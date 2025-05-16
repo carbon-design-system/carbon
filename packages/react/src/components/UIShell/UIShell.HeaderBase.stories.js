@@ -534,16 +534,16 @@ export const HeaderWActionsAndRightPanel = (args) => {
           <HeaderGlobalAction
             aria-label="Notifications"
             badgeCount={args.badgeCount}
-            isActive
-            onClick={action('notification click')}>
+            isActive={isPanelExpanded}
+            onClick={togglePanel}
+            tooltipAlignment="center"
+            id="notification-button">
             <Notification size={20} />
           </HeaderGlobalAction>
           <HeaderGlobalAction
-            aria-label={isPanelExpanded ? 'Close panel' : 'Open panel'}
-            isActive={isPanelExpanded}
-            onClick={togglePanel}
-            tooltipAlignment="end"
-            id="switcher-button">
+            aria-label="App Switcher"
+            onClick={action('app-switcher click')}
+            tooltipAlignment="end">
             <SwitcherIcon size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
@@ -551,20 +551,8 @@ export const HeaderWActionsAndRightPanel = (args) => {
           expanded={isPanelExpanded}
           onHeaderPanelFocus={closePanel}
           addFocusListeners={true}
-          href="#switcher-button">
-          {/* Add panel content here */}
-          <Switcher aria-label="Switcher Container" expanded={isPanelExpanded}>
-            <SwitcherItem aria-label="Link 1" href="#">
-              Link 1
-            </SwitcherItem>
-            <SwitcherDivider />
-            <SwitcherItem href="#" aria-label="Link 2">
-              Link 2
-            </SwitcherItem>
-            <SwitcherItem href="#" aria-label="Link 3">
-              Link 3
-            </SwitcherItem>
-          </Switcher>
+          href="#notification-button">
+          {/* Notification panel content here */}
         </HeaderPanel>
       </Header>
       <StoryContent />
