@@ -81,6 +81,9 @@ interface TooltipBaseProps {
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
+   * If the child already has an `aria-label`, the tooltip will not apply
+   * `aria-labelledby`. If the child has its own `aria-labelledby`, that value
+   * will be kept. Otherwise, the tooltip will use its own ID to label the child.
    * This means that if you have text in the child node, that it will not be
    * announced to the screen reader.
    *
@@ -130,6 +133,30 @@ const Tooltip: TooltipComponent = React.forwardRef(
     const prefix = usePrefix();
     const child = React.Children.only(children);
 
+    const {
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
+    } = child?.props ?? {};
+
+    const hasLabel = !!label;
+    const hasAriaLabel =
+      typeof ariaLabel === 'string' ? ariaLabel.trim() !== '' : false;
+
+    // An `aria-label` takes precedence over `aria-describedby`, but when it's
+    // needed and the user doesn't specify one, the fallback `id` is used.
+    const labelledBy = hasAriaLabel
+      ? null
+      : hasLabel
+        ? (ariaLabelledBy ?? id)
+        : undefined;
+
+    // If `aria-label` is present, use any provided `aria-describedby`.
+    // If not, fallback to child's `aria-describedby` or the tooltip `id` if needed.
+    const describedBy = hasAriaLabel
+      ? ariaDescribedBy
+      : (ariaDescribedBy ?? (!hasLabel && !ariaLabelledBy ? id : undefined));
+
     const triggerProps = {
       onFocus: () => !focusByMouse && setOpen(true),
       onBlur: () => {
@@ -143,6 +170,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
       onMouseDown,
       onMouseMove: onMouseMove,
       onTouchStart: onDragStart,
+      'aria-labelledby': labelledBy,
+      'aria-describedby': describedBy,
     };
 
     function getChildEventHandlers(childProps: any) {
@@ -159,12 +188,6 @@ const Tooltip: TooltipComponent = React.forwardRef(
         };
       });
       return eventHandlers;
-    }
-
-    if (label) {
-      triggerProps['aria-labelledby'] = id;
-    } else {
-      triggerProps['aria-describedby'] = id;
     }
 
     const onKeyDown = useCallback(
