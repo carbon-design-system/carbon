@@ -5,10 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as React from 'react';
-
-export type ReactAttr<T = HTMLElement> = React.HTMLAttributes<T>;
-
 /**
  * For "as" props.  Creates an "as" property that supports native html tags such as 'span', 'a', 'button' as well as custom functional components
  * All native props for the supplied html tag/component are inferred as part of the base component props, allowing us to use props like `href` on an 'a' element etc

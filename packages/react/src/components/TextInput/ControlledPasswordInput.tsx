@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
@@ -13,11 +13,10 @@ import { textInputProps } from './util';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
 export interface ControlledPasswordInputProps
-  extends ReactAttr<HTMLInputElement> {
+  extends HTMLAttributes<HTMLInputElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<input>` node

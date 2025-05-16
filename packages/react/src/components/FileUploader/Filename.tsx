@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,16 +7,16 @@
 
 import { Close, WarningFilled, CheckmarkFilled } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
+
 export type FilenameStatus = 'edit' | 'complete' | 'uploading';
 
 type SVGAttr = React.SVGAttributes<React.ReactSVGElement>;
 
 export interface FilenameProps
-  extends Omit<ReactAttr & SVGAttr, 'tabIndex' | 'type'> {
+  extends Omit<HTMLAttributes<HTMLElement> & SVGAttr, 'tabIndex' | 'type'> {
   /**
    * Specify an id that describes the error to be read by screen readers when the filename is invalid
    */
