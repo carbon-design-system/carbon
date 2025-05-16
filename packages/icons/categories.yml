@@ -477,6 +477,10 @@ categories:
           - send--alt--filled
           - send--filled
           - shuffle
+          - sorting-a-to-z
+          - sorting-highest-to-lowest-number
+          - sorting-lowest-to-highest-number
+          - sorting-z-to-a
           - sort--ascending
           - sort--descending
           - sort--remove
@@ -537,6 +541,7 @@ categories:
           - notification--new
           - notification--off
           - notification--off--filled
+          - notifications-paused
           - phone
           - phone--application
           - phone--filled
@@ -1187,6 +1192,8 @@ categories:
       - name: Data
         members:
           - activity
+          - add--child-node
+          - add--parent-node
           - analytics
           - analytics--custom
           - analytics--reference
@@ -1262,6 +1269,7 @@ categories:
           - chart--violin-plot
           - chart--waterfall
           - chart--win-loss
+          - child-node
           - choropleth-map
           - circle-packing
           - circle--filled
@@ -1316,6 +1324,8 @@ categories:
           - diagram
           - diagram--reference
           - document-sentiment
+          - double-axis-chart--bar
+          - double-axis-chart--column
           - double-integer
           - downstream
           - driver-analysis
@@ -1364,6 +1374,7 @@ categories:
           - null-sign
           - ordinal
           - parent-child
+          - parent-node
           - parameter
           - partition--auto
           - partition--collection
@@ -1498,6 +1509,7 @@ categories:
           - document--view
           - document--word-processor
           - document--word-processor--reference
+          - documentation
           - download
           - DVR
           - export
@@ -1661,6 +1673,7 @@ categories:
           - in-progress
           - in-progress--error
           - in-progress--warning
+          - incident-reporter
           - incomplete
           - incomplete--cancel
           - incomplete--error
@@ -1670,8 +1683,10 @@ categories:
           - information--filled
           - information--square
           - information--square--filled
+          - locked-and-blocked
           - misuse
           - misuse--outline
+          - notifications-paused
           - pending
           - pending--filled
           - queued
@@ -1705,6 +1720,9 @@ categories:
           - assembly
           - assembly--cluster
           - assembly--reference
+          - assignment-action--usage
+          - attribute--definition
+          - attribute--usage
           - bare-metal-server
           - bare-metal-server--01
           - bare-metal-server--02
@@ -1736,6 +1754,7 @@ categories:
           - cloud--service-management
           - chat--operational
           - code-signing-service
+          - comments
           - communication--unified
           - connection--usage
           - connection-flow--usage
@@ -1758,6 +1777,8 @@ categories:
           - db2--data-sharing-group
           - db2--database
           - decision-node
+          - dependency
+          - deployment-canary
           - deployment-unit--data
           - deployment-unit--execution
           - deployment-unit--installation
@@ -1768,17 +1789,20 @@ categories:
           - deployment-unit--technical--presentation
           - directory-domain
           - edge-node--alt
+          - element-picker
           - encryption
           - enumeration--definition
           - enumeration--usage
           - executable-program
           - feature-membership
           - feature-membership--filled
+          - feature-picker
           - feature-typing
           - file-storage
           - firewall
           - firewall--classic
           - floating-ip
+          - for-loop
           - fork-node
           - gateway
           - gateway--api
@@ -1796,6 +1820,7 @@ categories:
           - hardware-security-module
           - hybrid-networking--alt
           - id-management
+          - if--action
           - image-service
           - image-store--local
           - instance--bx
@@ -1811,8 +1836,14 @@ categories:
           - intent-request--scale-out
           - intent-request--uninstall
           - intent-request--upgrade
+          - interface--definition
+          - interface--definition--alt
           - interface--usage
+          - interface--usage--alt
+          - interface--usage--1
           - intrusion-prevention
+          - item--definition
+          - item--usage
           - job--daemon
           - job--run
           - join-node
@@ -1830,6 +1861,7 @@ categories:
           - load-balancer--network
           - load-balancer--pool
           - logical-partition
+          - loop--alt
           - merge-node
           - message-queue
           - microservices--1
@@ -1849,10 +1881,12 @@ categories:
           - pcn--military
           - pcn--p-node
           - pcn--z-node
+          - perform--action
           - point-of-presence
           - port--definition
           - port--usage
           - property-relationship
+          - redefinition
           - requirement--definition
           - requirement--usage
           - router
@@ -1877,7 +1911,10 @@ categories:
           - subject--definition
           - subject--usage
           - subnet-acl-rules
+          - subsetting
           - succession
+          - succession--flow-connection
+          - swimlane-d--vertical
           - switch-layer-2
           - switch-layer-3
           - sysplex--distributor
@@ -1900,6 +1937,7 @@ categories:
           - volume--object-storage
           - vpn--connection
           - vpn--policy
+          - while-loop
           - wifi-bridge
           - wifi-bridge--alt
           - wifi--not-secure
@@ -2391,6 +2429,7 @@ categories:
           - create-link
           - debug
           - delivery-settings
+          - deployment-canary
           - deployment-pattern
           - deployment-policy
           - desk--adjustable
