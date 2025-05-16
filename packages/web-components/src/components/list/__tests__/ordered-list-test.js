@@ -18,7 +18,7 @@ describe('cds-ordered-list', function () {
       const ol = el.shadowRoot.querySelector('ol');
       expect(ol).to.exist;
 
-      expect(el).dom.to.equalSnapshot();
+      await expect(el).dom.to.equalSnapshot();
     });
 
     it('should render children as expected', async () => {

@@ -31,6 +31,7 @@ import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
@@ -78,7 +79,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   className?: string;
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel?: string;
 
@@ -282,6 +283,7 @@ const Modal = React.forwardRef(function Modal(
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
+  const prevOpen = usePreviousValue(open);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
@@ -459,14 +461,14 @@ const Modal = React.forwardRef(function Modal(
   }, [open, prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!enableDialogElement && !open && launcherButtonRef) {
+    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
       setTimeout(() => {
         if ('current' in launcherButtonRef) {
           launcherButtonRef.current?.focus();
         }
       });
     }
-  }, [open, launcherButtonRef, enableDialogElement]);
+  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
 
   useEffect(() => {
     if (!enableDialogElement) {
@@ -804,7 +806,7 @@ Modal.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel: PropTypes.string,
 

@@ -46,6 +46,11 @@ export interface DismissibleTagBaseProps {
   disabled?: boolean;
 
   /**
+   * Provide a custom tooltip label for the dismiss button
+   */
+  dismissTooltipLabel?: string;
+
+  /**
    * Specify the id for the selectable tag.
    */
   id?: string;
@@ -113,6 +118,7 @@ const DismissibleTag = forwardRef(
       text,
       tagTitle,
       type,
+      dismissTooltipLabel = 'Dismiss tag',
       ...other
     }: DismissibleTagProps<T>,
     forwardRef: ForwardedRef<HTMLDivElement>
@@ -152,7 +158,7 @@ const DismissibleTag = forwardRef(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { onClick, ...otherProps } = other;
 
-    const dismissLabel = `Dismiss "${text}"`;
+    const dismissActionLabel = isEllipsisApplied ? dismissTooltipLabel : title;
 
     return (
       <Tag
@@ -180,7 +186,7 @@ const DismissibleTag = forwardRef(
             ''
           )}
           <Tooltip
-            label={isEllipsisApplied ? dismissLabel : title}
+            label={dismissActionLabel}
             align="bottom"
             className={tooltipClasses}
             leaveDelayMs={0}
@@ -190,7 +196,7 @@ const DismissibleTag = forwardRef(
               className={`${prefix}--tag__close-icon`}
               onClick={handleClose}
               disabled={disabled}
-              aria-label={title}>
+              aria-label={dismissActionLabel}>
               <Close />
             </button>
           </Tooltip>
@@ -214,6 +220,11 @@ DismissibleTag.propTypes = {
    * Specify if the `DismissibleTag` is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Provide a custom tooltip label for the dismiss button
+   */
+  dismissTooltipLabel: PropTypes.string,
 
   /**
    * Specify the id for the tag.
