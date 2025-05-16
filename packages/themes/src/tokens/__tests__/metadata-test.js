@@ -602,6 +602,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "layer-background-01",
+          "type": "color",
+        },
+        Object {
           "name": "layer-hover-01",
           "type": "color",
         },
@@ -622,6 +626,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "layer-background-02",
+          "type": "color",
+        },
+        Object {
           "name": "layer-hover-02",
           "type": "color",
         },
@@ -639,6 +647,10 @@ test('metadata', () => {
         },
         Object {
           "name": "layer-active-03",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-background-03",
           "type": "color",
         },
         Object {

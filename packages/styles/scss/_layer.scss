@@ -8,6 +8,7 @@
 @forward './layer/layer-sets';
 @use './config' as *;
 @use './layer/layer-tokens';
+@use './theme' as *;
 
 :root {
   @include layer-tokens.emit-layer-tokens(1);
@@ -23,4 +24,10 @@
 
 .#{$prefix}--layer-three {
   @include layer-tokens.emit-layer-tokens(3);
+}
+
+@each $i in (one, two, three) {
+  .#{$prefix}--layer-#{$i}.#{$prefix}--layer__with-background {
+    background-color: $layer-background;
+  }
 }

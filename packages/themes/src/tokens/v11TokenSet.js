@@ -26,6 +26,7 @@ export const set = TokenSet.create({
       tokens: [
         layer.getToken('layer-01'),
         layer.getToken('layer-active-01'),
+        layer.getToken('layer-background-01'),
         layer.getToken('layer-hover-01'),
         layer.getToken('layer-selected-hover-01'),
         layer.getToken('layer-accent-01'),
@@ -48,6 +49,7 @@ export const set = TokenSet.create({
       tokens: [
         layer.getToken('layer-02'),
         layer.getToken('layer-active-02'),
+        layer.getToken('layer-background-02'),
         layer.getToken('layer-hover-02'),
         layer.getToken('layer-selected-hover-02'),
         layer.getToken('layer-accent-02'),
@@ -70,6 +72,7 @@ export const set = TokenSet.create({
       tokens: [
         layer.getToken('layer-03'),
         layer.getToken('layer-active-03'),
+        layer.getToken('layer-background-03'),
         layer.getToken('layer-hover-03'),
         layer.getToken('layer-selected-hover-03'),
         layer.getToken('layer-accent-03'),

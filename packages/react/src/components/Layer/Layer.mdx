@@ -44,16 +44,31 @@ component is rendered using the layer tokens at that layer. `Layer` components
 can be nested indefinitely, but the token sets typically end after 3 layers.
 
 ```jsx
+<ChildComponent />
 <Layer>
   <ChildComponent />
   <Layer>
     <ChildComponent />
-    <Layer>
-      <ChildComponent />
-    </Layer>
   </Layer>
 </Layer>
 ```
+
+## With Background
+
+The `Layer` component updates layer tokens at each level and theme. When you add the
+`withBackground` prop, it automatically sets a background color using the
+`$layer-background` token. Without it, you can manually set the background with
+`background-color: $layer-background`.
+
+<Canvas
+  of={LayerStories.withBackground}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LayerStories.withBackground),
+    },
+  ]}
+/>
 
 ## Setting a custom level
 
