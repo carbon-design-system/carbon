@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect } from 'react';
 import { tabbable } from 'tabbable';
 import { selectorTabbable } from './keyboard/navigation';
 
@@ -143,16 +142,14 @@ export const wrapFocusWithoutSentinels = ({
 }) => {
   if (!containerNode) return;
 
-  useEffect(() => {
-    if (
-      ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
-      process.env.NODE_ENV !== 'production'
-    ) {
-      throw new Error(
-        `Error: wrapFocusWithoutSentinels(...) called in unsupported ${event.type} event.\n\nCall wrapFocusWithoutSentinels(...) from onKeyDown instead.`
-      );
-    }
-  }, []);
+  if (
+    ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
+    process.env.NODE_ENV !== 'production'
+  ) {
+    throw new Error(
+      `Error: wrapFocusWithoutSentinels(...) called in unsupported ${event.type} event.\n\nCall wrapFocusWithoutSentinels(...) from onKeyDown instead.`
+    );
+  }
 
   // Use `tabbable` to get the focusable elements in tab order.
   // `selectorTabbable` returns elements in DOM order which is why it's not
