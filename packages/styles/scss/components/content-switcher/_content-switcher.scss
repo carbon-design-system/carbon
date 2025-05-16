@@ -63,6 +63,8 @@
       @media (prefers-reduced-motion: reduce) {
         transition: none;
       }
+
+      @include high-contrast-mode('selected');
     }
 
     &:disabled::after {
@@ -147,6 +149,8 @@
   .#{$prefix}--content-switcher
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
     border: 0;
+
+    @include high-contrast-mode('bold-border');
   }
 
   .#{$prefix}--content-switcher-btn::before {
@@ -291,6 +295,8 @@
     .#{$prefix}--content-switcher-btn
     svg {
     fill: $icon-primary;
+
+    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -298,6 +304,8 @@
     svg {
     z-index: 1;
     fill: $icon-inverse;
+
+    @include high-contrast-mode('icon-fill-selected');
   }
 
   .#{$prefix}--content-switcher--icon-only.#{$prefix}--content-switcher--sm
