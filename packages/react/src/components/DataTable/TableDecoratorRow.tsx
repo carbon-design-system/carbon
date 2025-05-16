@@ -1,15 +1,17 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { cloneElement, type ReactNode } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TableDecoratorRowProps {
   /**
@@ -34,20 +36,10 @@ const TableDecoratorRow = ({
     [`${prefix}--table-column-decorator--active`]: decorator,
   });
 
-  let normalizedDecorator = React.isValidElement(decorator)
-    ? (decorator as ReactNode)
+  const decoratorIsAILabel = isComponentElement(decorator, AILabel);
+  const normalizedDecorator = decoratorIsAILabel
+    ? cloneElement(decorator, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   return <td className={TableDecoratorRowClasses}>{normalizedDecorator}</td>;
 };
