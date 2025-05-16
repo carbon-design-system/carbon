@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ArrowRight } from '@carbon/icons-react';
 import React from 'react';
+import { ArrowRight } from '@carbon/icons-react';
 import Link from './Link';
 import mdx from './Link.mdx';
 
@@ -16,9 +16,6 @@ export default {
   parameters: {
     docs: {
       page: mdx,
-    },
-    controls: {
-      exclude: ['asWithCarbonClasses'],
     },
   },
   args: {
@@ -39,10 +36,6 @@ export default {
       table: {
         disable: true,
       },
-    },
-    asWithCarbonClasses: {
-      description:
-        'By default, including the `as` property will remove Carbon class selectors: `cds--link`, etc. This property will allow you to continue to use Carbon styles while also using the `as` property.',
     },
   },
 };
