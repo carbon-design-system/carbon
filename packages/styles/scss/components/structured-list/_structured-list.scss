@@ -15,7 +15,6 @@
 @use '../../spacing' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
-@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
 
@@ -258,13 +257,6 @@
     span {
       display: none;
     }
-  }
-
-  // Windows HCM fix
-  .#{$prefix}--structured-list-input:checked
-    + .#{$prefix}--structured-list-td
-    .#{$prefix}--structured-list-svg {
-    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--structured-list__icon {

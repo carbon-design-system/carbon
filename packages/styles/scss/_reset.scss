@@ -172,7 +172,8 @@
 
   @include type.reset();
 
-  /// Makes SVGs accessible in high contrast mode
+  /// Makes SVGs accessible in high contrast mode, although it only works sporadically as other CSS selectors
+  /// routinely override this one.
   /// @link https://github.com/IBM/carbon-elements/issues/345#issuecomment-466577293 Carbon-elements #345
   @media screen and (-ms-high-contrast: active) {
     svg {

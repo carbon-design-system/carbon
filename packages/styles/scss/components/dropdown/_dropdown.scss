@@ -481,10 +481,6 @@
     }
   }
 
-  .#{$prefix}--list-box__menu-item__selected-icon {
-    @include high-contrast-mode('icon-fill');
-  }
-
   // readonly
   .#{$prefix}--dropdown--readonly,
   .#{$prefix}--dropdown--readonly:hover {

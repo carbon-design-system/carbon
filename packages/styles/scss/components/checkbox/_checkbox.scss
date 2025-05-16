@@ -12,6 +12,7 @@
 @use '../../type' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 
@@ -91,6 +92,9 @@
     position: absolute;
     border: 1px solid $icon-primary;
     border-radius: 2px;
+    @include high-contrast-mode {
+      border: 1px solid ButtonBorder;
+    }
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
@@ -136,6 +140,13 @@
     border: none;
     border-width: 1px;
     background-color: $icon-primary;
+
+    // According to https://developer.mozilla.org/en-US/docs/Web/CSS/system-color, in high contrast mode, the
+    // checkbox should be displayed using SelectedItem and SelectedItemText.
+    @include high-contrast-mode {
+      border: 1px solid ButtonBorder;
+      background-color: SelectedItem;
+    }
   }
 
   // Display the check
@@ -326,6 +337,12 @@
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::after {
     border-color: $text-primary;
+
+    // According to https://developer.mozilla.org/en-US/docs/Web/CSS/system-color, in high contrast mode, the
+    // checkbox should be displayed using SelectedItem and SelectedItemText.
+    @include high-contrast-mode {
+      fill: SelectedItemText;
+    }
   }
 
   //-----------------------------------------------

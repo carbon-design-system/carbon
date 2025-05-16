@@ -17,7 +17,6 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
-@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
 
@@ -261,11 +260,5 @@
 
     block-size: convert.to-rem(14px);
     inline-size: convert.to-rem(75px);
-  }
-
-  // Windows HCM fix
-
-  .#{$prefix}--date-picker__icon {
-    @include high-contrast-mode('icon-fill');
   }
 }

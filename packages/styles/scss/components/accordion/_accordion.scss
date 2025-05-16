@@ -17,7 +17,6 @@
 @use '../../utilities/convert';
 @use '../../utilities/layout';
 @use '../../utilities/focus-outline' as *;
-@use '../../utilities/high-contrast-mode' as *;
 
 /// @type Value
 /// @access public
@@ -383,12 +382,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__title {
     margin-inline-start: $spacing-05;
-  }
-
-  // Windows HCM fix
-  .#{$prefix}--accordion__arrow,
-  .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
-    @include high-contrast-mode('icon-fill');
   }
 
   // RTL overrides
