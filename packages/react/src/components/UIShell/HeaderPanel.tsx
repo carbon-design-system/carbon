@@ -19,6 +19,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { noopFn } from '../../internal/noopFn';
 
 export interface HeaderPanelProps {
   /**
@@ -53,7 +54,6 @@ export interface HeaderPanelProps {
   onHeaderPanelFocus?: () => void;
 }
 
-const noopFn = () => {};
 const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
   function HeaderPanel(
     {
