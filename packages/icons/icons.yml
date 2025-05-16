@@ -12652,7 +12652,7 @@
   sizes:
     - 32
 - name: ibm-watson--discovery
-  friendly_name: IBM® watsonx™ Discovery
+  friendly_name: IBM watsonx® Discovery
   aliases:
     - Watson
     - IBM Watson
@@ -12801,7 +12801,7 @@
   sizes:
     - 32
 - name: ibm-watson--orders
-  friendly_name: IBM® watsonx™ Orders
+  friendly_name: IBM watsonx® Orders
   aliases:
     - IBM Watson
     - watsonx
@@ -12931,7 +12931,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--assistant
-  friendly_name: IBM® watsonx™ Assistant
+  friendly_name: IBM® watsonx Assistant®
   aliases:
     - AI
     - watsonx
@@ -12943,7 +12943,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant
-  friendly_name: IBM® watsonx™ Code Assistant
+  friendly_name:  IBM® watsonx Code Assistant™
   aliases:
     - AI
     - watsonx
@@ -12961,7 +12961,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-enterprise-java-applications
-  friendly_name: IBM watsonx™ Code Assistant for Enterprise Java Applications
+  friendly_name:  IBM® watsonx Code Assistant™ for Enterprise Java Applications
   aliases:
     - IBM watsonx Code Assistant for Enterprise Java Applications
     - end-to-end application lifecycle
@@ -12975,7 +12975,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z
-  friendly_name: IBM® watsonx™ Code Assistant for Z
+  friendly_name: IBM® watsonx Code Assistant™ for Z
   aliases:
     - AI
     - watsonx
@@ -12997,7 +12997,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z--refactor
-  friendly_name: IBM® watsonx™ Code Assistant for Z Refactor
+  friendly_name: IBM® watsonx Code Assistant™ for Z Refactoring Assistant
   aliases:
     - app
     - development
@@ -13009,7 +13009,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z-validation-assistant
-  friendly_name: IBM watsonx™ Code Assistant for Z Validation Assistant
+  friendly_name: IBM® watsonx Code Assistant™ for Z Validation Assistant
   aliases:
     - ibm watsonx code assistant for Z Validation Assistant
     - AI assistant
@@ -13022,7 +13022,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--orchestrate
-  friendly_name: IBM® watsonx™ Orchestrate
+  friendly_name: IBM® watsonx Orchestrate™
   aliases:
     - efficiency
     - productivity
@@ -25701,7 +25701,7 @@
     - machine learing
     - ML
 - name: watsonx
-  friendly_name: IBM® watsonx™
+  friendly_name: IBM watsonx®
   aliases:
     - data
     - AI
@@ -25715,7 +25715,7 @@
   sizes:
     - 32
 - name: watsonx-ai
-  friendly_name: IBM® watsonx.ai™
+  friendly_name: IBM® watsonx.ai®
   aliases:
     - data
     - AI
@@ -25730,7 +25730,7 @@
   sizes:
     - 32
 - name: watsonx-data
-  friendly_name: IBM® watsonx.data™
+  friendly_name: IBM® watsonx.data®
   aliases:
     - data
     - AI
@@ -25749,7 +25749,7 @@
   sizes:
     - 32
 - name: watsonx-governance
-  friendly_name: IBM® watsonx.governance™
+  friendly_name: IBM® watsonx.governance®
   aliases:
     - data
     - AI
