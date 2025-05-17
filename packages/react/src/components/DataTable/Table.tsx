@@ -10,7 +10,6 @@ import React, {
   PropsWithChildren,
   useRef,
   useCallback,
-  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -118,7 +117,6 @@ export const Table = ({
 }: PropsWithChildren<TableProps>) => {
   const { titleId, descriptionId } = useContext(TableContext);
   const prefix = usePrefix();
-  const [isScrollable, setIsScrollable] = useState(false);
   const tableRef = useRef<HTMLTableElement>(null);
   const componentClass = cx(`${prefix}--data-table`, className, {
     [`${prefix}--data-table--${size}`]: size,
@@ -193,26 +191,6 @@ export const Table = ({
 
   useWindowEvent('resize', debouncedSetTableAlignment);
 
-  // Used to set a tabIndex when the Table is horizontally scrollable
-  const setTabIndex = useCallback(() => {
-    const tableContainer = tableRef?.current?.parentNode as HTMLElement;
-    const tableHeader = tableRef?.current?.firstChild as HTMLElement;
-
-    if (tableHeader?.scrollWidth > tableContainer?.clientWidth) {
-      setIsScrollable(true);
-    } else {
-      setIsScrollable(false);
-    }
-  }, []);
-
-  const debouncedSetTabIndex = debounce(setTabIndex, 100);
-
-  useWindowEvent('resize', debouncedSetTabIndex);
-
-  useIsomorphicEffect(() => {
-    setTabIndex();
-  }, [setTabIndex]);
-
   // recalculate table alignment once fonts have loaded
   if (
     typeof document !== 'undefined' &&
@@ -229,10 +207,7 @@ export const Table = ({
   }, [setTableAlignment, size]);
 
   const table = (
-    <div
-      className={`${prefix}--data-table-content`}
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-      tabIndex={tabIndex ?? (isScrollable ? 0 : undefined)}>
+    <div className={`${prefix}--data-table-content`}>
       <table
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
