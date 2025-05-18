@@ -590,7 +590,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
       'aria-label': t(translationKey),
-      'aria-controls': `expanded-row-${row.id}`,
+      'aria-controls': `expanded-row-${row.id}-${this.instanceId}`,
       isSelected: row.isSelected,
       disabled: row.disabled,
     };
@@ -612,7 +612,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   }) => {
     return {
       ...rest,
-      id: `expanded-row-${row.id}`,
+      id: `expanded-row-${row.id}-${this.instanceId}`,
     };
   };
 
