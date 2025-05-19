@@ -11,7 +11,6 @@ import React, {
   useState,
   useRef,
   useMemo,
-  useEffect,
   useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -27,6 +26,7 @@ import { OperationalTag, Tag } from '../Tag';
 import { TYPES } from '../Tag/Tag';
 import useOverflowItems from '../../internal/useOverflowItems';
 import { Popover, PopoverContent } from '../Popover';
+import { useEffect } from 'react';
 /**
  * ----------
  * PageHeader
