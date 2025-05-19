@@ -10,11 +10,19 @@ import classnames from 'classnames';
 import React from 'react';
 import './Annotation.scss';
 
-import { WarningHex, Layers, Chemistry } from '@carbon/react/icons';
+import {
+  WarningHex,
+  Layers,
+  SquareOutline,
+  Chemistry,
+} from '@carbon/react/icons';
 
 import { prefix } from '../_prefix';
 
 const types = {
+  background: {
+    icon: SquareOutline,
+  },
   'deprecation-notice': {
     icon: WarningHex,
   },
