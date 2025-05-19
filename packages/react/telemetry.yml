@@ -322,6 +322,7 @@ collect:
         # Dialog
         - modal
         # DismissibleTag
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback

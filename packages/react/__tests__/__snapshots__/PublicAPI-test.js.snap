@@ -2943,6 +2943,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "dismissTooltipLabel": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
@@ -4669,6 +4672,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "withBackground": Object {
+        "type": "bool",
       },
     },
     "render": [Function],
@@ -7062,6 +7068,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "defaultSelected": Object {
+        "type": "bool",
       },
       "disabled": Object {
         "type": "bool",
