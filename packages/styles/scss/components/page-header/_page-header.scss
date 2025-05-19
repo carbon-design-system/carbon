@@ -116,8 +116,29 @@
   }
 
   .#{$prefix}--page-header__tab-bar {
-    display: grid;
     padding: 0 $spacing-05;
     border: 1px solid green; /* stylelint-disable-line */
+  }
+
+  .#{$prefix}--page-header__tablist-tags-wrapper {
+    display: grid;
+    grid-gap: $spacing-10;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .#{$prefix}--page-header__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .#{$prefix}--page-header__tags-popover-list {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__tag-item {
+    flex-shrink: 0;
   }
 }

@@ -237,16 +237,6 @@ describe('PageHeader', () => {
       );
       expect(container.firstChild).toHaveClass('custom-class');
     });
-
-    it('should render children', () => {
-      const { container } = render(
-        <PageHeader.TabBar>
-          <div data-testid="test-child">Child content</div>
-        </PageHeader.TabBar>
-      );
-
-      expect(screen.getByTestId('test-child')).toBeInTheDocument();
-    });
   });
 
   describe('PageHeader.Tabs component api', () => {
@@ -262,22 +252,6 @@ describe('PageHeader', () => {
         </PageHeader.Tabs>
       );
       expect(container.firstChild).toBeInTheDocument();
-    });
-
-    it('should render children within the Tabs component', () => {
-      render(
-        <PageHeader.Tabs>
-          <TabList aria-label="List of tabs">
-            <Tab>Tab 1</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>Tab Panel 1</TabPanel>
-          </TabPanels>
-        </PageHeader.Tabs>
-      );
-
-      expect(screen.getByText('Tab 1')).toBeInTheDocument();
-      expect(screen.getByText('Tab Panel 1')).toBeInTheDocument();
     });
 
     it('should forward props to the internal Tabs component', () => {
@@ -315,6 +289,62 @@ describe('PageHeader', () => {
       ).toBeInTheDocument();
       expect(screen.getByText('Tab 1')).toBeInTheDocument();
       expect(screen.getByText('Tab Panel 1')).toBeInTheDocument();
+    });
+  });
+
+  describe('PageHeader.TabBar component with tags', () => {
+    const mockTags = [
+      { id: '1', type: 'blue', text: 'Tag 1', size: 'md' },
+      { id: '2', type: 'green', text: 'Tag 2', size: 'md' },
+      { id: '3', type: 'purple', text: 'Tag 3', size: 'md' },
+    ];
+
+    it('should render tags when provided', () => {
+      render(<PageHeader.TabBar tags={mockTags} />);
+
+      expect(screen.getByText('Tag 1')).toBeInTheDocument();
+      expect(screen.getByText('Tag 2')).toBeInTheDocument();
+      expect(screen.getByText('Tag 3')).toBeInTheDocument();
+    });
+
+    it('should not render tags when not provided', () => {
+      render(<PageHeader.TabBar />);
+
+      expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 2')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 3')).not.toBeInTheDocument();
+    });
+
+    it('should render tags alongside tabs', () => {
+      render(
+        <PageHeader.TabBar tags={mockTags}>
+          <PageHeader.Tabs>
+            <TabList aria-label="List of tabs">
+              <Tab>Tab 1</Tab>
+              <Tab>Tab 2</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>Tab Panel 1</TabPanel>
+              <TabPanel>Tab Panel 2</TabPanel>
+            </TabPanels>
+          </PageHeader.Tabs>
+        </PageHeader.TabBar>
+      );
+
+      expect(screen.getByText('Tab 1')).toBeInTheDocument();
+      expect(screen.getByText('Tab 2')).toBeInTheDocument();
+      expect(screen.getByText('Tag 1')).toBeInTheDocument();
+      expect(screen.getByText('Tag 2')).toBeInTheDocument();
+      expect(screen.getByText('Tag 3')).toBeInTheDocument();
+    });
+
+    it('should apply correct classes to tags container', () => {
+      const { container } = render(<PageHeader.TabBar tags={mockTags} />);
+
+      const tagsContainer = container.querySelector(
+        `.${prefix}--page-header__tags`
+      );
+      expect(tagsContainer).toBeInTheDocument();
     });
   });
 });

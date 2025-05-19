@@ -71,6 +71,39 @@ const dropdownItems = [
   },
 ];
 
+const tags = [
+  {
+    type: 'blue',
+    text: 'Tag 1',
+    size: 'lg',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 2',
+    size: 'lg',
+  },
+  {
+    type: 'red',
+    text: 'Tag 3',
+    size: 'lg',
+  },
+  {
+    type: 'blue',
+    text: 'Tag 4',
+    size: 'lg',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 5',
+    size: 'lg',
+  },
+  {
+    type: 'red',
+    text: 'Tag 6',
+    size: 'lg',
+  },
+];
+
 export default {
   title: 'Patterns/unstable__PageHeader',
   component: PageHeader,
@@ -98,7 +131,7 @@ export const Default = (args) => (
   <PageHeader.Root {...args}>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content />
-    <PageHeader.TabBar>
+    <PageHeader.TabBar tags={tags}>
       <PageHeader.Tabs>
         <TabList>
           <Tab>Dashboard</Tab>
@@ -314,6 +347,35 @@ export const TabBar = (args) => {
     </PageHeader.Root>
   );
 };
+
+export const TabBarWithOnlyTags = (args) => {
+  return (
+    <PageHeader.Root>
+      <PageHeader.TabBar {...args} tags={tags}></PageHeader.TabBar>
+    </PageHeader.Root>
+  );
+};
+
+export const TabBarWithTabsAndTags = (args) => (
+  <PageHeader.Root {...args}>
+    <PageHeader.TabBar tags={tags}>
+      <PageHeader.Tabs>
+        <TabList>
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Settings</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Dashboard Tab Panel</TabPanel>
+          <TabPanel>Monitoring Tab Panel</TabPanel>
+          <TabPanel>Activity Tab Panel</TabPanel>
+          <TabPanel>Settings Tab Panel</TabPanel>
+        </TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+);
 
 export const DirectExports = (args) => (
   <PageHeaderDirect {...args}>
