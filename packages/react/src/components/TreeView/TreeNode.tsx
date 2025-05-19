@@ -179,9 +179,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             onTreeSelect,
             onNodeFocusEvent,
             selected,
-            tabIndex:
-              (!(node as ReactElement<TreeNodeProps>).props.disabled && -1) ||
-              null,
+            tabIndex: (node as ReactElement<TreeNodeProps>).props.disabled
+              ? null
+              : -1,
           } as TreeNodeProps);
         }
 

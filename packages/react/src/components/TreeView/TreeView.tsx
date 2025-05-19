@@ -197,7 +197,7 @@ const TreeView: TreeViewComponent = ({
           onNodeFocusEvent: handleFocusEvent,
           onTreeSelect: handleTreeSelect,
           selected,
-          tabIndex: (!node.props.disabled && -1) || undefined,
+          tabIndex: node.props.disabled ? undefined : -1,
         };
 
         if (!focusTarget && !node.props.disabled) {
