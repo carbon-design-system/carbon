@@ -182,24 +182,46 @@ const TreeView: TreeViewComponent = ({
   }
 
   let focusTarget = false;
-  const nodesWithProps = React.Children.map(children, (_node) => {
-    const node = _node as React.ReactElement<TreeNodeProps>;
-    const sharedNodeProps: Partial<TreeNodeProps> = {
-      active,
-      depth: 0,
-      onNodeFocusEvent: handleFocusEvent,
-      onTreeSelect: handleTreeSelect,
-      selected,
-      tabIndex: (!node.props.disabled && -1) || undefined,
-    };
-    if (!focusTarget && !node.props.disabled) {
-      sharedNodeProps.tabIndex = 0;
-      focusTarget = true;
-    }
-    if (React.isValidElement(node)) {
-      return React.cloneElement(node, sharedNodeProps);
-    }
-  });
+  function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
+    return React.Children.map(children, (child) => {
+      if (!React.isValidElement(child)) return child;
+
+      const isTreeNode = (child.type as any).displayName === 'TreeNode';
+
+      if (isTreeNode) {
+        const node = child as React.ReactElement<TreeNodeProps>;
+
+        const sharedNodeProps: Partial<TreeNodeProps> = {
+          active,
+          depth: 0,
+          onNodeFocusEvent: handleFocusEvent,
+          onTreeSelect: handleTreeSelect,
+          selected,
+          tabIndex: (!node.props.disabled && -1) || undefined,
+        };
+
+        if (!focusTarget && !node.props.disabled) {
+          sharedNodeProps.tabIndex = 0;
+          focusTarget = true;
+        }
+
+        return React.cloneElement(child, sharedNodeProps);
+      }
+
+      const childProps = child.props as { children?: React.ReactNode };
+      if (childProps.children) {
+        const newChildren = enhanceTreeNodes(childProps.children);
+        return React.cloneElement(child as React.ReactElement<any>, {
+          ...(child as React.ReactElement<any>).props,
+          children: newChildren,
+        });
+      }
+
+      return child;
+    });
+  }
+
+  const nodesWithProps = enhanceTreeNodes(children);
 
   function handleKeyDown(event) {
     event.stopPropagation();
