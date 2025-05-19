@@ -244,6 +244,13 @@
   }
 
   // AILabel styles
+  .#{$prefix}--table-sort__header .#{$prefix}--ai-label,
+  .#{$prefix}--table-sort__header .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header
+    .#{$prefix}--table-header-label--decorator-inner {
+    display: none;
+  }
+
   .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon,
   .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--table-sort__header--ai-label .#{$prefix}--table-sort__icon,
@@ -260,6 +267,7 @@
     .#{$prefix}--table-header-label--decorator-inner,
   .#{$prefix}--table-sort__header--ai-label
     .#{$prefix}--table-header-label--decorator-inner {
+    display: block;
     margin-inline-end: convert.to-rem(8px);
   }
 

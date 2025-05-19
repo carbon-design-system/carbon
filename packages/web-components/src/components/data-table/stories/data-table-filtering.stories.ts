@@ -70,6 +70,7 @@ export const Default = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
@@ -180,6 +181,7 @@ export const Playground = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>

@@ -23,6 +23,7 @@ import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
 import mergeRefs from '../../tools/mergeRefs';
+import { useControllableState } from '../../internal/useControllableState';
 export interface SelectableTagBaseProps {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -60,6 +61,11 @@ export interface SelectableTagBaseProps {
   selected?: boolean;
 
   /**
+   * Specify the default state of the selectable tag.
+   */
+  defaultSelected?: boolean;
+
+  /**
    * Specify the size of the Tag. Currently supports either `sm`,
    * `md` (default) or `lg` sizes.
    */
@@ -85,9 +91,10 @@ const SelectableTag = forwardRef(
       renderIcon,
       onChange,
       onClick,
-      selected = false,
+      selected,
       size,
       text,
+      defaultSelected = false,
       ...other
     }: SelectableTagProps<T>,
     forwardRef: ForwardedRef<HTMLButtonElement>
@@ -95,7 +102,11 @@ const SelectableTag = forwardRef(
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
     const tagId = id || `tag-${useId()}`;
-    const [selectedTag, setSelectedTag] = useState(selected);
+    const [selectedTag, setSelectedTag] = useControllableState({
+      value: selected,
+      onChange: onChange,
+      defaultValue: defaultSelected,
+    });
     const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
       [`${prefix}--tag--selectable-selected`]: selectedTag,
     });
@@ -116,7 +127,6 @@ const SelectableTag = forwardRef(
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
       setSelectedTag(!selectedTag);
-      onChange?.(!selectedTag);
       onClick?.(e);
     };
 
@@ -200,6 +210,11 @@ SelectableTag.propTypes = {
    * Specify the state of the selectable tag.
    */
   selected: PropTypes.bool,
+
+  /**
+   * Specify the default state of the selectable tag.
+   */
+  defaultSelected: PropTypes.bool,
 
   /**
    * Specify the size of the Tag. Currently supports either `sm`,
