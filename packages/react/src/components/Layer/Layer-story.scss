@@ -12,3 +12,8 @@
   background: theme.$layer;
   color: theme.$text-primary;
 }
+
+.example-layer-test-component-no-background {
+  padding: 1rem;
+  color: theme.$text-primary;
+}

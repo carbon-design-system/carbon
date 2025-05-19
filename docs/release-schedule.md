@@ -8,14 +8,31 @@ major versions of the Carbon Design System.
 | `main`  | unstable    | unstable        | unstable     | unstable          | unstable    |
 | v9      | End of life | 2018-06-04      | 2018-06-04   | 2019-03-29        | 2022-03-31  |
 | v10     | End of life | 2019-03-29      | 2019-03-29   | 2022-03-31        | 2024-09-30  |
-| v11     | Active      | 2021-08-06      | 2022-03-31   | 2026-03-31        | 2028-03-31  |
-| v12     | Unreleased  | 2025-08-01      | 2026-03-31   | 2028-03-31        | 2029-03-31  |
+| v11     | Active      | 2021-08-06      | 2022-03-31   | TBD               | TBD         |
+| v12     | Preview     | 2023-05-25      | TBD          | TBD               | TBD         |
 
 > Dates are subject to change
 
-![schedule](https://github.com/carbon-design-system/carbon/assets/3360588/b8014b83-a743-4ace-83a3-ff1c96eef194)
+![schedule](https://github.com/user-attachments/assets/bc5ccd5a-8781-4ba5-9024-2aaaf0a53121)
 
 ## Release phases
+
+### Preview
+
+The preview phase allows consumers to incrementally opt in to changes that will
+be present in the next major, but through the current active release. This phase
+begins when the first feature flag is "committed" to be on-by-default in a
+future major version.
+
+Once committed, flag names contain the version they've been committed to with
+the prefix `enable-v#-*`. At this point the API or functionality behind this
+flag is now fixed and won't change. We intend to ship this flag as "on by
+default" in the major version indicated in the name. e.g.
+`enable-v12-tile-default-icons`
+
+In theory, if all `enable-v12-*` flags are enabled within your project before
+the v12 release, no changes should need to be made to the affected components
+when updating to v12.
 
 ### Prerelease
 

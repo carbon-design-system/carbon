@@ -12,7 +12,7 @@ describe('cds-checkbox-group', function () {
     const group = html`<cds-checkbox-group
       legend-text="Checkbox heading"></cds-checkbox-group>`;
     const el = await fixture(group);
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 
   it('should render helper-text', async () => {

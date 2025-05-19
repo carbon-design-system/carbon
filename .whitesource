@@ -1,6 +1,6 @@
 {
   "settingsInheritedFrom": "ibm-mend-config/mend-config",
   "issueSettings": {
-    "minSeverityLevel": "NONE"
+     "issueRepoName": "mend-issues"
   }
 }

@@ -1,16 +1,22 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as StackStories from './stack.stories';
 
 <Meta of={StackStories} />
 
 # Stack
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/stack)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/stack)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/stack)
+## Table of Contents
+
+- [Overview](#overview)
+- [Horizontal](#horizontal)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
 
 The Stack component is a useful layout utility in a component-based model. This
 allows components to not use margin and instead delegate the responsibility of
@@ -28,42 +34,20 @@ Inspiration for this component:
 - https://paste.twilio.design/layout/stack/
 - https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
 
-## Getting started
+<Canvas of={StackStories.Default} />
 
-Here's a quick example to get you started.
+## Horizontal
 
-### JS (via import)
+<Canvas of={StackStories.Horizontal} />
 
-```javascript
-import '@carbon/web-components/es/components/stack/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['stack'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-stack gap="6" orientation="vertical">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</cds-stack>
-```
-
-## Passing in custom gap value
-
-You can set a custom gap value by passing in the custom value to the `gap`
-attribute AND setting the `custom-gap-value` attribute to true.
-
-```html
-<cds-stack gap="2rem" orientation="vertical" custom-gap-value>
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</cds-stack>
-```
-
-## `<cds-stack>` attributes, properties and events
+## Component API
 
 <ArgTypes of="cds-stack" />
+
+<Markdown>{`${cdnJs({ components: ['stack'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/stack/stack.mdx).

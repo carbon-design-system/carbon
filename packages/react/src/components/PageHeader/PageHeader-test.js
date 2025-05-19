@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { render, screen } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { unstable__PageHeader as PageHeader } from '../../';
@@ -12,6 +12,7 @@ import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,
   PageHeaderContent as PageHeaderContentDirect,
+  PageHeaderContentPageActions as PageHeaderContentPageActionsDirect,
   PageHeaderTabBar as PageHeaderTabBarDirect,
 } from '../PageHeader';
 import * as hooks from '../../internal/useMatchMedia';
@@ -20,6 +21,14 @@ import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
 const prefix = 'cds';
+
+let mockOverflowOnChange = jest.fn();
+
+jest.mock('@carbon/utilities', () => ({
+  createOverflowHandler: jest.fn(({ onChange }) => {
+    mockOverflowOnChange = onChange;
+  }),
+}));
 
 describe('PageHeader', () => {
   describe('export configuration', () => {
@@ -108,12 +117,6 @@ describe('PageHeader', () => {
       expect(icon).toBeInTheDocument();
     });
 
-    it('should render a subtitle', () => {
-      render(<PageHeader.Content title="title" subtitle="subtitle" />);
-
-      expect(screen.getByText('subtitle')).toBeInTheDocument();
-    });
-
     it('should render children', () => {
       render(
         <PageHeader.Content title="title">Children content</PageHeader.Content>
@@ -145,19 +148,151 @@ describe('PageHeader', () => {
       const { container } = render(
         <PageHeader.Content
           title="title"
-          pageActions={
-            <>
-              <div>action 1</div>
-              <div>action 2</div>
-              <div>action 3</div>
-            </>
-          }></PageHeader.Content>
+          pageActions={<button>page actions</button>}></PageHeader.Content>
       );
 
-      const pageActions = container.querySelector(
-        `.${prefix}--page-header__content__page-actions`
+      const buttonElement = screen.getByText(/page actions/i);
+      expect(buttonElement).toBeInTheDocument();
+    });
+  });
+
+  describe('PageHeader.ContentPageActions component api', () => {
+    const onClickMock = jest.fn();
+    const mockPageActions = [
+      {
+        id: 'action1',
+        label: 'Action 1',
+        onClick: jest.fn(),
+        body: <button>Visible Action</button>,
+      },
+      {
+        id: 'action2',
+        label: 'Action 2',
+        onClick: onClickMock,
+        body: <button>Hidden Action</button>,
+      },
+    ];
+
+    it('should not show MenuButton when there are no hidden elements', async () => {
+      // Render the component with the mock page actions
+      const { container } = render(
+        <PageHeader.ContentPageActions pageActions={mockPageActions} />
       );
-      expect(pageActions).toBeInTheDocument();
+
+      act(() => {
+        mockOverflowOnChange(
+          [mockPageActions[0]], // visible
+          [] // no hidden elements
+        );
+      });
+
+      // Check that the visible action is in the document
+      expect(screen.getByText('Visible Action')).toBeInTheDocument();
+
+      // check that the parent div of menu button is hidden
+      const menuButton = container.querySelector(
+        `.${prefix}--menu-button__container`
+      );
+      const parent = menuButton?.parentElement;
+      expect(parent).toHaveAttribute('data-hidden');
+    });
+
+    it('should render MenuButton with hidden actions when overflow occurs', async () => {
+      render(<PageHeader.ContentPageActions pageActions={mockPageActions} />);
+
+      act(() => {
+        mockOverflowOnChange(
+          [mockPageActions[0]], // visible
+          [mockPageActions[1]] // hidden
+        );
+      });
+
+      // Find the menu button
+      const menuButton = await screen.findByRole('button', {
+        name: /Actions/i,
+      });
+      expect(menuButton).toBeInTheDocument();
+
+      await userEvent.click(menuButton);
+
+      const menu = await screen.findByRole('menu');
+      expect(menu).toBeInTheDocument();
+
+      // Check if the hidden action appears in the menu
+      const menuItems = screen.getAllByRole('menuitem');
+      expect(menuItems).toHaveLength(1); // Expecting just 1 item (the hidden action)
+      expect(menuItems[0]).toHaveTextContent('Action 2');
+    });
+
+    it('should apply a custom className', () => {
+      const { container } = render(
+        <PageHeader.ContentPageActions
+          className="custom-class"
+          pageActions={mockPageActions}
+        />
+      );
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should use a custom menuButtonLabel if provided', () => {
+      render(
+        <PageHeader.ContentPageActions
+          pageActions={mockPageActions}
+          menuButtonLabel="Options"
+        />
+      );
+      expect(screen.getByText('Options')).toBeInTheDocument();
+    });
+
+    it('should call onClick of hidden action when MenuItem is clicked', async () => {
+      render(<PageHeader.ContentPageActions pageActions={mockPageActions} />);
+
+      act(() => {
+        mockOverflowOnChange(
+          [mockPageActions[0]], // visible
+          [mockPageActions[1]] // hidden
+        );
+      });
+
+      // Find the menu button
+      const menuButton = await screen.findByRole('button', {
+        name: /Actions/i,
+      });
+      expect(menuButton).toBeInTheDocument();
+
+      await userEvent.click(menuButton);
+
+      const menuItem = await screen.findByRole('menuitem', {
+        name: /Action 2/i,
+      });
+      await userEvent.click(menuItem);
+
+      expect(onClickMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('PageHeader.ContentText component api', () => {
+    it('should render the child text', () => {
+      const { container, getByText } = render(
+        <PageHeader.ContentText>
+          PageHeader content title
+        </PageHeader.ContentText>
+      );
+      expect(container.firstChild).toBeInTheDocument();
+      expect(getByText('PageHeader content title')).toBeInTheDocument();
+    });
+
+    it('should place className on the outermost element', () => {
+      const { container } = render(
+        <PageHeader.ContentText className="custom-class" />
+      );
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should render a subtitle', () => {
+      render(<PageHeader.ContentText subtitle="subtitle" />);
+
+      expect(screen.getByText('subtitle')).toBeInTheDocument();
     });
   });
 

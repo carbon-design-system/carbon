@@ -21,7 +21,7 @@ import React, {
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
-import uniqueId from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
 
 export type TreeNodeProps = {
@@ -287,6 +287,13 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
       if (matches(event, [keys.Enter, keys.Space])) {
         event.preventDefault();
+        if (match(event, keys.Enter) && children) {
+          // Toggle expansion state for parent nodes
+          if (!enableTreeviewControllable) {
+            onToggle?.(event, { id, isExpanded: !expanded, label, value });
+          }
+          setExpanded(!expanded);
+        }
         if (href) {
           currentNode.current?.click();
         }
