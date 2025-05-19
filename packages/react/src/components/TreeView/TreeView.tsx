@@ -208,16 +208,10 @@ const TreeView: TreeViewComponent = ({
         return React.cloneElement(child, sharedNodeProps);
       }
 
-      const childProps = child.props as { children?: React.ReactNode };
-      if (childProps.children) {
-        const newChildren = enhanceTreeNodes(childProps.children);
-        return React.cloneElement(child as React.ReactElement<any>, {
-          ...(child as React.ReactElement<any>).props,
-          children: newChildren,
-        });
-      }
-
-      return child;
+      const newChildren = enhanceTreeNodes((child.props as any).children);
+      return React.cloneElement(child as React.ReactElement<any>, {
+        children: newChildren,
+      });
     });
   }
 
