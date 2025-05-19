@@ -102,6 +102,12 @@ class CDSTextarea extends CDSTextInput {
 
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
+      [`${prefix}--visually-hidden`]: this.hideLabel,
+      [`${prefix}--label--disabled`]: this.disabled,
+    });
+
+    const counterClasses = classMap({
+      [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: this.disabled,
     });
 
@@ -112,7 +118,7 @@ class CDSTextarea extends CDSTextInput {
 
     const counter =
       enableCounter && maxCount
-        ? html` <label class="${labelClasses}">
+        ? html` <label class="${counterClasses}">
             <slot name="label-text">${textCount}/${maxCount}</slot>
           </label>`
         : null;
@@ -128,13 +134,9 @@ class CDSTextarea extends CDSTextInput {
 
     return html`
       <div class="${prefix}--text-area__label-wrapper">
-        ${this.hideLabel
-          ? html``
-          : html`
-              <label class="${labelClasses}" for="input">
-                <slot name="label-text"> ${this.label} </slot>
-              </label>
-            `}
+        <label class="${labelClasses}" for="input">
+          <slot name="label-text"> ${this.label} </slot>
+        </label>
         ${counter}
       </div>
       <div class="${textareaWrapperClasses}" ?data-invalid="${this.invalid}">
