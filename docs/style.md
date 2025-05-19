@@ -91,7 +91,7 @@ row before the </tbody></table> line.
     - [Avoid nesting selectors](#avoid-nesting-selectors)
     - [Use only as much specificity as needed](#use-only-as-much-specificity-as-needed)
     - [Use the global `$prefix` variable](#use-the-global-prefix-variable)
-    - [Annotate relevant Sass values with SassDoc](#annotate-relevant-sass-values-with-sassdoc)
+    <!-- - [Annotate relevant Sass values with SassDoc](#annotate-relevant-sass-values-with-sassdoc) -->
   - [Style](#style-2)
     - [Comments](#comments)
   - [Testing](#testing-1)
@@ -977,7 +977,7 @@ is used to namespace all of the selectors that we ship in the design system.
 </td></tr>
 </tbody></table>
 
-#### Annotate relevant Sass values with SassDoc
+<!-- #### Annotate relevant Sass values with SassDoc
 
 When authoring functions, mixins, or values that are intended to be shared, you
 should leverage SassDoc. The typical format we use includes the following
@@ -990,7 +990,7 @@ information:
 @mixin my-component {
   // ...
 }
-```
+``` -->
 
 ### Style
 
