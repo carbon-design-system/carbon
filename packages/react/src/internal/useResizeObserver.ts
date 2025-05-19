@@ -6,7 +6,7 @@
  */
 import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 
-export const useResizeObserver = ({ ref, onResize, deps = [] }) => {
+export const useResizeObserver = ({ ref, onResize }) => {
   const [width, setWidth] = useState(-1);
   const [height, setHeight] = useState(-1);
   const entriesToHandle = useRef<ResizeObserverEntry[] | null>(null);
@@ -23,13 +23,14 @@ export const useResizeObserver = ({ ref, onResize, deps = [] }) => {
     const getInitialSize = () => {
       if (ref.current) {
         const refComputedStyle = window.getComputedStyle(ref.current);
+
         const initialWidth =
           (ref.current?.offsetWidth || 0) -
           (typeof refComputedStyle?.paddingLeft === 'string' &&
           refComputedStyle?.paddingLeft.length
             ? parseFloat(refComputedStyle?.paddingLeft)
-            : 0,
-          typeof refComputedStyle?.paddingRight === 'string' &&
+            : 0) -
+          (typeof refComputedStyle?.paddingRight === 'string' &&
           refComputedStyle?.paddingRight.length
             ? parseFloat(refComputedStyle?.paddingRight)
             : 0);
@@ -39,8 +40,8 @@ export const useResizeObserver = ({ ref, onResize, deps = [] }) => {
           (typeof refComputedStyle?.paddingTop === 'string' &&
           refComputedStyle?.paddingTop.length
             ? parseFloat(refComputedStyle?.paddingTop)
-            : 0,
-          typeof refComputedStyle?.paddingLeft === 'string' &&
+            : 0) -
+          (typeof refComputedStyle?.paddingLeft === 'string' &&
           refComputedStyle?.paddingLeft.length
             ? parseFloat(refComputedStyle?.paddingLeft)
             : 0);
@@ -53,8 +54,7 @@ export const useResizeObserver = ({ ref, onResize, deps = [] }) => {
       return;
     }
     getInitialSize();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width, height, ref.current, ...deps]);
+  }, [width, height]);
 
   useLayoutEffect(() => {
     if (!ref?.current) {
@@ -91,7 +91,6 @@ export const useResizeObserver = ({ ref, onResize, deps = [] }) => {
       observer?.disconnect();
       observer = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref.current, ...deps]);
+  }, [ref.current]);
   return { width, height };
 };

@@ -6,7 +6,7 @@
  */
 
 const hep = HTMLElement.prototype;
-export const mockHTMLElement = (options) => {
+export const mockHTMLElement = (options: HTMLElement) => {
   const originals = {};
 
   for (let option in options) {

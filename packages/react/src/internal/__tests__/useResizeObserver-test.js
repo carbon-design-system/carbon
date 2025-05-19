@@ -10,6 +10,9 @@ import { render, screen } from '@testing-library/react';
 import { useResizeObserver } from '../useResizeObserver';
 import { mockHTMLElement } from '../__mocks__/mockHTMLElement';
 
+/**
+ * @param {number} base - Represents the initial size used for the resizing example
+ */
 const sizes = (base) => ({
   offsetWidth: {
     ['observed-el']: base,
@@ -17,6 +20,10 @@ const sizes = (base) => ({
   offsetHeight: { ['observed-el']: base / 2 },
 });
 
+/**
+ * @param {HTMLElement} el - The element being mocked for resizing functionality
+ * @param {string} property - HTML property being mocked (in this scenario, these properties come from sizes())
+ */
 const testSizes = (el, property) => {
   const classes = el.getAttribute('class').split(' ');
   const container = el.closest('.test-container');
