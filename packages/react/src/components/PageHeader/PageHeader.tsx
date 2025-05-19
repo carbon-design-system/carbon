@@ -361,7 +361,11 @@ const PageHeaderTabBar = React.forwardRef<
     visibleItems = [],
     hiddenItems = [],
     itemRefHandler = () => {},
-  } = useOverflowItems<TagItem>(tagsWithIds, tagsContainerRef, offsetRef) || {
+  } = useOverflowItems<TagItem>(
+    tagsWithIds,
+    tagsContainerRef as React.RefObject<HTMLDivElement>,
+    offsetRef as React.RefObject<HTMLDivElement>
+  ) || {
     visibleItems: [],
     hiddenItems: [],
     itemRefHandler: () => {},
@@ -379,18 +383,26 @@ const PageHeaderTabBar = React.forwardRef<
   // Process children to extract TabList and TabPanels
   React.Children.forEach(children, (child) => {
     if (React.isValidElement(child)) {
+      const typedChild = child as React.ReactElement<{
+        children?: React.ReactNode;
+        displayName?: string;
+      }>;
       const isPageHeaderTabs =
         child.type === PageHeaderTabs ||
         (typeof child.type === 'function' &&
-          (child.type as any).displayName === 'PageHeader.Tabs') ||
+          (typedChild.type as any).displayName === 'PageHeader.Tabs') ||
         (typeof child.type === 'function' &&
-          (child.type as any).displayName === 'PageHeaderTabs');
+          (typedChild.type as any).displayName === 'PageHeaderTabs');
 
       if (isPageHeaderTabs) {
         // Extract TabList and TabPanels
-        React.Children.forEach(child.props.children, (tabChild) => {
+        React.Children.forEach(typedChild.props.children, (tabChild) => {
           if (React.isValidElement(tabChild)) {
-            const tabChildType = tabChild.type;
+            const typedTabChild = tabChild as React.ReactElement<{
+              displayName?: string;
+            }>;
+
+            const tabChildType = typedTabChild.type;
             const isTabList =
               (typeof tabChildType === 'function' &&
                 (tabChildType as any).displayName === 'TabList') ||
