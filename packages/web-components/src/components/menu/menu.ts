@@ -209,6 +209,10 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     if (e.key === 'Escape' || (!isRoot && e.key === 'ArrowLeft')) {
       this.dispatchCloseEvent(e);
     } else {
+      // Prevent scrolling when navigating menu items
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+      }
       this._focusItem(e);
     }
   };
