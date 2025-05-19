@@ -4673,6 +4673,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "withBackground": Object {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },

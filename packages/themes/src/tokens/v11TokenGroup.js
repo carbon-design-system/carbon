@@ -49,6 +49,9 @@ export const layer = TokenGroup.create({
       name: 'layer-active-01',
     },
     {
+      name: 'layer-background-01',
+    },
+    {
       state: 'hover',
       name: 'layer-hover-01',
     },
@@ -68,6 +71,9 @@ export const layer = TokenGroup.create({
       name: 'layer-active-02',
     },
     {
+      name: 'layer-background-02',
+    },
+    {
       state: 'hover',
       name: 'layer-hover-02',
     },
@@ -85,6 +91,9 @@ export const layer = TokenGroup.create({
     {
       state: 'active',
       name: 'layer-active-03',
+    },
+    {
+      name: 'layer-background-03',
     },
     {
       state: 'hover',
