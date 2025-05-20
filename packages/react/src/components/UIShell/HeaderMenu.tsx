@@ -75,7 +75,7 @@ export interface HeaderMenuProps {
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */
-  onClick?: (event: MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  onClick?: (event: MouseEvent<HTMLLIElement>) => void;
 
   /**
    * Optionally provide an onKeyDown handler that is called when the underlying
