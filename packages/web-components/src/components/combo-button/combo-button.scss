@@ -18,6 +18,6 @@ $css--plex: true !default;
   transform: rotate(180deg);
 }
 
-:host #{$prefix}-icon-button svg {
+:host(#{$prefix}-combo-button) #{$prefix}-icon-button svg {
   transition: transform $duration-fast-02 motion(standard, productive);
 }
