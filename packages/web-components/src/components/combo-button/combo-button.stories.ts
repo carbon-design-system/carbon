@@ -78,7 +78,7 @@ export const Default = {
       <cds-menu>
         <cds-menu-item
           label="Second action with a long label description"
-          .handleClick=${onClick}></cds-menu-item>
+          ></cds-menu-item>
         <cds-menu-item
           label="Third action"
           .handleClick=${onClick}></cds-menu-item>
