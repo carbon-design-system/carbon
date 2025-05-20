@@ -114,6 +114,33 @@ export const IconOnlyWithLayer = (args) => (
   </WithLayer>
 );
 
+export const lowContrast = (args) => (
+  <ContentSwitcher lowContrast {...args}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+);
+lowContrast.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const lowContrastIconOnly = (args) => (
+  <ContentSwitcher lowContrast onChange={() => {}} {...args}>
+    <IconSwitch name="one" text="Table of Contents">
+      <TableOfContents />
+    </IconSwitch>
+    <IconSwitch name="two" text="Workspace Test">
+      <Workspace />
+    </IconSwitch>
+    <IconSwitch name="three" text="View Mode">
+      <ViewMode_2 />
+    </IconSwitch>
+  </ContentSwitcher>
+);
+lowContrastIconOnly.argTypes = {
+  ...sharedArgTypes,
+};
 IconOnlyWithLayer.argTypes = {
   ...sharedArgTypes,
 };

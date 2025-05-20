@@ -208,6 +208,11 @@ Array [
     "relativePath": "scss/components/content-switcher",
   },
   Object {
+    "filepath": "scss/components/content-switcher/_tokens.scss",
+    "importPath": "@carbon/styles/scss/components/content-switcher/tokens",
+    "relativePath": "scss/components/content-switcher/tokens",
+  },
+  Object {
     "filepath": "scss/components/copy-button/_copy-button.scss",
     "importPath": "@carbon/styles/scss/components/copy-button/copy-button",
     "relativePath": "scss/components/copy-button/copy-button",

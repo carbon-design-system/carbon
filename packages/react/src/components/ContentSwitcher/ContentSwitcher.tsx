@@ -55,6 +55,11 @@ export interface ContentSwitcherProps
   light?: boolean;
 
   /**
+   * `true` to use the low contrast version.
+   */
+  lowContrast?: boolean;
+
+  /**
    * Specify an `onChange` handler that is called whenever the ContentSwitcher
    * changes which item is selected
    */
@@ -80,6 +85,7 @@ export const ContentSwitcher = ({
   children,
   className,
   light,
+  lowContrast,
   selectedIndex: selectedIndexProp = 0,
   selectionMode = 'automatic',
   size,
@@ -172,6 +178,7 @@ export const ContentSwitcher = ({
     [`${prefix}--content-switcher--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--content-switcher--icon-only`]: isIconOnly,
+    [`${prefix}--content-switcher--low-contrast`]: lowContrast,
   });
 
   return (
@@ -222,6 +229,11 @@ ContentSwitcher.propTypes = {
     'The `light` prop for `ContentSwitcher` is no longer needed and has ' +
       'been deprecated. It will be removed in the next major release.'
   ),
+
+  /**
+   * `true` to use the low contrast version.
+   */
+  lowContrast: PropTypes.bool,
 
   /**
    * Specify an `onChange` handler that is called whenever the ContentSwitcher

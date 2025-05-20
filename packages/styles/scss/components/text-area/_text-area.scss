@@ -19,6 +19,7 @@
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/layout';
+@use '../../utilities/visually-hidden' as *;
 
 /// Text area styles
 /// @access public
