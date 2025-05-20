@@ -80,7 +80,7 @@ export const useResizeObserver = ({
       cb.current && cb.current(entry.contentRect);
     };
 
-    const observer: ResizeObserver = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver((entries) => {
       // always update entriesToHandle
       entriesToHandle.current = entries;
 
@@ -94,7 +94,7 @@ export const useResizeObserver = ({
     observer.observe(ref.current);
 
     return () => {
-      observer?.disconnect();
+      observer.disconnect();
     };
   }, []);
   return { width, height };
