@@ -14,7 +14,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--combo-button__container;
 }
 
-:host([_open]) #{$prefix}-icon-button svg {
+:host(#{$prefix}-combo-button)[_open]) #{$prefix}-icon-button svg {
   transform: rotate(180deg);
 }
 
