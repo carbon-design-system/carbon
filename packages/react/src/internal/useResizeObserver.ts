@@ -94,7 +94,7 @@ export const useResizeObserver = ({
     observer.observe(ref.current);
 
     return () => {
-      observer?.disconnect();
+      observer.disconnect();
     };
   }, []);
   return { width, height };
