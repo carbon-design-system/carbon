@@ -7,7 +7,7 @@
 
 const hep = HTMLElement.prototype;
 export const mockHTMLElement = (options: HTMLElement) => {
-  const originals = {};
+  const originals: Record<string, PropertyDescriptor | undefined> = {};
 
   for (let option in options) {
     originals[option] = Object.getOwnPropertyDescriptor(hep, option);
