@@ -61,6 +61,28 @@ export const Default = () => {
   );
 };
 
+export const withBackground = () => {
+  function TestComponent() {
+    return (
+      <div className="example-layer-test-component-no-background">
+        Test component
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <TestComponent />
+      <Layer withBackground>
+        <TestComponent />
+        <Layer withBackground>
+          <TestComponent />
+        </Layer>
+      </Layer>
+    </>
+  );
+};
+
 export const CustomLevel = (args) => {
   function TestComponent() {
     return <div className="example-layer-test-component">Test component</div>;

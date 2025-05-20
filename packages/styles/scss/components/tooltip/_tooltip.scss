@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -36,6 +36,7 @@ $tooltip-padding-inline: custom-property.get-var(
 
     padding: $tooltip-padding-block $tooltip-padding-inline;
     max-inline-size: convert.to-rem(288px);
+    overflow-wrap: break-word;
   }
 }
 
