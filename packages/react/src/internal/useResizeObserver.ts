@@ -31,7 +31,7 @@ export const useResizeObserver = ({
         const refComputedStyle = window.getComputedStyle(ref.current);
 
         const initialWidth =
-          (ref.current?.offsetWidth || 0) -
+          (ref.current?.offsetWidth ?? 0) -
           (typeof refComputedStyle?.paddingLeft === 'string' &&
           refComputedStyle?.paddingLeft.length
             ? parseFloat(refComputedStyle?.paddingLeft)
@@ -42,7 +42,7 @@ export const useResizeObserver = ({
             : 0);
 
         const initialHeight =
-          (ref.current?.offsetHeight || 0) -
+          (ref.current?.offsetHeight ?? 0) -
           (typeof refComputedStyle?.paddingTop === 'string' &&
           refComputedStyle?.paddingTop.length
             ? parseFloat(refComputedStyle?.paddingTop)
