@@ -868,7 +868,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       </span>
     ) : (
       <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription}: 0
+        {clearSelectionDescription} 0
       </span>
     );
 
