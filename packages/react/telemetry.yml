@@ -172,6 +172,7 @@ collect:
         - orientation
         - overflowMenuOnHover
         - page
+        - pageActions
         - paragraph
         - passiveModal
         - pattern
@@ -321,6 +322,7 @@ collect:
         # Dialog
         - modal
         # DismissibleTag
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback
@@ -457,7 +459,8 @@ collect:
         - wrapperClassName
         # PageHeaderContent
         - contextualActions
-        - pageActions
+        # PageHeaderContentPageActions
+        - menuButtonLabel
         # PageSelector
         - currentPage
         - totalPages

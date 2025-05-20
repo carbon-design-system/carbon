@@ -15,7 +15,7 @@ describe('CopyButton', () => {
       </cds-copy-button>
     `);
     expect(el.getAttribute('tabindex')).to.equal('2');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should add extra classes via passed button-class-name', async () => {
@@ -30,7 +30,7 @@ describe('CopyButton', () => {
       ?.querySelector('cds-copy')
       ?.shadowRoot?.querySelector('button');
     expect(button).to.have.class('extra-class');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 });
 
@@ -45,7 +45,7 @@ describe('Button props', () => {
       ?.querySelector('cds-copy')
       ?.shadowRoot?.querySelector('button');
     expect(button).to.have.attribute('disabled');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should call the click handler', async () => {
@@ -64,7 +64,7 @@ describe('Button props', () => {
       ?.shadowRoot?.querySelector('button');
     button?.click();
     expect(clicked).to.be.true;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 });
 
@@ -95,7 +95,7 @@ describe('Feedback', () => {
       'Expected feedback to disappear',
       { timeout: 3000 }
     );
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should be able to specify the feedback message', async () => {
@@ -141,7 +141,7 @@ describe('Feedback', () => {
         ?.querySelector('cds-tooltip-content')
         ?.textContent?.trim()
     ).to.not.equal(customFeedback);
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should allow users to override default feedback timeout via prop', async () => {
@@ -182,6 +182,6 @@ describe('Feedback', () => {
         timeout: customTimeout + 300,
       }
     );
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 });

@@ -12,12 +12,13 @@ import React, {
   useContext,
   useRef,
   useState,
-  type HTMLAttributes,
-  type ReactNode,
-  type KeyboardEvent,
+  type ChangeEvent,
   type ComponentType,
   type FunctionComponent,
+  type HTMLAttributes,
+  type KeyboardEvent,
   type MouseEvent,
+  type ReactNode,
 } from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
@@ -26,6 +27,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
+import { noopFn } from '../../internal/noopFn';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -73,7 +75,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Optional callback called when the search value changes.
    */
-  onChange?(e: { target: HTMLInputElement; type: 'change' }): void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Optional callback called when the search value is cleared.
@@ -185,20 +187,39 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       inputRef.current.value = '';
     }
 
-    const inputTarget = Object.assign({}, inputRef.current, { value: '' });
-    const clearedEvt = { target: inputTarget, type: 'change' } as const;
+    if (inputRef.current) {
+      const inputTarget = Object.assign({}, inputRef.current, { value: '' });
+      const syntheticEvent: ChangeEvent<HTMLInputElement> = {
+        bubbles: false,
+        cancelable: false,
+        currentTarget: inputRef.current,
+        defaultPrevented: false,
+        eventPhase: 0,
+        isDefaultPrevented: () => false,
+        isPropagationStopped: () => false,
+        isTrusted: false,
+        nativeEvent: new Event('change'),
+        persist: noopFn,
+        preventDefault: noopFn,
+        stopPropagation: noopFn,
+        target: inputTarget,
+        timeStamp: 0,
+        type: 'change',
+      };
 
-    onChange(clearedEvt);
+      onChange(syntheticEvent);
+    }
+
     onClear();
     setHasContent(false);
     inputRef.current?.focus();
   }
 
-  function handleChange(event) {
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setHasContent(event.target.value !== '');
   }
 
-  function handleKeyDown(event: KeyboardEvent) {
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (match(event, keys.Escape)) {
       event.stopPropagation();
       if (inputRef.current?.value) {
