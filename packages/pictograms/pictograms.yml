@@ -94,7 +94,7 @@
   aliases:
     - emergency
     - medical
-    - heart attack, 
+    - 'heart attack,'
     - health
     - resuscitation
 - name: agile
@@ -4885,6 +4885,12 @@
     - study
     - networking
     - network
+- name: install
+  friendly_name: Install
+  aliases:
+    - install
+    - installation
+    - installing
 - name: insurance
   friendly_name: Insurance
   aliases:
@@ -4970,12 +4976,6 @@
     - application
     - infrastructure app
     - app
-- name: install
-  friendly_name: Install
-  aliases:
-    - install
-    - installation
-    - installing
 - name: japan--mt-fuji
   friendly_name: Japan Mt. Fuji
   aliases:
@@ -5180,15 +5180,6 @@
   friendly_name: Leadership
   aliases:
     - leadership
-- name: linuxone-5
-  friendly_name: LinuxONE 5
-  aliases:
-    - Z
-    - z17
-    - data storage
-    - hardware
-    - hybrid cloud
-    - open-source
 - name: library
   friendly_name: Library
   aliases:
@@ -5214,6 +5205,15 @@
     - hyperlink
     - url
     - reference
+- name: linuxone-5
+  friendly_name: LinuxONE 5
+  aliases:
+    - Z
+    - z17
+    - data storage
+    - hardware
+    - hybrid cloud
+    - open-source
 - name: liquids
   friendly_name: Liquids
   aliases:
@@ -5803,7 +5803,7 @@
   aliases:
     - modernize
     - modern
-    - modernization    
+    - modernization
 - name: monitor
   friendly_name: Monitor
   aliases:
@@ -6078,7 +6078,7 @@
     - sky
     - stars
     - moon
-- name: nighthwak
+- name: nighthawk
   friendly_name: Nighthawk
   aliases:
     - quantum
@@ -9078,7 +9078,7 @@
     - bathroom
     - restroom
     - WC
-    - name: urinal--02
+- name: urinal--02
   friendly_name: Urinal 02
   aliases:
     - urinal
@@ -9337,6 +9337,13 @@
     - washer
     - electronics
     - appliances
+- name: washing-hands
+  friendly_name: Washing hands
+  aliases:
+    - washing hands
+    - cleanliness
+    - sterilize
+    - hygiene
 - name: washington-dc
   friendly_name: Washington DC
   aliases:
@@ -9357,13 +9364,6 @@
     - monument
     - cities
     - city
-- name: washing-hands
-  friendly_name: Washing hands
-  aliases:
-    - washing hands
-    - cleanliness
-    - sterilize
-    - hygiene
 - name: waste--electronic
   friendly_name: Electronic waste
   aliases:
