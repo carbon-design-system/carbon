@@ -81,7 +81,7 @@ export const Default = {
           ></cds-menu-item>
         <cds-menu-item
           label="Third action"
-          .handleClick=${onClick}></cds-menu-item>
+         ></cds-menu-item>
         <cds-menu-item label="Fourth action" disabled></cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item
