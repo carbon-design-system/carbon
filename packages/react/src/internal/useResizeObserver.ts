@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { useRef, useState, useLayoutEffect, useEffect } from 'react';
+import { useRef, useState, useLayoutEffect, useEffect, RefObject } from 'react';
 
 export const useResizeObserver = ({
   ref,
@@ -47,9 +47,9 @@ export const useResizeObserver = ({
           refComputedStyle?.paddingTop.length
             ? parseFloat(refComputedStyle?.paddingTop)
             : 0) -
-          (typeof refComputedStyle?.paddingLeft === 'string' &&
-          refComputedStyle?.paddingLeft.length
-            ? parseFloat(refComputedStyle?.paddingLeft)
+          (typeof refComputedStyle?.paddingBottom === 'string' &&
+          refComputedStyle?.paddingBottom.length
+            ? parseFloat(refComputedStyle?.paddingBottom)
             : 0);
 
         setWidth(initialWidth);
@@ -80,7 +80,7 @@ export const useResizeObserver = ({
       cb.current && cb.current(entry.contentRect);
     };
 
-    let observer: ResizeObserver | null = new ResizeObserver((entries) => {
+    const observer: ResizeObserver = new ResizeObserver((entries) => {
       // always update entriesToHandle
       entriesToHandle.current = entries;
 
@@ -95,8 +95,7 @@ export const useResizeObserver = ({
 
     return () => {
       observer?.disconnect();
-      observer = null;
     };
-  }, [ref.current]);
+  }, []);
   return { width, height };
 };
