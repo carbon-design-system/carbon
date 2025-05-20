@@ -87,7 +87,7 @@ export const Default = {
         <cds-menu-item
           label="Danger action"
           kind="danger"
-          .handleClick=${onClick}></cds-menu-item>
+          ></cds-menu-item>
       </cds-menu>
     </cds-combo-button>
   `,
