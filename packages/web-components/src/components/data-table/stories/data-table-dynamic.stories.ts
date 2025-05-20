@@ -156,6 +156,7 @@ export const Default = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body flipped>
               <cds-overflow-menu-item @click=${addRow}
                 >Add row</cds-overflow-menu-item
@@ -297,6 +298,7 @@ export const Playground = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body flipped>
               <cds-overflow-menu-item @click=${addRow}
                 >Add row</cds-overflow-menu-item

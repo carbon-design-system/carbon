@@ -16,6 +16,7 @@ import '../../../.storybook/templates/with-layer';
 const args = {
   ariaLabelInput: 'Lower bound',
   disabled: false,
+  hideLabel: false,
   hideTextInput: false,
   labelText: 'Slider (must be an increment of 5)',
   invalid: false,
@@ -40,6 +41,10 @@ const argTypes = {
   disabled: {
     control: 'boolean',
     description: '<code>true</code> to disable this slider.',
+  },
+  hideLabel: {
+    control: 'boolean',
+    description: 'Hide label (hide-label)',
   },
   hideTextInput: {
     control: 'boolean',
@@ -347,6 +352,7 @@ export const Playground = {
     const {
       ariaLabelInput,
       disabled,
+      hideLabel,
       hideTextInput,
       invalid,
       invalidText,
@@ -370,6 +376,7 @@ export const Playground = {
       <cds-form-item>
         <cds-slider
           ?disabled="${disabled}"
+          ?hide-label="${hideLabel}"
           ?hide-text-input="${hideTextInput}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"

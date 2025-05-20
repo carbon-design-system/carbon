@@ -22,6 +22,10 @@ Closes #
 
 ## PR Checklist
 
+<!-- 
+  Do not remove checklist items. If some do not apply, ~strike out the text with tilde's~ 
+-->
+
 As the author of this PR, before marking ready for review, confirm you:
 
 - [ ] Reviewed every line of the diff
