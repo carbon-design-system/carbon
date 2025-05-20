@@ -1693,6 +1693,9 @@ Map {
         "type": "string",
       },
       "light": [Function],
+      "lowContrast": Object {
+        "type": "bool",
+      },
       "onChange": Object {
         "isRequired": true,
         "type": "func",
