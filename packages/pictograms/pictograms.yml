@@ -89,6 +89,14 @@
     - covid
     - covid worker
     - mask
+- name: aed-defibrillator
+  friendly_name: AED defibrillator
+  aliases:
+    - emergency
+    - medical
+    - 'heart attack,'
+    - health
+    - resuscitation
 - name: agile
   friendly_name: Agile
   aliases:
@@ -460,6 +468,12 @@
     - Australia
     - globe
     - continent
+- name: assess
+  friendly_name: Assess
+  aliases:
+    - assess
+    - evaluate
+    - guage
 - name: assessment-used
   friendly_name: Assessment used
   aliases:
@@ -482,6 +496,15 @@
   aliases:
     - assets
     - security
+- name: astronaut
+  friendly_name: Astronaut
+  aliases:
+    - astronaut
+    - helmet
+    - space
+    - exploration
+    - space flight
+    - nasa
 - name: atlanta
   friendly_name: Atlanta
   aliases:
@@ -1221,6 +1244,14 @@
     - data
     - analytics
     - data analytics
+- name: chart--donut
+  friendly_name: Chart donut
+  aliases:
+    - hart
+    - donut chart
+    - pie chart
+    - segment
+    - arc
 - name: chart--error-bar
   friendly_name: Chart error bar
   aliases:
@@ -2137,6 +2168,16 @@
     - console
     - electronics
     - gaming
+- name: constellation
+  friendly_name: Constellation
+  aliases:
+    - constellation
+    - stars
+    - space
+    - sky
+    - grouping
+    - group
+    - astronomy
 - name: construct
   friendly_name: Construct
   aliases:
@@ -2301,6 +2342,18 @@
     - crop
     - tools
     - images
+- name: crossbill
+  friendly_name: Crossbill
+  aliases:
+    - quantum
+    - processor
+    - chip
+    - bird
+    - type
+    - family
+    - backend
+    - system
+    - crossbill
 - name: crosshairs
   friendly_name: Crosshairs
   aliases:
@@ -2610,6 +2663,10 @@
     - design and development 02
     - design
     - development
+- name: design-system-alignment
+  friendly_name: Design system alignment
+  aliases:
+    - design system alignment
 - name: design-thinking-team
   friendly_name: Design thinking team
   aliases:
@@ -3118,6 +3175,13 @@
     - communication
     - communicate
     - support
+- name: epinephrine-auto-injectors
+  friendly_name: Epinephrine auto injectors
+  aliases:
+    - emergency
+    - medical
+    - allergic reaction
+    - health
 - name: erlenmeyer--flask
   friendly_name: Erlenmeyer flask
   aliases:
@@ -3544,6 +3608,18 @@
     - flag
     - pennant
     - banner
+- name: flamingo
+  friendly_name: Flaminco
+  aliases:
+    - quantum
+    - processor
+    - chip
+    - bird
+    - type
+    - family
+    - backend
+    - system
+    - flamingo
 - name: flash--storage
   friendly_name: Flash storage
   aliases:
@@ -3612,6 +3688,12 @@
     - alias
     - workplace
     - individual
+- name: focus-room
+  friendly_name: Focus room
+  aliases:
+    - Laptop
+    - heads down
+    - working
 - name: fog
   friendly_name: Fog
   aliases:
@@ -4243,6 +4325,18 @@
   aliases:
     - help desk
     - Cloud
+- name: heron
+  friendly_name: Heron
+  aliases:
+    - quantum
+    - processor
+    - chip
+    - bird
+    - type
+    - family
+    - backend
+    - system
+    - heron
 - name: high--five
   friendly_name: High five
   aliases:
@@ -4791,6 +4885,12 @@
     - study
     - networking
     - network
+- name: install
+  friendly_name: Install
+  aliases:
+    - install
+    - installation
+    - installing
 - name: insurance
   friendly_name: Insurance
   aliases:
@@ -4976,6 +5076,18 @@
     - Travel
     - Coconut tree
     - River
+- name: kookaburra
+  friendly_name: Kookaburra
+  aliases:
+    - quantum
+    - processor
+    - chip
+    - bird
+    - type
+    - family
+    - backend
+    - system
+    - kookaburra
 - name: kuala-lumpur
   friendly_name: Kuala Lumpur
   aliases:
@@ -5093,6 +5205,15 @@
     - hyperlink
     - url
     - reference
+- name: linuxone-5
+  friendly_name: LinuxONE 5
+  aliases:
+    - Z
+    - z17
+    - data storage
+    - hardware
+    - hybrid cloud
+    - open-source
 - name: liquids
   friendly_name: Liquids
   aliases:
@@ -5182,6 +5303,18 @@
     - big ben
     - cities
     - city
+- name: loon
+  friendly_name: Loon
+  aliases:
+    - quantum
+    - processor
+    - chip
+    - bird
+    - type
+    - family
+    - backend
+    - system
+    - loon
 - name: loop--hearing
   friendly_name: Hearing loop
   aliases:
@@ -5559,6 +5692,11 @@
   aliases:
     - microservices
     - cloud
+- name: migrate
+  friendly_name: Migrate
+  aliases:
+    - migrate
+    - migration
 - name: migration
   friendly_name: Migration
   aliases:
@@ -5587,6 +5725,16 @@
     - input
     - feedback
     - results
+- name: mission-control
+  friendly_name: Mission control
+  aliases:
+    - mission control
+    - command center
+    - control center
+    - nasa
+    - space
+    - operation
+    - monitorization
 - name: mobile
   friendly_name: Mobile
   aliases:
@@ -5650,6 +5798,12 @@
   aliases:
     - modernize
     - Cloud
+- name: modernize--02
+  friendly_name: Modernize 02
+  aliases:
+    - modernize
+    - modern
+    - modernization
 - name: monitor
   friendly_name: Monitor
   aliases:
@@ -5895,6 +6049,12 @@
     - networking 06
     - network
     - connect
+- name: neurodiversity
+  friendly_name: Neurodiversity
+  aliases:
+    - neurodiversity
+    - neurodiverse
+    - neurodivergent
 - name: new-financial-customer-experiences
   friendly_name: New financial customer experiences
   aliases:
@@ -5918,6 +6078,36 @@
     - sky
     - stars
     - moon
+- name: nighthawk
+  friendly_name: Nighthawk
+  aliases:
+    - quantum
+    - processor
+    - chip
+    - bird
+    - type
+    - family
+    - backend
+    - system
+    - nighthawk
+- name: no--food
+  friendly_name: No food
+  aliases:
+    - Recycle
+    - recycling
+    - trash
+    - waste
+    - disposal
+    - workplace etiquette
+- name: no--liquids
+  friendly_name: No liquids
+  aliases:
+    - Recycle
+    - recycling
+    - trash
+    - waste
+    - disposal
+    - workplace etiquette
 - name: no--parking
   friendly_name: No parking
   aliases:
@@ -5940,6 +6130,19 @@
   aliases:
     - notifications
     - Cloud
+- name: nuclear
+  friendly_name: Nuclear
+  aliases:
+    - Nuclear power
+    - Nuclear plant
+    - Cooling towers
+    - Atomic energy
+    - Nuclear reactor
+    - Power station
+    - Energy production
+    - Nuclear facility
+    - Steam towers
+    - Nuclear generation
 - name: nyc--brooklyn
   friendly_name: NYC Brooklyn
   aliases:
@@ -6340,6 +6543,13 @@
     - person 09
     - people
     - human
+- name: person--working
+  friendly_name: Person working
+  aliases:
+    - Laptop
+    - heads down
+    - working
+    - employee
 - name: personality--insights
   friendly_name: Personality insights
   aliases:
@@ -6549,6 +6759,12 @@
     - pregnancy
     - expecting
     - mother
+- name: prepare
+  friendly_name: Prepare
+  aliases:
+    - prepare
+    - preparation
+    - preparing
 - name: prescription
   friendly_name: Prescription
   aliases:
@@ -6721,6 +6937,22 @@
     - qbits
     - optimize
     - quantum computing
+- name: quantum--computer
+  friendly_name: Quantum computer
+  aliases:
+    - quantum computer
+    - qbits
+    - quantum computing
+    - AI
+    - Q
+- name: quantum--computer--02
+  friendly_name: Quantum computer 02
+  aliases:
+    - quantum computer
+    - qbits
+    - quantum computing
+    - AI
+    - Q
 - name: quantum--safe
   friendly_name: Quantum safe
   aliases:
@@ -8431,6 +8663,20 @@
     - bathroom
     - restroom
     - WC
+- name: toilet--02
+  friendly_name: Toilet 02
+  aliases:
+    - Toilet
+    - bathroom
+    - restroom
+    - WC
+- name: toilet--03
+  friendly_name: Toilet 03
+  aliases:
+    - Toilet
+    - bathroom
+    - restroom
+    - WC
 - name: tokyo--cherry-blossom
   friendly_name: Tokyo cherry blossom
   aliases:
@@ -8825,6 +9071,20 @@
     - upload 02
     - upload
     - input
+- name: urinal--01
+  friendly_name: Urinal 01
+  aliases:
+    - urinal
+    - bathroom
+    - restroom
+    - WC
+- name: urinal--02
+  friendly_name: Urinal 02
+  aliases:
+    - urinal
+    - bathroom
+    - restroom
+    - WC
 - name: uruguay--palacio-salvo
   friendly_name: Uruguay Palacio Salvo
   aliases:
@@ -9077,6 +9337,13 @@
     - washer
     - electronics
     - appliances
+- name: washing-hands
+  friendly_name: Washing hands
+  aliases:
+    - washing hands
+    - cleanliness
+    - sterilize
+    - hygiene
 - name: washington-dc
   friendly_name: Washington DC
   aliases:
@@ -9260,6 +9527,22 @@
     - farming
     - agriculture
     - industry
+- name: wheelchair-user
+  friendly_name: Wheelchair user
+  aliases:
+    - handicap
+    - disabled user
+    - people
+    - wheelchair
+    - workplace
+- name: wheelchair-user--active
+  friendly_name: Wheelchair user active
+  aliases:
+    - handicap active
+    - people
+    - disabled user
+    - wheelchair
+    - workplace
 - name: whistle
   friendly_name: Whistle
   aliases:
