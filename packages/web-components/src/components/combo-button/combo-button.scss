@@ -10,7 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/components/combo-button/index' as *;
 
-:host {
+:host(#{$prefix}-combo-button) {
   @extend .#{$prefix}--combo-button__container;
 }
 
