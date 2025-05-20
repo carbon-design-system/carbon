@@ -6,7 +6,13 @@
  */
 import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 
-export const useResizeObserver = ({ ref, onResize }) => {
+export const useResizeObserver = ({
+  ref,
+  onResize,
+}: {
+  ref: RefObject<HTMLElement>;
+  onResize?: (rect: DOMRectReadOnly) => void;
+}) => {
   const [width, setWidth] = useState(-1);
   const [height, setHeight] = useState(-1);
   const entriesToHandle = useRef<ResizeObserverEntry[] | null>(null);
