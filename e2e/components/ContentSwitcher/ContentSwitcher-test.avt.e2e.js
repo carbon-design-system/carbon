@@ -72,4 +72,32 @@ test.describe('@avt ContentSwitcher', () => {
     await page.keyboard.press('ArrowRight');
     await expect(thirdIconTab).toBeVisible();
   });
+
+  test('@avt-low-contrast ContentSwitcher', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ContentSwitcher',
+      id: 'components-contentswitcher--low-contrast',
+      globals: {
+        theme: 'white',
+      },
+      args: {
+        lowContrast: true,
+      },
+    });
+    await expect(page).toHaveNoACViolations('ContentSwitcher (low contrast)');
+  });
+
+  test('@avt-low-contrast ContentSwitcher icon only', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ContentSwitcher',
+      id: 'components-contentswitcher--low-contrast-icon-only',
+      globals: {
+        theme: 'white',
+      },
+      args: {
+        lowContrast: true,
+      },
+    });
+    await expect(page).toHaveNoACViolations('ContentSwitcher (low contrast)');
+  });
 });
