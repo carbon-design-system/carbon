@@ -275,4 +275,22 @@ because the nesting selector cannot represent pseudo-elements. */
       linear-gradient(to right, $layer 0, $spacing-01, transparent $spacing-01),
       linear-gradient(to top, $layer 0, $spacing-01, transparent $spacing-01);
   }
+  .#{$prefix}--dialog__close {
+    padding: convert.to-rem(12px);
+    border: 2px solid transparent;
+    background-color: transparent;
+    block-size: 3rem;
+    cursor: pointer;
+    inline-size: 3rem;
+    transition: background-color $duration-fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:focus {
+      border-color: $focus;
+      outline: none;
+    }
+  }
 }
