@@ -6,13 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 
-export interface DropdownSkeletonProps extends ReactAttr<HTMLDivElement> {
+export interface DropdownSkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify an optional className to add.
    */

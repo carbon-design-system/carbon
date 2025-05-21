@@ -8,11 +8,10 @@
 import { ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes, { Validator } from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import { ReactAttr } from '../../types/common';
 
 export type TableExpandHeaderPropsBase = {
   /**
@@ -54,7 +53,7 @@ export type TableExpandHeaderPropsBase = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand?(event: React.MouseEvent<HTMLButtonElement>): void;
-} & ReactAttr<HTMLTableCellElement>;
+} & HTMLAttributes<HTMLTableCellElement>;
 
 export type TableExpandHeaderPropsWithToggle = Omit<
   TableExpandHeaderPropsBase,

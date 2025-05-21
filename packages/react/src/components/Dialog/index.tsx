@@ -42,6 +42,7 @@ const DialogContext = createContext<{
  * ----------
  */
 interface DialogProps extends ReactAttr<HTMLDialogElement> {
+
   /**
    * Provide the contents of the Dialog
    */
@@ -276,6 +277,7 @@ unstable__Dialog.propTypes = {
   ariaDescribedBy: PropTypes.string,
 };
 
+
 /**
  * -------------
  * DialogHeader
@@ -306,6 +308,7 @@ DialogHeader.propTypes = {
    */
   children: PropTypes.node,
 };
+
 
 /**
  * ---------------
@@ -338,6 +341,7 @@ DialogControls.propTypes = {
    */
   children: PropTypes.node,
 };
+
 
 /**
  * -------------------
