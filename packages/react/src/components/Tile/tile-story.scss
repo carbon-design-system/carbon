@@ -18,3 +18,8 @@
 div .cds--tile--selectable:not(:last-child) {
   margin-block-end: 1rem;
 }
+
+.carbon-storybook-template--annotation--background {
+  margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+  min-block-size: 0 !important; /* stylelint-disable-line declaration-no-important */
+}

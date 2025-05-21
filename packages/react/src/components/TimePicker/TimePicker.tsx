@@ -7,16 +7,15 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { forwardRef, type ForwardRefRenderFunction } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
-import { ReactAttr } from '../../types/common';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 type ExcludedAttributes = 'id' | 'value';
 
 export interface TimePickerProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * Pass in the children that will be rendered next to the form control
    */

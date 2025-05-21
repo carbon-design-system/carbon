@@ -10,6 +10,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type HTMLAttributes,
   type ReactNode,
   type Ref,
 } from 'react';
@@ -35,7 +36,6 @@ import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
@@ -53,7 +53,7 @@ export interface ModalSecondaryButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface ModalProps extends ReactAttr<HTMLDivElement> {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify whether the Modal is displaying an alert, error or warning
    * Should go hand in hand with the danger prop.
@@ -430,7 +430,7 @@ const Modal = React.forwardRef(function Modal(
         }
       : {};
 
-  const alertDialogProps: ReactAttr<HTMLDivElement> = {};
+  const alertDialogProps: HTMLAttributes<HTMLDivElement> = {};
   if (alert && passiveModal) {
     alertDialogProps.role = 'alert';
   }
