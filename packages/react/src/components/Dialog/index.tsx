@@ -13,6 +13,7 @@ import React, {
   useState,
   createContext,
   useContext,
+  type HTMLAttributes,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { usePrefix } from '../../internal/usePrefix';
@@ -20,7 +21,6 @@ import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
-import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
 import { Layer } from '../Layer';
 import ButtonSet from '../ButtonSet';
@@ -41,8 +41,7 @@ const DialogContext = createContext<{
  * Dialog
  * ----------
  */
-interface DialogProps extends ReactAttr<HTMLDialogElement> {
-
+interface DialogProps extends HTMLAttributes<HTMLDialogElement> {
   /**
    * Provide the contents of the Dialog
    */
@@ -277,13 +276,12 @@ unstable__Dialog.propTypes = {
   ariaDescribedBy: PropTypes.string,
 };
 
-
 /**
  * -------------
  * DialogHeader
  * -------------
  */
-interface DialogHeaderProps extends ReactAttr<HTMLDivElement> {
+interface DialogHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
    */
@@ -309,13 +307,12 @@ DialogHeader.propTypes = {
   children: PropTypes.node,
 };
 
-
 /**
  * ---------------
  * DialogControls
  * ---------------
  */
-interface DialogControlsProps extends ReactAttr<HTMLDivElement> {
+interface DialogControlsProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
    */
@@ -342,13 +339,12 @@ DialogControls.propTypes = {
   children: PropTypes.node,
 };
 
-
 /**
  * -------------------
  * DialogCloseButton
  * -------------------
  */
-interface DialogCloseButtonProps extends ReactAttr<HTMLDivElement> {
+interface DialogCloseButtonProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify a click handler applied to the IconButton
    */
@@ -395,7 +391,7 @@ DialogCloseButton.propTypes = {
  * DialogTitle
  * ------------
  */
-interface DialogTitleProps extends ReactAttr<HTMLHeadingElement> {
+interface DialogTitleProps extends HTMLAttributes<HTMLHeadingElement> {
   /**
    * Provide the contents of the DialogTitle
    */
@@ -456,7 +452,7 @@ DialogTitle.propTypes = {
  * DialogSubtitle
  * ---------------
  */
-interface DialogSubtitleProps extends ReactAttr<HTMLParagraphElement> {
+interface DialogSubtitleProps extends HTMLAttributes<HTMLParagraphElement> {
   /**
    * Provide the contents of the DialogSubtitle
    */
@@ -517,7 +513,7 @@ DialogSubtitle.propTypes = {
  * DialogBody
  * -----------
  */
-interface DialogBodyProps extends ReactAttr<HTMLDivElement> {
+interface DialogBodyProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide the contents of the DialogBody
    */
@@ -628,7 +624,7 @@ DialogBody.propTypes = {
  * DialogFooter
  * -------------
  */
-interface DialogFooterProps extends ReactAttr<HTMLDivElement> {
+interface DialogFooterProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide the contents of the DialogFooter
    */
