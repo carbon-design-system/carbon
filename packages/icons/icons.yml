@@ -7928,14 +7928,25 @@
   sizes:
     - 32
 - name: double-axis-chart--bar
-  friendly_name:
-    Bar chart (double axis) - graph - data - chart - bar - x-axes - double axes
+  friendly_name: Bar chart (double axis)
+  aliases:
+    - graph
+    - data
+    - chart
+    - bar
+    - x-axes
+    - double axes
   sizes:
     - 32
 - name: double-axis-chart--column
-  friendly_name:
-    Column chart (double axis) - graph - data - chart - column - y-axes - double
-    axes
+  friendly_name: Column chart (double axis)
+  aliases:
+    - graph
+    - data
+    - chart
+    - column
+    - y-axes
+    - double axes
   sizes:
     - 32
 - name: double-integer
