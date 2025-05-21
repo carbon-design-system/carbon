@@ -52,7 +52,7 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   renderIcon?: ComponentType;
 
   /**
-   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size?: 'sm' | 'md' | 'lg';
 
@@ -175,7 +175,7 @@ const Link = LinkBase as LinkComponent;
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 

@@ -214,7 +214,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -257,6 +256,8 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
         # Breadcrumb
@@ -384,6 +385,8 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
+        # Layer
+        - withBackground
         # LinkBase
         - visited
         # ListBox
