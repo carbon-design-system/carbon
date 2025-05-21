@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,16 +7,15 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
-import { ForwardRefReturn, ReactAttr } from '../../types/common';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 type ExcludedAttributes = 'id' | 'value';
 
 export interface TimePickerProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * Pass in the children that will be rendered next to the form control
    */
@@ -129,16 +128,10 @@ export interface TimePickerProps
   value?: string;
 }
 
-export type TimePickerComponent = ForwardRefReturn<
-  HTMLInputElement,
-  TimePickerProps
->;
+const frFn = forwardRef<HTMLInputElement, TimePickerProps>;
 
-const TimePicker: TimePickerComponent = React.forwardRef<
-  HTMLInputElement,
-  TimePickerProps
->(function TimePicker(
-  {
+const TimePicker = frFn((props, ref) => {
+  const {
     children,
     className,
     disabled = false,
@@ -161,9 +154,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     type = 'text',
     value,
     ...rest
-  },
-  ref: React.Ref<HTMLInputElement>
-) {
+  } = props;
   const prefix = usePrefix();
 
   const [isValue, setValue] = React.useState(value);
