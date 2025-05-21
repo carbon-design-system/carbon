@@ -971,4 +971,19 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
+
+  it('passes inputProps to the input element', () => {
+    render(
+      <FilterableMultiSelect
+        id="test-combo"
+        items={[{ label: 'Item 1' }]}
+        itemToString={(item) => item?.label || ''}
+        inputProp={{ maxLength: 10, placeholder: 'Type here' }}
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Type here');
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('maxLength', '10'); // attributes are always strings in the DOM
+  });
 });

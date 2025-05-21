@@ -316,6 +316,13 @@ export interface FilterableMultiSelectProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Props to be passed directly to the underlying <input> element.
+   * Useful for customizing input behavior, such as setting maxLength, placeholder,
+   * Note: These props are merged with internal input props. Custom values will override defaults when applicable.
+   */
+  inputProp?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
@@ -360,6 +367,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     warn,
     warnText,
     slug,
+    inputProp,
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -767,6 +775,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       disabled,
       placeholder,
       preventKeyAction: isOpen,
+      ...inputProp,
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {

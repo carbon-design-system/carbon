@@ -1432,4 +1432,19 @@ describe('ComboBox', () => {
       expect(findInputNode()).toHaveDisplayValue('Option 2');
     });
   });
+
+  it('passes inputProps to the input element', () => {
+    render(
+      <ComboBox
+        id="test-combo"
+        items={[{ label: 'Item 1' }]}
+        itemToString={(item) => item?.label || ''}
+        inputProps={{ maxLength: 10, placeholder: 'Type here' }}
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Type here');
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('maxLength', '10');
+  });
 });

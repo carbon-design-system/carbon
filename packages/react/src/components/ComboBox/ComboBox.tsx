@@ -381,6 +381,13 @@ export interface ComboBoxProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Props to be passed directly to the underlying <input> element.
+   * Useful for customizing input behavior, such as setting maxLength, placeholder,
+   * Note: These props are merged with internal input props. Custom values will override defaults when applicable.
+   */
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 const ComboBox = forwardRef(
@@ -425,6 +432,7 @@ const ComboBox = forwardRef(
       warnText,
       allowCustomValue = false,
       slug,
+      inputProps,
       ...rest
     } = props;
 
@@ -991,6 +999,7 @@ const ComboBox = forwardRef(
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
                 value: inputValue,
+                ...inputProps,
                 onChange: (e) => {
                   const newValue = e.target.value;
                   setInputValue(newValue);
