@@ -13,6 +13,7 @@ categories:
       - export--01
       - export--02
       - flexible
+      - install
       - launch
       - link
       - love
@@ -21,6 +22,7 @@ categories:
       - music
       - paper--clip
       - player--flow
+      - prepare
       - refresh
       - renew
       - repeat
@@ -64,6 +66,7 @@ categories:
       - machine--learning--06
       - machine--learning--model
       - multi-model
+      - neurodiversity
       - prompt
       - spyre-accelerator
       - technical-owner
@@ -542,6 +545,7 @@ categories:
   - name: Data analytics
     members:
       - analyze
+      - assess
       - blockchain
       - box--plot
       - chart--two-y-axis
@@ -552,6 +556,7 @@ categories:
       - chart--bubble--line
       - chart--candlestick
       - chart--custom
+      - chart--donut
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
@@ -637,6 +642,7 @@ categories:
       - ibm--z17--single-frame
       - infrastructure-security
       - it--infrastructure-software
+      - linuxone-5
       - mainframe-qualities-of-service
       - reliability
       - resilience
@@ -665,6 +671,7 @@ categories:
       - content--design
       - design-and-development--01
       - design-and-development--02
+      - design-system-alignment
       - design--leadership
       - design--research
       - engineer
@@ -868,6 +875,7 @@ categories:
   - name: Industry
     members:
       - agriculture
+      - astronaut
       - b2b-commerce
       - bulldozer
       - cargo--crane
@@ -883,6 +891,8 @@ categories:
       - green-energy
       - insurance
       - keep-dry
+      - mission-control
+      - nuclear
       - oil--pump
       - oil--rig
       - power
@@ -909,6 +919,8 @@ categories:
       - build
       - connect
       - iot--munich
+      - migrate
+      - modernize--02
       - solve
       - transform--01
   - name: Life Science
@@ -1083,17 +1095,27 @@ categories:
       - user--mask
       - user--profile
       - user--search
+      - wheelchair-user
+      - wheelchair-user--active
   - name: Quantum
     members:
       - albatross
       - bloch-sphere
       - canary
       - condor
+      - crossbill
       - eagle
       - falcon
+      - flamingo
+      - heron
       - hummingbird
+      - kookaburra
+      - loon
+      - nighthawk
       - osprey
       - qiskit
+      - quantum--computer
+      - quantum--computer--02
   - name: Red Hat
     members:
       - build-applications-anywhere
@@ -1368,6 +1390,7 @@ categories:
       - cloudy--humid
       - cloudy--partial
       - cloudy--windy
+      - constellation
       - fog
       - hail
       - hail--heavy
@@ -1393,12 +1416,15 @@ categories:
   - name: Workplace
     members:
       - accessibility
+      - aed-defibrillator
       - bento-box-tray
       - beverage-carton
       - briefcase
       - cardboard
       - compost
       - do-not-step
+      - epinephrine-auto-injectors
+      - focus-room
       - fountain--drinking
       - glass-bottle
       - glass-bottle-and-metal-can
@@ -1408,13 +1434,21 @@ categories:
       - lockers
       - loop--hearing
       - metal-can
+      - no--food
+      - no--liquids
       - no--parking
       - parking
+      - person--working
       - plastic-bottle
       - plastics
       - silence
       - station--hydration
       - toilet
+      - toilet--02
+      - toilet--03
       - trash--burnable
       - trash--non-burnable
+      - urinal--01
+      - urinal--02
+      - washing-hands
       - waste--electronic
