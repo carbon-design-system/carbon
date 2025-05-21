@@ -149,6 +149,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       _handleAILabelSlotChange: handleAILabelSlotChange,
       _handleIconSlotChange: handleIconSlotChange,
       _hasEllipsisApplied: hasEllipsisApplied,
+      size,
       tagTitle,
       text,
       dismissTooltipLabel,
@@ -159,7 +160,9 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       dismissTooltipLabel || (hasEllipsisApplied ? dismissLabel : 'Dismiss');
 
     return html`
-      <slot name="icon" @slotchange="${handleIconSlotChange}"></slot>
+      ${size !== TAG_SIZE.SMALL
+        ? html`<slot name="icon" @slotchange="${handleIconSlotChange}"></slot>`
+        : ''}
       <div class="${prefix}--interactive--tag-children">
         <span
           title="${tagTitle ? tagTitle : text}"
