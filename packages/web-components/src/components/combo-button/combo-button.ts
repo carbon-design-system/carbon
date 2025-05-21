@@ -87,7 +87,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
     } else if (this._open) {
       this._open = false;
     }
-    if((event.target as HTMLElement).tagName === "CDS-MENU-ITEM"){
+    if ((event.target as HTMLElement).tagName === 'CDS-MENU-ITEM') {
       this.onClick?.(event);
     }
   };

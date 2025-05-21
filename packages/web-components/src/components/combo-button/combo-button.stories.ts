@@ -77,17 +77,11 @@ export const Default = {
       .onClick=${onClick}>
       <cds-menu>
         <cds-menu-item
-          label="Second action with a long label description"
-          ></cds-menu-item>
-        <cds-menu-item
-          label="Third action"
-         ></cds-menu-item>
+          label="Second action with a long label description"></cds-menu-item>
+        <cds-menu-item label="Third action"></cds-menu-item>
         <cds-menu-item label="Fourth action" disabled></cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item
-          label="Danger action"
-          kind="danger"
-          ></cds-menu-item>
+        <cds-menu-item label="Danger action" kind="danger"></cds-menu-item>
       </cds-menu>
     </cds-combo-button>
   `,
