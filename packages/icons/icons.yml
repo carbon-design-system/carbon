@@ -7928,23 +7928,14 @@
   sizes:
     - 32
 - name: double-axis-chart--bar
-  friendly_name: Bar chart (double axis)
-    - graph
-    - data
-    - chart
-    - bar
-    - x-axes
-    - double axes
+  friendly_name:
+    Bar chart (double axis) - graph - data - chart - bar - x-axes - double axes
   sizes:
     - 32
 - name: double-axis-chart--column
-  friendly_name: Column chart (double axis)
-    - graph
-    - data
-    - chart
-    - column
-    - y-axes
-    - double axes
+  friendly_name:
+    Column chart (double axis) - graph - data - chart - column - y-axes - double
+    axes
   sizes:
     - 32
 - name: double-integer
@@ -12943,7 +12934,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant
-  friendly_name:  IBM® watsonx Code Assistant™
+  friendly_name: IBM® watsonx Code Assistant™
   aliases:
     - AI
     - watsonx
@@ -12961,7 +12952,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-enterprise-java-applications
-  friendly_name:  IBM® watsonx Code Assistant™ for Enterprise Java Applications
+  friendly_name: IBM® watsonx Code Assistant™ for Enterprise Java Applications
   aliases:
     - IBM watsonx Code Assistant for Enterprise Java Applications
     - end-to-end application lifecycle
@@ -21837,8 +21828,8 @@
     - sort
     - order
     - number
-    - 1
-    - 2
+    - '1'
+    - '2'
   sizes:
     - 32
 - name: sorting-lowest-to-highest-number
@@ -21851,8 +21842,8 @@
     - sort
     - order
     - number
-    - 1
-    - 2
+    - '1'
+    - '2'
   sizes:
     - 32
 - name: sorting-z-to-a
