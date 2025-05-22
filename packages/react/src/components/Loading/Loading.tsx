@@ -7,12 +7,11 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
-import { ReactAttr } from '../../types/common';
 
-export interface LoadingProps extends ReactAttr<HTMLDivElement> {
+export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify whether you want the loading indicator to be spinning or not
    */

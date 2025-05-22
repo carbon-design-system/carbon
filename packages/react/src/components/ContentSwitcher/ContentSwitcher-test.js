@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import ContentSwitcher from './ContentSwitcher';
+import { ContentSwitcher } from './ContentSwitcher';
 import Switch from '../Switch';
 
 describe('ContentSwitcher - RTL', () => {
@@ -133,6 +133,52 @@ describe('ContentSwitcher - RTL', () => {
       expect(screen.getByRole('tablist')).toHaveClass(
         'cds--content-switcher--lg'
       );
+    });
+
+    it('should have the correct attributes when lowContrast prop is used', () => {
+      const { container } = render(
+        <ContentSwitcher onChange={() => {}} lowContrast>
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      const attributes = Array.from(container.firstChild.attributes).reduce(
+        (acc, { name, value }) => ({ ...acc, [name]: value }),
+        {}
+      );
+
+      expect(attributes).toEqual({
+        class:
+          'cds--content-switcher cds--content-switcher--low-contrast cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg',
+        role: 'tablist',
+      });
+    });
+
+    it('should have the correct attributes with iconOnly version when lowContrast is used', () => {
+      // Mock the IconSwitch component
+      const IconSwitch = (props) => <Switch {...props} />;
+      IconSwitch.displayName = 'IconSwitch';
+
+      const { container } = render(
+        <ContentSwitcher onChange={() => {}} lowContrast>
+          <IconSwitch name="one" />
+          <IconSwitch name="two" />
+          <IconSwitch name="three" />
+        </ContentSwitcher>
+      );
+
+      const attributes = Array.from(container.firstChild.attributes).reduce(
+        (acc, { name, value }) => ({ ...acc, [name]: value }),
+        {}
+      );
+
+      expect(attributes).toEqual({
+        class:
+          'cds--content-switcher cds--content-switcher--icon-only cds--content-switcher--low-contrast cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg',
+        role: 'tablist',
+      });
     });
   });
 });

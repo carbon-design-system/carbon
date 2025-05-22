@@ -60,18 +60,19 @@ const HeaderMenuItem = forwardRef(function HeaderMenuItem<
   if (isCurrentPage) {
     isActive = isCurrentPage;
   }
+  // We set the current class only if `isActive` is passed in and we do
+  // not have an `aria-current="page"` set for the breadcrumb item. When this
+  // class is added we also set `aria-current` as `true`
+  const hasCurrentClass = isActive && ariaCurrent !== 'page';
   const linkClassName = cx({
     [`${prefix}--header__menu-item`]: true,
-    // We set the current class only if `isActive` is passed in and we do
-    // not have an `aria-current="page"` set for the breadcrumb item
-    [`${prefix}--header__menu-item--current`]:
-      isActive && ariaCurrent !== 'page',
+    [`${prefix}--header__menu-item--current`]: hasCurrentClass,
   });
   return (
     <li className={className} role={role}>
       <Link
         {...(rest as LinkProps<E>)}
-        aria-current={ariaCurrent}
+        aria-current={hasCurrentClass ? true : ariaCurrent}
         className={linkClassName}
         ref={ref}
         tabIndex={tabIndex}>
@@ -101,7 +102,7 @@ HeaderMenuItem.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+   * If `true` and `aria-current !== 'page'`, applies selected styles to the item and sets `aria-current="true"`.
    */
   isActive: PropTypes.bool,
 

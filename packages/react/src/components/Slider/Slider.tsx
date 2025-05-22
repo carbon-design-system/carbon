@@ -191,6 +191,11 @@ export interface SliderProps
   labelText?: ReactNode;
 
   /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
    * @deprecated
    * `true` to use the light version.
    */
@@ -362,6 +367,11 @@ class Slider extends PureComponent<SliderProps> {
      * The label for the slider.
      */
     labelText: PropTypes.node,
+
+    /**
+     * Specify whether you want the underlying label to be visually hidden
+     */
+    hideLabel: PropTypes.bool,
 
     /**
      * `true` to use the light version.
@@ -1293,6 +1303,7 @@ class Slider extends PureComponent<SliderProps> {
       maxLabel = '',
       formatLabel = defaultFormatLabel,
       labelText,
+      hideLabel,
       step = 1,
       stepMultiplier: _stepMultiplier,
       inputType = 'number',
@@ -1341,6 +1352,7 @@ class Slider extends PureComponent<SliderProps> {
         {(prefix) => {
           const labelId = `${id}-label`;
           const labelClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--visually-hidden`]: hideLabel,
             [`${prefix}--label--disabled`]: disabled,
           });
 
