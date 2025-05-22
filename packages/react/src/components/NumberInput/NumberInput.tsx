@@ -135,7 +135,7 @@ export interface NumberInputProps
    * standard numeric keyboards vary across devices and operating systems.
    * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
    */
-  inputMode: React.HTMLAttributes<HTMLInputElement>['inputMode'];
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
 
   /**
    * Specify if the currently value is invalid.
