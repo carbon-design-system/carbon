@@ -76,8 +76,8 @@ const sharedArgTypes = {
 };
 
 const sharedProps = {
-  min: -100,
-  max: 100,
+  min: -100000000,
+  max: 100000000,
 };
 
 export const Default = (args) => {
@@ -173,12 +173,12 @@ export const WithTypeOfText = (args) => {
       id="default-number-input"
       min={sharedProps.min}
       max={sharedProps.max}
-      type="text"
-      locale={locale}
       inputMode="decimal"
+      defaultValue={50}
       label="NumberInput label"
       helperText="Optional helper text."
       {...args}
+      locale={locale}
     />
   );
 };
@@ -192,88 +192,94 @@ WithTypeOfText.args = {
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
   size: 'md',
+  type: 'text',
 };
-WithTypeOfText.argTypes = { ...sharedArgTypes };
-
-export const InternalLocalizationUncontrolled = (args) => {
-  const defaultValue = 75;
-  const [value, setValue] = React.useState(defaultValue);
-
-  const handleChange = (event, { value }) => {
-    setValue(value);
-  };
-
-  return (
-    <>
-      <NumberInput
-        id="default-number-input"
-        min={sharedProps.min}
-        max={sharedProps.max}
-        defaultValue={defaultValue}
-        type="text"
-        // hardcode locale/format values for testing
-        locale="DE"
-        formatOptions={{ style: 'decimal' }}
-        onChange={handleChange}
-        label="NumberInput label"
-        helperText="Optional helper text."
-        {...args}
-      />
-      <p>
-        Value is {value}, a {typeof value}
-      </p>
-    </>
-  );
+WithTypeOfText.argTypes = {
+  locale: { control: { type: 'text' } },
+  formatOptions: { control: { type: 'object' } },
+  // formatOptions={{style: 'percent'}}
+  ...sharedArgTypes,
 };
-InternalLocalizationUncontrolled.args = {
-  step: 1,
-  disabled: false,
-  invalid: false,
-  invalidText: `Number is not valid. Must be between ${sharedProps.min} and ${sharedProps.max}`,
-  helperText: 'Optional helper text.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-};
-InternalLocalizationUncontrolled.argTypes = { ...sharedArgTypes };
 
-export const InternalLocalizationControlled = (args) => {
-  const [value, setValue] = React.useState(50);
+// export const InternalLocalizationUncontrolled = (args) => {
+//   const defaultValue = 75;
+//   const [value, setValue] = React.useState(defaultValue);
 
-  const handleChange = (event, { value }) => {
-    setValue(value);
-  };
+//   const handleChange = (event, { value }) => {
+//     setValue(value);
+//   };
 
-  return (
-    <NumberInput
-      id="default-number-input"
-      min={sharedProps.min}
-      max={sharedProps.max}
-      value={value}
-      type="text"
-      // hardcode locale/format values for testing
-      locale="DE"
-      formatOptions={{ style: 'decimal' }}
-      label="NumberInput label"
-      helperText="Optional helper text."
-      onChange={handleChange}
-      {...args}
-    />
-  );
-};
-InternalLocalizationControlled.args = {
-  step: 1,
-  disabled: false,
-  invalid: false,
-  invalidText: `Number is not valid. Must be between ${sharedProps.min} and ${sharedProps.max}`,
-  helperText: 'Optional helper text.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-};
-InternalLocalizationControlled.argTypes = { ...sharedArgTypes };
+//   return (
+//     <>
+//       <NumberInput
+//         id="default-number-input"
+//         min={sharedProps.min}
+//         max={sharedProps.max}
+//         defaultValue={defaultValue}
+//         type="text"
+//         // hardcode locale/format values for testing
+//         locale="DE"
+//         formatOptions={{ style: 'decimal' }}
+//         onChange={handleChange}
+//         label="NumberInput label"
+//         helperText="Optional helper text."
+//         {...args}
+//       />
+//       <p>
+//         Value is {value}, a {typeof value}
+//       </p>
+//     </>
+//   );
+// };
+// InternalLocalizationUncontrolled.args = {
+//   step: 1,
+//   disabled: false,
+//   invalid: false,
+//   invalidText: `Number is not valid. Must be between ${sharedProps.min} and ${sharedProps.max}`,
+//   helperText: 'Optional helper text.',
+//   warn: false,
+//   warnText:
+//     'Warning message that is really long can wrap to more lines but should not be excessively long.',
+//   size: 'md',
+// };
+// InternalLocalizationUncontrolled.argTypes = { ...sharedArgTypes };
+
+// export const InternalLocalizationControlled = (args) => {
+//   const [value, setValue] = React.useState(50);
+
+//   const handleChange = (event, { value }) => {
+//     setValue(value);
+//   };
+
+//   return (
+//     <NumberInput
+//       id="default-number-input"
+//       min={sharedProps.min}
+//       max={sharedProps.max}
+//       value={value}
+//       type="text"
+//       // hardcode locale/format values for testing
+//       locale="DE"
+//       formatOptions={{ style: 'decimal' }}
+//       label="NumberInput label"
+//       helperText="Optional helper text."
+//       onChange={handleChange}
+//       {...args}
+//     />
+//   );
+// };
+// InternalLocalizationControlled.args = {
+//   step: 1,
+//   disabled: false,
+//   invalid: false,
+//   invalidText: `Number is not valid. Must be between ${sharedProps.min} and ${sharedProps.max}`,
+//   helperText: 'Optional helper text.',
+//   warn: false,
+//   warnText:
+//     'Warning message that is really long can wrap to more lines but should not be excessively long.',
+//   size: 'md',
+// };
+// InternalLocalizationControlled.argTypes = { ...sharedArgTypes };
 
 export const Skeleton = () => {
   return <NumberInputSkeleton />;

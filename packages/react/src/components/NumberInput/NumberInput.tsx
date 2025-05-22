@@ -15,6 +15,7 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -35,6 +36,7 @@ import {
   type NumberFormatOptions,
 } from '@carbon/utilities';
 import { keys, match } from '../../internal/keyboard';
+import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -66,7 +68,7 @@ export interface NumberInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
     TranslateWithId<TranslationKey> {
   /**
-   * `true` to allow empty string. Has no effect when type="text".
+   * `true` to allow empty string.
    */
   allowEmpty?: boolean;
 
@@ -76,7 +78,8 @@ export interface NumberInputProps
   className?: string;
 
   /**
-   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `decorator` component to be rendered inside the
+   * `TextInput` component
    */
   decorator?: ReactNode;
 
@@ -96,9 +99,10 @@ export interface NumberInputProps
   disabled?: boolean;
 
   /**
-   * Specify options applied to internal number parsing and formatting.
-   * This matches the native Intl.NumberFormat options object.
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
+   * **Experimental:** Specify Intl.NumberFormat options applied to internal
+   * number parsing and formatting. Use with `type="text"`, has no effect when
+   * `type="number"`.
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
    */
   formatOptions?: NumberFormatOptions;
 
@@ -128,6 +132,13 @@ export interface NumberInputProps
   id: string;
 
   /**
+   * Instruct the browser which keyboard to display on mobile devices. Note that
+   * standard numeric keyboards vary across devices and operating systems.
+   * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
+   */
+  inputMode: React.HTMLAttributes<HTMLInputElement>['inputMode'];
+
+  /**
    * Specify if the currently value is invalid.
    */
   invalid?: boolean;
@@ -147,12 +158,15 @@ export interface NumberInputProps
    * `true` to use the light version.
    *
    * @deprecated The `light` prop for `NumberInput` is no longer needed and has
-   *     been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.
+   * been deprecated in v11 in favor of the new `Layer` component. It will be
+   * removed in the next major release.
    */
   light?: boolean;
 
   /**
-   * Specify a [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code
+   * **Experimental:** Specify a [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt)
+   * language code for parsing and formatting. Use with `type="text"`, has no
+   * effect when `type="number"`.
    */
   locale?: string;
 
@@ -169,6 +183,9 @@ export interface NumberInputProps
   /**
    * Provide an optional handler that is called when the internal state of
    * NumberInput changes. This handler is called with event and state info.
+   * When type="number", this is called on every change of the input.
+   * When type="text", this is only called on blur after the number has been
+   * parsed and formatted.
    * `(event, { value, direction }) => void`
    */
   onChange?: (
@@ -193,7 +210,8 @@ export interface NumberInputProps
   onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
 
   /**
-   * Provide an optional pattern to restrict user input
+   * When type="text", provide an optional pattern to restrict user input. Has
+   * no effect when type="number".
    */
   pattern?: string;
 
@@ -220,7 +238,7 @@ export interface NumberInputProps
 
   /**
    * **Experimental**: Specify if the input should be of type text or number.
-   * Use with `locale`, `formatOptions`, and restrict user input with `pattern`
+   * Use with `locale`, `formatOptions`, and restrict user input with `pattern`.
    */
   type?: 'number' | 'text';
 
@@ -255,11 +273,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       hideSteppers,
       iconDescription,
       id,
-      label,
-      locale = 'en-US',
+      inputMode,
       invalid = false,
       invalidText,
+      label,
       light,
+      locale = 'en-US',
       max,
       min,
       onChange,
@@ -507,7 +526,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         }
 
         if (type === 'text') {
-          const formattedNewValue = numberFormatter.format(newValue);
+          const formattedNewValue = format(newValue);
           state = {
             value:
               allowEmpty && inputRef.current.value === '' && step === 0
@@ -582,34 +601,15 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     console.log(inputValue);
     console.log(`---render end-----`);
 
-    const [cursorPosition, setCursorPosition] = useState({
-      element: null,
-      position: '',
-    });
-    useEffect(() => {
-      const { element, position } = cursorPosition;
-      if (!element || !position) return;
-
-      element.focus();
-
-      if (position === 'end') {
-        element.setSelectionRange(element.length, element.length);
-      }
-    }, [cursorPosition]);
-
     const handleOnKeyDown = (e) => {
-      const up = match(e, keys.ArrowUp);
-      const down = match(e, keys.ArrowDown);
-      const lastCharacterIndex = e.target.value.length + 1;
+      if (type === 'text') {
+        match(e, keys.ArrowUp) && handleStep(e, 'up');
+        match(e, keys.ArrowDown) && handleStep(e, 'down');
+      }
 
-      up && handleStep(e, 'up');
-      down && handleStep(e, 'down');
-
-      setCursorPosition({ element: e.target, position: 'end' });
-
-      (up || down) &&
-        console.log('yes') &&
-        e.target.setSelectionRange(lastCharacterIndex, lastCharacterIndex);
+      if (rest?.onKeyDown) {
+        rest?.onKeyDown(e);
+      }
     };
 
     return (
@@ -667,7 +667,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
                   const formattedValue = isNaN(_numberValue)
                     ? ''
-                    : numberFormatter.format(_numberValue);
+                    : format(_numberValue);
                   setInputValue(formattedValue);
 
                   if (onChange) {
@@ -684,6 +684,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                 }
               }}
               pattern={pattern}
+              inputMode={inputMode}
               readOnly={readOnly}
               step={step}
               type={type}
@@ -775,6 +776,14 @@ NumberInput.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * **Experimental:** Specify Intl.NumberFormat options applied to internal
+   * number parsing and formatting. Use with `type="text"`, has no effect when
+   * `type="number"`.
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
+   */
+  formatOptions: NumberFormatOptionsPropType,
+
+  /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
@@ -798,6 +807,22 @@ NumberInput.propTypes = {
    * Specify a custom `id` for the input
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Instruct the browser which keyboard to display on mobile devices. Note that
+   * standard numeric keyboards vary across devices and operating systems.
+   * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
+   */
+  inputMode: PropTypes.oneOf([
+    'none',
+    'text',
+    'tel',
+    'url',
+    'email',
+    'numeric',
+    'decimal',
+    'search',
+  ]),
 
   /**
    * Specify if the currently value is invalid.
@@ -825,6 +850,13 @@ NumberInput.propTypes = {
   ),
 
   /**
+   * **Experimental:** Specify a [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt)
+   * language code for parsing and formatting. Use with `type="text"`, has no
+   * effect when `type="number"`.
+   */
+  locale: PropTypes.string,
+
+  /**
    * The maximum value.
    */
   max: PropTypes.number,
@@ -837,8 +869,9 @@ NumberInput.propTypes = {
   /**
    * Provide an optional handler that is called when the internal state of
    * NumberInput changes. This handler is called with event and state info.
-   * When type="text" it is called on blur, state.value is the parsed and
-   * formatted value.
+   * When type="number", this is called on every change of the input.
+   * When type="text", this is only called on blur after the number has been
+   * parsed and formatted.
    * `(event, { value, direction }) => void`
    */
   onChange: PropTypes.func,
@@ -854,7 +887,8 @@ NumberInput.propTypes = {
   onKeyUp: PropTypes.func,
 
   /**
-   * Provide an optional pattern to restrict user input
+   * When type="text", provide an optional pattern to restrict user input. Has
+   * no effect when type="number".
    */
   pattern: PropTypes.string,
 
@@ -869,7 +903,8 @@ NumberInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `NumberInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the
+   * `NumberInput` component
    */
   slug: deprecate(
     PropTypes.node,
@@ -878,7 +913,8 @@ NumberInput.propTypes = {
   ),
 
   /**
-   * Specify how much the values should increase/decrease upon clicking on up/down button
+   * Specify how much the values should increase/decrease upon clicking on
+   * up/down button
    */
   step: PropTypes.number,
 

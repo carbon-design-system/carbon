@@ -980,6 +980,64 @@ describe('NumberInput', () => {
     });
 
     describe('locale parsing and formatting', () => {
+      it('should parse and format numbers based on the default locale', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={0}
+            value={15.01}
+            step={1}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByLabelText('NumberInput label');
+
+        expect(input).toHaveValue('15.01');
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(input).toHaveValue('16.01');
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(input).toHaveValue('15.01');
+
+        await userEvent.clear(input);
+
+        await userEvent.type(input, '3');
+        expect(input).toHaveValue('3');
+
+        await userEvent.type(input, '4');
+        expect(input).toHaveValue('34');
+
+        await userEvent.type(input, ',');
+        expect(input).toHaveValue('34,');
+
+        await userEvent.type(input, '8');
+        expect(input).toHaveValue('34,8');
+
+        await userEvent.type(input, '9');
+        expect(input).toHaveValue('34,89');
+
+        await userEvent.tab();
+        expect(input).toHaveValue('3,489');
+
+        await userEvent.clear(input);
+        await userEvent.type(input, '1234,567');
+        await userEvent.tab();
+        expect(input).toHaveValue('1,234,567');
+
+        await userEvent.clear(input);
+        await userEvent.type(input, '34.56');
+        await userEvent.tab();
+        expect(input).toHaveValue('34.56');
+
+        await userEvent.type(input, '99999');
+        await userEvent.tab();
+        expect(input).toHaveValue('34.57');
+      });
       it('should parse and format numbers based on the given locale', async () => {
         render(
           <NumberInput
@@ -1042,12 +1100,91 @@ describe('NumberInput', () => {
 
         expect(input).toHaveValue('3.456');
       });
-      it.skip('should not call onChange until onBlur when input is parsed and formatted ', async () => {});
-      it.skip('controlled vs uncontrolled behavior', async () => {});
-      it.skip('respect formatOptions', async () => {
-        // 12.345,4399 -> 12.345,44
+      it('should not call onChange until onBlur when input is parsed and formatted ', async () => {
+        const onChange = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={0}
+            value={15.01}
+            step={1}
+            max={100}
+            onChange={onChange}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByLabelText('NumberInput label');
+
+        expect(input).toHaveValue('15.01');
+        await userEvent.type(input, '9');
+        expect(onChange).not.toHaveBeenCalled();
+        await userEvent.type(input, '9');
+        expect(onChange).not.toHaveBeenCalled();
+
+        await userEvent.tab();
+        expect(input).toHaveValue('15.02');
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          expect.objectContaining({
+            value: '15.02',
+            direction: 'up',
+          })
+        );
+        expect(onChange).toHaveBeenCalledTimes(1);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(input).toHaveValue('16.02');
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          expect.objectContaining({
+            value: '16.02',
+            direction: 'up',
+          })
+        );
+        expect(onChange).toHaveBeenCalledTimes(2);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          expect.objectContaining({
+            value: '15.02',
+            direction: 'down',
+          })
+        );
+        expect(input).toHaveValue('15.02');
+        expect(onChange).toHaveBeenCalledTimes(3);
       });
-      it.skip('??', async () => {});
+      it('supports formatOptions prop', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={0}
+            value={0.15}
+            step={0.05}
+            max={100}
+            formatOptions={{ style: 'percent' }}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByLabelText('NumberInput label');
+
+        expect(input).toHaveValue('15%');
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(input).toHaveValue('20%');
+      });
     });
   });
 });
