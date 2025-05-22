@@ -13,7 +13,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './NumberInput.mdx';
-import { NumberFormatter, NumberParser } from '@carbon/utilities';
 
 export default {
   title: 'Components/NumberInput',
@@ -197,7 +196,6 @@ WithTypeOfText.args = {
 WithTypeOfText.argTypes = {
   locale: { control: { type: 'text' } },
   formatOptions: { control: { type: 'object' } },
-  // formatOptions={{style: 'percent'}}
   ...sharedArgTypes,
 };
 
