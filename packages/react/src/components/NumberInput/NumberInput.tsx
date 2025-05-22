@@ -237,7 +237,8 @@ export interface NumberInputProps
 
   /**
    * **Experimental**: Specify if the input should be of type text or number.
-   * Use with `locale`, `formatOptions`, and restrict user input with `pattern`.
+   * Use type="text" with `locale`, `formatOptions`, and guide user input with
+   * `pattern` and `inputMode`.
    */
   type?: 'number' | 'text';
 
@@ -904,7 +905,9 @@ NumberInput.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * **Experimental**: Specify if the input should be of type text or number
+   * **Experimental**: Specify if the input should be of type text or number.
+   * Use type="text" with `locale`, `formatOptions`, and guide user input with
+   * `pattern` and `inputMode`.
    */
   type: PropTypes.oneOf(['number', 'text']),
 
