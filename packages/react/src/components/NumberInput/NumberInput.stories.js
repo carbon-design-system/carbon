@@ -104,7 +104,7 @@ Default.args = {
   step: 1,
   disabled: false,
   invalid: false,
-  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+  invalidText: `Number is not valid. Must be between -100 and 100`,
   helperText: 'Optional helper text.',
   warn: false,
   warnText:
