@@ -15,8 +15,10 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
+  useCallback,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -26,6 +28,13 @@ import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
 import { TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
+import { useControllableState } from '../../internal/useControllableState';
+import {
+  NumberFormatter,
+  NumberParser,
+  type NumberFormatOptions,
+} from '@carbon/utilities';
+import { keys, match } from '../../internal/keyboard';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -57,7 +66,7 @@ export interface NumberInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
     TranslateWithId<TranslationKey> {
   /**
-   * `true` to allow empty string.
+   * `true` to allow empty string. Has no effect when type="text".
    */
   allowEmpty?: boolean;
 
@@ -85,6 +94,13 @@ export interface NumberInputProps
    * Specify if the control should be disabled, or not
    */
   disabled?: boolean;
+
+  /**
+   * Specify options applied to internal number parsing and formatting.
+   * This matches the native Intl.NumberFormat options object.
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
+   */
+  formatOptions?: NumberFormatOptions;
 
   /**
    * Provide text that is used alongside the control label for additional help
@@ -136,6 +152,11 @@ export interface NumberInputProps
   light?: boolean;
 
   /**
+   * Specify a [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code
+   */
+  locale?: string;
+
+  /**
    * The maximum value.
    */
   max?: number;
@@ -151,7 +172,10 @@ export interface NumberInputProps
    * `(event, { value, direction }) => void`
    */
   onChange?: (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>,
     state: { value: number | string; direction: string }
   ) => void;
 
@@ -167,6 +191,11 @@ export interface NumberInputProps
    * Provide an optional function to be called when a key is pressed in the number input
    */
   onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /**
+   * Provide an optional pattern to restrict user input
+   */
+  pattern?: string;
 
   /**
    * Specify if the component should be read-only
@@ -190,7 +219,8 @@ export interface NumberInputProps
   step?: number;
 
   /**
-   * **Experimental**: Specify if the input should be of type text or number
+   * **Experimental**: Specify if the input should be of type text or number.
+   * Use with `locale`, `formatOptions`, and restrict user input with `pattern`
    */
   type?: 'number' | 'text';
 
@@ -219,12 +249,14 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       disabled = false,
       disableWheel: disableWheelProp = false,
       defaultValue = 0,
+      formatOptions,
       helperText = '',
       hideLabel = false,
       hideSteppers,
       iconDescription,
       id,
       label,
+      locale = 'en-US',
       invalid = false,
       invalidText,
       light,
@@ -233,6 +265,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onChange,
       onClick,
       onKeyUp,
+      pattern = '[0-9]*',
       readOnly,
       size = 'md',
       slug,
@@ -247,6 +280,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const [isFocused, setIsFocused] = useState(false);
+
+    /**
+     * The input value, only used when type=number
+     */
     const [value, setValue] = useState(() => {
       if (controlledValue !== undefined) {
         return controlledValue;
@@ -261,6 +298,60 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     });
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
+
+    const numberParser = useMemo(
+      () => new NumberParser(locale, formatOptions),
+      [locale, formatOptions]
+    );
+    /**
+     * The currently parsed number value.
+     * Only used when type=text
+     * Updated based on the `value` as the user types.
+     */
+    const [numberValue, setNumberValue, isControlled] = useControllableState({
+      name: 'NumberInput',
+      defaultValue:
+        typeof defaultValue === 'string'
+          ? numberParser.parse(defaultValue)
+          : defaultValue,
+      onChange: (newValue) => {
+        console.log(`numberValue was set to ${newValue}`);
+      },
+      value:
+        typeof controlledValue === 'string'
+          ? numberParser.parse(controlledValue)
+          : controlledValue,
+    });
+
+    /**
+     * The current text value of the input.
+     * Only used when type=text
+     * Updated as the user types and formatted on blur.
+     */
+    const [inputValue, setInputValue] = React.useState(() =>
+      isNaN(numberValue)
+        ? ''
+        : new NumberFormatter(locale, formatOptions).format(numberValue)
+    );
+
+    const numberingSystem = useMemo(
+      () => numberParser.getNumberingSystem(inputValue),
+      [numberParser, inputValue]
+    );
+    const numberFormatter = useMemo(
+      () =>
+        new NumberFormatter(locale, {
+          ...formatOptions,
+          numberingSystem,
+        }),
+      [locale, formatOptions, numberingSystem]
+    );
+    const format = useCallback(
+      (value) =>
+        isNaN(value) || value === null ? '' : numberFormatter.format(value),
+      [numberFormatter]
+    );
+
     const inputRef = useRef<HTMLInputElement>(null);
     const ref = useMergedRefs([forwardRef, inputRef]);
     const numberInputClasses = cx({
@@ -275,7 +366,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const isInputValid = getInputValidity({
       allowEmpty,
       invalid,
-      value,
+      value: type === 'number' ? value : numberValue,
       max,
       min,
     });
@@ -325,19 +416,37 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         return;
       }
 
-      const state = {
-        value:
-          allowEmpty && event.target.value === ''
-            ? ''
-            : type === 'text'
-              ? event.target.value
+      if (type === 'number') {
+        const state = {
+          value:
+            allowEmpty && event.target.value === ''
+              ? ''
               : Number(event.target.value),
-        direction: value < event.target.value ? 'up' : 'down',
-      };
-      setValue(state.value);
+          direction: value < event.target.value ? 'up' : 'down',
+        };
+        setValue(state.value);
 
-      if (onChange) {
-        onChange(event, state);
+        if (onChange) {
+          onChange(event, state);
+        }
+        return;
+      }
+
+      if (type === 'text') {
+        const _value =
+          allowEmpty && event.target.value === '' ? '' : event.target.value;
+        console.log(`-----on change------------`);
+        console.log(`_value:`);
+        console.log(_value);
+        console.log(`parsed to:`);
+        console.log(numberParser.parse(_value));
+        console.log(`------end on change-------`);
+        setNumberValue(numberParser.parse(_value));
+        setInputValue(_value);
+
+        // The onChange prop isn't called here because it will be called on blur
+        // or on click of a stepper, after the number is parsed and formatted
+        // according to the locale.
       }
     }
 
@@ -368,12 +477,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       return parts[1] ? parts[1].length : 0;
     };
 
-    const handleStepperClick = (
-      event: MouseEvent<HTMLButtonElement>,
-      direction: 'up' | 'down'
-    ) => {
+    const handleStep = (event, direction) => {
       if (inputRef.current) {
-        const currentValue = Number(inputRef.current.value);
+        const currentValue =
+          type === 'number'
+            ? Number(inputRef.current.value)
+            : numberParser.parse(inputRef.current.value);
         const rawValue =
           direction === 'up' ? currentValue + step : currentValue - step;
         const precision = Math.max(
@@ -383,19 +492,50 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         const floatValue = parseFloat(rawValue.toFixed(precision));
         const newValue = clamp(floatValue, min ?? -Infinity, max ?? Infinity);
 
-        const state = {
-          value:
-            allowEmpty && inputRef.current.value === '' && step === 0
-              ? ''
-              : newValue,
-          direction,
-        };
+        let state;
 
-        setValue(state.value);
+        if (type === 'number') {
+          state = {
+            value:
+              allowEmpty && inputRef.current.value === '' && step === 0
+                ? ''
+                : newValue,
+            direction,
+          };
+
+          setValue(state.value);
+        }
+
+        if (type === 'text') {
+          const formattedNewValue = numberFormatter.format(newValue);
+          state = {
+            value:
+              allowEmpty && inputRef.current.value === '' && step === 0
+                ? ''
+                : formattedNewValue,
+            direction,
+          };
+
+          // newValue does not need to be parsed because it is derived from
+          // currentValue, which is parsed at the beginning of this function
+          setNumberValue(newValue);
+          setInputValue(formattedNewValue);
+        }
 
         if (onChange) {
           onChange(event, state);
         }
+
+        return state;
+      }
+    };
+
+    const handleStepperClick = (
+      event: MouseEvent<HTMLButtonElement>,
+      direction: 'up' | 'down'
+    ) => {
+      if (inputRef.current) {
+        const { state } = handleStep(event, direction);
 
         if (onClick) {
           onClick(event, state);
@@ -435,6 +575,43 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     }, [defaultValue, isRevertActive, slug]);
 
+    console.log(`---render start---`);
+    console.log(`numberValue ${typeof numberValue}:`);
+    console.log(numberValue);
+    console.log(`inputValue: ${typeof inputValue}:`);
+    console.log(inputValue);
+    console.log(`---render end-----`);
+
+    const [cursorPosition, setCursorPosition] = useState({
+      element: null,
+      position: '',
+    });
+    useEffect(() => {
+      const { element, position } = cursorPosition;
+      if (!element || !position) return;
+
+      element.focus();
+
+      if (position === 'end') {
+        element.setSelectionRange(element.length, element.length);
+      }
+    }, [cursorPosition]);
+
+    const handleOnKeyDown = (e) => {
+      const up = match(e, keys.ArrowUp);
+      const down = match(e, keys.ArrowDown);
+      const lastCharacterIndex = e.target.value.length + 1;
+
+      up && handleStep(e, 'up');
+      down && handleStep(e, 'down');
+
+      setCursorPosition({ element: e.target, position: 'end' });
+
+      (up || down) &&
+        console.log('yes') &&
+        e.target.setSelectionRange(lastCharacterIndex, lastCharacterIndex);
+    };
+
     return (
       <div
         className={outerElementClasses}
@@ -464,6 +641,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onClick={onClick}
               onChange={handleOnChange}
               onKeyUp={onKeyUp}
+              onKeyDown={handleOnKeyDown}
               onFocus={(e) => {
                 if (disableWheelProp) {
                   e.target.addEventListener('wheel', disableWheel);
@@ -478,15 +656,38 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   e.target.removeEventListener('wheel', disableWheel);
                 }
 
+                if (type === 'text') {
+                  // When isControlled, the current inputValue needs re-parsed
+                  // because the consumer's onChange hasn't been called yet and
+                  // the `numberValue` we have in state is the (stale) value
+                  // they've passed in.
+                  const _numberValue = isControlled
+                    ? numberParser.parse(inputValue)
+                    : numberValue;
+
+                  const formattedValue = isNaN(_numberValue)
+                    ? ''
+                    : numberFormatter.format(_numberValue);
+                  setInputValue(formattedValue);
+
+                  if (onChange) {
+                    const state = {
+                      value: formattedValue,
+                      direction: value < e.target.value ? 'up' : 'down',
+                    };
+                    onChange(e, state);
+                  }
+                }
+
                 if (rest.onBlur) {
                   rest.onBlur(e);
                 }
               }}
-              pattern="[0-9]*"
+              pattern={pattern}
               readOnly={readOnly}
               step={step}
               type={type}
-              value={value}
+              value={type === 'number' ? value : inputValue}
             />
             {slug ? (
               normalizedDecorator
@@ -636,6 +837,8 @@ NumberInput.propTypes = {
   /**
    * Provide an optional handler that is called when the internal state of
    * NumberInput changes. This handler is called with event and state info.
+   * When type="text" it is called on blur, state.value is the parsed and
+   * formatted value.
    * `(event, { value, direction }) => void`
    */
   onChange: PropTypes.func,
@@ -649,6 +852,11 @@ NumberInput.propTypes = {
    * Provide an optional function to be called when a key is pressed in the number input
    */
   onKeyUp: PropTypes.func,
+
+  /**
+   * Provide an optional pattern to restrict user input
+   */
+  pattern: PropTypes.string,
 
   /**
    * Specify if the component should be read-only

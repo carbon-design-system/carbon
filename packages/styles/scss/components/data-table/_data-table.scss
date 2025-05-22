@@ -239,6 +239,7 @@
   .#{$prefix}--data-table .#{$prefix}--dropdown,
   .#{$prefix}--data-table .#{$prefix}--list-box,
   .#{$prefix}--data-table .#{$prefix}--number input[type='number'],
+  .#{$prefix}--data-table .#{$prefix}--number input[type='text'],
   .#{$prefix}--data-table .#{$prefix}--number__control-btn::before,
   .#{$prefix}--data-table .#{$prefix}--number__control-btn::after,
   .#{$prefix}--data-table .#{$prefix}--text-input,
@@ -1133,7 +1134,7 @@
     td.#{$prefix}--table-cell--column-slug,
 
   // Windows HCM fix
-  
+
   .#{$prefix}--data-table-content {
     @include high-contrast-mode('outline');
   }
