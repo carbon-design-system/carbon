@@ -4249,6 +4249,39 @@ Map {
   },
   "HeaderMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "className": Object {
+        "type": "string",
+      },
+      "focusRef": Object {
+        "type": "func",
+      },
+      "isActive": Object {
+        "type": "bool",
+      },
+      "isCurrentPage": [Function],
+      "menuLinkName": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onBlur": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "renderMenuContent": Object {
+        "type": "func",
+      },
+      "tabIndex": Object {
+        "type": "number",
+      },
+    },
     "render": [Function],
   },
   "HeaderMenuButton" => Object {
