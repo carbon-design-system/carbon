@@ -74,7 +74,7 @@ const sharedArgTypes = {
   },
 };
 
-const sharedProps = {
+const reusableProps = {
   min: -100000000,
   max: 100000000,
 };
@@ -89,8 +89,8 @@ export const Default = (args) => {
   return (
     <NumberInput
       id="default-number-input"
-      min={sharedProps.min}
-      max={sharedProps.max}
+      min={-100}
+      max={100}
       value={value}
       label="NumberInput label"
       helperText="Optional helper text."
@@ -104,7 +104,7 @@ Default.args = {
   step: 1,
   disabled: false,
   invalid: false,
-  invalidText: `Number is not valid. Must be between ${sharedProps.min} and ${sharedProps.max}`,
+  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
   helperText: 'Optional helper text.',
   warn: false,
   warnText:
@@ -149,8 +149,8 @@ export const withAILabel = (args) => {
   return (
     <div style={{ width: 400 }}>
       <NumberInput
-        min={sharedProps.min}
-        max={sharedProps.max}
+        min={reusableProps.min}
+        max={reusableProps.max}
         value={50}
         label="NumberInput label"
         helperText="Optional helper text."
@@ -170,8 +170,8 @@ export const WithTypeOfText = (args) => {
   return (
     <NumberInput
       id="default-number-input"
-      min={sharedProps.min}
-      max={sharedProps.max}
+      min={reusableProps.min}
+      max={reusableProps.max}
       inputMode="decimal"
       defaultValue={50}
       label="NumberInput label"
@@ -185,7 +185,7 @@ WithTypeOfText.args = {
   step: 1,
   disabled: false,
   invalid: false,
-  invalidText: `Number is not valid. Must be between ${sharedProps.min} and ${sharedProps.max}`,
+  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
   helperText: 'Optional helper text.',
   warn: false,
   warnText:

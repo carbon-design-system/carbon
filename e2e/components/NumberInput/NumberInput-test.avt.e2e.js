@@ -33,7 +33,7 @@ test.describe('@avt NumberInput', () => {
     await expect(page).toHaveNoACViolations('components-numberinput--skeleton');
   });
 
-  test('@avt-advanced-states type="text"', async ({ page }) => {
+  test('@avt-advanced-states type of text', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
       id: 'components-numberinput--with-type-of-text',
