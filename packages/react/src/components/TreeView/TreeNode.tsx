@@ -168,7 +168,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       return React.Children.map(children, (node) => {
         if (!React.isValidElement(node)) return node;
 
-        const isTreeNode = (node.type as any).displayName === 'TreeNode';
+        const isTreeNode = node.type === TreeNode;
 
         if (isTreeNode) {
           return React.cloneElement(node, {
