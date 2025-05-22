@@ -1850,7 +1850,6 @@
       ]
     },
     {
-
       "login": "murito",
       "name": "Francisco Alcalá",
       "avatar_url": "https://avatars.githubusercontent.com/u/2628140?v=4",
@@ -1891,6 +1890,15 @@
       "name": "Sojin antony",
       "avatar_url": "https://avatars.githubusercontent.com/u/29255847?v=4",
       "profile": "https://github.com/sojinantony01",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Gopi-Agasthia-S-005CIU744",
+      "name": "Gopi-Agasthia-S-005CIU744",
+      "avatar_url": "https://avatars.githubusercontent.com/u/196181829?v=4",
+      "profile": "https://github.com/Gopi-Agasthia-S-005CIU744",
       "contributions": [
         "code"
       ]
