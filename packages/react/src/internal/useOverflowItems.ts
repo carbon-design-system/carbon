@@ -5,12 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ReactNode, RefObject, useRef, useState } from 'react';
+import {
+  ReactNode,
+  RefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import useResizeObserver from 'use-resize-observer';
+import { usePreviousValue } from './usePreviousValue';
 
 type Item = {
   id: string;
 };
+
+/**
+ * Manages overflow items in a container by automatically hiding items that don't fit.
+ * @param items - Array of items to manage for overflow, each must have an `id` property.
+ * @param containerRef - React ref to the container element that holds the items.
+ * @param offsetRef - Optional ref to an offset element (like a "more" button) whose width is reserved when calculating available space.
+ * @param maxItems - Optional maximum number of visible items. If undefined, only container space constrains visibility.
+ * @param onChange - Optional callback called when hidden items change. Receives array of currently hidden items.
+ * @returns Object with `visibleItems` (items to display), `hiddenItems` (items that don't fit), and `itemRefHandler` (function to attach refs to items for width measurement).
+ */
 
 const useOverflowItems = <T extends Item>(
   items: T[] | ReactNode,
@@ -22,7 +40,6 @@ const useOverflowItems = <T extends Item>(
   const itemsRef = useRef<Map<string, number> | null>(null);
   const [maxWidth, setMaxWidth] = useState(0);
   const visibleItemCount = useRef<number>(0);
-
   const handleResize = () => {
     if (containerRef.current) {
       const offset = offsetRef?.current?.offsetWidth || 0;
@@ -30,6 +47,10 @@ const useOverflowItems = <T extends Item>(
       setMaxWidth(newMax);
     }
   };
+  useResizeObserver({
+    ref: containerRef,
+    onResize: handleResize,
+  });
 
   const getMap = () => {
     if (!itemsRef.current) {
@@ -84,21 +105,48 @@ const useOverflowItems = <T extends Item>(
     return visibleItems;
   };
 
-  useResizeObserver({
-    ref: containerRef,
-    onResize: handleResize,
-  });
-
   if (!items || Array.isArray(items) === false) {
     return {};
   }
 
-  const visibleItems = getVisibleItems();
-  const hiddenItems = items.slice(visibleItems.length);
+  // Memoize visible items calculation to avoid recalculating on every render
+  const visibleItems = useMemo(() => {
+    if (!Array.isArray(items)) {
+      return [];
+    }
+    return getVisibleItems();
+  }, [items, maxWidth, maxItems]);
 
-  if (visibleItems.length !== visibleItemCount.current) {
-    visibleItemCount.current = visibleItems.length;
-    onChange?.(hiddenItems);
+  // Memoize hidden items calculation
+  const hiddenItems = useMemo(() => {
+    if (!Array.isArray(items)) {
+      return [];
+    }
+    return items.slice(visibleItems.length);
+  }, [items, visibleItems]);
+
+  // Use previous value to compare and only call onChange when needed
+  const previousHiddenItems = usePreviousValue(hiddenItems);
+
+  // Only call onChange if hidden items actually changed
+  useEffect(() => {
+    if (previousHiddenItems && onChange) {
+      const hasChanged =
+        hiddenItems.length !== previousHiddenItems.length ||
+        hiddenItems.some((item, index) => item !== previousHiddenItems[index]);
+
+      if (hasChanged) {
+        onChange(hiddenItems);
+      }
+    }
+  }, [hiddenItems, previousHiddenItems, onChange]);
+
+  if (!items || Array.isArray(items) === false) {
+    return {
+      visibleItems: [],
+      hiddenItems: [],
+      itemRefHandler,
+    };
   }
 
   return {

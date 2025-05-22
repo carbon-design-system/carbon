@@ -147,7 +147,7 @@
     border: 1px solid green; /* stylelint-disable-line */
   }
 
-  .#{$prefix}--page-header__tablist-tags-wrapper {
+  .#{$prefix}--page-header__tab-bar--tablist {
     display: grid;
     grid-gap: $spacing-10;
     grid-template-columns: auto minmax(0, 1fr);

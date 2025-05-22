@@ -77,32 +77,32 @@ const tags = [
   {
     type: 'blue',
     text: 'Tag 1',
-    size: 'lg',
+    size: 'md',
   },
   {
     type: 'purple',
     text: 'Tag 2',
-    size: 'lg',
+    size: 'md',
   },
   {
     type: 'red',
     text: 'Tag 3',
-    size: 'lg',
+    size: 'md',
   },
   {
     type: 'blue',
     text: 'Tag 4',
-    size: 'lg',
+    size: 'md',
   },
   {
     type: 'purple',
     text: 'Tag 5',
-    size: 'lg',
+    size: 'md',
   },
   {
     type: 'red',
     text: 'Tag 6',
-    size: 'lg',
+    size: 'md',
   },
 ];
 

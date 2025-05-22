@@ -30,6 +30,8 @@ import { OperationalTag, Tag } from '../Tag';
 import { TYPES } from '../Tag/Tag';
 import useOverflowItems from '../../internal/useOverflowItems';
 import { Popover, PopoverContent } from '../Popover';
+import { useId } from '../../internal/useId';
+
 /**
  * ----------
  * PageHeader
@@ -503,13 +505,21 @@ const PageHeaderTabBar = React.forwardRef<
     },
     className
   );
+  // Early return if no tags are provided
+  if (tags.length === 0) {
+    return (
+      <div className={classNames} ref={ref} {...other}>
+        {children}
+      </div>
+    );
+  }
   const [openPopover, setOpenPopover] = useState(false);
   const tagSize = tags[0]?.size || 'md';
-
+  const instanceId = useId('PageHeaderTabBar');
   const tagsWithIds = useMemo(() => {
     return tags.map((tag, index) => ({
       ...tag,
-      id: tag.id || `tag-${index}`,
+      id: tag.id || `tag-${index}-${instanceId}`,
     }));
   }, [tags]);
 
@@ -597,7 +607,7 @@ const PageHeaderTabBar = React.forwardRef<
   return (
     <>
       <div className={classNames} ref={ref} {...other}>
-        <div className={`${prefix}--page-header__tablist-tags-wrapper`}>
+        <div className={`${prefix}--page-header__tab-bar--tablist`}>
           {tabListElement}
           {tags && tags.length > 0 && (
             <div
