@@ -15,7 +15,6 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -333,9 +332,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         typeof defaultValue === 'string'
           ? numberParser.parse(defaultValue)
           : defaultValue,
-      onChange: (newValue) => {
-        console.log(`numberValue was set to ${newValue}`);
-      },
       value:
         typeof controlledValue === 'string'
           ? numberParser.parse(controlledValue)
@@ -454,15 +450,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if (type === 'text') {
         const _value =
           allowEmpty && event.target.value === '' ? '' : event.target.value;
-        console.log(`-----on change------------`);
-        console.log(`_value:`);
-        console.log(_value);
-        console.log(`parsed to:`);
-        console.log(numberParser.parse(_value));
-        console.log(`------end on change-------`);
         setNumberValue(numberParser.parse(_value));
         setInputValue(_value);
-
         // The onChange prop isn't called here because it will be called on blur
         // or on click of a stepper, after the number is parsed and formatted
         // according to the locale.
@@ -594,24 +583,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     }, [defaultValue, isRevertActive, slug]);
 
-    console.log(`---render start---`);
-    console.log(`numberValue ${typeof numberValue}:`);
-    console.log(numberValue);
-    console.log(`inputValue: ${typeof inputValue}:`);
-    console.log(inputValue);
-    console.log(`---render end-----`);
-
-    const handleOnKeyDown = (e) => {
-      if (type === 'text') {
-        match(e, keys.ArrowUp) && handleStep(e, 'up');
-        match(e, keys.ArrowDown) && handleStep(e, 'down');
-      }
-
-      if (rest?.onKeyDown) {
-        rest?.onKeyDown(e);
-      }
-    };
-
     return (
       <div
         className={outerElementClasses}
@@ -641,7 +612,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onClick={onClick}
               onChange={handleOnChange}
               onKeyUp={onKeyUp}
-              onKeyDown={handleOnKeyDown}
+              onKeyDown={(e) => {
+                if (type === 'text') {
+                  match(e, keys.ArrowUp) && handleStep(e, 'up');
+                  match(e, keys.ArrowDown) && handleStep(e, 'down');
+                }
+
+                if (rest?.onKeyDown) {
+                  rest?.onKeyDown(e);
+                }
+              }}
               onFocus={(e) => {
                 if (disableWheelProp) {
                   e.target.addEventListener('wheel', disableWheel);
