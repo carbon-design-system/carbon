@@ -32,13 +32,19 @@ import React, {
   ReactElement,
   useLayoutEffect,
   useMemo,
+  forwardRef,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
@@ -280,7 +286,7 @@ export interface FilterableMultiSelectProps<ItemType>
    * Specify the size of the ListBox.
    * Currently, supports either `sm`, `md` or `lg` as an option.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: ListBoxSize;
 
   /**
    * @deprecated please use decorator instead.
@@ -294,7 +300,7 @@ export interface FilterableMultiSelectProps<ItemType>
    */
   titleText?: ReactNode;
 
-  type?: 'default' | 'inline';
+  type?: ListBoxType;
 
   /**
    * Specify title to show title on hover
@@ -312,7 +318,7 @@ export interface FilterableMultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
+export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(
   {
@@ -855,16 +861,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     : {};
 
   const clearSelectionContent =
-    controlledSelectedItems.length > 0 ? (
-      <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription} {controlledSelectedItems.length},
-        {clearSelectionText}
-      </span>
-    ) : (
-      <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription}: 0
-      </span>
-    );
+    controlledSelectedItems.length > 0
+      ? `${clearSelectionDescription} ${controlledSelectedItems.length}. ${clearSelectionText}.`
+      : `${clearSelectionDescription} 0.`;
 
   return (
     <div className={wrapperClasses}>
@@ -1009,13 +1008,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement<any>;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;
   displayName?: any;
 };
 
+FilterableMultiSelect.displayName = 'FilterableMultiSelect';
 FilterableMultiSelect.propTypes = {
   /**
    * Deprecated, aria-label is no longer needed
@@ -1178,7 +1178,7 @@ FilterableMultiSelect.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   slug: deprecate(
     PropTypes.node,
@@ -1198,6 +1198,8 @@ FilterableMultiSelect.propTypes = {
    */
   translateWithId: PropTypes.func,
 
+  type: ListBoxTypePropType,
+
   /**
    * Specify title to show title on hover
    */
@@ -1213,5 +1215,3 @@ FilterableMultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default FilterableMultiSelect;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -475,6 +475,38 @@ describe('Modal', () => {
 
     expect(screen.getByText('Cancel')).toHaveFocus();
   });
+
+  it('should not focus the launcherButtonRef on initial render or after timers', () => {
+    jest.useFakeTimers();
+
+    const launcherButtonRef = React.createRef();
+
+    render(
+      <>
+        <button ref={launcherButtonRef} data-testid="launcher-button">
+          Launch Modal
+        </button>
+        <Modal
+          launcherButtonRef={launcherButtonRef}
+          primaryButtonText="Save"
+          secondaryButtonText="Cancel">
+          <p>Modal Content</p>
+        </Modal>
+      </>
+    );
+
+    const launcherButton = screen.getByTestId('launcher-button');
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.runAllTimers();
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.useRealTimers();
+  });
 });
 
 describe('events', () => {
@@ -724,5 +756,29 @@ describe('events', () => {
     const secondaryBtn = screen.getByText('Secondary button');
     await userEvent.click(secondaryBtn);
     expect(onSecondarySubmit).toHaveBeenCalled();
+  });
+
+  it('should not double submit when Enter key is pressed on primary button with `shouldSubmitOnEnter` enabled', async () => {
+    const { keyboard } = userEvent;
+    const onRequestSubmit = jest.fn();
+
+    render(
+      <Modal
+        open
+        primaryButtonText="Submit"
+        secondaryButtonText="Cancel"
+        onRequestSubmit={onRequestSubmit}
+        shouldSubmitOnEnter>
+        <p>Test content</p>
+      </Modal>
+    );
+
+    const primaryButton = screen.getByRole('button', { name: 'Submit' });
+
+    primaryButton.focus();
+    expect(primaryButton).toHaveFocus();
+
+    await keyboard('{Enter}');
+    expect(onRequestSubmit).toHaveBeenCalledTimes(1);
   });
 });

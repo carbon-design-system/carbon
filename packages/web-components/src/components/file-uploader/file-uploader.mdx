@@ -1,62 +1,84 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as FileUploaderStories from './file-uploader.stories';
 
 <Meta of={FileUploaderStories} />
 
 # File uploader
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/file-uploader)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/file-uploader)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/file-uploader/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/file-uploader/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/file-uploader)
+## Table of Contents
 
-File uploaders allow users to select one or more files to upload to a specific
-location.
+- [Overview](#overview)
+- [Drag And Drop](#drag-and-drop)
+  - [Drag And Drop Upload Container Example Application](#drag-and-drop-upload-container-example-application)
+  - [Drag And Drop Upload Single Container Example Application](#drag-and-drop-upload-single-container-example-application)
+- [File](#file)
+  - [File Uploader Drop Container](#file-uploader-drop-container)
+  - [File Uploader Item](#file-uploader-item)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+<Canvas of={FileUploaderStories.Default} />
 
-### JS (via import)
+## Drag And Drop
 
-```javascript
-import '@carbon/web-components/es/components/file-uploader/index.js';
-```
+#### Drag And Drop Upload Container Example Application
 
-<Markdown>{`${cdnJs({ components: ['file-uploader'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+<Canvas of={FileUploaderStories.DragAndDropUploadContainerExampleApplication} />
 
-### HTML
+#### Drag And Drop Upload Single Container Example Application
 
-```html
-<cds-file-uploader
-  label-description="Only .jpg and .png files. 500kb max file size"
-  label-title="Account photo"
->
-  <cds-file-uploader-button accept="image/jpeg image/png" multiple>
-    Drag and drop files here or click to upload
-  </cds-file-drop-container>
-</cds-file-uploader>
-```
+<Canvas
+  of={FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication}
 
-## `<cds-file-uploader>` attributes, properties and events
+/>
+
+## File
+
+#### File Uploader Drop Container
+
+<Canvas of={FileUploaderStories.FileUploaderDropContainer} />
+
+#### File Uploader Item
+
+<Canvas of={FileUploaderStories.FileUploaderItem} />
+
+## Skeleton state
+
+<Canvas of={FileUploaderStories.Skeleton} />
+
+## Component API
+
+## `cds-file-uploader`
 
 <ArgTypes of="cds-file-uploader" />
 
-## `<cds-file-uploader-drop-container>` attributes, properties and events
+## `cds-file-uploader-drop-container`
 
 <ArgTypes of="cds-file-uploader-drop-container" />
 
-## `<cds-file-uploader-button>` attributes, properties and events
+## `cds-file-uploader-button`
 
 <ArgTypes of="cds-file-uploader-button" />
 
-## `<cds-file-uploader-item>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-file-uploader-item invalid>`) and `false` means not setting the attribute
-(e.g. `<cds-file-uploader-item>` without `invalid` attribute).
+## `cds-file-uploader-item`
 
 <ArgTypes of="cds-file-uploader-item" />
+
+<Markdown>{`${cdnJs({ components: ['file-uploader'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/file-uploader/file-uploader.mdx).

@@ -18,6 +18,7 @@ collect:
         - allowCustomValue
         - allowEmpty
         - aria-controls
+        - aria-current
         - aria-label
         - aria-labelledby
         - ariaLabel
@@ -171,6 +172,7 @@ collect:
         - orientation
         - overflowMenuOnHover
         - page
+        - pageActions
         - paragraph
         - passiveModal
         - pattern
@@ -212,7 +214,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -255,12 +256,12 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
         # Breadcrumb
         - noTrailingSlash
-        # BreadcrumbItem
-        - aria-current
         # ButtonSet
         - stacked
         # ChatButton
@@ -322,6 +323,7 @@ collect:
         # Dialog
         - modal
         # DismissibleTag
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback
@@ -383,7 +385,9 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
-        # Link
+        # Layer
+        - withBackground
+        # LinkBase
         - visited
         # ListBox
         - invalidTextId
@@ -458,7 +462,8 @@ collect:
         - wrapperClassName
         # PageHeaderContent
         - contextualActions
-        - pageActions
+        # PageHeaderContentPageActions
+        - menuButtonLabel
         # PageSelector
         - currentPage
         - totalPages
@@ -568,7 +573,7 @@ collect:
         - onTabCloseRequest
         # TabsVertical
         - height
-        # Tag
+        # TagBase
         - filter
         # TextArea
         - counterMode
@@ -629,6 +634,14 @@ collect:
         - top-left
         - top-right
         - top-start
+        # General - aria-current
+        - date
+        - "false"
+        - location
+        - page
+        - step
+        - time
+        - "true"
         # General - buttonKind
         - danger
         - danger--ghost
@@ -860,14 +873,6 @@ collect:
         - 3x4
         - 4x3
         - 9x16
-        # BreadcrumbItem - aria-current
-        - date
-        - "false"
-        - location
-        - page
-        - step
-        - time
-        - "true"
         # ContentSwitcher - selectionMode
         - automatic
         - manual

@@ -25,6 +25,7 @@
 @use '../../utilities/layout';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/button-reset';
+@use '../../utilities/visually-hidden' as *;
 
 /// Text input styles
 /// @access public
@@ -172,6 +173,8 @@
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
     svg {
     fill: $icon-primary;
+
+    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--text-input--invalid,

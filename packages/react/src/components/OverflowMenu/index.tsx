@@ -5,28 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-import { type OverflowMenuProps } from './OverflowMenu';
-
 import { OverflowMenu as OverflowMenuV12 } from './next';
+import {
+  OverflowMenu as OverflowMenuV11,
+  type OverflowMenuProps,
+} from './OverflowMenu';
 
-import { OverflowMenu as OverflowMenuComponent } from './OverflowMenu';
-import { createClassWrapper } from '../../internal/createClassWrapper';
+const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
+  (props, ref) => {
+    const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
 
-const OverflowMenuV11 = createClassWrapper(OverflowMenuComponent);
-
-const OverflowMenu = (props: OverflowMenuProps) => {
-  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
-
-  return enableV12OverflowMenu ? (
-    <OverflowMenuV12 {...props} />
-  ) : (
-    <OverflowMenuV11 {...props} />
-  );
-};
+    return enableV12OverflowMenu ? (
+      <OverflowMenuV12 {...props} ref={ref} />
+    ) : (
+      <OverflowMenuV11
+        {...props}
+        ref={ref as React.LegacyRef<HTMLButtonElement>}
+      />
+    );
+  }
+);
 
 OverflowMenu.displayName = 'OverflowMenu';
+OverflowMenu.propTypes = OverflowMenuV11.propTypes;
 
 export default OverflowMenu;
 export { OverflowMenu, type OverflowMenuProps };

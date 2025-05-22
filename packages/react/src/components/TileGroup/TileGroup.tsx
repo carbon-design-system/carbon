@@ -7,23 +7,23 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  Children,
   cloneElement,
   isValidElement,
   useEffect,
   useState,
   type ComponentProps,
-  type ReactElement,
+  type HTMLAttributes,
   type ReactNode,
 } from 'react';
 import RadioTile from '../RadioTile';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
 type ExcludedAttributes = 'onChange';
 
 export interface TileGroupProps
-  extends Omit<ReactAttr<HTMLFieldSetElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLFieldSetElement>, ExcludedAttributes> {
   /**
    * Provide a collection of <RadioTile> components to render in the group
    */
@@ -100,16 +100,18 @@ export const TileGroup = ({
     }
   };
 
-  const hasChildren = (
-    element: ReactElement
-  ): element is ReactElement<{ children: ReactNode }> =>
-    Boolean(element.props && element.props.children);
+  const getRadioTilesWithWrappers = (elements: typeof children): ReactNode => {
+    const traverseAndModifyChildren = (
+      elements: typeof children
+    ): ReactNode => {
+      return Children.map(elements, (child) => {
+        if (!isValidElement(child)) return child;
 
-  const getRadioTilesWithWrappers = (elements: typeof children) => {
-    const traverseAndModifyChildren = (elements: typeof children) => {
-      return React.Children.map(elements, (child) => {
-        // If RadioTile found, return it with necessary props
-        if (isValidElement(child) && child.type === RadioTile) {
+        // If a `RadioTile` is found, return it with necessary props,
+        if (
+          isValidElement<ComponentProps<typeof RadioTile>>(child) &&
+          child.type === RadioTile
+        ) {
           const { value, ...otherProps } = child.props;
           return (
             <RadioTile
@@ -122,16 +124,22 @@ export const TileGroup = ({
               checked={value === selected}
             />
           );
-        } else if (isValidElement(child) && hasChildren(child)) {
-          // If the child is not RadioTile and has children, recheck the children
-          return cloneElement(child, {
-            ...child.props,
-            children: traverseAndModifyChildren(child.props.children),
-          });
-        } else {
-          // If the child is neither a RadioTile nor has children, return it as is
-          return child;
         }
+
+        // If the child is not RadioTile and has children, recheck the children
+        const children = (child.props as { children?: ReactNode }).children;
+        const hasChildren = Children.count(children) > 0;
+
+        if (hasChildren) {
+          return cloneElement(
+            child,
+            undefined,
+            traverseAndModifyChildren(children)
+          );
+        }
+
+        // If the child is neither a RadioTile nor has children, return it as is
+        return child;
       });
     };
 

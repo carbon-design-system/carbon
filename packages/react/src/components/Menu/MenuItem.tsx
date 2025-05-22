@@ -8,7 +8,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ChangeEventHandler,
   ComponentProps,
   FC,
   ForwardedRef,
@@ -175,19 +174,33 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
     }
 
-    function handleKeyDown(e: React.KeyboardEvent<HTMLLIElement>) {
+    // Avoid stray keyup event from MenuButton affecting MenuItem, and vice versa.
+    // Keyboard click is handled differently for <button> vs. <li> and for Enter vs. Space.  See
+    // https://www.stefanjudis.com/today-i-learned/keyboard-button-clicks-with-space-and-enter-behave-differently/.
+    const pendingKeyboardClick = useRef(false);
+
+    const keyboardClickEvent = (e: KeyboardEvent) =>
+      match(e, keys.Enter) || match(e, keys.Space);
+
+    function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
         e.stopPropagation();
       }
 
-      if (match(e, keys.Enter) || match(e, keys.Space)) {
-        handleClick(e);
-      }
+      pendingKeyboardClick.current = keyboardClickEvent(e);
 
       if (rest.onKeyDown) {
         rest.onKeyDown(e);
       }
+    }
+
+    function handleKeyUp(e: KeyboardEvent<HTMLLIElement>) {
+      if (pendingKeyboardClick.current && keyboardClickEvent(e)) {
+        handleClick(e);
+      }
+
+      pendingKeyboardClick.current = false;
     }
 
     const classNames = cx(className, `${prefix}--menu-item`, {
@@ -243,6 +256,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           aria-expanded={hasChildren ? submenuOpen : undefined}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
           {...getReferenceProps()}>
           <div className={`${prefix}--menu-item__selection-icon`}>
             {rest['aria-checked'] && <Checkmark />}
@@ -338,7 +352,7 @@ export interface MenuItemSelectableProps
   /**
    * Provide an optional function to be called when the selection state changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (checked: boolean) => void;
 
   /**
    * Controls the state of this option.
@@ -500,7 +514,7 @@ export interface MenuItemRadioGroupProps<Item>
   /**
    * Provide an optional function to be called when the selection changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (selectedItem: Item) => void;
 
   /**
    * Provide props.selectedItem to control the state of this radio group. Must match the type of props.items.
@@ -527,7 +541,7 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   const [selection, setSelection] = useControllableState({
     value: selectedItem,
     onChange,
-    defaultValue: defaultSelectedItem,
+    defaultValue: defaultSelectedItem ?? ({} as Item),
   });
 
   function handleClick(item, e) {
