@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   useRef,
+  type HTMLAttributes,
   type MouseEventHandler,
   type ReactNode,
 } from 'react';
@@ -21,7 +22,7 @@ import classNames from 'classnames';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { TranslateWithId, ReactAttr } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
@@ -71,7 +72,7 @@ const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
 };
 
 export interface TableHeaderProps
-  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement>,
+  extends HTMLAttributes<HTMLTableCellElement & HTMLButtonElement>,
     TranslateWithId<
       TableHeaderTranslationKey,
       { header; sortDirection; isSortHeader; sortStates }

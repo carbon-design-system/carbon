@@ -12,12 +12,12 @@ import React, {
   cloneElement,
   useContext,
   type ForwardedRef,
+  type HTMLAttributes,
   type ReactNode,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useId } from '../../internal/useId';
-import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { AILabel } from '../AILabel';
@@ -36,7 +36,7 @@ export type ReactNodeLike =
 export type func = (...args: any[]) => any;
 
 export interface DatePickerInputProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * The type of the date picker:
    *

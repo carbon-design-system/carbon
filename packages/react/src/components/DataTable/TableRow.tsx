@@ -5,17 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Children } from 'react';
+import React, { Children, type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import TableSlugRow from './TableSlugRow';
 import TableDecoratorRow from './TableDecoratorRow';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
-export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
+export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
   /**
    * Specify an optional className to be applied to the container node
    */
