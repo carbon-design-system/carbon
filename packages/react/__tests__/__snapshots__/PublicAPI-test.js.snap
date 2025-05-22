@@ -1684,7 +1684,45 @@ Map {
     },
   },
   "ContentSwitcher" => Object {
-    "displayName": "ClassWrapper(ContentSwitcher)",
+    "displayName": "ContentSwitcher",
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "light": [Function],
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "selectedIndex": Object {
+        "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
   },
   "ControlledPasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
