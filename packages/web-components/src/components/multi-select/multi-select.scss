@@ -190,7 +190,7 @@ $css--plex: true !default;
   position: absolute;
   display: block;
   background-color: $border-subtle-01;
-  block-size: convert.to-rem(16px);
+  block-size: $spacing-05;
   content: '';
   inline-size: convert.to-rem(1px);
   inset-block-start: 0;
