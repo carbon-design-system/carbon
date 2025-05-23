@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +9,7 @@ import React from 'react';
 import Switcher from '../Switcher';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import HeaderPanel from '../HeaderPanel';
-import SwitcherItem from '../SwitcherItem';
+import { SwitcherDivider, SwitcherItem } from '../';
 
 describe('Switcher', () => {
   describe('renders as expected - Component API', () => {
@@ -91,6 +90,34 @@ describe('Switcher', () => {
       const switcher = screen.getByRole('list');
       expect(switcher).toHaveAttribute('aria-label', 'test-aria-label');
       expect(switcher).toHaveAttribute('aria-labelledby', 'test-labelledby');
+    });
+
+    it('should not pass unexpected props to children', () => {
+      const CustomListItem = (props) => {
+        expect(props).toEqual({});
+
+        return <li data-testid="divider">Divider</li>;
+      };
+
+      const consoleErrorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      try {
+        render(
+          <Switcher aria-label="test-switcher" expanded={false}>
+            <SwitcherItem aria-label="item-1">Item 1</SwitcherItem>
+            <CustomListItem />
+            <SwitcherDivider />
+            <SwitcherItem aria-label="item-2">Item 2</SwitcherItem>
+          </Switcher>
+        );
+
+        expect(screen.getByTestId('divider')).toBeInTheDocument();
+        expect(consoleErrorSpy).not.toHaveBeenCalled();
+      } finally {
+        consoleErrorSpy.mockRestore();
+      }
     });
   });
 
