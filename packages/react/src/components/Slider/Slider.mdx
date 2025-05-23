@@ -18,8 +18,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Overview](#overview)
   - [Controlled Slider](#controlled-slider)
   - [Skeleton](#skeleton)
-  - [Slider With Customer](#slider-with-customer)
-  - [Slider With Hidden Inputs](#slider-with-customer)
+  - [Slider With Custom Value](#slider-with-custom-value)
+  - [Slider With Hidden Inputs](#slider-with-hidden-inputs)
   - [Two Handle Skeleton](#two-handle-skeleton)
   - [Two Handle Slider](#two-handle-slider)
   - [Two Handle Slider With Hidden Inputs](#two-handle-slider-with-hidden-inputs)
@@ -65,14 +65,15 @@ increase or decrease the value by moving the handle along a horizontal track.
   ]}
 />
 
-## Slider With Customer
+## Slider With Custom Value
 
 <Canvas
   of={SliderStories.SliderWithCustomValueLabel}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SliderStories.SliderWithCustomValueLabel),
+      onClick: () =>
+        stackblitzPrefillConfig(SliderStories.SliderWithCustomValueLabel),
     },
   ]}
 />
@@ -84,7 +85,8 @@ increase or decrease the value by moving the handle along a horizontal track.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SliderStories.SliderWithHiddenInputs),
+      onClick: () =>
+        stackblitzPrefillConfig(SliderStories.SliderWithHiddenInputs),
     },
   ]}
 />
@@ -135,7 +137,8 @@ keys to `onChange` function prop that is passed to the component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SliderStories.TwoHandleSliderWithHiddenInputs),
+      onClick: () =>
+        stackblitzPrefillConfig(SliderStories.TwoHandleSliderWithHiddenInputs),
     },
   ]}
 />

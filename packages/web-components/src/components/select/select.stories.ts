@@ -191,7 +191,16 @@ export const Default = {
           warn-text="${ifDefined(warnText)}"
           value="${ifDefined(value)}"
           @cds-select-selected="${ifDefined(onInput)}">
-          ${children}
+          ${children} helper-text="Optional helper text" label-text="Select an
+          option">
+          <cds-select-item
+            value="An example option that is really long to show what should be done to handle long text"
+            >An example option that is really long to show what should be done
+            to handle long text</cds-select-item
+          >
+          <cds-select-item selected value="option-2">Option 2</cds-select-item>
+          <cds-select-item value="option-3">Option 3</cds-select-item>
+          <cds-select-item value="option-4">Option 4</cds-select-item>
         </cds-select>
       </cds-form-item>
     `;

@@ -475,6 +475,38 @@ describe('Modal', () => {
 
     expect(screen.getByText('Cancel')).toHaveFocus();
   });
+
+  it('should not focus the launcherButtonRef on initial render or after timers', () => {
+    jest.useFakeTimers();
+
+    const launcherButtonRef = React.createRef();
+
+    render(
+      <>
+        <button ref={launcherButtonRef} data-testid="launcher-button">
+          Launch Modal
+        </button>
+        <Modal
+          launcherButtonRef={launcherButtonRef}
+          primaryButtonText="Save"
+          secondaryButtonText="Cancel">
+          <p>Modal Content</p>
+        </Modal>
+      </>
+    );
+
+    const launcherButton = screen.getByTestId('launcher-button');
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.runAllTimers();
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.useRealTimers();
+  });
 });
 
 describe('events', () => {

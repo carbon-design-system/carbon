@@ -505,37 +505,65 @@ export const HeaderWSideNav = () => (
 
 HeaderWSideNav.storyName = 'Header w/ SideNav';
 
-export const HeaderWActionsAndRightPanel = (args) => (
-  <>
-    <Header aria-label="IBM Platform Name">
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
-      </HeaderName>
-      <HeaderGlobalBar>
-        <HeaderGlobalAction
-          aria-label="Search"
-          onClick={action('search click')}>
-          <Search size={20} />
-        </HeaderGlobalAction>
-        <HeaderGlobalAction
-          aria-label="Notifications"
-          badgeCount={args.badgeCount}
-          isActive
-          onClick={action('notification click')}>
-          <Notification size={20} />
-        </HeaderGlobalAction>
-        <HeaderGlobalAction
-          aria-label="App Switcher"
-          onClick={action('app-switcher click')}
-          tooltipAlignment="end">
-          <SwitcherIcon size={20} />
-        </HeaderGlobalAction>
-      </HeaderGlobalBar>
-      <HeaderPanel expanded />
-    </Header>
-    <StoryContent />
-  </>
-);
+export const HeaderWActionsAndRightPanel = (args) => {
+  // Add state to control panel expansion
+  const [isPanelExpanded, setIsPanelExpanded] = useState(false);
+
+  // Toggle the notification panel when the icon is clicked
+  const togglePanel = () => {
+    setIsPanelExpanded((prev) => !prev);
+  };
+
+  // Function to close panel specifically
+  const closePanel = () => {
+    setIsPanelExpanded(false);
+  };
+
+  // Close the panel when Escape key is pressed
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      closePanel();
+    }
+  };
+
+  return (
+    <>
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            badgeCount={args.badgeCount}
+            isActive={isPanelExpanded}
+            onClick={togglePanel}
+            onBlur={closePanel}
+            onKeyDown={handleKeyDown}
+            tooltipAlignment="center"
+            id="notification-button">
+            <Notification size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="App Switcher"
+            onClick={action('app-switcher click')}
+            tooltipAlignment="end">
+            <SwitcherIcon size={20} />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+        <HeaderPanel expanded={isPanelExpanded} href="#notification-button">
+          {/* Notification panel content here */}
+        </HeaderPanel>
+      </Header>
+      <StoryContent />
+    </>
+  );
+};
 
 HeaderWActionsAndRightPanel.storyName = 'Header w/ Actions and Right Panel';
 
