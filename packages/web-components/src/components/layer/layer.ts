@@ -38,6 +38,9 @@ class CDSLayer extends LitElement {
   @property()
   layers;
 
+  @property({ type: Boolean, attribute: 'with-background' })
+  withBackground;
+
   updated() {
     if (!this.layers) {
       this.layers = this.querySelectorAll(

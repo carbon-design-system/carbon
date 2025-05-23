@@ -12,6 +12,7 @@ import * as LayerStories from './layer.stories';
 
 - [Overview](#overview)
 - [Setting a custom level](#setting-a-custom-level)
+- [With background](#with-background)
 - [Get the current layer](#get-the-current-layer)
 - [Component API](#component-api)
 - [CDN](#cdn)
@@ -41,6 +42,15 @@ indefinitely, but the token sets typically end after 3 layers.
   </cds-layer>
 </cds-layer>
 ```
+
+## With Background
+
+The layer component updates layer tokens at each level and theme. When you add
+the `with-background` attribute, it automatically sets a background color using
+the `$layer-background` token. Without it, you can manually set the background
+with `background-color: $layer-background`.
+
+<Canvas of={LayerStories.withBackground} />
 
 ## Setting a custom level
 

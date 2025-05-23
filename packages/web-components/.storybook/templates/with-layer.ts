@@ -49,36 +49,38 @@ class CDSLayer extends LitElement {
 
   render() {
     return html`
-      <div class="${prefix}--with-layer">
-        <div class="${prefix}--with-layer__layer">
-          <div class="${prefix}--with-layer__label">${Layers()} Layer 1</div>
-          <div class="${prefix}--with-layer__content">
-            <cds-layer>
+      <cds-layer with-background>
+        <div class="${prefix}--with-layer">
+          <div class="${prefix}--with-layer__background">
+            <div class="${prefix}--with-layer__label">
+              ${Layers()} $background
+            </div>
+            <div class="${prefix}--with-layer__content">
               <slot @slotchange="${this._handleSlotChange}"></slot>
-              <div class="${prefix}--with-layer__layer">
-                <div class="${prefix}--with-layer__label">
-                  ${Layers()} Layer 2
-                </div>
-                <div class="${prefix}--with-layer__content">
-                  <cds-layer>
+              <cds-layer with-background>
+                <div class="${prefix}--with-layer__layer">
+                  <div class="${prefix}--with-layer__label">
+                    ${Layers()} $layer-02
+                  </div>
+                  <div class="${prefix}--with-layer__content">
                     <slot name="layer-2"></slot>
-                    <div class="${prefix}--with-layer__layer">
-                      <div class="${prefix}--with-layer__label">
-                        ${Layers()} Layer 3
-                      </div>
-                      <div class="${prefix}--with-layer__content">
-                        <cds-layer>
+                    <cds-layer with-background>
+                      <div class="${prefix}--with-layer__layer">
+                        <div class="${prefix}--with-layer__label">
+                          ${Layers()} $layer-03
+                        </div>
+                        <div class="${prefix}--with-layer__content">
                           <slot name="layer-3"></slot>
-                        </cds-layer>
+                        </div>
                       </div>
-                    </div>
-                  </cds-layer>
+                    </cds-layer>
+                  </div>
                 </div>
-              </div>
-            </cds-layer>
+              </cds-layer>
+            </div>
           </div>
         </div>
-      </div>
+      </cds-layer>
     `;
   }
 
