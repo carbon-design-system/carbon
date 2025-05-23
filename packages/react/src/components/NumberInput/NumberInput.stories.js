@@ -11,6 +11,7 @@ import NumberInputSkeleton from './NumberInput.Skeleton';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
+import { useDocumentLang } from '../../internal/useDocumentLang';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './NumberInput.mdx';
 
@@ -165,7 +166,7 @@ export const withAILabel = (args) => {
 withAILabel.argTypes = { ...sharedArgTypes };
 
 export const WithTypeOfText = (args) => {
-  const locale = document.documentElement.lang;
+  const locale = useDocumentLang();
 
   return (
     <NumberInput
