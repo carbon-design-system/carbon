@@ -78,6 +78,12 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   @property({ reflect: true, attribute: 'tooltip-alignment' })
   tooltipAlignment = ICON_BUTTON_TOOLTIP_ALIGNMENT.TOP;
 
+  /**
+   * Provide the tooltip content for the icon button.
+   */
+  @property({ type: String, attribute: 'tooltip-content' })
+  tooltipContent = 'Additional actions';
+
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: Event) => {
@@ -145,7 +151,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
         menu-alignment=${menuAlignment}
         part="trigger">
         ${ChevronDown16({ slot: 'icon' })}
-        <span slot="tooltip-content">Additional actions</span>
+        <span slot="tooltip-content">${this.tooltipContent}</span>
       </cds-icon-button>
       <slot></slot>
     `;
