@@ -16,6 +16,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/utilities/convert';
 
 :host(#{$prefix}-multi-select) {
   outline: none;
@@ -57,6 +58,12 @@ $css--plex: true !default;
   .#{$prefix}--list-box__field:focus-within {
   outline: $spacing-01 solid $focus;
   outline-offset: -#{$spacing-01};
+}
+
+:host(#{$prefix}-multi-select[filterable])
+  .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+  ~ ::slotted(#{$prefix}-ai-label) {
+  inset-inline-end: calc($spacing-10 + 18px);
 }
 
 :host(#{$prefix}-multi-select[direction='top']) {
@@ -169,13 +176,25 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-08;
+    inset-inline-end: calc($spacing-08 + 9px);
+    margin-block-start: convert.to-rem(0.5px);
   }
 
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
   }
+}
+
+:host(#{$prefix}-multi-select[ai-label]) ::slotted(#{$prefix}-ai-label)::after {
+  position: absolute;
+  display: block;
+  background-color: $border-subtle-01;
+  block-size: $spacing-05;
+  content: '';
+  inline-size: convert.to-rem(1px);
+  inset-block-start: 0;
+  inset-inline-end: convert.to-rem(-9px);
 }
 
 :host(#{$prefix}-multi-select[ai-label][warn]),
