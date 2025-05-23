@@ -518,6 +518,7 @@
     content: '';
     inline-size: convert.to-rem(1px);
   }
+
   .#{$prefix}--number__input-wrapper--decorator
     .#{$prefix}--number__input-inner-wrapper--decorator
     > *::before,
@@ -525,6 +526,16 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: convert.to-rem(-16px);
+  }
+
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug--revert::before {
+    inset-block-start: convert.to-rem(8px);
+    inset-inline-start: convert.to-rem(-8px);
   }
 
   .#{$prefix}--number__control-btn::after {
