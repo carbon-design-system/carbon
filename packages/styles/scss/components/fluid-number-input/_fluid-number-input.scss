@@ -58,10 +58,8 @@
     position: initial;
   }
 
-  .#{$prefix}--number-input--fluid
-    input[type='number']
-    .#{$prefix}--number-input--fluid
-    input[type='text'] {
+  .#{$prefix}--number-input--fluid input[type='number'],
+  .#{$prefix}--number-input--fluid input[type='text'] {
     padding: convert.to-rem(32px) convert.to-rem(80px) convert.to-rem(13px)
       $spacing-05;
     background: transparent;
@@ -107,15 +105,6 @@
     .#{$prefix}--number__control-btn,
   .#{$prefix}--number-input--fluid--invalid
     input[type='number']:focus
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn,
-  .#{$prefix}--number-input--fluid
-    .#{$prefix}--number__input-wrapper--warning
-    input[type='text']:focus
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn,
-  .#{$prefix}--number-input--fluid--invalid
-    input[type='text']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn,
   .#{$prefix}--number-input--fluid
