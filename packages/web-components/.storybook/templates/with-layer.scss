@@ -16,10 +16,6 @@
 .#{$prefix}--with-layer__layer {
   position: relative;
   border: 1px dashed colors.$purple-50;
-}
-
-.#{$prefix}--with-layer__layer .#{$prefix}--with-layer__layer {
-  background-color: theme.$layer;
   margin-block-start: spacing.$spacing-07;
 }
 
@@ -31,6 +27,17 @@
   background-color: tag.$tag-background-purple;
   color: tag.$tag-color-purple;
   column-gap: spacing.$spacing-02;
+}
+
+.#{$prefix}--with-layer__background {
+  border: 1px dashed colors.$magenta-50;
+  margin: -42px;
+  min-block-size: 100vh;
+}
+
+.#{$prefix}--with-layer__background > .#{$prefix}--with-layer__label {
+  background-color: tag.$tag-background-magenta;
+  color: tag.$tag-color-magenta;
 }
 
 .#{$prefix}--with-layer__content {
