@@ -57,6 +57,10 @@ Default.args = {
 
 Default.argTypes = {
   align: {
+    // TODO:
+    // 1. Should the deprecated options be deleted?
+    // 2. The list doesn't include all of the options available in the
+    //    component. Is it supposed to?
     options: [
       'top',
       'top-left',
