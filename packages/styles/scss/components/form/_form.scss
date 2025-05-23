@@ -116,12 +116,14 @@ $input-label-weight: 400 !default;
     inline-size: convert.to-rem(75px);
   }
 
-  input[type='number'] {
+  input[type='number'],
+  input[type='text'].#{$prefix}--number {
     font-family: font-family('sans');
   }
 
   input[data-invalid]:not(:focus),
   .#{$prefix}--number[data-invalid] input[type='number']:not(:focus),
+  .#{$prefix}--number[data-invalid] input[type='text']:not(:focus),
   .#{$prefix}--text-input__field-wrapper[data-invalid]
     > .#{$prefix}--text-input--invalid:not(:focus),
   .#{$prefix}--text-area__wrapper[data-invalid]
