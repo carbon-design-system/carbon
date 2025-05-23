@@ -18,6 +18,7 @@
 @use './components/notification/tokens' as notification;
 @use './components/tag/tokens' as tag;
 @use './components/icon-indicator/tokens' as icon-indicator;
+@use './components/content-switcher/tokens' as content-switcher;
 
 /// Specify a Map of zones where the key will be used as part of the selector
 /// and the value will be a map used to emit CSS Custom Properties for all color
@@ -33,7 +34,8 @@ $-components: (
   button.$button-tokens,
   notification.$notification-tokens,
   tag.$tag-tokens,
-  icon-indicator.$status-tokens
+  icon-indicator.$status-tokens,
+  content-switcher.$content-switcher-tokens
 );
 
 @each $name, $theme in $zones {

@@ -616,6 +616,12 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   minLabel = '';
 
   /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  @property({ attribute: 'hide-label', type: Boolean, reflect: true })
+  hideLabel = false;
+
+  /**
    * The formatter for the text for maximum value.
    * Should be changed upon the locale the UI is rendered with.
    */
@@ -870,6 +876,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       formatMaxText,
       formatMinText,
       labelText,
+      hideLabel,
       max,
       min,
       maxLabel,
@@ -892,6 +899,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
 
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
+      [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: disabled,
     });
     const sliderClasses = classMap({
