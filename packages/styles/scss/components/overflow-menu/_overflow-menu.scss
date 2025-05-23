@@ -361,10 +361,6 @@
   .#{$prefix}--overflow-menu-options__btn:focus {
     @include high-contrast-mode('focus');
   }
-
-  .#{$prefix}--overflow-menu svg {
-    @include high-contrast-mode('icon-fill');
-  }
   /*stylelint-enable */
 
   $popover-offset: custom-property.get-var('popover-offset', 2.5rem);

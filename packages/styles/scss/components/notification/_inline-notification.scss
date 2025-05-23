@@ -316,12 +316,4 @@
   .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--inline-notification__action-button:focus {
     @include high-contrast-mode('focus');
   }
-
-  .#{$prefix}--inline-notification .#{$prefix}--inline-notification__icon {
-    @include high-contrast-mode('icon-fill');
-  }
-  .#{$prefix}--inline-notification
-    .#{$prefix}--inline-notification__close-icon {
-    @include high-contrast-mode('icon-fill');
-  }
 }
