@@ -44,7 +44,6 @@ import { IconButton, IconButtonProps } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
-import { PopoverAlignment } from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
@@ -138,11 +137,6 @@ export interface OverflowMenuProps
     | 'label'
     | 'kind'
   > {
-  /**
-   * Specify how the trigger tooltip should be aligned.
-   */
-  align?: PopoverAlignment;
-
   /**
    * Specify a label to be read by screen readers on the container node
    */
