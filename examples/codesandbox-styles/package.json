@@ -1,7 +1,7 @@
 {
   "name": "codesandbox-styles",
   "private": true,
-  "version": "0.82.0",
+  "version": "0.83.0-rc.0",
   "type": "module",
   "scripts": {
     "dev": "vite"
@@ -11,6 +11,6 @@
     "vite": "^6.2.3"
   },
   "dependencies": {
-    "@carbon/styles": "^1.79.0"
+    "@carbon/styles": "^1.80.0-rc.0"
   }
 }
