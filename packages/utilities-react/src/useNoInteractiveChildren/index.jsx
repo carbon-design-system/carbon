@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// TODO: This entire file is a duplicate of useNoInteractiveChildren.js. Is
+// there a way to avoid duplicating this file? Could we just `import` the
+// functions from that file instead?
+
 import { useEffect } from 'react';
 
 export function useNoInteractiveChildren(
