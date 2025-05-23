@@ -81,6 +81,7 @@ export const Default = {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
+              <span slot="tooltip-content">Settings</span>
               <cds-overflow-menu-body>
                 <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                   Action 1
@@ -184,6 +185,7 @@ export const PersistentToolbar = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -286,6 +288,7 @@ export const SmallPersistentToolbar = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
@@ -381,6 +384,7 @@ export const WithOverflowMenu = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -573,6 +577,7 @@ export const Playground = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>

@@ -21,6 +21,13 @@ test.describe('NumberInput', () => {
           theme,
         });
       });
+      test('with type="text" @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'NumberInput',
+          id: 'components-numberinput--with-type-of-text',
+          theme,
+        });
+      });
     });
   });
 });

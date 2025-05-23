@@ -1,21 +1,20 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useState } from 'react';
+import React, { useState, type HTMLAttributes, type ReactNode } from 'react';
 import RadioTile from '../RadioTile';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
 type ExcludedAttributes = 'onChange';
 
 export interface TileGroupProps
-  extends Omit<ReactAttr<HTMLFieldSetElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLFieldSetElement>, ExcludedAttributes> {
   /**
    * Provide a collection of <RadioTile> components to render in the group
    */

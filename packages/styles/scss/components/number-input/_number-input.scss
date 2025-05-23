@@ -35,11 +35,15 @@
 
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--warning
-    input[type='number'] {
+    input[type='number'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text'] {
     padding-inline-end: convert.to-rem(128px);
   }
 
-  .#{$prefix}--number input[type='number'] {
+  .#{$prefix}--number input[type='number'],
+  .#{$prefix}--number input[type='text'] {
     @include type-style('body-compact-01');
     @include focus-outline('reset');
 
@@ -93,7 +97,8 @@
   }
 
   .#{$prefix}--number--lg.#{$prefix}--number {
-    input[type='number'] {
+    input[type='number'],
+    input[type='text'] {
       padding-inline-end: convert.to-rem(112px);
 
       &[data-invalid] {
@@ -101,13 +106,15 @@
       }
     }
 
-    .#{$prefix}--number__input-wrapper--warning input[type='number'] {
+    .#{$prefix}--number__input-wrapper--warning input[type='number'],
+    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
       padding-inline-end: convert.to-rem(144px);
     }
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number {
-    input[type='number'] {
+    input[type='number'],
+    input[type='text'] {
       padding-inline-end: convert.to-rem(80px);
 
       &[data-invalid] {
@@ -115,12 +122,14 @@
       }
     }
 
-    .#{$prefix}--number__input-wrapper--warning input[type='number'] {
+    .#{$prefix}--number__input-wrapper--warning input[type='number'],
+    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
       padding-inline-end: convert.to-rem(112px);
     }
   }
 
-  .#{$prefix}--number input[type='number']:disabled {
+  .#{$prefix}--number input[type='number']:disabled,
+  .#{$prefix}--number input[type='text']:disabled {
     background-color: $field;
     border-block-end-color: transparent;
     color: $text-disabled;
@@ -197,6 +206,10 @@
   .#{$prefix}--number
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number
+    input[type='text'][data-invalid]
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-block-end-color: $support-error;
   }
@@ -204,6 +217,10 @@
   // add top and bottom outlines to number controls when input is focused
   .#{$prefix}--number
     input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number
+    input[type='text']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-width: 2px 0;
@@ -216,6 +233,10 @@
   .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type:hover,
+  .#{$prefix}--number
+    input[type='text']:focus
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $focus inset;
   }
@@ -224,12 +245,20 @@
   .#{$prefix}--number
     input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type:hover,
+  .#{$prefix}--number
+    input[type='text'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $support-error inset;
   }
 
   .#{$prefix}--number
     input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number
+    input[type='text'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
     border-width: 2px 0;
@@ -241,6 +270,10 @@
 
   .#{$prefix}--number
     input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:focus:hover,
+  .#{$prefix}--number
+    input[type='text'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:focus:hover {
     @include focus-outline('outline');
@@ -283,12 +316,20 @@
   .#{$prefix}--number
     input[type='number']:disabled
     + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type,
+  .#{$prefix}--number
+    input[type='text']:disabled
+    + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
     background-color: transparent;
   }
 
   .#{$prefix}--number
     input[type='number']:disabled
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number
+    input[type='text']:disabled
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider {
     background-color: $icon-disabled;
@@ -350,7 +391,8 @@
   }
 
   // Size Variant styles
-  .#{$prefix}--number--lg input[type='number'] {
+  .#{$prefix}--number--lg input[type='number'],
+  .#{$prefix}--number--lg input[type='text'] {
     block-size: convert.to-rem(48px);
   }
 
@@ -362,7 +404,8 @@
     inline-size: convert.to-rem(48px);
   }
 
-  .#{$prefix}--number--sm input[type='number'] {
+  .#{$prefix}--number--sm input[type='number'],
+  .#{$prefix}--number--sm input[type='text'] {
     block-size: convert.to-rem(32px);
   }
 
@@ -382,14 +425,19 @@
   }
 
   // No steppers
-  .#{$prefix}--number--nosteppers input[type='number'] {
+  .#{$prefix}--number--nosteppers input[type='number'],
+  .#{$prefix}--number--nosteppers input[type='text'] {
     padding-inline-end: 0;
   }
 
   .#{$prefix}--number--nosteppers input[type='number'][data-invalid],
+  .#{$prefix}--number--nosteppers input[type='text'][data-invalid],
   .#{$prefix}--number--nosteppers
     .#{$prefix}--number__input-wrapper--warning
-    input[type='number'] {
+    input[type='number'],
+  .#{$prefix}--number--nosteppers
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text'] {
     padding-inline-end: convert.to-rem(48px);
   }
 
@@ -398,7 +446,8 @@
   }
 
   // Readonly
-  .#{$prefix}--number--readonly input[type='number'] {
+  .#{$prefix}--number--readonly input[type='number'],
+  .#{$prefix}--number--readonly input[type='text'] {
     background: transparent;
     border-block-end-color: $border-subtle;
   }
@@ -415,6 +464,10 @@
 
   .#{$prefix}--number--readonly
     input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number--readonly
+    input[type='text']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
     outline: none;
@@ -564,7 +617,26 @@
     input[type='number']:has(~ .#{$prefix}--slug):not(
       :has(~ .#{$prefix}--slug--revert)
     ),
-  .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled {
+  .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled,
+  .#{$prefix}--number__input-wrapper--decorator
+    input[type='text']:has(
+      ~ .#{$prefix}--number__input-inner-wrapper--decorator
+        .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--number__input-inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='text']:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='text']:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ),
+  .#{$prefix}--number__input-wrapper--slug input[type='text']:disabled {
     @include ai-gradient;
 
     padding-inline-end: convert.to-rem(145px);
@@ -577,7 +649,8 @@
 
     inline-size: 100%;
 
-    input[type='number'] {
+    input[type='number'],
+    input[type='text'] {
       display: none;
     }
   }
