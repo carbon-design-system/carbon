@@ -11,6 +11,8 @@ import React, {
   useLayoutEffect,
   useState,
   useRef,
+  useMemo,
+  useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -24,6 +26,11 @@ import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
 import { createOverflowHandler } from '@carbon/utilities';
 import { Tabs as BaseTabs } from '../Tabs/Tabs';
+import { OperationalTag, Tag } from '../Tag';
+import { TYPES } from '../Tag/Tag';
+import useOverflowItems from '../../internal/useOverflowItems';
+import { Popover, PopoverContent } from '../Popover';
+import { useId } from '../../internal/useId';
 
 /**
  * ----------
@@ -471,15 +478,24 @@ PageHeaderHeroImage.propTypes = {
  * PageHeaderTabBar
  * ----------------
  */
+interface TagItem {
+  type: keyof typeof TYPES;
+  text: string;
+  size?: 'sm' | 'md' | 'lg';
+  id: string;
+}
+
 interface PageHeaderTabBarProps {
   children?: React.ReactNode;
   className?: string;
+  tags?: TagItem[];
 }
+
 const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
 >(function PageHeaderTabBar(
-  { className, children, ...other }: PageHeaderTabBarProps,
+  { className, children, tags = [], ...other }: PageHeaderTabBarProps,
   ref
 ) {
   const prefix = usePrefix();
@@ -489,14 +505,158 @@ const PageHeaderTabBar = React.forwardRef<
     },
     className
   );
+  // Early return if no tags are provided
+  if (tags.length === 0) {
+    return (
+      <div className={classNames} ref={ref} {...other}>
+        {children}
+      </div>
+    );
+  }
+  const [openPopover, setOpenPopover] = useState(false);
+  const tagSize = tags[0]?.size || 'md';
+  const instanceId = useId('PageHeaderTabBar');
+  const tagsWithIds = useMemo(() => {
+    return tags.map((tag, index) => ({
+      ...tag,
+      id: tag.id || `tag-${index}-${instanceId}`,
+    }));
+  }, [tags]);
+
+  const tagsContainerRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef<HTMLDivElement>(null);
+  // To close popover when window resizes
+  useEffect(() => {
+    const handleResize = () => {
+      // Close the popover when window resizes to prevent unwanted opens
+      setOpenPopover(false);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // overflow items hook
+  const {
+    visibleItems = [],
+    hiddenItems = [],
+    itemRefHandler = () => {},
+  } = useOverflowItems<TagItem>(
+    tagsWithIds,
+    tagsContainerRef as React.RefObject<HTMLDivElement>,
+    offsetRef as React.RefObject<HTMLDivElement>
+  ) || {
+    visibleItems: [],
+    hiddenItems: [],
+    itemRefHandler: () => {},
+  };
+
+  const handleOverflowClick = useCallback((event: React.MouseEvent) => {
+    event.stopPropagation();
+    setOpenPopover((prev) => !prev);
+  }, []);
+
+  // Find TabList and TabPanels from children
+  let tabListElement: React.ReactNode = null;
+  let tabPanelsElement: React.ReactNode = null;
+
+  // Process children to extract TabList and TabPanels
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child)) {
+      const typedChild = child as React.ReactElement<{
+        children?: React.ReactNode;
+        displayName?: string;
+      }>;
+      const isPageHeaderTabs =
+        child.type === PageHeaderTabs ||
+        (typeof child.type === 'function' &&
+          (typedChild.type as any).displayName === 'PageHeader.Tabs') ||
+        (typeof child.type === 'function' &&
+          (typedChild.type as any).displayName === 'PageHeaderTabs');
+
+      if (isPageHeaderTabs) {
+        // Extract TabList and TabPanels
+        React.Children.forEach(typedChild.props.children, (tabChild) => {
+          if (React.isValidElement(tabChild)) {
+            const typedTabChild = tabChild as React.ReactElement<{
+              displayName?: string;
+            }>;
+
+            const tabChildType = typedTabChild.type;
+            const isTabList =
+              (typeof tabChildType === 'function' &&
+                (tabChildType as any).displayName === 'TabList') ||
+              (tabChildType as any)?.name === 'TabList';
+            const isTabPanels =
+              (typeof tabChildType === 'function' &&
+                (tabChildType as any).displayName === 'TabPanels') ||
+              (tabChildType as any)?.name === 'TabPanels';
+            if (isTabList) {
+              tabListElement = tabChild;
+            } else if (isTabPanels) {
+              tabPanelsElement = tabChild;
+            }
+          }
+        });
+      }
+    }
+  });
+
   return (
-    <div className={classNames} ref={ref} {...other}>
-      {children}
-    </div>
+    <>
+      <div className={classNames} ref={ref} {...other}>
+        <div className={`${prefix}--page-header__tab-bar--tablist`}>
+          {tabListElement}
+          {tags && tags.length > 0 && (
+            <div
+              className={`${prefix}--page-header__tags`}
+              ref={tagsContainerRef}>
+              {/* Only render visible tags */}
+              {visibleItems.map((tag) => (
+                <Tag
+                  key={tag.id}
+                  ref={(node) => itemRefHandler(tag.id, node)}
+                  type={tag.type}
+                  size={tag.size}
+                  className={`${prefix}--page-header__tag-item`}>
+                  {tag.text}
+                </Tag>
+              ))}
+
+              {hiddenItems.length > 0 && (
+                <Popover
+                  open={openPopover}
+                  onRequestClose={() => setOpenPopover(false)}>
+                  <OperationalTag
+                    onClick={handleOverflowClick}
+                    aria-expanded={openPopover}
+                    text={`+${hiddenItems.length}`}
+                    size={tagSize}
+                  />
+                  <PopoverContent className="tag-popover-content">
+                    <div
+                      className={`${prefix}--page-header__tags-popover-list`}>
+                      {hiddenItems.map((tag) => (
+                        <Tag key={tag.id} type={tag.type} size={tag.size}>
+                          {tag.text}
+                        </Tag>
+                      ))}
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              )}
+            </div>
+          )}
+        </div>
+        {tabPanelsElement}
+      </div>
+    </>
   );
 });
-PageHeaderTabBar.displayName = 'PageHeaderTabBar';
 
+PageHeaderTabBar.displayName = 'PageHeaderTabBar';
 interface PageHeaderTabsProps extends React.ComponentProps<typeof BaseTabs> {
   children?: React.ReactNode;
   className?: string;
