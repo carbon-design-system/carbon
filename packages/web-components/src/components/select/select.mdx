@@ -41,6 +41,37 @@ attribute in `cds-select`.
 
 ## Skeleton
 
+## Form item
+
+If the select is part of a form, make sure to import and wrap the select with
+`<cds-form-item>`
+
+```javascript
+import '@carbon/web-components/es/components/form/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['form'] })}`}</Markdown>
+
+```html
+<cds-form-item>
+  <cds-select
+    helper-text="Optional helper text"
+    label-text="Select"
+    placeholder="Optional placeholder text">
+      <cds-select-item-group label="Category 1">
+        <cds-select-item value="all">Option 1</cds-select-item>
+        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+      </cds-select-item-group>
+      <cds-select-item-group label="Category 2">
+        <cds-select-item value="staging">Option 3</cds-select-item>
+        <cds-select-item value="dea">Option 4</cds-select-item>
+        <cds-select-item value="router">Option 5</cds-select-item>
+      </cds-select-item-group>
+  </cds-select>
+</cds-form-item>
+```
+
+## `<cds-select>` attributes, properties and events
 <Canvas of={SelectStories.Skeleton} />
 
 ## AI Label
