@@ -610,9 +610,10 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
+    const expandedRowId = `expanded-row-${row.id}-${this.instanceId}`;
     return {
       ...rest,
-      id: `expanded-row-${row.id}-${this.instanceId}`,
+      id: expandedRowId,
     };
   };
 
