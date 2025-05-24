@@ -43,6 +43,7 @@ const ButtonBase = React.forwardRef(function ButtonBase<
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
+    [`${prefix}--btn--xs`]: size === 'xs' && !isExpressive, // TODO: V12 - Remove this class
     [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive, // TODO: V12 - Remove this class
     [`${prefix}--btn--md`]: size === 'md' && !isExpressive, // TODO: V12 - Remove this class
     [`${prefix}--btn--lg`]: size === 'lg' && !isExpressive, // TODO: V12 - Remove this class
