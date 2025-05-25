@@ -58,7 +58,8 @@
     position: initial;
   }
 
-  .#{$prefix}--number-input--fluid input[type='number'] {
+  .#{$prefix}--number-input--fluid input[type='number'],
+  .#{$prefix}--number-input--fluid input[type='text'] {
     padding: convert.to-rem(32px) convert.to-rem(80px) convert.to-rem(13px)
       $spacing-05;
     background: transparent;
@@ -75,6 +76,10 @@
   .#{$prefix}--number-input--fluid
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid
+    input[type='text']:focus
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-block-end-color: $focus;
     box-shadow: inset 0 -1px $focus;
@@ -82,6 +87,10 @@
 
   .#{$prefix}--number-input--fluid
     input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type,
+  .#{$prefix}--number-input--fluid
+    input[type='text']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type {
     box-shadow:
@@ -97,6 +106,15 @@
   .#{$prefix}--number-input--fluid--invalid
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid--invalid
+    input[type='text']:focus
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-block-end-color: transparent;
     box-shadow: none;
@@ -110,6 +128,15 @@
   .#{$prefix}--number-input--fluid--invalid
     input[type='number'][data-invalid]:focus
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type,
+  .#{$prefix}--number-input--fluid--invalid
+    input[type='text'][data-invalid]:focus
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type {
     box-shadow: inset -2px 0 $focus;
   }
@@ -117,12 +144,20 @@
   .#{$prefix}--number-input--fluid--invalid
     input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type:hover,
+  .#{$prefix}--number-input--fluid--invalid
+    input[type='text'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: inset -2px 0 $support-error;
   }
 
   .#{$prefix}--number-input--fluid--invalid
     input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number-input--fluid--invalid
+    input[type='text'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
     box-shadow: none;
@@ -141,6 +176,15 @@
     )
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number-input--fluid:not(
+      .#{$prefix}--number-input--fluid--invalid
+    )
+    .#{$prefix}--number-input-wrapper:not(
+      .#{$prefix}--number-input-wrapper__warning
+    )
+    input[type='text']:focus
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
     border-block-end: 1px solid $focus;
     outline: none;
@@ -153,6 +197,15 @@
   .#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number
     input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:focus:hover,
+  .#{$prefix}--number-input--fluid--invalid
+    input[type='text'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:focus,
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number
+    input[type='text'][data-invalid]
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:focus:hover {
     @include focus-outline('outline');
@@ -177,13 +230,19 @@
 
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--warning
-    input[type='number'] {
+    input[type='number'],
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text'] {
     border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--warning
-    input[type='number']:focus {
+    input[type='number']:focus,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text']:focus {
     outline: none;
   }
 
@@ -216,7 +275,10 @@
 
   .#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number[data-invalid]
-    input[type='number'] {
+    input[type='number'],
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number[data-invalid]
+    input[type='text'] {
     border-block-end: 1px solid transparent;
   }
 
@@ -232,6 +294,19 @@
     .#{$prefix}--number__input-wrapper--warning
     input[type='number']
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover:not(:focus),
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number[data-invalid]
+    input[type='text'],
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number
+    input[type='text'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text']
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover:not(:focus) {
     outline: none;
   }
@@ -245,6 +320,16 @@
     .#{$prefix}--number__input-wrapper--warning
     input[type='number']
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--invalid
+    .#{$prefix}--number__input-wrapper
+    input[type='text']
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='text']
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-block-end: none;
   }
@@ -257,6 +342,16 @@
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number
     input[type='number']
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number
+    input[type='text'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    input[type='text']
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border: initial;
@@ -273,7 +368,10 @@
 
   .#{$prefix}--number-input--fluid--disabled.#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number
-    input[type='number']:disabled {
+    input[type='number']:disabled,
+  .#{$prefix}--number-input--fluid--disabled.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number
+    input[type='text']:disabled {
     background-color: transparent;
   }
 
