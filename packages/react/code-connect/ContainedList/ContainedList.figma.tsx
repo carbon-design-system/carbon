@@ -68,7 +68,7 @@ figma.connect(
         label={"label text"}
         kind={"on-page"}
         size={"lg"}
-        action={}>
+        action={() => console.log('List clicked')}>
         {children}
       </ContainedList>
     ),
