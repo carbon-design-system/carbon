@@ -65,10 +65,10 @@ figma.connect(
     props: sharedContainedListProps,
     example: ({ children, kind, titleItem, rowItem }) => (
       <ContainedList
-        label={titleItem.label}
-        kind={kind}
-        size={rowItem.size}
-        action={titleItem.action}>
+        label="label text"
+        kind="on-page"
+        size="lg"
+        action={}>
         {children}
       </ContainedList>
     ),
