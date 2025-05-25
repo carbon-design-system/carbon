@@ -44,6 +44,7 @@
     "typescript-config-carbon": "^0.5.0"
   },
   "dependencies": {
-    "@ibm/telemetry-js": "^1.6.1"
+    "@ibm/telemetry-js": "^1.6.1",
+    "@internationalized/number": "^3.6.1"
   }
 }
