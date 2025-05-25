@@ -47,7 +47,7 @@ figma.connect(
         Disabled: true,
       }),
     },
-    example: ({ text, ...props }) => <Tag type={'blue'} renderIcon={null} size={'sm'}>{text}</Tag>,
+    example: ({ text, ...props }) => <Tag type={'blue'} renderIcon={null} size={'lg'}>{text}</Tag>,
   }
 );
 
