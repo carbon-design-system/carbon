@@ -31,9 +31,9 @@ figma.connect(
       // <ContainedListItem renderIcon={rowCellItem.renderIcon} {...props}>
       //   {rowCellItem.text}
       // </ContainedListItem>
-      <ContainedListItem renderIcon={}>
-        {child}
-      </ContainedListItem>      
+      <ContainedListItem renderIcon={} action={}>
+        {"text"}
+      </ContainedListItem>     
     ),
   }
 );
