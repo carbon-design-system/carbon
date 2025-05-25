@@ -26,7 +26,7 @@ figma.connect(
         '64px': 'xl',
       }),
     },
-    example: ({ ...props }) => <AILabel autoAlign {...props} />,
+    example: ({ ...props }) => <AILabel autoAlign aiText={'Text translation'} size={'md'} />
   }
 );
 
@@ -46,6 +46,6 @@ figma.connect(
         '16px': 'lg',
       }),
     },
-    example: ({ ...props }) => <AILabel autoAlign kind="inline" {...props} />,
+    example: ({ ...props }) => <AILabel autoAlign kind={"inline"} aiText={'Text translation'} />,
   }
 );
