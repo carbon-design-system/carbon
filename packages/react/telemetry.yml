@@ -172,6 +172,7 @@ collect:
         - orientation
         - overflowMenuOnHover
         - page
+        - pageActions
         - paragraph
         - passiveModal
         - pattern
@@ -213,7 +214,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -256,6 +256,8 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
         # Breadcrumb
@@ -321,6 +323,7 @@ collect:
         # Dialog
         - modal
         # DismissibleTag
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback
@@ -382,6 +385,8 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
+        # Layer
+        - withBackground
         # LinkBase
         - visited
         # ListBox
@@ -457,7 +462,8 @@ collect:
         - wrapperClassName
         # PageHeaderContent
         - contextualActions
-        - pageActions
+        # PageHeaderContentPageActions
+        - menuButtonLabel
         # PageSelector
         - currentPage
         - totalPages

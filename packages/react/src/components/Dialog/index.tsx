@@ -1,20 +1,24 @@
 /**
- * Copyright IBM Corp. 2014, 2024
+ * Copyright IBM Corp. 2014, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { MutableRefObject, useEffect, useRef } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  type HTMLAttributes,
+  type MutableRefObject,
+} from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
-import { ReactAttr } from '../../types/common';
 
-export interface DialogProps extends ReactAttr<HTMLDialogElement> {
+export interface DialogProps extends HTMLAttributes<HTMLDialogElement> {
   /**
    * Provide the contents of the Dialog
    */
@@ -82,7 +86,7 @@ export const unstable__Dialog = React.forwardRef(
     // If the parent component has not passed a ref for forwardRef, forwardRef
     // will be null. A "backup" ref is needed to ensure the dialog's instance
     // methods can always be called within this component.
-    const backupRef = useRef(null);
+    const backupRef = useRef<HTMLDialogElement>(null);
     const ref = (forwardRef ??
       backupRef) as MutableRefObject<HTMLDialogElement>;
 
@@ -173,7 +177,7 @@ unstable__Dialog.propTypes = {
   open: PropTypes.bool,
 };
 
-export interface DialogHeaderProps extends ReactAttr<HTMLDivElement> {
+export interface DialogHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
    */
@@ -196,7 +200,7 @@ DialogHeader.propTypes = {
   children: PropTypes.node,
 };
 
-export interface DialogControlsProps extends ReactAttr<HTMLDivElement> {
+export interface DialogControlsProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
    */
@@ -221,7 +225,7 @@ DialogControls.propTypes = {
   children: PropTypes.node,
 };
 
-export interface DialogCloseButtonProps extends ReactAttr<HTMLDivElement> {
+export interface DialogCloseButtonProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify a click handler applied to the IconButton
    */

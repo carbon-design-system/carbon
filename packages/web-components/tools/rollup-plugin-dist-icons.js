@@ -51,7 +51,10 @@ export default function rollupPluginDistIcons({
       const __dirname = path.dirname(fileURLToPath(import.meta.url));
       const require = createRequire(import.meta.url);
 
-      const svg = require(id); // eslint-disable-line global-require
+      // TODO: `global-require` was deprecated. Should the alternative in
+      // https://eslint.org/docs/latest/rules/global-require be used?
+      // https://github.com/carbon-design-system/carbon/issues/18991
+      const svg = require(id); /* // eslint-disable-line global-require */
 
       const code = [
         `import { svg } from 'lit'`,

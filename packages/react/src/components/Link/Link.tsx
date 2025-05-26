@@ -14,12 +14,8 @@ import React, {
   ElementType,
   HTMLAttributeAnchorTarget,
 } from 'react';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
 
 export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -56,7 +52,7 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   renderIcon?: ComponentType;
 
   /**
-   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size?: 'sm' | 'md' | 'lg';
 
@@ -110,7 +106,7 @@ const LinkBase = React.forwardRef<
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
-      className: BaseComponent ? undefined : className,
+      className,
       rel,
       target,
     };
@@ -179,7 +175,7 @@ const Link = LinkBase as LinkComponent;
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
