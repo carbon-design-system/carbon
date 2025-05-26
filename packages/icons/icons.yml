@@ -357,6 +357,19 @@
     - navigation
     - include
     - plus sign
+- name: add--child-node
+  friendly_name: Add child node
+  aliases:
+    - add
+    - new
+    - child
+    - nested
+    - hierarchy
+    - graph
+    - node
+    - software
+  sizes:
+    - 32
 - name: add--filled
   friendly_name: Add filled
   sizes:
@@ -376,6 +389,19 @@
     - navigation
     - add
     - large
+  sizes:
+    - 32
+- name: add--parent-node
+  friendly_name: Add parent node
+  aliases:
+    - add
+    - new
+    - parent
+    - top-level
+    - hierarchy
+    - graph
+    - node
+    - software
   sizes:
     - 32
 - name: add-comment
@@ -1613,6 +1639,15 @@
     - document
   sizes:
     - 32
+- name: assignment-action--usage
+  friendly_name: Assignment action usage
+  aliases:
+    - assigment
+    - assign
+    - usage
+    - diagram
+  sizes:
+    - 32
 - name: asterisk
   friendly_name: Asterisk
   aliases:
@@ -1650,6 +1685,23 @@
     - add
     - attachment
     - formatting
+  sizes:
+    - 32
+- name: attribute--definition
+  friendly_name: Attribute definition
+  aliases:
+    - attribute
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: attribute--usage
+  friendly_name: Attribute usage
+  aliases:
+    - attribute
+    - usage
+    - attr
+    - diagram
   sizes:
     - 32
 - name: audio-console
@@ -4537,6 +4589,17 @@
     - arrow
   sizes:
     - 32
+- name: child-node
+  friendly_name: Child node
+  aliases:
+    - child
+    - nested
+    - hierarchy
+    - graph
+    - node
+    - software
+  sizes:
+    - 32
 - name: chip
   friendly_name: Chip
   aliases:
@@ -4551,6 +4614,16 @@
     - forked arrows
     - arrows
     - variety
+  sizes:
+    - 32
+- name: comments
+  friendly_name: Comments
+  aliases:
+    - comments
+    - note
+    - explanation
+    - information
+    - annotations
   sizes:
     - 32
 - name: choose-item
@@ -6894,6 +6967,17 @@
     - leave
   sizes:
     - 32
+- name: dependency
+  friendly_name: Dependency
+  aliases:
+    - dependency
+    - linked
+    - connected
+    - interrelated
+    - cascading
+    - chain reaction
+  sizes:
+    - 32
 - name: deploy
   friendly_name: Deploy
   aliases:
@@ -6910,6 +6994,15 @@
     - document
     - instruction
     - deploy
+  sizes:
+    - 32
+- name: deployment-canary
+  friendly_name: Deployment Canary
+  aliases:
+    - bird
+    - deployment
+    - canary
+    - technology
   sizes:
     - 32
 - name: deployment-pattern
@@ -7802,6 +7895,16 @@
     - document
   sizes:
     - 32
+- name: documentation
+  friendly_name: Documentation
+  aliases:
+    - information
+    - doc
+    - notes
+    - explanation
+    - document
+  sizes:
+    - 32
 - name: dog-walker
   friendly_name: Dog walker
   aliases:
@@ -7822,6 +7925,28 @@
     - dot mark
     - dot
     - format
+  sizes:
+    - 32
+- name: double-axis-chart--bar
+  friendly_name: Bar chart (double axis)
+  aliases:
+    - graph
+    - data
+    - chart
+    - bar
+    - x-axes
+    - double axis
+  sizes:
+    - 32
+- name: double-axis-chart--column
+  friendly_name: Column chart (double axis)
+  aliases:
+    - graph
+    - data
+    - chart
+    - column
+    - y-axes
+    - double axis
   sizes:
     - 32
 - name: double-integer
@@ -8236,6 +8361,15 @@
     - study
     - school
     - college
+  sizes:
+    - 32
+- name: element-picker
+  friendly_name: Element picker
+  aliases:
+    - picker
+    - selection tool
+    - cursor
+    - diagram
   sizes:
     - 32
 - name: email
@@ -8862,6 +8996,15 @@
     - sysml
   sizes:
     - 32
+- name: feature-picker
+  friendly_name: Feature picker
+  aliases:
+    - picker
+    - selection tool
+    - attribute
+    - diagram
+  sizes:
+    - 32
 - name: feature-typing
   friendly_name: Feature typing
   aliases:
@@ -9409,6 +9552,15 @@
     - files
     - collection
     - folders
+  sizes:
+    - 32
+- name: for-loop
+  friendly_name: For loop
+  aliases:
+    - loop
+    - iteration
+    - repeat
+    - cycle
   sizes:
     - 32
 - name: forecast--hail
@@ -12502,7 +12654,7 @@
   sizes:
     - 32
 - name: ibm-watson--discovery
-  friendly_name: IBM® watsonx™ Discovery
+  friendly_name: IBM watsonx® Discovery
   aliases:
     - Watson
     - IBM Watson
@@ -12651,7 +12803,7 @@
   sizes:
     - 32
 - name: ibm-watson--orders
-  friendly_name: IBM® watsonx™ Orders
+  friendly_name: IBM watsonx® Orders
   aliases:
     - IBM Watson
     - watsonx
@@ -12781,7 +12933,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--assistant
-  friendly_name: IBM® watsonx™ Assistant
+  friendly_name: IBM® watsonx Assistant®
   aliases:
     - AI
     - watsonx
@@ -12793,7 +12945,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant
-  friendly_name: IBM® watsonx™ Code Assistant
+  friendly_name: IBM® watsonx Code Assistant™
   aliases:
     - AI
     - watsonx
@@ -12811,7 +12963,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-enterprise-java-applications
-  friendly_name: IBM watsonx™ Code Assistant for Enterprise Java Applications
+  friendly_name: IBM® watsonx Code Assistant™ for Enterprise Java Applications
   aliases:
     - IBM watsonx Code Assistant for Enterprise Java Applications
     - end-to-end application lifecycle
@@ -12825,7 +12977,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z
-  friendly_name: IBM® watsonx™ Code Assistant for Z
+  friendly_name: IBM® watsonx Code Assistant™ for Z
   aliases:
     - AI
     - watsonx
@@ -12847,7 +12999,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z--refactor
-  friendly_name: IBM® watsonx™ Code Assistant for Z Refactor
+  friendly_name: IBM® watsonx Code Assistant™ for Z Refactoring Assistant
   aliases:
     - app
     - development
@@ -12859,7 +13011,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z-validation-assistant
-  friendly_name: IBM watsonx™ Code Assistant for Z Validation Assistant
+  friendly_name: IBM® watsonx Code Assistant™ for Z Validation Assistant
   aliases:
     - ibm watsonx code assistant for Z Validation Assistant
     - AI assistant
@@ -12872,7 +13024,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--orchestrate
-  friendly_name: IBM® watsonx™ Orchestrate
+  friendly_name: IBM® watsonx Orchestrate™
   aliases:
     - efficiency
     - productivity
@@ -13083,6 +13235,17 @@
     - name
   sizes:
     - 32
+- name: if--action
+  friendly_name: If action usage
+  aliases:
+    - if action
+    - conditional
+    - flow control
+    - branch
+    - condition node
+    - branching logic
+  sizes:
+    - 32
 - name: image
   friendly_name: Image
   aliases:
@@ -13270,6 +13433,17 @@
     - time
     - in progress
     - warning
+  sizes:
+    - 32
+- name: incident-reporter
+  friendly_name: Incident reporter
+  aliases:
+    - incident
+    - report
+    - issue
+    - alert
+    - event
+    - notification
   sizes:
     - 32
 - name: incomplete
@@ -13611,6 +13785,42 @@
     - usage
   sizes:
     - 32
+- name: interface--usage--1
+  friendly_name: interface usage 1
+  aliases:
+    - interface
+    - node
+    - diagram
+    - sysml
+    - usage
+  sizes:
+    - 32
+- name: interface--usage--alt
+  friendly_name: Interface usage alt
+  aliases:
+    - interface
+    - diagram
+    - usage
+    - sysml
+    - port connectors
+  sizes:
+    - 32
+- name: interface--definition--alt
+  friendly_name: Interface definition alt
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: interface--definition
+  friendly_name: Interface definition
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
 - name: intersect
   friendly_name: Intersect
   aliases:
@@ -13732,6 +13942,22 @@
     - file set
     - ISO
     - outline
+- name: item--definition
+  friendly_name: Item definition
+  aliases:
+    - item
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: item--usage
+  friendly_name: Item usage
+  aliases:
+    - item
+    - usage
+    - diagram
+  sizes:
+    - 32
 - name: job--daemon
   friendly_name: Daemon job
   aliases:
@@ -14937,6 +15163,16 @@
     - padlock
   sizes:
     - 32
+- name: locked-and-blocked
+  friendly_name: Locked with Warning alt inverted filled
+  aliases:
+    - lock
+    - blocked
+    - warning
+    - locked and blocked
+    - software
+  sizes:
+    - 32
 - name: logical-partition
   friendly_name: Logical partition
   aliases:
@@ -15549,6 +15785,15 @@
     - curve
     - around
     - twirl
+  sizes:
+    - 32
+- name: loop--alt
+  friendly_name: Loop alt
+  aliases:
+    - loop node
+    - iteration
+    - repetition
+    - repetitive action
   sizes:
     - 32
 - name: low-severity
@@ -17026,6 +17271,15 @@
     - alert
   sizes:
     - 32
+- name: notifications-paused
+  friendly_name: Notifications paused
+  aliases:
+    - notification
+    - pause notifications
+    - do not disturb
+    - paused
+  sizes:
+    - 32
 - name: null-sign
   friendly_name: Null sign
   aliases:
@@ -17695,6 +17949,18 @@
     - hierarchy
   sizes:
     - 32
+- name: parent-node
+  friendly_name: Parent node
+  aliases:
+    - relation
+    - relationship
+    - graph
+    - node
+    - top-level
+    - hierarchy
+    - software
+  sizes:
+    - 32
 - name: part--definition
   friendly_name: Part definition
   aliases:
@@ -18128,6 +18394,17 @@
     - percentage filled
     - formatting
     - percent
+- name: perform--action
+  friendly_name: Perform action
+  aliases:
+    - perform action
+    - diagram
+    - trigger
+    - process
+    - run
+    - execute
+  sizes:
+    - 32
 - name: person
   friendly_name: Person
   aliases:
@@ -19215,6 +19492,15 @@
     - triangle
     - arrows
     - recycle
+  sizes:
+    - 32
+- name: redefinition
+  friendly_name: Redefinition
+  aliases:
+    - Redef
+    - refine
+    - modify
+    - diagram
   sizes:
     - 32
 - name: redo
@@ -21531,6 +21817,58 @@
     - operations
   sizes:
     - 32
+- name: sorting-a-to-z
+  friendly_name: Sorting A-Z (Alphabetical order)
+  aliases:
+    - alphabetical
+    - order
+    - sort
+    - arrange
+    - A
+    - Z
+    - low
+  sizes:
+    - 32
+- name: sorting-highest-to-lowest-number
+  friendly_name: Sorting highest to lowest number
+  aliases:
+    - numbers
+    - highest
+    - lowest
+    - arrange
+    - sort
+    - order
+    - number
+    - '1'
+    - '2'
+  sizes:
+    - 32
+- name: sorting-lowest-to-highest-number
+  friendly_name: Sorting lowest to highest number
+  aliases:
+    - numbers
+    - lowest
+    - highest
+    - arrange
+    - sort
+    - order
+    - number
+    - '1'
+    - '2'
+  sizes:
+    - 32
+- name: sorting-z-to-a
+  friendly_name: Sorting Z-A (Alphabetical order)
+  aliases:
+    - alphabetical
+    - order
+    - sort
+    - arrange
+    - A
+    - Z
+    - high
+  sizes:
+    - 32
 - name: spell-check
   friendly_name: Spell check
   aliases:
@@ -22123,6 +22461,14 @@
     - network
   sizes:
     - 32
+- name: subsetting
+  friendly_name: Subsetting
+  aliases:
+    - subset
+    - contained
+    - hierarchy
+  sizes:
+    - 32
 - name: subtract
   friendly_name: Subtract
   aliases:
@@ -22194,6 +22540,19 @@
     - sysml
   sizes:
     - 32
+- name: succession--flow-connection
+  friendly_name: Succession flow connection
+  aliases:
+    - succession
+    - flow
+    - connection
+    - diagram
+    - node
+    - arrow
+    - dash
+    - connector
+  sizes:
+    - 32
 - name: summary--KPI
   friendly_name: Summary KPI
   aliases:
@@ -22260,6 +22619,13 @@
   aliases:
     - travel
     - sports
+  sizes:
+    - 32
+- name: swimlane-d--vertical
+  friendly_name: Swimlane vertical
+  aliases:
+    - swimlane vertical
+    - swimlane
   sizes:
     - 32
 - name: switch-layer-2
@@ -25337,7 +25703,7 @@
     - machine learing
     - ML
 - name: watsonx
-  friendly_name: IBM® watsonx™
+  friendly_name: IBM watsonx®
   aliases:
     - data
     - AI
@@ -25351,7 +25717,7 @@
   sizes:
     - 32
 - name: watsonx-ai
-  friendly_name: IBM® watsonx.ai™
+  friendly_name: IBM® watsonx.ai®
   aliases:
     - data
     - AI
@@ -25366,7 +25732,7 @@
   sizes:
     - 32
 - name: watsonx-data
-  friendly_name: IBM® watsonx.data™
+  friendly_name: IBM® watsonx.data®
   aliases:
     - data
     - AI
@@ -25385,7 +25751,7 @@
   sizes:
     - 32
 - name: watsonx-governance
-  friendly_name: IBM® watsonx.governance™
+  friendly_name: IBM® watsonx.governance®
   aliases:
     - data
     - AI
@@ -25540,6 +25906,13 @@
     - food
     - crop
     - agriculture
+  sizes:
+    - 32
+- name: while-loop
+  friendly_name: While loop
+  aliases:
+    - while loop
+    - diagram
   sizes:
     - 32
 - name: white-paper
