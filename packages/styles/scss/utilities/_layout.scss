@@ -71,7 +71,8 @@
           $value
         );
 
-        .#{config.$prefix}--layout--#{$group}-#{$step} & {
+        &.#{config.$prefix}--layout--#{$group}-#{$step},
+        .#{config.$prefix}--layout--#{$group}-#{$step} :where(&) {
           $token: custom-property.get-var(
             'layout-#{$group}-#{$property}-#{$step}'
           );
