@@ -5708,6 +5708,166 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "formatOptions": Object {
+        "args": Array [
+          Object {
+            "compactDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currency": Object {
+              "type": "string",
+            },
+            "currencyDisplay": Object {
+              "args": Array [
+                Array [
+                  "symbol",
+                  "narrowSymbol",
+                  "code",
+                  "name",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currencySign": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "accounting",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "localeMatcher": Object {
+              "args": Array [
+                Array [
+                  "best fit",
+                  "lookup",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "maximumFractionDigits": Object {
+              "type": "number",
+            },
+            "maximumSignificantDigits": Object {
+              "type": "number",
+            },
+            "minimumFractionDigits": Object {
+              "type": "number",
+            },
+            "minimumIntegerDigits": Object {
+              "type": "number",
+            },
+            "minimumSignificantDigits": Object {
+              "type": "number",
+            },
+            "notation": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "scientific",
+                  "engineering",
+                  "compact",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "numberingSystem": Object {
+              "type": "string",
+            },
+            "roundingIncrement": Object {
+              "type": "number",
+            },
+            "roundingMode": Object {
+              "args": Array [
+                Array [
+                  "ceil",
+                  "floor",
+                  "expand",
+                  "trunc",
+                  "halfCeil",
+                  "halfFloor",
+                  "halfExpand",
+                  "halfTrunc",
+                  "halfEven",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "signDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "never",
+                  "always",
+                  "exceptZero",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "style": Object {
+              "args": Array [
+                Array [
+                  "decimal",
+                  "currency",
+                  "percent",
+                  "unit",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "trailingZeroDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "stripIfInteger",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "unit": Object {
+              "type": "string",
+            },
+            "unitDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "narrow",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "useGrouping": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "bool",
+                  },
+                  Object {
+                    "args": Array [
+                      Array [
+                        "always",
+                        "auto",
+                        "min2",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
+        ],
+        "type": "shape",
+      },
       "helperText": Object {
         "type": "node",
       },
@@ -5724,6 +5884,21 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "inputMode": Object {
+        "args": Array [
+          Array [
+            "none",
+            "text",
+            "tel",
+            "url",
+            "email",
+            "numeric",
+            "decimal",
+            "search",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -5734,6 +5909,9 @@ Map {
         "type": "node",
       },
       "light": [Function],
+      "locale": Object {
+        "type": "string",
+      },
       "max": Object {
         "type": "number",
       },
@@ -5748,6 +5926,9 @@ Map {
       },
       "onKeyUp": Object {
         "type": "func",
+      },
+      "pattern": Object {
+        "type": "string",
       },
       "readOnly": Object {
         "type": "bool",
@@ -5768,6 +5949,15 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "number",
+            "text",
+          ],
+        ],
+        "type": "oneOf",
       },
       "value": Object {
         "args": Array [
@@ -10695,12 +10885,187 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "formatOptions": Object {
+        "args": Array [
+          Object {
+            "compactDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currency": Object {
+              "type": "string",
+            },
+            "currencyDisplay": Object {
+              "args": Array [
+                Array [
+                  "symbol",
+                  "narrowSymbol",
+                  "code",
+                  "name",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currencySign": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "accounting",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "localeMatcher": Object {
+              "args": Array [
+                Array [
+                  "best fit",
+                  "lookup",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "maximumFractionDigits": Object {
+              "type": "number",
+            },
+            "maximumSignificantDigits": Object {
+              "type": "number",
+            },
+            "minimumFractionDigits": Object {
+              "type": "number",
+            },
+            "minimumIntegerDigits": Object {
+              "type": "number",
+            },
+            "minimumSignificantDigits": Object {
+              "type": "number",
+            },
+            "notation": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "scientific",
+                  "engineering",
+                  "compact",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "numberingSystem": Object {
+              "type": "string",
+            },
+            "roundingIncrement": Object {
+              "type": "number",
+            },
+            "roundingMode": Object {
+              "args": Array [
+                Array [
+                  "ceil",
+                  "floor",
+                  "expand",
+                  "trunc",
+                  "halfCeil",
+                  "halfFloor",
+                  "halfExpand",
+                  "halfTrunc",
+                  "halfEven",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "signDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "never",
+                  "always",
+                  "exceptZero",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "style": Object {
+              "args": Array [
+                Array [
+                  "decimal",
+                  "currency",
+                  "percent",
+                  "unit",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "trailingZeroDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "stripIfInteger",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "unit": Object {
+              "type": "string",
+            },
+            "unitDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "narrow",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "useGrouping": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "bool",
+                  },
+                  Object {
+                    "args": Array [
+                      Array [
+                        "always",
+                        "auto",
+                        "min2",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
+        ],
+        "type": "shape",
+      },
       "iconDescription": Object {
         "type": "string",
       },
       "id": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "inputMode": Object {
+        "args": Array [
+          Array [
+            "none",
+            "text",
+            "tel",
+            "url",
+            "email",
+            "numeric",
+            "decimal",
+            "search",
+          ],
+        ],
+        "type": "oneOf",
       },
       "invalid": Object {
         "type": "bool",
@@ -10710,6 +11075,9 @@ Map {
       },
       "label": Object {
         "type": "node",
+      },
+      "locale": Object {
+        "type": "string",
       },
       "max": Object {
         "type": "number",
@@ -10726,6 +11094,9 @@ Map {
       "onKeyUp": Object {
         "type": "func",
       },
+      "pattern": Object {
+        "type": "string",
+      },
       "readOnly": Object {
         "type": "bool",
       },
@@ -10734,6 +11105,15 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "number",
+            "text",
+          ],
+        ],
+        "type": "oneOf",
       },
       "value": Object {
         "args": Array [
