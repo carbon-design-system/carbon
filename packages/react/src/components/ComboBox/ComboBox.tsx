@@ -388,7 +388,7 @@ export interface ComboBoxProps<ItemType>
 
    * Note: These props are merged with internal input props. Custom values will override defaults when applicable.
    */
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 const ComboBox = forwardRef(
