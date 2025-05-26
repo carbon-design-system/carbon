@@ -385,6 +385,7 @@ export interface ComboBoxProps<ItemType>
   /**
    * Props to be passed directly to the underlying <input> element.
    * Useful for customizing input behavior, such as setting maxLength, placeholder,
+
    * Note: These props are merged with internal input props. Custom values will override defaults when applicable.
    */
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
