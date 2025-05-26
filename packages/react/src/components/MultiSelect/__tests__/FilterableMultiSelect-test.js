@@ -984,6 +984,6 @@ describe('FilterableMultiSelect', () => {
 
     const input = screen.getByPlaceholderText('Type here');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute('maxLength', '10'); // attributes are always strings in the DOM
+    expect(input).toHaveAttribute('maxLength', '10');
   });
 });
