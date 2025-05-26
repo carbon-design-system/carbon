@@ -384,7 +384,7 @@ export interface ComboBoxProps<ItemType>
 
   /**
    * Props to be passed directly to the underlying <input> element.
-   * Useful for customizing input behavior, such as setting maxLength, placeholder,
+   * Useful for customizing input behavior, such as setting maxLength, placeholder and other native input attributes.
 
    * Note: These props are merged with internal input props. Custom values will override defaults when applicable.
    */
