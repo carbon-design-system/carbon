@@ -10,6 +10,7 @@ import React, {
   cloneElement,
   forwardRef,
   isValidElement,
+  RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -38,9 +39,13 @@ import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
+import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { PopoverAlignment } from '../Popover';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -119,6 +124,11 @@ export const getMenuOffset: MenuOffset = (
 };
 
 export interface OverflowMenuProps {
+  /**
+   * Specify how the trigger tooltip should be aligned.
+   */
+  align?: PopoverAlignment;
+
   /**
    * Specify a label to be read by screen readers on the container node
    */
@@ -224,12 +234,13 @@ export interface OverflowMenuProps {
   selectorPrimaryFocus?: string;
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * The ref to the HTML element that should receive focus when the OverflowMenu opens
+   * The ref to the overflow menu's trigger button element.
+   * @deprecated Use the standard React `ref` prop instead.
    */
   innerRef?: Ref<any>;
 }
@@ -237,6 +248,7 @@ export interface OverflowMenuProps {
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
+      align,
       ['aria-label']: ariaLabel = null,
       ariaLabel: deprecatedAriaLabel,
       children,
@@ -258,6 +270,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       renderIcon: IconElement = OverflowMenuVertical,
       selectorPrimaryFocus = '[data-floating-menu-primary-focus]',
       size = 'md',
+      innerRef,
       ...other
     },
     ref
@@ -274,8 +287,8 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const prevOpenProp = useRef(openProp);
     const prevOpenState = useRef(open);
     /** The element ref of the tooltip's trigger button. */
-    const triggerRef = useRef<HTMLButtonElement>(null);
-    const wrapperRef = useRef<HTMLSpanElement>(null);
+    const triggerRef = useRef<HTMLButtonElement | null>(null);
+    const wrapperRef = useRef<HTMLSpanElement | null>(null);
 
     // Sync open prop changes.
     useEffect(() => {
@@ -385,14 +398,14 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
      * item index and direction to move.
      */
     const handleOverflowMenuItemFocus = ({
-      currentIndex,
+      currentIndex = 0,
       direction,
     }: {
       /**
        * The index of the currently focused overflow menu item in the list of
        * overflow menu items
        */
-      currentIndex: number;
+      currentIndex?: number;
       /**
        * Number denoting the direction to move focus (1 for forwards, -1 for
        * backwards).
@@ -401,7 +414,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     }) => {
       const enabledIndices = Children.toArray(children).reduce<number[]>(
         (acc, curr, i) => {
-          if (isValidElement(curr) && !curr.props.disabled) {
+          if (
+            React.isValidElement<OverflowMenuItemProps>(curr) &&
+            !curr.props.disabled
+          ) {
             acc.push(i);
           }
           return acc;
@@ -502,7 +518,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
       if (isValidElement(child)) {
-        const childElement = child as ReactElement;
+        const childElement = child as ReactElement<OverflowMenuItemProps>;
         return cloneElement(childElement, {
           closeMenu: childElement.props.closeMenu || closeMenuAndFocus,
           handleOverflowMenuItemFocus,
@@ -530,7 +546,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const wrappedMenuBody = (
       <FloatingMenu
         focusTrap={focusTrap}
-        triggerRef={triggerRef}
+        triggerRef={triggerRef as RefObject<HTMLElement>}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
         menuRef={bindMenuBody}
@@ -543,6 +559,9 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         })}
       </FloatingMenu>
     );
+    const combinedRef = innerRef
+      ? mergeRefs(triggerRef, innerRef, ref)
+      : mergeRefs(triggerRef, ref);
 
     return (
       <>
@@ -552,6 +571,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
           ref={wrapperRef}>
           <IconButton
             {...other}
+            align={align}
             type="button"
             aria-haspopup
             aria-expanded={open}
@@ -559,7 +579,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
             className={overflowMenuClasses}
             onClick={handleClick}
             id={id}
-            ref={mergeRefs(triggerRef, ref)}
+            ref={combinedRef}
             size={size}
             label={iconDescription}
             kind="ghost">
@@ -576,6 +596,54 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 );
 
 OverflowMenu.propTypes = {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
+
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
+
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
+
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    mapPopoverAlign
+  ),
+
   /**
    * Specify a label to be read by screen readers on the container node
    */
@@ -699,7 +767,6 @@ OverflowMenu.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
@@ -709,7 +776,7 @@ OverflowMenu.propTypes = {
   selectorPrimaryFocus: PropTypes.string,
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

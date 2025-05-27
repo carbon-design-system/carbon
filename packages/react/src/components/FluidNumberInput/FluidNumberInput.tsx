@@ -11,6 +11,8 @@ import classnames from 'classnames';
 import { NumberInput, NumberInputProps } from '../NumberInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
+import { type NumberFormatOptions } from '@carbon/utilities';
+import { NumberFormatOptionsPropType } from '../NumberInput/NumberFormatPropTypes';
 
 export interface FluidNumberInputProps {
   /**
@@ -39,6 +41,14 @@ export interface FluidNumberInputProps {
   disabled?: boolean;
 
   /**
+   * **Experimental:** Specify Intl.NumberFormat options applied to internal
+   * number parsing and formatting. Use with `type="text"`, has no effect when
+   * `type="number"`.
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
+   */
+  formatOptions?: NumberFormatOptions;
+
+  /**
    * Provide a description for up/down icons that can be read by screen readers
    */
   iconDescription?: string;
@@ -47,6 +57,13 @@ export interface FluidNumberInputProps {
    * Specify a custom `id` for the input
    */
   id: string;
+
+  /**
+   * Instruct the browser which keyboard to display on mobile devices. Note that
+   * standard numeric keyboards vary across devices and operating systems.
+   * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
+   */
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
 
   /**
    * Specify if the currently value is invalid.
@@ -65,6 +82,13 @@ export interface FluidNumberInputProps {
   label?: React.ReactNode;
 
   /**
+   * **Experimental:** Specify a [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt)
+   * language code for parsing and formatting. Use with `type="text"`, has no
+   * effect when `type="number"`.
+   */
+  locale?: string;
+
+  /**
    * The maximum value.
    */
   max?: number;
@@ -74,8 +98,19 @@ export interface FluidNumberInputProps {
    */
   min?: number;
 
+  /**
+   * Provide an optional handler that is called when the internal state of
+   * NumberInput changes. This handler is called with event and state info.
+   * When type="number", this is called on every change of the input.
+   * When type="text", this is only called on blur after the number has been
+   * parsed and formatted.
+   * `(event, { value, direction }) => void`
+   */
   onChange?: (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>,
     state: { value: number | string; direction: string }
   ) => void;
 
@@ -86,10 +121,17 @@ export interface FluidNumberInputProps {
     event: React.MouseEvent<HTMLElement>,
     state?: { value: number | string; direction: string }
   ) => void;
+
   /**
    * Provide an optional function to be called when a key is pressed in the number input
    */
   onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /**
+   * When type="text", provide an optional pattern to restrict user input. Has
+   * no effect when type="number".
+   */
+  pattern?: string;
 
   /**
    * Specify how much the values should increase/decrease upon clicking on up/down button
@@ -100,6 +142,13 @@ export interface FluidNumberInputProps {
    * Provide custom text for the component for each translation id
    */
   translateWithId?: (id: string) => string;
+
+  /**
+   * **Experimental**: Specify if the input should be of type text or number.
+   * Use type="text" with `locale`, `formatOptions`, and guide user input with
+   * `pattern` and `inputMode`.
+   */
+  type?: 'number' | 'text';
 
   /**
    * Specify the value of the input
@@ -163,6 +212,14 @@ FluidNumberInput.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * **Experimental:** Specify Intl.NumberFormat options applied to internal
+   * number parsing and formatting. Use with `type="text"`, has no effect when
+   * `type="number"`.
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
+   */
+  formatOptions: NumberFormatOptionsPropType,
+
+  /**
    * Provide a description for up/down icons that can be read by screen readers
    */
   iconDescription: PropTypes.string,
@@ -171,6 +228,22 @@ FluidNumberInput.propTypes = {
    * Specify a custom `id` for the input
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Instruct the browser which keyboard to display on mobile devices. Note that
+   * standard numeric keyboards vary across devices and operating systems.
+   * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
+   */
+  inputMode: PropTypes.oneOf([
+    'none',
+    'text',
+    'tel',
+    'url',
+    'email',
+    'numeric',
+    'decimal',
+    'search',
+  ]),
 
   /**
    * Specify if the currently value is invalid.
@@ -189,6 +262,13 @@ FluidNumberInput.propTypes = {
   label: PropTypes.node,
 
   /**
+   * **Experimental:** Specify a [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt)
+   * language code for parsing and formatting. Use with `type="text"`, has no
+   * effect when `type="number"`.
+   */
+  locale: PropTypes.string,
+
+  /**
    * The maximum value.
    */
   max: PropTypes.number,
@@ -201,6 +281,9 @@ FluidNumberInput.propTypes = {
   /**
    * Provide an optional handler that is called when the internal state of
    * NumberInput changes. This handler is called with event and state info.
+   * When type="number", this is called on every change of the input.
+   * When type="text", this is only called on blur after the number has been
+   * parsed and formatted.
    * `(event, { value, direction }) => void`
    */
   onChange: PropTypes.func,
@@ -216,6 +299,12 @@ FluidNumberInput.propTypes = {
   onKeyUp: PropTypes.func,
 
   /**
+   * When type="text", provide an optional pattern to restrict user input. Has
+   * no effect when type="number".
+   */
+  pattern: PropTypes.string,
+
+  /**
    * Specify how much the values should increase/decrease upon clicking on up/down button
    */
   step: PropTypes.number,
@@ -224,6 +313,13 @@ FluidNumberInput.propTypes = {
    * Provide custom text for the component for each translation id
    */
   translateWithId: PropTypes.func,
+
+  /**
+   * **Experimental**: Specify if the input should be of type text or number.
+   * Use type="text" with `locale`, `formatOptions`, and guide user input with
+   * `pattern` and `inputMode`.
+   */
+  type: PropTypes.oneOf(['number', 'text']),
 
   /**
    * Specify the value of the input

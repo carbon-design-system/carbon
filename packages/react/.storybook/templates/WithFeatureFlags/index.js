@@ -26,7 +26,7 @@ function WithFeatureFlags({ children }) {
         text={
           <span>
             This story is rendered with{' '}
-            <LinkTo title="Experimental/Feature Flags" name="Overview">
+            <LinkTo title="Getting Started/Feature Flags" name="Overview">
               all available feature flags
             </LinkTo>{' '}
             enabled

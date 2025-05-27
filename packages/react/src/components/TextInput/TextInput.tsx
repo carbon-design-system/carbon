@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,13 +15,11 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import PasswordInput from './PasswordInput';
-import ControlledPasswordInput from './ControlledPasswordInput';
 import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { usePrefix } from '../../internal/usePrefix';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import { Text } from '../Text';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
@@ -324,9 +322,9 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const ariaAnnouncement = getAnnouncement(textCount, maxCount);
   useEffect(() => {
     if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
       const announcer = announcerRef.current as HTMLSpanElement | null;
@@ -411,8 +409,6 @@ const TextInput = React.forwardRef(function TextInput(
 });
 
 TextInput.displayName = 'TextInput';
-(TextInput as any).PasswordInput = PasswordInput;
-(TextInput as any).ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
    * Specify an optional className to be applied to the `<input>` node

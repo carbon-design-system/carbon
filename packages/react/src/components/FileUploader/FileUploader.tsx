@@ -7,17 +7,21 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState, ForwardedRef, useImperativeHandle } from 'react';
+import React, {
+  useImperativeHandle,
+  useState,
+  type ForwardedRef,
+  type HTMLAttributes,
+} from 'react';
 import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
 import { ButtonKinds } from '../Button/Button';
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 
-export interface FileUploaderProps extends ReactAttr<HTMLSpanElement> {
+export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Specify the types of files that this input should be able to receive
    */
@@ -231,7 +235,9 @@ const FileUploader = React.forwardRef(
                 <span
                   key={index}
                   className={selectedFileClasses}
-                  ref={(node) => (nodes[index] = node as HTMLSpanElement)} // eslint-disable-line
+                  ref={(node) => {
+                    nodes[index] = node as HTMLSpanElement;
+                  }} // eslint-disable-line
                   {...other}>
                   <Text as="p" className={`${prefix}--file-filename`} id={name}>
                     {name}
@@ -257,7 +263,12 @@ const FileUploader = React.forwardRef(
       </div>
     );
   }
-);
+) as {
+  <ItemType>(props: FileUploaderProps): React.ReactElement<any>;
+  propTypes?: any;
+  contextTypes?: any;
+  defaultProps?: any;
+};
 
 FileUploader.propTypes = {
   /**

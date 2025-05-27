@@ -1,47 +1,34 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as SkeletonTextStories from './skeleton-text.stories';
 
 <Meta of={SkeletonTextStories} />
 
 # Skeleton text
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/skeleton-text)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/skeleton-text)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/patterns/loading-pattern/#skeleton-states)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/skeleton-text)
+## Table of Contents
 
-## Getting started
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Here's a quick example to get you started.
+## Overview
 
-### JS (via import)
+<Canvas of={SkeletonTextStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/skeleton-text/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['skeleton-text'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-skeleton-text></cds-skeleton-text>
-```
-
-### Lines
-
-To create multiple lines of skeleton text, set the `type` property and use
-multiple instances of `<cds-skeleton-text>`.
-
-```html
-<cds-skeleton-text type="line"></cds-skeleton-text>
-<cds-skeleton-text type="line"></cds-skeleton-text>
-<cds-skeleton-text type="line"></cds-skeleton-text>
-```
-
-## `<cds-skeleton-text>` attributes and properties
+## Component API
 
 <ArgTypes of="cds-skeleton-text" />
+
+<Markdown>{`${cdnJs({ components: ['skeleton-text'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/skeleton-text/skeleton-text.mdx).

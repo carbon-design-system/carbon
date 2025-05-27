@@ -44,33 +44,17 @@ const controls = {
 
 export const Default = {
   render: () => html`
-    <div>
-      <div style="display: flex; align-items: center">
-        <cds-toggletip alignment="bottom">
-          Toggletip label
+    <div style="display: flex; align-items: center">
+      <cds-toggletip alignment="bottom">
+        Toggletip label
 
-          <p slot="body-text">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <cds-link slot="actions">Test</cds-link>
-          <cds-button slot="actions">Button</cds-button>
-        </cds-toggletip>
-      </div>
-      <br />
-      <br />
-      <div style="display: flex; align-items: center">
-        <cds-toggletip alignment="bottom" open>
-          Toggletip label -- using <code>open</code> prop
-
-          <p slot="body-text">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <cds-link slot="actions">Test</cds-link>
-          <cds-button slot="actions">Button</cds-button>
-        </cds-toggletip>
-      </div>
+        <p slot="body-text">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <cds-link slot="actions">Test</cds-link>
+        <cds-button slot="actions">Button</cds-button>
+      </cds-toggletip>
     </div>
   `,
 };

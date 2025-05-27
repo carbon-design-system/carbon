@@ -151,8 +151,8 @@ export const Default = {
   render: () => html`
     <cds-dropdown
       helper-text="This is some helper text"
-      title-text="Dropdown label"
-      label="Dropdown menu options">
+      title-text="This is an example title"
+      label="This is an example label">
       ${items.map(
         (elem) => html`
           <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
@@ -169,7 +169,8 @@ export const Inline = {
     <cds-dropdown
       type="inline"
       title-text="Inline dropdown label"
-      label="Dropdown menu options">
+      label="Dropdown menu options"
+      value="option-1">
       ${items.map(
         (elem) => html`
           <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
@@ -272,7 +273,8 @@ export const WithAILabel = {
     <cds-dropdown
       helper-text="This is some helper text"
       title-text="Dropdown title"
-      label="Dropdown menu options">
+      label="Dropdown menu options"
+      value="option-1">
       <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
       ${items.map(
         (elem) => html`

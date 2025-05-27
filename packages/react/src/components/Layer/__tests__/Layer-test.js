@@ -20,6 +20,18 @@ describe('Layer', () => {
     expect(screen.getByTestId('test')).toBeInTheDocument();
   });
 
+  it('should have background class if withBackground prop is used', () => {
+    render(
+      <Layer data-testid="test" withBackground>
+        <span>test</span>
+      </Layer>
+    );
+
+    expect(screen.getByTestId('test')).toHaveClass(
+      'cds--layer__with-background'
+    );
+  });
+
   it('should spread any additional props onto the top-level element', () => {
     render(
       <Layer data-testid="test">

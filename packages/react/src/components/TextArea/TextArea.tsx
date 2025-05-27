@@ -19,7 +19,7 @@ import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
@@ -162,11 +162,9 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-// TODO: This type was added to prevent the formatter from changing the
-// indentation of this entire function. Delete it in a future pull request.
-type TTextArea = HTMLTextAreaElement;
+const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
 
-const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
+const TextArea = frFn((props, forwardRef) => {
   const {
     className,
     decorator,
@@ -183,7 +181,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     light,
     placeholder = '',
     enableCounter = false,
-    maxCount = undefined,
+    maxCount,
     counterMode = 'character',
     warn = false,
     warnText = '',
@@ -427,11 +425,12 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     }
   }
 
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(
+  const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
+    counterMode === 'word' ? 'word' : undefined,
     counterMode === 'word' ? 'words' : undefined
   );
   useEffect(() => {
