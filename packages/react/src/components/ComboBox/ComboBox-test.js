@@ -1444,8 +1444,28 @@ describe('ComboBox', () => {
     );
 
     const input = screen.getByPlaceholderText('Type here');
+    const attributes = Array.from(input.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
+
     expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute('maxLength', '10');
-    expect(input).toHaveAttribute('placeholder', 'Type here');
+    expect(attributes).toEqual({
+      'aria-activedescendant': '',
+      'aria-autocomplete': 'list',
+      'aria-controls': 'downshift-:r7r:-menu',
+      'aria-expanded': 'false',
+      'aria-haspopup': 'listbox',
+      'aria-label': 'Choose an item',
+      autocomplete: 'off',
+      class: 'cds--text-input cds--text-input--empty',
+      id: 'test-combo',
+      maxlength: '10',
+      placeholder: 'Type here',
+      role: 'combobox',
+      tabindex: '0',
+      type: 'text',
+      value: '',
+    });
   });
 });
