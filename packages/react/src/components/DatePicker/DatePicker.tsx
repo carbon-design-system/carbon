@@ -925,10 +925,13 @@ const DatePicker = React.forwardRef(function DatePicker(
     if (!calendarRef.current || !startInputField.current) return;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
-        match(event, keys.Tab) &&
-        !event.shiftKey &&
-        document.activeElement === endInputField.current &&
-        calendarRef.current?.isOpen
+        calendarRef.current?.isOpen &&
+        ((match(event, keys.Tab) &&
+          !event.shiftKey &&
+          document.activeElement === endInputField.current) ||
+          (match(event, keys.Tab) &&
+            event.shiftKey &&
+            document.activeElement === startInputField.current))
       ) {
         calendarRef.current.close();
         onCalendarClose(
