@@ -112,7 +112,6 @@ describe('PageHeader', () => {
         `${prefix}--breadcrumb-item`
       );
 
-      console.log('breadcrumbs', breadcrumbs);
       expect(breadcrumbs.length).toBe(2);
     });
 

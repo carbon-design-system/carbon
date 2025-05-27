@@ -329,25 +329,6 @@ export const ContentWithHeroImage = (args) => (
   </Grid>
 );
 
-const pageActionItems = (
-  <>
-    <ContentSwitcher onChange={() => {}}>
-      <IconSwitch name="one" text="Table of Contents">
-        <TableOfContents />
-      </IconSwitch>
-      <IconSwitch name="two" text="Workspace Test">
-        <Workspace />
-      </IconSwitch>
-      <IconSwitch name="three" text="View Mode">
-        <ViewMode_2 />
-      </IconSwitch>
-    </ContentSwitcher>
-    <Button kind="primary" renderIcon={Add} size="md">
-      Primary action
-    </Button>
-  </>
-);
-
 const pageActionButtonItems = [
   {
     id: 'action1',
