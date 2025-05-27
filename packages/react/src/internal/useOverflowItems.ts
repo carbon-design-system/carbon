@@ -39,7 +39,14 @@ const useOverflowItems = <T extends Item>(
 ) => {
   const itemsRef = useRef<Map<string, number> | null>(null);
   const [maxWidth, setMaxWidth] = useState(0);
-  const visibleItemCount = useRef<number>(0);
+  if (!items || !Array.isArray(items)) {
+    return {
+      visibleItems: [] as T[],
+      hiddenItems: [] as T[],
+      itemRefHandler: () => {},
+    };
+  }
+
   const handleResize = () => {
     if (containerRef.current) {
       const offset = offsetRef?.current?.offsetWidth || 0;
@@ -105,10 +112,6 @@ const useOverflowItems = <T extends Item>(
     return visibleItems;
   };
 
-  if (!items || Array.isArray(items) === false) {
-    return {};
-  }
-
   // Memoize visible items calculation to avoid recalculating on every render
   const visibleItems = useMemo(() => {
     if (!Array.isArray(items)) {
@@ -140,14 +143,6 @@ const useOverflowItems = <T extends Item>(
       }
     }
   }, [hiddenItems, previousHiddenItems, onChange]);
-
-  if (!items || Array.isArray(items) === false) {
-    return {
-      visibleItems: [],
-      hiddenItems: [],
-      itemRefHandler,
-    };
-  }
 
   return {
     visibleItems,
