@@ -154,9 +154,7 @@ export const Default = (args) => (
       contentActions={breadcrumbContentActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
@@ -195,9 +193,7 @@ export const BreadcrumbBar = (args) => (
       renderIcon={BreadcrumbBeeIcon}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
@@ -210,9 +206,7 @@ export const Content = (args) => (
       renderIcon={BreadcrumbBeeIcon}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
@@ -235,9 +229,7 @@ export const ContentWithIcon = (args) => (
       renderIcon={BreadcrumbBeeIcon}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
@@ -261,9 +253,7 @@ export const ContentWithContextualActions = (args) => (
       renderIcon={BreadcrumbBeeIcon}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
@@ -433,9 +423,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       renderIcon={BreadcrumbBeeIcon}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
@@ -493,9 +481,7 @@ export const DirectExports = (args) => (
       contextualActions={breadcrumbContextualActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeaderBreadcrumbBar>
