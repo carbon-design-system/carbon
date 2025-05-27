@@ -11,8 +11,6 @@ import bundlers from './bundle/bundlers.js';
 
 const logger = createLogger('bundle');
 
-console.log('BUNDLERS', bundlers);
-
 async function bundle({ entrypoint, name, globals }) {
   logger.start('bundle');
 

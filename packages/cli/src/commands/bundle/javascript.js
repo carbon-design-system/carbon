@@ -18,7 +18,6 @@ import {
 } from './utils.js';
 
 export default async function bundle(entrypoint, options) {
-  console.log('OPTIONS', options);
   const globals = options.globals ? formatGlobals(options.globals) : {};
   const { name } = options;
   const packageFolder = await findPackageFolder(entrypoint);

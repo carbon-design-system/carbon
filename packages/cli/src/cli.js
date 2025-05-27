@@ -1,23 +1,63 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import commands from './commands/index.js';
-import { hideBin } from 'yargs/helpers';
-import packageJson from '../package.json' assert { type: 'json' };
 import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createRequire } from 'module';
 
-export default async function main({ argv }) {
-  yargs(hideBin(process.argv.slice(2)))
+// Import commands explicitly since yargs commandDir() doesn't support ESM yet
+import * as bundle from './commands/bundle.js';
+import * as check from './commands/check.js';
+import * as ciCheck from './commands/ci-check.js';
+import * as changelog from './commands/changelog.js';
+import * as component from './commands/component.js';
+import * as contribute from './commands/contribute.js';
+import * as inline from './commands/inline.js';
+import * as publish from './commands/publish.js';
+import * as release from './commands/release.js';
+import * as sync from './commands/sync.js';
+
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const packageJson = require('../package.json');
+
+// Create yargs command config with optional properties
+function createCommand(cmd) {
+  const config = {
+    command: cmd.command,
+    desc: cmd.desc,
+    handler: cmd.handler,
+  };
+  if (cmd.builder) {
+    config.builder = cmd.builder;
+  }
+  return config;
+}
+
+export async function main({ argv }) {
+  yargs(hideBin(argv))
     .scriptName(packageJson.name)
     .version(packageJson.version)
-    .usage('Usage: $0 [options]');
-
-  yargs(hideBin(process.argv.slice(2)))
-    .command(commands)
+    .usage('Usage: $0 [options]')
+    // Add commands explicitly
+    .command(createCommand(bundle))
+    .command(createCommand(check))
+    .command(createCommand(ciCheck))
+    .command(createCommand(changelog))
+    .command(createCommand(component))
+    .command(createCommand(contribute))
+    .command(createCommand(inline))
+    .command(createCommand(publish))
+    .command(createCommand(release))
+    .command(createCommand(sync))
     .strict()
     .fail((message, error, yargs) => {
       if (error) {
