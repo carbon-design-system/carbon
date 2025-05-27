@@ -677,10 +677,6 @@
   .#{$prefix}--number__control-btn {
     @include high-contrast-mode('outline');
   }
-
-  .#{$prefix}--number__control-btn svg {
-    @include high-contrast-mode('icon-fill');
-  }
 }
 
 .#{$prefix}--number__controls:hover .#{$prefix}--number__control-btn::after {
