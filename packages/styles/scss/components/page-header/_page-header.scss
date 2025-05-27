@@ -59,12 +59,8 @@
     display: inline-flex;
   }
 
-  .#{$prefix}--page-header__breadcrumb__contextual-actions {
+  .#{$prefix}--page-header__breadcrumb__content-actions {
     margin-inline-end: $spacing-04;
-  }
-
-  .#{$prefix}--page-header__breadcrumb__contextual-flush {
-    margin-inline-end: 0;
   }
 
   .#{$prefix}--page-header__breadcrumb-wrapper {
@@ -184,6 +180,5 @@
   .#{$prefix}--page-header__tab-bar {
     display: grid;
     padding: 0 $spacing-05;
-    border: 1px solid green; /* stylelint-disable-line */
   }
 }

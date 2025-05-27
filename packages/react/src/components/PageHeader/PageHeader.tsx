@@ -67,13 +67,13 @@ interface PageHeaderBreadcrumbBarProps {
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
-   * The PageHeaderContent's contextual actions
+   * The PageHeaderBreadcrumbBar's content actions
    */
-  contextualActions?: React.ReactNode;
+  contentActions?: React.ReactNode;
   /**
-   * `true` to set contextual actions flush against page actions
+   * `true` to set content actions flush against page actions
    */
-  contextualActionsFlush?: Boolean;
+  contentActionsFlush?: Boolean;
   /**
    * The PageHeaderContent's page actions
    */
@@ -92,8 +92,8 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
     className,
     children,
     renderIcon: IconElement,
-    contextualActions,
-    contextualActionsFlush,
+    contentActions,
+    contentActionsFlush,
     pageActions,
     pageActionsFlush,
     ...other
@@ -110,10 +110,9 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
     className
   );
 
-  const contextualActionsClasses = classnames({
-    [`${prefix}--page-header__breadcrumb__contextual-actions`]: true,
-    [`${prefix}--page-header__breadcrumb__contextual-flush`]:
-      contextualActionsFlush,
+  const contentActionsClasses = classnames({
+    [`${prefix}--page-header__breadcrumb__content-actions`]:
+      !contentActionsFlush,
   });
 
   return (
@@ -130,9 +129,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
               {children}
             </div>
             <div className={`${prefix}--page-header__breadcrumb__actions`}>
-              <div className={contextualActionsClasses}>
-                {contextualActions}
-              </div>
+              <div className={contentActionsClasses}>{contentActions}</div>
               {pageActions}
             </div>
           </div>
@@ -174,6 +171,7 @@ interface PageHeaderContentProps {
    */
   pageActions?: React.ReactNode;
 }
+
 const PageHeaderContent = React.forwardRef<
   HTMLDivElement,
   PageHeaderContentProps

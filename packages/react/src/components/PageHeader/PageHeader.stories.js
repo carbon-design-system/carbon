@@ -102,7 +102,7 @@ const breadcrumbPageActions = (
   </>
 );
 
-const breadcrumbContextualActions = (
+const breadcrumbContentActions = (
   <>
     <Button size="md">Button</Button>
   </>
@@ -151,7 +151,7 @@ export const Default = (args) => (
   <PageHeader.Root {...args}>
     <PageHeader.BreadcrumbBar
       renderIcon={BreadcrumbBeeIcon}
-      contextualActions={breadcrumbContextualActions}
+      contentActions={breadcrumbContentActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem>
@@ -193,7 +193,6 @@ export const BreadcrumbBar = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
       renderIcon={BreadcrumbBeeIcon}
-      contextualActions={<Button size="md">Button</Button>}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem>
@@ -209,7 +208,6 @@ export const Content = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
       renderIcon={BreadcrumbBeeIcon}
-      contextualActions={breadcrumbContextualActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem>
@@ -235,7 +233,6 @@ export const ContentWithIcon = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
       renderIcon={BreadcrumbBeeIcon}
-      contextualActions={breadcrumbContextualActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem>
@@ -262,7 +259,6 @@ export const ContentWithContextualActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
       renderIcon={BreadcrumbBeeIcon}
-      contextualActions={breadcrumbContextualActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem>
@@ -435,7 +431,6 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
       renderIcon={BreadcrumbBeeIcon}
-      contextualActions={breadcrumbContextualActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem>
