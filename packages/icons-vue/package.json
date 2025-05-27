@@ -39,7 +39,7 @@
     "fs-extra": "^11.0.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.0",
-    "rollup": "^2.79.1",
+    "rollup": "^4.41.1",
     "vue": "^3.0.0"
   },
   "sideEffects": false
