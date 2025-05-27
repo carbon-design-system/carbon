@@ -17,7 +17,6 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
-@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 
 /// Select styles
@@ -418,11 +417,5 @@
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
     inset-inline-end: $spacing-11;
-  }
-
-  // Windows HCM fix
-
-  .#{$prefix}--select__arrow {
-    @include high-contrast-mode('icon-fill');
   }
 }

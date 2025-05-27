@@ -20,7 +20,6 @@
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/tooltip' as *;
 @use '../../utilities/skeleton' as *;
-@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert';
 @use '../../utilities/layout';
 @use '../../utilities/focus-outline' as *;
@@ -155,13 +154,6 @@
     svg {
     fill: $icon-secondary;
     transition: fill $duration-fast-01 motion(standard, productive);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
@@ -173,8 +165,6 @@
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
     svg {
     fill: $icon-primary;
-
-    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--text-input--invalid,
@@ -523,14 +513,6 @@
     )
     > * {
     block-size: 1rem;
-  }
-
-  // Windows HCM fix
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
-    svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
-    svg {
-    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--text-input__label-wrapper {
