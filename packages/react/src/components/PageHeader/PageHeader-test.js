@@ -482,4 +482,44 @@ describe('PageHeader', () => {
       expect(tagsContainer).toBeInTheDocument();
     });
   });
+
+  describe('PageHeader.TabBar popover functionality', () => {
+    const mockTags = [
+      { id: '1', type: 'blue', text: 'Tag 1', size: 'md' },
+      { id: '2', type: 'green', text: 'Tag 2', size: 'md' },
+      { id: '3', type: 'purple', text: 'Tag 3', size: 'md' },
+      { id: '4', type: 'red', text: 'Tag 4', size: 'md' },
+      { id: '5', type: 'cyan', text: 'Tag 5', size: 'md' },
+    ];
+
+    const mockUseOverflowItems = jest.fn();
+
+    beforeEach(() => {
+      mockUseOverflowItems.mockReset();
+
+      jest.mock('../../internal/useOverflowItems', () => ({
+        __esModule: true,
+        default: mockUseOverflowItems,
+      }));
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should not show overflow tag when all items are visible', () => {
+      mockUseOverflowItems.mockReturnValue({
+        visibleItems: mockTags,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      });
+
+      render(<PageHeader.TabBar tags={mockTags} />);
+
+      mockTags.forEach((tag) => {
+        expect(screen.getByText(tag.text)).toBeInTheDocument();
+      });
+      expect(screen.queryByText(/^\+\d+$/)).not.toBeInTheDocument();
+    });
+  });
 });
