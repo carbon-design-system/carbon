@@ -14,7 +14,7 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import useResizeObserver from 'use-resize-observer';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';

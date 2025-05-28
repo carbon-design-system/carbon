@@ -14,11 +14,6 @@ export interface SkeletonIconProps {
    * Specify an optional className to add.
    */
   className?: string;
-
-  /**
-   * The CSS styles.
-   */
-  style?: React.CSSProperties;
 }
 
 const SkeletonIcon: React.FC<SkeletonIconProps> = ({ className, ...other }) => {
@@ -36,11 +31,6 @@ SkeletonIcon.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
-
-  /**
-   * The CSS styles.
-   */
-  style: PropTypes.object,
 };
 
 export default SkeletonIcon;

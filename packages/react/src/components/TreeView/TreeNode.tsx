@@ -164,22 +164,36 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
     };
 
-    const nodesWithProps = React.Children.map(children, (node) => {
-      if (React.isValidElement(node)) {
-        return React.cloneElement(node, {
-          active,
-          depth: depth + 1,
-          disabled:
-            disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
-          onTreeSelect,
-          onNodeFocusEvent,
-          selected,
-          tabIndex:
-            (!(node as ReactElement<TreeNodeProps>).props.disabled && -1) ||
-            null,
-        } as TreeNodeProps);
-      }
-    });
+    function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
+      return React.Children.map(children, (node) => {
+        if (!React.isValidElement(node)) return node;
+
+        const isTreeNode = (node.type as any).displayName === 'TreeNode';
+
+        if (isTreeNode) {
+          return React.cloneElement(node, {
+            active,
+            depth: depth + 1,
+            disabled:
+              disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
+            onTreeSelect,
+            onNodeFocusEvent,
+            selected,
+            tabIndex: (node as ReactElement<TreeNodeProps>).props.disabled
+              ? null
+              : -1,
+          } as TreeNodeProps);
+        }
+
+        const newChildren = enhanceTreeNodes((node.props as any).children);
+        return React.cloneElement(node as React.ReactElement<any>, {
+          children: newChildren,
+        });
+      });
+    }
+
+    const nodesWithProps = enhanceTreeNodes(children);
+
     const isActive = active === id;
     const isSelected = selected.includes(id);
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
