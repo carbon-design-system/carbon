@@ -551,9 +551,13 @@ const PageHeaderTabBar = React.forwardRef<
     className
   );
   return (
-    <div className={classNames} ref={ref} {...other}>
-      {children}
-    </div>
+    <Grid>
+      <Column lg={16} md={8} sm={4}>
+        <div className={classNames} ref={ref} {...other}>
+          {children}
+        </div>
+      </Column>
+    </Grid>
   );
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';

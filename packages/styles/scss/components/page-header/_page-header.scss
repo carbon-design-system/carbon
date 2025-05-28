@@ -170,7 +170,6 @@
   }
 
   .#{$prefix}--page-header__tab-bar {
-    display: grid;
-    padding: 0 $spacing-05;
+    margin-inline-start: -$spacing-05;
   }
 }
