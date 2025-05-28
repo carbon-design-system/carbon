@@ -2106,7 +2106,6 @@ __metadata:
     "@web/test-runner-playwright": "npm:^0.11.0"
     "@webcomponents/webcomponentsjs": "npm:^2.8.0"
     autoprefixer: "npm:^10.4.0"
-    babel-loader: "npm:^9.0.0"
     cssnano: "npm:^7.0.0"
     flatpickr: "npm:4.6.13"
     globby: "npm:^14.0.2"
