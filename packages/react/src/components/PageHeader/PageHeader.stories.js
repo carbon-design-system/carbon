@@ -84,7 +84,7 @@ export default {
     PageHeaderTabs,
   },
   // uncomment includeStories before merging so the stories aren't visible in prod
-  includeStories: [],
+  // includeStories: [],
   argTypes: {
     children: {
       control: false, // ReactNode props don't work in the controls pane
@@ -262,9 +262,10 @@ const pageActionItems = (
 
 const pageActionButtonItems = [
   {
+    // props used for both collapse menu item and non-collapsed action form
     id: 'action1',
-    label: 'action 1',
     onClick: () => console.log(`Action 1`),
+    // component to render when non-collapsed
     body: (
       <Button
         renderIcon={AiGenerate}
@@ -274,10 +275,13 @@ const pageActionButtonItems = [
         kind="ghost"
       />
     ),
+    // props to pass to the corresponding collapsed menu item
+    menuItem: {
+      label: 'action 1',
+    },
   },
   {
     id: 'action2',
-    label: 'action 2',
     onClick: () => console.log(`Action 2`),
     body: (
       <Button
@@ -288,10 +292,12 @@ const pageActionButtonItems = [
         kind="ghost"
       />
     ),
+    menuItem: {
+      label: 'action 2',
+    },
   },
   {
     id: 'action3',
-    label: 'action 3',
     onClick: () => console.log(`Action 3`),
     body: (
       <Button
@@ -302,10 +308,12 @@ const pageActionButtonItems = [
         kind="ghost"
       />
     ),
+    menuItem: {
+      label: 'action 3',
+    },
   },
   {
     id: 'action4',
-    label: 'action 4',
     onClick: () => console.log(`Action 4`),
     body: (
       <Button
@@ -316,16 +324,21 @@ const pageActionButtonItems = [
         kind="ghost"
       />
     ),
+    menuItem: {
+      label: 'action 4',
+    },
   },
   {
     id: 'primary-action',
-    label: 'Primary action',
     onClick: () => console.log(`Primary action`),
     body: (
       <Button kind="primary" renderIcon={Add} size="md">
         Primary action
       </Button>
     ),
+    menuItem: {
+      label: 'Primary action',
+    },
   },
 ];
 

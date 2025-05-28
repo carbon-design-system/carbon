@@ -19,6 +19,7 @@ import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import { MenuButton } from '../MenuButton';
+import { MenuItemProps } from '../Menu/MenuItem';
 import { MenuItem } from '../Menu';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
@@ -265,9 +266,9 @@ const PageHeaderContentPageActions = ({
 
   type pageAction = {
     id: string;
-    label: string;
     onClick: () => void;
     body: React.ReactNode;
+    menuItem: MenuItemProps;
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -310,8 +311,11 @@ const PageHeaderContentPageActions = ({
           {Array.isArray(pageActions) && (
             <>
               {pageActions.map((action) => (
-                <div key={action.id} className="action">
-                  {action.body}
+                <div key={action.id}>
+                  {React.cloneElement(action.body, {
+                    ...action.body.props,
+                    onClick: action.onClick,
+                  })}
                 </div>
               ))}
               <span data-offset data-hidden ref={offsetRef}>
@@ -322,8 +326,8 @@ const PageHeaderContentPageActions = ({
                   {[...hiddenItems].reverse().map((item) => (
                     <MenuItem
                       key={item.id}
-                      label={item.label}
                       onClick={item.onClick}
+                      {...item.menuItem}
                     />
                   ))}
                 </MenuButton>
