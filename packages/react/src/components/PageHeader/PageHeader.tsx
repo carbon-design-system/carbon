@@ -266,7 +266,7 @@ const PageHeaderContentPageActions = ({
 
   type pageAction = {
     id: string;
-    onClick: () => void;
+    onClick?: () => void;
     body: React.ReactNode;
     menuItem: MenuItemProps;
   };
