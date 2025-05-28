@@ -421,15 +421,6 @@
     @include high-contrast-mode('focus');
   }
 
-  // Windows HCM fix
-
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
-    .#{$prefix}--btn__icon
-    path:not([data-icon-path]):not([fill='none']),
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
-    @include high-contrast-mode('icon-fill');
-  }
-
   // RTL overrides
   [dir='rtl'] .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus) {
     box-shadow: convert.to-rem(1px) 0 0 0 $button-separator;
