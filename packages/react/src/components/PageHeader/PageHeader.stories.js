@@ -459,7 +459,7 @@ export const DirectExports = (args) => (
   <PageHeaderDirect {...args}>
     <PageHeaderBreadcrumbBar
       renderIcon={BreadcrumbBeeIcon}
-      contextualActions={breadcrumbContextualActions}
+      contentActions={breadcrumbContentActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
