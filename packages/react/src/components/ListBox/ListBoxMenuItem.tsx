@@ -8,16 +8,17 @@
 import cx from 'classnames';
 import React, {
   forwardRef,
-  ReactNode,
   useEffect,
   useRef,
   useState,
+  type ForwardedRef,
+  type HTMLAttributes,
   type MutableRefObject,
+  type ReactNode,
   type Ref,
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /**
@@ -54,7 +55,7 @@ const useIsTruncated = <T extends HTMLElement>(
   return { isTruncated, ref: mergedRef };
 };
 
-export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
+export interface ListBoxMenuItemProps extends HTMLAttributes<HTMLLIElement> {
   /**
    * Specify any children nodes that should be rendered inside of the ListBox
    * Menu Item
