@@ -371,8 +371,11 @@ const PageHeaderContentPageActions = ({
           {Array.isArray(pageActions) && (
             <>
               {pageActions.map((action) => (
-                <div key={action.id} className="action">
-                  {action.body}
+                <div key={action.id}>
+                  {React.cloneElement(action.body, {
+                    ...action.body.props,
+                    onClick: action.onClick,
+                  })}
                 </div>
               ))}
               <span data-offset data-hidden ref={offsetRef}>
