@@ -16,6 +16,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
+@use '../dropdown/dropdown';
 
 :host(#{$prefix}-multi-select) {
   outline: none;
@@ -95,7 +96,7 @@ $css--plex: true !default;
 
   display: block;
 
-  .#{$prefix}--checkbox-label {
+  #{$prefix}-checkbox::part(label) {
     display: inline-block;
     overflow: hidden;
     inline-size: 100%;
@@ -145,8 +146,11 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select-item[disabled]) {
-  color: $text-disabled;
-  text-decoration: none;
+  cursor: not-allowed;
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-disabled;
+    text-decoration: none;
+  }
 }
 
 :host(#{$prefix}-multi-select-item[highlighted]) {
@@ -190,4 +194,28 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-10;
   }
+}
+
+// When select all is turned on, the first item in the listbox
+// is always the "Select all" option and gets special border
+// treatment
+:host([is-select-all]) {
+  .#{$prefix}--list-box__menu-item__option {
+    padding: 0.6875rem $spacing-05;
+    margin: 0;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+}
+
+// When select all is turned on, the second item in the list
+// has special treatment to look correct against the "Select all"
+// border treatment, this second item (index=1) gets a `flush-top` attribute
+// so that we can remove its top border.
+:host([flush-top]) .#{$prefix}--list-box__menu-item__option {
+  border-block-start: none;
+}
+
+// make the checkbox element transparent to mouse events so it doesn't interfere
+:host #{'cds-checkbox'} {
+  pointer-events: none;
 }
