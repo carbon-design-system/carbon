@@ -15,7 +15,9 @@ import { useCallback, type ForwardedRef, type Ref } from 'react';
  * accepts an array of refs and returns a callback ref that, when attached to a
  * node, assigns that node to every ref in the array.
  */
-export const useMergedRefs = <T>(refs: ForwardedRef<T>[]): Ref<T> => {
+export const useMergedRefs = <T>(
+  refs: (ForwardedRef<T> | undefined)[]
+): Ref<T> => {
   return useCallback(
     (node: T | null) => {
       refs.forEach((ref) => {

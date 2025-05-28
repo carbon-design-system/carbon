@@ -555,11 +555,6 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   // Windows HCM fix
-
-  .#{$prefix}--snippet__icon {
-    @include high-contrast-mode('icon-fill');
-  }
-
   .#{$prefix}--snippet--inline:focus {
     @include high-contrast-mode('focus');
   }
