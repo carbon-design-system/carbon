@@ -114,9 +114,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
             const nextCloseIcon = (nextFocusableTag as CDSDismissibleTag)
               ._buttonNode;
             if (nextCloseIcon) {
-              setTimeout(() => {
-                nextCloseIcon.focus();
-              }, 0);
+              nextCloseIcon.focus();
             }
           }
           this.dispatchEvent(
