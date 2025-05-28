@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,6 +59,52 @@ class CDSHeaderGlobalAction extends CDSButton {
     super.connectedCallback();
   }
 
+  firstUpdated() {
+    this._buttonNode?.addEventListener('focusout', this._handleFocusOut);
+    document.addEventListener('click', this._handleDocumentClick, true);
+  }
+
+  disconnectedCallback() {
+    this._buttonNode?.removeEventListener('focusout', this._handleFocusOut);
+    document.removeEventListener('click', this._handleDocumentClick, true);
+    super.disconnectedCallback();
+  }
+
+  private _handleFocusOut = (event: FocusEvent) => {
+    // Double-check:
+    // I use this `ownerDocument` instead of the global `document` to ensure the query
+    // works correctly even if this component is rendered inside a Shadow DOM or
+    // different document context (like an iframe).
+    //
+    // I found more info in:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument
+    // https://lit.dev/docs/components/shadow-dom/
+    // const panel = document.querySelector(`#${this.panelId}`);
+    // const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const relatedTarget = event.relatedTarget as HTMLElement;
+
+    if (
+      panel &&
+      relatedTarget &&
+      !this.contains(relatedTarget) &&
+      !panel.contains(relatedTarget)
+    ) {
+      panel.removeAttribute('expanded');
+      this.active = false;
+    }
+  };
+
+  private _handleDocumentClick = (event: MouseEvent) => {
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const target = event.composedPath()[0] as HTMLElement;
+
+    if (panel && !this.contains(target) && !panel.contains(target)) {
+      panel.removeAttribute('expanded');
+      this.active = false;
+    }
+  };
+
   @HostListener('click', { capture: true })
   // @ts-ignore
   private _handleClick(event: Event) {
@@ -66,7 +112,7 @@ class CDSHeaderGlobalAction extends CDSButton {
     if (disabled) {
       event.stopPropagation();
     } else {
-      const panel = document.querySelector(`#${this.panelId}`);
+      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
 
       // see if there is related panel for header-global-action button first
       // and then set the expanded attr of it accordingly
@@ -82,6 +128,16 @@ class CDSHeaderGlobalAction extends CDSButton {
         const active = !this.active;
         this.active = active;
       }
+    }
+  }
+
+  @HostListener('keydown', { capture: true })
+  // @ts-ignore
+  private _handleKeyDown(event: KeyboardEvent) {
+    const { key } = event;
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      this._handleClick(event);
     }
   }
 
