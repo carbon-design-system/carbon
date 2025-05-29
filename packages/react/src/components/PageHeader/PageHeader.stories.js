@@ -76,7 +76,6 @@ const dropdownItems = [
   },
 ];
 
-
 const tags = [
   {
     type: 'blue',
@@ -485,14 +484,6 @@ export const TabBar = (args) => {
           </TabPanels>
         </PageHeader.Tabs>
       </PageHeader.TabBar>
-    </PageHeader.Root>
-  );
-};
-
-export const TabBarWithOnlyTags = (args) => {
-  return (
-    <PageHeader.Root>
-      <PageHeader.TabBar {...args} tags={tags}></PageHeader.TabBar>
     </PageHeader.Root>
   );
 };

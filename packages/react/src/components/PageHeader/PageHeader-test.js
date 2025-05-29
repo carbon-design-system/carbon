@@ -4,6 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+// Mock at the very top, before any imports
+jest.mock('../../internal/useOverflowItems');
+
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -21,6 +25,10 @@ import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
 import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
+// Import the mocked hook
+import useOverflowItems from '../../internal/useOverflowItems';
+const mockUseOverflowItems = useOverflowItems;
+
 const prefix = 'cds';
 
 let mockOverflowOnChange = jest.fn();
@@ -32,6 +40,17 @@ jest.mock('@carbon/utilities', () => ({
 }));
 
 describe('PageHeader', () => {
+  // Reset the mock before each test
+  beforeEach(() => {
+    mockUseOverflowItems.mockReset();
+    // Default mock implementation
+    mockUseOverflowItems.mockReturnValue({
+      visibleItems: [],
+      hiddenItems: [],
+      itemRefHandler: jest.fn(),
+    });
+  });
+
   describe('export configuration', () => {
     it('supports dot notation component namespacing from the main entrypoint', () => {
       const { container } = render(
@@ -500,6 +519,13 @@ describe('PageHeader', () => {
     ];
 
     it('should render tags when provided', () => {
+      // Set up mock for this test
+      mockUseOverflowItems.mockReturnValue({
+        visibleItems: mockTags,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      });
+
       render(<PageHeader.TabBar tags={mockTags} />);
 
       expect(screen.getByText('Tag 1')).toBeInTheDocument();
@@ -516,6 +542,13 @@ describe('PageHeader', () => {
     });
 
     it('should render tags alongside tabs', () => {
+      // Set up mock for this test
+      mockUseOverflowItems.mockReturnValue({
+        visibleItems: mockTags,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      });
+
       render(
         <PageHeader.TabBar tags={mockTags}>
           <PageHeader.Tabs>
@@ -539,6 +572,13 @@ describe('PageHeader', () => {
     });
 
     it('should apply correct classes to tags container', () => {
+      // Set up mock for this test
+      mockUseOverflowItems.mockReturnValue({
+        visibleItems: mockTags,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      });
+
       const { container } = render(<PageHeader.TabBar tags={mockTags} />);
 
       const tagsContainer = container.querySelector(
@@ -546,45 +586,230 @@ describe('PageHeader', () => {
       );
       expect(tagsContainer).toBeInTheDocument();
     });
-  });
 
-  describe('PageHeader.TabBar popover functionality', () => {
-    const mockTags = [
-      { id: '1', type: 'blue', text: 'Tag 1', size: 'md' },
-      { id: '2', type: 'green', text: 'Tag 2', size: 'md' },
-      { id: '3', type: 'purple', text: 'Tag 3', size: 'md' },
-      { id: '4', type: 'red', text: 'Tag 4', size: 'md' },
-      { id: '5', type: 'cyan', text: 'Tag 5', size: 'md' },
-    ];
-
-    const mockUseOverflowItems = jest.fn();
-
-    beforeEach(() => {
-      mockUseOverflowItems.mockReset();
-
-      jest.mock('../../internal/useOverflowItems', () => ({
-        __esModule: true,
-        default: mockUseOverflowItems,
-      }));
-    });
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('should not show overflow tag when all items are visible', () => {
+    it('should maintain tab focus management with tags present', async () => {
+      // Set up mock for this test
       mockUseOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
       });
 
-      render(<PageHeader.TabBar tags={mockTags} />);
+      render(
+        <PageHeader.TabBar tags={mockTags}>
+          <PageHeader.Tabs>
+            <TabList aria-label="List of tabs">
+              <Tab>Tab 1</Tab>
+              <Tab>Tab 2</Tab>
+              <Tab>Tab 3</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>Tab Panel 1</TabPanel>
+              <TabPanel>Tab Panel 2</TabPanel>
+              <TabPanel>Tab Panel 3</TabPanel>
+            </TabPanels>
+          </PageHeader.Tabs>
+        </PageHeader.TabBar>
+      );
 
-      mockTags.forEach((tag) => {
-        expect(screen.getByText(tag.text)).toBeInTheDocument();
+      const tab1Button = screen.getByRole('tab', { name: 'Tab 1' });
+      const tab2Button = screen.getByRole('tab', { name: 'Tab 2' });
+      const tab3Button = screen.getByRole('tab', { name: 'Tab 3' });
+
+      // Verify tabs can be focused and clicked
+      await userEvent.click(tab2Button);
+      await waitFor(() => {
+        expect(screen.getByText('Tab Panel 2')).toBeInTheDocument();
       });
-      expect(screen.queryByText(/^\+\d+$/)).not.toBeInTheDocument();
+
+      await userEvent.click(tab3Button);
+      await waitFor(() => {
+        expect(screen.getByText('Tab Panel 3')).toBeInTheDocument();
+      });
+
+      // Verify tags are still present and functional
+      expect(screen.getByText('Tag 1')).toBeInTheDocument();
+      expect(screen.getByText('Tag 2')).toBeInTheDocument();
+      expect(screen.getByText('Tag 3')).toBeInTheDocument();
+    });
+
+    it('should inject tags into TabList wrapper correctly', () => {
+      // Set up mock for this test
+      mockUseOverflowItems.mockReturnValue({
+        visibleItems: mockTags,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      });
+
+      const { container } = render(
+        <PageHeader.TabBar tags={mockTags}>
+          <PageHeader.Tabs>
+            <TabList aria-label="List of tabs">
+              <Tab>Tab 1</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>Tab Panel 1</TabPanel>
+            </TabPanels>
+          </PageHeader.Tabs>
+        </PageHeader.TabBar>
+      );
+
+      const tabBarTablist = container.querySelector(
+        `.${prefix}--page-header__tab-bar--tablist`
+      );
+      const tagsContainer = container.querySelector(
+        `.${prefix}--page-header__tags`
+      );
+      const tabsContainer = container.querySelector(`.${prefix}--tabs`);
+
+      expect(tabBarTablist).toBeInTheDocument();
+      expect(tagsContainer).toBeInTheDocument();
+      expect(tabsContainer).toBeInTheDocument();
+
+      // Tags container should be a sibling of Tabs container within the wrapper
+      expect(tabBarTablist).toContainElement(tagsContainer);
+      expect(tabBarTablist).toContainElement(tabsContainer);
+
+      // Verify the structure: tabBarTablist should contain both tabs and tags
+      expect(tabBarTablist.children).toHaveLength(2); // tabs container + tags container
+    });
+
+    describe('Overflow functionality', () => {
+      it('should handle overflow items correctly', () => {
+        // Set up the mock to return overflow data
+        mockUseOverflowItems.mockReturnValue({
+          visibleItems: mockTags.slice(0, 2), // Only Tag 1 and Tag 2
+          hiddenItems: mockTags.slice(2), // Only Tag 3
+          itemRefHandler: jest.fn(),
+        });
+
+        render(
+          <PageHeader.TabBar tags={mockTags}>
+            <PageHeader.Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>Tab Panel 1</TabPanel>
+              </TabPanels>
+            </PageHeader.Tabs>
+          </PageHeader.TabBar>
+        );
+
+        // Check that only visible tags are rendered
+        expect(screen.getByText('Tag 1')).toBeInTheDocument();
+        expect(screen.getByText('Tag 2')).toBeInTheDocument();
+
+        // Check that overflow indicator is present
+        expect(screen.getByText('+1')).toBeInTheDocument();
+
+        // Check that the overflow button is not expanded (popover closed)
+        const overflowButton = screen.getByRole('button', { name: '+1' });
+        expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
+      });
+
+      it('should not show overflow tag when all items are visible', () => {
+        // Set up mock to show all items as visible
+        mockUseOverflowItems.mockReturnValue({
+          visibleItems: mockTags,
+          hiddenItems: [],
+          itemRefHandler: jest.fn(),
+        });
+
+        render(<PageHeader.TabBar tags={mockTags} />);
+
+        // All tags should be visible
+        mockTags.forEach((tag) => {
+          expect(screen.getByText(tag.text)).toBeInTheDocument();
+        });
+
+        // No overflow indicator should be present
+        expect(screen.queryByText(/^\+\d+$/)).not.toBeInTheDocument();
+      });
+
+      it('should show hidden tags in popover when overflow tag is clicked', async () => {
+        // Set up the mock to return overflow data
+        mockUseOverflowItems.mockReturnValue({
+          visibleItems: mockTags.slice(0, 2),
+          hiddenItems: mockTags.slice(2),
+          itemRefHandler: jest.fn(),
+        });
+
+        render(<PageHeader.TabBar tags={mockTags} />);
+
+        const overflowButton = screen.getByRole('button', { name: '+1' });
+
+        // Initially popover should be closed
+        expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
+
+        // Click to open popover
+        await userEvent.click(overflowButton);
+
+        // Check that popover is now open
+        await waitFor(() => {
+          expect(overflowButton).toHaveAttribute('aria-expanded', 'true');
+        });
+      });
+
+      it('should close popover when clicked outside', async () => {
+        // Set up the mock to return overflow data
+        mockUseOverflowItems.mockReturnValue({
+          visibleItems: mockTags.slice(0, 2),
+          hiddenItems: mockTags.slice(2),
+          itemRefHandler: jest.fn(),
+        });
+
+        render(<PageHeader.TabBar tags={mockTags} />);
+
+        const overflowButton = screen.getByRole('button', { name: '+1' });
+
+        // Click to open popover
+        await userEvent.click(overflowButton);
+
+        // Verify popover is open
+        await waitFor(() => {
+          expect(overflowButton).toHaveAttribute('aria-expanded', 'true');
+        });
+
+        // Click outside popover
+        await userEvent.click(document.body);
+
+        // Verify popover is closed
+        await waitFor(() => {
+          expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
+        });
+      });
+
+      it('should handle window resize by closing popover', async () => {
+        // Set up the mock to return overflow data
+        mockUseOverflowItems.mockReturnValue({
+          visibleItems: mockTags.slice(0, 2),
+          hiddenItems: mockTags.slice(2),
+          itemRefHandler: jest.fn(),
+        });
+
+        render(<PageHeader.TabBar tags={mockTags} />);
+
+        const overflowButton = screen.getByRole('button', { name: '+1' });
+
+        // Click to open popover
+        await userEvent.click(overflowButton);
+
+        // Verify popover is open
+        await waitFor(() => {
+          expect(overflowButton).toHaveAttribute('aria-expanded', 'true');
+        });
+
+        // Simulate window resize
+        act(() => {
+          window.dispatchEvent(new Event('resize'));
+        });
+
+        // Verify popover is closed after resize
+        await waitFor(() => {
+          expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
+        });
+      });
     });
   });
 });
