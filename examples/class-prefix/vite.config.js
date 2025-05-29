@@ -18,4 +18,16 @@ export default defineConfig({
       },
     },
   },
+  // resolve font paths
+  resolve: {
+    alias: [
+      {
+        find: /~@ibm\/plex\/(.*)/,
+        replacement: '@ibm/plex/$1',
+      },
+    ],
+  },
+  optimizeDeps: {
+    include: ['@carbon/react'],
+  },
 });
