@@ -17,6 +17,7 @@ import {
 } from '../PageHeader';
 import * as hooks from '../../internal/useMatchMedia';
 import { breakpoints } from '@carbon/layout';
+import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
 import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
@@ -80,6 +81,70 @@ describe('PageHeader', () => {
         <PageHeader.BreadcrumbBar className="custom-class" />
       );
       expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should render an icon', () => {
+      const { container } = render(
+        <PageHeader.BreadcrumbBar
+          renderIcon={() => {
+            return <Bee size={16} />;
+          }}
+        />
+      );
+
+      const icon = container.querySelector(
+        `.${prefix}--page-header__breadcrumb__icon`
+      );
+      expect(icon).toBeInTheDocument();
+    });
+
+    it('should render breadcrumb items', () => {
+      const { container } = render(
+        <PageHeader.BreadcrumbBar>
+          <Breadcrumb>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+      );
+
+      const breadcrumbs = container.getElementsByClassName(
+        `${prefix}--breadcrumb-item`
+      );
+
+      expect(breadcrumbs.length).toBe(2);
+    });
+
+    it('should render content actions', () => {
+      const { container } = render(
+        <PageHeader.BreadcrumbBar
+          contentActions={
+            <button className="content-action-item">Button</button>
+          }>
+          <Breadcrumb>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+      );
+
+      const elem = container.querySelector(`.content-action-item`);
+      expect(elem).toBeInTheDocument();
+    });
+
+    it('should render page actions', () => {
+      const { container } = render(
+        <PageHeader.BreadcrumbBar
+          pageActions={<button className="page-action-item">Button</button>}>
+          <Breadcrumb>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+      );
+
+      const elem = container.querySelector(`.page-action-item`);
+      expect(elem).toBeInTheDocument();
     });
   });
 

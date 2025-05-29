@@ -22,6 +22,7 @@ import { ContentSwitcher } from '../ContentSwitcher';
 import { IconSwitch } from '../Switch';
 import { Button } from '../Button';
 import { Grid, Column } from '../Grid';
+import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
@@ -41,6 +42,8 @@ import mdx from './PageHeader.mdx';
 import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 
 const BeeIcon = () => <Bee size={32} />;
+
+const BreadcrumbBeeIcon = () => <Bee size={16} />;
 
 const dropdownItems = [
   {
@@ -72,6 +75,7 @@ const dropdownItems = [
     text: 'Option 8',
   },
 ];
+
 
 const tags = [
   {
@@ -106,6 +110,38 @@ const tags = [
   },
 ];
 
+const breadcrumbPageActions = (
+  <>
+    <Button
+      renderIcon={Activity}
+      iconDescription="Icon Description 1"
+      hasIconOnly
+      size="md"
+      kind="ghost"
+    />
+    <Button
+      renderIcon={Activity}
+      iconDescription="Icon Description 2"
+      hasIconOnly
+      size="md"
+      kind="ghost"
+    />
+    <Button
+      renderIcon={Activity}
+      iconDescription="Icon Description 3"
+      hasIconOnly
+      size="md"
+      kind="ghost"
+    />
+  </>
+);
+
+const breadcrumbContentActions = (
+  <>
+    <Button size="md">Button</Button>
+  </>
+);
+
 export default {
   title: 'Patterns/unstable__PageHeader',
   component: PageHeader,
@@ -128,12 +164,44 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story) => (
+      <>
+        <style>
+          {`
+          .sb-show-main.sb-main-padded {
+            padding-left: 0;
+            padding-right: 0;
+          }
+        `}
+        </style>
+        <Story />
+      </>
+    ),
+  ],
 };
 
 export const Default = (args) => (
   <PageHeader.Root {...args}>
-    <PageHeader.BreadcrumbBar />
-    <PageHeader.Content />
+    <PageHeader.BreadcrumbBar
+      renderIcon={BreadcrumbBeeIcon}
+      contentActions={breadcrumbContentActions}
+      pageActions={breadcrumbPageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+    <PageHeader.Content
+      title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
+      {...args}>
+      <PageHeader.ContentText subtitle="Subtitle">
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </PageHeader.ContentText>
+    </PageHeader.Content>
     <PageHeader.TabBar tags={tags}>
       <PageHeader.Tabs>
         <TabList>
@@ -155,13 +223,27 @@ export const Default = (args) => (
 
 export const BreadcrumbBar = (args) => (
   <PageHeader.Root>
-    <PageHeader.BreadcrumbBar {...args} />
+    <PageHeader.BreadcrumbBar
+      renderIcon={BreadcrumbBeeIcon}
+      pageActions={breadcrumbPageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
   </PageHeader.Root>
 );
 
 export const Content = (args) => (
   <PageHeader.Root>
-    <PageHeader.BreadcrumbBar />
+    <PageHeader.BreadcrumbBar
+      renderIcon={BreadcrumbBeeIcon}
+      pageActions={breadcrumbPageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
     <PageHeader.Content
       title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
       {...args}>
@@ -177,7 +259,14 @@ export const Content = (args) => (
 
 export const ContentWithIcon = (args) => (
   <PageHeader.Root>
-    <PageHeader.BreadcrumbBar />
+    <PageHeader.BreadcrumbBar
+      renderIcon={BreadcrumbBeeIcon}
+      pageActions={breadcrumbPageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       renderIcon={BeeIcon}
@@ -194,7 +283,14 @@ export const ContentWithIcon = (args) => (
 
 export const ContentWithContextualActions = (args) => (
   <PageHeader.Root>
-    <PageHeader.BreadcrumbBar />
+    <PageHeader.BreadcrumbBar
+      renderIcon={BreadcrumbBeeIcon}
+      pageActions={breadcrumbPageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       contextualActions={
@@ -221,7 +317,16 @@ export const ContentWithHeroImage = (args) => (
       <PageHeader.Root>
         <Grid>
           <Column lg={8} md={4} sm={4}>
-            <PageHeader.BreadcrumbBar />
+            <PageHeader.BreadcrumbBar
+              border={false}
+              renderIcon={BreadcrumbBeeIcon}>
+              <Breadcrumb>
+                <BreadcrumbItem>
+                  <a href="/#">Breadcrumb 1</a>
+                </BreadcrumbItem>
+                <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+              </Breadcrumb>
+            </PageHeader.BreadcrumbBar>
             <PageHeader.Content
               title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
               {...args}>
@@ -256,41 +361,6 @@ export const ContentWithHeroImage = (args) => (
       </PageHeader.Root>
     </Column>
   </Grid>
-);
-
-ContentWithHeroImage.decorators = [
-  (Story) => (
-    <>
-      <style>
-        {`
-          .sb-show-main.sb-main-padded {
-            padding-left: 0;
-            padding-right: 0;
-          }
-        `}
-      </style>
-      <Story />
-    </>
-  ),
-];
-
-const pageActionItems = (
-  <>
-    <ContentSwitcher onChange={() => {}}>
-      <IconSwitch name="one" text="Table of Contents">
-        <TableOfContents />
-      </IconSwitch>
-      <IconSwitch name="two" text="Workspace Test">
-        <Workspace />
-      </IconSwitch>
-      <IconSwitch name="three" text="View Mode">
-        <ViewMode_2 />
-      </IconSwitch>
-    </ContentSwitcher>
-    <Button kind="primary" renderIcon={Add} size="md">
-      Primary action
-    </Button>
-  </>
 );
 
 const pageActionButtonItems = [
@@ -364,7 +434,14 @@ const pageActionButtonItems = [
 
 export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
-    <PageHeader.BreadcrumbBar />
+    <PageHeader.BreadcrumbBar
+      renderIcon={BreadcrumbBeeIcon}
+      pageActions={breadcrumbPageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       contextualActions={
@@ -443,7 +520,15 @@ export const TabBarWithTabsAndTags = (args) => (
 
 export const DirectExports = (args) => (
   <PageHeaderDirect {...args}>
-    <PageHeaderBreadcrumbBar />
+    <PageHeaderBreadcrumbBar
+      renderIcon={BreadcrumbBeeIcon}
+      contentActions={breadcrumbContentActions}
+      pageActions={breadcrumbPageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeaderBreadcrumbBar>
     <PageHeaderContent />
     <PageHeaderTabBar>
       <PageHeaderTabs>
