@@ -1,0 +1,52 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+// @use '@carbon/styles/scss/utilities' as *;
+// @use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/components/page-header/index' as *;
+// @use '@carbon/styles/scss/layout' as *;
+
+:host(#{$prefix}-page-header) {
+  // @extend .#{$prefix}--page-header;
+}
+
+:host(#{$prefix}-page-header-content) {
+  @extend .#{$prefix}--page-header__content;
+
+  .#{$prefix}--page-header__content__title {
+    margin: 0;
+  }
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--page-header__content__icon;
+  }
+
+  ::slotted([slot='contextual-actions']) {
+    @extend .#{$prefix}--page-header__content__contextual-actions;
+  }
+
+  .#{$prefix}--page-header__content__sub-title {
+    margin-bottom: 0;
+  }
+}
+
+:host(#{$prefix}-page-header-content:not([subtitle])) {
+  .#{$prefix}--page-header__content__body {
+    margin-block-start: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-page-header-content[contextual-actions]) {
+  .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
+  }
+}
