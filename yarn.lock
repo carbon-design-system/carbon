@@ -2166,7 +2166,7 @@ __metadata:
     nanoid: "npm:^5.0.0"
     npm-which: "npm:^3.0.1"
     rimraf: "npm:^6.0.0"
-    semver: "npm:^7.3.5"
+    semver: "npm:^7.7.2"
     yargs: "npm:^17.0.1"
   bin:
     carbon-upgrade: ./bin/carbon-upgrade.js
@@ -27613,7 +27613,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     rimraf: "npm:^6.0.0"
     sass: "npm:^1.77.7"
-    semver: "npm:^7.3.5"
+    semver: "npm:^7.7.2"
   languageName: unknown
   linkType: soft
 
