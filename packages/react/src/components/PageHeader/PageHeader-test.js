@@ -796,6 +796,47 @@ describe('PageHeader', () => {
           expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
         });
       });
+
+      it('should handle useOverflowItems returning null/undefined', () => {
+        // Mock the hook to return undefined/null
+        mockUseOverflowItems.mockReturnValue(null);
+
+        render(<PageHeader.TabBar tags={mockTags} />);
+
+        // Should use fallback values
+        const tagsContainer = document.querySelector('.cds--page-header__tags');
+        expect(tagsContainer).toBeInTheDocument();
+
+        // Should not render any tags (fallback to empty arrays)
+        expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+      });
+
+      it('should handle useOverflowItems returning undefined properties', () => {
+        // Mock with missing properties
+        mockUseOverflowItems.mockReturnValue({
+          visibleItems: undefined,
+          hiddenItems: undefined,
+          itemRefHandler: undefined,
+        });
+
+        render(<PageHeader.TabBar tags={mockTags} />);
+
+        // Should use fallback values from the || operator
+        const tagsContainer = document.querySelector('.cds--page-header__tags');
+        expect(tagsContainer).toBeInTheDocument();
+      });
+
+      it('should handle useOverflowItems with partial data', () => {
+        // Mock with only some properties
+        mockUseOverflowItems.mockReturnValue({
+          visibleItems: mockTags.slice(0, 1),
+          // hiddenItems and itemRefHandler missing
+        });
+
+        render(<PageHeader.TabBar tags={mockTags} />);
+
+        expect(screen.getByText('Tag 1')).toBeInTheDocument();
+      });
     });
   });
 });
