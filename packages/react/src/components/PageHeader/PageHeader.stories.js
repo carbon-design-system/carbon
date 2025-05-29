@@ -103,8 +103,11 @@ export default {
 };
 
 export const Default = (args) => (
-  <PageHeader.Root {...args}>
+  <PageHeader.Root>
     <PageHeader.BreadcrumbBar
+      border={args.border}
+      pageActionsFlush={args.pageActionsFlush}
+      contentActionsFlush={args.contentActionsFlush}
       renderIcon={BreadcrumbBeeIcon}
       contentActions={breadcrumbContentActions}
       pageActions={breadcrumbPageActions}>
@@ -113,9 +116,7 @@ export const Default = (args) => (
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
-    <PageHeader.Content
-      title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
-      {...args}>
+    <PageHeader.Content title={args.title}>
       <PageHeader.ContentText subtitle="Subtitle">
         Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
         Massa elementum class enim malesuada lacinia hendrerit enim erat
@@ -141,6 +142,44 @@ export const Default = (args) => (
     </PageHeader.TabBar>
   </PageHeader.Root>
 );
+
+Default.args = {
+  border: true,
+  pageActionsFlush: false,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+};
+
+Default.argTypes = {
+  border: {
+    description: 'Specify whether to render BreadcrumbBar border',
+    control: {
+      type: 'boolean',
+    },
+  },
+  pageActionsFlush: {
+    description:
+      'Specify whether the page actions within BreadcrumbBar should be flush',
+    control: {
+      type: 'boolean',
+    },
+  },
+  contentActionsFlush: {
+    description:
+      'Specify whether the content actions within BreadcrumbBar should be flush with the page actions',
+    control: {
+      type: 'boolean',
+    },
+  },
+  title: {
+    description:
+      'Provide the title text to be rendered within  PageHeaderContent',
+    control: {
+      type: 'text',
+    },
+  },
+};
 
 export const ContentWithIcon = (args) => (
   <PageHeader.Root>
