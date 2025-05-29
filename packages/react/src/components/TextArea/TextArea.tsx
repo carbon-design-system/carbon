@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
   forwardRef,
   useContext,
   useEffect,
@@ -25,6 +26,8 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -478,20 +481,11 @@ const TextArea = frFn((props, forwardRef) => {
   );
 
   // AILabel is always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   return (
     <div className={formItemClasses}>

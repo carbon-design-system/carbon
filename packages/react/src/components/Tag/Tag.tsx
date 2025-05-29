@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
+import React, {
+  cloneElement,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
@@ -19,10 +25,12 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
+import { SelectableTagBaseProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export const TYPES = {
   red: 'Red',
@@ -198,22 +206,12 @@ const TagBase = React.forwardRef<
     };
 
     // AILabel is always size `sm` and `inline`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
-      : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel' &&
-      !isInteractiveTag
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'sm',
-          kind: 'inline',
-        }
-      );
-    }
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator =
+      candidateIsAILabel && !isInteractiveTag
+        ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
+        : null;
 
     if (filter) {
       const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
