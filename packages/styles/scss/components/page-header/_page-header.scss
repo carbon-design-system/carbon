@@ -168,15 +168,6 @@
     block-size: 100%;
   }
 
-
-  .#{$prefix}--page-header__tab-bar {
-    padding: 0 $spacing-05;
-    border: 1px solid green; /* stylelint-disable-line */
-    
-  .#{$prefix}--page-header__tab-bar-container {
-    margin-inline-start: -$spacing-05;
-  }
-
   .#{$prefix}--page-header__tab-bar--tablist {
     display: grid;
     grid-gap: $spacing-10;

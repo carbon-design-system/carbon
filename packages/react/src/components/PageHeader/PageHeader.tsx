@@ -33,7 +33,6 @@ import { Popover, PopoverContent } from '../Popover';
 import { useId } from '../../internal/useId';
 import { Grid, Column } from '../Grid';
 
-
 /**
  * ----------
  * PageHeader
@@ -669,61 +668,56 @@ const PageHeaderTabBar = React.forwardRef<
   return (
     <>
       <div className={classNames} ref={ref} {...other}>
-        <div className={`${prefix}--page-header__tab-bar--tablist`}>
-          {tabListElement}
-          {tags && tags.length > 0 && (
-            <div
-              className={`${prefix}--page-header__tags`}
-              ref={tagsContainerRef}>
-              {/* Only render visible tags */}
-              {visibleItems.map((tag) => (
-                <Tag
-                  key={tag.id}
-                  ref={(node) => itemRefHandler(tag.id, node)}
-                  type={tag.type}
-                  size={tag.size}
-                  className={`${prefix}--page-header__tag-item`}>
-                  {tag.text}
-                </Tag>
-              ))}
+        <Grid>
+          <Column lg={16} md={8} sm={4}>
+            <div className={`${prefix}--page-header__tab-bar--tablist`}>
+              {tabListElement}
+              {tags && tags.length > 0 && (
+                <div
+                  className={`${prefix}--page-header__tags`}
+                  ref={tagsContainerRef}>
+                  {/* Only render visible tags */}
+                  {visibleItems.map((tag) => (
+                    <Tag
+                      key={tag.id}
+                      ref={(node) => itemRefHandler(tag.id, node)}
+                      type={tag.type}
+                      size={tag.size}
+                      className={`${prefix}--page-header__tag-item`}>
+                      {tag.text}
+                    </Tag>
+                  ))}
 
-              {hiddenItems.length > 0 && (
-                <Popover
-                  open={openPopover}
-                  onRequestClose={() => setOpenPopover(false)}>
-                  <OperationalTag
-                    onClick={handleOverflowClick}
-                    aria-expanded={openPopover}
-                    text={`+${hiddenItems.length}`}
-                    size={tagSize}
-                  />
-                  <PopoverContent className="tag-popover-content">
-                    <div
-                      className={`${prefix}--page-header__tags-popover-list`}>
-                      {hiddenItems.map((tag) => (
-                        <Tag key={tag.id} type={tag.type} size={tag.size}>
-                          {tag.text}
-                        </Tag>
-                      ))}
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                  {hiddenItems.length > 0 && (
+                    <Popover
+                      open={openPopover}
+                      onRequestClose={() => setOpenPopover(false)}>
+                      <OperationalTag
+                        onClick={handleOverflowClick}
+                        aria-expanded={openPopover}
+                        text={`+${hiddenItems.length}`}
+                        size={tagSize}
+                      />
+                      <PopoverContent className="tag-popover-content">
+                        <div
+                          className={`${prefix}--page-header__tags-popover-list`}>
+                          {hiddenItems.map((tag) => (
+                            <Tag key={tag.id} type={tag.type} size={tag.size}>
+                              {tag.text}
+                            </Tag>
+                          ))}
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                </div>
               )}
             </div>
-          )}
-        </div>
-        {tabPanelsElement}
+            {tabPanelsElement}
+          </Column>
+        </Grid>
       </div>
-    <div className={classNames} ref={ref} {...other}>
-      <Grid>
-        <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__tab-bar-container`}>
-            {children}
-          </div>
-        </Column>
-      </Grid>
-    </div>
-      </>
+    </>
   );
 });
 
