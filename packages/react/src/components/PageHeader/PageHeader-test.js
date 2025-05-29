@@ -226,15 +226,19 @@ describe('PageHeader', () => {
     const mockPageActions = [
       {
         id: 'action1',
-        label: 'Action 1',
         onClick: jest.fn(),
         body: <button>Visible Action</button>,
+        menuItem: {
+          label: 'Action 1',
+        },
       },
       {
         id: 'action2',
-        label: 'Action 2',
         onClick: onClickMock,
         body: <button>Hidden Action</button>,
+        menuItem: {
+          label: 'Action 2',
+        },
       },
     ];
 
