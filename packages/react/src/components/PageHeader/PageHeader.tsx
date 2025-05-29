@@ -24,6 +24,7 @@ import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
 import { createOverflowHandler } from '@carbon/utilities';
 import { Tabs as BaseTabs } from '../Tabs/Tabs';
+import { Grid, Column } from '../Grid';
 
 /**
  * ----------
@@ -45,7 +46,6 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     );
     return (
       <div className={classNames} ref={ref} {...other}>
-        <p>page header</p>
         {children}
       </div>
     );
@@ -59,27 +59,82 @@ PageHeader.displayName = 'PageHeader';
  * -----------------------
  */
 interface PageHeaderBreadcrumbBarProps {
+  border?: Boolean;
   children?: React.ReactNode;
   className?: string;
+  /**
+   * Provide an optional icon to render in front of the PageHeaderContent's title.
+   */
+  renderIcon?: ComponentType | FunctionComponent;
+  /**
+   * The PageHeaderBreadcrumbBar's content actions
+   */
+  contentActions?: React.ReactNode;
+  /**
+   * `true` to set content actions flush against page actions
+   */
+  contentActionsFlush?: Boolean;
+  /**
+   * The PageHeaderContent's page actions
+   */
+  pageActions?: React.ReactNode;
+  /**
+   * `true` to set page actions flush with page
+   */
+  pageActionsFlush?: Boolean;
 }
 const PageHeaderBreadcrumbBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderBreadcrumbBarProps
 >(function PageHeaderBreadcrumbBar(
-  { className, children, ...other }: PageHeaderBreadcrumbBarProps,
+  {
+    border = true,
+    className,
+    children,
+    renderIcon: IconElement,
+    contentActions,
+    contentActionsFlush,
+    pageActions,
+    pageActionsFlush,
+    ...other
+  }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
   const prefix = usePrefix();
   const classNames = classnames(
     {
       [`${prefix}--page-header__breadcrumb-bar`]: true,
+      [`${prefix}--page-header__breadcrumb-bar-border`]: border,
+      [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
     },
     className
   );
+
+  const contentActionsClasses = classnames({
+    [`${prefix}--page-header__breadcrumb__content-actions`]:
+      !contentActionsFlush,
+  });
+
   return (
     <div className={classNames} ref={ref} {...other}>
-      <p>page header breadcrumb bar</p>
-      {children}
+      <Grid>
+        <Column lg={16} md={8} sm={4}>
+          <div className={`${prefix}--page-header__breadcrumb-container`}>
+            <div className={`${prefix}--page-header__breadcrumb-wrapper`}>
+              {IconElement && (
+                <div className={`${prefix}--page-header__breadcrumb__icon`}>
+                  <IconElement />
+                </div>
+              )}
+              {children}
+            </div>
+            <div className={`${prefix}--page-header__breadcrumb__actions`}>
+              <div className={contentActionsClasses}>{contentActions}</div>
+              {pageActions}
+            </div>
+          </div>
+        </Column>
+      </Grid>
     </div>
   );
 });
@@ -116,6 +171,7 @@ interface PageHeaderContentProps {
    */
   pageActions?: React.ReactNode;
 }
+
 const PageHeaderContent = React.forwardRef<
   HTMLDivElement,
   PageHeaderContentProps
@@ -152,43 +208,48 @@ const PageHeaderContent = React.forwardRef<
 
   return (
     <div className={classNames} ref={ref} {...other}>
-      <div className={`${prefix}--page-header__content__title-wrapper`}>
-        <div className={`${prefix}--page-header__content__start`}>
-          <div className={`${prefix}--page-header__content__title-container`}>
-            {IconElement && (
-              <div className={`${prefix}--page-header__content__icon`}>
-                <IconElement />
-              </div>
-            )}
+      <Grid>
+        <Column lg={16} md={8} sm={4}>
+          <div className={`${prefix}--page-header__content__title-wrapper`}>
+            <div className={`${prefix}--page-header__content__start`}>
+              <div
+                className={`${prefix}--page-header__content__title-container`}>
+                {IconElement && (
+                  <div className={`${prefix}--page-header__content__icon`}>
+                    <IconElement />
+                  </div>
+                )}
 
-            {isEllipsisApplied ? (
-              <DefinitionTooltip definition={title}>
-                <Text
-                  ref={titleRef}
-                  as="h4"
-                  className={`${prefix}--page-header__content__title`}>
-                  {title}
-                </Text>
-              </DefinitionTooltip>
-            ) : (
-              <Text
-                ref={titleRef}
-                as="h4"
-                className={`${prefix}--page-header__content__title`}>
-                {title}
-              </Text>
-            )}
-          </div>
-          {contextualActions && (
-            <div
-              className={`${prefix}--page-header__content__contextual-actions`}>
-              {contextualActions}
+                {isEllipsisApplied ? (
+                  <DefinitionTooltip definition={title}>
+                    <Text
+                      ref={titleRef}
+                      as="h4"
+                      className={`${prefix}--page-header__content__title`}>
+                      {title}
+                    </Text>
+                  </DefinitionTooltip>
+                ) : (
+                  <Text
+                    ref={titleRef}
+                    as="h4"
+                    className={`${prefix}--page-header__content__title`}>
+                    {title}
+                  </Text>
+                )}
+              </div>
+              {contextualActions && (
+                <div
+                  className={`${prefix}--page-header__content__contextual-actions`}>
+                  {contextualActions}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        {pageActions}
-      </div>
-      {children}
+            {pageActions}
+          </div>
+          {children}
+        </Column>
+      </Grid>
     </div>
   );
 });
@@ -491,7 +552,13 @@ const PageHeaderTabBar = React.forwardRef<
   );
   return (
     <div className={classNames} ref={ref} {...other}>
-      {children}
+      <Grid>
+        <Column lg={16} md={8} sm={4}>
+          <div className={`${prefix}--page-header__tab-bar-container`}>
+            {children}
+          </div>
+        </Column>
+      </Grid>
     </div>
   );
 });
