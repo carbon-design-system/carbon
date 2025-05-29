@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Mock at the very top, before any imports
 jest.mock('../../internal/useOverflowItems');
 
 import { render, screen, act, waitFor } from '@testing-library/react';
@@ -25,7 +24,6 @@ import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
 import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
-// Import the mocked hook
 import useOverflowItems from '../../internal/useOverflowItems';
 const mockUseOverflowItems = useOverflowItems;
 
@@ -40,10 +38,8 @@ jest.mock('@carbon/utilities', () => ({
 }));
 
 describe('PageHeader', () => {
-  // Reset the mock before each test
   beforeEach(() => {
     mockUseOverflowItems.mockReset();
-    // Default mock implementation
     mockUseOverflowItems.mockReturnValue({
       visibleItems: [],
       hiddenItems: [],
@@ -519,7 +515,6 @@ describe('PageHeader', () => {
     ];
 
     it('should render tags when provided', () => {
-      // Set up mock for this test
       mockUseOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
@@ -542,7 +537,6 @@ describe('PageHeader', () => {
     });
 
     it('should render tags alongside tabs', () => {
-      // Set up mock for this test
       mockUseOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
@@ -572,7 +566,6 @@ describe('PageHeader', () => {
     });
 
     it('should apply correct classes to tags container', () => {
-      // Set up mock for this test
       mockUseOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
@@ -588,7 +581,6 @@ describe('PageHeader', () => {
     });
 
     it('should maintain tab focus management with tags present', async () => {
-      // Set up mock for this test
       mockUseOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
@@ -634,7 +626,6 @@ describe('PageHeader', () => {
     });
 
     it('should inject tags into TabList wrapper correctly', () => {
-      // Set up mock for this test
       mockUseOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
@@ -676,7 +667,6 @@ describe('PageHeader', () => {
 
     describe('Overflow functionality', () => {
       it('should handle overflow items correctly', () => {
-        // Set up the mock to return overflow data
         mockUseOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2), // Only Tag 1 and Tag 2
           hiddenItems: mockTags.slice(2), // Only Tag 3
@@ -709,7 +699,6 @@ describe('PageHeader', () => {
       });
 
       it('should not show overflow tag when all items are visible', () => {
-        // Set up mock to show all items as visible
         mockUseOverflowItems.mockReturnValue({
           visibleItems: mockTags,
           hiddenItems: [],
@@ -728,7 +717,6 @@ describe('PageHeader', () => {
       });
 
       it('should show hidden tags in popover when overflow tag is clicked', async () => {
-        // Set up the mock to return overflow data
         mockUseOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
@@ -752,7 +740,6 @@ describe('PageHeader', () => {
       });
 
       it('should close popover when clicked outside', async () => {
-        // Set up the mock to return overflow data
         mockUseOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
@@ -781,7 +768,6 @@ describe('PageHeader', () => {
       });
 
       it('should handle window resize by closing popover', async () => {
-        // Set up the mock to return overflow data
         mockUseOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),

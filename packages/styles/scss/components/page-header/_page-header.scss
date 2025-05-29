@@ -189,4 +189,8 @@
   .#{$prefix}--page-header__tag-item {
     flex-shrink: 0;
   }
+
+  .#{$prefix}--page-header__tab-bar .#{$prefix}--tabs {
+    margin-inline-start: -$spacing-05;
+  }
 }

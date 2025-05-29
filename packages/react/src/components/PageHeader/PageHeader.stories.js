@@ -204,16 +204,22 @@ export const Default = (args) => (
     <PageHeader.TabBar tags={tags}>
       <PageHeader.Tabs>
         <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
         </TabPanels>
       </PageHeader.Tabs>
     </PageHeader.TabBar>
@@ -471,16 +477,22 @@ export const TabBar = (args) => {
       <PageHeader.TabBar {...args}>
         <PageHeader.Tabs>
           <TabList>
-            <Tab>Dashboard</Tab>
-            <Tab>Monitoring</Tab>
-            <Tab>Activity</Tab>
-            <Tab>Settings</Tab>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
           </TabList>
           <TabPanels>
-            <TabPanel key={0}>Dashboard Tab Panel</TabPanel>
-            <TabPanel>Monitoring Tab Panel</TabPanel>
-            <TabPanel>Activity Tab Panel</TabPanel>
-            <TabPanel>Settings Tab Panel</TabPanel>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+            <TabPanel>Tab Panel 4</TabPanel>
+            <TabPanel>Tab Panel 5</TabPanel>
+            <TabPanel>Tab Panel 6</TabPanel>
+            <TabPanel>Tab Panel 7</TabPanel>
           </TabPanels>
         </PageHeader.Tabs>
       </PageHeader.TabBar>
@@ -493,16 +505,22 @@ export const TabBarWithTabsAndTags = (args) => (
     <PageHeader.TabBar tags={tags}>
       <PageHeader.Tabs>
         <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
         </TabPanels>
       </PageHeader.Tabs>
     </PageHeader.TabBar>
@@ -524,16 +542,22 @@ export const DirectExports = (args) => (
     <PageHeaderTabBar>
       <PageHeaderTabs>
         <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
         </TabPanels>
       </PageHeaderTabs>
     </PageHeaderTabBar>
