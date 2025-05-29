@@ -71,16 +71,6 @@ class CDSHeaderGlobalAction extends CDSButton {
   }
 
   private _handleFocusOut = (event: FocusEvent) => {
-    // Double-check:
-    // I use this `ownerDocument` instead of the global `document` to ensure the query
-    // works correctly even if this component is rendered inside a Shadow DOM or
-    // different document context (like an iframe).
-    //
-    // I found more info in:
-    // https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument
-    // https://lit.dev/docs/components/shadow-dom/
-    // const panel = document.querySelector(`#${this.panelId}`);
-    // const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
     const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
     const relatedTarget = event.relatedTarget as HTMLElement;
 
