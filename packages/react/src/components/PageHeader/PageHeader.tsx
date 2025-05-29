@@ -308,13 +308,13 @@ interface PageHeaderContentPageActionsProps {
   /**
    * The PageHeaderContent's page actions
    */
-  pageActions?: React.ReactNode;
+  actions?: React.ReactNode;
 }
 const PageHeaderContentPageActions = ({
   className,
   children,
   menuButtonLabel = 'Actions',
-  pageActions,
+  actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
   const prefix = usePrefix();
@@ -325,7 +325,7 @@ const PageHeaderContentPageActions = ({
     className
   );
 
-  type pageAction = {
+  type action = {
     id: string;
     onClick?: () => void;
     body: React.ReactNode;
@@ -335,7 +335,7 @@ const PageHeaderContentPageActions = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef<HTMLDivElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
-  const [hiddenItems, setHiddenItems] = useState<pageAction[]>([]);
+  const [hiddenItems, setHiddenItems] = useState<action[]>([]);
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
@@ -350,13 +350,13 @@ const PageHeaderContentPageActions = ({
   }, [menuButtonVisibility]);
 
   useEffect(() => {
-    if (!containerRef.current || !Array.isArray(pageActions)) return;
+    if (!containerRef.current || !Array.isArray(actions)) return;
     createOverflowHandler({
       container: containerRef.current,
       // exclude the hidden menu button from children
       maxVisibleItems: containerRef.current.children.length - 1,
       onChange: (visible, hidden) => {
-        setHiddenItems(pageActions?.slice(visible.length));
+        setHiddenItems(actions?.slice(visible.length));
 
         if (hidden.length > 0) {
           setMenuButtonVisibility(true);
@@ -367,11 +367,11 @@ const PageHeaderContentPageActions = ({
 
   return (
     <div className={classNames} ref={containerRef} {...other}>
-      {pageActions && (
+      {actions && (
         <>
-          {Array.isArray(pageActions) && (
+          {Array.isArray(actions) && (
             <>
-              {pageActions.map((action) => (
+              {actions.map((action) => (
                 <div key={action.id}>
                   {React.cloneElement(action.body, {
                     ...action.body.props,
@@ -418,7 +418,7 @@ PageHeaderContentPageActions.propTypes = {
   /**
    * The PageHeaderContent's page actions
    */
-  pageActions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  actions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
 };
 
 /**
