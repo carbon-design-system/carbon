@@ -229,7 +229,7 @@ export const ContentWithContextualActions = (args) => (
       contextualActions={
         <>
           <Tag className="tag" type="blue" size="lg">
-            Moop
+            Tag
           </Tag>
         </>
       }
@@ -387,7 +387,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       contextualActions={
         <>
           <Tag className="tag" type="blue" size="lg">
-            Moop
+            Tag
           </Tag>
         </>
       }

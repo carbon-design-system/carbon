@@ -61,15 +61,18 @@ const contentActions = (
 )
 
 return (
-  <PageHeader.BreadcrumbBar
-    renderIcon={BeeIcon}
-    contentActions={contentActions}
-    pageActions={pageActions}>
-    <Breadcrumb>
-      <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    </Breadcrumb>
-  </PageHeader.BreadcrumbBar>
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      renderIcon={BeeIcon}
+      contentActions={contentActions}
+      pageActions={pageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+    ...
+  </PageHeader.Root>
 )
 ```
 
@@ -91,7 +94,7 @@ to show an icon adjacent to the title. Child components such as `PageHeader.Cont
 To support use cases such as tags, `contextualActions` can be passed as a prop to render components beside the content.
 `pageActions` allows integration of action buttons aligned with the content section.
 
-The `PageHeader.ContentPageActions` component provides responsive behavior by collapsing actions into a `MenuButto`n when the viewport
+The `PageHeader.ContentPageActions` component provides responsive behavior by collapsing actions into a `MenuButton` when the viewport
 width is reduced. To enable this functionality, it expects an array of action objects with a specific API shape, as demonstrated below:
 
 ```jsx
@@ -120,7 +123,9 @@ const actionItems = [
 ];
 
 return (
-   <PageHeader.Content
+  <PageHeader.Root>
+   ...
+    <PageHeader.Content
       title="Title text"
       contextualActions={
         <>
@@ -140,6 +145,7 @@ return (
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
       </PageHeader.ContentText>
     </PageHeader.Content>
+  </PageHeader.Root>
 )
 ```
 
@@ -197,6 +203,32 @@ return (
 ```
 
 ## PageHeader.TabsBar
+
+To render the Tabs zone simply utilitize the `PageHeader.TabBar` and `PageHeader.Tabs` components, passing in
+the `Tab` components as children.
+
+
+```jsx
+  <PageHeader.Root>
+    ...
+    <PageHeader.TabBar>
+      <PageHeader.Tabs>
+        <TabList>
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Settings</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Dashboard Tab Panel</TabPanel>
+          <TabPanel>Monitoring Tab Panel</TabPanel>
+          <TabPanel>Activity Tab Panel</TabPanel>
+          <TabPanel>Settings Tab Panel</TabPanel>
+        </TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+```
 
 
 ## Component API
