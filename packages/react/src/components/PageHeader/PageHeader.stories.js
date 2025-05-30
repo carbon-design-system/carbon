@@ -398,7 +398,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       pageActions={
         <PageHeader.ContentPageActions
           menuButtonLabel="Actions"
-          pageActions={pageActionButtonItems}></PageHeader.ContentPageActions>
+          actions={pageActionButtonItems}></PageHeader.ContentPageActions>
       }
       {...args}>
       <PageHeader.ContentText subtitle="Subtitle">
@@ -408,54 +408,4 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       </PageHeader.ContentText>
     </PageHeader.Content>
   </PageHeader.Root>
-);
-
-export const DirectExports = (args) => (
-  <PageHeaderDirect {...args}>
-    <PageHeaderBreadcrumbBar
-      renderIcon={BreadcrumbBeeIcon}
-      pageActions={breadcrumbPageActions}>
-      <Breadcrumb>
-        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </Breadcrumb>
-    </PageHeaderBreadcrumbBar>
-    <PageHeaderContent
-      title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      contextualActions={
-        <>
-          <Tag className="tag" type="blue" size="lg">
-            Moop
-          </Tag>
-        </>
-      }
-      pageActions={
-        <PageHeaderContentPageActions
-          menuButtonLabel="Actions"
-          pageActions={pageActionButtonItems}></PageHeaderContentPageActions>
-      }
-      {...args}>
-      <PageHeaderContentText subtitle="Subtitle">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
-      </PageHeaderContentText>
-    </PageHeaderContent>
-    <PageHeaderTabBar>
-      <PageHeaderTabs>
-        <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
-        </TabPanels>
-      </PageHeaderTabs>
-    </PageHeaderTabBar>
-  </PageHeaderDirect>
 );
