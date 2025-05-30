@@ -12,6 +12,7 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { SliderSkeleton } from '.';
 import Slider from './Slider';
 import mdx from './Slider.mdx';
+import Checkbox from '../Checkbox';
 
 export default {
   title: 'Components/Slider',
@@ -172,6 +173,33 @@ Default.args = {
   unstable_valueUpper: undefined,
   warn: false,
   warnText: 'Warning message goes here',
+};
+
+export const Test = () => {
+  const [showSlider, setShowSlider] = useState(false);
+  const [sliderValue, setSliderValue] = useState(50);
+  return (
+    <>
+      <Checkbox
+        labelText="Show Slider"
+        id="showSlider"
+        checked={showSlider}
+        onChange={(checked) => setShowSlider(!showSlider)}
+      />
+      {showSlider
+        ? showSlider && (
+            <Slider
+              min={0}
+              max={100}
+              step={5}
+              labelText={`Slider (must be an increment of 5`}
+              value={sliderValue}
+              onChange={(e) => setSliderValue(e.value)}
+            />
+          )
+        : null}
+    </>
+  );
 };
 
 export const SliderWithHiddenInputs = () => {
