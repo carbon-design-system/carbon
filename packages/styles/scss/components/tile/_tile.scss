@@ -18,7 +18,6 @@
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
-@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
 
@@ -214,13 +213,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       @media screen and (prefers-reduced-motion: reduce) {
         transition: none;
       }
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        fill: ButtonText;
-      }
     }
   }
 
@@ -342,13 +334,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--tile-content {
@@ -631,12 +616,5 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator-rounded .#{$prefix}--tile__chevron,
   .#{$prefix}--tile--slug-rounded .#{$prefix}--tile__chevron {
     border-end-end-radius: $spacing-03;
-  }
-
-  // Windows HCM fix
-  .#{$prefix}--tile__chevron svg,
-  .#{$prefix}--tile__checkmark svg,
-  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
-    @include high-contrast-mode('icon-fill');
   }
 }
