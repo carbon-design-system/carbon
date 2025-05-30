@@ -565,6 +565,10 @@ describe('Single date picker', () => {
     // close on pressing SHIFT+TAB from date input
     await userEvent.tab();
     expect(dateInput).toHaveFocus();
+    await userEvent.tab();
+    expect(document.activeElement).toHaveClass(`flatpickr-day`);
+    await userEvent.tab({ shift: true });
+    expect(dateInput).toHaveFocus();
     await userEvent.tab({ shift: true });
     expect(document.body).toHaveFocus();
     expect(onClose).toHaveBeenCalledTimes(2);
@@ -837,6 +841,10 @@ describe('Range date picker', () => {
 
     // close on pressing SHIFT+TAB from start date input
     await userEvent.tab();
+    expect(startInput).toHaveFocus();
+    await userEvent.tab();
+    expect(document.activeElement).toHaveClass(`flatpickr-day`);
+    await userEvent.tab({ shift: true });
     expect(startInput).toHaveFocus();
     await userEvent.tab({ shift: true });
     expect(document.body).toHaveFocus();
