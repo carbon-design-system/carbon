@@ -23,12 +23,12 @@
     "provenance": true
   },
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/generator": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/template": "^7.24.7",
-    "@babel/types": "^7.24.7",
+    "@babel/core": "^7.27.3",
+    "@babel/generator": "^7.27.3",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/template": "^7.27.2",
+    "@babel/types": "^7.27.3",
     "@carbon/cli-reporter": "^10.7.0",
     "@carbon/icon-helpers": "^10.59.0",
     "@hapi/joi": "^17.1.1",
