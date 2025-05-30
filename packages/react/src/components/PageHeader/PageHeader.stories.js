@@ -38,6 +38,8 @@ export default {
     PageHeaderHeroImage,
     PageHeaderTabBar,
     PageHeaderTabs,
+    PageHeaderContentText,
+    PageHeaderContentPageActions,
   },
   argTypes: {
     children: {
