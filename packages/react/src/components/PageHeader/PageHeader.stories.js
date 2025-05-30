@@ -76,6 +76,39 @@ const dropdownItems = [
   },
 ];
 
+const tags = [
+  {
+    type: 'blue',
+    text: 'Tag 1',
+    size: 'md',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 2',
+    size: 'md',
+  },
+  {
+    type: 'red',
+    text: 'Tag 3',
+    size: 'md',
+  },
+  {
+    type: 'blue',
+    text: 'Tag 4',
+    size: 'md',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 5',
+    size: 'md',
+  },
+  {
+    type: 'red',
+    text: 'Tag 6',
+    size: 'md',
+  },
+];
+
 const breadcrumbPageActions = (
   <>
     <Button
@@ -119,7 +152,7 @@ export default {
     PageHeaderTabs,
   },
   // uncomment includeStories before merging so the stories aren't visible in prod
-  includeStories: [],
+  // includeStories: [],
   argTypes: {
     children: {
       control: false, // ReactNode props don't work in the controls pane
@@ -168,19 +201,25 @@ export const Default = (args) => (
         Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
       </PageHeader.ContentText>
     </PageHeader.Content>
-    <PageHeader.TabBar>
+    <PageHeader.TabBar tags={tags}>
       <PageHeader.Tabs>
         <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
         </TabPanels>
       </PageHeader.Tabs>
     </PageHeader.TabBar>
@@ -451,22 +490,55 @@ export const TabBar = (args) => {
       <PageHeader.TabBar {...args}>
         <PageHeader.Tabs>
           <TabList>
-            <Tab>Dashboard</Tab>
-            <Tab>Monitoring</Tab>
-            <Tab>Activity</Tab>
-            <Tab>Settings</Tab>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
           </TabList>
           <TabPanels>
-            <TabPanel key={0}>Dashboard Tab Panel</TabPanel>
-            <TabPanel>Monitoring Tab Panel</TabPanel>
-            <TabPanel>Activity Tab Panel</TabPanel>
-            <TabPanel>Settings Tab Panel</TabPanel>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+            <TabPanel>Tab Panel 4</TabPanel>
+            <TabPanel>Tab Panel 5</TabPanel>
+            <TabPanel>Tab Panel 6</TabPanel>
+            <TabPanel>Tab Panel 7</TabPanel>
           </TabPanels>
         </PageHeader.Tabs>
       </PageHeader.TabBar>
     </PageHeader.Root>
   );
 };
+
+export const TabBarWithTabsAndTags = (args) => (
+  <PageHeader.Root {...args}>
+    <PageHeader.TabBar tags={tags}>
+      <PageHeader.Tabs>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
+        </TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+);
 
 export const DirectExports = (args) => (
   <PageHeaderDirect {...args}>
@@ -483,16 +555,22 @@ export const DirectExports = (args) => (
     <PageHeaderTabBar>
       <PageHeaderTabs>
         <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
         </TabPanels>
       </PageHeaderTabs>
     </PageHeaderTabBar>
