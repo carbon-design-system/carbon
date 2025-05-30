@@ -14,9 +14,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
+- [Overview](#overview)
+- [PageHeader.BreadcrumbBar](#pageheaderbreadcrumbbar)
+- [PageHeader.Content](#pageheadercontent)
+  - [PageHeader.Content with hero image](#pageheadercontent-with-hero-image)
+- [PageHeader.TabsBar](#pageheadertabsbar)
+
 ## Overview
 
-The page header is a large family of components.
+The `PageHeader` is a large family of components, composed of three zones; the Breadcrumb, Content, and Tabs.
 
 <Canvas
   of={PageHeaderStories.Default}
@@ -27,6 +33,200 @@ The page header is a large family of components.
     },
   ]}
 />
+
+## PageHeader.BreadcrumbBar
+
+The `PageHeader.BreadcrumbBar` component is used to render the breadcrumb navigation area within the `PageHeader`.
+It accepts `Breadcrumb` and `BreadcrumbItem` components as children to define the breadcrumb trail. Additionally, it accepts
+`contentActions` and` pageActions` props, allowing for actions, such as `Button` or `IconButton` — alongside
+the breadcrumb content.
+
+```jsx
+import { Bee, Activity } from '@carbon/icons-react';
+
+const BeeIcon = () => <Bee size={16} />;
+
+const pageActions = (
+  <Button
+    renderIcon={Activity}
+    iconDescription="Icon Description 1"
+    hasIconOnly
+    size="md"
+    kind="ghost"
+  />
+);
+
+const contentActions = (
+  <Button size="md">Button</Button>
+)
+
+return (
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      renderIcon={BeeIcon}
+      contentActions={contentActions}
+      pageActions={pageActions}>
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+    ...
+  </PageHeader.Root>
+)
+```
+
+## PageHeader.Content
+
+<Canvas
+  of={PageHeaderStories.ContentWithContextualActionsAndPageActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PageHeaderStories.ContentWithContextualActionsAndPageActions),
+    },
+  ]}
+/>
+
+The `PageHeader.Content` component defines the primary content area of the `PageHeader`, including the title, subtitle, and
+any supporting text or contextual actions. It accepts a `title` prop to display the main heading and can optionally include a `renderIcon` prop
+to show an icon adjacent to the title. Child components such as `PageHeader.ContentText` can be used to provide additional descriptive text.
+To support use cases such as tags, `contextualActions` can be passed as a prop to render components beside the content.
+`pageActions` allows integration of action buttons aligned with the content section.
+
+The `PageHeader.ContentPageActions` component provides responsive behavior by collapsing actions into a `MenuButton` when the viewport
+width is reduced. To enable this functionality, it expects an array of action objects with a specific API shape, as demonstrated below:
+
+```jsx
+
+const actionItems = [
+  {
+    // props used for both collapse menu item and non-collapsed action form
+    id: 'action1',
+    onClick: () => console.log(`Action 1`),
+    // component to render when non-collapsed
+    body: (
+      <Button
+        renderIcon={AiGenerate}
+        iconDescription="Icon Description 1"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+    // props to pass to the corresponding collapsed menu item
+    menuItem: {
+      label: 'action 1',
+    },
+  },
+  ...
+];
+
+return (
+  <PageHeader.Root>
+   ...
+    <PageHeader.Content
+      title="Title text"
+      contextualActions={
+        <>
+          <Tag className="tag" type="blue" size="lg">
+            Moop
+          </Tag>
+        </>
+      }
+      pageActions={
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          actions={actionItems}></PageHeader.ContentPageActions>
+      }>
+      <PageHeader.ContentText subtitle="Subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+      </PageHeader.ContentText>
+    </PageHeader.Content>
+  </PageHeader.Root>
+)
+```
+
+## PageHeader.Content With Hero Image
+
+<Canvas
+  of={PageHeaderStories.ContentWithHeroImage}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PageHeaderStories.ContentWithHeroImage),
+    },
+  ]}
+/>
+
+When including a hero image within the `PageHeader`, the `Grid` and `Column` components will need to be utilized in order
+to define the layout correctly.
+
+```jsx
+import { Grid, Column } from '@carbon/react';
+
+return (
+  <PageHeader.Root>
+    <Grid>
+      <Column lg={8} md={4} sm={4}>
+        <PageHeader.BreadcrumbBar ... />
+        <PageHeader.Content ... />
+      </Column>
+      <Column lg={8} md={4} sm={0}>
+        <PageHeader.HeroImage>
+          <picture>
+            <source
+              srcset={image1}
+              media={`(min-width: ${breakpoints.lg.width})`}
+            />
+            <source
+              srcset={image2}
+              media={`(max-width: ${breakpoints.lg.width})`}
+            />
+            <img
+              src={image1}
+              alt="a default image"
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+          </picture>
+        </PageHeader.HeroImage>
+      </Column>
+    </Grid>
+  </PageHeader.Root>
+)
+
+```
+
+## PageHeader.TabsBar
+
+To render the Tabs zone simply utilitize the `PageHeader.TabBar` and `PageHeader.Tabs` components, passing in
+the `Tab` components as children.
+
+
+```jsx
+  <PageHeader.Root>
+    ...
+    <PageHeader.TabBar>
+      <PageHeader.Tabs>
+        <TabList>
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Settings</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Dashboard Tab Panel</TabPanel>
+          <TabPanel>Monitoring Tab Panel</TabPanel>
+          <TabPanel>Activity Tab Panel</TabPanel>
+          <TabPanel>Settings Tab Panel</TabPanel>
+        </TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+```
+
 
 ## Component API
 

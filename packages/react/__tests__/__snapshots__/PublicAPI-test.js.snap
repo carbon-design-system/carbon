@@ -11609,16 +11609,7 @@ Map {
     "ContentPageActions": Object {
       "displayName": "PageHeaderContentPageActions",
       "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "className": Object {
-          "type": "string",
-        },
-        "menuButtonLabel": Object {
-          "type": "string",
-        },
-        "pageActions": Object {
+        "actions": Object {
           "args": Array [
             Array [
               Object {
@@ -11630,6 +11621,15 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
         },
       },
     },
@@ -11707,16 +11707,7 @@ Map {
     "PageHeaderContentPageActions": Object {
       "displayName": "PageHeaderContentPageActions",
       "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "className": Object {
-          "type": "string",
-        },
-        "menuButtonLabel": Object {
-          "type": "string",
-        },
-        "pageActions": Object {
+        "actions": Object {
           "args": Array [
             Array [
               Object {
@@ -11728,6 +11719,15 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
         },
       },
     },
