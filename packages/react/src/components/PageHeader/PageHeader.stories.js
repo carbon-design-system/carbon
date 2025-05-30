@@ -245,55 +245,49 @@ export const ContentWithContextualActions = (args) => (
 );
 
 export const ContentWithHeroImage = (args) => (
-  <Grid>
-    <Column lg={16} md={8} sm={4}>
-      <PageHeader.Root>
-        <Grid>
-          <Column lg={8} md={4} sm={4}>
-            <PageHeader.BreadcrumbBar
-              border={false}
-              renderIcon={BreadcrumbBeeIcon}>
-              <Breadcrumb>
-                <BreadcrumbItem>
-                  <a href="/#">Breadcrumb 1</a>
-                </BreadcrumbItem>
-                <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-              </Breadcrumb>
-            </PageHeader.BreadcrumbBar>
-            <PageHeader.Content
-              title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-              {...args}>
-              <PageHeader.ContentText subtitle="Subtitle">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex.
-              </PageHeader.ContentText>
-            </PageHeader.Content>
-          </Column>
-          <Column lg={8} md={4} sm={0}>
-            <PageHeader.HeroImage>
-              <picture>
-                <source
-                  srcset={image1}
-                  media={`(min-width: ${breakpoints.lg.width})`}
-                />
-                <source
-                  srcset={image2}
-                  media={`(max-width: ${breakpoints.lg.width})`}
-                />
-                <img
-                  src={image1}
-                  alt="a default image"
-                  style={{ maxWidth: '100%', height: 'auto' }}
-                />
-              </picture>
-            </PageHeader.HeroImage>
-          </Column>
-        </Grid>
-      </PageHeader.Root>
-    </Column>
-  </Grid>
+  <PageHeader.Root withHeroImage>
+    <Grid>
+      <Column lg={8} md={4} sm={4}>
+        <PageHeader.BreadcrumbBar border={false} renderIcon={BreadcrumbBeeIcon}>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <a href="/#">Breadcrumb 1</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+        <PageHeader.Content
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          {...args}>
+          <PageHeader.ContentText subtitle="Subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex.
+          </PageHeader.ContentText>
+        </PageHeader.Content>
+      </Column>
+      <Column lg={8} md={4} sm={0}>
+        <PageHeader.HeroImage>
+          <picture>
+            <source
+              srcset={image1}
+              media={`(min-width: ${breakpoints.lg.width})`}
+            />
+            <source
+              srcset={image2}
+              media={`(max-width: ${breakpoints.lg.width})`}
+            />
+            <img
+              src={image1}
+              alt="a default image"
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+          </picture>
+        </PageHeader.HeroImage>
+      </Column>
+    </Grid>
+  </PageHeader.Root>
 );
 
 const pageActionButtonItems = [

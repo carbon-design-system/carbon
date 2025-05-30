@@ -17,14 +17,26 @@
 /// @access public
 /// @group page-header
 @mixin page-header {
+  .#{$prefix}--page-header__breadcrumb-bar,
+  .#{$prefix}--page-header__content,
+  .#{$prefix}--page-header__tablist-wrapper,
+  .#{$prefix}--page-header-with-hero-image {
+    background-color: $layer-01;
+  }
+
   .#{$prefix}--page-header__breadcrumb-bar {
     block-size: convert.to-rem(40px);
+  }
+
+  .#{$prefix}--page-header__breadcrumb-bar .#{$prefix}--subgrid {
+    block-size: 100%;
   }
 
   .#{$prefix}--page-header__breadcrumb-container {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
+    block-size: 100%;
     inline-size: 100%;
   }
 
@@ -39,7 +51,7 @@
   }
 
   .#{$prefix}--page-header__breadcrumb-bar-border {
-    border-block-end: 1px solid $border-subtle-01;
+    border-block-end: 1px solid $border-subtle-00;
   }
 
   .#{$prefix}--page-header__breadcrumb__icon {
@@ -59,7 +71,7 @@
   }
 
   .#{$prefix}--page-header__content {
-    margin: $spacing-06 0;
+    padding: $spacing-06 0;
   }
 
   .#{$prefix}--page-header__content__title-wrapper {
@@ -168,7 +180,11 @@
     block-size: 100%;
   }
 
-  .#{$prefix}--page-header__tab-bar-container {
+  .#{$prefix}--page-header__tablist-wrapper {
+    border-block-end: 1px solid $border-subtle-00;
+  }
+
+  .#{$prefix}--page-header__tab-bar .#{$prefix}--tabs {
     margin-inline-start: -$spacing-05;
   }
 }

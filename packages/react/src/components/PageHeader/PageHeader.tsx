@@ -35,13 +35,21 @@ import { Grid, Column } from '../Grid';
 interface PageHeaderProps {
   children?: React.ReactNode;
   className?: string;
+  /**
+   * Specify if using Hero Image layout.
+   */
+  withHeroImage?: Boolean;
 }
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
-  function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
+  function PageHeader(
+    { className, children, withHeroImage, ...other }: PageHeaderProps,
+    ref
+  ) {
     const prefix = usePrefix();
     const classNames = classnames(
       {
         [`${prefix}--page-header`]: true,
+        [`${prefix}--page-header-with-hero-image`]: withHeroImage,
       },
       className
     );
@@ -60,6 +68,9 @@ PageHeader.displayName = 'PageHeader';
  * -----------------------
  */
 interface PageHeaderBreadcrumbBarProps {
+  /**
+   * `true` by default to render BreadcrumbBar bottom border.
+   */
   border?: Boolean;
   children?: React.ReactNode;
   className?: string;
@@ -556,13 +567,7 @@ const PageHeaderTabBar = React.forwardRef<
   );
   return (
     <div className={classNames} ref={ref} {...other}>
-      <Grid>
-        <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__tab-bar-container`}>
-            {children}
-          </div>
-        </Column>
-      </Grid>
+      {children}
     </div>
   );
 });
@@ -578,7 +583,39 @@ const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
     { className, children, ...other }: PageHeaderTabsProps,
     ref
   ) {
-    return <BaseTabs {...other}>{children}</BaseTabs>;
+    const prefix = usePrefix();
+
+    const childrenArray = React.Children.toArray(children);
+    let tabListElement: React.ReactNode = null;
+    const otherChildren: React.ReactNode[] = [];
+
+    // extract the TabList component so we can wrap a needed div around for
+    // layout purposes
+    childrenArray.forEach((child: any) => {
+      if (
+        child?.type?.displayName === 'TabList' ||
+        child?.type?.name === 'TabList'
+      ) {
+        tabListElement = child;
+      } else {
+        otherChildren.push(child);
+      }
+    });
+
+    return (
+      <BaseTabs {...other}>
+        {tabListElement && (
+          <div className={`${prefix}--page-header__tablist-wrapper`}>
+            <Grid>
+              <Column lg={16} md={8} sm={4}>
+                {tabListElement}
+              </Column>
+            </Grid>
+          </div>
+        )}
+        {otherChildren}
+      </BaseTabs>
+    );
   }
 );
 PageHeaderTabs.displayName = 'PageHeaderTabs';

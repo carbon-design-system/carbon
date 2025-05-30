@@ -155,43 +155,43 @@ return (
   ]}
 />
 
-When including a hero image within the `PageHeader`, the `Grid` and `Column` components will need to be utilized in order
+When including a hero image within the `PageHeader`:
+
+1. The `Grid` and `Column` components will need to be utilized in order
 to define the layout correctly.
+2. The `withHeroImage` prop needs to be passed in to the `PageHeader.Root`
 
 ```jsx
 import { Grid, Column } from '@carbon/react';
 
 return (
-  <Grid>
-    <Column lg={16} md={8} sm={4}>
-      <PageHeader.Root>
-        <Grid>
-          <Column lg={8} md={4} sm={4}>
-            <PageHeader.Content .... />
-          </Column>
-          <Column lg={8} md={4} sm={0}>
-            <PageHeader.HeroImage>
-              <picture>
-                <source
-                  srcset={image1}
-                  media={`(min-width: ${breakpoints.lg.width})`}
-                />
-                <source
-                  srcset={image2}
-                  media={`(max-width: ${breakpoints.lg.width})`}
-                />
-                <img
-                  src={image1}
-                  alt="a default image"
-                  style={{ maxWidth: '100%', height: 'auto' }}
-                />
-              </picture>
-            </PageHeader.HeroImage>
-          </Column>
-        </Grid>
-      </PageHeader.Root>
-    </Column>
-  </Grid>
+  <PageHeader.Root withHeroImage>
+    <Grid>
+      <Column lg={8} md={4} sm={4}>
+        <PageHeader.BreadcrumbBar ... />
+        <PageHeader.Content ... />
+      </Column>
+      <Column lg={8} md={4} sm={0}>
+        <PageHeader.HeroImage>
+          <picture>
+            <source
+              srcset={image1}
+              media={`(min-width: ${breakpoints.lg.width})`}
+            />
+            <source
+              srcset={image2}
+              media={`(max-width: ${breakpoints.lg.width})`}
+            />
+            <img
+              src={image1}
+              alt="a default image"
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+          </picture>
+        </PageHeader.HeroImage>
+      </Column>
+    </Grid>
+  </PageHeader.Root>
 )
 
 ```
