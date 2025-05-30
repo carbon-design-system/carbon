@@ -7,7 +7,9 @@
 
 @use '../../config' as *;
 @use '../../breakpoint' as *;
+@use '../../colors' as *;
 @use '../../spacing' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert';
 
@@ -15,15 +17,49 @@
 /// @access public
 /// @group page-header
 @mixin page-header {
-  .#{$prefix}--page-header {
-    border: 1px solid rebeccapurple; /* stylelint-disable-line */
-  }
   .#{$prefix}--page-header__breadcrumb-bar {
-    border: 1px solid blue; /* stylelint-disable-line */
+    block-size: convert.to-rem(40px);
   }
+
+  .#{$prefix}--page-header__breadcrumb-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__actions-flush {
+    .#{$prefix}--css-grid {
+      padding-inline-end: 0;
+    }
+
+    .#{$prefix}--css-grid-column {
+      margin-inline-end: 0;
+    }
+  }
+
+  .#{$prefix}--page-header__breadcrumb-bar-border {
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__icon {
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__actions {
+    display: inline-flex;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__content-actions {
+    margin-inline-end: $spacing-04;
+  }
+
+  .#{$prefix}--page-header__breadcrumb-wrapper {
+    display: inline-flex;
+  }
+
   .#{$prefix}--page-header__content {
     margin: $spacing-06 0;
-    border: 1px solid red; /* stylelint-disable-line */
   }
 
   .#{$prefix}--page-header__content__title-wrapper {
@@ -132,9 +168,7 @@
     block-size: 100%;
   }
 
-  .#{$prefix}--page-header__tab-bar {
-    display: grid;
-    padding: 0 $spacing-05;
-    border: 1px solid green; /* stylelint-disable-line */
+  .#{$prefix}--page-header__tab-bar-container {
+    margin-inline-start: -$spacing-05;
   }
 }
