@@ -502,7 +502,6 @@
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
       .#{$prefix}--tabs__nav-link {
       border-block-end: 0;
-      padding-inline: layout.density('padding-inline');
     }
 
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
