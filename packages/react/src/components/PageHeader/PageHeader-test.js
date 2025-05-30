@@ -245,7 +245,7 @@ describe('PageHeader', () => {
     it('should not show MenuButton when there are no hidden elements', async () => {
       // Render the component with the mock page actions
       const { container } = render(
-        <PageHeader.ContentPageActions pageActions={mockPageActions} />
+        <PageHeader.ContentPageActions actions={mockPageActions} />
       );
 
       act(() => {
@@ -267,7 +267,7 @@ describe('PageHeader', () => {
     });
 
     it('should render MenuButton with hidden actions when overflow occurs', async () => {
-      render(<PageHeader.ContentPageActions pageActions={mockPageActions} />);
+      render(<PageHeader.ContentPageActions actions={mockPageActions} />);
 
       act(() => {
         mockOverflowOnChange(
@@ -297,7 +297,7 @@ describe('PageHeader', () => {
       const { container } = render(
         <PageHeader.ContentPageActions
           className="custom-class"
-          pageActions={mockPageActions}
+          actions={mockPageActions}
         />
       );
       expect(container.firstChild).toHaveClass('custom-class');
@@ -306,7 +306,7 @@ describe('PageHeader', () => {
     it('should use a custom menuButtonLabel if provided', () => {
       render(
         <PageHeader.ContentPageActions
-          pageActions={mockPageActions}
+          actions={mockPageActions}
           menuButtonLabel="Options"
         />
       );
@@ -314,7 +314,7 @@ describe('PageHeader', () => {
     });
 
     it('should call onClick of hidden action when MenuItem is clicked', async () => {
-      render(<PageHeader.ContentPageActions pageActions={mockPageActions} />);
+      render(<PageHeader.ContentPageActions actions={mockPageActions} />);
 
       act(() => {
         mockOverflowOnChange(

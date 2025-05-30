@@ -29,6 +29,44 @@ import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
 import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 
+export default {
+  title: 'Patterns/unstable__PageHeader',
+  component: PageHeader,
+  subcomponents: {
+    PageHeaderBreadcrumbBar,
+    PageHeaderContent,
+    PageHeaderHeroImage,
+    PageHeaderTabBar,
+    PageHeaderTabs,
+  },
+  argTypes: {
+    children: {
+      control: false, // ReactNode props don't work in the controls pane
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  decorators: [
+    (Story) => (
+      <>
+        <style>
+          {`
+          .sb-show-main.sb-main-padded {
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0;
+          }
+        `}
+        </style>
+        <Story />
+      </>
+    ),
+  ],
+};
+
 const BeeIcon = () => <Bee size={32} />;
 
 const BreadcrumbBeeIcon = () => <Bee size={16} />;
@@ -65,50 +103,13 @@ const breadcrumbContentActions = (
   </>
 );
 
-export default {
-  title: 'Patterns/unstable__PageHeader',
-  component: PageHeader,
-  subcomponents: {
-    PageHeaderBreadcrumbBar,
-    PageHeaderContent,
-    PageHeaderHeroImage,
-    PageHeaderTabBar,
-    PageHeaderTabs,
-  },
-  argTypes: {
-    children: {
-      control: false, // ReactNode props don't work in the controls pane
-    },
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  decorators: [
-    (Story) => (
-      <>
-        <style>
-          {`
-          .sb-show-main.sb-main-padded {
-            padding-left: 0;
-            padding-right: 0;
-          }
-        `}
-        </style>
-        <Story />
-      </>
-    ),
-  ],
-};
-
 export const Default = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
       border={args.border}
       pageActionsFlush={args.pageActionsFlush}
       contentActionsFlush={args.contentActionsFlush}
-      renderIcon={BreadcrumbBeeIcon}
+      renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
       contentActions={breadcrumbContentActions}
       pageActions={breadcrumbPageActions}>
       <Breadcrumb>
@@ -149,6 +150,7 @@ Default.args = {
   contentActionsFlush: false,
   title:
     'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
 };
 
 Default.argTypes = {
@@ -179,13 +181,18 @@ Default.argTypes = {
       type: 'text',
     },
   },
+  renderBreadcrumbIcon: {
+    description:
+      'Specify whether to render the BreadcrumbBar icon (storybook control only)',
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 export const ContentWithIcon = (args) => (
   <PageHeader.Root>
-    <PageHeader.BreadcrumbBar
-      renderIcon={BreadcrumbBeeIcon}
-      pageActions={breadcrumbPageActions}>
+    <PageHeader.BreadcrumbBar pageActions={breadcrumbPageActions}>
       <Breadcrumb>
         <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>

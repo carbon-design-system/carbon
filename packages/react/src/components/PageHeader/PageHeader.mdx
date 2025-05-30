@@ -116,22 +116,7 @@ const actionItems = [
       label: 'action 1',
     },
   },
-  {
-    id: 'action2',
-    onClick: () => console.log(`Action 2`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 2"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 2',
-    },
-  }
+  ...
 ];
 
 return (
@@ -182,16 +167,7 @@ return (
       <PageHeader.Root>
         <Grid>
           <Column lg={8} md={4} sm={4}>
-            <PageHeader.Content
-              title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-              {...args}>
-              <PageHeader.ContentText subtitle="Subtitle">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex.
-              </PageHeader.ContentText>
-            </PageHeader.Content>
+            <PageHeader.Content .... />
           </Column>
           <Column lg={8} md={4} sm={0}>
             <PageHeader.HeroImage>
