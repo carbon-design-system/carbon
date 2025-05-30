@@ -161,17 +161,14 @@ return (
   ]}
 />
 
-When including a hero image within the `PageHeader`:
-
-1. The `Grid` and `Column` components will need to be utilized in order
+When including a hero image within the `PageHeader`, the `Grid` and `Column` components will need to be utilized in order
 to define the layout correctly.
-2. The `withHeroImage` prop needs to be passed in to the `PageHeader.Root`
 
 ```jsx
 import { Grid, Column } from '@carbon/react';
 
 return (
-  <PageHeader.Root withHeroImage>
+  <PageHeader.Root>
     <Grid>
       <Column lg={8} md={4} sm={4}>
         <PageHeader.BreadcrumbBar ... />

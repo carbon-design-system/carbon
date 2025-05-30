@@ -35,21 +35,13 @@ import { Grid, Column } from '../Grid';
 interface PageHeaderProps {
   children?: React.ReactNode;
   className?: string;
-  /**
-   * Specify if using Hero Image layout.
-   */
-  withHeroImage?: Boolean;
 }
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
-  function PageHeader(
-    { className, children, withHeroImage, ...other }: PageHeaderProps,
-    ref
-  ) {
+  function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
     const prefix = usePrefix();
     const classNames = classnames(
       {
         [`${prefix}--page-header`]: true,
-        [`${prefix}--page-header-with-hero-image`]: withHeroImage,
       },
       className
     );
