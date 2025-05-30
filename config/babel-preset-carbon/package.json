@@ -18,13 +18,13 @@
     "react"
   ],
   "dependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/plugin-proposal-export-default-from": "^7.24.7",
-    "@babel/plugin-transform-class-properties": "^7.24.7",
-    "@babel/plugin-transform-export-namespace-from": "^7.24.7",
-    "@babel/plugin-transform-react-constant-elements": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
-    "@babel/preset-react": "^7.24.7",
+    "@babel/core": "^7.27.3",
+    "@babel/plugin-proposal-export-default-from": "^7.27.1",
+    "@babel/plugin-transform-class-properties": "^7.27.1",
+    "@babel/plugin-transform-export-namespace-from": "^7.27.1",
+    "@babel/plugin-transform-react-constant-elements": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
     "babel-plugin-dev-expression": "^0.2.3",
     "browserslist-config-carbon": "^11.2.0"
   }

@@ -27,7 +27,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@babel/core": "^7.24.7",
+    "@babel/core": "^7.27.3",
     "@carbon/cli-reporter": "^10.7.0",
     "@ibm/telemetry-js": "^1.5.0",
     "@octokit/plugin-retry": "^3.0.7",

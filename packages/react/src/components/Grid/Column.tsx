@@ -122,6 +122,7 @@ const Column = React.forwardRef<
           className={customClassName}
           sm={sm}
           md={md}
+          ref={ref}
           lg={lg}
           xlg={xlg}
           max={max}
@@ -233,34 +234,45 @@ Column.propTypes = {
   xlg: spanPropType,
 };
 
-function CSSGridColumn({
-  as: BaseComponent = 'div',
-  children,
-  className: containerClassName,
-  sm,
-  md,
-  lg,
-  xlg,
-  max,
-  span,
-  ...rest
-}: ColumnProps<any>) {
-  const prefix = usePrefix();
-  const breakpointClassName = getClassNameForBreakpoints(
-    [sm, md, lg, xlg, max],
-    prefix
-  );
-  const spanClassName = getClassNameForSpan(span, prefix);
-  const className = cx(containerClassName, breakpointClassName, spanClassName, {
-    [`${prefix}--css-grid-column`]: true,
-  });
+const CSSGridColumn = React.forwardRef<any, ColumnProps<any>>(
+  (
+    {
+      as: BaseComponent = 'div',
+      children,
+      className: containerClassName,
+      sm,
+      md,
+      lg,
+      xlg,
+      max,
+      span,
+      ...rest
+    },
+    ref
+  ) => {
+    // Add ref parameter
+    const prefix = usePrefix();
+    const breakpointClassName = getClassNameForBreakpoints(
+      [sm, md, lg, xlg, max],
+      prefix
+    );
+    const spanClassName = getClassNameForSpan(span, prefix);
+    const className = cx(
+      containerClassName,
+      breakpointClassName,
+      spanClassName,
+      {
+        [`${prefix}--css-grid-column`]: true,
+      }
+    );
 
-  return (
-    <BaseComponent className={className} {...rest}>
-      {children}
-    </BaseComponent>
-  );
-}
+    return (
+      <BaseComponent className={className} ref={ref} {...rest}>
+        {children}
+      </BaseComponent>
+    );
+  }
+);
 
 CSSGridColumn.propTypes = {
   /**
