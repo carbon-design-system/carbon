@@ -18,7 +18,7 @@ const prefix = 'cds';
 describe('Modal', () => {
   it('should add extra classes that are passed via className', () => {
     render(
-      <Modal data-testid="modal-1" className="custom-class">
+      <Modal open data-testid="modal-1" className="custom-class">
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -37,7 +37,7 @@ describe('Modal', () => {
 
   it('should set label if one is passed via props', () => {
     render(
-      <Modal modalLabel="Account resources">
+      <Modal open modalLabel="Account resources">
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -56,7 +56,7 @@ describe('Modal', () => {
 
   it('should set modal heading if one is passed via props', () => {
     render(
-      <Modal modalHeading="Add a custom domain">
+      <Modal open modalHeading="Add a custom domain">
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -75,7 +75,7 @@ describe('Modal', () => {
 
   it('should not be a passive modal by default', () => {
     render(
-      <Modal data-testid="modal-2">
+      <Modal open data-testid="modal-2">
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -94,7 +94,7 @@ describe('Modal', () => {
 
   it('should be a passive modal when passiveModal is passed', () => {
     render(
-      <Modal data-testid="modal-3" passiveModal>
+      <Modal open data-testid="modal-3" passiveModal>
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -115,7 +115,7 @@ describe('Modal', () => {
 
   it('should set id if one is passed via props', () => {
     render(
-      <Modal id="custom-modal-id" data-testid="modal-4">
+      <Modal open id="custom-modal-id" data-testid="modal-4">
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -137,7 +137,7 @@ describe('Modal', () => {
 
   it('should not place the svg icon in the accessibility tree', () => {
     render(
-      <Modal>
+      <Modal open>
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -159,7 +159,7 @@ describe('Modal', () => {
 
   it('should not make the icon tabbable', () => {
     render(
-      <Modal>
+      <Modal open>
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -181,7 +181,7 @@ describe('Modal', () => {
 
   it('enables primary button by default', () => {
     render(
-      <Modal primaryButtonText="Primary button text">
+      <Modal open primaryButtonText="Primary button text">
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -200,7 +200,7 @@ describe('Modal', () => {
 
   it('disables primary button is disablePrimaryButton prop is passed', () => {
     render(
-      <Modal primaryButtonText="Primary button text" primaryButtonDisabled>
+      <Modal open primaryButtonText="Primary button text" primaryButtonDisabled>
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -220,6 +220,7 @@ describe('Modal', () => {
   it('should set button text when passed via props', () => {
     render(
       <Modal
+        open
         primaryButtonText="Primary button text"
         secondaryButtonText="Secondary button text">
         <p>
@@ -242,6 +243,7 @@ describe('Modal', () => {
   it('should allow you to pass a node for the primary and secondary buttons', () => {
     render(
       <Modal
+        open
         primaryButtonText={<span data-testid="primary-node">testing</span>}
         secondaryButtonText={<span data-testid="secondary-node">testing</span>}>
         <p>
@@ -264,6 +266,7 @@ describe('Modal', () => {
   it('should support 2 secondary buttons', () => {
     render(
       <Modal
+        open
         primaryButtonText="Primary button text"
         secondaryButtons={[
           {
@@ -294,7 +297,7 @@ describe('Modal', () => {
 
   it('has the expected attributes when alert prop is passed', () => {
     render(
-      <Modal alert>
+      <Modal open alert>
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -315,6 +318,7 @@ describe('Modal', () => {
   it('renders a danger button and appropriate classes when danger prop is passed', () => {
     render(
       <Modal
+        open
         danger
         primaryButtonText="Danger button text"
         data-testid="modal-5">
@@ -342,6 +346,7 @@ describe('Modal', () => {
   it('disables buttons when inline loading status is active', () => {
     render(
       <Modal
+        open
         id="custom-modal-id"
         data-testid="modal-4"
         loadingStatus="active"
@@ -371,6 +376,7 @@ describe('Modal', () => {
   it('should respect decorator prop', () => {
     const { container } = render(
       <Modal
+        open
         danger
         primaryButtonText="Danger button text"
         data-testid="modal-5"
@@ -385,6 +391,7 @@ describe('Modal', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <Modal
+        open
         danger
         primaryButtonText="Danger button text"
         data-testid="modal-5"
@@ -487,23 +494,25 @@ describe('Modal', () => {
           Launch Modal
         </button>
         <Modal
+          open
           launcherButtonRef={launcherButtonRef}
           primaryButtonText="Save"
-          secondaryButtonText="Cancel">
+          secondaryButtonText="Cancel"
+          data-testid="modal">
           <p>Modal Content</p>
         </Modal>
       </>
     );
 
     const launcherButton = screen.getByTestId('launcher-button');
+    const saveButton = screen.getByRole('button', { name: /Save/ });
 
-    expect(launcherButton).not.toHaveFocus();
-    expect(document.body).toHaveFocus();
+    expect(saveButton).toHaveFocus();
 
     jest.runAllTimers();
 
     expect(launcherButton).not.toHaveFocus();
-    expect(document.body).toHaveFocus();
+    expect(saveButton).toHaveFocus();
 
     jest.useRealTimers();
   });
