@@ -350,7 +350,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       target: oldActiveNode,
       relatedTarget: currentActiveNode,
     }) {
-      if (open && currentActiveNode && oldActiveNode && innerModal.current) {
+      if (
+        !enableDialogElement &&
+        !focusTrapWithoutSentinels &&
+        open &&
+        currentActiveNode &&
+        oldActiveNode &&
+        innerModal.current
+      ) {
         const { current: bodyNode } = innerModal;
         const { current: startSentinelNode } = startSentinel;
         const { current: endSentinelNode } = endSentinel;
@@ -362,6 +369,39 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           oldActiveNode,
           selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
         });
+      }
+
+      // Adjust scroll if needed so that element with focus is not obscured by gradient
+      const modalContent = document.querySelector(`.${prefix}--modal-content`);
+      if (
+        !modalContent ||
+        !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+        !currentActiveNode ||
+        !modalContent.contains(currentActiveNode)
+      ) {
+        return;
+      }
+
+      const lastContent =
+        modalContent.children[modalContent.children.length - 1];
+      const gradientSpacing =
+        modalContent.scrollHeight -
+        (lastContent as HTMLElement).offsetTop -
+        (lastContent as HTMLElement).clientHeight;
+
+      for (let elem of modalContent.children) {
+        if (elem.contains(currentActiveNode)) {
+          const spaceBelow =
+            modalContent.clientHeight -
+            (elem as HTMLElement).offsetTop +
+            modalContent.scrollTop -
+            (elem as HTMLElement).clientHeight;
+          if (spaceBelow < gradientSpacing) {
+            modalContent.scrollTop =
+              modalContent.scrollTop + (gradientSpacing - spaceBelow);
+          }
+          break;
+        }
       }
     }
 
@@ -549,11 +589,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         role="presentation"
         ref={ref}
         aria-hidden={!open}
-        onBlur={
-          !enableDialogElement && !focusTrapWithoutSentinels
-            ? handleBlur
-            : () => {}
-        }
+        onBlur={handleBlur}
         onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
         onMouseDown={composeEventHandlers([
           rest?.onMouseDown,
