@@ -8,6 +8,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { HeaderMenuItem } from '../';
+import { HeaderMenu } from '../HeaderMenu';
+import userEvent from '@testing-library/user-event';
 
 describe('HeaderMenuItem', () => {
   it('should set the current class and aria-current based on isActive', () => {
@@ -42,5 +44,52 @@ describe('HeaderMenuItem', () => {
       </HeaderMenuItem>
     );
     expect(ref).toHaveBeenCalledWith(screen.getByTestId('test'));
+  });
+  it('should call onClick handler when clicked', async () => {
+    const user = userEvent.setup();
+    const onClick = jest.fn();
+
+    render(
+      <HeaderMenuItem data-testid="test" onClick={onClick}>
+        test
+      </HeaderMenuItem>
+    );
+    await user.click(screen.getByTestId('test'));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call onClick handler when clicked within HeaderMenu', async () => {
+    const user = userEvent.setup();
+    const onClick = jest.fn();
+
+    render(
+      <HeaderMenu aria-label="test-label" menuLinkName="test-link">
+        <HeaderMenuItem data-testid="test" onClick={onClick}>
+          test
+        </HeaderMenuItem>
+      </HeaderMenu>
+    );
+    await user.click(screen.getByTestId('test'));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+  it('should be focusable via keyboard navigation', async () => {
+    const user = userEvent.setup();
+    render(<HeaderMenuItem data-testid="test">test</HeaderMenuItem>);
+    const menuItem = screen.getByTestId('test');
+    await user.tab();
+    expect(menuItem).toHaveFocus();
+  });
+
+  it('should be focusable via keyboard navigation within HeaderMenu', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <HeaderMenu aria-label="test-menu" menuLinkName="Menu">
+        <HeaderMenuItem data-testid="test-item-1">Item 1</HeaderMenuItem>
+      </HeaderMenu>
+    );
+    const firstItem = screen.getByTestId('test-item-1');
+    firstItem.focus();
+    expect(firstItem).toHaveFocus();
   });
 });
