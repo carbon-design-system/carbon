@@ -31,7 +31,6 @@ import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
@@ -42,6 +41,8 @@ import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { warning } from '../../internal/warning';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { Presence, usePresenceContext } from '../../internal/Presence';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
@@ -234,7 +235,15 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   slug?: ReactNode;
 }
 
-const Modal = React.forwardRef(function Modal(
+const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
+  ({ open = false, ...props }, ref) => (
+    <Presence open={open}>
+      <ModalInner {...props} ref={ref} />
+    </Presence>
+  )
+);
+
+const ModalInner = React.forwardRef(function Modal(
   {
     'aria-label': ariaLabelProp,
     children,
@@ -246,7 +255,6 @@ const Modal = React.forwardRef(function Modal(
     passiveModal = false,
     secondaryButtonText,
     primaryButtonText,
-    open,
     onRequestClose = noopFn,
     onRequestSubmit = noopFn,
     onSecondarySubmit,
@@ -273,14 +281,15 @@ const Modal = React.forwardRef(function Modal(
   ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
+  const { presenceRef, isExiting } = usePresenceContext();
   const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const mergedInnerModalRefs = useMergedRefs([innerModal, presenceRef]);
   const [isScrollable, setIsScrollable] = useState(false);
-  const prevOpen = usePreviousValue(open);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
@@ -315,7 +324,7 @@ const Modal = React.forwardRef(function Modal(
 
     evt.stopPropagation();
 
-    if (open && target instanceof HTMLElement) {
+    if (target instanceof HTMLElement) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
@@ -363,7 +372,6 @@ const Modal = React.forwardRef(function Modal(
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
     if (
-      open &&
       oldActiveNode instanceof HTMLElement &&
       currentActiveNode instanceof HTMLElement
     ) {
@@ -389,7 +397,6 @@ const Modal = React.forwardRef(function Modal(
     `${prefix}--modal`,
     {
       [`${prefix}--modal-tall`]: !passiveModal,
-      'is-visible': open,
       [`${prefix}--modal--danger`]: danger,
       [`${prefix}--modal--slug`]: slug,
       [`${prefix}--modal--decorator`]: decorator,
@@ -449,23 +456,20 @@ const Modal = React.forwardRef(function Modal(
 
   useEffect(() => {
     if (!enableDialogElement) {
-      toggleClass(
-        document.body,
-        `${prefix}--body--with-modal-open`,
-        open ?? false
-      );
+      toggleClass(document.body, `${prefix}--body--with-modal-open`, true);
     }
-  }, [open, prefix, enableDialogElement]);
+  }, [prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
+    if (enableDialogElement || !launcherButtonRef) return;
+    return () => {
       setTimeout(() => {
         if ('current' in launcherButtonRef) {
           launcherButtonRef.current?.focus();
         }
       });
-    }
-  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
+    };
+  }, [enableDialogElement, launcherButtonRef]);
 
   useEffect(() => {
     if (!enableDialogElement) {
@@ -495,11 +499,9 @@ const Modal = React.forwardRef(function Modal(
         }
       };
 
-      if (open) {
-        focusButton(innerModal.current);
-      }
+      focusButton(innerModal.current);
     }
-  }, [open, selectorPrimaryFocus, danger, prefix, enableDialogElement]);
+  }, [selectorPrimaryFocus, danger, prefix, enableDialogElement]);
 
   useIsomorphicEffect(() => {
     if (contentRef.current) {
@@ -565,9 +567,9 @@ const Modal = React.forwardRef(function Modal(
 
   const modalBody = enableDialogElement ? (
     <Dialog
-      open={open}
+      open
       modal
-      ref={innerModal}
+      ref={mergedInnerModalRefs}
       role={isAlertDialog ? 'alertdialog' : ''}
       aria-describedby={isAlertDialog ? modalBodyId : ''}
       className={containerClasses}
@@ -674,7 +676,7 @@ const Modal = React.forwardRef(function Modal(
         </span>
       )}
       <div
-        ref={innerModal}
+        ref={mergedInnerModalRefs}
         role="dialog"
         {...alertDialogProps}
         className={containerClasses}
@@ -780,7 +782,8 @@ const Modal = React.forwardRef(function Modal(
       onBlur={!enableDialogElement ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
-      ref={ref}>
+      ref={ref}
+      data-exiting={isExiting}>
       {modalBody}
     </Layer>
   );
