@@ -15,7 +15,6 @@ import {
   PageHeaderContentText,
   PageHeaderContentPageActions,
   PageHeaderHeroImage,
-  PageHeaderTabs,
 } from '../PageHeader';
 import { Tag } from '../Tag';
 import { Button } from '../Button';
@@ -27,7 +26,40 @@ import image2 from './_story-assets/3x2.jpg';
 
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
-import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
+import { TabList, Tab, Tabs, TabPanels, TabPanel } from '../Tabs/Tabs';
+
+const tags = [
+  {
+    type: 'blue',
+    text: 'Tag 1',
+    size: 'md',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 2',
+    size: 'md',
+  },
+  {
+    type: 'red',
+    text: 'Tag 3',
+    size: 'md',
+  },
+  {
+    type: 'blue',
+    text: 'Tag 4',
+    size: 'md',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 5',
+    size: 'md',
+  },
+  {
+    type: 'red',
+    text: 'Tag 6',
+    size: 'md',
+  },
+];
 
 export default {
   title: 'Patterns/unstable__PageHeader',
@@ -37,7 +69,6 @@ export default {
     PageHeaderContent,
     PageHeaderHeroImage,
     PageHeaderTabBar,
-    PageHeaderTabs,
     PageHeaderContentText,
     PageHeaderContentPageActions,
   },
@@ -106,44 +137,51 @@ const breadcrumbContentActions = (
 );
 
 export const Default = (args) => (
-  <PageHeader.Root>
-    <PageHeader.BreadcrumbBar
-      border={args.border}
-      pageActionsFlush={args.pageActionsFlush}
-      contentActionsFlush={args.contentActionsFlush}
-      renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-      contentActions={breadcrumbContentActions}
-      pageActions={breadcrumbPageActions}>
-      <Breadcrumb>
-        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </Breadcrumb>
-    </PageHeader.BreadcrumbBar>
-    <PageHeader.Content title={args.title}>
-      <PageHeader.ContentText subtitle="Subtitle">
-        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-        Massa elementum class enim malesuada lacinia hendrerit enim erat
-        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
-      </PageHeader.ContentText>
-    </PageHeader.Content>
-    <PageHeader.TabBar>
-      <PageHeader.Tabs>
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        border={args.border}
+        pageActionsFlush={args.pageActionsFlush}
+        contentActionsFlush={args.contentActionsFlush}
+        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        contentActions={breadcrumbContentActions}
+        pageActions={breadcrumbPageActions}>
+        <Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </Breadcrumb>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content title={args.title}>
+        <PageHeader.ContentText subtitle="Subtitle">
+          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+          Massa elementum class enim malesuada lacinia hendrerit enim erat
+          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+          Nisi molestie primis lorem nascetur sem metus mattis etiam
+          scelerisque.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+      <PageHeader.TabBar>
         <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
-        </TabPanels>
-      </PageHeader.Tabs>
-    </PageHeader.TabBar>
-  </PageHeader.Root>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+      <TabPanel>Tab Panel 6</TabPanel>
+      <TabPanel>Tab Panel 7</TabPanel>
+    </TabPanels>
+  </Tabs>
 );
 
 Default.args = {
@@ -404,4 +442,52 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       </PageHeader.ContentText>
     </PageHeader.Content>
   </PageHeader.Root>
+);
+
+export const TabBarWithTabsAndTags = (args) => (
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        border={args.border}
+        pageActionsFlush={args.pageActionsFlush}
+        contentActionsFlush={args.contentActionsFlush}
+        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        pageActions={breadcrumbPageActions}>
+        <Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </Breadcrumb>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        {...args}>
+        <PageHeader.ContentText subtitle="Subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+      <PageHeader.TabBar tags={tags}>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
+        </TabList>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+      <TabPanel>Tab Panel 6</TabPanel>
+      <TabPanel>Tab Panel 7</TabPanel>
+    </TabPanels>
+  </Tabs>
 );
