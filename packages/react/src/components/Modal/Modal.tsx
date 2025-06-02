@@ -13,6 +13,11 @@ import React, {
   type HTMLAttributes,
   type ReactNode,
   type Ref,
+  createContext,
+  RefObject,
+  PropsWithChildren,
+  useMemo,
+  useContext,
 } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -236,19 +241,39 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
-  ({ open = false, ...props }, ref) => {
-    const presenceRef = useRef<HTMLDivElement | null>(null);
-
-    const [isPresent, isExiting] = usePresence(presenceRef, open);
-    const mergedRefs = useMergeRefs([presenceRef, ref]);
-
-    if (!isPresent) return null;
-
-    return <ModalInner {...props} ref={mergedRefs} isExiting={isExiting} />;
-  }
+  ({ open, ...props }, ref) => (
+    <ModalPresence open={open}>
+      <ModalDialog {...props} ref={ref} />
+    </ModalPresence>
+  )
 );
 
-const ModalInner = React.forwardRef(function Modal(
+type ModalPresenceContextType = {
+  presenceRef: RefObject<HTMLDivElement | null>;
+  isExiting: boolean;
+};
+const ModalPresenceContext = createContext<ModalPresenceContextType>(
+  undefined as unknown as ModalPresenceContextType
+);
+export const ModalPresence = ({
+  open = false,
+  children,
+}: PropsWithChildren<Pick<ModalProps, 'open'>>) => {
+  const presenceRef = useRef<HTMLDivElement | null>(null);
+  const [isPresent, isExiting] = usePresence(presenceRef, open);
+
+  const contextValue = useMemo(() => ({ presenceRef, isExiting }), [isExiting]);
+
+  if (!isPresent) return null;
+
+  return (
+    <ModalPresenceContext.Provider value={contextValue}>
+      {children}
+    </ModalPresenceContext.Provider>
+  );
+};
+
+export const ModalDialog = React.forwardRef(function Modal(
   {
     'aria-label': ariaLabelProp,
     children,
@@ -280,19 +305,20 @@ const ModalInner = React.forwardRef(function Modal(
     loadingDescription,
     loadingIconDescription,
     onLoadingSuccess = noopFn,
-    isExiting,
     slug,
     ...rest
-  }: ModalProps & { isExiting?: boolean },
+  }: ModalProps,
   ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
+  const { presenceRef, isExiting } = useContext(ModalPresenceContext);
   const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const mergedRefs = useMergeRefs([presenceRef, ref]);
   const [isScrollable, setIsScrollable] = useState(false);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
@@ -786,7 +812,7 @@ const ModalInner = React.forwardRef(function Modal(
       onBlur={!enableDialogElement ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
-      ref={ref}
+      ref={mergedRefs}
       data-exiting={isExiting}>
       {modalBody}
     </Layer>
