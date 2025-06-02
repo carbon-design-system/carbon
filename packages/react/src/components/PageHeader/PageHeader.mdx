@@ -19,6 +19,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [PageHeader.Content](#pageheadercontent)
   - [PageHeader.Content with hero image](#pageheadercontent-with-hero-image)
 - [PageHeader.TabsBar](#pageheadertabsbar)
+  - [PageHeader.TabsBar with Tags](#pageheadertabsbar-with-tags)
 
 ## Overview
 
@@ -149,7 +150,7 @@ return (
 )
 ```
 
-## PageHeader.Content With Hero Image
+### PageHeader.Content With Hero Image
 
 <Canvas
   of={PageHeaderStories.ContentWithHeroImage}
@@ -201,32 +202,78 @@ return (
 
 ## PageHeader.TabsBar
 
-To render the Tabs zone simply utilitize the `PageHeader.TabBar` and `PageHeader.Tabs` components, passing in
-the `Tab` components as children.
-
+To render the Tabs zone, utilitize the `PageHeader.TabBar` component, passing in the `TabList` and `Tab` components
+as its children. Then set up the `TabPanels` and `TabPanel` components outside of the `PageHeader`, making sure to
+wrap all components within the `Tabs` component to ensures proper linkage of tab and its associated panel.
 
 ```jsx
+<Tabs>
   <PageHeader.Root>
     ...
     <PageHeader.TabBar>
-      <PageHeader.Tabs>
-        <TabList>
-          <Tab>Dashboard</Tab>
-          <Tab>Monitoring</Tab>
-          <Tab>Activity</Tab>
-          <Tab>Settings</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Dashboard Tab Panel</TabPanel>
-          <TabPanel>Monitoring Tab Panel</TabPanel>
-          <TabPanel>Activity Tab Panel</TabPanel>
-          <TabPanel>Settings Tab Panel</TabPanel>
-        </TabPanels>
-      </PageHeader.Tabs>
+      <TabList>
+        <Tab>Dashboard</Tab>
+        <Tab>Monitoring</Tab>
+        <Tab>Activity</Tab>
+        <Tab>Settings</Tab>
+      </TabList>
     </PageHeader.TabBar>
   </PageHeader.Root>
+  <TabPanels>
+    <TabPanel>Dashboard Tab Panel</TabPanel>
+    <TabPanel>Monitoring Tab Panel</TabPanel>
+    <TabPanel>Activity Tab Panel</TabPanel>
+    <TabPanel>Settings Tab Panel</TabPanel>
+  </TabPanels>
+</Tabs>
 ```
 
+### PageHeader.TabsBar With Tags
+
+<Canvas
+  of={PageHeaderStories.TabBarWithTabsAndTags}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PageHeaderStories.TabBarWithTabsAndTags),
+    },
+  ]}
+/>
+
+The `PageHeader.TabsBar` component accepts a `tags` prop expecting an array of objects as shown below. When the viewport
+width is reduced, these tags automatically collapse into a `Popover` for responsive display.
+
+```jsx
+const tags = [
+  {
+    type: 'blue',
+    text: 'Tag 1',
+    size: 'md',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 2',
+    size: 'md',
+  },
+];
+
+return (
+<Tabs>
+  <PageHeader.Root>
+    <PageHeader.TabBar tags={tags}>
+      <TabList>
+        <Tab>Tab 1</Tab>
+        ...
+      </TabList>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+  <TabPanels>
+    <TabPanel>Tab Panel 1</TabPanel>
+    ...
+  </TabPanels>
+</Tabs>
+);
+```
 
 ## Component API
 
