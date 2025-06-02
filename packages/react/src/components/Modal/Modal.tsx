@@ -485,15 +485,14 @@ export const ModalDialog = React.forwardRef(function Modal(
   }, [prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!enableDialogElement && launcherButtonRef) {
-      return () => {
-        setTimeout(() => {
-          if ('current' in launcherButtonRef) {
-            launcherButtonRef.current?.focus();
-          }
-        });
-      };
-    }
+    if (enableDialogElement || !launcherButtonRef) return;
+    return () => {
+      setTimeout(() => {
+        if ('current' in launcherButtonRef) {
+          launcherButtonRef.current?.focus();
+        }
+      });
+    };
   }, [enableDialogElement, launcherButtonRef]);
 
   useEffect(() => {
