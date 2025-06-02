@@ -60,17 +60,27 @@ class CDSHeaderGlobalAction extends CDSButton {
   }
 
   firstUpdated() {
-    this._buttonNode?.addEventListener('focusout', this._handleFocusOut);
     document.addEventListener('click', this._handleDocumentClick, true);
   }
 
   disconnectedCallback() {
-    this._buttonNode?.removeEventListener('focusout', this._handleFocusOut);
     document.removeEventListener('click', this._handleDocumentClick, true);
     super.disconnectedCallback();
   }
 
-  private _handleFocusOut = (event: FocusEvent) => {
+  private _handleDocumentClick = (event: MouseEvent) => {
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const target = event.composedPath()[0] as HTMLElement;
+
+    if (panel && !this.contains(target) && !panel.contains(target)) {
+      panel.removeAttribute('expanded');
+      this.active = false;
+    }
+  };
+
+  @HostListener('focusout')
+  // @ts-ignore
+  private _handleFocusOut(event: FocusEvent) {
     const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
     const relatedTarget = event.relatedTarget as HTMLElement;
 
@@ -83,17 +93,7 @@ class CDSHeaderGlobalAction extends CDSButton {
       panel.removeAttribute('expanded');
       this.active = false;
     }
-  };
-
-  private _handleDocumentClick = (event: MouseEvent) => {
-    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
-    const target = event.composedPath()[0] as HTMLElement;
-
-    if (panel && !this.contains(target) && !panel.contains(target)) {
-      panel.removeAttribute('expanded');
-      this.active = false;
-    }
-  };
+  }
 
   @HostListener('click', { capture: true })
   // @ts-ignore
