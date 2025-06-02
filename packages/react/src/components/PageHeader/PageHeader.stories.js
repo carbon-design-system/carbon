@@ -29,42 +29,6 @@ import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
 import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 
-
-const BeeIcon = () => <Bee size={32} />;
-
-const BreadcrumbBeeIcon = () => <Bee size={16} />;
-
-const dropdownItems = [
-  {
-    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-  },
-  {
-    text: 'Option 1',
-  },
-  {
-    text: 'Option 2',
-  },
-  {
-    disabled: true,
-    text: 'Option 3 - a disabled item',
-  },
-  {
-    text: 'Option 4',
-  },
-  {
-    text: 'Option 5',
-  },
-  {
-    text: 'Option 6',
-  },
-  {
-    text: 'Option 7',
-  },
-  {
-    text: 'Option 8',
-  },
-];
-
 const tags = [
   {
     type: 'blue',
@@ -98,38 +62,6 @@ const tags = [
   },
 ];
 
-const breadcrumbPageActions = (
-  <>
-    <Button
-      renderIcon={Activity}
-      iconDescription="Icon Description 1"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-    <Button
-      renderIcon={Activity}
-      iconDescription="Icon Description 2"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-    <Button
-      renderIcon={Activity}
-      iconDescription="Icon Description 3"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-  </>
-);
-
-const breadcrumbContentActions = (
-  <>
-    <Button size="md">Button</Button>
-  </>
-);
-
 export default {
   title: 'Patterns/unstable__PageHeader',
   component: PageHeader,
@@ -145,7 +77,6 @@ export default {
 
   // uncomment includeStories before merging so the stories aren't visible in prod
   // includeStories: [],
-
 
   argTypes: {
     children: {
@@ -518,7 +449,6 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
   </PageHeader.Root>
 );
 
-
 export const TabBar = (args) => {
   return (
     <PageHeader.Root>
@@ -611,4 +541,3 @@ export const DirectExports = (args) => (
     </PageHeaderTabBar>
   </PageHeaderDirect>
 );
-
