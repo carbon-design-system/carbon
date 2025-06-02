@@ -54,7 +54,7 @@
     "nanoid": "^5.0.0",
     "npm-which": "^3.0.1",
     "rimraf": "^6.0.0",
-    "semver": "^7.3.5",
+    "semver": "^7.7.2",
     "yargs": "^17.0.1"
   },
   "dependencies": {

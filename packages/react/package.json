@@ -51,7 +51,7 @@
     "sass": "^1.33.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.7",
+    "@babel/runtime": "^7.27.3",
     "@carbon/feature-flags": "^0.26.0",
     "@carbon/icons-react": "^11.60.0",
     "@carbon/layout": "^11.34.0",
@@ -71,14 +71,14 @@
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/plugin-proposal-export-default-from": "^7.24.7",
-    "@babel/plugin-transform-class-properties": "^7.24.7",
-    "@babel/plugin-transform-export-namespace-from": "^7.24.7",
-    "@babel/plugin-transform-react-constant-elements": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
+    "@babel/core": "^7.27.3",
+    "@babel/plugin-proposal-export-default-from": "^7.27.1",
+    "@babel/plugin-transform-class-properties": "^7.27.1",
+    "@babel/plugin-transform-export-namespace-from": "^7.27.1",
+    "@babel/plugin-transform-react-constant-elements": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
     "@carbon/test-utils": "^10.36.0",
     "@carbon/themes": "^11.53.0",
     "@figma/code-connect": "^1.3.2",

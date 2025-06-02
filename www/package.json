@@ -40,6 +40,6 @@
     "fast-glob": "^3.2.7",
     "lodash.merge": "^4.6.2",
     "rimraf": "^6.0.0",
-    "semver": "^7.3.5"
+    "semver": "^7.7.2"
   }
 }

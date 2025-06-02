@@ -21,6 +21,7 @@ import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import { MenuButton } from '../MenuButton';
+import { MenuItemProps } from '../Menu/MenuItem';
 import { MenuItem } from '../Menu';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
@@ -66,6 +67,9 @@ PageHeader.displayName = 'PageHeader';
  * -----------------------
  */
 interface PageHeaderBreadcrumbBarProps {
+  /**
+   * `true` by default to render BreadcrumbBar bottom border.
+   */
   border?: Boolean;
   children?: React.ReactNode;
   className?: string;
@@ -314,13 +318,13 @@ interface PageHeaderContentPageActionsProps {
   /**
    * The PageHeaderContent's page actions
    */
-  pageActions?: React.ReactNode;
+  actions?: React.ReactNode;
 }
 const PageHeaderContentPageActions = ({
   className,
   children,
   menuButtonLabel = 'Actions',
-  pageActions,
+  actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
   const prefix = usePrefix();
@@ -331,17 +335,17 @@ const PageHeaderContentPageActions = ({
     className
   );
 
-  type pageAction = {
+  type action = {
     id: string;
-    label: string;
-    onClick: () => void;
+    onClick?: () => void;
     body: React.ReactNode;
+    menuItem: MenuItemProps;
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef<HTMLDivElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
-  const [hiddenItems, setHiddenItems] = useState<pageAction[]>([]);
+  const [hiddenItems, setHiddenItems] = useState<action[]>([]);
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
@@ -356,13 +360,13 @@ const PageHeaderContentPageActions = ({
   }, [menuButtonVisibility]);
 
   useEffect(() => {
-    if (!containerRef.current || !Array.isArray(pageActions)) return;
+    if (!containerRef.current || !Array.isArray(actions)) return;
     createOverflowHandler({
       container: containerRef.current,
       // exclude the hidden menu button from children
       maxVisibleItems: containerRef.current.children.length - 1,
       onChange: (visible, hidden) => {
-        setHiddenItems(pageActions?.slice(visible.length));
+        setHiddenItems(actions?.slice(visible.length));
 
         if (hidden.length > 0) {
           setMenuButtonVisibility(true);
@@ -373,13 +377,16 @@ const PageHeaderContentPageActions = ({
 
   return (
     <div className={classNames} ref={containerRef} {...other}>
-      {pageActions && (
+      {actions && (
         <>
-          {Array.isArray(pageActions) && (
+          {Array.isArray(actions) && (
             <>
-              {pageActions.map((action) => (
-                <div key={action.id} className="action">
-                  {action.body}
+              {actions.map((action) => (
+                <div key={action.id}>
+                  {React.cloneElement(action.body, {
+                    ...action.body.props,
+                    onClick: action.onClick,
+                  })}
                 </div>
               ))}
               <span data-offset data-hidden ref={offsetRef}>
@@ -390,8 +397,8 @@ const PageHeaderContentPageActions = ({
                   {[...hiddenItems].reverse().map((item) => (
                     <MenuItem
                       key={item.id}
-                      label={item.label}
                       onClick={item.onClick}
+                      {...item.menuItem}
                     />
                   ))}
                 </MenuButton>
@@ -421,7 +428,7 @@ PageHeaderContentPageActions.propTypes = {
   /**
    * The PageHeaderContent's page actions
    */
-  pageActions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  actions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
 };
 
 /**
@@ -742,12 +749,15 @@ const PageHeaderTabBar = React.forwardRef<
   // If no tabs but we have tags, render tags with other children
   return (
     <div className={classNames} ref={ref} {...other}>
+
       <Grid>
         <Column lg={16} md={8} sm={4}>
           {children}
           {renderTags()}
         </Column>
       </Grid>
+      {children}
+
     </div>
   );
 });
@@ -762,7 +772,39 @@ const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
     { className, children, ...other }: PageHeaderTabsProps,
     ref
   ) {
-    return <BaseTabs {...other}>{children}</BaseTabs>;
+    const prefix = usePrefix();
+
+    const childrenArray = React.Children.toArray(children);
+    let tabListElement: React.ReactNode = null;
+    const otherChildren: React.ReactNode[] = [];
+
+    // extract the TabList component so we can wrap a needed div around for
+    // layout purposes
+    childrenArray.forEach((child: any) => {
+      if (
+        child?.type?.displayName === 'TabList' ||
+        child?.type?.name === 'TabList'
+      ) {
+        tabListElement = child;
+      } else {
+        otherChildren.push(child);
+      }
+    });
+
+    return (
+      <BaseTabs {...other}>
+        {tabListElement && (
+          <div className={`${prefix}--page-header__tablist-wrapper`}>
+            <Grid>
+              <Column lg={16} md={8} sm={4}>
+                {tabListElement}
+              </Column>
+            </Grid>
+          </div>
+        )}
+        {otherChildren}
+      </BaseTabs>
+    );
   }
 );
 PageHeaderTabs.displayName = 'PageHeaderTabs';
