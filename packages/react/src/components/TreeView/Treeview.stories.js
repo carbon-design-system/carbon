@@ -79,15 +79,14 @@ export const Default = (args) => {
   const nodes = [
     {
       id: '1',
-      value: 'Artificial intelligence',
-      label: <span>Artificial intelligence</span>,
+      value: 'Application development and integration solutions',
+      label: 'Application development and integration solutions',
       renderIcon: Document,
     },
     {
       id: '2',
       value: 'Blockchain',
-      label:
-        'Blocrtificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencekchain',
+      label: 'Blockchain',
       renderIcon: Document,
     },
     {

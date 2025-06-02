@@ -138,7 +138,6 @@
   }
 
   .#{$prefix}--tree-leaf-node {
-    display: flex;
     padding-inline-start: $spacing-08;
   }
 
@@ -252,7 +251,7 @@
 .#{$prefix}--tree-node__label__text {
   display: block;
   overflow: hidden;
-  max-inline-size: 12rem;
+  padding-inline-start: convert.to-rem(4px);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -267,8 +266,12 @@
   text-align: start;
 }
 
-// Separate rule for focus state to avoid nesting
 .#{$prefix}--tree-node__label__text-button:focus {
   outline: 2px solid $focus;
   outline-offset: -2px;
+}
+
+.#{$prefix}--tree-node__label .#{$prefix}--popover-container {
+  inline-size: 100%;
+  padding-inline-end: $spacing-05;
 }
