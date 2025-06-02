@@ -120,34 +120,68 @@ const extractTextContent = (node: React.ReactNode): string => {
   return '';
 };
 
-const useEllipsisCheck = (label: React.ReactNode) => {
+type HTMLELementOrAnchor = HTMLElement | HTMLAnchorElement | null;
+
+const useEllipsisCheck = (
+  label: React.ReactNode,
+  detailsWrapperRef: React.RefObject<HTMLELementOrAnchor>
+) => {
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const labelTextRef = useRef<HTMLSpanElement>(null);
 
   const checkEllipsis = useCallback(() => {
     const element = labelTextRef.current;
-    if (!element) return;
+    if (!element) {
+      setIsEllipsisApplied(false);
+      return;
+    }
+    if (element.offsetWidth === 0) {
+      setIsEllipsisApplied(false);
+      return;
+    }
+    const checkElement = detailsWrapperRef.current || element;
 
-    const isVisible = element.offsetParent !== null && element.offsetWidth > 0;
-
-    if (isVisible) {
-      const isTextTruncated = element.scrollWidth > element.offsetWidth;
+    if (checkElement && checkElement.offsetWidth > 0) {
+      const isTextTruncated = element.scrollWidth > checkElement.offsetWidth;
       setIsEllipsisApplied(isTextTruncated);
     } else {
-      requestAnimationFrame(checkEllipsis);
+      setIsEllipsisApplied(false);
     }
-  }, []);
+  }, [detailsWrapperRef]);
 
   useEffect(() => {
-    const timerId = setTimeout(checkEllipsis, 50);
-    // Resize listener
-    window.addEventListener('resize', checkEllipsis);
+    let animationFrameId: number;
+    animationFrameId = requestAnimationFrame(checkEllipsis);
+
+    let resizeObserver: ResizeObserver | undefined;
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.ResizeObserver !== 'undefined' &&
+      labelTextRef.current
+    ) {
+      resizeObserver = new window.ResizeObserver(() => {
+        requestAnimationFrame(checkEllipsis);
+      });
+      resizeObserver.observe(labelTextRef.current);
+
+      if (detailsWrapperRef.current) {
+        resizeObserver.observe(detailsWrapperRef.current);
+      }
+    }
 
     return () => {
-      clearTimeout(timerId);
-      window.removeEventListener('resize', checkEllipsis);
+      cancelAnimationFrame(animationFrameId);
+      if (resizeObserver) {
+        if (labelTextRef.current) {
+          resizeObserver.unobserve(labelTextRef.current);
+        }
+        if (detailsWrapperRef.current) {
+          resizeObserver.unobserve(detailsWrapperRef.current);
+        }
+        resizeObserver.disconnect();
+      }
     };
-  }, [checkEllipsis]);
+  }, [checkEllipsis, detailsWrapperRef]);
 
   return {
     labelTextRef,
@@ -180,11 +214,14 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     },
     forwardedRef
   ) => {
-    // These are provided by the parent TreeView component
     const depth = propDepth as number;
     const selected = propSelected as (string | number)[];
-    const { labelTextRef, isEllipsisApplied, tooltipText } =
-      useEllipsisCheck(label);
+
+    const detailsWrapperRef = useRef<HTMLELementOrAnchor>(null);
+    const { labelTextRef, isEllipsisApplied, tooltipText } = useEllipsisCheck(
+      label,
+      detailsWrapperRef
+    );
 
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
@@ -531,7 +568,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 onClick={handleToggleClick}>
                 <CaretDown className={toggleClasses} />
               </span>
-              <span className={`${prefix}--tree-node__label__details`}>
+              <span
+                className={`${prefix}--tree-node__label__details`}
+                ref={detailsWrapperRef}>
                 {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
                 {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
                 {renderLabelText()}
@@ -561,7 +600,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
               onClick={handleToggleClick}>
               <CaretDown className={toggleClasses} />
             </span>
-            <span className={`${prefix}--tree-node__label__details`}>
+            <span
+              className={`${prefix}--tree-node__label__details`}
+              ref={detailsWrapperRef}>
               {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
               {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
               {renderLabelText()}

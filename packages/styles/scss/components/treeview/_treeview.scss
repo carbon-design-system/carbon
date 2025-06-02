@@ -57,7 +57,10 @@
   .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
     @include focus-outline('outline');
   }
-
+  .#{$prefix}--tree-node.#{$prefix}--tree-parent-node
+    > .#{$prefix}--tree-node__label {
+    inline-size: auto;
+  }
   .#{$prefix}--tree-node--disabled:focus > .#{$prefix}--tree-node__label {
     outline: none;
   }
@@ -110,9 +113,12 @@
   .#{$prefix}--tree-node__label {
     @include type-style('body-compact-01');
 
+    position: relative;
     display: flex;
+    box-sizing: border-box;
     flex: 1;
     align-items: center;
+    inline-size: 100%;
     min-block-size: convert.to-rem(32px);
 
     &:hover {
@@ -138,6 +144,7 @@
   }
 
   .#{$prefix}--tree-leaf-node {
+    display: flex;
     padding-inline-start: $spacing-08;
   }
 
@@ -153,6 +160,7 @@
   .#{$prefix}--tree-node__label__details {
     display: flex;
     align-items: center;
+    min-inline-size: 0;
   }
 
   .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
@@ -249,6 +257,8 @@
 }
 // Ensure text truncation works properly - no wrapping
 .#{$prefix}--tree-node__label__text {
+  @include type-style('body-compact-01');
+
   display: block;
   overflow: hidden;
   padding-inline-start: convert.to-rem(4px);

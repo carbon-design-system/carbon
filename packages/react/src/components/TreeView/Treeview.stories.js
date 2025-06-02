@@ -91,15 +91,14 @@ export const Default = (args) => {
     },
     {
       id: '3',
-      value: 'Business automation',
-      label: 'Business automation',
+      value: 'Business automation and integration solution',
+      label: 'Business automation and integration solution',
       renderIcon: Folder,
       children: [
         {
           id: '3-1',
           value: 'Business process automation',
-          label:
-            'Business process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automation',
+          label: 'Business process automation and integration solutions',
           renderIcon: Document,
         },
         {
