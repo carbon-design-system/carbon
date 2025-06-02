@@ -29,5 +29,4 @@ export type {
   PageHeaderContentTextProps,
   PageHeaderTabBarProps,
   PageHeaderHeroImageProps,
-  PageHeaderTabsProps,
 } from './PageHeader';
