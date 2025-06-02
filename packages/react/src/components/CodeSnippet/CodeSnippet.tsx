@@ -14,12 +14,12 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import useResizeObserver from 'use-resize-observer';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
-import getUniqueId from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
@@ -202,7 +202,7 @@ function CodeSnippet({
 }: PropsWithChildren<CodeSnippetProps>) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
-  const { current: uid } = useRef(getUniqueId());
+  const { current: uid } = useRef(uniqueId());
   const codeContentRef = useRef<HTMLPreElement>(null);
   const codeContainerRef = useRef<HTMLDivElement>(null);
   const innerCodeRef = useRef<HTMLElement>(null);

@@ -19,7 +19,7 @@ import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { usePrefix } from '../../internal/usePrefix';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import { Text } from '../Text';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
@@ -322,9 +322,9 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const ariaAnnouncement = getAnnouncement(textCount, maxCount);
   useEffect(() => {
     if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
       const announcer = announcerRef.current as HTMLSpanElement | null;

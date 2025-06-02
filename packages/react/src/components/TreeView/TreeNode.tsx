@@ -22,7 +22,7 @@ import React, {
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
-import uniqueId from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
 import { Tooltip } from '../Tooltip';
 
@@ -247,22 +247,36 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
     };
 
-    const nodesWithProps = React.Children.map(children, (node) => {
-      if (React.isValidElement(node)) {
-        return React.cloneElement(node, {
-          active,
-          depth: depth + 1,
-          disabled:
-            disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
-          onTreeSelect,
-          onNodeFocusEvent,
-          selected,
-          tabIndex:
-            (!(node as ReactElement<TreeNodeProps>).props.disabled && -1) ||
-            null,
-        } as TreeNodeProps);
-      }
-    });
+    function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
+      return React.Children.map(children, (node) => {
+        if (!React.isValidElement(node)) return node;
+
+        const isTreeNode = (node.type as any).displayName === 'TreeNode';
+
+        if (isTreeNode) {
+          return React.cloneElement(node, {
+            active,
+            depth: depth + 1,
+            disabled:
+              disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
+            onTreeSelect,
+            onNodeFocusEvent,
+            selected,
+            tabIndex: (node as ReactElement<TreeNodeProps>).props.disabled
+              ? null
+              : -1,
+          } as TreeNodeProps);
+        }
+
+        const newChildren = enhanceTreeNodes((node.props as any).children);
+        return React.cloneElement(node as React.ReactElement<any>, {
+          children: newChildren,
+        });
+      });
+    }
+
+    const nodesWithProps = enhanceTreeNodes(children);
+
     const isActive = active === id;
     const isSelected = selected.includes(id);
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
@@ -370,6 +384,13 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
       if (matches(event, [keys.Enter, keys.Space])) {
         event.preventDefault();
+        if (match(event, keys.Enter) && children) {
+          // Toggle expansion state for parent nodes
+          if (!enableTreeviewControllable) {
+            onToggle?.(event, { id, isExpanded: !expanded, label, value });
+          }
+          setExpanded(!expanded);
+        }
         if (href) {
           currentNode.current?.click();
         }

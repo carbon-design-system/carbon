@@ -205,7 +205,7 @@ export type CalRef = {
 export interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
+   * we must clear dates manually by resetting the value prop to to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
    */
   allowInput?: boolean;
 
@@ -388,7 +388,7 @@ export interface DatePickerProps {
    * The value of the date value provided to flatpickr, could
    * be a date, a date number, a date string, an array of dates.
    */
-  value?: string | number | (string | number | object)[] | object | undefined;
+  value?: DateOption | DateOption[];
 
   /**
    * Specify whether the control is currently in warning state (Fluid only)
@@ -443,11 +443,12 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, []);
 
   const lastStartValue = useRef('');
+  const calendarRef = useRef<Instance>(null);
 
   interface CalendarCloseEvent {
     selectedDates: Date[];
     dateStr: string;
-    instance: object; //This is `Intance` of flatpicker
+    instance: Instance;
   }
   const [calendarCloseEvent, setCalendarCloseEvent] =
     useState<CalendarCloseEvent | null>(null);
@@ -461,7 +462,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         !startInputField.current.value
       ) {
         startInputField.current.value = lastStartValue.current;
-        calendarRef.current.setDate(
+        calendarRef.current?.setDate(
           [startInputField.current.value, endInputField?.current?.value],
           true,
           calendarRef.current.config.dateFormat
@@ -488,7 +489,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [calendarCloseEvent, handleCalendarClose]);
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
-  const calendarRef: any | undefined = useRef(null);
+  const lastFocusedField = useRef<HTMLTextAreaElement>(null);
   const savedOnChange = useSavedCallback(onChange);
 
   const savedOnOpen = useSavedCallback(onOpen);
@@ -623,7 +624,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
-    const flatpickerconfig: any = {
+    const flatpickerConfig: any = {
       inline: inline ?? false,
       onClose: onCalendarClose,
       disableMobile: true,
@@ -678,36 +679,83 @@ const DatePicker = React.forwardRef(function DatePicker(
       },
       onValueUpdate: onHook,
     };
-    const calendar = flatpickr(start, flatpickerconfig);
+    const calendar = flatpickr(start, flatpickerConfig);
 
     calendarRef.current = calendar;
 
-    function handleArrowDown(event) {
+    const handleInputFieldKeyDown = (event: KeyboardEvent) => {
+      const {
+        calendarContainer,
+        selectedDateElem: fpSelectedDateElem,
+        todayDateElem: fpTodayDateElem,
+      } = calendar;
+
       if (match(event, keys.Escape)) {
-        calendar?.calendarContainer?.classList.remove('open');
+        calendarContainer.classList.remove('open');
       }
 
-      if (match(event, keys.ArrowDown)) {
-        if (event.target == endInputField.current) {
-          calendar?.calendarContainer?.classList.add('open');
+      if (match(event, keys.Tab)) {
+        if (!event.shiftKey) {
+          event.preventDefault();
+          calendarContainer.classList.add('open');
+          const selectedDateElem =
+            calendarContainer.querySelector('.selected') && fpSelectedDateElem;
+          const todayDateElem =
+            calendarContainer.querySelector('.today') && fpTodayDateElem;
+          (
+            (selectedDateElem ||
+              todayDateElem ||
+              calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+              calendarContainer) as HTMLElement
+          ).focus();
+
+          if (event.target === startInputField.current) {
+            lastFocusedField.current = startInputField.current;
+          } else if (event.target === endInputField.current) {
+            lastFocusedField.current = endInputField.current;
+          }
+        } else if (
+          calendarRef.current?.isOpen &&
+          event.target === startInputField.current
+        ) {
+          calendarRef.current.close();
+          onCalendarClose(
+            calendarRef.current.selectedDates,
+            '',
+            calendarRef.current,
+            event
+          );
         }
-        const {
-          calendarContainer,
-          selectedDateElem: fpSelectedDateElem,
-          todayDateElem: fptodayDateElem,
-        } = calendar;
-        const selectedDateElem =
-          calendarContainer.querySelector('.selected') && fpSelectedDateElem;
-        const todayDateElem =
-          calendarContainer.querySelector('.today') && fptodayDateElem;
-        (
-          (selectedDateElem ||
-            todayDateElem ||
-            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            calendarContainer) as HTMLElement
-        ).focus();
       }
-    }
+    };
+
+    const handleCalendarKeyDown = (event: KeyboardEvent) => {
+      if (!calendarRef.current || !startInputField.current) return;
+      const lastInputField =
+        datePickerType == 'range'
+          ? endInputField.current
+          : startInputField.current;
+      if (match(event, keys.Tab)) {
+        if (!event.shiftKey) {
+          if (lastFocusedField.current === lastInputField) {
+            lastInputField.focus();
+            calendarRef.current.close();
+            onCalendarClose(
+              calendarRef.current.selectedDates,
+              '',
+              calendarRef.current,
+              event
+            );
+          } else {
+            event.preventDefault();
+            lastInputField.focus();
+          }
+        } else {
+          event.preventDefault();
+          (lastFocusedField.current || startInputField.current).focus();
+        }
+      }
+    };
 
     function handleOnChange(event) {
       const { target } = event;
@@ -739,7 +787,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     if (start) {
-      start.addEventListener('keydown', handleArrowDown);
+      start.addEventListener('keydown', handleInputFieldKeyDown);
       start.addEventListener('change', handleOnChange);
       start.addEventListener('keypress', handleKeyPress);
 
@@ -757,9 +805,16 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     if (end) {
-      end.addEventListener('keydown', handleArrowDown);
+      end.addEventListener('keydown', handleInputFieldKeyDown);
       end.addEventListener('change', handleOnChange);
       end.addEventListener('keypress', handleKeyPress);
+    }
+
+    if (calendar.calendarContainer) {
+      calendar.calendarContainer.addEventListener(
+        'keydown',
+        handleCalendarKeyDown
+      );
     }
 
     //component did unmount equivalent
@@ -782,15 +837,22 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
 
       if (start) {
-        start.removeEventListener('keydown', handleArrowDown);
+        start.removeEventListener('keydown', handleInputFieldKeyDown);
         start.removeEventListener('change', handleOnChange);
         start.removeEventListener('keypress', handleKeyPress);
       }
 
       if (end) {
-        end.removeEventListener('keydown', handleArrowDown);
+        end.removeEventListener('keydown', handleInputFieldKeyDown);
         end.removeEventListener('change', handleOnChange);
-        end.removeEventListener('change', handleKeyPress);
+        end.removeEventListener('keypress', handleKeyPress);
+      }
+
+      if (calendar.calendarContainer) {
+        calendar.calendarContainer.removeEventListener(
+          'keydown',
+          handleCalendarKeyDown
+        );
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -813,50 +875,58 @@ const DatePicker = React.forwardRef(function DatePicker(
   }));
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set({ dateFormat });
     }
   }, [dateFormat]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set('allowInput', allowInput);
     }
   }, [allowInput]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set && disable) {
+    if (calendarRef.current?.set && disable) {
       calendarRef.current.set('disable', disable);
     }
   }, [disable]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set && enable) {
+    if (calendarRef.current?.set && enable) {
       calendarRef.current.set('enable', enable);
     }
   }, [enable]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set && inline) {
+    if (calendarRef.current?.set && inline) {
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
+
   useEffect(() => {
-    //when value prop is set to empty, this clears the faltpicker's calendar instance and text input
-    if (value === '') {
+    // when value prop is manually reset, this clears the flatpickr calendar instance and text input
+    // run if both:
+    // 1. value prop is set to a falsy value (`""`, `undefined`, `null`, etc) OR an array of all falsy values
+    // 2. flatpickr instance contains values in its `selectedDates` property so it hasn't already been cleared
+    if (
+      (!value || (Array.isArray(value) && value.every((date) => !date))) &&
+      calendarRef.current?.selectedDates.length
+    ) {
       calendarRef.current?.clear();
+
       if (startInputField.current) {
         startInputField.current.value = '';
       }
@@ -885,10 +955,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     };
 
     const closeCalendar = (event) => {
-      calendarRef.current.close();
+      calendarRef.current?.close();
       // Remove focus from endDate calendar input
       onCalendarClose(
-        calendarRef.current.selectedDates,
+        calendarRef.current?.selectedDates,
         '',
         calendarRef.current,
         { type: 'clickOutside' }
@@ -902,7 +972,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       if (value !== undefined) {
         calendarRef.current.setDate(value);
       }
@@ -912,29 +982,6 @@ const DatePicker = React.forwardRef(function DatePicker(
       startInputField.current.value = value;
     }
   }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!calendarRef.current || !startInputField.current) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (
-        match(event, keys.Tab) &&
-        !event.shiftKey &&
-        document.activeElement === endInputField.current &&
-        calendarRef.current.isOpen
-      ) {
-        calendarRef.current.close();
-        onCalendarClose(
-          calendarRef.current.selectedDates,
-          '',
-          calendarRef.current,
-          event
-        );
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown, true);
-    return () => document.removeEventListener('keydown', handleKeyDown, true);
-  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   let fluidError;
   if (isFluid) {
@@ -974,7 +1021,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 DatePicker.propTypes = {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
+   * we must clear dates manually by resetting the value prop to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
    */
   allowInput: PropTypes.bool,
 
