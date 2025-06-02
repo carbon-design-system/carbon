@@ -11,6 +11,8 @@ import React, {
   useLayoutEffect,
   useState,
   useRef,
+  useMemo,
+  useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -24,7 +26,11 @@ import { MenuItem } from '../Menu';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
 import { createOverflowHandler } from '@carbon/utilities';
-import { Tabs as BaseTabs } from '../Tabs/Tabs';
+import { OperationalTag, Tag } from '../Tag';
+import { TYPES } from '../Tag/Tag';
+import useOverflowItems from '../../internal/useOverflowItems';
+import { Popover, PopoverContent } from '../Popover';
+import { useId } from '../../internal/useId';
 import { Grid, Column } from '../Grid';
 
 /**
@@ -539,15 +545,24 @@ PageHeaderHeroImage.propTypes = {
  * PageHeaderTabBar
  * ----------------
  */
+interface TagItem {
+  type: keyof typeof TYPES;
+  text: string;
+  size?: 'sm' | 'md' | 'lg';
+  id: string;
+}
+
 interface PageHeaderTabBarProps {
   children?: React.ReactNode;
   className?: string;
+  tags?: TagItem[];
 }
+
 const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
 >(function PageHeaderTabBar(
-  { className, children, ...other }: PageHeaderTabBarProps,
+  { className, children, tags = [], ...other }: PageHeaderTabBarProps,
   ref
 ) {
   const prefix = usePrefix();
@@ -557,60 +572,115 @@ const PageHeaderTabBar = React.forwardRef<
     },
     className
   );
+  // Early return if no tags are provided
+  if (!tags.length) {
+    return (
+      <div className={classNames} ref={ref} {...other}>
+        <Grid>
+          <Column lg={16} md={8} sm={4}>
+            {children}
+          </Column>
+        </Grid>
+      </div>
+    );
+  }
+  const [openPopover, setOpenPopover] = useState(false);
+  const tagSize = tags[0]?.size || 'md';
+  const instanceId = useId('PageHeaderTabBar');
+  const tagsWithIds = useMemo(() => {
+    return tags.map((tag, index) => ({
+      ...tag,
+      id: tag.id || `tag-${index}-${instanceId}`,
+    }));
+  }, [tags]);
+
+  const tagsContainerRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef<HTMLDivElement>(null);
+  // To close popover when window resizes
+  useEffect(() => {
+    const handleResize = () => {
+      // Close the popover when window resizes to prevent unwanted opens
+      setOpenPopover(false);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // overflow items hook
+  const {
+    visibleItems = [],
+    hiddenItems = [],
+    itemRefHandler = () => {},
+  } = useOverflowItems<TagItem>(
+    tagsWithIds,
+    tagsContainerRef as React.RefObject<HTMLDivElement>,
+    offsetRef as React.RefObject<HTMLDivElement>
+  ) || {
+    visibleItems: [],
+    hiddenItems: [],
+    itemRefHandler: () => {},
+  };
+
+  const handleOverflowClick = useCallback((event: React.MouseEvent) => {
+    event.stopPropagation();
+    setOpenPopover((prev) => !prev);
+  }, []);
+
+  // Function to render tags
+  const renderTags = () => (
+    <div className={`${prefix}--page-header__tags`} ref={tagsContainerRef}>
+      {visibleItems.map((tag) => (
+        <Tag
+          key={tag.id}
+          ref={(node) => itemRefHandler(tag.id, node)}
+          type={tag.type}
+          size={tag.size}
+          className={`${prefix}--page-header__tag-item`}>
+          {tag.text}
+        </Tag>
+      ))}
+
+      {hiddenItems.length > 0 && (
+        <Popover
+          open={openPopover}
+          onRequestClose={() => setOpenPopover(false)}>
+          <OperationalTag
+            onClick={handleOverflowClick}
+            aria-expanded={openPopover}
+            text={`+${hiddenItems.length}`}
+            size={tagSize}
+          />
+          <PopoverContent className="tag-popover-content">
+            <div className={`${prefix}--page-header__tags-popover-list`}>
+              {hiddenItems.map((tag) => (
+                <Tag key={tag.id} type={tag.type} size={tag.size}>
+                  {tag.text}
+                </Tag>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+      )}
+    </div>
+  );
+
   return (
     <div className={classNames} ref={ref} {...other}>
-      {children}
+      <Grid>
+        <Column lg={16} md={8} sm={4}>
+          <div className={`${prefix}--page-header__tab-bar--tablist`}>
+            {children}
+            {tags.length > 0 && renderTags()}
+          </div>
+        </Column>
+      </Grid>
     </div>
   );
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
-
-interface PageHeaderTabsProps extends React.ComponentProps<typeof BaseTabs> {
-  children?: React.ReactNode;
-  className?: string;
-}
-
-const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
-  function PageHeaderTabs(
-    { className, children, ...other }: PageHeaderTabsProps,
-    ref
-  ) {
-    const prefix = usePrefix();
-
-    const childrenArray = React.Children.toArray(children);
-    let tabListElement: React.ReactNode = null;
-    const otherChildren: React.ReactNode[] = [];
-
-    // extract the TabList component so we can wrap a needed div around for
-    // layout purposes
-    childrenArray.forEach((child: any) => {
-      if (
-        child?.type?.displayName === 'TabList' ||
-        child?.type?.name === 'TabList'
-      ) {
-        tabListElement = child;
-      } else {
-        otherChildren.push(child);
-      }
-    });
-
-    return (
-      <BaseTabs {...other}>
-        {tabListElement && (
-          <div className={`${prefix}--page-header__tablist-wrapper`}>
-            <Grid>
-              <Column lg={16} md={8} sm={4}>
-                {tabListElement}
-              </Column>
-            </Grid>
-          </div>
-        )}
-        {otherChildren}
-      </BaseTabs>
-    );
-  }
-);
-PageHeaderTabs.displayName = 'PageHeaderTabs';
 
 /**
  * -------
@@ -638,9 +708,6 @@ HeroImage.displayName = 'PageHeaderHeroImage';
 const TabBar = PageHeaderTabBar;
 TabBar.displayName = 'PageHeaderTabBar';
 
-const Tabs = PageHeaderTabs;
-Tabs.displayName = 'PageHeader.Tabs';
-
 export {
   // direct exports
   PageHeader,
@@ -650,7 +717,6 @@ export {
   PageHeaderContentText,
   PageHeaderHeroImage,
   PageHeaderTabBar,
-  PageHeaderTabs,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -659,7 +725,6 @@ export {
   ContentText,
   HeroImage,
   TabBar,
-  Tabs,
 };
 export type {
   PageHeaderProps,
@@ -669,5 +734,4 @@ export type {
   PageHeaderContentTextProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
-  PageHeaderTabsProps,
 };
