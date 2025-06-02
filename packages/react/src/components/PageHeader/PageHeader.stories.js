@@ -27,7 +27,7 @@ import image2 from './_story-assets/3x2.jpg';
 
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
-import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
+import { TabList, Tab, Tabs, TabPanels, TabPanel } from '../Tabs/Tabs';
 
 const tags = [
   {
@@ -143,50 +143,53 @@ const breadcrumbContentActions = (
 );
 
 export const Default = (args) => (
-  <PageHeader.Root>
-    <PageHeader.BreadcrumbBar
-      border={args.border}
-      pageActionsFlush={args.pageActionsFlush}
-      contentActionsFlush={args.contentActionsFlush}
-      renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-      contentActions={breadcrumbContentActions}
-      pageActions={breadcrumbPageActions}>
-      <Breadcrumb>
-        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </Breadcrumb>
-    </PageHeader.BreadcrumbBar>
-    <PageHeader.Content title={args.title}>
-      <PageHeader.ContentText subtitle="Subtitle">
-        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-        Massa elementum class enim malesuada lacinia hendrerit enim erat
-        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
-      </PageHeader.ContentText>
-    </PageHeader.Content>
-    <PageHeader.TabBar tags={tags}>
-      <PageHeader.Tabs>
-        <TabList>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-          <Tab>Tab 5</Tab>
-          <Tab>Tab 6</Tab>
-          <Tab>Tab 7</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Tab Panel 1</TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-          <TabPanel>Tab Panel 4</TabPanel>
-          <TabPanel>Tab Panel 5</TabPanel>
-          <TabPanel>Tab Panel 6</TabPanel>
-          <TabPanel>Tab Panel 7</TabPanel>
-        </TabPanels>
-      </PageHeader.Tabs>
-    </PageHeader.TabBar>
-  </PageHeader.Root>
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        border={args.border}
+        pageActionsFlush={args.pageActionsFlush}
+        contentActionsFlush={args.contentActionsFlush}
+        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        contentActions={breadcrumbContentActions}
+        pageActions={breadcrumbPageActions}>
+        <Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </Breadcrumb>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content title={args.title}>
+        <PageHeader.ContentText subtitle="Subtitle">
+          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+          Massa elementum class enim malesuada lacinia hendrerit enim erat
+          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+          Nisi molestie primis lorem nascetur sem metus mattis etiam
+          scelerisque.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+      <PageHeader.TabBar tags={tags}>
+        <PageHeader.Tabs>
+          <TabList>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
+          </TabList>
+        </PageHeader.Tabs>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+      <TabPanel>Tab Panel 6</TabPanel>
+      <TabPanel>Tab Panel 7</TabPanel>
+    </TabPanels>
+  </Tabs>
 );
 
 Default.args = {
@@ -451,8 +454,39 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
 
 export const TabBar = (args) => {
   return (
-    <PageHeader.Root>
-      <PageHeader.TabBar {...args}>
+    <Tabs>
+      <PageHeader.Root>
+        <PageHeader.TabBar {...args}>
+          <PageHeader.Tabs>
+            <TabList>
+              <Tab>Tab 1</Tab>
+              <Tab>Tab 2</Tab>
+              <Tab>Tab 3</Tab>
+              <Tab>Tab 4</Tab>
+              <Tab>Tab 5</Tab>
+              <Tab>Tab 6</Tab>
+              <Tab>Tab 7</Tab>
+            </TabList>
+          </PageHeader.Tabs>
+        </PageHeader.TabBar>
+      </PageHeader.Root>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+        <TabPanel>Tab Panel 6</TabPanel>
+        <TabPanel>Tab Panel 7</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+export const TabBarWithTabsAndTags = (args) => (
+  <Tabs>
+    <PageHeader.Root {...args}>
+      <PageHeader.TabBar tags={tags}>
         <PageHeader.Tabs>
           <TabList>
             <Tab>Tab 1</Tab>
@@ -463,46 +497,19 @@ export const TabBar = (args) => {
             <Tab>Tab 6</Tab>
             <Tab>Tab 7</Tab>
           </TabList>
-          <TabPanels>
-            <TabPanel>Tab Panel 1</TabPanel>
-            <TabPanel>Tab Panel 2</TabPanel>
-            <TabPanel>Tab Panel 3</TabPanel>
-            <TabPanel>Tab Panel 4</TabPanel>
-            <TabPanel>Tab Panel 5</TabPanel>
-            <TabPanel>Tab Panel 6</TabPanel>
-            <TabPanel>Tab Panel 7</TabPanel>
-          </TabPanels>
         </PageHeader.Tabs>
       </PageHeader.TabBar>
     </PageHeader.Root>
-  );
-};
-
-export const TabBarWithTabsAndTags = (args) => (
-  <PageHeader.Root {...args}>
-    <PageHeader.TabBar tags={tags}>
-      <PageHeader.Tabs>
-        <TabList>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-          <Tab>Tab 5</Tab>
-          <Tab>Tab 6</Tab>
-          <Tab>Tab 7</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Tab Panel 1</TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-          <TabPanel>Tab Panel 4</TabPanel>
-          <TabPanel>Tab Panel 5</TabPanel>
-          <TabPanel>Tab Panel 6</TabPanel>
-          <TabPanel>Tab Panel 7</TabPanel>
-        </TabPanels>
-      </PageHeader.Tabs>
-    </PageHeader.TabBar>
-  </PageHeader.Root>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+      <TabPanel>Tab Panel 6</TabPanel>
+      <TabPanel>Tab Panel 7</TabPanel>
+    </TabPanels>
+  </Tabs>
 );
 
 export const DirectExports = (args) => (
