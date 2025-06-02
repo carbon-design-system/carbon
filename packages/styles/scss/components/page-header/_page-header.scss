@@ -19,6 +19,7 @@
 @mixin page-header {
   .#{$prefix}--page-header {
     background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
   }
 
   .#{$prefix}--page-header__breadcrumb-bar {
@@ -177,6 +178,10 @@
     block-size: 100%;
   }
 
+  .#{$prefix}--page-header__tab-bar {
+    margin-inline-start: -$spacing-05;
+  }
+
   .#{$prefix}--page-header__tab-bar--tablist {
     display: grid;
     grid-gap: $spacing-10;
@@ -197,17 +202,5 @@
 
   .#{$prefix}--page-header__tag-item {
     flex-shrink: 0;
-
-    .#{$prefix}--page-header__tablist-wrapper {
-      border-block-end: 1px solid $border-subtle-01;
-    }
-
-    .#{$prefix}--page-header__tab-bar .#{$prefix}--tabs {
-      margin-inline-start: -$spacing-05;
-    }
-
-    .#{$prefix}--tab-content {
-      background: $background;
-    }
   }
 }

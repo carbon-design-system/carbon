@@ -26,7 +26,6 @@ import { MenuItem } from '../Menu';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
 import { createOverflowHandler } from '@carbon/utilities';
-import { Tabs as BaseTabs } from '../Tabs/Tabs';
 import { OperationalTag, Tag } from '../Tag';
 import { TYPES } from '../Tag/Tag';
 import useOverflowItems from '../../internal/useOverflowItems';
@@ -749,7 +748,6 @@ const PageHeaderTabBar = React.forwardRef<
   // If no tabs but we have tags, render tags with other children
   return (
     <div className={classNames} ref={ref} {...other}>
-
       <Grid>
         <Column lg={16} md={8} sm={4}>
           {children}
@@ -757,12 +755,11 @@ const PageHeaderTabBar = React.forwardRef<
         </Column>
       </Grid>
       {children}
-
     </div>
   );
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
-interface PageHeaderTabsProps extends React.ComponentProps<typeof BaseTabs> {
+interface PageHeaderTabsProps {
   children?: React.ReactNode;
   className?: string;
 }
@@ -774,36 +771,14 @@ const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
   ) {
     const prefix = usePrefix();
 
-    const childrenArray = React.Children.toArray(children);
-    let tabListElement: React.ReactNode = null;
-    const otherChildren: React.ReactNode[] = [];
-
-    // extract the TabList component so we can wrap a needed div around for
-    // layout purposes
-    childrenArray.forEach((child: any) => {
-      if (
-        child?.type?.displayName === 'TabList' ||
-        child?.type?.name === 'TabList'
-      ) {
-        tabListElement = child;
-      } else {
-        otherChildren.push(child);
-      }
-    });
-
     return (
-      <BaseTabs {...other}>
-        {tabListElement && (
-          <div className={`${prefix}--page-header__tablist-wrapper`}>
-            <Grid>
-              <Column lg={16} md={8} sm={4}>
-                {tabListElement}
-              </Column>
-            </Grid>
-          </div>
-        )}
-        {otherChildren}
-      </BaseTabs>
+      <div {...other}>
+        <Grid>
+          <Column lg={16} md={8} sm={4}>
+            {children}
+          </Column>
+        </Grid>
+      </div>
     );
   }
 );
