@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-jest.mock('../../internal/useOverflowItems');
-
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -30,6 +28,8 @@ const mockUseOverflowItems = useOverflowItems;
 const prefix = 'cds';
 
 let mockOverflowOnChange = jest.fn();
+
+jest.mock('../../internal/useOverflowItems');
 
 jest.mock('@carbon/utilities', () => ({
   createOverflowHandler: jest.fn(({ onChange }) => {
