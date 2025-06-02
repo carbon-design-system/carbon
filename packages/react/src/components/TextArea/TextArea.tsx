@@ -206,7 +206,7 @@ const TextArea = frFn((props, forwardRef) => {
     if (counterMode === 'character') {
       return strValue.length;
     } else {
-      return strValue.match(/\w+/g)?.length || 0;
+      return strValue.match(/\p{L}+/gu)?.length || 0;
     }
   }
 
