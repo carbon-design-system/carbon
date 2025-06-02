@@ -164,7 +164,7 @@ export const Default = (args) => (
           scelerisque.
         </PageHeader.ContentText>
       </PageHeader.Content>
-      <PageHeader.TabBar tags={tags}>
+      <PageHeader.TabBar>
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>
@@ -448,38 +448,30 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
   </PageHeader.Root>
 );
 
-export const TabBar = (args) => {
-  return (
-    <Tabs>
-      <PageHeader.Root>
-        <PageHeader.TabBar {...args}>
-          <TabList>
-            <Tab>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-            <Tab>Tab 4</Tab>
-            <Tab>Tab 5</Tab>
-            <Tab>Tab 6</Tab>
-            <Tab>Tab 7</Tab>
-          </TabList>
-        </PageHeader.TabBar>
-      </PageHeader.Root>
-      <TabPanels>
-        <TabPanel>Tab Panel 1</TabPanel>
-        <TabPanel>Tab Panel 2</TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-        <TabPanel>Tab Panel 4</TabPanel>
-        <TabPanel>Tab Panel 5</TabPanel>
-        <TabPanel>Tab Panel 6</TabPanel>
-        <TabPanel>Tab Panel 7</TabPanel>
-      </TabPanels>
-    </Tabs>
-  );
-};
-
 export const TabBarWithTabsAndTags = (args) => (
   <Tabs>
-    <PageHeader.Root {...args}>
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        border={args.border}
+        pageActionsFlush={args.pageActionsFlush}
+        contentActionsFlush={args.contentActionsFlush}
+        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        pageActions={breadcrumbPageActions}>
+        <Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </Breadcrumb>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        {...args}>
+        <PageHeader.ContentText subtitle="Subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
       <PageHeader.TabBar tags={tags}>
         <TabList>
           <Tab>Tab 1</Tab>
@@ -502,39 +494,4 @@ export const TabBarWithTabsAndTags = (args) => (
       <TabPanel>Tab Panel 7</TabPanel>
     </TabPanels>
   </Tabs>
-);
-
-export const DirectExports = (args) => (
-  <PageHeaderDirect {...args}>
-    <PageHeaderBreadcrumbBar
-      renderIcon={BreadcrumbBeeIcon}
-      contentActions={breadcrumbContentActions}
-      pageActions={breadcrumbPageActions}>
-      <Breadcrumb>
-        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </Breadcrumb>
-    </PageHeaderBreadcrumbBar>
-    <PageHeaderContent />
-    <PageHeaderTabBar>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-        <Tab>Tab 4</Tab>
-        <Tab>Tab 5</Tab>
-        <Tab>Tab 6</Tab>
-        <Tab>Tab 7</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>Tab Panel 1</TabPanel>
-        <TabPanel>Tab Panel 2</TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-        <TabPanel>Tab Panel 4</TabPanel>
-        <TabPanel>Tab Panel 5</TabPanel>
-        <TabPanel>Tab Panel 6</TabPanel>
-        <TabPanel>Tab Panel 7</TabPanel>
-      </TabPanels>
-    </PageHeaderTabBar>
-  </PageHeaderDirect>
 );
