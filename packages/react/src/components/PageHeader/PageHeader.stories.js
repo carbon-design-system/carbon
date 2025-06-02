@@ -15,7 +15,6 @@ import {
   PageHeaderContentText,
   PageHeaderContentPageActions,
   PageHeaderHeroImage,
-  PageHeaderTabs,
 } from '../PageHeader';
 import { Tag } from '../Tag';
 import { Button } from '../Button';
@@ -70,13 +69,12 @@ export default {
     PageHeaderContent,
     PageHeaderHeroImage,
     PageHeaderTabBar,
-    PageHeaderTabs,
     PageHeaderContentText,
     PageHeaderContentPageActions,
   },
 
   // uncomment includeStories before merging so the stories aren't visible in prod
-  // includeStories: [],
+  //includeStories: [],
 
   argTypes: {
     children: {
@@ -167,17 +165,15 @@ export const Default = (args) => (
         </PageHeader.ContentText>
       </PageHeader.Content>
       <PageHeader.TabBar tags={tags}>
-        <PageHeader.Tabs>
-          <TabList>
-            <Tab>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-            <Tab>Tab 4</Tab>
-            <Tab>Tab 5</Tab>
-            <Tab>Tab 6</Tab>
-            <Tab>Tab 7</Tab>
-          </TabList>
-        </PageHeader.Tabs>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
+        </TabList>
       </PageHeader.TabBar>
     </PageHeader.Root>
     <TabPanels>
@@ -457,17 +453,15 @@ export const TabBar = (args) => {
     <Tabs>
       <PageHeader.Root>
         <PageHeader.TabBar {...args}>
-          <PageHeader.Tabs>
-            <TabList>
-              <Tab>Tab 1</Tab>
-              <Tab>Tab 2</Tab>
-              <Tab>Tab 3</Tab>
-              <Tab>Tab 4</Tab>
-              <Tab>Tab 5</Tab>
-              <Tab>Tab 6</Tab>
-              <Tab>Tab 7</Tab>
-            </TabList>
-          </PageHeader.Tabs>
+          <TabList>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
+          </TabList>
         </PageHeader.TabBar>
       </PageHeader.Root>
       <TabPanels>
@@ -487,17 +481,15 @@ export const TabBarWithTabsAndTags = (args) => (
   <Tabs>
     <PageHeader.Root {...args}>
       <PageHeader.TabBar tags={tags}>
-        <PageHeader.Tabs>
-          <TabList>
-            <Tab>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-            <Tab>Tab 4</Tab>
-            <Tab>Tab 5</Tab>
-            <Tab>Tab 6</Tab>
-            <Tab>Tab 7</Tab>
-          </TabList>
-        </PageHeader.Tabs>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
+        </TabList>
       </PageHeader.TabBar>
     </PageHeader.Root>
     <TabPanels>
@@ -525,26 +517,24 @@ export const DirectExports = (args) => (
     </PageHeaderBreadcrumbBar>
     <PageHeaderContent />
     <PageHeaderTabBar>
-      <PageHeaderTabs>
-        <TabList>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-          <Tab>Tab 5</Tab>
-          <Tab>Tab 6</Tab>
-          <Tab>Tab 7</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Tab Panel 1</TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-          <TabPanel>Tab Panel 4</TabPanel>
-          <TabPanel>Tab Panel 5</TabPanel>
-          <TabPanel>Tab Panel 6</TabPanel>
-          <TabPanel>Tab Panel 7</TabPanel>
-        </TabPanels>
-      </PageHeaderTabs>
+      <TabList>
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+        <Tab>Tab 4</Tab>
+        <Tab>Tab 5</Tab>
+        <Tab>Tab 6</Tab>
+        <Tab>Tab 7</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+        <TabPanel>Tab Panel 6</TabPanel>
+        <TabPanel>Tab Panel 7</TabPanel>
+      </TabPanels>
     </PageHeaderTabBar>
   </PageHeaderDirect>
 );

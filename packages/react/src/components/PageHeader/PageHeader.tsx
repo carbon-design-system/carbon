@@ -573,7 +573,7 @@ const PageHeaderTabBar = React.forwardRef<
     className
   );
   // Early return if no tags are provided
-  if (tags.length === 0) {
+  if (!tags.length) {
     return (
       <div className={classNames} ref={ref} {...other}>
         <Grid>
@@ -629,21 +629,6 @@ const PageHeaderTabBar = React.forwardRef<
     setOpenPopover((prev) => !prev);
   }, []);
 
-  const isPageHeaderTabsChild = (child: React.ReactElement) => {
-    const typedChild = child as React.ReactElement<{
-      children?: React.ReactNode;
-      displayName?: string;
-    }>;
-
-    return (
-      child.type === PageHeaderTabs ||
-      (typeof child.type === 'function' &&
-        (typedChild.type as any).displayName === 'PageHeader.Tabs') ||
-      (typeof child.type === 'function' &&
-        (typedChild.type as any).displayName === 'PageHeaderTabs')
-    );
-  };
-
   // Function to render tags
   const renderTags = () => (
     <div className={`${prefix}--page-header__tags`} ref={tagsContainerRef}>
@@ -682,107 +667,20 @@ const PageHeaderTabBar = React.forwardRef<
     </div>
   );
 
-  // Process children to inject tags into TabList if tabs exist
-  const processedChildren = React.Children.map(children, (child) => {
-    if (React.isValidElement(child) && isPageHeaderTabsChild(child)) {
-      const typedChild = child as React.ReactElement<{
-        children?: React.ReactNode;
-        displayName?: string;
-      }>;
-      const modifiedTabsChildren = React.Children.map(
-        typedChild.props.children,
-        (tabChild) => {
-          if (React.isValidElement(tabChild)) {
-            const typedTabChild = tabChild as React.ReactElement<{
-              displayName?: string;
-              children?: React.ReactNode;
-            }>;
-
-            const tabChildType = typedTabChild.type;
-            const isTabList =
-              (typeof tabChildType === 'function' &&
-                (tabChildType as any).displayName === 'TabList') ||
-              (tabChildType as any)?.name === 'TabList';
-
-            if (isTabList) {
-              // Wrap TabList with tags
-              return (
-                <div className={`${prefix}--page-header__tab-bar--tablist`}>
-                  {tabChild}
-                  {renderTags()}
-                </div>
-              );
-            }
-            return tabChild;
-          }
-          return tabChild;
-        }
-      );
-
-      return React.cloneElement(typedChild, {
-        ...typedChild.props,
-        children: modifiedTabsChildren,
-      });
-    }
-    return child;
-  });
-
-  // Check if any child was a PageHeaderTabs (after processing)
-  const hasPageHeaderTabs = React.Children.toArray(children).some(
-    (child) => React.isValidElement(child) && isPageHeaderTabsChild(child)
-  );
-
-  // If we have tabs, return processed children
-  if (hasPageHeaderTabs) {
-    return (
-      <div className={classNames} ref={ref} {...other}>
-        <Grid>
-          <Column lg={16} md={8} sm={4}>
-            {processedChildren}
-          </Column>
-        </Grid>
-      </div>
-    );
-  }
-
-  // If no tabs but we have tags, render tags with other children
   return (
     <div className={classNames} ref={ref} {...other}>
       <Grid>
         <Column lg={16} md={8} sm={4}>
-          {children}
-          {renderTags()}
+          <div className={`${prefix}--page-header__tab-bar--tablist`}>
+            {children}
+            {tags.length > 0 && renderTags()}
+          </div>
         </Column>
       </Grid>
-      {children}
     </div>
   );
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
-interface PageHeaderTabsProps {
-  children?: React.ReactNode;
-  className?: string;
-}
-
-const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
-  function PageHeaderTabs(
-    { className, children, ...other }: PageHeaderTabsProps,
-    ref
-  ) {
-    const prefix = usePrefix();
-
-    return (
-      <div {...other}>
-        <Grid>
-          <Column lg={16} md={8} sm={4}>
-            {children}
-          </Column>
-        </Grid>
-      </div>
-    );
-  }
-);
-PageHeaderTabs.displayName = 'PageHeaderTabs';
 
 /**
  * -------
@@ -810,9 +708,6 @@ HeroImage.displayName = 'PageHeaderHeroImage';
 const TabBar = PageHeaderTabBar;
 TabBar.displayName = 'PageHeaderTabBar';
 
-const Tabs = PageHeaderTabs;
-Tabs.displayName = 'PageHeader.Tabs';
-
 export {
   // direct exports
   PageHeader,
@@ -822,7 +717,6 @@ export {
   PageHeaderContentText,
   PageHeaderHeroImage,
   PageHeaderTabBar,
-  PageHeaderTabs,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -831,7 +725,6 @@ export {
   ContentText,
   HeroImage,
   TabBar,
-  Tabs,
 };
 export type {
   PageHeaderProps,
@@ -841,5 +734,4 @@ export type {
   PageHeaderContentTextProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
-  PageHeaderTabsProps,
 };

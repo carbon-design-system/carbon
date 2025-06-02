@@ -12,7 +12,6 @@ export {
   PageHeaderContentText,
   PageHeaderTabBar,
   PageHeaderHeroImage,
-  PageHeaderTabs,
   //
   Root,
   BreadcrumbBar,
@@ -21,7 +20,6 @@ export {
   ContentText,
   TabBar,
   HeroImage,
-  Tabs,
 } from './PageHeader';
 export type {
   PageHeaderProps,

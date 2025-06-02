@@ -458,59 +458,6 @@ describe('PageHeader', () => {
     });
   });
 
-  describe('PageHeader.Tabs component api', () => {
-    it('should render', () => {
-      const { container } = render(
-        <PageHeader.Tabs>
-          <TabList aria-label="List of tabs">
-            <Tab>Tab 1</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>Tab Panel 1</TabPanel>
-          </TabPanels>
-        </PageHeader.Tabs>
-      );
-      expect(container.firstChild).toBeInTheDocument();
-    });
-
-    it('should forward props to the internal Tabs component', () => {
-      render(
-        <PageHeader.Tabs onTabCloseRequest={() => {}} dismissable>
-          <TabList aria-label="List of tabs">
-            <Tab>Tab 1</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>Tab Panel 1</TabPanel>
-          </TabPanels>
-        </PageHeader.Tabs>
-      );
-      expect(
-        document.querySelector(`.${prefix}--tabs--dismissable`)
-      ).toBeInTheDocument();
-    });
-
-    it('should work with the TabBar component', () => {
-      const { container } = render(
-        <PageHeader.TabBar>
-          <PageHeader.Tabs>
-            <TabList aria-label="List of tabs">
-              <Tab>Tab 1</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>Tab Panel 1</TabPanel>
-            </TabPanels>
-          </PageHeader.Tabs>
-        </PageHeader.TabBar>
-      );
-
-      expect(
-        container.querySelector(`.${prefix}--page-header__tab-bar`)
-      ).toBeInTheDocument();
-      expect(screen.getByText('Tab 1')).toBeInTheDocument();
-      expect(screen.getByText('Tab Panel 1')).toBeInTheDocument();
-    });
-  });
-
   describe('PageHeader.TabBar component with tags', () => {
     const mockTags = [
       { id: '1', type: 'blue', text: 'Tag 1', size: 'md' },
@@ -549,16 +496,10 @@ describe('PageHeader', () => {
 
       render(
         <PageHeader.TabBar tags={mockTags}>
-          <PageHeader.Tabs>
-            <TabList aria-label="List of tabs">
-              <Tab>Tab 1</Tab>
-              <Tab>Tab 2</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>Tab Panel 1</TabPanel>
-              <TabPanel>Tab Panel 2</TabPanel>
-            </TabPanels>
-          </PageHeader.Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+          </TabList>
         </PageHeader.TabBar>
       );
 
@@ -592,20 +533,20 @@ describe('PageHeader', () => {
       });
 
       render(
-        <PageHeader.TabBar tags={mockTags}>
-          <PageHeader.Tabs>
+        <>
+          <PageHeader.TabBar tags={mockTags}>
             <TabList aria-label="List of tabs">
               <Tab>Tab 1</Tab>
               <Tab>Tab 2</Tab>
               <Tab>Tab 3</Tab>
             </TabList>
-            <TabPanels>
-              <TabPanel>Tab Panel 1</TabPanel>
-              <TabPanel>Tab Panel 2</TabPanel>
-              <TabPanel>Tab Panel 3</TabPanel>
-            </TabPanels>
-          </PageHeader.Tabs>
-        </PageHeader.TabBar>
+          </PageHeader.TabBar>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </>
       );
 
       const tab1Button = screen.getByRole('tab', { name: 'Tab 1' });
@@ -629,46 +570,6 @@ describe('PageHeader', () => {
       expect(screen.getByText('Tag 3')).toBeInTheDocument();
     });
 
-    it('should inject tags into TabList wrapper correctly', () => {
-      mockUseOverflowItems.mockReturnValue({
-        visibleItems: mockTags,
-        hiddenItems: [],
-        itemRefHandler: jest.fn(),
-      });
-
-      const { container } = render(
-        <PageHeader.TabBar tags={mockTags}>
-          <PageHeader.Tabs>
-            <TabList aria-label="List of tabs">
-              <Tab>Tab 1</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>Tab Panel 1</TabPanel>
-            </TabPanels>
-          </PageHeader.Tabs>
-        </PageHeader.TabBar>
-      );
-
-      const tabBarTablist = container.querySelector(
-        `.${prefix}--page-header__tab-bar--tablist`
-      );
-      const tagsContainer = container.querySelector(
-        `.${prefix}--page-header__tags`
-      );
-      const tabsContainer = container.querySelector(`.${prefix}--tabs`);
-
-      expect(tabBarTablist).toBeInTheDocument();
-      expect(tagsContainer).toBeInTheDocument();
-      expect(tabsContainer).toBeInTheDocument();
-
-      // Tags container should be a sibling of Tabs container within the wrapper
-      expect(tabBarTablist).toContainElement(tagsContainer);
-      expect(tabBarTablist).toContainElement(tabsContainer);
-
-      // Verify the structure: tabBarTablist should contain both tabs and tags
-      expect(tabBarTablist.children).toHaveLength(2); // tabs container + tags container
-    });
-
     describe('Overflow functionality', () => {
       it('should handle overflow items correctly', () => {
         mockUseOverflowItems.mockReturnValue({
@@ -679,14 +580,12 @@ describe('PageHeader', () => {
 
         render(
           <PageHeader.TabBar tags={mockTags}>
-            <PageHeader.Tabs>
-              <TabList aria-label="List of tabs">
-                <Tab>Tab 1</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>Tab Panel 1</TabPanel>
-              </TabPanels>
-            </PageHeader.Tabs>
+            <TabList aria-label="List of tabs">
+              <Tab>Tab 1</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>Tab Panel 1</TabPanel>
+            </TabPanels>
           </PageHeader.TabBar>
         );
 
