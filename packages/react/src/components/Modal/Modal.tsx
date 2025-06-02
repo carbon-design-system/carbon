@@ -477,17 +477,11 @@ export const ModalDialog = React.forwardRef(function Modal(
   }
 
   useEffect(() => {
+    if (enableDialogElement) return;
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, true);
     return () => {
-      if (!enableDialogElement) {
-        toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
-      }
+      toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
     };
-  }, [prefix, enableDialogElement]);
-
-  useEffect(() => {
-    if (!enableDialogElement) {
-      toggleClass(document.body, `${prefix}--body--with-modal-open`, true);
-    }
   }, [prefix, enableDialogElement]);
 
   useEffect(() => {
