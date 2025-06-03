@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useState, type RefObject } from 'react';
-import useIsomorphicEffect from './useIsomorphicEffect';
+import { useCallback, useEffect, useState, type RefObject } from 'react';
 
 export const usePresence = (
   ref: RefObject<HTMLElement | null>,
@@ -28,7 +27,7 @@ export const usePresence = (
     setExitState('finished');
   }, []);
 
-  useIsomorphicEffect(() => {
+  useEffect(() => {
     if (!ref.current || !isExiting) return;
     if (!('getAnimations' in ref.current)) {
       handleAnimationEnd();
