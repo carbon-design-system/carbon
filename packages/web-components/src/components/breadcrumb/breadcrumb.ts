@@ -12,6 +12,10 @@ import { prefix } from '../../globals/settings';
 import { BREADCRUMB_SIZE } from './defs';
 import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import {
+  isFeatureFlagEnabled,
+  getFeatureFlagsInstance,
+} from '../../../.storybook/with-feature-flag';
 /**
  * Breadcrumb.
  *
@@ -61,6 +65,10 @@ class CDSBreadcrumb extends LitElement {
         link?.setAttribute('size', this.size);
       });
     }
+    console.log('get', getFeatureFlagsInstance());
+    // console.log(FeatureFlagsElement)
+
+    console.log(isFeatureFlagEnabled('enable-v12-tile-default-icons'));
   }
 
   render() {
@@ -69,11 +77,20 @@ class CDSBreadcrumb extends LitElement {
       [`${prefix}--breadcrumb--no-trailing-slash`]: this.noTrailingSlash,
       [`${prefix}--breadcrumb--sm`]: this.size === BREADCRUMB_SIZE.SMALL,
     });
-    return html`
-      <ol class="${classes}">
-        <slot @slotchange="${this._handleSlotChange}"></slot>
-      </ol>
-    `;
+
+    const isV12Enabled = isFeatureFlagEnabled('enable-v12-tile-default-icons');
+    return isV12Enabled
+      ? html`
+          <ol class="${classes}">
+            <span>V12 </span>
+            <slot @slotchange="${this._handleSlotChange}"></slot>
+          </ol>
+        `
+      : html`
+          <ol class="${classes}">
+            <slot @slotchange="${this._handleSlotChange}"></slot>
+          </ol>
+        `;
   }
 
   static styles = styles;

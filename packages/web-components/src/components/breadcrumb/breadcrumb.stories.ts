@@ -60,24 +60,26 @@ export const Default = {
   render: (args) => {
     const { ariaLabel, className, noTrailingSlash, size } = args ?? {};
     return html`
-      <cds-breadcrumb
-        ?no-trailing-slash="${noTrailingSlash}"
-        .class="${className}"
-        .aria-label="${ariaLabel}"
-        .size="${size}">
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="#">Breadcrumb 4</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-      </cds-breadcrumb>
+      <feature-flags enable-v12-tile-default-icons="true">
+        <cds-breadcrumb
+          ?no-trailing-slash="${noTrailingSlash}"
+          .class="${className}"
+          .aria-label="${ariaLabel}"
+          .size="${size}">
+          <cds-breadcrumb-item>
+            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+          </cds-breadcrumb-item>
+          <cds-breadcrumb-item>
+            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+          </cds-breadcrumb-item>
+          <cds-breadcrumb-item>
+            <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+          </cds-breadcrumb-item>
+          <cds-breadcrumb-item>
+            <cds-breadcrumb-link href="#">Breadcrumb 4</cds-breadcrumb-link>
+          </cds-breadcrumb-item>
+        </cds-breadcrumb>
+      </feature-flags>
     `;
   },
 };
