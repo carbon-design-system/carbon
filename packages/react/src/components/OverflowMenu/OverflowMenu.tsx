@@ -308,9 +308,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     useEffect(() => {
       if (open && !prevOpenState.current) {
         onOpen();
-      }
-
-      if (!open && prevOpenState.current) {
+      } else if (!open && prevOpenState.current) {
         onClose();
       }
 
