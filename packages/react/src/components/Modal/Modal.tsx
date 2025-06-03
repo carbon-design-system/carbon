@@ -7,17 +7,17 @@
 
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
+  createContext,
+  useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type HTMLAttributes,
+  type PropsWithChildren,
   type ReactNode,
   type Ref,
-  createContext,
-  RefObject,
-  PropsWithChildren,
-  useMemo,
-  useContext,
+  type RefObject,
 } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';

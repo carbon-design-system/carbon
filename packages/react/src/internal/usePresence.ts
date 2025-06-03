@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RefObject, useCallback, useState } from 'react';
+import { useCallback, useState, type RefObject } from 'react';
 import useIsomorphicEffect from './useIsomorphicEffect';
 
 export const usePresence = (
