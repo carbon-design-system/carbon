@@ -21,6 +21,7 @@ import Analytics16 from '@carbon/icons/lib/analytics/16.js';
 export const Default = {
   render: () =>
     html`<cds-page-header>
+      <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
       <cds-page-header-content
         title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
         subtitle="Subtitle">
@@ -33,6 +34,7 @@ export const Default = {
         pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
         Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
       </cds-page-header-content>
+      <cds-page-header-tabs>Tabs Bar</cds-page-header-tabs>
     </cds-page-header>`,
 };
 
@@ -70,6 +72,15 @@ export const ContentWithContextualActions = {
 
 const meta = {
   title: 'Patterns/unstable__PageHeader',
+  decorators: [
+    (story) =>
+      html` <style>
+          .sb-show-main.sb-main-padded {
+            padding: 0;
+          }
+        </style>
+        ${story()}`,
+  ],
 };
 
 export default meta;

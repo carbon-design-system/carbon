@@ -16,7 +16,9 @@ $css--plex: true !default;
 // @use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-page-header) {
-  // @extend .#{$prefix}--page-header;
+  @extend .#{$prefix}--page-header;
+
+  display: block;
 }
 
 :host(#{$prefix}-page-header-content) {
@@ -35,7 +37,7 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--page-header__content__sub-title {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
