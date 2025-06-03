@@ -71,8 +71,6 @@ const stories = glob
 const config = {
   addons: [
     getAbsolutePath('@storybook/addon-webpack5-compiler-babel'),
-    // getAbsolutePath("storybook-addon-accessibility-checker"),
-    getAbsolutePath('@storybook/addon-a11y'),
     {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: {

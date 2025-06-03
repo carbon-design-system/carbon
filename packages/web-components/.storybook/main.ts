@@ -41,8 +41,6 @@ const config: StorybookConfig = {
       },
     },
     getAbsolutePath('@storybook/addon-links'),
-    // getAbsolutePath("storybook-addon-accessibility-checker")
-    getAbsolutePath('@storybook/addon-a11y'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/web-components-vite'),
