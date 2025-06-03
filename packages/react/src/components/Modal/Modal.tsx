@@ -252,9 +252,10 @@ type ModalPresenceContextType = {
   presenceRef: RefObject<HTMLDivElement | null>;
   isExiting: boolean;
 };
-const ModalPresenceContext = createContext<ModalPresenceContextType>(
-  undefined as unknown as ModalPresenceContextType
-);
+const ModalPresenceContext = createContext<ModalPresenceContextType>({
+  presenceRef: { current: null },
+  isExiting: false,
+});
 export const ModalPresence = ({
   open = false,
   children,
