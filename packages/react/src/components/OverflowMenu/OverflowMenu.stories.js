@@ -32,25 +32,6 @@ export const RenderCustomIcon = () => {
     </OverflowMenu>
   );
 };
-export const Test = () => {
-  const [loading, setLoading] = React.useState(false);
-
-  const onOpen = () => {
-    console.log('onOpen called');
-    setLoading(true);
-
-    setTimeout(() => {
-      console.log('loading done');
-      setLoading(false);
-    }, 1000);
-  };
-
-  return (
-    <OverflowMenu aria-label="overflow menu" align="bottom" onOpen={onOpen}>
-      <OverflowMenuItem itemText={loading ? 'Loading…' : 'Open'} />
-    </OverflowMenu>
-  );
-};
 export const Default = (args) => (
   <OverflowMenu aria-label="overflow-menu" {...args}>
     <OverflowMenuItem itemText="Stop app" />
