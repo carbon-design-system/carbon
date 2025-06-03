@@ -463,7 +463,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     });
 
     useEffect(() => {
-      if (!enableDialogElement && !open && launcherButtonRef) {
+      if (!open && launcherButtonRef) {
         setTimeout(() => {
           launcherButtonRef?.current?.focus();
         });

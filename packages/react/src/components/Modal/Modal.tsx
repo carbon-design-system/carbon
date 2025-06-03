@@ -494,14 +494,14 @@ const Modal = React.forwardRef(function Modal(
   }, [open, prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
+    if (prevOpen && !open && launcherButtonRef) {
       setTimeout(() => {
         if ('current' in launcherButtonRef) {
           launcherButtonRef.current?.focus();
         }
       });
     }
-  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
+  }, [open, prevOpen, launcherButtonRef]);
 
   useEffect(() => {
     if (!enableDialogElement) {
