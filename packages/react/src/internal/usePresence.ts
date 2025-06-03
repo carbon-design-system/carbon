@@ -21,16 +21,15 @@ export const usePresence = (
     setExitState('finished');
   }, []);
 
-  const isAnimating = isExiting;
   useIsomorphicEffect(() => {
-    if (!ref.current || !isAnimating) return;
+    if (!ref.current || !isExiting) return;
     if (!('getAnimations' in ref.current)) {
       handleAnimationEnd();
       return;
     }
 
     const animations = ref.current.getAnimations();
-    if (!animations) {
+    if (!animations.length) {
       handleAnimationEnd();
       return;
     }
@@ -40,7 +39,7 @@ export const usePresence = (
         handleAnimationEnd
       );
     } catch {}
-  }, [isAnimating, handleAnimationEnd]);
+  }, [isExiting, handleAnimationEnd]);
 
   return [isOpen || exitState !== 'finished', isExiting] as const;
 };
