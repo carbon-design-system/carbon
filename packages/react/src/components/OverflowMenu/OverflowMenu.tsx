@@ -305,13 +305,17 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    // Call `onClose` when menu closes.
     useEffect(() => {
+      if (open && !prevOpenState.current) {
+        onOpen();
+      }
+
       if (!open && prevOpenState.current) {
         onClose();
       }
+
       prevOpenState.current = open;
-    }, [open, onClose]);
+    }, [open, onClose, onOpen]);
 
     useOutsideClick(wrapperRef, ({ target }) => {
       if (
@@ -475,7 +479,6 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         },
         !hasFocusin
       );
-      onOpen();
     };
 
     const getTarget = () => {
