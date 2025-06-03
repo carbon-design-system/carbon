@@ -12,7 +12,6 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { SliderSkeleton } from '.';
 import Slider from './Slider';
 import mdx from './Slider.mdx';
-import Checkbox from '../Checkbox';
 
 export default {
   title: 'Components/Slider',
