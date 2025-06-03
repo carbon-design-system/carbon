@@ -166,11 +166,19 @@ class CDSActionableNotification extends HostListenerMixin(
 
     // Performs focus wrapping if _all_ of the following is met:
     // * This notification is open
+    // * Notification role attribute is set to 'alertdialog'
     // * The viewport still has focus
     // * Notification body used to have focus but no longer has focus
     const { selectorTabbable: selectorTabbableForActionableNotification } = this
       .constructor as typeof CDSActionableNotification;
-    if (open && relatedTarget && oldContains && !currentContains) {
+    if (
+      open &&
+      this.getAttribute('role') === 'alertdialog' &&
+      relatedTarget &&
+      !(relatedTarget instanceof CDSActionableNotification) &&
+      oldContains &&
+      !currentContains
+    ) {
       const comparisonResult = (target as Node).compareDocumentPosition(
         relatedTarget as Node
       );
