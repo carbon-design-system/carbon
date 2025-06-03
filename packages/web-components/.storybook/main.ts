@@ -53,6 +53,16 @@ const config: StorybookConfig = {
         litTemplateLoader(),
         viteSVGResultCarbonIconLoader(),
       ],
+      css: {
+        preprocessorOptions: {
+          // suppress mixed-declarations warnings until resolved in
+          // https://github.com/carbon-design-system/carbon/issues/16962
+          scss: {
+            api: 'modern',
+            silenceDeprecations: ['mixed-decls'],
+          },
+        },
+      },
       optimizeDeps: {
         include: ['@storybook/web-components'],
         exclude: ['lit', 'lit-html'],

@@ -74,34 +74,5 @@ describe('Dialog', () => {
 
       expect(onClick).toHaveBeenCalledTimes(1);
     });
-
-    // TODO: Move this to e2e/components/Dialog/Dialog-test.e2e.js once it exists
-    // --
-    // jsdom doesn't implement HTMLDialogElement: https://github.com/jsdom/jsdom/issues/3294
-    // All browser-based portions of the api will need to be tested in an actual browser.
-    it.skip('supports onCancel prop', async () => {
-      const user = userEvent.setup();
-      const onCancel = jest.fn();
-      render(<Dialog open onCancel={onCancel} />);
-
-      // onCancel is fired when the dialog is closed by the escape key
-      await user.keyboard('[Escape]');
-
-      expect(onCancel).toHaveBeenCalledTimes(1);
-    });
-
-    // TODO: Move this to e2e/components/Dialog/Dialog-test.e2e.js once it exists
-    // --
-    // jsdom doesn't implement HTMLDialogElement: https://github.com/jsdom/jsdom/issues/3294
-    // All browser-based portions of the api will need to be tested in an actual browser.
-    it.skip('supports onClose prop', async () => {
-      const user = userEvent.setup();
-      const onClose = jest.fn();
-      render(<Dialog open onClose={onClose} />);
-
-      // close the dialog via escape or click on close button
-
-      expect(onClose).toHaveBeenCalledTimes(1);
-    });
   });
 });
