@@ -10,6 +10,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type HTMLAttributes,
   type ReactNode,
   type Ref,
 } from 'react';
@@ -35,7 +36,6 @@ import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
@@ -53,7 +53,7 @@ export interface ModalSecondaryButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface ModalProps extends ReactAttr<HTMLDivElement> {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify whether the Modal is displaying an alert, error or warning
    * Should go hand in hand with the danger prop.
@@ -363,6 +363,7 @@ const Modal = React.forwardRef(function Modal(
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
     if (
+      !enableDialogElement &&
       open &&
       oldActiveNode instanceof HTMLElement &&
       currentActiveNode instanceof HTMLElement
@@ -378,6 +379,38 @@ const Modal = React.forwardRef(function Modal(
         oldActiveNode,
         selectorsFloatingMenus,
       });
+    }
+
+    // Adjust scroll if needed so that element with focus is not obscured by gradient
+    const modalContent = document.querySelector(`.${prefix}--modal-content`);
+    if (
+      !modalContent ||
+      !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+      !currentActiveNode ||
+      !modalContent.contains(currentActiveNode)
+    ) {
+      return;
+    }
+
+    const lastContent = modalContent.children[modalContent.children.length - 1];
+    const gradientSpacing =
+      modalContent.scrollHeight -
+      (lastContent as HTMLElement).offsetTop -
+      (lastContent as HTMLElement).clientHeight;
+
+    for (let elem of modalContent.children) {
+      if (elem.contains(currentActiveNode)) {
+        const spaceBelow =
+          modalContent.clientHeight -
+          (elem as HTMLElement).offsetTop +
+          modalContent.scrollTop -
+          (elem as HTMLElement).clientHeight;
+        if (spaceBelow < gradientSpacing) {
+          modalContent.scrollTop =
+            modalContent.scrollTop + (gradientSpacing - spaceBelow);
+        }
+        break;
+      }
     }
   }
 
@@ -430,7 +463,7 @@ const Modal = React.forwardRef(function Modal(
         }
       : {};
 
-  const alertDialogProps: ReactAttr<HTMLDivElement> = {};
+  const alertDialogProps: HTMLAttributes<HTMLDivElement> = {};
   if (alert && passiveModal) {
     alertDialogProps.role = 'alert';
   }
@@ -777,7 +810,7 @@ const Modal = React.forwardRef(function Modal(
       level={0}
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-      onBlur={!enableDialogElement ? handleBlur : () => {}}
+      onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
       ref={ref}>

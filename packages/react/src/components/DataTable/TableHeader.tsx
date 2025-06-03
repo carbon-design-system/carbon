@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { type MouseEventHandler, useRef, ReactNode } from 'react';
+import React, {
+  useRef,
+  type HTMLAttributes,
+  type MouseEventHandler,
+  type ReactNode,
+} from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
@@ -16,7 +21,7 @@ import classNames from 'classnames';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { TranslateWithId, ReactAttr } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
 
 const defaultScope = 'col';
@@ -64,7 +69,7 @@ const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
 };
 
 export interface TableHeaderProps
-  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement>,
+  extends HTMLAttributes<HTMLTableCellElement & HTMLButtonElement>,
     TranslateWithId<
       TableHeaderTranslationKey,
       { header; sortDirection; isSortHeader; sortStates }
