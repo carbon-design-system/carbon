@@ -68,6 +68,7 @@ collect:
         - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - formatOptions
         - fullWidth
         - gap
         - hasDivider
@@ -91,6 +92,7 @@ collect:
         - initialSelectedItems
         - inline
         - innerRef
+        - inputMode
         - invalid
         - invalidText
         - isActive
@@ -163,6 +165,7 @@ collect:
         - onOpen
         - onRequestClose
         - onRequestSubmit
+        - onSecondarySubmit
         - onSelect
         - onToggle
         - onToggleClick
@@ -321,6 +324,8 @@ collect:
         - tooltipText
         - triggerClassName
         # Dialog
+        - ariaDescribedBy
+        - ariaLabelledBy
         - modal
         # DismissibleTag
         - dismissTooltipLabel
@@ -415,7 +420,6 @@ collect:
         - alert
         - closeButtonLabel
         - modalAriaLabel
-        - onSecondarySubmit
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -460,9 +464,15 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderBreadcrumbBar
+        - border
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
+        - actions
         - menuButtonLabel
         # PageSelector
         - currentPage
@@ -665,6 +675,15 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - inputMode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
         - caution-major
         - caution-minor
@@ -791,6 +810,8 @@ collect:
         - vertical
         # General - role
         - alert
+        - alertdialog
+        - dialog
         - log
         - status
         # General - selectionFeedback
@@ -853,6 +874,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - outline
         - password
         - purple
