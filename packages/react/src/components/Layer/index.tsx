@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,11 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from './LayerContext';
 import { LayerLevel, MAX_LEVEL, MIN_LEVEL, levels } from './LayerLevel';
-import { PolymorphicProps } from '../../types/common';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
+import { clamp } from '../../internal/clamp';
 
 /**
  * A custom hook that will return information about the current layer. A common
@@ -41,55 +45,61 @@ export interface LayerBaseProps {
    * Specify the layer level and override any existing levels based on hierarchy
    */
   level?: LayerLevel;
+
+  /**
+   * Applies a css background-color set to $layer-background
+   */
+  withBackground?: boolean;
 }
 
-export type LayerProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  LayerBaseProps
->;
+export type LayerProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, LayerBaseProps>;
 
-export interface LayerComponent {
-  <T extends React.ElementType>(
-    props: LayerProps<T>,
-    context?: any
-  ): React.ReactElement<any, any> | null;
-}
-
-const LayerRenderFunction = React.forwardRef(function Layer<
-  T extends React.ElementType,
+const Layer = React.forwardRef<
+  any,
+  LayerBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
 >(
-  {
-    as = 'div' as T,
-    className: customClassName,
-    children,
-    level: overrideLevel,
-    ...rest
-  }: LayerProps<T>,
-  ref: React.Ref<unknown>
-) {
-  const contextLevel = React.useContext(LayerContext);
-  const level = overrideLevel ?? contextLevel;
-  const prefix = usePrefix();
-  const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
-  // The level should be between MIN_LEVEL and MAX_LEVEL
-  const value = Math.max(
-    MIN_LEVEL,
-    Math.min(level + 1, MAX_LEVEL)
-  ) as LayerLevel;
+  (
+    {
+      as,
+      className: customClassName,
+      children,
+      level: overrideLevel,
+      withBackground = false,
+      ...rest
+    },
+    ref
+  ) => {
+    const contextLevel = React.useContext(LayerContext);
+    const level = overrideLevel ?? contextLevel;
+    const prefix = usePrefix();
+    const className = cx(
+      `${prefix}--layer-${levels[level]}`,
+      {
+        [`${prefix}--layer__with-background`]: withBackground,
+      },
+      customClassName
+    );
+    // The level should be between MIN_LEVEL and MAX_LEVEL
+    const value = clamp(level + 1, MIN_LEVEL, MAX_LEVEL);
 
-  const BaseComponent = as as React.ElementType;
+    const BaseComponent = as || 'div';
 
-  return (
-    <LayerContext.Provider value={value}>
-      <BaseComponent ref={ref} {...rest} className={className}>
-        {children}
-      </BaseComponent>
-    </LayerContext.Provider>
-  );
-});
+    return (
+      <LayerContext.Provider value={value}>
+        <BaseComponent ref={ref} {...rest} className={className}>
+          {children}
+        </BaseComponent>
+      </LayerContext.Provider>
+    );
+  }
+);
 
-LayerRenderFunction.displayName = 'Layer';
-LayerRenderFunction.propTypes = {
+Layer.displayName = 'Layer';
+
+Layer.propTypes = {
   /**
    * Specify a custom component or element to be rendered as the top-level
    * element in the component
@@ -115,6 +125,11 @@ LayerRenderFunction.propTypes = {
    * Specify the layer level and override any existing levels based on hierarchy
    */
   level: PropTypes.oneOf([0, 1, 2]),
+
+  /**
+   * Applies a css background-color set to $layer-background
+   */
+  withBackground: PropTypes.bool,
 };
 
-export const Layer = LayerRenderFunction as LayerComponent;
+export { Layer };

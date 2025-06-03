@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -22,7 +20,7 @@ import { INPUT_SIZE } from './text-input';
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -68,6 +66,7 @@ const args = {
   maxCount: '100',
   placeholder: 'Placeholder text',
   playgroundWidth: 300,
+  showPasswordVisibilityToggle: false,
   size: INPUT_SIZE.MEDIUM,
   readonly: false,
   type: 'text',
@@ -128,6 +127,11 @@ const argTypes = {
       max: 800,
       step: 50,
     },
+  },
+  showPasswordVisibilityToggle: {
+    control: 'boolean',
+    description:
+      'Show password visibility toggle (show-password-visibility-toggle)',
   },
   size: {
     control: 'select',
@@ -228,6 +232,7 @@ export const Playground = {
     placeholder,
     playgroundWidth,
     readonly,
+    showPasswordVisibilityToggle,
     size,
     type,
     value,
@@ -248,6 +253,9 @@ export const Playground = {
         max-count="${ifDefined(maxCount)}"
         placeholder="${ifDefined(placeholder)}"
         ?readonly="${ifDefined(readonly)}"
+        ?show-password-visibility-toggle="${ifDefined(
+          showPasswordVisibilityToggle
+        )}"
         size="${ifDefined(size)}"
         type="${ifDefined(type)}"
         value="${ifDefined(value)}"

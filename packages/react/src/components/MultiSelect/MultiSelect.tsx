@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,11 +22,14 @@ import React, {
   useMemo,
   ReactNode,
   useLayoutEffect,
+  isValidElement,
+  useCallback,
 } from 'react';
 import ListBox, {
-  ListBoxSize,
-  ListBoxType,
-  PropTypes as ListBoxPropTypes,
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
 } from '../ListBox';
 import {
   MultiSelectSortingProps,
@@ -43,16 +46,15 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import Checkbox from '../Checkbox';
-import type { InternationalProps } from '../../types/common';
 import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
   useFloating,
   flip,
+  hide,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const {
@@ -297,7 +299,7 @@ export interface MultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const MultiSelect = React.forwardRef(
+export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
@@ -367,7 +369,7 @@ const MultiSelect = React.forwardRef(
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
     const [prevOpenProp, setPrevOpenProp] = useState(open);
-    const [topItems, setTopItems] = useState([]);
+    const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
     const enableFloatingStyles =
@@ -457,8 +459,8 @@ const MultiSelect = React.forwardRef(
           ''
         );
       },
-      selectedItem: controlledSelectedItems,
-      items: filteredItems as ItemType[],
+      selectedItem: controlledSelectedItems as ItemType,
+      items: filteredItems,
       isItemDisabled(item, _index) {
         return (item as any)?.disabled;
       },
@@ -729,9 +731,44 @@ const MultiSelect = React.forwardRef(
       [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
+    const allLabelProps = getLabelProps();
+    const labelProps = isValidElement(titleText)
+      ? { id: allLabelProps.id }
+      : allLabelProps;
+
+    const getSelectionStats = useCallback(
+      (
+        selectedItems: any[],
+        filteredItems: any[]
+      ): {
+        hasIndividualSelections: boolean;
+        nonSelectAllSelectedCount: number;
+        totalSelectableCount: number;
+      } => {
+        const hasIndividualSelections = selectedItems.some(
+          (selected) => !selected.isSelectAll
+        );
+
+        const nonSelectAllSelectedCount = selectedItems.filter(
+          (selected) => !selected.isSelectAll
+        ).length;
+
+        const totalSelectableCount = filteredItems.filter(
+          (item) => !item.isSelectAll && !item.disabled
+        ).length;
+
+        return {
+          hasIndividualSelections,
+          nonSelectAllSelectedCount,
+          totalSelectableCount,
+        };
+      },
+      [selectedItems, filteredItems]
+    );
+
     return (
       <div className={wrapperClasses}>
-        <label className={titleClasses} {...getLabelProps()}>
+        <label className={titleClasses} {...labelProps}>
           {titleText && titleText}
           {selectedItems.length > 0 && (
             <span className={`${prefix}--visually-hidden`}>
@@ -818,10 +855,16 @@ const MultiSelect = React.forwardRef(
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
 
+                const {
+                  hasIndividualSelections,
+                  nonSelectAllSelectedCount,
+                  totalSelectableCount,
+                } = getSelectionStats(selectedItems, filteredItems);
+
                 const isIndeterminate =
-                  selectedItems.length !== 0 &&
                   item['isSelectAll'] &&
-                  !isChecked;
+                  hasIndividualSelections &&
+                  nonSelectAllSelectedCount < totalSelectableCount;
 
                 const itemProps = getItemProps({
                   item,
@@ -872,7 +915,7 @@ const MultiSelect = React.forwardRef(
       </div>
     );
   }
-);
+) as MultiSelectComponent;
 
 type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   MultiSelectProps<ItemType>
@@ -880,9 +923,11 @@ type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   React.RefAttributes<HTMLButtonElement>;
 
 interface MultiSelectComponent {
+  propTypes: Record<string, any>;
+  displayName: string;
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
-  ): React.ReactElement | null;
+  ): React.ReactElement<any> | null;
 }
 
 MultiSelect.displayName = 'MultiSelect';
@@ -942,7 +987,9 @@ MultiSelect.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
+  downshiftProps: PropTypes.object as PropTypes.Validator<
+    UseSelectProps<unknown>
+  >,
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -1055,7 +1102,7 @@ MultiSelect.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   slug: deprecate(
     PropTypes.node,
@@ -1098,7 +1145,7 @@ MultiSelect.propTypes = {
   /**
    * Specify 'inline' to create an inline multi-select.
    */
-  type: PropTypes.oneOf(['default', 'inline']),
+  type: ListBoxTypePropType,
 
   /**
    * Specify title to show title on hover
@@ -1115,5 +1162,3 @@ MultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default MultiSelect as MultiSelectComponent;

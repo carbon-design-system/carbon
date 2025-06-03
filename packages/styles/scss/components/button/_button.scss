@@ -98,7 +98,7 @@
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $text-disabled;
       outline: none;
     }
   }
@@ -140,7 +140,7 @@
     &.#{$prefix}--btn--disabled:focus {
       border-color: transparent;
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $text-disabled;
       outline: none;
     }
 
@@ -274,7 +274,7 @@
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
         background: transparent;
-        color: $text-on-color-disabled;
+        color: $text-disabled;
         outline: none;
       }
     }
@@ -409,18 +409,16 @@
     box-shadow: none;
   }
 
-  // Windows HCM fix
-  .#{$prefix}--btn:focus {
-    @include high-contrast-mode('focus');
+  // badge indicator
+
+  .#{$prefix}--btn--sm .#{$prefix}--badge-indicator {
+    margin-block-start: $spacing-02;
+    margin-inline-end: $spacing-02;
   }
 
   // Windows HCM fix
-
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
-    .#{$prefix}--btn__icon
-    path:not([data-icon-path]):not([fill='none']),
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
-    @include high-contrast-mode('icon-fill');
+  .#{$prefix}--btn:focus {
+    @include high-contrast-mode('focus');
   }
 
   // RTL overrides

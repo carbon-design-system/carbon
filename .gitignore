@@ -3,6 +3,7 @@
 packages/*/build/
 packages/*/examples/*/build/
 es
+es-custom
 lib
 dist
 umd
@@ -15,9 +16,9 @@ css
 # Config files
 .npmrc
 
-# Cache folders
+# Caches
 .cache
-.parcel-cache
+.eslintcache
 
 # Logs
 logs
@@ -35,6 +36,7 @@ pids
 # Editor
 .DS_Store
 *.swp
+.history/*
 .idea
 .vscode
 
@@ -62,6 +64,6 @@ blob-report
 # Local token
 .env
 
-# nx local buiild cache
+# nx local build cache
 .nx/cache
 .nx/workspace-data

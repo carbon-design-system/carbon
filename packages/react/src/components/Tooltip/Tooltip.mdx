@@ -16,7 +16,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
+- [Tooltip](#Tooltip)
 - [Overview](#overview)
+  - [Usage](#usage)
   - [Toggletips vs Tooltips](#toggletips-vs-tooltips)
   - [Customizing the content of a tooltip](#customizing-the-content-of-a-tooltip)
   - [Tooltip alignment](#tooltip-alignment)
@@ -30,8 +32,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 You can use the `Tooltip` component as a wrapper to display a popup for an
 interactive element that you provide. If you are trying to place interactive
-content inside of the `Tooltip` itself, consider using `Toggletip` instead. You
-can provide the interactive element as a child to `Tooltip`, for example:
+content inside of the `Tooltip` itself, consider using `Toggletip` instead.
+
+### Usage
+
+`Tooltip` accepts a single child for its `children` prop. It is important that
+the child is an interactive element, for example:
 
 ```jsx
 <Tooltip label="Close">
@@ -39,9 +45,28 @@ can provide the interactive element as a child to `Tooltip`, for example:
 </Tooltip>
 ```
 
-`Tooltip` accepts a single child for its `children` prop. It is important that
-the component you provide renders an interactive element. In addition, you can
-specify the contents of the popup through the `label` or `description` prop.
+When used with a component, props need to be spread on the child component.
+
+```jsx
+export default function App() {
+  return (
+    <Tooltip label="Close">
+      <CustomTrigger />
+    </Tooltip>
+  );
+}
+
+function CustomTrigger(props) {
+  return (
+    <button type="button" {...props}>
+      X
+    </button>
+  );
+}
+```
+
+You can specify the contents of the popup through the `label` or `description`
+prop.
 
 <Canvas
   of={TooltipStories.Default}
@@ -130,7 +155,7 @@ component will wait before showing the tooltip. The `exitDelayMs` prop allows
 you to provide a time, in milliseconds, that the component will wait before
 hiding the tooltip.
 
-By default, these values are set to 100ms for `enterDelayms` and 300ms for
+By default, these values are set to 100ms for `enterDelayMs` and 300ms for
 `exitDelayMs`.
 
 ## Component API

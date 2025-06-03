@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,8 +33,15 @@ export * from './components/DatePickerInput';
 export * from './components/Dropdown';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
+export {
+  FeatureFlags,
+  useFeatureFlag,
+  useFeatureFlags,
+  FeatureFlags as unstable_FeatureFlags, // this export can be removed in v12
+  useFeatureFlag as unstable_useFeatureFlag, // this export can be removed in v12
+  useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
+} from './components/FeatureFlags';
 export * from './components/FileUploader';
-export * from './components/FilterableMultiSelect';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
@@ -57,6 +64,7 @@ export * from './components/NumberInput';
 export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
+export * as unstable__PageHeader from './components/PageHeader';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
 export * from './components/PaginationNav';
@@ -97,13 +105,7 @@ export * from './components/Toggletip';
 export * from './components/TreeView';
 export * from './components/UIShell';
 export * from './components/UnorderedList';
-
 // Experimental
-export {
-  FeatureFlags as unstable_FeatureFlags,
-  useFeatureFlag as unstable_useFeatureFlag,
-  useFeatureFlags as unstable_useFeatureFlags,
-} from './components/FeatureFlags';
 export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
@@ -138,6 +140,10 @@ export {
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
 export {
+  FluidNumberInput as unstable__FluidNumberInput,
+  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+} from './components/FluidNumberInput';
+export {
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
 } from './components/FluidTimePicker';
@@ -158,6 +164,8 @@ export {
 export * from './components/Popover';
 export * from './components/ProgressBar';
 export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
+export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
+export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';
 // Keep until V12
 export {
   AILabel as unstable__Slug,
@@ -370,6 +378,9 @@ export type { SectionProps } from './components/Heading/index';
 export type { IconSkeletonProps } from './components/Icon/Icon.Skeleton';
 export type { IconButtonProps } from './components/IconButton/index';
 
+// icon indicator
+export type { IconIndicatorProps } from './components/IconIndicator/index';
+
 //idprefix
 export type { IdPrefixProps } from './components/IdPrefix/index';
 
@@ -442,6 +453,15 @@ export type { OrderedListProps } from './components/OrderedList/OrderedList';
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
 
+//page header
+export type {
+  PageHeaderProps,
+  PageHeaderBreadcrumbBarProps,
+  PageHeaderContentProps,
+  PageHeaderHeroImageProps,
+  PageHeaderTabBarProps,
+} from './components/PageHeader';
+
 //pagination
 export type { PaginationProps } from './components/Pagination/Pagination';
 export type { PaginationSkeletonProps } from './components/Pagination/Pagination.Skeleton';
@@ -479,6 +499,9 @@ export type { SelectProps } from './components/Select/Select';
 export type { SelectSkeletonProps } from './components/Select/Select.Skeleton';
 export type { SelectItemProps } from './components/SelectItem/SelectItem';
 export type { SelectItemGroupProps } from './components/SelectItemGroup/SelectItemGroup';
+
+// shape indicator
+export type { ShapeIndicatorProps } from './components/ShapeIndicator/index';
 
 //skeleton items
 export type { SkeletonIconProps } from './components/SkeletonIcon/SkeletonIcon';
@@ -606,5 +629,3 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
-
-export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';

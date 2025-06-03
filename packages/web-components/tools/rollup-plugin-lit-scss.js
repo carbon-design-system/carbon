@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -76,6 +74,14 @@ export default function LitSCSS({
         ...options,
         file: id,
         data: finalContent,
+        // suppress mixed-declarations warnings until resolved in
+        // https://github.com/carbon-design-system/carbon/issues/16962
+        logger: {
+          warn: (message) =>
+            message.includes('mixed-decls')
+              ? undefined
+              : { type: 'warn', message },
+        },
       });
 
       return {

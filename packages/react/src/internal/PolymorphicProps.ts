@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 type AsProp<C extends React.ElementType> = {
   as?: C;
 };
@@ -15,7 +22,7 @@ export type PolymorphicComponentProp<
 export type PolymorphicRef<C extends React.ElementType> =
   React.ComponentPropsWithRef<C>['ref'];
 
-// This is a new type utitlity with ref!
+// This is a new type utility with ref!
 export type PolymorphicComponentPropWithRef<
   C extends React.ElementType,
   Props = {},

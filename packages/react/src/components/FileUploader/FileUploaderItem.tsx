@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,17 +7,21 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type HTMLAttributes,
+} from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
-import uid from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 
-export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
+export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Error message body for an invalid file upload
    */
@@ -89,7 +93,7 @@ function FileUploaderItem({
   const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
-  const { current: id } = useRef(uuid || uid());
+  const { current: id } = useRef(uuid || uniqueId());
   const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
@@ -156,7 +160,7 @@ function FileUploaderItem({
                 : undefined
             }
             onKeyDown={(evt) => {
-              if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
+              if (matches(evt, [keys.Enter, keys.Space])) {
                 if (status === 'edit') {
                   evt.preventDefault();
                   onDelete(evt, { uuid: id });

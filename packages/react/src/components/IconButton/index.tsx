@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,9 +10,12 @@ import React, { ForwardedRef, ReactNode } from 'react';
 import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import BadgeIndicator from '../BadgeIndicator';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 export const IconButtonKinds = [
   'primary',
@@ -51,20 +54,6 @@ export type IconButtonAlignment =
   | DeprecatedIconButtonAlignment
   | NewIconButtonAlignment;
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
-
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -78,9 +67,15 @@ export interface IconButtonProps
   autoAlign?: boolean;
 
   /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg" and kind="ghost"
+   */
+  badgeCount?: number;
+
+  /**
    * Optionally specify an href for your IconButton to become an `<a>` element
    */
-  href?: string;
+  href?: React.AnchorHTMLAttributes<HTMLAnchorElement>['href'];
 
   /**
    * Provide an icon or asset to be rendered inside of the IconButton
@@ -108,9 +103,19 @@ export interface IconButtonProps
   disabled?: boolean;
 
   /**
+   * Specify whether a drop shadow should be rendered on the tooltip
+   */
+  dropShadow?: boolean;
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs?: number;
+
+  /**
+   * Render the tooltip using the high-contrast theme
+   */
+  highContrast?: boolean;
 
   /**
    * Specify whether the IconButton is currently selected
@@ -127,7 +132,8 @@ export interface IconButtonProps
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If using the badgeCount = 0 then provide a
+   * label with describing there is a new notification.
    */
   label: ReactNode;
 
@@ -137,9 +143,19 @@ export interface IconButtonProps
   leaveDelayMs?: number;
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Optionally specify a `rel` when using an `<a>` element.
    */
-  size?: ButtonSize;
+  rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
+
+  /**
+   * Specify the size of the Button.
+   */
+  size?: Extract<ButtonSize, 'sm' | 'md' | 'lg'>;
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target?: React.AnchorHTMLAttributes<HTMLAnchorElement>['target'];
 
   /**
    * Specify an optional className to be added to your Tooltip wrapper
@@ -151,12 +167,15 @@ const IconButton = React.forwardRef(function IconButton(
   {
     align,
     autoAlign = false,
+    badgeCount,
     children,
     className,
     closeOnActivation = true,
     defaultOpen = false,
     disabled,
+    dropShadow = false,
     enterDelayMs = 100,
+    highContrast = true,
     kind,
     label,
     leaveDelayMs = 100,
@@ -173,6 +192,13 @@ const IconButton = React.forwardRef(function IconButton(
     [`${prefix}--icon-tooltip--disabled`]: disabled,
   });
 
+  if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
+    console.warn(
+      "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+    );
+  }
+  const badgeId = useId('badge-indicator');
+
   return (
     <Tooltip
       align={align}
@@ -180,7 +206,9 @@ const IconButton = React.forwardRef(function IconButton(
       closeOnActivation={closeOnActivation}
       className={tooltipClasses}
       defaultOpen={defaultOpen}
+      dropShadow={dropShadow}
       enterDelayMs={enterDelayMs}
+      highContrast={highContrast}
       label={label}
       leaveDelayMs={leaveDelayMs}>
       <ButtonBase
@@ -189,14 +217,16 @@ const IconButton = React.forwardRef(function IconButton(
         kind={kind}
         ref={ref}
         size={size}
-        className={classNames(
-          `${prefix}--btn--icon-only`,
-          {
-            [`${prefix}--btn--selected`]: isSelected,
-          },
-          className
-        )}>
+        isSelected={isSelected}
+        hasIconOnly
+        className={className}
+        aria-describedby={rest['aria-describedby'] || (badgeCount && badgeId)}>
         {children}
+        {!disabled && badgeCount !== undefined && (
+          <BadgeIndicator
+            id={badgeId}
+            count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
+        )}
       </ButtonBase>
     </Tooltip>
   );
@@ -234,7 +264,6 @@ IconButton.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -249,14 +278,19 @@ IconButton.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**
    * **Experimental**: Will attempt to automatically align the tooltip
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg", kind="ghost" and hasIconOnly=true
+   */
+  badgeCount: PropTypes.number,
 
   /**
    * Optionally specify an href for your IconButton to become an `<a>` element
@@ -284,6 +318,11 @@ IconButton.propTypes = {
   defaultOpen: PropTypes.bool,
 
   /**
+   * Specify whether a drop shadow should be rendered on the tooltip
+   */
+  dropShadow: PropTypes.bool,
+
+  /**
    * Specify whether the Button should be disabled, or not
    */
   disabled: PropTypes.bool,
@@ -296,8 +335,12 @@ IconButton.propTypes = {
   /**
    * Specify whether the IconButton is currently selected
    */
-
   isSelected: PropTypes.bool,
+
+  /**
+   * Render the tooltip using the high-contrast theme
+   */
+  highContrast: PropTypes.bool,
 
   /**
    * Specify the type of button to be used as the base for the IconButton
@@ -307,8 +350,13 @@ IconButton.propTypes = {
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
+   * If the child node already has an `aria-label`, the tooltip will not apply
+   * `aria-labelledby`. If the child node has `aria-labelledby`, that value will
+   * be used instead. Otherwise, the tooltip will use its own ID as the label.
    * This means that if you have text in the child node it will not be
    * announced to the screen reader.
+   * If using `badgeCount={0}`, make sure the label explains that there is a
+   * new notification.
    */
   label: PropTypes.node.isRequired,
 
@@ -318,9 +366,19 @@ IconButton.propTypes = {
   leaveDelayMs: PropTypes.number,
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel: PropTypes.string,
+
+  /**
+   * Specify the size of the Button.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target: PropTypes.string,
 
   /**
    * Specify an optional className to be added to your Tooltip wrapper

@@ -1,37 +1,47 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { useRef, useEffect, useState, ReactNode } from 'react';
+import PropTypes, { type Validator } from 'prop-types';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  type HTMLAttributes,
+  type ReactNode,
+  type Ref,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
-import toggleClass from '../../tools/toggleClass';
+import { toggleClass } from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import { Layer } from '../Layer';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
-  wrapFocusWithoutSentinels,
+import {
   elementOrParentIsFloatingMenu,
+  wrapFocus,
+  wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
+import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
@@ -43,7 +53,7 @@ export interface ModalSecondaryButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface ModalProps extends ReactAttr<HTMLDivElement> {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify whether the Modal is displaying an alert, error or warning
    * Should go hand in hand with the danger prop.
@@ -66,7 +76,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   className?: string;
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel?: string;
 
@@ -98,7 +108,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: any; // TODO FIXME
+  launcherButtonRef?: Ref<HTMLButtonElement>;
 
   /**
    * Specify the description for the loading text
@@ -260,7 +270,7 @@ const Modal = React.forwardRef(function Modal(
     slug,
     ...rest
   }: ModalProps,
-  ref: React.LegacyRef<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const button = useRef<HTMLButtonElement>(null);
@@ -270,6 +280,7 @@ const Modal = React.forwardRef(function Modal(
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
+  const prevOpen = usePreviousValue(open);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
@@ -279,8 +290,17 @@ const Modal = React.forwardRef(function Modal(
     [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
   });
   const loadingActive = loadingStatus !== 'inactive';
+
   const focusTrapWithoutSentinels = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
+  );
+  const enableDialogElement = useFeatureFlag('enable-dialog-element');
+  warning(
+    !(focusTrapWithoutSentinels && enableDialogElement),
+    '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+      '`enableDialogElement` feature flags are enabled. The native dialog ' +
+      'element handles focus, so `enableDialogElement` must be off for ' +
+      '`focusTrapWithoutSentinels` to have any effect.'
   );
 
   function isCloseButton(element: Element) {
@@ -291,8 +311,11 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+    const { target } = evt;
+
     evt.stopPropagation();
-    if (open) {
+
+    if (open && target instanceof HTMLElement) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
@@ -300,30 +323,33 @@ const Modal = React.forwardRef(function Modal(
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
-        !isCloseButton(evt.target as Element)
+        !isCloseButton(target) &&
+        document.activeElement !== button.current
       ) {
         onRequestSubmit(evt);
       }
 
       if (
         focusTrapWithoutSentinels &&
+        !enableDialogElement &&
         match(evt, keys.Tab) &&
         innerModal.current
       ) {
         wrapFocusWithoutSentinels({
           containerNode: innerModal.current,
-          currentActiveNode: evt.target,
-          event: evt as any,
+          currentActiveNode: target,
+          event: evt,
         });
       }
     }
   }
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-    const target = evt.target as Node;
+    const { target } = evt;
     evt.stopPropagation();
     if (
       !preventCloseOnClickOutside &&
+      target instanceof Node &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       innerModal.current &&
       !innerModal.current.contains(target)
@@ -336,7 +362,12 @@ const Modal = React.forwardRef(function Modal(
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
-    if (open && currentActiveNode && oldActiveNode) {
+    if (
+      !enableDialogElement &&
+      open &&
+      oldActiveNode instanceof HTMLElement &&
+      currentActiveNode instanceof HTMLElement
+    ) {
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
@@ -348,6 +379,38 @@ const Modal = React.forwardRef(function Modal(
         oldActiveNode,
         selectorsFloatingMenus,
       });
+    }
+
+    // Adjust scroll if needed so that element with focus is not obscured by gradient
+    const modalContent = document.querySelector(`.${prefix}--modal-content`);
+    if (
+      !modalContent ||
+      !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+      !currentActiveNode ||
+      !modalContent.contains(currentActiveNode)
+    ) {
+      return;
+    }
+
+    const lastContent = modalContent.children[modalContent.children.length - 1];
+    const gradientSpacing =
+      modalContent.scrollHeight -
+      (lastContent as HTMLElement).offsetTop -
+      (lastContent as HTMLElement).clientHeight;
+
+    for (let elem of modalContent.children) {
+      if (elem.contains(currentActiveNode)) {
+        const spaceBelow =
+          modalContent.clientHeight -
+          (elem as HTMLElement).offsetTop +
+          modalContent.scrollTop -
+          (elem as HTMLElement).clientHeight;
+        if (spaceBelow < gradientSpacing) {
+          modalContent.scrollTop =
+            modalContent.scrollTop + (gradientSpacing - spaceBelow);
+        }
+        break;
+      }
     }
   }
 
@@ -400,7 +463,7 @@ const Modal = React.forwardRef(function Modal(
         }
       : {};
 
-  const alertDialogProps: ReactAttr<HTMLDivElement> = {};
+  const alertDialogProps: HTMLAttributes<HTMLDivElement> = {};
   if (alert && passiveModal) {
     alertDialogProps.role = 'alert';
   }
@@ -411,53 +474,65 @@ const Modal = React.forwardRef(function Modal(
 
   useEffect(() => {
     return () => {
-      toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+      if (!enableDialogElement) {
+        toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+      }
     };
-  }, [prefix]);
+  }, [prefix, enableDialogElement]);
 
   useEffect(() => {
-    toggleClass(
-      document.body,
-      `${prefix}--body--with-modal-open`,
-      open ?? false
-    );
-  }, [open, prefix]);
+    if (!enableDialogElement) {
+      toggleClass(
+        document.body,
+        `${prefix}--body--with-modal-open`,
+        open ?? false
+      );
+    }
+  }, [open, prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!open && launcherButtonRef) {
+    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
       setTimeout(() => {
-        launcherButtonRef?.current?.focus();
+        if ('current' in launcherButtonRef) {
+          launcherButtonRef.current?.focus();
+        }
       });
     }
-  }, [open, launcherButtonRef]);
+  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
 
   useEffect(() => {
-    const initialFocus = (focusContainerElement: HTMLElement | null) => {
-      const containerElement = focusContainerElement || innerModal.current;
-      const primaryFocusElement = containerElement
-        ? containerElement.querySelector<HTMLElement | SVGElement>(
-            danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
-          )
-        : null;
+    if (!enableDialogElement) {
+      const initialFocus = (focusContainerElement: HTMLElement | null) => {
+        const containerElement = focusContainerElement || innerModal.current;
+        const primaryFocusElement =
+          containerElement &&
+          (containerElement.querySelector<HTMLElement | SVGElement>(
+            selectorPrimaryFocus
+          ) ||
+            (danger &&
+              containerElement.querySelector<HTMLElement | SVGElement>(
+                `.${prefix}--btn--secondary`
+              )));
 
-      if (primaryFocusElement) {
-        return primaryFocusElement;
+        if (primaryFocusElement) {
+          return primaryFocusElement;
+        }
+
+        return button && button.current;
+      };
+
+      const focusButton = (focusContainerElement: HTMLElement | null) => {
+        const target = initialFocus(focusContainerElement);
+        if (target !== null) {
+          target.focus();
+        }
+      };
+
+      if (open) {
+        focusButton(innerModal.current);
       }
-
-      return button && button.current;
-    };
-
-    const focusButton = (focusContainerElement: HTMLElement | null) => {
-      const target = initialFocus(focusContainerElement);
-      if (target !== null) {
-        target.focus();
-      }
-    };
-
-    if (open) {
-      focusButton(innerModal.current);
     }
-  }, [open, selectorPrimaryFocus, danger, prefix]);
+  }, [open, selectorPrimaryFocus, danger, prefix, enableDialogElement]);
 
   useIsomorphicEffect(() => {
     if (contentRef.current) {
@@ -517,17 +592,20 @@ const Modal = React.forwardRef(function Modal(
     </div>
   );
 
-  const modalBody = (
-    <div
+  // alertdialog is the only permitted aria role for a native dialog element
+  // https://www.w3.org/TR/html-aria/#docconformance:~:text=Role%3A-,alertdialog,-.%20(dialog%20is
+  const isAlertDialog = alert && !passiveModal;
+
+  const modalBody = enableDialogElement ? (
+    <Dialog
+      open={open}
+      modal
       ref={innerModal}
-      role="dialog"
-      {...alertDialogProps}
+      role={isAlertDialog ? 'alertdialog' : ''}
+      aria-describedby={isAlertDialog ? modalBodyId : ''}
       className={containerClasses}
-      aria-label={ariaLabel}
-      aria-modal="true"
-      tabIndex={-1}>
+      aria-label={ariaLabel}>
       <div className={`${prefix}--modal-header`}>
-        {passiveModal && modalButton}
         {modalLabel && (
           <Text
             as="h2"
@@ -542,16 +620,29 @@ const Modal = React.forwardRef(function Modal(
           className={`${prefix}--modal-header__heading`}>
           {modalHeading}
         </Text>
-        {slug ? (
-          normalizedDecorator
-        ) : decorator ? (
+        {decorator ? (
           <div className={`${prefix}--modal--inner__decorator`}>
             {normalizedDecorator}
           </div>
         ) : (
           ''
         )}
-        {!passiveModal && modalButton}
+        <div className={`${prefix}--modal-close-button`}>
+          <IconButton
+            className={modalCloseButtonClass}
+            label={closeButtonLabel}
+            onClick={onRequestClose}
+            aria-label={closeButtonLabel}
+            align="left"
+            ref={button}>
+            <Close
+              size={20}
+              aria-hidden="true"
+              tabIndex="-1"
+              className={`${modalCloseButtonClass}__icon`}
+            />
+          </IconButton>
+        </div>
       </div>
       <Layer
         ref={contentRef}
@@ -602,21 +693,11 @@ const Modal = React.forwardRef(function Modal(
           </Button>
         </ButtonSet>
       )}
-    </div>
-  );
-
-  return (
-    <Layer
-      {...rest}
-      level={0}
-      onKeyDown={handleKeyDown}
-      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
-      className={modalClasses}
-      role="presentation"
-      ref={ref}>
+    </Dialog>
+  ) : (
+    <>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!focusTrapWithoutSentinels && (
+      {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
           ref={startTrap}
           tabIndex={0}
@@ -625,9 +706,93 @@ const Modal = React.forwardRef(function Modal(
           Focus sentinel
         </span>
       )}
-      {modalBody}
+      <div
+        ref={innerModal}
+        role="dialog"
+        {...alertDialogProps}
+        className={containerClasses}
+        aria-label={ariaLabel}
+        aria-modal="true"
+        tabIndex={-1}>
+        <div className={`${prefix}--modal-header`}>
+          {passiveModal && modalButton}
+          {modalLabel && (
+            <Text
+              as="h2"
+              id={modalLabelId}
+              className={`${prefix}--modal-header__label`}>
+              {modalLabel}
+            </Text>
+          )}
+          <Text
+            as="h2"
+            id={modalHeadingId}
+            className={`${prefix}--modal-header__heading`}>
+            {modalHeading}
+          </Text>
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--modal--inner__decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
+          {!passiveModal && modalButton}
+        </div>
+        <Layer
+          ref={contentRef}
+          id={modalBodyId}
+          className={contentClasses}
+          {...hasScrollingContentProps}>
+          {children}
+        </Layer>
+        {!passiveModal && (
+          <ButtonSet className={footerClasses} aria-busy={loadingActive}>
+            {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+              ? secondaryButtons.map(
+                  ({ buttonText, onClick: onButtonClick }, i) => (
+                    <Button
+                      key={`${buttonText}-${i}`}
+                      kind="secondary"
+                      onClick={onButtonClick}>
+                      {buttonText}
+                    </Button>
+                  )
+                )
+              : secondaryButtonText && (
+                  <Button
+                    disabled={loadingActive}
+                    kind="secondary"
+                    onClick={onSecondaryButtonClick}
+                    ref={secondaryButton}>
+                    {secondaryButtonText}
+                  </Button>
+                )}
+            <Button
+              className={primaryButtonClass}
+              kind={danger ? 'danger' : 'primary'}
+              disabled={loadingActive || primaryButtonDisabled}
+              onClick={onRequestSubmit}
+              ref={button}>
+              {loadingStatus === 'inactive' ? (
+                primaryButtonText
+              ) : (
+                <InlineLoading
+                  status={loadingStatus}
+                  description={loadingDescription}
+                  iconDescription={loadingIconDescription}
+                  className={`${prefix}--inline-loading--btn`}
+                  onSuccess={onLoadingSuccess}
+                />
+              )}
+            </Button>
+          </ButtonSet>
+        )}
+      </div>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!focusTrapWithoutSentinels && (
+      {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
           ref={endTrap}
           tabIndex={0}
@@ -636,6 +801,20 @@ const Modal = React.forwardRef(function Modal(
           Focus sentinel
         </span>
       )}
+    </>
+  );
+
+  return (
+    <Layer
+      {...rest}
+      level={0}
+      onKeyDown={handleKeyDown}
+      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
+      onBlur={handleBlur}
+      className={modalClasses}
+      role="presentation"
+      ref={ref}>
+      {modalBody}
     </Layer>
   );
 });
@@ -666,7 +845,7 @@ Modal.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel: PropTypes.string,
 
@@ -701,9 +880,17 @@ Modal.propTypes = {
   launcherButtonRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.any,
+      current: PropTypes.oneOfType([
+        // `PropTypes.instanceOf(HTMLButtonElement)` alone won't work because
+        // `HTMLButtonElement` is not defined in the test environment even
+        // though `testEnvironment` is set to `jsdom`.
+        typeof HTMLButtonElement !== 'undefined'
+          ? PropTypes.instanceOf(HTMLButtonElement)
+          : PropTypes.any,
+        PropTypes.oneOf([null]),
+      ]).isRequired,
     }),
-  ]),
+  ]) as Validator<Ref<HTMLButtonElement>>,
 
   /**
    * Specify the description for the loading text

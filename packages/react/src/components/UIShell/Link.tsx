@@ -5,34 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, {
-  type ElementType,
-  type ForwardedRef,
-  forwardRef,
-  type WeakValidationMap,
-  type Ref,
-} from 'react';
+import PropTypes, { WeakValidationMap } from 'prop-types';
+import React, { ForwardedRef, JSX, type ElementType } from 'react';
 import deprecate from '../../prop-types/deprecate';
-import { type PolymorphicProps } from '../../types/common';
+import { PolymorphicProps } from '../../types/common';
+import { HeaderMenuItemBaseProps } from './HeaderMenuItem';
 
-// Note: Maybe we should use `as` instead of `element`? `as` appears to be
-// standard and is used in other places in this project.
-
-type LinkBaseProps<E extends ElementType> = {
+export interface LinkBaseProps {
   /**
    * @deprecated Use `as` instead
    */
-  element?: E | undefined;
-  ref?: Ref<E>;
-};
+  element?: ElementType | undefined;
+  as?: ElementType | undefined;
+  isSideNavExpanded?: boolean | undefined;
+}
 
-export type LinkProps<E extends ElementType> = PolymorphicProps<
+export type LinkProps<E extends ElementType = 'a'> = PolymorphicProps<
   E,
-  LinkBaseProps<E>
+  LinkBaseProps
 >;
 
-function LinkRenderFunction<E extends ElementType = 'a'>(
+export interface LinkComponent {
+  <E extends ElementType = 'a'>(props: LinkProps<E>): JSX.Element | null;
+  displayName?: string;
+  propTypes?: WeakValidationMap<LinkProps<any>>;
+}
+
+// First define the component without generics
+type LinkPropsWithoutRef = Omit<LinkProps<'a'>, 'ref'>;
+
+const LinkBase = (
   {
     element,
     as: BaseComponent,
@@ -40,12 +42,15 @@ function LinkRenderFunction<E extends ElementType = 'a'>(
     // See https://github.com/carbon-design-system/carbon/issues/3970
     isSideNavExpanded: _isSideNavExpanded,
     ...rest
-  }: LinkProps<E>,
-  ref: ForwardedRef<E>
-) {
+  }: LinkPropsWithoutRef,
+  ref: ForwardedRef<HTMLAnchorElement>
+) => {
   const BaseComponentAsAny = (BaseComponent ?? element ?? 'a') as any;
   return <BaseComponentAsAny ref={ref} {...rest} />;
-}
+};
+
+// Use forwardRef with the non-generic function
+const Link = React.forwardRef(LinkBase) as unknown as LinkComponent;
 
 /**
  * Link is a custom component that allows us to supporting rendering elements
@@ -53,12 +58,6 @@ function LinkRenderFunction<E extends ElementType = 'a'>(
  * in their own components to support use-cases like `react-router` or
  * `@reach/router`
  */
-const Link = forwardRef(LinkRenderFunction) as (<E extends ElementType = 'a'>(
-  props: LinkProps<E>
-) => JSX.Element) & {
-  displayName?: string;
-  propTypes?: WeakValidationMap<LinkProps<any>>;
-};
 
 const LinkPropTypes = {
   /**

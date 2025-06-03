@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -57,7 +55,7 @@ export const Default = {
     <cds-table is-sortable>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
-        >With filtering</cds-table-header-description
+        >With sorting</cds-table-header-description
       >
 
       <cds-table-head>
@@ -146,7 +144,7 @@ export const Playground = {
       ?use-zebra-styles="${useZebraStyles}">
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
-        >With filtering</cds-table-header-description
+        >With sorting</cds-table-header-description
       >
 
       <cds-table-head>

@@ -11,17 +11,21 @@ export function useNoInteractiveChildren(
   ref,
   message = 'component should have no interactive child nodes'
 ) {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
+    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
+    /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    */
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 
       if (node) {
-        throw new Error(
-          `Error: ${message}.\n\nInstead found: ${node.outerHTML}`
-        );
+        const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+        // eslint-disable-next-line no-console
+        console.error(errorMessage);
+        throw new Error(errorMessage);
       }
-    });
+    }, []);
   }
 }
 
@@ -29,8 +33,11 @@ export function useInteractiveChildrenNeedDescription(
   ref,
   message = `interactive child node(s) should have an \`aria-describedby\` property`
 ) {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
+    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
+    /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    */
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 

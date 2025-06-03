@@ -1,55 +1,83 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as ToggleTip from './toggletip.stories';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ToggleTipStories from './toggletip.stories';
 
-<Meta of={ToggleTip} />
+<Meta of={ToggleTipStories} />
 
 # Toggletip
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/toggletip)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/toogle-tip)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/toggletip/usage)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/toggletip)
+## Table of Contents
 
-The Toggletip component provides an accessible way to render interactive content
-within a popover. If you do not have any interactive content inside of your
-Toggletip, consider using Tooltip instead.
+- [Overview](#overview)
+  - [Toggletips vs Tooltips](#toggletips-vs-tooltips)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+The `cds-toggletip` component provides an accessible way to render interactive
+content within a popover. If you do not have any interactive content inside of
+your `cds-toggletip`, consider using `cds-tooltip` instead. To use this
+component, you can provide the label by passing it in as a child, include
+actions by using `slot="action"` in a `cds-button`, and to include the content
+you can use the `slot="body-text"`
 
-### JS (via import)
+<Canvas of={ToggleTipStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/toggle-tip/index.js';
-import '@carbon/web-components/es/components/link/index.js';
-import '@carbon/web-components/es/components/button/index.js';
-```
+### Toggletips vs Tooltips
 
-<Markdown>{`${cdnJs({ components: ['toggle-tip'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+Toggletips and tooltips are similar visually and both contain a popover and
+interactive trigger element. The two components differ in the way they are
+invoked and dismissed and if the user must interact with the contents. A tooltip
+is exposed on hover or focus when you need to expose brief, supplemental
+information that is not interactive. A toggletip is used on click or enter when
+you need to expose interactive elements, such as button, that a user needs to
+interact with.
 
-### HTML
+## Alignment
+
+The toggletip component provides four options for alignment: `top`, `bottom`,
+`left`, and `right`. These options will correspond to where the popover will
+render relative to the toggletip button. For example, when choosing `align="top"`
+the toggletip content will render above the toggletip button.
+
+## Customizing content
+
+You can customize the contents of a toggletip with the toggletip content
+component. You can render any kind of child element or component inside of this
+component.
+
+You can customize the contents of a toggletip with using the `slot="body-text"`
+on any kind of child element or component.
+
+## Actions
+
+If your toggletip includes actions, you can make use of the `slot="actions"` to
+render them underneath the content of your content. For example:
 
 ```html
 <cds-toggletip>
-  Toggletip label
-
   <p slot="body-text">
     Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
     eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
   </p>
-  <cds-link slot="actions">Test</cds-link>
-  <cds-button slot="actions">Button</cds-button>
+  <cds-link href="custom-link" slot="actions">Custom link</cds-link>
+  <cds-button size="sm" slot="actions">Custom action</cds-button>
 </cds-toggletip>
 ```
 
-### `<cds-toggletip>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-toggletip open>`) and `false` means not setting the attribute (e.g.
-`<cds-toggletip>` without `open` attribute).
+## Component API
 
 <ArgTypes of="cds-toggletip" />
+
+<Markdown>{`${cdnJs({ components: ['toggletip'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/toggle-tip/toggletip.mdx).

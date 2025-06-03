@@ -1,5 +1,6 @@
 import { Canvas, ArgTypes, Story, Meta } from '@storybook/blocks';
 import * as HeadingStories from './Heading.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -11,8 +12,11 @@ import * as HeadingStories from './Heading.stories';
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Heading](#heading)
+  - [Overview](#overview)
 - [Component API](#component-api)
+  - [Section as](#section-as)
+  - [Custom level](#custom-level)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -33,7 +37,15 @@ appropriate heading level without you having to manually specify it. To do this,
 you use the `Section` component for each section of your page. Every `Heading`
 component in that `Section` will use the correct heading level.
 
-<Canvas of={HeadingStories.Default} />
+<Canvas
+  of={HeadingStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(HeadingStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
 
@@ -65,6 +77,16 @@ You can use the `level` prop to override the level of a section:
   </Section>
 </Section>
 ```
+
+<Canvas
+  of={HeadingStories.CustomLevel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(HeadingStories.CustomLevel),
+    },
+  ]}
+/>
 
 ## Feedback
 

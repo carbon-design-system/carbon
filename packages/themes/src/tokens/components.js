@@ -99,10 +99,22 @@ export const status = TokenGroup.create({
   tokens: [
     'status-red',
     'status-orange',
+    'status-orange-outline',
     'status-yellow',
+    'status-yellow-outline',
     'status-purple',
     'status-green',
     'status-blue',
     'status-gray',
+  ],
+});
+
+export const contentSwitcher = TokenGroup.create({
+  name: 'Content Switcher',
+  properties: [],
+  tokens: [
+    'content-switcher-selected',
+    'content-switcher-background',
+    'content-switcher-background-hover',
   ],
 });

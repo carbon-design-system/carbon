@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Edit } from '@carbon/icons-react';
+import { Edit, Notification } from '@carbon/icons-react';
 import React from 'react';
 import { IconButton } from '../IconButton';
 import mdx from './IconButton.mdx';
@@ -16,6 +16,7 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['badgeCount'],
     },
     docs: {
       page: mdx,
@@ -36,24 +37,15 @@ export default {
   },
 };
 
-const DefaultStory = (props) => {
-  const { align, defaultOpen, disabled, kind, label, size } = props;
+export const Default = (args) => {
   return (
     <div style={{ margin: '3rem' }}>
-      <IconButton
-        align={align}
-        defaultOpen={defaultOpen}
-        disabled={disabled}
-        kind={kind}
-        label={label}
-        size={size}>
+      <IconButton {...args}>
         <Edit />
       </IconButton>
     </div>
   );
 };
-
-export const Default = DefaultStory.bind({});
 
 Default.args = {
   align: 'bottom',
@@ -94,5 +86,29 @@ Default.argTypes = {
       type: 'select',
     },
     options: ['primary', 'secondary', 'ghost', 'tertiary'],
+  },
+};
+
+export const withBadgeIndicator = (args) => {
+  return (
+    <div style={{ margin: '3rem' }}>
+      <IconButton
+        label="Notification"
+        kind="ghost"
+        size="lg"
+        autoAlign
+        {...args}>
+        <Notification />
+      </IconButton>
+    </div>
+  );
+};
+
+withBadgeIndicator.args = {
+  badgeCount: 4,
+};
+withBadgeIndicator.parameters = {
+  controls: {
+    exclude: ['size', 'kind'],
   },
 };

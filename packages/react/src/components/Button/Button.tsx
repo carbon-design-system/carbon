@@ -1,21 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React from 'react';
 import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
-import { composeEventHandlers } from '../../tools/events';
-import { PolymorphicProps } from '../../types/common';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 export const ButtonKinds = [
   'primary',
@@ -57,7 +52,7 @@ export interface ButtonBaseProps
   /**
    * Optionally specify an href for your Button to become an `<a>` element
    */
-  href?: string;
+  href?: React.AnchorHTMLAttributes<HTMLAnchorElement>['href'];
 
   /**
    * If specifying the `renderIcon` prop, provide a description for that icon that can
@@ -83,8 +78,12 @@ export interface ButtonBaseProps
     : ButtonKind;
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
+
+  /**
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 
@@ -94,10 +93,26 @@ export interface ButtonBaseProps
   size?: ButtonSize;
 
   /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target?: React.AnchorHTMLAttributes<HTMLAnchorElement>['target'];
+
+  /**
    * Specify the alignment of the tooltip to the icon-only button.
    * Can be one of: start, center, or end.
    */
   tooltipAlignment?: ButtonTooltipAlignment;
+
+  /**
+   * Enable drop shadow for tooltips for icon-only buttons.
+   */
+  tooltipDropShadow?: boolean;
+
+  /**
+   * Enable high-contrast theme for tooltips on icon-only buttons.
+   * Defaults to true.
+   */
+  tooltipHighContrast?: boolean;
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
@@ -130,12 +145,13 @@ const Button: ButtonComponent = React.forwardRef(
     props: ButtonProps<T>,
     ref: React.Ref<unknown>
   ) => {
-    const tooltipRef = useRef(null);
     const {
       as,
       autoAlign = false,
       children,
       hasIconOnly = false,
+      tooltipHighContrast = true,
+      tooltipDropShadow = false,
       iconDescription,
       kind = 'primary',
       onBlur,
@@ -150,12 +166,12 @@ const Button: ButtonComponent = React.forwardRef(
       ...rest
     } = props;
 
-    const handleClick = (evt: React.MouseEvent) => {
-      // Prevent clicks on the tooltip from triggering the button click event
-      if (evt.target === tooltipRef.current) {
-        evt.preventDefault();
-      }
-    };
+    if (ButtonImageElement && !children && !iconDescription) {
+      console.error(
+        'Button: renderIcon property specified without also providing an iconDescription property. ' +
+          'This may impact accessibility for screen reader users.'
+      );
+    }
 
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
@@ -183,6 +199,14 @@ const Button: ButtonComponent = React.forwardRef(
       }
 
       return (
+        // @ts-expect-error - `IconButton` does not support all `size`s that
+        // `Button` supports.
+        //
+        // TODO: What should be done here?
+        // 1. Should the `IconButton` not be rendered if the `size` is not
+        //    supported?
+        // 2. Should an error be thrown?
+        // 3. Something else?
         <IconButton
           {...rest}
           ref={ref}
@@ -191,12 +215,14 @@ const Button: ButtonComponent = React.forwardRef(
           label={iconDescription}
           kind={kind}
           size={size}
+          highContrast={tooltipHighContrast}
+          dropShadow={tooltipDropShadow}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onFocus={onFocus}
           onBlur={onBlur}
           autoAlign={autoAlign}
-          onClick={composeEventHandlers([onClick, handleClick])}
+          onClick={onClick}
           renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
         >
           {iconOnlyImage ?? children}
@@ -329,8 +355,12 @@ const Button: ButtonComponent = React.forwardRef(
   onMouseLeave: PropTypes.func,
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel: PropTypes.string,
+
+  /**
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
@@ -350,10 +380,26 @@ const Button: ButtonComponent = React.forwardRef(
   tabIndex: PropTypes.number,
 
   /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target: PropTypes.string,
+
+  /**
    * Specify the alignment of the tooltip to the icon-only button.
    * Can be one of: start, center, or end.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Enable drop shadow for tooltips for icon-only buttons.
+   */
+  tooltipDropShadow: PropTypes.bool,
+
+  /**
+   * Enable high-contrast theme for tooltips for icon-only buttons.
+   * Defaults to true.
+   */
+  tooltipHighContrast: PropTypes.bool,
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.

@@ -12,7 +12,7 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 import Button from '../Button';
 import Dropdown from '../Dropdown';
-import ContentSwitcher from '../ContentSwitcher';
+import { ContentSwitcher } from '../ContentSwitcher';
 import Switch from '../Switch';
 import { Heading } from '../Heading';
 import mdx from './Text.mdx';
@@ -77,6 +77,7 @@ export const SetTextDirection = () => {
         }
         return 'auto';
       }}>
+      {/* // TODO: These radio buttons don't work. */}
       <RadioButtonGroup
         legendText={legendText}
         name="radio-button-group"
@@ -123,6 +124,7 @@ export const UsageExamples = () => {
         <Text>{rtlText}</Text>
       </Button>
       <div style={{ width: 400 }}>
+        {/* // TODO: This dropdown doesn't work. */}
         <Dropdown
           id="default"
           titleText="Using <Text> with `itemToElement`"

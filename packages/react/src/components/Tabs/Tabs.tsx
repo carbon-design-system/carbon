@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,22 +15,24 @@ import React, {
   useState,
   useRef,
   useEffect,
+  useMemo,
   forwardRef,
+  createContext,
   type ReactNode,
   type MouseEvent,
   type KeyboardEvent,
-  type SyntheticEvent,
   type HTMLAttributes,
   type RefObject,
   type ComponentType,
-  type ReactHTML,
+  type HTMLElementType,
   type ElementType,
+  isValidElement,
+  ReactElement,
 } from 'react';
 import { Grid } from '../Grid';
 import { isElement } from 'react-is';
 import { Tooltip } from '../Tooltip';
 import { useControllableState } from '../../internal/useControllableState';
-import { useEffectOnce } from '../../internal/useEffectOnce';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
@@ -43,6 +45,7 @@ import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
+import BadgeIndicator from '../BadgeIndicator';
 
 const verticalTabHeight = 64;
 
@@ -136,6 +139,11 @@ function Tabs({
   onTabCloseRequest,
 }: TabsProps) {
   const baseId = useId('ccs');
+  if (dismissable && !onTabCloseRequest) {
+    console.error(
+      'dismissable property specified without also providing an onTabCloseRequest property.'
+    );
+  }
   // The active index is used to track the element which has focus in our tablist
   const [activeIndex, setActiveIndex] = useState(defaultSelectedIndex);
   // The selected index is used for the tab/panel pairing which is "visible"
@@ -303,7 +311,7 @@ TabsVertical.propTypes = {
  * given a count of the total items and the current index
  */
 function getNextIndex(
-  event: SyntheticEvent,
+  event: KeyboardEvent,
   total: number,
   index: number
 ): number {
@@ -330,7 +338,7 @@ function getNextIndex(
  * given a count of the total items and the current index
  */
 function getNextIndexVertical(
-  event: SyntheticEvent,
+  event: KeyboardEvent,
   total: number,
   index: number
 ): number {
@@ -457,7 +465,8 @@ function TabList({
   let hasSecondaryLabelTabs = false;
   if (contained) {
     hasSecondaryLabelTabs = React.Children.toArray(children).some((child) => {
-      return isElement(child) && !!child.props.secondaryLabel;
+      const _child = child as React.ReactElement<any>;
+      return React.isValidElement(child) && !!_child.props.secondaryLabel;
     });
   }
 
@@ -520,9 +529,12 @@ function TabList({
 
   const tabs = useRef<TabElement[]>([]);
   const debouncedOnScroll = useCallback(() => {
-    return debounce((event) => {
-      setScrollLeft(event.target.scrollLeft);
+    const updateScroll = debounce(() => {
+      if (ref.current) {
+        setScrollLeft(ref.current.scrollLeft);
+      }
     }, scrollDebounceWait);
+    updateScroll();
   }, [scrollDebounceWait]);
 
   function onKeyDown(event: KeyboardEvent) {
@@ -599,7 +611,7 @@ function TabList({
     }
   }
 
-  useEffectOnce(() => {
+  useEffect(() => {
     const tab = tabs.current[selectedIndex];
     if (scrollIntoView && tab) {
       tab.scrollIntoView({
@@ -607,7 +619,7 @@ function TabList({
         inline: 'nearest',
       });
     }
-  });
+  }, []);
 
   useEffect(() => {
     //adding 1 in calculation for firefox support
@@ -625,7 +637,7 @@ function TabList({
     }
   }, [scrollLeft, children, dismissable, isScrollable]);
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
         return !tab.disabled;
@@ -636,7 +648,7 @@ function TabList({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-  });
+  }, []);
 
   useIsomorphicEffect(() => {
     if (ref.current) {
@@ -744,11 +756,14 @@ function TabList({
                 hasSecondaryLabel: hasSecondaryLabelTabs,
                 contained,
               }}>
-              {React.cloneElement(child, {
-                ref: (node) => {
-                  tabs.current[index] = node;
-                },
-              })}
+              {React.cloneElement(
+                child as React.ReactElement<{ ref?: React.Ref<any> }>,
+                {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                }
+              )}
             </TabContext.Provider>
           );
         })}
@@ -854,7 +869,7 @@ export interface TabListVerticalProps extends DivAttributes {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': string;
+  'aria-label'?: string;
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.
@@ -939,7 +954,7 @@ function TabListVertical({
     }
   }
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
         return !tab.disabled;
@@ -950,7 +965,7 @@ function TabListVertical({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-  });
+  }, []);
 
   useEffect(() => {
     function handler() {
@@ -970,10 +985,11 @@ function TabListVertical({
             halfTabHeight >
             containerHeight
         ) {
-          ref.current.scrollTo({
-            top: (selectedIndex - 1) * verticalTabHeight,
-            behavior: 'smooth',
-          });
+          ref.current &&
+            ref.current.scrollTo({
+              top: (selectedIndex - 1) * verticalTabHeight,
+              behavior: 'smooth',
+            });
         }
       }
     }
@@ -1041,11 +1057,14 @@ function TabListVertical({
                 index,
                 hasSecondaryLabel: false,
               }}>
-              {React.cloneElement(child, {
-                ref: (node) => {
-                  tabs.current[index] = node;
-                },
-              })}
+              {React.cloneElement(
+                child as React.ReactElement<{ ref?: React.Ref<any> }>,
+                {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                }
+              )}
             </TabContext.Provider>
           );
         })}
@@ -1068,7 +1087,7 @@ TabListVertical.propTypes = {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': PropTypes.string.isRequired,
+  'aria-label': PropTypes.string,
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.
@@ -1091,7 +1110,7 @@ TabListVertical.propTypes = {
  * when the long press is deactivated
  */
 function createLongPressBehavior(
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   direction: 'forward' | 'backward',
   setScrollLeft
 ) {
@@ -1141,7 +1160,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   /**
    * Provide a custom element to render instead of the default button
    */
-  as?: keyof ReactHTML | ComponentType;
+  as?: HTMLElementType | ComponentType;
 
   /**
    * Provide child elements to be rendered inside `Tab`.
@@ -1176,14 +1195,13 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   renderButton?(): ReactNode;
 
   /**
-   * Optional prop to render an icon next to the label.
-   * Can be a React component class
+   * A component used to render an icon.
    */
-  renderIcon?: ComponentType<{ size: number }>;
+  renderIcon?: React.ElementType;
 
   /**
    * An optional label to render under the primary tab label.
-   * Only useful for conained tabs.
+   * Only useful for contained tabs.
    */
   secondaryLabel?: string;
 }
@@ -1211,6 +1229,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     onTabCloseRequest,
   } = React.useContext(TabsContext);
   const { index, hasSecondaryLabel, contained } = React.useContext(TabContext);
+  const { badgeIndicator } = React.useContext(IconTabContext) || {};
   const dismissIconRef = useRef<HTMLButtonElement>(null);
   const tabRef = useRef<HTMLElement>(null);
   const ref = useMergedRefs([forwardRef, tabRef]);
@@ -1346,7 +1365,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
 
   const hasIcon = Icon ?? dismissable;
 
-  // should only happen for vertical variation, so no dissimisamble icon is needed here
+  // should only happen for vertical variation, so no dismissable icon is needed here
   if (isEllipsisApplied) {
     return (
       <Tooltip
@@ -1441,6 +1460,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
             {secondaryLabel}
           </Text>
         )}
+        {!disabled && badgeIndicator && <BadgeIndicator />}
       </BaseComponent>
       {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
       {DismissIcon}
@@ -1451,7 +1471,6 @@ Tab.propTypes = {
   /**
    * Provide a custom element to render instead of the default button
    */
-  // @ts-expect-error: Invalid prop type derivation
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
@@ -1479,24 +1498,22 @@ Tab.propTypes = {
    */
   onKeyDown: PropTypes.func,
 
-  /*
+  /**
    * An optional parameter to allow overriding the anchor rendering.
    * Useful for using Tab along with react-router or other client
    * side router libraries.
-   **/
+   */
   renderButton: PropTypes.func,
 
   /**
-   * Optional prop to render an icon next to the label.
-   * Can be a React component class
+   * A component used to render an icon.
    */
-  // @ts-expect-error: Invalid prop type derivation
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
-  /*
+  /**
    * An optional label to render under the primary tab label.
-  /* This prop is only useful for conained tabs
-   **/
+   * Only useful for contained tabs.
+   */
   secondaryLabel: PropTypes.string,
 };
 
@@ -1504,7 +1521,15 @@ Tab.propTypes = {
  * IconTab
  */
 
+const IconTabContext = createContext<{ badgeIndicator?: boolean } | false>(
+  false
+);
+
 export interface IconTabProps extends DivAttributes {
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab.
+   */
+  badgeIndicator?: boolean;
   /**
    * Provide an icon to be rendered inside `IconTab` as the visual label for Tab.
    */
@@ -1529,7 +1554,8 @@ export interface IconTabProps extends DivAttributes {
    * Provide the label to be rendered inside the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If using the badgeIndicator then provide a
+   * label with describing that there is a new notification.
    */
   label: ReactNode;
 
@@ -1541,6 +1567,7 @@ export interface IconTabProps extends DivAttributes {
 
 const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
   {
+    badgeIndicator,
     children,
     className: customClassName,
     defaultOpen = false,
@@ -1552,27 +1579,39 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
   ref
 ) {
   const prefix = usePrefix();
+  const value = useMemo(() => ({ badgeIndicator }), [badgeIndicator]);
+
+  const hasSize20 =
+    isValidElement(children) &&
+    (children as ReactElement<{ size?: number }>).props.size === 20;
 
   const classNames = cx(
     `${prefix}--tabs__nav-item--icon-only`,
-    customClassName
+    customClassName,
+    { [`${prefix}--tabs__nav-item--icon-only__20`]: hasSize20 }
   );
   return (
-    <Tooltip
-      align="bottom"
-      defaultOpen={defaultOpen}
-      className={`${prefix}--icon-tooltip`}
-      enterDelayMs={enterDelayMs}
-      label={label}
-      leaveDelayMs={leaveDelayMs}>
-      <Tab className={classNames} ref={ref} {...rest}>
-        {children}
-      </Tab>
-    </Tooltip>
+    <IconTabContext.Provider value={value}>
+      <Tooltip
+        align="bottom"
+        defaultOpen={defaultOpen}
+        className={`${prefix}--icon-tooltip`}
+        enterDelayMs={enterDelayMs}
+        label={label}
+        leaveDelayMs={leaveDelayMs}>
+        <Tab className={classNames} ref={ref} {...rest}>
+          {children}
+        </Tab>
+      </Tooltip>
+    </IconTabContext.Provider>
   );
 });
 
 IconTab.propTypes = {
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab.
+   */
+  badgeIndicator: PropTypes.bool,
   /**
    * Provide an icon to be rendered inside `IconTab` as the visual label for Tab.
    */
@@ -1597,7 +1636,8 @@ IconTab.propTypes = {
    * Provide the label to be rendered inside the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If using the badgeIndicator then provide a
+   * label with describing that there is a new notification.
    */
   label: PropTypes.node.isRequired,
 
@@ -1642,7 +1682,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
       [`${prefix}--tab-content--interactive`]: interactiveContent,
     });
 
-    useEffectOnce(() => {
+    useEffect(() => {
       if (!panel.current) {
         return;
       }
@@ -1652,7 +1692,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         setInteractiveContent(true);
         setTabIndex(-1);
       }
-    });
+    }, []);
 
     // tabindex should only be 0 if no interactive content in children
     useEffect(() => {

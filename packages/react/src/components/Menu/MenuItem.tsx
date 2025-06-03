@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ChangeEventHandler,
   ComponentProps,
   FC,
   ForwardedRef,
@@ -77,7 +76,7 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   ) => void;
 
   /**
-   * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
+   * A component used to render an icon.
    */
   renderIcon?: FC;
 
@@ -130,11 +129,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergedRefs<HTMLLIElement>([
-      forwardRef,
-      menuItem,
-      refs.setReference,
-    ]);
+    const ref = useMergedRefs([forwardRef, menuItem, refs.setReference]);
 
     const hasChildren = Boolean(children);
 
@@ -179,19 +174,33 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
     }
 
-    function handleKeyDown(e: React.KeyboardEvent<HTMLLIElement>) {
+    // Avoid stray keyup event from MenuButton affecting MenuItem, and vice versa.
+    // Keyboard click is handled differently for <button> vs. <li> and for Enter vs. Space.  See
+    // https://www.stefanjudis.com/today-i-learned/keyboard-button-clicks-with-space-and-enter-behave-differently/.
+    const pendingKeyboardClick = useRef(false);
+
+    const keyboardClickEvent = (e: KeyboardEvent) =>
+      match(e, keys.Enter) || match(e, keys.Space);
+
+    function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
         e.stopPropagation();
       }
 
-      if (match(e, keys.Enter) || match(e, keys.Space)) {
-        handleClick(e);
-      }
+      pendingKeyboardClick.current = keyboardClickEvent(e);
 
       if (rest.onKeyDown) {
         rest.onKeyDown(e);
       }
+    }
+
+    function handleKeyUp(e: KeyboardEvent<HTMLLIElement>) {
+      if (pendingKeyboardClick.current && keyboardClickEvent(e)) {
+        handleClick(e);
+      }
+
+      pendingKeyboardClick.current = false;
     }
 
     const classNames = cx(className, `${prefix}--menu-item`, {
@@ -216,17 +225,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
     }, [direction]);
 
-    const iconsAllowed =
-      context.state.mode === 'basic' ||
-      rest.role === 'menuitemcheckbox' ||
-      rest.role === 'menuitemradio';
-
     useEffect(() => {
-      if (iconsAllowed && IconElement && !context.state.hasIcons) {
+      if (IconElement && !context.state.hasIcons) {
         // @ts-ignore - TODO: Should we be passing payload?
         context.dispatch({ type: 'enableIcons' });
       }
-    }, [iconsAllowed, IconElement, context.state.hasIcons, context]);
+    }, [IconElement, context.state.hasIcons, context]);
 
     useEffect(() => {
       Object.keys(floatingStyles).forEach((style) => {
@@ -252,9 +256,13 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           aria-expanded={hasChildren ? submenuOpen : undefined}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
           {...getReferenceProps()}>
+          <div className={`${prefix}--menu-item__selection-icon`}>
+            {rest['aria-checked'] && <Checkmark />}
+          </div>
           <div className={`${prefix}--menu-item__icon`}>
-            {iconsAllowed && IconElement && <IconElement />}
+            {IconElement && <IconElement />}
           </div>
           <Text
             as="div"
@@ -322,7 +330,7 @@ MenuItem.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
+   * A component used to render an icon.
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -344,7 +352,7 @@ export interface MenuItemSelectableProps
   /**
    * Provide an optional function to be called when the selection state changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (checked: boolean) => void;
 
   /**
    * Controls the state of this option.
@@ -362,13 +370,6 @@ export const MenuItemSelectable = forwardRef<
   const prefix = usePrefix();
   const context = useContext(MenuContext);
 
-  if (context.state.mode === 'basic') {
-    warning(
-      false,
-      'MenuItemSelectable is not supported when the menu is in "basic" mode.'
-    );
-  }
-
   const [checked, setChecked] = useControllableState({
     value: selected,
     onChange,
@@ -380,11 +381,11 @@ export const MenuItemSelectable = forwardRef<
   }
 
   useEffect(() => {
-    if (!context.state.hasIcons) {
+    if (!context.state.hasSelectableItems) {
       // @ts-ignore - TODO: Should we be passing payload?
-      context.dispatch({ type: 'enableIcons' });
+      context.dispatch({ type: 'enableSelectableItems' });
     }
-  }, [context.state.hasIcons, context]);
+  }, [context.state.hasSelectableItems, context]);
 
   const classNames = cx(className, `${prefix}--menu-item-selectable--selected`);
 
@@ -396,7 +397,6 @@ export const MenuItemSelectable = forwardRef<
       className={classNames}
       role="menuitemcheckbox"
       aria-checked={checked}
-      renderIcon={checked ? Checkmark : undefined}
       onClick={handleClick}
     />
   );
@@ -514,7 +514,7 @@ export interface MenuItemRadioGroupProps<Item>
   /**
    * Provide an optional function to be called when the selection changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (selectedItem: Item) => void;
 
   /**
    * Provide props.selectedItem to control the state of this radio group. Must match the type of props.items.
@@ -538,17 +538,10 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   const prefix = usePrefix();
   const context = useContext(MenuContext);
 
-  if (context.state.mode === 'basic') {
-    warning(
-      false,
-      'MenuItemRadioGroup is not supported when the menu is in "basic" mode.'
-    );
-  }
-
   const [selection, setSelection] = useControllableState({
     value: selectedItem,
     onChange,
-    defaultValue: defaultSelectedItem,
+    defaultValue: defaultSelectedItem ?? ({} as Item),
   });
 
   function handleClick(item, e) {
@@ -556,11 +549,11 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   }
 
   useEffect(() => {
-    if (!context.state.hasIcons) {
+    if (!context.state.hasSelectableItems) {
       // @ts-ignore - TODO: Should we be passing payload?
-      context.dispatch({ type: 'enableIcons' });
+      context.dispatch({ type: 'enableSelectableItems' });
     }
-  }, [context.state.hasIcons, context]);
+  }, [context.state.hasSelectableItems, context]);
 
   const classNames = cx(className, `${prefix}--menu-item-radio-group`);
 
@@ -573,7 +566,6 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
             label={itemToString(item)}
             role="menuitemradio"
             aria-checked={item === selection}
-            renderIcon={item === selection ? Checkmark : undefined}
             onClick={(e) => {
               handleClick(item, e);
             }}

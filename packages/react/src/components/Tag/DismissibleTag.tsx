@@ -1,12 +1,19 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
+import React, {
+  useLayoutEffect,
+  useState,
+  ReactNode,
+  useRef,
+  forwardRef,
+  ForwardedRef,
+} from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -17,6 +24,7 @@ import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
+import mergeRefs from '../../tools/mergeRefs';
 
 export interface DismissibleTagBaseProps {
   /**
@@ -35,7 +43,12 @@ export interface DismissibleTagBaseProps {
   disabled?: boolean;
 
   /**
-   * Specify the id for the selectabletag.
+   * Provide a custom tooltip label for the dismiss button
+   */
+  dismissTooltipLabel?: string;
+
+  /**
+   * Specify the id for the selectable tag.
    */
   id?: string;
 
@@ -45,8 +58,7 @@ export interface DismissibleTagBaseProps {
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 
@@ -88,111 +100,118 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
   DismissibleTagBaseProps
 >;
 
-const DismissibleTag = <T extends React.ElementType>({
-  className,
-  decorator,
-  disabled,
-  id,
-  renderIcon,
-  title = 'Dismiss',
-  onClose,
-  slug,
-  size,
-  text,
-  tagTitle,
-  type,
-  ...other
-}: DismissibleTagProps<T>) => {
-  const prefix = usePrefix();
-  const tagLabelRef = useRef<HTMLDivElement>(null);
-  const tagId = id || `tag-${useId()}`;
-  const tagClasses = classNames(`${prefix}--tag--filter`, className);
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+const DismissibleTag = forwardRef(
+  <T extends React.ElementType>(
+    {
+      className,
+      decorator,
+      disabled,
+      id,
+      renderIcon,
+      title = 'Dismiss',
+      onClose,
+      slug,
+      size,
+      text,
+      tagTitle,
+      type,
+      dismissTooltipLabel = 'Dismiss tag',
+      ...other
+    }: DismissibleTagProps<T>,
+    forwardRef: ForwardedRef<HTMLDivElement>
+  ) => {
+    const prefix = usePrefix();
+    const tagLabelRef = useRef<HTMLDivElement>(null);
+    const tagId = id || `tag-${useId()}`;
+    const tagClasses = classNames(`${prefix}--tag--filter`, className);
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  useLayoutEffect(() => {
-    const newElement = tagLabelRef.current?.getElementsByClassName(
-      `${prefix}--tag__label`
-    )[0];
-    setIsEllipsisApplied(isEllipsisActive(newElement));
-  }, [prefix, tagLabelRef]);
-  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClose) {
-      event.stopPropagation();
-      onClose(event);
-    }
-  };
-
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
-    : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-        kind: 'inline',
+    useLayoutEffect(() => {
+      const newElement = tagLabelRef.current?.getElementsByClassName(
+        `${prefix}--tag__label`
+      )[0];
+      setIsEllipsisApplied(isEllipsisActive(newElement));
+    }, [prefix, tagLabelRef]);
+    const combinedRef = mergeRefs(tagLabelRef, forwardRef);
+    const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (onClose) {
+        event.stopPropagation();
+        onClose(event);
       }
+    };
+
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? (slug ?? decorator)
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'sm',
+          kind: 'inline',
+        }
+      );
+    }
+
+    const tooltipClasses = classNames(
+      `${prefix}--icon-tooltip`,
+      `${prefix}--tag-label-tooltip`
+    );
+
+    // Removing onClick from the spread operator
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { onClick, ...otherProps } = other;
+
+    const dismissActionLabel = isEllipsisApplied ? dismissTooltipLabel : title;
+
+    return (
+      <Tag
+        ref={combinedRef}
+        type={type}
+        size={size}
+        renderIcon={renderIcon}
+        disabled={disabled}
+        className={tagClasses}
+        id={tagId}
+        {...otherProps}>
+        <div className={`${prefix}--interactive--tag-children`}>
+          <Text
+            title={tagTitle ? tagTitle : text}
+            className={`${prefix}--tag__label`}>
+            {text}
+          </Text>
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--tag__decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
+          <Tooltip
+            label={dismissActionLabel}
+            align="bottom"
+            className={tooltipClasses}
+            leaveDelayMs={0}
+            closeOnActivation>
+            <button
+              type="button"
+              className={`${prefix}--tag__close-icon`}
+              onClick={handleClose}
+              disabled={disabled}
+              aria-label={dismissActionLabel}>
+              <Close />
+            </button>
+          </Tooltip>
+        </div>
+      </Tag>
     );
   }
-
-  const tooltipClasses = classNames(
-    `${prefix}--icon-tooltip`,
-    `${prefix}--tag-label-tooltip`
-  );
-
-  // Removing onClick from the spread operator
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { onClick, ...otherProps } = other;
-
-  const dismissLabel = `Dismiss "${text}"`;
-
-  return (
-    <Tag
-      ref={tagLabelRef}
-      type={type}
-      size={size}
-      renderIcon={renderIcon}
-      disabled={disabled}
-      className={tagClasses}
-      id={tagId}
-      {...otherProps}>
-      <div className={`${prefix}--interactive--tag-children`}>
-        <Text
-          title={tagTitle ? tagTitle : text}
-          className={`${prefix}--tag__label`}>
-          {text}
-        </Text>
-        {slug ? (
-          normalizedDecorator
-        ) : decorator ? (
-          <div className={`${prefix}--tag__decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
-        <Tooltip
-          label={isEllipsisApplied ? dismissLabel : title}
-          align="bottom"
-          className={tooltipClasses}
-          leaveDelayMs={0}
-          closeOnActivation>
-          <button
-            type="button"
-            className={`${prefix}--tag__close-icon`}
-            onClick={handleClose}
-            disabled={disabled}
-            aria-label={title}>
-            <Close />
-          </button>
-        </Tooltip>
-      </div>
-    </Tag>
-  );
-};
+);
 DismissibleTag.propTypes = {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -210,6 +229,11 @@ DismissibleTag.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Provide a custom tooltip label for the dismiss button
+   */
+  dismissTooltipLabel: PropTypes.string,
+
+  /**
    * Specify the id for the tag.
    */
   id: PropTypes.string,
@@ -220,8 +244,7 @@ DismissibleTag.propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

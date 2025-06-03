@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2023, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, {
   useRef,
   useEffect,
@@ -21,10 +28,11 @@ import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
-import toggleClass from '../../tools/toggleClass';
+import { toggleClass } from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
+import {
   elementOrParentIsFloatingMenu,
+  wrapFocus,
   wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
@@ -32,6 +40,8 @@ import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
+import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { warning } from '../../internal/warning';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -189,7 +199,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: RefObject<HTMLButtonElement>;
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 
   /**
    * Specify an optional handler for closing modal.
@@ -260,14 +270,23 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const endSentinel = useRef<HTMLButtonElement>(null);
     const onMouseDownTarget: MutableRefObject<Node | null> =
       useRef<Node | null>(null);
+
+    const enableDialogElement = useFeatureFlag('enable-dialog-element');
     const focusTrapWithoutSentinels = useFeatureFlag(
       'enable-experimental-focus-wrap-without-sentinels'
+    );
+    warning(
+      !(focusTrapWithoutSentinels && enableDialogElement),
+      '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+        '`enableDialogElement` feature flags are enabled. The native dialog ' +
+        'element handles focus, so `enableDialogElement` must be off for ' +
+        '`focusTrapWithoutSentinels` to have any effect.'
     );
 
     // Keep track of modal open/close state
     // and propagate it to the document.body
     useEffect(() => {
-      if (open !== wasOpen) {
+      if (!enableDialogElement && open !== wasOpen) {
         setIsOpen(!!open);
         setWasOpen(!!open);
         toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
@@ -275,28 +294,32 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }, [open, wasOpen, prefix]);
     // Remove the document.body className on unmount
     useEffect(() => {
-      return () => {
-        toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
-      };
+      if (!enableDialogElement) {
+        return () => {
+          toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+        };
+      }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleKeyDown(event) {
-      event.stopPropagation();
-      if (match(event, keys.Escape)) {
-        closeModal(event);
-      }
+      if (!enableDialogElement) {
+        event.stopPropagation();
+        if (match(event, keys.Escape)) {
+          closeModal(event);
+        }
 
-      if (
-        focusTrapWithoutSentinels &&
-        open &&
-        match(event, keys.Tab) &&
-        innerModal.current
-      ) {
-        wrapFocusWithoutSentinels({
-          containerNode: innerModal.current,
-          currentActiveNode: event.target,
-          event: event,
-        });
+        if (
+          focusTrapWithoutSentinels &&
+          open &&
+          match(event, keys.Tab) &&
+          innerModal.current
+        ) {
+          wrapFocusWithoutSentinels({
+            containerNode: innerModal.current,
+            currentActiveNode: event.target,
+            event: event,
+          });
+        }
       }
 
       onKeyDown?.(event);
@@ -308,11 +331,12 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }
 
     function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-      const target = evt.target as Node;
-      const mouseDownTarget = onMouseDownTarget.current as Node;
+      const { target } = evt;
+      const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
       if (
         !preventCloseOnClickOutside &&
+        target instanceof Node &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&
         !innerModal.current.contains(target) &&
@@ -326,7 +350,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       target: oldActiveNode,
       relatedTarget: currentActiveNode,
     }) {
-      if (open && currentActiveNode && oldActiveNode && innerModal.current) {
+      if (
+        !enableDialogElement &&
+        !focusTrapWithoutSentinels &&
+        open &&
+        currentActiveNode &&
+        oldActiveNode &&
+        innerModal.current
+      ) {
         const { current: bodyNode } = innerModal;
         const { current: startSentinelNode } = startSentinel;
         const { current: endSentinelNode } = endSentinel;
@@ -336,10 +367,41 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           endTrapNode: endSentinelNode,
           currentActiveNode,
           oldActiveNode,
-          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
-            Boolean
-          ) as string[],
+          selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
         });
+      }
+
+      // Adjust scroll if needed so that element with focus is not obscured by gradient
+      const modalContent = document.querySelector(`.${prefix}--modal-content`);
+      if (
+        !modalContent ||
+        !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+        !currentActiveNode ||
+        !modalContent.contains(currentActiveNode)
+      ) {
+        return;
+      }
+
+      const lastContent =
+        modalContent.children[modalContent.children.length - 1];
+      const gradientSpacing =
+        modalContent.scrollHeight -
+        (lastContent as HTMLElement).offsetTop -
+        (lastContent as HTMLElement).clientHeight;
+
+      for (let elem of modalContent.children) {
+        if (elem.contains(currentActiveNode)) {
+          const spaceBelow =
+            modalContent.clientHeight -
+            (elem as HTMLElement).offsetTop +
+            modalContent.scrollTop -
+            (elem as HTMLElement).clientHeight;
+          if (spaceBelow < gradientSpacing) {
+            modalContent.scrollTop =
+              modalContent.scrollTop + (gradientSpacing - spaceBelow);
+          }
+          break;
+        }
       }
     }
 
@@ -400,7 +462,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     });
 
     useEffect(() => {
-      if (!open && launcherButtonRef) {
+      if (!enableDialogElement && !open && launcherButtonRef) {
         setTimeout(() => {
           launcherButtonRef?.current?.focus();
         });
@@ -408,37 +470,39 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }, [open, launcherButtonRef]);
 
     useEffect(() => {
-      const initialFocus = (focusContainerElement) => {
-        const containerElement = focusContainerElement || innerModal.current;
-        const primaryFocusElement = containerElement
-          ? containerElement.querySelector(
-              danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
-            )
-          : null;
+      if (!enableDialogElement) {
+        const initialFocus = (focusContainerElement) => {
+          const containerElement = focusContainerElement || innerModal.current;
+          const primaryFocusElement = containerElement
+            ? containerElement.querySelector(
+                danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
+              )
+            : null;
 
-        if (primaryFocusElement) {
-          return primaryFocusElement;
+          if (primaryFocusElement) {
+            return primaryFocusElement;
+          }
+
+          return button && button.current;
+        };
+
+        const focusButton = (focusContainerElement) => {
+          const target = initialFocus(focusContainerElement);
+
+          const closeButton = focusContainerElement.querySelector(
+            `.${prefix}--modal-close`
+          );
+
+          if (target) {
+            target.focus();
+          } else if (!target && closeButton) {
+            closeButton?.focus();
+          }
+        };
+
+        if (open && isOpen) {
+          focusButton(innerModal.current);
         }
-
-        return button && button.current;
-      };
-
-      const focusButton = (focusContainerElement) => {
-        const target = initialFocus(focusContainerElement);
-
-        const closeButton = focusContainerElement.querySelector(
-          `.${prefix}--modal-close`
-        );
-
-        if (target) {
-          target.focus();
-        } else if (!target && closeButton) {
-          closeButton?.focus();
-        }
-      };
-
-      if (open && isOpen) {
-        focusButton(innerModal.current);
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
@@ -458,6 +522,66 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       );
     }
 
+    const modalBody = enableDialogElement ? (
+      <Dialog
+        open={open}
+        modal
+        className={containerClass}
+        aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
+        aria-labelledby={ariaLabelledBy}>
+        <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--modal--inner__decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
+          {childrenWithProps}
+        </div>
+      </Dialog>
+    ) : (
+      <div
+        className={containerClass}
+        role="dialog"
+        aria-modal="true"
+        aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
+        aria-labelledby={ariaLabelledBy}>
+        {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+        {!focusTrapWithoutSentinels && (
+          <button
+            type="button"
+            ref={startSentinel}
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </button>
+        )}
+        <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--modal--inner__decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
+          {childrenWithProps}
+        </div>
+        {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+        {!focusTrapWithoutSentinels && (
+          <button
+            type="button"
+            ref={endSentinel}
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </button>
+        )}
+      </div>
+    );
+
     return (
       <Layer
         {...rest}
@@ -465,7 +589,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         role="presentation"
         ref={ref}
         aria-hidden={!open}
-        onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
+        onBlur={handleBlur}
         onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
         onMouseDown={composeEventHandlers([
           rest?.onMouseDown,
@@ -473,43 +597,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         ])}
         onKeyDown={handleKeyDown}
         className={modalClass}>
-        <div
-          className={containerClass}
-          role="dialog"
-          aria-modal="true"
-          aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
-          aria-labelledby={ariaLabelledBy}>
-          {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-          {!focusTrapWithoutSentinels && (
-            <button
-              type="button"
-              ref={startSentinel}
-              className={`${prefix}--visually-hidden`}>
-              Focus sentinel
-            </button>
-          )}
-          <div ref={innerModal} className={`${prefix}--modal-container-body`}>
-            {slug ? (
-              normalizedDecorator
-            ) : decorator ? (
-              <div className={`${prefix}--modal--inner__decorator`}>
-                {normalizedDecorator}
-              </div>
-            ) : (
-              ''
-            )}
-            {childrenWithProps}
-          </div>
-          {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-          {!focusTrapWithoutSentinels && (
-            <button
-              type="button"
-              ref={endSentinel}
-              className={`${prefix}--visually-hidden`}>
-              Focus sentinel
-            </button>
-          )}
-        </div>
+        {modalBody}
       </Layer>
     );
   }
@@ -560,7 +648,6 @@ ComposedModal.propTypes = {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  // @ts-expect-error: Invalid derived type
   launcherButtonRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({

@@ -3,7 +3,6 @@ categories:
     members:
       - cloud--download
       - cloud--upload
-      - coupon
       - crop
       - delete
       - do-not
@@ -14,6 +13,7 @@ categories:
       - export--01
       - export--02
       - flexible
+      - install
       - launch
       - link
       - love
@@ -22,6 +22,7 @@ categories:
       - music
       - paper--clip
       - player--flow
+      - prepare
       - refresh
       - renew
       - repeat
@@ -36,6 +37,41 @@ categories:
       - ai-governance--model
       - ai-governance--model-tuned
       - ai-governance--prompt
+      - ai--ethics
+      - ai--explainability
+      - ai--privacy
+      - ai--robustness
+      - ai--transparency
+      - ai--trust
+      - code--conversion
+      - code--generation--chat
+      - code--generation--inline
+      - code--generation
+      - code--reverse-engineering
+      - data--scientist
+      - decision-velocity
+      - ensure-data-quality
+      - foundation-model
+      - generate--ai
+      - generate--code
+      - governance
+      - hard--prompt
+      - ibm--granite
+      - intelligence
+      - machine--learning--01
+      - machine--learning--02
+      - machine--learning--03
+      - machine--learning--04
+      - machine--learning--05
+      - machine--learning--06
+      - machine--learning--model
+      - multi-model
+      - neurodiversity
+      - prompt
+      - spyre-accelerator
+      - technical-owner
+      - telum-ii-chip
+      - telum-ii-processor
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -58,7 +94,9 @@ categories:
       - escalator--up
       - fire--alarm
       - fire--extinguisher
+      - fire--hose
       - id--badge
+      - intelligent-infrastructure
       - no--smoking
       - office
       - recycle--bin
@@ -67,9 +105,12 @@ categories:
       - stairs--plan--view
       - stairs--up
       - temporary-badge
+      - trash--container
   - name: Cities
     members:
       - amsterdam--canal
+      - ahmedabad--jama-masjid
+      - ahmedabad--sabarmati-ashram
       - amsterdam--farm
       - amsterdam--windmill
       - argentina--obelisk
@@ -77,7 +118,8 @@ categories:
       - austin
       - bangalore
       - barcelona
-      #    - basel
+      - basel--munster
+      - basel--town-hall
       - beijing--municipal
       - beijing--tower
       - berlin--brandenburg-gate
@@ -87,9 +129,12 @@ categories:
       - bucharest--national-theatre
       - bucharest--romanian-athenaeum
       - budapest
+      - budapest--corvin7
+      - budapest--hungarian-auto-club
       - budapest--lab-skyline
       - budapest--citadella
       - cairo--giza-plateau
+      - cairo--giza-sphinx
       - canada--maple-leaf
       - chicago
       - chile--easter-island
@@ -97,14 +142,21 @@ categories:
       - colombia--cathedral-of-las-lajas
       - copenhagen--planetarium
       - copenhagen--snekkja
+      - dallas--reunion-tower
+      - dallas--skyline
       - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
       - dublin--castle
       - ecuador--quito
+      - ehningen--tech-campus-01
+      - ehningen--tech-campus-02
+      - geodesic-montreal-biosphere
+      - guadalajara--seal
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
+      - ibm--one-madison-avenue
       - ibm--uk-labs-hursley
       - japan--mt-fuji
       - kochi-houseboat
@@ -114,12 +166,15 @@ categories:
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
+      - mcgill-university--morrice-hall
       - melbourne
       - mexico-city--angel-of-independence
       - mexico-city--museo-soumaya
       - milan--duomo-di-milano
       - milan--skyscrapers
+      - montreal--olympic-stadium
       - moscow
+      - mumbai
       - munich
       - nice
       - nyc--brooklyn
@@ -131,11 +186,15 @@ categories:
       - okinawa
       - osaka--tsutenkaku-tower
       - paris--arc-de-triomphe
+      - paris--eiffel-tower
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
       - peru--machu-picchu
       - portland--building
+      - poughkeepsie--bridge
+      - poughkeepsie--ibm-clocktower
+      - poughkeepsie--mid-hudson-bridge
       - prague--charles-bridge-tower
       - prague--dancing-house--01
       - prague--dancing-house--02
@@ -153,6 +212,9 @@ categories:
       - shanghai--skyline
       - singapore
       - stockholm
+      - stuttgart--tv-tower
+      - sydney--mlc-centre
+      - sydney--opera-house
       - taipei--bubble-tea
       - tel-aviv
       - tokyo--cherry-blossom
@@ -379,6 +441,8 @@ categories:
       - new-financial-customer-experiences
       - new-revenue-streams
       - notifications
+      - observability--01
+      - observability--02
       - on-premise--to-cloud
       - on-premise
       - operate-offline
@@ -481,6 +545,7 @@ categories:
   - name: Data analytics
     members:
       - analyze
+      - assess
       - blockchain
       - box--plot
       - chart--two-y-axis
@@ -491,6 +556,7 @@ categories:
       - chart--bubble--line
       - chart--candlestick
       - chart--custom
+      - chart--donut
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
@@ -567,11 +633,16 @@ categories:
       - ibm--z-and-linuxone-single-frame
       - ibm--z-and-linuxone-multi-frame
       - ibm--z16
-      - ibm--z16--single-frame
-      - ibm--z16--multi-frame
       - ibm--z16--plus-cloud
+      - ibm--z16--multi-frame
+      - ibm--z16--single-frame
+      - ibm--z17
+      - ibm--z17--multi-frame
+      - ibm--z17--plus-cloud
+      - ibm--z17--single-frame
       - infrastructure-security
       - it--infrastructure-software
+      - linuxone-5
       - mainframe-qualities-of-service
       - reliability
       - resilience
@@ -585,36 +656,47 @@ categories:
       - storage--product
       - storage--systems
       - tape--storage
+      - tape--storage--02
       - virtualization
       - zero-trust
   - name: Design and development
     members:
+      - agile--coaching
       - app--developer
       - application
       - art--tools--01
-      - birthday--cake
+      - code--explanation
+      - colors
+      - composer-edit
       - content--design
-      - cupcake
       - design-and-development--01
       - design-and-development--02
+      - design-system-alignment
       - design--leadership
       - design--research
+      - engineer
       - feedback--01
       - hills
       - idea
       - ideate
       - inner-source
+      - landing-page
+      - motion
       - organization
+      - outcome-focused
       - overview
       - path
       - pattern
+      - pilot-test
+      - resourceful
+      - social--tile
       - universal-experiences
       - user--experience-design
       - user--insights
       - user--interface
       - visual--design
+      - web--banners
       - web--developer
-      - wedding--cake
       - windows
   - name: Device interaction
     members:
@@ -655,6 +737,7 @@ categories:
       - insights
       - medal--01
       - medal--02
+      - medal--03
       - scan-code
       - trophy
       - university
@@ -681,11 +764,14 @@ categories:
       - add--document
       - contract
       - document--security
+      - document--security--02
       - duplicate--file
       - envelope
       - file--backup
       - file--transfer
       - folder
+      - paper--confidential
+      - paper
       - read-only
       - rich--text--format
   - name: Finance
@@ -704,6 +790,7 @@ categories:
       - global--assets-and-recovery--01
       - global--assets-and-recovery--02
       - global--currency
+      - global--currency--02
       - global--exchange
       - global--finance--euro
       - global--finance--network
@@ -732,6 +819,8 @@ categories:
       - dropper
       - eyewash--station
       - first--aid
+      - gastro-health
+      - health
       - heart--health
       - hospital
       - hpi
@@ -744,9 +833,10 @@ categories:
       - pills
       - pregnant
       - prescription
-      - stethoscope
+      - social--distancing
       - social--work--01
       - social--work--02
+      - stethoscope
       - telemedicine
       - telemedicine--mobile
       - x-ray--01
@@ -772,14 +862,21 @@ categories:
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
+      - ibm--ibv
       - ibm--ix
       - ibm--z
+      - ibm--z-and-cloud-modernization-stack-provisioning
+      - ibm--z-open-enterprise-languages
+      - ibm--z-os-container-platform
+      - ibm--z-os-package-manager
       - ibm--z--partition
       - progress
       - world--community--grid
   - name: Industry
     members:
       - agriculture
+      - astronaut
+      - b2b-commerce
       - bulldozer
       - cargo--crane
       - cargo--ship
@@ -794,6 +891,8 @@ categories:
       - green-energy
       - insurance
       - keep-dry
+      - mission-control
+      - nuclear
       - oil--pump
       - oil--rig
       - power
@@ -820,25 +919,10 @@ categories:
       - build
       - connect
       - iot--munich
+      - migrate
+      - modernize--02
       - solve
       - transform--01
-  - name: Learning
-    members:
-      - ai--ethics
-      - ai--explainability
-      - ai--privacy
-      - ai--robustness
-      - ai--transparency
-      - ai--trust
-      - decision-velocity
-      - intelligence
-      - machine--learning--01
-      - machine--learning--02
-      - machine--learning--03
-      - machine--learning--04
-      - machine--learning--05
-      - machine--learning--06
-      - technical-owner
   - name: Life Science
     members:
       - cell
@@ -857,15 +941,19 @@ categories:
       - virus
   - name: Lifestyle
     members:
+      - alien
       - apple
       - backpack
       - balloon
       - balloon--hot-air
+      - birthday--cake
       - blender
       - cafe
       - candy
       - cherries
       - cookie
+      - crosshairs
+      - cupcake
       - dining
       - hard--ice--cream
       - firecracker
@@ -899,6 +987,9 @@ categories:
       - tennis--net
       - tennis--racquet
       - tree
+      - tree--02
+      - waving-hand
+      - wedding--cake
       - whistle
       - yoga--01
       - yoga--02
@@ -917,9 +1008,11 @@ categories:
   - name: Manufacturing
     members:
       - delivery--truck
+      - emissions
       - factory
       - forklift
       - ibm--rpa
+      - pipeline
       - robot
       - robotics
       - tools
@@ -962,7 +1055,10 @@ categories:
     members:
       - advocate
       - advocate--mask
+      - agility--02
       - design-thinking-team
+      - engagement-inclusion--01
+      - engagement-inclusion--02
       - expand--user
       - face--dissatisfied
       - face--neutral
@@ -970,10 +1066,12 @@ categories:
       - face--very--dissatisfied
       - face--very--satisfied
       - group
+      - growth--mindset
       - handicap
       - handicap--active
       - high--five
       - key--users
+      - leadership
       - multitask
       - partner--relationship
       - person--01
@@ -986,12 +1084,38 @@ categories:
       - person--08
       - person--09
       - renew--team
+      - resilience--02
+      - sap--successfactors
+      - sponsor-user-program
       - team--alignment
       - teammates
+      - transparency-and-trust--01
+      - transparency-and-trust--02
       - user
       - user--mask
       - user--profile
       - user--search
+      - wheelchair-user
+      - wheelchair-user--active
+  - name: Quantum
+    members:
+      - albatross
+      - bloch-sphere
+      - canary
+      - condor
+      - crossbill
+      - eagle
+      - falcon
+      - flamingo
+      - heron
+      - hummingbird
+      - kookaburra
+      - loon
+      - nighthawk
+      - osprey
+      - qiskit
+      - quantum--computer
+      - quantum--computer--02
   - name: Red Hat
     members:
       - build-applications-anywhere
@@ -1026,15 +1150,19 @@ categories:
       - clothes--rack--01
       - clothes--rack--02
       - coat--hanger
+      - coupon
       - credit--card
       - customer--service
       - gift
+      - mobile--pos--01
+      - mobile--pos--02
       - price
       - qr-code
       - receipt
       - retail--sustainable
       - secure--search
       - select--product
+      - sell
       - shirt
       - shop
       - shopping--cart
@@ -1058,12 +1186,16 @@ categories:
       - detect--and--stop--advancing--threats
       - digital--id
       - digital--trust
+      - encryption--02
       - endpoint--protection
       - firewall
       - get--ahead--of--risk--and--compliance
       - govern--users--and--identities
       - high--risk--users
       - identity--trust--assessment
+      - key--lifecycle
+      - keystores
+      - keystores--external
       - lock--01
       - lock--02
       - locked--network--01
@@ -1088,6 +1220,7 @@ categories:
       - unify--endpoint--management
       - unlock--01
       - unlock--02
+      - vault
   - name: Status
     members:
       - question
@@ -1095,8 +1228,10 @@ categories:
       - warning--02
   - name: Strategy
     members:
+      - agile
       - innovate
       - magic-wand
+      - performance
       - presentation
       - presenter
       - puzzle
@@ -1131,6 +1266,7 @@ categories:
       - esg-reporting--02
       - green-it--01
       - green-it--02
+      - incident-reporter
       - sustainability--02
       - sustainability--03
       - sustainability--04
@@ -1148,6 +1284,19 @@ categories:
       - cics--vsam-recovery-for-z-os
       - cics--vsam-transparency-for-z-os
       - developer-z-os
+      - ibm--elm
+      - ibm--elm-dcc
+      - ibm--elm-gcm
+      - ibm--elm-insights
+      - ibm--elm-method-composer
+      - ibm--elm-publishing
+      - ibm--elm-reporting
+      - ibm--engineering-requirement-doors
+      - ibm--engineering-systems-design-rhapsody--model-manager
+      - ibm--engineering-systems-design-rhapsody
+      - ibm--engineering-test-management
+      - ibm--engineering-workflow-management
+      - ibm--z-open-automation-utilities
       - systems-devops--analyze
       - systems-devops--build
       - systems-devops--cicd-pipeline
@@ -1158,6 +1307,7 @@ categories:
       - systems-devops--provision
       - systems-devops--release
       - systems-devops--test
+      - transaction-data
   - name: Third-party logos
     members:
       - slack
@@ -1173,17 +1323,22 @@ categories:
   - name: Transportation
     members:
       - airplane
+      - airport
       - automobile
       - bicycle
       - bus
+      - destination
       - electric--car
       - electric--charge
       - engine
       - fuel
       - luggage
+      - road
       - spaceship
       - steering--wheel
       - train
+      - travel-and-expenses
+      - tunnel
   - name: Watson
     members:
       - alchemy--data--news
@@ -1220,6 +1375,7 @@ categories:
       - visual--recognition
       - watson--logo
       - watsonx--ai
+      - watsonx--assistant
       - watsonx--code-assistant
       - watsonx--code-assistant-for-z
       - watsonx--code-assistant-for-z-refactor
@@ -1234,6 +1390,7 @@ categories:
       - cloudy--humid
       - cloudy--partial
       - cloudy--windy
+      - constellation
       - fog
       - hail
       - hail--heavy
@@ -1245,6 +1402,7 @@ categories:
       - moon--full
       - night--clear
       - overcast
+      - raindrop
       - rainy
       - rainy--heavy
       - snow
@@ -1257,19 +1415,40 @@ categories:
       - windy
   - name: Workplace
     members:
+      - accessibility
+      - aed-defibrillator
       - bento-box-tray
+      - beverage-carton
+      - briefcase
       - cardboard
+      - compost
       - do-not-step
+      - epinephrine-auto-injectors
+      - focus-room
       - fountain--drinking
+      - glass-bottle
       - glass-bottle-and-metal-can
       - library
       - liquids
       - literature
+      - lockers
       - loop--hearing
       - metal-can
+      - no--food
+      - no--liquids
+      - no--parking
+      - parking
+      - person--working
+      - plastic-bottle
       - plastics
       - silence
       - station--hydration
+      - toilet
+      - toilet--02
+      - toilet--03
       - trash--burnable
       - trash--non-burnable
+      - urinal--01
+      - urinal--02
+      - washing-hands
       - waste--electronic

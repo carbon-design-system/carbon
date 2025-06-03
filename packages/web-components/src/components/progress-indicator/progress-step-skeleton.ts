@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -11,7 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './progress-indicator.scss?lit';
-import CircleDash from '@carbon/icons/lib/circle-dash/16';
+import CircleDash from '@carbon/icons/lib/circle-dash/16.js';
 import '../skeleton-text';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

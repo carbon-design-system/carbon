@@ -70,7 +70,7 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   /**
    * Experimental property. Specify how the menu should align with the button element
    */
-  menuAlignment: MenuAlignment;
+  menuAlignment?: MenuAlignment;
 
   /**
    * Specify the size of the button and menu.
@@ -130,7 +130,6 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
         })
       );
     }
-
     const { refs, floatingStyles, placement, middlewareData } = useFloating({
       placement: menuAlignment,
 
@@ -139,6 +138,16 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       // “break” the floating element out of a clipping ancestor.
       // https://floating-ui.com/docs/misc#clipping
       strategy: 'fixed',
+
+      // Submenus are using a fixed position to break out of the parent menu's
+      // box avoiding clipping while allowing for vertical scroll. When an
+      // element is using transform it establishes a new containing block
+      // block for all of its descendants. Therefore, its padding box will be
+      // used for fixed-positioned descendants. This would cause the submenu
+      // to be clipped by its parent menu.
+      // Reference: https://www.w3.org/TR/2019/CR-css-transforms-1-20190214/#current-transformation-matrix-computation
+      // Reference: https://github.com/carbon-design-system/carbon/pull/18153#issuecomment-2498548835
+      transform: false,
 
       // Middleware order matters, arrow should be last
       middleware: middlewares,
@@ -155,7 +164,16 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     useLayoutEffect(() => {
       Object.keys(floatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+          let value = floatingStyles[style];
+
+          if (
+            ['top', 'right', 'bottom', 'left'].includes(style) &&
+            Number(value)
+          ) {
+            value += 'px';
+          }
+
+          refs.floating.current.style[style] = value;
         }
       });
     }, [floatingStyles, refs.floating, middlewareData, placement, open]);
@@ -206,7 +224,6 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           id={id}
           legacyAutoalign={false}
           label={label}
-          mode="basic"
           size={size}
           open={open}
           onClose={handleClose}
@@ -241,14 +258,13 @@ MenuButton.propTypes = {
   kind: PropTypes.oneOf(validButtonKinds),
 
   /**
-   * Provide the label to be renderd on the trigger button.
+   * Provide the label to be rendered on the trigger button.
    */
   label: PropTypes.string.isRequired,
 
   /**
    * Experimental property. Specify how the menu should align with the button element
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   menuAlignment: PropTypes.oneOf([
     'top',
     'top-start',
@@ -276,7 +292,7 @@ MenuButton.propTypes = {
 
   menuTarget: PropTypes.instanceOf(
     typeof Element !== 'undefined' ? Element : Object
-  ) as React.Validator<Element | null | undefined>,
+  ) as PropTypes.Validator<Element | null | undefined>,
 };
 
 export { MenuButton };

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -9,7 +7,6 @@
 
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
-import LOADING_TYPE from './types';
 
 /**
  * @param Object options The options.
@@ -18,18 +15,18 @@ import LOADING_TYPE from './types';
  * @returns The spinner icon.
  */
 export default ({
-  assistiveText,
-  type,
+  description,
+  small,
 }: {
-  assistiveText?: string;
-  type?: string;
+  description?: string;
+  small?: boolean;
 }) => {
-  const radius = type === LOADING_TYPE.SMALL ? '42' : '44';
+  const radius = small ? '42' : '44';
   return html`
     <svg class="${prefix}--loading__svg" viewBox="0 0 100 100">
-      ${!assistiveText ? undefined : html` <title>${assistiveText}</title> `}
+      ${!description ? undefined : html` <title>${description}</title> `}
       <circle
-        ?hidden="${type !== LOADING_TYPE.SMALL}"
+        ?hidden="${!small}"
         class="${prefix}--loading__background"
         cx="50%"
         cy="50%"

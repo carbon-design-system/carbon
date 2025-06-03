@@ -113,6 +113,16 @@ Array [
     "relativePath": "scss/components/aspect-ratio",
   },
   Object {
+    "filepath": "scss/components/badge-indicator/_badge-indicator.scss",
+    "importPath": "@carbon/styles/scss/components/badge-indicator/badge-indicator",
+    "relativePath": "scss/components/badge-indicator/badge-indicator",
+  },
+  Object {
+    "filepath": "scss/components/badge-indicator/_index.scss",
+    "importPath": "@carbon/styles/scss/components/badge-indicator",
+    "relativePath": "scss/components/badge-indicator",
+  },
+  Object {
     "filepath": "scss/components/breadcrumb/_breadcrumb.scss",
     "importPath": "@carbon/styles/scss/components/breadcrumb/breadcrumb",
     "relativePath": "scss/components/breadcrumb/breadcrumb",
@@ -196,6 +206,11 @@ Array [
     "filepath": "scss/components/content-switcher/_index.scss",
     "importPath": "@carbon/styles/scss/components/content-switcher",
     "relativePath": "scss/components/content-switcher",
+  },
+  Object {
+    "filepath": "scss/components/content-switcher/_tokens.scss",
+    "importPath": "@carbon/styles/scss/components/content-switcher/tokens",
+    "relativePath": "scss/components/content-switcher/tokens",
   },
   Object {
     "filepath": "scss/components/copy-button/_copy-button.scss",

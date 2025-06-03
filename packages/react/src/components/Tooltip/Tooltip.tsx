@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,8 +14,11 @@ import { useDelayedState } from '../../internal/useDelayedState';
 import { useId } from '../../internal/useId';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
-import { type PolymorphicProps } from '../../types/common';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
 /**
  * Event types that trigger a "drag" to stop.
@@ -31,7 +34,7 @@ interface TooltipBaseProps {
   /**
    * Pass in the child to which the tooltip will be applied
    */
-  children?: React.ReactElement;
+  children?: React.ReactElement<any>;
 
   /**
    * Specify an optional className to be applied to the container node
@@ -61,13 +64,26 @@ interface TooltipBaseProps {
   description?: React.ReactNode;
 
   /**
+   * Specify whether a drop shadow should be rendered
+   */
+  dropShadow?: boolean;
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs?: number;
 
   /**
+   * Render the component using the high-contrast theme
+   */
+  highContrast?: boolean;
+
+  /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
+   * If the child already has an `aria-label`, the tooltip will not apply
+   * `aria-labelledby`. If the child has its own `aria-labelledby`, that value
+   * will be kept. Otherwise, the tooltip will use its own ID to label the child.
    * This means that if you have text in the child node, that it will not be
    * announced to the screen reader.
    *
@@ -82,198 +98,229 @@ interface TooltipBaseProps {
   leaveDelayMs?: number;
 }
 
-export type TooltipProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  TooltipBaseProps
->;
+export type TooltipProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, TooltipBaseProps>;
 
-function Tooltip<T extends React.ElementType>({
-  align = 'top',
-  className: customClassName,
-  children,
-  label,
-  description,
-  enterDelayMs = 100,
-  leaveDelayMs = 300,
-  defaultOpen = false,
-  closeOnActivation = false,
-  ...rest
-}: TooltipProps<T>) {
-  const tooltipRef = useRef<HTMLSpanElement>(null);
-  const [open, setOpen] = useDelayedState(defaultOpen);
-  const [isDragging, setIsDragging] = useState(false);
-  const [focusByMouse, setFocusByMouse] = useState(false);
-  const [isPointerIntersecting, setIsPointerIntersecting] = useState(false);
-  const id = useId('tooltip');
-  const prefix = usePrefix();
-  const child = React.Children.only(children);
+type TooltipComponent = <T extends React.ElementType = typeof Popover>(
+  props: TooltipProps<T>
+) => React.ReactElement | any;
 
-  const triggerProps = {
-    onFocus: () => !focusByMouse && setOpen(true),
-    onBlur: () => {
-      setOpen(false);
-      setFocusByMouse(false);
-    },
-    onClick: () => closeOnActivation && setOpen(false),
-    // This should be placed on the trigger in case the element is disabled
-    onMouseEnter,
-    onMouseLeave,
-    onMouseDown,
-    onMouseMove: onMouseMove,
-    onTouchStart: onDragStart,
-  };
+const Tooltip: TooltipComponent = React.forwardRef(
+  <T extends React.ElementType = typeof Popover>(
+    {
+      as,
+      align = 'top',
+      className: customClassName,
+      children,
+      label,
+      description,
+      enterDelayMs = 100,
+      leaveDelayMs = 300,
+      defaultOpen = false,
+      closeOnActivation = false,
+      dropShadow = false,
+      highContrast = true,
+      ...rest
+    }: TooltipProps<T>,
+    ref?: PolymorphicRef<T>
+  ) => {
+    const tooltipRef = useRef<HTMLSpanElement>(null);
+    const [open, setOpen] = useDelayedState(defaultOpen);
+    const [isDragging, setIsDragging] = useState(false);
+    const [focusByMouse, setFocusByMouse] = useState(false);
+    const [isPointerIntersecting, setIsPointerIntersecting] = useState(false);
+    const id = useId('tooltip');
+    const prefix = usePrefix();
+    const child = React.Children.only(children);
 
-  function getChildEventHandlers(childProps: any) {
-    const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
-      prop.startsWith('on')
-    );
-    const eventHandlers = {};
-    eventHandlerFunctions.forEach((functionName) => {
-      eventHandlers[functionName] = (evt: React.SyntheticEvent) => {
-        triggerProps[functionName](evt);
-        if (childProps?.[functionName]) {
-          childProps?.[functionName](evt);
-        }
-      };
-    });
-    return eventHandlers;
-  }
+    const {
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
+    } = child?.props ?? {};
 
-  if (label) {
-    triggerProps['aria-labelledby'] = id;
-  } else {
-    triggerProps['aria-describedby'] = id;
-  }
+    const hasLabel = !!label;
+    const hasAriaLabel =
+      typeof ariaLabel === 'string' ? ariaLabel.trim() !== '' : false;
 
-  const onKeyDown = useCallback(
-    (event: React.SyntheticEvent | Event) => {
-      if (open && match(event, keys.Escape)) {
-        event.stopPropagation();
+    // An `aria-label` takes precedence over `aria-describedby`, but when it's
+    // needed and the user doesn't specify one, the fallback `id` is used.
+    const labelledBy = hasAriaLabel
+      ? null
+      : hasLabel
+        ? (ariaLabelledBy ?? id)
+        : undefined;
+
+    // If `aria-label` is present, use any provided `aria-describedby`.
+    // If not, fallback to child's `aria-describedby` or the tooltip `id` if needed.
+    const describedBy = hasAriaLabel
+      ? ariaDescribedBy
+      : (ariaDescribedBy ?? (!hasLabel && !ariaLabelledBy ? id : undefined));
+
+    const triggerProps = {
+      onFocus: () => !focusByMouse && setOpen(true),
+      onBlur: () => {
         setOpen(false);
-      }
-      if (
-        open &&
-        closeOnActivation &&
-        (match(event, keys.Enter) || match(event, keys.Space))
-      ) {
-        setOpen(false);
-      }
-    },
-    [closeOnActivation, open, setOpen]
-  );
-
-  useIsomorphicEffect(() => {
-    if (!open) {
-      return undefined;
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (match(event, keys.Escape)) {
-        onKeyDown(event);
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+        setFocusByMouse(false);
+      },
+      onClick: () => closeOnActivation && setOpen(false),
+      // This should be placed on the trigger in case the element is disabled
+      onMouseEnter,
+      onMouseLeave,
+      onMouseDown,
+      onMouseMove: onMouseMove,
+      onTouchStart: onDragStart,
+      'aria-labelledby': labelledBy,
+      'aria-describedby': describedBy,
     };
-  }, [open, onKeyDown]);
 
-  function onMouseEnter() {
-    // Interactive Tags should not support onMouseEnter
-    if (!rest?.onMouseEnter) {
-      setIsPointerIntersecting(true);
-      setOpen(true, enterDelayMs);
+    function getChildEventHandlers(childProps: any) {
+      const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
+        prop.startsWith('on')
+      );
+      const eventHandlers = {};
+      eventHandlerFunctions.forEach((functionName) => {
+        eventHandlers[functionName] = (evt: React.SyntheticEvent) => {
+          triggerProps[functionName](evt);
+          if (childProps?.[functionName]) {
+            childProps?.[functionName](evt);
+          }
+        };
+      });
+      return eventHandlers;
     }
-  }
 
-  function onMouseDown() {
-    setFocusByMouse(true);
-    onDragStart();
-  }
+    const onKeyDown = useCallback(
+      (event: KeyboardEvent) => {
+        if (open && match(event, keys.Escape)) {
+          event.stopPropagation();
+          setOpen(false);
+        }
+        if (
+          open &&
+          closeOnActivation &&
+          (match(event, keys.Enter) || match(event, keys.Space))
+        ) {
+          setOpen(false);
+        }
+      },
+      [closeOnActivation, open, setOpen]
+    );
 
-  function onMouseLeave() {
-    setIsPointerIntersecting(false);
-    if (isDragging) {
-      return;
+    useIsomorphicEffect(() => {
+      if (!open) {
+        return undefined;
+      }
+
+      function handleKeyDown(event: KeyboardEvent) {
+        if (match(event, keys.Escape)) {
+          onKeyDown(event);
+        }
+      }
+
+      document.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [open, onKeyDown]);
+
+    function onMouseEnter() {
+      // Interactive Tags should not support onMouseEnter
+      if (!rest?.onMouseEnter) {
+        setIsPointerIntersecting(true);
+        setOpen(true, enterDelayMs);
+      }
     }
-    setOpen(false, leaveDelayMs);
-  }
 
-  function onMouseMove(evt) {
-    if (evt.buttons === 1) {
-      setIsDragging(true);
-    } else {
-      setIsDragging(false);
+    function onMouseDown() {
+      setFocusByMouse(true);
+      onDragStart();
     }
-  }
 
-  function onDragStart() {
-    setIsDragging(true);
-  }
-
-  const onDragStop = useCallback(() => {
-    setIsDragging(false);
-    // Close the tooltip, unless the mouse pointer is within the bounds of the
-    // trigger.
-    if (!isPointerIntersecting) {
+    function onMouseLeave() {
+      setIsPointerIntersecting(false);
+      if (isDragging) {
+        return;
+      }
       setOpen(false, leaveDelayMs);
     }
-  }, [isPointerIntersecting, leaveDelayMs, setOpen]);
 
-  useNoInteractiveChildren(
-    tooltipRef,
-    'The Tooltip component must have no interactive content rendered by the' +
-      '`label` or `description` prop'
-  );
-
-  useEffect(() => {
-    if (isDragging) {
-      // Register drag stop handlers.
-      DRAG_STOP_EVENT_TYPES.forEach((eventType) => {
-        document.addEventListener(eventType, onDragStop);
-      });
+    function onMouseMove(evt) {
+      if (evt.buttons === 1) {
+        setIsDragging(true);
+      } else {
+        setIsDragging(false);
+      }
     }
-    return () => {
-      DRAG_STOP_EVENT_TYPES.forEach((eventType) => {
-        document.removeEventListener(eventType, onDragStop);
-      });
-    };
-  }, [isDragging, onDragStop]);
 
-  return (
-    // @ts-ignore-error Popover throws a TS error everytime is imported
-    <Popover
-      {...rest}
-      align={align}
-      className={cx(`${prefix}--tooltip`, customClassName)}
-      dropShadow={false}
-      highContrast
-      onKeyDown={onKeyDown}
-      onMouseLeave={onMouseLeave}
-      open={open}>
-      <div className={`${prefix}--tooltip-trigger__wrapper`}>
-        {child !== undefined
-          ? React.cloneElement(child, {
-              ...triggerProps,
-              ...getChildEventHandlers(child.props),
-            })
-          : null}
-      </div>
-      <PopoverContent
-        aria-hidden={open ? 'false' : 'true'}
-        className={`${prefix}--tooltip-content`}
-        id={id}
-        onMouseEnter={onMouseEnter}
-        role="tooltip">
-        {label || description}
-      </PopoverContent>
-    </Popover>
-  );
-}
+    function onDragStart() {
+      setIsDragging(true);
+    }
 
-Tooltip.propTypes = {
+    const onDragStop = useCallback(() => {
+      setIsDragging(false);
+      // Close the tooltip, unless the mouse pointer is within the bounds of the
+      // trigger.
+      if (!isPointerIntersecting) {
+        setOpen(false, leaveDelayMs);
+      }
+    }, [isPointerIntersecting, leaveDelayMs, setOpen]);
+
+    useNoInteractiveChildren(
+      tooltipRef,
+      'The Tooltip component must have no interactive content rendered by the' +
+        '`label` or `description` prop'
+    );
+
+    useEffect(() => {
+      if (isDragging) {
+        // Register drag stop handlers.
+        DRAG_STOP_EVENT_TYPES.forEach((eventType) => {
+          document.addEventListener(eventType, onDragStop);
+        });
+      }
+      return () => {
+        DRAG_STOP_EVENT_TYPES.forEach((eventType) => {
+          document.removeEventListener(eventType, onDragStop);
+        });
+      };
+    }, [isDragging, onDragStop]);
+
+    return (
+      <Popover<any>
+        as={as}
+        ref={ref}
+        {...rest}
+        align={align}
+        className={cx(`${prefix}--tooltip`, customClassName)}
+        dropShadow={dropShadow}
+        highContrast={highContrast}
+        onKeyDown={onKeyDown}
+        onMouseLeave={onMouseLeave}
+        open={open}>
+        <div className={`${prefix}--tooltip-trigger__wrapper`}>
+          {child !== undefined
+            ? React.cloneElement(child, {
+                ...triggerProps,
+                ...getChildEventHandlers(child.props),
+              })
+            : null}
+        </div>
+        <PopoverContent
+          aria-hidden={open ? 'false' : 'true'}
+          className={`${prefix}--tooltip-content`}
+          id={id}
+          onMouseEnter={onMouseEnter}
+          role="tooltip">
+          {label || description}
+        </PopoverContent>
+      </Popover>
+    );
+  }
+);
+
+(Tooltip as React.FC).propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -338,9 +385,19 @@ Tooltip.propTypes = {
   description: PropTypes.node,
 
   /**
+   * Specify whether a drop shadow should be rendered
+   */
+  dropShadow: PropTypes.bool,
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs: PropTypes.number,
+
+  /**
+   * Render the component using the high-contrast theme
+   */
+  highContrast: PropTypes.bool,
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use

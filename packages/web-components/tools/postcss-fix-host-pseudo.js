@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -54,9 +52,10 @@ const rePseudoElements = new RegExp(`::?(${pseudoElementNames.join('|')})`);
  * }
  * ```
  */
-// eslint-disable-next-line prefer-arrow-callback
+
 export default postcss.plugin(
   'fix-host-pseudo',
+  // eslint-disable-next-line prefer-arrow-callback
   function postCssPluginFixHostPseudo() {
     return function fixHostPseudo(css) {
       css.walkRules(async (rule) => {

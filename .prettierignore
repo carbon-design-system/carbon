@@ -59,6 +59,11 @@ packages/**/examples/**
 # Upgrade
 packages/upgrade/cli.js
 packages/upgrade/**/*.output.js
+packages/upgrade/**/*.output.tsx
 
 # Accessibility Verification Testing
 **/.avt/**
+
+# .github files
+CODEOWNERS
+PULL_REQUEST_TEMPLATE.md

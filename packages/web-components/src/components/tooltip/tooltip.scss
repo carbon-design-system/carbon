@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -39,8 +37,15 @@
   }
 }
 
-:host(#{prefix}-tooltip-content) {
+:host(#{$prefix}-tooltip-content) {
+  word-break: break-word;
+
   ::slotted(.#{$prefix}-tooltip-content) {
     @extend .#{$prefix}--tooltip-content;
   }
+}
+
+// Definition tooltip
+:host(#{$prefix}-definition-tooltip) #{$prefix}-popover-content::part(content) {
+  @extend .#{$prefix}--definition-tooltip;
 }

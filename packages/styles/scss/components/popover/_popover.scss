@@ -12,7 +12,6 @@
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
 @use '../../utilities/custom-property';
-@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/' as *;
 @use '../../utilities/convert';
@@ -264,6 +263,35 @@ $popover-caret-height: custom-property.get-var(
     inset-block-end: 0;
     inset-inline-end: 0;
     transform: translate($popover-offset, calc(100% + $popover-offset));
+  }
+
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: auto;
+  }
+
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-block-end: 0;
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+    transform: translate(50%, calc($popover-offset));
+  }
+
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-block-end: 0;
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+    transform: translate(50%, calc(-1 * $popover-offset));
   }
 
   [dir='rtl']

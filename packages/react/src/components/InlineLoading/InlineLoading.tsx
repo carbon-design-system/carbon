@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
@@ -72,6 +72,25 @@ const InlineLoading = ({
 }: InlineLoadingProps) => {
   const prefix = usePrefix();
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (status === 'finished') {
+      timerRef.current = setTimeout(() => {
+        if (onSuccess) {
+          onSuccess();
+        }
+      }, successDelay);
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [status, onSuccess, successDelay]);
+
   const getLoading = () => {
     let iconLabel = iconDescription ? iconDescription : status;
     if (status === 'error') {
@@ -82,11 +101,6 @@ const InlineLoading = ({
       );
     }
     if (status === 'finished') {
-      setTimeout(() => {
-        if (onSuccess) {
-          onSuccess();
-        }
-      }, successDelay);
       return (
         <CheckmarkFilled
           className={`${prefix}--inline-loading__checkmark-container`}>
@@ -94,9 +108,9 @@ const InlineLoading = ({
         </CheckmarkFilled>
       );
     }
-    if (status === 'inactive' || status === 'active') {
+    if (status === 'active') {
       if (!iconDescription) {
-        iconLabel = status === 'active' ? 'loading' : 'not loading';
+        iconLabel = 'loading';
       }
       return (
         <Loading
@@ -107,9 +121,20 @@ const InlineLoading = ({
         />
       );
     }
+    if (status === 'inactive') {
+      if (!iconDescription) {
+        iconLabel = 'not loading';
+      }
+      return (
+        <title className={`${prefix}--inline-loading__inactive-status`}>
+          {iconLabel}
+        </title>
+      );
+    }
     return undefined;
   };
-  const loadingText = (
+
+  const loadingText = description && (
     <div className={`${prefix}--inline-loading__text`}>{description}</div>
   );
   const loading = getLoading();
@@ -120,9 +145,9 @@ const InlineLoading = ({
     <div
       className={loadingClasses}
       {...rest}
-      aria-live={'assertive' || rest['aria-live']}>
+      aria-live={rest['aria-live'] ?? 'assertive'}>
       {loadingAnimation}
-      {description && loadingText}
+      {loadingText}
     </div>
   );
 };

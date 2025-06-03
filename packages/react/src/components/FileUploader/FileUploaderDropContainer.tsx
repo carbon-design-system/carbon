@@ -1,23 +1,22 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { keys, matches } from '../../internal/keyboard';
-import uniqueId from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
 export interface FileUploaderDropContainerProps
-  extends Omit<ReactAttr<HTMLButtonElement>, 'tabIndex'> {
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'tabIndex'> {
   /**
    * Specify the types of files that this input should be able to receive
    */
@@ -76,7 +75,7 @@ export interface FileUploaderDropContainerProps
   /**
    * Ref to pass to the inner button element
    */
-  innerRef?: React.LegacyRef<HTMLButtonElement>;
+  innerRef?: React.Ref<HTMLButtonElement>;
 
   /**
    * @deprecated The `role` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default, and has an implicit role of button.
@@ -150,13 +149,15 @@ function FileUploaderDropContainer({
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const files = [...(event.target.files ?? [])];
-    const addedFiles = validateFiles(files);
+    const filesToValidate = multiple ? files : [files[0]];
+    const addedFiles = validateFiles(filesToValidate);
     return onAddFiles(event, { addedFiles });
   }
 
   function handleDrop(event: React.DragEvent<HTMLDivElement>) {
     const files = [...event.dataTransfer.files];
-    const addedFiles = validateFiles(files);
+    const filesToValidate = multiple ? files : [files[0]];
+    const addedFiles = validateFiles(filesToValidate);
     return onAddFiles(event, { addedFiles });
   }
 
@@ -202,7 +203,7 @@ function FileUploaderDropContainer({
         className={dropareaClasses}
         ref={innerRef}
         onKeyDown={(evt) => {
-          if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
+          if (matches(evt, [keys.Enter, keys.Space])) {
             evt.preventDefault();
             inputRef.current?.click();
           }

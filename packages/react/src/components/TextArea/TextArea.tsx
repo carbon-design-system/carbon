@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,18 +7,19 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ReactNode,
-  useState,
+  forwardRef,
   useContext,
-  useRef,
   useEffect,
+  useRef,
+  useState,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
@@ -161,7 +162,9 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
+const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
+
+const TextArea = frFn((props, forwardRef) => {
   const {
     className,
     decorator,
@@ -178,7 +181,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     light,
     placeholder = '',
     enableCounter = false,
-    maxCount = undefined,
+    maxCount,
     counterMode = 'character',
     warn = false,
     warnText = '',
@@ -193,9 +196,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
-    | undefined;
+  const ref = useMergedRefs([forwardRef, textareaRef]);
 
   function getInitialTextCount(): number {
     const targetValue =
@@ -352,6 +353,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const counterClasses = classNames(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--text-area__label-counter`]: true,
   });
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
@@ -423,11 +425,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     }
   }
 
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(
+  const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
+    counterMode === 'word' ? 'word' : undefined,
     counterMode === 'word' ? 'words' : undefined
   );
   useEffect(() => {
