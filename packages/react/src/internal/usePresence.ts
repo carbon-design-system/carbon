@@ -41,5 +41,8 @@ export const usePresence = (
     } catch {}
   }, [isExiting, handleAnimationEnd]);
 
-  return [isOpen || exitState !== 'finished', isExiting] as const;
+  return {
+    isPresent: isOpen || exitState !== 'finished',
+    isExiting,
+  };
 };

@@ -260,7 +260,7 @@ export const ModalPresence = ({
   children,
 }: PropsWithChildren<Pick<ModalProps, 'open'>>) => {
   const presenceRef = useRef<HTMLDivElement | null>(null);
-  const [isPresent, isExiting] = usePresence(presenceRef, open);
+  const { isPresent, isExiting } = usePresence(presenceRef, open);
 
   const contextValue = useMemo(() => ({ presenceRef, isExiting }), [isExiting]);
 
