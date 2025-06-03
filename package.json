@@ -39,7 +39,7 @@
     "react-dom": "~19.0.0",
     "react-is": "~19.0.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
-    "chromedriver": "137.0.1"
+    "chromedriver": "^137.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
