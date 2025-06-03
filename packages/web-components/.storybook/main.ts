@@ -64,7 +64,7 @@ const config: StorybookConfig = {
         },
       },
       optimizeDeps: {
-        include: ['@storybook/web-components'],
+        include: ['@storybook/web-components-vite'],
         exclude: ['lit', 'lit-html'],
       },
       define: {

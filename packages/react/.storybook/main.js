@@ -6,12 +6,15 @@
  */
 
 'use strict';
+import { createRequire } from 'node:module';
 
 import remarkGfm from 'remark-gfm';
 import fs from 'fs';
 import glob from 'fast-glob';
-import path from 'path';
+import path, { dirname, join } from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const require = createRequire(import.meta.url);
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -67,27 +70,11 @@ const stories = glob
   });
 const config = {
   addons: [
+    getAbsolutePath('@storybook/addon-webpack5-compiler-babel'),
+    // getAbsolutePath("storybook-addon-accessibility-checker"),
+    getAbsolutePath('@storybook/addon-a11y'),
     {
-      name: '@storybook/addon-essentials',
-      options: {
-        actions: true,
-        backgrounds: false,
-        controls: true,
-        docs: true,
-        toolbars: true,
-        viewport: true,
-      },
-    },
-    '@storybook/addon-webpack5-compiler-babel',
-    /**
-     * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
-     * Eventually they plan to attempt to get this back into the root addon with the storybook team.
-     * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
-     */
-    // '@storybook/addon-a11y',
-    'storybook-addon-accessibility-checker',
-    {
-      name: '@storybook/addon-docs',
+      name: getAbsolutePath('@storybook/addon-docs'),
       options: {
         mdxPluginOptions: {
           mdxCompileOptions: {
@@ -102,7 +89,7 @@ const config = {
     buildStoriesJson: true,
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: getAbsolutePath('@storybook/react-webpack5'),
     options: {},
   },
   stories,
@@ -168,9 +155,12 @@ const config = {
     return config;
   },
   docs: {
-    autodocs: true,
     defaultName: 'Overview',
   },
 };
 
 export default config;
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}
