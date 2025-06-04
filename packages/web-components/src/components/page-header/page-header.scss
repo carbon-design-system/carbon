@@ -35,6 +35,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--page-header__breadcrumb-bar;
 }
 
+:host(#{$prefix}-page-header-breadcrumb[border]) {
+  @extend .#{$prefix}--page-header__breadcrumb-bar-border;
+}
+
 :host(#{$prefix}-page-header-content) {
   @extend .#{$prefix}--page-header__content;
 

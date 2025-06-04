@@ -9,6 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
+import { property } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -18,6 +19,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-page-header-breadcrumb`)
 class CDSPageHeaderBreadcrumb extends LitElement {
+  @property({ reflect: true })
+  border = true;
+
   render() {
     const {} = this;
     return html`
