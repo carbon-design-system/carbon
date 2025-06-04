@@ -14,6 +14,7 @@ import React, {
   createContext,
   useContext,
   type HTMLAttributes,
+  type RefObject,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { usePrefix } from '../../internal/usePrefix';
@@ -51,6 +52,11 @@ interface DialogProps extends HTMLAttributes<HTMLDialogElement> {
    * Specify an optional className to be applied to the modal root node
    */
   className?: string;
+
+  /**
+   * Provide a ref to return focus to once the dialog is closed.
+   */
+  focusAfterCloseRef?: RefObject<HTMLElement | null>;
 
   /**
    * Specifies whether the dialog is modal or non-modal. This cannot be changed
@@ -113,6 +119,7 @@ const unstable__Dialog = React.forwardRef(
     {
       children,
       className,
+      focusAfterCloseRef,
       modal,
       onCancel = noopFn,
       onClick = noopFn,
@@ -178,6 +185,14 @@ const unstable__Dialog = React.forwardRef(
       }
     }, [modal, open]);
 
+    useEffect(() => {
+      if (!open && focusAfterCloseRef) {
+        setTimeout(() => {
+          focusAfterCloseRef.current?.focus();
+        });
+      }
+    }, [open, focusAfterCloseRef]);
+
     const containerClasses = cx(`${prefix}--dialog-container`);
     const contextValue = {
       dialogId,
@@ -237,6 +252,13 @@ unstable__Dialog.propTypes = {
    * Specify an optional className to be applied to the modal root node
    */
   className: PropTypes.string,
+
+  /**
+   * Provide a ref to return focus to once the dialog is closed.
+   */
+  focusAfterCloseRef: PropTypes.shape({
+    current: PropTypes.instanceOf(HTMLElement),
+  }),
 
   /**
    * Modal specifies whether the Dialog is modal or non-modal. This cannot be
