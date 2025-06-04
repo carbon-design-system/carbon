@@ -8,6 +8,7 @@
  */
 
 import './page-header';
-import './page-header-content';
 import './page-header-breadcrumb';
+import './page-header-content';
+import './page-header-hero-image';
 import './page-header-tabs';

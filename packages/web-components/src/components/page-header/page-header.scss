@@ -25,7 +25,6 @@ $css--plex: true !default;
 :host(#{$prefix}-page-header-breadcrumb),
 :host(#{$prefix}-page-header-content),
 :host(#{$prefix}-page-header-tabs) {
-  @include grid.emit-grid-tokens();
   @include grid.css-grid();
 
   display: block;
@@ -35,7 +34,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--page-header__breadcrumb-bar;
 }
 
-:host(#{$prefix}-page-header-breadcrumb[border]) {
+:host(#{$prefix}-page-header-breadcrumb[border='true']) {
   @extend .#{$prefix}--page-header__breadcrumb-bar-border;
 }
 
@@ -66,6 +65,12 @@ $css--plex: true !default;
 :host(#{$prefix}-page-header-content:not([subtitle])) {
   .#{$prefix}--page-header__content__body {
     margin-block-start: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-page-header-content[contextual-actions]) {
+  .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
   }
 }
 

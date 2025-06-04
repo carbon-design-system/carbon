@@ -8,6 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
+import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
@@ -52,21 +53,41 @@ class CDSPageHeaderContent extends LitElement {
     this.requestUpdate();
   }
 
+  /**
+   * Title text of the page-header-content
+   */
   @property()
   title = '';
 
+  /**
+   * Subtitle text of the page-header-content
+   */
   @property()
   subtitle = '';
+
+  /**
+   * Set to `true` if the breadcrumb bar is sitting within a grid
+   * (ie. when used in tandem with page-header-hero-image)
+   */
+  @property({ attribute: 'within-grid', type: Boolean })
+  withinGrid = false;
 
   render() {
     const {
       title,
       subtitle,
+      withinGrid,
       _hasBody: hasBody,
       _handleSlotChange: handleSlotChange,
       _handleContextualActionsSlotChange: handleContextualActionsSlotChange,
     } = this;
-    return html` <div class="${prefix}--css-grid">
+
+    const gridClasses = classMap({
+      [`${prefix}--css-grid`]: !withinGrid,
+      [`${prefix}--subgrid ${prefix}--subgrid--wide`]: withinGrid,
+    });
+
+    return html` <div class="${gridClasses}">
       <div
         class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column">
         <div class="${prefix}--page-header__content__title-wrapper">
