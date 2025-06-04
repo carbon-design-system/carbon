@@ -7,7 +7,7 @@
 
 /* eslint-disable storybook/story-exports */
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VStack } from '../Stack';
 import {
   unstable__Dialog as Dialog,
@@ -51,8 +51,6 @@ export default {
 export const Modal = ({ open: _open, ...args }) => {
   const [open, setOpen] = useState(_open);
 
-  const buttonRef = useRef();
-
   function toggleDialog() {
     setOpen(!open);
   }
@@ -75,14 +73,8 @@ export const Modal = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <OverflowMenu ref={buttonRef}>
-        <OverflowMenuItem onClick={() => setOpen(true)} itemText="Open modal">
-          Open modal
-        </OverflowMenuItem>
-      </OverflowMenu>
       <Dialog
         {...args}
-        focusAfterCloseRef={buttonRef}
         open={open}
         onRequestClose={handleRequestClose}
         aria-labelledby="title">
