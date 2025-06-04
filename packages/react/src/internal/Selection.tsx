@@ -23,9 +23,12 @@ const callOnChangeHandler = <ItemType,>({
 }) => {
   if (isControlled) {
     if (isMounted && onChangeHandlerControlled) {
-      queueMicrotask(() => {
+      // Use setTimeout to defer the controlled onChange call,
+      // avoiding React’s warning: "Cannot update a component while rendering a different component".
+      // This ensures the parent state updates after rendering completes.
+      setTimeout(() => {
         onChangeHandlerControlled({ selectedItems });
-      });
+      }, 0);
     }
   } else {
     onChangeHandlerUncontrolled(selectedItems);
