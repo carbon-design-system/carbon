@@ -489,13 +489,29 @@ describe('Tooltip Text Rendering', () => {
     expect(screen.getByText('Bold')).toBeInTheDocument();
     expect(screen.getByText('italic')).toBeInTheDocument();
   });
-
-  it('should handle unsupported label types gracefully', () => {
-    const objectLabel = { name: 'test' };
-
-    const { container } = render(
-      <TreeNode id="test" label={objectLabel} selected={[]} />
+  it('should render React element labels with nested content', () => {
+    const complexLabel = (
+      <span>
+        <strong>Bold</strong> and <em>italic</em>
+      </span>
     );
+    render(<TreeNode id="test" label={complexLabel} selected={[]} />);
+
+    expect(screen.getByText('Bold')).toBeInTheDocument();
+    expect(screen.getByText('italic')).toBeInTheDocument();
+  });
+
+  it('should handle edge cases in text extraction', () => {
+    const { container, rerender } = render(
+      <TreeNode id="test" label={null} selected={[]} />
+    );
+    expect(container.querySelector('li')).toBeInTheDocument();
+    //with undefined
+    rerender(<TreeNode id="test" label={undefined} selected={[]} />);
+    expect(container.querySelector('li')).toBeInTheDocument();
+
+    // with empty string
+    rerender(<TreeNode id="test" label="" selected={[]} />);
     expect(container.querySelector('li')).toBeInTheDocument();
   });
 });
