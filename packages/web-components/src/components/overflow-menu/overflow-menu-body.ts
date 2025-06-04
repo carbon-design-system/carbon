@@ -134,8 +134,9 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
         requestAnimationFrame(() => {
           const menuTrigger = this.parent as HTMLElement | null;
           const triggerButton =
-            menuTrigger?.shadowRoot?.querySelector('button') ||
-            menuTrigger?.querySelector('button');
+            menuTrigger?.shadowRoot?.querySelector(
+              `button.${prefix}--overflow-menu`
+            ) || menuTrigger?.querySelector(`button.${prefix}--overflow-menu`);
 
           if (triggerButton) {
             (triggerButton as HTMLElement).focus();
