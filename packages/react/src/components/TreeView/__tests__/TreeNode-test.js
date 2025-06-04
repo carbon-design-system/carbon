@@ -470,3 +470,68 @@ describe('TreeNode - handleFocusEvent', () => {
     expect(onFocusMock).not.toHaveBeenCalled();
   });
 });
+describe('Tooltip Text Rendering', () => {
+  it('should render array labels as joined text', () => {
+    render(
+      <TreeNode id="test" label={['Hello', ' ', 'World']} selected={[]} />
+    );
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
+  });
+});
+
+describe('Tooltip Truncation', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should show button wrapper when text overflows', () => {
+    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', {
+      configurable: true,
+      get: () => 300,
+    });
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      configurable: true,
+      get: () => 150,
+    });
+
+    const { container } = render(
+      <TreeNode id="test" label="Very long text that overflows" selected={[]} />
+    );
+
+    expect(
+      container.querySelector('.cds--tree-node__label__text-button')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--popover-container')
+    ).toBeInTheDocument();
+  });
+});
+
+describe('TreeNode - Parent Node Tooltip', () => {
+  it('should support tooltip on parent nodes with children', () => {
+    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', {
+      configurable: true,
+      get: () => 250,
+    });
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      configurable: true,
+      get: () => 150,
+    });
+
+    const { container } = render(
+      <TreeNode id="parent" label="Long parent label" selected={[]}>
+        <TreeNode id="child" label="Child" />
+      </TreeNode>
+    );
+
+    expect(
+      container.querySelector('.cds--tree-node__label__details')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--tree-node__label__text-button')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--tree-parent-node__toggle')
+    ).toBeInTheDocument();
+  });
+});
