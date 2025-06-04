@@ -234,7 +234,7 @@ export interface OverflowMenuProps {
   selectorPrimaryFocus?: string;
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size?: 'sm' | 'md' | 'lg';
 
@@ -305,13 +305,15 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    // Call `onClose` when menu closes.
     useEffect(() => {
-      if (!open && prevOpenState.current) {
+      if (open && !prevOpenState.current) {
+        onOpen();
+      } else if (!open && prevOpenState.current) {
         onClose();
       }
+
       prevOpenState.current = open;
-    }, [open, onClose]);
+    }, [open, onClose, onOpen]);
 
     useOutsideClick(wrapperRef, ({ target }) => {
       if (
@@ -475,7 +477,6 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         },
         !hasFocusin
       );
-      onOpen();
     };
 
     const getTarget = () => {
@@ -776,7 +777,7 @@ OverflowMenu.propTypes = {
   selectorPrimaryFocus: PropTypes.string,
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
