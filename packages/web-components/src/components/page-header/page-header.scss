@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/grid';
 // @use '@carbon/styles/scss/utilities' as *;
 // @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/page-header/index' as *;
@@ -21,10 +22,25 @@ $css--plex: true !default;
   display: block;
 }
 
+:host(#{$prefix}-page-header-breadcrumb),
+:host(#{$prefix}-page-header-content),
+:host(#{$prefix}-page-header-tabs) {
+  @include grid.emit-grid-tokens();
+  @include grid.css-grid();
+
+  display: block;
+}
+
+:host(#{$prefix}-page-header-breadcrumb) {
+  @extend .#{$prefix}--page-header__breadcrumb-bar;
+}
+
 :host(#{$prefix}-page-header-content) {
   @extend .#{$prefix}--page-header__content;
 
   .#{$prefix}--page-header__content__title {
+    @extend .#{$prefix}--page-header__content__title;
+
     margin: 0;
   }
 
@@ -37,6 +53,8 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--page-header__content__sub-title {
+    @extend .#{$prefix}--page-header__content__subtitle;
+
     margin-block-end: 0;
   }
 }
@@ -51,4 +69,8 @@ $css--plex: true !default;
   .#{$prefix}--page-header__content__title {
     -webkit-line-clamp: 1;
   }
+}
+
+:host(#{$prefix}-page-header-tabs) {
+  @extend .#{$prefix}--page-header__tab-bar;
 }
