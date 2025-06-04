@@ -13,7 +13,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import useResizeObserver from 'use-resize-observer';
+import { useResizeObserver } from './useResizeObserver';
 import { usePreviousValue } from './usePreviousValue';
 
 type Item = {
