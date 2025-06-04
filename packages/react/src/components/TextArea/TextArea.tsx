@@ -206,7 +206,7 @@ const TextArea = frFn((props, forwardRef) => {
     if (counterMode === 'character') {
       return strValue.length;
     } else {
-      return strValue.match(/\w+/g)?.length || 0;
+      return strValue.match(/\p{L}+/gu)?.length || 0;
     }
   }
 
@@ -260,9 +260,9 @@ const TextArea = frFn((props, forwardRef) => {
           textareaRef.current !== null
         ) {
           const existingWords: string[] =
-            textareaRef.current.value.match(/\w+/g) || [];
+            textareaRef.current.value.match(/\p{L}+/gu) || [];
           const pastedWords: string[] =
-            evt.clipboardData.getData('Text').match(/\w+/g) || [];
+            evt.clipboardData.getData('Text').match(/\p{L}+/gu) || [];
 
           const totalWords = existingWords.length + pastedWords.length;
 
@@ -304,7 +304,7 @@ const TextArea = frFn((props, forwardRef) => {
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
           ) {
-            const matchedWords = evt.target?.value?.match(/\w+/g);
+            const matchedWords = evt.target?.value?.match(/\p{L}+/gu);
             if (matchedWords && matchedWords.length <= maxCount) {
               textareaRef.current.removeAttribute('maxLength');
 

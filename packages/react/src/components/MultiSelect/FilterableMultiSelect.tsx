@@ -539,6 +539,32 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     }
   }, [isOpen, onMenuChange, open]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const wrapper = document
+        .getElementById(id)
+        ?.closest(`.${prefix}--multi-select__wrapper`);
+
+      // If click is outside our component and menu is open or input is focused
+      if (wrapper && !wrapper.contains(target)) {
+        if (isOpen || inputFocused) {
+          setIsOpen(false);
+          setInputFocused(false);
+          setInputValue('');
+        }
+      }
+    };
+
+    if (inputFocused || isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, inputFocused]);
+
   const {
     getToggleButtonProps,
     getLabelProps,
