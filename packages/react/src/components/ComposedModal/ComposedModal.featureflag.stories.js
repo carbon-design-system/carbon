@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
@@ -13,8 +13,6 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
-import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 import { FeatureFlags } from '../FeatureFlags';
 import { Annotation } from '../../../.storybook/templates/Annotation';
 import LinkTo from '@storybook/addon-links/react';
@@ -32,7 +30,6 @@ export default {
 
 export const EnableDialogElement = (args) => {
   const [open, setOpen] = useState(true);
-  const buttonRef = useRef();
   return (
     <FeatureFlags enableDialogElement>
       <Annotation
@@ -47,16 +44,7 @@ export const EnableDialogElement = (args) => {
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-        <OverflowMenu ref={buttonRef}>
-          <OverflowMenuItem onClick={() => setOpen(true)} itemText="Open modal">
-            Open modal
-          </OverflowMenuItem>
-        </OverflowMenu>
-        <ComposedModal
-          {...args}
-          open={open}
-          launcherButtonRef={buttonRef}
-          onClose={() => setOpen(false)}>
+        <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
           <ModalHeader
             label="Account resources"
             title="Add a custom domain"

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from './';
 import Button from '../Button';
 import Select from '../Select';
@@ -13,8 +13,6 @@ import { MultiSelect } from '../MultiSelect';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
-import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 import { ClassPrefix } from '../ClassPrefix';
 import './Modal.stories.scss';
 import { FeatureFlags } from '../FeatureFlags';
@@ -29,7 +27,6 @@ export default {
 
 export const EnableDialogElement = () => {
   const [open, setOpen] = useState(false);
-  const buttonRef = useRef();
   return (
     <FeatureFlags enableDialogElement>
       <Annotation
@@ -44,11 +41,6 @@ export const EnableDialogElement = () => {
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
-        <OverflowMenu ref={buttonRef}>
-          <OverflowMenuItem onClick={() => setOpen(true)} itemText="Open modal">
-            Open modal
-          </OverflowMenuItem>
-        </OverflowMenu>
         <ClassPrefix prefix="dialog-refactor">
           <div className="experimental-modal">
             <Modal
@@ -57,8 +49,7 @@ export const EnableDialogElement = () => {
               modalHeading="Add a custom domain"
               modalLabel="Account resources"
               primaryButtonText="Add"
-              secondaryButtonText="Cancel"
-              launcherButtonRef={buttonRef}>
+              secondaryButtonText="Cancel">
               <p style={{ marginBottom: '1rem' }}>
                 Custom domains direct requests for your apps in this Cloud
                 Foundry organization to a URL that you own. A custom domain can
