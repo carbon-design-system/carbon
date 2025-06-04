@@ -7,7 +7,7 @@
 
 /* eslint-disable storybook/story-exports */
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VStack } from '../Stack';
 import {
   unstable__Dialog as Dialog,
@@ -19,15 +19,13 @@ import Button from '../Button';
 import TextInput from '../TextInput';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 import { action } from '@storybook/addon-actions';
 import mdx from './Dialog.mdx';
 
 export default {
   title: 'Experimental/unstable_Dialog',
   component: Dialog,
-  //includeStories: [],
+  includeStories: [],
   parameters: {
     docs: {
       page: mdx,
@@ -53,8 +51,6 @@ export default {
 export const Modal = ({ open: _open, ...args }) => {
   const [open, setOpen] = useState(_open);
 
-  const buttonRef = useRef();
-
   function toggleDialog() {
     setOpen(!open);
   }
@@ -77,14 +73,8 @@ export const Modal = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <OverflowMenu ref={buttonRef}>
-        <OverflowMenuItem onClick={() => setOpen(true)} itemText="Open modal">
-          Open modal
-        </OverflowMenuItem>
-      </OverflowMenu>
       <Dialog
         {...args}
-        focusAfterCloseRef={buttonRef}
         open={open}
         onRequestClose={handleRequestClose}
         aria-labelledby="title">

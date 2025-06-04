@@ -256,9 +256,12 @@ unstable__Dialog.propTypes = {
   /**
    * Provide a ref to return focus to once the dialog is closed.
    */
-  focusAfterCloseRef: PropTypes.shape({
-    current: PropTypes.instanceOf(HTMLElement),
-  }),
+  focusAfterCloseRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.instanceOf(HTMLElement),
+    }),
+  ]),
 
   /**
    * Modal specifies whether the Dialog is modal or non-modal. This cannot be

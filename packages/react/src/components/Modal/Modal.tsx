@@ -13,7 +13,7 @@ import React, {
   useState,
   type HTMLAttributes,
   type ReactNode,
-  type Ref,
+  type RefObject,
 } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -111,7 +111,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: Ref<HTMLButtonElement>;
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 
   /**
    * Specify the description for the loading text
@@ -494,14 +494,14 @@ const Modal = React.forwardRef(function Modal(
   }, [open, prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (prevOpen && !open && launcherButtonRef) {
+    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
       setTimeout(() => {
         if ('current' in launcherButtonRef) {
           launcherButtonRef.current?.focus();
         }
       });
     }
-  }, [open, prevOpen, launcherButtonRef]);
+  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
 
   useEffect(() => {
     if (!enableDialogElement) {
@@ -593,6 +593,7 @@ const Modal = React.forwardRef(function Modal(
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      focusAfterCloseRef={launcherButtonRef}
       modal
       ref={innerModal}
       role={isAlertDialog ? 'alertdialog' : ''}
@@ -884,7 +885,7 @@ Modal.propTypes = {
         PropTypes.oneOf([null]),
       ]).isRequired,
     }),
-  ]) as Validator<Ref<HTMLButtonElement>>,
+  ]) as Validator<RefObject<HTMLButtonElement | null>>,
 
   /**
    * Specify the description for the loading text
