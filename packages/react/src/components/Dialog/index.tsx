@@ -259,7 +259,7 @@ unstable__Dialog.propTypes = {
   focusAfterCloseRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.instanceOf(HTMLElement),
+      current: PropTypes.any,
     }),
   ]),
 
