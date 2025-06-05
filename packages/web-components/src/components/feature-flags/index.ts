@@ -36,12 +36,9 @@ export class FeatureFlagsElement extends HTMLElement {
     _oldVal: string | null,
     newVal: string | null
   ) {
-    const value = newVal !== null && newVal !== 'false';
+    const value = newVal === 'true';
     this.flags[name] = value;
     this.updateScope();
-    this.dispatchEvent(
-      new CustomEvent('flags-changed', { detail: this.scope })
-    );
   }
 
   private getParentScope(): FeatureFlagsElement | null {

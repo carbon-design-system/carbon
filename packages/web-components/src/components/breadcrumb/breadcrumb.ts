@@ -77,12 +77,13 @@ class CDSBreadcrumb extends LitElement {
     );
     return isV12Enabled
       ? html`
+          <span>Feature flag is enabled for this component.</span>
           <ol class="${classes}">
-            <span>V12 </span>
             <slot @slotchange="${this._handleSlotChange}"></slot>
           </ol>
         `
       : html`
+          <span>Feature flag is not enabled for this component.</span>
           <ol class="${classes}">
             <slot @slotchange="${this._handleSlotChange}"></slot>
           </ol>
