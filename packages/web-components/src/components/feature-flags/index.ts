@@ -6,9 +6,12 @@ import { setFeatureFlagsInstance } from '../../../.storybook/with-feature-flag';
 
 type FeatureFlags = Record<string, boolean>;
 
+console.log('GlobalFeatureFlags', GlobalFeatureFlags);
 export class FeatureFlagsElement extends HTMLElement {
   private scope = GlobalFeatureFlags;
   private flags: FeatureFlags = {};
+
+  // console.log(scope);
 
   static get observedAttributes() {
     return [
@@ -28,6 +31,7 @@ export class FeatureFlagsElement extends HTMLElement {
   }
 
   connectedCallback() {
+    console.log('this', this);
     setFeatureFlagsInstance(this);
     this.updateScope();
     this.render();
@@ -46,9 +50,23 @@ export class FeatureFlagsElement extends HTMLElement {
     );
   }
 
+  private getParentScope(): any {
+    let parent = this.parentNode;
+    while (parent) {
+      if (parent instanceof FeatureFlagsElement) {
+        return parent.getScope(); // 💡 parent exposes scope
+      }
+      parent = parent.parentNode;
+    }
+    return null;
+  }
+
   private updateScope() {
     const newScope = createScope(this.flags);
-    newScope.mergeWithScope(GlobalFeatureFlags);
+    const parentScope = this.getParentScope() || GlobalFeatureFlags;
+    if (parentScope) {
+      newScope.mergeWithScope(parentScope);
+    }
     this.scope = newScope;
   }
 
@@ -72,6 +90,7 @@ export class FeatureFlagsElement extends HTMLElement {
   }
 
   /** Optional getter to expose all flags */
+
   public getScope() {
     return this.scope;
   }

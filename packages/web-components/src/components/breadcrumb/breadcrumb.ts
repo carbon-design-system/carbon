@@ -68,7 +68,7 @@ class CDSBreadcrumb extends LitElement {
     console.log('get', getFeatureFlagsInstance());
     // console.log(FeatureFlagsElement)
 
-    console.log(isFeatureFlagEnabled('enable-v12-tile-default-icons'));
+    console.log(isFeatureFlagEnabled('enable-v12-tile-default-icons', this));
   }
 
   render() {
@@ -78,7 +78,10 @@ class CDSBreadcrumb extends LitElement {
       [`${prefix}--breadcrumb--sm`]: this.size === BREADCRUMB_SIZE.SMALL,
     });
 
-    const isV12Enabled = isFeatureFlagEnabled('enable-v12-tile-default-icons');
+    const isV12Enabled = isFeatureFlagEnabled(
+      'enable-v12-tile-default-icons',
+      this
+    );
     return isV12Enabled
       ? html`
           <ol class="${classes}">

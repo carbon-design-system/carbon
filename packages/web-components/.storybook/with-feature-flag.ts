@@ -10,10 +10,27 @@ export function getFeatureFlagsInstance(): FeatureFlagsElement | null {
   return flagsInstance;
 }
 
-export function isFeatureFlagEnabled(flag: string): boolean {
-  if (!flagsInstance) {
-    console.warn('FeatureFlags instance is not set');
+export function findClosestFeatureFlags(
+  el: HTMLElement
+): FeatureFlagsElement | null {
+  let parent = el.parentNode;
+  while (parent) {
+    if (parent instanceof FeatureFlagsElement) {
+      return parent;
+    }
+    parent = (parent as HTMLElement).parentNode;
+  }
+  return null;
+}
+
+export function isFeatureFlagEnabled(
+  flag: string,
+  fromEl: HTMLElement
+): boolean {
+  const instance = findClosestFeatureFlags(fromEl);
+  if (!instance) {
+    console.warn('No <feature-flags> context found for element', fromEl);
     return false;
   }
-  return flagsInstance.isFeatureFlagEnabled(flag);
+  return instance.isFeatureFlagEnabled(flag);
 }
