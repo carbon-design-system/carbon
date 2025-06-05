@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { ContentSwitcher } from './ContentSwitcher';
-import Switch from '../Switch';
+import { IconSwitch, Switch } from '../Switch';
 
 describe('ContentSwitcher - RTL', () => {
   describe('renders API as expected', () => {
@@ -157,10 +157,6 @@ describe('ContentSwitcher - RTL', () => {
     });
 
     it('should have the correct attributes with iconOnly version when lowContrast is used', () => {
-      // Mock the IconSwitch component
-      const IconSwitch = (props) => <Switch {...props} />;
-      IconSwitch.displayName = 'IconSwitch';
-
       const { container } = render(
         <ContentSwitcher onChange={() => {}} lowContrast>
           <IconSwitch name="one" />
