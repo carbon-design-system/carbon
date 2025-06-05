@@ -24,6 +24,7 @@ const storyGlobs = [
   '../src/**/next/**/*.stories.js',
   '../src/**/next/*.mdx',
   '../src/**/*-story.js',
+  './ComplianceActions/*.mdx',
 ];
 
 const stories = glob
