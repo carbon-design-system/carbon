@@ -5,8 +5,9 @@ import {
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 type FeatureFlags = Record<string, boolean>;
+
 @customElement('feature-flags')
-export class FeatureFlagsElement extends HTMLElement {
+class FeatureFlagsElement extends HTMLElement {
   private scope = GlobalFeatureFlags;
   private flags: FeatureFlags = {};
 
@@ -74,6 +75,8 @@ export class FeatureFlagsElement extends HTMLElement {
     return this.scope;
   }
 }
+
+export default FeatureFlagsElement;
 
 // Utility functions
 
