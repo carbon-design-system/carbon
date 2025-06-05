@@ -21,6 +21,39 @@ import { breakpoints } from '@carbon/layout';
 import Bee32 from '@carbon/icons/lib/bee/32.js';
 import Analytics16 from '@carbon/icons/lib/analytics/16.js';
 
+const tags = [
+  {
+    type: 'blue',
+    text: 'Tag 1',
+    size: 'md',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 2',
+    size: 'md',
+  },
+  {
+    type: 'red',
+    text: 'Tag 3',
+    size: 'md',
+  },
+  {
+    type: 'blue',
+    text: 'Tag 4',
+    size: 'md',
+  },
+  {
+    type: 'purple',
+    text: 'Tag 5',
+    size: 'md',
+  },
+  {
+    type: 'red',
+    text: 'Tag 6',
+    size: 'md',
+  },
+];
+
 export const Default = {
   render: () => html`
     <cds-page-header>
@@ -126,7 +159,7 @@ export const ContentWithHeroImage = {
               <img
                 src="${image1}"
                 alt="a default image"
-                style={{ maxWidth: '100%', height: 'auto' }}
+                style="max-width:100%;height:auto"
               />
             </picture>
           </cds-page-header-hero-image>
@@ -169,7 +202,7 @@ export const TabBarWithTabsAndTags = {
           scelerisque.
         </cds-page-header-content>
         <cds-page-header-tabs>
-          <cds-tabs value="tab-1">
+          <cds-tabs slot="tabs" value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
             >
@@ -192,6 +225,14 @@ export const TabBarWithTabsAndTags = {
               >Tab 7</cds-tab
             >
           </cds-tabs>
+          <div slot="tags">
+            ${tags.map(
+              (e) =>
+                html` <cds-tag type="${e.type}" size="${e.size}"
+                  >${e.text}</cds-tag
+                >`
+            )}
+          </div>
         </cds-page-header-tabs>
       </cds-page-header>
       <div class="${prefix}-ce-demo-devenv--tab-panels">

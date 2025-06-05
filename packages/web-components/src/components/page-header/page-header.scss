@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:math';
+
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
@@ -80,6 +82,48 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-page-header-hero-image) {
+  @extend .#{$prefix}--page-header__hero-image;
+
+  position: relative;
+}
+
+:host(#{$prefix}-page-header-hero-image)::before {
+  block-size: 0;
+  content: '';
+  float: inline-start;
+  inline-size: 1px;
+  margin-inline-start: -1px;
+
+  padding-block-start: math.percentage(math.div(2, 3));
+
+  @include grid.breakpoint-up('lg') {
+    padding-block-start: math.percentage(math.div(1, 2));
+  }
+}
+
+:host(#{$prefix}-page-header-hero-image)::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
 :host(#{$prefix}-page-header-tabs) {
   @extend .#{$prefix}--page-header__tab-bar;
+}
+
+:host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
+  display: flex;
+  justify-content: space-between;
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tags {
+  @extend .#{$prefix}--page-header__tags;
+
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-page-header-tabs) .#{$prefix}--css-grid {
+  inline-size: initial;
 }
