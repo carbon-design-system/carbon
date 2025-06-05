@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -66,11 +66,28 @@ class CDSPageHeaderContent extends LitElement {
   subtitle = '';
 
   /**
+   * true if the tag text has ellipsis applied
+   */
+  @state()
+  _hasEllipsisApplied = false;
+
+  /**
    * Set to `true` if the breadcrumb bar is sitting within a grid
    * (ie. when used in tandem with page-header-hero-image)
    */
   @property({ attribute: 'within-grid', type: Boolean })
   withinGrid = false;
+
+  updated() {
+    const textContainer = this.shadowRoot?.querySelector(
+      `.${prefix}--page-header__content__title`
+    );
+
+    if (!textContainer || this._hasEllipsisApplied === true) return;
+
+    this._hasEllipsisApplied =
+      textContainer.scrollHeight > textContainer.clientHeight;
+  }
 
   render() {
     const {
@@ -78,6 +95,7 @@ class CDSPageHeaderContent extends LitElement {
       subtitle,
       withinGrid,
       _hasBody: hasBody,
+      _hasEllipsisApplied: hasEllipsisApplied,
       _handleSlotChange: handleSlotChange,
       _handleContextualActionsSlotChange: handleContextualActionsSlotChange,
     } = this;
@@ -94,13 +112,26 @@ class CDSPageHeaderContent extends LitElement {
           <div class="${prefix}--page-header__content__start">
             <div class="${prefix}--page-header__content__title-container">
               <slot name="icon"></slot>
-              <h4 class="${prefix}--page-header__content__title">${title}</h4>
+              ${hasEllipsisApplied
+                ? html`
+                    <cds-definition-tooltip>
+                      <span slot="definition">${title}</span>
+                      <h4 class="${prefix}--page-header__content__title">
+                        ${title}
+                      </h4>
+                    </cds-definition-tooltip>
+                  `
+                : html`
+                    <h4 class="${prefix}--page-header__content__title">
+                      ${title}
+                    </h4>
+                  `}
             </div>
             <slot
               name="contextual-actions"
               @slotchange=${handleContextualActionsSlotChange}></slot>
           </div>
-          <div class="${prefix}--page-header__content__end">
+          <div class="${prefix}--page-header__content__page-actions">
             <slot name="page-actions"></slot>
           </div>
         </div>

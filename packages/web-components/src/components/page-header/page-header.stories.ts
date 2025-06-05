@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,8 +18,9 @@ import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
 import { breakpoints } from '@carbon/layout';
 
-import Bee32 from '@carbon/icons/lib/bee/32.js';
+import Add16 from '@carbon/icons/lib/add/16.js';
 import Analytics16 from '@carbon/icons/lib/analytics/16.js';
+import Bee32 from '@carbon/icons/lib/bee/32.js';
 
 const tags = [
   {
@@ -67,7 +68,7 @@ export const Default = {
         Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
       </cds-page-header-content>
       <cds-page-header-tabs>
-        <cds-tabs value="tab-1">
+        <cds-tabs slot="tabs" value="tab-1">
           <cds-tab id="tab-1" target="tab-panel-1" value="tab-1">Tab 1</cds-tab>
           <cds-tab id="tab-2" target="tab-panel-2" value="tab-2">Tab 2</cds-tab>
           <cds-tab id="tab-3" target="tab-panel-3" value="tab-3">Tab 3</cds-tab>
@@ -109,16 +110,33 @@ export const ContentWithContextualActions = {
     html`<cds-page-header>
       <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
       <cds-page-header-content
-        title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
         subtitle="Subtitle">
         <div slot="contextual-actions">
-          <cds-tag>Tag</cds-tag>
+          <cds-tag type="blue" size="lg">Tag</cds-tag>
+        </div>
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </cds-page-header-content>
+    </cds-page-header>`,
+};
+
+export const ContentWithContextualActionsAndPageActions = {
+  render: () =>
+    html`<cds-page-header>
+      <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
+      <cds-page-header-content
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        subtitle="Subtitle">
+        <div slot="contextual-actions">
+          <cds-tag type="blue" size="lg">Tag</cds-tag>
         </div>
         <div slot="page-actions">
-          <cds-tag>1</cds-tag>
-          <cds-tag>2</cds-tag>
-          <cds-tag>3</cds-tag>
-          <cds-button size="md">Button</cds-button>
+          <cds-button size="md"
+            >Primary action ${Add16({ slot: 'icon' })}</cds-button
+          >
         </div>
         Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
         Massa elementum class enim malesuada lacinia hendrerit enim erat
@@ -174,16 +192,13 @@ export const ContentWithIcon = {
     html`<cds-page-header>
       <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
       <cds-page-header-content
-        title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
         subtitle="Subtitle">
-        ${Bee32({
-          slot: 'icon',
-          class: `${prefix}--page-header__content__icon`,
-        })}
-        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-        Massa elementum class enim malesuada lacinia hendrerit enim erat
-        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+        ${Bee32({ slot: 'icon' })} Neque massa fames auctor maecenas leo. Mollis
+        vehicula per, est justo. Massa elementum class enim malesuada lacinia
+        hendrerit enim erat pellentesque. Sapien arcu lobortis est erat arcu
+        nibh vehicula congue. Nisi molestie primis lorem nascetur sem metus
+        mattis etiam scelerisque.
       </cds-page-header-content>
     </cds-page-header>`,
 };
@@ -193,7 +208,7 @@ export const TabBarWithTabsAndTags = {
     html`<cds-page-header>
         <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
         <cds-page-header-content
-          title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
           subtitle="Subtitle">
           Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
           Massa elementum class enim malesuada lacinia hendrerit enim erat
@@ -262,6 +277,8 @@ export const TabBarWithTabsAndTags = {
 
 const meta = {
   title: 'Patterns/unstable__PageHeader',
+  // uncomment to see the pageheader story
+  // includeStories:[],
   decorators: [
     (story) =>
       html` <style>

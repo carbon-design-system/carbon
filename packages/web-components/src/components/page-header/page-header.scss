@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2025
+// Copyright IBM Corp. 2025, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,10 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/grid';
-// @use '@carbon/styles/scss/utilities' as *;
-// @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/page-header/index' as *;
-// @use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-page-header) {
   @extend .#{$prefix}--page-header;
@@ -124,6 +121,13 @@ $css--plex: true !default;
   inline-size: 100%;
 }
 
-:host(#{$prefix}-page-header-tabs) .#{$prefix}--css-grid {
-  inline-size: initial;
+:host(#{$prefix}-page-header-content),
+:host(#{$prefix}-page-header-tabs) {
+  .#{$prefix}--css-grid {
+    inline-size: initial;
+  }
+}
+
+#{$prefix}-definition-tooltip::part(definition-term) {
+  border: none;
 }
