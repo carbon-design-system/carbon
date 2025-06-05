@@ -30,7 +30,11 @@ export default {
 
 export const Default = (args) => {
   return (
-    <TimePicker id="time-picker" labelText="Select a time" {...args}>
+    <TimePicker
+      id="time-picker"
+      labelText="Select a time"
+      {...args}
+      className="time-picker-container">
       <TimePickerSelect id="time-picker-select-1" disabled={args.disabled}>
         <SelectItem value="AM" text="AM" />
         <SelectItem value="PM" text="PM" />
