@@ -2,9 +2,10 @@ import {
   FeatureFlags as GlobalFeatureFlags,
   createScope,
 } from '@carbon/feature-flags';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 type FeatureFlags = Record<string, boolean>;
-
+@customElement('feature-flags')
 export class FeatureFlagsElement extends HTMLElement {
   private scope = GlobalFeatureFlags;
   private flags: FeatureFlags = {};
@@ -73,8 +74,6 @@ export class FeatureFlagsElement extends HTMLElement {
     return this.scope;
   }
 }
-
-customElements.define('feature-flags', FeatureFlagsElement);
 
 // Utility functions
 
