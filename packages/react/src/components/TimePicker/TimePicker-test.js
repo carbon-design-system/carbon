@@ -20,8 +20,11 @@ describe('TimePicker', () => {
     });
 
     it('passes classNames as expected', () => {
-      render(<TimePicker id="time-picker" className="🚀" />);
-      expect(screen.getByRole('textbox')).toHaveClass('🚀');
+      const { container } = render(
+        <TimePicker id="time-picker" className="🚀" />
+      );
+      expect(container.querySelector('.🚀')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).not.toHaveClass('🚀');
     });
 
     it('should set type as expected', () => {
