@@ -85,6 +85,7 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
+    interactions: false, // disable Interactions tab
   },
   framework: {
     name: getAbsolutePath('@storybook/react-webpack5'),

@@ -42,6 +42,9 @@ const config: StorybookConfig = {
     },
     getAbsolutePath('@storybook/addon-links'),
   ],
+  features: {
+    interactions: false, // disable Interactions tab
+  },
   framework: {
     name: getAbsolutePath('@storybook/web-components-vite'),
     options: {},
