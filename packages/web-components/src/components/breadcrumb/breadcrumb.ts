@@ -12,10 +12,7 @@ import { prefix } from '../../globals/settings';
 import { BREADCRUMB_SIZE } from './defs';
 import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import {
-  isFeatureFlagEnabled,
-  getFeatureFlagsInstance,
-} from '../../../.storybook/with-feature-flag';
+import { isFeatureFlagEnabled } from '../feature-flags/';
 /**
  * Breadcrumb.
  *
@@ -65,10 +62,6 @@ class CDSBreadcrumb extends LitElement {
         link?.setAttribute('size', this.size);
       });
     }
-    console.log('get', getFeatureFlagsInstance());
-    // console.log(FeatureFlagsElement)
-
-    console.log(isFeatureFlagEnabled('enable-v12-tile-default-icons', this));
   }
 
   render() {

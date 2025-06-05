@@ -2,16 +2,12 @@ import {
   FeatureFlags as GlobalFeatureFlags,
   createScope,
 } from '@carbon/feature-flags';
-import { setFeatureFlagsInstance } from '../../../.storybook/with-feature-flag';
 
 type FeatureFlags = Record<string, boolean>;
 
-console.log('GlobalFeatureFlags', GlobalFeatureFlags);
 export class FeatureFlagsElement extends HTMLElement {
   private scope = GlobalFeatureFlags;
   private flags: FeatureFlags = {};
-
-  // console.log(scope);
 
   static get observedAttributes() {
     return [
@@ -31,8 +27,6 @@ export class FeatureFlagsElement extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log('this', this);
-    setFeatureFlagsInstance(this);
     this.updateScope();
     this.render();
   }
@@ -50,11 +44,11 @@ export class FeatureFlagsElement extends HTMLElement {
     );
   }
 
-  private getParentScope(): any {
+  private getParentScope(): FeatureFlagsElement | null {
     let parent = this.parentNode;
     while (parent) {
       if (parent instanceof FeatureFlagsElement) {
-        return parent.getScope(); // 💡 parent exposes scope
+        return parent.getScope();
       }
       parent = parent.parentNode;
     }
@@ -74,26 +68,38 @@ export class FeatureFlagsElement extends HTMLElement {
     this.shadowRoot!.innerHTML = `<slot></slot>`;
   }
 
-  /** Public API to set flags programmatically */
-  public setFlags(flags: FeatureFlags) {
-    this.flags = { ...this.flags, ...flags };
-    this.updateScope();
-    this.dispatchEvent(
-      new CustomEvent('flags-changed', { detail: this.scope })
-    );
-  }
-
-  /** Public API to check a flag */
   public isFeatureFlagEnabled(flag: string): boolean {
-    console.log(`Checking feature flag: ${flag}`);
     return this.scope.enabled(flag);
   }
 
-  /** Optional getter to expose all flags */
-
-  public getScope() {
+  private getScope() {
     return this.scope;
   }
 }
 
 customElements.define('feature-flags', FeatureFlagsElement);
+
+// Utility functions
+
+// Function to find the nearest parent FeatureFlagsElement
+export function findParentFeatureFlags(
+  el: HTMLElement
+): FeatureFlagsElement | null {
+  let parent = el.parentNode;
+  while (parent) {
+    if (parent instanceof FeatureFlagsElement) {
+      return parent;
+    }
+    parent = (parent as HTMLElement).parentNode;
+  }
+  return null;
+}
+
+// function to check if a feature flag is enabled in components
+export function isFeatureFlagEnabled(
+  flag: string,
+  context: HTMLElement
+): boolean {
+  const instance = findParentFeatureFlags(context);
+  return instance?.isFeatureFlagEnabled(flag) ?? false;
+}
