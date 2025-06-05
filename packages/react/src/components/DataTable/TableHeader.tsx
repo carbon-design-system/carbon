@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
   useRef,
   type HTMLAttributes,
   type MouseEventHandler,
@@ -23,6 +24,8 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { TranslateWithId } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const defaultScope = 'col';
 
@@ -160,23 +163,12 @@ const TableHeader = React.forwardRef(function TableHeader(
   // AILabel is always size `mini`
   const AILableRef = useRef<HTMLInputElement>(null);
 
-  let colHasAILabel;
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const colHasAILabel = candidateIsAILabel;
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini', ref: AILableRef })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    colHasAILabel = true;
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-        ref: AILableRef,
-      }
-    );
-  }
 
   const headerLabelClassNames = classNames({
     [`${prefix}--table-header-label`]: true,
