@@ -111,6 +111,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
       }
 
       if (key in NAVIGATION_DIRECTION) {
+        event.preventDefault();
         this._navigate(NAVIGATION_DIRECTION[key]);
       }
 

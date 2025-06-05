@@ -11609,16 +11609,7 @@ Map {
     "ContentPageActions": Object {
       "displayName": "PageHeaderContentPageActions",
       "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "className": Object {
-          "type": "string",
-        },
-        "menuButtonLabel": Object {
-          "type": "string",
-        },
-        "pageActions": Object {
+        "actions": Object {
           "args": Array [
             Array [
               Object {
@@ -11630,6 +11621,15 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
         },
       },
     },
@@ -11707,16 +11707,7 @@ Map {
     "PageHeaderContentPageActions": Object {
       "displayName": "PageHeaderContentPageActions",
       "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "className": Object {
-          "type": "string",
-        },
-        "menuButtonLabel": Object {
-          "type": "string",
-        },
-        "pageActions": Object {
+        "actions": Object {
           "args": Array [
             Array [
               Object {
@@ -11728,6 +11719,15 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
         },
       },
     },
@@ -11760,19 +11760,11 @@ Map {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
-    "PageHeaderTabs": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
     "Root": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
     "TabBar": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "Tabs": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },

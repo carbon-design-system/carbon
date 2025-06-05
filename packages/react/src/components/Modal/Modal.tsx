@@ -7,6 +7,7 @@
 
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
+  cloneElement,
   useEffect,
   useRef,
   useState,
@@ -41,6 +42,8 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
@@ -363,6 +366,7 @@ const Modal = React.forwardRef(function Modal(
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
     if (
+      !enableDialogElement &&
       open &&
       oldActiveNode instanceof HTMLElement &&
       currentActiveNode instanceof HTMLElement
@@ -378,6 +382,38 @@ const Modal = React.forwardRef(function Modal(
         oldActiveNode,
         selectorsFloatingMenus,
       });
+    }
+
+    // Adjust scroll if needed so that element with focus is not obscured by gradient
+    const modalContent = document.querySelector(`.${prefix}--modal-content`);
+    if (
+      !modalContent ||
+      !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+      !currentActiveNode ||
+      !modalContent.contains(currentActiveNode)
+    ) {
+      return;
+    }
+
+    const lastContent = modalContent.children[modalContent.children.length - 1];
+    const gradientSpacing =
+      modalContent.scrollHeight -
+      (lastContent as HTMLElement).offsetTop -
+      (lastContent as HTMLElement).clientHeight;
+
+    for (let elem of modalContent.children) {
+      if (elem.contains(currentActiveNode)) {
+        const spaceBelow =
+          modalContent.clientHeight -
+          (elem as HTMLElement).offsetTop +
+          modalContent.scrollTop -
+          (elem as HTMLElement).clientHeight;
+        if (spaceBelow < gradientSpacing) {
+          modalContent.scrollTop =
+            modalContent.scrollTop + (gradientSpacing - spaceBelow);
+        }
+        break;
+      }
     }
   }
 
@@ -525,20 +561,11 @@ const Modal = React.forwardRef(function Modal(
   }, []);
 
   // AILabel always size `sm`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'sm' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-      }
-    );
-  }
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>
@@ -777,7 +804,7 @@ const Modal = React.forwardRef(function Modal(
       level={0}
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-      onBlur={!enableDialogElement ? handleBlur : () => {}}
+      onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
       ref={ref}>

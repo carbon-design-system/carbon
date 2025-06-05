@@ -75,8 +75,8 @@ $sizes: (
     z-index: 2;
   }
 
-  .#{$prefix}--ai-label .#{$prefix}--ai-label__button,
-  .#{$prefix}--slug .#{$prefix}--slug__button {
+  .#{$prefix}--ai-label__button,
+  .#{$prefix}--slug__button {
     position: relative;
     display: flex;
     align-items: center;
