@@ -18,6 +18,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Overview](#overview)
   - [Skeleton state](#skeleton-state)
   - [AI Label](#ai-label)
+  - [With type of text](#with-type-of-text)
+    - [Formatting with `locale` and `formatOptions`](#formatting-with-locale-and-formatoptions)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -56,6 +58,53 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     },
   ]}
 />
+
+## With type of text
+
+The input `type` can be set to `text` to avoid the various limitations and ux
+issues that surround `input type="number"`.
+
+Setting `type="text"` changes the NumberInput behavior in the following ways:
+
+- On blur of the input, the entered value is parsed and formatted based on the
+  given `locale` (defaults to `en-US`) and `formatOptions` props.
+- `onChange` is only called on blur of the input, and the given `event` may be a
+  MouseEvent, FocusEvent, or KeyboardEvent.
+- The wheel/spinbox functionality is disabled, `disableWheel` has no effect.
+- `inputMode` and `pattern` props should be configured to restrict and guide
+  user input.
+
+<Canvas
+  of={NumberInputStories.WithTypeOfText}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.WithTypeOfText),
+    },
+  ]}
+/>
+
+### Formatting with `locale` and `formatOptions`
+
+When `type="text"`, the user input is parsed and formatted to the `locale` on:
+
+- Blur of the input
+- Click of stepper buttons
+- Keydown of ArrowUp or ArrowDown keys
+
+The formatOptions prop can be used to further customize the formatting. It
+matches the signature of the
+[Intl.NumberFormat API options](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options).
+For example, percent style can be used:
+
+```
+<NumberInput
+  type="text"
+  value={0.15} // 15%
+  step={0.05} // 5%
+  formatOptions={{ style: 'percent' }}
+/>
+```
 
 ## Component API
 

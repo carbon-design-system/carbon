@@ -32,7 +32,6 @@ export const RenderCustomIcon = () => {
     </OverflowMenu>
   );
 };
-
 export const Default = (args) => (
   <OverflowMenu aria-label="overflow-menu" {...args}>
     <OverflowMenuItem itemText="Stop app" />

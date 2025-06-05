@@ -19,6 +19,7 @@ const buildModulesButtonTokens = require('./builders/modules-button-tokens');
 const buildModulesTagTokens = require('./builders/modules-tag-tokens');
 const buildModulesNotificationTokens = require('./builders/modules-notification-tokens');
 const buildModulesStatusTokens = require('./builders/modules-status-tokens');
+const buildModulesContentSwitcherTokens = require('./builders/modules-content-switcher-tokens');
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -72,6 +73,12 @@ async function build() {
       filepath: path.join(GENERATED_SCSS_DIR, '_status-tokens.scss'),
       builder() {
         return buildModulesStatusTokens();
+      },
+    },
+    {
+      filepath: path.join(GENERATED_SCSS_DIR, '_content-switcher-tokens.scss'),
+      builder() {
+        return buildModulesContentSwitcherTokens();
       },
     },
   ];

@@ -534,12 +534,26 @@ class Slider extends PureComponent<SliderProps> {
           useRawValue: true,
         });
         this.setState({ isRtl, value, left, valueUpper, leftUpper });
+        if (this.filledTrackRef.current) {
+          this.filledTrackRef.current.style.transform = this.state.isRtl
+            ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
+                (this.state.leftUpper - this.state.left) / 100
+              })`
+            : `translate(${this.state.left}%, -50%) scaleX(${
+                (this.state.leftUpper - this.state.left) / 100
+              })`;
+        }
       } else {
         const { value, left } = this.calcValue({
           value: this.state.value,
           useRawValue: true,
         });
         this.setState({ isRtl, value, left });
+        if (this.filledTrackRef.current) {
+          this.filledTrackRef.current.style.transform = this.state.isRtl
+            ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
+            : `translate(0%, -50%) scaleX(${this.state.left / 100})`;
+        }
       }
     }
   }
