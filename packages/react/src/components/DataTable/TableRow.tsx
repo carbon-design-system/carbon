@@ -5,10 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { type HTMLAttributes } from 'react';
+import React, { Children, type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import TableSlugRow from './TableSlugRow';
+import TableDecoratorRow from './TableDecoratorRow';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
   /**
@@ -27,17 +31,18 @@ const TableRow = React.forwardRef<HTMLTableCellElement, TableRowProps>(
 
     let rowHasAILabel;
     if (props?.children) {
-      React.Children.toArray(props.children).map((child: any) => {
-        if (
-          child.type?.displayName === 'TableSlugRow' ||
-          child.type?.displayName === 'TableDecoratorRow'
-        ) {
-          if (
-            child.props.slug ||
-            child.props.decorator?.type.displayName === 'AILabel'
-          ) {
+      // TODO: Why is this loop a `map`? It's not returning anything. Ideally,
+      // it seems that it should be a `some`. Maybe I'm missing something?
+      Children.toArray(props.children).map((child) => {
+        if (isComponentElement(child, TableSlugRow)) {
+          if (child.props.slug) {
             rowHasAILabel = true;
           }
+        } else if (
+          isComponentElement(child, TableDecoratorRow) &&
+          isComponentElement(child.props.decorator, AILabel)
+        ) {
+          rowHasAILabel = true;
         }
       });
     }
