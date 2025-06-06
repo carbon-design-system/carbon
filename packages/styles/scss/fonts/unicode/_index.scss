@@ -6,6 +6,8 @@
 //
 
 @use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
 
 /// All available unicode ranges where the keys are unicode range names and the
 /// value is the list of unicode ranges that are applicable
@@ -118,7 +120,16 @@ $ranges: (
 /// @returns {List}
 @function get-range($name) {
   @if map.has-key($ranges, $name) {
-    @return map.get($ranges, $name);
+    $items: map.get($ranges, $name);
+    $count: list.length($items);
+    $result: '';
+
+    @for $i from 1 through $count {
+      $result: if($i == 1, '', $result + ', ') + list.nth($items, $i);
+    }
+
+    @return string.unquote($result);
   }
+
   @error 'Unable to find range with the name: #{$name}';
 }
