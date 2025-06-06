@@ -16,6 +16,7 @@ import '../../../.storybook/templates/with-layer';
 const args = {
   ariaLabelInput: 'Lower bound',
   disabled: false,
+  hideLabel: false,
   hideTextInput: false,
   labelText: 'Slider (must be an increment of 5)',
   invalid: false,
@@ -40,6 +41,10 @@ const argTypes = {
   disabled: {
     control: 'boolean',
     description: '<code>true</code> to disable this slider.',
+  },
+  hideLabel: {
+    control: 'boolean',
+    description: 'Hide label (hide-label)',
   },
   hideTextInput: {
     control: 'boolean',
@@ -146,10 +151,8 @@ export const ControlledSlider = {
     let value = 87;
     function onClick() {
       value = Math.round(Math.random() * 100);
-      const sliders = document.getElementsByTagName('cds-slider');
-      for (const slider of sliders) {
-        slider.setAttribute('value', `${value}`);
-      }
+      const slider = document.querySelector('cds-slider[controlled]');
+      slider?.setAttribute('value', `${value}`);
 
       const headers = document.getElementsByClassName('slider-headers');
       for (const header of headers) {
@@ -159,7 +162,12 @@ export const ControlledSlider = {
     return html`
       <button type="button" @click="${onClick}">randomize value</button>
       <cds-form-item>
-        <cds-slider max="100" min="0" step="1" value="${ifDefined(value)}">
+        <cds-slider
+          controlled
+          max="100"
+          min="0"
+          step="1"
+          value="${ifDefined(value)}">
           <cds-slider-input
             aria-label="Slider value"
             type="number"></cds-slider-input>
@@ -232,7 +240,9 @@ export const Skeleton = {
     },
   },
   render: () => html`
-    <cds-form-item><cds-slider-skeleton></cds-slider-skeleton></cds-form-item>
+    <cds-form-item
+      ><cds-slider-skeleton><cds-slider></cds-slider></cds-slider-skeleton
+    ></cds-form-item>
   `,
 };
 
@@ -243,6 +253,7 @@ export const Playground = {
     const {
       ariaLabelInput,
       disabled,
+      hideLabel,
       hideTextInput,
       invalid,
       invalidText,
@@ -266,6 +277,7 @@ export const Playground = {
       <cds-form-item>
         <cds-slider
           ?disabled="${disabled}"
+          ?hide-label="${hideLabel}"
           ?hide-text-input="${hideTextInput}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"

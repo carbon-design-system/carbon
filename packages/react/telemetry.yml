@@ -18,6 +18,7 @@ collect:
         - allowCustomValue
         - allowEmpty
         - aria-controls
+        - aria-current
         - aria-label
         - aria-labelledby
         - ariaLabel
@@ -67,6 +68,7 @@ collect:
         - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - formatOptions
         - fullWidth
         - gap
         - hasDivider
@@ -90,6 +92,7 @@ collect:
         - initialSelectedItems
         - inline
         - innerRef
+        - inputMode
         - invalid
         - invalidText
         - isActive
@@ -162,6 +165,7 @@ collect:
         - onOpen
         - onRequestClose
         - onRequestSubmit
+        - onSecondarySubmit
         - onSelect
         - onToggle
         - onToggleClick
@@ -171,6 +175,7 @@ collect:
         - orientation
         - overflowMenuOnHover
         - page
+        - pageActions
         - paragraph
         - passiveModal
         - pattern
@@ -212,7 +217,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -255,12 +259,12 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
         # Breadcrumb
         - noTrailingSlash
-        # BreadcrumbItem
-        - aria-current
         # ButtonSet
         - stacked
         # ChatButton
@@ -320,8 +324,11 @@ collect:
         - tooltipText
         - triggerClassName
         # Dialog
+        - ariaDescribedBy
+        - ariaLabelledBy
         - modal
         # DismissibleTag
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback
@@ -383,7 +390,9 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
-        # Link
+        # Layer
+        - withBackground
+        # LinkBase
         - visited
         # ListBox
         - invalidTextId
@@ -411,7 +420,6 @@ collect:
         - alert
         - closeButtonLabel
         - modalAriaLabel
-        - onSecondarySubmit
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -456,9 +464,18 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderBreadcrumbBar
+        - border
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
         # PageHeaderContent
         - contextualActions
-        - pageActions
+        # PageHeaderContentPageActions
+        - actions
+        - menuButtonLabel
+        # PageHeaderTabBar
+        - tags
         # PageSelector
         - currentPage
         - totalPages
@@ -568,7 +585,7 @@ collect:
         - onTabCloseRequest
         # TabsVertical
         - height
-        # Tag
+        # TagBase
         - filter
         # TextArea
         - counterMode
@@ -629,6 +646,14 @@ collect:
         - top-left
         - top-right
         - top-start
+        # General - aria-current
+        - date
+        - "false"
+        - location
+        - page
+        - step
+        - time
+        - "true"
         # General - buttonKind
         - danger
         - danger--ghost
@@ -652,6 +677,15 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - inputMode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
         - caution-major
         - caution-minor
@@ -778,6 +812,8 @@ collect:
         - vertical
         # General - role
         - alert
+        - alertdialog
+        - dialog
         - log
         - status
         # General - selectionFeedback
@@ -840,6 +876,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - outline
         - password
         - purple
@@ -860,14 +897,6 @@ collect:
         - 3x4
         - 4x3
         - 9x16
-        # BreadcrumbItem - aria-current
-        - date
-        - "false"
-        - location
-        - page
-        - step
-        - time
-        - "true"
         # ContentSwitcher - selectionMode
         - automatic
         - manual

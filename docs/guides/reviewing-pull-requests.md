@@ -186,6 +186,11 @@
   - Ensure that the `#{$prefix}` is applied.
   - Verify that dependent style modules are imported correctly (e.g., Tooltip
     styles depending on Popover styles).
+- **Browser testing:**
+  - Perform cross-browser test by looking at the changes in major browsers
+    (chrome, firefox, edge, safari, opera)
+  - Use the storybook viewport width toolbar option to ensure the changes work
+    as expected at every major breakpoint
 
 ### Workflow/CI Changes
 

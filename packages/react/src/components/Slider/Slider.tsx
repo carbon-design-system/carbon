@@ -30,6 +30,7 @@ import {
   UpperHandleFocus,
 } from './SliderHandles';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
 
 const ThumbWrapper = ({
   hasTooltip = false,
@@ -188,6 +189,11 @@ export interface SliderProps
    * The label for the slider.
    */
   labelText?: ReactNode;
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
 
   /**
    * @deprecated
@@ -363,6 +369,11 @@ class Slider extends PureComponent<SliderProps> {
     labelText: PropTypes.node,
 
     /**
+     * Specify whether you want the underlying label to be visually hidden
+     */
+    hideLabel: PropTypes.bool,
+
+    /**
      * `true` to use the light version.
      */
     light: deprecate(
@@ -523,12 +534,26 @@ class Slider extends PureComponent<SliderProps> {
           useRawValue: true,
         });
         this.setState({ isRtl, value, left, valueUpper, leftUpper });
+        if (this.filledTrackRef.current) {
+          this.filledTrackRef.current.style.transform = this.state.isRtl
+            ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
+                (this.state.leftUpper - this.state.left) / 100
+              })`
+            : `translate(${this.state.left}%, -50%) scaleX(${
+                (this.state.leftUpper - this.state.left) / 100
+              })`;
+        }
       } else {
         const { value, left } = this.calcValue({
           value: this.state.value,
           useRawValue: true,
         });
         this.setState({ isRtl, value, left });
+        if (this.filledTrackRef.current) {
+          this.filledTrackRef.current.style.transform = this.state.isRtl
+            ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
+            : `translate(0%, -50%) scaleX(${this.state.left / 100})`;
+        }
       }
     }
   }
@@ -1069,7 +1094,7 @@ class Slider extends PureComponent<SliderProps> {
       range,
     });
     /** `leftPercentRaw` clamped between 0 and 1. */
-    const leftPercent = Math.min(1, Math.max(0, leftPercentRaw));
+    const leftPercent = clamp(leftPercentRaw, 0, 1);
 
     if (useRawValue) {
       return {
@@ -1292,6 +1317,7 @@ class Slider extends PureComponent<SliderProps> {
       maxLabel = '',
       formatLabel = defaultFormatLabel,
       labelText,
+      hideLabel,
       step = 1,
       stepMultiplier: _stepMultiplier,
       inputType = 'number',
@@ -1340,6 +1366,7 @@ class Slider extends PureComponent<SliderProps> {
         {(prefix) => {
           const labelId = `${id}-label`;
           const labelClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--visually-hidden`]: hideLabel,
             [`${prefix}--label--disabled`]: disabled,
           });
 

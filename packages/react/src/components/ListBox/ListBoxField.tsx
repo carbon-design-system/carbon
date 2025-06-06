@@ -1,19 +1,19 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 
+// TODO: When can this code be deleted?
 // No longer used, left export for backward-compatibility
 export const translationIds = {};
 
-export interface ListBoxFieldProps extends ReactAttr<HTMLDivElement> {
+export interface ListBoxFieldProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify if the parent <ListBox> is disabled
    */

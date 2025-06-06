@@ -7,9 +7,11 @@
 
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
+  cloneElement,
   useEffect,
   useRef,
   useState,
+  type HTMLAttributes,
   type ReactNode,
   type Ref,
 } from 'react';
@@ -21,24 +23,28 @@ import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import { Layer } from '../Layer';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
+import {
   elementOrParentIsFloatingMenu,
+  wrapFocus,
+  wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
-import { enable } from '@carbon/feature-flags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
+import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
@@ -50,7 +56,7 @@ export interface ModalSecondaryButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface ModalProps extends ReactAttr<HTMLDivElement> {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify whether the Modal is displaying an alert, error or warning
    * Should go hand in hand with the danger prop.
@@ -73,7 +79,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   className?: string;
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel?: string;
 
@@ -277,6 +283,7 @@ const Modal = React.forwardRef(function Modal(
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
+  const prevOpen = usePreviousValue(open);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
@@ -287,9 +294,17 @@ const Modal = React.forwardRef(function Modal(
   });
   const loadingActive = loadingStatus !== 'inactive';
 
-  const enableDialogElement =
-    useFeatureFlag('enable-experimental-focus-wrap-without-sentinels') ||
-    useFeatureFlag('enable-dialog-element');
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
+  const enableDialogElement = useFeatureFlag('enable-dialog-element');
+  warning(
+    !(focusTrapWithoutSentinels && enableDialogElement),
+    '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+      '`enableDialogElement` feature flags are enabled. The native dialog ' +
+      'element handles focus, so `enableDialogElement` must be off for ' +
+      '`focusTrapWithoutSentinels` to have any effect.'
+  );
 
   function isCloseButton(element: Element) {
     return (
@@ -299,8 +314,11 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+    const { target } = evt;
+
     evt.stopPropagation();
-    if (open) {
+
+    if (open && target instanceof HTMLElement) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
@@ -308,18 +326,33 @@ const Modal = React.forwardRef(function Modal(
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
-        !isCloseButton(evt.target as Element)
+        !isCloseButton(target) &&
+        document.activeElement !== button.current
       ) {
         onRequestSubmit(evt);
+      }
+
+      if (
+        focusTrapWithoutSentinels &&
+        !enableDialogElement &&
+        match(evt, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: target,
+          event: evt,
+        });
       }
     }
   }
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-    const target = evt.target as Node;
+    const { target } = evt;
     evt.stopPropagation();
     if (
       !preventCloseOnClickOutside &&
+      target instanceof Node &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       innerModal.current &&
       !innerModal.current.contains(target)
@@ -332,7 +365,12 @@ const Modal = React.forwardRef(function Modal(
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
-    if (open && currentActiveNode && oldActiveNode) {
+    if (
+      !enableDialogElement &&
+      open &&
+      oldActiveNode instanceof HTMLElement &&
+      currentActiveNode instanceof HTMLElement
+    ) {
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
@@ -344,6 +382,38 @@ const Modal = React.forwardRef(function Modal(
         oldActiveNode,
         selectorsFloatingMenus,
       });
+    }
+
+    // Adjust scroll if needed so that element with focus is not obscured by gradient
+    const modalContent = document.querySelector(`.${prefix}--modal-content`);
+    if (
+      !modalContent ||
+      !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+      !currentActiveNode ||
+      !modalContent.contains(currentActiveNode)
+    ) {
+      return;
+    }
+
+    const lastContent = modalContent.children[modalContent.children.length - 1];
+    const gradientSpacing =
+      modalContent.scrollHeight -
+      (lastContent as HTMLElement).offsetTop -
+      (lastContent as HTMLElement).clientHeight;
+
+    for (let elem of modalContent.children) {
+      if (elem.contains(currentActiveNode)) {
+        const spaceBelow =
+          modalContent.clientHeight -
+          (elem as HTMLElement).offsetTop +
+          modalContent.scrollTop -
+          (elem as HTMLElement).clientHeight;
+        if (spaceBelow < gradientSpacing) {
+          modalContent.scrollTop =
+            modalContent.scrollTop + (gradientSpacing - spaceBelow);
+        }
+        break;
+      }
     }
   }
 
@@ -396,7 +466,7 @@ const Modal = React.forwardRef(function Modal(
         }
       : {};
 
-  const alertDialogProps: ReactAttr<HTMLDivElement> = {};
+  const alertDialogProps: HTMLAttributes<HTMLDivElement> = {};
   if (alert && passiveModal) {
     alertDialogProps.role = 'alert';
   }
@@ -424,14 +494,14 @@ const Modal = React.forwardRef(function Modal(
   }, [open, prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!enableDialogElement && !open && launcherButtonRef) {
+    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
       setTimeout(() => {
         if ('current' in launcherButtonRef) {
           launcherButtonRef.current?.focus();
         }
       });
     }
-  }, [open, launcherButtonRef, enableDialogElement]);
+  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
 
   useEffect(() => {
     if (!enableDialogElement) {
@@ -491,20 +561,11 @@ const Modal = React.forwardRef(function Modal(
   }, []);
 
   // AILabel always size `sm`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'sm' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-      }
-    );
-  }
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>
@@ -630,7 +691,7 @@ const Modal = React.forwardRef(function Modal(
   ) : (
     <>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!enableDialogElement && (
+      {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
           ref={startTrap}
           tabIndex={0}
@@ -725,7 +786,7 @@ const Modal = React.forwardRef(function Modal(
         )}
       </div>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!enableDialogElement && (
+      {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
           ref={endTrap}
           tabIndex={0}
@@ -743,7 +804,7 @@ const Modal = React.forwardRef(function Modal(
       level={0}
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-      onBlur={!enableDialogElement ? handleBlur : () => {}}
+      onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
       ref={ref}>
@@ -778,7 +839,7 @@ Modal.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel: PropTypes.string,
 

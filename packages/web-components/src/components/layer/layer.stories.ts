@@ -39,6 +39,29 @@ export const Default = {
   `,
 };
 
+export const withBackground = {
+  render: () => html`
+    <cds-layer with-background>
+      <div class="example-layer-test-component-no-background">
+        Test component
+      </div>
+      <cds-layer with-background>
+        <div class="example-layer-test-component-no-background">
+          Test component
+        </div>
+        <cds-layer with-background>
+          <div class="example-layer-test-component-no-background">
+            Test component
+          </div>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+    <style>
+      ${styles}
+    </style>
+  `,
+};
+
 export const CustomLevel = {
   name: 'Custom level',
   args: {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,6 +27,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
 import { TranslateWithId } from '../../types/common';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
@@ -36,20 +37,6 @@ const defaultTranslations = {
  * Message ids that will be passed to translateWithId().
  */
 export type TranslationKey = keyof typeof defaultTranslations;
-
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
 
 function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];
@@ -319,7 +306,6 @@ ComboButton.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -334,8 +320,7 @@ ComboButton.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**

@@ -7,12 +7,13 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  useLayoutEffect,
-  useState,
-  ReactNode,
-  useRef,
+  cloneElement,
   forwardRef,
-  ForwardedRef,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ForwardedRef,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
@@ -25,6 +26,8 @@ import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
 import mergeRefs from '../../tools/mergeRefs';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface DismissibleTagBaseProps {
   /**
@@ -41,6 +44,11 @@ export interface DismissibleTagBaseProps {
    * Specify if the `DismissibleTag` is disabled
    */
   disabled?: boolean;
+
+  /**
+   * Provide a custom tooltip label for the dismiss button
+   */
+  dismissTooltipLabel?: string;
 
   /**
    * Specify the id for the selectable tag.
@@ -110,6 +118,7 @@ const DismissibleTag = forwardRef(
       text,
       tagTitle,
       type,
+      dismissTooltipLabel = 'Dismiss tag',
       ...other
     }: DismissibleTagProps<T>,
     forwardRef: ForwardedRef<HTMLDivElement>
@@ -134,21 +143,11 @@ const DismissibleTag = forwardRef(
       }
     };
 
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'sm',
-          kind: 'inline',
-        }
-      );
-    }
 
     const tooltipClasses = classNames(
       `${prefix}--icon-tooltip`,
@@ -159,7 +158,7 @@ const DismissibleTag = forwardRef(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { onClick, ...otherProps } = other;
 
-    const dismissLabel = `Dismiss "${text}"`;
+    const dismissActionLabel = isEllipsisApplied ? dismissTooltipLabel : title;
 
     return (
       <Tag
@@ -187,7 +186,7 @@ const DismissibleTag = forwardRef(
             ''
           )}
           <Tooltip
-            label={isEllipsisApplied ? dismissLabel : title}
+            label={dismissActionLabel}
             align="bottom"
             className={tooltipClasses}
             leaveDelayMs={0}
@@ -197,7 +196,7 @@ const DismissibleTag = forwardRef(
               className={`${prefix}--tag__close-icon`}
               onClick={handleClose}
               disabled={disabled}
-              aria-label={title}>
+              aria-label={dismissActionLabel}>
               <Close />
             </button>
           </Tooltip>
@@ -221,6 +220,11 @@ DismissibleTag.propTypes = {
    * Specify if the `DismissibleTag` is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Provide a custom tooltip label for the dismiss button
+   */
+  dismissTooltipLabel: PropTypes.string,
 
   /**
    * Specify the id for the tag.

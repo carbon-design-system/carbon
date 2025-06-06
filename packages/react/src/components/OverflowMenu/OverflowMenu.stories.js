@@ -32,7 +32,6 @@ export const RenderCustomIcon = () => {
     </OverflowMenu>
   );
 };
-
 export const Default = (args) => (
   <OverflowMenu aria-label="overflow-menu" {...args}>
     <OverflowMenuItem itemText="Stop app" />
@@ -51,6 +50,25 @@ Default.args = {
 };
 
 Default.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+  },
   ariaLabel: {
     table: {
       disable: true,

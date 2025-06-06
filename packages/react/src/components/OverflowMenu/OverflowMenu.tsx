@@ -39,10 +39,13 @@ import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { PopoverAlignment } from '../Popover';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -121,6 +124,11 @@ export const getMenuOffset: MenuOffset = (
 };
 
 export interface OverflowMenuProps {
+  /**
+   * Specify how the trigger tooltip should be aligned.
+   */
+  align?: PopoverAlignment;
+
   /**
    * Specify a label to be read by screen readers on the container node
    */
@@ -226,7 +234,7 @@ export interface OverflowMenuProps {
   selectorPrimaryFocus?: string;
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size?: 'sm' | 'md' | 'lg';
 
@@ -240,6 +248,7 @@ export interface OverflowMenuProps {
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
+      align,
       ['aria-label']: ariaLabel = null,
       ariaLabel: deprecatedAriaLabel,
       children,
@@ -296,13 +305,15 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    // Call `onClose` when menu closes.
     useEffect(() => {
-      if (!open && prevOpenState.current) {
+      if (open && !prevOpenState.current) {
+        onOpen();
+      } else if (!open && prevOpenState.current) {
         onClose();
       }
+
       prevOpenState.current = open;
-    }, [open, onClose]);
+    }, [open, onClose, onOpen]);
 
     useOutsideClick(wrapperRef, ({ target }) => {
       if (
@@ -466,7 +477,6 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         },
         !hasFocusin
       );
-      onOpen();
     };
 
     const getTarget = () => {
@@ -562,6 +572,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
           ref={wrapperRef}>
           <IconButton
             {...other}
+            align={align}
             type="button"
             aria-haspopup
             aria-expanded={open}
@@ -586,6 +597,54 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 );
 
 OverflowMenu.propTypes = {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
+
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
+
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
+
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    mapPopoverAlign
+  ),
+
   /**
    * Specify a label to be read by screen readers on the container node
    */
@@ -718,7 +777,7 @@ OverflowMenu.propTypes = {
   selectorPrimaryFocus: PropTypes.string,
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

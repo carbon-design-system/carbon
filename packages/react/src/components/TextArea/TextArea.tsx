@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
   forwardRef,
   useContext,
   useEffect,
@@ -19,12 +20,14 @@ import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -162,11 +165,9 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-// TODO: This type was added to prevent the formatter from changing the
-// indentation of this entire function. Delete it in a future pull request.
-type TTextArea = HTMLTextAreaElement;
+const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
 
-const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
+const TextArea = frFn((props, forwardRef) => {
   const {
     className,
     decorator,
@@ -183,7 +184,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     light,
     placeholder = '',
     enableCounter = false,
-    maxCount = undefined,
+    maxCount,
     counterMode = 'character',
     warn = false,
     warnText = '',
@@ -208,7 +209,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     if (counterMode === 'character') {
       return strValue.length;
     } else {
-      return strValue.match(/\w+/g)?.length || 0;
+      return strValue.match(/\p{L}+/gu)?.length || 0;
     }
   }
 
@@ -262,9 +263,9 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
           textareaRef.current !== null
         ) {
           const existingWords: string[] =
-            textareaRef.current.value.match(/\w+/g) || [];
+            textareaRef.current.value.match(/\p{L}+/gu) || [];
           const pastedWords: string[] =
-            evt.clipboardData.getData('Text').match(/\w+/g) || [];
+            evt.clipboardData.getData('Text').match(/\p{L}+/gu) || [];
 
           const totalWords = existingWords.length + pastedWords.length;
 
@@ -306,7 +307,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
           ) {
-            const matchedWords = evt.target?.value?.match(/\w+/g);
+            const matchedWords = evt.target?.value?.match(/\p{L}+/gu);
             if (matchedWords && matchedWords.length <= maxCount) {
               textareaRef.current.removeAttribute('maxLength');
 
@@ -427,11 +428,12 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     }
   }
 
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(
+  const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
+    counterMode === 'word' ? 'word' : undefined,
     counterMode === 'word' ? 'words' : undefined
   );
   useEffect(() => {
@@ -479,20 +481,11 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
   );
 
   // AILabel is always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   return (
     <div className={formItemClasses}>
