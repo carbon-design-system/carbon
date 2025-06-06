@@ -460,4 +460,34 @@ describe('ComposedModal', () => {
 
     expect(onClose).not.toHaveBeenCalled();
   });
+
+  it('should focus on launcherButtonRef element on close when defined', async () => {
+    const ComposedModalExample = () => {
+      const [open, setOpen] = useState(true);
+      const focusRef = useRef();
+      return (
+        <>
+          <ComposedModal
+            open={open}
+            launcherButtonRef={focusRef}
+            onClick={() => setOpen(false)}>
+            <button data-testid="close" onClick={() => setOpen(false)} />
+          </ComposedModal>
+          <button data-testid="focusElem" ref={focusRef}>
+            focus after close
+          </button>
+        </>
+      );
+    };
+    render(<ComposedModalExample />);
+
+    const closeButton = screen.getByTestId('close');
+    const focusElem = screen.getByTestId('focusElem');
+
+    expect(focusElem).not.toHaveFocus();
+    await userEvent.click(closeButton);
+    await waitFor(() => {
+      expect(focusElem).toHaveFocus();
+    });
+  });
 });
