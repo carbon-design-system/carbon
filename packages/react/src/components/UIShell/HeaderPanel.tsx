@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,17 +8,18 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  isValidElement,
   useRef,
   useState,
-  ReactNode,
   type ComponentProps,
   type ForwardedRef,
-  type JSX,
+  type ReactNode,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import Switcher from './Switcher';
 
 export interface HeaderPanelProps {
   /**
@@ -114,15 +115,19 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
     }
 
     useWindowEvent('click', () => {
-      const focusedElement = document.activeElement as HTMLElement;
-      setLastClickedElement(focusedElement);
+      const { activeElement } = document;
+      if (!(activeElement instanceof HTMLElement)) return;
+      setLastClickedElement(activeElement);
 
-      const childJsxElement = children as JSX.Element;
+      const isChildASwitcher =
+        isValidElement(children) &&
+        typeof children.type !== 'string' &&
+        children.type === Switcher;
 
       if (
-        childJsxElement?.type?.displayName === 'Switcher' &&
-        !focusedElement?.closest(`.${prefix}--header-panel--expanded`) &&
-        !focusedElement?.closest(`.${prefix}--header__action`) &&
+        isChildASwitcher &&
+        !activeElement.closest(`.${prefix}--header-panel--expanded`) &&
+        !activeElement.closest(`.${prefix}--header__action`) &&
         !headerPanelReference?.current?.classList.contains(
           `${prefix}--switcher`
         ) &&
