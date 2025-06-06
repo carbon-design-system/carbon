@@ -19,6 +19,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { getAnnouncement } from '../../internal/getAnnouncement';
 import { Text } from '../Text';
@@ -191,9 +192,20 @@ const TextInput = React.forwardRef(function TextInput(
   const prefix = usePrefix();
 
   const { defaultValue, value } = rest;
-  const [textCount, setTextCount] = useState(
-    defaultValue?.toString().length || value?.toString().length || 0
-  );
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mergedRef = useMergedRefs([ref, inputRef]);
+
+  function getInitialTextCount(): number {
+    const targetValue = defaultValue || value || inputRef.current?.value || '';
+    return targetValue.toString().length;
+  }
+
+  const [textCount, setTextCount] = useState(getInitialTextCount());
+
+  useEffect(() => {
+    setTextCount(getInitialTextCount());
+  }, [value, defaultValue, enableCounter]);
 
   const normalizedProps = useNormalizedInputProps({
     id,
@@ -227,7 +239,7 @@ const TextInput = React.forwardRef(function TextInput(
     },
     placeholder,
     type,
-    ref,
+    ref: mergedRef,
     className: textInputClasses,
     title: placeholder,
     disabled: normalizedProps.disabled,
