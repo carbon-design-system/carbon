@@ -187,9 +187,15 @@ const unstable__Dialog = React.forwardRef(
 
     useEffect(() => {
       if (!open && focusAfterCloseRef) {
-        setTimeout(() => {
+        // use setTimeout to ensure focus is set after all other default focus behavior
+        const moveFocus = setTimeout(() => {
           focusAfterCloseRef.current?.focus();
         });
+
+        //component did unmount equivalent
+        return () => {
+          clearTimeout(moveFocus);
+        };
       }
     }, [open, focusAfterCloseRef]);
 
