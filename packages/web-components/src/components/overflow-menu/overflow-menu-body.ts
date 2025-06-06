@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,10 +113,39 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
       if (key in NAVIGATION_DIRECTION) {
         event.preventDefault();
         this._navigate(NAVIGATION_DIRECTION[key]);
+        return;
       }
 
       if (key === 'Escape') {
         this.open = false;
+        return;
+      }
+
+      const items = this.querySelectorAll(
+        CDSOverflowMenuBody.selectorItemEnabled
+      );
+      const isInsideMenu = Array.from(items).some((item) =>
+        item.contains(document.activeElement)
+      );
+
+      if (isInsideMenu) {
+        event.preventDefault();
+        this.open = false;
+
+        requestAnimationFrame(() => {
+          const menuTrigger = this.parent as HTMLElement | null;
+          const triggerButton =
+            menuTrigger?.shadowRoot?.querySelector(
+              `button.${prefix}--overflow-menu`
+            ) || menuTrigger?.querySelector(`button.${prefix}--overflow-menu`);
+
+          if (triggerButton) {
+            (triggerButton as HTMLElement).focus();
+          } else {
+            console.warn('Could not find trigger button.');
+            (document.body as HTMLElement).focus();
+          }
+        });
       }
     }
   };

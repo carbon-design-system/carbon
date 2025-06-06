@@ -26,6 +26,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
+import { IconSwitch } from '../Switch';
 
 export interface SwitchEventHandlersParams {
   index?: number;
@@ -166,12 +167,9 @@ export const ContentSwitcher = ({
     }
   };
 
-  const isIconOnly = childrenArray.every(
-    // TODO: Update this code when
-    // https://github.com/carbon-design-system/carbon/pull/18971 is merged.
-    (child) =>
-      ((child as ReactElement).type as any).displayName === 'IconSwitch'
-  );
+  const isIconOnly = Children.map(children, (child) => {
+    return isValidElement(child) ? child.type === IconSwitch : null;
+  })?.every((val) => val === true);
 
   const classes = classNames(`${prefix}--content-switcher`, className, {
     [`${prefix}--content-switcher--light`]: light,
