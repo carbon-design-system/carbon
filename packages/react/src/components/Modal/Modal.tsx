@@ -7,6 +7,7 @@
 
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
+  cloneElement,
   useEffect,
   useRef,
   useState,
@@ -41,6 +42,8 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
@@ -558,20 +561,11 @@ const Modal = React.forwardRef(function Modal(
   }, []);
 
   // AILabel always size `sm`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'sm' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-      }
-    );
-  }
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>
