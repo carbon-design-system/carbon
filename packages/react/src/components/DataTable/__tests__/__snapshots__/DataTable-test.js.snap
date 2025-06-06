@@ -10,7 +10,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     >
       <h2
         class="cds--data-table-header__title"
-        id="tc-:r7g:-title"
+        id="tc-«r7g»-title"
       >
         DataTable with selection
       </h2>
@@ -19,7 +19,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r7g:-title"
+        aria-labelledby="tc-«r7g»-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -184,7 +184,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
     >
       <h2
         class="cds--data-table-header__title"
-        id="tc-:r77:-title"
+        id="tc-«r77»-title"
       >
         DataTable with selection
       </h2>
@@ -193,7 +193,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r77:-title"
+        aria-labelledby="tc-«r77»-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -358,7 +358,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     >
       <h2
         class="cds--data-table-header__title"
-        id="tc-:r2k:-title"
+        id="tc-«r2k»-title"
       >
         DataTable with selection
       </h2>
@@ -571,7 +571,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-:r2t:"
+                aria-labelledby="tooltip-«r2t»"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -600,7 +600,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-:r2t:"
+              id="tooltip-«r2t»"
               role="tooltip"
             >
               <span
@@ -626,7 +626,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r2k:-title"
+        aria-labelledby="tc-«r2k»-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -803,7 +803,7 @@ exports[`DataTable renders as expected - Component API should render and match s
     >
       <h2
         class="cds--data-table-header__title"
-        id="tc-:re:-title"
+        id="tc-«re»-title"
       >
         DataTable with toolbar
       </h2>
@@ -1004,7 +1004,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-:rm:"
+                aria-labelledby="tooltip-«rm»"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -1033,7 +1033,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-:rm:"
+              id="tooltip-«rm»"
               role="tooltip"
             >
               <span
@@ -1059,7 +1059,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:re:-title"
+        aria-labelledby="tc-«re»-title"
         class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>
