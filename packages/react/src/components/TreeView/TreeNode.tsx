@@ -21,7 +21,7 @@ import React, {
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
 
 export type TreeNodeProps = {
@@ -131,7 +131,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       'enable-treeview-controllable'
     );
 
-    const { current: id } = useRef(nodeId || uniqueId());
+    const { current: id } = useRef(nodeId || useId());
 
     const controllableExpandedState = useControllableState({
       value: isExpanded,
