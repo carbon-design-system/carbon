@@ -186,7 +186,7 @@ const TreeView: TreeViewComponent = ({
     return React.Children.map(children, (child) => {
       if (!React.isValidElement(child)) return child;
 
-      const isTreeNode = (child.type as any).displayName === 'TreeNode';
+      const isTreeNode = child.type === TreeNode;
 
       if (isTreeNode) {
         const node = child as React.ReactElement<TreeNodeProps>;
