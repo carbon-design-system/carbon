@@ -46,6 +46,11 @@ $css--plex: true !default;
     margin: 0;
   }
 
+  .#{$prefix}--page-header__content__title-wrapper {
+    // overriding until the responsive behavior is implemented
+    grid-template-columns: auto minmax(auto, auto);
+  }
+
   ::slotted([slot='icon']) {
     @extend .#{$prefix}--page-header__content__icon;
   }
