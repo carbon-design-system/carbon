@@ -7,11 +7,12 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ReactNode,
+  cloneElement,
   useContext,
-  useState,
   useEffect,
   useRef,
+  useState,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
@@ -21,6 +22,8 @@ import { FormContext } from '../FluidForm';
 import { usePrefix } from '../../internal/usePrefix';
 import { getAnnouncement } from '../../internal/getAnnouncement';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
 
@@ -350,20 +353,11 @@ const TextInput = React.forwardRef(function TextInput(
   const Icon = normalizedProps.icon as any;
 
   // AILabel is always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   return (
     <div className={inputWrapperClasses}>

@@ -6,13 +6,15 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactElement, ReactNode, useRef } from 'react';
+import React, { cloneElement, useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'onChange';
 
@@ -151,24 +153,13 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, {
+          size: candidate.props?.['kind'] === 'inline' ? 'md' : 'mini',
+        })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      const size =
-        (normalizedDecorator as ReactElement<any>).props?.['kind'] === 'inline'
-          ? 'md'
-          : 'mini';
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size,
-        }
-      );
-    }
 
     return (
       <div className={wrapperClasses}>

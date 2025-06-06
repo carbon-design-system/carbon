@@ -11,6 +11,7 @@ import NumberInputSkeleton from './NumberInput.Skeleton';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
+import { useDocumentLang } from '../../internal/useDocumentLang';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './NumberInput.mdx';
 
@@ -74,6 +75,11 @@ const sharedArgTypes = {
   },
 };
 
+const reusableProps = {
+  min: -100000000,
+  max: 100000000,
+};
+
 export const Default = (args) => {
   const [value, setValue] = React.useState(50);
 
@@ -99,7 +105,7 @@ Default.args = {
   step: 1,
   disabled: false,
   invalid: false,
-  invalidText: 'Number is not valid',
+  invalidText: `Number is not valid. Must be between -100 and 100`,
   helperText: 'Optional helper text.',
   warn: false,
   warnText:
@@ -144,8 +150,8 @@ export const withAILabel = (args) => {
   return (
     <div style={{ width: 400 }}>
       <NumberInput
-        min={-100}
-        max={100}
+        min={reusableProps.min}
+        max={reusableProps.max}
         value={50}
         label="NumberInput label"
         helperText="Optional helper text."
@@ -158,6 +164,41 @@ export const withAILabel = (args) => {
 };
 
 withAILabel.argTypes = { ...sharedArgTypes };
+
+export const WithTypeOfText = (args) => {
+  const locale = useDocumentLang();
+
+  return (
+    <NumberInput
+      id="default-number-input"
+      min={reusableProps.min}
+      max={reusableProps.max}
+      inputMode="decimal"
+      defaultValue={50}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      {...args}
+      locale={locale}
+    />
+  );
+};
+WithTypeOfText.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+  helperText: 'Optional helper text.',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+  type: 'text',
+};
+WithTypeOfText.argTypes = {
+  locale: { control: { type: 'text' } },
+  formatOptions: { control: { type: 'object' } },
+  ...sharedArgTypes,
+};
 
 export const Skeleton = () => {
   return <NumberInputSkeleton />;
