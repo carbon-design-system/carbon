@@ -29,45 +29,11 @@ const storyGlobs = [
   '../src/**/*-story.js',
 ];
 
-const stories = glob
-  .sync(storyGlobs, {
-    ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
-    cwd: __dirname,
-  })
-  // Filters the stories by finding the paths that have a story file that ends
-  // in `-story.js` and checks to see if they also have a `.stories.js`,
-  // if so then defer to the `.stories.js`
-  .filter((match) => {
-    const filepath = path.resolve(__dirname, match);
-    const basename = path.basename(match, '.js');
-    const denylist = new Set([
-      'DataTable-basic-story',
-      'DataTable-batch-actions-story',
-      'DataTable-filtering-story',
-      'DataTable-selection-story',
-      'DataTable-sorting-story',
-      'DataTable-toolbar-story',
-      'DataTable-dynamic-content-story',
-      'DataTable-expansion-story',
-    ]);
-    if (denylist.has(basename)) {
-      return false;
-    }
-    if (basename.endsWith('-story')) {
-      const component = basename.replace(/-story$/, '');
-      const storyName = path.resolve(
-        filepath,
-        '..',
-        'next',
-        `${component}.stories.js`
-      );
-      if (fs.existsSync(storyName)) {
-        return false;
-      }
-      return true;
-    }
-    return true;
-  });
+const stories = glob.sync(storyGlobs, {
+  ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+  cwd: __dirname,
+});
+
 const config = {
   addons: [
     getAbsolutePath('@storybook/addon-webpack5-compiler-babel'),
