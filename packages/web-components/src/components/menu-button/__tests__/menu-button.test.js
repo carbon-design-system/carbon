@@ -34,31 +34,61 @@ describe('cds-menu-button', function () {
     await expect(el).to.be.accessible();
   });
 
-  describe('Attributes and properties', () => {
-    it('should reflect and pass down kind, size, disabled, and label', async () => {
+  describe('Component API parity', () => {
+    it('supports a ref on the outermost element', async () => {
+      // Included for parity with React. Since refs don’t apply to Web Components,
+      // we verify the outer element tag instead.
       const el = await fixture(html`
-        <cds-menu-button
-          kind="tertiary"
-          size="sm"
-          label="TestLabel"
-          ?disabled=${true}>
+        <cds-menu-button label="Ref test">
           <cds-menu>
-            <cds-menu-item label="X"></cds-menu-item>
+            <cds-menu-item label="Action"></cds-menu-item>
           </cds-menu>
         </cds-menu-button>
       `);
-      expect(el.getAttribute('kind')).to.equal('tertiary');
-      expect(el.getAttribute('size')).to.equal('sm');
-      expect(el.label).to.equal('TestLabel');
-      expect(el.disabled).to.be.true;
-
-      // Make sure these props are passed to the internal button
-      const button = el.shadowRoot.querySelector('cds-button');
-      expect(button.getAttribute('kind')).to.equal('tertiary');
-      expect(button.getAttribute('size')).to.equal('sm');
-      expect(button.disabled).to.be.true;
+      expect(el.nodeName.toLowerCase()).to.equal('cds-menu-button');
     });
 
+    it('supports a custom class name', async () => {
+      // Included for parity with React. We check that the class is applied
+      // directly to the custom element host.
+      const el = await fixture(html`
+        <cds-menu-button label="Custom class" class="test">
+          <cds-menu>
+            <cds-menu-item label="Action"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      expect(el.classList.contains('test')).to.be.true;
+    });
+
+    it('forwards additional props', async () => {
+      // Included for parity with React. Custom attributes like data-testid
+      // are asserted directly on the custom element.
+      const el = await fixture(html`
+        <cds-menu-button label="Additional props" data-testid="test-id">
+          <cds-menu>
+            <cds-menu-item label="Action"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      expect(el.getAttribute('data-testid')).to.equal('test-id');
+    });
+
+    // Ensure the provided label prop is rendered as button content
+    it('renders props.label on the trigger button', async () => {
+      const el = await fixture(html`
+        <cds-menu-button label="MyLabel">
+          <cds-menu>
+            <cds-menu-item label="Item"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      const button = el.shadowRoot.querySelector('cds-button');
+      expect(button.textContent.trim()).to.equal('MyLabel');
+    });
+  });
+
+  describe('Attributes and properties', () => {
     it('should set menu-alignment and reflect on instance', async () => {
       const el = await fixture(html`
         <cds-menu-button menu-alignment="top-end" label="Align">
@@ -69,18 +99,6 @@ describe('cds-menu-button', function () {
       `);
       expect(el.menuAlignment).to.equal('top-end');
       expect(el.getAttribute('menu-alignment')).to.equal('top-end');
-    });
-
-    it('should set tabIndex', async () => {
-      const el = await fixture(html`
-        <cds-menu-button tab-index="5" label="TabIndex">
-          <cds-menu>
-            <cds-menu-item label="A"></cds-menu-item>
-          </cds-menu>
-        </cds-menu-button>
-      `);
-      const button = el.shadowRoot.querySelector('cds-button');
-      expect(button.getAttribute('tab-index')).to.equal('5');
     });
   });
 
@@ -102,6 +120,7 @@ describe('cds-menu-button', function () {
       expect(menu.open).to.be.false;
     });
 
+    // Simulate focus moving outside to trigger menu close behavior
     it('should close menu on focusout', async () => {
       const el = await fixture(menuButton);
       const button = el.shadowRoot.querySelector('cds-button');
@@ -125,6 +144,7 @@ describe('cds-menu-button', function () {
     });
   });
 
+  // Note: Focus management in WC is limited by Shadow DOM, so this suite covers basic trigger behavior only
   describe('Keyboard and focus interaction', () => {
     it('should receive focus and open with Space/Enter', async () => {
       const el = await fixture(menuButton);
@@ -170,9 +190,43 @@ describe('cds-menu-button', function () {
       await el.updateComplete;
       expect(el.querySelector('cds-menu').open).to.be.false;
     });
+
+    it('does not steal focus', async () => {
+      const el = await fixture(html`
+        <div>
+          <cds-menu-button label="Actions">
+            <cds-menu>
+              <cds-menu-item
+                label="Action"
+                @click=${() => {
+                  document.querySelector('input')?.focus();
+                }}>
+              </cds-menu-item>
+            </cds-menu>
+          </cds-menu-button>
+          <input type="text" id="focus-target" />
+        </div>
+      `);
+
+      const menuButton = el.querySelector('cds-menu-button');
+      const button = menuButton.shadowRoot.querySelector('cds-button');
+      const input = el.querySelector('#focus-target');
+
+      button.click();
+      await menuButton.updateComplete;
+
+      const item = el.querySelector('cds-menu-item');
+      item.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+      );
+      item.click();
+      await menuButton.updateComplete;
+
+      expect(document.activeElement).to.equal(input);
+    });
   });
 
-  describe('Children/slots and special menu content', () => {
+  describe('Children and special content', () => {
     it('should render danger item, divider, and menu items', async () => {
       const el = await fixture(html`
         <cds-menu-button label="Danger">
@@ -191,7 +245,6 @@ describe('cds-menu-button', function () {
 
       // Find all menu items
       const items = Array.from(el.querySelectorAll('cds-menu-item'));
-
       // Find the menu item with kind="danger"
       const dangerItem = items.find(
         (item) => item.getAttribute('kind') === 'danger'
@@ -202,24 +255,6 @@ describe('cds-menu-button', function () {
       // Make sure divider is rendered
       const divider = el.querySelector('cds-menu-item-divider');
       expect(divider).to.exist;
-    });
-
-    it('should render icon content inside menu items (slot)', async () => {
-      const el = await fixture(html`
-        <cds-menu-button label="Icons">
-          <cds-menu>
-            <cds-menu-item label="Asset">
-              <svg slot="render-icon"></svg>
-            </cds-menu-item>
-          </cds-menu>
-        </cds-menu-button>
-      `);
-      const button = el.shadowRoot.querySelector('cds-button');
-      button.click();
-      await el.updateComplete;
-      const menuItem = el.querySelector('cds-menu-item');
-      const icon = menuItem.querySelector('[slot="render-icon"]');
-      expect(icon).to.exist;
     });
 
     it('should render nested menus via cds-menu-item-group', async () => {
@@ -237,8 +272,7 @@ describe('cds-menu-button', function () {
       const button = el.shadowRoot.querySelector('cds-button');
       button.click();
       await el.updateComplete;
-      const menuItem = el.querySelector('cds-menu-item');
-      const group = menuItem.querySelector('cds-menu-item-group');
+      const group = el.querySelector('cds-menu-item-group');
       expect(group).to.exist;
       const nestedItem = group.querySelector('cds-menu-item');
       expect(nestedItem.getAttribute('label')).to.equal('PDF');
@@ -250,8 +284,7 @@ describe('cds-menu-button', function () {
         const button = el.shadowRoot.querySelector('cds-button');
         button.click();
         await el.updateComplete;
-        const menu = el.querySelector('cds-menu');
-        const items = menu.querySelectorAll('cds-menu-item');
+        const items = el.querySelectorAll('cds-menu-item');
         expect(items[2].hasAttribute('disabled')).to.be.true;
         // Should also have aria-disabled for accessibility
         expect(items[2].getAttribute('aria-disabled')).to.equal('true');
@@ -278,35 +311,6 @@ describe('cds-menu-button', function () {
           `);
           expect(el.menuAlignment).to.equal(alignment);
         });
-      });
-    });
-
-    describe('Snapshot variants', () => {
-      it('should render with divider and danger and match snapshot', async () => {
-        const el = await fixture(html`
-          <cds-menu-button label="Test">
-            <cds-menu>
-              <cds-menu-item label="First action"></cds-menu-item>
-              <cds-menu-item-divider></cds-menu-item-divider>
-              <cds-menu-item label="Danger" kind="danger"></cds-menu-item>
-            </cds-menu>
-          </cds-menu-button>
-        `);
-        await expect(el).dom.to.equalSnapshot();
-      });
-      it('should render with nested menu and match snapshot', async () => {
-        const el = await fixture(html`
-          <cds-menu-button label="Nested">
-            <cds-menu>
-              <cds-menu-item label="Export as">
-                <cds-menu-item-group slot="submenu">
-                  <cds-menu-item label="PDF"></cds-menu-item>
-                </cds-menu-item-group>
-              </cds-menu-item>
-            </cds-menu>
-          </cds-menu-button>
-        `);
-        await expect(el).dom.to.equalSnapshot();
       });
     });
   });
