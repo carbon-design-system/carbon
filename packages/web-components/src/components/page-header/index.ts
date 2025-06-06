@@ -10,5 +10,6 @@
 import './page-header';
 import './page-header-breadcrumb';
 import './page-header-content';
+import './page-header-content-text';
 import './page-header-hero-image';
 import './page-header-tabs';

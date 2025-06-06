@@ -21,11 +21,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-page-header-content`)
 class CDSPageHeaderContent extends LitElement {
   /**
-   * `true` if there is body content.
-   */
-  private _hasBody = false;
-
-  /**
    * `true` if there are contextual actions
    */
   private _hasContextualActions = false;
@@ -34,14 +29,6 @@ class CDSPageHeaderContent extends LitElement {
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
-    this._hasBody = Boolean((target as HTMLSlotElement).assignedNodes());
-    this.requestUpdate();
-  }
-
-  /**
-   * Handles `slotchange` event.
-   */
-  protected _handleContextualActionsSlotChange({ target }: Event) {
     this._hasContextualActions = Boolean(
       (target as HTMLSlotElement).assignedNodes()
     );
@@ -58,12 +45,6 @@ class CDSPageHeaderContent extends LitElement {
    */
   @property()
   title = '';
-
-  /**
-   * Subtitle text of the page-header-content
-   */
-  @property()
-  subtitle = '';
 
   /**
    * true if the tag text has ellipsis applied
@@ -92,12 +73,9 @@ class CDSPageHeaderContent extends LitElement {
   render() {
     const {
       title,
-      subtitle,
       withinGrid,
-      _hasBody: hasBody,
       _hasEllipsisApplied: hasEllipsisApplied,
       _handleSlotChange: handleSlotChange,
-      _handleContextualActionsSlotChange: handleContextualActionsSlotChange,
     } = this;
 
     const gridClasses = classMap({
@@ -129,19 +107,13 @@ class CDSPageHeaderContent extends LitElement {
             </div>
             <slot
               name="contextual-actions"
-              @slotchange=${handleContextualActionsSlotChange}></slot>
+              @slotchange=${handleSlotChange}></slot>
           </div>
           <div class="${prefix}--page-header__content__page-actions">
             <slot name="page-actions"></slot>
           </div>
         </div>
-        ${subtitle &&
-        html`<h3 class="${prefix}--page-header__content__sub-title">
-          ${subtitle}
-        </h3>`}
-        <div class="${prefix}--page-header__content__body" ?hidden=${!hasBody}>
-          <slot @slotchange=${handleSlotChange}></slot>
-        </div>
+        <slot></slot>
       </div>
     </div>`;
   }

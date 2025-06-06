@@ -19,7 +19,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-page-header-hero-image`)
 class CDSPageHeaderHeroImage extends LitElement {
   render() {
-    const {} = this;
     return html`<slot></slot> `;
   }
 

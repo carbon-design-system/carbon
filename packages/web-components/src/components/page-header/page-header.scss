@@ -58,18 +58,6 @@ $css--plex: true !default;
   ::slotted([slot='contextual-actions']) {
     @extend .#{$prefix}--page-header__content__contextual-actions;
   }
-
-  .#{$prefix}--page-header__content__sub-title {
-    @extend .#{$prefix}--page-header__content__subtitle;
-
-    margin-block-end: 0;
-  }
-}
-
-:host(#{$prefix}-page-header-content:not([subtitle])) {
-  .#{$prefix}--page-header__content__body {
-    margin-block-start: $spacing-05;
-  }
 }
 
 :host(#{$prefix}-page-header-content[contextual-actions]) {
@@ -81,6 +69,17 @@ $css--plex: true !default;
 :host(#{$prefix}-page-header-content[contextual-actions]) {
   .#{$prefix}--page-header__content__title {
     -webkit-line-clamp: 1;
+  }
+}
+
+:host(#{$prefix}-page-header-content-text) {
+  @extend .#{$prefix}--page-header__content__body;
+
+  display: block;
+  margin-block-start: $spacing-05;
+
+  .#{$prefix}--page-header__content__subtitle {
+    margin-block-start: 0;
   }
 }
 

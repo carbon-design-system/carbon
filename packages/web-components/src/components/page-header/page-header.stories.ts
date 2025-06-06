@@ -60,12 +60,14 @@ export const Default = {
     <cds-page-header>
       <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
       <cds-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-        subtitle="Subtitle">
-        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-        Massa elementum class enim malesuada lacinia hendrerit enim erat
-        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long">
+        <cds-page-header-content-text subtitle="Subtitle">
+          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+          Massa elementum class enim malesuada lacinia hendrerit enim erat
+          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+          Nisi molestie primis lorem nascetur sem metus mattis etiam
+          scelerisque.
+        </cds-page-header-content-text>
       </cds-page-header-content>
       <cds-page-header-tabs>
         <cds-tabs slot="tabs" value="tab-1">
@@ -110,15 +112,17 @@ export const ContentWithContextualActions = {
     html`<cds-page-header>
       <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
       <cds-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-        subtitle="Subtitle">
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long">
         <div slot="contextual-actions">
           <cds-tag type="blue" size="lg">Tag</cds-tag>
         </div>
-        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-        Massa elementum class enim malesuada lacinia hendrerit enim erat
-        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+        <cds-page-header-content-text subtitle="Subtitle">
+          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+          Massa elementum class enim malesuada lacinia hendrerit enim erat
+          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+          Nisi molestie primis lorem nascetur sem metus mattis etiam
+          scelerisque.
+        </cds-page-header-content-text>
       </cds-page-header-content>
     </cds-page-header>`,
 };
@@ -128,8 +132,7 @@ export const ContentWithContextualActionsAndPageActions = {
     html`<cds-page-header>
       <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
       <cds-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-        subtitle="Subtitle">
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long">
         <div slot="contextual-actions">
           <cds-tag type="blue" size="lg">Tag</cds-tag>
         </div>
@@ -138,10 +141,13 @@ export const ContentWithContextualActionsAndPageActions = {
             >Primary action ${Add16({ slot: 'icon' })}</cds-button
           >
         </div>
-        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-        Massa elementum class enim malesuada lacinia hendrerit enim erat
-        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+        <cds-page-header-content-text subtitle="Subtitle">
+          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+          Massa elementum class enim malesuada lacinia hendrerit enim erat
+          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+          Nisi molestie primis lorem nascetur sem metus mattis etiam
+          scelerisque.
+        </cds-page-header-content-text>
       </cds-page-header-content>
     </cds-page-header>`,
 };
@@ -156,11 +162,13 @@ export const ContentWithHeroImage = {
           <cds-page-header-content
             within-grid
             title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-            subtitle="Subtitle">
-            Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-            Massa elementum class enim malesuada lacinia hendrerit enim erat
-            pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-            Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+            >
+            <cds-page-header-content-text subtitle="Subtitle">
+              Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+              Massa elementum class enim malesuada lacinia hendrerit enim erat
+              pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+              Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+            </cds-page-header-content-text>
           </cds-page-header-content>
         </div>
         <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
@@ -192,13 +200,15 @@ export const ContentWithIcon = {
     html`<cds-page-header>
       <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
       <cds-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-        subtitle="Subtitle">
-        ${Bee32({ slot: 'icon' })} Neque massa fames auctor maecenas leo. Mollis
-        vehicula per, est justo. Massa elementum class enim malesuada lacinia
-        hendrerit enim erat pellentesque. Sapien arcu lobortis est erat arcu
-        nibh vehicula congue. Nisi molestie primis lorem nascetur sem metus
-        mattis etiam scelerisque.
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long">
+        ${Bee32({ slot: 'icon' })}
+        <cds-page-header-content-text subtitle="Subtitle">
+          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+          Massa elementum class enim malesuada lacinia hendrerit enim erat
+          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+          Nisi molestie primis lorem nascetur sem metus mattis etiam
+          scelerisque.
+        </cds-page-header-content-text>
       </cds-page-header-content>
     </cds-page-header>`,
 };
@@ -208,13 +218,14 @@ export const TabBarWithTabsAndTags = {
     html`<cds-page-header>
         <cds-page-header-breadcrumb>BreadcrumbBar</cds-page-header-breadcrumb>
         <cds-page-header-content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          subtitle="Subtitle">
-          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-          Massa elementum class enim malesuada lacinia hendrerit enim erat
-          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-          Nisi molestie primis lorem nascetur sem metus mattis etiam
-          scelerisque.
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long">
+          <cds-page-header-content-text subtitle="Subtitle">
+            Neque massa fames auctor maecenas leo. Mollis vehicula per, est
+            justo. Massa elementum class enim malesuada lacinia hendrerit enim
+            erat pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula
+            congue. Nisi molestie primis lorem nascetur sem metus mattis etiam
+            scelerisque.
+          </cds-page-header-content-text>
         </cds-page-header-content>
         <cds-page-header-tabs>
           <cds-tabs slot="tabs" value="tab-1">
