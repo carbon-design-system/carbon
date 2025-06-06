@@ -17,13 +17,13 @@ describe('cds-combo-button', () => {
 
   it('should render', async () => {
     const el = await fixture(basicComboButton);
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should render with minimum attributes', async () => {
     const el = await fixture(basicComboButton);
     expect(el).to.exist;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should support a custom class name on the outermost element', async () => {
@@ -35,7 +35,7 @@ describe('cds-combo-button', () => {
       </cds-combo-button>
     `);
     expect(el).to.have.class('test');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should forward additional attributes on the outermost element', async () => {
@@ -47,7 +47,7 @@ describe('cds-combo-button', () => {
       </cds-combo-button>
     `);
     expect(el).to.have.attribute('data-testid', 'test');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should render props.label on the primary button', async () => {
@@ -61,7 +61,7 @@ describe('cds-combo-button', () => {
 
     const primaryButton = el.shadowRoot?.querySelector('cds-button');
     expect(primaryButton?.textContent?.trim()).to.equal('Test');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should support props.disabled', async () => {
@@ -78,7 +78,7 @@ describe('cds-combo-button', () => {
 
     const triggerButton = el.shadowRoot?.querySelector('cds-icon-button');
     expect(triggerButton).to.have.attribute('disabled');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   describe('supports props.size', () => {
@@ -134,7 +134,7 @@ describe('cds-combo-button', () => {
 
         const triggerButton = el.shadowRoot?.querySelector('cds-icon-button');
         expect(triggerButton).to.have.attribute('align', alignment);
-        expect(el).shadowDom.to.equalSnapshot();
+        await expect(el).shadowDom.to.equalSnapshot();
       });
     });
   });
@@ -163,7 +163,7 @@ describe('cds-combo-button', () => {
 
         expect(el).to.have.attribute('menu-alignment', alignment);
         expect(el.menuAlignment).to.equal(alignment);
-        expect(el).shadowDom.to.equalSnapshot();
+        await expect(el).shadowDom.to.equalSnapshot();
       });
     });
   });
@@ -185,7 +185,7 @@ describe('cds-combo-button', () => {
       '[slot="tooltip-content"]'
     );
     expect(tooltipSlot?.textContent?.trim()).to.equal(customTooltip);
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should have default tooltip content', async () => {
@@ -221,7 +221,7 @@ describe('Button props', () => {
     primaryButton?.click();
     await el.updateComplete;
     expect(clicked).to.be.true;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should disable button if disabled prop is passed', async () => {
@@ -236,7 +236,7 @@ describe('Button props', () => {
     const triggerButton = el.shadowRoot?.querySelector('cds-icon-button');
 
     expect(triggerButton).to.have.attribute('disabled');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 });
 
@@ -267,7 +267,7 @@ describe('Menu behavior', () => {
     );
 
     expect(menu?.open).to.be.true;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should toggle menu when trigger button is clicked multiple times', async () => {
@@ -298,6 +298,7 @@ describe('Menu behavior', () => {
     );
     expect(menu?.open).to.be.false;
 
+    // Third click - opens menu again
     triggerButton?.click();
     await el.updateComplete;
     await waitUntil(
@@ -305,7 +306,7 @@ describe('Menu behavior', () => {
       'Menu should open on third click'
     );
     expect(menu?.open).to.be.true;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should close menu on blur when focus moves outside', async () => {
@@ -342,7 +343,7 @@ describe('Menu behavior', () => {
     await comboButton?.updateComplete;
     await waitUntil(() => menu?.open === false, 'Menu should close on blur');
     expect(menu?.open).to.be.false;
-    expect(comboButton).shadowDom.to.equalSnapshot();
+    await expect(comboButton).shadowDom.to.equalSnapshot();
   });
 
   it('should pass size to menu when size property changes', async () => {
@@ -361,7 +362,7 @@ describe('Menu behavior', () => {
     await el.updateComplete;
 
     expect(menu).to.have.attribute('size', 'lg');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should handle menu item clicks', async () => {
@@ -397,7 +398,7 @@ describe('Menu behavior', () => {
     );
 
     expect(menuItemClicked).to.be.true;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 });
 
@@ -420,7 +421,7 @@ describe('Edge cases', () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
 
     expect(menu?.open).to.be.false;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should handle empty menu gracefully', async () => {
@@ -438,7 +439,7 @@ describe('Edge cases', () => {
     await waitUntil(() => menu?.open === true, 'Empty menu should still open');
 
     expect(menu?.open).to.be.true;
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should handle dynamic label changes', async () => {
@@ -457,7 +458,7 @@ describe('Edge cases', () => {
     await el.updateComplete;
 
     expect(primaryButton?.textContent?.trim()).to.equal('Updated');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 });
 
