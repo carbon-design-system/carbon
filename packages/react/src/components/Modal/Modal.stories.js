@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';

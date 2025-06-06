@@ -11,7 +11,7 @@ import {
   Primary,
   Stories,
   ArgTypes,
-} from '@storybook/blocks';
+} from '@storybook/addon-docs/blocks';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -372,6 +372,7 @@ const preview = {
   parameters,
   decorators,
   globalTypes,
+  tags: ['autodocs'],
 };
 
 export default preview;
