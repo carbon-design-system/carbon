@@ -40,6 +40,11 @@ export default {
         disable: true,
       },
     },
+    focusAfterCloseRef: {
+      table: {
+        disable: true,
+      },
+    },
     onRequestClose: {
       table: {
         disable: true,
