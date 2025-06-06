@@ -47,7 +47,7 @@ class CDSPageHeaderContent extends LitElement {
   title = '';
 
   /**
-   * true if the tag text has ellipsis applied
+   * Set to `true` if the tag text has ellipsis applied
    */
   @state()
   _hasEllipsisApplied = false;
