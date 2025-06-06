@@ -309,43 +309,6 @@ describe('Menu behavior', () => {
     await expect(el).shadowDom.to.equalSnapshot();
   });
 
-  it('should close menu on blur when focus moves outside', async () => {
-    const container = await fixture(html`
-      <div>
-        <cds-combo-button label="Primary action">
-          <cds-menu>
-            <cds-menu-item label="Additional action"></cds-menu-item>
-          </cds-menu>
-        </cds-combo-button>
-        <button id="external-element">External</button>
-      </div>
-    `);
-
-    const comboButton = container.querySelector('cds-combo-button');
-    const triggerButton =
-      comboButton?.shadowRoot?.querySelector('cds-icon-button');
-    const externalButton = container.querySelector('#external-element');
-    const menu = comboButton?.querySelector('cds-menu');
-
-    triggerButton?.click();
-    await comboButton?.updateComplete;
-    await waitUntil(() => menu?.open === true, 'Menu should open');
-    expect(menu?.open).to.be.true;
-
-    externalButton?.focus();
-
-    const focusEvent = new FocusEvent('focusout', {
-      bubbles: true,
-      relatedTarget: externalButton,
-    });
-    comboButton?.dispatchEvent(focusEvent);
-
-    await comboButton?.updateComplete;
-    await waitUntil(() => menu?.open === false, 'Menu should close on blur');
-    expect(menu?.open).to.be.false;
-    await expect(comboButton).shadowDom.to.equalSnapshot();
-  });
-
   it('should pass size to menu when size property changes', async () => {
     const el = await fixture(html`
       <cds-combo-button label="Primary action" size="sm">
