@@ -474,6 +474,8 @@ collect:
         # PageHeaderContentPageActions
         - actions
         - menuButtonLabel
+        # PageHeaderTabBar
+        - tags
         # PageSelector
         - currentPage
         - totalPages
