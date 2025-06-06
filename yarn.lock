@@ -1893,7 +1893,6 @@ __metadata:
     react-fast-compare: "npm:^3.2.2"
     react-is: "npm:^16.13.1 || ^17.0.2 || ^18.3.1 || ^19.0.0"
     remark-gfm: "npm:^4.0.0"
-    requestanimationframe: "npm:^0.0.23"
     rimraf: "npm:^6.0.0"
     rollup: "npm:^2.79.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
@@ -2109,11 +2108,8 @@ __metadata:
     cssnano: "npm:^7.0.0"
     flatpickr: "npm:4.6.13"
     globby: "npm:^14.0.2"
-    is-port-reachable: "npm:^3.1.0"
     lit: "npm:^3.1.0"
     lodash-es: "npm:^4.17.21"
-    null-loader: "npm:^4.0.0"
-    prop-types: "npm:^15.8.1"
     read-package-up: "npm:^11.0.0"
     remark-gfm: "npm:^4.0.0"
     rimraf: "npm:^6.0.0"
@@ -2123,7 +2119,6 @@ __metadata:
     sass: "npm:^1.51.0"
     storybook: "npm:^8.4.7"
     storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
-    temp: "npm:^0.9.0"
     tslib: "npm:^2.6.3"
     typescript-config-carbon: "npm:^0.5.0"
     vite: "npm:^6.3.5"
@@ -9446,13 +9441,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"big.js@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "big.js@npm:5.2.2"
-  checksum: 10/c04416aeb084f4aa1c5857722439c327cc0ada9bd99ab80b650e3f30e2e4f1b92a04527ed1e7df8ffcd7c0ea311745a04af12d53e2f091bf09a06f1292003827
-  languageName: node
-  linkType: hard
-
 "binary-extensions@npm:^2.0.0":
   version: 2.0.0
   resolution: "binary-extensions@npm:2.0.0"
@@ -12574,13 +12562,6 @@ __metadata:
   version: 6.1.3
   resolution: "emoji-regex@npm:6.1.3"
   checksum: 10/348c4808cdc614e5522023c1f102eb06093ca24c693c7aa074fac93d3880c51948e9468bf91554d2e77ce47f0053411767aae21dd58fed12fdc54c2352a07976
-  languageName: node
-  linkType: hard
-
-"emojis-list@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "emojis-list@npm:3.0.0"
-  checksum: 10/114f47d6d45612621497d2b1556c8f142c35332a591780a54e863e42d281e72d6c7d7c419f2e419319d4eb7f6ebf1db82d9744905d90f275db20d06a763b5e19
   languageName: node
   linkType: hard
 
@@ -16577,13 +16558,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-port-reachable@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "is-port-reachable@npm:3.1.0"
-  checksum: 10/f6e51a1517acc8cc53f7ab08abe4f8f6262c680033a488b73700ab4986589a29b63db63bb1003110f54a7b555768501e32ab2aab138a082062a87694a18ee553
-  languageName: node
-  linkType: hard
-
 "is-potential-custom-element-name@npm:^1.0.1":
   version: 1.0.1
   resolution: "is-potential-custom-element-name@npm:1.0.1"
@@ -17869,7 +17843,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^2.1.2, json5@npm:^2.2.2, json5@npm:^2.2.3":
+"json5@npm:^2.2.2, json5@npm:^2.2.3":
   version: 2.2.3
   resolution: "json5@npm:2.2.3"
   bin:
@@ -18397,17 +18371,6 @@ __metadata:
   version: 4.2.0
   resolution: "loader-runner@npm:4.2.0"
   checksum: 10/89a648e0418f23edf2f310bf74a8adb0710548e8d8d47040def081e1b822bdc27b664b796ce43ceb7921fa56485e1f5046417e425714730dc6ea4242e7a176fa
-  languageName: node
-  linkType: hard
-
-"loader-utils@npm:^2.0.0":
-  version: 2.0.4
-  resolution: "loader-utils@npm:2.0.4"
-  dependencies:
-    big.js: "npm:^5.2.2"
-    emojis-list: "npm:^3.0.0"
-    json5: "npm:^2.1.2"
-  checksum: 10/28bd9af2025b0cb2fc6c9c2d8140a75a3ab61016e5a86edf18f63732216e985a50bf2479a662555beb472a54d12292e380423705741bfd2b54cab883aa067f18
   languageName: node
   linkType: hard
 
@@ -20664,18 +20627,6 @@ __metadata:
   dependencies:
     boolbase: "npm:^1.0.0"
   checksum: 10/5afc3dafcd1573b08877ca8e6148c52abd565f1d06b1eb08caf982e3fa289a82f2cae697ffb55b5021e146d60443f1590a5d6b944844e944714a5b549675bcd3
-  languageName: node
-  linkType: hard
-
-"null-loader@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "null-loader@npm:4.0.1"
-  dependencies:
-    loader-utils: "npm:^2.0.0"
-    schema-utils: "npm:^3.0.0"
-  peerDependencies:
-    webpack: ^4.0.0 || ^5.0.0
-  checksum: 10/eeb4c4dd2f8f41e46f5665e4500359109e95ec1028a178a60e0161984906572da7dd87644bcc3cb29f0125d77e2b2508fb4f3813cfb1c6604a15865beb4b987b
   languageName: node
   linkType: hard
 
@@ -23285,13 +23236,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"requestanimationframe@npm:^0.0.23":
-  version: 0.0.23
-  resolution: "requestanimationframe@npm:0.0.23"
-  checksum: 10/6d696bb4879281de8306922a91108b0abffd390c8b1903a8c5c40a20375abdb56979ea6fab93bb3ec82d0309a4c3f019b51cef96197c581e044536af9444d95c
-  languageName: node
-  linkType: hard
-
 "require-directory@npm:^2.1.1":
   version: 2.1.1
   resolution: "require-directory@npm:2.1.1"
@@ -23890,7 +23834,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"schema-utils@npm:^3.0.0, schema-utils@npm:^3.1.1, schema-utils@npm:^3.2.0":
+"schema-utils@npm:^3.1.1, schema-utils@npm:^3.2.0":
   version: 3.3.0
   resolution: "schema-utils@npm:3.3.0"
   dependencies:
@@ -25649,7 +25593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"temp@npm:^0.9.0, temp@npm:^0.9.4":
+"temp@npm:^0.9.4":
   version: 0.9.4
   resolution: "temp@npm:0.9.4"
   dependencies:
