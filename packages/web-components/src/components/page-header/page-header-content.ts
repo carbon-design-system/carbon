@@ -21,7 +21,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-page-header-content`)
 class CDSPageHeaderContent extends LitElement {
   /**
-   * `true` if there are contextual actions
+   * Set to `true` if there are contextual actions
    */
   private _hasContextualActions = false;
 
