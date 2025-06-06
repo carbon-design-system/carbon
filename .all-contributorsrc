@@ -1902,6 +1902,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "petersandor",
+      "name": "Peter Šándor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3933866?v=4",
+      "profile": "https://petersandor.name/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
