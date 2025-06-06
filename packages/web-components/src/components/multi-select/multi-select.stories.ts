@@ -185,13 +185,48 @@ const argTypes = {
 };
 
 export const Default = {
+  args,
+  argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
-  render: () => {
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <cds-multi-select
-        title-text="Multiselect title"
-        label="Multiselect label"
-        helper-text="This is helper text">
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        label=${ifDefined(label)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}">
         <cds-multi-select-item value="example"
           >An example option that is really long to show what should be done to
           handle long text</cds-multi-select-item
@@ -371,13 +406,25 @@ export const SelectAll = {
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
 
   render: () => {
+    const updateLabel = (e) => {
+      const multiSelect = e.target;
+      if (multiSelect.value && multiSelect.value.length > 0) {
+        multiSelect.label = 'Options Selected';
+      } else {
+        multiSelect.label = 'Choose Options';
+      }
+      multiSelect.requestUpdate();
+    };
+
     return html`
       <cds-multi-select
+        id="multiselect-selectall"
         title-text="Multiselect title"
         label="Choose Options"
         helper-text="This is helper text"
-        select-all>
-        <cds-multi-select-item is-select-all> All roles </cds-multi-select-item>
+        select-all
+        @cds-multi-select-selected=${updateLabel}>
+        <cds-multi-select-item is-select-all>All roles</cds-multi-select-item>
         <cds-multi-select-item value="editor">Editor</cds-multi-select-item>
         <cds-multi-select-item value="owner">Owner</cds-multi-select-item>
         <cds-multi-select-item disabled value="Reader"
@@ -554,67 +601,6 @@ export const WithToggletipLabel = {
           <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
         </cds-multi-select>
       </div>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
-  render: (args) => {
-    const {
-      clearSelectionLabel,
-      direction,
-      disabled,
-      helperText,
-      hideLabel,
-      locale,
-      invalid,
-      invalidText,
-      readOnly,
-      titleText,
-      selectionFeedback,
-      size,
-      label,
-      type,
-      value,
-      warn,
-      warnText,
-    } = args ?? {};
-    return html`
-      <cds-multi-select
-        direction=${ifDefined(direction)}
-        ?disabled=${disabled}
-        ?invalid=${invalid}
-        invalid-text=${ifDefined(invalidText)}
-        clear-selection-label=${ifDefined(clearSelectionLabel)}
-        helper-text=${ifDefined(helperText)}
-        ?hide-label=${hideLabel}
-        locale=${ifDefined(locale)}
-        ?read-only=${readOnly}
-        title-text=${ifDefined(titleText)}
-        selection-feedback=${ifDefined(selectionFeedback)}
-        size=${ifDefined(size)}
-        ?warn=${warn}
-        warn-text=${ifDefined(warnText)}
-        label=${ifDefined(label)}
-        type=${ifDefined(type)}
-        value="${ifDefined(value)}">
-        <cds-multi-select-item value="example"
-          >An example option that is really long to show what should be done to
-          handle long text</cds-multi-select-item
-        >
-        <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-        <cds-multi-select-item value="cloudFoundry"
-          >Option 2</cds-multi-select-item
-        >
-        <cds-multi-select-item disabled value="staging"
-          >Option 3 - a disabled item</cds-multi-select-item
-        >
-        <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-        <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
-      </cds-multi-select>
     `;
   },
 };

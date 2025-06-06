@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -67,12 +67,6 @@ class CDSMultiSelect extends CDSDropdown {
    */
   @query('#selection-button')
   private _selectionButtonNode!: HTMLElement;
-
-  /**
-   * The menu body.
-   */
-  @query('#menu-body')
-  private _menuBodyNode!: HTMLElement;
 
   /**
    * The `<input>` for filtering.
@@ -146,6 +140,9 @@ class CDSMultiSelect extends CDSDropdown {
   }
 
   protected _handleClickInner(event: MouseEvent) {
+    const clickedItem = (event.target as HTMLElement).closest(
+      `${prefix}-multi-select-item`
+    ) as CDSMultiSelectItem | null;
     if (
       this._selectionButtonNode?.contains(event.target as Node) &&
       !this.readOnly
@@ -155,6 +152,15 @@ class CDSMultiSelect extends CDSDropdown {
         this._filterInputNode.focus();
       } else {
         this._triggerNode.focus();
+      }
+    } else if (clickedItem && !clickedItem.hasAttribute('disabled')) {
+      // Handle focus highlight
+      const allItems = this.querySelectorAll(`${prefix}-multi-select-item`);
+      allItems.forEach((el) => el.removeAttribute('highlighted'));
+      clickedItem.setAttribute('highlighted', '');
+      this._handleUserInitiatedSelectItem(clickedItem);
+      if (this.filterable) {
+        this._filterInputNode.focus();
       }
     } else if (this._clearButtonNode?.contains(event.target as Node)) {
       this._handleUserInitiatedClearInput();
@@ -424,6 +430,7 @@ class CDSMultiSelect extends CDSDropdown {
         (item as CDSMultiSelectItem).highlighted = i === nextIndex;
       });
     }
+    this._triggerNode.classList.add('no-focus-style');
   }
 
   /**
@@ -610,8 +617,7 @@ class CDSMultiSelect extends CDSDropdown {
   updated(changedProperties) {
     super.updated(changedProperties);
     if (changedProperties.has('open') && this.open && !this.filterable) {
-      // move focus to menu body when open for non-filterable mulit-select
-      this._menuBodyNode.focus();
+      this._triggerNode.focus();
     }
     // reorder items so that select all is always at the top of the list
     if (this.selectAll && changedProperties.has('open') && this.open) {
@@ -638,6 +644,9 @@ class CDSMultiSelect extends CDSDropdown {
           }
         }
       );
+    }
+    if (changedProperties.has('open') && !this.open) {
+      this._triggerNode.classList.remove('no-focus-style');
     }
   }
 

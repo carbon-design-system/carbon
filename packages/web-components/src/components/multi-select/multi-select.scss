@@ -63,11 +63,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-multi-select[filterable])
   .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
-  ~ ::slotted(#{$prefix}-ai-label) {
-  inset-inline-end: calc($spacing-10 + 18px);
-}
-
-:host(#{$prefix}-multi-select[direction='top']) {
+  :host(#{$prefix}-multi-select[direction='top']) {
   @extend .#{$prefix}--list-box--up;
 
   .#{$prefix}--list-box__menu {
@@ -166,7 +162,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-multi-select-item[selected]) {
   @extend .#{$prefix}--list-box__menu-item--active;
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
     color: $text-primary;
@@ -218,7 +213,7 @@ $css--plex: true !default;
 // When select all is turned on, the first item in the listbox
 // is always the "Select all" option and gets special border
 // treatment
-:host([is-select-all]) {
+:host(#{$prefix}-multi-select-item[is-select-all]) {
   .#{$prefix}--list-box__menu-item__option {
     padding: 0.6875rem $spacing-05;
     margin: 0;
@@ -230,11 +225,18 @@ $css--plex: true !default;
 // has special treatment to look correct against the "Select all"
 // border treatment, this second item (index=1) gets a `flush-top` attribute
 // so that we can remove its top border.
-:host([flush-top]) .#{$prefix}--list-box__menu-item__option {
+:host(#{$prefix}-multi-select-item[flush-top])
+  .#{$prefix}--list-box__menu-item__option {
   border-block-start: none;
 }
 
 // make the checkbox element transparent to mouse events so it doesn't interfere
 :host #{'cds-checkbox'} {
   pointer-events: none;
+}
+
+// remove focus outline for when the label is out of focus
+:host .#{$prefix}--list-box__field.no-focus-style:focus,
+:host .#{$prefix}--list-box__field.no-focus-style:focus-within {
+  outline: none;
 }
