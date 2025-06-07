@@ -193,7 +193,6 @@ const TimePicker = frFn((props, ref) => {
   const timePickerInputClasses = cx(
     `${prefix}--time-picker__input-field`,
     `${prefix}--text-input`,
-    [className],
     {
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--time-picker__input-field-error`]: invalid || warning,
@@ -207,7 +206,6 @@ const TimePicker = frFn((props, ref) => {
     [`${prefix}--time-picker--warning`]: warning,
     [`${prefix}--time-picker--readonly`]: readOnly,
     [`${prefix}--time-picker--${size}`]: size,
-    ...(className && { [className]: true }),
   });
 
   const labelClasses = cx(`${prefix}--label`, {
