@@ -291,6 +291,11 @@ Default.argTypes = {
       disable: true,
     },
   },
+  launcherButtonRef: {
+    table: {
+      disable: true,
+    },
+  },
   modalHeading: {
     control: 'text',
   },

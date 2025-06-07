@@ -465,10 +465,10 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     useEffect(() => {
       if (!enableDialogElement && !open && launcherButtonRef) {
         setTimeout(() => {
-          launcherButtonRef?.current?.focus();
+          launcherButtonRef.current?.focus();
         });
       }
-    }, [open, launcherButtonRef]);
+    }, [enableDialogElement, open, launcherButtonRef]);
 
     useEffect(() => {
       if (!enableDialogElement) {
@@ -517,6 +517,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const modalBody = enableDialogElement ? (
       <Dialog
         open={open}
+        focusAfterCloseRef={launcherButtonRef}
         modal
         className={containerClass}
         aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
