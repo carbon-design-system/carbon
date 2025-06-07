@@ -16,7 +16,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { useMergedRefs } from '../../internal/useMergedRefs';
