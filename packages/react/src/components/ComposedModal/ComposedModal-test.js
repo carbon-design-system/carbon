@@ -7,10 +7,11 @@
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import React, { useRef, useState } from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ComposedModal, { ModalBody } from './ComposedModal';
+import { FeatureFlags } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import { TextInput } from '../../';
@@ -361,6 +362,38 @@ describe('ComposedModal', () => {
     });
   });
 
+  describe('enable-dialog-element feature flag', () => {
+    it('should bring launcherButtonRef element into focus on close when the ref is defined', async () => {
+      const ComposedModalExample = () => {
+        const [open, setOpen] = useState(true);
+        const focusRef = useRef();
+        return (
+          <FeatureFlags enableDialogElement>
+            <ComposedModal
+              open={open}
+              launcherButtonRef={focusRef}
+              onClick={() => setOpen(false)}>
+              <button data-testid="close" onClick={() => setOpen(false)} />
+            </ComposedModal>
+            <button data-testid="focusElem" ref={focusRef}>
+              focus after close
+            </button>
+          </FeatureFlags>
+        );
+      };
+      render(<ComposedModalExample />);
+
+      const closeButton = screen.getByTestId('close');
+      const focusElem = screen.getByTestId('focusElem');
+
+      expect(focusElem).not.toHaveFocus();
+      await userEvent.click(closeButton);
+      await waitFor(() => {
+        expect(focusElem).toHaveFocus();
+      });
+    });
+  });
+
   it('should respect the deprecated slug prop', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(
@@ -426,5 +459,35 @@ describe('ComposedModal', () => {
     fireEvent.click(backgroundLayer, { target: backgroundLayer });
 
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('should focus on launcherButtonRef element on close when defined', async () => {
+    const ComposedModalExample = () => {
+      const [open, setOpen] = useState(true);
+      const focusRef = useRef();
+      return (
+        <>
+          <ComposedModal
+            open={open}
+            launcherButtonRef={focusRef}
+            onClick={() => setOpen(false)}>
+            <button data-testid="close" onClick={() => setOpen(false)} />
+          </ComposedModal>
+          <button data-testid="focusElem" ref={focusRef}>
+            focus after close
+          </button>
+        </>
+      );
+    };
+    render(<ComposedModalExample />);
+
+    const closeButton = screen.getByTestId('close');
+    const focusElem = screen.getByTestId('focusElem');
+
+    expect(focusElem).not.toHaveFocus();
+    await userEvent.click(closeButton);
+    await waitFor(() => {
+      expect(focusElem).toHaveFocus();
+    });
   });
 });
