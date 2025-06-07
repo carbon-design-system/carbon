@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import FileUploaderItem from '../FileUploaderItem';
 import FileUploaderDropContainer from '../FileUploaderDropContainer';
 import FormItem from '../../FormItem';
-import { uniqueId } from '../../../tools/uniqueId';
+import { useId } from '../../../internal/useId';
 
 const prefix = 'cds';
 
@@ -105,7 +105,7 @@ const ExampleDropContainerApp = (props) => {
     (evt, { addedFiles }) => {
       evt.stopPropagation();
       const newFiles = addedFiles.map((file) => ({
-        uuid: uniqueId(),
+        uuid: useId(),
         name: file.name,
         filesize: file.size,
         status: 'uploading',
@@ -170,7 +170,7 @@ const ExampleDropContainerApp = (props) => {
             ...rest
           }) => (
             <FileUploaderItem
-              key={uniqueId()}
+              key={useId()}
               uuid={uuid}
               name={name}
               filesize={filesize}
