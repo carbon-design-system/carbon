@@ -98,7 +98,7 @@
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $text-disabled;
       outline: none;
     }
   }
@@ -119,6 +119,7 @@
 
     .#{$prefix}--btn__icon {
       position: static;
+      align-self: center;
       margin-inline-start: $spacing-03;
     }
 
@@ -139,7 +140,7 @@
     &.#{$prefix}--btn--disabled:focus {
       border-color: transparent;
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $text-disabled;
       outline: none;
     }
 
@@ -162,7 +163,6 @@
     );
 
     > :first-child {
-      margin-block-start: convert.to-rem(1px);
       min-inline-size: convert.to-rem(16px);
     }
 
@@ -173,6 +173,12 @@
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon,
     &.#{$prefix}--btn--danger--ghost .#{$prefix}--btn__icon {
       margin: 0;
+    }
+
+    &.#{$prefix}--btn--danger--ghost {
+      padding-inline-end: calc(
+        layout.density('padding-inline') - convert.to-rem(16px)
+      );
     }
   }
 
@@ -268,7 +274,7 @@
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
         background: transparent;
-        color: $text-on-color-disabled;
+        color: $text-disabled;
         outline: none;
       }
     }
@@ -317,8 +323,9 @@
 
     padding-block: min(
       calc(
-        (layout.size('height') - var(--temp-expressive-1lh)) / 2 -
-          convert.to-rem(1px)
+        (layout.size('height') - var(--temp-expressive-1lh)) / 2 - convert.to-rem(
+            1px
+          )
       ),
       var(--temp-padding-block-max)
     );
@@ -402,18 +409,16 @@
     box-shadow: none;
   }
 
-  // Windows HCM fix
-  .#{$prefix}--btn:focus {
-    @include high-contrast-mode('focus');
+  // badge indicator
+
+  .#{$prefix}--btn--sm .#{$prefix}--badge-indicator {
+    margin-block-start: $spacing-02;
+    margin-inline-end: $spacing-02;
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
-    .#{$prefix}--btn__icon
-    path:not([data-icon-path]):not([fill='none']),
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
-    @include high-contrast-mode('icon-fill');
+  .#{$prefix}--btn:focus {
+    @include high-contrast-mode('focus');
   }
 
   // RTL overrides

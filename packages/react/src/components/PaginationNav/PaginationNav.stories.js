@@ -7,27 +7,30 @@
 
 import React from 'react';
 import PaginationNav from '../PaginationNav';
+import './styles.scss';
+import mdx from './PaginationNav.mdx';
 
 export default {
   title: 'Components/PaginationNav',
   component: PaginationNav,
   subcomponents: {},
-  parameters: {},
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <div style={{ width: '800px' }}>
-    <PaginationNav itemsShown={10} totalItems={25} />
-  </div>
-);
+export const Default = (args) => {
+  return (
+    <div style={{ width: '800px' }}>
+      <PaginationNav totalItems={25} {...args} />
+    </div>
+  );
+};
 
-export const Playground = (args) => (
-  <div style={{ width: '800px' }}>
-    <PaginationNav {...args} />
-  </div>
-);
-
-Playground.args = {
+Default.args = {
+  size: 'lg',
   loop: false,
   itemsShown: 10,
   page: 0,
@@ -35,7 +38,11 @@ Playground.args = {
   disableOverflow: false,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
   loop: {
     control: {
       type: 'boolean',

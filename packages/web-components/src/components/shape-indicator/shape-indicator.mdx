@@ -1,0 +1,46 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ShapeIndicatorStories from './shape-indicator.stories';
+
+<Meta of={ShapeIndicatorStories} />
+
+# Shape indicator
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Kind](#kind)
+  - [Size](#size)
+  - [Customizing the label](#customizing-the-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={ShapeIndicatorStories.Default} />
+
+## Kind
+
+Shape indicators can take the form of failed, critical, high, medium, low,
+cautious, undefined, stable, informative, incomplete, and draft.
+
+## Size
+
+Shape indicators have two text size options 12 and 14. The default is 12.
+
+## Customizing the label
+
+You can set a string to customize the label of the Shape indicator.
+
+## Component API
+
+<ArgTypes of="cds-shape-indicator" />
+
+<Markdown>{`${cdnJs({ components: ['shape-indicator'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/shape-indicator/shape-indicator.mdx).

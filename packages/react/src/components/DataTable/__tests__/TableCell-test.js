@@ -38,4 +38,24 @@ describe('TableCell', () => {
       'test'
     );
   });
+
+  it('should forward refs to the rendered cell element', () => {
+    let td = null;
+    const ref = jest.fn((node) => {
+      td = node;
+    });
+    const { container } = render(
+      <Table>
+        <TableBody>
+          <TableRow data-testid="tr">
+            <TableCell ref={ref} className="custom-class" />
+          </TableRow>
+        </TableBody>
+      </Table>
+    );
+    expect(ref).toHaveBeenCalled();
+    expect(td).not.toBeNull();
+    expect(td).toEqual(container.querySelector('td'));
+    expect(td).toHaveClass('custom-class');
+  });
 });

@@ -1,101 +1,44 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 'use strict';
+import { createRequire } from 'node:module';
 
 import remarkGfm from 'remark-gfm';
-const fs = require('fs');
-const glob = require('fast-glob');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
+import fs from 'fs';
+import glob from 'fast-glob';
+import path, { dirname, join } from 'path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const require = createRequire(import.meta.url);
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
-const storyGlobs =
-  process.env.STORYBOOK_STORE_7 === 'false'
-    ? [
-        '../src/**/*.stories.js',
-        '../src/**/next/*.stories.js',
-        '../src/**/next/**/*.stories.js',
-        '../src/**/*-story.js',
-      ]
-    : [
-        './Welcome/Welcome.mdx',
-        '../src/**/*.stories.js',
-        '../src/**/*.stories.mdx',
-        '../src/components/Tile/Tile.mdx',
-        '../src/**/next/*.stories.js',
-        '../src/**/next/**/*.stories.js',
-        '../src/**/next/*.stories.mdx',
-        '../src/**/*-story.js',
-      ];
+const storyGlobs = [
+  './Welcome/Welcome.mdx',
+  '../src/**/*.stories.js',
+  '../src/**/*.mdx',
+  '../src/components/Tile/Tile.mdx',
+  '../src/**/next/*.stories.js',
+  '../src/**/next/**/*.stories.js',
+  '../src/**/next/*.mdx',
+  '../src/**/*-story.js',
+];
 
-const stories = glob
-  .sync(storyGlobs, {
-    ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
-    cwd: __dirname,
-  })
-  // Filters the stories by finding the paths that have a story file that ends
-  // in `-story.js` and checks to see if they also have a `.stories.js`,
-  // if so then defer to the `.stories.js`
-  .filter((match) => {
-    const filepath = path.resolve(__dirname, match);
-    const basename = path.basename(match, '.js');
-    const denylist = new Set([
-      'DataTable-basic-story',
-      'DataTable-batch-actions-story',
-      'DataTable-filtering-story',
-      'DataTable-selection-story',
-      'DataTable-sorting-story',
-      'DataTable-toolbar-story',
-      'DataTable-dynamic-content-story',
-      'DataTable-expansion-story',
-    ]);
-    if (denylist.has(basename)) {
-      return false;
-    }
-    if (basename.endsWith('-story')) {
-      const component = basename.replace(/-story$/, '');
-      const storyName = path.resolve(
-        filepath,
-        '..',
-        'next',
-        `${component}.stories.js`
-      );
-      if (fs.existsSync(storyName)) {
-        return false;
-      }
-      return true;
-    }
-    return true;
-  });
+const stories = glob.sync(storyGlobs, {
+  ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+  cwd: __dirname,
+});
+
 const config = {
   addons: [
+    getAbsolutePath('@storybook/addon-webpack5-compiler-babel'),
     {
-      name: '@storybook/addon-essentials',
-      options: {
-        actions: true,
-        backgrounds: false,
-        controls: true,
-        docs: true,
-        toolbars: true,
-        viewport: true,
-      },
-    },
-    '@storybook/addon-storysource',
-    /**
-     * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
-     * Eventually they plan to attempt to get this back into the root addon with the storybook team.
-     * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
-     */
-    // '@storybook/addon-a11y',
-    'storybook-addon-accessibility-checker',
-    {
-      name: '@storybook/addon-docs',
+      name: getAbsolutePath('@storybook/addon-docs'),
       options: {
         mdxPluginOptions: {
           mdxCompileOptions: {
@@ -108,10 +51,10 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
-    storyStoreV7: process.env.STORYBOOK_STORE_7 !== 'false',
+    interactions: false, // disable Interactions tab
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: getAbsolutePath('@storybook/react-webpack5'),
     options: {},
   },
   stories,
@@ -120,27 +63,6 @@ const config = {
   },
 
   webpack(config) {
-    const babelLoader = config.module.rules.find((rule) => {
-      return rule.use?.some(({ loader }) => {
-        return loader.includes('babel-loader');
-      });
-    });
-
-    // This is a temporary trick to get `babel-loader` to ignore packages that
-    // are brought in that have an es, lib, or umd directory.
-    //
-    // Typically this is covered by /node_modules/ (which is the default), but
-    // in our case it seems like these dependencies are resolving to where their
-    // symlink points to. In other words, `@carbon/icons-react` becomes
-    // `../icons-react/es/index.js`.
-    //
-    // This results in these files being included in `babel-loader` and causing
-    // the build times to increase dramatically
-    babelLoader.exclude = [
-      /node_modules/,
-      /packages\/.*\/(es|lib|umd)/,
-      /packages\/icons-react\/next/,
-    ];
     config.module.rules.push({
       test: /\.s?css$/,
       sideEffects: true,
@@ -180,6 +102,7 @@ const config = {
                 path.resolve(__dirname, '..', 'node_modules'),
                 path.resolve(__dirname, '..', '..', '..', 'node_modules'),
               ],
+              silenceDeprecations: ['mixed-decls'],
             },
             warnRuleAsWarning: true,
             sourceMap: true,
@@ -197,9 +120,12 @@ const config = {
     return config;
   },
   docs: {
-    autodocs: true,
     defaultName: 'Overview',
   },
 };
 
 export default config;
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

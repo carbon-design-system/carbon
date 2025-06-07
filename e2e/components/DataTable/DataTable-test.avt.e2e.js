@@ -276,18 +276,6 @@ test.describe('@avt DataTable', () => {
         'components-datatable-selection--default'
       );
     });
-    test('@avt-advanced-states with-radio-expansion', async ({ page }) => {
-      await visitStory(page, {
-        component: 'DataTable',
-        id: 'components-datatable-selection--with-radio-expansion',
-        globals: {
-          theme: 'white',
-        },
-      });
-      await expect(page).toHaveNoACViolations(
-        'components-datatable-selection--with-radio-expansion'
-      );
-    });
     test('@avt-advanced-states with-selection-and-sorting', async ({
       page,
     }) => {

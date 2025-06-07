@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import './WithLayer.scss';
 
 import { Layer } from '../../../src';
 
@@ -20,24 +19,18 @@ function WithLayer({ children }) {
   }
 
   return (
-    <Annotation type="layer" text="Layer 1" className={`${prefix}--with-layer`}>
+    <Annotation type="background" text="$background">
       {renderChild(0)}
-
-      <Annotation
-        type="layer"
-        text="Layer 2"
-        className={`${prefix}--with-layer`}>
-        <Layer>
+      <Layer withBackground>
+        <Annotation type="layer" text="$layer-01">
           {renderChild(1)}
-
-          <Annotation
-            type="layer"
-            text="Layer 3"
-            className={`${prefix}--with-layer`}>
-            <Layer>{renderChild(2)}</Layer>
-          </Annotation>
-        </Layer>
-      </Annotation>
+          <Layer withBackground>
+            <Annotation type="layer" text="$layer-02">
+              {renderChild(2)}
+            </Annotation>
+          </Layer>
+        </Annotation>
+      </Layer>
     </Annotation>
   );
 }
@@ -48,7 +41,7 @@ WithLayer.propTypes = {
    * Can be either a node or a function that receives the layer
    * index as a parameter and returns the child for that layer.
    */
-  children: PropTypes.oneOf([PropTypes.node, PropTypes.func]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 
 export { WithLayer };

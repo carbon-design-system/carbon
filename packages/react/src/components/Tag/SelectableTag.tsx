@@ -1,12 +1,19 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
+import React, {
+  useLayoutEffect,
+  useState,
+  useRef,
+  MouseEvent,
+  forwardRef,
+  ForwardedRef,
+} from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -15,7 +22,8 @@ import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
+import mergeRefs from '../../tools/mergeRefs';
+import { useControllableState } from '../../internal/useControllableState';
 export interface SelectableTagBaseProps {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -28,15 +36,24 @@ export interface SelectableTagBaseProps {
   disabled?: boolean;
 
   /**
-   * Specify the id for the selectabletag.
+   * Specify the id for the selectable tag.
    */
   id?: string;
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
+
+  /**
+   * Provide an optional hook that is called when selected is changed
+   */
+  onChange?: (selected: boolean) => void;
+
+  /**
+   * Provide an optional function to be called when the tag is clicked.
+   */
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 
   /**
    * Specify the state of the selectable tag.
@@ -44,15 +61,15 @@ export interface SelectableTagBaseProps {
   selected?: boolean;
 
   /**
+   * Specify the default state of the selectable tag.
+   */
+  defaultSelected?: boolean;
+
+  /**
    * Specify the size of the Tag. Currently supports either `sm`,
    * `md` (default) or `lg` sizes.
    */
   size?: keyof typeof SIZES;
-
-  /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
-   */
-  slug?: ReactNode;
 
   /**
    * Provide text to be rendered inside of a the tag.
@@ -65,95 +82,98 @@ export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
   SelectableTagBaseProps
 >;
 
-const SelectableTag = <T extends React.ElementType>({
-  className,
-  disabled,
-  id,
-  renderIcon,
-  selected = false,
-  slug,
-  size,
-  text,
-  ...other
-}: SelectableTagProps<T>) => {
-  const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${useId()}`;
-  const [selectedTag, setSelectedTag] = useState(selected);
-  const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
-    [`${prefix}--tag--selectable-selected`]: selectedTag,
-  });
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-
-  useLayoutEffect(() => {
-    const newElement = tagRef.current?.getElementsByClassName(
-      `${prefix}--tag__label`
-    )[0];
-    setIsEllipsisApplied(isEllipsisActive(newElement));
-  }, [prefix, tagRef]);
-
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
+const SelectableTag = forwardRef(
+  <T extends React.ElementType>(
+    {
+      className,
+      disabled,
+      id,
+      renderIcon,
+      onChange,
+      onClick,
+      selected,
+      size,
+      text,
+      defaultSelected = false,
+      ...other
+    }: SelectableTagProps<T>,
+    forwardRef: ForwardedRef<HTMLButtonElement>
+  ) => {
+    const prefix = usePrefix();
+    const tagRef = useRef<HTMLButtonElement>(null);
+    const tagId = id || `tag-${useId()}`;
+    const [selectedTag, setSelectedTag] = useControllableState({
+      value: selected,
+      onChange: onChange,
+      defaultValue: defaultSelected,
     });
-  }
+    const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
+      [`${prefix}--tag--selectable-selected`]: selectedTag,
+    });
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const tooltipClasses = classNames(
-    `${prefix}--icon-tooltip`,
-    `${prefix}--tag-label-tooltip`
-  );
+    useLayoutEffect(() => {
+      const newElement = tagRef.current?.getElementsByClassName(
+        `${prefix}--tag__label`
+      )[0];
+      setIsEllipsisApplied(isEllipsisActive(newElement));
+    }, [prefix, tagRef]);
 
-  // Removing onClick from the spread operator
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { onClick, ...otherProps } = other;
+    const tooltipClasses = classNames(
+      `${prefix}--icon-tooltip`,
+      `${prefix}--tag-label-tooltip`
+    );
+    const combinedRef = mergeRefs(tagRef, forwardRef);
 
-  if (isEllipsisApplied) {
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+      setSelectedTag(!selectedTag);
+      onClick?.(e);
+    };
+
+    if (isEllipsisApplied) {
+      return (
+        <Tooltip
+          label={text}
+          align="bottom"
+          className={tooltipClasses}
+          leaveDelayMs={0}
+          onMouseEnter={() => false}>
+          <Tag
+            aria-pressed={selectedTag !== false}
+            ref={combinedRef}
+            size={size}
+            renderIcon={renderIcon}
+            disabled={disabled}
+            className={tagClasses}
+            id={tagId}
+            onClick={handleClick}
+            {...other}>
+            <Text title={text} className={`${prefix}--tag__label`}>
+              {text}
+            </Text>
+          </Tag>
+        </Tooltip>
+      );
+    }
+
     return (
-      <Tooltip
-        label={text}
-        align="bottom"
-        className={tooltipClasses}
-        leaveDelayMs={0}
-        onMouseEnter={() => false}>
-        <Tag
-          ref={tagRef}
-          slug={slug}
-          size={size}
-          renderIcon={renderIcon}
-          disabled={disabled}
-          className={tagClasses}
-          id={tagId}
-          onClick={() => setSelectedTag(!selectedTag)}
-          {...otherProps}>
-          <Text title={text} className={`${prefix}--tag__label`}>
-            {text}
-          </Text>
-          {normalizedSlug}
-        </Tag>
-      </Tooltip>
+      <Tag
+        aria-pressed={selectedTag !== false}
+        ref={combinedRef}
+        size={size}
+        renderIcon={renderIcon}
+        disabled={disabled}
+        className={tagClasses}
+        id={tagId}
+        onClick={handleClick}
+        {...other}>
+        <Text title={text} className={`${prefix}--tag__label`}>
+          {text}
+        </Text>
+      </Tag>
     );
   }
-
-  return (
-    <Tag
-      ref={tagRef}
-      slug={slug}
-      size={size}
-      renderIcon={renderIcon}
-      disabled={disabled}
-      className={tagClasses}
-      id={tagId}
-      onClick={() => setSelectedTag(!selectedTag)}
-      {...otherProps}>
-      {normalizedSlug}
-      <Text title={text} className={`${prefix}--tag__label`}>
-        {text}
-      </Text>
-    </Tag>
-  );
-};
+);
 
 SelectableTag.propTypes = {
   /**
@@ -172,10 +192,19 @@ SelectableTag.propTypes = {
   id: PropTypes.string,
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Provide an optional hook that is called when selected is changed
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the tag is clicked.
+   */
+  onClick: PropTypes.func,
 
   /**
    * Specify the state of the selectable tag.
@@ -183,15 +212,15 @@ SelectableTag.propTypes = {
   selected: PropTypes.bool,
 
   /**
+   * Specify the default state of the selectable tag.
+   */
+  defaultSelected: PropTypes.bool,
+
+  /**
    * Specify the size of the Tag. Currently supports either `sm`,
    * `md` (default) or `lg` sizes.
    */
   size: PropTypes.oneOf(Object.keys(SIZES)),
-
-  /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
-   */
-  slug: PropTypes.node,
 
   /**
    * Provide text to be rendered inside of a the tag.

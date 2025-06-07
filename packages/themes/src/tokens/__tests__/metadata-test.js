@@ -602,6 +602,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "layer-background-01",
+          "type": "color",
+        },
+        Object {
           "name": "layer-hover-01",
           "type": "color",
         },
@@ -622,6 +626,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "layer-background-02",
+          "type": "color",
+        },
+        Object {
           "name": "layer-hover-02",
           "type": "color",
         },
@@ -639,6 +647,10 @@ test('metadata', () => {
         },
         Object {
           "name": "layer-active-03",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-background-03",
           "type": "color",
         },
         Object {
@@ -1234,6 +1246,18 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "content-switcher-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "content-switcher-background",
+          "type": "color",
+        },
+        Object {
+          "name": "content-switcher-background-hover",
+          "type": "color",
+        },
+        Object {
           "name": "notification-background-error",
           "type": "color",
         },
@@ -1271,6 +1295,42 @@ test('metadata', () => {
         },
         Object {
           "name": "notification-action-tertiary-inverse-text-on-color-disabled",
+          "type": "color",
+        },
+        Object {
+          "name": "status-red",
+          "type": "color",
+        },
+        Object {
+          "name": "status-orange",
+          "type": "color",
+        },
+        Object {
+          "name": "status-orange-outline",
+          "type": "color",
+        },
+        Object {
+          "name": "status-yellow",
+          "type": "color",
+        },
+        Object {
+          "name": "status-yellow-outline",
+          "type": "color",
+        },
+        Object {
+          "name": "status-purple",
+          "type": "color",
+        },
+        Object {
+          "name": "status-green",
+          "type": "color",
+        },
+        Object {
+          "name": "status-blue",
+          "type": "color",
+        },
+        Object {
+          "name": "status-gray",
           "type": "color",
         },
         Object {

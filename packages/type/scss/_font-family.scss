@@ -6,6 +6,7 @@
 //
 
 @use 'sass:string';
+@use 'sass:map';
 
 /// Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
 /// Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
@@ -65,7 +66,7 @@ $font-families: (
 /// @access public
 /// @group @carbon/type
 @function font-family($name) {
-  @return map-get($font-families, $name);
+  @return map.get($font-families, $name);
 }
 
 /// Include the `font-family` definition for the given name in your selector
@@ -92,7 +93,7 @@ $font-weights: (
 /// @access public
 /// @group @carbon/type
 @function font-weight($weight) {
-  @return map-get($font-weights, $weight);
+  @return map.get($font-weights, $weight);
 }
 
 /// Set the `font-weight` property with the value for a given name

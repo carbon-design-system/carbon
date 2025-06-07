@@ -8,7 +8,7 @@
 import React from 'react';
 import {
   unstable__FluidSearch as FluidSearch,
-  // unstable__FluidSearchSkeleton as FluidSearchSkeleton,
+  unstable__FluidSearchSkeleton as FluidSearchSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
@@ -33,16 +33,11 @@ figma.connect(
   }
 );
 
-// missing from Figma
-// figma.connect(
-//   FluidSearchSkeleton,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=15503-270751&t=6KMXKibN414b97hv-4',
-//   {
-//     variant: { State: 'Skeleton' },
-//     example: () => (
-//       // Disclaimer: Code Connect is currently in beta and integration with Carbon
-//       // React is in an exploratory phase. Code sample below may be incomplete.
-//       <FluidSearchSkeleton />
-//     ),
-//   }
-// );
+figma.connect(
+  FluidSearchSkeleton,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=15503-270751&t=6KMXKibN414b97hv-4',
+  {
+    variant: { State: 'Skeleton' },
+    example: () => <FluidSearchSkeleton />,
+  }
+);

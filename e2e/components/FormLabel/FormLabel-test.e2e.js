@@ -25,7 +25,7 @@ test.describe('FormLabel', () => {
       test('with tooltip @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FormLabel',
-          id: 'components-formlabel--with-tooltip',
+          id: 'components-formlabel--with-toggletip',
           theme,
         });
       });

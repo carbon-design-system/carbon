@@ -1,31 +1,33 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import cx from 'classnames';
-import { useCombobox, UseComboboxProps } from 'downshift';
+import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
+  forwardRef,
+  useCallback,
   useContext,
   useEffect,
-  useState,
-  useRef,
   useMemo,
-  forwardRef,
-  type ReactNode,
+  useRef,
+  useState,
   type ComponentType,
+  type FocusEvent,
   type ForwardedRef,
-  type ReactElement,
-  type RefAttributes,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
   type PropsWithChildren,
   type PropsWithRef,
-  type InputHTMLAttributes,
-  type MouseEvent,
-  type KeyboardEvent,
-  type FocusEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefAttributes,
 } from 'react';
 import { Text } from '../Text';
 import {
@@ -33,10 +35,8 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
-import ListBox, {
-  PropTypes as ListBoxPropTypes,
-  ListBoxSize,
-} from '../ListBox';
+import isEqual from 'react-fast-compare';
+import ListBox, { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
@@ -44,8 +44,11 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
+import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -56,6 +59,8 @@ const {
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
   MenuMouseLeave,
+  ItemClick,
+  FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -78,26 +83,52 @@ const defaultItemToString = <ItemType,>(item: ItemType | null) => {
 
 const defaultShouldFilterItem = () => true;
 
+const autocompleteCustomFilter = ({
+  item,
+  inputValue,
+}: {
+  item: string;
+  inputValue: string | null;
+}): boolean => {
+  if (inputValue === null || inputValue === '') {
+    return true; // Show all items if there's no input
+  }
+
+  const lowercaseItem = item.toLowerCase();
+  const lowercaseInput = inputValue.toLowerCase();
+
+  return lowercaseItem.startsWith(lowercaseInput);
+};
+
 const getInputValue = <ItemType,>({
   initialSelectedItem,
-  inputValue,
   itemToString,
   selectedItem,
+  prevSelectedItem,
 }: {
   initialSelectedItem?: ItemType | null;
-  inputValue: string;
   itemToString: ItemToStringHandler<ItemType>;
   selectedItem?: ItemType | null;
+  prevSelectedItem?: ItemType | null;
 }) => {
-  if (selectedItem) {
+  // If there's a current selection (even if it's an object or string), use it.
+  if (selectedItem !== null && typeof selectedItem !== 'undefined') {
     return itemToString(selectedItem);
   }
 
-  if (initialSelectedItem) {
+  // On the very first render (when no previous value exists), use
+  // `initialSelectedItem`.
+  if (
+    typeof prevSelectedItem === 'undefined' &&
+    initialSelectedItem !== null &&
+    typeof initialSelectedItem !== 'undefined'
+  ) {
     return itemToString(initialSelectedItem);
   }
 
-  return inputValue || '';
+  // Otherwise (i.e., after the user has cleared the selection), return an empty
+  // string.
+  return '';
 };
 
 const findHighlightedIndex = <ItemType,>(
@@ -125,7 +156,7 @@ const findHighlightedIndex = <ItemType,>(
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
-interface OnChangeData<ItemType> {
+export interface OnChangeData<ItemType> {
   selectedItem: ItemType | null | undefined;
   inputValue?: string | null;
 }
@@ -137,13 +168,14 @@ interface OnChangeData<ItemType> {
  * because those components aren't Typescript.  (If you try, TranslationKey
  * ends up just being defined as "string".)
  */
-type TranslationKey =
+export type TranslationKey =
   | 'close.menu'
   | 'open.menu'
   | 'clear.all'
   | 'clear.selection';
 
-type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
+export type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
+
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
     TranslateWithId<TranslationKey> {
@@ -178,6 +210,11 @@ export interface ComboBoxProps<ItemType>
   className?: string;
 
   /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `ComboBox` component
+   */
+  decorator?: ReactNode;
+
+  /**
    * Specify the direction of the combobox dropdown. Can be either top or bottom.
    */
   direction?: 'top' | 'bottom';
@@ -188,12 +225,30 @@ export interface ComboBoxProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
+   *
    */
   downshiftProps?: Partial<UseComboboxProps<ItemType>>;
+
+  /**
+   * Provide a ref that will be mutated to contain an object of downshift
+   * action functions. These can be called to change the internal state of the
+   * downshift useCombobox hook.
+   *
+   * **Use with caution:** calling these actions modifies the internal state of
+   * downshift. It may conflict with or override the state management used within
+   * Combobox. Downshift APIs and internals are subject to change, and in some
+   * cases they can not be shimmed by Carbon to shield you from potentially breaking
+   * changes.
+   */
+  downshiftActions?: React.MutableRefObject<
+    UseComboboxActions<ItemType> | undefined
+  >;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -277,7 +332,7 @@ export interface ComboBoxProps<ItemType>
   placeholder?: string;
 
   /**
-   * Is the ComboBox readonly?
+   * Whether or not the component is read-only
    */
   readOnly?: boolean;
 
@@ -290,6 +345,7 @@ export interface ComboBoxProps<ItemType>
    * Specify your own filtering logic by passing in a `shouldFilterItem`
    * function that takes in the current input and an item and passes back
    * whether or not the item should be filtered.
+   * this prop will be ignored if `typeahead` prop is enabled
    */
   shouldFilterItem?: (input: {
     item: ItemType;
@@ -303,6 +359,7 @@ export interface ComboBoxProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
   slug?: ReactNode;
@@ -312,6 +369,11 @@ export interface ComboBoxProps<ItemType>
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
+
+  /**
+   * **Experimental**: will enable autocomplete and typeahead for the input field
+   */
+  typeahead?: boolean;
 
   /**
    * Specify whether the control is currently in warning state
@@ -329,13 +391,18 @@ const ComboBox = forwardRef(
     props: ComboBoxProps<ItemType>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    const prevInputLengthRef = useRef(0);
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
       autoAlign = false,
       className: containerClassName,
+      decorator,
       direction = 'bottom',
       disabled = false,
+      downshiftActions,
       downshiftProps,
       helperText,
       id,
@@ -356,18 +423,23 @@ const ComboBox = forwardRef(
       size,
       titleText,
       translateWithId,
+      typeahead = false,
       warn,
       warnText,
       allowCustomValue = false,
       slug,
       ...rest
     } = props;
-    const { refs, floatingStyles } = useFloating(
-      autoAlign
+
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
+    const { refs, floatingStyles, middlewareData } = useFloating(
+      enableFloatingStyles
         ? {
             placement: direction,
             strategy: 'fixed',
-            middleware: [flip()],
+            middleware: autoAlign ? [flip(), hide()] : undefined,
             whileElementsMounted: autoUpdate,
           }
         : {}
@@ -375,47 +447,99 @@ const ComboBox = forwardRef(
     const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
 
     useEffect(() => {
-      if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+      if (enableFloatingStyles) {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
         if (parentWidth && refs.floating.current) {
           refs.floating.current.style.width = parentWidth + 'px';
         }
       }
-    }, [autoAlign, floatingStyles, refs.floating, parentWidth]);
-    const prefix = usePrefix();
-    const { isFluid } = useContext(FormContext);
-    const textInput = useRef<HTMLInputElement>(null);
-    const comboBoxInstanceId = useId();
+    }, [enableFloatingStyles, floatingStyles, refs.floating, parentWidth]);
+
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
-        inputValue: '',
         itemToString,
         selectedItem: selectedItemProp,
       })
     );
-    const [isFocused, setIsFocused] = useState(false);
-    const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
-    const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
-      useState(false);
-    const savedOnInputChange = useRef(onInputChange);
 
-    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItemProp) {
-      setDoneInitialSelectedItem(true);
-      setPrevSelectedItem(selectedItemProp);
-      setInputValue(
-        getInputValue({
+    const [typeaheadText, setTypeaheadText] = useState('');
+
+    useEffect(() => {
+      if (typeahead) {
+        if (inputValue.length >= prevInputLengthRef.current) {
+          if (inputValue) {
+            const filteredItems = items.filter((item) =>
+              autocompleteCustomFilter({
+                item: itemToString(item),
+                inputValue: inputValue,
+              })
+            );
+            if (filteredItems.length > 0) {
+              const suggestion = itemToString(filteredItems[0]);
+              setTypeaheadText(suggestion.slice(inputValue.length));
+            } else {
+              setTypeaheadText('');
+            }
+          } else {
+            setTypeaheadText('');
+          }
+        } else {
+          setTypeaheadText('');
+        }
+        prevInputLengthRef.current = inputValue.length;
+      }
+    }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
+    const isManualClearingRef = useRef(false);
+    const [isClearing, setIsClearing] = useState(false);
+    const prefix = usePrefix();
+    const { isFluid } = useContext(FormContext);
+    const textInput = useRef<HTMLInputElement>(null);
+    const comboBoxInstanceId = useId();
+    const [isFocused, setIsFocused] = useState(false);
+    const prevInputValue = useRef(inputValue);
+    const prevSelectedItemProp = useRef<ItemType | null | undefined>(
+      selectedItemProp
+    );
+    useEffect(() => {
+      isManualClearingRef.current = isClearing;
+
+      // Reset flag after render cycle
+      if (isClearing) {
+        setIsClearing(false);
+      }
+    }, [isClearing]);
+
+    // fully controlled combobox: handle changes to selectedItemProp
+    useEffect(() => {
+      if (prevSelectedItemProp.current !== selectedItemProp) {
+        const currentInputValue = getInputValue({
           initialSelectedItem,
-          inputValue,
           itemToString,
           selectedItem: selectedItemProp,
-        })
-      );
-    }
+          prevSelectedItem: prevSelectedItemProp.current,
+        });
+        // selectedItem has been updated externally, need to update state and call onChange
+        if (inputValue !== currentInputValue) {
+          setInputValue(currentInputValue);
+          onChange({
+            selectedItem: selectedItemProp,
+            inputValue: currentInputValue,
+          });
+        }
+        prevSelectedItemProp.current = selectedItemProp;
+      }
+    }, [selectedItemProp]);
 
     const filterItems = (
       items: ItemType[],
@@ -423,22 +547,22 @@ const ComboBox = forwardRef(
       inputValue: string | null
     ) =>
       items.filter((item) =>
-        shouldFilterItem
-          ? shouldFilterItem({
-              item,
-              itemToString,
-              inputValue,
-            })
-          : defaultShouldFilterItem()
+        typeahead
+          ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
+          : shouldFilterItem
+            ? shouldFilterItem({
+                item,
+                itemToString,
+                inputValue,
+              })
+            : defaultShouldFilterItem()
       );
 
+    // call onInputChange whenever inputValue is updated
     useEffect(() => {
-      savedOnInputChange.current = onInputChange;
-    }, [onInputChange]);
-
-    useEffect(() => {
-      if (savedOnInputChange.current) {
-        savedOnInputChange.current(inputValue);
+      if (prevInputValue.current !== inputValue) {
+        prevInputValue.current = inputValue;
+        onInputChange && onInputChange(inputValue);
       }
     }, [inputValue]);
 
@@ -460,13 +584,21 @@ const ComboBox = forwardRef(
         inputValue
       );
 
-    const stateReducer = React.useCallback(
+    const stateReducer = useCallback(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
 
         switch (type) {
-          case InputBlur:
+          case InputBlur: {
+            if (allowCustomValue && highlightedIndex == '-1') {
+              const customValue = inputValue as ItemType;
+              changes.selectedItem = customValue;
+              if (onChange) {
+                onChange({ selectedItem: inputValue as ItemType, inputValue });
+              }
+              return changes;
+            }
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
@@ -476,31 +608,77 @@ const ComboBox = forwardRef(
                 ...changes,
                 inputValue: itemToString(changes.selectedItem),
               };
-            } else if (
+            }
+            if (
               state.inputValue &&
               highlightedIndex == '-1' &&
               !allowCustomValue &&
               !changes.selectedItem
             ) {
               return { ...changes, inputValue: '' };
-            } else {
-              return changes;
             }
+            return changes;
+          }
+
           case InputKeyDownEnter:
-            if (allowCustomValue) {
-              setInputValue(inputValue);
-              setHighlightedIndex(changes.selectedItem);
-              if (onChange) {
-                onChange({ selectedItem: changes.selectedItem, inputValue });
+            if (!allowCustomValue) {
+              if (state.highlightedIndex !== -1) {
+                const filteredList = filterItems(
+                  items,
+                  itemToString,
+                  inputValue
+                );
+                const highlightedItem = filteredList[state.highlightedIndex];
+
+                if (highlightedItem && !(highlightedItem as any).disabled) {
+                  return {
+                    ...changes,
+                    selectedItem: highlightedItem,
+                    inputValue: itemToString(highlightedItem),
+                  };
+                }
+              } else {
+                const autoIndex = indexToHighlight(inputValue);
+                if (autoIndex !== -1) {
+                  const matchingItem = items[autoIndex];
+
+                  if (matchingItem && !(matchingItem as any).disabled) {
+                    return {
+                      ...changes,
+                      selectedItem: matchingItem,
+                      inputValue: itemToString(matchingItem),
+                    };
+                  }
+                }
+
+                // If no matching item is found and there is an existing
+                // selection, clear the selection.
+                if (state.selectedItem !== null) {
+                  return {
+                    ...changes,
+                    selectedItem: null,
+                    inputValue,
+                  };
+                }
               }
-              return changes;
-            } else if (changes.selectedItem && !allowCustomValue) {
-              return changes;
-            } else {
-              return { ...changes, isOpen: true };
             }
+
+            // For `allowCustomValue` or if no matching item is found, keep the
+            // menu open.
+            return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
+            if (
+              !changes.isOpen &&
+              state.inputValue &&
+              highlightedIndex === -1 &&
+              !allowCustomValue
+            ) {
+              return {
+                ...changes,
+                inputValue: '', // Clear the input
+              };
+            }
             if (changes.isOpen && !changes.selectedItem) {
               return { ...changes };
             }
@@ -540,6 +718,12 @@ const ComboBox = forwardRef(
         if (onToggleClick) {
           onToggleClick(event);
         }
+        if (readOnly) {
+          // Prevent the list from opening if readOnly is true
+          event.preventDownshiftDefault = true;
+          event?.persist?.();
+          return;
+        }
 
         if (event.target === textInput.current && isOpen) {
           event.preventDownshiftDefault = true;
@@ -553,6 +737,7 @@ const ComboBox = forwardRef(
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
       [`${prefix}--combo-box--readonly`]: readOnly,
+      [`${prefix}--autoalign`]: enableFloatingStyles,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -568,8 +753,8 @@ const ComboBox = forwardRef(
       containerClassName,
       {
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
+        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       },
     ]);
 
@@ -581,26 +766,34 @@ const ComboBox = forwardRef(
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
-    }
+    // AILabel always size `mini`
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
+      : null;
 
     const {
+      // Prop getters
       getInputProps,
       getItemProps,
       getLabelProps,
       getMenuProps,
       getToggleButtonProps,
+
+      // State
       isOpen,
       highlightedIndex,
-      selectItem,
       selectedItem,
-      toggleMenu,
+
+      // Actions
+      closeMenu,
+      openMenu,
+      reset,
+      selectItem,
       setHighlightedIndex,
+      setInputValue: downshiftSetInputValue,
+      toggleMenu,
     } = useCombobox({
       items: filterItems(items, itemToString, inputValue),
       inputValue: inputValue,
@@ -608,11 +801,9 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        setInputValue(inputValue || '');
-        setHighlightedIndex(indexToHighlight(inputValue));
-      },
-      onSelectedItemChange({ selectedItem }) {
-        onChange({ selectedItem });
+        const normalizedInput = inputValue || '';
+        setInputValue(normalizedInput);
+        setHighlightedIndex(indexToHighlight(normalizedInput));
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
         if (highlightedIndex! > -1 && typeof window !== undefined) {
@@ -632,11 +823,53 @@ const ComboBox = forwardRef(
       inputId: id,
       stateReducer,
       isItemDisabled(item, _index) {
-        return (item as any).disabled;
+        return (item as any)?.disabled;
       },
       ...downshiftProps,
+      onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        downshiftProps?.onStateChange?.({
+          type,
+          selectedItem: newSelectedItem,
+        });
+        if (isManualClearingRef.current) {
+          return;
+        }
+        if (
+          (type === ItemClick ||
+            type === FunctionSelectItem ||
+            type === InputKeyDownEnter) &&
+          typeof newSelectedItem !== 'undefined' &&
+          !isEqual(selectedItemProp, newSelectedItem)
+        ) {
+          onChange({ selectedItem: newSelectedItem });
+        }
+      },
     });
 
+    useEffect(() => {
+      // Used to expose the downshift actions to consumers for use with downshiftProps
+      // An odd pattern, here we mutate the value stored in the ref provided from the consumer.
+      // A riff of https://gist.github.com/gaearon/1a018a023347fe1c2476073330cc5509
+      if (downshiftActions) {
+        downshiftActions.current = {
+          closeMenu,
+          openMenu,
+          reset,
+          selectItem,
+          setHighlightedIndex,
+          setInputValue: downshiftSetInputValue,
+          toggleMenu,
+        };
+      }
+    }, [
+      closeMenu,
+      openMenu,
+      reset,
+      selectItem,
+      setHighlightedIndex,
+      downshiftSetInputValue,
+      toggleMenu,
+    ]);
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
       onClick: handleToggleClick(isOpen),
@@ -658,6 +891,9 @@ const ComboBox = forwardRef(
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus');
+      if (!inputRef.current?.value && evt.type === 'blur') {
+        selectItem(null);
+      }
     };
 
     const readOnlyEventHandlers = readOnly
@@ -667,6 +903,12 @@ const ComboBox = forwardRef(
             if (evt.key !== 'Tab') {
               evt.preventDefault();
             }
+          },
+          onClick: (evt: MouseEvent<HTMLInputElement>) => {
+            // Prevent the default behavior which would open the list
+            evt.preventDefault();
+            // Focus on the element as per readonly input behavior
+            evt.currentTarget.focus();
           },
         }
       : {};
@@ -684,11 +926,10 @@ const ComboBox = forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          'aria-label': deprecatedAriaLabel || ariaLabel,
-          ref: autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles ? refs.setFloating : null,
         }),
       [
-        autoAlign,
+        enableFloatingStyles,
         deprecatedAriaLabel,
         ariaLabel,
         getMenuProps,
@@ -696,6 +937,17 @@ const ComboBox = forwardRef(
       ]
     );
 
+    useEffect(() => {
+      if (textInput.current) {
+        if (inputRef.current && typeaheadText) {
+          const selectionStart = inputValue.length;
+          const selectionEnd = selectionStart + typeaheadText.length;
+
+          inputRef.current.value = inputValue + typeaheadText;
+          inputRef.current.setSelectionRange(selectionStart, selectionEnd);
+        }
+      }
+    }, [inputValue, typeaheadText]);
     return (
       <div className={wrapperClasses}>
         {titleText && (
@@ -715,7 +967,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={warn}
-          ref={autoAlign ? refs.setReference : null}
+          ref={enableFloatingStyles ? refs.setReference : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
@@ -727,9 +979,18 @@ const ComboBox = forwardRef(
               aria-haspopup="listbox"
               title={textInput?.current?.value}
               {...getInputProps({
+                'aria-label': titleText
+                  ? undefined
+                  : deprecatedAriaLabel || ariaLabel,
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
-                ref: { ...mergeRefs(textInput, ref) },
+                value: inputValue,
+                onChange: (e) => {
+                  const newValue = e.target.value;
+                  setInputValue(newValue);
+                  downshiftSetInputValue(newValue);
+                },
+                ref: mergeRefs(textInput, ref, inputRef),
                 onKeyDown: (
                   event: KeyboardEvent<HTMLInputElement> & {
                     preventDownshiftDefault: boolean;
@@ -759,8 +1020,13 @@ const ComboBox = forwardRef(
                     // Since `onChange` does not normally fire when the menu is closed, we should
                     // manually fire it when `allowCustomValue` is provided, the menu is closing,
                     // and there is a value.
-                    if (allowCustomValue && isOpen && inputValue) {
-                      onChange({ selectedItem, inputValue });
+                    if (
+                      allowCustomValue &&
+                      isOpen &&
+                      inputValue &&
+                      highlightedIndex === -1
+                    ) {
+                      onChange({ selectedItem: null, inputValue });
                     }
 
                     event.preventDownshiftDefault = true;
@@ -798,6 +1064,30 @@ const ComboBox = forwardRef(
                       toggleMenu();
                     }
                   }
+                  if (
+                    !inputValue &&
+                    highlightedIndex == -1 &&
+                    event.key == 'Enter'
+                  ) {
+                    if (!isOpen) toggleMenu();
+                    selectItem(null);
+                    event.preventDownshiftDefault = true;
+                    if (event.currentTarget.ariaExpanded === 'false')
+                      openMenu();
+                  }
+                  if (typeahead && event.key === 'Tab') {
+                    //  event.preventDefault();
+                    const matchingItem = items.find((item) =>
+                      itemToString(item)
+                        .toLowerCase()
+                        .startsWith(inputValue.toLowerCase())
+                    );
+                    if (matchingItem) {
+                      const newValue = itemToString(matchingItem);
+                      downshiftSetInputValue(newValue);
+                      selectItem(matchingItem);
+                    }
+                  }
                 },
               })}
               {...rest}
@@ -817,7 +1107,11 @@ const ComboBox = forwardRef(
             {inputValue && (
               <ListBoxSelection
                 clearSelection={() => {
+                  setIsClearing(true); // This updates the state which syncs to the ref
+                  setInputValue('');
+                  onChange({ selectedItem: null });
                   selectItem(null);
+                  handleSelectionClear();
                 }}
                 translateWithId={translateWithId}
                 disabled={disabled || readOnly}
@@ -827,12 +1121,19 @@ const ComboBox = forwardRef(
             )}
             <ListBoxTrigger
               {...buttonProps}
-              // @ts-expect-error
               isOpen={isOpen}
               translateWithId={translateWithId}
             />
           </div>
-          {normalizedSlug}
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
           <ListBox.Menu {...menuProps}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
@@ -928,6 +1229,11 @@ ComboBox.propTypes = {
   className: PropTypes.string,
 
   /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `ComboBox` component
+   */
+  decorator: PropTypes.node,
+
+  /**
    * Specify the direction of the combobox dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
@@ -938,14 +1244,30 @@ ComboBox.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<
+  downshiftProps: PropTypes.object as PropTypes.Validator<
     UseComboboxProps<unknown>
   >,
+
+  /**
+   * Provide a ref that will be mutated to contain an object of downshift
+   * action functions. These can be called to change the internal state of the
+   * downshift useCombobox hook.
+   *
+   * **Use with caution:** calling these actions modifies the internal state of
+   * downshift. It may conflict with or override the state management used within
+   * Combobox. Downshift APIs and internals are subject to change, and in some
+   * cases they can not be shimmed by Carbon to shield you from potentially breaking
+   * changes.
+   */
+  downshiftActions: PropTypes.exact({ current: PropTypes.any }),
+
   /**
    * Provide helper text that is used alongside the control label for
    * additional help
@@ -1052,18 +1374,19 @@ ComboBox.propTypes = {
    * Specify your own filtering logic by passing in a `shouldFilterItem`
    * function that takes in the current input and an item and passes back
    * whether or not the item should be filtered.
+   * this prop will be ignored if `typeahead` prop is enabled
    */
   shouldFilterItem: PropTypes.func,
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
@@ -1076,6 +1399,11 @@ ComboBox.propTypes = {
    * and returns the localized string for the message
    */
   translateWithId: PropTypes.func,
+
+  /**
+   * **Experimental**: will enable autocomplete and typeahead for the input field
+   */
+  typeahead: PropTypes.bool,
 
   /**
    * Specify whether the control is currently in warning state
@@ -1092,8 +1420,8 @@ type ComboboxComponentProps<ItemType> = PropsWithRef<
   PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
 >;
 
-interface ComboBoxComponent {
-  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
+export interface ComboBoxComponent {
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
 }
 
 export default ComboBox as ComboBoxComponent;

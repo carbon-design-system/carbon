@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import TreeView from './TreeView';
-import TreeNode from './TreeNode';
-import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen, within } from '@testing-library/react';
+
+import React from 'react';
+import TreeNode from './TreeNode';
+import TreeView from './TreeView';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
@@ -43,6 +44,29 @@ describe('TreeView', () => {
           <TreeNode isExpanded={true} data-testid="Node 1" label="Node 1">
             <TreeNode data-testid="Node 2" label="Node 2" />
           </TreeNode>
+        </TreeView>
+      );
+
+      const nodeParent = screen.getByTestId('Node 1');
+      const nodeChild = screen.getByTestId('Node 2');
+
+      expect(nodeParent).toHaveClass(`${prefix}--tree-parent-node`);
+      expect(nodeChild).toHaveClass(`${prefix}--tree-leaf-node`);
+
+      expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
+      expect(within(nodeChild).getByText('Node 2')).toBeInTheDocument();
+    });
+
+    it('should render children as expected when treenode is wrapped in a component', () => {
+      render(
+        <TreeView label="Tree View">
+          <div>
+            <TreeNode isExpanded={true} data-testid="Node 1" label="Node 1">
+              <div>
+                <TreeNode data-testid="Node 2" label="Node 2" />
+              </div>
+            </TreeNode>
+          </div>
         </TreeView>
       );
 
@@ -227,5 +251,436 @@ describe('TreeView', () => {
         `${prefix}--tree-node--with-icon`
       );
     });
+  });
+
+  describe('keyboard navigation', () => {
+    it('should focus on the first child node when right arrow is pressed on an expanded parent node', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <TreeView label="Tree View">
+          <TreeNode
+            data-testid="parent-node"
+            label="Parent Node"
+            isExpanded={true}>
+            <TreeNode data-testid="child-node-1" label="Child Node 1" />
+            <TreeNode data-testid="child-node-2" label="Child Node 2" />
+          </TreeNode>
+        </TreeView>
+      );
+
+      const parentNode = screen.getByTestId('parent-node');
+      const childNode1 = screen.getByTestId('child-node-1');
+
+      // Focus on the parent node
+      parentNode.focus();
+      expect(parentNode).toHaveFocus();
+
+      // Press the right arrow key
+      await user.keyboard('[ArrowRight]');
+
+      // Check if the first child node is now focused
+      expect(childNode1).toHaveFocus();
+    });
+
+    it('should expand a collapsed parent node when right arrow is pressed', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <TreeView label="Tree View">
+          <TreeNode
+            data-testid="parent-node"
+            label="Parent Node"
+            isExpanded={false}>
+            <TreeNode data-testid="child-node" label="Child Node" />
+          </TreeNode>
+        </TreeView>
+      );
+
+      const parentNode = screen.getByTestId('parent-node');
+
+      // Initially, the parent node should not be expanded
+      expect(parentNode).not.toHaveAttribute('aria-expanded', 'true');
+
+      // Focus on the parent node
+      parentNode.focus();
+      expect(parentNode).toHaveFocus();
+
+      // Press the right arrow key
+      await user.keyboard('[ArrowRight]');
+
+      // The parent node should now be expanded
+      expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+
+      // Now that the parent is expanded, we can check for the child node
+      const childNode = screen.getByTestId('child-node');
+      expect(childNode).toBeInTheDocument();
+
+      // The parent node should still have focus
+      expect(parentNode).toHaveFocus();
+    });
+  });
+  it('should respect multiselect prop (deselecting nodes)', async () => {
+    const user = userEvent.setup();
+    render(
+      <TreeView multiselect label="Tree">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+      </TreeView>
+    );
+    const lists = screen.getAllByRole('treeitem');
+    await user.keyboard('[ControlLeft>]');
+    await user.click(lists[0]);
+    await user.click(lists[1]);
+    expect(lists[0]).toHaveAttribute('aria-selected', 'true');
+    expect(lists[1]).toHaveAttribute('aria-selected', 'true');
+    await user.keyboard('[ControlLeft>]');
+    await user.click(lists[0]);
+    expect(lists[0]).toHaveAttribute('aria-selected', 'false');
+    expect(lists[1]).toHaveAttribute('aria-selected', 'true');
+  });
+  it('should render tree with custom icons', () => {
+    const CustomIcon = () => <svg data-testid="test-icon" />;
+    render(
+      <TreeView label="Tree View">
+        <TreeNode renderIcon={CustomIcon} data-testid="Node 1" label="Node 1" />
+      </TreeView>
+    );
+    expect(screen.getByTestId('test-icon')).toBeInTheDocument();
+  });
+
+  it('should expand a collapsed parent node when right arrow is pressed', async () => {
+    const user = userEvent.setup();
+    render(
+      <TreeView label="Tree View">
+        <TreeNode
+          data-testid="parent-node"
+          label="Parent Node"
+          isExpanded={false}>
+          <TreeNode data-testid="child-node" label="Child Node" />
+        </TreeNode>
+      </TreeView>
+    );
+    const parentNode = screen.getByTestId('parent-node');
+    expect(parentNode).not.toHaveAttribute('aria-expanded', 'true');
+    parentNode.focus();
+    expect(parentNode).toHaveFocus();
+    await user.keyboard('[ArrowRight]');
+    expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+    const childNode = screen.getByTestId('child-node');
+    expect(childNode).toBeInTheDocument();
+  });
+  it('should navigate between nodes using ArrowUp and ArrowDown', async () => {
+    const user = userEvent.setup();
+    render(
+      <TreeView label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+      </TreeView>
+    );
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    node1.focus();
+    expect(node1).toHaveFocus();
+    await user.keyboard('[ArrowDown]');
+    expect(node2).toHaveFocus();
+    await user.keyboard('[ArrowUp]');
+    expect(node1).toHaveFocus();
+  });
+
+  it('should not render label when hideLabel is true', () => {
+    render(
+      <TreeView label="Tree View" hideLabel>
+        <TreeNode id="Node 1" label="Node 1" />
+      </TreeView>
+    );
+    expect(screen.queryByText('Tree View')).not.toBeInTheDocument();
+  });
+
+  it('should render custom icons in TreeNode', () => {
+    const CustomIcon = () => <svg data-testid="custom-icon" />;
+
+    render(
+      <TreeView label="Tree View">
+        <TreeNode id="Node 1" label="Node 1" renderIcon={CustomIcon} />
+        <TreeNode id="Node 2" label="Node 2" />
+      </TreeView>
+    );
+
+    const node1Icon = screen.getByTestId('custom-icon');
+    const node2 = screen.getByText('Node 2');
+
+    expect(node1Icon).toBeInTheDocument();
+    expect(node2.querySelector('svg')).toBeNull();
+  });
+  it('should render the label correctly', () => {
+    render(
+      <TreeView label="My Tree View">
+        <TreeNode id="Node 1" label="Node 1" />
+        <TreeNode id="Node 2" label="Node 2" />
+      </TreeView>
+    );
+
+    expect(screen.getByLabelText('My Tree View')).toBeInTheDocument();
+  });
+
+  it('should collapse an expanded parent node when left arrow is pressed', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView label="Tree View">
+        <TreeNode
+          data-testid="parent-node"
+          label="Parent Node"
+          isExpanded={true}>
+          <TreeNode data-testid="child-node" label="Child Node" />
+        </TreeNode>
+      </TreeView>
+    );
+
+    const parentNode = screen.getByTestId('parent-node');
+
+    // Initially, the parent node should be expanded
+    expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+
+    // Focus on the parent node
+    parentNode.focus();
+    await user.keyboard('[ArrowLeft]');
+
+    // The parent node should now be collapsed
+    expect(parentNode).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should deselect a node when clicked again in multiselect mode', async () => {
+    const user = userEvent.setup();
+    render(
+      <TreeView multiselect label="Tree">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+      </TreeView>
+    );
+
+    const lists = screen.getAllByRole('treeitem');
+    await user.keyboard('[ControlLeft>]');
+    await user.click(lists[0]);
+    await user.click(lists[1]);
+
+    expect(lists[0]).toHaveAttribute('aria-selected', 'true');
+    expect(lists[1]).toHaveAttribute('aria-selected', 'true');
+
+    // Deselect Node 1
+    await user.keyboard('[ControlLeft>]');
+    await user.click(lists[0]);
+
+    expect(lists[0]).toHaveAttribute('aria-selected', 'false');
+    expect(lists[1]).toHaveAttribute('aria-selected', 'true');
+  });
+  it('should not allow interaction with disabled nodes', async () => {
+    const user = userEvent.setup();
+    render(
+      <TreeView label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" disabled={true} />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+
+    // The disabled node should not be focusable
+    await user.tab();
+    expect(node1).toHaveFocus();
+
+    // The disabled node should also not be clickable
+    fireEvent.click(node2);
+    expect(node2).not.toHaveClass(`${prefix}--tree-node--selected`);
+  });
+  it('should select nodes correctly when Home/End keys are used with multiselect and shiftKey+ctrlKey', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView multiselect label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+        <TreeNode data-testid="Node 3" label="Node 3" />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    const node3 = screen.getByTestId('Node 3');
+
+    await user.click(node2);
+    expect(node2).toHaveFocus();
+    await user.keyboard('[ControlLeft>][ShiftLeft>][Home]');
+    expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
+  });
+  it('should select nodes correctly when Home key is used with multiselect and shiftKey+ctrlKey', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView multiselect label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+        <TreeNode data-testid="Node 3" label="Node 3" />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    const node3 = screen.getByTestId('Node 3');
+
+    await user.click(node2);
+    expect(node2).toHaveFocus();
+
+    await user.keyboard('[ControlLeft>][ShiftLeft>][Home]');
+
+    expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node3).not.toHaveClass(`${prefix}--tree-node--selected`);
+  });
+
+  it('should select multiple nodes when Home key is pressed with Shift and Ctrl keys', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView multiselect label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+        <TreeNode data-testid="Node 3" label="Node 3" />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    const node3 = screen.getByTestId('Node 3');
+
+    await user.click(node2);
+    expect(node2).toHaveFocus();
+    await user.keyboard('[ControlLeft>][ShiftLeft>][Home]');
+    expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node3).not.toHaveClass(`${prefix}--tree-node--selected`);
+  });
+  it('should select nodes correctly when ctrl+A is pressed', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView multiselect label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+        <TreeNode data-testid="Node 3" label="Node 3" />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    const node3 = screen.getByTestId('Node 3');
+
+    await user.click(node1);
+    expect(node1).toHaveFocus();
+
+    await user.keyboard('[ControlLeft>]A');
+
+    expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node3).toHaveClass(`${prefix}--tree-node--selected`);
+  });
+
+  it('should expand a collapsed parent node when Enter key is pressed', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView label="Tree View">
+        <TreeNode
+          data-testid="parent-node"
+          label="Parent Node"
+          isExpanded={false}>
+          <TreeNode data-testid="child-node" label="Child Node" />
+        </TreeNode>
+      </TreeView>
+    );
+
+    const parentNode = screen.getByTestId('parent-node');
+
+    // Initially, the parent node should not be expanded
+    expect(parentNode).not.toHaveAttribute('aria-expanded', 'true');
+
+    // Focus on the parent node
+    parentNode.focus();
+    expect(parentNode).toHaveFocus();
+
+    // Press the Enter key
+    await user.keyboard('[Enter]');
+
+    // The parent node should now be expanded
+    expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+
+    // Child node should be visible
+    const childNode = screen.getByTestId('child-node');
+    expect(childNode).toBeInTheDocument();
+  });
+
+  it('should collapse an expanded parent node when Enter key is pressed', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView label="Tree View">
+        <TreeNode
+          data-testid="parent-node"
+          label="Parent Node"
+          isExpanded={true}>
+          <TreeNode data-testid="child-node" label="Child Node" />
+        </TreeNode>
+      </TreeView>
+    );
+
+    const parentNode = screen.getByTestId('parent-node');
+
+    // Initially, the parent node should be expanded
+    expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+
+    // Focus on the parent node
+    parentNode.focus();
+    expect(parentNode).toHaveFocus();
+
+    // Press the Enter key
+    await user.keyboard('[Enter]');
+
+    // The parent node should now be collapsed
+    expect(parentNode).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should expand/collapse nodes with Enter key while maintaining selection', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView label="Tree View">
+        <TreeNode
+          data-testid="parent-node"
+          label="Parent Node"
+          isExpanded={false}>
+          <TreeNode data-testid="child-node" label="Child Node" />
+        </TreeNode>
+      </TreeView>
+    );
+
+    const parentNode = screen.getByTestId('parent-node');
+
+    // Focus and select the parent node
+    parentNode.focus();
+    await user.click(parentNode);
+    expect(parentNode).toHaveClass(`${prefix}--tree-node--selected`);
+
+    // Press Enter to expand
+    await user.keyboard('[Enter]');
+    expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+    expect(parentNode).toHaveClass(`${prefix}--tree-node--selected`); // Should still be selected
+
+    // Press Enter again to collapse
+    await user.keyboard('[Enter]');
+    expect(parentNode).toHaveAttribute('aria-expanded', 'false');
+    expect(parentNode).toHaveClass(`${prefix}--tree-node--selected`); // Should still be selected
   });
 });

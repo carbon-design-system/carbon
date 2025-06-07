@@ -1,0 +1,45 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/components/pagination' as *;
+@use '@carbon/styles/scss/utilities/visually-hidden' as *;
+
+:host(#{$prefix}-pagination) {
+  @extend .#{$prefix}--pagination;
+
+  position: relative;
+  outline: none;
+
+  .#{$prefix}-ce--pagination__divider {
+    background-color: $layer-accent-01;
+    block-size: 100%;
+    inline-size: to-rem(1px);
+  }
+
+  .#{$prefix}--pagination__control-buttons {
+    block-size: 100%;
+  }
+
+  .#{$prefix}--pagination__button svg {
+    transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+  }
+}
+
+:host(#{$prefix}-pagination[size='sm']) {
+  @extend .#{$prefix}--pagination--sm;
+}
+
+:host(#{$prefix}-pagination[size='lg']) {
+  @extend .#{$prefix}--pagination--lg;
+}

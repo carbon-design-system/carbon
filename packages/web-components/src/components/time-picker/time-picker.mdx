@@ -1,0 +1,40 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TimePickerStories from './time-picker.stories';
+
+<Meta of={TimePickerStories} />
+
+# Time Picker
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/time-picker)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/date-picker/usage#time-picker)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/date-picker/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={TimePickerStories.Default} />
+
+## Component API
+
+## `cds-time-picker`
+<ArgTypes of="cds-time-picker" />
+
+## `cds-time-picker-select`
+<ArgTypes of="cds-time-picker-select" />
+
+<Markdown>{`${cdnJs({ components: ['time-picker'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/time-picker/time-picker.mdx).

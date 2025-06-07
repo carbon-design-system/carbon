@@ -66,8 +66,7 @@
 
   .#{$prefix}--unstable-pagination__right
     .#{$prefix}--unstable-pagination__text {
-    margin-inline-end: $spacing-05;
-    margin-inline-start: convert.to-rem(1px);
+    margin-inline: convert.to-rem(1px) $spacing-05;
   }
 
   .#{$prefix}--unstable-pagination__button {
@@ -86,7 +85,8 @@
     fill: $icon-primary;
     inline-size: convert.to-rem(40px);
     min-block-size: convert.to-rem(32px);
-    transition: outline $duration-fast-02 motion(standard, productive),
+    transition:
+      outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
   }
 

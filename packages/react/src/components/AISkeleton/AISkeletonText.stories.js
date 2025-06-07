@@ -16,4 +16,6 @@ export default {
   component: AISkeletonText,
 };
 
-export const _AISkeletonText = () => <AISkeletonText />;
+export const _AISkeletonText = () => {
+  return <AISkeletonText />;
+};

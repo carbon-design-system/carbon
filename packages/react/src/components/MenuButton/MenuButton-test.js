@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { MenuItem, MenuItemSelectable, MenuItemRadioGroup } from '../Menu';
+import { MenuItem } from '../Menu';
 
 import { MenuButton } from './';
 
@@ -116,56 +116,103 @@ describe('MenuButton', () => {
       expect(screen.getByRole('menuitem')).toHaveTextContent(/^Action$/);
     });
 
-    it('warns when MenuItemSelectable is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    it('has basic keyboard support', async () => {
+      const onClick = jest.fn();
 
       render(
-        <MenuButton label="Primary action">
-          <MenuItemSelectable label="Option" />
+        <MenuButton label="Actions">
+          <MenuItem label="Action 1" />
+          <MenuItem label="Action 2" onClick={onClick} />
         </MenuButton>
       );
 
-      await userEvent.click(screen.getByRole('button'));
+      expect(document.body).toHaveFocus();
 
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
+      // Tab to MenuButton.
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
+
+      // Open the menu with Enter.  Focus moves to first MenuItem.
+      await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+      const menuItem1 = screen.getByRole('menuitem', { name: 'Action 1' });
+      expect(menuItem1).toHaveFocus();
+
+      // Close the menu with Escape.  Focus should move back to MenuButton.
+      await userEvent.keyboard('{Escape}');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(menuButton).toHaveFocus();
+      expect(onClick).not.toHaveBeenCalled();
+
+      // Open the menu with Space.  Focus moves to first MenuItem.
+      await userEvent.keyboard(' ');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+      const menuItem1Again = screen.getByRole('menuitem', { name: 'Action 1' });
+      expect(menuItem1Again).toHaveFocus();
+
+      // Arrow down to second MenuItem.
+      await userEvent.keyboard('{ArrowDown}');
+      const menuItem2 = screen.getByRole('menuitem', { name: 'Action 2' });
+      expect(menuItem2).toHaveFocus();
+
+      // Click the second MenuItem with Enter.  Menu should close, and focus should move back to MenuButton.
+      await userEvent.keyboard('{Enter}');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(menuButton).toHaveFocus();
+      expect(onClick).toHaveBeenCalled();
     });
 
-    it('warns when MenuItemRadioGoup is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
+    it('does not steal focus', async () => {
       render(
-        <MenuButton label="Primary action">
-          <MenuItemRadioGroup
-            label="Options"
-            items={['Option 1', 'Option 2']}
-          />
-        </MenuButton>
+        <>
+          <MenuButton label="Actions">
+            <MenuItem
+              label="Action"
+              onClick={() => {
+                // This focus() should "override" Carbon's behavior to focus the MenuButton.
+                document.querySelector('input')?.focus();
+              }}
+            />
+          </MenuButton>
+          <input />
+        </>
       );
 
-      await userEvent.click(screen.getByRole('button'));
+      expect(document.body).toHaveFocus();
 
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
+      // Tab to MenuButton.
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
 
-    it('warns when a nested Menu is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      // Open the menu with Enter.  Focus moves to MenuItem.
+      await userEvent.keyboard('{Enter}');
+      const menuItem = screen.getByRole('menuitem', { name: 'Action' });
+      expect(menuItem).toHaveFocus();
 
-      render(
-        <MenuButton label="Primary action">
-          <MenuItem label="Submenu">
-            <MenuItem label="Action" />
-          </MenuItem>
-        </MenuButton>
-      );
+      // Click the MenuItem with Enter.  Menu should close, and focus should move to <input>.
+      await userEvent.keyboard('{Enter}');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveFocus();
 
-      await userEvent.click(screen.getByRole('button'));
+      // Shift-tab to MenuButton.
+      await userEvent.tab({ shift: true });
+      expect(menuButton).toHaveFocus();
 
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
+      // Open the menu with Space.  Focus moves to MenuItem.
+      await userEvent.keyboard(' ');
+      const menuItemAgain = screen.getByRole('menuitem', { name: 'Action' });
+      expect(menuItemAgain).toHaveFocus();
+
+      // Click the MenuItem with Space.  Menu should close, and focus should move to <input>.
+      await userEvent.keyboard(' ');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(input).toHaveFocus();
     });
   });
+
   describe('supports props.menuAlignment', () => {
     const alignments = [
       'top',

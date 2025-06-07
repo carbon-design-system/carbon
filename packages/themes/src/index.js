@@ -13,6 +13,8 @@ import * as v10 from './v10';
 import * as buttonTokens from './component-tokens/button';
 import * as tagTokens from './component-tokens/tag';
 import * as notificationTokens from './component-tokens/notification';
+import * as statusTokens from './component-tokens/status';
+import * as contentSwitcherTokens from './component-tokens/content-switcher';
 import { formatTokenName } from './tools';
 import { unstable_metadata } from './tokens';
 
@@ -34,6 +36,8 @@ export {
   buttonTokens,
   tagTokens,
   notificationTokens,
+  statusTokens,
+  contentSwitcherTokens,
   unstable_metadata,
   formatTokenName,
 };

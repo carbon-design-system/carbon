@@ -1,15 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
-import { ReactAttr } from '../../types/common';
+import React, { type HTMLAttributes } from 'react';
 
-export interface TableBodyProps extends ReactAttr<HTMLTableSectionElement> {
+export interface TableBodyProps
+  extends HTMLAttributes<HTMLTableSectionElement> {
   /**
    * `polite` Adjust the notification behavior of screen readers
    */
@@ -18,7 +18,7 @@ export interface TableBodyProps extends ReactAttr<HTMLTableSectionElement> {
 
 const TableBody = ({ children, className, ...rest }: TableBodyProps) => (
   <tbody
-    aria-live={'polite' || rest['aria-live']}
+    aria-live={rest['aria-live'] ?? 'polite'}
     className={className}
     {...rest}>
     {children}

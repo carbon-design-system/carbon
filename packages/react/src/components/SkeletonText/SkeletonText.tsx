@@ -17,7 +17,7 @@ function getRandomInt(min: number, max: number, n: number) {
   return Math.floor(randoms[n % 3] * (max - min + 1)) + min;
 }
 
-interface SkeletonTextProps {
+export interface SkeletonTextProps {
   /**
    * Specify an optional className to be applied to the container node.
    */
@@ -103,7 +103,9 @@ const SkeletonText = ({
       <p
         className={skeletonTextClasses}
         key={i}
-        ref={(el) => (refs.current = [...refs.current, el])}
+        ref={(el) => {
+          refs.current = [...refs.current, el];
+        }}
         {...rest}
       />
     );

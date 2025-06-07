@@ -11,7 +11,7 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import ExpandableSearch from '../ExpandableSearch';
 import Search from '.';
-import Button from '../Button';
+import mdx from './Search.mdx';
 
 export default {
   title: 'Components/Search',
@@ -26,87 +26,88 @@ export default {
   subcomponents: {
     ExpandableSearch,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <Search
-    size="lg"
-    placeholder="Find your items"
-    labelText="Search"
-    closeButtonLabelText="Clear search input"
-    id="search-1"
-    onChange={() => {}}
-    onKeyDown={() => {}}
-  />
-);
+export const Disabled = () => {
+  return (
+    <Search
+      disabled
+      size="lg"
+      placeholder="Find your items"
+      labelText="Search"
+      closeButtonLabelText="Clear search input"
+      id="search-1"
+      onChange={() => {}}
+      onKeyDown={() => {}}
+    />
+  );
+};
 
-export const Disabled = () => (
-  <Search
-    disabled
-    size="lg"
-    placeholder="Find your items"
-    labelText="Search"
-    closeButtonLabelText="Clear search input"
-    id="search-1"
-    onChange={() => {}}
-    onKeyDown={() => {}}
-  />
-);
+export const Expandable = () => {
+  return (
+    <ExpandableSearch
+      size="lg"
+      labelText="Search"
+      closeButtonLabelText="Clear search input"
+      id="search-expandable-1"
+      onChange={() => {}}
+      onKeyDown={() => {}}
+    />
+  );
+};
 
-export const Expandable = () => (
-  <ExpandableSearch
-    size="lg"
-    labelText="Search"
-    closeButtonLabelText="Clear search input"
-    id="search-expandable-1"
-    onChange={() => {}}
-    onKeyDown={() => {}}
-  />
-);
+export const _WithLayer = () => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <Search
+          size="lg"
+          placeholder="Find your items"
+          labelText="Search"
+          closeButtonLabelText="Clear search input"
+          id={`search-${layer}`}
+          onChange={() => {}}
+          onKeyDown={() => {}}
+        />
+      )}
+    </WithLayer>
+  );
+};
 
-export const _WithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <Search
-        size="lg"
-        placeholder="Find your items"
-        labelText="Search"
-        closeButtonLabelText="Clear search input"
-        id={`search-${layer}`}
-        onChange={() => {}}
-        onKeyDown={() => {}}
-      />
-    )}
-  </WithLayer>
-);
+export const ExpandableWithLayer = () => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <ExpandableSearch
+          size="lg"
+          placeholder="Search"
+          labelText="First Layer"
+          closeButtonLabelText="Clear search input"
+          id={`search-expandable-${layer}`}
+          onChange={() => {}}
+          onKeyDown={() => {}}
+        />
+      )}
+    </WithLayer>
+  );
+};
 
-export const ExpandableWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <ExpandableSearch
-        size="lg"
-        placeholder="Search"
-        labelText="First Layer"
-        closeButtonLabelText="Clear search input"
-        id={`search-expandable-${layer}`}
-        onChange={() => {}}
-        onKeyDown={() => {}}
-      />
-    )}
-  </WithLayer>
-);
+export const Default = (args) => {
+  return (
+    <div style={{ width: args.defaultWidth }}>
+      <Search id="search-default-1" {...args} />
+    </div>
+  );
+};
 
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
-    <Search id="search-playground-1" {...args} />
-  </div>
-);
-
-Playground.args = {
-  playgroundWidth: 300,
+Default.args = {
   closeButtonLabelText: 'Clear search input',
   disabled: false,
-  defaultValue: 'Default value',
   labelText: 'Label text',
   placeholder: 'Placeholder text',
   role: 'searchbox',
@@ -114,8 +115,8 @@ Playground.args = {
   type: 'text',
 };
 
-Playground.argTypes = {
-  playgroundWidth: {
+Default.argTypes = {
+  defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   className: {

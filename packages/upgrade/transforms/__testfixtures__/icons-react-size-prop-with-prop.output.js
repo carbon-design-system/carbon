@@ -2,9 +2,7 @@ import { Add, Bee, Chevron as chevron } from '@carbon/icons-react';
 
 const mapped = {
   default: Add,
-  // prettier-ignore
   size: props => <Bee size={24} {...props} />,
-  // prettier-ignore
   lowercase: props => React.createElement(chevron, {
     size: 24,
     ...props
@@ -12,11 +10,10 @@ const mapped = {
 };
 
 function RenderIconProp() {
-  // prettier-ignore
   return (
-    <div>
+    (<div>
       <DefaultSize renderIcon={Add} />
       <Size renderIcon={props => <Bee size={24} {...props} />} />
-    </div>
+    </div>)
   );
 }

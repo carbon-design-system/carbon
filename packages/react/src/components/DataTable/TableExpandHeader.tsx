@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,13 +8,12 @@
 import { ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes, { Validator } from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import { ReactAttr } from '../../types/common';
 
-type TableExpandHeaderPropsBase = {
+export type TableExpandHeaderPropsBase = {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandHeader
    */
@@ -31,7 +30,7 @@ type TableExpandHeaderPropsBase = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ['aria-label']: string;
+  ['aria-label']?: string;
 
   /**
    * @deprecated The enableExpando prop is being replaced by `enableToggle`
@@ -54,24 +53,25 @@ type TableExpandHeaderPropsBase = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand?(event: React.MouseEvent<HTMLButtonElement>): void;
-} & ReactAttr<HTMLTableCellElement>;
+} & HTMLAttributes<HTMLTableCellElement>;
 
-type TableExpandHeaderPropsWithToggle = Omit<
+export type TableExpandHeaderPropsWithToggle = Omit<
   TableExpandHeaderPropsBase,
-  'ariaLabel' | 'aria-label' | 'enableToggle' | 'onExpand'
+  'aria-label' | 'enableToggle' | 'onExpand'
 > & {
   enableToggle: true;
-  ariaLabel: string;
   ['aria-label']: string;
   onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
-type TableExpandHeaderPropsWithExpando = Omit<
+export type TableExpandHeaderPropsWithExpando = Omit<
   TableExpandHeaderPropsBase,
-  'ariaLabel' | 'aria-label' | 'enableExpando' | 'onExpand'
+  'aria-label' | 'enableExpando' | 'onExpand'
 > & {
+  /**
+   * @deprecated The enableExpando prop is being replaced by `enableToggle`
+   */
   enableExpando: true;
-  ariaLabel: string;
   ['aria-label']: string;
   onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
 };
@@ -150,7 +150,7 @@ TableExpandHeader.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The enableExpando prop is being replaced by enableToggle
+   * The enableExpando prop is being replaced by TableExpandHeader
    */
   enableExpando: deprecate(
     PropTypes.bool,
@@ -185,11 +185,11 @@ TableExpandHeader.propTypes = {
     requiredIfGivenPropIsTruthy(
       'enableExpando',
       PropTypes.func
-    ) as Validator<any>,
+    ) as PropTypes.Validator<any>,
     requiredIfGivenPropIsTruthy(
       'enableToggle',
       PropTypes.func
-    ) as Validator<any>,
+    ) as PropTypes.Validator<any>,
   ]),
 };
 

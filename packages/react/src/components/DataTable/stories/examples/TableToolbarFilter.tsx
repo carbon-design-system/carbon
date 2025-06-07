@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useId, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Filter } from '@carbon/icons-react';
@@ -38,10 +38,7 @@ interface TableToolbarFilterProps {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onChange?: (
-    event: '' | ChangeEvent<HTMLInputElement>,
-    value?: string
-  ) => void;
+  onChange?: (event: '' | ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Provide an function that is called when the apply button is clicked
@@ -63,6 +60,8 @@ const TableToolbarFilter = ({
 }: TableToolbarFilterProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState<string[]>([]);
+
+  const toolbarFilerId = useId();
 
 
   const prefix = usePrefix();
@@ -120,7 +119,7 @@ const TableToolbarFilter = ({
         className={toolbarActionClasses}>
         <Filter />
       </button>
-      <PopoverContent id="containerCheckbox" >
+      <PopoverContent id={toolbarFilerId}>
         <div className={`${prefix}--container-checkbox`}>
           <fieldset className={`${prefix}--fieldset`}>
             <legend className={`${prefix}--label`}>

@@ -128,7 +128,7 @@ test.describe('@avt Accordion', () => {
   test('@avt-advanced-states disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
-      id: 'components-accordion--playground',
+      id: 'components-accordion--default',
       globals: {
         theme: 'white',
       },

@@ -25,22 +25,28 @@ export const Welcome = () => {
       <h4 className="welcome__heading welcome__heading--subtitle">{`v${PackageInfo.version}`}</h4>
       <Stack>
         <Link
-          href="https://v10-react.carbondesignsystem.com/"
+          href="https://carbondesignsystem.com/"
           className="welcome__link"
           renderIcon={ArrowRight}>
-          v10 Storybook
-        </Link>
-        <Link
-          href="https://v10.carbondesignsystem.com/"
-          className="welcome__link"
-          renderIcon={ArrowRight}>
-          v10 website
+          Website
         </Link>
         <Link
           href="https://github.com/carbon-design-system/carbon/tree/main/packages/react"
           className="welcome__link"
           renderIcon={ArrowRight}>
           GitHub repo
+        </Link>
+        <Link
+          href="https://github.com/carbon-design-system/carbon/blob/main/docs/release-schedule.md"
+          className="welcome__link"
+          renderIcon={ArrowRight}>
+          Release schedule
+        </Link>
+        <Link
+          href="https://github.com/carbon-design-system/carbon/blob/main/SECURITY.md"
+          className="welcome__link"
+          renderIcon={ArrowRight}>
+          Security policy
         </Link>
       </Stack>
     </div>

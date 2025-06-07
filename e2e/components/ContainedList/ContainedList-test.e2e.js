@@ -78,14 +78,6 @@ test.describe('ContainedList', () => {
         });
       });
 
-      test('playground @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'ContainedList',
-          id: 'components-containedlist--playground',
-          theme,
-        });
-      });
-
       test('with-expandable-search @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ContainedList',

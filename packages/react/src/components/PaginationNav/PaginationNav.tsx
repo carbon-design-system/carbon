@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,9 @@ import {
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 import { TranslateWithId } from '../../types/common';
+import { breakpoints } from '@carbon/layout';
+import { useMatchMedia } from '../../internal/useMatchMedia';
+import { clamp } from '../../internal/clamp';
 
 const translationIds = {
   'carbon.pagination-nav.next': 'Next',
@@ -79,7 +82,7 @@ function calculateCuts(
   };
 }
 
-interface DirectionButtonProps {
+export interface DirectionButtonProps {
   /**
    * The direction this button represents ("forward" or "backward").
    */
@@ -123,7 +126,7 @@ function DirectionButton({
   );
 }
 
-interface PaginationItemProps
+export interface PaginationItemProps
   extends TranslateWithId<
     'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
   > {
@@ -173,7 +176,7 @@ function PaginationItem({
   );
 }
 
-interface PaginationOverflowProps
+export interface PaginationOverflowProps
   extends TranslateWithId<
     'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
   > {
@@ -277,7 +280,7 @@ function PaginationOverflow({
   return null;
 }
 
-interface PaginationNavProps
+export interface PaginationNavProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'>,
     TranslateWithId<TranslationKey> {
   /**
@@ -292,7 +295,7 @@ interface PaginationNavProps
   disableOverflow?: boolean;
 
   /**
-   * The number of items to be shown.
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown?: number;
 
@@ -312,6 +315,11 @@ interface PaginationNavProps
   page?: number;
 
   /**
+   * Specify the size of the PaginationNav.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
    * The total number of items.
    */
   totalItems?: number;
@@ -327,15 +335,35 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       itemsShown = 10,
       page = 0,
       loop = false,
+      size = 'lg',
       translateWithId: t = translateWithId,
       ...rest
     },
     ref
   ) {
+    const smMediaQuery = `(max-width: ${breakpoints.sm.width})`;
+    const isSm = useMatchMedia(smMediaQuery);
+
+    let numberOfPages: number;
+
+    switch (size) {
+      case 'md':
+        numberOfPages = itemsShown === 4 ? itemsShown : 5;
+        break;
+      case 'sm':
+        numberOfPages = clamp(itemsShown, 4, 7);
+        break;
+
+      default:
+        numberOfPages = 4;
+        break;
+    }
+
     const [currentPage, setCurrentPage] = useState(page);
     const [itemsDisplayedOnPage, setItemsDisplayedOnPage] = useState(
-      itemsShown >= 4 ? itemsShown : 4
+      itemsShown >= 4 && !isSm ? itemsShown : numberOfPages
     );
+
     const [cuts, setCuts] = useState(
       calculateCuts(currentPage, totalItems, itemsDisplayedOnPage)
     );
@@ -377,7 +405,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     function pageWouldBeHidden(page: number) {
       const startOffset = itemsDisplayedOnPage <= 4 && page > 1 ? 0 : 1;
 
-      const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
+      const wouldBeHiddenInFront =
+        (page >= startOffset && page <= cuts.front) || page === 0;
       const wouldBeHiddenInBack =
         page >= totalItems - cuts.back - 1 && page <= totalItems - 2;
 
@@ -391,9 +420,13 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     // re-calculate cuts if props.totalItems or props.itemsShown change
     useEffect(() => {
-      setItemsDisplayedOnPage(itemsShown >= 4 ? itemsShown : 4);
-      setCuts(calculateCuts(currentPage, totalItems, itemsShown));
-    }, [totalItems, itemsShown]); // eslint-disable-line react-hooks/exhaustive-deps
+      const itemsToBeShown =
+        itemsShown >= 4 && !isSm ? itemsShown : numberOfPages;
+      setItemsDisplayedOnPage(Math.max(itemsToBeShown, 4));
+      setCuts(
+        calculateCuts(currentPage, totalItems, Math.max(itemsToBeShown, 4))
+      );
+    }, [totalItems, itemsShown, isSm, size]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // update cuts if necessary whenever currentPage changes
     useEffect(() => {
@@ -428,7 +461,9 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       setIsOverFlowDisabled(disableOverflow);
     }, [disableOverflow]);
 
-    const classNames = classnames(`${prefix}--pagination-nav`, className);
+    const classNames = classnames(`${prefix}--pagination-nav`, className, {
+      [`${prefix}--layout--size-${size}`]: size,
+    });
 
     const backwardButtonDisabled = !loop && currentPage === 0;
     const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
@@ -613,7 +648,7 @@ PaginationNav.propTypes = {
   disableOverflow: PropTypes.bool, // eslint-disable-line react/prop-types
 
   /**
-   * The number of items to be shown.
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown: PropTypes.number,
 
@@ -631,6 +666,11 @@ PaginationNav.propTypes = {
    * The index of current page.
    */
   page: PropTypes.number,
+
+  /**
+   * Specify the size of the PaginationNav.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * The total number of items.

@@ -85,6 +85,20 @@ async function runMigration(migration, workspaces, options) {
   );
 
   await migration.migrate({ ...options, workspaceDir: workspace.directory });
+  // Display post run message if migration provides messageConfig
+  if (migration.messageConfig && !options.dry) {
+    logger.log('\n');
+    logger.log(`🎉 ${migration.messageConfig.name} Migration Complete!`);
+    logger.log('-'.repeat(migration.messageConfig.name.length + 22));
+
+    migration.messageConfig.changes?.forEach((change) => {
+      logger.log(change);
+    });
+
+    migration.messageConfig.nextSteps?.forEach((step) => {
+      logger.log(step);
+    });
+  }
 }
 
 /**

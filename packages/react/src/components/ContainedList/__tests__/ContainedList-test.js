@@ -49,6 +49,34 @@ beforeEach(() => {
 });
 
 describe('ContainedList', () => {
+  it('should apply correct class for kind="on-page"', () => {
+    wrapper.rerender(<TestComponent list={{ kind: 'on-page' }} />);
+    expect(wrapper.container.firstChild).toHaveClass(
+      `${prefix}--contained-list--on-page`
+    );
+  });
+
+  it('should apply correct class for kind="disclosed"', () => {
+    wrapper.rerender(<TestComponent list={{ kind: 'disclosed' }} />);
+    expect(wrapper.container.firstChild).toHaveClass(
+      `${prefix}--contained-list--disclosed`
+    );
+  });
+
+  it('should apply  inset class when isInset is true', () => {
+    wrapper.rerender(<TestComponent list={{ isInset: true }} />);
+    expect(wrapper.container.firstChild).toHaveClass(
+      `${prefix}--contained-list--inset-rulers`
+    );
+  });
+
+  it('should apply not apply inset class when isInset is false', () => {
+    wrapper.rerender(<TestComponent list={{ isInset: false }} />);
+    expect(wrapper.container.firstChild).not.toHaveClass(
+      `${prefix}--contained-list--inset-rulers`
+    );
+  });
+
   it('list and label ids match', () => {
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const list = wrapper.getByRole('list');
@@ -122,6 +150,35 @@ describe('ContainedList', () => {
 
     expect(screen.getByTestId('test-expandable-search-id')).toBeInTheDocument();
     expect(screen.queryByTestId('test-search-id')).not.toBeInTheDocument();
+  });
+
+  it('should render Search as the first child', () => {
+    const { container } = render(
+      <ContainedList label="label">
+        <Search labelText="Search" data-testid="search-child" />
+        <ContainedListItem>Item 1</ContainedListItem>
+        <ContainedListItem>Item 2</ContainedListItem>
+      </ContainedList>
+    );
+
+    // Verify the first child is Search
+    const listItems = container.querySelectorAll('ul');
+    expect(listItems[0]).toContainElement(screen.getByTestId('search-child'));
+  });
+
+  it('should handle action', () => {
+    const action = <button data-testid="action-button">Click me</button>;
+
+    render(
+      <ContainedList label="label" action={action}>
+        <ContainedListItem>Item 1</ContainedListItem>
+        <ContainedListItem>Item 2</ContainedListItem>
+      </ContainedList>
+    );
+
+    const actionButton = screen.getByTestId('action-button');
+    expect(actionButton).toBeInTheDocument();
+    expect(actionButton.tagName).toBe('BUTTON');
   });
 });
 

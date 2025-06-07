@@ -12,7 +12,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-interface TableSelectAllProps {
+export interface TableSelectAllProps {
   /**
    * Specify the aria label for the underlying input control
    * node
@@ -28,7 +28,7 @@ interface TableSelectAllProps {
   /**
    * Specify whether all items are selected, or not
    */
-  checked: boolean;
+  checked?: boolean;
 
   /**
    * The CSS class names of the cell that wraps the underlying input control
@@ -107,7 +107,7 @@ TableSelectAll.propTypes = {
   /**
    * Specify whether all items are selected, or not
    */
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
 
   /**
    * The CSS class names of the cell that wraps the underlying input control

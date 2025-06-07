@@ -6,7 +6,12 @@
  */
 
 import React from 'react';
-import { Theme, useTheme } from '../../Theme';
+import {
+  Theme,
+  useTheme,
+  GlobalTheme,
+  usePrefersDarkScheme,
+} from '../../Theme';
 import { screen, render } from '@testing-library/react';
 import * as hooks from '../../../internal/useMatchMedia';
 
@@ -89,5 +94,50 @@ describe('usePrefersDarkScheme', () => {
     );
 
     expect(screen.getByTestId('default')).toHaveTextContent('dark');
+  });
+
+  it('should call usePrefersDarkScheme', () => {
+    jest.resetModules();
+    usePrefersDarkScheme(); //mock the function
+
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => false);
+    render(
+      <Theme theme="g10">
+        <DarkTestComponent id="default-dark" />
+      </Theme>
+    );
+
+    expect(screen.getByTestId('default-dark')).toHaveTextContent('light');
+    expect(hooks.useMatchMedia).toHaveBeenCalledWith(
+      '(prefers-color-scheme: dark)'
+    );
+  });
+});
+
+describe('GlobalTheme', () => {
+  it('should set the theme globally', () => {
+    jest.resetModules();
+    function TestComponent({ id }) {
+      const { theme } = useTheme();
+      return (
+        <span className="test" data-testid={id}>
+          {theme}
+        </span>
+      );
+    }
+
+    const { container } = render(
+      <GlobalTheme theme="white">
+        <TestComponent id="default" />
+      </GlobalTheme>
+    );
+
+    expect(screen.getByTestId('default')).toHaveTextContent('white');
+    //it does not have any styles or class name like cds--white
+    const divElement = screen.getByTestId('default');
+    const hasCarbonClassName = Array.from(divElement.classList).some(
+      (className) => className.startsWith('cds--')
+    );
+    expect(hasCarbonClassName).toBe(false);
   });
 });

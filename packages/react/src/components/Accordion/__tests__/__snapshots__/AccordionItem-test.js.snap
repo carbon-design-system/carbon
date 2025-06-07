@@ -6,7 +6,7 @@ exports[`AccordionItem renders as expected - Component API should render and mat
     class="cds--accordion__item extra-class"
   >
     <button
-      aria-controls="accordion-item-:r1:"
+      aria-controls="accordion-item-«r1»"
       aria-expanded="false"
       class="cds--accordion__heading"
       type="button"
@@ -38,7 +38,7 @@ exports[`AccordionItem renders as expected - Component API should render and mat
     >
       <div
         class="cds--accordion__content"
-        id="accordion-item-:r1:"
+        id="accordion-item-«r1»"
       >
         Lorem ipsum.
       </div>

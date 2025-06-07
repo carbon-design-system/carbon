@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import prettier from 'prettier';
+import prettier from 'prettier2';
 
 /**
  * Find the HTMLElement that includes the given `text`

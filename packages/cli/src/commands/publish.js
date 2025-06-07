@@ -200,7 +200,6 @@ async function publish({ tag, ...flags }) {
   ]);
 
   if (display) {
-    // eslint-disable-next-line no-console
     console.log(changelog);
   }
 }

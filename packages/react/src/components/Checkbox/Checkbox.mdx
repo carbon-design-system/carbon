@@ -1,6 +1,9 @@
-import { Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Story, Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
 import Checkbox, { CheckboxSkeleton } from '../Checkbox';
 import * as CheckboxStories from './Checkbox.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
 
 # Checkbox
 
@@ -12,8 +15,12 @@ import * as CheckboxStories from './Checkbox.stories';
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Skeleton state](#skeleton-state)
+- [Checkbox](#Checkbox)
+  - [Overview](#overview)
+  - [Horizontal](#horizontal)
+  - [Single](#single)
+  - [Skeleton state](#skeleton-state)
+  - [AI Label](#With-ai-label)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -22,9 +29,15 @@ import * as CheckboxStories from './Checkbox.stories';
 You can build a checkbox using the `Checkbox` in combination with a `<fieldset>`
 element to group controls and `<legend>` element for the label.
 
-<Canvas>
-  <Story of={CheckboxStories.Default} />
-</Canvas>
+<Canvas
+  of={CheckboxStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Default),
+    },
+  ]}
+/>
 
 ### Controlled example
 
@@ -33,9 +46,40 @@ You can also use a controlled checkbox component driven by state:
 ```jsx
 function ExampleComponent() {
   const [isChecked, setIsChecked] = useState(false);
-  return <Checkbox id="checkbox" labelText="checkbox" checked={isChecked} onChange={(_, { checked }) => setIsChecked(checked)} />;
+  return (
+    <Checkbox
+      id="checkbox"
+      labelText="checkbox"
+      checked={isChecked}
+      onChange={(_, { checked }) => setIsChecked(checked)}
+    />
+  );
 }
 ```
+
+## Horizontal
+
+<Canvas
+  of={CheckboxStories.Horizontal}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Horizontal),
+    },
+  ]}
+/>
+
+## Single
+
+<Canvas
+  of={CheckboxStories.Single}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Single),
+    },
+  ]}
+/>
 
 ## Skeleton state
 
@@ -43,14 +87,31 @@ You can use the `CheckboxSkeleton` component to render a skeleton variant of a
 checkbox. This is useful to display while content in your checkbox is being
 fetched from an external resource like an API.
 
-<Canvas>
-  <Story of={CheckboxStories.Skeleton} />
-</Canvas>
+<Canvas
+  of={CheckboxStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Skeleton),
+    },
+  ]}
+/>
+
+## With AI label
+
+<Canvas
+  of={CheckboxStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Component API
 
-<ArgsTable />
-
+<ArgTypes />
 ### Checkbox defaultChecked
 
 You can use the `defaultChecked` prop to specify weather a checkbox is checked

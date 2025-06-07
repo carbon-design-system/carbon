@@ -24,14 +24,14 @@ yarn add @carbon/type
 Design Language. You can use all of these features either in JavaScript or Sass.
 These features include:
 
-| Feature                       | Description                                                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Feature                       | Description                                                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | [Font face](#font-face)       | Include IBM Plex™ font faces in your application. Uses Akamai CDN                                            |
-| [Type classes](#type-classes) | Helpers to use type styles directly. Not included by default                                                 |
+| [Type classes](#type-classes) | Helpers to use type styles directly. Not included by default                                                  |
 | [Font family](#font-family)   | Defines the font stack for IBM Plex™ in your application, provides helpers for working with font definitions |
-| [Reset](#reset)               | Provides a high-level CSS Reset to use in your project                                                       |
-| [Scale](#type-scale)          | Provides the type scale. Can access the size at any given step (step 1, 2, 3, etc)                           |
-| [Styles](#type-styles)        | Provides type styles for your application (heading-01, body-long-01, etc)                                    |
+| [Reset](#reset)               | Provides a high-level CSS Reset to use in your project                                                        |
+| [Scale](#type-scale)          | Provides the type scale. Can access the size at any given step (step 1, 2, 3, etc)                            |
+| [Styles](#type-styles)        | Provides type styles for your application (heading-01, body-long-01, etc)                                     |
 
 The `@carbon/type` package enables you to use typography from the IBM Design
 Language, including the type scale and fonts, along with typography design
@@ -231,9 +231,9 @@ Licensed under the [Apache 2.0 License](/LICENSE).
 
 ## <picture><source height="20" width="20" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-dark.svg"><source height="20" width="20" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"><img height="20" width="20" alt="IBM Telemetry" src="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"></picture> IBM Telemetry
 
-This package uses IBM Telemetry to collect metrics data. By installing this
-package as a dependency you are agreeing to telemetry collection. To opt out,
-see
+This package uses IBM Telemetry to collect de-identified and anonymized metrics
+data. By installing this package as a dependency you are agreeing to telemetry
+collection. To opt out, see
 [Opting out of IBM Telemetry data collection](https://github.com/ibm-telemetry/telemetry-js/tree/main#opting-out-of-ibm-telemetry-data-collection).
 For more information on the data being collected, please see the
 [IBM Telemetry documentation](https://github.com/ibm-telemetry/telemetry-js/tree/main#ibm-telemetry-collection-basics).

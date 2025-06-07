@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { SideNavContext } from './SideNav';
 
-interface SideNavMenuProps {
+export interface SideNavMenuProps {
   /**
    * An optional CSS class to apply to the component.
    */
@@ -47,7 +47,7 @@ interface SideNavMenuProps {
   large?: boolean;
 
   /**
-   * A custom icon to render next to the SideNavMenu title. This can be a function returning JSX or JSX itself.
+   * A component used to render an icon.
    */
   renderIcon?: React.ComponentType;
 
@@ -180,9 +180,8 @@ SideNavMenu.propTypes = {
   large: PropTypes.bool,
 
   /**
-   * Pass in a custom icon to render next to the `SideNavMenu` title
+   * A component used to render an icon.
    */
-  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**

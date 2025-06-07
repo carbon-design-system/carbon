@@ -13,7 +13,7 @@ import { PolymorphicProps } from '../../types/common';
 import { LayerContext } from '../Layer/LayerContext';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 
-interface GlobalThemeProps {
+export interface GlobalThemeProps {
   theme?: 'white' | 'g10' | 'g90' | 'g100';
   children?: React.ReactNode;
 }

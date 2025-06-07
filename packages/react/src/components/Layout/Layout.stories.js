@@ -9,6 +9,7 @@ import React from 'react';
 
 import { Accordion, AccordionItem } from '../Accordion';
 import Button from '../Button';
+import Tag from '../Tag';
 import { HStack, VStack } from '../Stack';
 import { TextInput } from '../TextInput';
 
@@ -35,6 +36,9 @@ const Demo = () => (
       <div style={{ display: 'flex', alignItems: 'flex-end' }}>
         <Button>&lt;Button /&gt;</Button>
       </div>
+      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <Tag>&lt;Tag /&gt;</Tag>
+      </div>
       <TextInput
         labelText='<TextInput size="sm" />'
         size="sm"
@@ -43,6 +47,9 @@ const Demo = () => (
       <div style={{ display: 'flex', alignItems: 'flex-end' }}>
         <Button size="sm">&lt;Button size=&quot;sm&quot; /&gt;</Button>
       </div>
+      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <Tag size="sm">&lt;Tag size&quot;sm&quot; /&gt;</Tag>
+      </div>
     </HStack>
     <Accordion>
       <AccordionItem title="<AccordionItem />">Content</AccordionItem>
@@ -50,7 +57,7 @@ const Demo = () => (
   </VStack>
 );
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <VStack gap={10}>
       <h1>Layout demo</h1>

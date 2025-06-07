@@ -1,0 +1,109 @@
+//
+// Copyright IBM Corp. 2020, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/select';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/utilities/convert' as *;
+
+$divider-width: 1px;
+
+:host(#{$prefix}-select) {
+  @extend .#{$prefix}--select;
+
+  outline: none;
+
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-09;
+  }
+
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-50%);
+  }
+
+  ::slotted(#{$prefix}-ai-label) {
+    &::before,
+    &::after {
+      position: absolute;
+      background-color: $border-subtle-01;
+      block-size: to-rem(16px);
+      content: '';
+      inline-size: to-rem(1px);
+      inset-inline-start: calc(#{$spacing-06} - #{$divider-width});
+    }
+
+    &::before {
+      display: var(--#{$prefix}-show-before);
+      inset-inline-start: calc(-#{$spacing-03} - #{$divider-width});
+    }
+  }
+}
+
+:host(#{$prefix}-select[inline]) {
+  @extend .#{$prefix}--select--inline;
+}
+
+:host(#{$prefix}-select[disabled]) {
+  @extend .#{$prefix}--select--disabled;
+}
+
+:host(#{$prefix}-select[invalid]) {
+  @extend .#{$prefix}--select--invalid;
+}
+
+:host(#{$prefix}-select[warn]) {
+  @extend .#{$prefix}--select--warning;
+}
+
+:host(#{$prefix}-select[slug]) {
+  @extend .#{$prefix}--select--slug;
+}
+
+:host(#{$prefix}-select[readonly]) select {
+  pointer-events: none;
+}
+
+:host(#{$prefix}-select[pagination]) {
+  .#{$prefix}--label {
+    margin: 0;
+  }
+
+  .#{$prefix}--select-input {
+    padding: 0 2.25rem 0 $spacing-05;
+
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--select__arrow {
+    inset-block-start: 50%;
+    transform: translate(-#{$spacing-03}, -50%);
+  }
+}
+
+:host(#{$prefix}-select[pagination][left-select]) {
+  .#{$prefix}--select-input {
+    border-inline-end: 1px solid $border-subtle;
+  }
+}
+
+:host(#{$prefix}-select[warn]),
+:host(#{$prefix}-select[invalid]) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-09;
+  }
+}

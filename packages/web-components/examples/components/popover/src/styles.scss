@@ -1,0 +1,51 @@
+@use "@carbon/styles/scss/reset";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/spacing" as *;
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+// Utilities
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.mt-10 {
+  padding-block-start: $spacing-10;
+}
+
+.p-3 {
+  padding: $spacing-05;
+}
+
+.playground-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid theme.$border-subtle;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+}
+
+.playground-trigger svg {
+  fill: theme.$background-inverse;
+}
+
+.popover-title {
+  @include type.type-style("heading-compact-01");
+
+  margin-block-end: $spacing-01;
+}
+
+.popover-details {
+  @include type.type-style("body-compact-01");
+}

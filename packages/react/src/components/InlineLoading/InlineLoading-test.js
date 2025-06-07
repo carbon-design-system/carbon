@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,8 +24,10 @@ describe('InlineLoading', () => {
 
   it('should render a loader if the status is inactive', () => {
     render(<InlineLoading status="inactive" />);
-
-    expect(screen.getByTitle('not loading')).toBeInTheDocument();
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector('.cds--inline-loading__inactive-status')
+    ).toBeInTheDocument();
   });
 
   it('should render the success state if status is finished', () => {
@@ -85,6 +87,27 @@ describe('InlineLoading', () => {
 
     jest.runAllTimers();
     expect(onSuccess).toHaveBeenCalled();
+    jest.useRealTimers();
+  });
+
+  it('should cancel the onSuccess timeout if the component unmounts', () => {
+    jest.useFakeTimers();
+    const onSuccess = jest.fn();
+    const { unmount } = render(
+      <InlineLoading
+        status="finished"
+        onSuccess={onSuccess}
+        successDelay={2500}
+      />
+    );
+
+    // Unmount the component before the timeout fires.
+    unmount();
+
+    // Run all timers. If the cleanup works, `onSuccess` should not be called.
+    jest.runAllTimers();
+    expect(onSuccess).not.toHaveBeenCalled();
+
     jest.useRealTimers();
   });
 });

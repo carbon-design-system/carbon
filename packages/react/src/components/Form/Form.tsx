@@ -10,7 +10,7 @@ import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-type FormProps = ComponentProps<'form'>;
+export type FormProps = ComponentProps<'form'>;
 
 export default function Form({ className, children, ...other }: FormProps) {
   const prefix = usePrefix();

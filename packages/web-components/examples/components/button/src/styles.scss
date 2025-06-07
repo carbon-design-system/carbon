@@ -1,0 +1,13 @@
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@include theme.add-component-tokens(button-tokens.$button-tokens);
+
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}

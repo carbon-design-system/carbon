@@ -1,51 +1,51 @@
+/**
+ * Copyright IBM Corp. 2022, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import {
   red20,
   red40,
   red50,
   red70,
-  red80,
   red20Hover,
   red70Hover,
   magenta20,
   magenta40,
   magenta50,
   magenta70,
-  magenta80,
   magenta20Hover,
   magenta70Hover,
   purple20,
   purple40,
   purple50,
   purple70,
-  purple80,
   purple20Hover,
   purple70Hover,
   blue20,
   blue40,
   blue50,
   blue70,
-  blue80,
   blue20Hover,
   blue70Hover,
   cyan20,
   cyan40,
   cyan50,
   cyan70,
-  cyan80,
   cyan20Hover,
   cyan70Hover,
   teal20,
   teal40,
   teal50,
   teal70,
-  teal80,
   teal20Hover,
   teal70Hover,
   green20,
   green40,
   green50,
   green70,
-  green80,
   green20Hover,
   green70Hover,
   gray10,
@@ -82,8 +82,8 @@ export const tagBackgroundRed = {
 };
 
 export const tagColorRed = {
-  whiteTheme: red80,
-  g10: red80,
+  whiteTheme: red70,
+  g10: red70,
   g90: red20,
   g100: red20,
 };
@@ -103,8 +103,8 @@ export const tagBackgroundMagenta = {
 };
 
 export const tagColorMagenta = {
-  whiteTheme: magenta80,
-  g10: magenta80,
+  whiteTheme: magenta70,
+  g10: magenta70,
   g90: magenta20,
   g100: magenta20,
 };
@@ -124,8 +124,8 @@ export const tagBackgroundPurple = {
 };
 
 export const tagColorPurple = {
-  whiteTheme: purple80,
-  g10: purple80,
+  whiteTheme: purple70,
+  g10: purple70,
   g90: purple20,
   g100: purple20,
 };
@@ -145,8 +145,8 @@ export const tagBackgroundBlue = {
 };
 
 export const tagColorBlue = {
-  whiteTheme: blue80,
-  g10: blue80,
+  whiteTheme: blue70,
+  g10: blue70,
   g90: blue20,
   g100: blue20,
 };
@@ -166,8 +166,8 @@ export const tagBackgroundCyan = {
 };
 
 export const tagColorCyan = {
-  whiteTheme: cyan80,
-  g10: cyan80,
+  whiteTheme: cyan70,
+  g10: cyan70,
   g90: cyan20,
   g100: cyan20,
 };
@@ -185,8 +185,8 @@ export const tagBackgroundTeal = {
   g100: teal70,
 };
 export const tagColorTeal = {
-  whiteTheme: teal80,
-  g10: teal80,
+  whiteTheme: teal70,
+  g10: teal70,
   g90: teal20,
   g100: teal20,
 };
@@ -206,8 +206,8 @@ export const tagBackgroundGreen = {
 };
 
 export const tagColorGreen = {
-  whiteTheme: green80,
-  g10: green80,
+  whiteTheme: green70,
+  g10: green70,
   g90: green20,
   g100: green20,
 };

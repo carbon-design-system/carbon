@@ -226,7 +226,21 @@ describe('TextInput', () => {
       );
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
+      render(
+        <TextInput
+          id="textarea-1"
+          labelText="TextArea label"
+          decorator={<AILabel />}
+        />
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI Show information' })
+      ).toBeInTheDocument();
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(
         <TextInput
           id="textarea-1"
@@ -235,8 +249,9 @@ describe('TextInput', () => {
         />
       );
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
+      spy.mockRestore();
     });
   });
 
@@ -353,6 +368,44 @@ describe('TextInput', () => {
       const counter = screen.queryByText('0/5');
 
       expect(counter).toBeInTheDocument();
+    });
+
+    it('should count ref value when enableCounter is toggled)', async () => {
+      // Test for issue #18520: TextInput missing ref check for initial value
+      const TestComponent = () => {
+        const [enableCounter, setEnableCounter] = React.useState(false);
+        const inputRef = React.useRef(null);
+
+        React.useEffect(() => {
+          if (inputRef.current) {
+            inputRef.current.value = 'FormValue';
+          }
+        }, []);
+
+        return (
+          <div>
+            <TextInput
+              ref={inputRef}
+              id="input-1"
+              labelText="TextInput label"
+              enableCounter={enableCounter}
+              maxCount={15}
+            />
+            <button onClick={() => setEnableCounter(true)}>
+              Enable Counter
+            </button>
+          </div>
+        );
+      };
+
+      render(<TestComponent />);
+
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      expect(screen.queryByText(/\/15/)).not.toBeInTheDocument();
+
+      // Enable counter
+      await userEvent.click(screen.getByText('Enable Counter'));
+      expect(screen.getByText('9/15')).toBeInTheDocument();
     });
   });
 });

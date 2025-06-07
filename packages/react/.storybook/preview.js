@@ -9,9 +9,9 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
   Stories,
-} from '@storybook/blocks';
+  ArgTypes,
+} from '@storybook/addon-docs/blocks';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -74,7 +74,12 @@ const globalTypes = {
         {
           right: '🇺🇸',
           title: 'English',
-          value: 'en',
+          value: 'en-US',
+        },
+        {
+          right: '🇩🇪',
+          title: 'German',
+          value: 'de-DE',
         },
         {
           right: '🇵🇸',
@@ -191,7 +196,7 @@ const parameters = {
         <Subtitle />
         <Description />
         <Primary />
-        <ArgsTable />
+        <ArgTypes />
         <Stories includePrimary={false} />
       </>
     ),
@@ -242,12 +247,10 @@ const parameters = {
   },
   options: {
     storySort: (storyA, storyB) => {
-      const isUsingV6Store = process.env.STORYBOOK_STORE_7 === 'false';
-
-      const idA = isUsingV6Store ? storyA[1].id : storyA.id;
-      const idB = isUsingV6Store ? storyB[1].id : storyB.id;
-      const titleA = isUsingV6Store ? storyA[1].title : storyA.title;
-      const titleB = isUsingV6Store ? storyB[1].title : storyB.title;
+      const idA = storyA.id;
+      const idB = storyB.id;
+      const titleA = storyA.title;
+      const titleB = storyB.title;
 
       if (idA.includes('welcome')) {
         return -1;
@@ -267,19 +270,30 @@ const parameters = {
         return titleA.localeCompare(titleB);
       }
 
+      if (titleA !== titleB) {
+        if (idA.includes('flag-details') && !idB.includes('flag-details')) {
+          return -1;
+        }
+        if (idB.includes('flag-details') && !idA.includes('flag-details')) {
+          return 1;
+        }
+        return titleA.localeCompare(titleB);
+      }
+
       // To sort the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to
       // determine order later on.
-      const UNKNOWN_KEYWORD = 4;
+      const UNKNOWN_KEYWORD = 5;
       const keywords = new Map([
         ['welcome', 0],
         ['overview', 1],
         ['default', 2],
         ['usage', 3],
-        ['playground', 5],
-        ['development', 6],
-        ['deprecated', 7],
-        ['unstable', 8],
+        ['flag-details', 4],
+        ['playground', 6],
+        ['development', 7],
+        ['deprecated', 8],
+        ['unstable', 9],
       ]);
       const matches = new Map();
 
@@ -358,6 +372,7 @@ const preview = {
   parameters,
   decorators,
   globalTypes,
+  tags: ['autodocs'],
 };
 
 export default preview;

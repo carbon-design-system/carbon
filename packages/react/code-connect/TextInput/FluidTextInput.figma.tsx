@@ -11,7 +11,6 @@ import {
   unstable__FluidTextInput as FluidTextInput,
   unstable__FluidTextInputSkeleton as FluidTextInputSkeleton,
 } from '@carbon/react';
-
 import figma from '@figma/code-connect';
 
 figma.connect(

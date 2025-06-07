@@ -25,7 +25,7 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { AccordionContext } from './AccordionProvider';
 
-interface AccordionItemProps {
+export interface AccordionItemProps {
   /**
    * Specify an optional className to be
    * applied to the container node.
@@ -68,7 +68,7 @@ interface AccordionItemProps {
    */
   renderExpando?: (
     props: PropsWithChildren<AccordionToggleProps>
-  ) => ReactElement;
+  ) => ReactElement<any>;
 
   /**
    * The callback function to render the expand button.
@@ -76,7 +76,7 @@ interface AccordionItemProps {
    */
   renderToggle?: (
     props: PropsWithChildren<AccordionToggleProps>
-  ) => ReactElement;
+  ) => ReactElement<any>;
 
   /**
    * The accordion title.
@@ -90,7 +90,7 @@ interface AccordionItemProps {
   handleAnimationEnd?: AnimationEventHandler<HTMLElement>;
 }
 
-interface AccordionToggleProps {
+export interface AccordionToggleProps {
   'aria-controls'?: AriaAttributes['aria-controls'];
   'aria-expanded'?: AriaAttributes['aria-expanded'];
   className?: string;

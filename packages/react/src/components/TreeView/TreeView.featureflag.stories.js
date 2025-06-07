@@ -6,11 +6,9 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { Button, VStack } from '../../';
-
-import mdx from './TreeView.featureflag.mdx';
 
 import { TreeView, TreeNode } from './';
 
@@ -184,16 +182,12 @@ function renderTree(nodes) {
 }
 
 export default {
-  title: 'Experimental/Feature Flags/TreeView',
+  title: 'components/TreeView/Feature Flag',
   component: TreeView,
   subcomponents: {
     TreeNode,
   },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
+  tags: ['!autodocs'],
   args: {
     onSelect: action('onSelect'),
   },
@@ -206,7 +200,7 @@ export default {
   ],
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   const [selected, setSelected] = useState([]);
   const [active, setActive] = useState(null);
 
@@ -246,12 +240,12 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   hideLabel: false,
   multiselect: false,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   active: { control: { disable: true } },
   selected: { control: { disable: true } },
   size: {

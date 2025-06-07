@@ -150,8 +150,7 @@ update PR:
    `--modifiers`. All icons with `--modifiers` are listed as variants of the
    same icon.
 3. make desired edits on the icon's `aliases` list.
-4. commit changes, preferably with a commit message "[icon name] metadata
-   update".
+4. commit changes, preferably with a commit message "[icon name] metadata update".
 5. create a new branch, suggested branch name is `yourname-metadata-iconName`
 6. create the PR from your branch, or click on `Propose file change` if you are
    in browser.

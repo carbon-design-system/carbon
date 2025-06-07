@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,22 +7,24 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ReactNode,
+  cloneElement,
   useContext,
-  useState,
   useEffect,
   useRef,
+  useState,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import PasswordInput from './PasswordInput';
-import ControlledPasswordInput from './ControlledPasswordInput';
 import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
 
@@ -35,6 +37,11 @@ export interface TextInputProps
    * Specify an optional className to be applied to the `<input>` node
    */
   className?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextInput` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Optionally provide the default value of the `<input>`
@@ -128,6 +135,7 @@ export interface TextInputProps
   size?: 'sm' | 'md' | 'lg' | 'xl';
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug?: ReactNode;
@@ -156,6 +164,7 @@ export interface TextInputProps
 const TextInput = React.forwardRef(function TextInput(
   {
     className,
+    decorator,
     disabled = false,
     helperText,
     hideLabel,
@@ -183,9 +192,20 @@ const TextInput = React.forwardRef(function TextInput(
   const prefix = usePrefix();
 
   const { defaultValue, value } = rest;
-  const [textCount, setTextCount] = useState(
-    defaultValue?.toString().length || value?.toString().length || 0
-  );
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mergedRef = useMergedRefs([ref, inputRef]);
+
+  function getInitialTextCount(): number {
+    const targetValue = defaultValue || value || inputRef.current?.value || '';
+    return targetValue.toString().length;
+  }
+
+  const [textCount, setTextCount] = useState(getInitialTextCount());
+
+  useEffect(() => {
+    setTextCount(getInitialTextCount());
+  }, [value, defaultValue, enableCounter]);
 
   const normalizedProps = useNormalizedInputProps({
     id,
@@ -219,7 +239,7 @@ const TextInput = React.forwardRef(function TextInput(
     },
     placeholder,
     type,
-    ref,
+    ref: mergedRef,
     className: textInputClasses,
     title: placeholder,
     disabled: normalizedProps.disabled,
@@ -264,6 +284,7 @@ const TextInput = React.forwardRef(function TextInput(
     {
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
       [`${prefix}--text-input__field-wrapper--slug`]: slug,
+      [`${prefix}--text-input__field-wrapper--decorator`]: decorator,
     }
   );
   const iconClasses = classNames({
@@ -316,9 +337,9 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const ariaAnnouncement = getAnnouncement(textCount, maxCount);
   useEffect(() => {
     if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
       const announcer = announcerRef.current as HTMLSpanElement | null;
@@ -343,13 +364,12 @@ const TextInput = React.forwardRef(function TextInput(
   }, [ariaAnnouncement, prevAnnouncement]);
   const Icon = normalizedProps.icon as any;
 
-  // Slug is always size `mini`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-    });
-  }
+  // AILabel is always size `mini`
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
+    : null;
 
   return (
     <div className={inputWrapperClasses}>
@@ -367,7 +387,16 @@ const TextInput = React.forwardRef(function TextInput(
           data-invalid={normalizedProps.invalid || null}>
           {Icon && <Icon className={iconClasses} />}
           {input}
-          {normalizedSlug}
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div
+              className={`${prefix}--text-input__field-inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
           <span
             className={`${prefix}--text-input__counter-alert`}
             role="alert"
@@ -386,13 +415,16 @@ const TextInput = React.forwardRef(function TextInput(
 });
 
 TextInput.displayName = 'TextInput';
-(TextInput as any).PasswordInput = PasswordInput;
-(TextInput as any).ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
    * Specify an optional className to be applied to the `<input>` node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextInput` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Optionally provide the default value of the `<input>`
@@ -490,7 +522,11 @@ TextInput.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `TextInput` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the type of the `<input>`

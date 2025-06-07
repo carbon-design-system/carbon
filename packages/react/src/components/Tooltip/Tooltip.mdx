@@ -1,5 +1,8 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as TooltipStories from './Tooltip.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
 
 # Tooltip
 
@@ -13,7 +16,9 @@ import * as TooltipStories from './Tooltip.stories';
 
 ## Table of Contents
 
+- [Tooltip](#Tooltip)
 - [Overview](#overview)
+  - [Usage](#usage)
   - [Toggletips vs Tooltips](#toggletips-vs-tooltips)
   - [Customizing the content of a tooltip](#customizing-the-content-of-a-tooltip)
   - [Tooltip alignment](#tooltip-alignment)
@@ -27,8 +32,12 @@ import * as TooltipStories from './Tooltip.stories';
 
 You can use the `Tooltip` component as a wrapper to display a popup for an
 interactive element that you provide. If you are trying to place interactive
-content inside of the `Tooltip` itself, consider using `Toggletip` instead. You
-can provide the interactive element as a child to `Tooltip`, for example:
+content inside of the `Tooltip` itself, consider using `Toggletip` instead.
+
+### Usage
+
+`Tooltip` accepts a single child for its `children` prop. It is important that
+the child is an interactive element, for example:
 
 ```jsx
 <Tooltip label="Close">
@@ -36,13 +45,38 @@ can provide the interactive element as a child to `Tooltip`, for example:
 </Tooltip>
 ```
 
-`Tooltip` accepts a single child for its `children` prop. It is important that
-the component you provide renders an interactive element. In addition, you can
-specify the contents of the popup through the `label` or `description` prop.
+When used with a component, props need to be spread on the child component.
 
-<Canvas>
-  <Story of={TooltipStories.Default} />
-</Canvas>
+```jsx
+export default function App() {
+  return (
+    <Tooltip label="Close">
+      <CustomTrigger />
+    </Tooltip>
+  );
+}
+
+function CustomTrigger(props) {
+  return (
+    <button type="button" {...props}>
+      X
+    </button>
+  );
+}
+```
+
+You can specify the contents of the popup through the `label` or `description`
+prop.
+
+<Canvas
+  of={TooltipStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TooltipStories.Default),
+    },
+  ]}
+/>
 
 ### Toggletips vs Tooltips
 
@@ -79,9 +113,15 @@ relative to the tooltip. For example, if you provide `align="top"` to the
 Similarly, if you provide `align="bottom"` then the tooltip will render below
 your component.
 
-<Canvas>
-  <Story of={TooltipStories.Alignment} />
-</Canvas>
+<Canvas
+  of={TooltipStories.Alignment}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TooltipStories.Alignment),
+    },
+  ]}
+/>
 
 You can also configure the placement of the caret, if it is enabled, by choosing
 between `left` and `right` or `bottom` and `top`, depending on where your
@@ -100,21 +140,27 @@ You can customize the delay between when a tooltip is invoked and its contents
 are shown. You can also customize the delay between when a tooltip is dismissed
 and its contents are hidden.
 
-<Canvas>
-  <Story of={TooltipStories.Duration} />
-</Canvas>
+<Canvas
+  of={TooltipStories.Duration}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TooltipStories.Duration),
+    },
+  ]}
+/>
 
 The `enterDelayMs` prop allows you to provide a time, in milliseconds, that the
 component will wait before showing the tooltip. The `exitDelayMs` prop allows
 you to provide a time, in milliseconds, that the component will wait before
 hiding the tooltip.
 
-By default, these values are set to 100ms for `enterDelayms` and 300ms for
+By default, these values are set to 100ms for `enterDelayMs` and 300ms for
 `exitDelayMs`.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

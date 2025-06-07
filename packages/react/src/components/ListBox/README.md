@@ -16,5 +16,3 @@ Currently, a `ListBox` is broken up into the following pieces:
   - `ListBoxMenu`: container component for the menu of options available in a
     `ListBox`
     - `ListBoxMenuItem`: container component for an option in a `ListBoxMenu`
-
-In addition, we have `ListBox`-specific `prop` types in `ListBoxPropTypes`.

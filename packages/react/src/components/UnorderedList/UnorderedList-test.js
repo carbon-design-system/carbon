@@ -46,4 +46,15 @@ describe('UnorderedList', () => {
 
     expect(screen.getByTestId('list')).toHaveClass('some-class');
   });
+
+  it('should render expressive lists', () => {
+    const { container } = render(
+      <UnorderedList isExpressive>
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--list--unordered`);
+    expect(container.firstChild).toHaveClass(`${prefix}--list--expressive`);
+  });
 });

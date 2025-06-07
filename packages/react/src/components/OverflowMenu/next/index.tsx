@@ -1,20 +1,16 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  type ComponentType,
-  type FunctionComponent,
-  useRef,
-  useEffect,
-} from 'react';
+import React, { useEffect, useRef, type ElementType } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { useFeatureFlag } from '../../FeatureFlags';
 
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
@@ -23,6 +19,8 @@ import mergeRefs from '../../../tools/mergeRefs';
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useAttachedMenu } from '../../../internal/useAttachedMenu';
+import deprecateValuesWithin from '../../../prop-types/deprecateValuesWithin';
+import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
 const defaultSize = 'md';
 
@@ -53,9 +51,9 @@ interface OverflowMenuProps {
   menuAlignment?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
 
   /**
-   * Optionally provide a custom icon to be rendered on the trigger button.
+   * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
 
   /**
    * Specify the size of the menu, from a list of available sizes.
@@ -74,6 +72,11 @@ interface OverflowMenuProps {
     | 'bottom-right'
     | 'left'
     | 'right';
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  menuTarget?: Element;
 }
 
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
@@ -87,36 +90,46 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size = defaultSize,
       menuAlignment = 'bottom-start',
       tooltipAlignment,
+      menuTarget,
       ...rest
     },
     forwardRef
   ) {
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles
         ? {
+            // Computing the position starts with initial positioning
+            // via `placement`.
             placement: menuAlignment,
 
             // The floating element is positioned relative to its nearest
-            // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
+            // containing block (usually the viewport). It will in many cases
+            // also “break” the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
-            // Middleware order matters, arrow should be last
+            // Middleware are executed as an in-between “middle” step of the
+            // initial `placement` computation and eventual return of data for
+            // rendering. Each middleware is executed in order.
             middleware: [
-              flip({
-                fallbackAxisSideDirection: 'start',
-                fallbackPlacements: [
-                  'top-start',
-                  'top-end',
-                  'bottom-start',
-                  'bottom-end',
-                ],
-              }),
+              autoAlign &&
+                flip({
+                  // An explicit array of placements to try if the initial
+                  // `placement` doesn’t fit on the axes in which overflow
+                  // is checked.
+                  fallbackPlacements: menuAlignment.includes('bottom')
+                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end'],
+                }),
             ],
             whileElementsMounted: autoUpdate,
           }
-        : {} // When autoAlign is turned off, floating-ui will not be used
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
     );
 
     const id = useId('overflowmenu');
@@ -133,7 +146,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       handleClose,
     } = useAttachedMenu(triggerRef);
     useEffect(() => {
-      if (autoAlign) {
+      if (enableFloatingStyles) {
         Object.keys(floatingStyles).forEach((style) => {
           if (refs.floating.current) {
             refs.floating.current.style[style] = floatingStyles[style];
@@ -142,7 +155,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       }
     }, [
       floatingStyles,
-      autoAlign,
+      enableFloatingStyles,
       refs.floating,
       open,
       placement,
@@ -157,7 +170,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
 
     const containerClasses = classNames(
       className,
-      `${prefix}--overflow-menu__container`
+      `${prefix}--overflow-menu__container`,
+      { [`${prefix}--autoalign`]: enableFloatingStyles }
     );
 
     const menuClasses = classNames(
@@ -200,12 +214,13 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           className={menuClasses}
           id={id}
           size={size}
-          legacyAutoalign={!autoAlign}
+          legacyAutoalign={!enableFloatingStyles}
           open={open}
           onClose={handleClose}
           x={x}
           y={y}
-          label={label}>
+          label={label}
+          target={menuTarget}>
           {children}
         </Menu>
       </div>
@@ -243,9 +258,8 @@ OverflowMenu.propTypes = {
   ]),
 
   /**
-   * Optionally provide a custom icon to be rendered on the trigger button.
+   * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
@@ -256,16 +270,57 @@ OverflowMenu.propTypes = {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  tooltipAlignment: PropTypes.oneOf([
-    'top',
-    'top-left',
-    'top-right',
-    'bottom',
-    'bottom-left',
-    'bottom-right',
-    'left',
-    'right',
-  ]),
+  tooltipAlignment: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
+
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
+
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
+
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    mapPopoverAlign
+  ),
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  menuTarget: PropTypes.instanceOf(
+    typeof Element !== 'undefined' ? Element : Object
+  ) as PropTypes.Validator<Element | null | undefined>,
 };
 
 export { OverflowMenu };

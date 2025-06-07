@@ -15,16 +15,8 @@ export default {
   component: FluidPasswordInput,
 };
 
-export const Default = () => (
-  <FluidPasswordInput
-    id="input-1"
-    labelText="Label"
-    placeholder="Placeholder text"
-  />
-);
-
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
     <FluidPasswordInput
       {...args}
       id="input-1"
@@ -34,8 +26,8 @@ export const Playground = (args) => (
   </div>
 );
 
-Playground.args = {
-  playgroundWidth: 300,
+Default.args = {
+  defaultWidth: 300,
   className: 'test-class',
   placeholder: 'Placeholder text',
   showPasswordLabel: 'Show password label',
@@ -51,8 +43,8 @@ Playground.args = {
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-Playground.argTypes = {
-  playgroundWidth: {
+Default.argTypes = {
+  defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   className: {

@@ -7,9 +7,10 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshot } = require('../../test-utils/snapshot');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Popover', () => {
   themes.forEach((theme) => {
@@ -17,7 +18,7 @@ test.describe('Popover', () => {
       test('Popover @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Popover',
-          id: 'components-popover--playground',
+          id: 'components-popover--default',
           theme,
         });
       });

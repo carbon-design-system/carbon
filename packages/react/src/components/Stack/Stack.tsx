@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { spacing } from '@carbon/layout';
@@ -14,12 +14,10 @@ import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * The steps in the spacing scale
- * @type {Array<number>}
  */
-const SPACING_STEPS = Array.from({ length: spacing.length - 1 }).map(
-  (_, step) => {
-    return step + 1;
-  }
+const SPACING_STEPS = Array.from(
+  { length: spacing.length - 1 },
+  (_, step) => step + 1
 );
 
 export interface StackProps extends React.HTMLAttributes<HTMLElement> {
@@ -71,10 +69,7 @@ export interface StackProps extends React.HTMLAttributes<HTMLElement> {
  * - https://paste.twilio.design/layout/stack/
  * - https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
  */
-const Stack = React.forwardRef<React.ReactNode, StackProps>(function Stack(
-  props,
-  ref
-) {
+export const Stack = forwardRef<HTMLElement, StackProps>((props, ref) => {
   const {
     as: BaseComponent = 'div',
     children,
@@ -88,7 +83,7 @@ const Stack = React.forwardRef<React.ReactNode, StackProps>(function Stack(
     [`${prefix}--stack-${orientation}`]: true,
     [`${prefix}--stack-scale-${gap}`]: typeof gap === 'number',
   });
-  const style = {};
+  const style = { ...rest.style };
 
   if (typeof gap === 'string') {
     style[`--${prefix}-stack-gap`] = gap;
@@ -133,5 +128,3 @@ Stack.propTypes = {
    */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 };
-
-export { Stack };

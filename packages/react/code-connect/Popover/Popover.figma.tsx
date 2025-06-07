@@ -7,7 +7,7 @@
 
 // @ts-nocheck
 import React from 'react';
-import { Popover, PopoverContent } from './Popover';
+import { Popover, PopoverContent } from '@carbon/react';
 import { Settings } from '@carbon/react';
 import figma from '@figma/code-connect';
 

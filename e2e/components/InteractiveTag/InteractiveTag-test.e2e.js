@@ -17,7 +17,7 @@ test.describe('InteractiveTag', () => {
       test('DismissibleTag @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DismissibleTag',
-          id: 'experimental-unstable-interactivetag--dismissible',
+          id: 'components-tag--dismissible',
           theme,
         });
       });
@@ -25,7 +25,7 @@ test.describe('InteractiveTag', () => {
       test('OperationalTag @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'OperationalTag',
-          id: 'experimental-unstable-interactivetag--operational',
+          id: 'components-tag--operational',
           theme,
         });
       });
@@ -33,7 +33,7 @@ test.describe('InteractiveTag', () => {
       test('SelectableTag @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'SelectableTag',
-          id: 'experimental-unstable-interactivetag--selectable',
+          id: 'components-tag--selectable',
           theme,
         });
       });

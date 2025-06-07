@@ -1,0 +1,148 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/structured-list/structured-list' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include structured-list;
+
+.#{$prefix}--structured-list ::slotted(#{$prefix}-structured-list-head) {
+  @extend .#{$prefix}--structured-list-thead;
+}
+
+:host(#{$prefix}-structured-list-head)
+  ::slotted(#{$prefix}-structured-list-header-row) {
+  @extend .#{$prefix}--structured-list-row,
+    .#{$prefix}--structured-list-row--header-row;
+}
+
+:host(#{$prefix}-structured-list-header-row) {
+  ::slotted(#{$prefix}-structured-list-header-cell:first-of-type) {
+    padding-inline-start: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-structured-list-header-cell),
+  ::slotted(#{$prefix}-structured-list-header-cell-skeleton) {
+    @extend .#{$prefix}--structured-list-th;
+  }
+}
+
+.#{$prefix}--structured-list
+  ::slotted(#{$prefix}-structured-list-header-cell[nowrap]) {
+  @extend .#{$prefix}--structured-list-content--nowrap;
+}
+
+.#{$prefix}--structured-list ::slotted(#{$prefix}-structured-list-body) {
+  @extend .#{$prefix}--structured-list-tbody;
+}
+
+:host(#{$prefix}-structured-list-body) {
+  ::slotted(#{$prefix}-structured-list-row) {
+    @extend .#{$prefix}--structured-list-row;
+  }
+
+  ::slotted(#{$prefix}-structured-list-row:last-child) {
+    border-block-end: 1px solid $border-subtle;
+  }
+}
+
+:host(#{$prefix}-structured-list-row) {
+  ::slotted(#{$prefix}-structured-list-cell) {
+    @extend .#{$prefix}--structured-list-td;
+  }
+
+  ::slotted(#{$prefix}-structured-list-cell:first-of-type) {
+    padding-inline-start: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-structured-list-cell[nowrap]) {
+    @extend .#{$prefix}--structured-list-content--nowrap;
+  }
+}
+
+// selection
+:host(#{$prefix}-structured-list-row[selection-value]:hover) {
+  background-color: $layer-hover;
+  border-block-end: 1px solid $layer-hover;
+  cursor: pointer;
+
+  ::slotted(#{$prefix}-structured-list-cell) {
+    color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-structured-list-row[selected]) {
+  background-color: $layer-selected;
+
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-cell
+    .#{$prefix}--structured-list-svg {
+    fill: $text-primary;
+  }
+
+  ::slotted(#{$prefix}-structured-list-cell) {
+    color: $text-primary;
+  }
+}
+
+// skeleton
+:host(#{$prefix}-structured-list-header-cell-skeleton) {
+  &:first-of-type {
+    inline-size: 8%;
+  }
+
+  &:nth-of-type(3n + 2) {
+    inline-size: 30%;
+  }
+
+  &:nth-of-type(3n + 3) {
+    inline-size: 15%;
+  }
+
+  span {
+    @include skeleton;
+
+    display: block;
+    block-size: $spacing-05;
+
+    inline-size: 75%;
+  }
+}
+
+// condensed
+:host(#{$prefix}-structured-list-row[condensed])
+  ::slotted(#{$prefix}-structured-list-cell),
+:host(#{$prefix}-structured-list-header-row[condensed])
+  ::slotted(#{$prefix}-structured-list-header-cell) {
+  padding: $spacing-03;
+}
+
+:host(#{$prefix}-structured-list-row[condensed])
+  ::slotted(#{$prefix}-structured-list-cell:first-of-type),
+:host(#{$prefix}-structured-list-header-row[condensed])
+  ::slotted(#{$prefix}-structured-list-header-cell:first-of-type) {
+  padding-inline-start: $spacing-05;
+}
+
+// flush
+:host(#{$prefix}-structured-list-row[flush])
+  ::slotted(#{$prefix}-structured-list-cell),
+:host(#{$prefix}-structured-list-row[condensed][flush])
+  ::slotted(#{$prefix}-structured-list-cell),
+:host(#{$prefix}-structured-list-header-row[flush])
+  ::slotted(#{$prefix}-structured-list-header-cell),
+:host(#{$prefix}-structured-list-header-row[condensed][flush])
+  ::slotted(#{$prefix}-structured-list-header-cell) {
+  padding-inline: 0 $spacing-05;
+}

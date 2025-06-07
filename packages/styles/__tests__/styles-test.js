@@ -10,6 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
+const css = require('css');
 const { files } = require('../files');
 
 const { render } = SassRenderer.create(__dirname);

@@ -46,6 +46,10 @@ figma.connect(
         '16px': 'lg',
       }),
     },
+<<<<<<< HEAD
     example: ({ ...props }) => <AILabel autoAlign kind={"inline"} aiText={'Text translation'} />,
+=======
+    example: ({ ...props }) => <AILabel autoAlign kind="inline" {...props} />,
+>>>>>>> upstream/main
   }
 );

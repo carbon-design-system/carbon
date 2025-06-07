@@ -1,7 +1,9 @@
-import { ArgsTable, Canvas, Story, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
 import * as TextInputStories from './TextInput.stories';
 import * as PasswordInputStories from './PasswordInput.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
+<Meta isTemplate />
 
 # TextInput
 
@@ -11,9 +13,17 @@ import * as PasswordInputStories from './PasswordInput.stories';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
 
-<Canvas>
-  <Story of={TextInputStories.Default} />
-</Canvas>
+## Table of Contents
+
+- [TextInput](#textinput)
+  - [Overview](#overview)
+  - [Fluid](#fluid)
+  - [Read Only](#read-only)
+  - [Skeleton](#skeleton)
+  - [AI Label](#ai-label)
+  - [With Layer](#with-layer)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
@@ -21,23 +31,67 @@ Text inputs enable users to enter free-form text data. The type of text field
 used should reflect the length of the content you expect the user to enter. The
 default text input is for short, one-line content.
 
+<Canvas
+  of={TextInputStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.Default),
+    },
+  ]}
+/>
+
 ### Fluid
 
-<Canvas>
-  <Story of={TextInputStories.Fluid} />
-</Canvas>
+<Canvas
+  of={TextInputStories.Fluid}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.Fluid),
+    },
+  ]}
+/>
 
 ### Read Only
 
-<Canvas>
-  <Story of={TextInputStories.ReadOnly} />
-</Canvas>
+<Canvas
+  of={TextInputStories.ReadOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.ReadOnly),
+    },
+  ]}
+/>
+
+### Skeleton
+
+<Canvas
+  of={TextInputStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.Skeleton),
+    },
+  ]}
+/>
+
+### AI Label
+
+<Canvas
+  of={TextInputStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.withAILabel),
+    },
+  ]}
+/>
 
 ### With Layer
 
-<Canvas>
-  <Story of={TextInputStories._WithLayer} />
-</Canvas>
+<Canvas of={TextInputStories._WithLayer} />
 
 ### Password Input
 
@@ -55,7 +109,7 @@ component instead.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

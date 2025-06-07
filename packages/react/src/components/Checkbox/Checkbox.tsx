@@ -1,18 +1,21 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
+import React, { cloneElement, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
@@ -31,6 +34,11 @@ export interface CheckboxProps
    * exposing to the user
    */
   labelText: NonNullable<ReactNode>;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Checkbox` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify whether the underlying input should be checked by default
@@ -68,6 +76,7 @@ export interface CheckboxProps
   invalidText?: ReactNode;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
   slug?: ReactNode;
@@ -102,6 +111,7 @@ const Checkbox = React.forwardRef(
   (
     {
       className,
+      decorator,
       helperText,
       id,
       labelText,
@@ -146,19 +156,20 @@ const Checkbox = React.forwardRef(
         [`${prefix}--checkbox-wrapper--invalid`]: !readOnly && invalid,
         [`${prefix}--checkbox-wrapper--warning`]: showWarning,
         [`${prefix}--checkbox-wrapper--slug`]: slug,
+        [`${prefix}--checkbox-wrapper--decorator`]: decorator,
       }
     );
     const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
-    let normalizedSlug;
-    if (slug && React.isValidElement(slug)) {
-      const size = slug.props?.['kind'] === 'inline' ? 'md' : 'mini';
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size,
-      });
-    }
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, {
+          size: candidate.props.kind === 'inline' ? 'md' : 'mini',
+        })
+      : null;
 
     return (
       <div className={wrapperClasses}>
@@ -179,7 +190,7 @@ const Checkbox = React.forwardRef(
             }
             if (typeof ref === 'function') {
               ref(el);
-            } else if (ref && Object(ref) === ref) {
+            } else if (ref && 'current' in ref) {
               ref.current = el;
             }
           }}
@@ -203,7 +214,15 @@ const Checkbox = React.forwardRef(
           title={title}>
           <Text className={innerLabelClasses}>
             {labelText}
-            {normalizedSlug}
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div className={`${prefix}--checkbox-wrapper-inner--decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
           </Text>
         </label>
         <div className={`${prefix}--checkbox__validation-msg`}>
@@ -238,6 +257,11 @@ Checkbox.propTypes = {
    * Specify an optional className to be applied to the <label> node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `Checkbox` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify whether the underlying input should be checked by default
@@ -300,7 +324,10 @@ Checkbox.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Specify a title for the <label> node for the Checkbox

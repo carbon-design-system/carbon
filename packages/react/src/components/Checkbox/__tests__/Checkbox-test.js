@@ -199,7 +199,8 @@ describe('Checkbox', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('should respect slug prop', () => {
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <Checkbox
         defaultChecked
@@ -212,5 +213,36 @@ describe('Checkbox', () => {
     expect(container.firstChild).toHaveClass(
       `${prefix}--checkbox-wrapper--slug`
     );
+    spy.mockRestore();
+  });
+
+  it('should respect decorator prop', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-wrapper--decorator`
+    );
+  });
+
+  it('should set size to "md" when decorator kind is "inline"', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-2"
+        decorator={<AILabel kind="inline" />}
+      />
+    );
+
+    expect(
+      container.querySelector('.cds--ai-label__button--md')
+    ).toBeInTheDocument();
   });
 });

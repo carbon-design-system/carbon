@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import { AccordionProvider } from './AccordionProvider';
 
 export interface AccordionProps {
@@ -23,6 +23,11 @@ export interface AccordionProps {
    * the container node.
    */
   className?: string;
+
+  /**
+   * Pass in the children that will be rendered within the Accordion
+   */
+  children?: ReactNode;
 
   /**
    * Specify whether an individual AccordionItem

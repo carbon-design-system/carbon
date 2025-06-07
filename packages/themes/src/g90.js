@@ -10,6 +10,7 @@ import {
   blue40,
   blue60,
   blue70,
+  blue80,
 
   // Gray
   gray10,
@@ -65,6 +66,7 @@ export const backgroundSelectedHover = adjustAlpha(gray50, 0.32);
 // layer-01
 export const layer01 = gray80;
 export const layerActive01 = gray60;
+export const layerBackground01 = gray90;
 export const layerHover01 = gray80Hover;
 export const layerSelected01 = gray70;
 export const layerSelectedHover01 = gray70Hover;
@@ -72,6 +74,7 @@ export const layerSelectedHover01 = gray70Hover;
 // layer-02
 export const layer02 = gray70;
 export const layerActive02 = gray50;
+export const layerBackground02 = gray80;
 export const layerHover02 = gray70Hover;
 export const layerSelected02 = gray60;
 export const layerSelectedHover02 = gray60Hover;
@@ -79,6 +82,7 @@ export const layerSelectedHover02 = gray60Hover;
 // layer-03
 export const layer03 = gray60;
 export const layerActive03 = gray80;
+export const layerBackground03 = gray70;
 export const layerHover03 = gray60Hover;
 export const layerSelected03 = gray70;
 export const layerSelectedHover03 = gray70Hover;
@@ -204,7 +208,7 @@ export const skeletonElement = gray70;
 
 // Misc
 export const interactive = blue50;
-export const highlight = blue70;
+export const highlight = blue80;
 export const overlay = rgba(black, 0.65);
 export const toggleOff = gray50;
 export const shadow = rgba(black, 0.8);

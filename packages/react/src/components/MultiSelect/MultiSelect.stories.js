@@ -1,24 +1,31 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { action } from 'storybook/actions';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
 
-import MultiSelect from '.';
-import FilterableMultiSelect from './FilterableMultiSelect';
+import { FilterableMultiSelect, MultiSelect } from '.';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
+import {
+  Toggletip,
+  ToggletipActions,
+  ToggletipButton,
+  ToggletipContent,
+  ToggletipLabel,
+} from '../Toggletip';
+import Link from '../Link';
+import TextInput from '../TextInput';
 
 export default {
   title: 'Components/MultiSelect',
@@ -117,37 +124,7 @@ const items = [
   },
 ];
 
-export const Playground = (args) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
-  return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
-          width: 300,
-        }}>
-        <MultiSelect
-          label="Multiselect Label"
-          id="carbon-multiselect-example"
-          titleText="Multiselect title"
-          helperText="This is helper text"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          ref={ref}
-          {...args}
-        />
-      </div>
-    </div>
-  );
-};
-
-Playground.args = {
+const sharedArgs = {
   size: 'md',
   autoAlign: false,
   type: 'default',
@@ -163,9 +140,11 @@ Playground.args = {
   clearSelectionDescription: 'Total items selected: ',
   useTitleInItem: false,
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
+  selectAll: false,
+  selectAllItemText: 'All options',
 };
 
-Playground.argTypes = {
+const sharedArgTypes = {
   selectionFeedback: {
     options: ['top', 'fixed', 'top-after-reopen'],
     control: { type: 'select' },
@@ -242,7 +221,34 @@ Playground.argTypes = {
   },
 };
 
-export const Default = () => {
+export const Default = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -256,12 +262,43 @@ export const Default = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const WithInitialSelectedItems = () => {
+Default.args = { ...sharedArgs };
+Default.argTypes = { ...sharedArgTypes };
+
+export const WithInitialSelectedItems = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -276,12 +313,40 @@ export const WithInitialSelectedItems = () => {
         itemToString={(item) => (item ? item.text : '')}
         initialSelectedItems={[items[0], items[1]]}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
 export const Filterable = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -289,7 +354,7 @@ export const Filterable = (args) => {
       }}>
       <FilterableMultiSelect
         id="carbon-multiselect-example-3"
-        titleText="Multiselect title"
+        titleText="FilterableMultiSelect title"
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
@@ -304,9 +369,12 @@ Filterable.argTypes = {
   onChange: {
     action: 'onChange',
   },
+  onMenuChange: {
+    action: 'onMenuChange',
+  },
 };
 
-export const WithLayerMultiSelect = () => (
+export const WithLayerMultiSelect = (args) => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 300 }}>
@@ -318,13 +386,70 @@ export const WithLayerMultiSelect = () => (
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
+          {...args}
         />
       </div>
     )}
   </WithLayer>
 );
 
-export const _FilterableWithLayer = () => (
+export const Test = () => {
+  const [selectedItems, setSelectedItems] = useState([]);
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div style={{ width: 600, margin: 20 }}>
+      <p style={{ marginBottom: 20 }}>
+        <strong>Issue:</strong> click on the "FilterableMultiSelect Sample" and
+        edit. Then click to select the "TextInput Sample". Note that the browser
+        focus automatically switches back to the FilterableMultiSelect.
+        <strong>Expected Behavior:</strong> When a user interacts with
+        FilterableMultiSelect and then clicks on TextInput, the focus should
+        immediately and permanently move to TextInput without automatically
+        returning to FilterableMultiSelect.
+      </p>
+      <div style={{ width: 600, display: 'flex', alignItems: 'center' }}>
+        <div style={{ marginRight: 20 }}>
+          <FilterableMultiSelect
+            id="carbon-multiselect-example-3"
+            titleText="FilterableMultiselect Sample"
+            items={items}
+            onChange={(data) => setSelectedItems(data.selectedItems)}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+          />
+        </div>
+        <TextInput className="text-input" labelText="TextInput Sample" />
+      </div>
+    </div>
+  );
+};
+export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 300 }}>
@@ -335,13 +460,14 @@ export const _FilterableWithLayer = () => (
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
+          {...args}
         />
       </div>
     )}
   </WithLayer>
 );
 
-export const _Controlled = () => {
+export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
     items.filter((item) => item.id === 'downshift-1-item-0')
   );
@@ -362,6 +488,7 @@ export const _Controlled = () => {
         onChange={(data) => onSelectionChanged(data.selectedItems)}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
       <br />
       <ButtonSet>
@@ -383,12 +510,67 @@ export const _Controlled = () => {
   );
 };
 
+const itemsWithSelectAll = [
+  {
+    id: 'downshift-1-item-0',
+    text: 'Editor',
+  },
+  {
+    id: 'downshift-1-item-1',
+    text: 'Owner',
+  },
+  {
+    id: 'downshift-1-item-2',
+    text: 'Uploader',
+  },
+  {
+    id: 'downshift-1-item-3',
+    text: 'Reader - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'select-all',
+    text: 'All roles',
+    isSelectAll: true,
+  },
+];
+
+export const SelectAll = (args) => {
+  const [label, setLabel] = useState('Choose options');
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={itemsWithSelectAll}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        onChange={onChange}
+        {...args}
+      />
+    </div>
+  );
+};
+
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
+        <h2 className="ai-label-heading">84%</h2>
         <p className="secondary bold">Confidence score</p>
         <p className="secondary">
           Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -424,12 +606,12 @@ export const withAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
     />
   </div>
 );
 
-export const FilterableWithAILabel = () => (
+export const FilterableWithAILabel = (args) => (
   <div style={{ width: 400 }}>
     <FilterableMultiSelect
       label="Multiselect Label"
@@ -439,12 +621,13 @@ export const FilterableWithAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
+      {...args}
     />
   </div>
 );
 
-export const ExperimentalAutoAlign = () => {
+export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
@@ -468,8 +651,96 @@ export const ExperimentalAutoAlign = () => {
           selectionFeedback="top-after-reopen"
           ref={ref}
           autoAlign
+          {...args}
         />
       </div>
+    </div>
+  );
+};
+
+ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+
+export const withToggletipLabel = (args) => {
+  return (
+    <div>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText={
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <ToggletipLabel>Multiselect title</ToggletipLabel>
+            <Toggletip>
+              <ToggletipButton label="Show information">
+                <Information />
+              </ToggletipButton>
+              <ToggletipContent>
+                <p>
+                  Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut fsil labore et dolore
+                  magna aliqua.
+                </p>
+                <ToggletipActions>
+                  <Link href="#">Link action</Link>
+                  <Button size="sm">Button</Button>
+                </ToggletipActions>
+              </ToggletipContent>
+            </Toggletip>
+          </div>
+        }
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+export const SelectAllWithDynamicItems = () => {
+  const [label, setLabel] = useState('Choose options');
+  const [items, setItems] = useState(itemsWithSelectAll);
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  function addItems() {
+    setItems((prevItems) => {
+      const now = Date.now();
+      return [
+        ...prevItems,
+        {
+          id: `item-added-via-button-1${now}`,
+          text: `item-added-via-button-1${now}`,
+        },
+        {
+          id: `item-added-via-button-2${now}`,
+          text: `item-added-via-button-2${now}`,
+        },
+      ];
+    });
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        onChange={onChange}
+      />
+      <Button onClick={addItems}>Add 2 items to the list</Button>
     </div>
   );
 };

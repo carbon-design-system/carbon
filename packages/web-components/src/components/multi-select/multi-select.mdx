@@ -1,0 +1,66 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as MultiSelectStories from './multi-select.stories';
+
+<Meta of={MultiSelectStories} />
+
+# Multi select
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/multi-select)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/dropdown/usage#multiselect)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With initial selected items](#with-initial-selected-items)
+- [Filtering](#filtering)
+- [With layer](#with-layer)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-multi-select` component is a variant of the `dropdown` component that
+allows for multiple items to be selected. The `cds-multi-select` component stays
+open while items are being selected.
+
+<Canvas of={MultiSelectStories.Default} />
+
+### With initial selected items
+
+By using the `selected` attribute, `cds-multi-select-item` components can be
+pre-selected.
+
+<Canvas of={MultiSelectStories.WithInitialSelectedItems} />
+
+### Filtering
+
+Setting the `filterable` attribute to `true` allows for filtering the list of
+selectable items to a subset.
+
+<Canvas of={MultiSelectStories.Filterable} />
+
+### With layer
+
+<Canvas of={MultiSelectStories.WithLayer} />
+
+## Component API
+
+## `cds-multi-select`
+
+<ArgTypes of="cds-multi-select" />
+
+## `cds-multi-select-item`
+
+<ArgTypes of="cds-multi-select-item" />
+
+<Markdown>{`${cdnJs({ components: ['multi-select'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/multi-select/multi-select.mdx).

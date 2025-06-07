@@ -1,0 +1,12 @@
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+
+@use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
+@include theme.add-component-tokens(notification-tokens.$notification-tokens);
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}

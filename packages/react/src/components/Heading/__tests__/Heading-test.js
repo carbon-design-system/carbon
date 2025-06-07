@@ -47,7 +47,7 @@ describe('Heading', () => {
     }
   });
 
-  it('should override heading levels when specifing the level of a section', () => {
+  it('should override heading levels when specifying the level of a section', () => {
     render(
       <>
         <Heading data-testid="h1">h1</Heading>

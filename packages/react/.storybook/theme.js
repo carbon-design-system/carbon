@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { create } from '@storybook/theming';
+import { create } from 'storybook/theming';
 import PackageInfo from './../package.json';
 
 /**

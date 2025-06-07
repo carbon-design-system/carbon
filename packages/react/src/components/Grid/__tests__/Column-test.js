@@ -12,6 +12,13 @@ import { Column } from '../';
 const prefix = 'cds';
 
 describe('Column', () => {
+  // Add this test case inside the main describe('Column', () => {}) block
+  it('should forward ref to the underlying DOM element', () => {
+    const ref = React.createRef();
+    const { container } = render(<Column ref={ref} />);
+    expect(ref.current).toBe(container.firstChild);
+  });
+
   it('should support a custom element as the root node', () => {
     const { container } = render(<Column as="section" />);
     expect(container.firstChild.tagName).toBe('SECTION');
@@ -123,6 +130,17 @@ describe('Column', () => {
 
     afterEach(() => {
       cleanup();
+    });
+
+    it('should forward ref in CSS Grid mode', () => {
+      const ref = React.createRef();
+      render(
+        <Grid>
+          <Column ref={ref} lg={4} />
+        </Grid>
+      );
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+      expect(ref.current).toHaveClass('cds--css-grid-column');
     });
 
     describe.each(['sm', 'md', 'lg', 'xlg', 'max'])('%s', (breakpoint) => {

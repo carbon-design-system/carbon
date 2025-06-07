@@ -8,33 +8,33 @@
 import React, { useState, useEffect } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import mdx from './ProgressBar.mdx';
 
 import ProgressBar from './';
 
 export default {
   title: 'Components/ProgressBar',
   component: ProgressBar,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <ProgressBar
-    label="Progress bar label"
-    helperText="Optional helper text"
-    value={75}
-  />
-);
+const DefaultStory = (args) => {
+  return (
+    <ProgressBar
+      label="Progress bar label"
+      helperText="Optional helper text"
+      {...args}
+    />
+  );
+};
 
-const PlaygroundStory = (args) => (
-  <ProgressBar
-    label="Progress bar label"
-    helperText="Optional helper text"
-    {...args}
-  />
-);
+export const Default = DefaultStory.bind({});
 
-export const Playground = PlaygroundStory.bind({});
-
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     table: {
       disable: true,

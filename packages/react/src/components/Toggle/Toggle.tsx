@@ -23,7 +23,8 @@ type ExcludedAttributes =
   | 'role'
   | 'id'
   | 'size'
-  | 'onClick';
+  | 'onClick'
+  | 'onToggle';
 
 export interface ToggleProps
   extends Omit<
@@ -204,6 +205,8 @@ export function Toggle({
           <div className={switchClasses}>
             {isSm && (
               <svg
+                aria-hidden="true"
+                focusable="false"
                 className={`${prefix}--toggle__check`}
                 width="6px"
                 height="5px"

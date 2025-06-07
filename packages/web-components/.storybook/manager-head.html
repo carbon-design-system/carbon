@@ -1,0 +1,93 @@
+<meta
+  name="keywords"
+  content="IBM, design, system, Carbon, design system, styleguide, style, guide, components, library, pattern, kit, component, cloud, Web Components, Custom Elements" />
+<meta
+  name="description"
+  content="This is the web components implementation of the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Carbon web components" />
+<meta property="og:site_name" content="Carbon web components" />
+<meta
+  property="og:description"
+  content="This is the web components implementation of the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs." />
+<meta
+  property="og:url"
+  content="https://github.com/carbon-design-system/carbon/tree/main/packages/web-components" />
+
+<!-- Social -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image:alt" content="Carbon Design System" />
+<meta name="twitter:site" content="@_carbondesign" />
+
+<!-- Storybook override -->
+<script>
+  setTimeout(function () {
+    document.title = 'Carbon Web Components';
+  }, 1000);
+</script>
+
+<style>
+  body div[data-item-id='data-table--overview'],
+  body div[data-item-id='list--overview'],
+  body div[data-item-id='notification--overview'],
+  body div[data-item-id='tile--overview'] {
+    display: none;
+  }
+</style>
+
+<footer>
+  <c4d-footer-container disable-locale-button="true" size="micro" />
+</footer>
+
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/latest/footer.min.js"></script>
+
+<!-- Tealium/GA Set up -->
+<script type="text/javascript">
+  window._ibmAnalytics = {
+    settings: {
+      name: 'CarbonWebComponentsStorybook',
+      isSpa: true,
+      tealiumProfileName: 'ibm-web-app',
+    },
+    onLoad: [['ibmStats.pageview', []]],
+  };
+  digitalData = {
+    page: {
+      pageInfo: {
+        ibm: {
+          siteId: 'IBM_' + _ibmAnalytics.settings.name,
+        },
+      },
+      category: {
+        primaryCategory: 'PC100',
+      },
+    },
+  };
+</script>
+<script
+  src="//1.www.s81c.com/common/stats/ibm-common.js"
+  type="text/javascript"
+  async="async"></script>
+
+<style type="text/css">
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 99999;
+  }
+
+  #root > div {
+    height: calc(100vh - 48px);
+  }
+
+  /* This style is required because of the compliance footer in smaller screens */
+  @media (max-width: 738px) {
+    #root > div {
+      height: calc(100vh - 361px);
+    }
+  }
+</style>

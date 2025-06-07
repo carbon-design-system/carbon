@@ -25,7 +25,7 @@ test.describe('@avt FileUploader', () => {
   test('@avt-advanced-states with upload', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
-      id: 'components-fileuploader--playground',
+      id: 'components-fileuploader--default',
       globals: {
         theme: 'white',
       },

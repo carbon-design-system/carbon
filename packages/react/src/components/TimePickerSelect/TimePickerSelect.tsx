@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,10 +8,9 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { usePrefix } from '../../internal/usePrefix';
-import { ForwardRefReturn } from '../../types/common';
 
 export type TimePickerSelectProps = {
   /**
@@ -41,50 +40,40 @@ export type TimePickerSelectProps = {
 } & React.SelectHTMLAttributes<HTMLSelectElement> &
   React.InputHTMLAttributes<HTMLSelectElement>;
 
-type TimePickerSelectComponent = ForwardRefReturn<
-  HTMLSelectElement,
-  TimePickerSelectProps
->;
+const frFn = forwardRef<HTMLSelectElement, TimePickerSelectProps>;
 
-const TimePickerSelect: TimePickerSelectComponent = React.forwardRef(
-  function TimePickerSelect(
-    {
-      ['aria-label']: ariaLabel = 'open list of options',
-      children,
-      id,
-      disabled = false,
-      className,
-      ...rest
-    },
-    ref
-  ) {
-    const prefix = usePrefix();
+const TimePickerSelect = frFn((props, ref) => {
+  const {
+    ['aria-label']: ariaLabel = 'open list of options',
+    children,
+    id,
+    disabled = false,
+    className,
+    ...rest
+  } = props;
+  const prefix = usePrefix();
 
-    const selectClasses = cx({
-      [`${prefix}--select`]: true,
-      [`${prefix}--time-picker__select`]: true,
-      ...(className && { [className]: true }),
-    });
+  const selectClasses = cx({
+    [`${prefix}--select`]: true,
+    [`${prefix}--time-picker__select`]: true,
+    ...(className && { [className]: true }),
+  });
 
-    return (
-      <div className={selectClasses}>
-        <select
-          aria-label={ariaLabel}
-          className={`${prefix}--select-input`}
-          disabled={disabled}
-          id={id}
-          ref={ref}
-          {...rest}>
-          {children}
-        </select>
-        <ChevronDown
-          className={`${prefix}--select__arrow`}
-          aria-hidden="true"
-        />
-      </div>
-    );
-  }
-);
+  return (
+    <div className={selectClasses}>
+      <select
+        aria-label={ariaLabel}
+        className={`${prefix}--select-input`}
+        disabled={disabled}
+        id={id}
+        ref={ref}
+        {...rest}>
+        {children}
+      </select>
+      <ChevronDown className={`${prefix}--select__arrow`} aria-hidden="true" />
+    </div>
+  );
+});
 
 TimePickerSelect.propTypes = {
   /**

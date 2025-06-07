@@ -1,7 +1,9 @@
 name: Accessibility Issue ♿
 description: Report an accessibility or usability issue.
 title: '[a11y]: '
-labels: 'type: a11y ♿'
+type: 'bug'
+labels:
+  ['type: a11y ♿', 'type: bug 🐛', 'status: needs triage :female_detective:']
 body:
   - type: markdown
     attributes:
@@ -37,6 +39,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - '@carbon/web-components'
     validations:
       required: true
   - type: dropdown
@@ -108,10 +111,8 @@ body:
     id: example-url
     attributes:
       label: Reproduction/example
-      description:
-        'Use our
-        [template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx)
-        to re-create the issue'
+      description: |
+        Re-create the issue using Stackblitz. We have templates for [`@carbon/react`](https://stackblitz.com/github/carbon-design-system/sandboxes/tree/main/react/latest/react-19-vite/?preset=node=), [`@carbon/react` with TypeScript](https://stackblitz.com/github/carbon-design-system/sandboxes/tree/main/react/latest/react-19-vite-ts/?preset=node=), or [`@carbon/web-components`](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/button?file=src%2Findex.js)
     validations:
       required: true
   - type: textarea

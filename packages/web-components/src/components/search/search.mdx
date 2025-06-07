@@ -1,0 +1,46 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as SearchStories from './search.stories';
+
+<Meta of={SearchStories} />
+
+# Search
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/search)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/search/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/search/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Disabled](#disabled)
+- [Expandable](#expandable)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={SearchStories.Default} />
+
+## Disabled
+
+<Canvas of={SearchStories.Disabled} />
+
+## Expandable
+
+<Canvas of={SearchStories.Expandable} />
+
+## Component API
+
+<ArgTypes of="cds-search" />
+
+<Markdown>{`${cdnJs({ components: ['search'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/search/search.mdx).

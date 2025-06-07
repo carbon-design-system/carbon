@@ -26,28 +26,6 @@ export default {
   subcomponents: {
     PopoverContent,
   },
-  argTypes: {
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-    relative: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     controls: {
       hideNoControlsWarning: true,
@@ -58,7 +36,30 @@ export default {
   },
 };
 
-const PlaygroundStory = (props) => {
+const sharedArgTypes = {
+  as: {
+    table: {
+      disable: true,
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  relative: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+const DefaultStory = (props) => {
   const { align, caret, dropShadow, highContrast, open } = props;
   return (
     <Popover
@@ -66,7 +67,8 @@ const PlaygroundStory = (props) => {
       caret={caret}
       dropShadow={dropShadow}
       highContrast={highContrast}
-      open={open}>
+      open={open}
+      {...props}>
       <div className="playground-trigger">
         <CheckboxIcon />
       </div>
@@ -80,7 +82,9 @@ const PlaygroundStory = (props) => {
   );
 };
 
-export const TabTip = () => {
+DefaultStory.argTypes = { ...sharedArgTypes };
+
+export const TabTip = (args) => {
   const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
   const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
@@ -96,7 +100,8 @@ export const TabTip = () => {
           }
         }}
         isTabTip
-        onRequestClose={() => setOpen(false)}>
+        onRequestClose={() => setOpen(false)}
+        {...args}>
         <button
           aria-label="Settings"
           type="button"
@@ -109,7 +114,7 @@ export const TabTip = () => {
         <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
-            legendText="Row height"
+            legendText="Row height 1"
             name="radio-button-group"
             defaultSelected="small">
             <RadioButton labelText="Small" value="small" id="radio-small" />
@@ -133,7 +138,8 @@ export const TabTip = () => {
         open={openTwo}
         isTabTip
         align={alignTwo}
-        onRequestClose={() => setOpenTwo(false)}>
+        onRequestClose={() => setOpenTwo(false)}
+        {...args}>
         <button
           aria-label="Settings"
           type="button"
@@ -146,7 +152,7 @@ export const TabTip = () => {
         <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
-            legendText="Row height"
+            legendText="Row height 2"
             name="radio-button-group-2"
             defaultSelected="small-2">
             <RadioButton labelText="Small" value="small-2" id="radio-small-2" />
@@ -169,16 +175,22 @@ export const TabTip = () => {
   );
 };
 
-export const Playground = PlaygroundStory.bind({});
+TabTip.argTypes = {
+  ...sharedArgTypes,
+  align: { control: false },
+  autoAlign: { control: false },
+};
 
-Playground.args = {
+export const Default = DefaultStory.bind({});
+
+Default.args = {
   caret: true,
   dropShadow: true,
   highContrast: false,
   open: true,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   align: {
     options: [
       'top',
@@ -223,13 +235,13 @@ Playground.argTypes = {
   },
 };
 
-Playground.story = {
+Default.story = {
   decorators: [
     (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
 };
 
-export const ExperimentalAutoAlign = () => {
+export const ExperimentalAutoAlign = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
 
@@ -245,7 +257,7 @@ export const ExperimentalAutoAlign = () => {
           top: '2500px',
           left: '2500px',
         }}>
-        <Popover open={open} align="top" autoAlign ref={ref}>
+        <Popover open={open} align="top" autoAlign ref={ref} {...args}>
           <div className="playground-trigger">
             <CheckboxIcon
               onClick={() => {
@@ -266,6 +278,136 @@ export const ExperimentalAutoAlign = () => {
           </PopoverContent>
         </Popover>
       </div>
+    </div>
+  );
+};
+
+export const ExperimentalAutoAlignBoundary = () => {
+  const [open, setOpen] = useState(true);
+  const ref = useRef();
+  const [boundary, setBoundary] = useState();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
+  return (
+    <div
+      style={{
+        display: 'grid',
+        placeItems: 'center',
+        overflow: 'scroll',
+        width: '800px',
+        height: '500px',
+        border: '1px',
+        borderStyle: 'dashed',
+        borderColor: 'black',
+        margin: '0 auto',
+      }}
+      ref={setBoundary}>
+      <div
+        style={{
+          width: '2100px',
+          height: '1px',
+          placeItems: 'center',
+        }}
+      />
+      <div style={{ placeItems: 'center', height: '32px', width: '32px' }}>
+        <Popover
+          open={open}
+          align="top"
+          autoAlign
+          autoAlignBoundary={boundary}
+          ref={ref}>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <div>
+              <p className="popover-title">This popover uses autoAlign</p>
+              <p className="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
+          </PopoverContent>
+        </Popover>
+        <div
+          style={{
+            height: '1000px',
+            width: '1px',
+            placeItems: 'center',
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const Test = () => {
+  const [open, setOpen] = useState();
+  const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
+  const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
+  return (
+    <div style={{ display: 'flex', gap: '8rem' }}>
+      <OverflowMenu
+        flipped={document?.dir === 'rtl'}
+        aria-label="overflow-menu">
+        <OverflowMenuItem itemText="Stop app" />
+        <OverflowMenuItem itemText="Restart app" />
+        <OverflowMenuItem itemText="Rename app" />
+        <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+        <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+        <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+      </OverflowMenu>
+
+      <Popover
+        align={align}
+        open={open}
+        onKeyDown={(evt) => {
+          if (match(evt, keys.Escape)) {
+            setOpen(false);
+          }
+        }}
+        isTabTip
+        onRequestClose={() => setOpen(false)}>
+        <button
+          aria-label="Settings"
+          type="button"
+          aria-expanded={open}
+          onClick={() => {
+            setOpen(!open);
+          }}>
+          <Settings />
+        </button>
+        <PopoverContent className="p-3">
+          <RadioButtonGroup
+            style={{ alignItems: 'flex-start', flexDirection: 'column' }}
+            legendText="Row height"
+            name="radio-button-group"
+            defaultSelected="small">
+            <RadioButton labelText="Small" value="small" id="radio-small" />
+            <RadioButton labelText="Large" value="large" id="radio-large" />
+          </RadioButtonGroup>
+          <hr />
+          <fieldset className={`cds--fieldset`}>
+            <legend className={`cds--label`}>Edit columns</legend>
+            <Checkbox defaultChecked labelText="Name" id="checkbox-label-1" />
+            <Checkbox defaultChecked labelText="Type" id="checkbox-label-2" />
+            <Checkbox
+              defaultChecked
+              labelText="Location"
+              id="checkbox-label-3"
+            />
+          </fieldset>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };

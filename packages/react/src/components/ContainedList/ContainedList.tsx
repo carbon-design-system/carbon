@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,10 +12,11 @@ import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ContainedListItem from './ContainedListItem';
+import { Search } from '../Search';
 
 const variants = ['on-page', 'disclosed'] as const;
 
-interface ContainedListType extends React.FC<ContainedListProps> {
+export interface ContainedListType extends React.FC<ContainedListProps> {
   ContainedListItem: typeof ContainedListItem;
 }
 
@@ -79,7 +80,7 @@ function filterChildren(children) {
 function renderChildren(children) {
   if (Array.isArray(children)) {
     children.map((child, index) => {
-      if (index === 0 && child.type?.displayName === 'Search') {
+      if (index === 0 && child.type === Search) {
         return child;
       }
 
@@ -87,7 +88,7 @@ function renderChildren(children) {
     });
   }
 
-  if (children && children.type?.displayName === 'Search') {
+  if (children && children.type === Search) {
     return children;
   }
 

@@ -16,8 +16,7 @@ the following:
 }
 ```
 
-For a full list of colors exported, refer to the [exports](#exports) section
-below.
+For a full list of colors exported, refer to the [API](#api) section below.
 
 In addition to individual colors, you can also access a `Map` of all colors from
 the IBM Design Language using the `$colors` variable.

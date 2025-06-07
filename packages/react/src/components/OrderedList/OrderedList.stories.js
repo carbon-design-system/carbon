@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import OrderedList from '../OrderedList';
 import ListItem from '../ListItem';
@@ -16,8 +23,8 @@ export default {
   },
 };
 
-export const Default = () => (
-  <OrderedList>
+export const Default = (args) => (
+  <OrderedList {...args}>
     <ListItem>Ordered List level 1</ListItem>
     <ListItem>Ordered List level 1</ListItem>
     <ListItem>Ordered List level 1</ListItem>
@@ -33,6 +40,40 @@ export const Default = () => (
     <ListItem>Ordered List level 1</ListItem>
   </OrderedList>
 );
+
+Default.args = {
+  isExpressive: false,
+  native: false,
+  nested: false,
+};
+
+Default.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  isExpressive: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  native: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  nested: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
 export const Nested = () => {
   return (
@@ -81,56 +122,4 @@ export const NativeListStyles = () => {
       <ListItem>Ordered List level 1</ListItem>
     </OrderedList>
   );
-};
-
-export const Playground = (args) => (
-  <OrderedList {...args}>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-    <ListItem>Ordered List level 1</ListItem>
-  </OrderedList>
-);
-
-Playground.args = {
-  isExpressive: false,
-  native: false,
-  nested: false,
-};
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  isExpressive: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  native: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  nested: {
-    control: {
-      type: 'boolean',
-    },
-  },
 };

@@ -70,7 +70,7 @@ test.describe('@avt Notifications', () => {
   test('@avt-advanced-states actionable info', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -84,7 +84,7 @@ test.describe('@avt Notifications', () => {
   test('@avt-advanced-states actionable info-square', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -100,7 +100,7 @@ test.describe('@avt Notifications', () => {
   test('@avt-advanced-states actionable success', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -114,7 +114,7 @@ test.describe('@avt Notifications', () => {
   test('@avt-advanced-states actionable warning', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -128,7 +128,7 @@ test.describe('@avt Notifications', () => {
   test('@avt-advanced-states actionable warning-alt', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -146,7 +146,7 @@ test.describe('@avt Notifications', () => {
   }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -165,7 +165,7 @@ test.describe('@avt Notifications', () => {
   }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -184,7 +184,7 @@ test.describe('@avt Notifications', () => {
   }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -203,7 +203,7 @@ test.describe('@avt Notifications', () => {
   }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -222,7 +222,7 @@ test.describe('@avt Notifications', () => {
   }) => {
     await visitStory(page, {
       component: 'Notifications',
-      id: 'components-notifications-actionable--playground',
+      id: 'components-notifications-actionable--default',
       globals: {
         theme: 'white',
         args: {
@@ -256,5 +256,16 @@ test.describe('@avt Notifications', () => {
       },
     });
     await expect(page).toHaveNoACViolations('Notifications toast');
+  });
+
+  test('@avt-advanced-states callout', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Notifications',
+      id: 'components-notifications-callout--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Notifications callout');
   });
 });

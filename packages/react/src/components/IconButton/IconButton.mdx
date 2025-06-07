@@ -1,4 +1,9 @@
-import { ArgsTable } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import  * as IconButtonStories from './IconButton.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+
+<Meta isTemplate />
 
 # IconButton
 
@@ -35,6 +40,15 @@ function ExampleComponent() {
   );
 }
 ```
+<Canvas
+  of={IconButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(IconButtonStories.Default),
+    },
+  ]}
+/>
 
 ## Kind
 
@@ -58,7 +72,7 @@ that the component remains accessible.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

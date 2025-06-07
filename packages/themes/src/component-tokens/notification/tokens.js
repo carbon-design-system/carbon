@@ -1,10 +1,17 @@
+/**
+ * Copyright IBM Corp. 2022, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import {
   red10,
   gray80,
   gray90,
   green10,
   blue10,
-  yellow30,
+  yellow10,
   white0,
 } from '@carbon/colors';
 import {
@@ -50,14 +57,9 @@ export const notificationBackgroundInfo = {
   g100: gray90,
 };
 
-export const colorMap = {
-  yellow30,
-  white0,
-};
-
 export const notificationBackgroundWarning = {
-  whiteTheme: colorMap,
-  g10: colorMap,
+  whiteTheme: yellow10,
+  g10: yellow10,
   g90: gray80,
   g100: gray90,
 };

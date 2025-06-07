@@ -49,59 +49,6 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <ToggletipLabel>Toggletip label</ToggletipLabel>
-        <Toggletip>
-          <ToggletipButton label="Show information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>
-              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut fsil labore et dolore magna
-              aliqua.
-            </p>
-            <ToggletipActions>
-              <Link href="#">Link action</Link>
-              <Button size="sm">Button</Button>
-            </ToggletipActions>
-          </ToggletipContent>
-        </Toggletip>
-      </div>
-      <br />
-      <br />
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}>
-        <ToggletipLabel>
-          Toggletip label -- using <code>defaultOpen</code> prop
-        </ToggletipLabel>
-        <Toggletip defaultOpen>
-          <ToggletipButton label="Show information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>
-              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut fsil labore et dolore magna
-              aliqua.
-            </p>
-            <ToggletipActions>
-              <Link href="#">Link action</Link>
-              <Button size="sm">Button</Button>
-            </ToggletipActions>
-          </ToggletipContent>
-        </Toggletip>
-      </div>
-    </div>
-  );
-};
-
 export const ExperimentalAutoAlign = () => {
   const ref = useRef();
   useEffect(() => {
@@ -140,14 +87,13 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
-const PlaygroundStory = (controls) => {
-  const { align } = controls;
+// Note: autoAlign is used here only to make tooltips visible in StackBlitz,
+// autoAlign is experimental and not part of the actual implementation.
+export const Default = (args) => {
   return (
     <>
-      <ToggletipLabel>
-        Toggletip label -- using <code>defaultOpen</code> prop
-      </ToggletipLabel>
-      <Toggletip align={align} defaultOpen>
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <Toggletip autoAlign {...args}>
         <ToggletipButton label="Show information">
           <Information />
         </ToggletipButton>
@@ -166,9 +112,7 @@ const PlaygroundStory = (controls) => {
   );
 };
 
-export const Playground = PlaygroundStory.bind({});
-
-Playground.argTypes = {
+Default.argTypes = {
   align: {
     options: [
       'top',
@@ -193,7 +137,7 @@ Playground.argTypes = {
   },
 };
 
-Playground.story = {
+Default.story = {
   decorators: [
     (story) => (
       <div

@@ -12,6 +12,7 @@
 @use '../../type' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 
@@ -62,7 +63,7 @@
     display: flex;
     cursor: pointer;
     min-block-size: convert.to-rem(20px);
-    padding-block-start: convert.to-rem(2px);
+    padding-block-start: convert.to-rem(1px);
     padding-inline-start: convert.to-rem(20px);
     user-select: none;
   }
@@ -91,6 +92,9 @@
     position: absolute;
     border: 1px solid $icon-primary;
     border-radius: 2px;
+    @include high-contrast-mode {
+      border: 1px solid ButtonBorder;
+    }
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
@@ -136,6 +140,13 @@
     border: none;
     border-width: 1px;
     background-color: $icon-primary;
+
+    // According to https://developer.mozilla.org/en-US/docs/Web/CSS/system-color, in high contrast mode, the
+    // checkbox should be displayed using SelectedItem and SelectedItemText.
+    @include high-contrast-mode {
+      border: 1px solid ButtonBorder;
+      background-color: SelectedItem;
+    }
   }
 
   // Display the check
@@ -229,6 +240,7 @@
   .#{$prefix}--checkbox__validation-msg {
     display: none;
     align-items: flex-start;
+    inline-size: 100%;
     margin-block-start: $spacing-02;
   }
 
@@ -325,6 +337,12 @@
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::after {
     border-color: $text-primary;
+
+    // According to https://developer.mozilla.org/en-US/docs/Web/CSS/system-color, in high contrast mode, the
+    // checkbox should be displayed using SelectedItem and SelectedItemText.
+    @include high-contrast-mode {
+      fill: SelectedItemText;
+    }
   }
 
   //-----------------------------------------------
@@ -366,12 +384,36 @@
     transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
   }
 
-  // Slug styles
+  //-----------------------------------------------
+  // Decorator
+  //-----------------------------------------------
+  .#{$prefix}--checkbox-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--decorator .#{$prefix}--checkbox-label-text {
+    display: flex;
+  }
+  // Remove v12
   .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label,
   .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--checkbox-label-text {
     display: flex;
   }
 
+  .#{$prefix}--checkbox-group--decorator
+    legend.#{$prefix}--label
+    .#{$prefix}--checkbox-group-inner--decorator
+    > *,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--checkbox-wrapper-inner--decorator
+    > * {
+    margin-inline-start: $spacing-03;
+  }
+  // Remove v12
+  .#{$prefix}--checkbox-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label,
   .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label .#{$prefix}--slug,
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
@@ -379,6 +421,16 @@
     margin-inline-start: $spacing-03;
   }
 
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
+  // Remove v12
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline,
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
     .#{$prefix}--slug__button--inline {
@@ -386,7 +438,9 @@
     margin-block-start: convert.to-rem(-1px);
   }
 
-  // horizontal checkbox group
+  //-----------------------------------------------
+  // Horizontal group
+  //-----------------------------------------------
   .#{$prefix}--checkbox-group--horizontal {
     position: relative;
     display: flex;

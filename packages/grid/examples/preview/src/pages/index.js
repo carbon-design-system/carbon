@@ -789,39 +789,23 @@ const sections = [
           <div className="cds--grid">
             <div className="cds--row">
               <div className="cds--col">
-                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
-                  <div className="cds--aspect-ratio--object">
-                    <div className="outside">
-                      <div className="inside">1</div>
-                    </div>
-                  </div>
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="inside">1</div>
                 </div>
               </div>
               <div className="cds--col">
-                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
-                  <div className="cds--aspect-ratio--object">
-                    <div className="outside">
-                      <div className="inside">1</div>
-                    </div>
-                  </div>
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="inside">1</div>
                 </div>
               </div>
               <div className="cds--col">
-                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
-                  <div className="cds--aspect-ratio--object">
-                    <div className="outside">
-                      <div className="inside">1</div>
-                    </div>
-                  </div>
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="inside">1</div>
                 </div>
               </div>
               <div className="cds--col">
-                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
-                  <div className="cds--aspect-ratio--object">
-                    <div className="outside">
-                      <div className="inside">1</div>
-                    </div>
-                  </div>
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="inside">1</div>
                 </div>
               </div>
             </div>
@@ -979,29 +963,29 @@ const sections = [
           <div className="cds--grid">
             <div className="cds--row">
               <div className="cds--col">
-                <div className="outside">
-                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x2">
+                  <div className="inside">
                     1
                   </div>
                 </div>
               </div>
               <div className="cds--col">
-                <div className="outside">
-                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x2">
+                  <div className="inside">
                     1
                   </div>
                 </div>
               </div>
               <div className="cds--col">
-                <div className="outside">
-                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x2">
+                  <div className="inside">
                     1
                   </div>
                 </div>
               </div>
               <div className="cds--col">
-                <div className="outside">
-                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x2">
+                  <div className="inside">
                     1
                   </div>
                 </div>
@@ -1015,8 +999,8 @@ const sections = [
         content: () => (
           <div className="cds--grid">
             <div className="cds--row">
-              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
-                <div className="outside">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
                   <div className="inside">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Duis aliquam tempus rutrum. Morbi consequat, mi quis
@@ -1037,18 +1021,18 @@ const sections = [
                   </div>
                 </div>
               </div>
-              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
-                <div className="outside">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
-                <div className="outside">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
-                <div className="outside">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--2x1">
                   <div className="inside">1</div>
                 </div>
               </div>

@@ -84,30 +84,15 @@ $notification-background-info: (
 ) !default;
 
 $notification-background-warning: (
-  fallback:
-    color.mix(
-      map.get(notification.$color-map, yellow-30),
-      map.get(notification.$color-map, white-0),
-      15%
-    ),
+  fallback: map.get(notification.$notification-background-warning, white-theme),
   values: (
     (
       theme: themes.$white,
-      value:
-        color.mix(
-          map.get(notification.$color-map, yellow-30),
-          map.get(notification.$color-map, white-0),
-          15%
-        ),
+      value: map.get(notification.$notification-background-warning, white-theme),
     ),
     (
       theme: themes.$g10,
-      value:
-        color.mix(
-          map.get(notification.$color-map, yellow-30),
-          map.get(notification.$color-map, white-0),
-          15%
-        ),
+      value: map.get(notification.$notification-background-warning, g-10),
     ),
     (
       theme: themes.$g90,

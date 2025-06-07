@@ -19,22 +19,18 @@ export default {
   },
 };
 
-export const Default = () => {
-  return <Loading className={'some-class'} withOverlay={false} />;
-};
-
-export const Playground = (args) => {
+export const Default = (args) => {
   return <Loading className={'some-class'} {...args} />;
 };
 
-Playground.args = {
+Default.args = {
   active: true,
   withOverlay: false,
   small: false,
   description: 'Loading',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   children: {
     table: {
       disable: true,

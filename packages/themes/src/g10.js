@@ -62,6 +62,7 @@ export const backgroundSelectedHover = adjustAlpha(gray50, 0.32);
 // layer-01
 export const layer01 = white;
 export const layerActive01 = gray30;
+export const layerBackground01 = gray10;
 export const layerHover01 = whiteHover;
 export const layerSelected01 = gray20;
 export const layerSelectedHover01 = gray20Hover;
@@ -69,6 +70,7 @@ export const layerSelectedHover01 = gray20Hover;
 // layer-02
 export const layer02 = gray10;
 export const layerActive02 = gray30;
+export const layerBackground02 = white;
 export const layerHover02 = gray10Hover;
 export const layerSelected02 = gray20;
 export const layerSelectedHover02 = gray20Hover;
@@ -76,6 +78,7 @@ export const layerSelectedHover02 = gray20Hover;
 // layer-03
 export const layer03 = white;
 export const layerActive03 = gray30;
+export const layerBackground03 = gray10;
 export const layerHover03 = whiteHover;
 export const layerSelected03 = gray20;
 export const layerSelectedHover03 = gray20Hover;

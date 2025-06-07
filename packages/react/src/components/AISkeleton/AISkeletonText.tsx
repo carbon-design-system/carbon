@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { SkeletonText } from '../SkeletonText';
 
-interface AISkeletonTextProps {
+export interface AISkeletonTextProps {
   /**
    * Specify an optional className to be applied to the container node.
    */

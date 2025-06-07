@@ -16,7 +16,7 @@ import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 
-type DivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
+export type DivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
 export interface ModalHeaderProps extends DivProps {
   /**
    * Provide an optional function to be called when the close button is
@@ -124,7 +124,7 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
       <div className={headerClass} {...rest} ref={ref}>
         {label && <h2 className={labelClass}>{label}</h2>}
 
-        {title && <h3 className={titleClass}>{title}</h3>}
+        {title && <h2 className={titleClass}>{title}</h2>}
 
         {children}
 

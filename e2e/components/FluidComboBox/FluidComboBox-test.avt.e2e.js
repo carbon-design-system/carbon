@@ -57,6 +57,9 @@ test.describe('@avt FluidComboBox', () => {
     const clearButton = page.getByRole('button', {
       name: 'Clear selected item',
     });
+    const exampleOption = page.getByRole('option', {
+      name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    });
     const optionOne = page.getByRole('option', {
       name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     });
@@ -71,6 +74,11 @@ test.describe('@avt FluidComboBox', () => {
     await expect(combobox).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(menu).toBeVisible();
+    // Expect focus to be on 1st item in menu after Arrow Down
+    // when there is no initial selected item
+    await expect(exampleOption).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
     await expect(menu).toBeHidden();
@@ -84,6 +92,8 @@ test.describe('@avt FluidComboBox', () => {
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
+    // Expect focus to be retained when no initial selected item after Enter
+    await expect(combobox).toBeFocused();
     await page.keyboard.press('ArrowDown');
     // Navigation inside the menu
     // move to first option

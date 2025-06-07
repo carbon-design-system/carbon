@@ -1,0 +1,87 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TileStories from './tile.stories';
+
+<Meta of={TileStories} />
+
+# Tile
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tile)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tile/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tile/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Clickable](#clickable)
+- [Expandable](#expandable)
+- [Expandable with Interactive](#expandable-with-interactive)
+- [Selectable](#selectable)
+- [Radio](#radio)
+- [AI Label](#ai-label)
+- [Experimental Improved Contrast](#experimental-improved-contrast)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={TileStories.Default} />
+
+## Clickable
+
+<Canvas of={TileStories.clickable} />
+
+#### With Custom Icon
+
+<Canvas of={TileStories.clickableWithCustomIcon} />
+
+## Expandable
+
+<Canvas of={TileStories.expandable} />
+
+## Expandable with Interactive
+
+<Canvas of={TileStories.ExpandableWithInteractive} />
+
+## Selectable
+
+<Canvas of={TileStories.Selectable} />
+
+## Multi Select
+
+<Canvas of={TileStories.MultiSelect} />
+
+## Radio
+
+<Canvas of={TileStories.Radio} />
+
+## Component API
+
+## `cds-tile`
+<ArgTypes of="cds-tile" />
+
+## `cds-clickable-tile`
+<ArgTypes of="cds-clickable-tile" />
+
+## `cds-expandable-tile`
+<ArgTypes of="cds-expandable-tile" />
+
+## `cds-radio-tile`
+<ArgTypes of="cds-radio-tile" />
+
+## `cds-selectable-tile`
+<ArgTypes of="cds-selectable-tile" />
+
+## `cds-tile-group`
+<ArgTypes of="cds-tile-group" />
+
+<Markdown>{`${cdnJs({ components: ['tile'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tile/tile.mdx).

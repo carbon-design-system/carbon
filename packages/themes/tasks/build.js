@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
@@ -20,6 +18,8 @@ const buildModulesTokensFile = require('./builders/modules-tokens');
 const buildModulesButtonTokens = require('./builders/modules-button-tokens');
 const buildModulesTagTokens = require('./builders/modules-tag-tokens');
 const buildModulesNotificationTokens = require('./builders/modules-notification-tokens');
+const buildModulesStatusTokens = require('./builders/modules-status-tokens');
+const buildModulesContentSwitcherTokens = require('./builders/modules-content-switcher-tokens');
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -69,13 +69,25 @@ async function build() {
         return buildModulesNotificationTokens();
       },
     },
+    {
+      filepath: path.join(GENERATED_SCSS_DIR, '_status-tokens.scss'),
+      builder() {
+        return buildModulesStatusTokens();
+      },
+    },
+    {
+      filepath: path.join(GENERATED_SCSS_DIR, '_content-switcher-tokens.scss'),
+      builder() {
+        return buildModulesContentSwitcherTokens();
+      },
+    },
   ];
 
   for (const { filepath, builder } of files) {
     await fs.ensureFile(filepath);
 
     const { code } = generate(builder());
-    await fs.writeFile(filepath, code);
+    await fs.writeFile(filepath, await code);
   }
 
   reporter.success('Done! 🎉');

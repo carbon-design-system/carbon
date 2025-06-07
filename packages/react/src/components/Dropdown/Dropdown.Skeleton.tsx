@@ -1,18 +1,17 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import cx from 'classnames';
-import { ListBoxSize, PropTypes as ListBoxPropTypes } from '../ListBox';
+import { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 
-export interface DropdownSkeletonProps extends ReactAttr<HTMLDivElement> {
+export interface DropdownSkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify an optional className to add.
    */
@@ -69,7 +68,7 @@ DropdownSkeleton.propTypes = {
   /**
    * Specify the size of the ListBox.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 };
 
 export default DropdownSkeleton;

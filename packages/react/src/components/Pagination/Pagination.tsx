@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import { equals } from '../../tools/array';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
+import isEqual from 'react-fast-compare';
 
 type ExcludedAttributes = 'id' | 'onChange';
 
@@ -225,7 +225,8 @@ const Pagination = React.forwardRef(function Pagination(
     [`${prefix}--pagination__button--backward`]: true,
     [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
   });
-  const forwardButtonDisabled = disabled || page === totalPages;
+  const forwardButtonDisabled =
+    disabled || (page === totalPages && !pagesUnknown);
   const forwardButtonClasses = cx({
     [`${prefix}--pagination__button`]: true,
     [`${prefix}--pagination__button--forward`]: true,
@@ -244,7 +245,7 @@ const Pagination = React.forwardRef(function Pagination(
     setPrevControlledPageSize(controlledPageSize);
   }
 
-  if (!equals(controlledPageSizes, prevPageSizes)) {
+  if (!isEqual(controlledPageSizes, prevPageSizes)) {
     const pageSizes = mapPageSizesToObject(controlledPageSizes);
 
     const hasPageSize = pageSizes.find((size) => {
@@ -387,7 +388,7 @@ const Pagination = React.forwardRef(function Pagination(
             <Select
               id={`${prefix}-pagination-select-${inputId}-right`}
               className={`${prefix}--select__page-number`}
-              labelText={`Page number, of ${totalPages} pages`}
+              labelText={`Page of ${totalPages} pages`}
               inline
               hideLabel
               onChange={handlePageInputChange}
@@ -413,7 +414,7 @@ const Pagination = React.forwardRef(function Pagination(
             <CaretLeft />
           </IconButton>
           <IconButton
-            align="top-right"
+            align="top-end"
             disabled={forwardButtonDisabled || isLastPage}
             kind="ghost"
             className={forwardButtonClasses}

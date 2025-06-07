@@ -1,0 +1,53 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as OverflowMenuStories from './overflow-menu.stories';
+
+<Meta of={OverflowMenuStories} />
+
+# Overflow menu
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/overflow-menu)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/overflow-menu/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/overflow-menu/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Render Custom Icon](#render-custom-icon)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-overflow-menu` component is a clickable element that contains
+additional options that are available to the user, but there is a space
+constraint.
+
+<Canvas of={OverflowMenuStories.Default} />
+
+## Render Custom Icon
+
+<Canvas of={OverflowMenuStories.RenderCustomIcon} />
+
+## Component API
+
+<ArgTypes of="cds-overflow-menu" />
+
+## `cds-overflow-menu-body`
+
+<ArgTypes of="cds-overflow-menu-body" />
+
+## `cds-overflow-menu-item`
+
+<ArgTypes of="cds-overflow-menu-item" />
+
+<Markdown>{`${cdnJs({ components: ['overflow-menu'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/overflow-menu/overflow-menu.mdx).

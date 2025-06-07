@@ -1,0 +1,91 @@
+# Using custom styles in components
+
+Since the
+[Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+provides encapsulation, web component styles do not affect styles in your
+application, or vice versa.
+
+However, in cases where your application or a Carbon-derived style guide needs
+to change the styles of components, there are a few options.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Using CSS Custom Properties](#using-css-custom-properties)
+- [Dependency injection](#dependency-injection)
+- [Creating derived components with different style](#creating-derived-components-with-different-style)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Using CSS Custom Properties
+
+Changes to CSS Custom Properties of the Carbon theme are reflected in the color
+scheme of web components:
+
+```css
+footer {
+  --cds-interactive-02: #6f6f6f; /* `$interactive-02` token for `g100` theme */
+}
+```
+
+The color of the button in the code below changes to the `g100` theme:
+
+```html
+<footer>
+  <cds-button kind="secondary">Secondary button</cds-button>
+</footer>
+```
+
+The names of CSS Custom Properties you can use are the Carbon theme
+[tokens](https://carbondesignsystem.com/elements/themes/overview/#default-theme),
+prefixed with `--cds-`.
+
+With CSS Custom Properties approach, you can switch the entire theme under the
+specific element by:
+
+```css
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+
+footer {
+  @include theme.theme(themes.$g100);
+} // Emits all theme tokens in CSS Custom Properties
+```
+
+Some components such as `button`, `notification`, and `tag` have specific tokens
+per theme that need to emitted in the styles. You can do this for example by
+adding the following:
+
+```css
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
+@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+@include theme.add-component-tokens(button-tokens.$button-tokens);
+@include theme.add-component-tokens(notification-tokens.$notification-tokens);
+@include theme.add-component-tokens(tag-tokens.$tag-tokens);
+```
+
+## Creating derived components with different style
+
+You can create a derived class of our component and override
+[static `styles` property](https://lit.dev/docs/components/styles/):
+
+```javascript
+import { css, customElement } from 'lit';
+import CDSDropdown from '@carbon/web-components/es/components/dropdown/dropdown';
+
+@customElement('my-dropdown')
+class MyDropdown extends CDSDropdown {
+  // Custom CSS to enforce `field-02` (light) style of the dropdown
+  static styles = css`
+    ${CDSDropdown.styles}
+    .cds--list-box {
+      background-color: white;
+    }
+  `;
+}
+```

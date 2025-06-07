@@ -1,0 +1,16 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '../button/button';
+
+:host(#{$prefix}-chat-button-skeleton) {
+  @include emit-layout-tokens();
+}

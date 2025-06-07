@@ -1,17 +1,20 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useRef } from 'react';
+import React, { cloneElement, useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'onChange';
 
@@ -29,6 +32,11 @@ export interface RadioButtonProps
    * Provide an optional className to be applied to the containing node
    */
   className?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `RadioButton` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify whether the `<RadioButton>` should be checked by default
@@ -83,6 +91,7 @@ export interface RadioButtonProps
   onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButton` component
    */
   slug?: ReactNode;
@@ -102,6 +111,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
   (props, ref) => {
     const {
       className,
+      decorator,
       disabled,
       hideLabel,
       id,
@@ -137,18 +147,19 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
         [`${prefix}--radio-button-wrapper--label-${labelPosition}`]:
           labelPosition !== 'right',
         [`${prefix}--radio-button-wrapper--slug`]: slug,
+        [`${prefix}--radio-button-wrapper--decorator`]: decorator,
       }
     );
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    let normalizedSlug: React.ReactElement | undefined;
-    if (slug && React.isValidElement(slug)) {
-      const size = slug.props?.['kind'] === 'inline' ? 'md' : 'mini';
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size,
-      });
-    }
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, {
+          size: candidate.props?.['kind'] === 'inline' ? 'md' : 'mini',
+        })
+      : null;
 
     return (
       <div className={wrapperClasses}>
@@ -169,7 +180,16 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           {labelText && (
             <Text className={innerLabelClasses}>
               {labelText}
-              {normalizedSlug}
+              {slug ? (
+                normalizedDecorator
+              ) : decorator ? (
+                <div
+                  className={`${prefix}--radio-button-wrapper-inner--decorator`}>
+                  {normalizedDecorator}
+                </div>
+              ) : (
+                ''
+              )}
             </Text>
           )}
         </label>
@@ -190,6 +210,11 @@ RadioButton.propTypes = {
    * Provide an optional className to be applied to the containing node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `RadioButton` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify whether the `<RadioButton>` should be checked by default
@@ -247,7 +272,10 @@ RadioButton.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButton` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Specify the value of the `<RadioButton>`

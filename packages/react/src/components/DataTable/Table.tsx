@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,13 +14,13 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
 import { useWindowEvent } from '../../internal/useEvent';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
-interface TableProps {
+export interface TableProps {
   experimentalAutoAlign?: boolean;
 
   className?: string;
@@ -54,6 +54,11 @@ interface TableProps {
    * `true` to add useZebraStyles striping.
    */
   useZebraStyles?: boolean;
+
+  /**
+   * Specify the table tabIndex
+   */
+  tabIndex?: number;
 }
 
 const isElementWrappingContent = (
@@ -108,6 +113,7 @@ export const Table = ({
   stickyHeader,
   overflowMenuOnHover = true,
   experimentalAutoAlign = false,
+  tabIndex,
   ...other
 }: PropsWithChildren<TableProps>) => {
   const { titleId, descriptionId } = useContext(TableContext);
@@ -226,7 +232,7 @@ export const Table = ({
     <div
       className={`${prefix}--data-table-content`}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-      tabIndex={isScrollable ? 0 : undefined}>
+      tabIndex={tabIndex ?? (isScrollable ? 0 : undefined)}>
       <table
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
@@ -287,6 +293,11 @@ Table.propTypes = {
    * `true` to add useZebraStyles striping.
    */
   useZebraStyles: PropTypes.bool,
+
+  /**
+   * Specify the table tabIndex
+   */
+  tabIndex: PropTypes.number,
 };
 
 export default Table;

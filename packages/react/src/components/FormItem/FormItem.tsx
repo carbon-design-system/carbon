@@ -10,7 +10,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-type FormItemProps = {
+export type FormItemProps = {
   /**
    * Provide content to be rendered in the form item
    */

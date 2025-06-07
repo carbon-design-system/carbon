@@ -1,0 +1,166 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/combo-box' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/text-input/text-input';
+@use '../dropdown/dropdown';
+
+:host(#{$prefix}-combo-box) {
+  @extend :host(#{$prefix}-dropdown);
+  @include emit-layout-tokens();
+
+  outline: none;
+
+  .#{$prefix}--assistive-text {
+    inset-block-start: -100%;
+    // Hides screen reader cursor
+    inset-inline-start: -100%;
+  }
+
+  .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+
+  .#{$prefix}--list-box__menu {
+    inset-block-start: 100%;
+    margin-block-start: 1px;
+    outline: none;
+  }
+}
+
+:host(#{$prefix}-combo-box[isClosable]) {
+  .#{$prefix}--list-box__invalid-icon {
+    /* stylelint-disable declaration-no-important */
+    inset-inline-end: to-rem(66px) !important;
+    /* stylelint-enable declaration-no-important */
+  }
+}
+
+:host(#{$prefix}-combo-box[disabled]),
+:host(#{$prefix}-combo-box[read-only]) {
+  .#{$prefix}--list-box__selection {
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-combo-box[invalid]) {
+  .#{$prefix}--form__helper-text {
+    color: $text-error;
+  }
+}
+
+:host(#{$prefix}-combo-box[read-only]) {
+  .#{$prefix}--list-box__selection svg {
+    fill: $icon-disabled;
+  }
+}
+
+:host(#{$prefix}-combo-box-item) {
+  @extend .#{$prefix}--list-box__menu-item;
+
+  display: block;
+
+  .#{$prefix}--list-box__menu-item__option {
+    block-size: auto;
+  }
+
+  &:hover {
+    background-color: $layer-hover;
+  }
+}
+
+:host(#{$prefix}-combo-box-item[disabled]) {
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-disabled;
+    text-decoration: none;
+  }
+}
+
+:host(#{$prefix}-combo-box-item[highlighted]) {
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-combo-box-item[selected]) {
+  @extend .#{$prefix}--list-box__menu-item--active;
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
+  }
+}
+
+:host(#{$prefix}-combo-box-item[size='sm']) {
+  block-size: $spacing-07;
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-block: to-rem(7px);
+  }
+}
+
+:host(#{$prefix}-combo-box-item[size='lg']) {
+  block-size: $spacing-09;
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-block: to-rem(15px);
+  }
+}
+
+:host(#{$prefix}-combo-box[ai-label]) {
+  @extend .#{$prefix}--list-box__wrapper--slug;
+
+  .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+  }
+
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-50%);
+  }
+}
+
+:host(#{$prefix}-combo-box[ai-label][isclosable]) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-combo-box[warn]),
+:host(#{$prefix}-combo-box[invalid]) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-combo-box[warn][isclosable]),
+:host(#{$prefix}-combo-box[invalid][isclosable]) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: to-rem(88px);
+  }
+}

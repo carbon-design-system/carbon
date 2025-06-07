@@ -29,66 +29,42 @@ export default {
   },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <Grid>
+    <Grid {...args}>
       <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
+        <AspectRatio {...args}>Content</AspectRatio>
       </Column>
       <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
+        <AspectRatio {...args}>Content</AspectRatio>
       </Column>
       <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
+        <AspectRatio {...args}>Content</AspectRatio>
       </Column>
       <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
+        <AspectRatio {...args}>Content</AspectRatio>
       </Column>
     </Grid>
   );
 };
 
-export const Playground = {
-  render: ({ ratio, ...args }) => {
-    return (
-      <Grid {...args}>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-      </Grid>
-    );
-  },
-};
-
-Playground.argTypes = {
+Default.argTypes = {
   as: {
-    table: {
-      disable: true,
-    },
+    control: false,
   },
   children: {
-    table: {
-      disable: true,
-    },
+    control: false,
   },
   className: {
-    table: {
-      disable: true,
-    },
+    control: false,
   },
   ratio: {
     control: {
       type: 'select',
     },
     options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
+    table: {
+      category: 'AspectRatio',
+    },
   },
 };

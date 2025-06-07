@@ -15,6 +15,9 @@ import { WarningHex, Layers, Chemistry } from '@carbon/react/icons';
 import { prefix } from '../_prefix';
 
 const types = {
+  background: {
+    icon: Layers,
+  },
   'deprecation-notice': {
     icon: WarningHex,
   },

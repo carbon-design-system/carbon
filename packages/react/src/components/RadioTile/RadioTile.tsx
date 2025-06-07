@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@ import {
 } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { cloneElement } from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -20,6 +20,8 @@ import deprecate from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface RadioTileProps {
   /**
@@ -36,6 +38,11 @@ export interface RadioTileProps {
    * Provide an optional `className` to be applied to the underlying `<label>`.
    */
   className?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `RadioTile` component
+   */
+  decorator?: React.ReactNode;
 
   /**
    * Specify whether the `RadioTile` should be disabled.
@@ -79,7 +86,8 @@ export interface RadioTileProps {
   ) => void;
 
   /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   * @deprecated please use `decorator` instead.
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioTile` component
    */
   slug?: React.ReactNode;
 
@@ -103,6 +111,7 @@ const RadioTile = React.forwardRef(function RadioTile(
   {
     children,
     className: customClassName,
+    decorator,
     disabled,
     light,
     checked,
@@ -131,6 +140,8 @@ const RadioTile = React.forwardRef(function RadioTile(
       [`${prefix}--tile--disabled`]: disabled,
       [`${prefix}--tile--slug`]: slug,
       [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
+      [`${prefix}--tile--decorator`]: decorator,
+      [`${prefix}--tile--decorator-rounded`]: decorator && hasRoundedCorners,
     }
   );
   const v12TileRadioIcons = useFeatureFlag('enable-v12-tile-radio-icons');
@@ -161,13 +172,12 @@ const RadioTile = React.forwardRef(function RadioTile(
     }
   }
 
-  // Slug is always size `xs`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'xs',
-    });
-  }
+  // AILabel is always size `xs`
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'xs' })
+    : null;
 
   return (
     <div>
@@ -188,7 +198,15 @@ const RadioTile = React.forwardRef(function RadioTile(
       <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>{icon()}</span>
         <Text className={`${prefix}--tile-content`}>{children}</Text>
-        {normalizedSlug}
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--tile--inner-decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
       </label>
     </div>
   );
@@ -211,6 +229,11 @@ RadioTile.propTypes = {
    * Provide an optional `className` to be applied to the underlying `<label>`.
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `RadioTile` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify whether the `RadioTile` should be disabled.
@@ -255,9 +278,13 @@ RadioTile.propTypes = {
   required: PropTypes.bool,
 
   /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioTile` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `RadioTile` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the tab index of the underlying `<input>`.

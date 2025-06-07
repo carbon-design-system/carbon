@@ -1,0 +1,127 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/search' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include search;
+
+:host(#{$prefix}-search) {
+  @extend .#{$prefix}--search;
+
+  outline: none;
+}
+
+:host(#{$prefix}-search[expandable]) {
+  @extend .#{$prefix}--search--expandable;
+}
+
+:host(#{$prefix}-search[expandable][size='sm']) {
+  .#{$prefix}--search-magnifier {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+  }
+}
+
+:host(#{$prefix}-search[expandable][size='md']) {
+  .#{$prefix}--search-magnifier {
+    block-size: $spacing-08;
+    inline-size: $spacing-08;
+  }
+}
+
+:host(#{$prefix}-search[expandable][size='lg']) {
+  .#{$prefix}--search-magnifier {
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded]) {
+  @extend .#{$prefix}--search--expanded;
+
+  .#{$prefix}--search-input {
+    inline-size: 100%;
+  }
+  .#{$prefix}--search-magnifier {
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded][size='sm']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-07;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded][size='md']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-08;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded][size='lg']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-09;
+  }
+
+  ::slotted(.#{$prefix}--search-magnifier) {
+    block-size: rem(48px);
+    inline-size: rem(48px);
+  }
+}
+
+:host(#{$prefix}-search[disabled]) {
+  svg {
+    fill: $icon-on-color-disabled;
+  }
+
+  .#{$prefix}--search-close {
+    outline: none;
+    pointer-events: none;
+
+    &::before {
+      background: none;
+    }
+  }
+}
+
+:host(#{$prefix}-search-skeleton) {
+  inline-size: 100%;
+
+  .#{$prefix}--search-input {
+    @include skeleton;
+
+    inline-size: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+:host(#{$prefix}-search[size='sm']),
+:host(#{$prefix}-search-skeleton[size='sm']) {
+  @extend .#{$prefix}--search--sm;
+}
+
+:host(#{$prefix}-search[size='md']),
+:host(#{$prefix}-search-skeleton[size='md']) {
+  @extend .#{$prefix}--search--md;
+}
+
+:host(#{$prefix}-search[size='lg']),
+:host(#{$prefix}-search-skeleton[size='lg']) {
+  @extend .#{$prefix}--search--lg;
+}

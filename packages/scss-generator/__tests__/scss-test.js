@@ -9,7 +9,7 @@
 
 'use strict';
 
-const prettier = require('prettier');
+const prettier = require('prettier2');
 const { generate, types: t } = require('../src');
 
 const prettierOptions = {

@@ -77,7 +77,7 @@ figma.connect(
         openOnHover
         definition={tooltip.definition}
         align={align}>
-        {tooltip.children}
+        {item.children}
       </DefinitionTooltip>
     ),
   }

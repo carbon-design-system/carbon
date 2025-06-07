@@ -1,0 +1,176 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ModalStories from './modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modal
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/modal)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Opening/closing modal](#openingclosing-modal)
+- [Modal sizes](#modal-sizes)
+  - [Overflow content](#overflow-content)
+- [Modal button variants](#modal-button-variants)
+- [Using modal title as message](#using-modal-title-as-message)
+- [Focus management](#focus-management)
+- [CDN](#cdn)
+- [References](#references)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-modal` allows you to use its bespoke set of contents. You can also use
+`cds-modal-label`, `cds-modal-heading`, and `cds-modal-footer-button` components
+to change the corresponding text.
+
+<Canvas of={ModalStories.WithStateManager} />
+
+## Component API
+
+<ArgTypes of="cds-modal" />
+
+## `cds-modal-footer-button`
+
+<ArgTypes of="cds-modal-footer-button" />
+
+## Opening/closing modal
+
+For both modal variants, you can open/close the modal by changing the `open`
+attribute. For example, you can implement a button that launches the modal upon
+click.
+
+```javascript
+const toggleButton = () => {
+  document.querySelector('cds-modal')?.toggleAttribute('open');
+};
+```
+
+## Modal sizes
+
+There are four responsive modal sizes: `xs`, `sm`, `md` (default), and `lg`. You
+can set it via the `size` attribute.
+
+```html
+<cds-modal size="lg">
+  <cds-modal-header>
+    <cds-modal-close-button></cds-modal-close-button>
+    <cds-modal-label>Label (Optional)</cds-modal-label>
+    <cds-modal-heading>Modal Title</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body>
+    <cds-modal-body-content>Modal text description</cds-modal-body-content>
+  </cds-modal-body>
+  <cds-modal-footer>
+    <cds-modal-footer-button kind="secondary" data-modal-close
+      >Cancel</cds-modal-footer-button
+    >
+    <cds-modal-footer-button kind="primary">Save</cds-modal-footer-button>
+  </cds-modal-footer>
+</cds-modal>
+```
+
+## Overflow content
+
+In cases where even the largest modal size does not fit all of the modal
+content, Carbon design specifies having a "visual fade" at the end of the modal
+body area to indicate there is additional content out of view. You can set
+`has-scrolling-content` attribute to the component as such:
+
+```html
+<cds-modal has-scrolling-content>
+  <cds-modal-header>
+    <cds-modal-close-button></cds-modal-close-button>
+    <cds-modal-label>Label (Optional)</cds-modal-label>
+    <cds-modal-heading>Modal Title</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body>
+    <cds-modal-body-content>Modal text description</cds-modal-body-content>
+    <p>Some very large contents...</p>
+  </cds-modal-body>
+  <cds-modal-footer>
+    <cds-modal-footer-button kind="secondary" data-modal-close
+      >Cancel</cds-modal-footer-button
+    >
+    <cds-modal-footer-button kind="primary">Save</cds-modal-footer-button>
+  </cds-modal-footer>
+</cds-modal>
+```
+
+## Modal button variants
+
+With the modal component you can use up to three buttons. One has to be primary,
+and the others secondary. Only the primary button can be a danger button.
+
+## Using modal title as message
+
+For short, direct messages the title can include the whole message to add visual
+clarity to an otherwise repetitive title and body message.
+
+```html
+<cds-modal>
+  <cds-modal-header>
+    <cds-modal-close-button></cds-modal-close-button>
+    <cds-modal-heading>You have been successfully signed out</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body></cds-modal-body>
+</cds-modal>
+```
+
+## Focus management
+
+Once the modal is open, keyboard focus will be restricted inside the modal. This
+means:
+
+- If you press Tab at the last keyboard-focusable element in modal, the first
+  keyboard-focusable element in modal will get focus.
+- If you press Shift-Tab at the first keyboard-focusable element in the modal,
+  the last keyboard-focusable element in the modal will get focus.
+
+You can set the DOM element that gets focus when the modal gets open by using
+the `data-modal-primary-focus` attribute.
+
+```html
+<cds-modal>
+  <cds-modal-header>
+    <cds-modal-close-button></cds-modal-close-button>
+    <cds-modal-label>Label (Optional)</cds-modal-label>
+    <cds-modal-heading>Modal Title</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body>
+    <cds-modal-body-content>Modal text description</cds-modal-body-content>
+    <p>Some very large contents...</p>
+  </cds-modal-body>
+  <cds-modal-footer>
+    <cds-modal-footer-button
+      data-modal-primary-focus
+      kind="secondary"
+      data-modal-close
+      >Cancel</cds-modal-footer-button
+    >
+    <cds-modal-footer-button kind="primary">Save</cds-modal-footer-button>
+  </cds-modal-footer>
+</cds-modal>
+```
+
+<Markdown>{`${cdnJs({ components: ['modal'] })}`}</Markdown>
+
+## References
+
+Check out the
+[usage guidelines](https://www.carbondesignsystem.com/components/modal/usage/)
+on the Carbon Design System website.
+
+## Feedback
+
+Help us improve this component by providing feedback through, asking questions
+on Slack,or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/edit/main/packages/carbon-web-components/src/components/modal/modal-story.mdx).

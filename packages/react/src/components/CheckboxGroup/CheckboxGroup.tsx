@@ -1,20 +1,24 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
+import React, { cloneElement, type ReactNode } from 'react';
 import cx from 'classnames';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface CheckboxGroupProps {
   children?: ReactNode;
   className?: string;
+  decorator?: ReactNode;
   helperText?: ReactNode;
   invalid?: boolean;
   invalidText?: ReactNode;
@@ -22,6 +26,10 @@ export interface CheckboxGroupProps {
   orientation?: 'horizontal' | 'vertical';
   legendText: ReactNode;
   readOnly?: boolean;
+  /**
+   * * @deprecated please use decorator instead.
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
+   */
   slug?: ReactNode;
   warn?: boolean;
   warnText?: ReactNode;
@@ -35,6 +43,7 @@ export interface CustomType {
 const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   children,
   className,
+  decorator,
   helperText,
   invalid,
   invalidText,
@@ -70,19 +79,16 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
     [`${prefix}--checkbox-group--slug`]: slug,
+    [`${prefix}--checkbox-group--decorator`]: decorator,
   });
 
-  // Slug is always size `mini`
-  let normalizedSlug;
-  if (
-    React.isValidElement(slug) &&
-    (slug['type'] as any)?.displayName === 'AILabel'
-  ) {
-    normalizedSlug = React.cloneElement(slug, {
-      size: 'mini',
-      kind: 'default',
-    } as CustomType);
-  }
+  // AILabel always size `mini`
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini', kind: 'default' })
+    : null;
+
   return (
     <fieldset
       className={fieldsetClasses}
@@ -95,7 +101,15 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
         className={`${prefix}--label`}
         id={legendId || rest['aria-labelledby']}>
         {legendText}
-        {normalizedSlug}
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--checkbox-group-inner--decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
       </legend>
       {children}
       <div className={`${prefix}--checkbox-group__validation-msg`}>
@@ -129,6 +143,11 @@ CheckboxGroup.propTypes = {
    * Provide a custom className to be applied to the containing <fieldset> node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `CheckboxGroup` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Provide text for the form group for additional help
@@ -168,7 +187,10 @@ CheckboxGroup.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `CheckboxGroup` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Specify whether the form group is currently in warning state

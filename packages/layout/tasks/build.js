@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 'use strict';
 
 require('core-js/features/array/flat-map');
@@ -101,7 +99,7 @@ async function build() {
   await fs.ensureDir(SCSS_DIR);
   for (const { filepath, builder } of files) {
     const { code } = generate(builder());
-    await fs.writeFile(filepath, code);
+    await fs.writeFile(filepath, await code);
   }
 
   reporter.success('Done! 🎉');

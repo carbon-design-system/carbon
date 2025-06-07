@@ -1,0 +1,226 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/components/overflow-menu/overflow-menu' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include overflow-menu;
+
+:host(#{$prefix}-overflow-menu),
+:host(#{$prefix}-breadcrumb-overflow-menu) {
+  @extend .#{$prefix}--overflow-menu;
+
+  ::slotted(.#{$prefix}--overflow-menu__icon) {
+    @extend .#{$prefix}--overflow-menu__icon;
+  }
+}
+
+:host(#{$prefix}-overflow-menu[size='sm']),
+:host(#{$prefix}-breadcrumb-overflow-menu[size='sm']) {
+  @extend .#{$prefix}--overflow-menu--sm;
+}
+
+:host(#{$prefix}-overflow-menu[size='lg']),
+:host(#{$prefix}-breadcrumb-overflow-menu[size='lg']) {
+  @extend .#{$prefix}--overflow-menu--lg;
+}
+
+:host(#{$prefix}-overflow-menu[disabled]),
+:host(#{$prefix}-breadcrumb-overflow-menu[disabled]) {
+  cursor: not-allowed;
+
+  svg {
+    cursor: not-allowed;
+    fill: $icon-disabled;
+  }
+}
+
+:host(#{$prefix}-overflow-menu[disabled]:hover),
+:host(#{$prefix}-breadcrumb-overflow-menu[disabled]:hover) {
+  background-color: transparent;
+}
+
+:host(#{$prefix}-overflow-menu[open]),
+:host(#{$prefix}-breadcrumb-overflow-menu[open]) {
+  background-color: $layer-01;
+  box-shadow: 0 $spacing-01 6px 0 rgba(0, 0, 0, 0.3);
+  transition: none;
+
+  :hover {
+    background-color: $layer;
+  }
+}
+
+:host(#{$prefix}-overflow-menu-body) {
+  @extend .#{$prefix}--overflow-menu-options;
+
+  &::after {
+    position: absolute;
+    display: block;
+    background-color: $layer;
+    content: '';
+    transition: background-color $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
+
+:host(#{$prefix}-overflow-menu-body[direction='top']) {
+  margin-block: 0 $spacing-02;
+}
+
+:host(#{$prefix}-overflow-menu-body[open]) {
+  @extend .#{$prefix}--overflow-menu-options--open;
+}
+
+:host(#{$prefix}-overflow-menu-body[size='sm']) {
+  @extend .#{$prefix}--overflow-menu-options--sm;
+}
+
+:host(#{$prefix}-overflow-menu-body[size='lg']) {
+  @extend .#{$prefix}--overflow-menu-options--lg;
+}
+
+:host(#{$prefix}-overflow-menu-item) {
+  @extend .#{$prefix}--overflow-menu-options__option;
+
+  outline: none;
+
+  button:hover {
+    background-color: $layer-hover;
+  }
+}
+
+:host(#{$prefix}-overflow-menu-item[size='sm']) {
+  block-size: $spacing-07;
+}
+
+:host(#{$prefix}-overflow-menu-item[size='lg']) {
+  block-size: $spacing-09;
+}
+
+:host(#{$prefix}-overflow-menu-item[danger]) {
+  @extend .#{$prefix}--overflow-menu-options__option--danger;
+}
+
+:host(#{$prefix}-overflow-menu-item[disabled]) {
+  @extend .#{$prefix}--overflow-menu-options__option--disabled;
+}
+
+:host(#{$prefix}-overflow-menu-item[divider]) {
+  @extend .#{$prefix}--overflow-menu--divider;
+}
+
+// breadcrumb
+:host(#{$prefix}-overflow-menu[breadcrumb]) {
+  background: none;
+  block-size: convert.to-rem(18px);
+  box-shadow: none;
+  inline-size: $spacing-05;
+  min-block-size: 1.125rem;
+
+  #{$prefix}-tooltip button {
+    position: relative;
+    block-size: convert.to-rem(18px);
+    inline-size: $spacing-05;
+    min-block-size: 1.125rem;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-sizing: border-box;
+      background: none;
+      box-shadow: none;
+      outline-offset: 0;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:active,
+    &:focus {
+      outline: 1px solid $focus;
+    }
+
+    &:hover {
+      &::after {
+        background: $link-primary-hover;
+      }
+    }
+
+    &:active {
+      &::after {
+        background: $text-primary;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      background: $focus;
+      block-size: 1px;
+      content: '';
+      inline-size: convert.to-rem(12px);
+      inset-block-end: 2px;
+      opacity: 0;
+      transition: opacity $duration-fast-01 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
+}
+
+:host(#{$prefix}-overflow-menu[breadcrumb]) ::slotted([slot='icon']) {
+  fill: $link-primary;
+  transform: translateY(4px);
+}
+
+:host(#{$prefix}-overflow-menu[breadcrumb]:hover) ::slotted([slot='icon']) {
+  fill: $link-primary-hover;
+}
+
+:host(#{$prefix}-overflow-menu[breadcrumb]:active) ::slotted([slot='icon']) {
+  fill: $text-primary;
+}
+
+:host(#{$prefix}-overflow-menu[breadcrumb][breadcrumb-size='sm']) {
+  #{$prefix}-tooltip button {
+    block-size: $spacing-05;
+    min-block-size: $spacing-05;
+  }
+
+  ::slotted([slot='icon']) {
+    transform: translateY(3px);
+  }
+}
+
+$caret-size: convert.to-rem(7px);
+
+:host(#{$prefix}-overflow-menu-body[breadcrumb='true']) {
+  &::after {
+    margin: 0 auto;
+    background: transparent;
+    block-size: 0;
+    border-block-end: $caret-size solid $field;
+    border-inline-end: $caret-size solid transparent;
+    border-inline-start: $caret-size solid transparent;
+    inline-size: 0;
+    inset-block-start: -$caret-size;
+    inset-inline-start: $caret-size * 2;
+  }
+}

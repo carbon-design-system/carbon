@@ -1,7 +1,10 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import * as DropdownStories from './Dropdown.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
 
 # Dropdown
 
@@ -17,7 +20,9 @@ import * as DropdownStories from './Dropdown.stories';
 
 - [Overview](#overview)
   - [Inline dropdown](#inline-dropdown)
+  - [Experimental Auto Align](#experimental-auto-align)
   - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
 - [Component API](#component-api)
   - [Dropdown `direction`](#dropdown-direction)
   - [Dropdown `downshiftProps`](#dropdown-downshiftprops)
@@ -41,18 +46,43 @@ Dropdowns present a list of options from which a user can select one option, or
 several. A selected option can represent a value in a form, or can be used as an
 action to filter or sort existing content.
 
-<Canvas>
-  <Story of={DropdownStories.Default} />
-</Canvas>
+<Canvas
+  of={DropdownStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.Default),
+    },
+  ]}
+/>
 
-### Inline dropdown
+### Inline Dropdown
 
 You can place a `Dropdown` inline with other content by using the `inline`
 variant
 
-<Canvas>
-  <Story of={DropdownStories.Inline} />
-</Canvas>
+<Canvas
+  of={DropdownStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.Inline),
+    },
+  ]}
+/>
+
+### Experimental Auto Align
+
+<Canvas
+  of={DropdownStories.ExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(DropdownStories.ExperimentalAutoAlign),
+    },
+  ]}
+/>
 
 ### Skeleton state
 
@@ -60,13 +90,31 @@ You can use the `DropdownSkeleton` component to render a skeleton variant of a
 `Dropdown`. This is useful to display on initial page load or when data needs to
 be fetched from an external API.
 
-<Canvas>
-  <Story of={DropdownStories.Skeleton} />
-</Canvas>
+<Canvas
+  of={DropdownStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.Skeleton),
+    },
+  ]}
+/>
+
+### AI label
+
+<Canvas
+  of={DropdownStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Dropdown `direction`
 
@@ -114,7 +162,7 @@ want to fully control the component, you can use `initialSelectedItem`.
 ```jsx
 const items = ['Option 1', 'Option 2', 'Option 3']
 
-<Dropdown initialSelectedItem={items[2]} />;
+<Dropdown initialSelectedItem={items[2]} />
 ```
 
 ### Dropdown `itemToElement`
@@ -267,8 +315,8 @@ const [currentItem, setCurrentItem] = useState(items[4]);
 
 ### Dropdown `size`
 
-There are three sizes of `Dropdown` available: `sm`, `lg` (the default), and
-`xl`.
+There are three sizes of `Dropdown` available: `sm`, `md` (the default), and
+`lg`.
 
 <Dropdown
   items={['Option 1', 'Option 2', 'Option 3']}

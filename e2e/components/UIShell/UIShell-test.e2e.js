@@ -14,10 +14,18 @@ const { snapshotStory } = require('../../test-utils/storybook');
 test.describe('UIShell', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('header @vrt', async ({ page }) => {
+      test('header w/ actions and right panel @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header',
+          id: 'components-ui-shell-header--header-w-actions-and-right-panel',
+          theme,
+        });
+      });
+
+      test('header w/ actions and switcher @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'UIShell',
+          id: 'components-ui-shell-header--header-w-actions-and-switcher',
           theme,
         });
       });
@@ -25,31 +33,7 @@ test.describe('UIShell', () => {
       test('header w/ navigation @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-w-navigation',
-          theme,
-        });
-      });
-
-      test('header w/ actions @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'UIShell',
-          id: 'components-ui-shell--header-w-actions',
-          theme,
-        });
-      });
-
-      test('header w/ skiptocontent @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'UIShell',
-          id: 'components-ui-shell--header-w-skip-to-content',
-          theme,
-        });
-      });
-
-      test('header w/ navigation and actions @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'UIShell',
-          id: 'components-ui-shell--header-w-navigation-and-actions',
+          id: 'components-ui-shell-header--header-w-navigation',
           theme,
         });
       });
@@ -59,7 +43,15 @@ test.describe('UIShell', () => {
       }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-w-navigation-actions-and-side-nav',
+          id: 'components-ui-shell-header--header-w-navigation-actions-and-side-nav',
+          theme,
+        });
+      });
+
+      test('header w/ navigation and actions @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'UIShell',
+          id: 'components-ui-shell-header--header-w-navigation-and-actions',
           theme,
         });
       });
@@ -67,23 +59,7 @@ test.describe('UIShell', () => {
       test('header w/ sidenav @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-w-side-nav',
-          theme,
-        });
-      });
-
-      test('header w/ actions and right panel @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'UIShell',
-          id: 'components-ui-shell--header-w-actions-and-right-panel',
-          theme,
-        });
-      });
-
-      test('header w/ actions and switcher @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'UIShell',
-          id: 'components-ui-shell--header-w-actions-and-switcher',
+          id: 'components-ui-shell-header--header-w-side-nav',
           theme,
         });
       });
@@ -91,15 +67,7 @@ test.describe('UIShell', () => {
       test('fixed sidenav @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--fixed-side-nav',
-          theme,
-        });
-      });
-
-      test('fixed sidenav w/ icons @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'UIShell',
-          id: 'components-ui-shell--fixed-side-nav-w-icons',
+          id: 'components-ui-shell-sidenav--fixed-side-nav',
           theme,
         });
       });
@@ -107,23 +75,22 @@ test.describe('UIShell', () => {
       test('fixed sidenav w/ divider @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--fixed-side-nav-w-divider',
+          id: 'components-ui-shell-sidenav--fixed-side-nav-w-divider',
           theme,
         });
       });
 
-      test('sidenav rail @vrt', async ({ page }) => {
+      test('fixed sidenav w/ icons @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--side-nav-rail',
+          id: 'components-ui-shell-sidenav--fixed-side-nav-w-icons',
           theme,
         });
       });
-
       test('sidenav rail w/header @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--side-nav-rail-w-header',
+          id: 'components-ui-shell-sidenav--side-nav-rail-w-header',
           theme,
         });
       });
@@ -131,7 +98,7 @@ test.describe('UIShell', () => {
       test('sidenav w/ large side nav items @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--side-nav-w-large-side-nav-items',
+          id: 'components-ui-shell-sidenav--side-nav-w-large-side-nav-items',
           theme,
         });
       });

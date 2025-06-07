@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { SkeletonIcon } from '../SkeletonIcon';
 
-interface AISkeletonIconProps {
+export interface AISkeletonIconProps {
   /**
    * Specify an optional className to add.
    */

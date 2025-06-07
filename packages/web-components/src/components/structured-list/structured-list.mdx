@@ -1,0 +1,47 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as StructuredListStories from './structured-list.stories';
+
+<Meta of={StructuredListStories} />
+
+# Structured list
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/structured-list)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/structured-list/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/structured-list/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={StructuredListStories.Default} />
+
+## Skeleton
+
+<Canvas of={StructuredListStories.Skeleton} />
+
+## Component API
+
+## `cds-structured-list`
+
+<ArgTypes of="cds-structured-list" />
+
+## `cds-structured-list-row`
+
+<ArgTypes of="cds-structured-list-row" />
+
+<Markdown>{`${cdnJs({ components: ['structured-list'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/structured-list/structured-list.mdx).

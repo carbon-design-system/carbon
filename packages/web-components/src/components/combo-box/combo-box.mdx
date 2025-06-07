@@ -1,0 +1,73 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ComboBoxStories from './combo-box.stories';
+
+<Meta of={ComboBoxStories} />
+
+# Combo box
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/combo-box)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/dropdown/usage#combo-box)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Placeholder and labeling](#placeholders-and-labeling)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+A combobox allows the user to make a selection from a predefined list of options
+and is typically used when there are a large amount of options to choose from.
+
+<Canvas of={ComboBoxStories.Default} />
+
+## Disabled
+
+A disabled combobox is available but should not be used as the sole means of
+conveying information. For example, if the user must complete a previous form
+input before moving on to the combobox, make sure to make that clear to the user
+via an error state on the previous form element in addition to disabling the
+next element.
+
+```html
+<cds-combo-box
+  helper-text="This is some helper text"
+  title-text="Combo box title"
+  label="Filter..."
+  disabled>
+  <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
+  <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
+  <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
+</cds-combo-box>
+```
+
+## Placeholders and Labeling
+
+The placeholder is not a replacement for a label under any circumstances
+including space restraints. Placeholders should be used to provide additive
+information regarding the format of the input. In all cases a label is required
+_in addition to_ a placeholder.
+
+## With AI Label
+
+<Canvas of={ComboBoxStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of="cds-combo-box" />
+
+<ArgTypes of="cds-combo-box-item" />
+
+<Markdown>{`${cdnJs({ components: ['combo-box'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve these docs by
+[editing this file on GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/combo-box/combo-box.mdx)

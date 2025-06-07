@@ -110,3 +110,60 @@ describe('Tooltip', () => {
     expect(popoverContainer).not.toHaveClass('cds--popover--open');
   });
 });
+
+describe('Tooltip ARIA logic', () => {
+  it('should not use aria-labelledby when the button already has aria-label', () => {
+    render(
+      <Tooltip defaultOpen label="Label text">
+        <button aria-label="Aria Label">X</button>
+      </Tooltip>
+    );
+    const button = screen.getByRole('button');
+    expect(button).not.toHaveAttribute('aria-labelledby');
+    expect(button).toHaveAttribute('aria-label', 'Aria Label');
+  });
+
+  it('should keep the button’s aria-labelledby if it already has one', () => {
+    render(
+      <Tooltip defaultOpen label="Label text">
+        <button aria-labelledby="custom-id">X</button>
+      </Tooltip>
+    );
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('aria-labelledby', 'custom-id');
+  });
+
+  it('should apply tooltip ID to aria-labelledby if label is given and the button doesn’t have its own', () => {
+    render(
+      <Tooltip defaultOpen label="Label text">
+        <button>X</button>
+      </Tooltip>
+    );
+    const button = screen.getByRole('button');
+    const tooltip = screen.getByRole('tooltip');
+    expect(button).toHaveAttribute('aria-labelledby', tooltip.id);
+  });
+
+  it('should keep aria-describedby from the button if aria-label is also set', () => {
+    render(
+      <Tooltip defaultOpen description="Some description">
+        <button aria-label="Label" aria-describedby="desc-id">
+          X
+        </button>
+      </Tooltip>
+    );
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('aria-describedby', 'desc-id');
+  });
+
+  it('should use its own ID for aria-describedby if only description is given', () => {
+    render(
+      <Tooltip defaultOpen description="Some description">
+        <button>X</button>
+      </Tooltip>
+    );
+    const button = screen.getByRole('button');
+    const tooltip = screen.getByRole('tooltip');
+    expect(button).toHaveAttribute('aria-describedby', tooltip.id);
+  });
+});

@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import ComposedModal from './ComposedModal';
 export {
   default as ComposedModal,
   type ComposedModalProps,
@@ -14,3 +14,4 @@ export {
 
 export { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 export { ModalFooter, type ModalFooterProps } from './ModalFooter';
+export default ComposedModal;

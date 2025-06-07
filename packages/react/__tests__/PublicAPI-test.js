@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -180,7 +180,7 @@ test('Public API should only change with a semver change', () => {
       }
 
       // Handle components defined as fields on a component, for example
-      // `MultiSelect.Filterable`
+      // `ContainedList.ContainedListItem`.
       if (
         typeof Component[key] === 'function' &&
         key !== 'render' &&

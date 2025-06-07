@@ -40,7 +40,50 @@ export default {
   },
 };
 
-export const Default = () => {
+const sharedArgTypes = {
+  filterRows: {
+    table: {
+      disable: true,
+    },
+  },
+  headers: {
+    table: {
+      disable: true,
+    },
+  },
+  isSortable: {
+    table: {
+      disable: true,
+    },
+  },
+  overflowMenuOnHover: {
+    table: {
+      disable: true,
+    },
+  },
+  radio: {
+    table: {
+      disable: true,
+    },
+  },
+  rows: {
+    table: {
+      disable: true,
+    },
+  },
+  translateWithId: {
+    table: {
+      disable: true,
+    },
+  },
+  sortRow: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Default = (args) => {
   const rows = [
     {
       id: 'load-balancer-1',
@@ -102,7 +145,7 @@ export const Default = () => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table size="lg" useZebraStyles={false} aria-label="sample table">
+    <Table {...args} aria-label="sample table">
       <TableHead>
         <TableRow>
           {headers.map((header) => (
@@ -127,7 +170,11 @@ export const Default = () => {
   );
 };
 
-export const XLWithTwoLines = () => {
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const XLWithTwoLines = (args) => {
   const rows = [
     {
       id: 'load-balancer-1',
@@ -224,7 +271,7 @@ export const XLWithTwoLines = () => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table size="xl" useZebraStyles={false} aria-label="sample table">
+    <Table size="xl" useZebraStyles={false} aria-label="sample table" {...args}>
       <TableHead>
         <TableRow>
           {headers.map((header) => (
@@ -249,132 +296,6 @@ export const XLWithTwoLines = () => {
   );
 };
 
-export const Playground = (args) => {
-  const rows = [
-    {
-      id: 'load-balancer-1',
-      name: 'Load Balancer 1',
-      rule: 'Round robin',
-      Status: 'Starting',
-      other: 'Test',
-      example: '22',
-    },
-    {
-      id: 'load-balancer-2',
-      name: 'Load Balancer 2',
-      rule: 'DNS delegation',
-      status: 'Active',
-      other: 'Test',
-      example: '22',
-    },
-    {
-      id: 'load-balancer-3',
-      name: 'Load Balancer 3',
-      rule: 'Round robin',
-      status: 'Disabled',
-      other: 'Test',
-      example: '22',
-    },
-    {
-      id: 'load-balancer-4',
-      name: 'Load Balancer 4',
-      rule: 'Round robin',
-      status: 'Disabled',
-      other: 'Test',
-      example: '22',
-    },
-    {
-      id: 'load-balancer-5',
-      name: 'Load Balancer 5',
-      rule: 'Round robin',
-      status: 'Disabled',
-      other: 'Test',
-      example: '22',
-    },
-    {
-      id: 'load-balancer-6',
-      name: 'Load Balancer 6',
-      rule: 'Round robin',
-      status: 'Disabled',
-      other: 'Test',
-      example: '22',
-    },
-    {
-      id: 'load-balancer-7',
-      name: 'Load Balancer 7',
-      rule: 'Round robin',
-      status: 'Disabled',
-      other: 'Test',
-      example: '22',
-    },
-  ];
-  const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
-
-  return (
-    <Table {...args} aria-label="sample table">
-      <TableHead>
-        <TableRow>
-          {headers.map((header) => (
-            <TableHeader id={header.key} key={header}>
-              {header}
-            </TableHeader>
-          ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.id}>
-            {Object.keys(row)
-              .filter((key) => key !== 'id')
-              .map((key) => {
-                return <TableCell key={key}>{row[key]}</TableCell>;
-              })}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  );
-};
-
-Playground.argTypes = {
-  filterRows: {
-    table: {
-      disable: true,
-    },
-  },
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  isSortable: {
-    table: {
-      disable: true,
-    },
-  },
-  overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
-  },
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
-  rows: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  sortRow: {
-    table: {
-      disable: true,
-    },
-  },
+XLWithTwoLines.argTypes = {
+  ...sharedArgTypes,
 };

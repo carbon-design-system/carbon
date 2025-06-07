@@ -89,9 +89,10 @@ members of the project's leadership.
     with the same questions can benefit.
 4.  If you have a pressing bug fix, it is best to make a PR directly to get your
     issues addressed.
-5.  `#carbon-components`: This channel is for questions about Carbon Components
-    only. It is not the place to ask general coding questions. Instead, use a
-    dev community like [StackOverflow](https://stackoverflow.com/).
+5.  `#carbon-react`, `#carbon-web-components`: These channels are for questions
+    about Carbon Components only. They are not the place to ask general coding
+    questions. Instead, use a dev community like
+    [StackOverflow](https://stackoverflow.com/).
 6.  `#carbon-design-system`: Please post any design questions with an in-context
     screen shot (i.e. screen shot of the whole UI you are designing) with
     background as to what you are trying to accomplish in this flow. We welcome

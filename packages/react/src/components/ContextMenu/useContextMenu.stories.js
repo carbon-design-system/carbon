@@ -6,7 +6,7 @@
  */
 
 import React, { useRef } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { usePrefix } from '../../internal/usePrefix';
 import CodeSnippet from '../CodeSnippet';
@@ -30,7 +30,7 @@ export default {
 
 const Text = () => (
   <div style={{ width: '40rem' }}>
-    <h2>Right click anywere in the story frame</h2>
+    <h2>Right click anywhere in the story frame</h2>
     <br />
     <p>
       The <CodeSnippet type="inline">{`<Menu>`}</CodeSnippet> props are set

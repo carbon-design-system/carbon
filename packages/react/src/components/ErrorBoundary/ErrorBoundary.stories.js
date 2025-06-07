@@ -6,18 +6,24 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { ErrorBoundary, ErrorBoundaryContext } from './';
 import Button from '../Button';
+import mdx from './ErrorBoundary.mdx';
 
 export default {
   title: 'Components/ErrorBoundary',
   component: ErrorBoundary,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = () => {
   function DemoComponent() {
-    const [shouldThrowError, setShouldThrowError] = useState(false);
+    const [shouldThrowError, setShouldThrowError] = React.useState(false);
 
     function onClick() {
       setShouldThrowError(!shouldThrowError);

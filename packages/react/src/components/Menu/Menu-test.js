@@ -9,6 +9,7 @@ import React from 'react';
 import { Menu, MenuItem, MenuItemSelectable, MenuItemRadioGroup } from './';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { waitForPosition } from '../ListBox/test-helpers';
 
 describe('Menu', () => {
   describe('renders as expected', () => {
@@ -82,25 +83,10 @@ describe('Menu', () => {
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
       document.body.removeChild(el);
     });
-
-    it('warns about nested menus in basic mode', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
-          <MenuItem label="Submenu">
-            <MenuItem label="Item" />
-          </MenuItem>
-        </Menu>
-      );
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
   });
 
   describe('Submenu behavior', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       jest.useFakeTimers();
       render(
         <Menu open>
@@ -109,6 +95,7 @@ describe('Menu', () => {
           </MenuItem>
         </Menu>
       );
+      await waitForPosition();
     });
     afterEach(() => {
       jest.useRealTimers();
@@ -222,34 +209,58 @@ describe('MenuItem', () => {
 
       expect(screen.getByText('item')).toBeInTheDocument();
     });
+  });
 
-    it('warns about MenuItemSelectable in basic mode', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  it('should call MenuItemRadioGroup onChange once', async () => {
+    const onChange = jest.fn();
 
-      render(
-        <Menu open mode="basic">
-          <MenuItemSelectable label="Option" />
-        </Menu>
-      );
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
-    it('warns about MenuItemRadioGroup in basic mode', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
+    render(
+      <Menu open label="Menu">
+        <MenuItem label="Menu">
           <MenuItemRadioGroup
-            label="Options"
-            items={['Option 1', 'Option 2']}
+            label="MenuItemRadioGroup"
+            items={[
+              { label: 'Item 1', value: '1' },
+              { label: 'Item 2', value: '2' },
+            ]}
+            onChange={onChange}
+            itemToString={(item) => item.label}
           />
-        </Menu>
-      );
+        </MenuItem>
+      </Menu>
+    );
 
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
+    await userEvent.click(screen.getByTitle('Menu'));
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call MenuItemSelectable onChange once with correct value', async () => {
+    const onChange = jest.fn();
+
+    const { rerender } = render(
+      <Menu open label="Menu">
+        <MenuItemSelectable
+          label="Item 1"
+          onChange={onChange}
+          selected={false}
+        />
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(true);
+
+    onChange.mockClear();
+    rerender(
+      <Menu open label="Menu">
+        <MenuItemSelectable label="Item 1" onChange={onChange} selected />
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(false);
   });
 });

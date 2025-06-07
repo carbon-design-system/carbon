@@ -17,7 +17,7 @@ describe('useId', () => {
     }
 
     render(<Test />);
-    expect(screen.getByText('test')).toHaveAttribute('id', 'test-:r0:');
+    expect(screen.getByText('test')).toHaveAttribute('id', 'test-«r0»');
   });
 
   it('should generate a unique id when using the useFallbackId empty', () => {
@@ -27,16 +27,16 @@ describe('useId', () => {
     }
 
     render(<Test />);
-    expect(screen.getByText('test')).toHaveAttribute('id', 'id-:r1:');
+    expect(screen.getByText('test')).toHaveAttribute('id', 'id-«r1»');
   });
 
-  it('should recieved a unique id by passing a string on params when using useFallbackId', () => {
+  it('should received a unique id by passing a string on params when using useFallbackId', () => {
     function Test() {
-      const id = useFallbackId('idRecieved');
+      const id = useFallbackId('idReceived');
       return <span id={id}>test</span>;
     }
 
     render(<Test />);
-    expect(screen.getByText('test')).toHaveAttribute('id', 'idRecieved');
+    expect(screen.getByText('test')).toHaveAttribute('id', 'idReceived');
   });
 });

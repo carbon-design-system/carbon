@@ -1,0 +1,53 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as StackStories from './stack.stories';
+
+<Meta of={StackStories} />
+
+# Stack
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/stack)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Horizontal](#horizontal)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+The Stack component is a useful layout utility in a component-based model. This
+allows components to not use margin and instead delegate the responsibility of
+positioning and layout to parent components.
+
+In the case of the Stack component, it uses the spacing scale from the Design
+Language in order to determine how much space there should be between items
+rendered by the Stack component. It also supports a custom gap prop which will
+allow a user to provide a custom value for the gap of the layout.
+
+This component supports both horizontal and vertical orientations.
+
+Inspiration for this component:
+
+- https://paste.twilio.design/layout/stack/
+- https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
+
+<Canvas of={StackStories.Default} />
+
+## Horizontal
+
+<Canvas of={StackStories.Horizontal} />
+
+## Component API
+
+<ArgTypes of="cds-stack" />
+
+<Markdown>{`${cdnJs({ components: ['stack'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/stack/stack.mdx).

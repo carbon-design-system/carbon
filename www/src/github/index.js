@@ -47,6 +47,7 @@ export async function loadGitHubData() {
     })
   );
 
+  // eslint-disable-next-line require-atomic-updates
   _data = {
     issues,
     pulls,

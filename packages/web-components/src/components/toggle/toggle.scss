@@ -1,0 +1,27 @@
+//
+// Copyright IBM Corp. 2019, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/components/toggle/index' as *;
+@use '@carbon/styles/scss/config' as *;
+
+:host(#{$prefix}-toggle) {
+  outline: none;
+}
+
+:host(#{$prefix}-toggle[disabled]) {
+  @extend .#{$prefix}--toggle--disabled !optional;
+
+  .#{$prefix}--toggle__appearance {
+    cursor: not-allowed;
+  }
+}
+
+:host(#{$prefix}-toggle[read-only]) {
+  @extend .#{$prefix}--toggle--readonly;
+}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -151,9 +151,8 @@ const TableToolbarSearch = ({
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useId('table-toolbar-search');
-  const [focusTarget, setFocusTarget] = useState<RefObject<HTMLElement> | null>(
-    null
-  );
+  const [focusTarget, setFocusTarget] =
+    useState<RefObject<HTMLElement | null> | null>(null);
   const prefix = usePrefix();
 
   useEffect(() => {
@@ -199,7 +198,7 @@ const TableToolbarSearch = ({
   const onChange = (e) => {
     setValue(e.target.value);
     if (onChangeProp) {
-      onChangeProp(e);
+      onChangeProp(e, e.target.value);
     }
   };
 

@@ -1,20 +1,23 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
-import MultiSelect from '../MultiSelect';
+import { MultiSelect } from '../MultiSelect';
+import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
+import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
+import ComboBox from '../ComboBox';
 import mdx from './Modal.mdx';
 import {
   StructuredListWrapper,
@@ -38,18 +41,45 @@ export default {
   },
 };
 
-export const Default = () => {
+const buttons = {
+  'One (1)': '1',
+  'Two (2)': '2',
+  'Three (3)': '3',
+};
+
+export const Default = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
+  const [popoverOpen, setPopoverOpen] = useState(false);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
       <Modal
-        open={open}
-        onRequestClose={() => setOpen(false)}
+        onRequestClose={(e) => {
+          action(e);
+          setOpen(false);
+        }}
         modalHeading="Add a custom domain"
-        modalLabel="Account resources"
         primaryButtonText="Add"
-        secondaryButtonText="Cancel">
+        secondaryButtonText="Cancel"
+        aria-label="Modal content"
+        open={open}
+        {...args}
+        {...modalFooter(numberOfButtons)}>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
         <p style={{ marginBottom: '1rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -62,23 +92,73 @@ export const Default = () => {
           placeholder="e.g. github.com"
           style={{ marginBottom: '1rem' }}
         />
-        <Select id="select-1" defaultValue="us-south" labelText="Region">
+        <Select
+          id="select-1"
+          defaultValue="us-south"
+          labelText="Region"
+          style={{ marginBottom: '1rem' }}>
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
-        <Dropdown
-          id="drop"
-          label="Dropdown"
-          titleText="Dropdown"
+
+        <ComboBox
+          allowCustomValue
+          autoAlign={true}
+          id="carbon-combobox"
           items={[
-            { id: 'one', label: 'one', name: 'one' },
-            { id: 'two', label: 'two', name: 'two' },
+            'Apple',
+            'Orange',
+            'Banana',
+            'Pineapple',
+            'Raspberry',
+            'Lime',
           ]}
+          titleText="ComboBox Example of Floating ui"
+        />
+
+        <Dropdown
+          autoAlign={true}
+          id="default"
+          style={{ margin: '1rem 0' }}
+          titleText="Dropdown Example of Floating ui"
+          helperText="This is some helper text"
+          label="Option 1"
+          items={[
+            {
+              id: 'option-0',
+              text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+            },
+            {
+              id: 'option-1',
+              text: 'Option 1',
+            },
+            {
+              id: 'option-2',
+              text: 'Option 2',
+            },
+            {
+              id: 'option-3',
+              text: 'Option 3 - a disabled item',
+              disabled: true,
+            },
+            {
+              id: 'option-4',
+              text: 'Option 4',
+            },
+            {
+              id: 'option-5',
+              text: 'Option 5',
+            },
+          ]}
+          itemToString={(item) => (item ? item.text : '')}
+          direction="top"
         />
         <MultiSelect
           id="test"
           label="Multiselect"
           titleText="Multiselect"
+          helperText="This is some helper text"
+          autoAlign
           items={[
             {
               id: 'downshift-1-item-0',
@@ -91,9 +171,182 @@ export const Default = () => {
           ]}
           itemToString={(item) => (item ? item.text : '')}
         />
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
+        <Popover align={'bottom-right'} autoAlign open={popoverOpen}>
+          <div className="default-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setPopoverOpen(!popoverOpen);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <h2 className="popover-title">Popover Example</h2>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
+        {args.hasScrollingContent && (
+          <>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <h3>Lorem ipsum</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+              posuere. Curabitur justo urna, consectetur vel elit iaculis,
+              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
+              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
+            </p>
+          </>
+        )}
       </Modal>
     </>
   );
+};
+
+Default.args = {
+  numberOfButtons: 'Two (2)',
+};
+
+Default.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  launcherButtonRef: {
+    table: {
+      disable: true,
+    },
+  },
+  modalHeading: {
+    control: 'text',
+  },
+  modalLabel: {
+    control: 'text',
+  },
+  numberOfButtons: {
+    description: 'Count of Footer Buttons',
+    options: Object.keys(buttons),
+    mapping: buttons,
+    control: {
+      type: 'inline-radio',
+      labels: Object.keys(buttons),
+    },
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
+  onRequestSubmit: {
+    action: 'onRequestSubmit',
+  },
+  onSecondarySubmit: {
+    action: 'onSecondarySubmit',
+    table: {
+      disable: true,
+    },
+  },
+  primaryButtonText: {
+    control: 'text',
+  },
+  secondaryButtons: {
+    table: {
+      disable: true,
+    },
+  },
+  secondaryButtonText: {
+    control: 'text',
+    table: {
+      disable: true,
+    },
+  },
+  selectorPrimaryFocus: {
+    table: {
+      disable: true,
+    },
+  },
+  selectorsFloatingMenus: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const FullWidth = () => {
@@ -179,11 +432,6 @@ export const DangerModal = () => {
   );
 };
 
-const buttons = {
-  'One (1)': '1',
-  'Two (2)': '2',
-  'Three (3)': '3',
-};
 const modalFooter = (numberOfButtons) => {
   const secondaryButtons = () => {
     switch (numberOfButtons) {
@@ -293,226 +541,6 @@ export const WithScrollingContent = () => {
   );
 };
 
-export const Playground = ({ numberOfButtons, ...args }) => {
-  const [open, setOpen] = useState(true);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      <Modal
-        onRequestClose={(e) => {
-          action(e);
-          setOpen(false);
-        }}
-        modalHeading="Add a custom domain"
-        primaryButtonText="Add"
-        secondaryButtonText="Cancel"
-        aria-label="Modal content"
-        open={open}
-        {...args}
-        {...modalFooter(numberOfButtons)}>
-        <p style={{ marginBottom: '1rem' }}>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-          placeholder="e.g. github.com"
-          style={{ marginBottom: '1rem' }}
-        />
-        <Select id="select-1" defaultValue="us-south" labelText="Region">
-          <SelectItem value="us-south" text="US South" />
-          <SelectItem value="us-east" text="US East" />
-        </Select>
-
-        <Dropdown
-          autoAlign={true}
-          id="default"
-          style={{ margin: '1rem 0' }}
-          titleText="Dropdown Example of Floating ui"
-          helperText="This is some helper text"
-          // initialSelectedItem={items[1]}
-          label="Option 1"
-          items={[
-            {
-              id: 'option-0',
-              text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-            },
-            {
-              id: 'option-1',
-              text: 'Option 1',
-            },
-            {
-              id: 'option-2',
-              text: 'Option 2',
-            },
-            {
-              id: 'option-3',
-              text: 'Option 3 - a disabled item',
-              disabled: true,
-            },
-            {
-              id: 'option-4',
-              text: 'Option 4',
-            },
-            {
-              id: 'option-5',
-              text: 'Option 5',
-            },
-          ]}
-          itemToString={(item) => (item ? item.text : '')}
-          direction="top"
-        />
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-
-        {args.hasScrollingContent && (
-          <>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <h3>Lorem ipsum</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-          </>
-        )}
-      </Modal>
-    </>
-  );
-};
-
-Playground.args = {
-  numberOfButtons: 'Two (2)',
-};
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  modalHeading: {
-    control: 'text',
-  },
-  modalLabel: {
-    control: 'text',
-  },
-  numberOfButtons: {
-    description: 'Count of Footer Buttons',
-    options: Object.keys(buttons),
-    mapping: buttons,
-    control: {
-      type: 'inline-radio',
-      labels: Object.keys(buttons),
-    },
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
-  },
-  onRequestSubmit: {
-    action: 'onRequestSubmit',
-  },
-  onSecondarySubmit: {
-    action: 'onSecondarySubmit',
-    table: {
-      disable: true,
-    },
-  },
-  primaryButtonText: {
-    control: 'text',
-  },
-  secondaryButtons: {
-    table: {
-      disable: true,
-    },
-  },
-  secondaryButtonText: {
-    control: 'text',
-    table: {
-      disable: true,
-    },
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
 export const WithStateManager = () => {
   /**
    * Simple state manager for modals.
@@ -521,7 +549,7 @@ export const WithStateManager = () => {
     renderLauncher: LauncherContent,
     children: ModalContent,
   }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = React.useState(false);
     return (
       <>
         {!ModalContent || typeof document === 'undefined'
@@ -535,7 +563,7 @@ export const WithStateManager = () => {
     );
   };
 
-  const button = useRef();
+  const button = React.useRef();
 
   return (
     <ModalStateManager
@@ -638,11 +666,11 @@ export const WithInlineLoading = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
+        <h2 className="ai-label-heading">84%</h2>
         <p className="secondary bold">Confidence score</p>
         <p className="secondary">
           Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -672,8 +700,11 @@ export const withAILabel = {
   render: () => {
     const [open, setOpen] = useState(true); // eslint-disable-line
     return (
-      <div className="slug-modal">
+      <div className="ai-label-modal">
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
+        <Button onClick={() => setOpen2(true)}>
+          Launch modal decorator tooltip
+        </Button>
         <Modal
           open={open}
           onRequestClose={() => setOpen(false)}
@@ -681,7 +712,7 @@ export const withAILabel = {
           modalLabel="Account resources"
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
-          slug={aiLabel}>
+          decorator={aiLabel}>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared

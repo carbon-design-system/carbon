@@ -1,0 +1,115 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/content-switcher/content-switcher' as *;
+@use '@carbon/styles/scss/layout' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include content-switcher;
+
+:host(#{$prefix}-content-switcher) {
+  @extend .#{$prefix}--content-switcher;
+  @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-content-switcher[icon]) {
+  @extend .#{$prefix}--content-switcher--icon-only;
+}
+
+:host(#{$prefix}-content-switcher[size='sm']) {
+  @extend .#{$prefix}--layout--size-sm;
+}
+
+:host(#{$prefix}-content-switcher[size='lg']) {
+  @extend .#{$prefix}--layout--size-lg;
+}
+
+:host(#{$prefix}-content-switcher-item) {
+  inline-size: 100%;
+  outline: none;
+
+  .#{$prefix}--content-switcher-btn {
+    align-items: center;
+    padding: $spacing-03 var(--cds-layout-density-padding-inline-local);
+    block-size: 100%;
+    inline-size: 100%;
+
+    &:first-child,
+    &:last-child {
+      border-radius: 0;
+      border-inline-end: none;
+      border-inline-start: none;
+    }
+
+    &::before {
+      position: absolute;
+      z-index: 2;
+      display: block;
+      background-color: $border-subtle;
+      block-size: $spacing-05;
+      content: '';
+      inline-size: rem(1px);
+      inset-inline-start: 0;
+    }
+
+    &.#{$prefix}--content-switcher--selected,
+    &:focus,
+    &:hover {
+      &::before {
+        background-color: transparent;
+      }
+    }
+
+    &:disabled {
+      border-block-end-color: $border-inverse;
+      border-block-start-color: $border-inverse;
+    }
+  }
+}
+
+:host(#{$prefix}-content-switcher-item[icon]) {
+  inline-size: initial;
+
+  .#{$prefix}--content-switcher-btn {
+    block-size: $spacing-08;
+    padding-inline: rem(11px);
+  }
+
+  .#{$prefix}--content-switcher__label {
+    display: flex;
+    align-items: center;
+  }
+}
+
+:host(#{$prefix}-content-switcher-item[hide-divider])
+  .#{$prefix}--content-switcher-btn::before {
+  background-color: transparent;
+}
+
+:host(#{$prefix}-content-switcher-item:first-of-type)
+  .#{$prefix}--content-switcher-btn {
+  border-end-start-radius: $spacing-02;
+  border-inline-start: rem(1px) solid $border-inverse;
+  border-start-start-radius: $spacing-02;
+
+  &::before {
+    content: none;
+  }
+}
+
+:host(#{$prefix}-content-switcher-item:last-of-type)
+  .#{$prefix}--content-switcher-btn {
+  border-end-end-radius: $spacing-02;
+  border-inline-end: rem(1px) solid $border-inverse;
+  border-start-end-radius: $spacing-02;
+}

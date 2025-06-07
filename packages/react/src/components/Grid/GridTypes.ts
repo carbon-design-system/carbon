@@ -5,9 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { PolymorphicProps } from '../../types/common';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import PropTypes from 'prop-types';
 
 export interface GridBaseProps {
+  /**
+   * Specify grid alignment. Default is center
+   */
+  align?: 'start' | 'center' | 'end';
+
   /**
    * Pass in content that will be rendered within the `Grid`
    */
@@ -36,14 +42,13 @@ export interface GridBaseProps {
   narrow?: boolean;
 }
 
-export type GridProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  GridBaseProps
->;
+export type GridProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, GridBaseProps>;
 
 export interface GridComponent {
-  <T extends React.ElementType>(
-    props: GridProps<T>,
-    context?: any
-  ): React.ReactElement<any, any> | null;
+  <T extends React.ElementType = 'div'>(
+    props: GridProps<T>
+  ): React.ReactElement | null;
+  displayName?: string;
+  propTypes?: PropTypes.WeakValidationMap<GridProps<any>>;
 }

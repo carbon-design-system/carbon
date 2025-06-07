@@ -40,6 +40,12 @@ async function build() {
   `;
   const { css } = sass.compileString(entrypoint, {
     loadPaths,
+    // suppress mixed-declarations warnings until resolved in
+    // https://github.com/carbon-design-system/carbon/issues/16962
+    logger: {
+      warn: (message) =>
+        message.includes('mixed-decls') ? undefined : { type: 'warn', message },
+    },
   });
   const bundles = [
     {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,13 +7,22 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { type MouseEventHandler, type PropsWithChildren } from 'react';
+import React, {
+  Children,
+  isValidElement,
+  type MouseEventHandler,
+  type PropsWithChildren,
+} from 'react';
 import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableRowProps } from './TableRow';
+import TableSlugRow from './TableSlugRow';
+import TableDecoratorRow from './TableDecoratorRow';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
-interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
+export interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    */
@@ -46,7 +55,7 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExpandedRow` work together
    */
-  isExpanded: boolean;
+  isExpanded?: boolean;
 
   /**
    * Hook for when a listener initiates a request to expand the given row
@@ -73,32 +82,41 @@ const TableExpandRow = React.forwardRef(
   ) => {
     const prefix = usePrefix();
 
-    // We need to put the slug before the expansion arrow and all other table cells after the arrow.
-    let rowHasSlug;
-    const slug = React.Children.toArray(children).map((child: any) => {
-      if (child.type?.displayName === 'TableSlugRow') {
+    // We need to put the AILabel and Decorator before the expansion arrow and all other table cells after the arrow.
+    let rowHasAILabel;
+    const decorator = Children.toArray(children).map((child) => {
+      if (isComponentElement(child, TableSlugRow)) {
         if (child.props.slug) {
-          rowHasSlug = true;
+          rowHasAILabel = true;
+        }
+
+        return child;
+      } else if (isComponentElement(child, TableDecoratorRow)) {
+        if (isComponentElement(child.props.decorator, AILabel)) {
+          rowHasAILabel = true;
         }
 
         return child;
       }
     });
 
-    const normalizedChildren = React.Children.toArray(children).map(
-      (child: any) => {
-        if (child.type?.displayName !== 'TableSlugRow') {
-          return child;
-        }
+    const normalizedChildren = Children.toArray(children).map((child) => {
+      if (
+        isValidElement(child) &&
+        child.type !== TableSlugRow &&
+        child.type !== TableDecoratorRow
+      ) {
+        return child;
       }
-    );
+    });
 
     const className = cx(
       {
         [`${prefix}--parent-row`]: true,
         [`${prefix}--expandable-row`]: isExpanded,
         [`${prefix}--data-table--selected`]: isSelected,
-        [`${prefix}--data-table--slug-row`]: rowHasSlug,
+        [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+          rowHasAILabel,
       },
       rowClassName
     );
@@ -106,7 +124,7 @@ const TableExpandRow = React.forwardRef(
 
     return (
       <tr {...rest} ref={ref as never} className={className} data-parent-row>
-        {slug}
+        {decorator}
         <TableCell
           className={`${prefix}--table-expand`}
           data-previous-value={previousValue}
@@ -168,7 +186,7 @@ TableExpandRow.propTypes = {
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExpandedRow` work together
    */
-  isExpanded: PropTypes.bool.isRequired,
+  isExpanded: PropTypes.bool,
 
   /**
    * Specify if the row is selected

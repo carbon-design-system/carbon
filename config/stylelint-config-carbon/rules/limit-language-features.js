@@ -9,7 +9,7 @@
 
 const OFF = null;
 
-module.exports = {
+export default {
   rules: {
     // Color
     // Require (where possible) or disallow named colors.
@@ -81,12 +81,6 @@ module.exports = {
     'declaration-property-unit-allowed-list': {
       '/^animation/': ['ms'],
     },
-    // Specify a blacklist of disallowed property and value pairs within
-    // declarations.
-    'declaration-property-value-disallowed-list': {
-      // Disallow unset as it is unsupported in IE11
-      '/.*/': ['unset'],
-    },
     // Specify a whitelist of allowed property and value pairs within
     // declarations.
     'declaration-property-value-allowed-list': OFF,
@@ -117,7 +111,7 @@ module.exports = {
     // Limit the number of compound selectors in a selector.
     'selector-max-compound-selectors': OFF,
     // Limit the number of adjacent empty lines within selectors.
-    'selector-max-empty-lines': OFF,
+    // 'selector-max-empty-lines': OFF,
     // Limit the number of id selectors in a selector.
     'selector-max-id': OFF,
     // Limit the specificity of selectors.

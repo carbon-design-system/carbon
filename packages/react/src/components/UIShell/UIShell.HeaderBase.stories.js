@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import cx from 'classnames';
 import {
   Content,
@@ -171,6 +171,22 @@ export default {
       },
     },
   },
+};
+
+export const Test = () => {
+  return (
+    <HeaderGlobalBar>
+      <HeaderMenu menuLinkName={'Test'}>
+        <HeaderMenuItem
+          key={`test`}
+          onClick={(e) => {
+            console.log('click event', e);
+          }}>
+          TEST
+        </HeaderMenuItem>
+      </HeaderMenu>
+    </HeaderGlobalBar>
+  );
 };
 
 export const HeaderWNavigation = () => (
@@ -358,7 +374,10 @@ export const HeaderWNavigationActionsAndSideNav = () => (
                   <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderSideNavItems>
-              <SideNavMenu renderIcon={Fade} title="Category title">
+              <SideNavMenu
+                renderIcon={Fade}
+                title="Category title"
+                tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link 5
                 </SideNavMenuItem>
@@ -369,7 +388,10 @@ export const HeaderWNavigationActionsAndSideNav = () => (
                   Link 7
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Category title">
+              <SideNavMenu
+                renderIcon={Fade}
+                title="Category title"
+                tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link 8
                 </SideNavMenuItem>
@@ -383,7 +405,8 @@ export const HeaderWNavigationActionsAndSideNav = () => (
               <SideNavMenu
                 renderIcon={Fade}
                 title="Category title"
-                isActive={true}>
+                isActive={true}
+                tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link 11
                 </SideNavMenuItem>
@@ -498,38 +521,81 @@ export const HeaderWSideNav = () => (
 
 HeaderWSideNav.storyName = 'Header w/ SideNav';
 
-export const HeaderWActionsAndRightPanel = () => (
-  <>
-    <Header aria-label="IBM Platform Name">
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
-      </HeaderName>
-      <HeaderGlobalBar>
-        <HeaderGlobalAction
-          aria-label="Search"
-          onClick={action('search click')}>
-          <Search size={20} />
-        </HeaderGlobalAction>
-        <HeaderGlobalAction
-          aria-label="Notifications"
-          isActive
-          onClick={action('notification click')}>
-          <Notification size={20} />
-        </HeaderGlobalAction>
-        <HeaderGlobalAction
-          aria-label="App Switcher"
-          onClick={action('app-switcher click')}
-          tooltipAlignment="end">
-          <SwitcherIcon size={20} />
-        </HeaderGlobalAction>
-      </HeaderGlobalBar>
-      <HeaderPanel expanded />
-    </Header>
-    <StoryContent />
-  </>
-);
+export const HeaderWActionsAndRightPanel = (args) => {
+  // Add state to control panel expansion
+  const [isPanelExpanded, setIsPanelExpanded] = useState(false);
+
+  // Toggle the notification panel when the icon is clicked
+  const togglePanel = () => {
+    setIsPanelExpanded((prev) => !prev);
+  };
+
+  // Function to close panel specifically
+  const closePanel = () => {
+    setIsPanelExpanded(false);
+  };
+
+  // Close the panel when Escape key is pressed
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      closePanel();
+    }
+  };
+
+  return (
+    <>
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            badgeCount={args.badgeCount}
+            isActive={isPanelExpanded}
+            onClick={togglePanel}
+            onBlur={closePanel}
+            onKeyDown={handleKeyDown}
+            tooltipAlignment="center"
+            id="notification-button">
+            <Notification size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="App Switcher"
+            onClick={action('app-switcher click')}
+            tooltipAlignment="end">
+            <SwitcherIcon size={20} />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+        <HeaderPanel expanded={isPanelExpanded} href="#notification-button">
+          {/* Notification panel content here */}
+        </HeaderPanel>
+      </Header>
+      <StoryContent />
+    </>
+  );
+};
 
 HeaderWActionsAndRightPanel.storyName = 'Header w/ Actions and Right Panel';
+
+HeaderWActionsAndRightPanel.argTypes = {
+  badgeCount: {
+    description:
+      ' **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0. Must be used with size="lg" and kind="ghost"',
+    control: {
+      type: 'number',
+    },
+  },
+};
+
+HeaderWActionsAndRightPanel.args = {
+  badgeCount: 4,
+};
 
 export const HeaderWActionsAndSwitcher = (args) => (
   <HeaderContainer

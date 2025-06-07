@@ -1,0 +1,62 @@
+/**
+* Copyright IBM Corp. 2019, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as *;
+
+.ai-label-container {
+  display: flex;
+  align-items: flex-start;
+  margin-block-end: $spacing-12;
+
+  > * {
+    margin-inline-start: $spacing-07;
+  }
+}
+
+.ai-label-container-example.centered {
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  inline-size: calc(100vw - 84px);
+}
+
+p {
+  @include type-style('body-compact-01');
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.secondary {
+  color: $text-secondary;
+}
+
+.ai-label-heading {
+  font-size: 2.625rem;
+  font-weight: 300;
+  margin-block-end: $spacing-05;
+}
+
+hr {
+  border: 0;
+  background: $border-subtle;
+  block-size: 1px;
+  margin-block: $spacing-07;
+}
+
+div #{$prefix}-selectable-tile::-moz-list-bullet {
+  margin-block-end: $spacing-05;
+}
+
+#{$prefix}-radio-button-group:not(:first-of-type),
+#{$prefix}-checkbox-group:not(:first-of-type) {
+  margin-block-start: $spacing-07;
+}

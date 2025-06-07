@@ -1,13 +1,21 @@
+/**
+ * Copyright IBM Corp. 2023, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { PrefixContext } from '../../internal/usePrefix';
 import React from 'react';
 
-export const LowerHandle = () => (
+export const LowerHandle = (props) => (
   <PrefixContext.Consumer>
     {(prefix) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower`}>
+        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower`}
+        {...props}>
         <path d="M15.08 6.46H16v11.08h-.92zM4.46 17.54c-.25 0-.46-.21-.46-.46V6.92a.465.465 0 0 1 .69-.4l8.77 5.08a.46.46 0 0 1 0 .8l-8.77 5.08c-.07.04-.15.06-.23.06Z" />
         <path fill="none" d="M-4 0h24v24H-4z" />
       </svg>
@@ -15,13 +23,14 @@ export const LowerHandle = () => (
   </PrefixContext.Consumer>
 );
 
-export const LowerHandleFocus = () => (
+export const LowerHandleFocus = (props) => (
   <PrefixContext.Consumer>
     {(prefix) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower ${prefix}--slider__thumb-icon--focus`}>
+        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower ${prefix}--slider__thumb-icon--focus`}
+        {...props}>
         <path d="M15.08 6.46H16v11.08h-.92zM4.46 17.54c-.25 0-.46-.21-.46-.46V6.92a.465.465 0 0 1 .69-.4l8.77 5.08a.46.46 0 0 1 0 .8l-8.77 5.08c-.07.04-.15.06-.23.06Z" />
         <path fill="none" d="M-4 0h24v24H-4z" />
         <path d="M15.08 0H16v6.46h-.92z" />
@@ -32,13 +41,14 @@ export const LowerHandleFocus = () => (
   </PrefixContext.Consumer>
 );
 
-export const UpperHandle = () => (
+export const UpperHandle = (props) => (
   <PrefixContext.Consumer>
     {(prefix) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper`}>
+        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper`}
+        {...props}>
         <path d="M0 6.46h.92v11.08H0zM11.54 6.46c.25 0 .46.21.46.46v10.15a.465.465 0 0 1-.69.4L2.54 12.4a.46.46 0 0 1 0-.8l8.77-5.08c.07-.04.15-.06.23-.06Z" />
         <path fill="none" d="M-4 0h24v24H-4z" />
       </svg>
@@ -46,13 +56,14 @@ export const UpperHandle = () => (
   </PrefixContext.Consumer>
 );
 
-export const UpperHandleFocus = () => (
+export const UpperHandleFocus = (props) => (
   <PrefixContext.Consumer>
     {(prefix) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper ${prefix}--slider__thumb-icon--focus`}>
+        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper ${prefix}--slider__thumb-icon--focus`}
+        {...props}>
         <path d="M0 6.46h.92v11.08H0zM11.54 6.46c.25 0 .46.21.46.46v10.15a.465.465 0 0 1-.69.4L2.54 12.4a.46.46 0 0 1 0-.8l8.77-5.08c.07-.04.15-.06.23-.06Z" />
         <path fill="none" d="M-4 0h24v24H-4z" />
         <path d="M.92 24H0v-6.46h.92z" />

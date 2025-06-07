@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:string';
+
 @use '../config';
 @use './src';
 
@@ -12,10 +14,11 @@ $font-family: 'IBM Plex Sans Devanagari';
 $name: 'IBM-Plex-Sans-Devanagari';
 $styles: (normal);
 $formats: (woff2, woff);
+$package-name: 'sans-devanagari';
 
 @mixin thin() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 100;
@@ -23,14 +26,15 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Thin,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
 
 @mixin extralight() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 200;
@@ -38,14 +42,15 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: ExtraLight,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
 
 @mixin light() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 300;
@@ -53,14 +58,15 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Light,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
 
 @mixin regular() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 400;
@@ -68,14 +74,15 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Regular,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
 
 @mixin text() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 450;
@@ -83,14 +90,15 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Text,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
 
 @mixin medium() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 500;
@@ -98,14 +106,15 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Medium,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
 
 @mixin semibold() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 500;
@@ -113,14 +122,15 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: SemiBold,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
 
 @mixin bold() {
   @font-face {
-    font-display: config.$font-display;
+    font-display: string.unquote(config.$font-display);
     font-family: $font-family;
     font-style: normal;
     font-weight: 500;
@@ -128,7 +138,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Bold,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }

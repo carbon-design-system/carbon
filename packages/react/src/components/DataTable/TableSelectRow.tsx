@@ -31,7 +31,7 @@ export interface TableSelectRowProps {
   /**
    * Specify whether this row is selected, or not
    */
-  checked: boolean;
+  checked?: boolean;
 
   /**
    * The CSS class names of the cell that wraps the underlying input control
@@ -87,29 +87,57 @@ const TableSelectRow = ({
 }: TableSelectRowProps) => {
   const prefix = usePrefix();
   const uniqueNameId = useId();
+
+  const handleRadioChange = onChange
+    ? (
+        value: string | number | undefined,
+        name: string | undefined,
+        event: React.ChangeEvent<HTMLInputElement>
+      ) => {
+        // Convert the radio value to boolean for consistency
+        onChange(!!value, name || '', event);
+      }
+    : undefined;
+
+  const handleCheckboxChange = onChange
+    ? (
+        checked: boolean,
+        name: string,
+        event: React.ChangeEvent<HTMLInputElement>
+      ) => {
+        onChange(checked, name, event);
+      }
+    : undefined;
+
   const selectionInputProps = {
     id,
     name: name ? name : uniqueNameId,
     onClick: onSelect,
-    onChange,
     checked,
     disabled,
   };
-  const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
+
+  const labelValue = ariaLabel || deprecatedAriaLabel || '';
   const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {
     ...(className && { [className]: true }),
     [`${prefix}--table-column-radio`]: radio,
   });
   return (
     <td className={tableSelectRowClasses} aria-live="off">
-      <InlineInputComponent
-        {...selectionInputProps}
-        {...(radio && {
-          labelText: ariaLabel || deprecatedAriaLabel,
-          hideLabel: true,
-        })}
-        {...(!radio && { 'aria-label': ariaLabel || deprecatedAriaLabel })}
-      />
+      {radio ? (
+        <RadioButton
+          {...selectionInputProps}
+          labelText={labelValue}
+          onChange={handleRadioChange}
+          hideLabel={true}
+        />
+      ) : (
+        <InlineCheckbox
+          {...selectionInputProps}
+          aria-label={labelValue}
+          onChange={handleCheckboxChange}
+        />
+      )}
     </td>
   );
 };
@@ -129,7 +157,7 @@ TableSelectRow.propTypes = {
   /**
    * Specify whether this row is selected, or not
    */
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
 
   /**
    * The CSS class names of the cell that wraps the underlying input control

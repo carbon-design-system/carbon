@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,15 +14,17 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import useResizeObserver from 'use-resize-observer/polyfilled';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
-import getUniqueId from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
@@ -30,19 +32,44 @@ const defaultMaxExpandedNumberOfRows = 0;
 const defaultMinCollapsedNumberOfRows = 3;
 const defaultMinExpandedNumberOfRows = 16;
 
+export type DeprecatedCodeSnippetAlignment =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left-bottom'
+  | 'left-top'
+  | 'right-bottom'
+  | 'right-top';
+
+export type NewCodeSnippetAlignment =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-end'
+  | 'left-start'
+  | 'right-end'
+  | 'right-start';
+
+export type CodeSnippetAlignment =
+  | DeprecatedCodeSnippetAlignment
+  | NewCodeSnippetAlignment;
+
 export interface CodeSnippetProps {
   /**
    * Specify how the trigger should align with the tooltip
    */
-  align?:
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'left'
-    | 'right';
+  align?: CodeSnippetAlignment;
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign?: boolean;
 
   /**
    * Specify a label to be read by screen readers on the containing textbox
@@ -150,6 +177,7 @@ export interface CodeSnippetProps {
 
 function CodeSnippet({
   align = 'bottom',
+  autoAlign = false,
   className,
   type = 'single',
   children,
@@ -174,7 +202,7 @@ function CodeSnippet({
 }: PropsWithChildren<CodeSnippetProps>) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
-  const { current: uid } = useRef(getUniqueId());
+  const { current: uid } = useRef(uniqueId());
   const codeContentRef = useRef<HTMLPreElement>(null);
   const codeContainerRef = useRef<HTMLDivElement>(null);
   const innerCodeRef = useRef<HTMLElement>(null);
@@ -230,7 +258,9 @@ function CodeSnippet({
   }, [type, getCodeRefDimensions]);
 
   useResizeObserver({
-    ref: getCodeRef(),
+    // Cast the ref until the hook supports React 19
+    // https://github.com/ZeeCoder/use-resize-observer/issues/108
+    ref: getCodeRef() as React.RefObject<HTMLElement>,
     onResize: () => {
       if (codeContentRef?.current && type === 'multi') {
         const { height } = codeContentRef.current.getBoundingClientRect();
@@ -304,6 +334,7 @@ function CodeSnippet({
       <Copy
         {...rest}
         align={align}
+        autoAlign={autoAlign}
         onClick={handleCopyClick}
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
@@ -377,6 +408,7 @@ function CodeSnippet({
       {!hideCopyButton && (
         <CopyButton
           align={align}
+          autoAlign={autoAlign}
           size={type === 'multi' ? 'sm' : 'md'}
           disabled={disabled}
           onClick={handleCopyClick}
@@ -410,16 +442,50 @@ CodeSnippet.propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
-  align: PropTypes.oneOf([
-    'top',
-    'top-left',
-    'top-right',
-    'bottom',
-    'bottom-left',
-    'bottom-right',
-    'left',
-    'right',
-  ]),
+  align: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
+
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
+
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
+
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    mapPopoverAlign
+  ),
 
   /**
    * Specify a label to be read by screen readers on the containing textbox
@@ -436,6 +502,11 @@ CodeSnippet.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Provide the content of your CodeSnippet as a node or string

@@ -256,7 +256,7 @@ or animatable.
 Note that adding a forwarded ref to a component should be considered a breaking
 change. When creating a new component, even if you do not anticipate an explicit
 need to provide a forwarded ref, it's likely still worthwhile to include one to
-avoid unecessary breaking changes in the future.
+avoid unnecessary breaking changes in the future.
 
 #### `className`, `data-testid`, and `...rest`
 
@@ -1112,3 +1112,7 @@ test('Public API', async () => {
   `);
 });
 ```
+
+You can run `yarn test -u` from the root to update the snapshot and include it
+in your pull request for review. This helps core reviewers to determine if api
+changes are being made in a backwards compatible way to avoid breaking changes.

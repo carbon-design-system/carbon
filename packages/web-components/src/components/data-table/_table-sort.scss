@@ -1,0 +1,70 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/data-table/sort';
+
+// Padding of header cell for sorting
+//
+// Let sort button rather than the cell define the padding
+// Ensure sort button takes 100% of the cell, by setting the same height as the parent row
+
+:host(#{$prefix}-table-header-row)
+  ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
+  padding-inline: 0;
+}
+
+:host(#{$prefix}-table-header-cell[sort-direction]:first-of-type)
+  .#{$prefix}--table-sort {
+  padding-inline-start: $spacing-05;
+}
+
+:host(#{$prefix}-table-header-cell[sort-direction][expandable][selection-name])
+  .#{$prefix}--table-sort {
+  padding-inline-start: 0;
+}
+
+//
+// Sort icon style
+//
+
+// Show sort icon of primary sorting column or one of hovered column
+:host(#{$prefix}-table-header-cell[sort-active])
+  .#{$prefix}--table-sort
+  .#{$prefix}--table-sort__icon,
+:host(#{$prefix}-table-header-cell)
+  .#{$prefix}--table-sort:hover
+  .#{$prefix}--table-sort__icon {
+  opacity: 1;
+}
+
+// `carbon-web-components` uses conditional rendering for choosing Arrows16 vs. ArrowDown16,
+// and thus `display:none` here is not needed
+:host(#{$prefix}-table-header-cell[sort-direction])
+  .#{$prefix}--table-sort
+  .#{$prefix}--table-sort__icon {
+  display: block;
+}
+
+:host(#{$prefix}-table-header-cell[sort-direction='ascending'])
+  .#{$prefix}--table-sort__icon {
+  transform: rotate(180deg);
+}
+
+// places slug near sorting icon in header
+:host(#{$prefix}-table-header-cell[sort-direction][ai-label]) {
+  .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--table-sort__icon {
+    margin-inline: auto $spacing-03;
+  }
+
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    margin-inline-end: $spacing-03;
+  }
+}

@@ -1,0 +1,59 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TabsStories from './tabs.stories';
+
+<Meta of={TabsStories} />
+
+# Tabs
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tabs)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tabs/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tabs/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Line Tabs](#line-tabs)
+- [Contained Tabs](#contained-tabs)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+Use tabs to allow users to navigate easily between views within the same
+context. `cds-tabs` are now more composable, meaning that you have more
+flexibility in what is in rendered inside of `cds-tab` and a tab's panel.
+
+### Line Tabs
+
+<Canvas of={TabsStories.Default} />
+
+### Contained Tabs
+
+<Canvas of={TabsStories.Contained} />
+
+### Skeleton
+
+<Canvas of={TabsStories.skeleton} />
+
+## Component API
+
+## `cds-tabs`
+
+<ArgTypes of="cds-tabs" />
+
+## `cds-tab`
+
+<ArgTypes of="cds-tab" />
+
+<Markdown>{`${cdnJs({ components: ['tabs'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tabs/tabs.mdx).

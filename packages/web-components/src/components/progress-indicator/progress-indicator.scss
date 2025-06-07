@@ -1,0 +1,127 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/components/progress-indicator/progress-indicator' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include progress-indicator;
+
+:host(#{$prefix}-progress-indicator),
+:host(#{$prefix}-progress-indicator-skeleton) {
+  @extend .#{$prefix}--progress;
+}
+
+:host(#{$prefix}-progress-indicator[vertical]),
+:host(#{$prefix}-progress-indicator-skeleton[vertical]) {
+  @extend .#{$prefix}--progress--vertical;
+}
+
+:host(#{$prefix}-progress-step),
+:host(#{$prefix}-progress-step-skeleton) {
+  @extend .#{$prefix}--progress-step;
+  @extend .#{$prefix}--progress-step--incomplete;
+
+  outline: none;
+
+  // Carbon core style has hard-coded width whose value is the same as `.#{$prefix}--progress-step`.
+  // We override it so changing width of `<#{$prefix}-progress-step>` automatically changes the width here.
+  // https://github.com/carbon-design-system/carbon-web-components/issues/325
+  .#{$prefix}--progress-line {
+    inline-size: 100%;
+  }
+}
+
+:host(#{$prefix}-progress-step[disabled]) {
+  @extend .#{$prefix}--progress-step--disabled;
+}
+
+:host(#{$prefix}-progress-step[vertical]),
+:host(#{$prefix}-progress-step-skeleton[vertical]) {
+  display: list-item;
+  inline-size: initial;
+  min-block-size: 3.625rem;
+  min-inline-size: initial;
+
+  svg {
+    display: inline-block;
+    margin: 0.1rem $spacing-02 0.1rem $spacing-03;
+  }
+
+  .#{$prefix}--progress-label {
+    display: inline-block;
+    margin: 0;
+    max-inline-size: none;
+    vertical-align: top;
+  }
+
+  .#{$prefix}--progress-line {
+    block-size: 100%;
+    inline-size: 1px;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+}
+
+:host(#{$prefix}-progress-step[vertical]) {
+  .#{$prefix}--progress-label {
+    inline-size: initial;
+  }
+
+  .#{$prefix}--progress-optional {
+    position: initial;
+    margin-block-start: auto;
+    margin-inline-start: $spacing-07;
+  }
+
+  .#{$prefix}--progress-step-button {
+    display: block;
+  }
+}
+
+:host(#{$prefix}-progress-step[vertical][state='current']) svg {
+  margin-inline-start: 0.563rem;
+}
+
+:host(#{$prefix}-progress-step[state='current']) {
+  @extend .#{$prefix}--progress-step--current;
+
+  svg {
+    fill: $interactive;
+  }
+}
+
+:host(#{$prefix}-progress-step[state='complete']) {
+  @extend .#{$prefix}--progress-step--complete;
+
+  svg {
+    fill: $interactive;
+  }
+}
+
+:host(#{$prefix}-progress-step[state='incomplete']) {
+  @extend .#{$prefix}--progress-step--incomplete;
+}
+
+:host(#{$prefix}-progress-step-skeleton) {
+  svg {
+    fill: $layer-selected-inverse;
+  }
+
+  .#{$prefix}--progress-line {
+    background-color: $layer-accent-01;
+  }
+}
+
+:host(#{$prefix}-progress-step[spaceEqually]) {
+  flex-grow: 1;
+}

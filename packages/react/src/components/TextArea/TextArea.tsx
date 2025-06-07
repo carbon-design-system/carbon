@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,23 +7,27 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ReactNode,
-  useState,
+  cloneElement,
+  forwardRef,
   useContext,
-  useRef,
   useEffect,
+  useRef,
+  useState,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -37,6 +41,11 @@ export interface TextAreaProps
    * Specify the `cols` attribute for the underlying `<textarea>` node
    */
   cols?: number;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextArea` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Optionally provide the default value of the `<textarea>`
@@ -130,6 +139,7 @@ export interface TextAreaProps
   rows?: number;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
   slug?: ReactNode;
@@ -155,9 +165,12 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
+const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
+
+const TextArea = frFn((props, forwardRef) => {
   const {
     className,
+    decorator,
     disabled = false,
     id,
     labelText,
@@ -171,7 +184,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     light,
     placeholder = '',
     enableCounter = false,
-    maxCount = undefined,
+    maxCount,
     counterMode = 'character',
     warn = false,
     warnText = '',
@@ -186,9 +199,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
-    | undefined;
+  const ref = useMergedRefs([forwardRef, textareaRef]);
 
   function getInitialTextCount(): number {
     const targetValue =
@@ -198,7 +209,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     if (counterMode === 'character') {
       return strValue.length;
     } else {
-      return strValue.match(/\w+/g)?.length || 0;
+      return strValue.match(/\p{L}+/gu)?.length || 0;
     }
   }
 
@@ -252,9 +263,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           textareaRef.current !== null
         ) {
           const existingWords: string[] =
-            textareaRef.current.value.match(/\w+/g) || [];
+            textareaRef.current.value.match(/\p{L}+/gu) || [];
           const pastedWords: string[] =
-            evt.clipboardData.getData('Text').match(/\w+/g) || [];
+            evt.clipboardData.getData('Text').match(/\p{L}+/gu) || [];
 
           const totalWords = existingWords.length + pastedWords.length;
 
@@ -296,7 +307,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
           ) {
-            const matchedWords = evt.target?.value?.match(/\w+/g);
+            const matchedWords = evt.target?.value?.match(/\p{L}+/gu);
             if (matchedWords && matchedWords.length <= maxCount) {
               textareaRef.current.removeAttribute('maxLength');
 
@@ -329,6 +340,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
     [`${prefix}--text-area__wrapper--warn`]: warn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
+    [`${prefix}--text-area__wrapper--decorator`]: decorator,
   });
 
   const labelClasses = classNames(`${prefix}--label`, {
@@ -344,6 +356,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const counterClasses = classNames(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--text-area__label-counter`]: true,
   });
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
@@ -415,11 +428,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     }
   }
 
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(
+  const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
+    counterMode === 'word' ? 'word' : undefined,
     counterMode === 'word' ? 'words' : undefined
   );
   useEffect(() => {
@@ -466,13 +480,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     />
   );
 
-  // Slug is always size `mini`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-    });
-  }
+  // AILabel is always size `mini`
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
+    : null;
 
   return (
     <div className={formItemClasses}>
@@ -490,7 +503,15 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           />
         )}
         {input}
-        {normalizedSlug}
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--text-area__inner-wrapper--decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
         <span
           className={`${prefix}--text-area__counter-alert`}
           role="alert"
@@ -527,6 +548,11 @@ TextArea.propTypes = {
    * Specify the method used for calculating the counter number
    */
   counterMode: PropTypes.oneOf(['character', 'word']),
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextArea` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Optionally provide the default value of the `<textarea>`
@@ -625,7 +651,11 @@ TextArea.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `TextArea` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Provide the current value of the `<textarea>`

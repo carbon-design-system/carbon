@@ -1,0 +1,143 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/ui-shell/side-nav';
+
+:host(#{$prefix}-side-nav[expanded]) ::slotted(#{$prefix}-side-nav-items) {
+  overflow-y: auto;
+}
+
+:host(#{$prefix}-side-nav-items) {
+  @extend .#{$prefix}--side-nav__items;
+}
+
+:host(#{$prefix}-side-nav-link) {
+  @extend .#{$prefix}--side-nav__item;
+
+  display: block;
+  block-size: auto;
+  inline-size: auto;
+  outline: none;
+
+  .#{$prefix}--side-nav__icon {
+    // TODO: audit
+    color: $text-primary;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+:host(#{$prefix}-side-nav-link[large]) {
+  @extend .#{$prefix}--side-nav__item--large;
+}
+
+:host(#{$prefix}-side-nav-divider) {
+  @extend .#{$prefix}--side-nav__divider;
+
+  display: block;
+}
+
+:host(#{$prefix}-side-nav-menu) {
+  @extend .#{$prefix}--side-nav__item;
+
+  display: block;
+
+  .#{$prefix}--side-nav__icon[hidden] {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav__menu {
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true']
+    + .#{$prefix}--side-nav__menu {
+    max-block-size: none;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu[active]) {
+  @extend .#{$prefix}--side-nav__item--active;
+
+  position: relative;
+
+  // TODO: audit
+  color: $text-primary;
+
+  &::before {
+    position: absolute;
+    background-color: $border-interactive;
+    content: '';
+    inline-size: $spacing-02;
+    inset-block: 0;
+    inset-inline-start: 0;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu[active][expanded]) {
+  position: inherit;
+  background-color: inherit;
+  color: inherit;
+
+  &::before {
+    content: none;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu[has-icon]) {
+  @extend .#{$prefix}--side-nav__item--icon;
+}
+
+:host(#{$prefix}-side-nav-menu[large]) {
+  @extend .#{$prefix}--side-nav__item--large;
+}
+
+:host(#{$prefix}-side-nav-menu-item) {
+  @extend .#{$prefix}--side-nav__menu-item;
+
+  display: block;
+  block-size: auto;
+  inline-size: auto;
+  outline: none;
+
+  a.#{$prefix}--side-nav__link {
+    block-size: $spacing-07;
+    font-weight: 400;
+    min-block-size: $spacing-07;
+    padding-inline-start: $spacing-07;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu-item[parent-has-icon])
+  a.#{$prefix}--side-nav__link {
+  padding-inline-start: 4.5rem;
+}
+
+:host(#{$prefix}-side-nav-item) .#{$prefix}--side-nav__link:hover,
+:host(#{$prefix}-side-nav-menu) .#{$prefix}--side-nav__submenu:hover,
+:host(#{$prefix}-side-nav-menu-item) .#{$prefix}--side-nav__link:hover {
+  // TODO: audit
+  background-color: $background-hover;
+  color: $text-primary;
+}
+
+:host(#{$prefix}-header-side-nav-items) {
+  @extend .#{$prefix}--side-nav__header-navigation;
+}
+
+:host(#{$prefix}-header-side-nav-items[has-divider]) {
+  @extend .#{$prefix}--side-nav__header-divider;
+}

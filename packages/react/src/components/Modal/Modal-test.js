@@ -1,17 +1,17 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import React, { useRef, useState } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import Modal from './Modal';
 import TextInput from '../TextInput';
 import { AILabel } from '../AILabel';
+import { FeatureFlags } from '../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -368,7 +368,21 @@ describe('Modal', () => {
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
   });
 
+  it('should respect decorator prop', () => {
+    const { container } = render(
+      <Modal
+        danger
+        primaryButtonText="Danger button text"
+        data-testid="modal-5"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--modal--decorator`);
+  });
+
   it('should respect slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <Modal
         danger
@@ -379,6 +393,151 @@ describe('Modal', () => {
     );
 
     expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
+    spy.mockRestore();
+  });
+
+  it('should set correct focus if data-modal-primary-focus is used', () => {
+    render(
+      <Modal
+        open
+        id="custom-modal-id"
+        data-testid="modal-4"
+        loadingStatus="active"
+        loadingDescription="loading..."
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          data-testid="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('text-input-1')).toHaveFocus();
+  });
+
+  it('should set correct focus on a danger modal if data-modal-primary-focus is used', () => {
+    render(
+      <Modal
+        open
+        danger
+        id="custom-modal-id"
+        data-testid="modal-4"
+        loadingStatus="active"
+        loadingDescription="loading..."
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          data-testid="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('text-input-1')).toHaveFocus();
+  });
+
+  it('should set focus on secondary button if danger modal is used', () => {
+    render(
+      <Modal
+        open
+        danger
+        id="custom-modal-id"
+        data-testid="modal-4"
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          id="text-input-1"
+          data-testid="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('Cancel')).toHaveFocus();
+  });
+
+  it('should not focus the launcherButtonRef on initial render or after timers', () => {
+    jest.useFakeTimers();
+
+    const launcherButtonRef = React.createRef();
+
+    render(
+      <>
+        <button ref={launcherButtonRef} data-testid="launcher-button">
+          Launch Modal
+        </button>
+        <Modal
+          launcherButtonRef={launcherButtonRef}
+          primaryButtonText="Save"
+          secondaryButtonText="Cancel">
+          <p>Modal Content</p>
+        </Modal>
+      </>
+    );
+
+    const launcherButton = screen.getByTestId('launcher-button');
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.runAllTimers();
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.useRealTimers();
+  });
+
+  describe('enable-dialog-element feature flag', () => {
+    it('should bring launcherButtonRef element into focus on close when the ref is defined', async () => {
+      const ModalExample = () => {
+        const [open, setOpen] = useState(true);
+        const focusRef = useRef();
+        return (
+          <FeatureFlags enableDialogElement>
+            <Modal
+              open={open}
+              launcherButtonRef={focusRef}
+              onClick={() => setOpen(false)}>
+              <button data-testid="close" onClick={() => setOpen(false)} />
+            </Modal>
+            <button data-testid="focusElem" ref={focusRef}>
+              focus after close
+            </button>
+          </FeatureFlags>
+        );
+      };
+      render(<ModalExample />);
+
+      const closeButton = screen.getByTestId('close');
+      const focusElem = screen.getByTestId('focusElem');
+
+      expect(focusElem).not.toHaveFocus();
+      await userEvent.click(closeButton);
+      await waitFor(() => {
+        expect(focusElem).toHaveFocus();
+      });
+    });
   });
 });
 
@@ -629,5 +788,29 @@ describe('events', () => {
     const secondaryBtn = screen.getByText('Secondary button');
     await userEvent.click(secondaryBtn);
     expect(onSecondarySubmit).toHaveBeenCalled();
+  });
+
+  it('should not double submit when Enter key is pressed on primary button with `shouldSubmitOnEnter` enabled', async () => {
+    const { keyboard } = userEvent;
+    const onRequestSubmit = jest.fn();
+
+    render(
+      <Modal
+        open
+        primaryButtonText="Submit"
+        secondaryButtonText="Cancel"
+        onRequestSubmit={onRequestSubmit}
+        shouldSubmitOnEnter>
+        <p>Test content</p>
+      </Modal>
+    );
+
+    const primaryButton = screen.getByRole('button', { name: 'Submit' });
+
+    primaryButton.focus();
+    expect(primaryButton).toHaveFocus();
+
+    await keyboard('{Enter}');
+    expect(onRequestSubmit).toHaveBeenCalledTimes(1);
   });
 });

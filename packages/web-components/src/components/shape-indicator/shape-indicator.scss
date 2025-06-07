@@ -1,0 +1,61 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+$css--plex: true !default;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/shape-indicator/index' as *;
+
+:host(#{$prefix}-shape-indicator) {
+  @extend .#{$prefix}--shape-indicator;
+}
+
+:host(#{$prefix}-shape-indicator[text-size='14']) {
+  @extend .#{$prefix}--shape-indicator--14;
+}
+
+:host(#{$prefix}-shape-indicator[kind='failed']) svg {
+  @extend .#{$prefix}--shape-indicator--failed;
+}
+
+:host(#{$prefix}-shape-indicator[kind='critical']) svg {
+  @extend .#{$prefix}--shape-indicator--critical;
+}
+
+:host(#{$prefix}-shape-indicator[kind='high']) svg {
+  @extend .#{$prefix}--shape-indicator--high;
+}
+
+:host(#{$prefix}-shape-indicator[kind='medium']) svg {
+  @extend .#{$prefix}--shape-indicator--medium;
+}
+
+:host(#{$prefix}-shape-indicator[kind='low']) svg {
+  @extend .#{$prefix}--shape-indicator--low;
+}
+
+:host(#{$prefix}-shape-indicator[kind='cautious']) svg {
+  @extend .#{$prefix}--shape-indicator--cautious;
+}
+
+:host(#{$prefix}-shape-indicator[kind='undefined']) svg {
+  @extend .#{$prefix}--shape-indicator--undefined;
+}
+
+:host(#{$prefix}-shape-indicator[kind='stable']) svg {
+  @extend .#{$prefix}--shape-indicator--stable;
+}
+
+:host(#{$prefix}-shape-indicator[kind='informative']) svg {
+  @extend .#{$prefix}--shape-indicator--informative;
+}
+
+:host(#{$prefix}-shape-indicator[kind='incomplete']) svg {
+  @extend .#{$prefix}--shape-indicator--incomplete;
+}
+
+:host(#{$prefix}-shape-indicator[kind='draft']) svg {
+  @extend .#{$prefix}--shape-indicator--draft;
+}

@@ -16,7 +16,7 @@ module.exports = {
 
     // Triage
     needsMoreInfo: 'status: needs more info',
-    needsTriage: 'status: needs triage 🕵️‍♀️',
+    needsTriage: 'status: needs triage :female_detective:',
     waitingForAuthor: `status: waiting for author's response 💬`,
     waitingForMaintainer: 'status: waiting for maintainer response 💬',
 

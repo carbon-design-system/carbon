@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,17 +8,25 @@
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
-import React, { ForwardedRef, useContext } from 'react';
+import React, {
+  cloneElement,
+  useContext,
+  type ForwardedRef,
+  type HTMLAttributes,
+  type ReactNode,
+} from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useId } from '../../internal/useId';
-import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
+import deprecate from '../../prop-types/deprecate';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
 export type ReactNodeLike =
   | ReactElementLike
-  | ReactNodeArray
+  | ReadonlyArray<ReactNode>
   | string
   | number
   | boolean
@@ -28,7 +36,7 @@ export type ReactNodeLike =
 export type func = (...args: any[]) => any;
 
 export interface DatePickerInputProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * The type of the date picker:
    *
@@ -37,6 +45,11 @@ export interface DatePickerInputProps
    * * `range` - With calendar dropdown and a date range.
    */
   datePickerType?: 'simple' | 'single' | 'range';
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `DatePickerInput` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify whether or not the input should be disabled
@@ -111,6 +124,7 @@ export interface DatePickerInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
    */
   slug?: ReactNodeLike;
@@ -137,6 +151,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
 ) {
   const {
     datePickerType,
+    decorator,
     disabled = false,
     helperText,
     hideLabel,
@@ -178,6 +193,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
     [`${prefix}--date-picker-input__wrapper--warn`]: warn,
     [`${prefix}--date-picker-input__wrapper--slug`]: slug,
+    [`${prefix}--date-picker-input__wrapper--decorator`]: decorator,
   });
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -200,7 +216,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
 
   const datePickerInputHelperId = !helperText
     ? undefined
-    : `detepicker-input-helper-text-${datePickerInputInstanceId}`;
+    : `datepicker-input-helper-text-${datePickerInputInstanceId}`;
 
   const inputProps: any = {
     ...rest,
@@ -215,13 +231,12 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   }
   const input = <input {...inputProps} />;
 
-  // Slug is always size `mini`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-    });
-  }
+  // AILabel always size `mini`
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
+    : null;
 
   return (
     <div className={containerClasses}>
@@ -233,7 +248,16 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
       <div className={wrapperClasses}>
         <span>
           {input}
-          {normalizedSlug}
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div
+              className={`${prefix}--date-picker-input-inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
           {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
           <DatePickerIcon
             datePickerType={datePickerType}
@@ -279,6 +303,11 @@ DatePickerInput.propTypes = {
    * * `range` - With calendar dropdown and a date range.
    */
   datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `RadioButton` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify whether or not the input should be disabled
@@ -358,10 +387,10 @@ DatePickerInput.propTypes = {
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Specify the type of the `<input>`
@@ -379,7 +408,17 @@ DatePickerInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-function DatePickerIcon({ datePickerType, invalid, warn }) {
+interface DatePickerIconProps {
+  datePickerType: 'simple' | 'single' | 'range' | undefined;
+  invalid?: boolean;
+  warn?: boolean;
+}
+
+function DatePickerIcon({
+  datePickerType,
+  invalid,
+  warn,
+}: DatePickerIconProps) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
 

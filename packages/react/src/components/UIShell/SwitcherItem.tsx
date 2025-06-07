@@ -1,7 +1,17 @@
+/**
+ * Copyright IBM Corp. 2023, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, {
   ElementType,
+  ForwardedRef,
   forwardRef,
   HTMLAttributeAnchorTarget,
+  KeyboardEvent,
+  MouseEvent,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -10,7 +20,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
-interface BaseSwitcherItemProps {
+export interface BaseSwitcherItemProps {
   /**
    * Specify the text content for the link
    */
@@ -37,7 +47,7 @@ interface BaseSwitcherItemProps {
   /**
    * event handlers
    */
-  onClick?: (event: MouseEvent) => void;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   /**
    * Specify the tab index of the Link
    */
@@ -58,19 +68,23 @@ interface BaseSwitcherItemProps {
    * Specify where to open the link.
    */
   target?: HTMLAttributeAnchorTarget;
+  /**
+   * The rel property for the link.
+   */
+  rel?: string;
 }
 
-interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
+export interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
   'aria-label': string;
   'aria-labelledby'?: never;
 }
 
-interface SwitcherItemWithAriaLabelledBy extends BaseSwitcherItemProps {
+export interface SwitcherItemWithAriaLabelledBy extends BaseSwitcherItemProps {
   'aria-label'?: never;
   'aria-labelledby': string;
 }
 
-type SwitcherItemProps =
+export type SwitcherItemProps =
   | SwitcherItemWithAriaLabel
   | SwitcherItemWithAriaLabelledBy;
 
@@ -89,6 +103,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
       onKeyDown = () => {},
       href,
       target,
+      rel,
       ...rest
     } = props;
 
@@ -126,13 +141,14 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
     return (
       <li className={classNames}>
         <Link
-          onKeyDown={(evt) => {
+          onKeyDown={(evt: KeyboardEvent<HTMLAnchorElement>) => {
             setTabFocus(evt);
             onKeyDown(evt);
           }}
           href={href}
           target={target}
-          ref={forwardRef}
+          rel={rel}
+          ref={forwardRef as ForwardedRef<HTMLAnchorElement | any>}
           {...rest}
           className={linkClassName}
           tabIndex={tabIndex}
@@ -183,6 +199,10 @@ SwitcherItem.propTypes = {
    * Specify where to open the link.
    */
   target: PropTypes.string,
+  /**
+   * The rel property for the link.
+   */
+  rel: PropTypes.string,
 };
 
 export default SwitcherItem;

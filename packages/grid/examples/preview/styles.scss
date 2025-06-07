@@ -1,5 +1,6 @@
 
 @use '@carbon/styles/scss/grid';
+@use '@carbon/styles/scss/components/aspect-ratio';
 @include grid.flex-grid();
 
 *,
