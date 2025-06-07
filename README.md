@@ -62,6 +62,12 @@ we support!
 | [`@carbon/themes`](./packages/themes)                 | Color tokens available in the Carbon Design System, like `$interactive-01`                                                                                                                                                                    |
 | [`@carbon/type`](./packages/type)                     | New type tokens used alongside IBM Plex                                                                                                                                                                                                       |
 
+> [!NOTE]
+>
+> The code for https://carbondesignsystem.com/ is in
+> https://github.com/carbon-design-system/carbon-website. Any issues or pull
+> requests related to the website should be made there.
+
 ## :books: Documentation
 
 - See our documentation site
