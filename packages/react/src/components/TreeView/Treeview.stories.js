@@ -11,6 +11,7 @@ import { Document, Folder } from '@carbon/icons-react';
 import { default as TreeView, TreeNode } from './';
 import { Button } from '../Button/index';
 import mdx from './TreeView.mdx';
+
 import './story.scss';
 import TextInput from '../TextInput';
 
@@ -78,8 +79,8 @@ export const Default = (args) => {
   const nodes = [
     {
       id: '1',
-      value: 'Artificial intelligence',
-      label: <span>Artificial intelligence</span>,
+      value: 'Application development and integration solutions',
+      label: 'Application development and integration solutions',
       renderIcon: Document,
     },
     {
@@ -90,14 +91,14 @@ export const Default = (args) => {
     },
     {
       id: '3',
-      value: 'Business automation',
-      label: 'Business automation',
+      value: 'Business automation and integration solution',
+      label: 'Business automation and integration solution',
       renderIcon: Folder,
       children: [
         {
           id: '3-1',
           value: 'Business process automation',
-          label: 'Business process automation',
+          label: 'Business process automation and integration solutions',
           renderIcon: Document,
         },
         {
