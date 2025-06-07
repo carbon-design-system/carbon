@@ -36,6 +36,25 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   protected _buttonNode!: HTMLButtonElement;
 
   /**
+   * Finds the next focusable dismissible tag sibling
+   * @returns {HTMLElement|null} The next focusable dismissible tag or null
+   */
+  protected _findNextFocusableTag() {
+    let nextElement = this.nextElementSibling;
+    while (nextElement) {
+      if (
+        nextElement.tagName.toLowerCase() === `${prefix}-dismissible-tag` &&
+        !nextElement.hasAttribute('disabled') &&
+        (nextElement as HTMLElement).getAttribute('open') !== 'false'
+      ) {
+        return nextElement;
+      }
+      nextElement = nextElement.nextElementSibling;
+    }
+    return null;
+  }
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleAILabelSlotChange({ target }: Event) {
@@ -73,6 +92,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       if (this.disabled) {
         event.stopPropagation();
       } else if (this.open) {
+        const nextFocusableTag = this._findNextFocusableTag();
         const init = {
           bubbles: true,
           cancelable: true,
@@ -90,6 +110,13 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
           )
         ) {
           this.open = false;
+          if (nextFocusableTag) {
+            const nextCloseIcon = (nextFocusableTag as CDSDismissibleTag)
+              ._buttonNode;
+            if (nextCloseIcon) {
+              nextCloseIcon.focus();
+            }
+          }
           this.dispatchEvent(
             new CustomEvent(
               (this.constructor as typeof CDSDismissibleTag).eventClose,
