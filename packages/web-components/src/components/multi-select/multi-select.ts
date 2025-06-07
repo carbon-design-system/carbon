@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -69,12 +69,6 @@ class CDSMultiSelect extends CDSDropdown {
   private _selectionButtonNode!: HTMLElement;
 
   /**
-   * The menu body.
-   */
-  @query('#menu-body')
-  private _menuBodyNode!: HTMLElement;
-
-  /**
    * The `<input>` for filtering.
    */
   @query('input')
@@ -92,8 +86,36 @@ class CDSMultiSelect extends CDSDropdown {
   }
 
   protected _selectionDidChange(itemToSelect?: CDSMultiSelectItem) {
+    const allItems = Array.from(
+      this.querySelectorAll(
+        (this.constructor as typeof CDSMultiSelect).selectorItem
+      )
+    ) as CDSMultiSelectItem[];
+
+    // clicked "select all" when it was indeterminate
+    if (itemToSelect?.isSelectAll && itemToSelect.indeterminate) {
+      allItems.forEach((i) => {
+        i.selected = false;
+        i.indeterminate = false;
+      });
+      this.value = '';
+      return;
+    }
+
     if (itemToSelect) {
-      itemToSelect.selected = !itemToSelect.selected;
+      // clicked select all
+      if (itemToSelect.isSelectAll) {
+        allItems.forEach((i) => {
+          if (!i.isSelectAll && !i.disabled) {
+            i.selected = !itemToSelect.selected;
+          }
+          i.indeterminate = false;
+        });
+        itemToSelect.selected = !itemToSelect.selected;
+        // clicked regular item
+      } else {
+        itemToSelect.selected = !itemToSelect.selected;
+      }
     } else {
       forEach(
         this.querySelectorAll(
@@ -105,6 +127,7 @@ class CDSMultiSelect extends CDSDropdown {
       );
       this._handleUserInitiatedToggle(false);
     }
+    if (this.selectAll) this._computeSelectAllState();
     // Change in `.selected` hasn't been reflected to the corresponding attribute yet
     this.value = filter(
       this.querySelectorAll(
@@ -117,6 +140,9 @@ class CDSMultiSelect extends CDSDropdown {
   }
 
   protected _handleClickInner(event: MouseEvent) {
+    const clickedItem = (event.target as HTMLElement).closest(
+      `${prefix}-multi-select-item`
+    ) as CDSMultiSelectItem | null;
     if (
       this._selectionButtonNode?.contains(event.target as Node) &&
       !this.readOnly
@@ -126,6 +152,15 @@ class CDSMultiSelect extends CDSDropdown {
         this._filterInputNode.focus();
       } else {
         this._triggerNode.focus();
+      }
+    } else if (clickedItem && !clickedItem.hasAttribute('disabled')) {
+      // Handle focus highlight
+      const allItems = this.querySelectorAll(`${prefix}-multi-select-item`);
+      allItems.forEach((el) => el.removeAttribute('highlighted'));
+      clickedItem.setAttribute('highlighted', '');
+      this._handleUserInitiatedSelectItem(clickedItem);
+      if (this.filterable) {
+        this._filterInputNode.focus();
       }
     } else if (this._clearButtonNode?.contains(event.target as Node)) {
       this._handleUserInitiatedClearInput();
@@ -349,6 +384,11 @@ class CDSMultiSelect extends CDSDropdown {
     }
 
     forEach(items, (item) => {
+      // always show the selectAll item
+      if ((item as CDSMultiSelectItem).isSelectAll) {
+        item.removeAttribute('filtered');
+        return;
+      }
       const itemValue = (item as HTMLElement).innerText.toLocaleLowerCase();
 
       if (!itemValue.includes(inputValue)) {
@@ -390,6 +430,7 @@ class CDSMultiSelect extends CDSDropdown {
         (item as CDSMultiSelectItem).highlighted = i === nextIndex;
       });
     }
+    this._triggerNode.classList.add('no-focus-style');
   }
 
   /**
@@ -431,6 +472,12 @@ class CDSMultiSelect extends CDSDropdown {
   locale = 'en';
 
   /**
+   * Enables rendering of a “Select all” multi-select-item
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'select-all' })
+  selectAll = false;
+
+  /**
    * Specify feedback (mode) of the selection.
    * `top`: selected item jumps to top
    * `fixed`: selected item stays at it's position
@@ -467,6 +514,8 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--readonly`]: readOnly,
       [`${prefix}--multi-select--selected`]: selectedItemsCount > 0,
+      [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel, // inherited from CDSDropdown
+      [`${prefix}--multi-select--selectall`]: this.selectAll,
     });
   }
 
@@ -528,7 +577,9 @@ class CDSMultiSelect extends CDSDropdown {
       });
       this._selectedItemsCount = filter(
         items,
-        (elem) => values.indexOf((elem as CDSMultiSelectItem).value) >= 0
+        (elem) =>
+          values.indexOf((elem as CDSMultiSelectItem).value) >= 0 &&
+          !(elem as CDSMultiSelectItem).isSelectAll
       ).length;
 
       if (this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP) {
@@ -555,7 +606,9 @@ class CDSMultiSelect extends CDSDropdown {
 
         aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
         // @todo remove typecast once we've updated to Typescript.
-        (this as any).replaceChildren(...sortedMenuItems);
+        sortedMenuItems.forEach((item) => {
+          this.appendChild(item);
+        });
       }
     }
     return true;
@@ -564,9 +617,73 @@ class CDSMultiSelect extends CDSDropdown {
   updated(changedProperties) {
     super.updated(changedProperties);
     if (changedProperties.has('open') && this.open && !this.filterable) {
-      // move focus to menu body when open for non-filterable mulit-select
-      this._menuBodyNode.focus();
+      this._triggerNode.focus();
     }
+    // reorder items so that select all is always at the top of the list
+    if (this.selectAll && changedProperties.has('open') && this.open) {
+      const items = Array.from(
+        this.querySelectorAll('cds-multi-select-item')
+      ) as CDSMultiSelectItem[];
+
+      const selectAllItem = items.find((i) => i.isSelectAll);
+      if (selectAllItem) {
+        this.appendChild(selectAllItem);
+        items
+          .filter((i) => i !== selectAllItem)
+          .forEach((i) => this.appendChild(i));
+      }
+
+      // item below select all gets special treatment to look correct against
+      // "Select all" border treatment via tag 'flush-top'
+      Array.from(this.querySelectorAll('cds-multi-select-item')).forEach(
+        (item, index) => {
+          if (index === 1) {
+            item.setAttribute('flush-top', '');
+          } else {
+            item.removeAttribute('flush-top');
+          }
+        }
+      );
+    }
+    if (changedProperties.has('open') && !this.open) {
+      this._triggerNode.classList.remove('no-focus-style');
+    }
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated?.(changedProperties);
+
+    // whenever more items are added/removed, recompute the state of the select all option
+    if (!this.selectAll) return;
+    const defaultSlot =
+      this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!;
+    defaultSlot.addEventListener('slotchange', () =>
+      this._computeSelectAllState()
+    );
+  }
+
+  /**
+   * Computes the state of the select all option and sets it to either
+   * 'selected' or 'indeterminate'
+   */
+  private _computeSelectAllState() {
+    if (!this.selectAll) return;
+
+    const allItems = Array.from(
+      this.querySelectorAll(
+        (this.constructor as typeof CDSMultiSelect).selectorItem
+      )
+    ) as CDSMultiSelectItem[];
+    const selectAllItem = allItems.find((i) => i.isSelectAll);
+    if (!selectAllItem) {
+      return;
+    }
+    const enabledItems = allItems.filter((i) => !i.isSelectAll && !i.disabled);
+    const selectedCount = enabledItems.filter((i) => i.selected).length;
+    const allSelected = selectedCount === enabledItems.length;
+
+    selectAllItem.selected = allSelected;
+    selectAllItem.indeterminate = selectedCount > 0 && !allSelected;
   }
 
   connectedCallback() {
