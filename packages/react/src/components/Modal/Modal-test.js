@@ -519,7 +519,9 @@ describe('Modal', () => {
               open={open}
               launcherButtonRef={focusRef}
               onClick={() => setOpen(false)}>
-              <button data-testid="close" onClick={() => setOpen(false)} />
+              <button data-testid="close" onClick={() => setOpen(false)}>
+                Close
+              </button>
             </Modal>
             <button data-testid="focusElem" ref={focusRef}>
               focus after close
@@ -565,7 +567,7 @@ describe('events', () => {
     expect(screen.getByTestId('modal-6')).toHaveClass('is-visible');
   });
 
-  it('should handle close when outside of modal is clicked', async () => {
+  it('should not close when clicking outside non-passive modal', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -589,6 +591,23 @@ describe('events', () => {
 
     const outerModal = screen.getByTestId('modal-7');
     await userEvent.click(outerModal);
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should close when clicking outside passive modal', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        passiveModal
+        onRequestClose={onRequestClose}
+        data-testid="modal-passive">
+        <p>This is a passive modal</p>
+      </Modal>
+    );
+
+    const backgroundLayer = screen.getByRole('presentation');
+    await userEvent.click(backgroundLayer);
     expect(onRequestClose).toHaveBeenCalled();
   });
 

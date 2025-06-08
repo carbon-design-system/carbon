@@ -263,7 +263,7 @@ const Modal = React.forwardRef(function Modal(
     size,
     hasScrollingContent = false,
     closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = false,
+    preventCloseOnClickOutside = !passiveModal,
     isFullWidth,
     launcherButtonRef,
     loadingStatus = 'inactive',
@@ -959,7 +959,19 @@ Modal.propTypes = {
   /**
    * Prevent closing on click outside of modal
    */
-  preventCloseOnClickOutside: PropTypes.bool,
+  preventCloseOnClickOutside: (
+    props: ModalProps,
+    propName: string,
+    componentName: string
+  ) => {
+    if (!props.passiveModal && props[propName] === false) {
+      return new Error(
+        `${componentName}: \`${propName}\` should not be \`false\` when \`passiveModal\` is \`false\`. Non-passive ${componentName}s should not be dismissible by clicking outside.`
+      );
+    }
+
+    return null;
+  },
 
   /**
    * Specify whether the Button should be disabled, or not
