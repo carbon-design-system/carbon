@@ -6,7 +6,7 @@
  */
 
 import { compare, defaultSortRow, sortRows } from '../sorting';
-import { sortStates } from '../../state/sorting';
+import { sortStates } from '../../state/sortStates';
 
 describe('sortRows', () => {
   const rowIds = ['row2', 'row1'];
