@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import bg from './carbon_bg.png';
 import './welcome.scss';
 import PackageInfo from './../../package.json';
 import Link from '../../src/components/Link';
@@ -15,15 +14,10 @@ import { Stack } from '../../src/components/Stack';
 
 export const Welcome = () => {
   return (
-    <div
-      className="welcome__container"
-      style={{
-        background: `url(${bg}) no-repeat center center fixed`,
-        backgroundSize: 'cover',
-      }}>
-      <h2 className="welcome__heading">@carbon/react</h2>
+    <div className="welcome__container">
+      <h2 className="welcome__heading">{PackageInfo.name}</h2>
       <h4 className="welcome__heading welcome__heading--subtitle">{`v${PackageInfo.version}`}</h4>
-      <Stack>
+      <Stack className="welcome__links" gap={5}>
         <Link
           href="https://carbondesignsystem.com/"
           className="welcome__link"
@@ -31,6 +25,9 @@ export const Welcome = () => {
           Website
         </Link>
         <Link
+          // TODO: Should the `href` be `PackageInfo.repository.url` instead?
+          // The current value links to the package's directory, not the
+          // repository. The link's text says "GitHub repo".
           href="https://github.com/carbon-design-system/carbon/tree/main/packages/react"
           className="welcome__link"
           renderIcon={ArrowRight}>
