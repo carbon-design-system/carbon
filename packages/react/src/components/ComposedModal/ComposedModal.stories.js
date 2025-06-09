@@ -59,6 +59,11 @@ const sharedArgTypes = {
       disable: true,
     },
   },
+  launcherButtonRef: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
     action: 'onClose',
   },
