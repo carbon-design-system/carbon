@@ -374,7 +374,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input--${size}`]: size,
       [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD,
-      [`${prefix}--text-input__field-wrapper--slug`]: hasAILabel,
+      [`${prefix}--text-input__field-wrapper--decorator`]: hasAILabel,
     });
 
     const fieldOuterWrapperClasses = classMap({

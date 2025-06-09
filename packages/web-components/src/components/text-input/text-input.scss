@@ -47,7 +47,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-text-input[warn]),
 :host(#{$prefix}-text-input[invalid]) {
-  .#{$prefix}--text-input__field-wrapper--slug {
+  .#{$prefix}--text-input__field-wrapper--decorator {
     .#{$prefix}--text-input {
       padding-inline-end: $spacing-10;
     }
@@ -59,6 +59,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-text-input[ai-label]) .#{$prefix}--text-input__field-wrapper--slug {
+:host(#{$prefix}-text-input[ai-label])
+  .#{$prefix}--text-input__field-wrapper--decorator {
   @include ai-gradient;
 }
