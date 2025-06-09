@@ -128,6 +128,12 @@ class CDSHeaderGlobalAction extends CDSButton {
     if (key === 'Enter' || key === ' ') {
       event.preventDefault();
       this._handleClick(event);
+    } else if (key === 'Escape') {
+      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+      if (panel) {
+        panel.removeAttribute('expanded');
+      }
+      this.active = false;
     }
   }
 
