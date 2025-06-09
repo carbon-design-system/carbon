@@ -1,0 +1,137 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:math';
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/grid';
+@use '@carbon/styles/scss/components/page-header/index' as *;
+
+:host(#{$prefix}-page-header) {
+  @extend .#{$prefix}--page-header;
+
+  display: block;
+}
+
+:host(#{$prefix}-page-header-breadcrumb),
+:host(#{$prefix}-page-header-content),
+:host(#{$prefix}-page-header-tabs) {
+  @include grid.css-grid();
+
+  display: block;
+}
+
+:host(#{$prefix}-page-header-breadcrumb) {
+  @extend .#{$prefix}--page-header__breadcrumb-bar;
+}
+
+:host(#{$prefix}-page-header-breadcrumb[border='true']) {
+  @extend .#{$prefix}--page-header__breadcrumb-bar-border;
+}
+
+:host(#{$prefix}-page-header-content) {
+  @extend .#{$prefix}--page-header__content;
+
+  .#{$prefix}--page-header__content__title {
+    @extend .#{$prefix}--page-header__content__title;
+
+    margin: 0;
+  }
+
+  .#{$prefix}--page-header__content__title-wrapper {
+    // overriding until the responsive behavior is implemented
+    grid-template-columns: auto minmax(auto, auto);
+  }
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--page-header__content__icon;
+  }
+
+  ::slotted([slot='contextual-actions']) {
+    @extend .#{$prefix}--page-header__content__contextual-actions;
+  }
+}
+
+:host(#{$prefix}-page-header-content[contextual-actions]) {
+  .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
+  }
+}
+
+:host(#{$prefix}-page-header-content[contextual-actions]) {
+  .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
+  }
+}
+
+:host(#{$prefix}-page-header-content-text) {
+  @extend .#{$prefix}--page-header__content__body;
+
+  display: block;
+  margin-block-start: $spacing-05;
+
+  .#{$prefix}--page-header__content__subtitle {
+    margin-block-start: 0;
+  }
+}
+
+:host(#{$prefix}-page-header-hero-image) {
+  @extend .#{$prefix}--page-header__hero-image;
+
+  position: relative;
+}
+
+:host(#{$prefix}-page-header-hero-image)::before {
+  block-size: 0;
+  content: '';
+  float: inline-start;
+  inline-size: 1px;
+  margin-inline-start: -1px;
+
+  padding-block-start: math.percentage(math.div(2, 3));
+
+  @include grid.breakpoint-up('lg') {
+    padding-block-start: math.percentage(math.div(1, 2));
+  }
+}
+
+:host(#{$prefix}-page-header-hero-image)::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+:host(#{$prefix}-page-header-tabs) {
+  @extend .#{$prefix}--page-header__tab-bar;
+}
+
+:host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
+  display: flex;
+  justify-content: space-between;
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tags {
+  @extend .#{$prefix}--page-header__tags;
+
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-page-header-content),
+:host(#{$prefix}-page-header-tabs) {
+  .#{$prefix}--css-grid {
+    inline-size: initial;
+  }
+}
+
+#{$prefix}-definition-tooltip::part(definition-term) {
+  border: none;
+}

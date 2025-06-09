@@ -101,6 +101,7 @@ class CDSDefinitionTooltip extends LitElement {
           @mousedown=${this._handleMouseDown}
           @keydown=${this._handleKeyDown}
           aria-expanded=${open}
+          part="definition-term"
           class="${prefix}--definition-term">
           <slot></slot>
         </button>
