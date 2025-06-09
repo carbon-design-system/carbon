@@ -231,7 +231,7 @@ $css--plex: true !default;
 }
 
 // make the checkbox element transparent to mouse events so it doesn't interfere
-:host #{'cds-checkbox'} {
+:host(#{$prefix}-multi-select-item) #{$prefix}-checkbox {
   pointer-events: none;
 }
 
