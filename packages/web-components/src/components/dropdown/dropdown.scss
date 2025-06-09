@@ -46,7 +46,7 @@ $css--plex: true !default;
     outline: none;
   }
 }
-:host([ai-label]) .#{$prefix}--list-box__wrapper--decorator {
+:host(#{$prefix}-dropdown[ai-label]) .#{$prefix}--list-box__wrapper--decorator {
   @include ai-gradient;
 }
 
