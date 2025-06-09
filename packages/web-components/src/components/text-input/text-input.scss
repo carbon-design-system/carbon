@@ -59,6 +59,6 @@ $css--plex: true !default;
   }
 }
 
-:host([ai-label]) .#{$prefix}--text-input__field-wrapper--slug {
+:host(#{$prefix}-text-input[ai-label]) .#{$prefix}--text-input__field-wrapper--slug {
   @include ai-gradient;
 }
