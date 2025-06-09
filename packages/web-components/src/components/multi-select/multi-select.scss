@@ -240,3 +240,8 @@ $css--plex: true !default;
 :host(#{$prefix}-multi-select) .#{$prefix}--list-box__field.no-focus-style:focus-within {
   outline: none;
 }
+
+:host(#{$prefix}-multi-select[ai-label])
+  .#{$prefix}--list-box__wrapper--decorator {
+  @include ai-gradient;
+}
