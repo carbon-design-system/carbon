@@ -7,6 +7,7 @@
 
 import React, {
   cloneElement,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -480,7 +481,11 @@ export const SelectableTile = React.forwardRef<
   const keyDownHandler = onKeyDown;
 
   const [isSelected, setIsSelected] = useState<boolean>(selected);
-  const [prevSelected, setPrevSelected] = useState<boolean>(selected);
+
+  // Use useEffect to sync with prop changes instead of render-time logic
+  useEffect(() => {
+    setIsSelected(selected);
+  }, [selected]);
 
   const classes = cx(
     `${prefix}--tile`,
@@ -497,46 +502,39 @@ export const SelectableTile = React.forwardRef<
     className
   );
 
-  function handleClick(evt) {
+  // Single function to handle selection changes
+  const handleSelectionChange = useCallback(
+    (evt: React.SyntheticEvent, newSelected: boolean) => {
+      setIsSelected(newSelected);
+      onChange(evt as React.ChangeEvent<HTMLDivElement>, newSelected, id);
+    },
+    [onChange, id]
+  );
+
+  function handleClick(evt: React.MouseEvent<HTMLDivElement>) {
     evt.preventDefault();
     evt?.persist?.();
     if (
       normalizedDecorator &&
       decoratorRef.current &&
-      decoratorRef.current.contains(evt.target)
+      decoratorRef.current.contains(evt.target as Node)
     ) {
       return;
     }
-    setIsSelected((prevSelected) => {
-      const newSelected = !prevSelected;
-      onChange(evt, newSelected, id);
-      return newSelected;
-    });
+
+    const newSelected = !isSelected;
+    handleSelectionChange(evt, newSelected);
     clickHandler(evt);
   }
 
-  function handleKeyDown(evt) {
+  function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
-      setIsSelected((prevSelected) => {
-        const newSelected = !prevSelected;
-        onChange(evt, newSelected, id);
-        return newSelected;
-      });
+      const newSelected = !isSelected;
+      handleSelectionChange(evt, newSelected);
     }
     keyDownHandler(evt);
-  }
-
-  function handleChange(event) {
-    const newSelected = event.target.checked;
-    setIsSelected(newSelected);
-    onChange(event, newSelected, id);
-  }
-
-  if (selected !== prevSelected) {
-    setIsSelected(selected);
-    setPrevSelected(selected);
   }
 
   // AILabel is always size `xs`
@@ -559,7 +557,6 @@ export const SelectableTile = React.forwardRef<
       tabIndex={!disabled ? tabIndex : undefined}
       ref={ref}
       id={id}
-      onChange={!disabled ? handleChange : undefined}
       title={title}
       {...rest}>
       <span
