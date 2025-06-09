@@ -409,7 +409,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
    * The empty handler of the `<input>`.
    */
   onChange?(
-    event: ChangeEvent<HTMLDivElement>,
+    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>,
     selected?: boolean,
     id?: string
   ): void;
@@ -504,20 +504,24 @@ export const SelectableTile = React.forwardRef<
 
   // Single function to handle selection changes
   const handleSelectionChange = useCallback(
-    (evt: React.SyntheticEvent, newSelected: boolean) => {
+    (
+      evt: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>,
+      newSelected: boolean
+    ) => {
       setIsSelected(newSelected);
-      onChange(evt as React.ChangeEvent<HTMLDivElement>, newSelected, id);
+      onChange(evt, newSelected, id);
     },
     [onChange, id]
   );
 
-  function handleClick(evt: React.MouseEvent<HTMLDivElement>) {
+  function handleClick(evt: MouseEvent<HTMLDivElement>) {
     evt.preventDefault();
     evt?.persist?.();
     if (
       normalizedDecorator &&
       decoratorRef.current &&
-      decoratorRef.current.contains(evt.target as Node)
+      evt.target instanceof Node &&
+      decoratorRef.current.contains(evt.target)
     ) {
       return;
     }
@@ -527,7 +531,7 @@ export const SelectableTile = React.forwardRef<
     clickHandler(evt);
   }
 
-  function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+  function handleKeyDown(evt: KeyboardEvent<HTMLDivElement>) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
