@@ -236,7 +236,7 @@ $css--plex: true !default;
 }
 
 // remove focus outline for when the label is out of focus
-:host .#{$prefix}--list-box__field.no-focus-style:focus,
-:host .#{$prefix}--list-box__field.no-focus-style:focus-within {
+:host(#{$prefix}-multi-select) .#{$prefix}--list-box__field.no-focus-style:focus,
+:host(#{$prefix}-multi-select) .#{$prefix}--list-box__field.no-focus-style:focus-within {
   outline: none;
 }
