@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:string';
+
 @use '../config';
 @use './src';
 @use './unicode';
@@ -20,7 +22,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 100;
@@ -42,7 +44,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 200;
@@ -64,7 +66,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 300;
@@ -86,7 +88,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 400;
@@ -108,7 +110,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 450;
@@ -130,7 +132,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 500;
@@ -152,7 +154,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 600;
@@ -174,7 +176,7 @@ $package-name: 'mono';
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
-        font-display: config.$font-display;
+        font-display: string.unquote(config.$font-display);
         font-family: $font-family;
         font-style: $style;
         font-weight: 700;
