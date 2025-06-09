@@ -6,18 +6,17 @@
  */
 
 import React, {
-  useRef,
+  cloneElement,
   useEffect,
+  useRef,
   useState,
-  type MouseEvent,
-  type KeyboardEvent,
   type HTMLAttributes,
-  type ReactNode,
-  type ReactElement,
-  type RefObject,
+  type KeyboardEvent,
+  type MouseEvent,
   type MutableRefObject,
-  useMemo,
-  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
@@ -42,6 +41,8 @@ import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { warning } from '../../internal/warning';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -464,10 +465,10 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     useEffect(() => {
       if (!enableDialogElement && !open && launcherButtonRef) {
         setTimeout(() => {
-          launcherButtonRef?.current?.focus();
+          launcherButtonRef.current?.focus();
         });
       }
-    }, [open, launcherButtonRef]);
+    }, [enableDialogElement, open, launcherButtonRef]);
 
     useEffect(() => {
       if (!enableDialogElement) {
@@ -507,24 +508,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }, [open, selectorPrimaryFocus, isOpen]);
 
     // AILabel is always size `sm`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'sm' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'sm',
-        }
-      );
-    }
 
     const modalBody = enableDialogElement ? (
       <Dialog
         open={open}
+        focusAfterCloseRef={launcherButtonRef}
         modal
         className={containerClass}
         aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}

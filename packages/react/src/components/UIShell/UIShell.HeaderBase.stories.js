@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import cx from 'classnames';
 import {
   Content,
@@ -171,6 +171,22 @@ export default {
       },
     },
   },
+};
+
+export const Test = () => {
+  return (
+    <HeaderGlobalBar>
+      <HeaderMenu menuLinkName={'Test'}>
+        <HeaderMenuItem
+          key={`test`}
+          onClick={(e) => {
+            console.log('click event', e);
+          }}>
+          TEST
+        </HeaderMenuItem>
+      </HeaderMenu>
+    </HeaderGlobalBar>
+  );
 };
 
 export const HeaderWNavigation = () => (

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,11 +7,12 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
   createContext,
-  ReactElement,
-  ReactNode,
   useRef,
   useState,
+  type ReactElement,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import type { RadioButtonProps } from '../RadioButton';
@@ -21,6 +22,8 @@ import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
 import { useId } from '../../internal/useId';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export const RadioButtonGroupContext = createContext(null);
 
@@ -248,21 +251,11 @@ const RadioButtonGroup = React.forwardRef(
     const divRef = useRef<HTMLDivElement>(null);
 
     // AILabel is always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini', kind: 'default' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-          kind: 'default',
-        }
-      );
-    }
 
     return (
       <div className={wrapperClasses} ref={mergeRefs(divRef, ref)}>
