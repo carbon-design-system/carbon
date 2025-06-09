@@ -122,6 +122,10 @@ $css--plex: true !default;
       flex-direction: row;
     }
   }
+  // make the checkbox element transparent to mouse events so it doesn't interfere
+  #{$prefix}-checkbox {
+    pointer-events: none;
+  }
 }
 
 :host(#{$prefix}-multi-select-item:hover) {
@@ -230,14 +234,11 @@ $css--plex: true !default;
   border-block-start: none;
 }
 
-// make the checkbox element transparent to mouse events so it doesn't interfere
-:host(#{$prefix}-multi-select-item) #{$prefix}-checkbox {
-  pointer-events: none;
-}
-
 // remove focus outline for when the label is out of focus
-:host(#{$prefix}-multi-select) .#{$prefix}--list-box__field.no-focus-style:focus,
-:host(#{$prefix}-multi-select) .#{$prefix}--list-box__field.no-focus-style:focus-within {
+:host(#{$prefix}-multi-select)
+  .#{$prefix}--list-box__field.no-focus-style:focus,
+:host(#{$prefix}-multi-select)
+  .#{$prefix}--list-box__field.no-focus-style:focus-within {
   outline: none;
 }
 
