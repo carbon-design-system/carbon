@@ -24,7 +24,7 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import { uniqueId } from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
-import { Tooltip } from '../Tooltip';
+import { IconButton } from '../IconButton';
 
 export type TreeNodeProps = {
   /**
@@ -120,11 +120,11 @@ const extractTextContent = (node: React.ReactNode): string => {
   return '';
 };
 
-type HTMLELementOrAnchor = HTMLElement | HTMLAnchorElement | null;
+type HTMLElementOrAnchor = HTMLElement | HTMLAnchorElement | null;
 
 const useEllipsisCheck = (
   label: React.ReactNode,
-  detailsWrapperRef: React.RefObject<HTMLELementOrAnchor>
+  detailsWrapperRef: React.RefObject<HTMLElementOrAnchor>
 ) => {
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const labelTextRef = useRef<HTMLSpanElement>(null);
@@ -217,7 +217,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const depth = propDepth as number;
     const selected = propSelected as (string | number)[];
 
-    const detailsWrapperRef = useRef<HTMLELementOrAnchor>(null);
+    const detailsWrapperRef = useRef<HTMLElementOrAnchor>(null);
     const { labelTextRef, isEllipsisApplied, tooltipText } = useEllipsisCheck(
       label,
       detailsWrapperRef
@@ -251,28 +251,30 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const prefix = usePrefix();
 
     const renderLabelText = () => {
-      const labelElement = (
+      if (isEllipsisApplied && tooltipText) {
+        return (
+          <IconButton
+            label={tooltipText}
+            kind="ghost"
+            autoAlign
+            wrapperClasses={`${prefix}--popover-container`}
+            className={`${prefix}--tree-node__label__text-button`}>
+            <span
+              ref={labelTextRef}
+              className={`${prefix}--tree-node__label__text`}>
+              {label}
+            </span>
+          </IconButton>
+        );
+      }
+
+      return (
         <span
           ref={labelTextRef}
           className={`${prefix}--tree-node__label__text`}>
           {label}
         </span>
       );
-
-      if (isEllipsisApplied && tooltipText) {
-        return (
-          <Tooltip autoAlign label={tooltipText}>
-            <button
-              type="button"
-              className={`${prefix}--tree-node__label__text-button`}
-              onClick={(e) => e.stopPropagation()}>
-              {labelElement}
-            </button>
-          </Tooltip>
-        );
-      }
-
-      return labelElement;
     };
 
     const setRefs = (element: HTMLElement | null) => {
