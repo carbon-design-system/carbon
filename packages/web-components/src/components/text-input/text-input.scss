@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/text-input/index';
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 
 :host(#{$prefix}-text-input) {
   @include emit-layout-tokens();
@@ -56,4 +57,8 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-08;
   }
+}
+
+:host([ai-label]) .#{$prefix}--text-input__field-wrapper--slug {
+  @include ai-gradient;
 }

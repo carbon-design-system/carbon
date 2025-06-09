@@ -374,6 +374,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input--${size}`]: size,
       [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD,
+      [`${prefix}--text-input__field-wrapper--slug`]: hasAILabel,
     });
 
     const fieldOuterWrapperClasses = classMap({
@@ -384,7 +385,6 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     const fieldWrapperClasses = classMap({
       [`${prefix}--text-input__field-wrapper`]: true,
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input__field-wrapper--slug`]: hasAILabel,
     });
 
     const labelClasses = classMap({
@@ -502,6 +502,9 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   updated() {
+    this._hasAILabel
+      ? this.setAttribute('ai-label', '')
+      : this.removeAttribute('ai-label');
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {
