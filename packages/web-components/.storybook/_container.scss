@@ -19,8 +19,8 @@
 @include theme.add-component-tokens(tag-tokens.$tag-tokens);
 @include theme.add-component-tokens(status-tokens.$status-tokens);
 
-// Emit the flex-grid styles
-@include grid.flex-grid();
+// Emit css-grid styles
+@include grid.css-grid();
 
 *,
 *::before,
