@@ -9,7 +9,7 @@ import './story.scss';
 
 import React from 'react';
 import { TrashCan, Save, Download } from '@carbon/icons-react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import DataTable, {
   Table,
   TableBatchAction,
