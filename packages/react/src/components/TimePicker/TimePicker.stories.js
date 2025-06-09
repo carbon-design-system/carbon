@@ -30,11 +30,7 @@ export default {
 
 export const Default = (args) => {
   return (
-    <TimePicker
-      id="time-picker"
-      labelText="Select a time"
-      {...args}
-      className="time-picker-container">
+    <TimePicker id="time-picker" labelText="Select a time" {...args}>
       <TimePickerSelect id="time-picker-select-1" disabled={args.disabled}>
         <SelectItem value="AM" text="AM" />
         <SelectItem value="PM" text="PM" />
@@ -61,6 +57,16 @@ Default.argTypes = {
     },
   },
   className: {
+    table: {
+      disable: true,
+    },
+  },
+  inputClassName: {
+    table: {
+      disable: true,
+    },
+  },
+  pickerClassName: {
     table: {
       disable: true,
     },
