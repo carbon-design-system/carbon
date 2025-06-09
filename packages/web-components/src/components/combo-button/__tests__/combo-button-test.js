@@ -168,7 +168,7 @@ describe('cds-combo-button', () => {
     });
   });
 
-  it('should support props.tooltipContent', async () => {
+  it('should support `tooltips-content` attribute', async () => {
     const customTooltip = 'Custom tooltip text';
     const el = await fixture(html`
       <cds-combo-button
