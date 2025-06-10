@@ -17,7 +17,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './Select.mdx';
-import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Select',
@@ -83,7 +82,7 @@ export const Inline = (args) => {
       <Select
         inline
         id="select-1"
-        labelText="Select"
+        labelText="Select an option"
         helperText="Optional helper text"
         {...args}>
         <SelectItem value="" text="" />

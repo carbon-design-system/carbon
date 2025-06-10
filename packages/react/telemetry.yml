@@ -68,6 +68,7 @@ collect:
         - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - formatOptions
         - fullWidth
         - gap
         - hasDivider
@@ -91,6 +92,7 @@ collect:
         - initialSelectedItems
         - inline
         - innerRef
+        - inputMode
         - invalid
         - invalidText
         - isActive
@@ -163,6 +165,7 @@ collect:
         - onOpen
         - onRequestClose
         - onRequestSubmit
+        - onSecondarySubmit
         - onSelect
         - onToggle
         - onToggleClick
@@ -214,7 +217,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -257,6 +259,8 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
         # Breadcrumb
@@ -320,6 +324,8 @@ collect:
         - tooltipText
         - triggerClassName
         # Dialog
+        - ariaDescribedBy
+        - ariaLabelledBy
         - modal
         # DismissibleTag
         - dismissTooltipLabel
@@ -384,6 +390,8 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
+        # Layer
+        - withBackground
         # LinkBase
         - visited
         # ListBox
@@ -412,7 +420,6 @@ collect:
         - alert
         - closeButtonLabel
         - modalAriaLabel
-        - onSecondarySubmit
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -457,10 +464,18 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderBreadcrumbBar
+        - border
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
+        - actions
         - menuButtonLabel
+        # PageHeaderTabBar
+        - tags
         # PageSelector
         - currentPage
         - totalPages
@@ -662,6 +677,15 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - inputMode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
         - caution-major
         - caution-minor
@@ -788,6 +812,8 @@ collect:
         - vertical
         # General - role
         - alert
+        - alertdialog
+        - dialog
         - log
         - status
         # General - selectionFeedback
@@ -850,6 +876,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - outline
         - password
         - purple
