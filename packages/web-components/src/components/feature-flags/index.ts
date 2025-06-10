@@ -1,3 +1,23 @@
+/**
+ * <feature-flags> provides scoped feature flags to child components.
+ *
+ * Usage:
+ * Wrap any child components inside <feature-flags> to provide scoped feature flags like this:
+ * <feature-flags enable-dialog-element="true">
+ *   <component></component>
+ * </feature-flags>
+ *
+ * Available flags:
+ * - enable-dialog-element
+ * - enable-treeview-controllable
+ * - ... (and others listed in observedAttributes)
+ *
+ * How to check a Flag in your component:
+ *   import { isFeatureFlagEnabled } from './feature-flags';
+ *   isFeatureFlagEnabled('enable-dialog-element', this)
+ *   Returns true if the flag is enabled in the nearest <feature-flags> ancestor
+ */
+
 import {
   FeatureFlags as GlobalFeatureFlags,
   createScope,
