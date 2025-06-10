@@ -38,44 +38,58 @@ describe('useResizeObserver', () => {
     jest.clearAllMocks();
   });
 
-  // Triggers resize from the saved resize observer callback
-  const triggerResize = (element, width = defaultSize, height = defaultSize) =>
+  /** Triggers resize from the saved resize observer callback */
+  const triggerResize = async (
+    element,
+    width = defaultSize,
+    height = defaultSize
+  ) =>
     act(() => {
       savedObserverCb([{ target: element, contentRect: { width, height } }]);
     });
 
   it('returns the initial size of the component', () => {
     render(<ResizeTest />);
-    screen.getByText('width: 0, height: 0');
+    expect(screen.getByText('width: 0, height: 0')).toBeInTheDocument();
   });
 
   it('returns the updated sizes from hook upon resizing', async () => {
     render(<ResizeTest />);
     const element = screen.getByTestId('observed-element');
-    screen.getByText('width: 0, height: 0');
+    expect(screen.getByText('width: 0, height: 0')).toBeInTheDocument();
 
-    triggerResize(element);
-    screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`);
+    await triggerResize(element);
+    expect(
+      screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`)
+    ).toBeInTheDocument();
 
-    triggerResize(element, defaultSize * 2, defaultSize * 3);
-    screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`);
+    await triggerResize(element, defaultSize * 2, defaultSize * 3);
+    expect(
+      screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`)
+    ).toBeInTheDocument();
   });
 
-  it('calls the provided onResize function', () => {
+  it('calls the provided onResize function', async () => {
     const resizeFn = jest.fn();
     render(<ResizeTest onResize={resizeFn} />);
     const element = screen.getByTestId('observed-element');
 
-    triggerResize(element, defaultSize * 2, defaultSize * 3);
-    screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`);
+    await triggerResize(element, defaultSize * 2, defaultSize * 3);
+    expect(
+      screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`)
+    ).toBeInTheDocument();
     expect(resizeFn).toHaveBeenCalledTimes(1);
 
-    triggerResize(element, defaultSize * 3, defaultSize * 4);
-    screen.getByText(`width: ${defaultSize * 3}, height: ${defaultSize * 4}`);
+    await triggerResize(element, defaultSize * 3, defaultSize * 4);
+    expect(
+      screen.getByText(`width: ${defaultSize * 3}, height: ${defaultSize * 4}`)
+    ).toBeInTheDocument();
     expect(resizeFn).toHaveBeenCalledTimes(2);
 
-    triggerResize(element, defaultSize, defaultSize);
-    screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`);
+    await triggerResize(element, defaultSize, defaultSize);
+    expect(
+      screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`)
+    ).toBeInTheDocument();
     expect(resizeFn).toHaveBeenCalledTimes(3);
   });
 });
