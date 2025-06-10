@@ -502,9 +502,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   updated() {
-    this._hasAILabel
-      ? this.setAttribute('ai-label', '')
-      : this.removeAttribute('ai-label');
+    this.toggleAttribute('ai-label', this._hasAILabel);
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {
