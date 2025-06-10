@@ -23,14 +23,14 @@ const sizes = {
   [`Large (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
-const defaultArgs = {
+const args = {
   dateFormat: 'm/d/Y',
   disabled: false,
   allowInput: true,
   closeOnSelect: true,
   minDate: '',
   maxDate: '',
-  datePickerType: 'single',
+  kind: 'single',
   readonly: false,
   short: false,
   helperText: '',
@@ -57,7 +57,7 @@ const argTypes = {
     control: 'text',
     description: 'The date format.',
   },
-  datePickerType: {
+  kind: {
     control: 'radio',
     options: { Single: 'single', Simple: 'simple', Range: 'range' },
     description: `The type of the date picker:
@@ -121,59 +121,20 @@ const argTypes = {
   },
 };
 
-export const Simple = {
-  render: () => {
+export const Default = {
+  args,
+  argTypes,
+  render: (args) => {
+    const { dateFormat, kind, placeholder, size } = args ?? {};
     return html`
-      <cds-date-picker>
+      <cds-date-picker dateFormat="${dateFormat}">
         <cds-date-picker-input
+          kind="${kind}"
           label-text="Date Picker label"
-          placeholder="mm/dd/yyyy">
+          placeholder="${placeholder}"
+          size="${size}">
         </cds-date-picker-input>
       </cds-date-picker>
-    `;
-  },
-};
-
-export const SimpleWithLayer = {
-  render: () => {
-    return html`
-  <sb-template-layers>
-    <cds-date-picker>
-    <cds-date-picker-input
-      label-text="Date Picker label"
-      placeholder="mm/dd/yyyy">
-    </cds-date-picker-input>
-  </sb-template-layers>
-  `;
-  },
-};
-
-export const SingleWithCalendar = {
-  render: () => {
-    return html`
-      <cds-date-picker>
-        <cds-date-picker-input
-          kind="single"
-          label-text="Date Picker label"
-          placeholder="mm/dd/yyyy">
-        </cds-date-picker-input>
-      </cds-date-picker>
-    `;
-  },
-};
-
-export const SingleWithCalendarWithLayer = {
-  render: () => {
-    return html`
-      <sb-template-layers>
-        <cds-date-picker>
-          <cds-date-picker-input
-            kind="single"
-            label-text="Date Picker label"
-            placeholder="mm/dd/yyyy">
-          </cds-date-picker-input>
-        </cds-date-picker>
-      </sb-template-layers>
     `;
   },
 };
@@ -246,6 +207,63 @@ export const RangeWithCalendarWithLayer = {
   },
 };
 
+export const Simple = {
+  render: () => {
+    return html`
+      <cds-date-picker>
+        <cds-date-picker-input
+          label-text="Date Picker label"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      </cds-date-picker>
+    `;
+  },
+};
+
+export const SimpleWithLayer = {
+  render: () => {
+    return html`
+  <sb-template-layers>
+    <cds-date-picker>
+    <cds-date-picker-input
+      label-text="Date Picker label"
+      placeholder="mm/dd/yyyy">
+    </cds-date-picker-input>
+  </sb-template-layers>
+  `;
+  },
+};
+
+export const SingleWithCalendar = {
+  render: () => {
+    return html`
+      <cds-date-picker>
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      </cds-date-picker>
+    `;
+  },
+};
+
+export const SingleWithCalendarWithLayer = {
+  render: () => {
+    return html`
+      <sb-template-layers>
+        <cds-date-picker>
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date Picker label"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      </sb-template-layers>
+    `;
+  },
+};
+
 export const Skeleton = {
   render: () => html`
     <cds-date-picker-input-skeleton
@@ -303,93 +321,6 @@ export const WithAILabel = {
             ${content}${actions}</cds-ai-label
           >
         </cds-date-picker-input>
-      </cds-date-picker>
-    `;
-  },
-};
-
-export const Playground = {
-  decorators: [(story) => html` <div>${story()}</div> `],
-  argTypes,
-  args: defaultArgs,
-  render: (args) => {
-    const {
-      disabled,
-      dateFormat,
-      onChange,
-      minDate,
-      maxDate,
-      size,
-      helperText,
-      placeholder,
-      invalid,
-      invalidText,
-      warning,
-      warningText,
-      short,
-      datePickerType,
-      readonly,
-      onInput,
-    } = args || {};
-
-    return html`
-      <cds-date-picker
-        ?disabled="${disabled}"
-        date-format="${dateFormat}"
-        ?readonly="${readonly}"
-        min-date="${minDate}"
-        max-date="${maxDate}"
-        @cds-date-picker-changed="${onChange}">
-        ${datePickerType === 'range'
-          ? html`
-              <cds-date-picker-input
-                kind="from"
-                label-text="Date Picker label"
-                size="${size}"
-                placeholder="${placeholder}"
-                ?invalid="${invalid}"
-                invalid-text="${invalidText}"
-                ?short="${short}"
-                ?warn="${warning}"
-                warn-text="${warningText}"
-                @input="${onInput}">
-                ${helperText
-                  ? html`<span slot="helper-text">${helperText}</span>`
-                  : html``}
-              </cds-date-picker-input>
-              <cds-date-picker-input
-                kind="to"
-                label-text="Date Picker label"
-                size="${size}"
-                placeholder="${placeholder}"
-                ?invalid="${invalid}"
-                invalid-text="${invalidText}"
-                ?short="${short}"
-                ?warn="${warning}"
-                warn-text="${warningText}"
-                @input="${onInput}">
-                ${helperText
-                  ? html`<span slot="helper-text">${helperText}</span>`
-                  : html``}
-              </cds-date-picker-input>
-            `
-          : html`
-              <cds-date-picker-input
-                kind="${datePickerType}"
-                label-text="Date Picker label"
-                size="${size}"
-                placeholder="${placeholder}"
-                ?invalid="${invalid}"
-                invalid-text="${invalidText}"
-                ?short="${short}"
-                ?warn="${warning}"
-                warn-text="${warningText}"
-                @input="${onInput}">
-                ${helperText
-                  ? html`<span slot="helper-text">${helperText}</span>`
-                  : html``}
-              </cds-date-picker-input>
-            `}
       </cds-date-picker>
     `;
   },
