@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/grid';
 @use '@carbon/styles/scss/components/page-header/index' as *;
 
@@ -118,12 +119,23 @@ $css--plex: true !default;
   display: flex;
   justify-content: space-between;
   inline-size: 100%;
+
+  // TODO: remove once responsive logic for tags is implemented
+  @include breakpoint-down(md) {
+    flex-direction: column-reverse;
+    grid-gap: $spacing-05;
+  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
   @extend .#{$prefix}--page-header__tags;
 
   inline-size: 100%;
+
+  // TODO: remove once responsive logic for tags is implemented
+  @include breakpoint-down(md) {
+    justify-content: left;
+  }
 }
 
 :host(#{$prefix}-page-header-content),
