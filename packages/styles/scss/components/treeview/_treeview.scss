@@ -288,4 +288,8 @@
   .#{$prefix}--tree-node__label .#{$prefix}--popover-container {
     inline-size: 100%;
   }
+  .#{$prefix}--tooltip-trigger__wrapper .#{$prefix}--btn--ghost:focus {
+    box-shadow: none;
+    outline: 2px solid $focus;
+  }
 }
