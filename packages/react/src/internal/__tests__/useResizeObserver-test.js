@@ -9,7 +9,7 @@ import React, { useRef } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { useResizeObserver } from '../useResizeObserver';
 
-const ResizeTest = ({ onResize = null }) => {
+const ResizeTest = ({ onResize }) => {
   const ref = useRef(null);
   const { width, height } = useResizeObserver({ ref, onResize });
   return (
