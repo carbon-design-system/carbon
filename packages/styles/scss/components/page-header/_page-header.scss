@@ -159,13 +159,6 @@
     max-inline-size: convert.to-rem(640px);
   }
 
-  .#{$prefix}--page-header__content:not(
-      :has(.#{$prefix}--page-header__content__sub-title)
-    )
-    .#{$prefix}--page-header__content__body {
-    margin-block-start: $spacing-05;
-  }
-
   [data-hidden]:not([data-fixed]) {
     display: none;
   }
