@@ -19,7 +19,7 @@ import DataTable, {
 } from '..';
 import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/DataTable/Selection',
