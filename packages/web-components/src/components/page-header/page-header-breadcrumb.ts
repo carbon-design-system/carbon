@@ -116,12 +116,10 @@ class CDSPageHeaderBreadcrumb extends LitElement {
                 <slot></slot>
               </div>
               <div class="${prefix}--page-header__breadcrumb__actions">
-                <div class="${contentActionsClasses}">
                   <slot
                     name="content-actions"
                     @slotchange=${handleContentActionsSlotChange}>
                   </slot>
-                </div>
                 <slot
                   name="page-actions"
                   @slotchange=${handlePageActionsSlotChange}>
