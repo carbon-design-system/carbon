@@ -208,10 +208,18 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       [`${prefix}--menu-item--danger`]: isDanger,
     });
 
+    const [isFirstFocusable, setIsFirstFocusable] = useState(false);
     // on first render, register this menuitem in the context's state
     // (used for keyboard navigation)
     useEffect(() => {
       registerItem();
+
+      // Detects if this is the first focusable item
+      const currentItems = context.state.items;
+      if (!disabled && menuItem.current && currentItems.length === 0) {
+        setIsFirstFocusable(true);
+      }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -250,7 +258,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           {...rest}
           ref={ref}
           className={classNames}
-          tabIndex={-1}
+          tabIndex={isFirstFocusable ? 0 : -1}
           aria-disabled={isDisabled ?? undefined}
           aria-haspopup={hasChildren ?? undefined}
           aria-expanded={hasChildren ? submenuOpen : undefined}
