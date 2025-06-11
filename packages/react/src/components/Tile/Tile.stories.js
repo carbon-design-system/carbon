@@ -160,6 +160,14 @@ export const Selectable = (args) => {
   );
 };
 
+export const SelectableOnChangeTest = () => {
+  return (
+    <SelectableTile onChange={() => console.log('onChange')}>
+      Selectable
+    </SelectableTile>
+  );
+};
+
 Selectable.args = {
   disabled: false,
 };

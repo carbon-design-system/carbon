@@ -398,7 +398,6 @@ export const HeaderBaseWActionsRightPanel = {
         </div>
         <cds-header-panel
           id="notification-panel"
-          expanded
           aria-label="Header Panel"></cds-header-panel>
       </cds-header>`,
 };
