@@ -50,7 +50,7 @@
   .#{$prefix}--data-table-full-ai {
     position: relative;
     // Allow for pseudo element to show for gradient border effect
-    padding: $spacing-01;
+    padding: 1px;
     border: none;
   }
 
@@ -58,11 +58,7 @@
     position: absolute;
     z-index: -1;
     // Used for gradient border effect
-    background-image: linear-gradient(
-      to top,
-      $ai-border-end,
-      $ai-popover-shadow-outer-01
-    );
+    background-image: linear-gradient(to top, $ai-border-end, $ai-border-start);
     block-size: 100%;
     content: '';
     inline-size: 100%;
