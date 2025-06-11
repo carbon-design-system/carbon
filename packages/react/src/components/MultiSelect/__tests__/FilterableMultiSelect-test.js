@@ -972,7 +972,6 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
 
-
   it('passes inputProps to the input element', async () => {
     render(
       <FilterableMultiSelect
@@ -1014,7 +1013,6 @@ describe('FilterableMultiSelect', () => {
       value: '',
     });
   });
-
 
   it('should lose focus in one click after interacting with menu items', async () => {
     const user = userEvent.setup();

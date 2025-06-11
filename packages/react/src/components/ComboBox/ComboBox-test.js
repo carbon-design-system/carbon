@@ -1453,7 +1453,7 @@ describe('ComboBox', () => {
     expect(attributes).toEqual({
       'aria-activedescendant': '',
       'aria-autocomplete': 'list',
-      'aria-controls': 'downshift-:r7r:-menu',
+      'aria-controls': 'downshift-«r7r»-menu',
       'aria-expanded': 'false',
       'aria-haspopup': 'listbox',
       'aria-label': 'Choose an item',

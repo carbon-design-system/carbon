@@ -326,7 +326,7 @@ export interface FilterableMultiSelectProps<ItemType>
    *
    * Note: These props are merged with internal input props. Custom values will override defaults when applicable.
    */
-  inputProp?: InputHTMLAttributes<HTMLInputElement>;
+  inputProp?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
