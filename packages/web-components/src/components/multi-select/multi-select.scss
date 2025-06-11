@@ -16,7 +16,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
-@use '../dropdown/dropdown';
 @use '@carbon/styles/scss/utilities/convert';
 
 :host(#{$prefix}-multi-select) {
@@ -35,6 +34,7 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu {
     inset-block-start: 100%;
     margin-block-start: 1px;
+    outline: none;
   }
 
   .#{$prefix}--text-input {
@@ -53,6 +53,11 @@ $css--plex: true !default;
   .#{$prefix}--list-box__field:focus {
     @extend .#{$prefix}--multi-select--filterable--input-focused;
   }
+
+  /* stylelint-disable declaration-no-important */
+  .#{$prefix}--list-box__selection--multi::after {
+    display: none !important;
+  }
 }
 
 :host(#{$prefix}-multi-select[filterable])
@@ -62,8 +67,12 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select[filterable])
-  .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
-  :host(#{$prefix}-multi-select[direction='top']) {
+  .#{$prefix}--list-box__field:has(input:not(:placeholder-shown))
+  ~ ::slotted(#{$prefix}-ai-label) {
+  inset-inline-end: calc($spacing-10 + 18px);
+}
+
+:host(#{$prefix}-multi-select[direction='top']) {
   @extend .#{$prefix}--list-box--up;
 
   .#{$prefix}--list-box__menu {
@@ -245,4 +254,9 @@ $css--plex: true !default;
 :host(#{$prefix}-multi-select[ai-label])
   .#{$prefix}--list-box__wrapper--decorator {
   @include ai-gradient;
+}
+
+:host(#{$prefix}-multi-select[item-clicked]) .#{$prefix}--list-box__field {
+  outline: 1px solid $focus !important;
+  outline-offset: -1px !important;
 }

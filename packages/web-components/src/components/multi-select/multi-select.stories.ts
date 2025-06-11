@@ -440,12 +440,22 @@ export const SelectAllWithDynamicItems = {
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
 
   render: () => {
+    const updateLabel = (e) => {
+      const multiSelect = e.target;
+      if (multiSelect.value && multiSelect.value.length > 0) {
+        multiSelect.label = 'Options Selected';
+      } else {
+        multiSelect.label = 'Choose Options';
+      }
+      multiSelect.requestUpdate();
+    };
     return html`
       <cds-multi-select
         title-text="Multiselect title"
         label="Choose Options"
         select-all
-        helper-text="This is helper text">
+        helper-text="This is helper text"
+        @cds-multi-select-selected=${updateLabel}>
         <cds-multi-select-item is-select-all> All roles </cds-multi-select-item>
         <cds-multi-select-item value="editor">Editor</cds-multi-select-item>
         <cds-multi-select-item value="owner">Owner</cds-multi-select-item>

@@ -159,6 +159,7 @@ class CDSMultiSelect extends CDSDropdown {
       allItems.forEach((el) => el.removeAttribute('highlighted'));
       clickedItem.setAttribute('highlighted', '');
       this._handleUserInitiatedSelectItem(clickedItem);
+      this.setAttribute('item-clicked', '');
       if (this.filterable) {
         this._filterInputNode.focus();
       }
@@ -400,6 +401,21 @@ class CDSMultiSelect extends CDSDropdown {
     });
 
     this.requestUpdate();
+
+    const constructor = this.constructor as typeof CDSMultiSelect;
+    const visibleItems = Array.from(
+      this.querySelectorAll(constructor.selectorItemResults)
+    ) as CDSMultiSelectItem[];
+
+    if (visibleItems.length > 0) {
+      visibleItems.forEach((i) => i.removeAttribute('highlighted'));
+      this.setAttribute('item-clicked', '');
+      const first = visibleItems[0] as HTMLElement;
+      first.setAttribute('highlighted', '');
+      first.focus();
+    } else {
+      this._filterInputNode.focus();
+    }
   }
 
   /**
@@ -410,6 +426,7 @@ class CDSMultiSelect extends CDSDropdown {
   protected _navigate(direction: number) {
     if (!this.filterable) {
       super._navigate(direction);
+      this._triggerNode.classList.add('no-focus-style');
     } else {
       // only navigate through remaining item
       const constructor = this.constructor as typeof CDSMultiSelect;
@@ -420,6 +437,10 @@ class CDSMultiSelect extends CDSDropdown {
       const highlightedIndex = indexOf(items, highlightedItem!);
 
       let nextIndex = highlightedIndex + direction;
+
+      if (items[nextIndex]?.hasAttribute('disabled')) {
+        nextIndex += direction;
+      }
       if (nextIndex < 0) {
         nextIndex = items.length - 1;
       }
@@ -429,8 +450,8 @@ class CDSMultiSelect extends CDSDropdown {
       forEach(items, (item, i) => {
         (item as CDSMultiSelectItem).highlighted = i === nextIndex;
       });
+      this.setAttribute('item-clicked', '');
     }
-    this._triggerNode.classList.add('no-focus-style');
   }
 
   /**
@@ -445,6 +466,9 @@ class CDSMultiSelect extends CDSDropdown {
     forEach(items, (item) => {
       (item as CDSMultiSelectItem).removeAttribute('filtered');
     });
+    this._filterInputNode.dispatchEvent(
+      new Event('input', { bubbles: true, composed: true })
+    );
   }
 
   /**
@@ -616,8 +640,30 @@ class CDSMultiSelect extends CDSDropdown {
 
   updated(changedProperties) {
     super.updated(changedProperties);
-    if (changedProperties.has('open') && this.open && !this.filterable) {
-      this._triggerNode.focus();
+
+    if (changedProperties.has('open') && this.open) {
+      const selectedItems = Array.from(
+        this.querySelectorAll(`${prefix}-multi-select-item[selected]`)
+      ) as CDSMultiSelectItem[];
+
+      if (selectedItems.length > 0) {
+        let itemToFocus: HTMLElement | null = null;
+        if (this.selectAll) {
+          itemToFocus = this.querySelector(
+            `${prefix}-multi-select-item[is-select-all]`
+          ) as CDSMultiSelectItem;
+        }
+        if (!itemToFocus) {
+          itemToFocus = selectedItems[0] as HTMLElement;
+        }
+        this.setAttribute('item-clicked', '');
+        itemToFocus.focus();
+        itemToFocus.setAttribute('highlighted', '');
+      } else {
+        this.filterable
+          ? this._filterInputNode.focus()
+          : this._triggerNode.focus();
+      }
     }
     // reorder items so that select all is always at the top of the list
     if (this.selectAll && changedProperties.has('open') && this.open) {
@@ -632,21 +678,24 @@ class CDSMultiSelect extends CDSDropdown {
           .filter((i) => i !== selectAllItem)
           .forEach((i) => this.appendChild(i));
       }
-
-      // item below select all gets special treatment to look correct against
-      // "Select all" border treatment via tag 'flush-top'
-      Array.from(this.querySelectorAll('cds-multi-select-item')).forEach(
-        (item, index) => {
-          if (index === 1) {
-            item.setAttribute('flush-top', '');
-          } else {
-            item.removeAttribute('flush-top');
-          }
-        }
-      );
     }
+
+    // flush the top of the first element
+    Array.from(this.querySelectorAll('cds-multi-select-item')).forEach(
+      (item, index) => {
+        if (index === 0 && !item.hasAttribute('is-select-all')) {
+          item.setAttribute('flush-top', '');
+        } else if (index === 1 && this.selectAll) {
+          item.setAttribute('flush-top', '');
+        } else {
+          item.removeAttribute('flush-top');
+        }
+      }
+    );
+
     if (changedProperties.has('open') && !this.open) {
       this._triggerNode.classList.remove('no-focus-style');
+      this.removeAttribute('item-clicked');
     }
   }
 
