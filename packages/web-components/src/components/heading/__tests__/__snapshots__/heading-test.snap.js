@@ -7,22 +7,6 @@ snapshots['cds-heading should begin with an <h1> tag'] = `<cds-heading>
 `;
 /* end snapshot cds-heading should begin with an <h1> tag */
 
-snapshots[
-  'cds-heading Component API should pass through all attributes for <cds-section>'
-] = `<cds-section data-testid="test">
-  test
-</cds-section>
-`;
-/* end snapshot cds-heading Component API should pass through all attributes for <cds-section> */
-
-snapshots[
-  'cds-heading Component API should pass through all attributes for <cds-heading>'
-] = `<cds-heading data-testid="test">
-  test
-</cds-heading>
-`;
-/* end snapshot cds-heading Component API should pass through all attributes for <cds-heading> */
-
 snapshots['cds-heading should increment heading levels as you nest sections'] =
   `<div>
   <cds-heading>
@@ -120,3 +104,19 @@ snapshots['cds-heading should stop increment heading levels past level 6'] =
 </div>
 `;
 /* end snapshot cds-heading should stop increment heading levels past level 6 */
+
+snapshots[
+  'cds-heading Component API should pass through all attributes for <cds-section>'
+] = `<cds-section data-testid="test">
+  test
+</cds-section>
+`;
+/* end snapshot cds-heading Component API should pass through all attributes for <cds-section> */
+
+snapshots[
+  'cds-heading Component API should pass through all attributes for <cds-heading>'
+] = `<cds-heading data-testid="test">
+  test
+</cds-heading>
+`;
+/* end snapshot cds-heading Component API should pass through all attributes for <cds-heading> */
