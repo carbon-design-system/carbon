@@ -40,7 +40,7 @@ describe('TableContainer', () => {
     );
 
     const aiEnabledContainer = container.querySelector(
-      '[class*="--data-table-full-ai"]'
+      '[class*="--data-table-container--ai-enabled"]'
     );
     expect(aiEnabledContainer).toBeInTheDocument();
   });

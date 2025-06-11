@@ -47,14 +47,14 @@
   //----------------------------------------------------------------------------
   // Container, full table ai
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table-full-ai {
+  .#{$prefix}--data-table-container--ai-enabled {
     position: relative;
     // Allow for pseudo element to show for gradient border effect
     padding: 1px;
     border: none;
   }
 
-  .#{$prefix}--data-table-full-ai::after {
+  .#{$prefix}--data-table-container--ai-enabled::after {
     position: absolute;
     z-index: -1;
     // Used for gradient border effect
@@ -66,11 +66,11 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--data-table-full-ai tbody {
+  .#{$prefix}--data-table-container--ai-enabled tbody {
     position: relative;
   }
 
-  .#{$prefix}--data-table-full-ai tbody::before {
+  .#{$prefix}--data-table-container--ai-enabled tbody::before {
     position: absolute;
     block-size: 100%;
     content: '';

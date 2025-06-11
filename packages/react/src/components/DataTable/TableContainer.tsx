@@ -57,7 +57,7 @@ const TableContainer = ({
     {
       [`${prefix}--data-table--max-width`]: stickyHeader,
       [`${prefix}--data-table-container--static`]: useStaticWidth,
-      [`${prefix}--data-table-full-ai`]: aiEnabled,
+      [`${prefix}--data-table-container--ai-enabled`]: aiEnabled,
     }
   );
   const value = useMemo(() => {
