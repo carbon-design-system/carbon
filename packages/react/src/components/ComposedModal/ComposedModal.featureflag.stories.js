@@ -95,6 +95,11 @@ EnableDialogElement.argTypes = {
       disable: true,
     },
   },
+  launcherButtonRef: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
     action: 'onClose',
   },
@@ -165,7 +170,7 @@ export const EnableExperimentalFocusWrapWithoutSentinels = (args) => {
 };
 EnableExperimentalFocusWrapWithoutSentinels.storyName =
   'enable-experimental-focus-wrap-without-sentinels';
-EnableDialogElement.argTypes = {
+EnableExperimentalFocusWrapWithoutSentinels.argTypes = {
   children: {
     table: {
       disable: true,
@@ -177,6 +182,11 @@ EnableDialogElement.argTypes = {
     },
   },
   containerClassName: {
+    table: {
+      disable: true,
+    },
+  },
+  launcherButtonRef: {
     table: {
       disable: true,
     },

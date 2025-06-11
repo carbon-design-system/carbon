@@ -432,11 +432,6 @@
     @include high-contrast-mode('outline');
   }
 
-  .#{$prefix}--tag__close-icon svg,
-  .#{$prefix}--tag__custom-icon svg {
-    @include high-contrast-mode('icon-fill');
-  }
-
   .#{$prefix}--tag__close-icon:focus {
     @include high-contrast-mode('focus');
   }

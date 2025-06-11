@@ -481,8 +481,4 @@
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
     @include high-contrast-mode('focus');
   }
-
-  .#{$prefix}--table-expand__svg {
-    @include high-contrast-mode('icon-fill');
-  }
 }
