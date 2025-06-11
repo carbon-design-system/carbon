@@ -50,9 +50,6 @@ $css--plex: true !default;
     max-inline-size: 50%;
   }
 
-  .#{$prefix}--page-header__breadcrumb__content-actions {
-    @extend .#{$prefix}--page-header__breadcrumb__content-actions;
-  }
 
   ::slotted([slot='icon']) {
     @extend .#{$prefix}--page-header__breadcrumb__icon;
