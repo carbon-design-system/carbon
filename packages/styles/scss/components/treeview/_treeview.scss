@@ -268,21 +268,31 @@
 
   .#{$prefix}--tree-node__label .#{$prefix}--icon-tooltip {
     inline-size: 100%;
+  }
 
-    .#{$prefix}--btn.#{$prefix}--btn--icon-only {
-      padding: 0;
-      border: none;
-      background: transparent;
-      block-size: auto;
-      color: inherit;
-      inline-size: 100%;
-      min-block-size: unset;
-      text-align: start;
-      .#{$prefix}--tree-node__label__text {
-        color: inherit;
-        inline-size: 100%;
-      }
-    }
+  .#{$prefix}--tree-node__label
+    .#{$prefix}--icon-tooltip
+    .#{$prefix}--btn--icon-only {
+    padding: 0;
+    border: none;
+    background: transparent;
+    block-size: auto;
+    color: inherit;
+    inline-size: 100%;
+    min-block-size: unset;
+    text-align: start;
+  }
+
+  .#{$prefix}--tree-node__label
+    .#{$prefix}--icon-tooltip
+    .#{$prefix}--btn--icon-only
+    .#{$prefix}--tree-node__label__text {
+    color: inherit;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--tree-node__label .#{$prefix}--tooltip-content {
+    padding: 1rem;
   }
 
   .#{$prefix}--tree-node__label .#{$prefix}--popover-container {

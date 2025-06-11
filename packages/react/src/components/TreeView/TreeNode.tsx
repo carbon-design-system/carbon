@@ -99,6 +99,31 @@ export type TreeNodeProps = {
    * Optional: The URL the TreeNode is linking to
    */
   href?: string;
+  /**
+   *
+   * Specify how the trigger should align with the tooltip when text is truncated
+   */
+
+  align?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left-end'
+    | 'left-start'
+    | 'right-end'
+    | 'right-start';
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
 } & Omit<React.LiHTMLAttributes<HTMLElement>, 'onSelect'>;
 
 const extractTextContent = (node: React.ReactNode): string => {
@@ -210,6 +235,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       selected: propSelected,
       value,
       href,
+      align = 'bottom',
+      autoAlign = false,
       ...rest
     },
     forwardedRef
@@ -256,9 +283,10 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
           <IconButton
             label={tooltipText}
             kind="ghost"
-            autoAlign
-            wrapperClasses={`${prefix}--popover-container`}
-            className={`${prefix}--tree-node__label__text-button`}>
+            align={align}
+            autoAlign={autoAlign}
+            className={`${prefix}--tree-node__label__text-button`}
+            wrapperClasses={`${prefix}--popover-container`}>
             <span
               ref={labelTextRef}
               className={`${prefix}--tree-node__label__text`}>
@@ -717,6 +745,31 @@ TreeNode.propTypes = {
    * Optional: The URL the TreeNode is linking to
    */
   href: PropTypes.string,
+
+  /**
+   * Specify how the tooltip should align when text is truncated
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'bottom',
+    'left',
+    'right',
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
+  ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 };
 
 TreeNode.displayName = 'TreeNode';
