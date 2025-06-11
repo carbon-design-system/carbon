@@ -2,7 +2,7 @@ name: Calculate PR Merge Rate
 
 on:
   schedule:
-    - cron: '0 1 * * 3' # Runs at 1:00 AM UTC every Wednesday
+    - cron: '0 13 * * 2' # Runs before retro at 13:00 UTC (8AM EST/9AM EDT) every Tuesday
   workflow_dispatch: # Allows manual runs from the GitHub Actions tab
 
 jobs:

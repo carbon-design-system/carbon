@@ -58,7 +58,7 @@
     "start": "yarn storybook",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "test": "web-test-runner \"src/components/**/__tests__/**/*.js\" --node-resolve",
+    "test": "web-test-runner \"src/components/**/__tests__/**/*.js\" --node-resolve --concurrency=1",
     "test:updateSnapshots": "yarn test --update-snapshots",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "visual-snapshot": "yarn percy storybook:start ./storybook-static",
