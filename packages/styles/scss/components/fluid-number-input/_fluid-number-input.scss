@@ -447,4 +447,17 @@
     ) {
     @include ai-gradient;
   }
+
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--slug::before {
+    display: none;
+  }
 }

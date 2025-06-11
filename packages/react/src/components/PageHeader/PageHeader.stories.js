@@ -283,7 +283,7 @@ export const ContentWithContextualActions = (args) => (
 );
 
 export const ContentWithHeroImage = (args) => (
-  <PageHeader.Root withHeroImage>
+  <PageHeader.Root>
     <Grid>
       <Column lg={8} md={4} sm={4}>
         <PageHeader.BreadcrumbBar border={false} renderIcon={BreadcrumbBeeIcon}>
