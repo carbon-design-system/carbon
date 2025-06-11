@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useEffect,
+  useMemo,
   useRef,
   useState,
   type JSX,
@@ -20,6 +21,8 @@ import { usePrefix } from '../../internal/usePrefix';
 import { uniqueId } from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
 import TreeNode, { TreeNodeProps } from './TreeNode';
+import { TreeContext } from './TreeContext';
+import { DepthContext } from './DepthContext';
 
 export type TreeViewProps = {
   /**
@@ -181,41 +184,58 @@ const TreeView: TreeViewComponent = ({
     }
   }
 
-  let focusTarget = false;
-  function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
-    return React.Children.map(children, (child) => {
-      if (!React.isValidElement(child)) return child;
+  // let focusTarget = false;
+  // function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
+  //   return React.Children.map(children, (child) => {
+  //     if (!React.isValidElement(child)) return child;
 
-      const isTreeNode = child.type === TreeNode;
+  //     const isTreeNode = child.type === TreeNode;
 
-      if (isTreeNode) {
-        const node = child as React.ReactElement<TreeNodeProps>;
+  //     if (isTreeNode) {
+  //       const node = child as React.ReactElement<TreeNodeProps>;
 
-        const sharedNodeProps: Partial<TreeNodeProps> = {
-          active,
-          depth: 0,
-          onNodeFocusEvent: handleFocusEvent,
-          onTreeSelect: handleTreeSelect,
-          selected,
-          tabIndex: node.props.disabled ? undefined : -1,
-        };
+  //       const sharedNodeProps: Partial<TreeNodeProps> = {
+  //         active,
+  //         depth: 0,
+  //         onNodeFocusEvent: handleFocusEvent,
+  //         onTreeSelect: handleTreeSelect,
+  //         selected,
+  //         tabIndex: node.props.disabled ? undefined : -1,
+  //       };
 
-        if (!focusTarget && !node.props.disabled) {
-          sharedNodeProps.tabIndex = 0;
-          focusTarget = true;
-        }
+  //       if (!focusTarget && !node.props.disabled) {
+  //         sharedNodeProps.tabIndex = 0;
+  //         focusTarget = true;
+  //       }
 
-        return React.cloneElement(child, sharedNodeProps);
-      }
+  //       return React.cloneElement(child, sharedNodeProps);
+  //     }
 
-      const newChildren = enhanceTreeNodes((child.props as any).children);
-      return React.cloneElement(child as React.ReactElement<any>, {
-        children: newChildren,
+  //     const newChildren = enhanceTreeNodes((child.props as any).children);
+  //     return React.cloneElement(child as React.ReactElement<any>, {
+  //       children: newChildren,
+  //     });
+  //   });
+  // }
+
+  // const nodesWithProps = enhanceTreeNodes(children);
+
+  useEffect(() => {
+    if (treeRootRef.current) {
+      const allNodes = treeRootRef.current.querySelectorAll(
+        `.${prefix}--tree-node`
+      );
+      allNodes.forEach((node) => {
+        node.setAttribute('tabindex', '-1');
       });
-    });
-  }
-
-  const nodesWithProps = enhanceTreeNodes(children);
+      const firstNode = treeRootRef.current.querySelector(
+        `.${prefix}--tree-node:not([aria-disabled="true"])`
+      );
+      if (firstNode) {
+        firstNode.setAttribute('tabindex', '0');
+      }
+    }
+  }, [children, prefix]);
 
   function handleKeyDown(event) {
     event.stopPropagation();
@@ -339,6 +359,16 @@ const TreeView: TreeViewComponent = ({
 
   useActiveAndSelectedOnMount();
 
+  const contextValue = useMemo(
+    () => ({
+      active,
+      selected,
+      onTreeSelect: handleTreeSelect,
+      onNodeFocusEvent: handleFocusEvent,
+    }),
+    [active, selected, multiselect, prefix]
+  );
+
   const labelId = `${treeId}__label`;
   const TreeLabel = () =>
     !hideLabel ? (
@@ -357,9 +387,11 @@ const TreeView: TreeViewComponent = ({
         aria-multiselectable={multiselect || undefined}
         className={treeClasses}
         onKeyDown={handleKeyDown}
-        ref={treeRootRef as unknown as React.RefObject<HTMLUListElement | null>}
+        ref={treeRootRef}
         role="tree">
-        {nodesWithProps}
+        <TreeContext.Provider value={contextValue}>
+          <DepthContext.Provider value={0}>{children}</DepthContext.Provider>
+        </TreeContext.Provider>
       </ul>
     </>
   );

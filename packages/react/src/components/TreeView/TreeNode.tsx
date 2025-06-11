@@ -17,12 +17,15 @@ import React, {
   type FunctionComponent,
   type MouseEvent,
   type MutableRefObject,
+  useContext,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import { uniqueId } from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
+import { TreeContext } from './TreeContext';
+import { DepthContext } from './DepthContext';
 
 export type TreeNodeProps = {
   /**
@@ -102,30 +105,25 @@ export type TreeNodeProps = {
 const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
   (
     {
-      active,
       children,
       className,
-      depth: propDepth,
       disabled,
       id: nodeId,
       isExpanded,
       defaultIsExpanded,
       label,
-      onNodeFocusEvent,
       onSelect: onNodeSelect,
       onToggle,
-      onTreeSelect,
       renderIcon: Icon,
-      selected: propSelected,
       value,
       href,
       ...rest
     },
     forwardedRef
   ) => {
-    // These are provided by the parent TreeView component
-    const depth = propDepth as number;
-    const selected = propSelected as (string | number)[];
+    const treeContext = useContext(TreeContext);
+    const depth = useContext(DepthContext);
+    const { active, selected, onTreeSelect, onNodeFocusEvent } = treeContext;
 
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
@@ -164,38 +162,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
     };
 
-    function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
-      return React.Children.map(children, (node) => {
-        if (!React.isValidElement(node)) return node;
-
-        const isTreeNode = node.type === TreeNode;
-
-        if (isTreeNode) {
-          return React.cloneElement(node, {
-            active,
-            depth: depth + 1,
-            disabled:
-              disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
-            onTreeSelect,
-            onNodeFocusEvent,
-            selected,
-            tabIndex: (node as ReactElement<TreeNodeProps>).props.disabled
-              ? null
-              : -1,
-          } as TreeNodeProps);
-        }
-
-        const newChildren = enhanceTreeNodes((node.props as any).children);
-        return React.cloneElement(node as React.ReactElement<any>, {
-          children: newChildren,
-        });
-      });
-    }
-
-    const nodesWithProps = enhanceTreeNodes(children);
-
     const isActive = active === id;
     const isSelected = selected.includes(id);
+    console.log(isSelected, selected, id);
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
       [`${prefix}--tree-node--active`]: isActive,
       [`${prefix}--tree-node--disabled`]: disabled,
@@ -395,6 +364,20 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       role: 'treeitem',
     };
 
+    const renderChildren = () => (
+      <ul
+        id={`${id}-subtree`}
+        role="group"
+        className={classNames(`${prefix}--tree-node__children`, {
+          [`${prefix}--tree-node--hidden`]: !expanded,
+        })}>
+        {/* NEW: The magic happens here. Re-provide DepthContext with an incremented value */}
+        <DepthContext.Provider value={depth + 1}>
+          {children}
+        </DepthContext.Provider>
+      </ul>
+    );
+
     if (!children) {
       if (href) {
         return (
@@ -454,14 +437,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
               </span>
             </div>
           </a>
-          <ul
-            id={`${id}-subtree`}
-            role="group"
-            className={classNames(`${prefix}--tree-node__children`, {
-              [`${prefix}--tree-node--hidden`]: !expanded,
-            })}>
-            {nodesWithProps}
-          </ul>
+          {renderChildren()}
         </li>
       );
     } else {
@@ -483,14 +459,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
               {label}
             </span>
           </div>
-          <ul
-            id={`${id}-subtree`}
-            role="group"
-            className={classNames(`${prefix}--tree-node__children`, {
-              [`${prefix}--tree-node--hidden`]: !expanded,
-            })}>
-            {nodesWithProps}
-          </ul>
+          {renderChildren()}
         </li>
       );
     }
