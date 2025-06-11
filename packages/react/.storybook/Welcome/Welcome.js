@@ -25,9 +25,6 @@ export const Welcome = () => {
           Website
         </Link>
         <Link
-          // TODO: Should the `href` be `PackageInfo.repository.url` instead?
-          // The current value links to the package's directory, not the
-          // repository. The link's text says "GitHub repo".
           href="https://github.com/carbon-design-system/carbon/tree/main/packages/react"
           className="welcome__link"
           renderIcon={ArrowRight}>
