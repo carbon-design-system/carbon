@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/search';
 @use '@carbon/styles/scss/components/data-table/action';
+@use '@carbon/styles/scss/layout' as *;
 
 //
 // Table toolbar
@@ -20,6 +21,7 @@
 
 :host(#{$prefix}-table-toolbar) {
   @extend .#{$prefix}--table-toolbar;
+  @include emit-layout-tokens();
 
   z-index: 1;
 }

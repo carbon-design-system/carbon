@@ -469,32 +469,52 @@
 
   // cancel btn pseudo element
   .#{$prefix}--action-list
-    .#{$prefix}--btn--primary:nth-child(3):hover
+    .#{$prefix}--btn--primary:nth-last-child(2):hover
     + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before,
   .#{$prefix}--action-list
-    .#{$prefix}--btn--primary:nth-child(3):focus
+    .#{$prefix}--btn--primary:nth-last-child(2):focus
     + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
     opacity: 0;
   }
 
-  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
-    position: absolute;
-    display: block;
-    border: none;
-    background-color: $text-on-color;
-    block-size: $spacing-05;
-    content: '';
-    inline-size: convert.to-rem(1px);
-    //visually 16px spacing is 1px too low
-    inset-block-start: convert.to-rem(15px);
-    inset-inline-start: 0;
-    opacity: 1;
-    transition: opacity $duration-fast-02 motion(standard, productive);
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary {
+    &__select-all {
+      margin-inline-start: $spacing-03;
+    }
+
+    &__cancel,
+    &__select-all {
+      @media (prefers-reduced-motion: no-preference) {
+        &::before {
+          position: absolute;
+          display: block;
+          border: none;
+          background-color: $text-on-color;
+          block-size: $spacing-05;
+          content: '';
+          inline-size: convert.to-rem(1px);
+          //visually 16px spacing is 1px too low
+          inset-block-start: convert.to-rem(15px);
+          inset-inline-start: 0;
+          opacity: 1;
+          transition: opacity $duration-fast-02 motion(standard, productive);
+        }
+      }
+    }
   }
 
-  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
-    opacity: 0;
-    transition: opacity $transition-base $standard-easing;
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary {
+    &__cancel:hover::before,
+    &__select-all:hover::before {
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      &__cancel:hover::before,
+      &__select-all:hover::before {
+        transition: opacity $transition-base $standard-easing;
+      }
+    }
   }
 
   // items selected text
@@ -517,10 +537,6 @@
 
   .#{$prefix}--batch-summary__para {
     @include type-style('body-compact-01');
-  }
-
-  .#{$prefix}--batch-summary__divider {
-    padding-inline-start: $spacing-03;
   }
 
   //-------------------------------------------------
