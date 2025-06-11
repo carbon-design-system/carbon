@@ -285,6 +285,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--date-picker__input--invalid`]: normalizedProps.invalid,
       [`${prefix}--date-picker__input--warn`]: normalizedProps.warn,
       [`${prefix}--date-picker__input--${size}`]: size,
+      [`${prefix}--date-picker__input--decorator`]: hasAILabel,
     });
 
     const inputWrapperClasses = classMap({
@@ -292,7 +293,6 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--date-picker-input__wrapper--invalid`]:
         normalizedProps.invalid,
       [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
-      [`${prefix}--date-picker-input__wrapper--slug`]: hasAILabel,
     });
 
     const helperTextClasses = classMap({
@@ -340,6 +340,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   }
 
   updated() {
+    this.toggleAttribute('ai-label', this._hasAILabel);
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {

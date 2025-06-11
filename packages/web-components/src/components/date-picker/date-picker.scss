@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/date-picker/date-picker' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include date-picker;
@@ -162,4 +163,9 @@ $css--plex: true !default;
 
     inline-size: rem(75px);
   }
+}
+
+:host(#{$prefix}-date-picker-input[ai-label])
+  .#{$prefix}--date-picker__input--decorator {
+  @include ai-gradient;
 }
