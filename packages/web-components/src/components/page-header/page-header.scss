@@ -31,9 +31,39 @@ $css--plex: true !default;
 
 :host(#{$prefix}-page-header-breadcrumb) {
   @extend .#{$prefix}--page-header__breadcrumb-bar;
+
+  .#{$prefix}--page-header__breadcrumb-bar {
+    display: flex;
+  }
+
+  .#{$prefix}--page-header__breadcrumb-container {
+    @extend .#{$prefix}--page-header__breadcrumb-container;
+  }
+
+  .#{$prefix}--page-header__breadcrumb-wrapper {
+    @extend .#{$prefix}--page-header__breadcrumb-wrapper;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__actions {
+    @extend .#{$prefix}--page-header__breadcrumb__actions;
+
+    max-inline-size: 50%;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__content-actions {
+    @extend .#{$prefix}--page-header__breadcrumb__content-actions;
+  }
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--page-header__breadcrumb__icon;
+  }
+
+  ::slotted([slot='content-actions']) {
+    @extend .#{$prefix}--page-header__breadcrumb__content-actions;
+  }
 }
 
-:host(#{$prefix}-page-header-breadcrumb[border='true']) {
+:host(#{$prefix}-page-header-breadcrumb[border]) {
   @extend .#{$prefix}--page-header__breadcrumb-bar-border;
 }
 

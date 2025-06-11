@@ -24,6 +24,68 @@ describe('cds-page-header', function () {
 
       await expect(el).dom.to.equalSnapshot();
     });
+
+    it('should place className on the outermost element', async () => {
+      const el = await fixture(
+        html`<cds-page-header-breadcrumb
+          class="custom-class"></cds-page-header-breadcrumb>`
+      );
+      expect(el).to.have.class('custom-class');
+    });
+
+    it('should render breadcrumb items', async () => {
+      const el = await fixture(html`
+        <cds-page-header-breadcrumb>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </cds-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const breadcrumbItems = el.querySelectorAll('cds-breadcrumb-item');
+      expect(breadcrumbItems.length).to.equal(2);
+    });
+
+    it('should render content actions', async () => {
+      const el = await fixture(html`
+        <cds-page-header-breadcrumb>
+          <div slot="content-actions">
+            <button class="content-action-item">Button</button>
+          </div>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </cds-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const elem = el.querySelector('.content-action-item');
+      expect(elem).to.exist;
+    });
+
+    it('should render page actions', async () => {
+      const el = await fixture(html`
+        <cds-page-header-breadcrumb>
+          <div slot="page-actions">
+            <button class="page-action-item">Button</button>
+          </div>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </cds-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const elem = el.querySelector('.page-action-item');
+      expect(elem).to.exist;
+    });
   });
 
   describe('cds-page-header-content', () => {

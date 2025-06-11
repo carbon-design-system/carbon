@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -23,7 +23,7 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   /**
    * Specify if breadcrumb bar has bottom border.
    */
-  @property({ reflect: true })
+  @property({ attribute: 'border', type: Boolean })
   border = true;
 
   /**
@@ -33,20 +33,101 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   @property({ attribute: 'within-grid', type: Boolean })
   withinGrid = false;
 
-  render() {
-    const { withinGrid } = this;
+  /**
+   * Set to `true` if page actions should be flush (no padding)
+   */
+  @property({ attribute: 'page-actions-flush', type: Boolean })
+  pageActionsFlush = false;
 
+  /**
+   * Set to `true` if content actions should be flush (no padding)
+   */
+  @property({ attribute: 'content-actions-flush', type: Boolean })
+  contentActionsFlush = false;
+
+  /**
+   * Set to `true` if there are content actions
+   */
+  @state()
+  private _hasContentActions = false;
+
+  /**
+   * Set to `true` if there are page actions
+   */
+  @state()
+  private _hasPageActions = false;
+
+  /**
+   * Handles `slotchange` event for content actions.
+   */
+  protected _handleContentActionsSlotChange({ target }: Event) {
+    this._hasContentActions = Boolean(
+      (target as HTMLSlotElement).assignedNodes().length
+    );
+    this.requestUpdate();
+  }
+
+  /**
+   * Handles `slotchange` event for page actions.
+   */
+  protected _handlePageActionsSlotChange({ target }: Event) {
+    this._hasPageActions = Boolean(
+      (target as HTMLSlotElement).assignedNodes().length
+    );
+    this.requestUpdate();
+  }
+
+  render() {
+    const {
+      border,
+      withinGrid,
+      pageActionsFlush,
+      contentActionsFlush,
+      _hasContentActions: hasContentActions,
+      _hasPageActions: hasPageActions,
+      _handleContentActionsSlotChange: handleContentActionsSlotChange,
+      _handlePageActionsSlotChange: handlePageActionsSlotChange,
+    } = this;
+    console.log(border);
     const gridClasses = classMap({
-      [`${prefix}--grid`]: !withinGrid,
+      [`${prefix}--css-grid`]: !withinGrid,
       [`${prefix}--subgrid ${prefix}--subgrid--wide`]: withinGrid,
     });
 
+    const breadcrumbBarClasses = classMap({
+      [`${prefix}--page-header__breadcrumb-bar`]: true,
+      [`${prefix}--page-header__breadcrumb-bar-border`]: border,
+      [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
+    });
+
+    const contentActionsClasses = classMap({
+      [`${prefix}--page-header__breadcrumb__content-actions`]:
+        !contentActionsFlush,
+    });
+
     return html`
-      <div class="${gridClasses}">
-        <div
-          class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column">
-          <div class="${prefix}--page-header__breadcrumb-container">
-            <slot></slot>
+      <div class="${breadcrumbBarClasses}">
+        <div class="${gridClasses}">
+          <div
+            class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column">
+            <div class="${prefix}--page-header__breadcrumb-container">
+              <div class="${prefix}--page-header__breadcrumb-wrapper">
+                <slot name="icon"></slot>
+                <slot></slot>
+              </div>
+              <div class="${prefix}--page-header__breadcrumb__actions">
+                <div class="${contentActionsClasses}">
+                  <slot
+                    name="content-actions"
+                    @slotchange=${handleContentActionsSlotChange}>
+                  </slot>
+                </div>
+                <slot
+                  name="page-actions"
+                  @slotchange=${handlePageActionsSlotChange}>
+                </slot>
+              </div>
+            </div>
           </div>
         </div>
       </div>
