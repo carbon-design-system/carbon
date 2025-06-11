@@ -9,7 +9,6 @@
 import { createRequire } from 'node:module';
 
 import remarkGfm from 'remark-gfm';
-import fs from 'fs';
 import glob from 'fast-glob';
 import path, { dirname, join } from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -47,6 +46,7 @@ const config = {
         },
       },
     },
+    getAbsolutePath('@chromatic-com/storybook'),
   ],
   features: {
     previewCsfV3: true,
