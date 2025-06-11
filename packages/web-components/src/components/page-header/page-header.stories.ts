@@ -289,7 +289,7 @@ export const TabBarWithTabsAndTags = {
 const meta = {
   title: 'Patterns/unstable__PageHeader',
   // comment below line to see the pageheader story
-  // includeStories: [],
+  includeStories: [],
   decorators: [
     (story) =>
       html` <style>
