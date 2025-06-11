@@ -23,7 +23,7 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   /**
    * Specify if breadcrumb bar has bottom border.
    */
-  @property({ attribute: 'border', type: Boolean })
+  @property({ reflect: true, type: Boolean })
   border = true;
 
   /**
