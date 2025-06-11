@@ -17,6 +17,7 @@ const prefix = 'cds';
 const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
   const uploaderButton = useRef(null);
+  const uniqueId = useId();
   const handleDrop = (e) => {
     e.preventDefault();
   };
@@ -105,7 +106,7 @@ const ExampleDropContainerApp = (props) => {
     (evt, { addedFiles }) => {
       evt.stopPropagation();
       const newFiles = addedFiles.map((file) => ({
-        uuid: useId(),
+        uuid: uniqueId + file.name + file.size,
         name: file.name,
         filesize: file.size,
         status: 'uploading',
@@ -170,7 +171,7 @@ const ExampleDropContainerApp = (props) => {
             ...rest
           }) => (
             <FileUploaderItem
-              key={useId()}
+              key={uuid}
               uuid={uuid}
               name={name}
               filesize={filesize}
