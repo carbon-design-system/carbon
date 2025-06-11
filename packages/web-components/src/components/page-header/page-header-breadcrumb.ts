@@ -96,7 +96,6 @@ class CDSPageHeaderBreadcrumb extends LitElement {
 
     const breadcrumbBarClasses = classMap({
       [`${prefix}--page-header__breadcrumb-bar`]: true,
-      [`${prefix}--page-header__breadcrumb-bar-border`]: border,
       [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
     });
 
