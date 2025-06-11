@@ -541,6 +541,67 @@ describe('Modal', () => {
       });
     });
   });
+
+  describe('preventCloseOnClickOutside prop validation', () => {
+    let consoleErrorSpy;
+
+    beforeEach(() => {
+      consoleErrorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should throw a prop-type warning when passiveModal=false and preventCloseOnClickOutside=false', () => {
+      render(
+        <Modal
+          open
+          passiveModal={false}
+          preventCloseOnClickOutside={false}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.'
+      );
+    });
+
+    it('should not throw a warning when passiveModal=true and preventCloseOnClickOutside=false', () => {
+      render(
+        <Modal
+          open
+          passiveModal
+          preventCloseOnClickOutside={false}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not throw a warning when passiveModal=false and preventCloseOnClickOutside=true', () => {
+      render(
+        <Modal
+          open
+          passiveModal={false}
+          preventCloseOnClickOutside={true}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+  });
 });
 
 describe('events', () => {

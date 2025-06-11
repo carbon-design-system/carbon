@@ -340,9 +340,9 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         (child) => isComponentElement(child, ModalFooter)
       );
       const isPassive = !containsModalFooter;
-      const shouldCloseOnOutsideClick =
-        (isPassive && preventCloseOnClickOutside !== false) ||
-        (!isPassive && preventCloseOnClickOutside === true);
+      const shouldCloseOnOutsideClick = isPassive
+        ? preventCloseOnClickOutside !== false
+        : preventCloseOnClickOutside === true;
 
       if (
         shouldCloseOnOutsideClick &&
