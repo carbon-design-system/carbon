@@ -5,17 +5,54 @@ a list of items.
 
 ## Getting started
 
-Here's a quick example to get you started.
+Here's a quick example to get you started using web components with Lit.
 
-```js
+```ts
+// App.ts
+import { html } from 'lit';
 import { createOverflowHandler } from '@carbon/utilities';
 
-createOverflowHandler({
-  container: HTMLElement,
-  maxVisibleItems?: number,
-  onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void,
-  dimension: 'width': 'height',
-});
+let handler;
+
+const initializeHandler = () => {
+  if (handler) {
+    console.log('Handler found. Removing and re-initiating...');
+    document.removeEventListener('DOMContentLoaded', initializeHandler);
+    handler.disconnect();
+    return;
+  }
+
+  // initiate the handler only when the dom settles and is stable, so that the items are at right dimensions before initialization.
+  requestAnimationFrame(() => {
+    handler = createOverflowHandler({
+      container: document.querySelector('#visible-items'),
+      maxVisibleItems: 5,
+      onChange: (visibleItems, hiddenItems) => {
+        console.log(visibleItems, hiddenItems);
+      },
+      dimension: 'width',
+    });
+  });
+};
+
+document.addEventListener('DOMContentLoaded', initializeHandler);
+
+return html`
+  <style>
+    /* Scope if necessary */
+    [data-hidden]:not([data-fixed]) {
+      display: none;
+    }
+  </style>
+  <div id="visible-items">
+    <button>button 1</button>
+    <button>button 2</button>
+    <button>button 3</button>
+    <button>button 4</button>
+    <button>button 5</button>
+    <button>button 6</button>
+  </div>
+`;
 ```
 
 Once the handler has been instantiated, an event handler is created that checks
@@ -23,12 +60,15 @@ the width of the container when it's rendered or resized. The handler adds the
 necessary `data-hidden` attributes to the items that should be hidden. These
 items can then be hidden using the following style in the implementation.
 
-```css
-/* Scope if necessary */
-[data-hidden]:not([data-fixed]) {
-  display: none;
-}
-```
+In the above example, once the handler has been instantiated, the
+`.visible-items` container will be monitored for changes in `width`. When the
+container is sized smaller than the amount of button elements capable of fitting
+inside, the `data-hidden` attribute will be added to the buttons that are
+considered "hidden". When the size of the container changes the number of
+visible items, the `onChange` handler will be called. `onChange` provides an
+array of hidden and visible nodes in the callback signature. Since the
+`maxVisibleItems` parameter has been set to `5` there should only be 5 buttons
+visible when the handler runs.
 
 ## Attribute definitions
 
