@@ -14,6 +14,9 @@ import { prefix } from '../../globals/settings';
 
 @customElement(`${prefix}-section`)
 export class CDSSection extends LitElement {
+  /**
+   * The level of the heading.
+   */
   @property({ type: Number })
   level?: HEADING_LEVEL;
 
