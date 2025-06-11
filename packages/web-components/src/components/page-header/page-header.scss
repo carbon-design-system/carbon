@@ -60,7 +60,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-page-header-breadcrumb[border]) {
+:host(#{$prefix}-page-header-breadcrumb[border='true']) {
   @extend .#{$prefix}--page-header__breadcrumb-bar-border;
 }
 
