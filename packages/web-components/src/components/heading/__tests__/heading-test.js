@@ -62,7 +62,7 @@ describe('cds-heading', function () {
             </cds-section>
           </cds-section>
         </cds-section>
-      </div> `
+      </div>`
     );
     await expect(el).dom.to.equalSnapshot();
 
@@ -76,10 +76,10 @@ describe('cds-heading', function () {
   });
 
   it('should stop increment heading levels past level 6', async () => {
-    const el = await fixture(html`
-      <div>
-        <cds-heading>h1</cds-heading>
-        <cds-section>
+    const el = await fixture(
+      html`<div>
+        <cds-heading>h1</cds-heading
+        ><cds-section>
           <cds-heading>h2</cds-heading>
           <cds-section>
             <cds-heading>h3</cds-heading>
@@ -97,8 +97,8 @@ describe('cds-heading', function () {
             </cds-section>
           </cds-section>
         </cds-section>
-      </div>
-    `);
+      </div>`
+    );
     await expect(el).dom.to.equalSnapshot();
 
     const maxHeading = el.querySelector('[data-testid="max"]');
@@ -106,7 +106,6 @@ describe('cds-heading', function () {
     expect(maxHeading.shadowRoot.querySelector('h6')).to.exist;
   });
 
-  // TODO: cds-section `as` attribute is not yet available
   describe('Component API', () => {
     it('should pass through all attributes for <cds-section>', async () => {
       const el = await fixture(html`
@@ -116,6 +115,7 @@ describe('cds-heading', function () {
       expect(el.getAttribute('data-testid')).to.equal('test');
     });
 
+    // TODO: cds-section `as` attribute is not yet available
     xit('should use the `as` attribute to change the element in <cds-section>', async () => {
       const el = await fixture(html`
         <cds-section as="article">test</cds-section>
