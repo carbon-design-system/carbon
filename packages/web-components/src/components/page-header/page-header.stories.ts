@@ -63,7 +63,7 @@ const tags = [
 export const Default = {
   render: () => html`
     <cds-page-header>
-      <cds-page-header-breadcrumb border>
+      <cds-page-header-breadcrumb>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
