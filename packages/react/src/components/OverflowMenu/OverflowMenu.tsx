@@ -162,6 +162,7 @@ export interface OverflowMenuProps {
   flipped?: boolean;
 
   /**
+   * @deprecated Tab key is handled with event handler so no need for focus trap.
    * Enable or disable focus trap behavior
    */
   focusTrap?: boolean;
@@ -255,7 +256,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       className,
       direction = DIRECTION_BOTTOM,
       flipped = false,
-      focusTrap = true,
+      focusTrap = false,
       iconClass,
       iconDescription = 'Options',
       id,
@@ -386,12 +387,15 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         evt.preventDefault();
       }
 
-      // Close the overflow menu on escape
-      if (keyCodeMatches(evt, [keys.Escape])) {
+      // Close the overflow menu on escape or tab.
+      if (keyCodeMatches(evt, [keys.Escape, keys.Tab])) {
         closeMenuOnEscape();
 
         // Stop the esc keypress from bubbling out and closing something it shouldn't
         evt.stopPropagation();
+
+        // Stop the tab key from making the browser focus somewhere else.
+        evt.preventDefault();
       }
     };
 
@@ -680,6 +684,7 @@ OverflowMenu.propTypes = {
   flipped: PropTypes.bool,
 
   /**
+   * @deprecated Tab key is handled with event handler so no need for focus trap.
    * Enable or disable focus trap behavior
    */
   focusTrap: PropTypes.bool,
