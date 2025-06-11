@@ -61,7 +61,7 @@ necessary `data-hidden` attributes to the items that should be hidden. These
 items can then be hidden using the following style in the implementation.
 
 In the above example, once the handler has been instantiated, the
-`.visible-items` container will be monitored for changes in `width`. When the
+`#visible-items` container will be monitored for changes in `width`. When the
 container is sized smaller than the amount of button elements capable of fitting
 inside, the `data-hidden` attribute will be added to the buttons that are
 considered "hidden". When the size of the container changes the number of
