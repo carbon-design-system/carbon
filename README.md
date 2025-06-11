@@ -62,6 +62,12 @@ we support!
 | [`@carbon/themes`](./packages/themes)                 | Color tokens available in the Carbon Design System, like `$interactive-01`                                                                                                                                                                    |
 | [`@carbon/type`](./packages/type)                     | New type tokens used alongside IBM Plex                                                                                                                                                                                                       |
 
+> [!NOTE]
+>
+> The code for https://carbondesignsystem.com/ is in
+> https://github.com/carbon-design-system/carbon-website. Any issues or pull
+> requests related to the website should be made there.
+
 ## :books: Documentation
 
 - See our documentation site
@@ -344,6 +350,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/mariyageorge01"><img src="https://avatars.githubusercontent.com/u/166684108?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mariya George</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mariyageorge01" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/sojinantony01"><img src="https://avatars.githubusercontent.com/u/29255847?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sojin antony</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sojinantony01" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Gopi-Agasthia-S-005CIU744"><img src="https://avatars.githubusercontent.com/u/196181829?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gopi-Agasthia-S-005CIU744</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Gopi-Agasthia-S-005CIU744" title="Code">💻</a></td>
+    <td align="center"><a href="https://petersandor.name/"><img src="https://avatars.githubusercontent.com/u/3933866?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Peter Šándor</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=petersandor" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -13,7 +13,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import mdx from './ComboBox.mdx';
 
 const items = [
