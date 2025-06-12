@@ -371,7 +371,6 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         className={classNames(`${prefix}--tree-node__children`, {
           [`${prefix}--tree-node--hidden`]: !expanded,
         })}>
-        {/* NEW: The magic happens here. Re-provide DepthContext with an incremented value */}
         <DepthContext.Provider value={depth + 1}>
           {children}
         </DepthContext.Provider>

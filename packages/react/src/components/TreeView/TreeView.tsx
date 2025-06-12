@@ -184,42 +184,6 @@ const TreeView: TreeViewComponent = ({
     }
   }
 
-  // let focusTarget = false;
-  // function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
-  //   return React.Children.map(children, (child) => {
-  //     if (!React.isValidElement(child)) return child;
-
-  //     const isTreeNode = child.type === TreeNode;
-
-  //     if (isTreeNode) {
-  //       const node = child as React.ReactElement<TreeNodeProps>;
-
-  //       const sharedNodeProps: Partial<TreeNodeProps> = {
-  //         active,
-  //         depth: 0,
-  //         onNodeFocusEvent: handleFocusEvent,
-  //         onTreeSelect: handleTreeSelect,
-  //         selected,
-  //         tabIndex: node.props.disabled ? undefined : -1,
-  //       };
-
-  //       if (!focusTarget && !node.props.disabled) {
-  //         sharedNodeProps.tabIndex = 0;
-  //         focusTarget = true;
-  //       }
-
-  //       return React.cloneElement(child, sharedNodeProps);
-  //     }
-
-  //     const newChildren = enhanceTreeNodes((child.props as any).children);
-  //     return React.cloneElement(child as React.ReactElement<any>, {
-  //       children: newChildren,
-  //     });
-  //   });
-  // }
-
-  // const nodesWithProps = enhanceTreeNodes(children);
-
   useEffect(() => {
     if (treeRootRef.current) {
       const allNodes = treeRootRef.current.querySelectorAll(
