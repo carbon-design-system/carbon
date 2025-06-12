@@ -185,7 +185,11 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
+        requestAnimationFrame(() => {
+          refs.floating.current?.focus();
+        });
         e.stopPropagation();
+        e.preventDefault();
       }
 
       pendingKeyboardClick.current = keyboardClickEvent(e);
