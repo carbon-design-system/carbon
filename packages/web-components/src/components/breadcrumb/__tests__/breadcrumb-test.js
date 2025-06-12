@@ -9,7 +9,7 @@ import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 
 describe('cds-breadcrumb', () => {
-  it('should accept a `aria-label` for nav element', async () => {
+  it('should accept an `aria-label` for nav element', async () => {
     const el = await fixture(html`
       <cds-breadcrumb aria-label="test-label"></cds-breadcrumb>
     `);
