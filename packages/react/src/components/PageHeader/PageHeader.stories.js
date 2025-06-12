@@ -20,9 +20,18 @@ import { Tag } from '../Tag';
 import { Button } from '../Button';
 import { Grid, Column } from '../Grid';
 import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
+import {
+  Header,
+  HeaderName,
+  HeaderMenuButton,
+  SideNav,
+  SideNavItems,
+  SideNavLink,
+} from '../UIShell';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
+import './_story-styles.scss';
 
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
@@ -491,3 +500,81 @@ export const TabBarWithTabsAndTags = (args) => (
     </TabPanels>
   </Tabs>
 );
+
+export const CollapseAndExpand = (args) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = React.useState(false);
+  return (
+    <div className="page-header-story-wrapper">
+      <Header aria-label="IBM Platform Name">
+        <HeaderMenuButton
+          aria-label="Open menu"
+          isCollapsible
+          onClick={() => {
+            setIsSideNavExpanded((prev) => !prev);
+          }}
+          isActive={isSideNavExpanded}
+        />
+        <HeaderName href="#" prefix="IBM">
+          Software application
+        </HeaderName>
+        <SideNav
+          aria-label="Side navigation"
+          expanded={isSideNavExpanded}
+          isFixedNav>
+          <SideNavItems>
+            <SideNavLink
+              href="https://pages.github.ibm.com/carbon/ibm-products/"
+              target="_blank">
+              Sample link: Carbon for IBM Products
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+      </Header>
+      <Tabs className>
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar
+            border={args.border}
+            pageActionsFlush={args.pageActionsFlush}
+            contentActionsFlush={args.contentActionsFlush}
+            renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+            pageActions={breadcrumbPageActions}>
+            <Breadcrumb>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+            </Breadcrumb>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+            {...args}>
+            <PageHeader.ContentText subtitle="Subtitle">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex.
+            </PageHeader.ContentText>
+          </PageHeader.Content>
+          <PageHeader.TabBar tags={tags} scroller={<PageHeader.ScrollButton />}>
+            <TabList>
+              <Tab>Tab 1</Tab>
+              <Tab>Tab 2</Tab>
+              <Tab>Tab 3</Tab>
+              <Tab>Tab 4</Tab>
+              <Tab>Tab 5</Tab>
+              <Tab>Tab 6</Tab>
+              <Tab>Tab 7</Tab>
+            </TabList>
+          </PageHeader.TabBar>
+        </PageHeader.Root>
+        <TabPanels>
+          <TabPanel style={{ height: '200vh' }}>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </div>
+  );
+};
