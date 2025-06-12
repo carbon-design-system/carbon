@@ -52,6 +52,10 @@ $inset-transition: inset 110ms motion(standard, productive);
   .#{$prefix}--tab--overflow-nav-button {
     z-index: 1;
   }
+
+  .#{$prefix}--tab--overflow-nav-button {
+    background-color: var(--tabs-overflow-button-background, $background);
+  }
 }
 
 :host(#{$prefix}-tabs) {

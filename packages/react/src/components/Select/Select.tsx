@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,13 +7,13 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ChangeEventHandler,
-  ComponentPropsWithRef,
-  ForwardedRef,
-  ReactNode,
+  cloneElement,
   useContext,
-  useRef,
   useState,
+  type ChangeEventHandler,
+  type ComponentPropsWithRef,
+  type ForwardedRef,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import {
@@ -27,6 +27,8 @@ import { FormContext } from '../FluidForm';
 import { useId } from '../../internal/useId';
 import { composeEventHandlers } from '../../tools/events';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'size';
 
@@ -275,20 +277,11 @@ const Select = React.forwardRef(function Select(
   };
 
   // AILabel always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   const input = (() => {
     return (

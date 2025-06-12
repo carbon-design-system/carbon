@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,6 +59,42 @@ class CDSHeaderGlobalAction extends CDSButton {
     super.connectedCallback();
   }
 
+  firstUpdated() {
+    document.addEventListener('click', this._handleDocumentClick, true);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('click', this._handleDocumentClick, true);
+    super.disconnectedCallback();
+  }
+
+  private _handleDocumentClick = (event: MouseEvent) => {
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const target = event.composedPath()[0] as HTMLElement;
+
+    if (panel && !this.contains(target) && !panel.contains(target)) {
+      panel.removeAttribute('expanded');
+      this.active = false;
+    }
+  };
+
+  @HostListener('focusout')
+  // @ts-ignore
+  private _handleFocusOut(event: FocusEvent) {
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const relatedTarget = event.relatedTarget as HTMLElement;
+
+    if (
+      panel &&
+      relatedTarget &&
+      !this.contains(relatedTarget) &&
+      !panel.contains(relatedTarget)
+    ) {
+      panel.removeAttribute('expanded');
+      this.active = false;
+    }
+  }
+
   @HostListener('click', { capture: true })
   // @ts-ignore
   private _handleClick(event: Event) {
@@ -66,7 +102,7 @@ class CDSHeaderGlobalAction extends CDSButton {
     if (disabled) {
       event.stopPropagation();
     } else {
-      const panel = document.querySelector(`#${this.panelId}`);
+      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
 
       // see if there is related panel for header-global-action button first
       // and then set the expanded attr of it accordingly
@@ -82,6 +118,22 @@ class CDSHeaderGlobalAction extends CDSButton {
         const active = !this.active;
         this.active = active;
       }
+    }
+  }
+
+  @HostListener('keydown', { capture: true })
+  // @ts-ignore
+  private _handleKeyDown(event: KeyboardEvent) {
+    const { key } = event;
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      this._handleClick(event);
+    } else if (key === 'Escape') {
+      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+      if (panel) {
+        panel.removeAttribute('expanded');
+      }
+      this.active = false;
     }
   }
 

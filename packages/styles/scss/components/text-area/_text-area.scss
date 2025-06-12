@@ -19,6 +19,7 @@
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/layout';
+@use '../../utilities/visually-hidden' as *;
 
 /// Text area styles
 /// @access public
@@ -213,6 +214,12 @@
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area--invalid
     ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area--warn

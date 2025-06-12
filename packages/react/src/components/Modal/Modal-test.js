@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import React, { useRef, useState } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import Modal from './Modal';
 import TextInput from '../TextInput';
 import { AILabel } from '../AILabel';
+import { FeatureFlags } from '../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -474,6 +474,70 @@ describe('Modal', () => {
     );
 
     expect(screen.getByText('Cancel')).toHaveFocus();
+  });
+
+  it('should not focus the launcherButtonRef on initial render or after timers', () => {
+    jest.useFakeTimers();
+
+    const launcherButtonRef = React.createRef();
+
+    render(
+      <>
+        <button ref={launcherButtonRef} data-testid="launcher-button">
+          Launch Modal
+        </button>
+        <Modal
+          launcherButtonRef={launcherButtonRef}
+          primaryButtonText="Save"
+          secondaryButtonText="Cancel">
+          <p>Modal Content</p>
+        </Modal>
+      </>
+    );
+
+    const launcherButton = screen.getByTestId('launcher-button');
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.runAllTimers();
+
+    expect(launcherButton).not.toHaveFocus();
+    expect(document.body).toHaveFocus();
+
+    jest.useRealTimers();
+  });
+
+  describe('enable-dialog-element feature flag', () => {
+    it('should bring launcherButtonRef element into focus on close when the ref is defined', async () => {
+      const ModalExample = () => {
+        const [open, setOpen] = useState(true);
+        const focusRef = useRef();
+        return (
+          <FeatureFlags enableDialogElement>
+            <Modal
+              open={open}
+              launcherButtonRef={focusRef}
+              onClick={() => setOpen(false)}>
+              <button data-testid="close" onClick={() => setOpen(false)} />
+            </Modal>
+            <button data-testid="focusElem" ref={focusRef}>
+              focus after close
+            </button>
+          </FeatureFlags>
+        );
+      };
+      render(<ModalExample />);
+
+      const closeButton = screen.getByTestId('close');
+      const focusElem = screen.getByTestId('focusElem');
+
+      expect(focusElem).not.toHaveFocus();
+      await userEvent.click(closeButton);
+      await waitFor(() => {
+        expect(focusElem).toHaveFocus();
+      });
+    });
   });
 });
 

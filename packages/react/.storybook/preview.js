@@ -11,7 +11,7 @@ import {
   Primary,
   Stories,
   ArgTypes,
-} from '@storybook/blocks';
+} from '@storybook/addon-docs/blocks';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -74,7 +74,12 @@ const globalTypes = {
         {
           right: '🇺🇸',
           title: 'English',
-          value: 'en',
+          value: 'en-US',
+        },
+        {
+          right: '🇩🇪',
+          title: 'German',
+          value: 'de-DE',
         },
         {
           right: '🇵🇸',
@@ -367,6 +372,7 @@ const preview = {
   parameters,
   decorators,
   globalTypes,
+  tags: ['autodocs'],
 };
 
 export default preview;

@@ -62,6 +62,12 @@ we support!
 | [`@carbon/themes`](./packages/themes)                 | Color tokens available in the Carbon Design System, like `$interactive-01`                                                                                                                                                                    |
 | [`@carbon/type`](./packages/type)                     | New type tokens used alongside IBM Plex                                                                                                                                                                                                       |
 
+> [!NOTE]
+>
+> The code for https://carbondesignsystem.com/ is in
+> https://github.com/carbon-design-system/carbon-website. Any issues or pull
+> requests related to the website should be made there.
+
 ## :books: Documentation
 
 - See our documentation site
@@ -337,8 +343,14 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/warrenmblood"><img src="https://avatars.githubusercontent.com/u/69060697?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Warren Blood</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=warrenmblood" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/vcherneny"><img src="https://avatars.githubusercontent.com/u/11604315?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vlad Cherneny</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=vcherneny" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/murito"><img src="https://avatars.githubusercontent.com/u/2628140?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Francisco Alcalá</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=murito" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/dkaushik95"><img src="https://avatars.githubusercontent.com/u/8481567?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dishant Kaushik</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=dkaushik95" title="Code">💻</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="https://www.linkedin.com/in/sujithcs"><img src="https://avatars.githubusercontent.com/u/43125517?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SUJITH C S</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Code-Suji" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/mariyageorge01"><img src="https://avatars.githubusercontent.com/u/166684108?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mariya George</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mariyageorge01" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/sojinantony01"><img src="https://avatars.githubusercontent.com/u/29255847?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sojin antony</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sojinantony01" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Gopi-Agasthia-S-005CIU744"><img src="https://avatars.githubusercontent.com/u/196181829?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gopi-Agasthia-S-005CIU744</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Gopi-Agasthia-S-005CIU744" title="Code">💻</a></td>
+    <td align="center"><a href="https://petersandor.name/"><img src="https://avatars.githubusercontent.com/u/3933866?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Peter Šándor</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=petersandor" title="Code">💻</a></td>
   </tr>
 </table>
 

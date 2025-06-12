@@ -374,6 +374,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input--${size}`]: size,
       [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD,
+      [`${prefix}--text-input__field-wrapper--decorator`]: hasAILabel,
     });
 
     const fieldOuterWrapperClasses = classMap({
@@ -384,7 +385,6 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     const fieldWrapperClasses = classMap({
       [`${prefix}--text-input__field-wrapper`]: true,
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input__field-wrapper--slug`]: hasAILabel,
     });
 
     const labelClasses = classMap({
@@ -441,13 +441,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
           </label>`
         : null;
 
-    const labelText =
-      label && !hideLabel
-        ? html`<label class="${labelClasses}"> ${label} </label>`
-        : null;
-
     const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
-      ${labelText} ${counter}
+      <label class="${labelClasses}"> ${label} </label> ${counter}
     </div>`;
 
     const helper = helperText
@@ -507,6 +502,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   updated() {
+    this.toggleAttribute('ai-label', this._hasAILabel);
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {

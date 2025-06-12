@@ -239,6 +239,7 @@
   .#{$prefix}--data-table .#{$prefix}--dropdown,
   .#{$prefix}--data-table .#{$prefix}--list-box,
   .#{$prefix}--data-table .#{$prefix}--number input[type='number'],
+  .#{$prefix}--data-table .#{$prefix}--number input[type='text'],
   .#{$prefix}--data-table .#{$prefix}--number__control-btn::before,
   .#{$prefix}--data-table .#{$prefix}--number__control-btn::after,
   .#{$prefix}--data-table .#{$prefix}--text-input,
@@ -836,8 +837,11 @@
       display: none;
     }
 
-    //hides ff scrollbar
-    @document url-prefix() {
+    /* This is for targeting styles specific to firefox */
+    /* To hide the firefox scrollbar */
+    /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+    /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+    @-moz-document url-prefix() {
       thead,
       tbody {
         scrollbar-width: none;
@@ -1133,7 +1137,7 @@
     td.#{$prefix}--table-cell--column-slug,
 
   // Windows HCM fix
-  
+
   .#{$prefix}--data-table-content {
     @include high-contrast-mode('outline');
   }

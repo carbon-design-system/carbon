@@ -14,7 +14,7 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import useResizeObserver from 'use-resize-observer';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
@@ -258,9 +258,7 @@ function CodeSnippet({
   }, [type, getCodeRefDimensions]);
 
   useResizeObserver({
-    // Cast the ref until the hook supports React 19
-    // https://github.com/ZeeCoder/use-resize-observer/issues/108
-    ref: getCodeRef() as React.RefObject<HTMLElement>,
+    ref: getCodeRef(),
     onResize: () => {
       if (codeContentRef?.current && type === 'multi') {
         const { height } = codeContentRef.current.getBoundingClientRect();

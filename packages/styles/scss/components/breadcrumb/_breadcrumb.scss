@@ -49,6 +49,11 @@
     margin-inline-end: $spacing-02;
   }
 
+  .#{$prefix}--breadcrumb--sm .#{$prefix}--breadcrumb-item .#{$prefix}--link {
+    justify-content: center;
+    min-inline-size: $spacing-04;
+  }
+
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
     color: $link-primary;
 
@@ -171,7 +176,7 @@
   .#{$prefix}--breadcrumb-item
     .#{$prefix}--overflow-menu:active
     .#{$prefix}--overflow-menu__icon {
-    fill: $text-primary;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--breadcrumb-menu-options:focus {
