@@ -55,23 +55,17 @@ export interface LayerBaseProps {
 export type LayerProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, LayerBaseProps>;
 
-const Layer = React.forwardRef<
-  any,
-  LayerBaseProps & {
-    as?: React.ElementType;
-  } & React.HTMLAttributes<HTMLDivElement>
->(
-  (
-    {
+const Layer = React.forwardRef(
+  <T extends React.ElementType = 'div'>(props: LayerProps<T>, ref) => {
+    const {
       as,
       className: customClassName,
       children,
       level: overrideLevel,
       withBackground = false,
       ...rest
-    },
-    ref
-  ) => {
+    } = props;
+
     const contextLevel = React.useContext(LayerContext);
     const level = overrideLevel ?? contextLevel;
     const prefix = usePrefix();
