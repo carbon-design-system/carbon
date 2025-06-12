@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -161,7 +161,7 @@ export const RangeWithCalendar = {
 export const RangeWithCalendarWithLayer = {
   render: () => {
     return html`
-      <cds-layer>
+      <sb-template-layers>
         <cds-date-picker>
           <cds-date-picker-input
             kind="from"
@@ -174,35 +174,7 @@ export const RangeWithCalendarWithLayer = {
             placeholder="mm/dd/yyyy">
           </cds-date-picker-input>
         </cds-date-picker>
-        <cds-layer>
-          <cds-date-picker>
-            <cds-date-picker-input
-              kind="from"
-              label-text="Start date"
-              placeholder="mm/dd/yyyy">
-            </cds-date-picker-input>
-            <cds-date-picker-input
-              kind="to"
-              label-text="End date"
-              placeholder="mm/dd/yyyy">
-            </cds-date-picker-input>
-          </cds-date-picker>
-          <cds-layer>
-            <cds-date-picker>
-              <cds-date-picker-input
-                kind="from"
-                label-text="Start date"
-                placeholder="mm/dd/yyyy">
-              </cds-date-picker-input>
-              <cds-date-picker-input
-                kind="to"
-                label-text="End date"
-                placeholder="mm/dd/yyyy">
-              </cds-date-picker-input>
-            </cds-date-picker>
-          </cds-layer>
-        </cds-layer>
-      </cds-layer>
+      </sb-template-layers>
     `;
   },
 };
