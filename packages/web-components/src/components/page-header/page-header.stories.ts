@@ -70,7 +70,7 @@ export const Default = {
         </cds-page-header-content-text>
       </cds-page-header-content>
       <cds-page-header-tabs>
-        <cds-tabs slot="tabs" value="tab-1">
+        <cds-tabs value="tab-1">
           <cds-tab id="tab-1" target="tab-panel-1" value="tab-1">Tab 1</cds-tab>
           <cds-tab id="tab-2" target="tab-panel-2" value="tab-2">Tab 2</cds-tab>
           <cds-tab id="tab-3" target="tab-panel-3" value="tab-3">Tab 3</cds-tab>
@@ -228,7 +228,7 @@ export const TabBarWithTabsAndTags = {
           </cds-page-header-content-text>
         </cds-page-header-content>
         <cds-page-header-tabs>
-          <cds-tabs slot="tabs" value="tab-1">
+          <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
             >

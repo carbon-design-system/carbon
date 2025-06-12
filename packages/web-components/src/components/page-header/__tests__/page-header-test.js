@@ -155,7 +155,7 @@ describe('cds-page-header', function () {
     it('should render', async () => {
       const el = await fixture(
         html` <cds-page-header-tabs>
-          <cds-tabs slot="tabs" value="tab-1">
+          <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
             >
@@ -172,7 +172,7 @@ describe('cds-page-header', function () {
     it('should render tabs', async () => {
       const el = await fixture(
         html` <cds-page-header-tabs>
-          <cds-tabs slot="tabs" value="tab-1">
+          <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
             >
@@ -183,21 +183,15 @@ describe('cds-page-header', function () {
         </cds-page-header-tabs>`
       );
 
-      const slot = el.shadowRoot.querySelector('slot[name="tabs"]');
-      const assigned = slot.assignedNodes({ flatten: true });
+      const tabs = el.querySelector('cds-tabs');
+      expect(tabs).to.exist;
 
-      const tabsComponent = assigned.find(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE &&
-          node.tagName.toLowerCase() === 'cds-tabs'
-      );
+      await tabs.updateComplete;
 
-      expect(tabsComponent).to.exist;
-
-      const tabs = tabsComponent.querySelectorAll('cds-tab');
-      expect(tabs.length).to.equal(2);
-      expect(tabs[0].textContent).to.include('Tab 1');
-      expect(tabs[1].textContent).to.include('Tab 2');
+      const tab = tabs.querySelectorAll('cds-tab');
+      expect(tab.length).to.equal(2);
+      expect(tab[0].textContent).to.include('Tab 1');
+      expect(tab[1].textContent).to.include('Tab 2');
     });
 
     it('should render tags', async () => {
