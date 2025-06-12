@@ -23,7 +23,7 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   /**
    * Specify if breadcrumb bar has bottom border.
    */
-  @property({ reflect: true, type: Boolean })
+  @property({ reflect: true })
   border = true;
 
   /**
@@ -82,7 +82,6 @@ class CDSPageHeaderBreadcrumb extends LitElement {
       border,
       withinGrid,
       pageActionsFlush,
-      contentActionsFlush,
       _hasContentActions: hasContentActions,
       _hasPageActions: hasPageActions,
       _handleContentActionsSlotChange: handleContentActionsSlotChange,
@@ -99,11 +98,6 @@ class CDSPageHeaderBreadcrumb extends LitElement {
       [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
     });
 
-    const contentActionsClasses = classMap({
-      [`${prefix}--page-header__breadcrumb__content-actions`]:
-        !contentActionsFlush,
-    });
-
     return html`
       <div class="${breadcrumbBarClasses}">
         <div class="${gridClasses}">
@@ -115,10 +109,10 @@ class CDSPageHeaderBreadcrumb extends LitElement {
                 <slot></slot>
               </div>
               <div class="${prefix}--page-header__breadcrumb__actions">
-                  <slot
-                    name="content-actions"
-                    @slotchange=${handleContentActionsSlotChange}>
-                  </slot>
+                <slot
+                  name="content-actions"
+                  @slotchange=${handleContentActionsSlotChange}>
+                </slot>
                 <slot
                   name="page-actions"
                   @slotchange=${handlePageActionsSlotChange}>

@@ -137,7 +137,7 @@ export const Default = {
 export const ContentWithContextualActions = {
   render: () =>
     html`<cds-page-header>
-      <cds-page-header-breadcrumb border>
+      <cds-page-header-breadcrumb>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -176,7 +176,7 @@ export const ContentWithContextualActions = {
 export const ContentWithContextualActionsAndPageActions = {
   render: () =>
     html`<cds-page-header>
-      <cds-page-header-breadcrumb border>
+      <cds-page-header-breadcrumb>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -223,7 +223,7 @@ export const ContentWithHeroImage = {
     <cds-page-header>
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <cds-page-header-breadcrumb border=false>
+          <cds-page-header-breadcrumb border=false within-grid>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -273,7 +273,7 @@ export const ContentWithHeroImage = {
 export const ContentWithIcon = {
   render: () =>
     html`<cds-page-header>
-      <cds-page-header-breadcrumb border>
+      <cds-page-header-breadcrumb>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -310,7 +310,7 @@ export const ContentWithIcon = {
 export const TabBarWithTabsAndTags = {
   render: () =>
     html`<cds-page-header>
-        <cds-page-header-breadcrumb border>
+        <cds-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
           <cds-breadcrumb>
             <cds-breadcrumb-item>

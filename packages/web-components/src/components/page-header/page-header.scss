@@ -32,10 +32,6 @@ $css--plex: true !default;
 :host(#{$prefix}-page-header-breadcrumb) {
   @extend .#{$prefix}--page-header__breadcrumb-bar;
 
-  .#{$prefix}--page-header__breadcrumb-bar {
-    display: flex;
-  }
-
   .#{$prefix}--page-header__breadcrumb-container {
     @extend .#{$prefix}--page-header__breadcrumb-container;
   }
@@ -49,7 +45,6 @@ $css--plex: true !default;
 
     max-inline-size: 50%;
   }
-
 
   ::slotted([slot='icon']) {
     @extend .#{$prefix}--page-header__breadcrumb__icon;
