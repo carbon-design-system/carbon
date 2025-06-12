@@ -1,13 +1,16 @@
 /**
+ * @license
+ *
  * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import { property, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -37,58 +40,20 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   pageActionsFlush = false;
 
   /**
-   * Set to `true` if there are content actions
+   * Set to `true` if content actions should be flush (no padding)
    */
-  @state()
-  private _hasContentActions = false;
-
-  /**
-   * Set to `true` if there are page actions
-   */
-  @state()
-  private _hasPageActions = false;
-
-  /**
-   * Handles `slotchange` event for content actions.
-   */
-  protected _handleContentActionsSlotChange({ target }: Event) {
-    this._hasContentActions = Boolean(
-      (target as HTMLSlotElement).assignedNodes().length
-    );
-    this.requestUpdate();
-  }
-
-  /**
-   * Handles `slotchange` event for page actions.
-   */
-  protected _handlePageActionsSlotChange({ target }: Event) {
-    this._hasPageActions = Boolean(
-      (target as HTMLSlotElement).assignedNodes().length
-    );
-    this.requestUpdate();
-  }
+  @property({ attribute: 'content-actions-flush', type: Boolean })
+  contentActionsFlush = false;
 
   render() {
-    const {
-      withinGrid,
-      pageActionsFlush,
-      _hasContentActions: hasContentActions,
-      _hasPageActions: hasPageActions,
-      _handleContentActionsSlotChange: handleContentActionsSlotChange,
-      _handlePageActionsSlotChange: handlePageActionsSlotChange,
-    } = this;
+    const { withinGrid } = this;
     const gridClasses = classMap({
       [`${prefix}--css-grid`]: !withinGrid,
       [`${prefix}--subgrid ${prefix}--subgrid--wide`]: withinGrid,
     });
 
-    const breadcrumbBarClasses = classMap({
-      [`${prefix}--page-header__breadcrumb-bar`]: true,
-      [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
-    });
-
     return html`
-      <div class="${breadcrumbBarClasses}">
+      <div class="${prefix}--page-header__breadcrumb-bar">
         <div class="${gridClasses}">
           <div
             class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column">
@@ -98,14 +63,8 @@ class CDSPageHeaderBreadcrumb extends LitElement {
                 <slot></slot>
               </div>
               <div class="${prefix}--page-header__breadcrumb__actions">
-                <slot
-                  name="content-actions"
-                  @slotchange=${handleContentActionsSlotChange}>
-                </slot>
-                <slot
-                  name="page-actions"
-                  @slotchange=${handlePageActionsSlotChange}>
-                </slot>
+                <slot name="content-actions"></slot>
+                <slot name="page-actions"></slot>
               </div>
             </div>
           </div>

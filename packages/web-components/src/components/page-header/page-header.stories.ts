@@ -59,78 +59,142 @@ const tags = [
   },
 ];
 
+const args = {
+  border: true,
+  pageActionsFlush: false,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
+
+const argTypes = {
+  border: {
+    description:
+      'Specify whether to render `cds-page-header-breadcrumb` border',
+    control: 'boolean',
+  },
+  pageActionsFlush: {
+    description:
+      'Specify whether the page actions within `cds-page-header-breadcrumb` should be flush',
+    control: 'boolean',
+  },
+  contentActionsFlush: {
+    description:
+      'Specify whether the content actions within `cds-page-header-breadcrumb` should be flush with the page actions',
+    control: 'boolean',
+  },
+  title: {
+    description:
+      'Provide the title text to be rendered within  `cds-page-header-content`',
+    control: 'text',
+  },
+  renderBreadcrumbIcon: {
+    description:
+      'Specify whether to render the `cds-page-header-breadcrumb` icon (storybook control only)',
+    control: 'boolean',
+  },
+};
+
 export const Default = {
-  render: () => html`
-    <cds-page-header>
-      <cds-page-header-breadcrumb>
-        ${Bee16({ slot: 'icon' })}
-        <cds-breadcrumb>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-        </cds-breadcrumb>
-        <div slot="content-actions">
-          <cds-button size="md">Button</cds-button>
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      border,
+      pageActionsFlush,
+      contentActionsFlush,
+      title,
+      renderBreadcrumbIcon,
+    } = args ?? {};
+    return html`
+      <cds-page-header>
+        <cds-page-header-breadcrumb
+          border="${border}"
+          ?page-actions-flush="${pageActionsFlush}"
+          ?content-actions-flush="${contentActionsFlush}">
+          ${renderBreadcrumbIcon ? Bee16({ slot: 'icon' }) : undefined}
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+          <div slot="content-actions">
+            <cds-button size="md">Button</cds-button>
+          </div>
+          <cds-icon-button slot="page-actions" kind="ghost" size="md"
+            >${Activity16()}</cds-icon-button
+          >
+          <cds-icon-button slot="page-actions" kind="ghost" size="md"
+            >${AiGenerate16()}</cds-icon-button
+          >
+          <cds-icon-button slot="page-actions" kind="ghost" size="md"
+            >${CloudFoundry16()}</cds-icon-button
+          >
+        </cds-page-header-breadcrumb>
+        <cds-page-header-content title="${title}">
+          <cds-page-header-content-text subtitle="Subtitle">
+            Neque massa fames auctor maecenas leo. Mollis vehicula per, est
+            justo. Massa elementum class enim malesuada lacinia hendrerit enim
+            erat pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula
+            congue. Nisi molestie primis lorem nascetur sem metus mattis etiam
+            scelerisque.
+          </cds-page-header-content-text>
+        </cds-page-header-content>
+        <cds-page-header-tabs>
+          <cds-tabs value="tab-1">
+            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+              >Tab 1</cds-tab
+            >
+            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+              >Tab 2</cds-tab
+            >
+            <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+              >Tab 3</cds-tab
+            >
+            <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+              >Tab 4</cds-tab
+            >
+            <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+              >Tab 5</cds-tab
+            >
+            <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+              >Tab 6</cds-tab
+            >
+            <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+              >Tab 7</cds-tab
+            >
+          </cds-tabs>
+        </cds-page-header-tabs>
+      </cds-page-header>
+      <div class="${prefix}-ce-demo-devenv--tab-panels">
+        <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+          Tab Panel 1
         </div>
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${Activity16()}</cds-icon-button
-        >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${AiGenerate16()}</cds-icon-button
-        >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${CloudFoundry16()}</cds-icon-button
-        >
-      </cds-page-header-breadcrumb>
-      <cds-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long">
-        <cds-page-header-content-text subtitle="Subtitle">
-          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-          Massa elementum class enim malesuada lacinia hendrerit enim erat
-          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-          Nisi molestie primis lorem nascetur sem metus mattis etiam
-          scelerisque.
-        </cds-page-header-content-text>
-      </cds-page-header-content>
-      <cds-page-header-tabs>
-        <cds-tabs value="tab-1">
-          <cds-tab id="tab-1" target="tab-panel-1" value="tab-1">Tab 1</cds-tab>
-          <cds-tab id="tab-2" target="tab-panel-2" value="tab-2">Tab 2</cds-tab>
-          <cds-tab id="tab-3" target="tab-panel-3" value="tab-3">Tab 3</cds-tab>
-          <cds-tab id="tab-4" target="tab-panel-4" value="tab-4">Tab 4</cds-tab>
-          <cds-tab id="tab-5" target="tab-panel-5" value="tab-5">Tab 5</cds-tab>
-          <cds-tab id="tab-6" target="tab-panel-6" value="tab-6">Tab 6</cds-tab>
-          <cds-tab id="tab-7" target="tab-panel-7" value="tab-7">Tab 7</cds-tab>
-        </cds-tabs>
-      </cds-page-header-tabs>
-    </cds-page-header>
-    <div class="${prefix}-ce-demo-devenv--tab-panels">
-      <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
-        Tab Panel 1
+        <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+          Tab Panel 2
+        </div>
+        <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+          Tab Panel 3
+        </div>
+        <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+          Tab Panel 4
+        </div>
+        <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+          Tab Panel 5
+        </div>
+        <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
+          Tab Panel 6
+        </div>
+        <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
+          Tab Panel 7
+        </div>
       </div>
-      <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
-        Tab Panel 2
-      </div>
-      <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
-        Tab Panel 3
-      </div>
-      <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
-        Tab Panel 4
-      </div>
-      <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
-        Tab Panel 5
-      </div>
-      <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
-        Tab Panel 6
-      </div>
-      <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
-        Tab Panel 7
-      </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const ContentWithContextualActions = {
