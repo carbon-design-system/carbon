@@ -18,7 +18,7 @@ describe('cds-breadcrumb', () => {
     expect(el.getAttribute('aria-label')).to.equal('test-label');
   });
 
-  xit('should provide a default `aria-label` for nav element', async () => {
+  it('should provide a default `aria-label` for nav element', async () => {
     const el = await fixture(html` <cds-breadcrumb></cds-breadcrumb> `);
     await expect(el).dom.to.equalSnapshot();
 

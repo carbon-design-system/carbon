@@ -20,12 +20,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-breadcrumb`)
 class CDSBreadcrumb extends LitElement {
   /**
-   * The `aria-label` for the breadcrumb. Default is 'Breadcrumb'.
-   */
-  @property()
-  label = 'Breadcrumb';
-
-  /**
    * Optional prop to omit the trailing slash for the breadcrumbs
    */
   @property({ type: Boolean, reflect: true, attribute: 'no-trailing-slash' })
@@ -56,6 +50,9 @@ class CDSBreadcrumb extends LitElement {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'navigation');
     }
+    if (!this.hasAttribute('aria-label')) {
+      this.setAttribute('aria-label', 'Breadcrumb');
+    }
     super.connectedCallback();
   }
 
@@ -66,9 +63,6 @@ class CDSBreadcrumb extends LitElement {
         const link = item.querySelector(`${prefix}-breadcrumb-link`);
         link?.setAttribute('size', this.size);
       });
-    }
-    if (changedProperties.has('label')) {
-      this.setAttribute('aria-label', this.label || 'Breadcrumb');
     }
   }
 

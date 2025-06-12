@@ -25,18 +25,17 @@ const sizes = {
   [`Medium size (${BREADCRUMB_SIZE.MEDIUM})`]: BREADCRUMB_SIZE.MEDIUM,
 };
 const args = {
-  label: '',
+  ariaLabel: '',
   className: '',
   noTrailingSlash: false,
   size: BREADCRUMB_SIZE.MEDIUM,
 };
 
 const argTypes = {
-  label: {
+  ariaLabel: {
     control: 'text',
-    description:
-      'Specify the label for the breadcrumb container. Also used for `aria-label`.',
-    name: 'label',
+    description: 'Specify the aria-label for the breadcrumb container.',
+    name: 'aria-label',
   },
   className: {
     control: 'text',
@@ -59,13 +58,13 @@ export const Default = {
   args,
   argTypes,
   render: (args) => {
-    const { className, label, noTrailingSlash, size } = args ?? {};
+    const { className, ariaLabel, noTrailingSlash, size } = args ?? {};
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
         .class="${className}"
         .size="${size}"
-        .label="${label}">
+        aria-label="${ariaLabel}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
@@ -87,12 +86,13 @@ export const BreadcrumbWithOverflowMenu = {
   args,
   argTypes,
   render: (args) => {
-    const { className, noTrailingSlash, size } = args ?? {};
+    const { ariaLabel, className, noTrailingSlash, size } = args ?? {};
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
         .class="${className}"
-        .size="${size}">
+        .size="${size}"
+        aria-label="${ariaLabel}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
