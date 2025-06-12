@@ -289,5 +289,26 @@ describe('MenuItem', () => {
       expect(items[0]).toHaveAttribute('tabindex', '-1');
       expect(items[1]).toHaveAttribute('tabindex', '0');
     });
+
+    it('moves focus to submenu when opening via ArrowRight key', async () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Parent">
+            <MenuItem label="Child" />
+          </MenuItem>
+        </Menu>
+      );
+
+      const parentItem = screen.getAllByRole('menuitem')[0];
+      parentItem.focus();
+      expect(parentItem).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowRight}');
+
+      const child = screen.getByRole('menuitem', { name: 'Child' });
+      expect(child).toBeVisible();
+
+      expect(child).toHaveFocus();
+    });
   });
 });
