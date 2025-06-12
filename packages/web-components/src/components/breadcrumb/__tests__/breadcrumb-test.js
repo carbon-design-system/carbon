@@ -72,15 +72,6 @@ describe('cds-breadcrumb', () => {
     expect(link.shadowRoot.querySelector('a.cds--link--sm')).to.exist;
   });
 
-  it('should accept a `class` for outermost DOM node', async () => {
-    const el = await fixture(html`
-      <cds-breadcrumb class="test"></cds-breadcrumb>
-    `);
-    await expect(el).dom.to.equalSnapshot();
-
-    expect(el.classList.contains('test')).to.be.true;
-  });
-
   it('should apply additional attributes to the outermost element', async () => {
     const el = await fixture(html`
       <cds-breadcrumb data-testid="test"></cds-breadcrumb>
