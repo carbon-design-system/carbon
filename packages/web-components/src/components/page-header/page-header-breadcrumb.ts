@@ -1,12 +1,3 @@
-/**
- * @license
- *
- * Copyright IBM Corp. 2025, 2025
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
@@ -38,12 +29,6 @@ class CDSPageHeaderBreadcrumb extends LitElement {
    */
   @property({ attribute: 'page-actions-flush', type: Boolean })
   pageActionsFlush = false;
-
-  /**
-   * Set to `true` if content actions should be flush (no padding)
-   */
-  @property({ attribute: 'content-actions-flush', type: Boolean })
-  contentActionsFlush = false;
 
   /**
    * Set to `true` if there are content actions
@@ -79,7 +64,6 @@ class CDSPageHeaderBreadcrumb extends LitElement {
 
   render() {
     const {
-      border,
       withinGrid,
       pageActionsFlush,
       _hasContentActions: hasContentActions,
@@ -87,7 +71,6 @@ class CDSPageHeaderBreadcrumb extends LitElement {
       _handleContentActionsSlotChange: handleContentActionsSlotChange,
       _handlePageActionsSlotChange: handlePageActionsSlotChange,
     } = this;
-    console.log(border);
     const gridClasses = classMap({
       [`${prefix}--css-grid`]: !withinGrid,
       [`${prefix}--subgrid ${prefix}--subgrid--wide`]: withinGrid,

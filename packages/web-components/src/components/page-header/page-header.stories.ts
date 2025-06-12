@@ -20,7 +20,6 @@ import image2 from './_story-assets/3x2.jpg';
 import { breakpoints } from '@carbon/layout';
 
 import Add16 from '@carbon/icons/lib/add/16.js';
-import Analytics16 from '@carbon/icons/lib/analytics/16.js';
 import Bee32 from '@carbon/icons/lib/bee/32.js';
 import Bee16 from '@carbon/icons/lib/bee/16.js';
 import Activity16 from '@carbon/icons/lib/activity/16.js';
