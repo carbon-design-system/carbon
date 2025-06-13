@@ -192,6 +192,14 @@
     display: flex;
     align-items: center;
     justify-content: right;
+    padding-inline-end: 0;
+
+    @include breakpoint(md) {
+      padding-inline-end: $spacing-03;
+    }
+    @include breakpoint(max) {
+      padding-inline-end: $spacing-05;
+    }
   }
 
   .#{$prefix}--page-header__tags-popover-list {
