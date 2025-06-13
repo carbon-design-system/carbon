@@ -801,7 +801,7 @@ describe('PageHeader', () => {
       );
       expect(screen.getByLabelText('Collapse')).toBeInTheDocument();
     });
-    it('should render call function passed to scroller', async () => {
+    it('should call onClick function passed to scroller', async () => {
       const scrollerOnClick = jest.fn();
       render(
         <PageHeader.Root>

@@ -566,13 +566,27 @@ export const CollapseAndExpand = (args) => {
           </PageHeader.TabBar>
         </PageHeader.Root>
         <TabPanels>
-          <TabPanel style={{ height: '200vh' }}>Tab Panel 1</TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-          <TabPanel>Tab Panel 4</TabPanel>
-          <TabPanel>Tab Panel 5</TabPanel>
-          <TabPanel>Tab Panel 6</TabPanel>
-          <TabPanel>Tab Panel 7</TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 1
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 2
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 3
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 4
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 5
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 6
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 7
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </div>
