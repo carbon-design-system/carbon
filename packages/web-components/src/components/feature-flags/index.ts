@@ -1,4 +1,10 @@
 /**
+ * Copyright IBM Corp. 2025, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+/**
  * <feature-flags> provides scoped feature flags to child components.
  *
  * Usage:
@@ -23,11 +29,18 @@ import {
   createScope,
 } from '@carbon/feature-flags';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { LitElement, html } from 'lit';
+
+/**
+ * Feature Flgs
+ *
+ * @element feature-flags
+ */
 
 type FeatureFlags = Record<string, boolean>;
 
 @customElement('feature-flags')
-class FeatureFlagsElement extends HTMLElement {
+class FeatureFlagsElement extends LitElement {
   private scope = GlobalFeatureFlags;
   private flags: FeatureFlags = {};
 
@@ -49,8 +62,8 @@ class FeatureFlagsElement extends HTMLElement {
   }
 
   connectedCallback() {
+    super.connectedCallback();
     this.updateScope();
-    this.render();
   }
 
   attributeChangedCallback(
@@ -83,8 +96,8 @@ class FeatureFlagsElement extends HTMLElement {
     this.scope = newScope;
   }
 
-  private render() {
-    this.shadowRoot!.innerHTML = `<slot></slot>`;
+  render() {
+    return html` <slot></slot> `;
   }
 
   public isFeatureFlagEnabled(flag: string): boolean {
