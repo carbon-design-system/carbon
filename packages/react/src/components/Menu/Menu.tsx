@@ -378,8 +378,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   useEffect(() => {
-    if (open && focusableItems.length > 0) {
-      focusItem();
+    if (open) {
+      const raf = requestAnimationFrame(() => {
+        if (focusableItems.length > 0) {
+          focusItem();
+        }
+      });
+
+      return () => cancelAnimationFrame(raf);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, focusableItems]);
