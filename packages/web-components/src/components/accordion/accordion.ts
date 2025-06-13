@@ -40,6 +40,12 @@ class CDSAccordion extends LitElement {
   @property({ type: Boolean, reflect: true })
   isFlush = false;
 
+  /**
+   * Disable all accordion items inside this accordion.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'list');
@@ -83,6 +89,21 @@ class CDSAccordion extends LitElement {
           this.isFlush && this.alignment !== 'start'
             ? elem.setAttribute('isFlush', '')
             : elem.removeAttribute('isFlush');
+        }
+      );
+    }
+
+    if (changedProperties.has('disabled')) {
+      forEach(
+        this.querySelectorAll(
+          (this.constructor as typeof CDSAccordion).selectorAccordionItems
+        ),
+        (elem) => {
+          if (this.disabled) {
+            elem.setAttribute('disabled', '');
+          } else {
+            elem.removeAttribute('disabled');
+          }
         }
       );
     }
