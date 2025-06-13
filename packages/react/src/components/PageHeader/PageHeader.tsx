@@ -102,6 +102,12 @@ const scrollableAncestor = (target: HTMLElement) => {
   return scrollableAncestorInner(target);
 };
 
+/**
+ * -------------
+ * Context setup
+ * -------------
+ */
+
 type PageHeaderRefs = {
   contentRef?: RefObject<HTMLDivElement>;
   baseRef?: RefObject<HTMLDivElement>;
@@ -706,6 +712,17 @@ const PageHeaderTabBar = React.forwardRef<
     },
     className
   );
+
+  const renderScroller = () => (
+    <>
+      {scroller && (
+        <div className={`${prefix}--page-header--scroller-button-container`}>
+          {scroller}
+        </div>
+      )}
+    </>
+  );
+
   // Early return if no tags are provided
   if (!tags.length) {
     return (
@@ -713,6 +730,7 @@ const PageHeaderTabBar = React.forwardRef<
         <Grid>
           <Column lg={16} md={8} sm={4}>
             {children}
+            {renderScroller()}
           </Column>
         </Grid>
       </div>
@@ -729,7 +747,6 @@ const PageHeaderTabBar = React.forwardRef<
   }, [tags]);
 
   const tagsContainerRef = useRef<HTMLDivElement>(null);
-  const tagsAndScrollerRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef<HTMLDivElement>(null);
   // To close popover when window resizes
   useEffect(() => {
@@ -751,7 +768,7 @@ const PageHeaderTabBar = React.forwardRef<
     itemRefHandler = () => {},
   } = useOverflowItems<TagItem>(
     tagsWithIds,
-    tagsAndScrollerRef as React.RefObject<HTMLDivElement>,
+    tagsContainerRef as React.RefObject<HTMLDivElement>,
     offsetRef as React.RefObject<HTMLDivElement>
   ) || {
     visibleItems: [],
@@ -808,12 +825,8 @@ const PageHeaderTabBar = React.forwardRef<
         <Column lg={16} md={8} sm={4}>
           <div className={`${prefix}--page-header__tab-bar--tablist`}>
             {children}
-            <div
-              ref={tagsAndScrollerRef}
-              className={`${prefix}--page-header__tab-bar--tag-scroller-wrapper`}>
-              {tags.length > 0 && renderTags()}
-              {scroller}
-            </div>
+            {tags.length > 0 && renderTags()}
+            {renderScroller()}
           </div>
         </Column>
       </Grid>
@@ -845,7 +858,7 @@ const PageHeaderScrollButton = React.forwardRef<
   const { refs } = usePageHeader();
   const [fullyCollapsed, setFullyCollapsed] = useState(false);
 
-  // Intersection Observer to track if PageHeaderContent is visible on page
+  // Intersection Observer to track if the PageHeaderContent is visible on page.
   // If it is not visible, we should set fully collapsed to true so that the
   // scroller button will know if it is clicked to expand rather than
   // collapse the header
@@ -877,7 +890,7 @@ const PageHeaderScrollButton = React.forwardRef<
     };
   }, [refs]);
 
-  const handleScroller = (event, isFullyCollapsed: boolean) => {
+  const handleScroller = (isFullyCollapsed: boolean) => {
     if (!refs?.contentRef?.current) return;
     const scrollableTarget = scrollableAncestor(
       refs?.contentRef.current
@@ -899,33 +912,28 @@ const PageHeaderScrollButton = React.forwardRef<
   const prefix = usePrefix();
 
   return (
-    <div className={`${prefix}--page-header--scroller-button-container`}>
-      <IconButton
-        ref={ref}
-        label={fullyCollapsed ? expandText : collapseText}
-        size="md"
-        kind="ghost"
-        autoAlign
-        {...other}
-        onClick={(event) => {
-          onClick?.(event);
-          handleScroller(event, fullyCollapsed);
-        }}
-        className={classnames(
-          className,
-          `${prefix}--page-header--scroller-button`
-        )}>
-        <ChevronUp
-          className={classnames(
-            `${prefix}--page-header--scroller-button-icon`,
-            {
-              [`${prefix}--page-header--scroller-button-icon-collapsed`]:
-                fullyCollapsed,
-            }
-          )}
-        />
-      </IconButton>
-    </div>
+    <IconButton
+      ref={ref}
+      label={fullyCollapsed ? expandText : collapseText}
+      size="md"
+      kind="ghost"
+      autoAlign
+      {...other}
+      onClick={(event) => {
+        onClick?.(event);
+        handleScroller(fullyCollapsed);
+      }}
+      className={classnames(
+        className,
+        `${prefix}--page-header--scroller-button`
+      )}>
+      <ChevronUp
+        className={classnames(`${prefix}--page-header--scroller-button-icon`, {
+          [`${prefix}--page-header--scroller-button-icon-collapsed`]:
+            fullyCollapsed,
+        })}
+      />
+    </IconButton>
   );
 });
 

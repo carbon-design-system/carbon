@@ -204,11 +204,6 @@
     flex-shrink: 0;
   }
 
-  .#{$prefix}--page-header__tab-bar--tag-scroller-wrapper {
-    display: flex;
-    justify-content: flex-end;
-  }
-
   .#{$prefix}--page-header--scroller-button-icon {
     transition: transform $transition-expansion;
     @media (prefers-reduced-motion: reduce) {

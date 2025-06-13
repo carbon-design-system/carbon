@@ -38,7 +38,6 @@ jest.mock('@carbon/utilities', () => ({
 }));
 
 describe('PageHeader', () => {
-  let consoleErrorSpy;
   beforeEach(() => {
     mockUseOverflowItems.mockReset();
     mockUseOverflowItems.mockReturnValue({
@@ -46,17 +45,6 @@ describe('PageHeader', () => {
       hiddenItems: [],
       itemRefHandler: jest.fn(),
     });
-    consoleErrorSpy = jest
-      .spyOn(console, 'error')
-      .mockImplementation((message) => {
-        expect(message).toBe(
-          'Page header context was not provided or hook was used outside of the Page header component.'
-        );
-      });
-  });
-
-  afterEach(() => {
-    consoleErrorSpy.mockRestore();
   });
 
   describe('export configuration', () => {
@@ -178,9 +166,9 @@ describe('PageHeader', () => {
   describe('PageHeader.Content component api', () => {
     it('should render', () => {
       const { container } = render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeader.Content title="title" />
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
       expect(container.firstChild).toBeInTheDocument();
     });
@@ -188,13 +176,13 @@ describe('PageHeader', () => {
     it('should place className on the outermost element', () => {
       const contentRef = React.createRef();
       const { container } = render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeader.Content
             ref={contentRef}
             className="custom-class"
             title="title"
           />
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
       expect(contentRef.current).toHaveClass(`${prefix}--page-header__content`);
       expect(contentRef.current).toHaveClass('custom-class');
@@ -202,9 +190,9 @@ describe('PageHeader', () => {
 
     it('should render a title', () => {
       render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeader.Content title="Page header content title" />
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
 
       expect(screen.getByText('Page header content title')).toBeInTheDocument();
@@ -212,13 +200,13 @@ describe('PageHeader', () => {
 
     it('should render an icon', () => {
       const { container } = render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeader.Content
             title="title"
             renderIcon={() => {
               return <Bee size={32} />;
             }}></PageHeader.Content>
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
 
       const icon = container.querySelector(
@@ -229,11 +217,11 @@ describe('PageHeader', () => {
 
     it('should render children', () => {
       render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeader.Content title="title">
             Children content
           </PageHeader.Content>
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
 
       expect(screen.getByText('Children content')).toBeInTheDocument();
@@ -241,7 +229,7 @@ describe('PageHeader', () => {
 
     it('should render contextual actions', () => {
       const { container } = render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeader.Content
             title="title"
             contextualActions={
@@ -251,7 +239,7 @@ describe('PageHeader', () => {
                 <div>action 3</div>
               </>
             }></PageHeader.Content>
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
 
       const pageActions = container.querySelector(
@@ -262,11 +250,11 @@ describe('PageHeader', () => {
 
     it('should render page actions', () => {
       const { container } = render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeader.Content
             title="title"
             pageActions={<button>page actions</button>}></PageHeader.Content>
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
 
       const buttonElement = screen.getByText(/page actions/i);
@@ -792,7 +780,7 @@ describe('PageHeader', () => {
         unobserve: () => null,
       }));
     });
-    it('should render a tab bar with the expand/collapse button', () => {
+    it('should render a tab bar with scroller button and tags', () => {
       render(
         <PageHeader.Root>
           <PageHeader.Content>Hello</PageHeader.Content>
@@ -800,6 +788,15 @@ describe('PageHeader', () => {
             tags={mockTags}
             scroller={<PageHeader.ScrollButton />}
           />
+        </PageHeader.Root>
+      );
+      expect(screen.getByLabelText('Collapse')).toBeInTheDocument();
+    });
+    it('should render a tab bar with scroller button and without passing tags', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeaderTabBarDirect scroller={<PageHeader.ScrollButton />} />
         </PageHeader.Root>
       );
       expect(screen.getByLabelText('Collapse')).toBeInTheDocument();

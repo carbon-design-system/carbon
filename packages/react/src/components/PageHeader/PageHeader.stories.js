@@ -523,9 +523,9 @@ export const CollapseAndExpand = (args) => {
           isFixedNav>
           <SideNavItems>
             <SideNavLink
-              href="https://pages.github.ibm.com/carbon/ibm-products/"
+              href="https://www.carbondesignsystem.com"
               target="_blank">
-              Sample link: Carbon for IBM Products
+              Carbon Design System
             </SideNavLink>
           </SideNavItems>
         </SideNav>
