@@ -14,7 +14,7 @@ import React, {
   type MouseEvent,
 } from 'react';
 import PropTypes from 'prop-types';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import {
   ListBoxSizePropType,
   ListBoxTypePropType,
