@@ -8,7 +8,6 @@ import React from 'react';
 import { Add } from '@carbon/icons-react';
 import { unstable__PageHeader as PageHeader } from '../../';
 import {
-  PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
