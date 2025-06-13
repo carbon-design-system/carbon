@@ -972,6 +972,48 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
 
+  it('passes inputProps to the input element', async () => {
+    render(
+      <FilterableMultiSelect
+        id="test-combo"
+        items={[{ label: 'Item 1' }]}
+        itemToString={(item) => item?.label || ''}
+        inputProps={{
+          maxLength: 10,
+          placeholder: 'Type here',
+          'aria-label': 'Choose an item',
+          'aria-controls': 'test-combo__menu',
+          tabIndex: '0',
+          type: 'text',
+        }}
+      />
+    );
+    const input = screen.getByPlaceholderText('Type here');
+    const attributes = Array.from(input.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
+
+    expect(input).toBeInTheDocument();
+    expect(attributes).toEqual({
+      'aria-activedescendant': '',
+      'aria-autocomplete': 'list',
+      'aria-controls': 'test-combo__menu',
+      'aria-expanded': 'false',
+      'aria-haspopup': 'listbox',
+      'aria-label': 'Choose an item',
+      autocomplete: 'off',
+      class: 'cds--text-input cds--text-input--empty',
+      id: 'test-combo-input',
+      maxlength: '10',
+      placeholder: 'Type here',
+      role: 'combobox',
+      tabindex: '0',
+      type: 'text',
+      value: '',
+    });
+  });
+
   it('should lose focus in one click after interacting with menu items', async () => {
     const user = userEvent.setup();
     render(<FilterableMultiSelect {...mockProps} />);
