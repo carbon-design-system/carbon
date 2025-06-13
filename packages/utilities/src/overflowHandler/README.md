@@ -22,7 +22,7 @@ const initializeHandler = () => {
     return;
   }
 
-  // initiate the handler only when the dom settles and is stable, so that the items are at right dimensions before initialization.
+  // initiate the handler only when the DOM settles and is stable, so that the items are at the correct dimensions before initialization.
   requestAnimationFrame(() => {
     handler = createOverflowHandler({
       container: document.querySelector('#visible-items'),
@@ -60,15 +60,14 @@ the width of the container when it's rendered or resized. The handler adds the
 necessary `data-hidden` attributes to the items that should be hidden. These
 items can then be hidden using the following style in the implementation.
 
-In the above example, once the handler has been instantiated, the
-`#visible-items` container will be monitored for changes in `width`. When the
-container is sized smaller than the amount of button elements capable of fitting
-inside, the `data-hidden` attribute will be added to the buttons that are
-considered "hidden". When the size of the container changes the number of
-visible items, the `onChange` handler will be called. `onChange` provides an
-array of hidden and visible nodes in the callback signature. Since the
-`maxVisibleItems` parameter has been set to `5` there should only be 5 buttons
-visible when the handler runs.
+In the above example, the `#visible-items` container will be monitored for
+changes in `width`. When the container is sized smaller than the amount of
+button elements capable of fitting inside, the `data-hidden` attribute will be
+added to the buttons that are considered "hidden". When the size of the
+container changes the number of visible items, the `onChange` handler will be
+called. `onChange` provides an array of hidden and visible nodes in the callback
+signature. Since the `maxVisibleItems` parameter has been set to `5` there
+should only be 5 buttons visible when the handler runs.
 
 ## Attribute definitions
 
@@ -88,8 +87,8 @@ and render them elsewhere, such as a modal or popover.
 ## Re-initialization guidelines
 
 The handler needs to be re-initialized whenever items are added or removed, when
-an item changes its width dynamically, or when the offset changes its width
-dynamically, to update the overflow with the new sizes.
+an item changes it's width dynamically, or when the offset element's width
+changes dynamically, to update the overflow with the new sizes.
 
 ## Example implementation
 
