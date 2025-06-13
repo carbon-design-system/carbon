@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -42,6 +42,44 @@
 
   .#{$prefix}--data-table-content:focus {
     @include focus-outline('outline');
+  }
+
+  //----------------------------------------------------------------------------
+  // Container, full table ai
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-container--ai-enabled {
+    position: relative;
+    // Allow for pseudo element to show for gradient border effect
+    padding: 1px;
+    border: none;
+  }
+
+  .#{$prefix}--data-table-container--ai-enabled::after {
+    position: absolute;
+    z-index: -1;
+    // Used for gradient border effect
+    background-image: linear-gradient(to top, $ai-border-end, $ai-border-start);
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--data-table-container--ai-enabled tbody {
+    position: relative;
+  }
+
+  .#{$prefix}--data-table-container--ai-enabled tbody::before {
+    position: absolute;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset: 0;
+    // Prevents the pseudo element overlay from obstructing click on elements below the overlay
+    pointer-events: none;
+
+    @include ai-table-gradient('full-table');
   }
 
   //----------------------------------------------------------------------------
