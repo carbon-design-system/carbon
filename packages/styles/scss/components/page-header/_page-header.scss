@@ -238,6 +238,20 @@
     }
   }
 
+  @keyframes page-header-title-breadcrumb-animation-reduced-motion {
+    0% {
+      opacity: 0;
+    }
+
+    5% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
   .#{$prefix}--page-header-title-breadcrumb {
     opacity: 0;
     transform: translateY($spacing-05);
@@ -250,6 +264,10 @@
         opacity: 1;
         transform: translateY(0);
       }
+      @media (prefers-reduced-motion: reduce) {
+        transform: translateY(0);
+        transition: opacity motion(standard, productive) $duration-moderate-01;
+      }
     }
     // `animation-timeline: scroll()` only currently supported in Chromium based browsers
     @supports (animation-timeline: scroll()) {
@@ -259,7 +277,8 @@
       animation-timeline: scroll(block nearest);
 
       @media (prefers-reduced-motion: reduce) {
-        transition: none;
+        animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+        transform: translateY(0);
       }
     }
   }

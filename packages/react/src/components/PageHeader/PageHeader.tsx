@@ -37,7 +37,9 @@ import { Grid, Column } from '../Grid';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { ChevronUp } from '@carbon/react/icons';
 import Breadcrumb from '../Breadcrumb';
-import { BreadcrumbItemProps } from '../Breadcrumb/BreadcrumbItem';
+import BreadcrumbItem, {
+  BreadcrumbItemProps,
+} from '../Breadcrumb/BreadcrumbItem';
 
 /**
  * ----------
@@ -342,7 +344,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
           [`${prefix}--page-header-title-breadcrumb-show`]: titleClipped,
         }),
         key: 'cloned title breadcrumb',
-        isCurrentPage: true,
+        ...(element.type === BreadcrumbItem && { isCurrentPage: true }),
       });
       const finalBreadcrumbs = React.cloneElement(
         foundBreadcrumb,

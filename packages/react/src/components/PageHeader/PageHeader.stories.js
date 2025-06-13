@@ -8,7 +8,7 @@ import React from 'react';
 import { Add } from '@carbon/icons-react';
 import { unstable__PageHeader as PageHeader } from '../../';
 import {
-  PageHeader as PageHeaderDirect,
+  PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
@@ -538,7 +538,7 @@ export const CollapseAndExpand = (args) => {
             contentActionsFlush={args.contentActionsFlush}
             renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
             renderTitleBreadcrumb={() => (
-              <BreadcrumbItem href="#" isCurrentPage>
+              <BreadcrumbItem href="#">
                 Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long
               </BreadcrumbItem>
             )}
