@@ -61,6 +61,43 @@ describe('cds-menu-button', function () {
       expect(el.classList.contains('test')).to.be.true;
     });
 
+    describe('renders as expected – Component API', () => {
+      const sizes = ['sm', 'md', 'lg'];
+      const kinds = ['primary', 'tertiary', 'ghost'];
+
+      sizes.forEach((size) => {
+        it(`supports size="${size}"`, async () => {
+          const el = await fixture(html`
+            <cds-menu-button label="Size test" size="${size}">
+              <cds-menu>
+                <cds-menu-item label="Test"></cds-menu-item>
+              </cds-menu>
+            </cds-menu-button>
+          `);
+
+          const button = el.shadowRoot.querySelector('cds-button');
+          expect(button).to.exist;
+          expect(button.size).to.equal(size);
+        });
+      });
+
+      kinds.forEach((kind) => {
+        it(`supports kind="${kind}"`, async () => {
+          const el = await fixture(html`
+            <cds-menu-button label="Kind test" kind="${kind}">
+              <cds-menu>
+                <cds-menu-item label="Test"></cds-menu-item>
+              </cds-menu>
+            </cds-menu-button>
+          `);
+
+          const button = el.shadowRoot.querySelector('cds-button');
+          expect(button).to.exist;
+          expect(button.kind).to.equal(kind);
+        });
+      });
+    });
+
     it('forwards additional props', async () => {
       // Included for parity with React. Custom attributes like data-testid
       // are asserted directly on the custom element.
