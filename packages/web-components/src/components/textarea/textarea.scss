@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/text-area/index';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 
 :host(#{$prefix}-textarea) {
   @include emit-layout-tokens();
@@ -39,7 +40,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-textarea[warn]),
 :host(#{$prefix}-textarea[invalid]) {
-  .#{$prefix}--text-area__wrapper--slug {
+  .#{$prefix}--text-area__wrapper--decorator {
     .#{$prefix}--text-area {
       padding-inline-end: $spacing-10;
     }
@@ -54,4 +55,8 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug[revert-active]) {
     inset-inline-end: $spacing-07;
   }
+}
+:host(#{$prefix}-textarea[ai-label])
+  .#{$prefix}--text-area__wrapper--decorator {
+  @include ai-gradient;
 }
