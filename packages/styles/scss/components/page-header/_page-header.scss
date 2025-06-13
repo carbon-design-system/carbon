@@ -231,6 +231,11 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .#{$prefix}--page-header-title-breadcrumb {
@@ -239,14 +244,14 @@
     transition:
       transform motion(standard, productive) $duration-moderate-01,
       opacity motion(standard, productive) $duration-moderate-01;
-    // Target browsers that do not yet support timeline scrolling
+    // Target browsers that do not yet support animation-timeline: scroll()
     @supports not (animation-timeline: scroll()) {
       &.#{$prefix}--page-header-title-breadcrumb-show {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    // scroll() only currently supported in Chromium based browsers
+    // `animation-timeline: scroll()` only currently supported in Chromium based browsers
     @supports (animation-timeline: scroll()) {
       animation-direction: alternate;
       animation-duration: 1ms; /* Firefox requires this to apply the animation */

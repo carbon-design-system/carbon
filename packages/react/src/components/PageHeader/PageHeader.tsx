@@ -37,6 +37,7 @@ import { Grid, Column } from '../Grid';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { ChevronUp } from '@carbon/react/icons';
 import Breadcrumb from '../Breadcrumb';
+import { BreadcrumbItemProps } from '../Breadcrumb/BreadcrumbItem';
 
 /**
  * ----------
@@ -281,7 +282,7 @@ interface PageHeaderBreadcrumbBarProps {
   /**
    * Text for the title breadcrumb, ie current page
    */
-  renderTitleBreadcrumb?: () => React.ReactElement;
+  renderTitleBreadcrumb?: () => React.ReactElement<BreadcrumbItemProps>;
 }
 const PageHeaderBreadcrumbBar = React.forwardRef<
   HTMLDivElement,
@@ -319,12 +320,24 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
 
   const renderChildren = () => {
     const filteredBreadcrumbs = React.Children.toArray(children).filter(
-      (child) => child.type === Breadcrumb
+      (child) => {
+        if (React.isValidElement(child)) {
+          return child.type === Breadcrumb;
+        }
+      }
     );
     if (filteredBreadcrumbs) {
       const foundBreadcrumb = filteredBreadcrumbs[0];
+      if (!React.isValidElement(foundBreadcrumb)) return;
       const element = renderTitleBreadcrumb?.();
-      const clonedElement = React.cloneElement(element!, {
+
+      // If there isn't a title breadcrumb stop here
+      // and just return the children
+      if (!element) {
+        return children;
+      }
+
+      const clonedElement = React.cloneElement(element, {
         className: classnames(`${prefix}--page-header-title-breadcrumb`, {
           [`${prefix}--page-header-title-breadcrumb-show`]: titleClipped,
         }),
@@ -332,12 +345,17 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
         isCurrentPage: true,
       });
       const finalBreadcrumbs = React.cloneElement(
-        foundBreadcrumb as React.ReactElement,
+        foundBreadcrumb,
         {},
+        // @ts-expect-error Revisit
         [...foundBreadcrumb.props.children.flat(), clonedElement]
       );
       const foundBreadcrumbIndex = React.Children.toArray(children).findIndex(
-        (child) => child.type === Breadcrumb
+        (child) => {
+          if (React.isValidElement(child)) {
+            return child.type === Breadcrumb;
+          }
+        }
       );
       const childrenArray = (React.Children.toArray(children)[
         foundBreadcrumbIndex
