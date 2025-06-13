@@ -167,56 +167,6 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-text-input label="Text input label" helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
-
-export const ReadOnly = {
-  render: () => html`
-    <cds-text-input
-      value="This is read only, you can't type more."
-      readonly="true"
-      label="Text input label"
-      helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
-
-export const Skeleton = {
-  render: () => html` <cds-text-input-skeleton></cds-text-input-skeleton> `,
-};
-
-export const TogglePasswordVisibility = {
-  render: () => html`
-    <cds-text-input
-      type="password"
-      show-password-visibility-toggle
-      label="Text input label"
-      helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
-
-export const WithAILabel = {
-  render: () => html`
-    <cds-text-input label="Text input label" helper-text="Optional help text">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-text-input>
-  `,
-};
-
-export const WithLayer = {
-  render: () => html`
-    <sb-template-layers>
-      <cds-text-input label="Text input label" helper-text="Optional help text">
-      </cds-text-input>
-    </sb-template-layers>
-  `,
-};
-
-export const Playground = {
   args,
   argTypes,
   render: ({
@@ -264,6 +214,49 @@ export const Playground = {
         @input="${onInput}">
       </cds-text-input>
     </div>
+  `,
+};
+
+export const ReadOnly = {
+  render: () => html`
+    <cds-text-input
+      value="This is read only, you can't type more."
+      readonly="true"
+      label="Text input label"
+      helper-text="Optional help text">
+    </cds-text-input>
+  `,
+};
+
+export const Skeleton = {
+  render: () => html` <cds-text-input-skeleton></cds-text-input-skeleton> `,
+};
+// Remove TogglePasswordVisibility story when password-input web component is created
+export const TogglePasswordVisibility = {
+  render: () => html`
+    <cds-text-input
+      type="password"
+      show-password-visibility-toggle
+      label="Text input label"
+      helper-text="Optional help text">
+    </cds-text-input>
+  `,
+};
+
+export const WithAILabel = {
+  render: () => html`
+    <cds-text-input label="Text input label" helper-text="Optional help text">
+      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
+    </cds-text-input>
+  `,
+};
+
+export const WithLayer = {
+  render: () => html`
+    <sb-template-layers>
+      <cds-text-input label="Text input label" helper-text="Optional help text">
+      </cds-text-input>
+    </sb-template-layers>
   `,
 };
 

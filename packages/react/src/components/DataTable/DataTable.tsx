@@ -480,6 +480,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
     return {
       ...rest,
       key: row.id,
+      onClick,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
       onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
@@ -611,6 +612,8 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
     };
   };
 
+  // TODO: `getHeaderProps` and `getRowProps` return `key` props. Would it be
+  // beneficial for this function to also return a `key` prop?
   /**
    * Get the props associated with the given table cell.
    */
