@@ -11756,11 +11756,19 @@ Map {
         },
       },
     },
+    "PageHeaderScrollButton": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
     "PageHeaderTabBar": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
     "Root": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ScrollButton": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },

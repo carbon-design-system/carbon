@@ -11,6 +11,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../motion' as *;
 @use '../../utilities/convert';
 
 /// Page header styles
@@ -18,12 +19,18 @@
 /// @group page-header
 @mixin page-header {
   .#{$prefix}--page-header {
+    position: sticky;
     background-color: $layer-01;
     border-block-end: 1px solid $border-subtle-01;
+    inset-block-start: var(--#{$prefix}-page-header-header-top);
   }
 
   .#{$prefix}--page-header__breadcrumb-bar {
+    position: sticky;
+    z-index: 1;
+    background-color: $layer;
     block-size: convert.to-rem(40px);
+    inset-block-start: var(--#{$prefix}-page-header-breadcrumb-top);
   }
 
   .#{$prefix}--page-header__breadcrumb-bar .#{$prefix}--subgrid {
@@ -185,6 +192,14 @@
     display: flex;
     align-items: center;
     justify-content: right;
+    padding-inline-end: 0;
+
+    @include breakpoint(md) {
+      padding-inline-end: $spacing-03;
+    }
+    @include breakpoint(max) {
+      padding-inline-end: $spacing-05;
+    }
   }
 
   .#{$prefix}--page-header__tags-popover-list {
@@ -195,5 +210,84 @@
 
   .#{$prefix}--page-header__tag-item {
     flex-shrink: 0;
+  }
+
+  .#{$prefix}--page-header--scroller-button-icon {
+    transition: transform $transition-expansion;
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .#{$prefix}--page-header--scroller-button-icon-collapsed {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--page-header--scroller-button-container {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+  }
+
+  @keyframes page-header-title-breadcrumb-animation {
+    0% {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    5% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes page-header-title-breadcrumb-animation-reduced-motion {
+    0% {
+      opacity: 0;
+    }
+
+    5% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--page-header-title-breadcrumb {
+    opacity: 0;
+    transform: translateY($spacing-05);
+    transition:
+      transform motion(standard, productive) $duration-moderate-01,
+      opacity motion(standard, productive) $duration-moderate-01;
+    // Target browsers that do not yet support animation-timeline: scroll()
+    @supports not (animation-timeline: scroll()) {
+      &.#{$prefix}--page-header-title-breadcrumb-show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        transform: translateY(0);
+        transition: opacity motion(standard, productive) $duration-moderate-01;
+      }
+    }
+    // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+    @supports (animation-timeline: scroll()) {
+      animation-direction: alternate;
+      animation-duration: 1ms; /* Firefox requires this to apply the animation */
+      animation-name: page-header-title-breadcrumb-animation;
+      animation-timeline: scroll(block nearest);
+
+      @media (prefers-reduced-motion: reduce) {
+        animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+        transform: translateY(0);
+      }
+    }
   }
 }

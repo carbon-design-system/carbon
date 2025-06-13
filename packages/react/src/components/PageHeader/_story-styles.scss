@@ -1,0 +1,9 @@
+@use '../../../../styles/scss/spacing';
+
+.page-header-story-wrapper {
+  margin-top: spacing.$spacing-09;
+}
+
+.page-header-story--tall-tab-panel {
+  height: 200vh;
+}
