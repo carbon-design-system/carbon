@@ -36,6 +36,7 @@ import { useId } from '../../internal/useId';
 import { Grid, Column } from '../Grid';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { ChevronUp } from '@carbon/react/icons';
+import Breadcrumb from '../Breadcrumb';
 
 /**
  * ----------
@@ -110,12 +111,14 @@ const scrollableAncestor = (target: HTMLElement) => {
 
 type PageHeaderRefs = {
   contentRef?: RefObject<HTMLDivElement>;
-  baseRef?: RefObject<HTMLDivElement>;
+  titleRef?: RefObject<HTMLDivElement>;
 };
 
 type PageHeaderContextType = {
   refs?: PageHeaderRefs;
   setRefs: React.Dispatch<React.SetStateAction<{}>>;
+  fullyCollapsed?: boolean;
+  titleClipped?: boolean;
 };
 
 const PageHeaderContext = createContext<PageHeaderContextType | undefined>(
@@ -154,13 +157,6 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       className
     );
 
-    // Save PageHeader ref to be used in sub-components
-    useEffect(() => {
-      if (componentRef?.current) {
-        setRefs((prev) => ({ ...prev, baseRef: componentRef }));
-      }
-    }, []);
-
     // Used to set CSS custom property with PageHeaderContent height to be used
     // for sticky positioning
     useEffect(() => {
@@ -178,8 +174,69 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       }
     }, [refs]);
 
+    const [fullyCollapsed, setFullyCollapsed] = useState(false);
+    const [titleClipped, setTitleClipped] = useState(false);
+
+    // Intersection Observer setup, one to track if the PageHeaderContent is visible on page.
+    // If it is not visible, we should set fully collapsed to true so that the
+    // scroller button will know if it is clicked to expand rather than
+    // collapse the header. And another to track if the page header title is intersecting
+    // the breadcrumb bar, to trigger the title breadcrumb animation for browsers that
+    // do not yet support `animation-timeline: scroll()`.
+    useEffect(() => {
+      if (!refs?.contentRef || !componentRef?.current || !refs?.titleRef)
+        return;
+      const totalHeaderOffset = getHeaderOffset(componentRef?.current);
+      const predefinedContentPadding = 24;
+      const contentObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === refs?.contentRef!.current) {
+              setFullyCollapsed(!entry.isIntersecting);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: `${(predefinedContentPadding + totalHeaderOffset) * -1}px 0px 0px 0px`,
+          threshold: 0.1,
+        }
+      );
+
+      const totalTitleHeight = refs?.titleRef.current.offsetHeight;
+      const titleObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === refs?.titleRef!.current) {
+              setTitleClipped(!entry.isIntersecting);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
+          threshold: 0.1,
+        }
+      );
+
+      if (refs?.contentRef.current) {
+        contentObserver.observe(refs?.contentRef.current);
+      }
+      if (refs?.titleRef.current) {
+        titleObserver.observe(refs?.titleRef.current);
+      }
+
+      return () => {
+        if (!refs?.contentRef?.current) return;
+        contentObserver.unobserve(refs?.contentRef.current);
+        if (!refs?.titleRef?.current) return;
+        contentObserver.unobserve(refs?.titleRef.current);
+      };
+    }, [refs]);
+
     return (
-      <PageHeaderContext.Provider value={{ refs, setRefs }}>
+      <PageHeaderContext.Provider
+        value={{ refs, setRefs, fullyCollapsed, titleClipped }}>
         <div className={classNames} ref={componentRef} {...other}>
           {children}
         </div>
@@ -221,6 +278,10 @@ interface PageHeaderBreadcrumbBarProps {
    * `true` to set page actions flush with page
    */
   pageActionsFlush?: Boolean;
+  /**
+   * Text for the title breadcrumb, ie current page
+   */
+  renderTitleBreadcrumb?: () => React.ReactElement;
 }
 const PageHeaderBreadcrumbBar = React.forwardRef<
   HTMLDivElement,
@@ -235,10 +296,12 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
     contentActionsFlush,
     pageActions,
     pageActionsFlush,
+    renderTitleBreadcrumb,
     ...other
   }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
+  const { titleClipped } = usePageHeader();
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -254,6 +317,36 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
       !contentActionsFlush,
   });
 
+  const renderChildren = () => {
+    const filteredBreadcrumbs = React.Children.toArray(children).filter(
+      (child) => child.type === Breadcrumb
+    );
+    if (filteredBreadcrumbs) {
+      const foundBreadcrumb = filteredBreadcrumbs[0];
+      const element = renderTitleBreadcrumb?.();
+      const clonedElement = React.cloneElement(element!, {
+        className: classnames(`${prefix}--page-header-title-breadcrumb`, {
+          [`${prefix}--page-header-title-breadcrumb-show`]: titleClipped,
+        }),
+        key: 'cloned title breadcrumb',
+        isCurrentPage: true,
+      });
+      const finalBreadcrumbs = React.cloneElement(
+        foundBreadcrumb as React.ReactElement,
+        {},
+        [...foundBreadcrumb.props.children.flat(), clonedElement]
+      );
+      const foundBreadcrumbIndex = React.Children.toArray(children).findIndex(
+        (child) => child.type === Breadcrumb
+      );
+      const childrenArray = (React.Children.toArray(children)[
+        foundBreadcrumbIndex
+      ] = finalBreadcrumbs);
+      return childrenArray;
+    }
+    return children;
+  };
+
   return (
     <div className={classNames} ref={ref} {...other}>
       <Grid>
@@ -265,7 +358,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
                   <IconElement />
                 </div>
               )}
-              {children}
+              {renderChildren()}
             </div>
             <div className={`${prefix}--page-header__breadcrumb__actions`}>
               <div className={contentActionsClasses}>{contentActions}</div>
@@ -330,12 +423,6 @@ const PageHeaderContent = React.forwardRef<
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
   const { setRefs } = usePageHeader();
 
-  useEffect(() => {
-    if (componentRef?.current) {
-      setRefs((prev) => ({ ...prev, contentRef: componentRef }));
-    }
-  }, []);
-
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -344,6 +431,13 @@ const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (componentRef?.current) {
+      setRefs((prev) => ({ ...prev, contentRef: componentRef, titleRef }));
+    }
+  }, []);
+
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
   const isEllipsisActive = (element: HTMLHeadingElement) => {
@@ -855,40 +949,7 @@ const PageHeaderScrollButton = React.forwardRef<
   }: PageHeaderScrollButtonProps,
   ref
 ) {
-  const { refs } = usePageHeader();
-  const [fullyCollapsed, setFullyCollapsed] = useState(false);
-
-  // Intersection Observer to track if the PageHeaderContent is visible on page.
-  // If it is not visible, we should set fully collapsed to true so that the
-  // scroller button will know if it is clicked to expand rather than
-  // collapse the header
-  useEffect(() => {
-    if (!refs?.contentRef || !refs?.baseRef) return;
-    const totalHeaderOffset = getHeaderOffset(refs?.baseRef?.current);
-    const predefinedContentPadding = 24;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        setFullyCollapsed(!entry.isIntersecting);
-      },
-      {
-        root: null,
-        rootMargin: `${(predefinedContentPadding + totalHeaderOffset) * -1}px 0px 0px 0px`,
-        threshold: 0.1,
-      }
-    );
-
-    if (refs?.contentRef.current) {
-      observer.observe(refs?.contentRef.current);
-    }
-
-    return () => {
-      if (!refs?.contentRef?.current) return;
-      if (refs?.contentRef.current) {
-        observer.unobserve(refs?.contentRef.current);
-      }
-    };
-  }, [refs]);
+  const { refs, fullyCollapsed } = usePageHeader();
 
   const handleScroller = (isFullyCollapsed: boolean) => {
     if (!refs?.contentRef?.current) return;
@@ -921,7 +982,7 @@ const PageHeaderScrollButton = React.forwardRef<
       {...other}
       onClick={(event) => {
         onClick?.(event);
-        handleScroller(fullyCollapsed);
+        handleScroller(!!fullyCollapsed);
       }}
       className={classnames(
         className,

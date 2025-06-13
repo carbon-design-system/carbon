@@ -220,4 +220,42 @@
     inset-block-end: 0;
     inset-inline-end: 0;
   }
+
+  @keyframes page-header-title-breadcrumb-animation {
+    0% {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    5% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .#{$prefix}--page-header-title-breadcrumb {
+    opacity: 0;
+    transform: translateY($spacing-05);
+    transition:
+      transform motion(standard, productive) $duration-moderate-01,
+      opacity motion(standard, productive) $duration-moderate-01;
+    // Target browsers that do not yet support timeline scrolling
+    @supports not (animation-timeline: scroll()) {
+      &.#{$prefix}--page-header-title-breadcrumb-show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    // scroll() only currently supported in Chromium based browsers
+    @supports (animation-timeline: scroll()) {
+      animation-direction: alternate;
+      animation-duration: 1ms; /* Firefox requires this to apply the animation */
+      animation-name: page-header-title-breadcrumb-animation;
+      animation-timeline: scroll(block nearest);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
 }
