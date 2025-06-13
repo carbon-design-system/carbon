@@ -899,13 +899,13 @@ const PageHeaderScrollButton = React.forwardRef<
     // Page header content is not fully collapsed
     if (!isFullyCollapsed) {
       const pageHeaderContentHeight = refs?.contentRef.current.offsetHeight;
-      scrollableTarget.scrollTo({
+      scrollableTarget?.scrollTo({
         top: pageHeaderContentHeight, // headerTopValue, check if breadcrumb bar is included
         behavior: 'smooth',
       });
     } else {
       // Page header content is fully collapsed
-      scrollableTarget.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollableTarget?.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

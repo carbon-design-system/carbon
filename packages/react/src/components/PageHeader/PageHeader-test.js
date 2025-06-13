@@ -801,5 +801,21 @@ describe('PageHeader', () => {
       );
       expect(screen.getByLabelText('Collapse')).toBeInTheDocument();
     });
+    it('should render call function passed to scroller', async () => {
+      const scrollerOnClick = jest.fn();
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeaderTabBarDirect
+            scroller={<PageHeader.ScrollButton onClick={scrollerOnClick} />}
+          />
+        </PageHeader.Root>
+      );
+      const scrollerButton = screen.getByLabelText('Collapse');
+      expect(scrollerButton).toBeInTheDocument();
+
+      await userEvent.click(scrollerButton);
+      expect(scrollerOnClick).toHaveBeenCalledTimes(1);
+    });
   });
 });
