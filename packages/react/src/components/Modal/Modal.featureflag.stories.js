@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
-import Modal from './';
+import React, { useRef, useState } from 'react';
+import Modal, { ModalDialog, ModalPresence } from './';
 import Button from '../Button';
 import Select from '../Select';
 import { MultiSelect } from '../MultiSelect';
@@ -18,6 +18,7 @@ import './Modal.stories.scss';
 import { FeatureFlags } from '../FeatureFlags';
 import { Annotation } from '../../../.storybook/templates/Annotation';
 import LinkTo from '@storybook/addon-links/react';
+import { createPortal } from 'react-dom';
 
 export default {
   title: 'Components/Modal/Feature Flags',
@@ -31,6 +32,67 @@ export default {
     },
   },
 };
+
+export const EnablePresence = () => {
+  const buttonRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  return (
+    <FeatureFlags enablePresence>
+      <Annotation
+        type="feature-flags"
+        text={
+          <span>
+            This story is rendered with{' '}
+            <LinkTo title="Getting Started/Feature Flags" name="Overview">
+              enable-presence
+            </LinkTo>{' '}
+            enabled
+          </span>
+        }>
+        <Button ref={buttonRef} onClick={() => setOpen(true)}>
+          Launch modal
+        </Button>
+        {createPortal(
+          <ClassPrefix prefix="dialog-refactor">
+            <div className="experimental-modal-with-presence">
+              <Modal
+                launcherButtonRef={buttonRef}
+                modalHeading="Add a custom domain"
+                modalLabel="Account resources"
+                primaryButtonText="Add"
+                secondaryButtonText="Cancel"
+                open={open}
+                onRequestClose={() => setOpen(false)}>
+                <p style={{ marginBottom: '1rem' }}>
+                  Custom domains direct requests for your apps in this Cloud
+                  Foundry organization to a URL that you own. A custom domain
+                  can be a shared domain, a shared subdomain, or a shared domain
+                  and host.
+                </p>
+                <TextInput
+                  data-modal-primary-focus
+                  id="text-input-1"
+                  labelText="Domain name"
+                  placeholder="e.g. github.com"
+                  style={{ marginBottom: '1rem' }}
+                />
+                <Select
+                  id="select-1"
+                  defaultValue="us-south"
+                  labelText="Region">
+                  <SelectItem value="us-south" text="US South" />
+                  <SelectItem value="us-east" text="US East" />
+                </Select>
+              </Modal>
+            </div>
+          </ClassPrefix>,
+          document.body
+        )}
+      </Annotation>
+    </FeatureFlags>
+  );
+};
+EnablePresence.storyName = 'enable-presence';
 
 export const EnableDialogElement = () => {
   const [open, setOpen] = useState(false);
