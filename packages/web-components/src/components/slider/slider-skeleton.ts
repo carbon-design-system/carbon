@@ -53,10 +53,10 @@ class CDSSliderSkeleton extends LitElement {
         <div class="${prefix}--slider">
           <div class="${prefix}--slider__track"></div>
           <div class="${prefix}--slider__filled-track"></div>
-          <div class="${lowerThumbWrapperClasses}">
-            <div class="${lowerThumbClasses}">
-              ${twoHandles
-                ? html`
+          ${twoHandles
+            ? html`
+                <div class="${lowerThumbWrapperClasses}">
+                  <div class="${lowerThumbClasses}">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 16 24"
@@ -65,10 +65,10 @@ class CDSSliderSkeleton extends LitElement {
                         d="M15.08 6.46H16v11.08h-.92zM4.46 17.54c-.25 0-.46-.21-.46-.46V6.92a.465.465 0 0 1 .69-.4l8.77 5.08a.46.46 0 0 1 0 .8l-8.77 5.08c-.07.04-.15.06-.23.06Z"></path>
                       <path fill="none" d="M-4 0h24v24H-4z"></path>
                     </svg>
-                  `
-                : undefined}
-            </div>
-          </div>
+                  </div>
+                </div>
+              `
+            : html` <div class="${lowerThumbClasses}"></div> `}
           ${twoHandles
             ? html` <div class="${upperThumbWrapperClasses}">
                 <div class="${upperThumbClasses}">

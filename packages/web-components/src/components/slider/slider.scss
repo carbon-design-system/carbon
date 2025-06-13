@@ -59,4 +59,12 @@ $css--plex: true !default;
   .#{$prefix}--slider__thumb {
     inset-inline-start: 50%;
   }
+  .#{$prefix}--slider__thumb--upper,
+  .#{$prefix}--slider__thumb--lower {
+    block-size: inherit;
+    inline-size: inherit;
+    inset: initial;
+    inset-inline-start: initial;
+    transform: unset;
+  }
 }
