@@ -1439,7 +1439,7 @@ describe('ComboBox', () => {
         id="test-combo"
         items={[{ label: 'Item 1' }]}
         itemToString={(item) => item?.label || ''}
-        inputProp={{ maxLength: 10, placeholder: 'Type here' }}
+        inputProps={{ maxLength: 10, placeholder: 'Type here' }}
       />
     );
 

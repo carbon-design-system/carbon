@@ -321,12 +321,12 @@ export interface FilterableMultiSelectProps<ItemType>
   warnText?: ReactNode;
 
   /**
-   * Props to be passed directly to the underlying <input> element.
-   * Useful for customizing input behavior, such as setting maxLength, placeholder and other native input attributes.
-   *
-   * Note: These props are merged with internal input props. Custom values will override defaults when applicable.
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
    */
-  inputProp?: React.InputHTMLAttributes<HTMLInputElement>;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
@@ -371,7 +371,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     warn,
     warnText,
     slug,
-    inputProp,
+    inputProps,
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -785,7 +785,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     },
   });
 
-  const inputProps = getInputProps(
+  const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': helperText ? helperId : undefined,
@@ -796,7 +796,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       disabled,
       placeholder,
       preventKeyAction: isOpen,
-      ...inputProp,
+      ...inputProps,
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
@@ -868,7 +868,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     }
   };
 
-  const mergedRef = mergeRefs(textInput, inputProps.ref);
+  const mergedRef = mergeRefs(textInput, inputProp.ref);
 
   const readOnlyEventHandlers = readOnly
     ? {
@@ -938,7 +938,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           )}
           <input
             className={inputClasses}
-            {...inputProps}
+            {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
             readOnly={readOnly}
@@ -1244,4 +1244,12 @@ FilterableMultiSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps: PropTypes.object,
 };
