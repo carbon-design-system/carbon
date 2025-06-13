@@ -5206,9 +5206,7 @@ Map {
       "passiveModal": Object {
         "type": "bool",
       },
-      "preventCloseOnClickOutside": Object {
-        "type": "bool",
-      },
+      "preventCloseOnClickOutside": [Function],
       "primaryButtonDisabled": Object {
         "type": "bool",
       },

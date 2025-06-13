@@ -47,6 +47,8 @@ import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
+const invalidOutsideClickMessage =
+  '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.';
 
 export type ModalSize = (typeof ModalSizes)[number];
 
@@ -263,7 +265,7 @@ const Modal = React.forwardRef(function Modal(
     size,
     hasScrollingContent = false,
     closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = false,
+    preventCloseOnClickOutside = !passiveModal,
     isFullWidth,
     launcherButtonRef,
     loadingStatus = 'inactive',
@@ -305,6 +307,10 @@ const Modal = React.forwardRef(function Modal(
       'element handles focus, so `enableDialogElement` must be off for ' +
       '`focusTrapWithoutSentinels` to have any effect.'
   );
+
+  if (!passiveModal && preventCloseOnClickOutside === false) {
+    console.error(invalidOutsideClickMessage);
+  }
 
   function isCloseButton(element: Element) {
     return (
@@ -959,7 +965,13 @@ Modal.propTypes = {
   /**
    * Prevent closing on click outside of modal
    */
-  preventCloseOnClickOutside: PropTypes.bool,
+  preventCloseOnClickOutside: (props: ModalProps, propName: string) => {
+    if (!props.passiveModal && props[propName] === false) {
+      return new Error(invalidOutsideClickMessage);
+    }
+
+    return null;
+  },
 
   /**
    * Specify whether the Button should be disabled, or not

@@ -58,6 +58,8 @@ text.
 
 <ArgTypes />
 
+{/* TODO: https://github.com/carbon-design-system/carbon/issues/19624 */}
+
 ## Opening/closing modal
 
 For both modal variants, you can open/close the modal by changing the `open`
@@ -107,17 +109,39 @@ const ModalStateManager = ({
 };
 ```
 
+{/* <!-- prettier-ignore-start --> */}
+
 <Unstyled>
   <InlineNotification
-    title="Warning"
     kind="warning"
+    title="Warning"
     className="sb-notification">
-    <CodeSnippet type="inline" hideCopyButton>{'<Modal>'}</CodeSnippet>
-    <CodeSnippet type="inline" hideCopyButton>{`<ComposedModal>`}</CodeSnippet>{' '}
-    has to be put at the top level in a React tree. The easiest way to ensure
-    that is using React portal as shown in above example.
+    <CodeSnippet type="inline" hideCopyButton>Modal</CodeSnippet>
+    and
+    <CodeSnippet type="inline" hideCopyButton>ComposedModal</CodeSnippet>
+    have to be put at the top level in a React tree. The easiest way to ensure
+    that is using a React portal, as shown in the example above.
   </InlineNotification>
 </Unstyled>
+<br />
+<Unstyled>
+  <InlineNotification
+    kind="info"
+    title="Outside click behavior"
+    className="sb-notification">
+    Passive modals can be closed by clicking outside by default. Non-passive
+    modals cannot be dismissed this way, even if{' '}
+    <CodeSnippet type="inline" hideCopyButton>
+      preventCloseOnClickOutside
+    </CodeSnippet>{' '}
+    is set to{' '}
+    <CodeSnippet type="inline" hideCopyButton>
+      false
+    </CodeSnippet>
+    .
+  </InlineNotification>
+</Unstyled>
+
 {/* <!-- prettier-ignore-end --> */}
 
 ## Modal sizes
@@ -223,18 +247,18 @@ With `<ComposedModal>`, you can control the buttons with the following code.
 
 <Unstyled>
   <InlineNotification
-    title="Warning"
     kind="warning"
+    title="Warning"
     className="sb-notification">
-    As the instruction for the three buttons implies,{' '}
-    <CodeSnippet type="inline" hideCopyButton>{'<ModalFooter>'}</CodeSnippet>
-    is flexible on the buttons as you render
-    <CodeSnippet type="inline" hideCopyButton>{'<Button>'}</CodeSnippet>
-    s by yourself, as shown below. In this case, the application code
-    needs to take care of running actions upon clicking those buttons, e.g. closing
-    the modal:
+    As the instructions for the three buttons imply,
+    <CodeSnippet type="inline" hideCopyButton>ModalFooter</CodeSnippet>
+    is flexible with the buttons you render using
+    <CodeSnippet type="inline" hideCopyButton>Button</CodeSnippet>
+    components. In this case, your application code is responsible for handling
+    button actions, such as closing the modal.
   </InlineNotification>
 </Unstyled>
+
 {/* <!-- prettier-ignore-end --> */}
 
 ```jsx
