@@ -35,7 +35,7 @@ import { Popover, PopoverContent } from '../Popover';
 import { useId } from '../../internal/useId';
 import { Grid, Column } from '../Grid';
 import { IconButton, IconButtonProps } from '../IconButton';
-import { ChevronUp } from '@carbon/react/icons';
+import { ChevronUp } from '@carbon/icons-react';
 import Breadcrumb from '../Breadcrumb';
 import BreadcrumbItem, {
   BreadcrumbItemProps,
