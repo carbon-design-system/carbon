@@ -93,6 +93,7 @@ $css--plex: true !default;
 :host(#{$prefix}-accordion-item-skeleton) {
   .#{$prefix}--accordion__heading {
     cursor: default;
+    pointer-events: none;
 
     &:hover::before {
       background: transparent;

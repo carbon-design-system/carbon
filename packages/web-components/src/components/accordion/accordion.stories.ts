@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,8 @@ import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import { ACCORDION_SIZE } from './accordion';
 import './index';
-import '../button/index';
+import '../layer/index';
+import '../../../.storybook/templates/with-layer';
 
 const sizes = {
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
@@ -60,11 +61,22 @@ const argTypes = {
 };
 
 export const Default = {
-  args,
+  args: {
+    alignment: 'end',
+    disabled: false,
+    isFlush: false,
+    size: 'md',
+    disableToggle: false,
+  },
   argTypes,
-  render: () => {
+  render: ({ alignment, isFlush, size, disabled, disableToggle }) => {
     return html`
-      <cds-accordion>
+      <cds-accordion
+        alignment="${alignment}"
+        size="${size}"
+        ?isFlush="${isFlush}"
+        ?disable-toggle="${disableToggle}"
+        ?disabled="${disabled}">
         <cds-accordion-item title="Section 1 title">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -121,10 +133,13 @@ export const Controlled = {
             });
         };
       </script>
-      <cds-button onclick="toggleItems(true)">Click to expand all</cds-button>
-      <cds-button onclick="toggleItems(false)"
-        >Click to collapse all</cds-button
-      >
+
+      <div style="padding-block-end: var(--cds-spacing-03);">
+        <cds-button onclick="toggleItems(true)">Click to expand all</cds-button>
+        <cds-button onclick="toggleItems(false)"
+          >Click to collapse all</cds-button
+        >
+      </div>
 
       <cds-accordion>
         <cds-accordion-item controlled title="Section 1 title">
@@ -173,6 +188,43 @@ export const Skeleton = {
   },
   render: () => {
     return html`<cds-accordion-skeleton></cds-accordion-skeleton>`;
+  },
+};
+
+export const WithLayer = {
+  args,
+  argTypes,
+  render: () => {
+    return html`
+      <sb-template-layers>
+        <cds-accordion>
+          <cds-accordion-item title="Section 1 title">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </cds-accordion-item>
+          <cds-accordion-item title="Section 2 title">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </cds-accordion-item>
+          <cds-accordion-item title="Section 3 title">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </cds-accordion-item>
+          <cds-accordion-item title="Section 4 title">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </cds-accordion-item>
+        </cds-accordion>
+      </sb-template-layers>
+    `;
   },
 };
 
