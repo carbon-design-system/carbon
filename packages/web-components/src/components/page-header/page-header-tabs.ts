@@ -24,10 +24,8 @@ class CDSPageHeaderTabs extends LitElement {
       <div
         class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column">
         <div class="${prefix}--page-header__tab-bar--tablist">
-          <slot name="tabs"></slot>
-          <div class="${prefix}--page-header__tags">
-            <slot name="tags"></slot>
-          </div>
+          <slot></slot>
+          <slot name="tags"></slot>
         </div>
       </div>
     </div>`;
