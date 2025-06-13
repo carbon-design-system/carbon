@@ -7,7 +7,7 @@
 
 import './story.scss';
 
-import { Help } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { Tooltip } from './';
 import mdx from './Tooltip.mdx';
@@ -59,7 +59,7 @@ export const Default = (args) => {
   return (
     <Tooltip autoAlign label={label} closeOnActivation={false} {...args}>
       <button className="sb-tooltip-trigger" type="button">
-        <Help />
+        <OverflowMenuVertical />
       </button>
     </Tooltip>
   );

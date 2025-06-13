@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Information } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
@@ -38,7 +38,7 @@ export const FloatingStyles = (args) => {
       }}>
       <Tooltip label={tooltipLabel} align={args.align}>
         <button className="sb-tooltip-trigger" type="button">
-          <Information />
+          <OverflowMenuVertical />
         </button>
       </Tooltip>
     </div>
