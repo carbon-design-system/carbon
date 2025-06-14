@@ -267,5 +267,35 @@ describe('Popover', () => {
       await userEvent.click(container);
       expect(onRequestClose).toHaveBeenCalled();
     });
+
+    it('should add multi-line class to popover content when text is long', async () => {
+      const { container } = render(
+        <Popover open>
+          <button type="button">Settings</button>
+          <PopoverContent>
+            This is a very long text that should trigger the multi-line class
+            sdfs sdfds sdfds dsfds dsf sdfdsf sdfsdf dsfsd sdf sdfds
+          </PopoverContent>
+        </Popover>
+      );
+      await setTimeout(
+        () =>
+          expect(container.firstChild.lastChild.firstChild).toHaveClass(
+            `${prefix}--popover-content--multi-line`
+          ),
+        100
+      );
+    });
+    it('should not add multi-line class to popover content when text is short', () => {
+      const { container } = render(
+        <Popover open>
+          <button type="button">Settings</button>
+          <PopoverContent className="test">Short text</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild.lastChild.firstChild).not.toHaveClass(
+        `${prefix}--popover-content--multi-line`
+      );
+    });
   });
 });
