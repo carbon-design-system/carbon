@@ -273,8 +273,8 @@ describe('Popover', () => {
         <Popover open>
           <button type="button">Settings</button>
           <PopoverContent>
-            This is a very long text that should trigger the multi-line class
-            sdfs sdfds sdfds dsfds dsf sdfdsf sdfsdf dsfsd sdf sdfds
+            This is a very long text that should trigger the multi-line. Adding
+            more text to make it even longer.
           </PopoverContent>
         </Popover>
       );
