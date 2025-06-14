@@ -2,6 +2,7 @@
 
 import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 
 // TODO: There is an `eslintConfig` reference in `package.json`. Investigate
 // whether it should be moved to this file or deleted.
@@ -10,11 +11,14 @@ import { defineConfig } from 'eslint/config';
 export default defineConfig([
   eslint.configs.recommended,
   {
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
     rules: {
-      // TODO: Turn these rules back on.
-      // https://github.com/carbon-design-system/carbon/issues/19007
-      'no-undef': 'off',
-      'no-unused-vars': 'off',
       // All of these rules have directives in the codebase that disable them,
       // which implies that they were set previously.
       'no-console': 'error',
