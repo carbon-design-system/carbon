@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@
  * that it applies to like border or background, along with a state if the
  * token should only be used for specific states like hover or focus.
  */
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class Token {
   static create(token) {
     if (typeof token === 'string') {
