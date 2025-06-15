@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import DataTable, {
+import {
+  DataTable,
   type DataTableCell,
   type DataTableHeader,
-  type DataTableRow,
   type DataTableProps,
   type DataTableRenderProps,
+  type DataTableRow,
   type DataTableSize,
 } from './DataTable';
 import Table from './Table';

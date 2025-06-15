@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,6 +35,10 @@ const getDerivedStateFromProps = (props, prevState) => {
     // Optional state field to indicate whether a consumer should show a
     // batch actions menu
     shouldShowBatchActions: prevState.shouldShowBatchActions || false,
+    // TODO: Investigate deleting this property when this util is ported to
+    // TypeScript. The only reason it was added was to address a type error in
+    // packages/react/src/components/DataTable/DataTable.tsx
+    isExpandedAll: false,
   };
 
   if (prevState.sortDirection && prevState.sortHeaderKey) {
