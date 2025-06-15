@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -139,7 +139,7 @@ function buildModulesTokenFile(tokenScale, group) {
     ];
   });
 
-  const variables = values.flatMap(([_name, _shorthand, _id, assignment]) => {
+  const variables = values.flatMap(([, , , assignment]) => {
     const comment = t.Comment(`/ @type Number
 / @access public
 / @group @carbon/layout`);
@@ -153,7 +153,7 @@ function buildModulesTokenFile(tokenScale, group) {
     t.Assignment({
       id: t.Identifier(group),
       init: t.SassMap({
-        properties: values.map(([name, _shorthand, id]) => {
+        properties: values.map(([name, , id]) => {
           return t.SassMapProperty({
             key: id,
             value: t.SassValue(`$${name}`),
