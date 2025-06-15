@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,7 +16,10 @@ async function main({ argv }) {
     .version(packageJson.version)
     .usage('Usage: $0 [options]');
 
-  cli
+  // TODO [@carbon-design-system/monorepo-reviewers]: What's the purpose of this
+  // code, especially the `argv` expression at the end? The only reason I had to
+  // add the `void` was because of that expression.
+  void cli
     .commandDir('commands')
     .strict()
     .fail((message, error, yargs) => {
@@ -27,7 +30,6 @@ async function main({ argv }) {
         }
         console.error(error);
         process.exit(1);
-        return;
       }
       console.log(message);
       console.log(yargs.help());
