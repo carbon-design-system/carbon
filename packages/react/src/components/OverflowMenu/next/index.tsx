@@ -60,6 +60,10 @@ interface OverflowMenuProps {
    */
   size?: 'sm' | 'md' | 'lg';
 
+  // TODO [@carbon-design-system/monorepo-reviewers]: The types for this prop do
+  // not match the prop-types. Which needs to be updated? It seems odd that the
+  // prop-types for the `OverflowMenu` for Carbon v12 already include deprecated
+  // values. Maybe I'm misunderstanding or missing something.
   /**
    * Specify how the trigger tooltip should be aligned.
    */
