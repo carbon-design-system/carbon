@@ -449,28 +449,28 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   disabled = false;
 
   /**
-   * The localization data.
-   */
-  @property({ attribute: false })
-  locale!: FlatpickrLocale;
-
-  /**
    * The date range that a user can pick in calendar dropdown.
    */
   @property({ attribute: 'enabled-range' })
   enabledRange!: string;
 
   /**
-   * The minimum date that a user can start picking from.
+   * The localization data.
    */
-  @property({ attribute: 'min-date' })
-  minDate!: string;
+  @property({ attribute: false })
+  locale!: FlatpickrLocale;
 
   /**
    * The maximum date that a user can start picking from.
    */
   @property({ attribute: 'max-date' })
   maxDate!: string;
+
+  /**
+   * The minimum date that a user can start picking from.
+   */
+  @property({ attribute: 'min-date' })
+  minDate!: string;
 
   /**
    * Name for the input in the `FormData`
