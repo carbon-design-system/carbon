@@ -14,12 +14,7 @@ async function main({ argv }) {
   cli
     .scriptName(packageJson.name)
     .version(packageJson.version)
-    .usage('Usage: $0 [options]');
-
-  // TODO [@carbon-design-system/monorepo-reviewers]: What's the purpose of this
-  // code, especially the `argv` expression at the end? The only reason I had to
-  // add the `void` was because of that expression.
-  void cli
+    .usage('Usage: $0 [options]')
     .commandDir('commands')
     .strict()
     .fail((message, error, yargs) => {
@@ -35,7 +30,7 @@ async function main({ argv }) {
       console.log(yargs.help());
       process.exit(1);
     })
-    .parse(argv.slice(2)).argv;
+    .parse(argv.slice(2));
 }
 
 module.exports = main;
