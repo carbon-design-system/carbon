@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,20 +10,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ChevronDown } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 
-export type ListBoxMenuIconTranslationKey = 'close.menu' | 'open.menu';
+const translationIds = {
+  'close.menu': 'close.menu',
+  'open.menu': 'open.menu',
+} as const;
 
-const defaultTranslations: Record<ListBoxMenuIconTranslationKey, string> = {
-  'close.menu': 'Close menu',
-  'open.menu': 'Open menu',
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['close.menu']]: 'Close menu',
+  [translationIds['open.menu']]: 'Open menu',
 };
 
-const defaultTranslateWithId = (id: ListBoxMenuIconTranslationKey): string =>
-  defaultTranslations[id];
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
-export interface ListBoxMenuIconProps
-  extends TranslateWithId<ListBoxMenuIconTranslationKey> {
+export interface ListBoxMenuIconProps extends TranslateWithId<TranslationKey> {
   /**
    * Specify whether the menu is currently open, which will influence the
    * direction of the menu icon
@@ -63,9 +68,7 @@ ListBoxMenuIcon.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 
   /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes a ListBoxMenuIconTranslationKey and should
-   * return a string message for that given message id.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };

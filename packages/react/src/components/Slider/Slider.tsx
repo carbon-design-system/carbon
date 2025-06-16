@@ -29,7 +29,7 @@ import {
   UpperHandle,
   UpperHandleFocus,
 } from './SliderHandles';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 
 const ThumbWrapper = ({
@@ -79,24 +79,31 @@ ThumbWrapper.propTypes = {
 };
 
 const translationIds = {
-  autoCorrectAnnouncement: 'carbon.slider.auto-correct-announcement',
+  'carbon.slider.auto-correct-announcement':
+    'carbon.slider.auto-correct-announcement',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
-type TranslationKey = (typeof translationIds)[keyof typeof translationIds];
+type TranslationKey = keyof typeof translationIds;
 
-function translateWithId(
-  translationId: TranslationKey,
-  translationState?: { correctedValue?: string }
-) {
-  if (translationState?.correctedValue) {
-    const { correctedValue } = translationState;
-    return `The inputted value "${correctedValue}" was corrected to the nearest allowed digit.`;
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.slider.auto-correct-announcement']]:
+    'The inputted value "{correctedValue}" was corrected to the nearest allowed digit.',
+};
+
+type TranslationArgs = { correctedValue?: string };
+
+const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
+  messageId,
+  args
+) => {
+  const template = defaultTranslations[messageId];
+
+  if (args?.correctedValue) {
+    return template.replace('{correctedValue}', args.correctedValue);
   }
-  return '';
-}
+
+  return template;
+};
 
 const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
@@ -129,7 +136,7 @@ type ExcludedAttributes = 'onChange' | 'onBlur';
 
 export interface SliderProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
-    TranslateWithId<TranslationKey, { correctedValue?: string }> {
+    TranslateWithId<TranslationKey, TranslationArgs> {
   /**
    * The `ariaLabel` for the `<input>`.
    */
@@ -1330,7 +1337,7 @@ class Slider extends PureComponent<SliderProps> {
       readOnly = false,
       warn,
       warnText,
-      translateWithId: t = translateWithId,
+      translateWithId: t = defaultTranslateWithId,
       ...other
     } = this.props;
     const twoHandles = this.hasTwoHandles();
@@ -1688,9 +1695,10 @@ class Slider extends PureComponent<SliderProps> {
                     `${prefix}--slider__status-msg`,
                     `${prefix}--form-requirement`
                   )}>
-                  {t(translationIds.autoCorrectAnnouncement, {
-                    correctedValue,
-                  })}
+                  {t(
+                    translationIds['carbon.slider.auto-correct-announcement'],
+                    { correctedValue }
+                  )}
                 </Text>
               )}
             </div>
