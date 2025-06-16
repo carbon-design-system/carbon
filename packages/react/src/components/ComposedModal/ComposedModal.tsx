@@ -6,6 +6,7 @@
  */
 
 import React, {
+  Children,
   cloneElement,
   useEffect,
   useRef,
@@ -335,8 +336,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       const { target } = evt;
       const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
+      const containsModalFooter = Children.toArray(childrenWithProps).some(
+        (child) => isComponentElement(child, ModalFooter)
+      );
+      const isPassive = !containsModalFooter;
+      const shouldCloseOnOutsideClick = isPassive
+        ? preventCloseOnClickOutside !== false
+        : preventCloseOnClickOutside === true;
+
       if (
-        !preventCloseOnClickOutside &&
+        shouldCloseOnOutsideClick &&
         target instanceof Node &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&
