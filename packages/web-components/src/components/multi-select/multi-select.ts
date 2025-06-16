@@ -379,6 +379,7 @@ class CDSMultiSelect extends CDSDropdown {
       (this.constructor as typeof CDSMultiSelect).selectorItem
     );
     const inputValue = this._filterInputNode.value.toLocaleLowerCase();
+    this.toggleAttribute('has-value', inputValue.length > 0);
 
     if (!this.open) {
       this.open = true;

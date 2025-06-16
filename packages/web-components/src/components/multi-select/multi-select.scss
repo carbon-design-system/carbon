@@ -66,8 +66,8 @@ $css--plex: true !default;
   outline-offset: -#{$spacing-01};
 }
 
-:host(#{$prefix}-multi-select[filterable])
-  .#{$prefix}--list-box__field:has(input:not(:placeholder-shown))
+:host(#{$prefix}-multi-select[filterable][has-value])
+  .#{$prefix}--list-box__field
   ~ ::slotted(#{$prefix}-ai-label) {
   inset-inline-end: calc($spacing-10 + 18px);
 }
