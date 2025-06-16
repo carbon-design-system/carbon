@@ -41,7 +41,7 @@ import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
-import { FeatureFlags, useFeatureFlag, useFeatureFlags } from '../FeatureFlags';
+import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import { deprecate } from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
@@ -251,7 +251,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
 
     if (enablePresence) {
       return (
-        <ModalPresence open={open}>
+        <ModalPresence open={open} autoEnablePresence={false}>
           <ModalDialog {...props} ref={ref} />
         </ModalPresence>
       );
@@ -261,22 +261,42 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
   }
 );
 
-type ModalPresenceContextType = {
+interface ModalPresenceContextData {
   presenceRef: RefObject<HTMLDivElement | null>;
+  autoEnablePresence: boolean;
   isExiting: boolean;
-};
-const ModalPresenceContext = createContext<ModalPresenceContextType>({
+}
+
+const ModalPresenceContext = createContext<ModalPresenceContextData>({
   presenceRef: { current: null },
+  autoEnablePresence: false,
   isExiting: false,
 });
+
+interface ModalPresence {
+  /**
+   * Specify whether the Modal is currently open
+   */
+  open?: boolean;
+
+  /**
+   * Specify whether the Modal should opt in to presence mode
+   */
+  autoEnablePresence?: boolean;
+}
+
 export const ModalPresence = ({
   open = false,
+  autoEnablePresence = true,
   children,
-}: PropsWithChildren<Pick<ModalProps, 'open'>>) => {
+}: PropsWithChildren<ModalPresence>) => {
   const presenceRef = useRef<HTMLDivElement | null>(null);
   const { isPresent, isExiting } = usePresence(presenceRef, open);
 
-  const contextValue = useMemo(() => ({ presenceRef, isExiting }), [isExiting]);
+  const contextValue = useMemo(
+    () => ({ presenceRef, autoEnablePresence, isExiting }),
+    [autoEnablePresence, isExiting]
+  );
 
   if (!isPresent) return null;
 
@@ -331,7 +351,8 @@ const ModalInner = React.forwardRef(function Modal(
   ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
-  const { presenceRef, isExiting } = useContext(ModalPresenceContext);
+  const { presenceRef, autoEnablePresence, isExiting } =
+    useContext(ModalPresenceContext);
   const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -351,7 +372,8 @@ const ModalInner = React.forwardRef(function Modal(
   });
   const loadingActive = loadingStatus !== 'inactive';
 
-  const enablePresence = useFeatureFlag('enable-presence');
+  const enablePresence =
+    useFeatureFlag('enable-presence') || autoEnablePresence;
   const focusTrapWithoutSentinels = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
@@ -484,6 +506,7 @@ const ModalInner = React.forwardRef(function Modal(
     {
       [`${prefix}--modal-tall`]: !passiveModal,
       'is-visible': !enablePresence && open,
+      [`${prefix}--modal--enable-presence`]: autoEnablePresence,
       [`${prefix}--modal--danger`]: danger,
       [`${prefix}--modal--slug`]: slug,
       [`${prefix}--modal--decorator`]: decorator,

@@ -27,7 +27,7 @@
 @mixin modal(
   $enable-experimental-focus-wrap-without-sentinels: false,
   $enable-dialog-element: false,
-  $enable-presence: true
+  $enable-presence: false
 ) {
   .#{$prefix}--modal {
     // For modals using the native dialog element, the modal visibility is handled
@@ -51,72 +51,28 @@
       inset-block-start: 0;
       inset-inline-start: 0;
 
-      @if not(enabled('enable-presence') or $enable-presence) {
-        opacity: 0;
-        transition:
-          opacity $duration-moderate-02 motion(exit, expressive),
-          visibility 0ms linear $duration-moderate-02;
-        visibility: hidden;
-      } @else {
-        animation: #{$prefix}--presence-modal__enter
-          $duration-moderate-02
-          motion(entrance, expressive)
-          forwards;
-
-        @media screen and (prefers-reduced-motion: reduce) {
-          animation: none;
-        }
-
-        &[data-exiting] {
-          animation: #{$prefix}--presence-modal__exit
-            $duration-moderate-02
-            motion(exit, expressive)
-            forwards;
-
-          @media screen and (prefers-reduced-motion: reduce) {
-            animation: none;
-          }
-        }
+      &.#{$prefix}--modal--enable-presence {
+        @include modal-animations($has-presence: true);
       }
-    }
 
-    // For modals using the native dialog element, the modal visibility is handled
-    // by the Dialog styles.
-    @if not(
-      enabled('enable-experimental-focus-wrap-without-sentinels') or
-        $enable-experimental-focus-wrap-without-sentinels or
-        enabled('enable-dialog-element') or
-        $enable-dialog-element
-    )
-    {
-      &.is-visible {
-        opacity: 1;
-        transition:
-          opacity $duration-moderate-02 motion(entrance, expressive),
-          visibility 0ms linear;
-        visibility: inherit;
-
-        @media screen and (prefers-reduced-motion: reduce) {
-          transition: none;
-        }
+      &:not(.#{$prefix}--modal--enable-presence) {
+        @include modal-animations(
+          $has-presence: enabled('enable-presence') or $enable-presence
+        );
       }
     }
 
     @include update_fields_on_layer;
   }
 
-  .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
-    transform: translate3d(0, 0, 0);
-    transition: transform $duration-moderate-02 motion(entrance, expressive);
+  .#{$prefix}--modal--enable-presence {
+    @include modal-container-animations($has-presence: true);
   }
 
-  .#{$prefix}--modal[data-exiting] .#{$prefix}--modal-container {
-    animation: #{$prefix}--presence-modal-container__exit $duration-moderate-02
-      motion(exit, expressive) forwards;
-
-    @media screen and (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
+  :not(.#{$prefix}--modal--enable-presence) {
+    @include modal-container-animations(
+      $has-presence: enabled('enable-presence') or $enable-presence
+    );
   }
 
   // -----------------------------
@@ -136,20 +92,6 @@
     outline: 3px solid transparent;
     outline-offset: -3px;
     transform-origin: top center;
-
-    @if not(enabled('enable-presence') or $enable-presence) {
-      transform: translate3d(0, -24px, 0);
-      transition: transform $duration-moderate-02 motion(exit, expressive);
-    } @else {
-      animation: #{$prefix}--presence-modal-container__enter
-        $duration-moderate-02
-        motion(entrance, expressive)
-        forwards;
-
-      @media screen and (prefers-reduced-motion: reduce) {
-        animation: none;
-      }
-    }
 
     @include breakpoint(md) {
       position: relative;
@@ -539,42 +481,120 @@
   }
 }
 
-@keyframes #{$prefix}--presence-modal__enter {
-  from {
+@mixin modal-animations($has-presence: false) {
+  @if not($has-presence) {
     opacity: 0;
-  }
+    transition:
+      opacity $duration-moderate-02 motion(exit, expressive),
+      visibility 0ms linear $duration-moderate-02;
+    visibility: hidden;
 
-  to {
-    opacity: 1;
+    &.is-visible {
+      opacity: 1;
+      transition:
+        opacity $duration-moderate-02 motion(entrance, expressive),
+        visibility 0ms linear;
+      visibility: inherit;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  } @else {
+    animation: #{$prefix}--presence-modal__enter
+      $duration-moderate-02
+      motion(entrance, expressive)
+      forwards;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+
+    &[data-exiting] {
+      animation: #{$prefix}--presence-modal__exit
+        $duration-moderate-02
+        motion(exit, expressive)
+        forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal__enter {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal__exit {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
   }
 }
 
-@keyframes #{$prefix}--presence-modal__exit {
-  from {
-    opacity: 1;
-  }
+@mixin modal-container-animations($has-presence: false) {
+  @if not($has-presence) {
+    &.is-visible .#{$prefix}--modal-container {
+      transform: translate3d(0, 0, 0);
+      transition: transform $duration-moderate-02 motion(entrance, expressive);
+    }
 
-  to {
-    opacity: 0;
-  }
-}
+    .#{$prefix}--modal-container {
+      transform: translate3d(0, -24px, 0);
+      transition: transform $duration-moderate-02 motion(exit, expressive);
+    }
+  } @else {
+    &[data-exiting] .#{$prefix}--modal-container {
+      animation: #{$prefix}--presence-modal-container__exit
+        $duration-moderate-02
+        motion(exit, expressive)
+        forwards;
 
-@keyframes #{$prefix}--presence-modal-container__enter {
-  from {
-    transform: translate3d(0, -24px, 0);
-  }
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
 
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
+    .#{$prefix}--modal-container {
+      animation: #{$prefix}--presence-modal-container__enter
+        $duration-moderate-02
+        motion(entrance, expressive)
+        forwards;
 
-@keyframes #{$prefix}--presence-modal-container__exit {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
 
-  to {
-    transform: translate3d(0, -24px, 0);
+    @keyframes #{$prefix}--presence-modal-container__enter {
+      from {
+        transform: translate3d(0, -24px, 0);
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal-container__exit {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(0, -24px, 0);
+      }
+    }
   }
 }
