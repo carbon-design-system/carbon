@@ -1,7 +1,7 @@
 {
   "name": "@carbon/pictograms",
   "description": "Pictograms for digital and software products using the Carbon Design System",
-  "version": "12.53.0",
+  "version": "12.54.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,7 +33,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^1.39.0",
+    "@carbon/icon-build-helpers": "^1.40.0-rc.0",
     "rimraf": "^6.0.0"
   },
   "dependencies": {
