@@ -177,6 +177,7 @@ class CDSTextarea extends CDSTextInput {
 
     const textareaWrapperClasses = classMap({
       [`${prefix}--text-area__wrapper`]: true,
+      [`${prefix}--text-area__wrapper--cols`]: this.cols,
       [`${prefix}--text-area__wrapper--warn`]: this.warn,
       [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
     });
