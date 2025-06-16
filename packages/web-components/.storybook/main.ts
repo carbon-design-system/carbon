@@ -1,5 +1,5 @@
 import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
+import path, { dirname, join } from 'node:path';
 /**
  * Copyright IBM Corp. 2023, 2024
  *
@@ -52,6 +52,12 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
+      resolve: {
+        alias: {
+          ...(config.resolve?.alias || {}),
+          '@docs': path.resolve(__dirname, '..', '..', '..', 'docs'),
+        },
+      },
       plugins: [
         litStyleLoader(),
         litTemplateLoader(),
@@ -77,6 +83,7 @@ const config: StorybookConfig = {
       sourcemap: true,
     });
   },
+
   docs: {
     defaultName: 'Overview',
   },

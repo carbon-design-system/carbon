@@ -1,0 +1,50 @@
+import { Markdown, Meta } from '@storybook/addon-docs/blocks';
+import FeatureFlag from '@docs/feature-flags.md?raw'
+
+<Meta title="Introduction/Feature Flags" />
+
+# Feature Flags
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/feature-flags)
+
+{/* prettier-ignore-start */}
+
+{/* START doctoc generated TOC please keep comment here to allow auto update */}
+
+{/* DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE */}
+
+## Table of Contents
+
+* [Current feature flags](#current-feature-flags)
+* [Turning on feature flags in @carbon/web-components](#turning-on-feature-flags-in-web-components)
+* [Turning on feature flags in Sass](#turning-on-feature-flags-in-sass)
+
+{/* END doctoc generated TOC please keep comment here to allow auto update */}
+
+{/* prettier-ignore-end */}
+
+The `@carbon/web-components` codebase ships with a number of feature flags. These feature
+flags enable new behavior and styling, allowing you to opt-in to new (and
+sometimes breaking) changes while using the current version. A feature flag may
+be configured in web-components, sass, or both.
+
+This section in the storybook documents each feature flag that is available and
+how to configure it. Folders and stories within this section in storybook show
+components with all feature flags turned on.
+
+<Markdown>{FeatureFlag}</Markdown>
+
+## Turning on feature flags in @carbon/web-components
+
+Use the `<feature-flags>` web component to turn on a feature flag for a portion of your
+application. You can configure multiple feature flags at the same time by passing them as attributes or properties to the element.
+
+```jsx
+<feature-flag enableV12TileDefaultIcons="true" enableASecondFeatureFlag="true">
+  <Tile />
+</feature-flag>;
+```
+
+The `<feature-flag>` component can be placed at any point in your react tree and
+will impact all children components. You can turn on feature flags for your
+entire app, or only certain pages/routes/sections of your application.
