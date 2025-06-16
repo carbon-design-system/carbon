@@ -117,6 +117,11 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       renderIcon: Icon,
       value,
       href,
+      active: _active,
+      depth: _depth,
+      onTreeSelect: _onTreeSelect,
+      onNodeFocusEvent: _onNodeFocusEvent,
+      selected: _selected,
       ...rest
     },
     forwardedRef
