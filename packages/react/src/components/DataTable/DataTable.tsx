@@ -253,8 +253,8 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   locale?: string;
   overflowMenuOnHover?: boolean;
   radio?: boolean;
-  // TODO [@carbon-design-system/monorepo-reviewers]: Any reason to keep this
-  // prop since it matches `children`? I'm wondering if it should be deprecated.
+  // TODO: Deprecate this prop.
+  // https://github.com/carbon-design-system/carbon/pull/19659#discussion_r2150091428
   render?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
   ) => ReactElement;
@@ -293,10 +293,6 @@ interface DataTableState<ColTypes extends any[]> {
 }
 
 /**
- * TODO [@carbon-design-system/monorepo-reviewers]: Is everything in this
- * comment still accurate? If not, figure out if it should be updated or
- * deleted.
- *
  * Data Tables are used to represent a collection of resources, displaying a
  * subset of their fields in columns, or headers. We prioritize direct updates
  * to the state of what we're rendering, so internally we end up normalizing the
@@ -709,7 +705,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
         // TODO:
         // 1. Should the `reduce` be typed with `<Record<string,
         // DataTableRow<ColTypes>>>`?
-        // 2. Add better parameter names. What is `p` and `c`?
+        // 2. Add better parameter names. Use `acc` and `row`.
         //
         // deselect all radio buttons
         const rowsById = Object.entries(prev.rowsById).reduce((p, c) => {
@@ -882,10 +878,6 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   return null;
 };
 
-// TODO [@carbon-design-system/monorepo-reviewers]: Should these namespaced
-// components and properties be removed in a future release? It happened for
-// v11:
-// https://github.com/carbon-design-system/carbon/blob/f574ad0e46ed2f7d84ba50c8561bd9cb20ffa1b3/packages/react/docs/migration/11.x-namespaced-exports.md#changes
 DataTable.translationKeys = Object.values(translationKeys);
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
