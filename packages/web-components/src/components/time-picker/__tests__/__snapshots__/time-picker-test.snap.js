@@ -12,7 +12,7 @@ snapshots['cds-time-picker should not call onBlur when disabled'] =
         class="cds--text-input cds--time-picker__input-field"
         disabled=""
         maxlength="5"
-        pattern="(1[012]|[1-9]):[0-5][0-9](\s)?"
+        pattern="(1[012]|[1-9]):[0-5][0-9](s)?"
         placeholder="hh:mm"
         type="text"
       >
@@ -34,7 +34,7 @@ snapshots['cds-time-picker events should write text inside the textbox'] =
       <input
         class="cds--text-input cds--time-picker__input-field"
         maxlength="5"
-        pattern="(1[012]|[1-9]):[0-5][0-9](\s)?"
+        pattern="(1[012]|[1-9]):[0-5][0-9](s)?"
         placeholder="hh:mm"
         type="text"
       >
