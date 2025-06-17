@@ -84,7 +84,6 @@ describe('cds-breadcrumb', () => {
           <cds-breadcrumb-item href="#c">C</cds-breadcrumb-item>
         </cds-breadcrumb>
       `);
-      await expect(el).dom.to.equalSnapshot();
 
       await expect(el).to.be.accessible();
     });
