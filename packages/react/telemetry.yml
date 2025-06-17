@@ -326,6 +326,7 @@ collect:
         # Dialog
         - ariaDescribedBy
         - ariaLabelledBy
+        - focusAfterCloseRef
         - modal
         # DismissibleTag
         - dismissTooltipLabel
