@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
@@ -269,7 +269,7 @@ describe('Popover', () => {
     });
 
     it('should add multi-line class to popover content when text is long', async () => {
-      const { container } = render(
+      const { container } = await render(
         <Popover open>
           <button type="button">Settings</button>
           <PopoverContent>
@@ -278,12 +278,10 @@ describe('Popover', () => {
           </PopoverContent>
         </Popover>
       );
-      await setTimeout(
-        () =>
-          expect(container.firstChild.lastChild.firstChild).toHaveClass(
-            `${prefix}--popover-content--multi-line`
-          ),
-        100
+      waitFor(() =>
+        expect(container.firstChild.lastChild.firstChild).toHaveClass(
+          `${prefix}--popover-content--multi-line`
+        )
       );
     });
     it('should not add multi-line class to popover content when text is short', () => {
