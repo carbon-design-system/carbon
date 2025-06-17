@@ -284,6 +284,7 @@ const Modal = React.forwardRef(function Modal(
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const prevOpen = usePreviousValue(open);
   const modalInstanceId = `modal-${useId()}`;
@@ -380,14 +381,18 @@ const Modal = React.forwardRef(function Modal(
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
-      wrapFocus({
-        bodyNode,
-        startTrapNode,
-        endTrapNode,
-        currentActiveNode,
-        oldActiveNode,
-        selectorsFloatingMenus,
-      });
+      // use setTimeout to ensure focus is set after all browser default focus behavior. Fixes issue of
+      // focus not wrapping in Firefox
+      wrapFocusTimeout.current = setTimeout(() =>
+        wrapFocus({
+          bodyNode,
+          startTrapNode,
+          endTrapNode,
+          currentActiveNode,
+          oldActiveNode,
+          selectorsFloatingMenus,
+        })
+      );
     }
 
     // Adjust scroll if needed so that element with focus is not obscured by gradient
@@ -480,6 +485,15 @@ const Modal = React.forwardRef(function Modal(
     alertDialogProps.role = 'alertdialog';
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
+
+  useEffect(() => {
+    // clear timeout for wrapFocus
+    return () => {
+      if (wrapFocusTimeout.current) {
+        clearTimeout(wrapFocusTimeout.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
