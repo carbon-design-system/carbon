@@ -1,8 +1,8 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["cds-time-picker should not call onBlur when disabled"] = 
-`<div class="cds--form-item">
+snapshots['cds-time-picker should not call onBlur when disabled'] =
+  `<div class="cds--form-item">
   <label class="cds--label cds--label--disabled">
     Select a time
   </label>
@@ -24,8 +24,8 @@ snapshots["cds-time-picker should not call onBlur when disabled"] =
 `;
 /* end snapshot cds-time-picker should not call onBlur when disabled */
 
-snapshots["cds-time-picker events should write text inside the textbox"] = 
-`<div class="cds--form-item">
+snapshots['cds-time-picker events should write text inside the textbox'] =
+  `<div class="cds--form-item">
   <label class="cds--label">
     Select a time
   </label>
@@ -45,4 +45,3 @@ snapshots["cds-time-picker events should write text inside the textbox"] =
 </div>
 `;
 /* end snapshot cds-time-picker events should write text inside the textbox */
-
