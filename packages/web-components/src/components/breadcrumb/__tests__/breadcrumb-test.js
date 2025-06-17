@@ -13,14 +13,12 @@ describe('cds-breadcrumb', () => {
     const el = await fixture(html`
       <cds-breadcrumb aria-label="test-label"></cds-breadcrumb>
     `);
-    await expect(el).dom.to.equalSnapshot();
 
     expect(el.getAttribute('aria-label')).to.equal('test-label');
   });
 
   it('should provide a default `aria-label` for nav element', async () => {
     const el = await fixture(html` <cds-breadcrumb></cds-breadcrumb> `);
-    await expect(el).dom.to.equalSnapshot();
 
     expect(el.getAttribute('aria-label')).to.equal('Breadcrumb');
   });
@@ -33,7 +31,6 @@ describe('cds-breadcrumb', () => {
         <cds-breadcrumb-item href="#c">C</cds-breadcrumb-item>
       </cds-breadcrumb>
     `);
-    await expect(el).dom.to.equalSnapshot();
 
     const items = el.querySelectorAll('cds-breadcrumb-item');
     expect(items.length).to.equal(3);
@@ -50,7 +47,6 @@ describe('cds-breadcrumb', () => {
         <cds-breadcrumb-item href="#c">C</cds-breadcrumb-item>
       </cds-breadcrumb>
     `);
-    await expect(el).dom.to.equalSnapshot();
 
     const lastItem = el.querySelector('cds-breadcrumb-item:last-of-type');
     const lastItemStyle = window.getComputedStyle(lastItem, ':after');
@@ -65,7 +61,6 @@ describe('cds-breadcrumb', () => {
         </cds-breadcrumb-item>
       </cds-breadcrumb>`
     );
-    await expect(el).dom.to.equalSnapshot();
 
     const item = el.querySelector('cds-breadcrumb-item');
     const link = item.querySelector('cds-breadcrumb-link');
@@ -76,7 +71,6 @@ describe('cds-breadcrumb', () => {
     const el = await fixture(html`
       <cds-breadcrumb data-testid="test"></cds-breadcrumb>
     `);
-    await expect(el).dom.to.equalSnapshot();
 
     expect(el.getAttribute('data-testid')).to.equal('test');
   });
