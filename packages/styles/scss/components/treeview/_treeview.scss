@@ -57,7 +57,10 @@
   .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
     @include focus-outline('outline');
   }
-
+  .#{$prefix}--tree-node.#{$prefix}--tree-parent-node
+    > .#{$prefix}--tree-node__label {
+    inline-size: auto;
+  }
   .#{$prefix}--tree-node--disabled:focus > .#{$prefix}--tree-node__label {
     outline: none;
   }
@@ -110,10 +113,14 @@
   .#{$prefix}--tree-node__label {
     @include type-style('body-compact-01');
 
+    position: relative;
     display: flex;
+    box-sizing: border-box;
     flex: 1;
     align-items: center;
+    inline-size: 100%;
     min-block-size: convert.to-rem(32px);
+    padding-inline-end: 1rem;
 
     &:hover {
       background-color: $layer-hover-01;
@@ -154,6 +161,7 @@
   .#{$prefix}--tree-node__label__details {
     display: flex;
     align-items: center;
+    min-inline-size: 0;
   }
 
   .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
@@ -246,5 +254,52 @@
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-parent-node__toggle {
     margin-block-start: 0;
+  }
+  .#{$prefix}--tree-node__label__text {
+    @include type-style('body-compact-01');
+
+    display: block;
+    overflow: hidden;
+    line-height: 1.2;
+    padding-inline-start: convert.to-rem(4px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--tree-node__label .#{$prefix}--icon-tooltip {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--tree-node__label
+    .#{$prefix}--icon-tooltip
+    .#{$prefix}--btn--icon-only {
+    padding: 0;
+    border: none;
+    background: transparent;
+    block-size: auto;
+    color: inherit;
+    inline-size: 100%;
+    min-block-size: unset;
+    text-align: start;
+  }
+
+  .#{$prefix}--tree-node__label
+    .#{$prefix}--icon-tooltip
+    .#{$prefix}--btn--icon-only
+    .#{$prefix}--tree-node__label__text {
+    color: inherit;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--tree-node__label .#{$prefix}--tooltip-content {
+    padding: 1rem;
+  }
+
+  .#{$prefix}--tree-node__label .#{$prefix}--popover-container {
+    inline-size: 100%;
+  }
+  .#{$prefix}--tooltip-trigger__wrapper .#{$prefix}--btn--ghost:focus {
+    box-shadow: none;
+    outline: 2px solid $focus;
   }
 }
