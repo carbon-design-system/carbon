@@ -615,15 +615,15 @@ function PopoverContentRenderFunction(
 
   const checkIfMultiLine = () => {
     const el = textRef.current;
-    if (!el) {
-      return;
+    if (el) {
+      const style = getComputedStyle(el);
+      const lineHeight = parseFloat(style.lineHeight);
+      const height = el.offsetHeight;
+      const lines = Math.floor(height / lineHeight);
+      setIsMultiLine(lines > 1);
     }
-    const style = getComputedStyle(el);
-    const lineHeight = parseFloat(style.lineHeight);
-    const height = el.offsetHeight;
-    const lines = Math.floor(height / lineHeight);
-    setIsMultiLine(lines > 1);
   };
+
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span
