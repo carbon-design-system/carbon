@@ -1,4 +1,9 @@
-// src/components/TreeView/TreeView.tsx
+/**
+ * Copyright IBM Corp. 2016, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -16,23 +21,55 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
 import TreeNode, { TreeNodeProps } from './TreeNode';
-import { TreeContext, DepthContext } from './TreeContext'; // New Import
+import { TreeContext, DepthContext } from './TreeContext';
 
 export type TreeViewProps = {
+  /**
+   * Mark the active node in the tree, represented by its ID
+   */
   active?: string | number;
+  /**
+   * Specify the children of the TreeView
+   */
   children?: React.ReactNode;
+  /**
+   * Specify an optional className to be applied to the TreeView
+   */
   className?: string;
+  /**
+   * Specify whether or not the label should be hidden
+   */
   hideLabel?: boolean;
+  /**
+   * Provide the label text that will be read by a screen reader
+   */
   label: string;
+  /**
+   * **[Experimental]** Specify the selection mode of the tree.
+   * If `multiselect` is `false` then only one node can be selected at a time
+   */
   multiselect?: boolean;
+  /**
+   * **[Experimental]** Callback function that is called when any node is activated.
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
+   */
   onActivate?: (activated?: string | number) => void;
+  /**
+   * Callback function that is called when any node is selected
+   */
   onSelect?: (
     event: React.SyntheticEvent<HTMLUListElement>,
     payload?: Partial<TreeNodeProps> & {
       activeNodeId?: string | number;
     }
   ) => void;
+  /**
+   * Array representing all selected node IDs in the tree
+   */
   selected?: Array<string | number>;
+  /**
+   * Specify the size of the tree from a list of available sizes.
+   */
   size?: 'xs' | 'sm';
 } & Omit<React.HTMLAttributes<HTMLUListElement>, 'onSelect'>;
 
@@ -309,19 +346,59 @@ const TreeView: TreeViewComponent = ({
   );
 };
 
-// PropTypes remain the same
 TreeView.propTypes = {
+  /**
+   * Mark the active node in the tree, represented by its ID
+   */
   active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify the children of the TreeView
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the TreeView
+   */
   className: PropTypes.string,
+
+  /**
+   * Specify whether or not the label should be hidden
+   */
   hideLabel: PropTypes.bool,
+
+  /**
+   * Provide the label text that will be read by a screen reader
+   */
   label: PropTypes.string.isRequired,
+
+  /**
+   * **[Experimental]** Specify the selection mode of the tree.
+   * If `multiselect` is `false` then only one node can be selected at a time
+   */
   multiselect: PropTypes.bool,
+
+  /**
+   * **[Experimental]** Callback function that is called when any node is activated.
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
+   */
   onActivate: PropTypes.func,
+
+  /**
+   * Callback function that is called when any node is selected
+   */
   onSelect: PropTypes.func,
+
+  /**
+   * Array representing all selected node IDs in the tree
+   */
   selected: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
+
+  /**
+   * Specify the size of the tree from a list of available sizes.
+   */
   size: PropTypes.oneOf(['xs', 'sm']),
 };
 

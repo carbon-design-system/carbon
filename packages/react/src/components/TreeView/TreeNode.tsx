@@ -17,7 +17,7 @@ import React, {
   type FunctionComponent,
   type MouseEvent,
   type MutableRefObject,
-  type FocusEvent, // Correctly import FocusEvent
+  type FocusEvent,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
