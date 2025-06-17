@@ -1,7 +1,7 @@
 {
   "name": "www",
   "private": true,
-  "version": "0.93.0",
+  "version": "0.94.0-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@carbon/react": "^1.84.0",
+    "@carbon/react": "^1.85.0-rc.0",
     "@octokit/core": "^4.0.0",
     "@octokit/plugin-retry": "^3.0.9",
     "@octokit/plugin-throttling": "^4.0.0",
@@ -30,7 +30,7 @@
     "clsx": "^2.0.0",
     "date-fns": "^3.0.0",
     "fs-extra": "^11.0.0",
-    "next": "^14.2.25",
+    "next": "^15.0.0",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

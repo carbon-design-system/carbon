@@ -1,7 +1,7 @@
 {
   "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
-  "version": "2.31.0",
+  "version": "2.32.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -58,14 +58,14 @@
     "start": "yarn storybook",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "test": "web-test-runner \"src/components/**/__tests__/**/*.js\" --node-resolve",
+    "test": "web-test-runner \"src/components/**/__tests__/**/*.js\" --node-resolve --concurrency=1",
     "test:updateSnapshots": "yarn test --update-snapshots",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "visual-snapshot": "yarn percy storybook:start ./storybook-static",
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "dependencies": {
-    "@carbon/styles": "^1.83.0",
+    "@carbon/styles": "^1.84.0-rc.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.5.0",
     "@lit/context": "^1.1.1",
@@ -76,9 +76,9 @@
   },
   "devDependencies": {
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/icons": "^11.61.0",
-    "@carbon/layout": "^11.35.0",
-    "@carbon/motion": "^11.29.0",
+    "@carbon/icons": "^11.62.0-rc.0",
+    "@carbon/layout": "^11.36.0-rc.0",
+    "@carbon/motion": "^11.30.0-rc.0",
     "@juggle/resize-observer": "^3.4.0",
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",

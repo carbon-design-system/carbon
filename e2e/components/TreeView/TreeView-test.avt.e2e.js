@@ -9,6 +9,15 @@
 
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
+const LONG_LABEL_NODE_1 = 'Application development and integration solutions';
+const LONG_LABEL_NODE_2 = 'Business automation and integration solution';
+const SHORT_LABEL_NODE = 'Blockchain';
+
+const STORY_CONFIG = {
+  component: 'TreeView',
+  id: 'components-treeview--default',
+  globals: { theme: 'white' },
+};
 
 test.describe('@avt TreeView', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -108,5 +117,48 @@ test.describe('@avt TreeView', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await expect(deepNode).toBeFocused();
+  });
+
+  test('@avt-advanced-states tooltip functionality', async ({ page }) => {
+    await visitStory(page, STORY_CONFIG);
+
+    // Long labels: tooltip appears with correct content and accessibility
+    const longNode = page.getByRole('treeitem', { name: LONG_LABEL_NODE_1 });
+    await longNode.focus();
+
+    const tooltip = longNode.locator('[role="tooltip"]');
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toHaveText(LONG_LABEL_NODE_1);
+
+    // Verify ARIA relationship
+    const button = longNode.locator('.cds--tree-node__label__text-button');
+    const ariaLabelledBy = await button.getAttribute('aria-labelledby');
+    const tooltipId = await tooltip.getAttribute('id');
+    expect(ariaLabelledBy).toBe(tooltipId);
+
+    await expect(page).toHaveNoACViolations('TreeView-tooltip');
+  });
+
+  test('@avt-advanced-states tooltip conditional behavior', async ({
+    page,
+  }) => {
+    await visitStory(page, STORY_CONFIG);
+
+    // Short labels: no tooltip rendered
+    const shortNode = page.getByRole('treeitem', { name: SHORT_LABEL_NODE });
+    await shortNode.focus();
+    await expect(shortNode.locator('[role="tooltip"]')).toHaveCount(0);
+
+    // Regular span structure without button wrapper
+    await expect(
+      shortNode.locator('.cds--tree-node__label__text')
+    ).toBeVisible();
+    await expect(
+      shortNode.locator('.cds--tree-node__label__text-button')
+    ).toHaveCount(0);
+
+    // TreeView selection functionality unaffected
+    await page.keyboard.press('Enter');
+    await expect(shortNode).toHaveAttribute('aria-selected', 'true');
   });
 });

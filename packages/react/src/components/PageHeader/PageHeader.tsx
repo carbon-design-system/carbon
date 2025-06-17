@@ -697,10 +697,10 @@ const Content = PageHeaderContent;
 Content.displayName = 'PageHeaderContent';
 
 const ContentPageActions = PageHeaderContentPageActions;
-Content.displayName = 'PageHeaderContentPageActions';
+ContentPageActions.displayName = 'PageHeaderContentPageActions';
 
 const ContentText = PageHeaderContentText;
-Content.displayName = 'PageHeaderContentText';
+ContentText.displayName = 'PageHeaderContentText';
 
 const HeroImage = PageHeaderHeroImage;
 HeroImage.displayName = 'PageHeaderHeroImage';

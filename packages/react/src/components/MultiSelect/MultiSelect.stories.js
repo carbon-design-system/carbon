@@ -393,62 +393,6 @@ export const WithLayerMultiSelect = (args) => (
   </WithLayer>
 );
 
-export const Test = () => {
-  const [selectedItems, setSelectedItems] = useState([]);
-  const items = [
-    {
-      id: 'downshift-1-item-0',
-      text: 'Option 1',
-    },
-    {
-      id: 'downshift-1-item-1',
-      text: 'Option 2',
-    },
-    {
-      id: 'downshift-1-item-2',
-      text: 'Option 3 - a disabled item',
-      disabled: true,
-    },
-    {
-      id: 'downshift-1-item-3',
-      text: 'Option 4',
-    },
-    {
-      id: 'downshift-1-item-4',
-      text: 'An example option that is really long to show what should be done to handle long text',
-    },
-    {
-      id: 'downshift-1-item-5',
-      text: 'Option 5',
-    },
-  ];
-  return (
-    <div style={{ width: 600, margin: 20 }}>
-      <p style={{ marginBottom: 20 }}>
-        <strong>Issue:</strong> click on the "FilterableMultiSelect Sample" and
-        edit. Then click to select the "TextInput Sample". Note that the browser
-        focus automatically switches back to the FilterableMultiSelect.
-        <strong>Expected Behavior:</strong> When a user interacts with
-        FilterableMultiSelect and then clicks on TextInput, the focus should
-        immediately and permanently move to TextInput without automatically
-        returning to FilterableMultiSelect.
-      </p>
-      <div style={{ width: 600, display: 'flex', alignItems: 'center' }}>
-        <div style={{ marginRight: 20 }}>
-          <FilterableMultiSelect
-            id="carbon-multiselect-example-3"
-            titleText="FilterableMultiselect Sample"
-            items={items}
-            onChange={(data) => setSelectedItems(data.selectedItems)}
-            itemToString={(item) => (item ? item.text : '')}
-            selectionFeedback="top-after-reopen"
-          />
-        </div>
-        <TextInput className="text-input" labelText="TextInput Sample" />
-      </div>
-    </div>
-  );
-};
 export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
