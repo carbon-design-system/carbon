@@ -27,11 +27,6 @@ jobs:
           # 👇 Tells the checkout which commit hash to reference
           # https://www.chromatic.com/docs/github-actions/#recommended-configuration-for-build-events
           ref: ${{ github.event.pull_request.head.ref }}
-        env:
-          CHROMATIC_BRANCH:
-            ${{ github.event.pull_request.head.ref || github.ref_name }}
-          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
-          CHROMATIC_SLUG: ${{ github.repository }}
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -70,3 +65,11 @@ jobs:
           # externals: |
           #   packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/**
           #   *.sass
+        env:
+          # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
+          CHROMATIC_BRANCH:
+            ${{ github.event.pull_request.head.ref || github.ref_name }}
+          # 👇 Set to the PR head commit if it's a PR; otherwise to the ref (which typically resolves to the latest commit SHA)
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+          # 👇 Makes sure this is always set to the corect owner/repo
+          CHROMATIC_SLUG: ${{ github.repository }}
