@@ -1,7 +1,7 @@
 {
   "name": "@carbon/motion",
   "description": "Motion helpers for digital and software products using the Carbon Design System",
-  "version": "11.29.0",
+  "version": "11.30.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -31,7 +31,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "@carbon/cli": "^11.28.0",
+    "@carbon/cli": "^11.29.0-rc.0",
     "rimraf": "^6.0.0"
   },
   "dependencies": {
