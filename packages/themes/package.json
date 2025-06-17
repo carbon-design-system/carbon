@@ -1,7 +1,7 @@
 {
   "name": "@carbon/themes",
   "description": "Themes for applying color in the Carbon Design System",
-  "version": "11.54.0",
+  "version": "11.55.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,16 +32,16 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@carbon/colors": "^11.34.0",
-    "@carbon/layout": "^11.35.0",
-    "@carbon/type": "^11.41.0",
+    "@carbon/colors": "^11.35.0-rc.0",
+    "@carbon/layout": "^11.36.0-rc.0",
+    "@carbon/type": "^11.42.0-rc.0",
     "@ibm/telemetry-js": "^1.5.0",
     "color": "^4.0.0"
   },
   "devDependencies": {
     "@babel/node": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
-    "@carbon/cli": "^11.28.0",
+    "@carbon/cli": "^11.29.0-rc.0",
     "@carbon/cli-reporter": "^10.7.0",
     "@carbon/scss-generator": "^10.19.0",
     "@carbon/test-utils": "^10.36.0",
