@@ -106,6 +106,7 @@
   }
 
   .#{$prefix}--form-item {
+    position: relative;
     &:has(.#{$prefix}--text-area__wrapper--cols) {
       inline-size: fit-content;
     }
@@ -246,5 +247,9 @@
     display: flex;
     justify-content: space-between;
     inline-size: 100%;
+  }
+  .#{$prefix}--form-requirement {
+    position: absolute;
+    inset-block-start: 100%;
   }
 }

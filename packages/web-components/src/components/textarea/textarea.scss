@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 
 :host(#{$prefix}-textarea) {
+  position: relative;
   @include emit-layout-tokens();
 
   outline: none;
@@ -40,6 +41,9 @@ $css--plex: true !default;
 
 :host(#{$prefix}-textarea[warn]),
 :host(#{$prefix}-textarea[invalid]) {
+  .#{$prefix}--form-requirement {
+    inset-block-start: auto;
+  }
   .#{$prefix}--text-area__wrapper--decorator {
     .#{$prefix}--text-area {
       padding-inline-end: $spacing-10;
