@@ -240,7 +240,7 @@ class CDSNumberInput extends CDSTextInput {
     const inputWrapperClasses = classMap({
       [`${prefix}--number__input-wrapper`]: true,
       [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--number__input-wrapper--slug`]: this._hasAILabel,
+      [`${prefix}--number__input-wrapper--decorator`]: this._hasAILabel,
     });
 
     const labelClasses = classMap({
