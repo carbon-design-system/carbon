@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-carbon",
   "description": "ESLint configuration for Carbon",
-  "version": "3.23.0",
+  "version": "3.24.0-rc.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -47,8 +47,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-ssr-friendly": "^1.3.0",
-    "eslint-plugin-storybook": "^0.11.0",
+    "eslint-plugin-storybook": "^0.12.0",
     "eslint-plugin-testing-library": "^6.0.1",
     "eslint-restricted-globals": "^0.2.0"
   },

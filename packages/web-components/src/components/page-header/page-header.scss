@@ -10,8 +10,10 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/grid';
 @use '@carbon/styles/scss/components/page-header/index' as *;
 
@@ -31,6 +33,27 @@ $css--plex: true !default;
 
 :host(#{$prefix}-page-header-breadcrumb) {
   @extend .#{$prefix}--page-header__breadcrumb-bar;
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--page-header__breadcrumb__icon;
+  }
+}
+
+:host(#{$prefix}-page-header-breadcrumb:not([content-actions-flush]))
+  ::slotted([slot='content-actions']) {
+  //stylelint-disable declaration-no-important
+  margin-inline-end: $spacing-04 !important;
+}
+
+:host(#{$prefix}-page-header-breadcrumb[page-actions-flush]) {
+  .#{$prefix}--css-grid {
+    margin-inline-end: 0;
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--css-grid-column {
+    margin-inline-end: 0;
+  }
 }
 
 :host(#{$prefix}-page-header-breadcrumb[border='true']) {
@@ -117,14 +140,26 @@ $css--plex: true !default;
   display: flex;
   justify-content: space-between;
   inline-size: 100%;
+
+  // TODO: remove once responsive logic for tags is implemented
+  @include breakpoint-down(md) {
+    flex-direction: column-reverse;
+    grid-gap: $spacing-05;
+  }
 }
 
-:host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tags {
+:host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
   @extend .#{$prefix}--page-header__tags;
 
   inline-size: 100%;
+
+  // TODO: remove once responsive logic for tags is implemented
+  @include breakpoint-down(md) {
+    justify-content: left;
+  }
 }
 
+:host(#{$prefix}-page-header-breadcrumb),
 :host(#{$prefix}-page-header-content),
 :host(#{$prefix}-page-header-tabs) {
   .#{$prefix}--css-grid {
@@ -134,4 +169,8 @@ $css--plex: true !default;
 
 #{$prefix}-definition-tooltip::part(definition-term) {
   border: none;
+}
+
+:host(#{$prefix}-page-header-tabs) ::slotted(cds-tabs) {
+  --tabs-overflow-button-background: $layer-01;
 }

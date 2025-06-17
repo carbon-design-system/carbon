@@ -24,6 +24,68 @@ describe('cds-page-header', function () {
 
       await expect(el).dom.to.equalSnapshot();
     });
+
+    it('should place className on the outermost element', async () => {
+      const el = await fixture(
+        html`<cds-page-header-breadcrumb
+          class="custom-class"></cds-page-header-breadcrumb>`
+      );
+      expect(el).to.have.class('custom-class');
+    });
+
+    it('should render breadcrumb items', async () => {
+      const el = await fixture(html`
+        <cds-page-header-breadcrumb>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </cds-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const breadcrumbItems = el.querySelectorAll('cds-breadcrumb-item');
+      expect(breadcrumbItems.length).to.equal(2);
+    });
+
+    it('should render content actions', async () => {
+      const el = await fixture(html`
+        <cds-page-header-breadcrumb>
+          <div slot="content-actions">
+            <button class="content-action-item">Button</button>
+          </div>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </cds-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const elem = el.querySelector('.content-action-item');
+      expect(elem).to.exist;
+    });
+
+    it('should render page actions', async () => {
+      const el = await fixture(html`
+        <cds-page-header-breadcrumb>
+          <div slot="page-actions">
+            <button class="page-action-item">Button</button>
+          </div>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </cds-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const elem = el.querySelector('.page-action-item');
+      expect(elem).to.exist;
+    });
   });
 
   describe('cds-page-header-content', () => {
@@ -155,7 +217,7 @@ describe('cds-page-header', function () {
     it('should render', async () => {
       const el = await fixture(
         html` <cds-page-header-tabs>
-          <cds-tabs slot="tabs" value="tab-1">
+          <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
             >
@@ -172,7 +234,7 @@ describe('cds-page-header', function () {
     it('should render tabs', async () => {
       const el = await fixture(
         html` <cds-page-header-tabs>
-          <cds-tabs slot="tabs" value="tab-1">
+          <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
             >
@@ -183,21 +245,15 @@ describe('cds-page-header', function () {
         </cds-page-header-tabs>`
       );
 
-      const slot = el.shadowRoot.querySelector('slot[name="tabs"]');
-      const assigned = slot.assignedNodes({ flatten: true });
+      const tabs = el.querySelector('cds-tabs');
+      expect(tabs).to.exist;
 
-      const tabsComponent = assigned.find(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE &&
-          node.tagName.toLowerCase() === 'cds-tabs'
-      );
+      await tabs.updateComplete;
 
-      expect(tabsComponent).to.exist;
-
-      const tabs = tabsComponent.querySelectorAll('cds-tab');
-      expect(tabs.length).to.equal(2);
-      expect(tabs[0].textContent).to.include('Tab 1');
-      expect(tabs[1].textContent).to.include('Tab 2');
+      const tab = tabs.querySelectorAll('cds-tab');
+      expect(tab.length).to.equal(2);
+      expect(tab[0].textContent).to.include('Tab 1');
+      expect(tab[1].textContent).to.include('Tab 2');
     });
 
     it('should render tags', async () => {
