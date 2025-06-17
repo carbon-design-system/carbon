@@ -9,7 +9,7 @@ import React, { useRef, useState, type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { keys, matches } from '../../internal/keyboard';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
@@ -109,7 +109,7 @@ function FileUploaderDropContainer({
 }: FileUploaderDropContainerProps) {
   const prefix = usePrefix();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { current: uid } = useRef(id || uniqueId());
+  const { current: uid } = useRef(id || useId());
   const [isActive, setActive] = useState(false);
   const dropareaClasses = classNames(
     `${prefix}--file__drop-container`,
