@@ -1,76 +1,38 @@
-/**
- * Copyright IBM Corp. 2016, 2025
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+// src/components/TreeView/TreeView.tsx
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useEffect,
-  useMemo,
   useRef,
   useState,
+  useMemo,
   type JSX,
   type SyntheticEvent,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
 import TreeNode, { TreeNodeProps } from './TreeNode';
-import { TreeContext } from './TreeContext';
-import { DepthContext } from './DepthContext';
+import { TreeContext, DepthContext } from './TreeContext'; // New Import
 
 export type TreeViewProps = {
-  /**
-   * Mark the active node in the tree, represented by its ID
-   */
   active?: string | number;
-  /**
-   * Specify the children of the TreeView
-   */
   children?: React.ReactNode;
-  /**
-   * Specify an optional className to be applied to the TreeView
-   */
   className?: string;
-  /**
-   * Specify whether or not the label should be hidden
-   */
   hideLabel?: boolean;
-  /**
-   * Provide the label text that will be read by a screen reader
-   */
   label: string;
-  /**
-   * **[Experimental]** Specify the selection mode of the tree.
-   * If `multiselect` is `false` then only one node can be selected at a time
-   */
   multiselect?: boolean;
-  /**
-   * **[Experimental]** Callback function that is called when any node is activated.
-   * *This is only supported with the `enable-treeview-controllable` feature flag!*
-   */
   onActivate?: (activated?: string | number) => void;
-  /**
-   * Callback function that is called when any node is selected
-   */
   onSelect?: (
     event: React.SyntheticEvent<HTMLUListElement>,
     payload?: Partial<TreeNodeProps> & {
       activeNodeId?: string | number;
     }
   ) => void;
-  /**
-   * Array representing all selected node IDs in the tree
-   */
   selected?: Array<string | number>;
-  /**
-   * Specify the size of the tree from a list of available sizes.
-   */
   size?: 'xs' | 'sm';
 } & Omit<React.HTMLAttributes<HTMLUListElement>, 'onSelect'>;
 
@@ -97,16 +59,15 @@ const TreeView: TreeViewComponent = ({
     'enable-treeview-controllable'
   );
 
-  const { current: treeId } = useRef(rest.id || uniqueId());
+  const { current: treeId } = useRef(rest.id || useId());
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
     // @ts-ignore - will always be false according to prop types
+
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
   const treeRootRef = useRef<HTMLUListElement>(null);
-  const treeWalker = useRef<TreeWalker>(
-    treeRootRef?.current as unknown as TreeWalker
-  );
+  const treeWalker = useRef<TreeWalker | null>(null);
 
   const controllableSelectionState = useControllableState({
     value: preselected,
@@ -163,11 +124,12 @@ const TreeView: TreeViewComponent = ({
     }
   }
 
+  // The logic inside this function is now handled by TreeNode consuming context.
+  // This function is kept to manage focus between nodes, which is a TreeView-level concern.
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
       const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
         event;
-
       if (treeRootRef?.current?.contains(currentFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
@@ -176,7 +138,6 @@ const TreeView: TreeViewComponent = ({
       resetNodeTabIndices();
       const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
         event;
-
       if (treeRootRef?.current?.contains(prevFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
@@ -184,22 +145,15 @@ const TreeView: TreeViewComponent = ({
     }
   }
 
+  // Set the first non-disabled node to be tabbable
   useEffect(() => {
-    if (treeRootRef.current) {
-      const allNodes = treeRootRef.current.querySelectorAll(
-        `.${prefix}--tree-node`
-      );
-      allNodes.forEach((node) => {
-        node.setAttribute('tabindex', '-1');
-      });
-      const firstNode = treeRootRef.current.querySelector(
-        `.${prefix}--tree-node:not([aria-disabled="true"])`
-      );
-      if (firstNode) {
-        firstNode.setAttribute('tabindex', '0');
-      }
+    const firstNode = treeRootRef.current?.querySelector(
+      `.${prefix}--tree-node:not(.${prefix}--tree-node--disabled)`
+    );
+    if (firstNode instanceof HTMLElement) {
+      firstNode.tabIndex = 0;
     }
-  }, [children, prefix]);
+  }, [prefix]);
 
   function handleKeyDown(event) {
     event.stopPropagation();
@@ -211,7 +165,7 @@ const TreeView: TreeViewComponent = ({
       return;
     }
 
-    treeWalker.current.currentNode = event.target;
+    treeWalker.current.currentNode = event.target as Node;
     let nextFocusNode: Node | null = null;
 
     if (match(event, keys.ArrowUp)) {
@@ -235,7 +189,7 @@ const TreeView: TreeViewComponent = ({
             `${prefix}--tree-node--hidden`
           )
         ) {
-          nodeIds.push(treeWalker.current.currentNode?.id);
+          nodeIds.push((treeWalker.current.currentNode as Element).id);
         }
         while (
           match(event, keys.Home)
@@ -251,7 +205,7 @@ const TreeView: TreeViewComponent = ({
             !nextFocusNode.getAttribute('aria-disabled') &&
             !nextFocusNode.classList.contains(`${prefix}--tree-node--hidden`)
           ) {
-            nodeIds.push(nextFocusNode?.id);
+            nodeIds.push((nextFocusNode as Element).id);
           }
         }
       }
@@ -267,7 +221,7 @@ const TreeView: TreeViewComponent = ({
               `${prefix}--tree-node--hidden`
             )
           ) {
-            nodeIds.push(treeWalker.current.currentNode?.id);
+            nodeIds.push((treeWalker.current.currentNode as Element).id);
           }
         }
       }
@@ -284,10 +238,9 @@ const TreeView: TreeViewComponent = ({
   }
 
   useEffect(() => {
-    treeWalker.current =
-      treeWalker.current ??
-      document.createTreeWalker(
-        treeRootRef?.current as unknown as Node,
+    if (treeRootRef.current && !treeWalker.current) {
+      treeWalker.current = document.createTreeWalker(
+        treeRootRef.current,
         NodeFilter.SHOW_ELEMENT,
         {
           acceptNode: function (node) {
@@ -307,31 +260,10 @@ const TreeView: TreeViewComponent = ({
           },
         }
       );
+    }
   }, [prefix]);
 
-  const useActiveAndSelectedOnMount = () =>
-    useEffect(() => {
-      if (!enableTreeviewControllable) {
-        if (preselected?.length) {
-          setSelected(preselected);
-        }
-        if (prespecifiedActive) {
-          setActive(prespecifiedActive);
-        }
-      }
-    }, []);
-
-  useActiveAndSelectedOnMount();
-
-  const contextValue = useMemo(
-    () => ({
-      active,
-      selected,
-      onTreeSelect: handleTreeSelect,
-      onNodeFocusEvent: handleFocusEvent,
-    }),
-    [active, selected, multiselect, prefix]
-  );
+  // Removed useActiveAndSelectedOnMount as this is now handled by the state initializers
 
   const labelId = `${treeId}__label`;
   const TreeLabel = () =>
@@ -341,79 +273,55 @@ const TreeView: TreeViewComponent = ({
       </label>
     ) : null;
 
+  // New: Define the context value
+  const treeContextValue = useMemo(
+    () => ({
+      active,
+      multiselect,
+      onActivate: setActive,
+      onTreeSelect: handleTreeSelect,
+      selected,
+      size,
+    }),
+    [active, multiselect, setActive, handleTreeSelect, selected, size]
+  );
+
   return (
     <>
       <TreeLabel />
-      <ul
-        {...rest}
-        aria-label={hideLabel ? label : undefined}
-        aria-labelledby={!hideLabel ? labelId : undefined}
-        aria-multiselectable={multiselect || undefined}
-        className={treeClasses}
-        onKeyDown={handleKeyDown}
-        ref={treeRootRef}
-        role="tree">
-        <TreeContext.Provider value={contextValue}>
-          <DepthContext.Provider value={0}>{children}</DepthContext.Provider>
-        </TreeContext.Provider>
-      </ul>
+      {/* New: Wrap children in Context Providers */}
+      <TreeContext.Provider value={treeContextValue}>
+        <DepthContext.Provider value={0}>
+          <ul
+            {...rest}
+            aria-label={hideLabel ? label : undefined}
+            aria-labelledby={!hideLabel ? labelId : undefined}
+            aria-multiselectable={multiselect || undefined}
+            className={treeClasses}
+            onKeyDown={handleKeyDown}
+            ref={treeRootRef}
+            role="tree">
+            {children}
+          </ul>
+        </DepthContext.Provider>
+      </TreeContext.Provider>
     </>
   );
 };
 
+// PropTypes remain the same
 TreeView.propTypes = {
-  /**
-   * Mark the active node in the tree, represented by its ID
-   */
   active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Specify the children of the TreeView
-   */
   children: PropTypes.node,
-
-  /**
-   * Specify an optional className to be applied to the TreeView
-   */
   className: PropTypes.string,
-
-  /**
-   * Specify whether or not the label should be hidden
-   */
   hideLabel: PropTypes.bool,
-
-  /**
-   * Provide the label text that will be read by a screen reader
-   */
   label: PropTypes.string.isRequired,
-
-  /**
-   * **[Experimental]** Specify the selection mode of the tree.
-   * If `multiselect` is `false` then only one node can be selected at a time
-   */
   multiselect: PropTypes.bool,
-
-  /**
-   * **[Experimental]** Callback function that is called when any node is activated.
-   * *This is only supported with the `enable-treeview-controllable` feature flag!*
-   */
   onActivate: PropTypes.func,
-
-  /**
-   * Callback function that is called when any node is selected
-   */
   onSelect: PropTypes.func,
-
-  /**
-   * Array representing all selected node IDs in the tree
-   */
   selected: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
-
-  /**
-   * Specify the size of the tree from a list of available sizes.
-   */
   size: PropTypes.oneOf(['xs', 'sm']),
 };
 
