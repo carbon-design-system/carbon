@@ -11,6 +11,7 @@ import { ACCORDION_SIZE } from './accordion';
 import './index';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
+import styles from './accordion.scss?lit';
 
 const sizes = {
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
@@ -120,6 +121,10 @@ export const Controlled = {
   argTypes: {},
   render: () => {
     return html`
+      <style>
+        ${styles}
+      </style>
+
       <script>
         const toggleItems = (isOpen) => {
           document
@@ -134,12 +139,18 @@ export const Controlled = {
         };
       </script>
 
-      <div style="padding-block-end: var(--cds-spacing-03);">
-        <cds-button onclick="toggleItems(true)">Click to expand all</cds-button>
-        <cds-button onclick="toggleItems(false)"
-          >Click to collapse all</cds-button
-        >
-      </div>
+      <cds-button-set class="controlled-accordion-btnset">
+        <cds-button
+          class="controlled-accordion-btn"
+          onclick="toggleItems(true)">
+          Click to expand all
+        </cds-button>
+        <cds-button
+          class="controlled-accordion-btn"
+          onclick="toggleItems(false)">
+          Click to collapse all
+        </cds-button>
+      </cds-button-set>
 
       <cds-accordion>
         <cds-accordion-item controlled title="Section 1 title">
