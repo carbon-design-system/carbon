@@ -7,7 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type JSX,
+} from 'react';
 import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { keys, match } from '../../internal/keyboard';
 import { useDelayedState } from '../../internal/useDelayedState';
@@ -34,7 +40,9 @@ interface TooltipBaseProps {
   /**
    * Pass in the child to which the tooltip will be applied
    */
-  children?: React.ReactElement<any>;
+  children?: React.ReactElement<
+    JSX.IntrinsicElements[keyof JSX.IntrinsicElements]
+  >;
 
   /**
    * Specify an optional className to be applied to the container node
@@ -146,7 +154,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
     // An `aria-label` takes precedence over `aria-describedby`, but when it's
     // needed and the user doesn't specify one, the fallback `id` is used.
     const labelledBy = hasAriaLabel
-      ? null
+      ? undefined
       : hasLabel
         ? (ariaLabelledBy ?? id)
         : undefined;
@@ -300,7 +308,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
         onMouseLeave={onMouseLeave}
         open={open}>
         <div className={`${prefix}--tooltip-trigger__wrapper`}>
-          {child !== undefined
+          {typeof child !== 'undefined'
             ? React.cloneElement(child, {
                 ...triggerProps,
                 ...getChildEventHandlers(child.props),
