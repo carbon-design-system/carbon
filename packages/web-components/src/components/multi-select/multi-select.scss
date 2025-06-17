@@ -48,6 +48,9 @@ $css--plex: true !default;
 
   .#{$prefix}--tag--disabled {
     @extend .#{$prefix}--tag--disabled;
+
+    background-color: transparent;
+    color: $text-disabled;
   }
 
   .#{$prefix}--list-box__field:focus {
@@ -259,4 +262,21 @@ $css--plex: true !default;
 :host(#{$prefix}-multi-select[item-clicked]) .#{$prefix}--list-box__field {
   outline: 1px solid $focus !important;
   outline-offset: -1px !important;
+}
+
+:host(#{$prefix}-multi-select[warn]) {
+  .#{$prefix}--form__helper-text {
+    color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-multi-select[disabled]) {
+  .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__selection {
+    pointer-events: none;
+  }
+  .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--list-box__selection:focus {
+    outline: none !important;
+  }
 }
