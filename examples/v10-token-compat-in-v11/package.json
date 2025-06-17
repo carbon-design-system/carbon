@@ -1,7 +1,7 @@
 {
   "name": "v10-token-compat-in-v11",
   "private": true,
-  "version": "0.82.0",
+  "version": "0.83.0-rc.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.84.0",
+    "@carbon/react": "^1.85.0-rc.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
