@@ -10,7 +10,7 @@ import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-search', () => {
   describe('renders as expected - Component API', () => {
-    it('should respect autoComplete prop', async () => {
+    it('should respect the autocomplete attribute', async () => {
       const el = await fixture(html`
         <cds-search label-text="test-search" autocomplete="test"></cds-search>
       `);
