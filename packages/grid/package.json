@@ -1,7 +1,7 @@
 {
   "name": "@carbon/grid",
   "description": "Grid for digital and software products using the Carbon Design System",
-  "version": "11.37.0",
+  "version": "11.38.0-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -35,11 +35,11 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@carbon/layout": "^11.35.0",
+    "@carbon/layout": "^11.36.0-rc.0",
     "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {
-    "@carbon/cli": "^11.28.0",
+    "@carbon/cli": "^11.29.0-rc.0",
     "rimraf": "^6.0.0"
   },
   "eyeglass": {
