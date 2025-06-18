@@ -1167,3 +1167,35 @@ snapshots['Menu behavior should handle menu item clicks'] = `<cds-button
 </slot>
 `;
 /* end snapshot Menu behavior should handle menu item clicks */
+snapshots['cds-combo-button should support `tooltips-content` attribute'] =
+  `<cds-button
+  has-main-content=""
+  kind="primary"
+  size="lg"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  Primary action
+</cds-button>
+<cds-icon-button
+  align="top"
+  close-on-activation=""
+  kind="primary"
+  menu-alignment="top"
+  part="trigger"
+  size="lg"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  <span slot="tooltip-content">
+    Custom tooltip text
+  </span>
+</cds-icon-button>
+<slot>
+</slot>
+`;
+/* end snapshot cds-combo-button should support `tooltips-content` attribute */
