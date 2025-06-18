@@ -54,7 +54,7 @@ describe('cds-search', () => {
       await expect(el).shadowDom.to.equalSnapshot();
     });
 
-    it('should respect disabled prop', async () => {
+    it('should respect the disabled attribute', async () => {
       const el = await fixture(html`
         <cds-search label-text="test-search" disabled></cds-search>
       `);
