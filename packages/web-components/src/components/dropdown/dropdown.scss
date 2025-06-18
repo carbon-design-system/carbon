@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include list-box;
@@ -44,6 +45,9 @@ $css--plex: true !default;
   .#{$prefix}--list-box__field {
     outline: none;
   }
+}
+:host(#{$prefix}-dropdown[ai-label]) .#{$prefix}--list-box__wrapper--decorator {
+  @include ai-gradient;
 }
 
 :host(#{$prefix}-dropdown[invalid]) {
