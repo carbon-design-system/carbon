@@ -12,7 +12,6 @@ import { prefix } from '../../globals/settings';
 import { BREADCRUMB_SIZE } from './defs';
 import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { isFeatureFlagEnabled } from '../feature-flags/';
 /**
  * Breadcrumb.
  *
@@ -70,24 +69,11 @@ class CDSBreadcrumb extends LitElement {
       [`${prefix}--breadcrumb--no-trailing-slash`]: this.noTrailingSlash,
       [`${prefix}--breadcrumb--sm`]: this.size === BREADCRUMB_SIZE.SMALL,
     });
-
-    const isV12Enabled = isFeatureFlagEnabled(
-      'enable-v12-tile-default-icons',
-      this
-    );
-    return isV12Enabled
-      ? html`
-          <span>Feature flag is enabled for this component.</span>
-          <ol class="${classes}">
-            <slot @slotchange="${this._handleSlotChange}"></slot>
-          </ol>
-        `
-      : html`
-          <span>Feature flag is not enabled for this component.</span>
-          <ol class="${classes}">
-            <slot @slotchange="${this._handleSlotChange}"></slot>
-          </ol>
-        `;
+    return html`
+      <ol class="${classes}">
+        <slot @slotchange="${this._handleSlotChange}"></slot>
+      </ol>
+    `;
   }
 
   static styles = styles;
