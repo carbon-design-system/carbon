@@ -6,7 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/select/index.js';
-import { html, fixture, expect, oneEvent } from '@open-wc/testing';
+import { html, fixture, expect } from '@open-wc/testing';
 
 describe('cds-select', () => {
   const basicSelect = html`
@@ -25,7 +25,7 @@ describe('cds-select', () => {
     expect(select).to.exist;
   });
 
-  it('should reflect selected option value', async () => {
+  it('should reflect the selected option', async () => {
     const el = await fixture(basicSelect);
     const select = el.querySelector('cds-select');
     const internalSelect = select.shadowRoot.querySelector('select');
@@ -41,7 +41,7 @@ describe('cds-select', () => {
     expect(label.textContent).to.include('Select label');
   });
 
-  it('should support disabled', async () => {
+  it('should support the disabled attribute', async () => {
     const el = await fixture(html`
       <cds-select disabled label-text="Select label">
         <cds-select-item value="option-1">Option 1</cds-select-item>
@@ -51,7 +51,7 @@ describe('cds-select', () => {
     expect(select).to.have.attribute('disabled');
   });
 
-  it('should support hide-label', async () => {
+  it('should support the hide-label attribute', async () => {
     const el = await fixture(html`
       <cds-select label-text="Hidden label" hide-label>
         <cds-select-item value="option-1">Option 1</cds-select-item>
@@ -61,7 +61,7 @@ describe('cds-select', () => {
     expect(label).to.be.null;
   });
 
-  it('should render invalid text', async () => {
+  it('should render invalid text when invalid attribute is set', async () => {
     const el = await fixture(html`
       <cds-select label-text="Select" invalid invalid-text="This is an error">
         <cds-select-item value="1">One</cds-select-item>
@@ -72,7 +72,7 @@ describe('cds-select', () => {
     expect(error.textContent).to.include('This is an error');
   });
 
-  it('should render warning text', async () => {
+  it('should render warning text when warn attribute is set', async () => {
     const el = await fixture(html`
       <cds-select label-text="Select" warn warn-text="This is a warning">
         <cds-select-item value="1">One</cds-select-item>
@@ -104,7 +104,7 @@ describe('cds-select', () => {
     expect(receivedValue).to.equal('b');
   });
 
-  it('should apply inline style when "inline" is set', async () => {
+  it('should support the inline attribute', async () => {
     const el = await fixture(html`
       <cds-select label-text="Inline select" inline>
         <cds-select-item value="1">One</cds-select-item>
@@ -131,7 +131,7 @@ describe('cds-select', () => {
     expect(ai.textContent).to.include('AI Confidence');
   });
 
-  it('should support size property', async () => {
+  it('should support the size attribute', async () => {
     const el = await fixture(html`
       <cds-select label-text="Sized select" size="sm">
         <cds-select-item value="1">One</cds-select-item>
@@ -140,7 +140,8 @@ describe('cds-select', () => {
     expect(el.getAttribute('size')).to.equal('sm');
   });
 
-  it('should receive focus via tab', async () => {
+  it('should receive focus via keyboard', async () => {
+    // Simulates focus via tab to match keyboard accessibility behavior from React parity
     const el = await fixture(html`
       <cds-select label-text="Focusable">
         <cds-select-item value="1">One</cds-select-item>
@@ -153,7 +154,8 @@ describe('cds-select', () => {
     );
   });
 
-  it('should handle default value via property', async () => {
+  it('should reflect the value attribute when changed via code', async () => {
+    // Ensures selection works when value is set via script (React parity)
     const el = await fixture(html`
       <cds-select label-text="Default value">
         <cds-select-item value="a">A</cds-select-item>
