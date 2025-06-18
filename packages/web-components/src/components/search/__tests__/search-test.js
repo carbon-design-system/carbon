@@ -64,7 +64,7 @@ describe('cds-search', () => {
       await expect(el).shadowDom.to.equalSnapshot();
     });
 
-    it('should respect labelText prop', async () => {
+    it('should respect the label-text attribute', async () => {
       const el = await fixture(html`
         <cds-search label-text="test-search"></cds-search>
       `);
