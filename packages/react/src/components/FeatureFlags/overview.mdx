@@ -127,6 +127,8 @@ boolean props for each feature flag. A `featureflag-deprecate-flags-prop`
 codemod has been provided to help deprecate the `flags` object prop and switch
 to individual boolean props.
 
+Since we're no longer using the `flags` object and instead passing flag names directly as props, these flag names must now follow camelCase formatting to align with standard JSX prop naming conventions.
+
 ```bash
 npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write
 ```
