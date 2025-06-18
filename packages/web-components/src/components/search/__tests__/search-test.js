@@ -169,7 +169,7 @@ describe('cds-search', () => {
       await expect(el).shadowDom.to.equalSnapshot();
     });
 
-    it('should respect value prop', async () => {
+    it('should respect the value attribute', async () => {
       const el = await fixture(html`
         <cds-search label-text="test-search" value="test-value"></cds-search>
       `);
