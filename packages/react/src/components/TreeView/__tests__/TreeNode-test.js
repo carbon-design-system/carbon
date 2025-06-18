@@ -22,6 +22,8 @@ import { TreeContext, DepthContext } from '../TreeContext';
  * @param {object} options.renderOptions - Other options for React Testing Library's render.
  * @returns The result of the render call.
  */
+
+const prefix = 'cds';
 const renderWithProviders = (
   ui,
   { providerProps = {}, depth = 0, ...renderOptions } = {}
@@ -87,12 +89,17 @@ describe('TreeNode Component', () => {
       </TreeNode>,
       { depth }
     );
-    const treeNode = getByText('Parent Node');
-    expect(treeNode).toBeInTheDocument();
 
-    // The component's internal calculation should use the provided depth
+    // FIX: Use .closest() to find the specific styled container
+    const styledNodeContainer = getByText('Parent Node').closest(
+      `.${prefix}--tree-node__label`
+    );
+    expect(styledNodeContainer).toBeInTheDocument();
+
     const offset = depth + 1 + depth * 0.5;
-    expect(treeNode.parentElement).toHaveStyle({
+
+    // Assert against the correct, robustly-selected element
+    expect(styledNodeContainer).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
     });
@@ -105,14 +112,15 @@ describe('TreeNode Component', () => {
       { depth }
     );
 
-    // Get the element that actually has the style applied to it.
-    // getByText returns the inner span, but the style is on its parent div.
-    const styledNodeContainer = getByText('Parent Node').parentElement;
+    // FIX: Use .closest() to find the specific styled container
+    const styledNodeContainer = getByText('Parent Node').closest(
+      `.${prefix}--tree-node__label`
+    );
     expect(styledNodeContainer).toBeInTheDocument();
 
     const offset = depth + 2 + depth * 0.5;
 
-    // Assert against the correct element
+    // Assert against the correct, robustly-selected element
     expect(styledNodeContainer).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
@@ -355,5 +363,107 @@ describe('TreeNode - handleFocusEvent', () => {
     expect(onBlurMock).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'blur' })
     );
+  });
+});
+describe('Tooltip Text Rendering', () => {
+  it('should render array labels as joined text', () => {
+    render(
+      <TreeNode id="test" label={['Hello', ' ', 'World']} selected={[]} />
+    );
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
+  });
+  it('should render React element labels with nested content', () => {
+    const complexLabel = (
+      <span>
+        <strong>Bold</strong> and <em>italic</em>
+      </span>
+    );
+
+    render(<TreeNode id="test" label={complexLabel} selected={[]} />);
+
+    expect(screen.getByText('Bold')).toBeInTheDocument();
+    expect(screen.getByText('italic')).toBeInTheDocument();
+  });
+  it('should render React element labels with nested content', () => {
+    const complexLabel = (
+      <span>
+        <strong>Bold</strong> and <em>italic</em>
+      </span>
+    );
+    render(<TreeNode id="test" label={complexLabel} selected={[]} />);
+
+    expect(screen.getByText('Bold')).toBeInTheDocument();
+    expect(screen.getByText('italic')).toBeInTheDocument();
+  });
+
+  it('should handle edge cases in text extraction', () => {
+    const { container, rerender } = render(
+      <TreeNode id="test" label={null} selected={[]} />
+    );
+    expect(container.querySelector('li')).toBeInTheDocument();
+    //with undefined
+    rerender(<TreeNode id="test" label={undefined} selected={[]} />);
+    expect(container.querySelector('li')).toBeInTheDocument();
+
+    // with empty string
+    rerender(<TreeNode id="test" label="" selected={[]} />);
+    expect(container.querySelector('li')).toBeInTheDocument();
+  });
+});
+
+describe('Tooltip Truncation', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should show button wrapper when text overflows', () => {
+    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', {
+      configurable: true,
+      get: () => 300,
+    });
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      configurable: true,
+      get: () => 150,
+    });
+
+    const { container } = render(
+      <TreeNode id="test" label="Very long text that overflows" selected={[]} />
+    );
+
+    expect(
+      container.querySelector('.cds--tree-node__label__text-button')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--popover-container')
+    ).toBeInTheDocument();
+  });
+});
+
+describe('TreeNode - Parent Node Tooltip', () => {
+  it('should support tooltip on parent nodes with children', () => {
+    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', {
+      configurable: true,
+      get: () => 250,
+    });
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      configurable: true,
+      get: () => 150,
+    });
+
+    const { container } = render(
+      <TreeNode id="parent" label="Long parent label" selected={[]}>
+        <TreeNode id="child" label="Child" />
+      </TreeNode>
+    );
+
+    expect(
+      container.querySelector('.cds--tree-node__label__details')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--tree-node__label__text-button')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--tree-parent-node__toggle')
+    ).toBeInTheDocument();
   });
 });
