@@ -118,6 +118,11 @@ describe('DataTable', () => {
               <TableHead>
                 <TableRow>
                   {headers.map((header, i) => (
+                    // TODO: `getHeaderProps` returns a `key`. Using it instead
+                    // of overwriting it with the `key` prop may improve test
+                    // coverage.
+                    //
+                    // This comment applies here and elsewhere.
                     <TableHeader key={i} {...getHeaderProps({ header })}>
                       {header.header}
                     </TableHeader>
@@ -126,6 +131,10 @@ describe('DataTable', () => {
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
+                  // TODO: `getRowProps` returns a `key`. Using it may improve
+                  // test coverage.
+                  //
+                  // This comment applies here and elsewhere.
                   <TableRow key={row.id}>
                     {row.cells.map((cell) => (
                       <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -981,6 +990,49 @@ describe('DataTable', () => {
           'Field 1:A!',
           'Field 3:A!',
         ]);
+      });
+    });
+
+    describe('row click behavior', () => {
+      it('should call onClick handler passed via getRowProps when row is clicked', async () => {
+        const handleClick = jest.fn();
+
+        render(
+          <DataTable
+            {...mockProps}
+            render={({ rows, headers, getRowProps, getHeaderProps }) => (
+              <TableContainer title="Test table">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        {...getRowProps({ row, onClick: handleClick })}
+                        data-testid={`row-${row.id}`}>
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id}>{cell.value}</TableCell>
+                        ))}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+          />
+        );
+
+        const firstRow = screen.getByTestId('row-b');
+        await userEvent.click(firstRow);
+
+        expect(handleClick).toHaveBeenCalledTimes(1);
       });
     });
   });

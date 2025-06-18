@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,6 @@
 
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import { createRequire } from 'module';
 
 // Import commands explicitly since yargs commandDir() doesn't support ESM yet
@@ -24,8 +22,6 @@ import * as release from './commands/release.js';
 import * as sync from './commands/sync.js';
 
 const require = createRequire(import.meta.url);
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const packageJson = require('../package.json');
 
@@ -67,11 +63,10 @@ export async function main({ argv }) {
         }
         console.error(error);
         process.exit(1);
-        return;
       }
       console.log(message);
       console.log(yargs.help());
       process.exit(1);
     })
-    .parse();
+    .parse(argv.slice(2));
 }
