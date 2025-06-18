@@ -5212,9 +5212,7 @@ Map {
       "passiveModal": Object {
         "type": "bool",
       },
-      "preventCloseOnClickOutside": Object {
-        "type": "bool",
-      },
+      "preventCloseOnClickOutside": [Function],
       "primaryButtonDisabled": Object {
         "type": "bool",
       },
@@ -9722,6 +9720,28 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+            "left",
+            "right",
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end",
+            "left-end",
+            "left-start",
+            "right-end",
+            "right-start",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -9814,6 +9834,28 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "align": Object {
+          "args": Array [
+            Array [
+              "top",
+              "bottom",
+              "left",
+              "right",
+              "top-start",
+              "top-end",
+              "bottom-start",
+              "bottom-end",
+              "left-end",
+              "left-start",
+              "right-end",
+              "right-start",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "autoAlign": Object {
+          "type": "bool",
         },
         "children": Object {
           "type": "node",
