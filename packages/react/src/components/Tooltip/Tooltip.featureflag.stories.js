@@ -27,8 +27,7 @@ export default {
 };
 
 export const FloatingStyles = (args) => {
-  const tooltipLabel =
-    'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
+  const tooltipLabel = 'Options';
   return (
     <div
       style={{
