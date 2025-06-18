@@ -20,7 +20,7 @@ describe('cds-search', () => {
       await expect(el).shadowDom.to.equalSnapshot();
     });
 
-    it('should support a custom `className` prop on the outermost element', async () => {
+    it('should support a custom class on the outermost element', async () => {
       const el = await fixture(html`
         <cds-search label-text="test-search" class="custom-class"></cds-search>
       `);
