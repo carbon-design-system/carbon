@@ -119,6 +119,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         {...rest}
         className={cx(`${prefix}--definition-term`, triggerClassName)}
         aria-controls={tooltipId}
+        aria-describedby={tooltipId}
         aria-expanded={isOpen}
         onBlur={() => {
           setOpen(false);

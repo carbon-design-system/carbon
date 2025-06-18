@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,9 +14,7 @@ async function main({ argv }) {
   cli
     .scriptName(packageJson.name)
     .version(packageJson.version)
-    .usage('Usage: $0 [options]');
-
-  cli
+    .usage('Usage: $0 [options]')
     .commandDir('commands')
     .strict()
     .fail((message, error, yargs) => {
@@ -27,13 +25,12 @@ async function main({ argv }) {
         }
         console.error(error);
         process.exit(1);
-        return;
       }
       console.log(message);
       console.log(yargs.help());
       process.exit(1);
     })
-    .parse(argv.slice(2)).argv;
+    .parse(argv.slice(2));
 }
 
 module.exports = main;

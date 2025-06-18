@@ -7,8 +7,6 @@
 
 import { renderHook, act } from '@testing-library/react';
 import useOverflowItems from '../useOverflowItems';
-import { useRef } from 'react';
-import React from 'react';
 
 // Mock ResizeObserver
 const mockResizeObserver = jest.fn(() => ({
@@ -17,10 +15,9 @@ const mockResizeObserver = jest.fn(() => ({
   disconnect: jest.fn(),
 }));
 
-// Mock use-resize-observer
-jest.mock('use-resize-observer', () => ({
-  __esModule: true,
-  default: jest.fn(({ onResize }) => {
+// Mock useResizeObserver
+jest.mock('../../internal/useResizeObserver', () => ({
+  useResizeObserver: jest.fn(({ onResize }) => {
     // Simulate resize behavior
     if (onResize) {
       setTimeout(() => onResize(), 0);

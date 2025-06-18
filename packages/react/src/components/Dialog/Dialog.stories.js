@@ -19,7 +19,7 @@ import Button from '../Button';
 import TextInput from '../TextInput';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import mdx from './Dialog.mdx';
 
 export default {
@@ -36,6 +36,11 @@ export default {
   },
   argTypes: {
     children: {
+      table: {
+        disable: true,
+      },
+    },
+    focusAfterCloseRef: {
       table: {
         disable: true,
       },

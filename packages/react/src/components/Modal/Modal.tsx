@@ -7,12 +7,13 @@
 
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
+  cloneElement,
   useEffect,
   useRef,
   useState,
   type HTMLAttributes,
   type ReactNode,
-  type Ref,
+  type RefObject,
 } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -41,9 +42,13 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
+const invalidOutsideClickMessage =
+  '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.';
 
 export type ModalSize = (typeof ModalSizes)[number];
 
@@ -108,7 +113,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: Ref<HTMLButtonElement>;
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 
   /**
    * Specify the description for the loading text
@@ -260,7 +265,7 @@ const Modal = React.forwardRef(function Modal(
     size,
     hasScrollingContent = false,
     closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = false,
+    preventCloseOnClickOutside = !passiveModal,
     isFullWidth,
     launcherButtonRef,
     loadingStatus = 'inactive',
@@ -302,6 +307,10 @@ const Modal = React.forwardRef(function Modal(
       'element handles focus, so `enableDialogElement` must be off for ' +
       '`focusTrapWithoutSentinels` to have any effect.'
   );
+
+  if (!passiveModal && preventCloseOnClickOutside === false) {
+    console.error(invalidOutsideClickMessage);
+  }
 
   function isCloseButton(element: Element) {
     return (
@@ -558,20 +567,11 @@ const Modal = React.forwardRef(function Modal(
   }, []);
 
   // AILabel always size `sm`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'sm' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-      }
-    );
-  }
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>
@@ -599,6 +599,7 @@ const Modal = React.forwardRef(function Modal(
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      focusAfterCloseRef={launcherButtonRef}
       modal
       ref={innerModal}
       role={isAlertDialog ? 'alertdialog' : ''}
@@ -890,7 +891,7 @@ Modal.propTypes = {
         PropTypes.oneOf([null]),
       ]).isRequired,
     }),
-  ]) as Validator<Ref<HTMLButtonElement>>,
+  ]) as Validator<RefObject<HTMLButtonElement | null>>,
 
   /**
    * Specify the description for the loading text
@@ -964,7 +965,13 @@ Modal.propTypes = {
   /**
    * Prevent closing on click outside of modal
    */
-  preventCloseOnClickOutside: PropTypes.bool,
+  preventCloseOnClickOutside: (props: ModalProps, propName: string) => {
+    if (!props.passiveModal && props[propName] === false) {
+      return new Error(invalidOutsideClickMessage);
+    }
+
+    return null;
+  },
 
   /**
    * Specify whether the Button should be disabled, or not
