@@ -33,6 +33,27 @@ $css--plex: true !default;
 
 :host(#{$prefix}-page-header-breadcrumb) {
   @extend .#{$prefix}--page-header__breadcrumb-bar;
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--page-header__breadcrumb__icon;
+  }
+}
+
+:host(#{$prefix}-page-header-breadcrumb:not([content-actions-flush]))
+  ::slotted([slot='content-actions']) {
+  //stylelint-disable declaration-no-important
+  margin-inline-end: $spacing-04 !important;
+}
+
+:host(#{$prefix}-page-header-breadcrumb[page-actions-flush]) {
+  .#{$prefix}--css-grid {
+    margin-inline-end: 0;
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--css-grid-column {
+    margin-inline-end: 0;
+  }
 }
 
 :host(#{$prefix}-page-header-breadcrumb[border='true']) {
@@ -138,6 +159,7 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-page-header-breadcrumb),
 :host(#{$prefix}-page-header-content),
 :host(#{$prefix}-page-header-tabs) {
   .#{$prefix}--css-grid {
