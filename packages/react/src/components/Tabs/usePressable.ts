@@ -1,36 +1,39 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-/* istanbul ignore file */
+import { useEffect, useRef, useState, type RefObject } from 'react';
 
-import { useEffect, useRef, useState } from 'react';
+type UsePressableState = { longPress: boolean };
 
-/**
- * @param {React.RefObject<HTMLElement | null>} ref
- *
- * @param {{
- *   onPress?(state: { longPress: boolean }): void,
- *   onPressIn?(): void,
- *   onPressOut?(): void,
- *   onLongPress?(): void,
- *   delayLongPressMs?: number,
- * }} options
- */
-export function usePressable(
-  ref,
-  { onPress, onPressIn, onPressOut, onLongPress, delayLongPressMs = 500 } = {}
-) {
+type UsePressableOptions = {
+  onPress?: (state: UsePressableState) => void;
+  onPressIn?: () => void;
+  onPressOut?: (state: UsePressableState) => void;
+  onLongPress?: () => void;
+  delayLongPressMs?: number;
+};
+
+export const usePressable = (
+  ref: RefObject<HTMLElement | null>,
+  {
+    onPress,
+    onPressIn,
+    onPressOut,
+    onLongPress,
+    delayLongPressMs = 500,
+  }: UsePressableOptions = {}
+) => {
   const savedOnPress = useRef(onPress);
   const savedOnPressIn = useRef(onPressIn);
   const savedOnPressOut = useRef(onPressOut);
   const savedOnLongPress = useRef(onLongPress);
   const [pendingLongPress, setPendingLongPress] = useState(false);
   const [longPress, setLongPress] = useState(false);
-  const state = useRef({ longPress: false });
+  const state = useRef<UsePressableState>({ longPress: false });
 
   useEffect(() => {
     savedOnPress.current = onPress;
@@ -49,54 +52,56 @@ export function usePressable(
   }, [onLongPress]);
 
   useEffect(() => {
-    const { current: element } = ref;
+    const element = ref.current;
+
+    if (!element) return;
 
     // Fired when a pointer becomes active buttons state.
-    function onPointerDown(event) {
+    const onPointerDown = (event: globalThis.PointerEvent) => {
       setPendingLongPress(true);
       savedOnPressIn.current?.();
       event.preventDefault();
-    }
+    };
 
     // Fired when a pointer is no longer active buttons state.
-    function onPointerUp() {
+    const onPointerUp = () => {
       setPendingLongPress(false);
       setLongPress(false);
       savedOnPressOut.current?.(state.current);
-    }
+    };
 
     // A browser fires this event if it concludes the pointer
     // will no longer be able to generate events (for example
     // the related device is deactivated).
-    function onPointerCancel() {
+    const onPointerCancel = () => {
       setPendingLongPress(false);
       setLongPress(false);
-      savedOnPressOut.current?.();
+      savedOnPressOut.current?.(state.current);
       state.current.longPress = false;
-    }
+    };
 
     // Fired when a pointer is moved out of the hit test
     // boundaries of an element. For pen devices, this event
     // is fired when the stylus leaves the hover range
     // detectable by the digitizer.
-    function onPointerLeave() {
+    const onPointerLeave = () => {
       setPendingLongPress(false);
       setLongPress(false);
-      savedOnPressOut.current?.();
+      savedOnPressOut.current?.(state.current);
       state.current.longPress = false;
-    }
+    };
 
-    function onClick() {
+    const onClick = () => {
       setLongPress(false);
       setPendingLongPress(false);
       savedOnPress.current?.(state.current);
       state.current.longPress = false;
-    }
+    };
 
     // Certain devices treat long press events as context menu triggers
-    function onContextMenu(event) {
+    const onContextMenu = (event: globalThis.MouseEvent) => {
       event.preventDefault();
-    }
+    };
 
     element.addEventListener('pointerdown', onPointerDown);
     element.addEventListener('pointerup', onPointerUp);
@@ -134,4 +139,4 @@ export function usePressable(
       return savedOnLongPress.current?.();
     }
   }, [longPress]);
-}
+};
