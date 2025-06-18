@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { OverflowMenuVertical } from '@carbon/icons-react';
+import { Information } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
@@ -27,7 +27,8 @@ export default {
 };
 
 export const FloatingStyles = (args) => {
-  const tooltipLabel = 'Options';
+  const tooltipLabel =
+    'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
   return (
     <div
       style={{
@@ -37,7 +38,7 @@ export const FloatingStyles = (args) => {
       }}>
       <Tooltip label={tooltipLabel} align={args.align}>
         <button className="sb-tooltip-trigger" type="button">
-          <OverflowMenuVertical />
+          <Information />
         </button>
       </Tooltip>
     </div>
