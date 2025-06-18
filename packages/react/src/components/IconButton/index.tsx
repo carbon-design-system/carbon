@@ -150,7 +150,7 @@ export interface IconButtonProps
   /**
    * Specify the size of the Button.
    */
-  size?: Extract<ButtonSize, 'sm' | 'md' | 'lg'>;
+  size?: Extract<ButtonSize, 'xs' | 'sm' | 'md' | 'lg'>;
 
   /**
    * Optionally specify a `target` when using an `<a>` element.
