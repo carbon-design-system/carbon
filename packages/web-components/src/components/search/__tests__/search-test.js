@@ -31,12 +31,15 @@ describe('cds-search', () => {
 
     it('should respect closeButtonLabelText prop', async () => {
       const el = await fixture(html`
-        <cds-search label-text="test-search" close-button-label-text="clear"></cds-search>
+        <cds-search
+          label-text="test-search"
+          close-button-label-text="clear"></cds-search>
       `);
 
-      const closeButton = el.shadowRoot?.querySelector('button[data-action="clear"]') || 
-                         el.shadowRoot?.querySelector('button[aria-label="clear"]') ||
-                         el.shadowRoot?.querySelector('button[title="clear"]');
+      const closeButton =
+        el.shadowRoot?.querySelector('button[data-action="clear"]') ||
+        el.shadowRoot?.querySelector('button[aria-label="clear"]') ||
+        el.shadowRoot?.querySelector('button[title="clear"]');
       expect(closeButton).to.exist;
       await expect(el).shadowDom.to.equalSnapshot();
     });
@@ -73,19 +76,20 @@ describe('cds-search', () => {
 
     it('should call focus expand button on Escape when expanded', async () => {
       const el = await fixture(html`
-        <cds-search 
-          label-text="test-search" 
-          is-expanded>
-        </cds-search>
+        <cds-search label-text="test-search" is-expanded> </cds-search>
       `);
 
       const input = el.shadowRoot?.querySelector('input');
-      const expandButton = el.shadowRoot?.querySelector('button[data-action="expand"]') || 
-                          el.shadowRoot?.querySelector('button.cds--search-magnifier');
+      const expandButton =
+        el.shadowRoot?.querySelector('button[data-action="expand"]') ||
+        el.shadowRoot?.querySelector('button.cds--search-magnifier');
 
       if (input && expandButton) {
         input.focus();
-        const escapeEvent = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+        const escapeEvent = new KeyboardEvent('keydown', {
+          key: 'Escape',
+          bubbles: true,
+        });
         input.dispatchEvent(escapeEvent);
         await el.updateComplete;
 
@@ -95,30 +99,29 @@ describe('cds-search', () => {
     });
 
     it('should have tabbable button and untabbable input if expandable and not expanded', async () => {
-        const el = await fixture(html`
-          <cds-search 
-            label-text="test-search"
-            expandable>
-          </cds-search>
-        `);
-  
-        expect(el).to.have.attribute('expandable');
-        expect(el).to.not.have.attribute('expanded');
-        await expect(el).shadowDom.to.equalSnapshot();
-      });
-  
-      it('should have tabbable input and untabbable button if not expandable', async () => {
-        const el = await fixture(html`
-          <cds-search label-text="test-search"></cds-search>
-        `);
-  
-        expect(el).to.not.have.attribute('expandable');
-        await expect(el).shadowDom.to.equalSnapshot();
-      });
+      const el = await fixture(html`
+        <cds-search label-text="test-search" expandable> </cds-search>
+      `);
+
+      expect(el).to.have.attribute('expandable');
+      expect(el).to.not.have.attribute('expanded');
+      await expect(el).shadowDom.to.equalSnapshot();
+    });
+
+    it('should have tabbable input and untabbable button if not expandable', async () => {
+      const el = await fixture(html`
+        <cds-search label-text="test-search"></cds-search>
+      `);
+
+      expect(el).to.not.have.attribute('expandable');
+      await expect(el).shadowDom.to.equalSnapshot();
+    });
 
     it('should respect placeholder prop', async () => {
       const el = await fixture(html`
-        <cds-search label-text="test-search" placeholder="test-placeholder"></cds-search>
+        <cds-search
+          label-text="test-search"
+          placeholder="test-placeholder"></cds-search>
       `);
 
       const input = el.shadowRoot?.querySelector('input');
@@ -149,12 +152,12 @@ describe('cds-search', () => {
     });
 
     it('should respect size prop', async () => {
-        const el = await fixture(html`
-          <cds-search label-text="test-search" size="sm"></cds-search>
-        `);
-        expect(el).to.have.attribute('size', 'sm');
-        await expect(el).shadowDom.to.equalSnapshot();
-      });
+      const el = await fixture(html`
+        <cds-search label-text="test-search" size="sm"></cds-search>
+      `);
+      expect(el).to.have.attribute('size', 'sm');
+      await expect(el).shadowDom.to.equalSnapshot();
+    });
 
     it('should respect type prop', async () => {
       const el = await fixture(html`
