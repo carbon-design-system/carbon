@@ -17,6 +17,7 @@ import FeatureFlag from '@docs/feature-flags.md?raw'
 
 * [Current feature flags](#current-feature-flags)
 * [Turning on feature flags in web-components](#turning-on-feature-flags-in-web-components)
+* [Turning on Style feature flags in web-components](#turning-on-style-feature-flags-in-web-components)
 
 {/* END doctoc generated TOC please keep comment here to allow auto update */}
 
@@ -40,10 +41,22 @@ application. You can configure multiple feature flags at the same time by passin
 
 ```jsx
 <feature-flag enableV12TileDefaultIcons="true" enableASecondFeatureFlag="true">
-  <Tile />
+  <cds-tile/>
 </feature-flag>;
 ```
 
 The `<feature-flag>` component can be placed at any point in your react tree and
 will impact all children components. You can turn on feature flags for your
 entire app, or only certain pages/routes/sections of your application.
+
+## Turning on Style feature flags in web-components
+
+To enable a style-based feature flag, add the feature flag name as an attribute on the component.
+
+```jsx
+<cds-clickable-tile
+  enable-experimental-tile-contrast
+  >
+  Clickable tile
+</cds-clickable-tile>
+```
