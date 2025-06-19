@@ -45,13 +45,20 @@ const controls = {
 };
 
 export const Default = {
+  args: defaultArgs,
+  argTypes: controls,
   parameters: {
     percy: {
       skip: true,
     },
   },
-  render: () =>
-    html`<cds-grid class="sb-grid">
+  render: ({ align, condensed, narrow, fullWidth }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?narrow=${narrow}
+        ?full-width=${fullWidth}>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -234,7 +241,7 @@ export const Offset = {
     html`<cds-grid class="sb-grid">
         <cds-column
           class="sb-column"
-          sm="span:1 start:4"
+          sm="span:0"
           md="span:2 start:7"
           lg="span:4 start:13"></cds-column>
         <cds-column
@@ -302,7 +309,7 @@ export const Responsive = {
       </style>`,
 };
 
-export const SubGrid = {
+export const Subgrid = {
   args: defaultArgs,
   render: ({ condensed, narrow, fullWidth }) =>
     html`<cds-grid
@@ -367,31 +374,6 @@ export const SubGrid = {
           <p>Medium: Span 0 of 8</p>
           <p>Large: Span 3 of 16</p>
         </cds-column>
-      </cds-grid>
-      <style>
-        ${styles}
-      </style>`,
-};
-
-export const Playground = {
-  args: defaultArgs,
-  argTypes: controls,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: ({ align, condensed, narrow, fullWidth }) =>
-    html`<cds-grid
-        align=${align}
-        class="sb-grid"
-        ?condensed=${condensed}
-        ?narrow=${narrow}
-        ?full-width=${fullWidth}>
-        <cds-column class="sb-column" sm="4"></cds-column>
-        <cds-column class="sb-column" sm="4"></cds-column>
-        <cds-column class="sb-column" sm="4"></cds-column>
-        <cds-column class="sb-column" sm="4"></cds-column>
       </cds-grid>
       <style>
         ${styles}

@@ -12,6 +12,11 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { prefix } from '../../globals/settings';
 import styles from './column-hang.scss?lit';
 
+/**
+ * The column component.
+ *
+ * @element cds-column-hang
+ */
 @customElement(`${prefix}-column-hang`)
 class CDSColumnHang extends LitElement {
   render() {
