@@ -22,6 +22,7 @@ import { TreeContext, DepthContext } from '../TreeContext';
  * @param {object} options.renderOptions - Other options for React Testing Library's render.
  * @returns The result of the render call.
  */
+const prefix = 'cds';
 const renderWithProviders = (
   ui,
   { providerProps = {}, depth = 0, ...renderOptions } = {}
@@ -87,12 +88,17 @@ describe('TreeNode Component', () => {
       </TreeNode>,
       { depth }
     );
-    const treeNode = getByText('Parent Node');
-    expect(treeNode).toBeInTheDocument();
 
-    // The component's internal calculation should use the provided depth
+    // FIX: Use .closest() to find the specific styled container
+    const styledNodeContainer = getByText('Parent Node').closest(
+      `.${prefix}--tree-node__label`
+    );
+    expect(styledNodeContainer).toBeInTheDocument();
+
     const offset = depth + 1 + depth * 0.5;
-    expect(treeNode.parentElement).toHaveStyle({
+
+    // Assert against the correct, robustly-selected element
+    expect(styledNodeContainer).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
     });
@@ -105,14 +111,15 @@ describe('TreeNode Component', () => {
       { depth }
     );
 
-    // Get the element that actually has the style applied to it.
-    // getByText returns the inner span, but the style is on its parent div.
-    const styledNodeContainer = getByText('Parent Node').parentElement;
+    // FIX: Use .closest() to find the specific styled container
+    const styledNodeContainer = getByText('Parent Node').closest(
+      `.${prefix}--tree-node__label`
+    );
     expect(styledNodeContainer).toBeInTheDocument();
 
     const offset = depth + 2 + depth * 0.5;
 
-    // Assert against the correct element
+    // Assert against the correct, robustly-selected element
     expect(styledNodeContainer).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
