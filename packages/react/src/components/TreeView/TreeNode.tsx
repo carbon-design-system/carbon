@@ -378,14 +378,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         return;
       }
 
-      if (
-        matches(event, [
-          keys.ArrowLeft,
-          keys.ArrowRight,
-          keys.Enter,
-          keys.Space,
-        ])
-      ) {
+      if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
         event.stopPropagation();
       }
 

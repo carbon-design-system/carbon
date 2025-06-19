@@ -13,8 +13,9 @@ import { ArrowDown } from '@carbon/icons-react';
 import { TreeContext, DepthContext } from '../TreeContext';
 
 /**
- * New: Test helper to render a component with the necessary context providers.
- * This is crucial for testing TreeNode in isolation now that it relies on context.
+ * This test helper is crucial for testing TreeNode in isolation because it
+ * relies on context. It ensures the component is rendered with the necessary
+ * context providers.
  * @param {React.ReactElement} ui The component to render.
  * @param {object} options - Configuration options.
  * @param {object} options.providerProps - Props to pass to the TreeContext.Provider.
@@ -36,7 +37,6 @@ const renderWithProviders = (
 };
 
 describe('TreeNode Component', () => {
-  // This test remains unchanged as it doesn't depend on context
   it('should handle forwarded refs correctly when forwardRef is a function', () => {
     const mockRef = jest.fn();
     renderWithProviders(<TreeNode id="node1" label="Node 1" ref={mockRef} />);
@@ -45,7 +45,6 @@ describe('TreeNode Component', () => {
     expect(mockRef).toHaveBeenCalledWith(treeNodeElement);
   });
 
-  // This test remains unchanged as it doesn't depend on context
   it('should correctly set the ref when forwardedRef is a mutable ref object', () => {
     const mockRef = { current: null };
     renderWithProviders(<TreeNode id="node1" label="Node 1" ref={mockRef} />);
@@ -53,7 +52,6 @@ describe('TreeNode Component', () => {
     expect(mockRef.current?.tagName).toBe('LI');
   });
 
-  // UPDATED: This test now uses renderWithProviders to supply context
   it('should apply correct attributes based on context', () => {
     const providerProps = {
       active: 'child1',
@@ -79,7 +77,6 @@ describe('TreeNode Component', () => {
     expect(child2).not.toHaveAttribute('tabindex');
   });
 
-  // UPDATED: This test now uses renderWithProviders to supply depth
   it('calculates the correct offset for parent node with icon', () => {
     const depth = 1;
     const { getByText } = renderWithProviders(
@@ -89,7 +86,6 @@ describe('TreeNode Component', () => {
       { depth }
     );
 
-    // FIX: Use .closest() to find the specific styled container
     const styledNodeContainer = getByText('Parent Node').closest(
       `.${prefix}--tree-node__label`
     );
@@ -97,7 +93,6 @@ describe('TreeNode Component', () => {
 
     const offset = depth + 1 + depth * 0.5;
 
-    // Assert against the correct, robustly-selected element
     expect(styledNodeContainer).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
@@ -180,7 +175,6 @@ describe('TreeNode - handleToggleClick', () => {
 });
 
 describe('TreeNode - handleClick', () => {
-  // UPDATED: This test now uses renderWithProviders to supply onTreeSelect
   it('should call onTreeSelect, onNodeSelect, and rest.onClick when not disabled', () => {
     const onTreeSelect = jest.fn();
     const onNodeSelect = jest.fn();
@@ -203,7 +197,7 @@ describe('TreeNode - handleClick', () => {
     fireEvent.click(clickableNode);
 
     expect(onTreeSelect).toHaveBeenCalledWith(expect.any(Object), {
-      id: expect.any(String), // ID is generated, so check for type
+      id: expect.any(String),
       label: 'Test Node',
       value: undefined,
     });
@@ -211,7 +205,6 @@ describe('TreeNode - handleClick', () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  // This test remains unchanged
   it('should support specifying the href', () => {
     render(
       <TreeNode
@@ -227,7 +220,6 @@ describe('TreeNode - handleClick', () => {
   });
 });
 
-// This test remains unchanged
 it('should support specifying the href for parent nodes', () => {
   const onToggle = jest.fn();
 
@@ -247,7 +239,6 @@ it('should support specifying the href for parent nodes', () => {
   );
 });
 
-// These keyboard tests remain largely unchanged
 describe('TreeNode - handleKeyDown', () => {
   const onToggle = jest.fn();
   const onClick = jest.fn();
@@ -293,6 +284,31 @@ describe('TreeNode - handleKeyDown', () => {
       expect.anything(),
       expect.objectContaining({ isExpanded: false })
     );
+  });
+
+  it('should find the Parent Element when ArrowLeft is clicked ', () => {
+    render(
+      <TreeNode
+        id="node-1"
+        label="Tree Node"
+        selected={[]}
+        onToggle={onToggle}
+        data-testid="key-node"
+        children>
+        <TreeNode id="child-1" label="Child Node" depth={1} />
+      </TreeNode>
+    );
+
+    const treeNode = screen.getByText('Tree Node').closest('li');
+    const childNode = screen.getByText('Child Node').closest('li');
+
+    expect(treeNode).toBeInTheDocument();
+    expect(childNode).toBeInTheDocument();
+
+    fireEvent.keyDown(treeNode, { key: 'ArrowLeft' });
+
+    const parentNode = treeNode?.parentElement;
+    expect(parentNode instanceof HTMLElement).toBe(true);
   });
 
   it('should expand the node when ArrowRight is pressed on a collapsed node', () => {
@@ -406,6 +422,26 @@ describe('Tooltip Text Rendering', () => {
     rerender(<TreeNode id="test" label="" selected={[]} />);
     expect(container.querySelector('li')).toBeInTheDocument();
   });
+});
+
+it('should trigger click handler when Enter or Space is pressed', () => {
+  const handleClick = jest.fn();
+  const { getByText } = render(
+    <TreeNode
+      id="parent-node"
+      label="Parent Node"
+      selected={[]}
+      onClick={handleClick}
+    />
+  );
+
+  const treeNode = getByText('Parent Node');
+
+  fireEvent.keyDown(treeNode, { key: 'Enter' });
+  expect(handleClick).toHaveBeenCalled();
+
+  fireEvent.keyDown(treeNode, { key: 'Space' });
+  expect(handleClick).toHaveBeenCalled();
 });
 
 describe('Tooltip Truncation', () => {

@@ -300,8 +300,6 @@ const TreeView: TreeViewComponent = ({
     }
   }, [prefix]);
 
-  // Removed useActiveAndSelectedOnMount as this is now handled by the state initializers
-
   const labelId = `${treeId}__label`;
   const TreeLabel = () =>
     !hideLabel ? (
@@ -310,7 +308,6 @@ const TreeView: TreeViewComponent = ({
       </label>
     ) : null;
 
-  // New: Define the context value
   const treeContextValue = useMemo(
     () => ({
       active,
@@ -326,7 +323,6 @@ const TreeView: TreeViewComponent = ({
   return (
     <>
       <TreeLabel />
-      {/* New: Wrap children in Context Providers */}
       <TreeContext.Provider value={treeContextValue}>
         <DepthContext.Provider value={0}>
           <ul
