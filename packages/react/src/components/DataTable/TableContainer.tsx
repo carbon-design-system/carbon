@@ -16,6 +16,10 @@ import { Heading, Section } from '../Heading';
 export interface TableContainerProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /**
+   * Specify if the entire table has AI generated contents
+   */
+  aiEnabled?: boolean;
+  /**
    * Optional description text for the Table
    */
   description?: React.ReactNode;
@@ -34,6 +38,7 @@ export interface TableContainerProps
 }
 
 const TableContainer = ({
+  aiEnabled,
   className,
   children,
   title,
@@ -52,6 +57,7 @@ const TableContainer = ({
     {
       [`${prefix}--data-table--max-width`]: stickyHeader,
       [`${prefix}--data-table-container--static`]: useStaticWidth,
+      [`${prefix}--data-table-container--ai-enabled`]: aiEnabled,
     }
   );
   const value = useMemo(() => {
@@ -89,6 +95,10 @@ const TableContainer = ({
 };
 
 TableContainer.propTypes = {
+  /**
+   * Specify if the entire table has AI generated contents
+   */
+  aiEnabled: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
   /**
