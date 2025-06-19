@@ -22,21 +22,21 @@ class CDSGrid extends LitElement {
   /**
    * Specify grid alignment. Default is center
    */
-  @property({ reflect: true, attribute: 'align', type: String })
+  @property({ reflect: true, type: String })
   align?: GridAlignmentType;
 
   /**
    * Collapse the gutter to 1px. Useful for fluid layouts.
    * Rows have 1px of margin between them to match gutter.
    */
-  @property({ reflect: true, attribute: 'condensed', type: Boolean })
+  @property({ reflect: true, type: Boolean })
   condensed = false;
 
   /**
    * Container hangs 16px into the gutter. Useful for
    * typographic alignment with and without containers.
    */
-  @property({ reflect: true, attribute: 'narrow', type: Boolean })
+  @property({ reflect: true, type: Boolean })
   narrow = false;
 
   /**
