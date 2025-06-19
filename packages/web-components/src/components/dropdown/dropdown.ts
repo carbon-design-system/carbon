@@ -690,6 +690,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--warn`]: warn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
+      [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
     });
   }
 
