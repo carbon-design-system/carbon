@@ -56,19 +56,26 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       formatStatusWithDeterminateTotal,
       formatStatusWithIndeterminateTotal,
     } = this;
+
     // * Regular: `1-10 of 100 items`
     // * Indeterminate total: `Item 1-10` (`Item 11-` at the last page)
     const end = Math.min(
       start + pageSize,
       totalItems == null ? Infinity : totalItems
     );
+
     const format =
       totalItems == null || pagesUnknown
         ? formatStatusWithIndeterminateTotal
         : formatStatusWithDeterminateTotal;
 
     // `start`/`end` properties starts with zero, whereas we want to show number starting with 1
-    return format({ start: start + 1, end, count: totalItems });
+    // Handle the case when there are no items by using 0 for start and end
+    return format({
+      start: totalItems === 0 ? 0 : start + 1,
+      end,
+      count: totalItems,
+    });
   }
 
   /**
