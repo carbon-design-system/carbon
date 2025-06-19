@@ -33,7 +33,7 @@ class CDSColumn extends LitElement {
    * S = Start column
    * E = End column (does not reach e.g. start 1 end 3 is same as start 1 span 2)
    */
-  @property({ reflect: true, attribute: 'sm' })
+  @property({ reflect: true })
   sm?: ColumnSpec;
 
   @property({ reflect: true, attribute: 'md' })
