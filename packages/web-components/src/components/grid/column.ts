@@ -36,13 +36,13 @@ class CDSColumn extends LitElement {
   @property({ reflect: true })
   sm?: ColumnSpec;
 
-  @property({ reflect: true, attribute: 'md' })
+  @property({ reflect: true })
   md?: ColumnSpec;
 
-  @property({ reflect: true, attribute: 'lg' })
+  @property({ reflect: true })
   lg?: ColumnSpec;
 
-  @property({ reflect: true, attribute: 'span' })
+  @property({ reflect: true })
   span?: ColumnSpecSimple;
 
   createRenderRoot() {
