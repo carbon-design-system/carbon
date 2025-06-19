@@ -367,24 +367,33 @@ For component translation, you will need to define a map of translation ids and
 their corresponding default values, along with a default `translateWithId` prop.
 For example:
 
-```js
-const translationIds = {
+```tsx
+const translationIds = [
+  'carbon.component-name.field',
+  'carbon.component-name.other-field',
+] as const;
+
+type TranslationKey = (typeof translationIds)[number];
+
+const defaultTranslations: Record<TranslationKey, string> = {
   'carbon.component-name.field': 'Default value',
   'carbon.component-name.other-field': 'Other value',
 };
 
-function translateWithId(messageId) {
-  return translationIds[messageId];
-}
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
-function MyComponent({ translateWithId: t = translateWithId }) {
+const MyComponent = ({
+  translateWithId: t = defaultTranslateWithId,
+}: MyComponentProps) => {
   return (
     <>
-      <span>t('carbon.component-name.field')</span>
-      <span>t('carbon.component-name.other-field')</span>
+      <span>{t('carbon.component-name.field')}</span>
+      <span>{t('carbon.component-name.other-field')}</span>
     </>
   );
-}
+};
 ```
 
 The `id`s used in `translationIds` should be consistent between major versions.
@@ -402,8 +411,10 @@ For example, when working with something that can be sorted in ascending or
 descending order you could create two message ids and choose, based on state,
 which one to use.
 
-```jsx
-function MyComponent({ translateWithId: t = translateWithId }) {
+```tsx
+const MyComponent = ({
+  translateWithId: t = defaultTranslateWithId,
+}: MyComponentProps) => {
   const [sortDirection, setSortDirection] = useState('ASC');
 
   function onClick() {
@@ -424,14 +435,16 @@ function MyComponent({ translateWithId: t = translateWithId }) {
       <button onClick={onClick}>t('carbon.component-name.toggle-sort')</button>
     </>
   );
-}
+};
 ```
 
 If the message depends on a state value, for example a count, then you should
 pass along this information as a state argument to `translateWithId`.
 
 ```jsx
-function MyComponent({ translateWithId: t = translateWithId }) {
+const MyComponent = ({
+  translateWithId: t = defaultTranslateWithId,
+}: MyComponentProps) => {
   const [count, updateCount] = useState(0);
   const translationState = {
     count,
@@ -448,7 +461,7 @@ function MyComponent({ translateWithId: t = translateWithId }) {
       </button>
     </>
   );
-}
+};
 ```
 
 #### Using `useCallback` and `useMemo`

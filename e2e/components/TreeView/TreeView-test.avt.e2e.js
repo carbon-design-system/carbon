@@ -10,7 +10,6 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 const LONG_LABEL_NODE_1 = 'Application development and integration solutions';
-const LONG_LABEL_NODE_2 = 'Business automation and integration solution';
 const SHORT_LABEL_NODE = 'Blockchain';
 
 const STORY_CONFIG = {
