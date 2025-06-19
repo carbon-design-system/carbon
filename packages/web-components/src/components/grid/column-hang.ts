@@ -16,7 +16,7 @@ import styles from './column-hang.scss?lit';
 class CDSColumnHang extends LitElement {
   render() {
     // Grid styling added to contained components, allowing CSS Grid
-    // to affect the it's own slot content.
+    // to affect its own slot content.
     return html`<div part="column-hang">
       <slot></slot>
     </div>`;
