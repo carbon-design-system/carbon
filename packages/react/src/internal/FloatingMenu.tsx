@@ -7,6 +7,7 @@
 
 import React, {
   cloneElement,
+  JSXElementConstructor,
   useCallback,
   useContext,
   useEffect,
@@ -26,7 +27,7 @@ import { OptimizedResize } from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 import { PrefixContext } from './usePrefix';
 import { warning } from './warning';
-import wrapFocus, { wrapFocusWithoutSentinels } from './wrapFocus';
+import { wrapFocus, wrapFocusWithoutSentinels } from './wrapFocus';
 
 export const DIRECTION_LEFT = 'left';
 export const DIRECTION_TOP = 'top';
@@ -46,8 +47,8 @@ interface RefPosition {
 }
 
 export interface Offset {
-  top?: number;
-  left?: number;
+  top: number;
+  left: number;
 }
 
 interface Container {
@@ -234,7 +235,7 @@ export const FloatingMenu = ({
   flipped,
   focusTrap,
   menuDirection = DIRECTION_BOTTOM,
-  menuOffset = {},
+  menuOffset = { top: 0, left: 0 },
   menuRef: externalMenuRef,
   onPlace,
   selectorPrimaryFocus,
@@ -260,7 +261,7 @@ export const FloatingMenu = ({
 
       if (!menuBody) {
         warning(
-          menuBody,
+          !!menuBody,
           'The DOM node for menu body for calculating its position is not available. Skipping...'
         );
 
@@ -356,7 +357,7 @@ export const FloatingMenu = ({
 
     focusTarget.focus();
 
-    if (focusTarget === menuBody && __DEV__) {
+    if (focusTarget === menuBody) {
       warning(
         focusableNode === null,
         'Floating Menus must have at least a programmatically focusable child. This can be accomplished by adding tabIndex="-1" to the content element.'
@@ -437,8 +438,11 @@ export const FloatingMenu = ({
           visibility: 'hidden',
           top: '0px',
         };
-
-    return cloneElement(children, {
+    const child = children as ReactElement<
+      any,
+      string | JSXElementConstructor<any>
+    >;
+    return cloneElement(child, {
       ref: handleMenuRef,
       style: {
         ...styles,
@@ -452,18 +456,22 @@ export const FloatingMenu = ({
   /**
    * Blur handler used when focus trapping is enabled.
    */
-  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    const { target, relatedTarget } = event;
+
     if (
       menuBodyRef.current &&
       startSentinelRef.current &&
-      endSentinelRef.current
+      endSentinelRef.current &&
+      target instanceof HTMLElement &&
+      relatedTarget instanceof HTMLElement
     ) {
       wrapFocus({
         bodyNode: menuBodyRef.current,
         startTrapNode: startSentinelRef.current,
         endTrapNode: endSentinelRef.current,
-        currentActiveNode: event.relatedTarget as HTMLElement,
-        oldActiveNode: event.target,
+        currentActiveNode: relatedTarget,
+        oldActiveNode: target,
       });
     }
   };
@@ -472,7 +480,11 @@ export const FloatingMenu = ({
    * Keydown handler for focus wrapping when experimental focus trap is enabled.
    */
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (match(event, keys.Tab) && menuBodyRef.current) {
+    if (
+      match(event, keys.Tab) &&
+      menuBodyRef.current &&
+      event.target instanceof HTMLElement
+    ) {
       wrapFocusWithoutSentinels({
         containerNode: menuBodyRef.current,
         currentActiveNode: event.target,

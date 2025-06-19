@@ -94,7 +94,7 @@ const OperationalTag = forwardRef(
       type = 'gray',
       ...other
     }: OperationalTagProps<T>,
-    forwardRef: ForwardedRef<HTMLLIElement>
+    forwardRef: ForwardedRef<HTMLButtonElement>
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);

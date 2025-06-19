@@ -1,11 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-/**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +11,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import getDisplayName from '../../prop-types/tools/getDisplayName';
+import SwitcherItem from './SwitcherItem';
 
 export interface BaseSwitcherProps {
   /**
@@ -49,10 +43,7 @@ type SwitcherProps = SwitcherWithAriaLabel | SwitcherWithAriaLabelledBy;
 const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
   function Switcher(props, forwardRef) {
     const switcherRef = useRef<HTMLUListElement>(null);
-    const ref = useMergedRefs<HTMLUListElement | null>([
-      switcherRef,
-      forwardRef,
-    ]);
+    const ref = useMergedRefs([switcherRef, forwardRef]);
 
     const prefix = usePrefix();
     const {
@@ -84,7 +75,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
           if (
             React.isValidElement(curr) &&
             Object.keys((curr as any).props).length !== 0 &&
-            getDisplayName(curr.type) === 'SwitcherItem'
+            curr.type === SwitcherItem
           ) {
             acc.push(i);
           }
@@ -121,11 +112,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
     const childrenWithProps = React.Children.toArray(children).map(
       (child, index) => {
         // only setup click handlers if onChange event is passed
-        if (
-          React.isValidElement(child) &&
-          child.type &&
-          getDisplayName(child.type) === 'SwitcherItem'
-        ) {
+        if (React.isValidElement(child) && child.type === SwitcherItem) {
           return React.cloneElement(child as React.ReactElement<any>, {
             handleSwitcherItemFocus,
             index,
@@ -143,10 +130,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
     );
 
     return (
-      <ul
-        ref={ref as React.RefObject<HTMLUListElement>}
-        className={className}
-        {...accessibilityLabel}>
+      <ul ref={ref} className={className} {...accessibilityLabel}>
         {childrenWithProps}
       </ul>
     );

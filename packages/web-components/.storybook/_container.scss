@@ -1,6 +1,4 @@
 //
-// @license
-//
 // Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
@@ -21,8 +19,8 @@
 @include theme.add-component-tokens(tag-tokens.$tag-tokens);
 @include theme.add-component-tokens(status-tokens.$status-tokens);
 
-// Emit the flex-grid styles
-@include grid.flex-grid();
+// Emit css-grid styles
+@include grid.css-grid();
 
 *,
 *::before,
@@ -57,10 +55,6 @@ body {
   color: theme.$text-primary;
 }
 
-.sb-show-main.sb-main-padded {
-  padding: 0;
-}
-
 #main-content {
   position: relative;
   padding: 42px;
@@ -72,3 +66,19 @@ body {
   block-size: 100vh;
   inline-size: 100%;
 }
+
+// Following styles are needed to ensure that the Canvas containers render correctly
+.docs-story div div {
+  transform: none;
+}
+
+// Disable stylelint max-nesting-depth
+/* stylelint-disable */
+.sbdocs {
+  &.sbdocs-preview,
+  .docs-story,
+  .docs-story div {
+    overflow: visible;
+  }
+}
+/* stylelint-enable */

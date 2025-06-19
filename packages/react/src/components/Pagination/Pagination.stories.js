@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import Pagination from './Pagination';
 import mdx from './Pagination.mdx';
 
@@ -46,7 +46,7 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Pagination {...args} />;
+  return <Pagination pageSizes={[10, 20, 30, 40, 50]} {...args} />;
 };
 
 Default.args = {

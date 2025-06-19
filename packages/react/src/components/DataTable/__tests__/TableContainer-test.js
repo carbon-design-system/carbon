@@ -32,6 +32,19 @@ describe('TableContainer', () => {
     expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 
+  it('should render an aiEnabled table container', () => {
+    const { container } = render(
+      <TableContainer aiEnabled>
+        <div data-testid="child-content">Child content</div>
+      </TableContainer>
+    );
+
+    const aiEnabledContainer = container.querySelector(
+      '[class*="--data-table-container--ai-enabled"]'
+    );
+    expect(aiEnabledContainer).toBeInTheDocument();
+  });
+
   describe('Header', () => {
     it('should render a header with only a `title`', () => {
       const title = 'Random title';
@@ -43,7 +56,7 @@ describe('TableContainer', () => {
       );
 
       const headerEl = container.querySelector('[class*="data-table-header"]');
-      const titleEl = headerEl.querySelector('h4');
+      const titleEl = headerEl.querySelector('h2');
       const descriptionEl = headerEl.querySelector('p');
 
       expect(headerEl).toBeInTheDocument();
@@ -82,7 +95,7 @@ describe('TableContainer', () => {
       );
 
       const headerEl = container.querySelector('[class*="data-table-header"]');
-      const titleEl = headerEl.querySelector('h4');
+      const titleEl = headerEl.querySelector('h2');
       const descriptionEl = headerEl.querySelector('p');
 
       expect(headerEl).toBeInTheDocument();

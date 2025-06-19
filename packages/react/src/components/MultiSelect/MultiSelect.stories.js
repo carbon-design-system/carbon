@@ -7,13 +7,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
 
-import MultiSelect from '.';
-import FilterableMultiSelect from './FilterableMultiSelect';
+import { FilterableMultiSelect, MultiSelect } from '.';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -26,6 +25,7 @@ import {
   ToggletipLabel,
 } from '../Toggletip';
 import Link from '../Link';
+import TextInput from '../TextInput';
 
 export default {
   title: 'Components/MultiSelect',
@@ -354,7 +354,7 @@ export const Filterable = (args) => {
       }}>
       <FilterableMultiSelect
         id="carbon-multiselect-example-3"
-        titleText="Multiselect title"
+        titleText="FilterableMultiSelect title"
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
@@ -514,7 +514,7 @@ const aiLabel = (
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
+        <h2 className="ai-label-heading">84%</h2>
         <p className="secondary bold">Confidence score</p>
         <p className="secondary">
           Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -637,6 +637,54 @@ export const withToggletipLabel = (args) => {
         selectionFeedback="top-after-reopen"
         {...args}
       />
+    </div>
+  );
+};
+
+export const SelectAllWithDynamicItems = () => {
+  const [label, setLabel] = useState('Choose options');
+  const [items, setItems] = useState(itemsWithSelectAll);
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  function addItems() {
+    setItems((prevItems) => {
+      const now = Date.now();
+      return [
+        ...prevItems,
+        {
+          id: `item-added-via-button-1${now}`,
+          text: `item-added-via-button-1${now}`,
+        },
+        {
+          id: `item-added-via-button-2${now}`,
+          text: `item-added-via-button-2${now}`,
+        },
+      ];
+    });
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        onChange={onChange}
+      />
+      <Button onClick={addItems}>Add 2 items to the list</Button>
     </div>
   );
 };

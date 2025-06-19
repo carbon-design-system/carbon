@@ -7,14 +7,18 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
-import { ReactAttr } from '../../types/common';
+import React, { useMemo, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { TableContext } from './TableContext';
+import { Heading, Section } from '../Heading';
 
 export interface TableContainerProps
-  extends Omit<ReactAttr<HTMLDivElement>, 'title'> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  /**
+   * Specify if the entire table has AI generated contents
+   */
+  aiEnabled?: boolean;
   /**
    * Optional description text for the Table
    */
@@ -34,6 +38,7 @@ export interface TableContainerProps
 }
 
 const TableContainer = ({
+  aiEnabled,
   className,
   children,
   title,
@@ -52,6 +57,7 @@ const TableContainer = ({
     {
       [`${prefix}--data-table--max-width`]: stickyHeader,
       [`${prefix}--data-table-container--static`]: useStaticWidth,
+      [`${prefix}--data-table-container--ai-enabled`]: aiEnabled,
     }
   );
   const value = useMemo(() => {
@@ -63,15 +69,15 @@ const TableContainer = ({
 
   return (
     <TableContext.Provider value={value}>
-      <div {...rest} className={tableContainerClasses}>
+      <Section {...rest} className={tableContainerClasses}>
         {(title || description) && (
           <div className={`${prefix}--data-table-header`}>
             {title && (
-              <h4
+              <Heading
                 className={`${prefix}--data-table-header__title`}
                 id={titleId}>
                 {title}
-              </h4>
+              </Heading>
             )}
             {description && (
               <p
@@ -83,12 +89,16 @@ const TableContainer = ({
           </div>
         )}
         {children}
-      </div>
+      </Section>
     </TableContext.Provider>
   );
 };
 
 TableContainer.propTypes = {
+  /**
+   * Specify if the entire table has AI generated contents
+   */
+  aiEnabled: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
   /**

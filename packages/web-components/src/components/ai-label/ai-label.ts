@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -23,7 +21,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-ai-label
  */
 @customElement(`${prefix}-ai-label`)
-export default class CDSAILabel extends CDSToggleTip {
+class CDSAILabel extends CDSToggleTip {
   /**
    * @deprecated the slot string will be renamed to "decorator"
    */
@@ -146,3 +144,5 @@ export default class CDSAILabel extends CDSToggleTip {
 
   static styles = styles;
 }
+
+export default CDSAILabel;

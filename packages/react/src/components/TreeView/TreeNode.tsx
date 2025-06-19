@@ -9,18 +9,22 @@ import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ComponentType,
-  FunctionComponent,
   useEffect,
   useRef,
   useState,
-  MutableRefObject,
+  useCallback,
+  ReactElement,
+  type ComponentType,
+  type FunctionComponent,
+  type MouseEvent,
+  type MutableRefObject,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
-import uniqueId from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
+import { IconButton } from '../IconButton';
 
 export type TreeNodeProps = {
   /**
@@ -95,7 +99,121 @@ export type TreeNodeProps = {
    * Optional: The URL the TreeNode is linking to
    */
   href?: string;
+  /**
+   *
+   * Specify how the trigger should align with the tooltip when text is truncated
+   */
+
+  align?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left-end'
+    | 'left-start'
+    | 'right-end'
+    | 'right-start';
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
 } & Omit<React.LiHTMLAttributes<HTMLElement>, 'onSelect'>;
+
+const extractTextContent = (node: React.ReactNode): string => {
+  if (node === null || node === undefined) return '';
+  if (typeof node === 'string') return node;
+  if (typeof node === 'number') return String(node);
+  if (typeof node === 'boolean') return String(node);
+
+  if (Array.isArray(node)) {
+    return node.map(extractTextContent).join('');
+  }
+
+  if (React.isValidElement(node)) {
+    const element = node as React.ReactElement<{ children?: React.ReactNode }>;
+    const children = element.props.children;
+    return extractTextContent(children);
+  }
+
+  return '';
+};
+
+type HTMLElementOrAnchor = HTMLElement | HTMLAnchorElement | null;
+
+const useEllipsisCheck = (
+  label: React.ReactNode,
+  detailsWrapperRef: React.RefObject<HTMLElementOrAnchor>
+) => {
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+  const labelTextRef = useRef<HTMLSpanElement>(null);
+
+  const checkEllipsis = useCallback(() => {
+    const element = labelTextRef.current;
+    if (!element) {
+      setIsEllipsisApplied(false);
+      return;
+    }
+    if (element.offsetWidth === 0) {
+      setIsEllipsisApplied(false);
+      return;
+    }
+    const checkElement = detailsWrapperRef.current || element;
+
+    if (checkElement && checkElement.offsetWidth > 0) {
+      const isTextTruncated = element.scrollWidth > checkElement.offsetWidth;
+      setIsEllipsisApplied(isTextTruncated);
+    } else {
+      setIsEllipsisApplied(false);
+    }
+  }, [detailsWrapperRef]);
+
+  useEffect(() => {
+    let animationFrameId: number;
+    animationFrameId = requestAnimationFrame(checkEllipsis);
+
+    let resizeObserver: ResizeObserver | undefined;
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.ResizeObserver !== 'undefined' &&
+      labelTextRef.current
+    ) {
+      resizeObserver = new window.ResizeObserver(() => {
+        requestAnimationFrame(checkEllipsis);
+      });
+      resizeObserver.observe(labelTextRef.current);
+
+      if (detailsWrapperRef.current) {
+        resizeObserver.observe(detailsWrapperRef.current);
+      }
+    }
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (resizeObserver) {
+        if (labelTextRef.current) {
+          resizeObserver.unobserve(labelTextRef.current);
+        }
+        if (detailsWrapperRef.current) {
+          resizeObserver.unobserve(detailsWrapperRef.current);
+        }
+        resizeObserver.disconnect();
+      }
+    };
+  }, [checkEllipsis, detailsWrapperRef]);
+
+  return {
+    labelTextRef,
+    isEllipsisApplied,
+    tooltipText: extractTextContent(label),
+  };
+};
 
 const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
   (
@@ -117,26 +235,40 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       selected: propSelected,
       value,
       href,
+      align = 'bottom',
+      autoAlign = false,
       ...rest
     },
     forwardedRef
   ) => {
-    // These are provided by the parent TreeView component
     const depth = propDepth as number;
     const selected = propSelected as (string | number)[];
+
+    const detailsWrapperRef = useRef<HTMLElementOrAnchor>(null);
+    const { labelTextRef, isEllipsisApplied, tooltipText } = useEllipsisCheck(
+      label,
+      detailsWrapperRef
+    );
 
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
     );
 
-    const { current: id } = useRef(nodeId || uniqueId());
+    const { current: id } = useRef(nodeId || useId());
 
     const controllableExpandedState = useControllableState({
       value: isExpanded,
-      onChange: onToggle,
-      defaultValue: defaultIsExpanded,
+      onChange: (newValue: boolean) => {
+        onToggle?.(undefined as unknown as MouseEvent, {
+          id,
+          isExpanded: newValue,
+          label,
+          value,
+        });
+      },
+      defaultValue: defaultIsExpanded ?? false,
     });
-    const uncontrollableExpandedState = useState(isExpanded);
+    const uncontrollableExpandedState = useState(isExpanded ?? false);
     const [expanded, setExpanded] = enableTreeviewControllable
       ? controllableExpandedState
       : uncontrollableExpandedState;
@@ -144,6 +276,34 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const currentNode = useRef<HTMLElement | null>(null);
     const currentNodeLabel = useRef<HTMLDivElement>(null);
     const prefix = usePrefix();
+
+    const renderLabelText = () => {
+      if (isEllipsisApplied && tooltipText) {
+        return (
+          <IconButton
+            label={tooltipText}
+            kind="ghost"
+            align={align}
+            autoAlign={autoAlign}
+            className={`${prefix}--tree-node__label__text-button`}
+            wrapperClasses={`${prefix}--popover-container`}>
+            <span
+              ref={labelTextRef}
+              className={`${prefix}--tree-node__label__text`}>
+              {label}
+            </span>
+          </IconButton>
+        );
+      }
+
+      return (
+        <span
+          ref={labelTextRef}
+          className={`${prefix}--tree-node__label__text`}>
+          {label}
+        </span>
+      );
+    };
 
     const setRefs = (element: HTMLElement | null) => {
       currentNode.current = element;
@@ -155,19 +315,36 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
     };
 
-    const nodesWithProps = React.Children.map(children, (node) => {
-      if (React.isValidElement(node)) {
-        return React.cloneElement(node, {
-          active,
-          depth: depth + 1,
-          disabled: disabled || node.props.disabled,
-          onTreeSelect,
-          onNodeFocusEvent,
-          selected,
-          tabIndex: (!node.props.disabled && -1) || null,
-        } as TreeNodeProps);
-      }
-    });
+    function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
+      return React.Children.map(children, (node) => {
+        if (!React.isValidElement(node)) return node;
+
+        const isTreeNode = node.type === TreeNode;
+
+        if (isTreeNode) {
+          return React.cloneElement(node, {
+            active,
+            depth: depth + 1,
+            disabled:
+              disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
+            onTreeSelect,
+            onNodeFocusEvent,
+            selected,
+            tabIndex: (node as ReactElement<TreeNodeProps>).props.disabled
+              ? null
+              : -1,
+          } as TreeNodeProps);
+        }
+
+        const newChildren = enhanceTreeNodes((node.props as any).children);
+        return React.cloneElement(node as React.ReactElement<any>, {
+          children: newChildren,
+        });
+      });
+    }
+
+    const nodesWithProps = enhanceTreeNodes(children);
+
     const isActive = active === id;
     const isSelected = selected.includes(id);
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
@@ -275,6 +452,13 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
       if (matches(event, [keys.Enter, keys.Space])) {
         event.preventDefault();
+        if (match(event, keys.Enter) && children) {
+          // Toggle expansion state for parent nodes
+          if (!enableTreeviewControllable) {
+            onToggle?.(event, { id, isExpanded: !expanded, label, value });
+          }
+          setExpanded(!expanded);
+        }
         if (href) {
           currentNode.current?.click();
         }
@@ -328,7 +512,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
       if (!enableTreeviewControllable) {
         // sync props and state
-        setExpanded(isExpanded);
+        setExpanded(isExpanded ?? false);
       }
     }, [
       children,
@@ -375,7 +559,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 ref={currentNodeLabel}>
                 {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
                 {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-                {label}
+                {renderLabelText()}
               </div>
             </a>
           </li>
@@ -388,7 +572,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
               ref={currentNodeLabel}>
               {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
               {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-              {label}
+              {renderLabelText()}
             </div>
           </li>
         );
@@ -414,10 +598,12 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 onClick={handleToggleClick}>
                 <CaretDown className={toggleClasses} />
               </span>
-              <span className={`${prefix}--tree-node__label__details`}>
+              <span
+                className={`${prefix}--tree-node__label__details`}
+                ref={detailsWrapperRef}>
                 {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
                 {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-                {label}
+                {renderLabelText()}
               </span>
             </div>
           </a>
@@ -444,10 +630,12 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
               onClick={handleToggleClick}>
               <CaretDown className={toggleClasses} />
             </span>
-            <span className={`${prefix}--tree-node__label__details`}>
+            <span
+              className={`${prefix}--tree-node__label__details`}
+              ref={detailsWrapperRef}>
               {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
               {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-              {label}
+              {renderLabelText()}
             </span>
           </div>
           <ul
@@ -557,6 +745,31 @@ TreeNode.propTypes = {
    * Optional: The URL the TreeNode is linking to
    */
   href: PropTypes.string,
+
+  /**
+   * Specify how the tooltip should align when text is truncated
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'bottom',
+    'left',
+    'right',
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
+  ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 };
 
 TreeNode.displayName = 'TreeNode';

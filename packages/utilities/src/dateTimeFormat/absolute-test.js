@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ const styles = ['full', 'long', 'medium', 'short'];
 const date = new Date('2016-04-28T19:12:47Z');
 const endDate = new Date('2018-07-01T09:00:02Z');
 const sameDayEndDate = new Date('2016-04-28T21:04:30Z');
+const timeZones = ['UTC', 'Asia/Tokyo'];
 
 describe(locale, () => {
   describe('formatTime', () => {
@@ -24,6 +25,24 @@ describe(locale, () => {
         expect(actualOutput).toBe(expectedOutput);
       });
     });
+
+    timeZones.forEach((timeZone) => {
+      const style = styles[0];
+      const dtf = new Intl.DateTimeFormat(locale, {
+        timeStyle: style,
+        timeZone,
+      });
+      const expectedOutput = dtf.format(date);
+
+      test(`timeZone ${timeZone} → ${expectedOutput}`, () => {
+        const actualOutput = absolute.formatTime(date, {
+          locale,
+          style,
+          timeZone,
+        });
+        expect(actualOutput).toBe(expectedOutput);
+      });
+    });
   });
 
   describe('formatDate', () => {
@@ -33,6 +52,24 @@ describe(locale, () => {
 
       test(`${style} → ${expectedOutput}`, () => {
         const actualOutput = absolute.formatDate(date, { locale, style });
+        expect(actualOutput).toBe(expectedOutput);
+      });
+    });
+
+    timeZones.forEach((timeZone) => {
+      const style = styles[0];
+      const dtf = new Intl.DateTimeFormat(locale, {
+        dateStyle: style,
+        timeZone,
+      });
+      const expectedOutput = dtf.format(date);
+
+      test(`timeZone ${timeZone} → ${expectedOutput}`, () => {
+        const actualOutput = absolute.formatDate(date, {
+          locale,
+          style,
+          timeZone,
+        });
         expect(actualOutput).toBe(expectedOutput);
       });
     });
@@ -68,6 +105,25 @@ describe(locale, () => {
             expect(actualOutput).toBe(expectedOutput);
           });
         });
+      });
+    });
+
+    timeZones.forEach((timeZone) => {
+      const timeStyle = styles[0];
+      const dtf = new Intl.DateTimeFormat(locale, {
+        timeStyle,
+        dateStyle: timeStyle,
+        timeZone,
+      });
+      const expectedOutput = dtf.format(date);
+
+      test(`timeZone ${timeZone} → ${expectedOutput}`, () => {
+        const actualOutput = absolute.format(date, {
+          locale,
+          style: timeStyle,
+          timeZone,
+        });
+        expect(actualOutput).toBe(expectedOutput);
       });
     });
 
@@ -134,6 +190,25 @@ describe(locale, () => {
             expect(actualOutput).toBe(expectedOutput);
           });
         });
+      });
+    });
+
+    timeZones.forEach((timeZone) => {
+      const dateStyle = styles[0];
+      const dtf = new Intl.DateTimeFormat(locale, {
+        timeStyle: dateStyle,
+        dateStyle,
+        timeZone,
+      });
+      const expectedOutput = dtf.formatRange(date, endDate);
+
+      test(`timeZone ${timeZone} → ${expectedOutput}`, () => {
+        const actualOutput = absolute.formatRange(date, endDate, {
+          locale,
+          style: dateStyle,
+          timeZone,
+        });
+        expect(actualOutput).toBe(expectedOutput);
       });
     });
   });

@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
+import React, {
+  cloneElement,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
@@ -15,14 +21,16 @@ import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import { useMergeRefs } from '@floating-ui/react';
 import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
+import { SelectableTagBaseProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export const TYPES = {
   red: 'Red',
@@ -120,8 +128,13 @@ type TagComponent = <T extends React.ElementType = 'div'>(
     | DismissibleTagBaseProps
 ) => React.ReactElement | any;
 
-const Tag: TagComponent = React.forwardRef(
-  <T extends React.ElementType = 'div'>(
+const TagBase = React.forwardRef<
+  any,
+  TagBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
     {
       children,
       className,
@@ -137,12 +150,23 @@ const Tag: TagComponent = React.forwardRef(
       as: BaseComponent,
       slug,
       ...other
-    }: TagProps<T>,
-    forwardRef: PolymorphicRef<T>
+    },
+    forwardRef
   ) => {
     const prefix = usePrefix();
-    const tagRef = useRef<HTMLElement>();
-    const ref = useMergeRefs([forwardRef, tagRef]);
+    const tagRef = useRef<HTMLElement>(null);
+    if (filter) {
+      console.warn(
+        'The `filter` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+      );
+    }
+
+    if (onClose) {
+      console.warn(
+        'The `onClose` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+      );
+    }
+    const ref = useMergedRefs([forwardRef, tagRef]);
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -182,22 +206,12 @@ const Tag: TagComponent = React.forwardRef(
     };
 
     // AILabel is always size `sm` and `inline`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
-      : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel' &&
-      !isInteractiveTag
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'sm',
-          kind: 'inline',
-        }
-      );
-    }
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator =
+      candidateIsAILabel && !isInteractiveTag
+        ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
+        : null;
 
     if (filter) {
       const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
@@ -302,7 +316,7 @@ const Tag: TagComponent = React.forwardRef(
     );
   }
 );
-
+const Tag = TagBase as TagComponent;
 (Tag as React.FC).propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default

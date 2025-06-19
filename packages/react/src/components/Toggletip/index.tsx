@@ -131,6 +131,7 @@ export function Toggletip<E extends ElementType = 'span'>({
     buttonProps: {
       'aria-expanded': open,
       'aria-controls': id,
+      'aria-describedby': open ? id : undefined,
       onClick: actions.toggle,
     },
     contentProps: {
@@ -171,8 +172,8 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   });
 
-  useWindowEvent('click', (event) => {
-    if (open && ref.current && !ref.current.contains(event.target as Node)) {
+  useWindowEvent('click', ({ target }) => {
+    if (open && target instanceof Node && !ref.current?.contains(target)) {
       actions.close();
     }
   });
@@ -354,8 +355,7 @@ const ToggletipContent = React.forwardRef<
     <PopoverContent
       className={customClassName}
       {...toggletip?.contentProps}
-      ref={ref}
-      aria-live="polite">
+      ref={ref}>
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );

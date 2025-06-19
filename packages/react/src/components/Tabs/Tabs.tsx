@@ -24,14 +24,15 @@ import React, {
   type HTMLAttributes,
   type RefObject,
   type ComponentType,
-  type ReactHTML,
+  type HTMLElementType,
   type ElementType,
+  isValidElement,
+  ReactElement,
 } from 'react';
 import { Grid } from '../Grid';
 import { isElement } from 'react-is';
 import { Tooltip } from '../Tooltip';
 import { useControllableState } from '../../internal/useControllableState';
-import { useEffectOnce } from '../../internal/useEffectOnce';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
@@ -138,6 +139,11 @@ function Tabs({
   onTabCloseRequest,
 }: TabsProps) {
   const baseId = useId('ccs');
+  if (dismissable && !onTabCloseRequest) {
+    console.error(
+      'dismissable property specified without also providing an onTabCloseRequest property.'
+    );
+  }
   // The active index is used to track the element which has focus in our tablist
   const [activeIndex, setActiveIndex] = useState(defaultSelectedIndex);
   // The selected index is used for the tab/panel pairing which is "visible"
@@ -459,7 +465,8 @@ function TabList({
   let hasSecondaryLabelTabs = false;
   if (contained) {
     hasSecondaryLabelTabs = React.Children.toArray(children).some((child) => {
-      return isElement(child) && !!child.props.secondaryLabel;
+      const _child = child as React.ReactElement<any>;
+      return React.isValidElement(child) && !!_child.props.secondaryLabel;
     });
   }
 
@@ -522,9 +529,12 @@ function TabList({
 
   const tabs = useRef<TabElement[]>([]);
   const debouncedOnScroll = useCallback(() => {
-    return debounce((event) => {
-      setScrollLeft(event.target.scrollLeft);
+    const updateScroll = debounce(() => {
+      if (ref.current) {
+        setScrollLeft(ref.current.scrollLeft);
+      }
     }, scrollDebounceWait);
+    updateScroll();
   }, [scrollDebounceWait]);
 
   function onKeyDown(event: KeyboardEvent) {
@@ -601,7 +611,7 @@ function TabList({
     }
   }
 
-  useEffectOnce(() => {
+  useEffect(() => {
     const tab = tabs.current[selectedIndex];
     if (scrollIntoView && tab) {
       tab.scrollIntoView({
@@ -609,7 +619,7 @@ function TabList({
         inline: 'nearest',
       });
     }
-  });
+  }, []);
 
   useEffect(() => {
     //adding 1 in calculation for firefox support
@@ -627,7 +637,7 @@ function TabList({
     }
   }, [scrollLeft, children, dismissable, isScrollable]);
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
         return !tab.disabled;
@@ -638,7 +648,7 @@ function TabList({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-  });
+  }, []);
 
   useIsomorphicEffect(() => {
     if (ref.current) {
@@ -746,11 +756,14 @@ function TabList({
                 hasSecondaryLabel: hasSecondaryLabelTabs,
                 contained,
               }}>
-              {React.cloneElement(child, {
-                ref: (node) => {
-                  tabs.current[index] = node;
-                },
-              })}
+              {React.cloneElement(
+                child as React.ReactElement<{ ref?: React.Ref<any> }>,
+                {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                }
+              )}
             </TabContext.Provider>
           );
         })}
@@ -941,7 +954,7 @@ function TabListVertical({
     }
   }
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
         return !tab.disabled;
@@ -952,7 +965,7 @@ function TabListVertical({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-  });
+  }, []);
 
   useEffect(() => {
     function handler() {
@@ -972,10 +985,11 @@ function TabListVertical({
             halfTabHeight >
             containerHeight
         ) {
-          ref.current.scrollTo({
-            top: (selectedIndex - 1) * verticalTabHeight,
-            behavior: 'smooth',
-          });
+          ref.current &&
+            ref.current.scrollTo({
+              top: (selectedIndex - 1) * verticalTabHeight,
+              behavior: 'smooth',
+            });
         }
       }
     }
@@ -1043,11 +1057,14 @@ function TabListVertical({
                 index,
                 hasSecondaryLabel: false,
               }}>
-              {React.cloneElement(child, {
-                ref: (node) => {
-                  tabs.current[index] = node;
-                },
-              })}
+              {React.cloneElement(
+                child as React.ReactElement<{ ref?: React.Ref<any> }>,
+                {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                }
+              )}
             </TabContext.Provider>
           );
         })}
@@ -1093,7 +1110,7 @@ TabListVertical.propTypes = {
  * when the long press is deactivated
  */
 function createLongPressBehavior(
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   direction: 'forward' | 'backward',
   setScrollLeft
 ) {
@@ -1143,7 +1160,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   /**
    * Provide a custom element to render instead of the default button
    */
-  as?: keyof ReactHTML | ComponentType;
+  as?: HTMLElementType | ComponentType;
 
   /**
    * Provide child elements to be rendered inside `Tab`.
@@ -1454,7 +1471,6 @@ Tab.propTypes = {
   /**
    * Provide a custom element to render instead of the default button
    */
-  // @ts-expect-error: Invalid prop type derivation
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
@@ -1492,7 +1508,6 @@ Tab.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: Invalid prop type derivation
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
@@ -1567,7 +1582,8 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
   const value = useMemo(() => ({ badgeIndicator }), [badgeIndicator]);
 
   const hasSize20 =
-    React.isValidElement(children) && children.props?.size === 20;
+    isValidElement(children) &&
+    (children as ReactElement<{ size?: number }>).props.size === 20;
 
   const classNames = cx(
     `${prefix}--tabs__nav-item--icon-only`,
@@ -1666,7 +1682,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
       [`${prefix}--tab-content--interactive`]: interactiveContent,
     });
 
-    useEffectOnce(() => {
+    useEffect(() => {
       if (!panel.current) {
         return;
       }
@@ -1676,7 +1692,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         setInteractiveContent(true);
         setTabIndex(-1);
       }
-    });
+    }, []);
 
     // tabindex should only be 0 if no interactive content in children
     useEffect(() => {

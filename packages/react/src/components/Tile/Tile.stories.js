@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from './';
-import TileGroup from '../TileGroup/TileGroup';
+import { TileGroup } from '../TileGroup';
 import {
   Launch,
   ArrowRight,
@@ -155,6 +155,14 @@ export const ClickableWithLayer = () => (
 export const Selectable = (args) => {
   return (
     <SelectableTile id="selectable-tile-1" {...args}>
+      Selectable
+    </SelectableTile>
+  );
+};
+
+export const SelectableOnChangeTest = () => {
+  return (
+    <SelectableTile onChange={() => console.log('onChange')}>
       Selectable
     </SelectableTile>
   );
@@ -333,7 +341,7 @@ const aiLabel = (
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
+        <h2 className="ai-label-heading">84%</h2>
         <p className="secondary bold">Confidence score</p>
         <p className="secondary">
           Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -692,6 +690,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--warn`]: warn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
+      [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
     });
   }
 

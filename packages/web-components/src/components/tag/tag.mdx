@@ -1,83 +1,214 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as TagStories from './tag.stories';
 
 <Meta of={TagStories} />
 
 # Tag
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tag)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tag)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tag/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tag/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tag)
+## Table of Contents
 
-Tags are used for items that need to be labeled, categorized, or organized using
-keywords that describe them.
+- [Overview](#overview)
+- [Read Only](#read-only)
+- [Dismissible](#dismissible)
+- [Selectable](#selectable)
+- [Operational](#operational)
+- [With AI Label](#with-ai-label)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Multiple or single tags can be used to categorize items.
+## Overview
 
-Use tags when content is mapped to multiple categories, and the user needs a way
-to differentiate between them.
+Tags can be used to categorize items. Use short labels for easy scanning. Use
+two words only if necessary to describe the status and differentiate it from
+other tags.
 
-## Getting started
+## Read Only
 
-Here's a quick example to get you started.
+Read-only tags are used to categorize, are used for labeling, and do not have
+interactive functionality. Read-only tags come in several color choices and can
+use optional decorative icons to delineate between multiple categories.
 
-### JS (via import)
+<Canvas of={TagStories.ReadOnly} />
 
-```javascript
-import '@carbon/web-components/es/components/tag/index.js';
-```
+## Dismissible
 
-<Markdown>{`${cdnJs({ components: ['tag'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+Dismissible tags are used to remove tags that can be filtered out by the user.
 
-### HTML
+When to use:
 
-```html
-<cds-tag type="gray" title="tag-example"> This is a tag </cds-tag>
-```
+- Use `cds-disimissible-tag` when you want to allow users to easily clear or dismiss
+  specific filters applied to items.
 
-## Filter tag
+<Canvas of={TagStories.Dismissible} />
 
-Use the `filter` attribute to turn the tag into a filterable element.
-
-```html
-<cds-tag filter type="gray" title="Clear selection"> This is a tag </cds-tag>
-```
-
-You can use the events to catch the closing of the tag.
-
-```js
-document.addEventListener('cds-tag-closed', (event) => {
-  // use values here
-});
-```
-
-## Custom icon
-
-If you'd like to use a custom icon other than the `Close` button, import another
-icon and insert it within the tag element as such:
-
-```html
-<cds-tag filter type="gray" title="Clear selection"> This is a tag </cds-tag>
-```
+Here it is a sample code to help you get started.
 
 ```javascript
-import Download16 from '@carbon/icons/lib/download/16.js';
+const tags = [
+  {
+    type: 'red',
+    text: 'Tag content with a long text description',
+    tagTitle: 'Provide a custom title to the tag',
+  },
+  {
+    type: 'magenta',
+    text: 'Tag content 1',
+  },
+  {
+    type: 'purple',
+    text: 'Tag content 2',
+  },
+];
 
 function App() {
-  return html` <cds-tag filter type="gray" title="Clear selection"
-    >This is a tag ${Download16({ slot: 'icon' })}</cds-tag
-  >`;
+  return html`
+    <cds-button style="margin-bottom: 3rem;"> Reset </cds-button>
+    <br />
+    ${tags.map(
+      (tag) => html`
+        <cds-dismissible-tag
+          type=${tag.type}
+          ?open=${true}
+          tag-title=${tag.tagTitle || ''}>
+          ${Asleep16({ slot: 'icon' })} ${tag.text}
+        </cds-dismissible-tag>
+      `
+    )}
+  `;
+}
+
+const button = document.querySelector('cds-button');
+button.addEventListener('click', () => resetTags());
+
+function resetTags() {
+  const dismissibleTags = document.querySelectorAll('cds-dismissible-tag');
+  dismissibleTags.forEach((tag) => tag.setAttribute('open', 'true'));
 }
 ```
 
-## `<cds-tag>` attributes and properties
+## Selectable
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-tag disabled>`) and `false` means not setting the attribute (e.g.
-`<cds-tag>` without `disabled` attribute).
+Selectable tags are used to select or unselect single or multiple items.
+Selectable tags can also be used in filtering by label scenarios when they do
+not need to be dismissed.
 
+When to use:
+
+- Use selectable tags to toggle between a selected or unselected state.
+- Use when needing to filter without an explicit dismissable functionality. (We
+  need to be a little more specific around filtering for selectable versus
+  dismissable tags).
+
+<Canvas of={TagStories.Selectable} />
+
+Here it is a sample code to help you get started.
+
+```javascript
+const tags = [
+  {
+    text: 'Tag content with a long text description',
+  },
+  {
+    text: 'Tag content 1',
+  },
+  {
+    text: 'Tag content 2',
+  },
+  {
+    text: 'Tag content 3',
+  },
+];
+
+function App() {
+  return html`
+    <div aria-label="Selectable tags" role="group">
+      ${tags.map(
+        (tag) =>
+          html`<cds-selectable-tag
+            ?disabled="${disabled}"
+            ?selected="${tag.selected}"
+            id="${tag.id}"
+            text="${text || tag.text}"
+            size="${size}"
+            >${Asleep16({ slot: 'icon' })}
+          </cds-selectable-tag>`
+      )}
+    </div>
+  `;
+}
+
+const tags = document.querySelectorAll('cds-selectable-tag');
+
+tags.forEach((tag) =>
+  tag.addEventListener('cds-selectable-tag-selected', (e) => {
+    console.log(e.detail);
+  })
+);
+```
+
+## Operational
+
+Operational tags enable the user to view a list of all items associated with a
+given tag in different ways.
+
+When to use:
+
+- Use to view a list of items with the same tag in a popover, or breadcrumb
+  detail view.
+
+When not to use:
+
+- Do not use operational tags as a replacement for links that direct you to an
+  entirely different page or launch you out to another tab.
+- Do not use in combination with Dismissable tags. Instead, consider letting the
+  user enter an "edit mode" to dismiss tags.
+
+<Canvas of={TagStories.Operational} />
+
+## With AI Label
+
+`<cds-tag>` with AI label is now stable for Read Only tags. This addition changes the
+visual appearance of the component and introduces an AI explainability feature
+when AI is present in the component.
+
+<Canvas of={TagStories.WithAILabel} />
+
+## Skeleton
+
+<Canvas
+  of={TagStories.Skeleton}
+/>
+
+## Component API
+
+## `cds-tag`
 <ArgTypes of="cds-tag" />
+
+## `cds-dismissible-tag`
+<ArgTypes of="cds-dismissible-tag" />
+
+## `cds-selectable-tag`
+<ArgTypes of="cds-selectable-tag" />
+
+## `cds-operational-tag`
+<ArgTypes of="cds-operational-tag" />
+
+## `cds-tag-skeleton`
+<ArgTypes of="cds-tag-skeleton" />
+
+<Markdown>{`${cdnJs({ components: ['tag'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tag/tag.mdx).

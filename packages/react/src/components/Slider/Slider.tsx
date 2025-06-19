@@ -6,9 +6,19 @@
  */
 
 import React, {
-  type KeyboardEventHandler,
+  createRef,
   PureComponent,
   ReactNode,
+  type ChangeEvent,
+  type ComponentProps,
+  type CSSProperties,
+  type FocusEvent,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+  type KeyboardEventHandler,
+  type MouseEvent,
+  type RefObject,
+  type TouchEvent,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -30,14 +40,26 @@ import {
   UpperHandleFocus,
 } from './SliderHandles';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
+
+interface ThumbWrapperProps
+  extends Omit<
+    ComponentProps<typeof Tooltip>,
+    'children' | 'className' | 'style'
+  > {
+  hasTooltip: boolean;
+  className: string;
+  style: CSSProperties;
+  children: ComponentProps<typeof Tooltip>['children'];
+}
 
 const ThumbWrapper = ({
-  hasTooltip = false,
+  hasTooltip,
   className,
   style,
   children,
   ...rest
-}) => {
+}: ThumbWrapperProps) => {
   if (hasTooltip) {
     return (
       // eslint-disable-next-line react/forbid-component-props
@@ -53,28 +75,6 @@ const ThumbWrapper = ({
       </div>
     );
   }
-};
-
-ThumbWrapper.propTypes = {
-  /**
-   * The thumb node itself.
-   */
-  children: PropTypes.node,
-
-  /**
-   * CSS wrapper class names.
-   */
-  className: PropTypes.string,
-
-  /**
-   * Should the thumb show a tooltip with the current value?
-   */
-  hasTooltip: PropTypes.bool.isRequired,
-
-  /**
-   * Percentage offset for the select thumb value.
-   */
-  style: PropTypes.object,
 };
 
 const translationIds = {
@@ -97,28 +97,32 @@ function translateWithId(
   return '';
 }
 
-const defaultFormatLabel = (value, label) => {
-  return typeof label === 'function' ? label(value) : `${value}${label}`;
+const defaultFormatLabel: NonNullable<SliderProps['formatLabel']> = (
+  value,
+  label
+) => {
+  return `${value}${label ?? ''}`;
 };
 
+// TODO: Assuming a 16ms throttle corresponds to 60 FPS, should it be halved,
+// since many systems can handle 120 FPS? If it doesn't correspond to 60 FPS,
+// what does it correspond to?
 /**
- * Minimum time between processed "drag" events.
+ * Minimum time between processed "drag" events in milliseconds.
  */
-const EVENT_THROTTLE = 16; // ms
+const EVENT_THROTTLE = 16;
 
-/**
- * Event types that trigger "drags".
- */
-const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
+const DRAG_EVENT_TYPES = new Set<keyof DocumentEventMap>([
+  'mousemove',
+  'touchmove',
+]);
 
-/**
- * Event types that trigger a "drag" to stop.
- */
-const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
+const DRAG_STOP_EVENT_TYPES = new Set<keyof DocumentEventMap>([
+  'mouseup',
+  'touchend',
+  'touchcancel',
+]);
 
-/**
- * Distinguish two handles by lower and upper positions.
- */
 enum HandlePosition {
   LOWER = 'lower',
   UPPER = 'upper',
@@ -127,7 +131,7 @@ enum HandlePosition {
 type ExcludedAttributes = 'onChange' | 'onBlur';
 
 export interface SliderProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
     TranslateWithId<TranslationKey, { correctedValue?: string }> {
   /**
    * The `ariaLabel` for the `<input>`.
@@ -190,6 +194,11 @@ export interface SliderProps
   labelText?: ReactNode;
 
   /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
    * @deprecated
    * `true` to use the light version.
    */
@@ -236,7 +245,6 @@ export interface SliderProps
 
   /**
    * The callback to get notified of change in value.
-   * `({ value: number, valueUpper?: number }) => void`
    */
   onChange?: (data: {
     value: SliderProps['value'];
@@ -244,7 +252,7 @@ export interface SliderProps
   }) => void;
 
   /**
-   * Provide an optional function to be called when a key is pressed in the number input. When there are two handles, you can obtain the relevant handle position by using `event.target.dataset.handlePosition`.
+   * Provide an optional function to be called when a key is pressed in the number input.
    */
   onInputKeyUp?: KeyboardEventHandler<HTMLInputElement>;
 
@@ -293,16 +301,11 @@ export interface SliderProps
    */
   warn?: boolean;
 
+  // TODO: This JSDoc comment isn't accurate. Evaluate all others.
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: React.ReactNode;
-}
-
-interface CalcValueProps {
-  clientX?: number;
-  value?: number;
-  useRawValue?: boolean;
+  warnText?: ReactNode;
 }
 
 interface CalcLeftPercentProps {
@@ -312,178 +315,8 @@ interface CalcLeftPercentProps {
 }
 
 class Slider extends PureComponent<SliderProps> {
-  static propTypes = {
-    /**
-     * The `ariaLabel` for the `<input>`.
-     */
-    ariaLabelInput: PropTypes.string,
-
-    /**
-     * The child nodes.
-     */
-    children: PropTypes.node,
-
-    /**
-     * The CSS class name for the slider.
-     */
-    className: PropTypes.string,
-
-    /**
-     * `true` to disable this slider.
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * The callback to format the label associated with the minimum/maximum value.
-     */
-    formatLabel: PropTypes.func,
-
-    /**
-     * `true` to hide the number input box.
-     */
-    hideTextInput: PropTypes.bool,
-
-    /**
-     * The ID of the `<input>`.
-     */
-    id: PropTypes.string,
-
-    /**
-     * The `type` attribute of the `<input>`.
-     */
-    inputType: PropTypes.string,
-
-    /**
-     * `Specify whether the Slider is currently invalid
-     */
-    invalid: PropTypes.bool,
-
-    /**
-     * Provide the text that is displayed when the Slider is in an invalid state
-     */
-    invalidText: PropTypes.node,
-
-    /**
-     * The label for the slider.
-     */
-    labelText: PropTypes.node,
-
-    /**
-     * `true` to use the light version.
-     */
-    light: deprecate(
-      PropTypes.bool,
-      'The `light` prop for `Slider` is no longer needed and has ' +
-        'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
-    ),
-
-    /**
-     * The maximum value.
-     */
-    max: PropTypes.number.isRequired,
-
-    /**
-     * The label associated with the maximum value.
-     */
-    maxLabel: PropTypes.string,
-
-    /**
-     * The minimum value.
-     */
-    min: PropTypes.number.isRequired,
-
-    /**
-     * The label associated with the minimum value.
-     */
-    minLabel: PropTypes.string,
-
-    /**
-     * The `name` attribute of the `<input>`.
-     */
-    name: PropTypes.string,
-
-    /**
-     * Provide an optional function to be called when the input element
-     * loses focus
-     */
-    onBlur: PropTypes.func,
-
-    /**
-     * The callback to get notified of change in value.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Provide an optional function to be called when a key is pressed in the number input
-     */
-    onInputKeyUp: PropTypes.func,
-
-    /**
-     * The callback to get notified of value on handle release.
-     */
-    onRelease: PropTypes.func,
-
-    /**
-     * Whether the slider should be read-only
-     */
-    readOnly: PropTypes.bool,
-
-    /**
-     * `true` to specify if the control is required.
-     */
-    required: PropTypes.bool,
-
-    /**
-     * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside the `step` increment will be considered invalid.
-     */
-    step: PropTypes.number,
-
-    /**
-     * A value determining how much the value should increase/decrease by Shift+arrow keys,
-     * which will be `(max - min) / stepMultiplier`.
-     */
-    stepMultiplier: PropTypes.number,
-
-    /**
-     * Supply a method to translate internal strings with your i18n tool of
-     * choice. Translation keys are available on the `translationIds` field for
-     * this component.
-     */
-    translateWithId: PropTypes.func,
-
-    /**
-     * The `ariaLabel` for the upper bound `<input>` when there are two handles.
-     */
-    unstable_ariaLabelInputUpper: PropTypes.string,
-
-    /**
-     * The `name` attribute of the upper bound `<input>` when there are two handles.
-     */
-    unstable_nameUpper: PropTypes.string,
-
-    /**
-     * The upper bound when there are two handles.
-     */
-    unstable_valueUpper: PropTypes.number,
-
-    /**
-     * The value of the slider. When there are two handles, value is the lower
-     * bound.
-     */
-    value: PropTypes.number.isRequired,
-
-    /**
-     * `Specify whether the Slider is in a warn state
-     */
-    warn: PropTypes.bool,
-
-    /**
-     * Provide the text that is displayed when the Slider is in a warn state
-     */
-    warnText: PropTypes.node,
-  };
-
   static contextType = FeatureFlagContext;
+  static translationIds = Object.values(translationIds);
 
   state = {
     value: this.props.value,
@@ -493,24 +326,24 @@ class Slider extends PureComponent<SliderProps> {
     needsOnRelease: false,
     isValid: true,
     isValidUpper: true,
-    activeHandle: null,
+    activeHandle: undefined,
     correctedValue: null,
     correctedPosition: null,
     isRtl: false,
   };
 
-  thumbRef: React.RefObject<HTMLDivElement>;
-  thumbRefUpper: React.RefObject<HTMLDivElement>;
-  filledTrackRef: React.RefObject<HTMLDivElement>;
+  thumbRef: RefObject<HTMLDivElement | null>;
+  thumbRefUpper: RefObject<HTMLDivElement | null>;
+  filledTrackRef: RefObject<HTMLDivElement | null>;
   element: HTMLDivElement | null = null;
   inputId = '';
   track: HTMLDivElement | null | undefined;
 
   constructor(props) {
     super(props);
-    this.thumbRef = React.createRef<HTMLDivElement>();
-    this.thumbRefUpper = React.createRef<HTMLDivElement>();
-    this.filledTrackRef = React.createRef<HTMLDivElement>();
+    this.thumbRef = createRef<HTMLDivElement>();
+    this.thumbRefUpper = createRef<HTMLDivElement>();
+    this.filledTrackRef = createRef<HTMLDivElement>();
   }
 
   /**
@@ -529,12 +362,26 @@ class Slider extends PureComponent<SliderProps> {
           useRawValue: true,
         });
         this.setState({ isRtl, value, left, valueUpper, leftUpper });
+        if (this.filledTrackRef.current) {
+          this.filledTrackRef.current.style.transform = this.state.isRtl
+            ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
+                (this.state.leftUpper - this.state.left) / 100
+              })`
+            : `translate(${this.state.left}%, -50%) scaleX(${
+                (this.state.leftUpper - this.state.left) / 100
+              })`;
+        }
       } else {
         const { value, left } = this.calcValue({
           value: this.state.value,
           useRawValue: true,
         });
         this.setState({ isRtl, value, left });
+        if (this.filledTrackRef.current) {
+          this.filledTrackRef.current.style.transform = this.state.isRtl
+            ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
+            : `translate(0%, -50%) scaleX(${this.state.left / 100})`;
+        }
       }
     }
   }
@@ -607,7 +454,7 @@ class Slider extends PureComponent<SliderProps> {
         useRawValue: true,
       })
     );
-    if (this.props.unstable_valueUpper !== undefined) {
+    if (typeof this.props.unstable_valueUpper !== 'undefined') {
       const { value: valueUpper, left: leftUpper } = this.calcValue({
         value: this.props.unstable_valueUpper,
         useRawValue: true,
@@ -619,19 +466,6 @@ class Slider extends PureComponent<SliderProps> {
     } else {
       this.setState({ valueUpper: undefined, leftUpper: undefined });
     }
-  }
-
-  /**
-   * Synonymous to ECMA2017+ `Math.clamp`.
-   *
-   * @param {number} val
-   * @param {number} min
-   * @param {number} max
-   *
-   * @returns `val` if `max>=val>=min`; `min` if `val<min`; `max` if `val>max`.
-   */
-  clamp(val, min, max) {
-    return Math.max(min, Math.min(val, max));
   }
 
   /**
@@ -647,14 +481,23 @@ class Slider extends PureComponent<SliderProps> {
     return Number(value.toFixed(decimals));
   }
 
+  handleDrag = (event: Event) => {
+    if (
+      event instanceof globalThis.MouseEvent ||
+      event instanceof globalThis.TouchEvent
+    ) {
+      this.onDrag(event);
+    }
+  };
+
   /**
    * Sets up "drag" event handlers and calls `this.onDrag` in case dragging
    * started on somewhere other than the thumb without a corresponding "move"
    * event.
-   *
-   * @param {Event} evt The event.
    */
-  onDragStart = (evt) => {
+  onDragStart = (
+    evt: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>
+  ) => {
     // Do nothing if component is disabled
     if (this.props.disabled || this.props.readOnly) {
       return;
@@ -666,25 +509,25 @@ class Slider extends PureComponent<SliderProps> {
     // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#notes
     evt.preventDefault();
 
-    // Register drag stop handlers
+    // Add drag stop handlers
     DRAG_STOP_EVENT_TYPES.forEach((element) => {
       this.element?.ownerDocument.addEventListener(element, this.onDragStop);
     });
 
-    // Register drag handlers
+    // Add drag handlers
     DRAG_EVENT_TYPES.forEach((element) => {
-      this.element?.ownerDocument.addEventListener(element, this.onDrag);
+      this.element?.ownerDocument.addEventListener(element, this.handleDrag);
     });
 
-    const clientX = this.getClientXFromEvent(evt);
+    const clientX = this.getClientXFromEvent(evt.nativeEvent);
 
-    let activeHandle;
+    let activeHandle: HandlePosition | undefined;
     if (this.hasTwoHandles()) {
       if (evt.target == this.thumbRef.current) {
         activeHandle = HandlePosition.LOWER;
       } else if (evt.target == this.thumbRefUpper.current) {
         activeHandle = HandlePosition.UPPER;
-      } else {
+      } else if (clientX) {
         const distanceToLower = this.calcDistanceToHandle(
           HandlePosition.LOWER,
           clientX
@@ -721,11 +564,11 @@ class Slider extends PureComponent<SliderProps> {
 
     // Perform first recalculation since we probably didn't click exactly in the
     // middle of the thumb.
-    this.onDrag(evt, activeHandle);
+    this.onDrag(evt.nativeEvent, activeHandle);
   };
 
   /**
-   * Unregisters "drag" and "drag stop" event handlers and calls sets the flag
+   * Removes "drag" and "drag stop" event handlers and calls sets the flag
    * indicating that the `onRelease` callback should be called.
    */
   onDragStop = () => {
@@ -741,7 +584,7 @@ class Slider extends PureComponent<SliderProps> {
 
     // Remove drag handlers
     DRAG_EVENT_TYPES.forEach((element) => {
-      this.element?.ownerDocument.removeEventListener(element, this.onDrag);
+      this.element?.ownerDocument.removeEventListener(element, this.handleDrag);
     });
 
     // Set needsOnRelease flag so event fires on next update.
@@ -756,12 +599,14 @@ class Slider extends PureComponent<SliderProps> {
    * Handles a "drag" event by recalculating the value/thumb and setting state
    * accordingly.
    *
-   * @param {Event} evt The event.
-   * @param activeHandle
-   *   The first drag event call, we may have an explicit activeHandle value,
-   *   which is to be used before state is used.
+   * @param evt The event.
+   * @param activeHandle The first drag event call, we may have an explicit
+   * activeHandle value, which is to be used before state is used.
    */
-  _onDrag = (evt, activeHandle: HandlePosition | null = null) => {
+  _onDrag = (
+    evt: globalThis.MouseEvent | globalThis.TouchEvent,
+    activeHandle?: HandlePosition
+  ) => {
     activeHandle = activeHandle ?? this.state.activeHandle;
     // Do nothing if component is disabled, or we have no event.
     if (this.props.disabled || this.props.readOnly || !evt) {
@@ -803,10 +648,8 @@ class Slider extends PureComponent<SliderProps> {
   /**
    * Handles a `keydown` event by recalculating the value/thumb and setting
    * state accordingly.
-   *
-   * @param {Event} evt The event.
    */
-  onKeyDown = (evt) => {
+  onKeyDown = (evt: KeyboardEvent<HTMLDivElement>) => {
     // Do nothing if component is disabled, or we don't have a valid event
     if (this.props.disabled || this.props.readOnly) {
       return;
@@ -867,11 +710,8 @@ class Slider extends PureComponent<SliderProps> {
    * Provides the two-way binding for the input field of the Slider. It also
    * Handles a change to the input field by recalculating the value/thumb and
    * setting state accordingly.
-   *
-   * @param {Event} evt The event.
    */
-
-  onChange = (evt) => {
+  onChange = (evt: ChangeEvent<HTMLInputElement>) => {
     // Do nothing if component is disabled
     if (this.props.disabled || this.props.readOnly) {
       return;
@@ -884,7 +724,8 @@ class Slider extends PureComponent<SliderProps> {
 
     // Avoid calling calcValue for invalid numbers, but still update the state.
     const activeHandle =
-      evt.target.dataset.handlePosition ?? HandlePosition.LOWER;
+      (evt.target.dataset.handlePosition as HandlePosition | undefined) ??
+      HandlePosition.LOWER;
     const targetValue = Number.parseFloat(evt.target.value);
 
     if (this.hasTwoHandles()) {
@@ -922,10 +763,8 @@ class Slider extends PureComponent<SliderProps> {
   /**
    * Checks for validity of input value after clicking out of the input. It also
    * Handles state change to isValid state.
-   *
-   * @param {Event} evt The event.
    */
-  onBlur = (evt: React.FocusEvent<HTMLInputElement>) => {
+  onBlur = (evt: FocusEvent<HTMLInputElement>) => {
     // Do nothing if we have no valid event, target, or value
     if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
       return;
@@ -937,15 +776,19 @@ class Slider extends PureComponent<SliderProps> {
 
     this.props.onBlur?.({
       value: targetValue,
-      handlePosition: evt.target?.dataset?.handlePosition as
+      handlePosition: evt.target.dataset.handlePosition as
         | HandlePosition
         | undefined,
     });
   };
 
-  onInputKeyDown = (evt) => {
+  onInputKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
     // Do nothing if component is disabled, or we don't have a valid event.
-    if (this.props.disabled || this.props.readOnly) {
+    if (
+      this.props.disabled ||
+      this.props.readOnly ||
+      !(evt.target instanceof HTMLInputElement)
+    ) {
       return;
     }
 
@@ -967,7 +810,7 @@ class Slider extends PureComponent<SliderProps> {
     // When there are two handles, we'll also have the data-handle-position
     // attribute to consider the other value before settling on the validity to
     // set.
-    const handlePosition = input?.dataset?.handlePosition as
+    const handlePosition = input.dataset.handlePosition as
       | HandlePosition
       | undefined;
 
@@ -1007,7 +850,10 @@ class Slider extends PureComponent<SliderProps> {
       });
 
       if (handlePosition) {
-        this.setValueLeftForHandle(handlePosition, { value, left });
+        this.setValueLeftForHandle(handlePosition, {
+          value: this.nearestStepValue(value),
+          left,
+        });
       } else {
         this.setState({
           value,
@@ -1033,7 +879,7 @@ class Slider extends PureComponent<SliderProps> {
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else if (value !== null && value !== undefined && range) {
+    } else if (value !== null && typeof value !== 'undefined' && range) {
       // Prevent NaN calculation if the range is 0.
       return range === 0 ? 0 : (value - this.props.min) / range;
     }
@@ -1042,68 +888,70 @@ class Slider extends PureComponent<SliderProps> {
     return 0;
   };
 
-  calcSteppedValuePercent = ({ leftPercent, range }) => {
-    const { step = 1 } = this.props;
-    const totalSteps = range / step;
+  /**
+   * Calculates the discrete value (snapped to the nearest step) along
+   * with the corresponding handle position percentage.
+   */
+  calcDiscreteValueAndPercent = ({
+    leftPercent,
+  }: {
+    /** The percentage representing the position on the track. */
+    leftPercent: number;
+  }) => {
+    const { step = 1, min, max } = this.props;
+    const numSteps =
+      Math.floor((max - min) / step) + ((max - min) % step === 0 ? 1 : 2);
+    /** Index of the step that corresponds to `leftPercent`. */
+    const stepIndex = Math.round(leftPercent * (numSteps - 1));
+    const discreteValue =
+      stepIndex === numSteps - 1 ? max : min + step * stepIndex;
+    /** Percentage corresponding to the step index. */
+    const discretePercent = stepIndex / (numSteps - 1);
 
-    let steppedValue = Math.round(leftPercent * totalSteps) * step;
-    const steppedPercent = this.clamp(steppedValue / range, 0, 1);
-
-    steppedValue = this.clamp(
-      steppedValue + this.props.min,
-      this.props.min,
-      this.props.max
-    );
-
-    return [steppedValue, steppedPercent];
+    return { discreteValue, discretePercent };
   };
 
   /**
-   * Calculates a new Slider `value` and `left` (thumb offset) given a `clientX`,
-   * `value`, or neither of those.
-   * - If `clientX` is specified, it will be used in
-   *   conjunction with the Slider's bounding rectangle to calculate the new
-   *   values.
-   * - If `clientX` is not specified and `value` is, it will be used to
-   *   calculate new values as though it were the current value of the Slider.
-   * - If neither `clientX` nor `value` are specified, `this.props.value` will
-   *   be used to calculate the new values as though it were the current value
-   *   of the Slider.
-   *
-   * @param {object} params
-   * @param {number} [params.clientX] Optional clientX value expected to be from
-   *   an event fired by one of the Slider's `DRAG_EVENT_TYPES` events.
-   * @param {number} [params.value] Optional value use during calculations if
-   *   clientX is not provided.
-   * @param {boolean} [params.useRawValue=false] `true` to use the given value as-is.
+   * Calculates the slider's value and handle position based on either a
+   * mouse/touch event or an explicit value.
    */
-  calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
+  calcValue = ({
+    clientX,
+    value,
+    useRawValue,
+  }: {
+    /** The x-coordinate from a mouse/touch event. */
+    clientX?: number;
+    /** Value to base the calculations on (if no `clientX`). */
+    value?: number;
+    /** Whether to bypass the stepping logic and use the raw value. */
+    useRawValue?: boolean;
+  }) => {
     const range = this.props.max - this.props.min;
-
-    // @todo solve for rtl.
-    const leftPercent = this.calcLeftPercent({
+    const leftPercentRaw = this.calcLeftPercent({
       clientX,
       value,
       range,
     });
+    /** `leftPercentRaw` clamped between 0 and 1. */
+    const leftPercent = clamp(leftPercentRaw, 0, 1);
 
     if (useRawValue) {
-      // Adjusts only for min/max of thumb position
       return {
         value,
-        left: Math.min(1, Math.max(0, leftPercent)) * 100,
+        left: leftPercent * 100,
       };
     }
 
-    const [steppedValue, steppedPercent] = this.calcSteppedValuePercent({
-      leftPercent,
-      range,
-    });
+    // Use the discrete value and percentage for snapping.
+    const { discreteValue, discretePercent } = this.calcDiscreteValueAndPercent(
+      { leftPercent }
+    );
 
-    return { value: steppedValue, left: steppedPercent * 100 };
+    return { value: discreteValue, left: discretePercent * 100 };
   };
 
-  calcDistanceToHandle = (handle: HandlePosition, clientX) => {
+  calcDistanceToHandle = (handle: HandlePosition, clientX: number) => {
     const handleBoundingRect = this.getHandleBoundingRect(handle);
     // x co-ordinate of the midpoint.
     const handleX = handleBoundingRect.left + handleBoundingRect.width / 2;
@@ -1136,7 +984,7 @@ class Slider extends PureComponent<SliderProps> {
    */
   setValueLeftForHandle = (
     handle: HandlePosition,
-    { value: newValue, left: newLeft }
+    { value: newValue, left: newLeft }: { value: number; left: number }
   ) => {
     const { value, valueUpper, left, leftUpper } = this.state;
     if (handle === HandlePosition.LOWER) {
@@ -1155,7 +1003,7 @@ class Slider extends PureComponent<SliderProps> {
     }
   };
 
-  setValueForHandle = (handle: HandlePosition, value) => {
+  setValueForHandle = (handle: HandlePosition, value: number | string) => {
     if (handle === HandlePosition.LOWER) {
       this.setState({
         value,
@@ -1169,7 +1017,17 @@ class Slider extends PureComponent<SliderProps> {
     }
   };
 
-  isValidValueForPosition = ({ handle, value: newValue, min, max }) => {
+  isValidValueForPosition = ({
+    handle,
+    value: newValue,
+    min,
+    max,
+  }: {
+    handle: HandlePosition;
+    value: number;
+    min: number;
+    max: number;
+  }) => {
     const { value, valueUpper } = this.state;
 
     if (!this.isValidValue({ value: newValue, min, max })) {
@@ -1185,11 +1043,29 @@ class Slider extends PureComponent<SliderProps> {
     return false;
   };
 
-  isValidValue = ({ value, min, max }) => {
+  isValidValue = ({
+    value,
+    min,
+    max,
+  }: {
+    value: number;
+    min: number;
+    max: number;
+  }) => {
     return !(value < min || value > max);
   };
 
-  getAdjustedValueForPosition = ({ handle, value: newValue, min, max }) => {
+  getAdjustedValueForPosition = ({
+    handle,
+    value: newValue,
+    min,
+    max,
+  }: {
+    handle: HandlePosition;
+    value: number;
+    min: number;
+    max: number;
+  }) => {
     const { value, valueUpper } = this.state;
 
     newValue = this.getAdjustedValue({ value: newValue, min, max });
@@ -1203,7 +1079,15 @@ class Slider extends PureComponent<SliderProps> {
     return newValue;
   };
 
-  getAdjustedValue = ({ value, min, max }) => {
+  getAdjustedValue = ({
+    value,
+    min,
+    max,
+  }: {
+    value: number;
+    min: number;
+    max: number;
+  }) => {
     if (value < min) {
       value = min;
     }
@@ -1219,17 +1103,17 @@ class Slider extends PureComponent<SliderProps> {
    * If the bounding rect is not available, a new, empty DOMRect is returned.
    */
   getHandleBoundingRect = (handle: HandlePosition): DOMRect => {
-    let boundingRect;
+    let boundingRect: DOMRect | undefined;
     if (handle === HandlePosition.LOWER) {
-      boundingRect = this?.thumbRef?.current?.getBoundingClientRect();
+      boundingRect = this.thumbRef.current?.getBoundingClientRect();
     } else {
-      boundingRect = this?.thumbRefUpper?.current?.getBoundingClientRect();
+      boundingRect = this.thumbRefUpper.current?.getBoundingClientRect();
     }
     return boundingRect ?? new DOMRect();
   };
 
-  getClientXFromEvent(event: MouseEvent | TouchEvent) {
-    let clientX;
+  getClientXFromEvent(event: globalThis.MouseEvent | globalThis.TouchEvent) {
+    let clientX: number | undefined;
     if ('clientX' in event) {
       clientX = event.clientX;
     } else if (
@@ -1243,55 +1127,24 @@ class Slider extends PureComponent<SliderProps> {
   }
 
   hasTwoHandles() {
-    return this.state.valueUpper !== undefined;
+    return typeof this.state.valueUpper !== 'undefined';
   }
 
   // syncs invalid state and prop
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props: SliderProps, state: Slider['state']) {
     const { isValid, isValidUpper } = state;
-    let derivedState = {};
+    const derivedState: Partial<Slider['state']> = {};
 
     // Will override state in favor of invalid prop
     if (props.invalid === true) {
-      if (isValid === true) {
-        derivedState = {
-          ...derivedState,
-          isValid: false,
-        };
-      }
-      if (isValid === true) {
-        derivedState = {
-          ...derivedState,
-          isValid: false,
-        };
-      }
-      if (isValidUpper === true) {
-        derivedState = {
-          ...derivedState,
-          isValidUpper: false,
-        };
-      }
+      if (isValid === true) derivedState.isValid = false;
+      if (isValidUpper === true) derivedState.isValidUpper = false;
     } else if (props.invalid === false) {
-      if (isValid === false) {
-        derivedState = {
-          ...derivedState,
-          isValid: true,
-        };
-      }
-      if (isValid === false) {
-        derivedState = {
-          ...derivedState,
-          isValid: true,
-        };
-      }
-      if (isValidUpper === false) {
-        derivedState = {
-          ...derivedState,
-          isValidUpper: true,
-        };
-      }
+      if (isValid === false) derivedState.isValid = true;
+      if (isValidUpper === false) derivedState.isValidUpper = true;
     }
-    return Object.entries(derivedState).length > 0 ? derivedState : null;
+
+    return Object.keys(derivedState).length ? derivedState : null;
   }
 
   render() {
@@ -1302,14 +1155,21 @@ class Slider extends PureComponent<SliderProps> {
       hideTextInput = false,
       id = (this.inputId =
         this.inputId ||
+        // TODO:
+        // 1. Why isn't `inputId` just set to this value instead of an empty
+        //    string?
+        // 2. Why this value instead of something else, like
+        //    `crypto.randomUUID()` or `useId()`?
         `__carbon-slider_${Math.random().toString(36).substr(2)}`),
       min,
-      minLabel = '',
+      minLabel,
       max,
-      maxLabel = '',
+      maxLabel,
       formatLabel = defaultFormatLabel,
       labelText,
+      hideLabel,
       step = 1,
+      // TODO: Other properties are deleted below. Why isn't this one?
       stepMultiplier: _stepMultiplier,
       inputType = 'number',
       invalidText,
@@ -1342,11 +1202,13 @@ class Slider extends PureComponent<SliderProps> {
 
     const showWarning =
       (!readOnly && warn) ||
+      // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
       (typeof correctedValue !== null &&
         correctedPosition === HandlePosition.LOWER &&
         isValid);
     const showWarningUpper =
       (!readOnly && warn) ||
+      // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
       (typeof correctedValue !== null &&
         correctedPosition ===
           (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
@@ -1357,6 +1219,7 @@ class Slider extends PureComponent<SliderProps> {
         {(prefix) => {
           const labelId = `${id}-label`;
           const labelClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--visually-hidden`]: hideLabel,
             [`${prefix}--label--disabled`]: disabled,
           });
 
@@ -1514,7 +1377,7 @@ class Slider extends PureComponent<SliderProps> {
                   <ThumbWrapper
                     hasTooltip={hideTextInput}
                     className={lowerThumbWrapperClasses}
-                    label={`${formatLabel(value, '')}`}
+                    label={formatLabel(value, undefined)}
                     align="top"
                     {...lowerThumbWrapperProps}>
                     <div
@@ -1522,7 +1385,7 @@ class Slider extends PureComponent<SliderProps> {
                       role="slider"
                       id={twoHandles ? undefined : id}
                       tabIndex={readOnly || disabled ? undefined : 0}
-                      aria-valuetext={`${formatLabel(value, '')}`}
+                      aria-valuetext={formatLabel(value, undefined)}
                       aria-valuemax={twoHandles ? valueUpper : max}
                       aria-valuemin={min}
                       aria-valuenow={value}
@@ -1549,7 +1412,7 @@ class Slider extends PureComponent<SliderProps> {
                     <ThumbWrapper
                       hasTooltip={hideTextInput}
                       className={upperThumbWrapperClasses}
-                      label={`${formatLabel(valueUpper || 0, '')}`}
+                      label={formatLabel(valueUpper ?? 0, undefined)}
                       align="top"
                       {...upperThumbWrapperProps}>
                       <div
@@ -1691,6 +1554,180 @@ class Slider extends PureComponent<SliderProps> {
   }
 }
 
-(Slider as any).translationIds = Object.values(translationIds);
+Slider.propTypes = {
+  /**
+   * The `ariaLabel` for the `<input>`.
+   */
+  ariaLabelInput: PropTypes.string,
+
+  /**
+   * The child nodes.
+   */
+  children: PropTypes.node,
+
+  /**
+   * The CSS class name for the slider.
+   */
+  className: PropTypes.string,
+
+  /**
+   * `true` to disable this slider.
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * The callback to format the label associated with the minimum/maximum value.
+   */
+  formatLabel: PropTypes.func,
+
+  /**
+   * `true` to hide the number input box.
+   */
+  hideTextInput: PropTypes.bool,
+
+  /**
+   * The ID of the `<input>`.
+   */
+  id: PropTypes.string,
+
+  /**
+   * The `type` attribute of the `<input>`.
+   */
+  inputType: PropTypes.string,
+
+  /**
+   * `Specify whether the Slider is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the Slider is in an invalid state
+   */
+  invalidText: PropTypes.node,
+
+  /**
+   * The label for the slider.
+   */
+  labelText: PropTypes.node,
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
+   * `true` to use the light version.
+   */
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Slider` is no longer needed and has ' +
+      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+  ),
+
+  /**
+   * The maximum value.
+   */
+  max: PropTypes.number.isRequired,
+
+  /**
+   * The label associated with the maximum value.
+   */
+  maxLabel: PropTypes.string,
+
+  /**
+   * The minimum value.
+   */
+  min: PropTypes.number.isRequired,
+
+  /**
+   * The label associated with the minimum value.
+   */
+  minLabel: PropTypes.string,
+
+  /**
+   * The `name` attribute of the `<input>`.
+   */
+  name: PropTypes.string,
+
+  /**
+   * Provide an optional function to be called when the input element
+   * loses focus
+   */
+  onBlur: PropTypes.func,
+
+  /**
+   * The callback to get notified of change in value.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when a key is pressed in the number input.
+   */
+  onInputKeyUp: PropTypes.func,
+
+  /**
+   * The callback to get notified of value on handle release.
+   */
+  onRelease: PropTypes.func,
+
+  /**
+   * Whether the slider should be read-only
+   */
+  readOnly: PropTypes.bool,
+
+  /**
+   * `true` to specify if the control is required.
+   */
+  required: PropTypes.bool,
+
+  /**
+   * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside the `step` increment will be considered invalid.
+   */
+  step: PropTypes.number,
+
+  /**
+   * A value determining how much the value should increase/decrease by Shift+arrow keys,
+   * which will be `(max - min) / stepMultiplier`.
+   */
+  stepMultiplier: PropTypes.number,
+
+  /**
+   * Supply a method to translate internal strings with your i18n tool of
+   * choice. Translation keys are available on the `translationIds` field for
+   * this component.
+   */
+  translateWithId: PropTypes.func,
+
+  /**
+   * The `ariaLabel` for the upper bound `<input>` when there are two handles.
+   */
+  unstable_ariaLabelInputUpper: PropTypes.string,
+
+  /**
+   * The `name` attribute of the upper bound `<input>` when there are two handles.
+   */
+  unstable_nameUpper: PropTypes.string,
+
+  /**
+   * The upper bound when there are two handles.
+   */
+  unstable_valueUpper: PropTypes.number,
+
+  /**
+   * The value of the slider. When there are two handles, value is the lower
+   * bound.
+   */
+  value: PropTypes.number.isRequired,
+
+  /**
+   * `Specify whether the Slider is in a warn state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the Slider is in a warn state
+   */
+  warnText: PropTypes.node,
+};
 
 export default Slider;
