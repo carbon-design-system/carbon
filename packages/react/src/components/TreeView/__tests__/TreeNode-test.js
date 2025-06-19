@@ -331,8 +331,6 @@ describe('TreeNode - handleKeyDown', () => {
   });
 });
 
-// UPDATED: These tests are simplified to only check for onFocus/onBlur
-// as onNodeFocusEvent is no longer a prop.
 describe('TreeNode - handleFocusEvent', () => {
   it('should call onFocus when event type is "focus"', () => {
     const onFocusMock = jest.fn();
