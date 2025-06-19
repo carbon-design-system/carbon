@@ -70,7 +70,7 @@ class CDSGrid extends LitElement {
       </div> `;
     } else {
       // Grid styling added to contained components, allowing CSS Grid
-      // to affect the it's own slot content.
+      // to affect its own slot content.
       return html`<div grid part="grid">
         <slot></slot>
       </div> `;
