@@ -20,6 +20,11 @@ export type ColumnSpec =
   | `span:${number} end:${number}`
   | `start:${number} end:${number}`;
 
+/**
+ * The column component.
+ *
+ * @element cds-column
+ */
 @customElement(`${prefix}-column`)
 class CDSColumn extends LitElement {
   /**

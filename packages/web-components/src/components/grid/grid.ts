@@ -16,8 +16,11 @@ import { prefix } from '../../globals/settings';
 import styles from './grid.scss?lit';
 import { GridAlignmentType, SUB_GRID_MODE } from './defs';
 export { GRID_ALIGNMENT } from './defs';
-
-@customElement(`${prefix}-grid`)
+/**
+ * The grid component.
+ *
+ * @element cds-grid
+ */ @customElement(`${prefix}-grid`)
 class CDSGrid extends LitElement {
   /**
    * Specify grid alignment. Default is center
