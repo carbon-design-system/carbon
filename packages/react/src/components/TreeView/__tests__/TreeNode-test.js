@@ -22,8 +22,6 @@ import { TreeContext, DepthContext } from '../TreeContext';
  * @param {object} options.renderOptions - Other options for React Testing Library's render.
  * @returns The result of the render call.
  */
-
-const prefix = 'cds';
 const renderWithProviders = (
   ui,
   { providerProps = {}, depth = 0, ...renderOptions } = {}
@@ -89,17 +87,12 @@ describe('TreeNode Component', () => {
       </TreeNode>,
       { depth }
     );
+    const treeNode = getByText('Parent Node');
+    expect(treeNode).toBeInTheDocument();
 
-    // FIX: Use .closest() to find the specific styled container
-    const styledNodeContainer = getByText('Parent Node').closest(
-      `.${prefix}--tree-node__label`
-    );
-    expect(styledNodeContainer).toBeInTheDocument();
-
+    // The component's internal calculation should use the provided depth
     const offset = depth + 1 + depth * 0.5;
-
-    // Assert against the correct, robustly-selected element
-    expect(styledNodeContainer).toHaveStyle({
+    expect(treeNode.parentElement).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
     });
@@ -112,15 +105,14 @@ describe('TreeNode Component', () => {
       { depth }
     );
 
-    // FIX: Use .closest() to find the specific styled container
-    const styledNodeContainer = getByText('Parent Node').closest(
-      `.${prefix}--tree-node__label`
-    );
+    // Get the element that actually has the style applied to it.
+    // getByText returns the inner span, but the style is on its parent div.
+    const styledNodeContainer = getByText('Parent Node').parentElement;
     expect(styledNodeContainer).toBeInTheDocument();
 
     const offset = depth + 2 + depth * 0.5;
 
-    // Assert against the correct, robustly-selected element
+    // Assert against the correct element
     expect(styledNodeContainer).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
@@ -467,3 +459,4 @@ describe('TreeNode - Parent Node Tooltip', () => {
     ).toBeInTheDocument();
   });
 });
+
