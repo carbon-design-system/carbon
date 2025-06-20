@@ -51,6 +51,12 @@ class CDSDropdownItem extends LitElement {
   size = DROPDOWN_SIZE.MEDIUM;
 
   /**
+   * title
+   */
+  @property({ type: String, reflect: true })
+  title = '';
+
+  /**
    * The `value` attribute that is set to the parent `<cds-dropdown>` when this dropdown item is selected.
    */
   @property()
@@ -71,11 +77,28 @@ class CDSDropdownItem extends LitElement {
     this.setAttribute('aria-selected', String(this.selected));
   }
 
+  /**
+   * Handles `slotchange` event.
+   *
+   * Adds the `title` property to its parent element so the native
+   * browser tooltip appears for menu items that result in ellipsis
+   */
+  protected _handleSlotChange({ target }: Event) {
+    const text = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter(
+        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
+
+    this.title = text[0].textContent ?? '';
+    this.requestUpdate();
+  }
+
   render() {
-    const { selected } = this;
+    const { selected, _handleSlotChange: handleSlotChange } = this;
     return html`
       <div class="${prefix}--list-box__menu-item__option">
-        <slot></slot>
+        <slot @slotchange=${handleSlotChange}></slot>
         ${!selected
           ? undefined
           : Checkmark16({
