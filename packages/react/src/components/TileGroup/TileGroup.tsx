@@ -22,7 +22,7 @@ import { noopFn } from '../../internal/noopFn';
 
 type ExcludedAttributes = 'onChange';
 
-export interface TileGroupProps
+export interface TileGroupProps<T = string | number>
   extends Omit<HTMLAttributes<HTMLFieldSetElement>, ExcludedAttributes> {
   /**
    * Provide a collection of <RadioTile> components to render in the group
@@ -37,7 +37,7 @@ export interface TileGroupProps
   /**
    * Specify the the value of <RadioTile> to be selected by default
    */
-  defaultSelected?: string | number;
+  defaultSelected?: T;
 
   /**
    * Specify whether the group is disabled
@@ -57,19 +57,19 @@ export interface TileGroupProps
   /**
    * Provide an optional `onChange` hook that is called whenever the value of the group changes
    */
-  onChange?: (selection: unknown, name: string, evt: unknown) => void;
+  onChange?: (selection: T, name: string, evt: unknown) => void;
 
   /**
    * Specify the value that is currently selected in the group
    */
-  valueSelected?: string | number;
+  valueSelected?: T;
   /**
    * `true` to specify if input selection in group is required.
    */
   required?: boolean;
 }
 
-export const TileGroup = ({
+export const TileGroup = <T extends string | number = string>({
   children,
   className,
   defaultSelected,
@@ -79,9 +79,11 @@ export const TileGroup = ({
   onChange = noopFn,
   valueSelected,
   required,
-}: TileGroupProps) => {
+}: TileGroupProps<T>) => {
   const prefix = usePrefix();
-  const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
+  const [selected, setSelected] = useState<T | undefined>(
+    valueSelected ?? defaultSelected
+  );
 
   useEffect(() => {
     if (typeof valueSelected !== 'undefined' && valueSelected !== selected) {
@@ -95,8 +97,8 @@ export const TileGroup = ({
     evt
   ) => {
     if (value !== selected) {
-      setSelected(value);
-      onChange(value, name ?? '', evt);
+      setSelected(value as T);
+      onChange(value as T, name ?? '', evt);
     }
   };
 
