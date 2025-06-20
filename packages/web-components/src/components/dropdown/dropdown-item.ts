@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16.js';
 import { prefix } from '../../globals/settings';
 import { DROPDOWN_SIZE } from './dropdown';
@@ -51,16 +51,13 @@ class CDSDropdownItem extends LitElement {
   size = DROPDOWN_SIZE.MEDIUM;
 
   /**
-   * title
-   */
-  @property({ type: String, reflect: true })
-  title = '';
-
-  /**
    * The `value` attribute that is set to the parent `<cds-dropdown>` when this dropdown item is selected.
    */
   @property()
   value = '';
+
+  @state()
+  _hasEllipsisApplied = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -90,8 +87,22 @@ class CDSDropdownItem extends LitElement {
         (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
       );
 
-    this.title = text[0].textContent ?? '';
-    this.requestUpdate();
+    const textContainer = this.shadowRoot?.querySelector(
+      `.${prefix}--list-box__menu-item__option`
+    );
+
+    if (!textContainer || this._hasEllipsisApplied === true) return;
+
+    const observer = new ResizeObserver(() => {
+      this._hasEllipsisApplied =
+        textContainer.scrollWidth > textContainer.clientWidth;
+
+      if (this._hasEllipsisApplied) {
+        textContainer.setAttribute('title', text[0].textContent ?? '');
+      }
+    });
+
+    observer.observe(textContainer);
   }
 
   render() {
