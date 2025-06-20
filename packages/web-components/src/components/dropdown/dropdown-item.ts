@@ -56,6 +56,9 @@ class CDSDropdownItem extends LitElement {
   @property()
   value = '';
 
+  /**
+   * true if menu item has ellipsis applied
+   */
   @state()
   _hasEllipsisApplied = false;
 
