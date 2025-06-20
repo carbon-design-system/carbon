@@ -28,7 +28,7 @@ import { throttle } from 'es-toolkit/compat';
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { Text } from '../Text';

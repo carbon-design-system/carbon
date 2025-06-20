@@ -21,7 +21,7 @@ import Button from '../Button';
 import CopyButton from '../CopyButton';
 import { useId } from '../../internal/useId';
 import copy from 'copy-to-clipboard';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
