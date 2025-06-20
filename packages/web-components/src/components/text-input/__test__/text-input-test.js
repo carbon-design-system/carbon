@@ -207,4 +207,85 @@ describe('cds-text-input', () => {
     const el = await fixture(defaultInput);
     await expect(el).to.be.accessible();
   });
+
+  it('should show password visibility toggle button and toggle type', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        type="password"
+        show-password-visibility-toggle
+        label-text="Password">
+        <cds-text-input-label slot="label-text">Password</cds-text-input-label>
+      </cds-text-input>
+    `);
+    const button = el.shadowRoot.querySelector('button');
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(button).to.exist;
+    expect(input.type).to.equal('password');
+
+    button.click();
+    await el.updateComplete;
+
+    expect(input.type).to.equal('text');
+  });
+
+  it('should not trigger click handler when disabled', async () => {
+    let clicked = false;
+    const el = await fixture(html`
+      <cds-text-input
+        disabled
+        label-text="Disabled"
+        @click=${() => {
+          clicked = true;
+        }}>
+        <cds-text-input-label slot="label-text">Disabled</cds-text-input-label>
+      </cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+    input.click();
+    expect(clicked).to.be.false;
+  });
+
+  it('should render counter when enable-counter and max-count are set', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        enable-counter
+        max-count="10"
+        value="1234"
+        label-text="Counter test">
+        <cds-text-input-label slot="label-text"
+          >Counter test</cds-text-input-label
+        >
+      </cds-text-input>
+    `);
+    const counter = el.shadowRoot.querySelector(
+      '.cds--text-input__label-counter'
+    );
+    expect(counter.textContent).to.include('4/10');
+  });
+
+  it('should apply hideLabel and visually hide the label', async () => {
+    const el = await fixture(html`
+      <cds-text-input hide-label label-text="Hidden label">
+        <cds-text-input-label slot="label-text"
+          >Hidden label</cds-text-input-label
+        >
+      </cds-text-input>
+    `);
+    const label = el.shadowRoot.querySelector('label');
+    expect(label.classList.contains('cds--visually-hidden')).to.be.true;
+  });
+
+  it('should apply inline class', async () => {
+    const el = await fixture(html`
+      <cds-text-input inline label-text="Inline label">
+        <cds-text-input-label slot="label-text"
+          >Inline label</cds-text-input-label
+        >
+      </cds-text-input>
+    `);
+    const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
+    expect(wrapper.classList.contains('cds--text-input-wrapper--inline')).to.be
+      .true;
+  });
 });
