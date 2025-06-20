@@ -90,8 +90,8 @@ export function useControllableState({
   }, [name, value]);
 
   if (controlled.current === true) {
-    return [value, setState];
+    return [value, setState, controlled.current];
   }
 
-  return [state, setState];
+  return [state, setState, controlled.current];
 }

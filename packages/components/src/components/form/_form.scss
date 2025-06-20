@@ -79,6 +79,7 @@
 
   input[data-invalid]:not(:focus),
   .#{$prefix}--number[data-invalid] input[type='number']:not(:focus),
+  .#{$prefix}--number[data-invalid] input[type='text']:not(:focus),
   .#{$prefix}--text-input__field-wrapper[data-invalid]
     > .#{$prefix}--text-input--invalid:not(:focus),
   .#{$prefix}--text-area__wrapper[data-invalid]

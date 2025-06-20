@@ -331,6 +331,16 @@ async function build() {
           },
           {
             type: 'directory',
+            filepath: 'number-input-v2',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
             filepath: 'overflow-menu',
             files: [
               {
