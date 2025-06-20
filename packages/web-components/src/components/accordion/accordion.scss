@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -36,6 +36,17 @@ $css--plex: true !default;
     }
   }
 }
+
+// Indicates this is the last visible item in a group (for styling the bottom border)
+:host([data-last-item]) {
+  border-block-end: 1px solid var(--cds-border-subtle);
+}
+
+// Prevent bottom border if flush mode is active (match React)
+//➡️ TODO: fix this later
+// :host([data-last-item][isFlush]) {
+//   border-block-end: none;
+// }
 
 :host(#{$prefix}-accordion-item[size='sm']),
 :host(#{$prefix}-accordion-item-skeleton[size='sm']) {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -108,11 +108,12 @@ class CDSAccordionSkeleton extends LitElement {
             </li>
           `
         : ``}
-      ${Array.from(new Array(numSkeletonItems)).map(
-        (_, index) => html`
-          <cds-accordion-item-skeleton
-            key=${index}></cds-accordion-item-skeleton>
-        `
+      ${Array.from({ length: numSkeletonItems }).map(
+        (_, i, arr) =>
+          html`<cds-accordion-item-skeleton
+            key=${i}
+            ?data-last-item=${i ===
+            arr.length - 1}></cds-accordion-item-skeleton>`
       )}
     `;
   }
