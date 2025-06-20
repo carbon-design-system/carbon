@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16.js';
 import { prefix } from '../../globals/settings';
 import { DROPDOWN_SIZE } from './dropdown';
@@ -56,6 +56,12 @@ class CDSDropdownItem extends LitElement {
   @property()
   value = '';
 
+  /**
+   * true if menu item has ellipsis applied
+   */
+  @state()
+  _hasEllipsisApplied = false;
+
   connectedCallback() {
     super.connectedCallback();
     if (!this.hasAttribute('role')) {
@@ -71,11 +77,42 @@ class CDSDropdownItem extends LitElement {
     this.setAttribute('aria-selected', String(this.selected));
   }
 
+  /**
+   * Handles `slotchange` event.
+   *
+   * Adds the `title` property to its parent element so the native
+   * browser tooltip appears for menu items that result in ellipsis
+   */
+  protected _handleSlotChange({ target }: Event) {
+    const text = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter(
+        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
+
+    const textContainer = this.shadowRoot?.querySelector(
+      `.${prefix}--list-box__menu-item__option`
+    );
+
+    if (!textContainer || this._hasEllipsisApplied === true) return;
+
+    const observer = new ResizeObserver(() => {
+      this._hasEllipsisApplied =
+        textContainer.scrollWidth > textContainer.clientWidth;
+
+      if (this._hasEllipsisApplied) {
+        textContainer.setAttribute('title', text[0].textContent ?? '');
+      }
+    });
+
+    observer.observe(textContainer);
+  }
+
   render() {
-    const { selected } = this;
+    const { selected, _handleSlotChange: handleSlotChange } = this;
     return html`
-      <div class="${prefix}--list-box__menu-item__option">
-        <slot></slot>
+      <div class="${prefix}--list-box__menu-item__option" part="menu-item">
+        <slot @slotchange=${handleSlotChange}></slot>
         ${!selected
           ? undefined
           : Checkmark16({
