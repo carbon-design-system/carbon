@@ -111,7 +111,7 @@ class CDSDropdownItem extends LitElement {
   render() {
     const { selected, _handleSlotChange: handleSlotChange } = this;
     return html`
-      <div class="${prefix}--list-box__menu-item__option">
+      <div class="${prefix}--list-box__menu-item__option" part="menu-item">
         <slot @slotchange=${handleSlotChange}></slot>
         ${!selected
           ? undefined
