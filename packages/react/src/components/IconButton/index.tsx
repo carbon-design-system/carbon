@@ -15,6 +15,11 @@ import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 export const IconButtonKinds = [
@@ -26,33 +31,11 @@ export const IconButtonKinds = [
 
 export type IconButtonKind = (typeof IconButtonKinds)[number];
 
-export type DeprecatedIconButtonAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedIconButtonAlignment = DeprecatedPopoverAlignment;
 
-export type NewIconButtonAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewIconButtonAlignment = NewPopoverAlignment;
 
-export type IconButtonAlignment =
-  | DeprecatedIconButtonAlignment
-  | NewIconButtonAlignment;
+export type IconButtonAlignment = PopoverAlignment;
 
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
