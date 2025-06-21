@@ -1,0 +1,59 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/grid';
+@use './mixin' as *;
+
+$css-grid: #{$prefix}--css-grid;
+:host(#{$prefix}-grid) [grid] {
+  @extend .#{$css-grid};
+
+  box-sizing: border-box; /* prevent padding leaking out */
+}
+
+:host(#{$prefix}-grid[align='start']) [grid] {
+  @extend .#{$css-grid}--start;
+}
+
+:host(#{$prefix}-grid[align='end']) [grid] {
+  @extend .#{$css-grid}--end;
+}
+
+:host(#{$prefix}-grid[condensed]) [grid] {
+  @extend .#{$css-grid}--condensed;
+}
+
+:host(#{$prefix}-grid[narrow]) [grid] {
+  @extend .#{$css-grid}--narrow;
+}
+
+:host(#{$prefix}-grid[full-width]) [grid] {
+  @extend .#{$css-grid}--full-width;
+}
+
+/* sub grid styles */
+$sub-grid: #{$prefix}--subgrid;
+:host(#{$prefix}-grid) [subgrid] {
+  @extend .#{$sub-grid};
+
+  box-sizing: border-box; /* prevent padding leaking out */
+}
+
+:host(#{$prefix}-grid) [subgrid][mode='wide'] {
+  @extend .#{$sub-grid}--wide;
+}
+
+:host(#{$prefix}-grid) [subgrid][mode='condensed'] {
+  @extend .#{$sub-grid}--condensed;
+}
+
+:host(#{$prefix}-grid) [subgrid][mode='narrow'] {
+  @extend .#{$sub-grid}--narrow;
+}
+
+// Column styles
+@include grid-columns(#{$prefix}-grid);
