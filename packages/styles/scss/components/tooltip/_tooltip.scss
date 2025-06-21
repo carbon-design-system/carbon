@@ -38,6 +38,10 @@ $tooltip-padding-inline: custom-property.get-var(
     max-inline-size: convert.to-rem(288px);
     overflow-wrap: break-word;
   }
+
+  .#{$prefix}--tooltip-content--multiline {
+    padding: $tooltip-padding-inline;
+  }
 }
 
 @mixin definition-tooltip {
