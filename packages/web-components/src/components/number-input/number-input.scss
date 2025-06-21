@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/number-input/index';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
@@ -72,4 +73,7 @@ $css--plex: true !default;
       display: none;
     }
   }
+}
+:host(#{$prefix}-number-input[ai-label]) input {
+  @include ai-gradient;
 }
