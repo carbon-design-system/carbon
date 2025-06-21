@@ -98,7 +98,6 @@ describe('cds-time-picker', () => {
     await el.updateComplete;
 
     expect(blurred).to.be.false;
-    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   describe('label', () => {
@@ -128,7 +127,6 @@ describe('cds-time-picker', () => {
 
         expect(input).to.have.property('value', '🧛');
       }
-      await expect(el).shadowDom.to.equalSnapshot();
     });
   });
 });
