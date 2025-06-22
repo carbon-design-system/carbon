@@ -57,6 +57,7 @@ const HeaderMenuItem = forwardRef(function HeaderMenuItem<
   ref: ForwardedRef<E>
 ) {
   const prefix = usePrefix();
+  const resolvedTabIndex = tabIndex ?? 0;
   if (isCurrentPage) {
     isActive = isCurrentPage;
   }
@@ -75,7 +76,7 @@ const HeaderMenuItem = forwardRef(function HeaderMenuItem<
         aria-current={hasCurrentClass ? true : ariaCurrent}
         className={linkClassName}
         ref={ref}
-        tabIndex={tabIndex}>
+        tabIndex={resolvedTabIndex}>
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
       </Link>
     </li>

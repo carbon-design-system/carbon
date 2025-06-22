@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { ErrorBoundary, ErrorBoundaryContext } from './';
 import Button from '../Button';
 import mdx from './ErrorBoundary.mdx';

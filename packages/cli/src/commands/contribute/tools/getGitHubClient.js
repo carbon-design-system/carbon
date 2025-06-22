@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -63,6 +63,7 @@ async function getGitHubClient() {
     await octokit.users.getAuthenticated();
     return octokit;
   } catch (error) {
+    console.error(error);
     throw new Error('Invalid GitHub token');
   }
 }

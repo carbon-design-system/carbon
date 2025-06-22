@@ -5,96 +5,91 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import { render, screen } from '@testing-library/react';
+import React, { useRef } from 'react';
+import { render, screen, act } from '@testing-library/react';
 import { useResizeObserver } from '../useResizeObserver';
-import { mockHTMLElement } from '../__mocks__/mockHTMLElement';
 
-/**
- * @param {number} base - Represents the initial size used for the resizing example
- */
-const sizes = (base) => ({
-  offsetWidth: {
-    ['observed-el']: base,
-  },
-  offsetHeight: { ['observed-el']: base / 2 },
-});
-
-/**
- * @param {HTMLElement} el - The element being mocked for resizing functionality
- * @param {string} property - HTML property being mocked (in this scenario, these properties come from sizes())
- */
-const testSizes = (el, property) => {
-  const classes = el.getAttribute('class').split(' ');
-  const container = el.closest('.test-container');
-
-  const base = container ? parseInt(container.style.width, 10) : 400;
-  const propSizes = sizes(base)[property];
-
-  if (propSizes) {
-    for (let cls of classes) {
-      const val = propSizes[cls] ? propSizes[cls] : -1;
-      if (val >= 0) {
-        return val;
-      }
-    }
-  }
-
-  // The test should never get here as all cases should be catered for in setup.
-  return base;
-};
-
-const mockSizes = () => {
-  const mocks = {};
-
-  const keys = Object.keys(sizes(-1));
-  for (let i = 0; i < keys.length; i++) {
-    mocks[keys[i]] = {
-      get: function () {
-        return testSizes(this, keys[i]);
-      },
-    };
-  }
-
-  return mocks;
-};
-
-const TestComponent = () => {
-  const observedElement = useRef(null);
-  const { width, height } = useResizeObserver({ ref: observedElement });
-  const [content, setContent] = useState(-1);
-
-  useEffect(() => {
-    setContent(`width: ${width}, height: ${height}`);
-  }, [height, width]);
-
+const ResizeTest = ({ onResize }) => {
+  const ref = useRef(null);
+  const { width, height } = useResizeObserver({ ref, onResize });
   return (
-    <div ref={observedElement} className="observed-el">
-      {content}
+    <div ref={ref} data-testid="observed-element">
+      width: {width}, height: {height}
     </div>
   );
 };
 
+const defaultSize = 100;
 describe('useResizeObserver', () => {
-  const { ResizeObserver } = window;
-  let mockElement;
+  let savedObserverCb;
 
   beforeEach(() => {
-    mockElement = mockHTMLElement(mockSizes());
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
+    window.ResizeObserver = jest.fn().mockImplementation((cb) => {
+      savedObserverCb = cb;
+      return {
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
+      };
+    });
   });
 
   afterEach(() => {
-    mockElement.mockRestore();
-    window.ResizeObserver = ResizeObserver;
+    jest.clearAllMocks();
   });
 
+  /** Triggers resize from the saved resize observer callback */
+  const triggerResize = async (
+    element,
+    width = defaultSize,
+    height = defaultSize
+  ) =>
+    act(() => {
+      savedObserverCb([{ target: element, contentRect: { width, height } }]);
+    });
+
   it('returns the initial size of the component', () => {
-    render(<TestComponent />);
-    screen.getByText('width: 400, height: 200');
+    render(<ResizeTest />);
+    expect(screen.getByText('width: 0, height: 0')).toBeInTheDocument();
+  });
+
+  it('returns the updated sizes from hook upon resizing', async () => {
+    render(<ResizeTest />);
+    const element = screen.getByTestId('observed-element');
+    expect(screen.getByText('width: 0, height: 0')).toBeInTheDocument();
+
+    await triggerResize(element);
+    expect(
+      screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`)
+    ).toBeInTheDocument();
+
+    await triggerResize(element, defaultSize * 2, defaultSize * 3);
+    expect(
+      screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`)
+    ).toBeInTheDocument();
+  });
+
+  it('calls the provided onResize function', async () => {
+    const resizeFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} />);
+    const element = screen.getByTestId('observed-element');
+
+    await triggerResize(element, defaultSize * 2, defaultSize * 3);
+    expect(
+      screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`)
+    ).toBeInTheDocument();
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+
+    await triggerResize(element, defaultSize * 3, defaultSize * 4);
+    expect(
+      screen.getByText(`width: ${defaultSize * 3}, height: ${defaultSize * 4}`)
+    ).toBeInTheDocument();
+    expect(resizeFn).toHaveBeenCalledTimes(2);
+
+    await triggerResize(element, defaultSize, defaultSize);
+    expect(
+      screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`)
+    ).toBeInTheDocument();
+    expect(resizeFn).toHaveBeenCalledTimes(3);
   });
 });

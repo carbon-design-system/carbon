@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactElement, ReactNode } from 'react';
+import React, { cloneElement, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
@@ -14,6 +14,8 @@ import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
@@ -161,24 +163,13 @@ const Checkbox = React.forwardRef(
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, {
+          size: candidate.props.kind === 'inline' ? 'md' : 'mini',
+        })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      const size =
-        (normalizedDecorator as ReactElement<any>).props?.['kind'] === 'inline'
-          ? 'md'
-          : 'mini';
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size,
-        }
-      );
-    }
 
     return (
       <div className={wrapperClasses}>
