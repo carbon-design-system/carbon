@@ -1432,4 +1432,48 @@ describe('ComboBox', () => {
       expect(findInputNode()).toHaveDisplayValue('Option 2');
     });
   });
+
+  it('should close menu when focusing on AI label or toggletip', async () => {
+    render(<ComboBox {...mockProps} />);
+    
+    // Open the menu first
+    await openMenu();
+    assertMenuOpen(mockProps);
+    
+    // Create a mock AI label element and trigger focus event
+    const aiLabelElement = document.createElement('div');
+    aiLabelElement.className = 'cds--ai-label';
+    document.body.appendChild(aiLabelElement);
+    
+    // Simulate focus event on AI label
+    fireEvent.focus(aiLabelElement);
+    
+    // Menu should be closed
+    assertMenuClosed();
+    
+    // Clean up
+    document.body.removeChild(aiLabelElement);
+  });
+
+  it('should close menu when focusing on toggletip', async () => {
+    render(<ComboBox {...mockProps} />);
+    
+    // Open the menu first
+    await openMenu();
+    assertMenuOpen(mockProps);
+    
+    // Create a mock toggletip element and trigger focus event
+    const toggletipElement = document.createElement('div');
+    toggletipElement.className = 'cds--toggletip';
+    document.body.appendChild(toggletipElement);
+    
+    // Simulate focus event on toggletip
+    fireEvent.focus(toggletipElement);
+    
+    // Menu should be closed
+    assertMenuClosed();
+    
+    // Clean up
+    document.body.removeChild(toggletipElement);
+  });
 });

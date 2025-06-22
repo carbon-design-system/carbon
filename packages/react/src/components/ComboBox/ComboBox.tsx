@@ -900,6 +900,13 @@ const ComboBox = forwardRef(
       if (!inputRef.current?.value && evt.type === 'blur') {
         selectItem(null);
       }
+      // Close the dropdown when focusing on the AI label or Toggletip
+      if (evt.type === 'focus' && (
+        evt.target.closest(`.${prefix}--ai-label`) ||
+        evt.target.closest(`.${prefix}--toggletip`)
+      )) {
+        closeMenu();
+      }
     };
 
     const readOnlyEventHandlers = readOnly
