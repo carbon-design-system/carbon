@@ -35,7 +35,7 @@ import React, {
   type ReactElement,
   type ReactNode,
 } from 'react';
-import { defaultFilterItems } from '../ComboBox/tools/filter';
+import { defaultFilterItems } from './filter';
 import {
   type MultiSelectSortingProps,
   sortingPropTypes,

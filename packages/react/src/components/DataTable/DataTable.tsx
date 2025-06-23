@@ -7,7 +7,9 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  Component,
+  useEffect,
+  useMemo,
+  useState,
   type ChangeEvent,
   type MouseEvent,
   type ReactElement,
@@ -58,6 +60,9 @@ const translationKeys = {
   selectRow: 'carbon.table.row.select',
   unselectRow: 'carbon.table.row.unselect',
 } as const;
+
+// TODO: All code comments in this file should be revisited for accuracy and
+// clarity.
 
 /**
  * Message ids that will be passed to translateWithId().
@@ -248,6 +253,8 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   locale?: string;
   overflowMenuOnHover?: boolean;
   radio?: boolean;
+  // TODO: Deprecate this prop.
+  // https://github.com/carbon-design-system/carbon/pull/19659#discussion_r2150091428
   render?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
   ) => ReactElement;
@@ -295,92 +302,77 @@ interface DataTableState<ColTypes extends any[]> {
  * and updating the state of the single entity will cascade updates to the
  * consumer.
  */
-class DataTable<RowType, ColTypes extends any[]> extends Component<
-  DataTableProps<RowType, ColTypes>,
-  DataTableState<ColTypes>
-> {
-  instanceId: number;
+export const DataTable = <RowType, ColTypes extends any[]>(
+  props: DataTableProps<RowType, ColTypes>
+) => {
+  type rp = DataTableRenderProps<RowType, ColTypes>;
+  const {
+    children,
+    filterRows = defaultFilterRows,
+    headers,
+    render,
+    translateWithId: t = translateWithId,
+    size,
+    isSortable: isSortableProp,
+    useZebraStyles,
+    useStaticWidth,
+    stickyHeader,
+    overflowMenuOnHover,
+    experimentalAutoAlign,
+    radio,
+    rows,
+  } = props;
 
-  static translationKeys = Object.values(translationKeys);
+  const instanceId = useMemo(() => getInstanceId(), []);
 
-  // TODO: Delete these static properties when the components are converted to a
-  // functional component.
-  //
-  // Static properties for sub-components
-  static Table: typeof Table;
-  static TableActionList: typeof TableActionList;
-  static TableBatchAction: typeof TableBatchAction;
-  static TableBatchActions: typeof TableBatchActions;
-  static TableBody: typeof TableBody;
-  static TableCell: typeof TableCell;
-  static TableContainer: typeof TableContainer;
-  static TableDecoratorRow: typeof TableDecoratorRow;
-  static TableExpandHeader: typeof TableExpandHeader;
-  static TableExpandRow: typeof TableExpandRow;
-  static TableExpandedRow: typeof TableExpandedRow;
-  static TableHead: typeof TableHead;
-  static TableHeader: typeof TableHeader;
-  static TableRow: typeof TableRow;
-  static TableSelectAll: typeof TableSelectAll;
-  static TableSelectRow: typeof TableSelectRow;
-  static TableSlugRow: typeof TableSlugRow;
-  static TableToolbar: typeof TableToolbar;
-  static TableToolbarAction: typeof TableToolbarAction;
-  static TableToolbarContent: typeof TableToolbarContent;
-  static TableToolbarSearch: typeof TableToolbarSearch;
-  static TableToolbarMenu: typeof TableToolbarMenu;
+  const [state, setState] = useState<DataTableState<ColTypes>>(() => ({
+    ...getDerivedStateFromProps(props, {}),
+    isExpandedAll: false, // Start with collapsed state, treat `undefined` as neutral state
+  }));
 
-  // TODO: Replace with a `type` when this component is converted to a
-  // functional component.
-  private readonly rp!: DataTableRenderProps<RowType, ColTypes>;
+  useEffect(() => {
+    const nextRowIds = rows.map((row) => row.id);
+    const nextHeaders = headers.map((header) => header.key);
+    const hasRowIdsChanged = !isEqual(nextRowIds, state.rowIds);
+    const currentHeaders = Object.keys(state.cellsById).reduce<string[]>(
+      (acc, cellId) => {
+        const headerKey = cellId.split(':')[1];
+        if (headerKey && !acc.includes(headerKey)) {
+          acc.push(headerKey);
+        }
+        return acc;
+      },
+      []
+    );
+    const hasHeadersChanged = !isEqual(nextHeaders, currentHeaders);
+    const currentRows = state.rowIds.map((id) => {
+      const row = state.rowsById[id];
+      return {
+        // TODO: Investigate whether it be okay to just return `row`.
+        id: row.id,
+        disabled: row.disabled,
+        isExpanded: row.isExpanded,
+        isSelected: row.isSelected,
+      };
+    });
+    const hasRowsChanged = !isEqual(rows, currentRows);
 
-  constructor(props: DataTableProps<RowType, ColTypes>) {
-    super(props);
-    this.state = {
-      ...getDerivedStateFromProps(props, {}),
-      isExpandedAll: false, // Start with collapsed state, treat `undefined` as neutral state
-    };
-    this.instanceId = getInstanceId();
-  }
-
-  // If state needs to be updated, defer render until after the update completes.
-  shouldComponentUpdate(nextProps: DataTableProps<RowType, ColTypes>) {
-    if (this.props !== nextProps) {
-      const nextRowIds = nextProps.rows.map((row) => row.id);
-      const rowIds = this.props.rows.map((row) => row.id);
-
-      if (!isEqual(nextRowIds, rowIds)) {
-        this.setState((state) => getDerivedStateFromProps(this.props, state));
-        return false;
-      }
-
-      const nextHeaders = nextProps.headers.map((header) => header.key);
-      const headers = this.props.headers.map((header) => header.key);
-
-      if (!isEqual(nextHeaders, headers)) {
-        this.setState((state) => getDerivedStateFromProps(this.props, state));
-        return false;
-      }
-
-      if (!isEqual(nextProps.rows, this.props.rows)) {
-        this.setState((state) => getDerivedStateFromProps(this.props, state));
-        return false;
-      }
+    if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
+      setState((prev) => getDerivedStateFromProps(props, prev));
     }
-    return true;
-  }
+  }, [headers, rows]);
 
   /**
    * Get the props associated with the given header. Mostly used for adding in
    * sorting behavior.
    */
-  getHeaderProps: (typeof this.rp)['getHeaderProps'] = ({
+  const getHeaderProps: rp['getHeaderProps'] = ({
     header,
     onClick,
-    isSortable = this.props.isSortable,
+    isSortable = isSortableProp,
     ...rest
   }) => {
-    const { sortDirection, sortHeaderKey } = this.state;
+    const { sortDirection, sortHeaderKey } = state;
     return {
       ...rest,
       key: header.key,
@@ -390,16 +382,15 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
       slug: header.slug,
       decorator: header.decorator,
       onClick: (event) => {
-        const nextSortState = getNextSortState(this.props, this.state, {
+        const nextSortState = getNextSortState(props, state, {
           key: header.key,
         });
-        this.setState(nextSortState, () => {
-          onClick &&
-            this.handleOnHeaderClick(onClick, {
-              sortHeaderKey: header.key,
-              sortDirection: nextSortState.sortDirection,
-            })(event);
-        });
+        setState((prev) => ({ ...prev, ...nextSortState }));
+        onClick &&
+          handleOnHeaderClick(onClick, {
+            sortHeaderKey: header.key,
+            sortDirection: nextSortState.sortDirection,
+          })(event);
       },
     };
   };
@@ -407,13 +398,12 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Get the props associated with the given expand header.
    */
-  getExpandHeaderProps: (typeof this.rp)['getExpandHeaderProps'] = ({
+  const getExpandHeaderProps: rp['getExpandHeaderProps'] = ({
     onClick,
     onExpand,
     ...rest
   } = {}) => {
-    const { translateWithId: t = translateWithId } = this.props;
-    const { isExpandedAll, rowIds, rowsById } = this.state;
+    const { isExpandedAll, rowIds, rowsById } = state;
     const isExpanded =
       isExpandedAll || rowIds.every((id) => rowsById[id].isExpanded);
     const translationKey = isExpanded
@@ -428,10 +418,11 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
       onExpand: composeEventHandlers([
-        this.handleOnExpandAll,
+        handleOnExpandAll,
         onExpand,
+        // TODO: Avoid passing `false` to this function.
         onClick &&
-          this.handleOnExpandHeaderClick(onClick, {
+          handleOnExpandHeaderClick(onClick, {
             isExpanded,
           }),
       ]),
@@ -441,7 +432,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Decorate consumer's `onClick` event handler with sort parameters
    */
-  handleOnHeaderClick = (
+  const handleOnHeaderClick = (
     onClick: (
       event: MouseEvent<HTMLButtonElement>,
       sortParams: { sortHeaderKey: string; sortDirection: DataTableSortState }
@@ -454,7 +445,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Decorate consumer's `onClick` event handler with expand parameters
    */
-  handleOnExpandHeaderClick = (
+  const handleOnExpandHeaderClick = (
     onClick: (
       event: MouseEvent<HTMLButtonElement>,
       expandParams: { isExpanded: boolean }
@@ -468,12 +459,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Get the props associated with the given row. Mostly used for expansion.
    */
-  getRowProps: (typeof this.rp)['getRowProps'] = ({
-    row,
-    onClick,
-    ...rest
-  }) => {
-    const { translateWithId: t = translateWithId } = this.props;
+  const getRowProps: rp['getRowProps'] = ({ row, onClick, ...rest }) => {
     const translationKey = row.isExpanded
       ? translationKeys.collapseRow
       : translationKeys.expandRow;
@@ -483,7 +469,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
       onClick,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
-      onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
+      onExpand: composeEventHandlers([handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
       'aria-label': t(translationKey),
       'aria-controls': `expanded-row-${row.id}`,
@@ -495,10 +481,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Get the props associated with an expanded row
    */
-  getExpandedRowProps: (typeof this.rp)['getExpandedRowProps'] = ({
-    row,
-    ...rest
-  }) => {
+  const getExpandedRowProps: rp['getExpandedRowProps'] = ({ row, ...rest }) => {
     return {
       ...rest,
       id: `expanded-row-${row.id}`,
@@ -510,13 +493,11 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
    * applicable. Most often used to indicate selection status of the table or
    * for a specific row.
    */
-  getSelectionProps: (typeof this.rp)['getSelectionProps'] = ({
+  const getSelectionProps: rp['getSelectionProps'] = ({
     onClick,
     row,
     ...rest
   } = {}) => {
-    const { translateWithId: t = translateWithId } = this.props;
-
     // If we're given a row, return the selection state values for that row
     if (row) {
       const translationKey = row.isSelected
@@ -525,22 +506,19 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
       return {
         ...rest,
         checked: row.isSelected,
-        onSelect: composeEventHandlers([
-          this.handleOnSelectRow(row.id),
-          onClick,
-        ]),
-        id: `${this.getTablePrefix()}__select-row-${row.id}`,
-        name: `select-row-${this.instanceId}`,
+        onSelect: composeEventHandlers([handleOnSelectRow(row.id), onClick]),
+        id: `${getTablePrefix()}__select-row-${row.id}`,
+        name: `select-row-${instanceId}`,
         'aria-label': t(translationKey),
         disabled: row.disabled,
-        radio: this.props.radio,
+        radio,
       };
     }
 
     // Otherwise, we're working on `TableSelectAll` which handles toggling the
     // selection state of all rows.
-    const rowCount = this.state.rowIds.length;
-    const selectedRowCount = this.getSelectedRows().length;
+    const rowCount = state.rowIds.length;
+    const selectedRowCount = getSelectedRows().length;
     const checked = rowCount > 0 && selectedRowCount === rowCount;
     const indeterminate =
       rowCount > 0 && selectedRowCount > 0 && selectedRowCount !== rowCount;
@@ -553,15 +531,14 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
       ...rest,
       'aria-label': t(translationKey),
       checked,
-      id: `${this.getTablePrefix()}__select-all`,
+      id: `${getTablePrefix()}__select-all`,
       indeterminate,
-      name: `select-all-${this.instanceId}`,
-      onSelect: composeEventHandlers([this.handleSelectAll, onClick]),
+      name: `select-all-${instanceId}`,
+      onSelect: composeEventHandlers([handleSelectAll, onClick]),
     };
   };
 
-  getToolbarProps: (typeof this.rp)['getToolbarProps'] = (props) => {
-    const { size } = this.props;
+  const getToolbarProps: rp['getToolbarProps'] = (props) => {
     const isSmall = size === 'xs' || size === 'sm';
     return {
       ...props,
@@ -569,43 +546,32 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
     };
   };
 
-  getBatchActionProps: (typeof this.rp)['getBatchActionProps'] = (props) => {
-    const { shouldShowBatchActions } = this.state;
-    const totalSelected = this.getSelectedRows().length;
+  const getBatchActionProps: rp['getBatchActionProps'] = (props) => {
+    const { shouldShowBatchActions } = state;
+    const totalSelected = getSelectedRows().length;
     return {
       onSelectAll: undefined,
-      totalCount: this.state.rowIds.length || 0,
+      totalCount: state.rowIds.length || 0,
       ...props,
       shouldShowBatchActions: shouldShowBatchActions && totalSelected > 0,
       totalSelected,
-      onCancel: this.handleOnCancel,
+      onCancel: handleOnCancel,
     };
   };
 
-  getTableProps: (typeof this.rp)['getTableProps'] = () => {
-    const {
-      useZebraStyles,
-      size = 'lg',
-      isSortable,
-      useStaticWidth,
-      stickyHeader,
-      overflowMenuOnHover = false,
-      experimentalAutoAlign,
-    } = this.props;
+  const getTableProps: rp['getTableProps'] = () => {
     return {
       useZebraStyles,
-      size,
-      isSortable,
+      size: size ?? 'lg',
+      isSortable: isSortableProp,
       useStaticWidth,
       stickyHeader,
-      overflowMenuOnHover,
+      overflowMenuOnHover: overflowMenuOnHover ?? false,
       experimentalAutoAlign,
     };
   };
 
-  getTableContainerProps: (typeof this.rp)['getTableContainerProps'] = () => {
-    const { stickyHeader, useStaticWidth } = this.props;
-
+  const getTableContainerProps: rp['getTableContainerProps'] = () => {
     return {
       stickyHeader,
       useStaticWidth,
@@ -617,7 +583,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Get the props associated with the given table cell.
    */
-  getCellProps: (typeof this.rp)['getCellProps'] = ({
+  const getCellProps: rp['getCellProps'] = ({
     cell: { hasAILabelHeader, hasDecoratorHeader },
     ...rest
   }) => {
@@ -633,9 +599,9 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
    *
    * @returns the array of rowIds that are currently selected
    */
-  getSelectedRows = () =>
-    this.state.rowIds.filter((id) => {
-      const row = this.state.rowsById[id];
+  const getSelectedRows = () =>
+    state.rowIds.filter((id) => {
+      const row = state.rowsById[id];
       return row.isSelected && !row.disabled;
     });
 
@@ -644,18 +610,18 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
    *
    * @returns the array of rowIds that are currently included through the filter
    */
-  getFilteredRowIds = () => {
-    const { filterRows = defaultFilterRows } = this.props;
+  const getFilteredRowIds = () => {
     const filteredRowIds =
-      typeof this.state.filterInputValue === 'string'
+      typeof state.filterInputValue === 'string'
         ? filterRows({
-            rowIds: this.state.rowIds,
-            headers: this.props.headers,
-            cellsById: this.state.cellsById,
-            inputValue: this.state.filterInputValue,
+            rowIds: state.rowIds,
+            headers: headers,
+            cellsById: state.cellsById,
+            inputValue: state.filterInputValue,
             getCellId,
           })
-        : this.state.rowIds;
+        : state.rowIds;
+    // TODO: Use strict equality check.
     if (filteredRowIds.length == 0) {
       return [];
     }
@@ -666,7 +632,7 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
    * Helper for getting the table prefix for elements that require an
    * `id` attribute that is unique.
    */
-  getTablePrefix = () => `data-table-${this.instanceId}`;
+  const getTablePrefix = () => `data-table-${instanceId}`;
 
   /**
    * Helper for toggling all selected items in a state. Does not call
@@ -674,14 +640,17 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
    *
    * @returns object to put into this.setState (use spread operator)
    */
-  setAllSelectedState = (
+  const setAllSelectedState = (
     initialState: DataTableState<ColTypes>,
     isSelected: boolean,
     filteredRowIds: string[]
   ): Pick<DataTableState<ColTypes>, 'rowsById'> => {
     const { rowIds } = initialState;
+    // TODO: Use strict inequality check.
     const isFiltered = rowIds.length != filteredRowIds.length;
     return {
+      // TODO: Should the `reduce` be typed with `<Record<string,
+      // DataTableRow<ColTypes>>>`?
       rowsById: rowIds.reduce((acc, id) => {
         const row = { ...initialState.rowsById[id] };
         if (!row.disabled && (!isFiltered || filteredRowIds.includes(id))) {
@@ -697,11 +666,12 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
    * Handler for the `onCancel` event to hide the batch action bar and
    * deselect all selected rows
    */
-  handleOnCancel = () => {
-    this.setState((state) => {
+  const handleOnCancel = () => {
+    setState((prev) => {
       return {
+        ...prev,
         shouldShowBatchActions: false,
-        ...this.setAllSelectedState(state, false, this.getFilteredRowIds()),
+        ...setAllSelectedState(prev, false, getFilteredRowIds()),
       };
     });
   };
@@ -709,17 +679,18 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Handler for toggling the selection state of all rows in the database
    */
-  handleSelectAll = () => {
-    this.setState((state) => {
-      const filteredRowIds = this.getFilteredRowIds();
-      const { rowsById } = state;
+  const handleSelectAll = () => {
+    setState((prev) => {
+      const filteredRowIds = getFilteredRowIds();
+      const { rowsById } = prev;
       const isSelected = !(
         Object.values(rowsById).filter((row) => row.isSelected && !row.disabled)
           .length > 0
       );
       return {
+        ...prev,
         shouldShowBatchActions: isSelected,
-        ...this.setAllSelectedState(state, isSelected, filteredRowIds),
+        ...setAllSelectedState(prev, isSelected, filteredRowIds),
       };
     });
   };
@@ -727,18 +698,24 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Handler for toggling the selection state of a given row.
    */
-  handleOnSelectRow = (rowId: string) => () => {
-    this.setState((state) => {
-      const row = state.rowsById[rowId];
-      if (this.props.radio) {
+  const handleOnSelectRow = (rowId: string) => () => {
+    setState((prev) => {
+      const row = prev.rowsById[rowId];
+      if (radio) {
+        // TODO:
+        // 1. Should the `reduce` be typed with `<Record<string,
+        // DataTableRow<ColTypes>>>`?
+        // 2. Add better parameter names. Use `acc` and `row`.
+        //
         // deselect all radio buttons
-        const rowsById = Object.entries(state.rowsById).reduce((p, c) => {
+        const rowsById = Object.entries(prev.rowsById).reduce((p, c) => {
           const [key, val] = c;
           val.isSelected = false;
           p[key] = val;
           return p;
         }, {});
         return {
+          ...prev,
           shouldShowBatchActions: false,
           rowsById: {
             ...rowsById,
@@ -749,21 +726,22 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
           },
         };
       }
-      const selectedRows = state.rowIds.filter(
-        (id) => state.rowsById[id].isSelected
+      const selectedRows = prev.rowIds.filter(
+        (id) => prev.rowsById[id].isSelected
       ).length;
       // Predict the length of the selected rows after this change occurs
       const selectedRowsCount = !row.isSelected
         ? selectedRows + 1
         : selectedRows - 1;
       return {
+        ...prev,
         // Basic assumption here is that we want to show the batch action bar if
         // the row is being selected. If it's being unselected, then see if we
         // have a non-zero number of selected rows that batch actions could
         // still apply to
         shouldShowBatchActions: !row.isSelected || selectedRowsCount > 0,
         rowsById: {
-          ...state.rowsById,
+          ...prev.rowsById,
           [rowId]: {
             ...row,
             isSelected: !row.isSelected,
@@ -776,14 +754,15 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Handler for toggling the expansion state of a given row.
    */
-  handleOnExpandRow = (rowId: string) => () => {
-    this.setState((state) => {
-      const row = state.rowsById[rowId];
-      const { isExpandedAll } = state;
+  const handleOnExpandRow = (rowId: string) => () => {
+    setState((prev) => {
+      const row = prev.rowsById[rowId];
+      const { isExpandedAll } = prev;
       return {
+        ...prev,
         isExpandedAll: row.isExpanded ? false : isExpandedAll,
         rowsById: {
-          ...state.rowsById,
+          ...prev.rowsById,
           [rowId]: {
             ...row,
             isExpanded: !row.isExpanded,
@@ -796,16 +775,18 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
   /**
    * Handler for changing the expansion state of all rows.
    */
-  handleOnExpandAll = () => {
-    this.setState((state) => {
-      const { rowIds, isExpandedAll } = state;
+  const handleOnExpandAll = () => {
+    setState((prev) => {
+      const { rowIds, isExpandedAll } = prev;
       return {
+        ...prev,
         isExpandedAll: !isExpandedAll,
+        // TODO: Add generic to `reduce`.
         rowsById: rowIds.reduce(
           (acc, id) => ({
             ...acc,
             [id]: {
-              ...state.rowsById[id],
+              ...prev.rowsById[id],
               isExpanded: !isExpandedAll,
             },
           }),
@@ -820,89 +801,84 @@ class DataTable<RowType, ColTypes extends any[]> extends Component<
    *
    * @param headerKey - The field for the header that we are sorting by.
    */
-  handleSortBy = (headerKey: string) => () => {
-    this.setState((state) =>
-      getNextSortState(this.props, state, { key: headerKey })
-    );
+  const handleSortBy = (headerKey: string) => () => {
+    setState((prev) => getNextSortState(props, prev, { key: headerKey }));
   };
 
   /**
    * Event handler for transitioning input value state changes for the table
    * filter component.
    */
-  handleOnInputValueChange = (
+  const handleOnInputValueChange = (
     event: ChangeEvent<HTMLInputElement>,
     defaultValue?: string
   ) => {
     if (event.target) {
-      this.setState({ filterInputValue: event.target.value });
+      setState((prev) => ({ ...prev, filterInputValue: event.target.value }));
     }
 
     if (defaultValue) {
-      this.setState({ filterInputValue: defaultValue });
+      setState((prev) => ({ ...prev, filterInputValue: defaultValue }));
     }
   };
 
-  render() {
-    const {
-      children,
-      filterRows = defaultFilterRows,
-      headers,
-      render,
-    } = this.props;
-    const { filterInputValue, rowIds, rowsById, cellsById } = this.state;
-    const filteredRowIds =
-      typeof filterInputValue === 'string'
-        ? filterRows({
-            rowIds,
-            headers,
-            cellsById,
-            inputValue: filterInputValue,
-            getCellId,
-          })
-        : rowIds;
-    const renderProps: typeof this.rp = {
-      // Data derived from state
-      rows: denormalize(filteredRowIds, rowsById, cellsById),
-      headers: this.props.headers,
-      selectedRows: denormalize(this.getSelectedRows(), rowsById, cellsById),
+  // TODO: Could getFilteredRowIds be used here?
+  const filteredRowIds =
+    typeof state.filterInputValue === 'string'
+      ? filterRows({
+          rowIds: state.rowIds,
+          headers,
+          cellsById: state.cellsById,
+          inputValue: state.filterInputValue,
+          getCellId,
+        })
+      : state.rowIds;
+  const renderProps: rp = {
+    // Data derived from state
+    rows: denormalize(filteredRowIds, state.rowsById, state.cellsById),
+    headers: headers,
+    selectedRows: denormalize(
+      getSelectedRows(),
+      state.rowsById,
+      state.cellsById
+    ),
 
-      // Prop accessors/getters
-      getHeaderProps: this.getHeaderProps,
-      getExpandHeaderProps: this.getExpandHeaderProps,
-      getRowProps: this.getRowProps,
-      getExpandedRowProps: this.getExpandedRowProps,
-      getSelectionProps: this.getSelectionProps,
-      getToolbarProps: this.getToolbarProps,
-      getBatchActionProps: this.getBatchActionProps,
-      getTableProps: this.getTableProps,
-      getTableContainerProps: this.getTableContainerProps,
-      getCellProps: this.getCellProps,
+    // Prop accessors/getters
+    getHeaderProps,
+    getExpandHeaderProps,
+    getRowProps,
+    getExpandedRowProps,
+    getSelectionProps,
+    getToolbarProps,
+    getBatchActionProps,
+    getTableProps,
+    getTableContainerProps,
+    getCellProps,
 
-      // Custom event handlers
-      onInputChange: this.handleOnInputValueChange,
+    // Custom event handlers
+    onInputChange: handleOnInputValueChange,
 
-      // Expose internal state change actions
-      sortBy: (headerKey) => this.handleSortBy(headerKey)(),
-      selectAll: this.handleSelectAll,
-      selectRow: (rowId) => this.handleOnSelectRow(rowId)(),
-      expandRow: (rowId) => this.handleOnExpandRow(rowId)(),
-      expandAll: this.handleOnExpandAll,
-      radio: this.props.radio,
-    };
+    // Expose internal state change actions
+    sortBy: (headerKey) => handleSortBy(headerKey)(),
+    selectAll: handleSelectAll,
+    selectRow: (rowId) => handleOnSelectRow(rowId)(),
+    expandRow: (rowId) => handleOnExpandRow(rowId)(),
+    expandAll: handleOnExpandAll,
+    radio: radio,
+  };
 
-    if (typeof render !== 'undefined') {
-      return render(renderProps);
-    }
-
-    if (typeof children !== 'undefined') {
-      return children(renderProps);
-    }
-
-    return null;
+  if (typeof render !== 'undefined') {
+    return render(renderProps);
   }
-}
 
+  if (typeof children !== 'undefined') {
+    return children(renderProps);
+  }
+
+  return null;
+};
+
+DataTable.translationKeys = Object.values(translationKeys);
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
 DataTable.TableBatchAction = TableBatchAction;
@@ -1019,5 +995,3 @@ DataTable.propTypes = {
    */
   useZebraStyles: PropTypes.bool,
 };
-
-export default DataTable;

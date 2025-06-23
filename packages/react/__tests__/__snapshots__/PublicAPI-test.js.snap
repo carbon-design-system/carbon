@@ -2034,6 +2034,9 @@ Map {
     },
     "TableContainer": Object {
       "propTypes": Object {
+        "aiEnabled": Object {
+          "type": "bool",
+        },
         "children": Object {
           "type": "node",
         },
@@ -8390,6 +8393,9 @@ Map {
   },
   "TableContainer" => Object {
     "propTypes": Object {
+      "aiEnabled": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
