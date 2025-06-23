@@ -304,7 +304,9 @@ const Pagination = React.forwardRef(function Pagination(
     // this presents an a11y problem for keyboard & screen reader users
     // instead, we want the focus to shift to the other pagination btn
     if (nextPage === totalPages && backBtnRef?.current) {
-      backBtnRef.current.focus();
+      setTimeout(() => {
+        backBtnRef.current?.focus();
+      }, 0);
     }
 
     if (onChange) {
@@ -325,7 +327,9 @@ const Pagination = React.forwardRef(function Pagination(
     // this presents an a11y problem for keyboard & screen reader users
     // instead, we want the focus to shift to the other pagination btn
     if (nextPage === 1 && forwardBtnRef?.current) {
-      forwardBtnRef.current.focus();
+      setTimeout(() => {
+        forwardBtnRef.current?.focus();
+      }, 0);
     }
 
     if (onChange) {
