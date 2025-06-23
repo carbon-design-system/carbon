@@ -1920,6 +1920,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "MariaThomson",
+      "name": "Maria Thomson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62303971?s=400&v=4",
+      "profile": "https://github.com/MariaThomson",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
