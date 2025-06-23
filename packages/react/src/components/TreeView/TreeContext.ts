@@ -12,10 +12,7 @@ interface TreeContextProps {
   active?: string | number;
   multiselect?: boolean;
   onActivate?: (nodeId?: string | number) => void;
-  onTreeSelect?: (
-    event: MouseEvent | SyntheticEvent<HTMLUListElement>,
-    node?: Partial<TreeNodeProps>
-  ) => void;
+  onTreeSelect?: (event: MouseEvent, node?: Partial<TreeNodeProps>) => void;
   selected?: Array<string | number>;
   size?: 'xs' | 'sm';
 }
