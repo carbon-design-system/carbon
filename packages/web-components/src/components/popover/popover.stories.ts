@@ -197,7 +197,7 @@ export const Playground = {
         ?dropShadow=${args.dropShadow}>
         <button
           class="playground-trigger"
-          aria-label="Settings"
+          aria-label="Checkbox"
           type="button"
           aria-expanded=${open}
           @click="${() => handleClick()}">

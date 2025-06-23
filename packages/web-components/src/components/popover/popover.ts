@@ -100,14 +100,34 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     this.requestUpdate();
   }
 
-  @HostListener('focusout', { capture: true })
+  @HostListener('focusout')
   // @ts-ignore
   private _handleFocusOut(event: Event) {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
-
     if (!this.contains(relatedTarget)) {
       this.open = false;
     }
+  }
+
+  private _handleOutsideClick(event: Event) {
+    const target = event.target as Node | null;
+    if (this.open && target && !this.contains(target)) {
+      this.open = false;
+    }
+  }
+
+  constructor() {
+    super();
+    this._handleOutsideClick = this._handleOutsideClick.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('click', this._handleOutsideClick);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('click', this._handleOutsideClick);
   }
 
   updated(changedProperties) {
