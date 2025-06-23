@@ -240,18 +240,23 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       href,
       align = 'bottom',
       autoAlign = false,
-      // These props are destructured to be ignored, as they are now supplied by context
-      active: _active,
-      depth: _depth,
-      onTreeSelect: _onTreeSelect,
-      onNodeFocusEvent: _onNodeFocusEvent,
-      selected: _selected,
+      // These props are fallback props if the TreeContext is not available or only TreeNode is used as a standalone component
+      active: propActive,
+      depth: propDepth,
+      selected: propSelected,
+      onTreeSelect: propOnTreeSelect,
       ...rest
     },
     forwardedRef
   ) => {
     const treeContext = useContext(TreeContext);
-    const depth = useContext(DepthContext);
+    const contextDepth = useContext(DepthContext);
+
+    // Prioritize direct props, and fall back to context values.
+    const depth = propDepth ?? (contextDepth !== -1 ? contextDepth : 0);
+    const active = propActive ?? treeContext?.active;
+    const selected = propSelected ?? treeContext?.selected ?? [];
+    const onTreeSelect = propOnTreeSelect ?? treeContext?.onTreeSelect;
 
     const detailsWrapperRef = useRef<HTMLElementOrAnchor>(null);
     const { labelTextRef, isEllipsisApplied, tooltipText } = useEllipsisCheck(
@@ -324,8 +329,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
     };
 
-    const isActive = treeContext?.active === id;
-    const isSelected = treeContext?.selected?.includes(id) ?? false;
+    const isActive = active === id;
+    const isSelected = selected?.includes(id) ?? false;
 
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
       [`${prefix}--tree-node--active`]: isActive,
@@ -361,7 +366,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     function handleClick(event: React.MouseEvent) {
       event.stopPropagation();
       if (!disabled) {
-        treeContext?.onTreeSelect?.(event, { id, label, value });
+        onTreeSelect?.(event, { id, label, value });
         onNodeSelect?.(event, { id, label, value });
         rest?.onClick?.(event as React.MouseEvent<HTMLElement>);
       }
@@ -531,7 +536,6 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       onKeyDown: handleKeyDown,
       role: 'treeitem',
       tabIndex,
-      // FIX: Wire the focus and blur events back to the element
       onFocus: handleFocusEvent,
       onBlur: handleFocusEvent,
     };

@@ -190,7 +190,7 @@ const TreeView: TreeViewComponent = ({
     if (firstNode instanceof HTMLElement) {
       firstNode.tabIndex = 0;
     }
-  }, [prefix]);
+  }, [children, prefix]);
 
   function handleKeyDown(event) {
     event.stopPropagation();
