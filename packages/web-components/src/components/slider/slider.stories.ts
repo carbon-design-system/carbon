@@ -126,6 +126,90 @@ const argTypes = {
     },
   },
 };
+const argTypesSkelton = {
+  ariaLabelInput: {
+    control: false,
+    description:
+      'The <code>ariaLabel</code> for the <code>&lt;input&gt;</code>.',
+  },
+  disabled: {
+    control: false,
+    description: '<code>true</code> to disable this slider.',
+  },
+  hideTextInput: {
+    control: false,
+    description: '<code>true</code> to hide the number input box.',
+  },
+  labelText: {
+    control: false,
+    description: 'Provide the text for the slider label.',
+  },
+  inputType: {
+    control: false,
+    description: 'The type attribute of the <code>&lt;input&gt;</code>.',
+  },
+  invalid: {
+    control: false,
+    description: 'Specify whether the Slider is currently invalid.',
+  },
+  invalidText: {
+    control: false,
+    description:
+      'Provide the text that is displayed when the Slider is in an invalid state.',
+  },
+  name: {
+    control: false,
+    description: 'The name attribute of the <code>&lt;input&gt;</code>.',
+  },
+  max: {
+    control: false,
+    description: 'The maximum value.',
+  },
+  min: {
+    control: false,
+    description: 'The minimum value.',
+  },
+  maxLabel: {
+    control: false,
+    description: 'The label associated with the maximum value.',
+  },
+  minLabel: {
+    control: false,
+    description: 'The label associated with the minimum value.',
+  },
+  readOnly: {
+    control: false,
+    description: 'Whether the slider should be read-only.',
+  },
+  required: {
+    control: false,
+    description: '<code>true</code> to specify if the control is required.',
+  },
+  step: {
+    control: false,
+    description:
+      'A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is <em>not</em> hidden, the new step requirement should be added to a visible label. Values outside the <code>step</code> increment will be considered invalid.',
+  },
+  stepMultiplier: {
+    control: false,
+    description:
+      'A value determining how much the value should increase/decrease by Shift+arrow keys, which will be <code>(max - min) / stepMultiplier</code>.',
+  },
+  warn: {
+    control: false,
+    description: 'Specify whether the control is currently in warning state.',
+  },
+  warnText: {
+    control: false,
+    description:
+      'Provide the text that is displayed when the control is in warning state.',
+  },
+  value: {
+    control: false,
+    description:
+      'The value of the slider. When there are two handles, value is the lower bound.',
+  },
+};
 
 export const Default = {
   render: () => {
@@ -242,6 +326,21 @@ export const Skeleton = {
   render: () => html`
     <cds-form-item
       ><cds-slider-skeleton><cds-slider></cds-slider></cds-slider-skeleton
+    ></cds-form-item>
+  `,
+};
+
+export const TwoHandleSkeleton = {
+  args,
+  argTypes: argTypesSkelton,
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: (args) => html`
+    <cds-form-item
+      ><cds-slider-skeleton twoHandles></cds-slider-skeleton
     ></cds-form-item>
   `,
 };
