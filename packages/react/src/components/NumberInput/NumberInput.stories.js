@@ -219,29 +219,39 @@ WithTypeOfText.argTypes = {
 // TODO: for testing, remove before marking ready for review
 export const WithTypeOfTextControlled = (args) => {
   const locale = useDocumentLang();
-  const [value, setValue] = useState(50);
+  const [value, setValue] = useState(NaN);
 
   return (
-    <NumberInput
-      id="default-number-input"
-      min={reusableProps.min}
-      max={reusableProps.max}
-      inputMode="decimal"
-      label="NumberInput label"
-      helperText="Optional helper text."
-      {...args}
-      locale={locale}
-      value={value}
-      onChange={(event, state) => {
-        handleOnChange(event, state);
-        console.log(`setting value to:`);
-        console.log(state.value);
-        setValue(state.value);
-      }}
-      onBlur={(event) => {
-        handleOnBlur(event);
-      }}
-    />
+    <>
+      <NumberInput
+        id="default-number-input"
+        min={reusableProps.min}
+        max={reusableProps.max}
+        type="text"
+        inputMode="decimal"
+        label="NumberInput label"
+        helperText="Optional helper text."
+        {...args}
+        locale={locale}
+        value={value}
+        onChange={(event, state) => {
+          handleOnChange(event, state);
+          console.log(`setting value to:`);
+          console.log(state.value);
+          setValue(state.value);
+        }}
+        onBlur={(event) => {
+          handleOnBlur(event);
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          setValue(50);
+        }}>
+        set to 50
+      </button>
+    </>
   );
 };
 WithTypeOfTextControlled.args = {

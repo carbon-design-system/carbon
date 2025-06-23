@@ -86,6 +86,8 @@ export interface NumberInputProps
 
   /**
    * Optional starting value for uncontrolled state
+   * Defaults to 0 when type="number"
+   * Defaults to NaN when type="text"
    */
   defaultValue?: number | string;
 
@@ -278,7 +280,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       decorator,
       disabled = false,
       disableWheel: disableWheelProp = false,
-      defaultValue = 0,
       formatOptions,
       helperText = '',
       hideLabel = false,
@@ -304,6 +305,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       step = 1,
       translateWithId: t = (id) => defaultTranslations[id],
       type = 'number',
+      defaultValue = type === 'number' ? 0 : NaN,
       warn = false,
       warnText = '',
       value: controlledValue,
@@ -368,7 +370,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         ? ''
         : new NumberFormatter(locale, formatOptions).format(numberValue)
     );
-
     const numberingSystem = useMemo(
       () => numberParser.getNumberingSystem(inputValue),
       [numberParser, inputValue]
@@ -386,6 +387,14 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         isNaN(value) || value === null ? '' : numberFormatter.format(value),
       [numberFormatter]
     );
+    if (
+      isControlled &&
+      !(isNaN(previousNumberValue) && isNaN(numberValue)) &&
+      previousNumberValue !== numberValue
+    ) {
+      setInputValue(format(numberValue));
+      setPreviousNumberValue(numberValue);
+    }
 
     const inputRef = useRef<HTMLInputElement>(null);
     const ref = useMergedRefs([forwardRef, inputRef]);
@@ -429,7 +438,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
     });
 
-    if (controlledValue !== prevControlledValue) {
+    if (
+      controlledValue !== prevControlledValue &&
+      !(isNaN(Number(controlledValue)) === isNaN(Number(prevControlledValue)))
+    ) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       setValue(controlledValue!);
       setPrevControlledValue(controlledValue);
@@ -509,25 +521,26 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     const handleStep = (event, direction) => {
       if (inputRef.current) {
-        let currentValue;
-        currentValue =
+        const currentValue =
           type === 'number' ? Number(inputRef.current.value) : numberValue;
 
-        // When the field is empty (NaN), incrementing begins at min,
-        // decrementing begins at max.
-        // When there's no min or max to use, it begins at 0.
+        let rawValue;
         if (Number.isNaN(currentValue)) {
+          // When the field is empty (NaN), incrementing begins at min,
+          // decrementing begins at max.
+          // When there's no min or max to use, it begins at 0.
           if (direction === `up` && min) {
-            currentValue = min;
+            rawValue = min;
           } else if (direction === `down` && max) {
-            currentValue = max;
+            rawValue = max;
           } else {
-            currentValue = 0;
+            rawValue = 0;
           }
+        } else if (direction === 'up') {
+          rawValue = currentValue + step;
+        } else {
+          rawValue = currentValue - step;
         }
-
-        const rawValue =
-          direction === 'up' ? currentValue + step : currentValue - step;
         const precision = Math.max(
           getDecimalPlaces(currentValue),
           getDecimalPlaces(step)
@@ -545,11 +558,18 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         }
 
         if (type === 'text') {
-          // When isControlled, setNumberValue will not update numberValue in useControllableState.
-          setNumberValue(newValue);
+          // Calling format() can alter the number (such as rounding it) causing
+          // the numberValue to mismatch the formatted value in the input.
+          // To avoid this, the newValue is re-parsed after formatting.
+          const formattedNewValue = format(newValue);
+          const parsedFormattedNewValue = numberParser.parse(formattedNewValue);
 
-          setInputValue(format(newValue));
-          setPreviousNumberValue(newValue);
+          // When isControlled, setNumberValue will not actually update
+          // numberValue in useControllableState.
+          setNumberValue(parsedFormattedNewValue);
+
+          setInputValue(formattedNewValue);
+          setPreviousNumberValue(parsedFormattedNewValue);
         }
 
         if (onChange) {
@@ -659,16 +679,43 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                     : format(_numberValue);
                   setInputValue(formattedValue);
 
+                  // Calling format() can alter the number (such as rounding it)
+                  // causing the _numberValue to mismatch the formatted value in
+                  // the input. To avoid this, formattedValue is re-parsed.
+                  const parsedFormattedNewValue =
+                    numberParser.parse(formattedValue);
+
                   if (onChange) {
                     const state = {
-                      value: _numberValue,
+                      value: parsedFormattedNewValue,
                       direction:
-                        previousNumberValue < _numberValue ? 'up' : 'down',
+                        previousNumberValue < parsedFormattedNewValue
+                          ? 'up'
+                          : 'down',
                     };
-                    onChange(e, state);
+
+                    // If the old and new values are NaN, don't call onChange
+                    // to avoid an unecessary re-render and potential infinite
+                    // loop when isControlled.
+                    if (
+                      !(
+                        isNaN(previousNumberValue) &&
+                        isNaN(parsedFormattedNewValue)
+                      )
+                    ) {
+                      onChange(e, state);
+                    }
                   }
 
-                  setPreviousNumberValue(numberValue);
+                  // If the old and new values are NaN, don't set state to avoid
+                  // an unecessary re-render and potential infinite loop when
+                  // isControlled.
+                  if (!(isNaN(previousNumberValue) && isNaN(numberValue))) {
+                    setPreviousNumberValue(numberValue);
+                  }
+                  if (!(isNaN(numberValue) && isNaN(parsedFormattedNewValue))) {
+                    setNumberValue(parsedFormattedNewValue);
+                  }
                 }
 
                 if (onBlur) {
