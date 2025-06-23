@@ -56,6 +56,7 @@ categories:
       - generate--code
       - governance
       - hard--prompt
+      - human-in-the-loop
       - ibm--granite
       - intelligence
       - machine--learning--01
@@ -231,6 +232,7 @@ categories:
       - washington-dc--capitol
       - washington-dc--monument
       - zurich
+      - zurich--swiss-national-museum
   - name: Cloud
     members:
       - accelerating-transformation
@@ -669,6 +671,7 @@ categories:
       - colors
       - composer-edit
       - content--design
+      - design
       - design-and-development--01
       - design-and-development--02
       - design-system-alignment
@@ -690,10 +693,12 @@ categories:
       - pilot-test
       - resourceful
       - social--tile
+      - software--02
       - universal-experiences
       - user--experience-design
       - user--insights
       - user--interface
+      - user--research-tools
       - visual--design
       - web--banners
       - web--developer
@@ -970,8 +975,10 @@ categories:
       - guitar
       - juice
       - lantern
+      - masters-leader-board
       - moon-cake
       - ornament
+      - pencil
       - perfume
       - racetrack
       - rock-on
@@ -986,6 +993,7 @@ categories:
       - tennis--ball
       - tennis--net
       - tennis--racquet
+      - tickets
       - tree
       - tree--02
       - waving-hand
@@ -1083,6 +1091,7 @@ categories:
       - person--07
       - person--08
       - person--09
+      - recruitment--01
       - renew--team
       - resilience--02
       - sap--successfactors
@@ -1157,6 +1166,7 @@ categories:
       - mobile--pos--01
       - mobile--pos--02
       - price
+      - product
       - qr-code
       - receipt
       - retail--sustainable
