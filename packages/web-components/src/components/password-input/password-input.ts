@@ -346,7 +346,6 @@ class CDSPasswordInput extends CDSTextInput {
                 ?disabled="${normalizedProps.disabled || readonly}"
                 type="button"
                 role="button"
-                style="${styleMap(toggleSize)}"
                 class="${passwordVisibilityButtonClasses}"
                 aria-labelledby="content"
                 @click="${this.handleTogglePasswordVisibility}">
