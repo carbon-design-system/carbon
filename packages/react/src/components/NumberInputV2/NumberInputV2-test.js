@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NumberInputV2 from './NumberInputV2';
@@ -200,13 +200,38 @@ describe('with type="text"', () => {
         target: expect.any(Object),
       }),
       expect.objectContaining({
-        value: '11',
+        value: 11,
         direction: 'up',
       })
     );
 
     await userEvent.click(screen.getByLabelText('decrement'));
     expect(onChange).toHaveBeenCalledTimes(2);
+  });
+
+  it('should call `onBlur` when the input is blurred', async () => {
+    const onBlur = jest.fn();
+    render(
+      <NumberInputV2
+        type="text"
+        label="test-label"
+        id="test"
+        onBlur={onBlur}
+        min={0}
+        defaultValue={10}
+        max={100}
+        translateWithId={translateWithId}
+      />
+    );
+
+    await userEvent.click(screen.getByLabelText('test-label'));
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      })
+    );
   });
 
   describe('steppers', () => {
@@ -220,7 +245,7 @@ describe('with type="text"', () => {
           id="test"
           onClick={onClick}
           min={0}
-          value={10}
+          defaultValue={10}
           max={100}
           translateWithId={translateWithId}
         />
@@ -235,6 +260,53 @@ describe('with type="text"', () => {
       expect(screen.getByLabelText('test-label')).toHaveValue('10');
     });
 
+    it('should call `onBlur` when focus leaves the input, decrement button, or increment button', async () => {
+      const onBlur = jest.fn();
+
+      render(
+        <NumberInputV2
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          min={0}
+          defaultValue={10}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('test-label'));
+      expect(screen.getByLabelText('test-label')).toHaveFocus();
+
+      await userEvent.click(screen.getByLabelText('decrement'));
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+      expect(screen.getByLabelText('decrement')).toHaveFocus();
+
+      await userEvent.click(screen.getByLabelText('increment'));
+      expect(onBlur).toHaveBeenCalledTimes(2);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+      expect(screen.getByLabelText('increment')).toHaveFocus();
+
+      await userEvent.click(screen.getByLabelText('test-label'));
+      expect(onBlur).toHaveBeenCalledTimes(3);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+      expect(screen.getByLabelText('test-label')).toHaveFocus();
+    });
+
     it('should set up and down arrows as disabled if `disabled` is true', () => {
       render(
         <NumberInputV2
@@ -242,7 +314,7 @@ describe('with type="text"', () => {
           label="test-label"
           id="test"
           min={0}
-          value={10}
+          defaultValue={10}
           max={100}
           disabled
           translateWithId={translateWithId}
@@ -263,7 +335,7 @@ describe('with type="text"', () => {
           id="test"
           onClick={onClick}
           min={0}
-          value={10}
+          defaultValue={10}
           max={100}
           disabled
           translateWithId={translateWithId}
@@ -286,7 +358,7 @@ describe('with type="text"', () => {
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -309,7 +381,7 @@ describe('with type="text"', () => {
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -332,7 +404,7 @@ describe('with type="text"', () => {
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -352,7 +424,7 @@ describe('with type="text"', () => {
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -362,7 +434,73 @@ describe('with type="text"', () => {
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(screen.getByLabelText('test-label')).toHaveValue('0');
     });
+
+    it('should begin incrementing from min when input is empty', async () => {
+      render(
+        <NumberInputV2
+          type="text"
+          label="test-label"
+          id="test"
+          allowEmpty
+          min={-100}
+          max={100}
+          step={2}
+          translateWithId={translateWithId}
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue('');
+      await userEvent.click(screen.getByLabelText('increment'));
+      expect(screen.getByLabelText('test-label')).toHaveValue('-100');
+    });
+
+    it('should begin decrementing from max when input is empty', async () => {
+      render(
+        <NumberInputV2
+          type="text"
+          label="test-label"
+          id="test"
+          min={-100}
+          max={100}
+          step={2}
+          translateWithId={translateWithId}
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue('');
+      await userEvent.click(screen.getByLabelText('decrement'));
+      expect(screen.getByLabelText('test-label')).toHaveValue('100');
+    });
+
+    it('should begin incrementing from 0 when no min is provided and input is empty', async () => {
+      render(
+        <NumberInputV2
+          type="text"
+          label="test-label"
+          id="test"
+          step={2}
+          translateWithId={translateWithId}
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue('');
+      await userEvent.click(screen.getByLabelText('increment'));
+      expect(screen.getByLabelText('test-label')).toHaveValue('0');
+    });
+
+    it('should begin decrementing from 0 when no max is provided and input is empty', async () => {
+      render(
+        <NumberInputV2
+          type="text"
+          label="test-label"
+          id="test"
+          step={2}
+          translateWithId={translateWithId}
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue('');
+      await userEvent.click(screen.getByLabelText('decrement'));
+      expect(screen.getByLabelText('test-label')).toHaveValue('0');
+    });
   });
+
   it('should increase by the value of large step and format to the default locale', async () => {
     render(
       <NumberInputV2
@@ -370,7 +508,7 @@ describe('with type="text"', () => {
         label="test-label"
         id="test"
         min={-9999}
-        value={1000}
+        defaultValue={1000}
         max={10000}
         step={1000}
         translateWithId={translateWithId}
@@ -387,7 +525,7 @@ describe('with type="text"', () => {
         label="test-label"
         id="test"
         min={-9999}
-        value={1000}
+        defaultValue={1000}
         max={10000}
         step={1000}
         translateWithId={translateWithId}
@@ -443,7 +581,7 @@ describe('with type="text"', () => {
         id="carbon-number"
         min={-100}
         max={100}
-        value={50}
+        defaultValue={50}
         label="NumberInput label"
         helperText="Optional helper text."
         invalidText="Number is not valid"
@@ -464,7 +602,7 @@ describe('with type="text"', () => {
         target: expect.any(Object),
       }),
       expect.objectContaining({
-        value: '',
+        value: NaN,
       })
     );
   });
@@ -476,7 +614,7 @@ describe('with type="text"', () => {
         label="NumberInput label"
         id="number-input"
         min={0}
-        value={15.01}
+        defaultValue={15.01}
         step={1}
         max={100}
         translateWithId={translateWithId}
@@ -494,6 +632,62 @@ describe('with type="text"', () => {
     expect(input).toHaveValue('15.01');
   });
 
+  it('should support fully controlled api via value prop', async () => {
+    const ControlledNumberInput = () => {
+      const [value, setValue] = useState(NaN);
+      return (
+        <>
+          <NumberInputV2
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={-100}
+            max={100}
+            value={value}
+            onChange={(event, state) => {
+              setValue(state.value);
+            }}
+            translateWithId={translateWithId}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              setValue(50);
+            }}>
+            set to 50
+          </button>
+        </>
+      );
+    };
+
+    render(<ControlledNumberInput />);
+
+    const input = screen.getByLabelText('NumberInput label');
+    expect(input).toHaveValue('');
+
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(input).toHaveValue('-100');
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(input).toHaveValue('-99');
+
+    await userEvent.clear(input);
+    expect(input).toHaveValue('');
+
+    await userEvent.click(screen.getByLabelText('decrement'));
+    expect(input).toHaveValue('100');
+    await userEvent.click(screen.getByLabelText('decrement'));
+    expect(input).toHaveValue('99');
+
+    await userEvent.click(screen.getByText('set to 50'));
+    expect(input).toHaveValue('50');
+
+    await userEvent.clear(input);
+    expect(input).toHaveValue('');
+
+    await userEvent.click(screen.getByText('set to 50'));
+    expect(input).toHaveValue('50');
+  });
+
   describe('locale parsing and formatting', () => {
     it('should parse and format numbers based on the default locale', async () => {
       render(
@@ -502,7 +696,7 @@ describe('with type="text"', () => {
           label="NumberInput label"
           id="number-input"
           min={0}
-          value={15.01}
+          defaultValue={15.01}
           step={1}
           max={100}
           translateWithId={translateWithId}
@@ -561,7 +755,7 @@ describe('with type="text"', () => {
           label="NumberInput label"
           id="number-input"
           min={0}
-          value={15.01}
+          defaultValue={15.01}
           step={1}
           max={100}
           translateWithId={translateWithId}
@@ -624,7 +818,7 @@ describe('with type="text"', () => {
           label="NumberInput label"
           id="number-input"
           min={0}
-          value={15.01}
+          defaultValue={15.01}
           step={1}
           max={100}
           onChange={onChange}
@@ -647,7 +841,7 @@ describe('with type="text"', () => {
           target: expect.any(Object),
         }),
         expect.objectContaining({
-          value: '15.02',
+          value: 15.02,
           direction: 'up',
         })
       );
@@ -660,7 +854,7 @@ describe('with type="text"', () => {
           target: expect.any(Object),
         }),
         expect.objectContaining({
-          value: '16.02',
+          value: 16.02,
           direction: 'up',
         })
       );
@@ -672,7 +866,7 @@ describe('with type="text"', () => {
           target: expect.any(Object),
         }),
         expect.objectContaining({
-          value: '15.02',
+          value: 15.02,
           direction: 'down',
         })
       );
@@ -686,7 +880,7 @@ describe('with type="text"', () => {
           label="NumberInput label"
           id="number-input"
           min={0}
-          value={0.15}
+          defaultValue={0.15}
           step={0.05}
           max={100}
           formatOptions={{ style: 'percent' }}
