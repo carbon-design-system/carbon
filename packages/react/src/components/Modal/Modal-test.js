@@ -893,4 +893,19 @@ describe('events', () => {
     await keyboard('{Enter}');
     expect(onRequestSubmit).toHaveBeenCalledTimes(1);
   });
+
+  it('should set focus on the modal container when the modal is passive', async () => {
+    render(
+      <Modal data-testid="modal-10" passiveModal open>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+      </Modal>
+    );
+
+    const modal = screen.getByRole('dialog');
+    expect(modal).toHaveFocus();
+  });
 });
