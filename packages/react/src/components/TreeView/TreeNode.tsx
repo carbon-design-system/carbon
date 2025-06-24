@@ -242,7 +242,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     forwardedRef
   ) => {
     const depth = propDepth as number;
-    const selected = propSelected as (string | number)[];
+    const selected = (propSelected as (string | number)[]) || [];
 
     const detailsWrapperRef = useRef<HTMLElementOrAnchor>(null);
     const { labelTextRef, isEllipsisApplied, tooltipText } = useEllipsisCheck(
