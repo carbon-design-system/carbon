@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,7 +54,8 @@ const args = {
   helperText: 'TextArea helper text',
   hideLabel: false,
   invalid: false,
-  invalidText: 'Invalid text',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
   label: 'TextArea label',
   maxCount: 500,
   onInput: 'input',

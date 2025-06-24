@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -177,6 +177,7 @@ class CDSTextarea extends CDSTextInput {
 
     const textareaWrapperClasses = classMap({
       [`${prefix}--text-area__wrapper`]: true,
+      [`${prefix}--text-area__wrapper--cols`]: this.cols,
       [`${prefix}--text-area__wrapper--warn`]: this.warn,
       [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
     });
