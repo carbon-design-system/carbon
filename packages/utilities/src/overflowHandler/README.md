@@ -87,7 +87,7 @@ and render them elsewhere, such as a modal or popover.
 ## Re-initialization guidelines
 
 The handler needs to be re-initialized whenever items are added or removed, when
-an item changes it's width dynamically, or when the offset element's width
+an item changes its width dynamically, or when the offset element's width
 changes dynamically, to update the overflow with the new sizes.
 
 ## Example implementation
