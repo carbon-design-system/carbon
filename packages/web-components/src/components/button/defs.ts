@@ -76,6 +76,11 @@ export enum BUTTON_TYPE {
  */
 export enum BUTTON_SIZE {
   /**
+   * Extra-small size.
+   */
+  EXTRA_SMALL = 'xs',
+
+  /**
    * Small size.
    */
   SMALL = 'sm',

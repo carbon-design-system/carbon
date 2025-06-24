@@ -43,6 +43,7 @@ const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({
   const buttonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--btn`]: true,
+    [`${prefix}--btn--xs`]: size === 'xs',
     [`${prefix}--btn--sm`]: small || size === 'sm',
     [`${prefix}--btn--md`]: size === 'md',
     [`${prefix}--btn--lg`]: size === 'lg',
@@ -78,7 +79,7 @@ ButtonSkeleton.propTypes = {
    * For `default` buttons, this prop can remain unspecified or use `default`.
    * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * @deprecated This property will be removed in the next major Carbon version,
