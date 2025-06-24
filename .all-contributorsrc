@@ -829,8 +829,8 @@
       "contributions": [
         "code"
       ]
-     },
-     {
+    },
+    {
       "login": "TannerS",
       "name": "Tanner Summers",
       "avatar_url": "https://avatars.githubusercontent.com/u/8866319?v=4",
@@ -863,6 +863,15 @@
       "name": "Joel Humberto Gómez Paredes",
       "avatar_url": "https://avatars.githubusercontent.com/u/1269896?v=4",
       "profile": "https://github.com/dezkareid",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "abpaul1993",
+      "name": "Abhishek Paul",
+      "avatar_url": "https://avatars.githubusercontent.com/u/136786799?v=4",
+      "profile": "https://github.com/abpaul1993",
       "contributions": [
         "code"
       ]
