@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,30 +7,17 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { prefix } from '../../globals/settings';
 import View16 from '@carbon/icons/lib/view/16.js';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
 import './index';
 import '../form/form-item';
-import '../ai-label';
 import '../icon-button';
-import { INPUT_SIZE } from './text-input';
-
-const content = html`
-  <div slot="body-text">
-    <p class="secondary">AI Explained</p>
-    <h2 class="ai-label-heading">84%</h2>
-    <p class="secondary bold">Confidence score</p>
-    <p class="secondary">
-      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-    </p>
-    <hr />
-    <p class="secondary">Model type</p>
-    <p class="bold">Foundation model</p>
-  </div>
-`;
+import {
+  INPUT_SIZE,
+  INPUT_TOOLTIP_ALIGNMENT,
+  INPUT_TOOLTIP_DIRECTION,
+} from './password-input';
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
@@ -45,7 +32,6 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
 const sizes = {
@@ -55,37 +41,37 @@ const sizes = {
 };
 
 const args = {
+  defaultWidth: 300,
   disabled: false,
-  enableCounter: false,
   helperText: 'Helper text',
   hideLabel: false,
+  hidePasswordLabel: 'Hide Password',
   inline: false,
   invalid: false,
   invalidText: 'Error message goes here',
   labelText: 'Label text',
-  maxCount: '100',
   placeholder: 'Placeholder text',
-  playgroundWidth: 300,
-  showPasswordVisibilityToggle: false,
-  size: INPUT_SIZE.MEDIUM,
   readonly: false,
-  type: 'text',
+  showPasswordLabel: 'Show Password',
+  size: INPUT_SIZE.MEDIUM,
+  tooltipAlignment: INPUT_TOOLTIP_ALIGNMENT.CENTER,
+  tooltipPosition: INPUT_TOOLTIP_DIRECTION.BOTTOM,
+  type: 'password',
+  value: '',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  value: '',
-  onInput: `${prefix}-select-selected`,
 };
 
 const argTypes = {
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
   disabled: {
     control: 'boolean',
     description: 'Disabled (disabled)',
   },
-  enableCounter: {
-    control: 'boolean',
-    description: 'Enable counter (enable-counter)',
-  },
+
   helperText: {
     control: 'text',
     description: 'Helper text (helper-text)',
@@ -94,6 +80,12 @@ const argTypes = {
     control: 'boolean',
     description: 'Hide label (hide-label)',
   },
+
+  hidePasswordLabel: {
+    control: 'text',
+    description: 'Hide password" tooltip text on password visibility toggle',
+  },
+
   inline: {
     control: 'boolean',
     description: 'Inline (inline)',
@@ -110,59 +102,52 @@ const argTypes = {
     control: 'text',
     description: 'Label text (label)',
   },
-  maxCount: {
-    control: 'text',
-    description: 'Max count (max-count)',
-  },
   placeholder: {
     control: 'text',
     description: 'Placeholder (placeholder)',
   },
-  playgroundWidth: {
-    control: 'number',
-    description: 'Playground width',
-    options: {
-      range: true,
-      min: 300,
-      max: 800,
-      step: 50,
-    },
-  },
-  showPasswordVisibilityToggle: {
+  readonly: {
     control: 'boolean',
-    description:
-      'Show password visibility toggle (show-password-visibility-toggle)',
+    description: 'Read only (readonly)',
+  },
+  showPasswordLabel: {
+    control: 'text',
+    description: 'Hide password" tooltip text on password visibility toggle',
   },
   size: {
     control: 'select',
     description: 'Size (size)',
     options: sizes,
   },
-  readonly: {
-    control: 'boolean',
-    description: 'Read only (readonly)',
+  tooltipAlignment: {
+    options: ['start', 'center', 'end'],
+    control: { type: 'radio' },
+    description:
+      'Specify the alignment of the tooltip to the icon-only button. Can be one of: `start`, `center`, or `end`.',
+  },
+  tooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'radio' },
+    description:
+      'Specify the direction of the tooltip for the icon-only button. Can be either `top`, `right`, `bottom`, or `left`',
   },
   type: {
-    control: 'text',
-    description: 'Type (type)',
-  },
-  warn: {
-    control: 'boolean',
-    description: 'Warn (warn)',
-  },
-  warnText: {
-    control: 'text',
-    description: 'Warn text (warn-text)',
+    options: ['password', 'text'],
+    control: { type: 'radio' },
+    description: 'The input type, either `password` or `text`',
   },
   value: {
     control: 'text',
-    description: 'Value of input (value)',
+    description: 'Provide the current value of the `<input>`',
   },
-  onInput: {
-    action: `${prefix}-select-selected`,
-    table: {
-      disable: true,
-    },
+  warn: {
+    control: 'boolean',
+    description: 'Specify whether the control is currently in warning state',
+  },
+  warnText: {
+    control: 'text',
+    description:
+      'Provide the text that is displayed when the control is in warning state',
   },
 };
 
@@ -170,86 +155,61 @@ export const Default = {
   args,
   argTypes,
   render: ({
+    defaultWidth,
     disabled,
-    enableCounter,
     helperText,
     hideLabel,
+    hidePasswordLabel,
     inline,
     invalid,
     invalidText,
     labelText,
-    maxCount,
     placeholder,
-    playgroundWidth,
     readonly,
-    showPasswordVisibilityToggle,
+    showPasswordLabel,
     size,
+    tooltipAlignment,
+    tooltipPosition,
     type,
     value,
     warn,
     warnText,
-    onInput,
   }) => html`
-    <div style="width: ${playgroundWidth}px;">
-      <cds-text-input
+    <div style="width: ${defaultWidth}px;">
+      <cds-password-input
         ?disabled="${disabled}"
-        ?enable-counter="${ifDefined(enableCounter)}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
+        hide-password-label="${ifDefined(hidePasswordLabel)}"
         ?inline="${inline}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(labelText)}"
-        max-count="${ifDefined(maxCount)}"
         placeholder="${ifDefined(placeholder)}"
         ?readonly="${ifDefined(readonly)}"
-        ?show-password-visibility-toggle="${ifDefined(
-          showPasswordVisibilityToggle
-        )}"
+        show-password-label="${ifDefined(showPasswordLabel)}"
         size="${ifDefined(size)}"
+        tooltip-alignment="${ifDefined(tooltipAlignment)}"
+        tooltip-position="${ifDefined(tooltipPosition)}"
         type="${ifDefined(type)}"
         value="${ifDefined(value)}"
         ?warn="${ifDefined(warn)}"
-        warn-text="${ifDefined(warnText)}"
-        @input="${onInput}">
-      </cds-text-input>
+        warn-text="${ifDefined(warnText)}">
+      </cds-password-input>
     </div>
   `,
 };
 
-export const ReadOnly = {
+export const test = {
   render: () => html`
-    <cds-text-input
-      value="This is read only, you can't type more."
-      readonly="true"
+    <cds-password-input
       label="Text input label"
       helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
-
-export const Skeleton = {
-  render: () => html` <cds-text-input-skeleton></cds-text-input-skeleton> `,
-};
-
-export const WithAILabel = {
-  render: () => html`
-    <cds-text-input label="Text input label" helper-text="Optional help text">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-text-input>
-  `,
-};
-
-export const WithLayer = {
-  render: () => html`
-    <sb-template-layers>
-      <cds-text-input label="Text input label" helper-text="Optional help text">
-      </cds-text-input>
-    </sb-template-layers>
+    </cds-password-input>
   `,
 };
 
 export default {
-  title: 'Components/Text Input',
+  title: 'Components/Password Input',
   actions: { argTypesRegex: '^on.*' },
 };
