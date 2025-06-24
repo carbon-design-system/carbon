@@ -263,4 +263,52 @@ describe('MenuItem', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith(false);
   });
+
+  describe('accessibility', () => {
+    it('should focus the first focusable menu item on open', async () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Item 1" />
+          <MenuItem label="Item 2" />
+        </Menu>
+      );
+
+      const item1 = await screen.findByRole('menuitem', { name: 'Item 1' });
+      expect(document.activeElement).toBe(item1);
+    });
+
+    it('should skip disabled items when determining first focusable', () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Disabled" disabled />
+          <MenuItem label="Focusable" />
+        </Menu>
+      );
+
+      const items = screen.getAllByRole('menuitem');
+      expect(items[0]).toHaveAttribute('tabindex', '-1');
+      expect(items[1]).toHaveAttribute('tabindex', '0');
+    });
+
+    it('moves focus to submenu when opening via ArrowRight key', async () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Parent">
+            <MenuItem label="Child" />
+          </MenuItem>
+        </Menu>
+      );
+
+      const parentItem = screen.getAllByRole('menuitem')[0];
+      parentItem.focus();
+      expect(parentItem).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowRight}');
+
+      const child = screen.getByRole('menuitem', { name: 'Child' });
+      expect(child).toBeVisible();
+
+      expect(child).toHaveFocus();
+    });
+  });
 });

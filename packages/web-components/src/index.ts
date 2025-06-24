@@ -169,6 +169,9 @@ export { default as CDSTimePicker } from './components/time-picker/time-picker';
 export { default as CDSTimePickerSelect } from './components/time-picker/time-picker-select';
 export { default as CDSTreeView } from './components/tree-view/tree-view';
 export { default as CDSTreeNode } from './components/tree-view/tree-node';
-export { default as CDSHeading } from './components/heading/heading';
+export {
+  CDSSection,
+  default as CDSHeading,
+} from './components/heading/heading';
 export { default as CDSMenuButton } from './components/menu-button/menu-button';
 export { default as CDSComboButton } from './components/combo-button/combo-button';

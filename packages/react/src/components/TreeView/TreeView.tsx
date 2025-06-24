@@ -17,7 +17,7 @@ import React, {
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
 import TreeNode, { TreeNodeProps } from './TreeNode';
 
@@ -94,7 +94,7 @@ const TreeView: TreeViewComponent = ({
     'enable-treeview-controllable'
   );
 
-  const { current: treeId } = useRef(rest.id || uniqueId());
+  const { current: treeId } = useRef(rest.id || useId());
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
     // @ts-ignore - will always be false according to prop types
@@ -186,7 +186,7 @@ const TreeView: TreeViewComponent = ({
     return React.Children.map(children, (child) => {
       if (!React.isValidElement(child)) return child;
 
-      const isTreeNode = (child.type as any).displayName === 'TreeNode';
+      const isTreeNode = child.type === TreeNode;
 
       if (isTreeNode) {
         const node = child as React.ReactElement<TreeNodeProps>;

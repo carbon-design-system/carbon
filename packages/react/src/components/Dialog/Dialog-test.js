@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import React, { useRef, useState } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
-
-import { unstable__Dialog as Dialog } from './';
+import { unstable__Dialog as Dialog, DialogCloseButton } from './';
 
 const prefix = 'cds';
 
@@ -73,6 +72,39 @@ describe('Dialog', () => {
       await user.click(screen.getByText('Test children'));
 
       expect(onClick).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('should bring focusAfterCloseRef element into focus on close when the ref is defined', async () => {
+    const DialogExample = () => {
+      const [open, setOpen] = useState(true);
+      const focusRef = useRef();
+      return (
+        <>
+          <Dialog
+            open={open}
+            focusAfterCloseRef={focusRef}
+            onClose={() => setOpen(false)}>
+            <DialogCloseButton
+              data-testid="close"
+              onClick={() => setOpen(false)}
+            />
+          </Dialog>
+          <button data-testid="focusElem" ref={focusRef}>
+            focus after close
+          </button>
+        </>
+      );
+    };
+    render(<DialogExample />);
+
+    const closeButton = screen.getByTestId('close');
+    const focusElem = screen.getByTestId('focusElem');
+
+    expect(focusElem).not.toHaveFocus();
+    await userEvent.click(closeButton);
+    await waitFor(() => {
+      expect(focusElem).toHaveFocus();
     });
   });
 });

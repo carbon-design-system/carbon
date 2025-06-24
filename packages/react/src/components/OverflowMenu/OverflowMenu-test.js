@@ -438,4 +438,21 @@ describe('OverflowMenu', () => {
       expect(standardRef.current).toBe(innerRef.current);
     });
   });
+  it('should call onOpen', async () => {
+    const onOpen = jest.fn();
+    render(
+      <OverflowMenu
+        aria-label="Overflow menu"
+        className="extra-class"
+        onOpen={onOpen}>
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+
+    await userEvent.click(screen.getByRole('button'));
+    await waitFor(() => {
+      expect(onOpen).toHaveBeenCalledTimes(1);
+    });
+  });
 });

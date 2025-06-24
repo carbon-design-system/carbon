@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import LinkTo from '@storybook/addon-links/react';
 
 import { WithDeprecationNotice } from '../../../.storybook/templates/WithDeprecationNotice';

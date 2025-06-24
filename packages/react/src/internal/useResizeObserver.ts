@@ -10,7 +10,7 @@ export const useResizeObserver = ({
   ref,
   onResize,
 }: {
-  ref: RefObject<HTMLElement>;
+  ref: RefObject<HTMLElement | null>;
   onResize?: (rect: DOMRectReadOnly) => void;
 }) => {
   const [width, setWidth] = useState(-1);

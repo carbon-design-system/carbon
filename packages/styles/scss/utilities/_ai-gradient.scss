@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023
+// Copyright IBM Corp. 2023, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -55,6 +55,13 @@
         transparent 50%
       ),
       theme.$layer-selected;
+  } @else if $type == 'full-table' {
+    background: linear-gradient(
+      to top,
+      theme.$ai-aura-start 0%,
+      theme.$ai-aura-end 50%,
+      transparent 50%
+    );
   } @else {
     background: linear-gradient(
       to right,

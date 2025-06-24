@@ -3,7 +3,7 @@
 exports[`ActionableNotification should render 1`] = `
 <DocumentFragment>
   <div
-    aria-labelledby="actionable-notification-subtitle-:r1:"
+    aria-labelledby="actionable-notification-subtitle-«r1»"
     class="cds--actionable-notification cds--actionable-notification--toast cds--actionable-notification--error"
     role="alertdialog"
   >

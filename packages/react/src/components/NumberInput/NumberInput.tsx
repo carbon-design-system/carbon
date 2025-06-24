@@ -9,16 +9,16 @@ import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  FC,
-  MouseEvent,
-  ReactElement,
-  ReactNode,
+  cloneElement,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
   useRef,
   useState,
-  useCallback,
+  type FC,
+  type MouseEvent,
+  type ReactNode,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -36,6 +36,8 @@ import {
 } from '@carbon/utilities';
 import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
+import { AILabel, type AILabelProps } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -553,29 +555,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
-    }
 
     // Need to update the internal value when the revert button is clicked
-    let isRevertActive;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      isRevertActive = (normalizedDecorator as ReactElement<any>).props
-        .revertActive;
+    let isRevertActive: AILabelProps['revertActive'];
+    if (normalizedDecorator?.type === AILabel) {
+      isRevertActive = normalizedDecorator.props.revertActive;
     }
 
     useEffect(() => {

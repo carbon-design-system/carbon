@@ -117,12 +117,6 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     open,
     size = 'sm',
     legacyAutoalign = 'true',
-    // TODO: `ssr-friendly` doesn't support ESLint v9.
-    // https://github.com/kopiro/eslint-plugin-ssr-friendly/issues/30
-    // https://github.com/carbon-design-system/carbon/issues/18991
-    /*
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-    */
     target = canUseDOM && document.body,
     x = 0,
     y = 0,
@@ -384,8 +378,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   useEffect(() => {
-    if (open && focusableItems.length > 0) {
-      focusItem();
+    if (open) {
+      const raf = requestAnimationFrame(() => {
+        if (focusableItems.length > 0) {
+          focusItem();
+        }
+      });
+
+      return () => cancelAnimationFrame(raf);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, focusableItems]);

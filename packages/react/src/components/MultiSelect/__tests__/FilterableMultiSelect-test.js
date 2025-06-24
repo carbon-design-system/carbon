@@ -971,4 +971,84 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
+
+  it('should lose focus in one click after interacting with menu items', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+
+    // Open the menu
+    await user.click(combobox);
+    assertMenuOpen(mockProps);
+
+    // Verify input is focused
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Interact with menu items (click on an option to select it)
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    // Verify menu is still open and input is still focused after selection
+    assertMenuOpen(mockProps);
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Click outside the component (simulate clicking on document body)
+    await user.click(document.body);
+
+    // Menu should close and component should lose focus in ONE click
+    assertMenuClosed();
+    expect(combobox.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Verify onMenuChange was called to close the menu
+    expect(mockProps.onMenuChange).toHaveBeenLastCalledWith(false);
+  });
+
+  it('should not steal focus from TextInput after user interaction', async () => {
+    const user = userEvent.setup();
+
+    // Render both components in the same container
+    render(
+      <div>
+        <FilterableMultiSelect {...mockProps} />
+        <input type="text" data-testid="text-input" placeholder="Text input" />
+      </div>
+    );
+    await waitForPosition();
+
+    const multiselect = screen.getByRole('combobox');
+    const textInput = screen.getByTestId('text-input');
+
+    // Interact with FilterableMultiSelect
+    await user.click(multiselect);
+    assertMenuOpen(mockProps);
+
+    // Select an item
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    // Click on TextInput to move focus
+    await user.click(textInput);
+
+    // Verify focus is on TextInput and stays there
+    expect(textInput).toHaveFocus();
+
+    // Type in TextInput to ensure focus is stable
+    await user.type(textInput, 'test');
+    expect(textInput).toHaveValue('test');
+    expect(textInput).toHaveFocus();
+
+    // Verify FilterableMultiSelect lost focus
+    expect(multiselect.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+    assertMenuClosed();
+  });
 });

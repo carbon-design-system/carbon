@@ -6,11 +6,12 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { default as TreeView, TreeNode } from './';
 import { Button } from '../Button/index';
 import mdx from './TreeView.mdx';
+
 import './story.scss';
 import TextInput from '../TextInput';
 
@@ -78,8 +79,8 @@ export const Default = (args) => {
   const nodes = [
     {
       id: '1',
-      value: 'Artificial intelligence',
-      label: <span>Artificial intelligence</span>,
+      value: 'Application development and integration solutions',
+      label: 'Application development and integration solutions',
       renderIcon: Document,
     },
     {

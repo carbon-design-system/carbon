@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { ToastNotification } from '../../Notification';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import mdx from '../Notification.mdx';
 
 // eslint-disable-next-line storybook/csf-component

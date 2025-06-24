@@ -215,6 +215,12 @@
   }
 
   .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--invalid
     ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area--warn
     ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,

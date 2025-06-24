@@ -23,7 +23,9 @@ Closes #
 ## PR Checklist
 
 <!-- 
-  Do not remove checklist items. If some do not apply, ~strike out the text with tilde's~ 
+  Do not remove checklist items.
+  If some are incomplete, create a draft pull request using the create button dropdown.
+  If some do not apply, ~strike through the item text with tildes~.
 -->
 
 As the author of this PR, before marking ready for review, confirm you:

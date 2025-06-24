@@ -7,20 +7,24 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ReactNode,
+  cloneElement,
   useContext,
-  useState,
   useEffect,
   useRef,
+  useState,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { getAnnouncement } from '../../internal/getAnnouncement';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
 
@@ -188,9 +192,20 @@ const TextInput = React.forwardRef(function TextInput(
   const prefix = usePrefix();
 
   const { defaultValue, value } = rest;
-  const [textCount, setTextCount] = useState(
-    defaultValue?.toString().length || value?.toString().length || 0
-  );
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mergedRef = useMergedRefs([ref, inputRef]);
+
+  function getInitialTextCount(): number {
+    const targetValue = defaultValue || value || inputRef.current?.value || '';
+    return targetValue.toString().length;
+  }
+
+  const [textCount, setTextCount] = useState(getInitialTextCount());
+
+  useEffect(() => {
+    setTextCount(getInitialTextCount());
+  }, [value, defaultValue, enableCounter]);
 
   const normalizedProps = useNormalizedInputProps({
     id,
@@ -224,7 +239,7 @@ const TextInput = React.forwardRef(function TextInput(
     },
     placeholder,
     type,
-    ref,
+    ref: mergedRef,
     className: textInputClasses,
     title: placeholder,
     disabled: normalizedProps.disabled,
@@ -350,20 +365,11 @@ const TextInput = React.forwardRef(function TextInput(
   const Icon = normalizedProps.icon as any;
 
   // AILabel is always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   return (
     <div className={inputWrapperClasses}>
