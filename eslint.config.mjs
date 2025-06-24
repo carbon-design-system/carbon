@@ -1,20 +1,25 @@
 // @ts-check
 
 import eslint from '@eslint/js';
-import { defineConfig } from 'eslint/config';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 // TODO: There is an `eslintConfig` reference in `package.json`. Investigate
 // whether it should be moved to this file or deleted.
 // https://github.com/carbon-design-system/carbon/issues/18991
 
-export default defineConfig([
+export default tseslint.config([
   eslint.configs.recommended,
+  tseslint.configs.strict,
   {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+        ...globals.node,
+      },
+    },
     rules: {
-      // TODO: Turn these rules back on.
-      // https://github.com/carbon-design-system/carbon/issues/19007
-      'no-undef': 'off',
-      'no-unused-vars': 'off',
       // All of these rules have directives in the codebase that disable them,
       // which implies that they were set previously.
       'no-console': 'error',
@@ -32,6 +37,12 @@ export default defineConfig([
     ],
     rules: {
       'no-console': 'off',
+    },
+  },
+  {
+    files: ['**/*.js'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
   {
