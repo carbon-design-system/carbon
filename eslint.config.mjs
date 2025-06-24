@@ -1,6 +1,7 @@
 // @ts-check
 
 import eslint from '@eslint/js';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 // TODO: There is an `eslintConfig` reference in `package.json`. Investigate
@@ -11,11 +12,14 @@ export default tseslint.config([
   eslint.configs.recommended,
   tseslint.configs.strict,
   {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+        ...globals.node,
+      },
+    },
     rules: {
-      // TODO: Turn these rules back on.
-      // https://github.com/carbon-design-system/carbon/issues/19007
-      'no-undef': 'off',
-      'no-unused-vars': 'off',
       // All of these rules have directives in the codebase that disable them,
       // which implies that they were set previously.
       'no-console': 'error',
