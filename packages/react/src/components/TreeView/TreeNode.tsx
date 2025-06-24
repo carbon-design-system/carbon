@@ -245,6 +245,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       depth: propDepth,
       selected: propSelected,
       onTreeSelect: propOnTreeSelect,
+      onNodeFocusEvent,
       ...rest
     },
     forwardedRef
@@ -465,6 +466,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       if (event.type === 'blur') {
         rest?.onBlur?.(event);
       }
+      onNodeFocusEvent?.(event);
     }
 
     useEffect(() => {
