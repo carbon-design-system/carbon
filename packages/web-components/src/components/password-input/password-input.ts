@@ -17,7 +17,6 @@ import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import '../tooltip';
 import '../tooltip/tooltip-content';
-import { styleMap } from 'lit/directives/style-map.js';
 import styles from './password-input.scss?lit';
 import CDSTextInput from '../text-input/text-input';
 
@@ -149,20 +148,6 @@ class CDSPasswordInput extends CDSTextInput {
       icon: null,
     };
 
-    // TODO: find a way to make this the size of its parent, instead of hardcoding it
-    const heightoPx: Record<string, string> = {
-      [INPUT_SIZE.SMALL]: '32px',
-      [INPUT_SIZE.MEDIUM]: '40px',
-      [INPUT_SIZE.LARGE]: '48px',
-    };
-
-    const height = heightoPx[size] || '30px';
-
-    const toggleSize = {
-      width: '40px',
-      height: height,
-    };
-
     if (normalizedProps.invalid) {
       normalizedProps.icon = invalidIcon;
       normalizedProps['slot-name'] = 'invalid-text';
@@ -221,7 +206,6 @@ class CDSPasswordInput extends CDSTextInput {
     const passwordVisibilityTooltipClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
       [`${prefix}--btn`]: true,
-      // [`${prefix}--btn--icon-only`]: true,
       [`${prefix}--tooltip__trigger`]: true,
       [`${prefix}--tooltip--a11y`]: true,
       [`${prefix}--toggle-password-tooltip`]: true,
@@ -229,25 +213,16 @@ class CDSPasswordInput extends CDSTextInput {
       [`${prefix}--tooltip--${this.tooltipDirection}`]: this.tooltipDirection,
       [`${prefix}--tooltip--align-${this.tooltipAlignment}`]:
         this.tooltipAlignment,
-      // [`${prefix}--text-input--password__visibility`]: true,
     });
 
     const passwordVisibilityButtonClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
-      // [`${prefix}--btn`]: true,
-      // [`${prefix}--test-text`]: true,
       [`${prefix}--btn--icon-only`]: true,
       [`${prefix}--tooltip__trigger`]: true,
       [`${prefix}--tooltip--a11y`]: true,
       [`${prefix}--toggle-password-tooltip`]: true,
       [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
     });
-
-    // const passwordButtonLabel = html`
-    //   <span class="${prefix}--assistive-text">
-    //     ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
-    //   </span>
-    // `;
 
     const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
       <label class="${labelClasses}"> ${label} </label>
@@ -261,18 +236,6 @@ class CDSPasswordInput extends CDSTextInput {
           <slot name="helper-text"> ${helperText} </slot>
         </div>`
       : null;
-
-    // const tooltip = !disabled
-    //   ? html` <cds-tooltip
-    //       for="password-input-hide-show-icon"
-    //       class="${`${prefix}--toggle-password-tooltip`}">
-    //       <cds-tooltip-content>
-    //         ${passwordIsVisible
-    //           ? this.hidePasswordLabel
-    //           : this.showPasswordLabel}
-    //       </cds-tooltip-content>
-    //     </cds-tooltip>`
-    //   : null;
 
     let align = '';
 
@@ -294,22 +257,6 @@ class CDSPasswordInput extends CDSTextInput {
     if (this.tooltipDirection === 'right' || this.tooltipDirection === 'left') {
       align = this.tooltipDirection;
     }
-
-    // if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
-    //   if (tooltipAlignment === 'center') {
-    //     align = tooltipPosition;
-    //   }
-    //   if (tooltipAlignment === 'end') {
-    //     align = `${tooltipPosition}-end`;
-    //   }
-    //   if (tooltipAlignment === 'start') {
-    //     align = `${tooltipPosition}-start`;
-    //   }
-    // }
-
-    // if (tooltipPosition === 'right' || tooltipPosition === 'left') {
-    //   align = tooltipPosition;
-    // }
 
     return html`
       <div class="${inputWrapperClasses}">

@@ -200,15 +200,6 @@ export const Default = {
   `,
 };
 
-export const test = {
-  render: () => html`
-    <cds-password-input
-      label="Text input label"
-      helper-text="Optional help text">
-    </cds-password-input>
-  `,
-};
-
 export default {
   title: 'Components/Password Input',
   actions: { argTypesRegex: '^on.*' },
