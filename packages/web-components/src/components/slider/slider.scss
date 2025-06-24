@@ -44,6 +44,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-slider-input) {
+  position: relative;
+
   input {
     box-sizing: border-box;
   }
@@ -53,6 +55,17 @@ $css--plex: true !default;
   input {
     background-color: transparent;
   }
+}
+.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon {
+  display: none;
+}
+.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon--focus {
+  display: block;
+}
+.#{$prefix}--slider__thumb-disabled {
+  pointer-events: none;
 }
 
 :host(#{$prefix}-slider-skeleton) {
@@ -66,5 +79,10 @@ $css--plex: true !default;
     inset: initial;
     inset-inline-start: initial;
     transform: unset;
+  }
+}
+.#{$prefix}--slider--readonly {
+  .#{$prefix}--slider__filled-track {
+    background: $border-inverse;
   }
 }
