@@ -62,4 +62,9 @@ component_management:
     - component_id: web-components
       name: web-components
       paths:
-        - ../packages/web-components/**
+        - ../packages/web-components/es/components/**
+        - ../packages/web-components/es/icons/**
+        - ../packages/web-components/src/components/**
+        - ../packages/web-components/src/globals/**
+      exclude:
+        - ../feature-flags/**
