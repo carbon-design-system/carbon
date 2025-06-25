@@ -189,12 +189,6 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
       }
     };
 
-    const handleKeyDown = (event: React.KeyboardEvent) => {
-      if (event.key == 'Enter' || event.key === '' || event.key === 'Escape') {
-        event.stopPropagation();
-      }
-    };
-
     const ariaLabelText =
       !aiTextLabel && !textLabel
         ? `${aiText} ${slugLabel || ariaLabel}`
@@ -210,7 +204,6 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
             kind="ghost"
             size="sm"
             label={revertLabel}
-            onKeyDown={handleKeyDown}
             {...rest}>
             <Undo />
           </IconButton>
@@ -222,8 +215,7 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
             {...rest}>
             <ToggletipButton
               className={aiLabelButtonClasses}
-              label={kind === 'inline' ? '' : ariaLabelText}
-              onKeyDown={handleKeyDown}>
+              label={kind === 'inline' ? '' : ariaLabelText}>
               <span className={`${prefix}--ai-label__text`}>{aiText}</span>
               {kind === 'inline' && (aiTextLabel || textLabel) && (
                 <span className={`${prefix}--ai-label__additional-text`}>
