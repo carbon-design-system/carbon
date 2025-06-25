@@ -87,6 +87,8 @@ jobs:
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
         run: yarn test --ci --collectCoverage
+      - name: Run web-components tests
+        run: yarn workspace @carbon/web-components test --coverage
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
         env:
@@ -120,14 +122,7 @@ jobs:
       - name: Run tests
         run: |
           cd packages/web-components
-          yarn test --coverage
-      - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
-        with:
-          working-directory: .
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
+          yarn test
   e2e:
     name: 'test:e2e'
     runs-on: ubuntu-latest
