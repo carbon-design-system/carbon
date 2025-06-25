@@ -19,24 +19,24 @@
       :host(#{$grid-component}) ::slotted(#{$prefix}-column[#{$key}='#{$i}']),
       :host(#{$grid-component})
         ::slotted(#{$prefix}-column[#{$key}*='span:#{$i}']) {
-        @extend .cds--#{$key}\:col-span-#{$i};
+        @extend .#{$prefix}--#{$key}\:col-span-#{$i};
       }
 
       :host(#{$grid-component})
         ::slotted(#{$prefix}-column[#{$key}*='start:#{$i}']) {
-        @extend .cds--#{$key}\:col-start-#{$i};
+        @extend .#{$prefix}--#{$key}\:col-start-#{$i};
       }
 
       :host(#{$grid-component})
         ::slotted(#{$prefix}-column[#{$key}*='end:#{$i + 1}']) {
-        @extend .cds--#{$key}\:col-end-#{$i + 1};
+        @extend .#{$prefix}--#{$key}\:col-end-#{$i + 1};
       }
 
       // span 0
       :host(#{$grid-component}) ::slotted(#{$prefix}-column[#{$key}='0']),
       :host(#{$grid-component})
         ::slotted(#{$prefix}-column[#{$key}*='span:0']) {
-        @extend .cds--#{$key}\:col-span-0;
+        @extend .#{$prefix}--#{$key}\:col-span-0;
       }
 
       // percent after others otherwise span:2 beats span:25%
@@ -47,7 +47,7 @@
           ::slotted(#{$prefix}-column[#{$key}='#{$percent}%']),
         :host(#{$grid-component})
           ::slotted(#{$prefix}-column[#{$key}*='span:#{$percent}%']) {
-          @extend .cds--#{$key}\:col-span-#{$percent};
+          @extend .#{$prefix}--#{$key}\:col-span-#{$percent};
         }
       }
     }
@@ -55,7 +55,7 @@
 
   @for $i from 1 through 16 {
     :host(#{$grid-component}) ::slotted(#{$prefix}-column[span='#{$i}']) {
-      @extend .cds--col-span-#{$i};
+      @extend .#{$prefix}--col-span-#{$i};
     }
   }
 
@@ -64,7 +64,7 @@
 
     :host(#{$grid-component})
       ::slotted(#{$prefix}-column[span='#{$percent}%']) {
-      @extend .cds--col-span-#{$percent};
+      @extend .#{$prefix}--col-span-#{$percent};
     }
   }
 }

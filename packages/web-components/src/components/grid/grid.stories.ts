@@ -237,7 +237,7 @@ export const Offset = {
       skip: true,
     },
   },
-  render: ({ condensed, narrow, fullWidth }) =>
+  render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column
           class="sb-column"
@@ -381,7 +381,7 @@ export const Subgrid = {
 };
 
 const meta = {
-  title: 'Components/Grid',
+  title: 'Elements/Grid',
   decorators: [
     (story, { name }) => {
       const width = !name.toLowerCase().includes('layer') ? `width:300px` : ``;
