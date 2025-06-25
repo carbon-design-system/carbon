@@ -71,17 +71,37 @@ class CDSAILabel extends CDSToggleTip {
   @property({ attribute: 'button-label' })
   buttonLabel = 'Show information';
 
+  @property({ type: Boolean, reflect: true })
+  open = false;
+
   @property()
   previousValue;
 
-  protected _handleClick = (event?: MouseEvent | KeyboardEvent) => {
-    event?.stopPropagation();
-    event?.preventDefault();
+  connectedCallback() {
+    super.connectedCallback?.();
+    document.addEventListener('click', this._handleOutsideClick, true); // capture phase
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    document.removeEventListener('click', this._handleOutsideClick, true);
+  }
+
+  private _handleOutsideClick = (event: MouseEvent) => {
+    const path = event.composedPath();
+    if (!path.includes(this)) {
+      this.open = false;
+      this.requestUpdate();
+    }
+  };
+
+  protected _handleClick = () => {
+    (document.activeElement as HTMLElement | null)?.blur();
     if (this.revertActive) {
       this.revertActive = false;
       this.removeAttribute('revert-active');
     } else {
       this.open = !this.open;
+      this.requestUpdate();
     }
   };
 
