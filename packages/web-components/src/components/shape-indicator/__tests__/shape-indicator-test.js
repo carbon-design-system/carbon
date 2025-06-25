@@ -8,15 +8,20 @@ import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/shape-indicator/index.js';
 
 describe('cds-shape-indicator', function () {
-  const shapeIndicator = html`<cds-shape-indicator kind="failed" label="test label"></cds-shape-indicator>`;
+  const shapeIndicator = html`<cds-shape-indicator
+    kind="failed"
+    label="test label"></cds-shape-indicator>`;
 
   it('should render', async () => {
     const el = await fixture(shapeIndicator);
   });
 
-
   it('should use a custom label', async () => {
-    const el = await fixture(html`<cds-shape-indicator kind="failed" label="custom label"></cds-shape-indicator>`);
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="custom label"></cds-shape-indicator>`
+    );
     await el.updateComplete;
 
     expect(el.label).to.equal('custom label');
@@ -24,7 +29,12 @@ describe('cds-shape-indicator', function () {
   });
 
   it('should update with textSize prop', async () => {
-    const el = await fixture(html`<cds-shape-indicator kind="failed" label="test label" text-size="14"></cds-shape-indicator>`);
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="test label"
+        text-size="14"></cds-shape-indicator>`
+    );
     await el.updateComplete;
 
     expect(el.textSize).to.equal('14');
@@ -33,14 +43,23 @@ describe('cds-shape-indicator', function () {
   });
 
   it('should render default textSize 12 when no textSize is specified', async () => {
-    const el = await fixture(html`<cds-shape-indicator kind="failed" label="test label"></cds-shape-indicator>`);
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="test label"></cds-shape-indicator>`
+    );
     await el.updateComplete;
 
     expect(el.textSize).to.equal(12);
   });
 
   it('should update with kind prop', async () => {
-    const el = await fixture(html`<cds-shape-indicator kind="critical" label="test label" text-size="14"></cds-shape-indicator>`);
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="critical"
+        label="test label"
+        text-size="14"></cds-shape-indicator>`
+    );
     await el.updateComplete;
 
     expect(el.kind).to.equal('critical');
@@ -50,25 +69,33 @@ describe('cds-shape-indicator', function () {
   });
 
   it('should support a custom class name on the outermost element', async () => {
-    const el = await fixture(html`<cds-shape-indicator kind="failed" label="test label" class="custom-class"></cds-shape-indicator>`);
-    
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="test label"
+        class="custom-class"></cds-shape-indicator>`
+    );
+
     expect(el.classList.contains('custom-class')).to.be.true;
   });
-
 
   it('should render different textSizes correctly', async () => {
     const textSizes = [12, 14];
 
     for (const textSize of textSizes) {
-      const el = await fixture(html`<cds-shape-indicator kind="failed" label="test" text-size="${textSize}"></cds-shape-indicator>`);
+      const el = await fixture(
+        html`<cds-shape-indicator
+          kind="failed"
+          label="test"
+          text-size="${textSize}"></cds-shape-indicator>`
+      );
       await el.updateComplete;
-      
+
       expect(el.textSize).to.equal(textSize.toString());
-      
+
       // Should render an SVG for both text sizes
       const svgElement = el.shadowRoot.querySelector('svg');
       expect(svgElement).to.exist;
     }
   });
-
 });

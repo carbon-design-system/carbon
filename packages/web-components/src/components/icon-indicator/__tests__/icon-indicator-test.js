@@ -8,14 +8,20 @@ import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/icon-indicator/index.js';
 
 describe('cds-icon-indicator', function () {
-  const iconIndicator = html`<cds-icon-indicator kind="failed" label="test label"></cds-icon-indicator>`;
+  const iconIndicator = html`<cds-icon-indicator
+    kind="failed"
+    label="test label"></cds-icon-indicator>`;
 
   it('should render', async () => {
     const el = await fixture(iconIndicator);
   });
 
   it('should use a custom label', async () => {
-    const el = await fixture(html`<cds-icon-indicator kind="failed" label="custom label"></cds-icon-indicator>`);
+    const el = await fixture(
+      html`<cds-icon-indicator
+        kind="failed"
+        label="custom label"></cds-icon-indicator>`
+    );
     await el.updateComplete;
 
     expect(el.label).to.equal('custom label');
@@ -23,7 +29,11 @@ describe('cds-icon-indicator', function () {
   });
 
   it('should render default size 16 when no size is specified', async () => {
-    const el = await fixture(html`<cds-icon-indicator kind="failed" label="test label"></cds-icon-indicator>`);
+    const el = await fixture(
+      html`<cds-icon-indicator
+        kind="failed"
+        label="test label"></cds-icon-indicator>`
+    );
     await el.updateComplete;
 
     expect(el.size).to.equal(16);
@@ -32,17 +42,27 @@ describe('cds-icon-indicator', function () {
   });
 
   it('should support a custom class name on the outermost element', async () => {
-    const el = await fixture(html`<cds-icon-indicator kind="failed" label="test label" class="custom-class"></cds-icon-indicator>`);
-    
+    const el = await fixture(
+      html`<cds-icon-indicator
+        kind="failed"
+        label="test label"
+        class="custom-class"></cds-icon-indicator>`
+    );
+
     expect(el.classList.contains('custom-class')).to.be.true;
   });
 
   it('should update with kind prop', async () => {
-    const el = await fixture(html`<cds-icon-indicator kind="pending" label="test label" size="20"></cds-icon-indicator>`);
+    const el = await fixture(
+      html`<cds-icon-indicator
+        kind="pending"
+        label="test label"
+        size="20"></cds-icon-indicator>`
+    );
     await el.updateComplete;
 
     expect(el.kind).to.equal('pending');
-    
+
     // Check that an SVG icon is rendered
     const svgElement = el.shadowRoot.querySelector('svg');
     expect(svgElement).to.exist;
@@ -52,13 +72,17 @@ describe('cds-icon-indicator', function () {
     const sizes = [16, 20];
 
     for (const size of sizes) {
-      const el = await fixture(html`<cds-icon-indicator kind="failed" label="test" size="${size}"></cds-icon-indicator>`);
+      const el = await fixture(
+        html`<cds-icon-indicator
+          kind="failed"
+          label="test"
+          size="${size}"></cds-icon-indicator>`
+      );
       await el.updateComplete;
-      
+
       expect(el.size).to.equal(size.toString());
       const svgElement = el.shadowRoot.querySelector('svg');
       expect(svgElement).to.exist;
     }
   });
-
 });
