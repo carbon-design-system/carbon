@@ -14,9 +14,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  ENVIRONMENT_NAME: '@carbon/react deploy preview'
-
 jobs:
   react-storybook:
     if:
@@ -89,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: react-storybook
     environment:
-      name: ${{ env.ENVIRONMENT_NAME }}
+      name: '@carbon/react storybook deploy preview'
       url: ${{ needs.react-storybook.outputs.storybookUrl }}
     steps:
       - name: Generate job summary
@@ -97,7 +94,7 @@ jobs:
           buildUrl: ${{ needs.react-storybook.outputs.buildUrl }}
           storybookUrl: ${{ needs.react-storybook.outputs.storybookUrl }}
         run: |
-          echo "### ${{ env.ENVIRONMENT_NAME }} :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "### @carbon/react storybook deploy preview :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
           echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
           echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
