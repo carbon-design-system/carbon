@@ -12,16 +12,19 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export interface HeaderProps {
   children?: ReactNode;
+
   /**
-   * Specify aria-label
+   * Optionally provide aria-label
    */
   'aria-label'?: string;
+
   /**
-   * Specify aria-labelledby
+   * Optionally provide aria-labelledby
    */
   'aria-labelledby'?: string;
+
   /**
-   * Optionally provide a custom class name that is applied to the underlying <header>
+   * Optionally provide a custom class name that is applied to the underlying header
    */
   className?: string;
 }
@@ -43,17 +46,17 @@ const Header: React.FC<HeaderProps> = ({
 
 Header.propTypes = {
   /**
-   * Specify aria-label
+   * Optionally provide aria-label
    */
   'aria-label': PropTypes.string,
 
   /**
-   * Specify aria-labelledby
+   * Optionally provide aria-labelledby
    */
   'aria-labelledby': PropTypes.string,
 
   /**
-   * Optionally provide a custom class name that is applied to the underlying <header>
+   * Optionally provide a custom class name that is applied to the underlying header
    */
   className: PropTypes.string,
 };
