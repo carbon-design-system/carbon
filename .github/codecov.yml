@@ -62,5 +62,4 @@ component_management:
     - component_id: web-components
       name: web-components
       paths:
-        - es/components/**
-        - lib/components/**
+        - ../packages/web-components/**
