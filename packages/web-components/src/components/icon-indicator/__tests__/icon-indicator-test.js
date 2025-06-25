@@ -14,6 +14,7 @@ describe('cds-icon-indicator', function () {
 
   it('should render', async () => {
     const el = await fixture(iconIndicator);
+    expect(el).to.exist;
   });
 
   it('should use a custom label', async () => {

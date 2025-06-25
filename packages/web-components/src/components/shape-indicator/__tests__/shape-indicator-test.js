@@ -14,6 +14,7 @@ describe('cds-shape-indicator', function () {
 
   it('should render', async () => {
     const el = await fixture(shapeIndicator);
+    expect(el).to.exist;
   });
 
   it('should use a custom label', async () => {
