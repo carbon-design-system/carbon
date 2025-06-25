@@ -54,7 +54,7 @@ describe('cds-shape-indicator', function () {
     expect(el.textSize).to.equal(12);
   });
 
-  it('should update with kind prop', async () => {
+  it('should update with the kind attribute', async () => {
     const el = await fixture(
       html`<cds-shape-indicator
         kind="critical"
