@@ -12,6 +12,20 @@ describe('cds-inline-loading', function () {
 
   it('should render', async () => {
     const el = await fixture(inlineLoading);
+    expect(el).to.exist;
+  });
+
+  it('should render a loader by default', async () => {
+    const el = await fixture(inlineLoading);
+    await el.updateComplete;
+
+    const loadingIcon = el.shadowRoot.querySelector('.cds--loading');
+    expect(loadingIcon).to.exist;
+  });
+
+  it('should set aria-live attribute automatically', async () => {
+    const el = await fixture(inlineLoading);
+    expect(el.getAttribute('aria-live')).to.equal('assertive');
   });
 
   it('should pass in extra classes that are passed via class', async () => {
@@ -50,16 +64,20 @@ describe('cds-inline-loading', function () {
     expect(textNode).to.exist;
   });
 
-  it('should call the onSuccess event after a delay when status is finished', async () => {
-    const el = await fixture(html`<cds-inline-loading status="finished"></cds-inline-loading>`);
+  it('should allow users to override the onSuccess timeout with successDelay', async function() {
+    this.timeout(4000); 
+    const el = await fixture(html`<cds-inline-loading status="finished" success-delay="500"></cds-inline-loading>`);
     await el.updateComplete;
 
+    expect(el.successDelay).to.equal('500');
+    
     const listener = oneEvent(el, 'cds-inline-loading-onsuccess');
     const event = await listener;
 
     expect(event).to.exist;
     expect(event.type).to.equal('cds-inline-loading-onsuccess');
   });
+
 
   it('should call the onSuccess event after a delay when status is finished', async function() {
     this.timeout(3000); 
