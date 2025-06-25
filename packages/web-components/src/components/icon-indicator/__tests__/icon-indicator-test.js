@@ -53,7 +53,7 @@ describe('cds-icon-indicator', function () {
     expect(el.classList.contains('custom-class')).to.be.true;
   });
 
-  it('should update with kind prop', async () => {
+  it('should update with the kind attribute', async () => {
     const el = await fixture(
       html`<cds-icon-indicator
         kind="pending"
