@@ -61,6 +61,17 @@ describe('cds-multi-select', function () {
     expect(el.hasAttribute('open')).to.be.true;
   });
 
+  it('should open the menu when a user hits space while the field is focused', async () => {
+    const el = await fixture(multiSelect);
+    const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+    trigger.focus();
+    const event = new KeyboardEvent('keypress', { key: ' ', bubbles: true });
+    trigger.dispatchEvent(event);
+    await el.updateComplete;
+    expect(el.open).to.be.true;
+    expect(el.hasAttribute('open')).to.be.true;
+  });
+
   it('should let the user toggle item selection with a mouse', async () => {
     const el = await fixture(multiSelect);
 
