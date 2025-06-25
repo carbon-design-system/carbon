@@ -879,8 +879,8 @@ __metadata:
   checksum: 8/7d0eda657002738aa5206107bd0580aead6c95c460ef1bdd0b1a87a9c7ae6277ac2e9b945306aaa5b32c6dcb7feaf462d0f552e7f8b5718abfc6ead5c94a71b3
   languageName: node
   linkType: hard
-
-"next@npm:^14.2.25":
+  
+"next@npm:^14.2.30":
   version: 14.2.30
   resolution: "next@npm:14.2.30"
   dependencies:
@@ -1465,7 +1465,7 @@ __metadata:
     "@carbon/styles": "link:../../../styles"
     "@carbon/type": "link:../../"
     change-case: "npm:^4.1.1"
-    next: "npm:^14.2.25"
+    next: "npm:^14.2.30"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     sass: "npm:^1.36.0"
