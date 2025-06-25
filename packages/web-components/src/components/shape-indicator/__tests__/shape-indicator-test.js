@@ -29,7 +29,7 @@ describe('cds-shape-indicator', function () {
     expect(el.shadowRoot.textContent.trim()).to.include('custom label');
   });
 
-  it('should update with textSize prop', async () => {
+  it('should update with the textSize attribute', async () => {
     const el = await fixture(
       html`<cds-shape-indicator
         kind="failed"
