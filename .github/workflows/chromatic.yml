@@ -14,12 +14,18 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  ENVIRONMENT_NAME: '@carbon/react deploy preview'
+
 jobs:
   react-storybook:
     if:
       ${{ github.repository == 'carbon-design-system/carbon' &&
       github.event.pull_request.draft == false }}
     runs-on: ubuntu-latest
+    outputs:
+      buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
+      storybookUrl: ${{ steps.chromatic.outputs.storybookUrl }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -49,7 +55,8 @@ jobs:
         run: yarn build
       - name: Build storybook
         run: yarn workspace @carbon/react storybook:build
-      - name: Run Chromatic
+      - id: chromatic
+        name: Run Chromatic
         uses: chromaui/action@3378c92d26c32353e53166beac732e2edc14213c # v13.0.0
         with:
           # 👇 Token is intentionally plaintext
@@ -73,3 +80,25 @@ jobs:
           CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
           # 👇 Makes sure this is always set to the corect owner/repo
           CHROMATIC_SLUG: ${{ github.repository }}
+
+  # This takes the storybook url and pipes it into a github deployment
+  # environment so that PRs will have the deploy preview listed in both the
+  # PR timeline and the 'branch deployment' section at the bottom above the
+  # status checks. This avoids noisy/large comments for deploy previews.
+  link-to-github-deployment-environment:
+    runs-on: ubuntu-latest
+    needs: react-storybook
+    environment:
+      name: ${{ env.ENVIRONMENT_NAME }}
+      url: ${{ needs.react-storybook.outputs.storybookUrl }}
+    steps:
+      - name: Generate job summary
+        env:
+          buildUrl: ${{ needs.react-storybook.outputs.buildUrl }}
+          storybookUrl: ${{ needs.react-storybook.outputs.storybookUrl }}
+        run: |
+          echo "### ${{ env.ENVIRONMENT_NAME }} :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY
