@@ -66,5 +66,3 @@ component_management:
         - ../packages/web-components/es/icons/**
         - ../packages/web-components/src/components/**
         - ../packages/web-components/src/globals/**
-      exclude:
-        - ../feature-flags/**
