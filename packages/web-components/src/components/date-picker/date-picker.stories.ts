@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,7 +30,6 @@ const defaultArgs = {
   closeOnSelect: true,
   minDate: '',
   maxDate: '',
-  datePickerType: 'single',
   readonly: false,
   short: false,
   helperText: '',
@@ -42,7 +41,7 @@ const defaultArgs = {
   size: INPUT_SIZE.MEDIUM,
 };
 
-const argTypes = {
+const controls = {
   allowInput: {
     control: 'boolean',
     description:
@@ -56,22 +55,6 @@ const argTypes = {
   dateFormat: {
     control: 'text',
     description: 'The date format.',
-  },
-  datePickerType: {
-    control: 'radio',
-    options: { Single: 'single', Simple: 'simple', Range: 'range' },
-    description: `The type of the date picker:
-    <ul>
-      <li><code>simple</code>
-        <ul><li>Without calendar dropdown.</li></ul>
-      </li>
-      <li><code>single</code>
-        <ul><li>With calendar dropdown and single date.</li></ul>
-      </li>
-      <li><code>range</code>
-        <ul><li>With calendar dropdown and a date range.</li></ul>
-      </li>
-    </ul>`,
   },
   disabled: { control: 'boolean' },
   helperText: { control: 'text' },
@@ -121,76 +104,95 @@ const argTypes = {
   },
 };
 
-export const Simple = {
-  render: () => {
+export const Default = {
+  args: { ...defaultArgs, kind: 'single' },
+  argTypes: {
+    ...controls,
+    kind: {
+      control: 'radio',
+      options: { Single: 'single', Simple: 'simple', Range: 'range' },
+      description: `The type of the date picker:
+    <ul>
+      <li><code>simple</code>
+        <ul><li>Without calendar dropdown.</li></ul>
+      </li>
+      <li><code>single</code>
+        <ul><li>With calendar dropdown and single date.</li></ul>
+      </li>
+      <li><code>range</code>
+        <ul><li>With calendar dropdown and a date range.</li></ul>
+      </li>
+    </ul>`,
+    },
+  },
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    kind,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
     return html`
-      <cds-date-picker>
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
         <cds-date-picker-input
+          kind="${kind}"
           label-text="Date Picker label"
-          placeholder="mm/dd/yyyy">
+          placeholder="${placeholder}"
+          size="${size}">
         </cds-date-picker-input>
+        ${kind === 'range'
+          ? html`
+              <cds-date-picker-input
+                kind="${kind}"
+                label-text="End date"
+                placeholder="${placeholder}"
+                size="${size}">
+              </cds-date-picker-input>
+            `
+          : null}
       </cds-date-picker>
-    `;
-  },
-};
-
-export const SimpleWithLayer = {
-  render: () => {
-    return html`
-  <sb-template-layers>
-    <cds-date-picker>
-    <cds-date-picker-input
-      label-text="Date Picker label"
-      placeholder="mm/dd/yyyy">
-    </cds-date-picker-input>
-  </sb-template-layers>
-  `;
-  },
-};
-
-export const SingleWithCalendar = {
-  render: () => {
-    return html`
-      <cds-date-picker>
-        <cds-date-picker-input
-          kind="single"
-          label-text="Date Picker label"
-          placeholder="mm/dd/yyyy">
-        </cds-date-picker-input>
-      </cds-date-picker>
-    `;
-  },
-};
-
-export const SingleWithCalendarWithLayer = {
-  render: () => {
-    return html`
-      <sb-template-layers>
-        <cds-date-picker>
-          <cds-date-picker-input
-            kind="single"
-            label-text="Date Picker label"
-            placeholder="mm/dd/yyyy">
-          </cds-date-picker-input>
-        </cds-date-picker>
-      </sb-template-layers>
     `;
   },
 };
 
 export const RangeWithCalendar = {
-  render: () => {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
     return html`
-      <cds-date-picker>
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
         <cds-date-picker-input
           kind="from"
           label-text="Start date"
-          placeholder="mm/dd/yyyy">
+          placeholder="${placeholder}"
+          size="${size}">
         </cds-date-picker-input>
         <cds-date-picker-input
           kind="to"
           label-text="End date"
-          placeholder="mm/dd/yyyy">
+          placeholder="${placeholder}"
+          size="${size}">
         </cds-date-picker-input>
       </cds-date-picker>
     `;
@@ -198,59 +200,181 @@ export const RangeWithCalendar = {
 };
 
 export const RangeWithCalendarWithLayer = {
-  render: () => {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
     return html`
-      <cds-layer>
-        <cds-date-picker>
+      <sb-template-layers>
+        <cds-date-picker
+          allow-input="${allowInput}"
+          close-on-select="${closeOnSelect}"
+          date-format="${dateFormat}"
+          max-date="${maxDate}"
+          min-date="${minDate}">
           <cds-date-picker-input
             kind="from"
             label-text="Start date"
-            placeholder="mm/dd/yyyy">
+            placeholder="${placeholder}"
+            size="${size}">
           </cds-date-picker-input>
           <cds-date-picker-input
             kind="to"
             label-text="End date"
-            placeholder="mm/dd/yyyy">
+            placeholder="${placeholder}"
+            size="${size}">
           </cds-date-picker-input>
         </cds-date-picker>
-        <cds-layer>
-          <cds-date-picker>
-            <cds-date-picker-input
-              kind="from"
-              label-text="Start date"
-              placeholder="mm/dd/yyyy">
-            </cds-date-picker-input>
-            <cds-date-picker-input
-              kind="to"
-              label-text="End date"
-              placeholder="mm/dd/yyyy">
-            </cds-date-picker-input>
-          </cds-date-picker>
-          <cds-layer>
-            <cds-date-picker>
-              <cds-date-picker-input
-                kind="from"
-                label-text="Start date"
-                placeholder="mm/dd/yyyy">
-              </cds-date-picker-input>
-              <cds-date-picker-input
-                kind="to"
-                label-text="End date"
-                placeholder="mm/dd/yyyy">
-              </cds-date-picker-input>
-            </cds-date-picker>
-          </cds-layer>
-        </cds-layer>
-      </cds-layer>
+      </sb-template-layers>
     `;
   },
 };
 
+export const Simple = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
+    return html`
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
+        <cds-date-picker-input
+          label-text="Date Picker label"
+          placeholder="${placeholder}"
+          size="${size}">
+        </cds-date-picker-input>
+      </cds-date-picker>
+    `;
+  },
+};
+
+export const SimpleWithLayer = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
+    return html`
+      <sb-template-layers>
+        <cds-date-picker
+          allow-input="${allowInput}"
+          close-on-select="${closeOnSelect}"
+          date-format="${dateFormat}"
+          max-date="${maxDate}"
+          min-date="${minDate}">
+        <cds-date-picker-input
+          label-text="Date Picker label"
+          placeholder="${placeholder}"
+          size="${size}">
+        </cds-date-picker-input>
+      </sb-template-layers>
+  `;
+  },
+};
+
+export const SingleWithCalendar = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
+    return html`
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="${placeholder}"
+          size="${size}">
+        </cds-date-picker-input>
+      </cds-date-picker>
+    `;
+  },
+};
+
+export const SingleWithCalendarWithLayer = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
+    return html`
+      <sb-template-layers>
+        <cds-date-picker
+          allow-input="${allowInput}"
+          close-on-select="${closeOnSelect}"
+          date-format="${dateFormat}"
+          max-date="${maxDate}"
+          min-date="${minDate}">
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date Picker label"
+            placeholder="${placeholder}"
+            size="${size}">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      </sb-template-layers>
+    `;
+  },
+};
+
+const skeletonControls = {
+  hideLabel: {
+    control: 'boolean',
+    description: 'Specify whether the label should be hidden, or not',
+  },
+  range: {
+    control: 'boolean',
+    description: 'Specify whether the skeleton should be of range date picker.',
+  },
+};
+
 export const Skeleton = {
-  render: () => html`
-    <cds-date-picker-input-skeleton
-      kind="from"></cds-date-picker-input-skeleton>
-    <cds-date-picker-input-skeleton kind="to"></cds-date-picker-input-skeleton>
+  args: { hideLabel: false, range: true },
+  argTypes: skeletonControls,
+  render: ({ range }) => html`
+    <cds-date-picker-input-skeleton range=${range}>
+    </cds-date-picker-input-skeleton>
   `,
   decorators: [(story) => html` <div>${story()}</div> `],
   parameters: {
@@ -292,13 +416,29 @@ const actions = html`
 `;
 
 export const WithAILabel = {
-  render: () => {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    maxDate,
+    minDate,
+    placeholder,
+    size,
+  }) => {
     return html`
-      <cds-date-picker>
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
         <cds-date-picker-input
           kind="single"
           label-text="Date Picker label"
-          placeholder="mm/dd/yyyy">
+          placeholder="${placeholder}"
+          size="${size}">
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
@@ -308,95 +448,13 @@ export const WithAILabel = {
   },
 };
 
-export const Playground = {
-  decorators: [(story) => html` <div>${story()}</div> `],
-  argTypes,
-  args: defaultArgs,
-  render: (args) => {
-    const {
-      disabled,
-      dateFormat,
-      onChange,
-      minDate,
-      maxDate,
-      size,
-      helperText,
-      placeholder,
-      invalid,
-      invalidText,
-      warning,
-      warningText,
-      short,
-      datePickerType,
-      readonly,
-      onInput,
-    } = args || {};
-
-    return html`
-      <cds-date-picker
-        ?disabled="${disabled}"
-        date-format="${dateFormat}"
-        ?readonly="${readonly}"
-        min-date="${minDate}"
-        max-date="${maxDate}"
-        @cds-date-picker-changed="${onChange}">
-        ${datePickerType === 'range'
-          ? html`
-              <cds-date-picker-input
-                kind="from"
-                label-text="Date Picker label"
-                size="${size}"
-                placeholder="${placeholder}"
-                ?invalid="${invalid}"
-                invalid-text="${invalidText}"
-                ?short="${short}"
-                ?warn="${warning}"
-                warn-text="${warningText}"
-                @input="${onInput}">
-                ${helperText
-                  ? html`<span slot="helper-text">${helperText}</span>`
-                  : html``}
-              </cds-date-picker-input>
-              <cds-date-picker-input
-                kind="to"
-                label-text="Date Picker label"
-                size="${size}"
-                placeholder="${placeholder}"
-                ?invalid="${invalid}"
-                invalid-text="${invalidText}"
-                ?short="${short}"
-                ?warn="${warning}"
-                warn-text="${warningText}"
-                @input="${onInput}">
-                ${helperText
-                  ? html`<span slot="helper-text">${helperText}</span>`
-                  : html``}
-              </cds-date-picker-input>
-            `
-          : html`
-              <cds-date-picker-input
-                kind="${datePickerType}"
-                label-text="Date Picker label"
-                size="${size}"
-                placeholder="${placeholder}"
-                ?invalid="${invalid}"
-                invalid-text="${invalidText}"
-                ?short="${short}"
-                ?warn="${warning}"
-                warn-text="${warningText}"
-                @input="${onInput}">
-                ${helperText
-                  ? html`<span slot="helper-text">${helperText}</span>`
-                  : html``}
-              </cds-date-picker-input>
-            `}
-      </cds-date-picker>
-    `;
-  },
-};
-
 const meta = {
   title: 'Components/Date picker',
+  parameters: {
+    docs: {
+      controls: { exclude: ['calendar'] },
+    },
+  },
 };
 
 export default meta;
