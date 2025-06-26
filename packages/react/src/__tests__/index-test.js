@@ -93,6 +93,7 @@ describe('Carbon Components React', () => {
         "NotificationTextDetails",
         "NumberInput",
         "NumberInputSkeleton",
+        "NumberInputV2",
         "OrderedList",
         "OverflowMenu",
         "OverflowMenuItem",
