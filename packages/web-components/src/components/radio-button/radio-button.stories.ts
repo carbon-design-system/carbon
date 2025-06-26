@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -144,22 +144,54 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      disabled,
+      readOnly,
+      helperText,
+      invalid,
+      invalidText,
+      labelPosition,
+      orientation,
+      name,
+      value,
+      warn,
+      warnText,
+      onChange,
+      checked,
+      hideLabel,
+      labelText,
+    } = args ?? {};
     return html`
       <cds-radio-button-group
-        legend-text="Group label"
-        name="radio-group"
-        value="radio-1">
+        ?readOnly="${readOnly}"
+        ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label-position="${ifDefined(labelPosition)}"
+        legend-text="Radio Button group"
+        orientation="${ifDefined(orientation)}"
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        @cds-radio-button-group-changed="${onChange}">
         <cds-radio-button
-          label-text="Radio button label"
+          ?checked="${checked}"
+          ?hide-label="${hideLabel}"
+          label-text="${ifDefined(labelText)}"
           value="radio-1"></cds-radio-button>
         <cds-radio-button
-          label-text="Radio button label"
+          ?hide-label="${hideLabel}"
+          label-text="${ifDefined(labelText)}"
           value="radio-2"></cds-radio-button>
         <cds-radio-button
-          label-text="Radio button label"
-          value="radio-3"
-          disabledItem></cds-radio-button>
+          ?hide-label="${hideLabel}"
+          label-text="${ifDefined(labelText)}"
+          value="radio-3"></cds-radio-button>
       </cds-radio-button-group>
     `;
   },
@@ -257,60 +289,6 @@ export const WithAILabel = {
         <cds-radio-button
           label-text="Radio button label"
           value="radio-9"></cds-radio-button>
-      </cds-radio-button-group>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      disabled,
-      readOnly,
-      helperText,
-      invalid,
-      invalidText,
-      labelPosition,
-      orientation,
-      name,
-      value,
-      warn,
-      warnText,
-      onChange,
-      checked,
-      hideLabel,
-      labelText,
-    } = args ?? {};
-    return html`
-      <cds-radio-button-group
-        ?readOnly="${readOnly}"
-        ?disabled="${disabled}"
-        helper-text="${ifDefined(helperText)}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label-position="${ifDefined(labelPosition)}"
-        legend-text="Radio Button group"
-        orientation="${ifDefined(orientation)}"
-        name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        @cds-radio-button-group-changed="${onChange}">
-        <cds-radio-button
-          ?checked="${checked}"
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-1"></cds-radio-button>
-        <cds-radio-button
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-2"></cds-radio-button>
-        <cds-radio-button
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-3"></cds-radio-button>
       </cds-radio-button-group>
     `;
   },

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -48,9 +48,16 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const { legendText, message, messageText } = args ?? {};
+
     return html`
-      <cds-form-group legend-text="FormGroup Legend">
+      <cds-form-group
+        legend-text="${ifDefined(legendText)}"
+        ?message="${message}"
+        message-text="${ifDefined(messageText)}">
         <cds-stack gap="7">
           <cds-text-input label="First Name"> </cds-text-input>
           <cds-text-input label="Last Name"> </cds-text-input>
@@ -71,7 +78,7 @@ export const Default = {
               value="radio-3"
               id="radio-3"></cds-radio-button>
           </cds-radio-button-group>
-          <cds-button>Submit</cds-button>
+          <cds-form-item> <cds-button>Submit</cds-button></cds-form-item>
         </cds-stack>
       </cds-form-group>
     `;
@@ -389,43 +396,6 @@ export const _WithAILabel = {
           </cds-stack>
         </cds-form-group>
       </div>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const { legendText, message, messageText } = args ?? {};
-    return html`
-      <cds-form-group
-        legend-text="${ifDefined(legendText)}"
-        ?message="${message}"
-        message-text="${ifDefined(messageText)}">
-        <cds-stack gap="7">
-          <cds-text-input label="First Name"> </cds-text-input>
-          <cds-text-input label="Last Name"> </cds-text-input>
-          <cds-radio-button-group
-            legend-text="Radio button heading"
-            name="radio-button-group"
-            value="radio-1">
-            <cds-radio-button
-              label-text="Option 1"
-              value="radio-1"
-              id="radio-1"></cds-radio-button>
-            <cds-radio-button
-              label-text="Option 2"
-              value="radio-2"
-              id="radio-2"></cds-radio-button>
-            <cds-radio-button
-              label-text="Option 3"
-              value="radio-3"
-              id="radio-3"></cds-radio-button>
-          </cds-radio-button-group>
-          <cds-form-item> <cds-button>Submit</cds-button></cds-form-item>
-        </cds-stack>
-      </cds-form-group>
     `;
   },
 };
