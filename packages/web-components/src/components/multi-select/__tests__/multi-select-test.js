@@ -72,6 +72,20 @@ describe('cds-multi-select', function () {
     expect(el.hasAttribute('open')).to.be.true;
   });
 
+  it('should open the menu when a user hits enter while the field is focused', async () => {
+    const el = await fixture(multiSelect);
+    const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+    trigger.focus();
+    const event = new KeyboardEvent('keypress', {
+      key: 'Enter',
+      bubbles: true,
+    });
+    trigger.dispatchEvent(event);
+    await el.updateComplete;
+    expect(el.open).to.be.true;
+    expect(el.hasAttribute('open')).to.be.true;
+  });
+
   it('should let the user toggle item selection with a mouse', async () => {
     const el = await fixture(multiSelect);
 
@@ -147,6 +161,29 @@ describe('cds-multi-select', function () {
     await el.updateComplete;
 
     expect(el.open).to.be.false;
+  });
+
+  it('does not render items with undefined values', async () => {
+    const el = await fixture(html`
+      <cds-multi-select label="test-label">
+        <cds-multi-select-item value="item-0">joey</cds-multi-select-item>
+        <cds-multi-select-item value="item-1">johnny</cds-multi-select-item>
+        <cds-multi-select-item value="item-2"
+          >${undefined}</cds-multi-select-item
+        >
+      </cds-multi-select>
+    `);
+    // Open the menu
+    const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+    trigger.click();
+    await el.updateComplete;
+
+    // Get all visible items
+    const items = el.querySelectorAll('cds-multi-select-item');
+    // Check that no item has textContent 'undefined'
+    items.forEach((item) => {
+      expect(item.textContent.trim()).to.not.equal('undefined');
+    });
   });
 
   describe('Component API', () => {
@@ -246,6 +283,53 @@ describe('cds-multi-select', function () {
         );
         expect(aiLabel).to.exist;
       }
+    });
+
+    it('should support a custom itemToString with object items', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label">
+          <cds-multi-select-item value="item-0"
+            >Custom joey</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-1"
+            >Custom johnny</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-2"
+            >Custom tommy</cds-multi-select-item
+          >
+        </cds-multi-select>
+      `);
+      await el.updateComplete;
+      // Open the menu
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+      // Check that the custom string is rendered
+      const items = el.querySelectorAll('cds-multi-select-item');
+      expect(items[0].textContent.trim()).to.equal('Custom joey');
+      expect(items[1].textContent.trim()).to.equal('Custom johnny');
+      expect(items[2].textContent.trim()).to.equal('Custom tommy');
+    });
+
+    it('should support a custom itemToElement', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label">
+          <cds-multi-select-item value="item-0">
+            <span class="test-element">test-item 🔥</span>
+          </cds-multi-select-item>
+        </cds-multi-select>
+      `);
+      await el.updateComplete;
+      // Open the menu
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+      // Check that the custom element is rendered
+      const item = el.querySelector('cds-multi-select-item');
+      const custom = item.querySelector('.test-element');
+      expect(custom).to.exist;
+      expect(custom.textContent).to.include('test-item');
+      expect(custom.textContent).to.include('🔥');
     });
   });
 
