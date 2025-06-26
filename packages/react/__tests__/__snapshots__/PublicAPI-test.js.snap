@@ -5919,6 +5919,9 @@ Map {
       "min": Object {
         "type": "number",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onChange": Object {
         "type": "func",
       },
