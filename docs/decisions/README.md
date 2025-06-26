@@ -25,8 +25,8 @@ construction techniques of the Carbon Design System.
 
 - ADRs will be created as proposals, before a decision is made
 - ADRs will be discussed both as a team and with relevant parties
-- When a decision is made, it will be documented by updating the initial/proposed
-  ADR
+- When a decision is made, it will be documented by updating the
+  initial/proposed ADR
 - If a decision is reversed, we will keep the old one around, but mark it as
   superseded by adding links from the old one to the new one and vice versa.
 
