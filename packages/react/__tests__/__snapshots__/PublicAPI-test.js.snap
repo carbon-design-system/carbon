@@ -4506,6 +4506,313 @@ Map {
       },
     },
   },
+  "NumberInputV2" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "allowEmpty": Object {
+        "type": "bool",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disableWheel": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "formatOptions": Object {
+        "args": Array [
+          Object {
+            "compactDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currency": Object {
+              "type": "string",
+            },
+            "currencyDisplay": Object {
+              "args": Array [
+                Array [
+                  "symbol",
+                  "narrowSymbol",
+                  "code",
+                  "name",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currencySign": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "accounting",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "localeMatcher": Object {
+              "args": Array [
+                Array [
+                  "best fit",
+                  "lookup",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "maximumFractionDigits": Object {
+              "type": "number",
+            },
+            "maximumSignificantDigits": Object {
+              "type": "number",
+            },
+            "minimumFractionDigits": Object {
+              "type": "number",
+            },
+            "minimumIntegerDigits": Object {
+              "type": "number",
+            },
+            "minimumSignificantDigits": Object {
+              "type": "number",
+            },
+            "notation": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "scientific",
+                  "engineering",
+                  "compact",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "numberingSystem": Object {
+              "type": "string",
+            },
+            "roundingIncrement": Object {
+              "type": "number",
+            },
+            "roundingMode": Object {
+              "args": Array [
+                Array [
+                  "ceil",
+                  "floor",
+                  "expand",
+                  "trunc",
+                  "halfCeil",
+                  "halfFloor",
+                  "halfExpand",
+                  "halfTrunc",
+                  "halfEven",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "signDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "never",
+                  "always",
+                  "exceptZero",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "style": Object {
+              "args": Array [
+                Array [
+                  "decimal",
+                  "currency",
+                  "percent",
+                  "unit",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "trailingZeroDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "stripIfInteger",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "unit": Object {
+              "type": "string",
+            },
+            "unitDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "narrow",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "useGrouping": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "bool",
+                  },
+                  Object {
+                    "args": Array [
+                      Array [
+                        "always",
+                        "auto",
+                        "min2",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
+        ],
+        "type": "shape",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "hideSteppers": Object {
+        "type": "bool",
+      },
+      "iconDescription": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "inputMode": Object {
+        "args": Array [
+          Array [
+            "none",
+            "text",
+            "tel",
+            "url",
+            "email",
+            "numeric",
+            "decimal",
+            "search",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "light": [Function],
+      "locale": Object {
+        "type": "string",
+      },
+      "max": Object {
+        "type": "number",
+      },
+      "min": Object {
+        "type": "number",
+      },
+      "onBlur": Object {
+        "type": "func",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyUp": Object {
+        "type": "func",
+      },
+      "pattern": Object {
+        "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": [Function],
+      "step": Object {
+        "type": "number",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "number",
+            "text",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
   "OrderedList" => Object {
     "defaultProps": Object {
       "isExpressive": false,

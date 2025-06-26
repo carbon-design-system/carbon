@@ -88,6 +88,7 @@ export {
   NotificationTextDetails,
 } from './components/Notification';
 export NumberInput from './components/NumberInput';
+export NumberInputV2 from './components/NumberInputV2';
 export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
