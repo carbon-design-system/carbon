@@ -20,10 +20,10 @@ import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import DatePickerInput from '../DatePickerInput';
-import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
+import { appendToPlugin } from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
@@ -217,7 +217,7 @@ export interface DatePickerProps {
   /**
    * The DOM element the flatpickr should be inserted into `<body>` by default.
    */
-  appendTo?: object;
+  appendTo?: HTMLElement;
 
   /**
    * The child nodes.
@@ -654,7 +654,7 @@ const DatePicker = React.forwardRef(function DatePicker(
             })
           : () => {},
         appendTo
-          ? carbonFlatpickrAppendToPlugin({
+          ? appendToPlugin({
               appendTo,
             })
           : () => {},

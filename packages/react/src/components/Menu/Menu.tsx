@@ -23,7 +23,7 @@ import { createPortal } from 'react-dom';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
@@ -378,8 +378,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   useEffect(() => {
-    if (open && focusableItems.length > 0) {
-      focusItem();
+    if (open) {
+      const raf = requestAnimationFrame(() => {
+        if (focusableItems.length > 0) {
+          focusItem();
+        }
+      });
+
+      return () => cancelAnimationFrame(raf);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, focusableItems]);
