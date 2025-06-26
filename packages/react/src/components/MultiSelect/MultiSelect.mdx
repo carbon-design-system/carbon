@@ -119,6 +119,31 @@ For more information, checkout the Downshift prop
 
 <ArgTypes />
 
+## `inputProps`
+
+Use `inputProps` to specify native input attributes to place on the `<input>`.  
+These are passed to [Downshift's `getInputProps()`](https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops) 
+and will override the internal input props.
+
+
+### Using `maxLength`
+
+The native `maxLength` attribute can be included in `inputProps` to define the maximum string length that the user can enter into the input.
+
+When using `maxLength`, ensure the limit is communicated to the user through both `helperText` and `invalidText`/`warnText`.
+
+```jsx
+<FilterableMultiSelect
+  inputProps={{ maxLength: 5 }}
+  id="test-combo"
+  items={[{ label: 'Item 1' }]}
+  titleText="Abbreviation"
+  helperText="Provide an abbreviation that is 5 characters or less"
+  invalidText="Abbreviations must be 5 characters or less"
+  warnText="Abbreviations must be 5 characters or less"
+/>
+```
+
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,

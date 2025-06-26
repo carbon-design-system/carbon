@@ -1339,6 +1339,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "inputProps": Object {
+        "type": "object",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -3852,6 +3855,9 @@ Map {
       },
       "initialSelectedItems": Object {
         "type": "array",
+      },
+      "inputProps": Object {
+        "type": "object",
       },
       "invalid": Object {
         "type": "bool",
