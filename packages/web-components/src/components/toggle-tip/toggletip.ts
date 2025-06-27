@@ -178,6 +178,9 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       );
 
       if (button && tooltip) {
+        // Ensure toggletip is visible when rendered in a large scrollable container (storybook parity)
+        button.scrollIntoView({ block: 'center', inline: 'center' });
+
         this.popoverController?.setPlacement({
           trigger: button as HTMLElement,
           target: tooltip as HTMLElement,

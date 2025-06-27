@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -95,6 +95,7 @@ export const ExperimentalAutoAlign = {
   args: {
     ...args,
     open: true,
+    autoalign: true,
   },
   render: ({
     alignment,
@@ -103,25 +104,32 @@ export const ExperimentalAutoAlign = {
     defaultOpen,
     alignmentAxisOffset,
   }) => html`
-    <div>
-      <cds-toggletip
-        alignment="${alignment}"
-        ?open="${open}"
-        ?autoalign="${autoalign}"
-        ?default-open="${defaultOpen}"
-        alignment-axis-offset="${alignmentAxisOffset}">
-        Toggletip label
+    <div style="width: 5000px; height: 5000px;">
+      <div
+        style="
+          position: absolute;
+          top: 2500px;
+          left: 2500px;
+          inline-size: 8rem;
+        ">
+        <cds-toggletip
+          alignment="${alignment}"
+          ?open="${open}"
+          ?autoalign="${autoalign}"
+          ?default-open="${defaultOpen}"
+          alignment-axis-offset="${alignmentAxisOffset}">
+          Toggletip label
+          <p slot="body-text">
+            Scroll the container up, down, left or right to observe how the
+            Toggletip will automatically change its position in attempt to stay
+            within the viewport. This works on initial render in addition to on
+            scroll.
+          </p>
 
-        <p slot="body-text">
-          Scroll the container up, down, left or right to observe how the
-          Toggletip will automatically change its position in attempt to stay
-          within the viewport. This works on initial render in addition to on
-          scroll.
-        </p>
-
-        <cds-link href="#" slot="actions">Link action</cds-link>
-        <cds-button size="sm" slot="actions">Button</cds-button>
-      </cds-toggletip>
+          <cds-link href="#" slot="actions">Link action</cds-link>
+          <cds-button size="sm" slot="actions">Button</cds-button>
+        </cds-toggletip>
+      </div>
     </div>
   `,
 };
