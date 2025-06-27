@@ -1,3 +1,16 @@
+fixes:
+  # Added these rules to tell Codecov to rewrite file paths found in lcov.info.
+  # The lcov.info paths are relative to 'packages/web-components/',
+  # but Codecov needs them to be relative to the 'carbon' repository root.
+  # Format: "original_prefix::new_prefix"
+
+  # Transforms "es/..." to "packages/web-components/es/..."
+  - 'es/::packages/web-components/es/'
+  # Transforms "src/..." to "packages/web-components/src/..."
+  - 'src/::packages/web-components/src/'
+  # Transforms "../feature-flags/es/..." to "packages/feature-flags/es/..."
+  # This handles the specific path for 'feature-flags' seen in your lcov.info.
+  - '../feature-flags/es/::packages/feature-flags/es/'
 coverage:
   status:
     project:
@@ -62,7 +75,7 @@ component_management:
     - component_id: web-components
       name: web-components
       paths:
-        - es/components/**
-        - es/icons/**
-        - src/components/**
-        - src/globals/**
+        - packages/web-components/es/components/**
+        - packages/web-components/es/icons/**
+        - packages/web-components/src/components/**
+        - packages/web-components/src/globals/**
