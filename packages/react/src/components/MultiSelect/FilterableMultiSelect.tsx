@@ -625,7 +625,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           return { ...changes };
         }
 
-        return { ...changes, highlightedIndex: null };
+        return {
+          ...changes,
+          highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
+        };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
@@ -635,6 +638,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
+        setIsOpen(changes.isOpen || false);
         validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
           return { ...changes };
@@ -642,7 +646,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         return {
           ...changes,
           isOpen: false,
-          highlightedIndex: null,
+          highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
         };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
