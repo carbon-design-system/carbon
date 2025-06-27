@@ -232,7 +232,7 @@ Toggletip.propTypes = {
   ]),
 
   /**
-   * Provide an offset value for alignment axis.
+   * Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
    */
   alignmentAxisOffset: PropTypes.number,
 
