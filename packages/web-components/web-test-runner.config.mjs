@@ -6,6 +6,6 @@ export default {
   coverageConfig: {
     report: true,
     reportDir: '../../coverage-web-components',
-    reporters: ['lcov'],
+    reporters: ['text-summary'],
   },
 };
