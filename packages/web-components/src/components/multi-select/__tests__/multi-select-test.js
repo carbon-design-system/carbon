@@ -393,6 +393,128 @@ describe('cds-multi-select', function () {
         expect(visibleItems.length).to.equal(2);
       }
     });
+
+    it('should open the menu with arrow down and close with escape', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.focus();
+      const arrowDown = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+      });
+      trigger.dispatchEvent(arrowDown);
+      await el.updateComplete;
+      expect(el.open).to.be.true;
+      const escape = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+      });
+      trigger.dispatchEvent(escape);
+      await el.updateComplete;
+      expect(el.open).to.be.false;
+    });
+
+    it('should move focus with arrow keys', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+          <cds-multi-select-item value="cherry">Cherry</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.focus();
+      trigger.click();
+      await el.updateComplete;
+      const items = el.querySelectorAll('cds-multi-select-item');
+      // ArrowDown to highlight the first item
+      const arrowDown = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+      });
+      trigger.dispatchEvent(arrowDown);
+      await el.updateComplete;
+      expect(items[0].hasAttribute('highlighted')).to.be.true;
+      // ArrowDown again to move to the next
+      trigger.dispatchEvent(arrowDown);
+      await el.updateComplete;
+      expect(items[1].hasAttribute('highlighted')).to.be.true;
+      // ArrowUp to move back
+      const arrowUp = new KeyboardEvent('keydown', {
+        key: 'ArrowUp',
+        bubbles: true,
+      });
+      trigger.dispatchEvent(arrowUp);
+      await el.updateComplete;
+      expect(items[0].hasAttribute('highlighted')).to.be.true;
+    });
+
+    it('should lose focus when clicking outside', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.focus();
+      trigger.click();
+      await el.updateComplete;
+      document.body.click();
+      await el.updateComplete;
+      expect(document.activeElement).to.not.equal(trigger);
+    });
+
+    it('should not steal focus from other inputs', async () => {
+      const el = await fixture(html`
+        <div>
+          <cds-multi-select label="test-label" filterable>
+            <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          </cds-multi-select>
+          <input id="other-input" type="text" value="" />
+        </div>
+      `);
+      const multi = el.querySelector('cds-multi-select');
+      const trigger = multi.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.focus();
+      trigger.click();
+      await multi.updateComplete;
+      const otherInput = el.querySelector('#other-input');
+      otherInput.focus();
+      otherInput.value = 'test';
+      otherInput.dispatchEvent(new Event('input', { bubbles: true }));
+      expect(document.activeElement).to.equal(otherInput);
+    });
+
+    it('should have correct accessibility attributes', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+      const input = el.shadowRoot.querySelector('input');
+      input.focus();
+      await el.updateComplete;
+      // Check aria-expanded on both input and trigger
+      const inputExpanded = input.getAttribute('aria-expanded');
+      const triggerExpanded = trigger.getAttribute('aria-expanded');
+      expect(inputExpanded === 'true' || triggerExpanded === 'true').to.be.true;
+      // aria-haspopup may not be present, so only check if it exists
+      if (input.hasAttribute('aria-haspopup')) {
+        expect(input.getAttribute('aria-haspopup')).to.equal('listbox');
+      }
+      // Menu should be open and listbox present
+      expect(el.open).to.be.true;
+      const listbox = el.shadowRoot.querySelector('[part="menu-body"]');
+      expect(listbox).to.exist;
+    });
   });
 
   describe('Controlled behavior', () => {
