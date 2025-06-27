@@ -31,7 +31,7 @@ import {
 } from '@carbon/icons-react';
 import Link from '../Link';
 import { keys, matches } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';

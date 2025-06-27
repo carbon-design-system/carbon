@@ -20,7 +20,7 @@ import React, {
   type ReactElement,
 } from 'react';
 import classNames from 'classnames';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';

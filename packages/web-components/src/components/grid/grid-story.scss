@@ -1,0 +1,96 @@
+@use '@carbon/styles/scss/grid';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+:root {
+  @include grid.css-grid();
+}
+
+.sb-css-grid-container {
+  // Gutter modes
+  .sb-grid::part(grid) {
+    background-color: $blue-20;
+    outline: 1px dashed $blue-40;
+  }
+
+  // Narrow
+  .sb-grid[narrow]::part(grid) {
+    background-color: #d6f9f9;
+    outline: 1px dashed $green-40;
+  }
+
+  // Condensed
+  .sb-grid[condensed]::part(grid) {
+    background-color: $purple-10;
+    outline: 1px dashed $purple-40;
+  }
+
+  .sb-sub-grid::part(grid) {
+    position: relative;
+    background: #eef4ff;
+    /* stylelint-disable-next-line color-named */
+    outline: 1px solid black;
+    padding-block: 2rem;
+  }
+
+  .sb-sub-grid::part(grid),
+  .sb-sub-grid:not(:is([condensed], [narrow]))::part(grid) {
+    --grid-mode-color: #97c1ff;
+  }
+
+  .sb-sub-grid[narrow]::part(grid) {
+    --grid-mode-color: #20d5d2;
+
+    background: #d6f9f9;
+  }
+
+  .sb-grid[condensed]::part(grid),
+  .sb-sub-grid[condensed]::part(grid) {
+    --grid-mode-color: #bb8eff;
+
+    background: $purple-10;
+  }
+
+  .sb-sub-grid[condensed]::part(grid) {
+    background: #f7f2ff;
+  }
+
+  .sb-sub-grid::part(grid)::before {
+    @include type-style('code-01');
+
+    position: absolute;
+    display: block;
+    padding: 0.125rem 0.25rem;
+    background: var(--grid-mode-color, #97c1ff);
+    color: $black;
+    content: 'subgrid';
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+
+  // Column
+  .sb-column {
+    --border-color: #97c1ff;
+
+    background: $white;
+    box-shadow: 0 0 0 1px var(--border-color);
+
+    min-block-size: 80px;
+  }
+
+  .sb-sub-grid[narrow]::part(grid) .sb-column,
+  .sb-grid[narrow]::part(grid) .sb-column {
+    --border-color: #20d5d2;
+  }
+
+  .sb-sub-grid[condensed]::part(grid) .sb-column,
+  .sb-grid[condensed]::part(grid) .sb-column {
+    --border-color: #bb8eff;
+  }
+}
+
+.cds--grid-part .sb-column .sb-grid::part(grid) {
+  /* stylelint-disable-next-line color-named */
+  box-shadow: 0 0 5px black;
+}
