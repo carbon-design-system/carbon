@@ -164,6 +164,13 @@ export default {
       hideNoControlsWarning: true,
     },
   },
+  argTypes: {
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const HeaderWNavigation = () => (
