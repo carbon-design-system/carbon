@@ -7,26 +7,30 @@
 
 import { sortStates, type DataTableSortState } from './sortStates';
 import { sortRows } from '../tools/sorting';
+import type { DataTableCell } from '../DataTable';
+
+export interface SortRowParams {
+  key: string;
+  sortDirection: DataTableSortState;
+  sortStates: Record<DataTableSortState, DataTableSortState>;
+  locale: string;
+  compare: (a: string | number, b: string | number, locale?: string) => number;
+}
+
+export type SortRowFn = (
+  cellA: any,
+  cellB: any,
+  options: SortRowParams
+) => number;
 
 interface Props {
   locale?: string;
-  sortRow?: (
-    cellA: any,
-    cellB: any,
-    params: {
-      key: string;
-      sortDirection: DataTableSortState;
-      sortStates: Record<DataTableSortState, DataTableSortState>;
-      locale: string;
-      compare: (a: any, b: any, locale?: string) => number;
-      rowIds: string[];
-    }
-  ) => number;
+  sortRow?: SortRowFn;
 }
 
-interface State {
+interface State<ColTypes extends any[]> {
   rowIds: string[];
-  cellsById: Record<string, { id: string; value: any }>;
+  cellsById: Record<string, DataTableCell<ColTypes[number]>>;
   initialRowOrder: string[];
   sortHeaderKey: string | null;
   sortDirection: DataTableSortState;
@@ -35,45 +39,45 @@ interface State {
 export const initialSortState = sortStates.NONE;
 
 /**
- * Determines the next sort direction for a header based on the previous state.
+ * Gets the next sort direction for a header.
  *
- * @param prevHeader - The key of the previously sorted header.
- * @param header - The key of the currently selected header.
- * @param prevState - The previous sort direction.
+ * @param prevHeader - Key of the previously sorted header.
+ * @param currentHeader - Key of the currently selected header.
+ * @param prevState - Previous sort direction.
  */
 export const getNextSortDirection = (
   prevHeader: string,
-  header: string,
+  currentHeader: string,
   prevState: DataTableSortState
 ): DataTableSortState => {
-  if (prevHeader === header) {
-    // When transitioning, we know that the sequence of states is as follows:
-    // NONE -> ASC -> DESC -> NONE
-    if (prevState === sortStates.NONE) {
-      return sortStates.ASC;
+  // Cycle for sorting the same header: NONE -> ASC -> DESC -> NONE.
+  if (prevHeader === currentHeader) {
+    switch (prevState) {
+      case sortStates.NONE:
+        return sortStates.ASC;
+      case sortStates.ASC:
+        return sortStates.DESC;
+      case sortStates.DESC:
+        return sortStates.NONE;
     }
-    if (prevState === sortStates.ASC) {
-      return sortStates.DESC;
-    }
-    return sortStates.NONE;
   }
-  // Otherwise, we have selected a new header and need to start off by sorting
-  // in descending order by default
+
+  // Sorting a new header starts at ascending order.
   return sortStates.ASC;
 };
 
 /**
- * Gets the updated sort state for the table based on the selected header.
+ * Gets the next sort state.
  *
  * @param props - Component props.
- * @param state - The current state of the `DataTable`.
- * @param key - The key of the header to sort by.
+ * @param state - Current table state.
+ * @param key - Header key to sort by.
  */
-export const getNextSortState = (
+export const getNextSortState = <ColTypes extends any[]>(
   props: Props,
-  state: State,
+  state: State<ColTypes>,
   { key }: { key: string }
-) => {
+): Pick<State<ColTypes>, 'sortHeaderKey' | 'sortDirection' | 'rowIds'> => {
   const { sortDirection, sortHeaderKey } = state;
 
   const nextSortDirection = getNextSortDirection(
@@ -86,21 +90,19 @@ export const getNextSortState = (
 };
 
 /**
- * Gets the next sorted state for the table.
+ * Gets a sort state update.
  *
  * @param props - Component props.
- * @param state - The current state of the `DataTable`.
- * @param key - The key of the header to sort by.
- * @param sortDirection - The sort direction to apply.
+ * @param state - Current state of the table.
+ * @param key - Header key to sort by.
+ * @param sortDirection - Sort direction to apply.
  */
-export const getSortedState = (
-  props: Props,
-  state: State,
+export const getSortedState = <ColTypes extends any[]>(
+  { locale, sortRow }: Props,
+  { rowIds, cellsById, initialRowOrder }: State<ColTypes>,
   key: string,
   sortDirection: DataTableSortState
-) => {
-  const { rowIds, cellsById, initialRowOrder } = state;
-  const { locale, sortRow } = props;
+): Pick<State<ColTypes>, 'rowIds' | 'sortDirection' | 'sortHeaderKey'> => {
   const nextRowIds =
     sortDirection !== sortStates.NONE
       ? sortRows({
@@ -112,6 +114,7 @@ export const getSortedState = (
           sortRow,
         })
       : initialRowOrder;
+
   return {
     sortHeaderKey: key,
     sortDirection,
