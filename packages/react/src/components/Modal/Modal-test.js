@@ -519,7 +519,9 @@ describe('Modal', () => {
               open={open}
               launcherButtonRef={focusRef}
               onClick={() => setOpen(false)}>
-              <button data-testid="close" onClick={() => setOpen(false)} />
+              <button data-testid="close" onClick={() => setOpen(false)}>
+                Close
+              </button>
             </Modal>
             <button data-testid="focusElem" ref={focusRef}>
               focus after close
@@ -537,6 +539,67 @@ describe('Modal', () => {
       await waitFor(() => {
         expect(focusElem).toHaveFocus();
       });
+    });
+  });
+
+  describe('preventCloseOnClickOutside prop validation', () => {
+    let consoleErrorSpy;
+
+    beforeEach(() => {
+      consoleErrorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should throw a prop-type warning when passiveModal=false and preventCloseOnClickOutside=false', () => {
+      render(
+        <Modal
+          open
+          passiveModal={false}
+          preventCloseOnClickOutside={false}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.'
+      );
+    });
+
+    it('should not throw a warning when passiveModal=true and preventCloseOnClickOutside=false', () => {
+      render(
+        <Modal
+          open
+          passiveModal
+          preventCloseOnClickOutside={false}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not throw a warning when passiveModal=false and preventCloseOnClickOutside=true', () => {
+      render(
+        <Modal
+          open
+          passiveModal={false}
+          preventCloseOnClickOutside={true}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
   });
 });
@@ -565,7 +628,7 @@ describe('events', () => {
     expect(screen.getByTestId('modal-6')).toHaveClass('is-visible');
   });
 
-  it('should handle close when outside of modal is clicked', async () => {
+  it('should not close when clicking outside non-passive modal', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -589,6 +652,23 @@ describe('events', () => {
 
     const outerModal = screen.getByTestId('modal-7');
     await userEvent.click(outerModal);
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should close when clicking outside passive modal', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        passiveModal
+        onRequestClose={onRequestClose}
+        data-testid="modal-passive">
+        <p>This is a passive modal</p>
+      </Modal>
+    );
+
+    const backgroundLayer = screen.getByRole('presentation');
+    await userEvent.click(backgroundLayer);
     expect(onRequestClose).toHaveBeenCalled();
   });
 

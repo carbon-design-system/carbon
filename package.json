@@ -38,7 +38,8 @@
     "react": "~19.1.0",
     "react-dom": "~19.1.0",
     "react-is": "~19.1.0",
-    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch"
+    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
+    "brace-expansion": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -80,7 +81,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rimraf": "^5.0.0",
-    "stylelint": "^16.0.0"
+    "stylelint": "^16.0.0",
+    "typescript-eslint": "^8.34.0"
   },
   "commitlint": {
     "extends": [
@@ -150,5 +152,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.9.2"
 }
