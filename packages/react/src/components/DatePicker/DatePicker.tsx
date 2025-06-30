@@ -23,7 +23,7 @@ import DatePickerInput from '../DatePickerInput';
 import { appendToPlugin } from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
