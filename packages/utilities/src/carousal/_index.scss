@@ -1,0 +1,68 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/motion' as *;
+
+$prefix: 'carousal' !default;
+$animateTime: $duration-moderate-01;
+
+.#{$prefix}__view-stack .#{$prefix}__itemsWrapper {
+  position: relative;
+  overflow: hidden;
+  min-block-size: 100%;
+  min-inline-size: 100%;
+}
+
+.#{$prefix}__view {
+  position: absolute;
+  z-index: 80;
+  overflow: hidden auto;
+  block-size: 100%;
+  inline-size: 100%;
+  inset-inline-start: 100%;
+  transform: translateX(0);
+  transition: transform $animateTime $standard-easing;
+}
+
+.#{$prefix}__view-active {
+  z-index: 100;
+  transform: translateX(-100%);
+}
+
+.#{$prefix}__view-in-stack {
+  z-index: 90;
+  transform: translateX(-200%);
+}
+
+@keyframes out-to-active {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes active-to-out {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.#{$prefix}__view-recycle-in {
+  z-index: 100;
+  animation: out-to-active $animateTime $standard-easing forwards;
+}
+
+.#{$prefix}__view-recycle-out {
+  z-index: 90;
+  animation: active-to-out $animateTime $standard-easing forwards;
+}
