@@ -256,23 +256,23 @@ describe('cds-multi-select', function () {
       }
     });
 
-    it('should respect deprecated ai-label slot', async () => {
+    it('should respect deprecated slug slot', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label">
           <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
-          <cds-ai-label slot="ai-label"></cds-ai-label>
+          <cds-ai-label slot="slug"></cds-ai-label>
         </cds-multi-select>
       `);
 
-      const aiLabelSlot = el.shadowRoot.querySelector('slot[name="ai-label"]');
-      if (aiLabelSlot) {
-        const assigned = aiLabelSlot.assignedNodes({ flatten: true });
-        const aiLabel = assigned.find(
+      const slugSlot = el.shadowRoot.querySelector('slot[name="slug"]');
+      if (slugSlot) {
+        const assigned = slugSlot.assignedNodes({ flatten: true });
+        const slug = assigned.find(
           (node) =>
             node.nodeType === Node.ELEMENT_NODE &&
             node.tagName.toLowerCase() === 'cds-ai-label'
         );
-        expect(aiLabel).to.exist;
+        expect(slug).to.exist;
       }
     });
 
@@ -678,7 +678,499 @@ describe('cds-multi-select', function () {
       expect(changeEventTriggered).to.be.false;
     });
   });
+  describe('Select All Functionality', () => {
+    it('should render select-all item when select-all attribute is present', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+        </cds-multi-select>
+      `);
 
+      expect(el.selectAll).to.be.true;
+      expect(el.hasAttribute('select-all')).to.be.true;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      expect(selectAllItem).to.exist;
+      expect(selectAllItem.hasAttribute('is-select-all')).to.be.true;
+    });
+
+    it('should select all items when select-all is clicked', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all value=""
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+          <cds-multi-select-item value="item-2">Item 2</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const regularItems = el.querySelectorAll(
+        'cds-multi-select-item:not([is-select-all])'
+      );
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      regularItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.false;
+      });
+
+      selectAllItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      regularItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.true;
+      });
+
+      const cleanValue = el.value.replace(/^,/, '');
+      expect(cleanValue).to.equal('item-0,item-1,item-2');
+    });
+
+    it('should deselect all items when select-all is clicked while all are selected', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          select-all
+          value="item-0,item-1,item-2">
+          <cds-multi-select-item is-select-all selected
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0" selected
+            >Item 0</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-1" selected
+            >Item 1</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-2" selected
+            >Item 2</cds-multi-select-item
+          >
+        </cds-multi-select>
+      `);
+
+      await el.updateComplete;
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const regularItems = el.querySelectorAll(
+        'cds-multi-select-item:not([is-select-all])'
+      );
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      regularItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.true;
+      });
+
+      selectAllItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      regularItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.false;
+      });
+      expect(el.value).to.equal('');
+    });
+
+    it('should show indeterminate state when some but not all items are selected', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+          <cds-multi-select-item value="item-2">Item 2</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const firstItem = el.querySelector(
+        'cds-multi-select-item[value="item-0"]'
+      );
+
+      firstItem.click();
+      await el.updateComplete;
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
+      expect(firstItem.hasAttribute('selected')).to.be.true;
+      expect(el.value).to.equal('item-0');
+    });
+
+    it('should clear indeterminate state and clear all when select-all is clicked in indeterminate state', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all value=""
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+          <cds-multi-select-item value="item-2">Item 2</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const firstItem = el.querySelector(
+        'cds-multi-select-item[value="item-0"]'
+      );
+      const regularItems = el.querySelectorAll(
+        'cds-multi-select-item:not([is-select-all])'
+      );
+
+      firstItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
+
+      selectAllItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+      regularItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.false;
+      });
+
+      expect(el.value).to.equal('');
+    });
+
+    it('should not select disabled items when select-all is clicked', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all value=""
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1" disabled
+            >Item 1 (disabled)</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-2">Item 2</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const enabledItems = el.querySelectorAll(
+        'cds-multi-select-item:not([is-select-all]):not([disabled])'
+      );
+      const disabledItem = el.querySelector('cds-multi-select-item[disabled]');
+
+      selectAllItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      enabledItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.true;
+      });
+      expect(disabledItem.hasAttribute('selected')).to.be.false;
+
+      const cleanValue = el.value.replace(/^,/, '');
+      expect(cleanValue).to.equal('item-0,item-2');
+    });
+
+    it('should update select-all state when individual items are selected/deselected', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const firstItem = el.querySelector(
+        'cds-multi-select-item[value="item-0"]'
+      );
+      const secondItem = el.querySelector(
+        'cds-multi-select-item[value="item-1"]'
+      );
+
+      firstItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
+
+      secondItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+
+      firstItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
+
+      secondItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+    });
+
+    it('should handle select-all with keyboard navigation', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const regularItems = el.querySelectorAll(
+        'cds-multi-select-item:not([is-select-all])'
+      );
+
+      const arrowDown = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+      });
+      trigger.dispatchEvent(arrowDown);
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('highlighted')).to.be.true;
+
+      const enterEvent = new KeyboardEvent('keypress', {
+        key: 'Enter',
+        bubbles: true,
+      });
+      trigger.dispatchEvent(enterEvent);
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      regularItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.true;
+      });
+    });
+
+    it('should trigger selection events when select-all is used', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all value=""
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      let selectionEventData = null;
+      el.addEventListener('cds-multi-select-selected', (event) => {
+        selectionEventData = event.detail;
+      });
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      selectAllItem.click();
+      await el.updateComplete;
+
+      expect(selectionEventData).to.not.be.null;
+
+      const cleanValue = el.value.replace(/^,/, '');
+      expect(cleanValue).to.equal('item-0,item-1');
+    });
+
+    it('should maintain select-all position at top of list', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-multi-select-item');
+      expect(items[0].hasAttribute('is-select-all')).to.be.true;
+    });
+
+    it('should handle select-all with filterable multiselect', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all filterable>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+          <cds-multi-select-item value="cherry">Cherry</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const filterInput = el.shadowRoot.querySelector('input');
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+
+      filterInput.value = 'a';
+      filterInput.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('filtered')).to.be.false;
+
+      const visibleItems = el.querySelectorAll(
+        'cds-multi-select-item:not([filtered])'
+      );
+      expect(visibleItems.length).to.equal(3);
+
+      selectAllItem.click();
+      await el.updateComplete;
+
+      const appleItem = el.querySelector(
+        'cds-multi-select-item[value="apple"]'
+      );
+      const bananaItem = el.querySelector(
+        'cds-multi-select-item[value="banana"]'
+      );
+      const cherryItem = el.querySelector(
+        'cds-multi-select-item[value="cherry"]'
+      );
+
+      expect(appleItem.hasAttribute('selected')).to.be.true;
+      expect(bananaItem.hasAttribute('selected')).to.be.true;
+      expect(cherryItem.hasAttribute('selected')).to.be.true;
+    });
+
+    it('should clear all selections when select-all is clicked in indeterminate state', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+          <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+          <cds-multi-select-item value="item-2">Item 2</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      const firstItem = el.querySelector(
+        'cds-multi-select-item[value="item-0"]'
+      );
+      const regularItems = el.querySelectorAll(
+        'cds-multi-select-item:not([is-select-all])'
+      );
+
+      firstItem.click();
+      await el.updateComplete;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
+
+      selectAllItem.click();
+      await el.updateComplete;
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+      regularItems.forEach((item) => {
+        expect(item.hasAttribute('selected')).to.be.false;
+      });
+      expect(el.value).to.equal('');
+    });
+
+    it('should recalculate select-all state when items are dynamically added', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" select-all value="item-0">
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="item-0" selected
+            >Item 0</cds-multi-select-item
+          >
+        </cds-multi-select>
+      `);
+
+      await el.updateComplete;
+
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+
+      const newItem = document.createElement('cds-multi-select-item');
+      newItem.setAttribute('value', 'item-1');
+      newItem.textContent = 'Item 1';
+      el.appendChild(newItem);
+
+      await el.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
+    });
+  });
   describe('Validation States', () => {
     it('should handle invalid state with invalid-text', async () => {
       const el = await fixture(html`
