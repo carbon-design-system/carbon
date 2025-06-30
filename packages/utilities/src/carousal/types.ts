@@ -24,12 +24,18 @@ type ActiveItem = {
   item: HTMLElement | null;
 };
 
+export type Config = {
+  onViewChangeStart?: (args: CarousalResponse) => void;
+  onViewChangeEnd?: (args: CarousalResponse) => void;
+  excludeSwipeSupport?: boolean;
+};
+
 interface InitCarousal {
   next: () => void;
   prev: () => void;
   reset: () => void;
   goToIndex: (index: number) => void;
   getActiveItem: () => ActiveItem;
-  destroyEvents: () => void;
+  destroyEvents: (() => void) | null;
 }
 export type { CarousalStackHistory, CarousalResponse, InitCarousal };

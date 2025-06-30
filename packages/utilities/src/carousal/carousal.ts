@@ -5,18 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { InitCarousal, CarousalResponse, CarousalStackHistory } from './types';
+import {
+  InitCarousal,
+  CarousalResponse,
+  CarousalStackHistory,
+  Config,
+} from './types';
 import { registerSwipeEvents } from './swipeEvents';
 
 export const initCarousal = (
   carousalContainer: HTMLElement,
-  onViewChangeStart: (args: CarousalResponse) => void,
-  onViewChangeEnd: (args: CarousalResponse) => void
+  config?: Config
 ): InitCarousal => {
   const prefix = 'carousal';
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
   let refs: Record<number, HTMLElement | null> = {};
+
+  const { onViewChangeStart, onViewChangeEnd, excludeSwipeSupport } =
+    config as Config;
 
   const registerRef = (index: number, ref: HTMLElement) => {
     refs = { ...refs, [index]: ref };
@@ -257,7 +264,9 @@ export const initCarousal = (
     : [];
   carousalContainer.classList.add(`${prefix}__view-stack`);
   performAnimation(true);
-  registerSwipeEvents(carousalContainer, navigateNext, navigatePrev, false);
+  if (!excludeSwipeSupport) {
+    registerSwipeEvents(carousalContainer, navigateNext, navigatePrev, false);
+  }
 
   return {
     next: navigateNext,
@@ -265,6 +274,6 @@ export const initCarousal = (
     reset: reset,
     goToIndex: goToIndex,
     getActiveItem: getActiveItem,
-    destroyEvents: destroyEvents,
+    destroyEvents: !excludeSwipeSupport ? destroyEvents : null,
   };
 };
