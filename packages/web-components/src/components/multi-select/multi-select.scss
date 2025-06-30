@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -34,6 +34,7 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu {
     inset-block-start: 100%;
     margin-block-start: 1px;
+    outline: none;
   }
 
   .#{$prefix}--text-input {
@@ -47,10 +48,18 @@ $css--plex: true !default;
 
   .#{$prefix}--tag--disabled {
     @extend .#{$prefix}--tag--disabled;
+
+    background-color: transparent;
+    color: $text-disabled;
   }
 
   .#{$prefix}--list-box__field:focus {
     @extend .#{$prefix}--multi-select--filterable--input-focused;
+  }
+
+  /* stylelint-disable declaration-no-important */
+  .#{$prefix}--list-box__selection--multi::after {
+    display: none !important;
   }
 }
 
@@ -60,8 +69,8 @@ $css--plex: true !default;
   outline-offset: -#{$spacing-01};
 }
 
-:host(#{$prefix}-multi-select[filterable])
-  .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+:host(#{$prefix}-multi-select[filterable][has-value])
+  .#{$prefix}--list-box__field
   ~ ::slotted(#{$prefix}-ai-label) {
   inset-inline-end: calc($spacing-10 + 18px);
 }
@@ -102,7 +111,7 @@ $css--plex: true !default;
 
   display: block;
 
-  .#{$prefix}--checkbox-label {
+  #{$prefix}-checkbox::part(label) {
     display: inline-block;
     overflow: hidden;
     inline-size: 100%;
@@ -124,6 +133,10 @@ $css--plex: true !default;
     > .#{$prefix}--form-item {
       flex-direction: row;
     }
+  }
+  // make the checkbox element transparent to mouse events so it doesn't interfere
+  #{$prefix}-checkbox {
+    pointer-events: none;
   }
 }
 
@@ -152,8 +165,11 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select-item[disabled]) {
-  color: $text-disabled;
-  text-decoration: none;
+  cursor: not-allowed;
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-disabled;
+    text-decoration: none;
+  }
 }
 
 :host(#{$prefix}-multi-select-item[highlighted]) {
@@ -162,7 +178,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-multi-select-item[selected]) {
   @extend .#{$prefix}--list-box__menu-item--active;
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
     color: $text-primary;
@@ -208,5 +223,60 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-10;
+  }
+}
+
+// When select all is turned on, the first item in the listbox
+// is always the "Select all" option and gets special border
+// treatment
+:host(#{$prefix}-multi-select-item[is-select-all]) {
+  .#{$prefix}--list-box__menu-item__option {
+    padding: 0.6875rem $spacing-05;
+    margin: 0;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+}
+
+// When select all is turned on, the second item in the list
+// has special treatment to look correct against the "Select all"
+// border treatment, this second item (index=1) gets a `flush-top` attribute
+// so that we can remove its top border.
+:host(#{$prefix}-multi-select-item[flush-top])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start: none;
+}
+
+// remove focus outline for when the label is out of focus
+:host(#{$prefix}-multi-select)
+  .#{$prefix}--list-box__field.no-focus-style:focus,
+:host(#{$prefix}-multi-select)
+  .#{$prefix}--list-box__field.no-focus-style:focus-within {
+  outline: none;
+}
+
+:host(#{$prefix}-multi-select[ai-label])
+  .#{$prefix}--list-box__wrapper--decorator {
+  @include ai-gradient;
+}
+
+:host(#{$prefix}-multi-select[item-clicked]) .#{$prefix}--list-box__field {
+  outline: 1px solid $focus !important;
+  outline-offset: -1px !important;
+}
+
+:host(#{$prefix}-multi-select[warn]) {
+  .#{$prefix}--form__helper-text {
+    color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-multi-select[disabled]) {
+  .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__selection {
+    pointer-events: none;
+  }
+  .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--list-box__selection:focus {
+    outline: none !important;
   }
 }

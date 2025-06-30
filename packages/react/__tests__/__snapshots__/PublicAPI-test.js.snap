@@ -2031,6 +2031,9 @@ Map {
     },
     "TableContainer": Object {
       "propTypes": Object {
+        "aiEnabled": Object {
+          "type": "bool",
+        },
         "children": Object {
           "type": "node",
         },
@@ -5916,6 +5919,9 @@ Map {
       "min": Object {
         "type": "number",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onChange": Object {
         "type": "func",
       },
@@ -8384,6 +8390,9 @@ Map {
   },
   "TableContainer" => Object {
     "propTypes": Object {
+      "aiEnabled": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
