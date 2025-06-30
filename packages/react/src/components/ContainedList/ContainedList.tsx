@@ -162,7 +162,7 @@ const ContainedList: ContainedListType = ({
          * Ref https://bugs.webkit.org/show_bug.cgi?id=170179#c1
          */
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
-        <ul role="list" aria-labelledby={labelId}>
+        <ul role="list" aria-labelledby={label ? labelId : undefined}>
           {isActionSearch ? filteredChildren : renderedChildren}
         </ul>
       )}
