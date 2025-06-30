@@ -21,7 +21,7 @@ import { IconButton } from '../IconButton';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
