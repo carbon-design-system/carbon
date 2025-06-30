@@ -8,7 +8,7 @@
 import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { useFallbackId } from '../../internal/useId';
@@ -204,6 +204,9 @@ const Pagination = React.forwardRef(function Pagination(
 
   const [page, setPage] = useState(controlledPage);
   const [prevControlledPage, setPrevControlledPage] = useState(controlledPage);
+  const [focusTarget, setFocusTarget] = useState<'backward' | 'forward' | null>(
+    null
+  );
 
   const [pageSize, setPageSize] = useState(() => {
     return getPageSize(pageSizes, controlledPageSize);
@@ -233,6 +236,26 @@ const Pagination = React.forwardRef(function Pagination(
     [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
   });
   const selectItems = renderSelectItems(totalPages);
+
+  const focusMap = {
+    backward: backBtnRef,
+    forward: forwardBtnRef,
+  };
+
+  const handleFocus = (target: 'backward' | 'forward') => {
+    const targetRef = focusMap[target];
+
+    if (targetRef?.current && !targetRef.current.disabled) {
+      targetRef.current.focus();
+    }
+  };
+
+  useEffect(() => {
+    if (focusTarget) {
+      handleFocus(focusTarget);
+      setFocusTarget(null);
+    }
+  }, [focusTarget]);
 
   // Sync state with props
   if (controlledPage !== prevControlledPage) {
@@ -303,8 +326,8 @@ const Pagination = React.forwardRef(function Pagination(
     // the icon button becomes disabled and the focus shifts to `main`
     // this presents an a11y problem for keyboard & screen reader users
     // instead, we want the focus to shift to the other pagination btn
-    if (nextPage === totalPages && backBtnRef?.current) {
-      backBtnRef.current.focus();
+    if (nextPage === totalPages) {
+      setFocusTarget('backward');
     }
 
     if (onChange) {
@@ -324,8 +347,8 @@ const Pagination = React.forwardRef(function Pagination(
     // the icon button becomes disabled and the focus shifts to `main`
     // this presents an a11y problem for keyboard & screen reader users
     // instead, we want the focus to shift to the other pagination btn
-    if (nextPage === 1 && forwardBtnRef?.current) {
-      forwardBtnRef.current.focus();
+    if (nextPage === 1) {
+      setFocusTarget('forward');
     }
 
     if (onChange) {

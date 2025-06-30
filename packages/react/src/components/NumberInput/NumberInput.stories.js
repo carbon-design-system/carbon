@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NumberInput } from './';
 import NumberInputSkeleton from './NumberInput.Skeleton';
 import Button from '../Button';
@@ -165,6 +165,20 @@ export const withAILabel = (args) => {
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
+// TODO: for testing. remove before marking ready for review
+const handleOnChange = (event, state) => {
+  console.log(`-------onChange--------`);
+  console.log(event.target);
+  console.log(state?.value);
+  console.log(state?.direction);
+};
+
+// TODO: for testing. remove before marking ready for review
+const handleOnBlur = (event) => {
+  console.log(`--------onBlur--------`);
+  console.log(event.target);
+};
+
 export const WithTypeOfText = (args) => {
   const locale = useDocumentLang();
 
@@ -179,6 +193,8 @@ export const WithTypeOfText = (args) => {
       helperText="Optional helper text."
       {...args}
       locale={locale}
+      onChange={handleOnChange}
+      onBlur={handleOnBlur}
     />
   );
 };
@@ -195,6 +211,62 @@ WithTypeOfText.args = {
   type: 'text',
 };
 WithTypeOfText.argTypes = {
+  locale: { control: { type: 'text' } },
+  formatOptions: { control: { type: 'object' } },
+  ...sharedArgTypes,
+};
+
+// TODO: for testing, remove before marking ready for review
+export const WithTypeOfTextControlled = (args) => {
+  const locale = useDocumentLang();
+  const [value, setValue] = useState(NaN);
+
+  return (
+    <>
+      <NumberInput
+        id="default-number-input"
+        min={reusableProps.min}
+        max={reusableProps.max}
+        type="text"
+        inputMode="decimal"
+        label="NumberInput label"
+        helperText="Optional helper text."
+        {...args}
+        locale={locale}
+        value={value}
+        onChange={(event, state) => {
+          handleOnChange(event, state);
+          console.log(`setting value to:`);
+          console.log(state.value);
+          setValue(state.value);
+        }}
+        onBlur={(event) => {
+          handleOnBlur(event);
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          setValue(50);
+        }}>
+        set to 50
+      </button>
+    </>
+  );
+};
+WithTypeOfTextControlled.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+  helperText: 'Optional helper text.',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+  type: 'text',
+};
+WithTypeOfTextControlled.argTypes = {
   locale: { control: { type: 'text' } },
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
