@@ -14,7 +14,6 @@ import styles from './ai-label.scss?lit';
 import Undo16 from '@carbon/icons/lib/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import events from 'storybook/internal/core-events';
 
 /**
  * Basic AI Label.
@@ -95,7 +94,11 @@ class CDSAILabel extends CDSToggleTip {
   };
 
   protected _handleClick = () => {
-    (document.activeElement as HTMLElement | null)?.blur();
+    const activeElement = document.activeElement;
+    if (activeElement instanceof HTMLElement) {
+      activeElement.blur();
+    }
+
     if (this.revertActive) {
       this.revertActive = false;
       this.removeAttribute('revert-active');
@@ -106,12 +109,8 @@ class CDSAILabel extends CDSToggleTip {
   };
 
   protected _handleAIKeydown = (event: React.KeyboardEvent) => {
-    if (
-      event?.key === 'Enter' ||
-      event?.key === ' ' ||
-      event?.key === 'Escape'
-    ) {
-      event?.stopPropagation();
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
+      event.stopPropagation();
     }
   };
 
