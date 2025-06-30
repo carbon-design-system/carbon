@@ -68,4 +68,4 @@ component_management:
     - component_id: web-components
       name: web-components
       paths:
-        - ../packages/web-components/**
+        - packages/web-components/**
