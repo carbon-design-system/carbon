@@ -5,7 +5,14 @@ export default {
 
   coverageConfig: {
     report: true,
-    reportDir: '../../coverage-web-components',
+    reportDir: 'coverage',
     reporters: ['lcov'],
+
+    include: [
+      'src/components/**/*.js',
+      'src/components/**/*.ts',
+      'es/components/**/*.js',
+      'es/components/**/*.ts',
+    ],
   },
 };
