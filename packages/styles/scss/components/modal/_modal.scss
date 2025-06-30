@@ -65,14 +65,24 @@
     @include update_fields_on_layer;
   }
 
-  .#{$prefix}--modal--enable-presence {
-    @include modal-container-animations($has-presence: true);
-  }
+  // For modals using the native dialog element, the modal visibility is handled
+  // by the Dialog styles.
+  @if not(
+    enabled('enable-experimental-focus-wrap-without-sentinels') or
+      $enable-experimental-focus-wrap-without-sentinels or
+      enabled('enable-dialog-element') or
+      $enable-dialog-element
+  )
+  {
+    .#{$prefix}--modal--enable-presence {
+      @include modal-container-animations($has-presence: true);
+    }
 
-  :not(.#{$prefix}--modal--enable-presence) {
-    @include modal-container-animations(
-      $has-presence: enabled('enable-presence') or $enable-presence
-    );
+    :not(.#{$prefix}--modal--enable-presence) {
+      @include modal-container-animations(
+        $has-presence: enabled('enable-presence') or $enable-presence
+      );
+    }
   }
 
   // -----------------------------

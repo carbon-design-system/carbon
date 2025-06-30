@@ -715,7 +715,8 @@ const ModalInner = React.forwardRef(function Modal(
       role={isAlertDialog ? 'alertdialog' : ''}
       aria-describedby={isAlertDialog ? modalBodyId : ''}
       className={containerClasses}
-      aria-label={ariaLabel}>
+      aria-label={ariaLabel}
+      data-exiting={isExiting || undefined}>
       <div className={`${prefix}--modal-header`}>
         {modalLabel && (
           <Text
