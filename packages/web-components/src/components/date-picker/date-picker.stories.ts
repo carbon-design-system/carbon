@@ -33,10 +33,8 @@ const defaultArgs = {
   readonly: false,
   short: false,
   helperText: '',
-  warning: false,
-  warningText: '',
-  invalid: false,
-  invalidText: '',
+  warn: false,
+  warnText: '',
   placeholder: 'mm/dd/yyyy',
   size: INPUT_SIZE.MEDIUM,
 };
@@ -58,15 +56,6 @@ const controls = {
   },
   disabled: { control: 'boolean' },
   helperText: { control: 'text' },
-  invalid: {
-    control: 'boolean',
-    description: 'Specify whether or not the control is invalid (Fluid only).',
-  },
-  invalidText: {
-    control: 'text',
-    description:
-      'Provide the text that is displayed when the control is in error state (Fluid Only).',
-  },
   maxDate: {
     control: 'text',
     description: 'The maximum date that a user can pick to.',
@@ -86,15 +75,14 @@ const controls = {
     description: '<code>true</code> to use the short version.',
   },
   size: { control: 'select', options: sizes },
-  warning: {
+  warn: {
     control: 'boolean',
-    description:
-      'Specify whether the control is currently in warning state (Fluid only).',
+    description: 'Specify whether the control is currently in warning state.',
   },
-  warningText: {
+  warnText: {
     control: 'text',
     description:
-      'Provide the text that is displayed when the control is in warning state (Fluid only).',
+      'Provide the text that is displayed when the control is in warning state.',
   },
   onChange: {
     action: `${prefix}-date-picker-changed`,
@@ -129,32 +117,42 @@ export const Default = {
     allowInput,
     closeOnSelect,
     dateFormat,
+    disabled,
     kind,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <cds-date-picker
         allow-input="${allowInput}"
         close-on-select="${closeOnSelect}"
         date-format="${dateFormat}"
+        ?disabled="${disabled}"
         max-date="${maxDate}"
-        min-date="${minDate}">
+        min-date="${minDate}"
+        ?readonly="${readonly}">
         <cds-date-picker-input
-          kind="${kind}"
+          kind="${kind === 'range' ? 'from' : kind}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
-          size="${size}">
+          size="${size}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
         </cds-date-picker-input>
         ${kind === 'range'
           ? html`
               <cds-date-picker-input
-                kind="${kind}"
+                kind="to"
                 label-text="End date"
                 placeholder="${placeholder}"
-                size="${size}">
+                size="${size}"
+                ?warn="${warn}"
+                warn-text="${warnText}">
               </cds-date-picker-input>
             `
           : null}
@@ -170,29 +168,39 @@ export const RangeWithCalendar = {
     allowInput,
     closeOnSelect,
     dateFormat,
+    disabled,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <cds-date-picker
         allow-input="${allowInput}"
         close-on-select="${closeOnSelect}"
         date-format="${dateFormat}"
+        ?disabled="${disabled}"
         max-date="${maxDate}"
-        min-date="${minDate}">
+        min-date="${minDate}"
+        ?readonly="${readonly}">
         <cds-date-picker-input
           kind="from"
           label-text="Start date"
           placeholder="${placeholder}"
-          size="${size}">
+          size="${size}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
         </cds-date-picker-input>
         <cds-date-picker-input
           kind="to"
           label-text="End date"
           placeholder="${placeholder}"
-          size="${size}">
+          size="${size}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
         </cds-date-picker-input>
       </cds-date-picker>
     `;
@@ -206,10 +214,14 @@ export const RangeWithCalendarWithLayer = {
     allowInput,
     closeOnSelect,
     dateFormat,
+    disabled,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <sb-template-layers>
@@ -217,19 +229,25 @@ export const RangeWithCalendarWithLayer = {
           allow-input="${allowInput}"
           close-on-select="${closeOnSelect}"
           date-format="${dateFormat}"
+          ?disabled="${disabled}"
           max-date="${maxDate}"
-          min-date="${minDate}">
+          min-date="${minDate}"
+          ?readonly="${readonly}">
           <cds-date-picker-input
             kind="from"
             label-text="Start date"
             placeholder="${placeholder}"
-            size="${size}">
+            size="${size}"
+            ?warn="${warn}"
+            warn-text="${warnText}">
           </cds-date-picker-input>
           <cds-date-picker-input
             kind="to"
             label-text="End date"
             placeholder="${placeholder}"
-            size="${size}">
+            size="${size}"
+            ?warn="${warn}"
+            warn-text="${warnText}">
           </cds-date-picker-input>
         </cds-date-picker>
       </sb-template-layers>
@@ -244,10 +262,14 @@ export const Simple = {
     allowInput,
     closeOnSelect,
     dateFormat,
+    disabled,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <cds-date-picker
@@ -257,9 +279,13 @@ export const Simple = {
         max-date="${maxDate}"
         min-date="${minDate}">
         <cds-date-picker-input
+          ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
-          size="${size}">
+          ?readonly="${readonly}"
+          size="${size}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
         </cds-date-picker-input>
       </cds-date-picker>
     `;
@@ -273,10 +299,14 @@ export const SimpleWithLayer = {
     allowInput,
     closeOnSelect,
     dateFormat,
+    disabled,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <sb-template-layers>
@@ -287,9 +317,13 @@ export const SimpleWithLayer = {
           max-date="${maxDate}"
           min-date="${minDate}">
         <cds-date-picker-input
+          ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
-          size="${size}">
+          ?readonly="${readonly}"
+          size="${size}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
         </cds-date-picker-input>
       </sb-template-layers>
   `;
@@ -303,23 +337,31 @@ export const SingleWithCalendar = {
     allowInput,
     closeOnSelect,
     dateFormat,
+    disabled,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <cds-date-picker
         allow-input="${allowInput}"
         close-on-select="${closeOnSelect}"
         date-format="${dateFormat}"
+        ?disabled="${disabled}"
         max-date="${maxDate}"
-        min-date="${minDate}">
+        min-date="${minDate}"
+        ?readonly="${readonly}">
         <cds-date-picker-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
-          size="${size}">
+          size="${size}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
         </cds-date-picker-input>
       </cds-date-picker>
     `;
@@ -332,11 +374,15 @@ export const SingleWithCalendarWithLayer = {
   render: ({
     allowInput,
     closeOnSelect,
+    disabled,
     dateFormat,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <sb-template-layers>
@@ -344,13 +390,17 @@ export const SingleWithCalendarWithLayer = {
           allow-input="${allowInput}"
           close-on-select="${closeOnSelect}"
           date-format="${dateFormat}"
+          ?disabled="${disabled}"
           max-date="${maxDate}"
-          min-date="${minDate}">
+          min-date="${minDate}"
+          ?readonly="${readonly}">
           <cds-date-picker-input
             kind="single"
             label-text="Date Picker label"
             placeholder="${placeholder}"
-            size="${size}">
+            size="${size}"
+            ?warn="${warn}"
+            warn-text="${warnText}">
           </cds-date-picker-input>
         </cds-date-picker>
       </sb-template-layers>
@@ -372,8 +422,10 @@ const skeletonControls = {
 export const Skeleton = {
   args: { hideLabel: false, range: true },
   argTypes: skeletonControls,
-  render: ({ range }) => html`
-    <cds-date-picker-input-skeleton range=${range}>
+  render: ({ hideLabel, range }) => html`
+    <cds-date-picker-input-skeleton
+      ?hide-label="${hideLabel}"
+      ?range="${range}">
     </cds-date-picker-input-skeleton>
   `,
   decorators: [(story) => html` <div>${story()}</div> `],
@@ -422,23 +474,31 @@ export const WithAILabel = {
     allowInput,
     closeOnSelect,
     dateFormat,
+    disabled,
     maxDate,
     minDate,
     placeholder,
+    readonly,
     size,
+    warn,
+    warnText,
   }) => {
     return html`
       <cds-date-picker
         allow-input="${allowInput}"
         close-on-select="${closeOnSelect}"
         date-format="${dateFormat}"
+        ?disabled="${disabled}"
         max-date="${maxDate}"
-        min-date="${minDate}">
+        min-date="${minDate}"
+        ?readonly="${readonly}">
         <cds-date-picker-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
-          size="${size}">
+          size="${size}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
