@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/accordion';
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/motion' as *;
 
 :host(#{$prefix}-accordion),
 :host(#{$prefix}-accordion-skeleton) {
@@ -67,7 +68,33 @@ $css--plex: true !default;
 
 :host(#{$prefix}-accordion-item[isFlush]),
 :host(#{$prefix}-accordion-item-skeleton[isFlush]) {
-  @extend .#{$prefix}--accordion--flush;
+  position: relative;
+  border-color: transparent;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    block-size: 1px;
+    content: '';
+    inline-size: calc(100% - #{$spacing-05} - #{$spacing-05});
+    margin-inline-start: $spacing-05;
+    transition: background $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &::before {
+    background: var(--cds-border-subtle);
+    inset-block-start: -1px;
+  }
+
+  &::after {
+    background: var(--cds-border-subtle);
+    inset-block-end: -1px;
+  }
 }
 
 :host(#{$prefix}-accordion-item[expanding]) {
