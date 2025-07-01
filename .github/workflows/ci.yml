@@ -124,6 +124,7 @@ jobs:
         run: |
           cd packages/web-components
           yarn test --coverage
+          sed -i 's|SF:es/components/|SF:packages/web-components/src/components/|g' coverage/lcov.info
 
       - name: Debug coverage file
         run: |

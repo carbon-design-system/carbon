@@ -1,8 +1,5 @@
 fixes:
-  # Path transformation rules for web-components coverage
-  # Transforms paths in lcov.info from package-relative to repo-relative
-  - 'es/::packages/web-components/es/'
-  - 'src/::packages/web-components/src/'
+  - 'es/components/::packages/web-components/src/components/'
   - '../feature-flags/es/::packages/feature-flags/es/'
 coverage:
   status:
