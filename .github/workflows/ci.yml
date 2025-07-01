@@ -87,7 +87,7 @@ jobs:
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
         run: yarn test --ci --collectCoverage
-      - name: Upload main coverage reports to Codecov
+      - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
         with:
           flags: main-packages
@@ -124,16 +124,6 @@ jobs:
         run: |
           cd packages/web-components
           yarn test --coverage
-      - name: Debug coverage file
-        run: |
-          echo "=== Coverage file location ==="
-          find packages/web-components -name "lcov.info" -type f
-          echo "=== Coverage file size ==="
-          wc -l packages/web-components/coverage/lcov.info || echo "lcov.info not found at expected location"
-          echo "=== Sample coverage entries ==="
-          grep "SF:" packages/web-components/coverage/lcov.info | head -10 || echo "Could not read lcov.info"
-          echo "=== Total files tracked ==="
-          grep "SF:" packages/web-components/coverage/lcov.info | wc -l || echo "Could not count files"
       - name: Upload web-components coverage reports to Codecov
         uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
         with:
