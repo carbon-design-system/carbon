@@ -829,7 +829,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       },
       onFocus: () => setInputFocused(true),
       onBlur: () => {
-        !isOpen && setInputFocused(false);
+        setInputFocused(false);
         setInputValue('');
       },
     })
