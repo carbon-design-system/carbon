@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Toggle/Feature Flag" name="Flag details" />
+
+# Reduced toggle label spacing
+
+Reduced spacing between the toggle control and its label to improve visual consistency with other form inputs.
+
+```scss
+@use '@carbon/react/scss/feature-flags' with (
+  $feature-flags: (
+    'enable-v12-toggle-reduced-label-spacing': true,
+  )
+);
+@use '@carbon/react';
+```
