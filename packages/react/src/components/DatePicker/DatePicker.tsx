@@ -20,10 +20,10 @@ import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import DatePickerInput from '../DatePickerInput';
-import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
+import { appendToPlugin } from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
@@ -212,7 +212,7 @@ export interface DatePickerProps {
   /**
    * The DOM element the flatpickr should be inserted into `<body>` by default.
    */
-  appendTo?: object;
+  appendTo?: HTMLElement;
 
   /**
    * The child nodes.
@@ -489,6 +489,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [calendarCloseEvent, handleCalendarClose]);
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
+  const lastFocusedField = useRef<HTMLTextAreaElement>(null);
   const savedOnChange = useSavedCallback(onChange);
 
   const savedOnOpen = useSavedCallback(onOpen);
@@ -644,7 +645,7 @@ const DatePicker = React.forwardRef(function DatePicker(
             })
           : () => {},
         appendTo
-          ? carbonFlatpickrAppendToPlugin({
+          ? appendToPlugin({
               appendTo,
             })
           : () => {},
@@ -682,32 +683,79 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     calendarRef.current = calendar;
 
-    function handleArrowDown(event) {
+    const handleInputFieldKeyDown = (event: KeyboardEvent) => {
+      const {
+        calendarContainer,
+        selectedDateElem: fpSelectedDateElem,
+        todayDateElem: fpTodayDateElem,
+      } = calendar;
+
       if (match(event, keys.Escape)) {
-        calendar?.calendarContainer?.classList.remove('open');
+        calendarContainer.classList.remove('open');
       }
 
-      if (match(event, keys.ArrowDown)) {
-        if (event.target == endInputField.current) {
-          calendar?.calendarContainer?.classList.add('open');
+      if (match(event, keys.Tab)) {
+        if (!event.shiftKey) {
+          event.preventDefault();
+          calendarContainer.classList.add('open');
+          const selectedDateElem =
+            calendarContainer.querySelector('.selected') && fpSelectedDateElem;
+          const todayDateElem =
+            calendarContainer.querySelector('.today') && fpTodayDateElem;
+          (
+            (selectedDateElem ||
+              todayDateElem ||
+              calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+              calendarContainer) as HTMLElement
+          ).focus();
+
+          if (event.target === startInputField.current) {
+            lastFocusedField.current = startInputField.current;
+          } else if (event.target === endInputField.current) {
+            lastFocusedField.current = endInputField.current;
+          }
+        } else if (
+          calendarRef.current?.isOpen &&
+          event.target === startInputField.current
+        ) {
+          calendarRef.current.close();
+          onCalendarClose(
+            calendarRef.current.selectedDates,
+            '',
+            calendarRef.current,
+            event
+          );
         }
-        const {
-          calendarContainer,
-          selectedDateElem: fpSelectedDateElem,
-          todayDateElem: fpTodayDateElem,
-        } = calendar;
-        const selectedDateElem =
-          calendarContainer.querySelector('.selected') && fpSelectedDateElem;
-        const todayDateElem =
-          calendarContainer.querySelector('.today') && fpTodayDateElem;
-        (
-          (selectedDateElem ||
-            todayDateElem ||
-            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            calendarContainer) as HTMLElement
-        ).focus();
       }
-    }
+    };
+
+    const handleCalendarKeyDown = (event: KeyboardEvent) => {
+      if (!calendarRef.current || !startInputField.current) return;
+      const lastInputField =
+        datePickerType == 'range'
+          ? endInputField.current
+          : startInputField.current;
+      if (match(event, keys.Tab)) {
+        if (!event.shiftKey) {
+          if (lastFocusedField.current === lastInputField) {
+            lastInputField.focus();
+            calendarRef.current.close();
+            onCalendarClose(
+              calendarRef.current.selectedDates,
+              '',
+              calendarRef.current,
+              event
+            );
+          } else {
+            event.preventDefault();
+            lastInputField.focus();
+          }
+        } else {
+          event.preventDefault();
+          (lastFocusedField.current || startInputField.current).focus();
+        }
+      }
+    };
 
     function handleOnChange(event) {
       const { target } = event;
@@ -739,7 +787,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     if (start) {
-      start.addEventListener('keydown', handleArrowDown);
+      start.addEventListener('keydown', handleInputFieldKeyDown);
       start.addEventListener('change', handleOnChange);
       start.addEventListener('keypress', handleKeyPress);
 
@@ -757,9 +805,16 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     if (end) {
-      end.addEventListener('keydown', handleArrowDown);
+      end.addEventListener('keydown', handleInputFieldKeyDown);
       end.addEventListener('change', handleOnChange);
       end.addEventListener('keypress', handleKeyPress);
+    }
+
+    if (calendar.calendarContainer) {
+      calendar.calendarContainer.addEventListener(
+        'keydown',
+        handleCalendarKeyDown
+      );
     }
 
     //component did unmount equivalent
@@ -782,15 +837,22 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
 
       if (start) {
-        start.removeEventListener('keydown', handleArrowDown);
+        start.removeEventListener('keydown', handleInputFieldKeyDown);
         start.removeEventListener('change', handleOnChange);
         start.removeEventListener('keypress', handleKeyPress);
       }
 
       if (end) {
-        end.removeEventListener('keydown', handleArrowDown);
+        end.removeEventListener('keydown', handleInputFieldKeyDown);
         end.removeEventListener('change', handleOnChange);
-        end.removeEventListener('change', handleKeyPress);
+        end.removeEventListener('keypress', handleKeyPress);
+      }
+
+      if (calendar.calendarContainer) {
+        calendar.calendarContainer.removeEventListener(
+          'keydown',
+          handleCalendarKeyDown
+        );
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -920,29 +982,6 @@ const DatePicker = React.forwardRef(function DatePicker(
       startInputField.current.value = value;
     }
   }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!calendarRef.current || !startInputField.current) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (
-        match(event, keys.Tab) &&
-        !event.shiftKey &&
-        document.activeElement === endInputField.current &&
-        calendarRef.current?.isOpen
-      ) {
-        calendarRef.current.close();
-        onCalendarClose(
-          calendarRef.current.selectedDates,
-          '',
-          calendarRef.current,
-          event
-        );
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown, true);
-    return () => document.removeEventListener('keydown', handleKeyDown, true);
-  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   let fluidError;
   if (isFluid) {

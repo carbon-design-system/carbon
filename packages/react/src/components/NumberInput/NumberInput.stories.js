@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NumberInput } from './';
 import NumberInputSkeleton from './NumberInput.Skeleton';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
+import { useDocumentLang } from '../../internal/useDocumentLang';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './NumberInput.mdx';
 
@@ -74,6 +75,11 @@ const sharedArgTypes = {
   },
 };
 
+const reusableProps = {
+  min: -100000000,
+  max: 100000000,
+};
+
 export const Default = (args) => {
   const [value, setValue] = React.useState(50);
 
@@ -99,7 +105,7 @@ Default.args = {
   step: 1,
   disabled: false,
   invalid: false,
-  invalidText: 'Number is not valid',
+  invalidText: `Number is not valid. Must be between -100 and 100`,
   helperText: 'Optional helper text.',
   warn: false,
   warnText:
@@ -144,8 +150,8 @@ export const withAILabel = (args) => {
   return (
     <div style={{ width: 400 }}>
       <NumberInput
-        min={-100}
-        max={100}
+        min={reusableProps.min}
+        max={reusableProps.max}
         value={50}
         label="NumberInput label"
         helperText="Optional helper text."
@@ -158,6 +164,113 @@ export const withAILabel = (args) => {
 };
 
 withAILabel.argTypes = { ...sharedArgTypes };
+
+// TODO: for testing. remove before marking ready for review
+const handleOnChange = (event, state) => {
+  console.log(`-------onChange--------`);
+  console.log(event.target);
+  console.log(state?.value);
+  console.log(state?.direction);
+};
+
+// TODO: for testing. remove before marking ready for review
+const handleOnBlur = (event) => {
+  console.log(`--------onBlur--------`);
+  console.log(event.target);
+};
+
+export const WithTypeOfText = (args) => {
+  const locale = useDocumentLang();
+
+  return (
+    <NumberInput
+      id="default-number-input"
+      min={reusableProps.min}
+      max={reusableProps.max}
+      inputMode="decimal"
+      defaultValue={50}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      {...args}
+      locale={locale}
+      onChange={handleOnChange}
+      onBlur={handleOnBlur}
+    />
+  );
+};
+WithTypeOfText.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+  helperText: 'Optional helper text.',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+  type: 'text',
+};
+WithTypeOfText.argTypes = {
+  locale: { control: { type: 'text' } },
+  formatOptions: { control: { type: 'object' } },
+  ...sharedArgTypes,
+};
+
+// TODO: for testing, remove before marking ready for review
+export const WithTypeOfTextControlled = (args) => {
+  const locale = useDocumentLang();
+  const [value, setValue] = useState(NaN);
+
+  return (
+    <>
+      <NumberInput
+        id="default-number-input"
+        min={reusableProps.min}
+        max={reusableProps.max}
+        type="text"
+        inputMode="decimal"
+        label="NumberInput label"
+        helperText="Optional helper text."
+        {...args}
+        locale={locale}
+        value={value}
+        onChange={(event, state) => {
+          handleOnChange(event, state);
+          console.log(`setting value to:`);
+          console.log(state.value);
+          setValue(state.value);
+        }}
+        onBlur={(event) => {
+          handleOnBlur(event);
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          setValue(50);
+        }}>
+        set to 50
+      </button>
+    </>
+  );
+};
+WithTypeOfTextControlled.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+  helperText: 'Optional helper text.',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+  type: 'text',
+};
+WithTypeOfTextControlled.argTypes = {
+  locale: { control: { type: 'text' } },
+  formatOptions: { control: { type: 'object' } },
+  ...sharedArgTypes,
+};
 
 export const Skeleton = () => {
   return <NumberInputSkeleton />;

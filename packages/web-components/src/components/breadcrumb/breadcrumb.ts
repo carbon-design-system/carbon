@@ -50,6 +50,9 @@ class CDSBreadcrumb extends LitElement {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'navigation');
     }
+    if (!this.hasAttribute('aria-label')) {
+      this.setAttribute('aria-label', 'Breadcrumb');
+    }
     super.connectedCallback();
   }
 
