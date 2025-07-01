@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,8 +8,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import ContentSwitcher from './ContentSwitcher';
-import Switch from '../Switch';
+import { ContentSwitcher } from './ContentSwitcher';
+import { IconSwitch, Switch } from '../Switch';
 
 describe('ContentSwitcher - RTL', () => {
   describe('renders API as expected', () => {
@@ -157,10 +157,6 @@ describe('ContentSwitcher - RTL', () => {
     });
 
     it('should have the correct attributes with iconOnly version when lowContrast is used', () => {
-      // Mock the IconSwitch component
-      const IconSwitch = (props) => <Switch {...props} />;
-      IconSwitch.displayName = 'IconSwitch';
-
       const { container } = render(
         <ContentSwitcher onChange={() => {}} lowContrast>
           <IconSwitch name="one" />
