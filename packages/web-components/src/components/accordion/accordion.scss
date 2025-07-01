@@ -42,12 +42,6 @@ $css--plex: true !default;
   border-block-end: 1px solid var(--cds-border-subtle);
 }
 
-// Prevent bottom border if flush mode is active (match React)
-//➡️ TODO: fix this later
-// :host([data-last-item][isFlush]) {
-//   border-block-end: none;
-// }
-
 :host(#{$prefix}-accordion-item[size='sm']),
 :host(#{$prefix}-accordion-item-skeleton[size='sm']) {
   button {

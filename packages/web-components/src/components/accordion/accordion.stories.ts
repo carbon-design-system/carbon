@@ -120,34 +120,31 @@ export const Controlled = {
   args: {},
   argTypes: {},
   render: () => {
+    const toggleItems = (isOpen: boolean) => {
+      document
+        .querySelectorAll('cds-accordion-item[controlled]')
+        .forEach((item) => {
+          if (isOpen) {
+            item.setAttribute('open', '');
+          } else {
+            item.removeAttribute('open');
+          }
+        });
+    };
+
     return html`
       <style>
         ${styles}
       </style>
-
-      <script>
-        const toggleItems = (isOpen) => {
-          document
-            .querySelectorAll('cds-accordion-item[controlled]')
-            .forEach((item) => {
-              if (isOpen) {
-                item.setAttribute('open', '');
-              } else {
-                item.removeAttribute('open');
-              }
-            });
-        };
-      </script>
-
       <cds-button-set class="controlled-accordion-btnset">
         <cds-button
           class="controlled-accordion-btn"
-          onclick="toggleItems(true)">
+          @click=${() => toggleItems(true)}>
           Click to expand all
         </cds-button>
         <cds-button
           class="controlled-accordion-btn"
-          onclick="toggleItems(false)">
+          @click=${() => toggleItems(false)}>
           Click to collapse all
         </cds-button>
       </cds-button-set>
