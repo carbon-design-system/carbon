@@ -393,6 +393,106 @@ export const WithLayerMultiSelect = (args) => (
   </WithLayer>
 );
 
+export const Test = () => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div
+      style={{
+        width: 600,
+      }}>
+      <div>
+        Open FilterableMultiSelect, then tab to the button. FMS stays
+        highlighted as if it has focus
+      </div>
+      <br /> <br />
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-3"
+        titleText="FilterableMultiSelect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+      />
+      <br /> <br />
+      <button id="myButton">Tab to me</button>
+    </div>
+  );
+};
+
+export const MultiselectTest = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+      <button id="myButton">Tab to me</button>
+    </div>
+  );
+};
+
 export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
