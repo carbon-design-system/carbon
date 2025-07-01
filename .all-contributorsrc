@@ -1947,6 +1947,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AnvarPK",
+      "name": "Anvar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10231751?v=4",
+      "profile": "https://github.com/AnvarPK",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
