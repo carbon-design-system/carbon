@@ -158,4 +158,54 @@ describe('cds-textarea', () => {
     const event = await oneEvent(textarea, 'click');
     expect(event).to.exist;
   });
+
+  describe('cds-textarea - core behaviors', () => {
+    it('should render slotted label-text', async () => {
+      const el = await fixture(html`
+        <cds-textarea>
+          <span slot="label-text">Slotted Label</span>
+        </cds-textarea>
+      `);
+      await el.updateComplete;
+      const slot = el.shadowRoot.querySelector('slot[name="label-text"]');
+      const content = slot.assignedNodes({ flatten: true })[0];
+      expect(content.textContent.trim()).to.include('Slotted Label');
+    });
+
+    it('should render slotted helper-text', async () => {
+      const el = await fixture(html`
+        <cds-textarea>
+          <span slot="helper-text">Slotted Helper</span>
+        </cds-textarea>
+      `);
+      await el.updateComplete;
+      const slot = el.shadowRoot.querySelector('slot[name="helper-text"]');
+      const content = slot.assignedNodes({ flatten: true })[0];
+      expect(content.textContent.trim()).to.include('Slotted Helper');
+    });
+
+    it('should render slotted invalid-text', async () => {
+      const el = await fixture(html`
+        <cds-textarea invalid>
+          <span slot="invalid-text">Slotted Invalid</span>
+        </cds-textarea>
+      `);
+      await el.updateComplete;
+      const slot = el.shadowRoot.querySelector('slot[name="invalid-text"]');
+      const content = slot.assignedNodes({ flatten: true })[0];
+      expect(content.textContent.trim()).to.include('Slotted Invalid');
+    });
+
+    it('should render slotted warn-text', async () => {
+      const el = await fixture(html`
+        <cds-textarea warn>
+          <span slot="warn-text">Slotted Warning</span>
+        </cds-textarea>
+      `);
+      await el.updateComplete;
+      const slot = el.shadowRoot.querySelector('slot[name="warn-text"]');
+      const content = slot.assignedNodes({ flatten: true })[0];
+      expect(content.textContent.trim()).to.include('Slotted Warning');
+    });
+  });
 });
