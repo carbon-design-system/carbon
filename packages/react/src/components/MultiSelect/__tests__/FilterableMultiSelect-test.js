@@ -1051,4 +1051,35 @@ describe('FilterableMultiSelect', () => {
     );
     assertMenuClosed();
   });
+
+  it('should remove focus styling when tabbing away from component', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <div>
+        <FilterableMultiSelect {...mockProps} />
+        <button data-testid="other-button">Other Button</button>
+      </div>
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    const otherButton = screen.getByTestId('other-button');
+
+    // Open the menu and verify focus styling is applied
+    await user.click(combobox);
+    assertMenuOpen(mockProps);
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Tab away to the other button
+    await user.tab();
+    expect(otherButton).toHaveFocus();
+
+    // Verify focus styling is removed
+    expect(combobox.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+  });
 });
