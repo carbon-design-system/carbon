@@ -182,7 +182,8 @@
     }
   }
 
-  // Adjust icon positioning in small, medium variants only
+  // Adjust icon positioning in extra small, small, medium variants only
+  .#{$prefix}--btn--xs:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
   .#{$prefix}--btn--sm:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
   .#{$prefix}--btn--md:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon {
     margin-block-start: 0;
