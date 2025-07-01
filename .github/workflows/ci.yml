@@ -124,8 +124,9 @@ jobs:
         run: |
           cd packages/web-components
           yarn test --coverage
-          sed -i 's|SF:es/components/|SF:packages/web-components/src/components/|g' coverage/lcov.info
-
+          awk '/^SF:es\/components\//,/^end_of_record$/' coverage/lcov.info | \
+          sed 's|SF:es/components/|SF:packages/web-components/src/components/|g' > coverage/lcov-clean.info
+          mv coverage/lcov-clean.info coverage/lcov.info
       - name: Debug coverage file
         run: |
           echo "=== Coverage file location ==="
