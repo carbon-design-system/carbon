@@ -132,3 +132,143 @@
 :host(#{$prefix}-table-batch-actions[active]) {
   @extend .#{$prefix}--batch-actions--active;
 }
+
+// Small persistent toolbar
+:host(#{$prefix}-table-toolbar[size='xs']),
+:host(#{$prefix}-table-toolbar-content[size='xs']) {
+  &,
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
+  }
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    inline-size: $spacing-07;
+  }
+}
+
+:host(#{$prefix}-table-toolbar[size='sm']),
+:host(#{$prefix}-table-toolbar-content[size='sm']) {
+  &,
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
+  }
+
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    inline-size: $spacing-07;
+  }
+}
+
+// Toolbar sizing - xl
+:host(#{$prefix}-table-toolbar[size='xl']),
+:host(#{$prefix}-table-toolbar-content[size='xl']) {
+  &,
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    block-size: $spacing-10;
+    min-block-size: $spacing-10;
+  }
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    inline-size: $spacing-10;
+  }
+}
+
+// Batch actions specific sizing - xs/sm
+:host(#{$prefix}-table-batch-actions[size='xs']),
+:host(#{$prefix}-table-batch-actions[size='sm']) {
+  // Override the base component height
+  &.#{$prefix}--batch-actions {
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
+  }
+
+  .#{$prefix}--batch-summary {
+    &__para {
+      padding: 0;
+      margin: 0;
+      block-size: $spacing-07;
+      line-height: $spacing-07;
+    }
+
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
+  }
+
+  .#{$prefix}--action-list {
+    block-size: $spacing-07;
+  }
+}
+
+// Batch actions specific sizing - md/lg (same size)
+:host(#{$prefix}-table-batch-actions[size='md']),
+:host(#{$prefix}-table-batch-actions[size='lg']) {
+  // Override the base component height
+  &.#{$prefix}--batch-actions {
+    block-size: $spacing-09;
+    min-block-size: $spacing-09;
+  }
+
+  .#{$prefix}--batch-summary {
+    block-size: $spacing-09;
+    min-block-size: $spacing-09;
+
+    &__para {
+      padding: 0;
+      margin: 0;
+      block-size: $spacing-09;
+      line-height: $spacing-09;
+    }
+  }
+
+  .#{$prefix}--action-list {
+    block-size: $spacing-09;
+  }
+}
+
+// Batch actions specific sizing - xl
+:host(#{$prefix}-table-batch-actions[size='xl']) {
+  // Override the base component height
+  &.#{$prefix}--batch-actions {
+    block-size: $spacing-10;
+    min-block-size: $spacing-10;
+  }
+
+  .#{$prefix}--batch-summary {
+    block-size: $spacing-10;
+    min-block-size: $spacing-10;
+
+    &__para {
+      padding: 0;
+      margin: 0;
+      block-size: $spacing-10;
+      line-height: $spacing-10;
+    }
+  }
+
+  .#{$prefix}--action-list {
+    block-size: $spacing-10;
+  }
+}
+
+// Transform adjustments for toolbar content when batch actions are active
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='xs']),
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='sm']) {
+  transform: translate3d(0, $spacing-07, 0);
+}
+
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='md']),
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='lg']) {
+  transform: translate3d(0, $spacing-09, 0);
+}
+
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='xl']) {
+  transform: translate3d(0, $spacing-10, 0);
+}
