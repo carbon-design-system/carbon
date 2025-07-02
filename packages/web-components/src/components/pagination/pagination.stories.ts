@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -95,55 +95,6 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
-    return html`
-      <cds-pagination start="0" total-items="103">
-        <cds-select-item value="10">10</cds-select-item>
-        <cds-select-item value="20">20</cds-select-item>
-        <cds-select-item value="30">30</cds-select-item>
-        <cds-select-item value="40">40</cds-select-item>
-        <cds-select-item value="50">50</cds-select-item>
-      </cds-pagination>
-    `;
-  },
-};
-
-export const MultiplePaginationComponents = {
-  render: () => {
-    return html`
-      <cds-pagination start="0" total-items="103">
-        <cds-select-item value="10">10</cds-select-item>
-        <cds-select-item value="20">20</cds-select-item>
-        <cds-select-item value="30">30</cds-select-item>
-        <cds-select-item value="40">40</cds-select-item>
-        <cds-select-item value="50">50</cds-select-item>
-      </cds-pagination>
-      <cds-pagination start="0" total-items="103">
-        <cds-select-item value="10">10</cds-select-item>
-        <cds-select-item value="20">20</cds-select-item>
-        <cds-select-item value="30">30</cds-select-item>
-        <cds-select-item value="40">40</cds-select-item>
-        <cds-select-item value="50">50</cds-select-item>
-      </cds-pagination>
-    `;
-  },
-};
-
-export const PaginationWithCustomPageSizesLabel = {
-  render: () => {
-    return html`
-      <cds-pagination start="0" total-items="103">
-        <cds-select-item value="10">Ten</cds-select-item>
-        <cds-select-item value="20">Twenty</cds-select-item>
-        <cds-select-item value="30">Thirty</cds-select-item>
-        <cds-select-item value="40">Forty</cds-select-item>
-        <cds-select-item value="50">Fifty</cds-select-item>
-      </cds-pagination>
-    `;
-  },
-};
-
-export const Playground = {
   args,
   argTypes,
   render: (args) => {
@@ -184,6 +135,41 @@ export const Playground = {
         <cds-select-item value="30">30</cds-select-item>
         <cds-select-item value="40">40</cds-select-item>
         <cds-select-item value="50">50</cds-select-item>
+      </cds-pagination>
+    `;
+  },
+};
+
+export const MultiplePaginationComponents = {
+  render: () => {
+    return html`
+      <cds-pagination start="0" total-items="103">
+        <cds-select-item value="10">10</cds-select-item>
+        <cds-select-item value="20">20</cds-select-item>
+        <cds-select-item value="30">30</cds-select-item>
+        <cds-select-item value="40">40</cds-select-item>
+        <cds-select-item value="50">50</cds-select-item>
+      </cds-pagination>
+      <cds-pagination start="0" total-items="103">
+        <cds-select-item value="10">10</cds-select-item>
+        <cds-select-item value="20">20</cds-select-item>
+        <cds-select-item value="30">30</cds-select-item>
+        <cds-select-item value="40">40</cds-select-item>
+        <cds-select-item value="50">50</cds-select-item>
+      </cds-pagination>
+    `;
+  },
+};
+
+export const PaginationWithCustomPageSizesLabel = {
+  render: () => {
+    return html`
+      <cds-pagination start="0" total-items="103">
+        <cds-select-item value="10">Ten</cds-select-item>
+        <cds-select-item value="20">Twenty</cds-select-item>
+        <cds-select-item value="30">Thirty</cds-select-item>
+        <cds-select-item value="40">Forty</cds-select-item>
+        <cds-select-item value="50">Fifty</cds-select-item>
       </cds-pagination>
     `;
   },

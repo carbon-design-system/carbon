@@ -89,8 +89,11 @@ jobs:
         run: yarn test --ci --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
+        with:
+          flags: main-packages
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   web-components-test:
     runs-on: ubuntu-latest
     steps:
@@ -120,7 +123,16 @@ jobs:
       - name: Run tests
         run: |
           cd packages/web-components
-          yarn test
+          yarn test --coverage
+      - name: Upload web-components coverage reports to Codecov
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
+        with:
+          files: ./packages/web-components/coverage/lcov.info
+          flags: web-components
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   e2e:
     name: 'test:e2e'
     runs-on: ubuntu-latest
