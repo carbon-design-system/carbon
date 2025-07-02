@@ -427,7 +427,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@3378c92d26c32353e53166beac732e2edc14213c # v13.0.0
+        uses: chromaui/action@b5848056bb67ce5f1cccca8e62a37cbd9dd42871 # v13.0.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
