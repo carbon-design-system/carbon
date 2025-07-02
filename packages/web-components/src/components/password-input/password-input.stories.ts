@@ -54,7 +54,7 @@ const args = {
   readonly: false,
   showPasswordLabel: 'Show Password',
   size: INPUT_SIZE.MEDIUM,
-  tooltipAlignment: INPUT_TOOLTIP_ALIGNMENT.CENTER,
+  tooltipAlignment: INPUT_TOOLTIP_ALIGNMENT.END,
   tooltipPosition: INPUT_TOOLTIP_DIRECTION.BOTTOM,
   type: 'password',
   value: '',
