@@ -70,9 +70,6 @@ class CDSAILabel extends CDSToggleTip {
   @property({ attribute: 'button-label' })
   buttonLabel = 'Show information';
 
-  @property({ type: Boolean, reflect: true })
-  open = false;
-
   @property()
   previousValue;
 
@@ -108,7 +105,7 @@ class CDSAILabel extends CDSToggleTip {
     }
   };
 
-  protected _handleAIKeydown = (event: React.KeyboardEvent) => {
+  protected _handleAIKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
       event.stopPropagation();
     }
