@@ -527,6 +527,10 @@ const Modal = React.forwardRef(function Modal(
           return primaryFocusElement;
         }
 
+        if (passiveModal) {
+          return innerModal.current;
+        }
+
         return button && button.current;
       };
 
