@@ -65,9 +65,10 @@ collect:
         - enterDelayMs
         - expanded
         - expandIconDescription
-        - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - flipped
+        - focusTrap
         - formatOptions
         - fullWidth
         - gap
@@ -84,6 +85,7 @@ collect:
         - hidePasswordLabel
         - highContrast
         - href
+        - iconClass
         - iconDescription
         - id
         - indeterminate
@@ -131,6 +133,8 @@ collect:
         - max
         - maxCount
         - menuAlignment
+        - menuOffset
+        - menuOffsetFlip
         - menuOptionsClass
         - menuTarget
         - min
@@ -173,7 +177,6 @@ collect:
         - open
         - ordered
         - orientation
-        - overflowMenuOnHover
         - page
         - pageActions
         - paragraph
@@ -184,11 +187,9 @@ collect:
         - preventCloseOnClickOutside
         - primaryButtonDisabled
         - primaryButtonText
-        - radio
         - readOnly
         - ref
         - rel
-        - render
         - renderIcon
         - renderSelectedItem
         - required
@@ -235,7 +236,6 @@ collect:
         - typeahead
         - useStaticWidth
         - useTitleInItem
-        - useZebraStyles
         - value
         - valueSelected
         - vertical
@@ -296,9 +296,6 @@ collect:
         - selectionMode
         # Copy
         - onAnimationEnd
-        # DataTable
-        - filterRows
-        - sortRow
         # DataTableSkeleton
         - columnCount
         - compact
@@ -373,6 +370,8 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # HeaderContainer
+        - render
         # HeaderMenu
         - focusRef
         - menuLinkName
@@ -452,12 +451,6 @@ collect:
         - hideSteppers
         # OrderedList
         - native
-        # OverflowMenu
-        - flipped
-        - focusTrap
-        - iconClass
-        - menuOffset
-        - menuOffsetFlip
         # OverflowMenuItem
         - closeMenu
         - handleOverflowMenuItemFocus
@@ -552,6 +545,10 @@ collect:
         - handleSwitcherItemFocus
         # Tab
         - renderButton
+        # Table
+        - experimentalAutoAlign
+        - overflowMenuOnHover
+        - useZebraStyles
         # TableBatchActions
         - onSelectAll
         - shouldShowBatchActions
@@ -561,6 +558,8 @@ collect:
         - aria-live
         # TableCell
         - hasAILabelHeader
+        # TableContainer
+        - aiEnabled
         # TableExpandHeader
         - enableExpando
         - enableToggle
@@ -570,6 +569,8 @@ collect:
         - isSortHeader
         - scope
         - sortDirection
+        # TableSelectRow
+        - radio
         # TableToolbarFilter
         - onApplyFilter
         - onResetFilter
