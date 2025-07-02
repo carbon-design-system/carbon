@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import Link from '../Link';
+import { Link } from '../Link';
 
 const prefix = 'cds';
 
@@ -129,6 +129,31 @@ describe('Link', () => {
     expect(document.body).toHaveFocus();
     await userEvent.tab();
     expect(document.body).toHaveFocus();
+  });
+
+  // check for disabled onclick handler
+  it('should not call onClick when disabled', async () => {
+    const onClick = jest.fn();
+    render(
+      <Link href="/" disabled onClick={onClick} className="some-class">
+        A simple link
+      </Link>
+    );
+    const link = screen.getByText('A simple link');
+    await userEvent.click(link);
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it('should call onClick when not disabled', async () => {
+    const onClick = jest.fn();
+    render(
+      <Link href="/" onClick={onClick} className="some-class">
+        A simple link
+      </Link>
+    );
+    const link = screen.getByText('A simple link');
+    await userEvent.click(link);
+    expect(onClick).toHaveBeenCalled();
   });
 
   describe('automated verification testing', () => {
