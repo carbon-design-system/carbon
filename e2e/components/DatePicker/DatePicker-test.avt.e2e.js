@@ -97,7 +97,7 @@ test.describe('@avt DatePicker', () => {
     // avoid flaky test failures from the keyboard press happening too quickly
     // this retries the keypress along with the focus assertion until it passes
     await expect(async () => {
-      await page.keyboard.press('ArrowDown');
+      await page.keyboard.press('Tab');
       const today = await page.locator('span.today');
       await expect(today).toBeVisible();
       await expect(today).toBeFocused();
@@ -128,7 +128,7 @@ test.describe('@avt DatePicker', () => {
       page.locator('input#date-picker-input-id-start')
     ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
-    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Tab');
     await expect(page.locator('span.today')).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('span.today')).toBeFocused();

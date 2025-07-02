@@ -19,22 +19,23 @@ import Downshift, {
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
+  forwardRef,
   useContext,
-  useState,
-  useRef,
   useEffect,
-  ReactNode,
-  FunctionComponent,
-  ForwardedRef,
-  type FocusEvent,
-  type KeyboardEvent,
-  type MouseEvent,
-  ReactElement,
   useLayoutEffect,
   useMemo,
-  forwardRef,
+  useRef,
+  useState,
+  type FocusEvent,
+  type ForwardedRef,
+  type FunctionComponent,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
 } from 'react';
-import { defaultFilterItems } from '../ComboBox/tools/filter';
+import { defaultFilterItems } from './filter';
 import {
   type MultiSelectSortingProps,
   sortingPropTypes,
@@ -49,7 +50,7 @@ import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
@@ -63,6 +64,8 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -539,6 +542,32 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     }
   }, [isOpen, onMenuChange, open]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const wrapper = document
+        .getElementById(id)
+        ?.closest(`.${prefix}--multi-select__wrapper`);
+
+      // If click is outside our component and menu is open or input is focused
+      if (wrapper && !wrapper.contains(target)) {
+        if (isOpen || inputFocused) {
+          setIsOpen(false);
+          setInputFocused(false);
+          setInputValue('');
+        }
+      }
+    };
+
+    if (inputFocused || isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, inputFocused]);
+
   const {
     getToggleButtonProps,
     getLabelProps,
@@ -701,20 +730,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }
 
   // AILabel always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   const className = cx(
     `${prefix}--multi-select`,
@@ -809,7 +829,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       },
       onFocus: () => setInputFocused(true),
       onBlur: () => {
-        !isOpen && setInputFocused(false);
+        setInputFocused(false);
         setInputValue('');
       },
     })
@@ -861,16 +881,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     : {};
 
   const clearSelectionContent =
-    controlledSelectedItems.length > 0 ? (
-      <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription} {controlledSelectedItems.length},
-        {clearSelectionText}
-      </span>
-    ) : (
-      <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription}: 0
-      </span>
-    );
+    controlledSelectedItems.length > 0
+      ? `${clearSelectionDescription} ${controlledSelectedItems.length}. ${clearSelectionText}.`
+      : `${clearSelectionDescription} 0.`;
 
   return (
     <div className={wrapperClasses}>
