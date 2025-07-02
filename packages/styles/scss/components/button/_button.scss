@@ -27,11 +27,6 @@
     @include layout.use('density', $default: 'normal');
 
     @include button-base;
-
-    // Adjust text positioning in extra small buttons
-    &.#{$prefix}--btn--xs {
-      padding-block-start: 1.5px;
-    }
   }
 
   // Reset intrinsic padding in Firefox (see #731)
@@ -185,6 +180,11 @@
         layout.density('padding-inline') - convert.to-rem(16px)
       );
     }
+  }
+
+  // Adjust text positioning in extra small variant only
+  .#{$prefix}--btn--xs:not(.#{$prefix}--btn--icon-only) {
+    padding-block-start: 1.5px;
   }
 
   // Adjust icon positioning in extra small, small, medium variants only
