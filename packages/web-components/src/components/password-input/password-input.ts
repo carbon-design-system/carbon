@@ -269,7 +269,6 @@ class CDSPasswordInput extends CDSTextInput {
           <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
             ${normalizedProps.icon}
             <input
-              autocomplete="${this.autocomplete}"
               ?autofocus="${this.autofocus}"
               class="${inputClasses}"
               ?data-invalid="${invalid}"
