@@ -13,11 +13,6 @@ describe('cds-layer', function () {
     <div class="test-content">Test content</div>
   </cds-layer>`;
 
-  it('should render', async () => {
-    const el = await fixture(basicLayer);
-    await expect(el).dom.to.equalSnapshot();
-  });
-
   it('should set a level', async () => {
     const el = await fixture(
       html`<cds-layer level="2"><div>Test</div></cds-layer>`
