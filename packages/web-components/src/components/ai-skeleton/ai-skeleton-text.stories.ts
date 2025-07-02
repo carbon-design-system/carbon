@@ -19,19 +19,20 @@ const args = {
 const argTypes = {
   heading: {
     control: 'boolean',
-    description: 'Heading (heading)',
+    description: 'Set this to true to apply heading styling.',
   },
   paragraph: {
     control: 'boolean',
-    description: 'Paragraph (paragraph)',
+    description: 'Set this to true to generate multiple lines of text.',
   },
   width: {
     control: 'text',
-    description: 'Width (width)',
+    description:
+      'Width (in px or %) of single line of text or max-width of paragraph lines.',
   },
   lineCount: {
     control: 'number',
-    description: 'Line count (linecount)',
+    description: 'The number of lines shown if paragraph is true.',
   },
 };
 

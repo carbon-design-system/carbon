@@ -26,11 +26,11 @@ const defaultArgs = {
 const controls = {
   condensed: {
     control: 'boolean',
-    description: 'Condensed (condensed)',
+    description: 'Specify if structured list is condensed, default is false.',
   },
   flush: {
     control: 'boolean',
-    description: 'Flush (flush)',
+    description: 'Specify if structured list is flush, default is false.',
   },
   hasSelection: {
     control: 'boolean',
