@@ -96,7 +96,7 @@ const argTypes = {
   },
   invalidText: {
     control: 'text',
-    description: 'Invalid text (invalid-text)',
+    description: 'Provide the text that is displayed when the control is in an invalid state',
   },
   labelText: {
     control: 'text',
