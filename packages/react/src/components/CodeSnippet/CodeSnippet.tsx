@@ -337,6 +337,7 @@ function CodeSnippet({
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
+        disabled={disabled}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
         <code id={uid} ref={innerCodeRef}>
