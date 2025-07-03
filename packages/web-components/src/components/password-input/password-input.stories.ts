@@ -69,7 +69,7 @@ const argTypes = {
   },
   disabled: {
     control: 'boolean',
-    description: 'Disabled (disabled)',
+    description: 'Specify whether the control is disabled',
   },
 
   helperText: {
