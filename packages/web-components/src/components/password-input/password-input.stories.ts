@@ -78,7 +78,7 @@ const argTypes = {
   },
   hideLabel: {
     control: 'boolean',
-    description: 'Hide label (hide-label)',
+    description: 'Specify whether or not the underlying label is visually hidden',
   },
 
   hidePasswordLabel: {
