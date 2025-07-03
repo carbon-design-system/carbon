@@ -74,11 +74,13 @@ const argTypes = {
 
   helperText: {
     control: 'text',
-    description: 'Provide text that is used alongside the control label for additional help',
+    description:
+      'Provide text that is used alongside the control label for additional help',
   },
   hideLabel: {
     control: 'boolean',
-    description: 'Specify whether or not the underlying label is visually hidden',
+    description:
+      'Specify whether or not the underlying label is visually hidden',
   },
 
   hidePasswordLabel: {
@@ -96,11 +98,13 @@ const argTypes = {
   },
   invalidText: {
     control: 'text',
-    description: 'Provide the text that is displayed when the control is in an invalid state',
+    description:
+      'Provide the text that is displayed when the control is in an invalid state',
   },
   labelText: {
     control: 'text',
-    description: 'Provide the text that will be read by a screen reader when visiting this control',
+    description:
+      'Provide the text that will be read by a screen reader when visiting this control',
   },
   placeholder: {
     control: 'text',
