@@ -83,7 +83,7 @@ const argTypes = {
 
   hidePasswordLabel: {
     control: 'text',
-    description: 'Hide password" tooltip text on password visibility toggle',
+    description: '"Hide password" tooltip text on password visibility toggle',
   },
 
   inline: {
