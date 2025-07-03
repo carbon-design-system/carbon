@@ -49,7 +49,7 @@ const args = {
   inline: false,
   invalid: false,
   invalidText: 'Error message goes here',
-  labelText: 'Label text',
+  labelText: 'Text input label',
   placeholder: 'Placeholder text',
   readonly: false,
   showPasswordLabel: 'Show Password',
