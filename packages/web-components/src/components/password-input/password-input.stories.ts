@@ -112,7 +112,7 @@ const argTypes = {
   },
   showPasswordLabel: {
     control: 'text',
-    description: 'Hide password" tooltip text on password visibility toggle',
+    description: '"Hide password" tooltip text on password visibility toggle',
   },
   size: {
     control: 'select',
