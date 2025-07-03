@@ -92,7 +92,7 @@ const argTypes = {
   },
   invalid: {
     control: 'boolean',
-    description: 'Invalid (invalid)',
+    description: 'Specify whether the control is currently invalid',
   },
   invalidText: {
     control: 'text',
