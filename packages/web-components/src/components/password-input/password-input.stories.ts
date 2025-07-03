@@ -88,7 +88,7 @@ const argTypes = {
 
   inline: {
     control: 'boolean',
-    description: 'Inline (inline)',
+    description: 'true to use the inline version',
   },
   invalid: {
     control: 'boolean',
