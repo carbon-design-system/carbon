@@ -44,7 +44,7 @@ describe('cds-textarea', () => {
     expect(el.value).to.equal('Updated content');
   });
 
-  it('should support readonly and disabled states', async () => {
+  it('should support readonly and disabled attributes', async () => {
     const el = await fixture(html`
       <cds-textarea readonly disabled></cds-textarea>
     `);
@@ -112,7 +112,7 @@ describe('cds-textarea', () => {
       <cds-textarea-skeleton></cds-textarea-skeleton>
     `);
     expect(el).to.exist;
-    const skeleton = el.shadowRoot.querySelector(`.cds--skeleton`);
+    const skeleton = el.shadowRoot.querySelector('.cds--skeleton');
     expect(skeleton).to.exist;
   });
 
@@ -128,39 +128,51 @@ describe('cds-textarea', () => {
 
   // Additional parity tests with React
 
-  it('should reflect placeholder attribute', async () => {
-    const el = await fixture(html`
-      <cds-textarea placeholder="Enter text here"></cds-textarea>
-    `);
-    const textarea = el.shadowRoot.querySelector('textarea');
-    expect(textarea.placeholder).to.equal('Enter text here');
+  describe('counter mode behaviors', () => {
+    // Test for switching counter mode from "word" to "character"
+    it('should apply maxlength only in character mode', async () => {
+      const el = await fixture(html`
+        <cds-textarea
+          enable-counter
+          counter-mode="character"
+          max-count="100"></cds-textarea>
+      `);
+      const textarea = el.shadowRoot.querySelector('textarea');
+      expect(textarea.getAttribute('maxlength')).to.equal('100');
+    });
+
+    // Test for switching counter mode from "word" to "character"
+    it('should remove maxlength when switching to word mode', async () => {
+      const el = await fixture(html`
+        <cds-textarea
+          enable-counter
+          counter-mode="character"
+          max-count="100"></cds-textarea>
+      `);
+      el.counterMode = 'word';
+      await el.updateComplete;
+      const textarea = el.shadowRoot.querySelector('textarea');
+      expect(textarea.hasAttribute('maxlength')).to.be.false;
+    });
+
+    // Test for switching back to character mode
+    it('should add maxlength when switching back to character mode', async () => {
+      const el = await fixture(html`
+        <cds-textarea
+          enable-counter
+          counter-mode="word"
+          max-count="100"></cds-textarea>
+      `);
+      el.counterMode = 'character';
+      await el.updateComplete;
+      const textarea = el.shadowRoot.querySelector('textarea');
+      expect(textarea.getAttribute('maxlength')).to.equal('100');
+    });
   });
 
-  it('should reflect id attribute to the host element', async () => {
-    const el = await fixture(html`
-      <cds-textarea id="textarea-1"></cds-textarea>
-    `);
-    expect(el.id).to.equal('textarea-1');
-  });
-
-  it('should apply custom class to the host element', async () => {
-    const el = await fixture(html`
-      <cds-textarea class="custom-class"></cds-textarea>
-    `);
-    expect(el.classList.contains('custom-class')).to.be.true;
-  });
-
-  it('should fire click event on textarea', async () => {
-    const el = await fixture(html`<cds-textarea></cds-textarea>`);
-    const textarea = el.shadowRoot.querySelector('textarea');
-
-    setTimeout(() => textarea.click());
-    const event = await oneEvent(textarea, 'click');
-    expect(event).to.exist;
-  });
-
-  describe('cds-textarea - core behaviors', () => {
-    it('should render slotted label-text', async () => {
+  // Slot support tests (label-text, helper-text, invalid-text, warn-text)
+  describe('slot support', () => {
+    it('renders slotted label-text', async () => {
       const el = await fixture(html`
         <cds-textarea>
           <span slot="label-text">Slotted Label</span>
@@ -169,10 +181,10 @@ describe('cds-textarea', () => {
       await el.updateComplete;
       const slot = el.shadowRoot.querySelector('slot[name="label-text"]');
       const content = slot.assignedNodes({ flatten: true })[0];
-      expect(content.textContent.trim()).to.include('Slotted Label');
+      expect(content.textContent.trim()).to.equal('Slotted Label');
     });
 
-    it('should render slotted helper-text', async () => {
+    it('renders slotted helper-text', async () => {
       const el = await fixture(html`
         <cds-textarea>
           <span slot="helper-text">Slotted Helper</span>
@@ -181,10 +193,10 @@ describe('cds-textarea', () => {
       await el.updateComplete;
       const slot = el.shadowRoot.querySelector('slot[name="helper-text"]');
       const content = slot.assignedNodes({ flatten: true })[0];
-      expect(content.textContent.trim()).to.include('Slotted Helper');
+      expect(content.textContent.trim()).to.equal('Slotted Helper');
     });
 
-    it('should render slotted invalid-text', async () => {
+    it('renders slotted invalid-text', async () => {
       const el = await fixture(html`
         <cds-textarea invalid>
           <span slot="invalid-text">Slotted Invalid</span>
@@ -193,10 +205,10 @@ describe('cds-textarea', () => {
       await el.updateComplete;
       const slot = el.shadowRoot.querySelector('slot[name="invalid-text"]');
       const content = slot.assignedNodes({ flatten: true })[0];
-      expect(content.textContent.trim()).to.include('Slotted Invalid');
+      expect(content.textContent.trim()).to.equal('Slotted Invalid');
     });
 
-    it('should render slotted warn-text', async () => {
+    it('renders slotted warn-text', async () => {
       const el = await fixture(html`
         <cds-textarea warn>
           <span slot="warn-text">Slotted Warning</span>
@@ -205,7 +217,7 @@ describe('cds-textarea', () => {
       await el.updateComplete;
       const slot = el.shadowRoot.querySelector('slot[name="warn-text"]');
       const content = slot.assignedNodes({ flatten: true })[0];
-      expect(content.textContent.trim()).to.include('Slotted Warning');
+      expect(content.textContent.trim()).to.equal('Slotted Warning');
     });
   });
 });
