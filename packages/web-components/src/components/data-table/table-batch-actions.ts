@@ -50,18 +50,34 @@ class CDSTableBatchActions extends LitElement {
   @property({ type: Number, attribute: 'selected-rows-count' })
   selectedRowsCount = 0;
 
+  /**
+   * The table size.
+   */
+  @property({ reflect: true })
+  size = 'lg';
+
   firstUpdated() {
-    this.querySelectorAll(
-      (this.constructor as typeof CDSTableBatchActions).selectorButtons
-    ).forEach((e) => {
-      e.setAttribute('batch-action', '');
-    });
+    this._updateButtons();
   }
 
   updated(changedProperties) {
     if (changedProperties.has('active')) {
       this.setAttribute('tabindex', `${this.active ? '' : '-1'}`);
     }
+
+    if (changedProperties.has('size')) {
+      this._updateButtons();
+    }
+  }
+
+  private _updateButtons() {
+    this.querySelectorAll(
+      (this.constructor as typeof CDSTableBatchActions).selectorButtons
+    ).forEach((button) => {
+      button.setAttribute('batch-action', '');
+      const buttonSize = this.size === 'xs' || this.size === 'sm' ? 'sm' : 'lg';
+      button.setAttribute('size', buttonSize);
+    });
   }
 
   render() {
@@ -69,7 +85,12 @@ class CDSTableBatchActions extends LitElement {
       formatSelectedItemsCount,
       selectedRowsCount,
       _handleCancel: handleCancel,
+      size,
     } = this;
+
+    const buttonSizeClass =
+      size === 'xs' || size === 'sm' ? `${prefix}--btn--sm` : '';
+
     return html`
       <div class="${prefix}--batch-summary">
         <p class="${prefix}--batch-summary__para">
@@ -79,7 +100,7 @@ class CDSTableBatchActions extends LitElement {
       <div class="${prefix}--action-list">
         <slot></slot>
         <button
-          class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel"
+          class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel ${buttonSizeClass}"
           @click=${handleCancel}>
           <slot name="cancel-button-content">Cancel</slot>
         </button>
