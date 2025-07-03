@@ -100,7 +100,7 @@ const argTypes = {
   },
   labelText: {
     control: 'text',
-    description: 'Label text (label)',
+    description: 'Provide the text that will be read by a screen reader when visiting this control',
   },
   placeholder: {
     control: 'text',
