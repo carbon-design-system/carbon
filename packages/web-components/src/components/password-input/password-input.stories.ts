@@ -74,7 +74,7 @@ const argTypes = {
 
   helperText: {
     control: 'text',
-    description: 'Helper text (helper-text)',
+    description: 'Provide text that is used alongside the control label for additional help',
   },
   hideLabel: {
     control: 'boolean',
