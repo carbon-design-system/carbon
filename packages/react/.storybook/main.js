@@ -110,6 +110,12 @@ const config = {
         },
       ],
     });
+
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@docs': path.resolve(__dirname, '..', '..', '..', 'docs'),
+    };
+
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
         new MiniCssExtractPlugin({
