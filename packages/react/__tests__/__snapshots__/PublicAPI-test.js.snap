@@ -3470,6 +3470,12 @@ Map {
       "onDelete": Object {
         "type": "func",
       },
+      "renderFileActions": Object {
+        "type": "func",
+      },
+      "renderFileName": Object {
+        "type": "func",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -3613,6 +3619,12 @@ Map {
       "onDelete": Object {
         "type": "func",
       },
+      "renderActions": Object {
+        "type": "func",
+      },
+      "renderName": Object {
+        "type": "func",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -3656,9 +3668,6 @@ Map {
       "invalid": Object {
         "type": "bool",
       },
-      "name": Object {
-        "type": "string",
-      },
       "status": Object {
         "args": Array [
           Array [
@@ -3668,9 +3677,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "tabIndex": Object {
-        "type": "number",
       },
     },
   },

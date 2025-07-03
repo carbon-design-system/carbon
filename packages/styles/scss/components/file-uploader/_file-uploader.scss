@@ -177,7 +177,7 @@
     .#{$prefix}--file-filename-container-wrap {
       margin-block-start: 1px;
       max-inline-size: 17.5rem;
-      padding-inline-start: $spacing-05;
+
       @include breakpoint-down(410px) {
         max-inline-size: 13.5rem;
       }
@@ -188,7 +188,6 @@
 
       .#{$prefix}--file-filename-tooltip {
         inline-size: -webkit-fill-available;
-        padding-inline-start: $spacing-05;
 
         /* This is for targeting styles specific to firefox */
         /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
