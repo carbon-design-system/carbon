@@ -43,7 +43,7 @@ const sizes = {
 const args = {
   defaultWidth: 300,
   disabled: false,
-  helperText: 'Helper text',
+  helperText: 'Optional help text',
   hideLabel: false,
   hidePasswordLabel: 'Hide Password',
   inline: false,
