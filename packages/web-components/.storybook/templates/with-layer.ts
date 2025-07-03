@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,12 +38,12 @@ class CDSLayer extends LitElement {
 
   updated() {
     if (this.content) {
+      const layer1 = this.content.cloneNode(true) as HTMLElement;
       const layer2 = this.content.cloneNode(true) as HTMLElement;
-      const layer3 = this.content.cloneNode(true) as HTMLElement;
+      layer1.setAttribute('slot', 'layer-1');
       layer2.setAttribute('slot', 'layer-2');
-      layer3.setAttribute('slot', 'layer-3');
+      this.appendChild(layer1);
       this.appendChild(layer2);
-      this.appendChild(layer3);
     }
   }
 
@@ -60,17 +60,17 @@ class CDSLayer extends LitElement {
               <cds-layer with-background>
                 <div class="${prefix}--with-layer__layer">
                   <div class="${prefix}--with-layer__label">
-                    ${Layers()} $layer-02
+                    ${Layers()} $layer-01
                   </div>
                   <div class="${prefix}--with-layer__content">
-                    <slot name="layer-2"></slot>
+                    <slot name="layer-1"></slot>
                     <cds-layer with-background>
                       <div class="${prefix}--with-layer__layer">
                         <div class="${prefix}--with-layer__label">
-                          ${Layers()} $layer-03
+                          ${Layers()} $layer-02
                         </div>
                         <div class="${prefix}--with-layer__content">
-                          <slot name="layer-3"></slot>
+                          <slot name="layer-2"></slot>
                         </div>
                       </div>
                     </cds-layer>
