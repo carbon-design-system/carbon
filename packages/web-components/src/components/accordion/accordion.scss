@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/accordion';
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/motion' as *;
 
 :host(#{$prefix}-accordion),
 :host(#{$prefix}-accordion-skeleton) {
@@ -35,6 +36,11 @@ $css--plex: true !default;
       margin: 0;
     }
   }
+}
+
+// Indicates this is the last visible item in a group (for styling the bottom border)
+:host([data-last-item]) {
+  border-block-end: 1px solid var(--cds-border-subtle);
 }
 
 :host(#{$prefix}-accordion-item[size='sm']),
@@ -62,7 +68,33 @@ $css--plex: true !default;
 
 :host(#{$prefix}-accordion-item[isFlush]),
 :host(#{$prefix}-accordion-item-skeleton[isFlush]) {
-  @extend .#{$prefix}--accordion--flush;
+  position: relative;
+  border-color: transparent;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    block-size: 1px;
+    content: '';
+    inline-size: calc(100% - #{$spacing-05} - #{$spacing-05});
+    margin-inline-start: $spacing-05;
+    transition: background $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &::before {
+    background: var(--cds-border-subtle);
+    inset-block-start: -1px;
+  }
+
+  &::after {
+    background: var(--cds-border-subtle);
+    inset-block-end: -1px;
+  }
 }
 
 :host(#{$prefix}-accordion-item[expanding]) {
@@ -93,9 +125,25 @@ $css--plex: true !default;
 :host(#{$prefix}-accordion-item-skeleton) {
   .#{$prefix}--accordion__heading {
     cursor: default;
+    pointer-events: none;
 
     &:hover::before {
       background: transparent;
     }
   }
+}
+
+.controlled-accordion-btnset {
+  @extend .cds--btn-set !optional;
+
+  padding-block-end: $spacing-03;
+
+  .controlled-accordion-btn:not(:first-child)::part(button) {
+    box-shadow: -0.0625rem 0 0 0
+      var(--cds-button-separator, --cds-border-subtle);
+  }
+}
+
+.controlled-accordion-btn {
+  max-inline-size: 13.25rem;
 }
