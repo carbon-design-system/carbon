@@ -108,7 +108,7 @@ export const TabTip = {
         ${styles}
       </style>
       <div class="popover-tabtip-story" style="display: 'flex'">
-        <cds-popover open tabTip id="popover-one">
+        <cds-popover tabTip id="popover-one">
           <button
             aria-label="Settings"
             type="button"
