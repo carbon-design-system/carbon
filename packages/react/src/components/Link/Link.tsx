@@ -122,8 +122,25 @@ const LinkBase = React.forwardRef<
 
     const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
 
+    const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      if (disabled) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        // If the link is not disabled, we allow the onClick event to propagate
+        // so that any parent handlers can also respond to the click.
+        if (rest.onClick) {
+          rest.onClick(event);
+        }
+      }
+    };
+
     return (
-      <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
+      <BaseComponentAsAny
+        ref={ref}
+        {...linkProps}
+        {...rest}
+        onClick={handleOnClick}>
         {children}
         {!inline && Icon && (
           <div className={`${prefix}--link__icon`}>
