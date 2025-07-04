@@ -14,6 +14,7 @@ import styles from './ai-label.scss?lit';
 import Undo16 from '@carbon/icons/lib/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import events from 'storybook/internal/core-events';
 
 /**
  * Basic AI Label.
@@ -73,12 +74,56 @@ class CDSAILabel extends CDSToggleTip {
   @property()
   previousValue;
 
+  connectedCallback() {
+    super.connectedCallback?.();
+    document.addEventListener('click', this._handleOutsideClick, true);
+    document.addEventListener('focusin', this._handleFocusChange, true);
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    document.removeEventListener('click', this._handleOutsideClick, true);
+    document.removeEventListener('click', this._handleFocusChange, true);
+  }
+
+  private _handleOutsideClick = (event: MouseEvent) => {
+    const path = event.composedPath();
+    if (!path.includes(this)) {
+      this.open = false;
+      this.requestUpdate();
+    }
+  };
+
+  private _handleFocusChange = (event: FocusEvent) => {
+    if (this.open && !this.contains(event.target as Node)) {
+      this.open = false;
+      this.requestUpdate();
+    }
+  };
+
   protected _handleClick = () => {
+    const activeElement = document.activeElement;
+    if (activeElement instanceof HTMLElement) {
+      activeElement.blur();
+    }
+
     if (this.revertActive) {
       this.revertActive = false;
       this.removeAttribute('revert-active');
     } else {
       this.open = !this.open;
+      this.requestUpdate();
+    }
+  };
+
+  protected _handleAIKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
+      event.stopPropagation();
+    }
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.open = false;
+      this.requestUpdate();
     }
   };
 
@@ -101,6 +146,7 @@ class CDSAILabel extends CDSToggleTip {
       <button
         aria-controls="${this.id}"
         @click="${this._handleClick}"
+        @keydown="${this._handleAIKeydown}"
         class=${classes}
         aria-label="${ariaLabel}">
         <span class="${prefix}--slug__text">${aiText}</span>
@@ -124,7 +170,8 @@ class CDSAILabel extends CDSToggleTip {
               ?autoalign=${autoalign}
               kind="ghost"
               size="sm"
-              @click="${this._handleClick}">
+              @click="${this._handleClick}"
+              @keydown="${this._handleAIKeydown}">
               <span slot="tooltip-content"> ${revertLabel} </span>
               ${Undo16({ slot: 'icon' })}
             </cds-icon-button>
