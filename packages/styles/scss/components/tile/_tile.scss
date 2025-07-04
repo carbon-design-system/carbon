@@ -475,6 +475,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--ai-label
     ).#{$prefix}--tile--clickable::before,
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--ai-label-icon
+    ).#{$prefix}--tile--clickable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
     @include ai-popover-gradient('hover', 0, 'layer');
