@@ -8,11 +8,16 @@
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
   cloneElement,
+  createContext,
+  useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type HTMLAttributes,
+  type PropsWithChildren,
   type ReactNode,
+  type Ref,
   type RefObject,
 } from 'react';
 import classNames from 'classnames';
@@ -32,7 +37,6 @@ import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
@@ -45,6 +49,9 @@ import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
+import { usePresence } from '../../internal/usePresence';
+import { useMergeRefs } from '@floating-ui/react';
+import { usePreviousValue } from '../../internal/usePreviousValue';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
@@ -239,8 +246,76 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   slug?: ReactNode;
 }
 
-const Modal = React.forwardRef(function Modal(
+const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
+  ({ open, ...props }, ref) => {
+    const enablePresence = useFeatureFlag('enable-presence');
+
+    if (enablePresence) {
+      return (
+        <ModalPresence open={open} autoEnablePresence={false}>
+          <ModalDialog {...props} ref={ref} />
+        </ModalPresence>
+      );
+    }
+
+    return <ModalInner {...props} open={open} ref={ref} />;
+  }
+);
+
+interface ModalPresenceContextData {
+  presenceRef: RefObject<HTMLDivElement | null>;
+  autoEnablePresence: boolean;
+  isExiting: boolean;
+}
+
+const ModalPresenceContext = createContext<ModalPresenceContextData>({
+  presenceRef: { current: null },
+  autoEnablePresence: false,
+  isExiting: false,
+});
+
+interface ModalPresence {
+  /**
+   * Specify whether the Modal is currently open
+   */
+  open?: boolean;
+
+  /**
+   * Specify whether the Modal should opt in to presence mode
+   */
+  autoEnablePresence?: boolean;
+}
+
+export const ModalPresence = ({
+  open = false,
+  autoEnablePresence = true,
+  children,
+}: PropsWithChildren<ModalPresence>) => {
+  const presenceRef = useRef<HTMLDivElement | null>(null);
+  const { isPresent, isExiting } = usePresence(presenceRef, open);
+
+  const contextValue = useMemo(
+    () => ({ presenceRef, autoEnablePresence, isExiting }),
+    [autoEnablePresence, isExiting]
+  );
+
+  if (!isPresent) return null;
+
+  return (
+    <ModalPresenceContext.Provider value={contextValue}>
+      {children}
+    </ModalPresenceContext.Provider>
+  );
+};
+
+export const ModalDialog = React.forwardRef<
+  HTMLDivElement,
+  Omit<ModalProps, 'open'>
+>((props, ref) => <ModalInner {...props} ref={ref} open />);
+
+const ModalInner = React.forwardRef(function Modal(
   {
+    open,
     'aria-label': ariaLabelProp,
     children,
     className,
@@ -251,7 +326,6 @@ const Modal = React.forwardRef(function Modal(
     passiveModal = false,
     secondaryButtonText,
     primaryButtonText,
-    open,
     onRequestClose = noopFn,
     onRequestSubmit = noopFn,
     onSecondarySubmit,
@@ -278,12 +352,15 @@ const Modal = React.forwardRef(function Modal(
   ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
+  const { presenceRef, autoEnablePresence, isExiting } =
+    useContext(ModalPresenceContext);
   const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const mergedRefs = useMergeRefs([presenceRef, ref]);
   const [isScrollable, setIsScrollable] = useState(false);
   const prevOpen = usePreviousValue(open);
   const modalInstanceId = `modal-${useId()}`;
@@ -296,6 +373,8 @@ const Modal = React.forwardRef(function Modal(
   });
   const loadingActive = loadingStatus !== 'inactive';
 
+  const enablePresence =
+    useFeatureFlag('enable-presence') || autoEnablePresence;
   const focusTrapWithoutSentinels = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
@@ -431,7 +510,8 @@ const Modal = React.forwardRef(function Modal(
     `${prefix}--modal`,
     {
       [`${prefix}--modal-tall`]: !passiveModal,
-      'is-visible': open,
+      'is-visible': !enablePresence && open,
+      [`${prefix}--modal--enable-presence`]: autoEnablePresence,
       [`${prefix}--modal--danger`]: danger,
       [`${prefix}--modal--slug`]: slug,
       [`${prefix}--modal--decorator`]: decorator,
@@ -500,14 +580,32 @@ const Modal = React.forwardRef(function Modal(
   }, [open, prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
+    if (
+      !enableDialogElement &&
+      !enablePresence &&
+      prevOpen &&
+      !open &&
+      launcherButtonRef
+    ) {
       setTimeout(() => {
         if ('current' in launcherButtonRef) {
           launcherButtonRef.current?.focus();
         }
       });
     }
-  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
+  }, [open, prevOpen, launcherButtonRef, enableDialogElement, enablePresence]);
+
+  useEffect(() => {
+    return () => {
+      if (enablePresence && launcherButtonRef) {
+        setTimeout(() => {
+          if ('current' in launcherButtonRef) {
+            launcherButtonRef.current?.focus();
+          }
+        });
+      }
+    };
+  }, [enablePresence, launcherButtonRef]);
 
   useEffect(() => {
     if (!enableDialogElement) {
@@ -605,7 +703,8 @@ const Modal = React.forwardRef(function Modal(
       role={isAlertDialog ? 'alertdialog' : ''}
       aria-describedby={isAlertDialog ? modalBodyId : ''}
       className={containerClasses}
-      aria-label={ariaLabel}>
+      aria-label={ariaLabel}
+      data-exiting={isExiting || undefined}>
       <div className={`${prefix}--modal-header`}>
         {modalLabel && (
           <Text
@@ -814,7 +913,8 @@ const Modal = React.forwardRef(function Modal(
       onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
-      ref={ref}>
+      ref={mergedRefs}
+      data-exiting={isExiting || undefined}>
       {modalBody}
     </Layer>
   );

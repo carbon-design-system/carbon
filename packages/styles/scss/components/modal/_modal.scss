@@ -26,7 +26,8 @@
 /// @group modal
 @mixin modal(
   $enable-experimental-focus-wrap-without-sentinels: false,
-  $enable-dialog-element: false
+  $enable-dialog-element: false,
+  $enable-presence: false
 ) {
   .#{$prefix}--modal {
     // For modals using the native dialog element, the modal visibility is handled
@@ -49,41 +50,39 @@
       inline-size: 100vw;
       inset-block-start: 0;
       inset-inline-start: 0;
-      opacity: 0;
-      transition:
-        opacity $duration-moderate-02 motion(exit, expressive),
-        visibility 0ms linear $duration-moderate-02;
-      visibility: hidden;
-    }
 
-    // For modals using the native dialog element, the modal visibility is handled
-    // by the Dialog styles.
-    @if not(
-      enabled('enable-experimental-focus-wrap-without-sentinels') or
-        $enable-experimental-focus-wrap-without-sentinels or
-        enabled('enable-dialog-element') or
-        $enable-dialog-element
-    )
-    {
-      &.is-visible {
-        opacity: 1;
-        transition:
-          opacity $duration-moderate-02 motion(entrance, expressive),
-          visibility 0ms linear;
-        visibility: inherit;
+      &.#{$prefix}--modal--enable-presence {
+        @include modal-animations($has-presence: true);
+      }
 
-        @media screen and (prefers-reduced-motion: reduce) {
-          transition: none;
-        }
+      &:not(.#{$prefix}--modal--enable-presence) {
+        @include modal-animations(
+          $has-presence: enabled('enable-presence') or $enable-presence
+        );
       }
     }
 
     @include update_fields_on_layer;
   }
 
-  .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
-    transform: translate3d(0, 0, 0);
-    transition: transform $duration-moderate-02 motion(entrance, expressive);
+  // For modals using the native dialog element, the modal visibility is handled
+  // by the Dialog styles.
+  @if not(
+    enabled('enable-experimental-focus-wrap-without-sentinels') or
+      $enable-experimental-focus-wrap-without-sentinels or
+      enabled('enable-dialog-element') or
+      $enable-dialog-element
+  )
+  {
+    .#{$prefix}--modal--enable-presence {
+      @include modal-container-animations($has-presence: true);
+    }
+
+    :not(.#{$prefix}--modal--enable-presence) {
+      @include modal-container-animations(
+        $has-presence: enabled('enable-presence') or $enable-presence
+      );
+    }
   }
 
   // -----------------------------
@@ -102,12 +101,10 @@
     // make modal edge visible on high contrast themes (#3880)
     outline: 3px solid transparent;
     outline-offset: -3px;
-    transform: translate3d(0, -24px, 0);
     transform-origin: top center;
-    transition: transform $duration-moderate-02 motion(exit, expressive);
 
     @include breakpoint(md) {
-      position: static;
+      position: relative;
       block-size: auto;
       inline-size: 84%;
       max-block-size: 90%;
@@ -491,5 +488,123 @@
   // Windows HCM fix
   .#{$prefix}--modal-close:focus {
     @include high-contrast-mode('focus');
+  }
+}
+
+@mixin modal-animations($has-presence: false) {
+  @if not($has-presence) {
+    opacity: 0;
+    transition:
+      opacity $duration-moderate-02 motion(exit, expressive),
+      visibility 0ms linear $duration-moderate-02;
+    visibility: hidden;
+
+    &.is-visible {
+      opacity: 1;
+      transition:
+        opacity $duration-moderate-02 motion(entrance, expressive),
+        visibility 0ms linear;
+      visibility: inherit;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  } @else {
+    animation: #{$prefix}--presence-modal__enter
+      $duration-moderate-02
+      motion(entrance, expressive)
+      forwards;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+
+    &[data-exiting] {
+      animation: #{$prefix}--presence-modal__exit
+        $duration-moderate-02
+        motion(exit, expressive)
+        forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal__enter {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal__exit {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@mixin modal-container-animations($has-presence: false) {
+  @if not($has-presence) {
+    &.is-visible .#{$prefix}--modal-container {
+      transform: translate3d(0, 0, 0);
+      transition: transform $duration-moderate-02 motion(entrance, expressive);
+    }
+
+    .#{$prefix}--modal-container {
+      transform: translate3d(0, -24px, 0);
+      transition: transform $duration-moderate-02 motion(exit, expressive);
+    }
+  } @else {
+    &[data-exiting] .#{$prefix}--modal-container {
+      animation: #{$prefix}--presence-modal-container__exit
+        $duration-moderate-02
+        motion(exit, expressive)
+        forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    .#{$prefix}--modal-container {
+      animation: #{$prefix}--presence-modal-container__enter
+        $duration-moderate-02
+        motion(entrance, expressive)
+        forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal-container__enter {
+      from {
+        transform: translate3d(0, -24px, 0);
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes #{$prefix}--presence-modal-container__exit {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(0, -24px, 0);
+      }
+    }
   }
 }
