@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/search';
+@use '@carbon/styles/scss/components/data-table/data-table';
 @use '@carbon/styles/scss/components/data-table/action';
 
 //
@@ -24,6 +25,11 @@
   z-index: 1;
 }
 
+:host(#{$prefix}-table-toolbar[size='xs']),
+:host(#{$prefix}-table-toolbar[size='sm']) {
+  @extend .#{$prefix}--table-toolbar--sm;
+}
+
 :host(#{$prefix}-table-toolbar-content) {
   @extend .#{$prefix}--toolbar-content;
 
@@ -33,6 +39,21 @@
     cursor: pointer;
     inline-size: $spacing-09;
     transition: background-color $duration-fast-02 motion(entrance, productive);
+  }
+}
+
+:host(#{$prefix}-table-toolbar-content[size='xs']),
+:host(#{$prefix}-table-toolbar-content[size='sm']) {
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
+  }
+
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    inline-size: $spacing-07;
   }
 }
 
@@ -133,39 +154,6 @@
   @extend .#{$prefix}--batch-actions--active;
 }
 
-// Small persistent toolbar
-:host(#{$prefix}-table-toolbar[size='xs']),
-:host(#{$prefix}-table-toolbar-content[size='xs']) {
-  &,
-  ::slotted(#{$prefix}-table-toolbar-search),
-  ::slotted(#{$prefix}-overflow-menu),
-  ::slotted(#{$prefix}-button) {
-    block-size: $spacing-07;
-    min-block-size: $spacing-07;
-  }
-  ::slotted(#{$prefix}-table-toolbar-search),
-  ::slotted(#{$prefix}-overflow-menu) {
-    inline-size: $spacing-07;
-  }
-}
-
-:host(#{$prefix}-table-toolbar[size='sm']),
-:host(#{$prefix}-table-toolbar-content[size='sm']) {
-  &,
-  ::slotted(#{$prefix}-table-toolbar-search),
-  ::slotted(#{$prefix}-overflow-menu),
-  ::slotted(#{$prefix}-button) {
-    block-size: $spacing-07;
-    min-block-size: $spacing-07;
-  }
-
-  ::slotted(#{$prefix}-table-toolbar-search),
-  ::slotted(#{$prefix}-overflow-menu) {
-    inline-size: $spacing-07;
-  }
-}
-
-// Batch actions sizing - Small (xs, sm)
 :host(#{$prefix}-table-batch-actions[size='xs']),
 :host(#{$prefix}-table-batch-actions[size='sm']) {
   block-size: $spacing-07;
@@ -188,7 +176,6 @@
   }
 }
 
-// Batch actions sizing - Large (md, lg, xl)
 :host(#{$prefix}-table-batch-actions[size='md']),
 :host(#{$prefix}-table-batch-actions[size='lg']),
 :host(#{$prefix}-table-batch-actions[size='xl']) {
@@ -212,7 +199,6 @@
   }
 }
 
-// Transform adjustments for toolbar content when batch actions are active
 :host(#{$prefix}-table-toolbar-content[has-batch-actions][size='xs']),
 :host(#{$prefix}-table-toolbar-content[has-batch-actions][size='sm']) {
   transform: translate3d(0, $spacing-07, 0);
