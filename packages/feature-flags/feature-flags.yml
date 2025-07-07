@@ -54,3 +54,7 @@ feature-flags:
       Enable dynamic setting of floating styles for components like Popover,
       Tooltip, etc.
     enabled: false
+  - name: enable-presence
+    description: >
+      Enable components to remain unmounted in closed state and mount in open state.
+    enabled: false
