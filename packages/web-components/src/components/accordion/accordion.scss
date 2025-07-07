@@ -24,6 +24,7 @@ $css--plex: true !default;
 :host(#{$prefix}-accordion-item),
 :host(#{$prefix}-accordion-item-skeleton) {
   @extend .#{$prefix}--accordion__item;
+  @include type-style('body-01');
 
   display: block;
   outline: none;
@@ -31,9 +32,9 @@ $css--plex: true !default;
     @extend .#{$prefix}--accordion__content;
 
     ::slotted(p) {
-      @include type-style('body-01');
-
       margin: 0;
+      // <p> are not applying the correct text style using $body-01 type token
+      font-size: 0.875rem !important; /* stylelint-disable-line declaration-no-important */
     }
   }
 }
