@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,9 +32,10 @@ const tooltipAlignments = {
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.BOTTOM,
   closeOnActivation: false,
-  defaultOpen: true,
+  defaultOpen: false,
   enterDelayMs: 100,
-  label: 'Custom label',
+  label:
+    'Occassionally, services are updated in a specified time window to ensure no down time for customers.',
   leaveDelayMs: 300,
 };
 
@@ -71,18 +72,29 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-tooltip align="bottom">
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({
+    align,
+    closeOnActivation,
+    defaultOpen,
+    enterDelayMs,
+    label,
+    leaveDelayMs,
+  }) => html`
+    <cds-tooltip
+      ?defaultOpen=${defaultOpen}
+      align=${align}
+      enter-delay-ms=${enterDelayMs}
+      leave-delay-ms=${leaveDelayMs}
+      ?closeOnActivation=${closeOnActivation}>
       <button
         class="sb-tooltip-trigger"
         role="button"
         aria-labelledby="content">
         ${Information16()}
       </button>
-      <cds-tooltip-content id="content">
-        Occassionally, services are updated in a specified time window to ensure
-        no down time for customers.
-      </cds-tooltip-content>
+      <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
     </cds-tooltip>
   `,
 };
@@ -113,34 +125,6 @@ export const Duration = {
         ${Information16()}
       </button>
       <cds-tooltip-content id="content"> Label one </cds-tooltip-content>
-    </cds-tooltip>
-  `,
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({
-    align,
-    closeOnActivation,
-    defaultOpen,
-    enterDelayMs,
-    label,
-    leaveDelayMs,
-  }) => html`
-    <cds-tooltip
-      ?defaultOpen=${defaultOpen}
-      align=${align}
-      enter-delay-ms=${enterDelayMs}
-      leave-delay-ms=${leaveDelayMs}
-      ?closeOnActivation=${closeOnActivation}>
-      <button
-        class="sb-tooltip-trigger"
-        role="button"
-        aria-labelledby="content">
-        ${Information16()}
-      </button>
-      <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
     </cds-tooltip>
   `,
 };
