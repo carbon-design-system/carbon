@@ -384,6 +384,14 @@ export interface ComboBoxProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 const ComboBox = forwardRef(
@@ -428,6 +436,7 @@ const ComboBox = forwardRef(
       warnText,
       allowCustomValue = false,
       slug,
+      inputProps,
       ...rest
     } = props;
 
@@ -985,6 +994,7 @@ const ComboBox = forwardRef(
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
                 value: inputValue,
+                ...inputProps,
                 onChange: (e) => {
                   const newValue = e.target.value;
                   setInputValue(newValue);
@@ -1414,6 +1424,14 @@ ComboBox.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps: PropTypes.object,
 };
 
 type ComboboxComponentProps<ItemType> = PropsWithRef<
