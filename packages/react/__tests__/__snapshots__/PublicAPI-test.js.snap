@@ -1625,7 +1625,6 @@ Map {
             },
           ],
         ],
-        "isRequired": true,
         "type": "oneOfType",
       },
       "size": Object {

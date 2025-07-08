@@ -51,7 +51,7 @@ export interface ContainedListProps {
   /**
    * A label describing the contained list.
    */
-  label: string | ReactNode;
+  label?: string | ReactNode;
 
   /**
    * Specify the size of the contained list.
@@ -141,16 +141,18 @@ const ContainedList: ContainedListType = ({
 
   return (
     <div className={classes} {...rest}>
-      <div className={`${prefix}--contained-list__header`}>
-        <div id={labelId} className={`${prefix}--contained-list__label`}>
-          {label}
+      {label && (
+        <div className={`${prefix}--contained-list__header`}>
+          <div id={labelId} className={`${prefix}--contained-list__label`}>
+            {label}
+          </div>
+          <LayoutConstraint
+            size={{ min: 'sm', max: 'xl' }}
+            className={`${prefix}--contained-list__action`}>
+            {action}
+          </LayoutConstraint>
         </div>
-        <LayoutConstraint
-          size={{ min: 'sm', max: 'xl' }}
-          className={`${prefix}--contained-list__action`}>
-          {action}
-        </LayoutConstraint>
-      </div>
+      )}
       {children && (
         /**
          * Webkit removes implicit "list" semantics when "list-style-type: none" is set.
@@ -160,7 +162,7 @@ const ContainedList: ContainedListType = ({
          * Ref https://bugs.webkit.org/show_bug.cgi?id=170179#c1
          */
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
-        <ul role="list" aria-labelledby={labelId}>
+        <ul role="list" aria-labelledby={label ? labelId : undefined}>
           {isActionSearch ? filteredChildren : renderedChildren}
         </ul>
       )}
@@ -197,7 +199,7 @@ ContainedList.propTypes = {
   /**
    * A label describing the contained list.
    */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Specify the size of the contained list.
