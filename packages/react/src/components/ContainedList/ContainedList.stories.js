@@ -361,14 +361,3 @@ export const UsageExamples = () => {
     </>
   );
 };
-
-export const test = () => {
-  return (
-    <ContainedList kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-  );
-};
