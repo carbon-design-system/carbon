@@ -353,11 +353,11 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/sanraj2000"><img src="https://avatars.githubusercontent.com/u/70739919?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sanraj2000</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sanraj2000" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/NAS-IBM"><img src="https://avatars.githubusercontent.com/u/211188842?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nagarajan Sivaraman</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=NAS-IBM" title="Code">💻</a></td>
     <td align="center"><a href="https://petersandor.name/"><img src="https://avatars.githubusercontent.com/u/3933866?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Peter Šándor</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=petersandor" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/MichCest"><img src="https://avatars.githubusercontent.com/u/3931469?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michele Payne</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=MichCest" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/MariaThomson"><img src="https://avatars.githubusercontent.com/u/62303971?s=400&v=4?s=100" width="100px;" alt=""/><br /><sub><b>Maria Thomson</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=MariaThomson" title="Code">💻</a></td>
   </tr>
   <tr>
+    <td align="center"><a href="https://github.com/MariaThomson"><img src="https://avatars.githubusercontent.com/u/62303971?s=400&v=4?s=100" width="100px;" alt=""/><br /><sub><b>Maria Thomson</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=MariaThomson" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/AndresCS2025"><img src="https://avatars.githubusercontent.com/u/216789473?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andres CS</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=AndresCS2025" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/MichCest"><img src="https://avatars.githubusercontent.com/u/3931469?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michele Payne</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=MichCest" title="Code">💻</a></td>
   </tr>
 </table>
 

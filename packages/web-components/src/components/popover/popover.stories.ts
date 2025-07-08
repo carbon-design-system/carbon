@@ -69,6 +69,14 @@ export const Default = {
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
+    const handleClick = () => {
+      const popover = document.querySelector(`${prefix}-popover`);
+      const open = popover?.hasAttribute('open');
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
+    };
+
     return html`
       <style>
         ${styles}
@@ -79,7 +87,14 @@ export const Default = {
         ?highContrast=${args.highContrast}
         align=${args.align}
         ?dropShadow=${args.dropShadow}>
-        <div class="playground-trigger">${Checkbox16()}</div>
+        <button
+          class="playground-trigger"
+          aria-label="Checkbox"
+          type="button"
+          aria-expanded=${open}
+          @click="${() => handleClick()}">
+          ${Checkbox16()}
+        </button>
         <cds-popover-content>
           <div class="p-3">
             <p class="popover-title">Available storage</p>
