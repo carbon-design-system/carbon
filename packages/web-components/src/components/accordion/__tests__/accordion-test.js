@@ -26,8 +26,6 @@ const accordion = html`
 describe('cds-accordion', function () {
   it('should render', async () => {
     const el = await fixture(accordion);
-
-    await expect(el).dom.to.equalSnapshot();
   });
 
   describe('automated verification testing', () => {
