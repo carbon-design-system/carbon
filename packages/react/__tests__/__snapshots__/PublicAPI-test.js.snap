@@ -1339,6 +1339,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "inputProps": Object {
+        "type": "object",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -3853,6 +3856,9 @@ Map {
       "initialSelectedItems": Object {
         "type": "array",
       },
+      "inputProps": Object {
+        "type": "object",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -5918,6 +5924,9 @@ Map {
       },
       "min": Object {
         "type": "number",
+      },
+      "onBlur": Object {
+        "type": "func",
       },
       "onChange": Object {
         "type": "func",
