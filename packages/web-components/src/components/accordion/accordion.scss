@@ -33,8 +33,14 @@ $css--plex: true !default;
 
     ::slotted(p) {
       margin: 0;
-      // <p> are not applying the correct text style using $body-01 type token
-      font-size: 0.875rem !important; /* stylelint-disable-line declaration-no-important */
+
+      font-size: var(
+        --cds-body-01-font-size
+      ) !important; /* stylelint-disable-line declaration-no-important */
+
+      font-weight: var(--cds-body-01-font-weight);
+      letter-spacing: var(--cds-body-01-letter-spacing);
+      line-height: var(--cds-body-01-line-height);
     }
   }
 }
