@@ -140,17 +140,13 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
         forEach(headerItems, (item) => {
           item.setAttribute('tabindex', '-1');
         });
-        (
-          this.querySelector(
-            (this.constructor as typeof CDSSideNav).selectorNavItems
-          ) as HTMLElement
-        )?.focus();
       } else {
         forEach(headerItems, (item) => {
           item.removeAttribute('tabindex');
         });
       }
     }
+
     if (changedProperties.has('isNotChildOfHeader')) {
       forEach(
         doc.querySelectorAll(
@@ -175,7 +171,7 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
   private _handleFocusOut({ relatedTarget }: FocusEvent) {
     const { collapseMode } = this;
     if (collapseMode !== SIDE_NAV_COLLAPSE_MODE.FIXED) {
-      if (!this.contains(relatedTarget as Node)) {
+      if (relatedTarget && !this.contains(relatedTarget as Node)) {
         this.expanded = false;
       }
     }
