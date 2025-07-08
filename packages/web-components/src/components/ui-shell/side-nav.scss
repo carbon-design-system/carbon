@@ -141,11 +141,3 @@ $css--plex: true !default;
 :host(#{$prefix}-header-side-nav-items[has-divider]) {
   @extend .#{$prefix}--side-nav__header-divider;
 }
-
-:host(#{$prefix}-side-nav) {
-  @extend .#{$prefix}--side-nav;
-}
-
-:host(#{$prefix}-side-nav[expanded]) {
-  @extend .#{$prefix}--side-nav--expanded;
-}
