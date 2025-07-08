@@ -140,22 +140,6 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
         forEach(headerItems, (item) => {
           item.setAttribute('tabindex', '-1');
         });
-
-        const currentFocus = document.activeElement;
-        const shouldAutoFocus =
-          !currentFocus ||
-          !this.contains(currentFocus) ||
-          currentFocus === document.body;
-
-        if (shouldAutoFocus) {
-          const firstNavItem = this.querySelector(
-            (this.constructor as typeof CDSSideNav).selectorNavItems
-          ) as HTMLElement;
-
-          if (firstNavItem) {
-            firstNavItem.focus();
-          }
-        }
       } else {
         forEach(headerItems, (item) => {
           item.removeAttribute('tabindex');
