@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { forwardRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 type ExcludedAttributes = 'id' | 'value';
@@ -25,6 +25,16 @@ export interface TimePickerProps
    * Specify an optional className to be applied to the container node
    */
   className?: string;
+
+  /**
+   * Specify an optional className to be applied to the `<input>` node
+   */
+  inputClassName?: string;
+
+  /**
+   * Specify an optional className to be applied to the container that wraps the `<input>` and select option
+   */
+  pickerClassName?: string;
 
   /**
    * Specify whether the `<input>` should be disabled
@@ -134,6 +144,8 @@ const TimePicker = frFn((props, ref) => {
   const {
     children,
     className,
+    inputClassName,
+    pickerClassName,
     disabled = false,
     hideLabel,
     id,
@@ -193,7 +205,7 @@ const TimePicker = frFn((props, ref) => {
   const timePickerInputClasses = cx(
     `${prefix}--time-picker__input-field`,
     `${prefix}--text-input`,
-    [className],
+    [inputClassName],
     {
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--time-picker__input-field-error`]: invalid || warning,
@@ -207,7 +219,7 @@ const TimePicker = frFn((props, ref) => {
     [`${prefix}--time-picker--warning`]: warning,
     [`${prefix}--time-picker--readonly`]: readOnly,
     [`${prefix}--time-picker--${size}`]: size,
-    ...(className && { [className]: true }),
+    ...(pickerClassName && { [pickerClassName]: true }),
   });
 
   const labelClasses = cx(`${prefix}--label`, {

@@ -50,7 +50,7 @@ import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
@@ -319,6 +319,14 @@ export interface FilterableMultiSelectProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
@@ -363,6 +371,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     warn,
     warnText,
     slug,
+    inputProps,
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -776,7 +785,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     },
   });
 
-  const inputProps = getInputProps(
+  const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': helperText ? helperId : undefined,
@@ -787,6 +796,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       disabled,
       placeholder,
       preventKeyAction: isOpen,
+      ...inputProps,
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
@@ -829,7 +839,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       },
       onFocus: () => setInputFocused(true),
       onBlur: () => {
-        !isOpen && setInputFocused(false);
+        setInputFocused(false);
         setInputValue('');
       },
     })
@@ -858,7 +868,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     }
   };
 
-  const mergedRef = mergeRefs(textInput, inputProps.ref);
+  const mergedRef = mergeRefs(textInput, inputProp.ref);
 
   const readOnlyEventHandlers = readOnly
     ? {
@@ -928,7 +938,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           )}
           <input
             className={inputClasses}
-            {...inputProps}
+            {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
             readOnly={readOnly}
@@ -1234,4 +1244,12 @@ FilterableMultiSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps: PropTypes.object,
 };

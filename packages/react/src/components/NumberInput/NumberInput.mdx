@@ -59,6 +59,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   ]}
 />
 
+## `step` values
+
+When stepper buttons increment or decrement an empty input, the following
+applies:
+
+- Incrementing always starts at `min`
+- Decrementing always starts at `max`
+- If no `min` or `max` is provided, the input will be set to 0
+
 ## With type of text
 
 The input `type` can be set to `text` to avoid the various limitations and ux

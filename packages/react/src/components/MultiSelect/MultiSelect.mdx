@@ -14,19 +14,17 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> */}
-{/* <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
-- [MultiSelect](#MultiSelect)
-  - [Overview](#overview)
+- [Overview](#overview)
   - [With initial selected items](#with-initial-selected-items)
   - [Select all](#select-all)
   - [Filtering](#filtering)
   - [With layer](#with-layer)
 - [Component API](#component-api)
-  - [`downshiftProps`](#downshiftProps)
+  - [`downshiftProps`](#downshiftprops)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -120,6 +118,31 @@ For more information, checkout the Downshift prop
 [documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
 
 <ArgTypes />
+
+## `inputProps`
+
+Use `inputProps` to specify native input attributes to place on the `<input>`.  
+These are passed to [Downshift's `getInputProps()`](https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops) 
+and will override the internal input props.
+
+
+### Using `maxLength`
+
+The native `maxLength` attribute can be included in `inputProps` to define the maximum string length that the user can enter into the input.
+
+When using `maxLength`, ensure the limit is communicated to the user through both `helperText` and `invalidText`/`warnText`.
+
+```jsx
+<FilterableMultiSelect
+  inputProps={{ maxLength: 5 }}
+  id="test-combo"
+  items={[{ label: 'Item 1' }]}
+  titleText="Abbreviation"
+  helperText="Provide an abbreviation that is 5 characters or less"
+  invalidText="Abbreviations must be 5 characters or less"
+  warnText="Abbreviations must be 5 characters or less"
+/>
+```
 
 ## Feedback
 
