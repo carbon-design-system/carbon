@@ -103,7 +103,7 @@ class CDSAccordionSkeleton extends LitElement {
               <div class="${prefix}--accordion__content">
                 <cds-skeleton-text width="90%"></cds-skeleton-text>
                 <cds-skeleton-text width="80%"></cds-skeleton-text>
-                <cds-skeleton-text width="85%"></cds-skeleton-text>
+                <cds-skeleton-text width="95%"></cds-skeleton-text>
               </div>
             </li>
           `

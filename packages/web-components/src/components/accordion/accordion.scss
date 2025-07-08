@@ -134,6 +134,22 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-accordion-item[alignment='end' i]),
+:host(#{$prefix}-accordion-item-skeleton[alignment='end' i]),
+:host(#{$prefix}-accordion-skeleton)
+  .#{$prefix}--accordion__item.#{$prefix}--accordion--END {
+  .#{$prefix}--accordion__arrow {
+    margin-inline-start: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-accordion-item-skeleton) .#{$prefix}--accordion__title,
+:host(#{$prefix}-accordion-skeleton)
+  .#{$prefix}--accordion__heading
+  .#{$prefix}--accordion__title {
+  padding-block-start: $spacing-03;
+}
+
 .controlled-accordion-btnset {
   @extend .cds--btn-set !optional;
 
