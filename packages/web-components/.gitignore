@@ -6,3 +6,9 @@ custom-elements.json
 
 # Storybook
 storybook-static
+# Coverage directories
+coverage/
+coverage-jest/
+
+# Test outputs
+test-results/
