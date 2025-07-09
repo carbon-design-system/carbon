@@ -43,6 +43,12 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   alignmentAxisOffset = 0;
 
   /**
+   * Specify text for the accessibility label.
+   */
+  @property({ attribute: 'aria-label' })
+  ariaLabel = 'Show information';
+
+  /**
    * Specify whether a auto align functionality should be applied
    */
   @property({ type: Boolean, reflect: true })
@@ -117,7 +123,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     return html`
       <button
         aria-controls="${this.id}"
-        aria-label="Show information"
+        aria-label="${this.ariaLabel}"
         class="${prefix}--toggletip-button"
         @click=${this._handleClick}>
         <slot name="trigger">${Information16({ id: 'trigger' })}</slot>
