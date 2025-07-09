@@ -6,6 +6,7 @@
  */
 
 import React, {
+  Children,
   cloneElement,
   useEffect,
   useRef,
@@ -38,7 +39,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { warning } from '../../internal/warning';
 import { AILabel } from '../AILabel';
@@ -335,8 +336,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       const { target } = evt;
       const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
+      const containsModalFooter = Children.toArray(childrenWithProps).some(
+        (child) => isComponentElement(child, ModalFooter)
+      );
+      const isPassive = !containsModalFooter;
+      const shouldCloseOnOutsideClick = isPassive
+        ? preventCloseOnClickOutside !== false
+        : preventCloseOnClickOutside === true;
+
       if (
-        !preventCloseOnClickOutside &&
+        shouldCloseOnOutsideClick &&
         target instanceof Node &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&

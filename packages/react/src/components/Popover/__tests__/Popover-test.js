@@ -268,6 +268,7 @@ describe('Popover', () => {
       expect(onRequestClose).toHaveBeenCalled();
     });
 
+
     it('should add multi-line class to popover content when text is long', async () => {
       const { container } = await render(
         <Popover open>
@@ -295,5 +296,18 @@ describe('Popover', () => {
         `${prefix}--popover-content--multi-line`
       );
     });
-  });
+
+    it('should call onRequestClose when tabbing out of popover via keyboard', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      await userEvent.tab();
+      await userEvent.tab();
+      expect(onRequestClose).toHaveBeenCalled();
+    });
+ 
 });

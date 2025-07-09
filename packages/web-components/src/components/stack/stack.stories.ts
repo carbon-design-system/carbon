@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,28 +33,18 @@ const controls = {
 };
 
 export const Default = {
-  render: () =>
-    html` <cds-stack gap="6">
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </cds-stack>`,
-};
-
-export const Horizontal = {
-  render: () =>
-    html` <cds-stack gap="6" orientation="horizontal">
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </cds-stack>`,
-};
-
-export const Playground = {
   args: defaultArgs,
   argTypes: controls,
   render: ({ gap, orientation }) =>
     html` <cds-stack gap="${gap}" orientation="${orientation}">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </cds-stack>`,
+};
+export const Horizontal = {
+  render: () =>
+    html` <cds-stack gap="6" orientation="horizontal">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
