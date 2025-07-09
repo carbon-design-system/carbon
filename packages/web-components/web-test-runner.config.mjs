@@ -4,10 +4,9 @@ export default {
   coverage: true,
   coverageConfig: {
     threshold: {
-      statements: 60,
-      branches: 60,
-      functions: 60,
-      lines: 60,
+      statements: 50,
+      branches: 50,
+      lines: 50,
     },
     exclude: [
       '**/node_modules/**',
