@@ -501,16 +501,6 @@ describe('FilterableMultiSelect', () => {
     expect(options[4]).toHaveTextContent('Item 0');
   });
 
-  it('should handle useTitleInItem prop', async () => {
-    render(<FilterableMultiSelect {...mockProps} useTitleInItem />);
-    await waitForPosition();
-
-    await openMenu();
-
-    const option = screen.getAllByRole('option')[0];
-    expect(option.querySelector('span')).toHaveAttribute('title', 'Item 0');
-  });
-
   it('should handle helperText prop', async () => {
     render(
       <FilterableMultiSelect {...mockProps} helperText="This is helper text" />

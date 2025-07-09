@@ -671,6 +671,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     }
     switch (type) {
       case InputKeyDownEnter:
+        if (sortedItems.length === 0) {
+          return changes;
+        }
         if (changes.selectedItem && changes.selectedItem.disabled !== true) {
           if (changes.selectedItem.isSelectAll) {
             handleSelectAllClick();
@@ -1108,6 +1111,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                         indeterminate={isIndeterminate}
                         disabled={disabled}
                         data-contained-checkbox-state={isChecked}
+                        tabIndex={-1}
                       />
                     </div>
                   </ListBox.MenuItem>
