@@ -1093,7 +1093,36 @@ describe('FilterableMultiSelect', () => {
     );
     assertMenuClosed();
   });
+  it('should close menu options when open the menu and click on it again', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
 
+    await openMenu();
+    expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
+    await openMenu();
+    assertMenuClosed();
+  });
+  it('should focus when user open menu, select one item, unselect item and close the menu', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await openMenu();
+    const options = screen.getAllByRole('option');
+    expect(options.length).toBe(mockProps.items.length);
+    await user.click(options[0]);
+    expect(options[0].closest(`.${prefix}--list-box__menu-item`)).toHaveClass(
+      `${prefix}--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted`
+    );
+    act(() => {
+      user.click(options[0]);
+    });
+    await openMenu();
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--list-box`)
+    ).toHaveClass(`${prefix}--multi-select--filterable--input-focused`);
+    assertMenuClosed();
+  });
   it('should remove focus styling when tabbing away from component', async () => {
     const user = userEvent.setup();
 
