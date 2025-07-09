@@ -972,6 +972,48 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
 
+  it('passes inputProps to the input element', async () => {
+    render(
+      <FilterableMultiSelect
+        id="test-combo"
+        items={[{ label: 'Item 1' }]}
+        itemToString={(item) => item?.label || ''}
+        inputProps={{
+          maxLength: 10,
+          placeholder: 'Type here',
+          'aria-label': 'Choose an item',
+          'aria-controls': 'test-combo__menu',
+          tabIndex: '0',
+          type: 'text',
+        }}
+      />
+    );
+    const input = screen.getByPlaceholderText('Type here');
+    const attributes = Array.from(input.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
+
+    expect(input).toBeInTheDocument();
+    expect(attributes).toEqual({
+      'aria-activedescendant': '',
+      'aria-autocomplete': 'list',
+      'aria-controls': 'test-combo__menu',
+      'aria-expanded': 'false',
+      'aria-haspopup': 'listbox',
+      'aria-label': 'Choose an item',
+      autocomplete: 'off',
+      class: 'cds--text-input cds--text-input--empty',
+      id: 'test-combo-input',
+      maxlength: '10',
+      placeholder: 'Type here',
+      role: 'combobox',
+      tabindex: '0',
+      type: 'text',
+      value: '',
+    });
+  });
+
   it('should lose focus in one click after interacting with menu items', async () => {
     const user = userEvent.setup();
     render(<FilterableMultiSelect {...mockProps} />);
@@ -1051,7 +1093,36 @@ describe('FilterableMultiSelect', () => {
     );
     assertMenuClosed();
   });
+  it('should close menu options when open the menu and click on it again', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
 
+    await openMenu();
+    expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
+    await openMenu();
+    assertMenuClosed();
+  });
+  it('should focus when user open menu, select one item, unselect item and close the menu', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await openMenu();
+    const options = screen.getAllByRole('option');
+    expect(options.length).toBe(mockProps.items.length);
+    await user.click(options[0]);
+    expect(options[0].closest(`.${prefix}--list-box__menu-item`)).toHaveClass(
+      `${prefix}--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted`
+    );
+    act(() => {
+      user.click(options[0]);
+    });
+    await openMenu();
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--list-box`)
+    ).toHaveClass(`${prefix}--multi-select--filterable--input-focused`);
+    assertMenuClosed();
+  });
   it('should remove focus styling when tabbing away from component', async () => {
     const user = userEvent.setup();
 
