@@ -1,16 +1,41 @@
+import { esbuildPlugin } from '@web/dev-server-esbuild';
+
 export default {
-  files: 'src/components/**/__tests__/**/*.js',
+  files: 'src/components/**/__tests__/*-test.js',
   nodeResolve: true,
-  concurrency: 1,
+  coverage: true,
   coverageConfig: {
-    report: true,
-    reportDir: 'coverage',
-    reporters: ['lcov', 'text-summary'],
-    include: ['es/components/**/*.js'],
+    threshold: {
+      statements: 60,
+      branches: 60,
+      functions: 60,
+      lines: 60,
+    },
     exclude: [
-      'es/components/**/__tests__/**/*',
-      'es/components/**/*.stories.js',
-      'es/components/**/*.scss.js',
+      '**/node_modules/**',
+      '**/coverage/**',
+      '**/*.stories.js',
+      '**/*.test.js',
     ],
   },
+
+  esbuildTarget: 'auto',
+  preserveSymlinks: true,
+  plugins: [
+    esbuildPlugin(),
+    {
+      name: 'resolve-typescript',
+      transform(context) {
+        if (
+          context.path.endsWith('.ts') &&
+          !context.path.endsWith('.test.ts')
+        ) {
+          return {
+            body: context.body,
+            headers: { 'content-type': 'application/javascript' },
+          };
+        }
+      },
+    },
+  ],
 };
