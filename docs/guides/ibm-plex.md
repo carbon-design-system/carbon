@@ -338,10 +338,10 @@ When using the default:
 <$font-path>/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Bold.woff2
 ```
 
-When using the per-family configuration:
+When using the per-family configuration, note the `$font-path` is suffixed with the family, `-sans`:
 
 ```
-<$font-path>/fonts/complete/woff2/IBMPlexSans-Bold.woff2
+<$font-path>-sans/fonts/complete/woff2/IBMPlexSans-Bold.woff2
 ```
 
 > If you're using Vite, the tilde included in the default
