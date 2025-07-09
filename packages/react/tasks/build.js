@@ -71,34 +71,34 @@ async function build() {
       // modules that are problematic in consumers' bundlers. esm-only modules,
       // modules using package.json keys like `exports` that are not well supported
       // in older toolchains (webpack, jest, etc.), etc.
-      manualChunks: (id) => {
-        if (id.includes('es-toolkit')) {
-          // Extract relative path from es-toolkit to preserve folder structure
-          const esToolkitIndex = id.indexOf('es-toolkit');
-          const relativePath = id.substring(
-            esToolkitIndex + 'es-toolkit'.length
-          );
+      // manualChunks: (id) => {
+      //   if (id.includes('es-toolkit')) {
+      //     // Extract relative path from es-toolkit to preserve folder structure
+      //     const esToolkitIndex = id.indexOf('es-toolkit');
+      //     const relativePath = id.substring(
+      //       esToolkitIndex + 'es-toolkit'.length
+      //     );
 
-          // Remove leading slash and .mjs extension
-          const cleanPath = relativePath
-            .replace(/^\/dist/, '')
-            .replace(/\.mjs$/, '');
+      //     // Remove leading slash and .mjs extension
+      //     const cleanPath = relativePath
+      //       .replace(/^\/dist/, '')
+      //       .replace(/\.mjs$/, '');
 
-          // Only include what's being used in the bundle
-          const allowedPaths = [
-            '/compat/function/debounce',
-            '/compat/function/throttle',
-            '/function/debounce',
-          ];
+      //     // Only include what's being used in the bundle
+      //     const allowedPaths = [
+      //       '/compat/function/debounce',
+      //       '/compat/function/throttle',
+      //       '/function/debounce',
+      //     ];
 
-          if (allowedPaths.includes(cleanPath)) {
-            return `node_modules/es-toolkit/dist${cleanPath}.mjs`;
-          }
+      //     if (allowedPaths.includes(cleanPath)) {
+      //       return `node_modules/es-toolkit/dist${cleanPath}.mjs`;
+      //     }
 
-          return null;
-        }
-        return null;
-      },
+      //     return null;
+      //   }
+      //   return null;
+      // },
     });
 
     const iconsInputConfig = getRollupConfig(

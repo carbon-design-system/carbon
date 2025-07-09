@@ -128,6 +128,9 @@
     "webpack": "^5.65.0",
     "webpack-dev-server": "^5.0.0"
   },
+  "bundleDependencies": [
+    "es-toolkit"
+  ],
   "sideEffects": [
     "es/index.js",
     "lib/index.js",
