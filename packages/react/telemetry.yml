@@ -18,6 +18,7 @@ collect:
         - allowCustomValue
         - allowEmpty
         - aria-controls
+        - aria-current
         - aria-label
         - aria-labelledby
         - ariaLabel
@@ -64,9 +65,11 @@ collect:
         - enterDelayMs
         - expanded
         - expandIconDescription
-        - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - flipped
+        - focusTrap
+        - formatOptions
         - fullWidth
         - gap
         - hasDivider
@@ -82,6 +85,7 @@ collect:
         - hidePasswordLabel
         - highContrast
         - href
+        - iconClass
         - iconDescription
         - id
         - indeterminate
@@ -90,6 +94,7 @@ collect:
         - initialSelectedItems
         - inline
         - innerRef
+        - inputMode
         - invalid
         - invalidText
         - isActive
@@ -128,6 +133,8 @@ collect:
         - max
         - maxCount
         - menuAlignment
+        - menuOffset
+        - menuOffsetFlip
         - menuOptionsClass
         - menuTarget
         - min
@@ -162,6 +169,7 @@ collect:
         - onOpen
         - onRequestClose
         - onRequestSubmit
+        - onSecondarySubmit
         - onSelect
         - onToggle
         - onToggleClick
@@ -169,8 +177,8 @@ collect:
         - open
         - ordered
         - orientation
-        - overflowMenuOnHover
         - page
+        - pageActions
         - paragraph
         - passiveModal
         - pattern
@@ -179,11 +187,9 @@ collect:
         - preventCloseOnClickOutside
         - primaryButtonDisabled
         - primaryButtonText
-        - radio
         - readOnly
         - ref
         - rel
-        - render
         - renderIcon
         - renderSelectedItem
         - required
@@ -212,7 +218,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -231,7 +236,6 @@ collect:
         - typeahead
         - useStaticWidth
         - useTitleInItem
-        - useZebraStyles
         - value
         - valueSelected
         - vertical
@@ -255,12 +259,12 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
         # Breadcrumb
         - noTrailingSlash
-        # BreadcrumbItem
-        - aria-current
         # ButtonSet
         - stacked
         # ChatButton
@@ -292,9 +296,6 @@ collect:
         - selectionMode
         # Copy
         - onAnimationEnd
-        # DataTable
-        - filterRows
-        - sortRow
         # DataTableSkeleton
         - columnCount
         - compact
@@ -320,8 +321,12 @@ collect:
         - tooltipText
         - triggerClassName
         # Dialog
+        - ariaDescribedBy
+        - ariaLabelledBy
+        - focusAfterCloseRef
         - modal
         # DismissibleTag
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback
@@ -365,6 +370,8 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # HeaderContainer
+        - render
         # HeaderMenu
         - focusRef
         - menuLinkName
@@ -383,7 +390,9 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
-        # Link
+        # Layer
+        - withBackground
+        # LinkBase
         - visited
         # ListBox
         - invalidTextId
@@ -411,7 +420,6 @@ collect:
         - alert
         - closeButtonLabel
         - modalAriaLabel
-        - onSecondarySubmit
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -443,12 +451,6 @@ collect:
         - hideSteppers
         # OrderedList
         - native
-        # OverflowMenu
-        - flipped
-        - focusTrap
-        - iconClass
-        - menuOffset
-        - menuOffsetFlip
         # OverflowMenuItem
         - closeMenu
         - handleOverflowMenuItemFocus
@@ -456,9 +458,18 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderBreadcrumbBar
+        - border
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
         # PageHeaderContent
         - contextualActions
-        - pageActions
+        # PageHeaderContentPageActions
+        - actions
+        - menuButtonLabel
+        # PageHeaderTabBar
+        - tags
         # PageSelector
         - currentPage
         - totalPages
@@ -534,6 +545,10 @@ collect:
         - handleSwitcherItemFocus
         # Tab
         - renderButton
+        # Table
+        - experimentalAutoAlign
+        - overflowMenuOnHover
+        - useZebraStyles
         # TableBatchActions
         - onSelectAll
         - shouldShowBatchActions
@@ -543,6 +558,8 @@ collect:
         - aria-live
         # TableCell
         - hasAILabelHeader
+        # TableContainer
+        - aiEnabled
         # TableExpandHeader
         - enableExpando
         - enableToggle
@@ -552,6 +569,8 @@ collect:
         - isSortHeader
         - scope
         - sortDirection
+        # TableSelectRow
+        - radio
         # TableToolbarFilter
         - onApplyFilter
         - onResetFilter
@@ -568,7 +587,7 @@ collect:
         - onTabCloseRequest
         # TabsVertical
         - height
-        # Tag
+        # TagBase
         - filter
         # TextArea
         - counterMode
@@ -629,6 +648,14 @@ collect:
         - top-left
         - top-right
         - top-start
+        # General - aria-current
+        - date
+        - "false"
+        - location
+        - page
+        - step
+        - time
+        - "true"
         # General - buttonKind
         - danger
         - danger--ghost
@@ -652,6 +679,15 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - inputMode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
         - caution-major
         - caution-minor
@@ -778,6 +814,8 @@ collect:
         - vertical
         # General - role
         - alert
+        - alertdialog
+        - dialog
         - log
         - status
         # General - selectionFeedback
@@ -840,6 +878,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - outline
         - password
         - purple
@@ -860,14 +899,6 @@ collect:
         - 3x4
         - 4x3
         - 9x16
-        # BreadcrumbItem - aria-current
-        - date
-        - "false"
-        - location
-        - page
-        - step
-        - time
-        - "true"
         # ContentSwitcher - selectionMode
         - automatic
         - manual

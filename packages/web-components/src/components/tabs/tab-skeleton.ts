@@ -12,6 +12,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 /**
  * Skeleton of tab.
+ *
+ * @element cds-tab-skeleton
  */
 @customElement(`${prefix}-tab-skeleton`)
 export default class CDSTabSkeleton extends LitElement {

@@ -66,7 +66,6 @@ below.
 | `breakpoint-next`        | Get the value of the next breakpoint                                                | `@function` |               |
 | `breakpoint-prev`        | Get the value of the previous breakpoint                                            | `@function` |               |
 | `is-smallest-breakpoint` | Check to see if the given breakpoint is the smallest breakpoint                     | `@function` |               |
-| `is-largest-breakpoint`  | Check to see if the given breakpoint is the largest breakpoint                      | `@function` |               |
 | `breakpoint-up`          | Generate a media query from the width of the given breakpoint to infinity           | `@mixin`    |               |
 | `breakpoint-down`        | Generate a media query that applies below the maximum width of the given breakpoint | `@mixin`    |               |
 | `breakpoint-between`     | Generate a media query for the range between the lower and upper breakpoints        | `@mixin`    |               |

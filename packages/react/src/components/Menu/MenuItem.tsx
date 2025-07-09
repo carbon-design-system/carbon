@@ -174,19 +174,37 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
     }
 
-    function handleKeyDown(e: React.KeyboardEvent<HTMLLIElement>) {
+    // Avoid stray keyup event from MenuButton affecting MenuItem, and vice versa.
+    // Keyboard click is handled differently for <button> vs. <li> and for Enter vs. Space.  See
+    // https://www.stefanjudis.com/today-i-learned/keyboard-button-clicks-with-space-and-enter-behave-differently/.
+    const pendingKeyboardClick = useRef(false);
+
+    const keyboardClickEvent = (e: KeyboardEvent) =>
+      match(e, keys.Enter) || match(e, keys.Space);
+
+    function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
+        requestAnimationFrame(() => {
+          refs.floating.current?.focus();
+        });
         e.stopPropagation();
+        e.preventDefault();
       }
 
-      if (match(e, keys.Enter) || match(e, keys.Space)) {
-        handleClick(e);
-      }
+      pendingKeyboardClick.current = keyboardClickEvent(e);
 
       if (rest.onKeyDown) {
         rest.onKeyDown(e);
       }
+    }
+
+    function handleKeyUp(e: KeyboardEvent<HTMLLIElement>) {
+      if (pendingKeyboardClick.current && keyboardClickEvent(e)) {
+        handleClick(e);
+      }
+
+      pendingKeyboardClick.current = false;
     }
 
     const classNames = cx(className, `${prefix}--menu-item`, {
@@ -194,10 +212,18 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       [`${prefix}--menu-item--danger`]: isDanger,
     });
 
+    const [isFocusable, setIsFocusable] = useState(false);
     // on first render, register this menuitem in the context's state
     // (used for keyboard navigation)
     useEffect(() => {
       registerItem();
+
+      // Detects if this is the first focusable item
+      const currentItems = context.state.items;
+      if (!disabled && menuItem.current && currentItems.length === 0) {
+        setIsFocusable(true);
+      }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -236,12 +262,13 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           {...rest}
           ref={ref}
           className={classNames}
-          tabIndex={-1}
+          tabIndex={isFocusable ? 0 : -1}
           aria-disabled={isDisabled ?? undefined}
           aria-haspopup={hasChildren ?? undefined}
           aria-expanded={hasChildren ? submenuOpen : undefined}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
           {...getReferenceProps()}>
           <div className={`${prefix}--menu-item__selection-icon`}>
             {rest['aria-checked'] && <Checkmark />}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ContainedListItem from './ContainedListItem';
+import { Search } from '../Search';
 
 const variants = ['on-page', 'disclosed'] as const;
 
@@ -50,7 +51,7 @@ export interface ContainedListProps {
   /**
    * A label describing the contained list.
    */
-  label: string | ReactNode;
+  label?: string | ReactNode;
 
   /**
    * Specify the size of the contained list.
@@ -79,7 +80,7 @@ function filterChildren(children) {
 function renderChildren(children) {
   if (Array.isArray(children)) {
     children.map((child, index) => {
-      if (index === 0 && child.type?.displayName === 'Search') {
+      if (index === 0 && child.type === Search) {
         return child;
       }
 
@@ -87,7 +88,7 @@ function renderChildren(children) {
     });
   }
 
-  if (children && children.type?.displayName === 'Search') {
+  if (children && children.type === Search) {
     return children;
   }
 
@@ -140,16 +141,18 @@ const ContainedList: ContainedListType = ({
 
   return (
     <div className={classes} {...rest}>
-      <div className={`${prefix}--contained-list__header`}>
-        <div id={labelId} className={`${prefix}--contained-list__label`}>
-          {label}
+      {label && (
+        <div className={`${prefix}--contained-list__header`}>
+          <div id={labelId} className={`${prefix}--contained-list__label`}>
+            {label}
+          </div>
+          <LayoutConstraint
+            size={{ min: 'sm', max: 'xl' }}
+            className={`${prefix}--contained-list__action`}>
+            {action}
+          </LayoutConstraint>
         </div>
-        <LayoutConstraint
-          size={{ min: 'sm', max: 'xl' }}
-          className={`${prefix}--contained-list__action`}>
-          {action}
-        </LayoutConstraint>
-      </div>
+      )}
       {children && (
         /**
          * Webkit removes implicit "list" semantics when "list-style-type: none" is set.
@@ -159,7 +162,7 @@ const ContainedList: ContainedListType = ({
          * Ref https://bugs.webkit.org/show_bug.cgi?id=170179#c1
          */
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
-        <ul role="list" aria-labelledby={labelId}>
+        <ul role="list" aria-labelledby={label ? labelId : undefined}>
           {isActionSearch ? filteredChildren : renderedChildren}
         </ul>
       )}
@@ -196,7 +199,7 @@ ContainedList.propTypes = {
   /**
    * A label describing the contained list.
    */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Specify the size of the contained list.

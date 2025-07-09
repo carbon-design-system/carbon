@@ -12,7 +12,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/slider';
 @use '@carbon/styles/scss/layout' as *;
 
-:host(#{$prefix}-slider) {
+:host(#{$prefix}-slider),
+:host(#{$prefix}-slider-skeleton) {
   outline: none;
   @include emit-layout-tokens();
 
@@ -43,6 +44,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-slider-input) {
+  position: relative;
+
   input {
     box-sizing: border-box;
   }
@@ -51,5 +54,35 @@ $css--plex: true !default;
 :host(#{$prefix}-slider-input[readonly]) {
   input {
     background-color: transparent;
+  }
+}
+.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon {
+  display: none;
+}
+.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon--focus {
+  display: block;
+}
+.#{$prefix}--slider__thumb-disabled {
+  pointer-events: none;
+}
+
+:host(#{$prefix}-slider-skeleton) {
+  .#{$prefix}--slider__thumb {
+    inset-inline-start: 50%;
+  }
+  .#{$prefix}--slider__thumb--upper,
+  .#{$prefix}--slider__thumb--lower {
+    block-size: inherit;
+    inline-size: inherit;
+    inset: initial;
+    inset-inline-start: initial;
+    transform: unset;
+  }
+}
+.#{$prefix}--slider--readonly {
+  .#{$prefix}--slider__filled-track {
+    background: $border-inverse;
   }
 }

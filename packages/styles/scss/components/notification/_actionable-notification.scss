@@ -486,11 +486,4 @@
   .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--actionable-notification__action-button:focus {
     @include high-contrast-mode('focus');
   }
-
-  .#{$prefix}--actionable-notification .#{$prefix}--inline-notification__icon,
-  .#{$prefix}--actionable-notification .#{$prefix}--toast-notification__icon,
-  .#{$prefix}--actionable-notification
-    .#{$prefix}--actionable-notification__close-icon {
-    @include high-contrast-mode('icon-fill');
-  }
 }

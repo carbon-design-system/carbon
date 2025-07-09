@@ -8,19 +8,12 @@
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
-import React, {
-  useRef,
-  useMemo,
-  useEffect,
-  type ForwardedRef,
-  type ElementType,
-} from 'react';
+import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { type PolymorphicProps } from '../../types/common';
-import { useWindowEvent } from '../../internal/useEvent';
-import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
+import { useWindowEvent, useEvent } from '../../internal/useEvent';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
   flip,
@@ -35,6 +28,7 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
+import { ToggletipButton } from '../Toggletip';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -82,19 +76,6 @@ export type NewPopoverAlignment =
 
 export type PopoverAlignment = DeprecatedPopoverAlignment | NewPopoverAlignment;
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
 export interface PopoverBaseProps {
   /**
    * Specify how the popover should align with the trigger element.
@@ -193,11 +174,13 @@ export const Popover: PopoverComponent & {
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
-  let align = mapPopoverAlignProp(initialAlign);
+  let align = mapPopoverAlign(initialAlign);
 
-  // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
-  useWindowEvent('blur', () => {
-    if (open) {
+  // The `Popover` should close whenever it and its children loses focus
+  useEvent(popover, 'focusout', (event) => {
+    const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+
+    if (!popover.current?.contains(relatedTarget)) {
       onRequestClose?.();
     }
   });
@@ -277,35 +260,39 @@ export const Popover: PopoverComponent & {
             ),
             autoAlign &&
               flip({
-                fallbackPlacements: align.includes('bottom')
-                  ? [
-                      'bottom',
-                      'bottom-start',
-                      'bottom-end',
-                      'right',
-                      'right-start',
-                      'right-end',
-                      'left',
-                      'left-start',
-                      'left-end',
-                      'top',
-                      'top-start',
-                      'top-end',
-                    ]
-                  : [
-                      'top',
-                      'top-start',
-                      'top-end',
-                      'left',
-                      'left-start',
-                      'left-end',
-                      'right',
-                      'right-start',
-                      'right-end',
-                      'bottom',
-                      'bottom-start',
-                      'bottom-end',
-                    ],
+                fallbackPlacements: isTabTip
+                  ? align.includes('bottom')
+                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+                  : align.includes('bottom')
+                    ? [
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'top',
+                        'top-start',
+                        'top-end',
+                      ]
+                    : [
+                        'top',
+                        'top-start',
+                        'top-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                      ],
 
                 fallbackStrategy: 'initialPlacement',
                 fallbackAxisSideDirection: 'start',
@@ -454,10 +441,8 @@ export const Popover: PopoverComponent & {
           // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
           if (
-            (enableFloatingStyles &&
-              (item?.type as any)?.displayName !== 'PopoverContent') ||
-            (enableFloatingStyles &&
-              (item?.type as any)?.displayName === 'ToggletipButton')
+            (enableFloatingStyles && item?.type !== PopoverContent) ||
+            (enableFloatingStyles && item?.type === ToggletipButton)
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
@@ -525,7 +510,6 @@ Popover.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -540,8 +524,7 @@ Popover.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**

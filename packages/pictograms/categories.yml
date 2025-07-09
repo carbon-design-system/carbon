@@ -3,7 +3,6 @@ categories:
     members:
       - cloud--download
       - cloud--upload
-      - coupon
       - crop
       - delete
       - do-not
@@ -14,6 +13,7 @@ categories:
       - export--01
       - export--02
       - flexible
+      - install
       - launch
       - link
       - love
@@ -22,6 +22,7 @@ categories:
       - music
       - paper--clip
       - player--flow
+      - prepare
       - refresh
       - renew
       - repeat
@@ -42,8 +43,20 @@ categories:
       - ai--robustness
       - ai--transparency
       - ai--trust
+      - code--conversion
+      - code--generation--chat
+      - code--generation--inline
+      - code--generation
+      - code--reverse-engineering
+      - data--scientist
       - decision-velocity
+      - ensure-data-quality
       - foundation-model
+      - generate--ai
+      - generate--code
+      - governance
+      - hard--prompt
+      - human-in-the-loop
       - ibm--granite
       - intelligence
       - machine--learning--01
@@ -53,8 +66,13 @@ categories:
       - machine--learning--05
       - machine--learning--06
       - machine--learning--model
+      - multi-model
+      - neurodiversity
+      - prompt
+      - spyre-accelerator
       - technical-owner
       - telum-ii-chip
+      - telum-ii-processor
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -77,6 +95,7 @@ categories:
       - escalator--up
       - fire--alarm
       - fire--extinguisher
+      - fire--hose
       - id--badge
       - intelligent-infrastructure
       - no--smoking
@@ -124,6 +143,8 @@ categories:
       - colombia--cathedral-of-las-lajas
       - copenhagen--planetarium
       - copenhagen--snekkja
+      - dallas--reunion-tower
+      - dallas--skyline
       - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
@@ -132,6 +153,7 @@ categories:
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
       - geodesic-montreal-biosphere
+      - guadalajara--seal
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
@@ -210,6 +232,7 @@ categories:
       - washington-dc--capitol
       - washington-dc--monument
       - zurich
+      - zurich--swiss-national-museum
   - name: Cloud
     members:
       - accelerating-transformation
@@ -524,6 +547,7 @@ categories:
   - name: Data analytics
     members:
       - analyze
+      - assess
       - blockchain
       - box--plot
       - chart--two-y-axis
@@ -534,6 +558,7 @@ categories:
       - chart--bubble--line
       - chart--candlestick
       - chart--custom
+      - chart--donut
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
@@ -615,9 +640,11 @@ categories:
       - ibm--z16--single-frame
       - ibm--z17
       - ibm--z17--multi-frame
+      - ibm--z17--plus-cloud
       - ibm--z17--single-frame
       - infrastructure-security
       - it--infrastructure-software
+      - linuxone-5
       - mainframe-qualities-of-service
       - reliability
       - resilience
@@ -642,9 +669,12 @@ categories:
       - art--tools--01
       - code--explanation
       - colors
+      - composer-edit
       - content--design
+      - design
       - design-and-development--01
       - design-and-development--02
+      - design-system-alignment
       - design--leadership
       - design--research
       - engineer
@@ -656,14 +686,19 @@ categories:
       - landing-page
       - motion
       - organization
+      - outcome-focused
       - overview
       - path
       - pattern
+      - pilot-test
+      - resourceful
       - social--tile
+      - software--02
       - universal-experiences
       - user--experience-design
       - user--insights
       - user--interface
+      - user--research-tools
       - visual--design
       - web--banners
       - web--developer
@@ -789,6 +824,7 @@ categories:
       - dropper
       - eyewash--station
       - first--aid
+      - gastro-health
       - health
       - heart--health
       - hospital
@@ -802,9 +838,10 @@ categories:
       - pills
       - pregnant
       - prescription
-      - stethoscope
+      - social--distancing
       - social--work--01
       - social--work--02
+      - stethoscope
       - telemedicine
       - telemedicine--mobile
       - x-ray--01
@@ -843,6 +880,7 @@ categories:
   - name: Industry
     members:
       - agriculture
+      - astronaut
       - b2b-commerce
       - bulldozer
       - cargo--crane
@@ -858,6 +896,8 @@ categories:
       - green-energy
       - insurance
       - keep-dry
+      - mission-control
+      - nuclear
       - oil--pump
       - oil--rig
       - power
@@ -884,6 +924,8 @@ categories:
       - build
       - connect
       - iot--munich
+      - migrate
+      - modernize--02
       - solve
       - transform--01
   - name: Life Science
@@ -915,6 +957,7 @@ categories:
       - candy
       - cherries
       - cookie
+      - crosshairs
       - cupcake
       - dining
       - hard--ice--cream
@@ -932,8 +975,10 @@ categories:
       - guitar
       - juice
       - lantern
+      - masters-leader-board
       - moon-cake
       - ornament
+      - pencil
       - perfume
       - racetrack
       - rock-on
@@ -948,7 +993,9 @@ categories:
       - tennis--ball
       - tennis--net
       - tennis--racquet
+      - tickets
       - tree
+      - tree--02
       - waving-hand
       - wedding--cake
       - whistle
@@ -1044,6 +1091,7 @@ categories:
       - person--07
       - person--08
       - person--09
+      - recruitment--01
       - renew--team
       - resilience--02
       - sap--successfactors
@@ -1056,16 +1104,27 @@ categories:
       - user--mask
       - user--profile
       - user--search
+      - wheelchair-user
+      - wheelchair-user--active
   - name: Quantum
     members:
       - albatross
+      - bloch-sphere
       - canary
       - condor
+      - crossbill
       - eagle
       - falcon
+      - flamingo
+      - heron
       - hummingbird
+      - kookaburra
+      - loon
+      - nighthawk
       - osprey
       - qiskit
+      - quantum--computer
+      - quantum--computer--02
   - name: Red Hat
     members:
       - build-applications-anywhere
@@ -1100,15 +1159,20 @@ categories:
       - clothes--rack--01
       - clothes--rack--02
       - coat--hanger
+      - coupon
       - credit--card
       - customer--service
       - gift
+      - mobile--pos--01
+      - mobile--pos--02
       - price
+      - product
       - qr-code
       - receipt
       - retail--sustainable
       - secure--search
       - select--product
+      - sell
       - shirt
       - shop
       - shopping--cart
@@ -1212,6 +1276,7 @@ categories:
       - esg-reporting--02
       - green-it--01
       - green-it--02
+      - incident-reporter
       - sustainability--02
       - sustainability--03
       - sustainability--04
@@ -1272,6 +1337,7 @@ categories:
       - automobile
       - bicycle
       - bus
+      - destination
       - electric--car
       - electric--charge
       - engine
@@ -1334,6 +1400,7 @@ categories:
       - cloudy--humid
       - cloudy--partial
       - cloudy--windy
+      - constellation
       - fog
       - hail
       - hail--heavy
@@ -1358,11 +1425,16 @@ categories:
       - windy
   - name: Workplace
     members:
+      - accessibility
+      - aed-defibrillator
       - bento-box-tray
       - beverage-carton
       - briefcase
       - cardboard
+      - compost
       - do-not-step
+      - epinephrine-auto-injectors
+      - focus-room
       - fountain--drinking
       - glass-bottle
       - glass-bottle-and-metal-can
@@ -1372,11 +1444,21 @@ categories:
       - lockers
       - loop--hearing
       - metal-can
+      - no--food
+      - no--liquids
+      - no--parking
+      - parking
+      - person--working
       - plastic-bottle
       - plastics
       - silence
       - station--hydration
       - toilet
+      - toilet--02
+      - toilet--03
       - trash--burnable
       - trash--non-burnable
+      - urinal--01
+      - urinal--02
+      - washing-hands
       - waste--electronic

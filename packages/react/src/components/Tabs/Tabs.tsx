@@ -40,7 +40,7 @@ import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
 import { useMatchMedia } from '../../internal/useMatchMedia';
@@ -529,9 +529,12 @@ function TabList({
 
   const tabs = useRef<TabElement[]>([]);
   const debouncedOnScroll = useCallback(() => {
-    return debounce((event) => {
-      setScrollLeft(event.target.scrollLeft);
+    const updateScroll = debounce(() => {
+      if (ref.current) {
+        setScrollLeft(ref.current.scrollLeft);
+      }
     }, scrollDebounceWait);
+    updateScroll();
   }, [scrollDebounceWait]);
 
   function onKeyDown(event: KeyboardEvent) {

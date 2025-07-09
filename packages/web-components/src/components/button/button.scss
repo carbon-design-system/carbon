@@ -33,10 +33,6 @@ $css--plex: true !default;
   .#{$prefix}--btn {
     flex-grow: 1;
     max-inline-size: 100%;
-
-    &:not(:focus) {
-      box-shadow: to-rem(-1px) to-rem(-1px) 0 0 $button-separator;
-    }
   }
 }
 
