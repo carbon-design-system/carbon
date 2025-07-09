@@ -268,7 +268,6 @@ describe('Popover', () => {
       expect(onRequestClose).toHaveBeenCalled();
     });
 
-
     it('should add multi-line class to popover content when text is long', async () => {
       const { container } = await render(
         <Popover open>
@@ -309,5 +308,5 @@ describe('Popover', () => {
       await userEvent.tab();
       expect(onRequestClose).toHaveBeenCalled();
     });
- 
+  });
 });
