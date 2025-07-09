@@ -37,7 +37,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   alignment = POPOVER_ALIGNMENT.TOP;
 
   /**
-   * Provide an offset value for alignment axis.
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
    */
   @property({ type: Number, attribute: 'alignment-axis-offset' })
   alignmentAxisOffset = 0;
