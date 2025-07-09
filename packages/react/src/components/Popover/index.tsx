@@ -12,7 +12,7 @@ import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { useWindowEvent } from '../../internal/useEvent';
+import { useWindowEvent, useEvent } from '../../internal/useEvent';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
@@ -176,9 +176,11 @@ export const Popover: PopoverComponent & {
 
   let align = mapPopoverAlign(initialAlign);
 
-  // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
-  useWindowEvent('blur', () => {
-    if (open) {
+  // The `Popover` should close whenever it and its children loses focus
+  useEvent(popover, 'focusout', (event) => {
+    const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+
+    if (!popover.current?.contains(relatedTarget)) {
       onRequestClose?.();
     }
   });

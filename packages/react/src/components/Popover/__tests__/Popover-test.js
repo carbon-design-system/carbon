@@ -267,5 +267,18 @@ describe('Popover', () => {
       await userEvent.click(container);
       expect(onRequestClose).toHaveBeenCalled();
     });
+
+    it('should call onRequestClose when tabbing out of popover via keyboard', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      await userEvent.tab();
+      await userEvent.tab();
+      expect(onRequestClose).toHaveBeenCalled();
+    });
   });
 });
