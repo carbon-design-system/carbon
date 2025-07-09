@@ -1965,6 +1965,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "kadiryazgan",
+      "name": "Kadir Yazgan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2729020?v=4",
+      "profile": "https://github.com/kadiryazgan",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
