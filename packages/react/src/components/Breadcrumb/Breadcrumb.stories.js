@@ -79,26 +79,22 @@ BreadcrumbWithOverflowMenu.argTypes = {
   ...sharedArgTypes,
 };
 
-export const BreadcrumbWithOverflowMenuSizeSmall = (args) => {
-  console.log(process.env.IS_PRODUCTION);
-
-  return (
-    <Breadcrumb noTrailingSlash {...args}>
-      <BreadcrumbItem>
-        <a href="/#">Breadcrumb 1</a>
-      </BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      <BreadcrumbItem data-floating-menu-container>
-        <OverflowMenu align="bottom" aria-label="Overflow menu in a breadcrumb">
-          <OverflowMenuItem itemText="Breadcrumb 3" />
-          <OverflowMenuItem itemText="Breadcrumb 4" />
-        </OverflowMenu>
-      </BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
-      <BreadcrumbItem isCurrentPage>Breadcrumb 6</BreadcrumbItem>
-    </Breadcrumb>
-  );
-};
+export const BreadcrumbWithOverflowMenuSizeSmall = (args) => (
+  <Breadcrumb noTrailingSlash {...args}>
+    <BreadcrumbItem>
+      <a href="/#">Breadcrumb 1</a>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem data-floating-menu-container>
+      <OverflowMenu align="bottom" aria-label="Overflow menu in a breadcrumb">
+        <OverflowMenuItem itemText="Breadcrumb 3" />
+        <OverflowMenuItem itemText="Breadcrumb 4" />
+      </OverflowMenu>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
+    <BreadcrumbItem isCurrentPage>Breadcrumb 6</BreadcrumbItem>
+  </Breadcrumb>
+);
 
 BreadcrumbWithOverflowMenuSizeSmall.argTypes = {
   ...sharedArgTypes,
