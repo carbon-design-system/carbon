@@ -64,10 +64,9 @@ export const Default = (props) => {
 Default.args = {
   size: 16,
 };
-
 Default.argTypes = sharedArgTypes;
 
-export const DefaultWithSize24 = (props) => {
+export const DefaultWithSize20 = (props) => {
   return (
     <div
       style={{
@@ -91,8 +90,8 @@ export const DefaultWithSize24 = (props) => {
   );
 };
 
-DefaultWithSize24.args = {
-  size: 24,
+DefaultWithSize20.args = {
+  size: 20,
 };
 
 /*
@@ -101,6 +100,5 @@ DefaultWithSize24.args = {
  * - Removed from the sidebar navigation
  * - Still be a tested variant
  */
-DefaultWithSize24.tags = ['!dev', '!autodocs'];
-
-DefaultWithSize24.argTypes = sharedArgTypes;
+DefaultWithSize20.tags = ['!dev', '!autodocs'];
+DefaultWithSize20.argTypes = sharedArgTypes;
