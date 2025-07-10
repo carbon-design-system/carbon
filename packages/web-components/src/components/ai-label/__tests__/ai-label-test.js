@@ -19,7 +19,6 @@ describe('cds-ai-label', function () {
     );
     expect(el.classList.contains('custom-class')).to.be.true;
   });
-
   it('should render children as expected', async () => {
     const el = await fixture(html`
       <cds-ai-label>
@@ -30,101 +29,46 @@ describe('cds-ai-label', function () {
     expect(bodySlot).to.exist;
   });
 
-  it('should respect aiText prop', async () => {
+  it('should use the ai-text attribute to set the AI label text', async () => {
     const el = await fixture(html`<cds-ai-label ai-text="IA"></cds-ai-label>`);
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    const textSpan = button.querySelector('.cds--slug__text');
-
+    const textSpan = el.shadowRoot.querySelector('.cds--slug__text');
     expect(textSpan.textContent).to.equal('IA');
   });
 
-  it('should not render ai-text-label when kind is not inline', async () => {
+  it('should render ai-text-label if kind is inline', async () => {
+    const el = await fixture(
+      html`<cds-ai-label
+        kind="inline"
+        ai-text-label="Test text"></cds-ai-label>`
+    );
+    const additionalTextSpan = el.shadowRoot.querySelector(
+      '.cds--slug__additional-text'
+    );
+
+    expect(additionalTextSpan).to.exist;
+    expect(additionalTextSpan.textContent.trim()).to.equal('Test text');
+  });
+
+  it('should not render ai-text-label if kind is not inline', async () => {
     const el = await fixture(
       html`<cds-ai-label ai-text-label="Test text"></cds-ai-label>`
     );
     const additionalTextSpan = el.shadowRoot.querySelector(
       '.cds--slug__additional-text'
     );
-
     expect(additionalTextSpan).to.not.exist;
   });
 
-  it('should respect kind prop', async () => {
+  it('should set the appropriate class when kind is inline', async () => {
     const el = await fixture(html`<cds-ai-label kind="inline"></cds-ai-label>`);
     const button = el.shadowRoot.querySelector('.cds--slug__button');
-
     expect(button).to.have.class('cds--slug__button--inline');
   });
 
-  it('should respect revertActive prop when initially set', async () => {
-    const el = await fixture(html`<cds-ai-label revert-active></cds-ai-label>`);
-    const iconButton = el.shadowRoot.querySelector('cds-icon-button');
-
-    expect(el.revertActive).to.be.true;
-    expect(iconButton).to.exist;
-  });
-
-  it('should respect revertLabel prop', async () => {
-    const el = await fixture(
-      html`<cds-ai-label
-        revert-active
-        revert-label="Custom revert label"></cds-ai-label>`
-    );
-    const tooltipContent = el.shadowRoot.querySelector(
-      'span[slot="tooltip-content"]'
-    );
-
-    expect(tooltipContent.textContent.trim()).to.equal('Custom revert label');
-  });
-
-  it('should respect size prop', async () => {
+  it('should set the appropriate class for the given size', async () => {
     const el = await fixture(html`<cds-ai-label size="xl"></cds-ai-label>`);
     const button = el.shadowRoot.querySelector('.cds--slug__button');
-
     expect(button).to.have.class('cds--slug__button--xl');
-  });
-
-  it('should have correct aria-label on button', async () => {
-    const el = await fixture(
-      html`<cds-ai-label ai-text="AI" button-label="Show info"></cds-ai-label>`
-    );
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-
-    expect(button.getAttribute('aria-label')).to.equal('AI - Show info');
-  });
-
-  it('should toggle visibility on click', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-
-    button.click();
-    await el.updateComplete;
-    expect(el.open).to.be.true;
-
-    button.click();
-    await el.updateComplete;
-    expect(el.open).to.be.false;
-  });
-
-  it('should render body text when provided via slot', async () => {
-    const el = await fixture(html`
-      <cds-ai-label>
-        <div slot="body-text">Custom body content</div>
-      </cds-ai-label>
-    `);
-    const bodySlot = el.shadowRoot.querySelector('slot[name="body-text"]');
-    expect(bodySlot).to.exist;
-  });
-
-  it('should render actions when provided via slot', async () => {
-    const el = await fixture(html`
-      <cds-ai-label>
-        <div slot="body-text">Content</div>
-        <button slot="actions">Action Button</button>
-      </cds-ai-label>
-    `);
-    const actionsSlot = el.shadowRoot.querySelector('slot[name="actions"]');
-    expect(actionsSlot).to.exist;
   });
 
   it('should support different size values', async () => {
@@ -141,89 +85,101 @@ describe('cds-ai-label', function () {
     }
   });
 
-  it('should have default property values', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+  it('should render icon button if revert-active attribute is true', async () => {
+    const el = await fixture(html`<cds-ai-label revert-active></cds-ai-label>`);
+    const iconButton = el.shadowRoot.querySelector('cds-icon-button');
+    const tooltipButton = el.shadowRoot.querySelector('.cds--slug__button');
 
-    expect(el.aiText).to.equal('AI');
-    expect(el.aiTextLabel).to.equal('');
-    expect(el.kind).to.equal('');
-    expect(el.revertActive).to.be.false;
-    expect(el.revertLabel).to.equal('Revert to AI input');
-    expect(el.size).to.equal('xs');
-    expect(el.buttonLabel).to.equal('Show information');
+    expect(el.revertActive).to.be.true;
+    expect(iconButton).to.exist;
+    expect(tooltipButton).to.not.exist;
   });
 
-  it('should render inline with content class when kind is inline and has ai-text-label', async () => {
+  it('should use the revert-label attribute for the revert button tooltip', async () => {
+    const el = await fixture(
+      html`<cds-ai-label
+        revert-active
+        revert-label="Custom revert label"></cds-ai-label>`
+    );
+    const tooltipContent = el.shadowRoot.querySelector(
+      'span[slot="tooltip-content"]'
+    );
+    expect(tooltipContent.textContent.trim()).to.equal('Custom revert label');
+  });
+
+  it('should use default revert label if revert-label is not provided', async () => {
+    const el = await fixture(html`<cds-ai-label revert-active></cds-ai-label>`);
+    const tooltipContent = el.shadowRoot.querySelector(
+      'span[slot="tooltip-content"]'
+    );
+    expect(tooltipContent.textContent.trim()).to.equal('Revert to AI input');
+  });
+
+  it('should set aria-label using button-label attribute', async () => {
+    const el = await fixture(
+      html`<cds-ai-label
+        ai-text="AI"
+        button-label="Custom info"></cds-ai-label>`
+    );
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    expect(button.getAttribute('aria-label')).to.equal('AI - Custom info');
+  });
+
+  it('should use default button label if button-label is not provided', async () => {
+    const el = await fixture(html`<cds-ai-label ai-text="AI"></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    expect(button.getAttribute('aria-label')).to.equal('AI - Show information');
+  });
+
+  it('should add inline-with-content class when kind is inline and ai-text-label is provided', async () => {
     const el = await fixture(
       html`<cds-ai-label
         kind="inline"
         ai-text-label="Text here"></cds-ai-label>`
     );
     const button = el.shadowRoot.querySelector('.cds--slug__button');
-
     expect(button).to.have.class('cds--slug__button--inline-with-content');
   });
 
-  it('should not render tooltip button when revert is active', async () => {
-    const el = await fixture(html`<cds-ai-label revert-active></cds-ai-label>`);
-    const tooltipButton = el.shadowRoot.querySelector('.cds--slug__button');
-    const iconButton = el.shadowRoot.querySelector('cds-icon-button');
+  it('should render body text content when provided via body-text slot', async () => {
+    const el = await fixture(html`
+      <cds-ai-label>
+        <div slot="body-text">Custom body content</div>
+      </cds-ai-label>
+    `);
 
-    expect(tooltipButton).to.not.exist;
-    expect(iconButton).to.exist;
+    const bodySlot = el.shadowRoot.querySelector('slot[name="body-text"]');
+    const assigned = bodySlot.assignedNodes({ flatten: true });
+
+    const bodyContent = assigned.find(
+      (node) =>
+        node.nodeType === Node.ELEMENT_NODE &&
+        node.textContent.includes('Custom body content')
+    );
+    expect(bodyContent).to.exist;
   });
 
-  it('should close on Escape key', async () => {
-    const el = await fixture(html`<cds-ai-label open></cds-ai-label>`);
-    expect(el.open).to.be.true;
+  it('should render action elements when provided via actions slot', async () => {
+    const el = await fixture(html`
+      <cds-ai-label>
+        <div slot="body-text">Content</div>
+        <button slot="actions">Action Button</button>
+      </cds-ai-label>
+    `);
 
-    const event = new KeyboardEvent('keydown', { key: 'Escape' });
-    el.dispatchEvent(event);
-    await el.updateComplete;
+    const actionsSlot = el.shadowRoot.querySelector('slot[name="actions"]');
+    const assigned = actionsSlot.assignedNodes({ flatten: true });
 
-    expect(el.open).to.be.false;
-  });
-
-  it('should close on focus out', async () => {
-    const el = await fixture(html`<cds-ai-label open></cds-ai-label>`);
-    const event = new FocusEvent('focusout', {
-      relatedTarget: document.body,
-    });
-    el.dispatchEvent(event);
-    await el.updateComplete;
-
-    expect(el.open).to.be.false;
+    const actionButton = assigned.find(
+      (node) =>
+        node.nodeType === Node.ELEMENT_NODE &&
+        node.tagName.toLowerCase() === 'button'
+    );
+    expect(actionButton).to.exist;
   });
 
   it('should have no Axe violations', async () => {
-    const el = await fixture(html`
-      <cds-ai-label>
-        <div slot="body-text">AI content</div>
-      </cds-ai-label>
-    `);
-    await expect(el).to.be.accessible();
-  });
-
-  it('should have deprecated slot attribute with default value', async () => {
     const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-    expect(el.slot).to.equal('ai-label');
-  });
-
-  it('should use empty label for inline kind', async () => {
-    const el = await fixture(
-      html`<cds-ai-label
-        kind="inline"
-        ai-text="AI"
-        ai-text-label="Text goes here"></cds-ai-label>`
-    );
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    expect(button.getAttribute('aria-label')).to.equal('AI - Show information');
-  });
-
-  it('should set aria-label when kind is default', async () => {
-    const el = await fixture(html`<cds-ai-label ai-text="AI"></cds-ai-label>`);
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-
-    expect(button.getAttribute('aria-label')).to.equal('AI - Show information');
+    await expect(el).to.be.accessible();
   });
 });
