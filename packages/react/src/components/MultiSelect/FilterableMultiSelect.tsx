@@ -503,6 +503,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const selectAllItem = items.find((item) => (item as any).isSelectAll);
 
+    const selectableRealItems = nonSelectAllItems.filter(
+      (item) => !(item as any).disabled
+    );
+
     // Sort only non-select-all items, select-all item must stay at the top
     const sortedReal = sortItems!(nonSelectAllItems, {
       selectedItems: {
@@ -515,8 +519,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       locale,
     });
 
-    // Only show select-all-item if there exist filtered items to select
-    if (selectAllItem && nonSelectAllItems.length > 0) {
+    // Only show select-all-item if there exist non-disabled filtered items to select
+    if (selectAllItem && selectableRealItems.length > 0) {
       return [selectAllItem, ...sortedReal];
     }
     return sortedReal;
