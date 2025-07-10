@@ -40,7 +40,7 @@ export default {
     sourceMap: true,
     all: true,
 
-    // thresholds can be modified once all componets have unit tests
+    // thresholds can be modified once all components have unit tests
     threshold: {
       statements: 60,
       branches: 60,
