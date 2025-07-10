@@ -28,7 +28,6 @@ const tooltipAlignments = {
 
 const args = {
   alignment: 'bottom',
-  open: false,
   autoalign: false,
   defaultOpen: false,
   alignmentAxisOffset: 0,
@@ -54,26 +53,15 @@ const argTypes = {
     control: 'boolean',
     description: 'Specify if the toggletip should be open by default',
   },
-  open: {
-    control: 'boolean',
-    description: 'Specify if the toggletip should be open',
-  },
 };
 
 export const Default = {
   argTypes,
   args,
-  render: ({
-    alignment,
-    open,
-    autoalign,
-    defaultOpen,
-    alignmentAxisOffset,
-  }) => html`
+  render: ({ alignment, autoalign, defaultOpen, alignmentAxisOffset }) => html`
     <div style="display: flex; align-items: center">
       <cds-toggletip
         alignment="${alignment}"
-        ?open="${open}"
         ?autoalign="${autoalign}"
         ?default-open="${defaultOpen}"
         alignment-axis-offset="${alignmentAxisOffset}">
@@ -94,16 +82,10 @@ export const ExperimentalAutoAlign = {
   argTypes,
   args: {
     ...args,
-    open: true,
     autoalign: true,
+    defaultOpen: true,
   },
-  render: ({
-    alignment,
-    open,
-    autoalign,
-    defaultOpen,
-    alignmentAxisOffset,
-  }) => html`
+  render: ({ alignment, autoalign, defaultOpen, alignmentAxisOffset }) => html`
     <div style="width: 5000px; height: 5000px;">
       <div
         style="
@@ -114,7 +96,6 @@ export const ExperimentalAutoAlign = {
         ">
         <cds-toggletip
           alignment="${alignment}"
-          ?open="${open}"
           ?autoalign="${autoalign}"
           ?default-open="${defaultOpen}"
           alignment-axis-offset="${alignmentAxisOffset}">
