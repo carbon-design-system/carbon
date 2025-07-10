@@ -4,7 +4,7 @@
   "version": "0.27.0",
   "license": "Apache-2.0",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "es/index.js",
   "module": "es/index.js",
   "sass": "index.scss",
   "repository": {
