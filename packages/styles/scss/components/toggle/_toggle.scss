@@ -6,6 +6,7 @@
 //3
 
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -19,7 +20,7 @@
 /// Toggle styles
 /// @access public
 /// @group toggle
-@mixin toggle {
+@mixin toggle($enable-v12-toggle-reduced-label-spacing: false) {
   .#{$prefix}--toggle {
     display: inline-block;
     user-select: none;
@@ -31,6 +32,12 @@
     display: block;
     color: $text-secondary;
     margin-block-end: $spacing-05;
+    @if (
+      enabled('enable-v12-toggle-reduced-label-spacing') or
+        $enable-v12-toggle-reduced-label-spacing
+    ) {
+      margin-block-end: $spacing-03;
+    }
   }
 
   .#{$prefix}--toggle__button {
