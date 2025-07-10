@@ -43,7 +43,7 @@ import ListBox, {
   type ListBoxType,
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { TranslateWithId } from '../../types/common';
