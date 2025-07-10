@@ -43,16 +43,16 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   alignmentAxisOffset = 0;
 
   /**
-   * The label for the toggle button
-   */
-  @property({ attribute: 'button-label' })
-  buttonLabel = 'Show information';
-
-  /**
    * Specify whether a auto align functionality should be applied
    */
   @property({ type: Boolean, reflect: true })
   autoalign = false;
+
+  /**
+   * The label for the toggle button
+   */
+  @property({ attribute: 'button-label' })
+  buttonLabel = 'Show information';
 
   /**
    * Set whether toggletip is open
@@ -72,7 +72,6 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       this.open = true;
     }
   }
-
 
   /**
    * Handles `slotchange` event.
