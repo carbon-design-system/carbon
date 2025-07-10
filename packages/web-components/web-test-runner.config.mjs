@@ -1,12 +1,15 @@
+import { esbuildPlugin } from '@web/dev-server-esbuild';
+
 export default {
   files: 'src/components/**/__tests__/*-test.js',
   nodeResolve: true,
   coverage: true,
   coverageConfig: {
     threshold: {
-      statements: 50,
-      branches: 50,
-      lines: 50,
+      statements: 60,
+      branches: 60,
+      // lines: 60,
+      // functions: 60,
     },
     exclude: [
       '**/node_modules/**',
@@ -14,10 +17,21 @@ export default {
       '**/*.stories.js',
       '**/*.test.js',
     ],
-  },
 
+    include: [
+      'src/**/*.js',
+      'src/**/*.ts',
+      'src/**/*.jsx',
+      'src/**/*.tsx',
+
+      '../feature-flags/es/**/*.js',
+      '../feature-flags/es/**/*.ts',
+    ],
+  },
+  esbuildTarget: 'auto',
   preserveSymlinks: true,
   plugins: [
+    esbuildPlugin(),
     {
       name: 'resolve-typescript',
       transform(context) {
