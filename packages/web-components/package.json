@@ -88,7 +88,7 @@
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.2",
+    "@rollup/plugin-typescript": "^12.1.4",
     "@rollup/pluginutils": "^5.1.4",
     "@storybook/addon-docs": "^9.0.5",
     "@storybook/addon-links": "^9.0.5",
