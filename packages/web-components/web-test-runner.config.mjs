@@ -24,15 +24,15 @@ export default {
 
     include: [
       'es/components/**/*.js',
-      '!es/components/**/*.scss.js',
       '!es/components/**/index.js',
-      '!es/components/**/*.stories.js',
       '!es/components/**/__tests__/**/*',
     ],
 
     exclude: [
       'node_modules/**/*',
       'coverage/**/*',
+      '**/*.stories.js',
+      '**/*.scss',
       'tests/**/*',
       '.storybook/**/*',
     ],
