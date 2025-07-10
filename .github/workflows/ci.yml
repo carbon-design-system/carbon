@@ -424,7 +424,7 @@ jobs:
       - name: Build project
         run: yarn build
       - name: Build storybook
-        run: yarn workspace @carbon/react storybook:build
+        run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
         uses: chromaui/action@4d8ebd13658d795114f8051e25c28d66f14886c6 # v13.1.2
