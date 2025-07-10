@@ -106,6 +106,40 @@ $css--plex: true !default;
   }
 }
 
+:host([isFlush]) .#{$prefix}--accordion__heading:hover {
+  position: relative;
+  z-index: 1;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    background: $layer-hover;
+    block-size: 1px;
+    content: '';
+    inline-size: 100%;
+    inset-inline-start: 0;
+    transition: background $duration-fast-02 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &::before {
+    inset-block-start: -1px;
+  }
+
+  &::after {
+    inset-block-end: -1px;
+  }
+
+  &:focus::before,
+  &:focus::after {
+    background: none;
+  }
+}
+
 :host(#{$prefix}-accordion-item[expanding]) {
   @extend .#{$prefix}--accordion__item--expanding;
 }
