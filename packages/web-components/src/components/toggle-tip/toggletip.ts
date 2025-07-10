@@ -49,6 +49,12 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   open = false;
 
   /**
+   * The label for the toggle button
+   */
+  @property({ attribute: 'button-label' })
+  buttonLabel = 'Show information';
+
+  /**
    * Handles `slotchange` event.
    */
   private _handleActionsSlotChange({ target }: Event) {
@@ -98,6 +104,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     return html`
       <button
         aria-controls="${this.id}"
+        aria-label="${this.buttonLabel}"
         class="${prefix}--toggletip-button"
         @click=${this._handleClick}>
         ${Information16({ id: 'trigger' })}
