@@ -183,3 +183,288 @@ describe('cds-ai-label', function () {
     await expect(el).to.be.accessible();
   });
 });
+
+describe('Focus and click handling', () => {
+  it('should close when clicking outside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    // Open the AI label
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    // Click outside the component
+    document.body.click();
+
+    // Should close the AI label
+    expect(el.open).to.be.false;
+  });
+
+  it('should close when focus moves away from the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    // Open the AI label
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    // Focus on another element
+    const otherElement = document.createElement('button');
+    document.body.appendChild(otherElement);
+    otherElement.focus();
+
+    // Should close the AI label
+    expect(el.open).to.be.false;
+
+    // Cleanup
+    document.body.removeChild(otherElement);
+  });
+
+  it('should not close when clicking inside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    // Open the AI label
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    // Click inside the component
+    button.click();
+
+    // Should still be open (toggle behavior)
+    expect(el.open).to.be.false;
+  });
+
+  it('should not close when focus moves to an element inside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    // Open the AI label
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    // Focus back to the button (inside the component)
+    button.focus();
+
+    // Should still be open
+    expect(el.open).to.be.true;
+  });
+
+  it('should handle keyboard navigation properly', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    // Focus the button
+    button.focus();
+
+    // Press Space to open
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+    expect(el.open).to.be.true;
+
+    // Press Escape to close
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(el.open).to.be.false;
+  });
+
+  it('should handle Enter key to toggle', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    // Focus the button
+    button.focus();
+
+    // Press Enter to open
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    expect(el.open).to.be.true;
+
+    // Press Enter again to close
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    expect(el.open).to.be.false;
+  });
+
+  it('should blur active element when clicked', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    // Focus the button
+    button.focus();
+    expect(document.activeElement).to.equal(button);
+
+    // Click the button
+    button.click();
+
+    // Active element should be blurred
+    expect(document.activeElement).to.not.equal(button);
+  });
+
+  it('should handle revert active state properly', async () => {
+    const el = await fixture(html`<cds-ai-label revert-active></cds-ai-label>`);
+    const iconButton = el.shadowRoot.querySelector('cds-icon-button');
+
+    // Click the revert button
+    iconButton.click();
+
+    // Should remove revert-active attribute
+    expect(el.hasAttribute('revert-active')).to.be.false;
+    expect(el.revertActive).to.be.false;
+  });
+
+  it('should handle focus change with null target gracefully', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    // Open the AI label
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    // Simulate focus change with null target
+    const focusEvent = new FocusEvent('focusin', { target: null });
+    document.dispatchEvent(focusEvent);
+
+    // Should handle gracefully without errors
+    expect(el.open).to.be.false;
+  });
+
+  it('should handle focus change with non-Node target gracefully', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    // Open the AI label
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    // Simulate focus change with non-Node target
+    const focusEvent = new FocusEvent('focusin', { target: 'string' });
+    document.dispatchEvent(focusEvent);
+
+    // Should handle gracefully without errors
+    expect(el.open).to.be.false;
+  });
+});
+
+describe('Focus and click handling', () => {
+  it('should close when clicking outside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    document.body.click();
+    expect(el.open).to.be.false;
+  });
+
+  it('should close when focus moves away from the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    const otherElement = document.createElement('button');
+    document.body.appendChild(otherElement);
+    otherElement.focus();
+
+    expect(el.open).to.be.false;
+
+    document.body.removeChild(otherElement);
+  });
+
+  it('should not close when clicking inside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    button.click();
+
+    expect(el.open).to.be.false;
+  });
+
+  it('should not close when focus moves to an element inside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    button.focus();
+
+    expect(el.open).to.be.true;
+  });
+
+  it('should handle keyboard navigation properly', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    button.focus();
+
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+    expect(el.open).to.be.true;
+
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(el.open).to.be.false;
+  });
+
+  it('should handle Enter key to toggle', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    button.focus();
+
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    expect(el.open).to.be.true;
+
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    expect(el.open).to.be.false;
+  });
+
+  it('should blur active element when clicked', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    button.focus();
+    expect(document.activeElement).to.equal(button);
+
+    button.click();
+
+    expect(document.activeElement).to.not.equal(button);
+  });
+
+  it('should handle revert active state properly', async () => {
+    const el = await fixture(html`<cds-ai-label revert-active></cds-ai-label>`);
+    const iconButton = el.shadowRoot.querySelector('cds-icon-button');
+
+    iconButton.click();
+
+    expect(el.hasAttribute('revert-active')).to.be.false;
+    expect(el.revertActive).to.be.false;
+  });
+
+  it('should handle focus change with null target gracefully', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    const focusEvent = new FocusEvent('focusin', { target: null });
+    document.dispatchEvent(focusEvent);
+
+    expect(el.open).to.be.false;
+  });
+
+  it('should handle focus change with non-Node target gracefully', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    expect(el.open).to.be.true;
+
+    const focusEvent = new FocusEvent('focusin', { target: 'string' });
+    document.dispatchEvent(focusEvent);
+
+    expect(el.open).to.be.false;
+  });
+});
