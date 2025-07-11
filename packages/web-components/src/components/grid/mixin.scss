@@ -1,0 +1,70 @@
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/grid';
+
+@mixin grid-columns($grid-component) {
+  $cols: (
+    sm: 4,
+    md: 8,
+    lg: 16,
+    xlg: 16,
+    max: 16,
+  );
+
+  :host(#{$grid-component}) ::slotted(#{$prefix}-column) {
+    @extend .#{$prefix}--css-grid-column;
+  }
+
+  @each $key, $value in $cols {
+    @for $i from 1 through $value {
+      :host(#{$grid-component}) ::slotted(#{$prefix}-column[#{$key}='#{$i}']),
+      :host(#{$grid-component})
+        ::slotted(#{$prefix}-column[#{$key}*='span:#{$i}']) {
+        @extend .#{$prefix}--#{$key}\:col-span-#{$i};
+      }
+
+      :host(#{$grid-component})
+        ::slotted(#{$prefix}-column[#{$key}*='start:#{$i}']) {
+        @extend .#{$prefix}--#{$key}\:col-start-#{$i};
+      }
+
+      :host(#{$grid-component})
+        ::slotted(#{$prefix}-column[#{$key}*='end:#{$i + 1}']) {
+        @extend .#{$prefix}--#{$key}\:col-end-#{$i + 1};
+      }
+
+      // span 0
+      :host(#{$grid-component}) ::slotted(#{$prefix}-column[#{$key}='0']),
+      :host(#{$grid-component})
+        ::slotted(#{$prefix}-column[#{$key}*='span:0']) {
+        @extend .#{$prefix}--#{$key}\:col-span-0;
+      }
+
+      // percent after others otherwise span:2 beats span:25%
+      @for $p from 1 through 4 {
+        $percent: $p * 25;
+
+        :host(#{$grid-component})
+          ::slotted(#{$prefix}-column[#{$key}='#{$percent}%']),
+        :host(#{$grid-component})
+          ::slotted(#{$prefix}-column[#{$key}*='span:#{$percent}%']) {
+          @extend .#{$prefix}--#{$key}\:col-span-#{$percent};
+        }
+      }
+    }
+  }
+
+  @for $i from 1 through 16 {
+    :host(#{$grid-component}) ::slotted(#{$prefix}-column[span='#{$i}']) {
+      @extend .#{$prefix}--col-span-#{$i};
+    }
+  }
+
+  @for $p from 1 through 4 {
+    $percent: $p * 25;
+
+    :host(#{$grid-component})
+      ::slotted(#{$prefix}-column[span='#{$percent}%']) {
+      @extend .#{$prefix}--col-span-#{$percent};
+    }
+  }
+}

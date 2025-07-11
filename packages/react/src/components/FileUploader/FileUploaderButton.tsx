@@ -11,7 +11,7 @@ import React, { useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
 import { ButtonKinds } from '../Button';
 
