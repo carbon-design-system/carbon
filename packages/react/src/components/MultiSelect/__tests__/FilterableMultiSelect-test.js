@@ -971,4 +971,186 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
+
+  it('passes inputProps to the input element', async () => {
+    render(
+      <FilterableMultiSelect
+        id="test-combo"
+        items={[{ label: 'Item 1' }]}
+        itemToString={(item) => item?.label || ''}
+        inputProps={{
+          maxLength: 10,
+          placeholder: 'Type here',
+          'aria-label': 'Choose an item',
+          'aria-controls': 'test-combo__menu',
+          tabIndex: '0',
+          type: 'text',
+        }}
+      />
+    );
+    const input = screen.getByPlaceholderText('Type here');
+    const attributes = Array.from(input.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
+
+    expect(input).toBeInTheDocument();
+    expect(attributes).toEqual({
+      'aria-activedescendant': '',
+      'aria-autocomplete': 'list',
+      'aria-controls': 'test-combo__menu',
+      'aria-expanded': 'false',
+      'aria-haspopup': 'listbox',
+      'aria-label': 'Choose an item',
+      autocomplete: 'off',
+      class: 'cds--text-input cds--text-input--empty',
+      id: 'test-combo-input',
+      maxlength: '10',
+      placeholder: 'Type here',
+      role: 'combobox',
+      tabindex: '0',
+      type: 'text',
+      value: '',
+    });
+  });
+
+  it('should lose focus in one click after interacting with menu items', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+
+    // Open the menu
+    await user.click(combobox);
+    assertMenuOpen(mockProps);
+
+    // Verify input is focused
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Interact with menu items (click on an option to select it)
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    // Verify menu is still open and input is still focused after selection
+    assertMenuOpen(mockProps);
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Click outside the component (simulate clicking on document body)
+    await user.click(document.body);
+
+    // Menu should close and component should lose focus in ONE click
+    assertMenuClosed();
+    expect(combobox.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Verify onMenuChange was called to close the menu
+    expect(mockProps.onMenuChange).toHaveBeenLastCalledWith(false);
+  });
+
+  it('should not steal focus from TextInput after user interaction', async () => {
+    const user = userEvent.setup();
+
+    // Render both components in the same container
+    render(
+      <div>
+        <FilterableMultiSelect {...mockProps} />
+        <input type="text" data-testid="text-input" placeholder="Text input" />
+      </div>
+    );
+    await waitForPosition();
+
+    const multiselect = screen.getByRole('combobox');
+    const textInput = screen.getByTestId('text-input');
+
+    // Interact with FilterableMultiSelect
+    await user.click(multiselect);
+    assertMenuOpen(mockProps);
+
+    // Select an item
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    // Click on TextInput to move focus
+    await user.click(textInput);
+
+    // Verify focus is on TextInput and stays there
+    expect(textInput).toHaveFocus();
+
+    // Type in TextInput to ensure focus is stable
+    await user.type(textInput, 'test');
+    expect(textInput).toHaveValue('test');
+    expect(textInput).toHaveFocus();
+
+    // Verify FilterableMultiSelect lost focus
+    expect(multiselect.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+    assertMenuClosed();
+  });
+  it('should close menu options when open the menu and click on it again', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await openMenu();
+    expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
+    await openMenu();
+    assertMenuClosed();
+  });
+  it('should focus when user open menu, select one item, unselect item and close the menu', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await openMenu();
+    const options = screen.getAllByRole('option');
+    expect(options.length).toBe(mockProps.items.length);
+    await user.click(options[0]);
+    expect(options[0].closest(`.${prefix}--list-box__menu-item`)).toHaveClass(
+      `${prefix}--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted`
+    );
+    act(() => {
+      user.click(options[0]);
+    });
+    await openMenu();
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--list-box`)
+    ).toHaveClass(`${prefix}--multi-select--filterable--input-focused`);
+    assertMenuClosed();
+  });
+  it('should remove focus styling when tabbing away from component', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <div>
+        <FilterableMultiSelect {...mockProps} />
+        <button data-testid="other-button">Other Button</button>
+      </div>
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    const otherButton = screen.getByTestId('other-button');
+
+    // Open the menu and verify focus styling is applied
+    await user.click(combobox);
+    assertMenuOpen(mockProps);
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Tab away to the other button
+    await user.tab();
+    expect(otherButton).toHaveFocus();
+
+    // Verify focus styling is removed
+    expect(combobox.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+  });
 });

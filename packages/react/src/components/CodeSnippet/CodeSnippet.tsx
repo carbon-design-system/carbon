@@ -19,9 +19,9 @@ import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import copy from 'copy-to-clipboard';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
@@ -202,7 +202,7 @@ function CodeSnippet({
 }: PropsWithChildren<CodeSnippetProps>) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
-  const { current: uid } = useRef(uniqueId());
+  const { current: uid } = useRef(useId());
   const codeContentRef = useRef<HTMLPreElement>(null);
   const codeContainerRef = useRef<HTMLDivElement>(null);
   const innerCodeRef = useRef<HTMLElement>(null);
@@ -258,9 +258,7 @@ function CodeSnippet({
   }, [type, getCodeRefDimensions]);
 
   useResizeObserver({
-    // Cast the ref until the hook supports React 19
-    // https://github.com/ZeeCoder/use-resize-observer/issues/108
-    ref: getCodeRef() as React.RefObject<HTMLElement>,
+    ref: getCodeRef(),
     onResize: () => {
       if (codeContentRef?.current && type === 'multi') {
         const { height } = codeContentRef.current.getBoundingClientRect();
@@ -339,6 +337,7 @@ function CodeSnippet({
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
+        disabled={disabled}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
         <code id={uid} ref={innerCodeRef}>

@@ -37,14 +37,13 @@ import {
 import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonProps } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
-import { PopoverAlignment } from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
@@ -123,12 +122,21 @@ export const getMenuOffset: MenuOffset = (
   }
 };
 
-export interface OverflowMenuProps {
-  /**
-   * Specify how the trigger tooltip should be aligned.
-   */
-  align?: PopoverAlignment;
-
+export interface OverflowMenuProps
+  extends Omit<
+    IconButtonProps,
+    | 'type'
+    | 'aria-haspopup'
+    | 'aria-expanded'
+    | 'aria-controls'
+    | 'className'
+    | 'onClick'
+    | 'id'
+    | 'ref'
+    | 'size'
+    | 'label'
+    | 'kind'
+  > {
   /**
    * Specify a label to be read by screen readers on the container node
    */
@@ -305,13 +313,15 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    // Call `onClose` when menu closes.
     useEffect(() => {
-      if (!open && prevOpenState.current) {
+      if (open && !prevOpenState.current) {
+        onOpen();
+      } else if (!open && prevOpenState.current) {
         onClose();
       }
+
       prevOpenState.current = open;
-    }, [open, onClose]);
+    }, [open, onClose, onOpen]);
 
     useOutsideClick(wrapperRef, ({ target }) => {
       if (
@@ -475,7 +485,6 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         },
         !hasFocusin
       );
-      onOpen();
     };
 
     const getTarget = () => {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import React, {
 import cx from 'classnames';
 import Link, { LinkProps, LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 export interface HeaderMenuItemBaseProps {
@@ -57,6 +57,7 @@ const HeaderMenuItem = forwardRef(function HeaderMenuItem<
   ref: ForwardedRef<E>
 ) {
   const prefix = usePrefix();
+  const resolvedTabIndex = tabIndex ?? 0;
   if (isCurrentPage) {
     isActive = isCurrentPage;
   }
@@ -75,7 +76,7 @@ const HeaderMenuItem = forwardRef(function HeaderMenuItem<
         aria-current={hasCurrentClass ? true : ariaCurrent}
         className={linkClassName}
         ref={ref}
-        tabIndex={tabIndex}>
+        tabIndex={resolvedTabIndex}>
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
       </Link>
     </li>
