@@ -1,3 +1,5 @@
+'use client';
+
 import { GlobalTheme } from '@carbon/react';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 

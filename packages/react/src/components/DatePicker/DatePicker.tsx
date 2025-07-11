@@ -32,15 +32,20 @@ import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
 import type { Instance } from 'flatpickr/dist/types/instance';
 
-// Weekdays shorthand for english locale
-l10n.en.weekdays.shorthand.forEach((_day, index) => {
-  const currentDay = l10n.en.weekdays.shorthand;
-  if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
-    currentDay[index] = 'Th';
-  } else {
-    currentDay[index] = currentDay[index].charAt(0);
+// Weekdays shorthand for English locale
+// Ensure localization exists before trying to access it
+function initializeWeekdayShorthand() {
+  if (l10n?.en?.weekdays?.shorthand) {
+    l10n.en.weekdays.shorthand.forEach((_day, index) => {
+      const currentDay = l10n.en.weekdays.shorthand;
+      if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
+        currentDay[index] = 'Th';
+      } else {
+        currentDay[index] = currentDay[index].charAt(0);
+      }
+    });
   }
-});
+}
 
 const forEach = Array.prototype.forEach;
 
@@ -543,6 +548,10 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     }
   );
+
+  useEffect(() => {
+    initializeWeekdayShorthand();
+  }, []);
 
   useEffect(() => {
     if (datePickerType !== 'single' && datePickerType !== 'range') {

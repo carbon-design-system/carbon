@@ -15,7 +15,6 @@ import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import cssnano from 'cssnano';
 import fs from 'fs';
-import multiInput from 'rollup-plugin-multi-input';
 import postcss from 'postcss';
 import replace from '@rollup/plugin-replace';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
@@ -62,11 +61,20 @@ async function buildDist() {
     }
   }
 
-  return rollup(getRollupConfig({ folders }))
+  // Generates the multi-input for the rollup config
+  const inputs = folders.reduce((acc, folder) => {
+    acc[`components/${folder}/index`] = `src/components/${folder}/index.ts`;
+    return acc;
+  }, {});
+
+  return rollup(getRollupConfig({ inputs }))
     .then((bundle) => {
       bundle.write({
         format: 'es',
         dir: 'dist',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        entryFileNames: '[name].min.js',
         banner: 'let process = { env: {} };',
       });
     })
@@ -76,30 +84,13 @@ async function buildDist() {
 }
 
 /**
- * Generates the multi-input for the rollup config
- *
- * @param {Array} folders Package names as inputs
- * @returns {{}} Object with inputs
- * @private
- */
-function _generateInputs(folders) {
-  const inputs = {};
-
-  folders.forEach((folder) => {
-    inputs[`${folder}.min`] = `src/components/${folder}/index.ts`;
-  });
-
-  return inputs;
-}
-
-/**
  * Sets the rollup configuration based on various settings
  *
  * @param {object} [options] The build options.
- * @param {Array} [options.folders] Package names as inputs
+ * @param {object} [options.inputs] Map input files
  * @returns {object} The Rollup config.
  */
-function getRollupConfig({ folders = [] } = {}) {
+function getRollupConfig({ inputs = {} } = {}) {
   const postCSSPlugins = [fixHostPseudo(), autoprefixer(), cssnano()];
 
   const licenseOptions = {
@@ -110,12 +101,11 @@ function getRollupConfig({ folders = [] } = {}) {
   };
 
   return {
-    input: _generateInputs(folders),
+    input: inputs,
     plugins: [
       alias({
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
       }),
-      multiInput(),
       nodeResolve({
         browser: true,
         mainFields: ['jsnext', 'module', 'main'],
