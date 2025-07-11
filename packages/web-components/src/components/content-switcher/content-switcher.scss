@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -99,7 +99,7 @@ $css--plex: true !default;
 :host(#{$prefix}-content-switcher-item:first-of-type)
   .#{$prefix}--content-switcher-btn {
   border-end-start-radius: $spacing-02;
-  border-inline-start: rem(1px) solid $border-inverse;
+  // border-inline-start: rem(1px) solid $border-inverse;
   border-start-start-radius: $spacing-02;
 
   &::before {
@@ -112,4 +112,8 @@ $css--plex: true !default;
   border-end-end-radius: $spacing-02;
   border-inline-end: rem(1px) solid $border-inverse;
   border-start-end-radius: $spacing-02;
+}
+
+:host([lowcontrast]) {
+  @extend .#{$prefix}--content-switcher--low-contrast;
 }

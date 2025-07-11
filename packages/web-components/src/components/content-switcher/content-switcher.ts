@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -142,6 +142,7 @@ class CDSContentSwitcher extends LitElement {
     interactionType?: 'mouse' | 'keyboard' | undefined
   ) {
     if (
+      item &&
       (!item.disabled && item.value !== this.value) ||
       (this.selectionMode === 'manual' &&
         interactionType === 'keyboard' &&
@@ -161,7 +162,23 @@ class CDSContentSwitcher extends LitElement {
       });
       if (this.dispatchEvent(beforeSelectEvent)) {
         this._selectionDidChange(item, interactionType);
-        const afterSelectEvent = new CustomEvent(constructor.eventSelect, init);
+
+        // Add extra event details (index, name, text) to match the React `onChange`
+        const items = this.querySelectorAll(constructor.selectorItem);
+        const index = Array.from(items).indexOf(item);
+        const name = item.getAttribute('name') ?? undefined;
+        const text = item.textContent?.trim() ?? undefined;
+
+        const afterSelectEvent = new CustomEvent(constructor.eventSelect, {
+          bubbles: true,
+          composed: true,
+          detail: {
+            item,
+            index,
+            name,
+            text,
+          },
+        });
         this.dispatchEvent(afterSelectEvent);
       }
     }
@@ -228,7 +245,6 @@ class CDSContentSwitcher extends LitElement {
         (itemToSelect as Element).closest(selectorItem)!
       );
       const nextIndex = index < 0 ? index : index + 1;
-
       forEach(this.querySelectorAll(selectorItem), (elem, i) => {
         // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
         // until `:host-context()` gets supported in all major browsers
@@ -267,6 +283,12 @@ class CDSContentSwitcher extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'icon' })
   iconOnly = false;
 
+  /**
+   * `true` to use the low contrast version.
+   */
+  @property({ type: Boolean, reflect: true })
+  lowContrast = false;
+
   firstUpdated() {
     this._updateSelectedItemFromIndex();
   }
@@ -299,15 +321,14 @@ class CDSContentSwitcher extends LitElement {
     }
   }
 
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has('iconOnly')) {
-      const { selectorIconItem } = this
-        .constructor as typeof CDSContentSwitcher;
-      if (this.querySelector(selectorIconItem)) {
-        this.iconOnly = true;
-      }
+  shouldUpdate(changedProps) {
+    if (changedProps.has('iconOnly') || changedProps.has('selectedIndex')) {
+      const items = this.querySelectorAll(`${prefix}-content-switcher-item`);
+      const allIcon = Array.from(items).every((item) =>
+        item.hasAttribute('icon')
+      );
+      this.iconOnly = allIcon;
     }
-
     return true;
   }
 
