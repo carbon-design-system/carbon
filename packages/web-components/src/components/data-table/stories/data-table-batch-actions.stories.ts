@@ -18,6 +18,7 @@ import Settings16 from '@carbon/icons/lib/settings/16.js';
 import '../../overflow-menu';
 import '../index';
 import storyDocs from './data-table.mdx';
+import '../../link/index';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
