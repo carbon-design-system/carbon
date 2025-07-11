@@ -878,7 +878,6 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   return null;
 };
 
-DataTable.translationKeys = Object.values(translationIds);
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
 DataTable.TableBatchAction = TableBatchAction;
