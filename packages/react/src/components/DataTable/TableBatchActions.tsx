@@ -141,14 +141,12 @@ const TableBatchActions: TableBatchActionsComponent = ({
           </Text>
         </p>
         {onSelectAll && (
-          <>
-            <span className={`${prefix}--batch-summary__divider`}>&#x7c;</span>
-            <Button
-              onClick={onSelectAll}
-              tabIndex={shouldShowBatchActions ? 0 : -1}>
-              {t('carbon.table.batch.selectAll', { totalCount })}
-            </Button>
-          </>
+          <Button
+            onClick={onSelectAll}
+            className={`${prefix}--batch-summary__select-all`}
+            tabIndex={shouldShowBatchActions ? 0 : -1}>
+            {t('carbon.table.batch.selectAll', { totalCount })}
+          </Button>
         )}
       </div>
       <TableActionList>

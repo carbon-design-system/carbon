@@ -383,13 +383,8 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               0 items selected
             </span>
           </p>
-          <span
-            class="cds--batch-summary__divider"
-          >
-            |
-          </span>
           <button
-            class="cds--btn cds--btn--primary"
+            class="cds--batch-summary__select-all cds--btn cds--btn--primary"
             tabindex="-1"
             type="button"
           >
