@@ -131,6 +131,7 @@ export function Toggletip<E extends ElementType = 'span'>({
     buttonProps: {
       'aria-expanded': open,
       'aria-controls': id,
+      'aria-describedby': open ? id : undefined,
       onClick: actions.toggle,
     },
     contentProps: {
@@ -231,7 +232,7 @@ Toggletip.propTypes = {
   ]),
 
   /**
-   * Provide an offset value for alignment axis.
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
    */
   alignmentAxisOffset: PropTypes.number,
 
@@ -354,8 +355,7 @@ const ToggletipContent = React.forwardRef<
     <PopoverContent
       className={customClassName}
       {...toggletip?.contentProps}
-      ref={ref}
-      aria-live="polite">
+      ref={ref}>
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );

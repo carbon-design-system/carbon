@@ -6,13 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 
-export interface DropdownSkeletonProps extends ReactAttr<HTMLDivElement> {
+export interface DropdownSkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify an optional className to add.
    */
@@ -39,10 +38,7 @@ const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
   const wrapperClasses = cx(
     className,
     `${prefix}--skeleton`,
-    `${prefix}--form-item`,
-    {
-      [`${prefix}--list-box--${size}`]: size,
-    }
+    `${prefix}--form-item`
   );
 
   return (
@@ -50,7 +46,11 @@ const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
       {!hideLabel && (
         <span className={`${prefix}--label ${prefix}--skeleton`} />
       )}
-      <div className={`${prefix}--skeleton ${prefix}--dropdown`} />
+      <div
+        className={cx(`${prefix}--skeleton ${prefix}--dropdown`, {
+          [`${prefix}--list-box--${size}`]: size,
+        })}
+      />
     </div>
   );
 };

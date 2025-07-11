@@ -25,7 +25,7 @@ export const ButtonKinds = [
 
 export type ButtonKind = (typeof ButtonKinds)[number];
 
-export const ButtonSizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+export const ButtonSizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 export type ButtonSize = (typeof ButtonSizes)[number];
 
@@ -372,7 +372,7 @@ const Button: ButtonComponent = React.forwardRef(
   /**
    * Specify the size of the button, from the following list of sizes:
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Optional prop to specify the tabIndex of the Button

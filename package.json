@@ -31,24 +31,25 @@
     "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~19.0.0",
+    "@types/react": "~19.1.0",
     "@types/prop-types": "^15.7.14",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
-    "react": "~19.0.0",
-    "react-dom": "~19.0.0",
-    "react-is": "~19.0.0",
-    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch"
+    "react": "~19.1.0",
+    "react-dom": "~19.1.0",
+    "react-is": "~19.1.0",
+    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
+    "brace-expansion": "^2.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/plugin-proposal-export-default-from": "^7.24.7",
-    "@babel/plugin-transform-class-properties": "^7.24.7",
-    "@babel/plugin-transform-export-namespace-from": "^7.24.7",
-    "@babel/plugin-transform-runtime": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/runtime": "^7.24.7",
+    "@babel/core": "^7.27.3",
+    "@babel/plugin-proposal-export-default-from": "^7.27.1",
+    "@babel/plugin-transform-class-properties": "^7.27.1",
+    "@babel/plugin-transform-export-namespace-from": "^7.27.1",
+    "@babel/plugin-transform-runtime": "^7.27.3",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/runtime": "^7.27.3",
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
@@ -62,7 +63,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/prop-types": "^15.7.13",
     "@types/react-is": "^19.0.0",
-    "accessibility-checker": "^4.0.4",
+    "accessibility-checker": "^4.0.6",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
@@ -80,7 +81,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rimraf": "^5.0.0",
-    "stylelint": "^16.0.0"
+    "stylelint": "^16.0.0",
+    "typescript-eslint": "^8.34.0"
   },
   "commitlint": {
     "extends": [
@@ -150,5 +152,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.9.2"
 }

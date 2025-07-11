@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { wrapFocus } from '../wrapFocus';
+import { wrapFocus, wrapFocusWithoutSentinels } from '../wrapFocus';
 
 describe('wrapFocus', () => {
   let node;
@@ -144,5 +144,56 @@ describe('wrapFocus', () => {
       oldActiveNode: node.querySelector('#dummy-old-active-node'),
     });
     expect(spyInnerModal).toHaveBeenCalled();
+  });
+});
+
+describe('wrapFocusWithoutSentinels', () => {
+  let container;
+  let button1;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    container.innerHTML = `
+      <button id="button-0">Button 0</button>
+      <button id="button-1">Button 1</button>
+    `;
+    document.body.appendChild(container);
+    button1 = container.querySelector('#button-1');
+  });
+
+  afterEach(() => {
+    document.body.removeChild(container);
+  });
+
+  it('should not throw an error when called during keydown event', () => {
+    const event = new KeyboardEvent('keydown', { key: 'Tab' });
+    Object.defineProperty(event, 'shiftKey', { value: false });
+
+    expect(() =>
+      wrapFocusWithoutSentinels({
+        containerNode: container,
+        currentActiveNode: button1,
+        event,
+      })
+    ).not.toThrow();
+  });
+
+  it('should throw an error when called during unsupported event', () => {
+    const event = new FocusEvent('focusin');
+    const originalEnv = process.env.NODE_ENV;
+
+    process.env.NODE_ENV = 'development';
+
+    expect(() =>
+      wrapFocusWithoutSentinels({
+        containerNode: container,
+        currentActiveNode: button1,
+        event,
+      })
+    ).toThrow(
+      /^Error: wrapFocusWithoutSentinels\(\.\.\.\) called in unsupported focusin event\.\s+Call wrapFocusWithoutSentinels\(\.\.\.\) from onKeyDown instead\.$/
+    );
+
+    process.env.NODE_ENV = originalEnv;
   });
 });
