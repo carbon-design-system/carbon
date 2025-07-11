@@ -135,8 +135,9 @@ export interface NumberInputProps
   id: string;
 
   /**
-   * Instruct the browser which keyboard to display on mobile devices. Note that
-   * standard numeric keyboards vary across devices and operating systems.
+   * Instruct the browser which keyboard to display on mobile devices. Defaults
+   * to `decimal`, but note that standard numeric keyboards vary across devices
+   * and operating systems.
    * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
    */
   inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
@@ -286,7 +287,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       hideSteppers,
       iconDescription,
       id,
-      inputMode,
+      inputMode = 'decimal',
       invalid = false,
       invalidText,
       label,
@@ -850,8 +851,9 @@ NumberInput.propTypes = {
   id: PropTypes.string.isRequired,
 
   /**
-   * Instruct the browser which keyboard to display on mobile devices. Note that
-   * standard numeric keyboards vary across devices and operating systems.
+   * Instruct the browser which keyboard to display on mobile devices. Defaults
+   * to `decimal`, but note that standard numeric keyboards vary across devices
+   * and operating systems.
    * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
    */
   inputMode: PropTypes.oneOf([
