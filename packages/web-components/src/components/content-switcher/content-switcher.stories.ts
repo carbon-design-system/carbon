@@ -16,6 +16,10 @@ import ViewMode2_16 from '@carbon/icons/lib/view--mode-2/16.js';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
 
+const forwardEventDetail = (handler) => (event) => {
+  handler?.(event.detail);
+};
+
 const sizes = {
   [`Small (${CONTENT_SWITCHER_SIZE.SMALL})`]: CONTENT_SWITCHER_SIZE.SMALL,
   'Medium (md - default)': null,
@@ -75,10 +79,6 @@ export const Default = {
     selectedIndex,
     lowContrast,
   }) => {
-    const handleBeforeSelect = (event: CustomEvent) => {
-      onBeforeSelect?.(event);
-    };
-
     return html`
       <cds-content-switcher
         value="${ifDefined(value)}"
@@ -86,8 +86,10 @@ export const Default = {
         selectedIndex="${selectedIndex}"
         size="${size}"
         ?lowcontrast="${lowContrast}"
-        @cds-content-switcher-beingselected="${handleBeforeSelect}"
-        @cds-content-switcher-selected="${onChange}">
+        @cds-content-switcher-beingselected="${forwardEventDetail(
+          onBeforeSelect
+        )}"
+        @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
         <cds-content-switcher-item
           value="all"
           name="one"
@@ -117,13 +119,25 @@ export const Default = {
 export const IconOnly = {
   args,
   argTypes,
-  render: ({ value, size, selectionMode, selectedIndex, lowContrast }) => html`
+  render: ({
+    value,
+    onBeforeSelect,
+    onChange,
+    size,
+    selectionMode,
+    selectedIndex,
+    lowContrast,
+  }) => html`
     <cds-content-switcher
       value="${ifDefined(value)}"
       size="${size}"
       selectionMode="${selectionMode}"
       selectedIndex="${selectedIndex}"
-      ?lowcontrast="${lowContrast}">
+      ?lowcontrast="${lowContrast}"
+      @cds-content-switcher-beingselected="${forwardEventDetail(
+        onBeforeSelect
+      )}"
+      @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
       <cds-content-switcher-item icon value="all" ?lowcontrast="${lowContrast}">
         ${TableOfContents16()}
         <span slot="tooltip-content">Table of Contents</span>
@@ -149,14 +163,26 @@ export const IconOnly = {
 export const IconOnlyWithLayer = {
   args,
   argTypes,
-  render: ({ value, size, selectionMode, selectedIndex, lowContrast }) => html`
+  render: ({
+    value,
+    onBeforeSelect,
+    onChange,
+    size,
+    selectionMode,
+    selectedIndex,
+    lowContrast,
+  }) => html`
     <sb-template-layers>
       <cds-content-switcher
         value="${ifDefined(value)}"
         size="${size}"
         selectionMode="${selectionMode}"
         selectedIndex="${selectedIndex}"
-        ?lowcontrast="${lowContrast}">
+        ?lowcontrast="${lowContrast}"
+        @cds-content-switcher-beingselected="${forwardEventDetail(
+          onBeforeSelect
+        )}"
+        @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
         <cds-content-switcher-item
           icon
           value="all"
@@ -198,10 +224,6 @@ export const LowContrast = {
     selectedIndex,
     lowContrast,
   }) => {
-    const handleBeforeSelect = (event: CustomEvent) => {
-      onBeforeSelect?.(event);
-    };
-
     return html`
       <cds-content-switcher
         value="${ifDefined(value)}"
@@ -209,17 +231,27 @@ export const LowContrast = {
         selectedIndex="${selectedIndex}"
         size="${size}"
         ?lowcontrast="${lowContrast}"
-        @cds-content-switcher-beingselected="${handleBeforeSelect}"
-        @cds-content-switcher-selected="${onChange}">
-        <cds-content-switcher-item ?lowcontrast="${lowContrast}" value="all">
+        @cds-content-switcher-beingselected="${forwardEventDetail(
+          onBeforeSelect
+        )}"
+        @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
+        <cds-content-switcher-item
+          ?lowcontrast="${lowContrast}"
+          value="all"
+          name="one"
+          text="First section">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
-          ?lowcontrast="${lowContrast}"
-          value="cloudFoundry">
+          value="cloudFoundry"
+          name="two"
+          text="Second section"
+          ?lowcontrast="${lowContrast}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
+          name="three"
+          text="Third section"
           ?lowcontrast="${lowContrast}"
           value="staging">
           Third section
@@ -235,13 +267,25 @@ export const lowContrastIconOnly = {
     lowContrast: true,
   },
   argTypes,
-  render: ({ value, size, selectionMode, selectedIndex, lowContrast }) => html`
+  render: ({
+    value,
+    onBeforeSelect,
+    onChange,
+    size,
+    selectionMode,
+    selectedIndex,
+    lowContrast,
+  }) => html`
     <cds-content-switcher
       value="${ifDefined(value)}"
       size="${size}"
       selectionMode="${selectionMode}"
       selectedIndex="${selectedIndex}"
-      ?lowcontrast="${lowContrast}">
+      ?lowcontrast="${lowContrast}"
+      @cds-content-switcher-beingselected="${forwardEventDetail(
+        onBeforeSelect
+      )}"
+      @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
       <cds-content-switcher-item icon value="all" ?lowcontrast="${lowContrast}">
         ${TableOfContents16()}
         <span slot="tooltip-content">Table of Contents</span>
@@ -267,21 +311,39 @@ export const lowContrastIconOnly = {
 export const WithLayer = {
   args,
   argTypes,
-  render: ({ value, size, selectionMode, selectedIndex, lowContrast }) => html`
+  render: ({
+    value,
+    onBeforeSelect,
+    onChange,
+    size,
+    selectionMode,
+    selectedIndex,
+    lowContrast,
+  }) => html`
     <sb-template-layers>
       <cds-content-switcher
         value="${ifDefined(value)}"
         size="${size}"
         selectionMode="${selectionMode}"
         selectedIndex="${selectedIndex}"
-        ?lowcontrast="${lowContrast}">
-        <cds-content-switcher-item value="all">
+        ?lowcontrast="${lowContrast}"
+        @cds-content-switcher-beingselected="${forwardEventDetail(
+          onBeforeSelect
+        )}"
+        @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
+        <cds-content-switcher-item value="all" name="one" text="First section">
           First section
         </cds-content-switcher-item>
-        <cds-content-switcher-item value="cloudFoundry">
+        <cds-content-switcher-item
+          value="cloudFoundry"
+          name="two"
+          text="Second section">
           Second section
         </cds-content-switcher-item>
-        <cds-content-switcher-item value="staging">
+        <cds-content-switcher-item
+          value="staging"
+          name="three"
+          text="Third section">
           Third section
         </cds-content-switcher-item>
       </cds-content-switcher>
