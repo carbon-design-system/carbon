@@ -5,10 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// TODO [@carbon-design-system/monorepo-reviewers]: This file was in the
-// `ComboBox` directory before but it wasn't used there. Now it's used in
-// `FilterableMultiSelect`. Is that expected?
-
 export const defaultFilterItems = <ItemType>(
   items: ItemType[],
   {
