@@ -22,32 +22,17 @@ import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 
-export type DeprecatedCopyAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedCopyAlignment = DeprecatedPopoverAlignment;
 
-export type NewCopyAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewCopyAlignment = NewPopoverAlignment;
 
-export type CopyAlignment = DeprecatedCopyAlignment | NewCopyAlignment;
+export type CopyAlignment = PopoverAlignment;
 
 export interface CopyProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
