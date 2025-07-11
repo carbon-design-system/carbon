@@ -94,7 +94,10 @@ class CDSAILabel extends CDSToggleTip {
   };
 
   private _handleFocusChange = (event: FocusEvent) => {
-    if (this.open && !this.contains(event.target as Node)) {
+    if (
+      this.open &&
+      (!(event.target instanceof Node) || !this.contains(event.target))
+    ) {
       this.open = false;
       this.requestUpdate();
     }
