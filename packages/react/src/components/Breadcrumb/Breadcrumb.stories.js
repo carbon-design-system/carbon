@@ -79,6 +79,39 @@ BreadcrumbWithOverflowMenu.argTypes = {
   ...sharedArgTypes,
 };
 
+export const BreadcrumbWithOverflowMenuSizeSmall = (args) => (
+  <Breadcrumb noTrailingSlash {...args}>
+    <BreadcrumbItem>
+      <a href="/#">Breadcrumb 1</a>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem data-floating-menu-container>
+      <OverflowMenu align="bottom" aria-label="Overflow menu in a breadcrumb">
+        <OverflowMenuItem itemText="Breadcrumb 3" />
+        <OverflowMenuItem itemText="Breadcrumb 4" />
+      </OverflowMenu>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
+    <BreadcrumbItem isCurrentPage>Breadcrumb 6</BreadcrumbItem>
+  </Breadcrumb>
+);
+
+BreadcrumbWithOverflowMenuSizeSmall.argTypes = {
+  ...sharedArgTypes,
+};
+
+/*
+ * This story will:
+ * - Be excluded from the docs page
+ * - Removed from the sidebar navigation
+ * - Still be a tested variant
+ */
+BreadcrumbWithOverflowMenuSizeSmall.tags = ['!dev', '!autodocs'];
+
+BreadcrumbWithOverflowMenuSizeSmall.args = {
+  size: 'sm',
+};
+
 export const Skeleton = () => {
   return <BreadcrumbSkeleton />;
 };
