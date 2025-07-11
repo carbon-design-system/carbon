@@ -37,6 +37,7 @@ import {
   Chat,
   Task,
   Restart,
+  Icon,
 } from '@carbon/icons-react';
 
 export default {
@@ -794,3 +795,87 @@ export const Skeleton = () => {
     </div>
   );
 };
+
+export const Icon20OnlyVisualSnapshots = (args) => {
+  return (
+    <Tabs>
+      <TabList iconSize="lg">
+        <IconTab label="Analyze" disabled>
+          <IbmWatsonDiscovery size={20} aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity size={20} aria-label="Activity" />
+        </IconTab>
+        <IconTab label="New Notifications" {...args}>
+          <Notification size={20} aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat size={20} aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+Icon20OnlyVisualSnapshots.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+Icon20OnlyVisualSnapshots.play = async ({ userEvent }) => {
+  await userEvent.keyboard('{Tab}');
+};
+
+Icon20OnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
+
+export const IconOnlyVisualSnapshots = (args) => {
+  return (
+    <Tabs>
+      <TabList iconSize="default">
+        <IconTab label="Analyze" disabled>
+          <IbmWatsonDiscovery aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity aria-label="Activity" />
+        </IconTab>
+        <IconTab label="New Notifications" {...args}>
+          <Notification aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+IconOnlyVisualSnapshots.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+IconOnlyVisualSnapshots.play = async ({ userEvent }) => {
+  await userEvent.keyboard('{Tab}');
+};
+
+IconOnlyVisualSnapshots.tags = ['!dev', '!autodocs'];

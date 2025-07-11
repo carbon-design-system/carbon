@@ -51,7 +51,7 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
-    interactions: false, // disable Interactions tab
+    interactions: process.env.NODE_ENV !== 'production', // disable interactions in production builds, but enabled in development
   },
   framework: {
     name: getAbsolutePath('@storybook/react-webpack5'),
