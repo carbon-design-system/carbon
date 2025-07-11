@@ -34,3 +34,39 @@ deprecated:
   - name: ibm-watson--knowledge-catalog
     reason:
       Icon renamed, slightly redesigned and replaced by ibm--knowledge-catalog
+  - name: ai-results
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--high
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--low
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--medium
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--urgent
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--very-high
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--complete
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--failed
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--in-progress
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--queued
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--rejected
+    reason:
+      Icon no longer relevant to how we represent AI moments
