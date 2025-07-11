@@ -31,8 +31,10 @@ class CDSTableToolbarContent extends LitElement {
   size;
 
   updated(changedProperties) {
-    if (changedProperties.has('hasBatchActions')) {
-      this.setAttribute('tabindex', `${this.hasBatchActions ? '-1' : ''}`);
+    if (this.hasBatchActions) {
+      this.setAttribute('tabindex', '-1');
+    } else {
+      this.removeAttribute('tabindex');
     }
 
     if (changedProperties.has('size')) {
