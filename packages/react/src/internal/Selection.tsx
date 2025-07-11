@@ -126,6 +126,19 @@ export const useSelection = <ItemType,>({
     });
   }, [disabled, isControlled]);
 
+  const toggleAll = useCallback(
+    (items: ItemType[]) => {
+      callOnChangeHandler<ItemType>({
+        isControlled,
+        isMounted: isMounted.current,
+        onChangeHandlerControlled: savedOnChange.current,
+        onChangeHandlerUncontrolled: setUncontrolledItems,
+        selectedItems: items,
+      });
+    },
+    [isControlled]
+  );
+
   useEffect(() => {
     savedOnChange.current = onChange;
   }, [onChange]);
@@ -146,6 +159,7 @@ export const useSelection = <ItemType,>({
   return {
     clearSelection,
     onItemChange,
+    toggleAll,
     selectedItems,
   };
 };
