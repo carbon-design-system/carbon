@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
-import { getNextSortState } from './state/sorting';
+import { getNextSortState, type SortRowFn } from './state/sorting';
 import type { DataTableSortState } from './state/sortStates';
 import { getCellId } from './tools/cells';
 import denormalize from './tools/denormalize';
@@ -260,21 +260,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   ) => ReactElement;
   rows: Omit<DataTableRow<ColTypes>, 'cells'>[];
   size?: DataTableSize;
-  sortRow?: (
-    cellA: any,
-    cellB: any,
-    options: {
-      sortDirection: DataTableSortState;
-      sortStates: Record<DataTableSortState, DataTableSortState>;
-      locale: string;
-      key: string;
-      compare: (
-        a: number | string,
-        b: number | string,
-        locale?: string
-      ) => number;
-    }
-  ) => number;
+  sortRow?: SortRowFn;
   stickyHeader?: boolean;
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
@@ -802,7 +788,11 @@ export const DataTable = <RowType, ColTypes extends any[]>(
    * @param headerKey - The field for the header that we are sorting by.
    */
   const handleSortBy = (headerKey: string) => () => {
-    setState((prev) => getNextSortState(props, prev, { key: headerKey }));
+    const nextSortState = getNextSortState(props, state, {
+      key: headerKey,
+    });
+
+    setState((prev) => ({ ...prev, ...nextSortState }));
   };
 
   /**
