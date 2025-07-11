@@ -470,6 +470,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -551,11 +552,12 @@ Map {
     "render": [Function],
   },
   "ButtonSizes" => Object {
-    "0": "sm",
-    "1": "md",
-    "2": "lg",
-    "3": "xl",
-    "4": "2xl",
+    "0": "xs",
+    "1": "sm",
+    "2": "md",
+    "3": "lg",
+    "4": "xl",
+    "5": "2xl",
   },
   "ButtonSkeleton" => Object {
     "propTypes": Object {
@@ -568,6 +570,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -1339,6 +1342,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "inputProps": Object {
+        "type": "object",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -1622,7 +1628,6 @@ Map {
             },
           ],
         ],
-        "isRequired": true,
         "type": "oneOfType",
       },
       "size": Object {
@@ -2025,6 +2030,9 @@ Map {
     },
     "TableContainer": Object {
       "propTypes": Object {
+        "aiEnabled": Object {
+          "type": "bool",
+        },
         "children": Object {
           "type": "node",
         },
@@ -3830,6 +3838,9 @@ Map {
       },
       "initialSelectedItems": Object {
         "type": "array",
+      },
+      "inputProps": Object {
+        "type": "object",
       },
       "invalid": Object {
         "type": "bool",
@@ -5896,6 +5907,9 @@ Map {
       },
       "min": Object {
         "type": "number",
+      },
+      "onBlur": Object {
+        "type": "func",
       },
       "onChange": Object {
         "type": "func",
@@ -8359,6 +8373,9 @@ Map {
   },
   "TableContainer" => Object {
     "propTypes": Object {
+      "aiEnabled": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },

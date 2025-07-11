@@ -392,7 +392,6 @@ export const WithLayerMultiSelect = (args) => (
     )}
   </WithLayer>
 );
-
 export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
