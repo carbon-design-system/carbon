@@ -132,6 +132,9 @@ export const parameters = {
   },
   docs: {
     theme,
+    source: {
+      excludeDecorators: true,
+    },
   },
   viewport: {
     viewports: {
