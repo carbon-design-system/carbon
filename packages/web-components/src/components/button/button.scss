@@ -144,3 +144,19 @@ $css--plex: true !default;
 :host(#{$prefix}-button-set[stacked]) {
   @extend .#{$prefix}--btn-set--stacked;
 }
+
+:host([data-context='data-table']) {
+  .#{$prefix}--btn {
+    padding-inline: $spacing-05 $spacing-05;
+  }
+
+  .#{$prefix}--btn__icon {
+    position: static;
+    fill: $icon-on-color;
+    margin-inline-start: $spacing-03;
+
+    .st0 {
+      fill: none;
+    }
+  }
+}

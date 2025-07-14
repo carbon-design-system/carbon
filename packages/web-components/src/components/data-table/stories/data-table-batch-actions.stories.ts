@@ -77,15 +77,25 @@ export const Default = {
       >
       <cds-table-toolbar slot="toolbar">
         <cds-table-batch-actions ?active="true">
-          <cds-button>Delete ${TrashCan({ slot: 'icon' })}</cds-button>
+          <cds-button data-context="data-table"
+            >Delete
+            ${TrashCan({
+              slot: 'icon',
+              class: `${prefix}--btn__icon`,
+            })}</cds-button
+          >
           <cds-button tooltip-position="bottom" tooltip-text="Add"
             >${Add({ slot: 'icon' })}</cds-button
           >
           <cds-button tooltip-position="bottom" tooltip-text="Save"
             >${Save({ slot: 'icon' })}</cds-button
           >
-          <cds-button href="javascript:void 0" download="table-data.json">
-            Download ${Download16({ slot: 'icon' })}
+          <cds-button
+            href="javascript:void 0"
+            download="table-data.json"
+            data-context="data-table">
+            Download
+            ${Download16({ slot: 'icon', class: `${prefix}--btn__icon` })}
           </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="true">
