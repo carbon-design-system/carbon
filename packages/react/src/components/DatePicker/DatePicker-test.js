@@ -968,4 +968,34 @@ describe('Date picker with minDate and maxDate', () => {
     expect(mockConsoleError).not.toHaveBeenCalled();
     jest.restoreAllMocks();
   });
+
+  it('should append the calendar to a custom container using the `appendTo` prop', async () => {
+    const customContainer = document.createElement('div');
+
+    document.body.appendChild(customContainer);
+
+    render(
+      <DatePicker
+        datePickerType="single"
+        appendTo={customContainer}
+        value="01/01/2025">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Label"
+          data-testid="date-picker-1"
+        />
+      </DatePicker>
+    );
+
+    const input = screen.getByTestId('date-picker-1');
+
+    expect(screen.getByRole('application').parentElement).toBe(customContainer);
+
+    await userEvent.click(input);
+
+    expect(screen.getByRole('application').parentElement).toBe(customContainer);
+
+    document.body.removeChild(customContainer);
+  });
 });
