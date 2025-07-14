@@ -15,7 +15,9 @@ describe('cds-toggletip', function () {
 
   it('should have no Axe violations', async () => {
     const el = await fixture(
-      html`<cds-toggletip>Toggle content</cds-toggletip>`
+      html`<cds-toggletip button-label="More info"
+        >Toggle content</cds-toggletip
+      >`
     );
     await expect(el).to.be.accessible();
   });
