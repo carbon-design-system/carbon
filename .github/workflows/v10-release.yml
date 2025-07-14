@@ -33,10 +33,10 @@ jobs:
       - name: Run Continuous Integration checks
         run: yarn ci-check
 
-      - name: Publish packages under the `next` dist tag
+      - name: Publish packages under the `community` dist tag
         run:
-          yarn lerna publish from-package --dist-tag next --no-verify-access
-          --yes
+          yarn lerna publish from-package --dist-tag community
+          --no-verify-access --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -44,16 +44,51 @@ jobs:
         run: |
           zip -r --junk-paths carbon-elements.sketchplugin.zip packages/sketch/carbon-elements.sketchplugin
 
+      - name: Get latest v10 tag
+        id: calculate-tag
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const semver = require('semver');
+
+            // Get all tags starting with v10
+            const output = execSync("git tag --list 'v10.*.*'", { encoding: 'utf8' });
+            const tags = output.trim().split('\n').filter(Boolean);
+
+            if (tags.length === 0) {
+              core.setFailed('No v10 tags found.');
+              return;
+            }
+
+            // Sort with semver
+            const sorted = tags.sort((a, b) => semver.rcompare(a, b));
+            const latest = sorted[0];
+
+            core.info(`Latest v10 tag: ${latest}`);
+            core.setOutput('latestTag', latest);
+
       - name: Create Release
         id: create_release
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         with:
           script: |
+            // Generate the changelog
+            const {
+              exitCode,
+              stdout,
+              stderr
+            } = await exec.getExecOutput('./packages/cli/bin/carbon-cli.js', ['changelog', '${{ steps.calculate-tag.outputs.latestTag }}..${{ context.ref }}', '--noPrompt'], options);
+
+            // Changelog command outputs the generated changelog to stdout
+            core.info(`${stdout}`);
+
             github.rest.repos.createRelease({
               tag_name: context.ref,
               name: context.ref,
+              body: stdout
               draft: false,
-              prerelease: true,
+              make_latest: false,
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
