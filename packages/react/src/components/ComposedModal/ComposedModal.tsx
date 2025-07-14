@@ -305,11 +305,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     function handleKeyDown(event) {
       if (!enableDialogElement) {
-        event.stopPropagation();
-        if (match(event, keys.Escape)) {
-          closeModal(event);
-        }
-
         if (
           focusTrapWithoutSentinels &&
           open &&
@@ -470,6 +465,23 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           return child;
       }
     });
+
+    useEffect(() => {
+      if (!open) return;
+
+      const handleEscapeKey = (event) => {
+        if (match(event, keys.Escape)) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeModal(event);
+        }
+      };
+      document.addEventListener('keydown', handleEscapeKey, true);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey, true);
+      };
+    }, [open]);
 
     useEffect(() => {
       if (!enableDialogElement && !open && launcherButtonRef) {
