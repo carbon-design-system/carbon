@@ -95,6 +95,7 @@ collect:
         - inline
         - innerRef
         - inputMode
+        - inputProps
         - invalid
         - invalidText
         - isActive
