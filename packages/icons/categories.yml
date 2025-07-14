@@ -1437,7 +1437,7 @@ categories:
           - summary--KPI--mirror
           - support-vector-machine
           - surrogate--key-database
-          - surrogate--key-flat-file.svg
+          - surrogate--key-flat-file
           - sys-provision
           - table
           - table--alias

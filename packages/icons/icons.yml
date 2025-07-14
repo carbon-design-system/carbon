@@ -9592,11 +9592,12 @@
     - folders
   sizes:
     - 32
-- - name: follow-up-work-order
+- name: follow-up-work-order
   friendly_name: Follow-up work order
   aliases:
     - work order
     - follow-up
+    - follow-up work order
   sizes:
     - 32
 - name: for-loop
