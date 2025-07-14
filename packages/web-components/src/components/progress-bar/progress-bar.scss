@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023
+// Copyright IBM Corp. 2023, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,3 +9,15 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/components/progress-bar' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+:host(#{$prefix}-progress-bar) {
+  .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__label {
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
+  .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
+    padding-inline: $spacing-05;
+  }
+}
