@@ -1,7 +1,22 @@
 {
   "name": "examples-light-dark",
+  "description": "Light/dark mode example",
   "private": true,
   "version": "0.85.0-rc.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "examples/light-dark-mode"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "scripts": {
     "build": "next build",
     "dev": "next dev",

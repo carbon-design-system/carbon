@@ -1,16 +1,31 @@
 {
   "name": "codesandbox-styles",
+  "description": "CodeSandbox styles example",
   "private": true,
   "version": "0.89.0-rc.0",
+  "license": "Apache-2.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "examples/codesandbox-styles"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "scripts": {
     "dev": "vite"
+  },
+  "dependencies": {
+    "@carbon/styles": "^1.86.0-rc.0"
   },
   "devDependencies": {
     "sass": "^1.77.7",
     "vite": "^6.3.5"
-  },
-  "dependencies": {
-    "@carbon/styles": "^1.86.0-rc.0"
   }
 }

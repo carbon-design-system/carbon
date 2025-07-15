@@ -1,7 +1,22 @@
 {
   "name": "examples-nextjs",
+  "description": "Next.js example",
   "private": true,
   "version": "0.87.0-rc.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "examples/nextjs"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "scripts": {
     "build": "next build",
     "dev": "next dev",
