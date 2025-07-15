@@ -9,7 +9,7 @@ import fs from 'fs-extra';
 import klaw from 'klaw-sync';
 import os from 'os';
 import path from 'path';
-import replace from 'replace-in-file';
+import { replaceInFile } from 'replace-in-file';
 import { createLogger } from '../logger.js';
 
 const logger = createLogger('inline');
@@ -119,7 +119,7 @@ async function inlineSassDependencies(
         vendorFolder
       );
 
-      await replace({
+      await replaceInFile({
         files: file.path,
         from: REPLACE_REGEX,
         glob: { windowsPathsNoEscape: true },

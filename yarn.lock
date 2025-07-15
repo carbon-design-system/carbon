@@ -1598,7 +1598,7 @@ __metadata:
     prettier-config-carbon: "npm:^0.11.0"
     progress-estimator: "npm:^0.3.0"
     remark: "npm:^15.0.1"
-    replace-in-file: "npm:^7.0.0"
+    replace-in-file: "npm:^8.3.0"
     rollup: "npm:^4.41.1"
     sass: "npm:^1.77.7"
     typescript-config-carbon: "npm:^0.5.0"
@@ -1638,7 +1638,6 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.5.0"
     fs-extra: "npm:^11.0.0"
     klaw-sync: "npm:^6.0.0"
-    replace-in-file: "npm:^7.0.0"
     rimraf: "npm:^6.0.0"
   languageName: unknown
   linkType: soft
@@ -9277,7 +9276,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.2.0, chalk@npm:^5.4.1":
+"chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1":
   version: 5.4.1
   resolution: "chalk@npm:5.4.1"
   checksum: 10/29df3ffcdf25656fed6e95962e2ef86d14dfe03cd50e7074b06bad9ffbbf6089adbb40f75c00744d843685c8d008adaf3aed31476780312553caf07fa86e5bc7
@@ -13975,7 +13974,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.3.7":
+"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.3.7, glob@npm:^10.4.2":
   version: 10.4.5
   resolution: "glob@npm:10.4.5"
   dependencies:
@@ -14021,7 +14020,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^8.0.1, glob@npm:^8.1.0":
+"glob@npm:^8.0.1":
   version: 8.1.0
   resolution: "glob@npm:8.1.0"
   dependencies:
@@ -21973,16 +21972,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"replace-in-file@npm:^7.0.0":
-  version: 7.0.1
-  resolution: "replace-in-file@npm:7.0.1"
+"replace-in-file@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "replace-in-file@npm:8.3.0"
   dependencies:
-    chalk: "npm:^4.1.2"
-    glob: "npm:^8.1.0"
+    chalk: "npm:^5.3.0"
+    glob: "npm:^10.4.2"
     yargs: "npm:^17.7.2"
   bin:
     replace-in-file: bin/cli.js
-  checksum: 10/41c5f5b2ac58cf9cf9f371e038a9b1ece08a734a48cef7225b394ba8c955636c32828f08873246822fa46337b7e30c6cb7f7c1374e88d40f63063d142f918272
+  checksum: 10/9d5641019d26602a59cecc38883c157fa3008722e1f88e2f15b4c5bbf298a373745aad19a383d75c7788c100395c5b7469eec7d6b9e14fdc1d6732ddefffebfd
   languageName: node
   linkType: hard
 
