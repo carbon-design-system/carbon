@@ -40,9 +40,11 @@ collect:
         - compareItems
         - condensed
         - contained
+        - count
         - danger
         - dangerDescription
         - datePickerType
+        - decorator
         - defaultChecked
         - defaultExpanded
         - defaultOpen
@@ -57,14 +59,17 @@ collect:
         - disableWheel
         - downshiftActions
         - downshiftProps
+        - dropShadow
         - element
         - enableCounter
         - enterDelayMs
         - expanded
         - expandIconDescription
-        - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - flipped
+        - focusTrap
+        - formatOptions
         - fullWidth
         - gap
         - hasDivider
@@ -78,7 +83,9 @@ collect:
         - hideCloseButton
         - hideLabel
         - hidePasswordLabel
+        - highContrast
         - href
+        - iconClass
         - iconDescription
         - id
         - indeterminate
@@ -87,6 +94,7 @@ collect:
         - initialSelectedItems
         - inline
         - innerRef
+        - inputMode
         - invalid
         - invalidText
         - isActive
@@ -125,6 +133,8 @@ collect:
         - max
         - maxCount
         - menuAlignment
+        - menuOffset
+        - menuOffsetFlip
         - menuOptionsClass
         - menuTarget
         - min
@@ -138,6 +148,7 @@ collect:
         - onActionButtonClick
         - onAddFiles
         - onBlur
+        - onCancel
         - onChange
         - onClear
         - onClick
@@ -158,6 +169,7 @@ collect:
         - onOpen
         - onRequestClose
         - onRequestSubmit
+        - onSecondarySubmit
         - onSelect
         - onToggle
         - onToggleClick
@@ -165,8 +177,8 @@ collect:
         - open
         - ordered
         - orientation
-        - overflowMenuOnHover
         - page
+        - pageActions
         - paragraph
         - passiveModal
         - pattern
@@ -175,10 +187,9 @@ collect:
         - preventCloseOnClickOutside
         - primaryButtonDisabled
         - primaryButtonText
-        - radio
         - readOnly
+        - ref
         - rel
-        - render
         - renderIcon
         - renderSelectedItem
         - required
@@ -207,7 +218,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -217,6 +227,8 @@ collect:
         - titleId
         - titleText
         - tooltipAlignment
+        - tooltipDropShadow
+        - tooltipHighContrast
         - tooltipPosition
         - totalItems
         - translateWithId
@@ -224,7 +236,6 @@ collect:
         - typeahead
         - useStaticWidth
         - useTitleInItem
-        - useZebraStyles
         - value
         - valueSelected
         - vertical
@@ -236,8 +247,6 @@ collect:
         - onHeadingClick
         - renderExpando
         - renderToggle
-        # AccordionSkeleton
-        - count
         # ActionableNotification
         - closeOnEscape
         - hasFocus
@@ -250,6 +259,8 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
         # Breadcrumb
@@ -285,9 +296,6 @@ collect:
         - selectionMode
         # Copy
         - onAnimationEnd
-        # DataTable
-        - filterRows
-        - sortRow
         # DataTableSkeleton
         - columnCount
         - compact
@@ -313,8 +321,12 @@ collect:
         - tooltipText
         - triggerClassName
         # Dialog
+        - ariaDescribedBy
+        - ariaLabelledBy
+        - focusAfterCloseRef
         - modal
         # DismissibleTag
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback
@@ -326,8 +338,8 @@ collect:
         - tileMaxHeight
         - tilePadding
         # FeatureFlags
-        - enableExperimentalFocusWrapWithoutSentinels
         - enableDialogElement
+        - enableExperimentalFocusWrapWithoutSentinels
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
@@ -358,6 +370,8 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # HeaderContainer
+        - render
         # HeaderMenu
         - focusRef
         - menuLinkName
@@ -369,11 +383,16 @@ collect:
         # HeaderPanel
         - onHeaderPanelFocus
         # IconButton
+        - badgeCount
         - wrapperClasses
+        # IconTab
+        - badgeIndicator
         # InlineLoading
         - onSuccess
         - successDelay
-        # Link
+        # Layer
+        - withBackground
+        # LinkBase
         - visited
         # ListBox
         - invalidTextId
@@ -401,7 +420,6 @@ collect:
         - alert
         - closeButtonLabel
         - modalAriaLabel
-        - onSecondarySubmit
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -433,12 +451,6 @@ collect:
         - hideSteppers
         # OrderedList
         - native
-        # OverflowMenu
-        - flipped
-        - focusTrap
-        - iconClass
-        - menuOffset
-        - menuOffsetFlip
         # OverflowMenuItem
         - closeMenu
         - handleOverflowMenuItemFocus
@@ -446,6 +458,18 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderBreadcrumbBar
+        - border
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
+        # PageHeaderContent
+        - contextualActions
+        # PageHeaderContentPageActions
+        - actions
+        - menuButtonLabel
+        # PageHeaderTabBar
+        - tags
         # PageSelector
         - currentPage
         - totalPages
@@ -469,9 +493,8 @@ collect:
         - itemsShown
         - loop
         # Popover
+        - autoAlignBoundary
         - caret
-        - dropShadow
-        - highContrast
         - isTabTip
         # ProgressIndicator
         - currentIndex
@@ -485,6 +508,8 @@ collect:
         - noLabel
         # SelectItem
         - hidden
+        # ShapeIndicator
+        - textSize
         # SideNav
         - addMouseListeners
         - inert
@@ -513,14 +538,18 @@ collect:
         - unstable_valueUpper
         # SliderSkeleton
         - twoHandles
+        - unstable_ariaLabelHandleUpper
         # StructuredListCell
         - noWrap
         # SwitcherItem
         - handleSwitcherItemFocus
         # Tab
         - renderButton
+        # Table
+        - experimentalAutoAlign
+        - overflowMenuOnHover
+        - useZebraStyles
         # TableBatchActions
-        - onCancel
         - onSelectAll
         - shouldShowBatchActions
         - totalCount
@@ -528,7 +557,9 @@ collect:
         # TableBody
         - aria-live
         # TableCell
-        - hasSlugHeader
+        - hasAILabelHeader
+        # TableContainer
+        - aiEnabled
         # TableExpandHeader
         - enableExpando
         - enableToggle
@@ -538,6 +569,8 @@ collect:
         - isSortHeader
         - scope
         - sortDirection
+        # TableSelectRow
+        - radio
         # TableToolbarFilter
         - onApplyFilter
         - onResetFilter
@@ -554,7 +587,7 @@ collect:
         - onTabCloseRequest
         # TabsVertical
         - height
-        # Tag
+        # TagBase
         - filter
         # TextArea
         - counterMode
@@ -574,6 +607,8 @@ collect:
         - labelA
         - labelB
         - toggled
+        # Toggletip
+        - alignmentAxisOffset
         # TreeNode
         - defaultIsExpanded
         - depth
@@ -595,6 +630,7 @@ collect:
         - bottom-left
         - bottom-right
         - bottom-start
+        - center
         - end
         - left
         - left-bottom
@@ -614,12 +650,12 @@ collect:
         - top-start
         # General - aria-current
         - date
-        - 'false'
+        - "false"
         - location
         - page
         - step
         - time
-        - 'true'
+        - "true"
         # General - buttonKind
         - danger
         - danger--ghost
@@ -643,29 +679,57 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - inputMode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
+        - caution-major
+        - caution-minor
+        - cautious
+        - critical
         - danger
         - default
         - disclosed
+        - draft
         - error
+        - failed
         - ghost
+        - high
+        - in-progress
+        - incomplete
         - info
         - info-square
+        - informative
         - inline
+        - low
+        - medium
+        - normal
+        - not-started
         - on-page
+        - pending
         - primary
         - secondary
+        - stable
+        - succeeded
         - success
         - tertiary
+        - undefined
+        - unknown
         - warning
         - warning-alt
         # General - labelPosition
         - left
         - right
         # General - level
-        - '0'
-        - '1'
-        - '2'
+        - "0"
+        - "1"
+        - "2"
         # General - loadingStatus
         - active
         - error
@@ -750,6 +814,8 @@ collect:
         - vertical
         # General - role
         - alert
+        - alertdialog
+        - dialog
         - log
         - status
         # General - selectionFeedback
@@ -757,6 +823,8 @@ collect:
         - top
         - top-after-reopen
         # General - size
+        - "16"
+        - "20"
         - 2xl
         - 2xs
         - big
@@ -782,20 +850,16 @@ collect:
         - white
         # General - tooltipAlignment
         - bottom
-        - bottom-end
         - bottom-left
         - bottom-right
-        - bottom-start
         - center
         - end
         - left
         - right
         - start
         - top
-        - top-end
         - top-left
         - top-right
-        - top-start
         # General - tooltipPosition
         - bottom
         - left
@@ -814,6 +878,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - outline
         - password
         - purple
@@ -854,6 +919,11 @@ collect:
         - actionable
         - inline
         - toast
+        # Popover - autoAlignBoundary
+        - clippingAncestors
+        # ShapeIndicator - textSize
+        - "12"
+        - "14"
         # TableBody - aria-live
         - assertive
         - off

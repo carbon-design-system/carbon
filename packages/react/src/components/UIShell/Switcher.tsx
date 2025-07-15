@@ -1,23 +1,25 @@
 /**
- * Copyright IBM Corp. 2016, 2023
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-/**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, forwardRef, ReactNode } from 'react';
+import React, {
+  Children,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useRef,
+  type ComponentProps,
+  type ReactNode,
+} from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import getDisplayName from '../../prop-types/tools/getDisplayName';
+import { SwitcherDivider, SwitcherItem } from '.';
 
 export interface BaseSwitcherProps {
   /**
@@ -49,10 +51,7 @@ type SwitcherProps = SwitcherWithAriaLabel | SwitcherWithAriaLabelledBy;
 const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
   function Switcher(props, forwardRef) {
     const switcherRef = useRef<HTMLUListElement>(null);
-    const ref = useMergedRefs<HTMLUListElement | null>([
-      switcherRef,
-      forwardRef,
-    ]);
+    const ref = useMergedRefs([switcherRef, forwardRef]);
 
     const prefix = usePrefix();
     const {
@@ -79,12 +78,12 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
       currentIndex: number;
       direction: number;
     }) => {
-      const enabledIndices = React.Children.toArray(children).reduce<number[]>(
-        (acc, curr, i) => {
+      const enabledIndices = Children.toArray(children).reduce<number[]>(
+        (acc, child, i) => {
           if (
-            React.isValidElement(curr) &&
-            Object.keys((curr as any).props).length !== 0 &&
-            getDisplayName(curr.type) === 'SwitcherItem'
+            isValidElement<ComponentProps<typeof SwitcherItem>>(child) &&
+            child.type === SwitcherItem &&
+            Object.keys(child.props).length
           ) {
             acc.push(i);
           }
@@ -118,35 +117,33 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
       }
     };
 
-    const childrenWithProps = React.Children.toArray(children).map(
-      (child, index) => {
-        // only setup click handlers if onChange event is passed
-        if (
-          React.isValidElement(child) &&
-          child.type &&
-          getDisplayName(child.type) === 'SwitcherItem'
-        ) {
-          return React.cloneElement(child as React.ReactElement<any>, {
-            handleSwitcherItemFocus,
-            index,
-            key: index,
-            expanded,
-          });
-        }
-
-        return React.cloneElement(child as React.ReactElement<any>, {
+    const childrenWithProps = Children.toArray(children).map((child, index) => {
+      if (
+        isValidElement<ComponentProps<typeof SwitcherItem>>(child) &&
+        child.type === SwitcherItem
+      ) {
+        return cloneElement(child, {
+          handleSwitcherItemFocus,
           index,
           key: index,
           expanded,
         });
       }
-    );
+
+      if (
+        isValidElement<ComponentProps<typeof SwitcherDivider>>(child) &&
+        child.type === SwitcherDivider
+      ) {
+        return cloneElement(child, {
+          key: index,
+        });
+      }
+
+      return child;
+    });
 
     return (
-      <ul
-        ref={ref as React.RefObject<HTMLUListElement>}
-        className={className}
-        {...accessibilityLabel}>
+      <ul ref={ref} className={className} {...accessibilityLabel}>
         {childrenWithProps}
       </ul>
     );

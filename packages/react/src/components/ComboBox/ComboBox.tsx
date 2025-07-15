@@ -9,24 +9,25 @@ import cx from 'classnames';
 import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
+  cloneElement,
   forwardRef,
   useCallback,
-  type ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
   type ComponentType,
+  type FocusEvent,
   type ForwardedRef,
-  type ReactElement,
-  type RefAttributes,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
   type PropsWithChildren,
   type PropsWithRef,
-  type InputHTMLAttributes,
-  type MouseEvent,
-  type KeyboardEvent,
-  type FocusEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefAttributes,
 } from 'react';
 import { Text } from '../Text';
 import {
@@ -35,20 +36,19 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import isEqual from 'react-fast-compare';
-import ListBox, {
-  PropTypes as ListBoxPropTypes,
-  ListBoxSize,
-} from '../ListBox';
+import ListBox, { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -59,6 +59,8 @@ const {
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
   MenuMouseLeave,
+  ItemClick,
+  FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -382,6 +384,14 @@ export interface ComboBoxProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 const ComboBox = forwardRef(
@@ -426,6 +436,7 @@ const ComboBox = forwardRef(
       warnText,
       allowCustomValue = false,
       slug,
+      inputProps,
       ...rest
     } = props;
 
@@ -498,7 +509,8 @@ const ComboBox = forwardRef(
         prevInputLengthRef.current = inputValue.length;
       }
     }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
-
+    const isManualClearingRef = useRef(false);
+    const [isClearing, setIsClearing] = useState(false);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -508,6 +520,14 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+    useEffect(() => {
+      isManualClearingRef.current = isClearing;
+
+      // Reset flag after render cycle
+      if (isClearing) {
+        setIsClearing(false);
+      }
+    }, [isClearing]);
 
     // fully controlled combobox: handle changes to selectedItemProp
     useEffect(() => {
@@ -611,32 +631,44 @@ const ComboBox = forwardRef(
 
           case InputKeyDownEnter:
             if (!allowCustomValue) {
-              const highlightedIndex = indexToHighlight(inputValue);
-              const matchingItem = items[highlightedIndex];
+              if (state.highlightedIndex !== -1) {
+                const filteredList = filterItems(
+                  items,
+                  itemToString,
+                  inputValue
+                );
+                const highlightedItem = filteredList[state.highlightedIndex];
 
-              if (matchingItem) {
-                // Prevent matching items that are marked as `disabled` from
-                // being selected.
-                if ((matchingItem as any).disabled) {
-                  return state;
+                if (highlightedItem && !(highlightedItem as any).disabled) {
+                  return {
+                    ...changes,
+                    selectedItem: highlightedItem,
+                    inputValue: itemToString(highlightedItem),
+                  };
+                }
+              } else {
+                const autoIndex = indexToHighlight(inputValue);
+                if (autoIndex !== -1) {
+                  const matchingItem = items[autoIndex];
+
+                  if (matchingItem && !(matchingItem as any).disabled) {
+                    return {
+                      ...changes,
+                      selectedItem: matchingItem,
+                      inputValue: itemToString(matchingItem),
+                    };
+                  }
                 }
 
-                // Select the matching item.
-                return {
-                  ...changes,
-                  selectedItem: matchingItem,
-                  inputValue: itemToString(matchingItem),
-                };
-              }
-
-              // If no matching item is found and there is an existing
-              // selection, clear the selection.
-              if (state.selectedItem !== null) {
-                return {
-                  ...changes,
-                  selectedItem: null,
-                  inputValue,
-                };
+                // If no matching item is found and there is an existing
+                // selection, clear the selection.
+                if (state.selectedItem !== null) {
+                  return {
+                    ...changes,
+                    selectedItem: null,
+                    inputValue,
+                  };
+                }
               }
             }
 
@@ -744,20 +776,11 @@ const ComboBox = forwardRef(
     const ItemToElement = itemToElement;
 
     // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
-    }
 
     const {
       // Prop getters
@@ -817,16 +840,15 @@ const ComboBox = forwardRef(
           type,
           selectedItem: newSelectedItem,
         });
-        if (
-          type === useCombobox.stateChangeTypes.ItemClick &&
-          !isEqual(selectedItemProp, newSelectedItem)
-        ) {
-          onChange({ selectedItem: newSelectedItem });
+        if (isManualClearingRef.current) {
+          return;
         }
         if (
-          (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
-            type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
-          !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
+          (type === ItemClick ||
+            type === FunctionSelectItem ||
+            type === InputKeyDownEnter) &&
+          typeof newSelectedItem !== 'undefined' &&
+          !isEqual(selectedItemProp, newSelectedItem)
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
@@ -972,6 +994,7 @@ const ComboBox = forwardRef(
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
                 value: inputValue,
+                ...inputProps,
                 onChange: (e) => {
                   const newValue = e.target.value;
                   setInputValue(newValue);
@@ -1094,7 +1117,11 @@ const ComboBox = forwardRef(
             {inputValue && (
               <ListBoxSelection
                 clearSelection={() => {
+                  setIsClearing(true); // This updates the state which syncs to the ref
+                  setInputValue('');
+                  onChange({ selectedItem: null });
                   selectItem(null);
+                  handleSelectionClear();
                 }}
                 translateWithId={translateWithId}
                 disabled={disabled || readOnly}
@@ -1234,7 +1261,7 @@ ComboBox.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<
+  downshiftProps: PropTypes.object as PropTypes.Validator<
     UseComboboxProps<unknown>
   >,
 
@@ -1364,7 +1391,7 @@ ComboBox.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   slug: deprecate(
     PropTypes.node,
@@ -1397,6 +1424,14 @@ ComboBox.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps: PropTypes.object,
 };
 
 type ComboboxComponentProps<ItemType> = PropsWithRef<
@@ -1404,7 +1439,7 @@ type ComboboxComponentProps<ItemType> = PropsWithRef<
 >;
 
 export interface ComboBoxComponent {
-  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
 }
 
 export default ComboBox as ComboBoxComponent;

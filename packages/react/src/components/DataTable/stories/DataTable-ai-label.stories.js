@@ -123,7 +123,7 @@ const columnAILabelHeaders = [
         <AILabelContent>
           <div>
             <p className="secondary">AI Explained</p>
-            <h1>84%</h1>
+            <h2 className="ai-label-heading">84%</h2>
             <p className="secondary bold">Confidence score</p>
             <p className="secondary">
               Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
@@ -161,7 +161,7 @@ const aiLabel = (
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
+        <h2 className="ai-label-heading">84%</h2>
         <p className="secondary bold">Confidence score</p>
         <p className="secondary">
           Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -529,3 +529,49 @@ export const ColumnAILabelSort = (args) => (
 );
 
 ColumnAILabelSort.argTypes = { ...sharedArgTypes };
+
+export const FullTableAI = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getCellProps,
+    }) => (
+      <TableContainer
+        aiEnabled
+        title="DataTable"
+        description="AI, full table"
+        className="ai-label-column-table">
+        <Table {...getTableProps()} aria-label="sample table">
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader
+                  key={header.key}
+                  {...getHeaderProps({ header, isSortable: true })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell {...getCellProps({ cell })} key={cell.id}>
+                    {cell.value}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+FullTableAI.argTypes = { ...sharedArgTypes };

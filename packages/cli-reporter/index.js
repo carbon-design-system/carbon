@@ -7,7 +7,7 @@
 
 import chalk from 'chalk';
 
-export class ConsoleReporter {
+class ConsoleReporter {
   constructor({
     stderr = process.stderr,
     stdin = process.stdin,
@@ -51,6 +51,6 @@ export class ConsoleReporter {
   }
 }
 
-const reporter = new ConsoleReporter();
+export const reporter = new ConsoleReporter();
 
-export default reporter;
+export { ConsoleReporter };

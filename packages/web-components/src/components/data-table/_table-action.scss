@@ -27,8 +27,6 @@
 :host(#{$prefix}-table-toolbar-content) {
   @extend .#{$prefix}--toolbar-content;
 
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-
   ::slotted(#{$prefix}-overflow-menu) {
     display: flex;
     block-size: $spacing-09;

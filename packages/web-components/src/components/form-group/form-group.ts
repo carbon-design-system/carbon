@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -17,8 +15,6 @@ import styles from './form-group.scss?lit';
  * The shell UI for file uploader.
  *
  * @element cds-form-group
- * @slot label-title.
- * @slot lebel-description.
  */
 @customElement(`${prefix}-form-group`)
 class CDSFormGroup extends LitElement {

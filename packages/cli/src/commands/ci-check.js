@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import reporter from '@carbon/cli-reporter';
+import { reporter } from '@carbon/cli-reporter';
 import { exec } from 'child-process-promise';
 import { workspace } from '../workspace.js';
 

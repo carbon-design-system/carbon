@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -73,19 +71,6 @@ const controls = {
   },
 };
 
-const singleControls = {
-  ...controls,
-  indeterminate: {
-    control: 'boolean',
-    description: 'Specify whether the Checkbox is in an indeterminate state',
-  },
-  defaultChecked: {
-    control: 'boolean',
-    description:
-      'Specify whether the underlying input should be checked by default',
-  },
-};
-
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
@@ -137,7 +122,6 @@ export const Horizontal = {
     warnText,
   }) => html`
     <cds-checkbox-group
-      legend-text="Group label"
       helper-text="${helperText}"
       ?disabled="${disabled}"
       ?invalid="${invalid}"
@@ -159,7 +143,6 @@ export const Horizontal = {
 
 export const Single = {
   args: defaultArgs,
-  argTypes: singleControls,
   render: () => html`
     <cds-checkbox helper-text="Helper text goes here"
       >${checkboxLabel}</cds-checkbox
@@ -179,10 +162,9 @@ export const Single = {
 
 export const Skeleton = {
   args: defaultArgs,
-  argTypes: singleControls,
   render: () => html`
     <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton>${checkboxLabel}</cds-checkbox-skeleton>
+      <cds-checkbox-skeleton></cds-checkbox-skeleton>
     </fieldset>
   `,
 };
@@ -190,7 +172,7 @@ export const Skeleton = {
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -226,6 +208,7 @@ export const WithAILabel = {
     readonly,
     onChange,
     helperText,
+    legendText,
     invalid,
     invalidText,
     orientation,
@@ -234,7 +217,7 @@ export const WithAILabel = {
   }) => html`
     <div style="width: 400px">
       <cds-checkbox-group
-      legend-text="Group label"
+      legend-text="${legendText}"
       helper-text="${helperText}"
       ?disabled="${disabled}"
       ?invalid="${invalid}"
@@ -251,7 +234,7 @@ export const WithAILabel = {
         <cds-checkbox @cds-checkbox-changed="${onChange}">Checkbox label</cds-checkbox>
       </cds-checkbox-group>
       <br></br>
-      <cds-checkbox-group 
+      <cds-checkbox-group
       legend-text="Group label"
       helper-text="${helperText}"
       ?disabled="${disabled}"
@@ -276,7 +259,7 @@ export const WithAILabel = {
         <cds-checkbox @cds-checkbox-changed="${onChange}">Checkbox label</cds-checkbox>
       </cds-checkbox-group>
        <br></br>
-      <cds-checkbox-group 
+      <cds-checkbox-group
       legend-text="Group label"
       helper-text="${helperText}"
       ?disabled="${disabled}"

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -76,7 +74,6 @@ export const Default = {
         vel arcu pulvinar bibendum non sit amet ligula. Nullam ut nisi eu tellus
         aliquet vestibulum vel sit amet odio.</cds-table-header-description
       >
-
       <cds-table-toolbar slot="toolbar">
         <cds-table-batch-actions ?active="true">
           <cds-button>Delete ${TrashCan({ slot: 'icon' })}</cds-button>
@@ -98,6 +95,8 @@ export const Default = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
+
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -223,6 +222,8 @@ export const Playground = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
+
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1

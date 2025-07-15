@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -22,7 +20,7 @@ import { INPUT_SIZE } from './text-input';
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -76,7 +74,7 @@ const args = {
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
   value: '',
-  onInput: `${prefix}-select-selected`,
+  onInput: (e: Event) => {},
 };
 
 const argTypes = {
@@ -169,56 +167,6 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-text-input label="Text input label" helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
-
-export const ReadOnly = {
-  render: () => html`
-    <cds-text-input
-      value="This is read only, you can't type more."
-      readonly="true"
-      label="Text input label"
-      helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
-
-export const Skeleton = {
-  render: () => html` <cds-text-input-skeleton></cds-text-input-skeleton> `,
-};
-
-export const TogglePasswordVisibility = {
-  render: () => html`
-    <cds-text-input
-      type="password"
-      show-password-visibility-toggle
-      label="Text input label"
-      helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
-
-export const WithAILabel = {
-  render: () => html`
-    <cds-text-input label="Text input label" helper-text="Optional help text">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-text-input>
-  `,
-};
-
-export const WithLayer = {
-  render: () => html`
-    <sb-template-layers>
-      <cds-text-input label="Text input label" helper-text="Optional help text">
-      </cds-text-input>
-    </sb-template-layers>
-  `,
-};
-
-export const Playground = {
   args,
   argTypes,
   render: ({
@@ -266,6 +214,38 @@ export const Playground = {
         @input="${onInput}">
       </cds-text-input>
     </div>
+  `,
+};
+
+export const ReadOnly = {
+  render: () => html`
+    <cds-text-input
+      value="This is read only, you can't type more."
+      readonly="true"
+      label="Text input label"
+      helper-text="Optional help text">
+    </cds-text-input>
+  `,
+};
+
+export const Skeleton = {
+  render: () => html` <cds-text-input-skeleton></cds-text-input-skeleton> `,
+};
+
+export const WithAILabel = {
+  render: () => html`
+    <cds-text-input label="Text input label" helper-text="Optional help text">
+      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
+    </cds-text-input>
+  `,
+};
+
+export const WithLayer = {
+  render: () => html`
+    <sb-template-layers>
+      <cds-text-input label="Text input label" helper-text="Optional help text">
+      </cds-text-input>
+    </sb-template-layers>
   `,
 };
 

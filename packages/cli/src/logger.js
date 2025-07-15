@@ -13,7 +13,7 @@ import chalk from 'chalk';
  * box-drawing ASCII characters.
  * @returns {object}
  */
-export function createLogger(command) {
+export function createLogger(name) {
   const timers = [];
   let indentLevel = 0;
 
@@ -25,7 +25,9 @@ export function createLogger(command) {
    * @returns {void}
    */
   function log(boxCharacter, message = '') {
-    console.log(chalk`{yellow ${command} ▐} {gray ${boxCharacter}} ${message}`);
+    console.log(
+      chalk.yellow(`${name} ▐`) + ' ' + chalk.gray(boxCharacter) + ' ' + message
+    );
   }
 
   function getLinePrefix() {
@@ -62,7 +64,10 @@ export function createLogger(command) {
       if (message) {
         log(prefix + '┗', message);
       } else {
-        log(prefix + '┗', chalk`{gray Done in {italic ${duration}s}}`);
+        log(
+          prefix + '┗',
+          chalk.gray('Done in ' + chalk.italic(`${duration}s`))
+        );
       }
     },
     newline() {

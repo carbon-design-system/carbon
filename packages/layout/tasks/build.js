@@ -1,28 +1,44 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 'use strict';
 
-require('core-js/features/array/flat-map');
+// require('core-js/features/array/flat-map');
+import 'core-js/features/array/flat-map.js';
 
-const { reporter } = require('@carbon/cli-reporter');
-const { types: t, generate } = require('@carbon/scss-generator');
-const fs = require('fs-extra');
-const path = require('path');
-const {
+// const { reporter } = require('@carbon/cli-reporter');
+// const { types: t, generate } = require('@carbon/scss-generator');
+// const fs = require('fs-extra');
+// const path = require('path');
+// const {
+//   container,
+//   iconSize,
+//   spacing,
+//   fluidSpacing,
+//   sizes,
+//   layout,
+// } = require('../lib');
+
+import { reporter } from '@carbon/cli-reporter';
+import { types as t, generate } from '@carbon/scss-generator';
+import fs from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import {
   container,
   iconSize,
   spacing,
   fluidSpacing,
   sizes,
   layout,
-} = require('../lib');
+} from '../src/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function build() {
   reporter.info('Building scss files for layout...');
@@ -141,7 +157,7 @@ function buildModulesTokenFile(tokenScale, group) {
     ];
   });
 
-  const variables = values.flatMap(([_name, _shorthand, _id, assignment]) => {
+  const variables = values.flatMap(([, , , assignment]) => {
     const comment = t.Comment(`/ @type Number
 / @access public
 / @group @carbon/layout`);
@@ -155,7 +171,7 @@ function buildModulesTokenFile(tokenScale, group) {
     t.Assignment({
       id: t.Identifier(group),
       init: t.SassMap({
-        properties: values.map(([name, _shorthand, id]) => {
+        properties: values.map(([name, , id]) => {
           return t.SassMapProperty({
             key: id,
             value: t.SassValue(`$${name}`),

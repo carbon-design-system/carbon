@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -153,8 +151,8 @@ export const Default = {
   render: () => html`
     <cds-dropdown
       helper-text="This is some helper text"
-      title-text="Dropdown label"
-      label="Dropdown menu options">
+      title-text="This is an example title"
+      label="This is an example label">
       ${items.map(
         (elem) => html`
           <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
@@ -171,7 +169,8 @@ export const Inline = {
     <cds-dropdown
       type="inline"
       title-text="Inline dropdown label"
-      label="Dropdown menu options">
+      label="Dropdown menu options"
+      value="option-1">
       ${items.map(
         (elem) => html`
           <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
@@ -241,7 +240,7 @@ export const Skeleton = {
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -274,7 +273,8 @@ export const WithAILabel = {
     <cds-dropdown
       helper-text="This is some helper text"
       title-text="Dropdown title"
-      label="Dropdown menu options">
+      label="Dropdown menu options"
+      value="option-1">
       <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
       ${items.map(
         (elem) => html`

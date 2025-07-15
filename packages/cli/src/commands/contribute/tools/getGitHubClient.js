@@ -61,6 +61,7 @@ export default async function getGitHubClient() {
     await octokit.users.getAuthenticated();
     return octokit;
   } catch (error) {
+    console.error(error);
     throw new Error('Invalid GitHub token');
   }
 }

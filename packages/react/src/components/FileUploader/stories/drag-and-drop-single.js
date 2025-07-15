@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,20 +10,14 @@ import classnames from 'classnames';
 import FileUploaderItem from '../FileUploaderItem';
 import FileUploaderDropContainer from '../FileUploaderDropContainer';
 import FormItem from '../../FormItem';
+import { useId } from '../../../internal/useId';
 
 const prefix = 'cds';
-
-// -- copied from internal/tools/uniqueId.js
-let lastId = 0;
-function uid(prefix = 'id') {
-  lastId++;
-  return `${prefix}${lastId}`;
-}
-// -- end copied
 
 const ExampleDropContainerApp = (props) => {
   const [file, setFile] = useState();
   const uploaderButton = useRef(null);
+  const uniqueId = useId();
   const handleDrop = (e) => {
     e.preventDefault();
   };
@@ -92,12 +86,12 @@ const ExampleDropContainerApp = (props) => {
     }, rand + 1000);
   };
 
-  const onAddFilesButton = (event) => {
-    const file = event.target.files;
+  const onAddFilesButton = (event, { addedFiles }) => {
+    const file = addedFiles;
 
     const newFile = [
       {
-        uuid: uid(),
+        uuid: uniqueId + file[0].name + file[0].size,
         name: file[0].name,
         filesize: file[0].size,
         status: 'uploading',
@@ -145,7 +139,7 @@ const ExampleDropContainerApp = (props) => {
         )}>
         {file !== undefined && (
           <FileUploaderItem
-            key={uid()}
+            key={file.uuid}
             uuid={file.uuid}
             name={file.name}
             filesize={file.filesize}

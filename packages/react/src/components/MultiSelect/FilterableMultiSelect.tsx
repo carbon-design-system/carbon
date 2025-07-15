@@ -19,31 +19,38 @@ import Downshift, {
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
+  forwardRef,
   useContext,
-  useState,
-  useRef,
   useEffect,
-  ReactNode,
-  FunctionComponent,
-  ForwardedRef,
-  type FocusEvent,
-  type KeyboardEvent,
-  type MouseEvent,
-  ReactElement,
   useLayoutEffect,
   useMemo,
+  useRef,
+  useState,
+  type FocusEvent,
+  type ForwardedRef,
+  type FunctionComponent,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
 } from 'react';
-import { defaultFilterItems } from '../ComboBox/tools/filter';
+import { defaultFilterItems } from './filter';
 import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
@@ -57,6 +64,8 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -280,7 +289,7 @@ export interface FilterableMultiSelectProps<ItemType>
    * Specify the size of the ListBox.
    * Currently, supports either `sm`, `md` or `lg` as an option.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: ListBoxSize;
 
   /**
    * @deprecated please use decorator instead.
@@ -294,7 +303,7 @@ export interface FilterableMultiSelectProps<ItemType>
    */
   titleText?: ReactNode;
 
-  type?: 'default' | 'inline';
+  type?: ListBoxType;
 
   /**
    * Specify title to show title on hover
@@ -310,9 +319,17 @@ export interface FilterableMultiSelectProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
-const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
+export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(
   {
@@ -354,6 +371,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     warn,
     warnText,
     slug,
+    inputProps,
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -533,6 +551,32 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }, [isOpen, onMenuChange, open]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const wrapper = document
+        .getElementById(id)
+        ?.closest(`.${prefix}--multi-select__wrapper`);
+
+      // If click is outside our component and menu is open or input is focused
+      if (wrapper && !wrapper.contains(target)) {
+        if (isOpen || inputFocused) {
+          setIsOpen(false);
+          setInputFocused(false);
+          setInputValue('');
+        }
+      }
+    };
+
+    if (inputFocused || isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, inputFocused]);
+
   const {
     getToggleButtonProps,
     getLabelProps,
@@ -590,7 +634,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           return { ...changes };
         }
 
-        return { ...changes, highlightedIndex: null };
+        return {
+          ...changes,
+          highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
+        };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
@@ -600,6 +647,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
+        setIsOpen(changes.isOpen || false);
         validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
           return { ...changes };
@@ -607,7 +655,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return {
           ...changes,
           isOpen: false,
-          highlightedIndex: null,
+          highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
         };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
@@ -695,20 +743,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   }
 
   // AILabel always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   const className = cx(
     `${prefix}--multi-select`,
@@ -750,7 +789,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     },
   });
 
-  const inputProps = getInputProps(
+  const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': helperText ? helperId : undefined,
@@ -761,6 +800,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       disabled,
       placeholder,
       preventKeyAction: isOpen,
+      ...inputProps,
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
@@ -803,7 +843,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       },
       onFocus: () => setInputFocused(true),
       onBlur: () => {
-        !isOpen && setInputFocused(false);
+        setInputFocused(false);
         setInputValue('');
       },
     })
@@ -832,7 +872,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   };
 
-  const mergedRef = mergeRefs(textInput, inputProps.ref);
+  const mergedRef = mergeRefs(textInput, inputProp.ref);
 
   const readOnlyEventHandlers = readOnly
     ? {
@@ -855,16 +895,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     : {};
 
   const clearSelectionContent =
-    controlledSelectedItems.length > 0 ? (
-      <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription} {controlledSelectedItems.length},
-        {clearSelectionText}
-      </span>
-    ) : (
-      <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription}: 0
-      </span>
-    );
+    controlledSelectedItems.length > 0
+      ? `${clearSelectionDescription} ${controlledSelectedItems.length}. ${clearSelectionText}.`
+      : `${clearSelectionDescription} 0.`;
 
   return (
     <div className={wrapperClasses}>
@@ -909,7 +942,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           )}
           <input
             className={inputClasses}
-            {...inputProps}
+            {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
             readOnly={readOnly}
@@ -1009,13 +1042,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement<any>;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;
   displayName?: any;
 };
 
+FilterableMultiSelect.displayName = 'FilterableMultiSelect';
 FilterableMultiSelect.propTypes = {
   /**
    * Deprecated, aria-label is no longer needed
@@ -1178,7 +1212,7 @@ FilterableMultiSelect.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   slug: deprecate(
     PropTypes.node,
@@ -1198,6 +1232,8 @@ FilterableMultiSelect.propTypes = {
    */
   translateWithId: PropTypes.func,
 
+  type: ListBoxTypePropType,
+
   /**
    * Specify title to show title on hover
    */
@@ -1212,6 +1248,12 @@ FilterableMultiSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
 
-export default FilterableMultiSelect;
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps: PropTypes.object,
+};

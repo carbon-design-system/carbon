@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +19,7 @@ const defaultArgs = {
   labelA: 'On',
   labelB: 'Off',
   checked: true,
+  labelText: 'Label',
 };
 
 const controls = {
@@ -62,27 +61,6 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-toggle
-      checked
-      label-a="On"
-      label-b="Off"
-      label-text="Toggle element label"></cds-toggle>
-  `,
-};
-
-export const SmallToggle = {
-  render: () => html`
-    <cds-toggle
-      checked
-      label-a="On"
-      label-b="Off"
-      label-text="Toggle element label"
-      size="sm"></cds-toggle>
-  `,
-};
-
-export const Playground = {
   argTypes: controls,
   args: defaultArgs,
   render: ({
@@ -104,6 +82,16 @@ export const Playground = {
       size="${size}"
       ?read-only=${readonly}
       ?checked="${checked}"></cds-toggle>
+  `,
+};
+export const SmallToggle = {
+  render: () => html`
+    <cds-toggle
+      checked
+      label-a="On"
+      label-b="Off"
+      label-text="Toggle element label"
+      size="sm"></cds-toggle>
   `,
 };
 

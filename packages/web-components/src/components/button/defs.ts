@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2020, 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -77,6 +75,11 @@ export enum BUTTON_TYPE {
  * Button size.
  */
 export enum BUTTON_SIZE {
+  /**
+   * Extra-small size.
+   */
+  EXTRA_SMALL = 'xs',
+
   /**
    * Small size.
    */

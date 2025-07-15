@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -57,6 +55,59 @@ const controls = {
   },
 };
 
+export const Default = {
+  argTypes: controls,
+  args: {
+    caret: true,
+    highContrast: false,
+    align: POPOVER_ALIGNMENT.BOTTOM,
+    dropShadow: true,
+    open: true,
+  },
+
+  decorators: [
+    (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
+  ],
+  render: (args) => {
+    const handleClick = () => {
+      const popover = document.querySelector(`${prefix}-popover`);
+      const open = popover?.hasAttribute('open');
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
+    };
+
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <cds-popover
+        ?open=${args.open}
+        ?caret=${args.caret}
+        ?highContrast=${args.highContrast}
+        align=${args.align}
+        ?dropShadow=${args.dropShadow}>
+        <button
+          class="playground-trigger"
+          aria-label="Checkbox"
+          type="button"
+          aria-expanded=${open}
+          @click="${() => handleClick()}">
+          ${Checkbox16()}
+        </button>
+        <cds-popover-content>
+          <div class="p-3">
+            <p class="popover-title">Available storage</p>
+            <p class="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </div>
+        </cds-popover-content>
+      </cds-popover>
+    `;
+  },
+};
+
 export const TabTip = {
   render: () => {
     const handleClick = (id) => {
@@ -72,7 +123,7 @@ export const TabTip = {
         ${styles}
       </style>
       <div class="popover-tabtip-story" style="display: 'flex'">
-        <cds-popover open tabTip id="popover-one">
+        <cds-popover tabTip id="popover-one">
           <button
             aria-label="Settings"
             type="button"
@@ -161,44 +212,6 @@ export const TabTip = {
           </cds-popover-content>
         </cds-popover>
       </div>
-    `;
-  },
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: {
-    caret: true,
-    highContrast: false,
-    align: POPOVER_ALIGNMENT.BOTTOM,
-    dropShadow: true,
-    open: true,
-  },
-
-  decorators: [
-    (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
-  ],
-  render: (args) => {
-    return html`
-      <style>
-        ${styles}
-      </style>
-      <cds-popover
-        ?open=${args.open}
-        ?caret=${args.caret}
-        ?highContrast=${args.highContrast}
-        align=${args.align}
-        ?dropShadow=${args.dropShadow}>
-        <div class="playground-trigger">${Checkbox16()}</div>
-        <cds-popover-content>
-          <div class="p-3">
-            <p class="popover-title">Available storage</p>
-            <p class="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
-          </div>
-        </cds-popover-content>
-      </cds-popover>
     `;
   },
 };

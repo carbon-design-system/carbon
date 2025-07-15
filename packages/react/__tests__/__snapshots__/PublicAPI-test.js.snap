@@ -470,6 +470,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -551,11 +552,12 @@ Map {
     "render": [Function],
   },
   "ButtonSizes" => Object {
-    "0": "sm",
-    "1": "md",
-    "2": "lg",
-    "3": "xl",
-    "4": "2xl",
+    "0": "xs",
+    "1": "sm",
+    "2": "md",
+    "3": "lg",
+    "4": "xl",
+    "5": "2xl",
   },
   "ButtonSkeleton" => Object {
     "propTypes": Object {
@@ -568,6 +570,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -1339,6 +1342,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "inputProps": Object {
+        "type": "object",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -1622,7 +1628,6 @@ Map {
             },
           ],
         ],
-        "isRequired": true,
         "type": "oneOfType",
       },
       "size": Object {
@@ -1684,7 +1689,45 @@ Map {
     },
   },
   "ContentSwitcher" => Object {
-    "displayName": "ClassWrapper(ContentSwitcher)",
+    "displayName": "ContentSwitcher",
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "light": [Function],
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "selectedIndex": Object {
+        "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
   },
   "ControlledPasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -1972,10 +2015,30 @@ Map {
     },
     "TableCell": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "colSpan": Object {
+          "type": "number",
+        },
+        "hasAILabelHeader": Object {
+          "type": "bool",
+        },
+        "headers": Object {
+          "type": "string",
+        },
+      },
       "render": [Function],
     },
     "TableContainer": Object {
       "propTypes": Object {
+        "aiEnabled": Object {
+          "type": "bool",
+        },
         "children": Object {
           "type": "node",
         },
@@ -2915,6 +2978,7 @@ Map {
     },
   },
   "DismissibleTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -2924,6 +2988,9 @@ Map {
       },
       "disabled": Object {
         "type": "bool",
+      },
+      "dismissTooltipLabel": Object {
+        "type": "string",
       },
       "id": Object {
         "type": "string",
@@ -2984,6 +3051,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -3307,6 +3375,35 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "FeatureFlags" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "enableDialogElement": Object {
+        "type": "bool",
+      },
+      "enableExperimentalFocusWrapWithoutSentinels": Object {
+        "type": "bool",
+      },
+      "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12DynamicFloatingStyles": Object {
+        "type": "bool",
+      },
+      "enableV12Overflowmenu": Object {
+        "type": "bool",
+      },
+      "enableV12TileDefaultIcons": Object {
+        "type": "bool",
+      },
+      "enableV12TileRadioIcons": Object {
+        "type": "bool",
+      },
+      "flags": [Function],
+    },
   },
   "FileUploader" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -3761,6 +3858,9 @@ Map {
       "initialSelectedItems": Object {
         "type": "array",
       },
+      "inputProps": Object {
+        "type": "object",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -3825,6 +3925,15 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+          ],
+        ],
+        "type": "oneOf",
       },
       "useTitleInItem": Object {
         "type": "bool",
@@ -4033,6 +4142,55 @@ Map {
   },
   "HStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gap": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
     "render": [Function],
   },
   "Header" => Object {
@@ -4102,6 +4260,39 @@ Map {
   },
   "HeaderMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "className": Object {
+        "type": "string",
+      },
+      "focusRef": Object {
+        "type": "func",
+      },
+      "isActive": Object {
+        "type": "bool",
+      },
+      "isCurrentPage": [Function],
+      "menuLinkName": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onBlur": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "renderMenuContent": Object {
+        "type": "func",
+      },
+      "tabIndex": Object {
+        "type": "number",
+      },
+    },
     "render": [Function],
   },
   "HeaderMenuButton" => Object {
@@ -4564,6 +4755,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "withBackground": Object {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -5023,9 +5217,7 @@ Map {
       "passiveModal": Object {
         "type": "bool",
       },
-      "preventCloseOnClickOutside": Object {
-        "type": "bool",
-      },
+      "preventCloseOnClickOutside": [Function],
       "primaryButtonDisabled": Object {
         "type": "bool",
       },
@@ -5525,6 +5717,166 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "formatOptions": Object {
+        "args": Array [
+          Object {
+            "compactDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currency": Object {
+              "type": "string",
+            },
+            "currencyDisplay": Object {
+              "args": Array [
+                Array [
+                  "symbol",
+                  "narrowSymbol",
+                  "code",
+                  "name",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currencySign": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "accounting",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "localeMatcher": Object {
+              "args": Array [
+                Array [
+                  "best fit",
+                  "lookup",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "maximumFractionDigits": Object {
+              "type": "number",
+            },
+            "maximumSignificantDigits": Object {
+              "type": "number",
+            },
+            "minimumFractionDigits": Object {
+              "type": "number",
+            },
+            "minimumIntegerDigits": Object {
+              "type": "number",
+            },
+            "minimumSignificantDigits": Object {
+              "type": "number",
+            },
+            "notation": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "scientific",
+                  "engineering",
+                  "compact",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "numberingSystem": Object {
+              "type": "string",
+            },
+            "roundingIncrement": Object {
+              "type": "number",
+            },
+            "roundingMode": Object {
+              "args": Array [
+                Array [
+                  "ceil",
+                  "floor",
+                  "expand",
+                  "trunc",
+                  "halfCeil",
+                  "halfFloor",
+                  "halfExpand",
+                  "halfTrunc",
+                  "halfEven",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "signDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "never",
+                  "always",
+                  "exceptZero",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "style": Object {
+              "args": Array [
+                Array [
+                  "decimal",
+                  "currency",
+                  "percent",
+                  "unit",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "trailingZeroDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "stripIfInteger",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "unit": Object {
+              "type": "string",
+            },
+            "unitDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "narrow",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "useGrouping": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "bool",
+                  },
+                  Object {
+                    "args": Array [
+                      Array [
+                        "always",
+                        "auto",
+                        "min2",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
+        ],
+        "type": "shape",
+      },
       "helperText": Object {
         "type": "node",
       },
@@ -5541,6 +5893,21 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "inputMode": Object {
+        "args": Array [
+          Array [
+            "none",
+            "text",
+            "tel",
+            "url",
+            "email",
+            "numeric",
+            "decimal",
+            "search",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "invalid": Object {
         "type": "bool",
       },
@@ -5551,11 +5918,17 @@ Map {
         "type": "node",
       },
       "light": [Function],
+      "locale": Object {
+        "type": "string",
+      },
       "max": Object {
         "type": "number",
       },
       "min": Object {
         "type": "number",
+      },
+      "onBlur": Object {
+        "type": "func",
       },
       "onChange": Object {
         "type": "func",
@@ -5565,6 +5938,9 @@ Map {
       },
       "onKeyUp": Object {
         "type": "func",
+      },
+      "pattern": Object {
+        "type": "string",
       },
       "readOnly": Object {
         "type": "bool",
@@ -5585,6 +5961,15 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "number",
+            "text",
+          ],
+        ],
+        "type": "oneOf",
       },
       "value": Object {
         "args": Array [
@@ -5706,7 +6091,143 @@ Map {
     },
   },
   "OverflowMenu" => Object {
-    "displayName": "OverflowMenu",
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": [Function],
+      "aria-label": Object {
+        "type": "string",
+      },
+      "ariaLabel": [Function],
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "flipped": Object {
+        "type": "bool",
+      },
+      "focusTrap": Object {
+        "type": "bool",
+      },
+      "iconClass": Object {
+        "type": "string",
+      },
+      "iconDescription": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "light": [Function],
+      "menuOffset": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Object {
+                  "left": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "top": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+            Object {
+              "type": "func",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "menuOffsetFlip": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Object {
+                  "left": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "top": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+            Object {
+              "type": "func",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "menuOptionsClass": Object {
+        "type": "string",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onOpen": Object {
+        "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "selectorPrimaryFocus": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
   },
   "OverflowMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6816,9 +7337,13 @@ Map {
     },
   },
   "SelectableTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "defaultSelected": Object {
+        "type": "bool",
       },
       "disabled": Object {
         "type": "bool",
@@ -6862,6 +7387,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "SelectableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -7217,9 +7743,6 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
-      },
-      "style": Object {
-        "type": "object",
       },
     },
   },
@@ -7854,10 +8377,30 @@ Map {
   },
   "TableCell" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "colSpan": Object {
+        "type": "number",
+      },
+      "hasAILabelHeader": Object {
+        "type": "bool",
+      },
+      "headers": Object {
+        "type": "string",
+      },
+    },
     "render": [Function],
   },
   "TableContainer" => Object {
     "propTypes": Object {
+      "aiEnabled": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -8525,240 +9068,6 @@ Map {
   },
   "TextInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "ControlledPasswordInput": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "className": Object {
-          "type": "string",
-        },
-        "defaultValue": Object {
-          "args": Array [
-            Array [
-              Object {
-                "type": "string",
-              },
-              Object {
-                "type": "number",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
-        "disabled": Object {
-          "type": "bool",
-        },
-        "helperText": Object {
-          "type": "node",
-        },
-        "hideLabel": Object {
-          "type": "bool",
-        },
-        "hidePasswordLabel": Object {
-          "type": "string",
-        },
-        "id": Object {
-          "isRequired": true,
-          "type": "string",
-        },
-        "invalid": Object {
-          "type": "bool",
-        },
-        "invalidText": Object {
-          "type": "node",
-        },
-        "labelText": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "light": [Function],
-        "onChange": Object {
-          "type": "func",
-        },
-        "onClick": Object {
-          "type": "func",
-        },
-        "placeholder": Object {
-          "type": "string",
-        },
-        "showPasswordLabel": Object {
-          "type": "string",
-        },
-        "size": Object {
-          "args": Array [
-            Array [
-              "sm",
-              "md",
-              "lg",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "tooltipAlignment": Object {
-          "args": Array [
-            Array [
-              "start",
-              "center",
-              "end",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "tooltipPosition": Object {
-          "args": Array [
-            Array [
-              "top",
-              "right",
-              "bottom",
-              "left",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "value": Object {
-          "args": Array [
-            Array [
-              Object {
-                "type": "string",
-              },
-              Object {
-                "type": "number",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
-      },
-      "render": [Function],
-    },
-    "PasswordInput": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "className": Object {
-          "type": "string",
-        },
-        "defaultValue": Object {
-          "args": Array [
-            Array [
-              Object {
-                "type": "string",
-              },
-              Object {
-                "type": "number",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
-        "disabled": Object {
-          "type": "bool",
-        },
-        "helperText": Object {
-          "type": "node",
-        },
-        "hideLabel": Object {
-          "type": "bool",
-        },
-        "hidePasswordLabel": Object {
-          "type": "string",
-        },
-        "id": Object {
-          "isRequired": true,
-          "type": "string",
-        },
-        "inline": Object {
-          "type": "bool",
-        },
-        "invalid": Object {
-          "type": "bool",
-        },
-        "invalidText": Object {
-          "type": "node",
-        },
-        "labelText": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "light": [Function],
-        "onChange": Object {
-          "type": "func",
-        },
-        "onClick": Object {
-          "type": "func",
-        },
-        "onTogglePasswordVisibility": Object {
-          "type": "func",
-        },
-        "placeholder": Object {
-          "type": "string",
-        },
-        "readOnly": Object {
-          "type": "bool",
-        },
-        "showPasswordLabel": Object {
-          "type": "string",
-        },
-        "size": Object {
-          "args": Array [
-            Array [
-              "sm",
-              "md",
-              "lg",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "tooltipAlignment": Object {
-          "args": Array [
-            Array [
-              "start",
-              "center",
-              "end",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "tooltipPosition": Object {
-          "args": Array [
-            Array [
-              "top",
-              "right",
-              "bottom",
-              "left",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "type": Object {
-          "args": Array [
-            Array [
-              "password",
-              "text",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "value": Object {
-          "args": Array [
-            Array [
-              Object {
-                "type": "string",
-              },
-              Object {
-                "type": "number",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
-        "warn": Object {
-          "type": "bool",
-        },
-        "warnText": Object {
-          "type": "node",
-        },
-      },
-      "render": [Function],
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -9422,6 +9731,28 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+            "left",
+            "right",
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end",
+            "left-end",
+            "left-start",
+            "right-end",
+            "right-start",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -9514,6 +9845,28 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "align": Object {
+          "args": Array [
+            Array [
+              "top",
+              "bottom",
+              "left",
+              "right",
+              "top-start",
+              "top-end",
+              "bottom-start",
+              "bottom-end",
+              "left-end",
+              "left-start",
+              "right-end",
+              "right-start",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "autoAlign": Object {
+          "type": "bool",
         },
         "children": Object {
           "type": "node",
@@ -9674,6 +10027,55 @@ Map {
   },
   "VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gap": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
     "render": [Function],
   },
   "unstable_FeatureFlags" => Object {
@@ -10200,6 +10602,77 @@ Map {
   },
   "unstable__FluidDatePickerInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "datePickerType": Object {
+        "args": Array [
+          Array [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "decorator": Object {
+        "type": "node",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "pattern": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
     "render": [Function],
   },
   "unstable__FluidDatePickerSkeleton" => Object {
@@ -10437,6 +10910,293 @@ Map {
     "render": [Function],
   },
   "unstable__FluidMultiSelectSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable__FluidNumberInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "allowEmpty": Object {
+        "type": "bool",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disableWheel": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "formatOptions": Object {
+        "args": Array [
+          Object {
+            "compactDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currency": Object {
+              "type": "string",
+            },
+            "currencyDisplay": Object {
+              "args": Array [
+                Array [
+                  "symbol",
+                  "narrowSymbol",
+                  "code",
+                  "name",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currencySign": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "accounting",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "localeMatcher": Object {
+              "args": Array [
+                Array [
+                  "best fit",
+                  "lookup",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "maximumFractionDigits": Object {
+              "type": "number",
+            },
+            "maximumSignificantDigits": Object {
+              "type": "number",
+            },
+            "minimumFractionDigits": Object {
+              "type": "number",
+            },
+            "minimumIntegerDigits": Object {
+              "type": "number",
+            },
+            "minimumSignificantDigits": Object {
+              "type": "number",
+            },
+            "notation": Object {
+              "args": Array [
+                Array [
+                  "standard",
+                  "scientific",
+                  "engineering",
+                  "compact",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "numberingSystem": Object {
+              "type": "string",
+            },
+            "roundingIncrement": Object {
+              "type": "number",
+            },
+            "roundingMode": Object {
+              "args": Array [
+                Array [
+                  "ceil",
+                  "floor",
+                  "expand",
+                  "trunc",
+                  "halfCeil",
+                  "halfFloor",
+                  "halfExpand",
+                  "halfTrunc",
+                  "halfEven",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "signDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "never",
+                  "always",
+                  "exceptZero",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "style": Object {
+              "args": Array [
+                Array [
+                  "decimal",
+                  "currency",
+                  "percent",
+                  "unit",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "trailingZeroDisplay": Object {
+              "args": Array [
+                Array [
+                  "auto",
+                  "stripIfInteger",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "unit": Object {
+              "type": "string",
+            },
+            "unitDisplay": Object {
+              "args": Array [
+                Array [
+                  "short",
+                  "narrow",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "useGrouping": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "bool",
+                  },
+                  Object {
+                    "args": Array [
+                      Array [
+                        "always",
+                        "auto",
+                        "min2",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
+        ],
+        "type": "shape",
+      },
+      "iconDescription": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "inputMode": Object {
+        "args": Array [
+          Array [
+            "none",
+            "text",
+            "tel",
+            "url",
+            "email",
+            "numeric",
+            "decimal",
+            "search",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "locale": Object {
+        "type": "string",
+      },
+      "max": Object {
+        "type": "number",
+      },
+      "min": Object {
+        "type": "number",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyUp": Object {
+        "type": "func",
+      },
+      "pattern": Object {
+        "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "step": Object {
+        "type": "number",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "number",
+            "text",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidNumberInputSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -10862,6 +11622,212 @@ Map {
     },
     "render": [Function],
   },
+  "unstable__PageHeader" => Object {
+    "BreadcrumbBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Content": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "ContentPageActions": Object {
+      "displayName": "PageHeaderContentPageActions",
+      "propTypes": Object {
+        "actions": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "node",
+              },
+              Object {
+                "type": "array",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
+        },
+      },
+    },
+    "ContentText": Object {
+      "displayName": "PageHeaderContentText",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+      },
+    },
+    "HeroImage": Object {
+      "displayName": "PageHeaderHeroImage",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
+    },
+    "PageHeader": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "PageHeaderBreadcrumbBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "PageHeaderContent": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "PageHeaderContentPageActions": Object {
+      "displayName": "PageHeaderContentPageActions",
+      "propTypes": Object {
+        "actions": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "node",
+              },
+              Object {
+                "type": "array",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
+        },
+      },
+    },
+    "PageHeaderContentText": Object {
+      "displayName": "PageHeaderContentText",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+      },
+    },
+    "PageHeaderHeroImage": Object {
+      "displayName": "PageHeaderHeroImage",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
+    },
+    "PageHeaderTabBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Root": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TabBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+  },
   "unstable__ShapeIndicator" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -10993,6 +11959,8 @@ Map {
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
   "useContextMenu" => Object {},
+  "useFeatureFlag" => Object {},
+  "useFeatureFlags" => Object {},
   "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefersDarkScheme" => Object {},

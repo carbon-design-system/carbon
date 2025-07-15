@@ -6,16 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React from 'react';
 import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
-import { composeEventHandlers } from '../../tools/events';
-import { PolymorphicProps } from '../../types/common';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 export const ButtonKinds = [
   'primary',
@@ -30,7 +25,7 @@ export const ButtonKinds = [
 
 export type ButtonKind = (typeof ButtonKinds)[number];
 
-export const ButtonSizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+export const ButtonSizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 export type ButtonSize = (typeof ButtonSizes)[number];
 
@@ -150,7 +145,6 @@ const Button: ButtonComponent = React.forwardRef(
     props: ButtonProps<T>,
     ref: React.Ref<unknown>
   ) => {
-    const tooltipRef = useRef(null);
     const {
       as,
       autoAlign = false,
@@ -172,12 +166,12 @@ const Button: ButtonComponent = React.forwardRef(
       ...rest
     } = props;
 
-    const handleClick = (evt: React.MouseEvent) => {
-      // Prevent clicks on the tooltip from triggering the button click event
-      if (evt.target === tooltipRef.current) {
-        evt.preventDefault();
-      }
-    };
+    if (ButtonImageElement && !children && !iconDescription) {
+      console.error(
+        'Button: renderIcon property specified without also providing an iconDescription property. ' +
+          'This may impact accessibility for screen reader users.'
+      );
+    }
 
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
@@ -228,7 +222,7 @@ const Button: ButtonComponent = React.forwardRef(
           onFocus={onFocus}
           onBlur={onBlur}
           autoAlign={autoAlign}
-          onClick={composeEventHandlers([onClick, handleClick])}
+          onClick={onClick}
           renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
         >
           {iconOnlyImage ?? children}
@@ -378,7 +372,7 @@ const Button: ButtonComponent = React.forwardRef(
   /**
    * Specify the size of the button, from the following list of sizes:
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Optional prop to specify the tabIndex of the Button

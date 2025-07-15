@@ -8,11 +8,60 @@
 @forward './theme/theme' hide theme;
 @use './theme/theme';
 @use './layer/layer-tokens';
+@use './utilities/custom-property';
 
 /// Include the CSS Custom Properties for the active theme or a given theme on
 /// a selector
 @mixin theme($args...) {
   @include theme.theme($args...);
+
+  // If the system is in high-contrast mode, use the system defined colors.  This mostly happens automatically, but
+  // we need to do it manually for icons and selected backgrounds.  Importantly, the custom properties we set here
+  // need to override the CSS custom properties set above.  See:
+  // - https://github.com/carbon-design-system/carbon/issues/19015
+  // - https://developer.mozilla.org/en-US/docs/Web/CSS/system-color.
+  // - https://carbondesignsystem.com/elements/color/tokens/#icon
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
+    // Icon colors specified by "fill".
+    @include custom-property.declaration('icon-primary', ButtonText);
+    @include custom-property.declaration('icon-secondary', ButtonText);
+    @include custom-property.declaration('icon-interactive', ButtonText);
+    @include custom-property.declaration('icon-disabled', GrayText);
+    @include custom-property.declaration('icon-on-color-disabled', GrayText);
+
+    // Since icon-inverse and icon-on-color are generally used to indicated selected icons, use SelectedItemText.
+    @include custom-property.declaration('icon-inverse', SelectedItemText);
+    @include custom-property.declaration('icon-on-color', SelectedItemText);
+
+    // Some components currently set these values for fill, although unclear if that's valid.
+    @include custom-property.declaration('button-disabled', GrayText);
+    @include custom-property.declaration('interactive', ButtonText);
+    @include custom-property.declaration('link-primary', LinkText);
+    @include custom-property.declaration('link-primary-hover', LinkText);
+    @include custom-property.declaration('link-secondary', LinkText);
+    @include custom-property.declaration('link-inverse', SelectedItemText);
+    @include custom-property.declaration(
+      'link-inverse-hover',
+      SelectedItemText
+    );
+    @include custom-property.declaration(
+      'link-inverse-visited',
+      SelectedItemText
+    );
+    @include custom-property.declaration('link-visited', VisitedText);
+
+    // Force a background-color for selected buttons etc., otherwise the user won't know they are selected.
+    @include custom-property.declaration('background-selected', SelectedItem);
+    @include custom-property.declaration(
+      'background-selected-hover',
+      SelectedItem
+    );
+    @include custom-property.declaration('background-inverse', SelectedItem);
+    @include custom-property.declaration(
+      'layer-selected-inverse',
+      SelectedItem
+    );
+  }
 
   // Note: we need to re-emit the contextual layer tokens as part of the theme
   // mixin. Otherwise, the layer tokens are defined at the :root level and will

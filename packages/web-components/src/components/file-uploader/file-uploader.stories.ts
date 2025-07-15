@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +9,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import './index';
-import './demo-file-uploader';
 import { FILE_UPLOADER_ITEM_STATE } from './file-uploader-item';
 import { BUTTON_KIND, BUTTON_SIZE } from '../button/button';
 
@@ -114,57 +111,6 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
-    return html`
-      <cds-ce-demo-file-uploader
-        accept="image/jpeg"
-        button
-        label-description="Max file size is 500mb. Only .jpg files are supported."
-        label-title="Upload files">
-      </cds-ce-demo-file-uploader>
-    `;
-  },
-};
-
-export const DragAndDropUploadContainerExampleApplication = {
-  render: () => {
-    return html`
-      <cds-ce-demo-file-uploader
-        accept="image/jpeg image/png"
-        label-description="Max file size is 500kb. Supported file types are .jpg and .png."
-        label-title="Upload files">
-      </cds-ce-demo-file-uploader>
-    `;
-  },
-};
-
-export const FileUploaderDropContainer = {
-  render: () => {
-    return html`
-      <cds-file-uploader-drop-container accept="image/jpeg image/png">
-        Drag and drop files here or click to upload
-      </cds-file-uploader-drop-container>
-    `;
-  },
-};
-
-export const FileUploaderItem = {
-  render: () => {
-    return html`
-      <cds-file-uploader-item state="${FILE_UPLOADER_ITEM_STATE.EDIT}">
-        README.md
-      </cds-file-uploader-item>
-    `;
-  },
-};
-
-export const Skeleton = {
-  render: () => {
-    return html` <cds-file-uploader-skeleton></cds-file-uploader-skeleton> `;
-  },
-};
-
-export const Playground = {
   args,
   argTypes,
   render: (args) => {
@@ -184,23 +130,84 @@ export const Playground = {
     } = args ?? {};
 
     return html`
-      <cds-ce-demo-file-uploader
-        button-kind="${buttonKind}"
-        button-label="${buttonLabel}"
-        input-state="${state}"
-        icon-description="${iconDescription}"
-        accept="image/jpeg"
-        button
-        ?disabled="${disabled}"
-        label-description="${ifDefined(labelDescription)}"
-        label-title="${ifDefined(labelTitle)}"
+      <cds-file-uploader
+        label-title="${labelTitle}"
+        label-description="${labelDescription}"
         ?multiple="${multiple}"
-        size="${ifDefined(size)}"
-        input-name="${ifDefined(name)}"
+        input-state="${state}"
+        ?disabled="${disabled}"
+        icon-description="${iconDescription}"
         @cds-file-uploader-item-deleted="${onDelete}"
-        @cds-file-uploader-drop-container-changed="${onChange}">
-      </cds-ce-demo-file-uploader>
+        @cds-file-uploader-drop-container-changed="${onChange}"
+        input-name="${ifDefined(name)}">
+        <cds-file-uploader-button
+          button-kind="${buttonKind}"
+          accept="image/jpeg"
+          name="default-file-uploader-button"
+          size="${ifDefined(size)}">
+          ${buttonLabel}
+        </cds-file-uploader-button>
+      </cds-file-uploader>
     `;
+  },
+};
+
+export const DragAndDropUploadContainerExampleApplication = {
+  render: () => {
+    return html`
+      <cds-file-uploader
+        label-title="Upload files"
+        label-description="Max file size is 500 KB. Supported file types are .jpg and .png."
+        multiple>
+        <cds-file-uploader-drop-container accept="image/jpeg image/png">
+          Drag and drop files here or click to upload
+        </cds-file-uploader-drop-container>
+      </cds-file-uploader>
+    `;
+  },
+};
+
+export const DragAndDropUploadSingleContainerExampleApplication = {
+  render: () => {
+    return html`
+      <cds-file-uploader
+        label-title="Upload a file"
+        label-description="Max file size is 500 KB. Only .jpg files are supported.">
+        <cds-file-uploader-drop-container accept="image/jpeg">
+          Drag and drop a file here or click to upload
+        </cds-file-uploader-drop-container>
+      </cds-file-uploader>
+    `;
+  },
+};
+
+export const FileUploaderDropContainer = {
+  render: () => {
+    return html`
+      <cds-file-uploader>
+        <cds-file-uploader-drop-container
+          multiple
+          accept="image/jpeg image/png">
+          Drag and drop files here or click to upload
+        </cds-file-uploader-drop-container>
+      </cds-file-uploader>
+    `;
+  },
+};
+
+export const FileUploaderItem = {
+  render: () => {
+    return html`
+      <cds-file-uploader-item state="${FILE_UPLOADER_ITEM_STATE.EDIT}">
+        README.md
+      </cds-file-uploader-item>
+    `;
+  },
+};
+
+export const Skeleton = {
+  render: () => {
+    return html` <cds-file-uploader-skeleton></cds-file-uploader-skeleton> `;
   },
 };
 
