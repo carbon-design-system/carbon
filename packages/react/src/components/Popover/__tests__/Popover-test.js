@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
@@ -266,6 +266,34 @@ describe('Popover', () => {
       );
       await userEvent.click(container);
       expect(onRequestClose).toHaveBeenCalled();
+    });
+
+    it('should add multi-line class to popover content when text is long', async () => {
+      const { container } = await render(
+        <Popover open>
+          <button type="button">Settings</button>
+          <PopoverContent>
+            This is a very long text that should trigger the multi-line. Adding
+            more text to make it even longer.
+          </PopoverContent>
+        </Popover>
+      );
+      waitFor(() =>
+        expect(container.firstChild.lastChild.firstChild).toHaveClass(
+          `${prefix}--popover-content--multi-line`
+        )
+      );
+    });
+    it('should not add multi-line class to popover content when text is short', () => {
+      const { container } = render(
+        <Popover open>
+          <button type="button">Settings</button>
+          <PopoverContent className="test">Short text</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild.lastChild.firstChild).not.toHaveClass(
+        `${prefix}--popover-content--multi-line`
+      );
     });
 
     it('should call onRequestClose when tabbing out of popover via keyboard', async () => {

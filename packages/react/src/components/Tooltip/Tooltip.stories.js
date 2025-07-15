@@ -7,7 +7,7 @@
 
 import './story.scss';
 
-import { Help } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { Tooltip } from './';
 import mdx from './Tooltip.mdx';
@@ -54,12 +54,11 @@ export default {
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
 // autoAlign is experimental and not part of the actual implementation.
 export const Default = (args) => {
-  const label =
-    'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
+  const label = 'Options';
   return (
     <Tooltip autoAlign label={label} closeOnActivation={false} {...args}>
       <button className="sb-tooltip-trigger" type="button">
-        <Help />
+        <OverflowMenuVertical />
       </button>
     </Tooltip>
   );

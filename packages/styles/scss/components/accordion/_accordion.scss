@@ -121,6 +121,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   // Disabled styles
   .#{$prefix}--accordion__heading[disabled] {
+    background-color: transparent;
     color: $text-disabled;
     cursor: not-allowed;
   }
