@@ -156,6 +156,7 @@ categories:
           - group-objects
           - group-objects--new
           - group-objects--save
+          - heading
           - hexagon--outline
           - hexagon--solid
           - hexagon--vertical--outline
@@ -399,8 +400,11 @@ categories:
           - filter--reset
           - flag
           - flag--filled
+          - follow-up-work-order
           - fork
           - function-math
+          - funnel--sequence
+          - funnel--sort
           - gears
           - image--search
           - image--search--alt
@@ -426,6 +430,8 @@ categories:
           - migrate
           - migrate--alt
           - minimize
+          - modified--newest
+          - modified--oldest
           - move
           - new-tab
           - not-sent
@@ -440,11 +446,15 @@ categories:
           - pause-past
           - pin
           - pin--filled
+          - pivot--horizontal
+          - pivot--vertical
+          - pop-in
           - process
           - process-automate
           - promote
           - pull-request
           - query
+          - read-me
           - recently-viewed
           - recommend
           - redo
@@ -610,6 +620,7 @@ categories:
           - logo--vue
           - logo--git
           - logo--red-hat-ai-instructlab-on-ibm-cloud
+          - SAP
       - name: IBM
         members:
           - bee
@@ -864,6 +875,12 @@ categories:
           - ibm-quantum--safe-advisor
           - ibm-quantum--safe-explorer
           - ibm-quantum--safe-remediator
+          - ibm-software--watsonx--data--analyze-and-process
+          - ibm-software--watsonx--data--structured--enrichment
+          - ibm-software--watsonx--data--structured--import
+          - ibm-software--watsonx--data--unstructured--enrichment
+          - ibm-software--watsonx--data--unstructured--import
+          - ibm-software--watsonx--document--library
           - ibm-security--services
           - ibm-watson--assistant
           - ibm-watson--knowledge-catalog
@@ -1194,6 +1211,8 @@ categories:
           - activity
           - add--child-node
           - add--parent-node
+          - aggregator--count-rows
+          - aggregator--recalculation
           - analytics
           - analytics--custom
           - analytics--reference
@@ -1352,14 +1371,18 @@ categories:
           - increase-level
           - join--full
           - join--inner
+          - join--inner--alt
           - join--left
+          - join--left-outer
           - join--outer
           - join--right
+          - join--right-outer
           - kubernetes--ip-address
           - kubernetes--pod
           - linux
           - linux--alt
           - managed-solutions
+          - marginal
           - math-curve
           - model-builder
           - model-builder--reference
@@ -1413,6 +1436,8 @@ categories:
           - summary--KPI
           - summary--KPI--mirror
           - support-vector-machine
+          - surrogate--key-database
+          - surrogate--key-flat-file
           - sys-provision
           - table
           - table--alias
@@ -1454,6 +1479,7 @@ categories:
           - application
           - avro
           - badge
+          - base-document-set
           - book
           - CAD
           - catalog
@@ -1480,6 +1506,7 @@ categories:
           - cube-view
           - DOC
           - document
+          - document-set
           - document--add
           - document--attachment
           - document--audio
@@ -1670,6 +1697,7 @@ categories:
           - low-severity
           - help
           - help--filled
+          - important
           - in-progress
           - in-progress--error
           - in-progress--warning
@@ -2511,6 +2539,7 @@ categories:
           - voicemail
           - VPN
           - watch
+          - waveform
           - web-services--cluster
           - web-services--container
           - web-services--definition

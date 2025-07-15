@@ -39,7 +39,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { warning } from '../../internal/warning';
 import { AILabel } from '../AILabel';
@@ -305,11 +305,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     function handleKeyDown(event) {
       if (!enableDialogElement) {
-        event.stopPropagation();
-        if (match(event, keys.Escape)) {
-          closeModal(event);
-        }
-
         if (
           focusTrapWithoutSentinels &&
           open &&
@@ -470,6 +465,23 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           return child;
       }
     });
+
+    useEffect(() => {
+      if (!open) return;
+
+      const handleEscapeKey = (event) => {
+        if (match(event, keys.Escape)) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeModal(event);
+        }
+      };
+      document.addEventListener('keydown', handleEscapeKey, true);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey, true);
+      };
+    }, [open]);
 
     useEffect(() => {
       if (!enableDialogElement && !open && launcherButtonRef) {

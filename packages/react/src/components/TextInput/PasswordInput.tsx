@@ -20,7 +20,7 @@ import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { Tooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 type ExcludedAttributes = 'size';
