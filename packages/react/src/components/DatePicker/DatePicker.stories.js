@@ -4,11 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import React, { useState } from 'react';
-
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
 import DatePickerInput from '../DatePickerInput';
@@ -16,7 +13,6 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
-
 import mdx from './DatePicker.mdx';
 
 export default {
@@ -230,6 +226,29 @@ export const RangeWithCalendar = (args) => {
 };
 
 RangeWithCalendar.argTypes = { ...sharedArgTypes };
+
+export const ReadOnlyRangeBugReproduction = () => {
+  const startDate = '01/15/2024';
+  const endDate = '01/25/2024';
+  return (
+    <DatePicker datePickerType="range" readOnly={true}>
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Start date"
+        size="md"
+        value={startDate}
+      />
+      <DatePickerInput
+        id="date-picker-input-id-finish"
+        placeholder="mm/dd/yyyy"
+        labelText="End date"
+        size="md"
+        value={endDate}
+      />
+    </DatePicker>
+  );
+};
 
 export const SimpleWithLayer = (args) => (
   <WithLayer>
