@@ -22,7 +22,7 @@ async function sync(args, env) {
 
   for (const name of tasksToRun) {
     const task = tasks[name];
-    await task.run(env);
+    await task(env);
   }
 }
 
