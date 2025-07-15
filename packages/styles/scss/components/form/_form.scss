@@ -116,12 +116,14 @@ $input-label-weight: 400 !default;
     inline-size: convert.to-rem(75px);
   }
 
-  input[type='number'] {
+  input[type='number'],
+  input[type='text'].#{$prefix}--number {
     font-family: font-family('sans');
   }
 
   input[data-invalid]:not(:focus),
   .#{$prefix}--number[data-invalid] input[type='number']:not(:focus),
+  .#{$prefix}--number[data-invalid] input[type='text']:not(:focus),
   .#{$prefix}--text-input__field-wrapper[data-invalid]
     > .#{$prefix}--text-input--invalid:not(:focus),
   .#{$prefix}--text-area__wrapper[data-invalid]
@@ -163,6 +165,20 @@ $input-label-weight: 400 !default;
     }
   }
 
+  .#{$prefix}--select--inline.#{$prefix}--select--warning
+    .#{$prefix}--select-input--inline__wrapper,
+  .#{$prefix}--select-input--inline__wrapper[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
+      display: inline-flex;
+      overflow: visible;
+      margin: 0;
+      inline-size: 100%;
+      margin-block-end: 0;
+      max-block-size: 100%;
+      padding-inline-start: $spacing-03;
+    }
+  }
+
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--date-picker-input__wrapper,
@@ -172,7 +188,8 @@ $input-label-weight: 400 !default;
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
-  .#{$prefix}--list-box[data-invalid] {
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--select-input--inline__wrapper[data-invalid] {
     ~ .#{$prefix}--form-requirement {
       color: $text-error;
     }

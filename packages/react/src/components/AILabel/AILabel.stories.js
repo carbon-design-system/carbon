@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -379,112 +379,6 @@ ExplainabilityPopover.argTypes = {
     },
   },
   textLabel: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-export const Playground = (args) => {
-  const { showAILabelActions = true } = args;
-
-  const renderedContent = (
-    <>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h2 className="ai-label-heading">84%</h2>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      {showAILabelActions && (
-        <AILabelActions>
-          <IconButton kind="ghost" label="View">
-            <View />
-          </IconButton>
-          <IconButton kind="ghost" label="Open Folder">
-            <FolderOpen />
-          </IconButton>
-          <IconButton kind="ghost" label="Folders">
-            <Folders />
-          </IconButton>
-          <Button>View details</Button>
-        </AILabelActions>
-      )}
-    </>
-  );
-
-  return (
-    <>
-      <div className="ai-label-container ai-label-container-example">
-        <AILabel aria-label="Test" {...args}>
-          <AILabelContent>{renderedContent}</AILabelContent>
-        </AILabel>
-      </div>
-      <Button>Test</Button>
-      <Button kind="danger">Test</Button>
-    </>
-  );
-};
-
-Playground.argTypes = {
-  showAILabelActions: {
-    control: {
-      type: 'boolean',
-    },
-    description: 'Playground only - toggle to show the callout toolbar',
-  },
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: { type: 'select' },
-  },
-  AILabelContent: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  onRevertClick: {
-    table: {
-      disable: true,
-    },
-  },
-  revertActive: {
-    table: {
-      disable: true,
-    },
-  },
-  revertLabel: {
     table: {
       disable: true,
     },

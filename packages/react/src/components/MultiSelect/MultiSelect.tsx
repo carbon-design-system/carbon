@@ -16,14 +16,15 @@ import {
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
-  ForwardedRef,
-  useContext,
-  useState,
-  useMemo,
-  ReactNode,
-  useLayoutEffect,
+  cloneElement,
   isValidElement,
   useCallback,
+  useContext,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type ForwardedRef,
+  type ReactNode,
 } from 'react';
 import ListBox, {
   ListBoxSizePropType,
@@ -40,7 +41,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -56,6 +57,8 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   ItemClick,
@@ -699,20 +702,11 @@ export const MultiSelect = React.forwardRef(
       : {};
 
     // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
-    }
 
     const itemsSelectedText =
       selectedItems.length > 0 &&

@@ -9,6 +9,7 @@ import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
 import React, {
+  cloneElement,
   useContext,
   type ForwardedRef,
   type HTMLAttributes,
@@ -18,7 +19,9 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useId } from '../../internal/useId';
 import { Text } from '../Text';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
 export type ReactNodeLike =
@@ -229,20 +232,11 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   const input = <input {...inputProps} />;
 
   // AILabel always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   return (
     <div className={containerClasses}>

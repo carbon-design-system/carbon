@@ -6,8 +6,8 @@
  */
 
 import React, {
+  cloneElement,
   isValidElement,
-  Ref,
   useCallback,
   useContext,
   useEffect,
@@ -18,6 +18,7 @@ import React, {
   type HTMLAttributes,
   type MouseEvent,
   type ReactNode,
+  type Ref,
 } from 'react';
 import {
   useSelect,
@@ -42,7 +43,7 @@ import ListBox, {
   type ListBoxType,
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { TranslateWithId } from '../../types/common';
@@ -55,6 +56,8 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -596,15 +599,11 @@ const Dropdown = React.forwardRef(
     );
 
     // AILabel is always size `mini`
-    const normalizedDecorator = useMemo(() => {
-      let element = slug ?? decorator;
-      if (element && element['type']?.displayName === 'AILabel') {
-        return React.cloneElement(element as React.ReactElement<any>, {
-          size: 'mini',
-        });
-      }
-      return React.isValidElement(element) ? element : null;
-    }, [slug, decorator]);
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
+      : null;
 
     const allLabelProps = getLabelProps();
     const labelProps = isValidElement(titleText)

@@ -25,7 +25,7 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 
@@ -247,7 +247,6 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
-        aria-label={onExpand ? 'button' : undefined}
         aria-labelledby={onExpand ? searchId : undefined}
         role={onExpand ? 'button' : undefined}
         className={`${prefix}--search-magnifier`}

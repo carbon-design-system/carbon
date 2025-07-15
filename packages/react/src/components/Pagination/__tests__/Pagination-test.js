@@ -8,7 +8,7 @@
 import React from 'react';
 import Pagination from '../Pagination';
 import userEvent from '@testing-library/user-event';
-import { getAllByRole, render, screen } from '@testing-library/react';
+import { getAllByRole, render, screen, act } from '@testing-library/react';
 
 describe('Pagination', () => {
   describe('renders as expected - Component API', () => {
@@ -175,12 +175,15 @@ describe('Pagination', () => {
           pageSizes={[10, 20]}
           pageSize={10}
           page={2}
+          totalItems={15}
           onChange={onChange}
         />
       );
 
       await userEvent.click(screen.getByLabelText('Previous page'));
-      expect(screen.getByLabelText('Next page')).toHaveFocus();
+      act(() => {
+        expect(screen.getByLabelText('Next page')).toHaveFocus();
+      });
     });
 
     it('should keep focus on the next button if there is a next page after it is clicked', async () => {
@@ -196,6 +199,23 @@ describe('Pagination', () => {
 
       await userEvent.click(screen.getByLabelText('Next page'));
       expect(screen.getByLabelText('Next page')).toHaveFocus();
+    });
+    it('should focus on the previous button when next page is clicked and just contain two pages', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          pageSizes={[10, 20]}
+          pageSize={10}
+          totalItems={18}
+          page={1}
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('Next page'));
+      act(() => {
+        expect(screen.getByLabelText('Previous page')).toHaveFocus();
+      });
     });
 
     it('should change focus off the next button and to the previous button if there is no next page after it is clicked', async () => {
