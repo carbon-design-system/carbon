@@ -65,6 +65,7 @@
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "dependencies": {
+    "@carbon/icons-web-components": "^11.62.0",
     "@carbon/styles": "^1.86.0-rc.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.5.0",

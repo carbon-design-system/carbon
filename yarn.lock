@@ -1763,6 +1763,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/icons-web-components@npm:^11.62.0, @carbon/icons-web-components@workspace:packages/icons-web-components":
+  version: 0.0.0-use.local
+  resolution: "@carbon/icons-web-components@workspace:packages/icons-web-components"
+  dependencies:
+    "@carbon/icon-build-helpers": "npm:^1.40.0"
+    "@carbon/icon-helpers": "npm:^10.61.0"
+    "@carbon/icons": "npm:^11.62.0"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+    rimraf: "npm:^6.0.0"
+  peerDependencies:
+    lit: ">=2.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@carbon/icons@npm:^11.62.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
@@ -2068,6 +2082,7 @@ __metadata:
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.62.0"
+    "@carbon/icons-web-components": "npm:^11.62.0"
     "@carbon/layout": "npm:^11.36.0"
     "@carbon/motion": "npm:^11.30.0"
     "@carbon/styles": "npm:^1.86.0-rc.0"

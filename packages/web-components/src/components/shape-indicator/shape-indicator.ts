@@ -12,13 +12,15 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import styles from './shape-indicator.scss?lit';
 
 // Import Carbon icons
-import Critical from '@carbon/icons/lib/critical/index.js';
-import CriticalSeverity from '@carbon/icons/lib/critical-severity/index.js';
-import DiamondFill from '@carbon/icons/lib/diamond-fill/index.js';
-import LowSeverity from '@carbon/icons/lib/low-severity/index.js';
-import Caution from '@carbon/icons/lib/caution/index.js';
-import CircleFill from '@carbon/icons/lib/circle-fill/index.js';
-import CircleStroke from '@carbon/icons/lib/circle-stroke/index.js';
+import {
+  Critical16,
+  CriticalSeverity16,
+  DiamondFill16,
+  LowSeverity16,
+  Caution16,
+  CircleFill16,
+  CircleStroke16,
+} from '@carbon/icons-web-components';
 import { SHAPE_INDICATOR_KIND } from './defs';
 
 /**
@@ -46,17 +48,17 @@ const IncompleteIcon = () => html`
  * Map of shape indicators to their corresponding icons
  */
 const shapeMap = {
-  [SHAPE_INDICATOR_KIND.FAILED]: Critical,
-  [SHAPE_INDICATOR_KIND.CRITICAL]: CriticalSeverity,
-  [SHAPE_INDICATOR_KIND.HIGH]: Caution,
-  [SHAPE_INDICATOR_KIND.MEDIUM]: DiamondFill,
-  [SHAPE_INDICATOR_KIND.LOW]: LowSeverity,
-  [SHAPE_INDICATOR_KIND.CAUTIOUS]: Caution,
-  [SHAPE_INDICATOR_KIND.UNDEFINED]: DiamondFill,
-  [SHAPE_INDICATOR_KIND.STABLE]: CircleFill,
-  [SHAPE_INDICATOR_KIND.INFORMATIVE]: LowSeverity,
+  [SHAPE_INDICATOR_KIND.FAILED]: Critical16,
+  [SHAPE_INDICATOR_KIND.CRITICAL]: CriticalSeverity16,
+  [SHAPE_INDICATOR_KIND.HIGH]: Caution16,
+  [SHAPE_INDICATOR_KIND.MEDIUM]: DiamondFill16,
+  [SHAPE_INDICATOR_KIND.LOW]: LowSeverity16,
+  [SHAPE_INDICATOR_KIND.CAUTIOUS]: Caution16,
+  [SHAPE_INDICATOR_KIND.UNDEFINED]: DiamondFill16,
+  [SHAPE_INDICATOR_KIND.STABLE]: CircleFill16,
+  [SHAPE_INDICATOR_KIND.INFORMATIVE]: LowSeverity16,
   [SHAPE_INDICATOR_KIND.INCOMPLETE]: IncompleteIcon,
-  [SHAPE_INDICATOR_KIND.DRAFT]: CircleStroke,
+  [SHAPE_INDICATOR_KIND.DRAFT]: CircleStroke16,
 };
 
 /**
