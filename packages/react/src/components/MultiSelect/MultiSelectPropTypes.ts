@@ -18,12 +18,6 @@ export const sortingPropTypes = {
   compareItems: PropTypes.func,
 
   /**
-   * Provide a method that filters all options in the control. Overriding this
-   * prop means that you have to handle the filtering logic when the user types in the text input.
-   * Otherwise, a built-in default function will handling the filtering  */
-  filterItems: PropTypes.func,
-
-  /**
    * Provide a method that sorts all options in the control. Overriding this
    * prop means that you also have to handle the sort logic for selected versus
    * un-selected items. If you just want to control ordering, consider the
