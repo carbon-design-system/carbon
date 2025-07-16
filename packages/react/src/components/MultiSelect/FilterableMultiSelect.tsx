@@ -1128,8 +1128,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                         title={useTitleInItem ? itemText : undefined}
                         indeterminate={isIndeterminate}
                         disabled={disabled}
-                        data-contained-checkbox-state={isChecked}
-                        tabIndex={-1}
                       />
                     </div>
                   </ListBox.MenuItem>
