@@ -3848,9 +3848,6 @@ Map {
         ],
         "type": "shape",
       },
-      "filterItems": Object {
-        "type": "func",
-      },
       "hideLabel": Object {
         "type": "bool",
       },
