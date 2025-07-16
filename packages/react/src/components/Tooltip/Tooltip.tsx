@@ -139,15 +139,11 @@ const Tooltip: TooltipComponent = React.forwardRef(
     const child = React.Children.only(children);
 
     const {
-      'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
     } = child?.props ?? {};
 
     const hasLabel = !!label;
-    const hasAriaLabel =
-      typeof ariaLabel === 'string' ? ariaLabel.trim() !== '' : false;
-
     const labelledBy = ariaLabelledBy ?? (hasLabel ? id : undefined);
     const describedBy = ariaDescribedBy ?? (!hasLabel ? id : undefined);
 
