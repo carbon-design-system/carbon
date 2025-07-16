@@ -442,7 +442,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     // clear all options if select-all state is checked or indeterminate
     if (checked || indeterminate) {
       const remainingSelectedItems = controlledSelectedItems.filter(
-        (sel) => !selectable.some((e) => isEqual(e, sel))
+        (sel) => !filteredItems.some((e) => isEqual(e, sel))
       );
       toggleAll(remainingSelectedItems);
 
