@@ -84,11 +84,9 @@ export const Default = {
               class: `${prefix}--btn__icon`,
             })}</cds-button
           >
-          <cds-button tooltip-position="bottom" tooltip-text="Add"
-            >${Add({ slot: 'icon' })}</cds-button
-          >
-          <cds-button tooltip-position="bottom" tooltip-text="Save"
-            >${Save({ slot: 'icon' })}</cds-button
+          <cds-button data-context="data-table"
+            >Save
+            ${Save({ slot: 'icon', class: `${prefix}--btn__icon` })}</cds-button
           >
           <cds-button
             href="javascript:void 0"

@@ -145,7 +145,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--btn-set--stacked;
 }
 
-:host([data-context='data-table']) {
+:host(#{$prefix}-button[data-context='data-table']) {
   .#{$prefix}--btn {
     padding-inline: $spacing-05;
   }
