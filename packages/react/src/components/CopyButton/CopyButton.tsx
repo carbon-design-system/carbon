@@ -16,34 +16,17 @@ import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 
-export type DeprecatedCopyButtonAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedCopyButtonAlignment = DeprecatedPopoverAlignment;
 
-export type NewCopyButtonAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewCopyButtonAlignment = NewPopoverAlignment;
 
-export type CopyButtonAlignment =
-  | DeprecatedCopyButtonAlignment
-  | NewCopyButtonAlignment;
+export type CopyButtonAlignment = PopoverAlignment;
 
 export interface CopyButtonProps extends ButtonProps<'button'> {
   /**
