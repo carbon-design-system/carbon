@@ -14,6 +14,7 @@ import { useFeatureFlag } from '../../FeatureFlags';
 
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
+import type { PopoverAlignment } from '../../Popover';
 import mergeRefs from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
@@ -63,15 +64,7 @@ interface OverflowMenuProps {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  tooltipAlignment?:
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'left'
-    | 'right';
+  tooltipAlignment?: PopoverAlignment;
 
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
