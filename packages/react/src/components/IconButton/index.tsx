@@ -15,6 +15,11 @@ import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 export const IconButtonKinds = [
@@ -26,33 +31,11 @@ export const IconButtonKinds = [
 
 export type IconButtonKind = (typeof IconButtonKinds)[number];
 
-export type DeprecatedIconButtonAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedIconButtonAlignment = DeprecatedPopoverAlignment;
 
-export type NewIconButtonAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewIconButtonAlignment = NewPopoverAlignment;
 
-export type IconButtonAlignment =
-  | DeprecatedIconButtonAlignment
-  | NewIconButtonAlignment;
+export type IconButtonAlignment = PopoverAlignment;
 
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -150,7 +133,7 @@ export interface IconButtonProps
   /**
    * Specify the size of the Button.
    */
-  size?: Extract<ButtonSize, 'sm' | 'md' | 'lg'>;
+  size?: Extract<ButtonSize, 'xs' | 'sm' | 'md' | 'lg'>;
 
   /**
    * Optionally specify a `target` when using an `<a>` element.
@@ -220,7 +203,7 @@ const IconButton = React.forwardRef(function IconButton(
         isSelected={isSelected}
         hasIconOnly
         className={className}
-        aria-describedby={badgeCount && badgeId}>
+        aria-describedby={rest['aria-describedby'] || (badgeCount && badgeId)}>
         {children}
         {!disabled && badgeCount !== undefined && (
           <BadgeIndicator
@@ -350,8 +333,13 @@ IconButton.propTypes = {
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
+   * If the child node already has an `aria-label`, the tooltip will not apply
+   * `aria-labelledby`. If the child node has `aria-labelledby`, that value will
+   * be used instead. Otherwise, the tooltip will use its own ID as the label.
    * This means that if you have text in the child node it will not be
    * announced to the screen reader.
+   * If using `badgeCount={0}`, make sure the label explains that there is a
+   * new notification.
    */
   label: PropTypes.node.isRequired,
 

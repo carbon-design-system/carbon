@@ -81,6 +81,7 @@ export const Default = {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
+              <span slot="tooltip-content">Settings</span>
               <cds-overflow-menu-body>
                 <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                   Action 1
@@ -184,6 +185,7 @@ export const PersistentToolbar = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -286,6 +288,7 @@ export const SmallPersistentToolbar = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
@@ -366,7 +369,7 @@ export const SmallPersistentToolbar = {
 
 export const WithOverflowMenu = {
   render: () => html`
-    <cds-table overflow-menu-on-hover>
+    <cds-table>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With toolbar</cds-table-header-description
@@ -381,6 +384,7 @@ export const WithOverflowMenu = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -420,7 +424,10 @@ export const WithOverflowMenu = {
           >
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${OverflowMenuVertical16({
+                slot: 'icon',
+                class: `${prefix}--overflow-menu__icon`,
+              })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -440,7 +447,10 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${OverflowMenuVertical16({
+                slot: 'icon',
+                class: `${prefix}--overflow-menu__icon`,
+              })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -460,7 +470,10 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${OverflowMenuVertical16({
+                slot: 'icon',
+                class: `${prefix}--overflow-menu__icon`,
+              })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -482,7 +495,10 @@ export const WithOverflowMenu = {
           >
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${OverflowMenuVertical16({
+                slot: 'icon',
+                class: `${prefix}--overflow-menu__icon`,
+              })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -502,7 +518,10 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${OverflowMenuVertical16({
+                slot: 'icon',
+                class: `${prefix}--overflow-menu__icon`,
+              })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -522,7 +541,10 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${OverflowMenuVertical16({
+                slot: 'icon',
+                class: `${prefix}--overflow-menu__icon`,
+              })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -573,6 +595,7 @@ export const Playground = {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
+            <span slot="tooltip-content">Settings</span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>

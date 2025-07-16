@@ -21,7 +21,12 @@ import { IconButton } from '../IconButton';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
@@ -33,7 +38,12 @@ export const AILabelContent = React.forwardRef(function AILabelContent(
 
   const hasAILabelActions = React.Children.toArray(children).some((child) => {
     const item = child as any;
-    item.type?.displayName === 'AILabelActions';
+    // TODO: Is there supposed to be a `return` here? If so, this issue would
+    // have been caught by ESLint. It's concerning that this code is 7 months
+    // old and no one has noticed any issues with it. It also makes me question
+    // whether the code is necessary.
+    // https://github.com/carbon-design-system/carbon/issues/18991
+    item.type === AILabelActions;
   });
 
   const aiLabelContentClasses = cx(className, {
@@ -97,31 +107,11 @@ AILabelActions.propTypes = {
  * Deprecated popover alignment values.
  * @deprecated Use NewPopoverAlignment instead.
  */
-export type DeprecatedAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedAlignment = DeprecatedPopoverAlignment;
 
-export type NewAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewAlignment = NewPopoverAlignment;
 
-export type Alignment = DeprecatedAlignment | NewAlignment;
+export type Alignment = PopoverAlignment;
 
 export interface AILabelProps {
   AILabelContent?: React.ReactNode;

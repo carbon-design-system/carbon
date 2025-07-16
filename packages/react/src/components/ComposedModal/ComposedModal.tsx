@@ -6,18 +6,18 @@
  */
 
 import React, {
-  useRef,
+  Children,
+  cloneElement,
   useEffect,
+  useRef,
   useState,
-  type MouseEvent,
-  type KeyboardEvent,
   type HTMLAttributes,
-  type ReactNode,
-  type ReactElement,
-  type RefObject,
+  type KeyboardEvent,
+  type MouseEvent,
   type MutableRefObject,
-  useMemo,
-  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
@@ -39,9 +39,11 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { warning } from '../../internal/warning';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -303,11 +305,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     function handleKeyDown(event) {
       if (!enableDialogElement) {
-        event.stopPropagation();
-        if (match(event, keys.Escape)) {
-          closeModal(event);
-        }
-
         if (
           focusTrapWithoutSentinels &&
           open &&
@@ -334,8 +331,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       const { target } = evt;
       const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
+      const containsModalFooter = Children.toArray(childrenWithProps).some(
+        (child) => isComponentElement(child, ModalFooter)
+      );
+      const isPassive = !containsModalFooter;
+      const shouldCloseOnOutsideClick = isPassive
+        ? preventCloseOnClickOutside !== false
+        : preventCloseOnClickOutside === true;
+
       if (
-        !preventCloseOnClickOutside &&
+        shouldCloseOnOutsideClick &&
         target instanceof Node &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&
@@ -350,7 +355,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       target: oldActiveNode,
       relatedTarget: currentActiveNode,
     }) {
-      if (open && currentActiveNode && oldActiveNode && innerModal.current) {
+      if (
+        !enableDialogElement &&
+        !focusTrapWithoutSentinels &&
+        open &&
+        currentActiveNode &&
+        oldActiveNode &&
+        innerModal.current
+      ) {
         const { current: bodyNode } = innerModal;
         const { current: startSentinelNode } = startSentinel;
         const { current: endSentinelNode } = endSentinel;
@@ -362,6 +374,39 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           oldActiveNode,
           selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
         });
+      }
+
+      // Adjust scroll if needed so that element with focus is not obscured by gradient
+      const modalContent = document.querySelector(`.${prefix}--modal-content`);
+      if (
+        !modalContent ||
+        !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+        !currentActiveNode ||
+        !modalContent.contains(currentActiveNode)
+      ) {
+        return;
+      }
+
+      const lastContent =
+        modalContent.children[modalContent.children.length - 1];
+      const gradientSpacing =
+        modalContent.scrollHeight -
+        (lastContent as HTMLElement).offsetTop -
+        (lastContent as HTMLElement).clientHeight;
+
+      for (let elem of modalContent.children) {
+        if (elem.contains(currentActiveNode)) {
+          const spaceBelow =
+            modalContent.clientHeight -
+            (elem as HTMLElement).offsetTop +
+            modalContent.scrollTop -
+            (elem as HTMLElement).clientHeight;
+          if (spaceBelow < gradientSpacing) {
+            modalContent.scrollTop =
+              modalContent.scrollTop + (gradientSpacing - spaceBelow);
+          }
+          break;
+        }
       }
     }
 
@@ -422,12 +467,29 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     });
 
     useEffect(() => {
+      if (!open) return;
+
+      const handleEscapeKey = (event) => {
+        if (match(event, keys.Escape)) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeModal(event);
+        }
+      };
+      document.addEventListener('keydown', handleEscapeKey, true);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey, true);
+      };
+    }, [open]);
+
+    useEffect(() => {
       if (!enableDialogElement && !open && launcherButtonRef) {
         setTimeout(() => {
-          launcherButtonRef?.current?.focus();
+          launcherButtonRef.current?.focus();
         });
       }
-    }, [open, launcherButtonRef]);
+    }, [enableDialogElement, open, launcherButtonRef]);
 
     useEffect(() => {
       if (!enableDialogElement) {
@@ -467,24 +529,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }, [open, selectorPrimaryFocus, isOpen]);
 
     // AILabel is always size `sm`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'sm' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'sm',
-        }
-      );
-    }
 
     const modalBody = enableDialogElement ? (
       <Dialog
         open={open}
+        focusAfterCloseRef={launcherButtonRef}
         modal
         className={containerClass}
         aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
@@ -549,11 +603,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         role="presentation"
         ref={ref}
         aria-hidden={!open}
-        onBlur={
-          !enableDialogElement && !focusTrapWithoutSentinels
-            ? handleBlur
-            : () => {}
-        }
+        onBlur={handleBlur}
         onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
         onMouseDown={composeEventHandlers([
           rest?.onMouseDown,

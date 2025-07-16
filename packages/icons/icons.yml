@@ -357,6 +357,19 @@
     - navigation
     - include
     - plus sign
+- name: add--child-node
+  friendly_name: Add child node
+  aliases:
+    - add
+    - new
+    - child
+    - nested
+    - hierarchy
+    - graph
+    - node
+    - software
+  sizes:
+    - 32
 - name: add--filled
   friendly_name: Add filled
   sizes:
@@ -378,6 +391,19 @@
     - large
   sizes:
     - 32
+- name: add--parent-node
+  friendly_name: Add parent node
+  aliases:
+    - add
+    - new
+    - parent
+    - top-level
+    - hierarchy
+    - graph
+    - node
+    - software
+  sizes:
+    - 32
 - name: add-comment
   friendly_name: Add comment
   aliases:
@@ -390,6 +416,30 @@
     - add comment
     - remark
     - add remark
+  sizes:
+    - 32
+- name: aggregator--count-rows
+  friendly_name: aggregator count rows
+  aliases:
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+    - count
+    - aggregator
+  sizes:
+    - 32
+- name: aggregator--recalculation
+  friendly_name: aggregator recalculation
+  aliases:
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+    - recalculation
+    - aggregator
   sizes:
     - 32
 - name: agriculture-analytics
@@ -1613,6 +1663,15 @@
     - document
   sizes:
     - 32
+- name: assignment-action--usage
+  friendly_name: Assignment action usage
+  aliases:
+    - assigment
+    - assign
+    - usage
+    - diagram
+  sizes:
+    - 32
 - name: asterisk
   friendly_name: Asterisk
   aliases:
@@ -1650,6 +1709,23 @@
     - add
     - attachment
     - formatting
+  sizes:
+    - 32
+- name: attribute--definition
+  friendly_name: Attribute definition
+  aliases:
+    - attribute
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: attribute--usage
+  friendly_name: Attribute usage
+  aliases:
+    - attribute
+    - usage
+    - attr
+    - diagram
   sizes:
     - 32
 - name: audio-console
@@ -1818,6 +1894,13 @@
     - divide
     - research
     - dotted line
+  sizes:
+    - 32
+- name: base-document-set
+  friendly_name: Base document set
+  aliases:
+    - document
+    - unstructured data
   sizes:
     - 32
 - name: basketball
@@ -4537,6 +4620,17 @@
     - arrow
   sizes:
     - 32
+- name: child-node
+  friendly_name: Child node
+  aliases:
+    - child
+    - nested
+    - hierarchy
+    - graph
+    - node
+    - software
+  sizes:
+    - 32
 - name: chip
   friendly_name: Chip
   aliases:
@@ -4551,6 +4645,16 @@
     - forked arrows
     - arrows
     - variety
+  sizes:
+    - 32
+- name: comments
+  friendly_name: Comments
+  aliases:
+    - comments
+    - note
+    - explanation
+    - information
+    - annotations
   sizes:
     - 32
 - name: choose-item
@@ -6894,6 +6998,17 @@
     - leave
   sizes:
     - 32
+- name: dependency
+  friendly_name: Dependency
+  aliases:
+    - dependency
+    - linked
+    - connected
+    - interrelated
+    - cascading
+    - chain reaction
+  sizes:
+    - 32
 - name: deploy
   friendly_name: Deploy
   aliases:
@@ -6910,6 +7025,15 @@
     - document
     - instruction
     - deploy
+  sizes:
+    - 32
+- name: deployment-canary
+  friendly_name: Deployment Canary
+  aliases:
+    - bird
+    - deployment
+    - canary
+    - technology
   sizes:
     - 32
 - name: deployment-pattern
@@ -7494,6 +7618,13 @@
     - paper
   sizes:
     - 32
+- name: document-set
+  friendly_name: Document set
+  aliases:
+    - document
+    - unstructured data
+  sizes:
+    - 32
 - name: document--add
   friendly_name: Document add
   sizes:
@@ -7802,6 +7933,16 @@
     - document
   sizes:
     - 32
+- name: documentation
+  friendly_name: Documentation
+  aliases:
+    - information
+    - doc
+    - notes
+    - explanation
+    - document
+  sizes:
+    - 32
 - name: dog-walker
   friendly_name: Dog walker
   aliases:
@@ -7822,6 +7963,28 @@
     - dot mark
     - dot
     - format
+  sizes:
+    - 32
+- name: double-axis-chart--bar
+  friendly_name: Bar chart (double axis)
+  aliases:
+    - graph
+    - data
+    - chart
+    - bar
+    - x-axes
+    - double axis
+  sizes:
+    - 32
+- name: double-axis-chart--column
+  friendly_name: Column chart (double axis)
+  aliases:
+    - graph
+    - data
+    - chart
+    - column
+    - y-axes
+    - double axis
   sizes:
     - 32
 - name: double-integer
@@ -8236,6 +8399,15 @@
     - study
     - school
     - college
+  sizes:
+    - 32
+- name: element-picker
+  friendly_name: Element picker
+  aliases:
+    - picker
+    - selection tool
+    - cursor
+    - diagram
   sizes:
     - 32
 - name: email
@@ -8862,6 +9034,15 @@
     - sysml
   sizes:
     - 32
+- name: feature-picker
+  friendly_name: Feature picker
+  aliases:
+    - picker
+    - selection tool
+    - attribute
+    - diagram
+  sizes:
+    - 32
 - name: feature-typing
   friendly_name: Feature typing
   aliases:
@@ -9411,6 +9592,23 @@
     - folders
   sizes:
     - 32
+- name: follow-up-work-order
+  friendly_name: Follow-up work order
+  aliases:
+    - work order
+    - follow-up
+    - follow-up work order
+  sizes:
+    - 32
+- name: for-loop
+  friendly_name: For loop
+  aliases:
+    - loop
+    - iteration
+    - repeat
+    - cycle
+  sizes:
+    - 32
 - name: forecast--hail
   friendly_name: Forecast hail
   aliases:
@@ -9585,6 +9783,30 @@
     - function math
     - function
     - operations
+  sizes:
+    - 32
+- name: funnel--sequence
+  friendly_name: funnel sequence
+  aliases:
+    - funnel
+    - sequence
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+  sizes:
+    - 32
+- name: funnel--sort
+  friendly_name: funnel sort
+  aliases:
+    - funnel
+    - sort
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
   sizes:
     - 32
 - name: fusion-blender
@@ -10082,6 +10304,14 @@
     - color
     - HD
     - HDR
+  sizes:
+    - 32
+- name: heading
+  friendly_name: Heading
+  aliases:
+    - header
+    - heading
+    - H
   sizes:
     - 32
 - name: headphones
@@ -12473,6 +12703,67 @@
     - security
   sizes:
     - 32
+- name: ibm-software--watsonx--data--analyze-and-process
+  friendly_name: Data analyze and process
+  aliases:
+    - Watsonx
+    - Data analyze and process
+    - data analyze
+    - analysis
+    - process
+  sizes:
+    - 32
+- name: ibm-software--watsonx--data--structured--enrichment
+  friendly_name: Data structured enrichment
+  aliases:
+    - Watsonx
+    - Data structured enrichment
+    - data
+    - enrich
+    - structured
+    - enrichment
+  sizes:
+    - 32
+- name: ibm-software--watsonx--data--structured--import
+  friendly_name: Data structured import
+  aliases:
+    - Watsonx
+    - Data structured import
+    - data
+    - import
+    - structured
+  sizes:
+    - 32
+- name: ibm-software--watsonx--data--unstructured--enrichment
+  friendly_name: Data unstructured enrichment
+  aliases:
+    - Watsonx
+    - Data unstructured enrichment
+    - data
+    - enrich
+    - unstructured data
+  sizes:
+    - 32
+- name: ibm-software--watsonx--data--unstructured--import
+  friendly_name: Data unstructured import
+  aliases:
+    - Watsonx
+    - Data unstructured import
+    - data
+    - import
+    - unstructured data
+  sizes:
+    - 32
+- name: ibm-software--watsonx--document--library
+  friendly_name: Document library
+  aliases:
+    - Watsonx
+    - Document library
+    - documents
+    - library
+    - folder
+  sizes:
+    - 32
 - name: ibm-watson--assistant
   friendly_name: IBM Watson® Assistant
   aliases:
@@ -12502,7 +12793,7 @@
   sizes:
     - 32
 - name: ibm-watson--discovery
-  friendly_name: IBM® watsonx™ Discovery
+  friendly_name: IBM watsonx® Discovery
   aliases:
     - Watson
     - IBM Watson
@@ -12651,7 +12942,7 @@
   sizes:
     - 32
 - name: ibm-watson--orders
-  friendly_name: IBM® watsonx™ Orders
+  friendly_name: IBM watsonx® Orders
   aliases:
     - IBM Watson
     - watsonx
@@ -12781,7 +13072,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--assistant
-  friendly_name: IBM® watsonx™ Assistant
+  friendly_name: IBM® watsonx Assistant®
   aliases:
     - AI
     - watsonx
@@ -12793,7 +13084,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant
-  friendly_name: IBM® watsonx™ Code Assistant
+  friendly_name: IBM® watsonx Code Assistant™
   aliases:
     - AI
     - watsonx
@@ -12811,7 +13102,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-enterprise-java-applications
-  friendly_name: IBM watsonx™ Code Assistant for Enterprise Java Applications
+  friendly_name: IBM® watsonx Code Assistant™ for Enterprise Java Applications
   aliases:
     - IBM watsonx Code Assistant for Enterprise Java Applications
     - end-to-end application lifecycle
@@ -12825,7 +13116,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z
-  friendly_name: IBM® watsonx™ Code Assistant for Z
+  friendly_name: IBM® watsonx Code Assistant™ for Z
   aliases:
     - AI
     - watsonx
@@ -12847,7 +13138,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z--refactor
-  friendly_name: IBM® watsonx™ Code Assistant for Z Refactor
+  friendly_name: IBM® watsonx Code Assistant™ for Z Refactoring Assistant
   aliases:
     - app
     - development
@@ -12859,7 +13150,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z-validation-assistant
-  friendly_name: IBM watsonx™ Code Assistant for Z Validation Assistant
+  friendly_name: IBM® watsonx Code Assistant™ for Z Validation Assistant
   aliases:
     - ibm watsonx code assistant for Z Validation Assistant
     - AI assistant
@@ -12872,7 +13163,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--orchestrate
-  friendly_name: IBM® watsonx™ Orchestrate
+  friendly_name: IBM® watsonx Orchestrate™
   aliases:
     - efficiency
     - productivity
@@ -13083,6 +13374,17 @@
     - name
   sizes:
     - 32
+- name: if--action
+  friendly_name: If action usage
+  aliases:
+    - if action
+    - conditional
+    - flow control
+    - branch
+    - condition node
+    - branching logic
+  sizes:
+    - 32
 - name: image
   friendly_name: Image
   aliases:
@@ -13224,6 +13526,15 @@
     - file
   sizes:
     - 32
+- name: important
+  friendly_name: Important
+  aliases:
+    - important
+    - critical
+    - alert
+    - review
+  sizes:
+    - 32
 - name: improve-relevance
   friendly_name: Improve relevance
   aliases:
@@ -13270,6 +13581,17 @@
     - time
     - in progress
     - warning
+  sizes:
+    - 32
+- name: incident-reporter
+  friendly_name: Incident reporter
+  aliases:
+    - incident
+    - report
+    - issue
+    - alert
+    - event
+    - notification
   sizes:
     - 32
 - name: incomplete
@@ -13611,6 +13933,42 @@
     - usage
   sizes:
     - 32
+- name: interface--usage--1
+  friendly_name: interface usage 1
+  aliases:
+    - interface
+    - node
+    - diagram
+    - sysml
+    - usage
+  sizes:
+    - 32
+- name: interface--usage--alt
+  friendly_name: Interface usage alt
+  aliases:
+    - interface
+    - diagram
+    - usage
+    - sysml
+    - port connectors
+  sizes:
+    - 32
+- name: interface--definition--alt
+  friendly_name: Interface definition alt
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: interface--definition
+  friendly_name: Interface definition
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
 - name: intersect
   friendly_name: Intersect
   aliases:
@@ -13732,6 +14090,22 @@
     - file set
     - ISO
     - outline
+- name: item--definition
+  friendly_name: Item definition
+  aliases:
+    - item
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: item--usage
+  friendly_name: Item usage
+  aliases:
+    - item
+    - usage
+    - diagram
+  sizes:
+    - 32
 - name: job--daemon
   friendly_name: Daemon job
   aliases:
@@ -13764,11 +14138,36 @@
     - inner
   sizes:
     - 32
+- name: join--inner--alt
+  friendly_name: Join inner alt
+  aliases:
+    - join
+    - inner
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+  sizes:
+    - 32
 - name: join--left
   friendly_name: Join left
   aliases:
     - join
     - left
+  sizes:
+    - 32
+- name: join--left-outer
+  friendly_name: Join left outer
+  aliases:
+    - join
+    - left
+    - outer
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
   sizes:
     - 32
 - name: join--outer
@@ -13783,6 +14182,19 @@
   aliases:
     - join
     - right
+  sizes:
+    - 32
+- name: join--right-outer
+  friendly_name: Join right outer
+  aliases:
+    - join
+    - right
+    - outer
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
   sizes:
     - 32
 - name: join-node
@@ -14937,6 +15349,16 @@
     - padlock
   sizes:
     - 32
+- name: locked-and-blocked
+  friendly_name: Locked with Warning alt inverted filled
+  aliases:
+    - lock
+    - blocked
+    - warning
+    - locked and blocked
+    - software
+  sizes:
+    - 32
 - name: logical-partition
   friendly_name: Logical partition
   aliases:
@@ -15551,6 +15973,15 @@
     - twirl
   sizes:
     - 32
+- name: loop--alt
+  friendly_name: Loop alt
+  aliases:
+    - loop node
+    - iteration
+    - repetition
+    - repetitive action
+  sizes:
+    - 32
 - name: low-severity
   friendly_name: Low severity
   aliases:
@@ -15770,6 +16201,14 @@
     - boundary
     - travel
     - vegetation
+  sizes:
+    - 32
+- name: marginal
+  friendly_name: Marginal
+  aliases:
+    - marginal
+    - margin
+    - defer
   sizes:
     - 32
 - name: marine-warning
@@ -16356,6 +16795,30 @@
     - analysis
     - citation
     - source
+  sizes:
+    - 32
+- name: modified--newest
+  friendly_name: Modified newest
+  aliases:
+    - Modified
+    - newest
+    - new
+    - sorting
+    - order
+    - sort
+    - arrange
+  sizes:
+    - 32
+- name: modified--oldest
+  friendly_name: Modified oldest
+  aliases:
+    - Modified
+    - oldest
+    - old
+    - sorting
+    - order
+    - sort
+    - arrange
   sizes:
     - 32
 - name: money
@@ -17024,6 +17487,15 @@
     - interface
     - counter
     - alert
+  sizes:
+    - 32
+- name: notifications-paused
+  friendly_name: Notifications paused
+  aliases:
+    - notification
+    - pause notifications
+    - do not disturb
+    - paused
   sizes:
     - 32
 - name: null-sign
@@ -17695,6 +18167,18 @@
     - hierarchy
   sizes:
     - 32
+- name: parent-node
+  friendly_name: Parent node
+  aliases:
+    - relation
+    - relationship
+    - graph
+    - node
+    - top-level
+    - hierarchy
+    - software
+  sizes:
+    - 32
 - name: part--definition
   friendly_name: Part definition
   aliases:
@@ -18128,6 +18612,17 @@
     - percentage filled
     - formatting
     - percent
+- name: perform--action
+  friendly_name: Perform action
+  aliases:
+    - perform action
+    - diagram
+    - trigger
+    - process
+    - run
+    - execute
+  sizes:
+    - 32
 - name: person
   friendly_name: Person
   aliases:
@@ -18423,6 +18918,30 @@
     - flow
   sizes:
     - 32
+- name: pivot--horizontal
+  friendly_name: pivot horizontal
+  aliases:
+    - pivot
+    - horizontal
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+  sizes:
+    - 32
+- name: pivot--vertical
+  friendly_name: pivot vertical
+  aliases:
+    - pivot
+    - vertical
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+  sizes:
+    - 32
 - name: plan
   friendly_name: Plan
   aliases:
@@ -18615,6 +19134,15 @@
   aliases:
     - policy
     - contract
+  sizes:
+    - 32
+- name: pop-in
+  friendly_name: Pop-in
+  aliases:
+    - Pop-in
+    - return to window
+    - minimize
+    - close
   sizes:
     - 32
 - name: popup
@@ -19157,6 +19685,18 @@
     - unedited
   sizes:
     - 32
+- name: read-me
+  friendly_name: Read-me
+  aliases:
+    - README.md
+    - readme
+    - readme file
+    - documentation
+    - documentation file
+    - README documentation
+    - project documentation
+  sizes:
+    - 32
 - name: receipt
   friendly_name: Receipt
   aliases:
@@ -19215,6 +19755,15 @@
     - triangle
     - arrows
     - recycle
+  sizes:
+    - 32
+- name: redefinition
+  friendly_name: Redefinition
+  aliases:
+    - Redef
+    - refine
+    - modify
+    - diagram
   sizes:
     - 32
 - name: redo
@@ -20073,6 +20622,14 @@
     - Sankey diagram alt
     - data
     - Sankey alt
+  sizes:
+    - 32
+- name: SAP
+  friendly_name: SAP
+  aliases:
+    - SAP
+    - SAP Wayfinder
+    - SAP IBM Cloud
   sizes:
     - 32
 - name: satellite
@@ -21531,6 +22088,58 @@
     - operations
   sizes:
     - 32
+- name: sorting-a-to-z
+  friendly_name: Sorting A-Z (Alphabetical order)
+  aliases:
+    - alphabetical
+    - order
+    - sort
+    - arrange
+    - A
+    - Z
+    - low
+  sizes:
+    - 32
+- name: sorting-highest-to-lowest-number
+  friendly_name: Sorting highest to lowest number
+  aliases:
+    - numbers
+    - highest
+    - lowest
+    - arrange
+    - sort
+    - order
+    - number
+    - '1'
+    - '2'
+  sizes:
+    - 32
+- name: sorting-lowest-to-highest-number
+  friendly_name: Sorting lowest to highest number
+  aliases:
+    - numbers
+    - lowest
+    - highest
+    - arrange
+    - sort
+    - order
+    - number
+    - '1'
+    - '2'
+  sizes:
+    - 32
+- name: sorting-z-to-a
+  friendly_name: Sorting Z-A (Alphabetical order)
+  aliases:
+    - alphabetical
+    - order
+    - sort
+    - arrange
+    - A
+    - Z
+    - high
+  sizes:
+    - 32
 - name: spell-check
   friendly_name: Spell check
   aliases:
@@ -22123,6 +22732,14 @@
     - network
   sizes:
     - 32
+- name: subsetting
+  friendly_name: Subsetting
+  aliases:
+    - subset
+    - contained
+    - hierarchy
+  sizes:
+    - 32
 - name: subtract
   friendly_name: Subtract
   aliases:
@@ -22194,6 +22811,19 @@
     - sysml
   sizes:
     - 32
+- name: succession--flow-connection
+  friendly_name: Succession flow connection
+  aliases:
+    - succession
+    - flow
+    - connection
+    - diagram
+    - node
+    - arrow
+    - dash
+    - connector
+  sizes:
+    - 32
 - name: summary--KPI
   friendly_name: Summary KPI
   aliases:
@@ -22235,6 +22865,30 @@
     - vector
   sizes:
     - 32
+- name: surrogate--key-database
+  friendly_name: surrogate key database
+  aliases:
+    - surrogate
+    - key database
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+  sizes:
+    - 32
+- name: surrogate--key-flat-file
+  friendly_name: surrogate key flat file
+  aliases:
+    - surrogate
+    - key flat file
+    - DataStage
+    - Transform
+    - Processes
+    - Stages
+    - ETL
+  sizes:
+    - 32
 - name: sustainability
   friendly_name: Sustainability
   aliases:
@@ -22260,6 +22914,13 @@
   aliases:
     - travel
     - sports
+  sizes:
+    - 32
+- name: swimlane-d--vertical
+  friendly_name: Swimlane vertical
+  aliases:
+    - swimlane vertical
+    - swimlane
   sizes:
     - 32
 - name: switch-layer-2
@@ -25337,7 +25998,7 @@
     - machine learing
     - ML
 - name: watsonx
-  friendly_name: IBM® watsonx™
+  friendly_name: IBM watsonx®
   aliases:
     - data
     - AI
@@ -25351,7 +26012,7 @@
   sizes:
     - 32
 - name: watsonx-ai
-  friendly_name: IBM® watsonx.ai™
+  friendly_name: IBM® watsonx.ai®
   aliases:
     - data
     - AI
@@ -25366,7 +26027,7 @@
   sizes:
     - 32
 - name: watsonx-data
-  friendly_name: IBM® watsonx.data™
+  friendly_name: IBM® watsonx.data®
   aliases:
     - data
     - AI
@@ -25385,7 +26046,7 @@
   sizes:
     - 32
 - name: watsonx-governance
-  friendly_name: IBM® watsonx.governance™
+  friendly_name: IBM® watsonx.governance®
   aliases:
     - data
     - AI
@@ -25425,6 +26086,12 @@
     - wave
     - period
     - forecast
+  sizes:
+    - 32
+- name: waveform
+  friendly_name: Waveform
+  aliases:
+    - waveform
   sizes:
     - 32
 - name: weather-front--cold
@@ -25540,6 +26207,13 @@
     - food
     - crop
     - agriculture
+  sizes:
+    - 32
+- name: while-loop
+  friendly_name: While loop
+  aliases:
+    - while loop
+    - diagram
   sizes:
     - 32
 - name: white-paper

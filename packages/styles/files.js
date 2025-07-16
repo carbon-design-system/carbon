@@ -60,6 +60,7 @@ const files = [
   'scss/components/contained-list/_index.scss',
   'scss/components/content-switcher/_content-switcher.scss',
   'scss/components/content-switcher/_index.scss',
+  'scss/components/content-switcher/_tokens.scss',
   'scss/components/copy-button/_copy-button.scss',
   'scss/components/copy-button/_index.scss',
   'scss/components/data-table/_data-table.scss',

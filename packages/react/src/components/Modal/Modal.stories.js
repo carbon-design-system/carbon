@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
@@ -188,7 +188,7 @@ export const Default = ({ numberOfButtons, ...args }) => {
               }}
             />
           </div>
-          <PopoverContent className="p-3">
+          <PopoverContent>
             <h2 className="popover-title">Popover Example</h2>
             <p className="popover-details">
               This server has 150 GB of block storage remaining.
@@ -287,6 +287,11 @@ Default.argTypes = {
     },
   },
   id: {
+    table: {
+      disable: true,
+    },
+  },
+  launcherButtonRef: {
     table: {
       disable: true,
     },

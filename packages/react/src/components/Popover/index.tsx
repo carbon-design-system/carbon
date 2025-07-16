@@ -8,18 +8,11 @@
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
-import React, {
-  useRef,
-  useMemo,
-  useEffect,
-  type ForwardedRef,
-  type ElementType,
-} from 'react';
+import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { type PolymorphicProps } from '../../types/common';
-import { useWindowEvent } from '../../internal/useEvent';
+import { useWindowEvent, useEvent } from '../../internal/useEvent';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
@@ -35,6 +28,7 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
+import { ToggletipButton } from '../Toggletip';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -182,9 +176,11 @@ export const Popover: PopoverComponent & {
 
   let align = mapPopoverAlign(initialAlign);
 
-  // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
-  useWindowEvent('blur', () => {
-    if (open) {
+  // The `Popover` should close whenever it and its children loses focus
+  useEvent(popover, 'focusout', (event) => {
+    const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+
+    if (!popover.current?.contains(relatedTarget)) {
       onRequestClose?.();
     }
   });
@@ -445,10 +441,8 @@ export const Popover: PopoverComponent & {
           // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
           if (
-            (enableFloatingStyles &&
-              (item?.type as any)?.displayName !== 'PopoverContent') ||
-            (enableFloatingStyles &&
-              (item?.type as any)?.displayName === 'ToggletipButton')
+            (enableFloatingStyles && item?.type !== PopoverContent) ||
+            (enableFloatingStyles && item?.type === ToggletipButton)
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
@@ -611,12 +605,34 @@ function PopoverContentRenderFunction(
 ) {
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const ref = useMergedRefs([setFloating, forwardRef]);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const [isMultiLine, setIsMultiLine] = React.useState(false);
+  const ref = useMergedRefs([setFloating, textRef, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
+  useEffect(() => {
+    checkIfMultiLine();
+  }, [children]);
+
+  const checkIfMultiLine = () => {
+    const el = textRef.current;
+    if (el) {
+      const style = getComputedStyle(el);
+      const lineHeight = parseFloat(style.lineHeight);
+      const height = el.offsetHeight;
+      const lines = Math.floor(height / lineHeight);
+      setIsMultiLine(lines > 1);
+    }
+  };
+
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
+      <span
+        className={cx(`${prefix}--popover-content`, className, {
+          [`${prefix}--tooltip-content--multiline`]: isMultiLine,
+        })}
+        ref={ref}>
         {children}
         {enableFloatingStyles && (
           <span
