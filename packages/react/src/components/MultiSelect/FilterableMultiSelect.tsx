@@ -1128,6 +1128,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                         title={useTitleInItem ? itemText : undefined}
                         indeterminate={isIndeterminate}
                         disabled={disabled}
+                        tabIndex={-1}
                       />
                     </div>
                   </ListBox.MenuItem>
