@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,12 @@ export const sortingPropTypes = {
    *  (itemA: string, itemB: string, { locale: string }) => number
    */
   compareItems: PropTypes.func,
+
+  /**
+   * Provide a method that filters all options in the control. Overriding this
+   * prop means that you have to handle the filtering logic when the user types in the text input.
+   * Otherwise, a built-in default function will handling the filtering  */
+  filterItems: PropTypes.func,
 
   /**
    * Provide a method that sorts all options in the control. Overriding this

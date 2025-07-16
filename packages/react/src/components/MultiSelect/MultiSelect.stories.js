@@ -89,13 +89,7 @@ export default {
       table: { disable: true },
     },
     filterItems: {
-      control: false,
-      description:
-        'Override the default filtering logic by providing a function. When left empty, a default internal function is used',
-      defaultValue: { summary: 'defaultFilterItems' },
-      table: {
-        type: { summary: 'func' },
-      },
+      table: { disable: true },
     },
   },
   parameters: {
