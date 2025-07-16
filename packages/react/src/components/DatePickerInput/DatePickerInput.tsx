@@ -6,6 +6,7 @@
  */
 
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { warning } from '../../internal/warning';
 import cx from 'classnames';
 import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
 import React, {
@@ -34,6 +35,7 @@ export type ReactNodeLike =
   | undefined;
 
 export type func = (...args: any[]) => any;
+let didWarnAboutDatePickerInputValue = false;
 
 export interface DatePickerInputProps
   extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
@@ -189,6 +191,21 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     placeholder,
     type,
   };
+
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    'value' in rest &&
+    !didWarnAboutDatePickerInputValue
+  ) {
+    warning(
+      false,
+      `The 'value' prop is not supported on the DatePickerInput component. ` +
+        `For DatePicker components with 'datePickerType="range"', please ` +
+        `pass the 'value' prop (as an array of dates) to the parent ` +
+        `DatePicker component instead.`
+    );
+    didWarnAboutDatePickerInputValue = true;
+  }
   const wrapperClasses = cx(`${prefix}--date-picker-input__wrapper`, {
     [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
     [`${prefix}--date-picker-input__wrapper--warn`]: warn,
