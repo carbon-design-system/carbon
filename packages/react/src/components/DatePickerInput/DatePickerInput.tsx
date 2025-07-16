@@ -191,12 +191,14 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     placeholder,
     type,
   };
+
   if (
     process.env.NODE_ENV !== 'production' &&
+    'value' in rest &&
     !didWarnAboutDatePickerInputValue
   ) {
     warning(
-      !('value' in rest),
+      false,
       `The 'value' prop is not supported on the DatePickerInput component. ` +
         `For DatePicker components with 'datePickerType="range"', please ` +
         `pass the 'value' prop (as an array of dates) to the parent ` +
