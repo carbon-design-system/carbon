@@ -231,7 +231,6 @@
       block-size: $spacing-05;
       content: '';
       inline-size: convert.to-rem(1px);
-      inset-block-start: $spacing-01;
       inset-inline-start: 0;
       opacity: 1;
       transition: opacity $duration-fast-02 motion(standard, productive);
