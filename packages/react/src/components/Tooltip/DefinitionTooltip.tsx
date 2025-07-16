@@ -32,7 +32,7 @@ export interface DefinitionTooltipProps
   /**
    * The `children` prop will be used as the value that is being defined
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 
   /**
    * Specify an optional className to be applied to the container node
