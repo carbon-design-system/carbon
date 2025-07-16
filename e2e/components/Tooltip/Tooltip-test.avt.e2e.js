@@ -77,9 +77,7 @@ test.describe('@avt Tooltip', () => {
 
     await tooltipTrigger.hover();
 
-    const tooltipContent = page.getByText(
-      'Occasionally, services are updated in a specified time window to ensure no down time for customers.'
-    );
+    const tooltipContent = page.getByText('Options');
     await expect(tooltipContent).toBeVisible();
     // Press ESCAPE key while hover is active
     await page.keyboard.press('Escape');
