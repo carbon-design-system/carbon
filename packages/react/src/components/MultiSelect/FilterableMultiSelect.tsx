@@ -121,7 +121,8 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -1072,7 +1073,8 @@ FilterableMultiSelect.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

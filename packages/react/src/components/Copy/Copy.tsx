@@ -42,7 +42,8 @@ export interface CopyProps
   align?: CopyAlignment;
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -191,7 +192,9 @@ Copy.propTypes = {
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
