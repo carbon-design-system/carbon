@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -112,15 +112,14 @@ describe('Tooltip', () => {
 });
 
 describe('Tooltip ARIA logic', () => {
-  it('should not use aria-labelledby when the button already has aria-label', () => {
+  it('should prefer aria-describedby from the button if already present', () => {
     render(
-      <Tooltip defaultOpen label="Label text">
-        <button aria-label="Aria Label">X</button>
+      <Tooltip defaultOpen description="Some description">
+        <button aria-describedby="desc-id">X</button>
       </Tooltip>
     );
     const button = screen.getByRole('button');
-    expect(button).not.toHaveAttribute('aria-labelledby');
-    expect(button).toHaveAttribute('aria-label', 'Aria Label');
+    expect(button).toHaveAttribute('aria-describedby', 'desc-id');
   });
 
   it('should keep the button’s aria-labelledby if it already has one', () => {
