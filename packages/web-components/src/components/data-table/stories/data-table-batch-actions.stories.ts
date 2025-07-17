@@ -67,7 +67,7 @@ const controls = {
 
 export const Default = {
   args: defaultArgs,
-  argsType: controls,
+  argTypes: controls,
   render: ({
     isSortable,
     locale,
