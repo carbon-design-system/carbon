@@ -17,6 +17,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-table-batch-actions
  * @fires cds-table-batch-actions-cancel-clicked - The custom event fired after the Cancel button is clicked.
  */
+
 @customElement(`${prefix}-table-batch-actions`)
 class CDSTableBatchActions extends LitElement {
   /**
@@ -50,18 +51,59 @@ class CDSTableBatchActions extends LitElement {
   @property({ type: Number, attribute: 'selected-rows-count' })
   selectedRowsCount = 0;
 
+  /**
+   * The table size.
+   */
+  @property({ reflect: true })
+  size = 'lg';
+
   firstUpdated() {
-    this.querySelectorAll(
-      (this.constructor as typeof CDSTableBatchActions).selectorButtons
-    ).forEach((e) => {
-      e.setAttribute('batch-action', '');
-    });
+    this._updateButtons();
+    this._setupHoverListeners();
+  }
+
+  private _setupHoverListeners() {
+    const slot = this.shadowRoot?.querySelector('slot');
+    const cancelButton = this.shadowRoot?.querySelector(
+      '.cds--batch-summary__cancel'
+    ) as HTMLElement;
+
+    if (slot && cancelButton) {
+      slot.addEventListener('slotchange', () => {
+        const buttons = slot.assignedElements();
+        const lastButton = buttons[buttons.length - 1];
+
+        if (lastButton) {
+          lastButton.addEventListener('mouseenter', () => {
+            cancelButton.style.setProperty('--divider-opacity', '0');
+          });
+
+          lastButton.addEventListener('mouseleave', () => {
+            cancelButton.style.setProperty('--divider-opacity', '1');
+          });
+        }
+      });
+    }
   }
 
   updated(changedProperties) {
     if (changedProperties.has('active')) {
       this.setAttribute('tabindex', `${this.active ? '' : '-1'}`);
     }
+
+    if (changedProperties.has('size')) {
+      this._updateButtons();
+    }
+  }
+
+  private _updateButtons() {
+    this.querySelectorAll(
+      (this.constructor as typeof CDSTableBatchActions).selectorButtons
+    ).forEach((button) => {
+      button.setAttribute('batch-action', '');
+      const buttonSize = this.size === 'xs' || this.size === 'sm' ? 'sm' : 'lg';
+      button.setAttribute('size', buttonSize);
+    });
   }
 
   render() {
@@ -69,17 +111,24 @@ class CDSTableBatchActions extends LitElement {
       formatSelectedItemsCount,
       selectedRowsCount,
       _handleCancel: handleCancel,
+      size,
     } = this;
+
+    const buttonSizeClass =
+      size === 'xs' || size === 'sm' ? `${prefix}--btn--sm` : '';
+
     return html`
       <div class="${prefix}--batch-summary">
         <p class="${prefix}--batch-summary__para">
           ${formatSelectedItemsCount({ count: selectedRowsCount })}
         </p>
       </div>
+
       <div class="${prefix}--action-list">
         <slot></slot>
+
         <button
-          class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel"
+          class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel ${buttonSizeClass}"
           @click=${handleCancel}>
           <slot name="cancel-button-content">Cancel</slot>
         </button>
