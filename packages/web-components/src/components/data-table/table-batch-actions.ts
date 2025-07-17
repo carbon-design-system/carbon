@@ -17,6 +17,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-table-batch-actions
  * @fires cds-table-batch-actions-cancel-clicked - The custom event fired after the Cancel button is clicked.
  */
+
 @customElement(`${prefix}-table-batch-actions`)
 class CDSTableBatchActions extends LitElement {
   /**
@@ -58,6 +59,31 @@ class CDSTableBatchActions extends LitElement {
 
   firstUpdated() {
     this._updateButtons();
+    this._setupHoverListeners();
+  }
+
+  private _setupHoverListeners() {
+    const slot = this.shadowRoot?.querySelector('slot');
+    const cancelButton = this.shadowRoot?.querySelector(
+      '.cds--batch-summary__cancel'
+    ) as HTMLElement;
+
+    if (slot && cancelButton) {
+      slot.addEventListener('slotchange', () => {
+        const buttons = slot.assignedElements();
+        const lastButton = buttons[buttons.length - 1];
+
+        if (lastButton) {
+          lastButton.addEventListener('mouseenter', () => {
+            cancelButton.style.setProperty('--divider-opacity', '0');
+          });
+
+          lastButton.addEventListener('mouseleave', () => {
+            cancelButton.style.setProperty('--divider-opacity', '1');
+          });
+        }
+      });
+    }
   }
 
   updated(changedProperties) {
@@ -97,8 +123,10 @@ class CDSTableBatchActions extends LitElement {
           ${formatSelectedItemsCount({ count: selectedRowsCount })}
         </p>
       </div>
+
       <div class="${prefix}--action-list">
         <slot></slot>
+
         <button
           class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel ${buttonSizeClass}"
           @click=${handleCancel}>
