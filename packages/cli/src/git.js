@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import execa from 'execa';
+import { execa } from 'execa';
 
 /**
  * For certain release types, we want to be certain that our base branch is

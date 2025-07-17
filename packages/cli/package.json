@@ -42,7 +42,7 @@
     "child-process-promise": "^2.2.1",
     "clipboardy": "^4.0.0",
     "enquirer": "^2.4.1",
-    "fast-glob": "^3.2.7",
+    "fast-glob": "^3.3.3",
     "fs-extra": "^11.2.0",
     "inquirer": "^12.5.0",
     "klaw-sync": "^6.0.0",

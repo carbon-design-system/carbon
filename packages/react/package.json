@@ -102,7 +102,7 @@
     "clipboardy": "^2.1.0",
     "css-loader": "^7.0.0",
     "enquirer": "^2.3.6",
-    "fast-glob": "^3.2.7",
+    "fast-glob": "^3.3.3",
     "fs-extra": "^11.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.4.5",

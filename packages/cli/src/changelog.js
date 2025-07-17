@@ -6,7 +6,7 @@
  */
 
 import { default as parse } from '@commitlint/parse';
-import execa from 'execa';
+import { execa } from 'execa';
 
 // We keep a list of commits that are process-oriented that we never want to
 // show up in generated changelogs

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import execa from 'execa';
+import { execa } from 'execa';
 import inquirer from 'inquirer';
 import semver from 'semver';
 import { generate } from '../changelog.js';

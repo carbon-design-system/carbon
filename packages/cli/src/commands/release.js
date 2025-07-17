@@ -6,7 +6,7 @@
  */
 
 import parse from '@commitlint/parse';
-import execa from 'execa';
+import { execa } from 'execa';
 import inquirer from 'inquirer';
 import semver from 'semver';
 import { fetchLatestFromUpstream } from '../git.js';

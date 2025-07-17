@@ -42,7 +42,7 @@
     "chalk": "^5.4.1",
     "esbuild": "^0.25.0",
     "execa": "^9.6.0",
-    "fast-glob": "^3.2.11",
+    "fast-glob": "^3.3.3",
     "fs-extra": "^11.0.0",
     "inquirer": "^12.5.0",
     "is-git-clean": "^1.1.0",
