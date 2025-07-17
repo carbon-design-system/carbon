@@ -291,7 +291,9 @@ AILabel.propTypes = {
   'aria-label': PropTypes.string,
 
   /**
-   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover. This prop is currently experimental and is
+   * subject to future changes. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
