@@ -4647,6 +4647,15 @@
     - One Madison Avenue
     - One Madison
     - OMA
+- name: ibm--power11
+  friendly_name: IBM® Power11
+  aliases:
+    - Power
+    - server
+    - data storage
+    - hardware
+    - hybrid cloud
+    - IT
 - name: ibm--rpa
   friendly_name: IBM RPA
   aliases:

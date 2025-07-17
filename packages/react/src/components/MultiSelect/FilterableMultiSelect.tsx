@@ -121,7 +121,8 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -163,7 +164,9 @@ export interface FilterableMultiSelectProps<ItemType>
   downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
   /**
-   * Default sorter is assigned if not provided.
+   * Provide a method that filters the dropdown options based on the current input. Overriding this
+   * prop means that you have to handle the filtering logic when the user types in the text input.
+   * Otherwise, a default built-in filtering function will be used.
    */
   filterItems?(
     items: readonly ItemType[],
@@ -1072,7 +1075,8 @@ FilterableMultiSelect.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -1090,6 +1094,13 @@ FilterableMultiSelect.propTypes = {
    * **Experimental**: Provide a decorator component to be rendered inside the `FilterableMultiSelect` component
    */
   decorator: PropTypes.node,
+
+  /**
+   * Provide a method that filters the dropdown options based on the current input. Overriding this
+   * prop means that you have to handle the filtering logic when the user types in the text input.
+   * Otherwise, a default built-in filtering function will be used.
+   */
+  filterItems: PropTypes.func,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
