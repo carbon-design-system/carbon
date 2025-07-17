@@ -396,7 +396,7 @@ StructuredListRow.propTypes = {
   selection: PropTypes.bool,
 
   /**
-   * Specify row id so that it can be used for intial selection
+   * Specify row id so that it can be used for initial selection
    */
   id: PropTypes.string,
 };
