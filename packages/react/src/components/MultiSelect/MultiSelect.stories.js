@@ -88,6 +88,9 @@ export default {
     translateWithId: {
       table: { disable: true },
     },
+    filterItems: {
+      table: { disable: true },
+    },
   },
   parameters: {
     docs: {
