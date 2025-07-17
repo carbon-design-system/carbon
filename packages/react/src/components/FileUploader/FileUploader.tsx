@@ -13,13 +13,13 @@ import React, {
   type ForwardedRef,
   type HTMLAttributes,
 } from 'react';
-import Filename from './Filename';
-import FileUploaderButton from './FileUploaderButton';
-import { ButtonKinds } from '../Button/Button';
-import { keys, matches } from '../../internal/keyboard';
-import { usePrefix } from '../../internal/usePrefix';
-import { Text } from '../Text';
+
 import { useId } from '../../internal/useId';
+import { usePrefix } from '../../internal/usePrefix';
+import { ButtonKinds } from '../Button/Button';
+import { Text } from '../Text';
+import FileUploaderButton from './FileUploaderButton';
+import FileUploaderItem from './FileUploaderItem';
 
 export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -109,6 +109,19 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * sizes.
    */
   size?: 'sm' | 'small' | 'md' | 'field' | 'lg';
+
+  /**
+   * A function used to render a custom name for each file object.
+   */
+  renderFileName?: (props: { name: string | undefined }) => React.ReactNode;
+
+  /**
+   * A function used to render a custom actions for each file object.
+   */
+  renderFileActions?: (props: {
+    name: string | undefined;
+    status: string;
+  }) => React.ReactNode;
 }
 
 export interface FileUploaderHandle {
@@ -136,6 +149,8 @@ const FileUploader = React.forwardRef(
       onClick,
       onDelete,
       size,
+      renderFileName,
+      renderFileActions,
       ...other
     }: FileUploaderProps,
     ref: ForwardedRef<FileUploaderHandle>
@@ -144,7 +159,6 @@ const FileUploader = React.forwardRef(
     const [state, updateState] = useState({
       fileNames: [] as (string | undefined)[],
     });
-    const nodes: HTMLElement[] = [];
     const prefix = usePrefix();
     const handleChange = (evt) => {
       evt.stopPropagation();
@@ -165,9 +179,7 @@ const FileUploader = React.forwardRef(
     const handleClick = (evt, { index, filenameStatus }) => {
       if (filenameStatus === 'edit') {
         evt.stopPropagation();
-        const filteredArray = state.fileNames.filter(
-          (filename) => filename !== nodes[index]?.innerText?.trim()
-        );
+        const filteredArray = state.fileNames.filter((_, i) => index !== i);
 
         updateState({ fileNames: filteredArray });
 
@@ -232,32 +244,19 @@ const FileUploader = React.forwardRef(
           {state.fileNames.length === 0
             ? null
             : state.fileNames.map((name, index) => (
-                <span
+                <FileUploaderItem
                   key={index}
                   className={selectedFileClasses}
-                  ref={(node) => {
-                    nodes[index] = node as HTMLSpanElement;
-                  }} // eslint-disable-line
-                  {...other}>
-                  <Text as="p" className={`${prefix}--file-filename`} id={name}>
-                    {name}
-                  </Text>
-                  <span className={`${prefix}--file__state-container`}>
-                    <Filename
-                      name={name}
-                      iconDescription={iconDescription}
-                      status={filenameStatus}
-                      onKeyDown={(evt) => {
-                        if (matches(evt, [keys.Enter, keys.Space])) {
-                          handleClick(evt, { index, filenameStatus });
-                        }
-                      }}
-                      onClick={(evt) =>
-                        handleClick(evt, { index, filenameStatus })
-                      }
-                    />
-                  </span>
-                </span>
+                  name={name}
+                  status={filenameStatus}
+                  iconDescription={iconDescription}
+                  onDelete={(evt) =>
+                    handleClick(evt, { index, filenameStatus })
+                  }
+                  renderName={renderFileName}
+                  renderActions={renderFileActions}
+                  {...other}
+                />
               ))}
         </div>
       </div>
@@ -350,6 +349,16 @@ FileUploader.propTypes = {
    * sizes.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * A function used to render a custom name for each file object.
+   */
+  renderFileName: PropTypes.func,
+
+  /**
+   * A function used to render a custom actions for each file object.
+   */
+  renderFileActions: PropTypes.func,
 } as PropTypes.ValidationMap<FileUploaderProps>;
 
 export default FileUploader;
