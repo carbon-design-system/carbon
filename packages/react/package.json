@@ -108,7 +108,7 @@
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.5",
     "postcss-loader": "^8.0.0",
-    "prettier2": "npm:prettier@2",
+    "prettier2": "npm:prettier@3",
     "process": "^0.11.10",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",

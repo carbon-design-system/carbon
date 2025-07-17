@@ -1878,7 +1878,7 @@ __metadata:
     mini-css-extract-plugin: "npm:^2.4.5"
     postcss: "npm:^8.4.5"
     postcss-loader: "npm:^8.0.0"
-    prettier2: "npm:prettier@2"
+    prettier2: "npm:prettier@3"
     process: "npm:^0.11.10"
     prop-types: "npm:^15.8.1"
     react: "npm:^19.0.0"
@@ -20926,7 +20926,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier2@npm:prettier@2, prettier@npm:^2.8.8":
+"prettier2@npm:prettier@3":
+  version: 3.6.2
+  resolution: "prettier@npm:3.6.2"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10/1213691706bcef1371d16ef72773c8111106c3533b660b1cc8ec158bd109cdf1462804125f87f981f23c4a3dba053b6efafda30ab0114cc5b4a725606bb9ff26
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.8.8":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
