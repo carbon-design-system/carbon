@@ -55,7 +55,7 @@ Default.argTypes = {
 };
 
 export const BreadcrumbWithOverflowMenu = (args) => (
-  <Breadcrumb noTrailingSlash {...args}>
+  <Breadcrumb noTrailingSlash {...args} style={{ border: '1px solid red' }}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
