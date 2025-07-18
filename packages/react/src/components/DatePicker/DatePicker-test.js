@@ -850,6 +850,22 @@ describe('Range date picker', () => {
     expect(document.body).toHaveFocus();
     expect(onClose).toHaveBeenCalledTimes(2);
   });
+  it('should log a one-time warning when `value` prop is passed directly to DatePickerInput', () => {
+    const consoleWarnSpy = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
+
+    render(
+      <DatePickerInput
+        id="test-input-1"
+        labelText="Test Label 1"
+        placeholder="mm/dd/yyyy"
+        value="2023-01-01"
+      />
+    );
+    expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+    consoleWarnSpy.mockRestore();
+  });
 });
 
 describe('Date picker with locale', () => {

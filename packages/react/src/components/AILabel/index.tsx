@@ -22,6 +22,11 @@ import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { deprecate } from '../../prop-types/deprecate';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
@@ -102,31 +107,11 @@ AILabelActions.propTypes = {
  * Deprecated popover alignment values.
  * @deprecated Use NewPopoverAlignment instead.
  */
-export type DeprecatedAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedAlignment = DeprecatedPopoverAlignment;
 
-export type NewAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewAlignment = NewPopoverAlignment;
 
-export type Alignment = DeprecatedAlignment | NewAlignment;
+export type Alignment = PopoverAlignment;
 
 export interface AILabelProps {
   AILabelContent?: React.ReactNode;
@@ -306,7 +291,9 @@ AILabel.propTypes = {
   'aria-label': PropTypes.string,
 
   /**
-   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover. This prop is currently experimental and is
+   * subject to future changes. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

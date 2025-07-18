@@ -381,7 +381,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}">
-          ${labelText}
+          <slot> ${labelText} </slot>
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${this._handleSlotChange}"></slot
         ></span>
