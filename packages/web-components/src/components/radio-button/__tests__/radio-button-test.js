@@ -32,7 +32,7 @@ describe('cds-radio-button', () => {
 
   it('should reflect checked state when attribute is set', async () => {
     const el = await fixture(html`
-      <cds-radio-button checked hide-label></cds-radio-button>
+      <cds-radio-button checked></cds-radio-button>
     `);
     const input = el.shadowRoot.querySelector('input[type="radio"]');
     expect(input.checked).to.be.true;
@@ -40,7 +40,7 @@ describe('cds-radio-button', () => {
 
   it('should label the <input> with label-text', async () => {
     const el = await fixture(html`
-      <cds-radio-button label-text="test-label" hide-label></cds-radio-button>
+      <cds-radio-button label-text="test-label"></cds-radio-button>
     `);
     const labelNode = el.shadowRoot?.querySelector(
       '.cds--radio-button__label-text'
