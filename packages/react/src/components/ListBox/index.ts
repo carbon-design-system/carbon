@@ -7,6 +7,7 @@
 
 export * from './ListBoxPropTypes';
 
+import type { ComponentProps } from 'react';
 import ListBoxInternal from './ListBox';
 import ListBoxField, { ListBoxFieldComponent } from './ListBoxField';
 import ListBoxMenu from './ListBoxMenu';
@@ -38,4 +39,9 @@ const ListBox: ListBoxComponent = Object.assign(ListBoxInternal, {
 
 export default ListBox;
 
-export type { ListBoxMenuIconTranslationKey } from './ListBoxMenuIcon';
+export type ListBoxMenuIconTranslationKey = Parameters<
+  NonNullable<ComponentProps<typeof ListBoxMenuIcon>['translateWithId']>
+>[0];
+export type ListBoxSelectionTranslationKey = Parameters<
+  NonNullable<ComponentProps<typeof ListBoxSelection>['translateWithId']>
+>[0];
