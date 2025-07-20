@@ -83,6 +83,11 @@ export interface PopoverBaseProps {
   align?: PopoverAlignment;
 
   /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset?: number;
+
+  /**
    * Will auto-align the popover on first render if it is not visible. This prop
    * is currently experimental and is subject to future changes. Requires
    * React v17+
@@ -529,6 +534,11 @@ Popover.propTypes = {
     ],
     mapPopoverAlign
   ),
+
+  /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset: PropTypes.number,
 
   /**
    * Provide a custom element or component to render the top-level node for the

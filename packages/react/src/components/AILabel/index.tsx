@@ -16,6 +16,7 @@ import {
   ToggletipButton,
   ToggletipContent,
   ToggletipActions,
+  ToggletipBaseProps,
 } from '../Toggletip';
 import { IconButton } from '../IconButton';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
@@ -113,15 +114,11 @@ export type NewAlignment = NewPopoverAlignment;
 
 export type Alignment = PopoverAlignment;
 
-export interface AILabelProps {
+export interface AILabelProps extends ToggletipBaseProps {
   AILabelContent?: React.ReactNode;
   aiText?: string;
   aiTextLabel?: string;
   textLabel?: string;
-  align?: Alignment;
-  autoAlign?: boolean;
-  children?: React.ReactNode;
-  className?: string;
   kind?: 'default' | 'inline';
   onRevertClick?: (evt: React.MouseEvent<HTMLButtonElement>) => void;
   revertActive?: boolean;
@@ -218,6 +215,8 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
 
 AILabel.displayName = 'AILabel';
 AILabel.propTypes = {
+  ...Toggletip.propTypes,
+
   /**
    * Specify the content you want rendered inside the `AILabel` ToggleTip
    */
@@ -238,74 +237,9 @@ AILabel.propTypes = {
   ),
 
   /**
-   * Specify how the popover should align with the button
-   */
-  align: deprecateValuesWithin(
-    PropTypes.oneOf([
-      'top',
-      'top-left', // deprecated use top-start instead
-      'top-right', // deprecated use top-end instead
-
-      'bottom',
-      'bottom-left', // deprecated use bottom-start instead
-      'bottom-right', // deprecated use bottom-end instead
-
-      'left',
-      'left-bottom', // deprecated use left-end instead
-      'left-top', // deprecated use left-start instead
-
-      'right',
-      'right-bottom', // deprecated use right-end instead
-      'right-top', // deprecated use right-start instead
-
-      // new values to match floating-ui
-      'top-start',
-      'top-end',
-      'bottom-start',
-      'bottom-end',
-      'left-end',
-      'left-start',
-      'right-end',
-      'right-start',
-    ]),
-    [
-      'top',
-      'top-start',
-      'top-end',
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-      'left',
-      'left-start',
-      'left-end',
-      'right',
-      'right-start',
-      'right-end',
-    ],
-    mapPopoverAlign
-  ),
-
-  /**
    * Specify the text that will be provided to the aria-label of the `AILabel` button
    */
   'aria-label': PropTypes.string,
-
-  /**
-   * Will auto-align the popover. This prop is currently experimental and is
-   * subject to future changes. Requires React v17+
-   * @see https://github.com/carbon-design-system/carbon/issues/18714
-   */
-  autoAlign: PropTypes.bool,
-
-  /**
-   * Specify the content you want rendered inside the `AILabel` ToggleTip
-   */
-  children: PropTypes.node,
-
-  /**
-   * Specify an optional className to be added to the `AILabel`
-   */
-  className: PropTypes.string,
 
   /**
    * Specify the type of `AILabel`, from the following list of types:
