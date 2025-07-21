@@ -214,7 +214,7 @@
     min-block-size: auto;
 
     &::before {
-      inset-block-start: convert.to-rem(15px);
+      inset-block-start: rem(15px);
     }
   }
 }
