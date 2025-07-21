@@ -82,7 +82,7 @@ const DefaultStory = (props) => {
         }}>
         <CheckboxIcon />
       </button>
-      <PopoverContent>
+      <PopoverContent className="p-3">
         <h2 className="popover-title">Available storage</h2>
         <p className="popover-details">
           This server has 150 GB of block storage remaining.
@@ -121,7 +121,7 @@ export const TabTip = (args) => {
           }}>
           <Settings />
         </button>
-        <PopoverContent>
+        <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
             legendText="Row height 1"
@@ -159,7 +159,7 @@ export const TabTip = (args) => {
           }}>
           <Settings />
         </button>
-        <PopoverContent>
+        <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
             legendText="Row height 2"
@@ -284,7 +284,7 @@ export const ExperimentalAutoAlign = (args) => {
             }}>
             <CheckboxIcon />
           </button>
-          <PopoverContent>
+          <PopoverContent className="p-3">
             <div>
               <p className="popover-title">This popover uses autoAlign</p>
               <p className="popover-details">
@@ -349,7 +349,7 @@ export const ExperimentalAutoAlignBoundary = () => {
             }}>
             <CheckboxIcon />
           </button>
-          <PopoverContent>
+          <PopoverContent className="p-3">
             <div>
               <p className="popover-title">This popover uses autoAlign</p>
               <p className="popover-details">
@@ -409,7 +409,7 @@ export const Test = () => {
           }}>
           <Settings />
         </button>
-        <PopoverContent>
+        <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
             legendText="Row height"
@@ -459,7 +459,7 @@ export const TabTipExperimentalAutoAlign = () => {
               }}
             />
           </div>
-          <PopoverContent>
+          <PopoverContent className="p-3">
             <div>
               <p className="popover-title">
                 This popover uses autoAlign with isTabTip
