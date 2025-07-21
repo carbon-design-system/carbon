@@ -41,7 +41,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -112,7 +112,8 @@ export interface MultiSelectProps<ItemType>
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -931,7 +932,8 @@ MultiSelect.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

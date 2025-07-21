@@ -40,7 +40,7 @@ import { Text } from '../Text';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
@@ -325,10 +325,6 @@ const Modal = React.forwardRef(function Modal(
     evt.stopPropagation();
 
     if (open && target instanceof HTMLElement) {
-      if (match(evt, keys.Escape)) {
-        onRequestClose(evt);
-      }
-
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -480,6 +476,23 @@ const Modal = React.forwardRef(function Modal(
     alertDialogProps.role = 'alertdialog';
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleEscapeKey = (event) => {
+      if (match(event, keys.Escape)) {
+        event.preventDefault();
+        event.stopPropagation();
+        onRequestClose(event);
+      }
+    };
+    document.addEventListener('keydown', handleEscapeKey, true);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey, true);
+    };
+  }, [open]);
 
   useEffect(() => {
     return () => {
