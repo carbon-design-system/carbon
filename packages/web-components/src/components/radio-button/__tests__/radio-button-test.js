@@ -13,7 +13,6 @@ describe('cds-radio-button', () => {
 
   it('should render', async () => {
     const el = await fixture(basicRadioButton);
-    await el.updateComplete;
     expect(el).to.exist;
   });
 

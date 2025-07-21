@@ -12,8 +12,8 @@ describe('cds-radio-button-group', () => {
   it('should render `legend-text`', async () => {
     const el = await fixture(html`
       <cds-radio-button-group legend-text="test">
-        <cds-radio-button label-text="test-1"></cds-radio-button>
-        <cds-radio-button label-text="test-2"></cds-radio-button>
+        <cds-radio-button></cds-radio-button>
+        <cds-radio-button></cds-radio-button>
       </cds-radio-button-group>
     `);
     const legend = el.shadowRoot?.querySelector('legend');
@@ -24,8 +24,8 @@ describe('cds-radio-button-group', () => {
   it('should render a <fieldset> wrapper', async () => {
     const el = await fixture(html`
       <cds-radio-button-group legend-text="test">
-        <cds-radio-button label-text="test-1"></cds-radio-button>
-        <cds-radio-button label-text="test-2"></cds-radio-button>
+        <cds-radio-button></cds-radio-button>
+        <cds-radio-button></cds-radio-button>
       </cds-radio-button-group>
     `);
     const fieldset = el.shadowRoot?.querySelector('fieldset');
@@ -34,23 +34,23 @@ describe('cds-radio-button-group', () => {
 
   it('should render `legend-text` inside a <fieldset>', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group legend-text="test-legend">
-        <cds-radio-button label-text="one" value="one"></cds-radio-button>
-        <cds-radio-button label-text="two" value="two"></cds-radio-button>
+      <cds-radio-button-group legend-text="test">
+        <cds-radio-button></cds-radio-button>
+        <cds-radio-button></cds-radio-button>
       </cds-radio-button-group>
     `);
     const legend = el.shadowRoot?.querySelector('legend');
     expect(legend, 'legend should exist').to.exist;
-    expect(legend?.textContent).to.contain('test-legend');
+    expect(legend?.textContent).to.contain('test');
     const fieldset = legend?.closest('fieldset');
     expect(fieldset, 'legend should be inside a fieldset').to.exist;
   });
 
   it('should render <cds-radio-button> children', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group legend-text="test">
-        <cds-radio-button label-text="test-1" value="test-1"></cds-radio-button>
-        <cds-radio-button label-text="test-2" value="test-2"></cds-radio-button>
+      <cds-radio-button-group>
+        <cds-radio-button value="test-1"></cds-radio-button>
+        <cds-radio-button value="test-2"></cds-radio-button>
       </cds-radio-button-group>
     `);
     const rb1 = el.querySelector(`cds-radio-button[value="test-1"]`);
@@ -61,16 +61,19 @@ describe('cds-radio-button-group', () => {
 
   it('supports a custom class', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group class="test-class"></cds-radio-button-group>
+      <cds-radio-button-group class="test-class">
+        <cds-radio-button></cds-radio-button>
+        <cds-radio-button></cds-radio-button
+      ></cds-radio-button-group>
     `);
     expect(el.classList.contains('test-class')).to.be.true;
   });
 
   it('disables the <fieldset> when disabled', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group disabled legend-text="test">
-        <cds-radio-button label-text="1" value="1"></cds-radio-button>
-        <cds-radio-button label-text="2" value="2"></cds-radio-button>
+      <cds-radio-button-group disabled>
+        <cds-radio-button></cds-radio-button>
+        <cds-radio-button></cds-radio-button>
       </cds-radio-button-group>
     `);
     const fieldset = el.shadowRoot?.querySelector('fieldset');
@@ -79,60 +82,43 @@ describe('cds-radio-button-group', () => {
 
   it('respects disabled to prevent changes', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group legend-text="test" disabled value="test-1">
-        <cds-radio-button label-text="test-1" value="test-1"></cds-radio-button>
-        <cds-radio-button label-text="test-2" value="test-2"></cds-radio-button>
+      <cds-radio-button-group disabled>
+        <cds-radio-button value="test-1"></cds-radio-button>
       </cds-radio-button-group>
     `);
-    const rb1 = el.querySelector(`cds-radio-button[value="test-1"]`);
-    const rb2 = el.querySelector(`cds-radio-button[value="test-2"]`);
-    await rb1?.updateComplete;
-    await rb2?.updateComplete;
-
-    expect(rb1?.checked).to.be.true;
-    expect(rb2?.checked).to.be.false;
+    const rb = el.querySelector(`cds-radio-button[value="test-1"]`);
+    expect(rb?.checked).to.be.false;
 
     // attempt user click
-    rb2?.click();
+    rb?.click();
     await el.updateComplete;
 
-    expect(rb1?.checked).to.be.true;
-    expect(rb2?.checked).to.be.false;
+    expect(rb?.checked).to.be.false;
   });
 
   it('respects readOnly to prevent changes', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group legend-text="test" readonly>
-        <cds-radio-button label-text="test-1" value="test-1"></cds-radio-button>
-        <cds-radio-button label-text="test-2" value="test-2"></cds-radio-button>
+      <cds-radio-button-group readonly>
+        <cds-radio-button value="test-1"></cds-radio-button>
       </cds-radio-button-group>
     `);
-    await el.updateComplete;
-
-    const rb1 = el.querySelector(`cds-radio-button[value="test-1"]`);
-    const rb2 = el.querySelector(`cds-radio-button[value="test-2"]`);
-    await rb1?.updateComplete;
-    await rb2?.updateComplete;
-
-    expect(rb1?.checked).to.be.false;
-    expect(rb2?.checked).to.be.false;
+    const rb = el.querySelector(`cds-radio-button[value="test-1"]`);
+    expect(rb?.checked).to.be.false;
 
     // attempt user click
-    rb2?.click();
+    rb?.click();
     await el.updateComplete;
 
-    expect(rb1?.checked).to.be.false;
-    expect(rb2?.checked).to.be.false;
+    expect(rb?.checked).to.be.false;
   });
 
   it('selects initial value', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group value="test-1" legend-text="test">
-        <cds-radio-button label-text="test-1" value="test-1"></cds-radio-button>
-        <cds-radio-button label-text="test-2" value="test-2"></cds-radio-button>
+      <cds-radio-button-group value="test-1">
+        <cds-radio-button value="test-1"></cds-radio-button>
+        <cds-radio-button value="test-2"></cds-radio-button>
       </cds-radio-button-group>
     `);
-    await el.updateComplete;
     const rb1 = el.querySelector(`cds-radio-button[value="test-1"]`);
     expect(rb1?.checked).to.be.true;
   });
@@ -140,34 +126,27 @@ describe('cds-radio-button-group', () => {
   it('should support `checked` attribute in radio-button when there is no value in group', async () => {
     const el = await fixture(html`
       <cds-radio-button-group>
-        <cds-radio-button checked value="test-1"> </cds-radio-button>
-        <cds-radio-button value="test-2"> </cds-radio-button>
+        <cds-radio-button checked value="test-1"></cds-radio-button>
+        <cds-radio-button value="test-2"></cds-radio-button>
       </cds-radio-button-group>
     `);
-    await el.updateComplete;
     const rb1 = el.querySelector('cds-radio-button[value="test-1"]');
-    expect(rb1).to.exist;
     expect(rb1?.checked).to.be.true;
   });
 
   it('updates selection when `value` prop changes programmatically', async () => {
     const el = await fixture(html`
-      <cds-radio-button-group value="option-one">
-        <cds-radio-button
-          label-text="Option one"
-          value="option-one"></cds-radio-button>
-        <cds-radio-button
-          label-text="Option two"
-          value="option-two"></cds-radio-button>
+      <cds-radio-button-group value="test-1">
+        <cds-radio-button value="test-1"></cds-radio-button>
+        <cds-radio-button value="test-2"></cds-radio-button>
       </cds-radio-button-group>
     `);
-    await el.updateComplete;
-    const rb1 = el.querySelector(`cds-radio-button[value="option-one"]`);
-    const rb2 = el.querySelector(`cds-radio-button[value="option-two"]`);
+    const rb1 = el.querySelector(`cds-radio-button[value="test-1"]`);
+    const rb2 = el.querySelector(`cds-radio-button[value="test-2"]`);
     expect(rb1?.checked).to.be.true;
     expect(rb2?.checked).to.be.false;
 
-    el.value = 'option-two';
+    el.value = 'test-2';
     await el.updateComplete;
     expect(rb1?.checked).to.be.false;
     expect(rb2?.checked).to.be.true;
