@@ -13,20 +13,33 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
 
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Overview](#overview)
-- [downshiftProps](#combobox-uses-downshift)
-- [Placeholder and labeling](#placeholders-and-labeling)
-- [initialSelectedItem](#initialselecteditem)
-- [selectedItem](#selecteditem)
-- [itemToElement](#itemtoelement)
-- [itemToString](#itemtostring)
-- [shouldFilterItem](#shouldfilteritem)
-- [allowCustomValue](#allowcustomvalue)
+- [Disabled](#disabled)
+- [Combobox uses Downshift](#combobox-uses-downshift)
+  - [`downshiftProps`](#downshiftprops)
+- [typeahead Prop](#typeahead-prop)
+  - [Autocomplete with typeahead](#autocomplete-with-typeahead)
+  - [Combobox `downshiftActions`](#combobox-downshiftactions)
+    - [`downshiftActions` Usage](#downshiftactions-usage)
+- [Placeholders and Labeling](#placeholders-and-labeling)
+- [`initialSelectedItem`](#initialselecteditem)
+- [`selectedItem`](#selecteditem)
+- [`itemToElement`](#itemtoelement)
+- [`itemToString`](#itemtostring)
+- [`shouldFilterItem`](#shouldfilteritem)
+- [`allowCustomValue`](#allowcustomvalue)
+- [`inputProps`](#inputprops)
+  - [Using `maxLength`](#using-maxlength)
+- [With AI Label](#with-ai-label)
 - [With Layer](#with-layer)
 - [Component API](#component-api)
 - [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -85,7 +98,7 @@ arrow keys can still be used to navigate through filtered options.
 When combined with the `allowCustomValue` prop, the ComboBox supports both
 custom values and typeahead suggestions.
 
-#### Autocomplete with typeahead:
+### Autocomplete with typeahead
 
 <Canvas
   of={ComboBoxStories.AutocompleteWithTypeahead}
@@ -313,6 +326,30 @@ callback.
     },
   ]}
 />
+
+## `inputProps`
+
+Use `inputProps` to specify native input attributes to place on the `<input>`.
+These are passed to [Downshift's `getInputProps()`](https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops)
+and will override the internal input props.
+
+
+### Using `maxLength`
+
+The native `maxLength` attribute can be included in `inputProps` to define the maximum string length that the user can enter into the input.
+
+When using `maxLength`, ensure the limit is communicated to the user through both `helperText` and `invalidText`/`warnText`.
+
+```jsx
+<ComboBox
+  inputProps={{ maxLength: 5 }}
+  titleText="Abbreviation"
+  helperText="Provide an abbreviation that is 5 characters or less"
+  invalidText="Abbreviations must be 5 characters or less"
+  warnText="Abbreviations must be 5 characters or less"
+/>
+```
+
 
 ## With AI Label
 
