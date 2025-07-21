@@ -182,7 +182,7 @@
     padding-block: 0.375rem;
 
     &::before {
-      inset-block-start: convert.to-rem(8px);
+      inset-block-start: rem(8px);
     }
   }
 }
