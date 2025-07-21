@@ -206,6 +206,7 @@ export const Default = (args) => {
         itemToString={(item) => (item ? item.text : '')}
         {...args}
       />
+      <Dropdown />
     </div>
   );
 };

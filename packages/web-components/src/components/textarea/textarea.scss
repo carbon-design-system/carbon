@@ -42,6 +42,7 @@ $css--plex: true !default;
 :host(#{$prefix}-textarea[warn]),
 :host(#{$prefix}-textarea[invalid]) {
   .#{$prefix}--form-requirement {
+    position: absolute;
     inset-block-start: auto;
   }
   .#{$prefix}--text-area__wrapper--decorator {

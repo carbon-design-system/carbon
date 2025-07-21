@@ -117,8 +117,17 @@ const sharedArgTypes = {
 
 export const Default = (args) => {
   return (
-    <div style={{ width: args.defaultWidth }}>
-      <TextInput {...args} id="text-input-1" type="text" />
+    <div>
+      <div style={{ width: args.defaultWidth }}>
+        <TextInput {...args} id="text-input-1" type="text" />
+        <TextInput
+          invalid
+          invalidText="this is invalid"
+          id="text-input-2"
+          type="text"
+        />
+        <TextInput labelText="labelText" id="text-input-2" type="text" />
+      </div>
     </div>
   );
 };
