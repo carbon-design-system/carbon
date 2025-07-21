@@ -21,6 +21,7 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   forwardRef,
+  useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -46,11 +47,12 @@ import ListBox, {
   type ListBoxSize,
   type ListBoxType,
 } from '../ListBox';
+import Checkbox from '../Checkbox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
@@ -121,7 +123,8 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -163,7 +166,9 @@ export interface FilterableMultiSelectProps<ItemType>
   downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
   /**
-   * Default sorter is assigned if not provided.
+   * Provide a method that filters the dropdown options based on the current input. Overriding this
+   * prop means that you have to handle the filtering logic when the user types in the text input.
+   * Otherwise, a default built-in filtering function will be used.
    */
   filterItems?(
     items: readonly ItemType[],
@@ -319,6 +324,14 @@ export interface FilterableMultiSelectProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
@@ -363,6 +376,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     warn,
     warnText,
     slug,
+    inputProps,
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -377,16 +391,72 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
   const [inputFocused, setInputFocused] = useState<boolean>(false);
 
+  const filteredItems = useMemo(
+    () => filterItems(items, { itemToString, inputValue }),
+    [items, inputValue, itemToString, filterItems]
+  );
+
+  const nonSelectAllItems = useMemo(
+    () => filteredItems.filter((item) => !(item as any).isSelectAll),
+    [filteredItems]
+  );
+  let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
+  if ((selected ?? []).length > 0 && selectAll) {
+    console.warn(
+      'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
+    );
+    selectAll = false;
+  }
+
   const {
     selectedItems: controlledSelectedItems,
     onItemChange,
     clearSelection,
+    toggleAll,
   } = useSelection({
     disabled,
     initialSelectedItems,
     onChange,
     selectedItems: selected,
+    selectAll,
+    filteredItems,
   });
+
+  const selectAllStatus = useMemo(() => {
+    const selectable = nonSelectAllItems.filter(
+      (item) => !(item as any).disabled
+    );
+
+    const nonSelectedCount = selectable.filter(
+      (item) => !controlledSelectedItems.some((sel) => isEqual(sel, item))
+    ).length;
+
+    const totalCount = selectable.length;
+    return {
+      checked: totalCount > 0 && nonSelectedCount === 0,
+      indeterminate: nonSelectedCount > 0 && nonSelectedCount < totalCount,
+    };
+  }, [controlledSelectedItems, nonSelectAllItems]);
+
+  const handleSelectAllClick = useCallback(() => {
+    const selectable = nonSelectAllItems.filter((i) => !(i as any).disabled);
+    const { checked, indeterminate } = selectAllStatus;
+
+    // clear all options if select-all state is checked or indeterminate
+    if (checked || indeterminate) {
+      const remainingSelectedItems = controlledSelectedItems.filter(
+        (sel) => !filteredItems.some((e) => isEqual(e, sel))
+      );
+      toggleAll(remainingSelectedItems);
+
+      // select all options if select-all state is empty
+    } else {
+      const toSelect = selectable.filter(
+        (e) => !controlledSelectedItems.some((sel) => isEqual(sel, e))
+      );
+      toggleAll([...controlledSelectedItems, ...toSelect]);
+    }
+  }, [nonSelectAllItems, selectAllStatus, controlledSelectedItems, toggleAll]);
 
   const { refs, floatingStyles, middlewareData } = useFloating(
     autoAlign
@@ -443,7 +513,14 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   // memoize sorted items to reduce unnecessary expensive sort on rerender
   const sortedItems = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return sortItems!(filterItems(items, { itemToString, inputValue }), {
+    const selectAllItem = items.find((item) => (item as any).isSelectAll);
+
+    const selectableRealItems = nonSelectAllItems.filter(
+      (item) => !(item as any).disabled
+    );
+
+    // Sort only non-select-all items, select-all item must stay at the top
+    const sortedReal = sortItems!(nonSelectAllItems, {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -453,6 +530,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       compareItems,
       locale,
     });
+
+    // Only show select-all-item if there exist non-disabled filtered items to select
+    if (selectAllItem && selectableRealItems.length > 0) {
+      return [selectAllItem, ...sortedReal];
+    }
+    return sortedReal;
   }, [
     items,
     inputValue,
@@ -462,6 +545,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     itemToString,
     compareItems,
     locale,
+    sortItems,
+    nonSelectAllItems,
   ]);
 
   const inline = type === 'inline';
@@ -602,14 +687,23 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     }
     switch (type) {
       case InputKeyDownEnter:
+        if (sortedItems.length === 0) {
+          return changes;
+        }
         if (changes.selectedItem && changes.selectedItem.disabled !== true) {
-          onItemChange(changes.selectedItem);
+          if (changes.selectedItem.isSelectAll) {
+            handleSelectAllClick();
+          } else {
+            onItemChange(changes.selectedItem);
+          }
         }
         setHighlightedIndex(changes.selectedItem);
 
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case ItemClick:
-        if (changes.selectedItem) {
+        if (changes.selectedItem.isSelectAll) {
+          handleSelectAllClick();
+        } else {
           onItemChange(changes.selectedItem);
         }
         setHighlightedIndex(changes.selectedItem);
@@ -625,7 +719,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           return { ...changes };
         }
 
-        return { ...changes, highlightedIndex: null };
+        return {
+          ...changes,
+          highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
+        };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
@@ -635,6 +732,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
+        setIsOpen(changes.isOpen || false);
         validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
           return { ...changes };
@@ -642,7 +740,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         return {
           ...changes,
           isOpen: false,
-          highlightedIndex: null,
+          highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
         };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
@@ -736,6 +834,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     ? cloneElement(candidate, { size: 'mini' })
     : null;
 
+  // exclude the select-all item from the count
+  const selectedItemsLength = controlledSelectedItems.filter(
+    (item: any) => !(item as any).isSelectAll
+  ).length;
+
   const className = cx(
     `${prefix}--multi-select`,
     `${prefix}--combo-box`,
@@ -749,6 +852,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         controlledSelectedItems?.length > 0,
       [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
       [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--selectall`]: selectAll,
     }
   );
 
@@ -776,7 +880,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     },
   });
 
-  const inputProps = getInputProps(
+  const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': helperText ? helperId : undefined,
@@ -787,6 +891,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       disabled,
       placeholder,
       preventKeyAction: isOpen,
+      ...inputProps,
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
@@ -829,7 +934,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       },
       onFocus: () => setInputFocused(true),
       onBlur: () => {
-        !isOpen && setInputFocused(false);
+        setInputFocused(false);
         setInputValue('');
       },
     })
@@ -858,7 +963,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     }
   };
 
-  const mergedRef = mergeRefs(textInput, inputProps.ref);
+  const mergedRef = mergeRefs(textInput, inputProp.ref);
 
   const readOnlyEventHandlers = readOnly
     ? {
@@ -921,14 +1026,14 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                   textInput.current.focus();
                 }
               }}
-              selectionCount={controlledSelectedItems.length}
+              selectionCount={selectedItemsLength}
               translateWithId={translateWithId}
               disabled={disabled}
             />
           )}
           <input
             className={inputClasses}
-            {...inputProps}
+            {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
             readOnly={readOnly}
@@ -976,10 +1081,17 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         <ListBox.Menu {...menuProps}>
           {isOpen
             ? sortedItems.map((item, index) => {
-                const isChecked =
-                  controlledSelectedItems.filter((selected) =>
-                    isEqual(selected, item)
-                  ).length > 0;
+                let isChecked: boolean;
+                let isIndeterminate = false;
+                if ((item as any).isSelectAll) {
+                  isChecked = selectAllStatus.checked;
+                  isIndeterminate = selectAllStatus.indeterminate;
+                } else {
+                  isChecked =
+                    controlledSelectedItems.filter((selected) =>
+                      isEqual(selected, item)
+                    ).length > 0;
+                }
                 const itemProps = getItemProps({
                   item,
                   ['aria-selected']: isChecked,
@@ -1000,23 +1112,27 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                   <ListBox.MenuItem
                     key={itemProps.id}
                     aria-label={itemText}
-                    isActive={isChecked}
+                    isActive={isChecked && !item['isSelectAll']}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={disabled}
                     {...modifiedItemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
-                      <span
+                      <Checkbox
+                        id={`${itemProps.id}-item`}
+                        labelText={
+                          ItemToElement ? (
+                            <ItemToElement key={itemProps.id} {...item} />
+                          ) : (
+                            itemText
+                          )
+                        }
+                        checked={isChecked}
                         title={useTitleInItem ? itemText : undefined}
-                        className={`${prefix}--checkbox-label`}
-                        data-contained-checkbox-state={isChecked}
-                        id={`${itemProps.id}-item`}>
-                        {ItemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemText
-                        )}
-                      </span>
+                        indeterminate={isIndeterminate}
+                        disabled={disabled}
+                        tabIndex={-1}
+                      />
                     </div>
                   </ListBox.MenuItem>
                 );
@@ -1058,7 +1174,8 @@ FilterableMultiSelect.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -1076,6 +1193,13 @@ FilterableMultiSelect.propTypes = {
    * **Experimental**: Provide a decorator component to be rendered inside the `FilterableMultiSelect` component
    */
   decorator: PropTypes.node,
+
+  /**
+   * Provide a method that filters the dropdown options based on the current input. Overriding this
+   * prop means that you have to handle the filtering logic when the user types in the text input.
+   * Otherwise, a default built-in filtering function will be used.
+   */
+  filterItems: PropTypes.func,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -1234,4 +1358,12 @@ FilterableMultiSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps: PropTypes.object,
 };

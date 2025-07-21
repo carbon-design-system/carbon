@@ -38,7 +38,8 @@
     "react": "~19.1.0",
     "react-dom": "~19.1.0",
     "react-is": "~19.1.0",
-    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch"
+    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
+    "brace-expansion": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -62,7 +63,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/prop-types": "^15.7.13",
     "@types/react-is": "^19.0.0",
-    "accessibility-checker": "^4.0.1",
+    "accessibility-checker": "^4.0.6",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",

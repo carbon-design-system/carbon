@@ -88,6 +88,9 @@ export default {
     translateWithId: {
       table: { disable: true },
     },
+    filterItems: {
+      table: { disable: true },
+    },
   },
   parameters: {
     docs: {
@@ -365,6 +368,25 @@ export const Filterable = (args) => {
   );
 };
 
+export const FilterableWithSelectAll = (args) => {
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-3"
+        titleText="FilterableMultiSelect title"
+        helperText="This is helper text"
+        items={itemsWithSelectAll}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
 Filterable.argTypes = {
   onChange: {
     action: 'onChange',
@@ -392,7 +414,6 @@ export const WithLayerMultiSelect = (args) => (
     )}
   </WithLayer>
 );
-
 export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (

@@ -68,7 +68,7 @@ async function build() {
     const iconsInputConfig = getRollupConfig(
       iconsEntrypoint.filepath,
       iconsEntrypoint.rootDir,
-      outputDirectory
+      iconsEntrypoint.outputDirectory
     );
     const iconsBundle = await rollup(iconsInputConfig);
 
