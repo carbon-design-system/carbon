@@ -12,7 +12,6 @@ import {
   Config,
 } from './types';
 import { registerSwipeEvents } from './swipeEvents';
-
 export const initCarousal = (
   carousalContainer: HTMLElement,
   config?: Config
@@ -21,36 +20,30 @@ export const initCarousal = (
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
   let refs: Record<number, HTMLElement | null> = {};
+  let itemHeightSmallest = 0;
+  const minHeight = 10; // 10 rem
 
   const { onViewChangeStart, onViewChangeEnd, excludeSwipeSupport } =
-    config as Config;
+    config || {};
 
   const registerRef = (index: number, ref: HTMLElement) => {
-    refs = { ...refs, [index]: ref };
+    refs[index] = ref;
   };
 
   const wrapAllItems = (container: HTMLElement, wrapperClass: string) => {
-    // Create a wrapper div around children
-
     if (container.querySelector(`.${wrapperClass}`)) return;
 
     const wrapper = document.createElement('div');
     wrapper.classList.add(`${wrapperClass}`);
-
-    // Move all child nodes to the wrapper
-    while (container.firstChild) {
-      wrapper.appendChild(container.firstChild);
-    }
-
-    // Append the wrapper to the container
-
+    while (container.firstChild) wrapper.appendChild(container.firstChild);
     container.appendChild(wrapper);
   };
 
   const getHistory = () => {
-    return viewIndexStack.map((id) => {
-      return { id: id, elem: refs[id] };
-    });
+    return viewIndexStack.map((id) => ({
+      id,
+      elem: refs[id],
+    }));
   };
 
   const getCallbackResponse = (): CarousalResponse => {
@@ -70,50 +63,26 @@ export const initCarousal = (
 
   const handleTransitionStart = () => {
     previousViewIndexStack = [...viewIndexStack];
-    const { currentIndex, lastIndex, totalViews, historyStack } =
-      getCallbackResponse();
-    if (onViewChangeStart) {
-      onViewChangeStart({
-        currentIndex,
-        lastIndex,
-        totalViews,
-        historyStack,
-      });
-    }
+    const callbackData = getCallbackResponse();
+    onViewChangeStart?.(callbackData);
   };
 
   const handleTransitionEnd = (el?: HTMLElement | null) => {
-    if (!el) {
-      return;
-    }
+    if (!el) return;
     const tmpElementIndex = el.dataset.index;
-
     if (
       tmpElementIndex &&
-      viewIndexStack[0] === parseInt(tmpElementIndex, 10) &&
-      onViewChangeEnd
+      viewIndexStack[0] === parseInt(tmpElementIndex, 10)
     ) {
-      const { currentIndex, lastIndex, totalViews, historyStack } =
-        getCallbackResponse();
-
-      onViewChangeEnd({
-        currentIndex,
-        lastIndex,
-        totalViews,
-        historyStack,
-      });
+      const callbackData = getCallbackResponse();
+      onViewChangeEnd?.(callbackData);
     }
   };
 
   const sanitizeIndex = (idx: number) => {
     const floorVal = 0;
     const ceilVal = Object.keys(refs).length - 1;
-    if (idx < floorVal) {
-      return floorVal;
-    } else if (idx > ceilVal) {
-      return ceilVal;
-    }
-    return idx;
+    return Math.max(floorVal, Math.min(idx, ceilVal));
   };
 
   const transitionToViewIndex = (idx: number) => {
@@ -129,7 +98,7 @@ export const initCarousal = (
     handleTransitionEnd(ref);
   };
 
-  const attachClasssNames = (
+  const attachClassNames = (
     viewItem: HTMLElement,
     isInViewStack: boolean,
     isActive: boolean,
@@ -138,16 +107,15 @@ export const initCarousal = (
   ) => {
     viewItem.classList.add(`${prefix}__view`);
 
-    if (isInViewStack && !isActive) {
-      viewItem.classList.add(`${prefix}__view-in-stack`);
-    } else {
-      viewItem.classList.remove(`${prefix}__view-in-stack`);
-    }
-    if (isInViewStack && isActive) {
-      viewItem.classList.add(`${prefix}__view-active`);
-    } else {
-      viewItem.classList.remove(`${prefix}__view-active`);
-    }
+    viewItem.classList.toggle(
+      `${prefix}__view-in-stack`,
+      isInViewStack && !isActive
+    );
+    viewItem.classList.toggle(
+      `${prefix}__view-active`,
+      isInViewStack && isActive
+    );
+
     if (isBeingRecycledIn && !isBeingRecycledOut) {
       viewItem.classList.add(`${prefix}__view-recycle-in`);
     }
@@ -155,18 +123,47 @@ export const initCarousal = (
       viewItem.classList.add(`${prefix}__view-recycle-out`);
     }
   };
+
   const removeReCycleClasses = (viewItem: HTMLElement) => {
-    viewItem?.classList.remove(
+    viewItem.classList.remove(
       `${prefix}__view-recycle-in`,
       `${prefix}__view-recycle-out`
     );
   };
+
+  const remToPx = (rem: number) => {
+    return (
+      rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
+    );
+  };
+
+  const updateHeightForWrapper = () => {
+    setTimeout(() => {
+      const thresholdHeight = remToPx(minHeight);
+      const containerHeight = carousalContainer.clientHeight;
+
+      if (containerHeight < thresholdHeight) {
+        if (itemHeightSmallest < thresholdHeight) {
+          itemHeightSmallest = thresholdHeight;
+        }
+
+        const itemsWrapper = carousalContainer.querySelector(
+          `.${prefix}__itemsWrapper`
+        ) as HTMLElement;
+        if (itemsWrapper) {
+          itemsWrapper.style.blockSize = `${itemHeightSmallest}px`;
+        }
+      }
+    }, 10); // Delay to ensure layout is rendered before measuring
+  };
+
   const performAnimation = (isInitial: boolean) => {
     Array.from(viewItems).forEach((viewItem: HTMLElement, index) => {
       const stackIndex = viewIndexStack.findIndex((idx) => idx === index);
       const stackIndexInstanceCount = previousViewIndexStack.filter(
         (viIdx) => viIdx === index
       ).length;
+
       const isBeingRecycledOut =
         previousViewIndexStack.length > viewIndexStack.length &&
         previousViewIndexStack[0] === index &&
@@ -178,12 +175,9 @@ export const initCarousal = (
         stackIndexInstanceCount > 0;
 
       const isInViewStack = stackIndex > -1;
-      let isActive = false;
-      if (index === viewIndexStack[0]) {
-        isActive = true;
-      }
+      const isActive = index === viewIndexStack[0];
 
-      attachClasssNames(
+      attachClassNames(
         viewItem,
         isInViewStack,
         isActive,
@@ -194,23 +188,29 @@ export const initCarousal = (
       if (isInitial) {
         registerRef(index, viewItem);
 
-        viewItem.addEventListener('animationend', (e) => {
+        setTimeout(() => {
+          if (
+            !itemHeightSmallest ||
+            (viewItem.offsetHeight < itemHeightSmallest &&
+              itemHeightSmallest > remToPx(minHeight))
+          ) {
+            itemHeightSmallest = viewItem.offsetHeight;
+          }
+          viewItem.style.position = 'absolute';
+        });
+
+        const listener = (e: Event) => {
           removeReCycleClasses(viewItem);
-          if (refs[viewIndexStack[0]] === e.target) {
+          if (e.target === refs[viewIndexStack[0]]) {
             //transitionend will trigger twice for pervious card and currnt card
             transitionComplete(viewItem);
           }
-        });
+        };
 
-        viewItem.addEventListener('transitionend', (e) => {
-          removeReCycleClasses(viewItem);
-          if (refs[viewIndexStack[0]] === e.target) {
-            //transitionend will trigger twice for pervious card and currnt card
-            transitionComplete(viewItem);
-          }
-        });
+        viewItem.addEventListener('animationend', listener);
+        viewItem.addEventListener('transitionend', listener);
 
-        viewItem.setAttribute('data-index', index + '');
+        viewItem.setAttribute('data-index', index.toString());
       }
     });
 
@@ -219,7 +219,6 @@ export const initCarousal = (
     }
   };
 
-  //api
   const navigateNext = () => {
     const targetViewIndex = viewIndexStack[0] + 1;
     transitionToViewIndex(targetViewIndex);
@@ -229,7 +228,6 @@ export const initCarousal = (
     if (viewIndexStack.length - 1 >= 1) {
       handleTransitionStart();
       viewIndexStack = viewIndexStack.slice(1);
-
       performAnimation(false);
     }
   };
@@ -237,6 +235,7 @@ export const initCarousal = (
   const goToIndex = (index: number) => {
     transitionToViewIndex(index);
   };
+
   const getActiveItem = () => {
     return {
       index: viewIndexStack[0],
@@ -246,24 +245,29 @@ export const initCarousal = (
 
   const reset = () => {
     viewIndexStack = [0];
-
     performAnimation(false);
   };
 
   const destroyEvents = () => {
     registerSwipeEvents(carousalContainer, navigateNext, navigatePrev, true);
   };
-  //initialize
+
+  const getCarouselItems = (container: HTMLElement): HTMLElement[] => {
+    const slot = container.querySelector('slot') as HTMLSlotElement | null;
+    return slot
+      ? (slot.assignedElements({ flatten: true }) as HTMLElement[])
+      : (Array.from(container.children) as HTMLElement[]);
+  };
+
+  // initialize
   wrapAllItems(carousalContainer, `${prefix}__itemsWrapper`);
   const wrapper = carousalContainer.querySelector(`.${prefix}__itemsWrapper`);
+  const viewItems = getCarouselItems(wrapper as HTMLElement);
 
-  const viewItems = wrapper
-    ? Array.from(wrapper.children).filter(
-        (el): el is HTMLElement => el instanceof HTMLElement
-      )
-    : [];
   carousalContainer.classList.add(`${prefix}__view-stack`);
   performAnimation(true);
+  updateHeightForWrapper();
+
   if (!excludeSwipeSupport) {
     registerSwipeEvents(carousalContainer, navigateNext, navigatePrev, false);
   }
@@ -271,9 +275,9 @@ export const initCarousal = (
   return {
     next: navigateNext,
     prev: navigatePrev,
-    reset: reset,
-    goToIndex: goToIndex,
-    getActiveItem: getActiveItem,
+    reset,
+    goToIndex,
+    getActiveItem,
     destroyEvents: !excludeSwipeSupport ? destroyEvents : null,
   };
 };

@@ -43,10 +43,12 @@ export const registerSwipeEvents = (
     mouseStartX = e.clientX;
   };
   const mouseMoveHandler = (e: MouseEvent) => {
-    if (!isMouseDown) return;
+    if (!isMouseDown) {
+      return;
+    }
     mouseEndX = e.clientX;
   };
-  const mouseUpHandler = (e: MouseEvent) => {
+  const mouseUpHandler = () => {
     if (isMouseDown && mouseStartX !== null && mouseEndX !== null) {
       const distance = mouseStartX - mouseEndX;
       if (Math.abs(distance) > minSwipeDistance) {
@@ -65,10 +67,15 @@ export const registerSwipeEvents = (
     const now = Date.now();
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 20) {
       e.preventDefault(); // Prevent page from scrolling
-      if (now - lastScrollTime < scrollCooldown) return;
+      if (now - lastScrollTime < scrollCooldown) {
+        return;
+      }
 
-      if (e.deltaX > 0) next();
-      else prev();
+      if (e.deltaX > 0) {
+        next();
+      } else {
+        prev();
+      }
       lastScrollTime = now;
     }
   };

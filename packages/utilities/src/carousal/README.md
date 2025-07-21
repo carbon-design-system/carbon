@@ -14,11 +14,11 @@ building swipeable, carousal like components
 
 ## Getting started
 
-The utility can be initialized within any on-load function by passing the
-carousal container element. It's important to set explicit width and height on
-the container, as the utility uses the container's dimensions to calculate and
-apply the size of its child elements. Once initialized, the utility returns a
-set of APIs that allow for programmatic navigation between views.
+The utility can be initialized from any on-load function by passing in the
+carousel container element. You may optionally set a height on the container—if
+not provided, the utility will automatically use the smallest height among the
+items. Once initialized, it returns a set of APIs that enable programmatic
+navigation between views.
 
 By default, the carousal responds to swipe gestures, horizontal scroll gestures,
 and click-and-drag interactions. To disable this behavior, you can set the
@@ -56,6 +56,20 @@ carousal.reset();
 
 ### Import styles
 
+Apply `@include carouselClassStyles;` inside a SCSS file for React/class-based
+components. Use `@include carouselHostStyles;` for Web Components with :host
+selectors. Automatically handles animations, view transitions, and reduced
+motion preferences across platforms.
+
 ```css
-@use '@carbon/utilities/styles/carousal/_index.scss';
+
+@use '@carbon/utilities/styles/carousal/_index.scss' as carousel;
+
+//usage in react app
+@include carousel.carouselClassStyles;
+
+// usage in webcomponents
+@include carousel.carouselHostStyles();
+
+
 ```
