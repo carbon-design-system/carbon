@@ -65,7 +65,7 @@ class CDSTableBatchActions extends LitElement {
   private _setupHoverListeners() {
     const slot = this.shadowRoot?.querySelector('slot');
     const cancelButton = this.shadowRoot?.querySelector(
-      '.cds--batch-summary__cancel'
+      `.${prefix}--batch-summary__cancel`
     ) as HTMLElement;
 
     if (slot && cancelButton) {
