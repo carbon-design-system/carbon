@@ -13,13 +13,13 @@ import styles from './shape-indicator.scss?lit';
 
 // Import Carbon icons
 import {
-  Critical16,
-  CriticalSeverity16,
-  DiamondFill16,
-  LowSeverity16,
-  Caution16,
-  CircleFill16,
-  CircleStroke16,
+  CriticalGlyph as Critical16,
+  CriticalSeverityGlyph as CriticalSeverity16,
+  DiamondFillGlyph as DiamondFill16,
+  LowSeverityGlyph as LowSeverity16,
+  CautionGlyph as Caution16,
+  CircleFillGlyph as CircleFill16,
+  CircleStrokeGlyph as CircleStroke16,
 } from '@carbon/icons-web-components';
 import { SHAPE_INDICATOR_KIND } from './defs';
 
