@@ -59,12 +59,13 @@ $animateTime: $duration-moderate-01;
   }
 }
 
-/// Wrapper styles (only applies to class-based layout)
+/// Wrapper styles
 @mixin wrapperStyles {
   .#{$prefix}__view-stack .#{$prefix}__itemsWrapper {
     position: relative;
     overflow: hidden;
-    min-block-size: 100%;
+    block-size: 100%;
+    inline-size: 100%;
     min-inline-size: 20vh;
   }
 }

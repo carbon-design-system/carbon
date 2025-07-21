@@ -19,7 +19,7 @@ export const initCarousal = (
   const prefix = 'carousal';
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
-  let refs: Record<number, HTMLElement | null> = {};
+  const refs: Record<number, HTMLElement | null> = {};
   let itemHeightSmallest = 0;
   const minHeight = 10; // 10 rem
 
@@ -31,11 +31,15 @@ export const initCarousal = (
   };
 
   const wrapAllItems = (container: HTMLElement, wrapperClass: string) => {
-    if (container.querySelector(`.${wrapperClass}`)) return;
+    if (container.querySelector(`.${wrapperClass}`)) {
+      return;
+    }
 
     const wrapper = document.createElement('div');
     wrapper.classList.add(`${wrapperClass}`);
-    while (container.firstChild) wrapper.appendChild(container.firstChild);
+    while (container.firstChild) {
+      wrapper.appendChild(container.firstChild);
+    }
     container.appendChild(wrapper);
   };
 
@@ -68,7 +72,9 @@ export const initCarousal = (
   };
 
   const handleTransitionEnd = (el?: HTMLElement | null) => {
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     const tmpElementIndex = el.dataset.index;
     if (
       tmpElementIndex &&
