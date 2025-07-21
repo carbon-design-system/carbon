@@ -30,7 +30,13 @@ export default {
   },
 };
 
-export const Default = (args) => <ActionableNotification {...args} />;
+export const Default = (args) => (
+  <ActionableNotification
+    title="A title"
+    subtitle="A subtitle"
+    caption="00:00:00 AM"
+    actionButtonLabel="My custom action"></ActionableNotification>
+);
 
 Default.argTypes = {
   ['aria-label']: {
@@ -70,6 +76,7 @@ Default.argTypes = {
 };
 Default.args = {
   actionButtonLabel: 'Action',
+  caption: '00:00:00 AM',
   inline: false,
   closeOnEscape: true,
   title: 'Notification title',

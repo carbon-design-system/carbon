@@ -280,6 +280,19 @@
     .#{$prefix}--actionable-notification__subtitle {
     color: $text-primary;
   }
+
+  .#{$prefix}--actionable-notification__caption {
+    @include type-style('body-compact-01');
+
+    color: $text-inverse;
+    padding-block-start: $spacing-06;
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast
+    .#{$prefix}--actionable-notification__caption {
+    color: $text-primary;
+  }
+
   /* Ghost action button when inline */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
     block-size: convert.to-rem(32px);

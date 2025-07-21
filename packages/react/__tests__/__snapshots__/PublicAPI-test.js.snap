@@ -225,6 +225,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "caption": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
