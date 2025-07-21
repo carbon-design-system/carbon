@@ -50,6 +50,25 @@ describe('FileUploaderButton', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
+  it('should not trigger multiple file dialogs when using keyboard Enter', async () => {
+    const onChange = jest.fn();
+
+    render(<FileUploaderButton onChange={onChange} labelText="Add file" />);
+
+    const button = screen.getByRole('button', { name: /add file/i });
+    const input = screen.getByLabelText(/add file/i);
+
+    // Simulate keyboard interaction
+    button.focus();
+    await userEvent.keyboard('{Enter}');
+
+    // Simulate file upload (since real dialog can't be tested)
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+    await userEvent.upload(input, file);
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
   it('should not support multiple files by default', () => {
     const { container } = render(<FileUploaderButton />);
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
