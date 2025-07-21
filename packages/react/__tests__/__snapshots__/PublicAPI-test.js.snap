@@ -5701,6 +5701,9 @@ Map {
       "decorator": Object {
         "type": "node",
       },
+      "defaultStartValue": Object {
+        "type": "number",
+      },
       "defaultValue": Object {
         "args": Array [
           Array [
