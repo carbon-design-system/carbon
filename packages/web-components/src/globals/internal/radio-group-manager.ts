@@ -194,9 +194,7 @@ class RadioGroupManager {
     const sortedGroup = this.getSortedGroup(radio);
 
     const n = sortedGroup.length;
-    const initialIndex = sortedGroup.indexOf(radio);
-
-    let searchRadioIndex = initialIndex;
+    let searchRadioIndex = sortedGroup.indexOf(radio);
 
     // We can do circular array indexing here
     for (let i = 0; i < n; i++) {
