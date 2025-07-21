@@ -12,7 +12,7 @@ import {
   Stories,
   ArgTypes,
 } from '@storybook/addon-docs/blocks';
-import { allModes } from '../modes';
+import { allModes } from './modes';
 
 import './styles.scss';
 import '../src/feature-flags';
