@@ -5,110 +5,110 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { initCarousal } from './carousal';
+import { initCarousel } from './carousel';
 
-describe('initCarousal', () => {
+describe('initCarousel', () => {
   let container;
   let mockOnViewChangeStart;
   let mockOnViewChangeEnd;
 
   beforeEach(() => {
     document.body.innerHTML = `
-    <div id="carousal">
+    <div id="carousel">
       <div>Slide 1</div>
       <div>Slide 2</div>
       <div>Slide 3</div>
     </div>
   `;
 
-    container = document.getElementById('carousal');
+    container = document.getElementById('carousel');
     mockOnViewChangeStart = jest.fn();
     mockOnViewChangeEnd = jest.fn();
   });
 
-  test('initializes carousal with correct classes and wrapper', () => {
-    initCarousal(container, {
+  test('initializes carousel with correct classes and wrapper', () => {
+    initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    const wrapper = container.querySelector('.carousal__itemsWrapper');
+    const wrapper = container.querySelector('.carousel__itemsWrapper');
     expect(wrapper).toBeTruthy();
-    expect(container.classList.contains('carousal__view-stack')).toBe(true);
+    expect(container.classList.contains('carousel__view-stack')).toBe(true);
     expect(wrapper?.children.length).toBe(3);
   });
 
   test('getActiveItem returns correct index and item', () => {
-    const carousal = initCarousal(container, {
+    const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    const active = carousal.getActiveItem();
+    const active = carousel.getActiveItem();
     expect(active.index).toBe(0);
     expect(active.item?.textContent).toBe('Slide 1');
   });
 
   test('navigate next triggers onViewChangeStart and onViewChangeEnd', () => {
-    const carousal = initCarousal(container, {
+    const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    carousal.next();
-    const active = carousal.getActiveItem();
+    carousel.next();
+    const active = carousel.getActiveItem();
 
     expect(mockOnViewChangeStart).toHaveBeenCalled();
     expect(mockOnViewChangeEnd).toHaveBeenCalled();
     expect(active.index).toBe(1);
   });
   it('should navigate to the previous view', () => {
-    const carousal = initCarousal(container, {
+    const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
-    carousal.next(); // go to index 1
-    carousal.prev();
-    const active = carousal.getActiveItem();
+    carousel.next(); // go to index 1
+    carousel.prev();
+    const active = carousel.getActiveItem();
     expect(active.index).toBe(0);
   });
 
   test('navigate prev does not go below index 0', () => {
-    const carousal = initCarousal(container, {
+    const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    carousal.prev(); // Should not move
-    expect(carousal.getActiveItem().index).toBe(0);
+    carousel.prev(); // Should not move
+    expect(carousel.getActiveItem().index).toBe(0);
 
-    carousal.next();
-    carousal.prev(); // Should go back to 0
-    expect(carousal.getActiveItem().index).toBe(0);
+    carousel.next();
+    carousel.prev(); // Should go back to 0
+    expect(carousel.getActiveItem().index).toBe(0);
   });
 
   test('goToIndex navigates to correct slide', () => {
-    const carousal = initCarousal(container, {
+    const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    carousal.goToIndex(2);
-    const active = carousal.getActiveItem();
+    carousel.goToIndex(2);
+    const active = carousel.getActiveItem();
 
     expect(active.index).toBe(2);
     expect(active.item?.textContent).toBe('Slide 3');
   });
 
   test('reset goes back to first slide', () => {
-    const carousal = initCarousal(container, {
+    const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    carousal.goToIndex(2);
-    carousal.reset();
-    const active = carousal.getActiveItem();
+    carousel.goToIndex(2);
+    carousel.reset();
+    const active = carousel.getActiveItem();
 
     expect(active.index).toBe(0);
   });

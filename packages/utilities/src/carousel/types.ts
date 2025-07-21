@@ -7,16 +7,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-interface CarousalStackHistory {
+interface CarouselStackHistory {
   id: number;
   elem: HTMLLIElement;
 }
 
-type CarousalResponse = {
+type CarouselResponse = {
   currentIndex: number;
   lastIndex: number;
   totalViews: number;
-  historyStack: CarousalStackHistory[];
+  historyStack: CarouselStackHistory[];
 };
 
 type ActiveItem = {
@@ -25,12 +25,12 @@ type ActiveItem = {
 };
 
 export type Config = {
-  onViewChangeStart?: (args: CarousalResponse) => void;
-  onViewChangeEnd?: (args: CarousalResponse) => void;
+  onViewChangeStart?: (args: CarouselResponse) => void;
+  onViewChangeEnd?: (args: CarouselResponse) => void;
   excludeSwipeSupport?: boolean;
 };
 
-interface InitCarousal {
+interface InitCarousel {
   next: () => void;
   prev: () => void;
   reset: () => void;
@@ -38,4 +38,4 @@ interface InitCarousal {
   getActiveItem: () => ActiveItem;
   destroyEvents: (() => void) | null;
 }
-export type { CarousalStackHistory, CarousalResponse, InitCarousal };
+export type { CarouselStackHistory, CarouselResponse, InitCarousel };

@@ -1,6 +1,6 @@
 @use '@carbon/styles/scss/motion' as *;
 
-$prefix: 'carousal' !default;
+$prefix: 'carousel' !default;
 $animateTime: $duration-moderate-01;
 
 /// Shared keyframes (needed in both)

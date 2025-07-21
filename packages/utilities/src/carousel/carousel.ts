@@ -6,17 +6,17 @@
  */
 
 import {
-  InitCarousal,
-  CarousalResponse,
-  CarousalStackHistory,
+  InitCarousel,
+  CarouselResponse,
+  CarouselStackHistory,
   Config,
 } from './types';
 import { registerSwipeEvents } from './swipeEvents';
-export const initCarousal = (
-  carousalContainer: HTMLElement,
+export const initCarousel = (
+  carouselContainer: HTMLElement,
   config?: Config
-): InitCarousal => {
-  const prefix = 'carousal';
+): InitCarousel => {
+  const prefix = 'carousel';
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
   const refs: Record<number, HTMLElement | null> = {};
@@ -50,7 +50,7 @@ export const initCarousal = (
     }));
   };
 
-  const getCallbackResponse = (): CarousalResponse => {
+  const getCallbackResponse = (): CarouselResponse => {
     const totalRefs = Object.keys(refs).length;
     const lastElementRef = refs[totalRefs - 1];
     const historicalData = getHistory();
@@ -61,7 +61,7 @@ export const initCarousal = (
         10
       ),
       totalViews: totalRefs,
-      historyStack: historicalData as CarousalStackHistory[],
+      historyStack: historicalData as CarouselStackHistory[],
     };
   };
 
@@ -146,14 +146,14 @@ export const initCarousal = (
   const updateHeightForWrapper = () => {
     setTimeout(() => {
       const thresholdHeight = remToPx(minHeight);
-      const containerHeight = carousalContainer.clientHeight;
+      const containerHeight = carouselContainer.clientHeight;
 
       if (containerHeight < thresholdHeight) {
         if (itemHeightSmallest < thresholdHeight) {
           itemHeightSmallest = thresholdHeight;
         }
 
-        const itemsWrapper = carousalContainer.querySelector(
+        const itemsWrapper = carouselContainer.querySelector(
           `.${prefix}__itemsWrapper`
         ) as HTMLElement;
         if (itemsWrapper) {
@@ -255,7 +255,7 @@ export const initCarousal = (
   };
 
   const destroyEvents = () => {
-    registerSwipeEvents(carousalContainer, navigateNext, navigatePrev, true);
+    registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, true);
   };
 
   const getCarouselItems = (container: HTMLElement): HTMLElement[] => {
@@ -266,16 +266,16 @@ export const initCarousal = (
   };
 
   // initialize
-  wrapAllItems(carousalContainer, `${prefix}__itemsWrapper`);
-  const wrapper = carousalContainer.querySelector(`.${prefix}__itemsWrapper`);
+  wrapAllItems(carouselContainer, `${prefix}__itemsWrapper`);
+  const wrapper = carouselContainer.querySelector(`.${prefix}__itemsWrapper`);
   const viewItems = getCarouselItems(wrapper as HTMLElement);
 
-  carousalContainer.classList.add(`${prefix}__view-stack`);
+  carouselContainer.classList.add(`${prefix}__view-stack`);
   performAnimation(true);
   updateHeightForWrapper();
 
   if (!excludeSwipeSupport) {
-    registerSwipeEvents(carousalContainer, navigateNext, navigatePrev, false);
+    registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, false);
   }
 
   return {

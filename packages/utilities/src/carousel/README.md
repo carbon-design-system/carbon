@@ -1,7 +1,7 @@
-# carousal
+# carousel
 
-`carousal` is a lightweight,headless, framework-agnostic JavaScript utility for
-building swipeable, carousal like components
+`carousel` is a lightweight,headless, framework-agnostic JavaScript utility for
+building swipeable, carousel like components
 
 ## Features
 
@@ -20,14 +20,14 @@ not provided, the utility will automatically use the smallest height among the
 items. Once initialized, it returns a set of APIs that enable programmatic
 navigation between views.
 
-By default, the carousal responds to swipe gestures, horizontal scroll gestures,
+By default, the carousel responds to swipe gestures, horizontal scroll gestures,
 and click-and-drag interactions. To disable this behavior, you can set the
 `excludeSwipeSupport` flag to true.
 
 Here's the usage example.
 
 ```html
-<div id="myCarousal">
+<div id="myCarousel">
   <div>Slide 1</div>
   <div>Slide 2</div>
   <div>Slide 3</div>
@@ -35,9 +35,9 @@ Here's the usage example.
 ```
 
 ```ts
-import { initCarousal } from '@carbon/utilities';
+import { initCarousel } from '@carbon/utilities';
 
-const container = document.getElementById('myCarousal');
+const container = document.getElementById('myCarousel');
 
 const config = {
   onViewChangeStart: (startData) =>
@@ -45,13 +45,13 @@ const config = {
   onViewChangeEnd: (endData) => console.log('View change ended', endData),
   excludeSwipeSupport: false,
 };
-const carousal = initCarousal(container, config);
+const carousel = initCarousel(container, config);
 
 // Navigation controls
-carousal.next();
-carousal.prev();
-carousal.goToIndex(2);
-carousal.reset();
+carousel.next();
+carousel.prev();
+carousel.goToIndex(2);
+carousel.reset();
 ```
 
 ### Import styles
@@ -63,7 +63,7 @@ motion preferences across platforms.
 
 ```css
 
-@use '@carbon/utilities/styles/carousal/_index.scss' as carousel;
+@use '@carbon/utilities/styles/carousel/_index.scss' as carousel;
 
 //usage in react app
 @include carousel.carouselClassStyles;
