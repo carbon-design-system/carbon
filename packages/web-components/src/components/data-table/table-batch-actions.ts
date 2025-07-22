@@ -65,24 +65,33 @@ class CDSTableBatchActions extends LitElement {
   private _setupHoverListeners() {
     const slot = this.shadowRoot?.querySelector('slot');
     const cancelButton = this.shadowRoot?.querySelector(
-      `.${prefix}--batch-summary__cancel`
+      `${prefix}-button.${prefix}--batch-summary__cancel`
     ) as HTMLElement;
 
     if (slot && cancelButton) {
-      slot.addEventListener('slotchange', () => {
+      const setupListeners = () => {
         const buttons = slot.assignedElements();
-        const lastButton = buttons[buttons.length - 1];
+        const lastButton = buttons[buttons.length - 1] as HTMLElement;
 
         if (lastButton) {
-          lastButton.addEventListener('mouseenter', () => {
+          const handleEnter = () => {
             cancelButton.style.setProperty('--divider-opacity', '0');
-          });
+          };
 
-          lastButton.addEventListener('mouseleave', () => {
+          const handleLeave = () => {
             cancelButton.style.setProperty('--divider-opacity', '1');
-          });
+          };
+
+          lastButton.removeEventListener('mouseenter', handleEnter);
+          lastButton.removeEventListener('mouseleave', handleLeave);
+
+          lastButton.addEventListener('mouseenter', handleEnter);
+          lastButton.addEventListener('mouseleave', handleLeave);
         }
-      });
+      };
+
+      setupListeners();
+      slot.addEventListener('slotchange', setupListeners);
     }
   }
 
@@ -114,8 +123,7 @@ class CDSTableBatchActions extends LitElement {
       size,
     } = this;
 
-    const buttonSizeClass =
-      size === 'xs' || size === 'sm' ? `${prefix}--btn--sm` : '';
+    const buttonSize = size === 'xs' || size === 'sm' ? 'sm' : 'lg';
 
     return html`
       <div class="${prefix}--batch-summary">
@@ -126,12 +134,14 @@ class CDSTableBatchActions extends LitElement {
 
       <div class="${prefix}--action-list">
         <slot></slot>
-
-        <button
-          class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel ${buttonSizeClass}"
+        <cds-button
+          kind="primary"
+          size="${buttonSize}"
+          class="${prefix}--batch-summary__cancel"
+          batch-action
           @click=${handleCancel}>
           <slot name="cancel-button-content">Cancel</slot>
-        </button>
+        </cds-button>
       </div>
     `;
   }

@@ -31,7 +31,6 @@ const sizes = {
 const defaultArgs = {
   isSortable: false,
   locale: 'en',
-  radio: false,
   size: TABLE_SIZE.LG,
   useStaticWidth: false,
   useZebraStyles: false,
@@ -45,10 +44,6 @@ const controls = {
   locale: {
     control: 'text',
     description: 'Locale',
-  },
-  radio: {
-    control: 'boolean',
-    description: 'Radio',
   },
   size: {
     control: 'radio',
@@ -71,7 +66,6 @@ export const Default = {
   render: ({
     isSortable,
     locale,
-    radio,
     size,
     useStaticWidth,
     useZebraStyles,
@@ -79,7 +73,6 @@ export const Default = {
     <cds-table
       ?is-sortable=${isSortable}
       locale="${locale}"
-      ?radio=${radio}
       size="${size}"
       ?use-static-width="${useStaticWidth}"
       ?use-zebra-styles="${useZebraStyles}">
