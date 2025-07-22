@@ -154,6 +154,12 @@ class CDSTextarea extends CDSTextInput {
    */
   private _prevCounterMode: 'character' | 'word' = this.counterMode;
 
+  /**
+   * The previous cols value. This lets updated() conditionally call _measureWrapper()
+   * if the cols value has changed.
+   */
+  private _prevCols?: number;
+
   render() {
     const { enableCounter, maxCount } = this;
 
@@ -265,6 +271,10 @@ class CDSTextarea extends CDSTextInput {
   }
   updated(): void {
     super.updated?.();
+    if (this.cols !== this._prevCols) {
+      this._prevCols = this.cols;
+      this._measureWrapper();
+    }
     if (this.counterMode !== this._prevCounterMode) {
       const textarea = this._textarea;
       if (textarea) {
@@ -276,6 +286,31 @@ class CDSTextarea extends CDSTextInput {
       }
       this._prevCounterMode = this.counterMode;
     }
+  }
+
+  /**
+   * Measures the width of the wrapper and applies that to the max-width of the
+   * helper-text and invalid/warn-text
+   */
+  private _measureWrapper() {
+    const wrapper = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${prefix}--text-area__wrapper`
+    );
+
+    const wrapperWidth = wrapper?.scrollWidth;
+
+    const helper = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${prefix}--form__helper-text`
+    );
+    const requirement = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${prefix}--form-requirement`
+    );
+    [helper, requirement].forEach((el) => {
+      if (el) {
+        el.style.maxWidth = `${wrapperWidth}px`;
+        el.style.overflowWrap = 'break-word';
+      }
+    });
   }
 
   static shadowRootOptions = {
