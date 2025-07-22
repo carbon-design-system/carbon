@@ -21,6 +21,24 @@ import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 
+interface FileItem {
+  name: string;
+  uuid: string;
+  file?: File;
+}
+
+export interface FileChangeData {
+  addedFiles: FileItem[];
+  removedFiles: FileItem[];
+  currentFiles: FileItem[];
+  action: 'add' | 'remove' | 'clear';
+}
+
+export interface FileDeleteData {
+  deletedFile: FileItem;
+  remainingFiles: FileItem[];
+}
+
 export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Specify the types of files that this input should be able to receive
@@ -87,10 +105,10 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   name?: string;
 
   /**
-   * Provide an optional `onChange` hook that is called each time the input is
-   * changed
+   * Provide an optional `onChange` hook that is called for all file changes.
+   * Second parameter contains complete file information.
    */
-  onChange?: (event: any) => void;
+  onChange?: (event: any, data?: FileChangeData) => void;
 
   /**
    * Provide an optional `onClick` hook that is called each time the
@@ -100,9 +118,9 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
 
   /**
    * Provide an optional `onDelete` hook that is called when an uploaded item
-   * is removed
+   * is removed. Second parameter contains deleted file information.
    */
-  onDelete?: (event: any) => void;
+  onDelete?: (event: any, data?: FileDeleteData) => void;
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available
@@ -116,6 +134,11 @@ export interface FileUploaderHandle {
    * Clear internal state
    */
   clearFiles: () => void;
+
+  /**
+   * Get current files
+   */
+  getCurrentFiles: () => FileItem[];
 }
 
 const FileUploader = React.forwardRef(
@@ -141,47 +164,140 @@ const FileUploader = React.forwardRef(
     ref: ForwardedRef<FileUploaderHandle>
   ) => {
     const fileUploaderInstanceId = useId('file-uploader');
-    const [state, updateState] = useState({
-      fileNames: [] as (string | undefined)[],
-    });
+    const [fileItems, setFileItems] = useState<FileItem[]>([]);
     const nodes: HTMLElement[] = [];
     const prefix = usePrefix();
+
+    const createFileItem = (file: File): FileItem => ({
+      name: file.name,
+      uuid: `${fileUploaderInstanceId}-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      file,
+    });
+
     const handleChange = (evt) => {
       evt.stopPropagation();
-      const filenames = Array.prototype.map.call(
-        evt.target.files,
-        (file) => file.name
-      ) as string[];
-      updateState((prevState) => ({
-        fileNames: multiple
-          ? [...new Set([...prevState.fileNames, ...filenames])]
-          : filenames,
-      }));
+
+      const newFiles = Array.from(evt.target.files as FileList);
+      const newFileItems = newFiles.map(createFileItem);
+
+      let updatedFileItems: FileItem[];
+
+      if (multiple) {
+        const existingNames = new Set(fileItems.map((item) => item.name));
+        const uniqueNewItems = newFileItems.filter(
+          (item) => !existingNames.has(item.name)
+        );
+        updatedFileItems = [...fileItems, ...uniqueNewItems];
+      } else {
+        updatedFileItems = newFileItems;
+      }
+
+      setFileItems(updatedFileItems);
+
       if (onChange) {
-        onChange(evt);
+        const allFiles = updatedFileItems
+          .map((item) => item.file)
+          .filter(Boolean) as File[];
+
+        // Create FileList object for backward compatibility
+        const fileListLike = Object.assign(allFiles, {
+          item: (index: number) => allFiles[index] || null,
+        });
+
+        const enhancedEvent = {
+          ...evt,
+          target: {
+            ...evt.target,
+            files: fileListLike,
+          },
+        };
+
+        const changeData: FileChangeData = {
+          addedFiles: newFileItems,
+          removedFiles: [],
+          currentFiles: updatedFileItems,
+          action: 'add',
+        };
+
+        onChange(enhancedEvent, changeData);
       }
     };
 
     const handleClick = (evt, { index, filenameStatus }) => {
       if (filenameStatus === 'edit') {
         evt.stopPropagation();
-        const filteredArray = state.fileNames.filter(
-          (filename) => filename !== nodes[index]?.innerText?.trim()
-        );
 
-        updateState({ fileNames: filteredArray });
+        const deletedItem = fileItems[index];
+        if (!deletedItem) return;
+
+        const remainingItems = fileItems.filter((_, i) => i !== index);
+        setFileItems(remainingItems);
+
+        const remainingFiles = remainingItems
+          .map((item) => item.file)
+          .filter(Boolean) as File[];
+
+        // Create FileList object for backward compatibility
+        const fileListLike = Object.assign(remainingFiles, {
+          item: (index: number) => remainingFiles[index] || null,
+        });
+
+        const enhancedEvent = {
+          ...evt,
+          target: {
+            ...evt.target,
+            files: fileListLike,
+          },
+          deletedFile: deletedItem,
+          remainingFiles: remainingItems,
+        };
 
         if (onDelete) {
-          onDelete(evt);
-          uploaderButton.current?.focus?.();
+          const deleteData: FileDeleteData = {
+            deletedFile: deletedItem,
+            remainingFiles: remainingItems,
+          };
+
+          onDelete(enhancedEvent, deleteData);
         }
-        onClick?.(evt);
+
+        if (onChange) {
+          const changeData: FileChangeData = {
+            addedFiles: [],
+            removedFiles: [deletedItem],
+            currentFiles: remainingItems,
+            action: 'remove',
+          };
+
+          onChange(enhancedEvent, changeData);
+        }
+
+        if (onClick) {
+          onClick(evt);
+        }
+
+        uploaderButton.current?.focus?.();
       }
     };
 
     useImperativeHandle(ref, () => ({
       clearFiles() {
-        updateState({ fileNames: [] });
+        const previousItems = [...fileItems];
+        setFileItems([]);
+
+        if (onChange && previousItems.length > 0) {
+          const changeData: FileChangeData = {
+            addedFiles: [],
+            removedFiles: previousItems,
+            currentFiles: [],
+            action: 'clear',
+          };
+
+          onChange({} as any, changeData);
+        }
+      },
+      getCurrentFiles() {
+        return [...fileItems];
       },
     }));
 
@@ -229,22 +345,25 @@ const FileUploader = React.forwardRef(
           aria-describedby={fileUploaderInstanceId}
         />
         <div className={`${prefix}--file-container`}>
-          {state.fileNames.length === 0
+          {fileItems.length === 0
             ? null
-            : state.fileNames.map((name, index) => (
+            : fileItems.map((item, index) => (
                 <span
-                  key={index}
+                  key={item.uuid}
                   className={selectedFileClasses}
                   ref={(node) => {
                     nodes[index] = node as HTMLSpanElement;
-                  }} // eslint-disable-line
+                  }}
                   {...other}>
-                  <Text as="p" className={`${prefix}--file-filename`} id={name}>
-                    {name}
+                  <Text
+                    as="p"
+                    className={`${prefix}--file-filename`}
+                    id={item.name}>
+                    {item.name}
                   </Text>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
-                      name={name}
+                      name={item.name}
                       iconDescription={iconDescription}
                       status={filenameStatus}
                       onKeyDown={(evt) => {

@@ -134,4 +134,152 @@ describe('FileUploader', () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });
+  describe('FileUploader enhanced callbacks', () => {
+    it('should provide complete file information in onChange callback', async () => {
+      const onChange = jest.fn();
+      const { container } = render(
+        <FileUploader {...requiredProps} onChange={onChange} />
+      );
+
+      const input = container.querySelector('input');
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+      await userEvent.upload(input, file);
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      const [event, data] = onChange.mock.calls[0];
+
+      // Test backward compatibility
+      expect(event.target.files.length).toBe(1);
+      expect(event.target.files[0].name).toBe('test.png');
+
+      // Test enhanced data
+      expect(data).toEqual({
+        addedFiles: expect.arrayContaining([
+          expect.objectContaining({
+            name: 'test.png',
+            uuid: expect.any(String),
+            file: expect.any(File),
+          }),
+        ]),
+        removedFiles: [],
+        currentFiles: expect.any(Array),
+        action: 'add',
+      });
+    });
+
+    it('should provide complete file information in onDelete callback', async () => {
+      const onDelete = jest.fn();
+      const { container } = render(
+        <FileUploader
+          {...requiredProps}
+          filenameStatus="edit"
+          onDelete={onDelete}
+        />
+      );
+
+      const input = container.querySelector('input');
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+      await userEvent.upload(input, file);
+
+      const removeFileButton = screen.getByLabelText(
+        'test description - test.png'
+      );
+      await userEvent.click(removeFileButton);
+
+      expect(onDelete).toHaveBeenCalledTimes(1);
+
+      const [event, data] = onDelete.mock.calls[0];
+
+      expect(event.target.files).toBeDefined();
+      expect(event.target.files.length).toBe(0);
+
+      expect(data).toEqual({
+        deletedFile: expect.objectContaining({
+          name: 'test.png',
+          uuid: expect.any(String),
+          file: expect.any(File),
+        }),
+        remainingFiles: [],
+      });
+    });
+
+    it('should call onChange for both add and delete operations', async () => {
+      const onChange = jest.fn();
+      const { container } = render(
+        <FileUploader
+          {...requiredProps}
+          filenameStatus="edit"
+          onChange={onChange}
+        />
+      );
+
+      const input = container.querySelector('input');
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+      // Add file - should trigger onChange
+      await userEvent.upload(input, file);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({ action: 'add' })
+      );
+
+      // Delete file - should also trigger onChange
+      const removeFileButton = screen.getByLabelText(
+        'test description - test.png'
+      );
+      await userEvent.click(removeFileButton);
+
+      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenLastCalledWith(
+        expect.anything(),
+        expect.objectContaining({
+          action: 'remove',
+          removedFiles: expect.arrayContaining([
+            expect.objectContaining({ name: 'test.png' }),
+          ]),
+        })
+      );
+    });
+
+    it('should maintain backward compatibility with existing callback patterns', async () => {
+      const onChange = jest.fn();
+      const onDelete = jest.fn();
+
+      const { container } = render(
+        <FileUploader
+          {...requiredProps}
+          filenameStatus="edit"
+          onChange={onChange}
+          onDelete={onDelete}
+        />
+      );
+
+      const input = container.querySelector('input');
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+      await userEvent.upload(input, file);
+
+      //for backword compatibility
+      const [changeEvent] = onChange.mock.calls[0];
+      expect(changeEvent.target.files).toBeDefined();
+      expect(changeEvent.target.files.length).toBe(1);
+      expect(changeEvent.target.files[0]).toBe(file);
+
+      const removeFileButton = screen.getByLabelText(
+        'test description - test.png'
+      );
+      await userEvent.click(removeFileButton);
+
+      // onDelete should provides file information
+      const [deleteEvent] = onDelete.mock.calls[0];
+      expect(deleteEvent.target.files).toBeDefined();
+      expect(deleteEvent.target.files.length).toBe(0);
+
+      expect(typeof deleteEvent.target.files.item).toBe('function');
+      expect(deleteEvent.target.files.item(0)).toBe(null);
+    });
+  });
 });

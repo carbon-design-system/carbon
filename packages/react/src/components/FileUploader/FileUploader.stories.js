@@ -7,7 +7,7 @@
 
 /* eslint-disable no-console */
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import ExampleDropContainerApp from './stories/drop-container';
 import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';
 import mdx from './FileUploader.mdx';
@@ -220,4 +220,22 @@ Default.argTypes = {
   role: {
     table: { disable: true },
   },
+};
+export const Test = () => {
+  return (
+    <FileUploader
+      filenameStatus="edit"
+      multiple
+      buttonLabel="Select files"
+      onChange={(evt) => {
+        console.log('onChange files: ', evt.target.files); // Now shows ALL current files
+        console.log('onChange length: ', evt.target.files?.length);
+      }}
+      onDelete={(evt) => {
+        console.log('onDelete files: ', evt.target.files); // Now shows remaining files
+        console.log('onDelete length: ', evt.target.files?.length);
+        console.log('Deleted file available on event: ', evt.deletedFile); // Bonus!
+      }}
+    />
+  );
 };
