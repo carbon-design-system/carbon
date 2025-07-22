@@ -206,12 +206,63 @@ export const Default = (args) => {
         itemToString={(item) => (item ? item.text : '')}
         {...args}
       />
-      <Dropdown id="default-2" />
     </div>
   );
 };
 
 Default.args = {
+  ...sharedArgs,
+};
+
+// Test story, remove before merging
+export const Test19971 = (args) => {
+  const items = [
+    {
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+    {
+      text: 'Option 1',
+    },
+    {
+      text: 'Option 2',
+    },
+    {
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      text: 'Option 4',
+    },
+    {
+      text: 'Option 5',
+    },
+    {
+      text: 'Option 6',
+    },
+    {
+      text: 'Option 7',
+    },
+    {
+      text: 'Option 8',
+    },
+  ];
+
+  return (
+    <div style={{ width: 400 }}>
+      <Dropdown
+        id="test-1"
+        titleText="Dropdown label"
+        helperText="This is some helper text"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...args}
+      />
+      <Dropdown id="test-2" items={items} />
+    </div>
+  );
+};
+Test19971.args = {
   ...sharedArgs,
 };
 
