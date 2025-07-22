@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/ai-label/index.js';
 
 describe('cds-ai-label', function () {

@@ -14,7 +14,6 @@ import styles from './ai-label.scss?lit';
 import Undo16 from '@carbon/icons/lib/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import events from 'storybook/internal/core-events';
 
 /**
  * Basic AI Label.
