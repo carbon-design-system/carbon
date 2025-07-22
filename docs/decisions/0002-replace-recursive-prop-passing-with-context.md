@@ -8,10 +8,10 @@ Accepted
 
 ## Context
 
-The TreeView and TreeNode components in Carbon Design System share props that
-need to be passed from parent to child. Previously, we implemented a recursive
-function that would traverse the component tree to locate TreeNode instances
-(including those wrapped in other components) and pass props down to them.
+The TreeView and TreeNode components share props that need to be passed from
+parent to child. Previously, we implemented a recursive function that would
+traverse the component tree to locate TreeNode instances (including those
+wrapped in other components) and pass props down to them.
 
 This approach had several significant drawbacks:
 
