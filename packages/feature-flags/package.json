@@ -3,8 +3,7 @@
   "description": "Build with feature flags in Carbon",
   "version": "0.28.0",
   "license": "Apache-2.0",
-  "type": "module",
-  "main": "es/index.js",
+  "main": "lib/index.js",
   "module": "es/index.js",
   "sass": "index.scss",
   "repository": {
