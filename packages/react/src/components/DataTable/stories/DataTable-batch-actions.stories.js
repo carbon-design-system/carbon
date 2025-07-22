@@ -62,7 +62,7 @@ export default {
 };
 
 export const Default = (args) => (
-  <DataTable rows={rows} headers={headers} {...args} size="sm">
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
