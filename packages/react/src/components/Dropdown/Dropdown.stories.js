@@ -258,7 +258,7 @@ export const Test19971 = (args) => {
         itemToString={(item) => (item ? item.text : '')}
         {...args}
       />
-      <Dropdown id="test-2" items={items} />
+      <Dropdown titleText="test title " id="test-2" items={items} />
     </div>
   );
 };

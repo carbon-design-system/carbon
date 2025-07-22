@@ -143,7 +143,7 @@ export const Test19971 = (args) => {
   return (
     <div style={{ width: args.defaultWidth }}>
       <TextInput {...args} id="text-input-1" type="text" />
-      <TextInput id="text-input-2" type="text" />
+      <TextInput labelText="test label" id="text-input-2" type="text" />
     </div>
   );
 };
