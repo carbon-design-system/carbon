@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createContext, type SyntheticEvent, type MouseEvent } from 'react';
+import { createContext } from 'react';
 import type { TreeNodeProps } from './TreeNode';
 
 interface TreeContextProps {
   active?: string | number;
   multiselect?: boolean;
   onActivate?: (nodeId?: string | number) => void;
-  onTreeSelect?: (event: MouseEvent, node?: Partial<TreeNodeProps>) => void;
+  onTreeSelect?: TreeNodeProps['onTreeSelect'];
   selected?: Array<string | number>;
   size?: 'xs' | 'sm';
 }
