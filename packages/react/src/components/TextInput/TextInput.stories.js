@@ -126,7 +126,7 @@ export const Default = (args) => {
           id="text-input-2"
           type="text"
         />
-        <TextInput labelText="labelText" id="text-input-2" type="text" />
+        <TextInput labelText="labelText" id="text-input-3" type="text" />
       </div>
     </div>
   );
