@@ -28,7 +28,6 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { ToggletipButton } from '../Toggletip';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -450,7 +449,8 @@ export const Popover: PopoverComponent & {
           // positioning.
           if (
             (enableFloatingStyles && item?.type !== PopoverContent) ||
-            (enableFloatingStyles && item?.type === ToggletipButton)
+            (enableFloatingStyles &&
+              item?.type['displayName'] === 'ToggletipButton')
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);

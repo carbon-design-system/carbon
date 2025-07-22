@@ -202,9 +202,8 @@ export function Toggletip<E extends ElementType = 'span'>({
 // Get all the properties from Popover except for "open".
 // The Typescript types for PropTypes are really messed up so we need lots of
 // casting.  It will be great when we can finally get rid of PropTypes altogether.
-const { open, ...popoverNonOpenPropTypes } = Popover.propTypes as unknown as {
-  open: boolean;
-};
+const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
+  {}) as unknown as PopoverBaseProps;
 
 Toggletip.propTypes = {
   // Has all of Popover's PropTypes except for "open".
