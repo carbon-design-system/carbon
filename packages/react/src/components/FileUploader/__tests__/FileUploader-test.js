@@ -1,16 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, act, screen } from '@testing-library/react';
+import { Download, TrashCan } from '@carbon/icons-react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import FileUploader from '../';
 import React from 'react';
-import { uploadFiles } from '../test-helpers';
+import FileUploader from '../';
+import { IconButton } from '../../IconButton';
+import Link from '../../Link';
 
 const iconDescription = 'test description';
 const requiredProps = {
@@ -21,6 +23,11 @@ const requiredProps = {
 };
 
 describe('FileUploader', () => {
+  it('should have no aXe violations', async () => {
+    const { container } = render(<FileUploader />);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
   it('should support a custom class name on the root element', () => {
     const { container } = render(
       <FileUploader {...requiredProps} className="test" />
@@ -81,6 +88,7 @@ describe('FileUploader', () => {
     const complete = screen.getByLabelText(iconDescription);
     expect(edit).not.toEqual(complete);
   });
+
   it('should disable file input when `disabled` prop is true', () => {
     const { container } = render(
       <FileUploader {...requiredProps} disabled buttonLabel="disabled upload" />
@@ -88,6 +96,7 @@ describe('FileUploader', () => {
     const input = container.querySelector('input');
     expect(input).toBeDisabled();
   });
+
   it('should render with different button kinds', () => {
     const buttonKinds = ['primary', 'secondary', 'danger', 'ghost'];
     buttonKinds.forEach((kind) => {
@@ -98,6 +107,7 @@ describe('FileUploader', () => {
       expect(button).toHaveClass(`cds--btn--${kind}`);
     });
   });
+
   it('should trigger `onDelete` when a file is removed', async () => {
     const onDelete = jest.fn();
     const { container } = render(
@@ -121,6 +131,7 @@ describe('FileUploader', () => {
 
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
+
   it('should trigger `onChange` when files are selected', async () => {
     const onChange = jest.fn();
     const { container } = render(
@@ -133,5 +144,42 @@ describe('FileUploader', () => {
     await userEvent.upload(input, file);
 
     expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render custom file name and actions when provided via `renderFileName` and `renderFileActions`', async () => {
+    const renderFileActions = () => (
+      <>
+        <IconButton autoAlign="true" kind="ghost" size="sm" label="Download">
+          <Download data-testid="Node 1" />
+        </IconButton>
+        <IconButton autoAlign="true" kind="ghost" size="sm" label="Remove">
+          <TrashCan data-testid="Node 2" />
+        </IconButton>
+      </>
+    );
+
+    const renderFileName = (name) => (
+      <Link data-testid="Node 3" title={name} href="#">
+        {JSON.stringify(name)}
+      </Link>
+    );
+
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        renderFileName={renderFileName}
+        renderFileActions={renderFileActions}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const filename = 'test.png';
+    const file = new File(['test'], filename, { type: 'image/png' });
+
+    await userEvent.upload(input, file);
+
+    expect(screen.getByTestId('Node 1')).toBeInTheDocument();
+    expect(screen.getByTestId('Node 2')).toBeInTheDocument();
+    expect(screen.getByTestId('Node 3')).toBeInTheDocument();
   });
 });

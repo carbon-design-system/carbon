@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Close, WarningFilled, CheckmarkFilled } from '@carbon/icons-react';
+import { WarningFilled, CheckmarkFilled } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import React, { type HTMLAttributes } from 'react';
 import Loading from '../Loading';
@@ -33,27 +33,15 @@ export interface FilenameProps
   invalid?: boolean;
 
   /**
-   * Name of the uploaded file
-   */
-  name?: string;
-
-  /**
    * Status of the file upload
    */
   status?: FilenameStatus;
-
-  /**
-   * Provide a custom tabIndex value for the `<Filename>`
-   */
-  tabIndex?: number;
 }
 
 function Filename({
   iconDescription = 'Uploading file',
   status = 'uploading',
   invalid,
-  name,
-  tabIndex = 0,
   ['aria-describedby']: ariaDescribedBy,
   ...rest
 }: FilenameProps) {
@@ -72,15 +60,6 @@ function Filename({
       return (
         <>
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
-          <button
-            aria-label={`${iconDescription} - ${name}`}
-            className={`${prefix}--file-close`}
-            type="button"
-            tabIndex={tabIndex}
-            {...rest}
-            aria-describedby={invalid ? ariaDescribedBy : undefined}>
-            <Close />
-          </button>
         </>
       );
     case 'complete':
@@ -115,19 +94,9 @@ Filename.propTypes = {
   invalid: PropTypes.bool,
 
   /**
-   * Name of the uploaded file
-   */
-  name: PropTypes.string,
-
-  /**
    * Status of the file upload
    */
   status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
-
-  /**
-   * Provide a custom tabIndex value for the `<Filename>`
-   */
-  tabIndex: PropTypes.number,
 };
 
 export default Filename;
