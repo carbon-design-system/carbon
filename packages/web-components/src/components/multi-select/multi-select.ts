@@ -414,8 +414,6 @@ class CDSMultiSelect extends CDSDropdown {
     this.requestUpdate();
 
     if (this.selectAll) {
-      this._computeSelectAllState();
-
       const selectAllItem = this.querySelector(
         `${prefix}-multi-select-item[is-select-all]`
       ) as CDSMultiSelectItem;
@@ -430,6 +428,7 @@ class CDSMultiSelect extends CDSDropdown {
           selectAllItem.setAttribute('filtered', '');
         } else {
           selectAllItem.removeAttribute('filtered');
+          this._computeSelectAllState();
         }
       }
     }
