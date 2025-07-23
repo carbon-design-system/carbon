@@ -7984,7 +7984,7 @@ Map {
       "isFlush": Object {
         "type": "bool",
       },
-      "selectedInitialRowId": Object {
+      "selectedInitialRow": Object {
         "type": "string",
       },
       "selection": Object {

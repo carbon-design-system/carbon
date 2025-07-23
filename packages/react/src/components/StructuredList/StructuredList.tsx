@@ -66,7 +66,7 @@ export interface StructuredListWrapperProps extends DivAttrs {
   /**
    * Specify which row will be selected initially
    */
-  selectedInitialRowId?: string;
+  selectedInitialRow?: string;
 }
 export function StructuredListWrapper(props: StructuredListWrapperProps) {
   const {
@@ -78,7 +78,7 @@ export function StructuredListWrapper(props: StructuredListWrapperProps) {
     ariaLabel: deprecatedAriaLabel,
     isCondensed,
     isFlush,
-    selectedInitialRowId,
+    selectedInitialRow,
     ...other
   } = props;
 
@@ -93,7 +93,7 @@ export function StructuredListWrapper(props: StructuredListWrapperProps) {
     className
   );
   const [selectedRow, setSelectedRow] = React.useState<GridSelectedRowState>(
-    selectedInitialRowId ?? null
+    selectedInitialRow ?? null
   );
 
   return (
@@ -153,7 +153,7 @@ StructuredListWrapper.propTypes = {
   /**
    * Specify which row will be selected initially
    */
-  selectedInitialRowId: PropTypes.string,
+  selectedInitialRow: PropTypes.string,
 };
 
 export interface StructuredListHeadProps extends DivAttrs {

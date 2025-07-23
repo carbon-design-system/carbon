@@ -151,7 +151,7 @@ export const Selection = (args) => {
 
 export const InitialSelection = (args) => {
   return (
-    <StructuredListWrapper selection {...args} selectedInitialRowId="row-2">
+    <StructuredListWrapper selection {...args} selectedInitialRow="row-2">
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>

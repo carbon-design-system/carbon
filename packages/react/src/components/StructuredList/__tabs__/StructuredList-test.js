@@ -130,7 +130,7 @@ const renderInitialSelectionVariant = ({ ...rest } = {}) => {
     <StructuredListWrapper
       selection
       {...wrapperProps}
-      selectedInitialRowId="row-1">
+      selectedInitialRow="row-1">
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>
