@@ -341,6 +341,28 @@ export const Filterable = {
   },
 };
 
+export const FilterableWithSelectAll = {
+  decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
+  render: () => {
+    return html`
+      <cds-multi-select
+        filterable="true"
+        title-text="FilterableMultiselect title"
+        helper-text="This is helper text"
+        select-all>
+        <cds-multi-select-item is-select-all>All roles</cds-multi-select-item>
+
+        <cds-multi-select-item value="editor">Editor</cds-multi-select-item>
+        <cds-multi-select-item value="owner">Owner</cds-multi-select-item>
+        <cds-multi-select-item disabled value="staging"
+          >Reader - a disabled itme</cds-multi-select-item
+        >
+        <cds-multi-select-item value="uploader">Uploader</cds-multi-select-item>
+      </cds-multi-select>
+    `;
+  },
+};
+
 export const FilterableWithAILabel = {
   render: () => {
     return html`
