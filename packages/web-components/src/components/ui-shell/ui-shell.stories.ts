@@ -1054,6 +1054,39 @@ export const SideNavWLargeSideNavItems = {
   },
 };
 
+export const TestHeaderPanelWithDropdown = {
+  name: 'Test Header Panel w/ Dropdown (test close on click)',
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-header aria-label="IBM Platform Name">
+      <cds-header-name href="javascript:void(0)" prefix="IBM">
+        [Platform]
+      </cds-header-name>
+      <div class="${prefix}--header__global">
+        <cds-header-global-action
+          panel-id="dropdown-panel"
+          aria-label="Notifications"
+          tooltip-text="Notifications">
+          ${Notification20({ slot: 'icon' })}
+        </cds-header-global-action>
+      </div>
+      <cds-header-panel id="dropdown-panel" aria-label="Dropdown Panel">
+        <div style="padding: 1rem;">
+          <h4 style="margin-bottom: 0.5rem;">Choose a theme</h4>
+          <cds-dropdown label="Select theme" value="light">
+            <cds-dropdown-item value="light">Light</cds-dropdown-item>
+            <cds-dropdown-item value="dark">Dark</cds-dropdown-item>
+            <cds-dropdown-item value="cool">Cool</cds-dropdown-item>
+          </cds-dropdown>
+        </div>
+      </cds-header-panel>
+    </cds-header>
+    ${StoryContent({ useResponsiveOffset: true })}
+  `,
+};
+
 export default {
   title: 'Components/UI Shell',
 };

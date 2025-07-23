@@ -70,9 +70,13 @@ class CDSHeaderGlobalAction extends CDSButton {
 
   private _handleDocumentClick = (event: MouseEvent) => {
     const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
-    const target = event.composedPath()[0] as HTMLElement;
+    const path = event.composedPath();
+    const clickedInside = path.some(
+      (el) =>
+        el instanceof HTMLElement && (panel?.contains(el) || this.contains(el))
+    );
 
-    if (panel && !this.contains(target) && !panel.contains(target)) {
+    if (panel && !clickedInside) {
       panel.removeAttribute('expanded');
       this.active = false;
     }
