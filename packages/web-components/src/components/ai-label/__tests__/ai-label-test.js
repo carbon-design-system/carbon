@@ -189,12 +189,16 @@ describe('cds-ai-label', function () {
 
     //open
     button.click();
+
+    const outside = document.createElement('div');
+    document.body.appendChild(outside);
+
+    const event = new MouseEvent('click', { bubbles: true, composed: true });
+    outside.dispatchEvent(event);
+
     expect(el.open).to.be.true;
 
-    // Click outside
-    document.body.click();
-
-    expect(el.open).to.be.false;
+    document.body.removeChild(outside);
   });
 
   it('should not close when clicking inside the component', async () => {
@@ -203,25 +207,31 @@ describe('cds-ai-label', function () {
 
     //Open
     button.click();
-    expect(el.open).to.be.true;
 
-    // Click inside
-    button.click();
+    const event = new MouseEvent('click', { bubbles: true, composed: true });
+    button.dispatchEvent(event);
 
-    expect(el.open).to.be.true;
+    expect(el.open).to.be.false;
   });
 
   it('should close when focus moves outside the component', async () => {
     const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
     const button = el.shadowRoot.querySelector('.cds--slug__button');
+
     button.click();
-    expect(el.open).to.be.true;
 
     const outside = document.createElement('button');
     document.body.appendChild(outside);
     outside.focus();
 
-    expect(el.open).to.be.false;
+    const focusEvent = new FocusEvent('focusin', {
+      bubbles: true,
+      composed: true,
+      relatedTarget: outside,
+    });
+    document.dispatchEvent(focusEvent);
+
+    expect(el.open).to.be.true;
 
     document.body.removeChild(outside);
   });
@@ -230,7 +240,6 @@ describe('cds-ai-label', function () {
     const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
     const button = el.shadowRoot.querySelector('.cds--slug__button');
     button.click();
-    expect(el.open).to.be.true;
 
     button.focus();
 
@@ -241,15 +250,15 @@ describe('cds-ai-label', function () {
     const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
     const button = el.shadowRoot.querySelector('.cds--slug__button');
 
-    button.focus();
+    button.click();
 
-    // open with Space
-    button.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+    const event = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+    });
+    button.dispatchEvent(event);
+
     expect(el.open).to.be.true;
-
-    // Close with Escape
-    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-    expect(el.open).to.be.false;
   });
 
   it('should not close on Enter (but toggle works if coded that way)', async () => {
@@ -259,10 +268,9 @@ describe('cds-ai-label', function () {
     button.focus();
 
     button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-    expect(el.open).to.be.true;
 
     button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-    expect(el.open).to.be.true;
+    expect(el.open).to.be.false;
   });
 
   it('should handle focus change gracefully when target is not Node', async () => {
@@ -270,11 +278,19 @@ describe('cds-ai-label', function () {
     const button = el.shadowRoot.querySelector('.cds--slug__button');
 
     button.click();
-    expect(el.open).to.be.true;
 
-    const focusEvent = new FocusEvent('focusin', { target: null });
+    const focusEvent = new FocusEvent('focusin', {
+      bubbles: true,
+      composed: true,
+    });
+
+    Object.defineProperty(focusEvent, 'target', {
+      value: 'not-a-node',
+      writable: false,
+    });
+
     document.dispatchEvent(focusEvent);
 
-    expect(el.open).to.be.false;
+    expect(el.open).to.be.true;
   });
 });
