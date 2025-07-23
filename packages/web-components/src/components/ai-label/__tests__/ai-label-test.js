@@ -35,6 +35,17 @@ describe('cds-ai-label', function () {
     expect(textSpan.textContent).to.equal('IA');
   });
 
+  it('should update the AI label text when ai-text attribute changes', async () => {
+    const el = await fixture(
+      html`<cds-ai-label ai-text="Initial"></cds-ai-label>`
+    );
+    const textSpan = el.shadowRoot.querySelector('.cds--slug__text');
+    expect(textSpan.textContent).to.equal('Initial');
+    el.setAttribute('ai-text', 'Updated');
+    await el.updateComplete; // wait for  to re-render
+    expect(textSpan.textContent).to.equal('Updated');
+  });
+
   it('should render ai-text-label if kind is inline', async () => {
     const el = await fixture(
       html`<cds-ai-label
@@ -338,133 +349,6 @@ describe('Focus and click handling', () => {
     document.dispatchEvent(focusEvent);
 
     // Should handle gracefully without errors
-    expect(el.open).to.be.false;
-  });
-});
-
-describe('Focus and click handling', () => {
-  it('should close when clicking outside the component', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    button.click();
-    expect(el.open).to.be.true;
-
-    document.body.click();
-    expect(el.open).to.be.false;
-  });
-
-  it('should close when focus moves away from the component', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    button.click();
-    expect(el.open).to.be.true;
-
-    const otherElement = document.createElement('button');
-    document.body.appendChild(otherElement);
-    otherElement.focus();
-
-    expect(el.open).to.be.false;
-
-    document.body.removeChild(otherElement);
-  });
-
-  it('should not close when clicking inside the component', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    button.click();
-    expect(el.open).to.be.true;
-
-    button.click();
-
-    expect(el.open).to.be.false;
-  });
-
-  it('should not close when focus moves to an element inside the component', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    button.click();
-    expect(el.open).to.be.true;
-
-    button.focus();
-
-    expect(el.open).to.be.true;
-  });
-
-  it('should handle keyboard navigation properly', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-
-    button.focus();
-
-    button.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
-    expect(el.open).to.be.true;
-
-    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-    expect(el.open).to.be.false;
-  });
-
-  it('should handle Enter key to toggle', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-
-    button.focus();
-
-    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-    expect(el.open).to.be.true;
-
-    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-    expect(el.open).to.be.false;
-  });
-
-  it('should blur active element when clicked', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-
-    button.focus();
-    expect(document.activeElement).to.equal(button);
-
-    button.click();
-
-    expect(document.activeElement).to.not.equal(button);
-  });
-
-  it('should handle revert active state properly', async () => {
-    const el = await fixture(html`<cds-ai-label revert-active></cds-ai-label>`);
-    const iconButton = el.shadowRoot.querySelector('cds-icon-button');
-
-    iconButton.click();
-
-    expect(el.hasAttribute('revert-active')).to.be.false;
-    expect(el.revertActive).to.be.false;
-  });
-
-  it('should handle focus change with null target gracefully', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    button.click();
-    expect(el.open).to.be.true;
-
-    const focusEvent = new FocusEvent('focusin', { target: null });
-    document.dispatchEvent(focusEvent);
-
-    expect(el.open).to.be.false;
-  });
-
-  it('should handle focus change with non-Node target gracefully', async () => {
-    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
-
-    const button = el.shadowRoot.querySelector('.cds--slug__button');
-    button.click();
-    expect(el.open).to.be.true;
-
-    const focusEvent = new FocusEvent('focusin', { target: 'string' });
-    document.dispatchEvent(focusEvent);
-
     expect(el.open).to.be.false;
   });
 });
