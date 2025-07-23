@@ -100,20 +100,23 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-button) {
+  .#{$prefix}--btn--icon-only {
+    align-items: center;
+    padding-block-start: 0;
+
+    &.#{$prefix}--btn--selected,
+    &.#{$prefix}--btn--expressive {
+      padding: $spacing-03;
+    }
+  }
+}
+
 :host(#{$prefix}-button[kind='ghost']) {
   .#{$prefix}--btn--ghost {
     &:hover,
     &:active {
       outline: none;
-    }
-
-    &.#{$prefix}--btn--icon-only {
-      padding-block-start: 0;
-
-      &.#{$prefix}--btn--selected,
-      &.#{$prefix}--btn--expressive {
-        padding: $spacing-03;
-      }
     }
 
     &:not(:focus) {
