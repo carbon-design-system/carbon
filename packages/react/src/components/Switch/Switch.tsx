@@ -101,6 +101,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(function Switch(
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    // TODO: `which` was deprecated years ago. When can its usage be deleted?
     const key = event.key || event.which;
 
     onKeyDown?.({ index, name, text, key });

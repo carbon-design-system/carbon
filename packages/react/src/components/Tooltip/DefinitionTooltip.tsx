@@ -25,14 +25,16 @@ export interface DefinitionTooltipProps
   align?: PopoverAlignment;
 
   /**
-   * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
+   * Will auto-align Definition Tooltip. This prop is currently experimental
+   * and is subject to future changes. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
   /**
    * The `children` prop will be used as the value that is being defined
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 
   /**
    * Specify an optional className to be applied to the container node
@@ -175,7 +177,9 @@ DefinitionTooltip.propTypes = {
   ]),
 
   /**
-   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover. This prop is currently experimental and is
+   * subject to future changes. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
