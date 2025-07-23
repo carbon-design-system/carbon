@@ -23,6 +23,7 @@ import '../button';
 import '../toggle-tip';
 import '../icon-button';
 import '../../../.storybook/templates/with-layer';
+import '../link';
 
 const content = html`
   <div slot="body-text">
@@ -613,7 +614,7 @@ export const WithToggletipLabel = {
                 sed do eiusmod tempor incididunt ut fsil labore et dolore magna
                 aliqua.
               </p>
-              <cds-link slot="actions">Test</cds-link>
+              <cds-link href="#" slot="actions">Test</cds-link>
               <cds-button slot="actions">Button</cds-button>
             </cds-toggletip>
           </span>
