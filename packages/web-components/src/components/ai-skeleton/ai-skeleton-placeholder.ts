@@ -20,6 +20,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 class CDSAISkeletonPlaceholder extends LitElement {
   render() {
     return html`<cds-skeleton-placeholder
+      exportparts="placeholder:skeleton-placeholder"
       optional-classes="${prefix}--skeleton__placeholder--ai"></cds-skeleton-placeholder>`;
   }
 
