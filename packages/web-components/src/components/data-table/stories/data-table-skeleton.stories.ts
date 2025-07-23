@@ -55,11 +55,6 @@ const controls = {
 };
 
 export const Default = {
-  render: () =>
-    html` <cds-table-skeleton .headers=${headers}> </cds-table-skeleton>`,
-};
-
-export const Playground = {
   args: defaultArgs,
   argTypes: controls,
   render: ({ columnCount, rowCount, showHeader, showToolbar, zebra }) => html`
