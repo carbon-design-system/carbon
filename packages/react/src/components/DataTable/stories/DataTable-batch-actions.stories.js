@@ -136,11 +136,7 @@ export const Default = (args) => (
           <Table {...getTableProps()} aria-label="sample table">
             <TableHead>
               <TableRow>
-                {args.radio ? (
-                  <th scope="col" />
-                ) : (
-                  <TableSelectAll {...getSelectionProps()} />
-                )}
+                <TableSelectAll {...getSelectionProps()} />
                 {headers.map((header, i) => (
                   <TableHeader key={i} {...getHeaderProps({ header })}>
                     {header.header}
@@ -168,7 +164,44 @@ export const Default = (args) => (
   </DataTable>
 );
 
+Default.args = {
+  isSortable: false,
+  locale: 'en',
+  overflowMenuOnHover: true,
+  size: 'lg',
+  stickyHeader: false,
+  useStaticWidth: false,
+  useZebraStyles: false,
+};
+
 Default.argTypes = {
+  locale: {
+    control: 'text',
+    description: 'Provide a string for the current locale',
+  },
+  overflowMenuOnHover: {
+    control: 'boolean',
+    description:
+      'Specify whether the overflow menu (if it exists) should be shown always, or only on hover',
+  },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of table',
+  },
+  stickyHeader: {
+    control: 'boolean',
+    description:
+      'Specify whether the header should be sticky. Still experimental: may not work with every combination of table props',
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'If true, will use a width of "auto" instead of 100%',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to rows',
+  },
   filterRows: {
     table: {
       disable: true,
@@ -179,22 +212,17 @@ Default.argTypes = {
       disable: true,
     },
   },
-  overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
-  },
   rows: {
     table: {
       disable: true,
     },
   },
-  translateWithId: {
+  sortRow: {
     table: {
       disable: true,
     },
   },
-  sortRow: {
+  translateWithId: {
     table: {
       disable: true,
     },

@@ -41,6 +41,24 @@ export default {
 };
 
 const sharedArgTypes = {
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of table',
+  },
+  stickyHeader: {
+    control: 'boolean',
+    description:
+      'Specify whether the header should be sticky. Still experimental: may not work with every combination of table props',
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'If true, will use a width of "auto" instead of 100%',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to rows',
+  },
   filterRows: {
     table: {
       disable: true,
@@ -52,11 +70,6 @@ const sharedArgTypes = {
     },
   },
   isSortable: {
-    table: {
-      disable: true,
-    },
-  },
-  overflowMenuOnHover: {
     table: {
       disable: true,
     },
@@ -81,6 +94,13 @@ const sharedArgTypes = {
       disable: true,
     },
   },
+};
+
+const sharedArgs = {
+  size: 'lg',
+  stickyHeader: false,
+  useStaticWidth: false,
+  useZebraStyles: false,
 };
 
 export const Default = (args) => {
@@ -170,9 +190,8 @@ export const Default = (args) => {
   );
 };
 
-Default.argTypes = {
-  ...sharedArgTypes,
-};
+Default.args = sharedArgs;
+Default.argTypes = sharedArgTypes;
 
 export const XLWithTwoLines = (args) => {
   const rows = [
@@ -271,7 +290,7 @@ export const XLWithTwoLines = (args) => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table size="xl" useZebraStyles={false} aria-label="sample table" {...args}>
+    <Table {...args} aria-label="sample table">
       <TableHead>
         <TableRow>
           {headers.map((header) => (
@@ -296,6 +315,8 @@ export const XLWithTwoLines = (args) => {
   );
 };
 
-XLWithTwoLines.argTypes = {
-  ...sharedArgTypes,
+XLWithTwoLines.args = {
+  ...sharedArgs,
+  size: 'xl',
 };
+XLWithTwoLines.argTypes = sharedArgTypes;
