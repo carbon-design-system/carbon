@@ -755,6 +755,9 @@ class CDSTable extends HostListenerMixin(LitElement) {
           (elem as CDSTableRow).radio = this.radio;
         }
       );
+      if (this._tableHeaderRow) {
+        this._tableHeaderRow.hideCheckbox = this.radio;
+      }
     }
 
     if (changedProperties.has('size')) {
