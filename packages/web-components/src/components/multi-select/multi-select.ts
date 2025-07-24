@@ -755,7 +755,7 @@ class CDSMultiSelect extends CDSDropdown {
       )
     ) as CDSMultiSelectItem[];
     const selectAllItem = allItems.find((i) => i.isSelectAll);
-    if (!selectAllItem) {
+    if (!selectAllItem || selectAllItem.hasAttribute('filtered')) {
       return;
     }
 
