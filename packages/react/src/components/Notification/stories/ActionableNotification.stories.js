@@ -30,7 +30,9 @@ export default {
   },
 };
 
-export const Default = (args) => <ActionableNotification {...args} />;
+export const Default = (args) => (
+  <ActionableNotification {...args}></ActionableNotification>
+);
 
 Default.argTypes = {
   ['aria-label']: {

@@ -827,6 +827,11 @@ export interface ActionableNotificationProps
   'aria-label'?: string;
 
   /**
+   * Specify the caption
+   */
+  caption?: string;
+
+  /**
    * Specify the content
    */
   children?: ReactNode;
@@ -918,6 +923,7 @@ export function ActionableNotification({
   ['aria-label']: ariaLabel,
   // @ts-expect-error: deprecated prop
   ariaLabel: deprecatedAriaLabel,
+  caption,
   children,
   role = 'alertdialog',
   onActionButtonClick,
@@ -1060,6 +1066,13 @@ export function ActionableNotification({
                 {subtitle}
               </Text>
             )}
+            {caption && (
+              <Text
+                as="div"
+                className={`${prefix}--actionable-notification__caption`}>
+                {caption}
+              </Text>
+            )}
             {children}
           </div>
         </div>
@@ -1115,6 +1128,11 @@ ActionableNotification.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+
+  /**
+   * Specify the caption
+   */
+  caption: PropTypes.string,
 
   /**
    * Specify the content
