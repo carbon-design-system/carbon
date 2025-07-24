@@ -20,8 +20,7 @@ like `deletedFile`, `addedFiles`, and `currentFiles` on `event.target`.
   <FileUploader
     multiple
     filenameStatus="edit"
-    // Use your callbacks here to see the enhanced data in the console
-    onChange={(evt) => console.log('onChange :', evt.target.action, evt.target.currentFiles)}
-    onDelete={(evt) => console.log('onDelete :', evt.target.deletedFile)}
+    onChange={(evt) => console.log('onChange', evt.target.action, evt.target.currentFiles)}
+    onDelete={(evt) => console.log('onDelete', evt.target.deletedFile)}
   />
 </FeatureFlags>

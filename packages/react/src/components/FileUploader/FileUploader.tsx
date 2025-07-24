@@ -188,7 +188,11 @@ const FileUploader = React.forwardRef(
 
     const createFileItem = (file: File): FileItem => ({
       name: file.name,
-      uuid: `${fileUploaderInstanceId}-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      uuid: `${fileUploaderInstanceId}-${Date.now()}-${Array.from(
+        crypto.getRandomValues(new Uint8Array(8))
+      )
+        .map((b) => b.toString(36))
+        .join('')}`,
       file,
     });
 
