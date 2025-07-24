@@ -743,12 +743,6 @@
     }
   }
 
-  .#{$prefix}--tab-content--interactive {
-    &:focus {
-      outline: none;
-    }
-  }
-
   //-----------------------------
   // Skeleton state
   //-----------------------------
