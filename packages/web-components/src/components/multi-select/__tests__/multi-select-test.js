@@ -1669,6 +1669,10 @@ describe('cds-multi-select', function () {
         'cds-multi-select-item[is-select-all]'
       );
 
+      // no items are selected
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+
       // filter to “foo”
       input.value = 'foo';
       input.dispatchEvent(new Event('input', { bubbles: true }));
