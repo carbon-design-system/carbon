@@ -152,6 +152,7 @@ class CDSOperationalTag extends HostListenerMixin(FocusMixin(LitElement)) {
           closeOnActivation
           leave-delay-ms=${0}>
           <cds-tag
+            part="tag"
             ?aria-pressed="${selected}"
             size="${size}"
             ?disabled="${disabled}"
@@ -166,6 +167,7 @@ class CDSOperationalTag extends HostListenerMixin(FocusMixin(LitElement)) {
         </cds-tooltip>`
       : html`
           <cds-tag
+            part="tag"
             ?aria-pressed="${selected}"
             size="${size}"
             ?disabled="${disabled}"
