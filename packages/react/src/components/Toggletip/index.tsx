@@ -17,7 +17,12 @@ import React, {
   type KeyboardEventHandler,
   type FocusEventHandler,
 } from 'react';
-import { Popover, type PopoverAlignment, PopoverContent } from '../Popover';
+import {
+  Popover,
+  type PopoverAlignment,
+  PopoverBaseProps,
+  PopoverContent,
+} from '../Popover';
 import { match, keys } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useId } from '../../internal/useId';
@@ -85,12 +90,7 @@ function useToggletip() {
   return useContext(ToggletipContext);
 }
 
-export interface ToggletipBaseProps {
-  align?: PopoverAlignment;
-  alignmentAxisOffset?: number;
-  autoAlign?: boolean;
-  className?: string;
-  children?: ReactNode;
+export interface ToggletipBaseProps extends Omit<PopoverBaseProps, 'open'> {
   defaultOpen?: boolean;
 }
 
@@ -199,67 +199,15 @@ export function Toggletip<E extends ElementType = 'span'>({
   );
 }
 
+// Get all the properties from Popover except for "open".
+// The Typescript types for PropTypes are really messed up so we need lots of
+// casting.  It will be great when we can finally get rid of PropTypes altogether.
+const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
+  {}) as unknown as PopoverBaseProps;
+
 Toggletip.propTypes = {
-  /**
-   * Specify how the toggletip should align with the button
-   */
-  align: PropTypes.oneOf([
-    'top',
-    'top-left', // deprecated use top-start instead
-    'top-right', // deprecated use top-end instead
-
-    'bottom',
-    'bottom-left', // deprecated use bottom-start instead
-    'bottom-right', // deprecated use bottom-end instead
-
-    'left',
-    'left-bottom', // deprecated use left-end instead
-    'left-top', // deprecated use left-start instead
-
-    'right',
-    'right-bottom', // deprecated use right-end instead
-    'right-top', // deprecated use right-start instead
-
-    // new values to match floating-ui
-    'top-start',
-    'top-end',
-    'bottom-start',
-    'bottom-end',
-    'left-end',
-    'left-start',
-    'right-end',
-    'right-start',
-  ]),
-
-  /**
-   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
-   */
-  alignmentAxisOffset: PropTypes.number,
-
-  /**
-   * Provide a custom element or component to render the top-level node for the
-   * component.
-   */
-  as: PropTypes.elementType,
-
-  /**
-   * Will auto-align the popover on first render if it is not visible. This prop
-   * is currently experimental and is subject to future changes. Requires
-   * React v17+
-   * @see https://github.com/carbon-design-system/carbon/issues/18714
-   */
-  autoAlign: PropTypes.bool,
-
-  /**
-   * Custom children to be rendered as the content of the label
-   */
-  children: PropTypes.node,
-
-  /**
-   * Provide a custom class name to be added to the outermost node in the
-   * component
-   */
-  className: PropTypes.string,
+  // Has all of Popover's PropTypes except for "open".
+  ...popoverNonOpenPropTypes,
 
   /**
    * Specify if the toggletip should be open by default
