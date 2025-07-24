@@ -54,3 +54,7 @@ feature-flags:
       Enable dynamic setting of floating styles for components like Popover,
       Tooltip, etc.
     enabled: false
+  - name: enable-v12-toggle-reduced-label-spacing
+    description: >
+      Enable a reduced spacing between the toggle control and its label
+    enabled: false

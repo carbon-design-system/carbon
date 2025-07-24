@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -82,12 +82,21 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const { helperText, hideLabel, label, max, size, status, type, value } =
+      args ?? {};
     return html`
       <cds-progress-bar
-        label="Progress bar label"
-        helper-text="Optional helper text"
-        value="75">
+        max="${ifDefined(max)}"
+        ?hide-label="${hideLabel}"
+        label="${ifDefined(label)}"
+        helper-text="${ifDefined(helperText)}"
+        size="${ifDefined(size)}"
+        status="${ifDefined(status)}"
+        type="${ifDefined(type)}"
+        value="${value}">
       </cds-progress-bar>
     `;
   },
@@ -150,27 +159,6 @@ export const WithLayer = {
           value="42">
         </cds-progress-bar>
       </sb-template-layers>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const { helperText, hideLabel, label, max, size, status, type, value } =
-      args ?? {};
-    return html`
-      <cds-progress-bar
-        max="${ifDefined(max)}"
-        ?hide-label="${hideLabel}"
-        label="${ifDefined(label)}"
-        helper-text="${ifDefined(helperText)}"
-        size="${ifDefined(size)}"
-        status="${ifDefined(status)}"
-        type="${ifDefined(type)}"
-        value="${value}">
-      </cds-progress-bar>
     `;
   },
 };

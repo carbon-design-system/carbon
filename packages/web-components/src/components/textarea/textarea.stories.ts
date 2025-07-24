@@ -58,7 +58,7 @@ const args = {
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   label: 'TextArea label',
   maxCount: 500,
-  onInput: 'input',
+  onInput: (e: Event) => {},
   placeholder: '',
   readonly: false,
   rows: 4,

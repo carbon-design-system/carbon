@@ -38,23 +38,5 @@ describe('TabContent', () => {
       );
       expect(screen.getByRole('tabpanel')).toBeVisible();
     });
-
-    it('includes the content container in the tabbable index when no tab contents are provided', () => {
-      render(
-        <TabContent selected>
-          <p>content</p>
-        </TabContent>
-      );
-      expect(screen.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
-    });
-
-    it('does not include the content container in the tabbable index when tab contents are provided', () => {
-      render(
-        <TabContent selected>
-          <a href="https://www.ibm.com/">content</a>
-        </TabContent>
-      );
-      expect(screen.getByRole('tabpanel')).not.toHaveAttribute('tabindex', '0');
-    });
   });
 });

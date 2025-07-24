@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -37,16 +37,41 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   alignment = POPOVER_ALIGNMENT.TOP;
 
   /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  @property({ type: Number, attribute: 'alignment-axis-offset' })
+  alignmentAxisOffset = 0;
+
+  /**
    * Specify whether a auto align functionality should be applied
    */
   @property({ type: Boolean, reflect: true })
   autoalign = false;
 
   /**
+   * The label for the toggle button
+   */
+  @property({ attribute: 'button-label' })
+  buttonLabel = 'Show information';
+
+  /**
    * Set whether toggletip is open
    */
   @property({ type: Boolean, reflect: true })
   open = false;
+
+  /**
+   * Set whether toggletip is open by default.
+   */
+  @property({ type: Boolean, attribute: 'default-open' })
+  defaultOpen = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.defaultOpen && !this.hasAttribute('open')) {
+      this.open = true;
+    }
+  }
 
   /**
    * Handles `slotchange` event.
@@ -98,9 +123,10 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     return html`
       <button
         aria-controls="${this.id}"
+        aria-label="${this.buttonLabel}"
         class="${prefix}--toggletip-button"
         @click=${this._handleClick}>
-        ${Information16({ id: 'trigger' })}
+        <slot name="trigger">${Information16({ id: 'trigger' })}</slot>
       </button>
     `;
   };
@@ -144,7 +170,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   updated() {
-    if (this.autoalign && this.open) {
+    if (this.autoalign) {
       // auto align functionality with @floating-ui/dom library
       const button = this.shadowRoot?.querySelector(
         CDSToggletip.selectorToggletipButton
@@ -158,6 +184,9 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       );
 
       if (button && tooltip) {
+        // Ensure toggletip is visible when rendered in a large scrollable container (storybook parity)
+        button.scrollIntoView({ block: 'center', inline: 'center' });
+
         this.popoverController?.setPlacement({
           trigger: button as HTMLElement,
           target: tooltip as HTMLElement,
@@ -166,6 +195,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
           flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.alignment,
           open: this.open,
+          alignmentAxisOffset: this.alignmentAxisOffset,
         });
       }
     }
@@ -184,10 +214,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     });
     return html`
       ${this._renderToggleTipLabel()}
-      <span class="${classes}">
-        ${this._renderInnerContent()}
-      </span>
-    </span>
+      <span class="${classes}"> ${this._renderInnerContent()} </span>
     `;
   }
 

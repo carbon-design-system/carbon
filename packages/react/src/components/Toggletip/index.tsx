@@ -232,7 +232,7 @@ Toggletip.propTypes = {
   ]),
 
   /**
-   * Provide an offset value for alignment axis.
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
    */
   alignmentAxisOffset: PropTypes.number,
 
@@ -243,7 +243,10 @@ Toggletip.propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover on first render if it is not visible. This prop
+   * is currently experimental and is subject to future changes. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

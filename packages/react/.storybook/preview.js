@@ -207,7 +207,7 @@ const parameters = {
   // X-Large (1312 - 1584px)
   // Max (>1584)
   viewport: {
-    viewports: {
+    options: {
       sm: {
         name: 'Small',
         styles: {
