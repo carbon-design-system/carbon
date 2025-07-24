@@ -212,6 +212,7 @@ WithTypeOfText.args = {
 };
 WithTypeOfText.argTypes = {
   locale: { control: { type: 'text' } },
+  defaultStartValue: { control: { type: 'number' } },
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
 };
