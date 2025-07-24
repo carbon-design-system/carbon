@@ -18,7 +18,6 @@ import '../button/button';
 const noop = () => {};
 
 const args = {
-  caption: '00:00:00 AM',
   actionButtonLabel: 'Action',
   closeOnEscape: true,
   hasFocus: false,
