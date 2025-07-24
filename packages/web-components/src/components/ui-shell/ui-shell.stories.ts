@@ -17,6 +17,8 @@ import contentStyles from '@carbon/styles/scss/components/ui-shell/content/_cont
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
 import { classMap } from 'lit/directives/class-map.js';
 import './index';
+import '../dropdown/dropdown';
+import '../dropdown/dropdown-item';
 import '../skip-to-content';
 import '../modal/modal';
 import '../button/button';
