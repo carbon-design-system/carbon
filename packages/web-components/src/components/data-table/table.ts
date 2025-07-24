@@ -771,6 +771,12 @@ class CDSTable extends HostListenerMixin(LitElement) {
         }
       );
       this._tableToolbar?.setAttribute('size', this.size);
+      const batchActions = this.querySelector(
+        (this.constructor as typeof CDSTable).selectorTableBatchActions
+      );
+      if (batchActions) {
+        batchActions.setAttribute('size', this.size);
+      }
     }
 
     // TODO: Uncomment when Carbon fully implements Sticky header feature

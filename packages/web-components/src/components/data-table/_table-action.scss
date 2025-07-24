@@ -12,16 +12,23 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/search';
+@use '@carbon/styles/scss/components/data-table/data-table';
 @use '@carbon/styles/scss/components/data-table/action';
-
+@use '@carbon/styles/scss/layout' as *;
 //
 // Table toolbar
 //
 
 :host(#{$prefix}-table-toolbar) {
   @extend .#{$prefix}--table-toolbar;
+  @include emit-layout-tokens();
 
   z-index: 1;
+}
+
+:host(#{$prefix}-table-toolbar[size='xs']),
+:host(#{$prefix}-table-toolbar[size='sm']) {
+  @extend .#{$prefix}--table-toolbar--sm;
 }
 
 :host(#{$prefix}-table-toolbar-content) {
@@ -33,6 +40,21 @@
     cursor: pointer;
     inline-size: $spacing-09;
     transition: background-color $duration-fast-02 motion(entrance, productive);
+  }
+}
+
+:host(#{$prefix}-table-toolbar-content[size='xs']),
+:host(#{$prefix}-table-toolbar-content[size='sm']) {
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
+  }
+
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    inline-size: $spacing-07;
   }
 }
 
@@ -131,4 +153,98 @@
 
 :host(#{$prefix}-table-batch-actions[active]) {
   @extend .#{$prefix}--batch-actions--active;
+}
+
+:host(#{$prefix}-table-batch-actions[size='xs']),
+:host(#{$prefix}-table-batch-actions[size='sm']) {
+  block-size: $spacing-07;
+  min-block-size: $spacing-07;
+
+  .#{$prefix}--batch-summary {
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
+
+    &__para {
+      padding: 0;
+      margin: 0;
+      block-size: $spacing-07;
+      line-height: $spacing-07;
+    }
+  }
+
+  .#{$prefix}--action-list {
+    block-size: $spacing-07;
+  }
+
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel {
+    block-size: $spacing-07;
+    min-block-size: auto;
+    padding-block: 0.375rem;
+
+    &::before {
+      inset-block-start: rem(8px);
+    }
+  }
+}
+
+:host(#{$prefix}-table-batch-actions[size='md']),
+:host(#{$prefix}-table-batch-actions[size='lg']),
+:host(#{$prefix}-table-batch-actions[size='xl']) {
+  block-size: $spacing-09;
+  min-block-size: $spacing-09;
+
+  .#{$prefix}--batch-summary {
+    block-size: $spacing-09;
+    min-block-size: $spacing-09;
+
+    &__para {
+      padding: 0;
+      margin: 0;
+      block-size: $spacing-09;
+      line-height: $spacing-09;
+    }
+  }
+
+  .#{$prefix}--action-list {
+    block-size: $spacing-09;
+  }
+
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel {
+    block-size: $spacing-09;
+    min-block-size: auto;
+
+    &::before {
+      inset-block-start: rem(15px);
+    }
+  }
+}
+
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='xs']),
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='sm']) {
+  transform: translate3d(0, $spacing-07, 0);
+}
+
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='md']),
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='lg']),
+:host(#{$prefix}-table-toolbar-content[has-batch-actions][size='xl']) {
+  transform: translate3d(0, $spacing-09, 0);
+}
+
+:host(#{$prefix}-table-batch-actions) {
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel {
+    --divider-opacity: 1;
+
+    &::before {
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
+      opacity: var(--divider-opacity);
+      transition: opacity $duration-fast-02 motion(standard, productive);
+    }
+
+    &:hover::before {
+      opacity: 0;
+    }
+  }
 }
