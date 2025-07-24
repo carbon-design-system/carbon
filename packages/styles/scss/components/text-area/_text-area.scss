@@ -61,10 +61,6 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--text-area--invalid {
-    padding-inline-end: $spacing-08;
-  }
-
   .#{$prefix}--text-area__wrapper {
     @include layout.use('density', $default: 'normal');
 
@@ -106,7 +102,6 @@
   }
 
   .#{$prefix}--form-item {
-    position: relative;
     &:has(.#{$prefix}--text-area__wrapper--cols) {
       inline-size: fit-content;
     }
@@ -247,9 +242,5 @@
     display: flex;
     justify-content: space-between;
     inline-size: 100%;
-  }
-  .#{$prefix}--form-requirement {
-    position: absolute;
-    inset-block-start: 100%;
   }
 }

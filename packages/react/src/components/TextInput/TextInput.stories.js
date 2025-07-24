@@ -138,6 +138,31 @@ Default.args = {
   size: 'md',
 };
 
+// Test story, remove before merging
+export const Test19971 = (args) => {
+  return (
+    <div style={{ width: args.defaultWidth }}>
+      <TextInput {...args} id="text-input-1" type="text" />
+      <TextInput labelText="test label" id="text-input-2" type="text" />
+    </div>
+  );
+};
+
+Test19971.args = {
+  defaultWidth: 300,
+  className: 'input-test-class',
+  placeholder: 'Placeholder text',
+  invalid: false,
+  invalidText: 'Error message goes here',
+  disabled: false,
+  labelText: 'Label text',
+  helperText: 'Helper text',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+};
+
 Default.argTypes = {
   ...sharedArgTypes,
 };
