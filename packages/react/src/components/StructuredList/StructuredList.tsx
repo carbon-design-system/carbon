@@ -62,6 +62,11 @@ export interface StructuredListWrapperProps extends DivAttrs {
    * Specify whether your StructuredListWrapper should have selections
    */
   selection?: boolean;
+
+  /**
+   * Specify which row will be selected initially
+   */
+  selectedInitialRow?: string;
 }
 export function StructuredListWrapper(props: StructuredListWrapperProps) {
   const {
@@ -73,6 +78,7 @@ export function StructuredListWrapper(props: StructuredListWrapperProps) {
     ariaLabel: deprecatedAriaLabel,
     isCondensed,
     isFlush,
+    selectedInitialRow,
     ...other
   } = props;
 
@@ -86,8 +92,9 @@ export function StructuredListWrapper(props: StructuredListWrapperProps) {
     },
     className
   );
-  const [selectedRow, setSelectedRow] =
-    React.useState<GridSelectedRowState>(null);
+  const [selectedRow, setSelectedRow] = React.useState<GridSelectedRowState>(
+    selectedInitialRow ?? null
+  );
 
   return (
     <GridSelectedRowStateContext.Provider value={selectedRow}>
@@ -142,6 +149,11 @@ StructuredListWrapper.propTypes = {
    * Specify whether your StructuredListWrapper should have selections
    */
   selection: PropTypes.bool,
+
+  /**
+   * Specify which row will be selected initially
+   */
+  selectedInitialRow: PropTypes.string,
 };
 
 export interface StructuredListHeadProps extends DivAttrs {
@@ -257,16 +269,29 @@ export interface StructuredListRowProps extends DivAttrs {
    * Mark if this row should be selectable
    */
   selection?: boolean;
+
+  /**
+   * Specify row id so that it can be used for initial selection
+   */
+  id?: string;
 }
 export function StructuredListRow(props: StructuredListRowProps) {
-  const { onKeyDown, children, className, head, onClick, selection, ...other } =
-    props;
+  const {
+    onKeyDown,
+    children,
+    className,
+    head,
+    onClick,
+    selection,
+    id,
+    ...other
+  } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
-  const id = useId('grid-input');
+  const rowId = id ?? useId('grid-input');
   const selectedRow = React.useContext(GridSelectedRowStateContext);
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const prefix = usePrefix();
-  const value = { id };
+  const value = { id: rowId };
   const classes = classNames(
     `${prefix}--structured-list-row`,
     {
@@ -275,9 +300,9 @@ export function StructuredListRow(props: StructuredListRowProps) {
         (hasFocusWithin && !selection) ||
         (hasFocusWithin &&
           selection &&
-          (selectedRow === id || selectedRow === null)),
+          (selectedRow === rowId || selectedRow === null)),
       // Ensure focus on the first item when navigating through Tab keys and no row is selected (selectedRow === null)
-      [`${prefix}--structured-list-row--selected`]: selectedRow === id,
+      [`${prefix}--structured-list-row--selected`]: selectedRow === rowId,
     },
     className
   );
@@ -299,7 +324,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
       className={classes}
       ref={itemRef}
       onClick={(event) => {
-        setSelectedRow?.(id);
+        setSelectedRow?.(rowId);
         onClick && onClick(event);
         if (selection) {
           // focus items only when selection is enabled
@@ -316,7 +341,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
       <GridRowContext.Provider value={value}>
         {selection && (
           <StructuredListCell>
-            {selectedRow === id ? (
+            {selectedRow === rowId ? (
               <RadioButtonChecked
                 className={`${prefix}--structured-list__icon`}
               />
@@ -369,6 +394,11 @@ StructuredListRow.propTypes = {
    * Mark if this row should be selectable
    */
   selection: PropTypes.bool,
+
+  /**
+   * Specify row id so that it can be used for initial selection
+   */
+  id: PropTypes.string,
 };
 
 export interface StructuredListInputProps extends DivAttrs {
