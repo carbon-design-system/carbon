@@ -1047,56 +1047,6 @@ describe('cds-multi-select', function () {
       expect(items[0].hasAttribute('is-select-all')).to.be.true;
     });
 
-    it('should handle select-all with filterable multiselect', async () => {
-      const el = await fixture(html`
-        <cds-multi-select label="test-label" select-all filterable>
-          <cds-multi-select-item is-select-all
-            >Select All</cds-multi-select-item
-          >
-          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
-          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
-          <cds-multi-select-item value="cherry">Cherry</cds-multi-select-item>
-        </cds-multi-select>
-      `);
-
-      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
-      trigger.click();
-      await el.updateComplete;
-
-      const filterInput = el.shadowRoot.querySelector('input');
-      const selectAllItem = el.querySelector(
-        'cds-multi-select-item[is-select-all]'
-      );
-
-      filterInput.value = 'a';
-      filterInput.dispatchEvent(new Event('input', { bubbles: true }));
-      await el.updateComplete;
-
-      expect(selectAllItem.hasAttribute('filtered')).to.be.false;
-
-      const visibleItems = el.querySelectorAll(
-        'cds-multi-select-item:not([filtered])'
-      );
-      expect(visibleItems.length).to.equal(3);
-
-      selectAllItem.click();
-      await el.updateComplete;
-
-      const appleItem = el.querySelector(
-        'cds-multi-select-item[value="apple"]'
-      );
-      const bananaItem = el.querySelector(
-        'cds-multi-select-item[value="banana"]'
-      );
-      const cherryItem = el.querySelector(
-        'cds-multi-select-item[value="cherry"]'
-      );
-
-      expect(appleItem.hasAttribute('selected')).to.be.true;
-      expect(bananaItem.hasAttribute('selected')).to.be.true;
-      expect(cherryItem.hasAttribute('selected')).to.be.true;
-    });
-
     it('should clear all selections when select-all is clicked in indeterminate state', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" select-all>
@@ -1593,6 +1543,166 @@ describe('cds-multi-select', function () {
         'cds-multi-select-item:not([filtered])'
       );
       expect(visibleItems.length).to.equal(1);
+    });
+  });
+
+  describe('Select All Behaviours with Filterable MultiSelect', () => {
+    it('should only select visible item when filtering', async () => {
+      const el = await fixture(html`
+        <cds-multi-select select-all filterable>
+          <cds-multi-select-item is-select-all
+            >Select All</cds-multi-select-item
+          >
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+          <cds-multi-select-item value="cherry">Cherry</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const filterInput = el.shadowRoot.querySelector('input');
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+
+      filterInput.value = 'a';
+      filterInput.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      selectAllItem.click();
+      await el.updateComplete;
+
+      const appleItem = el.querySelector(
+        'cds-multi-select-item[value="apple"]'
+      );
+      const bananaItem = el.querySelector(
+        'cds-multi-select-item[value="banana"]'
+      );
+      const cherryItem = el.querySelector(
+        'cds-multi-select-item[value="cherry"]'
+      );
+
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      expect(appleItem.hasAttribute('selected')).to.be.true;
+      expect(bananaItem.hasAttribute('selected')).to.be.true;
+      expect(cherryItem.hasAttribute('selected')).to.be.false;
+    });
+    it('should hide the select-all item when there are no items visible', async () => {
+      const el = await fixture(html`
+        <cds-multi-select filterable select-all>
+          <cds-multi-select-item is-select-all>All</cds-multi-select-item>
+          <cds-multi-select-item value="enabled">Enabled</cds-multi-select-item>
+          <cds-multi-select-item value="disabled-a" disabled
+            >Disabled A</cds-multi-select-item
+          >
+          <cds-multi-select-item value="disabled-b" disabled
+            >Disabled B</cds-multi-select-item
+          >
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+      const selectAll = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      expect(selectAll.hasAttribute('filtered')).to.be.false;
+
+      // filter that matches nothing
+      const input = el.shadowRoot.querySelector('input');
+      input.value = 'xyz';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(selectAll.hasAttribute('filtered')).to.be.true;
+    });
+
+    it('should hide the select-all item when there are only disabled items visible', async () => {
+      const el = await fixture(html`
+        <cds-multi-select filterable select-all>
+          <cds-multi-select-item is-select-all>All</cds-multi-select-item>
+          <cds-multi-select-item value="enabled">Enabled</cds-multi-select-item>
+          <cds-multi-select-item value="disabled-a" disabled
+            >Disabled A</cds-multi-select-item
+          >
+          <cds-multi-select-item value="disabled-b" disabled
+            >Disabled B</cds-multi-select-item
+          >
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+      const selectAll = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+      expect(selectAll.hasAttribute('filtered')).to.be.false;
+
+      // filter that matches disabled items
+      const input = el.shadowRoot.querySelector('input');
+      input.value = 'Disabled';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(selectAll.hasAttribute('filtered')).to.be.true;
+    });
+
+    it('should correctly compute checked/indeterminate state depending on filter ', async () => {
+      const el = await fixture(html`
+        <cds-multi-select filterable select-all>
+          <cds-multi-select-item is-select-all>All</cds-multi-select-item>
+          <cds-multi-select-item value="foo">foo</cds-multi-select-item>
+          <cds-multi-select-item value="bar">bar</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+      const input = el.shadowRoot.querySelector('input');
+      const selectAllItem = el.querySelector(
+        'cds-multi-select-item[is-select-all]'
+      );
+
+      // no items are selected
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+
+      // filter to “foo”
+      input.value = 'foo';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+      // no selected items visible: neither
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+
+      // click select all
+      selectAllItem.click();
+      await el.updateComplete;
+      // all visible items (foo) are selected: selected
+      expect(selectAllItem.hasAttribute('selected')).to.be.true;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+
+      // filter to “bar”
+      input.value = 'bar';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+      // no selected items visible: neither
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.false;
+
+      // Remove filter
+      input.value = '';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+      // only some visible items are selected: indeterminate
+      expect(selectAllItem.hasAttribute('selected')).to.be.false;
+      expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
     });
   });
 });
