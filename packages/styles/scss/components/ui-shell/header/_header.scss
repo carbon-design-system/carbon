@@ -401,9 +401,11 @@
   .#{$prefix}--header__global {
     display: flex;
     flex: 1 1 0%;
+    align-items: center;
     justify-content: flex-end;
     block-size: 100%;
-    margin-block-start: 1rem;
+    margin-block-start: 0.25rem;
+    margin-inline: 0.25rem;
   }
 
   //--------------------------------------------------------------------------
