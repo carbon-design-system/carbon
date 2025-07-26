@@ -248,7 +248,7 @@
     justify-content: space-between;
     inline-size: 100%;
   }
-  .#{$prefix}--form-requirement {
+  .#{$prefix}--text-area__wrapper ~ .#{$prefix}--form-requirement {
     position: absolute;
     inset-block-start: 100%;
   }
