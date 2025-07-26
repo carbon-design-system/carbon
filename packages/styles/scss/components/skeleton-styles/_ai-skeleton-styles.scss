@@ -8,6 +8,7 @@
 @use '../../config' as *;
 @use '../../theme';
 @use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
 
 @keyframes ai-skeleton-animation {
   0% {
@@ -60,6 +61,22 @@
   //skeleton icon
   .#{$prefix}--skeleton__icon--ai {
     border-radius: convert.to-rem(2px);
+  }
+
+  //High Contrast Mode
+  //Ensure AI Skeleton is visible and animated in Windows HCM
+  @include high-contrast-mode {
+    .#{$prefix}--skeleton__text--ai,
+    .#{$prefix}--skeleton__placeholder--ai,
+    .#{$prefix}--skeleton__icon--ai {
+      background: CanvasText;
+    }
+
+    .#{$prefix}--skeleton__text--ai::before,
+    .#{$prefix}--skeleton__placeholder--ai::before,
+    .#{$prefix}--skeleton__icon--ai::before {
+      background: Canvas;
+    }
   }
 }
 
