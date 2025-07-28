@@ -9,6 +9,8 @@ import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 /**
  * Skeleton of tabs.
@@ -17,14 +19,24 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-tabs-skeleton`)
 export default class CDSTabsSkeleton extends LitElement {
+  /**
+   * Provide the type of Tab
+   */
+  @property({ type: Boolean, reflect: true })
+  contained = false;
   render() {
+    const { contained } = this;
+    const tabClasses = classMap({
+      [`${prefix}--tabs`]: true,
+      [`${prefix}--skeleton`]: true,
+      [`${prefix}--tabs--contained`]: contained,
+    });
     return html`
-      <div class="${prefix}--tabs-trigger">
-        <span class="${prefix}--tabs-trigger-text"></span>
+      <div class="${tabClasses}">
+        <ul class="${prefix}--tabs__nav">
+          <slot></slot>
+        </ul>
       </div>
-      <ul class="${prefix}--tabs__nav">
-        <slot></slot>
-      </ul>
     `;
   }
 
