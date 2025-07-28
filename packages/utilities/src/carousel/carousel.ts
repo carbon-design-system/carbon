@@ -20,7 +20,7 @@ export const initCarousel = (
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
   const refs: Record<number, HTMLElement | null> = {};
-  let itemHeightSmallest = 0;
+
   const minHeight = 10; // 10 rem
 
   const { onViewChangeStart, onViewChangeEnd, excludeSwipeSupport } =
@@ -143,27 +143,26 @@ export const initCarousel = (
     );
   };
 
-  const updateHeightForWrapper = () => {
-    setTimeout(() => {
-      const thresholdHeight = remToPx(minHeight);
-      const containerHeight = carouselContainer.clientHeight;
+  const updateHeightForWrapper = (itemHeightSmallest: number) => {
+    const thresholdHeight = remToPx(minHeight);
+    const containerHeight = carouselContainer.clientHeight;
 
-      if (containerHeight < thresholdHeight) {
-        if (itemHeightSmallest < thresholdHeight) {
-          itemHeightSmallest = thresholdHeight;
-        }
-
-        const itemsWrapper = carouselContainer.querySelector(
-          `.${prefix}__itemsWrapper`
-        ) as HTMLElement;
-        if (itemsWrapper) {
-          itemsWrapper.style.blockSize = `${itemHeightSmallest}px`;
-        }
+    if (containerHeight < thresholdHeight) {
+      if (itemHeightSmallest < thresholdHeight) {
+        itemHeightSmallest = thresholdHeight;
       }
-    }, 10); // Delay to ensure layout is rendered before measuring
+
+      const itemsWrapper = carouselContainer.querySelector(
+        `.${prefix}__itemsWrapper`
+      ) as HTMLElement;
+      if (itemsWrapper) {
+        itemsWrapper.style.blockSize = `${itemHeightSmallest}px`;
+      }
+    }
   };
 
   const performAnimation = (isInitial: boolean) => {
+    let itemHeightSmallest = 0;
     Array.from(viewItems).forEach((viewItem: HTMLElement, index) => {
       const stackIndex = viewIndexStack.findIndex((idx) => idx === index);
       const stackIndexInstanceCount = previousViewIndexStack.filter(
@@ -203,12 +202,13 @@ export const initCarousel = (
             itemHeightSmallest = viewItem.offsetHeight;
           }
           viewItem.style.position = 'absolute';
+          updateHeightForWrapper(itemHeightSmallest);
         });
 
         const listener = (e: Event) => {
           removeReCycleClasses(viewItem);
           if (e.target === refs[viewIndexStack[0]]) {
-            //transitionend will trigger twice for pervious card and currnt card
+            //transitionend will trigger twice for pervious card and current card
             transitionComplete(viewItem);
           }
         };
@@ -272,7 +272,6 @@ export const initCarousel = (
 
   carouselContainer.classList.add(`${prefix}__view-stack`);
   performAnimation(true);
-  updateHeightForWrapper();
 
   if (!excludeSwipeSupport) {
     registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, false);
