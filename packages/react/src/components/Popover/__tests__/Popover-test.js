@@ -309,4 +309,25 @@ describe('Popover', () => {
       expect(onRequestClose).toHaveBeenCalled();
     });
   });
+
+  it('should NOT call onRequestClose when clicking inside the popover content', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open onRequestClose={onRequestClose}>
+        <button type="button">Settings</button>
+        <PopoverContent data-testid="popover-content">
+          <button data-testid="inside-button">Inside Button</button>
+          <input data-testid="inside-input" placeholder="Inside Input" />
+        </PopoverContent>
+      </Popover>
+    );
+
+    // Click on button inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-button'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    // Click on input inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
 });
