@@ -212,7 +212,7 @@ class CDSContentSwitcher extends LitElement {
 
   protected _selectionDidChange(
     itemToSelect: CDSContentSwitcherItem,
-    interactionType: 'mouse' | 'keyboard' | undefined
+    interactionType?: 'mouse' | 'keyboard' | undefined
   ) {
     if (this.selectionMode === 'manual' && interactionType === 'keyboard') {
       // In manual mode, only focus the item without changing the selection
