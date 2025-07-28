@@ -44,7 +44,7 @@ export const FloatingStyles = (args) => {
             }}
           />
         </div>
-        <PopoverContent className="p-3">
+        <PopoverContent>
           <div>
             <p className="popover-title">This popover uses autoAlign</p>
             <p className="popover-details">

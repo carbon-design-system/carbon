@@ -210,18 +210,24 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
 
   /**
    * "Hide password" tooltip text on password visibility toggle
+   *
+   * @deprecated will be removed in the next major version, use `cds-password-input` instead
    */
   @property()
   hidePasswordLabel = 'Hide password';
 
   /**
    * "Show password" tooltip text on password visibility toggle
+   *
+   * @deprecated will be removed in the next major version, use `cds-password-input` instead
    */
   @property()
   showPasswordLabel = 'Show password';
 
   /**
    * Boolean property to render password visibility toggle
+   *
+   * @deprecated will be removed in the next major version, use `cds-password-input` instead
    */
   @property({
     type: Boolean,
@@ -296,8 +302,10 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
 
   /**
    * Handles password visibility toggle button click
+   *
+   * @deprecated will be removed in the next major version, use `cds-password-input` instead
    */
-  private handleTogglePasswordVisibility() {
+  private togglePasswordVisibility() {
     this.type =
       this.type === INPUT_TYPE.PASSWORD ? INPUT_TYPE.TEXT : INPUT_TYPE.PASSWORD;
   }
@@ -373,7 +381,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
       [`${prefix}--text-input--${size}`]: size,
       [`${prefix}--layout--size-${size}`]: size,
-      [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD,
+      [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD, //TODO deprecated, remove in v12
       [`${prefix}--text-input__field-wrapper--decorator`]: hasAILabel,
     });
 
@@ -398,11 +406,13 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
+    //TODO deprecated, remove in v12
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
     const passwordVisibilityIcon = passwordIsVisible
       ? ViewOff16({ class: `${prefix}--icon-visibility-off` })
       : View16({ class: `${prefix}--icon-visibility-on` });
 
+    //TODO deprecated, remove in v12
     const passwordVisibilityToggleClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
       [`${prefix}--btn`]: true,
@@ -415,18 +425,20 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         this.tooltipAlignment,
     });
 
+    //TODO deprecated, remove in v12
     const passwordButtonLabel = html`
       <span class="${prefix}--assistive-text">
         ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
       </span>
     `;
 
+    //TODO deprecated, remove in v12
     const passwordVisibilityButton = () => html`
       <button
         type="button"
         class="${passwordVisibilityToggleClasses}"
         ?disabled="${normalizedProps.disabled}"
-        @click="${this.handleTogglePasswordVisibility}">
+        @click="${this.togglePasswordVisibility}">
         ${!normalizedProps.disabled ? passwordButtonLabel : null}
         ${passwordVisibilityIcon}
       </button>

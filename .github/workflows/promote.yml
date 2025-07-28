@@ -10,8 +10,7 @@ on:
       dry_run:
         type: boolean
         description:
-          'Specify whether to run this action without publishing packages
-          (useful for debugging)'
+          'Run as dry run (will not actually update dist tags)'
         default: false
 
 jobs:

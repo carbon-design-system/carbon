@@ -325,10 +325,6 @@ const Modal = React.forwardRef(function Modal(
     evt.stopPropagation();
 
     if (open && target instanceof HTMLElement) {
-      if (match(evt, keys.Escape)) {
-        onRequestClose(evt);
-      }
-
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -480,6 +476,23 @@ const Modal = React.forwardRef(function Modal(
     alertDialogProps.role = 'alertdialog';
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleEscapeKey = (event) => {
+      if (match(event, keys.Escape)) {
+        event.preventDefault();
+        event.stopPropagation();
+        onRequestClose(event);
+      }
+    };
+    document.addEventListener('keydown', handleEscapeKey, true);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey, true);
+    };
+  }, [open]);
 
   useEffect(() => {
     return () => {

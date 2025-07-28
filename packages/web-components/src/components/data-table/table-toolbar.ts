@@ -27,7 +27,7 @@ class CDSTableToolbar extends LitElement {
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'section');
+      this.setAttribute('role', 'toolbar');
     }
     super.connectedCallback();
   }

@@ -11,6 +11,7 @@ import ButtonSkeleton from '../Button.Skeleton';
 
 describe('ButtonSkeleton', () => {
   it.each([
+    ['xs', 'cds--btn--xs'],
     ['sm', 'cds--btn--sm'],
     ['md', 'cds--btn--md'],
     ['lg', 'cds--btn--lg'],
