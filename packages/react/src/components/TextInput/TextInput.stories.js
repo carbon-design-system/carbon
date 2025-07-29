@@ -138,31 +138,6 @@ Default.args = {
   size: 'md',
 };
 
-// Test story, remove before merging
-export const Test19971 = (args) => {
-  return (
-    <div style={{ width: args.defaultWidth }}>
-      <TextInput {...args} id="text-input-1" type="text" />
-      <TextInput labelText="test label" id="text-input-2" type="text" />
-    </div>
-  );
-};
-
-Test19971.args = {
-  defaultWidth: 300,
-  className: 'input-test-class',
-  placeholder: 'Placeholder text',
-  invalid: false,
-  invalidText: 'Error message goes here',
-  disabled: false,
-  labelText: 'Label text',
-  helperText: 'Helper text',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-};
-
 Default.argTypes = {
   ...sharedArgTypes,
 };
@@ -250,3 +225,27 @@ withAILabel.argTypes = {
 export const Skeleton = () => {
   return <TextInputSkeleton />;
 };
+
+// Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960
+export const TestInvalidTextNoOverlap = (args) => {
+  return (
+    <div style={{ width: args.defaultWidth }}>
+      <TextInput
+        labelText="test invalid text, the invalid text should not overlap"
+        invalid
+        invalidText="invalid text, this should not overlap with the component below"
+        id="text-input-1"
+        type="text"
+      />
+      <TextInput labelText="test label" id="text-input-2" type="text" />
+    </div>
+  );
+};
+
+/*
+ * This story will:
+ * - Be excluded from the docs page
+ * - Removed from the sidebar navigation
+ * - Still be a tested variant
+ */
+TestInvalidTextNoOverlap.tags = ['!dev', '!autodocs'];
