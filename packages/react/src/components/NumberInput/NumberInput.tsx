@@ -532,21 +532,18 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           type === 'number' ? Number(inputRef.current.value) : numberValue;
 
         let rawValue;
-        if (Number.isNaN(currentValue)) {
-          // When the field is empty (NaN), incrementing begins at min,
-          // decrementing begins at max.
-          // When there's no min or max to use, it begins at 0.
+        if (Number.isNaN(currentValue) || !currentValue) {
           if (typeof stepStartValue === 'number' && stepStartValue) {
             rawValue = stepStartValue;
-          } else if ((min && min < 0 && max && max > 0) || (!max && !min)) {
+          } else if (
+            (min && min < 0 && max && max > 0) ||
+            (!max && !min) ||
+            max
+          ) {
             if (direction === `up`) rawValue = 1;
             if (direction === `down`) rawValue = -1;
-          } else if (min && min > 0 && max && max > 0) {
+          } else if ((min && min > 0 && max && max > 0) || min) {
             rawValue = min;
-          } else if (direction === `up` && min) {
-            rawValue = min;
-          } else if (direction === `down` && max) {
-            rawValue = max;
           } else {
             rawValue = 0;
           }
