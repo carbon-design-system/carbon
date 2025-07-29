@@ -850,17 +850,9 @@ collect:
         - g90
         - white
         # General - tooltipAlignment
-        - bottom
-        - bottom-left
-        - bottom-right
         - center
         - end
-        - left
-        - right
         - start
-        - top
-        - top-left
-        - top-right
         # General - tooltipPosition
         - bottom
         - left
