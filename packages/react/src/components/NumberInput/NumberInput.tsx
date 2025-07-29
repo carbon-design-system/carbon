@@ -112,7 +112,7 @@ export interface NumberInputProps
   /**
    * Provide stepper start value when input is empty
    */
-  defaultStartValue?: number;
+  stepStartValue?: number;
 
   /**
    * Provide text that is used alongside the control label for additional help
@@ -314,7 +314,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       defaultValue = type === 'number' ? 0 : NaN,
       warn = false,
       warnText = '',
-      defaultStartValue,
+      stepStartValue = 0,
       value: controlledValue,
       ...rest
     } = props;
@@ -536,10 +536,13 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           // When the field is empty (NaN), incrementing begins at min,
           // decrementing begins at max.
           // When there's no min or max to use, it begins at 0.
-          if (typeof defaultStartValue === 'number' && defaultStartValue) {
-            rawValue = defaultStartValue;
-          } else if (min && min < 0 && max && max > 0) {
-            rawValue = 0;
+          if (typeof stepStartValue === 'number' && stepStartValue) {
+            rawValue = stepStartValue;
+          } else if ((min && min < 0 && max && max > 0) || (!max && !min)) {
+            if (direction === `up`) rawValue = 1;
+            if (direction === `down`) rawValue = -1;
+          } else if (min && min > 0 && max && max > 0) {
+            rawValue = min;
           } else if (direction === `up` && min) {
             rawValue = min;
           } else if (direction === `down` && max) {
@@ -922,7 +925,7 @@ NumberInput.propTypes = {
   /**
    * Stepper Start Value When Input is Empty.
    */
-  defaultStartValue: PropTypes.number,
+  stepStartValue: PropTypes.number,
 
   /**
    * Provide an optional handler that is called when the input or stepper

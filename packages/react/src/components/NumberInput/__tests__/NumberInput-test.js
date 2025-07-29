@@ -1018,14 +1018,14 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue('0');
       });
 
-      it('should begin incrementing from defaultStartValue when input is empty and defaultStartValue is provided', async () => {
+      it('should begin incrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
         render(
           <NumberInput
             type="text"
             label="test-label"
             id="test"
             step={2}
-            defaultStartValue={10}
+            stepStartValue={10}
             translateWithId={translateWithId}
           />
         );
@@ -1034,14 +1034,14 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue('10');
       });
 
-      it('should begin decrementing from defaultStartValue when input is empty and defaultStartValue is provided', async () => {
+      it('should begin decrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
         render(
           <NumberInput
             type="text"
             label="test-label"
             id="test"
             step={2}
-            defaultStartValue={10}
+            stepStartValue={10}
             translateWithId={translateWithId}
           />
         );

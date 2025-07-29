@@ -5701,7 +5701,7 @@ Map {
       "decorator": Object {
         "type": "node",
       },
-      "defaultStartValue": Object {
+      "stepStartValue": Object {
         "type": "number",
       },
       "defaultValue": Object {
