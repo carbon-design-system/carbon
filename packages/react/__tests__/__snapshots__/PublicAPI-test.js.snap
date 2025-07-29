@@ -5701,9 +5701,6 @@ Map {
       "decorator": Object {
         "type": "node",
       },
-      "stepStartValue": Object {
-        "type": "number",
-      },
       "defaultValue": Object {
         "args": Array [
           Array [
@@ -5963,6 +5960,9 @@ Map {
       },
       "slug": [Function],
       "step": Object {
+        "type": "number",
+      },
+      "stepStartValue": Object {
         "type": "number",
       },
       "translateWithId": Object {
