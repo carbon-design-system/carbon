@@ -355,7 +355,11 @@ Default.parameters = {
     //🔶 Test this story in the medium breakpoint as well as the default
     // chromatic modes defined in .storybook/preview.js
     modes: {
-      ...preview.parameters.chromatic.modes,
+      white: allModes['white'],
+      g10: allModes['g10'],
+      g90: allModes['g90'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
       'breakpoint-md': allModes['breakpoint-md'],
     },
   },
