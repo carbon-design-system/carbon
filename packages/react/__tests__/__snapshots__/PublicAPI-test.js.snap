@@ -5962,6 +5962,9 @@ Map {
       "step": Object {
         "type": "number",
       },
+      "stepStartValue": Object {
+        "type": "number",
+      },
       "translateWithId": Object {
         "type": "func",
       },
