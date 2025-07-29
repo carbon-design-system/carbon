@@ -225,6 +225,13 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
+    const items = focusableItems;
+
+    if (!items || items.length === 0) return;
+
+    const validItems = items.filter((item) => item?.ref?.current);
+    if (validItems.length === 0) return;
+
     const currentItem = focusableItems.findIndex((item) =>
       item.ref?.current?.contains(document.activeElement)
     );
@@ -244,17 +251,15 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
 
     if (indexToFocus < 0) {
-      indexToFocus = focusableItems.length - 1;
+      indexToFocus = validItems.length - 1;
     }
-    if (indexToFocus >= focusableItems.length) {
+    if (indexToFocus >= validItems.length) {
       indexToFocus = 0;
     }
 
-    if (
-      indexToFocus !== currentItem &&
-      focusableItems[indexToFocus]?.ref?.current
-    ) {
-      focusableItems[indexToFocus].ref.current.focus();
+    if (indexToFocus !== currentItem) {
+      const nodeToFocus = validItems[indexToFocus];
+      nodeToFocus?.ref?.current?.focus();
       e?.preventDefault();
     }
   }
