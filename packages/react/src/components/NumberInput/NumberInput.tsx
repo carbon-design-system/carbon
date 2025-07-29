@@ -110,7 +110,7 @@ export interface NumberInputProps
   formatOptions?: NumberFormatOptions;
 
   /**
-   * Provide stepper start value when input is empty
+   * Provide the value stepping should begin at when the input is empty
    */
   stepStartValue?: number;
 
@@ -923,7 +923,7 @@ NumberInput.propTypes = {
   min: PropTypes.number,
 
   /**
-   * Stepper Start Value When Input is Empty.
+   * Provide the value stepping should begin at when the input is empty
    */
   stepStartValue: PropTypes.number,
 

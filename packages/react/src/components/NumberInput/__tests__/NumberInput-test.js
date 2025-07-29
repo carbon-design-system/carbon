@@ -920,7 +920,7 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue('0');
       });
 
-      it('should begin incrementing from 1 when input is empty and o is in betwenn of min and max', async () => {
+      it('should begin incrementing from 1 when input is empty and 0 is in between of min and max', async () => {
         render(
           <NumberInput
             type="text"
