@@ -7,21 +7,23 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useMemo,
-  type JSX,
-  type SyntheticEvent,
-} from 'react';
+import React, { useEffect, useRef, useState, useMemo, type JSX } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
-import TreeNode, { TreeNodeProps } from './TreeNode';
+import TreeNode, { type TreeNodeProps } from './TreeNode';
 import { TreeContext, DepthContext } from './TreeContext';
+
+type UncontrolledOnSelect = (
+  event: React.MouseEvent | React.KeyboardEvent,
+  payload: Parameters<NonNullable<TreeNodeProps['onSelect']>>[1] & {
+    activeNodeId?: TreeViewProps['active'];
+  }
+) => void;
+
+type ControlledOnSelect = (selected: TreeViewProps['selected']) => void;
 
 export type TreeViewProps = {
   /**
@@ -53,16 +55,11 @@ export type TreeViewProps = {
    * **[Experimental]** Callback function that is called when any node is activated.
    * *This is only supported with the `enable-treeview-controllable` feature flag!*
    */
-  onActivate?: (activated?: string | number) => void;
+  onActivate?: (active: TreeViewProps['active']) => void;
   /**
    * Callback function that is called when any node is selected
    */
-  onSelect?: (
-    event: React.SyntheticEvent<HTMLUListElement>,
-    payload?: Partial<TreeNodeProps> & {
-      activeNodeId?: string | number;
-    }
-  ) => void;
+  onSelect?: UncontrolledOnSelect | ControlledOnSelect;
   /**
    * Array representing all selected node IDs in the tree
    */
@@ -108,11 +105,7 @@ const TreeView: TreeViewComponent = ({
 
   const controllableSelectionState = useControllableState({
     value: preselected,
-    onChange: (newSelected) => {
-      onSelect?.(undefined as unknown as SyntheticEvent<HTMLUListElement>, {
-        activeNodeId: newSelected[0],
-      });
-    },
+    onChange: onSelect as ControlledOnSelect,
     defaultValue: [],
   });
   const uncontrollableSelectionState = useState(preselected ?? []);
@@ -139,24 +132,32 @@ const TreeView: TreeViewComponent = ({
     );
   }
 
-  function handleTreeSelect(event, node = {}) {
-    const nodeId = (node as any).id;
-    if (multiselect && (event.metaKey || event.ctrlKey)) {
-      if (!selected.includes(nodeId)) {
-        setSelected(selected.concat(nodeId));
+  function handleTreeSelect(
+    event,
+    node: Parameters<NonNullable<TreeNodeProps['onTreeSelect']>>[1]
+  ) {
+    const nodeId = node.id;
+    if (nodeId) {
+      if (multiselect && (event.metaKey || event.ctrlKey)) {
+        if (!selected.includes(nodeId)) {
+          setSelected(selected.concat(nodeId));
+        } else {
+          setSelected(selected.filter((selectedId) => selectedId !== nodeId));
+        }
+
+        if (!enableTreeviewControllable) {
+          (onSelect as UncontrolledOnSelect)?.(event, node);
+        }
       } else {
-        setSelected(selected.filter((selectedId) => selectedId !== nodeId));
-      }
+        setSelected([nodeId]);
+        setActive(nodeId);
 
-      if (!enableTreeviewControllable) {
-        onSelect?.(event, node);
-      }
-    } else {
-      setSelected([nodeId]);
-      setActive(nodeId);
-
-      if (!enableTreeviewControllable) {
-        onSelect?.(event, { activeNodeId: nodeId, ...node });
+        if (!enableTreeviewControllable) {
+          (onSelect as UncontrolledOnSelect)?.(event, {
+            activeNodeId: nodeId,
+            ...node,
+          });
+        }
       }
     }
   }
