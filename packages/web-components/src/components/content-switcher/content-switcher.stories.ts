@@ -6,7 +6,6 @@
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import './index';
 import { prefix } from '../../globals/settings';
@@ -27,7 +26,6 @@ const sizes = {
 };
 
 const args = {
-  value: 'all',
   size: null,
   selectionMode: 'automatic',
   selectedIndex: 0,
@@ -35,10 +33,6 @@ const args = {
 };
 
 const argTypes = {
-  value: {
-    control: 'text',
-    description: 'The value of the selected item (value)',
-  },
   selectedIndex: {
     control: 'number',
     description: 'Specify a selected index for the initially selected content',
@@ -63,7 +57,7 @@ const argTypes = {
   },
   lowContrast: {
     control: 'boolean',
-    description: 'Use the low contrast version of the content switcher',
+    description: '`true` to use the low contrast version.',
   },
 };
 
@@ -71,7 +65,6 @@ export const Default = {
   args,
   argTypes,
   render: ({
-    value,
     onBeforeSelect,
     onChange,
     size,
@@ -81,7 +74,6 @@ export const Default = {
   }) => {
     return html`
       <cds-content-switcher
-        value="${ifDefined(value)}"
         selectionMode="${selectionMode}"
         selectedIndex="${selectedIndex}"
         size="${size}"
@@ -120,7 +112,6 @@ export const IconOnly = {
   args,
   argTypes,
   render: ({
-    value,
     onBeforeSelect,
     onChange,
     size,
@@ -129,7 +120,6 @@ export const IconOnly = {
     lowContrast,
   }) => html`
     <cds-content-switcher
-      value="${ifDefined(value)}"
       size="${size}"
       selectionMode="${selectionMode}"
       selectedIndex="${selectedIndex}"
@@ -164,7 +154,6 @@ export const IconOnlyWithLayer = {
   args,
   argTypes,
   render: ({
-    value,
     onBeforeSelect,
     onChange,
     size,
@@ -174,7 +163,6 @@ export const IconOnlyWithLayer = {
   }) => html`
     <sb-template-layers>
       <cds-content-switcher
-        value="${ifDefined(value)}"
         size="${size}"
         selectionMode="${selectionMode}"
         selectedIndex="${selectedIndex}"
@@ -216,7 +204,6 @@ export const LowContrast = {
   },
   argTypes,
   render: ({
-    value,
     onBeforeSelect,
     onChange,
     size,
@@ -226,7 +213,6 @@ export const LowContrast = {
   }) => {
     return html`
       <cds-content-switcher
-        value="${ifDefined(value)}"
         selectionMode="${selectionMode}"
         selectedIndex="${selectedIndex}"
         size="${size}"
@@ -268,7 +254,6 @@ export const lowContrastIconOnly = {
   },
   argTypes,
   render: ({
-    value,
     onBeforeSelect,
     onChange,
     size,
@@ -277,7 +262,6 @@ export const lowContrastIconOnly = {
     lowContrast,
   }) => html`
     <cds-content-switcher
-      value="${ifDefined(value)}"
       size="${size}"
       selectionMode="${selectionMode}"
       selectedIndex="${selectedIndex}"
@@ -312,7 +296,6 @@ export const WithLayer = {
   args,
   argTypes,
   render: ({
-    value,
     onBeforeSelect,
     onChange,
     size,
@@ -322,7 +305,6 @@ export const WithLayer = {
   }) => html`
     <sb-template-layers>
       <cds-content-switcher
-        value="${ifDefined(value)}"
         size="${size}"
         selectionMode="${selectionMode}"
         selectedIndex="${selectedIndex}"
