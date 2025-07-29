@@ -95,6 +95,13 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
         ?.querySelector(`${prefix}-tooltip`)
         ?.classList.add(`${prefix}--icon-tooltip`);
     }
+
+    if (
+      changedProperties.has('disabled') &&
+      !this.parentElement?.hasAttribute('disabled')
+    ) {
+      this.parentElement?.setAttribute('disabled', '');
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this

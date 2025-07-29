@@ -42,6 +42,7 @@ $css--plex: true !default;
     align-items: center;
     padding: $spacing-03 var(--cds-layout-density-padding-inline-local);
     block-size: 100%;
+    color: var(--cds-text-primary, #161616);
     inline-size: 100%;
 
     &:first-child,
@@ -64,6 +65,7 @@ $css--plex: true !default;
 
     &.#{$prefix}--content-switcher--selected {
       border: 0;
+      color: var(--cds-text-inverse, #ffffff);
     }
 
     &.#{$prefix}--content-switcher--selected,
@@ -85,7 +87,7 @@ $css--plex: true !default;
   inline-size: initial;
 
   .#{$prefix}--content-switcher-btn {
-    block-size: $spacing-08;
+    block-size: var(--cds-layout-size-height-local);
     padding-inline: rem(12px);
   }
 
