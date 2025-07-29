@@ -629,3 +629,5 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
+export * from './components/EduButton';
+export * from './tokens/edu-tokens';
