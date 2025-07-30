@@ -100,7 +100,6 @@ export const Default = ({ numberOfButtons, ...args }) => {
             id="default"
             style={{ marginBottom: '24px' }}
             titleText="TLS (Example of Floating ui)"
-            helperText="This is some helper text"
             label="Option 1"
             items={[
               {
@@ -125,7 +124,6 @@ export const Default = ({ numberOfButtons, ...args }) => {
             id="test"
             label="Mapping Domain"
             titleText="Choose options"
-            helperText="This is some helper text"
             autoAlign
             items={[
               {
