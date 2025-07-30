@@ -17,6 +17,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tooltip';
 @use '@carbon/styles/scss/components/chat-button' as *;
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/motion' as *;
 
 @include code-snippet;
 
@@ -146,4 +147,81 @@ $css--plex: true !default;
 
 :host(#{$prefix}-button-set[stacked]) {
   @extend .#{$prefix}--btn-set--stacked;
+}
+
+:host(#{$prefix}-button[data-context='data-table']) {
+  .#{$prefix}--btn {
+    padding-inline: $spacing-05;
+  }
+
+  .#{$prefix}--btn__icon {
+    position: static;
+    fill: $icon-on-color;
+    margin-inline-start: $spacing-03;
+
+    .st0 {
+      fill: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button.#{$prefix}--batch-summary__cancel) {
+  --divider-opacity: 1;
+
+  button.#{$prefix}--btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    block-size: 100%;
+    min-block-size: 100%;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
+
+    &::before {
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
+      position: absolute;
+      display: block;
+      border: none;
+      background-color: $text-on-color;
+      block-size: $spacing-05;
+      content: '';
+      inline-size: rem(1px);
+      inset-block-start: rem(15px);
+      inset-inline-start: 0;
+      opacity: var(--divider-opacity);
+      transition: opacity $duration-fast-02 motion(standard, productive);
+    }
+
+    &:hover::before {
+      opacity: 0;
+    }
+  }
+}
+
+:host(#{$prefix}-button.#{$prefix}--batch-summary__cancel[size='sm']) {
+  button.#{$prefix}--btn {
+    block-size: $spacing-07;
+    min-block-size: auto;
+    padding-block: 0.375rem;
+
+    &::before {
+      inset-block-start: rem(8px);
+    }
+  }
+}
+
+:host(#{$prefix}-button.#{$prefix}--batch-summary__cancel[size='lg']) {
+  button.#{$prefix}--btn {
+    block-size: $spacing-09;
+    min-block-size: auto;
+
+    &::before {
+      inset-block-start: rem(15px);
+    }
+  }
 }
