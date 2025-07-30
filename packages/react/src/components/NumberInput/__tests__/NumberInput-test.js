@@ -920,7 +920,7 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue('0');
       });
 
-      it('should begin incrementing from min when input is empty', async () => {
+      it('should begin incrementing from 1 when input is empty and 0 is in between of min and max', async () => {
         render(
           <NumberInput
             type="text"
@@ -935,9 +935,27 @@ describe('NumberInput', () => {
         );
         expect(screen.getByLabelText('test-label')).toHaveValue('');
         await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('-100');
+        expect(screen.getByLabelText('test-label')).toHaveValue('1');
       });
-      it('should begin decrementing from max when input is empty', async () => {
+
+      it('should begin incrementing from min when input is empty and min is positive', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            allowEmpty
+            min={10}
+            max={100}
+            step={2}
+            translateWithId={translateWithId}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue('10');
+      });
+      it('should begin decrementing from max when input is empty and when min is negative', async () => {
         render(
           <NumberInput
             type="text"
@@ -951,9 +969,27 @@ describe('NumberInput', () => {
         );
         expect(screen.getByLabelText('test-label')).toHaveValue('');
         await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('100');
+        expect(screen.getByLabelText('test-label')).toHaveValue('-1');
       });
-      it('should begin incrementing from 0 when no min is provided and input is empty', async () => {
+
+      it('should begin decrementing from min when input is empty and when min and max is greater than 0', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            min={10}
+            max={100}
+            step={2}
+            translateWithId={translateWithId}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue('10');
+      });
+
+      it('should begin incrementing from 1 when no min is provided and input is empty', async () => {
         render(
           <NumberInput
             type="text"
@@ -965,9 +1001,9 @@ describe('NumberInput', () => {
         );
         expect(screen.getByLabelText('test-label')).toHaveValue('');
         await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('0');
+        expect(screen.getByLabelText('test-label')).toHaveValue('1');
       });
-      it('should begin decrementing from 0 when no max is provided and input is empty', async () => {
+      it('should begin decrementing from -1 when no max is provided and input is empty', async () => {
         render(
           <NumberInput
             type="text"
@@ -979,7 +1015,39 @@ describe('NumberInput', () => {
         );
         expect(screen.getByLabelText('test-label')).toHaveValue('');
         await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('0');
+        expect(screen.getByLabelText('test-label')).toHaveValue('-1');
+      });
+
+      it('should begin incrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            step={2}
+            stepStartValue={10}
+            translateWithId={translateWithId}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue('10');
+      });
+
+      it('should begin decrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            step={2}
+            stepStartValue={10}
+            translateWithId={translateWithId}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue('10');
       });
     });
     it('should increase by the value of large step and format to the default locale', async () => {
@@ -1122,7 +1190,7 @@ describe('NumberInput', () => {
               type="text"
               label="NumberInput label"
               id="number-input"
-              min={-100}
+              min={10}
               max={100}
               value={value}
               onChange={(event, state) => {
@@ -1147,17 +1215,17 @@ describe('NumberInput', () => {
       expect(input).toHaveValue('');
 
       await userEvent.click(screen.getByLabelText('increment'));
-      expect(input).toHaveValue('-100');
+      expect(input).toHaveValue('10');
       await userEvent.click(screen.getByLabelText('increment'));
-      expect(input).toHaveValue('-99');
+      expect(input).toHaveValue('11');
 
       await userEvent.clear(input);
       expect(input).toHaveValue('');
 
       await userEvent.click(screen.getByLabelText('decrement'));
-      expect(input).toHaveValue('100');
+      expect(input).toHaveValue('10');
       await userEvent.click(screen.getByLabelText('decrement'));
-      expect(input).toHaveValue('99');
+      expect(input).toHaveValue('10');
 
       await userEvent.click(screen.getByText('set to 50'));
       expect(input).toHaveValue('50');
