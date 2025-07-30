@@ -89,7 +89,9 @@ jobs:
       - name: If commit is a release commit, tag it
         if: steps.check-commit.outputs.is_release_commit == 'true'
         run: |
-          git tag -a ${{ steps.calculate-tag.outputs.nextTag }} -m '${{ steps.calculate-tag.outputs.nextTag }}' && git push upstream ${{ steps.calculate-tag.outputs.nextTag }}
+          echo ${{ steps.calculate-tag.outputs.nextTag }} ${{ steps.calculate-tag.outputs.nextTag }}
+        # run: |
+        #   git tag -a ${{ steps.calculate-tag.outputs.nextTag }} -m '${{ steps.calculate-tag.outputs.nextTag }}' && git push upstream ${{ steps.calculate-tag.outputs.nextTag }}
 
       - name: Generate token
         # Do not generate token for release commits
