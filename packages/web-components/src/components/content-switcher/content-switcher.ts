@@ -341,7 +341,8 @@ class CDSContentSwitcher extends LitElement {
     if (changedProperties.has('size')) {
       const items = this.querySelectorAll(`${prefix}-content-switcher-item`);
       items.forEach((item) => {
-        item.setAttribute('size', this.size);
+        const size = this.size || 'md';
+        item.setAttribute('size', size);
       });
     }
   }
