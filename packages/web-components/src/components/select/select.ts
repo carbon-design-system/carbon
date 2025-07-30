@@ -211,6 +211,12 @@ class CDSSelect extends FormMixin(LitElement) {
   disabled = false;
 
   /**
+   * Specify text for the accessibility label of the 'select' element
+   */
+  @property({ attribute: 'aria-label' })
+  ariaLabel = 'Select option';
+
+  /**
    * The helper text.
    */
   @property({ attribute: 'helper-text' })
@@ -395,6 +401,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
   render() {
     const {
+      ariaLabel,
       disabled,
       helperText,
       hideLabel,
@@ -450,6 +457,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ?disabled="${disabled}"
         aria-readonly="${String(Boolean(readonly))}"
         aria-invalid="${String(Boolean(invalid))}"
+        aria-label=${ifDefined(ariaLabel)}
         aria-describedby="${ifDefined(!invalid ? undefined : 'invalid-text')}"
         @input="${handleInput}">
         ${!placeholder || value
