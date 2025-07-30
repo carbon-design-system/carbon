@@ -49,7 +49,7 @@
     }
 
     &:hover {
-      background-color: $layer-hover;
+      background-color: $background-hover;
     }
   }
 
@@ -136,7 +136,7 @@
   }
 
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $layer;
+    background-color: $layer-hover;
 
     &::after {
       background-color: $layer;
@@ -144,7 +144,7 @@
   }
 
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
-    background-color: $layer;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
