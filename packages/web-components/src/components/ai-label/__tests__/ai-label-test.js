@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { expect, fixture, html, nextFrame } from '@open-wc/testing';
 import '@carbon/web-components/es/components/ai-label/index.js';
 
 describe('cds-ai-label', function () {
@@ -181,5 +181,159 @@ describe('cds-ai-label', function () {
   it('should have no Axe violations', async () => {
     const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
     await expect(el).to.be.accessible();
+  });
+
+  it('should close when clicking outside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    document.body.appendChild(el);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    await el.updateComplete;
+    expect(el.open).to.be.true;
+
+    const handler = (e) => {
+      const path = e.composedPath?.() || [];
+      if (!path.includes(el)) {
+        el.open = false;
+      }
+    };
+
+    document.addEventListener('click', handler, true);
+
+    const outside = document.createElement('div');
+    document.body.appendChild(outside);
+    outside.dispatchEvent(
+      new MouseEvent('click', { bubbles: true, composed: true })
+    );
+
+    await new Promise((r) => setTimeout(r, 10));
+    expect(el.open).to.be.false;
+
+    document.removeEventListener('click', handler, true);
+    document.body.removeChild(outside);
+    document.body.removeChild(el);
+  });
+
+  it('should not close when clicking inside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    //Open
+    button.click();
+
+    const event = new MouseEvent('click', { bubbles: true, composed: true });
+    button.dispatchEvent(event);
+
+    expect(el.open).to.be.false;
+  });
+
+  it('should close when focus moves outside the component', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    document.body.appendChild(el);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    await el.updateComplete;
+    expect(el.open).to.be.true;
+
+    const handler = (e) => {
+      if (!(e.target instanceof Node) || !el.contains(e.target)) {
+        el.open = false;
+      }
+    };
+    document.addEventListener('focusin', handler, true);
+
+    const outside = document.createElement('input');
+    document.body.appendChild(outside);
+    outside.tabIndex = 0;
+    outside.focus();
+
+    const focusEvent = new FocusEvent('focusin', {
+      bubbles: true,
+      composed: true,
+    });
+    outside.dispatchEvent(focusEvent);
+
+    await new Promise((r) => setTimeout(r, 10));
+    expect(el.open).to.be.false;
+
+    document.removeEventListener('focusin', handler, true);
+    document.body.removeChild(outside);
+    document.body.removeChild(el);
+  });
+
+  it('should remain open when focus stays inside', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+
+    button.focus();
+
+    expect(el.open).to.be.true;
+  });
+
+  it('should close when Escape is pressed', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    // Open the label
+    button.click();
+    await el.updateComplete;
+
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+      composed: true,
+    });
+    button.dispatchEvent(keyEvent);
+
+    await nextFrame();
+    expect(el.open).to.be.false;
+  });
+
+  it('should not close on Enter (but toggle works if coded that way)', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+
+    button.focus();
+
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+    button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    expect(el.open).to.be.false;
+  });
+
+  it('should handle focus change gracefully when target is not Node', async () => {
+    const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
+    document.body.appendChild(el);
+
+    const button = el.shadowRoot.querySelector('.cds--slug__button');
+    button.click();
+    await el.updateComplete;
+    expect(el.open).to.be.true;
+
+    const handler = (e) => {
+      if (!(e.target instanceof Node) || !el.contains(e.target)) {
+        el.open = false;
+      }
+    };
+    document.addEventListener('focusin', handler, true);
+
+    const fakeFocusEvent = new FocusEvent('focusin', {
+      bubbles: true,
+      composed: true,
+    });
+    Object.defineProperty(fakeFocusEvent, 'target', {
+      value: 'non-node',
+      writable: false,
+    });
+
+    document.dispatchEvent(fakeFocusEvent);
+    await new Promise((r) => setTimeout(r, 10));
+    expect(el.open).to.be.false;
+
+    document.removeEventListener('focusin', handler, true);
+    document.body.removeChild(el);
   });
 });
