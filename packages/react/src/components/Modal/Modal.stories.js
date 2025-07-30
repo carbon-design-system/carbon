@@ -30,6 +30,8 @@ import TextArea from '../TextArea';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import Checkbox from '../Checkbox';
+import CheckboxGroup from '../CheckboxGroup';
 
 export default {
   title: 'Components/Modal',
@@ -65,22 +67,7 @@ export const Default = ({ numberOfButtons, ...args }) => {
         open={open}
         {...args}
         {...modalFooter(numberOfButtons)}>
-        <p style={{ marginBottom: '1rem' }}>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <p style={{ marginBottom: '1rem' }}>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <p style={{ marginBottom: '1rem' }}>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <p style={{ marginBottom: '1rem' }}>
+        <p style={{ marginBottom: '2rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
@@ -89,183 +76,80 @@ export const Default = ({ numberOfButtons, ...args }) => {
           data-modal-primary-focus
           id="text-input-1"
           labelText="Domain name"
-          placeholder="e.g. github.com"
-          style={{ marginBottom: '1rem' }}
+          placeholder="For example, Github.com"
+          style={{ marginBottom: '24px' }}
         />
-        <Select
-          id="select-1"
-          defaultValue="us-south"
-          labelText="Region"
-          style={{ marginBottom: '1rem' }}>
-          <SelectItem value="us-south" text="US South" />
-          <SelectItem value="us-east" text="US East" />
-        </Select>
-
-        <ComboBox
-          allowCustomValue
-          autoAlign={true}
-          id="carbon-combobox"
-          items={[
-            'Apple',
-            'Orange',
-            'Banana',
-            'Pineapple',
-            'Raspberry',
-            'Lime',
-          ]}
-          titleText="ComboBox Example of Floating ui"
-        />
-
-        <Dropdown
-          autoAlign={true}
-          id="default"
-          style={{ margin: '1rem 0' }}
-          titleText="Dropdown Example of Floating ui"
-          helperText="This is some helper text"
-          label="Option 1"
-          items={[
-            {
-              id: 'option-0',
-              text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-            },
-            {
-              id: 'option-1',
-              text: 'Option 1',
-            },
-            {
-              id: 'option-2',
-              text: 'Option 2',
-            },
-            {
-              id: 'option-3',
-              text: 'Option 3 - a disabled item',
-              disabled: true,
-            },
-            {
-              id: 'option-4',
-              text: 'Option 4',
-            },
-            {
-              id: 'option-5',
-              text: 'Option 5',
-            },
-          ]}
-          itemToString={(item) => (item ? item.text : '')}
-          direction="top"
-        />
-        <MultiSelect
-          id="test"
-          label="Multiselect"
-          titleText="Multiselect"
-          helperText="This is some helper text"
-          autoAlign
-          items={[
-            {
-              id: 'downshift-1-item-0',
-              text: 'Option 1',
-            },
-            {
-              id: 'downshift-1-item-1',
-              text: 'Option 2',
-            },
-          ]}
-          itemToString={(item) => (item ? item.text : '')}
-        />
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-
-        <Popover align={'bottom-right'} autoAlign open={popoverOpen}>
-          <div className="default-trigger">
-            <CheckboxIcon
-              onClick={() => {
-                setPopoverOpen(!popoverOpen);
-              }}
-            />
-          </div>
-          <PopoverContent>
-            <h2 className="popover-title">Popover Example</h2>
-            <p className="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
-          </PopoverContent>
-        </Popover>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-
-        {args.hasScrollingContent && (
-          <>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <h3>Lorem ipsum</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-              accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-              posuere. Curabitur justo urna, consectetur vel elit iaculis,
-              ultrices condimentum risus. Nulla facilisi. Etiam venenatis
-              molestie tellus. Quisque consectetur non risus eu rutrum.{' '}
-            </p>
-          </>
-        )}
+        <div style={{ marginBottom: '24px' }}>
+          <Select id="select-1" defaultValue="us-south" labelText="Region">
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+        </div>
+        <div style={{ marginBottom: '24px' }}>
+          <ComboBox
+            allowCustomValue
+            autoAlign={true}
+            id="carbon-combobox"
+            items={['Viewer', 'Editor', 'Manager']}
+            titleText="Permissions (Example of Floating ui)"
+          />
+        </div>
+        <div style={{ marginBottom: '24px' }}>
+          <Dropdown
+            autoAlign={true}
+            id="default"
+            style={{ marginBottom: '24px' }}
+            titleText="TLS (Example of Floating ui)"
+            helperText="This is some helper text"
+            label="Option 1"
+            items={[
+              {
+                id: 'option-0',
+                text: '1.0',
+              },
+              {
+                id: 'option-1',
+                text: '1.1',
+              },
+              {
+                id: 'option-2',
+                text: '1.2',
+              },
+            ]}
+            itemToString={(item) => (item ? item.text : '')}
+            direction="top"
+          />
+        </div>
+        <div style={{ marginBottom: '24px' }}>
+          <MultiSelect
+            id="test"
+            label="Mapping Domain"
+            titleText="Choose options"
+            helperText="This is some helper text"
+            autoAlign
+            items={[
+              {
+                id: 'downshift-1-item-0',
+                text: 'Cloud Foundry',
+              },
+              {
+                id: 'downshift-1-item-1',
+                text: 'Kubernetes Ingress',
+              },
+              {
+                id: 'downshift-1-item-2',
+                text: 'VPC Load Balancer',
+              },
+            ]}
+            itemToString={(item) => (item ? item.text : '')}
+          />
+        </div>
+        <CheckboxGroup legendText="Terms of Agreement">
+          <Checkbox
+            id="checkbox-label-1"
+            labelText="I confirm domain ownership and accept IBM service terms and applicable charges."
+          />
+        </CheckboxGroup>
       </Modal>
     </>
   );
@@ -362,50 +246,35 @@ export const FullWidth = () => {
         modalLabel="An example of a modal with no padding"
         primaryButtonText="Add"
         secondaryButtonText="Cancel">
-        <StructuredListWrapper>
+        <StructuredListWrapper style={{ marginBottom: '48px' }}>
           <StructuredListHead>
             <StructuredListRow head>
               <StructuredListCell head noWrap>
-                Column A
+                Default size
               </StructuredListCell>
               <StructuredListCell head noWrap>
-                Column B
+                Features
               </StructuredListCell>
               <StructuredListCell head noWrap>
-                Column C
+                Pricing
               </StructuredListCell>
             </StructuredListRow>
           </StructuredListHead>
           <StructuredListBody>
             <StructuredListRow>
-              <StructuredListCell noWrap>Row 1</StructuredListCell>
-              <StructuredListCell>Row 1</StructuredListCell>
-              <StructuredListCell>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </StructuredListCell>
+              <StructuredListCell noWrap>Lite</StructuredListCell>
+              <StructuredListCell>2 vCPUs | 4GB RAM</StructuredListCell>
+              <StructuredListCell>$0.12 USD / hourly</StructuredListCell>
             </StructuredListRow>
             <StructuredListRow>
-              <StructuredListCell noWrap>Row 2</StructuredListCell>
-              <StructuredListCell>Row 2</StructuredListCell>
-              <StructuredListCell>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </StructuredListCell>
+              <StructuredListCell noWrap>Graduated tier</StructuredListCell>
+              <StructuredListCell>2 vCPUs | 8GB RAM</StructuredListCell>
+              <StructuredListCell>$0.13 USD / hourly</StructuredListCell>
             </StructuredListRow>
             <StructuredListRow>
-              <StructuredListCell noWrap>Row 3</StructuredListCell>
-              <StructuredListCell>Row 3</StructuredListCell>
-              <StructuredListCell>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </StructuredListCell>
+              <StructuredListCell noWrap>Premium</StructuredListCell>
+              <StructuredListCell>4 vCPUs | 10GB RAM</StructuredListCell>
+              <StructuredListCell>$0.20 USD / hourly</StructuredListCell>
             </StructuredListRow>
           </StructuredListBody>
         </StructuredListWrapper>
@@ -426,8 +295,14 @@ export const DangerModal = () => {
         modalHeading="Are you sure you want to delete this custom domain?"
         modalLabel="Account resources"
         primaryButtonText="Delete"
-        secondaryButtonText="Cancel"
-      />
+        secondaryButtonText="Cancel">
+        <p>
+          Check for dependencies on the domain before deletion. For instance, if
+          the domain is used as a primary domain for users or if it's associated
+          with critical applications or services, those connections will need to
+          be removed or reconfigured first.
+        </p>
+      </Modal>
     </>
   );
 };
@@ -612,7 +487,7 @@ export const PassiveModal = () => {
         open={open}
         onRequestClose={() => setOpen(false)}
         passiveModal
-        modalHeading="You have been successfully signed out"
+        modalHeading="You are now signed out."
       />
     </>
   );
@@ -713,36 +588,25 @@ export const withAILabel = {
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
           decorator={aiLabel}>
-          <p style={{ marginBottom: '1rem' }}>
+          <p style={{ marginBottom: '2rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
             domain, a shared subdomain, or a shared domain and host.
-          </p>
-          <p style={{ marginBottom: '1rem' }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
-            leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
-            ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
-            elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
-            ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
-            ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
-            mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
-            quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
-            elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
-            magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
-            leo nec molestie sollicitudin.
           </p>
           <TextInput
             data-modal-primary-focus
             id="text-input-1"
             labelText="Domain name"
-            placeholder="e.g. github.com"
+            placeholder="For example, Github.com"
+            style={{ marginBottom: '24px' }}
           />
-          <Select id="select-1" defaultValue="us-south" labelText="Region">
-            <SelectItem value="us-south" text="US South" />
-            <SelectItem value="us-east" text="US East" />
-          </Select>
-          <TextArea labelText="Comments" />
+          <div style={{ marginBottom: '24px' }}>
+            <Select id="select-1" defaultValue="us-south" labelText="Region">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+          </div>
+          <TextArea labelText="Comments" style={{ height: '80px' }} />
         </Modal>
       </div>
     );
