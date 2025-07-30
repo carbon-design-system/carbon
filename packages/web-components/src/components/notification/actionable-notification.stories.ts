@@ -37,6 +37,10 @@ const argTypes = {
     description:
       'Pass in the action button label that will be rendered within the ActionableNotification.',
   },
+  caption: {
+    control: 'text',
+    description: 'Specify the caption.',
+  },
   closeOnEscape: {
     control: 'boolean',
     description:
@@ -111,6 +115,7 @@ export const Playground = {
   render: (args) => {
     const {
       actionButtonLabel,
+      caption,
       closeOnEscape,
       hasFocus,
       kind,
@@ -135,6 +140,7 @@ export const Playground = {
       <cds-actionable-notification
         ?close-on-escape="${closeOnEscape}"
         ?has-focus="${hasFocus}"
+        caption="${ifDefined(caption)}"
         kind="${ifDefined(kind)}"
         title="${ifDefined(title)}"
         subtitle="${ifDefined(subtitle)}"
