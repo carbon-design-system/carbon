@@ -493,3 +493,41 @@ export const withToggletipLabel = () => {
     </div>
   );
 };
+
+// Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960
+export const TestInvalidTextNoOverlap = () => {
+  const items = [
+    {
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+  ];
+
+  return (
+    <div style={{ width: 400 }}>
+      <Dropdown
+        id="test-1"
+        titleText="test invalid text, the invalid text should not overlap"
+        helperText="This is some helper text"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        invalid
+        invalidText="invalid text, this should not overlap with the component below"
+      />
+      <Dropdown
+        titleText="test title"
+        label="Choose an option"
+        itemToString={(item) => (item ? item.text : '')}
+        id="test-2"
+        items={items}
+      />
+    </div>
+  );
+};
+/*
+ * This story will:
+ * - Be excluded from the docs page
+ * - Removed from the sidebar navigation
+ * - Still be a tested variant
+ */
+TestInvalidTextNoOverlap.tags = ['!dev', '!autodocs'];
