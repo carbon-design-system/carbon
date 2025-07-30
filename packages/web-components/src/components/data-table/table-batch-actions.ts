@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
@@ -31,6 +31,17 @@ class CDSTableBatchActions extends LitElement {
   }
 
   /**
+   * Handles `click` event on the Select all button.
+   */
+  private _handleSelectAll() {
+    const { eventClickSelectAll } = this
+      .constructor as typeof CDSTableBatchActions;
+    this.dispatchEvent(
+      new CustomEvent(eventClickSelectAll, { bubbles: true, composed: true })
+    );
+  }
+
+  /**
    * `true` if this batch actions bar should be active.
    */
   @property({ type: Boolean, reflect: true })
@@ -50,6 +61,12 @@ class CDSTableBatchActions extends LitElement {
   @property({ type: Number, attribute: 'selected-rows-count' })
   selectedRowsCount = 0;
 
+  /**
+   * Numeric representation of the total number of items present in a table.
+   */
+  @property({ type: Number, attribute: 'total-rows-count' })
+  totalRowsCount = 0;
+
   firstUpdated() {
     this.querySelectorAll(
       (this.constructor as typeof CDSTableBatchActions).selectorButtons
@@ -68,13 +85,26 @@ class CDSTableBatchActions extends LitElement {
     const {
       formatSelectedItemsCount,
       selectedRowsCount,
+      totalRowsCount,
       _handleCancel: handleCancel,
+      _handleSelectAll: handleSelectAll,
     } = this;
     return html`
       <div class="${prefix}--batch-summary">
         <p class="${prefix}--batch-summary__para">
           ${formatSelectedItemsCount({ count: selectedRowsCount })}
         </p>
+        ${totalRowsCount > 0
+          ? html`
+              <button
+                class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__select-all"
+                @click=${handleSelectAll}>
+                <slot name="select-all-button-content"
+                  >Select all ${totalRowsCount}</slot
+                >
+              </button>
+            `
+          : nothing}
       </div>
       <div class="${prefix}--action-list">
         <slot></slot>
@@ -99,6 +129,13 @@ class CDSTableBatchActions extends LitElement {
    */
   static get eventClickCancel() {
     return `${prefix}-table-batch-actions-cancel-clicked`;
+  }
+
+  /**
+   * The name of the custom event fired after the Select all button is clicked.
+   */
+  static get eventClickSelectAll() {
+    return `${prefix}-table-batch-actions-select-all-clicked`;
   }
 
   static styles = styles;
