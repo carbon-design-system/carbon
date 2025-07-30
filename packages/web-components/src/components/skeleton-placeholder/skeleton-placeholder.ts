@@ -39,7 +39,7 @@ class CDSSkeletonPlaceholder extends LitElement {
     }
     const classes = classMap(defaultClasses);
 
-    return html` <div class="${classes}"></div> `;
+    return html` <div part="placeholder" class="${classes}"></div> `;
   }
 
   static styles = styles;
