@@ -44,6 +44,7 @@ const props = () => ({
   hideSteppers: boolean('No steppers (hideSteppers)', false),
   min: number('Minimum value (min)', reusableProps.min),
   max: number('Maximum value (max)', reusableProps.max),
+  stepStartValue: number('Step Start Value', 0),
   step: number('Step of up/down arrow (step)', 10),
   size: select('Field size (size)', sizes, undefined) || undefined,
   locale: select('Locale', locales, undefined) || undefined,
