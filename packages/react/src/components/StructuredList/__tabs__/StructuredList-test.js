@@ -75,6 +75,7 @@ const structuredListBodyRowGenerator = (numRows, rest, selection) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
     <StructuredListRow
       key={`row-${i}`}
+      id={`row-${i}`}
       onKeyDown={onKeyDownHandlerFn}
       selection={selection}>
       <StructuredListCell>Row {i}</StructuredListCell>
@@ -108,6 +109,28 @@ const renderSelectionVariant = ({ ...rest } = {}) => {
   const { inputProps, wrapperProps, rowSelection } = rest;
   return render(
     <StructuredListWrapper selection {...wrapperProps}>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+          <StructuredListCell head>{''}</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody onKeyDown={onKeyDownBodyHandlerFn}>
+        {structuredListBodyRowGenerator(4, inputProps, rowSelection)}
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
+
+const renderInitialSelectionVariant = ({ ...rest } = {}) => {
+  const { inputProps, wrapperProps, rowSelection } = rest;
+  return render(
+    <StructuredListWrapper
+      selection
+      {...wrapperProps}
+      selectedInitialRow="row-1">
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>
@@ -177,6 +200,13 @@ describe('StructuredList', () => {
     it('should check that children are rendered', () => {
       renderComponent();
       expect(screen.getByText('ColumnA')).toBeVisible();
+    });
+    it('should apply the selected class to the initially selected row', async () => {
+      renderInitialSelectionVariant();
+      const input = screen.getByTitle('row-1');
+      expect(input).toBeChecked();
+      const selectedRow = input.closest('.cds--structured-list-row');
+      expect(selectedRow).toHaveClass('cds--structured-list-row--selected');
     });
   });
 
