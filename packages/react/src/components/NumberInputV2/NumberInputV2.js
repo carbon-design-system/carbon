@@ -80,6 +80,7 @@ const NumberInputV2 = React.forwardRef(function NumberInputV2(
     type = 'number',
     warn = false,
     warnText = '',
+    stepStartValue = 0,
     value: controlledValue,
     ...rest
   } = props;
@@ -277,13 +278,21 @@ const NumberInputV2 = React.forwardRef(function NumberInputV2(
 
       let rawValue;
       if (Number.isNaN(currentValue)) {
-        // When the field is empty (NaN), incrementing begins at min,
-        // decrementing begins at max.
-        // When there's no min or max to use, it begins at 0.
-        if (direction === `up` && min) {
+        if (typeof stepStartValue === 'number' && stepStartValue) {
+          rawValue = stepStartValue;
+        } else if (
+          (min && min < 0 && max && max > 0) ||
+          (!max && !min) ||
+          max
+        ) {
+          if (direction === `up`) {
+            rawValue = 1;
+          }
+          if (direction === `down`) {
+            rawValue = -1;
+          }
+        } else if ((min && min > 0 && max && max > 0) || min) {
           rawValue = min;
-        } else if (direction === `down` && max) {
-          rawValue = max;
         } else {
           rawValue = 0;
         }
@@ -701,6 +710,11 @@ NumberInputV2.propTypes = {
    * up/down button
    */
   step: PropTypes.number,
+
+  /**
+   * Provide the value stepping should begin at when the input is empty
+   */
+  stepStartValue: PropTypes.number,
 
   /**
    * Provide custom text for the component for each translation id
