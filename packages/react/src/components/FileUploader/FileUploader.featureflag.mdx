@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/FileUploader/Feature Flag" name="Flag details" />
+
+# Enhanced FileUploader Callbacks
+
+The `enable-enhanced-file-uploader` flag enables enhanced functionality for the
+FileUploader component, including richer callback data and expanded trigger
+events for `onChange` and `onDelete`.
+
+When this flag is enabled, the `onChange` callback is consistently triggered for
+all file list modifications (additions, deletions, programmatic clears), and both
+`onChange` and `onDelete` events are augmented with detailed file information
+like `deletedFile`, `addedFiles`, and `currentFiles` on `event.target`.
+
+## Enable enhanced FileUploader callbacks
+
+```js
+<FeatureFlags enableEnhancedFileUploader={true}>
+  <FileUploader
+    multiple
+    filenameStatus="edit"
+    onChange={(evt) => console.log('onChange', evt.target.action, evt.target.currentFiles)}
+    onDelete={(evt) => console.log('onDelete', evt.target.deletedFile)}
+  />
+</FeatureFlags>

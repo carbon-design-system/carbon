@@ -3387,6 +3387,9 @@ Map {
       "enableDialogElement": Object {
         "type": "bool",
       },
+      "enableEnhancedFileUploader": Object {
+        "type": "bool",
+      },
       "enableExperimentalFocusWrapWithoutSentinels": Object {
         "type": "bool",
       },
@@ -3482,7 +3485,9 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "small",
             "md",
+            "field",
             "lg",
           ],
         ],
@@ -10093,6 +10098,9 @@ Map {
         "type": "node",
       },
       "enableDialogElement": Object {
+        "type": "bool",
+      },
+      "enableEnhancedFileUploader": Object {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": Object {
