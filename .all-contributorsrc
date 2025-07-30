@@ -1977,6 +1977,15 @@
         "a11y",
         "review"
       ]
+    },
+    {
+      "login": "bijoyvalsan",
+      "name": "bijoy valsan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26248649?v=4",
+      "profile": "https://github.com/bijoyvalsan",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
