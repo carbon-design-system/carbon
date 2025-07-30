@@ -677,6 +677,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     isItemDisabled(item, _index) {
       return (item as any)?.disabled;
     },
+    ...downshiftProps,
   });
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
