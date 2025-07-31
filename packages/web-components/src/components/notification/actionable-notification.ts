@@ -23,7 +23,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 /**
  * The default icons, keyed by notification kind.
  */
-const iconsForKinds = {
+export const iconsForKinds = {
   [NOTIFICATION_KIND.SUCCESS]: CheckmarkFilled20,
   [NOTIFICATION_KIND.INFO]: InformationFilled20,
   [NOTIFICATION_KIND.INFO_SQUARE]: InformationSquareFilled20,
