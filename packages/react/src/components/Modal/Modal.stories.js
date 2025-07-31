@@ -8,6 +8,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from 'storybook/actions';
+import { allModes } from '../../../.storybook/modes';
+import { default as preview } from '../../../.storybook/preview';
 import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
@@ -345,6 +347,20 @@ Default.argTypes = {
   selectorsFloatingMenus: {
     table: {
       disable: true,
+    },
+  },
+};
+Default.parameters = {
+  chromatic: {
+    //🔶 Test this story in the medium breakpoint as well as the default
+    // chromatic modes defined in .storybook/preview.js
+    modes: {
+      white: allModes['white'],
+      g10: allModes['g10'],
+      g90: allModes['g90'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
+      'breakpoint-md': allModes['breakpoint-md'],
     },
   },
 };
