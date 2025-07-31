@@ -401,12 +401,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     [filteredItems]
   );
   let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
-  if ((selected ?? []).length > 0 && selectAll) {
-    console.warn(
-      'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
-    );
-    selectAll = false;
-  }
+  // if ((selected ?? []).length > 0 && selectAll) {
+  //   console.warn(
+  //     'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
+  //   );
+  //   selectAll = false;
+  // }
 
   const {
     selectedItems: controlledSelectedItems,
