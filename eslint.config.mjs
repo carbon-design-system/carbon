@@ -70,6 +70,7 @@ export default tseslint.config([
     rules: {
       ...jsxA11y.configs.recommended.rules,
       ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
     },
   },
   {
