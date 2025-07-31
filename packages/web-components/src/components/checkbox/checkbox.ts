@@ -263,7 +263,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         part="input"
         class="${`${prefix}--checkbox`}"
         aria-readonly="${String(Boolean(readonly))}"
-        ?checked="${checked}"
+        .checked="${checked}"
         ?data-invalid="${invalid}"
         ?disabled="${disabled}"
         ?defaultChecked="${defaultChecked}"
