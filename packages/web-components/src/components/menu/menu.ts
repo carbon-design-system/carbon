@@ -183,6 +183,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     await this.updateComplete;
     this._registerMenuItems();
     this._setActiveItems();
+
+    const slot = this.shadowRoot?.querySelector('slot');
+    slot?.addEventListener('slotchange', () => {
+      this._registerMenuItems();
+      this._setActiveItems();
+    });
   }
   render() {
     const {
@@ -469,6 +475,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     });
   };
   _setActiveItems = () => {
+    this.activeitems = [];
+
     this.items?.map((item) => {
       let activeItem: activeItemType;
       switch (item.tagName) {
