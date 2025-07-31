@@ -136,6 +136,8 @@ Default.argTypes = {
     },
   },
 };
+
+// Test story, removing before merging
 export const BugFix = () => {
   const [items, setItems] = useState([1, 2, 3, 4, 5]);
 
@@ -145,7 +147,7 @@ export const BugFix = () => {
         onClick={() => {
           setItems([0, 1, 2, 3, 11, 4, 5, 6, 9]);
         }}>
-        Add menu item
+        Add menu items
       </Button>
       <Menu open style={{ marginTop: '5rem' }}>
         {items.map((item) => (
@@ -155,6 +157,8 @@ export const BugFix = () => {
     </>
   );
 };
+
+// Test story, removing before merging
 export const BugFixDisabled = () => {
   const initialItemsRef = useRef([1, 2, 3, 4, 5]);
   const [items, setItems] = useState(initialItemsRef.current);
@@ -165,7 +169,7 @@ export const BugFixDisabled = () => {
         onClick={() => {
           setItems([0, 1, 2, 3, 11, 4, 5, 6, 9]);
         }}>
-        Add menu item
+        Add disabled menu items
       </Button>
       <Menu open style={{ marginTop: '5rem' }}>
         {items.map((item) => {
