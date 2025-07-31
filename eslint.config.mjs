@@ -5,6 +5,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 
 // TODO: There is an `eslintConfig` reference in `package.json`. Investigate
 // whether it should be moved to this file or deleted.
@@ -52,6 +53,7 @@ export default tseslint.config([
     plugins: {
       'jsx-a11y': jsxA11y,
       react: react,
+      'react-hooks': reactHooks,
     },
     settings: {
       react: {

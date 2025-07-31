@@ -71,6 +71,7 @@
     "eslint": "^9.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-playwright": "^2.0.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "fs-extra": "^11.0.0",
     "glob": "^11.0.0",
     "husky": "^9.0.0",
