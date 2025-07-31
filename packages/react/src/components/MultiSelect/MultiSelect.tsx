@@ -360,12 +360,12 @@ export const MultiSelect = React.forwardRef(
     }, [items]);
 
     let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
-    if ((selected ?? []).length > 0 && selectAll) {
-      console.warn(
-        'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
-      );
-      selectAll = false;
-    }
+    // if ((selected ?? []).length > 0 && selectAll) {
+    //   console.warn(
+    //     'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
+    //   );
+    //   selectAll = false;
+    // }
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
@@ -846,18 +846,19 @@ export const MultiSelect = React.forwardRef(
                 filteredItems,
                 sortOptions as SortItemsOptions<ItemType>
               ).map((item, index) => {
-                const isChecked =
-                  selectedItems.filter((selected) => isEqual(selected, item))
-                    .length > 0;
-
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,
                   totalSelectableCount,
                 } = getSelectionStats(selectedItems, filteredItems);
 
+                const isChecked = (item as any).isSelectAll
+                  ? nonSelectAllSelectedCount === totalSelectableCount &&
+                    totalSelectableCount > 0
+                  : selectedItems.some((selected) => isEqual(selected, item));
+
                 const isIndeterminate =
-                  item['isSelectAll'] &&
+                  (item as any).isSelectAll &&
                   hasIndividualSelections &&
                   nonSelectAllSelectedCount < totalSelectableCount;
 

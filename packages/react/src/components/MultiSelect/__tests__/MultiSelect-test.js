@@ -1080,4 +1080,102 @@ describe('MultiSelect', () => {
       'false'
     );
   });
+
+  it('should reflect external control actions and update the select-all item state correctly', async () => {
+    const items = [
+      { id: 'select-all', text: 'All roles', isSelectAll: true },
+      { id: 'downshift-1-item-0', text: 'Editor' },
+
+      { id: 'downshift-1-item-1', text: 'Owner' },
+      { id: 'downshift-1-item-2', text: 'Uploader' },
+    ];
+
+    const ControlledMultiSelect = () => {
+      const [selectedItems, setSelectedItems] = React.useState([]);
+      return (
+        <>
+          <MultiSelect
+            id="controlled-multi"
+            label="Controlled test"
+            items={items}
+            selectedItems={selectedItems}
+            onChange={(data) => setSelectedItems(data.selectedItems)}
+            itemToString={(item) => (item ? item.text : '')}
+          />
+          <Button
+            id="external-all"
+            onClick={() =>
+              setSelectedItems(
+                items.filter((i) => !i.disabled && !i.isSelectAll)
+              )
+            }>
+            External Select All
+          </Button>
+          <Button
+            id="external-one"
+            onClick={() => setSelectedItems([items[1]])}>
+            External Select One
+          </Button>
+          <Button
+            id="external-clear"
+            kind="secondary"
+            onClick={() => setSelectedItems([])}>
+            External Clear
+          </Button>
+        </>
+      );
+    };
+
+    render(<ControlledMultiSelect />);
+
+    const combobox = screen.getByRole('combobox');
+
+    // External full select all (state update)
+    await userEvent.click(screen.getByText('External Select All'));
+
+    // Open dropdown AFTER state is updated to verify selection
+    await userEvent.click(combobox);
+
+    let options = screen.getAllByRole('option');
+    options.forEach((option) =>
+      expect(option).toHaveAttribute('aria-selected', 'true')
+    );
+
+    // "Select All" checkbox should be fully checked
+    const selectAllOption = screen.getByText('All roles').closest('li');
+    const selectAllCheckbox = selectAllOption?.querySelector(
+      'input[type="checkbox"]'
+    );
+    expect(selectAllCheckbox).toHaveProperty('checked', true);
+    expect(selectAllCheckbox).toHaveProperty('indeterminate', false);
+
+    // External single select (partial selection)
+    await userEvent.click(screen.getByText('External Select One'));
+    await userEvent.click(combobox);
+
+    // Select All should now be indeterminate
+    const selectAllOption2 = screen.getByText('All roles').closest('li');
+    const selectAllCheckbox2 = selectAllOption2?.querySelector(
+      'input[type="checkbox"]'
+    );
+    expect(selectAllCheckbox2).toHaveProperty('indeterminate', true);
+    expect(selectAllCheckbox2).toHaveProperty('checked', false);
+
+    // External clear
+    await userEvent.click(screen.getByText('External Clear'));
+    await userEvent.click(combobox);
+
+    options = screen.getAllByRole('option');
+    options.forEach((option) =>
+      expect(option).toHaveAttribute('aria-selected', 'false')
+    );
+
+    // Select All should now be unchecked
+    const selectAllOption3 = screen.getByText('All roles').closest('li');
+    const selectAllCheckbox3 = selectAllOption3?.querySelector(
+      'input[type="checkbox"]'
+    );
+    expect(selectAllCheckbox3).toHaveProperty('checked', false);
+    expect(selectAllCheckbox3).toHaveProperty('indeterminate', false);
+  });
 });
