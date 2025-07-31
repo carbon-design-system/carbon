@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022, 2023
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,10 +33,4 @@ export enum CONTENT_SWITCHER_SIZE {
    * Large size.
    */
   LARGE = 'lg',
-
-  // TODO: deprecate
-  /**
-   * X-Large size.
-   */
-  EXTRA_LARGE = 'xl',
 }
