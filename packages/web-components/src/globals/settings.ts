@@ -30,6 +30,7 @@ const selectorTabbable = `
   ${prefix}-table-toolbar-search,
   ${prefix}-date-picker-input,
   ${prefix}-dropdown,
+  ${prefix}-icon-button,
   ${prefix}-input,
   ${prefix}-link,
   ${prefix}-number-input,
