@@ -30,6 +30,7 @@ const selectorTabbable = `
   ${prefix}-table-toolbar-search,
   ${prefix}-date-picker-input,
   ${prefix}-dropdown,
+  ${prefix}-icon-button,
   ${prefix}-input,
   ${prefix}-link,
   ${prefix}-number-input,
@@ -67,7 +68,8 @@ const selectorTabbable = `
   ${prefix}-header-nav-item,
   ${prefix}-side-nav-link,
   ${prefix}-side-nav-menu,
-  ${prefix}-side-nav-menu-item
+  ${prefix}-side-nav-menu-item,
+  ${prefix}-slug
 `;
 
 // Because we're going to have a bunch of exports
