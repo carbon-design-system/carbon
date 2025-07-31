@@ -22,6 +22,7 @@ export function useNoInteractiveChildren(
 
       if (node) {
         const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+        // eslint-disable-next-line no-console
         console.error(errorMessage);
         throw new Error(errorMessage);
       }
