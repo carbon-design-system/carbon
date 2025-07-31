@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 /* eslint-disable no-console */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import ExampleDropContainerApp from './stories/drop-container';
 import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';
 import mdx from './FileUploader.mdx';
@@ -19,6 +19,11 @@ import {
   FileUploaderItem,
   FileUploaderSkeleton,
 } from './';
+import Link from '../Link';
+import { Download, TrashCan } from '@carbon/icons-react';
+import { usePrefix } from '../../internal/usePrefix';
+import { IconButton } from '../IconButton';
+import { Tooltip } from '../Tooltip';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
 
@@ -173,6 +178,97 @@ export const Default = (args) => {
       <FileUploader {...args} />
     </div>
   );
+};
+
+export const WithCustomFileItems = (args) => {
+  return (
+    <div className="cds--file__container">
+      <FileUploader {...args} />
+    </div>
+  );
+};
+
+WithCustomFileItems.args = {
+  labelTitle: 'Upload files',
+  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
+  buttonLabel: 'Add file',
+  buttonKind: 'primary',
+  size: 'md',
+  filenameStatus: 'edit',
+  accept: ['.jpg', '.png'],
+  multiple: true,
+  disabled: false,
+  iconDescription: 'Delete file',
+  name: '',
+  renderFileActions: () => {
+    return (
+      <>
+        <IconButton autoAlign="true" kind="ghost" size="sm" label="Download">
+          <Download />
+        </IconButton>
+        <IconButton autoAlign="true" kind="ghost" size="sm" label="Remove">
+          <TrashCan />
+        </IconButton>
+      </>
+    );
+  },
+  renderFileName: ({ name }) => {
+    const prefix = usePrefix();
+    const linkRef = useRef(null);
+
+    return (
+      <Tooltip
+        align="bottom"
+        className={`${prefix}--file-filename-tooltip`}
+        label={name}
+        style={{ minWidth: '0', width: '100%' }}>
+        <button className={`${prefix}--file-filename-button`} type="button">
+          <Link
+            style={{ display: 'inline' }}
+            ref={linkRef}
+            className={` ${prefix}--file-filename`}
+            title={name}
+            href="#">
+            {name}
+          </Link>
+        </button>
+      </Tooltip>
+    );
+  },
+};
+
+WithCustomFileItems.argTypes = {
+  onChange: { action: 'onChange' },
+  onClick: { action: 'onClick' },
+  onDelete: { action: 'onDelete' },
+  buttonKind: {
+    control: { type: 'select' },
+    options: [
+      'primary',
+      'secondary',
+      'danger',
+      'ghost',
+      'danger--primary',
+      'tertiary',
+    ],
+  },
+  filenameStatus: {
+    control: { type: 'select' },
+    options: filenameStatuses,
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg'],
+  },
+  accept: {
+    table: { disable: true },
+  },
+  className: {
+    table: { disable: true },
+  },
+  role: {
+    table: { disable: true },
+  },
 };
 
 Default.args = {

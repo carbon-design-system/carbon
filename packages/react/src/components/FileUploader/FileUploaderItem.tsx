@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
+import { Close } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import React, {
   useLayoutEffect,
@@ -13,13 +13,13 @@ import React, {
   useState,
   type HTMLAttributes,
 } from 'react';
-import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
+import { noopFn } from '../../internal/noopFn';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
+import FileUploaderItemBase from './FileUploaderItemBase';
 
 export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -76,7 +76,21 @@ export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
    * Unique identifier for the file object
    */
   uuid?: string;
+
+  /**
+   * A function used to render a custom name for the file object.
+   */
+  renderName?: (props: { name: string | undefined }) => React.ReactNode;
+
+  /**
+   * A function used to render a custom actions for the file object.
+   */
+  renderActions?: (props: {
+    name: string | undefined;
+    status: string;
+  }) => React.ReactNode;
 }
+
 function FileUploaderItem({
   uuid,
   name,
@@ -88,109 +102,110 @@ function FileUploaderItem({
   errorBody,
   size,
   className,
+  renderName,
+  renderActions,
+  tabIndex = 0,
   ...other
 }: FileUploaderItemProps) {
   const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
   const { current: id } = useRef(uuid || useId());
-  const classes = cx(`${prefix}--file__selected-file`, className, {
-    [`${prefix}--file__selected-file--invalid`]: invalid,
-    [`${prefix}--file__selected-file--md`]: size === 'md',
-    [`${prefix}--file__selected-file--sm`]: size === 'sm',
-  });
   const isInvalid = invalid
     ? `${prefix}--file-filename-container-wrap-invalid`
     : `${prefix}--file-filename-container-wrap`;
 
-  const filterSpaceName = (name: string | undefined) => {
-    return name?.replace(/\s+/g, '');
-  };
+  const removeSpaces = (name: string | undefined) => name?.replace(/\s+/g, '');
 
   const isEllipsisActive = (element: any) => {
     setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
     return element.offsetWidth < element.scrollWidth;
   };
+  const ariaDescribedBy =
+    invalid && errorSubject ? `${removeSpaces(name)}-id-error` : undefined;
 
   useLayoutEffect(() => {
-    isEllipsisActive(textRef.current);
+    if (textRef.current) {
+      isEllipsisActive(textRef.current);
+    }
   }, [prefix, name]);
 
-  return (
-    <span className={classes} {...other}>
-      {isEllipsisApplied ? (
-        <div className={isInvalid}>
-          <Tooltip
-            label={name}
-            align="bottom"
-            className={`${prefix}--file-filename-tooltip`}>
-            <button className={`${prefix}--file-filename-button`} type="button">
-              <Text
-                ref={textRef}
-                as="p"
-                title={name}
-                className={`${prefix}--file-filename-button`}
-                id={filterSpaceName(name)}>
-                {name}
-              </Text>
-            </button>
-          </Tooltip>
-        </div>
-      ) : (
-        <Text
-          ref={textRef}
-          as="p"
-          title={name}
-          className={`${prefix}--file-filename`}
-          id={filterSpaceName(name)}>
-          {name}
-        </Text>
-      )}
-
-      <div className={`${prefix}--file-container-item`}>
-        <span className={`${prefix}--file__state-container`}>
-          <Filename
-            name={name}
-            iconDescription={iconDescription}
-            status={status}
-            invalid={invalid}
-            aria-describedby={
-              invalid && errorSubject
-                ? `${filterSpaceName(name)}-id-error`
-                : undefined
-            }
-            onKeyDown={(evt) => {
-              if (matches(evt, [keys.Enter, keys.Space])) {
-                if (status === 'edit') {
-                  evt.preventDefault();
-                  onDelete(evt, { uuid: id });
-                }
-              }
-            }}
-            onClick={(evt) => {
-              if (status === 'edit') {
-                onDelete(evt, { uuid: id });
-              }
-            }}
-          />
-        </span>
-      </div>
-      {invalid && errorSubject && (
-        <div
-          className={`${prefix}--form-requirement`}
-          role="alert"
-          id={`${filterSpaceName(name)}-id-error`}>
-          <Text as="div" className={`${prefix}--form-requirement__title`}>
-            {errorSubject}
+  const defaultFileName = isEllipsisApplied ? (
+    <div className={isInvalid}>
+      <Tooltip
+        label={name}
+        align="bottom"
+        className={`${prefix}--file-filename-tooltip`}>
+        <button className={`${prefix}--file-filename-button`} type="button">
+          <Text
+            ref={textRef}
+            as="p"
+            title={name}
+            className={`${prefix}--file-filename`}
+            id={removeSpaces(name)}>
+            {name}
           </Text>
-          {errorBody && (
-            <Text as="p" className={`${prefix}--form-requirement__supplement`}>
-              {errorBody}
-            </Text>
-          )}
-        </div>
-      )}
-    </span>
+        </button>
+      </Tooltip>
+    </div>
+  ) : (
+    <Text
+      ref={textRef}
+      as="p"
+      title={name}
+      className={`${prefix}--file-filename`}
+      id={removeSpaces(name)}>
+      {name}
+    </Text>
+  );
+
+  const onKeyDown = (evt) => {
+    if (matches(evt, [keys.Enter, keys.Space])) {
+      if (status === 'edit') {
+        evt.preventDefault();
+        onDelete(evt, { uuid: id });
+      }
+    }
+  };
+
+  const onClick = (evt) => {
+    if (status === 'edit') {
+      onDelete(evt, { uuid: id });
+    }
+  };
+
+  const defaultActions = status === 'edit' && (
+    <button
+      aria-describedby={invalid ? ariaDescribedBy : undefined}
+      aria-label={`${iconDescription} - ${name}`}
+      className={`${prefix}--file-close`}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      tabIndex={tabIndex}
+      type="button">
+      <Close />
+    </button>
+  );
+
+  const renderFileName = () =>
+    renderName ? renderName({ name }) : defaultFileName;
+
+  const renderFileActions = () =>
+    renderActions ? renderActions({ name, status }) : defaultActions;
+
+  return (
+    <FileUploaderItemBase
+      className={className}
+      errorBody={errorBody}
+      errorSubject={errorSubject}
+      iconDescription={iconDescription}
+      invalid={invalid}
+      renderActions={renderFileActions}
+      renderName={renderFileName}
+      size={size}
+      status={status}
+      {...other}
+    />
   );
 }
 
@@ -241,6 +256,16 @@ FileUploaderItem.propTypes = {
    * Unique identifier for the file object
    */
   uuid: PropTypes.string,
+
+  /**
+   * A function used to render a custom name for the file object.
+   */
+  renderName: PropTypes.func,
+
+  /**
+   * A function used to render a custom actions for the file object.
+   */
+  renderActions: PropTypes.func,
 };
 
 export default FileUploaderItem;
