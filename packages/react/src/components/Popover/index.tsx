@@ -28,7 +28,6 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { ToggletipButton } from '../Toggletip';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -81,6 +80,11 @@ export interface PopoverBaseProps {
    * Specify how the popover should align with the trigger element.
    */
   align?: PopoverAlignment;
+
+  /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset?: number;
 
   /**
    * Will auto-align the popover on first render if it is not visible. This prop
@@ -454,7 +458,8 @@ export const Popover: PopoverComponent & {
           // positioning.
           if (
             (enableFloatingStyles && item?.type !== PopoverContent) ||
-            (enableFloatingStyles && item?.type === ToggletipButton)
+            (enableFloatingStyles &&
+              item?.type['displayName'] === 'ToggletipButton')
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
@@ -538,6 +543,11 @@ Popover.propTypes = {
     ],
     mapPopoverAlign
   ),
+
+  /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset: PropTypes.number,
 
   /**
    * Provide a custom element or component to render the top-level node for the
