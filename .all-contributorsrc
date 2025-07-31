@@ -1977,6 +1977,15 @@
         "a11y",
         "review"
       ]
+    },
+    {
+      "login": "jose-biescas",
+      "name": "Jose Biescas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/188625806?v=4",
+      "profile": "https://github.com/jose-biescas",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
