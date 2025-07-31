@@ -243,24 +243,6 @@ $css--plex: true !default;
   pointer-events: none;
 }
 
-:host(#{$prefix}-callout-notification[kind='success']) {
-  @extend .#{$prefix}--actionable-notification--success;
-}
-
-:host(#{$prefix}-callout-notification[kind='success'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--success;
-
-  @include notification--experimental(
-    $support-success,
-    $notification-background-success
-  );
-
-  &::before {
-    border-color: $support-success;
-  }
-}
-
 :host(#{$prefix}-callout-notification[kind='info']) {
   @extend .#{$prefix}--actionable-notification--info;
 }
@@ -320,24 +302,6 @@ $css--plex: true !default;
 
   &::before {
     border-color: $support-warning;
-  }
-}
-
-:host(#{$prefix}-callout-notification[kind='error']) {
-  @extend .#{$prefix}--actionable-notification--error;
-}
-
-:host(#{$prefix}-callout-notification[kind='error'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--error;
-
-  @include notification--experimental(
-    $support-error,
-    $notification-background-error
-  );
-
-  &::before {
-    border-color: $support-error;
   }
 }
 
