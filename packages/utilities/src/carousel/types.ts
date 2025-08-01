@@ -37,5 +37,6 @@ interface InitCarousel {
   goToIndex: (index: number) => void;
   getActiveItem: () => ActiveItem;
   destroyEvents: (() => void) | null;
+  allViews: Record<number, HTMLElement | null>;
 }
 export type { CarouselStackHistory, CarouselResponse, InitCarousel };

@@ -284,5 +284,6 @@ export const initCarousel = (
     goToIndex,
     getActiveItem,
     destroyEvents: !excludeSwipeSupport ? destroyEvents : null,
+    allViews: refs,
   };
 };
