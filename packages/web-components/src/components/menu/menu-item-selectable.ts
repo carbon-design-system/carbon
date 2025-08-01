@@ -96,7 +96,6 @@ class CDSmenuItemSelectable extends LitElement {
       menuItemSelectable.addEventListener('keydown', this._handleKeydown);
     }
 
-    this.setAttribute('tabindex', '-1');
     this.context.updateFromChild({ hasSelectableItems: true });
   }
 
