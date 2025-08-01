@@ -10,7 +10,7 @@ let aCheckerPromise = null;
 async function toHaveNoACViolations(node, label) {
   if (aCheckerPromise === null) {
     aCheckerPromise = (async () => {
-      const aChecker = (await import('accessibility-checker')).default;
+      const aChecker = await import('accessibility-checker');
 
       const denylist = new Set([
         'html_lang_exists',

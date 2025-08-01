@@ -18,7 +18,7 @@ export default {
     // this as the version of uuid that gets resolved is ESM but we would like
     // to work in CommonJS until Jest lands support for ESM in stable
     // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
-    '^uuid$': resolve(__dirname, 'node_modules/uuid'),
+    // '^uuid$': resolve(__dirname, 'node_modules/uuid'),
   },
   modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],

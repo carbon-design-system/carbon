@@ -7,6 +7,7 @@
 
 export default {
   preset: 'jest-config-carbon',
+  testEnvironment: 'jsdom',
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
     'packages/**/src/**/*.tsx',
@@ -29,11 +30,12 @@ export default {
     // @see https://jestjs.io/docs/upgrading-to-jest28#packagejson-exports
     // @see https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
     // nanoid: require.resolve('nanoid'),
-    '#(.*)': '<rootDir>/node_modules/$1',
+    '\\.(css|scss)$': 'identity-obj-proxy',
   },
   reporters: ['default', 'jest-junit'],
 
   // This is a temporary workaround until Jest supports Prettier 3 (and ESM)
   // @see https://jestjs.io/docs/configuration#prettierpath-string
   prettierPath: 'prettier',
+  extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
 };
