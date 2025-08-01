@@ -16,13 +16,13 @@ snapshots['cds-menu-button should render and match snapshot'] =
     <cds-menu-item
       label="First action"
       role="menuitem"
-      tabindex="-1"
+      tabindex="0"
     >
     </cds-menu-item>
     <cds-menu-item
       label="Second action"
       role="menuitem"
-      tabindex="-1"
+      tabindex="0"
     >
     </cds-menu-item>
     <cds-menu-item
