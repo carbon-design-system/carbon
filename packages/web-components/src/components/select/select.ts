@@ -16,7 +16,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
 import { INPUT_SIZE } from '../text-input/text-input';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './select.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -466,7 +466,7 @@ class CDSSelect extends FormMixin(LitElement) {
             `}
         ${this._renderItems(this)}
       </select>
-      ${cdsIcon(ChevronDown16, {
+      ${iconLoader(ChevronDown16, {
         class: `${prefix}--select__arrow`,
         'aria-hidden': 'true',
       })}
@@ -477,11 +477,11 @@ class CDSSelect extends FormMixin(LitElement) {
       <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
-        : cdsIcon(WarningFilled16, {
+        : iconLoader(WarningFilled16, {
             class: `${prefix}--select__invalid-icon`,
           })}
       ${!invalid && warn
-        ? cdsIcon(WarningAltFilled16, {
+        ? iconLoader(WarningAltFilled16, {
             class: `${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`,
           })
         : null}

@@ -12,7 +12,7 @@ import { prefix } from '../../globals/settings';
 import { ACCORDION_ALIGNMENT } from './accordion';
 import { forEach } from '../../globals/internal/collection-helpers';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import './accordion-item-skeleton';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
@@ -94,7 +94,7 @@ class CDSAccordionSkeleton extends LitElement {
         ? html`
             <li class="${classes}">
               <span class="${prefix}--accordion__heading">
-                ${cdsIcon(ChevronRight16, {
+                ${iconLoader(ChevronRight16, {
                   class: `${prefix}--accordion__arrow`,
                   part: 'expando-icon',
                 })}

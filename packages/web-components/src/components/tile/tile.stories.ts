@@ -16,7 +16,7 @@ import './index';
 import '../ai-label';
 import '../icon-button';
 import '../link';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import storyDocs from './tile.mdx';
 import styles from './tile-story.scss?lit';
 import '../../../.storybook/templates/with-layer';
@@ -38,15 +38,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${cdsIcon(View16, { slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${cdsIcon(FolderOpen16, { slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${cdsIcon(Folders16, { slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -104,7 +104,7 @@ export const clickableWithCustomIcon = {
     <cds-clickable-tile
       ?disabled=${disabled}
       href="https://www.carbondesignsystem.com/">
-      Clickable tile ${cdsIcon(Launch16, { slot: 'icon' })}
+      Clickable tile ${iconLoader(Launch16, { slot: 'icon' })}
     </cds-clickable-tile>
   `,
 };
@@ -345,7 +345,7 @@ export const WithAILabel = {
           href="https://example.com"
           ai-label
           ?has-rounded-corners="${hasRoundedCorners}">
-          ${cdsIcon(ArrowRight16, { slot: 'icon' })}
+          ${iconLoader(ArrowRight16, { slot: 'icon' })}
           <div class="tile-container">
             <h4>Title</h4>
             <p>

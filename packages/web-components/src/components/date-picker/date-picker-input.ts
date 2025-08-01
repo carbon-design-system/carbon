@@ -18,7 +18,7 @@ import Calendar16 from '@carbon/icons/es/calendar/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 
@@ -91,7 +91,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   private _renderIcon() {
     return this.kind === DATE_PICKER_INPUT_KIND.SIMPLE
       ? undefined
-      : cdsIcon(Calendar16, {
+      : iconLoader(Calendar16, {
           class: `${prefix}--date-picker__icon`,
           role: 'img',
           title: 'Open calendar',
@@ -249,11 +249,11 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       _hasAILabel: hasAILabel,
     } = this;
 
-    const invalidIcon = cdsIcon(WarningFilled16, {
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`,
     });
 
-    const warnIcon = cdsIcon(WarningAltFilled16, {
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`,
     });
 

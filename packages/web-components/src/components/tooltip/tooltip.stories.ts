@@ -11,7 +11,7 @@ import { html } from 'lit';
 // @ts-ignore
 import './index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './tooltip-story.scss?lit';
 import Information16 from '@carbon/icons/es/information/16.js';
 
@@ -93,7 +93,7 @@ export const Default = {
         class="sb-tooltip-trigger"
         role="button"
         aria-labelledby="content">
-        ${cdsIcon(Information16)}
+        ${iconLoader(Information16)}
       </button>
       <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
     </cds-tooltip>
@@ -107,7 +107,7 @@ export const Alignment = {
         class="sb-tooltip-trigger"
         role="button"
         aria-labelledby="content">
-        ${cdsIcon(Information16)}
+        ${iconLoader(Information16)}
       </button>
       <cds-tooltip-content id="content">
         Tooltip alignment
@@ -123,7 +123,7 @@ export const Duration = {
         class="sb-tooltip-trigger"
         role="button"
         aria-labelledby="content">
-        ${cdsIcon(Information16)}
+        ${iconLoader(Information16)}
       </button>
       <cds-tooltip-content id="content"> Label one </cds-tooltip-content>
     </cds-tooltip>

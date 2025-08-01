@@ -14,7 +14,7 @@ import View16 from '@carbon/icons/es/view/16.js';
 import ViewOff16 from '@carbon/icons/es/view--off/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import '../tooltip';
 import '../tooltip/tooltip-content';
@@ -132,11 +132,11 @@ class CDSPasswordInput extends CDSTextInput {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const invalidIcon = cdsIcon(WarningFilled16, {
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-input__invalid-icon`,
     });
 
-    const warnIcon = cdsIcon(WarningAltFilled16, {
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
@@ -208,8 +208,8 @@ class CDSPasswordInput extends CDSTextInput {
 
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
     const passwordVisibilityIcon = passwordIsVisible
-      ? cdsIcon(ViewOff16, { class: `${prefix}--icon-visibility-off` })
-      : cdsIcon(View16, { class: `${prefix}--icon-visibility-on` });
+      ? iconLoader(ViewOff16, { class: `${prefix}--icon-visibility-off` })
+      : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
 
     const passwordVisibilityTooltipClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,

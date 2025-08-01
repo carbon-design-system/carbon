@@ -15,7 +15,7 @@ import getLoadingIcon from '../loading/loading-icon';
 import { INLINE_LOADING_STATE } from './defs';
 import styles from './inline-loading.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { INLINE_LOADING_STATE };
 
@@ -55,7 +55,7 @@ class CDSInlineLoading extends LitElement {
   private _renderIcon() {
     const { iconDescription, status } = this;
     if (status === INLINE_LOADING_STATE.ERROR) {
-      return cdsIcon(ErrorFilled16, {
+      return iconLoader(ErrorFilled16, {
         class: `${prefix}--inline-loading--error`,
         'aria-label': iconDescription,
       });
@@ -76,7 +76,7 @@ class CDSInlineLoading extends LitElement {
         );
       }, this.successDelay);
 
-      return cdsIcon(CheckmarkFilled16, {
+      return iconLoader(CheckmarkFilled16, {
         class: `${prefix}--inline-loading__checkmark-container`,
         'aria-label': iconDescription,
       });

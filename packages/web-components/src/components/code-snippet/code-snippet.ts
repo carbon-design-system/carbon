@@ -18,7 +18,7 @@ import '../copy-button/index';
 import '../copy/copy';
 import '../button/button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE };
 
@@ -452,7 +452,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
               <span class="${prefix}--snippet-btn--text">
                 ${expandCodeBtnText}
               </span>
-              ${cdsIcon(ChevronDown16, {
+              ${iconLoader(ChevronDown16, {
                 class: `${prefix}--icon-chevron--down ${prefix}--snippet__icon`,
                 role: 'img',
                 slot: 'icon',

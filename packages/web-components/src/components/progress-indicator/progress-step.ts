@@ -16,7 +16,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import { PROGRESS_STEP_STAT } from './defs';
 import styles from './progress-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { PROGRESS_STEP_STAT };
 
@@ -119,7 +119,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     const optionalLabel = secondaryLabelText || secondaryLabel;
     return html`
       <div class="${prefix}--progress-step-button" tabindex="0">
-        ${cdsIcon(icons[state], {
+        ${iconLoader(icons[state], {
           class:
             state === PROGRESS_STEP_STAT.INVALID
               ? `${prefix}--progress__warning`

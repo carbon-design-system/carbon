@@ -17,7 +17,7 @@ import {
   TABLE_SORT_CYCLES,
   TABLE_SORT_DIRECTION,
 } from './defs';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -208,11 +208,11 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     if (sortDirection) {
       const sortIcon =
         sortDirection === TABLE_SORT_DIRECTION.NONE
-          ? cdsIcon(ArrowsVertical32, {
+          ? iconLoader(ArrowsVertical32, {
               part: 'sort-icon',
               class: `${prefix}--table-sort__icon-unsorted`,
             })
-          : cdsIcon(ArrowDown32, {
+          : iconLoader(ArrowDown32, {
               part: 'sort-icon',
               class: `${prefix}--table-sort__icon`,
             });

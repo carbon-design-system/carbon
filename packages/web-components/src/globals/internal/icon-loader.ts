@@ -16,16 +16,20 @@ import { createIconTemplate } from './icon-loader-utils';
  * import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
  *
  * Usage:
- *   Icon import: ${cdsIcon(ChevronRight16)}
- *   With attributes: ${cdsIcon(ChevronRight16, { class: 'my-class', slot: 'icon' })}
- *   SVG string: ${cdsIcon(null, {}, '<svg>...</svg>')}
+ *   Icon import: ${iconLoader(ChevronRight16)}
+ *   With attributes: ${iconLoader(ChevronRight16, { class: 'my-class', slot: 'icon' })}
+ *   SVG string: ${iconLoader(null, {}, '<svg>...</svg>')}
  *
  * @param icon - Icon descriptor from import, Lit template, or null for custom SVG
  * @param attributes - Additional attributes to apply to the SVG
  * @param customSvg - Custom SVG string (used when icon is null)
  * @returns Lit template with pure SVG content
  */
-export function cdsIcon(icon: any, attributes: any = {}, customSvg?: string) {
+export function iconLoader(
+  icon: any,
+  attributes: any = {},
+  customSvg?: string
+) {
   // SVG string
   if (customSvg) {
     return unsafeSVG(customSvg);
@@ -46,4 +50,4 @@ export function cdsIcon(icon: any, attributes: any = {}, customSvg?: string) {
   return null;
 }
 
-export default cdsIcon;
+export default iconLoader;

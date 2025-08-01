@@ -10,7 +10,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import Handle from '../../globals/internal/handle';
 import { ACCORDION_ITEM_BREAKPOINT } from './defs';
@@ -202,7 +202,7 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         aria-expanded="${open}"
         @click="${handleClickExpando}"
         @keydown="${handleKeydownExpando}">
-        ${cdsIcon(ChevronRight16, {
+        ${iconLoader(ChevronRight16, {
           part: 'expando-icon',
           class: `${prefix}--accordion__arrow`,
         })}

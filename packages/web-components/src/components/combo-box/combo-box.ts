@@ -13,7 +13,7 @@ import Close16 from '@carbon/icons/es/close/16.js';
 import { findIndex, forEach } from '../../globals/internal/collection-helpers';
 import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import CDSComboBoxItem from './combo-box-item';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -275,7 +275,7 @@ class CDSComboBox extends CDSDropdown {
             class="${prefix}--list-box__selection"
             tabindex="0"
             title="${clearSelectionLabel}">
-            ${cdsIcon(Close16, { 'aria-label': clearSelectionLabel })}
+            ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
         `;
   }

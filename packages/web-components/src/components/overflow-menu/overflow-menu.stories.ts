@@ -13,7 +13,7 @@ import './overflow-menu-item';
 import { prefix } from '../../globals/settings';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import Filter16 from '@carbon/icons/es/filter/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const sizes = {
   [`Small size (${OVERFLOW_MENU_SIZE.SMALL})`]: OVERFLOW_MENU_SIZE.SMALL,
@@ -62,7 +62,7 @@ export const Default = {
     const { flipped, iconDescription, open, index, size } = args ?? {};
     return html`
       <cds-overflow-menu ?open="${open}" size="${size}" index=${index}>
-        ${cdsIcon(OverflowMenuVertical16, {
+        ${iconLoader(OverflowMenuVertical16, {
           class: `${prefix}--overflow-menu__icon`,
           slot: 'icon',
         })}
@@ -89,7 +89,7 @@ export const RenderCustomIcon = {
   render: () => {
     return html`
       <cds-overflow-menu>
-        ${cdsIcon(Filter16, {
+        ${iconLoader(Filter16, {
           class: `${prefix}--overflow-menu__icon`,
           slot: 'icon',
         })}

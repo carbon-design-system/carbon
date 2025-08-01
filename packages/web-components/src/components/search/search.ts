@@ -19,7 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './search.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Search box.
@@ -221,7 +221,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         <slot name="icon" @slotchange=${handleSlotChange}>
           ${hasCustomIcon
             ? html``
-            : cdsIcon(Search16, {
+            : iconLoader(Search16, {
                 part: 'search-icon',
                 class: `${prefix}--search-magnifier-icon`,
                 role: 'img',
@@ -249,7 +249,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         @click="${handleClearInputButtonClick}"
         type="button"
         aria-label="${closeButtonLabelText}">
-        ${cdsIcon(Close16, {
+        ${iconLoader(Close16, {
           part: 'close-icon',
           'aria-label': closeButtonLabelText,
           role: 'img',

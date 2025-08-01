@@ -9,7 +9,7 @@ import './index';
 import Asset16 from '@carbon/icons/es/asset/16.js';
 import User16 from '@carbon/icons/es/user/16.js';
 import Group16 from '@carbon/icons/es/group/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const args = {
   label: 'Actions',
@@ -170,13 +170,13 @@ export const withIcons = {
       tab-index=${tabIndex}>
       <cds-menu>
         <cds-menu-item label="Asset">
-          ${cdsIcon(Asset16, { slot: 'render-icon' })}
+          ${iconLoader(Asset16, { slot: 'render-icon' })}
         </cds-menu-item>
         <cds-menu-item label="User">
-          ${cdsIcon(User16, { slot: 'render-icon' })}
+          ${iconLoader(User16, { slot: 'render-icon' })}
         </cds-menu-item>
         <cds-menu-item label="User group">
-          ${cdsIcon(Group16, { slot: 'render-icon' })}
+          ${iconLoader(Group16, { slot: 'render-icon' })}
         </cds-menu-item>
       </cds-menu>
     </cds-menu-button>

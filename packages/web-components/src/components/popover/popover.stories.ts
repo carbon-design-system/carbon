@@ -14,7 +14,7 @@ import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../checkbox/checkbox';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
 const controls = {
@@ -94,7 +94,7 @@ export const Default = {
           type="button"
           aria-expanded=${open}
           @click="${() => handleClick()}">
-          ${cdsIcon(Checkbox16)}
+          ${iconLoader(Checkbox16)}
         </button>
         <cds-popover-content>
           <div class="p-3">
@@ -129,7 +129,7 @@ export const TabTip = {
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-one')}">
-            ${cdsIcon(Settings16)}
+            ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">
@@ -173,7 +173,7 @@ export const TabTip = {
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-two')}">
-            ${cdsIcon(Settings16)}
+            ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">

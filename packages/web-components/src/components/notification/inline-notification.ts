@@ -16,7 +16,7 @@ import ErrorFilled20 from '@carbon/icons/es/error--filled/20.js';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
@@ -144,7 +144,7 @@ class CDSInlineNotification extends FocusMixin(LitElement) {
         aria-label=${ifDefined(ariaLabel)}
         title=${ifDefined(ariaLabel)}
         @click="${handleClickCloseButton}">
-        ${cdsIcon(Close16, {
+        ${iconLoader(Close16, {
           class: `${prefix}--${type}-notification__close-icon`,
         })}
       </button>
@@ -177,7 +177,7 @@ class CDSInlineNotification extends FocusMixin(LitElement) {
     const IconComponent = iconNamesForKinds[kind];
     return !IconComponent
       ? undefined
-      : cdsIcon(IconComponent, {
+      : iconLoader(IconComponent, {
           class: `${prefix}--${type}-notification__icon`,
           'aria-label': statusIconDescription,
         });

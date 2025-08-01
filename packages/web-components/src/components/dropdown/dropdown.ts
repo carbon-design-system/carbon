@@ -10,7 +10,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html, TemplateResult } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
@@ -745,14 +745,14 @@ class CDSDropdown extends ValidityMixin(
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
     const validityIcon = !invalid
       ? undefined
-      : cdsIcon(WarningFilled16, {
+      : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
     const warningIcon =
       !warn || (invalid && warn)
         ? undefined
-        : cdsIcon(WarningAltFilled16, {
+        : iconLoader(WarningAltFilled16, {
             class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
             'aria-label': toggleLabel,
           });
@@ -809,7 +809,7 @@ class CDSDropdown extends ValidityMixin(
           )}">
           ${this._renderPrecedingLabel()}${this._renderLabel()}${validityIcon}${warningIcon}${this._renderFollowingLabel()}
           <div id="trigger-caret" class="${iconContainerClasses}">
-            ${cdsIcon(ChevronDown16, { 'aria-label': toggleLabel })}
+            ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}
           </div>
         </div>
         <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>

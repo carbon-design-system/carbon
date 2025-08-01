@@ -16,7 +16,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Multi-selectable tile.
@@ -88,7 +88,7 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   protected _renderIcon() {
     const { selected, checkmarkLabel } = this;
 
-    return cdsIcon(selected ? CheckboxCheckedFilled16 : Checkbox16, {
+    return iconLoader(selected ? CheckboxCheckedFilled16 : Checkbox16, {
       'aria-label': checkmarkLabel || undefined,
       class: `${prefix}--selectable-tile__icon`,
     });

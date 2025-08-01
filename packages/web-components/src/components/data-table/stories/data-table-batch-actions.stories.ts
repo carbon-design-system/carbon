@@ -19,7 +19,7 @@ import '../../overflow-menu';
 import '../index';
 import storyDocs from './data-table.mdx';
 import '../../link/index';
-import { cdsIcon } from '../../../globals/internal/icon-loader';
+import { iconLoader } from '../../../globals/internal/icon-loader';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -86,21 +86,21 @@ export const Default = {
         <cds-table-batch-actions ?active="true">
           <cds-button data-context="data-table"
             >Delete
-            ${cdsIcon(TrashCan, {
+            ${iconLoader(TrashCan, {
               slot: 'icon',
               class: `${prefix}--btn__icon`,
             })}
           </cds-button>
           <cds-button data-context="data-table"
             >Save
-            ${cdsIcon(Save, { slot: 'icon', class: `${prefix}--btn__icon` })}
+            ${iconLoader(Save, { slot: 'icon', class: `${prefix}--btn__icon` })}
           </cds-button>
           <cds-button
             href="javascript:void 0"
             download="table-data.json"
             data-context="data-table">
             Download
-            ${cdsIcon(Download16, {
+            ${iconLoader(Download16, {
               slot: 'icon',
               class: `${prefix}--btn__icon`,
             })}
@@ -110,7 +110,7 @@ export const Default = {
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${cdsIcon(Settings16, {
+            ${iconLoader(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}

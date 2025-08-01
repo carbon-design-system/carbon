@@ -17,7 +17,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import FloatingUIContoller from '../../globals/controllers/floating-controller';
 import styles from './toggletip.scss?lit';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Definition tooltip.
@@ -128,7 +128,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${prefix}--toggletip-button"
         @click=${this._handleClick}>
         <slot name="trigger"
-          >${cdsIcon(Information16, { id: 'trigger' })}
+          >${iconLoader(Information16, { id: 'trigger' })}
         </slot>
       </button>
     `;

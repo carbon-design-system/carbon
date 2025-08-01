@@ -14,7 +14,7 @@ import TrashCan16 from '@carbon/icons/es/trash-can/16.js';
 import TextItalic16 from '@carbon/icons/es/text--italic/16.js';
 import TextBold16 from '@carbon/icons/es/text--bold/16.js';
 import Paste16 from '@carbon/icons/es/paste/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import CDSMenu from './menu';
 import MDXContent from './menu.mdx';
 import CDSmenuItem from './menu-item';
@@ -80,7 +80,7 @@ export const Default = {
     return html`
       <cds-menu ?open=${open} size=${size} menuAlignment="bottom">
         <cds-menu-item label="Share with">
-          ${cdsIcon(FolderShared16, { slot: 'render-icon' })}
+          ${iconLoader(FolderShared16, { slot: 'render-icon' })}
           <cds-menu-item-radio-group slot="submenu" label="Share with list">
             <cds-menu-item label="None"></cds-menu-item>
             <cds-menu-item label="Product team"></cds-menu-item>
@@ -90,21 +90,21 @@ export const Default = {
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Cut" shortcut="⌘X">
-          ${cdsIcon(Cut16, { slot: 'render-icon' })}
+          ${iconLoader(Cut16, { slot: 'render-icon' })}
         </cds-menu-item>
         <cds-menu-item label="Copy" shortcut="⌘C">
-          ${cdsIcon(Copy16, { slot: 'render-icon' })}
+          ${iconLoader(Copy16, { slot: 'render-icon' })}
         </cds-menu-item>
         <cds-menu-item label="Paste" shortcut="⌘V" disabled>
-          ${cdsIcon(Paste16, { slot: 'render-icon' })}
+          ${iconLoader(Paste16, { slot: 'render-icon' })}
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
           <cds-menu-item-selectable label="Bold" shortcut="⌘B">
-            ${cdsIcon(TextBold16, { slot: 'render-icon' })}
+            ${iconLoader(TextBold16, { slot: 'render-icon' })}
           </cds-menu-item-selectable>
           <cds-menu-item-selectable label="Italic" shortcut="⌘I">
-            ${cdsIcon(TextItalic16, { slot: 'render-icon' })}
+            ${iconLoader(TextItalic16, { slot: 'render-icon' })}
           </cds-menu-item-selectable>
         </cds-menu-item-group>
         <cds-menu-item-divider></cds-menu-item-divider>
@@ -116,7 +116,7 @@ export const Default = {
         </cds-menu-item-radio-group>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Delete" shortcut="⌫" kind="danger">
-          ${cdsIcon(TrashCan16, { slot: 'render-icon' })}
+          ${iconLoader(TrashCan16, { slot: 'render-icon' })}
         </cds-menu-item>
       </cds-menu>
     `;

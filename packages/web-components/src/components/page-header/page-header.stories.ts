@@ -25,7 +25,7 @@ import Bee16 from '@carbon/icons/es/bee/16.js';
 import Activity16 from '@carbon/icons/es/activity/16.js';
 import AiGenerate16 from '@carbon/icons/es/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/icons/es/cloud-foundry--1/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const tags = [
   {
@@ -114,7 +114,9 @@ export const Default = {
           border="${border}"
           ?page-actions-flush="${pageActionsFlush}"
           ?content-actions-flush="${contentActionsFlush}">
-          ${renderBreadcrumbIcon ? cdsIcon(Bee16, { slot: 'icon' }) : undefined}
+          ${renderBreadcrumbIcon
+            ? iconLoader(Bee16, { slot: 'icon' })
+            : undefined}
           <cds-breadcrumb>
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -127,13 +129,13 @@ export const Default = {
             <cds-button size="md">Button</cds-button>
           </div>
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${cdsIcon(Activity16)}</cds-icon-button
+            >${iconLoader(Activity16)}</cds-icon-button
           >
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${cdsIcon(AiGenerate16)}</cds-icon-button
+            >${iconLoader(AiGenerate16)}</cds-icon-button
           >
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${cdsIcon(CloudFoundry16)}</cds-icon-button
+            >${iconLoader(CloudFoundry16)}</cds-icon-button
           >
         </cds-page-header-breadcrumb>
         <cds-page-header-content title="${title}">
@@ -202,7 +204,7 @@ export const ContentWithContextualActions = {
   render: () =>
     html`<cds-page-header>
       <cds-page-header-breadcrumb>
-        ${cdsIcon(Bee16, { slot: 'icon' })}
+        ${iconLoader(Bee16, { slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
             <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -212,13 +214,13 @@ export const ContentWithContextualActions = {
           </cds-breadcrumb-item>
         </cds-breadcrumb>
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(Activity16)}</cds-icon-button
+          >${iconLoader(Activity16)}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(AiGenerate16)}</cds-icon-button
+          >${iconLoader(AiGenerate16)}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(CloudFoundry16)}</cds-icon-button
+          >${iconLoader(CloudFoundry16)}</cds-icon-button
         >
       </cds-page-header-breadcrumb>
       <cds-page-header-content
@@ -241,7 +243,7 @@ export const ContentWithContextualActionsAndPageActions = {
   render: () =>
     html`<cds-page-header>
       <cds-page-header-breadcrumb>
-        ${cdsIcon(Bee16, { slot: 'icon' })}
+        ${iconLoader(Bee16, { slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
             <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -251,13 +253,13 @@ export const ContentWithContextualActionsAndPageActions = {
           </cds-breadcrumb-item>
         </cds-breadcrumb>
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(Activity16)}</cds-icon-button
+          >${iconLoader(Activity16)}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(AiGenerate16)}</cds-icon-button
+          >${iconLoader(AiGenerate16)}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(CloudFoundry16)}</cds-icon-button
+          >${iconLoader(CloudFoundry16)}</cds-icon-button
         >
       </cds-page-header-breadcrumb>
       <cds-page-header-content
@@ -267,7 +269,7 @@ export const ContentWithContextualActionsAndPageActions = {
         </div>
         <div slot="page-actions">
           <cds-button size="md"
-            >Primary action ${cdsIcon(Add16, { slot: 'icon' })}</cds-button
+            >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
           >
         </div>
         <cds-page-header-content-text subtitle="Subtitle">
@@ -288,7 +290,7 @@ export const ContentWithHeroImage = {
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
           <cds-page-header-breadcrumb border=false within-grid>
-        ${cdsIcon(Bee16, { slot: 'icon' })}
+        ${iconLoader(Bee16, { slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
             <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -338,7 +340,7 @@ export const ContentWithIcon = {
   render: () =>
     html`<cds-page-header>
       <cds-page-header-breadcrumb>
-        ${cdsIcon(Bee16, { slot: 'icon' })}
+        ${iconLoader(Bee16, { slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
             <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -348,18 +350,18 @@ export const ContentWithIcon = {
           </cds-breadcrumb-item>
         </cds-breadcrumb>
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(Activity16)}</cds-icon-button
+          >${iconLoader(Activity16)}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(AiGenerate16)}</cds-icon-button
+          >${iconLoader(AiGenerate16)}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${cdsIcon(CloudFoundry16)}</cds-icon-button
+          >${iconLoader(CloudFoundry16)}</cds-icon-button
         >
       </cds-page-header-breadcrumb>
       <cds-page-header-content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long">
-        ${cdsIcon(Bee32, { slot: 'icon' })}
+        ${iconLoader(Bee32, { slot: 'icon' })}
         <cds-page-header-content-text subtitle="Subtitle">
           Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
           Massa elementum class enim malesuada lacinia hendrerit enim erat
@@ -375,7 +377,7 @@ export const TabBarWithTabsAndTags = {
   render: () =>
     html`<cds-page-header>
         <cds-page-header-breadcrumb>
-          ${cdsIcon(Bee16, { slot: 'icon' })}
+          ${iconLoader(Bee16, { slot: 'icon' })}
           <cds-breadcrumb>
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -385,13 +387,13 @@ export const TabBarWithTabsAndTags = {
             </cds-breadcrumb-item>
           </cds-breadcrumb>
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${cdsIcon(Activity16)}</cds-icon-button
+            >${iconLoader(Activity16)}</cds-icon-button
           >
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${cdsIcon(AiGenerate16)}</cds-icon-button
+            >${iconLoader(AiGenerate16)}</cds-icon-button
           >
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${cdsIcon(CloudFoundry16)}</cds-icon-button
+            >${iconLoader(CloudFoundry16)}</cds-icon-button
           >
         </cds-page-header-breadcrumb>
         <cds-page-header-content

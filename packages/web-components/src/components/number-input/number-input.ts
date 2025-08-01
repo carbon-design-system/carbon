@@ -9,7 +9,7 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import Add16 from '@carbon/icons/es/add/16.js';
 import Subtract16 from '@carbon/icons/es/subtract/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
@@ -277,11 +277,11 @@ class CDSNumberInput extends CDSTextInput {
 
     const isValid = this._getInputValidity();
 
-    const invalidIcon = cdsIcon(WarningFilled16, {
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--number__invalid`,
     });
 
-    const warnIcon = cdsIcon(WarningAltFilled16, {
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--number__invalid ${prefix}--number__invalid--warning`,
     });
 
@@ -340,7 +340,7 @@ class CDSNumberInput extends CDSTextInput {
         type="button"
         ?disabled=${normalizedProps.disabled}
         @click=${handleUserInitiatedStepUp}>
-        ${cdsIcon(Add16)}
+        ${iconLoader(Add16)}
       </button>
       <div class="${prefix}--number__rule-divider"></div>
     `;
@@ -354,7 +354,7 @@ class CDSNumberInput extends CDSTextInput {
         type="button"
         ?disabled=${normalizedProps.disabled}
         @click=${handleUserInitiatedStepDown}>
-        ${cdsIcon(Subtract16)}
+        ${iconLoader(Subtract16)}
       </button>
       <div class="${prefix}--number__rule-divider"></div>
     `;

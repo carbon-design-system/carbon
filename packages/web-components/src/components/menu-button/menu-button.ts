@@ -15,7 +15,7 @@ import styles from './menu-button.scss?lit';
 import '../button/index';
 import '../menu/index';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
@@ -134,7 +134,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
         size=${size}
         ?disabled=${disabled}
         tab-index=${tabIndex}>
-        ${label} ${cdsIcon(ChevronDown16, { slot: 'icon' })}
+        ${label} ${iconLoader(ChevronDown16, { slot: 'icon' })}
       </cds-button>
       <slot></slot>
     `;

@@ -10,7 +10,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import './index';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
 import Workspace16 from '@carbon/icons/es/workspace/16.js';
 import ViewMode216 from '@carbon/icons/es/view--mode-2/16.js';
@@ -73,15 +73,15 @@ export const IconOnly = {
   render: () => html`
     <cds-content-switcher value="all">
       <cds-content-switcher-item icon value="all">
-        ${cdsIcon(TableOfContents16)}
+        ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item icon value="cloudFoundry">
-        ${cdsIcon(Workspace16)}
+        ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item icon value="staging">
-        ${cdsIcon(ViewMode216)}
+        ${iconLoader(ViewMode216)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
     </cds-content-switcher>
@@ -93,15 +93,15 @@ export const IconOnlyWithLayer = {
     <sb-template-layers>
       <cds-content-switcher value="all">
         <cds-content-switcher-item icon value="all">
-          ${cdsIcon(TableOfContents16)}
+          ${iconLoader(TableOfContents16)}
           <span slot="tooltip-content">Table of Contents</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item icon value="cloudFoundry">
-          ${cdsIcon(Workspace16)}
+          ${iconLoader(Workspace16)}
           <span slot="tooltip-content">Workspace Test</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item icon value="staging">
-          ${cdsIcon(ViewMode216)}
+          ${iconLoader(ViewMode216)}
           <span slot="tooltip-content">View Mode</span>
         </cds-content-switcher-item>
       </cds-content-switcher>

@@ -14,7 +14,7 @@ import { ICON_BUTTON_SIZE } from './defs';
 import Edit16 from '@carbon/icons/es/edit/16.js';
 import Notification16 from '@carbon/icons/es/notification/16.js';
 import { BUTTON_KIND } from '../button/defs';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const kinds = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -127,7 +127,7 @@ export const Default = {
         kind=${kind}
         leave-delay-ms=${leaveDelayMs}
         size=${size}>
-        ${cdsIcon(Edit16, { slot: 'icon' })}
+        ${iconLoader(Edit16, { slot: 'icon' })}
         <span slot="tooltip-content">${label}</span>
       </cds-icon-button>
     `;
@@ -154,7 +154,7 @@ export const withBadgeIndicator = {
         size="lg"
         href="https://www.example.com"
         ?disabled=${disabled}>
-        ${cdsIcon(Notification16, { slot: 'icon' })}
+        ${iconLoader(Notification16, { slot: 'icon' })}
         <span slot="tooltip-content">label</span>
         ${badgeCount > 0
           ? html` <cds-badge-indicator

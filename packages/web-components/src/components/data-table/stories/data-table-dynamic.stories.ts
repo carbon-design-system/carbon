@@ -18,7 +18,7 @@ import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../index';
 import '../../icon-indicator/index';
 import storyDocs from './data-table.mdx';
-import { cdsIcon } from '../../../globals/internal/icon-loader';
+import { iconLoader } from '../../../globals/internal/icon-loader';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -139,21 +139,21 @@ export const Default = {
       <cds-table-toolbar slot="toolbar">
         <cds-table-batch-actions ?active="true">
           <cds-button tooltip-position="bottom" tooltip-text="Add"
-            >${cdsIcon(Add, { slot: 'icon' })}</cds-button
+            >${iconLoader(Add, { slot: 'icon' })}</cds-button
           >
           <cds-button tooltip-position="bottom" tooltip-text="Save"
-            >${cdsIcon(Save, { slot: 'icon' })}</cds-button
+            >${iconLoader(Save, { slot: 'icon' })}</cds-button
           >
-          <cds-button>${cdsIcon(Save, { slot: 'icon' })}</cds-button>
+          <cds-button>${iconLoader(Save, { slot: 'icon' })}</cds-button>
           <cds-button href="javascript:void 0" download="table-data.json">
-            Download ${cdsIcon(Download16, { slot: 'icon' })}
+            Download ${iconLoader(Download16, { slot: 'icon' })}
           </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${cdsIcon(Settings16, {
+            ${iconLoader(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
@@ -285,17 +285,19 @@ export const Playground = {
 
       <cds-table-toolbar slot="toolbar">
         <cds-table-batch-actions ?active="true">
-          <cds-button>Delete ${cdsIcon(TrashCan, { slot: 'icon' })}</cds-button>
-          <cds-button>Save ${cdsIcon(Save, { slot: 'icon' })}</cds-button>
+          <cds-button
+            >Delete ${iconLoader(TrashCan, { slot: 'icon' })}</cds-button
+          >
+          <cds-button>Save ${iconLoader(Save, { slot: 'icon' })}</cds-button>
           <cds-button href="javascript:void 0" download="table-data.json">
-            Download ${cdsIcon(Download16, { slot: 'icon' })}
+            Download ${iconLoader(Download16, { slot: 'icon' })}
           </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${cdsIcon(Settings16, {
+            ${iconLoader(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}

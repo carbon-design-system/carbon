@@ -35,7 +35,7 @@ import WarningSquareFilled16 from '@carbon/icons/es/warning-square--filled/16.js
 import WarningSquareFilled20 from '@carbon/icons/es/warning-square--filled/20.js';
 export { ICON_INDICATOR_KIND };
 
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './icon-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -117,7 +117,7 @@ class CDSIconIndicator extends LitElement {
 
   render() {
     const IconComponent = iconMap[this.kind]?.[this.size];
-    return html`${cdsIcon(IconComponent, { size: this.size })}${this.label}`;
+    return html`${iconLoader(IconComponent, { size: this.size })}${this.label}`;
   }
 
   static styles = styles;

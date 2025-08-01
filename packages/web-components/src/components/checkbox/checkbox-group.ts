@@ -12,7 +12,7 @@ import { prefix } from '../../globals/settings';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import CDSCheckbox from './checkbox';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './checkbox.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { CHECKBOX_ORIENTATION } from './defs';
@@ -208,7 +208,7 @@ class CDSCheckboxGroup extends LitElement {
         <div class="${prefix}--checkbox-group__validation-msg">
           ${!readonly && invalid
             ? html`
-                ${cdsIcon(WarningFilled16, {
+                ${iconLoader(WarningFilled16, {
                   class: `${prefix}--checkbox__invalid-icon`,
                 })}
                 <div class="${prefix}--form-requirement">${invalidText}</div>
@@ -216,7 +216,7 @@ class CDSCheckboxGroup extends LitElement {
             : null}
           ${showWarning
             ? html`
-                ${cdsIcon(WarningAltFilled16, {
+                ${iconLoader(WarningAltFilled16, {
                   class: `${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`,
                 })}
                 <div class="${prefix}--form-requirement">${warnText}</div>

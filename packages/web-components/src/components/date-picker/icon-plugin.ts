@@ -10,7 +10,7 @@ import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
 import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * @returns A Flatpickr plugin to set the right icons in the design system.
@@ -21,8 +21,8 @@ export default (): Plugin => (fp: FlatpickrInstance) => {
    */
   const setIcon = () => {
     const { prevMonthNav, nextMonthNav } = fp;
-    render(cdsIcon(ChevronLeft16), prevMonthNav);
-    render(cdsIcon(ChevronRight16), nextMonthNav);
+    render(iconLoader(ChevronLeft16), prevMonthNav);
+    render(iconLoader(ChevronRight16), nextMonthNav);
   };
 
   /**

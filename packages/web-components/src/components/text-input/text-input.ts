@@ -10,7 +10,7 @@ import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
@@ -334,11 +334,11 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const invalidIcon = cdsIcon(WarningFilled16, {
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-input__invalid-icon`,
     });
 
-    const warnIcon = cdsIcon(WarningAltFilled16, {
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
@@ -417,8 +417,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     //TODO deprecated, remove in v12
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
     const passwordVisibilityIcon = passwordIsVisible
-      ? cdsIcon(ViewOff16, { class: `${prefix}--icon-visibility-off` })
-      : cdsIcon(View16, { class: `${prefix}--icon-visibility-on` });
+      ? iconLoader(ViewOff16, { class: `${prefix}--icon-visibility-off` })
+      : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
 
     //TODO deprecated, remove in v12
     const passwordVisibilityToggleClasses = classMap({

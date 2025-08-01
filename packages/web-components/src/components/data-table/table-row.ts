@@ -19,7 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSTableExpandedRow from './table-expanded-row';
 import CDSTableCell from './table-cell';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Data table row.
@@ -190,7 +190,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
           <button
             class="${prefix}--table-expand__button"
             @click="${handleClickExpando}">
-            ${cdsIcon(ChevronRight16, {
+            ${iconLoader(ChevronRight16, {
               class: `${prefix}--table-expand__svg`,
             })}
           </button>

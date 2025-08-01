@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import Close16 from '@carbon/icons/es/close/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
@@ -207,7 +207,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
             aria-labelledby="content"
             class="${prefix}--tag__close-icon"
             ?disabled=${disabled}>
-            ${cdsIcon(Close16)}
+            ${iconLoader(Close16)}
           </button>
           <cds-tooltip-content id="content">
             ${dismissActionLabel}

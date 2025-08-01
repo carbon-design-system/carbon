@@ -13,7 +13,7 @@ import {
   state,
 } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './defs';
@@ -725,7 +725,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
               size="sm"
               class=${`${prefix}--btn ${blockClass}__navigation-back-button`}
               @click=${this._handleNavigateBack}>
-              ${cdsIcon(ArrowLeft16, { slot: 'icon' })}
+              ${iconLoader(ArrowLeft16, { slot: 'icon' })}
               <span slot="tooltip-content">
                 ${navigationBackIconDescription}
               </span>
@@ -751,7 +751,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             size="sm"
             class=${`${blockClass}__close-button`}
             @click=${this._handleCloseClick}>
-            ${cdsIcon(Close20, { slot: 'icon' })}
+            ${iconLoader(Close20, { slot: 'icon' })}
             <span slot="tooltip-content"> ${closeIconDescription} </span>
           </cds-icon-button>
         </div>

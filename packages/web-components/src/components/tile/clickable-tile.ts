@@ -14,7 +14,7 @@ import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import AILabel24 from '@carbon/icons/es/ai-label/24.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 /**
  * Clickable tile.
  *
@@ -85,7 +85,7 @@ class CDSClickableTile extends CDSLink {
     return html`
       ${super._renderInner()}
       ${this.aiLabel || this.slug
-        ? cdsIcon(AILabel24, { class: `${prefix}--tile--ai-label-icon` })
+        ? iconLoader(AILabel24, { class: `${prefix}--tile--ai-label-icon` })
         : ''}
       <slot name="decorator"></slot>
     `;

@@ -14,7 +14,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../copy/copy';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Copy button.
@@ -83,7 +83,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}
         align=${align}>
-        ${cdsIcon(Copy16, {
+        ${iconLoader(Copy16, {
           slot: 'icon',
           class: `${prefix}--snippet__icon`,
         })}

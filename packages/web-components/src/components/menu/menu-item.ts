@@ -18,7 +18,7 @@ import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
 
@@ -178,7 +178,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
 
     return html`
       <div class="${prefix}--menu-item__selection-icon">
-        ${this.ariaChecked === 'true' ? cdsIcon(Checkmark16) : undefined}
+        ${this.ariaChecked === 'true' ? iconLoader(Checkmark16) : undefined}
       </div>
 
       <div class="${prefix}--menu-item__icon">
@@ -191,7 +191,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       ${this.hasSubmenu
         ? html`
             <div class="${prefix}--menu-item__shortcut">
-              ${isRtl ? cdsIcon(CaretLeft16) : cdsIcon(CaretRight16)}
+              ${isRtl ? iconLoader(CaretLeft16) : iconLoader(CaretRight16)}
             </div>
             <cds-menu
               className=${menuClassName}

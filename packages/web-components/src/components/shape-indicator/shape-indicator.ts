@@ -9,7 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './shape-indicator.scss?lit';
 
 // Import Carbon icons
@@ -91,10 +91,10 @@ class CDSShapeIndicator extends LitElement {
 
     // Handle custom SVG string vs Carbon icon descriptor
     if (typeof shape === 'string') {
-      return html` ${cdsIcon(null, {}, shape)} ${this.label} `;
+      return html` ${iconLoader(null, {}, shape)} ${this.label} `;
     }
 
-    return html` ${cdsIcon(shape)} ${this.label} `;
+    return html` ${iconLoader(shape)} ${this.label} `;
   }
 
   /**

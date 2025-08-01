@@ -19,7 +19,7 @@ import CDSDropdown, {
   DROPDOWN_KEYBOARD_ACTION,
   DROPDOWN_TYPE,
 } from '../dropdown/dropdown';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
@@ -317,7 +317,7 @@ class CDSMultiSelect extends CDSDropdown {
             aria-disabled=${readOnly}
             title="${clearSelectionLabel}">
             ${selectedItemsCount}
-            ${cdsIcon(Close16, {
+            ${iconLoader(Close16, {
               'aria-label': clearSelectionLabel,
               class: `${prefix}--tag__close-icon`,
             })}
@@ -366,7 +366,7 @@ class CDSMultiSelect extends CDSDropdown {
             class="${prefix}--list-box__selection"
             tabindex="0"
             title="${clearSelectionLabel}">
-            ${cdsIcon(Close16, { 'aria-label': clearSelectionLabel })}
+            ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
         `
       : undefined;

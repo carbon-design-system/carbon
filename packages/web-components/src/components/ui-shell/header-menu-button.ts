@@ -12,7 +12,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import Menu16 from '@carbon/icons/es/menu/16.js';
 import Close16 from '@carbon/icons/es/close/16.js';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import { SIDE_NAV_COLLAPSE_MODE } from './side-nav';
 import styles from './header.scss?lit';
@@ -107,7 +107,7 @@ class CDSHeaderMenuButton extends FocusMixin(LitElement) {
         ?disabled=${disabled}
         aria-label="${ifDefined(buttonLabel)}"
         @click=${handleClick}>
-        ${cdsIcon(active ? Close16 : Menu16, { part: 'toggle-icon' })}
+        ${iconLoader(active ? Close16 : Menu16, { part: 'toggle-icon' })}
       </button>
     `;
   }

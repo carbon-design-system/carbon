@@ -16,7 +16,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import CDSTextInput from '../text-input/text-input';
 import styles from './textarea.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Text area.
@@ -161,11 +161,11 @@ class CDSTextarea extends CDSTextInput {
     const textCount = this.value?.length ?? 0;
     const wordCount = this.value?.match(/\p{L}+/gu)?.length || 0;
 
-    const invalidIcon = cdsIcon(WarningFilled16, {
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-area__invalid-icon`,
     });
 
-    const warnIcon = cdsIcon(WarningAltFilled16, {
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`,
     });
 

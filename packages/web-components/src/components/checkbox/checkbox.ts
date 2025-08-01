@@ -16,7 +16,7 @@ import styles from './checkbox.scss?lit';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Check box.
@@ -288,7 +288,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       <div class="${prefix}--checkbox__validation-msg">
         ${!readonly && invalid
           ? html`
-              ${cdsIcon(WarningFilled16, {
+              ${iconLoader(WarningFilled16, {
                 class: `${prefix}--checkbox__invalid-icon`,
               })}
               <div class="${prefix}--form-requirement">${invalidText}</div>
@@ -296,7 +296,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
           : null}
         ${showWarning
           ? html`
-              ${cdsIcon(WarningAltFilled16, {
+              ${iconLoader(WarningAltFilled16, {
                 class: `${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`,
               })}
               <div class="${prefix}--form-requirement">${warnText}</div>

@@ -19,7 +19,7 @@ import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import styles from './radio-button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { RADIO_BUTTON_ORIENTATION };
 
@@ -225,11 +225,11 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     const showWarning = !readOnly && !invalid && warn;
     const showHelper = !invalid && !disabled && !warn;
 
-    const invalidIcon = cdsIcon(WarningFilled16, {
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--radio-button__invalid-icon`,
     });
 
-    const warnIcon = cdsIcon(WarningAltFilled16, {
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`,
     });
 

@@ -16,7 +16,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import styles from './pagination.scss?lit';
 import { PAGINATION_SIZE } from './defs';
 import CDSSelect from '../select/select';
-import { cdsIcon } from '../../globals/internal/icon-loader';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import '../button/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -458,7 +458,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             button-class-name="${prevButtonClasses}"
             tooltip-text="${backwardText}"
             @click="${handleClickPrevButton}">
-            ${cdsIcon(CaretLeft16, { slot: 'icon' })}
+            ${iconLoader(CaretLeft16, { slot: 'icon' })}
           </cds-button>
           <cds-button
             tooltip-position="top-right"
@@ -468,7 +468,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             button-class-name="${nextButtonClasses}"
             tooltip-text="${forwardText}"
             @click="${handleClickNextButton}">
-            ${cdsIcon(CaretRight16, { slot: 'icon' })}
+            ${iconLoader(CaretRight16, { slot: 'icon' })}
           </cds-button>
         </div>
       </div>
