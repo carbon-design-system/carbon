@@ -3,7 +3,7 @@
 exports[`fontFamily should be printable 1`] = `"font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;"`;
 
 exports[`fontFamily should export the supported font families 1`] = `
-Object {
+{
   "mono": "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
   "sans": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif",
   "sansCondensed": "'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif",

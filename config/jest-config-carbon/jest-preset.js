@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import config from './index.js';
 
-const config = require('./');
-
-module.exports = config;
+export default config;

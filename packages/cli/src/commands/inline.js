@@ -1,18 +1,16 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const fs = require('fs-extra');
-const klaw = require('klaw-sync');
-const os = require('os');
-const path = require('path');
-const replace = require('replace-in-file');
-const { createLogger } = require('../logger');
+import fs from 'fs-extra';
+import klaw from 'klaw-sync';
+import os from 'os';
+import path from 'path';
+import { replaceInFile } from 'replace-in-file';
+import { createLogger } from '../logger.js';
 
 const logger = createLogger('inline');
 const isWin = process.platform === 'win32';
@@ -121,7 +119,7 @@ async function inlineSassDependencies(
         vendorFolder
       );
 
-      await replace({
+      await replaceInFile({
         files: file.path,
         from: REPLACE_REGEX,
         glob: { windowsPathsNoEscape: true },
@@ -154,18 +152,18 @@ function findSassModule(packageName, cwd) {
   return false;
 }
 
-module.exports = {
-  command: 'inline',
-  desc: 'inline sass dependencies from package.json in a target folder',
-  builder(yargs) {
-    yargs.options({
-      o: {
-        alias: 'output',
-        describe: 'the directory to output inlined sass dependencies',
-        type: 'string',
-        default: 'scss',
-      },
-    });
-  },
-  handler: inline,
+export const builder = (yargs) => {
+  yargs.options({
+    o: {
+      alias: 'output',
+      describe: 'the directory to output inlined sass dependencies',
+      type: 'string',
+      default: 'scss',
+    },
+  });
 };
+
+export const command = 'inline';
+export const desc =
+  'inline sass dependencies from package.json in a target folder';
+export const handler = inline;

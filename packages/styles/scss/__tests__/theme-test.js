@@ -33,7 +33,7 @@ describe('@carbon/styles/scss/theme', () => {
       theme: true,
     });
     expect(api.variables).toMatchInlineSnapshot(`
-      Array [
+      [
         "fallback",
         "theme",
         "background",

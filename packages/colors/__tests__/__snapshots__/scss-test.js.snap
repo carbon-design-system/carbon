@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@carbon/colors Public API 1`] = `
-Object {
+{
   "black": "#000000",
   "black-100": "#000000",
   "black-hover": "#212121",
@@ -25,11 +25,11 @@ Object {
   "blue-80-hover": "#0039c7",
   "blue-90": "#001d6c",
   "blue-90-hover": "#00258a",
-  "colors": Object {
-    "black": Object {
+  "colors": {
+    "black": {
       "100": "#000000",
     },
-    "blue": Object {
+    "blue": {
       "10": "#edf5ff",
       "100": "#001141",
       "20": "#d0e2ff",
@@ -41,7 +41,7 @@ Object {
       "80": "#002d9c",
       "90": "#001d6c",
     },
-    "cool-gray": Object {
+    "cool-gray": {
       "10": "#f2f4f8",
       "100": "#121619",
       "20": "#dde1e6",
@@ -53,7 +53,7 @@ Object {
       "80": "#343a3f",
       "90": "#21272a",
     },
-    "cyan": Object {
+    "cyan": {
       "10": "#e5f6ff",
       "100": "#061727",
       "20": "#bae6ff",
@@ -65,7 +65,7 @@ Object {
       "80": "#003a6d",
       "90": "#012749",
     },
-    "gray": Object {
+    "gray": {
       "10": "#f4f4f4",
       "100": "#161616",
       "20": "#e0e0e0",
@@ -77,7 +77,7 @@ Object {
       "80": "#393939",
       "90": "#262626",
     },
-    "green": Object {
+    "green": {
       "10": "#defbe6",
       "100": "#071908",
       "20": "#a7f0ba",
@@ -89,7 +89,7 @@ Object {
       "80": "#044317",
       "90": "#022d0d",
     },
-    "magenta": Object {
+    "magenta": {
       "10": "#fff0f7",
       "100": "#2a0a18",
       "20": "#ffd6e8",
@@ -101,7 +101,7 @@ Object {
       "80": "#740937",
       "90": "#510224",
     },
-    "orange": Object {
+    "orange": {
       "10": "#fff2e8",
       "100": "#231000",
       "20": "#ffd9be",
@@ -113,7 +113,7 @@ Object {
       "80": "#5e2900",
       "90": "#3e1a00",
     },
-    "purple": Object {
+    "purple": {
       "10": "#f6f2ff",
       "100": "#1c0f30",
       "20": "#e8daff",
@@ -125,7 +125,7 @@ Object {
       "80": "#491d8b",
       "90": "#31135e",
     },
-    "red": Object {
+    "red": {
       "10": "#fff1f1",
       "100": "#2d0709",
       "20": "#ffd7d9",
@@ -137,7 +137,7 @@ Object {
       "80": "#750e13",
       "90": "#520408",
     },
-    "teal": Object {
+    "teal": {
       "10": "#d9fbfb",
       "100": "#081a1c",
       "20": "#9ef0f0",
@@ -149,7 +149,7 @@ Object {
       "80": "#004144",
       "90": "#022b30",
     },
-    "warm-gray": Object {
+    "warm-gray": {
       "10": "#f7f3f2",
       "100": "#171414",
       "20": "#e5e0df",
@@ -161,10 +161,10 @@ Object {
       "80": "#3c3838",
       "90": "#272525",
     },
-    "white": Object {
+    "white": {
       "0": "#ffffff",
     },
-    "yellow": Object {
+    "yellow": {
       "10": "#fcf4d6",
       "100": "#1c1500",
       "20": "#fddc69",

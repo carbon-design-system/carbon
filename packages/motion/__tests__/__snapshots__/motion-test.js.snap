@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
-Array [
+[
   "easings",
   "duration-fast-01",
   "duration-fast-02",
@@ -19,23 +19,23 @@ Array [
 `;
 
 exports[`@carbon/motion Public API 1`] = `
-Object {
+{
   "durationFast01": "70ms",
   "durationFast02": "110ms",
   "durationModerate01": "150ms",
   "durationModerate02": "240ms",
   "durationSlow01": "400ms",
   "durationSlow02": "700ms",
-  "easings": Object {
-    "entrance": Object {
+  "easings": {
+    "entrance": {
       "expressive": "cubic-bezier(0, 0, 0.3, 1)",
       "productive": "cubic-bezier(0, 0, 0.38, 0.9)",
     },
-    "exit": Object {
+    "exit": {
       "expressive": "cubic-bezier(0.4, 0.14, 1, 1)",
       "productive": "cubic-bezier(0.2, 0, 1, 0.9)",
     },
-    "standard": Object {
+    "standard": {
       "expressive": "cubic-bezier(0.4, 0.14, 0.3, 1)",
       "productive": "cubic-bezier(0.2, 0, 0.38, 0.9)",
     },
@@ -47,7 +47,7 @@ Object {
   "motion": [Function],
   "slow01": "400ms",
   "slow02": "700ms",
-  "unstable_tokens": Array [
+  "unstable_tokens": [
     "fast01",
     "fast02",
     "moderate01",

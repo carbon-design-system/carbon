@@ -25,7 +25,7 @@ describe('scss/components/data-table', () => {
      `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
-      Array [
+      [
         "data-table-column-hover",
       ]
     `);

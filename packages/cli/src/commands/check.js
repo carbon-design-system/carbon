@@ -1,16 +1,14 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const glob = require('fast-glob');
-const path = require('path');
-const { createLogger } = require('../logger');
-const compile = require('../compile');
+import glob from 'fast-glob';
+import path from 'path';
+import { createLogger } from '../logger.js';
+import compile from '../compile.js';
 
 const logger = createLogger('check');
 
@@ -51,27 +49,25 @@ async function check({ glob: pattern, ignore = [], list = false }) {
   }
 }
 
-module.exports = {
-  command: 'check <glob>',
-  desc: 'check that each file can be compiled',
-  builder(yargs) {
-    yargs.positional('glob', {
-      type: 'string',
-      describe: 'glob pattern for files to check',
-    });
+export const builder = (yargs) => {
+  yargs.positional('glob', {
+    type: 'string',
+    describe: 'glob pattern for files to check',
+  });
 
-    yargs.options({
-      i: {
-        alias: 'ignore',
-        describe: 'provide a glob pattern of files to ignore',
-        type: 'string',
-      },
-      l: {
-        alias: 'list',
-        describe: 'list all the files that were compiled',
-        type: 'boolean',
-      },
-    });
-  },
-  handler: check,
+  yargs.options({
+    i: {
+      alias: 'ignore',
+      describe: 'provide a glob pattern of files to ignore',
+      type: 'string',
+    },
+    l: {
+      alias: 'list',
+      describe: 'list all the files that were compiled',
+      type: 'boolean',
+    },
+  });
 };
+export const command = 'check <glob>';
+export const desc = 'check that each file can be compiled';
+export const handler = check;

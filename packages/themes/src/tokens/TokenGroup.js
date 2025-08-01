@@ -60,7 +60,9 @@ export class TokenGroup {
   getTokens(parentContext = {}) {
     const context = {
       ...parentContext,
-      groups: parentContext.groups ? parentContext.groups.concat(this) : [this],
+      groups: parentContext.groups
+        ? parentContext.groups.concat(this.name)
+        : [this.name],
       properties: this.properties || parentContext.properties,
     };
 

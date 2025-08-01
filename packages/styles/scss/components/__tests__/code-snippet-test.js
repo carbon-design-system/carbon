@@ -25,7 +25,7 @@ describe('scss/components/code-snippet', () => {
     `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
-      Array [
+      [
         "copy-active",
         "copy-btn-feedback",
       ]

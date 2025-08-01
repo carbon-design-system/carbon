@@ -1,18 +1,16 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const parse = require('@commitlint/parse');
-const execa = require('execa');
-const { prompt } = require('inquirer');
-const semver = require('semver');
-const { fetchLatestFromUpstream } = require('../git');
-const { createLogger, displayBanner } = require('../logger');
+import parse from '@commitlint/parse';
+import { execa } from 'execa';
+import inquirer from 'inquirer';
+import semver from 'semver';
+import { fetchLatestFromUpstream } from '../git.js';
+import { createLogger, displayBanner } from '../logger.js';
 
 // All supported commit types from our conventional-changelog preset
 const types = [
@@ -166,7 +164,7 @@ async function cherryPickCommitsFrom(commitRange, bump) {
     // If we cannot derive the commit type, we'll need to manually confirm if we
     // should include the commit
     if (info.type === null) {
-      const answers = await prompt([
+      const answers = await inquirer.prompt([
         {
           type: 'confirm',
           name: 'confirmed',
@@ -207,7 +205,7 @@ async function cherryPickCommitsFrom(commitRange, bump) {
       if (!error.stderr.startsWith('error: could not apply')) {
         throw error;
       }
-      const answers = await prompt([
+      const answers = await inquirer.prompt([
         {
           type: 'confirm',
           name: 'proceed',
@@ -267,7 +265,7 @@ async function resetProjectState() {
 async function checkIfBranchIsDirty() {
   const { stdout } = await execa('git', ['status', '--porcelain']);
   if (stdout !== '') {
-    const { confirmed } = await prompt([
+    const { confirmed } = await inquirer.prompt([
       {
         type: 'confirm',
         name: 'confirmed',
@@ -288,15 +286,14 @@ async function checkIfBranchIsDirty() {
   }
 }
 
-module.exports = {
-  command: 'release [bump]',
-  desc: 'run the release step for the given version bump',
-  builder(yargs) {
-    yargs.positional('bump', {
-      describe: 'choose a release version to bump',
-      choices: ['minor', 'patch'],
-      default: 'patch',
-    });
-  },
-  handler: release,
+export const builder = (yargs) => {
+  yargs.positional('bump', {
+    describe: 'choose a release version to bump',
+    choices: ['minor', 'patch'],
+    default: 'patch',
+  });
 };
+
+export const command = 'release [bump]';
+export const desc = 'run the release step for the given version bump';
+export const handler = release;

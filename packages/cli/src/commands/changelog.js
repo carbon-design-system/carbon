@@ -1,18 +1,16 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const clipboard = require('clipboardy');
-const { prompt } = require('inquirer');
-const { generate } = require('../changelog');
-const { fetchLatestFromUpstream } = require('../git');
-const { createLogger, displayBanner } = require('../logger');
-const { getPackages } = require('../workspace');
+import clipboard from 'clipboardy';
+import inquirer from 'inquirer';
+import { generate } from '../changelog.js';
+import { fetchLatestFromUpstream } from '../git.js';
+import { createLogger, displayBanner } from '../logger.js';
+import { getPackages } from '../workspace.js';
 
 const logger = createLogger('changelog');
 
@@ -52,7 +50,7 @@ async function changelog({ range, noPrompt = false }) {
 
   let response;
   if (!noPrompt) {
-    response = await prompt([
+    response = await inquirer.prompt([
       {
         type: 'confirm',
         name: 'copy',
@@ -69,21 +67,19 @@ async function changelog({ range, noPrompt = false }) {
   }
 }
 
-module.exports = {
-  command: 'changelog <range>',
-  desc: 'generate the changelog for the given git tag range',
-  builder(yargs) {
-    yargs.positional('range', {
-      describe: 'the git tag range to generate a changelog for',
-      type: 'string',
-    });
-    yargs.options({
-      n: {
-        alias: 'noPrompt',
-        describe: 'disables copy to clipboard prompt',
-        type: 'boolean',
-      },
-    });
-  },
-  handler: changelog,
+export const builder = (yargs) => {
+  yargs.positional('range', {
+    describe: 'the git tag range to generate a changelog for',
+    type: 'string',
+  });
+  yargs.options({
+    n: {
+      alias: 'noPrompt',
+      describe: 'disables copy to clipboard prompt',
+      type: 'boolean',
+    },
+  });
 };
+export const command = 'changelog <range>';
+export const desc = 'generate the changelog for the given git tag range';
+export const handler = changelog;

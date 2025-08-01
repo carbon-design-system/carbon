@@ -25,7 +25,7 @@ describe('scss/components/list-box', () => {
      `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
-      Array [
+      [
         "list-box-width",
         "list-box-height",
         "list-box-inline-height",

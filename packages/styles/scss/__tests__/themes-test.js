@@ -25,7 +25,7 @@ describe('@carbon/styles/scss/themes', () => {
 
     const { value: api } = get('api');
     expect(api).toMatchInlineSnapshot(`
-      Array [
+      [
         "white",
         "g10",
         "g90",

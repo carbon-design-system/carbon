@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { unstable_tokens } from './tokens';
+import { unstable_tokens } from './tokens.js';
 
 export { unstable_tokens };
 

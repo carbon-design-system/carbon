@@ -12,7 +12,7 @@ import * as CarbonType from '../';
 describe('type', () => {
   it('should export type helpers', () => {
     expect(Object.keys(CarbonType)).toMatchInlineSnapshot(`
-      Array [
+      [
         "fluid",
         "fontFamilies",
         "fontFamily",

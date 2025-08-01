@@ -1,18 +1,16 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const chalk = require('chalk');
-const { exec } = require('child-process-promise');
-const { prompt } = require('inquirer');
-const path = require('path');
-const createLogger = require('progress-estimator');
-const getGitHubClient = require('./tools/getGitHubClient');
+import chalk from 'chalk';
+import { exec } from 'child-process-promise';
+import inquirer from 'inquirer';
+import path from 'path';
+import createLogger from 'progress-estimator';
+import getGitHubClient from './tools/getGitHubClient.js';
 
 const logger = createLogger();
 
@@ -22,13 +20,13 @@ chalk.dimmed = chalk.dim.italic;
 async function setup() {
   console.log(chalk`
 {bold Hi there!} 👋
-This tools is built for people looking to contribute to carbon.`);
+This tool is built for people looking to contribute to carbon.`);
 
   if (!process.env.GH_TOKEN) {
     console.log(chalk`
 To get started, you will need a GitHub account {link (https://github.com/)}
 
-Once you have an account you will need to setup a GitHub access token
+Once you have an account you will need to set up a GitHub access token
 {link (https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)}
 `);
   }
@@ -43,7 +41,7 @@ Once you have an account you will need to setup a GitHub access token
 Our first step is going to be to create a fork for each project you want to work on.
 `);
 
-  const { projects } = await prompt([
+  const { projects } = await inquirer.prompt([
     {
       type: 'checkbox',
       name: 'projects',
@@ -81,11 +79,11 @@ async function fork(client, cwd, project) {
   );
 
   console.log(
-    `Your fork is done! Now let's setup the project on your computer.`
+    `Your fork is done! Now let's set up the project on your computer.`
   );
   console.log();
 
-  const { folder } = await prompt([
+  const { folder } = await inquirer.prompt([
     {
       type: 'input',
       name: 'folder',
@@ -223,8 +221,6 @@ const availableProjects = [
   },
 ];
 
-module.exports = {
-  command: 'setup',
-  desc: 'setup your environment',
-  handler: wrap(setup),
-};
+export const command = 'setup';
+export const desc = 'setup your environment';
+export const handler = wrap(setup);

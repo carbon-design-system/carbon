@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@carbon/styles/scss/config Public API 1`] = `
-Object {
+{
   "css--body": true,
   "css--default-type": true,
   "css--emit-type-custom-props": false,
@@ -10,28 +10,28 @@ Object {
   "flex-grid-columns": 16,
   "font-display": "swap",
   "font-path": "~@ibm/plex",
-  "grid-breakpoints": Object {
-    "lg": Object {
+  "grid-breakpoints": {
+    "lg": {
       "columns": 16,
       "margin": "1rem",
       "width": "66rem",
     },
-    "max": Object {
+    "max": {
       "columns": 16,
       "margin": "1.5rem",
       "width": "99rem",
     },
-    "md": Object {
+    "md": {
       "columns": 8,
       "margin": "1rem",
       "width": "42rem",
     },
-    "sm": Object {
+    "sm": {
       "columns": 4,
       "margin": 0,
       "width": "20rem",
     },
-    "xlg": Object {
+    "xlg": {
       "columns": 16,
       "margin": "1rem",
       "width": "82rem",

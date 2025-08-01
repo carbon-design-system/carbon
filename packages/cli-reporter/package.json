@@ -3,6 +3,7 @@
   "description": "Reporter for CLI-based tools in the Carbon Design System",
   "version": "10.7.0",
   "license": "Apache-2.0",
+  "type": "module",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -24,6 +25,6 @@
     "provenance": true
   },
   "dependencies": {
-    "chalk": "^4.1.1"
+    "chalk": "^5.4.1"
   }
 }

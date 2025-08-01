@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`scale should export the type scale 1`] = `
-Array [
+[
   12,
   14,
   16,

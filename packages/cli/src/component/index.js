@@ -1,20 +1,20 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { fileURLToPath } from 'url';
+import fs from 'fs-extra';
+import path from 'path';
+import template from 'lodash.template';
 
-const fs = require('fs-extra');
-const path = require('path');
-const template = require('lodash.template');
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATES_DIR = path.join(__dirname, 'templates');
 const blocklist = new Set(['.DS_Store']);
 
-async function loadTemplates() {
+export async function loadTemplates() {
   const files = await fs.readdir(TEMPLATES_DIR).then((names) => {
     return names
       .filter((name) => {
@@ -41,7 +41,3 @@ async function loadTemplates() {
 
   return templates;
 }
-
-module.exports = {
-  loadTemplates,
-};
