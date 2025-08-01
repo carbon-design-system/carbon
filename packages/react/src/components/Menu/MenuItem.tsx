@@ -216,6 +216,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     // (used for keyboard navigation)
     useEffect(() => {
       registerItem();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Set RTL based on the document direction or `LayoutDirection`
