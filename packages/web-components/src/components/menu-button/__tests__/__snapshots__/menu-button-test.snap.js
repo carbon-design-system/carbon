@@ -30,7 +30,7 @@ snapshots['cds-menu-button should render and match snapshot'] =
       disabled=""
       label="Third action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
   </cds-menu>
