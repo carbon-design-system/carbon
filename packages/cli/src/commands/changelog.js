@@ -21,31 +21,45 @@ const logger = createLogger('changelog');
  * v10.5.1..master or v10.5.0..v10.5.1
  * @returns {void}
  */
-async function changelog({ range }) {
-  displayBanner();
-
-  logger.start('Fetching latest git information from upstream');
+async function changelog({ range, noPrompt = false }) {
+  if (!noPrompt) {
+    displayBanner();
+    logger.start('Fetching latest git information from upstream');
+  }
   await fetchLatestFromUpstream();
-  logger.stop();
+  if (!noPrompt) {
+    logger.stop();
+  }
 
-  logger.start('Getting a list of all packages in the project');
+  if (!noPrompt) {
+    logger.start('Getting a list of all packages in the project');
+  }
   const packages = await getPackages();
-  logger.stop();
+  if (!noPrompt) {
+    logger.stop();
+  }
 
   const [lastTag, tag] = range.split('..');
-  logger.start(`Generating a changelog for range: ${range}`);
+  if (!noPrompt) {
+    logger.start(`Generating a changelog for range: ${range}`);
+  }
   const changelog = await generate(packages, lastTag, tag);
-  logger.stop();
+  if (!noPrompt) {
+    logger.stop();
+  }
 
-  const { copy } = await inquirer.prompt([
-    {
-      type: 'confirm',
-      name: 'copy',
-      message: 'Would you like to copy the changelog to your clipboard?',
-    },
-  ]);
+  let response;
+  if (!noPrompt) {
+    response = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'copy',
+        message: 'Would you like to copy the changelog to your clipboard?',
+      },
+    ]);
+  }
 
-  if (copy) {
+  if (response?.copy) {
     clipboard.writeSync(changelog);
     console.log('Done!');
   } else {
@@ -57,6 +71,13 @@ export const builder = (yargs) => {
   yargs.positional('range', {
     describe: 'the git tag range to generate a changelog for',
     type: 'string',
+  });
+  yargs.options({
+    n: {
+      alias: 'noPrompt',
+      describe: 'disables copy to clipboard prompt',
+      type: 'boolean',
+    },
   });
 };
 export const command = 'changelog <range>';

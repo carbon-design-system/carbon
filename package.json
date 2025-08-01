@@ -63,7 +63,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/prop-types": "^15.7.13",
     "@types/react-is": "^19.0.0",
-    "accessibility-checker": "^4.0.1",
+    "accessibility-checker": "^4.0.6",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",

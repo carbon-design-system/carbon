@@ -657,6 +657,7 @@ exports[`@carbon/pictograms should not update exports without a semver change 1`
   "IbmIbv",
   "IbmIx",
   "IbmOneMadisonAvenue",
+  "IbmPower11",
   "IbmRpa",
   "IbmUkLabsHursley",
   "IbmZ",

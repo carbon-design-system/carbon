@@ -88,6 +88,9 @@ export default {
     translateWithId: {
       table: { disable: true },
     },
+    filterItems: {
+      table: { disable: true },
+    },
   },
   parameters: {
     docs: {
@@ -357,6 +360,25 @@ export const Filterable = (args) => {
         titleText="FilterableMultiSelect title"
         helperText="This is helper text"
         items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+export const FilterableWithSelectAll = (args) => {
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-3"
+        titleText="FilterableMultiSelect title"
+        helperText="This is helper text"
+        items={itemsWithSelectAll}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
         {...args}

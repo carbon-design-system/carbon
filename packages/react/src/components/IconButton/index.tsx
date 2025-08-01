@@ -15,6 +15,11 @@ import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 export const IconButtonKinds = [
@@ -26,33 +31,11 @@ export const IconButtonKinds = [
 
 export type IconButtonKind = (typeof IconButtonKinds)[number];
 
-export type DeprecatedIconButtonAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedIconButtonAlignment = DeprecatedPopoverAlignment;
 
-export type NewIconButtonAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewIconButtonAlignment = NewPopoverAlignment;
 
-export type IconButtonAlignment =
-  | DeprecatedIconButtonAlignment
-  | NewIconButtonAlignment;
+export type IconButtonAlignment = PopoverAlignment;
 
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -62,7 +45,8 @@ export interface IconButtonProps
   align?: IconButtonAlignment;
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -282,7 +266,9 @@ IconButton.propTypes = {
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -350,9 +336,6 @@ IconButton.propTypes = {
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
-   * If the child node already has an `aria-label`, the tooltip will not apply
-   * `aria-labelledby`. If the child node has `aria-labelledby`, that value will
-   * be used instead. Otherwise, the tooltip will use its own ID as the label.
    * This means that if you have text in the child node it will not be
    * announced to the screen reader.
    * If using `badgeCount={0}`, make sure the label explains that there is a

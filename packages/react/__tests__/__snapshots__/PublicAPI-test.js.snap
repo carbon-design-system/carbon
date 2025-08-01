@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Public API should only change with a semver change 1`] = `
 Map {
@@ -225,6 +225,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "caption": {
+        "type": "string",
+      },
       "children": {
         "type": "node",
       },
@@ -3848,6 +3851,9 @@ Map {
         ],
         "type": "shape",
       },
+      "filterItems": {
+        "type": "func",
+      },
       "hideLabel": {
         "type": "bool",
       },
@@ -5957,6 +5963,9 @@ Map {
       },
       "slug": [Function],
       "step": {
+        "type": "number",
+      },
+      "stepStartValue": {
         "type": "number",
       },
       "translateWithId": {
