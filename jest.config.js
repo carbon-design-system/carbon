@@ -29,7 +29,6 @@ export default {
     //
     // @see https://jestjs.io/docs/upgrading-to-jest28#packagejson-exports
     // @see https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
-    // nanoid: require.resolve('nanoid'),
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
   reporters: ['default', 'jest-junit'],
