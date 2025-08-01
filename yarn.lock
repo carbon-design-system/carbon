@@ -1676,7 +1676,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-build-helpers@npm:^1.40.0, @carbon/icon-build-helpers@npm:^1.41.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
+"@carbon/icon-build-helpers@npm:^1.41.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
@@ -1721,7 +1721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icon-helpers@npm:^10.61.0, @carbon/icon-helpers@npm:^10.62.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@npm:^10.62.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
@@ -1763,19 +1763,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-web-components@npm:^11.62.0, @carbon/icons-web-components@workspace:packages/icons-web-components":
-  version: 0.0.0-use.local
-  resolution: "@carbon/icons-web-components@workspace:packages/icons-web-components"
-  dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.40.0"
-    "@carbon/icon-helpers": "npm:^10.61.0"
-    "@carbon/icons": "npm:^11.62.0"
-    "@ibm/telemetry-js": "npm:^1.5.0"
-    rimraf: "npm:^6.0.0"
-  languageName: unknown
-  linkType: soft
-
-"@carbon/icons@npm:^11.62.0, @carbon/icons@npm:^11.63.0, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@npm:^11.63.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
@@ -2080,7 +2068,6 @@ __metadata:
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.63.0"
-    "@carbon/icons-web-components": "npm:^11.62.0"
     "@carbon/layout": "npm:^11.37.0"
     "@carbon/motion": "npm:^11.31.0"
     "@carbon/styles": "npm:^1.86.0"

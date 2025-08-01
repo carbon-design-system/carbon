@@ -12,7 +12,7 @@ import { globby } from 'globby';
 import { rollup } from 'rollup';
 import alias from '@rollup/plugin-alias';
 import autoprefixer from 'autoprefixer';
-import carbonIconPaths from '../tools/rollup-plugin-icon-paths.js';
+
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import cssnano from 'cssnano';
@@ -150,7 +150,6 @@ function getRollupConfig(input, rootDir, outDir) {
           outDir,
         },
       }),
-      carbonIconPaths(),
     ],
   };
 }
