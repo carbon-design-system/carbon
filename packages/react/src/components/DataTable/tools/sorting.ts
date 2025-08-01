@@ -52,6 +52,8 @@ interface Cell {
   value: any;
 }
 
+// TODO: Should `SortRowParams` in
+// packages/react/src/components/DataTable/state/sorting.ts be used here?
 interface SortRowParams {
   key: string;
   sortDirection: DataTableSortState;
