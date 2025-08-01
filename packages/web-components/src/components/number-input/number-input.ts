@@ -9,7 +9,7 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import Add16 from '@carbon/icons/es/add/16.js';
 import Subtract16 from '@carbon/icons/es/subtract/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';

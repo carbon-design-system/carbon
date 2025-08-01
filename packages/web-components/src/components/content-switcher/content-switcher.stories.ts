@@ -10,7 +10,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import './index';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
 import Workspace16 from '@carbon/icons/es/workspace/16.js';
 import ViewMode216 from '@carbon/icons/es/view--mode-2/16.js';

@@ -18,7 +18,7 @@ import '../copy-button/index';
 import '../copy/copy';
 import '../button/button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 export { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE };
 

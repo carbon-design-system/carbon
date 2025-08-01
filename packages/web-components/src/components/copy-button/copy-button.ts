@@ -14,7 +14,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../copy/copy';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 /**
  * Copy button.

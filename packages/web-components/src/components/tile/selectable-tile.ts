@@ -16,7 +16,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 /**
  * Multi-selectable tile.

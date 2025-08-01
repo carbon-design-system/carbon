@@ -14,7 +14,7 @@ import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import AILabel24 from '@carbon/icons/es/ai-label/24.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 /**
  * Clickable tile.
  *

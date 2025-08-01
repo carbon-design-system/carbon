@@ -12,7 +12,7 @@ import styles from './progress-indicator.scss?lit';
 import CircleDash from '@carbon/icons/es/circle-dash/16.js';
 import '../skeleton-text';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 /**
  * Skeleton of progress step.

@@ -15,7 +15,7 @@ import styles from './menu-button.scss?lit';
 import '../button/index';
 import '../menu/index';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';

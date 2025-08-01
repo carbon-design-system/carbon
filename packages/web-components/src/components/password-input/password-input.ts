@@ -14,7 +14,7 @@ import View16 from '@carbon/icons/es/view/16.js';
 import ViewOff16 from '@carbon/icons/es/view--off/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import '../tooltip';
 import '../tooltip/tooltip-content';

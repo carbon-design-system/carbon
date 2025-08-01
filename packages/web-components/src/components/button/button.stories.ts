@@ -17,7 +17,7 @@ import {
 import './index';
 
 import Add16 from '@carbon/icons/es/add/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const kind = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,

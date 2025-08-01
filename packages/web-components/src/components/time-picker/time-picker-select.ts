@@ -10,7 +10,7 @@ import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import { filter } from '../../globals/internal/collection-helpers';
 import styles from './time-picker.scss?lit';

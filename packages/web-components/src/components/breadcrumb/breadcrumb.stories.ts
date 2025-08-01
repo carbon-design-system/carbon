@@ -19,7 +19,7 @@ import { BREADCRUMB_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
 
 import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const sizes = {
   [`Small size (${BREADCRUMB_SIZE.SMALL})`]: BREADCRUMB_SIZE.SMALL,

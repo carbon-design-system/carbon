@@ -19,7 +19,7 @@ import '../../overflow-menu';
 import '../index';
 import storyDocs from './data-table.mdx';
 import '../../link/index';
-import { cdsIcon } from '../../icon/icon';
+import { cdsIcon } from '../../../globals/internal/icon-loader';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,

@@ -17,7 +17,7 @@ import {
   TABLE_SORT_CYCLES,
   TABLE_SORT_DIRECTION,
 } from './defs';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

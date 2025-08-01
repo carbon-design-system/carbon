@@ -9,7 +9,7 @@ import './index';
 import Asset16 from '@carbon/icons/es/asset/16.js';
 import User16 from '@carbon/icons/es/user/16.js';
 import Group16 from '@carbon/icons/es/group/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const args = {
   label: 'Actions',

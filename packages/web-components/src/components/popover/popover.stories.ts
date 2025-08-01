@@ -14,7 +14,7 @@ import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../checkbox/checkbox';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
 const controls = {

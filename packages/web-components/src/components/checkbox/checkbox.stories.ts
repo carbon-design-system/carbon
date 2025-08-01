@@ -13,7 +13,7 @@ import Folders16 from '@carbon/icons/es/folders/16.js';
 import '../ai-label/index';
 import './index';
 import { CHECKBOX_ORIENTATION } from './defs';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const checkboxLabel = 'Checkbox label';
 

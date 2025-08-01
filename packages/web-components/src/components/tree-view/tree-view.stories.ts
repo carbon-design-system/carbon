@@ -13,7 +13,7 @@ import { TREE_SIZE } from './defs';
 import Document16 from '@carbon/icons/es/document/16.js';
 import Folder16 from '@carbon/icons/es/folder/16.js';
 import '../button/index';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const sizes = {
   [`XS size (${TREE_SIZE.EXTRA_SMALL})`]: TREE_SIZE.EXTRA_SMALL,

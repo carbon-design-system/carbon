@@ -12,7 +12,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import Menu16 from '@carbon/icons/es/menu/16.js';
 import Close16 from '@carbon/icons/es/close/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import { SIDE_NAV_COLLAPSE_MODE } from './side-nav';
 import styles from './header.scss?lit';

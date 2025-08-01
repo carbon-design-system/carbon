@@ -23,7 +23,7 @@ import '../button';
 import '../toggle-tip';
 import '../icon-button';
 import '../../../.storybook/templates/with-layer';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const content = html`
   <div slot="body-text">

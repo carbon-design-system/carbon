@@ -17,7 +17,7 @@ import {
 import { prefix } from '../../globals/settings';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import styles from './progress-bar.scss?lit';
 
 export { PROGRESS_BAR_SIZE, PROGRESS_BAR_STATUS, PROGRESS_BAR_TYPE };

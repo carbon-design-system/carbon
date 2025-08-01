@@ -16,7 +16,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import styles from './pagination.scss?lit';
 import { PAGINATION_SIZE } from './defs';
 import CDSSelect from '../select/select';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import '../button/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

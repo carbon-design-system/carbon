@@ -6,7 +6,7 @@
  */
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import Add16 from '@carbon/web-components/es/icons/add/16.js';
-import { cdsIcon } from '../../icon/icon';
+import { cdsIcon } from '../../../globals/internal/icon-loader';
 import '@carbon/web-components/es/components/tag/index.js';
 
 describe('cds-tag', function () {

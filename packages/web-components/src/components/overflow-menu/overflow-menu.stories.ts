@@ -13,7 +13,7 @@ import './overflow-menu-item';
 import { prefix } from '../../globals/settings';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import Filter16 from '@carbon/icons/es/filter/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const sizes = {
   [`Small size (${OVERFLOW_MENU_SIZE.SMALL})`]: OVERFLOW_MENU_SIZE.SMALL,

@@ -14,7 +14,7 @@ import '../index';
 import '../../icon-button/index';
 import '../../link/index';
 import '../../ai-label/index';
-import { cdsIcon } from '../../icon/icon';
+import { cdsIcon } from '../../../globals/internal/icon-loader';
 
 const content = html`
   <div slot="body-text">

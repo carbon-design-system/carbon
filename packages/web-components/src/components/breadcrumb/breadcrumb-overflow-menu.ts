@@ -9,7 +9,7 @@ import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSOverflowMenu from '../overflow-menu/overflow-menu';
 import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

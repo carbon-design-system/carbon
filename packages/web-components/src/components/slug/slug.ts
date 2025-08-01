@@ -14,7 +14,7 @@ import styles from './slug.scss?lit';
 import { SLUG_SIZE, SLUG_KIND } from './defs';
 import Undo16 from '@carbon/icons/es/undo/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 /**
  * Basic slug.

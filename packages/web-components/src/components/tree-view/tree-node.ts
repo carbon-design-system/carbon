@@ -11,7 +11,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import CaretDown16 from '@carbon/icons/es/caret--down/16.js';
 
 import styles from './tree-view.scss?lit';

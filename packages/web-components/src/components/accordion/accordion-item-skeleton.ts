@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { prefix } from '../../globals/settings';
 import '../skeleton-text/index';

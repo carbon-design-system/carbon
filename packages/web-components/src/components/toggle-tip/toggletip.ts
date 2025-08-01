@@ -17,7 +17,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import FloatingUIContoller from '../../globals/controllers/floating-controller';
 import styles from './toggletip.scss?lit';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 /**
  * Definition tooltip.

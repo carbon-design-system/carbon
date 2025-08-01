@@ -8,7 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import Close16 from '@carbon/icons/es/close/16.js';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';

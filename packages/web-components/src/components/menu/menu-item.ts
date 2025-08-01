@@ -18,7 +18,7 @@ import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
 

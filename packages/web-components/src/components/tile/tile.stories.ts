@@ -16,7 +16,7 @@ import './index';
 import '../ai-label';
 import '../icon-button';
 import '../link';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import storyDocs from './tile.mdx';
 import styles from './tile-story.scss?lit';
 import '../../../.storybook/templates/with-layer';

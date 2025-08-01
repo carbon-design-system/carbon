@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import './index';
 import Add16 from '@carbon/icons/es/add/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import styles from './chat-button-story.scss?lit';
 
 export const Default = () => {

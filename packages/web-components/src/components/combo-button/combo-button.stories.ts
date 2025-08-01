@@ -9,7 +9,7 @@ import { html } from 'lit';
 import './index';
 import CopyFile16 from '@carbon/icons/es/copy--file/16.js';
 import Export16 from '@carbon/icons/es/export/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const args = {
   label: 'Primary action',

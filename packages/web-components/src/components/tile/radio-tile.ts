@@ -12,7 +12,7 @@ import { prefix } from '../../globals/settings';
 import SelectableTile from './selectable-tile';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 /**
  * Radio tile.

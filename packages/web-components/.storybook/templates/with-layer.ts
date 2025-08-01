@@ -7,7 +7,7 @@
 
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { cdsIcon } from '../../src/components/icon/icon';
+import { cdsIcon } from '../../src/globals/internal/icon-loader';
 import Layers from '@carbon/icons/es/layers/16.js';
 import { prefix } from '../../src/globals/settings';
 import '../../src/components/layer/index.js';

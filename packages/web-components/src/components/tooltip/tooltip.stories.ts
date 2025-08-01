@@ -11,7 +11,7 @@ import { html } from 'lit';
 // @ts-ignore
 import './index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import styles from './tooltip-story.scss?lit';
 import Information16 from '@carbon/icons/es/information/16.js';
 

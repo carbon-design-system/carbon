@@ -13,7 +13,7 @@ import './index';
 import '../icon-button/index';
 import '../button/index';
 import styles from './ai-label-story.scss?lit';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { AI_LABEL_SIZE } from './defs';

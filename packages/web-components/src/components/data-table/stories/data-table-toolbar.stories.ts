@@ -12,7 +12,7 @@ import Settings16 from '@carbon/icons/es/settings/16.js';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import storyDocs from './data-table.mdx';
 import '../index';
-import { cdsIcon } from '../../icon/icon';
+import { cdsIcon } from '../../../globals/internal/icon-loader';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,

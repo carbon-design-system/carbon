@@ -14,7 +14,7 @@ import TrashCan16 from '@carbon/icons/es/trash-can/16.js';
 import TextItalic16 from '@carbon/icons/es/text--italic/16.js';
 import TextBold16 from '@carbon/icons/es/text--bold/16.js';
 import Paste16 from '@carbon/icons/es/paste/16.js';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 import CDSMenu from './menu';
 import MDXContent from './menu.mdx';
 import CDSmenuItem from './menu-item';

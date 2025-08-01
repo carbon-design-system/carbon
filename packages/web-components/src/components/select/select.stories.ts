@@ -22,7 +22,7 @@ import '../ai-label';
 import '../icon-button';
 import '../../../.storybook/templates/with-layer';
 import styles from './select-story.scss?lit';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const content = html`
   <div slot="body-text">

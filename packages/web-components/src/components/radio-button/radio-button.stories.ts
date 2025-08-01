@@ -16,7 +16,7 @@ import { RADIO_BUTTON_LABEL_POSITION } from './radio-button';
 import './index';
 import '../ai-label';
 import '../icon-button';
-import { cdsIcon } from '../icon/icon';
+import { cdsIcon } from '../../globals/internal/icon-loader';
 
 const content = html`
   <div slot="body-text">
