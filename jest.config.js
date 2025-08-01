@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-module.exports = {
+export default {
   preset: 'jest-config-carbon',
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
@@ -20,7 +18,9 @@ module.exports = {
   ],
   coveragePathIgnorePatterns: ['packages/web-components/*'],
   testPathIgnorePatterns: ['packages/web-components/*'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es|nanoid)'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
+  ],
   moduleNameMapper: {
     // This is a temporary workaround from moving to Jest v28. In this update,
     // certain dependencies are only providing ESM through exports and so we use
@@ -28,11 +28,12 @@ module.exports = {
     //
     // @see https://jestjs.io/docs/upgrading-to-jest28#packagejson-exports
     // @see https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
-    nanoid: require.resolve('nanoid'),
+    // nanoid: require.resolve('nanoid'),
+    '#(.*)': '<rootDir>/node_modules/$1',
   },
   reporters: ['default', 'jest-junit'],
 
   // This is a temporary workaround until Jest supports Prettier 3 (and ESM)
   // @see https://jestjs.io/docs/configuration#prettierpath-string
-  prettierPath: require.resolve('prettier2'),
+  prettierPath: 'prettier',
 };
