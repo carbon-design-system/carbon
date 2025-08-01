@@ -15,7 +15,8 @@ import styles from './combo-button.scss?lit';
 import '../button/index';
 import '../menu/index';
 import '../icon-button/index';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import { cdsIcon } from '../icon/icon';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
 import { COMBO_BUTTON_SIZE, COMBO_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
@@ -150,7 +151,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
         align=${tooltipAlignment}
         menu-alignment=${menuAlignment}
         part="trigger">
-        ${ChevronDown16({ slot: 'icon' })}
+        ${cdsIcon(ChevronDown16, { slot: 'icon' })}
         <span slot="tooltip-content">${this.tooltipContent}</span>
       </cds-icon-button>
       <slot></slot>

@@ -10,9 +10,10 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import './index';
 import { prefix } from '../../globals/settings';
-import TableOfContents16 from '@carbon/icons/lib/table-of-contents/16.js';
-import Workspace16 from '@carbon/icons/lib/workspace/16.js';
-import ViewMode2_16 from '@carbon/icons/lib/view--mode-2/16.js';
+import { cdsIcon } from '../icon/icon';
+import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
+import Workspace16 from '@carbon/icons/es/workspace/16.js';
+import ViewMode216 from '@carbon/icons/es/view--mode-2/16.js';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
 
@@ -72,15 +73,15 @@ export const IconOnly = {
   render: () => html`
     <cds-content-switcher value="all">
       <cds-content-switcher-item icon value="all">
-        ${TableOfContents16()}
+        ${cdsIcon(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item icon value="cloudFoundry">
-        ${Workspace16()}
+        ${cdsIcon(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item icon value="staging">
-        ${ViewMode2_16()}
+        ${cdsIcon(ViewMode216)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
     </cds-content-switcher>
@@ -92,15 +93,15 @@ export const IconOnlyWithLayer = {
     <sb-template-layers>
       <cds-content-switcher value="all">
         <cds-content-switcher-item icon value="all">
-          ${TableOfContents16()}
+          ${cdsIcon(TableOfContents16)}
           <span slot="tooltip-content">Table of Contents</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item icon value="cloudFoundry">
-          ${Workspace16()}
+          ${cdsIcon(Workspace16)}
           <span slot="tooltip-content">Workspace Test</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item icon value="staging">
-          ${ViewMode2_16()}
+          ${cdsIcon(ViewMode216)}
           <span slot="tooltip-content">View Mode</span>
         </cds-content-switcher-item>
       </cds-content-switcher>

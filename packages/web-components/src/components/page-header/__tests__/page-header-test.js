@@ -7,6 +7,7 @@
 
 import { expect, fixture, html } from '@open-wc/testing';
 import Bee32 from '@carbon/web-components/es/icons/bee/32.js';
+import { cdsIcon } from '../../icon/icon';
 import '@carbon/web-components/es/components/page-header/index.js';
 
 describe('cds-page-header', function () {
@@ -118,7 +119,7 @@ describe('cds-page-header', function () {
       const el = await fixture(html`
         <cds-page-header>
           <cds-page-header-content title="Page header content title">
-            ${Bee32({ slot: 'icon' })}
+            ${cdsIcon(Bee32, { slot: 'icon' })}
           </cds-page-header-content>
         </cds-page-header>
       `);

@@ -9,8 +9,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ChevronDownGlyph from '@carbon/icons/lib/chevron--down/16.js';
 import { prefix } from '../../globals/settings';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import { cdsIcon } from '../icon/icon';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
@@ -156,7 +157,7 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
         aria-haspopup="menu"
         aria-expanded="${String(Boolean(expanded))}"
         @click=${handleClick}>
-        ${triggerContent}${ChevronDownGlyph({
+        ${triggerContent}${cdsIcon(ChevronDown16, {
           part: 'trigger-icon',
           class: `${prefix}--header__menu-arrow`,
         })}

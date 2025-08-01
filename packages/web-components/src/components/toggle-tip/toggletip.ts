@@ -9,14 +9,15 @@ import { classMap } from 'lit/directives/class-map.js';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import Information16 from '@carbon/icons/lib/information/16.js';
 import { prefix } from '../../globals/settings';
+import Information16 from '@carbon/icons/es/information/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import FloatingUIContoller from '../../globals/controllers/floating-controller';
 import styles from './toggletip.scss?lit';
+import { cdsIcon } from '../icon/icon';
 
 /**
  * Definition tooltip.
@@ -126,7 +127,9 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
         aria-label="${this.buttonLabel}"
         class="${prefix}--toggletip-button"
         @click=${this._handleClick}>
-        <slot name="trigger">${Information16({ id: 'trigger' })}</slot>
+        <slot name="trigger"
+          >${cdsIcon(Information16, { id: 'trigger' })}
+        </slot>
       </button>
     `;
   };

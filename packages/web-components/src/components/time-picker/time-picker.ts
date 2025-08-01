@@ -8,9 +8,10 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { cdsIcon } from '../icon/icon';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ValidityMixin from '../../globals/mixins/validity';
 import FormMixin from '../../globals/mixins/form';
 import { prefix } from '../../globals/settings';
@@ -251,10 +252,10 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               ? html`
                   <div class="${prefix}--time-picker__error__icon">
                     ${invalid
-                      ? WarningFilled16({
+                      ? cdsIcon(WarningFilled16, {
                           class: `${prefix}--checkbox__invalid-icon`,
                         })
-                      : WarningAltFilled16({
+                      : cdsIcon(WarningAltFilled16, {
                           class: `${prefix}--text-input__invalid-icon--warning`,
                         })}
                   </div>

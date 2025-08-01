@@ -7,8 +7,9 @@
 
 import { LitElement, html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
+import { cdsIcon } from '../icon/icon';
+import Close16 from '@carbon/icons/es/close/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -202,7 +203,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
       ${filter
         ? html`
             <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
-              ${Close16({ 'aria-label': title })}
+              ${cdsIcon(Close16, { 'aria-label': title })}
             </button>
           `
         : ``}

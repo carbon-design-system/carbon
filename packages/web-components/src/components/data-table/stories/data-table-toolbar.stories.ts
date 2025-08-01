@@ -8,10 +8,11 @@
 import { html } from 'lit';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
-import Settings16 from '@carbon/icons/lib/settings/16.js';
-import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
+import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import storyDocs from './data-table.mdx';
 import '../index';
+import { cdsIcon } from '../../icon/icon';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -77,7 +78,7 @@ export const Default = {
             <cds-table-toolbar-search
               placeholder="Filter table"></cds-table-toolbar-search>
             <cds-overflow-menu toolbar-action>
-              ${Settings16({
+              ${cdsIcon(Settings16, {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
@@ -181,7 +182,7 @@ export const PersistentToolbar = {
             persistent
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({
+            ${cdsIcon(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
@@ -284,7 +285,7 @@ export const SmallPersistentToolbar = {
             persistent
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({
+            ${cdsIcon(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
@@ -380,7 +381,7 @@ export const WithOverflowMenu = {
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({
+            ${cdsIcon(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
@@ -424,7 +425,7 @@ export const WithOverflowMenu = {
           >
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({
+              ${cdsIcon(OverflowMenuVertical16, {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
@@ -447,7 +448,7 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({
+              ${cdsIcon(OverflowMenuVertical16, {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
@@ -470,7 +471,7 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({
+              ${cdsIcon(OverflowMenuVertical16, {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
@@ -495,7 +496,7 @@ export const WithOverflowMenu = {
           >
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({
+              ${cdsIcon(OverflowMenuVertical16, {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
@@ -518,7 +519,7 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({
+              ${cdsIcon(OverflowMenuVertical16, {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
@@ -541,7 +542,7 @@ export const WithOverflowMenu = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({
+              ${cdsIcon(OverflowMenuVertical16, {
                 slot: 'icon',
                 class: `${prefix}--overflow-menu__icon`,
               })}
@@ -591,7 +592,7 @@ export const Playground = {
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({
+            ${cdsIcon(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
@@ -629,7 +630,7 @@ export const Playground = {
           >
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${cdsIcon(OverflowMenuVertical16, { slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -649,7 +650,7 @@ export const Playground = {
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${cdsIcon(OverflowMenuVertical16, { slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -669,7 +670,7 @@ export const Playground = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${cdsIcon(OverflowMenuVertical16, { slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -691,7 +692,7 @@ export const Playground = {
           >
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${cdsIcon(OverflowMenuVertical16, { slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -711,7 +712,7 @@ export const Playground = {
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${cdsIcon(OverflowMenuVertical16, { slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>
@@ -731,7 +732,7 @@ export const Playground = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           <cds-table-cell>
             <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
+              ${cdsIcon(OverflowMenuVertical16, { slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
               <cds-overflow-menu-body flipped>

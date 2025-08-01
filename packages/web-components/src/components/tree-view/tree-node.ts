@@ -11,7 +11,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import CaretDown16 from '@carbon/icons/lib/caret--down/16.js';
+import { cdsIcon } from '../icon/icon';
+import CaretDown16 from '@carbon/icons/es/caret--down/16.js';
 
 import styles from './tree-view.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -336,7 +337,7 @@ class CDSTreeNode extends LitElement {
                         class="${prefix}--tree-parent-node__toggle"
                         ?disabled=${disabled}
                         @click=${handleToggleClick}>
-                        ${CaretDown16({ class: toggleClasses })}
+                        ${cdsIcon(CaretDown16, { class: toggleClasses })}
                       </span>
                       <span class="${prefix}--tree-node__label__details">
                         <slot
@@ -354,7 +355,7 @@ class CDSTreeNode extends LitElement {
                       class="${prefix}--tree-parent-node__toggle"
                       ?disabled=${disabled}
                       @click=${handleToggleClick}>
-                      ${CaretDown16({ class: toggleClasses })}
+                      ${cdsIcon(CaretDown16, { class: toggleClasses })}
                     </span>
                     <span class="${prefix}--tree-node__label__details">
                       <slot

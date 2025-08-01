@@ -13,13 +13,14 @@ import {
   state,
 } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import { cdsIcon } from '../icon/icon';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './defs';
 import { selectorTabbable } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import ArrowLeft16 from '@carbon/icons/lib/arrow--left/16.js';
-import Close20 from '@carbon/icons/lib/close/20.js';
+import ArrowLeft16 from '@carbon/icons/es/arrow--left/16.js';
+import Close20 from '@carbon/icons/es/close/20.js';
 import { moderate02 } from '@carbon/motion';
 import '../button/index';
 import '../icon-button/index';
@@ -724,7 +725,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
               size="sm"
               class=${`${prefix}--btn ${blockClass}__navigation-back-button`}
               @click=${this._handleNavigateBack}>
-              ${ArrowLeft16({ slot: 'icon' })}
+              ${cdsIcon(ArrowLeft16, { slot: 'icon' })}
               <span slot="tooltip-content">
                 ${navigationBackIconDescription}
               </span>
@@ -750,7 +751,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             size="sm"
             class=${`${blockClass}__close-button`}
             @click=${this._handleCloseClick}>
-            ${Close20({ slot: 'icon' })}
+            ${cdsIcon(Close20, { slot: 'icon' })}
             <span slot="tooltip-content"> ${closeIconDescription} </span>
           </cds-icon-button>
         </div>

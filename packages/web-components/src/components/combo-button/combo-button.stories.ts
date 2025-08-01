@@ -7,8 +7,9 @@
 
 import { html } from 'lit';
 import './index';
-import CopyFile16 from '@carbon/icons/lib/copy--file/16';
-import Export16 from '@carbon/icons/lib/export/16';
+import CopyFile16 from '@carbon/icons/es/copy--file/16.js';
+import Export16 from '@carbon/icons/es/export/16.js';
+import { cdsIcon } from '../icon/icon';
 
 const args = {
   label: 'Primary action',
@@ -156,10 +157,10 @@ export const withIcons = {
       .tooltip-alignment="${tooltipAlignment}">
       <cds-menu>
         <cds-menu-item label="Save as a copy">
-          ${CopyFile16({ slot: 'render-icon' })}
+          ${cdsIcon(CopyFile16, { slot: 'render-icon' })}
         </cds-menu-item>
         <cds-menu-item label="Export">
-          ${Export16({ slot: 'render-icon' })}
+          ${cdsIcon(Export16, { slot: 'render-icon' })}
         </cds-menu-item>
       </cds-menu>
     </cds-combo-button>

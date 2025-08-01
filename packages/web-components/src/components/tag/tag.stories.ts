@@ -7,11 +7,12 @@
 
 import { html } from 'lit';
 import { TAG_SIZE } from './tag';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
-import Asleep16 from '@carbon/icons/lib/asleep/16.js';
 import './index';
+import { cdsIcon } from '../icon/icon';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
+import Asleep16 from '@carbon/icons/es/asleep/16.js';
 import '../popover';
 import '../ai-label';
 import '../button';
@@ -34,15 +35,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${cdsIcon(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${cdsIcon(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${cdsIcon(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -168,8 +169,8 @@ export const Dismissible = {
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
             size="${size}"
-            >${Asleep16({ slot: 'icon' })}</cds-dismissible-tag
-          >`
+            >${cdsIcon(Asleep16, { slot: 'icon' })}
+          </cds-dismissible-tag>`
       )}`;
   },
 };
@@ -234,7 +235,7 @@ export const Selectable = {
             id="${tag.id}"
             text="${text || tag.text}"
             size="${size}"
-            >${Asleep16({ slot: 'icon' })}
+            >${cdsIcon(Asleep16, { slot: 'icon' })}
           </cds-selectable-tag>`
       )}
     </div>`;
@@ -323,7 +324,7 @@ export const Operational = {
               type=${tag.type}
               text="${text || tag.text}"
               size="${size}"
-              >${Asleep16({ slot: 'icon' })}
+              >${cdsIcon(Asleep16, { slot: 'icon' })}
             </cds-operational-tag>`
         )}
       </div>
@@ -340,7 +341,7 @@ export const Operational = {
               @keydown="${togglePopover}"
               ?disabled="${disabled}"
               text="${text || `Tag content`}">
-              ${Asleep16({ slot: 'icon' })}
+              ${cdsIcon(Asleep16, { slot: 'icon' })}
             </cds-operational-tag>
           </div>
           <cds-popover-content class="popover-content">
@@ -361,7 +362,7 @@ export const Operational = {
               @keydown="${togglePopover}"
               ?disabled="${disabled}"
               text="${text || `Tag content`}">
-              ${Asleep16({ slot: 'icon' })}
+              ${cdsIcon(Asleep16, { slot: 'icon' })}
             </cds-operational-tag>
           </div>
           <cds-popover-content>
@@ -437,13 +438,13 @@ export const WithAILabel = {
       </cds-tag>
 
       <cds-tag type="blue">
-        ${Asleep16({ slot: 'icon' })} Tag
+        ${cdsIcon(Asleep16, { slot: 'icon' })} Tag
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
       </cds-tag>
       <cds-tag filter type="green">
-        ${Asleep16({ slot: 'icon' })} Tag
+        ${cdsIcon(Asleep16, { slot: 'icon' })} Tag
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >

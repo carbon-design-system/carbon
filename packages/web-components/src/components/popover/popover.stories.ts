@@ -11,9 +11,10 @@ import './popover-content';
 import '../radio-button/index';
 import { POPOVER_ALIGNMENT } from './defs';
 import { prefix } from '../../globals/settings';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
-import Settings16 from '@carbon/icons/lib/settings/16.js';
+import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../checkbox/checkbox';
+import { cdsIcon } from '../icon/icon';
 
 import styles from './popover-story.scss?lit';
 const controls = {
@@ -93,7 +94,7 @@ export const Default = {
           type="button"
           aria-expanded=${open}
           @click="${() => handleClick()}">
-          ${Checkbox16()}
+          ${cdsIcon(Checkbox16)}
         </button>
         <cds-popover-content>
           <div class="p-3">
@@ -128,7 +129,7 @@ export const TabTip = {
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-one')}">
-            ${Settings16()}
+            ${cdsIcon(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">
@@ -172,7 +173,7 @@ export const TabTip = {
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-two')}">
-            ${Settings16()}
+            ${cdsIcon(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">

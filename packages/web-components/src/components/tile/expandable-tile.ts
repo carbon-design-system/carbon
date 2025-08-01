@@ -8,8 +8,9 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import { prefix } from '../../globals/settings';
+import { cdsIcon } from '../icon/icon';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -169,9 +170,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         tabindex="0"
         @click="${withInteractive ? this._handleExpand : ''}"
         aria-expanded="${String(Boolean(expanded))}">
-        ${ChevronDown16({
-          id: 'icon',
-        })}
+        ${cdsIcon(ChevronDown16, { id: 'icon' })}
       </button>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>

@@ -7,8 +7,9 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16.js';
 import { prefix } from '../../globals/settings';
+import { cdsIcon } from '../icon/icon';
+import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
 import { DROPDOWN_SIZE } from './dropdown';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -115,7 +116,7 @@ class CDSDropdownItem extends LitElement {
         <slot @slotchange=${handleSlotChange}></slot>
         ${!selected
           ? undefined
-          : Checkmark16({
+          : cdsIcon(Checkmark16, {
               part: 'selected-icon',
               class: `${prefix}--list-box__menu-item__selected-icon`,
             })}

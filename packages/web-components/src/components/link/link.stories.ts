@@ -7,8 +7,9 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import ArrowRight16 from '@carbon/icons/lib/arrow--right/16.js';
+import ArrowRight16 from '@carbon/icons/es/arrow--right/16.js';
 import { LINK_SIZE } from './link';
+import { cdsIcon } from '../icon/icon';
 
 const defaultArgs = {
   disabled: false,
@@ -85,7 +86,7 @@ export const PairedWithIcon = {
       .href="${ifDefined(href)}"
       .size="${ifDefined(size)}"
       @click="${onClick}">
-      Carbon Docs ${ArrowRight16({ slot: 'icon' })}
+      Carbon Docs ${cdsIcon(ArrowRight16, { slot: 'icon' })}
     </cds-link>
   `,
 };

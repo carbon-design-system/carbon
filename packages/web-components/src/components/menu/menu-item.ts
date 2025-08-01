@@ -10,14 +10,15 @@ import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
-import CaretRight16 from '@carbon/icons/lib/caret--right/16';
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
+import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
+import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
+import { cdsIcon } from '../icon/icon';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
 
@@ -177,7 +178,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
 
     return html`
       <div class="${prefix}--menu-item__selection-icon">
-        ${this.ariaChecked === 'true' ? Checkmark16() : undefined}
+        ${this.ariaChecked === 'true' ? cdsIcon(Checkmark16) : undefined}
       </div>
 
       <div class="${prefix}--menu-item__icon">
@@ -190,7 +191,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       ${this.hasSubmenu
         ? html`
             <div class="${prefix}--menu-item__shortcut">
-              ${isRtl ? CaretLeft16() : CaretRight16()}
+              ${isRtl ? cdsIcon(CaretLeft16) : cdsIcon(CaretRight16)}
             </div>
             <cds-menu
               className=${menuClassName}

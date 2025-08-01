@@ -8,9 +8,9 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
-import Search16 from '@carbon/icons/lib/search/16.js';
 import { prefix } from '../../globals/settings';
+import Search16 from '@carbon/icons/es/search/16.js';
+import Close16 from '@carbon/icons/es/close/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
@@ -19,6 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './search.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { cdsIcon } from '../icon/icon';
 
 /**
  * Search box.
@@ -220,11 +221,11 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         <slot name="icon" @slotchange=${handleSlotChange}>
           ${hasCustomIcon
             ? html``
-            : html`${Search16({
+            : cdsIcon(Search16, {
                 part: 'search-icon',
                 class: `${prefix}--search-magnifier-icon`,
                 role: 'img',
-              })}`}
+              })}
         </slot>
       </div>
       <label for="input" part="label-text" class="${prefix}--label">
@@ -248,7 +249,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         @click="${handleClearInputButtonClick}"
         type="button"
         aria-label="${closeButtonLabelText}">
-        ${Close16({
+        ${cdsIcon(Close16, {
           part: 'close-icon',
           'aria-label': closeButtonLabelText,
           role: 'img',

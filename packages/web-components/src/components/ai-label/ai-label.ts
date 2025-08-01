@@ -11,9 +11,10 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './ai-label.scss?lit';
-import Undo16 from '@carbon/icons/lib/undo/16.js';
+import Undo16 from '@carbon/icons/es/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { cdsIcon } from '../icon/icon';
 
 /**
  * Basic AI Label.
@@ -126,7 +127,7 @@ class CDSAILabel extends CDSToggleTip {
               size="sm"
               @click="${this._handleClick}">
               <span slot="tooltip-content"> ${revertLabel} </span>
-              ${Undo16({ slot: 'icon' })}
+              ${cdsIcon(Undo16, { slot: 'icon' })}
             </cds-icon-button>
           `
         : html`

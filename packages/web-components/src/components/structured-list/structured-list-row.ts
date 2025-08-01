@@ -8,8 +8,9 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
 import { prefix } from '../../globals/settings';
+import { cdsIcon } from '../icon/icon';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import RadioGroupManager, {
@@ -220,7 +221,7 @@ class CDSStructuredListRow extends HostListenerMixin(LitElement) {
           value=${ifDefined(selectionValue)} />
         <div
           class="${prefix}--structured-list-td ${prefix}--structured-list-cell">
-          ${CheckmarkFilled16({
+          ${cdsIcon(CheckmarkFilled16, {
             class: `${prefix}--structured-list-svg`,
             title: selectionIconTitle,
           })}

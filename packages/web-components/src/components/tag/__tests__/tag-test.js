@@ -6,6 +6,7 @@
  */
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import Add16 from '@carbon/web-components/es/icons/add/16.js';
+import { cdsIcon } from '../../icon/icon';
 import '@carbon/web-components/es/components/tag/index.js';
 
 describe('cds-tag', function () {
@@ -134,7 +135,7 @@ describe('cds-tag', function () {
 
   it('should allow for a custom icon', async () => {
     const tag = html`<cds-tag type="red"
-      >${Add16({ slot: 'icon' })} Dee Dee Ramone</cds-tag
+      >${cdsIcon(Add16, { slot: 'icon' })} Dee Dee Ramone</cds-tag
     >`;
     const el = await fixture(tag);
 

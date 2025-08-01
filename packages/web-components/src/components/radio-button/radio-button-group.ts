@@ -14,11 +14,12 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
 import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import CDSRadioButton from './radio-button';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import styles from './radio-button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { cdsIcon } from '../icon/icon';
 
 export { RADIO_BUTTON_ORIENTATION };
 
@@ -224,11 +225,11 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     const showWarning = !readOnly && !invalid && warn;
     const showHelper = !invalid && !disabled && !warn;
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = cdsIcon(WarningFilled16, {
       class: `${prefix}--radio-button__invalid-icon`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = cdsIcon(WarningAltFilled16, {
       class: `${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`,
     });
 
