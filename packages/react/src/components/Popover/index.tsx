@@ -620,34 +620,12 @@ function PopoverContentRenderFunction(
 ) {
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const [isMultiLine, setIsMultiLine] = React.useState(false);
-  const ref = useMergedRefs([setFloating, textRef, forwardRef]);
+  const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-
-  useEffect(() => {
-    checkIfMultiLine();
-  }, [children]);
-
-  const checkIfMultiLine = () => {
-    const el = textRef.current;
-    if (el) {
-      const style = getComputedStyle(el);
-      const lineHeight = parseFloat(style.lineHeight);
-      const height = el.offsetHeight;
-      const lines = Math.floor(height / lineHeight);
-      setIsMultiLine(lines > 1);
-    }
-  };
-
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span
-        className={cx(`${prefix}--popover-content`, className, {
-          [`${prefix}--tooltip-content--multiline`]: isMultiLine,
-        })}
-        ref={ref}>
+      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
         {enableFloatingStyles && (
           <span
