@@ -4,7 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import Modal, { ModalDialog, ModalPresence, type ModalProps } from './Modal';
+import Modal, { type ModalProps } from './Modal';
+import { ModalPresence, type ModalPresenceProps } from './ModalPresence';
 
 export default Modal;
-export { Modal, ModalDialog, ModalPresence, type ModalProps };
+export { Modal, ModalPresence, type ModalProps, type ModalPresenceProps };

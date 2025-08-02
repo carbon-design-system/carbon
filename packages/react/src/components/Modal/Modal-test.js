@@ -6,20 +6,29 @@
  */
 
 import React, { useRef, useState } from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from './Modal';
 import TextInput from '../TextInput';
 import { AILabel } from '../AILabel';
 import { FeatureFlags } from '../FeatureFlags';
+import { ModalPresence } from './ModalPresence';
 
 const prefix = 'cds';
 
-const ModalWithPresenceEnabled = ({ open = true, ...props }) => {
+const ModalWithPresenceFeatureFlag = ({ open = true, ...props }) => {
   return (
     <FeatureFlags enablePresence>
       <Modal {...props} open={open} />
     </FeatureFlags>
+  );
+};
+
+const ModalWithPresenceContext = ({ open = true, ...props }) => {
+  return (
+    <ModalPresence open={open}>
+      <Modal {...props} />
+    </ModalPresence>
   );
 };
 
@@ -29,10 +38,16 @@ describe.each([
     Component: Modal,
   },
   {
-    title: 'Modal with presence enabled',
-    Component: ModalWithPresenceEnabled,
+    title: 'Modal with presence feature flag',
+    Component: ModalWithPresenceFeatureFlag,
+    isPresence: true,
   },
-])('$title', ({ Component }) => {
+  {
+    title: 'Modal with presence context',
+    Component: ModalWithPresenceContext,
+    isPresence: true,
+  },
+])('$title', ({ Component, isPresence }) => {
   it('should add extra classes that are passed via className', () => {
     render(
       <Component data-testid="modal-1" className="custom-class">
@@ -526,6 +541,45 @@ describe.each([
     jest.useRealTimers();
   });
 
+  it('should focus the launcherButtonRef on close when defined', async () => {
+    const ModalExample = () => {
+      const buttonRef = useRef(null);
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <>
+          <button ref={buttonRef} type="button" onClick={() => setIsOpen(true)}>
+            Launch modal
+          </button>
+          <Component
+            data-testid="modal"
+            launcherButtonRef={buttonRef}
+            open={isOpen}
+            onRequestClose={() => {
+              setIsOpen(false);
+            }}
+          />
+        </>
+      );
+    };
+    render(<ModalExample />);
+
+    const button = screen.getByRole('button', { name: /Launch modal/ });
+    await userEvent.click(button);
+
+    expect(screen.getByTestId('modal')).toHaveClass('is-visible');
+
+    await userEvent.click(screen.getByRole('button', { name: /Close/ }));
+
+    if (isPresence) {
+      expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+    } else {
+      expect(screen.getByTestId('modal')).not.toHaveClass('is-visible');
+    }
+
+    expect(button).toHaveFocus();
+  });
+
   describe('enable-dialog-element feature flag', () => {
     it('should bring launcherButtonRef element into focus on close when the ref is defined', async () => {
       const ModalExample = () => {
@@ -533,14 +587,14 @@ describe.each([
         const focusRef = useRef();
         return (
           <FeatureFlags enableDialogElement>
-            <Modal
+            <Component
               open={open}
               launcherButtonRef={focusRef}
               onClick={() => setOpen(false)}>
               <button data-testid="close" onClick={() => setOpen(false)}>
                 Close
               </button>
-            </Modal>
+            </Component>
             <button data-testid="focusElem" ref={focusRef}>
               focus after close
             </button>
@@ -575,14 +629,14 @@ describe.each([
 
     it('should throw a prop-type warning when passiveModal=false and preventCloseOnClickOutside=false', () => {
       render(
-        <Modal
+        <Component
           open
           passiveModal={false}
           preventCloseOnClickOutside={false}
           primaryButtonText="Submit"
           secondaryButtonText="Cancel">
           <p>Test content</p>
-        </Modal>
+        </Component>
       );
 
       expect(consoleErrorSpy).toHaveBeenCalledWith(
@@ -592,14 +646,14 @@ describe.each([
 
     it('should not throw a warning when passiveModal=true and preventCloseOnClickOutside=false', () => {
       render(
-        <Modal
+        <Component
           open
           passiveModal
           preventCloseOnClickOutside={false}
           primaryButtonText="Submit"
           secondaryButtonText="Cancel">
           <p>Test content</p>
-        </Modal>
+        </Component>
       );
 
       expect(consoleErrorSpy).not.toHaveBeenCalled();
@@ -607,14 +661,14 @@ describe.each([
 
     it('should not throw a warning when passiveModal=false and preventCloseOnClickOutside=true', () => {
       render(
-        <Modal
+        <Component
           open
           passiveModal={false}
           preventCloseOnClickOutside={true}
           primaryButtonText="Submit"
           secondaryButtonText="Cancel">
           <p>Test content</p>
-        </Modal>
+        </Component>
       );
 
       expect(consoleErrorSpy).not.toHaveBeenCalled();
@@ -647,14 +701,14 @@ describe('state', () => {
   });
 });
 
-describe('state with presence enabled', () => {
+describe('state with presence feature flag', () => {
   it('should be present when state is open', () => {
-    render(<ModalWithPresenceEnabled open data-testid="modal" />);
+    render(<ModalWithPresenceFeatureFlag open data-testid="modal" />);
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
   });
 
   it('should not be present when open is false', () => {
-    render(<ModalWithPresenceEnabled open={false} data-testid="modal" />);
+    render(<ModalWithPresenceFeatureFlag open={false} data-testid="modal" />);
     expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
   });
 
@@ -668,14 +722,82 @@ describe('state with presence enabled', () => {
   });
 });
 
+describe('state with presence context', () => {
+  it('should be present when state is open', () => {
+    render(<ModalWithPresenceContext open data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should not be present when open is false', () => {
+    render(<ModalWithPresenceContext open={false} data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should not be present when open is undefined', () => {
+    render(
+      <ModalPresence>
+        <Modal data-testid="modal" />
+      </ModalPresence>
+    );
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should mount and unmount sibling modal independently, if wrapped in presence context', async () => {
+    const ModalExample = () => {
+      const [isSiblingOpen, setIsSiblingOpen] = useState(false);
+
+      return (
+        <ModalPresence open>
+          <Modal data-testid="modal">
+            <button type="button" onClick={() => setIsSiblingOpen(true)}>
+              Launch sibling modal
+            </button>
+          </Modal>
+          <Modal
+            data-testid="sibling-modal"
+            open={isSiblingOpen}
+            onRequestClose={() => setIsSiblingOpen(false)}
+          />
+        </ModalPresence>
+      );
+    };
+    render(<ModalExample />);
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).not.toBeInTheDocument();
+
+    const launchSiblingModalButton = screen.getByRole('button', {
+      name: /Launch sibling modal/,
+    });
+    await userEvent.click(launchSiblingModalButton);
+
+    const siblingModal = screen.queryByTestId('sibling-modal');
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(siblingModal).toBeInTheDocument();
+
+    const closeSiblingModalButton = within(siblingModal).getByRole('button', {
+      name: /Close/,
+    });
+    await userEvent.click(closeSiblingModalButton);
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(siblingModal).not.toBeInTheDocument();
+  });
+});
+
 describe.each([
   {
     title: 'events',
     Component: Modal,
   },
   {
-    title: 'events with presence enabled',
-    Component: ModalWithPresenceEnabled,
+    title: 'events with presence feature flag',
+    Component: ModalWithPresenceFeatureFlag,
+  },
+  {
+    title: 'events with presence context',
+    Component: ModalWithPresenceContext,
   },
 ])('$title', ({ Component }) => {
   it('should set expected class when state is open', () => {
@@ -976,7 +1098,7 @@ describe.each([
           style={{ width: '100px', height: '100px' }}>
           Outside area
         </div>
-        <Modal
+        <Component
           open
           primaryButtonText="Primary button"
           secondaryButtonText="Secondary button"
@@ -991,7 +1113,7 @@ describe.each([
             id="text-input-1"
             labelText="Domain name"
           />
-        </Modal>
+        </Component>
       </div>
     );
 
