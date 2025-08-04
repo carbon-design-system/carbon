@@ -8945,6 +8945,7 @@ __metadata:
     eslint: "npm:^9.32.0"
     eslint-plugin-jsx-a11y: "npm:^6.10.2"
     eslint-plugin-playwright: "npm:^2.0.0"
+    eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^5.2.0"
     fs-extra: "npm:^11.0.0"
     glob: "npm:^11.0.0"
@@ -12210,7 +12211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.32.2, eslint-plugin-react@npm:^7.37.0":
+"eslint-plugin-react@npm:^7.32.2, eslint-plugin-react@npm:^7.37.0, eslint-plugin-react@npm:^7.37.5":
   version: 7.37.5
   resolution: "eslint-plugin-react@npm:7.37.5"
   dependencies:
