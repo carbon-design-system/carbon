@@ -91,15 +91,14 @@ export const Default = ({ numberOfButtons, ...args }) => {
             autoAlign={true}
             id="carbon-combobox"
             items={['Viewer', 'Editor', 'Manager']}
-            titleText="Permissions (Example of Floating ui)"
+            titleText="Permissions (Example of Floating UI)"
           />
         </div>
         <div style={{ marginBottom: '24px' }}>
           <Dropdown
             autoAlign={true}
             id="default"
-            style={{ marginBottom: '24px' }}
-            titleText="TLS (Example of Floating ui)"
+            titleText="TLS (Example of Floating UI)"
             label="Option 1"
             items={[
               {
@@ -116,14 +115,13 @@ export const Default = ({ numberOfButtons, ...args }) => {
               },
             ]}
             itemToString={(item) => (item ? item.text : '')}
-            direction="top"
           />
         </div>
         <div style={{ marginBottom: '24px' }}>
           <MultiSelect
             id="test"
-            label="Mapping Domain"
-            titleText="Choose options"
+            label="Choose options"
+            titleText="Mapping Domain"
             autoAlign
             items={[
               {
@@ -240,7 +238,7 @@ export const FullWidth = () => {
         open={open}
         onRequestClose={() => setOpen(false)}
         isFullWidth
-        modalHeading="Full Width Modal"
+        modalHeading="Full width modal"
         modalLabel="An example of a modal with no padding"
         primaryButtonText="Add"
         secondaryButtonText="Cancel">
@@ -356,55 +354,55 @@ export const WithScrollingContent = () => {
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>
-        <p style={{ marginBottom: '1rem' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu
-          nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae leo
-          vitae orci tincidunt auctor eget eget libero. Ut tincidunt ultricies
-          fringilla. Aliquam erat volutpat. Aenean arcu odio, elementum vel
-          vehicula vitae, porttitor ac lorem. Sed viverra elit ac risus
-          tincidunt fermentum. Ut sollicitudin nibh id risus ornare ornare.
-          Etiam gravida orci ut lectus dictum, quis ultricies felis mollis.
-          Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante quis
-          pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at elit.
-          Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales magna.
-          Proin ornare tellus quis hendrerit egestas. Donec pharetra leo nec
-          molestie sollicitudin.{' '}
+        <p style={{ marginBottom: '2rem' }}>
+          Domain mappings provide the URL route to your Code Engine application
+          or function within a project. With Code Engine, these mappings are
+          automatically created, by default, whenever you deploy an application
+          or create a function. However, you can map your own custom domain to a
+          Code Engine application or function. This option routes requests from
+          your custom URL to your application or function. You can use the Code
+          Engine CLI.
         </p>
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-          placeholder="e.g. github.com"
-          style={{ marginBottom: '1rem' }}
-        />
-        <div style={{ marginBottom: '1rem' }}>
+        <div style={{ marginBottom: '24px' }}>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+            placeholder="For example, GitHub.com"
+          />
+        </div>
+        <div style={{ marginBottom: '24px' }}>
           <Select id="select-1" defaultValue="us-south" labelText="Region">
             <SelectItem value="us-south" text="US South" />
             <SelectItem value="us-east" text="US East" />
           </Select>
         </div>
-        <Dropdown
-          id="drop"
-          label="Dropdown"
-          titleText="Dropdown"
-          items={[
-            { id: 'one', label: 'one', name: 'one' },
-            { id: 'two', label: 'two', name: 'two' },
-          ]}
-          style={{ marginBottom: '1rem' }}
-        />
+        <div style={{ marginBottom: '24px' }}>
+          <ComboBox
+            allowCustomValue
+            autoAlign={true}
+            id="carbon-combobox"
+            items={['Viewer', 'Editor', 'Manager']}
+            titleText="Permissions (Example of Floating UI)"
+          />
+        </div>
         <MultiSelect
           id="test"
-          label="Multiselect"
-          titleText="Multiselect"
+          label="Choose options"
+          titleText="Mapping Domain"
+          autoAlign
           items={[
             {
               id: 'downshift-1-item-0',
-              text: 'Option 1',
+              text: 'Cloud Foundry',
             },
             {
               id: 'downshift-1-item-1',
-              text: 'Option 2',
+              text: 'Kubernetes Ingress',
+            },
+            {
+              id: 'downshift-1-item-2',
+              text: 'VPC Load Balancer',
             },
           ]}
           itemToString={(item) => (item ? item.text : '')}
