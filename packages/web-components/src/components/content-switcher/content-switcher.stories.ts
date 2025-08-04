@@ -313,16 +313,22 @@ export const WithLayer = {
           onBeforeSelect
         )}"
         @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-        <cds-content-switcher-item value="all" name="one" text="First section">
+        <cds-content-switcher-item
+          ?lowcontrast="${lowContrast}"
+          value="all"
+          name="one"
+          text="First section">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
+          ?lowcontrast="${lowContrast}"
           value="cloudFoundry"
           name="two"
           text="Second section">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
+          ?lowcontrast="${lowContrast}"
           value="staging"
           name="three"
           text="Third section">
