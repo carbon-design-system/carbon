@@ -61,20 +61,19 @@ async function buildDist() {
     }
   }
 
-  // Generates the multi-input for the rollup config
-  const inputs = folders.reduce((acc, folder) => {
-    acc[`components/${folder}/index`] = `src/components/${folder}/index.ts`;
-    return acc;
-  }, {});
+  // Generate inputs with flat file names
+  const inputs = {};
+  folders.forEach((folder) => {
+    inputs[`${folder}.min`] = `src/components/${folder}/index.ts`;
+  });
 
   return rollup(getRollupConfig({ inputs }))
     .then((bundle) => {
       bundle.write({
         format: 'es',
         dir: 'dist',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        entryFileNames: '[name].min.js',
+        // This ensures output files are named based on input keys
+        entryFileNames: '[name].js',
         banner: 'let process = { env: {} };',
       });
     })

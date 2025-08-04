@@ -179,6 +179,7 @@ class CDSDropdown extends ValidityMixin(
           this._handleUserInitiatedToggle(false);
           break;
         case DROPDOWN_KEYBOARD_ACTION.NAVIGATING:
+          event.preventDefault();
           this._navigate(NAVIGATION_DIRECTION[key]);
           break;
         default:
