@@ -93,26 +93,34 @@ const InlineLoading = ({
 
   const getLoading = () => {
     let iconLabel = iconDescription ? iconDescription : status;
+    let element = undefined;
+    let loading = {
+      text: description ? (
+        <div className={`${prefix}--inline-loading__text`}>{description}</div>
+      ) : undefined,
+      animation: undefined,
+    };
+
     if (status === 'error') {
-      return (
+      element = (
         <ErrorFilled className={`${prefix}--inline-loading--error`}>
           <title>{iconLabel}</title>
         </ErrorFilled>
       );
     }
-    if (status === 'finished') {
-      return (
+    else if (status === 'finished') {
+      element = (
         <CheckmarkFilled
           className={`${prefix}--inline-loading__checkmark-container`}>
           <title>{iconLabel}</title>
         </CheckmarkFilled>
       );
     }
-    if (status === 'active') {
+    else if (status === 'active') {
       if (!iconDescription) {
         iconLabel = 'loading';
       }
-      return (
+      element = (
         <Loading
           small
           description={iconLabel}
@@ -121,33 +129,34 @@ const InlineLoading = ({
         />
       );
     }
-    if (status === 'inactive') {
+    else if (status === 'inactive') {
       if (!iconDescription) {
         iconLabel = 'not loading';
       }
-      return (
-        <title className={`${prefix}--inline-loading__inactive-status`}>
-          {iconLabel}
-        </title>
+      loading.animation = (
+        <svg width="0" height="0" viewBox="0 0 0 0">
+          <title className={`${prefix}--inline-loading__inactive-status`}>
+            {iconLabel}
+          </title>
+        </svg>
       );
+      loading.text = undefined;
     }
-    return undefined;
+    if (element) {
+      loading.animation = <div className={`${prefix}--inline-loading__animation`}>{element}</div>;
+    }
+    return loading;
   };
 
-  const loadingText = description && (
-    <div className={`${prefix}--inline-loading__text`}>{description}</div>
-  );
   const loading = getLoading();
-  const loadingAnimation = loading && (
-    <div className={`${prefix}--inline-loading__animation`}>{loading}</div>
-  );
+
   return (
     <div
       className={loadingClasses}
       {...rest}
       aria-live={rest['aria-live'] ?? 'assertive'}>
-      {loadingAnimation}
-      {loadingText}
+      {loading.animation}
+      {loading.text}
     </div>
   );
 };
