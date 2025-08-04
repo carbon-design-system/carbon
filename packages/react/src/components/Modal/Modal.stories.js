@@ -121,7 +121,7 @@ export const Default = ({ numberOfButtons, ...args }) => {
           <MultiSelect
             id="test"
             label="Choose options"
-            titleText="Mapping Domain"
+            titleText="Mapping domain"
             autoAlign
             items={[
               {
@@ -389,7 +389,7 @@ export const WithScrollingContent = () => {
         <MultiSelect
           id="test"
           label="Choose options"
-          titleText="Mapping Domain"
+          titleText="Mapping domain"
           autoAlign
           items={[
             {
