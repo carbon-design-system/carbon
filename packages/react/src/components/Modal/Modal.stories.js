@@ -595,7 +595,7 @@ export const withAILabel = {
             data-modal-primary-focus
             id="text-input-1"
             labelText="Domain name"
-            placeholder="For example, Github.com"
+            placeholder="For example, GitHub.com"
             style={{ marginBottom: '24px' }}
           />
           <div style={{ marginBottom: '24px' }}>
