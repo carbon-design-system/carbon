@@ -39,7 +39,7 @@ export interface ManagedRadioButtonDelegate {
   /**
    * 'true' if the radio button is disabled.
    */
-  disabled: boolean;
+  disabled?: boolean;
 
   /**
    * @param other A node to compare this radio button's DOM position in document with.
