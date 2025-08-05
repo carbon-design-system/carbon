@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 jest.setTimeout(20000);
 
 global.requestAnimationFrame = function requestAnimationFrame(callback) {

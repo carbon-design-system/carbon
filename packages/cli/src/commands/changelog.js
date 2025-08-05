@@ -72,7 +72,6 @@ export const builder = (yargs) => {
     describe: 'the git tag range to generate a changelog for',
     type: 'string',
   });
-
   yargs.options({
     n: {
       alias: 'noPrompt',
