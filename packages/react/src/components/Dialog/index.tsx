@@ -114,7 +114,7 @@ interface DialogProps extends HTMLAttributes<HTMLDialogElement> {
   ariaDescribedBy?: string;
 }
 
-const unstable__Dialog = React.forwardRef(
+const preview__Dialog = React.forwardRef(
   (
     {
       children,
@@ -246,9 +246,9 @@ const unstable__Dialog = React.forwardRef(
   }
 );
 
-unstable__Dialog.displayName = 'Dialog';
+preview__Dialog.displayName = 'Dialog';
 
-unstable__Dialog.propTypes = {
+preview__Dialog.propTypes = {
   /**
    * Provide children to be rendered inside of the Dialog
    */
@@ -948,8 +948,8 @@ DialogFooter.propTypes = {
  * -------
  */
 
-type DialogComponentType = typeof unstable__Dialog & {
-  Root: typeof unstable__Dialog;
+type DialogComponentType = typeof preview__Dialog & {
+  Root: typeof preview__Dialog;
   Header: typeof DialogHeader;
   Controls: typeof DialogControls;
   CloseButton: typeof DialogCloseButton;
@@ -959,9 +959,9 @@ type DialogComponentType = typeof unstable__Dialog & {
   Footer: typeof DialogFooter;
 };
 
-const Dialog = unstable__Dialog as DialogComponentType;
+const Dialog = preview__Dialog as DialogComponentType;
 
-Dialog.Root = unstable__Dialog;
+Dialog.Root = preview__Dialog;
 Dialog.Root.displayName = 'Dialog.Root';
 
 Dialog.Header = DialogHeader;
@@ -987,7 +987,7 @@ Dialog.Footer.displayName = 'Dialog.Footer';
 
 export {
   Dialog,
-  unstable__Dialog,
+  preview__Dialog,
   DialogHeader,
   DialogControls,
   DialogCloseButton,

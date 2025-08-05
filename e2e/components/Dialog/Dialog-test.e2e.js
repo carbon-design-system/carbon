@@ -16,32 +16,32 @@ test.describe('Dialog', () => {
     test.describe(theme, () => {
       test('modal dialog @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'unstable_Dialog',
-          id: 'experimental-unstable-dialog--modal',
+          component: 'preview__Dialog',
+          id: 'experimental-preview-dialog--modal',
           theme,
         });
       });
 
       test('non-modal dialog @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'unstable_Dialog',
-          id: 'experimental-unstable-dialog--non-modal',
+          component: 'preview__Dialog',
+          id: 'experimental-preview-dialog--non-modal',
           theme,
         });
       });
 
       test('passive dialog @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'unstable_Dialog',
-          id: 'experimental-unstable-dialog--passive-dialog',
+          component: 'preview__Dialog',
+          id: 'experimental-preview-dialog--passive-dialog',
           theme,
         });
       });
 
       test('danger dialog @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'unstable_Dialog',
-          id: 'experimental-unstable-dialog--danger-dialog',
+          component: 'preview__Dialog',
+          id: 'experimental-preview-dialog--danger-dialog',
           theme,
         });
       });

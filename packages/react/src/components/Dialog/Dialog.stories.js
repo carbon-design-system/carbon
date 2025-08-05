@@ -10,7 +10,7 @@
 import React, { useEffect, useState } from 'react';
 import { VStack } from '../Stack';
 import {
-  unstable__Dialog as Dialog,
+  preview__Dialog as Dialog,
   DialogControls,
   DialogCloseButton,
   DialogBody,
@@ -23,9 +23,8 @@ import { action } from 'storybook/actions';
 import mdx from './Dialog.mdx';
 
 export default {
-  title: 'Experimental/unstable_Dialog',
+  title: 'Experimental/preview__Dialog',
   component: Dialog,
-  //includeStories: [],
   parameters: {
     docs: {
       page: mdx,

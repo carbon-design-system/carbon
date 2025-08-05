@@ -13,8 +13,8 @@ const { visitStory } = require('../../test-utils/storybook');
 test.describe('@avt Dialog', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'unstable_Dialog',
-      id: 'experimental-unstable-dialog--modal',
+      component: 'preview__Dialog',
+      id: 'experimental-preview-dialog--modal',
       globals: {
         theme: 'white',
       },
@@ -23,8 +23,8 @@ test.describe('@avt Dialog', () => {
   });
   test('@avt-advanced-states modal', async ({ page }) => {
     await visitStory(page, {
-      component: 'unstable_Dialog',
-      id: 'experimental-unstable-dialog--modal',
+      component: 'preview__Dialog',
+      id: 'experimental-preview-dialog--modal',
       globals: {
         theme: 'white',
       },
@@ -49,8 +49,8 @@ test.describe('@avt Dialog', () => {
   });
   test('@avt-advanced-states non-modal', async ({ page }) => {
     await visitStory(page, {
-      component: 'unstable_Dialog',
-      id: 'experimental-unstable-dialog--non-modal',
+      component: 'preview__Dialog',
+      id: 'experimental-preview-dialog--non-modal',
       globals: {
         theme: 'white',
       },
@@ -70,8 +70,8 @@ test.describe('@avt Dialog', () => {
   });
   test('@avt-advanced-states passive dialog', async ({ page }) => {
     await visitStory(page, {
-      component: 'unstable_Dialog',
-      id: 'experimental-unstable-dialog--passive-dialog',
+      component: 'preview__Dialog',
+      id: 'experimental-preview-dialog--passive-dialog',
       globals: {
         theme: 'white',
       },
@@ -92,8 +92,8 @@ test.describe('@avt Dialog', () => {
 
   test('@avt-advanced-states danger dialog', async ({ page }) => {
     await visitStory(page, {
-      component: 'unstable_Dialog',
-      id: 'experimental-unstable-dialog--danger-dialog',
+      component: 'preview__Dialog',
+      id: 'experimental-preview-dialog--danger-dialog',
       globals: {
         theme: 'white',
       },
@@ -107,8 +107,8 @@ test.describe('@avt Dialog', () => {
 
   test('@avt-advanced-states dialog Escape btn close', async ({ page }) => {
     await visitStory(page, {
-      component: 'unstable_Dialog',
-      id: 'experimental-unstable-dialog--modal',
+      component: 'preview__Dialog',
+      id: 'experimental-preview-dialog--modal',
       globals: {
         theme: 'white',
       },
@@ -122,8 +122,8 @@ test.describe('@avt Dialog', () => {
   });
   test('@avt-advanced-states dialog with click to close', async ({ page }) => {
     await visitStory(page, {
-      component: 'unstable_Dialog',
-      id: 'experimental-unstable-dialog--modal',
+      component: 'preview__Dialog',
+      id: 'experimental-preview-dialog--modal',
       globals: {
         theme: 'white',
       },
