@@ -424,7 +424,7 @@ jobs:
       - name: Build project
         run: yarn build
       - name: Build storybook
-        run: yarn workspace @carbon/react storybook:build
+        run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
         uses: chromaui/action@4d8ebd13658d795114f8051e25c28d66f14886c6 # v13.1.2
@@ -436,12 +436,15 @@ jobs:
           buildScriptName: storybook:build
           zip: true # Runs Chromatic with the option to compress the build output
           autoAcceptChanges: 'main' # Option to accept all changes on main
-          # TODO: set up TurboSnap via onlyChanged w/ externals
-          # https://www.chromatic.com/docs/github-actions/#enable-turbosnap
-          # onlyChanged: true # 👈 Required option to enable TurboSnap
-          # externals: |
-          #   packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/**
-          #   *.sass
+          # 👇 Add debug: true and print dependency trace for changed files to help with debugging:
+          traceChanged: 'expanded'
+          debug: true
+          onlyChanged: true # 👈 Required option to enable TurboSnap
+          externals: |
+            packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/**
+            *.sass
+          untraced: |
+            config/**
         env:
           # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
           CHROMATIC_BRANCH:

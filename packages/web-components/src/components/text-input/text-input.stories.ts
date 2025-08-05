@@ -231,17 +231,6 @@ export const ReadOnly = {
 export const Skeleton = {
   render: () => html` <cds-text-input-skeleton></cds-text-input-skeleton> `,
 };
-// Remove TogglePasswordVisibility story when password-input web component is created
-export const TogglePasswordVisibility = {
-  render: () => html`
-    <cds-text-input
-      type="password"
-      show-password-visibility-toggle
-      label="Text input label"
-      helper-text="Optional help text">
-    </cds-text-input>
-  `,
-};
 
 export const WithAILabel = {
   render: () => html`

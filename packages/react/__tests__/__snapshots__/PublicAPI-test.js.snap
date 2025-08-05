@@ -225,6 +225,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "caption": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -470,6 +473,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -551,11 +555,12 @@ Map {
     "render": [Function],
   },
   "ButtonSizes" => Object {
-    "0": "sm",
-    "1": "md",
-    "2": "lg",
-    "3": "xl",
-    "4": "2xl",
+    "0": "xs",
+    "1": "sm",
+    "2": "md",
+    "3": "lg",
+    "4": "xl",
+    "5": "2xl",
   },
   "ButtonSkeleton" => Object {
     "propTypes": Object {
@@ -568,6 +573,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3845,6 +3851,9 @@ Map {
         ],
         "type": "shape",
       },
+      "filterItems": Object {
+        "type": "func",
+      },
       "hideLabel": Object {
         "type": "bool",
       },
@@ -5954,6 +5963,9 @@ Map {
       },
       "slug": [Function],
       "step": Object {
+        "type": "number",
+      },
+      "stepStartValue": Object {
         "type": "number",
       },
       "translateWithId": Object {
