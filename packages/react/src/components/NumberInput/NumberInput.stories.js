@@ -212,6 +212,7 @@ WithTypeOfText.args = {
 };
 WithTypeOfText.argTypes = {
   locale: { control: { type: 'text' } },
+  stepStartValue: { control: { type: 'number' } },
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
 };
