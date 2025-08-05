@@ -228,6 +228,49 @@ export const ExplainabilityPopover = {
     `;
   },
 };
+export const Test = {
+  render: () => {
+    class TestWrapper extends HTMLElement {
+      constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        const aiLabel = document.createElement('cds-ai-label');
+        aiLabel.setAttribute('autoalign', '');
+        aiLabel.setAttribute('ai-text', 'AI');
+        aiLabel.setAttribute('size', 'xs');
+
+        const bodyText = document.createElement('div');
+        bodyText.setAttribute('slot', 'body-text');
+
+        const slot = document.createElement('slot');
+        slot.setAttribute('name', 'content');
+
+        bodyText.appendChild(slot);
+        aiLabel.appendChild(bodyText);
+        shadow.appendChild(aiLabel);
+      }
+    }
+
+    if (!customElements.get('test-wrapper')) {
+      customElements.define('test-wrapper', TestWrapper);
+    }
+
+    return html`
+      <div style="padding: 2rem;">
+        <test-wrapper>
+          <div slot="content">
+            <p>Interactive slotted content:</p>
+            <button>Click me</button>
+            <input type="text" placeholder="Type here" />
+            <a href="#">Link</a>
+            <p>now it should not close on click/typing</p>
+          </div>
+        </test-wrapper>
+      </div>
+    `;
+  },
+};
 
 const meta = {
   title: 'Components/AI Label',
