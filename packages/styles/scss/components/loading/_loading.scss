@@ -76,12 +76,11 @@
   }
 
   // Negative values for `stroke-dashoffset` are not supported in Safari
-  @media not all and (resolution >= 0.001dpcm) {
-    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-      circle.#{$prefix}--loading__background {
-        stroke-dasharray: 265;
-        stroke-dashoffset: 0;
-      }
+  @supports (hanging-punctuation: first) and (font: -apple-system-body) and
+    (-webkit-appearance: none) {
+    circle.#{$prefix}--loading__background {
+      stroke-dasharray: 265;
+      stroke-dashoffset: 0;
     }
   }
 

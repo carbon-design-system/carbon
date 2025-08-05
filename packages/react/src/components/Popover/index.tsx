@@ -83,7 +83,10 @@ export interface PopoverBaseProps {
   align?: PopoverAlignment;
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover on first render if it is not visible. This prop
+   * is currently experimental and is subject to future changes. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -179,8 +182,17 @@ export const Popover: PopoverComponent & {
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+    if (!relatedTarget) {
+      return;
+    }
+    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
+    const isOutsideFloating =
+      enableFloatingStyles && refs.floating.current
+        ? !refs.floating.current.contains(relatedTarget)
+        : true;
 
-    if (!popover.current?.contains(relatedTarget)) {
+    // Only close if focus moved outside both containers
+    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
     }
   });
@@ -534,7 +546,10 @@ Popover.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover on first render if it is not visible. This prop
+   * is currently experimental and is subject to future changes. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -605,12 +620,34 @@ function PopoverContentRenderFunction(
 ) {
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const ref = useMergedRefs([setFloating, forwardRef]);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const [isMultiLine, setIsMultiLine] = React.useState(false);
+  const ref = useMergedRefs([setFloating, textRef, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
+  useEffect(() => {
+    checkIfMultiLine();
+  }, [children]);
+
+  const checkIfMultiLine = () => {
+    const el = textRef.current;
+    if (el) {
+      const style = getComputedStyle(el);
+      const lineHeight = parseFloat(style.lineHeight);
+      const height = el.offsetHeight;
+      const lines = Math.floor(height / lineHeight);
+      setIsMultiLine(lines > 1);
+    }
+  };
+
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
+      <span
+        className={cx(`${prefix}--popover-content`, className, {
+          [`${prefix}--tooltip-content--multiline`]: isMultiLine,
+        })}
+        ref={ref}>
         {children}
         {enableFloatingStyles && (
           <span
