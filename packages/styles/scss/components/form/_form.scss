@@ -233,7 +233,7 @@ $input-label-weight: 400 !default;
     @include type-style('helper-text-01');
 
     z-index: 0;
-    color: $text-secondary;
+    color: $text-helper;
     // Added to prevent error text from displaying under helper text in Safari (#6392)
     inline-size: 100%;
     margin-block-start: $spacing-02;
