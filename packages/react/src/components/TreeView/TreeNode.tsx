@@ -28,6 +28,13 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { IconButton } from '../IconButton';
 import { TreeContext, DepthContext } from './TreeContext';
 
+type UncontrolledOnToggle = (
+  event: React.MouseEvent | React.KeyboardEvent,
+  node: Pick<TreeNodeProps, 'id' | 'label' | 'value' | 'isExpanded'>
+) => void;
+
+type ControlledOnToggle = (isExpanded: TreeNodeProps['isExpanded']) => void;
+
 export type TreeNodeProps = {
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
@@ -76,20 +83,20 @@ export type TreeNodeProps = {
    * Callback function for when the node is selected
    */
   onSelect?: (
-    event: React.MouseEvent,
-    node?: Omit<TreeNodeProps, 'children'>
+    event: React.MouseEvent | React.KeyboardEvent,
+    node: Pick<TreeNodeProps, 'id' | 'label' | 'value'>
   ) => void;
   /**
    * Callback function for when a parent node is expanded or collapsed
    */
-  onToggle?: (
-    event: React.MouseEvent | React.KeyboardEvent,
-    node?: Omit<TreeNodeProps, 'children'>
-  ) => void;
+  onToggle?: UncontrolledOnToggle | ControlledOnToggle;
   /**
    * Callback function for when any node in the tree is selected
    */
-  onTreeSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  onTreeSelect?: (
+    event: React.MouseEvent | React.KeyboardEvent,
+    node: Pick<TreeNodeProps, 'id' | 'label' | 'value'>
+  ) => void;
   /**
    * A component used to render an icon.
    */
@@ -129,7 +136,8 @@ export type TreeNodeProps = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 } & Omit<React.LiHTMLAttributes<HTMLElement>, 'onSelect'>;
@@ -273,14 +281,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
     const controllableExpandedState = useControllableState({
       value: isExpanded,
-      onChange: (newValue: boolean) => {
-        onToggle?.(undefined as unknown as MouseEvent, {
-          id,
-          isExpanded: newValue,
-          label,
-          value,
-        });
-      },
+      onChange: onToggle as ControlledOnToggle,
       defaultValue: defaultIsExpanded ?? false,
     });
     const uncontrollableExpandedState = useState(isExpanded ?? false);
@@ -359,7 +360,12 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
 
       if (!enableTreeviewControllable) {
-        onToggle?.(event, { id, isExpanded: !expanded, label, value });
+        (onToggle as UncontrolledOnToggle)?.(event, {
+          id,
+          isExpanded: !expanded,
+          label,
+          value,
+        });
       }
       setExpanded(!expanded);
     }
@@ -405,7 +411,12 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
         if (children && expanded) {
           if (!enableTreeviewControllable) {
-            onToggle?.(event, { id, isExpanded: false, label, value });
+            (onToggle as UncontrolledOnToggle)?.(event, {
+              id,
+              isExpanded: false,
+              label,
+              value,
+            });
           }
           setExpanded(false);
         } else {
@@ -437,7 +448,12 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
           )?.focus();
         } else {
           if (!enableTreeviewControllable) {
-            onToggle?.(event, { id, isExpanded: true, label, value });
+            (onToggle as UncontrolledOnToggle)?.(event, {
+              id,
+              isExpanded: true,
+              label,
+              value,
+            });
           }
           setExpanded(true);
         }
@@ -448,7 +464,12 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         if (match(event, keys.Enter) && children) {
           // Toggle expansion state for parent nodes
           if (!enableTreeviewControllable) {
-            onToggle?.(event, { id, isExpanded: !expanded, label, value });
+            (onToggle as UncontrolledOnToggle)?.(event, {
+              id,
+              isExpanded: !expanded,
+              label,
+              value,
+            });
           }
           setExpanded(!expanded);
         }
@@ -726,7 +747,8 @@ TreeNode.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 };
