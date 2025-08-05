@@ -8,6 +8,7 @@
 import { expect, fixture, html } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/dropdown/index.js';
+import '@carbon/web-components/es/components/dropdown/dropdown-skeleton.js';
 import '@carbon/web-components/es/components/ai-label/index.js';
 
 const dropdown = html`
@@ -261,6 +262,26 @@ describe('cds-dropdown', function () {
       expect(label.textContent.trim()).to.equal('Option 2');
     });
 
+    it('should render when defaultItemToString passed with null value', async () => {
+      const el = await fixture(html`
+        <cds-dropdown title-text="Dropdown Label">
+          <!-- No items or empty items array -->
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      // Check that the label is empty
+      const label = el.shadowRoot.querySelector('.cds--list-box__label');
+      expect(label.textContent.trim()).to.equal('');
+
+      // Verify no non-empty label exists
+      const nonEmptyLabel = el.shadowRoot.querySelector(
+        '.cds--list-box__label:not(:empty)'
+      );
+      expect(nonEmptyLabel).to.be.null;
+    });
+
     it('should support AI Label decorator', async () => {
       const el = await fixture(html`
         <cds-dropdown title-text="Dropdown Label">
@@ -277,6 +298,62 @@ describe('cds-dropdown', function () {
       // Should have the AI label in the slot
       const aiLabel = el.querySelector('cds-ai-label');
       expect(aiLabel).to.exist;
+    });
+
+    it('should have proper ARIA attributes', async () => {
+      const el = await fixture(html`
+        <cds-dropdown
+          title-text="Dropdown Label"
+          aria-label="Custom Dropdown Label">
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      // Check trigger button ARIA attributes
+      const triggerButton = el.shadowRoot.querySelector('#trigger-button');
+      expect(triggerButton).to.have.attribute('role', 'combobox');
+      expect(triggerButton).to.have.attribute('aria-haspopup', 'listbox');
+      expect(triggerButton).to.have.attribute('aria-expanded', 'false');
+      expect(triggerButton).to.have.attribute('aria-controls', 'menu-body');
+
+      // Check menu body ARIA attributes
+      const menuBody = el.shadowRoot.querySelector('#menu-body');
+      expect(menuBody).to.have.attribute('role', 'listbox');
+      expect(menuBody).to.have.attribute('aria-label', 'Custom Dropdown Label');
+
+      // Open the dropdown and check updated ARIA attributes
+      triggerButton.click();
+      await el.updateComplete;
+
+      expect(triggerButton).to.have.attribute('aria-expanded', 'true');
+    });
+
+    it('should support custom toggle labels for accessibility', async () => {
+      const el = await fixture(html`
+        <cds-dropdown
+          title-text="Dropdown Label"
+          toggle-label-closed="Open dropdown"
+          toggle-label-open="Close dropdown">
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      // Check that the chevron icon has the correct aria-label when closed
+      const chevronIcon = el.shadowRoot.querySelector('#trigger-caret svg');
+      expect(chevronIcon).to.have.attribute('aria-label', 'Open dropdown');
+
+      // Open the dropdown
+      const triggerButton = el.shadowRoot.querySelector('#trigger-button');
+      triggerButton.click();
+      await el.updateComplete;
+
+      // Check that the aria-label changes when open
+      expect(chevronIcon).to.have.attribute('aria-label', 'Close dropdown');
     });
   });
 
@@ -321,6 +398,32 @@ describe('cds-dropdown', function () {
 
       expect(eventFired).to.be.true;
       expect(openState).to.be.true;
+    });
+  });
+});
+
+describe('cds-dropdown-skeleton', function () {
+  describe('Renders as expected', () => {
+    it('should render with the expected classes', async () => {
+      const el = await fixture(
+        html`<cds-dropdown-skeleton></cds-dropdown-skeleton>`
+      );
+      expect(el).to.exist;
+      expect(el.shadowRoot.querySelector('.cds--skeleton')).to.exist;
+      expect(el.shadowRoot.querySelector('.cds--dropdown-v2')).to.exist;
+      expect(el.shadowRoot.querySelector('.cds--list-box')).to.exist;
+      expect(el.shadowRoot.querySelector('.cds--form-item')).to.exist;
+    });
+
+    it('should respect size attribute', async () => {
+      const sizes = ['sm', 'md', 'lg'];
+
+      for (const size of sizes) {
+        const el = await fixture(
+          html`<cds-dropdown-skeleton size="${size}"></cds-dropdown-skeleton>`
+        );
+        expect(el.getAttribute('size')).to.equal(size);
+      }
     });
   });
 });
