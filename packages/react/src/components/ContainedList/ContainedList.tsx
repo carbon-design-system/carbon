@@ -16,9 +16,9 @@ import { Search } from '../Search';
 
 const variants = ['on-page', 'disclosed'] as const;
 
-export interface ContainedListType extends React.FC<ContainedListProps> {
+export type ContainedListType = React.FC<ContainedListProps> & {
   ContainedListItem: typeof ContainedListItem;
-}
+};
 
 export type Variants = (typeof variants)[number];
 
