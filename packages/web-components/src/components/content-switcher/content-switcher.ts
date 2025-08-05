@@ -358,7 +358,9 @@ class CDSContentSwitcher extends LitElement {
 
     // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
     // until `:host-context()` gets supported in all major browsers
-    (nextItem as CDSContentSwitcherItem).hideDivider = true;
+    if (nextItem) {
+      (nextItem as CDSContentSwitcherItem).hideDivider = true;
+    }
   }
 
   /**

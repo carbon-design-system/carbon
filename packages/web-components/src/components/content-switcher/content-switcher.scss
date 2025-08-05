@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/content-switcher/content-switcher' as *;
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/button/index' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include content-switcher;
@@ -32,6 +33,10 @@ $css--plex: true !default;
 
 :host(#{$prefix}-content-switcher[size='lg']) {
   @extend .#{$prefix}--layout--size-lg;
+}
+
+:host(#{$prefix}-content-switcher[disabled]) {
+  outline-color: $border-disabled;
 }
 
 :host(#{$prefix}-content-switcher-item) {
@@ -81,6 +86,21 @@ $css--plex: true !default;
     }
 
     &:disabled {
+      &.#{$prefix}--content-switcher--selected {
+        background-color: $button-disabled;
+
+        ::slotted(p) {
+          color: $text-disabled;
+        }
+      }
+
+      border-color: $border-disabled !important; /* stylelint-disable-line declaration-no-important */
+      background-color: transparent;
+
+      ::slotted(p) {
+        color: $text-disabled !important; /* stylelint-disable-line declaration-no-important */
+      }
+
       border-block-end-color: $border-inverse;
       border-block-start-color: $border-inverse;
     }
@@ -117,6 +137,13 @@ $css--plex: true !default;
 :host(#{$prefix}-content-switcher-item[hide-divider])
   .#{$prefix}--content-switcher-btn::before {
   background-color: transparent;
+}
+
+:host(#{$prefix}-content-switcher-item) {
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled::before,
+  .#{$prefix}--content-switcher-btn:disabled::before {
+    background-color: $border-disabled;
+  }
 }
 
 :host(#{$prefix}-content-switcher-item[icon]) {
