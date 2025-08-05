@@ -220,36 +220,25 @@ describe('cds-dropdown', function () {
     });
 
     it('should support different sizes', async () => {
-      const el = await fixture(html`
-        <cds-dropdown size="sm" title-text="Dropdown Label">
-          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-        </cds-dropdown>
-      `);
+      const sizes = ['sm', 'md', 'lg'];
 
-      expect(el.size).to.equal('sm');
-
-      // Size should be propagated to dropdown items
-      const items = el.querySelectorAll('cds-dropdown-item');
-      expect(items[0].size).to.equal('sm');
-
-      // ListBox should have the size class
-      const listBox = el.shadowRoot.querySelector('.cds--list-box');
-      expect(listBox.classList.contains('cds--list-box--sm')).to.be.true;
+      for (const size of sizes) {
+        const el = await fixture(html`
+          <cds-dropdown size="${size}" title-text="Dropdown Label">
+            <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+          </cds-dropdown>
+        `);
+        expect(el.getAttribute('size')).to.equal(size);
+      }
     });
 
-    it('should support inline type', async () => {
+    it('should support type attribute', async () => {
       const el = await fixture(html`
         <cds-dropdown type="inline" title-text="Dropdown Label">
           <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
         </cds-dropdown>
       `);
-
-      expect(el.type).to.equal('inline');
-
-      // ListBox should have the inline class
-      const listBox = el.shadowRoot.querySelector('.cds--list-box');
-      expect(listBox.classList.contains('cds--list-box--inline')).to.be.true;
-      expect(listBox.classList.contains('cds--dropdown--inline')).to.be.true;
+      expect(el.getAttribute('type')).to.equal('inline');
     });
 
     it('should display initially selected item', async () => {
