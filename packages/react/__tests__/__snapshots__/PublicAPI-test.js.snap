@@ -225,6 +225,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "caption": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -5960,6 +5963,9 @@ Map {
       },
       "slug": [Function],
       "step": Object {
+        "type": "number",
+      },
+      "stepStartValue": Object {
         "type": "number",
       },
       "translateWithId": Object {
