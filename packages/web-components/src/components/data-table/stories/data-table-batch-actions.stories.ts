@@ -18,6 +18,7 @@ import Settings16 from '@carbon/icons/lib/settings/16.js';
 import '../../overflow-menu';
 import '../index';
 import storyDocs from './data-table.mdx';
+import '../../link/index';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -30,7 +31,6 @@ const sizes = {
 const defaultArgs = {
   isSortable: false,
   locale: 'en',
-  radio: false,
   size: TABLE_SIZE.LG,
   useStaticWidth: false,
   useZebraStyles: false,
@@ -44,10 +44,6 @@ const controls = {
   locale: {
     control: 'text',
     description: 'Locale',
-  },
-  radio: {
-    control: 'boolean',
-    description: 'Radio',
   },
   size: {
     control: 'radio',
@@ -66,11 +62,10 @@ const controls = {
 
 export const Default = {
   args: defaultArgs,
-  argsType: controls,
+  argTypes: controls,
   render: ({
     isSortable,
     locale,
-    radio,
     size,
     useStaticWidth,
     useZebraStyles,
@@ -78,7 +73,6 @@ export const Default = {
     <cds-table
       ?is-sortable=${isSortable}
       locale="${locale}"
-      ?radio=${radio}
       size="${size}"
       ?use-static-width="${useStaticWidth}"
       ?use-zebra-styles="${useZebraStyles}">
@@ -89,10 +83,23 @@ export const Default = {
 
       <cds-table-toolbar slot="toolbar">
         <cds-table-batch-actions ?active="true">
-          <cds-button>Delete ${TrashCan({ slot: 'icon' })}</cds-button>
-          <cds-button>Save ${Save({ slot: 'icon' })}</cds-button>
-          <cds-button href="javascript:void 0" download="table-data.json">
-            Download ${Download16({ slot: 'icon' })}
+          <cds-button data-context="data-table"
+            >Delete
+            ${TrashCan({
+              slot: 'icon',
+              class: `${prefix}--btn__icon`,
+            })}</cds-button
+          >
+          <cds-button data-context="data-table"
+            >Save
+            ${Save({ slot: 'icon', class: `${prefix}--btn__icon` })}</cds-button
+          >
+          <cds-button
+            href="javascript:void 0"
+            download="table-data.json"
+            data-context="data-table">
+            Download
+            ${Download16({ slot: 'icon', class: `${prefix}--btn__icon` })}
           </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="true">
