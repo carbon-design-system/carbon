@@ -105,11 +105,21 @@ class CDSMultiSelect extends CDSDropdown {
     if (itemToSelect) {
       // clicked select all
       if (itemToSelect.isSelectAll) {
-        allItems.forEach((i) => {
-          if (!i.isSelectAll && !i.disabled) {
-            i.selected = !itemToSelect.selected;
+        const items = this.filterable
+          ? Array.from(
+              this.querySelectorAll(
+                (this.constructor as typeof CDSMultiSelect).selectorItemResults
+              )
+            )
+          : allItems;
+        items.forEach((i) => {
+          if (
+            !(i as CDSMultiSelectItem).isSelectAll &&
+            !(i as CDSMultiSelectItem).disabled
+          ) {
+            (i as CDSMultiSelectItem).selected = !itemToSelect.selected;
           }
-          i.indeterminate = false;
+          (i as CDSMultiSelectItem).indeterminate = false;
         });
         itemToSelect.selected = !itemToSelect.selected;
         // clicked regular item
@@ -402,6 +412,26 @@ class CDSMultiSelect extends CDSDropdown {
     });
 
     this.requestUpdate();
+
+    if (this.selectAll) {
+      const selectAllItem = this.querySelector(
+        `${prefix}-multi-select-item[is-select-all]`
+      ) as CDSMultiSelectItem;
+      if (selectAllItem) {
+        const visible = Array.from(
+          this.querySelectorAll(
+            (this.constructor as typeof CDSMultiSelect).selectorItemResults
+          )
+        ) as CDSMultiSelectItem[];
+        const actionable = visible.filter((i) => !i.isSelectAll && !i.disabled);
+        if (actionable.length === 0) {
+          selectAllItem.setAttribute('filtered', '');
+        } else {
+          selectAllItem.removeAttribute('filtered');
+          this._computeSelectAllState();
+        }
+      }
+    }
 
     const constructor = this.constructor as typeof CDSMultiSelect;
     const visibleItems = Array.from(
@@ -725,10 +755,13 @@ class CDSMultiSelect extends CDSDropdown {
       )
     ) as CDSMultiSelectItem[];
     const selectAllItem = allItems.find((i) => i.isSelectAll);
-    if (!selectAllItem) {
+    if (!selectAllItem || selectAllItem.hasAttribute('filtered')) {
       return;
     }
-    const enabledItems = allItems.filter((i) => !i.isSelectAll && !i.disabled);
+
+    const enabledItems = allItems
+      .filter((i) => !i.isSelectAll && !i.disabled)
+      .filter((i) => !this.filterable || !i.hasAttribute('filtered'));
     const selectedCount = enabledItems.filter((i) => i.selected).length;
     const allSelected = selectedCount === enabledItems.length;
 

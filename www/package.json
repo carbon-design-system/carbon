@@ -23,10 +23,10 @@
   },
   "dependencies": {
     "@carbon/react": "^1.88.0",
-    "@octokit/core": "^4.0.0",
+    "@octokit/core": "^7.0.3",
     "@octokit/plugin-retry": "^3.0.9",
     "@octokit/plugin-throttling": "^4.0.0",
-    "@octokit/rest": "^19.0.0",
+    "@octokit/rest": "^22.0.0",
     "clsx": "^2.0.0",
     "date-fns": "^3.0.0",
     "fs-extra": "^11.0.0",
