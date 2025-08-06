@@ -4201,8 +4201,12 @@ Map {
   },
   "Header" => {
     "propTypes": {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "aria-label": {
+        "type": "string",
+      },
+      "aria-labelledby": {
+        "type": "string",
+      },
       "className": {
         "type": "string",
       },
