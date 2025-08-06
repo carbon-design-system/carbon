@@ -8,21 +8,23 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { ReactNode } from 'react';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface HeaderProps {
   children?: ReactNode;
+
   /**
-   * Required props for the accessibility label of the header
+   * Optionally provide aria-label
    */
   'aria-label'?: string;
+
   /**
-   * Required props for the accessibility label of the header
+   * Optionally provide aria-labelledby
    */
   'aria-labelledby'?: string;
+
   /**
-   * Optionally provide a custom class name that is applied to the underlying <header>
+   * Optionally provide a custom class name that is applied to the underlying header
    */
   className?: string;
 }
@@ -44,12 +46,17 @@ const Header: React.FC<HeaderProps> = ({
 
 Header.propTypes = {
   /**
-   * Required props for the accessibility label of the header
+   * Optionally provide aria-label
    */
-  ...AriaLabelPropType,
+  'aria-label': PropTypes.string,
 
   /**
-   * Optionally provide a custom class name that is applied to the underlying <header>
+   * Optionally provide aria-labelledby
+   */
+  'aria-labelledby': PropTypes.string,
+
+  /**
+   * Optionally provide a custom class name that is applied to the underlying header
    */
   className: PropTypes.string,
 };
