@@ -7,7 +7,7 @@
 
 import fs from 'fs-extra';
 import path from 'path';
-import prettier from 'prettier2';
+import prettier from 'prettier';
 import prettierConfig from 'prettier-config-carbon';
 import { remark } from 'remark';
 import monorepo from './remark/remark-monorepo.js';

@@ -7,7 +7,7 @@
 
 'use strict';
 
-const prettier = require('prettier2');
+const prettier = require('prettier');
 
 const prettierOptions = {
   parser: 'scss',
