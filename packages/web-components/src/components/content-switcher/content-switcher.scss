@@ -87,6 +87,7 @@ $css--plex: true !default;
 
     &:disabled {
       &.#{$prefix}--content-switcher--selected {
+        border-radius: rem(4px);
         background-color: $button-disabled;
 
         ::slotted(p) {
@@ -140,7 +141,9 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-content-switcher-item:not([hide-divider]))
-  .#{$prefix}--content-switcher-btn {
+  .#{$prefix}--content-switcher-btn:not(
+    .#{$prefix}--content-switcher--selected
+  ) {
   &:disabled {
     &:hover {
       &::before {
@@ -177,19 +180,22 @@ $css--plex: true !default;
   padding-inline: rem(14px);
 }
 
-:host([icon]:not([lowcontrast])) ::slotted(svg) {
+:host(#{$prefix}-content-switcher-item[icon]:not([low-contrast]))
+  ::slotted(svg) {
   fill: $icon-primary;
 }
 
-:host([icon]:not([lowcontrast])[selected]) ::slotted(svg) {
+:host(#{$prefix}-content-switcher-item[icon]:not([low-contrast])[selected])
+  ::slotted(svg) {
   fill: $icon-inverse;
 }
 
-:host([icon]:not([lowcontrast])[disabled]) ::slotted(svg) {
+:host(#{$prefix}-content-switcher-item[icon]:not([low-contrast])[disabled])
+  ::slotted(svg) {
   fill: $icon-disabled;
 }
 
-:host([lowcontrast]) {
+:host([low-contrast]) {
   @extend .#{$prefix}--content-switcher--low-contrast;
 
   border-radius: rem(4px);

@@ -97,6 +97,7 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
     }
 
     if (
+      this.disabled &&
       changedProperties.has('disabled') &&
       !this.parentElement?.hasAttribute('disabled')
     ) {

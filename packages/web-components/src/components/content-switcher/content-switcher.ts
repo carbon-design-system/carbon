@@ -266,13 +266,13 @@ class CDSContentSwitcher extends LitElement {
   /**
    * Specify a selected index for the initially selected content
    */
-  @property({ type: Number })
+  @property({ type: Number, attribute: 'selected-index' })
   selectedIndex = 0;
 
   /**
    * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
    */
-  @property()
+  @property({ attribute: 'selection-mode' })
   selectionMode = 'automatic';
 
   /**

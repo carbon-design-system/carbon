@@ -33,4 +33,10 @@ export enum CONTENT_SWITCHER_SIZE {
    * Large size.
    */
   LARGE = 'lg',
+
+  /**
+   * @deprecated
+   * X-Large size.
+   */
+  EXTRA_LARGE = 'xl',
 }
