@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { jest } from '@jest/globals';
+
 jest.setTimeout(20000);
 
 global.requestAnimationFrame = function requestAnimationFrame(callback) {

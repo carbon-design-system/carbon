@@ -17,8 +17,14 @@ export default {
     '!**/*.stories.js',
     '!**/*-test.e2e.js',
   ],
-  coveragePathIgnorePatterns: ['packages/web-components/*'],
-  testPathIgnorePatterns: ['packages/web-components/*'],
+  coveragePathIgnorePatterns: [
+    'packages/web-components/*',
+    'packages/scss-generator/*',
+  ],
+  testPathIgnorePatterns: [
+    'packages/web-components/*',
+    'packages/scss-generator/*',
+  ],
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
   ],
@@ -32,9 +38,5 @@ export default {
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
   reporters: ['default', 'jest-junit'],
-
-  // This is a temporary workaround until Jest supports Prettier 3 (and ESM)
-  // @see https://jestjs.io/docs/configuration#prettierpath-string
-  prettierPath: 'prettier',
   extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
 };
