@@ -189,7 +189,6 @@ $css--plex: true !default;
   fill: $icon-disabled;
 }
 
-//LOW CONTRAST
 :host([lowcontrast]) {
   @extend .#{$prefix}--content-switcher--low-contrast;
 
