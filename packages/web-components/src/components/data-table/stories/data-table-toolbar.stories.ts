@@ -27,7 +27,6 @@ const defaultArgs = {
   overflowMenuOnHover: false,
   radio: false,
   size: TABLE_SIZE.LG,
-  useStaticWidth: false,
   useZebraStyles: false,
 };
 
@@ -53,10 +52,6 @@ const controls = {
     description: 'Size',
     options: sizes,
   },
-  useStaticWidth: {
-    control: 'boolean',
-    description: 'Use static width',
-  },
   useZebraStyles: {
     control: 'boolean',
     description: 'Use zebra styles',
@@ -73,7 +68,6 @@ export const Default = {
     radio,
     overflowMenuOnHover,
     size,
-    useStaticWidth,
     useZebraStyles,
   }) => html`
     <cds-table
@@ -82,7 +76,6 @@ export const Default = {
       ?overflow-menu-on-hover=${overflowMenuOnHover}
       ?radio=${radio}
       size="${size}"
-      ?use-static-width="${useStaticWidth}"
       ?use-zebra-styles="${useZebraStyles}">
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
