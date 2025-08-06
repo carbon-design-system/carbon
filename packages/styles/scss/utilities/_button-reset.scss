@@ -14,16 +14,18 @@
 @mixin reset($width: true) {
   @include component-reset.reset;
 
-  display: inline-block;
-  padding: 0;
-  border: 0;
-  appearance: none;
-  background: none;
-  cursor: pointer;
-  text-align: start;
+  & {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    appearance: none;
+    background: none;
+    cursor: pointer;
+    text-align: start;
 
-  @if ($width == true) {
-    inline-size: 100%;
+    @if ($width == true) {
+      inline-size: 100%;
+    }
   }
 
   &::-moz-focus-inner {
