@@ -78,7 +78,7 @@ jobs:
               exitCode,
               stdout,
               stderr
-            } = await exec.getExecOutput('./packages/cli/bin/carbon-cli.js', ['changelog', '${{ steps.calculate-tag.outputs.latestTag }}..${{ context.ref }}', '--noPrompt'], options);
+            } = await exec.getExecOutput('./packages/cli/bin/carbon-cli.js', ['changelog', `${{ steps.calculate-tag.outputs.latestTag }}..${context.ref}`, '--noPrompt'], options);
 
             // Changelog command outputs the generated changelog to stdout
             core.info(`${stdout}`);

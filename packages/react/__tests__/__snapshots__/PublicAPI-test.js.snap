@@ -4201,8 +4201,12 @@ Map {
   },
   "Header" => Object {
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "aria-label": Object {
+        "type": "string",
+      },
+      "aria-labelledby": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
