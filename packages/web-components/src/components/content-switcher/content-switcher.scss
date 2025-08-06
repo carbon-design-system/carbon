@@ -139,10 +139,14 @@ $css--plex: true !default;
   background-color: transparent;
 }
 
-:host(#{$prefix}-content-switcher-item) {
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled::before,
-  .#{$prefix}--content-switcher-btn:disabled::before {
-    background-color: $border-disabled;
+:host(#{$prefix}-content-switcher-item:not([hide-divider]))
+  .#{$prefix}--content-switcher-btn {
+  &:disabled {
+    &:hover {
+      &::before {
+        background-color: $border-subtle;
+      }
+    }
   }
 }
 

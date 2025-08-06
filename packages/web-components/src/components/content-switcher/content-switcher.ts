@@ -56,6 +56,11 @@ class CDSContentSwitcher extends LitElement {
       type !== 'mouseover'
         ? -1
         : indexOf(items, (target as Element).closest(selectorItem)!);
+
+    if ((target as Element).closest(selectorItem)?.hasAttribute('disabled')) {
+      return;
+    }
+
     const nextIndex = index < 0 ? index : index + 1;
     forEach(this.querySelectorAll(selectorItem), (elem, i) => {
       // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
