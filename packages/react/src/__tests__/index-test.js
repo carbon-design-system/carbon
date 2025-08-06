@@ -252,6 +252,7 @@ describe('Carbon Components React', () => {
         "TreeView",
         "UnorderedList",
         "VStack",
+        "preview__Dialog",
         "unstable_FeatureFlags",
         "unstable_Layout",
         "unstable_LayoutDirection",

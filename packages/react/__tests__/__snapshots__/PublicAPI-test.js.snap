@@ -10091,6 +10091,193 @@ Map {
     },
     "render": [Function],
   },
+  "preview__Dialog" => Object {
+    "Dialog": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "aria-label": Object {
+          "type": "string",
+        },
+        "aria-labelledby": Object {
+          "type": "string",
+        },
+        "ariaDescribedBy": Object {
+          "type": "string",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "focusAfterCloseRef": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "args": Array [
+                  Object {
+                    "current": Object {
+                      "type": "any",
+                    },
+                  },
+                ],
+                "type": "shape",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "modal": Object {
+          "type": "bool",
+        },
+        "onRequestClose": Object {
+          "type": "func",
+        },
+        "open": Object {
+          "type": "bool",
+        },
+        "role": Object {
+          "args": Array [
+            Array [
+              "dialog",
+              "alertdialog",
+            ],
+          ],
+          "type": "oneOf",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogBody": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "hasScrollingContent": Object {
+          "type": "bool",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogCloseButton": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "onClick": Object {
+          "type": "func",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogControls": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogFooter": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "danger": Object {
+          "type": "bool",
+        },
+        "loadingDescription": Object {
+          "type": "string",
+        },
+        "loadingIconDescription": Object {
+          "type": "string",
+        },
+        "loadingStatus": Object {
+          "args": Array [
+            Array [
+              "inactive",
+              "active",
+              "finished",
+              "error",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "onLoadingSuccess": Object {
+          "type": "func",
+        },
+        "onRequestClose": Object {
+          "type": "func",
+        },
+        "onRequestSubmit": Object {
+          "type": "func",
+        },
+        "onSecondarySubmit": Object {
+          "type": "func",
+        },
+        "primaryButtonDisabled": Object {
+          "type": "bool",
+        },
+        "primaryButtonText": Object {
+          "type": "node",
+        },
+        "secondaryButtonText": Object {
+          "type": "node",
+        },
+        "secondaryButtons": [Function],
+      },
+      "render": [Function],
+    },
+    "DialogHeader": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogSubtitle": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "id": Object {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogTitle": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "id": Object {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
