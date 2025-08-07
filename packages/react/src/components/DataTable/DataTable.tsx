@@ -385,10 +385,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
         const nextSortState = getNextSortState(props, state, {
           key: header.key,
         });
-        setState((prev) => ({
-          ...prev, // Preserve ALL existing state first
-          ...nextSortState, // Then apply sorting changes
-        }));
+        setState((prev) => ({ ...prev, ...nextSortState }));
         onClick &&
           handleOnHeaderClick(onClick, {
             sortHeaderKey: header.key,
