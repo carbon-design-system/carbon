@@ -60,8 +60,26 @@ const actions = html`
 
 export const Default = {
   render: () => {
+    const handleSubmit = () => {
+      const form =
+        (document
+          .getElementById('test-form')
+          ?.shadowRoot?.querySelector('form') as HTMLFormElement) || null;
+      if (!form) return;
+
+      const invalid = Array.from(document.querySelectorAll('[required]')).some(
+        (el: Element) => {
+          const input = el.shadowRoot?.querySelector('input');
+          return input ? !input.reportValidity() : false;
+        }
+      );
+      if (invalid) return;
+
+      form.requestSubmit();
+    };
+
     return html`
-      <cds-form>
+      <cds-form id="test-form">
         <cds-stack gap="7">
           <cds-form-group legend-text="Checkbox heading">
             <cds-checkbox default-checked>Checkbox label</cds-checkbox>
@@ -137,13 +155,13 @@ export const Default = {
             required
             type="password"
             label="Password"
-            pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6,}"></cds-text-input>
+            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$"></cds-text-input>
 
           <cds-text-input
             required
             type="password"
             label="Password"
-            pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$"
             invalid
             invalid-text="Your password must be at least 6 characters as well as contain at least one uppercase one lowercase, and one number."></cds-text-input>
 
@@ -151,7 +169,7 @@ export const Default = {
             label="Text Area label"
             placeholder="Placeholder text"
             rows="4"></cds-textarea>
-          <cds-button type="submit"> Submit </cds-button>
+          <cds-button type="submit" @click=${handleSubmit}> Submit </cds-button>
         </cds-stack>
       </cds-form>
     `;
@@ -194,8 +212,17 @@ export const WithAILabel = {
       ?revert-active="${revertActive}">
       ${content}${actions}
     </cds-ai-label>`;
+
+    const handleSubmit = () => {
+      const form =
+        (document
+          .getElementById('test-form')
+          ?.shadowRoot?.querySelector('form') as HTMLFormElement) || null;
+      if (!form) return;
+      form.requestSubmit();
+    };
     return html`
-      <cds-form
+      <cds-form id="test-form"
         ><cds-stack gap="7">
           <cds-number-input
             label="Number Input"
@@ -374,7 +401,7 @@ export const WithAILabel = {
             <cds-select-item value="option-2">Option 2</cds-select-item>
             <cds-select-item value="option-3">Option 3</cds-select-item>
           </cds-select>
-          <cds-button type="submit"> Submit </cds-button>
+          <cds-button type="submit" @click=${handleSubmit}> Submit </cds-button>
         </cds-stack>
       </cds-form>
     `;
