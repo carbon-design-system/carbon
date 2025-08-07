@@ -9,18 +9,18 @@ import { html, svg } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import CDSActionableNotification, {
-  iconsForKinds,
-} from './actionable-notification';
+import CDSActionableNotification from './actionable-notification';
+import { iconsForKinds } from './actionable-notification';
+import { NOTIFICATION_KIND } from './defs';
 import styles from './actionable-notification.scss?lit';
 
 /**
  * Callout notification.
- *
  * @element cds-callout-notification
  * @slot subtitle - The subtitle.
  * @slot title - The title.
  * @slot action - The action button.
+ * @slot - The default slot for additional content.
  */
 @customElement(`${prefix}-callout-notification`)
 class CDSCalloutNotification extends CDSActionableNotification {
@@ -29,6 +29,12 @@ class CDSCalloutNotification extends CDSActionableNotification {
    */
   @property({ type: String, reflect: true, attribute: 'title-id' })
   titleId = '';
+
+  /**
+   *  Specify the notification kind, Defaults to 'info'.
+   */
+  @property({ reflect: true })
+  kind = NOTIFICATION_KIND.INFO;
 
   protected _renderIcon() {
     const { statusIconDescription, kind } = this;
@@ -44,7 +50,7 @@ class CDSCalloutNotification extends CDSActionableNotification {
   }
 
   protected _renderText() {
-    const { caption, subtitle, title, titleId, _type: type } = this;
+    const { subtitle, title, titleId, _type: type } = this;
     return html`
       <div class="${prefix}--${type}-notification__text-wrapper">
         <div class="${prefix}--${type}-notification__content">
@@ -57,10 +63,6 @@ class CDSCalloutNotification extends CDSActionableNotification {
           ${subtitle &&
           html`<div class="${prefix}--${type}-notification__subtitle">
             ${subtitle}<slot name="subtitle"></slot>
-          </div>`}
-          ${caption &&
-          html`<div class="${prefix}--${type}-notification__caption">
-            ${caption}<slot name="caption"></slot>
           </div>`}
           <slot></slot>
         </div>
@@ -87,7 +89,6 @@ class CDSCalloutNotification extends CDSActionableNotification {
       if (this.titleId) {
         button.setAttribute('aria-describedby', this.titleId);
       }
-      button.setAttribute('hide-close-button', 'true');
     }
   }
   static styles = styles;
