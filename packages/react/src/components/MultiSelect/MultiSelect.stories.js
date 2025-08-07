@@ -777,7 +777,10 @@ export const FilterableControlledWithSelectAll = () => {
       />
 
       <div style={{ marginTop: '16px' }}>
-        <h4>External Controls:</h4>
+        <strong
+          style={{ marginBottom: '12px', display: 'block', fontSize: '14px' }}>
+          External Controls:
+        </strong>
 
         <ButtonSet style={{ marginBottom: '12px' }}>
           <Button size="sm" onClick={selectAll}>
@@ -791,7 +794,7 @@ export const FilterableControlledWithSelectAll = () => {
         <ButtonSet style={{ marginBottom: '12px' }}>
           <Button
             size="sm"
-            kind="ghost"
+            kind="tertiary"
             onClick={() =>
               selectSpecific(['downshift-1-item-0', 'downshift-1-item-1'])
             }>
@@ -799,31 +802,34 @@ export const FilterableControlledWithSelectAll = () => {
           </Button>
           <Button
             size="sm"
-            kind="ghost"
+            kind="tertiary"
             onClick={() => selectSpecific(['downshift-1-item-2'])}>
             Select Uploader Only
           </Button>
-          <Button size="sm" kind="ghost" onClick={selectFirst}>
+          <Button size="sm" kind="tertiary" onClick={selectFirst}>
             Select First
           </Button>
         </ButtonSet>
 
         <div
           style={{
-            marginTop: '12px',
-            padding: '8px',
+            marginTop: '16px',
+            padding: '16px',
             backgroundColor: '#f4f4f4',
             borderRadius: '4px',
-            fontSize: '12px',
+            fontSize: '14px',
           }}>
-          <strong>Current Selection:</strong>
-          <br />
+          <strong style={{ marginBottom: '8px', display: 'block' }}>
+            Current Selection:
+          </strong>
           {selectedItems.length === 0 ? (
-            <em>None selected</em>
+            <em style={{ color: '#6f6f6f' }}>None selected</em>
           ) : (
-            <ul style={{ margin: '4px 0', paddingLeft: '16px' }}>
+            <ul style={{ margin: '0', paddingLeft: '20px' }}>
               {selectedItems.map((item) => (
-                <li key={item.id}>{item.text}</li>
+                <li key={item.id} style={{ marginBottom: '4px' }}>
+                  {item.text}
+                </li>
               ))}
             </ul>
           )}
@@ -899,7 +905,10 @@ export const MultiSelectControlledWithSelectAll = () => {
       />
 
       <div style={{ marginTop: '16px' }}>
-        <h5>External Controls:</h5>
+        <strong
+          style={{ marginBottom: '12px', display: 'block', fontSize: '14px' }}>
+          External Controls:
+        </strong>
 
         <ButtonSet style={{ marginBottom: '12px' }}>
           <Button size="sm" onClick={selectAll}>
@@ -911,12 +920,12 @@ export const MultiSelectControlledWithSelectAll = () => {
         </ButtonSet>
 
         <ButtonSet style={{ marginBottom: '12px' }}>
-          <Button size="sm" kind="ghost" onClick={selectFirst}>
+          <Button size="sm" kind="tertiary" onClick={selectFirst}>
             Select First
           </Button>
           <Button
             size="sm"
-            kind="ghost"
+            kind="tertiary"
             onClick={() =>
               selectSpecific(['downshift-1-item-0', 'downshift-1-item-1'])
             }>
@@ -924,7 +933,7 @@ export const MultiSelectControlledWithSelectAll = () => {
           </Button>
           <Button
             size="sm"
-            kind="ghost"
+            kind="tertiary"
             onClick={() => selectSpecific(['downshift-1-item-2'])}>
             Select Uploader Only
           </Button>
@@ -932,20 +941,23 @@ export const MultiSelectControlledWithSelectAll = () => {
 
         <div
           style={{
-            marginTop: '12px',
-            padding: '8px',
+            marginTop: '16px',
+            padding: '16px',
             backgroundColor: '#f4f4f4',
             borderRadius: '4px',
             fontSize: '14px',
           }}>
-          <strong>Current Selection:</strong>
-          <br />
+          <strong style={{ marginBottom: '8px', display: 'block' }}>
+            Current Selection:
+          </strong>
           {selectedItems.length === 0 ? (
-            <em>None selected</em>
+            <em style={{ color: '#6f6f6f' }}>None selected</em>
           ) : (
-            <ul style={{ margin: '4px 0', paddingLeft: '16px' }}>
+            <ul style={{ margin: '0', paddingLeft: '20px' }}>
               {selectedItems.map((item) => (
-                <li key={item.id}>{item.text}</li>
+                <li key={item.id} style={{ marginBottom: '4px' }}>
+                  {item.text}
+                </li>
               ))}
             </ul>
           )}

@@ -65,7 +65,7 @@ export const useSelection = <ItemType,>({
       // Assert special properties (e.g., `disabled`, `isSelectAll`, etc.) are
       // `any` since those properties aren’t part of the generic type.
       const allSelectableItems = filteredItems.filter(
-        (item) => !(item as any)?.disabled
+        (item) => !(item as any)?.disabled && !(item as any)?.isSelectAll
       );
       const disabledItemCount = filteredItems.filter(
         (item) => (item as any)?.disabled
