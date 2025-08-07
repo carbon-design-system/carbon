@@ -19,22 +19,21 @@ export default {
   ],
   coveragePathIgnorePatterns: [
     'packages/web-components/*',
+    // TODO: remove scss-generator once issue is resolved
+    // https://github.com/carbon-design-system/carbon/issues/20115
     'packages/scss-generator/*',
   ],
   testPathIgnorePatterns: [
     'packages/web-components/*',
+    // TODO: remove scss-generator once issue is resolved
+    // https://github.com/carbon-design-system/carbon/issues/20115
     'packages/scss-generator/*',
   ],
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
   ],
   moduleNameMapper: {
-    // This is a temporary workaround from moving to Jest v28. In this update,
-    // certain dependencies are only providing ESM through exports and so we use
-    // `require.resolve` to force CommonJS resolution
-    //
-    // @see https://jestjs.io/docs/upgrading-to-jest28#packagejson-exports
-    // @see https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
+    // Jest uses identity-obj-proxy to mock CSS/SCSS imports.
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
   reporters: ['default', 'jest-junit'],
