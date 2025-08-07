@@ -385,7 +385,14 @@ export const DataTable = <RowType, ColTypes extends any[]>(
         const nextSortState = getNextSortState(props, state, {
           key: header.key,
         });
-        setState((prev) => ({ ...prev, ...nextSortState }));
+        setState((prev) => ({
+          ...prev,
+          ...nextSortState,
+          // Preserve these critical fields
+          cellsById: nextSortState.cellsById || prev.cellsById,
+          rowsById: nextSortState.rowsById || prev.rowsById,
+          rowIds: nextSortState.rowIds || prev.rowIds,
+        }));
         onClick &&
           handleOnHeaderClick(onClick, {
             sortHeaderKey: header.key,
@@ -802,7 +809,17 @@ export const DataTable = <RowType, ColTypes extends any[]>(
    * @param headerKey - The field for the header that we are sorting by.
    */
   const handleSortBy = (headerKey: string) => () => {
-    setState((prev) => getNextSortState(props, prev, { key: headerKey }));
+    setState((prev) => {
+      const sortState = getNextSortState(props, prev, { key: headerKey });
+      // Ensure we preserve cellsById and other critical state
+      return {
+        ...prev,
+        ...sortState,
+        cellsById: sortState.cellsById || prev.cellsById,
+        rowsById: sortState.rowsById || prev.rowsById,
+        rowIds: sortState.rowIds || prev.rowIds,
+      };
+    });
   };
 
   /**
