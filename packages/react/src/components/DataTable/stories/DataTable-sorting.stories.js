@@ -67,7 +67,7 @@ export const Default = (args) => (
   </DataTable>
 );
 
-export const WithCustomSortButtons = () => {
+export const TestWithCustomSortButtons = () => {
   const headers = [
     {
       key: 'name',
