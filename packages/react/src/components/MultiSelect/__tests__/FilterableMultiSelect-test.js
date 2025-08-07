@@ -1260,4 +1260,71 @@ describe('FilterableMultiSelect', () => {
     expect(selectAllCheckbox).toHaveProperty('checked', false);
     expect(selectAllCheckbox).toHaveProperty('indeterminate', true);
   });
+
+  it('should reflect external control actions for select all and clear', async () => {
+    const items = [
+      { label: 'Select all', isSelectAll: true },
+      { label: 'Item 0' },
+      { label: 'Item 1' },
+      { label: 'Item 2' },
+    ];
+
+    const ControlledFilterableMultiSelect = () => {
+      const [selectedItems, setSelectedItems] = React.useState([]);
+      return (
+        <>
+          <FilterableMultiSelect
+            id="controlled-filterable"
+            label="Controlled test"
+            items={items}
+            selectedItems={selectedItems}
+            onChange={(data) => setSelectedItems(data.selectedItems)}
+            selectAll
+            itemToString={(item) => (item ? item.label : '')}
+          />
+          <button
+            onClick={() =>
+              setSelectedItems(items.filter((i) => !i.isSelectAll))
+            }>
+            External Select All
+          </button>
+          <button onClick={() => setSelectedItems([])}>External Clear</button>
+        </>
+      );
+    };
+
+    render(<ControlledFilterableMultiSelect />);
+
+    // Trigger external select all
+    await userEvent.click(screen.getByText('External Select All'));
+
+    // Open dropdown to verify all items are selected
+    const combobox = screen.getByRole('combobox');
+    await userEvent.click(combobox);
+
+    let selectAllCheckbox = screen
+      .getAllByRole('option')[0]
+      .querySelector('input[type="checkbox"]');
+    expect(selectAllCheckbox).not.toBeNull();
+    expect(selectAllCheckbox.checked).toBe(true);
+
+    // Trigger external clear
+    await userEvent.click(screen.getByText('External Clear'));
+
+    // Re-open dropdown to verify cleared state
+    await userEvent.click(combobox);
+
+    selectAllCheckbox = screen
+      .getAllByRole('option')[0]
+      .querySelector('input[type="checkbox"]');
+    expect(selectAllCheckbox).not.toBeNull();
+    expect(selectAllCheckbox.checked).toBe(false);
+    expect(selectAllCheckbox.indeterminate).toBe(false);
+
+    // Ensure all individual items are unselected
+    screen
+      .getAllByRole('option')
+      .slice(1)
+      .forEach((opt) => expect(opt).toHaveAttribute('aria-selected', 'false'));
+  });
 });
