@@ -84,6 +84,9 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
    * Provide a shortcut for the action of this MenuItem. Note that the component will only render it as a hint but not actually register the shortcut.
    */
   shortcut?: string;
+
+  /** Title property to passdown, will be shown as a default HTML tooltip. */
+  title?: string;
 }
 
 export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
@@ -97,6 +100,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       onClick,
       renderIcon: IconElement,
       shortcut,
+      title,
       ...rest
     },
     forwardRef
@@ -279,7 +283,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <Text
             as="div"
             className={`${prefix}--menu-item__label`}
-            title={label}>
+            title={title || label}>
             {label}
           </Text>
           {shortcut && !hasChildren && (
@@ -352,6 +356,9 @@ MenuItem.propTypes = {
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   shortcut: PropTypes.string,
+
+  /** Title property to passdown, will be shown as a default HTML tooltip. */
+  title: PropTypes.string,
 };
 
 export interface MenuItemSelectableProps
