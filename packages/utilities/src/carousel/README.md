@@ -56,12 +56,12 @@ carousel.reset();
 
 ### Import styles
 
-Apply `@include carouselStyles;` inside a SCSS file for React/class-based or Web
+Apply `@include carousel;` inside a SCSS file for React/class-based or Web
 Components with :host selectors. Automatically handles animations, view
 transitions, and reduced motion preferences across platforms.
 
 ```css
 @use '@carbon/utilities/styles/carousel/_index.scss' as carousel;
 
-@include carousel.carouselStyles;
+@include carousel.carousel;
 ```

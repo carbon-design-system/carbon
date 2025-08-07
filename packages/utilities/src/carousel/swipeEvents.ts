@@ -1,3 +1,11 @@
+/**
+ * Registers swipe event handlers for a carousel element.
+ * Handles touch, mouse, and wheel events for navigation.
+ * @param {HTMLElement} carousel - The carousel element to attach event listeners to.
+ * @param {() => void} next - Callback function to execute when swiping right.
+ * @param {() => void} prev - Callback function to execute when swiping left.
+ * @param {boolean} destroy - If true, removes existing event listeners before adding new ones.
+ */
 export const registerSwipeEvents = (
   carousel: HTMLElement,
   next: () => void,

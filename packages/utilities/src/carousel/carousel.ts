@@ -12,6 +12,13 @@ import {
   Config,
 } from './types';
 import { registerSwipeEvents } from './swipeEvents';
+
+/**
+ * Initializes a carousel with the given configuration.
+ * @param carouselContainer - The HTMLElement representing the carousel container.
+ * @param config - Optional configuration object.
+ * @returns An object containing methods to control the carousel.
+ */
 export const initCarousel = (
   carouselContainer: HTMLElement,
   config?: Config
@@ -26,10 +33,27 @@ export const initCarousel = (
   const { onViewChangeStart, onViewChangeEnd, excludeSwipeSupport } =
     config || {};
 
+  /**
+   * Registers an HTMLElement at a specific index in the refs array.
+   *
+   * @param {number} index - The index at which to register the HTMLElement.
+   * @param {HTMLElement} ref - The HTMLElement to register.
+   *
+   * @example
+   * registerRef(0, document.getElementById('myElement'));
+   */
   const registerRef = (index: number, ref: HTMLElement) => {
     refs[index] = ref;
   };
 
+  /**
+   * Wraps all child elements of a given container into a new div with the specified class.
+   * If an element with the specified class already exists as a child of the container, the function does nothing.
+   *
+   * @param {HTMLElement} container - The container element to wrap child elements of.
+   * @param {string} wrapperClass - The class name to apply to the new wrapper div.
+   * @returns {void}
+   */
   const wrapAllItems = (container: HTMLElement, wrapperClass: string) => {
     if (container.querySelector(`.${wrapperClass}`)) {
       return;
@@ -49,7 +73,10 @@ export const initCarousel = (
       elem: refs[id],
     }));
   };
-
+  /**
+   * Retrieves the current carousel response based on the view index stack and reference objects.
+   * @returns {CarouselResponse} - An object containing carousel response details.
+   */
   const getCallbackResponse = (): CarouselResponse => {
     const totalRefs = Object.keys(refs).length;
     const lastElementRef = refs[totalRefs - 1];
@@ -65,12 +92,28 @@ export const initCarousel = (
     };
   };
 
+  /**
+   * Handles the start of a transition in the application.
+   * This function is responsible for capturing the current state of the view index stack
+   * and invoking a callback function if it exists.
+   *
+   * @function handleTransitionStart
+   * @returns {void}
+   */
   const handleTransitionStart = () => {
     previousViewIndexStack = [...viewIndexStack];
     const callbackData = getCallbackResponse();
     onViewChangeStart?.(callbackData);
   };
 
+  /**
+   * Handles the 'transitionend' event for a given element.
+   * This function checks if the element has a 'data-index' attribute and if its value matches the current view index.
+   * If both conditions are met, it calls the 'onViewChangeEnd' callback with the response from 'getCallbackResponse'.
+   *
+   * @param {HTMLElement | null} el - The element to handle the 'transitionend' event for.
+   * @returns {void}
+   */
   const handleTransitionEnd = (el?: HTMLElement | null) => {
     if (!el) {
       return;
@@ -85,12 +128,27 @@ export const initCarousel = (
     }
   };
 
+  /**
+   * A utility function to sanitize an index value.
+   * This function ensures the index stays within the bounds of the refs array.
+   *
+   * @param {number} idx - The index to be sanitized.
+   * @returns {number} - The sanitized index.
+   */
   const sanitizeIndex = (idx: number) => {
     const floorVal = 0;
     const ceilVal = Object.keys(refs).length - 1;
     return Math.max(floorVal, Math.min(idx, ceilVal));
   };
 
+  /**
+   * Handles the 'transitionend' event for a given element.
+   * This function checks if the element has a 'data-index' attribute and if its value matches the current view index.
+   * If both conditions are met, it calls the 'onViewChangeEnd' callback with the response from 'getCallbackResponse'.
+   *
+   * @param {HTMLElement | null} el - The element to handle the 'transitionend' event for.
+   * @returns {void}
+   */
   const transitionToViewIndex = (idx: number) => {
     const sanitizedIndex = sanitizeIndex(idx);
     if (viewIndexStack[0] !== sanitizedIndex) {
@@ -103,7 +161,16 @@ export const initCarousel = (
   const transitionComplete = (ref: HTMLElement) => {
     handleTransitionEnd(ref);
   };
-
+  /**
+   * Attaches class names to an HTMLElement based on given conditions.
+   *
+   * @param {HTMLElement} viewItem - The HTML element to which class names will be added.
+   * @param {boolean} isInViewStack - Indicates if the view item is in the view stack.
+   * @param {boolean} isActive - Indicates if the view item is active.
+   * @param {boolean} isBeingRecycledOut - Indicates if the view item is being recycled out.
+   * @param {boolean} isBeingRecycledIn - Indicates if the view item is being recycled in.
+   * @returns {void}
+   */
   const attachClassNames = (
     viewItem: HTMLElement,
     isInViewStack: boolean,
@@ -143,6 +210,12 @@ export const initCarousel = (
     );
   };
 
+  /**
+   * Updates the height of the items wrapper in a carousel based on the smallest item height and a threshold height.
+   * This function ensures that the items wrapper does not have a height smaller than the threshold, adjusting the item height if necessary.
+   *
+   * @param {number} itemHeightSmallest - The smallest height of an item in pixels.
+   */
   const updateHeightForWrapper = (itemHeightSmallest: number) => {
     const thresholdHeight = remToPx(minHeight);
     const containerHeight = carouselContainer.clientHeight;
@@ -161,6 +234,10 @@ export const initCarousel = (
     }
   };
 
+  /**
+   * Performs animation on view items based on their state in the view index stack.
+   * @param {boolean} isInitial - A flag indicating if this is the initial animation.
+   */
   const performAnimation = (isInitial: boolean) => {
     let itemHeightSmallest = 0;
     Array.from(viewItems).forEach((viewItem: HTMLElement, index) => {
@@ -225,11 +302,22 @@ export const initCarousel = (
     }
   };
 
+  /**
+   * A utility function to navigate to the next view in the stack.
+   * This function increments the current view index and transitions to the new index.
+   *
+   * @returns {void} - This function does not return any value.
+   */
   const navigateNext = () => {
     const targetViewIndex = viewIndexStack[0] + 1;
     transitionToViewIndex(targetViewIndex);
   };
-
+  /**
+   * Navigates to the previous view in the view stack.
+   * @function navigatePrev
+   * @description This function checks if there is a previous view in the stack. If so, it triggers a transition start, removes the current view from the stack, and performs an animation to transition to the previous view.
+   * @returns {void} - This function does not return a value.
+   */
   const navigatePrev = () => {
     if (viewIndexStack.length - 1 >= 1) {
       handleTransitionStart();
@@ -238,10 +326,20 @@ export const initCarousel = (
     }
   };
 
+  /**
+   * A function that transitions the view to a specified index.
+   *
+   * @param {number} index - The index to transition to.
+   * @returns {void} - This function does not return a value.
+   */
   const goToIndex = (index: number) => {
     transitionToViewIndex(index);
   };
 
+  /**
+   * Retrieves the currently active item and its index from the view index stack and references.
+   * @returns An object containing the index and the corresponding item reference.
+   */
   const getActiveItem = () => {
     return {
       index: viewIndexStack[0],
@@ -249,15 +347,41 @@ export const initCarousel = (
     };
   };
 
+  /**
+   * Resets the view index stack and performs an animation.
+   *
+   * @returns {void}
+   */
   const reset = () => {
     viewIndexStack = [0];
     performAnimation(false);
   };
 
+  /**
+   * Function to destroy swipe events for the carousel.
+   * This function is used to unregister the swipe event listeners attached to the carousel container.
+   *
+   * @param {HTMLElement} carouselContainer - The DOM element representing the carousel container.
+   * @param {Function} navigateNext - The function to call when swiping right.
+   * @param {Function} navigatePrev - The function to call when swiping left.
+   * @param {boolean} [clearCache=true] - Whether to clear the cache after unregistering events.
+   */
   const destroyEvents = () => {
     registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, true);
   };
-
+  /**
+   * Retrieves carousel items from a given container element.
+   * If the container has a 'slot' element, it fetches all elements assigned to that slot.
+   * Otherwise, it fetches all direct children of the container.
+   *
+   * @param {HTMLElement} container - The container element from which to extract carousel items.
+   * @returns {HTMLElement[]} An array of HTMLElements representing the carousel items.
+   *
+   * @example
+   * const carouselContainer = document.querySelector('.carousel-container');
+   * const carouselItems = getCarouselItems(carouselContainer);
+   * console.log(carouselItems); // Logs the carousel items as HTMLElements
+   */
   const getCarouselItems = (container: HTMLElement): HTMLElement[] => {
     const slot = container.querySelector('slot') as HTMLSlotElement | null;
     return slot
