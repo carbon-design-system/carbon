@@ -20,7 +20,6 @@ class CDSForm extends LitElement {
   render() {
     return html`<form class="${prefix}--form">
       <slot></slot>
-      <form></form>
     </form>`;
   }
 
