@@ -200,16 +200,17 @@ $css--plex: true !default;
 
   border-radius: rem(4px);
 
+  &:host(#{$prefix}-content-switcher-item)
+    .#{$prefix}--content-switcher-btn:not([disabled]) {
+    box-shadow: none;
+  }
+
   // First item (only in low contrast)
   &:host(#{$prefix}-content-switcher-item:first-of-type)
     .#{$prefix}--content-switcher-btn:not([disabled]) {
     border-end-start-radius: rem(4px);
     border-start-start-radius: rem(4px);
     box-shadow: inset rem(1px) 0 0 0 $border-strong;
-
-    &:disabled {
-      box-shadow: none;
-    }
   }
 
   // Last item (only in low contrast)
@@ -218,9 +219,5 @@ $css--plex: true !default;
     border-end-end-radius: rem(4px);
     border-start-end-radius: rem(4px);
     box-shadow: inset rem(-1px) 0 0 0 $border-strong;
-
-    &:disabled {
-      box-shadow: none;
-    }
   }
 }
