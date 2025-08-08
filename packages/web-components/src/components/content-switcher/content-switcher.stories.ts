@@ -85,21 +85,18 @@ export const Default = {
         <cds-content-switcher-item
           value="all"
           name="one"
-          text="First section"
           ?low-contrast="${lowContrast}">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
-          text="Second section"
           ?low-contrast="${lowContrast}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="staging"
           name="three"
-          text="Third section"
           ?low-contrast="${lowContrast}">
           Third section
         </cds-content-switcher-item>
@@ -227,20 +224,17 @@ export const LowContrast = {
         <cds-content-switcher-item
           ?low-contrast="${lowContrast}"
           value="all"
-          name="one"
-          text="First section">
+          name="one">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
-          text="Second section"
           ?low-contrast="${lowContrast}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           name="three"
-          text="Third section"
           ?low-contrast="${lowContrast}"
           value="staging">
           Third section
@@ -322,22 +316,19 @@ export const WithLayer = {
         <cds-content-switcher-item
           ?low-contrast="${lowContrast}"
           value="all"
-          name="one"
-          text="First section">
+          name="one">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           ?low-contrast="${lowContrast}"
           value="cloudFoundry"
-          name="two"
-          text="Second section">
+          name="two">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           ?low-contrast="${lowContrast}"
           value="staging"
-          name="three"
-          text="Third section">
+          name="three">
           Third section
         </cds-content-switcher-item>
       </cds-content-switcher>

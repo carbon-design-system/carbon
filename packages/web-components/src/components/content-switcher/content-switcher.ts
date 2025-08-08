@@ -290,7 +290,7 @@ class CDSContentSwitcher extends LitElement {
   /**
    * `true` to use the low contrast version.
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'low-contrast' })
   lowContrast = false;
 
   firstUpdated() {
