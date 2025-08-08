@@ -125,6 +125,7 @@ export { OrderedList } from './components/OrderedList';
 export { OverflowMenu } from './components/OverflowMenu';
 export { OverflowMenuItem } from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
+export * as preview__Dialog from './components/Dialog';
 export { Pagination } from './components/Pagination';
 export { PaginationNav } from './components/PaginationNav';
 export {

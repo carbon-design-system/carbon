@@ -10,11 +10,15 @@
 import React, { useEffect, useState } from 'react';
 import { VStack } from '../Stack';
 import {
-  unstable__Dialog as Dialog,
+  Dialog,
   DialogControls,
   DialogCloseButton,
   DialogBody,
-} from './';
+  DialogHeader,
+  DialogSubtitle,
+  DialogTitle,
+  DialogFooter,
+} from './Dialog';
 import Button from '../Button';
 import TextInput from '../TextInput';
 import Select from '../Select';
@@ -23,9 +27,8 @@ import { action } from 'storybook/actions';
 import mdx from './Dialog.mdx';
 
 export default {
-  title: 'Experimental/unstable_Dialog',
+  title: 'Experimental/preview__Dialog',
   component: Dialog,
-  includeStories: [],
   parameters: {
     docs: {
       page: mdx,
@@ -83,14 +86,13 @@ export const Modal = ({ open: _open, ...args }) => {
         open={open}
         onRequestClose={handleRequestClose}
         aria-labelledby="title">
-        <Dialog.Header>
-          <Dialog.Subtitle>Configure dialog settings</Dialog.Subtitle>
-          <Dialog.Title id="title">Modal Dialog Example</Dialog.Title>
+        <DialogHeader>
+          <DialogSubtitle>Configure dialog settings</DialogSubtitle>
+          <DialogTitle id="title">Modal Dialog Example</DialogTitle>
           <DialogControls>
             <DialogCloseButton onClick={closeDialog} />
           </DialogControls>
-        </Dialog.Header>
-
+        </DialogHeader>
         <DialogBody>
           <VStack>
             <p>
@@ -155,14 +157,14 @@ export const Modal = ({ open: _open, ...args }) => {
             </p>
           </VStack>
         </DialogBody>
-        <Dialog.Footer>
+        <DialogFooter>
           <Button type="button" kind="secondary" onClick={closeDialog}>
             Cancel
           </Button>
           <Button type="button" kind="primary" onClick={closeDialog}>
             Save
           </Button>
-        </Dialog.Footer>
+        </DialogFooter>
       </Dialog>
     </>
   );
@@ -202,21 +204,20 @@ export const NonModal = ({ open: _open, ...args }) => {
         open={open}
         onRequestClose={handleRequestClose}
         aria-label="Dialog Title">
-        <Dialog.Header>
-          <Dialog.Subtitle>Non-modal dialog example Subtitle</Dialog.Subtitle>
-          <Dialog.Title>Non-Modal Dialog</Dialog.Title>
+        <DialogHeader>
+          <DialogSubtitle>Non-modal dialog example Subtitle</DialogSubtitle>
+          <DialogTitle>Non-Modal Dialog</DialogTitle>
           <DialogControls>
             <DialogCloseButton onClick={closeDialog} />
           </DialogControls>
-        </Dialog.Header>
-        <Dialog.Body>
+        </DialogHeader>
+        <DialogBody>
           <p>
             Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
             autem officiis dolores facilis nulla earum! Neque quia nemo sequi
             assumenda ratione officia Voluptate beatae eligendi placeat nemo
             laborum, ratione.
           </p>
-
           <TextInput
             id="dialog-text-input"
             labelText="Name"
@@ -232,15 +233,15 @@ export const NonModal = ({ open: _open, ...args }) => {
             assumenda ratione officia Voluptate beatae eligendi placeat nemo
             laborum, ratione.
           </p>
-        </Dialog.Body>
-        <Dialog.Footer>
+        </DialogBody>
+        <DialogFooter>
           <Button type="button" kind="secondary" onClick={closeDialog}>
             Cancel
           </Button>
           <Button type="button" kind="primary" onClick={closeDialog}>
             Submit
           </Button>
-        </Dialog.Footer>
+        </DialogFooter>
       </Dialog>
     </>
   );
@@ -280,14 +281,14 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
         open={open}
         onRequestClose={handleRequestClose}
         aria-label="Dialog Title">
-        <Dialog.Header>
-          <Dialog.Subtitle>Configure dialog settings</Dialog.Subtitle>
-          <Dialog.Title>Modal Dialog Example</Dialog.Title>
+        <DialogHeader>
+          <DialogSubtitle>Configure dialog settings</DialogSubtitle>
+          <DialogTitle>Modal Dialog Example</DialogTitle>
           <DialogControls>
             <DialogCloseButton onClick={closeDialog} />
           </DialogControls>
-        </Dialog.Header>
-        <Dialog.Body hasScrollingContent>
+        </DialogHeader>
+        <DialogBody hasScrollingContent>
           <VStack>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
@@ -303,7 +304,6 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
               mattis. Nunc non sodales magna. Proin ornare tellus quis hendrerit
               egestas. Donec pharetra leo nec molestie sollicitudin.
             </p>
-
             <TextInput
               id="dialog-text-input"
               labelText="Name"
@@ -328,7 +328,6 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
               assumenda ratione officia Voluptate beatae eligendi placeat nemo
               laborum, ratione.
             </p>
-
             <TextInput
               id="dialog-text-input"
               labelText="Name"
@@ -348,15 +347,15 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
               laborum, ratione.
             </p>
           </VStack>
-        </Dialog.Body>
-        <Dialog.Footer>
+        </DialogBody>
+        <DialogFooter>
           <Button type="button" kind="secondary" onClick={closeDialog}>
             Close
           </Button>
           <Button type="button" kind="primary" onClick={closeDialog}>
             Save
           </Button>
-        </Dialog.Footer>
+        </DialogFooter>
       </Dialog>
     </>
   );
@@ -397,15 +396,15 @@ export const PassiveDialog = ({ open: _open, ...args }) => {
         modal
         onRequestClose={handleRequestClose}
         aria-label="Dialog Title">
-        <Dialog.Header>
-          <Dialog.Title>Information Message</Dialog.Title>
-          <Dialog.Controls>
-            <Dialog.CloseButton onClick={closeDialog} />
-          </Dialog.Controls>
-        </Dialog.Header>
-        <Dialog.Body>
+        <DialogHeader>
+          <DialogTitle>Information Message</DialogTitle>
+          <DialogControls>
+            <DialogCloseButton onClick={closeDialog} />
+          </DialogControls>
+        </DialogHeader>
+        <DialogBody>
           <p>You have been successfully signed out</p>
-        </Dialog.Body>
+        </DialogBody>
       </Dialog>
     </>
   );
@@ -417,24 +416,18 @@ export const DangerDialog = (args) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}> Toggle open</Button>
-      <Dialog
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        onRequestSubmit={() => {
-          setOpen(false);
-        }}>
-        <Dialog.Header>
-          <Dialog.Subtitle>Account resources</Dialog.Subtitle>
-          <Dialog.Title>
+      <Dialog {...args} open={open} onRequestClose={() => setOpen(false)}>
+        <DialogHeader>
+          <DialogSubtitle>Account resources</DialogSubtitle>
+          <DialogTitle>
             Are you sure you want to delete this custom domain?
-          </Dialog.Title>
-          <Dialog.Controls>
-            <Dialog.CloseButton onClick={() => setOpen(false)} />
-          </Dialog.Controls>
-        </Dialog.Header>
-        <Dialog.Body></Dialog.Body>
-        <Dialog.Footer
+          </DialogTitle>
+          <DialogControls>
+            <DialogCloseButton onClick={() => setOpen(false)} />
+          </DialogControls>
+        </DialogHeader>
+        <DialogBody></DialogBody>
+        <DialogFooter
           danger
           primaryButtonText="Delete"
           secondaryButtonText="Cancel"
@@ -450,5 +443,4 @@ export const DangerDialog = (args) => {
 
 DangerDialog.args = {
   modal: true,
-  danger: true,
 };
