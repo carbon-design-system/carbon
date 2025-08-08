@@ -6450,6 +6450,9 @@ Map {
       "pageRangeText": Object {
         "type": "func",
       },
+      "pageSelectLabelText": Object {
+        "type": "func",
+      },
       "pageSize": Object {
         "type": "number",
       },
