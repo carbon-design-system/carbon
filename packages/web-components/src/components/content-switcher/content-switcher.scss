@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/content-switcher/content-switcher' as *;
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/button/index' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include content-switcher;
@@ -34,6 +35,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--layout--size-lg;
 }
 
+:host(#{$prefix}-content-switcher[disabled]) {
+  outline-color: $border-disabled;
+}
+
 :host(#{$prefix}-content-switcher-item) {
   inline-size: 100%;
   outline: none;
@@ -42,6 +47,7 @@ $css--plex: true !default;
     align-items: center;
     padding: $spacing-03 var(--cds-layout-density-padding-inline-local);
     block-size: 100%;
+    color: $text-secondary;
     inline-size: 100%;
 
     &:first-child,
@@ -62,6 +68,15 @@ $css--plex: true !default;
       inset-inline-start: 0;
     }
 
+    &:hover {
+      color: $text-primary;
+    }
+
+    &.#{$prefix}--content-switcher--selected {
+      border: 0;
+      color: $text-inverse;
+    }
+
     &.#{$prefix}--content-switcher--selected,
     &:focus,
     &:hover {
@@ -71,24 +86,53 @@ $css--plex: true !default;
     }
 
     &:disabled {
+      &.#{$prefix}--content-switcher--selected {
+        border-radius: rem(4px);
+        background-color: $button-disabled;
+
+        ::slotted(p) {
+          color: $text-disabled;
+        }
+      }
+
+      border-color: $border-disabled !important; /* stylelint-disable-line declaration-no-important */
+      background-color: transparent;
+
+      ::slotted(p) {
+        color: $text-disabled !important; /* stylelint-disable-line declaration-no-important */
+      }
+
       border-block-end-color: $border-inverse;
       border-block-start-color: $border-inverse;
     }
   }
 }
 
-:host(#{$prefix}-content-switcher-item[icon]) {
-  inline-size: initial;
-
+:host(#{$prefix}-content-switcher-item:first-of-type)
   .#{$prefix}--content-switcher-btn {
-    block-size: $spacing-08;
-    padding-inline: rem(11px);
-  }
+  border-end-start-radius: $spacing-02;
+  border-start-start-radius: $spacing-02;
+  box-shadow: inset rem(1px) 0 0 0 $border-inverse;
 
-  .#{$prefix}--content-switcher__label {
-    display: flex;
-    align-items: center;
+  &:disabled {
+    box-shadow: none;
   }
+}
+
+:host(#{$prefix}-content-switcher-item:last-of-type)
+  .#{$prefix}--content-switcher-btn {
+  border-end-end-radius: $spacing-02;
+  border-start-end-radius: $spacing-02;
+  box-shadow: inset rem(-1px) 0 0 0 $border-inverse;
+
+  &:disabled {
+    box-shadow: none;
+  }
+}
+
+:host(#{$prefix}-content-switcher-item:first-of-type)
+  .#{$prefix}--content-switcher-btn::before {
+  background-color: transparent;
 }
 
 :host(#{$prefix}-content-switcher-item[hide-divider])
@@ -96,20 +140,84 @@ $css--plex: true !default;
   background-color: transparent;
 }
 
-:host(#{$prefix}-content-switcher-item:first-of-type)
-  .#{$prefix}--content-switcher-btn {
-  border-end-start-radius: $spacing-02;
-  border-inline-start: rem(1px) solid $border-inverse;
-  border-start-start-radius: $spacing-02;
-
-  &::before {
-    content: none;
+:host(#{$prefix}-content-switcher-item:not([hide-divider]))
+  .#{$prefix}--content-switcher-btn:not(
+    .#{$prefix}--content-switcher--selected
+  ) {
+  &:disabled {
+    &:hover {
+      &::before {
+        background-color: $border-subtle;
+      }
+    }
   }
 }
 
-:host(#{$prefix}-content-switcher-item:last-of-type)
+:host(#{$prefix}-content-switcher-item[icon]) {
+  inline-size: initial;
+
+  .#{$prefix}--content-switcher__label {
+    display: flex;
+    align-items: center;
+  }
+}
+
+:host(#{$prefix}-content-switcher-item[icon][size='sm'])
   .#{$prefix}--content-switcher-btn {
-  border-end-end-radius: $spacing-02;
-  border-inline-end: rem(1px) solid $border-inverse;
-  border-start-end-radius: $spacing-02;
+  block-size: var(--cds-layout-size-height-local);
+  padding-inline: rem(8px);
+}
+
+:host(#{$prefix}-content-switcher-item[icon][size='md'])
+  .#{$prefix}--content-switcher-btn {
+  block-size: $spacing-08;
+  padding-inline: rem(12px);
+}
+
+:host(#{$prefix}-content-switcher-item[icon][size='lg'])
+  .#{$prefix}--content-switcher-btn {
+  block-size: $spacing-09;
+  padding-inline: rem(14px);
+}
+
+:host(#{$prefix}-content-switcher-item[icon]:not([low-contrast]))
+  ::slotted(svg) {
+  fill: $icon-primary;
+}
+
+:host(#{$prefix}-content-switcher-item[icon]:not([low-contrast])[selected])
+  ::slotted(svg) {
+  fill: $icon-inverse;
+}
+
+:host(#{$prefix}-content-switcher-item[icon]:not([low-contrast])[disabled])
+  ::slotted(svg) {
+  fill: $icon-disabled;
+}
+
+:host([low-contrast]) {
+  @extend .#{$prefix}--content-switcher--low-contrast;
+
+  border-radius: rem(4px);
+
+  &:host(#{$prefix}-content-switcher-item)
+    .#{$prefix}--content-switcher-btn:not([disabled]) {
+    box-shadow: none;
+  }
+
+  // First item (only in low contrast)
+  &:host(#{$prefix}-content-switcher-item:first-of-type)
+    .#{$prefix}--content-switcher-btn:not([disabled]) {
+    border-end-start-radius: rem(4px);
+    border-start-start-radius: rem(4px);
+    box-shadow: inset rem(1px) 0 0 0 $border-strong;
+  }
+
+  // Last item (only in low contrast)
+  &:host(#{$prefix}-content-switcher-item:last-of-type)
+    .#{$prefix}--content-switcher-btn:not([disabled]) {
+    border-end-end-radius: rem(4px);
+    border-start-end-radius: rem(4px);
+    box-shadow: inset rem(-1px) 0 0 0 $border-strong;
+  }
 }
