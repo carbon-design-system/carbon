@@ -28,7 +28,6 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { ToggletipButton } from '../Toggletip';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -81,6 +80,11 @@ export interface PopoverBaseProps {
    * Specify how the popover should align with the trigger element.
    */
   align?: PopoverAlignment;
+
+  /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset?: number;
 
   /**
    * Will auto-align the popover on first render if it is not visible. This prop
@@ -454,7 +458,8 @@ export const Popover: PopoverComponent & {
           // positioning.
           if (
             (enableFloatingStyles && item?.type !== PopoverContent) ||
-            (enableFloatingStyles && item?.type === ToggletipButton)
+            (enableFloatingStyles &&
+              item?.type['displayName'] === 'ToggletipButton')
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
@@ -540,6 +545,11 @@ Popover.propTypes = {
   ),
 
   /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset: PropTypes.number,
+
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
@@ -620,34 +630,12 @@ function PopoverContentRenderFunction(
 ) {
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const [isMultiLine, setIsMultiLine] = React.useState(false);
-  const ref = useMergedRefs([setFloating, textRef, forwardRef]);
+  const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-
-  useEffect(() => {
-    checkIfMultiLine();
-  }, [children]);
-
-  const checkIfMultiLine = () => {
-    const el = textRef.current;
-    if (el) {
-      const style = getComputedStyle(el);
-      const lineHeight = parseFloat(style.lineHeight);
-      const height = el.offsetHeight;
-      const lines = Math.floor(height / lineHeight);
-      setIsMultiLine(lines > 1);
-    }
-  };
-
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span
-        className={cx(`${prefix}--popover-content`, className, {
-          [`${prefix}--tooltip-content--multiline`]: isMultiLine,
-        })}
-        ref={ref}>
+      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
         {enableFloatingStyles && (
           <span

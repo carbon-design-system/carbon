@@ -55,23 +55,29 @@ const controls = {
 };
 
 export const Default = {
-  render: () =>
-    html` <cds-table-skeleton .headers=${headers}> </cds-table-skeleton>`,
-};
-
-export const Playground = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ columnCount, rowCount, showHeader, showToolbar, zebra }) => html`
-    <cds-table-skeleton
-      .headers=${headers}
-      column-count=${columnCount}
-      row-count=${rowCount}
-      ?show-header=${showHeader}
-      ?show-toolbar=${showToolbar}
-      ?zebra=${zebra}>
-    </cds-table-skeleton>
-  `,
+  render: ({
+    compact,
+    columnCount,
+    rowCount,
+    showHeader,
+    showToolbar,
+    zebra,
+  }) => {
+    const dynamicHeaders = headers.slice(0, columnCount);
+    return html`
+      <cds-table-skeleton
+        .headers=${dynamicHeaders}
+        .compact=${compact}
+        column-count=${columnCount}
+        row-count=${rowCount}
+        ?show-header=${showHeader}
+        ?show-toolbar=${showToolbar}
+        ?zebra=${zebra}>
+      </cds-table-skeleton>
+    `;
+  },
 };
 
 const meta = {
