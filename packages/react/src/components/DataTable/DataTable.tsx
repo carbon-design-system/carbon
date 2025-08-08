@@ -802,7 +802,13 @@ export const DataTable = <RowType, ColTypes extends any[]>(
    * @param headerKey - The field for the header that we are sorting by.
    */
   const handleSortBy = (headerKey: string) => () => {
-    setState((prev) => getNextSortState(props, prev, { key: headerKey }));
+    setState((prev) => {
+      const sortState = getNextSortState(props, prev, { key: headerKey });
+      return {
+        ...prev, // Preserve ALL existing state
+        ...sortState, // Then apply only the sorting changes
+      };
+    });
   };
 
   /**
