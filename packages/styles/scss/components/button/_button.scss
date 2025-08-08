@@ -150,17 +150,12 @@
   }
 
   .#{$prefix}--btn--icon-only {
+    align-items: center;
     justify-content: center;
     padding: 0;
     block-size: layout.size('height');
     inline-size: layout.size('height');
-    // -1px to compensate for border width
-    padding-block-start: min(
-      calc(
-        (layout.size('height') - convert.to-rem(16px)) / 2 - convert.to-rem(1px)
-      ),
-      var(--temp-padding-block-max)
-    );
+    padding-block-start: 0;
 
     > :first-child {
       min-inline-size: convert.to-rem(16px);

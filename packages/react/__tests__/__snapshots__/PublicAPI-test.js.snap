@@ -308,6 +308,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "caption": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4281,8 +4284,12 @@ Map {
   },
   "Header" => Object {
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "aria-label": Object {
+        "type": "string",
+      },
+      "aria-labelledby": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
@@ -6043,6 +6050,9 @@ Map {
       },
       "slug": [Function],
       "step": Object {
+        "type": "number",
+      },
+      "stepStartValue": Object {
         "type": "number",
       },
       "translateWithId": Object {

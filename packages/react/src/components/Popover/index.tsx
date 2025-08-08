@@ -186,8 +186,17 @@ export const Popover: PopoverComponent & {
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+    if (!relatedTarget) {
+      return;
+    }
+    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
+    const isOutsideFloating =
+      enableFloatingStyles && refs.floating.current
+        ? !refs.floating.current.contains(relatedTarget)
+        : true;
 
-    if (!popover.current?.contains(relatedTarget)) {
+    // Only close if focus moved outside both containers
+    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
     }
   });
@@ -621,34 +630,12 @@ function PopoverContentRenderFunction(
 ) {
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const [isMultiLine, setIsMultiLine] = React.useState(false);
-  const ref = useMergedRefs([setFloating, textRef, forwardRef]);
+  const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-
-  useEffect(() => {
-    checkIfMultiLine();
-  }, [children]);
-
-  const checkIfMultiLine = () => {
-    const el = textRef.current;
-    if (el) {
-      const style = getComputedStyle(el);
-      const lineHeight = parseFloat(style.lineHeight);
-      const height = el.offsetHeight;
-      const lines = Math.floor(height / lineHeight);
-      setIsMultiLine(lines > 1);
-    }
-  };
-
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span
-        className={cx(`${prefix}--popover-content`, className, {
-          [`${prefix}--tooltip-content--multiline`]: isMultiLine,
-        })}
-        ref={ref}>
+      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
         {enableFloatingStyles && (
           <span
