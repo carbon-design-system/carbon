@@ -1837,7 +1837,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/69060697?v=4",
       "profile": "https://github.com/warrenmblood",
       "contributions": [
-        "code"
+        "code",
+        "doc",
+        "a11y"
       ]
     },
     {
