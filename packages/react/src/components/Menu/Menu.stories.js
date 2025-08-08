@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { useState, useRef } from 'react';
 import { action } from 'storybook/actions';
 
 import {
@@ -29,7 +28,6 @@ import {
 } from './';
 import mdx from './Menu.mdx';
 
-import Button from '../Button';
 export default {
   title: 'Components/Menu',
   component: Menu,
@@ -135,48 +133,4 @@ Default.argTypes = {
       disable: true,
     },
   },
-};
-
-// Test story, removing before merging
-export const BugFix = () => {
-  const [items, setItems] = useState([1, 2, 3, 4, 5]);
-
-  return (
-    <>
-      <Button
-        onClick={() => {
-          setItems([0, 1, 2, 3, 11, 4, 5, 6, 9]);
-        }}>
-        Add menu items
-      </Button>
-      <Menu open style={{ marginTop: '5rem' }}>
-        {items.map((item) => (
-          <MenuItem key={item} label={item} />
-        ))}
-      </Menu>
-    </>
-  );
-};
-
-// Test story, removing before merging
-export const BugFixDisabled = () => {
-  const initialItemsRef = useRef([1, 2, 3, 4, 5]);
-  const [items, setItems] = useState(initialItemsRef.current);
-
-  return (
-    <>
-      <Button
-        onClick={() => {
-          setItems([0, 1, 2, 3, 11, 4, 5, 6, 9]);
-        }}>
-        Add disabled menu items
-      </Button>
-      <Menu open style={{ marginTop: '5rem' }}>
-        {items.map((item) => {
-          const isNew = !initialItemsRef.current.includes(item);
-          return <MenuItem key={item} label={String(item)} disabled={isNew} />;
-        })}
-      </Menu>
-    </>
-  );
 };

@@ -21,7 +21,7 @@ import CDSmenuItemSelectable from './menu-item-selectable';
 import CDSmenuItemGroup from './menu-item-group';
 import CDSmenuItemRadioGroup from './menu-item-radio-group';
 import CDSmenuItemDivider from './menu-item-divider';
-import '../button';
+
 const args = {
   size: 'sm',
   open: true,
@@ -120,82 +120,6 @@ export const Default = {
       </cds-menu>
     `;
   },
-};
-
-// Test story, removing before merging
-export const BugFix = {
-  args,
-  render: () => html`
-    <cds-button
-      @click=${() => {
-        const menu = document.getElementById('bugfix-menu');
-        const mi0 = document.createElement('cds-menu-item');
-        mi0.setAttribute('label', '0');
-        menu?.insertBefore(mi0, menu.children[0]);
-
-        const mi11 = document.createElement('cds-menu-item');
-        mi11.setAttribute('label', '11');
-        menu?.insertBefore(mi11, menu.children[3]);
-
-        [6, 9].forEach((value) => {
-          const mi = document.createElement('cds-menu-item');
-          mi.setAttribute('label', String(value));
-          menu?.appendChild(mi);
-        });
-      }}
-      >Add menu items</cds-button
-    >
-
-    <cds-menu open size="sm" style="margin-top: 6rem;" id="bugfix-menu">
-      <cds-menu-item label="1"></cds-menu-item>
-      <cds-menu-item label="2"></cds-menu-item>
-      <cds-menu-item label="3"></cds-menu-item>
-      <cds-menu-item label="4"></cds-menu-item>
-      <cds-menu-item label="5"></cds-menu-item>
-    </cds-menu>
-  `,
-};
-
-// Test story, removing before merging
-export const BugFixDisabled = {
-  args,
-  render: () => html`
-    <cds-button
-      @click=${() => {
-        const menu = document.getElementById('bugfix-menu-disabled');
-
-        const mi0 = document.createElement('cds-menu-item');
-        mi0.setAttribute('label', '0');
-        mi0.setAttribute('disabled', '');
-        menu?.insertBefore(mi0, menu.children[0]);
-
-        const mi11 = document.createElement('cds-menu-item');
-        mi11.setAttribute('label', '11');
-        mi11.setAttribute('disabled', '');
-        menu?.insertBefore(mi11, menu.children[3]);
-
-        [6, 9].forEach((value) => {
-          const mi = document.createElement('cds-menu-item');
-          mi.setAttribute('label', String(value));
-          mi.setAttribute('disabled', '');
-          menu?.appendChild(mi);
-        });
-      }}>
-      Add disabled menu items
-    </cds-button>
-
-    <cds-menu
-      open
-      size="sm"
-      style="margin-top: 6rem;"
-      id="bugfix-menu-disabled">
-      <cds-menu-item label="1"></cds-menu-item>
-      <cds-menu-item label="2"></cds-menu-item>
-      <cds-menu-item label="3"></cds-menu-item>
-      <cds-menu-item label="4"></cds-menu-item>
-      <cds-menu-item label="5"></cds-menu-item>
-    </cds-menu>
-  `,
 };
 
 const meta = {
