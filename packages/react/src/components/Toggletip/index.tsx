@@ -144,6 +144,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
   const onKeyDown: KeyboardEventHandler = (event) => {
     if (open && match(event, keys.Escape)) {
+      event.stopPropagation();
       actions.close();
 
       // If the menu is closed while focus is still inside the menu, it should return to the trigger button  (#12922)
