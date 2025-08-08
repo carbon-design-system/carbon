@@ -47,12 +47,17 @@ means that:
 - `enable-experimental-focus-wrap-without-sentinels` has no effect and can be
   removed when using `enable-dialog-element`
 
+## `enable-presence`
+
+`Modal` supports the `enable-presence` feature flag. When enabled, Modal
+will not be mounted until opened and unmounted when closed. CSS transitions are replaced with animations.
+
 ### Enabling the flag
 
 To enable the flag, use the `FeatureFlags` component and set the prop:
 
 ```js
-<FeatureFlags enableDialogElement>
+<FeatureFlags enableDialogElement enablePresence>
   <Modal ... />
 </FeatureFlags>
 ```

@@ -58,3 +58,7 @@ feature-flags:
     description: >
       Enable a reduced spacing between the toggle control and its label
     enabled: false
+  - name: enable-presence
+    description: >
+      Enable components to remain unmounted in closed state and mount in open state.
+    enabled: false
