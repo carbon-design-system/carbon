@@ -1350,7 +1350,7 @@ categories:
       - train
       - travel-and-expenses
       - tunnel
-  - name: Watson
+  - name: watsonx
     members:
       - alchemy--data--news
       - alchemy--language
