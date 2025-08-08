@@ -66,7 +66,7 @@
     "fs-extra": "^11.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "rimraf": "^6.0.0",
+    "rimraf": "^6.0.1",
     "rollup": "^4.41.1",
     "rollup-plugin-strip-banner": "^3.0.0"
   },
