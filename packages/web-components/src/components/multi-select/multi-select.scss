@@ -97,7 +97,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__wrapper--inline;
 
   .#{$prefix}--form__helper-text {
-    grid-column: 2;
+    grid-column: 3;
   }
 }
 
