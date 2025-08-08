@@ -105,7 +105,7 @@ Default.argTypes = {
 };
 const structuredListBodyRowGenerator = (numRows) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
-    <StructuredListRow key={`row-${i}`}>
+    <StructuredListRow key={`row-${i}`} id={`row-${i}`}>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>
@@ -149,7 +149,37 @@ export const Selection = (args) => {
   );
 };
 
+export const InitialSelection = (args) => {
+  return (
+    <StructuredListWrapper selection {...args} selectedInitialRow="row-2">
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        {structuredListBodyRowGenerator(4)}
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
+
 Selection.argTypes = {
+  isFlush: {
+    table: {
+      disable: true,
+    },
+  },
+  selection: {
+    control: {
+      disable: true,
+    },
+  },
+};
+
+InitialSelection.argTypes = {
   isFlush: {
     table: {
       disable: true,

@@ -119,6 +119,18 @@ For example, percent style can be used:
 />
 ```
 
+### Configurable start value with stepStartValue
+
+A step start value can be configured to provide the user a more beneficial starting point when the input is empty and an increment or decrement button is clicked. This can be used in situations where zero is not within the min/max or there is a more sensible default starting value, such as the current year when asking the user for a year. Since this allows the input to still initially be empty, it ensures on submission of the form that the user has actually interacted with the input and inserted a value.
+
+```
+<NumberInput
+  type="text"
+  value={1000}
+  stepStartValue={10}
+/>
+```
+
 ## Component API
 
 <ArgTypes />
