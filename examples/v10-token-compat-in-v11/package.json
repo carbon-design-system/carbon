@@ -1,8 +1,22 @@
 {
   "name": "v10-token-compat-in-v11",
+  "description": "V10 token compat in V11 example",
   "private": true,
   "version": "0.87.0-rc.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "examples/v10-token-compat-in-v11"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

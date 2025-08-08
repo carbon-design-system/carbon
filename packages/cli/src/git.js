@@ -1,13 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const execa = require('execa');
+import { execa } from 'execa';
 
 /**
  * For certain release types, we want to be certain that our base branch is
@@ -17,9 +15,9 @@ const execa = require('execa');
  *
  * @returns {void}
  */
-async function fetchLatestFromUpstream() {
+export async function fetchLatestFromUpstream() {
   try {
-    // This command will fail is no upstream is present, with `catch` we can
+    // This command will fail if no upstream is present, with `catch` we can
     // create the appropriate remote before running the next commands
     await execa('git', ['remote', 'get-url', 'upstream']);
   } catch {
@@ -32,7 +30,3 @@ async function fetchLatestFromUpstream() {
   }
   await execa('git', ['fetch', 'upstream', 'main', '--tags']);
 }
-
-module.exports = {
-  fetchLatestFromUpstream,
-};
