@@ -31,6 +31,7 @@ export interface FeatureFlagsProps {
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
   enableDialogElement?: boolean;
   enableV12DynamicFloatingStyles?: boolean;
+  enablePresence?: boolean;
 }
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
@@ -53,6 +54,7 @@ function FeatureFlags({
   enableExperimentalFocusWrapWithoutSentinels = false,
   enableDialogElement = false,
   enableV12DynamicFloatingStyles = false,
+  enablePresence = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
@@ -66,6 +68,7 @@ function FeatureFlags({
       enableExperimentalFocusWrapWithoutSentinels,
     'enable-dialog-element': enableDialogElement,
     'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
+    'enable-presence': enablePresence,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {

@@ -8,6 +8,7 @@
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
   cloneElement,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -31,6 +32,7 @@ import {
 import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
@@ -45,6 +47,12 @@ import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
+
+import {
+  ModalPresence,
+  ModalPresenceContext,
+  useExclusiveModalPresenceContext,
+} from './ModalPresence';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
@@ -238,506 +246,460 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
    */
   slug?: ReactNode;
 }
-
-const Modal = React.forwardRef(function Modal(
-  {
-    'aria-label': ariaLabelProp,
-    children,
-    className,
-    decorator,
-    modalHeading = '',
-    modalLabel = '',
-    modalAriaLabel,
-    passiveModal = false,
-    secondaryButtonText,
-    primaryButtonText,
-    open,
-    onRequestClose = noopFn,
-    onRequestSubmit = noopFn,
-    onSecondarySubmit,
-    primaryButtonDisabled = false,
-    danger,
-    alert,
-    secondaryButtons,
-    selectorPrimaryFocus = '[data-modal-primary-focus]',
-    selectorsFloatingMenus,
-    shouldSubmitOnEnter,
-    size,
-    hasScrollingContent = false,
-    closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = !passiveModal,
-    isFullWidth,
-    launcherButtonRef,
-    loadingStatus = 'inactive',
-    loadingDescription,
-    loadingIconDescription,
-    onLoadingSuccess = noopFn,
-    slug,
-    ...rest
-  }: ModalProps,
-  ref: React.Ref<HTMLDivElement>
+const Modal = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
+  { open, ...props },
+  ref
 ) {
-  const prefix = usePrefix();
-  const button = useRef<HTMLButtonElement>(null);
-  const secondaryButton = useRef<HTMLButtonElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const innerModal = useRef<HTMLDivElement>(null);
-  const startTrap = useRef<HTMLSpanElement>(null);
-  const endTrap = useRef<HTMLSpanElement>(null);
-  const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
-  const [isScrollable, setIsScrollable] = useState(false);
-  const prevOpen = usePreviousValue(open);
-  const modalInstanceId = `modal-${useId()}`;
-  const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
-  const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
-  const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
-  const modalCloseButtonClass = `${prefix}--modal-close`;
-  const primaryButtonClass = classNames({
-    [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
-  });
-  const loadingActive = loadingStatus !== 'inactive';
+  const id = useId();
 
-  const focusTrapWithoutSentinels = useFeatureFlag(
-    'enable-experimental-focus-wrap-without-sentinels'
-  );
-  const enableDialogElement = useFeatureFlag('enable-dialog-element');
-  warning(
-    !(focusTrapWithoutSentinels && enableDialogElement),
-    '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
-      '`enableDialogElement` feature flags are enabled. The native dialog ' +
-      'element handles focus, so `enableDialogElement` must be off for ' +
-      '`focusTrapWithoutSentinels` to have any effect.'
-  );
+  const enablePresence = useFeatureFlag('enable-presence');
+  const hasPresenceContext = Boolean(useContext(ModalPresenceContext));
+  const hasPresenceOptIn = enablePresence || hasPresenceContext;
 
-  if (!passiveModal && preventCloseOnClickOutside === false) {
-    console.error(invalidOutsideClickMessage);
-  }
+  const exclusivePresenceContext = useExclusiveModalPresenceContext(id);
 
-  function isCloseButton(element: Element) {
+  if (hasPresenceOptIn && !exclusivePresenceContext) {
     return (
-      (!onSecondarySubmit && element === secondaryButton.current) ||
-      element.classList.contains(modalCloseButtonClass)
+      <ModalPresence
+        open={open ?? false}
+        _presenceId={id}
+        // do not auto enable styles for opt-in by feature flag
+        _autoEnablePresence={hasPresenceContext}>
+        <ModalDialog open ref={ref} {...props} />
+      </ModalPresence>
     );
   }
 
-  function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
-    const { target } = evt;
+  return <ModalDialog ref={ref} open={open} {...props} />;
+});
 
-    evt.stopPropagation();
-
-    if (open && target instanceof HTMLElement) {
-      if (
-        match(evt, keys.Enter) &&
-        shouldSubmitOnEnter &&
-        !isCloseButton(target) &&
-        document.activeElement !== button.current
-      ) {
-        onRequestSubmit(evt);
-      }
-
-      if (
-        focusTrapWithoutSentinels &&
-        !enableDialogElement &&
-        match(evt, keys.Tab) &&
-        innerModal.current
-      ) {
-        wrapFocusWithoutSentinels({
-          containerNode: innerModal.current,
-          currentActiveNode: target,
-          event: evt,
-        });
-      }
-    }
-  }
-
-  function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-    const { target } = evt;
-    evt.stopPropagation();
-    if (
-      !preventCloseOnClickOutside &&
-      target instanceof Node &&
-      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
-      innerModal.current &&
-      !innerModal.current.contains(target)
-    ) {
-      onRequestClose(evt);
-    }
-  }
-
-  function handleBlur({
-    target: oldActiveNode,
-    relatedTarget: currentActiveNode,
-  }: React.FocusEvent<HTMLDivElement>) {
-    if (
-      !enableDialogElement &&
-      open &&
-      oldActiveNode instanceof HTMLElement &&
-      currentActiveNode instanceof HTMLElement
-    ) {
-      const { current: bodyNode } = innerModal;
-      const { current: startTrapNode } = startTrap;
-      const { current: endTrapNode } = endTrap;
-      // use setTimeout to ensure focus is set after all browser default focus behavior. Fixes issue of
-      // focus not wrapping in Firefox
-      wrapFocusTimeout.current = setTimeout(() => {
-        wrapFocus({
-          bodyNode,
-          startTrapNode,
-          endTrapNode,
-          currentActiveNode,
-          oldActiveNode,
-          selectorsFloatingMenus,
-        });
-        if (wrapFocusTimeout.current) {
-          clearTimeout(wrapFocusTimeout.current);
-        }
-      });
-    }
-
-    // Adjust scroll if needed so that element with focus is not obscured by gradient
-    const modalContent = document.querySelector(`.${prefix}--modal-content`);
-    if (
-      !modalContent ||
-      !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
-      !currentActiveNode ||
-      !modalContent.contains(currentActiveNode)
-    ) {
-      return;
-    }
-
-    const lastContent = modalContent.children[modalContent.children.length - 1];
-    const gradientSpacing =
-      modalContent.scrollHeight -
-      (lastContent as HTMLElement).offsetTop -
-      (lastContent as HTMLElement).clientHeight;
-
-    for (let elem of modalContent.children) {
-      if (elem.contains(currentActiveNode)) {
-        const spaceBelow =
-          modalContent.clientHeight -
-          (elem as HTMLElement).offsetTop +
-          modalContent.scrollTop -
-          (elem as HTMLElement).clientHeight;
-        if (spaceBelow < gradientSpacing) {
-          modalContent.scrollTop =
-            modalContent.scrollTop + (gradientSpacing - spaceBelow);
-        }
-        break;
-      }
-    }
-  }
-
-  const onSecondaryButtonClick = onSecondarySubmit
-    ? onSecondarySubmit
-    : onRequestClose;
-
-  const modalClasses = classNames(
-    `${prefix}--modal`,
+const ModalDialog = React.forwardRef<HTMLDivElement, ModalProps>(
+  function ModalDialog(
     {
-      [`${prefix}--modal-tall`]: !passiveModal,
-      'is-visible': open,
-      [`${prefix}--modal--danger`]: danger,
-      [`${prefix}--modal--slug`]: slug,
-      [`${prefix}--modal--decorator`]: decorator,
+      'aria-label': ariaLabelProp,
+      children,
+      className,
+      decorator,
+      modalHeading = '',
+      modalLabel = '',
+      modalAriaLabel,
+      passiveModal = false,
+      secondaryButtonText,
+      primaryButtonText,
+      open: externalOpen,
+      onRequestClose = noopFn,
+      onRequestSubmit = noopFn,
+      onSecondarySubmit,
+      primaryButtonDisabled = false,
+      danger,
+      alert,
+      secondaryButtons,
+      selectorPrimaryFocus = '[data-modal-primary-focus]',
+      selectorsFloatingMenus,
+      shouldSubmitOnEnter,
+      size,
+      hasScrollingContent = false,
+      closeButtonLabel = 'Close',
+      preventCloseOnClickOutside = !passiveModal,
+      isFullWidth,
+      launcherButtonRef,
+      loadingStatus = 'inactive',
+      loadingDescription,
+      loadingIconDescription,
+      onLoadingSuccess = noopFn,
+      slug,
+      ...rest
     },
-    className
-  );
+    ref
+  ) {
+    const prefix = usePrefix();
+    const button = useRef<HTMLButtonElement>(null);
+    const secondaryButton = useRef<HTMLButtonElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const innerModal = useRef<HTMLDivElement>(null);
+    const startTrap = useRef<HTMLSpanElement>(null);
+    const endTrap = useRef<HTMLSpanElement>(null);
+    const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const modalInstanceId = `modal-${useId()}`;
+    const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
+    const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
+    const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
+    const modalCloseButtonClass = `${prefix}--modal-close`;
+    const primaryButtonClass = classNames({
+      [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
+    });
+    const loadingActive = loadingStatus !== 'inactive';
 
-  const containerClasses = classNames(`${prefix}--modal-container`, {
-    [`${prefix}--modal-container--${size}`]: size,
-    [`${prefix}--modal-container--full-width`]: isFullWidth,
-  });
+    const presenceContext = useContext(ModalPresenceContext);
+    const mergedRefs = useMergedRefs([ref, presenceContext?.presenceRef]);
+    const enablePresence =
+      useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
 
-  const contentClasses = classNames(`${prefix}--modal-content`, {
-    [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
-  });
+    // always mark as open when mounted with presence
+    const open = externalOpen || enablePresence;
+    const prevOpen = usePreviousValue(open);
 
-  const footerClasses = classNames(`${prefix}--modal-footer`, {
-    [`${prefix}--modal-footer--three-button`]:
-      Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
-  });
+    const focusTrapWithoutSentinels = useFeatureFlag(
+      'enable-experimental-focus-wrap-without-sentinels'
+    );
+    const enableDialogElement = useFeatureFlag('enable-dialog-element');
+    warning(
+      !(focusTrapWithoutSentinels && enableDialogElement),
+      '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+        '`enableDialogElement` feature flags are enabled. The native dialog ' +
+        'element handles focus, so `enableDialogElement` must be off for ' +
+        '`focusTrapWithoutSentinels` to have any effect.'
+    );
 
-  const asStringOrUndefined = (node: ReactNode): string | undefined => {
-    return typeof node === 'string' ? node : undefined;
-  };
-  const modalLabelStr = asStringOrUndefined(modalLabel);
-  const modalHeadingStr = asStringOrUndefined(modalHeading);
-  const ariaLabel =
-    modalLabelStr || ariaLabelProp || modalAriaLabel || modalHeadingStr;
-  const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
+    if (!passiveModal && preventCloseOnClickOutside === false) {
+      console.error(invalidOutsideClickMessage);
+    }
 
-  const hasScrollingContentProps =
-    hasScrollingContent || isScrollable
-      ? {
-          tabIndex: 0,
-          role: 'region',
-          'aria-label': ariaLabel,
-          'aria-labelledby': getAriaLabelledBy,
+    function isCloseButton(element: Element) {
+      return (
+        (!onSecondarySubmit && element === secondaryButton.current) ||
+        element.classList.contains(modalCloseButtonClass)
+      );
+    }
+
+    function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+      const { target } = evt;
+
+      evt.stopPropagation();
+
+      if (open && target instanceof HTMLElement) {
+        if (
+          match(evt, keys.Enter) &&
+          shouldSubmitOnEnter &&
+          !isCloseButton(target) &&
+          document.activeElement !== button.current
+        ) {
+          onRequestSubmit(evt);
         }
-      : {};
 
-  const alertDialogProps: HTMLAttributes<HTMLDivElement> = {};
-  if (alert && passiveModal) {
-    alertDialogProps.role = 'alert';
-  }
-  if (alert && !passiveModal) {
-    alertDialogProps.role = 'alertdialog';
-    alertDialogProps['aria-describedby'] = modalBodyId;
-  }
-
-  useEffect(() => {
-    if (!open) return;
-
-    const handleEscapeKey = (event) => {
-      if (match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        onRequestClose(event);
+        if (
+          focusTrapWithoutSentinels &&
+          !enableDialogElement &&
+          match(evt, keys.Tab) &&
+          innerModal.current
+        ) {
+          wrapFocusWithoutSentinels({
+            containerNode: innerModal.current,
+            currentActiveNode: target,
+            event: evt,
+          });
+        }
       }
-    };
-    document.addEventListener('keydown', handleEscapeKey, true);
+    }
 
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
-    };
-  }, [open]);
+    function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
+      const { target } = evt;
+      evt.stopPropagation();
+      if (
+        !preventCloseOnClickOutside &&
+        target instanceof Node &&
+        !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+        innerModal.current &&
+        !innerModal.current.contains(target)
+      ) {
+        onRequestClose(evt);
+      }
+    }
 
-  useEffect(() => {
-    return () => {
+    function handleBlur({
+      target: oldActiveNode,
+      relatedTarget: currentActiveNode,
+    }: React.FocusEvent<HTMLDivElement>) {
+      if (
+        !enableDialogElement &&
+        open &&
+        oldActiveNode instanceof HTMLElement &&
+        currentActiveNode instanceof HTMLElement
+      ) {
+        const { current: bodyNode } = innerModal;
+        const { current: startTrapNode } = startTrap;
+        const { current: endTrapNode } = endTrap;
+        // use setTimeout to ensure focus is set after all browser default focus behavior. Fixes issue of
+        // focus not wrapping in Firefox
+        wrapFocusTimeout.current = setTimeout(() => {
+          wrapFocus({
+            bodyNode,
+            startTrapNode,
+            endTrapNode,
+            currentActiveNode,
+            oldActiveNode,
+            selectorsFloatingMenus,
+          });
+          if (wrapFocusTimeout.current) {
+            clearTimeout(wrapFocusTimeout.current);
+          }
+        });
+      }
+
+      // Adjust scroll if needed so that element with focus is not obscured by gradient
+      const modalContent = document.querySelector(`.${prefix}--modal-content`);
+      if (
+        !modalContent ||
+        !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+        !currentActiveNode ||
+        !modalContent.contains(currentActiveNode)
+      ) {
+        return;
+      }
+
+      const lastContent =
+        modalContent.children[modalContent.children.length - 1];
+      const gradientSpacing =
+        modalContent.scrollHeight -
+        (lastContent as HTMLElement).offsetTop -
+        (lastContent as HTMLElement).clientHeight;
+
+      for (let elem of modalContent.children) {
+        if (elem.contains(currentActiveNode)) {
+          const spaceBelow =
+            modalContent.clientHeight -
+            (elem as HTMLElement).offsetTop +
+            modalContent.scrollTop -
+            (elem as HTMLElement).clientHeight;
+          if (spaceBelow < gradientSpacing) {
+            modalContent.scrollTop =
+              modalContent.scrollTop + (gradientSpacing - spaceBelow);
+          }
+          break;
+        }
+      }
+    }
+
+    const onSecondaryButtonClick = onSecondarySubmit
+      ? onSecondarySubmit
+      : onRequestClose;
+
+    const modalClasses = classNames(
+      `${prefix}--modal`,
+      {
+        [`${prefix}--modal-tall`]: !passiveModal,
+        'is-visible': enablePresence || open,
+        [`${prefix}--modal--enable-presence`]:
+          presenceContext?.autoEnablePresence,
+        [`${prefix}--modal--danger`]: danger,
+        [`${prefix}--modal--slug`]: slug,
+        [`${prefix}--modal--decorator`]: decorator,
+      },
+      className
+    );
+
+    const containerClasses = classNames(`${prefix}--modal-container`, {
+      [`${prefix}--modal-container--${size}`]: size,
+      [`${prefix}--modal-container--full-width`]: isFullWidth,
+    });
+
+    const contentClasses = classNames(`${prefix}--modal-content`, {
+      [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
+    });
+
+    const footerClasses = classNames(`${prefix}--modal-footer`, {
+      [`${prefix}--modal-footer--three-button`]:
+        Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
+    });
+
+    const asStringOrUndefined = (node: ReactNode): string | undefined => {
+      return typeof node === 'string' ? node : undefined;
+    };
+    const modalLabelStr = asStringOrUndefined(modalLabel);
+    const modalHeadingStr = asStringOrUndefined(modalHeading);
+    const ariaLabel =
+      modalLabelStr || ariaLabelProp || modalAriaLabel || modalHeadingStr;
+    const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
+
+    const hasScrollingContentProps =
+      hasScrollingContent || isScrollable
+        ? {
+            tabIndex: 0,
+            role: 'region',
+            'aria-label': ariaLabel,
+            'aria-labelledby': getAriaLabelledBy,
+          }
+        : {};
+
+    const alertDialogProps: HTMLAttributes<HTMLDivElement> = {};
+    if (alert && passiveModal) {
+      alertDialogProps.role = 'alert';
+    }
+    if (alert && !passiveModal) {
+      alertDialogProps.role = 'alertdialog';
+      alertDialogProps['aria-describedby'] = modalBodyId;
+    }
+
+    useEffect(() => {
+      if (!open) return;
+
+      const handleEscapeKey = (event) => {
+        if (match(event, keys.Escape)) {
+          event.preventDefault();
+          event.stopPropagation();
+          onRequestClose(event);
+        }
+      };
+      document.addEventListener('keydown', handleEscapeKey, true);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey, true);
+      };
+    }, [open]);
+
+    useEffect(() => {
+      return () => {
+        if (!enableDialogElement) {
+          toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+        }
+      };
+    }, [prefix, enableDialogElement]);
+
+    useEffect(() => {
       if (!enableDialogElement) {
-        toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+        toggleClass(
+          document.body,
+          `${prefix}--body--with-modal-open`,
+          open ?? false
+        );
       }
-    };
-  }, [prefix, enableDialogElement]);
+    }, [open, prefix, enableDialogElement]);
 
-  useEffect(() => {
-    if (!enableDialogElement) {
-      toggleClass(
-        document.body,
-        `${prefix}--body--with-modal-open`,
-        open ?? false
-      );
-    }
-  }, [open, prefix, enableDialogElement]);
+    useEffect(() => {
+      if (
+        !enableDialogElement &&
+        !enablePresence &&
+        prevOpen &&
+        !open &&
+        launcherButtonRef
+      ) {
+        setTimeout(() => {
+          if ('current' in launcherButtonRef) {
+            launcherButtonRef.current?.focus();
+          }
+        });
+      }
+    }, [
+      open,
+      prevOpen,
+      launcherButtonRef,
+      enableDialogElement,
+      enablePresence,
+    ]);
 
-  useEffect(() => {
-    if (!enableDialogElement && prevOpen && !open && launcherButtonRef) {
-      setTimeout(() => {
-        if ('current' in launcherButtonRef) {
-          launcherButtonRef.current?.focus();
-        }
-      });
-    }
-  }, [open, prevOpen, launcherButtonRef, enableDialogElement]);
-
-  useEffect(() => {
-    if (!enableDialogElement) {
-      const initialFocus = (focusContainerElement: HTMLElement | null) => {
-        const containerElement = focusContainerElement || innerModal.current;
-        const primaryFocusElement =
-          containerElement &&
-          (containerElement.querySelector<HTMLElement | SVGElement>(
-            selectorPrimaryFocus
-          ) ||
-            (danger &&
-              containerElement.querySelector<HTMLElement | SVGElement>(
-                `.${prefix}--btn--secondary`
-              )));
-
-        if (primaryFocusElement) {
-          return primaryFocusElement;
-        }
-
-        return button && button.current;
-      };
-
-      const focusButton = (focusContainerElement: HTMLElement | null) => {
-        const target = initialFocus(focusContainerElement);
-        if (target !== null) {
-          target.focus();
+    // Focus launderButtonRef on unmount
+    useEffect(() => {
+      return () => {
+        if (enablePresence && launcherButtonRef) {
+          setTimeout(() => {
+            if ('current' in launcherButtonRef) {
+              launcherButtonRef.current?.focus();
+            }
+          });
         }
       };
+    }, [enablePresence, launcherButtonRef]);
 
-      if (open) {
-        focusButton(innerModal.current);
+    useEffect(() => {
+      if (!enableDialogElement) {
+        const initialFocus = (focusContainerElement: HTMLElement | null) => {
+          const containerElement = focusContainerElement || innerModal.current;
+          const primaryFocusElement =
+            containerElement &&
+            (containerElement.querySelector<HTMLElement | SVGElement>(
+              selectorPrimaryFocus
+            ) ||
+              (danger &&
+                containerElement.querySelector<HTMLElement | SVGElement>(
+                  `.${prefix}--btn--secondary`
+                )));
+
+          if (primaryFocusElement) {
+            return primaryFocusElement;
+          }
+
+          return button && button.current;
+        };
+
+        const focusButton = (focusContainerElement: HTMLElement | null) => {
+          const target = initialFocus(focusContainerElement);
+          if (target !== null) {
+            target.focus();
+          }
+        };
+
+        if (open) {
+          focusButton(innerModal.current);
+        }
       }
-    }
-  }, [open, selectorPrimaryFocus, danger, prefix, enableDialogElement]);
+    }, [open, selectorPrimaryFocus, danger, prefix, enableDialogElement]);
 
-  useIsomorphicEffect(() => {
-    if (contentRef.current) {
-      setIsScrollable(
-        contentRef.current.scrollHeight > contentRef.current.clientHeight
-      );
-    }
-
-    function handler() {
+    useIsomorphicEffect(() => {
       if (contentRef.current) {
         setIsScrollable(
           contentRef.current.scrollHeight > contentRef.current.clientHeight
         );
       }
-    }
 
-    const debouncedHandler = debounce(handler, 200);
-    window.addEventListener('resize', debouncedHandler);
-    return () => {
-      debouncedHandler.cancel();
-      window.removeEventListener('resize', debouncedHandler);
-    };
-  }, []);
+      function handler() {
+        if (contentRef.current) {
+          setIsScrollable(
+            contentRef.current.scrollHeight > contentRef.current.clientHeight
+          );
+        }
+      }
 
-  // AILabel always size `sm`
-  const candidate = slug ?? decorator;
-  const candidateIsAILabel = isComponentElement(candidate, AILabel);
-  const normalizedDecorator = candidateIsAILabel
-    ? cloneElement(candidate, { size: 'sm' })
-    : null;
+      const debouncedHandler = debounce(handler, 200);
+      window.addEventListener('resize', debouncedHandler);
+      return () => {
+        debouncedHandler.cancel();
+        window.removeEventListener('resize', debouncedHandler);
+      };
+    }, []);
 
-  const modalButton = (
-    <div className={`${prefix}--modal-close-button`}>
-      <IconButton
-        className={modalCloseButtonClass}
-        label={closeButtonLabel}
-        onClick={onRequestClose}
-        aria-label={closeButtonLabel}
-        align="left"
-        ref={button}>
-        <Close
-          size={20}
-          aria-hidden="true"
-          tabIndex="-1"
-          className={`${modalCloseButtonClass}__icon`}
-        />
-      </IconButton>
-    </div>
-  );
+    // AILabel always size `sm`
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'sm' })
+      : null;
 
-  // alertdialog is the only permitted aria role for a native dialog element
-  // https://www.w3.org/TR/html-aria/#docconformance:~:text=Role%3A-,alertdialog,-.%20(dialog%20is
-  const isAlertDialog = alert && !passiveModal;
-
-  const modalBody = enableDialogElement ? (
-    <Dialog
-      open={open}
-      focusAfterCloseRef={launcherButtonRef}
-      modal
-      ref={innerModal}
-      role={isAlertDialog ? 'alertdialog' : ''}
-      aria-describedby={isAlertDialog ? modalBodyId : ''}
-      className={containerClasses}
-      aria-label={ariaLabel}>
-      <div className={`${prefix}--modal-header`}>
-        {modalLabel && (
-          <Text
-            as="h2"
-            id={modalLabelId}
-            className={`${prefix}--modal-header__label`}>
-            {modalLabel}
-          </Text>
-        )}
-        <Text
-          as="h2"
-          id={modalHeadingId}
-          className={`${prefix}--modal-header__heading`}>
-          {modalHeading}
-        </Text>
-        {decorator ? (
-          <div className={`${prefix}--modal--inner__decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
-        <div className={`${prefix}--modal-close-button`}>
-          <IconButton
-            className={modalCloseButtonClass}
-            label={closeButtonLabel}
-            onClick={onRequestClose}
-            aria-label={closeButtonLabel}
-            align="left"
-            ref={button}>
-            <Close
-              size={20}
-              aria-hidden="true"
-              tabIndex="-1"
-              className={`${modalCloseButtonClass}__icon`}
-            />
-          </IconButton>
-        </div>
+    const modalButton = (
+      <div className={`${prefix}--modal-close-button`}>
+        <IconButton
+          className={modalCloseButtonClass}
+          label={closeButtonLabel}
+          onClick={onRequestClose}
+          aria-label={closeButtonLabel}
+          align="left"
+          ref={button}>
+          <Close
+            size={20}
+            aria-hidden="true"
+            tabIndex="-1"
+            className={`${modalCloseButtonClass}__icon`}
+          />
+        </IconButton>
       </div>
-      <Layer
-        ref={contentRef}
-        id={modalBodyId}
-        className={contentClasses}
-        {...hasScrollingContentProps}>
-        {children}
-      </Layer>
-      {!passiveModal && (
-        <ButtonSet className={footerClasses} aria-busy={loadingActive}>
-          {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
-            ? secondaryButtons.map(
-                ({ buttonText, onClick: onButtonClick }, i) => (
-                  <Button
-                    key={`${buttonText}-${i}`}
-                    kind="secondary"
-                    onClick={onButtonClick}>
-                    {buttonText}
-                  </Button>
-                )
-              )
-            : secondaryButtonText && (
-                <Button
-                  disabled={loadingActive}
-                  kind="secondary"
-                  onClick={onSecondaryButtonClick}
-                  ref={secondaryButton}>
-                  {secondaryButtonText}
-                </Button>
-              )}
-          <Button
-            className={primaryButtonClass}
-            kind={danger ? 'danger' : 'primary'}
-            disabled={loadingActive || primaryButtonDisabled}
-            onClick={onRequestSubmit}
-            ref={button}>
-            {loadingStatus === 'inactive' ? (
-              primaryButtonText
-            ) : (
-              <InlineLoading
-                status={loadingStatus}
-                description={loadingDescription}
-                iconDescription={loadingIconDescription}
-                className={`${prefix}--inline-loading--btn`}
-                onSuccess={onLoadingSuccess}
-              />
-            )}
-          </Button>
-        </ButtonSet>
-      )}
-    </Dialog>
-  ) : (
-    <>
-      {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!enableDialogElement && !focusTrapWithoutSentinels && (
-        <span
-          ref={startTrap}
-          tabIndex={0}
-          role="link"
-          className={`${prefix}--visually-hidden`}>
-          Focus sentinel
-        </span>
-      )}
-      <div
+    );
+
+    // alertdialog is the only permitted aria role for a native dialog element
+    // https://www.w3.org/TR/html-aria/#docconformance:~:text=Role%3A-,alertdialog,-.%20(dialog%20is
+    const isAlertDialog = alert && !passiveModal;
+
+    const modalBody = enableDialogElement ? (
+      <Dialog
+        open={open}
+        focusAfterCloseRef={launcherButtonRef}
+        modal
         ref={innerModal}
-        role="dialog"
-        {...alertDialogProps}
+        role={isAlertDialog ? 'alertdialog' : ''}
+        aria-describedby={isAlertDialog ? modalBodyId : ''}
         className={containerClasses}
         aria-label={ariaLabel}
-        aria-modal="true"
-        tabIndex={-1}>
+        data-exiting={presenceContext?.isExiting || undefined}>
         <div className={`${prefix}--modal-header`}>
-          {passiveModal && modalButton}
           {modalLabel && (
             <Text
               as="h2"
@@ -752,16 +714,29 @@ const Modal = React.forwardRef(function Modal(
             className={`${prefix}--modal-header__heading`}>
             {modalHeading}
           </Text>
-          {slug ? (
-            normalizedDecorator
-          ) : decorator ? (
+          {decorator ? (
             <div className={`${prefix}--modal--inner__decorator`}>
               {normalizedDecorator}
             </div>
           ) : (
             ''
           )}
-          {!passiveModal && modalButton}
+          <div className={`${prefix}--modal-close-button`}>
+            <IconButton
+              className={modalCloseButtonClass}
+              label={closeButtonLabel}
+              onClick={onRequestClose}
+              aria-label={closeButtonLabel}
+              align="left"
+              ref={button}>
+              <Close
+                size={20}
+                aria-hidden="true"
+                tabIndex="-1"
+                className={`${modalCloseButtonClass}__icon`}
+              />
+            </IconButton>
+          </div>
         </div>
         <Layer
           ref={contentRef}
@@ -812,34 +787,133 @@ const Modal = React.forwardRef(function Modal(
             </Button>
           </ButtonSet>
         )}
-      </div>
-      {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!enableDialogElement && !focusTrapWithoutSentinels && (
-        <span
-          ref={endTrap}
-          tabIndex={0}
-          role="link"
-          className={`${prefix}--visually-hidden`}>
-          Focus sentinel
-        </span>
-      )}
-    </>
-  );
+      </Dialog>
+    ) : (
+      <>
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        {!enableDialogElement && !focusTrapWithoutSentinels && (
+          <span
+            ref={startTrap}
+            tabIndex={0}
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+        )}
+        <div
+          ref={innerModal}
+          role="dialog"
+          {...alertDialogProps}
+          className={containerClasses}
+          aria-label={ariaLabel}
+          aria-modal="true"
+          tabIndex={-1}>
+          <div className={`${prefix}--modal-header`}>
+            {passiveModal && modalButton}
+            {modalLabel && (
+              <Text
+                as="h2"
+                id={modalLabelId}
+                className={`${prefix}--modal-header__label`}>
+                {modalLabel}
+              </Text>
+            )}
+            <Text
+              as="h2"
+              id={modalHeadingId}
+              className={`${prefix}--modal-header__heading`}>
+              {modalHeading}
+            </Text>
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div className={`${prefix}--modal--inner__decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
+            {!passiveModal && modalButton}
+          </div>
+          <Layer
+            ref={contentRef}
+            id={modalBodyId}
+            className={contentClasses}
+            {...hasScrollingContentProps}>
+            {children}
+          </Layer>
+          {!passiveModal && (
+            <ButtonSet className={footerClasses} aria-busy={loadingActive}>
+              {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+                ? secondaryButtons.map(
+                    ({ buttonText, onClick: onButtonClick }, i) => (
+                      <Button
+                        key={`${buttonText}-${i}`}
+                        kind="secondary"
+                        onClick={onButtonClick}>
+                        {buttonText}
+                      </Button>
+                    )
+                  )
+                : secondaryButtonText && (
+                    <Button
+                      disabled={loadingActive}
+                      kind="secondary"
+                      onClick={onSecondaryButtonClick}
+                      ref={secondaryButton}>
+                      {secondaryButtonText}
+                    </Button>
+                  )}
+              <Button
+                className={primaryButtonClass}
+                kind={danger ? 'danger' : 'primary'}
+                disabled={loadingActive || primaryButtonDisabled}
+                onClick={onRequestSubmit}
+                ref={button}>
+                {loadingStatus === 'inactive' ? (
+                  primaryButtonText
+                ) : (
+                  <InlineLoading
+                    status={loadingStatus}
+                    description={loadingDescription}
+                    iconDescription={loadingIconDescription}
+                    className={`${prefix}--inline-loading--btn`}
+                    onSuccess={onLoadingSuccess}
+                  />
+                )}
+              </Button>
+            </ButtonSet>
+          )}
+        </div>
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        {!enableDialogElement && !focusTrapWithoutSentinels && (
+          <span
+            ref={endTrap}
+            tabIndex={0}
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+        )}
+      </>
+    );
 
-  return (
-    <Layer
-      {...rest}
-      level={0}
-      onKeyDown={handleKeyDown}
-      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-      onBlur={handleBlur}
-      className={modalClasses}
-      role="presentation"
-      ref={ref}>
-      {modalBody}
-    </Layer>
-  );
-});
+    return (
+      <Layer
+        {...rest}
+        level={0}
+        onKeyDown={handleKeyDown}
+        onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
+        onBlur={handleBlur}
+        className={modalClasses}
+        role="presentation"
+        ref={mergedRefs}
+        data-exiting={presenceContext?.isExiting || undefined}>
+        {modalBody}
+      </Layer>
+    );
+  }
+);
 
 Modal.propTypes = {
   /**

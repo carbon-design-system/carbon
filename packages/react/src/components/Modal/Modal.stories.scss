@@ -18,13 +18,22 @@
 .experimental-modal {
   @include modal.modal(
     $enable-experimental-focus-wrap-without-sentinels: true,
-    $enable-dialog-element: true
+    $enable-dialog-element: true,
+    $enable-presence: true
   );
-  @include dialog.dialog();
+  @include dialog.dialog($enable-presence: true);
   @include text-input.text-input();
   @include select.select();
   @include dropdown.dropdown();
   @include multiselect.multiselect();
+}
+
+.with-presence {
+  @include modal.modal(
+    $enable-experimental-focus-wrap-without-sentinels: false,
+    $enable-dialog-element: false,
+    $enable-presence: true
+  );
 }
 
 .sb-notification p {
