@@ -16,8 +16,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Skeleton](#skeleton)
+- [StructuredList](#structuredList)
+  - [Overview](#overview)
+  - [Skeleton](#skeleton)
+  - [Initial Row Selection](#initial-row-selection)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -43,6 +45,17 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(StructuredListStories.Skeleton),
+    },
+  ]}
+/>
+
+## Initial Row Selection 
+<Canvas
+  of={StructuredListStories.InitialSelection}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(StructuredListStories.InitialSelection),
     },
   ]}
 />
