@@ -360,13 +360,8 @@ export const initCarousel = (
   };
 
   /**
-   * Function to destroy swipe events for the carousel.
-   * This function is used to unregister the swipe event listeners attached to the carousel container.
-   *
-   * @param {HTMLElement} carouselContainer - The DOM element representing the carousel container.
-   * @param {Function} navigateNext - The function to call when swiping right.
-   * @param {Function} navigatePrev - The function to call when swiping left.
-   * @param {boolean} [clearCache=true] - Whether to clear the cache after unregistering events.
+   * Removes event listeners for 'animationend' and 'transitionend' events from all elements with references stored in the `refs` object.
+   * Also registers swipe events if `excludeSwipeSupport` is false.
    */
   const destroyEvents = () => {
     Object.values(refs).forEach((el) => {
