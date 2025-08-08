@@ -29,15 +29,13 @@ describe('cds-checkbox', function () {
     expect(el.textContent.trim()).to.equal('test label');
   });
 
-  it('should use default-checked to set the default value of the <input> checkbox', async () => {
+  it('should use default-checked to set the default value of the checkbox', async () => {
     const checkbox = html`<cds-checkbox default-checked
       >Checkbox Label</cds-checkbox
     >`;
     const el = await fixture(checkbox);
 
-    const inputElement = el.shadowRoot.querySelector('input');
-
-    expect(inputElement.hasAttribute('checked')).to.be.true;
+    expect(el.hasAttribute('checked')).to.be.true;
   });
 
   it('should disable the <input> if disabled is provided as an attribute', async () => {
@@ -48,18 +46,16 @@ describe('cds-checkbox', function () {
     expect(inputElement.hasAttribute('disabled')).to.be.true;
   });
 
-  it('should set checked on the <input> if checked is provided as a prop', async () => {
+  it('should set checked on the checkbox if checked is provided as a prop', async () => {
     const checked = html`<cds-checkbox checked>Checkbox Label</cds-checkbox>`;
     const el = await fixture(checked);
 
-    const inputElement = el.shadowRoot.querySelector('input');
-    expect(inputElement.hasAttribute('checked')).to.be.true;
+    expect(el.hasAttribute('checked')).to.be.true;
 
     const notChecked = html`<cds-checkbox>Checkbox Label</cds-checkbox>`;
     const elem = await fixture(notChecked);
 
-    const inputElem = elem.shadowRoot.querySelector('input');
-    expect(inputElem.hasAttribute('checked')).to.be.false;
+    expect(elem.hasAttribute('checked')).to.be.false;
   });
 
   it('should hide the label if hide-label is provided as an attribute', async () => {
