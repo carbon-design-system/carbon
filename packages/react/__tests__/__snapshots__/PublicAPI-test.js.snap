@@ -13,10 +13,78 @@ Map {
       },
       "aiTextLabel": [Function],
       "align": [Function],
+      "alignmentAxisOffset": Object {
+        "type": "number",
+      },
       "aria-label": Object {
         "type": "string",
       },
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "autoAlign": Object {
+        "type": "bool",
+      },
+      "autoAlignBoundary": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Array [
+                  "clippingAncestors",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            Object {
+              "type": "elementType",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "elementType",
+                },
+              ],
+              "type": "arrayOf",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "height": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "width": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "x": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "y": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "exact",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "caret": Object {
         "type": "bool",
       },
       "children": Object {
@@ -24,6 +92,18 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "dropShadow": Object {
+        "type": "bool",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "isTabTip": Object {
+        "type": "bool",
       },
       "kind": Object {
         "args": Array [
@@ -33,6 +113,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "onRequestClose": Object {
+        "type": "func",
       },
       "onRevertClick": Object {
         "type": "func",
@@ -6613,6 +6696,9 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "align": [Function],
+      "alignmentAxisOffset": Object {
+        "type": "number",
+      },
       "as": Object {
         "args": Array [
           Array [
@@ -9574,40 +9660,76 @@ Map {
   },
   "Toggletip" => Object {
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "left-bottom",
-            "left-top",
-            "right",
-            "right-bottom",
-            "right-top",
-            "top-start",
-            "top-end",
-            "bottom-start",
-            "bottom-end",
-            "left-end",
-            "left-start",
-            "right-end",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "alignmentAxisOffset": Object {
         "type": "number",
       },
       "as": Object {
-        "type": "elementType",
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "autoAlign": Object {
+        "type": "bool",
+      },
+      "autoAlignBoundary": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Array [
+                  "clippingAncestors",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            Object {
+              "type": "elementType",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "elementType",
+                },
+              ],
+              "type": "arrayOf",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "height": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "width": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "x": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "y": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "exact",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "caret": Object {
         "type": "bool",
       },
       "children": Object {
@@ -9618,6 +9740,18 @@ Map {
       },
       "defaultOpen": Object {
         "type": "bool",
+      },
+      "dropShadow": Object {
+        "type": "bool",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "isTabTip": Object {
+        "type": "bool",
+      },
+      "onRequestClose": Object {
+        "type": "func",
       },
     },
   },
@@ -11899,10 +12033,78 @@ Map {
       },
       "aiTextLabel": [Function],
       "align": [Function],
+      "alignmentAxisOffset": Object {
+        "type": "number",
+      },
       "aria-label": Object {
         "type": "string",
       },
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "autoAlign": Object {
+        "type": "bool",
+      },
+      "autoAlignBoundary": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Array [
+                  "clippingAncestors",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            Object {
+              "type": "elementType",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "elementType",
+                },
+              ],
+              "type": "arrayOf",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "height": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "width": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "x": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "y": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "exact",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "caret": Object {
         "type": "bool",
       },
       "children": Object {
@@ -11910,6 +12112,18 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "dropShadow": Object {
+        "type": "bool",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "isTabTip": Object {
+        "type": "bool",
       },
       "kind": Object {
         "args": Array [
@@ -11919,6 +12133,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "onRequestClose": Object {
+        "type": "func",
       },
       "onRevertClick": Object {
         "type": "func",
