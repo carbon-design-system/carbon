@@ -289,6 +289,8 @@ export const initCarousel = (
             transitionComplete(viewItem);
           }
         };
+        // store reference on the element for later removal
+        (viewItem as any)._carouselListener = listener;
 
         viewItem.addEventListener('animationend', listener);
         viewItem.addEventListener('transitionend', listener);
@@ -367,6 +369,12 @@ export const initCarousel = (
    * @param {boolean} [clearCache=true] - Whether to clear the cache after unregistering events.
    */
   const destroyEvents = () => {
+    Object.values(refs).forEach((el) => {
+      if (el && (el as any)._carouselListener) {
+        el.removeEventListener('animationend', (el as any)._carouselListener);
+        el.removeEventListener('transitionend', (el as any)._carouselListener);
+      }
+    });
     registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, true);
   };
   /**
