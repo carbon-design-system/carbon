@@ -114,6 +114,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
       middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
+      strategy: 'fixed',
     });
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
