@@ -2072,12 +2072,6 @@ Map {
           "type": "func",
         },
       },
-      "translationKeys": Array [
-        "carbon.table.batch.cancel",
-        "carbon.table.batch.items.selected",
-        "carbon.table.batch.item.selected",
-        "carbon.table.batch.selectAll",
-      ],
     },
     "TableBody": Object {
       "propTypes": Object {
@@ -2296,9 +2290,6 @@ Map {
         },
       },
       "render": [Function],
-      "translationKeys": Array [
-        "carbon.table.header.icon.description",
-      ],
     },
     "TableRow": Object {
       "$$typeof": Symbol(react.forward_ref),
@@ -2636,16 +2627,6 @@ Map {
         "type": "bool",
       },
     },
-    "translationKeys": Array [
-      "carbon.table.row.expand",
-      "carbon.table.row.collapse",
-      "carbon.table.all.expand",
-      "carbon.table.all.collapse",
-      "carbon.table.all.select",
-      "carbon.table.all.unselect",
-      "carbon.table.row.select",
-      "carbon.table.row.unselect",
-    ],
   },
   "DataTableSkeleton" => Object {
     "propTypes": Object {
@@ -8453,12 +8434,6 @@ Map {
         "type": "func",
       },
     },
-    "translationKeys": Array [
-      "carbon.table.batch.cancel",
-      "carbon.table.batch.items.selected",
-      "carbon.table.batch.item.selected",
-      "carbon.table.batch.selectAll",
-    ],
   },
   "TableBody" => Object {
     "propTypes": Object {
@@ -8677,9 +8652,6 @@ Map {
       },
     },
     "render": [Function],
-    "translationKeys": Array [
-      "carbon.table.header.icon.description",
-    ],
   },
   "TableRow" => Object {
     "$$typeof": Symbol(react.forward_ref),
