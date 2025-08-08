@@ -8,6 +8,7 @@
 import React from 'react';
 import mdx from './StructuredList.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { DefinitionTooltip } from '@carbon/react'; // I need remove this
 
 import {
   StructuredListWrapper,
@@ -270,4 +271,26 @@ Skeleton.argTypes = {
       type: 'number',
     },
   },
+};
+
+// I need remove this
+export const ReproIssue17391 = () => {
+  return (
+    <StructuredListWrapper>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>Key</StructuredListCell>
+          <StructuredListCell head>Value</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        <StructuredListRow>
+          <StructuredListCell>
+            <DefinitionTooltip definition="Definition">Hello</DefinitionTooltip>
+          </StructuredListCell>
+          <StructuredListCell>world</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
 };
