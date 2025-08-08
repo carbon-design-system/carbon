@@ -146,4 +146,21 @@ describe('Feedback', () => {
     });
     expect(button).not.toHaveClass(`${prefix}--copy-btn--animating`);
   });
+
+  it('should display the correct feedback text after mouseleave', async () => {
+    render(
+      <Copy
+        title="Copy title"
+        data-testid="copy-button-8"
+        aria-label="Copy to clipboard">
+        <CopyIcon />
+      </Copy>
+    );
+
+    const button = screen.getByTestId('copy-button-8');
+    expect(screen.getAllByText('Copy to clipboard').length).toBe(1);
+    await user.click(button);
+    fireEvent.mouseLeave(button);
+    expect(screen.getAllByText('Copied!').length).toBe(1);
+  });
 });
