@@ -375,7 +375,9 @@ export const initCarousel = (
         el.removeEventListener('transitionend', (el as any)._carouselListener);
       }
     });
-    registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, true);
+    if (!excludeSwipeSupport) {
+      registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, true);
+    }
   };
   /**
    * Retrieves carousel items from a given container element.
@@ -415,7 +417,7 @@ export const initCarousel = (
     reset,
     goToIndex,
     getActiveItem,
-    destroyEvents: !excludeSwipeSupport ? destroyEvents : null,
+    destroyEvents: destroyEvents,
     allViews: refs,
   };
 };
