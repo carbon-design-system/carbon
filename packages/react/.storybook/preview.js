@@ -156,7 +156,6 @@ const parameters = {
       opacity: 0.5,
     },
     options: {
-      white: { name: 'white', value: white.background },
       g10: { name: 'g10', value: g10.background },
       g90: { name: 'g90', value: g90.background },
       g100: { name: 'g100', value: g100.background },
@@ -326,7 +325,6 @@ const parameters = {
   },
   chromatic: {
     modes: {
-      white: allModes['white'],
       g10: allModes['g10'],
       g90: allModes['g90'],
       g100: allModes['g100'],
