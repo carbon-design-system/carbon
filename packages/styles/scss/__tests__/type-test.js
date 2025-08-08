@@ -50,7 +50,7 @@ describe('@carbon/styles/scss/type', () => {
       'font-weight': true,
     });
     expect(api.variables).toMatchInlineSnapshot(`
-      Array [
+      [
         "caption-01",
         "caption-02",
         "label-01",

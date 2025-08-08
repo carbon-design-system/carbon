@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-function defineType(type, { fields = {}, generate } = {}) {
+export function defineType(type, { fields = {}, generate } = {}) {
   const keys = Object.keys(fields);
 
   if (typeof generate !== 'function') {
@@ -71,7 +69,3 @@ function defineType(type, { fields = {}, generate } = {}) {
     type,
   };
 }
-
-module.exports = {
-  defineType,
-};

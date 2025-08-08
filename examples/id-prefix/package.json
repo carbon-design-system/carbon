@@ -1,8 +1,22 @@
 {
   "name": "id-prefix",
+  "description": "ID prefix example",
   "private": true,
   "version": "0.86.0-rc.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "examples/id-prefix"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
