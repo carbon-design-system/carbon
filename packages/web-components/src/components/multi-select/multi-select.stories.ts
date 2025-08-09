@@ -22,6 +22,7 @@ import '../ai-label';
 import '../button';
 import '../toggle-tip';
 import '../icon-button';
+import '../link';
 import '../../../.storybook/templates/with-layer';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
@@ -342,6 +343,28 @@ export const Filterable = {
   },
 };
 
+export const FilterableWithSelectAll = {
+  decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
+  render: () => {
+    return html`
+      <cds-multi-select
+        filterable="true"
+        title-text="FilterableMultiselect title"
+        helper-text="This is helper text"
+        select-all>
+        <cds-multi-select-item is-select-all>All roles</cds-multi-select-item>
+
+        <cds-multi-select-item value="editor">Editor</cds-multi-select-item>
+        <cds-multi-select-item value="owner">Owner</cds-multi-select-item>
+        <cds-multi-select-item disabled value="staging"
+          >Reader - a disabled itme</cds-multi-select-item
+        >
+        <cds-multi-select-item value="uploader">Uploader</cds-multi-select-item>
+      </cds-multi-select>
+    `;
+  },
+};
+
 export const FilterableWithAILabel = {
   render: () => {
     return html`
@@ -592,7 +615,7 @@ export const WithToggletipLabel = {
                 sed do eiusmod tempor incididunt ut fsil labore et dolore magna
                 aliqua.
               </p>
-              <cds-link slot="actions">Test</cds-link>
+              <cds-link href="#" slot="actions">Test</cds-link>
               <cds-button slot="actions">Button</cds-button>
             </cds-toggletip>
           </span>

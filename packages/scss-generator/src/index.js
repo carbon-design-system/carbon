@@ -5,13 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { definitions, types } from './types/index.js';
+import { generate } from './generate/index.js';
 
-const { definitions, types } = require('./types');
-const { generate } = require('./generate');
-
-module.exports = {
-  definitions,
-  generate,
-  types,
-};
+export { definitions, generate, types };

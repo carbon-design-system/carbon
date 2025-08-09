@@ -6,7 +6,7 @@
  */
 
 // @ts-nocheck
-import rangePlugin, { Config } from 'flatpickr/dist/plugins/rangePlugin';
+import rangePlugin, { Config } from 'flatpickr/dist/plugins/rangePlugin.js';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
 import on from '../../globals/mixins/on';
