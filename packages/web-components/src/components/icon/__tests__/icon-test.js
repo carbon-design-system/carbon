@@ -38,10 +38,10 @@ describe('cds-icon', function () {
 
   it('should apply custom classes', async function () {
     const el = await fixture(
-      html`<cds-icon .icon=${Add16} class="my-custom-class"></cds-icon>`
+      html`<cds-icon .icon=${Add16} class="custom-class"></cds-icon>`
     );
 
     const svg = el.shadowRoot.querySelector('svg');
-    expect(svg.classList.contains('my-custom-class')).to.be.true;
+    expect(svg.classList.contains('custom-class')).to.be.true;
   });
 });

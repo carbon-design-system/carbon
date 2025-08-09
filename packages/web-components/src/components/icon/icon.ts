@@ -20,8 +20,7 @@ import { createIconTemplate } from '../../globals/internal/icon-loader-utils';
 @customElement(`${prefix}-icon`)
 class CDSIcon extends LitElement {
   /**
-   * Direct imports, e.g.
-   * import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
+   * The imported icon
    */
   @property({ type: Object })
   icon?: any;
