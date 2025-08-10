@@ -55,8 +55,6 @@ describe('Toggletip', () => {
     expect(container.firstChild).not.toHaveClass(`${prefix}--toggletip--open`);
     expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
   });
-  // TODO: Should these close tests be moved inside of `Toggletip Closing
-  // Behavior`?
   it('should close on Escape', async () => {
     const { container } = render(
       <Toggletip data-testid="toggletip" defaultOpen>
