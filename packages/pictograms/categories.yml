@@ -646,6 +646,7 @@ categories:
       - it--infrastructure-software
       - linuxone-5
       - mainframe-qualities-of-service
+      - ibm--power11
       - reliability
       - resilience
       - sap--hana
@@ -1349,7 +1350,7 @@ categories:
       - train
       - travel-and-expenses
       - tunnel
-  - name: Watson
+  - name: watsonx
     members:
       - alchemy--data--news
       - alchemy--language

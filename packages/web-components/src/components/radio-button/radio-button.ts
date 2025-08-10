@@ -88,6 +88,10 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
     return this._radio.name;
   }
 
+  get disabled() {
+    return this._radio.disabled;
+  }
+
   compareDocumentPosition(other: RadioButtonDelegate) {
     return this._radio.compareDocumentPosition(other._radio);
   }
@@ -183,9 +187,14 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         (this.constructor as typeof CDSRadioButton)?.slugItem
       )
     ) {
-      const { orientation, _radioButtonDelegate: radioButtonDelegate } = this;
+      const {
+        orientation,
+        _radioButtonDelegate: radioButtonDelegate,
+        disabled,
+        disabledItem,
+      } = this;
       const manager = this._manager;
-      if (radioButtonDelegate && manager) {
+      if (radioButtonDelegate && manager && !disabled && !disabledItem) {
         const navigationDirectionForKey =
           orientation === RADIO_BUTTON_ORIENTATION.HORIZONTAL
             ? navigationDirectionForKeyHorizontal
@@ -343,9 +352,14 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           manager!.add(radioButtonDelegate);
         }
       }
+      // Disabled items should have tabIndex -1.
       inputNode.setAttribute(
         'tabindex',
-        !name || !manager || !manager.shouldBeFocusable(radioButtonDelegate)
+        !name ||
+          !manager ||
+          this.disabled ||
+          this.disabledItem ||
+          !manager.shouldBeFocusable(radioButtonDelegate)
           ? '-1'
           : '0'
       );
@@ -381,7 +395,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}">
-          ${labelText}
+          <slot> ${labelText} </slot>
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${this._handleSlotChange}"></slot
         ></span>

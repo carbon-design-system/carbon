@@ -514,4 +514,39 @@ describe('ComposedModal', () => {
       expect(focusElem).toHaveFocus();
     });
   });
+
+  it('should close modal when ESC key is pressed regardless of focus', async () => {
+    const onClose = jest.fn();
+    render(
+      <div>
+        <div
+          data-testid="outside-area"
+          style={{ width: '100px', height: '100px' }}>
+          Outside area
+        </div>
+        <ComposedModal open onClose={onClose}>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>
+            This is the modal body content
+            <TextInput
+              data-modal-primary-focus
+              id="text-input-1"
+              labelText="Domain name"
+            />
+          </ModalBody>
+          <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+        </ComposedModal>
+      </div>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+    await userEvent.click(screen.getByTestId('outside-area'));
+
+    const inputField = screen.getByLabelText('Domain name');
+    expect(inputField).not.toHaveFocus();
+    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
+    expect(onClose).toHaveBeenCalled();
+  });
 });

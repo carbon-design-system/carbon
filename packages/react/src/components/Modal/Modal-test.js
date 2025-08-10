@@ -893,4 +893,40 @@ describe('events', () => {
     await keyboard('{Enter}');
     expect(onRequestSubmit).toHaveBeenCalledTimes(1);
   });
+
+  it('should close modal when ESC key is pressed after clicking outside to lose focus', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <div>
+        <div
+          data-testid="outside-area"
+          style={{ width: '100px', height: '100px' }}>
+          Outside area
+        </div>
+        <Modal
+          open
+          primaryButtonText="Primary button"
+          secondaryButtonText="Secondary button"
+          onRequestClose={onRequestClose}>
+          <p>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </Modal>
+      </div>
+    );
+
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+    expect(screen.getByLabelText('Domain name')).toHaveFocus();
+    await userEvent.click(screen.getByTestId('outside-area'));
+    expect(screen.getByLabelText('Domain name')).not.toHaveFocus();
+    await userEvent.keyboard('{Escape}');
+    expect(onRequestClose).toHaveBeenCalled();
+  });
 });
