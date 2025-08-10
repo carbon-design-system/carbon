@@ -1145,12 +1145,6 @@ $list-box-menu-width: convert.to-rem(300px);
     @include high-contrast-mode('focus');
   }
 
-  .#{$prefix}--list-box__menu-icon > svg,
-  .#{$prefix}--list-box__selection > svg,
-  .#{$prefix}--list-box__selection--multi > svg {
-    @include high-contrast-mode('icon-fill');
-  }
-
   .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
     .#{$prefix}--list-box__selection::after {
     position: absolute;

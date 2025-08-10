@@ -23,7 +23,7 @@ import { createPortal } from 'react-dom';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
@@ -67,7 +67,9 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   mode?: 'full' | 'basic';
 
   /**
-   * Provide an optional function to be called when the Menu should be closed.
+   * Provide an optional function to be called when the Menu should be closed,
+   * including if the Menu is blurred, the user presses escape, or the Menu is
+   * a submenu and the user presses ArrowLeft.
    */
   onClose?: () => void;
 
@@ -117,12 +119,6 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     open,
     size = 'sm',
     legacyAutoalign = 'true',
-    // TODO: `ssr-friendly` doesn't support ESLint v9.
-    // https://github.com/kopiro/eslint-plugin-ssr-friendly/issues/30
-    // https://github.com/carbon-design-system/carbon/issues/18991
-    /*
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-    */
     target = canUseDOM && document.body,
     x = 0,
     y = 0,
@@ -384,8 +380,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   useEffect(() => {
-    if (open && focusableItems.length > 0) {
-      focusItem();
+    if (open) {
+      const raf = requestAnimationFrame(() => {
+        if (focusableItems.length > 0) {
+          focusItem();
+        }
+      });
+
+      return () => cancelAnimationFrame(raf);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, focusableItems]);
@@ -481,7 +483,9 @@ Menu.propTypes = {
   ),
 
   /**
-   * Provide an optional function to be called when the Menu should be closed.
+   * Provide an optional function to be called when the Menu should be closed,
+   * including if the Menu is blurred, the user presses escape, or the Menu is
+   * a submenu and the user presses ArrowLeft.
    */
   onClose: PropTypes.func,
 

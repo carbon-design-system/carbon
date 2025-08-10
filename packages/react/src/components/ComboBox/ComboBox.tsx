@@ -9,24 +9,25 @@ import cx from 'classnames';
 import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
+  cloneElement,
   forwardRef,
   useCallback,
-  type ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
   type ComponentType,
+  type FocusEvent,
   type ForwardedRef,
-  type ReactElement,
-  type RefAttributes,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
   type PropsWithChildren,
   type PropsWithRef,
-  type InputHTMLAttributes,
-  type MouseEvent,
-  type KeyboardEvent,
-  type FocusEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefAttributes,
 } from 'react';
 import { Text } from '../Text';
 import {
@@ -40,12 +41,14 @@ import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -197,7 +200,8 @@ export interface ComboBoxProps<ItemType>
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -381,6 +385,14 @@ export interface ComboBoxProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 const ComboBox = forwardRef(
@@ -425,6 +437,7 @@ const ComboBox = forwardRef(
       warnText,
       allowCustomValue = false,
       slug,
+      inputProps,
       ...rest
     } = props;
 
@@ -764,20 +777,11 @@ const ComboBox = forwardRef(
     const ItemToElement = itemToElement;
 
     // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
-    }
 
     const {
       // Prop getters
@@ -991,6 +995,7 @@ const ComboBox = forwardRef(
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
                 value: inputValue,
+                ...inputProps,
                 onChange: (e) => {
                   const newValue = e.target.value;
                   setInputValue(newValue);
@@ -1225,7 +1230,8 @@ ComboBox.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -1420,6 +1426,14 @@ ComboBox.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Specify native input attributes to place on the `<input>`, like maxLength.
+   * These are passed to downshift's getInputProps() and will override the
+   * internal input props.
+   * https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops
+   */
+  inputProps: PropTypes.object,
 };
 
 type ComboboxComponentProps<ItemType> = PropsWithRef<

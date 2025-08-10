@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,6 +39,12 @@ class CDSAccordion extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   isFlush = false;
+
+  /**
+   * Disable all accordion items inside this accordion.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -86,6 +92,34 @@ class CDSAccordion extends LitElement {
         }
       );
     }
+
+    if (changedProperties.has('disabled')) {
+      forEach(
+        this.querySelectorAll(
+          (this.constructor as typeof CDSAccordion).selectorAccordionItems
+        ),
+        (elem) => {
+          if (this.disabled) {
+            elem.setAttribute('disabled', '');
+          } else {
+            elem.removeAttribute('disabled');
+          }
+        }
+      );
+    }
+
+    // Marks the last accordion item for styling (simulates :last-child in Shadow DOM)
+    const items = Array.from(
+      this.querySelectorAll(
+        (this.constructor as typeof CDSAccordion).selectorAccordionItems
+      )
+    );
+    items.forEach((item) => item.removeAttribute('data-last-item'));
+
+    const lastVisible = items
+      .reverse()
+      .find((item) => !(item as HTMLElement).hidden);
+    lastVisible?.setAttribute('data-last-item', '');
   }
 
   render() {

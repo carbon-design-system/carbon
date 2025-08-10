@@ -17,7 +17,6 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
-@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 
 /// Select styles
@@ -74,9 +73,12 @@
       display: none;
     }
 
-    // Select text renders a little high on Firefox
-    @document url-prefix() {
-      // Removes dotted inner focus
+    //
+    /* This is for targeting styles specific to firefox */
+    /* Removes dotted inner focus */
+    /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+    /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+    @-moz-document url-prefix() {
       &:-moz-focusring,
       &::-moz-focus-inner {
         background-image: none;
@@ -168,6 +170,12 @@
     fill: $support-error;
   }
 
+  .#{$prefix}--select-input--inline__wrapper[data-invalid] {
+    .#{$prefix}--select__invalid-icon {
+      fill: $support-error;
+    }
+  }
+
   .#{$prefix}--select__invalid-icon--warning {
     fill: $support-warning;
   }
@@ -194,14 +202,6 @@
     align-items: center;
   }
 
-  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
-  .#{$prefix}--select--inline.#{$prefix}--select--invalid
-    .#{$prefix}--form__helper-text {
-    align-self: flex-start;
-    // Offset label text margin
-    margin-block-start: convert.to-rem(13px);
-  }
-
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
     margin-block-end: 0;
     margin-inline-start: $spacing-03;
@@ -216,19 +216,27 @@
     background-color: transparent;
     border-block-end: none;
     color: $text-primary;
-    inline-size: auto;
-    padding-inline: $spacing-03 $spacing-07;
+    inline-size: 100%;
+    padding-inline: $spacing-03 $spacing-09;
+
+    &:hover {
+      background-color: $field-hover;
+    }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus,
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus option,
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus optgroup {
     background-color: $background;
+
+    &:hover {
+      background-color: $field-hover;
+    }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $field;
+    background-color: $background;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
@@ -242,7 +250,10 @@
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon {
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--inline.#{$prefix}--select--warning
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon--warning {
     inset-inline-end: $spacing-07;
   }
 
@@ -264,6 +275,11 @@
 
   .#{$prefix}--select--readonly .#{$prefix}--select__arrow {
     fill: $icon-disabled;
+  }
+
+  .#{$prefix}--select--readonly.#{$prefix}--select--inline
+    .#{$prefix}--select-input:hover {
+    background-color: transparent;
   }
 
   // Skeleton State
@@ -391,7 +407,8 @@
   .#{$prefix}--select--slug
     .#{$prefix}--select-input:has(~ .#{$prefix}--slug):not(
       :has(~ .#{$prefix}--slug--revert)
-    ) {
+    ),
+  .#{$prefix}--select-input-has--ai-label {
     @include ai-gradient;
   }
 
@@ -418,11 +435,5 @@
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
     inset-inline-end: $spacing-11;
-  }
-
-  // Windows HCM fix
-
-  .#{$prefix}--select__arrow {
-    @include high-contrast-mode('icon-fill');
   }
 }

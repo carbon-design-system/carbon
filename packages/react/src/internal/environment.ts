@@ -12,15 +12,6 @@
  */
 export const canUseDOM = !!(
   typeof window !== 'undefined' &&
-  // TODO: `ssr-friendly` doesn't support ESLint v9.
-  // https://github.com/kopiro/eslint-plugin-ssr-friendly/issues/30
-  // https://github.com/carbon-design-system/carbon/issues/18991
-  /*
-  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
-  */
   window.document &&
-  /*
-  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
-  */
   window.document.createElement
 );

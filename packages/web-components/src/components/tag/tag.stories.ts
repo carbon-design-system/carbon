@@ -168,7 +168,7 @@ export const Dismissible = {
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
             size="${size}"
-            >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
+            >${Asleep16({ slot: 'icon' })}</cds-dismissible-tag
           >`
       )}`;
   },

@@ -529,3 +529,49 @@ export const ColumnAILabelSort = (args) => (
 );
 
 ColumnAILabelSort.argTypes = { ...sharedArgTypes };
+
+export const FullTableAI = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getCellProps,
+    }) => (
+      <TableContainer
+        aiEnabled
+        title="DataTable"
+        description="AI, full table"
+        className="ai-label-column-table">
+        <Table {...getTableProps()} aria-label="sample table">
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader
+                  key={header.key}
+                  {...getHeaderProps({ header, isSortable: true })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell {...getCellProps({ cell })} key={cell.id}>
+                    {cell.value}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+FullTableAI.argTypes = { ...sharedArgTypes };

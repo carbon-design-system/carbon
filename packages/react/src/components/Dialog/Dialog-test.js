@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import React, { useRef, useState } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
-
-import { unstable__Dialog as Dialog } from './';
+import { unstable__Dialog as Dialog, DialogCloseButton } from './';
 
 const prefix = 'cds';
 
@@ -74,34 +73,38 @@ describe('Dialog', () => {
 
       expect(onClick).toHaveBeenCalledTimes(1);
     });
+  });
 
-    // TODO: Move this to e2e/components/Dialog/Dialog-test.e2e.js once it exists
-    // --
-    // jsdom doesn't implement HTMLDialogElement: https://github.com/jsdom/jsdom/issues/3294
-    // All browser-based portions of the api will need to be tested in an actual browser.
-    it.skip('supports onCancel prop', async () => {
-      const user = userEvent.setup();
-      const onCancel = jest.fn();
-      render(<Dialog open onCancel={onCancel} />);
+  it('should bring focusAfterCloseRef element into focus on close when the ref is defined', async () => {
+    const DialogExample = () => {
+      const [open, setOpen] = useState(true);
+      const focusRef = useRef();
+      return (
+        <>
+          <Dialog
+            open={open}
+            focusAfterCloseRef={focusRef}
+            onClose={() => setOpen(false)}>
+            <DialogCloseButton
+              data-testid="close"
+              onClick={() => setOpen(false)}
+            />
+          </Dialog>
+          <button data-testid="focusElem" ref={focusRef}>
+            focus after close
+          </button>
+        </>
+      );
+    };
+    render(<DialogExample />);
 
-      // onCancel is fired when the dialog is closed by the escape key
-      await user.keyboard('[Escape]');
+    const closeButton = screen.getByTestId('close');
+    const focusElem = screen.getByTestId('focusElem');
 
-      expect(onCancel).toHaveBeenCalledTimes(1);
-    });
-
-    // TODO: Move this to e2e/components/Dialog/Dialog-test.e2e.js once it exists
-    // --
-    // jsdom doesn't implement HTMLDialogElement: https://github.com/jsdom/jsdom/issues/3294
-    // All browser-based portions of the api will need to be tested in an actual browser.
-    it.skip('supports onClose prop', async () => {
-      const user = userEvent.setup();
-      const onClose = jest.fn();
-      render(<Dialog open onClose={onClose} />);
-
-      // close the dialog via escape or click on close button
-
-      expect(onClose).toHaveBeenCalledTimes(1);
+    expect(focusElem).not.toHaveFocus();
+    await userEvent.click(closeButton);
+    await waitFor(() => {
+      expect(focusElem).toHaveFocus();
     });
   });
 });

@@ -46,12 +46,12 @@ export const AutoAlign = () => {
   });
 
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
+    <div style={{ width: '4900px', height: '4900px' }}>
       <div
         style={{
           position: 'absolute',
-          top: '2500px',
-          left: '2500px',
+          top: '2450px',
+          left: '2450px',
         }}
         ref={ref}>
         <OverflowMenu autoAlign={true}>

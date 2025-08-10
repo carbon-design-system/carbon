@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`normalize should return a normalized map of cells by id 1`] = `
-Object {
-  "a:fieldA": Object {
+{
+  "a:fieldA": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "a:fieldA",
-    "info": Object {
+    "info": {
       "header": "fieldA",
     },
     "isEditable": false,
@@ -14,11 +14,11 @@ Object {
     "isValid": true,
     "value": "fieldA",
   },
-  "a:fieldB": Object {
+  "a:fieldB": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "a:fieldB",
-    "info": Object {
+    "info": {
       "header": "fieldB",
     },
     "isEditable": false,
@@ -26,11 +26,11 @@ Object {
     "isValid": true,
     "value": "fieldB",
   },
-  "a:fieldC": Object {
+  "a:fieldC": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "a:fieldC",
-    "info": Object {
+    "info": {
       "header": "fieldC",
     },
     "isEditable": false,
@@ -38,11 +38,11 @@ Object {
     "isValid": true,
     "value": "fieldC",
   },
-  "b:fieldA": Object {
+  "b:fieldA": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "b:fieldA",
-    "info": Object {
+    "info": {
       "header": "fieldA",
     },
     "isEditable": false,
@@ -50,11 +50,11 @@ Object {
     "isValid": true,
     "value": "fieldA",
   },
-  "b:fieldB": Object {
+  "b:fieldB": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "b:fieldB",
-    "info": Object {
+    "info": {
       "header": "fieldB",
     },
     "isEditable": false,
@@ -62,11 +62,11 @@ Object {
     "isValid": true,
     "value": "fieldB",
   },
-  "b:fieldC": Object {
+  "b:fieldC": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "b:fieldC",
-    "info": Object {
+    "info": {
       "header": "fieldC",
     },
     "isEditable": false,
@@ -74,11 +74,11 @@ Object {
     "isValid": true,
     "value": "fieldC",
   },
-  "c:fieldA": Object {
+  "c:fieldA": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "c:fieldA",
-    "info": Object {
+    "info": {
       "header": "fieldA",
     },
     "isEditable": false,
@@ -86,11 +86,11 @@ Object {
     "isValid": true,
     "value": "fieldA",
   },
-  "c:fieldB": Object {
+  "c:fieldB": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "c:fieldB",
-    "info": Object {
+    "info": {
       "header": "fieldB",
     },
     "isEditable": false,
@@ -98,11 +98,11 @@ Object {
     "isValid": true,
     "value": "fieldB",
   },
-  "c:fieldC": Object {
+  "c:fieldC": {
     "errors": null,
     "hasAILabelHeader": false,
     "id": "c:fieldC",
-    "info": Object {
+    "info": {
       "header": "fieldC",
     },
     "isEditable": false,
@@ -114,9 +114,9 @@ Object {
 `;
 
 exports[`normalize should return a normalized map of rows by id 1`] = `
-Object {
-  "a": Object {
-    "cells": Array [
+{
+  "a": {
+    "cells": [
       "a:fieldA",
       "a:fieldB",
       "a:fieldC",
@@ -126,8 +126,8 @@ Object {
     "isExpanded": false,
     "isSelected": false,
   },
-  "b": Object {
-    "cells": Array [
+  "b": {
+    "cells": [
       "b:fieldA",
       "b:fieldB",
       "b:fieldC",
@@ -137,8 +137,8 @@ Object {
     "isExpanded": false,
     "isSelected": false,
   },
-  "c": Object {
-    "cells": Array [
+  "c": {
+    "cells": [
       "c:fieldA",
       "c:fieldB",
       "c:fieldC",
@@ -152,7 +152,7 @@ Object {
 `;
 
 exports[`normalize should return an array of the row ids 1`] = `
-Array [
+[
   "a",
   "b",
   "c",

@@ -7,3 +7,6 @@
 
 export * from './dateTimeFormat';
 export * from './overflowHandler';
+export * from '@internationalized/number';
+export type * from '@internationalized/number';
+export * from './documentLang';

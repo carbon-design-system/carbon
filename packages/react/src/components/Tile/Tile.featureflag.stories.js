@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from '.';
-import TileGroup from '../TileGroup/TileGroup';
+import { TileGroup } from '../TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
 import '../AILabel/ailabel-story.scss';

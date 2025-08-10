@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, type ForwardedRef, type Ref } from 'react';
+import { useCallback, useMemo, type ForwardedRef, type Ref } from 'react';
 
 /**
  * Merges multiple refs into a single callback ref.
@@ -15,10 +15,13 @@ import { useCallback, type ForwardedRef, type Ref } from 'react';
  * accepts an array of refs and returns a callback ref that, when attached to a
  * node, assigns that node to every ref in the array.
  */
-export const useMergedRefs = <T>(refs: ForwardedRef<T>[]): Ref<T> => {
+export const useMergedRefs = <T>(
+  refs: (ForwardedRef<T> | undefined)[]
+): Ref<T> => {
+  const memoizedRefs = useMemo(() => refs, refs);
   return useCallback(
     (node: T | null) => {
-      refs.forEach((ref) => {
+      memoizedRefs.forEach((ref) => {
         if (typeof ref === 'function') {
           ref(node);
         } else if (ref) {
@@ -26,6 +29,6 @@ export const useMergedRefs = <T>(refs: ForwardedRef<T>[]): Ref<T> => {
         }
       });
     },
-    [refs]
+    [memoizedRefs]
   );
 };

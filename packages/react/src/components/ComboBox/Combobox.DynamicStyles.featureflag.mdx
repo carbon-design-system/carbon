@@ -1,4 +1,4 @@
-import { Meta, Canvas } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as ComboBoxFeatureflagStories from './ComboBox.featureflag.stories.js';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
@@ -20,6 +20,9 @@ without the collision detection.
 
 **Note**: The flag has no effect when used with `autoAlign` because `autoAlign`
 includes both the dynamic positioning styles and collision detection.
+
+To use `autoAlign` your project needs to be using React v17+, see
+https://github.com/carbon-design-system/carbon/issues/18714.
 
 ## Enable dynamic setting of floating styles
 
@@ -45,7 +48,8 @@ includes both the dynamic positioning styles and collision detection.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboBoxFeatureflagStories.FloatingStyles),
+      onClick: () =>
+        stackblitzPrefillConfig(ComboBoxFeatureflagStories.FloatingStyles),
     },
   ]}
 />

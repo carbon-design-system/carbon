@@ -6,17 +6,19 @@
  */
 
 import React, {
-  FocusEvent,
-  ForwardedRef,
+  cloneElement,
   isValidElement,
-  MouseEvent,
-  ReactNode,
-  Ref,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
+  type FocusEvent,
+  type ForwardedRef,
+  type HTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
+  type Ref,
 } from 'react';
 import {
   useSelect,
@@ -41,10 +43,10 @@ import ListBox, {
   type ListBoxType,
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { TranslateWithId, ReactAttr } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 import { useId } from '../../internal/useId';
 import {
   useFloating,
@@ -54,6 +56,8 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -85,7 +89,7 @@ export interface OnChangeData<ItemType> {
 }
 
 export interface DropdownProps<ItemType>
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
+  extends Omit<HTMLAttributes<HTMLDivElement>, ExcludedAttributes>,
     TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -100,7 +104,10 @@ export interface DropdownProps<ItemType>
   ariaLabel?: string;
 
   /**
-   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   * **Experimental**: Will attempt to automatically align the floating element
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -595,15 +602,11 @@ const Dropdown = React.forwardRef(
     );
 
     // AILabel is always size `mini`
-    const normalizedDecorator = useMemo(() => {
-      let element = slug ?? decorator;
-      if (element && element['type']?.displayName === 'AILabel') {
-        return React.cloneElement(element as React.ReactElement<any>, {
-          size: 'mini',
-        });
-      }
-      return React.isValidElement(element) ? element : null;
-    }, [slug, decorator]);
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
+      : null;
 
     const allLabelProps = getLabelProps();
     const labelProps = isValidElement(titleText)
@@ -745,7 +748,10 @@ Dropdown.propTypes = {
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   * **Experimental**: Will attempt to automatically align the floating element
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

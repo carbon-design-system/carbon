@@ -9,11 +9,12 @@ import cx from 'classnames';
 import React, {
   forwardRef,
   useContext,
+  type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
 } from 'react';
 import PropTypes from 'prop-types';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import {
   ListBoxSizePropType,
   ListBoxTypePropType,
@@ -22,7 +23,6 @@ import {
 } from '.';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { ReactAttr } from '../../types/common';
 
 const handleOnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
   if (event.keyCode === 27) {
@@ -38,7 +38,7 @@ const handleClick = (event: MouseEvent<HTMLDivElement>) => {
 type ExcludedAttributes = 'onKeyDown' | 'onKeyPress' | 'ref';
 
 export interface ListBoxProps
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, ExcludedAttributes> {
   /**
    * Specify whether the ListBox is currently disabled
    */

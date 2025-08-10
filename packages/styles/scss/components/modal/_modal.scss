@@ -489,11 +489,6 @@
   }
 
   // Windows HCM fix
-
-  .#{$prefix}--modal-close__icon {
-    @include high-contrast-mode('icon-fill');
-  }
-
   .#{$prefix}--modal-close:focus {
     @include high-contrast-mode('focus');
   }

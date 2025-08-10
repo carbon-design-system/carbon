@@ -23,6 +23,13 @@ export default {
   title: 'Components/Modal/Feature Flags',
   component: Modal,
   tags: ['!autodocs'],
+  argTypes: {
+    launcherButtonRef: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const EnableDialogElement = () => {

@@ -11,7 +11,7 @@ import { FeatureFlags } from '../FeatureFlags';
 import { MenuItem } from '../Menu';
 import { OverflowMenuV2 } from './';
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import userEvent from '@testing-library/user-event';
 
 describe('<OverflowMenuV2 />', () => {

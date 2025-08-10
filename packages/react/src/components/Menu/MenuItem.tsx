@@ -185,7 +185,11 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
+        requestAnimationFrame(() => {
+          refs.floating.current?.focus();
+        });
         e.stopPropagation();
+        e.preventDefault();
       }
 
       pendingKeyboardClick.current = keyboardClickEvent(e);
@@ -250,7 +254,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           {...rest}
           ref={ref}
           className={classNames}
-          tabIndex={-1}
+          tabIndex={!disabled ? 0 : -1}
           aria-disabled={isDisabled ?? undefined}
           aria-haspopup={hasChildren ?? undefined}
           aria-expanded={hasChildren ? submenuOpen : undefined}

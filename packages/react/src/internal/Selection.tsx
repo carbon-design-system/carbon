@@ -23,7 +23,12 @@ const callOnChangeHandler = <ItemType,>({
 }) => {
   if (isControlled) {
     if (isMounted && onChangeHandlerControlled) {
-      onChangeHandlerControlled({ selectedItems });
+      // Use setTimeout to defer the controlled onChange call,
+      // avoiding React’s warning: "Cannot update a component while rendering a different component".
+      // This ensures the parent state updates after rendering completes.
+      setTimeout(() => {
+        onChangeHandlerControlled({ selectedItems });
+      }, 0);
     }
   } else {
     onChangeHandlerUncontrolled(selectedItems);
@@ -60,7 +65,7 @@ export const useSelection = <ItemType,>({
       // Assert special properties (e.g., `disabled`, `isSelectAll`, etc.) are
       // `any` since those properties aren’t part of the generic type.
       const allSelectableItems = filteredItems.filter(
-        (item) => !(item as any)?.disabled
+        (item) => !(item as any)?.disabled && !(item as any)?.isSelectAll
       );
       const disabledItemCount = filteredItems.filter(
         (item) => (item as any)?.disabled
@@ -121,6 +126,19 @@ export const useSelection = <ItemType,>({
     });
   }, [disabled, isControlled]);
 
+  const toggleAll = useCallback(
+    (items: ItemType[]) => {
+      callOnChangeHandler<ItemType>({
+        isControlled,
+        isMounted: isMounted.current,
+        onChangeHandlerControlled: savedOnChange.current,
+        onChangeHandlerUncontrolled: setUncontrolledItems,
+        selectedItems: items,
+      });
+    },
+    [isControlled]
+  );
+
   useEffect(() => {
     savedOnChange.current = onChange;
   }, [onChange]);
@@ -141,6 +159,7 @@ export const useSelection = <ItemType,>({
   return {
     clearSelection,
     onItemChange,
+    toggleAll,
     selectedItems,
   };
 };

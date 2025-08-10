@@ -49,6 +49,27 @@ describe('Link', () => {
     expect(screen.getByRole('link')).toHaveClass('custom-class');
   });
 
+  it('should support a custom class on the element with the as property', () => {
+    render(
+      <Link
+        href="https://carbondesignsystem.com"
+        as="h1"
+        className="custom-class">
+        test
+      </Link>
+    );
+    expect(screen.getByRole('heading')).toHaveClass('custom-class');
+  });
+
+  it('should keep Carbon classes on the element with the as property', () => {
+    render(
+      <Link href="https://carbondesignsystem.com" as="h1">
+        test
+      </Link>
+    );
+    expect(screen.getByRole('heading').classList.length).toBeTruthy();
+  });
+
   it('should support being disabled', () => {
     render(
       <Link href="https://carbondesignsystem.com" disabled>
@@ -108,6 +129,31 @@ describe('Link', () => {
     expect(document.body).toHaveFocus();
     await userEvent.tab();
     expect(document.body).toHaveFocus();
+  });
+
+  // check for disabled onclick handler
+  it('should not call onClick when disabled', async () => {
+    const onClick = jest.fn();
+    render(
+      <Link href="/" disabled onClick={onClick} className="some-class">
+        A simple link
+      </Link>
+    );
+    const link = screen.getByText('A simple link');
+    await userEvent.click(link);
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it('should call onClick when not disabled', async () => {
+    const onClick = jest.fn();
+    render(
+      <Link href="/" onClick={onClick} className="some-class">
+        A simple link
+      </Link>
+    );
+    const link = screen.getByText('A simple link');
+    await userEvent.click(link);
+    expect(onClick).toHaveBeenCalled();
   });
 
   describe('automated verification testing', () => {

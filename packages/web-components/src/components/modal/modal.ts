@@ -154,6 +154,40 @@ class CDSModal extends HostListenerMixin(LitElement) {
         }
       }
     }
+
+    // Adjust scroll if needed so that element with focus is not obscured by gradient
+    const modal = document.querySelector(`${prefix}-modal`);
+    const modalContent = document.querySelector(`${prefix}-modal-body`);
+    if (
+      !modal ||
+      !modal.hasAttribute('has-scrolling-content') ||
+      !modalContent ||
+      !relatedTarget ||
+      !modalContent.contains(relatedTarget as Node)
+    ) {
+      return;
+    }
+
+    const lastContent = modalContent.children[modalContent.children.length - 1];
+    const gradientSpacing =
+      modalContent.scrollHeight -
+      (lastContent as HTMLElement).offsetTop -
+      (lastContent as HTMLElement).clientHeight;
+
+    for (let elem of modalContent.children) {
+      if (elem.contains(relatedTarget as Node)) {
+        const spaceBelow =
+          modalContent.clientHeight -
+          (elem as HTMLElement).offsetTop +
+          modalContent.scrollTop -
+          (elem as HTMLElement).clientHeight;
+        if (spaceBelow < gradientSpacing) {
+          modalContent.scrollTop =
+            modalContent.scrollTop + (gradientSpacing - spaceBelow);
+        }
+        break;
+      }
+    }
   };
 
   @HostListener('document:keydown')

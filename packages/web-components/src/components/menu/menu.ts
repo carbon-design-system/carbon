@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@ import { prefix } from '../../globals/settings';
 import { property, state } from 'lit/decorators.js';
 import styles from './menu.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
 import { MenuContext, menuDefaultState } from './menu-context';
@@ -134,6 +135,19 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @property()
   y: number | number[] = 0;
 
+  @HostListener('focusout')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleBlur = (e: FocusEvent) => {
+    const { isRoot } = this.context;
+    // Close the menu if all of the following are met:
+    // * The menu is open
+    // * The focusout event is on the root menu
+    // * Focus is moving outside the menu
+    if (this.open && isRoot && !this.contains(e.relatedTarget as Node)) {
+      this.dispatchCloseEvent(e);
+    }
+  };
+
   /**
    * The name of the custom event fired when the the Menu should be closed.
    */
@@ -169,6 +183,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     await this.updateComplete;
     this._registerMenuItems();
     this._setActiveItems();
+
+    const slot = this.shadowRoot?.querySelector('slot');
+    slot?.addEventListener('slotchange', () => {
+      this._registerMenuItems();
+      this._setActiveItems();
+    });
   }
   render() {
     const {
@@ -209,6 +229,10 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     if (e.key === 'Escape' || (!isRoot && e.key === 'ArrowLeft')) {
       this.dispatchCloseEvent(e);
     } else {
+      // Prevent scrolling when navigating menu items
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+      }
       this._focusItem(e);
     }
   };
@@ -451,6 +475,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     });
   };
   _setActiveItems = () => {
+    this.activeitems = [];
+
     this.items?.map((item) => {
       let activeItem: activeItemType;
       switch (item.tagName) {

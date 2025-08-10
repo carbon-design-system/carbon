@@ -258,41 +258,40 @@
     // Safari-only media query
     // won't appear correctly with CSS custom properties
     // see: code snippet and modal overflow indicators
-    @media not all and (resolution >= 0.001dpcm) {
-      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    @supports (hanging-punctuation: first) and (font: -apple-system-body) and
+      (-webkit-appearance: none) {
+      .#{$prefix}--tabs__overflow-indicator--left {
+        background-image: linear-gradient(
+          to left,
+          rgba($background, 0),
+          $background
+        );
+      }
+
+      .#{$prefix}--tabs__overflow-indicator--right {
+        background-image: linear-gradient(
+          to right,
+          rgba($background, 0),
+          $background
+        );
+      }
+
+      &.#{$prefix}--tabs--contained
         .#{$prefix}--tabs__overflow-indicator--left {
-          background-image: linear-gradient(
-            to left,
-            rgba($background, 0),
-            $background
-          );
-        }
+        background-image: linear-gradient(
+          to left,
+          rgba($layer-accent, 0),
+          $layer-accent
+        );
+      }
 
+      &.#{$prefix}--tabs--contained
         .#{$prefix}--tabs__overflow-indicator--right {
-          background-image: linear-gradient(
-            to right,
-            rgba($background, 0),
-            $background
-          );
-        }
-
-        &.#{$prefix}--tabs--contained
-          .#{$prefix}--tabs__overflow-indicator--left {
-          background-image: linear-gradient(
-            to left,
-            rgba($layer-accent, 0),
-            $layer-accent
-          );
-        }
-
-        &.#{$prefix}--tabs--contained
-          .#{$prefix}--tabs__overflow-indicator--right {
-          background-image: linear-gradient(
-            to right,
-            rgba($layer-accent, 0),
-            $layer-accent
-          );
-        }
+        background-image: linear-gradient(
+          to right,
+          rgba($layer-accent, 0),
+          $layer-accent
+        );
       }
     }
 
@@ -410,7 +409,7 @@
       }
 
       svg:hover {
-        fill: $text-primary;
+        fill: $icon-primary;
       }
 
       &:hover {
@@ -427,12 +426,12 @@
       + .#{$prefix}--tabs__nav-item--close
       .#{$prefix}--tabs__nav-item--close-icon
       svg {
-      fill: $text-primary;
+      fill: $icon-primary;
     }
 
     .#{$prefix}--tabs__nav-item--close-icon--selected {
       svg {
-        fill: $text-primary;
+        fill: $icon-primary;
       }
     }
 
@@ -445,7 +444,9 @@
       cursor: not-allowed;
 
       svg {
-        fill: $tab-text-disabled;
+        // Note: $icon-disabled maps to the same color as $tab-text-disabled, but in high contrast mode, $icon-disabled
+        // maps to the system-defined "GrayText" color, which is better for high contrast mode support.
+        fill: $icon-disabled;
       }
 
       &:focus,
@@ -500,7 +501,6 @@
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
       .#{$prefix}--tabs__nav-link {
       border-block-end: 0;
-      padding-inline: layout.density('padding-inline');
     }
 
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)

@@ -12,4 +12,8 @@ deprecated:
   - name: tokyo--volcano
     reason: This icon has been replaced by japan--mt-fuji
   - name: telum-ii-chip
-    reason: This icon has been replaced by telum-ii-processor  
+    reason: This icon has been replaced by telum-ii-processor 
+  - name: handicap
+    reason: This icon has been replaced by wheelchair-user
+  - name: handicap--active
+    reason: This icon has been replaced by wheelchair-user--active  

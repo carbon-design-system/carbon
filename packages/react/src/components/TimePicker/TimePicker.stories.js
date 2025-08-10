@@ -61,6 +61,16 @@ Default.argTypes = {
       disable: true,
     },
   },
+  inputClassName: {
+    table: {
+      disable: true,
+    },
+  },
+  pickerClassName: {
+    table: {
+      disable: true,
+    },
+  },
   id: {
     table: {
       disable: true,

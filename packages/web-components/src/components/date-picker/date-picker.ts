@@ -92,12 +92,11 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * @returns The effective date picker mode, determined by the child `<cds-date-picker-input>`.
    */
   private get _mode() {
-    const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof CDSDatePicker;
+    const { selectorInputTo } = this.constructor as typeof CDSDatePicker;
     if (this.querySelector(selectorInputTo)) {
       return DATE_PICKER_MODE.RANGE;
     }
-    if (this.querySelector(selectorInputFrom)) {
+    if (this.querySelector(`${prefix}-date-picker-input[kind="single"]`)) {
       return DATE_PICKER_MODE.SINGLE;
     }
     return DATE_PICKER_MODE.SIMPLE;
@@ -367,9 +366,8 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   private _instantiateDatePicker() {
     this._releaseDatePicker();
     const { _dateInteractNode: dateInteractNode } = this;
-    // `this._dateInteractNode` won't be there unless there is a slotted `<cds-date-input type="from">`,
-    // which means Flatpickr will never be instantiated in "simple" mode.
-    if (dateInteractNode && dateInteractNode.input) {
+    // do not instantiate Flatpickr in "simple" mode
+    if (dateInteractNode && dateInteractNode.input && this._mode !== 'simple') {
       this.calendar = flatpickr(
         dateInteractNode.input as any,
         this._datePickerOptions
@@ -451,28 +449,28 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   disabled = false;
 
   /**
-   * The localization data.
-   */
-  @property({ attribute: false })
-  locale!: FlatpickrLocale;
-
-  /**
    * The date range that a user can pick in calendar dropdown.
    */
   @property({ attribute: 'enabled-range' })
   enabledRange!: string;
 
   /**
-   * The minimum date that a user can start picking from.
+   * The localization data.
    */
-  @property({ attribute: 'min-date' })
-  minDate!: string;
+  @property({ attribute: false })
+  locale!: FlatpickrLocale;
 
   /**
    * The maximum date that a user can start picking from.
    */
   @property({ attribute: 'max-date' })
   maxDate!: string;
+
+  /**
+   * The minimum date that a user can start picking from.
+   */
+  @property({ attribute: 'min-date' })
+  minDate!: string;
 
   /**
    * Name for the input in the `FormData`
@@ -550,13 +548,15 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       <a
         class="${prefix}--visually-hidden"
         href="javascript:void 0"
-        role="navigation"></a>
+        role="navigation"
+        tabindex="-1"></a>
       <slot @slotchange="${handleSlotChange}"></slot>
       <div id="floating-menu-container"></div>
       <a
         class="${prefix}--visually-hidden"
         href="javascript:void 0"
-        role="navigation"></a>
+        role="navigation"
+        tabindex="-1"></a>
     `;
   }
 

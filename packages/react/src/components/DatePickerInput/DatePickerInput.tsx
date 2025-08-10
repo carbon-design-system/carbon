@@ -1,20 +1,28 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { warning } from '../../internal/warning';
 import cx from 'classnames';
 import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
-import React, { ForwardedRef, ReactNode, useContext } from 'react';
+import React, {
+  cloneElement,
+  useContext,
+  type ForwardedRef,
+  type HTMLAttributes,
+  type ReactNode,
+} from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useId } from '../../internal/useId';
-import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
 export type ReactNodeLike =
@@ -27,9 +35,10 @@ export type ReactNodeLike =
   | undefined;
 
 export type func = (...args: any[]) => any;
+let didWarnAboutDatePickerInputValue = false;
 
 export interface DatePickerInputProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * The type of the date picker:
    *
@@ -182,6 +191,21 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     placeholder,
     type,
   };
+
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    'value' in rest &&
+    !didWarnAboutDatePickerInputValue
+  ) {
+    warning(
+      false,
+      `The 'value' prop is not supported on the DatePickerInput component. ` +
+        `For DatePicker components with 'datePickerType="range"', please ` +
+        `pass the 'value' prop (as an array of dates) to the parent ` +
+        `DatePicker component instead.`
+    );
+    didWarnAboutDatePickerInputValue = true;
+  }
   const wrapperClasses = cx(`${prefix}--date-picker-input__wrapper`, {
     [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
     [`${prefix}--date-picker-input__wrapper--warn`]: warn,
@@ -225,20 +249,11 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   const input = <input {...inputProps} />;
 
   // AILabel always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
 
   return (
     <div className={containerClasses}>

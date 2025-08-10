@@ -6,7 +6,7 @@
  */
 
 import React, { useRef } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { usePrefix } from '../../internal/usePrefix';
 import CodeSnippet from '../CodeSnippet';

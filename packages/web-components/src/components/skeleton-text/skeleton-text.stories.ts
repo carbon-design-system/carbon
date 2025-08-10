@@ -6,26 +6,18 @@
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { SKELETON_TEXT_TYPE } from './skeleton-text';
-
-const types = {
-  Regular: null,
-  [`Heading (${SKELETON_TEXT_TYPE.HEADING})`]: SKELETON_TEXT_TYPE.HEADING,
-};
 
 const args = {
-  type: null,
-  paragraph: true,
+  paragraph: false,
+  heading: false,
   lineCount: 3,
   width: '100%',
 };
 
 const argTypes = {
-  type: {
-    control: 'select',
-    description: 'Indicate the type of skeleton text, heading or regular.',
-    options: types,
+  heading: {
+    control: 'boolean',
+    description: 'Set to true to use heading style',
   },
   paragraph: {
     control: 'boolean',
@@ -43,23 +35,19 @@ const argTypes = {
 };
 
 export const Default = {
+  args,
+  argTypes,
   parameters: {
     percy: {
       skip: true,
     },
   },
-  render: () => html`<cds-skeleton-text></cds-skeleton-text>`,
-};
-
-export const Playground = {
-  args,
-  argTypes,
   render: (args) => {
-    const { type, paragraph, lineCount, width } = args ?? {};
+    const { heading, paragraph, lineCount, width } = args ?? {};
     return html`
       <cds-skeleton-text
-        type="${ifDefined(type)}"
         ?paragraph="${paragraph}"
+        ?heading="${heading}"
         lineCount="${lineCount}"
         width="${width}">
       </cds-skeleton-text>

@@ -16,14 +16,15 @@ import {
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
-  ForwardedRef,
-  useContext,
-  useState,
-  useMemo,
-  ReactNode,
-  useLayoutEffect,
+  cloneElement,
   isValidElement,
   useCallback,
+  useContext,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type ForwardedRef,
+  type ReactNode,
 } from 'react';
 import ListBox, {
   ListBoxSizePropType,
@@ -40,7 +41,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -56,6 +57,8 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   ItemClick,
@@ -109,7 +112,8 @@ export interface MultiSelectProps<ItemType>
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -355,13 +359,8 @@ export const MultiSelect = React.forwardRef(
       });
     }, [items]);
 
-    let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
-    if ((selected ?? []).length > 0 && selectAll) {
-      console.warn(
-        'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
-      );
-      selectAll = false;
-    }
+    const selectAll = filteredItems.some((item) => (item as any).isSelectAll);
+
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
@@ -699,20 +698,11 @@ export const MultiSelect = React.forwardRef(
       : {};
 
     // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
-    }
 
     const itemsSelectedText =
       selectedItems.length > 0 &&
@@ -851,18 +841,19 @@ export const MultiSelect = React.forwardRef(
                 filteredItems,
                 sortOptions as SortItemsOptions<ItemType>
               ).map((item, index) => {
-                const isChecked =
-                  selectedItems.filter((selected) => isEqual(selected, item))
-                    .length > 0;
-
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,
                   totalSelectableCount,
                 } = getSelectionStats(selectedItems, filteredItems);
 
+                const isChecked = (item as any).isSelectAll
+                  ? nonSelectAllSelectedCount === totalSelectableCount &&
+                    totalSelectableCount > 0
+                  : selectedItems.some((selected) => isEqual(selected, item));
+
                 const isIndeterminate =
-                  item['isSelectAll'] &&
+                  (item as any).isSelectAll &&
                   hasIndividualSelections &&
                   nonSelectAllSelectedCount < totalSelectableCount;
 
@@ -937,7 +928,8 @@ MultiSelect.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

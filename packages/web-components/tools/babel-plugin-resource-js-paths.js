@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 import { dirname, relative, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import replaceExtension from 'replace-ext';
 
 export function resourceJSPaths(babel) {
   const t = babel.types;

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/accordion';
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 
 :host(#{$prefix}-accordion),
 :host(#{$prefix}-accordion-skeleton) {
@@ -23,6 +26,7 @@ $css--plex: true !default;
 :host(#{$prefix}-accordion-item),
 :host(#{$prefix}-accordion-item-skeleton) {
   @extend .#{$prefix}--accordion__item;
+  @include type-style('body-01');
 
   display: block;
   outline: none;
@@ -30,11 +34,22 @@ $css--plex: true !default;
     @extend .#{$prefix}--accordion__content;
 
     ::slotted(p) {
-      @include type-style('body-01');
-
       margin: 0;
+
+      font-size: var(
+        --cds-body-01-font-size
+      ) !important; /* stylelint-disable-line declaration-no-important */
+
+      font-weight: var(--cds-body-01-font-weight);
+      letter-spacing: var(--cds-body-01-letter-spacing);
+      line-height: var(--cds-body-01-line-height);
     }
   }
+}
+
+// Indicates this is the last visible item in a group (for styling the bottom border)
+:host([data-last-item]) {
+  border-block-end: 1px solid $border-subtle;
 }
 
 :host(#{$prefix}-accordion-item[size='sm']),
@@ -62,7 +77,67 @@ $css--plex: true !default;
 
 :host(#{$prefix}-accordion-item[isFlush]),
 :host(#{$prefix}-accordion-item-skeleton[isFlush]) {
-  @extend .#{$prefix}--accordion--flush;
+  position: relative;
+  border-color: transparent;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    block-size: 1px;
+    content: '';
+    inline-size: calc(100% - #{$spacing-05} - #{$spacing-05});
+    margin-inline-start: $spacing-05;
+    transition: background $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &::before {
+    background: $border-subtle;
+    inset-block-start: -1px;
+  }
+
+  &::after {
+    background: $border-subtle;
+    inset-block-end: -1px;
+  }
+}
+
+:host([isFlush]) .#{$prefix}--accordion__heading:hover {
+  position: relative;
+  z-index: 1;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    background: $layer-hover;
+    block-size: 1px;
+    content: '';
+    inline-size: 100%;
+    inset-inline-start: 0;
+    transition: background $duration-fast-02 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &::before {
+    inset-block-start: -1px;
+  }
+
+  &::after {
+    inset-block-end: -1px;
+  }
+
+  &:focus::before,
+  &:focus::after {
+    background: none;
+  }
 }
 
 :host(#{$prefix}-accordion-item[expanding]) {
@@ -93,9 +168,40 @@ $css--plex: true !default;
 :host(#{$prefix}-accordion-item-skeleton) {
   .#{$prefix}--accordion__heading {
     cursor: default;
+    pointer-events: none;
 
     &:hover::before {
       background: transparent;
     }
   }
+}
+
+:host(#{$prefix}-accordion-item[alignment='end' i]),
+:host(#{$prefix}-accordion-item-skeleton[alignment='end' i]),
+:host(#{$prefix}-accordion-skeleton)
+  .#{$prefix}--accordion__item.#{$prefix}--accordion--END {
+  .#{$prefix}--accordion__arrow {
+    margin-inline-start: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-accordion-item-skeleton) .#{$prefix}--accordion__title,
+:host(#{$prefix}-accordion-skeleton)
+  .#{$prefix}--accordion__heading
+  .#{$prefix}--accordion__title {
+  padding-block-start: $spacing-03;
+}
+
+.controlled-accordion-btnset {
+  @extend .cds--btn-set !optional;
+
+  padding-block-end: $spacing-03;
+
+  .controlled-accordion-btn:not(:first-child)::part(button) {
+    box-shadow: -0.0625rem 0 0 0 button-tokens.$button-separator;
+  }
+}
+
+.controlled-accordion-btn {
+  max-inline-size: 13.25rem;
 }

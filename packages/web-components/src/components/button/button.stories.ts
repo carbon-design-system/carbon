@@ -52,6 +52,7 @@ const positionOptions = {
 };
 
 const sizes = {
+  [`Extra small size (${BUTTON_SIZE.EXTRA_SMALL})`]: BUTTON_SIZE.EXTRA_SMALL,
   [`Small size (${BUTTON_SIZE.SMALL})`]: BUTTON_SIZE.SMALL,
   [`Medium size (${BUTTON_SIZE.MEDIUM})`]: BUTTON_SIZE.MEDIUM,
   [`Large size (${BUTTON_SIZE.LARGE})`]: BUTTON_SIZE.LARGE,

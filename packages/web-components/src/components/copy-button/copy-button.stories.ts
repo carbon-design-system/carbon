@@ -7,7 +7,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import type { Meta } from '@storybook/web-components';
+import type { Meta } from '@storybook/web-components-vite';
 import './copy-button';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 
