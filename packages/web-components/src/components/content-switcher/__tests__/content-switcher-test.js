@@ -12,20 +12,14 @@ import '@carbon/web-components/es/components/content-switcher/index.js';
 describe('cds-content-switcher', function () {
   it('should apply selectedIndex correctly', async () => {
     const el = await fixture(html`
-      <cds-content-switcher selectedIndex="2">
-        <cds-content-switcher-item name="one" text="First section" value="all">
+      <cds-content-switcher selected-index="2">
+        <cds-content-switcher-item name="one" value="all">
           First section
         </cds-content-switcher-item>
-        <cds-content-switcher-item
-          name="two"
-          text="Second section"
-          value="cloudFoundry">
+        <cds-content-switcher-item name="two" value="cloudFoundry">
           Second section
         </cds-content-switcher-item>
-        <cds-content-switcher-item
-          name="three"
-          text="Third section"
-          value="staging">
+        <cds-content-switcher-item name="three" value="staging">
           Third section
         </cds-content-switcher-item>
       </cds-content-switcher>
@@ -37,25 +31,27 @@ describe('cds-content-switcher', function () {
     await selectedItem.updateComplete;
 
     expect(selectedItem.hasAttribute('selected')).to.be.true;
-    expect(selectedItem.getAttribute('tabindex')).to.equal('0');
+
+    const btn = selectedItem.shadowRoot.querySelector('button');
+    expect(btn.getAttribute('tabindex')).to.equal('0');
+
+    const btn0 = items[0].shadowRoot.querySelector('button');
+    const btn1 = items[1].shadowRoot.querySelector('button');
+    expect(btn0.getAttribute('tabindex')).to.equal('-1');
+    expect(btn1.getAttribute('tabindex')).to.equal('-1');
   });
 
-  it('should emit event on click with matching details (parity with React onChange)', async () => {
+  // parity with React onChange
+  it('should emit event on click with matching details', async () => {
     const el = await fixture(html`
       <cds-content-switcher>
-        <cds-content-switcher-item name="one" text="First section" value="all">
+        <cds-content-switcher-item name="one" value="all">
           First section
         </cds-content-switcher-item>
-        <cds-content-switcher-item
-          name="two"
-          text="Second section"
-          value="cloudFoundry">
+        <cds-content-switcher-item name="two" value="cloudFoundry">
           Second section
         </cds-content-switcher-item>
-        <cds-content-switcher-item
-          name="three"
-          text="Third section"
-          value="staging">
+        <cds-content-switcher-item name="three" value="staging">
           Third section
         </cds-content-switcher-item>
       </cds-content-switcher>
@@ -71,24 +67,22 @@ describe('cds-content-switcher', function () {
     expect(detail.item.getAttribute('name')).to.equal('two');
     expect(detail.item.getAttribute('value')).to.equal('cloudFoundry');
     expect(detail.item.textContent.trim()).to.equal('Second section');
+
+    expect(detail.index).to.equal(1);
+    expect(detail.name).to.equal('two');
+    expect(detail.text).to.equal('Second section');
   });
 
   it('should emit event on keydown (ArrowRight/ArrowLeft)', async () => {
     const el = await fixture(html`
       <cds-content-switcher>
-        <cds-content-switcher-item name="one" text="First section" value="all">
+        <cds-content-switcher-item name="one" value="all">
           First section
         </cds-content-switcher-item>
-        <cds-content-switcher-item
-          name="two"
-          text="Second section"
-          value="cloudFoundry">
+        <cds-content-switcher-item name="two" value="cloudFoundry">
           Second section
         </cds-content-switcher-item>
-        <cds-content-switcher-item
-          name="three"
-          text="Third section"
-          value="staging">
+        <cds-content-switcher-item name="three" value="staging">
           Third section
         </cds-content-switcher-item>
       </cds-content-switcher>
@@ -121,42 +115,39 @@ describe('cds-content-switcher', function () {
   it('should support size attribute', async () => {
     const el = await fixture(html`
       <cds-content-switcher size="lg">
-        <cds-content-switcher-item
-          text="Section"
-          value="default"></cds-content-switcher-item>
+        <cds-content-switcher-item value="default"
+          >Section</cds-content-switcher-item
+        >
       </cds-content-switcher>
     `);
 
     expect(el.getAttribute('size')).to.equal('lg');
   });
 
-  it('should apply lowContrast attribute', async () => {
+  it('should apply low-contrast attribute', async () => {
     const el = await fixture(html`
-      <cds-content-switcher lowContrast>
-        <cds-content-switcher-item
-          text="Section"
-          value="lowContrastValue"></cds-content-switcher-item>
+      <cds-content-switcher low-contrast>
+        <cds-content-switcher-item value="lowContrastValue"
+          >Section</cds-content-switcher-item
+        >
       </cds-content-switcher>
     `);
 
-    expect(el.hasAttribute('lowContrast')).to.be.true;
+    expect(el.hasAttribute('low-contrast')).to.be.true;
   });
 
   it('should apply iconOnly mode automatically if all items have icon attribute', async () => {
     const el = await fixture(html`
       <cds-content-switcher>
-        <cds-content-switcher-item
-          icon
-          text="Icon 1"
-          value="icon1"></cds-content-switcher-item>
-        <cds-content-switcher-item
-          icon
-          text="Icon 2"
-          value="icon2"></cds-content-switcher-item>
-        <cds-content-switcher-item
-          icon
-          text="Icon 3"
-          value="icon3"></cds-content-switcher-item>
+        <cds-content-switcher-item icon value="icon1"
+          >Icon 1</cds-content-switcher-item
+        >
+        <cds-content-switcher-item icon value="icon2"
+          >Icon 2</cds-content-switcher-item
+        >
+        <cds-content-switcher-item icon value="icon3"
+          >Icon 3</cds-content-switcher-item
+        >
       </cds-content-switcher>
     `);
 
@@ -166,17 +157,33 @@ describe('cds-content-switcher', function () {
   it('should allow disabling items via attribute', async () => {
     const el = await fixture(html`
       <cds-content-switcher>
-        <cds-content-switcher-item
-          text="Section 1"
-          value="enabled"></cds-content-switcher-item>
-        <cds-content-switcher-item
-          text="Section 2"
-          value="disabled"
-          disabled></cds-content-switcher-item>
+        <cds-content-switcher-item value="enabled"
+          >Section 1</cds-content-switcher-item
+        >
+        <cds-content-switcher-item value="disabled" disabled
+          >Section 2</cds-content-switcher-item
+        >
       </cds-content-switcher>
     `);
 
     const disabledItem = el.querySelectorAll('cds-content-switcher-item')[1];
     expect(disabledItem.hasAttribute('disabled')).to.be.true;
+  });
+
+  it('should set parent content-switcher as disabled when a child item becomes disabled', async () => {
+    const el = await fixture(html`
+      <cds-content-switcher>
+        <cds-content-switcher-item value="a">A</cds-content-switcher-item>
+        <cds-content-switcher-item value="b" disabled
+          >B</cds-content-switcher-item
+        >
+      </cds-content-switcher>
+    `);
+
+    await el.updateComplete;
+    const disabledItem = el.querySelectorAll('cds-content-switcher-item')[1];
+    await disabledItem.updateComplete;
+
+    expect(el.hasAttribute('disabled')).to.be.true;
   });
 });
