@@ -331,8 +331,10 @@ export function StructuredListRow(props: StructuredListRowProps) {
           setHasFocusWithin(true);
         }
       }}
-      onFocus={() => {
-        setHasFocusWithin(true);
+      onFocus={(event) => {
+        if (selection || event.currentTarget === event.target) {
+          setHasFocusWithin(true);
+        }
       }}
       onBlur={() => {
         setHasFocusWithin(false);
