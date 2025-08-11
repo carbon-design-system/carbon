@@ -351,7 +351,7 @@ jobs:
         run: yarn install --immutable --immutable-cache
 
       - name: Download vrt blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: all-playwright-vrt-blob-reports
           pattern: playwright-vrt-blob-report-*
@@ -370,7 +370,7 @@ jobs:
           retention-days: 14
 
       - name: Download avt blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: all-playwright-avt-blob-reports
           pattern: playwright-avt-blob-report-*
