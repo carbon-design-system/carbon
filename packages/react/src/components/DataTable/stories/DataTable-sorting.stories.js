@@ -15,7 +15,6 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '..';
-import { Button } from '../../Button';
 import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 
@@ -66,81 +65,6 @@ export const Default = (args) => (
     )}
   </DataTable>
 );
-
-export const TestWithCustomSortButtons = () => {
-  const headers = [
-    {
-      key: 'name',
-      header: 'Name',
-    },
-    {
-      key: 'status',
-      header: 'Status',
-    },
-  ];
-
-  const rows = [
-    {
-      id: 'a',
-      name: 'Load balancer 1',
-      status: 'Disabled',
-    },
-    {
-      id: 'b',
-      name: 'Load balancer 2',
-      status: 'Starting',
-    },
-    {
-      id: 'c',
-      name: 'Load balancer 3',
-      status: 'Active',
-    },
-  ];
-
-  return (
-    <DataTable
-      headers={headers}
-      rows={rows}
-      render={({
-        rows,
-        headers,
-        getTableProps,
-        getHeaderProps,
-        getRowProps,
-        sortBy,
-      }) => {
-        return (
-          <Table {...getTableProps()}>
-            <TableHead>
-              <TableRow>
-                {headers.map((header) => (
-                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
-                    {header.header}
-                    <Button
-                      onClick={() => {
-                        sortBy(header.key);
-                      }}>
-                      {`Sort by ${header.header}`}
-                    </Button>
-                  </TableHeader>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id} {...getRowProps({ row })}>
-                  {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        );
-      }}
-    />
-  );
-};
 
 Default.argTypes = {
   filterRows: {
