@@ -496,6 +496,7 @@ collect:
         - itemsShown
         - loop
         # Popover
+        - alignmentAxisOffset
         - autoAlignBoundary
         - caret
         - isTabTip
@@ -544,6 +545,8 @@ collect:
         - unstable_ariaLabelHandleUpper
         # StructuredListCell
         - noWrap
+        # StructuredListWrapper
+        - selectedInitialRow
         # SwitcherItem
         - handleSwitcherItemFocus
         # Tab
@@ -609,8 +612,6 @@ collect:
         - labelA
         - labelB
         - toggled
-        # Toggletip
-        - alignmentAxisOffset
         # TreeNode
         - defaultIsExpanded
         - depth
