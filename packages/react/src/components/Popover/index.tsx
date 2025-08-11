@@ -186,9 +186,13 @@ export const Popover: PopoverComponent & {
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+
+    // No relatedTarget, focus moved to nowhere, so close the popover
     if (!relatedTarget) {
+      onRequestClose?.();
       return;
     }
+
     const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
     const isOutsideFloating =
       enableFloatingStyles && refs.floating.current

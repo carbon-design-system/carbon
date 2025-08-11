@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const { default: babelJest } = require('babel-jest');
+import babelJest from 'babel-jest';
 const { createTransformer } = babelJest;
 
 const babelOptions = {
@@ -36,4 +34,4 @@ const babelOptions = {
   ],
 };
 
-module.exports = createTransformer(babelOptions);
+export default createTransformer(babelOptions);
