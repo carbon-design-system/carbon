@@ -1,5 +1,6 @@
 {
   "name": "examples-nextjs",
+  "description": "Next.js example",
   "private": true,
   "version": "0.89.0-rc.0",
   "scripts": {

@@ -2,9 +2,8 @@
   "name": "release-notifications",
   "private": true,
   "dependencies": {
-    "@actions/core": "^1.10.0",
+    "@actions/core": "^1.11.1",
     "@actions/github": "6.0.1",
-    "@octokit/auth-action": "^2.0.1",
-    "@octokit/request": "^8.4.1"
+    "@octokit/auth-action": "^6.0.1"
   }
 }

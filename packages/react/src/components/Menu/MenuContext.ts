@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,13 +42,14 @@ function menuReducer(state: StateType, action: ActionType) {
         ...state,
         hasSelectableItems: true,
       };
-    case 'registerItem':
-      return {
-        ...state,
-        items: [...state.items, action.payload].filter(
-          (item) => item.ref.current !== null
-        ),
-      };
+    case 'registerItem': {
+      const newItem = action.payload;
+      const items = state.items.filter((item) => item.ref.current);
+      const next = newItem.ref.current?.nextElementSibling;
+      const idx = items.findIndex((item) => item.ref.current === next);
+      items.splice(idx < 0 ? items.length : idx, 0, newItem);
+      return { ...state, items };
+    }
   }
 }
 
