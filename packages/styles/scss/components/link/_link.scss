@@ -47,7 +47,7 @@ $link-focus-text-color: custom-property.get-var(
       text-decoration: underline;
     }
 
-    &:active,
+    &:active:not(.#{$prefix}--link--disabled),
     &:active:visited,
     &:active:visited:hover {
       @include focus-outline;
@@ -57,7 +57,7 @@ $link-focus-text-color: custom-property.get-var(
       text-decoration: underline;
     }
 
-    &:focus {
+    &:focus:not(.#{$prefix}--link--disabled) {
       @include focus-outline;
 
       outline-color: $link-focus-text-color;

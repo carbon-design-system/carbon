@@ -7,10 +7,8 @@
  * @jest-environment node
  */
 
-'use strict';
-
-const prettier = require('prettier2');
-const { generate, types: t } = require('../src');
+import prettier from 'prettier';
+import { generate, types as t } from '../src';
 
 const prettierOptions = {
   parser: 'scss',
