@@ -5,12 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { createHash } from 'crypto';
+import fs from 'fs';
+import sass from 'sass';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const { createHash } = require('crypto');
-const fs = require('fs');
-const sass = require('sass');
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const THIS_FILE = fs.readFileSync(__filename);
 const { root: ROOT_DIR } = path.parse(__dirname);
@@ -37,7 +40,7 @@ function ancestors(directory) {
   return result;
 }
 
-module.exports = {
+export default {
   process(_file, filepath) {
     const nodeModules = ancestors(path.dirname(filepath))
       .map((directory) => {

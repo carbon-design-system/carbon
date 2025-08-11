@@ -1,5 +1,6 @@
 {
   "name": "examples-light-dark",
+  "description": "Light/dark mode example",
   "private": true,
   "version": "0.87.0-rc.0",
   "scripts": {
