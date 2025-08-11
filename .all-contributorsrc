@@ -1837,7 +1837,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/69060697?v=4",
       "profile": "https://github.com/warrenmblood",
       "contributions": [
-        "code"
+        "code",
+        "doc",
+        "a11y"
       ]
     },
     {
@@ -1983,6 +1985,15 @@
       "name": "bijoy valsan",
       "avatar_url": "https://avatars.githubusercontent.com/u/26248649?v=4",
       "profile": "https://github.com/bijoyvalsan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jose-biescas",
+      "name": "Jose Biescas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/188625806?v=4",
+      "profile": "https://github.com/jose-biescas",
       "contributions": [
         "code"
       ]
