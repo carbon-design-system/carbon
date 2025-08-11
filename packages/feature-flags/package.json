@@ -1,7 +1,7 @@
 {
   "name": "@carbon/feature-flags",
   "description": "Build with feature flags in Carbon",
-  "version": "0.29.0",
+  "version": "0.29.1-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -42,7 +42,7 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/template": "^7.27.2",
     "@babel/types": "^7.27.3",
-    "@carbon/scss-generator": "^10.19.0",
+    "@carbon/scss-generator": "^10.19.1-rc.0",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "change-case": "^4.1.2",
