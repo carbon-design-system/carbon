@@ -134,26 +134,3 @@ Default.argTypes = {
     },
   },
 };
-
-// I'll remove this
-export const ScrollTest = (args) => {
-  const filler = Array.from({ length: 40 }, (_, i) => (
-    <div key={i}>Text to cause scroll</div>
-  ));
-
-  return (
-    <div style={{ height: '150vh', padding: '1rem' }}>
-      {filler}
-      <Menu {...args} open x={[100, 120]} y={[300, 350]}>
-        <MenuItem label="Open" />
-        <MenuItem label="Save" />
-        <MenuItem label="Import">
-          <MenuItem label="Image" />
-          <MenuItem label="Movie" />
-          <MenuItem label="Text" />
-        </MenuItem>
-      </Menu>
-      {filler}
-    </div>
-  );
-};
