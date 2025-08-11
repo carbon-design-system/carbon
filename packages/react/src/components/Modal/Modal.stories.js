@@ -188,7 +188,7 @@ export const Default = ({ numberOfButtons, ...args }) => {
               }}
             />
           </div>
-          <PopoverContent>
+          <PopoverContent className="p-3">
             <h2 className="popover-title">Popover Example</h2>
             <p className="popover-details">
               This server has 150 GB of block storage remaining.

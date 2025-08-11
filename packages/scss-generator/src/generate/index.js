@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { definitions } from '../types/index.js';
+import { createPrinter } from './printer.js';
 
-const { definitions } = require('../types');
-const { createPrinter } = require('./printer');
-
-function generate(ast) {
+export function generate(ast) {
   const printer = createPrinter(definitions);
 
   printer.print(ast);
@@ -19,7 +17,3 @@ function generate(ast) {
     code: printer.get(),
   };
 }
-
-module.exports = {
-  generate,
-};

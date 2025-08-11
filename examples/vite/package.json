@@ -1,15 +1,29 @@
 {
   "name": "vite",
+  "description": "Vite example",
   "private": true,
-  "version": "0.86.0",
+  "version": "0.87.0-rc.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "examples/vite"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.88.0",
+    "@carbon/react": "^1.89.0-rc.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
