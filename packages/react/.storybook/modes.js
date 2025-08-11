@@ -1,7 +1,4 @@
 export const allModes = {
-  white: {
-    theme: 'white',
-  },
   g10: {
     theme: 'g10',
   },

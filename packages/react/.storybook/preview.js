@@ -326,7 +326,6 @@ const parameters = {
   },
   chromatic: {
     modes: {
-      white: allModes['white'],
       g10: allModes['g10'],
       g90: allModes['g90'],
       g100: allModes['g100'],
