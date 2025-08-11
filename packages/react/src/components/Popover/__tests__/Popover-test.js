@@ -273,11 +273,22 @@ describe('Popover', () => {
       render(
         <Popover open onRequestClose={() => onRequestClose()}>
           <button type="button">Settings</button>
-          <PopoverContent>test</PopoverContent>
+          <PopoverContent>
+            <button data-testid="inside-button">Inside Button</button>
+            <input data-testid="inside-input" placeholder="Inside Input" />
+          </PopoverContent>
         </Popover>
       );
+
+      // Focus on the first focusable element inside the popover
+      screen.getByTestId('inside-button').focus();
+
+      // Tab to the next focusable element
       await userEvent.tab();
+
+      // Tab out of the popover (should trigger onRequestClose)
       await userEvent.tab();
+
       expect(onRequestClose).toHaveBeenCalled();
     });
   });

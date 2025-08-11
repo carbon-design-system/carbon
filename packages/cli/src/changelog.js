@@ -1,14 +1,12 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const { default: parse } = require('@commitlint/parse');
-const execa = require('execa');
+import { default as parse } from '@commitlint/parse';
+import { execa } from 'execa';
 
 // We keep a list of commits that are process-oriented that we never want to
 // show up in generated changelogs
@@ -36,7 +34,7 @@ const headerDenyList = new Set([
  * @param {string} latestTag
  * @returns {string}
  */
-async function generate(packages, lastTag, latestTag) {
+export async function generate(packages, lastTag, latestTag) {
   const packageCommitsInRange = await Promise.all(
     packages.map((pkg) => getCommitsInRange(pkg, `${lastTag}...${latestTag}`))
   );
@@ -211,7 +209,3 @@ async function getCommitsInRange(pkg, range) {
     commits,
   };
 }
-
-module.exports = {
-  generate,
-};

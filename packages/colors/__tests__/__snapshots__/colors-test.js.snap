@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`colors 1`] = `
-Object {
-  "black": Object {
+{
+  "black": {
     "100": "#000000",
   },
-  "blue": Object {
+  "blue": {
     "10": "#edf5ff",
     "100": "#001141",
     "20": "#d0e2ff",
@@ -17,7 +17,7 @@ Object {
     "80": "#002d9c",
     "90": "#001d6c",
   },
-  "coolGray": Object {
+  "coolGray": {
     "10": "#f2f4f8",
     "100": "#121619",
     "20": "#dde1e6",
@@ -29,7 +29,7 @@ Object {
     "80": "#343a3f",
     "90": "#21272a",
   },
-  "cyan": Object {
+  "cyan": {
     "10": "#e5f6ff",
     "100": "#061727",
     "20": "#bae6ff",
@@ -41,7 +41,7 @@ Object {
     "80": "#003a6d",
     "90": "#012749",
   },
-  "gray": Object {
+  "gray": {
     "10": "#f4f4f4",
     "100": "#161616",
     "20": "#e0e0e0",
@@ -53,7 +53,7 @@ Object {
     "80": "#393939",
     "90": "#262626",
   },
-  "green": Object {
+  "green": {
     "10": "#defbe6",
     "100": "#071908",
     "20": "#a7f0ba",
@@ -65,7 +65,7 @@ Object {
     "80": "#044317",
     "90": "#022d0d",
   },
-  "magenta": Object {
+  "magenta": {
     "10": "#fff0f7",
     "100": "#2a0a18",
     "20": "#ffd6e8",
@@ -77,7 +77,7 @@ Object {
     "80": "#740937",
     "90": "#510224",
   },
-  "orange": Object {
+  "orange": {
     "10": "#fff2e8",
     "100": "#231000",
     "20": "#ffd9be",
@@ -89,7 +89,7 @@ Object {
     "80": "#5e2900",
     "90": "#3e1a00",
   },
-  "purple": Object {
+  "purple": {
     "10": "#f6f2ff",
     "100": "#1c0f30",
     "20": "#e8daff",
@@ -101,7 +101,7 @@ Object {
     "80": "#491d8b",
     "90": "#31135e",
   },
-  "red": Object {
+  "red": {
     "10": "#fff1f1",
     "100": "#2d0709",
     "20": "#ffd7d9",
@@ -113,7 +113,7 @@ Object {
     "80": "#750e13",
     "90": "#520408",
   },
-  "teal": Object {
+  "teal": {
     "10": "#d9fbfb",
     "100": "#081a1c",
     "20": "#9ef0f0",
@@ -125,7 +125,7 @@ Object {
     "80": "#004144",
     "90": "#022b30",
   },
-  "warmGray": Object {
+  "warmGray": {
     "10": "#f7f3f2",
     "100": "#171414",
     "20": "#e5e0df",
@@ -137,10 +137,10 @@ Object {
     "80": "#3c3838",
     "90": "#272525",
   },
-  "white": Object {
+  "white": {
     "0": "#ffffff",
   },
-  "yellow": Object {
+  "yellow": {
     "10": "#fcf4d6",
     "100": "#1c1500",
     "20": "#fddc69",
@@ -156,9 +156,9 @@ Object {
 `;
 
 exports[`hoverColors 1`] = `
-Object {
+{
   "blackHover": "#212121",
-  "blueHover": Object {
+  "blueHover": {
     "10": "#dbebff",
     "100": "#001f75",
     "20": "#b8d3ff",
@@ -170,7 +170,7 @@ Object {
     "80": "#0039c7",
     "90": "#00258a",
   },
-  "coolGrayHover": Object {
+  "coolGrayHover": {
     "10": "#e4e9f1",
     "100": "#222a2f",
     "20": "#cdd3da",
@@ -182,7 +182,7 @@ Object {
     "80": "#434a51",
     "90": "#2b3236",
   },
-  "cyanHover": Object {
+  "cyanHover": {
     "10": "#cceeff",
     "100": "#0b2947",
     "20": "#99daff",
@@ -194,7 +194,7 @@ Object {
     "80": "#00498a",
     "90": "#013360",
   },
-  "grayHover": Object {
+  "grayHover": {
     "10": "#e8e8e8",
     "100": "#292929",
     "20": "#d1d1d1",
@@ -206,7 +206,7 @@ Object {
     "80": "#474747",
     "90": "#333333",
   },
-  "greenHover": Object {
+  "greenHover": {
     "10": "#b6f6c8",
     "100": "#0d300f",
     "20": "#74e792",
@@ -218,7 +218,7 @@ Object {
     "80": "#05521c",
     "90": "#033b11",
   },
-  "magentaHover": Object {
+  "magentaHover": {
     "10": "#ffe0ef",
     "100": "#53142f",
     "20": "#ffbdda",
@@ -230,7 +230,7 @@ Object {
     "80": "#8e0b43",
     "90": "#68032e",
   },
-  "orangeHover": Object {
+  "orangeHover": {
     "10": "#ffe2cc",
     "100": "#421e00",
     "20": "#ffc69e",
@@ -242,7 +242,7 @@ Object {
     "80": "#753300",
     "90": "#522200",
   },
-  "purpleHover": Object {
+  "purpleHover": {
     "10": "#ede5ff",
     "100": "#341c59",
     "20": "#dcc7ff",
@@ -254,7 +254,7 @@ Object {
     "80": "#5b24ad",
     "90": "#40197b",
   },
-  "redHover": Object {
+  "redHover": {
     "10": "#ffe0e0",
     "100": "#540d11",
     "20": "#ffc2c5",
@@ -266,7 +266,7 @@ Object {
     "80": "#921118",
     "90": "#66050a",
   },
-  "tealHover": Object {
+  "tealHover": {
     "10": "#acf6f6",
     "100": "#0f3034",
     "20": "#57e5e5",
@@ -278,7 +278,7 @@ Object {
     "80": "#005357",
     "90": "#033940",
   },
-  "warmGrayHover": Object {
+  "warmGrayHover": {
     "10": "#f0e8e6",
     "100": "#2c2626",
     "20": "#d8d0cf",
@@ -291,7 +291,7 @@ Object {
     "90": "#343232",
   },
   "whiteHover": "#e8e8e8",
-  "yellowHover": Object {
+  "yellowHover": {
     "10": "#f8e6a0",
     "100": "#332600",
     "20": "#fccd27",
