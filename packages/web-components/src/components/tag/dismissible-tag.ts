@@ -137,8 +137,12 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   /**
    * Specify the tooltip alignment for the dismiss button
    */
-  @property({ type: String, attribute: 'dismiss-tooltip-align', reflect: true })
-  dismissTooltipAlign = 'bottom';
+  @property({
+    type: String,
+    attribute: 'dismiss-tooltip-alignment',
+    reflect: true,
+  })
+  dismissTooltipAlignment = 'bottom';
 
   /**
    * Provide a custom tooltip label for the dismiss button
@@ -186,7 +190,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       tagTitle,
       text,
       dismissTooltipLabel,
-      dismissTooltipAlign,
+      dismissTooltipAlignment,
     } = this;
 
     const dismissLabel = `Dismiss "${text}"`;
@@ -206,7 +210,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
         <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
-        <cds-tooltip align=${dismissTooltipAlign} enter-delay-ms=${0}>
+        <cds-tooltip align=${dismissTooltipAlignment} enter-delay-ms=${0}>
           <button
             class="sb-tooltip-trigger"
             role="button"

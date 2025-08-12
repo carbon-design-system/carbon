@@ -110,7 +110,7 @@ export const Dismissible = {
       control: 'text',
       description: 'Provide text to be rendered inside of a the tag.',
     },
-    dismissTooltipAlign: {
+    dismissTooltipAlignment: {
       control: 'select',
       options: tooltipAlignments,
       description: 'Specify the tooltip alignment for the dismiss button',
@@ -121,9 +121,9 @@ export const Dismissible = {
   },
   args: {
     ...defaultArgs,
-    dismissTooltipAlign: 'bottom',
+    dismissTooltipAlignment: 'bottom',
   },
-  render: ({ disabled, size, text, dismissTooltipAlign }) => {
+  render: ({ disabled, size, text, dismissTooltipAlignment }) => {
     const tags = [
       {
         type: 'red',
@@ -193,7 +193,7 @@ export const Dismissible = {
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
             size="${size}"
-            dismiss-tooltip-align="${dismissTooltipAlign}"
+            dismiss-tooltip-alignment="${dismissTooltipAlignment}"
             >${Asleep16({ slot: 'icon' })}</cds-dismissible-tag
           >`
       )}`;

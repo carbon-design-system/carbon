@@ -49,7 +49,7 @@ export interface DismissibleTagBaseProps {
   /**
    * Specify the tooltip alignment for the dismiss button
    */
-  dismissTooltipAlign?: PopoverAlignment;
+  dismissTooltipAlignment?: PopoverAlignment;
 
   /**
    * Provide a custom tooltip label for the dismiss button
@@ -124,7 +124,7 @@ const DismissibleTag = forwardRef(
       text,
       tagTitle,
       type,
-      dismissTooltipAlign = 'bottom',
+      dismissTooltipAlignment = 'bottom',
       dismissTooltipLabel = 'Dismiss tag',
       ...other
     }: DismissibleTagProps<T>,
@@ -194,7 +194,7 @@ const DismissibleTag = forwardRef(
           )}
           <Tooltip
             label={dismissActionLabel}
-            align={dismissTooltipAlign}
+            align={dismissTooltipAlignment}
             className={tooltipClasses}
             leaveDelayMs={0}
             closeOnActivation>
@@ -231,7 +231,7 @@ DismissibleTag.propTypes = {
   /**
    * Specify the tooltip alignment for the dismiss button
    */
-  dismissTooltipAlign: PropTypes.oneOf([
+  dismissTooltipAlignment: PropTypes.oneOf([
     'top',
     'bottom',
     'left',

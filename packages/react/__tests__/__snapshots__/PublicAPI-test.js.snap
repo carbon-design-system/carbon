@@ -3075,7 +3075,7 @@ Map {
       "disabled": {
         "type": "bool",
       },
-      "dismissTooltipAlign": {
+      "dismissTooltipAlignment": {
         "args": [
           [
             "top",

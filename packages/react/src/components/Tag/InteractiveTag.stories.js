@@ -410,7 +410,7 @@ export const Dismissible = (args) => {
             text={tag.text}
             tagTitle={tag.tagTitle}
             title="Dismiss"
-            dismissTooltipAlign={args.dismissTooltipAlign}
+            dismissTooltipAlignment={args.dismissTooltipAlignment}
             onClose={(e) => {
               e.preventDefault();
               handleClose(tag);
@@ -426,7 +426,7 @@ export const Dismissible = (args) => {
 Dismissible.args = {
   disabled: false,
   size: 'md',
-  dismissTooltipAlign: 'bottom',
+  dismissTooltipAlignment: 'bottom',
 };
 
 Dismissible.argTypes = {
@@ -451,7 +451,7 @@ Dismissible.argTypes = {
       type: 'select',
     },
   },
-  dismissTooltipAlign: {
+  dismissTooltipAlignment: {
     options: [
       'top',
       'top-start',
