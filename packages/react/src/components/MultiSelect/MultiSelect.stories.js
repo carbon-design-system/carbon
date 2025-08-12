@@ -709,3 +709,260 @@ export const SelectAllWithDynamicItems = () => {
     </div>
   );
 };
+
+export const FilterableControlledWithSelectAll = () => {
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [label, setLabel] = useState('Choose options');
+
+  const onSelectionChanged = (value) => {
+    setSelectedItems(value.selectedItems);
+
+    if (value.selectedItems.length === 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  const selectAll = () => {
+    const allSelectableItems = itemsWithSelectAll.filter(
+      (item) => !item.disabled && !item.isSelectAll
+    );
+    setSelectedItems(allSelectableItems);
+    setLabel('Options selected');
+  };
+
+  const selectNone = () => {
+    setSelectedItems([]);
+    setLabel('Choose options');
+  };
+
+  const selectFirst = () => {
+    const firstItem = itemsWithSelectAll.find(
+      (item) => !item.disabled && !item.isSelectAll
+    );
+    setSelectedItems(firstItem ? [firstItem] : []);
+    setLabel(firstItem ? 'Option selected' : 'Choose options');
+  };
+
+  const selectSpecific = (itemIds) => {
+    const specificItems = itemsWithSelectAll.filter(
+      (item) => itemIds.includes(item.id) && !item.disabled
+    );
+    setSelectedItems(specificItems);
+    setLabel(
+      specificItems.length > 1
+        ? 'Options selected'
+        : specificItems.length === 1
+          ? 'Option selected'
+          : 'Choose options'
+    );
+  };
+
+  return (
+    <div style={{ width: 400 }}>
+      <FilterableMultiSelect
+        label={label}
+        id="carbon-filterable-multiselect-controlled"
+        titleText="FilterableMultiSelect with External Control"
+        helperText="Test external control of selectedItems prop"
+        placeholder="Search and select roles..."
+        items={itemsWithSelectAll}
+        selectedItems={selectedItems}
+        onChange={(data) => onSelectionChanged(data)}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+      />
+
+      <div style={{ marginTop: '16px' }}>
+        <strong
+          style={{ marginBottom: '12px', display: 'block', fontSize: '14px' }}>
+          External Controls:
+        </strong>
+
+        <ButtonSet style={{ marginBottom: '12px' }}>
+          <Button size="sm" onClick={selectAll}>
+            Select All (External)
+          </Button>
+          <Button size="sm" kind="secondary" onClick={selectNone}>
+            Clear All
+          </Button>
+        </ButtonSet>
+
+        <ButtonSet style={{ marginBottom: '12px' }}>
+          <Button
+            size="sm"
+            kind="tertiary"
+            onClick={() =>
+              selectSpecific(['downshift-1-item-0', 'downshift-1-item-1'])
+            }>
+            Select Editor + Owner
+          </Button>
+          <Button
+            size="sm"
+            kind="tertiary"
+            onClick={() => selectSpecific(['downshift-1-item-2'])}>
+            Select Uploader Only
+          </Button>
+          <Button size="sm" kind="tertiary" onClick={selectFirst}>
+            Select First
+          </Button>
+        </ButtonSet>
+
+        <div
+          style={{
+            marginTop: '16px',
+            padding: '16px',
+            backgroundColor: '#f4f4f4',
+            borderRadius: '4px',
+            fontSize: '14px',
+          }}>
+          <strong style={{ marginBottom: '8px', display: 'block' }}>
+            Current Selection:
+          </strong>
+          {selectedItems.length === 0 ? (
+            <em style={{ color: '#6f6f6f' }}>None selected</em>
+          ) : (
+            <ul style={{ margin: '0', paddingLeft: '20px' }}>
+              {selectedItems.map((item) => (
+                <li key={item.id} style={{ marginBottom: '4px' }}>
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const MultiSelectControlledWithSelectAll = () => {
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [label, setLabel] = useState('Choose options');
+
+  const onSelectionChanged = (value) => {
+    setSelectedItems(value.selectedItems);
+
+    if (value.selectedItems.length === 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  const selectAll = () => {
+    const allSelectableItems = itemsWithSelectAll.filter(
+      (item) => !item.disabled && !item.isSelectAll
+    );
+    setSelectedItems(allSelectableItems);
+    setLabel('Options selected');
+  };
+
+  const selectNone = () => {
+    setSelectedItems([]);
+    setLabel('Choose options');
+  };
+
+  const selectFirst = () => {
+    const firstItem = itemsWithSelectAll.find(
+      (item) => !item.disabled && !item.isSelectAll
+    );
+    setSelectedItems(firstItem ? [firstItem] : []);
+    setLabel(firstItem ? 'Option selected' : 'Choose options');
+  };
+
+  const selectSpecific = (itemIds) => {
+    const specificItems = itemsWithSelectAll.filter(
+      (item) => itemIds.includes(item.id) && !item.disabled
+    );
+    setSelectedItems(specificItems);
+    setLabel(
+      specificItems.length > 1
+        ? 'Options selected'
+        : specificItems.length === 1
+          ? 'Option selected'
+          : 'Choose options'
+    );
+  };
+
+  return (
+    <div style={{ width: 400 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-controlled"
+        titleText="MultiSelect with External Control"
+        helperText="Test external control of selectedItems prop"
+        items={itemsWithSelectAll}
+        selectedItems={selectedItems}
+        onChange={(data) => onSelectionChanged(data)}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+      />
+
+      <div style={{ marginTop: '16px' }}>
+        <strong
+          style={{ marginBottom: '12px', display: 'block', fontSize: '14px' }}>
+          External Controls:
+        </strong>
+
+        <ButtonSet style={{ marginBottom: '12px' }}>
+          <Button size="sm" onClick={selectAll}>
+            Select All (External)
+          </Button>
+          <Button size="sm" kind="secondary" onClick={selectNone}>
+            Clear All
+          </Button>
+        </ButtonSet>
+
+        <ButtonSet style={{ marginBottom: '12px' }}>
+          <Button size="sm" kind="tertiary" onClick={selectFirst}>
+            Select First
+          </Button>
+          <Button
+            size="sm"
+            kind="tertiary"
+            onClick={() =>
+              selectSpecific(['downshift-1-item-0', 'downshift-1-item-1'])
+            }>
+            Select Editor + Owner
+          </Button>
+          <Button
+            size="sm"
+            kind="tertiary"
+            onClick={() => selectSpecific(['downshift-1-item-2'])}>
+            Select Uploader Only
+          </Button>
+        </ButtonSet>
+
+        <div
+          style={{
+            marginTop: '16px',
+            padding: '16px',
+            backgroundColor: '#f4f4f4',
+            borderRadius: '4px',
+            fontSize: '14px',
+          }}>
+          <strong style={{ marginBottom: '8px', display: 'block' }}>
+            Current Selection:
+          </strong>
+          {selectedItems.length === 0 ? (
+            <em style={{ color: '#6f6f6f' }}>None selected</em>
+          ) : (
+            <ul style={{ margin: '0', paddingLeft: '20px' }}>
+              {selectedItems.map((item) => (
+                <li key={item.id} style={{ marginBottom: '4px' }}>
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};

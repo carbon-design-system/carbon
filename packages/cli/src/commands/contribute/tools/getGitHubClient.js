@@ -5,17 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const Octokit = require('@octokit/rest');
-const { prompt } = require('inquirer');
+import inquirer from 'inquirer';
+import { Octokit } from '@octokit/rest';
 
 const CustomOctokit = Octokit.plugin([
-  require('@octokit/plugin-throttling'),
-  require('@octokit/plugin-retry'),
+  import('@octokit/plugin-throttling'),
+  import('@octokit/plugin-retry'),
 ]);
 
-async function getGitHubClient() {
+export default async function getGitHubClient() {
   let { GH_TOKEN } = process.env;
 
   if (!GH_TOKEN) {
@@ -27,7 +25,7 @@ async function getGitHubClient() {
         hint: 'Help: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line',
       },
     ];
-    const answers = await prompt(question);
+    const answers = await inquirer.prompt(question);
     GH_TOKEN = answers.token;
   }
 
@@ -67,5 +65,3 @@ async function getGitHubClient() {
     throw new Error('Invalid GitHub token');
   }
 }
-
-module.exports = getGitHubClient;

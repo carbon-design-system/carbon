@@ -8,7 +8,7 @@
 'use strict';
 
 const clipboard = require('clipboardy');
-const prettier = require('prettier2');
+const prettier = require('prettier');
 const CarbonComponents = require('@carbon/react');
 const enquirer = require('enquirer');
 const fs = require('fs-extra');
