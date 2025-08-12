@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const chalk = require('chalk');
-const util = require('util');
-const toHaveNoAxeViolations = require('../matchers/toHaveNoAxeViolations');
-const toHaveNoACViolations = require('../matchers/toHaveNoACViolations');
+import chalk from 'chalk';
+import util from 'util';
+import toHaveNoAxeViolations from '../matchers/toHaveNoAxeViolations.js';
+import toHaveNoACViolations from '../matchers/toHaveNoACViolations.js';
 
-require('@testing-library/jest-dom');
+import '@testing-library/jest-dom';
 
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
