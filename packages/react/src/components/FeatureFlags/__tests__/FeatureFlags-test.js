@@ -633,5 +633,58 @@ describe('FeatureFlags', () => {
         enableV12DynamicFloatingStyles: true,
       });
     });
+    it('enable-enhanced-file-uploader - enableEnhancedFileUploader', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableEnhancedFileUploader = useFeatureFlag(
+          'enable-enhanced-file-uploader'
+        );
+
+        checkFlags({
+          enableEnhancedFileUploader: featureFlags.enabled(
+            'enable-enhanced-file-uploader'
+          ),
+        });
+
+        checkFlag({
+          enableEnhancedFileUploader,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableEnhancedFileUploader: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableEnhancedFileUploader: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableEnhancedFileUploader>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag is true and does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableEnhancedFileUploader: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableEnhancedFileUploader: true,
+      });
+    });
   });
 });
