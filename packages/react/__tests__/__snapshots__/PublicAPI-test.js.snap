@@ -10231,35 +10231,35 @@ Map {
     },
     "render": [Function],
   },
-  "preview__Dialog" => Object {
-    "Dialog": Object {
+  "preview__Dialog" => {
+    "Dialog": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "aria-label": Object {
+      "propTypes": {
+        "aria-label": {
           "type": "string",
         },
-        "aria-labelledby": Object {
+        "aria-labelledby": {
           "type": "string",
         },
-        "ariaDescribedBy": Object {
+        "ariaDescribedBy": {
           "type": "string",
         },
-        "children": Object {
+        "children": {
           "type": "node",
         },
-        "className": Object {
+        "className": {
           "type": "string",
         },
-        "focusAfterCloseRef": Object {
-          "args": Array [
-            Array [
-              Object {
+        "focusAfterCloseRef": {
+          "args": [
+            [
+              {
                 "type": "func",
               },
-              Object {
-                "args": Array [
-                  Object {
-                    "current": Object {
+              {
+                "args": [
+                  {
+                    "current": {
                       "type": "any",
                     },
                   },
@@ -10270,18 +10270,18 @@ Map {
           ],
           "type": "oneOfType",
         },
-        "modal": Object {
+        "modal": {
           "type": "bool",
         },
-        "onRequestClose": Object {
+        "onRequestClose": {
           "type": "func",
         },
-        "open": Object {
+        "open": {
           "type": "bool",
         },
-        "role": Object {
-          "args": Array [
-            Array [
+        "role": {
+          "args": [
+            [
               "dialog",
               "alertdialog",
             ],
@@ -10291,60 +10291,60 @@ Map {
       },
       "render": [Function],
     },
-    "DialogBody": Object {
+    "DialogBody": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "children": Object {
+      "propTypes": {
+        "children": {
           "type": "node",
         },
-        "className": Object {
+        "className": {
           "type": "string",
         },
-        "hasScrollingContent": Object {
+        "hasScrollingContent": {
           "type": "bool",
         },
       },
       "render": [Function],
     },
-    "DialogCloseButton": Object {
+    "DialogCloseButton": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "onClick": Object {
+      "propTypes": {
+        "onClick": {
           "type": "func",
         },
       },
       "render": [Function],
     },
-    "DialogControls": Object {
+    "DialogControls": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "children": Object {
+      "propTypes": {
+        "children": {
           "type": "node",
         },
       },
       "render": [Function],
     },
-    "DialogFooter": Object {
+    "DialogFooter": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "children": Object {
+      "propTypes": {
+        "children": {
           "type": "node",
         },
-        "className": Object {
+        "className": {
           "type": "string",
         },
-        "danger": Object {
+        "danger": {
           "type": "bool",
         },
-        "loadingDescription": Object {
+        "loadingDescription": {
           "type": "string",
         },
-        "loadingIconDescription": Object {
+        "loadingIconDescription": {
           "type": "string",
         },
-        "loadingStatus": Object {
-          "args": Array [
-            Array [
+        "loadingStatus": {
+          "args": [
+            [
               "inactive",
               "active",
               "finished",
@@ -10353,79 +10353,74 @@ Map {
           ],
           "type": "oneOf",
         },
-        "onLoadingSuccess": Object {
+        "onLoadingSuccess": {
           "type": "func",
         },
-        "onRequestClose": Object {
+        "onRequestClose": {
           "type": "func",
         },
-        "onRequestSubmit": Object {
+        "onRequestSubmit": {
           "type": "func",
         },
-        "onSecondarySubmit": Object {
+        "onSecondarySubmit": {
           "type": "func",
         },
-        "primaryButtonDisabled": Object {
+        "primaryButtonDisabled": {
           "type": "bool",
         },
-        "primaryButtonText": Object {
+        "primaryButtonText": {
           "type": "node",
         },
-        "secondaryButtonText": Object {
+        "secondaryButtonText": {
           "type": "node",
         },
         "secondaryButtons": [Function],
       },
       "render": [Function],
     },
-    "DialogHeader": Object {
+    "DialogHeader": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "children": Object {
+      "propTypes": {
+        "children": {
           "type": "node",
         },
       },
       "render": [Function],
     },
-    "DialogSubtitle": Object {
+    "DialogSubtitle": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "children": Object {
+      "propTypes": {
+        "children": {
           "type": "node",
         },
-        "className": Object {
+        "className": {
           "type": "string",
         },
-        "id": Object {
+        "id": {
           "type": "string",
         },
       },
       "render": [Function],
     },
-    "DialogTitle": Object {
+    "DialogTitle": {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "children": Object {
+      "propTypes": {
+        "children": {
           "type": "node",
         },
-        "className": Object {
+        "className": {
           "type": "string",
         },
-        "id": Object {
+        "id": {
           "type": "string",
         },
       },
       "render": [Function],
     },
   },
-  "unstable_FeatureFlags" => Object {
-    "propTypes": Object {
-      "children": Object {
-
   "unstable_FeatureFlags" => {
     "propTypes": {
       "children": {
-
         "type": "node",
       },
       "enableDialogElement": {
