@@ -10231,6 +10231,193 @@ Map {
     },
     "render": [Function],
   },
+  "preview__Dialog" => {
+    "Dialog": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "aria-label": {
+          "type": "string",
+        },
+        "aria-labelledby": {
+          "type": "string",
+        },
+        "ariaDescribedBy": {
+          "type": "string",
+        },
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "focusAfterCloseRef": {
+          "args": [
+            [
+              {
+                "type": "func",
+              },
+              {
+                "args": [
+                  {
+                    "current": {
+                      "type": "any",
+                    },
+                  },
+                ],
+                "type": "shape",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "modal": {
+          "type": "bool",
+        },
+        "onRequestClose": {
+          "type": "func",
+        },
+        "open": {
+          "type": "bool",
+        },
+        "role": {
+          "args": [
+            [
+              "dialog",
+              "alertdialog",
+            ],
+          ],
+          "type": "oneOf",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "hasScrollingContent": {
+          "type": "bool",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogCloseButton": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "onClick": {
+          "type": "func",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogControls": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogFooter": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "danger": {
+          "type": "bool",
+        },
+        "loadingDescription": {
+          "type": "string",
+        },
+        "loadingIconDescription": {
+          "type": "string",
+        },
+        "loadingStatus": {
+          "args": [
+            [
+              "inactive",
+              "active",
+              "finished",
+              "error",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "onLoadingSuccess": {
+          "type": "func",
+        },
+        "onRequestClose": {
+          "type": "func",
+        },
+        "onRequestSubmit": {
+          "type": "func",
+        },
+        "onSecondarySubmit": {
+          "type": "func",
+        },
+        "primaryButtonDisabled": {
+          "type": "bool",
+        },
+        "primaryButtonText": {
+          "type": "node",
+        },
+        "secondaryButtonText": {
+          "type": "node",
+        },
+        "secondaryButtons": [Function],
+      },
+      "render": [Function],
+    },
+    "DialogHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogSubtitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "id": {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogTitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "id": {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+  },
   "unstable_FeatureFlags" => {
     "propTypes": {
       "children": {
