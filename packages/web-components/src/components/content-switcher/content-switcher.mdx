@@ -1,5 +1,5 @@
 import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as ContentSwitcherStories from './content-switcher.stories';
 
 <Meta of={ContentSwitcherStories} />
@@ -19,11 +19,9 @@ import * as ContentSwitcherStories from './content-switcher.stories';
 - [Icon Only With Layer](#icon-only-with-layer)
 - [With Layer](#with-layer)
 - [Component API](#component-api)
-  - [ContentSwitcher `onChange`](#contentswitcher-onchange)
-  - [Switch `disabled`](#switch-disabled)
 - [CDN](#cdn)
+- [Accessibility concerns](#accessibility-concerns)
 - [References](#references)
-  - [Accessibility concerns](#accessibility-concerns)
 - [Feedback](#feedback)
 
 ## Overview
@@ -73,27 +71,27 @@ You can disable the content switcher items by adding the `disabled` attribute to
 `cds-content-switcher-item` elements directly.
 
 <cds-content-switcher>
-  <cds-content-switcher-item disabled name="one" text="First section">
-    Option 1
+  <cds-content-switcher-item disabled value="all" name="one">
+    First section
   </cds-content-switcher-item>
-  <cds-content-switcher-item disabled name="two" text="Second section">
-    Option 2
+  <cds-content-switcher-item disabled value="cloudFoundry " name="two">
+    Second section
   </cds-content-switcher-item>
-  <cds-content-switcher-item disabled name="three" text="Third section">
-    Option 3
+  <cds-content-switcher-item disabled value="staging" name="three">
+    Third section
   </cds-content-switcher-item>
 </cds-content-switcher>
 
 ```html
 <cds-content-switcher>
-  <cds-content-switcher-item disabled name="one" text="First section">
-    Option 1
+  <cds-content-switcher-item disabled value="all" name="one">
+    First section
   </cds-content-switcher-item>
-  <cds-content-switcher-item disabled name="two" text="Second section">
-    Option 2
+  <cds-content-switcher-item disabled value="cloudFoundry" name="two">
+    Second section
   </cds-content-switcher-item>
-  <cds-content-switcher-item disabled name="three" text="Third section">
-    Option 3
+  <cds-content-switcher-item disabled value="staging" name="three">
+    Third section
   </cds-content-switcher-item>
 </cds-content-switcher>
 ```

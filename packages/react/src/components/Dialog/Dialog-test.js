@@ -8,7 +8,7 @@
 import React, { useRef, useState } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { unstable__Dialog as Dialog, DialogCloseButton } from './';
+import { Dialog, DialogCloseButton } from './Dialog';
 
 const prefix = 'cds';
 
