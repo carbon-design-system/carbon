@@ -3470,6 +3470,9 @@ Map {
       "enableDialogElement": {
         "type": "bool",
       },
+      "enableEnhancedFileUploader": {
+        "type": "bool",
+      },
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
@@ -3565,7 +3568,9 @@ Map {
         "args": [
           [
             "sm",
+            "small",
             "md",
+            "field",
             "lg",
           ],
         ],
@@ -10424,6 +10429,9 @@ Map {
         "type": "node",
       },
       "enableDialogElement": {
+        "type": "bool",
+      },
+      "enableEnhancedFileUploader": {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
