@@ -128,6 +128,7 @@ export default function Copy({
       autoAlign={autoAlign}
       className={classNames}
       label={animation ? feedback : initialLabel}
+      leaveDelayMs={animation ? feedbackTimeout : undefined}
       onClick={composeEventHandlers([onClick, handleClick])}
       onAnimationEnd={composeEventHandlers([
         onAnimationEnd,

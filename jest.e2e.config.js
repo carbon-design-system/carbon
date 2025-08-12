@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-module.exports = {
+export default {
   preset: 'jest-config-carbon',
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
@@ -21,6 +19,8 @@ module.exports = {
     '/packages/components/',
     '/packages/react/',
   ],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
+  ],
   reporters: ['default', 'jest-junit'],
 };

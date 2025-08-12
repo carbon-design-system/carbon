@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { jest } from '@jest/globals';
 
 jest.setTimeout(20000);
 

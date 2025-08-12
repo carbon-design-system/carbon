@@ -1,27 +1,27 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const execa = require('execa');
-const { prompt } = require('inquirer');
-const semver = require('semver');
-const { generate } = require('../changelog');
-const { fetchLatestFromUpstream } = require('../git');
-const { createLogger, displayBanner } = require('../logger');
-const { getPackages } = require('../workspace');
+import { execa } from 'execa';
+import inquirer from 'inquirer';
+import semver from 'semver';
+import { generate } from '../changelog.js';
+import { fetchLatestFromUpstream } from '../git.js';
+import { createLogger, displayBanner } from '../logger.js';
+import { getPackages } from '../workspace.js';
 
 const logger = createLogger('publish');
+
 // Enqueue tasks to run at the end of the command where we want to "clean-up"
 // the environment
 const deferred = [];
 function defer(thunk) {
   deferred.push(thunk);
 }
+
 async function cleanup() {
   for (let i = deferred.length - 1; i >= 0; i--) {
     const task = deferred[i];
@@ -144,7 +144,7 @@ async function publish({ tag, ...flags }) {
 
   // We specify a stopping point so that the operator can verify the packages
   // published as intended before setting the `latest` dist-tag
-  const answers = await prompt([
+  const answers = await inquirer.prompt([
     {
       type: 'confirm',
       name: 'tags',
@@ -170,7 +170,7 @@ async function publish({ tag, ...flags }) {
   }
 
   if (!noPush) {
-    const { remote } = await prompt([
+    const { remote } = await inquirer.prompt([
       {
         type: 'confirm',
         name: 'remote',
@@ -191,7 +191,7 @@ async function publish({ tag, ...flags }) {
   const changelog = await generate(packages, lastTag, tag);
   logger.stop();
 
-  const { display } = await prompt([
+  const { display } = await inquirer.prompt([
     {
       type: 'confirm',
       name: 'display',
@@ -218,55 +218,55 @@ async function getLastGitTag() {
   return tags[0];
 }
 
-module.exports = {
-  command: 'publish <tag>',
-  desc: 'publish packages that have different versions from the package registry',
-  builder(yargs) {
-    yargs.positional('tag', {
-      describe: 'the version tag associated with the release',
-      type: 'string',
-    });
+export const builder = (yargs) => {
+  yargs.positional('tag', {
+    describe: 'the version tag associated with the release',
+    type: 'string',
+  });
 
-    yargs.option('skip-reset', {
-      demandOption: false,
-      default: false,
-      describe: 'Skip the project reset step',
-      type: 'boolean',
-    });
+  yargs.option('skip-reset', {
+    demandOption: false,
+    default: false,
+    describe: 'Skip the project reset step',
+    type: 'boolean',
+  });
 
-    yargs.option('registry', {
-      demandOption: false,
-      describe: 'Specify registry URL',
-      default: 'https://registry.npmjs.org/',
-      type: 'string',
-    });
+  yargs.option('registry', {
+    demandOption: false,
+    describe: 'Specify registry URL',
+    default: 'https://registry.npmjs.org/',
+    type: 'string',
+  });
 
-    yargs.option('no-git-tag-version', {
-      demandOption: false,
-      describe: 'Do not commit or tag version changes.',
-      default: false,
-      type: 'boolean',
-    });
+  yargs.option('no-git-tag-version', {
+    demandOption: false,
+    describe: 'Do not commit or tag version changes.',
+    default: false,
+    type: 'boolean',
+  });
 
-    yargs.option('git-remote', {
-      demandOption: false,
-      describe: 'Push git changes to the specified remote.',
-      default: 'upstream',
-      type: 'string',
-    });
+  yargs.option('git-remote', {
+    demandOption: false,
+    describe: 'Push git changes to the specified remote.',
+    default: 'upstream',
+    type: 'string',
+  });
 
-    yargs.option('no-push', {
-      demandOption: false,
-      describe: 'Do not push tagged commit to git remote.',
-      default: false,
-      type: 'boolean',
-    });
-  },
-  async handler(...args) {
-    try {
-      await publish(...args);
-    } finally {
-      await cleanup();
-    }
-  },
+  yargs.option('no-push', {
+    demandOption: false,
+    describe: 'Do not push tagged commit to git remote.',
+    default: false,
+    type: 'boolean',
+  });
+};
+
+export const command = 'publish <tag>';
+export const desc =
+  'publish packages that have different versions from the package registry';
+export const handler = async (...args) => {
+  try {
+    await publish(...args);
+  } finally {
+    await cleanup();
+  }
 };

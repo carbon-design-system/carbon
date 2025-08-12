@@ -131,6 +131,31 @@ describe('Link', () => {
     expect(document.body).toHaveFocus();
   });
 
+  // check for disabled onclick handler
+  it('should not call onClick when disabled', async () => {
+    const onClick = jest.fn();
+    render(
+      <Link href="/" disabled onClick={onClick} className="some-class">
+        A simple link
+      </Link>
+    );
+    const link = screen.getByText('A simple link');
+    await userEvent.click(link);
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it('should call onClick when not disabled', async () => {
+    const onClick = jest.fn();
+    render(
+      <Link href="/" onClick={onClick} className="some-class">
+        A simple link
+      </Link>
+    );
+    const link = screen.getByText('A simple link');
+    await userEvent.click(link);
+    expect(onClick).toHaveBeenCalled();
+  });
+
   describe('automated verification testing', () => {
     it('should have no aXe violations', async () => {
       render(
