@@ -9,7 +9,7 @@ import { render, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FileUploader from '../';
-import { WithFeatureFlags } from '../../../../.storybook/templates/WithFeatureFlags';
+import { FeatureFlags } from '../../FeatureFlags';
 import React from 'react';
 import { uploadFiles } from '../test-helpers';
 
@@ -154,13 +154,13 @@ describe('FileUploader', () => {
       const onChange = jest.fn();
 
       render(
-        <WithFeatureFlags flags={{ 'enable-enhanced-file-uploader': true }}>
+        <FeatureFlags enableEnhancedFileUploader>
           <FileUploader
             {...requiredProps}
             multiple={true}
             onChange={onChange}
           />
-        </WithFeatureFlags>
+        </FeatureFlags>
       );
 
       const input = document.querySelector('input[type="file"]');
@@ -186,13 +186,13 @@ describe('FileUploader', () => {
       const onChange = jest.fn();
 
       render(
-        <WithFeatureFlags flags={{ 'enable-enhanced-file-uploader': true }}>
+        <FeatureFlags enableEnhancedFileUploader>
           <FileUploader
             {...requiredProps}
             multiple={false}
             onChange={onChange}
           />
-        </WithFeatureFlags>
+        </FeatureFlags>
       );
 
       const input = document.querySelector('input[type="file"]');
@@ -213,14 +213,14 @@ describe('FileUploader', () => {
       const onChange = jest.fn();
 
       render(
-        <WithFeatureFlags flags={{ 'enable-enhanced-file-uploader': true }}>
+        <FeatureFlags enableEnhancedFileUploader>
           <FileUploader
             {...requiredProps}
             filenameStatus="edit"
             onDelete={onDelete}
             onChange={onChange}
           />
-        </WithFeatureFlags>
+        </FeatureFlags>
       );
 
       const input = document.querySelector('input[type="file"]');
@@ -250,9 +250,9 @@ describe('FileUploader', () => {
       const ref = React.createRef();
 
       render(
-        <WithFeatureFlags flags={{ 'enable-enhanced-file-uploader': true }}>
+        <FeatureFlags enableEnhancedFileUploader>
           <FileUploader {...requiredProps} ref={ref} multiple={true} />
-        </WithFeatureFlags>
+        </FeatureFlags>
       );
 
       const input = document.querySelector('input[type="file"]');
