@@ -102,7 +102,7 @@ export const WithInteractiveElements = {
         kind="${NOTIFICATION_KIND.INFO}"
         title="Notification title"
         title-id="callout-title-interactive"
-        ?low-contrast="${true}">
+        ?low-contrast="true">
         <div class="${prefix}--actionable-notification__subtitle">
           Additional text can describe the notification, or a link to
           <a href="#" aria-describedby="callout-title-interactive"
