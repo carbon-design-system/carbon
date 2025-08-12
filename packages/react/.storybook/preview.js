@@ -12,6 +12,7 @@ import {
   Stories,
   ArgTypes,
 } from '@storybook/addon-docs/blocks';
+import { allModes } from './modes';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -154,24 +155,12 @@ const parameters = {
       cellSize: 8,
       opacity: 0.5,
     },
-    values: [
-      {
-        name: 'white',
-        value: white.background,
-      },
-      {
-        name: 'g10',
-        value: g10.background,
-      },
-      {
-        name: 'g90',
-        value: g90.background,
-      },
-      {
-        name: 'g100',
-        value: g100.background,
-      },
-    ],
+    options: {
+      white: { name: 'white', value: white.background },
+      g10: { name: 'g10', value: g10.background },
+      g90: { name: 'g90', value: g90.background },
+      g100: { name: 'g100', value: g100.background },
+    },
   },
   controls: {
     // https://storybook.js.org/docs/react/essentials/controls#show-full-documentation-for-each-property
@@ -333,6 +322,14 @@ const parameters = {
       // By default, if we have no matches we'll do a locale compare between the
       // two ids
       return idA.localeCompare(idB);
+    },
+  },
+  chromatic: {
+    modes: {
+      g10: allModes['g10'],
+      g90: allModes['g90'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
     },
   },
 };
