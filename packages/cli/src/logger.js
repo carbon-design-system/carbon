@@ -1,13 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 /**
  * Create a logger to be used in a handler. This is typically just for
@@ -15,7 +13,7 @@ const chalk = require('chalk');
  * box-drawing ASCII characters.
  * @returns {object}
  */
-function createLogger(command) {
+export function createLogger(name) {
   const timers = [];
   let indentLevel = 0;
 
@@ -27,7 +25,9 @@ function createLogger(command) {
    * @returns {void}
    */
   function log(boxCharacter, message = '') {
-    console.log(chalk`{yellow ${command} ▐} {gray ${boxCharacter}} ${message}`);
+    console.log(
+      chalk.yellow(`${name} ▐`) + ' ' + chalk.gray(boxCharacter) + ' ' + message
+    );
   }
 
   function getLinePrefix() {
@@ -64,7 +64,10 @@ function createLogger(command) {
       if (message) {
         log(prefix + '┗', message);
       } else {
-        log(prefix + '┗', chalk`{gray Done in {italic ${duration}s}}`);
+        log(
+          prefix + '┗',
+          chalk.gray('Done in ' + chalk.italic(`${duration}s`))
+        );
       }
     },
     newline() {
@@ -78,7 +81,7 @@ function createLogger(command) {
  * Display the banner in the console, typically at the beginning of a handler
  * @returns {void}
  */
-function displayBanner() {
+export function displayBanner() {
   console.log(`
                  _
                 | |
@@ -88,8 +91,3 @@ function displayBanner() {
   \\___\\__,_|_|  |_.__/ \\___/|_| |_|
 `);
 }
-
-module.exports = {
-  createLogger,
-  displayBanner,
-};

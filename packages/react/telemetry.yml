@@ -26,6 +26,7 @@ collect:
         - autoAlign
         - autoComplete
         - buttonKind
+        - caption
         - checked
         - children
         - className
@@ -450,6 +451,7 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - stepStartValue
         # OrderedList
         - native
         # OverflowMenuItem
@@ -494,6 +496,7 @@ collect:
         - itemsShown
         - loop
         # Popover
+        - alignmentAxisOffset
         - autoAlignBoundary
         - caret
         - isTabTip
@@ -542,6 +545,8 @@ collect:
         - unstable_ariaLabelHandleUpper
         # StructuredListCell
         - noWrap
+        # StructuredListWrapper
+        - selectedInitialRow
         # SwitcherItem
         - handleSwitcherItemFocus
         # Tab
@@ -601,15 +606,12 @@ collect:
         - warning
         - warningText
         # ToastNotification
-        - caption
         - timeout
         # Toggle
         - defaultToggled
         - labelA
         - labelB
         - toggled
-        # Toggletip
-        - alignmentAxisOffset
         # TreeNode
         - defaultIsExpanded
         - depth
@@ -850,17 +852,9 @@ collect:
         - g90
         - white
         # General - tooltipAlignment
-        - bottom
-        - bottom-left
-        - bottom-right
         - center
         - end
-        - left
-        - right
         - start
-        - top
-        - top-left
-        - top-right
         # General - tooltipPosition
         - bottom
         - left

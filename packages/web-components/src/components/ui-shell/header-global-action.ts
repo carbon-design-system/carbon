@@ -61,22 +61,37 @@ class CDSHeaderGlobalAction extends CDSButton {
 
   firstUpdated() {
     document.addEventListener('click', this._handleDocumentClick, true);
+    document.addEventListener('focusin', this._handleDocumentFocusIn, true);
   }
 
   disconnectedCallback() {
     document.removeEventListener('click', this._handleDocumentClick, true);
+    document.removeEventListener('focusin', this._handleDocumentFocusIn, true);
     super.disconnectedCallback();
   }
 
   private _handleDocumentClick = (event: MouseEvent) => {
-    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
-    const target = event.composedPath()[0] as HTMLElement;
+    const path = event.composedPath();
+    this._handlePanelCloseIfFocusOutside(path);
+  };
 
-    if (panel && !this.contains(target) && !panel.contains(target)) {
+  private _handleDocumentFocusIn = (event: FocusEvent) => {
+    const path = event.composedPath();
+    this._handlePanelCloseIfFocusOutside(path);
+  };
+
+  private _handlePanelCloseIfFocusOutside(path: EventTarget[]) {
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const isInside = path.some(
+      (el) =>
+        el instanceof HTMLElement && (panel?.contains(el) || this.contains(el))
+    );
+
+    if (panel && !isInside) {
       panel.removeAttribute('expanded');
       this.active = false;
     }
-  };
+  }
 
   @HostListener('focusout')
   // @ts-ignore
