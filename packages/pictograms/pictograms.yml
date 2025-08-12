@@ -2286,11 +2286,6 @@
   aliases:
     - control
     - cloud
-- name: control-panel
-  friendly_name: Control panel
-  aliases:
-    - control panel
-    - cloud
 - name: control--tower
   friendly_name: Control tower
   aliases:
@@ -2299,6 +2294,11 @@
     - Trace
     - Transparent
     - Data
+- name: control-panel
+  friendly_name: Control panel
+  aliases:
+    - control panel
+    - cloud
 - name: controls-framework
   friendly_name: Controls framework
   aliases:
@@ -3535,6 +3535,14 @@
   aliases:
     - filter and group data
     - cloud
+- name: finance--strategy
+  friendly_name: Finance strategy
+  aliases:
+    - finance strategy
+    - finance
+    - strategy
+    - loan
+    - finance
 - name: finance-and-operations
   friendly_name: Finance and operations
   aliases:
@@ -3547,14 +3555,6 @@
     - currency
     - supply chain
     - growth
-- name: finance--strategy
-  friendly_name: Finance strategy
-  aliases:
-    - finance strategy
-    - finance
-    - strategy
-    - loan
-    - finance
 - name: financial--consultant
   friendly_name: Financial consultant
   aliases:
@@ -8615,7 +8615,7 @@
   friendly_name: Team radio
   aliases:
     - radio
-    - walkie-talkie,
+    - 'walkie-talkie,'
     - communication
     - range
     - handheld tranciever
@@ -9973,4 +9973,4 @@
     - Zurich
     - cultural history
     - Switzerland
-    - museum, swiss
+    - 'museum, swiss'
