@@ -276,3 +276,83 @@ WithTypeOfTextControlled.argTypes = {
 export const Skeleton = () => {
   return <NumberInputSkeleton />;
 };
+
+// I need remove this, just for testing
+export const TestControlledSync = () => {
+  const [value, setValue] = React.useState(5);
+
+  return (
+    <div style={{ padding: 16 }}>
+      <NumberInput
+        id="test-controlled-sync"
+        label="Controlled NumberInput"
+        type="number"
+        value={value}
+        onChange={(e, { value }) => {
+          console.log('onChange →', value);
+          setValue(value);
+        }}
+      />
+
+      <div
+        style={{
+          display: 'grid',
+          gap: 8,
+          gridAutoFlow: 'column',
+          width: 'fit-content',
+          marginTop: 16,
+        }}>
+        <Button onClick={() => setValue(6)}>Set 6</Button>
+        <Button onClick={() => setValue(NaN)} kind="tertiary">
+          Set NaN
+        </Button>
+        <Button onClick={() => setValue(5)} kind="ghost">
+          Set 5
+        </Button>
+      </div>
+
+      <div style={{ marginTop: 8 }}>External value: {String(value)}</div>
+    </div>
+  );
+};
+
+// I need remove this, just for testing
+export const TestAsyncUpdate = () => {
+  const [value, setValue] = React.useState(5);
+
+  return (
+    <div style={{ padding: 16 }}>
+      <NumberInput
+        id="test-async-update"
+        label="Async Update NumberInput"
+        type="number"
+        value={value}
+        onChange={(e, { value }) => setValue(value)}
+      />
+
+      <div
+        style={{
+          display: 'grid',
+          gap: 8,
+          gridAutoFlow: 'column',
+          width: 'fit-content',
+          marginTop: 16,
+        }}>
+        <Button
+          onClick={() =>
+            setTimeout(
+              () => setValue((v) => (Number.isNaN(v) ? 0 : v + 1)),
+              300
+            )
+          }>
+          Async +1 (300ms)
+        </Button>
+        <Button onClick={() => setValue(NaN)} kind="tertiary">
+          Set NaN
+        </Button>
+      </div>
+
+      <div style={{ marginTop: 8 }}>External value: {String(value)}</div>
+    </div>
+  );
+};
