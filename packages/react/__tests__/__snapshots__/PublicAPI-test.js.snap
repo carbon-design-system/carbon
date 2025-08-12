@@ -3470,11 +3470,9 @@ Map {
       "enableDialogElement": {
         "type": "bool",
       },
-
-      "enableEnhancedFileUploader": Object {
+      "enableEnhancedFileUploader": {
         "type": "bool",
       },
-      "enableExperimentalFocusWrapWithoutSentinels": Object {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
@@ -10245,12 +10243,11 @@ Map {
       },
       "enableDialogElement": {
         "type": "bool",
-      }
-      "enableEnhancedFileUploader": Object {
+      },
+      "enableEnhancedFileUploader": {
         "type": "bool",
       },
-      "enableExperimentalFocusWrapWithoutSentinels": Object {
-
+      "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
