@@ -11,6 +11,10 @@ export {
   ModalBody,
   type ModalBodyProps,
 } from './ComposedModal';
+export {
+  ComposedModalPresence,
+  type ComposedModalPresenceProps,
+} from './ComposedModalPresence';
 
 export { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 export { ModalFooter, type ModalFooterProps } from './ModalFooter';
