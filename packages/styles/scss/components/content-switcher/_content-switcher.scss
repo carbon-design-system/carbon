@@ -149,8 +149,6 @@
     box-shadow: inset convert.to-rem(1px) 0 0 0 $border-inverse;
 
     &:disabled {
-      border-end-end-radius: convert.to-rem(4px);
-      border-start-end-radius: convert.to-rem(4px);
       box-shadow: none;
     }
   }
@@ -162,8 +160,6 @@
     box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-inverse;
 
     &:disabled {
-      border-end-start-radius: convert.to-rem(4px);
-      border-start-start-radius: convert.to-rem(4px);
       box-shadow: none;
     }
   }
