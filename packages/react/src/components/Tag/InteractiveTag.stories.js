@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -410,6 +410,7 @@ export const Dismissible = (args) => {
             text={tag.text}
             tagTitle={tag.tagTitle}
             title="Dismiss"
+            dismissTooltipAlignment={args.dismissTooltipAlignment}
             onClose={(e) => {
               e.preventDefault();
               handleClose(tag);
@@ -425,6 +426,7 @@ export const Dismissible = (args) => {
 Dismissible.args = {
   disabled: false,
   size: 'md',
+  dismissTooltipAlignment: 'bottom',
 };
 
 Dismissible.argTypes = {
@@ -447,6 +449,27 @@ Dismissible.argTypes = {
     options: ['sm', 'md', 'lg'],
     control: {
       type: 'select',
+    },
+  },
+  dismissTooltipAlignment: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    control: { type: 'select' },
+    description: 'Specify the tooltip alignment for the dismiss button',
+    table: {
+      defaultValue: { summary: 'bottom' },
     },
   },
 };
