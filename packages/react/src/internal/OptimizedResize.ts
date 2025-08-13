@@ -6,7 +6,7 @@
  */
 
 // mdn resize function
-import window from 'window-or-global';
+import { useGlobalWindow } from './useGlobalWindow';
 
 /**
  * A callback function to be executed on `resize`.
@@ -28,7 +28,7 @@ export const OptimizedResize = (() => {
   const handleResize = () => {
     if (!running) {
       running = true;
-      window.requestAnimationFrame(runCallbacks);
+      useGlobalWindow.requestAnimationFrame(runCallbacks);
     }
   };
 
@@ -43,7 +43,7 @@ export const OptimizedResize = (() => {
     /** Adds a callback function to be executed on window `resize`. */
     add: (callback: Callback) => {
       if (!callbacks.length) {
-        window.addEventListener('resize', handleResize);
+        useGlobalWindow.addEventListener('resize', handleResize);
       }
       addCallback(callback);
       return {

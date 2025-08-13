@@ -21,13 +21,13 @@ import React, {
 } from 'react';
 import * as FeatureFlags from '@carbon/feature-flags';
 import ReactDOM from 'react-dom';
-import window from 'window-or-global';
 import { keys, match } from '../internal/keyboard';
 import { OptimizedResize } from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 import { PrefixContext } from './usePrefix';
 import { warning } from './warning';
 import { wrapFocus, wrapFocusWithoutSentinels } from './wrapFocus';
+import { getScrollPosition } from './useGlobalWindow';
 
 export const DIRECTION_LEFT = 'left';
 export const DIRECTION_TOP = 'top';
@@ -279,13 +279,14 @@ export const FloatingMenu = ({
           : menuOffset;
 
       if (updateOrientation) {
+        const { scrollX, scrollY } = getScrollPosition();
         updateOrientation({
           menuSize,
           refPosition,
           direction: menuDirection,
           offset: offsetValue,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
@@ -295,13 +296,14 @@ export const FloatingMenu = ({
 
       // Only set position if the menu has a valid size or if no offset is provided.
       if ((menuSize.width > 0 && menuSize.height > 0) || !offsetValue) {
+        const { scrollX, scrollY } = getScrollPosition();
         const newFloatingPosition = getFloatingPosition({
           menuSize,
           refPosition: refPosition ?? { left: 0, top: 0, right: 0, bottom: 0 },
           offset: offsetValue,
           direction: menuDirection,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
