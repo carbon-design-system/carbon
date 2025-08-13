@@ -665,7 +665,6 @@
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled {
     border-color: $border-disabled;
-    border-radius: convert.to-rem(4px);
   }
 
   .#{$prefix}--content-switcher--low-contrast
