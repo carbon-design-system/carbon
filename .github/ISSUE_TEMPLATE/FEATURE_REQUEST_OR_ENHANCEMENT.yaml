@@ -1,5 +1,5 @@
 name: Feature request or enhancement 💡
-description: Suggest an idea for this project.
+description: Suggest an idea for a new or existing component or pattern.
 title: '[Feature Request]: '
 type: 'enhancement'
 labels: ['type: enhancement 💡', 'status: needs triage :female_detective:']
