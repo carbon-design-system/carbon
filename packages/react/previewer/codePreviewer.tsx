@@ -92,7 +92,10 @@ export const stackblitzPrefillConfig = (
       filename: 'src/stories/FlexGrid.stories.scss',
       content: FlexGridScssRaw,
     },
-    Grid: { filename: 'src/stories/Grid.stories.scss', content: GridScssRaw },
+    Grid: {
+      filename: 'src/stories/Grid.stories.scss',
+      content: GridScssRaw,
+    },
     HideAtBreakpoint: {
       filename: 'src/stories/HideAtBreakpoint.stories.scss',
       content: HideAtBreakpointScssRaw,
@@ -111,6 +114,27 @@ export const stackblitzPrefillConfig = (
   const componentsWithStyles = matchedComponents.filter(
     (c) => storyScssRegistry[c]
   );
+  console.error('componentsWithStyles');
+
+  // Detect if we need flexbox grid enabled
+  const hasFlexboxGridComponent = componentsWithStyles.some(
+    (component) => component === 'Grid' || component === 'FlexGrid'
+  );
+  console.error('hasFlexboxGridComponent');
+
+  // index.scss = base style + conditional @use for story scss
+  const indexScss = `
+${
+  hasFlexboxGridComponent
+    ? `@use '@carbon/react' with (
+  $font-path: '@ibm/plex',
+  $use-flexbox-grid: true
+);`
+    : style
+}
+
+${componentsWithStyles.map((c) => `@use './stories/${c}.stories.scss';`).join('\n')}
+`;
 
   // Generate App.jsx code
   const app = `
@@ -122,13 +146,6 @@ export const stackblitzPrefillConfig = (
     ${storyCode}
   }
   `;
-
-  // index.scss = base style + conditional @use for story scss
-  const indexScss = `
-${style}
-
-${componentsWithStyles.map((c) => `@use './stories/${c}.stories.scss';`).join('\n')}
-`;
 
   // Build files, injecting only the needed .stories.scss files
   const files: Project['files'] = {
