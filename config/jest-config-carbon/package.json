@@ -28,7 +28,7 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.27.3",
-    "accessibility-checker": "^4.0.6",
+    "accessibility-checker": "^4.0.7",
     "axe-core": "^4.10.3",
     "babel-jest": "^30.0.5",
     "chalk": "^5.4.1",
