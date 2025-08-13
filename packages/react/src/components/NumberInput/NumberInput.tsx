@@ -445,15 +445,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
     });
 
-    if (
-      controlledValue !== prevControlledValue &&
-      !(isNaN(Number(controlledValue)) === isNaN(Number(prevControlledValue)))
-    ) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      setValue(controlledValue!);
-      setPrevControlledValue(controlledValue);
-    }
-
+    useEffect(() => {
+      if (type === 'number' && controlledValue !== undefined) {
+        if (allowEmpty && controlledValue === '') {
+          setValue('');
+        } else {
+          setValue(controlledValue);
+        }
+        setPrevControlledValue(controlledValue);
+      }
+    }, [controlledValue, type, allowEmpty]);
     let ariaDescribedBy: string | undefined = undefined;
     if (normalizedProps.invalid) {
       ariaDescribedBy = normalizedProps.invalidId;
