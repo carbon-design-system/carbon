@@ -179,8 +179,6 @@ export const WithTypeOfText = (args) => {
       helperText="Optional helper text."
       {...args}
       locale={locale}
-      onChange={handleOnChange}
-      onBlur={handleOnBlur}
     />
   );
 };
@@ -221,13 +219,7 @@ export const WithTypeOfTextControlled = (args) => {
         locale={locale}
         value={value}
         onChange={(event, state) => {
-          handleOnChange(event, state);
-          console.log(`setting value to:`);
-          console.log(state.value);
           setValue(state.value);
-        }}
-        onBlur={(event) => {
-          handleOnBlur(event);
         }}
       />
       <button
