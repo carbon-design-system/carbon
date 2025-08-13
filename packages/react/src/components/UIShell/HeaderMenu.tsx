@@ -27,7 +27,7 @@ import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { PrefixContext } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import type HeaderMenuItem from './HeaderMenuItem';

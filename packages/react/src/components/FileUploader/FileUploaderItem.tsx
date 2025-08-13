@@ -15,7 +15,7 @@ import React, {
 } from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
@@ -93,7 +93,7 @@ function FileUploaderItem({
   const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
-  const { current: id } = useRef(uuid || uniqueId());
+  const { current: id } = useRef(uuid || useId());
   const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',

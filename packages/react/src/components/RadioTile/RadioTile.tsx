@@ -16,7 +16,7 @@ import React, { cloneElement } from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';

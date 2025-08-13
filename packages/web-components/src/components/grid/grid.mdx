@@ -1,0 +1,214 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as GridStories from './grid.stories';
+
+<Meta of={GridStories} />
+
+# Grid
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/grid)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/elements/2x-grid/overview/)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Debugging](#debugging)
+- [Gutter modes](#gutter-modes)
+  - [Wide grid](#wide-grid)
+  - [Condensed grid](#condensed-grid)
+- [Subgrid](#subgrid)
+- [Mixed gutter modes](#mixed-gutter-modes)
+- [Auto columns](#auto-columns)
+- [Offset columns](#offset-columns)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [FAQ](#faq)
+  - [How can I hide columns at a certain breakpoint?](#how-can-i-hide-columns-at-a-certain-breakpoint)
+  - [Can I nest grid components?](#can-i-nest-grid-components)
+- [Feedback](#feedback)
+
+Carbon's grid components help developers use the
+[2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/). The
+project provides `grid` and `column` components which can be used to build a
+variety of layouts. You can import these components from `@carbon/web-components`:
+
+```js
+import '@carbon/web-components/es/components/grid/index';
+```
+
+<Canvas of={GridStories.Default} />
+
+## Overview
+
+Every layout starts with the `grid` component. You can specify a `grid` at the
+top-level of your project, or at different depths provided that it can span 100%
+width of its container.
+
+Next, you will use a combination of `column` and `grid`. You can have multiple
+`column` components in a `grid`, and nest `grid` components in a `column`. Each
+`grid` will contain all the `column` components provided to it, as long as they
+don't span more columns than the total number of columns in the grid.
+
+To specify how many columns the `column` component should span, you can use the
+`sm`, `md`, `lg` attributes. These props are shorthand versions of
+the names given to each of the breakpoints defined by the
+[2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints).
+In the example below, we will use the `lg` prop for the large breakpoint and the
+number `4` to specify that each `column` component should span 4 columns at that
+breakpoint.
+
+```js
+import '@carbon/web-components/es/components/grid/index';
+
+return (
+  <cds-grid>
+    <cds-column lg='4'>Span 4 of 16</cds-column>
+    <cds-column lg='4'>Span 4 of 16</cds-column>
+    <cds-column lg='4'>Span 4 of 16</cds-column>
+    <cds-column lg='4'>Span 4 of 16</cds-column>
+  </cds-grid>
+);
+```
+
+_Note: by default, `@carbon/styles` ships with a 16 column grid._
+
+You can pair up multiple breakpoint props to specify how many columns the
+`column` component should span at different break points. In the example below,
+we will use the `sm`, `md`, and `lg` prop to specify how many columns the
+`column` components should span at the small, medium, and large breakpoints.
+
+<Canvas of={GridStories.Default} />
+
+### Debugging
+
+It is incredibly helpful when debugging CSS Grid to use the browser developer
+tools' css gutter mode to view the grid definition. Depending on the browser,
+these typically provide a toggle for overlaying a schematic showing the column
+and grid gap definition. With this overlay, it's much easier to visually
+understand if gutter modes are configured and set properly on the grid.
+
+Documentation on these features is available for
+[Chrome](https://developer.chrome.com/docs/devtools/css/grid/),
+[Firefox](https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Examine_grid_layouts),
+and
+[Safari](https://webkit.org/blog/11588/introducing-css-grid-inspector/#:~:text=If%20you're%20using%20Safari,%23css%2Dgrid%2Ddemo%20.),
+among others.
+
+## Gutter modes
+
+There are several
+[gutter modes](https://carbondesignsystem.com/elements/2x-grid/overview/#gutters)
+that you can use depending on the layout effect you're looking to achieve. By
+default, `grid` uses the wide gutter mode with a 32px gutter. However, you can
+use the `condensed` prop to enable the condensed gutter mode with a 1px gutter
+or the `narrow` prop to enable the narrow grid with a 16px gutter.
+
+### Full width grid
+
+<Canvas of={GridStories.FullWidth} />
+
+### Condensed grid
+
+<Canvas of={GridStories.Condensed} />
+
+### Narrow grid
+
+<Canvas of={GridStories.Narrow} />
+
+## Subgrid
+
+`grid` components can be nested within one another to achieve more advanced
+layout configurations. When a `grid` is a child of another `grid`, the child
+will always be automatically defined as a subgrid. Subgrids should always be
+contained within a `column` to ensure that the column amount/definition is
+properly configured for the subgrid to inherit. Additionally, wrapping subgrids
+in a `column` enables you to define responsive parameters for the column (`sm`,
+`md`, etc) that the subgrid will inherit and be bound to.
+
+<Canvas of={GridStories.Subgrid} />
+
+
+## Mixed gutter modes
+
+The same way that you can pass in `condensed` to a root `grid`, you can also
+pass in `condensed` to a nested `grid` (subgrid) to enable a certain gutter mode
+for only that subgrid. This can be useful when you need to mix-and-match certain
+gutter modes to achieve a particular layout.
+
+<Canvas of={GridStories.MixedGutterModes} />
+
+## Auto columns
+
+Each column by default spans one single column as defined by the parent grid's
+parameters.
+
+The default track sizing functions of the grid columns are defined by the parent
+grid's `grid-template-columns` property. This declares that there should be
+`--cds-grid-columns` number of columns, and each column should by default span a
+`minmax()` of `0` columns minimum, or a maximum of `--cds-grid-column-size`
+(`1fr`).
+
+The values of these custom properties can be changed to modify the default
+behavior of columns.
+
+<Canvas of={GridStories.Responsive} />
+
+## Offset columns
+
+You can offset your `column` components by a specific amount of columns using
+the object form for each breakpoint prop. This specific prop type allows you to
+pass in an object to each breakpoint prop and this object has two keys, `span`
+and `start`, which allow you to specify the total numbers of columns the
+`column` component spans, and how many columns to offset it by.
+
+You can specify either prop in this object form, and can mix-and-match across
+breakpoints. For example, the following snippet will have the `Column` component
+span two columns at the small breakpoint and then four columns at the medium
+breakpoint. At the medium breakpoint, it will be offset by two columns.
+
+```html
+<cds-column sm='2' md='span:4 start:2'></cds-column>
+```
+
+<Canvas of={GridStories.Offset} />
+
+## Component API
+
+## `<cds-grid>` attributes, properties and events
+
+<ArgTypes of="cds-grid" />
+
+## `<cds-column>` attributes, properties and events
+
+<ArgTypes of="cds-column" />
+
+<Markdown>{`${cdnJs({ components: ['grid'] })}`}</Markdown>
+
+## FAQ
+
+### How can I hide columns at a certain breakpoint?
+
+To hide a column at a specific breakpoint, you should specify 0 for the span of
+the column at that particular breakpoint. For example, you can use the following
+two forms for specifying column span and pass in 0 to either to hide the column
+at the small breakpoint.
+
+```html
+<cds-column sm='0'></cds-column>
+<cds-column sm='span:0'></cds-column>
+```
+
+### Can I nest grid components?
+
+Yes! While the CSS Grid `subgrid` property is still
+[not well supported](https://caniuse.com/#feat=css-subgrid), css custom
+properties are used to enable nested grids with inherited column definitions.
+View the subgrid story documentation for more information on how this works and
+how to use it.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/grid/grid.mdx).

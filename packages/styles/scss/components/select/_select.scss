@@ -73,9 +73,12 @@
       display: none;
     }
 
-    // Select text renders a little high on Firefox
-    @document url-prefix() {
-      // Removes dotted inner focus
+    //
+    /* This is for targeting styles specific to firefox */
+    /* Removes dotted inner focus */
+    /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+    /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+    @-moz-document url-prefix() {
       &:-moz-focusring,
       &::-moz-focus-inner {
         background-image: none;

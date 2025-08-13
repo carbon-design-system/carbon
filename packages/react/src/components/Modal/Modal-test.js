@@ -519,7 +519,9 @@ describe('Modal', () => {
               open={open}
               launcherButtonRef={focusRef}
               onClick={() => setOpen(false)}>
-              <button data-testid="close" onClick={() => setOpen(false)} />
+              <button data-testid="close" onClick={() => setOpen(false)}>
+                Close
+              </button>
             </Modal>
             <button data-testid="focusElem" ref={focusRef}>
               focus after close
@@ -537,6 +539,67 @@ describe('Modal', () => {
       await waitFor(() => {
         expect(focusElem).toHaveFocus();
       });
+    });
+  });
+
+  describe('preventCloseOnClickOutside prop validation', () => {
+    let consoleErrorSpy;
+
+    beforeEach(() => {
+      consoleErrorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should throw a prop-type warning when passiveModal=false and preventCloseOnClickOutside=false', () => {
+      render(
+        <Modal
+          open
+          passiveModal={false}
+          preventCloseOnClickOutside={false}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.'
+      );
+    });
+
+    it('should not throw a warning when passiveModal=true and preventCloseOnClickOutside=false', () => {
+      render(
+        <Modal
+          open
+          passiveModal
+          preventCloseOnClickOutside={false}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not throw a warning when passiveModal=false and preventCloseOnClickOutside=true', () => {
+      render(
+        <Modal
+          open
+          passiveModal={false}
+          preventCloseOnClickOutside={true}
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Modal>
+      );
+
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
   });
 });
@@ -565,7 +628,7 @@ describe('events', () => {
     expect(screen.getByTestId('modal-6')).toHaveClass('is-visible');
   });
 
-  it('should handle close when outside of modal is clicked', async () => {
+  it('should not close when clicking outside non-passive modal', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -589,6 +652,23 @@ describe('events', () => {
 
     const outerModal = screen.getByTestId('modal-7');
     await userEvent.click(outerModal);
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should close when clicking outside passive modal', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        passiveModal
+        onRequestClose={onRequestClose}
+        data-testid="modal-passive">
+        <p>This is a passive modal</p>
+      </Modal>
+    );
+
+    const backgroundLayer = screen.getByRole('presentation');
+    await userEvent.click(backgroundLayer);
     expect(onRequestClose).toHaveBeenCalled();
   });
 
@@ -812,5 +892,41 @@ describe('events', () => {
 
     await keyboard('{Enter}');
     expect(onRequestSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it('should close modal when ESC key is pressed after clicking outside to lose focus', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <div>
+        <div
+          data-testid="outside-area"
+          style={{ width: '100px', height: '100px' }}>
+          Outside area
+        </div>
+        <Modal
+          open
+          primaryButtonText="Primary button"
+          secondaryButtonText="Secondary button"
+          onRequestClose={onRequestClose}>
+          <p>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </Modal>
+      </div>
+    );
+
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+    expect(screen.getByLabelText('Domain name')).toHaveFocus();
+    await userEvent.click(screen.getByTestId('outside-area'));
+    expect(screen.getByLabelText('Domain name')).not.toHaveFocus();
+    await userEvent.keyboard('{Escape}');
+    expect(onRequestClose).toHaveBeenCalled();
   });
 });

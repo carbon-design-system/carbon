@@ -6,6 +6,7 @@
  */
 
 import React, {
+  Children,
   cloneElement,
   useEffect,
   useRef,
@@ -38,8 +39,8 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
-import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { deprecate } from '../../prop-types/deprecate';
+import { Dialog } from '../Dialog';
 import { warning } from '../../internal/warning';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
@@ -304,11 +305,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     function handleKeyDown(event) {
       if (!enableDialogElement) {
-        event.stopPropagation();
-        if (match(event, keys.Escape)) {
-          closeModal(event);
-        }
-
         if (
           focusTrapWithoutSentinels &&
           open &&
@@ -335,8 +331,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       const { target } = evt;
       const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
+      const containsModalFooter = Children.toArray(childrenWithProps).some(
+        (child) => isComponentElement(child, ModalFooter)
+      );
+      const isPassive = !containsModalFooter;
+      const shouldCloseOnOutsideClick = isPassive
+        ? preventCloseOnClickOutside !== false
+        : preventCloseOnClickOutside === true;
+
       if (
-        !preventCloseOnClickOutside &&
+        shouldCloseOnOutsideClick &&
         target instanceof Node &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&
@@ -461,6 +465,23 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           return child;
       }
     });
+
+    useEffect(() => {
+      if (!open) return;
+
+      const handleEscapeKey = (event) => {
+        if (match(event, keys.Escape)) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeModal(event);
+        }
+      };
+      document.addEventListener('keydown', handleEscapeKey, true);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey, true);
+      };
+    }, [open]);
 
     useEffect(() => {
       if (!enableDialogElement && !open && launcherButtonRef) {

@@ -33,6 +33,7 @@ import {
 - [Selection](#selection)
   - [Programmatic selection](#programmatic-selection)
 - [Filtering](#filtering)
+  - [Multiple filters with batch updates](#multiple-filters-with-batch-updates)
 - [Batch actions](#batch-actions)
 - [Toolbar](#toolbar)
   - [Overflow Menu](#overflow-menu)
@@ -46,6 +47,7 @@ import {
     - [Prop getters](#prop-getters)
     - [Actions](#actions)
     - [State](#state)
+    - [Example](#example)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -244,7 +246,7 @@ current `row` in order to retrieve selection state about the given row.
 You can access all the selected rows through the `selectedRows` property passed
 into your `render` prop function.
 
-#### Programmatic selection
+### Programmatic selection
 
 You can use either of the following actions from your `render` prop function to
 update the selection status of a row:
@@ -491,67 +493,105 @@ naming rule
 
 ### Render props
 
-The types of arguments that this function has are as follows:
+The `DataTable` component uses a render props pattern to give you full control
+over rendering, while Carbon manages internal state like sorting, filtering,
+selection, and expansion.
 
-- [Prop Getters](#prop-getters)
+You can pass either a `render` or `children` function as a prop. This function
+receives an object with the following properties:
+
+- [Prop getters](#prop-getters)
 - [Actions](#actions)
 - [State](#state)
 
 #### Prop getters
 
-> See
-> [the blog post about prop getters](https://blog.kentcdodds.com/how-to-give-rendering-control-to-users-with-prop-getters-549eaef76acf)
+These functions are provided via the `DataTable`'s render props and must be
+applied to the corresponding Carbon components to enable built-in functionality
+like sorting, selection, and expansion.
 
-These functions are used to apply props to the elements that you render. The
-idea behind this is that it can allow you more flexibility when deciding when to
-render, and where, while still allowing `DataTable` to help orchestrate state
-changes inside of the Table itself.
+| Getter                   | Description                                                       |
+| ------------------------ | ----------------------------------------------------------------- |
+| `getBatchActionProps`    | Returns props for the batch action toolbar.                       |
+| `getCellProps`           | Returns props for a cell.                                         |
+| `getExpandedRowProps`    | Returns props for an expanded row.                                |
+| `getExpandHeaderProps`   | Returns props for the expand-all header cell.                     |
+| `getHeaderProps`         | Returns props for a header.                                       |
+| `getRowProps`            | Returns props for a row.                                          |
+| `getSelectionProps`      | Returns props for row-level or header-level selection checkboxes. |
+| `getTableContainerProps` | Returns props for the table container.                            |
+| `getTableProps`          | Returns props for the table.                                      |
+| `getToolbarProps`        | Returns props for the toolbar.                                    |
 
-You are able to call these on specific elements in your `render` prop function
-by doing the following:
-
-```jsx
-<TableHeader {...getHeaderProps({ header })}>{header.header}</TableHeader>
-```
-
-In order to make sure that everything works as intended, it's important that you
-pass all of the `props` that you want to place on the component as fields on the
-object you give to a prop getter. For example, if you wanted to add an `onClick`
-handler to `TableHeader` above, you would do the following:
-
-```js
-<TableHeader {...getHeaderProps({ header, onClick: this.handleOnClick })}>
-  {header.header}
-</TableHeader>
-```
-
-| Property            | Type                    | Description                                              |
-| ------------------- | ----------------------- | -------------------------------------------------------- |
-| `getHeaderProps`    | `({ header }) => props` | returns the props you should apply to a specific header  |
-| `getRowProps`       | `({ row }) => props`    | returns the props you should apply to a specific row     |
-| `getSelectionProps` | `({ row? }) => props`   | returns the props you should apply to selection elements |
+For full details on the arguments and returned values of these getters, refer to
+the `DataTableRenderProps` type in the
+[source code](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/DataTable/DataTable.tsx).
 
 #### Actions
 
-These are functions you can call to change the state of the `DataTable`
-component.
+These functions allow you to programmatically update the table's state.
 
-| Property        | Type                          | Description                                     |
-| --------------- | ----------------------------- | ----------------------------------------------- |
-| `sortBy`        | `(headerKey: string) => void` | Sort by the given `headerKey` value             |
-| `selectAll`     | `() => void`                  | Toggle the selection status of all rows         |
-| `selectRow`     | `(rowId: string) => void`     | Select a specific row by the given `rowId`      |
-| `expandRow`     | `(rowId: string) => void`     | Expand a specific row by the given `rowId`      |
-| `onInputChange` | `(event: Event) => void`      | Handle the input change of a table search field |
+| Action          | Description                               |
+| --------------- | ----------------------------------------- |
+| `expandAll`     | Toggles expansion for all rows.           |
+| `expandRow`     | Toggles expansion for a row.              |
+| `onInputChange` | Updates the table's filter/search string. |
+| `selectAll`     | Selects or deselects all rows.            |
+| `selectRow`     | Toggles selection for a row.              |
+| `sortBy`        | Sorts the table by a header key.          |
 
 #### State
 
-These are values that represent the current state of the `DataTable` component.
+These values represent the internal table state, useful for custom logic or
+conditional rendering.
 
-| Property     | Type    | Description                                     |
-| ------------ | ------- | ----------------------------------------------- |
-| rows         | `Array` | The array of rows to render for the given table |
-| selectedRows | `Array` | the array of currently selected rows            |
+| Property       | Description                                            |
+| -------------- | ------------------------------------------------------ |
+| `headers`      | Headers to render.                                     |
+| `radio`        | Whether the table is in single-selection (radio) mode. |
+| `rows`         | Rows to render (after filtering and sorting).          |
+| `selectedRows` | Selected rows.                                         |
+
+#### Example
+
+```jsx
+<DataTable headers={headers} isSortable rows={rows}>
+  {({
+    getCellProps,
+    getHeaderProps,
+    getRowProps,
+    getSelectionProps,
+    getTableProps,
+    headers,
+    rows,
+  }) => (
+    <Table {...getTableProps()}>
+      <TableHead>
+        <TableRow>
+          <TableSelectAll {...getSelectionProps()} />
+          {headers.map((header) => (
+            <TableHeader {...getHeaderProps({ header })}>
+              {header.header}
+            </TableHeader>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow {...getRowProps({ row })}>
+            <TableSelectRow {...getSelectionProps({ row })} />
+            {row.cells.map((cell) => (
+              <TableCell key={cell.id} {...getCellProps({ cell })}>
+                {cell.value}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )}
+</DataTable>
+```
 
 ## Feedback
 

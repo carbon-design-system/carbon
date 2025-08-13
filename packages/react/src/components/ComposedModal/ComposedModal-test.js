@@ -373,7 +373,9 @@ describe('ComposedModal', () => {
               open={open}
               launcherButtonRef={focusRef}
               onClick={() => setOpen(false)}>
-              <button data-testid="close" onClick={() => setOpen(false)} />
+              <button data-testid="close" onClick={() => setOpen(false)}>
+                Close
+              </button>
             </ComposedModal>
             <button data-testid="focusElem" ref={focusRef}>
               focus after close
@@ -430,7 +432,7 @@ describe('ComposedModal', () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should close when clicked on outside background layer', async () => {
+  it('should close when clicking outside passive composed modal', async () => {
     const onClose = jest.fn();
     render(
       <ComposedModal open onClose={onClose}>
@@ -440,6 +442,26 @@ describe('ComposedModal', () => {
     const backgroundLayer = screen.getByRole('presentation');
     await userEvent.click(backgroundLayer);
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should not close when clicking outside non-passive composed modal', async () => {
+    const onClose = jest.fn();
+    render(
+      <>
+        <button data-testid="outside-button">☀️</button>
+        <ComposedModal open onClose={onClose}>
+          <ModalHeader>Header</ModalHeader>
+          <ModalBody>Body</ModalBody>
+          <ModalFooter
+            primaryButtonText="Confirm"
+            secondaryButtonText="Cancel"
+          />
+        </ComposedModal>
+      </>
+    );
+
+    await userEvent.click(screen.getByTestId('outside-button'));
+    expect(onClose).not.toHaveBeenCalled();
   });
 
   it('should NOT close when clicked inside dialog window, dragged outside and released mouse button', async () => {
@@ -471,7 +493,9 @@ describe('ComposedModal', () => {
             open={open}
             launcherButtonRef={focusRef}
             onClick={() => setOpen(false)}>
-            <button data-testid="close" onClick={() => setOpen(false)} />
+            <button data-testid="close" onClick={() => setOpen(false)}>
+              Close
+            </button>
           </ComposedModal>
           <button data-testid="focusElem" ref={focusRef}>
             focus after close
@@ -489,5 +513,40 @@ describe('ComposedModal', () => {
     await waitFor(() => {
       expect(focusElem).toHaveFocus();
     });
+  });
+
+  it('should close modal when ESC key is pressed regardless of focus', async () => {
+    const onClose = jest.fn();
+    render(
+      <div>
+        <div
+          data-testid="outside-area"
+          style={{ width: '100px', height: '100px' }}>
+          Outside area
+        </div>
+        <ComposedModal open onClose={onClose}>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>
+            This is the modal body content
+            <TextInput
+              data-modal-primary-focus
+              id="text-input-1"
+              labelText="Domain name"
+            />
+          </ModalBody>
+          <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+        </ComposedModal>
+      </div>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+    await userEvent.click(screen.getByTestId('outside-area'));
+
+    const inputField = screen.getByLabelText('Domain name');
+    expect(inputField).not.toHaveFocus();
+    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
+    expect(onClose).toHaveBeenCalled();
   });
 });

@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useRef, type MutableRefObject } from 'react';
+import { useEffect, useRef, RefObject } from 'react';
 
 export const useEvent = <E extends keyof GlobalEventHandlersEventMap>(
-  elementOrRef: HTMLElement | MutableRefObject<HTMLElement | null>,
+  elementOrRef: HTMLElement | RefObject<Element | null>,
   eventName: E,
   callback: (event: GlobalEventHandlersEventMap[E]) => void
 ) => {
@@ -21,18 +21,20 @@ export const useEvent = <E extends keyof GlobalEventHandlersEventMap>(
   }, [callback]);
 
   useEffect(() => {
+    const element =
+      'current' in elementOrRef ? elementOrRef.current : elementOrRef;
+    if (!element) return;
+
     const handler = (event: GlobalEventHandlersEventMap[E]) => {
       if (savedCallback.current) {
         savedCallback.current(event);
       }
     };
 
-    const element =
-      'current' in elementOrRef ? elementOrRef.current : elementOrRef;
-    element?.addEventListener(eventName, handler);
+    element.addEventListener(eventName, handler as EventListener);
 
     return () => {
-      element?.removeEventListener(eventName, handler);
+      element.removeEventListener(eventName, handler as EventListener);
     };
   }, [elementOrRef, eventName]);
 };

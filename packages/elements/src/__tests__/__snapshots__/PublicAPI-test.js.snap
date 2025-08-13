@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Public API should only change with a semver change 1`] = `
-Array [
+[
   "aiAuraEnd",
   "aiAuraHoverBackground",
   "aiAuraHoverEnd",

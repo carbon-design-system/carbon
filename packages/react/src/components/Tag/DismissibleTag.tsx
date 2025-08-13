@@ -19,7 +19,7 @@ import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import Tag, { SIZES, TYPES } from './Tag';
 import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';

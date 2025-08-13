@@ -85,6 +85,7 @@ $css--plex: true !default;
 :host(#{$prefix}-combo-box-item[disabled]) {
   .#{$prefix}--list-box__menu-item__option {
     color: $text-disabled;
+    cursor: not-allowed;
     text-decoration: none;
   }
 }

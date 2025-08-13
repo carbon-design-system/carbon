@@ -33,20 +33,40 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   @property({ attribute: 'within-grid', type: Boolean })
   withinGrid = false;
 
+  /**
+   * Set to `true` if page actions should be flush (no padding)
+   */
+  @property({ attribute: 'page-actions-flush', type: Boolean })
+  pageActionsFlush = false;
+
+  /**
+   * Set to `true` if content actions should be flush (no padding)
+   */
+  @property({ attribute: 'content-actions-flush', type: Boolean })
+  contentActionsFlush = false;
+
   render() {
     const { withinGrid } = this;
-
     const gridClasses = classMap({
-      [`${prefix}--grid`]: !withinGrid,
+      [`${prefix}--css-grid`]: !withinGrid,
       [`${prefix}--subgrid ${prefix}--subgrid--wide`]: withinGrid,
     });
 
     return html`
-      <div class="${gridClasses}">
-        <div
-          class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column">
-          <div class="${prefix}--page-header__breadcrumb-container">
-            <slot></slot>
+      <div class="${prefix}--page-header__breadcrumb-bar">
+        <div class="${gridClasses}">
+          <div
+            class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column">
+            <div class="${prefix}--page-header__breadcrumb-container">
+              <div class="${prefix}--page-header__breadcrumb-wrapper">
+                <slot name="icon"></slot>
+                <slot></slot>
+              </div>
+              <div class="${prefix}--page-header__breadcrumb__actions">
+                <slot name="content-actions"></slot>
+                <slot name="page-actions"></slot>
+              </div>
+            </div>
           </div>
         </div>
       </div>

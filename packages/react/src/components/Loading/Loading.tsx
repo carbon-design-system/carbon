@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
   /**

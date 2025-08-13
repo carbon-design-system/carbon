@@ -35,7 +35,7 @@ export default {
       control: { type: 'select' },
     },
     size: {
-      options: ['sm', 'md', 'lg', 'xl', '2xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       control: { type: 'select' },
     },
     children: {

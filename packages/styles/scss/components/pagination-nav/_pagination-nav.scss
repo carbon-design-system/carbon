@@ -141,8 +141,10 @@
     appearance: none;
     max-block-size: layout.size('height');
     text-indent: calc(50% - 4.5px);
-    // Override some Firefox user-agent styles
-    @document url-prefix() {
+    /* This is for targeting styles specific to firefox */
+    /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+    /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+    @-moz-document url-prefix() {
       text-indent: 0;
     }
   }

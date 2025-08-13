@@ -26,6 +26,7 @@ collect:
         - autoAlign
         - autoComplete
         - buttonKind
+        - caption
         - checked
         - children
         - className
@@ -65,9 +66,10 @@ collect:
         - enterDelayMs
         - expanded
         - expandIconDescription
-        - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - flipped
+        - focusTrap
         - formatOptions
         - fullWidth
         - gap
@@ -84,6 +86,7 @@ collect:
         - hidePasswordLabel
         - highContrast
         - href
+        - iconClass
         - iconDescription
         - id
         - indeterminate
@@ -93,6 +96,7 @@ collect:
         - inline
         - innerRef
         - inputMode
+        - inputProps
         - invalid
         - invalidText
         - isActive
@@ -131,6 +135,8 @@ collect:
         - max
         - maxCount
         - menuAlignment
+        - menuOffset
+        - menuOffsetFlip
         - menuOptionsClass
         - menuTarget
         - min
@@ -173,7 +179,6 @@ collect:
         - open
         - ordered
         - orientation
-        - overflowMenuOnHover
         - page
         - pageActions
         - paragraph
@@ -184,11 +189,9 @@ collect:
         - preventCloseOnClickOutside
         - primaryButtonDisabled
         - primaryButtonText
-        - radio
         - readOnly
         - ref
         - rel
-        - render
         - renderIcon
         - renderSelectedItem
         - required
@@ -235,7 +238,6 @@ collect:
         - typeahead
         - useStaticWidth
         - useTitleInItem
-        - useZebraStyles
         - value
         - valueSelected
         - vertical
@@ -296,9 +298,6 @@ collect:
         - selectionMode
         # Copy
         - onAnimationEnd
-        # DataTable
-        - filterRows
-        - sortRow
         # DataTableSkeleton
         - columnCount
         - compact
@@ -326,6 +325,7 @@ collect:
         # Dialog
         - ariaDescribedBy
         - ariaLabelledBy
+        - focusAfterCloseRef
         - modal
         # DismissibleTag
         - dismissTooltipLabel
@@ -372,6 +372,8 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # HeaderContainer
+        - render
         # HeaderMenu
         - focusRef
         - menuLinkName
@@ -449,14 +451,9 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - stepStartValue
         # OrderedList
         - native
-        # OverflowMenu
-        - flipped
-        - focusTrap
-        - iconClass
-        - menuOffset
-        - menuOffsetFlip
         # OverflowMenuItem
         - closeMenu
         - handleOverflowMenuItemFocus
@@ -499,6 +496,7 @@ collect:
         - itemsShown
         - loop
         # Popover
+        - alignmentAxisOffset
         - autoAlignBoundary
         - caret
         - isTabTip
@@ -547,10 +545,16 @@ collect:
         - unstable_ariaLabelHandleUpper
         # StructuredListCell
         - noWrap
+        # StructuredListWrapper
+        - selectedInitialRow
         # SwitcherItem
         - handleSwitcherItemFocus
         # Tab
         - renderButton
+        # Table
+        - experimentalAutoAlign
+        - overflowMenuOnHover
+        - useZebraStyles
         # TableBatchActions
         - onSelectAll
         - shouldShowBatchActions
@@ -560,6 +564,8 @@ collect:
         - aria-live
         # TableCell
         - hasAILabelHeader
+        # TableContainer
+        - aiEnabled
         # TableExpandHeader
         - enableExpando
         - enableToggle
@@ -569,6 +575,8 @@ collect:
         - isSortHeader
         - scope
         - sortDirection
+        # TableSelectRow
+        - radio
         # TableToolbarFilter
         - onApplyFilter
         - onResetFilter
@@ -598,15 +606,12 @@ collect:
         - warning
         - warningText
         # ToastNotification
-        - caption
         - timeout
         # Toggle
         - defaultToggled
         - labelA
         - labelB
         - toggled
-        # Toggletip
-        - alignmentAxisOffset
         # TreeNode
         - defaultIsExpanded
         - depth
@@ -847,17 +852,9 @@ collect:
         - g90
         - white
         # General - tooltipAlignment
-        - bottom
-        - bottom-left
-        - bottom-right
         - center
         - end
-        - left
-        - right
         - start
-        - top
-        - top-left
-        - top-right
         # General - tooltipPosition
         - bottom
         - left

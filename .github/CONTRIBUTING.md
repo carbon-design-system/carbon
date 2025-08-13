@@ -73,15 +73,20 @@ Great job on getting to this point! Now it's time to code :computer:
 #### Find or create an issue
 
 Check the [issues list](https://github.com/carbon-design-system/carbon/issues)
-for anything you'd like to work on. If something exists, comment to claim it or
-assign yourself.
+for anything you'd like to work on. If something exists, comment to claim it.
 
 No issue yet?
 [Create one](https://github.com/carbon-design-system/carbon/issues/new/choose).
 Issues help us track work and streamline the contribution process.
 
 Looking for a good starting point? Try these:
-[Good first issues 👋](https://github.com/carbon-design-system/carbon/issues?q=label%3A%22good%20first%20issue%20%F0%9F%91%8B%22)
+
+- [Good first issues 👋](https://github.com/carbon-design-system/carbon/issues?q=label%3A%22good%20first%20issue%20%F0%9F%91%8B%22)
+- [Low severity bugs 🐛](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22severity%3A%203%22%20OR%20label%3A%22severity%3A%204%22)
+
+For something more advanced, the
+[enhancements that need a community contribution](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22needs%3A%20community%20contribution%22%20label%3A%22type%3A%20enhancement%20%F0%9F%92%A1%22)
+are a good option.
 
 #### Create a working branch
 
@@ -239,7 +244,23 @@ versions or open an issue so we can update them.
 
 ### How can I test components or share a bug reproduction?
 
-Use in-browser development environments. Here are some options:
+Use in-browser development environments. Templates are available at
+[new.carbondesignsystem.com](https://new.carbondesignsystem.com)
 
-- [Stackblitz – `@carbon/react` template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx)
-- [Carbon Design System Sandboxes](https://github.com/carbon-design-system/sandboxes)
+### Can you assign me to the issue I want to work on?
+
+We only assign team members and core maintainers. To claim an issue, add a
+comment stating you're going to work on it. If you haven't created a PR for that
+issue within two weeks, the issue is considered fair game again for someone else
+to pick up and work on.
+
+### When can I work on an issue that someone else has said they're working on?
+
+Our rule of thumb is if an issue doesn't have a PR in two weeks, it's fair game
+for someone else to work on.
+
+### Why do you only assign team members and core maintainers?
+
+An assignee indicates the issue is currently being worked on or is planned for
+our current sprint. Scoping assignment to our team ensures we can maintain that
+expectation.

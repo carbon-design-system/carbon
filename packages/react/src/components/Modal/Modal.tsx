@@ -40,13 +40,15 @@ import { Text } from '../Text';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
-import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { deprecate } from '../../prop-types/deprecate';
+import { Dialog } from '../Dialog';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
+const invalidOutsideClickMessage =
+  '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.';
 
 export type ModalSize = (typeof ModalSizes)[number];
 
@@ -263,7 +265,7 @@ const Modal = React.forwardRef(function Modal(
     size,
     hasScrollingContent = false,
     closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = false,
+    preventCloseOnClickOutside = !passiveModal,
     isFullWidth,
     launcherButtonRef,
     loadingStatus = 'inactive',
@@ -282,6 +284,7 @@ const Modal = React.forwardRef(function Modal(
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const prevOpen = usePreviousValue(open);
   const modalInstanceId = `modal-${useId()}`;
@@ -306,6 +309,10 @@ const Modal = React.forwardRef(function Modal(
       '`focusTrapWithoutSentinels` to have any effect.'
   );
 
+  if (!passiveModal && preventCloseOnClickOutside === false) {
+    console.error(invalidOutsideClickMessage);
+  }
+
   function isCloseButton(element: Element) {
     return (
       (!onSecondarySubmit && element === secondaryButton.current) ||
@@ -319,10 +326,6 @@ const Modal = React.forwardRef(function Modal(
     evt.stopPropagation();
 
     if (open && target instanceof HTMLElement) {
-      if (match(evt, keys.Escape)) {
-        onRequestClose(evt);
-      }
-
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -374,13 +377,20 @@ const Modal = React.forwardRef(function Modal(
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
-      wrapFocus({
-        bodyNode,
-        startTrapNode,
-        endTrapNode,
-        currentActiveNode,
-        oldActiveNode,
-        selectorsFloatingMenus,
+      // use setTimeout to ensure focus is set after all browser default focus behavior. Fixes issue of
+      // focus not wrapping in Firefox
+      wrapFocusTimeout.current = setTimeout(() => {
+        wrapFocus({
+          bodyNode,
+          startTrapNode,
+          endTrapNode,
+          currentActiveNode,
+          oldActiveNode,
+          selectorsFloatingMenus,
+        });
+        if (wrapFocusTimeout.current) {
+          clearTimeout(wrapFocusTimeout.current);
+        }
       });
     }
 
@@ -474,6 +484,23 @@ const Modal = React.forwardRef(function Modal(
     alertDialogProps.role = 'alertdialog';
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleEscapeKey = (event) => {
+      if (match(event, keys.Escape)) {
+        event.preventDefault();
+        event.stopPropagation();
+        onRequestClose(event);
+      }
+    };
+    document.addEventListener('keydown', handleEscapeKey, true);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey, true);
+    };
+  }, [open]);
 
   useEffect(() => {
     return () => {
@@ -959,7 +986,13 @@ Modal.propTypes = {
   /**
    * Prevent closing on click outside of modal
    */
-  preventCloseOnClickOutside: PropTypes.bool,
+  preventCloseOnClickOutside: (props: ModalProps, propName: string) => {
+    if (!props.passiveModal && props[propName] === false) {
+      return new Error(invalidOutsideClickMessage);
+    }
+
+    return null;
+  },
 
   /**
    * Specify whether the Button should be disabled, or not

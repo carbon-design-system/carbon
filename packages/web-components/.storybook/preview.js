@@ -137,7 +137,7 @@ export const parameters = {
     },
   },
   viewport: {
-    viewports: {
+    options: {
       sm: {
         name: 'Small',
         styles: {

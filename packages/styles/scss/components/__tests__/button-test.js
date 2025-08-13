@@ -25,7 +25,7 @@ describe('scss/components/button', () => {
     `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
-Array [
+[
   "button-font-weight",
   "button-font-size",
   "button-border-radius",

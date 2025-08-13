@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:string';
-
 @use '../config';
 @use './src';
 
@@ -18,7 +16,7 @@ $package-name: 'sans-hebrew';
 
 @mixin thin() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 100;
@@ -34,7 +32,7 @@ $package-name: 'sans-hebrew';
 
 @mixin extralight() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 200;
@@ -50,7 +48,7 @@ $package-name: 'sans-hebrew';
 
 @mixin light() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 300;
@@ -66,7 +64,7 @@ $package-name: 'sans-hebrew';
 
 @mixin regular() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 400;
@@ -82,7 +80,7 @@ $package-name: 'sans-hebrew';
 
 @mixin text() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 450;
@@ -98,7 +96,7 @@ $package-name: 'sans-hebrew';
 
 @mixin medium() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 500;
@@ -114,7 +112,7 @@ $package-name: 'sans-hebrew';
 
 @mixin semibold() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 500;
@@ -130,7 +128,7 @@ $package-name: 'sans-hebrew';
 
 @mixin bold() {
   @font-face {
-    font-display: string.unquote(config.$font-display);
+    font-display: config.$font-display;
     font-family: $font-family;
     font-style: normal;
     font-weight: 500;

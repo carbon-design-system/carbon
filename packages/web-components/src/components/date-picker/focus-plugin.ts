@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,7 +59,7 @@ export interface ExtendedFlatpickrInstanceFocusPlugin
   /**
    * Lastly focused `<input>` for starting/end date.
    */
-  _lastFocusInput?: HTMLInputElement;
+  _lastFocusInput?: CDSDatePickerInput;
 }
 
 /**
@@ -77,53 +77,46 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
     };
 
     /**
-     * Handles `blur` event to move the focus back to the `<input>`.
+     * Handles `keydown` event for date picker input field
      */
-    const handleBlur = ({ target, relatedTarget }: FocusEvent) => {
-      // Obtains `beingUpdated` up-front because it'll be flushed out shortly
-      const { calendarContainer, isOpen } = fp;
-      if (
-        isOpen &&
-        calendarContainer.contains(target as Node) &&
-        !calendarContainer.contains(relatedTarget as Node) &&
-        relatedTarget !== config.inputFrom &&
-        relatedTarget !== config.inputTo
-      ) {
-        Promise.resolve().then(() => {
-          const rootNode = (target as Node).getRootNode();
-          // This `blur` event handler can be called from Flatpickr's code,
-          // cleaning up the calendar dropdowns DOM. Changing focus in such
-          // condition causes removing an orphaned DOM node, because Flatpickr
-          // redraws the calendar dropdown when the `<input>` gets focus.
-          if (
-            rootNode.nodeType === Node.DOCUMENT_NODE ||
-            rootNode.nodeType === Node.DOCUMENT_FRAGMENT_NODE
-          ) {
-            if (fp._lastFocusInput === config.inputTo) {
-              config.inputTo!.focus();
-            } else {
-              config.inputFrom.focus();
-            }
-            // Closing after moving focus. Reversing the order will cause re-opening calendar dropdown upon focusing
-            fp.close();
-          }
-        });
+    const handleInputKeydown = (event: KeyboardEvent) => {
+      if (!(event.target instanceof CDSDatePickerInput)) return;
+
+      const { key } = event;
+
+      if (key === 'Escape') {
+        fp.close();
+      }
+      if (key === 'Tab') {
+        if (!event.shiftKey) {
+          event.preventDefault();
+          fp.open();
+          focusCalendar();
+        } else if (fp.isOpen && event.target === config.inputFrom) {
+          fp.close();
+        }
       }
     };
 
     /**
-     * Handles `keydown` event to move focus on calendar dropdown.
+     * Handles `keydown` event for calendar dropdown
      */
-    const handleInputKeydown = (event: KeyboardEvent) => {
+    const handleCalendarKeydown = (event: KeyboardEvent) => {
+      const endInput = config.inputTo ? config.inputTo : config.inputFrom;
       const { key } = event;
-      if (key === 'ArrowDown' || key === 'Down' || key === 'Enter') {
-        event.preventDefault();
-        fp.open();
-        if (key !== 'Enter') {
-          focusCalendar();
-        } else {
-          // Hitting Enter key blurs the `<input>`, causing any element to lose focus
-          setTimeout(focusCalendar, 0);
+
+      if (key === 'Tab') {
+        if (!event.shiftKey) {
+          if (fp._lastFocusInput === endInput) {
+            endInput.focus();
+            fp.close();
+          } else {
+            event.preventDefault();
+            endInput.focus();
+          }
+        } else if (fp._lastFocusInput === endInput) {
+          event.preventDefault();
+          setTimeout(() => endInput.focus(), 0);
         }
       }
     };
@@ -132,7 +125,7 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
      * Handles `focus` event on `<input>` for starting/end date to track the lastly focused one.
      */
     const handleInputFocus = ({ target }: FocusEvent) => {
-      fp._lastFocusInput = target as HTMLInputElement;
+      fp._lastFocusInput = target as CDSDatePickerInput;
     };
 
     /**
@@ -169,8 +162,8 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
       const { inputFrom, inputTo } = config;
       fp._hCDSCEDatePickerFocusPluginBlur = on(
         fp.calendarContainer,
-        'blur',
-        handleBlur,
+        'keydown',
+        handleCalendarKeydown,
         true
       );
       fp._hCDSCEDatePickerFocusPluginKeydownFrom = on(
