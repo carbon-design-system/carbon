@@ -11,6 +11,13 @@ import sdk, { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
 import * as carbonComponents from '../src/index';
 import * as carbonIconsReact from '@carbon/icons-react';
+import {
+  FlexGridScssRaw,
+  GridScssRaw,
+  HideAtBreakpointScssRaw,
+  LayerScssRaw,
+  ThemeScssRaw,
+} from './stylesStorybook';
 
 export const stackblitzPrefillConfig = (
   code: any,
@@ -76,6 +83,35 @@ export const stackblitzPrefillConfig = (
   const iconsNames = Object.keys(carbonIconsReact);
   const matchedIcons = findIconImports(iconsNames, storyCode);
 
+  // Registry of story scss strings we can inject
+  const storyScssRegistry: Record<
+    string,
+    { filename: string; content: string }
+  > = {
+    FlexGrid: {
+      filename: 'src/stories/FlexGrid.stories.scss',
+      content: FlexGridScssRaw,
+    },
+    Grid: { filename: 'src/stories/Grid.stories.scss', content: GridScssRaw },
+    HideAtBreakpoint: {
+      filename: 'src/stories/HideAtBreakpoint.stories.scss',
+      content: HideAtBreakpointScssRaw,
+    },
+    Layer: {
+      filename: 'src/stories/Layer.stories.scss',
+      content: LayerScssRaw,
+    },
+    Theme: {
+      filename: 'src/stories/Theme.stories.scss',
+      content: ThemeScssRaw,
+    },
+  };
+
+  // Only include story scss for components actually used
+  const componentsWithStyles = matchedComponents.filter(
+    (c) => storyScssRegistry[c]
+  );
+
   // Generate App.jsx code
   const app = `
   import React from 'react';
@@ -87,19 +123,35 @@ export const stackblitzPrefillConfig = (
   }
   `;
 
+  // index.scss = base style + conditional @use for story scss
+  const indexScss = `
+${style}
+
+${componentsWithStyles.map((c) => `@use './stories/${c}.stories.scss';`).join('\n')}
+`;
+
+  // Build files, injecting only the needed .stories.scss files
+  const files: Project['files'] = {
+    'package.json': packageJson,
+    'index.html': index,
+    'vite.config.js': viteConfig,
+    'src/main.jsx': main,
+    'src/App.jsx': app,
+    'src/index.scss': indexScss,
+  };
+
+  // Attach the actual story scss contents
+  for (const componentName of componentsWithStyles) {
+    const { filename, content } = storyScssRegistry[componentName];
+    files[filename] = content;
+  }
+
   const stackblitzFileConfig: Project = {
     title: 'Carbon demo',
     description:
       'Run official live example code for a Carbon component, created by Carbon Design System on StackBlitz',
     template: 'node',
-    files: {
-      'package.json': packageJson,
-      'index.html': index,
-      'vite.config.js': viteConfig,
-      'src/main.jsx': main,
-      'src/App.jsx': app,
-      'src/index.scss': style,
-    },
+    files,
   };
 
   StackBlitzSDK.openProject(stackblitzFileConfig, {
