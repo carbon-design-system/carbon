@@ -43,7 +43,15 @@ files by writing:
 
 You also get this file when you import `@carbon/react` directly in your Sass.
 
-<Canvas of={ThemeStories.Default} />
+<Canvas
+  of={ThemeStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ThemeStories.Default),
+    },
+  ]}
+/>
 
 ## Setting the global theme
 
@@ -119,7 +127,15 @@ function ExamplePage() {
   );
 }
 ```
-<Canvas of={ThemeStories.Default} />
+<Canvas
+  of={ThemeStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ThemeStories.Default),
+    },
+  ]}
+/>
 
 ## Getting the current theme in a component
 
@@ -136,7 +152,16 @@ function ExampleComponent() {
 }
 ```
 
-<Canvas of={ThemeStories.UseTheme} />
+<Canvas
+  of={ThemeStories.UseTheme}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ThemeStories.UseTheme),
+    },
+  ]}
+/>
+
 
 ## Component API
 

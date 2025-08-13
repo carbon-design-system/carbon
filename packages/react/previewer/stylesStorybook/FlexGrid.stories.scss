@@ -1,0 +1,94 @@
+//
+// Copyright IBM Corp. 2022, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/colors' as *;
+
+// base of project work area
+#root > #templates > div:first-child {
+  inline-size: 100%;
+}
+
+// grid styles
+.cds--grid .outside {
+  block-size: 100%;
+  min-block-size: 80px;
+}
+
+.cds--grid .inside {
+  block-size: 100%;
+  min-block-size: 80px;
+}
+
+// hack to enable zoom feature to trigger
+.cds--grid--full-width {
+  max-inline-size: 100%;
+}
+
+.default .cds--col code {
+  display: flex;
+  justify-content: center;
+}
+
+// template hard-coded styles
+#templates .inside {
+  background-color: $blue-10;
+}
+
+#templates .cds--grid [class*='col'] {
+  background-color: $blue-20;
+  outline: 1px dashed $blue-40;
+}
+
+#templates .cds--grid--condensed,
+#templates .cds--row--condensed {
+  background-color: $warm-gray-100;
+  color: $gray-10;
+}
+
+#templates .cds--grid--condensed [class*='col'],
+#templates .cds--row--condensed [class*='col'] {
+  background: none;
+  outline: none;
+}
+
+#templates .cds--grid--condensed .outside,
+#templates .cds--row--condensed .outside {
+  background-color: $gray-80;
+  outline: none;
+}
+
+#templates .cds--grid--condensed .inside,
+#templates .cds--row--condensed .inside {
+  background: none;
+}
+
+#templates .cds--grid--narrow .inside,
+#templates .cds--row--narrow .inside {
+  background-color: $teal-10;
+}
+
+#templates .cds--grid--narrow [class*='col'],
+#templates .cds--row--narrow [class*='col'] {
+  background-color: $teal-20;
+  outline: 1px dashed $teal-40;
+}
+
+// css grid
+#templates > .cds--css-grid {
+  border: 1px dashed #000000;
+}
+
+#templates .cds--css-grid [class*='col'] {
+  background-color: #edf4ff;
+  min-block-size: 80px;
+  outline: 1px solid #a6c8ff;
+}
+
+#templates .cds--css-grid .cds--subgrid [class*='col'] {
+  background-color: rgba(#ffe056, 0.25);
+  outline: 1px solid #ffe056;
+}
