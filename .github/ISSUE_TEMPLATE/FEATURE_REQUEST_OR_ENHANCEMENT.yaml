@@ -50,7 +50,7 @@ body:
         interaction (how it behaves)?
       options:
         # NOTE: The text in these options is used to automatically label the
-        # issue with the appropriate severity label. If these are modified,
+        # issue with it's corresponding label. If these are modified,
         # .github/labeler.yml must be updated as well.
         - 'Yes, visual design'
         - 'Yes, user interaction'
@@ -67,7 +67,7 @@ body:
         What documentation will need to be updated for this enhancement?
       options:
         # NOTE: The text in these options is used to automatically label the
-        # issue with the appropriate severity label. If these are modified,
+        # issue with it's corresponding label. If these are modified,
         # .github/labeler.yml must be updated as well.
         - label: The website documentation (carbondesignsystem.com)
         - label: Figma kit documentation
