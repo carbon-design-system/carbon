@@ -42,6 +42,32 @@ body:
         Provide sample content, references, or audits of solutions solving the
         same problem in other applications/websites.
   - type: dropdown
+    id: needs-design-spec
+    attributes:
+      label: Design impact
+      description:
+        Will this enhancement affect the visual design (how it looks) or user
+        interaction (how it behaves)?
+      options:
+        - 'Yes – visual design'
+        - 'Yes – user interaction'
+        - 'Yes – both visual and interaction'
+        - "I'm not sure"
+        - 'No'
+    validations:
+      required: true
+  - type: checkboxes
+    id: needs-documentation-updates
+    attributes:
+      label: Documentation impact
+      description:
+        What documentation will need to be updated for this enhancement?
+      options:
+        - label: The website (carbondesignsystem.com)
+        - label: Figma kit
+        - label: Storybook(s)
+        - label: "I'm not sure"
+  - type: dropdown
     id: package
     attributes:
       label: Package
@@ -106,3 +132,8 @@ body:
             I agree to follow this project's [Code of
             Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
           required: true
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > You do not need to apply labels. Labels are applied automatically and by the Carbon team when your issue is triaged.
