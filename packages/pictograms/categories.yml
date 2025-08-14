@@ -378,6 +378,7 @@ categories:
       - geographic-flexibility
       - global--business--services
       - global--footprint
+      - global--infrastructure
       - global--technology--services
       - go--language
       - gpu-computing
@@ -408,7 +409,6 @@ categories:
       - insurance--02
       - integration--02
       - integration--03
-      - internet-of-things
       - java
       - javascript
       - keep-your-own-key
@@ -695,6 +695,7 @@ categories:
       - resourceful
       - social--tile
       - software--02
+      - systems-and-tools
       - universal-experiences
       - user--experience-design
       - user--insights
@@ -761,6 +762,7 @@ categories:
       - headphones
       - microphone
       - printer
+      - team-radio
       - telephone
       - television
       - washer
@@ -787,6 +789,8 @@ categories:
       - client--financing--02
       - commercial--financing--01
       - commercial--financing--02
+      - finance-and-operations
+      - finance-and-supply-chain
       - finance--strategy
       - financial--consultant
       - financial--gain
@@ -924,6 +928,7 @@ categories:
     members:
       - build
       - connect
+      - internet-of-things
       - iot--munich
       - migrate
       - modernize--02
@@ -981,11 +986,15 @@ categories:
       - ornament
       - pencil
       - perfume
+      - punching-bag--01
+      - punching-bag--02
+      - punching-bag--03
       - racetrack
       - rock-on
       - scale
       - snowflake
       - soft--ice--cream
+      - speed-bag
       - sports
       - spotlight
       - stage
@@ -997,6 +1006,9 @@ categories:
       - tickets
       - tree
       - tree--02
+      - ufc--belt
+      - ufc--fighting
+      - ufc--ring
       - waving-hand
       - wedding--cake
       - whistle
@@ -1065,6 +1077,7 @@ categories:
       - advocate
       - advocate--mask
       - agility--02
+      - client--support
       - design-thinking-team
       - engagement-inclusion--01
       - engagement-inclusion--02
@@ -1193,6 +1206,7 @@ categories:
       - build--leadership--and--culture
       - collaboration
       - continuous--security
+      - cybersecurity
       - data--security
       - detect--and--stop--advancing--threats
       - digital--id
@@ -1257,6 +1271,7 @@ categories:
   - name: Supply chain
     members:
       - connected--nodes--to--the--cloud
+      - control--tower
       - delivered
       - managing--contractual--flow
       - managing--items
@@ -1270,6 +1285,7 @@ categories:
       - process
       - supply-chain--01
       - supply-chain--02
+      - transparent-supply
   - name: Sustainability
     members:
       - energy--crisis
