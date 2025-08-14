@@ -161,6 +161,13 @@ export const MultiplePaginationComponents = {
   },
 };
 
+export const PaginationUnknownPages = {
+  name: 'Unknown pages and items',
+  render: () => {
+    return html` <cds-pagination ?pages-unknown=${true}> </cds-pagination> `;
+  },
+};
+
 export const PaginationWithCustomPageSizesLabel = {
   render: () => {
     return html`
@@ -172,12 +179,6 @@ export const PaginationWithCustomPageSizesLabel = {
         <cds-select-item value="50">Fifty</cds-select-item>
       </cds-pagination>
     `;
-  },
-};
-
-export const IndefinitePaginationFix = {
-  render: () => {
-    return html` <cds-pagination ?pages-unknown=${true}> </cds-pagination> `;
   },
 };
 
