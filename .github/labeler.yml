@@ -2,7 +2,7 @@
 # the issue-triage-labeler.yml workflow.
 #
 # Keys within this file are the name of the label in the repository that we want
-# to add (eg: "adopter: strategic-product", "needs-updating") and the value is the regular
+# to add (eg: "package: styles", "severity: 1") and the value is the regular
 # expression for when to apply the label. Should the regular expression not
 # match, the label will not be applied.
 #
