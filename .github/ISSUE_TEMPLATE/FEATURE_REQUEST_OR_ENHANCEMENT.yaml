@@ -49,9 +49,12 @@ body:
         Will this enhancement affect the visual design (how it looks) or user
         interaction (how it behaves)?
       options:
-        - 'Yes – visual design'
-        - 'Yes – user interaction'
-        - 'Yes – both visual and interaction'
+        # NOTE: The text in these options is used to automatically label the
+        # issue with the appropriate severity label. If these are modified,
+        # .github/labeler.yml must be updated as well.
+        - 'Yes, visual design'
+        - 'Yes, user interaction'
+        - 'Yes, both visual and interaction'
         - "I'm not sure"
         - 'No'
     validations:
@@ -63,9 +66,12 @@ body:
       description:
         What documentation will need to be updated for this enhancement?
       options:
-        - label: The website (carbondesignsystem.com)
-        - label: Figma kit
-        - label: Storybook(s)
+        # NOTE: The text in these options is used to automatically label the
+        # issue with the appropriate severity label. If these are modified,
+        # .github/labeler.yml must be updated as well.
+        - label: The website documentation (carbondesignsystem.com)
+        - label: Figma kit documentation
+        - label: Storybook(s) documentation
         - label: "I'm not sure"
   - type: dropdown
     id: package
