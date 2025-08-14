@@ -127,15 +127,8 @@ function ExamplePage() {
   );
 }
 ```
-<Canvas
-  of={ThemeStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ThemeStories.Default),
-    },
-  ]}
-/>
+
+<Canvas of={ThemeStories.Default} />
 
 ## Getting the current theme in a component
 
@@ -152,16 +145,7 @@ function ExampleComponent() {
 }
 ```
 
-<Canvas
-  of={ThemeStories.UseTheme}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ThemeStories.UseTheme),
-    },
-  ]}
-/>
-
+<Canvas of={ThemeStories.UseTheme} />
 
 ## Component API
 

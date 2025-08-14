@@ -1,4 +1,4 @@
-export const FlexGridScssRaw = `
+export const FlexGridScss = `
 @use '@carbon/styles/scss/colors' as *;
 
 // base of project work area
@@ -73,7 +73,12 @@ export const FlexGridScssRaw = `
 
 // css grid
 #templates > .cds--css-grid {
-  border: 1px dashed #000000;
+  border: 1px dashed black;
+}
+
+#templates .cds--css-grid .cds--subgrid [class*='col'] {
+  background-color: rgba(#ffe056, 0.25);
+  outline: 1px solid #ffe056;
 }
 
 #templates .cds--css-grid [class*='col'] {
@@ -81,14 +86,9 @@ export const FlexGridScssRaw = `
   min-block-size: 80px;
   outline: 1px solid #a6c8ff;
 }
-
-#templates .cds--css-grid .cds--subgrid [class*='col'] {
-  background-color: rgba(#ffe056, 0.25);
-  outline: 1px solid #ffe056;
-}
 `;
 
-export const GridScssRaw = `
+export const GridScss = `
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/type' as *;
 
@@ -186,44 +186,9 @@ export const GridScssRaw = `
     --border-color: #bb8eff;
   }
 }
-
 `;
 
-export const HideAtBreakpointScssRaw = `
-@use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
-
-.hide-at-sm {
-  padding: 2rem 1rem;
-  background: #8a3ffc;
-  @include hide-at-sm;
-}
-
-.hide-at-md {
-  padding: 2rem 1rem;
-  background: #4589ff;
-  @include hide-at-md;
-}
-
-.hide-at-lg {
-  padding: 2rem 1rem;
-  background: #42be65;
-  @include hide-at-lg;
-}
-
-.hide-at-xlg {
-  padding: 2rem 1rem;
-  background: #f1c21b;
-  @include hide-at-xlg;
-}
-
-.hide-at-max {
-  padding: 2rem 1rem;
-  background: #da1e28;
-  @include hide-at-max;
-}
-`;
-
-export const LayerScssRaw = `
+export const LayerScss = `
 @use '@carbon/styles/scss/theme';
 
 .example-layer-test-component {
@@ -238,7 +203,7 @@ export const LayerScssRaw = `
 }
 `;
 
-export const ThemeScssRaw = `
+export const ThemeScss = `
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/theme';
 

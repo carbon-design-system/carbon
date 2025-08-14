@@ -6,18 +6,16 @@
  */
 
 import React from 'react';
-import StackBlitzSDK from '@stackblitz/sdk';
-import sdk, { Project } from '@stackblitz/sdk';
+import StackBlitzSDK, { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
 import * as carbonComponents from '../src/index';
 import * as carbonIconsReact from '@carbon/icons-react';
 import {
-  FlexGridScssRaw,
-  GridScssRaw,
-  HideAtBreakpointScssRaw,
-  LayerScssRaw,
-  ThemeScssRaw,
-} from './stylesStorybook';
+  FlexGridScss,
+  GridScss,
+  LayerScss,
+  ThemeScss,
+} from './storybookStyles';
 
 export const stackblitzPrefillConfig = (
   code: any,
@@ -84,29 +82,18 @@ export const stackblitzPrefillConfig = (
   const matchedIcons = findIconImports(iconsNames, storyCode);
 
   // Registry of story scss strings we can inject
-  const storyScssRegistry: Record<
-    string,
-    { filename: string; content: string }
-  > = {
+  const storyScssRegistry: Record<string, { content: string }> = {
     FlexGrid: {
-      filename: 'src/stories/FlexGrid.stories.scss',
-      content: FlexGridScssRaw,
+      content: FlexGridScss,
     },
     Grid: {
-      filename: 'src/stories/Grid.stories.scss',
-      content: GridScssRaw,
-    },
-    HideAtBreakpoint: {
-      filename: 'src/stories/HideAtBreakpoint.stories.scss',
-      content: HideAtBreakpointScssRaw,
+      content: GridScss,
     },
     Layer: {
-      filename: 'src/stories/Layer.stories.scss',
-      content: LayerScssRaw,
+      content: LayerScss,
     },
     Theme: {
-      filename: 'src/stories/Theme.stories.scss',
-      content: ThemeScssRaw,
+      content: ThemeScss,
     },
   };
 
@@ -114,26 +101,33 @@ export const stackblitzPrefillConfig = (
   const componentsWithStyles = matchedComponents.filter(
     (c) => storyScssRegistry[c]
   );
-  console.error('componentsWithStyles');
+  const uniqueComponentsWithStyles = Array.from(new Set(componentsWithStyles));
 
   // Detect if we need flexbox grid enabled
-  const hasFlexboxGridComponent = componentsWithStyles.some(
+  const hasFlexboxGridComponent = uniqueComponentsWithStyles.some(
     (component) => component === 'Grid' || component === 'FlexGrid'
   );
-  console.error('hasFlexboxGridComponent');
 
-  // index.scss = base style + conditional @use for story scss
-  const indexScss = `
-${
-  hasFlexboxGridComponent
+  // Build base Carbon import for index.scss (enable flexbox grid only when needed)
+  const carbonBaseScss = hasFlexboxGridComponent
     ? `@use '@carbon/react' with (
   $font-path: '@ibm/plex',
   $use-flexbox-grid: true
 );`
-    : style
-}
+    : style;
 
-${componentsWithStyles.map((c) => `@use './stories/${c}.stories.scss';`).join('\n')}
+  // Inline/append the  SCSS content for each matched component
+  const inlinedStoryScss = uniqueComponentsWithStyles
+    .map(
+      (c) => `
+${storyScssRegistry[c].content}`
+    )
+    .join('\n');
+
+  // Final index.scss = base Carbon + (conditionally) inlined story styles
+  const indexScss = `
+${carbonBaseScss}
+${inlinedStoryScss}
 `;
 
   // Generate App.jsx code
@@ -147,7 +141,7 @@ ${componentsWithStyles.map((c) => `@use './stories/${c}.stories.scss';`).join('\
   }
   `;
 
-  // Build files, injecting only the needed .stories.scss files
+  // Build files (NO separate src/stories/*.scss files created)
   const files: Project['files'] = {
     'package.json': packageJson,
     'index.html': index,
@@ -156,12 +150,6 @@ ${componentsWithStyles.map((c) => `@use './stories/${c}.stories.scss';`).join('\
     'src/App.jsx': app,
     'src/index.scss': indexScss,
   };
-
-  // Attach the actual story scss contents
-  for (const componentName of componentsWithStyles) {
-    const { filename, content } = storyScssRegistry[componentName];
-    files[filename] = content;
-  }
 
   const stackblitzFileConfig: Project = {
     title: 'Carbon demo',
