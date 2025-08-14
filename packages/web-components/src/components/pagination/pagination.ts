@@ -381,6 +381,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       .map(([key]) => key)
       .join(' ');
 
+    const totalPagesSafe =
+      Number.isFinite(totalPages) && totalPages > 0
+        ? totalPages
+        : Math.max(1, page || 1);
+
     return html`
       <div class="${prefix}--pagination__left">
         <label for="select" class="${prefix}--pagination__text"
@@ -419,7 +424,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 size="${size}"
                 inline
                 value="${page}">
-                ${Array.from(new Array(totalPages)).map(
+                ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
                     <cds-select-item value="${index + 1}">
                       ${index + 1}
@@ -436,7 +441,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 size="${size}"
                 inline
                 value="${page}">
-                ${Array.from(new Array(totalPages)).map(
+                ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
                     <cds-select-item value="${index + 1}">
                       ${index + 1}

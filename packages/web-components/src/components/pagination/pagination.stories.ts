@@ -175,6 +175,12 @@ export const PaginationWithCustomPageSizesLabel = {
   },
 };
 
+export const IndefinitePaginationFix = {
+  render: () => {
+    return html` <cds-pagination ?pages-unknown=${true}> </cds-pagination> `;
+  },
+};
+
 const meta = {
   title: 'Components/Pagination',
   decorators: [(story) => html`<div style="max-width: 800px">${story()}</div>`],
