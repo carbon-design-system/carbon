@@ -33,8 +33,6 @@ export default {
 };
 
 export const AutoColumns = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -65,8 +63,6 @@ export const AutoColumns = () => {
 };
 
 export const ResponsiveGrid = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -106,8 +102,6 @@ export const ResponsiveGrid = () => {
 };
 
 export const Offset = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -138,8 +132,6 @@ export const Offset = () => {
 };
 
 export const Condensed = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -170,8 +162,6 @@ export const Condensed = () => {
 };
 
 export const CondensedColumns = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -230,8 +220,6 @@ export const CondensedColumns = () => {
 };
 
 export const Narrow = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -262,8 +250,6 @@ export const Narrow = () => {
 };
 
 export const NarrowColumns = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -322,8 +308,6 @@ export const NarrowColumns = () => {
 };
 
 export const FullWidth = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -354,8 +338,6 @@ export const FullWidth = () => {
 };
 
 export const MixedGutterModes = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -414,8 +396,6 @@ export const MixedGutterModes = () => {
 };
 
 export const Default = (args) => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">

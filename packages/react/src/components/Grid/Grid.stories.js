@@ -37,8 +37,6 @@ export default {
 };
 
 export const Default = (args) => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid {...args}>
@@ -88,8 +86,6 @@ Default.argTypes = {
 };
 
 export const Narrow = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid narrow>
@@ -103,8 +99,6 @@ export const Narrow = () => {
 };
 
 export const Condensed = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid condensed>
@@ -118,8 +112,6 @@ export const Condensed = () => {
 };
 
 export const FullWidth = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid fullWidth>
@@ -133,8 +125,6 @@ export const FullWidth = () => {
 };
 
 export const Responsive = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid>
@@ -169,8 +159,6 @@ export const Responsive = () => {
 };
 
 export const Subgrid = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid>
@@ -267,8 +255,6 @@ export const Subgrid = () => {
 };
 
 export const MixedGutterModes = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid>
@@ -337,8 +323,6 @@ export const MixedGutterModes = () => {
 };
 
 export const GridStartEnd = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid>
@@ -366,8 +350,6 @@ export const GridStartEnd = () => {
 };
 
 export const Offset = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <div className="sb-css-grid-container">
       <Grid>
