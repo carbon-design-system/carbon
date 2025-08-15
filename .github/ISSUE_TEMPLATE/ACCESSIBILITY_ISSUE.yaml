@@ -155,3 +155,8 @@ body:
             I checked the [current
             issues](https://github.com/carbon-design-system/carbon/issues) for
             duplicate problems
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > You do not need to apply labels. Labels are applied automatically and by the Carbon team when your issue is triaged.

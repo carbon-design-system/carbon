@@ -1,5 +1,5 @@
 name: Design defect 🎨
-description: Report a visual design issue
+description: Report a visual design issue for an existing component or pattern.
 title: '[Bug]: '
 type: 'bug'
 labels: ['type: bug 🐛', 'status: needs triage :female_detective:']
@@ -95,3 +95,8 @@ body:
             I checked the [current
             issues](https://github.com/carbon-design-system/carbon/issues) for
             duplicate problems
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > You do not need to apply labels. Labels are applied automatically and by the Carbon team when your issue is triaged.

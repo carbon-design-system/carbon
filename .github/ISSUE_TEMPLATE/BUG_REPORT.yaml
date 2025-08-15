@@ -94,6 +94,9 @@ body:
         'Read more to understand our [severity
         levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
       options:
+        # NOTE: The text in these options is used to automatically label the
+        # issue with the appropriate severity label. If these are modified,
+        # .github/labeler.yml must be updated as well.
         - 'Severity 1 = Must be fixed ASAP. The response must be swift. Someone
           from the team must drop all current work and be immediately reassigned
           to address the issue.'
@@ -122,3 +125,8 @@ body:
             I checked the [current
             issues](https://github.com/carbon-design-system/carbon/issues) for
             duplicate problems
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > You do not need to apply labels. Labels are applied automatically and by the Carbon team when your issue is triaged.
