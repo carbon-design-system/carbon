@@ -7,7 +7,14 @@
 
 import React from 'react';
 import StackBlitzSDK, { Project } from '@stackblitz/sdk';
-import { index, main, packageJson, style, viteConfig } from './configFiles';
+import {
+  index,
+  main,
+  packageJson,
+  style,
+  viteConfig,
+  flexGridScss,
+} from './configFiles';
 import * as carbonComponents from '../src/index';
 import * as carbonIconsReact from '@carbon/icons-react';
 import {
@@ -98,29 +105,23 @@ export const stackblitzPrefillConfig = (
   };
 
   // Only include story scss for components actually used
-  const componentsWithStyles = matchedComponents.filter(
-    (c) => storyScssRegistry[c]
-  );
-  const uniqueComponentsWithStyles = Array.from(new Set(componentsWithStyles));
+  const componentsWithStyles = [
+    ...new Set(matchedComponents.filter((item) => storyScssRegistry[item])),
+  ];
 
   // Detect if we need flexbox grid enabled
-  const hasFlexboxGridComponent = uniqueComponentsWithStyles.some(
-    (component) => component === 'Grid' || component === 'FlexGrid'
+  const hasFlexboxGridComponent = componentsWithStyles.some(
+    (component) => component === 'FlexGrid'
   );
 
-  // Build base Carbon import for index.scss (enable flexbox grid only when needed)
-  const carbonBaseScss = hasFlexboxGridComponent
-    ? `@use '@carbon/react' with (
-  $font-path: '@ibm/plex',
-  $use-flexbox-grid: true
-);`
-    : style;
+  // Enable flexbox grid only when needed
+  const carbonBaseScss = hasFlexboxGridComponent ? flexGridScss : style;
 
   // Inline/append the  SCSS content for each matched component
-  const inlinedStoryScss = uniqueComponentsWithStyles
+  const inlinedStoryScss = componentsWithStyles
     .map(
-      (c) => `
-${storyScssRegistry[c].content}`
+      (item) => `
+${storyScssRegistry[item].content}`
     )
     .join('\n');
 
@@ -141,7 +142,6 @@ ${inlinedStoryScss}
   }
   `;
 
-  // Build files (NO separate src/stories/*.scss files created)
   const files: Project['files'] = {
     'package.json': packageJson,
     'index.html': index,
