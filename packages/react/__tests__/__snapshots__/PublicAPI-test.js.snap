@@ -9895,19 +9895,7 @@ Map {
   "TreeNode" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
-      "active": {
-        "args": [
-          [
-            {
-              "type": "string",
-            },
-            {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
+      "active": [Function],
       "align": {
         "args": [
           [
@@ -9939,9 +9927,7 @@ Map {
       "defaultIsExpanded": {
         "type": "bool",
       },
-      "depth": {
-        "type": "number",
-      },
+      "depth": [Function],
       "disabled": {
         "type": "bool",
       },
@@ -9957,18 +9943,14 @@ Map {
       "label": {
         "type": "node",
       },
-      "onNodeFocusEvent": {
-        "type": "func",
-      },
+      "onNodeFocusEvent": [Function],
       "onSelect": {
         "type": "func",
       },
       "onToggle": {
         "type": "func",
       },
-      "onTreeSelect": {
-        "type": "func",
-      },
+      "onTreeSelect": [Function],
       "renderIcon": {
         "args": [
           [
@@ -9982,24 +9964,7 @@ Map {
         ],
         "type": "oneOfType",
       },
-      "selected": {
-        "args": [
-          {
-            "args": [
-              [
-                {
-                  "type": "string",
-                },
-                {
-                  "type": "number",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        ],
-        "type": "arrayOf",
-      },
+      "selected": [Function],
       "value": {
         "type": "string",
       },
@@ -10010,19 +9975,7 @@ Map {
     "TreeNode": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
-        "active": {
-          "args": [
-            [
-              {
-                "type": "string",
-              },
-              {
-                "type": "number",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
+        "active": [Function],
         "align": {
           "args": [
             [
@@ -10054,9 +10007,7 @@ Map {
         "defaultIsExpanded": {
           "type": "bool",
         },
-        "depth": {
-          "type": "number",
-        },
+        "depth": [Function],
         "disabled": {
           "type": "bool",
         },
@@ -10072,18 +10023,14 @@ Map {
         "label": {
           "type": "node",
         },
-        "onNodeFocusEvent": {
-          "type": "func",
-        },
+        "onNodeFocusEvent": [Function],
         "onSelect": {
           "type": "func",
         },
         "onToggle": {
           "type": "func",
         },
-        "onTreeSelect": {
-          "type": "func",
-        },
+        "onTreeSelect": [Function],
         "renderIcon": {
           "args": [
             [
@@ -10097,24 +10044,7 @@ Map {
           ],
           "type": "oneOfType",
         },
-        "selected": {
-          "args": [
-            {
-              "args": [
-                [
-                  {
-                    "type": "string",
-                  },
-                  {
-                    "type": "number",
-                  },
-                ],
-              ],
-              "type": "oneOfType",
-            },
-          ],
-          "type": "arrayOf",
-        },
+        "selected": [Function],
         "value": {
           "type": "string",
         },
