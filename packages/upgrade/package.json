@@ -46,7 +46,7 @@
     "fs-extra": "^11.0.0",
     "inquirer": "^12.5.0",
     "is-git-clean": "^1.1.0",
-    "jest-diff": "^28.1.0",
+    "jest-diff": "^30.0.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
     "memfs": "^4.0.0",
