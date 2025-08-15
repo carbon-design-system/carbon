@@ -91,7 +91,7 @@ $css--plex: true !default;
 :host(#{$prefix}-dropdown[warn]),
 :host(#{$prefix}-dropdown[invalid]) {
   .#{$prefix}--form__helper-text {
-    grid-column: 2;
+    grid-column: 3;
   }
 }
 
