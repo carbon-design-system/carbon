@@ -272,7 +272,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <Text
             as="div"
             className={`${prefix}--menu-item__label`}
-            title={label}>
+            title={rest?.title || label}>
             {label}
           </Text>
           {shortcut && !hasChildren && (
