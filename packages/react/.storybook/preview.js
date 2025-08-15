@@ -189,12 +189,8 @@ const parameters = {
         <Stories includePrimary={false} />
       </>
     ),
+    codePanel: true,
   },
-  // Small (<672)
-  // Medium (672 - 1056px)
-  // Large (1056 - 1312px)
-  // X-Large (1312 - 1584px)
-  // Max (>1584)
   viewport: {
     options: {
       sm: {
