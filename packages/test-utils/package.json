@@ -23,7 +23,7 @@
     "provenance": true
   },
   "peerDependencies": {
-    "react-dom": "^18.0.0"
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "prettier": "^3.3.3",
