@@ -185,7 +185,8 @@ const Pagination = React.forwardRef(function Pagination(
     pageNumberText: _pageNumberText = 'Page Number',
     pageRangeText = (_current, total) =>
       `of ${total} ${total === 1 ? 'page' : 'pages'}`,
-    pageSelectLabelText = (_current, total) => `Page of ${total} pages`,
+    pageSelectLabelText = (current, total) =>
+      `Page ${current} of ${total} ${total === 1 ? 'page' : 'pages'}`,
     page: controlledPage = 1,
     pageInputDisabled,
     pageSize: controlledPageSize,
