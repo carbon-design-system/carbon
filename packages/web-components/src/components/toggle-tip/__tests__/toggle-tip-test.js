@@ -66,13 +66,18 @@ describe('cds-toggletip', function () {
 
   it('should close on focus out', async () => {
     const el = await fixture(html`<cds-toggletip open></cds-toggletip>`);
-    const event = new FocusEvent('focusout', {
-      relatedTarget: document.body,
-    });
-    el.dispatchEvent(event);
+
+    const outsideElement = document.createElement('button');
+    document.body.appendChild(outsideElement);
+
+    const button = el.shadowRoot.querySelector('.cds--toggletip-button');
+    button.focus();
+
+    outsideElement.focus();
     await el.updateComplete;
 
     expect(el.open).to.be.false;
+    document.body.removeChild(outsideElement);
   });
 
   it('should render body text when provided via slot', async () => {

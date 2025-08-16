@@ -106,9 +106,11 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   @HostListener('focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleFocusOut(event: FocusEvent) {
-    if (!this.contains(event.relatedTarget as Node)) {
-      this.open = false;
+    const path = event.composedPath();
+    if (path.includes(this as unknown as EventTarget)) {
+      return;
     }
+    this.open = false;
   }
 
   protected _renderToggleTipLabel = () => {
