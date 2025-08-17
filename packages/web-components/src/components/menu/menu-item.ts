@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,11 +10,11 @@ import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
-import CaretRight16 from '@carbon/icons/lib/caret--right/16';
+import CaretLeft16 from '@carbon/icons/lib/caret--left/16.js';
+import CaretRight16 from '@carbon/icons/lib/caret--right/16.js';
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import Checkmark16 from '@carbon/icons/lib/checkmark/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
@@ -101,8 +101,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   private _updateAttributes() {
     if (this.disabled && !this.hasSubmenu) {
       this.setAttribute('aria-disabled', this.disabled);
+      this.setAttribute('tabindex', '-1');
     } else {
       this.removeAttribute('aria-disabled');
+      this.setAttribute('tabindex', '0');
     }
     if (this.hasSubmenu) {
       this.setAttribute('aria-haspopup', this.hasSubmenu + '');
@@ -115,8 +117,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     } else if (!this.getAttribute('role')) {
       this.setAttribute('role', 'menuitem');
     }
-
-    this.setAttribute('tabindex', '-1');
   }
 
   firstUpdated() {

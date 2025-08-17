@@ -7,10 +7,8 @@
  * @jest-environment node
  */
 
-'use strict';
-
-const { files } = require('@carbon/styles/files');
-const { SassRenderer } = require('@carbon/test-utils/scss');
+import { files } from '@carbon/styles/files';
+import { SassRenderer } from '@carbon/test-utils/scss';
 
 const { render } = SassRenderer.create(__dirname);
 

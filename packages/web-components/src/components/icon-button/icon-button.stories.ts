@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -101,17 +101,6 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
-    return html`
-      <cds-icon-button>
-        ${Edit16({ slot: 'icon' })}
-        <span slot="tooltip-content">label</span>
-      </cds-icon-button>
-    `;
-  },
-};
-
-export const Playground = {
   args,
   argTypes,
   render: ({

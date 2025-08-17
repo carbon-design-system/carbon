@@ -5,16 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import generator from '@babel/generator';
+import babelTemplate from '@babel/template';
+import * as babelTypes from '@babel/types';
+import { types as t, generate } from '@carbon/scss-generator';
+import { camelCase, constantCase } from 'change-case';
+import fs from 'fs-extra';
+import yaml from 'js-yaml';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const { default: babelGenerate } = require('@babel/generator');
-const { default: template } = require('@babel/template');
-const babelTypes = require('@babel/types');
-const { types: t, generate } = require('@carbon/scss-generator');
-const { camelCase, constantCase } = require('change-case');
-const fs = require('fs-extra');
-const yaml = require('js-yaml');
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function main() {
   const featureFlagsPath = path.resolve(__dirname, '../feature-flags.yml');
@@ -82,7 +84,7 @@ const javascriptBanner = `/**
 `;
 function buildJavaScriptModule(featureFlags) {
   const t = babelTypes;
-  const tmpl = template(`
+  const tmpl = babelTemplate.default(`
     if (process.env.%%env%%) {
       if (process.env.%%env%% === 'true') {
         enabled.%%key%% = true;
@@ -93,7 +95,7 @@ function buildJavaScriptModule(featureFlags) {
       enabled.%%key%% = %%defaultEnabled%%;
     }
   `);
-  const fallback = template(`enabled.%%key%% = %%enabled%%;`);
+  const fallback = babelTemplate.default(`enabled.%%key%% = %%enabled%%;`);
 
   const file = t.file(
     t.program([
@@ -152,7 +154,7 @@ function buildJavaScriptModule(featureFlags) {
       ),
     ])
   );
-  const { code } = babelGenerate(file);
+  const { code } = generator.default(file);
 
   return `${javascriptBanner}${code}`;
 }

@@ -61,17 +61,27 @@ const sharedArgTypes = {
 
 const DefaultStory = (props) => {
   const { align, caret, dropShadow, highContrast, open } = props;
+  const [isOpen, setIsOpen] = useState(open);
+
   return (
     <Popover
+      {...props}
       align={align}
       caret={caret}
       dropShadow={dropShadow}
       highContrast={highContrast}
-      open={open}
-      {...props}>
-      <div className="playground-trigger">
+      open={isOpen}
+      onRequestClose={() => setIsOpen(false)}>
+      <button
+        className="playground-trigger"
+        aria-label="Checkbox"
+        type="button"
+        aria-expanded={isOpen}
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}>
         <CheckboxIcon />
-      </div>
+      </button>
       <PopoverContent className="p-3">
         <h2 className="popover-title">Available storage</h2>
         <p className="popover-details">
@@ -257,14 +267,23 @@ export const ExperimentalAutoAlign = (args) => {
           top: '2500px',
           left: '2500px',
         }}>
-        <Popover open={open} align="top" autoAlign ref={ref} {...args}>
-          <div className="playground-trigger">
-            <CheckboxIcon
-              onClick={() => {
-                setOpen(!open);
-              }}
-            />
-          </div>
+        <Popover
+          open={open}
+          align="top"
+          autoAlign
+          ref={ref}
+          onRequestClose={() => setOpen(false)}
+          {...args}>
+          <button
+            className="playground-trigger"
+            aria-label="Checkbox"
+            type="button"
+            aria-expanded={open}
+            onClick={() => {
+              setOpen(!open);
+            }}>
+            <CheckboxIcon />
+          </button>
           <PopoverContent className="p-3">
             <div>
               <p className="popover-title">This popover uses autoAlign</p>
@@ -318,14 +337,18 @@ export const ExperimentalAutoAlignBoundary = () => {
           align="top"
           autoAlign
           autoAlignBoundary={boundary}
+          onRequestClose={() => setOpen(false)}
           ref={ref}>
-          <div className="playground-trigger">
-            <CheckboxIcon
-              onClick={() => {
-                setOpen(!open);
-              }}
-            />
-          </div>
+          <button
+            className="playground-trigger"
+            aria-label="Checkbox"
+            type="button"
+            aria-expanded={open}
+            onClick={() => {
+              setOpen(!open);
+            }}>
+            <CheckboxIcon />
+          </button>
           <PopoverContent className="p-3">
             <div>
               <p className="popover-title">This popover uses autoAlign</p>

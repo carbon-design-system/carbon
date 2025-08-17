@@ -279,6 +279,7 @@
     }
 
     &:disabled {
+      border-radius: convert.to-rem(4px);
       background-color: $button-disabled;
       color: $text-disabled;
     }

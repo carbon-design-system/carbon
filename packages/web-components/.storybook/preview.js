@@ -135,9 +135,10 @@ export const parameters = {
     source: {
       excludeDecorators: true,
     },
+    codePanel: true,
   },
   viewport: {
-    viewports: {
+    options: {
       sm: {
         name: 'Small',
         styles: {

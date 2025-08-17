@@ -148,9 +148,12 @@ function FileUploaderButton({
   }
 
   function onKeyDown(event) {
-    if (matches(event, [keys.Enter, keys.Space]) && inputNode.current) {
-      inputNode.current.value = '';
-      inputNode.current.click();
+    if (matches(event, [keys.Enter, keys.Space])) {
+      event.preventDefault();
+      if (inputNode.current) {
+        inputNode.current.value = '';
+        inputNode.current.click();
+      }
     }
   }
 

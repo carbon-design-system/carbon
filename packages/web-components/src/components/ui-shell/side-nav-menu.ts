@@ -69,7 +69,9 @@ class CDSSideNavMenu extends FocusMixin(LitElement) {
   /**
    * Handler for the `click` event on the expando button.
    */
-  private _handleClickExpando() {
+  private _handleClickExpando(e: Event) {
+    const target = e.currentTarget as HTMLButtonElement;
+    target.focus();
     this._handleUserInitiatedToggle();
   }
 

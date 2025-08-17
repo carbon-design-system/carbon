@@ -25,7 +25,7 @@ describe('scss/components/accordion', () => {
     `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
-      Array [
+      [
         "flex-direction",
         "justify-content",
         "arrow-margin",
