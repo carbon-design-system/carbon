@@ -406,9 +406,6 @@ export type { ListBoxFieldProps } from './components/ListBox/ListBoxField';
 export type { ListBoxMenuProps } from './components/ListBox/ListBoxMenu';
 export type { ListBoxMenuItemProps } from './components/ListBox/ListBoxMenuItem';
 export type { ListBoxMenuIconProps } from './components/ListBox/ListBoxMenuIcon';
-// TODO: Most components with translation do not expose their translation keys.
-// Why should these need to? There are ways to access the keys and there types
-// without these exports.
 export type {
   ListBoxMenuIconTranslationKey,
   ListBoxSelectionTranslationKey,

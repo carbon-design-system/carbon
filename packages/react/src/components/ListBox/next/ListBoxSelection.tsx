@@ -12,7 +12,6 @@ import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../../internal/usePrefix';
 import type { TFunc, TranslateWithId } from '../../../types/common';
 
-// TODO: Why is this code comment here?
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
  * addition to conditionally rendering a badge if the control has more than one
