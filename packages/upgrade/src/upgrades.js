@@ -665,6 +665,36 @@ export const upgrades = [
         },
       },
       {
+        name: 'ibm-products-update-pdlc-status',
+        description: 'Update imports after PDLC status integration',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'ibm-products-update-pdlc-status.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
         name: 'enable-v12-structured-list-visible-icons',
         description: `
         Updates selectable StructuredList components with new v12 selection pattern.
