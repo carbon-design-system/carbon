@@ -63,7 +63,7 @@ const argTypes = {
   },
   disabled: {
     control: 'boolean',
-    description: 'Specify disabled attribute to `true` to disable a button ',
+    description: 'Specify disabled attribute to `true` to disable a button.',
   },
 };
 
