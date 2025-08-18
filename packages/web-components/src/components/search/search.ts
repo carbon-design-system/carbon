@@ -76,7 +76,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   }
 
   /**
-   * Expand only when the magnifier icon is clicked (not on focus or tab)
+   * Expand only when the magnifier icon is clicked
    */
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -138,7 +138,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       return;
     }
 
-    // Enter / Space → expand if collapsed
+    // Enter/Space: expand if collapsed
     if (key === 'Enter' || key === ' ') {
       event.preventDefault();
       this.setAttribute('expanded', '');
