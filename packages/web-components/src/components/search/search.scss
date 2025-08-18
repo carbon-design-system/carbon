@@ -27,6 +27,16 @@ $css--plex: true !default;
   @extend .#{$prefix}--search--expandable;
 }
 
+:host(#{$prefix}-search[expandable]:focus-within):not([expanded])
+  .#{$prefix}--search-magnifier {
+  outline: $spacing-01 solid var(--cds-focus);
+}
+
+:host(#{$prefix}-search[expandable][expanded]:focus-within)
+  .#{$prefix}--search-magnifier {
+  outline: none;
+}
+
 :host(#{$prefix}-search[expandable][size='sm']) {
   .#{$prefix}--search-magnifier {
     block-size: $spacing-07;

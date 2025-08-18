@@ -76,13 +76,73 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   }
 
   /**
-   * Handles `focus` event on the button when the button can be expanded
+   * Expand only when the magnifier icon is clicked (not on focus or tab)
    */
-  @HostListener('focus')
+  @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleExpand() {
-    if (this.expandable && !this.expanded) {
+  private _handleExpand(e: Event) {
+    // Check if the click came from the magnifier area
+    const path = (e.composedPath && (e.composedPath() as unknown[])) || [];
+    const isMagnifierClick = path.some((n: unknown) =>
+      (n as Element)?.classList?.contains(`${prefix}--search-magnifier`)
+    );
+
+    if (isMagnifierClick && this.expandable && !this.expanded) {
       this.setAttribute('expanded', '');
+      // Focus the input after expanding
+      this.shadowRoot!.getElementById('input')?.focus();
+    }
+  }
+
+  /**
+   * Handle keyboard interactions:
+   * - Enter/Space: expand when collapsed and focus the input
+   * - Esc: if input has text: clear it | if empty: collapse and move focus back to magnifier
+   */
+  @HostListener('keydown')
+  // @ts-ignore
+  private _handleKeys(event: KeyboardEvent) {
+    const key = event.key;
+
+    // Esc only works when the input is the active element
+    if (key === 'Escape') {
+      const inputEl = this.shadowRoot?.getElementById(
+        'input'
+      ) as HTMLInputElement | null;
+      if (this.shadowRoot?.activeElement === inputEl) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if (this.value && this.value.length > 0) {
+          // Clear but keep focus in the input
+          this.dispatchEvent(
+            new CustomEvent((this.constructor as typeof CDSSearch).eventInput, {
+              bubbles: true,
+              composed: true,
+              cancelable: false,
+              detail: { value: '' },
+            })
+          );
+          this.value = '';
+        } else {
+          if (this.expandable && this.expanded) {
+            this.removeAttribute('expanded');
+          }
+          this._focusMagnifier();
+        }
+      }
+      return;
+    }
+
+    if (!this.expandable || this.expanded) {
+      return;
+    }
+
+    // Enter / Space → expand if collapsed
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      this.setAttribute('expanded', '');
+      this.shadowRoot!.getElementById('input')?.focus();
     }
   }
 
@@ -116,6 +176,22 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
     const { disabled, name, value } = this;
     if (!disabled) {
       formData.append(name, value);
+    }
+  }
+
+  /**
+   * Move focus back to the magnifier element.
+   * Adds tabindex="-1" if it is not focusable yet.
+   */
+  private _focusMagnifier() {
+    const magnifier = this.shadowRoot?.querySelector(
+      `.${prefix}--search-magnifier`
+    ) as HTMLElement | null;
+    if (magnifier) {
+      if (!magnifier.hasAttribute('tabindex')) {
+        magnifier.setAttribute('tabindex', '-1');
+      }
+      magnifier.focus();
     }
   }
 
