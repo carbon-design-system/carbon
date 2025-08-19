@@ -17,7 +17,6 @@
  */
 
 const nonStableMap = {
-  PageHeader: 'preview__PageHeader',
   BigNumber: 'previewCandidate__BigNumber',
   BigNumbers: 'previewCandidate__BigNumber',
   Coachmark: 'previewCandidate__Coachmark',
