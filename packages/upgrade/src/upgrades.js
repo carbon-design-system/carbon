@@ -695,6 +695,67 @@ export const upgrades = [
         },
       },
       {
+        name: 'rename-imports-to-preview',
+        description: 'Update imports after PDLC status integration',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'rename-imports-to-preview.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'rename-imports-to-preview-core-and-products',
+        description:
+          'Update imports after PDLC status integration both `@carbon/react` and `@carbon/ibm-products`',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'rename-imports-to-preview-core-and-products.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
         name: 'enable-v12-structured-list-visible-icons',
         description: `
         Updates selectable StructuredList components with new v12 selection pattern.
