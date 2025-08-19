@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -84,10 +84,16 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   }
 
   /**
+   * Specify another element's id to be used as the label for this toggle
+   */
+  @property({ type: String, attribute: 'aria-labelledby' })
+  ariaLabelledby?: string;
+
+  /**
    * The text for the checked state.
    */
   @property({ attribute: 'label-a' })
-  labelA = '';
+  labelA = 'On';
 
   /**
    * Hide label text.
@@ -111,7 +117,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    * The text for the unchecked state.
    */
   @property({ attribute: 'label-b' })
-  labelB = '';
+  labelB = 'Off';
 
   render() {
     const {
@@ -138,15 +144,31 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
 
     const labelTextClasses = classMap({
       [`${prefix}--toggle__label-text`]: labelText,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
-    const stateText = checked ? labelA : labelB;
+
+    let stateText = '';
+
+    if (hideLabel) {
+      stateText = labelText || '';
+    } else {
+      stateText = checked ? labelA : labelB;
+    }
+
+    const labelId = id ? `${id}_label` : undefined;
+
+    const hasLabelText = (this.labelText ?? '') !== '';
+
+    const ariaLabelledby =
+      this.ariaLabelledby ?? (hasLabelText && labelId ? labelId : undefined);
+
     return html`
       <button
         class="${prefix}--toggle__button"
         role="switch"
         type="button"
         aria-checked=${checked}
-        aria-lable=${labelText}
+        aria-labelledby=${ifDefined(ariaLabelledby)}
         .checked="${checked}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
@@ -160,10 +182,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
           <div class="${toggleClasses}" @click=${handleChange}>
             ${this._renderCheckmark()}
           </div>
-          <span
-            ?hidden="${hideLabel}"
-            class="${prefix}--toggle__text"
-            aria-hidden="true"
+          <span class="${prefix}--toggle__text" aria-hidden="true"
             >${stateText}</span
           >
         </div>
