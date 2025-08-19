@@ -28,7 +28,7 @@ const carbonPackages = ['@carbon/react', '@carbon/ibm-products'];
 function transformer(file, api) {
   const j = api.jscodeshift;
 
-  carbonPackages.forEach(p => {
+  carbonPackages.forEach((p) => {
     j(file.source)
       .find(j.ImportDeclaration, {
         source: {
@@ -36,12 +36,10 @@ function transformer(file, api) {
         },
       })
       .find(j.ImportSpecifier)
-      .filter(
-        (path) => !!nonStableKeys.includes(path.node.imported.name)
-      )
+      .filter((path) => !!nonStableKeys.includes(path.node.imported.name))
       .replaceWith((path) =>
         j.importSpecifier(j.identifier(allPreviews[path.node.imported.name]))
-      )
+      );
   });
   return j.toSource();
 }
