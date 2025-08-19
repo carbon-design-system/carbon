@@ -5,13 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  useCallback,
-  useEffect,
-  useState,
-  type RefObject,
-  useLayoutEffect,
-} from 'react';
+import { useCallback, useLayoutEffect, useState, type RefObject } from 'react';
 import { usePrefix } from './usePrefix';
 
 export const usePresence = (

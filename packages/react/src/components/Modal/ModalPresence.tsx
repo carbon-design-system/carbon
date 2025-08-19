@@ -66,6 +66,9 @@ export const ModalPresenceContext = createContext<
   ModalPresenceContextProps | undefined
 >(undefined);
 
+/**
+ * Handles occurrences where only a single modal must consume a context.
+ */
 export const useExclusiveModalPresenceContext = (id: string) => {
   const ctx = useContext(ModalPresenceContext);
   return ctx?.isPresenceExclusive(id) ? ctx : undefined;
