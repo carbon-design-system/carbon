@@ -19,9 +19,9 @@
   @include modal.modal(
     $enable-experimental-focus-wrap-without-sentinels: true,
     $enable-dialog-element: true,
-    $enable-presence: true
+    $enable-presence: false
   );
-  @include dialog.dialog($enable-presence: true);
+  @include dialog.dialog($enable-presence: false);
   @include text-input.text-input();
   @include select.select();
   @include dropdown.dropdown();
