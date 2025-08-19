@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { reactPreviewMap } = require('./nonStableMapping');
+const { reactPreviewMap, productsPreviewMap } = require('./nonStableMapping');
 
 /**
  * Updates imports for non-stable components
@@ -13,43 +13,37 @@ const { reactPreviewMap } = require('./nonStableMapping');
  * @example
  * Before:
  * import { unstable__FluidTimePicker } from '@carbon/react';
+ * import { SearchBar } from '@carbon/ibm-products';
  *
  * After:
  * import { preview__FluidTimePicker } from "@carbon/react";
+ * import { previewCandidate__SearchBar } from '@carbon/ibm-products';
  */
 
-const nonStableComponentKeys = Object.keys(reactPreviewMap);
+const allPreviews = { ...reactPreviewMap, ...productsPreviewMap };
+const nonStableKeys = Object.keys(allPreviews);
+
+const carbonPackages = ['@carbon/react', '@carbon/ibm-products'];
 
 function transformer(file, api) {
   const j = api.jscodeshift;
 
-  return j(file.source)
-    .find(j.ImportDeclaration, {
-      source: {
-        value: '@carbon/react',
-      },
-    })
-    .find(j.ImportSpecifier)
-    .filter(
-      (path) => !!nonStableComponentKeys.includes(path.node.imported.name)
-    )
-    .replaceWith((path) =>
-      j.importSpecifier(j.identifier(reactPreviewMap[path.node.imported.name]))
-    )
-    .toSource()
-    .find(j.ImportDeclaration, {
-      source: {
-        value: '@carbon/ibm-products',
-      },
-    })
-    .find(j.ImportSpecifier)
-    .filter(
-      (path) => !!nonStableComponentKeys.includes(path.node.imported.name)
-    )
-    .replaceWith((path) =>
-      j.importSpecifier(j.identifier(reactPreviewMap[path.node.imported.name]))
-    )
-    .toSource();
+  carbonPackages.forEach(p => {
+    j(file.source)
+      .find(j.ImportDeclaration, {
+        source: {
+          value: p,
+        },
+      })
+      .find(j.ImportSpecifier)
+      .filter(
+        (path) => !!nonStableKeys.includes(path.node.imported.name)
+      )
+      .replaceWith((path) =>
+        j.importSpecifier(j.identifier(allPreviews[path.node.imported.name]))
+      )
+  });
+  return j.toSource();
 }
 
 module.exports = transformer;
