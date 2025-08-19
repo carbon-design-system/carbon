@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const definitions = require('./definitions');
+import * as definitions from './definitions.js';
 
 const types = Object.keys(definitions).reduce((acc, key) => {
   const { builder, type } = definitions[key];
@@ -17,7 +15,4 @@ const types = Object.keys(definitions).reduce((acc, key) => {
   };
 }, {});
 
-module.exports = {
-  definitions,
-  types,
-};
+export { definitions, types };

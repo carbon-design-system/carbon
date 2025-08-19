@@ -665,7 +665,7 @@ export const upgrades = [
         },
       },
       {
-        name: 'ibm-products-update-pdlc-status',
+        name: 'ibm-products-rename-imports-to-preview',
         description: 'Update imports after PDLC status integration',
         migrate: async (options) => {
           const transform = path.join(
