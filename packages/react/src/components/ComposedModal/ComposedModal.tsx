@@ -534,8 +534,7 @@ const ComposedModalDialog = React.forwardRef<
       });
     }
   }, [enableDialogElement, enablePresence, open, launcherButtonRef]);
-
-  // Focus launderButtonRef on unmount
+  // Focus launcherButtonRef on unmount
   useEffect(() => {
     return () => {
       if (enablePresence && launcherButtonRef) {

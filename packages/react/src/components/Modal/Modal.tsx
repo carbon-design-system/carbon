@@ -588,8 +588,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalProps>(
       enableDialogElement,
       enablePresence,
     ]);
-
-    // Focus launderButtonRef on unmount
+    // Focus launcherButtonRef on unmount
     useEffect(() => {
       return () => {
         if (enablePresence && launcherButtonRef) {
