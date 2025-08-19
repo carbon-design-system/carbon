@@ -86,42 +86,6 @@ const ModalTemplate = (props) => {
   );
 };
 
-export const EnablePresence = () => {
-  const buttonRef = useRef(null);
-  const [open, setOpen] = useState(false);
-  return (
-    <FeatureFlags enablePresence>
-      <Annotation
-        type="feature-flags"
-        text={
-          <span>
-            This story is rendered with{' '}
-            <LinkTo title="Getting Started/Feature Flags" name="Overview">
-              enable-presence
-            </LinkTo>{' '}
-            enabled
-          </span>
-        }>
-        <Button ref={buttonRef} onClick={() => setOpen(true)}>
-          Launch modal
-        </Button>
-        <ClassPrefix prefix="dialog-refactor">
-          <div className="experimental-modal with-presence">
-            <ModalTemplate
-              launcherButtonRef={buttonRef}
-              open={open}
-              onRequestClose={() => {
-                setOpen(false);
-              }}
-            />
-          </div>
-        </ClassPrefix>
-      </Annotation>
-    </FeatureFlags>
-  );
-};
-EnablePresence.storyName = 'enable-presence';
-
 export const EnableDialogElement = () => {
   const [open, setOpen] = useState(false);
   return (
@@ -176,3 +140,39 @@ export const EnableExperimentalFocusWrapWithoutSentinels = () => {
 };
 EnableExperimentalFocusWrapWithoutSentinels.storyName =
   'enable-experimental-focus-wrap-without-sentinels';
+
+export const EnablePresence = () => {
+  const buttonRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  return (
+    <FeatureFlags enablePresence>
+      <Annotation
+        type="feature-flags"
+        text={
+          <span>
+            This story is rendered with{' '}
+            <LinkTo title="Getting Started/Feature Flags" name="Overview">
+              enable-presence
+            </LinkTo>{' '}
+            enabled
+          </span>
+        }>
+        <Button ref={buttonRef} onClick={() => setOpen(true)}>
+          Launch modal
+        </Button>
+        <ClassPrefix prefix="dialog-refactor">
+          <div className="experimental-modal with-presence">
+            <ModalTemplate
+              launcherButtonRef={buttonRef}
+              open={open}
+              onRequestClose={() => {
+                setOpen(false);
+              }}
+            />
+          </div>
+        </ClassPrefix>
+      </Annotation>
+    </FeatureFlags>
+  );
+};
+EnablePresence.storyName = 'enable-presence';
