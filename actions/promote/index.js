@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import core from '@actions/core';
-import execa from 'execa';
+import { execa } from 'execa';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
 import got from 'got';
