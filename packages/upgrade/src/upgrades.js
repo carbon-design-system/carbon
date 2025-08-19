@@ -665,7 +665,7 @@ export const upgrades = [
         },
       },
       {
-        name: 'ibm-products-rename-imports-to-preview',
+        name: 'rename-ibm-products-imports-to-preview',
         description: 'Update imports after PDLC status integration',
         migrate: async (options) => {
           const transform = path.join(
@@ -695,7 +695,7 @@ export const upgrades = [
         },
       },
       {
-        name: 'rename-imports-to-preview',
+        name: 'rename-carbon-imports-to-preview',
         description: 'Update imports after PDLC status integration',
         migrate: async (options) => {
           const transform = path.join(
@@ -725,9 +725,9 @@ export const upgrades = [
         },
       },
       {
-        name: 'rename-imports-to-preview-core-and-products',
+        name: 'rename-imports-to-preview',
         description:
-          'Update imports after PDLC status integration both `@carbon/react` and `@carbon/ibm-products`',
+          'Update imports after PDLC status integration both `@carbon/react` and `@carbon/ibm-products`, this assumes both packages are upgraded together to adopt the preview export naming',
         migrate: async (options) => {
           const transform = path.join(
             TRANSFORM_DIR,
