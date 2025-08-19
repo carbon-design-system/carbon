@@ -541,67 +541,6 @@ describe('Modal', () => {
       });
     });
   });
-
-  describe('preventCloseOnClickOutside prop validation', () => {
-    let consoleErrorSpy;
-
-    beforeEach(() => {
-      consoleErrorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
-    });
-
-    afterEach(() => {
-      consoleErrorSpy.mockRestore();
-    });
-
-    it('should throw a prop-type warning when passiveModal=false and preventCloseOnClickOutside=false', () => {
-      render(
-        <Modal
-          open
-          passiveModal={false}
-          preventCloseOnClickOutside={false}
-          primaryButtonText="Submit"
-          secondaryButtonText="Cancel">
-          <p>Test content</p>
-        </Modal>
-      );
-
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.'
-      );
-    });
-
-    it('should not throw a warning when passiveModal=true and preventCloseOnClickOutside=false', () => {
-      render(
-        <Modal
-          open
-          passiveModal
-          preventCloseOnClickOutside={false}
-          primaryButtonText="Submit"
-          secondaryButtonText="Cancel">
-          <p>Test content</p>
-        </Modal>
-      );
-
-      expect(consoleErrorSpy).not.toHaveBeenCalled();
-    });
-
-    it('should not throw a warning when passiveModal=false and preventCloseOnClickOutside=true', () => {
-      render(
-        <Modal
-          open
-          passiveModal={false}
-          preventCloseOnClickOutside={true}
-          primaryButtonText="Submit"
-          secondaryButtonText="Cancel">
-          <p>Test content</p>
-        </Modal>
-      );
-
-      expect(consoleErrorSpy).not.toHaveBeenCalled();
-    });
-  });
 });
 
 describe('events', () => {
@@ -628,6 +567,166 @@ describe('events', () => {
     expect(screen.getByTestId('modal-6')).toHaveClass('is-visible');
   });
 
+  describe('close behavior for clicks outside the modal', () => {
+    describe('passive', () => {
+      it('should close on outside click by default', async () => {
+        const onRequestClose = jest.fn();
+        render(
+          <Modal
+            open
+            modalHeading="A test heading"
+            onRequestClose={onRequestClose}
+            passiveModal>
+            <p>Test content</p>
+          </Modal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(onRequestClose).toHaveBeenCalled();
+      });
+      it('should not close on outside click when preventCloseOnClickOutside', async () => {
+        const onRequestClose = jest.fn();
+        render(
+          <Modal
+            open
+            primaryButtonText="Primary button"
+            secondaryButtonText="Secondary button"
+            onRequestClose={onRequestClose}
+            passiveModal
+            preventCloseOnClickOutside>
+            <p>Test content</p>
+          </Modal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(onRequestClose).not.toHaveBeenCalled();
+      });
+      it('should close on outside click when preventCloseOnClickOutside is explicitly false', async () => {
+        const onRequestClose = jest.fn();
+        render(
+          <Modal
+            open
+            primaryButtonText="Primary button"
+            secondaryButtonText="Secondary button"
+            onRequestClose={onRequestClose}
+            passiveModal
+            preventCloseOnClickOutside={false}>
+            <p>Test content</p>
+          </Modal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(onRequestClose).toHaveBeenCalled();
+      });
+    });
+    describe('non-passive', () => {
+      it('should not close on outside click by default', async () => {
+        const onRequestClose = jest.fn();
+        render(
+          <Modal
+            open
+            primaryButtonText="Primary button"
+            secondaryButtonText="Secondary button"
+            onRequestClose={onRequestClose}>
+            <p>Test content</p>
+          </Modal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(onRequestClose).not.toHaveBeenCalled();
+      });
+      it('should not close on outside click when preventCloseOnClickOutside', async () => {
+        const onRequestClose = jest.fn();
+        render(
+          <Modal
+            open
+            primaryButtonText="Primary button"
+            secondaryButtonText="Secondary button"
+            onRequestClose={onRequestClose}
+            preventCloseOnClickOutside>
+            <p>Test content</p>
+          </Modal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(onRequestClose).not.toHaveBeenCalled();
+      });
+      it('should close on outside click when preventCloseOnClickOutside is explicitly false', async () => {
+        const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        const onRequestClose = jest.fn();
+
+        render(
+          <Modal
+            open
+            primaryButtonText="Primary button"
+            secondaryButtonText="Secondary button"
+            onRequestClose={onRequestClose}
+            preventCloseOnClickOutside={false}>
+            <p>Test content</p>
+          </Modal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(onRequestClose).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(
+          'Warning: `<Modal>` prop `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Transactional, non-passive Modals should not be dissmissable by clicking outside. See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
+        );
+
+        spy.mockRestore();
+      });
+    });
+  });
+
+  // below here is some
+
   it('should not close when clicking outside non-passive modal', async () => {
     const onRequestClose = jest.fn();
     render(
@@ -650,8 +749,16 @@ describe('events', () => {
       </Modal>
     );
 
-    const outerModal = screen.getByTestId('modal-7');
-    await userEvent.click(outerModal);
+    // The background layer is used here instead of a button outside the
+    // modal because a real user cannot interact with a button. The
+    // backround layer is in the way.
+    const backgroundLayer = screen.getByRole('presentation', {
+      hidden: true,
+    });
+    expect(backgroundLayer).toHaveClass('is-visible');
+
+    await userEvent.click(backgroundLayer);
+    expect(backgroundLayer).toHaveClass('is-visible');
     expect(onRequestClose).not.toHaveBeenCalled();
   });
 

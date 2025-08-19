@@ -264,6 +264,56 @@ export const WithStateManager = () => {
   );
 };
 
+export const WithStateManagerPreventClose = () => {
+  const button = React.useRef();
+
+  /**
+   * Simple state manager for modals.
+   */
+  const ModalStateManager = ({
+    renderLauncher: LauncherContent,
+    children: ModalContent,
+  }) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <>
+        {!ModalContent || typeof document === 'undefined'
+          ? null
+          : ReactDOM.createPortal(
+              <ModalContent open={open} setOpen={setOpen} />,
+              document.body
+            )}
+        {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      </>
+    );
+  };
+  return (
+    <ModalStateManager
+      renderLauncher={({ setOpen }) => (
+        <Button ref={button} onClick={() => setOpen(true)}>
+          Launch composed modal
+        </Button>
+      )}>
+      {({ open, setOpen }) => (
+        <ComposedModal
+          open={open}
+          preventCloseOnClickOutside
+          onClose={() => {
+            console.log(`CALLED ON CLOSE`);
+            setOpen(false);
+          }}
+          launcherButtonRef={button}>
+          <ModalHeader label="A test" title="of preventCloseOnClickOutside" />
+          <ModalBody>
+            <p style={{ marginBottom: '1rem' }}>test</p>
+          </ModalBody>
+          <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+        </ComposedModal>
+      )}
+    </ModalStateManager>
+  );
+};
+
 export const WithScrollingContent = () => {
   const [open, setOpen] = useState(true);
   return (
@@ -494,6 +544,88 @@ export const _withAILabel = {
           />
         </ComposedModal>
       </div>
+    );
+  },
+};
+const alertOnClose = () => {
+  alert('modal will close');
+};
+
+export const testA = {
+  name: 'passive - close on outside',
+  render: () => {
+    return (
+      <ComposedModal open onClose={alertOnClose}>
+        <ModalHeader>ModalHeader content</ModalHeader>
+        <ModalBody>ModalBody content</ModalBody>
+        {/* ModalFooter is omitted, this is what makes it passive */}
+      </ComposedModal>
+    );
+  },
+};
+export const testB = {
+  name: 'passive w/ preventClose - do not close outside',
+  render: () => {
+    return (
+      <ComposedModal open onClose={alertOnClose} preventCloseOnClickOutside>
+        <ModalHeader>ModalHeader content</ModalHeader>
+        <ModalBody>ModalBody content</ModalBody>
+        {/* ModalFooter is omitted, this is what makes it passive */}
+      </ComposedModal>
+    );
+  },
+};
+export const testC = {
+  name: 'passive w/ preventClose={false} - close on outside',
+  render: () => {
+    return (
+      <ComposedModal
+        open
+        onClose={alertOnClose}
+        preventCloseOnClickOutside={false}>
+        <ModalHeader>ModalHeader content</ModalHeader>
+        <ModalBody>ModalBody content</ModalBody>
+        {/* ModalFooter is omitted, this is what makes it passive */}
+      </ComposedModal>
+    );
+  },
+};
+export const testD = {
+  name: 'non-passive - do not close on outside',
+  render: () => {
+    return (
+      <ComposedModal open onClose={alertOnClose}>
+        <ModalHeader>ModalHeader content</ModalHeader>
+        <ModalBody>ModalBody content</ModalBody>
+        <ModalFooter primaryButtonText="Confirm" secondaryButtonText="Cancel" />
+      </ComposedModal>
+    );
+  },
+};
+export const testE = {
+  name: 'non-passive w/ preventClose - do not close on outside',
+  render: () => {
+    return (
+      <ComposedModal open onClose={alertOnClose} preventCloseOnClickOutside>
+        <ModalHeader>ModalHeader content</ModalHeader>
+        <ModalBody>ModalBody content</ModalBody>
+        <ModalFooter primaryButtonText="Confirm" secondaryButtonText="Cancel" />
+      </ComposedModal>
+    );
+  },
+};
+export const testF = {
+  name: 'non-passive w/ preventClose={false} - close on outside with warning',
+  render: () => {
+    return (
+      <ComposedModal
+        open
+        onClose={alertOnClose}
+        preventCloseOnClickOutside={false}>
+        <ModalHeader>ModalHeader content</ModalHeader>
+        <ModalBody>ModalBody content</ModalBody>
+        <ModalFooter primaryButtonText="Confirm" secondaryButtonText="Cancel" />
+      </ComposedModal>
     );
   },
 };
