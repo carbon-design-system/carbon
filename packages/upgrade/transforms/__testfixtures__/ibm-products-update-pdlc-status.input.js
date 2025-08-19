@@ -1,4 +1,2 @@
-// eslint-disable-next-line
-import { SearchBar } from '@carbon/ibm-products';
-// eslint-disable-next-line
+// eslint-disable-next-line no-unused-vars
 import { Tearsheet, SearchBar } from '@carbon/ibm-products';
