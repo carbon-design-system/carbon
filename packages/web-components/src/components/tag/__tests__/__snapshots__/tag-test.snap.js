@@ -12,6 +12,7 @@ snapshots['cds-tag should render'] = `<cds-tag
 /* end snapshot cds-tag should render */
 
 snapshots['cds-tag cds-dismissible-tag should render'] = `<cds-dismissible-tag
+  dismiss-tooltip-alignment="bottom"
   open=""
   size="md"
   tag-title="Close tag"
