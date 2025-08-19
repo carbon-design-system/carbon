@@ -27,9 +27,10 @@ const carbonPackages = ['@carbon/react', '@carbon/ibm-products'];
 
 function transformer(file, api) {
   const j = api.jscodeshift;
+  const root = j(file.source);
 
   carbonPackages.forEach((p) => {
-    j(file.source)
+    root
       .find(j.ImportDeclaration, {
         source: {
           value: p,
@@ -41,7 +42,7 @@ function transformer(file, api) {
         j.importSpecifier(j.identifier(allPreviews[path.node.imported.name]))
       );
   });
-  return j.toSource();
+  return root.toSource();
 }
 
 module.exports = transformer;

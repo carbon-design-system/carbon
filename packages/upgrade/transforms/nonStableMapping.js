@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const reactPreviewMap = {
+exports.reactPreviewMap = {
   unstable__FluidTimePicker: 'preview__FluidTimePicker',
 };
 
-export const productsPreviewMap = {
+exports.productsPreviewMap = {
   BigNumber: 'previewCandidate__BigNumber',
   BigNumbers: 'previewCandidate__BigNumber',
   Coachmark: 'previewCandidate__Coachmark',
