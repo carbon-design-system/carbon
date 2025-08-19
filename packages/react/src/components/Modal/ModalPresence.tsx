@@ -46,7 +46,7 @@ export const ModalPresence = ({
       autoEnablePresence,
       ...context,
     }),
-    [context, autoEnablePresence]
+    [autoEnablePresence, context]
   );
 
   if (!isPresent) return null;

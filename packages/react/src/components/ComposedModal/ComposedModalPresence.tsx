@@ -12,10 +12,6 @@ import React, {
   type PropsWithChildren,
 } from 'react';
 import {
-  useComposedModalState,
-  type ComposedModalState,
-} from './useComposedModalState';
-import {
   usePresenceContext,
   type PresenceContext,
 } from '../../internal/usePresenceContext';
@@ -45,15 +41,12 @@ export const ComposedModalPresence = ({
 }: PropsWithChildren<ComposedModalPresenceProps>) => {
   const [isPresent, context] = usePresenceContext(open, presenceId);
 
-  const modalState = useComposedModalState(open);
-
   const presenceContextValue = useMemo(
     () => ({
-      modalState,
       autoEnablePresence,
       ...context,
     }),
-    [modalState, context]
+    [autoEnablePresence, context]
   );
 
   if (!isPresent) return null;
@@ -66,7 +59,6 @@ export const ComposedModalPresence = ({
 };
 
 interface ComposedModalPresenceContextProps extends PresenceContext {
-  modalState: ComposedModalState;
   autoEnablePresence: boolean;
 }
 

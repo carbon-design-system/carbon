@@ -16,11 +16,15 @@ export const usePresence = (
   const [exitState, setExitState] = useState<'idle' | 'active' | 'finished'>(
     isOpen ? 'idle' : 'finished'
   );
+
   const isExiting = exitState === 'active';
 
+  // element is exiting
   if (!isOpen && exitState === 'idle') {
     setExitState('active');
   }
+
+  // element exit was interrupted
   if (isOpen && exitState !== 'idle') {
     setExitState('idle');
   }
@@ -31,11 +35,14 @@ export const usePresence = (
 
   useLayoutEffect(() => {
     if (!ref.current || !isExiting) return;
+
+    // resolve for JSDOM
     if (!('getAnimations' in ref.current)) {
       handleAnimationEnd();
       return;
     }
 
+    // cover all animations that start with the presence prefix
     const animations = ref.current
       .getAnimations({ subtree: true })
       .filter(
@@ -43,7 +50,7 @@ export const usePresence = (
           animation instanceof CSSAnimation &&
           animation.animationName.startsWith(`${prefix}--presence`)
       );
-
+    console.log(animations);
     if (!animations.length) {
       handleAnimationEnd();
       return;

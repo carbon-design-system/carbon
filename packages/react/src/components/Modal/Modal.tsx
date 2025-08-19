@@ -258,6 +258,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
 
   const exclusivePresenceContext = useExclusiveModalPresenceContext(id);
 
+  // if opt in and not exclusive to a presence context, wrap with presence
   if (hasPresenceOptIn && !exclusivePresenceContext) {
     return (
       <ModalPresence

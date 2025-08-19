@@ -51,7 +51,6 @@ import {
   ComposedModalPresenceContext,
   useExclusiveComposedModalPresenceContext,
 } from './ComposedModalPresence';
-import { useComposedModalState } from './useComposedModalState';
 import { useId } from '../../internal/useId';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
@@ -260,6 +259,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const exclusivePresenceContext =
       useExclusiveComposedModalPresenceContext(id);
 
+    // if opt in and not exclusive to a presence context, wrap with presence
     if (hasPresenceOptIn && !exclusivePresenceContext) {
       return (
         <ComposedModalPresence
@@ -319,9 +319,8 @@ const ComposedModalDialog = React.forwardRef<
 
   // always mark as open when mounted with presence
   const open = externalOpen || enablePresence;
-  const modalState = useComposedModalState(open);
-  const { isOpen, setIsOpen, wasOpen } =
-    presenceContext?.modalState ?? modalState;
+  const [isOpen, setIsOpen] = useState<boolean>(!!open);
+  const [wasOpen, setWasOpen] = useState<boolean>(!!open);
 
   const enableDialogElement = useFeatureFlag('enable-dialog-element');
   const focusTrapWithoutSentinels = useFeatureFlag(
@@ -335,9 +334,12 @@ const ComposedModalDialog = React.forwardRef<
       '`focusTrapWithoutSentinels` to have any effect.'
   );
 
-  // Propagate open state to the document.body
+  // Keep track of modal open/close state
+  // and propagate it to the document.body
   useEffect(() => {
     if (!enableDialogElement && open !== wasOpen) {
+      setIsOpen(!!open);
+      setWasOpen(!!open);
       toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
     }
   }, [open, wasOpen, prefix]);
@@ -592,7 +594,7 @@ const ComposedModalDialog = React.forwardRef<
 
   const modalBody = enableDialogElement ? (
     <Dialog
-      open={isOpen}
+      open={open}
       focusAfterCloseRef={launcherButtonRef}
       modal
       className={containerClass}

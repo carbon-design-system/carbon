@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import ComposedModal, { ModalBody } from './ComposedModal';
-import { ComposedModalPresence } from './ComposedModalPresence';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import Select from '../Select';
@@ -29,39 +28,6 @@ export default {
   tags: ['!autodocs'],
 };
 
-const ComposedModalTemplate = (props) => (
-  <ComposedModal {...props}>
-    <ModalHeader
-      label="Account resources"
-      title="Add a custom domain"
-      {...props}
-    />
-    <ModalBody>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <TextInput
-        data-modal-primary-focus
-        id="text-input-1"
-        labelText="Domain name"
-        placeholder="e.g. github.com"
-        style={{ marginBottom: '1rem' }}
-      />
-      <Select id="select-1" defaultValue="us-south" labelText="Region">
-        <SelectItem value="us-south" text="US South" />
-        <SelectItem value="us-east" text="US East" />
-      </Select>
-    </ModalBody>
-    <ModalFooter
-      primaryButtonText="Add"
-      secondaryButtonText="Cancel"
-      {...props}
-    />
-  </ComposedModal>
-);
-
 export const EnableDialogElement = (args) => {
   const [open, setOpen] = useState(true);
   return (
@@ -78,11 +44,36 @@ export const EnableDialogElement = (args) => {
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-        <ComposedModalTemplate
-          {...args}
-          open={open}
-          onClose={() => setOpen(false)}
-        />
+        <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+          <ModalHeader
+            label="Account resources"
+            title="Add a custom domain"
+            {...args}
+          />
+          <ModalBody>
+            <p style={{ marginBottom: '1rem' }}>
+              Custom domains direct requests for your apps in this Cloud Foundry
+              organization to a URL that you own. A custom domain can be a
+              shared domain, a shared subdomain, or a shared domain and host.
+            </p>
+            <TextInput
+              data-modal-primary-focus
+              id="text-input-1"
+              labelText="Domain name"
+              placeholder="e.g. github.com"
+              style={{ marginBottom: '1rem' }}
+            />
+            <Select id="select-1" defaultValue="us-south" labelText="Region">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+          </ModalBody>
+          <ModalFooter
+            primaryButtonText="Add"
+            secondaryButtonText="Cancel"
+            {...args}
+          />
+        </ComposedModal>
       </Annotation>
     </FeatureFlags>
   );
@@ -143,11 +134,36 @@ export const EnableExperimentalFocusWrapWithoutSentinels = (args) => {
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-        <ComposedModalTemplate
-          {...args}
-          open={open}
-          onClose={() => setOpen(false)}
-        />
+        <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+          <ModalHeader
+            label="Account resources"
+            title="Add a custom domain"
+            {...args}
+          />
+          <ModalBody>
+            <p style={{ marginBottom: '1rem' }}>
+              Custom domains direct requests for your apps in this Cloud Foundry
+              organization to a URL that you own. A custom domain can be a
+              shared domain, a shared subdomain, or a shared domain and host.
+            </p>
+            <TextInput
+              data-modal-primary-focus
+              id="text-input-1"
+              labelText="Domain name"
+              placeholder="e.g. github.com"
+              style={{ marginBottom: '1rem' }}
+            />
+            <Select id="select-1" defaultValue="us-south" labelText="Region">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+          </ModalBody>
+          <ModalFooter
+            primaryButtonText="Add"
+            secondaryButtonText="Cancel"
+            {...args}
+          />
+        </ComposedModal>
       </Annotation>
     </FeatureFlags>
   );
@@ -155,78 +171,6 @@ export const EnableExperimentalFocusWrapWithoutSentinels = (args) => {
 EnableExperimentalFocusWrapWithoutSentinels.storyName =
   'enable-experimental-focus-wrap-without-sentinels';
 EnableExperimentalFocusWrapWithoutSentinels.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  containerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    action: 'onClose',
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-export const EnablePresence = (args) => {
-  const buttonRef = useRef(null);
-  const [open, setOpen] = useState(true);
-  return (
-    <FeatureFlags enablePresence>
-      <Annotation
-        type="feature-flags"
-        text={
-          <span>
-            This story is rendered with{' '}
-            <LinkTo title="Getting Started/Feature Flags" name="Overview">
-              enable-presence
-            </LinkTo>{' '}
-            enabled
-          </span>
-        }>
-        <Button ref={buttonRef} onClick={() => setOpen(true)}>
-          Launch composed modal
-        </Button>
-        <div className="experimental-modal-with-presence">
-          <ComposedModalPresence open={open}>
-            <ComposedModalTemplate
-              {...args}
-              launcherButtonRef={buttonRef}
-              onClose={() => setOpen(false)}
-            />
-          </ComposedModalPresence>
-        </div>
-      </Annotation>
-    </FeatureFlags>
-  );
-};
-EnablePresence.storyName = 'enable-presence';
-EnablePresence.argTypes = {
   children: {
     table: {
       disable: true,
