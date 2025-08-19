@@ -48,7 +48,7 @@
     "@carbon/themes": "^11.58.0",
     "@carbon/type": "^11.45.0",
     "@ibm/plex": "6.0.0-next.6",
-    "@ibm/plex-mono": "0.0.3-alpha.0",
+    "@ibm/plex-mono": "1.1.0",
     "@ibm/plex-sans": "0.0.3-alpha.0",
     "@ibm/plex-sans-arabic": "0.0.3-alpha.0",
     "@ibm/plex-sans-devanagari": "0.0.3-alpha.0",
