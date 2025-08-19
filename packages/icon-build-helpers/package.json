@@ -2,7 +2,7 @@
   "name": "@carbon/icon-build-helpers",
   "private": true,
   "description": "Build helpers for the Carbon Design System icon library",
-  "version": "1.43.0-rc.1",
+  "version": "1.43.0",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "repository": {
@@ -29,8 +29,8 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/template": "^7.27.2",
     "@babel/types": "^7.27.3",
-    "@carbon/cli-reporter": "^10.7.1-rc.0",
-    "@carbon/icon-helpers": "^10.64.0-rc.1",
+    "@carbon/cli-reporter": "^10.8.0",
+    "@carbon/icon-helpers": "^10.64.0",
     "@hapi/joi": "^17.1.1",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-replace": "^6.0.0",
@@ -51,6 +51,6 @@
     "svg-parser": "^2.0.4",
     "svgo": "^1.1.1",
     "svgson": "^5.2.1",
-    "typescript-config-carbon": "^0.5.0"
+    "typescript-config-carbon": "^0.6.0"
   }
 }
