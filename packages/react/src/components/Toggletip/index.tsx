@@ -175,7 +175,7 @@ export function Toggletip<E extends ElementType = 'span'>({
   });
 
   useEffect(() => {
-    if (!open || !ref.current) return;
+    if (!ref.current) return;
 
     const targetDocument = ref.current.ownerDocument || document;
     const eventType: 'pointerdown' | 'mousedown' =
@@ -183,7 +183,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
       const node = event.target as Node | null;
-      if (node && !ref.current!.contains(node)) {
+      if (open && node && !ref.current!.contains(node)) {
         setOpen(false);
       }
     };
