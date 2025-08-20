@@ -430,13 +430,6 @@ describe('ComposedModal', () => {
     expect(onClose).not.toHaveBeenCalled();
   });
 
-  // passive - close on outside
-  // passive w/ preventClose - do not close outside
-  // passive w/ preventClose={false} - close on outside
-  // non-passive - do not close on outside
-  // non-passive w/ preventClose - do not close on outside
-  // non-passive w/ preventClose={false} - close on outside with warning
-
   describe('close behavior for clicks outside the modal', () => {
     describe('passive', () => {
       it('should close on outside click by default', async () => {
