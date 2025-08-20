@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const axe = require('axe-core');
+import axe from 'axe-core';
 
 const defaultOptions = {
   rules: {
@@ -82,4 +80,4 @@ ${divider}
 ${nodes.join('\n')}`;
 }
 
-module.exports = toHaveNoAxeViolations;
+export default toHaveNoAxeViolations;

@@ -7,10 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 // Inspired by Create React App
 // https://github.com/facebook/create-react-app/blob/next/packages/create-react-app/index.js
+
+import chalk from 'chalk';
+import { main } from '../src/cli.js';
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -19,11 +20,9 @@ process.on('unhandledRejection', (error) => {
   console.error(error);
 });
 
-var chalk = require('chalk');
-
-var currentNodeVersion = process.versions.node;
-var semver = currentNodeVersion.split('.');
-var major = semver[0];
+const currentNodeVersion = process.versions.node;
+const semver = currentNodeVersion.split('.');
+const major = semver[0];
 
 if (major < 8) {
   console.error(
@@ -35,8 +34,6 @@ if (major < 8) {
   );
   process.exit(1);
 }
-
-var main = require('../src/cli');
 
 main(process).catch((error) => {
   console.error(error);
