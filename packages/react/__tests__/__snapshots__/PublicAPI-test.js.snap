@@ -2303,11 +2303,26 @@ Map {
     "TableRow": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-controls": {
+          "type": "string",
+        },
+        "aria-label": {
+          "type": "string",
+        },
+        "ariaLabel": {
+          "type": "string",
+        },
         "className": {
           "type": "string",
         },
+        "isExpanded": {
+          "type": "bool",
+        },
         "isSelected": {
           "type": "bool",
+        },
+        "onExpand": {
+          "type": "func",
         },
       },
       "render": [Function],
@@ -8708,11 +8723,26 @@ Map {
   "TableRow" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "aria-controls": {
+        "type": "string",
+      },
+      "aria-label": {
+        "type": "string",
+      },
+      "ariaLabel": {
+        "type": "string",
+      },
       "className": {
         "type": "string",
       },
+      "isExpanded": {
+        "type": "bool",
+      },
       "isSelected": {
         "type": "bool",
+      },
+      "onExpand": {
+        "type": "func",
       },
     },
     "render": [Function],
