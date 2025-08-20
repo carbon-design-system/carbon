@@ -9,6 +9,7 @@ import { Information } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
+import Modal from '../Modal';
 import {
   ToggletipLabel,
   Toggletip,
@@ -153,4 +154,35 @@ Default.story = {
       </div>
     ),
   ],
+};
+
+// I need to remove this
+export const OutsideClickTest = () => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div style={{ padding: '2rem' }}>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+
+      <Modal
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        modalHeading="Test Modal"
+        primaryButtonText="Close">
+        <p>
+          Click the <strong>i</strong> icon to open the Toggletip, then click
+          anywhere in this modal body. The Toggletip should close.
+        </p>
+
+        <Toggletip align="bottom">
+          <ToggletipButton label="Show information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Toggletip content</p>
+          </ToggletipContent>
+        </Toggletip>
+      </Modal>
+    </div>
+  );
 };
