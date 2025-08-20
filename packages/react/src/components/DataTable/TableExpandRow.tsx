@@ -10,23 +10,57 @@ import PropTypes from 'prop-types';
 import React, {
   Children,
   isValidElement,
+  type HTMLAttributes,
   type MouseEventHandler,
   type PropsWithChildren,
 } from 'react';
 import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
-import { TableRowProps } from './TableRow';
 import TableSlugRow from './TableSlugRow';
 import TableDecoratorRow from './TableDecoratorRow';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
-export interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
+/** Props shared between `TableRow` and `TableExpandRow`. */
+export interface TableRowExpandInteropProps {
+  /**
+   * @deprecated Use `aria-label` instead.
+   */
+  ariaLabel?: string;
+  /**
+   * Specify the string read by a voice reader when the expand trigger is
+   * focused
+   */
+  'aria-label'?: string;
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    */
-  ['aria-controls']?: string;
+  'aria-controls'?: string;
+  /**
+   * Specify whether this row is expanded or not. This helps coordinate data
+   * attributes so that `TableExpandRow` and `TableExpandedRow` work together
+   */
+  isExpanded?: boolean;
+  /**
+   * Hook for when a listener initiates a request to expand the given row
+   */
+  onExpand?: MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Specify if the row is selected.
+   */
+  isSelected?: boolean;
+}
+
+export interface TableExpandRowProps
+  extends PropsWithChildren<
+      Omit<HTMLAttributes<HTMLTableRowElement>, 'onClick'>
+    >,
+    Omit<TableRowExpandInteropProps, 'aria-label' | 'onExpand'> {
+  /**
+   * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
+   */
+  'aria-controls'?: string;
 
   /**
    * @deprecated This prop has been deprecated and will be
@@ -39,7 +73,7 @@ export interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ['aria-label']: string;
+  'aria-label': string;
 
   /**
    * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
@@ -154,14 +188,14 @@ TableExpandRow.propTypes = {
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    * TODO: make this required in v12
    */
-  ['aria-controls']: PropTypes.string,
+  'aria-controls': PropTypes.string,
 
   /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
   /**@ts-ignore*/
-  ['aria-label']: PropTypes.string,
+  'aria-label': PropTypes.string,
 
   /**
    * Deprecated, please use `aria-label` instead.
