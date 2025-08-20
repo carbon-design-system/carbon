@@ -41,8 +41,8 @@ export type TreeNodeProps = {
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * The ID of the active node in the tree
    *
-   *     @deprecated The `active` prop for `TreeNode` has
-   *     been deprecated after the introduction of context. It will be removed in the next major release.
+   * @deprecated The `active` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   active?: string | number;
   /**
@@ -62,8 +62,8 @@ export type TreeNodeProps = {
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * TreeNode depth to determine spacing
    *
-   *    @deprecated The `depth` prop for `TreeNode` has
-   *     been deprecated after the introduction of context. It will be removed in the next major release.
+   * @deprecated The `depth` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   depth?: number;
   /**
@@ -85,8 +85,8 @@ export type TreeNodeProps = {
   /**
    * Callback function for when the node receives or loses focus
    *
-   *     @deprecated The `onNodeFocusEvent` prop for `TreeNode` has
-   *     been deprecated after the introduction of context. It will be removed in the next major release.
+   * @deprecated The `onNodeFocusEvent` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   onNodeFocusEvent?: (event: React.FocusEvent<HTMLElement>) => void;
   /**
@@ -103,8 +103,8 @@ export type TreeNodeProps = {
   /**
    * Callback function for when any node in the tree is selected
    *
-   *     @deprecated The `onTreeSelect` prop for `TreeNode` has
-   *     been deprecated after the introduction of context. It will be removed in the next major release.
+   * @deprecated The `onTreeSelect` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   onTreeSelect?: (
     event: React.MouseEvent | React.KeyboardEvent,
@@ -117,8 +117,8 @@ export type TreeNodeProps = {
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
-   *     @deprecated The `selected` prop for `TreeNode` has
-   *     been deprecated after the introduction of context. It will be removed in the next major release.
+   * @deprecated The `selected` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   selected?: Array<string | number>;
   /**
