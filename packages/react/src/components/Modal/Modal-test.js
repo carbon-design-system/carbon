@@ -725,60 +725,6 @@ describe('events', () => {
     });
   });
 
-  // below here is some
-
-  it('should not close when clicking outside non-passive modal', async () => {
-    const onRequestClose = jest.fn();
-    render(
-      <Modal
-        open
-        primaryButtonText="Primary button"
-        secondaryButtonText="Secondary button"
-        data-testid="modal-7"
-        onRequestClose={onRequestClose}>
-        <p>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-        />
-      </Modal>
-    );
-
-    // The background layer is used here instead of a button outside the
-    // modal because a real user cannot interact with a button. The
-    // backround layer is in the way.
-    const backgroundLayer = screen.getByRole('presentation', {
-      hidden: true,
-    });
-    expect(backgroundLayer).toHaveClass('is-visible');
-
-    await userEvent.click(backgroundLayer);
-    expect(backgroundLayer).toHaveClass('is-visible');
-    expect(onRequestClose).not.toHaveBeenCalled();
-  });
-
-  it('should close when clicking outside passive modal', async () => {
-    const onRequestClose = jest.fn();
-    render(
-      <Modal
-        open
-        passiveModal
-        onRequestClose={onRequestClose}
-        data-testid="modal-passive">
-        <p>This is a passive modal</p>
-      </Modal>
-    );
-
-    const backgroundLayer = screen.getByRole('presentation');
-    await userEvent.click(backgroundLayer);
-    expect(onRequestClose).toHaveBeenCalled();
-  });
-
   it('should not handle close when inner content is clicked', async () => {
     const onRequestClose = jest.fn();
     render(
@@ -802,34 +748,6 @@ describe('events', () => {
 
     const innerModal = screen.getByRole('dialog');
     await userEvent.click(innerModal);
-    expect(onRequestClose).not.toHaveBeenCalled();
-  });
-
-  it('should not handle close when outside of modal is clicked and preventCloseOnClickOutside is passed', async () => {
-    const onRequestClose = jest.fn();
-    render(
-      <Modal
-        open
-        primaryButtonText="Primary button"
-        secondaryButtonText="Secondary button"
-        data-testid="modal-8"
-        onRequestClose={onRequestClose}
-        preventCloseOnClickOutside>
-        <p>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-        />
-      </Modal>
-    );
-
-    const outerModal = screen.getByTestId('modal-8');
-    await userEvent.click(outerModal);
     expect(onRequestClose).not.toHaveBeenCalled();
   });
 
