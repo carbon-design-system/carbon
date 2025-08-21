@@ -6,14 +6,18 @@
  */
 
 import React, {
+  cloneElement,
+  useCallback,
   useEffect,
   useRef,
   useState,
-  type ReactNode,
-  type MouseEvent,
-  type KeyboardEvent,
-  type HTMLAttributes,
+  type ButtonHTMLAttributes,
   type ChangeEvent,
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+  type Ref,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -27,7 +31,7 @@ import {
 } from '@carbon/icons-react';
 import Link from '../Link';
 import { keys, matches } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -39,6 +43,8 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -363,7 +369,6 @@ ClickableTile.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
@@ -404,7 +409,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
    * The empty handler of the `<input>`.
    */
   onChange?(
-    event: ChangeEvent<HTMLDivElement>,
+    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>,
     selected?: boolean,
     id?: string
   ): void;
@@ -476,7 +481,11 @@ export const SelectableTile = React.forwardRef<
   const keyDownHandler = onKeyDown;
 
   const [isSelected, setIsSelected] = useState<boolean>(selected);
-  const [prevSelected, setPrevSelected] = useState<boolean>(selected);
+
+  // Use useEffect to sync with prop changes instead of render-time logic
+  useEffect(() => {
+    setIsSelected(selected);
+  }, [selected]);
 
   const classes = cx(
     `${prefix}--tile`,
@@ -493,65 +502,52 @@ export const SelectableTile = React.forwardRef<
     className
   );
 
-  function handleClick(evt) {
+  // Single function to handle selection changes
+  const handleSelectionChange = useCallback(
+    (
+      evt: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>,
+      newSelected: boolean
+    ) => {
+      setIsSelected(newSelected);
+      onChange(evt, newSelected, id);
+    },
+    [onChange, id]
+  );
+
+  function handleClick(evt: MouseEvent<HTMLDivElement>) {
     evt.preventDefault();
     evt?.persist?.();
     if (
       normalizedDecorator &&
       decoratorRef.current &&
+      evt.target instanceof Node &&
       decoratorRef.current.contains(evt.target)
     ) {
       return;
     }
-    setIsSelected((prevSelected) => {
-      const newSelected = !prevSelected;
-      onChange(evt, newSelected, id);
-      return newSelected;
-    });
+
+    const newSelected = !isSelected;
+    handleSelectionChange(evt, newSelected);
     clickHandler(evt);
   }
 
-  function handleKeyDown(evt) {
+  function handleKeyDown(evt: KeyboardEvent<HTMLDivElement>) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
-      setIsSelected((prevSelected) => {
-        const newSelected = !prevSelected;
-        onChange(evt, newSelected, id);
-        return newSelected;
-      });
+      const newSelected = !isSelected;
+      handleSelectionChange(evt, newSelected);
     }
     keyDownHandler(evt);
   }
 
-  function handleChange(event) {
-    const newSelected = event.target.checked;
-    setIsSelected(newSelected);
-    onChange(event, newSelected, id);
-  }
-
-  if (selected !== prevSelected) {
-    setIsSelected(selected);
-    setPrevSelected(selected);
-  }
-
   // AILabel is always size `xs`
   const decoratorRef = useRef<HTMLInputElement>(null);
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'xs', ref: decoratorRef })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'xs',
-        ref: decoratorRef,
-      }
-    );
-  }
 
   return (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
@@ -565,7 +561,6 @@ export const SelectableTile = React.forwardRef<
       tabIndex={!disabled ? tabIndex : undefined}
       ref={ref}
       id={id}
-      onChange={!disabled ? handleChange : undefined}
       title={title}
       {...rest}>
       <span
@@ -937,25 +932,15 @@ export const ExpandableTile = React.forwardRef<
   const belowTheFoldId = useId('expandable-tile-interactive');
 
   // AILabel is always size `xs`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'xs' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'xs',
-      }
-    );
-  }
 
   return interactive ? (
     <div
-      // @ts-expect-error: Needlesly strict & deep typing for the element type
-      ref={ref}
+      ref={ref as Ref<HTMLDivElement>}
       className={interactiveClassNames}
       {...rest}>
       <div ref={tileContent}>
@@ -993,12 +978,11 @@ export const ExpandableTile = React.forwardRef<
   ) : (
     <button
       type="button"
-      // @ts-expect-error: Needlesly strict & deep typing for the element type
-      ref={ref}
+      ref={ref as Ref<HTMLButtonElement>}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
-      {...rest}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
       onKeyUp={composeEventHandlers([onKeyUp, handleKeyUp])}
       onClick={composeEventHandlers([onClick, handleClick])}
       tabIndex={tabIndex}>

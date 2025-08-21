@@ -1,23 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { Stack, StackProps } from './Stack';
 
-const HStack = React.forwardRef<React.ReactNode, StackProps>(function HStack(
-  { children, ...props },
-  ref
-) {
-  return (
-    <Stack {...props} ref={ref} orientation="horizontal">
-      {children}
-    </Stack>
-  );
+export const HStack = forwardRef<HTMLElement, StackProps>((props, ref) => {
+  return <Stack {...props} ref={ref} orientation="horizontal" />;
 });
 
-export { HStack };
+HStack.propTypes = Stack.propTypes;

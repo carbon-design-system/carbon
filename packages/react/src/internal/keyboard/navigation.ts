@@ -37,24 +37,6 @@ export const getNextIndex = (
 };
 
 /**
- * A flag `node.compareDocumentPosition(target)` returns that indicates
- * `target` is located earlier than `node` in the document or `target` contains `node`.
- */
-export const DOCUMENT_POSITION_BROAD_PRECEDING =
-  typeof Node !== 'undefined'
-    ? Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS
-    : 0;
-
-/**
- * A flag `node.compareDocumentPosition(target)` returns that indicates
- * `target` is located later than `node` in the document or `node` contains `target`.
- */
-export const DOCUMENT_POSITION_BROAD_FOLLOWING =
-  typeof Node !== 'undefined'
-    ? Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY
-    : 0;
-
-/**
  * CSS selector that selects major nodes that are sequentially focusable.
  */
 export const selectorTabbable = `

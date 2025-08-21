@@ -6,13 +6,13 @@
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, {
   ComponentType,
   ElementType,
   ForwardedRef,
+  JSX,
   ReactNode,
-  WeakValidationMap,
   forwardRef,
   useContext,
 } from 'react';
@@ -70,16 +70,15 @@ export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
 };
 
 export interface SideNavLinkComponent {
-  <E extends ElementType = 'a'>(
-    props: SideNavLinkProps<E> & { ref?: ForwardedRef<ElementType> }
-  ): JSX.Element | null;
+  <E extends ElementType = 'a'>(props: SideNavLinkProps<E>): JSX.Element | null;
   displayName?: string;
   propTypes?: WeakValidationMap<SideNavLinkProps<any>>;
 }
 
-const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
-  E extends ElementType = 'a',
->(
+// First define a non-generic base component to work with forwardRef
+type SideNavLinkPropsWithoutRef = Omit<SideNavLinkProps<'a'>, 'ref'>;
+
+const SideNavLinkBase = (
   {
     children,
     className: customClassName,
@@ -89,9 +88,9 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
     large = false,
     tabIndex,
     ...rest
-  }: SideNavLinkProps<E>,
-  ref: ForwardedRef<ElementType>
-) {
+  }: SideNavLinkPropsWithoutRef,
+  ref: ForwardedRef<HTMLAnchorElement>
+) => {
   const isRail = useContext(SideNavContext);
 
   const prefix = usePrefix();
@@ -104,7 +103,7 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
   return (
     <SideNavItem large={large}>
       <Link
-        {...(rest as LinkProps<E>)}
+        {...(rest as LinkProps<'a'>)}
         className={className}
         ref={ref}
         tabIndex={
@@ -123,7 +122,12 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
       </Link>
     </SideNavItem>
   );
-}) as SideNavLinkComponent;
+};
+
+// Use forwardRef with the non-generic function and cast to the generic component type
+const SideNavLink = forwardRef(
+  SideNavLinkBase
+) as unknown as SideNavLinkComponent;
 
 SideNavLink.displayName = 'SideNavLink';
 SideNavLink.propTypes = {

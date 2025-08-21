@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-global.__DEV__ = true;
+import { jest } from '@jest/globals';
 
 jest.setTimeout(20000);
 
@@ -75,4 +73,26 @@ if (global.window && global.AnimationEvent === undefined) {
     }
   }
   global.AnimationEvent = AnimationEvent;
+}
+
+// jsdom doesn't implement HTMLDialogElement
+// https://github.com/jsdom/jsdom/issues/3294
+if (global.window) {
+  if (!window.HTMLDialogElement.prototype.show) {
+    HTMLDialogElement.prototype.show = jest.fn(function () {
+      this.open = true;
+    });
+  }
+
+  if (!window.HTMLDialogElement.prototype.showModal) {
+    HTMLDialogElement.prototype.showModal = jest.fn(function () {
+      this.open = true;
+    });
+  }
+
+  if (!window.HTMLDialogElement.prototype.close) {
+    HTMLDialogElement.prototype.close = jest.fn(function () {
+      this.open = false;
+    });
+  }
 }

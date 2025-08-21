@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,20 +10,14 @@ import classnames from 'classnames';
 import FileUploaderItem from '../FileUploaderItem';
 import FileUploaderDropContainer from '../FileUploaderDropContainer';
 import FormItem from '../../FormItem';
+import { useId } from '../../../internal/useId';
 
 const prefix = 'cds';
-
-// -- copied from internal/tools/uniqueId.js
-let lastId = 0;
-function uid(prefix = 'id') {
-  lastId++;
-  return `${prefix}${lastId}`;
-}
-// -- end copied
 
 const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
   const uploaderButton = useRef(null);
+  const uniqueId = useId();
   const handleDrop = (e) => {
     e.preventDefault();
   };
@@ -112,7 +106,7 @@ const ExampleDropContainerApp = (props) => {
     (evt, { addedFiles }) => {
       evt.stopPropagation();
       const newFiles = addedFiles.map((file) => ({
-        uuid: uid(),
+        uuid: uniqueId + file.name + file.size,
         name: file.name,
         filesize: file.size,
         status: 'uploading',
@@ -177,7 +171,7 @@ const ExampleDropContainerApp = (props) => {
             ...rest
           }) => (
             <FileUploaderItem
-              key={uid()}
+              key={uuid}
               uuid={uuid}
               name={name}
               filesize={filesize}

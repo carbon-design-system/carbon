@@ -94,7 +94,7 @@ want to run:
 | `yarn doctoc`                     | Runs `doctoc` on all files in the `doctoc` directory                                                          |
 | `yarn format`, `yarn format:diff` | Format files using Prettier, check if files have been formatted                                               |
 | `yarn sync`                       | Sync package files across the project                                                                         |
-| `yarn lint`                       | Run eslint on files in the project                                                                            |
+| `yarn lint`                       | Finds and fixes problems in code                                                                              |
 
 In addition, you can use `yarn` to run `bin` files using the `yarn <bin>`
 syntax. For example, if you wanted to use `lerna` to run a script in every
@@ -660,7 +660,7 @@ import { warning } from '../../internal/warning';
 let didWarnAboutDeprecation = false;
 
 function SomeComponent() {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,
       'The `SomeComponent` component has been deprecated and will be removed ' +
@@ -670,6 +670,10 @@ function SomeComponent() {
   }
 }
 ```
+
+_Note: even though warning() has a process.env.NODE_ENV condition internal to
+itself, an additional one is needed above to ensure `didWarnAboutDeprecation` is
+not modified in non-development environments._
 
 _Note: if available, you should add a closing sentence specifying what component
 to use instead, or share a link for more information. This may look like:_

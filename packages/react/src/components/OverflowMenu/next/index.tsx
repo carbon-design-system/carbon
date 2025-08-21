@@ -14,32 +14,23 @@ import { useFeatureFlag } from '../../FeatureFlags';
 
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
+import type { PopoverAlignment } from '../../Popover';
 import mergeRefs from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useAttachedMenu } from '../../../internal/useAttachedMenu';
 import deprecateValuesWithin from '../../../prop-types/deprecateValuesWithin';
+import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
 const defaultSize = 'md';
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
-
 interface OverflowMenuProps {
   /**
-   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   * **Experimental**: Will attempt to automatically align the floating element
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -76,15 +67,7 @@ interface OverflowMenuProps {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  tooltipAlignment?:
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'left'
-    | 'right';
+  tooltipAlignment?: PopoverAlignment;
 
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
@@ -242,7 +225,10 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
 );
 OverflowMenu.propTypes = {
   /**
-   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   * **Experimental**: Will attempt to automatically align the floating element
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
   /**
@@ -273,7 +259,6 @@ OverflowMenu.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
@@ -312,7 +297,6 @@ OverflowMenu.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -327,8 +311,7 @@ OverflowMenu.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**
@@ -336,7 +319,7 @@ OverflowMenu.propTypes = {
    */
   menuTarget: PropTypes.instanceOf(
     typeof Element !== 'undefined' ? Element : Object
-  ) as React.Validator<Element | null | undefined>,
+  ) as PropTypes.Validator<Element | null | undefined>,
 };
 
 export { OverflowMenu };

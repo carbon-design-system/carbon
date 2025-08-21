@@ -1,7 +1,0 @@
-@use '@carbon/styles/scss/theme';
-
-@use '../prefix' as *;
-
-.#{$prefix}--with-layer .#{$prefix}--with-layer {
-  background-color: theme.$layer;
-}

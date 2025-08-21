@@ -568,4 +568,158 @@ describe('Tile', () => {
     );
     checkExpandedState(false);
   });
+
+  describe('SelectableTile React Strict Mode', () => {
+    it('Should call onChange only once per interaction in React Strict Mode', async () => {
+      const onChange = jest.fn();
+
+      // Wrap component in React.StrictMode to enable strict mode
+      const { container } = render(
+        <React.StrictMode>
+          <SelectableTile id="selectable-tile-1" onChange={onChange}>
+            Option 1
+          </SelectableTile>
+        </React.StrictMode>
+      );
+
+      const tile = container.firstChild;
+
+      // Clear any potential initial calls
+      onChange.mockClear();
+
+      // Test click interaction
+      await userEvent.click(tile);
+
+      // Should be called exactly once, not twice
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'click',
+        }),
+        true,
+        'selectable-tile-1'
+      );
+
+      // Clear mock for next test
+      onChange.mockClear();
+
+      // Test keyboard interaction
+      tile.focus();
+      await userEvent.keyboard('[Enter]');
+
+      // Should be called exactly once for keyboard interaction too
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'keydown',
+        }),
+        false,
+        'selectable-tile-1'
+      );
+    });
+
+    it('Should maintain correct state synchronization in Strict Mode when selected prop changes', async () => {
+      const onChange = jest.fn();
+
+      const { rerender } = render(
+        <React.StrictMode>
+          <SelectableTile
+            id="selectable-tile-1"
+            selected={false}
+            onChange={onChange}>
+            Option 1
+          </SelectableTile>
+        </React.StrictMode>
+      );
+
+      // Clear any potential initial calls
+      onChange.mockClear();
+
+      // Change the selected prop
+      rerender(
+        <React.StrictMode>
+          <SelectableTile
+            id="selectable-tile-1"
+            selected={true}
+            onChange={onChange}>
+            Option 1
+          </SelectableTile>
+        </React.StrictMode>
+      );
+
+      // onChange should NOT be called when prop changes
+      // (only when user interacts with the component)
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('Should handle rapid successive interactions correctly in Strict Mode', async () => {
+      const onChange = jest.fn();
+
+      const { container } = render(
+        <React.StrictMode>
+          <SelectableTile id="selectable-tile-1" onChange={onChange}>
+            Option 1
+          </SelectableTile>
+        </React.StrictMode>
+      );
+
+      const tile = container.firstChild;
+      onChange.mockClear();
+
+      // Perform multiple rapid clicks
+      await userEvent.click(tile);
+      await userEvent.click(tile);
+      await userEvent.click(tile);
+
+      // Should be called exactly 3 times (once per click), not 6 times
+      expect(onChange).toHaveBeenCalledTimes(3);
+
+      // Verify the selection states are correct
+      expect(onChange).toHaveBeenNthCalledWith(
+        1,
+        expect.anything(),
+        true,
+        'selectable-tile-1'
+      );
+      expect(onChange).toHaveBeenNthCalledWith(
+        2,
+        expect.anything(),
+        false,
+        'selectable-tile-1'
+      );
+      expect(onChange).toHaveBeenNthCalledWith(
+        3,
+        expect.anything(),
+        true,
+        'selectable-tile-1'
+      );
+    });
+
+    // Comparison test - what would happen without the fix
+    // (This test would fail with the old implementation)
+    it('Should not have regression - onChange fires exactly once per user action', async () => {
+      const onChange = jest.fn();
+
+      const { container } = render(
+        <React.StrictMode>
+          <SelectableTile id="selectable-tile-1" onChange={onChange}>
+            Option 1
+          </SelectableTile>
+        </React.StrictMode>
+      );
+
+      const tile = container.firstChild;
+      onChange.mockClear();
+
+      // Single click should result in exactly one onChange call
+      await userEvent.click(tile);
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      // Verify it's not called multiple times after a short delay
+      // (to catch any delayed duplicate calls)
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+  });
 });

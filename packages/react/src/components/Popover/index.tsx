@@ -1,27 +1,19 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
-import React, {
-  useRef,
-  useMemo,
-  useEffect,
-  type ForwardedRef,
-  type WeakValidationMap,
-  type ElementType,
-} from 'react';
+import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { type PolymorphicProps } from '../../types/common';
-import { useWindowEvent } from '../../internal/useEvent';
-import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
+import { useWindowEvent, useEvent } from '../../internal/useEvent';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
   flip,
@@ -83,19 +75,6 @@ export type NewPopoverAlignment =
 
 export type PopoverAlignment = DeprecatedPopoverAlignment | NewPopoverAlignment;
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
 export interface PopoverBaseProps {
   /**
    * Specify how the popover should align with the trigger element.
@@ -103,7 +82,15 @@ export interface PopoverBaseProps {
   align?: PopoverAlignment;
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset?: number;
+
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop
+   * is currently experimental and is subject to future changes. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -183,8 +170,9 @@ export const Popover: PopoverComponent & {
     open,
     alignmentAxisOffset,
     ...rest
-  }: PopoverProps<E>,
-  forwardRef: PolymorphicRef<E>
+  }: any,
+  //this is a workaround, have to come back and fix this.
+  forwardRef: any
 ) {
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
@@ -193,17 +181,32 @@ export const Popover: PopoverComponent & {
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
-  let align = mapPopoverAlignProp(initialAlign);
+  let align = mapPopoverAlign(initialAlign);
 
-  // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
-  useWindowEvent('blur', () => {
-    if (open) {
+  // The `Popover` should close whenever it and its children loses focus
+  useEvent(popover, 'focusout', (event) => {
+    const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+
+    // No relatedTarget, focus moved to nowhere, so close the popover
+    if (!relatedTarget) {
+      onRequestClose?.();
+      return;
+    }
+
+    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
+    const isOutsideFloating =
+      enableFloatingStyles && refs.floating.current
+        ? !refs.floating.current.contains(relatedTarget)
+        : true;
+
+    // Only close if focus moved outside both containers
+    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
     }
   });
 
-  useWindowEvent('click', (event: Event) => {
-    if (open && !popover?.current?.contains(event.target as Node)) {
+  useWindowEvent('click', ({ target }) => {
+    if (open && target instanceof Node && !popover.current?.contains(target)) {
       onRequestClose?.();
     }
   });
@@ -277,35 +280,39 @@ export const Popover: PopoverComponent & {
             ),
             autoAlign &&
               flip({
-                fallbackPlacements: align.includes('bottom')
-                  ? [
-                      'bottom',
-                      'bottom-start',
-                      'bottom-end',
-                      'right',
-                      'right-start',
-                      'right-end',
-                      'left',
-                      'left-start',
-                      'left-end',
-                      'top',
-                      'top-start',
-                      'top-end',
-                    ]
-                  : [
-                      'top',
-                      'top-start',
-                      'top-end',
-                      'left',
-                      'left-start',
-                      'left-end',
-                      'right',
-                      'right-start',
-                      'right-end',
-                      'bottom',
-                      'bottom-start',
-                      'bottom-end',
-                    ],
+                fallbackPlacements: isTabTip
+                  ? align.includes('bottom')
+                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+                  : align.includes('bottom')
+                    ? [
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'top',
+                        'top-start',
+                        'top-end',
+                      ]
+                    : [
+                        'top',
+                        'top-start',
+                        'top-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                      ],
 
                 fallbackStrategy: 'initialPlacement',
                 fallbackAxisSideDirection: 'start',
@@ -454,10 +461,9 @@ export const Popover: PopoverComponent & {
           // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
           if (
+            (enableFloatingStyles && item?.type !== PopoverContent) ||
             (enableFloatingStyles &&
-              (item?.type as any)?.displayName !== 'PopoverContent') ||
-            (enableFloatingStyles &&
-              (item?.type as any)?.displayName === 'ToggletipButton')
+              item?.type['displayName'] === 'ToggletipButton')
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
@@ -489,7 +495,7 @@ export const Popover: PopoverComponent & {
 
 // Note: this displayName is temporarily set so that Storybook ArgTable
 // correctly displays the name of this component
-if (__DEV__) {
+if (process.env.NODE_ENV !== 'production') {
   Popover.displayName = 'Popover';
 }
 
@@ -525,7 +531,6 @@ Popover.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -540,9 +545,13 @@ Popover.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
+
+  /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset: PropTypes.number,
 
   /**
    * Provide a custom element or component to render the top-level node for the
@@ -551,7 +560,10 @@ Popover.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover on first render if it is not visible. This prop
+   * is currently experimental and is subject to future changes. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

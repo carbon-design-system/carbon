@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -151,5 +151,35 @@ describe('HeaderPanel', () => {
 
       expect(onBlur).toHaveBeenCalled();
     });
+  });
+
+  it('should call `onHeaderPanelFocus` when child is a `Switcher` component and a click occurs outside the header panel', async () => {
+    const onHeaderPanelFocus = jest.fn();
+    render(
+      <HeaderPanel expanded href="#" onHeaderPanelFocus={onHeaderPanelFocus}>
+        <Switcher aria-label="Switcher Container">
+          <SwitcherItem aria-label="Link 1" href="#">
+            Link 1
+          </SwitcherItem>
+        </Switcher>
+      </HeaderPanel>
+    );
+
+    await userEvent.click(document.body);
+
+    expect(onHeaderPanelFocus).toHaveBeenCalled();
+  });
+
+  it('should not call `onHeaderPanelFocus` when child is not a `Switcher` component', async () => {
+    const onHeaderPanelFocus = jest.fn();
+    render(
+      <HeaderPanel expanded href="#" onHeaderPanelFocus={onHeaderPanelFocus}>
+        <div>Not a Switcher</div>
+      </HeaderPanel>
+    );
+
+    await userEvent.click(document.body);
+
+    expect(onHeaderPanelFocus).not.toHaveBeenCalled();
   });
 });

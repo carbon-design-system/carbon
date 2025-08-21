@@ -176,6 +176,8 @@
     grid-column: 1/-1;
     grid-row: 1/1;
     margin-block-end: $spacing-03;
+    max-block-size: 50vh;
+    overflow-y: auto;
     padding-block-start: $spacing-05;
     padding-inline: $spacing-05 $spacing-09;
   }
@@ -487,11 +489,6 @@
   }
 
   // Windows HCM fix
-
-  .#{$prefix}--modal-close__icon {
-    @include high-contrast-mode('icon-fill');
-  }
-
   .#{$prefix}--modal-close:focus {
     @include high-contrast-mode('focus');
   }

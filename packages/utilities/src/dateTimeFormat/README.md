@@ -142,3 +142,22 @@ dateTimeFormat.absolute.formatRange(startDate, sameDayEndDate, {
 });
 // 3:47 – 4:29 PM
 ```
+
+#### Timezone
+
+For `absolute` functions, you can provide `timeZone` as an optional property.
+This is useful when (for example) you want to display utc time instead of a
+local timezone.
+
+```js
+import { dateTimeFormat } from '@carbon/utilities';
+
+dateTimeFormat.absolute.format(timestamp);
+// Apr 4, 2024 at 3:47 PM
+
+dateTimeFormat.absolute.format(timestamp, { timeZone: 'UTC' });
+// Apr 4, 2024 at 10:47 PM
+```
+
+Timezone options are according to
+[ECMAScript® 2026 Internationalization API Specification](https://tc39.es/ecma402/#datetimeformat-objects)

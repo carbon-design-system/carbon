@@ -28,6 +28,7 @@ function emitIconComponent(compileOpts) {
     .concat(emitResult.diagnostics);
   if (diagnostics.length > 0) {
     diagnostics.forEach((diagnostic) => {
+      // eslint-disable-next-line no-console
       console.log(diagnosticToMessage(diagnostic));
     });
     throw new Error('Icon.tsx compilation failed');

@@ -17,6 +17,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tooltip';
 @use '@carbon/styles/scss/components/chat-button' as *;
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/motion' as *;
 
 @include code-snippet;
 
@@ -33,10 +34,6 @@ $css--plex: true !default;
   .#{$prefix}--btn {
     flex-grow: 1;
     max-inline-size: 100%;
-
-    &:not(:focus) {
-      box-shadow: to-rem(-1px) to-rem(-1px) 0 0 $button-separator;
-    }
   }
 }
 
@@ -104,6 +101,18 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-button) {
+  .#{$prefix}--btn--icon-only {
+    align-items: center;
+    padding-block-start: 0;
+
+    &.#{$prefix}--btn--selected,
+    &.#{$prefix}--btn--expressive {
+      padding: $spacing-03;
+    }
+  }
+}
+
 :host(#{$prefix}-button[kind='ghost']) {
   .#{$prefix}--btn--ghost {
     &:hover,
@@ -111,13 +120,16 @@ $css--plex: true !default;
       outline: none;
     }
 
-    &.#{$prefix}--btn--icon-only {
-      padding-block-start: 0;
+    &:not(:focus) {
+      box-shadow: none;
+    }
+  }
+}
 
-      &.#{$prefix}--btn--selected,
-      &.#{$prefix}--btn--expressive {
-        padding: $spacing-03;
-      }
+:host(#{$prefix}-button[kind='danger-ghost']) {
+  .#{$prefix}--btn--danger-ghost {
+    &:not(:focus) {
+      box-shadow: none;
     }
   }
 }
@@ -135,4 +147,81 @@ $css--plex: true !default;
 
 :host(#{$prefix}-button-set[stacked]) {
   @extend .#{$prefix}--btn-set--stacked;
+}
+
+:host(#{$prefix}-button[data-context='data-table']) {
+  .#{$prefix}--btn {
+    padding-inline: $spacing-05;
+  }
+
+  .#{$prefix}--btn__icon {
+    position: static;
+    fill: $icon-on-color;
+    margin-inline-start: $spacing-03;
+
+    .st0 {
+      fill: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button.#{$prefix}--batch-summary__cancel) {
+  --divider-opacity: 1;
+
+  button.#{$prefix}--btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    block-size: 100%;
+    min-block-size: 100%;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
+
+    &::before {
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
+      position: absolute;
+      display: block;
+      border: none;
+      background-color: $text-on-color;
+      block-size: $spacing-05;
+      content: '';
+      inline-size: rem(1px);
+      inset-block-start: rem(15px);
+      inset-inline-start: 0;
+      opacity: var(--divider-opacity);
+      transition: opacity $duration-fast-02 motion(standard, productive);
+    }
+
+    &:hover::before {
+      opacity: 0;
+    }
+  }
+}
+
+:host(#{$prefix}-button.#{$prefix}--batch-summary__cancel[size='sm']) {
+  button.#{$prefix}--btn {
+    block-size: $spacing-07;
+    min-block-size: auto;
+    padding-block: 0.375rem;
+
+    &::before {
+      inset-block-start: rem(8px);
+    }
+  }
+}
+
+:host(#{$prefix}-button.#{$prefix}--batch-summary__cancel[size='lg']) {
+  button.#{$prefix}--btn {
+    block-size: $spacing-09;
+    min-block-size: auto;
+
+    &::before {
+      inset-block-start: rem(15px);
+    }
+  }
 }

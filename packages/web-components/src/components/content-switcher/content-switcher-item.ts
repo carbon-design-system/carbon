@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +20,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-content-switcher-item
  */
 @customElement(`${prefix}-content-switcher-item`)
-export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
+class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   /**
    * `true` if this content switcher item should be disabled.
    */
@@ -88,7 +86,6 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
    * Specify the duration in milliseconds to delay before hiding the tooltip
    * for icon-only switcher-item
    *
-   * TODO: match upstream value once #10471 is resolved
    */
   leaveDelayMs = 100;
 
@@ -97,6 +94,14 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
       this.shadowRoot
         ?.querySelector(`${prefix}-tooltip`)
         ?.classList.add(`${prefix}--icon-tooltip`);
+    }
+
+    if (
+      this.disabled &&
+      changedProperties.has('disabled') &&
+      !this.parentElement?.hasAttribute('disabled')
+    ) {
+      this.parentElement?.setAttribute('disabled', '');
     }
   }
 
@@ -156,5 +161,8 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
+
   static styles = styles;
 }
+
+export default CDSContentSwitcherItem;

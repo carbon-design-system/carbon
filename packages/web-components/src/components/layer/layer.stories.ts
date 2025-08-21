@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -32,6 +30,29 @@ export const Default = {
         <div class="example-layer-test-component">Test component</div>
         <cds-layer>
           <div class="example-layer-test-component">Test component</div>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+    <style>
+      ${styles}
+    </style>
+  `,
+};
+
+export const withBackground = {
+  render: () => html`
+    <cds-layer with-background>
+      <div class="example-layer-test-component-no-background">
+        Test component
+      </div>
+      <cds-layer with-background>
+        <div class="example-layer-test-component-no-background">
+          Test component
+        </div>
+        <cds-layer with-background>
+          <div class="example-layer-test-component-no-background">
+            Test component
+          </div>
         </cds-layer>
       </cds-layer>
     </cds-layer>

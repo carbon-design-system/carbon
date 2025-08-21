@@ -13,6 +13,7 @@ import React, {
   type MouseEventHandler,
   isValidElement,
   createContext,
+  type JSX,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -28,7 +29,7 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
-export interface SideNavProps extends ComponentProps<'nav'> {
+export interface SideNavProps {
   expanded?: boolean | undefined;
   defaultExpanded?: boolean | undefined;
   isChildOfHeader?: boolean | undefined;
@@ -80,7 +81,7 @@ function SideNavRenderFunction(
     onSideNavBlur,
     enterDelayMs = 100,
     ...other
-  }: SideNavProps,
+  }: SideNavProps & ComponentProps<'nav'>,
   ref: ForwardedRef<HTMLElement>
 ) {
   const prefix = usePrefix();
@@ -239,7 +240,7 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail ? (expanded || isLg ? undefined : -1) : undefined}
+        inert={!isRail ? !(expanded || isLg) : undefined}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>

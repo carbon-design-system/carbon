@@ -16,18 +16,21 @@ import {
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
-  ForwardedRef,
-  useContext,
-  useState,
-  useMemo,
-  ReactNode,
-  useLayoutEffect,
+  cloneElement,
   isValidElement,
+  useCallback,
+  useContext,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type ForwardedRef,
+  type ReactNode,
 } from 'react';
 import ListBox, {
-  ListBoxSize,
-  ListBoxType,
-  PropTypes as ListBoxPropTypes,
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
 } from '../ListBox';
 import {
   MultiSelectSortingProps,
@@ -38,13 +41,12 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import Checkbox from '../Checkbox';
-import type { InternationalProps } from '../../types/common';
 import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
@@ -55,6 +57,8 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   ItemClick,
@@ -108,7 +112,8 @@ export interface MultiSelectProps<ItemType>
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -298,7 +303,7 @@ export interface MultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const MultiSelect = React.forwardRef(
+export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
@@ -354,13 +359,8 @@ const MultiSelect = React.forwardRef(
       });
     }, [items]);
 
-    let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
-    if ((selected ?? []).length > 0 && selectAll) {
-      console.warn(
-        'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
-      );
-      selectAll = false;
-    }
+    const selectAll = filteredItems.some((item) => (item as any).isSelectAll);
+
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
@@ -698,20 +698,11 @@ const MultiSelect = React.forwardRef(
       : {};
 
     // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
-    }
 
     const itemsSelectedText =
       selectedItems.length > 0 &&
@@ -730,7 +721,40 @@ const MultiSelect = React.forwardRef(
       [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
-    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+    const allLabelProps = getLabelProps();
+    const labelProps = isValidElement(titleText)
+      ? { id: allLabelProps.id }
+      : allLabelProps;
+
+    const getSelectionStats = useCallback(
+      (
+        selectedItems: any[],
+        filteredItems: any[]
+      ): {
+        hasIndividualSelections: boolean;
+        nonSelectAllSelectedCount: number;
+        totalSelectableCount: number;
+      } => {
+        const hasIndividualSelections = selectedItems.some(
+          (selected) => !selected.isSelectAll
+        );
+
+        const nonSelectAllSelectedCount = selectedItems.filter(
+          (selected) => !selected.isSelectAll
+        ).length;
+
+        const totalSelectableCount = filteredItems.filter(
+          (item) => !item.isSelectAll && !item.disabled
+        ).length;
+
+        return {
+          hasIndividualSelections,
+          nonSelectAllSelectedCount,
+          totalSelectableCount,
+        };
+      },
+      [selectedItems, filteredItems]
+    );
 
     return (
       <div className={wrapperClasses}>
@@ -817,14 +841,21 @@ const MultiSelect = React.forwardRef(
                 filteredItems,
                 sortOptions as SortItemsOptions<ItemType>
               ).map((item, index) => {
-                const isChecked =
-                  selectedItems.filter((selected) => isEqual(selected, item))
-                    .length > 0;
+                const {
+                  hasIndividualSelections,
+                  nonSelectAllSelectedCount,
+                  totalSelectableCount,
+                } = getSelectionStats(selectedItems, filteredItems);
+
+                const isChecked = (item as any).isSelectAll
+                  ? nonSelectAllSelectedCount === totalSelectableCount &&
+                    totalSelectableCount > 0
+                  : selectedItems.some((selected) => isEqual(selected, item));
 
                 const isIndeterminate =
-                  selectedItems.length !== 0 &&
-                  item['isSelectAll'] &&
-                  !isChecked;
+                  (item as any).isSelectAll &&
+                  hasIndividualSelections &&
+                  nonSelectAllSelectedCount < totalSelectableCount;
 
                 const itemProps = getItemProps({
                   item,
@@ -875,7 +906,7 @@ const MultiSelect = React.forwardRef(
       </div>
     );
   }
-);
+) as MultiSelectComponent;
 
 type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   MultiSelectProps<ItemType>
@@ -883,9 +914,11 @@ type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   React.RefAttributes<HTMLButtonElement>;
 
 interface MultiSelectComponent {
+  propTypes: Record<string, any>;
+  displayName: string;
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
-  ): React.ReactElement | null;
+  ): React.ReactElement<any> | null;
 }
 
 MultiSelect.displayName = 'MultiSelect';
@@ -895,7 +928,8 @@ MultiSelect.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -945,7 +979,9 @@ MultiSelect.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
+  downshiftProps: PropTypes.object as PropTypes.Validator<
+    UseSelectProps<unknown>
+  >,
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -1058,7 +1094,7 @@ MultiSelect.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   slug: deprecate(
     PropTypes.node,
@@ -1101,7 +1137,7 @@ MultiSelect.propTypes = {
   /**
    * Specify 'inline' to create an inline multi-select.
    */
-  type: PropTypes.oneOf(['default', 'inline']),
+  type: ListBoxTypePropType,
 
   /**
    * Specify title to show title on hover
@@ -1118,5 +1154,3 @@ MultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default MultiSelect as MultiSelectComponent;

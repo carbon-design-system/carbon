@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +18,7 @@ import '../icon-button';
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -50,15 +48,17 @@ const actions = html`
 
 const args = {
   cols: 0,
+  counterMode: '',
   disabled: false,
   enableCounter: true,
-  helperText: 'Textarea helper text',
+  helperText: 'TextArea helper text',
   hideLabel: false,
   invalid: false,
-  invalidText: 'Invalid text',
-  label: 'Textarea label',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  label: 'TextArea label',
   maxCount: 500,
-  onInput: 'input',
+  onInput: (e: Event) => {},
   placeholder: '',
   readonly: false,
   rows: 4,
@@ -71,6 +71,12 @@ const argTypes = {
   cols: {
     control: 'number',
     description: 'Number of columns (cols)',
+  },
+  counterMode: {
+    control: 'radio',
+    options: ['character', 'word'],
+    description:
+      'Specify the method used for calculating the counter number (character or word)',
   },
   disabled: {
     control: 'boolean',
@@ -137,45 +143,11 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-form-item>
-      <cds-textarea label="Textarea label" helper-text="Optional helper text">
-      </cds-textarea>
-    </cds-form-item>
-  `,
-};
-
-export const skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: () => html` <cds-textarea-skeleton></cds-textarea-skeleton> `,
-};
-
-export const WithAILabel = {
-  render: () => html`
-    <cds-textarea label="Text input label" helper-text="Optional helper text">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-textarea>
-  `,
-};
-
-export const WithLayer = {
-  render: () => html`
-    <sb-template-layers>
-      <cds-textarea label="Text Area label" helper-text="Optional helper text">
-      </cds-textarea>
-    </sb-template-layers>
-  `,
-};
-
-export const Playground = {
   args,
   argTypes,
   render: ({
     cols,
+    counterMode,
     disabled,
     enableCounter,
     helperText,
@@ -195,6 +167,7 @@ export const Playground = {
     <cds-form-item>
       <cds-textarea
         ?enable-counter="${enableCounter}"
+        counter-mode="${ifDefined(counterMode)}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
@@ -213,6 +186,34 @@ export const Playground = {
         ${value}
       </cds-textarea>
     </cds-form-item>
+  `,
+};
+
+export const Skeleton = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => html` <cds-textarea-skeleton></cds-textarea-skeleton> `,
+};
+
+export const WithAILabel = {
+  render: () => html`
+    <cds-textarea label="Text Area label" helper-text="Optional helper text">
+      <cds-ai-label alignment="bottom-right">
+        ${content}${actions}</cds-ai-label
+      >
+    </cds-textarea>
+  `,
+};
+
+export const WithLayer = {
+  render: () => html`
+    <sb-template-layers>
+      <cds-textarea label="Text Area label" helper-text="Optional helper text">
+      </cds-textarea>
+    </sb-template-layers>
   `,
 };
 

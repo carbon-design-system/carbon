@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -41,7 +39,7 @@ class CDSSkeletonPlaceholder extends LitElement {
     }
     const classes = classMap(defaultClasses);
 
-    return html` <div class="${classes}"></div> `;
+    return html` <div part="placeholder" class="${classes}"></div> `;
   }
 
   static styles = styles;

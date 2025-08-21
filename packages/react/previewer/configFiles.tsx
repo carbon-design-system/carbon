@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export const packageJson: string = `{
   "name": "vite",
   "private": true,
@@ -16,7 +23,7 @@ export const packageJson: string = `{
   "devDependencies": {
     "@vitejs/plugin-react": "4.0.0",
     "sass": "^1.77.7",
-    "vite": "^4.3.8"
+    "vite": "^6.3.5"
   }
 }`;
 

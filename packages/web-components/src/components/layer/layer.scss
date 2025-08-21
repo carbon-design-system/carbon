@@ -10,6 +10,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/layer' as *;
 @use '@carbon/styles/scss/config' as *;
 
+:host(#{$prefix}-layer) {
+  display: block;
+}
+
 :host(#{$prefix}-layer[level='0']) {
   @extend .#{$prefix}--layer-one;
 }
@@ -20,4 +24,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-layer[level='2']) {
   @extend .#{$prefix}--layer-three;
+}
+
+:host(#{$prefix}-layer[with-background]) {
+  @extend .#{$prefix}--layer__with-background;
 }

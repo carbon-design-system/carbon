@@ -1,13 +1,11 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE } from '../text-input';
 
 const inputTypes = Object.entries(INPUT_TYPE).reduce(

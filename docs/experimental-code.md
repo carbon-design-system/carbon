@@ -101,8 +101,8 @@ All breaking changes will be shipped as `enable-v12-*` flags within the current
 major release (v11). This enables projects to opt-in to breaking changes earlier
 and at their own pace avoiding one huge changeset when upgrading to the next
 major release. In theory, if all `enable-v12-*` flags are enabled within your
-project before the v12 release, no changes should need to be made when updating
-to v12.
+project before the v12 release, no changes should need to be made to the
+affected components when updating to v12.
 
 For a flag to be committed to a release and renamed to `enable-v#-*` it must:
 

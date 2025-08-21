@@ -9,6 +9,7 @@ import { Information } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
+import Modal from '../Modal';
 import {
   ToggletipLabel,
   Toggletip,
@@ -87,11 +88,13 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
+// Note: autoAlign is used here only to make tooltips visible in StackBlitz,
+// autoAlign is experimental and not part of the actual implementation.
 export const Default = (args) => {
   return (
     <>
       <ToggletipLabel>Toggletip label</ToggletipLabel>
-      <Toggletip {...args}>
+      <Toggletip autoAlign {...args}>
         <ToggletipButton label="Show information">
           <Information />
         </ToggletipButton>
@@ -112,6 +115,10 @@ export const Default = (args) => {
 
 Default.argTypes = {
   align: {
+    // TODO:
+    // 1. Should the deprecated options be deleted?
+    // 2. The list doesn't include all of the options available in the
+    //    component. Is it supposed to?
     options: [
       'top',
       'top-left',
@@ -147,4 +154,35 @@ Default.story = {
       </div>
     ),
   ],
+};
+
+// I need to remove this
+export const OutsideClickTest = () => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div style={{ padding: '2rem' }}>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+
+      <Modal
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        modalHeading="Test Modal"
+        primaryButtonText="Close">
+        <p>
+          Click the <strong>i</strong> icon to open the Toggletip, then click
+          anywhere in this modal body. The Toggletip should close.
+        </p>
+
+        <Toggletip align="bottom">
+          <ToggletipButton label="Show information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Toggletip content</p>
+          </ToggletipContent>
+        </Toggletip>
+      </Modal>
+    </div>
+  );
 };

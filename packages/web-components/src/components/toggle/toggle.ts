@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -137,6 +135,10 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
       [`${prefix}--toggle__switch`]: true,
       [`${prefix}--toggle__switch--checked`]: checked,
     });
+
+    const labelTextClasses = classMap({
+      [`${prefix}--toggle__label-text`]: labelText,
+    });
     const stateText = checked ? labelA : labelB;
     return html`
       <button
@@ -151,7 +153,9 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
         ?disabled=${disabled}
         id="${id}"></button>
       <label for="${id}" class="${prefix}--toggle__label">
-        <span class="${prefix}--toggle__label-text">${labelText}</span>
+        ${labelText
+          ? html`<span class="${labelTextClasses}">${labelText}</span>`
+          : null}
         <div class="${inputClasses}">
           <div class="${toggleClasses}" @click=${handleChange}>
             ${this._renderCheckmark()}

@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ChangeEvent } from 'react';
 import classnames from 'classnames';
 import Search from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
@@ -45,7 +45,7 @@ export interface FluidSearchProps {
   /**
    * Optional callback called when the search value changes.
    */
-  onChange?(e: { target: HTMLInputElement; type: 'change' }): void;
+  onChange?(event: ChangeEvent<HTMLInputElement>): void;
   /**
    * Optional callback called when the search value is cleared.
    */

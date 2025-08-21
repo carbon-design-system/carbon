@@ -15,7 +15,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import cx from 'classnames';
 import {
   Close,
@@ -38,7 +38,7 @@ import { keys, matches, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
-import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import { wrapFocus, wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
@@ -416,7 +416,7 @@ export function ToastNotification({
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   useNoInteractiveChildren(contentRef);
 
   const handleClose = (evt) => {
@@ -424,7 +424,7 @@ export function ToastNotification({
       setIsOpen(false);
     }
   };
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   function handleCloseButtonClick(event: MouseEvent) {
     onCloseButtonClick(event);
@@ -683,7 +683,7 @@ export function InlineNotification({
     [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
   });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   useNoInteractiveChildren(contentRef);
 
   const handleClose = (evt) => {
@@ -691,7 +691,7 @@ export function InlineNotification({
       setIsOpen(false);
     }
   };
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -827,6 +827,11 @@ export interface ActionableNotificationProps
   'aria-label'?: string;
 
   /**
+   * Specify the caption
+   */
+  caption?: string;
+
+  /**
    * Specify the content
    */
   children?: ReactNode;
@@ -918,6 +923,7 @@ export function ActionableNotification({
   ['aria-label']: ariaLabel,
   // @ts-expect-error: deprecated prop
   ariaLabel: deprecatedAriaLabel,
+  caption,
   children,
   role = 'alertdialog',
   onActionButtonClick,
@@ -1060,6 +1066,13 @@ export function ActionableNotification({
                 {subtitle}
               </Text>
             )}
+            {caption && (
+              <Text
+                as="div"
+                className={`${prefix}--actionable-notification__caption`}>
+                {caption}
+              </Text>
+            )}
             {children}
           </div>
         </div>
@@ -1115,6 +1128,11 @@ ActionableNotification.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+
+  /**
+   * Specify the caption
+   */
+  caption: PropTypes.string,
 
   /**
    * Specify the content
@@ -1310,7 +1328,7 @@ export function Callout({
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
-  const childrenContainer = useRef(null);
+  const childrenContainer = useRef<HTMLDivElement>(null);
   useInteractiveChildrenNeedDescription(
     childrenContainer,
     `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``
@@ -1436,7 +1454,7 @@ let didWarnAboutDeprecation = false;
 export const StaticNotification: React.FC<StaticNotificationProps> = (
   props
 ) => {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,
       '`StaticNotification` has been renamed to `Callout`.' +

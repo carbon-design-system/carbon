@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,16 +14,22 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import useResizeObserver from 'use-resize-observer/polyfilled';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
-import getUniqueId from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import copy from 'copy-to-clipboard';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
@@ -31,46 +37,11 @@ const defaultMaxExpandedNumberOfRows = 0;
 const defaultMinCollapsedNumberOfRows = 3;
 const defaultMinExpandedNumberOfRows = 16;
 
-export type DeprecatedCodeSnippetAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedCodeSnippetAlignment = DeprecatedPopoverAlignment;
 
-export type NewCodeSnippetAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewCodeSnippetAlignment = NewPopoverAlignment;
 
-export type CodeSnippetAlignment =
-  | DeprecatedCodeSnippetAlignment
-  | NewCodeSnippetAlignment;
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
+export type CodeSnippetAlignment = PopoverAlignment;
 
 export interface CodeSnippetProps {
   /**
@@ -79,7 +50,8 @@ export interface CodeSnippetProps {
   align?: CodeSnippetAlignment;
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -214,7 +186,7 @@ function CodeSnippet({
 }: PropsWithChildren<CodeSnippetProps>) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
-  const { current: uid } = useRef(getUniqueId());
+  const { current: uid } = useRef(useId());
   const codeContentRef = useRef<HTMLPreElement>(null);
   const codeContainerRef = useRef<HTMLDivElement>(null);
   const innerCodeRef = useRef<HTMLElement>(null);
@@ -349,6 +321,7 @@ function CodeSnippet({
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
+        disabled={disabled}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
         <code id={uid} ref={innerCodeRef}>
@@ -480,7 +453,6 @@ CodeSnippet.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -495,8 +467,7 @@ CodeSnippet.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**
@@ -516,7 +487,9 @@ CodeSnippet.propTypes = {
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

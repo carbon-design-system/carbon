@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/layout';
+@use '../../utilities/visually-hidden' as *;
 
 /// Text area styles
 /// @access public
@@ -58,10 +59,6 @@
   // V11: Possibly deprecate
   .#{$prefix}--text-area--light {
     background-color: $field-02;
-  }
-
-  .#{$prefix}--text-area--invalid {
-    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-area__wrapper {
@@ -213,6 +210,12 @@
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area--invalid
     ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area--warn

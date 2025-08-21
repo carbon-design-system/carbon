@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText, render } from '@testing-library/react';
+import { getByText, render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { Filename } from '../';
@@ -46,7 +46,7 @@ describe('Filename', () => {
       />
     );
 
-    Simulate.click(
+    fireEvent.click(
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       edit.querySelector(`[aria-label="test description - File 1"]`)
     );
@@ -63,7 +63,7 @@ describe('Filename', () => {
     );
 
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    Simulate.click(complete.querySelector(`[aria-label="test description"]`));
+    fireEvent.click(complete.querySelector(`[aria-label="test description"]`));
     expect(onClick).toHaveBeenCalledTimes(1);
 
     const { container: uploading } = render(
@@ -77,7 +77,7 @@ describe('Filename', () => {
     onClick.mockReset();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
-    Simulate.click(getByText(uploading, 'test description'));
+    fireEvent.click(getByText(uploading, 'test description'));
     expect(onClick).not.toHaveBeenCalled();
   });
 });

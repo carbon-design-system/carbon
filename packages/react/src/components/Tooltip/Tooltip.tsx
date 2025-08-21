@@ -7,7 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type JSX,
+} from 'react';
 import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { keys, match } from '../../internal/keyboard';
 import { useDelayedState } from '../../internal/useDelayedState';
@@ -34,7 +40,9 @@ interface TooltipBaseProps {
   /**
    * Pass in the child to which the tooltip will be applied
    */
-  children?: React.ReactElement;
+  children?: React.ReactElement<
+    JSX.IntrinsicElements[keyof JSX.IntrinsicElements]
+  >;
 
   /**
    * Specify an optional className to be applied to the container node
@@ -130,6 +138,15 @@ const Tooltip: TooltipComponent = React.forwardRef(
     const prefix = usePrefix();
     const child = React.Children.only(children);
 
+    const {
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
+    } = child?.props ?? {};
+
+    const hasLabel = !!label;
+    const labelledBy = ariaLabelledBy ?? (hasLabel ? id : undefined);
+    const describedBy = ariaDescribedBy ?? (!hasLabel ? id : undefined);
+
     const triggerProps = {
       onFocus: () => !focusByMouse && setOpen(true),
       onBlur: () => {
@@ -143,6 +160,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
       onMouseDown,
       onMouseMove: onMouseMove,
       onTouchStart: onDragStart,
+      'aria-labelledby': labelledBy,
+      'aria-describedby': describedBy,
     };
 
     function getChildEventHandlers(childProps: any) {
@@ -159,12 +178,6 @@ const Tooltip: TooltipComponent = React.forwardRef(
         };
       });
       return eventHandlers;
-    }
-
-    if (label) {
-      triggerProps['aria-labelledby'] = id;
-    } else {
-      triggerProps['aria-describedby'] = id;
     }
 
     const onKeyDown = useCallback(
@@ -277,7 +290,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
         onMouseLeave={onMouseLeave}
         open={open}>
         <div className={`${prefix}--tooltip-trigger__wrapper`}>
-          {child !== undefined
+          {typeof child !== 'undefined'
             ? React.cloneElement(child, {
                 ...triggerProps,
                 ...getChildEventHandlers(child.props),

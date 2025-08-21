@@ -37,6 +37,7 @@ import {
   Chat,
   Task,
   Restart,
+  Icon,
 } from '@carbon/icons-react';
 
 export default {
@@ -187,6 +188,76 @@ export const Dismissable = () => {
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
         <TabList>
+          {renderedTabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+      </Tabs>
+    </>
+  );
+};
+export const DismissableContained = () => {
+  const tabs = [
+    {
+      label: 'Dashboard',
+      panel: <TabPanel key={0}>Dashboard</TabPanel>,
+    },
+    {
+      label: 'Monitoring',
+      panel: <TabPanel key={1}>Monitoring</TabPanel>,
+    },
+    {
+      label: 'Activity',
+      panel: <TabPanel key={2}>Activity</TabPanel>,
+    },
+    {
+      label: 'Settings',
+      panel: <TabPanel key={3}>Settings</TabPanel>,
+      disabled: true,
+    },
+  ];
+  const [renderedTabs, setRenderedTabs] = React.useState(tabs);
+
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const handleTabChange = (evt) => {
+    setSelectedIndex(evt.selectedIndex);
+  };
+
+  const handleCloseTabRequest = (tabIndex) => {
+    if (renderedTabs[tabIndex].disabled) {
+      return;
+    }
+    const selectedTab = renderedTabs[selectedIndex];
+
+    const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+    if (tabIndex === selectedIndex) {
+      const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+      setSelectedIndex(defaultTabIndex);
+    } else {
+      setSelectedIndex(filteredTabs.indexOf(selectedTab));
+    }
+    setRenderedTabs(filteredTabs);
+  };
+
+  const resetTabs = () => {
+    setRenderedTabs(tabs);
+  };
+
+  return (
+    <>
+      <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+        Reset
+      </Button>
+      <Tabs
+        selectedIndex={selectedIndex}
+        onChange={handleTabChange}
+        dismissable
+        onTabCloseRequest={handleCloseTabRequest}>
+        <TabList contained>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
               {tab.label}
@@ -724,3 +795,87 @@ export const Skeleton = () => {
     </div>
   );
 };
+
+export const Icon20OnlyVisualSnapshots = (args) => {
+  return (
+    <Tabs>
+      <TabList iconSize="lg">
+        <IconTab label="Analyze" disabled>
+          <IbmWatsonDiscovery size={20} aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity size={20} aria-label="Activity" />
+        </IconTab>
+        <IconTab label="New Notifications" {...args}>
+          <Notification size={20} aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat size={20} aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+Icon20OnlyVisualSnapshots.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+Icon20OnlyVisualSnapshots.play = async ({ userEvent }) => {
+  await userEvent.keyboard('{Tab}');
+};
+
+Icon20OnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
+
+export const IconOnlyVisualSnapshots = (args) => {
+  return (
+    <Tabs>
+      <TabList iconSize="default">
+        <IconTab label="Analyze" disabled>
+          <IbmWatsonDiscovery aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity aria-label="Activity" />
+        </IconTab>
+        <IconTab label="New Notifications" {...args}>
+          <Notification aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+IconOnlyVisualSnapshots.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+IconOnlyVisualSnapshots.play = async ({ userEvent }) => {
+  await userEvent.keyboard('{Tab}');
+};
+
+IconOnlyVisualSnapshots.tags = ['!dev', '!autodocs'];

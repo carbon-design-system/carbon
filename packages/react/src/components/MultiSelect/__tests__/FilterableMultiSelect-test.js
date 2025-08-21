@@ -9,7 +9,7 @@ import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
-import FilterableMultiSelect from '../FilterableMultiSelect';
+import { FilterableMultiSelect } from '../';
 import {
   assertMenuOpen,
   assertMenuClosed,
@@ -501,16 +501,6 @@ describe('FilterableMultiSelect', () => {
     expect(options[4]).toHaveTextContent('Item 0');
   });
 
-  it('should handle useTitleInItem prop', async () => {
-    render(<FilterableMultiSelect {...mockProps} useTitleInItem />);
-    await waitForPosition();
-
-    await openMenu();
-
-    const option = screen.getAllByRole('option')[0];
-    expect(option.querySelector('span')).toHaveAttribute('title', 'Item 0');
-  });
-
   it('should handle helperText prop', async () => {
     render(
       <FilterableMultiSelect {...mockProps} helperText="This is helper text" />
@@ -970,5 +960,371 @@ describe('FilterableMultiSelect', () => {
     await userEvent.click(document.body);
     expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
+  });
+
+  it('passes inputProps to the input element', async () => {
+    render(
+      <FilterableMultiSelect
+        id="test-combo"
+        items={[{ label: 'Item 1' }]}
+        itemToString={(item) => item?.label || ''}
+        inputProps={{
+          maxLength: 10,
+          placeholder: 'Type here',
+          'aria-label': 'Choose an item',
+          'aria-controls': 'test-combo__menu',
+          tabIndex: '0',
+          type: 'text',
+        }}
+      />
+    );
+    const input = screen.getByPlaceholderText('Type here');
+    const attributes = Array.from(input.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
+
+    expect(input).toBeInTheDocument();
+    expect(attributes).toEqual({
+      'aria-activedescendant': '',
+      'aria-autocomplete': 'list',
+      'aria-controls': 'test-combo__menu',
+      'aria-expanded': 'false',
+      'aria-haspopup': 'listbox',
+      'aria-label': 'Choose an item',
+      autocomplete: 'off',
+      class: 'cds--text-input cds--text-input--empty',
+      id: 'test-combo-input',
+      maxlength: '10',
+      placeholder: 'Type here',
+      role: 'combobox',
+      tabindex: '0',
+      type: 'text',
+      value: '',
+    });
+  });
+
+  it('should lose focus in one click after interacting with menu items', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+
+    // Open the menu
+    await user.click(combobox);
+    assertMenuOpen(mockProps);
+
+    // Verify input is focused
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Interact with menu items (click on an option to select it)
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    // Verify menu is still open and input is still focused after selection
+    assertMenuOpen(mockProps);
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Click outside the component (simulate clicking on document body)
+    await user.click(document.body);
+
+    // Menu should close and component should lose focus in ONE click
+    assertMenuClosed();
+    expect(combobox.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Verify onMenuChange was called to close the menu
+    expect(mockProps.onMenuChange).toHaveBeenLastCalledWith(false);
+  });
+
+  it('should not steal focus from TextInput after user interaction', async () => {
+    const user = userEvent.setup();
+
+    // Render both components in the same container
+    render(
+      <div>
+        <FilterableMultiSelect {...mockProps} />
+        <input type="text" data-testid="text-input" placeholder="Text input" />
+      </div>
+    );
+    await waitForPosition();
+
+    const multiselect = screen.getByRole('combobox');
+    const textInput = screen.getByTestId('text-input');
+
+    // Interact with FilterableMultiSelect
+    await user.click(multiselect);
+    assertMenuOpen(mockProps);
+
+    // Select an item
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    // Click on TextInput to move focus
+    await user.click(textInput);
+
+    // Verify focus is on TextInput and stays there
+    expect(textInput).toHaveFocus();
+
+    // Type in TextInput to ensure focus is stable
+    await user.type(textInput, 'test');
+    expect(textInput).toHaveValue('test');
+    expect(textInput).toHaveFocus();
+
+    // Verify FilterableMultiSelect lost focus
+    expect(multiselect.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+    assertMenuClosed();
+  });
+  it('should close menu options when open the menu and click on it again', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await openMenu();
+    expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
+    await openMenu();
+    assertMenuClosed();
+  });
+  it('should focus when user open menu, select one item, unselect item and close the menu', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await openMenu();
+    const options = screen.getAllByRole('option');
+    expect(options.length).toBe(mockProps.items.length);
+    await user.click(options[0]);
+    expect(options[0].closest(`.${prefix}--list-box__menu-item`)).toHaveClass(
+      `${prefix}--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted`
+    );
+    act(() => {
+      user.click(options[0]);
+    });
+    await openMenu();
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--list-box`)
+    ).toHaveClass(`${prefix}--multi-select--filterable--input-focused`);
+    assertMenuClosed();
+  });
+  it('should remove focus styling when tabbing away from component', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <div>
+        <FilterableMultiSelect {...mockProps} />
+        <button data-testid="other-button">Other Button</button>
+      </div>
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    const otherButton = screen.getByTestId('other-button');
+
+    // Open the menu and verify focus styling is applied
+    await user.click(combobox);
+    assertMenuOpen(mockProps);
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+
+    // Tab away to the other button
+    await user.tab();
+    expect(otherButton).toHaveFocus();
+
+    // Verify focus styling is removed
+    expect(combobox.closest(`.${prefix}--list-box`)).not.toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+  });
+
+  it('should render a "Select all" option at the top when enabled', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        items={[{ label: 'Select all', isSelectAll: true }, ...mockProps.items]}
+        selectAll
+      />
+    );
+    await waitForPosition();
+
+    await openMenu();
+    const options = screen.getAllByRole('option');
+    expect(options[0]).toHaveTextContent('Select all');
+  });
+
+  it('should select every non-disabled item when "Select all" is clicked', async () => {
+    const items = [
+      { label: 'Select all', isSelectAll: true },
+      ...generateItems(3, (i) => ({ label: `Item ${i}`, disabled: i === 2 })),
+    ];
+    render(<FilterableMultiSelect {...mockProps} items={items} selectAll />);
+    await waitForPosition();
+    await openMenu();
+
+    await userEvent.click(screen.getAllByRole('option')[0]);
+    expect(mockProps.onChange).toHaveBeenLastCalledWith({
+      selectedItems: [
+        { label: 'Item 0', disabled: false },
+        { label: 'Item 1', disabled: false },
+      ],
+    });
+  });
+
+  it('should clear every item when "Select all" is clicked if everything is already selected', async () => {
+    const items = [
+      { label: 'Select all', isSelectAll: true },
+      ...generateItems(2, generateGenericItem),
+    ];
+    const initial = items.slice(1);
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        items={items}
+        selectAll
+        initialSelectedItems={initial}
+      />
+    );
+    await waitForPosition();
+    await openMenu();
+
+    await userEvent.click(screen.getAllByRole('option')[0]);
+    expect(mockProps.onChange).toHaveBeenLastCalledWith({ selectedItems: [] });
+  });
+
+  it('should show the correct checkbox state (checked / indeterminate) on the "Select all" option', async () => {
+    const items = [
+      { label: 'Select all', isSelectAll: true },
+      ...generateItems(3, generateGenericItem),
+    ];
+    render(<FilterableMultiSelect {...mockProps} items={items} selectAll />);
+    await waitForPosition();
+    await openMenu();
+
+    const [selectAllOption, itemOption] = screen.getAllByRole('option');
+
+    // initial state should be empty
+    const checkbox = selectAllOption.querySelector('input[type="checkbox"]');
+    expect(checkbox).toHaveProperty('indeterminate', false);
+    expect(checkbox).toHaveProperty('checked', false);
+
+    // select all items
+    await userEvent.click(selectAllOption);
+    expect(checkbox).toHaveProperty('checked', true);
+    expect(checkbox).toHaveProperty('indeterminate', false);
+
+    // clear selection
+    await userEvent.click(selectAllOption);
+    expect(checkbox).toHaveProperty('checked', false);
+    expect(checkbox).toHaveProperty('indeterminate', false);
+
+    // select one item
+    await userEvent.click(itemOption);
+    expect(checkbox).toHaveProperty('checked', false);
+    expect(checkbox).toHaveProperty('indeterminate', true);
+  });
+
+  it('should update “Select all” checkbox state when filtering and then clearing the filter', async () => {
+    const items = [
+      { label: 'Select all', isSelectAll: true },
+      ...generateItems(4, generateGenericItem),
+    ];
+    render(<FilterableMultiSelect {...mockProps} items={items} selectAll />);
+    await waitForPosition();
+    await openMenu();
+
+    // filter for Item 2
+    const input = screen.getByRole('combobox');
+    await userEvent.type(input, 'Item 2');
+
+    const options = screen.getAllByRole('option');
+    expect(options).toHaveLength(2);
+    const selectAllOption = options[0];
+    const selectAllCheckbox = selectAllOption.querySelector(
+      'input[type="checkbox"]'
+    );
+
+    // select all filtered (Item 2)
+    await userEvent.click(selectAllOption);
+    expect(selectAllCheckbox).toHaveProperty('checked', true);
+    expect(selectAllCheckbox).toHaveProperty('indeterminate', false);
+
+    // clear filter, now only one item shown is selected
+    await userEvent.clear(input);
+    expect(selectAllCheckbox).toHaveProperty('checked', false);
+    expect(selectAllCheckbox).toHaveProperty('indeterminate', true);
+  });
+
+  it('should reflect external control actions for select all and clear', async () => {
+    const items = [
+      { label: 'Select all', isSelectAll: true },
+      { label: 'Item 0' },
+      { label: 'Item 1' },
+      { label: 'Item 2' },
+    ];
+
+    const ControlledFilterableMultiSelect = () => {
+      const [selectedItems, setSelectedItems] = React.useState([]);
+      return (
+        <>
+          <FilterableMultiSelect
+            id="controlled-filterable"
+            label="Controlled test"
+            items={items}
+            selectedItems={selectedItems}
+            onChange={(data) => setSelectedItems(data.selectedItems)}
+            selectAll
+            itemToString={(item) => (item ? item.label : '')}
+          />
+          <button
+            onClick={() =>
+              setSelectedItems(items.filter((i) => !i.isSelectAll))
+            }>
+            External Select All
+          </button>
+          <button onClick={() => setSelectedItems([])}>External Clear</button>
+        </>
+      );
+    };
+
+    render(<ControlledFilterableMultiSelect />);
+
+    // Trigger external select all
+    await userEvent.click(screen.getByText('External Select All'));
+
+    // Open dropdown to verify all items are selected
+    const combobox = screen.getByRole('combobox');
+    await userEvent.click(combobox);
+
+    let selectAllCheckbox = screen
+      .getAllByRole('option')[0]
+      .querySelector('input[type="checkbox"]');
+    expect(selectAllCheckbox).not.toBeNull();
+    expect(selectAllCheckbox.checked).toBe(true);
+
+    // Trigger external clear
+    await userEvent.click(screen.getByText('External Clear'));
+
+    // Re-open dropdown to verify cleared state
+    await userEvent.click(combobox);
+
+    selectAllCheckbox = screen
+      .getAllByRole('option')[0]
+      .querySelector('input[type="checkbox"]');
+    expect(selectAllCheckbox).not.toBeNull();
+    expect(selectAllCheckbox.checked).toBe(false);
+    expect(selectAllCheckbox.indeterminate).toBe(false);
+
+    // Ensure all individual items are unselected
+    screen
+      .getAllByRole('option')
+      .slice(1)
+      .forEach((opt) => expect(opt).toHaveAttribute('aria-selected', 'false'));
   });
 });

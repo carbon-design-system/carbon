@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +9,6 @@ import { html } from 'lit';
 import View16 from '@carbon/icons/lib/view/16.js';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../icon-button/index';
 import '../button/index';
@@ -49,7 +46,7 @@ const sizes = {
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -227,43 +224,6 @@ export const ExplainabilityPopover = {
           size="${AI_LABEL_SIZE.EXTRA_SMALL}">
           ${content} ${showActions ? actions : ''}
         </cds-ai-label>
-      </div>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      alignment,
-      aiTextLabel,
-      autoalign,
-      kind,
-      revertActive,
-      showActions,
-      size,
-    } = args ?? {};
-    return html`
-      <style>
-        ${styles}
-      </style>
-      <div class="ai-label-container">
-        <cds-ai-label
-          ?autoalign=${autoalign}
-          alignment="${ifDefined(alignment)}"
-          size="${size}"
-          kind="${kind}"
-          ai-text-label="${aiTextLabel}"
-          ?revert-active="${revertActive}">
-          ${content} ${showActions ? actions : ''}
-        </cds-ai-label>
-      </div>
-      <div style="display: inline-flex">
-        <cds-button>Test</cds-button>
-        <cds-button kind="danger">Test</cds-button>
-        <div></div>
       </div>
     `;
   },

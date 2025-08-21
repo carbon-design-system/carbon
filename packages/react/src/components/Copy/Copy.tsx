@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,46 +21,18 @@ import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 
-export type DeprecatedCopyAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedCopyAlignment = DeprecatedPopoverAlignment;
 
-export type NewCopyAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewCopyAlignment = NewPopoverAlignment;
 
-export type CopyAlignment = DeprecatedCopyAlignment | NewCopyAlignment;
-
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
+export type CopyAlignment = PopoverAlignment;
 
 export interface CopyProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -70,7 +42,8 @@ export interface CopyProps
   align?: CopyAlignment;
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -155,6 +128,7 @@ export default function Copy({
       autoAlign={autoAlign}
       className={classNames}
       label={animation ? feedback : initialLabel}
+      leaveDelayMs={animation ? feedbackTimeout : undefined}
       onClick={composeEventHandlers([onClick, handleClick])}
       onAnimationEnd={composeEventHandlers([
         onAnimationEnd,
@@ -201,7 +175,6 @@ Copy.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -216,12 +189,13 @@ Copy.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

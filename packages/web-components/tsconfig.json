@@ -14,6 +14,8 @@
     "rootDir": ".",
     "skipLibCheck": true,
     "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": true,
     "stripInternal": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

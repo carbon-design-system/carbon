@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,13 +8,14 @@
 import PropTypes from 'prop-types';
 import React, { ForwardedRef, RefObject } from 'react';
 import classnames from 'classnames';
-import { FilterableMultiSelect } from '../FilterableMultiSelect';
-import MultiSelect from '../MultiSelect';
+import {
+  FilterableMultiSelect,
+  MultiSelect,
+  type MultiSelectProps,
+} from '../MultiSelect';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 import { UseSelectProps } from 'downshift';
-import { MultiSelectProps } from '../MultiSelect/MultiSelect';
-import { FilterableMultiSelectProps } from '../MultiSelect/FilterableMultiSelect';
 
 interface OnChangeData<ItemType> {
   selectedItems: ItemType[] | null;
@@ -182,11 +183,12 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
       {isFilterable ? (
         // @ts-ignore
         <FilterableMultiSelect
-          ref={ref as RefObject<HTMLDivElement>}
+          ref={ref as RefObject<HTMLDivElement | null>}
           className={classNames}
           {...other}
         />
       ) : (
+        // @ts-ignore
         <MultiSelect ref={ref} className={classNames} {...other} />
       )}
     </FormContext.Provider>

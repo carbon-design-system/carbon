@@ -14,7 +14,11 @@
  */
 export default function requiredIfGivenPropIsTruthy(name, propType) {
   return function check(props, propName, componentName, ...rest) {
-    if (__DEV__ && props[name] == true && props[propName] == null) {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      props[name] == true &&
+      props[propName] == null
+    ) {
       return new Error(
         `You must provide a value for \`${propName}\` in \`${componentName}\` if \`${name}\` exists.`
       );

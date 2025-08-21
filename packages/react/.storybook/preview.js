@@ -11,7 +11,8 @@ import {
   Primary,
   Stories,
   ArgTypes,
-} from '@storybook/blocks';
+} from '@storybook/addon-docs/blocks';
+import { allModes } from './modes';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -74,7 +75,12 @@ const globalTypes = {
         {
           right: '🇺🇸',
           title: 'English',
-          value: 'en',
+          value: 'en-US',
+        },
+        {
+          right: '🇩🇪',
+          title: 'German',
+          value: 'de-DE',
         },
         {
           right: '🇵🇸',
@@ -149,24 +155,12 @@ const parameters = {
       cellSize: 8,
       opacity: 0.5,
     },
-    values: [
-      {
-        name: 'white',
-        value: white.background,
-      },
-      {
-        name: 'g10',
-        value: g10.background,
-      },
-      {
-        name: 'g90',
-        value: g90.background,
-      },
-      {
-        name: 'g100',
-        value: g100.background,
-      },
-    ],
+    options: {
+      white: { name: 'white', value: white.background },
+      g10: { name: 'g10', value: g10.background },
+      g90: { name: 'g90', value: g90.background },
+      g100: { name: 'g100', value: g100.background },
+    },
   },
   controls: {
     // https://storybook.js.org/docs/react/essentials/controls#show-full-documentation-for-each-property
@@ -195,14 +189,10 @@ const parameters = {
         <Stories includePrimary={false} />
       </>
     ),
+    codePanel: true,
   },
-  // Small (<672)
-  // Medium (672 - 1056px)
-  // Large (1056 - 1312px)
-  // X-Large (1312 - 1584px)
-  // Max (>1584)
   viewport: {
-    viewports: {
+    options: {
       sm: {
         name: 'Small',
         styles: {
@@ -330,6 +320,14 @@ const parameters = {
       return idA.localeCompare(idB);
     },
   },
+  chromatic: {
+    modes: {
+      g10: allModes['g10'],
+      g90: allModes['g90'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
+    },
+  },
 };
 
 const decorators = [
@@ -367,6 +365,7 @@ const preview = {
   parameters,
   decorators,
   globalTypes,
+  tags: ['autodocs'],
 };
 
 export default preview;

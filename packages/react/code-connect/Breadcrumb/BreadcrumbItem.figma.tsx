@@ -18,7 +18,7 @@ figma.connect(
       // state: figma.enum('State', { // in react skeleton state replaces the entire Breadcrumb component , not BreadcrumbItem
       //   Skeleton: 'skeleton',
       // }),
-      children: figma.string('Link text'),
+      children: figma.string('Text'),
     },
     example: ({ children }) => (
       <BreadcrumbItem href="#">{children}</BreadcrumbItem>
@@ -30,9 +30,9 @@ figma.connect(
   BreadcrumbItem,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3136-29234&t=U57NnoohldL54XAl-4',
   {
-    variant: { Type: 'Current page' },
+    variant: { State: 'Current' },
     props: {
-      children: figma.string('Link text'),
+      children: figma.string('Text'),
       isCurrentPage: figma.boolean('Current'),
     },
     example: ({ children, isCurrentPage }) => (

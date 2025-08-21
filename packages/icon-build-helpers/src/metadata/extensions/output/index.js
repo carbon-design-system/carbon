@@ -81,6 +81,7 @@ const output = (options = defaultOptions) => {
         const defaultAsset = icon.assets.find(
           (asset) => asset.size === defaultSize
         );
+        // eslint-disable-next-line require-atomic-updates
         icon.output = await Promise.all(
           sizes.map(async (size) => {
             const asset = icon.assets.find((asset) => asset.size === size);

@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
-import { Simulate } from 'react-dom/test-utils';
 import { FileUploaderItem } from '../';
 import { keys } from '../../../internal/keyboard';
 
@@ -42,13 +41,13 @@ describe('FileUploaderItem', () => {
     );
 
     let removeFile = getByLabel(edit.container, 'test-description - edit');
-    Simulate.click(removeFile);
+    fireEvent.click(removeFile);
     expect(onDelete).toHaveBeenCalledTimes(1);
 
-    Simulate.keyDown(removeFile, keys.Enter);
+    fireEvent.keyDown(removeFile, keys.Enter);
     expect(onDelete).toHaveBeenCalledTimes(2);
 
-    Simulate.keyDown(removeFile, keys.Space);
+    fireEvent.keyDown(removeFile, keys.Space);
     expect(onDelete).toHaveBeenCalledTimes(3);
 
     onDelete.mockReset();
@@ -66,13 +65,13 @@ describe('FileUploaderItem', () => {
     // eslint-disable-next-line testing-library/prefer-screen-queries
     removeFile = getByText(uploading.container, description);
 
-    Simulate.click(removeFile);
+    fireEvent.click(removeFile);
     expect(onDelete).not.toHaveBeenCalled();
 
-    Simulate.keyDown(removeFile, keys.Enter);
+    fireEvent.keyDown(removeFile, keys.Enter);
     expect(onDelete).not.toHaveBeenCalled();
 
-    Simulate.keyDown(removeFile, keys.Space);
+    fireEvent.keyDown(removeFile, keys.Space);
     expect(onDelete).not.toHaveBeenCalled();
   });
 });

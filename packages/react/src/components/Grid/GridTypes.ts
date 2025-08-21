@@ -6,8 +6,14 @@
  */
 
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import PropTypes from 'prop-types';
 
 export interface GridBaseProps {
+  /**
+   * Specify grid alignment. Default is center
+   */
+  align?: 'start' | 'center' | 'end';
+
   /**
    * Pass in content that will be rendered within the `Grid`
    */
@@ -44,5 +50,5 @@ export interface GridComponent {
     props: GridProps<T>
   ): React.ReactElement | null;
   displayName?: string;
-  propTypes?: React.WeakValidationMap<GridProps<any>>;
+  propTypes?: PropTypes.WeakValidationMap<GridProps<any>>;
 }

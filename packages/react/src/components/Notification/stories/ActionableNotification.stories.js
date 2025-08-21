@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { ActionableNotification } from '../../Notification';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import mdx from '../Notification.mdx';
 
 // eslint-disable-next-line storybook/csf-component
@@ -30,7 +30,9 @@ export default {
   },
 };
 
-export const Default = (args) => <ActionableNotification {...args} />;
+export const Default = (args) => (
+  <ActionableNotification {...args}></ActionableNotification>
+);
 
 Default.argTypes = {
   ['aria-label']: {

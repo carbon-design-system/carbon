@@ -12,12 +12,18 @@ import React, {
   useContext,
   useRef,
   useState,
+  useEffect,
   type ReactNode,
   type ComponentProps,
   type KeyboardEventHandler,
   type FocusEventHandler,
 } from 'react';
-import { Popover, type PopoverAlignment, PopoverContent } from '../Popover';
+import {
+  Popover,
+  type PopoverAlignment,
+  PopoverBaseProps,
+  PopoverContent,
+} from '../Popover';
 import { match, keys } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useId } from '../../internal/useId';
@@ -85,12 +91,7 @@ function useToggletip() {
   return useContext(ToggletipContext);
 }
 
-export interface ToggletipBaseProps {
-  align?: PopoverAlignment;
-  alignmentAxisOffset?: number;
-  autoAlign?: boolean;
-  className?: string;
-  children?: ReactNode;
+export interface ToggletipBaseProps extends Omit<PopoverBaseProps, 'open'> {
   defaultOpen?: boolean;
 }
 
@@ -131,6 +132,7 @@ export function Toggletip<E extends ElementType = 'span'>({
     buttonProps: {
       'aria-expanded': open,
       'aria-controls': id,
+      'aria-describedby': open ? id : undefined,
       onClick: actions.toggle,
     },
     contentProps: {
@@ -143,6 +145,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
   const onKeyDown: KeyboardEventHandler = (event) => {
     if (open && match(event, keys.Escape)) {
+      event.stopPropagation();
       actions.close();
 
       // If the menu is closed while focus is still inside the menu, it should return to the trigger button  (#12922)
@@ -171,11 +174,31 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   });
 
-  useWindowEvent('click', (event) => {
-    if (open && ref.current && !ref.current.contains(event.target as Node)) {
-      actions.close();
-    }
-  });
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const targetDocument = ref.current.ownerDocument || document;
+    const eventType: 'pointerdown' | 'mousedown' =
+      'PointerEvent' in window ? 'pointerdown' : 'mousedown';
+
+    const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
+      const node = event.target as Node | null;
+      if (open && node && !ref.current!.contains(node)) {
+        setOpen(false);
+      }
+    };
+
+    const options = { capture: true } as const;
+
+    targetDocument.addEventListener(eventType, handleOutsideClick, options);
+    return () => {
+      targetDocument.removeEventListener(
+        eventType,
+        handleOutsideClick,
+        options
+      );
+    };
+  }, [open]);
 
   return (
     <ToggletipContext.Provider value={value}>
@@ -198,64 +221,15 @@ export function Toggletip<E extends ElementType = 'span'>({
   );
 }
 
+// Get all the properties from Popover except for "open".
+// The Typescript types for PropTypes are really messed up so we need lots of
+// casting.  It will be great when we can finally get rid of PropTypes altogether.
+const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
+  {}) as unknown as PopoverBaseProps;
+
 Toggletip.propTypes = {
-  /**
-   * Specify how the toggletip should align with the button
-   */
-  align: PropTypes.oneOf([
-    'top',
-    'top-left', // deprecated use top-start instead
-    'top-right', // deprecated use top-end instead
-
-    'bottom',
-    'bottom-left', // deprecated use bottom-start instead
-    'bottom-right', // deprecated use bottom-end instead
-
-    'left',
-    'left-bottom', // deprecated use left-end instead
-    'left-top', // deprecated use left-start instead
-
-    'right',
-    'right-bottom', // deprecated use right-end instead
-    'right-top', // deprecated use right-start instead
-
-    // new values to match floating-ui
-    'top-start',
-    'top-end',
-    'bottom-start',
-    'bottom-end',
-    'left-end',
-    'left-start',
-    'right-end',
-    'right-start',
-  ]),
-
-  /**
-   * Provide an offset value for alignment axis.
-   */
-  alignmentAxisOffset: PropTypes.number,
-
-  /**
-   * Provide a custom element or component to render the top-level node for the
-   * component.
-   */
-  as: PropTypes.elementType,
-
-  /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
-   */
-  autoAlign: PropTypes.bool,
-
-  /**
-   * Custom children to be rendered as the content of the label
-   */
-  children: PropTypes.node,
-
-  /**
-   * Provide a custom class name to be added to the outermost node in the
-   * component
-   */
-  className: PropTypes.string,
+  // Has all of Popover's PropTypes except for "open".
+  ...popoverNonOpenPropTypes,
 
   /**
    * Specify if the toggletip should be open by default
@@ -354,8 +328,7 @@ const ToggletipContent = React.forwardRef<
     <PopoverContent
       className={customClassName}
       {...toggletip?.contentProps}
-      ref={ref}
-      aria-live="polite">
+      ref={ref}>
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );

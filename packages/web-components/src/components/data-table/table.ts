@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -757,6 +755,9 @@ class CDSTable extends HostListenerMixin(LitElement) {
           (elem as CDSTableRow).radio = this.radio;
         }
       );
+      if (this._tableHeaderRow) {
+        this._tableHeaderRow.hideCheckbox = this.radio;
+      }
     }
 
     if (changedProperties.has('size')) {
@@ -770,6 +771,12 @@ class CDSTable extends HostListenerMixin(LitElement) {
         }
       );
       this._tableToolbar?.setAttribute('size', this.size);
+      const batchActions = this.querySelector(
+        (this.constructor as typeof CDSTable).selectorTableBatchActions
+      );
+      if (batchActions) {
+        batchActions.setAttribute('size', this.size);
+      }
     }
 
     // TODO: Uncomment when Carbon fully implements Sticky header feature

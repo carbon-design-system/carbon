@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -15,11 +13,9 @@ import styles from './file-uploader.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
- * The shell UI for file uploader.
+ * The file uploader component.
  *
  * @element cds-file-uploader
- * @slot label-title.
- * @slot lebel-description.
  */
 @customElement(`${prefix}-file-uploader`)
 class CDSFileUploader extends LitElement {

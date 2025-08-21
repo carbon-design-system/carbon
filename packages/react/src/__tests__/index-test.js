@@ -14,7 +14,7 @@ describe('Carbon Components React', () => {
 
   it('should export components', () => {
     expect(Object.keys(Carbon).sort()).toMatchInlineSnapshot(`
-      Array [
+      [
         "AILabel",
         "AILabelActions",
         "AILabelContent",
@@ -252,6 +252,7 @@ describe('Carbon Components React', () => {
         "TreeView",
         "UnorderedList",
         "VStack",
+        "preview__Dialog",
         "unstable_FeatureFlags",
         "unstable_Layout",
         "unstable_LayoutDirection",
@@ -274,6 +275,8 @@ describe('Carbon Components React', () => {
         "unstable__FluidDropdownSkeleton",
         "unstable__FluidMultiSelect",
         "unstable__FluidMultiSelectSkeleton",
+        "unstable__FluidNumberInput",
+        "unstable__FluidNumberInputSkeleton",
         "unstable__FluidSearch",
         "unstable__FluidSearchSkeleton",
         "unstable__FluidSelect",

@@ -109,7 +109,7 @@ describe('ToastNotification', () => {
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
-  it('does not allow interactive elements as children', () => {
+  it('does not allow toast notification to have interactive elements as children', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => {
@@ -229,7 +229,7 @@ describe('InlineNotification', () => {
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
-  it('does not allow interactive elements as children', () => {
+  it('does not allow inline notification to have interactive elements as children', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => {
@@ -340,6 +340,20 @@ describe('ActionableNotification', () => {
     await waitFor(() => {
       expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
     });
+  });
+
+  it('supports `title`, `subtitle`, `caption` props', () => {
+    render(
+      <ActionableNotification
+        title="A title"
+        subtitle="A subtitle"
+        caption="00:00:00 AM"
+        actionButtonLabel="My custom action"></ActionableNotification>
+    );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryByText(/A title/i)).toBeInTheDocument();
+    expect(screen.queryByText(/A subtitle/i)).toBeInTheDocument();
+    expect(screen.queryByText(/00:00:00 AM/i)).toBeInTheDocument();
   });
 });
 

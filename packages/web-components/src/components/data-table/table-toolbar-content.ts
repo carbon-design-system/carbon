@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -33,8 +31,10 @@ class CDSTableToolbarContent extends LitElement {
   size;
 
   updated(changedProperties) {
-    if (changedProperties.has('hasBatchActions')) {
-      this.setAttribute('tabindex', `${this.hasBatchActions ? '-1' : ''}`);
+    if (this.hasBatchActions) {
+      this.setAttribute('tabindex', '-1');
+    } else {
+      this.removeAttribute('tabindex');
     }
 
     if (changedProperties.has('size')) {

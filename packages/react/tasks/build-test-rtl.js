@@ -1,7 +1,14 @@
+/**
+ * Copyright IBM Corp. 2022, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 'use strict';
 
 const clipboard = require('clipboardy');
-const prettier = require('prettier2');
+const prettier = require('prettier');
 const CarbonComponents = require('@carbon/react');
 const enquirer = require('enquirer');
 const fs = require('fs-extra');

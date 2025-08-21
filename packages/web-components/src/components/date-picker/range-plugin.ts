@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -8,7 +6,7 @@
  */
 
 // @ts-nocheck
-import rangePlugin, { Config } from 'flatpickr/dist/plugins/rangePlugin';
+import rangePlugin, { Config } from 'flatpickr/dist/plugins/rangePlugin.js';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
 import on from '../../globals/mixins/on';

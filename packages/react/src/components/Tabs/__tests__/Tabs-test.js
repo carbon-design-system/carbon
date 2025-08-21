@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import {
   Tabs,
@@ -590,8 +597,9 @@ describe('Tab', () => {
   });
 
   it('should render close icon when dismissable', () => {
+    const onTabCloseRequest = jest.fn();
     render(
-      <Tabs dismissable>
+      <Tabs dismissable onTabCloseRequest={onTabCloseRequest}>
         <TabList aria-label="List of tabs">
           <Tab>Tab Label 1</Tab>
           <Tab>Tab Label 2</Tab>
@@ -611,8 +619,9 @@ describe('Tab', () => {
   });
 
   it('should render close icon and renderIcon when dismissable and icon supplied', () => {
+    const onTabCloseRequest = jest.fn();
     render(
-      <Tabs dismissable>
+      <Tabs dismissable onTabCloseRequest={onTabCloseRequest}>
         <TabList aria-label="List of tabs">
           <Tab renderIcon={() => <svg data-testid="svg" />}>Tab Label 1</Tab>
           <Tab>Tab Label 2</Tab>

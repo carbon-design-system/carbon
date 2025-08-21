@@ -80,6 +80,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-text {
     overflow: hidden;
+    padding: $spacing-01;
+    margin: -$spacing-01;
   }
 
   .#{$prefix}--progress-label {

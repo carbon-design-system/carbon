@@ -11,7 +11,7 @@ import { FeatureFlags } from '../FeatureFlags';
 import { MenuItem } from '../Menu';
 import { OverflowMenuV2 } from './';
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import userEvent from '@testing-library/user-event';
 
 describe('<OverflowMenuV2 />', () => {
@@ -84,9 +84,7 @@ describe('<OverflowMenuV2 />', () => {
 
     const button = screen.getByRole('button', { name: /options/i });
 
-    await act(async () => {
-      await userEvent.click(button);
-    });
+    await userEvent.click(button);
 
     const stopAppMenuItem = await screen.findByRole('menuitem', {
       name: /Stop app/i,

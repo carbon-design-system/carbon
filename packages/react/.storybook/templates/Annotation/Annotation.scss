@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @use 'sass:map';
 
 @use '@carbon/styles/scss/colors';
@@ -9,6 +16,11 @@
 @use '../prefix' as *;
 
 $types: (
+  'background': (
+    border: colors.$magenta-50,
+    background: tag.$tag-background-magenta,
+    color: tag.$tag-color-magenta,
+  ),
   'deprecation-notice': (
     border: colors.$red-50,
     background: tag.$tag-background-red,
@@ -58,6 +70,11 @@ $types: (
 
 .#{$prefix}--annotation__content {
   padding: spacing.$spacing-05;
+}
+
+.#{$prefix}--annotation--background {
+  margin: -42px;
+  min-block-size: 100vh;
 }
 
 @each $type, $colors in $types {

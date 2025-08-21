@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,7 +42,6 @@ export {
   useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
-export * from './components/FilterableMultiSelect';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
@@ -66,6 +65,7 @@ export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
+export * as preview__Dialog from './components/Dialog';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
 export * from './components/PaginationNav';
@@ -140,6 +140,10 @@ export {
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
+export {
+  FluidNumberInput as unstable__FluidNumberInput,
+  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+} from './components/FluidNumberInput';
 export {
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
@@ -288,9 +292,6 @@ export type { DatePickerProps } from './components/DatePicker/DatePicker';
 
 //date picker input
 export type { DatePickerInputProps } from './components/DatePickerInput/DatePickerInput';
-
-//dialog
-export type { DialogProps } from './components/Dialog/index';
 
 //dropdown
 export type { DropdownProps } from './components/Dropdown/Dropdown';
@@ -455,8 +456,20 @@ export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
+  PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
 } from './components/PageHeader';
+
+export type {
+  DialogProps,
+  DialogHeaderProps,
+  DialogControlsProps,
+  DialogCloseButtonProps,
+  DialogTitleProps,
+  DialogSubtitleProps,
+  DialogBodyProps,
+  DialogFooterProps,
+} from './components/Dialog';
 
 //pagination
 export type { PaginationProps } from './components/Pagination/Pagination';

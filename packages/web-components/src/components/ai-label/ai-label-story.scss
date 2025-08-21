@@ -1,6 +1,4 @@
 /**
-* @license
-*
 * Copyright IBM Corp. 2019, 2024
 *
 * This source code is licensed under the Apache-2.0 license found in the
@@ -41,7 +39,9 @@ p {
   color: $text-secondary;
 }
 
-h1 {
+.ai-label-heading {
+  font-size: 2.625rem;
+  font-weight: 300;
   margin-block-end: $spacing-05;
 }
 

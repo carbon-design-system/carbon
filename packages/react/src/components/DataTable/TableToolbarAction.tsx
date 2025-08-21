@@ -1,14 +1,13 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
-import { ForwardRefReturn } from '../../types/common';
 
 export interface TableToolbarActionProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
@@ -23,16 +22,13 @@ export interface TableToolbarActionProps
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export type TableToolbarActionComponent = ForwardRefReturn<
-  HTMLDivElement,
-  TableToolbarActionProps
->;
+const frFn = forwardRef<HTMLDivElement, TableToolbarActionProps>;
 
-const TableToolbarAction: TableToolbarActionComponent = React.forwardRef(
-  ({ children, ...rest }, ref) => {
-    return <OverflowMenuItem ref={ref} itemText={children} {...rest} />;
-  }
-);
+const TableToolbarAction = frFn((props, ref) => {
+  const { children, ...rest } = props;
+
+  return <OverflowMenuItem ref={ref} itemText={children} {...rest} />;
+});
 
 TableToolbarAction.displayName = 'TableToolbarAction';
 TableToolbarAction.propTypes = {

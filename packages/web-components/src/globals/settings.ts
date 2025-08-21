@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -14,11 +12,12 @@ const prefix = 'cds';
  * Borrowed from `carbon-angular`. tabbable === focusable.
  */
 const selectorTabbable = `
-  a[href], area[href], input:not([disabled]):not([tabindex='-1']),
+  a[href]:not(#start-sentinel, #end-sentinel), area[href], input:not([disabled]):not([tabindex='-1']),
   button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']),
   textarea:not([disabled]):not([tabindex='-1']),
   iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true],
   ${prefix}-accordion-item,
+  ${prefix}-actionable-notification-button,
   ${prefix}-button,
   ${prefix}-breadcrumb-link,
   ${prefix}-checkbox,
@@ -31,6 +30,7 @@ const selectorTabbable = `
   ${prefix}-table-toolbar-search,
   ${prefix}-date-picker-input,
   ${prefix}-dropdown,
+  ${prefix}-icon-button,
   ${prefix}-input,
   ${prefix}-link,
   ${prefix}-number-input,
@@ -68,7 +68,8 @@ const selectorTabbable = `
   ${prefix}-header-nav-item,
   ${prefix}-side-nav-link,
   ${prefix}-side-nav-menu,
-  ${prefix}-side-nav-menu-item
+  ${prefix}-side-nav-menu-item,
+  ${prefix}-slug
 `;
 
 // Because we're going to have a bunch of exports

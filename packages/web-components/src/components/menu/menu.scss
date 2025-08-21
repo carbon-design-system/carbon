@@ -17,17 +17,21 @@ $css--plex: true !default;
 
 :host(#{$prefix}-menu) {
   position: fixed;
-  --grid-template: 1rem 1fr max-content;
+  --grid-template: 1fr max-content;
   --display-icon-item: none;
   --display-selection-icon: none;
-  --block-size-value: $spacing-07;
+  --block-size-value: #{$spacing-07};
 }
 .#{$prefix}--menu--with-icons {
-  --grid-template: 1rem 1rem 1fr max-content;
+  --grid-template: #{$spacing-05} 1fr max-content;
   --display-icon-item: flex;
 }
 .#{$prefix}--menu--with-selectable-items {
   --display-selection-icon: flex;
+}
+
+.#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items {
+  --grid-template: #{$spacing-05} #{$spacing-05} 1fr max-content;
 }
 
 .#{$prefix}--menu {

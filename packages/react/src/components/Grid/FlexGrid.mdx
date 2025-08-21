@@ -1,10 +1,10 @@
-import { Story, Canvas, ArgTypes, Meta } from '@storybook/blocks';
+import { Story, Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
 import * as FlexGridStories from './FlexGrid.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
-# Grid
+# FlexGrid
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Grid)
 &nbsp;|&nbsp;
@@ -28,7 +28,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Using the `as` prop](#using-the-as-prop)
 - [FAQ](#faq)
   - [How can I hide columns at a certain breakpoint?](#how-can-i-hide-columns-at-a-certain-breakpoint)
-  - [Can I nest grid components?](#can-i-nest-grid-components)
+  - [Can I nest FlexGrid components?](#can-i-nest-flexgrid-components)
+  - [Why are the FlexGrid styles not working?](#why-are-the-flexgrid-styles-not-working)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -77,7 +78,7 @@ they don't span more columns than the total number of columns in the grid.
 To specify how many columns the `Column` component should span, you can use the
 `sm`, `md`, `lg`, `xlg`, or `max` props. These props are shorthand versions of
 the names given to each of the breakpoints defined by the
-[2x Grid](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#responsive-options).
+[2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints).
 In the example below, we will use the `lg` prop for the large breakpoint and the
 number `4` to specify that each `Column` component should span 4 columns at that
 breakpoint.
@@ -117,7 +118,7 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 ## Gutter modes
 
 There are several
-[gutter modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#gutter-modes)
+[gutter modes](https://carbondesignsystem.com/elements/2x-grid/overview/#gutters)
 that you can use depending on the layout effect you're looking to achieve. By
 default, `FlexGrid` uses the wide gutter mode with a 32px gutter. However, you
 can use the `narrow` or `condensed` props to enable the narrow and condensed

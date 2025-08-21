@@ -1,83 +1,99 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { Children, forwardRef, type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
+import TableSlugRow from './TableSlugRow';
+import TableDecoratorRow from './TableDecoratorRow';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
+import type { TableRowExpandInteropProps } from './TableExpandRow';
 
-export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
+export interface TableRowProps
+  extends HTMLAttributes<HTMLTableRowElement>,
+    TableRowExpandInteropProps {
   /**
    * Specify an optional className to be applied to the container node
    */
   className?: string;
-  /**
-   * Specify if the row is selected
-   */
-  isSelected?: boolean;
 }
 
-const TableRow = React.forwardRef<HTMLTableCellElement, TableRowProps>(
-  (props, ref) => {
-    const prefix = usePrefix();
+const frFn = forwardRef<HTMLTableRowElement, TableRowProps>;
 
-    let rowHasAILabel;
-    if (props?.children) {
-      React.Children.toArray(props.children).map((child: any) => {
-        if (
-          child.type?.displayName === 'TableSlugRow' ||
-          child.type?.displayName === 'TableDecoratorRow'
-        ) {
-          if (
-            child.props.slug ||
-            child.props.decorator?.type.displayName === 'AILabel'
-          ) {
-            rowHasAILabel = true;
-          }
-        }
-      });
-    }
-    // Remove unnecessary props if provided to this component, these are
-    // only useful in `TableExpandRow`
-    const className = cx(props.className, {
-      [`${prefix}--data-table--selected`]: props.isSelected,
-      [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
-        rowHasAILabel,
-    });
+const TableRow = frFn((props, ref) => {
+  // Remove unnecessary props if provided to this component, these are
+  // only useful in `TableExpandRow`
+  const {
+    ariaLabel,
+    'aria-label': ariaLabelAlt,
+    'aria-controls': ariaControls,
+    onExpand,
+    isExpanded,
+    isSelected,
+    ...cleanProps
+  } = props;
 
-    const {
-      ariaLabel,
-      'aria-label': ariaLabelAlt,
-      'aria-controls': ariaControls,
-      onExpand,
-      isExpanded,
-      isSelected,
-      ...cleanProps
-    } = props as any;
+  const prefix = usePrefix();
 
-    if (className) {
-      cleanProps.className = className;
+  const rowHasAILabel = Children.toArray(props.children).some((child) => {
+    if (isComponentElement(child, TableSlugRow)) {
+      return !!child.props.slug;
     }
 
-    return <tr ref={ref} {...cleanProps} />;
+    return (
+      isComponentElement(child, TableDecoratorRow) &&
+      isComponentElement(child.props.decorator, AILabel)
+    );
+  });
+
+  const className = cx(props.className, {
+    [`${prefix}--data-table--selected`]: isSelected,
+    [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+      rowHasAILabel,
+  });
+
+  if (className) {
+    cleanProps.className = className;
   }
-);
+
+  return <tr ref={ref} {...cleanProps} />;
+});
 
 TableRow.propTypes = {
   /**
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
-
   /**
    * Specify if the row is selected
    */
   isSelected: PropTypes.bool,
+  /**
+   * Non-standard alias for `aria-label`.
+   */
+  ariaLabel: PropTypes.string,
+  /**
+   * Accessible label for the row element.
+   */
+  'aria-label': PropTypes.string,
+  /**
+   * Associates this row with the id of the corresponding expanded row content.
+   */
+  'aria-controls': PropTypes.string,
+  /**
+   * Handler called when the row’s expand toggle is clicked.
+   */
+  onExpand: PropTypes.func,
+  /**
+   * Flag indicating whether the row is currently expanded.
+   */
+  isExpanded: PropTypes.bool,
 };
 
 export default TableRow;

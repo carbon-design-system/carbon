@@ -106,7 +106,6 @@ SideNavSwitcher.propTypes = {
    * `<option>`. The text value will be what is displayed to the user and is set
    * as the `value` prop for each `<option>`.
    */
-  // @ts-expect-error
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

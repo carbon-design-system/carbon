@@ -48,7 +48,7 @@ export interface ColumnBaseProps {
    * Specify column span for the `lg` breakpoint (Default breakpoint up to 1312px)
    * This breakpoint supports 16 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   lg?: ColumnSpan;
 
@@ -56,7 +56,7 @@ export interface ColumnBaseProps {
    * Specify column span for the `max` breakpoint. This breakpoint supports 16
    * columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   max?: ColumnSpan;
 
@@ -64,7 +64,7 @@ export interface ColumnBaseProps {
    * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
    * This breakpoint supports 8 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   md?: ColumnSpan;
 
@@ -72,7 +72,7 @@ export interface ColumnBaseProps {
    * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
    * This breakpoint supports 4 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   sm?: ColumnSpan;
 
@@ -80,7 +80,7 @@ export interface ColumnBaseProps {
    * Specify column span for the `xlg` breakpoint (Default breakpoint up to
    * 1584px) This breakpoint supports 16 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   xlg?: ColumnSpan;
 
@@ -101,56 +101,52 @@ export interface ColumnComponent {
   ): React.ReactElement<any, any> | null;
 }
 
-const Column = React.forwardRef(function Column<
-  T extends React.ElementType = 'div',
+const Column = React.forwardRef<
+  any,
+  ColumnBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
 >(
-  {
-    as,
-    children,
-    className: customClassName,
-    sm,
-    md,
-    lg,
-    xlg,
-    max,
-    ...rest
-  }: ColumnProps<T>,
-  ref?: PolymorphicRef<T>
-) {
-  const { mode } = useGridSettings();
-  const prefix = usePrefix();
-  const BaseComponent = as || 'div';
+  (
+    { as, children, className: customClassName, sm, md, lg, xlg, max, ...rest },
+    ref
+  ) => {
+    const { mode } = useGridSettings();
+    const prefix = usePrefix();
+    const BaseComponent = as || 'div';
 
-  if (mode === 'css-grid') {
+    if (mode === 'css-grid') {
+      return (
+        <CSSGridColumn
+          as={BaseComponent}
+          className={customClassName}
+          sm={sm}
+          md={md}
+          ref={ref}
+          lg={lg}
+          xlg={xlg}
+          max={max}
+          {...rest}>
+          {children}
+        </CSSGridColumn>
+      );
+    }
+
+    const columnClassName = getClassNameForFlexGridBreakpoints(
+      [sm, md, lg, xlg, max],
+      prefix
+    );
+    const className = cx(customClassName, columnClassName, {
+      [`${prefix}--col`]: columnClassName.length === 0,
+    });
+
     return (
-      <CSSGridColumn
-        as={BaseComponent}
-        className={customClassName}
-        sm={sm}
-        md={md}
-        lg={lg}
-        xlg={xlg}
-        max={max}
-        {...rest}>
+      <BaseComponent className={className} ref={ref} {...rest}>
         {children}
-      </CSSGridColumn>
+      </BaseComponent>
     );
   }
-
-  const columnClassName = getClassNameForFlexGridBreakpoints(
-    [sm, md, lg, xlg, max],
-    prefix
-  );
-  const className = cx(customClassName, columnClassName, {
-    [`${prefix}--col`]: columnClassName.length === 0,
-  });
-
-  return (
-    <BaseComponent className={className} ref={ref} {...rest}>
-      {children}
-    </BaseComponent>
-  );
-});
+);
 
 const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
 
@@ -195,7 +191,7 @@ Column.propTypes = {
    * Specify column span for the `lg` breakpoint (Default breakpoint up to 1312px)
    * This breakpoint supports 16 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   lg: spanPropType,
 
@@ -203,7 +199,7 @@ Column.propTypes = {
    * Specify column span for the `max` breakpoint. This breakpoint supports 16
    * columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   max: spanPropType,
 
@@ -211,7 +207,7 @@ Column.propTypes = {
    * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
    * This breakpoint supports 8 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   md: spanPropType,
 
@@ -219,7 +215,7 @@ Column.propTypes = {
    * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
    * This breakpoint supports 4 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   sm: spanPropType,
 
@@ -233,39 +229,50 @@ Column.propTypes = {
    * Specify column span for the `xlg` breakpoint (Default breakpoint up to
    * 1584px) This breakpoint supports 16 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   xlg: spanPropType,
 };
 
-function CSSGridColumn({
-  as: BaseComponent = 'div',
-  children,
-  className: containerClassName,
-  sm,
-  md,
-  lg,
-  xlg,
-  max,
-  span,
-  ...rest
-}: ColumnProps<any>) {
-  const prefix = usePrefix();
-  const breakpointClassName = getClassNameForBreakpoints(
-    [sm, md, lg, xlg, max],
-    prefix
-  );
-  const spanClassName = getClassNameForSpan(span, prefix);
-  const className = cx(containerClassName, breakpointClassName, spanClassName, {
-    [`${prefix}--css-grid-column`]: true,
-  });
+const CSSGridColumn = React.forwardRef<any, ColumnProps<any>>(
+  (
+    {
+      as: BaseComponent = 'div',
+      children,
+      className: containerClassName,
+      sm,
+      md,
+      lg,
+      xlg,
+      max,
+      span,
+      ...rest
+    },
+    ref
+  ) => {
+    // Add ref parameter
+    const prefix = usePrefix();
+    const breakpointClassName = getClassNameForBreakpoints(
+      [sm, md, lg, xlg, max],
+      prefix
+    );
+    const spanClassName = getClassNameForSpan(span, prefix);
+    const className = cx(
+      containerClassName,
+      breakpointClassName,
+      spanClassName,
+      {
+        [`${prefix}--css-grid-column`]: true,
+      }
+    );
 
-  return (
-    <BaseComponent className={className} {...rest}>
-      {children}
-    </BaseComponent>
-  );
-}
+    return (
+      <BaseComponent className={className} ref={ref} {...rest}>
+        {children}
+      </BaseComponent>
+    );
+  }
+);
 
 CSSGridColumn.propTypes = {
   /**
@@ -287,7 +294,7 @@ CSSGridColumn.propTypes = {
    * Specify column span for the `lg` breakpoint (Default breakpoint up to 1312px)
    * This breakpoint supports 16 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   lg: spanPropType,
 
@@ -295,7 +302,7 @@ CSSGridColumn.propTypes = {
    * Specify column span for the `max` breakpoint. This breakpoint supports 16
    * columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   max: spanPropType,
 
@@ -303,7 +310,7 @@ CSSGridColumn.propTypes = {
    * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
    * This breakpoint supports 8 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   md: spanPropType,
 
@@ -311,7 +318,7 @@ CSSGridColumn.propTypes = {
    * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
    * This breakpoint supports 4 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   sm: spanPropType,
 
@@ -333,7 +340,7 @@ CSSGridColumn.propTypes = {
    * Specify column span for the `xlg` breakpoint (Default breakpoint up to
    * 1584px) This breakpoint supports 16 columns by default.
    *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * @see https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints
    */
   xlg: spanPropType,
 };

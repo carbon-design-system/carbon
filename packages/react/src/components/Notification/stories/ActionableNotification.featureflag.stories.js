@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { ActionableNotification } from '../../Notification';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { WithFeatureFlags } from '../../../../.storybook/templates/WithFeatureFlags';
 
 // eslint-disable-next-line storybook/csf-component

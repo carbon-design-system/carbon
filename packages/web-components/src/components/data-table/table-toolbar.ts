@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -11,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { CDSTableToolbarContent } from '../..';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -29,18 +26,27 @@ class CDSTableToolbar extends LitElement {
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'section');
+      this.setAttribute('role', 'toolbar');
     }
     super.connectedCallback();
   }
 
   updated(changedProperties) {
     if (changedProperties.has('size')) {
-      (
-        this.querySelector(
-          (this.constructor as typeof CDSTableToolbar).selectorToolbarContent
-        ) as CDSTableToolbarContent
-      ).size = this.size;
+      const toolbarContent = this.querySelector(
+        (this.constructor as typeof CDSTableToolbar).selectorToolbarContent
+      );
+      const batchActions = this.querySelector(
+        (this.constructor as typeof CDSTableToolbar).selectorBatchActions
+      );
+
+      if (toolbarContent) {
+        toolbarContent.setAttribute('size', this.size);
+      }
+
+      if (batchActions) {
+        batchActions.setAttribute('size', this.size);
+      }
     }
   }
 
@@ -53,6 +59,13 @@ class CDSTableToolbar extends LitElement {
    */
   static get selectorToolbarContent() {
     return `${prefix}-table-toolbar-content`;
+  }
+
+  /**
+   * The CSS selector to find the batch actions
+   */
+  static get selectorBatchActions() {
+    return `${prefix}-table-batch-actions`;
   }
 
   static styles = styles;

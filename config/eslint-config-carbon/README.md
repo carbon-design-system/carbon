@@ -49,3 +49,9 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 ## 📝 License
 
 Licensed under the [Apache 2.0 License](/LICENSE).
+
+<!--
+TODO: ESLint v9 is a peer dependency in `eslint-config-carbon`. None of the
+ESLint configs in this package are ESLint v9 compatible.
+https://github.com/carbon-design-system/carbon/issues/18991
+-->

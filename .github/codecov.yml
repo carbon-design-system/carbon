@@ -1,3 +1,6 @@
+fixes:
+  - 'es/components/::packages/web-components/src/components/'
+  - '../feature-flags/es/::packages/feature-flags/es/'
 coverage:
   status:
     project:
@@ -59,3 +62,7 @@ component_management:
       name: upgrade
       paths:
         - ../packages/upgrade/**
+    - component_id: web-components
+      name: web-components
+      paths:
+        - packages/web-components/**

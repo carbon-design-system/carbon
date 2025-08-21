@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,8 +17,9 @@ import React, {
   useRef,
   useState,
   ReactNode,
+  type JSX,
 } from 'react';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 export interface FeatureFlagsProps {
   children?: ReactNode;
@@ -30,6 +31,7 @@ export interface FeatureFlagsProps {
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
   enableDialogElement?: boolean;
   enableV12DynamicFloatingStyles?: boolean;
+  enableEnhancedFileUploader?: boolean;
 }
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
@@ -52,6 +54,7 @@ function FeatureFlags({
   enableExperimentalFocusWrapWithoutSentinels = false,
   enableDialogElement = false,
   enableV12DynamicFloatingStyles = false,
+  enableEnhancedFileUploader = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
@@ -65,6 +68,7 @@ function FeatureFlags({
       enableExperimentalFocusWrapWithoutSentinels,
     'enable-dialog-element': enableDialogElement,
     'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
+    'enable-enhanced-file-uploader': enableEnhancedFileUploader,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {
@@ -115,6 +119,7 @@ FeatureFlags.propTypes = {
   enableExperimentalFocusWrapWithoutSentinels: PropTypes.bool,
   enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
+  enableEnhancedFileUploader: PropTypes.bool,
 };
 
 /**

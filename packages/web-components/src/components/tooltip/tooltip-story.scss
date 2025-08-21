@@ -35,3 +35,12 @@
 .sb-tooltip-trigger svg {
   fill: theme.$background-inverse;
 }
+
+// DefinitionTooltip
+.sb-definition-tooltip {
+  max-inline-size: 60ch;
+}
+
+.sb-definition-tooltip p {
+  @include type.type-style('body-short-02');
+}

@@ -235,4 +235,35 @@ test.describe('@avt Tabs', () => {
     await page.keyboard.press('Delete');
     await expect(page.getByRole('tab', { name: 'Tab label 4' })).toBeHidden();
   });
+
+  test('@avt-keyboard-nav - horizontal manual scroll', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tabs',
+      id: 'components-tabs--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    // Set viewport size so scroll buttons appear
+    await page.setViewportSize({
+      width: 200,
+      height: 480,
+    });
+    await page.waitForSelector('.cds--tab--overflow-nav-button--next', {
+      state: 'visible',
+    });
+
+    // Right scroll button should disappear after manually scrolling horizontally to end of tabs
+    const tabList = page.locator('.cds--tab--list');
+    const lastElement = page.getByText('Settings').nth(1);
+    const nextButton = page.getByLabel('Scroll right');
+    await tabList.hover();
+    await lastElement.scrollIntoViewIfNeeded();
+    await page.waitForSelector('.cds--tab--overflow-nav-button--next', {
+      state: 'hidden',
+      timeout: 1000,
+    });
+    await expect(nextButton).toBeHidden();
+  });
 });

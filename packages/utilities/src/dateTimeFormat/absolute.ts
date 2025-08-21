@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,10 +10,12 @@ export function formatTime(
   options?: Partial<{
     locale: string;
     style: Intl.DateTimeFormatOptions['timeStyle'];
+    timeZone: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ): string {
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     timeStyle: options?.style ?? 'short',
+    timeZone: options?.timeZone,
   });
 
   return dtf.format(date);
@@ -24,10 +26,12 @@ export function formatDate(
   options?: Partial<{
     locale: string;
     style: Intl.DateTimeFormatOptions['dateStyle'];
+    timeZone: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ): string {
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     dateStyle: options?.style ?? 'medium',
+    timeZone: options?.timeZone,
   });
 
   return dtf.format(date);
@@ -40,6 +44,7 @@ export function format(
     style: Intl.DateTimeFormatOptions['timeStyle'] | 'tooltip';
     timeStyle: Intl.DateTimeFormatOptions['timeStyle'];
     dateStyle: Intl.DateTimeFormatOptions['dateStyle'];
+    timeZone: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ) {
   const timeStyle =
@@ -55,6 +60,7 @@ export function format(
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     timeStyle,
     dateStyle,
+    timeZone: options?.timeZone,
   });
 
   return dtf.format(date);
@@ -68,6 +74,7 @@ export function formatRange(
     style: Intl.DateTimeFormatOptions['timeStyle'];
     timeStyle: Intl.DateTimeFormatOptions['timeStyle'] | null;
     dateStyle: Intl.DateTimeFormatOptions['dateStyle'] | null;
+    timeZone: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ) {
   const timeStyle =
@@ -83,6 +90,7 @@ export function formatRange(
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     timeStyle,
     dateStyle,
+    timeZone: options?.timeZone,
   });
 
   return dtf.formatRange(startDate, endDate);

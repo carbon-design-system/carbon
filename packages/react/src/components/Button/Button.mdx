@@ -1,4 +1,4 @@
-import { Story, ArgTypes, Canvas, Unstyled, Meta } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Unstyled, Meta } from '@storybook/addon-docs/blocks';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
@@ -15,19 +15,18 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/button/accessibility)
 
-## Table of Contents
-
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
-- [Buttons](#Buttons)
-  - [Overview](#overview)
-  - [Secondary Button](#secondary)
-  - [Tertiary Button](#tertiary)
-  - [Ghost Button](#ghost)
-  - [Danger Button](#danger-button)
-  - [Icon-only Button](#icon-only-button)
-  - [Set of Buttons](#set-of-buttons)
-  - [Skeleton state](#skeleton-state)
+## Table of Contents
+
+- [Overview](#overview)
+- [Secondary](#secondary)
+- [Tertiary](#tertiary)
+- [Ghost](#ghost)
+- [Danger Button](#danger-button)
+- [Icon-only Button](#icon-only-button)
+- [Set of Buttons](#set-of-buttons)
+- [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
   - [Button `as`](#button-as)
   - [Button `className`](#button-classname)
@@ -64,6 +63,7 @@ user interacts with it.
 />
 
 ## Secondary
+
 <Canvas
   of={ButtonStories.Secondary}
   additionalActions={[
@@ -75,6 +75,7 @@ user interacts with it.
 />
 
 ## Tertiary
+
 <Canvas
   of={ButtonStories.Tertiary}
   additionalActions={[
@@ -86,6 +87,7 @@ user interacts with it.
 />
 
 ## Ghost
+
 <Canvas
   of={ButtonStories.Ghost}
   additionalActions={[
@@ -346,9 +348,9 @@ an element appear as a button control to a screen reader. Check out the
 
 ### Button `size`
 
-This prop specifies which size the `Button` should be rendered at. Valid values
-are `sm`, `md`, `lg`, `xl`, and `2xl`. If no `size` is specified, it renders as
-`lg`.
+This attribute specifies at which size the `button` should be rendered. Valid
+values are `sm`, `md`, `lg`, `xl`, and `2xl`. If no size is specified, it
+renders as `lg`.
 
 <Button>Submit</Button> <Button size="sm">Submit</Button> <Button size="md">
   Submit
@@ -450,4 +452,3 @@ By passing in `stacked` to the `ButtonSet` component, you can arrange your two
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Button/Button.mdx)
--->

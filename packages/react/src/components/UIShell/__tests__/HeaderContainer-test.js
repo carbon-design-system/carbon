@@ -22,7 +22,7 @@ describe('HeaderContainer', () => {
         isSideNavExpanded: false,
         onClickSideNavExpand: expect.any(Function),
       },
-      {}
+      undefined
     );
   });
 
@@ -39,7 +39,7 @@ describe('HeaderContainer', () => {
         isSideNavExpanded: true,
         onClickSideNavExpand: expect.any(Function),
       },
-      {}
+      undefined
     );
 
     act(() => {
@@ -51,7 +51,7 @@ describe('HeaderContainer', () => {
         isSideNavExpanded: false,
         onClickSideNavExpand: expect.any(Function),
       },
-      {}
+      undefined
     );
   });
 
@@ -70,7 +70,7 @@ describe('HeaderContainer', () => {
         onClickSideNavExpand: expect.any(Function),
         ...rest,
       },
-      {}
+      undefined
     );
   });
 
@@ -85,7 +85,7 @@ describe('HeaderContainer', () => {
         isSideNavExpanded: false,
         onClickSideNavExpand: expect.any(Function),
       },
-      {}
+      undefined
     );
   });
 });

@@ -1,21 +1,35 @@
 {
   "name": "id-prefix",
+  "description": "ID prefix example",
   "private": true,
-  "version": "0.76.0",
+  "version": "0.86.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "examples/id-prefix"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.79.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@carbon/react": "^1.89.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.0.0",
     "sass": "^1.77.7",
-    "vite": "^4.3.8"
+    "vite": "^6.3.5"
   }
 }

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -204,7 +202,9 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
     // Specifies child `<cds-tab>` to hide its divider instead of using CSS,
     // until `:host-context()` gets supported in all major browsers
-    (nextItem as CDSTab).hideDivider = true;
+    if (nextItem) {
+      (nextItem as CDSTab).hideDivider = true;
+    }
   }
 
   protected _selectionDidChange(itemToSelect: CDSTab) {

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -14,6 +12,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 /**
  * Skeleton of tab.
+ *
+ * @element cds-tab-skeleton
  */
 @customElement(`${prefix}-tab-skeleton`)
 export default class CDSTabSkeleton extends LitElement {
