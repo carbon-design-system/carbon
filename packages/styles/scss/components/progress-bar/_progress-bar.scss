@@ -114,9 +114,12 @@
   }
 
   .#{$prefix}--progress-bar--error .#{$prefix}--progress-bar__bar,
-  .#{$prefix}--progress-bar--error .#{$prefix}--progress-bar__status-icon,
-  .#{$prefix}--progress-bar--error .#{$prefix}--progress-bar__helper-text {
+  .#{$prefix}--progress-bar--error .#{$prefix}--progress-bar__status-icon {
     color: $support-error;
+  }
+
+  .#{$prefix}--progress-bar--error .#{$prefix}--progress-bar__helper-text {
+    color: $text-error;
   }
 
   .#{$prefix}--progress-bar--finished .#{$prefix}--progress-bar__bar,
