@@ -196,7 +196,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   _handleSlotchange() {
-    // Calling super.updated() to preserve Content Switcher behavior
+    // Call super to preserve content-switcher slot handling
     super._handleSlotchange?.();
     const { selectorItemSelected } = this.constructor as typeof CDSTabs;
     const selectedItem = this.querySelector(selectorItemSelected);
@@ -370,7 +370,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   firstUpdated() {
-    //Calling super.updated() to preserve Content Switcher behavior
+    // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
 
     const { selectorTablist } = this.constructor as typeof CDSTabs;
@@ -380,7 +380,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   updated(changedProperties) {
-    //Calling super.updated() to preserve Content Switcher behavior
+    // Call super to keep selection/value in sync
     super.updated?.(changedProperties);
 
     if (changedProperties.has('value')) {
