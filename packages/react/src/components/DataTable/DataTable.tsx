@@ -100,8 +100,9 @@ export interface DataTableCell<T> {
   hasDecoratorHeader?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 type DataTableCells<T extends any[]> = { [K in keyof T]: DataTableCell<T[K]> };
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 export interface DataTableRow<ColTypes extends any[]> {
   id: string;
   cells: DataTableCells<ColTypes>;
@@ -116,7 +117,7 @@ export interface DataTableHeader {
   slug?: ReactElement;
   decorator?: ReactElement;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   headers: DataTableHeader[];
   rows: (DataTableRow<ColTypes> & RowType)[];
@@ -234,7 +235,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   expandAll: () => void;
   radio: boolean | undefined;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 export interface DataTableProps<RowType, ColTypes extends any[]>
   extends TranslateWithId<TranslationKey> {
   children?: (
@@ -261,7 +262,9 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   rows: Omit<DataTableRow<ColTypes>, 'cells'>[];
   size?: DataTableSize;
   sortRow?: (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     cellA: any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     cellB: any,
     options: {
       sortDirection: DataTableSortState;
@@ -279,7 +282,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 interface DataTableState<ColTypes extends any[]> {
   cellsById: Record<string, DataTableCell<ColTypes>>;
   filterInputValue: string | null;
@@ -302,6 +305,7 @@ interface DataTableState<ColTypes extends any[]> {
  * and updating the state of the single entity will cascade updates to the
  * consumer.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 export const DataTable = <RowType, ColTypes extends any[]>(
   props: DataTableProps<RowType, ColTypes>
 ) => {

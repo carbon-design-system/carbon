@@ -229,6 +229,7 @@ class CDSDropdown extends ValidityMixin(
    * @param event The event.
    */
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleFocusOut(event: FocusEvent) {
     if (!this.contains(event.relatedTarget as Node)) {
@@ -394,14 +395,12 @@ class CDSDropdown extends ValidityMixin(
     }
   }
 
-  /* eslint-disable class-methods-use-this */
   /**
    * @returns The content preceding the trigger button.
    */
   protected _renderPrecedingLabel(): TemplateResult | void {
     return undefined;
   }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * @returns The main content of the trigger button.
@@ -451,14 +450,12 @@ class CDSDropdown extends ValidityMixin(
     `;
   }
 
-  /* eslint-disable class-methods-use-this */
   /**
    * @returns The content following the trigger button.
    */
   protected _renderFollowingLabel(): TemplateResult | void {
     return undefined;
   }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * Handles event to include selected value on the parent form.
@@ -672,6 +669,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * The CSS class list for dropdown listbox
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   protected get _classes(): any {
     const { disabled, size, type, invalid, open, warn } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;

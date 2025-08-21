@@ -14,7 +14,6 @@ import React, {
   useRef,
   useState,
   type CSSProperties,
-  type FocusEvent,
   type KeyboardEvent,
   type ReactElement,
   type RefObject,
@@ -439,7 +438,9 @@ export const FloatingMenu = ({
           top: '0px',
         };
     const child = children as ReactElement<
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       string | JSXElementConstructor<any>
     >;
     return cloneElement(child, {

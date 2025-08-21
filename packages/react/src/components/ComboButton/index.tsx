@@ -85,7 +85,7 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
 }
 
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
-  function ComboButton(
+  (
     {
       children,
       className,
@@ -99,7 +99,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       ...rest
     },
     forwardRef
-  ) {
+  ) => {
     // feature flag utilized to separate out only the dynamic styles from @floating-ui
     // flag is turned on when collision detection (ie. flip, hide) logic is not desired
     const enableOnlyFloatingStyles = useFeatureFlag(
@@ -109,6 +109,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     let middlewares: any[] = [];
 
     if (!enableOnlyFloatingStyles) {

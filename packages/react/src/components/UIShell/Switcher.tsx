@@ -49,7 +49,7 @@ interface SwitcherWithAriaLabelledBy extends BaseSwitcherProps {
 type SwitcherProps = SwitcherWithAriaLabel | SwitcherWithAriaLabelledBy;
 
 const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
-  function Switcher(props, forwardRef) {
+  (props, forwardRef) => {
     const switcherRef = useRef<HTMLUListElement>(null);
     const ref = useMergedRefs([switcherRef, forwardRef]);
 

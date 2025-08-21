@@ -640,6 +640,7 @@ const ComboBox = forwardRef(
                 );
                 const highlightedItem = filteredList[state.highlightedIndex];
 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
                 if (highlightedItem && !(highlightedItem as any).disabled) {
                   return {
                     ...changes,
@@ -652,6 +653,7 @@ const ComboBox = forwardRef(
                 if (autoIndex !== -1) {
                   const matchingItem = items[autoIndex];
 
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
                   if (matchingItem && !(matchingItem as any).disabled) {
                     return {
                       ...changes,
@@ -832,7 +834,9 @@ const ComboBox = forwardRef(
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
       isItemDisabled(item, _index) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         return (item as any)?.disabled;
       },
       ...downshiftProps,
@@ -1441,6 +1445,7 @@ type ComboboxComponentProps<ItemType> = PropsWithRef<
 >;
 
 export interface ComboBoxComponent {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
 }
 

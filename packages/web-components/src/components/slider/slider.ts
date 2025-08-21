@@ -326,6 +326,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       const { _trackNode: trackNode } = this;
       const isRtl =
         trackNode
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           .ownerDocument!.defaultView!.getComputedStyle(trackNode)
           .getPropertyValue('direction') === 'rtl';
       const thumbPosition = event.clientX;
@@ -416,6 +417,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * @param event The event.
    */
   @HostListener('document:pointermove')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handlePointermove = (event: PointerEvent) => {
     const {
@@ -423,7 +425,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _dragging: dragging,
       _draggingUpper: draggingUpper,
     } = this;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     if (!disabled && (dragging || draggingUpper)) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       this._throttledHandlePointermoveImpl!(event);
     }
   };
@@ -440,9 +444,11 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _trackNode: trackNode,
       _draggingUpper: draggingUpper,
     } = this;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     if (!disabled) {
       const isRtl =
         trackNode
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           .ownerDocument!.defaultView!.getComputedStyle(trackNode)
           .getPropertyValue('direction') === 'rtl';
       const thumbPosition = event.clientX;
@@ -542,6 +548,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * Handles `${prefix}-slider-input-changed` event to update the value.
    */
   @HostListener('eventChangeInput')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeInput = (event: CustomEvent) => {
     const input = event.target as HTMLElement;

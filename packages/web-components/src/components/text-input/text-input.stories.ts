@@ -74,7 +74,7 @@ const args = {
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
   value: '',
-  onInput: (e: Event) => {},
+  onInput: () => {},
 };
 
 const argTypes = {

@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import PropTypes, { WeakValidationMap } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   type ElementType,
   useContext,
@@ -20,6 +20,7 @@ import React, {
 } from 'react';
 import {
   Popover,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   type PopoverAlignment,
   PopoverBaseProps,
   PopoverContent,
@@ -224,6 +225,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 // Get all the properties from Popover except for "open".
 // The Typescript types for PropTypes are really messed up so we need lots of
 // casting.  It will be great when we can finally get rid of PropTypes altogether.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
   {}) as unknown as PopoverBaseProps;
 
@@ -266,6 +268,7 @@ export const ToggletipButton = React.forwardRef(function ToggletipButton<
   const toggletip = useToggletip();
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-button`, customClassName);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const ComponentToggle: any = BaseComponent ?? 'button';
 
   if (ComponentToggle !== 'button') {

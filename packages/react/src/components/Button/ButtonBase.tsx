@@ -11,6 +11,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { ButtonBaseProps, ButtonProps } from './Button';
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const ButtonBase = React.forwardRef(function ButtonBase<
   T extends React.ElementType,
 >(

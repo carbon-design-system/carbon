@@ -112,12 +112,14 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * - Also fires for file deletions and clearFiles operations
    * - Event includes enhanced file information in event.target
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   onChange?: (event: any, data?: FileChangeData) => void;
 
   /**
    * Provide an optional `onClick` hook that is called each time the
    * FileUploader is clicked
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   onClick?: (event: any) => void;
 
   /**
@@ -125,6 +127,7 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * When 'enable-enhanced-file-uploader' feature flag is enabled:
    * - Event includes deleted file information in event.target
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   onDelete?: (event: any, data?: FileDeleteData) => void;
 
   /**
@@ -146,6 +149,7 @@ export interface FileUploaderHandle {
   getCurrentFiles?: () => FileItem[];
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FileUploader = React.forwardRef(
   (
     {
@@ -180,6 +184,7 @@ const FileUploader = React.forwardRef(
       (string | undefined)[]
     >([]);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     const [fileObjects, setFileObjects] = useState<Map<string, File>>(
       new Map()
     );
@@ -472,9 +477,13 @@ const FileUploader = React.forwardRef(
     );
   }
 ) as {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   <ItemType>(props: FileUploaderProps): React.ReactElement<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   propTypes?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   contextTypes?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   defaultProps?: any;
 };
 

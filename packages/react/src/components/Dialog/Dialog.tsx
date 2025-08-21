@@ -353,6 +353,7 @@ const DialogControls = React.forwardRef<HTMLDivElement, DialogControlsProps>(
   ({ children, ...rest }, ref) => {
     const prefix = usePrefix();
     return (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
         {children}
@@ -387,6 +388,7 @@ const DialogCloseButton = React.forwardRef<
 >(({ onClick, ...rest }, ref) => {
   const prefix = usePrefix();
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
     // @ts-ignore
     <IconButton
       kind="ghost"

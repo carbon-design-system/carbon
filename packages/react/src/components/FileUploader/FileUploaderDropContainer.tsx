@@ -103,7 +103,7 @@ function FileUploaderDropContainer({
   onAddFiles = noopFn,
   onClick,
   pattern = '.[0-9a-z]+$',
-  // eslint-disable-next-line react/prop-types
+
   innerRef,
   ...rest
 }: FileUploaderDropContainerProps) {

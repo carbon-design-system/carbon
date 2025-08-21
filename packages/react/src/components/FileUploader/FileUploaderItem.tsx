@@ -107,6 +107,7 @@ function FileUploaderItem({
     return name?.replace(/\s+/g, '');
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const isEllipsisActive = (element: any) => {
     setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
     return element.offsetWidth < element.scrollWidth;

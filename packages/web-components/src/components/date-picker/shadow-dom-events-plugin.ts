@@ -90,7 +90,9 @@ export default (): Plugin =>
   (fp: ExtendedFlatpickrInstanceShadowDOMEventsPlugin) => {
     const getDateElem = (localDate) =>
       find(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         fp.daysContainer!.firstElementChild!.children,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         ({ dateObj }: any) => localDate.getTime() === dateObj.getTime()
       );
 
@@ -100,35 +102,42 @@ export default (): Plugin =>
     const handleKeydown = (event: KeyboardEvent) => {
       const { ctrlKey, key, target } = event;
       if (key === 'Enter') {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         target!.dispatchEvent(
           Object.assign(new CustomEvent('mousedown', { bubbles: true }), {
             which: 1,
           })
         );
       } else if (!ctrlKey && key in moveDateForKeys) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         const { dateObj } = target as any;
         const movedDate = adjustDate(dateObj, { date: moveDateForKeys[key] });
         const movedDateElem = getDateElem(movedDate);
         if (movedDateElem) {
           movedDateElem.focus();
         } else {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           const innerDaysContainer = fp.daysContainer!.firstElementChild!;
           if (
             movedDate.getTime() <
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
             (innerDaysContainer.firstElementChild as any).dateObj.getTime()
           ) {
             fp.changeMonth(-1);
             // `fp.daysContainer` is updated by `fp.changeMonth()`
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             (
               fp.daysContainer!.firstElementChild!
                 .lastElementChild as HTMLElement
             ).focus();
           } else if (
             movedDate.getTime() >
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
             (innerDaysContainer.lastElementChild as any).dateObj.getTime()
           ) {
             fp.changeMonth(1);
             // `fp.daysContainer` is updated by `fp.changeMonth()`
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             (
               fp.daysContainer!.firstElementChild!
                 .firstElementChild as HTMLElement
@@ -138,6 +147,7 @@ export default (): Plugin =>
         event.preventDefault();
       } else if (ctrlKey && key in moveMonthForKeys) {
         fp.changeMonth(moveMonthForKeys[key]);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         (
           fp.daysContainer!.firstElementChild!.firstElementChild as HTMLElement
         ).focus();

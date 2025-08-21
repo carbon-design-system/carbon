@@ -72,6 +72,7 @@ export type TreeViewProps = {
 
 type TreeViewComponent = {
   (props: TreeViewProps): JSX.Element;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   propTypes?: any;
   TreeNode: typeof TreeNode;
 };
@@ -96,6 +97,7 @@ const TreeView: TreeViewComponent = ({
   const { current: treeId } = useRef(rest.id || useId());
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
     // @ts-ignore - will always be false according to prop types
 
     [`${prefix}--tree--${size}`]: size !== 'default',
@@ -164,6 +166,7 @@ const TreeView: TreeViewComponent = ({
 
   // The logic inside this function is now handled by TreeNode consuming context.
   // This function is kept to manage focus between nodes, which is a TreeView-level concern.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
       const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
@@ -212,6 +215,7 @@ const TreeView: TreeViewComponent = ({
     if (match(event, keys.ArrowDown)) {
       nextFocusNode = treeWalker.current.nextNode();
     }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
     // @ts-ignore - `matches` doesn't like the object syntax without missing properties
     if (matches(event, [keys.Home, keys.End, { code: 'KeyA' }])) {
       const nodeIds: string[] = [];
@@ -247,6 +251,7 @@ const TreeView: TreeViewComponent = ({
           }
         }
       }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore - `matches` doesn't like the object syntax without missing properties
       if (match(event, { code: 'KeyA' }) && event.ctrlKey) {
         treeWalker.current.currentNode = treeWalker.current.root;

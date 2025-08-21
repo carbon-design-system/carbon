@@ -77,7 +77,6 @@ class CDSCopy extends CDSIconButton {
   @property({ type: Number, attribute: 'feedback-timeout' })
   feedbackTimeout = 2000;
 
-  // eslint-disable-next-line class-methods-use-this
   protected _renderTooltipContent() {
     return html`
       <cds-tooltip-content>
@@ -111,7 +110,7 @@ class CDSCopy extends CDSIconButton {
 
     super.updated(changedProperties);
 
-    this.shadowRoot
+    this.shadowRoot // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       ?.querySelector('button') // @ts-ignore: TS thinks `host` doesn't exist on `parentNode`
       ?.setAttribute('aria-label', this.parentNode?.host.textContent);
   }

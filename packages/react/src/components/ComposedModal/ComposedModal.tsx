@@ -239,8 +239,9 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   slug?: ReactNode;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
-  function ComposedModal(
+  (
     {
       ['aria-labelledby']: ariaLabelledBy,
       ['aria-label']: ariaLabel,
@@ -262,7 +263,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       ...rest
     },
     ref
-  ) {
+  ) => {
     const prefix = usePrefix();
     const [isOpen, setIsOpen] = useState<boolean>(!!open);
     const [wasOpen, setWasOpen] = useState<boolean>(!!open);
@@ -394,7 +395,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         (lastContent as HTMLElement).offsetTop -
         (lastContent as HTMLElement).clientHeight;
 
-      for (let elem of modalContent.children) {
+      for (const elem of modalContent.children) {
         if (elem.contains(currentActiveNode)) {
           const spaceBelow =
             modalContent.clientHeight -

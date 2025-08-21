@@ -589,7 +589,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         )}
 
         <span className={`${prefix}--tree-node__label__details`}>
-          {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+      @ts-ignore - TS cannot be sure `className` exists on Icon props */}
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
           {renderLabelText()}
         </span>
@@ -734,6 +735,7 @@ TreeNode.propTypes = {
   /**
    * A component used to render an icon.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
@@ -741,6 +743,7 @@ TreeNode.propTypes = {
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   selected: deprecate(
     PropTypes.arrayOf(

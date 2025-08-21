@@ -7,7 +7,6 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React from 'react';
 
 import { usePrefix } from '../../internal/usePrefix';
@@ -19,7 +18,6 @@ import {
   ToggletipBaseProps,
 } from '../Toggletip';
 import { IconButton } from '../IconButton';
-import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { deprecate } from '../../prop-types/deprecate';
@@ -38,6 +36,7 @@ export const AILabelContent = React.forwardRef(function AILabelContent(
   const prefix = usePrefix();
 
   const hasAILabelActions = React.Children.toArray(children).some((child) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const item = child as any;
     // TODO: Is there supposed to be a `return` here? If so, this issue would
     // have been caught by ESLint. It's concerning that this code is 7 months
@@ -129,7 +128,7 @@ export interface AILabelProps extends ToggletipBaseProps {
 }
 
 export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
-  function AILabel(
+  (
     {
       aiText = 'AI',
       aiTextLabel,
@@ -148,7 +147,7 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
       ...rest
     },
     ref
-  ) {
+  ) => {
     const prefix = usePrefix();
     const id = useId('AILabel');
 

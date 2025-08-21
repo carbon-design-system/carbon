@@ -135,6 +135,7 @@ export default class CDSSlug extends CDSToggleTip {
   attributeChangedCallback(name, old, newValue) {
     super.attributeChangedCallback(name, old, newValue);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
     //@ts-ignore typescript does not think requestUpdate() exists on parentElement
     name === 'revert-active' ? this.parentElement?.requestUpdate() : ``;
   }

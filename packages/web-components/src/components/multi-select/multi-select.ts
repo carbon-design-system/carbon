@@ -465,6 +465,7 @@ class CDSMultiSelect extends CDSDropdown {
       const highlightedItem = this.querySelector(
         constructor.selectorItemHighlighted
       );
+      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const highlightedIndex = indexOf(items, highlightedItem!);
 
       let nextIndex = highlightedIndex + direction;
@@ -544,6 +545,7 @@ class CDSMultiSelect extends CDSDropdown {
   /**
    * The CSS class list for multi-select listbox
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   protected get _classes(): any {
     const {
       disabled,
@@ -646,6 +648,7 @@ class CDSMultiSelect extends CDSDropdown {
 
         aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
         // @todo remove typecast once we've updated to Typescript.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         (this as any).replaceChildren(...sortedMenuItems);
       }
     }
@@ -736,6 +739,7 @@ class CDSMultiSelect extends CDSDropdown {
     // whenever more items are added/removed, recompute the state of the select all option
     if (!this.selectAll) return;
     const defaultSlot =
+      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!;
     defaultSlot.addEventListener('slotchange', () =>
       this._computeSelectAllState()

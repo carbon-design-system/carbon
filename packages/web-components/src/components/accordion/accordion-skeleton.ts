@@ -51,6 +51,7 @@ class CDSAccordionSkeleton extends LitElement {
     if (changedProperties.has('alignment')) {
       // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this.shadowRoot!.querySelectorAll(
           (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons
@@ -66,6 +67,7 @@ class CDSAccordionSkeleton extends LitElement {
     ) {
       // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this.shadowRoot!.querySelectorAll(
           (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons

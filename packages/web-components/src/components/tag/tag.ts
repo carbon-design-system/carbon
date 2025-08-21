@@ -70,9 +70,11 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('shadowRoot:click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleClick = (event: MouseEvent) => {
     if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
+      // eslint-disable @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (this.disabled) {
         event.stopPropagation();
       } else if (this.open) {

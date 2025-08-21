@@ -391,6 +391,7 @@ const Dropdown = React.forwardRef(
       [onChange]
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     const isItemDisabled = useCallback((item, _index) => {
       const isObject = item !== null && typeof item === 'object';
       return isObject && 'disabled' in item && item.disabled === true;
@@ -663,7 +664,8 @@ const Dropdown = React.forwardRef(
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
                   : itemToString(selectedItem)
-                : (label as any)}
+                : // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                  (label as any)}
             </span>
             <ListBox.MenuIcon
               isOpen={isOpen}
@@ -727,6 +729,7 @@ const Dropdown = React.forwardRef(
 interface DropdownComponent {
   <ItemType>(
     props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ): React.ReactElement<any> | null;
 }
 

@@ -126,7 +126,9 @@ export type ButtonProps<T extends React.ElementType> =
 
 export type ButtonComponent = <T extends React.ElementType = 'button'>(
   props: ButtonProps<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   context?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 ) => React.ReactElement | any;
 
 function isIconOnlyButton(
@@ -140,6 +142,7 @@ function isIconOnlyButton(
   return false;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const Button: ButtonComponent = React.forwardRef(
   <T extends React.ElementType = 'button'>(
     props: ButtonProps<T>,

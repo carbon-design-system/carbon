@@ -382,6 +382,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 ) {
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
@@ -397,9 +398,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
 
   const nonSelectAllItems = useMemo(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     () => filteredItems.filter((item) => !(item as any).isSelectAll),
     [filteredItems]
   );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const selectAll = filteredItems.some((item) => (item as any).isSelectAll);
 
   const {
@@ -418,10 +421,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const selectAllStatus = useMemo(() => {
     const selectable = nonSelectAllItems.filter(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (item) => !(item as any).disabled
     );
 
     const nonSelectedCount = selectable.filter(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (item) => !controlledSelectedItems.some((sel) => isEqual(sel, item))
     ).length;
 
@@ -433,6 +438,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }, [controlledSelectedItems, nonSelectAllItems]);
 
   const handleSelectAllClick = useCallback(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const selectable = nonSelectAllItems.filter((i) => !(i as any).disabled);
     const { checked, indeterminate } = selectAllStatus;
 
@@ -506,10 +512,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   // memoize sorted items to reduce unnecessary expensive sort on rerender
   const sortedItems = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const selectAllItem = items.find((item) => (item as any).isSelectAll);
 
     const selectableRealItems = nonSelectAllItems.filter(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (item) => !(item as any).disabled
     );
 
@@ -668,6 +675,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     inputId,
     inputValue,
     stateReducer,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     isItemDisabled(item, _index) {
       return (item as any)?.disabled;
     },
@@ -830,6 +838,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   // exclude the select-all item from the count
   const selectedItemsLength = controlledSelectedItems.filter(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     (item: any) => !(item as any).isSelectAll
   ).length;
 
@@ -1077,6 +1086,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             ? sortedItems.map((item, index) => {
                 let isChecked: boolean;
                 let isIndeterminate = false;
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
                 if ((item as any).isSelectAll) {
                   isChecked = selectAllStatus.checked;
                   isIndeterminate = selectAllStatus.indeterminate;
@@ -1138,10 +1148,15 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   propTypes?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   contextTypes?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   defaultProps?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   displayName?: any;
 };
 

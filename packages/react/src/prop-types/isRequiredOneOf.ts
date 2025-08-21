@@ -15,25 +15,29 @@ import type { Validator, ValidationMap } from 'prop-types';
  *    are the names of the props, and the values are the prop-type validators.
  * @returns A new object of wrapped prop-type validators.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 export const isRequiredOneOf = <T extends Record<string, Validator<any>>>(
   propTypes: T
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 ): ValidationMap<any> => {
   const names = Object.keys(propTypes);
   const checker =
-    (propType: Validator<any>): Validator<any> =>
-    (props, propName, componentName, ...rest) => {
-      if (
-        process.env.NODE_ENV !== 'production' &&
-        names.every((name) => typeof props[name] === 'undefined')
-      ) {
-        return new Error(
-          `${componentName} requires one of the following props: ${names.join(
-            ', '
-          )}`
-        );
-      }
-      return propType(props, propName, componentName, ...rest);
-    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+
+      (propType: Validator<any>): Validator<any> =>
+      (props, propName, componentName, ...rest) => {
+        if (
+          process.env.NODE_ENV !== 'production' &&
+          names.every((name) => typeof props[name] === 'undefined')
+        ) {
+          return new Error(
+            `${componentName} requires one of the following props: ${names.join(
+              ', '
+            )}`
+          );
+        }
+        return propType(props, propName, componentName, ...rest);
+      };
   return names.reduce(
     (acc, name) => ({
       ...acc,

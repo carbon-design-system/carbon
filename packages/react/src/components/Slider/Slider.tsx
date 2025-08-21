@@ -62,14 +62,12 @@ const ThumbWrapper = ({
 }: ThumbWrapperProps) => {
   if (hasTooltip) {
     return (
-      // eslint-disable-next-line react/forbid-component-props
       <Tooltip className={className} style={style} {...rest}>
         {children}
       </Tooltip>
     );
   } else {
     return (
-      // eslint-disable-next-line react/forbid-dom-props
       <div className={className} style={style}>
         {children}
       </div>
@@ -1170,6 +1168,7 @@ class Slider extends PureComponent<SliderProps> {
       hideLabel,
       step = 1,
       // TODO: Other properties are deleted below. Why isn't this one?
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
       stepMultiplier: _stepMultiplier,
       inputType = 'number',
       invalidText,

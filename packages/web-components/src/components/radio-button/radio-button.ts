@@ -62,7 +62,7 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
 
   set checked(checked) {
     const { host } = this._radio.getRootNode() as ShadowRoot;
-    const { eventChange } = host.constructor as typeof CDSRadioButton; // eslint-disable-line no-use-before-define
+    const { eventChange } = host.constructor as typeof CDSRadioButton;
     (host as CDSRadioButton).checked = checked;
     this._radio.tabIndex = checked ? 0 : -1;
     host.dispatchEvent(
@@ -129,6 +129,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `click` event on this element.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event) => {
     if (
@@ -177,6 +178,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = (event: KeyboardEvent) => {
     if (
@@ -349,6 +351,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       if (changedProperties.has('name')) {
         manager!.delete(radioButtonDelegate, changedProperties.get('name'));
         if (name) {
+          // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           manager!.add(radioButtonDelegate);
         }
       }

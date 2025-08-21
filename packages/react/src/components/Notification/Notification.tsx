@@ -197,7 +197,6 @@ export function NotificationButton({
   return (
     <button
       {...rest}
-      // eslint-disable-next-line react/button-has-type
       type={type}
       aria-label={deprecatedAriaLabel || ariaLabel}
       title={deprecatedAriaLabel || ariaLabel}
