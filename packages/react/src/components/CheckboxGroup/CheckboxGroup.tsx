@@ -101,30 +101,23 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
       isValidElement<ComponentProps<typeof Checkbox>>(child) &&
       child.type === Checkbox
     ) {
-      const childProps: Partial<
-        Pick<ComponentProps<typeof Checkbox>, 'invalid' | 'readOnly' | 'warn'>
-      > = {};
-
-      if (
-        typeof invalid !== 'undefined' &&
+      const childProps: Pick<
+        ComponentProps<typeof Checkbox>,
+        'invalid' | 'readOnly' | 'warn'
+      > = {
+        ...(typeof invalid !== 'undefined' &&
         typeof child.props.invalid === 'undefined'
-      ) {
-        childProps.invalid = invalid;
-      }
-
-      if (
-        typeof readOnly !== 'undefined' &&
+          ? { invalid }
+          : {}),
+        ...(typeof readOnly !== 'undefined' &&
         typeof child.props.readOnly === 'undefined'
-      ) {
-        childProps.readOnly = readOnly;
-      }
-
-      if (
-        typeof warn !== 'undefined' &&
+          ? { readOnly }
+          : {}),
+        ...(typeof warn !== 'undefined' &&
         typeof child.props.warn === 'undefined'
-      ) {
-        childProps.warn = warn;
-      }
+          ? { warn }
+          : {}),
+      };
 
       return Object.keys(childProps).length
         ? cloneElement(child, childProps)
