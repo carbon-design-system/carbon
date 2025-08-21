@@ -1546,6 +1546,11 @@ export interface IconTabProps extends DivAttributes {
   defaultOpen?: boolean;
 
   /**
+   *  Specify whether your Tab is disabled.
+   */
+  disabled?: boolean;
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip for the icon.
    */
   enterDelayMs?: number;
@@ -1574,6 +1579,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
     enterDelayMs,
     leaveDelayMs,
     label,
+    disabled = false,
     ...rest
   },
   ref
@@ -1599,7 +1605,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
         enterDelayMs={enterDelayMs}
         label={label}
         leaveDelayMs={leaveDelayMs}>
-        <Tab className={classNames} ref={ref} {...rest}>
+        <Tab className={classNames} ref={ref} disabled={disabled} {...rest}>
           {children}
         </Tab>
       </Tooltip>
