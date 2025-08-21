@@ -9,6 +9,7 @@ import { render, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FileUploader from '../';
+import { FeatureFlags } from '../../FeatureFlags';
 import React from 'react';
 import { uploadFiles } from '../test-helpers';
 
@@ -133,5 +134,146 @@ describe('FileUploader', () => {
     await userEvent.upload(input, file);
 
     expect(onChange).toHaveBeenCalledTimes(1);
+  });
+  describe('Enhanced FileUploader (with feature flag)', () => {
+    beforeAll(() => {
+      Object.defineProperty(global, 'crypto', {
+        value: {
+          getRandomValues: (arr) => {
+            for (let i = 0; i < arr.length; i++) {
+              arr[i] = Math.floor(Math.random() * 256);
+            }
+            return arr;
+          },
+        },
+        writable: true,
+      });
+    });
+
+    it('should handle multiple file uploads with duplicate prevention', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader
+            {...requiredProps}
+            multiple={true}
+            onChange={onChange}
+          />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+
+      const file1 = new File(['content1'], 'photo1.png', { type: 'image/png' });
+      await userEvent.upload(input, file1);
+
+      const duplicateFile = new File(['duplicate'], 'photo1.png', {
+        type: 'image/png',
+      });
+      const newFile = new File(['new'], 'photo2.png', { type: 'image/png' });
+      await userEvent.upload(input, [duplicateFile, newFile]);
+
+      const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
+      expect(lastCall.target.action).toBe('add');
+      expect(lastCall.target.currentFiles.length).toBe(2);
+      expect(typeof lastCall.target.files.item).toBe('function');
+      expect(lastCall.target.files.item(0)).toBeDefined();
+      expect(lastCall.target.files.item(99)).toBe(null);
+    });
+
+    it('should replace files in single file mode', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader
+            {...requiredProps}
+            multiple={false}
+            onChange={onChange}
+          />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+
+      const file1 = new File(['content1'], 'first.png', { type: 'image/png' });
+      await userEvent.upload(input, file1);
+
+      const file2 = new File(['content2'], 'second.png', { type: 'image/png' });
+      await userEvent.upload(input, file2);
+
+      const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
+      expect(lastCall.target.currentFiles).toHaveLength(1);
+      expect(lastCall.target.currentFiles[0].name).toBe('second.png');
+    });
+
+    it('should provide enhanced callbacks when deleting files', async () => {
+      const onDelete = jest.fn();
+      const onChange = jest.fn();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader
+            {...requiredProps}
+            filenameStatus="edit"
+            onDelete={onDelete}
+            onChange={onChange}
+          />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+      const file = new File(['test'], 'deleteme.png', { type: 'image/png' });
+
+      await userEvent.upload(input, file);
+      onChange.mockClear();
+
+      const removeButton = screen.getByLabelText(
+        'test description - deleteme.png'
+      );
+      await userEvent.click(removeButton);
+
+      expect(onDelete).toHaveBeenCalledTimes(1);
+      const deleteEvent = onDelete.mock.calls[0][0];
+      //verifys the event
+      expect(deleteEvent.target.action).toBe('remove');
+      expect(deleteEvent.target.deletedFile.name).toBe('deleteme.png');
+      expect(deleteEvent.target.deletedFileName).toBe('deleteme.png');
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      const changeEvent = onChange.mock.calls[0][0];
+      expect(changeEvent.target.action).toBe('remove');
+    });
+
+    it('should provide file management utilities through ref methods', async () => {
+      const ref = React.createRef();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader {...requiredProps} ref={ref} multiple={true} />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+      const files = [
+        new File(['content1'], 'util1.png', { type: 'image/png' }),
+        new File(['content2'], 'util2.png', { type: 'image/png' }),
+      ];
+
+      await userEvent.upload(input, files);
+
+      const currentFiles = ref.current.getCurrentFiles();
+      expect(currentFiles).toHaveLength(2);
+      expect(currentFiles[0].name).toBe('util1.png');
+      expect(currentFiles[1].name).toBe('util2.png');
+
+      await act(async () => {
+        ref.current.clearFiles();
+      });
+
+      expect(screen.queryByText('util1.png')).not.toBeInTheDocument();
+      expect(screen.queryByText('util2.png')).not.toBeInTheDocument();
+    });
   });
 });

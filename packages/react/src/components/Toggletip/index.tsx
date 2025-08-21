@@ -12,6 +12,7 @@ import React, {
   useContext,
   useRef,
   useState,
+  useEffect,
   type ReactNode,
   type ComponentProps,
   type KeyboardEventHandler,
@@ -144,6 +145,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
   const onKeyDown: KeyboardEventHandler = (event) => {
     if (open && match(event, keys.Escape)) {
+      event.stopPropagation();
       actions.close();
 
       // If the menu is closed while focus is still inside the menu, it should return to the trigger button  (#12922)
@@ -172,11 +174,31 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   });
 
-  useWindowEvent('click', ({ target }) => {
-    if (open && target instanceof Node && !ref.current?.contains(target)) {
-      actions.close();
-    }
-  });
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const targetDocument = ref.current.ownerDocument || document;
+    const eventType: 'pointerdown' | 'mousedown' =
+      'PointerEvent' in window ? 'pointerdown' : 'mousedown';
+
+    const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
+      const node = event.target as Node | null;
+      if (open && node && !ref.current!.contains(node)) {
+        setOpen(false);
+      }
+    };
+
+    const options = { capture: true } as const;
+
+    targetDocument.addEventListener(eventType, handleOutsideClick, options);
+    return () => {
+      targetDocument.removeEventListener(
+        eventType,
+        handleOutsideClick,
+        options
+      );
+    };
+  }, [open]);
 
   return (
     <ToggletipContext.Provider value={value}>

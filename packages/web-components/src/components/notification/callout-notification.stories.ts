@@ -86,10 +86,11 @@ export const Default = {
         ?low-contrast="${lowContrast}"
         status-icon-description="${ifDefined(statusIconDescription)}"
         title-id="${ifDefined(titleId)}">
-        ${actionButtonLabel &&
-        html`<cds-actionable-notification-button slot="action"
-          >${actionButtonLabel}</cds-actionable-notification-button
-        >`}
+        ${actionButtonLabel
+          ? html`<cds-actionable-notification-button slot="action" kind="ghost"
+              >${actionButtonLabel}</cds-actionable-notification-button
+            >`
+          : ''}
       </cds-callout-notification>
     `;
   },
@@ -102,7 +103,7 @@ export const WithInteractiveElements = {
         kind="${NOTIFICATION_KIND.INFO}"
         title="Notification title"
         title-id="callout-title-interactive"
-        ?low-contrast="true">
+        ?low-contrast="${true}">
         <div class="${prefix}--actionable-notification__subtitle">
           Additional text can describe the notification, or a link to
           <a href="#" aria-describedby="callout-title-interactive"
