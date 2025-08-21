@@ -103,6 +103,27 @@ const config = {
       ],
       resolve: {
         preserveSymlinks: true,
+        alias: {
+          '~@ibm/plex': '@ibm/plex',
+          '~@ibm/plex/': '@ibm/plex/',
+        },
+      },
+      build: {
+        rollupOptions: {
+          output: {
+            // Don't add hashes to font file names during build
+            assetFileNames: (assetInfo) => {
+              if (
+                assetInfo.name &&
+                (assetInfo.name.endsWith('.woff2') ||
+                  assetInfo.name.endsWith('.woff'))
+              ) {
+                return 'assets/[name][extname]';
+              }
+              return 'assets/[name]-[hash][extname]';
+            },
+          },
+        },
       },
     });
   },
