@@ -116,7 +116,7 @@ export const WithAccessibleLabels = {
       <div>
         <label
           id="toggle-7-label"
-          htmlFor="toggle-7"
+          for="toggle-7"
           style="display: block; margin-block-end: 0.5rem;">
           External toggle label
         </label>

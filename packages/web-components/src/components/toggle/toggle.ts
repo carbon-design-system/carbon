@@ -63,7 +63,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   protected _handleKeydown = async (event: KeyboardEvent) => {
     const { key } = event;
 
-    if (key === ' ') {
+    if (key === ' ' || key === 'Enter') {
       this._handleChange();
     }
   };
@@ -118,6 +118,46 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    */
   @property({ attribute: 'label-b' })
   labelB = 'Off';
+
+  /**
+   * Private references of external <label> elements that are
+   * `for="this-toggle-element-id"`
+   */
+  private _externalLabels: HTMLLabelElement[] = [];
+
+  /**
+   * Handles `click` on external `<label>`
+   */
+  private _onExternalLabelClick = () => {
+    this._checkboxNode?.focus();
+    this._handleChange();
+  };
+
+  /**
+   * Finds external toggle `<label>`s and attaches handlers.
+   */
+  private _attachExternalLabels() {
+    const doc = this.ownerDocument || document;
+    const found: HTMLLabelElement[] = [];
+
+    if (this.id) {
+      found.push(
+        ...(Array.from(
+          doc.querySelectorAll(`label[for="${this.id}"]`)
+        ) as HTMLLabelElement[])
+      );
+    }
+
+    this._externalLabels = Array.from(new Set(found));
+    this._externalLabels.forEach((lbl) => {
+      lbl.addEventListener('click', this._onExternalLabelClick);
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback?.();
+    this._attachExternalLabels();
+  }
 
   render() {
     const {
@@ -174,14 +214,15 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
         value="${ifDefined(value)}"
         ?disabled=${disabled}
         id="${id}"></button>
-      <label for="${id}" class="${prefix}--toggle__label">
+      <label
+        for="${id}"
+        class="${prefix}--toggle__label"
+        @click=${handleChange}>
         ${labelText
           ? html`<span class="${labelTextClasses}">${labelText}</span>`
           : null}
         <div class="${inputClasses}">
-          <div class="${toggleClasses}" @click=${handleChange}>
-            ${this._renderCheckmark()}
-          </div>
+          <div class="${toggleClasses}">${this._renderCheckmark()}</div>
           <span class="${prefix}--toggle__text" aria-hidden="true"
             >${stateText}</span
           >

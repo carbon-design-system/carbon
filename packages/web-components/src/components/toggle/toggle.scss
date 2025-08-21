@@ -14,6 +14,12 @@ $css--plex: true !default;
 
 :host(#{$prefix}-toggle) {
   outline: none;
+  .#{$prefix}--toggle__label {
+    // safari compatibility
+    -webkit-user-select: none;
+
+    user-select: none;
+  }
 }
 
 :host(#{$prefix}-toggle[disabled]) {
