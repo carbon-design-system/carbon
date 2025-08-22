@@ -287,64 +287,6 @@ export const Playground = {
   },
 };
 
-//I need remove this one
-export const Test1 = () => {
-  return html`
-    <cds-tabs trigger-content="Select an item" value="staging">
-      <cds-tab id="tab-all" target="panel-all" value="all">Option 1</cds-tab>
-      <cds-tab
-        id="tab-cloudFoundry"
-        target="panel-cloudFoundry"
-        disabled
-        value="cloudFoundry">
-        Option 2
-      </cds-tab>
-      <cds-tab id="tab-staging" target="panel-staging" value="staging"
-        >Option 3</cds-tab
-      >
-      <cds-tab id="tab-dea" target="panel-dea" value="dea">Option 4</cds-tab>
-      <cds-tab id="tab-router" target="panel-router" value="router"
-        >Option 5</cds-tab
-      >
-    </cds-tabs>
-
-    <div class="cds-ce-demo-devenv--tab-panels">
-      <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
-        <h4>Content for option 1</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-      <div
-        id="panel-cloudFoundry"
-        role="tabpanel"
-        aria-labelledby="tab-cloudFoundry"
-        hidden>
-        <h4>Content for option 2</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-      <div
-        id="panel-staging"
-        role="tabpanel"
-        aria-labelledby="tab-staging"
-        hidden>
-        <h4>Content for option 3</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-      <div id="panel-dea" role="tabpanel" aria-labelledby="tab-dea" hidden>
-        <h4>Content for option 4</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-      <div
-        id="panel-router"
-        role="tabpanel"
-        aria-labelledby="tab-router"
-        hidden>
-        <h4>Content for option 5</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-      </div>
-    </div>
-  `;
-};
-
 export default {
   title: 'Components/Tabs',
   actions: { argTypesRegex: '^on.*' },
