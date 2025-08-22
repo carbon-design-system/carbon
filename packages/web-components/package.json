@@ -100,7 +100,7 @@
     "@web/test-runner-playwright": "^0.11.0",
     "@webcomponents/webcomponentsjs": "^2.8.0",
     "autoprefixer": "^10.4.0",
-    "cssnano": "^7.0.0",
+    "cssnano": "^7.1.0",
     "globby": "^14.0.2",
     "read-package-up": "^11.0.0",
     "remark-gfm": "^4.0.0",
