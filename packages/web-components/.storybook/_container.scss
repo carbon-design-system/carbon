@@ -71,14 +71,3 @@ body {
 .docs-story div div {
   transform: none;
 }
-
-// Disable stylelint max-nesting-depth
-/* stylelint-disable */
-.sbdocs {
-  &.sbdocs-preview,
-  .docs-story,
-  .docs-story div {
-    overflow: visible;
-  }
-}
-/* stylelint-enable */

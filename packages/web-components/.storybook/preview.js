@@ -135,6 +135,7 @@ export const parameters = {
     source: {
       excludeDecorators: true,
     },
+    codePanel: true,
   },
   viewport: {
     options: {

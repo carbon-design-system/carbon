@@ -1837,7 +1837,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/69060697?v=4",
       "profile": "https://github.com/warrenmblood",
       "contributions": [
-        "code"
+        "code",
+        "doc",
+        "a11y"
       ]
     },
     {
@@ -1992,6 +1994,42 @@
       "name": "bijoy valsan",
       "avatar_url": "https://avatars.githubusercontent.com/u/26248649?v=4",
       "profile": "https://github.com/bijoyvalsan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jose-biescas",
+      "name": "Jose Biescas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/188625806?v=4",
+      "profile": "https://github.com/jose-biescas",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "anuanto966",
+      "name": "anuanto966",
+      "avatar_url": "https://avatars.githubusercontent.com/u/216390110?v=4",
+      "profile": "https://github.com/anuanto966",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "F4isalSH",
+      "name": "Faisal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88539362?v=4",
+      "profile": "https://github.com/F4isalSH",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "seanhaug",
+      "name": "Sean Haughey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/227620549?v=4",
+      "profile": "https://github.com/seanhaug",
       "contributions": [
         "code"
       ]
