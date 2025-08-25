@@ -53,3 +53,8 @@ body:
             I agree to follow this project's [Code of
             Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
           required: true
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > You do not need to apply labels. Labels are applied automatically and by the Carbon team when your issue is triaged.
