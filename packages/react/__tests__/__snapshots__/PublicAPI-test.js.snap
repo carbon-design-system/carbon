@@ -7927,7 +7927,108 @@ Map {
     },
   },
   "Slider" => {
-    "displayName": "ClassWrapper(Slider)",
+    "propTypes": {
+      "ariaLabelInput": {
+        "type": "string",
+      },
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "formatLabel": {
+        "type": "func",
+      },
+      "hideLabel": {
+        "type": "bool",
+      },
+      "hideTextInput": {
+        "type": "bool",
+      },
+      "id": {
+        "type": "string",
+      },
+      "inputType": {
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "labelText": {
+        "type": "node",
+      },
+      "light": [Function],
+      "max": {
+        "isRequired": true,
+        "type": "number",
+      },
+      "maxLabel": {
+        "type": "string",
+      },
+      "min": {
+        "isRequired": true,
+        "type": "number",
+      },
+      "minLabel": {
+        "type": "string",
+      },
+      "name": {
+        "type": "string",
+      },
+      "onBlur": {
+        "type": "func",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onInputKeyUp": {
+        "type": "func",
+      },
+      "onRelease": {
+        "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "required": {
+        "type": "bool",
+      },
+      "step": {
+        "type": "number",
+      },
+      "stepMultiplier": {
+        "type": "number",
+      },
+      "translateWithId": {
+        "type": "func",
+      },
+      "unstable_ariaLabelInputUpper": {
+        "type": "string",
+      },
+      "unstable_nameUpper": {
+        "type": "string",
+      },
+      "unstable_valueUpper": {
+        "type": "number",
+      },
+      "value": {
+        "isRequired": true,
+        "type": "number",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
   },
   "SliderSkeleton" => {
     "propTypes": {
