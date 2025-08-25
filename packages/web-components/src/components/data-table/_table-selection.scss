@@ -21,6 +21,15 @@
   }
 }
 
+:host(#{$prefix}-table-header-row[selected]) {
+  .#{$prefix}--table-column-checkbox,
+  ::slotted(#{$prefix}-table-header-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    border-block-end: 1px solid $layer-active;
+  }
+}
+
 :host(#{$prefix}-table-row) {
   .#{$prefix}--table-column-checkbox {
     border-block-end: 1px solid $border-subtle;
