@@ -55,7 +55,7 @@ export interface HeaderPanelProps {
   onHeaderPanelFocus?: () => void;
 }
 
-const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
+const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
   function HeaderPanel(
     {
       children,
