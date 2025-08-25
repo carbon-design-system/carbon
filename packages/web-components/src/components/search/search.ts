@@ -117,7 +117,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         event.stopPropagation();
         event.preventDefault();
 
-        if (this.value && this.value.length > 0) {
+        if (this.value?.length) {
           // Clear but keep focus in the input
           this.dispatchEvent(
             new CustomEvent((this.constructor as typeof CDSSearch).eventInput, {
