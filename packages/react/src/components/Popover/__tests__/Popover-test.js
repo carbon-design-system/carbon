@@ -10,6 +10,9 @@ import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../../ListBox/test-helpers';
+import RadioButton from '../../RadioButton';
+import RadioButtonGroup from '../../RadioButtonGroup';
+import { default as Checkbox } from '../../Checkbox';
 
 const prefix = 'cds';
 
@@ -311,6 +314,44 @@ describe('Popover', () => {
 
     // Click on input inside popover - should NOT close
     await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+  it('should not close TabTip when interacting with form elements inside', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open isTabTip onRequestClose={onRequestClose}>
+        <button type="button">Settings</button>
+        <PopoverContent>
+          <RadioButtonGroup legendText="Test options">
+            <RadioButton
+              labelText="Option 1"
+              value="option1"
+              id="tabtip-radio-1"
+              data-testid="tabtip-radio-1"
+            />
+            <RadioButton
+              labelText="Option 2"
+              value="option2"
+              id="tabtip-radio-2"
+              data-testid="tabtip-radio-2"
+            />
+          </RadioButtonGroup>
+          <Checkbox
+            labelText="Test checkbox"
+            id="tabtip-checkbox"
+            data-testid="tabtip-checkbox"
+          />
+        </PopoverContent>
+      </Popover>
+    );
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-1'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-2'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-checkbox'));
     expect(onRequestClose).not.toHaveBeenCalled();
   });
 });
