@@ -88,10 +88,14 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
     );
 
     if (isMagnifierClick && this.expandable && !this.expanded) {
-      this.setAttribute('expanded', '');
-      // Focus the input after expanding
-      this.shadowRoot!.getElementById('input')?.focus();
+      this._expandAndFocus();
     }
+  }
+
+  private _expandAndFocus() {
+    this.setAttribute('expanded', '');
+    // Focus the input after expanding
+    this.shadowRoot?.getElementById('input')?.focus();
   }
 
   /**
@@ -141,8 +145,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
     // Enter/Space: expand if collapsed
     if (key === 'Enter' || key === ' ') {
       event.preventDefault();
-      this.setAttribute('expanded', '');
-      this.shadowRoot!.getElementById('input')?.focus();
+      this._expandAndFocus();
     }
   }
 
@@ -184,12 +187,12 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * Adds tabindex="-1" if it is not focusable yet.
    */
   private _focusMagnifier() {
-    const magnifier = this.shadowRoot?.querySelector(
+    const magnifier = this.shadowRoot?.querySelector<HTMLElement>(
       `.${prefix}--search-magnifier`
-    ) as HTMLElement | null;
+    );
     if (magnifier) {
       if (!magnifier.hasAttribute('tabindex')) {
-        magnifier.setAttribute('tabindex', '-1');
+        magnifier.tabIndex = -1;
       }
       magnifier.focus();
     }
