@@ -32,12 +32,11 @@ describe('cds-inline-loading', () => {
 
     it('should render with unknown status', async () => {
       render(template(), document.body);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       (
         document.body.querySelector(
           'cds-inline-loading'
         ) as unknown as CDSInlineLoading
-      ).status = undefined!;
+      ).status = undefined!; // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       await Promise.resolve();
       expect(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071

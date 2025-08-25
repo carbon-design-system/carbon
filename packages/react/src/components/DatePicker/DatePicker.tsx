@@ -408,336 +408,355 @@ export interface DatePickerProps {
   warnText?: ReactNode;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
-const DatePicker = React.forwardRef(
-  (
-    {
-      allowInput,
-      appendTo,
-      children,
-      className,
-      closeOnSelect = true,
-      dateFormat = 'm/d/Y',
-      datePickerType,
-      disable,
-      enable,
-      inline,
-      invalid,
-      invalidText,
-      warn,
-      warnText,
-      light = false,
-      locale = 'en',
-      maxDate,
-      minDate,
-      onChange,
-      onClose,
-      onOpen,
-      readOnly = false,
-      short = false,
-      value,
-      parseDate: parseDateProp,
-      ...rest
-    }: DatePickerProps,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
-    const prefix = usePrefix();
-    const { isFluid } = useContext(FormContext);
-    const [hasInput, setHasInput] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-    const startInputField: any = useCallback((node) => {
-      if (node !== null) {
-        startInputField.current = node;
-        setHasInput(true);
-      }
-    }, []);
-
-    const lastStartValue = useRef('');
-    const calendarRef = useRef<Instance>(null);
-
-    interface CalendarCloseEvent {
-      selectedDates: Date[];
-      dateStr: string;
-      instance: Instance;
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
+const DatePicker = React.forwardRef(function DatePicker(
+  {
+    allowInput,
+    appendTo,
+    children,
+    className,
+    closeOnSelect = true,
+    dateFormat = 'm/d/Y',
+    datePickerType,
+    disable,
+    enable,
+    inline,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    light = false,
+    locale = 'en',
+    maxDate,
+    minDate,
+    onChange,
+    onClose,
+    onOpen,
+    readOnly = false,
+    short = false,
+    value,
+    parseDate: parseDateProp,
+    ...rest
+  }: DatePickerProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
+  const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
+  const [hasInput, setHasInput] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  const startInputField: any = useCallback((node) => {
+    if (node !== null) {
+      startInputField.current = node;
+      setHasInput(true);
     }
-    const [calendarCloseEvent, setCalendarCloseEvent] =
-      useState<CalendarCloseEvent | null>(null);
+  }, []);
 
-    // fix datepicker deleting the selectedDate when the calendar closes
-    const handleCalendarClose = useCallback(
-      (selectedDates, dateStr, instance) => {
-        if (
-          lastStartValue.current &&
-          selectedDates[0] &&
-          !startInputField.current.value
-        ) {
-          startInputField.current.value = lastStartValue.current;
-          calendarRef.current?.setDate(
-            [startInputField.current.value, endInputField?.current?.value],
-            true,
-            calendarRef.current.config.dateFormat
-          );
+  const lastStartValue = useRef('');
+  const calendarRef = useRef<Instance>(null);
+
+  interface CalendarCloseEvent {
+    selectedDates: Date[];
+    dateStr: string;
+    instance: Instance;
+  }
+  const [calendarCloseEvent, setCalendarCloseEvent] =
+    useState<CalendarCloseEvent | null>(null);
+
+  // fix datepicker deleting the selectedDate when the calendar closes
+  const handleCalendarClose = useCallback(
+    (selectedDates, dateStr, instance) => {
+      if (
+        lastStartValue.current &&
+        selectedDates[0] &&
+        !startInputField.current.value
+      ) {
+        startInputField.current.value = lastStartValue.current;
+        calendarRef.current?.setDate(
+          [startInputField.current.value, endInputField?.current?.value],
+          true,
+          calendarRef.current.config.dateFormat
+        );
+      }
+      if (onClose) {
+        onClose(selectedDates, dateStr, instance);
+      }
+    },
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    [onClose]
+  );
+  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  const onCalendarClose = (selectedDates, dateStr, instance, e) => {
+    if (e && e.type === 'clickOutside') {
+      return;
+    }
+    setCalendarCloseEvent({ selectedDates, dateStr, instance });
+  };
+  useEffect(() => {
+    if (calendarCloseEvent) {
+      const { selectedDates, dateStr, instance } = calendarCloseEvent;
+      handleCalendarClose(selectedDates, dateStr, instance);
+      setCalendarCloseEvent(null);
+    }
+  }, [calendarCloseEvent, handleCalendarClose]);
+
+  const endInputField = useRef<HTMLTextAreaElement>(null);
+  const lastFocusedField = useRef<HTMLTextAreaElement>(null);
+  const savedOnChange = useSavedCallback(onChange);
+
+  const savedOnOpen = useSavedCallback(onOpen);
+
+  const datePickerClasses = cx(`${prefix}--date-picker`, {
+    [`${prefix}--date-picker--short`]: short,
+    [`${prefix}--date-picker--light`]: light,
+    [`${prefix}--date-picker--simple`]: datePickerType === 'simple',
+    [`${prefix}--date-picker--single`]: datePickerType === 'single',
+    [`${prefix}--date-picker--range`]: datePickerType === 'range',
+    [`${prefix}--date-picker--nolabel`]:
+      datePickerType === 'range' && isLabelTextEmpty(children),
+  });
+  const wrapperClasses = cx(`${prefix}--form-item`, {
+    [String(className)]: className,
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  const childrenWithProps = React.Children.toArray(children as any).map(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    (child: any, index) => {
+      if (
+        index === 0 &&
+        child.type === React.createElement(DatePickerInput, child.props).type
+      ) {
+        return React.cloneElement(child, {
+          datePickerType,
+          ref: startInputField,
+          readOnly,
+        });
+      }
+      if (
+        index === 1 &&
+        child.type === React.createElement(DatePickerInput, child.props).type
+      ) {
+        return React.cloneElement(child, {
+          datePickerType,
+          ref: endInputField,
+          readOnly,
+        });
+      }
+      if (index === 0) {
+        return React.cloneElement(child, {
+          ref: startInputField,
+          readOnly,
+        });
+      }
+      if (index === 1) {
+        return React.cloneElement(child, {
+          ref: endInputField,
+          readOnly,
+        });
+      }
+    }
+  );
+
+  useEffect(() => {
+    initializeWeekdayShorthand();
+  }, []);
+
+  useEffect(() => {
+    if (datePickerType !== 'single' && datePickerType !== 'range') {
+      return;
+    }
+
+    if (!startInputField.current) {
+      return;
+    }
+
+    const onHook = (_electedDates, _dateStr, instance) => {
+      updateClassNames(instance, prefix);
+      if (startInputField?.current) {
+        startInputField.current.readOnly = readOnly;
+      }
+      if (endInputField?.current) {
+        endInputField.current.readOnly = readOnly;
+      }
+    };
+
+    // Logic to determine if `enable` or `disable` will be passed down. If neither
+    // is provided, we return the default empty disabled array, allowing all dates.
+    const enableOrDisable = enable ? 'enable' : 'disable';
+    let enableOrDisableArr;
+    if (!enable && !disable) {
+      enableOrDisableArr = [];
+    } else if (enable) {
+      enableOrDisableArr = enable;
+    } else {
+      enableOrDisableArr = disable;
+    }
+
+    let localeData;
+    if (typeof locale === 'object') {
+      const location = locale.locale ? locale.locale : 'en';
+      localeData = { ...l10n[location], ...locale };
+    } else {
+      localeData = l10n[locale];
+    }
+
+    /**
+     * parseDate is called before the date is actually set.
+     * It attempts to parse the input value and return a valid date string.
+     * Flatpickr's default parser results in odd dates when given invalid
+     * values, so instead here we normalize the month/day to `1` if given
+     * a value outside the acceptable range.
+     */
+    let parseDate;
+    if (!parseDateProp && dateFormat === 'm/d/Y') {
+      // This function only supports the default dateFormat.
+      parseDate = (date) => {
+        // Month must be 1-12. If outside these bounds, `1` should be used.
+        const month =
+          date.split('/')[0] <= 12 && date.split('/')[0] > 0
+            ? parseInt(date.split('/')[0])
+            : 1;
+        const year = parseInt(date.split('/')[2]);
+
+        if (month && year) {
+          // The month and year must be provided to be able to determine
+          // the number of days in the month.
+          const daysInMonth = new Date(year, month, 0).getDate();
+          // If the day does not fall within the days in the month, `1` should be used.
+          const day =
+            date.split('/')[1] <= daysInMonth && date.split('/')[1] > 0
+              ? parseInt(date.split('/')[1])
+              : 1;
+
+          return new Date(`${year}/${month}/${day}`);
+        } else {
+          // With no month and year, we cannot calculate anything.
+          // Returning false gives flatpickr an invalid date, which will clear the input
+          return false;
         }
-        if (onClose) {
-          onClose(selectedDates, dateStr, instance);
+      };
+    } else if (parseDateProp) {
+      parseDate = parseDateProp;
+    }
+
+    const { current: start } = startInputField;
+    const { current: end } = endInputField;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    const flatpickerConfig: any = {
+      inline: inline ?? false,
+      onClose: onCalendarClose,
+      disableMobile: true,
+      defaultDate: value,
+      closeOnSelect: closeOnSelect,
+      mode: datePickerType,
+      allowInput: allowInput ?? true,
+      dateFormat: dateFormat,
+      locale: localeData,
+      [enableOrDisable]: enableOrDisableArr,
+      minDate: minDate,
+      maxDate: maxDate,
+      parseDate: parseDate,
+      plugins: [
+        datePickerType === 'range'
+          ? carbonFlatpickrRangePlugin({
+              input: endInputField.current,
+            })
+          : () => {},
+        appendTo
+          ? appendToPlugin({
+              appendTo,
+            })
+          : () => {},
+        carbonFlatpickrMonthSelectPlugin({
+          selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
+          selectorFlatpickrYearContainer: '.numInputWrapper',
+          selectorFlatpickrCurrentMonth: '.cur-month',
+          classFlatpickrCurrentMonth: 'cur-month',
+        }),
+        carbonFlatpickrFixEventsPlugin({
+          inputFrom: startInputField.current,
+          inputTo: endInputField.current,
+          lastStartValue,
+        }),
+      ],
+      clickOpens: !readOnly,
+      noCalendar: readOnly,
+      nextArrow: rightArrowHTML,
+      prevArrow: leftArrowHTML,
+      onChange: (...args: [Date[], string, Instance]) => {
+        if (!readOnly) {
+          savedOnChange(...args);
         }
       },
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-      [onClose]
-    );
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-    const onCalendarClose = (selectedDates, dateStr, instance, e) => {
-      if (e && e.type === 'clickOutside') {
-        return;
-      }
-      setCalendarCloseEvent({ selectedDates, dateStr, instance });
+      onReady: onHook,
+      onMonthChange: onHook,
+      onYearChange: onHook,
+      onOpen: (...args: [Date[], string, Instance]) => {
+        onHook(...args);
+        savedOnOpen(...args);
+      },
+      onValueUpdate: onHook,
     };
-    useEffect(() => {
-      if (calendarCloseEvent) {
-        const { selectedDates, dateStr, instance } = calendarCloseEvent;
-        handleCalendarClose(selectedDates, dateStr, instance);
-        setCalendarCloseEvent(null);
-      }
-    }, [calendarCloseEvent, handleCalendarClose]);
+    const calendar = flatpickr(start, flatpickerConfig);
 
-    const endInputField = useRef<HTMLTextAreaElement>(null);
-    const lastFocusedField = useRef<HTMLTextAreaElement>(null);
-    const savedOnChange = useSavedCallback(onChange);
+    calendarRef.current = calendar;
 
-    const savedOnOpen = useSavedCallback(onOpen);
+    const handleInputFieldKeyDown = (event: KeyboardEvent) => {
+      const {
+        calendarContainer,
+        selectedDateElem: fpSelectedDateElem,
+        todayDateElem: fpTodayDateElem,
+      } = calendar;
 
-    const datePickerClasses = cx(`${prefix}--date-picker`, {
-      [`${prefix}--date-picker--short`]: short,
-      [`${prefix}--date-picker--light`]: light,
-      [`${prefix}--date-picker--simple`]: datePickerType === 'simple',
-      [`${prefix}--date-picker--single`]: datePickerType === 'single',
-      [`${prefix}--date-picker--range`]: datePickerType === 'range',
-      [`${prefix}--date-picker--nolabel`]:
-        datePickerType === 'range' && isLabelTextEmpty(children),
-    });
-    const wrapperClasses = cx(`${prefix}--form-item`, {
-      [String(className)]: className,
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-    const childrenWithProps = React.Children.toArray(children as any).map(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-      (child: any, index) => {
-        if (
-          index === 0 &&
-          child.type === React.createElement(DatePickerInput, child.props).type
-        ) {
-          return React.cloneElement(child, {
-            datePickerType,
-            ref: startInputField,
-            readOnly,
-          });
-        }
-        if (
-          index === 1 &&
-          child.type === React.createElement(DatePickerInput, child.props).type
-        ) {
-          return React.cloneElement(child, {
-            datePickerType,
-            ref: endInputField,
-            readOnly,
-          });
-        }
-        if (index === 0) {
-          return React.cloneElement(child, {
-            ref: startInputField,
-            readOnly,
-          });
-        }
-        if (index === 1) {
-          return React.cloneElement(child, {
-            ref: endInputField,
-            readOnly,
-          });
-        }
-      }
-    );
-
-    useEffect(() => {
-      initializeWeekdayShorthand();
-    }, []);
-
-    useEffect(() => {
-      if (datePickerType !== 'single' && datePickerType !== 'range') {
-        return;
+      if (match(event, keys.Escape)) {
+        calendarContainer.classList.remove('open');
       }
 
-      if (!startInputField.current) {
-        return;
-      }
+      if (match(event, keys.Tab)) {
+        if (!event.shiftKey) {
+          event.preventDefault();
+          calendarContainer.classList.add('open');
+          const selectedDateElem =
+            calendarContainer.querySelector('.selected') && fpSelectedDateElem;
+          const todayDateElem =
+            calendarContainer.querySelector('.today') && fpTodayDateElem;
+          (
+            (selectedDateElem ||
+              todayDateElem ||
+              calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+              calendarContainer) as HTMLElement
+          ).focus();
 
-      const onHook = (_electedDates, _dateStr, instance) => {
-        updateClassNames(instance, prefix);
-        if (startInputField?.current) {
-          startInputField.current.readOnly = readOnly;
-        }
-        if (endInputField?.current) {
-          endInputField.current.readOnly = readOnly;
-        }
-      };
-
-      // Logic to determine if `enable` or `disable` will be passed down. If neither
-      // is provided, we return the default empty disabled array, allowing all dates.
-      const enableOrDisable = enable ? 'enable' : 'disable';
-      let enableOrDisableArr;
-      if (!enable && !disable) {
-        enableOrDisableArr = [];
-      } else if (enable) {
-        enableOrDisableArr = enable;
-      } else {
-        enableOrDisableArr = disable;
-      }
-
-      let localeData;
-      if (typeof locale === 'object') {
-        const location = locale.locale ? locale.locale : 'en';
-        localeData = { ...l10n[location], ...locale };
-      } else {
-        localeData = l10n[locale];
-      }
-
-      /**
-       * parseDate is called before the date is actually set.
-       * It attempts to parse the input value and return a valid date string.
-       * Flatpickr's default parser results in odd dates when given invalid
-       * values, so instead here we normalize the month/day to `1` if given
-       * a value outside the acceptable range.
-       */
-      let parseDate;
-      if (!parseDateProp && dateFormat === 'm/d/Y') {
-        // This function only supports the default dateFormat.
-        parseDate = (date) => {
-          // Month must be 1-12. If outside these bounds, `1` should be used.
-          const month =
-            date.split('/')[0] <= 12 && date.split('/')[0] > 0
-              ? parseInt(date.split('/')[0])
-              : 1;
-          const year = parseInt(date.split('/')[2]);
-
-          if (month && year) {
-            // The month and year must be provided to be able to determine
-            // the number of days in the month.
-            const daysInMonth = new Date(year, month, 0).getDate();
-            // If the day does not fall within the days in the month, `1` should be used.
-            const day =
-              date.split('/')[1] <= daysInMonth && date.split('/')[1] > 0
-                ? parseInt(date.split('/')[1])
-                : 1;
-
-            return new Date(`${year}/${month}/${day}`);
-          } else {
-            // With no month and year, we cannot calculate anything.
-            // Returning false gives flatpickr an invalid date, which will clear the input
-            return false;
+          if (event.target === startInputField.current) {
+            lastFocusedField.current = startInputField.current;
+          } else if (event.target === endInputField.current) {
+            lastFocusedField.current = endInputField.current;
           }
-        };
-      } else if (parseDateProp) {
-        parseDate = parseDateProp;
-      }
-
-      const { current: start } = startInputField;
-      const { current: end } = endInputField;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-      const flatpickerConfig: any = {
-        inline: inline ?? false,
-        onClose: onCalendarClose,
-        disableMobile: true,
-        defaultDate: value,
-        closeOnSelect: closeOnSelect,
-        mode: datePickerType,
-        allowInput: allowInput ?? true,
-        dateFormat: dateFormat,
-        locale: localeData,
-        [enableOrDisable]: enableOrDisableArr,
-        minDate: minDate,
-        maxDate: maxDate,
-        parseDate: parseDate,
-        plugins: [
-          datePickerType === 'range'
-            ? carbonFlatpickrRangePlugin({
-                input: endInputField.current,
-              })
-            : () => {},
-          appendTo
-            ? appendToPlugin({
-                appendTo,
-              })
-            : () => {},
-          carbonFlatpickrMonthSelectPlugin({
-            selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
-            selectorFlatpickrYearContainer: '.numInputWrapper',
-            selectorFlatpickrCurrentMonth: '.cur-month',
-            classFlatpickrCurrentMonth: 'cur-month',
-          }),
-          carbonFlatpickrFixEventsPlugin({
-            inputFrom: startInputField.current,
-            inputTo: endInputField.current,
-            lastStartValue,
-          }),
-        ],
-        clickOpens: !readOnly,
-        noCalendar: readOnly,
-        nextArrow: rightArrowHTML,
-        prevArrow: leftArrowHTML,
-        onChange: (...args: [Date[], string, Instance]) => {
-          if (!readOnly) {
-            savedOnChange(...args);
-          }
-        },
-        onReady: onHook,
-        onMonthChange: onHook,
-        onYearChange: onHook,
-        onOpen: (...args: [Date[], string, Instance]) => {
-          onHook(...args);
-          savedOnOpen(...args);
-        },
-        onValueUpdate: onHook,
-      };
-      const calendar = flatpickr(start, flatpickerConfig);
-
-      calendarRef.current = calendar;
-
-      const handleInputFieldKeyDown = (event: KeyboardEvent) => {
-        const {
-          calendarContainer,
-          selectedDateElem: fpSelectedDateElem,
-          todayDateElem: fpTodayDateElem,
-        } = calendar;
-
-        if (match(event, keys.Escape)) {
-          calendarContainer.classList.remove('open');
+        } else if (
+          calendarRef.current?.isOpen &&
+          event.target === startInputField.current
+        ) {
+          calendarRef.current.close();
+          onCalendarClose(
+            calendarRef.current.selectedDates,
+            '',
+            calendarRef.current,
+            event
+          );
         }
+      }
+    };
 
-        if (match(event, keys.Tab)) {
-          if (!event.shiftKey) {
-            event.preventDefault();
-            calendarContainer.classList.add('open');
-            const selectedDateElem =
-              calendarContainer.querySelector('.selected') &&
-              fpSelectedDateElem;
-            const todayDateElem =
-              calendarContainer.querySelector('.today') && fpTodayDateElem;
-            (
-              (selectedDateElem ||
-                todayDateElem ||
-                calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-                calendarContainer) as HTMLElement
-            ).focus();
-
-            if (event.target === startInputField.current) {
-              lastFocusedField.current = startInputField.current;
-            } else if (event.target === endInputField.current) {
-              lastFocusedField.current = endInputField.current;
-            }
-          } else if (
-            calendarRef.current?.isOpen &&
-            event.target === startInputField.current
-          ) {
+    const handleCalendarKeyDown = (event: KeyboardEvent) => {
+      if (!calendarRef.current || !startInputField.current) return;
+      const lastInputField =
+        datePickerType == 'range'
+          ? endInputField.current
+          : startInputField.current;
+      if (match(event, keys.Tab)) {
+        if (!event.shiftKey) {
+          if (lastFocusedField.current === lastInputField) {
+            lastInputField.focus();
             calendarRef.current.close();
             onCalendarClose(
               calendarRef.current.selectedDates,
@@ -745,302 +764,280 @@ const DatePicker = React.forwardRef(
               calendarRef.current,
               event
             );
-          }
-        }
-      };
-
-      const handleCalendarKeyDown = (event: KeyboardEvent) => {
-        if (!calendarRef.current || !startInputField.current) return;
-        const lastInputField =
-          datePickerType == 'range'
-            ? endInputField.current
-            : startInputField.current;
-        if (match(event, keys.Tab)) {
-          if (!event.shiftKey) {
-            if (lastFocusedField.current === lastInputField) {
-              lastInputField.focus();
-              calendarRef.current.close();
-              onCalendarClose(
-                calendarRef.current.selectedDates,
-                '',
-                calendarRef.current,
-                event
-              );
-            } else {
-              event.preventDefault();
-              lastInputField.focus();
-            }
           } else {
             event.preventDefault();
-            (lastFocusedField.current || startInputField.current).focus();
+            lastInputField.focus();
           }
-        }
-      };
-
-      function handleOnChange(event) {
-        const { target } = event;
-        if (target === start) {
-          lastStartValue.current = start.value;
-        }
-
-        if (start.value !== '') {
-          return;
-        }
-
-        if (!calendar.selectedDates) {
-          return;
-        }
-
-        if (calendar.selectedDates.length === 0) {
-          return;
+        } else {
+          event.preventDefault();
+          (lastFocusedField.current || startInputField.current).focus();
         }
       }
+    };
 
-      function handleKeyPress(event) {
-        if (
-          match(event, keys.Enter) &&
-          closeOnSelect &&
-          datePickerType == 'single'
-        ) {
-          calendar.calendarContainer.classList.remove('open');
-        }
+    function handleOnChange(event) {
+      const { target } = event;
+      if (target === start) {
+        lastStartValue.current = start.value;
       }
 
-      if (start) {
-        start.addEventListener('keydown', handleInputFieldKeyDown);
-        start.addEventListener('change', handleOnChange);
-        start.addEventListener('keypress', handleKeyPress);
-
-        if (calendar && calendar.calendarContainer) {
-          // Flatpickr's calendar dialog is not rendered in a landmark causing an
-          // error with IBM Equal Access Accessibility Checker so we add an aria
-          // role to the container div.
-          calendar.calendarContainer.setAttribute('role', 'application');
-          // IBM EAAC requires an aria-label on a role='region'
-          calendar.calendarContainer.setAttribute(
-            'aria-label',
-            'calendar-container'
-          );
-        }
+      if (start.value !== '') {
+        return;
       }
 
-      if (end) {
-        end.addEventListener('keydown', handleInputFieldKeyDown);
-        end.addEventListener('change', handleOnChange);
-        end.addEventListener('keypress', handleKeyPress);
+      if (!calendar.selectedDates) {
+        return;
       }
 
-      if (calendar.calendarContainer) {
-        calendar.calendarContainer.addEventListener(
-          'keydown',
-          handleCalendarKeyDown
-        );
+      if (calendar.selectedDates.length === 0) {
+        return;
       }
+    }
 
-      //component did unmount equivalent
-      return () => {
-        // Note: if the `startInputField` ref is undefined then calendar will be
-        // of type: Array and `destroy` will not be defined
-        if (calendar && calendar.destroy) {
-          calendar.destroy();
-        }
-
-        // prevent a duplicate date selection when a default value is set
-        if (value) {
-          if (startInputField?.current) {
-            startInputField.current.value = '';
-          }
-          if (endInputField?.current) {
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            endInputField.current.value = '';
-          }
-        }
-
-        if (start) {
-          start.removeEventListener('keydown', handleInputFieldKeyDown);
-          start.removeEventListener('change', handleOnChange);
-          start.removeEventListener('keypress', handleKeyPress);
-        }
-
-        if (end) {
-          end.removeEventListener('keydown', handleInputFieldKeyDown);
-          end.removeEventListener('change', handleOnChange);
-          end.removeEventListener('keypress', handleKeyPress);
-        }
-
-        if (calendar.calendarContainer) {
-          calendar.calendarContainer.removeEventListener(
-            'keydown',
-            handleCalendarKeyDown
-          );
-        }
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [
-      savedOnChange,
-      savedOnOpen,
-      readOnly,
-      closeOnSelect,
-      hasInput,
-      datePickerType,
-    ]);
-
-    // this hook allows consumers to access the flatpickr calendar
-    // instance for cases where functions like open() or close()
-    // need to be imperatively called on the calendar
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-    useImperativeHandle(ref, (): any => ({
-      get calendar() {
-        return calendarRef.current;
-      },
-    }));
-
-    useEffect(() => {
-      if (calendarRef.current?.set) {
-        calendarRef.current.set({ dateFormat });
-      }
-    }, [dateFormat]);
-
-    useEffect(() => {
-      if (calendarRef.current?.set) {
-        calendarRef.current.set('minDate', minDate);
-      }
-    }, [minDate]);
-
-    useEffect(() => {
-      if (calendarRef.current?.set) {
-        calendarRef.current.set('allowInput', allowInput);
-      }
-    }, [allowInput]);
-
-    useEffect(() => {
-      if (calendarRef.current?.set) {
-        calendarRef.current.set('maxDate', maxDate);
-      }
-    }, [maxDate]);
-
-    useEffect(() => {
-      if (calendarRef.current?.set && disable) {
-        calendarRef.current.set('disable', disable);
-      }
-    }, [disable]);
-
-    useEffect(() => {
-      if (calendarRef.current?.set && enable) {
-        calendarRef.current.set('enable', enable);
-      }
-    }, [enable]);
-
-    useEffect(() => {
-      if (calendarRef.current?.set && inline) {
-        calendarRef.current.set('inline', inline);
-      }
-    }, [inline]);
-
-    useEffect(() => {
-      // when value prop is manually reset, this clears the flatpickr calendar instance and text input
-      // run if both:
-      // 1. value prop is set to a falsy value (`""`, `undefined`, `null`, etc) OR an array of all falsy values
-      // 2. flatpickr instance contains values in its `selectedDates` property so it hasn't already been cleared
+    function handleKeyPress(event) {
       if (
-        (!value || (Array.isArray(value) && value.every((date) => !date))) &&
-        calendarRef.current?.selectedDates.length
+        match(event, keys.Enter) &&
+        closeOnSelect &&
+        datePickerType == 'single'
       ) {
-        calendarRef.current?.clear();
-
-        if (startInputField.current) {
-          startInputField.current.value = '';
-        }
-
-        if (endInputField.current) {
-          endInputField.current.value = '';
-        }
+        calendar.calendarContainer.classList.remove('open');
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-    }, [value]);
+    }
 
-    useEffect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
-      let isMouseDown = false;
+    if (start) {
+      start.addEventListener('keydown', handleInputFieldKeyDown);
+      start.addEventListener('change', handleOnChange);
+      start.addEventListener('keypress', handleKeyPress);
 
-      const handleMouseDown = (event) => {
-        if (
-          calendarRef.current &&
-          calendarRef.current.isOpen &&
-          !calendarRef.current.calendarContainer.contains(event.target) &&
-          !startInputField.current.contains(event.target) &&
-          !endInputField.current?.contains(event.target)
-        ) {
-          isMouseDown = true;
-          // Close the calendar immediately on mousedown
-          closeCalendar(event);
-        }
-      };
-
-      const closeCalendar = (event) => {
-        calendarRef.current?.close();
-        // Remove focus from endDate calendar input
-        onCalendarClose(
-          calendarRef.current?.selectedDates,
-          '',
-          calendarRef.current,
-          { type: 'clickOutside' }
-        );
-      };
-      document.addEventListener('mousedown', handleMouseDown, true);
-
-      return () => {
-        document.removeEventListener('mousedown', handleMouseDown, true);
-      };
-    }, [calendarRef, startInputField, endInputField, onCalendarClose]);
-
-    useEffect(() => {
-      if (calendarRef.current?.set) {
-        if (value !== undefined) {
-          calendarRef.current.setDate(value);
-        }
-        updateClassNames(calendarRef.current, prefix);
-        //for simple date picker w/o calendar; initial mount may not have value
-      } else if (!calendarRef.current && value) {
-        startInputField.current.value = value;
-      }
-    }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
-
-    let fluidError;
-    if (isFluid) {
-      if (invalid) {
-        fluidError = (
-          <>
-            <WarningFilled
-              className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
-            />
-            <hr className={`${prefix}--date-picker__divider`} />
-            <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-          </>
-        );
-      }
-
-      if (warn && !invalid) {
-        fluidError = (
-          <>
-            <WarningAltFilled
-              className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
-            />
-            <hr className={`${prefix}--date-picker__divider`} />
-            <div className={`${prefix}--form-requirement`}>{warnText}</div>
-          </>
+      if (calendar && calendar.calendarContainer) {
+        // Flatpickr's calendar dialog is not rendered in a landmark causing an
+        // error with IBM Equal Access Accessibility Checker so we add an aria
+        // role to the container div.
+        calendar.calendarContainer.setAttribute('role', 'application');
+        // IBM EAAC requires an aria-label on a role='region'
+        calendar.calendarContainer.setAttribute(
+          'aria-label',
+          'calendar-container'
         );
       }
     }
 
-    return (
-      <div className={wrapperClasses} ref={ref} {...rest}>
-        <div className={datePickerClasses}>{childrenWithProps}</div>
-        {fluidError}
-      </div>
-    );
+    if (end) {
+      end.addEventListener('keydown', handleInputFieldKeyDown);
+      end.addEventListener('change', handleOnChange);
+      end.addEventListener('keypress', handleKeyPress);
+    }
+
+    if (calendar.calendarContainer) {
+      calendar.calendarContainer.addEventListener(
+        'keydown',
+        handleCalendarKeyDown
+      );
+    }
+
+    //component did unmount equivalent
+    return () => {
+      // Note: if the `startInputField` ref is undefined then calendar will be
+      // of type: Array and `destroy` will not be defined
+      if (calendar && calendar.destroy) {
+        calendar.destroy();
+      }
+
+      // prevent a duplicate date selection when a default value is set
+      if (value) {
+        if (startInputField?.current) {
+          startInputField.current.value = '';
+        }
+        if (endInputField?.current) {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          endInputField.current.value = '';
+        }
+      }
+
+      if (start) {
+        start.removeEventListener('keydown', handleInputFieldKeyDown);
+        start.removeEventListener('change', handleOnChange);
+        start.removeEventListener('keypress', handleKeyPress);
+      }
+
+      if (end) {
+        end.removeEventListener('keydown', handleInputFieldKeyDown);
+        end.removeEventListener('change', handleOnChange);
+        end.removeEventListener('keypress', handleKeyPress);
+      }
+
+      if (calendar.calendarContainer) {
+        calendar.calendarContainer.removeEventListener(
+          'keydown',
+          handleCalendarKeyDown
+        );
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    savedOnChange,
+    savedOnOpen,
+    readOnly,
+    closeOnSelect,
+    hasInput,
+    datePickerType,
+  ]);
+
+  // this hook allows consumers to access the flatpickr calendar
+  // instance for cases where functions like open() or close()
+  // need to be imperatively called on the calendar
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  useImperativeHandle(ref, (): any => ({
+    get calendar() {
+      return calendarRef.current;
+    },
+  }));
+
+  useEffect(() => {
+    if (calendarRef.current?.set) {
+      calendarRef.current.set({ dateFormat });
+    }
+  }, [dateFormat]);
+
+  useEffect(() => {
+    if (calendarRef.current?.set) {
+      calendarRef.current.set('minDate', minDate);
+    }
+  }, [minDate]);
+
+  useEffect(() => {
+    if (calendarRef.current?.set) {
+      calendarRef.current.set('allowInput', allowInput);
+    }
+  }, [allowInput]);
+
+  useEffect(() => {
+    if (calendarRef.current?.set) {
+      calendarRef.current.set('maxDate', maxDate);
+    }
+  }, [maxDate]);
+
+  useEffect(() => {
+    if (calendarRef.current?.set && disable) {
+      calendarRef.current.set('disable', disable);
+    }
+  }, [disable]);
+
+  useEffect(() => {
+    if (calendarRef.current?.set && enable) {
+      calendarRef.current.set('enable', enable);
+    }
+  }, [enable]);
+
+  useEffect(() => {
+    if (calendarRef.current?.set && inline) {
+      calendarRef.current.set('inline', inline);
+    }
+  }, [inline]);
+
+  useEffect(() => {
+    // when value prop is manually reset, this clears the flatpickr calendar instance and text input
+    // run if both:
+    // 1. value prop is set to a falsy value (`""`, `undefined`, `null`, etc) OR an array of all falsy values
+    // 2. flatpickr instance contains values in its `selectedDates` property so it hasn't already been cleared
+    if (
+      (!value || (Array.isArray(value) && value.every((date) => !date))) &&
+      calendarRef.current?.selectedDates.length
+    ) {
+      calendarRef.current?.clear();
+
+      if (startInputField.current) {
+        startInputField.current.value = '';
+      }
+
+      if (endInputField.current) {
+        endInputField.current.value = '';
+      }
+    }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  }, [value]);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    let isMouseDown = false;
+
+    const handleMouseDown = (event) => {
+      if (
+        calendarRef.current &&
+        calendarRef.current.isOpen &&
+        !calendarRef.current.calendarContainer.contains(event.target) &&
+        !startInputField.current.contains(event.target) &&
+        !endInputField.current?.contains(event.target)
+      ) {
+        isMouseDown = true;
+        // Close the calendar immediately on mousedown
+        closeCalendar(event);
+      }
+    };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    const closeCalendar = (event) => {
+      calendarRef.current?.close();
+      // Remove focus from endDate calendar input
+      onCalendarClose(
+        calendarRef.current?.selectedDates,
+        '',
+        calendarRef.current,
+        { type: 'clickOutside' }
+      );
+    };
+    document.addEventListener('mousedown', handleMouseDown, true);
+
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown, true);
+    };
+  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
+
+  useEffect(() => {
+    if (calendarRef.current?.set) {
+      if (value !== undefined) {
+        calendarRef.current.setDate(value);
+      }
+      updateClassNames(calendarRef.current, prefix);
+      //for simple date picker w/o calendar; initial mount may not have value
+    } else if (!calendarRef.current && value) {
+      startInputField.current.value = value;
+    }
+  }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  let fluidError;
+  if (isFluid) {
+    if (invalid) {
+      fluidError = (
+        <>
+          <WarningFilled
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
+          />
+          <hr className={`${prefix}--date-picker__divider`} />
+          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        </>
+      );
+    }
+
+    if (warn && !invalid) {
+      fluidError = (
+        <>
+          <WarningAltFilled
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
+          />
+          <hr className={`${prefix}--date-picker__divider`} />
+          <div className={`${prefix}--form-requirement`}>{warnText}</div>
+        </>
+      );
+    }
   }
-);
+
+  return (
+    <div className={wrapperClasses} ref={ref} {...rest}>
+      <div className={datePickerClasses}>{childrenWithProps}</div>
+      {fluidError}
+    </div>
+  );
+});
 
 DatePicker.propTypes = {
   /**
