@@ -48,7 +48,10 @@ import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
-  '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.';
+  '`<Modal>` prop `preventCloseOnClickOutside` should not be `false` when ' +
+  '`passiveModal` is `false`. Transactional, non-passive Modals should ' +
+  'not be dissmissable by clicking outside. ' +
+  'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal';
 
 export type ModalSize = (typeof ModalSizes)[number];
 
@@ -239,76 +242,85 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   slug?: ReactNode;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
-const Modal = React.forwardRef(
-  (
-    {
-      'aria-label': ariaLabelProp,
-      children,
-      className,
-      decorator,
-      modalHeading = '',
-      modalLabel = '',
-      modalAriaLabel,
-      passiveModal = false,
-      secondaryButtonText,
-      primaryButtonText,
-      open,
-      onRequestClose = noopFn,
-      onRequestSubmit = noopFn,
-      onSecondarySubmit,
-      primaryButtonDisabled = false,
-      danger,
-      alert,
-      secondaryButtons,
-      selectorPrimaryFocus = '[data-modal-primary-focus]',
-      selectorsFloatingMenus,
-      shouldSubmitOnEnter,
-      size,
-      hasScrollingContent = false,
-      closeButtonLabel = 'Close',
-      preventCloseOnClickOutside = !passiveModal,
-      isFullWidth,
-      launcherButtonRef,
-      loadingStatus = 'inactive',
-      loadingDescription,
-      loadingIconDescription,
-      onLoadingSuccess = noopFn,
-      slug,
-      ...rest
-    }: ModalProps,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
-    const prefix = usePrefix();
-    const button = useRef<HTMLButtonElement>(null);
-    const secondaryButton = useRef<HTMLButtonElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
-    const innerModal = useRef<HTMLDivElement>(null);
-    const startTrap = useRef<HTMLSpanElement>(null);
-    const endTrap = useRef<HTMLSpanElement>(null);
-    const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
-    const [isScrollable, setIsScrollable] = useState(false);
-    const prevOpen = usePreviousValue(open);
-    const modalInstanceId = `modal-${useId()}`;
-    const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
-    const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
-    const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
-    const modalCloseButtonClass = `${prefix}--modal-close`;
-    const primaryButtonClass = classNames({
-      [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
-    });
-    const loadingActive = loadingStatus !== 'inactive';
 
-    const focusTrapWithoutSentinels = useFeatureFlag(
-      'enable-experimental-focus-wrap-without-sentinels'
-    );
-    const enableDialogElement = useFeatureFlag('enable-dialog-element');
-    warning(
-      !(focusTrapWithoutSentinels && enableDialogElement),
-      '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
-        '`enableDialogElement` feature flags are enabled. The native dialog ' +
-        'element handles focus, so `enableDialogElement` must be off for ' +
-        '`focusTrapWithoutSentinels` to have any effect.'
+const Modal = React.forwardRef(function Modal(
+  {
+    'aria-label': ariaLabelProp,
+    children,
+    className,
+    decorator,
+    modalHeading = '',
+    modalLabel = '',
+    modalAriaLabel,
+    passiveModal = false,
+    secondaryButtonText,
+    primaryButtonText,
+    open,
+    onRequestClose = noopFn,
+    onRequestSubmit = noopFn,
+    onSecondarySubmit,
+    primaryButtonDisabled = false,
+    danger,
+    alert,
+    secondaryButtons,
+    selectorPrimaryFocus = '[data-modal-primary-focus]',
+    selectorsFloatingMenus,
+    shouldSubmitOnEnter,
+    size,
+    hasScrollingContent = false,
+    closeButtonLabel = 'Close',
+    preventCloseOnClickOutside,
+    isFullWidth,
+    launcherButtonRef,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    onLoadingSuccess = noopFn,
+    slug,
+    ...rest
+  }: ModalProps,
+  ref: React.Ref<HTMLDivElement>
+) {
+  const prefix = usePrefix();
+  const button = useRef<HTMLButtonElement>(null);
+  const secondaryButton = useRef<HTMLButtonElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const innerModal = useRef<HTMLDivElement>(null);
+  const startTrap = useRef<HTMLSpanElement>(null);
+  const endTrap = useRef<HTMLSpanElement>(null);
+  const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
+  const [isScrollable, setIsScrollable] = useState(false);
+  const prevOpen = usePreviousValue(open);
+  const modalInstanceId = `modal-${useId()}`;
+  const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
+  const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
+  const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
+  const modalCloseButtonClass = `${prefix}--modal-close`;
+  const primaryButtonClass = classNames({
+    [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
+  });
+  const loadingActive = loadingStatus !== 'inactive';
+
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
+  const enableDialogElement = useFeatureFlag('enable-dialog-element');
+  warning(
+    !(focusTrapWithoutSentinels && enableDialogElement),
+    '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+      '`enableDialogElement` feature flags are enabled. The native dialog ' +
+      'element handles focus, so `enableDialogElement` must be off for ' +
+      '`focusTrapWithoutSentinels` to have any effect.'
+  );
+  warning(
+    !(!passiveModal && preventCloseOnClickOutside === false),
+    invalidOutsideClickMessage
+  );
+
+  function isCloseButton(element: Element) {
+    return (
+      (!onSecondarySubmit && element === secondaryButton.current) ||
+      element.classList.contains(modalCloseButtonClass)
     );
 
     if (!passiveModal && preventCloseOnClickOutside === false) {
@@ -396,6 +408,32 @@ const Modal = React.forwardRef(
           }
         });
       }
+    }
+  }
+
+  function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
+    const { target } = evt;
+    evt.stopPropagation();
+
+    const shouldCloseOnOutsideClick =
+      // Passive modals can close on clicks outside the modal when
+      // preventCloseOnClickOutside is undefined or explicitly set to false.
+      (passiveModal && !preventCloseOnClickOutside) ||
+      // Non-passive modals have to explicitly opt-in for close on outside
+      // behavior by explicitly setting preventCloseOnClickOutside to false,
+      // rather than just leaving it undefined.
+      (!passiveModal && preventCloseOnClickOutside === false);
+
+    if (
+      shouldCloseOnOutsideClick &&
+      target instanceof Node &&
+      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+      innerModal.current &&
+      !innerModal.current.contains(target)
+    ) {
+      onRequestClose(evt);
+    }
+  }
 
       // Adjust scroll if needed so that element with focus is not obscured by gradient
       const modalContent = document.querySelector(`.${prefix}--modal-content`);

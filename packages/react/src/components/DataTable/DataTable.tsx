@@ -17,7 +17,7 @@ import React, { // eslint-disable-line @typescript-eslint/no-unused-vars -- http
 } from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
-import { getNextSortState } from './state/sorting';
+import { getNextSortState, type SortRowFn } from './state/sorting';
 import type { DataTableSortState } from './state/sortStates';
 import { getCellId } from './tools/cells';
 import denormalize from './tools/denormalize';
@@ -262,23 +262,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   ) => ReactElement;
   rows: Omit<DataTableRow<ColTypes>, 'cells'>[];
   size?: DataTableSize;
-  sortRow?: (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-    cellA: any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-    cellB: any,
-    options: {
-      sortDirection: DataTableSortState;
-      sortStates: Record<DataTableSortState, DataTableSortState>;
-      locale: string;
-      key: string;
-      compare: (
-        a: number | string,
-        b: number | string,
-        locale?: string
-      ) => number;
-    }
-  ) => number;
+  sortRow?: SortRowFn;
   stickyHeader?: boolean;
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
