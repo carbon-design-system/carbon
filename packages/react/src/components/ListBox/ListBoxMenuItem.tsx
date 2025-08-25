@@ -50,6 +50,7 @@ const useIsTruncated = <T extends HTMLElement>(
 
       setIsTruncated(offsetWidth < scrollWidth);
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [localRef, ...deps]);
 
   return { isTruncated, ref: mergedRef };

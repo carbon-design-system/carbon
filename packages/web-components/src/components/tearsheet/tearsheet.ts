@@ -405,6 +405,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
 
     if (actionsCount > this._maxActions) {
       this._actionsCount = this._maxActions;
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.error(`Too many tearsheet actions, max ${this._maxActions}.`);
     } else {
       this._actionsCount = actionsCount;
@@ -675,14 +676,17 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     ) {
       if (this.width === 'narrow') {
         if (this._hasHeaderNavigation) {
+          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
           console.error(
             `Header navigation is not permitted in narrow Tearsheet.`
           );
         }
         if (this._hasInfluencerLeft || this._hasInfluencerRight) {
+          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
           console.error(`Influencer is not permitted in narrow Tearsheet.`);
         }
         if (this._hasHeaderActions) {
+          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
           console.error(
             `Header actions are not permitted in narrow Tearsheet.`
           );

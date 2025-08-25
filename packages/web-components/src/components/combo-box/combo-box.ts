@@ -113,7 +113,7 @@ class CDSComboBox extends CDSDropdown {
           const isViewable =
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             menuRect!.top <= itemRect?.top &&
-            // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             itemRect?.bottom <= menuRect?.top + this._itemMenu!.clientHeight;
           if (!isViewable) {
             const scrollTop = itemRect?.top - menuRect?.top;
@@ -260,6 +260,7 @@ class CDSComboBox extends CDSDropdown {
     `;
   }
 
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   protected _renderFollowingLabel(): TemplateResult | void {
     const { clearSelectionLabel, _filterInputValue: filterInputValue } = this;
 

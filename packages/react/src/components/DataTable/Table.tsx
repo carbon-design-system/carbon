@@ -131,6 +131,7 @@ export const Table = ({
 
   const toggleTableBodyAlignmentClass = useCallback(
     (alignTop = false) => {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       alignTop
         ? tableRef.current?.classList.add(
             `${prefix}--data-table--top-aligned-body`
@@ -144,6 +145,7 @@ export const Table = ({
 
   const toggleTableHeaderAlignmentClass = useCallback(
     (alignTop = false) => {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       alignTop
         ? tableRef.current?.classList.add(
             `${prefix}--data-table--top-aligned-header`

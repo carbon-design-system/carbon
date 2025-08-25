@@ -67,6 +67,7 @@ figma.connect(
   {
     props: { children: figma.children(['UI shell - Header sub-menu item']) },
     example: ({ children }) => (
+      /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */
       <UIShellHeaderSubMenu>{children}</UIShellHeaderSubMenu>
     ),
   }

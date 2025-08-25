@@ -173,8 +173,8 @@ describe('file-uploader', () => {
         // Workaround for `HTMLInputElement.files` that only accepts `FileList` while there is no `FileList` constructor
         spyOn(elem, '_getFiles').and.callFake(function (event) {
           // TODO: See if we can get around TS2683
-          //  @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+          // @ts-ignore
           return origGetFiles.call(this, {
             type: event.type,
             target: {

@@ -377,6 +377,7 @@ const Dropdown = React.forwardRef(
           }
         });
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [floatingStyles, autoAlign, refs.floating]);
 
     const prefix = usePrefix();
@@ -404,6 +405,7 @@ const Dropdown = React.forwardRef(
         if (
           highlightedIndex !== undefined &&
           highlightedIndex > -1 &&
+          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
           typeof window !== undefined
         ) {
           const itemArray = document.querySelectorAll(
@@ -433,6 +435,7 @@ const Dropdown = React.forwardRef(
         onHighlightedIndexChange,
         ...downshiftProps,
       }),
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
       [
         items,
         itemToString,
@@ -567,6 +570,7 @@ const Dropdown = React.forwardRef(
           toggleButtonProps.onKeyDown(evt);
         }
       },
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
       [isTyping, currTimer, toggleButtonProps]
     );
 
@@ -592,6 +596,7 @@ const Dropdown = React.forwardRef(
           onKeyDown: onKeyDownHandler,
         };
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [readOnly, onKeyDownHandler]);
 
     const menuProps = useMemo(

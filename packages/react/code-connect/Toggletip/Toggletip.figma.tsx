@@ -47,8 +47,10 @@ figma.connect(
           <ToggletipButton label="Show information">
             <Information />
           </ToggletipButton>
+          {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */}
           <ToggletipContent>
             <p>{toggletip.content}</p>
+            {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */}
             <ToggletipActions>
               {toggletip.link}
               {toggletip.button}

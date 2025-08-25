@@ -36,7 +36,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -45,7 +45,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -93,7 +93,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: MouseEvent) => {
     if (
-      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       event.composedPath().indexOf(this.shadowRoot!) < 0 &&
       !this.preventCloseOnClickOutside
     ) {
@@ -255,6 +255,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * Handles `slotchange` event.
    */
   private _handleSlotChange() {
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     this.querySelector(`${prefix}-modal-footer`)
       ? this.setAttribute('has-footer', '')
       : this.removeAttribute('has-footer');
@@ -372,7 +373,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
   async updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (this.open) {
-        // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this._launcher = this.ownerDocument!.activeElement;
         const primaryFocusNode = this.querySelector(
           (this.constructor as typeof CDSModal).selectorPrimaryFocus

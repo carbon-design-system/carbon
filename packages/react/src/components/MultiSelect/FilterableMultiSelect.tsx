@@ -334,6 +334,7 @@ export interface FilterableMultiSelectProps<ItemType>
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(
@@ -426,7 +427,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     );
 
     const nonSelectedCount = selectable.filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (item) => !controlledSelectedItems.some((sel) => isEqual(sel, item))
     ).length;
 
@@ -456,6 +456,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       );
       toggleAll([...controlledSelectedItems, ...toSelect]);
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [nonSelectAllItems, selectAllStatus, controlledSelectedItems, toggleAll]);
 
   const { refs, floatingStyles, middlewareData } = useFloating(
@@ -521,6 +522,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     );
 
     // Sort only non-select-all items, select-all item must stay at the top
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const sortedReal = sortItems!(nonSelectAllItems, {
       selectedItems: {
         top: controlledSelectedItems,
@@ -537,6 +539,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       return [selectAllItem, ...sortedReal];
     }
     return sortedReal;
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [
     items,
     inputValue,
@@ -652,6 +655,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [isOpen, inputFocused]);
 
   const {
@@ -677,6 +681,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     stateReducer,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     isItemDisabled(item, _index) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       return (item as any)?.disabled;
     },
   });
@@ -1228,6 +1233,7 @@ FilterableMultiSelect.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),
 

@@ -140,6 +140,7 @@ function Tabs({
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
+    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
     console.error(
       'dismissable property specified without also providing an onTabCloseRequest property.'
     );
@@ -619,6 +620,7 @@ function TabList({
         inline: 'nearest',
       });
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
 
   useEffect(() => {
@@ -648,6 +650,7 @@ function TabList({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
 
   useIsomorphicEffect(() => {
@@ -966,6 +969,7 @@ function TabListVertical({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
 
   useEffect(() => {
@@ -986,6 +990,7 @@ function TabListVertical({
             halfTabHeight >
             containerHeight
         ) {
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
           ref.current &&
             ref.current.scrollTo({
               top: (selectedIndex - 1) * verticalTabHeight,
@@ -1812,6 +1817,7 @@ function TabPanels({ children }: TabPanelsProps) {
       {React.Children.map(children, (child, index) => {
         return !isElement(child) ? null : (
           <TabPanelContext.Provider value={index}>
+            {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071 */}
             {React.cloneElement(child as React.ReactElement<any>, {
               ref: (element: HTMLDivElement) => {
                 refs.current[index] = element;

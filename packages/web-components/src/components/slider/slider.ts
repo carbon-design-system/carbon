@@ -325,8 +325,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     if (!this.disabled && !this.readonly) {
       const { _trackNode: trackNode } = this;
       const isRtl =
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         trackNode
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           .ownerDocument!.defaultView!.getComputedStyle(trackNode)
           .getPropertyValue('direction') === 'rtl';
       const thumbPosition = event.clientX;
@@ -389,6 +389,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               !this._draggingUpper &&
               differenceValue === differenceValueUpper
             ) {
+              // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
               Math.round(position) > this.unstable_valueUpper
                 ? (this._rateUpper = position / 100)
                 : (this._rate = position / 100);
@@ -425,7 +426,6 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _dragging: dragging,
       _draggingUpper: draggingUpper,
     } = this;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     if (!disabled && (dragging || draggingUpper)) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       this._throttledHandlePointermoveImpl!(event);
@@ -444,11 +444,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _trackNode: trackNode,
       _draggingUpper: draggingUpper,
     } = this;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     if (!disabled) {
       const isRtl =
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         trackNode
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           .ownerDocument!.defaultView!.getComputedStyle(trackNode)
           .getPropertyValue('direction') === 'rtl';
       const thumbPosition = event.clientX;
@@ -573,6 +572,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     }
     const valueMain =
       eventContainer === 'upper' ? this.unstable_valueUpper : this.value;
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     valueMain !== '' &&
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {

@@ -60,6 +60,7 @@ export const useResizeObserver = ({
       return;
     }
     getInitialSize();
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [width, height]);
 
   useLayoutEffect(() => {
@@ -77,6 +78,7 @@ export const useResizeObserver = ({
       setWidth(entry.contentRect.width);
       setHeight(entry.contentRect.height);
 
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       cb.current && cb.current(entry.contentRect);
     };
 
@@ -96,6 +98,7 @@ export const useResizeObserver = ({
     return () => {
       observer.disconnect();
     };
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
   return { width, height };
 };

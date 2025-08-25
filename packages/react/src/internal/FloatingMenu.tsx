@@ -390,6 +390,7 @@ export const FloatingMenu = ({
 
       placeInProgressRef.current = false;
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [floatingPosition, onPlace]);
 
   // Attach a resize listener.
@@ -401,6 +402,7 @@ export const FloatingMenu = ({
     return () => {
       resizeHandler.remove();
     };
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [
     triggerRef,
     menuOffset,
@@ -413,6 +415,7 @@ export const FloatingMenu = ({
   // Update menu position when key props change.
   useEffect(() => {
     updateMenuPosition();
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [
     menuOffset,
     menuDirection,
@@ -502,6 +505,7 @@ export const FloatingMenu = ({
     const portalTarget = target ? target() : document.body;
 
     return ReactDOM.createPortal(
+      // eslint-disable-next-line  jsx-a11y/no-static-element-interactions  -- https://github.com/carbon-design-system/carbon/issues/20071
       <div
         onBlur={
           focusTrap && !focusTrapWithoutSentinels ? handleBlur : undefined

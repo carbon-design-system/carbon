@@ -69,6 +69,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -77,7 +78,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -450,6 +451,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     if (actionsCount > this._maxActions) {
       this._actionsCount = this._maxActions;
       if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
         console.error(`Too many side-panel actions, max ${this._maxActions}.`);
       }
     } else {
@@ -897,7 +899,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       this.disconnectObservers();
       if (this.open) {
         this.connectObservers();
-        // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this._launcher = this.ownerDocument!.activeElement;
         const focusNode =
           this.selectorInitialFocus &&

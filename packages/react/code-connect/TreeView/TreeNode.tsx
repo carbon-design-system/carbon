@@ -17,6 +17,7 @@ figma.connect(
   {
     props: {
       renderIcon: figma.boolean('Icon', {
+        /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */
         true: <AddActualIconName />,
       }),
       label: figma.string('Node text'),

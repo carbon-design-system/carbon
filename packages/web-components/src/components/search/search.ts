@@ -70,7 +70,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       this.value = '';
 
       // set focus on back to input once search is cleared
-      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const input = this.shadowRoot!.querySelector('input');
       (input as HTMLElement).focus();
     }

@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
+import React, { // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   useEffect,
   useMemo,
   useState,
@@ -196,6 +196,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   };
   getBatchActionProps: (options?: { [key: string]: unknown }) => {
     onCancel: () => void;
+    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
     onSelectAll?: () => void | undefined;
     shouldShowBatchActions: boolean;
     totalCount: number;
@@ -364,6 +365,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
       setState((prev) => getDerivedStateFromProps(props, prev));
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [headers, rows]);
 
   /**
@@ -390,6 +392,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
           key: header.key,
         });
         setState((prev) => ({ ...prev, ...nextSortState }));
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
         onClick &&
           handleOnHeaderClick(onClick, {
             sortHeaderKey: header.key,

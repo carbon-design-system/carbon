@@ -42,6 +42,7 @@ export interface HeaderMenuItemComponent {
   propTypes?: WeakValidationMap<HeaderMenuItemProps<any>>;
 }
 
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const HeaderMenuItem = forwardRef(function HeaderMenuItem<
   E extends ElementType = 'a',
 >(

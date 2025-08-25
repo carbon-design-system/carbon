@@ -77,6 +77,7 @@ figma.connect(
   }
 );
 
+// eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
 WithPersistentSearch;
 figma.connect(
   ContainedList,

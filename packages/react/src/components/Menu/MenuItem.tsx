@@ -85,8 +85,8 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   shortcut?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function MenuItem(
     {
       children,
@@ -362,10 +362,10 @@ export interface MenuItemSelectableProps
   selected?: boolean;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 export const MenuItemSelectable = forwardRef<
   HTMLLIElement,
   MenuItemSelectableProps
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 >(function MenuItemSelectable(
   { className, defaultSelected, label, onChange, selected, ...rest },
   forwardRef
@@ -449,8 +449,8 @@ export interface MenuItemGroupProps extends ComponentProps<'ul'> {
   label: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 export const MenuItemGroup = forwardRef<HTMLLIElement, MenuItemGroupProps>(
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function MenuItemGroup({ children, className, label, ...rest }, forwardRef) {
     const prefix = usePrefix();
 
@@ -523,6 +523,7 @@ export interface MenuItemRadioGroupProps<Item>
   selectedItem?: Item;
 }
 
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   {
     className,
@@ -544,7 +545,7 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
     onChange,
     defaultValue: defaultSelectedItem ?? ({} as Item),
   });
-
+  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   function handleClick(item, e) {
     setSelection(item);
   }
@@ -621,8 +622,9 @@ export interface MenuItemDividerProps extends ComponentProps<'li'> {
   className?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+/// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const MenuItemDivider = forwardRef<HTMLLIElement, MenuItemDividerProps>(
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function MenuItemDivider({ className, ...rest }, forwardRef) {
     const prefix = usePrefix();
 

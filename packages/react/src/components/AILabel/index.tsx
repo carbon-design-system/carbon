@@ -29,10 +29,11 @@ import type {
 
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-export const AILabelContent = React.forwardRef(function AILabelContent(
-  { className, children, ...rest }: AILabelContentProps,
-  ref
-) {
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
+export const AILabelContent = React.forwardRef(function AILabelContent({
+  className,
+  children,
+}: AILabelContentProps) {
   const prefix = usePrefix();
 
   const hasAILabelActions = React.Children.toArray(children).some((child) => {
@@ -43,6 +44,7 @@ export const AILabelContent = React.forwardRef(function AILabelContent(
     // old and no one has noticed any issues with it. It also makes me question
     // whether the code is necessary.
     // https://github.com/carbon-design-system/carbon/issues/18991
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     item.type === AILabelActions;
   });
 
@@ -73,10 +75,11 @@ AILabelContent.propTypes = {
 
 export type AILabelActionsProps = React.HTMLAttributes<HTMLSpanElement>;
 
-export const AILabelActions = React.forwardRef(function AILabelActions(
-  { className, children, ...rest }: AILabelActionsProps,
-  ref
-) {
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
+export const AILabelActions = React.forwardRef(function AILabelActions({
+  className,
+  children,
+}: AILabelActionsProps) {
   const prefix = usePrefix();
 
   const aiLabelActionsClasses = cx(className, {

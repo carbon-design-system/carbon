@@ -76,8 +76,8 @@ export interface ModalHeaderProps extends DivProps {
   titleClassName?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function ModalHeader(
     {
       buttonOnClick,

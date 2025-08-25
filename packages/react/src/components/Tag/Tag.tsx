@@ -156,17 +156,20 @@ const TagBase = React.forwardRef<
     const prefix = usePrefix();
     const tagRef = useRef<HTMLElement>(null);
     if (filter) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.warn(
         'The `filter` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
 
     if (onClose) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.warn(
         'The `onClose` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
     const ref = useMergedRefs([forwardRef, tagRef]);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 

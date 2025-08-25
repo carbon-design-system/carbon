@@ -102,6 +102,7 @@ const SelectableTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
     const tagId = id || `tag-${useId()}`;
     const [selectedTag, setSelectedTag] = useControllableState({
       value: selected,

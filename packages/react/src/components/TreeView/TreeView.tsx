@@ -94,6 +94,7 @@ const TreeView: TreeViewComponent = ({
     'enable-treeview-controllable'
   );
 
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
   const { current: treeId } = useRef(rest.id || useId());
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
@@ -134,6 +135,7 @@ const TreeView: TreeViewComponent = ({
     );
   }
 
+  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   function handleTreeSelect(
     event,
     node: Parameters<NonNullable<TreeNodeProps['onTreeSelect']>>[1]

@@ -22,6 +22,7 @@ const sharedTabProps = {
   icon: figma.instance('Swap icon'),
 };
 
+// eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
 '',
   figma.connect(
     Tab,

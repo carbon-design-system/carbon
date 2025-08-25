@@ -57,6 +57,7 @@ export interface ChatButtonProps
 }
 
 const ChatButton = React.forwardRef<HTMLButtonElement, ChatButtonProps>(
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function ChatButton(
     {
       className,
@@ -87,6 +88,7 @@ const ChatButton = React.forwardRef<HTMLButtonElement, ChatButtonProps>(
     } else {
       // Check if size is valid and warn if not
       if (size && !allowedSizes.includes(size as ChatButtonSize)) {
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
         console.error(
           `Invalid size "${size}" provided to ChatButton. Size must be one of: ${allowedSizes.join(
             ', '

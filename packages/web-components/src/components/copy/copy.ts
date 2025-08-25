@@ -30,6 +30,7 @@ class CDSCopy extends CDSIconButton {
   private _animation = '';
 
   private _createHandleFeedbackTooltip = () => {
+    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
     let timeoutId: number | void;
     return (timeout: number) => {
       const buttonClasses = this.shadowRoot?.querySelector('button')?.classList;

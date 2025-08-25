@@ -355,6 +355,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when menu is closed
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onClose?(event: MouseEvent): boolean | void;
 
   /**
@@ -629,6 +630,7 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when menu is closed
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onClose?(event: MouseEvent): boolean | void;
 
   /**
@@ -886,11 +888,13 @@ export interface ActionableNotificationProps
    * Provide a function that is called when menu is closed.
    * Default behavior of hiding the notification is prevented if this function returns false.
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onClose?(event: MouseEvent): boolean | void;
 
   /**
    * Provide a function that is called when the close button is clicked
    */
+
   onCloseButtonClick?(event: MouseEvent): void;
 
   /**
@@ -1448,6 +1452,7 @@ Callout.propTypes = {
 /**
  * @deprecated Use `CalloutProps` instead.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20071
 export interface StaticNotificationProps extends CalloutProps {}
 let didWarnAboutDeprecation = false;
 export const StaticNotification: React.FC<StaticNotificationProps> = (

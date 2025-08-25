@@ -22,7 +22,7 @@ export type SectionProps<E extends ElementType> = PolymorphicProps<
   SectionBaseProps
 >;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const Section = React.forwardRef(function Section<
   E extends ElementType = 'section',
 >(

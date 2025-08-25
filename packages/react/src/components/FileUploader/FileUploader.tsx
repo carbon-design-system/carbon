@@ -260,6 +260,7 @@ const FileUploader = React.forwardRef(
           }
         }
       },
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
       [
         enhancedFileUploaderEnabled,
         fileItems,
@@ -334,6 +335,7 @@ const FileUploader = React.forwardRef(
           uploaderButton.current?.focus?.();
         }
       },
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
       [
         enhancedFileUploaderEnabled,
         fileItems,
@@ -477,7 +479,7 @@ const FileUploader = React.forwardRef(
     );
   }
 ) as {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any , @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   <ItemType>(props: FileUploaderProps): React.ReactElement<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   propTypes?: any;

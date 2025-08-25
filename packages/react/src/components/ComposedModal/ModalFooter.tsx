@@ -197,8 +197,8 @@ export interface ModalFooterProps {
   onLoadingSuccess?(): void;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function ModalFooter(
     {
       children,

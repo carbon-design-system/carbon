@@ -145,6 +145,7 @@ class CDSDropdown extends ValidityMixin(
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     if (this.shadowRoot!.contains(event.target as Node)) {
       this._handleUserInitiatedToggle();
     } else {
@@ -367,6 +368,7 @@ class CDSDropdown extends ValidityMixin(
     const highlightedItem = this.querySelector(
       constructor.selectorItemHighlighted
     );
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const highlightedIndex = indexOf(items, highlightedItem!);
     let nextIndex = highlightedIndex + direction;
 
@@ -398,6 +400,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content preceding the trigger button.
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   protected _renderPrecedingLabel(): TemplateResult | void {
     return undefined;
   }
@@ -453,6 +456,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content following the trigger button.
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   protected _renderFollowingLabel(): TemplateResult | void {
     return undefined;
   }
@@ -633,6 +637,7 @@ class CDSDropdown extends ValidityMixin(
         (elem) => (elem as CDSDropdownItem).value === this.value
       );
       if (item) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const range = this.ownerDocument!.createRange();
         range.selectNodeContents(item);
         this._selectedItemContent = range.cloneContents();
@@ -645,6 +650,7 @@ class CDSDropdown extends ValidityMixin(
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updated(_changedProperties) {
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     this._hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');

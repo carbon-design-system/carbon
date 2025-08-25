@@ -34,7 +34,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
   private _handleSlotChange({ target }: Event) {
     const content = (target as HTMLSlotElement).assignedNodes().filter(
-      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
     );
 
@@ -310,7 +310,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       .constructor as typeof CDSPagination;
 
     if (changedProperties.has('pageSize')) {
-      // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion , @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (this.shadowRoot!.querySelector(selectorPageSizesSelect) as any).value =
         pageSize;
     }

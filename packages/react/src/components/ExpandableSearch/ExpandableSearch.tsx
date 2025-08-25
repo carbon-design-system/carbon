@@ -13,6 +13,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { match, keys } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const ExpandableSearch = React.forwardRef(function ExpandableSearch(
   {
     onBlur,

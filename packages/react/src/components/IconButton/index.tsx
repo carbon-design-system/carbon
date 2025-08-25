@@ -183,6 +183,7 @@ const IconButton = React.forwardRef(
     );
 
     if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.warn(
         "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
       );

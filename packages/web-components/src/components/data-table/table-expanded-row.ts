@@ -81,6 +81,7 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
   }
 
   updated() {
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     this.previousElementSibling?.hasAttribute('ai-label')
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');

@@ -150,6 +150,7 @@ export interface DatePickerInputProps
   warnText?: ReactNodeLike;
 }
 
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const DatePickerInput = React.forwardRef(function DatePickerInput(
   props: DatePickerInputProps,
   ref: ForwardedRef<HTMLDivElement>

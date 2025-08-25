@@ -9,7 +9,6 @@ import React from 'react';
 import { Dropdown, DropdownSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 figma.connect(
   Dropdown,

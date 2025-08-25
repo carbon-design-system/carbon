@@ -234,7 +234,7 @@ Column.propTypes = {
   xlg: spanPropType,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any , react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const CSSGridColumn = React.forwardRef<any, ColumnProps<any>>(
   (
     {

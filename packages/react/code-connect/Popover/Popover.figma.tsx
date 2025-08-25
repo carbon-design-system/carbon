@@ -39,6 +39,7 @@ figma.connect(
       }),
     },
     example: ({ align, open, popoverItem }) => {
+      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
       const [open, setOpen] = React.useState(false);
       return (
         <Popover
@@ -77,6 +78,7 @@ figma.connect(
       }),
     },
     example: ({ align, open, dropShadow, popoverItem }) => {
+      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
       const [open, setOpen] = React.useState(false);
       return (
         <Popover isTabTip align={align} open={open} dropShadow={dropShadow}>

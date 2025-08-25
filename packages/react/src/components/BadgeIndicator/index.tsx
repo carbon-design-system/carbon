@@ -26,6 +26,7 @@ interface BadgeIndicatorProps {
    */
   id?: string;
 }
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const BadgeIndicator = React.forwardRef(function BadgeIndicatorContent(
   { className: customClassName, count, ...rest }: BadgeIndicatorProps,
   ref: React.Ref<HTMLDivElement>

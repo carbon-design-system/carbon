@@ -58,6 +58,7 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
       (node as CDSTreeNode).selected = isTarget;
       (node as CDSTreeNode).active = isTarget;
       if (!isTarget) {
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
         isLink
           ? (element as CDSTreeNode).setAttribute('tabindex', '-1')
           : (element as CDSTreeNode).removeAttribute('tabindex');

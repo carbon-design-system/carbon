@@ -73,6 +73,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       hasBadgeIndicator &&
       (this.kind !== BUTTON_KIND.GHOST || this.size !== BUTTON_SIZE.LARGE)
     ) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.warn(
         `The badge indicator must be used with kind='ghost' and size='lg'`
       );

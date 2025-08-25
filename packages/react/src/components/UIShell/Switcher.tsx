@@ -105,6 +105,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
             if (direction === 1) {
               return enabledIndices[1];
             }
+          // eslint-disable-next-line   no-fallthrough -- https://github.com/carbon-design-system/carbon/issues/20071
           default:
             return enabledIndices[nextIndex];
         }

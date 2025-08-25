@@ -391,7 +391,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         const end = tab.offsetLeft + tabWidth;
 
         // The start and end of the visible area of the tablist
-        // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const visibleStart = this.tablist!.scrollLeft + this.BUTTON_WIDTH;
         const visibleEnd =
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071

@@ -143,6 +143,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
           if (triggerButton) {
             (triggerButton as HTMLElement).focus();
           } else {
+            // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
             console.warn('Could not find trigger button.');
             (document.body as HTMLElement).focus();
           }

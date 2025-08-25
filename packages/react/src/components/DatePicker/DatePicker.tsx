@@ -482,8 +482,10 @@ const DatePicker = React.forwardRef(
           onClose(selectedDates, dateStr, instance);
         }
       },
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
       [onClose]
     );
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     const onCalendarClose = (selectedDates, dateStr, instance, e) => {
       if (e && e.type === 'clickOutside') {
         return;
@@ -954,13 +956,13 @@ const DatePicker = React.forwardRef(
           endInputField.current.value = '';
         }
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [value]);
 
     useEffect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
       let isMouseDown = false;
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
       const handleMouseDown = (event) => {
         if (
           calendarRef.current &&

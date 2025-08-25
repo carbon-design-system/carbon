@@ -312,6 +312,7 @@ const Modal = React.forwardRef(
     );
 
     if (!passiveModal && preventCloseOnClickOutside === false) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.error(invalidOutsideClickMessage);
     }
 
@@ -503,6 +504,7 @@ const Modal = React.forwardRef(
       return () => {
         document.removeEventListener('keydown', handleEscapeKey, true);
       };
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [open]);
 
     useEffect(() => {

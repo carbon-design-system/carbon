@@ -1202,12 +1202,14 @@ class Slider extends PureComponent<SliderProps> {
     const showWarning =
       (!readOnly && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
+      // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
       (typeof correctedValue !== null &&
         correctedPosition === HandlePosition.LOWER &&
         isValid);
     const showWarningUpper =
       (!readOnly && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
+      // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
       (typeof correctedValue !== null &&
         correctedPosition ===
           (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
@@ -1355,7 +1357,8 @@ class Slider extends PureComponent<SliderProps> {
                 <Text className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
                 </Text>
-                {/* @ts-ignore onBlur + onChange types are incompatible*/}
+                {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071 */
+                /* @ts-ignore onBlur + onChange types are incompatible*/}
                 <div
                   className={sliderClasses}
                   ref={(node) => {

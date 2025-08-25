@@ -49,6 +49,7 @@ export function ToggletipLabel<E extends ElementType>({
 }: ToggletipLabelProps<E>) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-label`, customClassName);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const BaseComponentAsAny = BaseComponent as any;
   return (
     <BaseComponentAsAny className={className} {...rest}>
@@ -184,6 +185,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
       const node = event.target as Node | null;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (open && node && !ref.current!.contains(node)) {
         setOpen(false);
       }
@@ -203,6 +205,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
   return (
     <ToggletipContext.Provider value={value}>
+      {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071 */}
       <Popover<any>
         align={align}
         as={as}
@@ -253,6 +256,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * clicks and keyboard interactions.
  */
 
+// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
   T extends React.ElementType,
 >(
@@ -324,6 +328,7 @@ export interface ToggletipContentProps {
 const ToggletipContent = React.forwardRef<
   HTMLDivElement,
   ToggletipContentProps
+  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 >(function ToggletipContent({ children, className: customClassName }, ref) {
   const toggletip = useToggletip();
   const prefix = usePrefix();

@@ -18,14 +18,17 @@ export declare type Constructor<T> = {
 export interface ClassDescriptor {
   kind: 'class';
   elements: ClassElement[];
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   finisher?: <T>(clazz: Constructor<T>) => void | Constructor<T>;
 }
 export interface ClassElement {
   kind: 'field' | 'method';
   key: PropertyKey;
   placement: 'static' | 'prototype' | 'own';
+  // eslint-disable-next-line   @typescript-eslint/no-unsafe-function-type -- https://github.com/carbon-design-system/carbon/issues/20071
   initializer?: Function;
   extras?: ClassElement[];
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   finisher?: <T>(clazz: Constructor<T>) => void | Constructor<T>;
   descriptor?: PropertyDescriptor;
 }
@@ -40,6 +43,7 @@ const legacyCustomElement = (tagName: string, clazz: CustomElementClass) => {
     customElements.define(tagName, clazz as CustomElementConstructor);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   } catch (error) {
+    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
     console.warn(`Attempting to re-define ${tagName}`);
   }
   // Cast as any because TS doesn't recognize the return type as being a
@@ -65,6 +69,7 @@ const standardCustomElement = (
         customElements.define(tagName, clazz);
         // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
       } catch (error) {
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
         console.warn(`Attempting to re-define ${tagName}`);
       }
     },

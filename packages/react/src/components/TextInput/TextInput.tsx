@@ -207,6 +207,7 @@ const TextInput = React.forwardRef(
 
     useEffect(() => {
       setTextCount(getInitialTextCount());
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [value, defaultValue, enableCounter]);
 
     const normalizedProps = useNormalizedInputProps({

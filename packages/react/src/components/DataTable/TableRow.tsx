@@ -29,15 +29,7 @@ const frFn = forwardRef<HTMLTableRowElement, TableRowProps>;
 const TableRow = frFn((props, ref) => {
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
-  const {
-    ariaLabel,
-    'aria-label': ariaLabelAlt,
-    'aria-controls': ariaControls,
-    onExpand,
-    isExpanded,
-    isSelected,
-    ...cleanProps
-  } = props;
+  const { isSelected, ...cleanProps } = props;
 
   const prefix = usePrefix();
 

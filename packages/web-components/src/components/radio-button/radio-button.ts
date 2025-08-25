@@ -349,9 +349,10 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       }
       const { _manager: manager } = this;
       if (changedProperties.has('name')) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         manager!.delete(radioButtonDelegate, changedProperties.get('name'));
         if (name) {
-          // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           manager!.add(radioButtonDelegate);
         }
       }
@@ -367,6 +368,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           : '0'
       );
     }
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');

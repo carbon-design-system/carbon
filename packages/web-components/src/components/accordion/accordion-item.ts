@@ -85,6 +85,7 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
       const { selectorAccordionContent } = this
         .constructor as typeof CDSAccordionItem;
 
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       !this.open
         ? this.setAttribute('expanding', '')
         : this.setAttribute('collapsing', '');

@@ -342,6 +342,7 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
+      // eslint-disable-next-line require-atomic-updates -- https://github.com/carbon-design-system/carbon/issues/20071
       inputNode.value = 'Foo';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
@@ -360,6 +361,7 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
+      // eslint-disable-next-line require-atomic-updates -- https://github.com/carbon-design-system/carbon/issues/20071
       inputNode.value = '';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
