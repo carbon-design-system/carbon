@@ -244,10 +244,8 @@ describe('cds-number-input', () => {
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
       events.on(elem, 'cds-number-input', spyInput);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-      (
-        elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement
-      ).click();
+      (elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement) // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        .click();
       expect(Number(input.value)).toEqual(initialValue - stepSize);
       expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(
         initialValue - stepSize

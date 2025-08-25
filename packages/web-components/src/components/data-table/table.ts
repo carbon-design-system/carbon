@@ -579,15 +579,13 @@ class CDSTable extends HostListenerMixin(LitElement) {
     forEach(tableRows, (elem) => {
       if (!(elem as CDSTableRow).filtered) {
         (elem as CDSTableRow).selected = selected;
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
-        this.radio
-          ? (// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-            (
-              (elem as CDSTableRow).shadowRoot!.querySelector(
-                `${prefix}-radio-button`
-              ) as CDSRadioButton
-            ).checked = selected)
-          : null;
+        if (this.radio) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          const radioButton = (elem as CDSTableRow).shadowRoot!.querySelector(
+            `${prefix}-radio-button`
+          ) as CDSRadioButton;
+          radioButton.checked = selected;
+        }
         this._selectedRows.push(elem as CDSTableRow);
         totalRows++;
 

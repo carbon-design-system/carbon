@@ -22,22 +22,22 @@ export const isRequiredOneOf = <T extends Record<string, Validator<any>>>(
 ): ValidationMap<any> => {
   const names = Object.keys(propTypes);
   const checker =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-
-      (propType: Validator<any>): Validator<any> =>
-      (props, propName, componentName, ...rest) => {
-        if (
-          process.env.NODE_ENV !== 'production' &&
-          names.every((name) => typeof props[name] === 'undefined')
-        ) {
-          return new Error(
-            `${componentName} requires one of the following props: ${names.join(
-              ', '
-            )}`
-          );
-        }
-        return propType(props, propName, componentName, ...rest);
-      };
+    (
+      propType: Validator<any> // eslint-disable-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    ): Validator<any> => // eslint-disable-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    (props, propName, componentName, ...rest) => {
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        names.every((name) => typeof props[name] === 'undefined')
+      ) {
+        return new Error(
+          `${componentName} requires one of the following props: ${names.join(
+            ', '
+          )}`
+        );
+      }
+      return propType(props, propName, componentName, ...rest);
+    };
   return names.reduce(
     (acc, name) => ({
       ...acc,

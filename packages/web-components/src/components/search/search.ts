@@ -81,6 +81,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    */
 
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleExpand(e: Event) {
     // Check if the click came from the magnifier area
@@ -106,6 +107,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * - Esc: if input has text: clear it | if empty: collapse and move focus back to magnifier
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _handleKeys(event: KeyboardEvent) {
     const key = event.key;

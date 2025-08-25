@@ -125,9 +125,8 @@ export default (): Plugin =>
           ) {
             fp.changeMonth(-1);
             // `fp.daysContainer` is updated by `fp.changeMonth()`
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             (
-              fp.daysContainer!.firstElementChild!
+              fp.daysContainer!.firstElementChild! // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
                 .lastElementChild as HTMLElement
             ).focus();
           } else if (
@@ -137,9 +136,8 @@ export default (): Plugin =>
           ) {
             fp.changeMonth(1);
             // `fp.daysContainer` is updated by `fp.changeMonth()`
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             (
-              fp.daysContainer!.firstElementChild!
+              fp.daysContainer!.firstElementChild! // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
                 .firstElementChild as HTMLElement
             ).focus();
           }
@@ -147,10 +145,8 @@ export default (): Plugin =>
         event.preventDefault();
       } else if (ctrlKey && key in moveMonthForKeys) {
         fp.changeMonth(moveMonthForKeys[key]);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-        (
-          fp.daysContainer!.firstElementChild!.firstElementChild as HTMLElement
-        ).focus();
+        (fp.daysContainer!.firstElementChild!.firstElementChild as HTMLElement) // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          .focus();
         event.preventDefault();
       }
     };
