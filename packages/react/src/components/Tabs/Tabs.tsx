@@ -1173,7 +1173,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   className?: string;
 
   /**
-   * Whether your Tab is disabled.
+   * Whether your IconTab is disabled.
    */
   disabled?: boolean;
 
@@ -1579,7 +1579,6 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
     enterDelayMs,
     leaveDelayMs,
     label,
-    disabled = false,
     ...rest
   },
   ref
@@ -1605,7 +1604,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
         enterDelayMs={enterDelayMs}
         label={label}
         leaveDelayMs={leaveDelayMs}>
-        <Tab className={classNames} ref={ref} disabled={disabled} {...rest}>
+        <Tab className={classNames} ref={ref} {...rest}>
           {children}
         </Tab>
       </Tooltip>
