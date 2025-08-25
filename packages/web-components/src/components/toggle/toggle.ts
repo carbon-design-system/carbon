@@ -138,15 +138,10 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    */
   private _attachExternalLabels() {
     const doc = this.ownerDocument || document;
-    const found: HTMLLabelElement[] = [];
 
-    if (this.id) {
-      found.push(
-        ...(Array.from(
-          doc.querySelectorAll(`label[for="${this.id}"]`)
-        ) as HTMLLabelElement[])
-      );
-    }
+    const found = this.id
+      ? [...doc.querySelectorAll<HTMLLabelElement>(`label[for="${this.id}"]`)]
+      : [];
 
     this._externalLabels = Array.from(new Set(found));
     this._externalLabels.forEach((lbl) => {
@@ -157,6 +152,13 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   connectedCallback() {
     super.connectedCallback?.();
     this._attachExternalLabels();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    this._externalLabels.forEach((lbl) =>
+      lbl.removeEventListener('click', this._onExternalLabelClick)
+    );
   }
 
   render() {
@@ -199,8 +201,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
 
     const hasLabelText = (this.labelText ?? '') !== '';
 
-    const ariaLabelledby =
-      this.ariaLabelledby ?? (hasLabelText && labelId ? labelId : undefined);
+    const ariaLabelledby = this.ariaLabelledby ?? (hasLabelText && labelId);
 
     return html`
       <button
