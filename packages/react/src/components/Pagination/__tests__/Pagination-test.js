@@ -307,6 +307,23 @@ describe('Pagination', () => {
       expect(screen.getByText('2 de 4')).toBeInTheDocument();
     });
 
+    it('should respect pageSelectLabelText prop', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={2}
+          pagesUnknown={false}
+          pageSelectLabelText={(page, totalPages) => {
+            return `Select Label ${page} de ${totalPages}`;
+          }}
+        />
+      );
+
+      expect(screen.getByText('Select Label 2 de 4')).toBeInTheDocument();
+    });
+
     it('should respect pageSize prop', () => {
       render(
         <Pagination

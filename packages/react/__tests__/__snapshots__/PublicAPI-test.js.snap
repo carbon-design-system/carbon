@@ -6489,6 +6489,9 @@ Map {
       "pageRangeText": {
         "type": "func",
       },
+      "pageSelectLabelText": {
+        "type": "func",
+      },
       "pageSize": {
         "type": "number",
       },
