@@ -48,7 +48,10 @@ import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
-  '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.';
+  '`<Modal>` prop `preventCloseOnClickOutside` should not be `false` when ' +
+  '`passiveModal` is `false`. Transactional, non-passive Modals should ' +
+  'not be dissmissable by clicking outside. ' +
+  'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal';
 
 export type ModalSize = (typeof ModalSizes)[number];
 
@@ -265,7 +268,7 @@ const Modal = React.forwardRef(function Modal(
     size,
     hasScrollingContent = false,
     closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = !passiveModal,
+    preventCloseOnClickOutside,
     isFullWidth,
     launcherButtonRef,
     loadingStatus = 'inactive',
@@ -308,10 +311,10 @@ const Modal = React.forwardRef(function Modal(
       'element handles focus, so `enableDialogElement` must be off for ' +
       '`focusTrapWithoutSentinels` to have any effect.'
   );
-
-  if (!passiveModal && preventCloseOnClickOutside === false) {
-    console.error(invalidOutsideClickMessage);
-  }
+  warning(
+    !(!passiveModal && preventCloseOnClickOutside === false),
+    invalidOutsideClickMessage
+  );
 
   function isCloseButton(element: Element) {
     return (
@@ -353,8 +356,18 @@ const Modal = React.forwardRef(function Modal(
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
     evt.stopPropagation();
+
+    const shouldCloseOnOutsideClick =
+      // Passive modals can close on clicks outside the modal when
+      // preventCloseOnClickOutside is undefined or explicitly set to false.
+      (passiveModal && !preventCloseOnClickOutside) ||
+      // Non-passive modals have to explicitly opt-in for close on outside
+      // behavior by explicitly setting preventCloseOnClickOutside to false,
+      // rather than just leaving it undefined.
+      (!passiveModal && preventCloseOnClickOutside === false);
+
     if (
-      !preventCloseOnClickOutside &&
+      shouldCloseOnOutsideClick &&
       target instanceof Node &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       innerModal.current &&
