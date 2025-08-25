@@ -9,6 +9,7 @@ import { Information } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
+import Modal from '../Modal';
 import {
   ToggletipLabel,
   Toggletip,
@@ -114,6 +115,10 @@ export const Default = (args) => {
 
 Default.argTypes = {
   align: {
+    // TODO:
+    // 1. Should the deprecated options be deleted?
+    // 2. The list doesn't include all of the options available in the
+    //    component. Is it supposed to?
     options: [
       'top',
       'top-left',

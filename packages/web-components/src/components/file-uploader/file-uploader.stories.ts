@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -111,16 +111,41 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      buttonKind,
+      buttonLabel,
+      disabled,
+      state,
+      iconDescription,
+      labelDescription,
+      labelTitle,
+      multiple,
+      onDelete,
+      onChange,
+      name,
+      size,
+    } = args ?? {};
+
     return html`
       <cds-file-uploader
-        label-title="Upload files"
-        label-description="Max file size is 500 MB. Only .jpg files are supported."
-        multiple>
+        label-title="${labelTitle}"
+        label-description="${labelDescription}"
+        ?multiple="${multiple}"
+        input-state="${state}"
+        ?disabled="${disabled}"
+        icon-description="${iconDescription}"
+        @cds-file-uploader-item-deleted="${onDelete}"
+        @cds-file-uploader-drop-container-changed="${onChange}"
+        input-name="${ifDefined(name)}">
         <cds-file-uploader-button
+          button-kind="${buttonKind}"
           accept="image/jpeg"
-          name="default-file-uploader-button">
-          Add file
+          name="default-file-uploader-button"
+          size="${ifDefined(size)}">
+          ${buttonLabel}
         </cds-file-uploader-button>
       </cds-file-uploader>
     `;
@@ -183,46 +208,6 @@ export const FileUploaderItem = {
 export const Skeleton = {
   render: () => {
     return html` <cds-file-uploader-skeleton></cds-file-uploader-skeleton> `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      buttonKind,
-      buttonLabel,
-      disabled,
-      state,
-      iconDescription,
-      labelDescription,
-      labelTitle,
-      multiple,
-      onDelete,
-      onChange,
-      name,
-      size,
-    } = args ?? {};
-
-    return html`
-      <cds-ce-demo-file-uploader
-        button-kind="${buttonKind}"
-        button-label="${buttonLabel}"
-        input-state="${state}"
-        icon-description="${iconDescription}"
-        accept="image/jpeg"
-        button
-        ?disabled="${disabled}"
-        label-description="${ifDefined(labelDescription)}"
-        label-title="${ifDefined(labelTitle)}"
-        ?multiple="${multiple}"
-        size="${ifDefined(size)}"
-        input-name="${ifDefined(name)}"
-        @cds-file-uploader-item-deleted="${onDelete}"
-        @cds-file-uploader-drop-container-changed="${onChange}">
-      </cds-ce-demo-file-uploader>
-    `;
   },
 };
 

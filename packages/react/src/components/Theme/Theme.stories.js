@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,24 +62,16 @@ export const Default = () => {
   return (
     <>
       <Theme theme="g100">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">g100</section>
       </Theme>
       <Theme theme="g90">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">g90</section>
       </Theme>
       <Theme theme="g10">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">g10</section>
       </Theme>
       <Theme theme="white">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">white</section>
       </Theme>
     </>
   );
@@ -165,15 +157,3 @@ export const _WithLayer = () => {
     </VStack>
   );
 };
-
-const PlaygroundStory = (args) => {
-  return (
-    <Theme {...args}>
-      <section className="theme-section">
-        <ThemeText before="Theme" />
-      </section>
-    </Theme>
-  );
-};
-
-export const Playground = PlaygroundStory.bind({});

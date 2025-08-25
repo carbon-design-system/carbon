@@ -23,7 +23,7 @@ import React, {
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
 import { TranslateWithId } from '../../types/common';
@@ -86,6 +86,8 @@ export interface NumberInputProps
 
   /**
    * Optional starting value for uncontrolled state
+   * Defaults to 0 when type="number"
+   * Defaults to NaN when type="text"
    */
   defaultValue?: number | string;
 
@@ -106,6 +108,11 @@ export interface NumberInputProps
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
    */
   formatOptions?: NumberFormatOptions;
+
+  /**
+   * Provide the value stepping should begin at when the input is empty
+   */
+  stepStartValue?: number;
 
   /**
    * Provide text that is used alongside the control label for additional help
@@ -133,8 +140,9 @@ export interface NumberInputProps
   id: string;
 
   /**
-   * Instruct the browser which keyboard to display on mobile devices. Note that
-   * standard numeric keyboards vary across devices and operating systems.
+   * Instruct the browser which keyboard to display on mobile devices. Defaults
+   * to `decimal`, but note that standard numeric keyboards vary across devices
+   * and operating systems.
    * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
    */
   inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
@@ -180,6 +188,16 @@ export interface NumberInputProps
    * The minimum value.
    */
   min?: number;
+
+  /**
+   * Provide an optional handler that is called when the input or stepper
+   * buttons are blurred.
+   */
+  onBlur?: (
+    event:
+      | React.FocusEvent<HTMLInputElement>
+      | React.FocusEvent<HTMLButtonElement>
+  ) => void;
 
   /**
    * Provide an optional handler that is called when the internal state of
@@ -268,14 +286,13 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       decorator,
       disabled = false,
       disableWheel: disableWheelProp = false,
-      defaultValue = 0,
       formatOptions,
       helperText = '',
       hideLabel = false,
       hideSteppers,
       iconDescription,
       id,
-      inputMode,
+      inputMode = 'decimal',
       invalid = false,
       invalidText,
       label,
@@ -283,6 +300,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       locale = 'en-US',
       max,
       min,
+      onBlur,
       onChange,
       onClick,
       onKeyUp,
@@ -293,8 +311,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       step = 1,
       translateWithId: t = (id) => defaultTranslations[id],
       type = 'number',
+      defaultValue = type === 'number' ? 0 : NaN,
       warn = false,
       warnText = '',
+      stepStartValue = 0,
       value: controlledValue,
       ...rest
     } = props;
@@ -342,6 +362,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     });
 
     /**
+     * The number value that was previously "committed" to the input on blur
+     * Only used when type="text"
+     */
+    const [previousNumberValue, setPreviousNumberValue] = useState(numberValue);
+
+    /**
      * The current text value of the input.
      * Only used when type=text
      * Updated as the user types and formatted on blur.
@@ -351,7 +377,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         ? ''
         : new NumberFormatter(locale, formatOptions).format(numberValue)
     );
-
     const numberingSystem = useMemo(
       () => numberParser.getNumberingSystem(inputValue),
       [numberParser, inputValue]
@@ -369,6 +394,14 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         isNaN(value) || value === null ? '' : numberFormatter.format(value),
       [numberFormatter]
     );
+    if (
+      isControlled &&
+      !(isNaN(previousNumberValue) && isNaN(numberValue)) &&
+      previousNumberValue !== numberValue
+    ) {
+      setInputValue(format(numberValue));
+      setPreviousNumberValue(numberValue);
+    }
 
     const inputRef = useRef<HTMLInputElement>(null);
     const ref = useMergedRefs([forwardRef, inputRef]);
@@ -412,12 +445,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
     });
 
-    if (controlledValue !== prevControlledValue) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      setValue(controlledValue!);
-      setPrevControlledValue(controlledValue);
-    }
-
+    useEffect(() => {
+      if (type === 'number' && controlledValue !== undefined) {
+        if (allowEmpty && controlledValue === '') {
+          setValue('');
+        } else {
+          setValue(controlledValue);
+        }
+        setPrevControlledValue(controlledValue);
+      }
+    }, [controlledValue, type, allowEmpty]);
     let ariaDescribedBy: string | undefined = undefined;
     if (normalizedProps.invalid) {
       ariaDescribedBy = normalizedProps.invalidId;
@@ -453,6 +490,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if (type === 'text') {
         const _value =
           allowEmpty && event.target.value === '' ? '' : event.target.value;
+
+        // When isControlled, setNumberValue will not update numberValue in useControllableState.
         setNumberValue(numberParser.parse(_value));
         setInputValue(_value);
         // The onChange prop isn't called here because it will be called on blur
@@ -491,11 +530,29 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const handleStep = (event, direction) => {
       if (inputRef.current) {
         const currentValue =
-          type === 'number'
-            ? Number(inputRef.current.value)
-            : numberParser.parse(inputRef.current.value);
-        const rawValue =
-          direction === 'up' ? currentValue + step : currentValue - step;
+          type === 'number' ? Number(inputRef.current.value) : numberValue;
+
+        let rawValue;
+        if (Number.isNaN(currentValue) || !currentValue) {
+          if (typeof stepStartValue === 'number' && stepStartValue) {
+            rawValue = stepStartValue;
+          } else if (
+            (min && min < 0 && max && max > 0) ||
+            (!max && !min) ||
+            max
+          ) {
+            if (direction === `up`) rawValue = 1;
+            if (direction === `down`) rawValue = -1;
+          } else if ((min && min > 0 && max && max > 0) || min) {
+            rawValue = min;
+          } else {
+            rawValue = 0;
+          }
+        } else if (direction === 'up') {
+          rawValue = currentValue + step;
+        } else {
+          rawValue = currentValue - step;
+        }
         const precision = Math.max(
           getDecimalPlaces(currentValue),
           getDecimalPlaces(step)
@@ -503,34 +560,28 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         const floatValue = parseFloat(rawValue.toFixed(precision));
         const newValue = clamp(floatValue, min ?? -Infinity, max ?? Infinity);
 
-        let state;
+        const state = {
+          value: newValue,
+          direction,
+        };
 
         if (type === 'number') {
-          state = {
-            value:
-              allowEmpty && inputRef.current.value === '' && step === 0
-                ? ''
-                : newValue,
-            direction,
-          };
-
           setValue(state.value);
         }
 
         if (type === 'text') {
+          // Calling format() can alter the number (such as rounding it) causing
+          // the numberValue to mismatch the formatted value in the input.
+          // To avoid this, the newValue is re-parsed after formatting.
           const formattedNewValue = format(newValue);
-          state = {
-            value:
-              allowEmpty && inputRef.current.value === '' && step === 0
-                ? ''
-                : formattedNewValue,
-            direction,
-          };
+          const parsedFormattedNewValue = numberParser.parse(formattedNewValue);
 
-          // newValue does not need to be parsed because it is derived from
-          // currentValue, which is parsed at the beginning of this function
-          setNumberValue(newValue);
+          // When isControlled, setNumberValue will not actually update
+          // numberValue in useControllableState.
+          setNumberValue(parsedFormattedNewValue);
+
           setInputValue(formattedNewValue);
+          setPreviousNumberValue(parsedFormattedNewValue);
         }
 
         if (onChange) {
@@ -546,7 +597,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       direction: 'up' | 'down'
     ) => {
       if (inputRef.current) {
-        const { state } = handleStep(event, direction);
+        const state = handleStep(event, direction);
 
         if (onClick) {
           onClick(event, state);
@@ -640,17 +691,47 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                     : format(_numberValue);
                   setInputValue(formattedValue);
 
+                  // Calling format() can alter the number (such as rounding it)
+                  // causing the _numberValue to mismatch the formatted value in
+                  // the input. To avoid this, formattedValue is re-parsed.
+                  const parsedFormattedNewValue =
+                    numberParser.parse(formattedValue);
+
                   if (onChange) {
                     const state = {
-                      value: formattedValue,
-                      direction: value < e.target.value ? 'up' : 'down',
+                      value: parsedFormattedNewValue,
+                      direction:
+                        previousNumberValue < parsedFormattedNewValue
+                          ? 'up'
+                          : 'down',
                     };
-                    onChange(e, state);
+
+                    // If the old and new values are NaN, don't call onChange
+                    // to avoid an unecessary re-render and potential infinite
+                    // loop when isControlled.
+                    if (
+                      !(
+                        isNaN(previousNumberValue) &&
+                        isNaN(parsedFormattedNewValue)
+                      )
+                    ) {
+                      onChange(e, state);
+                    }
+                  }
+
+                  // If the old and new values are NaN, don't set state to avoid
+                  // an unecessary re-render and potential infinite loop when
+                  // isControlled.
+                  if (!(isNaN(previousNumberValue) && isNaN(numberValue))) {
+                    setPreviousNumberValue(numberValue);
+                  }
+                  if (!(isNaN(numberValue) && isNaN(parsedFormattedNewValue))) {
+                    setNumberValue(parsedFormattedNewValue);
                   }
                 }
 
-                if (rest.onBlur) {
-                  rest.onBlur(e);
+                if (onBlur) {
+                  onBlur(e);
                 }
               }}
               pattern={pattern}
@@ -678,6 +759,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn down-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'down')}
+                  onBlur={onBlur}
                   tabIndex={-1}
                   title={decrementNumLabel || iconDescription}
                   type="button">
@@ -689,6 +771,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn up-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'up')}
+                  onBlur={onBlur}
                   tabIndex={-1}
                   title={incrementNumLabel || iconDescription}
                   type="button">
@@ -779,8 +862,9 @@ NumberInput.propTypes = {
   id: PropTypes.string.isRequired,
 
   /**
-   * Instruct the browser which keyboard to display on mobile devices. Note that
-   * standard numeric keyboards vary across devices and operating systems.
+   * Instruct the browser which keyboard to display on mobile devices. Defaults
+   * to `decimal`, but note that standard numeric keyboards vary across devices
+   * and operating systems.
    * @see https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/
    */
   inputMode: PropTypes.oneOf([
@@ -835,6 +919,17 @@ NumberInput.propTypes = {
    * The minimum value.
    */
   min: PropTypes.number,
+
+  /**
+   * Provide the value stepping should begin at when the input is empty
+   */
+  stepStartValue: PropTypes.number,
+
+  /**
+   * Provide an optional handler that is called when the input or stepper
+   * buttons are blurred.
+   */
+  onBlur: PropTypes.func,
 
   /**
    * Provide an optional handler that is called when the internal state of

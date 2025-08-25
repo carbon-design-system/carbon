@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -388,6 +388,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       .map(([key]) => key)
       .join(' ');
 
+    const totalPagesSafe =
+      Number.isFinite(totalPages) && totalPages > 0
+        ? totalPages
+        : Math.max(1, page || 1);
+
     return html`
       <div class="${prefix}--pagination__left">
         <label for="select" class="${prefix}--pagination__text"
@@ -426,7 +431,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 size="${size}"
                 inline
                 value="${page}">
-                ${Array.from(new Array(totalPages)).map(
+                ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
                     <cds-select-item value="${index + 1}">
                       ${index + 1}
@@ -443,7 +448,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 size="${size}"
                 inline
                 value="${page}">
-                ${Array.from(new Array(totalPages)).map(
+                ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
                     <cds-select-item value="${index + 1}">
                       ${index + 1}

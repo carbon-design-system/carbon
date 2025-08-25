@@ -1602,6 +1602,14 @@
     - client
     - loan
     - payment
+- name: client--support
+  friendly_name: Client support
+  aliases:
+    - workplace
+    - office
+    - team
+    - people
+    - coworker
 - name: clothes--rack--01
   friendly_name: Clothes rack 01
   aliases:
@@ -2278,6 +2286,14 @@
   aliases:
     - control
     - cloud
+- name: control--tower
+  friendly_name: Control tower
+  aliases:
+    - Control Tower
+    - Transparent Supply
+    - Trace
+    - Transparent
+    - Data
 - name: control-panel
   friendly_name: Control panel
   aliases:
@@ -2443,6 +2459,13 @@
   aliases:
     - customizable
     - Cloud
+- name: cybersecurity
+  friendly_name: Cybersecurity
+  aliases:
+    - shield
+    - security
+    - secure
+    - identify
 - name: dallas--reunion-tower
   friendly_name: Dallas Reunion Tower
   aliases:
@@ -2643,6 +2666,15 @@
   aliases:
     - deployment
     - cloud
+- name: design
+  friendly_name: Design
+  aliases:
+    - design
+    - art
+    - create
+    - draw
+    - pen
+    - illustrate
 - name: design--leadership
   friendly_name: Design leadership
   aliases:
@@ -3511,6 +3543,18 @@
     - strategy
     - loan
     - finance
+- name: finance-and-operations
+  friendly_name: Finance and operations
+  aliases:
+    - currency
+    - operations
+    - chart
+- name: finance-and-supply-chain
+  friendly_name: Finance and supply chain
+  aliases:
+    - currency
+    - supply chain
+    - growth
 - name: financial--consultant
   friendly_name: Financial consultant
   aliases:
@@ -3609,7 +3653,7 @@
     - pennant
     - banner
 - name: flamingo
-  friendly_name: Flaminco
+  friendly_name: Flamingo
   aliases:
     - quantum
     - processor
@@ -3945,6 +3989,12 @@
   aliases:
     - global footprint
     - cloud
+- name: global--infrastructure
+  friendly_name: Global infrastructure
+  aliases:
+    - cloud
+    - infrastructure
+    - platforms
 - name: global--markets
   friendly_name: Global markets
   aliases:
@@ -4432,6 +4482,14 @@
   aliases:
     - hpi
     - healthcare performance improvement
+- name: human-in-the-loop
+  friendly_name: Human in the loop
+  aliases:
+    - human
+    - loop
+    - AI
+    - human intelligence
+    - machine intelligence
 - name: humid
   friendly_name: Humid
   aliases:
@@ -4630,6 +4688,15 @@
     - One Madison Avenue
     - One Madison
     - OMA
+- name: ibm--power11
+  friendly_name: IBM® Power11
+  aliases:
+    - Power
+    - server
+    - data storage
+    - hardware
+    - hybrid cloud
+    - IT
 - name: ibm--rpa
   friendly_name: IBM RPA
   aliases:
@@ -4996,6 +5063,7 @@
   friendly_name: Javascript
   aliases:
     - javascript
+    - language
     - cloud
     - software
     - code
@@ -5214,6 +5282,7 @@
     - hardware
     - hybrid cloud
     - open-source
+    - emperor
 - name: liquids
   friendly_name: Liquids
   aliases:
@@ -5538,6 +5607,12 @@
     - threat
     - hunting
     - security
+- name: masters-leader-board
+  friendly_name: Masters leader board
+  aliases:
+    - leaderboard
+    - scoreboard
+    - tournament
 - name: math--curve
   friendly_name: Math curve
   aliases:
@@ -6471,6 +6546,13 @@
   aliases:
     - pay for what you use
     - Cloud
+- name: pencil
+  friendly_name: Pencil
+  aliases:
+    - pencil
+    - writing
+    - edit
+    - draw
 - name: performance
   friendly_name: Performance
   aliases:
@@ -6851,6 +6933,12 @@
     - process
     - automation
     - cloud
+- name: product
+  friendly_name: Product
+  aliases:
+    - product
+    - shipping
+    - receiving
 - name: productivity
   friendly_name: Productivity
   aliases:
@@ -6897,6 +6985,51 @@
   aliases:
     - public cloud to private cloud
     - Cloud
+- name: punching-bag--01
+  friendly_name: Punching bag 01
+  aliases:
+    - UFC
+    - Sports
+    - Boxing
+    - Punching bag
+    - kicking
+    - punching
+    - stage
+    - ring
+    - fighting
+    - person
+    - training
+    - combat
+- name: punching-bag--02
+  friendly_name: Punching bag 02
+  aliases:
+    - UFC
+    - Sports
+    - Boxing
+    - Punching bag
+    - kicking
+    - punching
+    - stage
+    - ring
+    - fighting
+    - person
+    - training
+    - combat
+- name: punching-bag--03
+  friendly_name: Punching bag 03
+  aliases:
+    - UFC
+    - Sports
+    - Boxing
+    - Punching bag
+    - kicking
+    - punching
+    - stage
+    - ring
+    - fighting
+    - person
+    - training
+    - combat
 - name: puzzle
   friendly_name: Puzzle
   aliases:
@@ -7075,6 +7208,14 @@
     - shopping
     - shop
     - bill
+- name: recruitment--01
+  friendly_name: Recruitment 01
+  aliases:
+    - participants
+    - jobs
+    - hire
+    - recruitment
+    - recruiting
 - name: recycle
   friendly_name: Recycle
   aliases:
@@ -7848,6 +7989,15 @@
   aliases:
     - software
     - cloud
+- name: software--02
+  friendly_name: Software 02
+  aliases:
+    - computer
+    - software
+    - digital
+    - coding
+    - html
+    - markup language
 - name: solar--field
   friendly_name: Solar field
   aliases:
@@ -7888,6 +8038,20 @@
     - text
     - watson
     - AI
+- name: speed-bag
+  friendly_name: Speed bag
+  aliases:
+    - UFC
+    - Sports
+    - Boxing
+    - Punching bag
+    - kicking
+    - punching
+    - stage
+    - ring
+    - fighting
+    - training
+    - combat
 - name: speedometer
   friendly_name: Speedometer
   aliases:
@@ -8313,6 +8477,16 @@
     - synergy
     - union
     - Venn diagram
+- name: systems-and-tools
+  friendly_name: Systems and tools
+  aliases:
+    - tools
+    - software
+    - devices
+    - platforms
+    - communication
+    - systems
+    - software
 - name: systems-devops--analyze
   friendly_name: Systems DevOps analyze
   aliases:
@@ -8437,6 +8611,16 @@
     - team alignment
     - team
     - people
+- name: team-radio
+  friendly_name: Team radio
+  aliases:
+    - radio
+    - 'walkie-talkie,'
+    - communication
+    - range
+    - handheld tranciever
+    - two-way communicator
+    - portable
 - name: teammates
   friendly_name: Teammates
   aliases:
@@ -8482,7 +8666,7 @@
     - hospital visit
     - checkup
 - name: telemedicine--mobile
-  friendly_name: Telemedicine-mobile
+  friendly_name: Telemedicine mobile
   aliases:
     - telemedicine
     - telemedicine mobile
@@ -8633,6 +8817,23 @@
     - threat
     - management
     - security
+- name: tickets
+  friendly_name: Tickets
+  aliases:
+    - tickets
+    - event
+    - sport
+    - spectator
+    - ticketing
+    - retail
+    - entertainment
+    - stub
+    - sports
+    - us open
+    - usopen
+    - tennis
+    - masters
+    - tournament
 - name: time
   friendly_name: Time
   aliases:
@@ -8869,6 +9070,14 @@
   friendly_name: Transparency and trust 02
   aliases:
     - transparency and trust
+- name: transparent-supply
+  friendly_name: Transparent supply
+  aliases:
+    - Control Tower
+    - Transparent Supply
+    - Trace
+    - Transparent
+    - Data
 - name: trash
   friendly_name: Trash
   aliases:
@@ -8994,6 +9203,51 @@
     - two person lift
     - assistance
     - packaging
+- name: ufc--belt
+  friendly_name: UFC belt
+  aliases:
+    - UFC
+    - Sports
+    - Boxing
+    - Punching bag
+    - kicking
+    - punching
+    - stage
+    - ring
+    - fighting
+    - person
+    - training
+    - combat
+- name: ufc--fighting
+  friendly_name: UFC fighting
+  aliases:
+    - UFC
+    - Sports
+    - Boxing
+    - Punching bag
+    - kicking
+    - punching
+    - stage
+    - ring
+    - fighting
+    - person
+    - training
+    - combat
+- name: ufc--ring
+  friendly_name: UFC ring
+  aliases:
+    - UFC
+    - Sports
+    - Boxing
+    - Punching bag
+    - kicking
+    - punching
+    - stage
+    - ring
+    - fighting
+    - person
+    - training
+    - combat
 - name: unauthorized--user--access
   friendly_name: Unauthorized User Access
   aliases:
@@ -9176,6 +9430,12 @@
     - human
     - person
     - employee
+- name: user--research-tools
+  friendly_name: User research tools
+  aliases:
+    - research
+    - tools
+    - UX design
 - name: user--search
   friendly_name: User search
   aliases:
@@ -9707,3 +9967,10 @@
   friendly_name: Zurich
   aliases:
     - Zurich
+- name: zurich--swiss-national-museum
+  friendly_name: Zurich Swiss National Museum
+  aliases:
+    - Zurich
+    - cultural history
+    - Switzerland
+    - 'museum, swiss'

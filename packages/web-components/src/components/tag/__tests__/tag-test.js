@@ -296,6 +296,14 @@ describe('cds-tag', function () {
 
       await expect(el).dom.to.equalSnapshot();
     });
+
+    it('should expose part on tag', async () => {
+      const operationalTag = html`<cds-operational-tag
+        text="Tag content"></cds-operational-tag>`;
+      const el = await fixture(operationalTag);
+
+      expect(el.shadowRoot.querySelector('[part="tag"]')).to.exist;
+    });
   });
 
   it('should render as a filter tag', async () => {

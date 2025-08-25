@@ -12,7 +12,7 @@ import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { useWindowEvent } from '../../internal/useEvent';
+import { useWindowEvent, useEvent } from '../../internal/useEvent';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
@@ -28,7 +28,6 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { ToggletipButton } from '../Toggletip';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -83,7 +82,15 @@ export interface PopoverBaseProps {
   align?: PopoverAlignment;
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset?: number;
+
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop
+   * is currently experimental and is subject to future changes. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -176,9 +183,29 @@ export const Popover: PopoverComponent & {
 
   let align = mapPopoverAlign(initialAlign);
 
-  // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
-  useWindowEvent('blur', () => {
-    if (open) {
+  // The `Popover` should close whenever it and its children loses focus
+  useEvent(popover, 'focusout', (event) => {
+    const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+    if (isTabTip) {
+      if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+        onRequestClose?.();
+      }
+      return;
+    }
+
+    if (!relatedTarget) {
+      onRequestClose?.();
+      return;
+    }
+
+    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
+    const isOutsideFloating =
+      enableFloatingStyles && refs.floating.current
+        ? !refs.floating.current.contains(relatedTarget)
+        : true;
+
+    // Only close if focus moved outside both containers
+    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
     }
   });
@@ -440,7 +467,8 @@ export const Popover: PopoverComponent & {
           // positioning.
           if (
             (enableFloatingStyles && item?.type !== PopoverContent) ||
-            (enableFloatingStyles && item?.type === ToggletipButton)
+            (enableFloatingStyles &&
+              item?.type['displayName'] === 'ToggletipButton')
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
@@ -526,13 +554,21 @@ Popover.propTypes = {
   ),
 
   /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset: PropTypes.number,
+
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover on first render if it is not visible. This prop
+   * is currently experimental and is subject to future changes. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

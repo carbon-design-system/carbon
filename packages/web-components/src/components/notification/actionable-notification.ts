@@ -23,7 +23,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 /**
  * The default icons, keyed by notification kind.
  */
-const iconsForKinds = {
+export const iconsForKinds = {
   [NOTIFICATION_KIND.SUCCESS]: CheckmarkFilled20,
   [NOTIFICATION_KIND.INFO]: InformationFilled20,
   [NOTIFICATION_KIND.INFO_SQUARE]: InformationSquareFilled20,
@@ -238,7 +238,7 @@ class CDSActionableNotification extends HostListenerMixin(
   }
 
   protected _renderText() {
-    const { subtitle, title, _type: type } = this;
+    const { caption, subtitle, title, _type: type } = this;
     return html`
       <div class="${prefix}--${type}-notification__text-wrapper">
         <div class="${prefix}--${type}-notification__content">
@@ -248,6 +248,10 @@ class CDSActionableNotification extends HostListenerMixin(
           <div class="${prefix}--${type}-notification__subtitle">
             ${subtitle}<slot name="subtitle"></slot>
           </div>
+          ${caption &&
+          html`<div class="${prefix}--${type}-notification__caption">
+            ${caption}<slot name="caption"></slot>
+          </div>`}
           <slot></slot>
         </div>
       </div>

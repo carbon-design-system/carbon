@@ -23,7 +23,7 @@ import { createPortal } from 'react-dom';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
@@ -67,7 +67,9 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   mode?: 'full' | 'basic';
 
   /**
-   * Provide an optional function to be called when the Menu should be closed.
+   * Provide an optional function to be called when the Menu should be closed,
+   * including if the Menu is blurred, the user presses escape, or the Menu is
+   * a submenu and the user presses ArrowLeft.
    */
   onClose?: () => void;
 
@@ -481,7 +483,9 @@ Menu.propTypes = {
   ),
 
   /**
-   * Provide an optional function to be called when the Menu should be closed.
+   * Provide an optional function to be called when the Menu should be closed,
+   * including if the Menu is blurred, the user presses escape, or the Menu is
+   * a submenu and the user presses ArrowLeft.
    */
   onClose: PropTypes.func,
 

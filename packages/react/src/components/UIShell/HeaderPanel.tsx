@@ -20,6 +20,7 @@ import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import Switcher from './Switcher';
+import { noopFn } from '../../internal/noopFn';
 
 export interface HeaderPanelProps {
   /**
@@ -54,7 +55,6 @@ export interface HeaderPanelProps {
   onHeaderPanelFocus?: () => void;
 }
 
-const noopFn = () => {};
 const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
   function HeaderPanel(
     {
@@ -114,10 +114,10 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       };
     }
 
-    useWindowEvent('click', () => {
-      const { activeElement } = document;
-      if (!(activeElement instanceof HTMLElement)) return;
-      setLastClickedElement(activeElement);
+    useWindowEvent('click', (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!(target instanceof HTMLElement)) return;
+      setLastClickedElement(target);
 
       const isChildASwitcher =
         isValidElement(children) &&
@@ -126,8 +126,8 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
 
       if (
         isChildASwitcher &&
-        !activeElement.closest(`.${prefix}--header-panel--expanded`) &&
-        !activeElement.closest(`.${prefix}--header__action`) &&
+        !target.closest(`.${prefix}--header-panel--expanded`) &&
+        !target.closest(`.${prefix}--header__action`) &&
         !headerPanelReference?.current?.classList.contains(
           `${prefix}--switcher`
         ) &&

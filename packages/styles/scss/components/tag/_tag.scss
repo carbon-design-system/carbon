@@ -381,10 +381,9 @@
     inline-size: convert.to-rem(60px);
 
     // Safari specific bug (#7672)
-    @media not all and (min-resolution >= 0.001dpcm) {
-      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-        transform: translateZ(0);
-      }
+    @supports (hanging-punctuation: first) and (font: -apple-system-body) and
+      (-webkit-appearance: none) {
+      transform: translateZ(0);
     }
   }
 

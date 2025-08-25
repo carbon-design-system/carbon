@@ -29,6 +29,14 @@ test.describe('TreeView', () => {
           theme,
         });
       });
+
+      test('treeview with complex nesting @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'TreeView',
+          id: 'components-treeview--with-complex-nesting',
+          theme,
+        });
+      });
     });
   });
 });

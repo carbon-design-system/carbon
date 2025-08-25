@@ -122,6 +122,7 @@ $css--plex: true !default;
 :host(#{$prefix}-dropdown-item[disabled])
   .#{$prefix}--list-box__menu-item__option {
   color: $text-disabled;
+  cursor: not-allowed;
   text-decoration: none;
 }
 

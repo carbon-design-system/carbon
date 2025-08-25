@@ -25,7 +25,7 @@ describe('scss/components/form', () => {
     `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
-      Array [
+      [
         "input-label-weight",
       ]
     `);

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { cloneElement, useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';

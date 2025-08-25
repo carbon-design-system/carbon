@@ -20,20 +20,14 @@ import React, {
   type ReactElement,
 } from 'react';
 import classNames from 'classnames';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import { IconSwitch } from '../Switch';
-
-export interface SwitchEventHandlersParams {
-  index?: number;
-  name?: string | number;
-  text?: string;
-  key?: string | number;
-}
+import type { SwitchEventHandlersParams } from '../Switch/Switch';
 
 export interface ContentSwitcherProps
   extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {

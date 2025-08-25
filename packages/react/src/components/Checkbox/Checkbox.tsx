@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { cloneElement, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';

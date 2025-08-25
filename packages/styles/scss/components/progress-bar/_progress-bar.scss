@@ -14,6 +14,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
+@use '../../utilities/high-contrast-mode' as *;
 
 /// Progress Bar styles
 /// @access public
@@ -184,5 +185,22 @@
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
     padding-inline: layout.density('padding-inline');
+  }
+
+  //High Contrast Mode
+  //Ensure ProgressBar is visible and animated in Windows HCM
+  @include high-contrast-mode {
+    .#{$prefix}--progress-bar__track {
+      //According to https://developer.mozilla.org/en-US/docs/Web/CSS/system-color, in HCM, the
+      //checkbox should be displayed using Canvas and CanvasText.
+      background-color: Canvas;
+      forced-color-adjust: none;
+      outline: 2px solid rgba(0, 0, 0, 0);
+      outline-offset: -2px;
+    }
+
+    .#{$prefix}--progress-bar__bar {
+      background-color: CanvasText;
+    }
   }
 }

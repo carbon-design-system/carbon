@@ -39,8 +39,8 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
-import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { deprecate } from '../../prop-types/deprecate';
+import { Dialog } from '../Dialog';
 import { warning } from '../../internal/warning';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
@@ -305,11 +305,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     function handleKeyDown(event) {
       if (!enableDialogElement) {
-        event.stopPropagation();
-        if (match(event, keys.Escape)) {
-          closeModal(event);
-        }
-
         if (
           focusTrapWithoutSentinels &&
           open &&
@@ -336,13 +331,15 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       const { target } = evt;
       const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
-      const containsModalFooter = Children.toArray(childrenWithProps).some(
-        (child) => isComponentElement(child, ModalFooter)
-      );
-      const isPassive = !containsModalFooter;
-      const shouldCloseOnOutsideClick = isPassive
-        ? preventCloseOnClickOutside !== false
-        : preventCloseOnClickOutside === true;
+
+      const shouldCloseOnOutsideClick =
+        // Passive modals can close on clicks outside the modal when
+        // preventCloseOnClickOutside is undefined or explicitly set to false.
+        (isPassive && !preventCloseOnClickOutside) ||
+        // Non-passive modals have to explicitly opt-in for close on outside
+        // behavior by explicitly setting preventCloseOnClickOutside to false,
+        // rather than just leaving it undefined.
+        (!isPassive && preventCloseOnClickOutside === false);
 
       if (
         shouldCloseOnOutsideClick &&
@@ -470,6 +467,37 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           return child;
       }
     });
+
+    // Modals without a footer are considered passive and carry limitations as
+    // outlined in the design spec.
+    const containsModalFooter = Children.toArray(childrenWithProps).some(
+      (child) => isComponentElement(child, ModalFooter)
+    );
+    const isPassive = !containsModalFooter;
+    warning(
+      !(!isPassive && preventCloseOnClickOutside === false),
+      '`<ComposedModal>` prop `preventCloseOnClickOutside` should not be ' +
+        '`false` when `<ModalFooter>` is present. Transactional, non-passive ' +
+        'Modals should not be dissmissable by clicking outside. ' +
+        'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
+    );
+
+    useEffect(() => {
+      if (!open) return;
+
+      const handleEscapeKey = (event) => {
+        if (match(event, keys.Escape)) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeModal(event);
+        }
+      };
+      document.addEventListener('keydown', handleEscapeKey, true);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey, true);
+      };
+    }, [open]);
 
     useEffect(() => {
       if (!enableDialogElement && !open && launcherButtonRef) {

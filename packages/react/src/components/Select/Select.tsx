@@ -21,7 +21,7 @@ import {
   WarningFilled,
   WarningAltFilled,
 } from '@carbon/icons-react';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useId } from '../../internal/useId';

@@ -5,21 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const {
+import {
   assertAny,
   assertOneOf,
   assertType,
   assertValueType,
   arrayOf,
-} = require('./assert');
-const { defineType } = require('./type');
+} from './assert.js';
+import { defineType } from './type.js';
 
 //-------------------------------------------------------------------------------
 // Comments
 //-------------------------------------------------------------------------------
-const Comment = defineType('Comment', {
+export const Comment = defineType('Comment', {
   fields: {
     value: {
       validate: assertValueType('string'),
@@ -40,7 +38,7 @@ const Comment = defineType('Comment', {
 //-------------------------------------------------------------------------------
 // Identifier
 //-------------------------------------------------------------------------------
-const Identifier = defineType('Identifier', {
+export const Identifier = defineType('Identifier', {
   fields: {
     name: {
       validate: assertValueType('string'),
@@ -67,7 +65,7 @@ const Identifier = defineType('Identifier', {
 //-------------------------------------------------------------------------------
 // Blocks
 //-------------------------------------------------------------------------------
-const BlockStatement = defineType('BlockStatement', {
+export const BlockStatement = defineType('BlockStatement', {
   fields: {
     body: {
       validate: arrayOf(assertAny),
@@ -88,7 +86,7 @@ const BlockStatement = defineType('BlockStatement', {
 //-------------------------------------------------------------------------------
 // Values
 //-------------------------------------------------------------------------------
-const SassBoolean = defineType('SassBoolean', {
+export const SassBoolean = defineType('SassBoolean', {
   fields: {
     value: {
       validate: assertValueType('boolean'),
@@ -99,7 +97,7 @@ const SassBoolean = defineType('SassBoolean', {
   },
 });
 
-const SassColor = defineType('SassColor', {
+export const SassColor = defineType('SassColor', {
   fields: {
     value: {
       validate: assertValueType('string'),
@@ -110,7 +108,7 @@ const SassColor = defineType('SassColor', {
   },
 });
 
-const SassFunction = defineType('SassFunction', {
+export const SassFunction = defineType('SassFunction', {
   fields: {
     id: {
       validate: assertType(Identifier),
@@ -148,7 +146,7 @@ const SassFunction = defineType('SassFunction', {
   },
 });
 
-const SassList = defineType('SassList', {
+export const SassList = defineType('SassList', {
   fields: {
     elements: {
       validate: () =>
@@ -177,7 +175,7 @@ const SassList = defineType('SassList', {
   },
 });
 
-const SassMap = defineType('SassMap', {
+export const SassMap = defineType('SassMap', {
   fields: {
     properties: {
       validate: () => arrayOf(assertType(SassMapProperty)),
@@ -196,7 +194,7 @@ const SassMap = defineType('SassMap', {
   },
 });
 
-const SassMapProperty = defineType('SassMapProperty', {
+export const SassMapProperty = defineType('SassMapProperty', {
   fields: {
     key: {
       validate: assertType(Identifier),
@@ -224,7 +222,7 @@ const SassMapProperty = defineType('SassMapProperty', {
   },
 });
 
-const SassMixin = defineType('SassMixin', {
+export const SassMixin = defineType('SassMixin', {
   fields: {
     id: {
       validate: assertType(Identifier),
@@ -262,7 +260,7 @@ const SassMixin = defineType('SassMixin', {
   },
 });
 
-const SassNumber = defineType('SassNumber', {
+export const SassNumber = defineType('SassNumber', {
   fields: {
     value: {
       validate: assertValueType('number'),
@@ -273,7 +271,7 @@ const SassNumber = defineType('SassNumber', {
   },
 });
 
-const SassString = defineType('SassString', {
+export const SassString = defineType('SassString', {
   fields: {
     value: {
       validate: assertValueType('string'),
@@ -286,7 +284,7 @@ const SassString = defineType('SassString', {
 
 // Allow ability to shortcircuit AST builder limitations and embed raw values
 // into the Sass source code
-const SassValue = defineType('SassValue', {
+export const SassValue = defineType('SassValue', {
   fields: {
     value: {
       validate: assertAny,
@@ -300,7 +298,7 @@ const SassValue = defineType('SassValue', {
 //-------------------------------------------------------------------------------
 // Calls
 //-------------------------------------------------------------------------------
-const SassFunctionCall = defineType('SassFunctionCall', {
+export const SassFunctionCall = defineType('SassFunctionCall', {
   fields: {
     id: {
       validate: assertType(Identifier),
@@ -342,7 +340,7 @@ const SassFunctionCall = defineType('SassFunctionCall', {
   },
 });
 
-const SassMixinCall = defineType('SassMixinCall', {
+export const SassMixinCall = defineType('SassMixinCall', {
   fields: {
     id: {
       validate: assertType(Identifier),
@@ -400,7 +398,7 @@ const SassMixinCall = defineType('SassMixinCall', {
 //-------------------------------------------------------------------------------
 // Rules
 //-------------------------------------------------------------------------------
-const Rule = defineType('Rule', {
+export const Rule = defineType('Rule', {
   fields: {
     declarations: {
       validate: () => arrayOf(assertType(Declaration)),
@@ -428,7 +426,7 @@ const Rule = defineType('Rule', {
   },
 });
 
-const Declaration = defineType('Declaration', {
+export const Declaration = defineType('Declaration', {
   fields: {
     property: {
       validate: assertValueType('string'),
@@ -454,7 +452,7 @@ const Declaration = defineType('Declaration', {
 //-------------------------------------------------------------------------------
 // At-Rules and directives
 //-------------------------------------------------------------------------------
-const AtRule = defineType('AtRule', {
+export const AtRule = defineType('AtRule', {
   fields: {
     name: {
       validate: assertValueType('string'),
@@ -482,7 +480,7 @@ const AtRule = defineType('AtRule', {
   },
 });
 
-const AtContent = defineType('AtContent', {
+export const AtContent = defineType('AtContent', {
   fields: {},
   generate(printer, node, parent) {
     if (parent.body.indexOf(node) !== 0) {
@@ -492,7 +490,7 @@ const AtContent = defineType('AtContent', {
   },
 });
 
-const AtReturn = defineType('AtReturn', {
+export const AtReturn = defineType('AtReturn', {
   fields: {
     argument: {
       validate: assertAny,
@@ -512,7 +510,7 @@ const AtReturn = defineType('AtReturn', {
 //-------------------------------------------------------------------------------
 // Assignment
 //-------------------------------------------------------------------------------
-const Assignment = defineType('Assignment', {
+export const Assignment = defineType('Assignment', {
   fields: {
     id: {
       validate: assertType(Identifier),
@@ -584,7 +582,7 @@ const Assignment = defineType('Assignment', {
   },
 });
 
-const AssignmentPattern = defineType('AssignmentPattern', {
+export const AssignmentPattern = defineType('AssignmentPattern', {
   fields: {
     left: {
       validate: assertType(Identifier),
@@ -601,7 +599,7 @@ const AssignmentPattern = defineType('AssignmentPattern', {
   },
 });
 
-const RestPattern = defineType('RestPattern', {
+export const RestPattern = defineType('RestPattern', {
   fields: {
     id: {
       validate: assertType(Identifier),
@@ -616,7 +614,7 @@ const RestPattern = defineType('RestPattern', {
 //-------------------------------------------------------------------------------
 // Imports
 //-------------------------------------------------------------------------------
-const SassImport = defineType('SassImport', {
+export const SassImport = defineType('SassImport', {
   fields: {
     path: {
       validate: assertValueType('string'),
@@ -630,7 +628,7 @@ const SassImport = defineType('SassImport', {
   },
 });
 
-const SassModule = defineType('SassModule', {
+export const SassModule = defineType('SassModule', {
   fields: {
     path: {
       validate: assertValueType('string'),
@@ -644,7 +642,7 @@ const SassModule = defineType('SassModule', {
   },
 });
 
-const SassForward = defineType('SassForward', {
+export const SassForward = defineType('SassForward', {
   fields: {
     path: {
       validate: assertValueType('string'),
@@ -661,7 +659,7 @@ const SassForward = defineType('SassForward', {
 //-------------------------------------------------------------------------------
 // Control structures
 //-------------------------------------------------------------------------------
-const IfStatement = defineType('IfStatement', {
+export const IfStatement = defineType('IfStatement', {
   fields: {
     test: {
       validate: assertAny,
@@ -698,7 +696,7 @@ const IfStatement = defineType('IfStatement', {
 //-------------------------------------------------------------------------------
 // Logical expressions
 //-------------------------------------------------------------------------------
-const LogicalExpression = defineType('LogicalExpression', {
+export const LogicalExpression = defineType('LogicalExpression', {
   fields: {
     left: {
       validate: assertAny,
@@ -722,7 +720,7 @@ const LogicalExpression = defineType('LogicalExpression', {
 //-------------------------------------------------------------------------------
 // Call expressions
 //-------------------------------------------------------------------------------
-const CallExpression = defineType('CallExpression', {
+export const CallExpression = defineType('CallExpression', {
   fields: {
     callee: {
       validate: assertType(Identifier),
@@ -751,7 +749,7 @@ const CallExpression = defineType('CallExpression', {
 //-------------------------------------------------------------------------------
 // StyleSheet
 //-------------------------------------------------------------------------------
-const StyleSheet = defineType('StyleSheet', {
+export const StyleSheet = defineType('StyleSheet', {
   fields: {
     children: {
       validate: () =>
@@ -785,44 +783,8 @@ const StyleSheet = defineType('StyleSheet', {
 //-------------------------------------------------------------------------------
 // Formatting
 //-------------------------------------------------------------------------------
-const Newline = defineType('Newline', {
+export const Newline = defineType('Newline', {
   generate(printer) {
     printer.newline();
   },
 });
-
-module.exports = {
-  Assignment,
-  AssignmentPattern,
-  AtContent,
-  AtReturn,
-  AtRule,
-  BlockStatement,
-  CallExpression,
-  Comment,
-  Declaration,
-  IfStatement,
-  Identifier,
-  LogicalExpression,
-  RestPattern,
-  Rule,
-  SassBoolean,
-  SassColor,
-  SassForward,
-  SassFunction,
-  SassFunctionCall,
-  SassImport,
-  SassNumber,
-  SassString,
-  SassList,
-  SassMap,
-  SassMapProperty,
-  SassModule,
-  SassValue,
-  SassMixin,
-  SassMixinCall,
-  StyleSheet,
-
-  // Formatting
-  Newline,
-};

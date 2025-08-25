@@ -114,6 +114,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
       middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
+      strategy: 'fixed',
     });
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
@@ -212,18 +213,10 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       [`${prefix}--menu-item--danger`]: isDanger,
     });
 
-    const [isFocusable, setIsFocusable] = useState(false);
     // on first render, register this menuitem in the context's state
     // (used for keyboard navigation)
     useEffect(() => {
       registerItem();
-
-      // Detects if this is the first focusable item
-      const currentItems = context.state.items;
-      if (!disabled && menuItem.current && currentItems.length === 0) {
-        setIsFocusable(true);
-      }
-
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -262,7 +255,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           {...rest}
           ref={ref}
           className={classNames}
-          tabIndex={isFocusable ? 0 : -1}
+          tabIndex={!disabled ? 0 : -1}
           aria-disabled={isDisabled ?? undefined}
           aria-haspopup={hasChildren ?? undefined}
           aria-expanded={hasChildren ? submenuOpen : undefined}

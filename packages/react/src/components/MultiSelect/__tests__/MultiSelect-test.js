@@ -1080,4 +1080,300 @@ describe('MultiSelect', () => {
       'false'
     );
   });
+
+  it('should reflect external control actions and update the select-all item state correctly', async () => {
+    const items = [
+      { id: 'select-all', text: 'All roles', isSelectAll: true },
+      { id: 'downshift-1-item-0', text: 'Editor' },
+
+      { id: 'downshift-1-item-1', text: 'Owner' },
+      { id: 'downshift-1-item-2', text: 'Uploader' },
+    ];
+
+    const ControlledMultiSelect = () => {
+      const [selectedItems, setSelectedItems] = React.useState([]);
+      return (
+        <>
+          <MultiSelect
+            id="controlled-multi"
+            label="Controlled test"
+            items={items}
+            selectedItems={selectedItems}
+            onChange={(data) => setSelectedItems(data.selectedItems)}
+            itemToString={(item) => (item ? item.text : '')}
+          />
+          <Button
+            id="external-all"
+            onClick={() =>
+              setSelectedItems(
+                items.filter((i) => !i.disabled && !i.isSelectAll)
+              )
+            }>
+            External Select All
+          </Button>
+          <Button
+            id="external-one"
+            onClick={() => setSelectedItems([items[1]])}>
+            External Select One
+          </Button>
+          <Button
+            id="external-clear"
+            kind="secondary"
+            onClick={() => setSelectedItems([])}>
+            External Clear
+          </Button>
+        </>
+      );
+    };
+
+    render(<ControlledMultiSelect />);
+
+    const combobox = screen.getByRole('combobox');
+
+    // External full select all (state update)
+    await userEvent.click(screen.getByText('External Select All'));
+
+    // Open dropdown AFTER state is updated to verify selection
+    await userEvent.click(combobox);
+
+    let options = screen.getAllByRole('option');
+    options.forEach((option) =>
+      expect(option).toHaveAttribute('aria-selected', 'true')
+    );
+
+    // "Select All" checkbox should be fully checked
+    const selectAllOption = screen.getByText('All roles').closest('li');
+    const selectAllCheckbox = selectAllOption?.querySelector(
+      'input[type="checkbox"]'
+    );
+    expect(selectAllCheckbox).toHaveProperty('checked', true);
+    expect(selectAllCheckbox).toHaveProperty('indeterminate', false);
+
+    // External single select (partial selection)
+    await userEvent.click(screen.getByText('External Select One'));
+    await userEvent.click(combobox);
+
+    // Select All should now be indeterminate
+    const selectAllOption2 = screen.getByText('All roles').closest('li');
+    const selectAllCheckbox2 = selectAllOption2?.querySelector(
+      'input[type="checkbox"]'
+    );
+    expect(selectAllCheckbox2).toHaveProperty('indeterminate', true);
+    expect(selectAllCheckbox2).toHaveProperty('checked', false);
+
+    // External clear
+    await userEvent.click(screen.getByText('External Clear'));
+    await userEvent.click(combobox);
+
+    options = screen.getAllByRole('option');
+    options.forEach((option) =>
+      expect(option).toHaveAttribute('aria-selected', 'false')
+    );
+
+    // Select All should now be unchecked
+    const selectAllOption3 = screen.getByText('All roles').closest('li');
+    const selectAllCheckbox3 = selectAllOption3?.querySelector(
+      'input[type="checkbox"]'
+    );
+    expect(selectAllCheckbox3).toHaveProperty('checked', false);
+    expect(selectAllCheckbox3).toHaveProperty('indeterminate', false);
+  });
+
+  it('should not include isSelectAll item in onChange handler output', async () => {
+    const onChange = jest.fn();
+    const items = [
+      {
+        id: 'select-all',
+        text: 'All roles',
+        isSelectAll: true,
+      },
+      {
+        id: 'downshift-1-item-0',
+        text: 'Editor',
+      },
+      {
+        id: 'downshift-1-item-1',
+        text: 'Owner',
+      },
+      {
+        id: 'downshift-1-item-2',
+        text: 'Uploader',
+      },
+    ];
+
+    render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        titleText="Multiselect title"
+        itemToString={(item) => (item ? item.text : '')}
+        items={items}
+        onChange={onChange}
+      />
+    );
+
+    const labelNode = screen.getByRole('combobox');
+    await userEvent.click(labelNode);
+
+    // Select all via "All roles"
+    await userEvent.click(screen.getByText('All roles'));
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    const firstCallData = onChange.mock.calls[0][0];
+    expect(firstCallData.selectedItems).toHaveLength(3);
+    expect(firstCallData.selectedItems).toEqual([
+      { id: 'downshift-1-item-0', text: 'Editor' },
+      { id: 'downshift-1-item-1', text: 'Owner' },
+      { id: 'downshift-1-item-2', text: 'Uploader' },
+    ]);
+    expect(firstCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
+      false
+    );
+
+    onChange.mockClear();
+
+    // Deselect all
+    await userEvent.click(screen.getByText('All roles'));
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    const secondCallData = onChange.mock.calls[0][0];
+    expect(secondCallData.selectedItems).toHaveLength(0);
+    expect(secondCallData.selectedItems).toEqual([]);
+
+    onChange.mockClear();
+
+    // Select individual items
+    await userEvent.click(screen.getByText('Editor'));
+    await userEvent.click(screen.getByText('Owner'));
+
+    expect(onChange).toHaveBeenCalledTimes(2);
+
+    const thirdCallData = onChange.mock.calls[0][0];
+    expect(thirdCallData.selectedItems).toHaveLength(1);
+    expect(thirdCallData.selectedItems[0]).toEqual({
+      id: 'downshift-1-item-0',
+      text: 'Editor',
+    });
+    expect(thirdCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
+      false
+    );
+
+    const fourthCallData = onChange.mock.calls[1][0];
+    expect(fourthCallData.selectedItems).toHaveLength(2);
+    expect(fourthCallData.selectedItems).toEqual([
+      { id: 'downshift-1-item-0', text: 'Editor' },
+      { id: 'downshift-1-item-1', text: 'Owner' },
+    ]);
+    expect(fourthCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
+      false
+    );
+
+    onChange.mockClear();
+
+    // Complete selection by selecting the last item
+    await userEvent.click(screen.getByText('Uploader'));
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    const fifthCallData = onChange.mock.calls[0][0];
+    expect(fifthCallData.selectedItems).toHaveLength(3);
+    expect(fifthCallData.selectedItems).toEqual([
+      { id: 'downshift-1-item-0', text: 'Editor' },
+      { id: 'downshift-1-item-1', text: 'Owner' },
+      { id: 'downshift-1-item-2', text: 'Uploader' },
+    ]);
+    expect(fifthCallData.selectedItems.some((item) => item.isSelectAll)).toBe(
+      false
+    );
+  });
+
+  it('should handle controlled mode without including isSelectAll item in selectedItems', async () => {
+    const items = [
+      { id: 'select-all', text: 'All roles', isSelectAll: true },
+      { id: 'downshift-1-item-0', text: 'Editor' },
+      { id: 'downshift-1-item-1', text: 'Owner' },
+      { id: 'downshift-1-item-2', text: 'Uploader' },
+    ];
+
+    const ControlledComponent = () => {
+      const [selectedItems, setSelectedItems] = useState([]);
+      const [changeHistory, setChangeHistory] = useState([]);
+
+      const handleChange = (data) => {
+        const hasSelectAll = data.selectedItems.some(
+          (item) => item.isSelectAll
+        );
+        setChangeHistory((prev) => [
+          ...prev,
+          {
+            hasSelectAll,
+            itemCount: data.selectedItems.length,
+          },
+        ]);
+        setSelectedItems(data.selectedItems);
+      };
+
+      return (
+        <>
+          <MultiSelect
+            id="controlled-test"
+            label="Controlled test"
+            items={items}
+            selectedItems={selectedItems}
+            onChange={handleChange}
+            itemToString={(item) => (item ? item.text : '')}
+          />
+          <div data-testid="change-history">
+            {changeHistory.map((change, idx) => (
+              <div key={idx} data-testid={`change-${idx}`}>
+                {`Change ${idx}: hasSelectAll=${change.hasSelectAll}, count=${change.itemCount}`}
+              </div>
+            ))}
+          </div>
+          <Button
+            onClick={() => {
+              const allSelectableItems = items.filter((i) => !i.isSelectAll);
+              setSelectedItems(allSelectableItems);
+            }}>
+            External Select All
+          </Button>
+        </>
+      );
+    };
+
+    render(<ControlledComponent />);
+
+    const combobox = screen.getByRole('combobox');
+    await userEvent.click(combobox);
+
+    // Click "All roles" from dropdown
+    await userEvent.click(screen.getByText('All roles'));
+
+    await waitFor(() => {
+      const change0 = screen.getByTestId('change-0');
+      expect(change0).toHaveTextContent(
+        'Change 0: hasSelectAll=false, count=3'
+      );
+    });
+
+    // Click external button
+    await userEvent.click(screen.getByText('External Select All'));
+
+    await userEvent.click(combobox);
+    const options = screen.getAllByRole('option');
+
+    expect(options[0]).toHaveAttribute('aria-selected', 'true');
+    expect(options[1]).toHaveAttribute('aria-selected', 'true');
+    expect(options[2]).toHaveAttribute('aria-selected', 'true');
+    expect(options[3]).toHaveAttribute('aria-selected', 'true');
+
+    // Deselect all
+    await userEvent.click(screen.getByText('All roles'));
+
+    await waitFor(() => {
+      const change1 = screen.getByTestId('change-1');
+      expect(change1).toHaveTextContent(
+        'Change 1: hasSelectAll=false, count=0'
+      );
+    });
+  });
 });

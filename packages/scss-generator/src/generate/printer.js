@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const prettier = require('prettier2');
+import prettier from 'prettier';
 
 const prettierOptions = {
   parser: 'scss',
@@ -17,7 +15,7 @@ const prettierOptions = {
   proseWrap: 'always',
 };
 
-function createPrinter(definitions) {
+export function createPrinter(definitions) {
   let buffer = [];
   let indentLevel = 0;
 
@@ -72,7 +70,3 @@ function createPrinter(definitions) {
 function padLeft(level) {
   return '  '.repeat(level);
 }
-
-module.exports = {
-  createPrinter,
-};

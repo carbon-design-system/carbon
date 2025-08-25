@@ -16,8 +16,14 @@ figma.connect(
     props: {
       //noTrailingSlash: needs to come from child item component in figma
       children: figma.children(['_Breadcrumb item']),
+      size: figma.enum('Size', {
+        Medium: 'md',
+        Small: 'sm',
+      }),
     },
-    example: ({ children }) => <Breadcrumb>{children}</Breadcrumb>,
+    example: ({ children, size }) => (
+      <Breadcrumb size={size}>{children}</Breadcrumb>
+    ),
   }
 );
 

@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import prettier from 'prettier2';
-
 /**
  * Find the HTMLElement that includes the given `text`
  *
@@ -108,17 +106,4 @@ export function isElementVisible(element) {
   }
 
   return true;
-}
-
-/**
- * Pretty-print the outerHTML of the given element. Uses prettier under the
- * hood.
- *
- * @param {HTMLElement} element
- * @returns {string}
- */
-export function debug(element) {
-  return prettier.format(element.outerHTML, {
-    parser: 'html',
-  });
 }

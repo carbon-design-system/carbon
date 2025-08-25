@@ -11,7 +11,7 @@ import React, { useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
 import { ButtonKinds } from '../Button';
 
@@ -148,9 +148,12 @@ function FileUploaderButton({
   }
 
   function onKeyDown(event) {
-    if (matches(event, [keys.Enter, keys.Space]) && inputNode.current) {
-      inputNode.current.value = '';
-      inputNode.current.click();
+    if (matches(event, [keys.Enter, keys.Space])) {
+      event.preventDefault();
+      if (inputNode.current) {
+        inputNode.current.value = '';
+        inputNode.current.click();
+      }
     }
   }
 

@@ -13,23 +13,36 @@ import React, {
   useRef,
   useState,
   useCallback,
-  ReactElement,
+  useContext,
   type ComponentType,
   type FunctionComponent,
   type MouseEvent,
   type MutableRefObject,
+  type FocusEvent,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
+import { deprecate } from '../../prop-types/deprecate';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
 import { IconButton } from '../IconButton';
+import { TreeContext, DepthContext } from './TreeContext';
+
+type UncontrolledOnToggle = (
+  event: React.MouseEvent | React.KeyboardEvent,
+  node: Pick<TreeNodeProps, 'id' | 'label' | 'value' | 'isExpanded'>
+) => void;
+
+type ControlledOnToggle = (isExpanded: TreeNodeProps['isExpanded']) => void;
 
 export type TreeNodeProps = {
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * The ID of the active node in the tree
+   *
+   * @deprecated The `active` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   active?: string | number;
   /**
@@ -48,6 +61,9 @@ export type TreeNodeProps = {
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * TreeNode depth to determine spacing
+   *
+   * @deprecated The `depth` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   depth?: number;
   /**
@@ -68,20 +84,32 @@ export type TreeNodeProps = {
   label: React.ReactNode;
   /**
    * Callback function for when the node receives or loses focus
+   *
+   * @deprecated The `onNodeFocusEvent` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   onNodeFocusEvent?: (event: React.FocusEvent<HTMLElement>) => void;
   /**
    * Callback function for when the node is selected
    */
-  onSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  onSelect?: (
+    event: React.MouseEvent | React.KeyboardEvent,
+    node: Pick<TreeNodeProps, 'id' | 'label' | 'value'>
+  ) => void;
   /**
    * Callback function for when a parent node is expanded or collapsed
    */
-  onToggle?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  onToggle?: UncontrolledOnToggle | ControlledOnToggle;
   /**
    * Callback function for when any node in the tree is selected
+   *
+   * @deprecated The `onTreeSelect` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
-  onTreeSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  onTreeSelect?: (
+    event: React.MouseEvent | React.KeyboardEvent,
+    node: Pick<TreeNodeProps, 'id' | 'label' | 'value'>
+  ) => void;
   /**
    * A component used to render an icon.
    */
@@ -89,6 +117,8 @@ export type TreeNodeProps = {
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
+   * @deprecated The `selected` prop for `TreeNode` has
+   * been deprecated after the introduction of context. It will be removed in the next major release.
    */
   selected?: Array<string | number>;
   /**
@@ -121,7 +151,8 @@ export type TreeNodeProps = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 } & Omit<React.LiHTMLAttributes<HTMLElement>, 'onSelect'>;
@@ -218,31 +249,38 @@ const useEllipsisCheck = (
 const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
   (
     {
-      active,
       children,
       className,
-      depth: propDepth,
       disabled,
       id: nodeId,
       isExpanded,
       defaultIsExpanded,
       label,
-      onNodeFocusEvent,
       onSelect: onNodeSelect,
       onToggle,
-      onTreeSelect,
       renderIcon: Icon,
-      selected: propSelected,
       value,
       href,
       align = 'bottom',
       autoAlign = false,
+      // These props are fallback props if the TreeContext is not available or only TreeNode is used as a standalone component
+      active: propActive,
+      depth: propDepth,
+      selected: propSelected,
+      onTreeSelect: propOnTreeSelect,
+      onNodeFocusEvent,
       ...rest
     },
     forwardedRef
   ) => {
-    const depth = propDepth as number;
-    const selected = propSelected as (string | number)[];
+    const treeContext = useContext(TreeContext);
+    const contextDepth = useContext(DepthContext);
+
+    // Prioritize direct props, and fall back to context values.
+    const depth = propDepth ?? (contextDepth !== -1 ? contextDepth : 0);
+    const active = propActive ?? treeContext?.active;
+    const selected = propSelected ?? treeContext?.selected ?? [];
+    const onTreeSelect = propOnTreeSelect ?? treeContext?.onTreeSelect;
 
     const detailsWrapperRef = useRef<HTMLElementOrAnchor>(null);
     const { labelTextRef, isEllipsisApplied, tooltipText } = useEllipsisCheck(
@@ -258,14 +296,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
     const controllableExpandedState = useControllableState({
       value: isExpanded,
-      onChange: (newValue: boolean) => {
-        onToggle?.(undefined as unknown as MouseEvent, {
-          id,
-          isExpanded: newValue,
-          label,
-          value,
-        });
-      },
+      onChange: onToggle as ControlledOnToggle,
       defaultValue: defaultIsExpanded ?? false,
     });
     const uncontrollableExpandedState = useState(isExpanded ?? false);
@@ -315,38 +346,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
     };
 
-    function enhanceTreeNodes(children: React.ReactNode): React.ReactNode {
-      return React.Children.map(children, (node) => {
-        if (!React.isValidElement(node)) return node;
-
-        const isTreeNode = node.type === TreeNode;
-
-        if (isTreeNode) {
-          return React.cloneElement(node, {
-            active,
-            depth: depth + 1,
-            disabled:
-              disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
-            onTreeSelect,
-            onNodeFocusEvent,
-            selected,
-            tabIndex: (node as ReactElement<TreeNodeProps>).props.disabled
-              ? null
-              : -1,
-          } as TreeNodeProps);
-        }
-
-        const newChildren = enhanceTreeNodes((node.props as any).children);
-        return React.cloneElement(node as React.ReactElement<any>, {
-          children: newChildren,
-        });
-      });
-    }
-
-    const nodesWithProps = enhanceTreeNodes(children);
-
     const isActive = active === id;
-    const isSelected = selected.includes(id);
+    const isSelected = selected?.includes(id) ?? false;
+
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
       [`${prefix}--tree-node--active`]: isActive,
       [`${prefix}--tree-node--disabled`]: disabled,
@@ -373,10 +375,16 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
 
       if (!enableTreeviewControllable) {
-        onToggle?.(event, { id, isExpanded: !expanded, label, value });
+        (onToggle as UncontrolledOnToggle)?.(event, {
+          id,
+          isExpanded: !expanded,
+          label,
+          value,
+        });
       }
       setExpanded(!expanded);
     }
+
     function handleClick(event: React.MouseEvent) {
       event.stopPropagation();
       if (!disabled) {
@@ -385,19 +393,22 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         rest?.onClick?.(event as React.MouseEvent<HTMLElement>);
       }
     }
-    function handleKeyDown(event) {
+    function handleKeyDown(event: React.KeyboardEvent<HTMLElement>) {
       function getFocusableNode(node) {
         if (node?.classList.contains(`${prefix}--tree-node`)) {
           return node;
         }
         return node?.firstChild;
       }
+
       if (disabled) {
         return;
       }
+
       if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
         event.stopPropagation();
       }
+
       if (match(event, keys.ArrowLeft)) {
         const findParentTreeNode = (node: Element | null): Element | null => {
           if (!node) return null;
@@ -412,9 +423,15 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
           }
           return findParentTreeNode(node.parentElement);
         };
+
         if (children && expanded) {
           if (!enableTreeviewControllable) {
-            onToggle?.(event, { id, isExpanded: false, label, value });
+            (onToggle as UncontrolledOnToggle)?.(event, {
+              id,
+              isExpanded: false,
+              label,
+              value,
+            });
           }
           setExpanded(false);
         } else {
@@ -432,6 +449,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
           }
         }
       }
+
       if (children && match(event, keys.ArrowRight)) {
         if (expanded) {
           /**
@@ -442,36 +460,47 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             href
               ? currentNode.current?.parentElement?.lastChild?.firstChild
               : currentNode.current?.lastChild?.firstChild
-          ).focus();
+          )?.focus();
         } else {
           if (!enableTreeviewControllable) {
-            onToggle?.(event, { id, isExpanded: true, label, value });
+            (onToggle as UncontrolledOnToggle)?.(event, {
+              id,
+              isExpanded: true,
+              label,
+              value,
+            });
           }
           setExpanded(true);
         }
       }
+
       if (matches(event, [keys.Enter, keys.Space])) {
         event.preventDefault();
         if (match(event, keys.Enter) && children) {
           // Toggle expansion state for parent nodes
           if (!enableTreeviewControllable) {
-            onToggle?.(event, { id, isExpanded: !expanded, label, value });
+            (onToggle as UncontrolledOnToggle)?.(event, {
+              id,
+              isExpanded: !expanded,
+              label,
+              value,
+            });
           }
           setExpanded(!expanded);
         }
         if (href) {
           currentNode.current?.click();
         }
-        handleClick(event);
+        handleClick(event as unknown as MouseEvent);
       }
       rest?.onKeyDown?.(event);
     }
-    function handleFocusEvent(event) {
-      if (event.type === 'blur') {
-        rest?.onBlur?.(event);
-      }
+    function handleFocusEvent(event: FocusEvent<HTMLElement>) {
       if (event.type === 'focus') {
         rest?.onFocus?.(event);
+      }
+      if (event.type === 'blur') {
+        rest?.onBlur?.(event);
       }
       onNodeFocusEvent?.(event);
     }
@@ -523,6 +552,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       setExpanded,
     ]);
 
+    const tabIndex = disabled ? undefined : (rest.tabIndex ?? -1);
+
     const treeNodeProps: React.LiHTMLAttributes<HTMLElement> = {
       ...rest,
       ['aria-current']: !href
@@ -539,116 +570,80 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       ['aria-owns']: children ? `${id}-subtree` : undefined,
       className: treeNodeClasses,
       id,
-      onBlur: handleFocusEvent,
       onClick: handleClick,
-      onFocus: handleFocusEvent,
       onKeyDown: handleKeyDown,
       role: 'treeitem',
+      tabIndex,
+      onFocus: handleFocusEvent,
+      onBlur: handleFocusEvent,
     };
 
-    if (!children) {
-      if (href) {
-        return (
-          <li role="none">
-            <a
-              {...treeNodeProps}
-              ref={setRefs}
-              href={!disabled ? href : undefined}>
-              <div
-                className={`${prefix}--tree-node__label`}
-                ref={currentNodeLabel}>
-                {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
-                {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-                {renderLabelText()}
-              </div>
-            </a>
-          </li>
-        );
-      } else {
-        return (
-          <li {...treeNodeProps} ref={setRefs}>
-            <div
-              className={`${prefix}--tree-node__label`}
-              ref={currentNodeLabel}>
-              {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
-              {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-              {renderLabelText()}
-            </div>
-          </li>
-        );
-      }
-    }
+    const nodeContent = (
+      <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
+        {children && (
+          <span
+            className={`${prefix}--tree-parent-node__toggle`}
+            onClick={handleToggleClick}>
+            <CaretDown className={toggleClasses} />
+          </span>
+        )}
+
+        <span className={`${prefix}--tree-node__label__details`}>
+          {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
+          {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
+          {renderLabelText()}
+        </span>
+      </div>
+    );
+
     if (href) {
       return (
-        <li role="none" className={`${prefix}--tree-node-link-parent`}>
+        <li
+          role="none"
+          className={children ? `${prefix}--tree-node-link-parent` : ''}>
           <a
             {...treeNodeProps}
             aria-expanded={!!expanded}
             ref={setRefs}
             href={!disabled ? href : undefined}>
-            <div
-              className={`${prefix}--tree-node__label`}
-              ref={currentNodeLabel}>
-              {/* https://github.com/carbon-design-system/carbon/pull/6008#issuecomment-675738670 */}
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-              <span
-                className={`${prefix}--tree-parent-node__toggle`}
-                // @ts-ignore
-                disabled={disabled}
-                onClick={handleToggleClick}>
-                <CaretDown className={toggleClasses} />
-              </span>
-              <span
-                className={`${prefix}--tree-node__label__details`}
-                ref={detailsWrapperRef}>
-                {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
-                {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-                {renderLabelText()}
-              </span>
-            </div>
+            {nodeContent}
           </a>
-          <ul
-            id={`${id}-subtree`}
-            role="group"
-            className={classNames(`${prefix}--tree-node__children`, {
-              [`${prefix}--tree-node--hidden`]: !expanded,
-            })}>
-            {nodesWithProps}
-          </ul>
-        </li>
-      );
-    } else {
-      return (
-        <li {...treeNodeProps} aria-expanded={!!expanded} ref={setRefs}>
-          <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
-            {/* https://github.com/carbon-design-system/carbon/pull/6008#issuecomment-675738670 */}
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-            <span
-              className={`${prefix}--tree-parent-node__toggle`}
-              // @ts-ignore
-              disabled={disabled}
-              onClick={handleToggleClick}>
-              <CaretDown className={toggleClasses} />
-            </span>
-            <span
-              className={`${prefix}--tree-node__label__details`}
-              ref={detailsWrapperRef}>
-              {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
-              {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-              {renderLabelText()}
-            </span>
-          </div>
-          <ul
-            id={`${id}-subtree`}
-            role="group"
-            className={classNames(`${prefix}--tree-node__children`, {
-              [`${prefix}--tree-node--hidden`]: !expanded,
-            })}>
-            {nodesWithProps}
-          </ul>
+          {children && (
+            <ul
+              id={`${id}-subtree`}
+              role="group"
+              className={classNames(`${prefix}--tree-node__children`, {
+                [`${prefix}--tree-node--hidden`]: !expanded,
+              })}>
+              <DepthContext.Provider value={depth + 1}>
+                {children}
+              </DepthContext.Provider>
+            </ul>
+          )}
         </li>
       );
     }
+
+    return (
+      <li
+        {...treeNodeProps}
+        aria-expanded={children ? !!expanded : undefined}
+        ref={setRefs}>
+        {nodeContent}
+        {children && (
+          <ul
+            id={`${id}-subtree`}
+            role="group"
+            className={classNames(`${prefix}--tree-node__children`, {
+              [`${prefix}--tree-node--hidden`]: !expanded,
+            })}>
+            <DepthContext.Provider value={depth + 1}>
+              {children}
+            </DepthContext.Provider>
+          </ul>
+        )}
+      </li>
+    );
   }
 );
 
@@ -657,7 +652,11 @@ TreeNode.propTypes = {
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * The ID of the active node in the tree
    */
-  active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  active: deprecate(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    'The `active` prop for `TreeNode` is no longer needed and has ' +
+      'been deprecated. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the children of the TreeNode
@@ -679,8 +678,11 @@ TreeNode.propTypes = {
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * TreeNode depth to determine spacing
    */
-  depth: PropTypes.number,
-
+  depth: deprecate(
+    PropTypes.number,
+    'The `depth` prop for `TreeNode` is no longer needed and has ' +
+      'been deprecated. It will be removed in the next major release.'
+  ),
   /**
    * Specify if the TreeNode is disabled
    */
@@ -704,7 +706,11 @@ TreeNode.propTypes = {
   /**
    * Callback function for when the node receives or loses focus
    */
-  onNodeFocusEvent: PropTypes.func,
+  onNodeFocusEvent: deprecate(
+    PropTypes.func,
+    'The `onNodeFocusEvent` prop for `TreeNode` is no longer needed and has ' +
+      'been deprecated. It will be removed in the next major release.'
+  ),
 
   /**
    * Callback function for when the node is selected
@@ -719,7 +725,11 @@ TreeNode.propTypes = {
   /**
    * Callback function for when any node in the tree is selected
    */
-  onTreeSelect: PropTypes.func,
+  onTreeSelect: deprecate(
+    PropTypes.func,
+    'The `onTreeSelect` prop for `TreeNode` is no longer needed and has ' +
+      'been deprecated. It will be removed in the next major release.'
+  ),
 
   /**
    * A component used to render an icon.
@@ -732,8 +742,12 @@ TreeNode.propTypes = {
    * Array containing all selected node IDs in the tree
    */
   // @ts-ignore
-  selected: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  selected: deprecate(
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ),
+    'The `selected` prop for `TreeNode` is no longer needed and has ' +
+      'been deprecated. It will be removed in the next major release.'
   ),
 
   /**
@@ -767,7 +781,8 @@ TreeNode.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating
    * element to avoid collisions with the viewport and being clipped by
-   * ancestor elements.
+   * ancestor elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 };
