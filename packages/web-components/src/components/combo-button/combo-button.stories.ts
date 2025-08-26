@@ -90,14 +90,7 @@ export const Default = {
 export const ExperimentalAutoAlign = {
   argTypes: argTypes,
   args: args,
-  render: ({
-    disabled,
-    label,
-    menuAlignment,
-    size,
-    tooltipAlignment,
-    onClick,
-  }) => html`
+  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
     <div style="width: 5000px; height: 5000px;">
       <div style="position: absolute; bottom: 20px">
         <cds-combo-button

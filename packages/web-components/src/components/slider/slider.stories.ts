@@ -424,7 +424,6 @@ export const TwoHandleSlider = {
       minLabel,
       name,
       readOnly,
-      required,
       step,
       stepMultiplier,
       warn,
@@ -552,7 +551,7 @@ export const TwoHandleSkeleton = {
       skip: true,
     },
   },
-  render: (args) => html`
+  render: () => html`
     <cds-form-item
       ><cds-slider-skeleton twoHandles></cds-slider-skeleton
     ></cds-form-item>

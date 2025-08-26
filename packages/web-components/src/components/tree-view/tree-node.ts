@@ -85,6 +85,7 @@ class CDSTreeNode extends LitElement {
 
       return depth + 2.5;
     };
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const label = this.shadowRoot!.querySelector(
       `.${prefix}--tree-node__label`
     );

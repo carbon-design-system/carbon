@@ -147,74 +147,84 @@ export interface IconButtonProps
   wrapperClasses?: string;
 }
 
-const IconButton = React.forwardRef(function IconButton(
-  {
-    align,
-    autoAlign = false,
-    badgeCount,
-    children,
-    className,
-    closeOnActivation = true,
-    defaultOpen = false,
-    disabled,
-    dropShadow = false,
-    enterDelayMs = 100,
-    highContrast = true,
-    kind,
-    label,
-    leaveDelayMs = 100,
-    wrapperClasses,
-    size,
-    isSelected,
-    ...rest
-  }: IconButtonProps,
-  ref: ForwardedRef<unknown> // TODO: this is unknown on Button, so should it be here as well?
-) {
-  const prefix = usePrefix();
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+const IconButton = React.forwardRef(
+  (
+    {
+      align,
+      autoAlign = false,
+      badgeCount,
+      children,
+      className,
+      closeOnActivation = true,
+      defaultOpen = false,
+      disabled,
+      dropShadow = false,
+      enterDelayMs = 100,
+      highContrast = true,
+      kind,
+      label,
+      leaveDelayMs = 100,
+      wrapperClasses,
+      size,
+      isSelected,
+      ...rest
+    }: IconButtonProps,
+    ref: ForwardedRef<unknown> // TODO: this is unknown on Button, so should it be here as well?
+  ) => {
+    const prefix = usePrefix();
 
-  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`, {
-    [`${prefix}--icon-tooltip--disabled`]: disabled,
-  });
+    const tooltipClasses = classNames(
+      wrapperClasses,
+      `${prefix}--icon-tooltip`,
+      {
+        [`${prefix}--icon-tooltip--disabled`]: disabled,
+      }
+    );
 
-  if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
-    console.warn(
-      "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+    if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      console.warn(
+        "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+      );
+    }
+    const badgeId = useId('badge-indicator');
+
+    return (
+      <Tooltip
+        align={align}
+        autoAlign={autoAlign}
+        closeOnActivation={closeOnActivation}
+        className={tooltipClasses}
+        defaultOpen={defaultOpen}
+        dropShadow={dropShadow}
+        enterDelayMs={enterDelayMs}
+        highContrast={highContrast}
+        label={label}
+        leaveDelayMs={leaveDelayMs}>
+        <ButtonBase
+          {...rest}
+          disabled={disabled}
+          kind={kind}
+          ref={ref}
+          size={size}
+          isSelected={isSelected}
+          hasIconOnly
+          className={className}
+          aria-describedby={
+            rest['aria-describedby'] || (badgeCount && badgeId)
+          }>
+          {children}
+          {!disabled && badgeCount !== undefined && (
+            <BadgeIndicator
+              id={badgeId}
+              count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
+          )}
+        </ButtonBase>
+      </Tooltip>
     );
   }
-  const badgeId = useId('badge-indicator');
-
-  return (
-    <Tooltip
-      align={align}
-      autoAlign={autoAlign}
-      closeOnActivation={closeOnActivation}
-      className={tooltipClasses}
-      defaultOpen={defaultOpen}
-      dropShadow={dropShadow}
-      enterDelayMs={enterDelayMs}
-      highContrast={highContrast}
-      label={label}
-      leaveDelayMs={leaveDelayMs}>
-      <ButtonBase
-        {...rest}
-        disabled={disabled}
-        kind={kind}
-        ref={ref}
-        size={size}
-        isSelected={isSelected}
-        hasIconOnly
-        className={className}
-        aria-describedby={rest['aria-describedby'] || (badgeCount && badgeId)}>
-        {children}
-        {!disabled && badgeCount !== undefined && (
-          <BadgeIndicator
-            id={badgeId}
-            count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
-        )}
-      </ButtonBase>
-    </Tooltip>
-  );
-});
+);
 
 IconButton.propTypes = {
   /**

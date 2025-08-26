@@ -9,6 +9,7 @@ if (typeof Element.prototype.closest !== 'function') {
   Element.prototype.closest = function closestElement(selector: string) {
     const doc = this.ownerDocument;
     for (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       // eslint-disable-next-line @typescript-eslint/no-this-alias
       let traverse: Node | null = this;
