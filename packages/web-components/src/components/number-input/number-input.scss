@@ -66,10 +66,10 @@ $css--plex: true !default;
     &::after {
       position: absolute;
       background-color: $border-subtle;
-      block-size: to-rem(16px);
+      block-size: 100%;
       content: '';
       inline-size: to-rem(1px);
-      inset-inline-start: to-rem(-16px);
+      inset-inline-start: -#{$spacing-05};
     }
   }
 }
