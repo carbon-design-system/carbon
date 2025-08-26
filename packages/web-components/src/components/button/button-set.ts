@@ -66,7 +66,8 @@ class CDSButtonSet extends CDSButtonSetBase {
    * @private
    */
   private _hideSiblingMargin = () => {
-    const slot = this.shadowRoot?.querySelector('slot')!;
+    const slot = this.shadowRoot?.querySelector('slot');
+    if (!slot) return;
     const items = slot
       .assignedElements()
       .filter(
