@@ -12,7 +12,6 @@ const reactNext = require('./react/next');
 const svg = require('./svg');
 const vanilla = require('./vanilla');
 const vue = require('./vue/builder');
-const webComponents = require('./web-components/builder');
 
 const builders = {
   react: {
@@ -29,9 +28,6 @@ const builders = {
   },
   vue: {
     run: vue,
-  },
-  webComponents: {
-    run: webComponents,
   },
 };
 
