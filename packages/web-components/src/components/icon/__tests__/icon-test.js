@@ -4,15 +4,16 @@
 
 import { fixture, expect } from '@open-wc/testing';
 import { html } from 'lit';
-import '../icon.js';
+import '@carbon/web-components/es/components/icon/index.js';
 import Add16 from '@carbon/icons/es/add/16.js';
 
 describe('cds-icon', function () {
   it('should render an empty icon', async function () {
     const el = await fixture(html`<cds-icon></cds-icon>`);
 
-    // Should render nothing when no icon is provided
-    expect(el.shadowRoot.children.length).to.equal(0);
+    // Should render a slot when no icon is provided
+    expect(el.shadowRoot.children.length).to.equal(1);
+    expect(el.shadowRoot.querySelector('slot')).to.exist;
   });
 
   it('should render a Carbon icon', async function () {
@@ -31,7 +32,7 @@ describe('cds-icon', function () {
       </cds-icon>
     `);
 
-    const svg = el.shadowRoot.querySelector('svg');
+    const svg = el.querySelector('svg');
     expect(svg).to.exist;
     expect(svg.querySelector('circle')).to.exist;
   });

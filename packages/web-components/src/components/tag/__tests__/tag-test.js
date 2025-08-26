@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import Add16 from '@carbon/web-components/es/icons/add/16.js';
-import { iconLoader } from '../../../globals/internal/icon-loader';
+import Add16 from '@carbon/icons/es/add/16.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/tag/index.js';
 
 describe('cds-tag', function () {
