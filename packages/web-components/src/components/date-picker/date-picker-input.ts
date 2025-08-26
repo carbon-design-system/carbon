@@ -108,12 +108,11 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   protected _handleSlotChange({ target }: Event) {
     if (!(target as HTMLSlotElement).name) {
-      const hasContent = (target as HTMLSlotElement)
-        .assignedNodes()
-        .some(
-          (node) =>
-            node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-        );
+      const hasContent = (target as HTMLSlotElement).assignedNodes().some(
+        (node) =>
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
       this._hasHelperText = hasContent;
     }
   }

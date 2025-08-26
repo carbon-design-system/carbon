@@ -183,6 +183,7 @@ const Dialog = React.forwardRef(
           ref.current.close();
         }
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [modal, open]);
 
     useEffect(() => {
@@ -218,10 +219,12 @@ const Dialog = React.forwardRef(
           ref.current.setAttribute('aria-labelledby', title.id);
         }
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [open, ariaLabel, ariaLabelledBy, prefix]);
 
     return (
       <DialogContext.Provider value={contextValue}>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events , jsx-a11y/no-noninteractive-element-interactions -- https://github.com/carbon-design-system/carbon/issues/20071 */}
         <dialog
           {...rest}
           className={cx(
@@ -353,6 +356,7 @@ const DialogControls = React.forwardRef<HTMLDivElement, DialogControlsProps>(
   ({ children, ...rest }, ref) => {
     const prefix = usePrefix();
     return (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
         {children}
@@ -387,6 +391,7 @@ const DialogCloseButton = React.forwardRef<
 >(({ onClick, ...rest }, ref) => {
   const prefix = usePrefix();
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
     // @ts-ignore
     <IconButton
       kind="ghost"
@@ -800,6 +805,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
               ({ buttonText, onClick: onButtonClick }, i) => (
                 <Button
                   key={`${buttonText}-${i}`}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus -- https://github.com/carbon-design-system/carbon/issues/20071
                   autoFocus={danger}
                   kind="secondary"
                   ref={i === 0 && danger ? setSecondaryButtonRef : undefined}
@@ -813,6 +819,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
                 ref={danger ? setSecondaryButtonRef : undefined}
                 disabled={loadingActive}
                 kind="secondary"
+                // eslint-disable-next-line jsx-a11y/no-autofocus -- https://github.com/carbon-design-system/carbon/issues/20071
                 autoFocus={danger}
                 onClick={onSecondaryButtonClick}>
                 {secondaryButtonText}

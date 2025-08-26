@@ -72,10 +72,13 @@ export type LinkProps<T extends React.ElementType> =
 
 type LinkComponent = <T extends React.ElementType = 'a'>(
   props: LinkProps<T>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 ) => React.ReactElement | any;
 
 // First create the component with basic types
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const LinkBase = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   any,
   LinkBaseProps & {
     as?: ElementType;
@@ -120,6 +123,7 @@ const LinkBase = React.forwardRef<
       linkProps['aria-disabled'] = true;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
 
     const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

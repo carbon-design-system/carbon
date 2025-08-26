@@ -27,7 +27,7 @@ export default tseslint.config([
       // which implies that they were set previously.
       'no-console': 'error',
       'no-template-curly-in-string': 'error',
-      'prefer-arrow-callback': 'error',
+      'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
       'require-atomic-updates': 'error',
     },
   },
@@ -163,13 +163,6 @@ export default tseslint.config([
       'www/src/pages/insights/index.js',
       'www/src/pages/packages/\\[package\\]/index.js',
       'www/src/pages/packages/index.js',
-
-      // TODO:
-      // 1. Delete this ignore.
-      // 2. Delete `--no-warn-ignored` from the `lint` script in `package.json`.
-      //
-      // https://github.com/carbon-design-system/carbon/issues/18991
-      '**/*.{ts,tsx}',
     ],
   },
 ]);

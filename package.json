@@ -130,7 +130,7 @@
   "lint-staged": {
     "**/*.{cjs,js,jsx,mjs,ts,tsx}": [
       "yarn prettier --cache --write",
-      "eslint --cache --fix --max-warnings 0 --no-warn-ignored"
+      "eslint --cache --fix --max-warnings 0"
     ],
     "**/*.scss": [
       "yarn prettier --cache --write",

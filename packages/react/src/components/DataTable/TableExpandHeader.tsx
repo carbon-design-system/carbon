@@ -7,7 +7,7 @@
 
 import { ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
-import PropTypes, { Validator } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
@@ -185,10 +185,12 @@ TableExpandHeader.propTypes = {
     requiredIfGivenPropIsTruthy(
       'enableExpando',
       PropTypes.func
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     ) as PropTypes.Validator<any>,
     requiredIfGivenPropIsTruthy(
       'enableToggle',
       PropTypes.func
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     ) as PropTypes.Validator<any>,
   ]),
 };

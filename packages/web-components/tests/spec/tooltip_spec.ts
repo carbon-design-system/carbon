@@ -27,56 +27,63 @@ const template = ({
   hasContent = true,
   hasBody = true,
 }: { hasContent?: boolean; hasBody?: boolean } = {}) =>
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
   !hasContent ? (undefined! as TemplateResult) : contentTemplate({ hasBody });
 
-const iconTemplate = (props?) =>
+const iconTemplate = (props) =>
   Playground({
     'cds-tooltip-icon': props,
   });
 
-xdescribe('cds-tooltip', function () {
-  describe('Missing menu body', function () {
+xdescribe('cds-tooltip', () => {
+  describe('Missing menu body', () => {
     let trigger: CDSTooltip | null;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template({ hasBody: false }), document.body);
       await Promise.resolve();
       trigger = document.body.querySelector('cds-tooltip');
     });
 
-    it('Should be tolerant of missing menu body', async function () {
+    it('Should be tolerant of missing menu body', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(trigger!.open).toBe(true);
     });
   });
 
-  describe('Toggling', function () {
+  describe('Toggling', () => {
     let trigger: CDSTooltip | null;
     let content: CDSTooltipContent | null;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
       trigger = document.body.querySelector('cds-tooltip');
       content = document.body.querySelector('cds-tooltip-content');
     });
 
-    it('Should open and close the menu', async function () {
+    it('Should open and close the menu', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(trigger!.open).toBe(true);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(content!.open).toBe(true);
       expect(trigger?.getAttribute('aria-expanded')).toBe('true');
     });
 
-    it('Should start observing element resizes when tooltip gets open', async function () {
+    it('Should start observing element resizes when tooltip gets open', async () => {
       spyOn(ResizeObserver.prototype, 'observe');
       spyOn(ResizeObserver.prototype, 'unobserve');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
@@ -86,76 +93,87 @@ xdescribe('cds-tooltip', function () {
         'div[data-floating-menu-container]'
       );
       expect(ResizeObserver.prototype.observe).toHaveBeenCalledWith(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         floatingMenuContainer!
       );
       expect(ResizeObserver.prototype.observe).toHaveBeenCalledWith(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         trigger!.parentElement!
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip>`
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip-content>`
       expect(ResizeObserver.prototype.unobserve).toHaveBeenCalledWith(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         trigger!.parentElement!
       );
       expect(ResizeObserver.prototype.unobserve).toHaveBeenCalledWith(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         floatingMenuContainer!
       );
     });
   });
 
-  describe('Placing', function () {
+  describe('Placing', () => {
     let trigger: CDSTooltip | null;
     let content: CDSTooltipContent | null;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
       trigger = document.body.querySelector('cds-tooltip');
       content = document.body.querySelector('cds-tooltip-content');
     });
 
-    it('Should place and position', async function () {
+    it('Should place and position', async () => {
       // TODO: Figure out why `spyOnProperty()` with a property name that actually exists causes a TS error
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       spyOnProperty(body, 'position').and.returnValue({
         start: 1,
         top: 2,
       });
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip>`
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip-body>`
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(content!.parentElement).toBe(
         document.body.querySelector(
           'div[data-floating-menu-container]'
         ) as HTMLElement
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(content!.style.left).toBe('1px');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(content!.style.top).toBe('2px');
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     await render(template({ hasContent: false }), document.body);
   });
 });
 
-describe('cds-tooltip-icon', function () {
-  describe('Rendering', function () {
-    xit('Should render with minimum attributes', async function () {
+describe('cds-tooltip-icon', () => {
+  describe('Rendering', () => {
+    xit('Should render with minimum attributes', async () => {
       render(iconTemplate(), document.body);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-tooltip-icon' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    xit('Should render with various attributes', async function () {
+    xit('Should render with various attributes', async () => {
       render(
         iconTemplate({
           alignment: POPOVER_ALIGNMENT.TOP,
@@ -165,6 +183,7 @@ describe('cds-tooltip-icon', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-tooltip-icon' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -172,7 +191,7 @@ describe('cds-tooltip-icon', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     await render(iconTemplate({ hasContent: false }), document.body);
   });
 });
