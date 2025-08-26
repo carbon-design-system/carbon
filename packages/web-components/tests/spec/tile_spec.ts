@@ -32,20 +32,21 @@ const multiSelectableTemplate = (props?) =>
     'cds-selectable-tile': props,
   });
 
-xdescribe('cds-tile', function () {
+xdescribe('cds-tile', () => {
   const events = new EventManager();
 
-  describe('cds-clickable-tile', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-clickable-tile', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           clickableTemplate({
             colorScheme: TILE_COLOR_SCHEME.LIGHT,
@@ -61,11 +62,12 @@ xdescribe('cds-tile', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render disabled state', async function () {
+      it('should render disabled state', async () => {
         render(
           clickableTemplate({
             colorScheme: TILE_COLOR_SCHEME.LIGHT,
@@ -82,23 +84,25 @@ xdescribe('cds-tile', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
 
-  describe('cds-expandable-tile', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-expandable-tile', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           expandableTemplate({
             colorScheme: TILE_COLOR_SCHEME.LIGHT,
@@ -108,20 +112,24 @@ xdescribe('cds-tile', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
-    describe('Toggling', function () {
-      it('Should fire cds-expandable-tile-beingtoggled/cds-expandable-tile-toggled events upon expanding', async function () {
+    describe('Toggling', () => {
+      it('Should fire cds-expandable-tile-beingtoggled/cds-expandable-tile-toggled events upon expanding', async () => {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
         const tile = document.querySelector('cds-expandable-tile');
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyBeforeToggle).toHaveBeenCalled();
@@ -130,14 +138,17 @@ xdescribe('cds-tile', function () {
         expect(spyAfterToggle.calls.argsFor(0)[0].detail.expanded).toBe(true);
       });
 
-      it('Should fire cds-expandable-tile-beingtoggled/cds-expandable-tile-toggled events upon collapsing', async function () {
+      it('Should fire cds-expandable-tile-beingtoggled/cds-expandable-tile-toggled events upon collapsing', async () => {
         render(expandableTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const tile = document.querySelector('cds-expandable-tile');
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyBeforeToggle).toHaveBeenCalled();
@@ -146,29 +157,35 @@ xdescribe('cds-tile', function () {
         expect(spyAfterToggle.calls.argsFor(0)[0].detail.expanded).toBe(false);
       });
 
-      it('Should support preventing tile from being expanded upon user gesture', async function () {
+      it('Should support preventing tile from being expanded upon user gesture', async () => {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
         const tile = document.querySelector('cds-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyAfterToggle).not.toHaveBeenCalled();
       });
 
-      it('Should support preventing tile from being collapsed upon user gesture', async function () {
+      it('Should support preventing tile from being collapsed upon user gesture', async () => {
         render(expandableTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const tile = document.querySelector('cds-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyAfterToggle).not.toHaveBeenCalled();
@@ -176,19 +193,20 @@ xdescribe('cds-tile', function () {
     });
   });
 
-  describe('cds-radio-tile', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-radio-tile', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-radio-tile' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           clickableTemplate({
             checkmarkLabel: 'checkmark-label-foo',
@@ -200,6 +218,7 @@ xdescribe('cds-tile', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-radio-tile' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -207,34 +226,38 @@ xdescribe('cds-tile', function () {
       });
     });
 
-    describe('Selection', function () {
-      it('should reflect the selection', async function () {
+    describe('Selection', () => {
+      it('should reflect the selection', async () => {
         render(clickableTemplate({ name: 'name-foo' }), document.body);
         await Promise.resolve();
         const tiles = document.body.querySelectorAll('cds-radio-tile');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const input1 = tiles[1]!.shadowRoot!.querySelector('input');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         input1!.click();
         expect(
           Array.prototype.map.call(
             tiles,
-            (item) => (item as CDSRadioTile).selected
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+            (item: any) => (item as CDSRadioTile).selected
           )
         ).toEqual([false, true, false]);
       });
     });
   });
 
-  describe('cds-selectable-tile', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-selectable-tile', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           multiSelectableTemplate({
             checkmarkLabel: 'checkmark-label-foo',
@@ -247,26 +270,31 @@ xdescribe('cds-tile', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
-    describe('Selection', function () {
-      it('should reflect the selection', async function () {
+    describe('Selection', () => {
+      it('should reflect the selection', async () => {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
         const tile = document.body.querySelector('cds-selectable-tile');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const input = tile!.shadowRoot!.querySelector('input');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         input!.click();
         expect((tile as CDSSelectableTile).selected).toBe(true);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         input!.click();
         expect((tile as CDSSelectableTile).selected).toBe(false);
       });
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
     events.reset();
   });

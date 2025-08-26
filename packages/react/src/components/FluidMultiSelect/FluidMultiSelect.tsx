@@ -21,10 +21,6 @@ interface OnChangeData<ItemType> {
   selectedItems: ItemType[] | null;
 }
 
-interface SharedOptions {
-  locale: string;
-}
-
 export interface FluidMultiSelectProps<ItemType>
   extends MultiSelectProps<ItemType>,
     Pick<ComponentProps<typeof MultiSelect>, 'translateWithId'> {
@@ -159,6 +155,7 @@ export interface FluidMultiSelectProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
+
 const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   {
     className,
@@ -178,6 +175,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   return (
     <FormContext.Provider value={{ isFluid: true }}>
       {isFilterable ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
         // @ts-ignore
         <FilterableMultiSelect
           ref={ref as RefObject<HTMLDivElement | null>}
@@ -185,6 +183,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
           {...other}
         />
       ) : (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
         // @ts-ignore
         <MultiSelect ref={ref} className={classNames} {...other} />
       )}

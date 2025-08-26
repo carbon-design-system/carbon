@@ -19,6 +19,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 class CDSActionableNotificationButton extends CDSButton {
   update(changedProperties) {
     super.update(changedProperties);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     this.shadowRoot!.getElementById('button')?.classList.add(
       `${prefix}--actionable-notification__action-button`
     );

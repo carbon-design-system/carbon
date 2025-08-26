@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
-import React, { Children } from 'react';
+import React from 'react';
 import { SideNav, SideNavItems, SideNavMenu } from '@carbon/react';
 import figma from '@figma/code-connect';
 

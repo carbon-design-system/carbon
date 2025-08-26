@@ -279,8 +279,9 @@ export interface NumberInputProps
   warnText?: ReactNode;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
-  function NumberInput(props: NumberInputProps, forwardRef) {
+  (props: NumberInputProps, forwardRef) => {
     const {
       allowEmpty = false,
       className: customClassName,
@@ -338,6 +339,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
       return 0;
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
 
@@ -520,6 +522,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const Icon = normalizedProps.icon as any;
 
     const getDecimalPlaces = (num: number) => {
@@ -656,7 +659,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
                   match(e, keys.ArrowUp) && handleStep(e, 'up');
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
                   match(e, keys.ArrowDown) && handleStep(e, 'down');
                 }
 

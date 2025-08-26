@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
   FunctionComponent,
-  RefObject,
   type ComponentProps,
 } from 'react';
 import classnames from 'classnames';
@@ -24,10 +23,6 @@ import {
 
 interface OnChangeData<ItemType> {
   selectedItems: ItemType[] | null;
-}
-
-interface SharedOptions {
-  locale: string;
 }
 
 export interface FluidFilterableMultiSelectProps<ItemType>
@@ -160,6 +155,7 @@ export interface FluidFilterableMultiSelectProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
+
 const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   {
     className,
