@@ -176,7 +176,7 @@ async function postBuild() {
     await Promise.all(
       files.map(async (file) => {
         const content = await fs.promises.readFile(file, 'utf8');
-        const updatedContent = content.replace(/cds/g, 'cds-custom');
+        const updatedContent = content.replace(/(?<!--)cds/g, 'cds-custom');
         await fs.promises.writeFile(file, updatedContent);
       })
     );
