@@ -253,6 +253,7 @@ const TimePicker = frFn((props, ref) => {
     };
 
     const mappedChildren = React.Children.map(children, (pickerSelect) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       const item = pickerSelect as any;
 
       if (item) {

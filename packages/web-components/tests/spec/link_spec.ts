@@ -9,22 +9,24 @@ import { render } from 'lit';
 import '../../src/components/link/link';
 import { PairedWithIcon } from '../../src/components/link/link.stories';
 
-const template = (props?) =>
-  (PairedWithIcon = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+const template = (props?: any) =>
+  PairedWithIcon({
     'cds-link': props,
   });
 
-describe('cds-link', function () {
-  describe('Misc attributes', function () {
-    it('should render with minimum attributes', async function () {
+describe('cds-link', () => {
+  describe('Misc attributes', () => {
+    it('should render with minimum attributes', async () => {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render with various attributes', async function () {
+    it('should render with various attributes', async () => {
       render(
         template({
           download: 'file-name-foo',
@@ -39,12 +41,13 @@ describe('cds-link', function () {
         document.body
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render disabled state', async function () {
+    it('should render disabled state', async () => {
       render(
         template({
           disabled: true,
@@ -60,13 +63,15 @@ describe('cds-link', function () {
         document.body
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });

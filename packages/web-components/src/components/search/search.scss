@@ -27,6 +27,18 @@ $css--plex: true !default;
   @extend .#{$prefix}--search--expandable;
 }
 
+:host([expandable]:focus-within) .#{$prefix}--search-magnifier {
+  outline: $spacing-01 solid var(--cds-focus);
+
+  ~ .#{$prefix}--search-input {
+    outline: none;
+  }
+}
+
+:host([expandable][expanded]:focus-within) .#{$prefix}--search-magnifier {
+  outline: none;
+}
+
 :host(#{$prefix}-search[expandable][size='sm']) {
   .#{$prefix}--search-magnifier {
     block-size: $spacing-07;
@@ -53,6 +65,10 @@ $css--plex: true !default;
 
   .#{$prefix}--search-input {
     inline-size: 100%;
+
+    &:focus {
+      outline: $spacing-01 solid var(--cds-focus);
+    }
   }
   .#{$prefix}--search-magnifier {
     pointer-events: none;

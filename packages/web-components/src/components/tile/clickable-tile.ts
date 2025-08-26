@@ -21,6 +21,7 @@ import AILabel24 from '@carbon/icons/lib/ai-label/24.js';
  */
 @customElement(`${prefix}-clickable-tile`)
 class CDSClickableTile extends CDSLink {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   protected get _classes(): any {
     const { colorScheme, disabled, hasRoundedCorners, aiLabel, slug } = this;
     return classMap({

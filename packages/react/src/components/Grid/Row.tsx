@@ -43,7 +43,9 @@ export type RowProps<T extends React.ElementType> = PolymorphicProps<
 export interface RowComponent {
   <T extends React.ElementType>(
     props: RowProps<T>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     context?: any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ): React.ReactElement<any, any> | null;
 }
 
@@ -62,6 +64,7 @@ function Row<T extends React.ElementType>({
     [`${prefix}--row--narrow`]: narrow,
   });
   // TypeScript type validation reports conflicts on different instances of keyof JSX.IntrinsicElements
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const BaseComponentAsAny: any = BaseComponent;
   return (
     <BaseComponentAsAny className={className} {...rest}>

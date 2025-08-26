@@ -161,258 +161,266 @@ export interface TextInputProps
   warnText?: ReactNode;
 }
 
-const TextInput = React.forwardRef(function TextInput(
-  {
-    className,
-    decorator,
-    disabled = false,
-    helperText,
-    hideLabel,
-    id,
-    inline = false,
-    invalid = false,
-    invalidText,
-    labelText,
-    light,
-    onChange = () => {},
-    onClick = () => {},
-    placeholder,
-    readOnly,
-    size,
-    type = 'text',
-    warn = false,
-    warnText,
-    enableCounter = false,
-    maxCount,
-    slug,
-    ...rest
-  }: TextInputProps,
-  ref
-) {
-  const prefix = usePrefix();
+const TextInput = React.forwardRef(
+  (
+    {
+      className,
+      decorator,
+      disabled = false,
+      helperText,
+      hideLabel,
+      id,
+      inline = false,
+      invalid = false,
+      invalidText,
+      labelText,
+      light,
+      onChange = () => {},
+      onClick = () => {},
+      placeholder,
+      readOnly,
+      size,
+      type = 'text',
+      warn = false,
+      warnText,
+      enableCounter = false,
+      maxCount,
+      slug,
+      ...rest
+    }: TextInputProps,
+    ref
+  ) => {
+    const prefix = usePrefix();
 
-  const { defaultValue, value } = rest;
+    const { defaultValue, value } = rest;
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const mergedRef = useMergedRefs([ref, inputRef]);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const mergedRef = useMergedRefs([ref, inputRef]);
 
-  function getInitialTextCount(): number {
-    const targetValue = defaultValue || value || inputRef.current?.value || '';
-    return targetValue.toString().length;
-  }
+    function getInitialTextCount(): number {
+      const targetValue =
+        defaultValue || value || inputRef.current?.value || '';
+      return targetValue.toString().length;
+    }
 
-  const [textCount, setTextCount] = useState(getInitialTextCount());
+    const [textCount, setTextCount] = useState(getInitialTextCount());
 
-  useEffect(() => {
-    setTextCount(getInitialTextCount());
-  }, [value, defaultValue, enableCounter]);
+    useEffect(() => {
+      setTextCount(getInitialTextCount());
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    }, [value, defaultValue, enableCounter]);
 
-  const normalizedProps = useNormalizedInputProps({
-    id,
-    readOnly,
-    disabled,
-    invalid,
-    invalidText,
-    warn,
-    warnText,
-  });
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      readOnly,
+      disabled,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+    });
 
-  const textInputClasses = classNames(`${prefix}--text-input`, {
-    [`${prefix}--text-input--light`]: light,
-    [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
-    [`${prefix}--text-input--warning`]: normalizedProps.warn,
-    [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
-    [`${prefix}--layout--size-${size}`]: size,
-  });
-  const sharedTextInputProps = {
-    id,
-    onChange: (evt) => {
-      if (!normalizedProps.disabled) {
-        setTextCount(evt.target.value?.length);
-        onChange(evt);
+    const textInputClasses = classNames(`${prefix}--text-input`, {
+      [`${prefix}--text-input--light`]: light,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--text-input--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
+    });
+    const sharedTextInputProps = {
+      id,
+      onChange: (evt) => {
+        if (!normalizedProps.disabled) {
+          setTextCount(evt.target.value?.length);
+          onChange(evt);
+        }
+      },
+      onClick: (evt) => {
+        if (!normalizedProps.disabled) {
+          onClick(evt);
+        }
+      },
+      placeholder,
+      type,
+      ref: mergedRef,
+      className: textInputClasses,
+      title: placeholder,
+      disabled: normalizedProps.disabled,
+      readOnly,
+      ['aria-describedby']: helperText && normalizedProps.helperId,
+      ...rest,
+    };
+
+    if (enableCounter) {
+      sharedTextInputProps.maxLength = maxCount;
+    }
+
+    const inputWrapperClasses = classNames(
+      [classNames(`${prefix}--form-item`, className)],
+      `${prefix}--text-input-wrapper`,
+      {
+        [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+        [`${prefix}--text-input-wrapper--light`]: light,
+        [`${prefix}--text-input-wrapper--inline`]: inline,
+        [`${prefix}--text-input-wrapper--inline--invalid`]:
+          inline && normalizedProps.invalid,
       }
-    },
-    onClick: (evt) => {
-      if (!normalizedProps.disabled) {
-        onClick(evt);
+    );
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--inline`]: inline,
+      [`${prefix}--label--inline--${size}`]: inline && !!size,
+    });
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
+      [`${prefix}--form__helper-text--inline`]: inline,
+    });
+    const fieldOuterWrapperClasses = classNames(
+      `${prefix}--text-input__field-outer-wrapper`,
+      {
+        [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
       }
-    },
-    placeholder,
-    type,
-    ref: mergedRef,
-    className: textInputClasses,
-    title: placeholder,
-    disabled: normalizedProps.disabled,
-    readOnly,
-    ['aria-describedby']: helperText && normalizedProps.helperId,
-    ...rest,
-  };
+    );
+    const fieldWrapperClasses = classNames(
+      `${prefix}--text-input__field-wrapper`,
+      {
+        [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+        [`${prefix}--text-input__field-wrapper--slug`]: slug,
+        [`${prefix}--text-input__field-wrapper--decorator`]: decorator,
+      }
+    );
+    const iconClasses = classNames({
+      [`${prefix}--text-input__invalid-icon`]:
+        normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
+    });
 
-  if (enableCounter) {
-    sharedTextInputProps.maxLength = maxCount;
-  }
+    const counterClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--text-input__label-counter`]: true,
+    });
 
-  const inputWrapperClasses = classNames(
-    [classNames(`${prefix}--form-item`, className)],
-    `${prefix}--text-input-wrapper`,
-    {
-      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
-      [`${prefix}--text-input-wrapper--light`]: light,
-      [`${prefix}--text-input-wrapper--inline`]: inline,
-      [`${prefix}--text-input-wrapper--inline--invalid`]:
-        inline && normalizedProps.invalid,
-    }
-  );
-  const labelClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: normalizedProps.disabled,
-    [`${prefix}--label--inline`]: inline,
-    [`${prefix}--label--inline--${size}`]: inline && !!size,
-  });
-  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
-    [`${prefix}--form__helper-text--inline`]: inline,
-  });
-  const fieldOuterWrapperClasses = classNames(
-    `${prefix}--text-input__field-outer-wrapper`,
-    {
-      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
-    }
-  );
-  const fieldWrapperClasses = classNames(
-    `${prefix}--text-input__field-wrapper`,
-    {
-      [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input__field-wrapper--slug`]: slug,
-      [`${prefix}--text-input__field-wrapper--decorator`]: decorator,
-    }
-  );
-  const iconClasses = classNames({
-    [`${prefix}--text-input__invalid-icon`]:
-      normalizedProps.invalid || normalizedProps.warn,
-    [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
-  });
+    const counter =
+      enableCounter && maxCount ? (
+        <Text
+          as="div"
+          className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
+      ) : null;
 
-  const counterClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--text-input__label-counter`]: true,
-  });
-
-  const counter =
-    enableCounter && maxCount ? (
-      <Text
-        as="div"
-        className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
+    const label = labelText ? (
+      <Text as="label" htmlFor={id} className={labelClasses}>
+        {labelText}
+      </Text>
     ) : null;
 
-  const label = labelText ? (
-    <Text as="label" htmlFor={id} className={labelClasses}>
-      {labelText}
-    </Text>
-  ) : null;
-
-  const labelWrapper = (
-    <div className={`${prefix}--text-input__label-wrapper`}>
-      {label}
-      {counter}
-    </div>
-  );
-
-  const helper = helperText ? (
-    <Text as="div" id={normalizedProps.helperId} className={helperTextClasses}>
-      {helperText}
-    </Text>
-  ) : null;
-
-  const input = (
-    <input
-      {...textInputProps({
-        sharedTextInputProps,
-        invalid: normalizedProps.invalid,
-        invalidId: normalizedProps.invalidId,
-        warn: normalizedProps.warn,
-        warnId: normalizedProps.warnId,
-      })}
-    />
-  );
-
-  const { isFluid } = useContext(FormContext);
-  const announcerRef = useRef<HTMLSpanElement>(null);
-  const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = getAnnouncement(textCount, maxCount);
-  useEffect(() => {
-    if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
-      const announcer = announcerRef.current as HTMLSpanElement | null;
-      if (announcer) {
-        // Clear the content first
-        announcer.textContent = '';
-        // Set the new content after a small delay
-        const timeoutId = setTimeout(() => {
-          if (announcer) {
-            announcer.textContent = ariaAnnouncement;
-            setPrevAnnouncement(ariaAnnouncement);
-          }
-        }, 1000);
-        // clear the timeout
-        return () => {
-          if (timeoutId) {
-            clearTimeout(timeoutId);
-          }
-        };
-      }
-    }
-  }, [ariaAnnouncement, prevAnnouncement]);
-  const Icon = normalizedProps.icon as any;
-
-  // AILabel is always size `mini`
-  const candidate = slug ?? decorator;
-  const candidateIsAILabel = isComponentElement(candidate, AILabel);
-  const normalizedDecorator = candidateIsAILabel
-    ? cloneElement(candidate, { size: 'mini' })
-    : null;
-
-  return (
-    <div className={inputWrapperClasses}>
-      {!inline ? (
-        labelWrapper
-      ) : (
-        <div className={`${prefix}--text-input__label-helper-wrapper`}>
-          {labelWrapper}
-          {!isFluid && (normalizedProps.validation || helper)}
-        </div>
-      )}
-      <div className={fieldOuterWrapperClasses}>
-        <div
-          className={fieldWrapperClasses}
-          data-invalid={normalizedProps.invalid || null}>
-          {Icon && <Icon className={iconClasses} />}
-          {input}
-          {slug ? (
-            normalizedDecorator
-          ) : decorator ? (
-            <div
-              className={`${prefix}--text-input__field-inner-wrapper--decorator`}>
-              {normalizedDecorator}
-            </div>
-          ) : (
-            ''
-          )}
-          <span
-            className={`${prefix}--text-input__counter-alert`}
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-            ref={announcerRef}>
-            {ariaAnnouncement}
-          </span>
-          {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-          {isFluid && !inline && normalizedProps.validation}
-        </div>
-        {!isFluid && !inline && (normalizedProps.validation || helper)}
+    const labelWrapper = (
+      <div className={`${prefix}--text-input__label-wrapper`}>
+        {label}
+        {counter}
       </div>
-    </div>
-  );
-});
+    );
+
+    const helper = helperText ? (
+      <Text
+        as="div"
+        id={normalizedProps.helperId}
+        className={helperTextClasses}>
+        {helperText}
+      </Text>
+    ) : null;
+
+    const input = (
+      <input
+        {...textInputProps({
+          sharedTextInputProps,
+          invalid: normalizedProps.invalid,
+          invalidId: normalizedProps.invalidId,
+          warn: normalizedProps.warn,
+          warnId: normalizedProps.warnId,
+        })}
+      />
+    );
+
+    const { isFluid } = useContext(FormContext);
+    const announcerRef = useRef<HTMLSpanElement>(null);
+    const [prevAnnouncement, setPrevAnnouncement] = useState('');
+    const ariaAnnouncement = getAnnouncement(textCount, maxCount);
+    useEffect(() => {
+      if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
+        const announcer = announcerRef.current as HTMLSpanElement | null;
+        if (announcer) {
+          // Clear the content first
+          announcer.textContent = '';
+          // Set the new content after a small delay
+          const timeoutId = setTimeout(() => {
+            if (announcer) {
+              announcer.textContent = ariaAnnouncement;
+              setPrevAnnouncement(ariaAnnouncement);
+            }
+          }, 1000);
+          // clear the timeout
+          return () => {
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+            }
+          };
+        }
+      }
+    }, [ariaAnnouncement, prevAnnouncement]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    const Icon = normalizedProps.icon as any;
+
+    // AILabel is always size `mini`
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
+      : null;
+
+    return (
+      <div className={inputWrapperClasses}>
+        {!inline ? (
+          labelWrapper
+        ) : (
+          <div className={`${prefix}--text-input__label-helper-wrapper`}>
+            {labelWrapper}
+            {!isFluid && (normalizedProps.validation || helper)}
+          </div>
+        )}
+        <div className={fieldOuterWrapperClasses}>
+          <div
+            className={fieldWrapperClasses}
+            data-invalid={normalizedProps.invalid || null}>
+            {Icon && <Icon className={iconClasses} />}
+            {input}
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div
+                className={`${prefix}--text-input__field-inner-wrapper--decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
+            <span
+              className={`${prefix}--text-input__counter-alert`}
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+              ref={announcerRef}>
+              {ariaAnnouncement}
+            </span>
+            {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+            {isFluid && !inline && normalizedProps.validation}
+          </div>
+          {!isFluid && !inline && (normalizedProps.validation || helper)}
+        </div>
+      </div>
+    );
+  }
+);
 
 TextInput.displayName = 'TextInput';
 TextInput.propTypes = {

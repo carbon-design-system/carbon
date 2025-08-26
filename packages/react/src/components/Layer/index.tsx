@@ -11,10 +11,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from './LayerContext';
 import { LayerLevel, MAX_LEVEL, MIN_LEVEL, levels } from './LayerLevel';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { clamp } from '../../internal/clamp';
 
 /**

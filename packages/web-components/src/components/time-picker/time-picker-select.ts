@@ -142,6 +142,7 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
   }
 
   _handleFormdata(event: Event) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const { formData } = event as any; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
     const { disabled, name, value } = this;
     if (!disabled) {

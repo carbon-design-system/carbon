@@ -384,6 +384,7 @@ const meta = {
   title: 'Elements/Grid',
   decorators: [
     (story, { name }) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
       const width = !name.toLowerCase().includes('layer') ? `width:300px` : ``;
       return html` <div class="sb-css-grid-container">${story()}</div> `;
     },

@@ -9,12 +9,15 @@ declare module '*.scss';
 declare module '*.scss?lit';
 
 declare module '*.mdx' {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   let MDXComponent: (props: any) => JSX.Element;
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   export default {
     parameters: {
       docs: {
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         container: JSX.Element,
         page: MDXComponent,
       },
