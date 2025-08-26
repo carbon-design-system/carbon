@@ -69,7 +69,7 @@
 
   .#{$prefix}--breadcrumb-item::after {
     color: $text-primary;
-    content: '/';
+    content: var(--breadcrumb-separator, '/');
     margin-inline-start: $spacing-03;
   }
 

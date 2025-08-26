@@ -410,6 +410,9 @@ Map {
       "noTrailingSlash": {
         "type": "bool",
       },
+      "separator": {
+        "type": "string",
+      },
       "size": {
         "args": [
           [
