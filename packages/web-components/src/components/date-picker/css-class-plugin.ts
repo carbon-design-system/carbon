@@ -134,11 +134,13 @@ export default (config: DatePickerCSSClassPluginConfig): Plugin =>
             item.classList.add(classDay);
             if (
               item.classList.contains(classFlatpickrToday) &&
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
               selectedDates!.length > 0
             ) {
               item.classList.add(classNoBorder);
             } else if (
               item.classList.contains(classFlatpickrToday) &&
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
               selectedDates!.length === 0
             ) {
               item.classList.remove(classNoBorder);

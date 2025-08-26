@@ -59,6 +59,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    * Handles `keydown` event on the toggle button.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleKeydown = async (event: KeyboardEvent) => {
     const { key } = event;

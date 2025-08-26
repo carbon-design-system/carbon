@@ -31,7 +31,9 @@ export type ColumnHangProps<T extends React.ElementType> = PolymorphicProps<
 export interface ColumnHangComponent {
   <T extends React.ElementType>(
     props: ColumnHangProps<T>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     context?: any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ): React.ReactElement<any, any> | null;
 }
 
@@ -48,6 +50,7 @@ function ColumnHang<T extends React.ElementType>({
   const prefix = usePrefix();
   const className = cx(customClassName, `${prefix}--grid-column-hang`);
   // cast as any to let TypeScript allow passing in attributes to base component
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const BaseComponentAsAny: any = BaseComponent;
   return (
     <BaseComponentAsAny {...rest} className={className}>

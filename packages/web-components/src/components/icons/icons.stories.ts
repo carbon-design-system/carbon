@@ -9,12 +9,16 @@ import { html, svg } from 'lit';
 
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-ignore
 import Add16 from '@carbon/icons/lib/add/16.js';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-ignore
 import Add20 from '@carbon/icons/lib/add/20.js';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-ignore
 import Add24 from '@carbon/icons/lib/add/24.js';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-ignore
 import Add32 from '@carbon/icons/lib/add/32.js';
 
@@ -48,21 +52,25 @@ export const withTitle = {
   render: () => html`
     ${Add16({
       'aria-describedby': 'id-title-1',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       children: svg`<title id="id-title-1">add</title>`,
     })}
     ${Add20({
       'aria-describedby': 'id-title-2',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       children: svg`<title id="id-title-2">add</title>`,
     })}
     ${Add24({
       'aria-describedby': 'id-title-3',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       children: svg`<title id="id-title-3">add</title>`,
     })}
     ${Add32({
       'aria-describedby': 'id-title-4',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
       // @ts-ignore
       children: svg`<title id="id-title-4">add</title>`,
     })}
