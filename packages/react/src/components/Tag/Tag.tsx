@@ -21,10 +21,7 @@ import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { SelectableTagBaseProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
@@ -126,9 +123,12 @@ type TagComponent = <T extends React.ElementType = 'div'>(
     | OperationalTagBaseProps
     | SelectableTagBaseProps
     | DismissibleTagBaseProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 ) => React.ReactElement | any;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const TagBase = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   any,
   TagBaseProps & {
     as?: React.ElementType;
@@ -156,17 +156,20 @@ const TagBase = React.forwardRef<
     const prefix = usePrefix();
     const tagRef = useRef<HTMLElement>(null);
     if (filter) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.warn(
         'The `filter` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
 
     if (onClose) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.warn(
         'The `onClose` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
     const ref = useMergedRefs([forwardRef, tagRef]);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 

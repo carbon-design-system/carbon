@@ -122,7 +122,7 @@ export interface ControlledPasswordInputProps
 }
 
 const ControlledPasswordInput = React.forwardRef(
-  function ControlledPasswordInput(
+  (
     {
       labelText,
       className,
@@ -136,9 +136,9 @@ const ControlledPasswordInput = React.forwardRef(
       invalidText = '',
       helperText = '',
       light,
-      // eslint-disable-next-line react/prop-types
+
       type = 'password',
-      // eslint-disable-next-line react/prop-types
+
       togglePasswordVisibility,
       tooltipPosition = 'bottom',
       tooltipAlignment = 'center',
@@ -148,7 +148,7 @@ const ControlledPasswordInput = React.forwardRef(
       ...other
     }: ControlledPasswordInputProps,
     ref
-  ) {
+  ) => {
     const prefix = usePrefix();
     const controlledPasswordInstanceId = useId();
 

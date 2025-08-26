@@ -105,6 +105,7 @@ class CDSProgressBar extends LitElement {
 
       const percentage: number = cappedValue / max;
 
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const bar = this.shadowRoot!.querySelector(
         `.${prefix}--progress-bar__bar`
       ) as HTMLElement;

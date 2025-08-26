@@ -134,6 +134,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   updated(_changedProperties: PropertyValues): void {
     if (this.hasSubmenu) {
       this.setAttribute('aria-expanded', this.hasSubmenu + '');
