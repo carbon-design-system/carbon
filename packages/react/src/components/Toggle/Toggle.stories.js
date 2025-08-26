@@ -77,7 +77,7 @@ Default.argTypes = {
   },
 };
 
-export const SmallToggle = () => {
+export const SmallToggle = (args) => {
   return (
     <Toggle
       size="sm"
@@ -86,6 +86,7 @@ export const SmallToggle = () => {
       labelB="On"
       defaultToggled
       id="toggle-2"
+      {...args}
     />
   );
 };
@@ -123,4 +124,72 @@ export const Skeleton = () => {
       <ToggleSkeleton />
     </div>
   );
+};
+
+Skeleton.argTypes = {
+  readOnly: {
+    table: {
+      disable: true,
+    },
+  },
+  defaultToggled: {
+    table: {
+      disable: true,
+    },
+  },
+  disabled: {
+    table: {
+      disable: true,
+    },
+  },
+  hideLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  labelA: {
+    table: {
+      disable: true,
+    },
+  },
+  labelB: {
+    table: {
+      disable: true,
+    },
+  },
+  labelText: {
+    table: {
+      disable: true,
+    },
+  },
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+  onToggle: {
+    table: {
+      disable: true,
+    },
+  },
+  size: {
+    table: {
+      disable: true,
+    },
+  },
+  toggled: {
+    table: {
+      disable: true,
+    },
+  },
+  'aria-labelledby': {
+    table: {
+      disable: true,
+    },
+  },
 };
