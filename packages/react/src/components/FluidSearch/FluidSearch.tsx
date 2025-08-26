@@ -74,10 +74,11 @@ export interface FluidSearchProps {
   value?: string | number;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidSearch: React.FC<FluidSearchProps> = React.forwardRef<
   HTMLInputElement,
   FluidSearchProps
->(function FluidSearch({ className, ...other }, ref) {
+>(({ className, ...other }, ref) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--search--fluid`, className);
 

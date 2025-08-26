@@ -58,6 +58,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   _handleFormdata(event: Event) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const { formData } = event as any;
     const { disabled, name, value } = this;
     if (!disabled) {
@@ -284,6 +285,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSTimePicker]: value } = this;
         // Propagate the property to descendants
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         timePickerSelects.forEach((elem: any) => {
           elem[name] = value;
         });

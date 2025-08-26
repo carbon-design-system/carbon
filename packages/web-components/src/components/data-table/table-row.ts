@@ -52,6 +52,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventRadioChange')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _handleClickSelectionRadio(event: CustomEvent) {
     const { detail } = event;
@@ -85,7 +86,8 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventCheckboxChange')
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // @ts-expect-error
   private _handleClickSelectionCheckbox(event: CustomEvent) {
     const { detail } = event;
     const selected = detail.checked;
@@ -126,7 +128,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @HostListener('mouseover')
   @HostListener('mouseout')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleMouseOverOut(event: MouseEvent) {
     const { selectorExpandedRow, selectorTableCellOverflowMenu } = this
       .constructor as typeof CDSTableRow;

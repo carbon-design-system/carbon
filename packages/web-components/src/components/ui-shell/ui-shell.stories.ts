@@ -8,6 +8,7 @@
 import { html } from 'lit';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-ignore
 import Fade16 from '@carbon/icons/lib/fade/16.js';
 import Search20 from '@carbon/icons/lib/search/20.js';
@@ -177,6 +178,7 @@ export const FixedSideNav = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     (result as any).hasMainTag = true;
     return result;
   },
@@ -242,6 +244,7 @@ export const FixedSideNavDivider = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     (result as any).hasMainTag = true;
     return result;
   },
@@ -309,6 +312,7 @@ export const FixedSideNavIcons = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     (result as any).hasMainTag = true;
     return result;
   },
@@ -800,6 +804,7 @@ export const HeaderBaseWSideNav = {
       </cds-header>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     (result as any).hasMainTag = true;
     return result;
   },
@@ -1049,6 +1054,7 @@ export const SideNavWLargeSideNavItems = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     (result as any).hasMainTag = true;
     return result;
   },

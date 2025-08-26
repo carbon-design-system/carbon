@@ -71,7 +71,6 @@ class CDSComboBox extends CDSDropdown {
     );
   }
 
-  /* eslint-disable class-methods-use-this */
   /**
    * The default item matching callback.
    *
@@ -84,10 +83,10 @@ class CDSComboBox extends CDSDropdown {
     queryText: string
   ): boolean {
     return (
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       item.textContent!.toLowerCase().indexOf(queryText.toLowerCase()) >= 0
     );
   }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * Handles `input` event on the `<input>` for filtering.
@@ -112,15 +111,19 @@ class CDSComboBox extends CDSDropdown {
 
         if (menuRect && itemRect) {
           const isViewable =
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             menuRect!.top <= itemRect?.top &&
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             itemRect?.bottom <= menuRect?.top + this._itemMenu!.clientHeight;
           if (!isViewable) {
             const scrollTop = itemRect?.top - menuRect?.top;
             const scrollBot = itemRect?.bottom - menuRect?.bottom;
 
             if (Math.abs(scrollTop) < Math.abs(scrollBot)) {
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
               this._itemMenu!.scrollTop += scrollTop;
             } else {
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
               this._itemMenu!.scrollTop += scrollBot;
             }
           }
@@ -135,6 +138,7 @@ class CDSComboBox extends CDSDropdown {
   }
 
   protected _handleClickInner(event: MouseEvent) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const { target } = event as any;
     if (this._selectionButtonNode?.contains(target)) {
       this._handleUserInitiatedClearInput();
@@ -256,6 +260,7 @@ class CDSComboBox extends CDSDropdown {
     `;
   }
 
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   protected _renderFollowingLabel(): TemplateResult | void {
     const { clearSelectionLabel, _filterInputValue: filterInputValue } = this;
 
