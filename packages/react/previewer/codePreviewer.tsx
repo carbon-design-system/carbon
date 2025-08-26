@@ -6,11 +6,23 @@
  */
 
 import React from 'react';
-import StackBlitzSDK from '@stackblitz/sdk';
-import sdk, { Project } from '@stackblitz/sdk';
-import { index, main, packageJson, style, viteConfig } from './configFiles';
+import StackBlitzSDK, { Project } from '@stackblitz/sdk';
+import {
+  index,
+  main,
+  packageJson,
+  style,
+  viteConfig,
+  flexGridScss,
+} from './configFiles';
 import * as carbonComponents from '../src/index';
 import * as carbonIconsReact from '@carbon/icons-react';
+import {
+  FlexGridScss,
+  GridScss,
+  LayerScss,
+  ThemeScss,
+} from './storybookStyles';
 
 export const stackblitzPrefillConfig = (
   code: any,
@@ -76,6 +88,49 @@ export const stackblitzPrefillConfig = (
   const iconsNames = Object.keys(carbonIconsReact);
   const matchedIcons = findIconImports(iconsNames, storyCode);
 
+  // Registry of story scss strings we can inject
+  const storyScssRegistry: Record<string, { content: string }> = {
+    FlexGrid: {
+      content: FlexGridScss,
+    },
+    Grid: {
+      content: GridScss,
+    },
+    Layer: {
+      content: LayerScss,
+    },
+    Theme: {
+      content: ThemeScss,
+    },
+  };
+
+  // Only include story scss for components actually used
+  const componentsWithStyles = [
+    ...new Set(matchedComponents.filter((item) => storyScssRegistry[item])),
+  ];
+
+  // Detect if we need flexbox grid enabled
+  const hasFlexboxGridComponent = componentsWithStyles.some(
+    (component) => component === 'FlexGrid'
+  );
+
+  // Enable flexbox grid only when needed
+  const carbonBaseScss = hasFlexboxGridComponent ? flexGridScss : style;
+
+  // Inline/append the  SCSS content for each matched component
+  const inlinedStoryScss = componentsWithStyles
+    .map(
+      (item) => `
+${storyScssRegistry[item].content}`
+    )
+    .join('\n');
+
+  // Final index.scss = base Carbon + (conditionally) inlined story styles
+  const indexScss = `
+${carbonBaseScss}
+${inlinedStoryScss}
+`;
+
   // Generate App.jsx code
   const app = `
   import React from 'react';
@@ -87,19 +142,21 @@ export const stackblitzPrefillConfig = (
   }
   `;
 
+  const files: Project['files'] = {
+    'package.json': packageJson,
+    'index.html': index,
+    'vite.config.js': viteConfig,
+    'src/main.jsx': main,
+    'src/App.jsx': app,
+    'src/index.scss': indexScss,
+  };
+
   const stackblitzFileConfig: Project = {
     title: 'Carbon demo',
     description:
       'Run official live example code for a Carbon component, created by Carbon Design System on StackBlitz',
     template: 'node',
-    files: {
-      'package.json': packageJson,
-      'index.html': index,
-      'vite.config.js': viteConfig,
-      'src/main.jsx': main,
-      'src/App.jsx': app,
-      'src/index.scss': style,
-    },
+    files,
   };
 
   StackBlitzSDK.openProject(stackblitzFileConfig, {
