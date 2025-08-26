@@ -33,7 +33,7 @@
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    border-block-start: 1px solid var(--cds-border-subtle-selected);
+    border-block-start: 1px solid $border-subtle-selected;
   }
 }
 
