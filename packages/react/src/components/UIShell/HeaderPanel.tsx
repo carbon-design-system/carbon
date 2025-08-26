@@ -12,7 +12,6 @@ import React, {
   useRef,
   useState,
   type ComponentProps,
-  type ForwardedRef,
   type ReactNode,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
@@ -66,7 +65,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       href,
       ...rest
     },
-    ref: ForwardedRef<HTMLDivElement>
+    ref
   ) {
     const prefix = usePrefix();
     const headerPanelReference = useRef<HTMLDivElement>(null);
