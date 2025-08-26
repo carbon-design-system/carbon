@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+/**  eslint-disable @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071 */
 import { styleMap } from 'lit/directives/style-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
@@ -82,10 +82,14 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
    */
   private _handleCopyClick() {
     const { ownerDocument: doc } = this;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const selection = doc!.defaultView!.getSelection();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     selection!.removeAllRanges();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const code = doc!.createElement('code');
     code.className = `${prefix}--visually-hidden`;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const pre = doc!.createElement('pre');
     const text = Array.from(this.childNodes).filter(
       (node) => node.nodeType === Node.TEXT_NODE
@@ -93,16 +97,21 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
     pre.textContent = this.copyText || text[0].textContent;
     code.appendChild(pre);
     // Using `<code>` in shadow DOM seems to lose the LFs in some browsers
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     doc!.body.appendChild(code);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const range = doc!.createRange();
     range.selectNodeContents(code);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     selection!.addRange(range);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     doc!.execCommand('copy');
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     doc!.body.removeChild(code);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     selection!.removeAllRanges();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private _getCodeRefDimensions(ref) {
     const {
       clientWidth: codeClientWidth,
@@ -164,6 +173,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
   // TODO: Wait for `.d.ts` update to support `ResizeObserver`
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _resizeObserver = new ResizeObserver(() => {
     const codeContainerRef = this.shadowRoot?.querySelector(
@@ -341,12 +351,17 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
     } = this;
 
     let classes = `${prefix}--snippet`;
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     type ? (classes += ` ${prefix}--snippet--${type}`) : '';
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     type !== 'inline' && disabled
       ? (classes += ` ${prefix}--snippet--disabled`)
       : '';
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     hideCopyButton ? (classes += ` ${prefix}--snippet--no-copy`) : '';
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     wrapText ? (classes += ` ${prefix}--snippet--wraptext`) : '';
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     type == 'multi' && hasRightOverflow
       ? (classes += ` ${prefix}--snippet--has-right-overflow`)
       : '';

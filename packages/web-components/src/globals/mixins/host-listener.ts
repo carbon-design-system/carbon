@@ -31,7 +31,7 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
     _handles: Set<Handle> = new Set(); // Not using TypeScript `private` due to: microsoft/TypeScript#17744
 
     connectedCallback() {
-      // @ts-ignore: Until `connectedCallback` is added to `HTMLElement` definition
+      // @ts-expect-error: Until `connectedCallback` is added to `HTMLElement` definition
       super.connectedCallback();
       const hostListeners = (this.constructor as typeof HostListenerMixinImpl)
         ._hostListeners;
@@ -46,6 +46,7 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
           const target: EventTarget =
             {
               document: this.ownerDocument,
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
               window: this.ownerDocument!.defaultView,
               parentRoot: this.getRootNode(),
               shadowRoot: this.shadowRoot,
@@ -71,7 +72,7 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
         handle.release();
         this._handles.delete(handle);
       });
-      // @ts-ignore: Until `disconnectedCallback` is added to `HTMLElement` definition
+      // @ts-expect-error: Until `disconnectedCallback` is added to `HTMLElement` definition
       super.disconnectedCallback();
     }
 

@@ -9,6 +9,7 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-ignore
 import { prefix } from '../../globals/settings';
 import { INPUT_SIZE } from '../text-input/text-input';
@@ -21,7 +22,6 @@ import '../layer';
 import '../ai-label';
 import '../icon-button';
 import '../../../.storybook/templates/with-layer';
-import styles from './select-story.scss?lit';
 
 const content = html`
   <div slot="body-text">

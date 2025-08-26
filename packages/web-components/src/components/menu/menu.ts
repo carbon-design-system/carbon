@@ -136,6 +136,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   y: number | number[] = 0;
 
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = (e: FocusEvent) => {
     const { isRoot } = this.context;
@@ -481,7 +482,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       let activeItem: activeItemType;
       switch (item.tagName) {
         case 'CDS-MENU-ITEM-RADIO-GROUP': {
-          let slotElements = item.querySelectorAll(`${prefix}-menu-item`);
+          const slotElements = item.querySelectorAll(`${prefix}-menu-item`);
           if (slotElements?.length) {
             for (const entry of slotElements.entries()) {
               activeItem = {
@@ -494,7 +495,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
           break;
         }
         case 'CDS-MENU-ITEM-GROUP': {
-          let slotElements = item.shadowRoot
+          const slotElements = item.shadowRoot
             ?.querySelector('slot')
             ?.assignedElements();
           slotElements?.map((el) => {

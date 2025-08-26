@@ -62,14 +62,12 @@ const ThumbWrapper = ({
 }: ThumbWrapperProps) => {
   if (hasTooltip) {
     return (
-      // eslint-disable-next-line react/forbid-component-props
       <Tooltip className={className} style={style} {...rest}>
         {children}
       </Tooltip>
     );
   } else {
     return (
-      // eslint-disable-next-line react/forbid-dom-props
       <div className={className} style={style}>
         {children}
       </div>
@@ -1259,6 +1257,7 @@ export const Slider = (props: SliderProps) => {
       hideLabel,
       step = 1,
       // TODO: Other properties are deleted below. Why isn't this one?
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
       stepMultiplier: _stepMultiplier,
       inputType = 'number',
       invalidText,
@@ -1291,12 +1290,14 @@ export const Slider = (props: SliderProps) => {
     const showWarning =
       (!readOnly && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
+      // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
       (typeof correctedValue !== null &&
         correctedPosition === HandlePosition.LOWER &&
         isValid);
     const showWarningUpper =
       (!readOnly && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
+      // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
       (typeof correctedValue !== null &&
         correctedPosition ===
           (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
@@ -1444,7 +1445,8 @@ export const Slider = (props: SliderProps) => {
                 <Text className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
                 </Text>
-                {/* @ts-ignore onBlur + onChange types are incompatible*/}
+                {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071 */
+                /* @ts-ignore onBlur + onChange types are incompatible*/}
                 <div
                   className={sliderClasses}
                   ref={(node) => {

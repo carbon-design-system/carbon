@@ -49,16 +49,16 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   private _handleSlotChange({ target }: Event) {
     const { name } = target as HTMLSlotElement;
-    const hasContent = (target as HTMLSlotElement)
-      .assignedNodes()
-      .some(
-        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-      );
+    const hasContent = (target as HTMLSlotElement).assignedNodes().some(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+    );
     this[name === 'icon' ? '_hasIcon' : 'hasMainContent'] = hasContent;
     this.requestUpdate();
   }
 
   @HostListener('click', { capture: true })
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _handleDisabledClick(event: Event) {
     const { disabled } = this;
@@ -73,6 +73,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       hasBadgeIndicator &&
       (this.kind !== BUTTON_KIND.GHOST || this.size !== BUTTON_SIZE.LARGE)
     ) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.warn(
         `The badge indicator must be used with kind='ghost' and size='lg'`
       );
@@ -84,6 +85,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   @HostListener('mouseover')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleOver = () => {
     this.openTooltip = true;
@@ -93,6 +95,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `keydown` event on this element.
    */
   @HostListener('mouseout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleHoverOut = async () => {
     this.openTooltip = false;
@@ -103,6 +106,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Space & enter will toggle state, Escape will only close.
    */
   @HostListener('focus')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocus = async () => {
     this.openTooltip = true;
@@ -113,6 +117,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Space & enter will toggle state, Escape will only close.
    */
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusout = async () => {
     this.openTooltip = false;

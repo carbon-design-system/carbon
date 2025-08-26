@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
 /**
  * Offical useSyncExternalStore shim for React <18
  * @see https://github.com/reactwg/react-18/discussions/86
  */
+import React from 'react';
 import { useSyncExternalStore as useSyncExternalStoreShim } from 'use-sync-external-store/shim';
 import {
   getDocumentLang,
@@ -20,6 +20,7 @@ import {
  * Use useSyncExternalStore when available with React v18+, use the shim with
  * React v17 and v16.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 const useSync = (React as any).useSyncExternalStore ?? useSyncExternalStoreShim;
 
 /**

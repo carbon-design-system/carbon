@@ -101,6 +101,7 @@ class CDSStructuredListRow extends HostListenerMixin(LitElement) {
    * Handles `click` event on this element.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = () => {
     const { _inputNode: inputNode } = this;
@@ -116,6 +117,7 @@ class CDSStructuredListRow extends HostListenerMixin(LitElement) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = (event: KeyboardEvent) => {
     const { _inputNode: inputNode } = this;
