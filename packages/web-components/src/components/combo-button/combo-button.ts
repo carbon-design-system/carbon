@@ -85,6 +85,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   tooltipContent = 'Additional actions';
 
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: Event) => {
     const path = event.composedPath();
@@ -99,6 +100,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     // Close the menu if the focus moves outside the menu button or menu

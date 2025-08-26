@@ -11,9 +11,10 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings } from './GridContext';
 import { GridComponent, GridBaseProps } from './GridTypes';
-import { PolymorphicRef } from '../../internal/PolymorphicProps';
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FlexGrid = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   any,
   GridBaseProps & {
     as?: React.ElementType;
