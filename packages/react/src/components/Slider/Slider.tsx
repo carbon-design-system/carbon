@@ -314,8 +314,8 @@ interface CalcLeftPercentProps {
 }
 
 type State = {
-  value: any;
-  valueUpper: any;
+  value: ComponentProps<typeof Slider>['value'];
+  valueUpper: ComponentProps<typeof Slider>['unstable_valueUpper'];
   left: number;
   leftUpper: number;
   needsOnRelease: boolean;
@@ -418,6 +418,7 @@ export const Slider = (props: SliderProps) => {
         )
       );
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -446,10 +447,16 @@ export const Slider = (props: SliderProps) => {
           : `translate(0%, -50%) scaleX(${state.left / 100})`;
       }
     }
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.left, state.leftUpper, state.isRtl]);
 
   // Fire onChange when value(s) change
-  const prevValsRef = useRef<{ value: any; valueUpper: any } | null>(null);
+  const prevValsRef = useRef<{
+    value: State['value'];
+    valueUpper: State['valueUpper'];
+  }>(null);
 
   useEffect(() => {
     const prev = prevValsRef.current;
@@ -466,6 +473,9 @@ export const Slider = (props: SliderProps) => {
     }
 
     prevValsRef.current = { value: state.value, valueUpper: state.valueUpper };
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.value, state.valueUpper, props.onChange]);
 
   useEffect(() => {
@@ -478,6 +488,9 @@ export const Slider = (props: SliderProps) => {
       // Reset the flag
       setState({ needsOnRelease: false });
     }
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.needsOnRelease, state.value, state.valueUpper, props.onRelease]);
 
   const prevSyncKeysRef = useRef<
@@ -523,6 +536,9 @@ export const Slider = (props: SliderProps) => {
 
       prevSyncKeysRef.current = next;
     }
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.value, props.unstable_valueUpper, props.max, props.min]);
 
   /**
@@ -826,6 +842,10 @@ export const Slider = (props: SliderProps) => {
       }
     } else {
       if (isNaN(targetValue)) {
+        // TODO: Address this error
+        //
+        // @ts-expect-error - Passing a string to something that expects a
+        // number.
         setState({ value: evt.target.value });
       } else if (
         isValidValue({
@@ -1091,11 +1111,19 @@ export const Slider = (props: SliderProps) => {
   ) => {
     if (handle === HandlePosition.LOWER) {
       setState({
+        // TODO: Address this error
+        //
+        // @ts-expect-error - Passing a string to something that expects a
+        // number.
         value,
         isValid: true,
       });
     } else {
       setState({
+        // TODO: Address this error
+        //
+        // @ts-expect-error - Passing a string to something that expects a
+        // number.
         valueUpper: value,
         isValidUpper: true,
       });
