@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { css, html } from 'lit';
+import { html } from 'lit';
 import Add16 from '@carbon/icons/es/add/16.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import Search16 from '@carbon/icons/es/search/16.js';

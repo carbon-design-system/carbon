@@ -106,6 +106,7 @@ class CDSProgressBar extends LitElement {
 
       const percentage: number = cappedValue / max;
 
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const bar = this.shadowRoot!.querySelector(
         `.${prefix}--progress-bar__bar`
       ) as HTMLElement;
@@ -140,7 +141,7 @@ class CDSProgressBar extends LitElement {
     const indeterminate =
       !isFinished && !isError && (value === null || value === undefined);
 
-    let statusIcon: any = null;
+    let statusIcon: ReturnType<typeof iconLoader> | null = null;
 
     if (isError) {
       statusIcon = iconLoader(ErrorFilled16, {

@@ -6,7 +6,8 @@
  */
 
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import { createIconTemplate } from './icon-loader-utils';
+import { createIconTemplate, type CarbonIcon } from './icon-loader-utils';
+import type { TemplateResult } from 'lit';
 
 /**
  * Icon utility function that returns pure SVG content without any wrapper element.
@@ -26,10 +27,10 @@ import { createIconTemplate } from './icon-loader-utils';
  * @returns Lit template with pure SVG content
  */
 export function iconLoader(
-  icon: any,
-  attributes: any = {},
+  icon: CarbonIcon | TemplateResult | null,
+  attributes: Record<string, string | number | undefined> = {},
   customSvg?: string
-) {
+): TemplateResult | ReturnType<typeof unsafeSVG> | null {
   // SVG string
   if (customSvg) {
     return unsafeSVG(customSvg);
@@ -38,12 +39,12 @@ export function iconLoader(
   // Imported icon
   if (icon) {
     // If it's an imported icon descriptor such as ChevronRight16, convert to SVG
-    if (icon.default || (icon.attrs && icon.content)) {
-      const iconTemplate = createIconTemplate(icon);
+    if ('default' in icon || ('attrs' in icon && 'content' in icon)) {
+      const iconTemplate = createIconTemplate(icon as CarbonIcon);
       return iconTemplate(attributes);
     }
     // If it's a Lit template or other content
-    return icon;
+    return icon as TemplateResult;
   }
 
   // No icon provided

@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { createIconTemplate } from '../../globals/internal/icon-loader-utils';
+import type { CarbonIcon } from '../../globals/internal/icon-loader-utils';
 
 /**
  * Icon component that renders imported icons or custom SVG content.
@@ -23,7 +24,7 @@ class CDSIcon extends LitElement {
    * The imported icon
    */
   @property({ type: Object })
-  icon?: any;
+  icon?: CarbonIcon;
 
   /**
    * The size of the icon (16, 20, 24, 32)
@@ -48,16 +49,14 @@ class CDSIcon extends LitElement {
 
     // render icon descriptor if provided
     if (icon) {
-      if (icon.default || (icon.attrs && icon.content)) {
-        const iconTemplate = createIconTemplate(icon);
-        return iconTemplate({
-          class: className,
-          'aria-label': ariaLabel,
-          'aria-hidden': !ariaLabel,
-          width: size,
-          height: size,
-        });
-      }
+      const iconTemplate = createIconTemplate(icon);
+      return iconTemplate({
+        class: className || '',
+        'aria-label': ariaLabel || '',
+        'aria-hidden': !ariaLabel ? 'true' : 'false',
+        width: size,
+        height: size,
+      });
     }
 
     // slot for custom SVG content

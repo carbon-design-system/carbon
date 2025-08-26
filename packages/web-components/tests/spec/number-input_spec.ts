@@ -17,7 +17,7 @@ import { Playground } from '../../src/components/number-input/number-input-story
  */
 const getValues = (formData: FormData) => {
   const values = {};
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const [key, value] of formData.entries()) {
     values[key] = value;
   }
@@ -29,11 +29,11 @@ const template = (props?) =>
     'cds-number-input': props,
   });
 
-describe('cds-number-input', function () {
+describe('cds-number-input', () => {
   const events = new EventManager();
 
-  describe('Rendering', function () {
-    it('Should render with various attributes', async function () {
+  describe('Rendering', () => {
+    it('Should render with various attributes', async () => {
       render(
         template({
           autocomplete: 'on',
@@ -56,6 +56,7 @@ describe('cds-number-input', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-number-input' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -64,8 +65,8 @@ describe('cds-number-input', function () {
   });
 
   // most of this describe is borrowed from the input tests
-  describe('Event-based form participation', function () {
-    xit('Should respond to `formdata` event', async function () {
+  describe('Event-based form participation', () => {
+    xit('Should respond to `formdata` event', async () => {
       render(
         html`
           <form>
@@ -84,13 +85,15 @@ describe('cds-number-input', function () {
         cancelable: false,
         composed: false,
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': '50' });
     });
 
-    it('Should not respond to `formdata` event if disabled', async function () {
+    it('Should not respond to `formdata` event if disabled', async () => {
       render(
         html`
           <form>
@@ -110,20 +113,23 @@ describe('cds-number-input', function () {
         cancelable: false,
         composed: false,
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
   });
 
   // most of this describe is borrowed from the input tests
-  describe('Form validation', function () {
+  describe('Form validation', () => {
     let elem: Element;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       elem = document.body.querySelector('cds-number-input')!;
     });
 
@@ -134,6 +140,7 @@ describe('cds-number-input', function () {
     // eslint-disable-next-line
     xit('should support checking if required value exists', async function () {
       const input = elem as CDSNumberInput;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       input.value = null as any;
       input.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
@@ -149,7 +156,7 @@ describe('cds-number-input', function () {
       expect(input.validityMessage).toBe('');
     });
 
-    it('should support canceling required check', async function () {
+    it('should support canceling required check', async () => {
       const input = elem as CDSNumberInput;
       input.required = true;
       events.on(input, 'invalid', (event) => {
@@ -160,21 +167,21 @@ describe('cds-number-input', function () {
       expect(input.validityMessage).toBe('');
     });
 
-    it('should treat empty custom validity message as not invalid', async function () {
+    it('should treat empty custom validity message as not invalid', async () => {
       const input = elem as CDSNumberInput;
       input.setCustomValidity('');
       expect(input.invalid).toBe(false);
       expect(input.validityMessage).toBe('');
     });
 
-    it('should treat non-empty custom validity message as invalid', async function () {
+    it('should treat non-empty custom validity message as invalid', async () => {
       const input = elem as CDSNumberInput;
       input.setCustomValidity('validity-message-foo');
       expect(input.invalid).toBe(true);
       expect(input.validityMessage).toBe('validity-message-foo');
     });
 
-    xit('should warn if a value less than the min', async function () {
+    xit('should warn if a value less than the min', async () => {
       const input = elem as CDSNumberInput;
       input.min = '50';
       input.value = '0';
@@ -182,7 +189,7 @@ describe('cds-number-input', function () {
       expect(input.checkValidity()).toBe(false);
     });
 
-    xit('should warn if a value is greater than the max', async function () {
+    xit('should warn if a value is greater than the max', async () => {
       const input = elem as CDSNumberInput;
       input.max = '50';
       input.value = '51';
@@ -191,16 +198,17 @@ describe('cds-number-input', function () {
     });
   });
 
-  describe('Number input specific functionality', function () {
+  describe('Number input specific functionality', () => {
     let elem: Element;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       elem = document.body.querySelector('cds-number-input')!;
     });
 
-    it('should increment values', async function () {
+    it('should increment values', async () => {
       const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
@@ -208,7 +216,7 @@ describe('cds-number-input', function () {
       expect(Number(input.value)).toEqual(initialValue + stepSize);
     });
 
-    it('should decrement values', async function () {
+    it('should decrement values', async () => {
       const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
@@ -216,12 +224,13 @@ describe('cds-number-input', function () {
       expect(Number(input.value)).toEqual(initialValue - stepSize);
     });
 
-    it('should increment values upon user gesture', async function () {
+    it('should increment values upon user gesture', async () => {
       const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
       events.on(elem, 'cds-number-input', spyInput);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       (elem.shadowRoot!.querySelector('button.up-icon') as HTMLElement).click();
       expect(Number(input.value)).toEqual(initialValue + stepSize);
       expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(
@@ -229,22 +238,21 @@ describe('cds-number-input', function () {
       );
     });
 
-    it('should decrement values upon user gesture', async function () {
+    it('should decrement values upon user gesture', async () => {
       const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
       events.on(elem, 'cds-number-input', spyInput);
-      (
-        elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement
-      ).click();
+      (elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement) // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        .click();
       expect(Number(input.value)).toEqual(initialValue - stepSize);
       expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(
         initialValue - stepSize
       );
     });
 
-    it('should increment values by the step amount', async function () {
+    it('should increment values by the step amount', async () => {
       const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       input.step = '50';
@@ -255,7 +263,7 @@ describe('cds-number-input', function () {
       expect(Number(input.value)).toEqual(initialValue + stepSize);
     });
 
-    it('should decrement values by the step amount', async function () {
+    it('should decrement values by the step amount', async () => {
       const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       input.step = '50';
@@ -266,7 +274,7 @@ describe('cds-number-input', function () {
       expect(Number(input.value)).toEqual(initialValue - stepSize);
     });
 
-    it('should not step past the max value', async function () {
+    it('should not step past the max value', async () => {
       const input = elem as CDSNumberInput;
       input.max = '50';
       input.value = '50';
@@ -276,7 +284,7 @@ describe('cds-number-input', function () {
       expect(Number(input.value)).toEqual(50);
     });
 
-    it('should not step below the min value', async function () {
+    it('should not step below the min value', async () => {
       const input = elem as CDSNumberInput;
       input.min = '50';
       input.value = '50';
@@ -287,8 +295,9 @@ describe('cds-number-input', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     events.reset();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });

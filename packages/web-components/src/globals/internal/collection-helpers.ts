@@ -14,6 +14,7 @@
 export const filter = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Node, index?: number) => boolean,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   thisObject?: any
 ) => Array.prototype.filter.call(a, predicate, thisObject);
 
@@ -26,6 +27,7 @@ export const filter = (
 export const findIndex = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Node, index?: number) => boolean,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   thisObject?: any
 ) => Array.prototype.findIndex.call(a, predicate, thisObject);
 
@@ -38,6 +40,7 @@ export const findIndex = (
 export const find = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Node, index?: number) => boolean,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   thisObject?: any
 ) => Array.prototype.find.call(a, predicate, thisObject);
 
@@ -51,6 +54,7 @@ export const find = (
 export const forEach = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Element, index?: number) => void,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   thisObject?: any
 ) => Array.prototype.forEach.call(a, predicate, thisObject);
 

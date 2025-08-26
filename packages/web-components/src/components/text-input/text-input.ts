@@ -348,7 +348,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       warn: boolean;
       'slot-name': string;
       'slot-text': string;
-      icon: any;
+      icon: ReturnType<typeof iconLoader>;
     } = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,

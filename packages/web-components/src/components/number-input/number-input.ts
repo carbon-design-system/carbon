@@ -56,7 +56,7 @@ class CDSNumberInput extends CDSTextInput {
         },
       })
     );
-    super._handleInput(event);
+    this._value = value;
   }
 
   /**
@@ -252,18 +252,44 @@ class CDSNumberInput extends CDSTextInput {
   @property({ reflect: true })
   size = INPUT_SIZE.MEDIUM;
 
+  getDecimalPlaces = (num: number) => {
+    const parts = num.toString().split('.');
+
+    return parts[1] ? parts[1].length : 0;
+  };
+
   /**
    * Handles incrementing the value in the input
    */
   stepUp() {
-    this._input.stepUp();
+    const currentValue = Number(this._input.value);
+    const rawValue = currentValue + Number(this.step);
+
+    const precision = Math.max(
+      this.getDecimalPlaces(currentValue),
+      this.getDecimalPlaces(Number(this.step))
+    );
+
+    const floatValue = parseFloat(rawValue.toFixed(precision));
+    this._value = String(floatValue);
+    this.value = this._value;
   }
 
   /**
    * Handles decrementing the value in the input
    */
   stepDown() {
-    this._input.stepDown();
+    const currentValue = Number(this._input.value);
+    const rawValue = currentValue - Number(this.step);
+
+    const precision = Math.max(
+      this.getDecimalPlaces(currentValue),
+      this.getDecimalPlaces(Number(this.step))
+    );
+
+    const floatValue = parseFloat(rawValue.toFixed(precision));
+    this._value = String(floatValue);
+    this.value = this._value;
   }
 
   render() {
@@ -291,7 +317,7 @@ class CDSNumberInput extends CDSTextInput {
       warn: boolean;
       'slot-name': string;
       'slot-text': string;
-      icon: any;
+      icon: ReturnType<typeof iconLoader>;
     } = {
       disabled: !this.readonly && this.disabled,
       invalid: !this.readonly && !isValid,

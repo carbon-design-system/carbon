@@ -211,13 +211,16 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   protected _hasAILabel = false;
 
   updated() {
-    const { _hasAILabel: hasAILabel, defaultChecked } = this;
+    const { _hasAILabel: hasAILabel } = this;
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
-
-    if (defaultChecked) {
-      this.checked = defaultChecked;
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.defaultChecked) {
+      this.checked = this.defaultChecked;
     }
   }
 
@@ -264,7 +267,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         part="input"
         class="${`${prefix}--checkbox`}"
         aria-readonly="${String(Boolean(readonly))}"
-        ?checked="${checked}"
+        .checked="${checked}"
         ?data-invalid="${invalid}"
         ?disabled="${disabled}"
         ?defaultChecked="${defaultChecked}"

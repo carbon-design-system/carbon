@@ -17,6 +17,7 @@ import '../popover';
 import '../ai-label';
 import '../button';
 import '../icon-button';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
 
 const content = html`
   <div slot="body-text">
@@ -70,6 +71,21 @@ const types = [
   'outline',
 ];
 
+const tooltipAlignments = {
+  [`top`]: POPOVER_ALIGNMENT.TOP,
+  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
+  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
+  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
+  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`left`]: POPOVER_ALIGNMENT.LEFT,
+  [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
+  [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
+  [`right`]: POPOVER_ALIGNMENT.RIGHT,
+  [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
+  [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
+};
+
 const defaultArgs = {
   disabled: false,
   size: TAG_SIZE.MEDIUM,
@@ -95,11 +111,20 @@ export const Dismissible = {
       control: 'text',
       description: 'Provide text to be rendered inside of a the tag.',
     },
+    dismissTooltipAlignment: {
+      control: 'select',
+      options: tooltipAlignments,
+      description: 'Specify the tooltip alignment for the dismiss button',
+      table: {
+        defaultValue: { summary: 'bottom' },
+      },
+    },
   },
   args: {
     ...defaultArgs,
+    dismissTooltipAlignment: 'bottom',
   },
-  render: ({ disabled, size, text }) => {
+  render: ({ disabled, size, text, dismissTooltipAlignment }) => {
     const tags = [
       {
         type: 'red',
@@ -169,6 +194,7 @@ export const Dismissible = {
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
             size="${size}"
+            dismiss-tooltip-alignment="${dismissTooltipAlignment}"
             >${iconLoader(Asleep16, { slot: 'icon' })}
           </cds-dismissible-tag>`
       )}`;

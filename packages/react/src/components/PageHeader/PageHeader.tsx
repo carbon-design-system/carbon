@@ -43,7 +43,7 @@ interface PageHeaderProps {
   className?: string;
 }
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
-  function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
+  ({ className, children, ...other }: PageHeaderProps, ref) => {
     const prefix = usePrefix();
     const classNames = classnames(
       {
@@ -69,7 +69,7 @@ interface PageHeaderBreadcrumbBarProps {
   /**
    * `true` by default to render BreadcrumbBar bottom border.
    */
-  border?: Boolean;
+  border?: boolean;
   children?: React.ReactNode;
   className?: string;
   /**
@@ -83,7 +83,7 @@ interface PageHeaderBreadcrumbBarProps {
   /**
    * `true` to set content actions flush against page actions
    */
-  contentActionsFlush?: Boolean;
+  contentActionsFlush?: boolean;
   /**
    * The PageHeaderContent's page actions
    */
@@ -91,63 +91,65 @@ interface PageHeaderBreadcrumbBarProps {
   /**
    * `true` to set page actions flush with page
    */
-  pageActionsFlush?: Boolean;
+  pageActionsFlush?: boolean;
 }
 const PageHeaderBreadcrumbBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderBreadcrumbBarProps
->(function PageHeaderBreadcrumbBar(
-  {
-    border = true,
-    className,
-    children,
-    renderIcon: IconElement,
-    contentActions,
-    contentActionsFlush,
-    pageActions,
-    pageActionsFlush,
-    ...other
-  }: PageHeaderBreadcrumbBarProps,
-  ref
-) {
-  const prefix = usePrefix();
-  const classNames = classnames(
+>(
+  (
     {
-      [`${prefix}--page-header__breadcrumb-bar`]: true,
-      [`${prefix}--page-header__breadcrumb-bar-border`]: border,
-      [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
-    },
-    className
-  );
+      border = true,
+      className,
+      children,
+      renderIcon: IconElement,
+      contentActions,
+      contentActionsFlush,
+      pageActions,
+      pageActionsFlush,
+      ...other
+    }: PageHeaderBreadcrumbBarProps,
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const classNames = classnames(
+      {
+        [`${prefix}--page-header__breadcrumb-bar`]: true,
+        [`${prefix}--page-header__breadcrumb-bar-border`]: border,
+        [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
+      },
+      className
+    );
 
-  const contentActionsClasses = classnames({
-    [`${prefix}--page-header__breadcrumb__content-actions`]:
-      !contentActionsFlush,
-  });
+    const contentActionsClasses = classnames({
+      [`${prefix}--page-header__breadcrumb__content-actions`]:
+        !contentActionsFlush,
+    });
 
-  return (
-    <div className={classNames} ref={ref} {...other}>
-      <Grid>
-        <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__breadcrumb-container`}>
-            <div className={`${prefix}--page-header__breadcrumb-wrapper`}>
-              {IconElement && (
-                <div className={`${prefix}--page-header__breadcrumb__icon`}>
-                  <IconElement />
-                </div>
-              )}
-              {children}
+    return (
+      <div className={classNames} ref={ref} {...other}>
+        <Grid>
+          <Column lg={16} md={8} sm={4}>
+            <div className={`${prefix}--page-header__breadcrumb-container`}>
+              <div className={`${prefix}--page-header__breadcrumb-wrapper`}>
+                {IconElement && (
+                  <div className={`${prefix}--page-header__breadcrumb__icon`}>
+                    <IconElement />
+                  </div>
+                )}
+                {children}
+              </div>
+              <div className={`${prefix}--page-header__breadcrumb__actions`}>
+                <div className={contentActionsClasses}>{contentActions}</div>
+                {pageActions}
+              </div>
             </div>
-            <div className={`${prefix}--page-header__breadcrumb__actions`}>
-              <div className={contentActionsClasses}>{contentActions}</div>
-              {pageActions}
-            </div>
-          </div>
-        </Column>
-      </Grid>
-    </div>
-  );
-});
+          </Column>
+        </Grid>
+      </div>
+    );
+  }
+);
 PageHeaderBreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
 
 /**
@@ -185,84 +187,87 @@ interface PageHeaderContentProps {
 const PageHeaderContent = React.forwardRef<
   HTMLDivElement,
   PageHeaderContentProps
->(function PageHeaderContent(
-  {
-    className,
-    children,
-    title,
-    renderIcon: IconElement,
-    contextualActions,
-    pageActions,
-    ...other
-  }: PageHeaderContentProps,
-  ref
-) {
-  const prefix = usePrefix();
-  const classNames = classnames(
+>(
+  (
     {
-      [`${prefix}--page-header__content`]: true,
-    },
-    className
-  );
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+      className,
+      children,
+      title,
+      renderIcon: IconElement,
+      contextualActions,
+      pageActions,
+      ...other
+    }: PageHeaderContentProps,
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const classNames = classnames(
+      {
+        [`${prefix}--page-header__content`]: true,
+      },
+      className
+    );
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const isEllipsisActive = (element: HTMLHeadingElement) => {
-    setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
-    return element.offsetHeight < element.scrollHeight;
-  };
+    const isEllipsisActive = (element: HTMLHeadingElement) => {
+      setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
+      return element.offsetHeight < element.scrollHeight;
+    };
 
-  useLayoutEffect(() => {
-    titleRef.current && isEllipsisActive(titleRef.current);
-  }, [title]);
+    useLayoutEffect(() => {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      titleRef.current && isEllipsisActive(titleRef.current);
+    }, [title]);
 
-  return (
-    <div className={classNames} ref={ref} {...other}>
-      <Grid>
-        <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__content__title-wrapper`}>
-            <div className={`${prefix}--page-header__content__start`}>
-              <div
-                className={`${prefix}--page-header__content__title-container`}>
-                {IconElement && (
-                  <div className={`${prefix}--page-header__content__icon`}>
-                    <IconElement />
-                  </div>
-                )}
+    return (
+      <div className={classNames} ref={ref} {...other}>
+        <Grid>
+          <Column lg={16} md={8} sm={4}>
+            <div className={`${prefix}--page-header__content__title-wrapper`}>
+              <div className={`${prefix}--page-header__content__start`}>
+                <div
+                  className={`${prefix}--page-header__content__title-container`}>
+                  {IconElement && (
+                    <div className={`${prefix}--page-header__content__icon`}>
+                      <IconElement />
+                    </div>
+                  )}
 
-                {isEllipsisApplied ? (
-                  <DefinitionTooltip definition={title}>
+                  {isEllipsisApplied ? (
+                    <DefinitionTooltip definition={title}>
+                      <Text
+                        ref={titleRef}
+                        as="h4"
+                        className={`${prefix}--page-header__content__title`}>
+                        {title}
+                      </Text>
+                    </DefinitionTooltip>
+                  ) : (
                     <Text
                       ref={titleRef}
                       as="h4"
                       className={`${prefix}--page-header__content__title`}>
                       {title}
                     </Text>
-                  </DefinitionTooltip>
-                ) : (
-                  <Text
-                    ref={titleRef}
-                    as="h4"
-                    className={`${prefix}--page-header__content__title`}>
-                    {title}
-                  </Text>
+                  )}
+                </div>
+                {contextualActions && (
+                  <div
+                    className={`${prefix}--page-header__content__contextual-actions`}>
+                    {contextualActions}
+                  </div>
                 )}
               </div>
-              {contextualActions && (
-                <div
-                  className={`${prefix}--page-header__content__contextual-actions`}>
-                  {contextualActions}
-                </div>
-              )}
+              {pageActions}
             </div>
-            {pageActions}
-          </div>
-          {children}
-        </Column>
-      </Grid>
-    </div>
-  );
-});
+            {children}
+          </Column>
+        </Grid>
+      </div>
+    );
+  }
+);
 PageHeaderContent.displayName = 'PageHeaderContent';
 
 PageHeaderContent.propTypes = {
@@ -321,6 +326,7 @@ interface PageHeaderContentPageActionsProps {
 }
 const PageHeaderContentPageActions = ({
   className,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   children,
   menuButtonLabel = 'Actions',
   actions,
@@ -372,6 +378,7 @@ const PageHeaderContentPageActions = ({
         }
       },
     });
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
 
   return (
@@ -561,125 +568,136 @@ interface PageHeaderTabBarProps {
 const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
->(function PageHeaderTabBar(
-  { className, children, tags = [], ...other }: PageHeaderTabBarProps,
-  ref
-) {
-  const prefix = usePrefix();
-  const classNames = classnames(
-    {
-      [`${prefix}--page-header__tab-bar`]: true,
-    },
-    className
-  );
-  // Early return if no tags are provided
-  if (!tags.length) {
+>(
+  (
+    { className, children, tags = [], ...other }: PageHeaderTabBarProps,
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const classNames = classnames(
+      {
+        [`${prefix}--page-header__tab-bar`]: true,
+      },
+      className
+    );
+    // Early return if no tags are provided
+    if (!tags.length) {
+      return (
+        <div className={classNames} ref={ref} {...other}>
+          <Grid>
+            <Column lg={16} md={8} sm={4}>
+              {children}
+            </Column>
+          </Grid>
+        </div>
+      );
+    }
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    const [openPopover, setOpenPopover] = useState(false);
+    const tagSize = tags[0]?.size || 'md';
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    const instanceId = useId('PageHeaderTabBar');
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    const tagsWithIds = useMemo(() => {
+      return tags.map((tag, index) => ({
+        ...tag,
+        id: tag.id || `tag-${index}-${instanceId}`,
+      }));
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    }, [tags]);
+
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    const tagsContainerRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    const offsetRef = useRef<HTMLDivElement>(null);
+    // To close popover when window resizes
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    useEffect(() => {
+      const handleResize = () => {
+        // Close the popover when window resizes to prevent unwanted opens
+        setOpenPopover(false);
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
+    // overflow items hook
+    const {
+      visibleItems = [],
+      hiddenItems = [],
+      itemRefHandler = () => {},
+      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    } = useOverflowItems<TagItem>(
+      tagsWithIds,
+      tagsContainerRef as React.RefObject<HTMLDivElement>,
+      offsetRef as React.RefObject<HTMLDivElement>
+    ) || {
+      visibleItems: [],
+      hiddenItems: [],
+      itemRefHandler: () => {},
+    };
+
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    const handleOverflowClick = useCallback((event: React.MouseEvent) => {
+      event.stopPropagation();
+      setOpenPopover((prev) => !prev);
+    }, []);
+
+    // Function to render tags
+    const renderTags = () => (
+      <div className={`${prefix}--page-header__tags`} ref={tagsContainerRef}>
+        {visibleItems.map((tag) => (
+          <Tag
+            key={tag.id}
+            ref={(node) => itemRefHandler(tag.id, node)}
+            type={tag.type}
+            size={tag.size}
+            className={`${prefix}--page-header__tag-item`}>
+            {tag.text}
+          </Tag>
+        ))}
+
+        {hiddenItems.length > 0 && (
+          <Popover
+            open={openPopover}
+            onRequestClose={() => setOpenPopover(false)}>
+            <OperationalTag
+              onClick={handleOverflowClick}
+              aria-expanded={openPopover}
+              text={`+${hiddenItems.length}`}
+              size={tagSize}
+            />
+            <PopoverContent className="tag-popover-content">
+              <div className={`${prefix}--page-header__tags-popover-list`}>
+                {hiddenItems.map((tag) => (
+                  <Tag key={tag.id} type={tag.type} size={tag.size}>
+                    {tag.text}
+                  </Tag>
+                ))}
+              </div>
+            </PopoverContent>
+          </Popover>
+        )}
+      </div>
+    );
+
     return (
       <div className={classNames} ref={ref} {...other}>
         <Grid>
           <Column lg={16} md={8} sm={4}>
-            {children}
+            <div className={`${prefix}--page-header__tab-bar--tablist`}>
+              {children}
+              {tags.length > 0 && renderTags()}
+            </div>
           </Column>
         </Grid>
       </div>
     );
   }
-  const [openPopover, setOpenPopover] = useState(false);
-  const tagSize = tags[0]?.size || 'md';
-  const instanceId = useId('PageHeaderTabBar');
-  const tagsWithIds = useMemo(() => {
-    return tags.map((tag, index) => ({
-      ...tag,
-      id: tag.id || `tag-${index}-${instanceId}`,
-    }));
-  }, [tags]);
-
-  const tagsContainerRef = useRef<HTMLDivElement>(null);
-  const offsetRef = useRef<HTMLDivElement>(null);
-  // To close popover when window resizes
-  useEffect(() => {
-    const handleResize = () => {
-      // Close the popover when window resizes to prevent unwanted opens
-      setOpenPopover(false);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  // overflow items hook
-  const {
-    visibleItems = [],
-    hiddenItems = [],
-    itemRefHandler = () => {},
-  } = useOverflowItems<TagItem>(
-    tagsWithIds,
-    tagsContainerRef as React.RefObject<HTMLDivElement>,
-    offsetRef as React.RefObject<HTMLDivElement>
-  ) || {
-    visibleItems: [],
-    hiddenItems: [],
-    itemRefHandler: () => {},
-  };
-
-  const handleOverflowClick = useCallback((event: React.MouseEvent) => {
-    event.stopPropagation();
-    setOpenPopover((prev) => !prev);
-  }, []);
-
-  // Function to render tags
-  const renderTags = () => (
-    <div className={`${prefix}--page-header__tags`} ref={tagsContainerRef}>
-      {visibleItems.map((tag) => (
-        <Tag
-          key={tag.id}
-          ref={(node) => itemRefHandler(tag.id, node)}
-          type={tag.type}
-          size={tag.size}
-          className={`${prefix}--page-header__tag-item`}>
-          {tag.text}
-        </Tag>
-      ))}
-
-      {hiddenItems.length > 0 && (
-        <Popover
-          open={openPopover}
-          onRequestClose={() => setOpenPopover(false)}>
-          <OperationalTag
-            onClick={handleOverflowClick}
-            aria-expanded={openPopover}
-            text={`+${hiddenItems.length}`}
-            size={tagSize}
-          />
-          <PopoverContent className="tag-popover-content">
-            <div className={`${prefix}--page-header__tags-popover-list`}>
-              {hiddenItems.map((tag) => (
-                <Tag key={tag.id} type={tag.type} size={tag.size}>
-                  {tag.text}
-                </Tag>
-              ))}
-            </div>
-          </PopoverContent>
-        </Popover>
-      )}
-    </div>
-  );
-
-  return (
-    <div className={classNames} ref={ref} {...other}>
-      <Grid>
-        <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__tab-bar--tablist`}>
-            {children}
-            {tags.length > 0 && renderTags()}
-          </div>
-        </Column>
-      </Grid>
-    </div>
-  );
-});
+);
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
 
 /**

@@ -24,7 +24,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 /**
  * The default icons, keyed by notification kind.
  */
-const iconsForKinds = {
+export const iconsForKinds = {
   [NOTIFICATION_KIND.SUCCESS]: CheckmarkFilled20,
   [NOTIFICATION_KIND.INFO]: InformationFilled20,
   [NOTIFICATION_KIND.INFO_SQUARE]: InformationSquareFilled20,
@@ -33,10 +33,9 @@ const iconsForKinds = {
   [NOTIFICATION_KIND.ERROR]: ErrorFilled20,
 };
 
-// eslint-disable-next-line no-bitwise
 const PRECEDING =
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-// eslint-disable-next-line no-bitwise
+
 const FOLLOWING =
   Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
@@ -52,6 +51,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const active = elem.ownerDocument!.activeElement;
       if (
         active === elem ||
@@ -65,6 +65,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const active = elem.ownerDocument!.activeElement;
       if (
         active === elem ||
@@ -136,6 +137,7 @@ class CDSActionableNotification extends HostListenerMixin(
    * Escape will close the notification if `closeOnEscape` is true
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown = async (event: KeyboardEvent) => {
     const { key } = event;
@@ -145,6 +147,7 @@ class CDSActionableNotification extends HostListenerMixin(
   };
 
   @HostListener('shadowRoot:focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
     const {
@@ -184,6 +187,7 @@ class CDSActionableNotification extends HostListenerMixin(
         relatedTarget as Node
       );
       // tabbable elements in Shadow root
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const shadowElems = this.shadowRoot!.querySelectorAll(
         selectorTabbableForActionableNotification
       );
@@ -191,7 +195,7 @@ class CDSActionableNotification extends HostListenerMixin(
       const lightElems = this.querySelectorAll(
         selectorTabbableForActionableNotification
       );
-      // eslint-disable-next-line no-bitwise
+
       if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
         await (this.constructor as typeof CDSActionableNotification)._delay();
         if (
@@ -201,9 +205,7 @@ class CDSActionableNotification extends HostListenerMixin(
         ) {
           this.focus();
         }
-      }
-      // eslint-disable-next-line no-bitwise
-      else if (
+      } else if (
         relatedTarget === endSentinelNode ||
         comparisonResult & FOLLOWING
       ) {

@@ -8,13 +8,45 @@
 import { getAttributes, formatAttributes } from '@carbon/icon-helpers';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
+// Carbon icon element types
+export interface CarbonIconElement {
+  elem: string;
+  attrs: Record<string, string | number>;
+  content: (CarbonIconElement | string)[];
+}
+
+// Carbon icon descriptor types
+export interface CarbonIconDescriptor {
+  elem: string;
+  attrs: Record<string, string | number>;
+  content: CarbonIconElement[];
+  name: string;
+  size: number;
+}
+
+// Carbon icon module types
+export interface CarbonIconModule {
+  default?: CarbonIconDescriptor;
+}
+
+export type CarbonIcon = CarbonIconDescriptor | CarbonIconModule;
+
+// Helper function to get the actual descriptor
+function getIconDescriptor(descriptor: CarbonIcon): CarbonIconDescriptor {
+  return 'default' in descriptor && descriptor.default
+    ? (descriptor.default as CarbonIconDescriptor)
+    : (descriptor as CarbonIconDescriptor);
+}
+
 /**
  * Convert an imported icon descriptor to an SVG string, e.g.
  * import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
  */
-export function carbonIconToSVG(descriptor: any, attributes: any = {}) {
-  // Handle the case where descriptor has a 'default' property
-  const iconDescriptor = descriptor.default || descriptor;
+export function carbonIconToSVG(
+  descriptor: CarbonIcon,
+  attributes: Record<string, string | number | undefined> = {}
+) {
+  const iconDescriptor = getIconDescriptor(descriptor);
 
   // Ensure attrs exists
   if (!iconDescriptor.attrs) {
@@ -36,7 +68,7 @@ export function carbonIconToSVG(descriptor: any, attributes: any = {}) {
   // Process content
   const content = iconDescriptor.content || [];
   const contentString = content
-    .map((child: any) => {
+    .map((child: CarbonIconElement | string) => {
       if (typeof child === 'string') return child;
       return elementToSVG(child);
     })
@@ -48,7 +80,7 @@ export function carbonIconToSVG(descriptor: any, attributes: any = {}) {
 /**
  * Convert an element to SVG string
  */
-function elementToSVG(element: any): string {
+function elementToSVG(element: CarbonIconElement | string): string {
   if (typeof element === 'string') {
     return element;
   }
@@ -63,8 +95,8 @@ function elementToSVG(element: any): string {
 /**
  * Create an icon function that returns a Lit template with unsafeSVG
  */
-export function createIconTemplate(descriptor: any) {
-  return (attributes: any = {}) => {
+export function createIconTemplate(descriptor: CarbonIcon) {
+  return (attributes: Record<string, string | number | undefined> = {}) => {
     const svgString = carbonIconToSVG(descriptor, attributes);
     return unsafeSVG(svgString);
   };
