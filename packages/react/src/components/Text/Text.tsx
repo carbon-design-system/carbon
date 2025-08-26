@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, {
   Children,
-  forwardRef,
   useContext,
   type ElementType,
   type FC,
@@ -35,6 +34,7 @@ type TextComponent = <T extends ElementType = 'span'>(
   props: TextProps<T> & { ref?: PolymorphicRef<T> }
 ) => ReactElement | null;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const TextBase = React.forwardRef(
   (
     {

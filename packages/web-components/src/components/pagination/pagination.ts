@@ -33,11 +33,10 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   private _pageSizeSelect!: HTMLElement;
 
   private _handleSlotChange({ target }: Event) {
-    const content = (target as HTMLSlotElement)
-      .assignedNodes()
-      .filter(
-        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-      );
+    const content = (target as HTMLSlotElement).assignedNodes().filter(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+    );
 
     content.forEach((item) => {
       this._pageSizeSelect.appendChild(item);
@@ -162,6 +161,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener(`${prefix}-select-selected`)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeSelector(event) {
     const { value } = event.detail;
@@ -310,6 +310,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       .constructor as typeof CDSPagination;
 
     if (changedProperties.has('pageSize')) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion , @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (this.shadowRoot!.querySelector(selectorPageSizesSelect) as any).value =
         pageSize;
     }
@@ -318,6 +319,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       // division by 0.
       this.totalPages =
         pageSize > 0 ? Math.ceil(totalItems / pageSize) : totalItems;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       (this.shadowRoot!.querySelector(selectorPagesSelect) as CDSSelect).value =
         this.page.toString();
     }

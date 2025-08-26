@@ -26,6 +26,7 @@ interface BadgeIndicatorProps {
    */
   id?: string;
 }
+
 export const BadgeIndicator = React.forwardRef(function BadgeIndicatorContent(
   { className: customClassName, count, ...rest }: BadgeIndicatorProps,
   ref: React.Ref<HTMLDivElement>

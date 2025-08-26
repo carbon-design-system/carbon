@@ -268,7 +268,6 @@ class CDSSelect extends FormMixin(LitElement) {
    * `true` to enable multiple selection.
    */
   @property({ type: Boolean })
-  // eslint-disable-next-line class-methods-use-this
   get multiple() {
     return false;
   }

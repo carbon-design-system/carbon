@@ -74,6 +74,7 @@ class CDSStructuredList extends FocusMixin(LitElement) {
               .selectorRowsWithHeader
           ),
           (elem) => {
+            // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
             this[`${attr}`]
               ? elem.setAttribute(attr, '')
               : elem.removeAttribute(attr);

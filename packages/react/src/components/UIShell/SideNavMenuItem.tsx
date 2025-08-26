@@ -42,7 +42,7 @@ export type SideNavMenuItemProps = ComponentProps<typeof Link> & {
 };
 
 const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
-  function SideNavMenuItem(props, ref: ForwardedRef<HTMLElement>) {
+  (props, ref: ForwardedRef<HTMLElement>) => {
     const prefix = usePrefix();
     const {
       children,
