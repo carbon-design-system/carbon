@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/components/progress-indicator/progress-indicator' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include progress-indicator;
@@ -54,12 +55,15 @@ $css--plex: true !default;
 
   svg {
     display: inline-block;
-    margin: 0.1rem $spacing-02 0.1rem $spacing-03;
+    margin: rem(1px) $spacing-03 0;
   }
 
   .#{$prefix}--progress-label {
     display: inline-block;
     margin: 0;
+    block-size: rem(14px);
+    inline-size: rem(40px);
+    margin-block-start: rem(1px);
     max-inline-size: none;
     vertical-align: top;
   }
@@ -115,6 +119,12 @@ $css--plex: true !default;
 :host(#{$prefix}-progress-step-skeleton) {
   svg {
     fill: $layer-selected-inverse;
+  }
+
+  .#{$prefix}--progress-label {
+    block-size: rem(14px);
+    inline-size: rem(40px);
+    margin-block-start: 0.625rem;
   }
 
   .#{$prefix}--progress-line {

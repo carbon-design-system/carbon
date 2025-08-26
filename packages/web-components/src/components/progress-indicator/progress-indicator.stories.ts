@@ -8,7 +8,6 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import ifNonEmpty from '../../globals/directives/if-non-empty';
 
 const args = {
   vertical: false,
@@ -49,26 +48,26 @@ export const Default = {
         ?vertical="${vertical}"
         ?space-equally="${spaceEqually}">
         <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
+          description="Step 1: Getting started with Carbon Design System"
           label="First step"
           secondary-label="${ifDefined(secondaryLabelText)}"
           state="complete"></cds-progress-step>
         <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
+          description="Step 2: Getting started with Carbon Design System"
           label="Second step with tooltip"
           state="current"></cds-progress-step>
         <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
+          description="Step 3: Getting started with Carbon Design System"
           label="Third step with tooltip"
           state="incomplete"></cds-progress-step>
         <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
+          description="Step 4: Getting started with Carbon Design System"
           label="Fourth step"
           secondary-label="Example invalid step"
           state="invalid"></cds-progress-step>
         <cds-progress-step
           disabled
-          description="${ifNonEmpty(iconLabel)}"
+          description="Step 5: Getting started with Carbon Design System"
           label="Fifth step"
           state="incomplete"></cds-progress-step>
       </cds-progress-indicator>
@@ -78,17 +77,17 @@ export const Default = {
 
 export const Interactive = {
   render: () => html`
-    <cds-progress-indicator>
+    <cds-progress-indicator .onChange=${() => alert('Clicked')}>
       <cds-progress-step
         label="Click me"
-        description="Step 1: Register a onChange event"
+        description="Step 1: Register an onChange event"
         state="complete"></cds-progress-step>
       <cds-progress-step
         label="Really long label"
         description="The progress indicator will listen for clicks on the steps"
         state="current"></cds-progress-step>
       <cds-progress-step
-        label="Third step with tooltip"
+        label="Third step"
         description="The progress indicator will listen for clicks on the steps"
         state="incomplete"></cds-progress-step>
     </cds-progress-indicator>

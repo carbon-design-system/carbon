@@ -28,7 +28,7 @@ export const Interactive = () => {
     <ProgressIndicator currentIndex={1} onChange={() => alert('Clicked')}>
       <ProgressStep
         label="Click me"
-        description="Step 1: Register a onChange event"
+        description="Step 1: Register an onChange event"
       />
       <ProgressStep
         label="Really long label"

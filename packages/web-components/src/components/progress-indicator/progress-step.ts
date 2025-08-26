@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -52,12 +52,6 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
   @property({ reflect: true })
   description!: string;
 
-  /**
-   * The primary progress label.
-   */
-  @property({ attribute: 'label-text' })
-  labelText!: string;
-
   @property()
   label!: string;
 
@@ -85,12 +79,11 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
   vertical = false;
 
   /**
-   * `true` if the progress step should be spaced equally.
-   *
-   * @private
+   * Set by the parent indicator. If true, the step is interactive unless it is
+   * current or disabled. This mirrors React's "onChange prop exists" semantics.
    */
-  @property({ type: Boolean, reflect: true })
-  spaceEqually = false;
+  @property({ type: Boolean })
+  clickable = false;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -99,11 +92,35 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     super.connectedCallback();
   }
 
-  updated(changedProperties) {
+  updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('disabled')) {
       this.setAttribute('aria-disabled', String(Boolean(this.disabled)));
     }
   }
+
+  // Fire internal click only when interactive
+  private _fireStepClick = () => {
+    const isUnclickable =
+      this.state === PROGRESS_STEP_STAT.CURRENT ||
+      this.disabled ||
+      !this.clickable;
+    if (isUnclickable) return;
+
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-progress-step-click`, {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
+  };
+
+  private _onKeyDown = (ev: KeyboardEvent) => {
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
+      this._fireStepClick();
+    }
+  };
 
   render() {
     const {
@@ -116,8 +133,22 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     } = this;
     const svgLabel = iconLabel || description;
     const optionalLabel = secondaryLabelText || secondaryLabel;
+
+    // Unclickable if current OR disabled OR no onChange upstream (to match React)
+    const isUnclickable =
+      state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
+
     return html`
-      <div class="${prefix}--progress-step-button" tabindex="0">
+      <div
+        class="${prefix}--progress-step-button ${isUnclickable
+          ? `${prefix}--progress-step-button--unclickable`
+          : ''}"
+        tabindex="${isUnclickable ? -1 : 0}"
+        @click=${this._fireStepClick}
+        @keydown=${this._onKeyDown}
+        role="button"
+        aria-disabled="${String(isUnclickable)}"
+        title="${label}">
         ${icons[state]({
           class: {
             [PROGRESS_STEP_STAT.INVALID]: `${prefix}--progress__warning`,
@@ -126,7 +157,6 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
         })}
         <slot name="label-text">
           <p
-            role="button"
             class="${prefix}--progress-label"
             aria-describedby="label-tooltip"
             title="${label}">
