@@ -334,7 +334,6 @@ export interface FilterableMultiSelectProps<ItemType>
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(

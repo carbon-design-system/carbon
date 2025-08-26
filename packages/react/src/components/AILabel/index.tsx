@@ -29,7 +29,6 @@ import type {
 
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const AILabelContent = React.forwardRef(function AILabelContent(
   { className, children }: AILabelContentProps,
   ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
@@ -75,7 +74,6 @@ AILabelContent.propTypes = {
 
 export type AILabelActionsProps = React.HTMLAttributes<HTMLSpanElement>;
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const AILabelActions = React.forwardRef(function AILabelActions(
   { className, children }: AILabelActionsProps,
   ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
@@ -131,7 +129,6 @@ export interface AILabelProps extends ToggletipBaseProps {
 }
 
 export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
-  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function AILabel(
     {
       aiText = 'AI',

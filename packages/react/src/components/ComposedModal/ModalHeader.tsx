@@ -77,7 +77,6 @@ export interface ModalHeaderProps extends DivProps {
 }
 
 export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
-  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function ModalHeader(
     {
       buttonOnClick,

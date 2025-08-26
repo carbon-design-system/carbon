@@ -256,7 +256,6 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * clicks and keyboard interactions.
  */
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
   T extends React.ElementType,
 >(
@@ -328,7 +327,6 @@ export interface ToggletipContentProps {
 const ToggletipContent = React.forwardRef<
   HTMLDivElement,
   ToggletipContentProps
-  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 >(function ToggletipContent({ children, className: customClassName }, ref) {
   const toggletip = useToggletip();
   const prefix = usePrefix();

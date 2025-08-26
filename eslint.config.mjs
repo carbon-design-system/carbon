@@ -27,7 +27,7 @@ export default tseslint.config([
       // which implies that they were set previously.
       'no-console': 'error',
       'no-template-curly-in-string': 'error',
-      'prefer-arrow-callback': 'error',
+      'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
       'require-atomic-updates': 'error',
     },
   },

@@ -125,7 +125,6 @@ export interface FluidComboBoxProps<ItemType> extends ComboBoxProps<ItemType> {
   warnText?: React.ReactNode;
 }
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidComboBox = React.forwardRef(function FluidComboBox<ItemType>(
   { className, isCondensed, ...other }: FluidComboBoxProps<ItemType>,
   ref: ForwardedRef<HTMLInputElement>

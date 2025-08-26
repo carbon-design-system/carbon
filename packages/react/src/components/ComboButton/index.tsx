@@ -85,7 +85,6 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
 }
 
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
-  // eslint-disable-next-line  prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function ComboButton(
     {
       children,

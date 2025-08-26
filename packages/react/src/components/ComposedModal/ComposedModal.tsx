@@ -62,7 +62,6 @@ export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
-  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function ModalBody(
     {
       className: customClassName,
@@ -242,7 +241,6 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
-  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
   function ComposedModal(
     {
       ['aria-labelledby']: ariaLabelledBy,

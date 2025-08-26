@@ -158,7 +158,7 @@ export interface FluidMultiSelectProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
+
 const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   {
     className,

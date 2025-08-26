@@ -138,7 +138,6 @@ export interface TableHeaderProps
   sortDirection?: string;
 }
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const TableHeader = React.forwardRef(function TableHeader(
   {
     className: headerClassName,

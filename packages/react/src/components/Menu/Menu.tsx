@@ -106,355 +106,345 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   legacyAutoalign?: boolean;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
-const Menu = forwardRef<HTMLUListElement, MenuProps>(
-  (
-    {
-      children,
-      className,
-      containerRef,
-      label,
-      menuAlignment,
-      onClose,
-      onOpen,
-      open,
-      size = 'sm',
-      legacyAutoalign = 'true',
-      target = canUseDOM && document.body,
-      x = 0,
-      y = 0,
-      ...rest
-    },
-    forwardRef
-  ) => {
-    const prefix = usePrefix();
+const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
+  {
+    children,
+    className,
+    containerRef,
+    label,
+    menuAlignment,
+    onClose,
+    onOpen,
+    open,
+    size = 'sm',
+    legacyAutoalign = 'true',
+    target = canUseDOM && document.body,
+    x = 0,
+    y = 0,
+    ...rest
+  },
+  forwardRef
+) {
+  const prefix = usePrefix();
 
-    const focusReturn = useRef<HTMLElement | null>(null);
+  const focusReturn = useRef<HTMLElement | null>(null);
 
-    const context = useContext(MenuContext);
+  const context = useContext(MenuContext);
 
-    const isRoot = context.state.isRoot;
+  const isRoot = context.state.isRoot;
 
-    const menuSize = isRoot ? size : context.state.size;
+  const menuSize = isRoot ? size : context.state.size;
 
-    const [childState, childDispatch] = useReducer(menuReducer, {
-      ...context.state,
-      isRoot: false,
-      size,
-      requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
-    });
-    const childContext = useMemo(() => {
-      return {
-        state: childState,
-        dispatch: childDispatch,
-      };
-    }, [childState, childDispatch]);
+  const [childState, childDispatch] = useReducer(menuReducer, {
+    ...context.state,
+    isRoot: false,
+    size,
+    requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
+  });
+  const childContext = useMemo(() => {
+    return {
+      state: childState,
+      dispatch: childDispatch,
+    };
+  }, [childState, childDispatch]);
 
-    const menu = useRef<HTMLUListElement>(null);
-    const ref = useMergedRefs([forwardRef, menu]);
+  const menu = useRef<HTMLUListElement>(null);
+  const ref = useMergedRefs([forwardRef, menu]);
 
-    const [position, setPosition] = useState([-1, -1]);
-    const focusableItems = childContext.state.items.filter(
-      (item) => !item.disabled && item.ref.current
+  const [position, setPosition] = useState([-1, -1]);
+  const focusableItems = childContext.state.items.filter(
+    (item) => !item.disabled && item.ref.current
+  );
+
+  // Getting the width from the parent container element - controlled
+  let actionButtonWidth: number;
+  if (containerRef?.current) {
+    const { width: w } = containerRef.current.getBoundingClientRect();
+    actionButtonWidth = w;
+  }
+
+  // Set RTL based on the document direction or `LayoutDirection`
+  const { direction } = useLayoutDirection();
+
+  function returnFocus() {
+    if (focusReturn.current) {
+      focusReturn.current.focus();
+    }
+  }
+
+  function handleOpen() {
+    if (menu.current) {
+      focusReturn.current = document.activeElement as HTMLElement;
+      if (legacyAutoalign) {
+        const pos = calculatePosition();
+        if (
+          (document?.dir === 'rtl' || direction === 'rtl') &&
+          !rest?.id?.includes('MenuButton')
+        ) {
+          menu.current.style.insetInlineStart = `initial`;
+          menu.current.style.insetInlineEnd = `${pos[0]}px`;
+        } else {
+          menu.current.style.insetInlineStart = `${pos[0]}px`;
+          menu.current.style.insetInlineEnd = `initial`;
+        }
+
+        menu.current.style.insetBlockStart = `${pos[1]}px`;
+        setPosition(pos);
+      }
+
+      menu.current.focus();
+
+      if (onOpen) {
+        onOpen();
+      }
+    }
+  }
+
+  function handleClose() {
+    returnFocus();
+
+    if (onClose) {
+      onClose();
+    }
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
+    e.stopPropagation();
+
+    // if the user presses escape or this is a submenu
+    // and the user presses ArrowLeft, close it
+    if (
+      (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
+      onClose
+    ) {
+      handleClose();
+    } else {
+      focusItem(e);
+    }
+  }
+
+  function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
+    const currentItem = focusableItems.findIndex((item) =>
+      item.ref?.current?.contains(document.activeElement)
     );
+    let indexToFocus = currentItem;
 
-    // Getting the width from the parent container element - controlled
-    let actionButtonWidth: number;
-    if (containerRef?.current) {
-      const { width: w } = containerRef.current.getBoundingClientRect();
-      actionButtonWidth = w;
-    }
-
-    // Set RTL based on the document direction or `LayoutDirection`
-    const { direction } = useLayoutDirection();
-
-    function returnFocus() {
-      if (focusReturn.current) {
-        focusReturn.current.focus();
+    // if currentItem is -1, no menu item is focused yet.
+    // in this case, the first item should receive focus.
+    if (currentItem === -1) {
+      indexToFocus = 0;
+    } else if (e) {
+      if (match(e, keys.ArrowUp)) {
+        indexToFocus = indexToFocus - 1;
+      }
+      if (match(e, keys.ArrowDown)) {
+        indexToFocus = indexToFocus + 1;
       }
     }
 
-    function handleOpen() {
-      if (menu.current) {
-        focusReturn.current = document.activeElement as HTMLElement;
-        if (legacyAutoalign) {
-          const pos = calculatePosition();
-          if (
-            (document?.dir === 'rtl' || direction === 'rtl') &&
-            !rest?.id?.includes('MenuButton')
-          ) {
-            menu.current.style.insetInlineStart = `initial`;
-            menu.current.style.insetInlineEnd = `${pos[0]}px`;
-          } else {
-            menu.current.style.insetInlineStart = `${pos[0]}px`;
-            menu.current.style.insetInlineEnd = `initial`;
-          }
-
-          menu.current.style.insetBlockStart = `${pos[1]}px`;
-          setPosition(pos);
-        }
-
-        menu.current.focus();
-
-        if (onOpen) {
-          onOpen();
-        }
-      }
+    if (indexToFocus < 0) {
+      indexToFocus = focusableItems.length - 1;
+    }
+    if (indexToFocus >= focusableItems.length) {
+      indexToFocus = 0;
     }
 
-    function handleClose() {
-      returnFocus();
+    if (indexToFocus !== currentItem) {
+      const nodeToFocus = focusableItems[indexToFocus];
+      nodeToFocus.ref?.current?.focus();
+      e?.preventDefault();
+    }
+  }
 
-      if (onClose) {
-        onClose();
-      }
+  function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
+    if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
+      handleClose();
+    }
+  }
+
+  function fitValue(range: number[], axis: 'x' | 'y') {
+    if (!menu.current) {
+      return;
     }
 
-    function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
-      e.stopPropagation();
+    const { width, height } = menu.current.getBoundingClientRect();
+    const alignment = isRoot ? 'vertical' : 'horizontal';
 
-      // if the user presses escape or this is a submenu
-      // and the user presses ArrowLeft, close it
-      if (
-        (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
-        onClose
-      ) {
-        handleClose();
+    const axes = {
+      x: {
+        max: window.innerWidth,
+        size: width,
+        anchor: alignment === 'horizontal' ? range[1] : range[0],
+        reversedAnchor: alignment === 'horizontal' ? range[0] : range[1],
+        offset: 0,
+      },
+      y: {
+        max: window.innerHeight,
+        size: height,
+        anchor: alignment === 'horizontal' ? range[0] : range[1],
+        reversedAnchor: alignment === 'horizontal' ? range[1] : range[0],
+        offset: isRoot ? 0 : 4, // top padding in menu, used to align the menu items
+      },
+    };
+
+    // Avoid that the Menu render incorrectly when the position is set in the right side of the screen
+    if (
+      actionButtonWidth &&
+      actionButtonWidth < axes.x.size &&
+      (menuAlignment === 'bottom' || menuAlignment === 'top')
+    ) {
+      axes.x.size = actionButtonWidth;
+    }
+
+    // if 'axes.x.anchor' is lower than 87px dynamically switch render side
+    if (
+      actionButtonWidth &&
+      (menuAlignment === 'bottom-end' || menuAlignment === 'top-end') &&
+      axes.x.anchor >= 87 &&
+      actionButtonWidth < axes.x.size
+    ) {
+      const diff = axes.x.anchor + axes.x.reversedAnchor;
+      axes.x.anchor = axes.x.anchor + diff;
+    }
+
+    const { max, size, anchor, reversedAnchor, offset } = axes[axis];
+
+    // get values for different scenarios, set to false if they don't work
+    const options = [
+      // towards max (preferred)
+      max - spacing - size - anchor >= 0 ? anchor - offset : false,
+
+      // towards min / reversed (first fallback)
+      reversedAnchor - size >= 0 ? reversedAnchor - size + offset : false,
+
+      // align at max (second fallback)
+      max - spacing - size,
+    ];
+
+    const topAlignment =
+      menuAlignment === 'top' ||
+      menuAlignment === 'top-end' ||
+      menuAlignment === 'top-start';
+
+    // If the tooltip is not visible in the top, switch to the bottom
+    if (
+      typeof options[0] === 'number' &&
+      topAlignment &&
+      options[0] >= 0 &&
+      !options[1] &&
+      axis === 'y'
+    ) {
+      menu.current.style.transform = 'translate(0)';
+    } else if (topAlignment && !options[0] && axis === 'y') {
+      options[0] = anchor - offset;
+    }
+
+    // Previous array `options`, has at least one item that is a number (the last one - second fallback).
+    // That guarantees that the return of `find()` will always be a number
+    // and we can safely add the numeric casting `as number`.
+    const bestOption = options.find((option) => option !== false) as number;
+
+    return bestOption >= spacing ? bestOption : spacing;
+  }
+
+  function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+    return value !== null && value !== undefined;
+  }
+
+  function getPosition(x: number | (number | null | undefined)[]) {
+    if (Array.isArray(x)) {
+      // has to be of length 2
+      const filtered = x.filter(notEmpty);
+      if (filtered.length === 2) {
+        return filtered;
       } else {
-        focusItem(e);
-      }
-    }
-
-    function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
-      const currentItem = focusableItems.findIndex((item) =>
-        item.ref?.current?.contains(document.activeElement)
-      );
-      let indexToFocus = currentItem;
-
-      // if currentItem is -1, no menu item is focused yet.
-      // in this case, the first item should receive focus.
-      if (currentItem === -1) {
-        indexToFocus = 0;
-      } else if (e) {
-        if (match(e, keys.ArrowUp)) {
-          indexToFocus = indexToFocus - 1;
-        }
-        if (match(e, keys.ArrowDown)) {
-          indexToFocus = indexToFocus + 1;
-        }
-      }
-
-      if (indexToFocus < 0) {
-        indexToFocus = focusableItems.length - 1;
-      }
-      if (indexToFocus >= focusableItems.length) {
-        indexToFocus = 0;
-      }
-
-      if (indexToFocus !== currentItem) {
-        const nodeToFocus = focusableItems[indexToFocus];
-        nodeToFocus.ref?.current?.focus();
-        e?.preventDefault();
-      }
-    }
-
-    function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
-      if (
-        open &&
-        onClose &&
-        isRoot &&
-        !menu.current?.contains(e.relatedTarget)
-      ) {
-        handleClose();
-      }
-    }
-
-    function fitValue(range: number[], axis: 'x' | 'y') {
-      if (!menu.current) {
         return;
       }
-
-      const { width, height } = menu.current.getBoundingClientRect();
-      const alignment = isRoot ? 'vertical' : 'horizontal';
-
-      const axes = {
-        x: {
-          max: window.innerWidth,
-          size: width,
-          anchor: alignment === 'horizontal' ? range[1] : range[0],
-          reversedAnchor: alignment === 'horizontal' ? range[0] : range[1],
-          offset: 0,
-        },
-        y: {
-          max: window.innerHeight,
-          size: height,
-          anchor: alignment === 'horizontal' ? range[0] : range[1],
-          reversedAnchor: alignment === 'horizontal' ? range[1] : range[0],
-          offset: isRoot ? 0 : 4, // top padding in menu, used to align the menu items
-        },
-      };
-
-      // Avoid that the Menu render incorrectly when the position is set in the right side of the screen
-      if (
-        actionButtonWidth &&
-        actionButtonWidth < axes.x.size &&
-        (menuAlignment === 'bottom' || menuAlignment === 'top')
-      ) {
-        axes.x.size = actionButtonWidth;
-      }
-
-      // if 'axes.x.anchor' is lower than 87px dynamically switch render side
-      if (
-        actionButtonWidth &&
-        (menuAlignment === 'bottom-end' || menuAlignment === 'top-end') &&
-        axes.x.anchor >= 87 &&
-        actionButtonWidth < axes.x.size
-      ) {
-        const diff = axes.x.anchor + axes.x.reversedAnchor;
-        axes.x.anchor = axes.x.anchor + diff;
-      }
-
-      const { max, size, anchor, reversedAnchor, offset } = axes[axis];
-
-      // get values for different scenarios, set to false if they don't work
-      const options = [
-        // towards max (preferred)
-        max - spacing - size - anchor >= 0 ? anchor - offset : false,
-
-        // towards min / reversed (first fallback)
-        reversedAnchor - size >= 0 ? reversedAnchor - size + offset : false,
-
-        // align at max (second fallback)
-        max - spacing - size,
-      ];
-
-      const topAlignment =
-        menuAlignment === 'top' ||
-        menuAlignment === 'top-end' ||
-        menuAlignment === 'top-start';
-
-      // If the tooltip is not visible in the top, switch to the bottom
-      if (
-        typeof options[0] === 'number' &&
-        topAlignment &&
-        options[0] >= 0 &&
-        !options[1] &&
-        axis === 'y'
-      ) {
-        menu.current.style.transform = 'translate(0)';
-      } else if (topAlignment && !options[0] && axis === 'y') {
-        options[0] = anchor - offset;
-      }
-
-      // Previous array `options`, has at least one item that is a number (the last one - second fallback).
-      // That guarantees that the return of `find()` will always be a number
-      // and we can safely add the numeric casting `as number`.
-      const bestOption = options.find((option) => option !== false) as number;
-
-      return bestOption >= spacing ? bestOption : spacing;
+    } else {
+      return [x, x];
     }
-
-    function notEmpty<TValue>(
-      value: TValue | null | undefined
-    ): value is TValue {
-      return value !== null && value !== undefined;
-    }
-
-    function getPosition(x: number | (number | null | undefined)[]) {
-      if (Array.isArray(x)) {
-        // has to be of length 2
-        const filtered = x.filter(notEmpty);
-        if (filtered.length === 2) {
-          return filtered;
-        } else {
-          return;
-        }
-      } else {
-        return [x, x];
-      }
-    }
-
-    function calculatePosition() {
-      const ranges = {
-        x: getPosition(x),
-        y: getPosition(y),
-      };
-
-      if (!ranges.x || !ranges.y) {
-        return [-1, -1];
-      }
-
-      return [fitValue(ranges.x, 'x') ?? -1, fitValue(ranges.y, 'y') ?? -1];
-    }
-
-    useEffect(() => {
-      if (open) {
-        const raf = requestAnimationFrame(() => {
-          if (focusableItems.length > 0) {
-            focusItem();
-          }
-        });
-
-        return () => cancelAnimationFrame(raf);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, focusableItems]);
-
-    useEffect(() => {
-      if (open) {
-        handleOpen();
-      } else {
-        // reset position when menu is closed in order for the --shown
-        // modifier to be applied correctly
-        setPosition([-1, -1]);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open]);
-
-    const classNames = cx(
-      className,
-      `${prefix}--menu`,
-      `${prefix}--menu--${menuSize}`,
-      {
-        // --open sets visibility and --shown sets opacity.
-        // visibility is needed for focusing elements.
-        // opacity is only set once the position has been set correctly
-        // to avoid a flicker effect when opening.
-        [`${prefix}--menu--box-shadow-top`]:
-          menuAlignment && menuAlignment.slice(0, 3) === 'top',
-        [`${prefix}--menu--open`]: open,
-        [`${prefix}--menu--shown`]:
-          (open && !legacyAutoalign) || (position[0] >= 0 && position[1] >= 0),
-        [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
-        [`${prefix}--menu--with-selectable-items`]:
-          childContext.state.hasSelectableItems,
-        [`${prefix}--autoalign`]: !legacyAutoalign,
-      }
-    );
-
-    const rendered = (
-      <MenuContext.Provider value={childContext}>
-        <ul
-          {...rest}
-          className={classNames}
-          role="menu"
-          ref={ref}
-          aria-label={label}
-          tabIndex={-1}
-          onKeyDown={handleKeyDown}
-          onBlur={handleBlur}>
-          {children}
-        </ul>
-      </MenuContext.Provider>
-    );
-
-    if (!target) {
-      return rendered;
-    }
-
-    return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
   }
-);
+
+  function calculatePosition() {
+    const ranges = {
+      x: getPosition(x),
+      y: getPosition(y),
+    };
+
+    if (!ranges.x || !ranges.y) {
+      return [-1, -1];
+    }
+
+    return [fitValue(ranges.x, 'x') ?? -1, fitValue(ranges.y, 'y') ?? -1];
+  }
+
+  useEffect(() => {
+    if (open) {
+      const raf = requestAnimationFrame(() => {
+        if (focusableItems.length > 0) {
+          focusItem();
+        }
+      });
+
+      return () => cancelAnimationFrame(raf);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, focusableItems]);
+
+  useEffect(() => {
+    if (open) {
+      handleOpen();
+    } else {
+      // reset position when menu is closed in order for the --shown
+      // modifier to be applied correctly
+      setPosition([-1, -1]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  const classNames = cx(
+    className,
+    `${prefix}--menu`,
+    `${prefix}--menu--${menuSize}`,
+    {
+      // --open sets visibility and --shown sets opacity.
+      // visibility is needed for focusing elements.
+      // opacity is only set once the position has been set correctly
+      // to avoid a flicker effect when opening.
+      [`${prefix}--menu--box-shadow-top`]:
+        menuAlignment && menuAlignment.slice(0, 3) === 'top',
+      [`${prefix}--menu--open`]: open,
+      [`${prefix}--menu--shown`]:
+        (open && !legacyAutoalign) || (position[0] >= 0 && position[1] >= 0),
+      [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
+      [`${prefix}--menu--with-selectable-items`]:
+        childContext.state.hasSelectableItems,
+      [`${prefix}--autoalign`]: !legacyAutoalign,
+    }
+  );
+
+  const rendered = (
+    <MenuContext.Provider value={childContext}>
+      <ul
+        {...rest}
+        className={classNames}
+        role="menu"
+        ref={ref}
+        aria-label={label}
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+        onBlur={handleBlur}>
+        {children}
+      </ul>
+    </MenuContext.Provider>
+  );
+
+  if (!target) {
+    return rendered;
+  }
+
+  return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
+});
 
 Menu.propTypes = {
   /**

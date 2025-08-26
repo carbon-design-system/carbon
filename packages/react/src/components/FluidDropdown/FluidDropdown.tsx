@@ -122,7 +122,6 @@ export interface FluidDropdownProps<ItemType> extends DropdownProps<ItemType> {
   warnText?: React.ReactNode;
 }
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidDropdown = React.forwardRef(function FluidDropdown<ItemType>(
   { className, isCondensed, ...other }: FluidDropdownProps<ItemType>,
   ref: ForwardedRef<HTMLButtonElement>

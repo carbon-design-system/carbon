@@ -408,7 +408,6 @@ export interface DatePickerProps {
   warnText?: ReactNode;
 }
 
-// eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const DatePicker = React.forwardRef(function DatePicker(
   {
     allowInput,

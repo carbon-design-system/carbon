@@ -150,7 +150,6 @@ export const Popover: PopoverComponent & {
   displayName?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   propTypes?: WeakValidationMap<PopoverProps<any>>;
-  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 } = React.forwardRef(function PopoverRenderFunction<
   E extends ElementType = 'span',
 >(

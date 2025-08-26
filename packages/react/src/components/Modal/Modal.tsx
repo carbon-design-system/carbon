@@ -242,7 +242,6 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   slug?: ReactNode;
 }
 
-// eslint-disable-next-line  prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 const Modal = React.forwardRef(function Modal(
   {
     'aria-label': ariaLabelProp,

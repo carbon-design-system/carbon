@@ -46,7 +46,6 @@ export interface FluidDatePickerProps {
 const FluidDatePicker: React.FC<FluidDatePickerProps> = React.forwardRef<
   HTMLInputElement,
   FluidDatePickerProps
-  // eslint-disable-next-line prefer-arrow-callback -- https://github.com/carbon-design-system/carbon/issues/20071
 >(function FluidDatePicker(
   {
     className,
