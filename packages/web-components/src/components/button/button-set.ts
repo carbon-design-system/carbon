@@ -65,7 +65,7 @@ class CDSButtonSet extends CDSButtonSetBase {
    *
    * @private
    */
-  private _markNextOfFocus = () => {
+  private _hideSiblingMargin = () => {
     const slot = this.shadowRoot!.querySelector('slot')!;
     const items = slot
       .assignedElements()
@@ -84,8 +84,8 @@ class CDSButtonSet extends CDSButtonSetBase {
 
   connectedCallback() {
     super.connectedCallback?.();
-    this.addEventListener('focusin', this._markNextOfFocus);
-    this.addEventListener('focusout', this._markNextOfFocus);
+    this.addEventListener('focusin', this._hideSiblingMargin);
+    this.addEventListener('focusout', this._hideSiblingMargin);
   }
 
   render() {
