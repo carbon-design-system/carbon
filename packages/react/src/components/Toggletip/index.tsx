@@ -6,12 +6,13 @@
  */
 
 import cx from 'classnames';
-import PropTypes, { WeakValidationMap } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   type ElementType,
   useContext,
   useRef,
   useState,
+  useEffect,
   type ReactNode,
   type ComponentProps,
   type KeyboardEventHandler,
@@ -19,6 +20,7 @@ import React, {
 } from 'react';
 import {
   Popover,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   type PopoverAlignment,
   PopoverBaseProps,
   PopoverContent,
@@ -47,6 +49,7 @@ export function ToggletipLabel<E extends ElementType>({
 }: ToggletipLabelProps<E>) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-label`, customClassName);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const BaseComponentAsAny = BaseComponent as any;
   return (
     <BaseComponentAsAny className={className} {...rest}>
@@ -173,14 +176,36 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   });
 
-  useWindowEvent('click', ({ target }) => {
-    if (open && target instanceof Node && !ref.current?.contains(target)) {
-      actions.close();
-    }
-  });
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const targetDocument = ref.current.ownerDocument || document;
+    const eventType: 'pointerdown' | 'mousedown' =
+      'PointerEvent' in window ? 'pointerdown' : 'mousedown';
+
+    const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
+      const node = event.target as Node | null;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      if (open && node && !ref.current!.contains(node)) {
+        setOpen(false);
+      }
+    };
+
+    const options = { capture: true } as const;
+
+    targetDocument.addEventListener(eventType, handleOutsideClick, options);
+    return () => {
+      targetDocument.removeEventListener(
+        eventType,
+        handleOutsideClick,
+        options
+      );
+    };
+  }, [open]);
 
   return (
     <ToggletipContext.Provider value={value}>
+      {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071 */}
       <Popover<any>
         align={align}
         as={as}
@@ -203,6 +228,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 // Get all the properties from Popover except for "open".
 // The Typescript types for PropTypes are really messed up so we need lots of
 // casting.  It will be great when we can finally get rid of PropTypes altogether.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
   {}) as unknown as PopoverBaseProps;
 
@@ -245,6 +271,7 @@ export const ToggletipButton = React.forwardRef(function ToggletipButton<
   const toggletip = useToggletip();
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-button`, customClassName);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const ComponentToggle: any = BaseComponent ?? 'button';
 
   if (ComponentToggle !== 'button') {

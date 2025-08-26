@@ -68,7 +68,7 @@ export interface SideNavMenuProps {
 }
 
 const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
-  function SideNavMenu(
+  (
     {
       className: customClassName,
       children,
@@ -81,7 +81,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       title,
     },
     ref: ForwardedRef<HTMLElement>
-  ) {
+  ) => {
     const { isRail } = useContext(SideNavContext);
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);

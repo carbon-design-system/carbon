@@ -11,6 +11,7 @@ import { LayoutDirectionContext } from './LayoutDirectionContext';
 
 type Direction = 'ltr' | 'rtl';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 interface LayoutDirectionContextValue {
   direction: Direction;
 }

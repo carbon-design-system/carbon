@@ -14,22 +14,23 @@ const template = (props?) =>
     'cds-structured-list': props,
   });
 
-xdescribe('cds-structured-list', function () {
-  describe('Selection', function () {
+xdescribe('cds-structured-list', () => {
+  describe('Selection', () => {
     let list;
     let rows;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template({ hasSelection: true }), document.body);
       await Promise.resolve();
       list = document.body.querySelector('cds-structured-list');
       rows = document.body.querySelectorAll('cds-structured-list-row');
     });
 
-    it('should reflect the selection settings', async function () {
+    it('should reflect the selection settings', async () => {
       list.setAttribute('selection-name', 'selection-name-foo');
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         list
           .shadowRoot!.querySelector('section')!
           .classList.contains('cds--structured-list--selection')
@@ -42,8 +43,10 @@ xdescribe('cds-structured-list', function () {
       ).toBe(true);
     });
 
-    it('should reflect the selection', function () {
+    it('should reflect the selection', () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const input1 = rows[1]!.shadowRoot!.querySelector('input');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       input1!.click();
       expect(
         Array.prototype.map.call(
@@ -53,7 +56,7 @@ xdescribe('cds-structured-list', function () {
       ).toEqual([false, true, false]);
     });
 
-    it('Should navigate by up/down keys', function () {
+    it('Should navigate by up/down keys', () => {
       (rows[0] as HTMLElement).focus();
       const event = new CustomEvent('keydown', {
         bubbles: true,
@@ -82,7 +85,8 @@ xdescribe('cds-structured-list', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });

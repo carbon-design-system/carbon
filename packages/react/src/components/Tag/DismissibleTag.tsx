@@ -109,6 +109,7 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
   DismissibleTagBaseProps
 >;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const DismissibleTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -132,6 +133,7 @@ const DismissibleTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagLabelRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
     const tagId = id || `tag-${useId()}`;
     const tagClasses = classNames(`${prefix}--tag--filter`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
