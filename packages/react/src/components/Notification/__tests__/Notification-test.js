@@ -397,8 +397,9 @@ describe('Callout', () => {
     });
     await userEvent.click(closeButton);
     expect(onActionButtonClick).toHaveBeenCalledTimes(1);
-    expect(onActionButtonClick).toHaveBeenCalledWith(expect.any(Object));
-    expect(onActionButtonClick.mock.calls[0][0].type).toBe('click');
+    expect(onActionButtonClick.mock.calls).toEqual([
+      [expect.objectContaining({ type: 'click' })],
+    ]);
   });
 
   it('interpolates matching className based on kind prop', () => {
