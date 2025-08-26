@@ -59,10 +59,40 @@ class CDSButtonSet extends CDSButtonSetBase {
     this.dispatchEvent(update);
   }
 
+  /**
+   * When a button within a button-set is focused, hide the margin on both sides
+   * of the focused button, by applying the appropriate styles to its sibling
+   *
+   * @private
+   */
+  private _markNextOfFocus = () => {
+    const slot = this.shadowRoot!.querySelector('slot')!;
+    const items = slot
+      .assignedElements()
+      .filter(
+        (el) => el.tagName.toLowerCase() === `${prefix}-button`
+      ) as HTMLElement[];
+
+    const focusedIndex = items.findIndex((el) => el.matches(':focus-within'));
+
+    items.forEach((el, idx) => {
+      const shouldHide =
+        focusedIndex >= 0 && (idx === focusedIndex || idx === focusedIndex + 1);
+      el.toggleAttribute('hide-margin', shouldHide);
+    });
+  };
+
+  connectedCallback() {
+    super.connectedCallback?.();
+    this.addEventListener('focusin', this._markNextOfFocus);
+    this.addEventListener('focusout', this._markNextOfFocus);
+  }
+
   render() {
     const { stacked } = this;
     const defaultClasses = {
       [`${prefix}--btn-set--stacked`]: stacked,
+      [`${prefix}--btn-set`]: true,
     };
     const classes = classMap(defaultClasses);
 
