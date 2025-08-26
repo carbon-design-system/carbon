@@ -11,7 +11,7 @@ import '../stack/index';
 import { TOGGLE_SIZE } from './toggle';
 
 const sizes = {
-  'Regular size': null,
+  'Medium size (default)': null,
   [`Small size (${TOGGLE_SIZE.SMALL})`]: TOGGLE_SIZE.SMALL,
 };
 
@@ -20,6 +20,14 @@ const defaultArgs = {
   labelB: 'Off',
   checked: true,
   labelText: 'Label',
+};
+
+const smallToggleArgs = {
+  labelA: 'On',
+  labelB: 'Off',
+  checked: true,
+  labelText: 'Label',
+  size: 'sm',
 };
 
 const controls = {
@@ -90,13 +98,27 @@ export const Skeleton = {
 };
 
 export const SmallToggle = {
-  render: () => html`
+  argTypes: controls,
+  args: smallToggleArgs,
+  render: ({
+    disabled,
+    hideLabel,
+    labelA,
+    labelB,
+    labelText,
+    readOnly,
+    size,
+    checked,
+  }) => html`
     <cds-toggle
-      checked
-      label-a="On"
-      label-b="Off"
-      label-text="Toggle element label"
-      size="sm"></cds-toggle>
+      ?checked="${checked}"
+      ?read-only=${readOnly}
+      ?disabled="${disabled}"
+      ?hideLabel="${hideLabel}"
+      label-text="${labelText}"
+      label-b="${labelB}"
+      label-a="${labelA}"
+      size="${size}"></cds-toggle>
   `,
 };
 
