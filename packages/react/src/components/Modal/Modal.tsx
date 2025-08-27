@@ -424,6 +424,7 @@ const Modal = React.forwardRef(function Modal(
       (lastContent as HTMLElement).offsetTop -
       (lastContent as HTMLElement).clientHeight;
 
+    // eslint-disable-next-line   prefer-const -- https://github.com/carbon-design-system/carbon/issues/20071
     for (let elem of modalContent.children) {
       if (elem.contains(currentActiveNode)) {
         const spaceBelow =
@@ -513,6 +514,7 @@ const Modal = React.forwardRef(function Modal(
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [open]);
 
   useEffect(() => {

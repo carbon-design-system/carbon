@@ -18,7 +18,8 @@ import CDSTableExpandedRow from '../../src/components/data-table/table-expanded-
 import CDSTableToolbarSearch from '../../src/components/data-table/table-toolbar-search';
 import { Playground } from '../../src/components/data-table/stories/data-table-basic.stories';
 
-const template = ({ ...rest } = {}) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+const template = ({ ...rest }: any = {}) =>
   Playground({
     'cds-table': { ...rest },
   });
@@ -87,20 +88,21 @@ const toolbarSearchTemplate = (props?) => {
   `;
 };
 
-describe('data-table', function () {
+describe('data-table', () => {
   const events = new EventManager();
 
-  describe('cds-table-batch-action', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-table-batch-action', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(batchActionTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-batch-actions' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           batchActionTemplate({
             active: true,
@@ -110,11 +112,12 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-batch-actions' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render non-plural selected rows count', async function () {
+      it('should render non-plural selected rows count', async () => {
         render(
           batchActionTemplate({
             active: true,
@@ -124,23 +127,27 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-batch-actions' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
-    describe('Handling cancel button', function () {
+    describe('Handling cancel button', () => {
       let elem: Element;
 
-      beforeEach(async function () {
+      beforeEach(async () => {
         render(batchActionTemplate({ active: true }), document.body);
         await Promise.resolve();
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         elem = document.body.querySelector('cds-table-batch-actions')!;
       });
 
-      it('should fire a custom event', async function () {
+      it('should fire a custom event', async () => {
         const spyCancel = jasmine.createSpy('cancel');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(elem!, 'cds-table-batch-actions-cancel-clicked', spyCancel);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const cancelButton = elem.shadowRoot!.querySelector(
           '.cds--batch-summary__cancel'
         );
@@ -151,20 +158,21 @@ describe('data-table', function () {
     });
   });
 
-  describe('cds-table-body', function () {
-    xit('should support setting zebra stripe to rows', async function () {
+  describe('cds-table-body', () => {
+    xit('should support setting zebra stripe to rows', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const result = Array.prototype.every.call(
         document.body.querySelectorAll('cds-table-row'),
-        (item, i) =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        (item: any, i) =>
           (item as CDSTableRow).even === ((i + 1) % 2 === 0) &&
           (item as CDSTableRow).odd === ((i + 1) % 2 !== 0)
       );
       expect(result).toBe(true);
     });
 
-    it('should support unsetting zebra stripe to rows', async function () {
+    it('should support unsetting zebra stripe to rows', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const result = Array.prototype.every.call(
@@ -177,17 +185,18 @@ describe('data-table', function () {
     });
   });
 
-  describe('cds-table-header-cell', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-table-header-cell', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(headerCellTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-header-cell' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           headerCellTemplate({
             sortActive: true,
@@ -198,13 +207,14 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-header-cell' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
-    describe('Changing sort direction', function () {
-      it('should support ascending -> descending cycle', async function () {
+    describe('Changing sort direction', () => {
+      it('should support ascending -> descending cycle', async () => {
         render(
           headerCellTemplate({
             sortActive: true,
@@ -217,6 +227,7 @@ describe('data-table', function () {
         const elem = document.body.querySelector(
           'cds-table-header-cell'
         ) as CDSTableHeaderCell;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const button = elem.shadowRoot!.querySelector(
           '.cds--table-sort'
         ) as HTMLButtonElement;
@@ -231,7 +242,7 @@ describe('data-table', function () {
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.ASCENDING);
       });
 
-      it('should support descending -> ascending cycle', async function () {
+      it('should support descending -> ascending cycle', async () => {
         render(
           headerCellTemplate({
             sortActive: true,
@@ -244,6 +255,7 @@ describe('data-table', function () {
         const elem = document.body.querySelector(
           'cds-table-header-cell'
         ) as CDSTableHeaderCell;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const button = elem.shadowRoot!.querySelector(
           '.cds--table-sort'
         ) as HTMLButtonElement;
@@ -258,7 +270,7 @@ describe('data-table', function () {
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.DESCENDING);
       });
 
-      it('should support none -> ascending -> descending cycle', async function () {
+      it('should support none -> ascending -> descending cycle', async () => {
         render(
           headerCellTemplate({
             sortActive: true,
@@ -271,6 +283,7 @@ describe('data-table', function () {
         const elem = document.body.querySelector(
           'cds-table-header-cell'
         ) as CDSTableHeaderCell;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const button = elem.shadowRoot!.querySelector(
           '.cds--table-sort'
         ) as HTMLButtonElement;
@@ -285,7 +298,7 @@ describe('data-table', function () {
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.NONE);
       });
 
-      it('should support none -> descending -> ascending cycle', async function () {
+      it('should support none -> descending -> ascending cycle', async () => {
         render(
           headerCellTemplate({
             sortActive: true,
@@ -298,6 +311,7 @@ describe('data-table', function () {
         const elem = document.body.querySelector(
           'cds-table-header-cell'
         ) as CDSTableHeaderCell;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const button = elem.shadowRoot!.querySelector(
           '.cds--table-sort'
         ) as HTMLButtonElement;
@@ -312,7 +326,7 @@ describe('data-table', function () {
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.NONE);
       });
 
-      it('should support preventing sort order from being changed upon user gesture', async function () {
+      it('should support preventing sort order from being changed upon user gesture', async () => {
         render(
           headerCellTemplate({
             sortActive: true,
@@ -325,9 +339,11 @@ describe('data-table', function () {
         const elem = document.body.querySelector(
           'cds-table-header-cell'
         ) as CDSTableHeaderCell;
-        events.on(elem, 'cds-table-header-cell-sort', (event) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        events.on(elem!, 'cds-table-header-cell-sort', (event) => {
           event.preventDefault();
         });
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const button = elem.shadowRoot!.querySelector(
           '.cds--table-sort'
         ) as HTMLButtonElement;
@@ -338,19 +354,20 @@ describe('data-table', function () {
     });
   });
 
-  describe('cds-table-row', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-table-row', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(rowTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-row' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           rowTemplate({
             disabled: true,
@@ -363,6 +380,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-row' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -370,8 +388,8 @@ describe('data-table', function () {
       });
     });
 
-    describe('Handling selection', function () {
-      xit('should fire cds-table-row-change-selection event upon selecting', async function () {
+    describe('Handling selection', () => {
+      xit('should fire cds-table-row-change-selection event upon selecting', async () => {
         const spyBeforeChange = jasmine.createSpy('before toggle');
         render(
           rowTemplate({
@@ -381,7 +399,9 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         const row = document.body.querySelector('cds-table-row');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(row!, 'cds-table-row-change-selection', spyBeforeChange);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         row!.shadowRoot!.querySelector('input')!.click();
         expect(spyBeforeChange).toHaveBeenCalled();
         expect(spyBeforeChange.calls.argsFor(0)[0].detail.selected).toBe(true);
@@ -389,7 +409,7 @@ describe('data-table', function () {
         expect((row as CDSTableRow).selected).toBe(true);
       });
 
-      xit('should fire cds-table-row-change-selection event upon unselecting', async function () {
+      xit('should fire cds-table-row-change-selection event upon unselecting', async () => {
         const spyBeforeChange = jasmine.createSpy('before toggle');
         render(
           rowTemplate({
@@ -400,7 +420,9 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         const row = document.body.querySelector('cds-table-row');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(row!, 'cds-table-row-change-selection', spyBeforeChange);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         row!.shadowRoot!.querySelector('input')!.click();
         expect(spyBeforeChange).toHaveBeenCalled();
         expect(spyBeforeChange.calls.argsFor(0)[0].detail.selected).toBe(false);
@@ -408,7 +430,7 @@ describe('data-table', function () {
         expect((row as CDSTableRow).selected).toBe(false);
       });
 
-      xit('should support preventing table row selection from being toggled upon user gesture', async function () {
+      xit('should support preventing table row selection from being toggled upon user gesture', async () => {
         render(
           rowTemplate({
             selectionName: 'selection-name-foo',
@@ -417,9 +439,11 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         const row = document.body.querySelector('cds-table-row');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(row!, 'cds-table-row-change-selection', (event) => {
           event.preventDefault();
         });
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         row!.shadowRoot!.querySelector('input')!.click();
         await Promise.resolve();
         expect((row as CDSTableRow).selected).toBe(false);
@@ -427,17 +451,18 @@ describe('data-table', function () {
     });
   });
 
-  describe('cds-table-row', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-table-row', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-row' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           expandRowTemplate({
             disabled: true,
@@ -451,13 +476,14 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-row' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
-    describe('Toggling', function () {
-      xit('should expand and collapse', async function () {
+    describe('Toggling', () => {
+      xit('should expand and collapse', async () => {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
 
@@ -466,12 +492,14 @@ describe('data-table', function () {
           'cds-table-expanded-row'
         );
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
         expect((expandRow as CDSTableRow).expanded).toBe(true);
         await Promise.resolve();
         expect((expandedRow as CDSTableExpandedRow).expanded).toBe(true);
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
         expect((expandRow as CDSTableRow).expanded).toBe(false);
@@ -479,18 +507,21 @@ describe('data-table', function () {
         expect((expandedRow as CDSTableExpandedRow).expanded).toBe(false);
       });
 
-      xit('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon expanding', async function () {
+      xit('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon expanding', async () => {
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
         const expandRow = document.body.querySelector('cds-table-row');
         events.on(
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           expandRow!,
           'cds-table-row-expando-beingtoggled',
           spyBeforeToggle
         );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(expandRow!, 'cds-table-row-expando-toggled', spyAfterToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
         expect(spyBeforeToggle).toHaveBeenCalled();
@@ -499,18 +530,21 @@ describe('data-table', function () {
         expect(spyAfterToggle.calls.argsFor(0)[0].detail.expanded).toBe(true);
       });
 
-      xit('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon collapsing', async function () {
+      xit('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon collapsing', async () => {
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
         render(expandRowTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const expandRow = document.body.querySelector('cds-table-row');
         events.on(
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           expandRow!,
           'cds-table-row-expando-beingtoggled',
           spyBeforeToggle
         );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(expandRow!, 'cds-table-row-expando-toggled', spyAfterToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
         expect(spyBeforeToggle).toHaveBeenCalled();
@@ -519,23 +553,26 @@ describe('data-table', function () {
         expect(spyAfterToggle.calls.argsFor(0)[0].detail.expanded).toBe(false);
       });
 
-      xit('should support preventing table row from being toggled upon user gesture', async function () {
+      xit('should support preventing table row from being toggled upon user gesture', async () => {
         const spyAfterToggle = jasmine.createSpy('after toggle');
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
         const expandRow = document.body.querySelector('cds-table-row');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(expandRow!, 'cds-table-row-expando-beingtoggled', (event) => {
           event.preventDefault();
         });
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         events.on(expandRow!, 'cds-table-row-expando-toggled', spyAfterToggle);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
         expect(spyAfterToggle).not.toHaveBeenCalled();
       });
     });
 
-    describe('Hovering over', function () {
-      it('should toggle the highlight of the expanded content', async function () {
+    describe('Hovering over', () => {
+      it('should toggle the highlight of the expanded content', async () => {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
 
@@ -544,11 +581,13 @@ describe('data-table', function () {
           'cds-table-expanded-row'
         );
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expandRow!.dispatchEvent(
           new CustomEvent('mouseover', { bubbles: true })
         );
         expect((expandedRow as CDSTableExpandedRow).highlighted).toBe(true);
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expandRow!.dispatchEvent(
           new CustomEvent('mouseout', { bubbles: true })
         );
@@ -557,17 +596,18 @@ describe('data-table', function () {
     });
   });
 
-  describe('cds-table-toolbar-search', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('cds-table-toolbar-search', () => {
+    describe('Misc attributes', () => {
+      it('should render with minimum attributes', async () => {
         render(toolbarSearchTemplate(), document.body);
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-toolbar-search' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async () => {
         render(
           toolbarSearchTemplate({
             expanded: true,
@@ -577,35 +617,41 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           document.body.querySelector('cds-table-toolbar-search' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
-    describe('Expanding/collapsing', function () {
-      it('should expand and focus on the search box upon getting focus on the root', async function () {
+    describe('Expanding/collapsing', () => {
+      it('should expand and focus on the search box upon getting focus on the root', async () => {
         render(toolbarSearchTemplate(), document.body);
         await Promise.resolve();
         const toolbarSearch = document.body.querySelector(
           'cds-table-toolbar-search'
         );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const input = toolbarSearch!.shadowRoot!.querySelector('input');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         spyOn(input!, 'focus');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         toolbarSearch!.dispatchEvent(
           new CustomEvent('focusin', { bubbles: true })
         );
         expect((toolbarSearch as CDSTableToolbarSearch).expanded).toBe(true);
         await Promise.resolve();
         await Promise.resolve();
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         expect(input!.focus).toHaveBeenCalled();
       });
 
-      it('should collapse upon losing focus on the root', async function () {
+      it('should collapse upon losing focus on the root', async () => {
         render(toolbarSearchTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const toolbarSearch = document.body.querySelector(
           'cds-table-toolbar-search'
         );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         toolbarSearch!.dispatchEvent(
           new CustomEvent('focusout', { bubbles: true })
         );
@@ -614,7 +660,8 @@ describe('data-table', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
     events.reset();
   });
