@@ -73,7 +73,13 @@ describe('cds-toggletip', function () {
     const button = el.shadowRoot.querySelector('.cds--toggletip-button');
     button.focus();
 
-    outsideElement.focus();
+    const event = new FocusEvent('focusout', {
+      relatedTarget: outsideElement,
+      bubbles: true,
+      composed: true,
+    });
+    el.dispatchEvent(event);
+
     await el.updateComplete;
 
     expect(el.open).to.be.false;
