@@ -84,6 +84,7 @@ export default tseslint.config([
       '**/lib/',
       '**/dist/',
       '**/umd/',
+      '**/types/',
 
       'node_modules',
       'packages/*/examples/*',
