@@ -8,9 +8,9 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
-import Search16 from '@carbon/icons/lib/search/16.js';
 import { prefix } from '../../globals/settings';
+import Search16 from '@carbon/icons/es/search/16.js';
+import Close16 from '@carbon/icons/es/close/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
@@ -19,6 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './search.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Search box.
@@ -70,6 +71,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       this.value = '';
 
       // set focus on back to input once search is cleared
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const input = this.shadowRoot!.querySelector('input');
       (input as HTMLElement).focus();
     }
@@ -78,7 +80,9 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   /**
    * Expand only when the magnifier icon is clicked
    */
+
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleExpand(e: Event) {
     // Check if the click came from the magnifier area
@@ -104,6 +108,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * - Esc: if input has text: clear it | if empty: collapse and move focus back to magnifier
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _handleKeys(event: KeyboardEvent) {
     const key = event.key;
@@ -154,6 +159,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * Will not close if there is a value typed within.
    */
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClose() {
     if (this.expandable && this.expanded && !this.value) {
@@ -299,11 +305,11 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         <slot name="icon" @slotchange=${handleSlotChange}>
           ${hasCustomIcon
             ? html``
-            : html`${Search16({
+            : iconLoader(Search16, {
                 part: 'search-icon',
                 class: `${prefix}--search-magnifier-icon`,
                 role: 'img',
-              })}`}
+              })}
         </slot>
       </div>
       <label for="input" part="label-text" class="${prefix}--label">
@@ -327,7 +333,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         @click="${handleClearInputButtonClick}"
         type="button"
         aria-label="${closeButtonLabelText}">
-        ${Close16({
+        ${iconLoader(Close16, {
           part: 'close-icon',
           'aria-label': closeButtonLabelText,
           role: 'img',

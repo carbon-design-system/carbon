@@ -15,11 +15,11 @@ const template = (props?) =>
     'cds-content-switcher': props,
   });
 
-describe('cds-content-switcher', function () {
-  describe('Selecting an item', function () {
+describe('cds-content-switcher', () => {
+  describe('Selecting an item', () => {
     const events = new EventManager();
 
-    xit('should add/remove "selected" attribute', async function () {
+    xit('should add/remove "selected" attribute', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(
@@ -34,7 +34,7 @@ describe('cds-content-switcher', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    it('should update value', async function () {
+    it('should update value', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(
@@ -47,7 +47,7 @@ describe('cds-content-switcher', function () {
       ).toBe('staging');
     });
 
-    xit('should provide a way to switch item with a value', async function () {
+    xit('should provide a way to switch item with a value', async () => {
       render(template(), document.body);
       await Promise.resolve();
       (document.body.querySelector('cds-content-switcher') as CDSTabs).value =
@@ -64,7 +64,7 @@ describe('cds-content-switcher', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    xit('should provide a way to cancel switching item', async function () {
+    xit('should provide a way to cancel switching item', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-content-switcher');
@@ -75,6 +75,7 @@ describe('cds-content-switcher', function () {
         'all';
       await Promise.resolve();
       events.on(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         elem!,
         'cds-content-switcher-beingselected',
         (event: CustomEvent) => {
@@ -91,13 +92,13 @@ describe('cds-content-switcher', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    afterEach(async function () {
+    afterEach(async () => {
       events.reset();
     });
   });
 
-  describe('Handling hover-over', function () {
-    xit('should add/remove "hide-divider" attribute', async function () {
+  describe('Handling hover-over', () => {
+    xit('should add/remove "hide-divider" attribute', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(
@@ -124,7 +125,8 @@ describe('cds-content-switcher', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });

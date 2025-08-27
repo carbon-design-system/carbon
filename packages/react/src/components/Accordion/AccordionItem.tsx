@@ -68,6 +68,7 @@ export interface AccordionItemProps {
    */
   renderExpando?: (
     props: PropsWithChildren<AccordionToggleProps>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ) => ReactElement<any>;
 
   /**
@@ -76,6 +77,7 @@ export interface AccordionItemProps {
    */
   renderToggle?: (
     props: PropsWithChildren<AccordionToggleProps>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ) => ReactElement<any>;
 
   /**

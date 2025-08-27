@@ -36,6 +36,7 @@ export interface SideNavProps {
   onToggle?: (
     event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
     value: boolean
+    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   ) => void | undefined;
   href?: string | undefined;
   // TO-DO: comment back in when footer is added for rails
@@ -46,6 +47,7 @@ export interface SideNavProps {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onSideNavBlur?: () => void | undefined;
   enterDelayMs?: number;
   inert?: boolean;

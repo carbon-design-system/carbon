@@ -18,8 +18,8 @@ export interface SortRowParams {
 }
 
 export type SortRowFn = (
-  cellA: any,
-  cellB: any,
+  cellA: any, // eslint-disable-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  cellB: any, // eslint-disable-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   options: SortRowParams
 ) => number;
 
@@ -28,6 +28,7 @@ interface Props {
   sortRow?: SortRowFn;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 interface State<ColTypes extends any[]> {
   rowIds: string[];
   cellsById: Record<string, DataTableCell<ColTypes[number]>>;
@@ -73,7 +74,7 @@ export const getNextSortDirection = (
  * @param state - Current table state.
  * @param key - Header key to sort by.
  */
-export const getNextSortState = <ColTypes extends any[]>(
+export const getNextSortState = <ColTypes extends any[]>( // eslint-disable-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   props: Props,
   state: State<ColTypes>,
   { key }: { key: string }
@@ -97,7 +98,7 @@ export const getNextSortState = <ColTypes extends any[]>(
  * @param key - Header key to sort by.
  * @param sortDirection - Sort direction to apply.
  */
-export const getSortedState = <ColTypes extends any[]>(
+export const getSortedState = <ColTypes extends any[]>( // eslint-disable-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   { locale, sortRow }: Props,
   { rowIds, cellsById, initialRowOrder }: State<ColTypes>,
   key: string,

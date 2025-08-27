@@ -8,10 +8,11 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Close20 from '@carbon/icons/lib/close/20.js';
-import Menu20 from '@carbon/icons/lib/menu/20.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
+import Menu16 from '@carbon/icons/es/menu/16.js';
+import Close16 from '@carbon/icons/es/close/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import { SIDE_NAV_COLLAPSE_MODE } from './side-nav';
 import styles from './header.scss?lit';
@@ -106,7 +107,7 @@ class CDSHeaderMenuButton extends FocusMixin(LitElement) {
         ?disabled=${disabled}
         aria-label="${ifDefined(buttonLabel)}"
         @click=${handleClick}>
-        ${(active ? Close20 : Menu20)({ slot: 'toggle-icon' })}
+        ${iconLoader(active ? Close16 : Menu16, { part: 'toggle-icon' })}
       </button>
     `;
   }

@@ -34,6 +34,7 @@ export interface SelectItemProps extends HTMLAttributes<HTMLOptionElement> {
   /**
    * Specify the value of the <SelectItem>
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   value: any;
 }
 

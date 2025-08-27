@@ -18,8 +18,10 @@ import type { SyntheticEvent } from 'react';
  */
 export const composeEventHandlers =
   <E extends SyntheticEvent = SyntheticEvent>(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     handlers: (((event: E, ...args: any[]) => void) | undefined)[]
   ) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   (event: E, ...args: any[]) => {
     for (const handler of handlers) {
       if (event.defaultPrevented) {

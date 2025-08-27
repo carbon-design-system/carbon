@@ -23,6 +23,7 @@ export interface FluidTimePickerSelectProps {
   /**
    * Optionally provide the default value of the `<select>`
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   defaultValue?: any;
 
   /**
@@ -48,10 +49,11 @@ export interface FluidTimePickerSelectProps {
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidTimePickerSelect = React.forwardRef<
   HTMLSelectElement,
   FluidTimePickerSelectProps
->(function FluidTimePickerSelect({ children, className, ...other }, ref) {
+>(({ children, className, ...other }, ref) => {
   return (
     <FluidSelect className={className} ref={ref} {...other}>
       {children}
