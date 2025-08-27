@@ -8,10 +8,13 @@
 import { warning } from '../internal/warning';
 
 type PropValidator = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   props: Record<string, any>,
   propName: string,
   componentName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ...rest: any[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 ) => any;
 
 const warningCache = new Map<string, Set<string>>();

@@ -32,7 +32,8 @@ const FormMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
     abstract _handleFormdata(event: Event): void;
 
     connectedCallback() {
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       super.connectedCallback();
       const form = this.closest('form');
       if (form) {
@@ -44,7 +45,8 @@ const FormMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
       if (this._hFormdata) {
         this._hFormdata = this._hFormdata.release();
       }
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       super.disconnectedCallback();
     }
   }

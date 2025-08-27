@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { NumberInput, NumberInputProps } from '../NumberInput';
+import { NumberInput } from '../NumberInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 import { type NumberFormatOptions } from '@carbon/utilities';
@@ -172,10 +172,11 @@ export interface FluidNumberInputProps {
   readOnly?: boolean;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidNumberInput: React.FC<FluidNumberInputProps> = React.forwardRef<
   HTMLInputElement,
   FluidNumberInputProps
->(function FluidNumberInput({ className, ...other }, ref) {
+>(({ className, ...other }, ref) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--number-input--fluid`, className);
 

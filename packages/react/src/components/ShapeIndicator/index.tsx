@@ -95,35 +95,39 @@ export interface ShapeIndicatorProps {
   textSize?: 12 | 14;
 }
 
-export const ShapeIndicator = React.forwardRef(function ShapeIndicatorContent(
-  {
-    className: customClassName,
-    kind,
-    label,
-    textSize = 12,
-    ...rest
-  }: ShapeIndicatorProps,
-  ref: React.Ref<HTMLDivElement>
-) {
-  const prefix = usePrefix();
-  const classNames = cx(`${prefix}--shape-indicator`, customClassName, {
-    [`${prefix}--shape-indicator--14`]: textSize == 14,
-  });
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+export const ShapeIndicator = React.forwardRef(
+  (
+    {
+      className: customClassName,
+      kind,
+      label,
+      textSize = 12,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+      ...rest
+    }: ShapeIndicatorProps,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
+    const prefix = usePrefix();
+    const classNames = cx(`${prefix}--shape-indicator`, customClassName, {
+      [`${prefix}--shape-indicator--14`]: textSize == 14,
+    });
 
-  const ShapeForKind = shapeTypes[kind];
-  if (!ShapeForKind) {
-    return null;
+    const ShapeForKind = shapeTypes[kind];
+    if (!ShapeForKind) {
+      return null;
+    }
+    return (
+      <div className={classNames} ref={ref}>
+        <ShapeForKind
+          size={16}
+          className={`${prefix}--shape-indicator--${kind}`}
+        />
+        {label}
+      </div>
+    );
   }
-  return (
-    <div className={classNames} ref={ref}>
-      <ShapeForKind
-        size={16}
-        className={`${prefix}--shape-indicator--${kind}`}
-      />
-      {label}
-    </div>
-  );
-});
+);
 
 ShapeIndicator.propTypes = {
   /**

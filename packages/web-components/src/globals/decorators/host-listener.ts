@@ -78,7 +78,7 @@ const HostListener =
   (type: string, options?: boolean | AddEventListenerOptions) =>
   (targetOrDescriptor, name: string) =>
     typeof name !== 'undefined'
-      ? setHostListener(type, options!, targetOrDescriptor.constructor, name)
-      : HostListenerStandard(type, options!, targetOrDescriptor);
+      ? setHostListener(type, options!, targetOrDescriptor.constructor, name) // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      : HostListenerStandard(type, options!, targetOrDescriptor); // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
 
 export default HostListener;
