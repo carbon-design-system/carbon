@@ -1,12 +1,9 @@
 # makeDraggable
 
-The `makeDraggable` is a framework-agnostic javaScript utility that can be used
-to drag any HTML element by using either mouse or keyboard interactions. It
-allows developers to specify an HTML element as a required attribute to be
-moved, optional HTML element to initiate the drag(e.g., a header), optional HTML
-element to focus on drag for keyboard interaction (e.g., an icon) and an
-optional pixel value that defines the distance to move when dragging with arrow
-keys (default: 8px) and shift arrow keys (default: 32px).
+`makeDraggable` is a framework-agnostic utility that enables dragging an HTML
+element via mouse or keyboard. Developers can specify the target element, a drag
+handle, a focusable element for keyboard interaction, and pixel values for
+movement with arrow or Shift + arrow keys.
 
 ## Getting started
 

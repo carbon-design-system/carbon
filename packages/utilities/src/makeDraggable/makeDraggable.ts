@@ -5,29 +5,46 @@
  * LICENSE file in the root directory of this source tree.
  */
 interface DraggableProps {
-  //The HTML element to move.
+  /**
+   * HTML element to move.
+   */
   el: HTMLElement;
-  //Optional HTML element to initiate the drag (e.g., header).
+  /**
+   * HTML element to initiate the drag (e.g., header).
+   */
   dragHandle?: HTMLElement;
-  //Optional HTML element to focus on drag for keyboard interaction (e.g., Drag Icon).
+  /**
+   * HTML element to focus on drag for keyboard interaction (e.g., Drag Icon).
+   */
   focusableDragHandle?: HTMLElement;
-  //Optional pixel value that defines the distance to move when dragging with arrow keys. (default:8px)
+  /**
+   * Pixel value that defines the distance to move when dragging with arrow
+   * keys.
+   */
   dragStep?: number;
-  //Optional pixel value that defines the distance to move when dragging with shift+arrow keys. (default:32px)
+  /**
+   * Pixel value that defines the distance to move when dragging with
+   * shift+arrow keys.
+   */
   shiftDragStep?: number;
 }
+
+interface EventDetail {
+  dragstart: { keyboard?: boolean; mouse?: boolean };
+  dragend: { keyboard?: boolean; mouse?: boolean };
+}
+
 /**
  * Makes a given element draggable using a handle element.
  *@param draggable - object which accepts el and optional attributes handle,focusableInHandle,dragStep and shiftDragStep
  */
-
-export function makeDraggable({
+export const makeDraggable = ({
   el,
   dragHandle,
   focusableDragHandle,
   dragStep,
   shiftDragStep,
-}: DraggableProps) {
+}: DraggableProps) => {
   const computedStyle = window.getComputedStyle(el);
   if (dragHandle) {
     dragHandle.style.cursor = 'move';
@@ -49,11 +66,18 @@ export function makeDraggable({
   let offsetX = 0;
   let offsetY = 0;
 
-  function dispatch(type: string, detail: any = {}) {
-    el.dispatchEvent(new CustomEvent(type, { detail, bubbles: true }));
-  }
+  const dispatch = <T extends keyof EventDetail>(
+    type: T,
+    detail: EventDetail[T]
+  ) => {
+    const eventInit: CustomEventInit<EventDetail[T]> = {
+      detail,
+      bubbles: true,
+    };
+    el.dispatchEvent(new CustomEvent(type, eventInit));
+  };
 
-  function onKeyDown(e: KeyboardEvent) {
+  const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       isDragging = !isDragging;
     }
@@ -85,12 +109,17 @@ export function makeDraggable({
         el.style.top = `${el.offsetTop + distance}px`;
         break;
     }
-  }
+  };
 
-  function onMouseDown(e: MouseEvent) {
+  const onMouseDown = (e: MouseEvent) => {
+    const target = e.target;
+    if (!(target instanceof Node)) {
+      return;
+    }
+
     const isTargetInHandle = dragHandle
-      ? dragHandle.contains(e.target as Node)
-      : el.contains(e.target as Node);
+      ? dragHandle.contains(target)
+      : el.contains(target);
 
     if (!isTargetInHandle) {
       return;
@@ -103,17 +132,17 @@ export function makeDraggable({
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp, { once: true });
-  }
+  };
 
-  function onMouseMove(e: MouseEvent) {
+  const onMouseMove = (e: MouseEvent) => {
     if (!isDragging) {
       return;
     }
     el.style.left = `${e.clientX - offsetX}px`;
     el.style.top = `${e.clientY - offsetY}px`;
-  }
+  };
 
-  function onMouseUp() {
+  const onMouseUp = () => {
     if (!isDragging) {
       return;
     }
@@ -121,11 +150,11 @@ export function makeDraggable({
     dispatch('dragend', { mouse: true });
 
     document.removeEventListener('mousemove', onMouseMove);
-  }
+  };
   if (dragHandle) {
     dragHandle.addEventListener('mousedown', onMouseDown);
   } else {
     el.addEventListener('mousedown', onMouseDown);
   }
   focusableDragHandle?.addEventListener('keydown', onKeyDown);
-}
+};
