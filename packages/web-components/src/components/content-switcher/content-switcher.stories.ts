@@ -6,15 +6,16 @@
  */
 
 import './index';
+import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
+import Workspace16 from '@carbon/icons/es/workspace/16.js';
+import ViewMode2_16 from '@carbon/icons/es/view--mode-2/16.js';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
 
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
-import TableOfContents16 from '@carbon/icons/lib/table-of-contents/16.js';
-import ViewMode2_16 from '@carbon/icons/lib/view--mode-2/16.js';
-import Workspace16 from '@carbon/icons/lib/workspace/16.js';
 import { html } from 'lit';
-import { prefix } from '../../globals/settings';
 
 const forwardEventDetail = (handler) => (event) => {
   handler?.(event.detail);
@@ -141,7 +142,7 @@ export const IconOnly = {
         value="all"
         ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${TableOfContents16()}
+        ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
@@ -149,7 +150,7 @@ export const IconOnly = {
         value="cloudFoundry"
         ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${Workspace16()}
+        ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
@@ -157,7 +158,7 @@ export const IconOnly = {
         value="staging"
         ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${ViewMode2_16()}
+        ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
     </cds-content-switcher>
@@ -191,7 +192,7 @@ export const IconOnlyWithLayer = {
           value="all"
           ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
-          ${TableOfContents16()}
+          ${iconLoader(TableOfContents16)}
           <span slot="tooltip-content">Table of Contents</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item
@@ -199,7 +200,7 @@ export const IconOnlyWithLayer = {
           value="cloudFoundry"
           ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
-          ${Workspace16()}
+          ${iconLoader(Workspace16)}
           <span slot="tooltip-content">Workspace Test</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item
@@ -207,7 +208,7 @@ export const IconOnlyWithLayer = {
           value="staging"
           ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
-          ${ViewMode2_16()}
+          ${iconLoader(ViewMode2_16)}
           <span slot="tooltip-content">View Mode</span>
         </cds-content-switcher-item>
       </cds-content-switcher>
@@ -295,7 +296,7 @@ export const lowContrastIconOnly = {
         value="all"
         ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${TableOfContents16()}
+        ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
@@ -303,7 +304,7 @@ export const lowContrastIconOnly = {
         value="cloudFoundry"
         ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${Workspace16()}
+        ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
@@ -311,7 +312,7 @@ export const lowContrastIconOnly = {
         value="staging"
         ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${ViewMode2_16()}
+        ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
     </cds-content-switcher>

@@ -6,11 +6,6 @@
  */
 
 import { html } from 'lit';
-// Below path will be there when an application installs `carbon-web-components` package.
-// In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
-// @ts-ignore
-import Add16 from '@carbon/icons/lib/add/16.js';
 import '../badge-indicator/index';
 import {
   BUTTON_KIND,
@@ -20,6 +15,9 @@ import {
   BUTTON_TOOLTIP_POSITION,
 } from './button';
 import './index';
+
+import Add16 from '@carbon/icons/es/add/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const kind = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -303,7 +301,9 @@ export const IconButton = {
       tooltip-text="Icon Description"
       .type="${type}"
       @click="${onClick}">
-      ${Add16({ slot: 'icon' })}
+      ${iconLoader(Add16, {
+        slot: 'icon',
+      })}
     </cds-button>`,
 };
 
@@ -325,7 +325,7 @@ export const iconButtonWithBadge = {
       kind="ghost"
       ?disabled="${disabled}"
       tooltip-text="Icon Description">
-      ${Add16({ slot: 'icon' })}
+      ${iconLoader(Add16, { slot: 'icon' })}
       ${badgeCount > 0
         ? html`<cds-badge-indicator count=${badgeCount}></cds-badge-indicator>`
         : html`<cds-badge-indicator></cds-badge-indicator>`}

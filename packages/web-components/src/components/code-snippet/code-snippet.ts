@@ -8,8 +8,8 @@
 import { styleMap } from 'lit/directives/style-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
 import { prefix } from '../../globals/settings';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE } from './defs';
 import styles from './code-snippet.scss?lit';
@@ -18,6 +18,7 @@ import '../copy-button/index';
 import '../copy/copy';
 import '../button/button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE };
 
@@ -466,9 +467,8 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
               <span class="${prefix}--snippet-btn--text">
                 ${expandCodeBtnText}
               </span>
-              ${ChevronDown16({
+              ${iconLoader(ChevronDown16, {
                 class: `${prefix}--icon-chevron--down ${prefix}--snippet__icon`,
-                name: 'cheveron--down',
                 role: 'img',
                 slot: 'icon',
               })}
