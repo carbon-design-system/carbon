@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -64,7 +64,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   protected _handleKeydown = async (event: KeyboardEvent) => {
     const { key } = event;
 
-    if (key === ' ') {
+    if (key === ' ' || key === 'Enter') {
       this._handleChange();
     }
   };
@@ -85,10 +85,16 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   }
 
   /**
+   * Specify another element's id to be used as the label for this toggle
+   */
+  @property({ type: String, attribute: 'aria-labelledby' })
+  ariaLabelledby?: string;
+
+  /**
    * The text for the checked state.
    */
   @property({ attribute: 'label-a' })
-  labelA = '';
+  labelA = 'On';
 
   /**
    * Hide label text.
@@ -112,7 +118,49 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    * The text for the unchecked state.
    */
   @property({ attribute: 'label-b' })
-  labelB = '';
+  labelB = 'Off';
+
+  /**
+   * Private references of external <label> elements that are
+   * `for="this-toggle-element-id"`
+   */
+  private _externalLabels: HTMLLabelElement[] = [];
+
+  /**
+   * Handles `click` on external `<label>`
+   */
+  private _onExternalLabelClick = () => {
+    this._checkboxNode?.focus();
+    this._handleChange();
+  };
+
+  /**
+   * Finds external toggle `<label>`s and attaches handlers.
+   */
+  private _attachExternalLabels() {
+    const doc = this.ownerDocument || document;
+
+    const found = this.id
+      ? [...doc.querySelectorAll<HTMLLabelElement>(`label[for="${this.id}"]`)]
+      : [];
+
+    this._externalLabels = Array.from(new Set(found));
+    this._externalLabels.forEach((lbl) => {
+      lbl.addEventListener('click', this._onExternalLabelClick);
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback?.();
+    this._attachExternalLabels();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    this._externalLabels.forEach((lbl) =>
+      lbl.removeEventListener('click', this._onExternalLabelClick)
+    );
+  }
 
   render() {
     const {
@@ -139,32 +187,45 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
 
     const labelTextClasses = classMap({
       [`${prefix}--toggle__label-text`]: labelText,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
-    const stateText = checked ? labelA : labelB;
+
+    let stateText = '';
+
+    if (hideLabel) {
+      stateText = labelText || '';
+    } else {
+      stateText = checked ? labelA : labelB;
+    }
+
+    const labelId = id ? `${id}_label` : undefined;
+
+    const hasLabelText = (this.labelText ?? '') !== '';
+
+    const ariaLabelledby = this.ariaLabelledby ?? (hasLabelText && labelId);
+
     return html`
       <button
         class="${prefix}--toggle__button"
         role="switch"
         type="button"
         aria-checked=${checked}
-        aria-lable=${labelText}
+        aria-labelledby=${ifDefined(ariaLabelledby)}
         .checked="${checked}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
         ?disabled=${disabled}
         id="${id}"></button>
-      <label for="${id}" class="${prefix}--toggle__label">
+      <label
+        for="${id}"
+        class="${prefix}--toggle__label"
+        @click=${handleChange}>
         ${labelText
           ? html`<span class="${labelTextClasses}">${labelText}</span>`
           : null}
         <div class="${inputClasses}">
-          <div class="${toggleClasses}" @click=${handleChange}>
-            ${this._renderCheckmark()}
-          </div>
-          <span
-            ?hidden="${hideLabel}"
-            class="${prefix}--toggle__text"
-            aria-hidden="true"
+          <div class="${toggleClasses}">${this._renderCheckmark()}</div>
+          <span class="${prefix}--toggle__text" aria-hidden="true"
             >${stateText}</span
           >
         </div>
