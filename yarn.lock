@@ -1718,7 +1718,7 @@ __metadata:
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     change-case: "npm:^4.1.2"
     fs-extra: "npm:^11.0.0"
-    js-yaml: "npm:^3.14.0"
+    js-yaml: "npm:^4.1.0"
     rimraf: "npm:^6.0.1"
     rollup: "npm:^4.41.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
@@ -1755,7 +1755,7 @@ __metadata:
     change-case: "npm:^4.1.1"
     core-js: "npm:^3.16.0"
     fs-extra: "npm:^11.0.0"
-    js-yaml: "npm:^3.12.1"
+    js-yaml: "npm:^4.1.0"
     klaw-sync: "npm:^6.0.0"
     memfs: "npm:^4.0.0"
     prettier: "npm:^3.3.3"
@@ -2045,7 +2045,7 @@ __metadata:
     color: "npm:^4.0.0"
     core-js: "npm:^3.16.0"
     fs-extra: "npm:^11.0.0"
-    js-yaml: "npm:^3.13.0"
+    js-yaml: "npm:^4.1.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
@@ -16625,7 +16625,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^3.10.0, js-yaml@npm:^3.12.1, js-yaml@npm:^3.13.0, js-yaml@npm:^3.13.1, js-yaml@npm:^3.14.0":
+"js-yaml@npm:^3.10.0, js-yaml@npm:^3.13.1":
   version: 3.14.1
   resolution: "js-yaml@npm:3.14.1"
   dependencies:
