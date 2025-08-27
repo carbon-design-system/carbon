@@ -58,3 +58,9 @@ feature-flags:
     description: >
       Enable a reduced spacing between the toggle control and its label
     enabled: false
+  - name: enable-enhanced-file-uploader
+    description: >
+      Enable enhanced functionality for the FileUploader component, including
+      richer callback data and expanded trigger events for onChange and
+      onDelete.
+    enabled: false

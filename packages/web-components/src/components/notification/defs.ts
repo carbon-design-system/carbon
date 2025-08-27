@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -64,4 +64,11 @@ export enum NOTIFICATION_TYPE {
    * to the message, where they can resolve the notification.
    */
   ACTIONABLE = 'actionable',
+
+  /**
+   * Callout notification is non-modal and should only be used inline with content on the
+   * initial render of the page or modal because it will not be announced to screenreader users
+   * like the other notification components.
+   */
+  CALLOUT = 'callout',
 }

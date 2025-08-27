@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import { Toggletip, ToggletipLabel, ToggletipButton } from '@carbon/react';
@@ -37,6 +38,7 @@ figma.connect(
       }),
       // information: figma.instance('Information'), look at this once icons are connected
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     example: ({ align, toggletip }) => (
       <>
         <ToggletipLabel>Toggletip label</ToggletipLabel>
@@ -45,8 +47,10 @@ figma.connect(
           <ToggletipButton label="Show information">
             <Information />
           </ToggletipButton>
+          {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */}
           <ToggletipContent>
             <p>{toggletip.content}</p>
+            {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */}
             <ToggletipActions>
               {toggletip.link}
               {toggletip.button}

@@ -9,6 +9,7 @@ import { Information } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
+import Modal from '../Modal';
 import {
   ToggletipLabel,
   Toggletip,

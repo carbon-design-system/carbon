@@ -8,7 +8,7 @@
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { warning } from '../../internal/warning';
 import cx from 'classnames';
-import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
+import PropTypes, { ReactElementLike } from 'prop-types';
 import React, {
   cloneElement,
   useContext,
@@ -34,6 +34,7 @@ export type ReactNodeLike =
   | null
   | undefined;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 export type func = (...args: any[]) => any;
 let didWarnAboutDatePickerInputValue = false;
 
@@ -105,9 +106,11 @@ export interface DatePickerInputProps
    * TODO:need to be rewritten
    */
   pattern?: (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     props: { [key: string]: any },
     propName: string,
     componentName: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ) => null | any | Error;
 
   /**
@@ -235,6 +238,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     ? undefined
     : `datepicker-input-helper-text-${datePickerInputInstanceId}`;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const inputProps: any = {
     ...rest,
     ...datePickerInputProps,
@@ -376,12 +380,14 @@ DatePickerInput.propTypes = {
   /**
    * Provide a regular expression that the input value must match
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   pattern: (props, propName, componentName): null | any | Error => {
     if (props[propName] === undefined) {
       return;
     }
     try {
       new RegExp(props[propName]);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     } catch (e) {
       return new Error(
         `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`

@@ -66,7 +66,7 @@
     "@types/react-is": "^19.0.0",
     "accessibility-checker": "^4.0.7",
     "all-contributors-cli": "^6.19.0",
-    "cross-env": "^7.0.0",
+    "cross-env": "^10.0.0",
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
     "eslint": "^9.32.0",
@@ -79,8 +79,8 @@
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
-    "lerna": "8.0.0",
-    "lint-staged": "^15.0.0",
+    "lerna": "^8.0.0",
+    "lint-staged": "^16.0.0",
     "prettier": "^3.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -156,5 +156,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.9.3"
 }

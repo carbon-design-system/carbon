@@ -108,8 +108,10 @@ export type TooltipProps<T extends React.ElementType> =
 
 type TooltipComponent = <T extends React.ElementType = typeof Popover>(
   props: TooltipProps<T>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 ) => React.ReactElement | any;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const Tooltip: TooltipComponent = React.forwardRef(
   <T extends React.ElementType = typeof Popover>(
     {
@@ -164,6 +166,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
       'aria-describedby': describedBy,
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     function getChildEventHandlers(childProps: any) {
       const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
         prop.startsWith('on')
@@ -278,6 +281,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
     }, [isDragging, onDragStop]);
 
     return (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       <Popover<any>
         as={as}
         ref={ref}
