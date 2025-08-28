@@ -683,6 +683,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       return (item as any)?.disabled;
     },
+    ...downshiftProps,
   });
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
