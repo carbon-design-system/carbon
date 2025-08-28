@@ -54,7 +54,7 @@ export interface ProgressIndicatorProps
   currentIndex?: number;
 
   /**
-   * Optional callback called if a ProgressStep is clicked on.  Returns the index of the step.
+   * Optional callback called if a ProgressStep is clicked on. Returns the index of the step.
    */
   onChange?: (data: number) => void;
 
@@ -148,7 +148,7 @@ ProgressIndicator.propTypes = {
   currentIndex: PropTypes.number,
 
   /**
-   * Optional callback called if a ProgressStep is clicked on.  Returns the index of the step.
+   * Optional callback called if a ProgressStep is clicked on. Returns the index of the step.
    */
   onChange: PropTypes.func,
 

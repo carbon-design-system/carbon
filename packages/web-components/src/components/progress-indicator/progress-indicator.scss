@@ -61,7 +61,8 @@ $css--plex: true !default;
   .#{$prefix}--progress-label {
     display: inline-block;
     margin: 0;
-    margin-inline-start: to-rem(-3.9px);
+    inline-size: $spacing-08;
+    margin-block-start: rem(1px);
     max-inline-size: none;
     vertical-align: top;
   }
@@ -76,7 +77,13 @@ $css--plex: true !default;
 
 :host(#{$prefix}-progress-step[vertical]) {
   .#{$prefix}--progress-label {
+    display: inline-block;
     inline-size: initial;
+    margin-block: auto;
+    margin-inline-start: to-rem(-4px);
+    max-inline-size: $spacing-13;
+    vertical-align: top;
+    white-space: initial;
   }
 
   .#{$prefix}--progress-optional {
@@ -117,7 +124,7 @@ $css--plex: true !default;
 
   .#{$prefix}--progress-label {
     block-size: rem(14px);
-    inline-size: rem(40px);
+    inline-size: $spacing-08;
     margin-block-start: 0.625rem;
   }
 
@@ -128,4 +135,13 @@ $css--plex: true !default;
 
 :host(#{$prefix}-progress-step[spaceEqually]) {
   flex-grow: 1;
+}
+
+:host(#{$prefix}-progress-step[spaceEqually]) .#{$prefix}--progress-label {
+  max-inline-size: none;
+}
+
+:host(#{$prefix}-progress-step[disabled][state='current']) svg,
+:host(#{$prefix}-progress-step[disabled][state='complete']) svg {
+  fill: $icon-disabled;
 }
