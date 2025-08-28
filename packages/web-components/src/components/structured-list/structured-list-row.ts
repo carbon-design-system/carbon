@@ -8,8 +8,9 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import RadioGroupManager, {
@@ -101,6 +102,7 @@ class CDSStructuredListRow extends HostListenerMixin(LitElement) {
    * Handles `click` event on this element.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = () => {
     const { _inputNode: inputNode } = this;
@@ -116,6 +118,7 @@ class CDSStructuredListRow extends HostListenerMixin(LitElement) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = (event: KeyboardEvent) => {
     const { _inputNode: inputNode } = this;
@@ -220,7 +223,7 @@ class CDSStructuredListRow extends HostListenerMixin(LitElement) {
           value=${ifDefined(selectionValue)} />
         <div
           class="${prefix}--structured-list-td ${prefix}--structured-list-cell">
-          ${CheckmarkFilled16({
+          ${iconLoader(CheckmarkFilled16, {
             class: `${prefix}--structured-list-svg`,
             title: selectionIconTitle,
           })}

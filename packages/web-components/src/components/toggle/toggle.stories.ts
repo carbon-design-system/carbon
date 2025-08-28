@@ -11,7 +11,7 @@ import '../stack/index';
 import { TOGGLE_SIZE } from './toggle';
 
 const sizes = {
-  'Regular size': null,
+  'Medium size (default)': null,
   [`Small size (${TOGGLE_SIZE.SMALL})`]: TOGGLE_SIZE.SMALL,
 };
 
@@ -20,6 +20,14 @@ const defaultArgs = {
   labelB: 'Off',
   checked: true,
   labelText: 'Label',
+};
+
+const smallToggleArgs = {
+  labelA: 'On',
+  labelB: 'Off',
+  checked: true,
+  labelText: 'Label',
+  size: 'sm',
 };
 
 const controls = {
@@ -44,7 +52,7 @@ const controls = {
     control: 'text',
     description: 'The text that is read for the control',
   },
-  readonly: {
+  readOnly: {
     control: 'boolean',
     description: 'Whether the toggle should be read-only',
   },
@@ -69,7 +77,7 @@ export const Default = {
     labelA,
     labelB,
     labelText,
-    readonly,
+    readOnly,
     size,
     checked,
   }) => html`
@@ -80,18 +88,63 @@ export const Default = {
       ?hideLabel="${hideLabel}"
       label-text="${labelText}"
       size="${size}"
-      ?read-only=${readonly}
+      ?read-only=${readOnly}
       ?checked="${checked}"></cds-toggle>
   `,
 };
+
+export const Skeleton = {
+  render: () => html` <cds-toggle-skeleton></cds-toggle-skeleton> `,
+};
+
 export const SmallToggle = {
-  render: () => html`
+  argTypes: controls,
+  args: smallToggleArgs,
+  render: ({
+    disabled,
+    hideLabel,
+    labelA,
+    labelB,
+    labelText,
+    readOnly,
+    size,
+    checked,
+  }) => html`
     <cds-toggle
-      checked
-      label-a="On"
-      label-b="Off"
-      label-text="Toggle element label"
-      size="sm"></cds-toggle>
+      ?checked="${checked}"
+      ?read-only=${readOnly}
+      ?disabled="${disabled}"
+      ?hideLabel="${hideLabel}"
+      label-text="${labelText}"
+      label-b="${labelB}"
+      label-a="${labelA}"
+      size="${size}"></cds-toggle>
+  `,
+};
+
+export const WithAccessibleLabels = {
+  render: () => html`
+    <cds-stack gap="7">
+      <cds-toggle id="toggle-4" label-text="Label"></cds-toggle>
+      <cds-toggle id="toggle-5" label-text="Label" hideLabel></cds-toggle>
+
+      <div>
+        <div id="toggle-6-label" style="margin-block-end: 0.5rem;">
+          Internal aria-label toggle
+        </div>
+        <cds-toggle aria-labelledby="toggle-6-label" id="toggle-6"></cds-toggle>
+      </div>
+
+      <div>
+        <label
+          id="toggle-7-label"
+          for="toggle-7"
+          style="display: block; margin-block-end: 0.5rem;">
+          External toggle label
+        </label>
+        <cds-toggle aria-labelledby="toggle-7-label" id="toggle-7"></cds-toggle>
+      </div>
+    </cds-stack>
   `,
 };
 

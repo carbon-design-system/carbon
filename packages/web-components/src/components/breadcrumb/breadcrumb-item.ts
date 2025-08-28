@@ -34,6 +34,7 @@ class CDSBreadcrumbItem extends LitElement {
       items.forEach((item) => {
         (item as HTMLElement).setAttribute(
           'breadcrumb-size',
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           this.getAttribute('size')!
         );
       });

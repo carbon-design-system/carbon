@@ -12,26 +12,28 @@ import CDSDropdown from '../../src/components/dropdown/dropdown';
 import CDSDropdownItem from '../../src/components/dropdown/dropdown-item';
 import { Playground } from '../../src/components/dropdown/dropdown.stories';
 
-const template = (props?) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+const template = (props?: any) =>
   Playground({
     'cds-dropdown': props,
   });
 
-describe('cds-dropdown', function () {
+describe('cds-dropdown', () => {
   const events = new EventManager();
 
-  describe('Misc attributes', function () {
-    it('should render with minimum attributes', async function () {
+  describe('Misc attributes', () => {
+    it('should render with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-dropdown' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render with various attributes', async function () {
+    it('should render with various attributes', async () => {
       render(
         template({
           disabled: true,
@@ -46,6 +48,7 @@ describe('cds-dropdown', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-dropdown' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -53,86 +56,101 @@ describe('cds-dropdown', function () {
     });
   });
 
-  describe('Toggling', function () {
+  describe('Toggling', () => {
     let elem: Element;
     let itemNode: Element;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       elem = document.body.querySelector('cds-dropdown')!;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       itemNode = elem.querySelector('cds-dropdown-item')!;
     });
 
-    it('should add "open" stateful modifier class', async function () {
+    it('should add "open" stateful modifier class', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
 
-    it('should remove "open" stateful modifier class (closed default state)', async function () {
+    it('should remove "open" stateful modifier class (closed default state)', async () => {
       (elem as CDSDropdown).open = true;
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
-    it('should always close dropdown when clicking document', async function () {
+    it('should always close dropdown when clicking document', async () => {
       (elem as CDSDropdown).open = true;
       await Promise.resolve();
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
-    it('should close dropdown when clicking on an item', async function () {
+    it('should close dropdown when clicking on an item', async () => {
       (elem as CDSDropdown).open = true;
       await Promise.resolve();
       (itemNode as HTMLElement).click();
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
-    it('should provide a way to cancel opening', async function () {
+    it('should provide a way to cancel opening', async () => {
       events.on(elem, 'cds-dropdown-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
-    it('should provide a way to cancel closing', async function () {
+    it('should provide a way to cancel closing', async () => {
       (elem as CDSDropdown).open = true;
       await Promise.resolve();
       events.on(elem, 'cds-dropdown-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
   });
 
-  describe('Selecting an item', function () {
+  describe('Selecting an item', () => {
     let elem: Element;
     let itemNodes: NodeListOf<Element>;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template({ open: true, value: 'all' }), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       elem = document.body.querySelector('cds-dropdown')!;
       itemNodes = elem.querySelectorAll('cds-dropdown-item');
     });
 
-    xit('should add/remove "selected" modifier class', async function () {
+    xit('should add/remove "selected" modifier class', async () => {
       (
         document.body.querySelector(
           'cds-dropdown-item[value="staging"]'
@@ -146,7 +164,7 @@ describe('cds-dropdown', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    xit('should update text', async function () {
+    xit('should update text', async () => {
       (
         document.body.querySelector(
           'cds-dropdown-item[value="staging"]'
@@ -154,11 +172,12 @@ describe('cds-dropdown', function () {
       ).click();
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
       ).toBe('Option 3');
     });
 
-    xit('should update value', async function () {
+    xit('should update value', async () => {
       (
         document.body.querySelector(
           'cds-dropdown-item[value="staging"]'
@@ -168,7 +187,7 @@ describe('cds-dropdown', function () {
       expect((elem as CDSDropdown).value).toBe('staging');
     });
 
-    xit('should provide a way to switch item with a value', async function () {
+    xit('should provide a way to switch item with a value', async () => {
       (elem as CDSDropdown).value = 'staging';
       await Promise.resolve(); // Update cycle for `<cds-dropdown>`
       await Promise.resolve(); // Update cycle for `<cds-dropdown-item>`
@@ -179,7 +198,7 @@ describe('cds-dropdown', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    xit('should provide a way to cancel switching item', async function () {
+    xit('should provide a way to cancel switching item', async () => {
       events.on(elem, 'cds-dropdown-beingselected', (event: CustomEvent) => {
         expect(event.detail.item).toBe(
           document.body.querySelector('cds-dropdown-item[value="staging"]')
@@ -198,11 +217,12 @@ describe('cds-dropdown', function () {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
       ).toBe('Option 1');
     });
 
-    it('should reflect the added child to the selection', async function () {
+    it('should reflect the added child to the selection', async () => {
       const itemNode = document.createElement('cds-dropdown-item');
       itemNode.textContent = 'text-added';
       (itemNode as unknown as CDSDropdownItem).value = 'value-added';
@@ -210,24 +230,27 @@ describe('cds-dropdown', function () {
       (elem as CDSDropdown).value = 'value-added';
       try {
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
         ).toBe('text-added');
       } finally {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         itemNode.parentNode!.removeChild(itemNode);
       }
     });
   });
 
-  describe('Form validation', function () {
+  describe('Form validation', () => {
     let elem: Element;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       elem = document.body.querySelector('cds-dropdown')!;
     });
 
-    it('should support checking if required value exists', async function () {
+    it('should support checking if required value exists', async () => {
       const dropdown = elem as CDSDropdown;
       dropdown.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
@@ -242,7 +265,7 @@ describe('cds-dropdown', function () {
       expect(dropdown.validityMessage).toBe('');
     });
 
-    it('should support canceling required check', async function () {
+    it('should support canceling required check', async () => {
       const dropdown = elem as CDSDropdown;
       dropdown.required = true;
       events.on(dropdown, 'invalid', (event) => {
@@ -253,14 +276,14 @@ describe('cds-dropdown', function () {
       expect(dropdown.validityMessage).toBe('');
     });
 
-    it('should treat empty custom validity message as not invalid', async function () {
+    it('should treat empty custom validity message as not invalid', async () => {
       const dropdown = elem as CDSDropdown;
       dropdown.setCustomValidity('');
       expect(dropdown.invalid).toBe(false);
       expect(dropdown.validityMessage).toBe('');
     });
 
-    it('should treat non-empty custom validity message as invalid', async function () {
+    it('should treat non-empty custom validity message as invalid', async () => {
       const dropdown = elem as CDSDropdown;
       dropdown.setCustomValidity('validity-message-foo');
       expect(dropdown.invalid).toBe(true);
@@ -268,8 +291,9 @@ describe('cds-dropdown', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     events.reset();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });

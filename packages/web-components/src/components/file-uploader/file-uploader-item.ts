@@ -7,10 +7,11 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import Close16 from '@carbon/icons/es/close/16.js';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import { LOADING_TYPE } from '../loading/loading';
 import { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE } from './defs';
 import styles from './file-uploader.scss?lit';
@@ -59,13 +60,13 @@ class CDSFileUploaderItem extends LitElement {
     return html`
       ${!invalid
         ? undefined
-        : WarningFilled16({ class: `${prefix}--file-invalid` })}
+        : iconLoader(WarningFilled16, { class: `${prefix}--file-invalid` })}
       <button
         type="button"
         aria-label="${iconDescription}"
         class="${prefix}--file-close"
         @click="${handleClickDeleteButton}">
-        ${Close16()}
+        ${iconLoader(Close16)}
       </button>
     `;
   }
@@ -87,7 +88,7 @@ class CDSFileUploaderItem extends LitElement {
    */
   private _renderUploaded() {
     const { iconDescription } = this;
-    return CheckmarkFilled16({
+    return iconLoader(CheckmarkFilled16, {
       class: `${prefix}--file-complete`,
       'aria-label': iconDescription,
     });
