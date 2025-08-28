@@ -45,21 +45,11 @@ export const makeDraggable = ({
   dragStep,
   shiftDragStep,
 }: DraggableProps) => {
-  const computedStyle = window.getComputedStyle(el);
   if (dragHandle) {
     dragHandle.style.cursor = 'move';
     el.style.cursor = 'default';
   } else {
     el.style.cursor = 'move';
-  }
-  const position = computedStyle.position;
-
-  if (
-    position !== 'absolute' &&
-    position !== 'relative' &&
-    position !== 'fixed'
-  ) {
-    el.style.position = 'relative';
   }
 
   let isDragging = false;
@@ -157,4 +147,18 @@ export const makeDraggable = ({
     el.addEventListener('mousedown', onMouseDown);
   }
   focusableDragHandle?.addEventListener('keydown', onKeyDown);
+
+  const draggableCleanup = () => {
+    if (dragHandle) {
+      dragHandle.removeEventListener('mousedown', onMouseDown);
+    } else {
+      el.removeEventListener('mousedown', onMouseDown);
+    }
+    focusableDragHandle?.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+  return {
+    cleanup: draggableCleanup,
+  };
 };

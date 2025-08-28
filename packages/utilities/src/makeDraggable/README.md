@@ -31,25 +31,37 @@ const dialogEle = document.getElementById('draggableDialog');
 const headerEle = document.getElementById('dialogHeader');
 const dragBtn = document.getElementById('dragButton');
 
-makeDraggable({
-  el: dialogEle,
-  dragHandle: headerEle,
-  focusableDragHandle: dragBtn,
-});
+const draggableElement = () => {
+  let draggable = makeDraggable({
+    el: dialogEle,
+    dragHandle: headerEle,
+    focusableDragHandle: dragBtn,
+  });
 
-// Add visual and accessibility support
-dialogEle.addEventListener('dragstart', () => {
-  dialogEle.classList.add('is-dragging');
-  dialogEle.setAttribute('aria-label', 'Picked up the draggable Dialog');
-});
+  // Add visual and accessibility support
+  const onDragStart = () => {
+    dialogEle.classList.add('is-dragging');
+    dialogEle.setAttribute('aria-label', 'Picked up the draggable Dialog');
+  };
 
-dialogEle.addEventListener('dragend', () => {
-  dialogEle.classList.remove('is-dragging');
-  dialogEle.setAttribute('aria-label', 'Draggable Dialog was dropped');
-});
+  const onDragEnd = () => {
+    dialogEle.classList.remove('is-dragging');
+    dialogEle.setAttribute('aria-label', 'Draggable Dialog was dropped');
+  };
+
+  dialogEle.addEventListener('dragstart', onDragStart);
+  dialogEle.addEventListener('dragend', onDragEnd);
+
+  // Clean up attached event listeners
+  return () => {
+    dialogEle.removeEventListener('dragstart', onDragStart);
+    dialogEle.removeEventListener('dragend', onDragEnd);
+    draggable.cleanup();
+  };
+};
 ```
 
 ## React Example implementation
 
-For react implementation, please refer to the example code in
+For React implementation, please refer to the example code in
 [Storybook](https://ibm-products.carbondesignsystem.com/?path=/docs/utilities-makedraggable--overview).
