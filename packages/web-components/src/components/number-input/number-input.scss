@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/number-input/index';
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
@@ -50,7 +51,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: 5.5rem;
+    inset-inline-end: $spacing-12;
   }
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
@@ -62,7 +63,14 @@ $css--plex: true !default;
 :host(#{$prefix}-number-input[invalid]) {
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
-    inset-inline-end: to-rem(120px);
+    &::after {
+      position: absolute;
+      background-color: $border-subtle;
+      block-size: 100%;
+      content: '';
+      inline-size: to-rem(1px);
+      inset-inline-start: -#{$spacing-05};
+    }
   }
 }
 
