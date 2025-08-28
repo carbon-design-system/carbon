@@ -15,7 +15,7 @@ const { productsPreviewMap } = require('./nonStableMapping');
  * import { SearchBar, InlineTip } from '@carbon/ibm-products';
  *
  * After:
- * import { previewCandidate__SearchBar, previewCandidate__InlineTip } from "@carbon/ibm-products";
+ * import { previewCandidate__SearchBar as SearchBar, previewCandidate__InlineTip as InlineTip } from "@carbon/ibm-products";
  */
 
 const nonStableComponentKeys = Object.keys(productsPreviewMap);
@@ -36,6 +36,9 @@ function transformer(file, api) {
         if (specifier.type === 'ImportSpecifier') {
           nonStableComponentKeys.forEach((c) => {
             const importedName = specifier.imported.name;
+            const localName = specifier.local
+              ? specifier.local.name
+              : importedName;
             let transformedImportedName = importedName;
             if (importedName === c) {
               transformedImportedName = productsPreviewMap[c];
@@ -47,7 +50,8 @@ function transformer(file, api) {
               // within jsx.
               const importSpecifier = j.importSpecifier(
                 j.identifier(transformedImportedName),
-                j.identifier(c)
+                // Use the already specified alias if there is one
+                j.identifier(localName)
               );
               j(path).replaceWith(
                 j.importDeclaration(
@@ -57,7 +61,6 @@ function transformer(file, api) {
               );
 
               if (specifier.type === 'ImportSpecifier') {
-                const importedName = specifier.imported.name;
                 if (!uniqueSpecifiers.has(importedName)) {
                   uniqueSpecifiers.add(importedName);
                   newSpecifiers.push(importSpecifier);

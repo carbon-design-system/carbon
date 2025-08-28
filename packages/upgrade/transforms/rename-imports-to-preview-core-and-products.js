@@ -17,7 +17,7 @@ const { reactPreviewMap, productsPreviewMap } = require('./nonStableMapping');
  *
  * After:
  * import { preview__FluidTimePicker } from "@carbon/react";
- * import { previewCandidate__SearchBar } from '@carbon/ibm-products';
+ * import { previewCandidate__SearchBar as SearchBar } from '@carbon/ibm-products';
  */
 
 const allPreviews = { ...reactPreviewMap, ...productsPreviewMap };
@@ -43,6 +43,9 @@ function transformer(file, api) {
           if (specifier.type === 'ImportSpecifier') {
             nonStableKeys.forEach((c) => {
               const importedName = specifier.imported.name;
+              const localName = specifier.local
+                ? specifier.local.name
+                : importedName;
               let transformedImportedName = importedName;
               if (importedName === c) {
                 transformedImportedName = allPreviews[c];
@@ -55,7 +58,8 @@ function transformer(file, api) {
                   // within jsx.
                   const importSpecifier = j.importSpecifier(
                     j.identifier(transformedImportedName),
-                    j.identifier(c)
+                    // Use the already specified alias if there is one
+                    j.identifier(localName)
                   );
                   j(path).replaceWith(
                     j.importDeclaration(
@@ -64,7 +68,6 @@ function transformer(file, api) {
                     )
                   );
                   if (specifier.type === 'ImportSpecifier') {
-                    const importedName = specifier.imported.name;
                     if (!uniqueSpecifiers.has(importedName)) {
                       uniqueSpecifiers.add(importedName);
                       newSpecifiers.push(importSpecifier);
