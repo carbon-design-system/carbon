@@ -29,15 +29,48 @@ function transformer(file, api) {
         value: '@carbon/ibm-products',
       },
     })
-    .find(j.ImportSpecifier)
-    .filter(
-      (path) => !!nonStableComponentKeys.includes(path.node.imported.name)
-    )
-    .replaceWith((path) =>
-      j.importSpecifier(
-        j.identifier(productsPreviewMap[path.node.imported.name])
-      )
-    )
+    .forEach((path) => {
+      const uniqueSpecifiers = new Set();
+      const newSpecifiers = [];
+      path.node.specifiers.forEach((specifier) => {
+        if (specifier.type === 'ImportSpecifier') {
+          nonStableComponentKeys.forEach((c) => {
+            const importedName = specifier.imported.name;
+            let transformedImportedName = importedName;
+            if (importedName === c) {
+              transformedImportedName = productsPreviewMap[c];
+              specifier.imported.name = transformedImportedName;
+              // Build our new import specifier
+              const importSpecifier = j.importSpecifier(
+                j.identifier(transformedImportedName),
+                j.identifier(c)
+              );
+              j(path).replaceWith(
+                j.importDeclaration(
+                  [...path.node.specifiers, importSpecifier],
+                  path.node.source
+                )
+              );
+
+              if (specifier.type === 'ImportSpecifier') {
+                const importedName = specifier.imported.name;
+                if (!uniqueSpecifiers.has(importedName)) {
+                  uniqueSpecifiers.add(importedName);
+                  newSpecifiers.push(importSpecifier);
+                }
+              } else {
+                newSpecifiers.push(specifier);
+              }
+            }
+          });
+          // Replace the original specifiers with the unique ones
+          const others = path.node.specifiers.filter(
+            (c) => !Object.values(productsPreviewMap).includes(c.imported.name)
+          );
+          path.node.specifiers = [...others, ...newSpecifiers];
+        }
+      });
+    })
     .toSource();
 }
 
