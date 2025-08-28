@@ -64,7 +64,7 @@ describe('cds-toggletip', function () {
     expect(el.open).to.be.false;
   });
 
-  it('should close on focus out', async () => {
+  it('should stay open on focus out (as per spec)', async () => {
     const el = await fixture(html`<cds-toggletip open></cds-toggletip>`);
 
     const outsideElement = document.createElement('button');
@@ -82,7 +82,7 @@ describe('cds-toggletip', function () {
 
     await el.updateComplete;
 
-    expect(el.open).to.be.false;
+    expect(el.open).to.be.true;
     document.body.removeChild(outsideElement);
   });
 
