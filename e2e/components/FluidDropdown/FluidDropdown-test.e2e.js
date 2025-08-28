@@ -17,7 +17,7 @@ test.describe('FluidDropdown', () => {
       test('fluid dropdown @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidDropdown',
-          id: 'experimental-fluid-components-unstable-fluiddropdown--default',
+          id: 'preview-fluid-components-unstable-fluiddropdown--default',
           theme,
         });
       });

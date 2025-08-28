@@ -11,7 +11,7 @@ import { IconIndicatorKinds } from './index';
 import mdx from './IconIndicator.mdx';
 
 export default {
-  title: 'Experimental/StatusIndicators/unstable__IconIndicator',
+  title: 'Experimental/StatusIndicators/preview__IconIndicator',
   component: IconIndicator,
   parameters: {
     docs: {
