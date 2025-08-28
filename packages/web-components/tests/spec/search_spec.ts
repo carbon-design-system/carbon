@@ -16,19 +16,22 @@ const template = (props?) =>
     'cds-search': props,
   });
 
-describe('cds-search', function () {
+describe('cds-search', () => {
   const events = new EventManager();
 
-  describe('Misc attributes', function () {
-    it('should render with minimum attributes', async function () {
+  describe('Misc attributes', () => {
+    it('should render with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('cds-search' as any)).toMatchSnapshot({
+      expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        document.body.querySelector('cds-search' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render with various attributes', async function () {
+    it('should render with various attributes', async () => {
       render(
         template({
           closeButtonAssistiveText: 'close-button-assistive-text-foo',
@@ -43,31 +46,41 @@ describe('cds-search', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('cds-search' as any)).toMatchSnapshot({
+      expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        document.body.querySelector('cds-search' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
   });
 
-  describe('Typing in the search box', function () {
-    it('should reflect the value', async function () {
+  describe('Typing in the search box', () => {
+    it('should reflect the value', async () => {
       render(template({ value: 'value-foo' }), document.body);
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inputNode = search!.shadowRoot!.querySelector('input');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       inputNode!.value = 'value-bar';
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       inputNode!.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       expect((search as CDSSearch).value).toBe('value-bar');
     });
 
-    it('Should fire cds-search-input event upon typing', async function () {
+    it('Should fire cds-search-input event upon typing', async () => {
       render(template({ value: 'value-foo' }), document.body);
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
       const spyBeforeClear = jasmine.createSpy('before clear');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       events.on(search!, 'cds-search-input', spyBeforeClear);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const inputNode = search!.shadowRoot!.querySelector('input');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       inputNode!.value = 'value-bar';
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       inputNode!.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       expect(spyBeforeClear).toHaveBeenCalled();
@@ -75,21 +88,24 @@ describe('cds-search', function () {
     });
   });
 
-  describe('Clearing the input', function () {
-    it('should clear the value', async function () {
+  describe('Clearing the input', () => {
+    it('should clear the value', async () => {
       render(template({ value: 'value-foo' }), document.body);
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       search!.shadowRoot!.querySelector('button')!.click();
       expect((search as CDSSearch).value).toBe('');
     });
 
-    it('Should fire cds-search-input event upon clearing', async function () {
+    it('Should fire cds-search-input event upon clearing', async () => {
       render(template({ value: 'value-foo' }), document.body);
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
       const spyBeforeClear = jasmine.createSpy('before clear');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       events.on(search!, 'cds-search-input', spyBeforeClear);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       search!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
       expect(spyBeforeClear).toHaveBeenCalled();
@@ -97,7 +113,8 @@ describe('cds-search', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
     events.reset();
   });

@@ -105,6 +105,7 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
 
   switch (triggerButtonPositionProp) {
@@ -250,9 +251,11 @@ export interface OverflowMenuProps
    * The ref to the overflow menu's trigger button element.
    * @deprecated Use the standard React `ref` prop instead.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   innerRef?: Ref<any>;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {

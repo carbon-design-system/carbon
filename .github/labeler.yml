@@ -139,11 +139,11 @@
   - '/(windows)/i'
 
 # Severity labels
-severity 1:
+'severity: 1':
   - '(Severity 1 = Must be fixed ASAP)'
-severity 2:
+'severity: 2':
   - '(Severity 2 = User cannot complete task)'
-severity 3:
+'severity: 3':
   - '(Severity 3 = User can complete task)'
-severity 4:
+'severity: 4':
   - '(Severity 4 = Unrelated to a user task)'

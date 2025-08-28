@@ -75,8 +75,9 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
-  function OverflowMenu(
+  (
     {
       autoAlign = false,
       children,
@@ -90,7 +91,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       ...rest
     },
     forwardRef
-  ) {
+  ) => {
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 

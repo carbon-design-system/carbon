@@ -7,10 +7,11 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Close20 from '@carbon/icons/lib/close/20.js';
 import { prefix } from '../../globals/settings';
+import Close20 from '@carbon/icons/es/close/20.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FocusMixin from '../../globals/mixins/focus';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './modal.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -41,7 +42,7 @@ class CDSModalCloseButton extends FocusMixin(LitElement) {
         aria-label="${ifDefined(closeButtonLabel)}"
         class="${prefix}--modal-close"
         title="${ifDefined(closeButtonLabel)}">
-        ${Close20({
+        ${iconLoader(Close20, {
           part: 'close-icon',
           class: `${prefix}--modal-close__icon`,
         })}

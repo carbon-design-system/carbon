@@ -4,15 +4,16 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20.js';
-import ErrorFilled20 from '@carbon/icons/lib/error--filled/20.js';
-import InformationFilled20 from '@carbon/icons/lib/information--filled/20.js';
-import InformationSquareFilled20 from '@carbon/icons/lib/information--square--filled/20.js';
-import WarningFilled20 from '@carbon/icons/lib/warning--filled/20.js';
-import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20.js';
-import { html, svg } from 'lit';
+import { html } from 'lit';
+import CheckmarkFilled20 from '@carbon/icons/es/checkmark--filled/20.js';
+import InformationFilled20 from '@carbon/icons/es/information--filled/20.js';
+import InformationSquareFilled20 from '@carbon/icons/es/information--square--filled/20.js';
+import WarningFilled20 from '@carbon/icons/es/warning--filled/20.js';
+import WarningAltFilled20 from '@carbon/icons/es/warning--alt--filled/20.js';
+import ErrorFilled20 from '@carbon/icons/es/error--filled/20.js';
 import { property, query } from 'lit/decorators.js';
 import { prefix, selectorTabbable } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NOTIFICATION_TYPE, NOTIFICATION_KIND } from './defs';
 import CDSInlineNotification from './inline-notification';
@@ -32,10 +33,9 @@ export const iconsForKinds = {
   [NOTIFICATION_KIND.ERROR]: ErrorFilled20,
 };
 
-// eslint-disable-next-line no-bitwise
 const PRECEDING =
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-// eslint-disable-next-line no-bitwise
+
 const FOLLOWING =
   Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
@@ -51,6 +51,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const active = elem.ownerDocument!.activeElement;
       if (
         active === elem ||
@@ -64,6 +65,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const active = elem.ownerDocument!.activeElement;
       if (
         active === elem ||
@@ -135,6 +137,7 @@ class CDSActionableNotification extends HostListenerMixin(
    * Escape will close the notification if `closeOnEscape` is true
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown = async (event: KeyboardEvent) => {
     const { key } = event;
@@ -144,6 +147,7 @@ class CDSActionableNotification extends HostListenerMixin(
   };
 
   @HostListener('shadowRoot:focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
     const {
@@ -183,6 +187,7 @@ class CDSActionableNotification extends HostListenerMixin(
         relatedTarget as Node
       );
       // tabbable elements in Shadow root
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const shadowElems = this.shadowRoot!.querySelectorAll(
         selectorTabbableForActionableNotification
       );
@@ -190,7 +195,7 @@ class CDSActionableNotification extends HostListenerMixin(
       const lightElems = this.querySelectorAll(
         selectorTabbableForActionableNotification
       );
-      // eslint-disable-next-line no-bitwise
+
       if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
         await (this.constructor as typeof CDSActionableNotification)._delay();
         if (
@@ -200,9 +205,7 @@ class CDSActionableNotification extends HostListenerMixin(
         ) {
           this.focus();
         }
-      }
-      // eslint-disable-next-line no-bitwise
-      else if (
+      } else if (
         relatedTarget === endSentinelNode ||
         comparisonResult & FOLLOWING
       ) {
@@ -225,15 +228,12 @@ class CDSActionableNotification extends HostListenerMixin(
   }
 
   protected _renderIcon() {
-    const { statusIconDescription, kind, inline } = this;
-    const { [kind]: icon } = iconsForKinds;
-    return !icon
+    const { kind, inline } = this;
+    const IconComponent = iconsForKinds[kind];
+    return !IconComponent
       ? undefined
-      : icon({
+      : iconLoader(IconComponent, {
           class: `${prefix}--${inline ? 'inline' : 'toast'}-notification__icon`,
-          children: !statusIconDescription
-            ? undefined
-            : svg`<title>${statusIconDescription}</title>`,
         });
   }
 
