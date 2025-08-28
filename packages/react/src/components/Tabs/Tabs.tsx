@@ -1173,7 +1173,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   className?: string;
 
   /**
-   * Whether your IconTab is disabled.
+   * Whether your Tab is disabled.
    */
   disabled?: boolean;
 
@@ -1546,7 +1546,7 @@ export interface IconTabProps extends DivAttributes {
   defaultOpen?: boolean;
 
   /**
-   *  Specify whether your Tab is disabled.
+   *  Specify whether your IconTab is disabled.
    */
   disabled?: boolean;
 
