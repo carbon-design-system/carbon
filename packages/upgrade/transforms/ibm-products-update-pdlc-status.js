@@ -40,7 +40,11 @@ function transformer(file, api) {
             if (importedName === c) {
               transformedImportedName = productsPreviewMap[c];
               specifier.imported.name = transformedImportedName;
-              // Build our new import specifier
+              // Build new import specifier so that
+              // products components changing exports
+              // are aliased to their original name.
+              // This will help to avoid additional changes
+              // within jsx.
               const importSpecifier = j.importSpecifier(
                 j.identifier(transformedImportedName),
                 j.identifier(c)
@@ -63,7 +67,8 @@ function transformer(file, api) {
               }
             }
           });
-          // Replace the original specifiers with the unique ones
+          // Replace the original specifiers with the new aliased ones
+          // to prevent further changes needed in jsx for products components
           const others = path.node.specifiers.filter(
             (c) => !Object.values(productsPreviewMap).includes(c.imported.name)
           );

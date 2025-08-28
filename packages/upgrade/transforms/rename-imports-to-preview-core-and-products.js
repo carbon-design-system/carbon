@@ -75,7 +75,8 @@ function transformer(file, api) {
                 }
               }
             });
-            // Replace the original specifiers with the unique ones
+            // Replace the original specifiers with the new aliased ones
+            // to prevent further changes needed in jsx for products components
             if (p === '@carbon/ibm-products') {
               const others = path.node.specifiers.filter(
                 (c) =>
