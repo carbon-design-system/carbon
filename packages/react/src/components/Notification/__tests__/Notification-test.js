@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -397,6 +397,9 @@ describe('Callout', () => {
     });
     await userEvent.click(closeButton);
     expect(onActionButtonClick).toHaveBeenCalledTimes(1);
+    expect(onActionButtonClick.mock.calls).toEqual([
+      [expect.objectContaining({ type: 'click' })],
+    ]);
   });
 
   it('interpolates matching className based on kind prop', () => {
