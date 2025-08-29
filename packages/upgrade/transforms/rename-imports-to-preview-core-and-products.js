@@ -17,7 +17,7 @@ const { reactPreviewMap, productsPreviewMap } = require('./nonStableMapping');
  *
  * After:
  * import { preview__FluidTimePicker } from "@carbon/react";
- * import { previewCandidate__SearchBar } from '@carbon/ibm-products';
+ * import { previewCandidate__SearchBar as SearchBar } from '@carbon/ibm-products';
  */
 
 const allPreviews = { ...reactPreviewMap, ...productsPreviewMap };
@@ -36,11 +36,60 @@ function transformer(file, api) {
           value: p,
         },
       })
-      .find(j.ImportSpecifier)
-      .filter((path) => !!nonStableKeys.includes(path.node.imported.name))
-      .replaceWith((path) =>
-        j.importSpecifier(j.identifier(allPreviews[path.node.imported.name]))
-      );
+      .forEach((path) => {
+        const uniqueSpecifiers = new Set();
+        const newSpecifiers = [];
+        path.node.specifiers.forEach((specifier) => {
+          if (specifier.type === 'ImportSpecifier') {
+            nonStableKeys.forEach((c) => {
+              const importedName = specifier.imported.name;
+              const localName = specifier.local
+                ? specifier.local.name
+                : importedName;
+              let transformedImportedName = importedName;
+              if (importedName === c) {
+                transformedImportedName = allPreviews[c];
+                specifier.imported.name = transformedImportedName;
+                if (p === '@carbon/ibm-products') {
+                  // Build new import specifier so that
+                  // products components changing exports
+                  // are aliased to their original name.
+                  // This will help to avoid additional changes
+                  // within jsx.
+                  const importSpecifier = j.importSpecifier(
+                    j.identifier(transformedImportedName),
+                    // Use the already specified alias if there is one
+                    j.identifier(localName)
+                  );
+                  j(path).replaceWith(
+                    j.importDeclaration(
+                      [...path.node.specifiers, importSpecifier],
+                      path.node.source
+                    )
+                  );
+                  if (specifier.type === 'ImportSpecifier') {
+                    if (!uniqueSpecifiers.has(importedName)) {
+                      uniqueSpecifiers.add(importedName);
+                      newSpecifiers.push(importSpecifier);
+                    }
+                  } else {
+                    newSpecifiers.push(specifier);
+                  }
+                }
+              }
+            });
+            // Replace the original specifiers with the new aliased ones
+            // to prevent further changes needed in jsx for products components
+            if (p === '@carbon/ibm-products') {
+              const others = path.node.specifiers.filter(
+                (c) =>
+                  !Object.values(productsPreviewMap).includes(c.imported.name)
+              );
+              path.node.specifiers = [...others, ...newSpecifiers];
+            }
+          }
+        });
+      });
   });
   return root.toSource();
 }
