@@ -4,15 +4,16 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20.js';
-import ErrorFilled20 from '@carbon/icons/lib/error--filled/20.js';
-import InformationFilled20 from '@carbon/icons/lib/information--filled/20.js';
-import InformationSquareFilled20 from '@carbon/icons/lib/information--square--filled/20.js';
-import WarningFilled20 from '@carbon/icons/lib/warning--filled/20.js';
-import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20.js';
-import { html, svg } from 'lit';
+import { html } from 'lit';
+import CheckmarkFilled20 from '@carbon/icons/es/checkmark--filled/20.js';
+import InformationFilled20 from '@carbon/icons/es/information--filled/20.js';
+import InformationSquareFilled20 from '@carbon/icons/es/information--square--filled/20.js';
+import WarningFilled20 from '@carbon/icons/es/warning--filled/20.js';
+import WarningAltFilled20 from '@carbon/icons/es/warning--alt--filled/20.js';
+import ErrorFilled20 from '@carbon/icons/es/error--filled/20.js';
 import { property, query } from 'lit/decorators.js';
 import { prefix, selectorTabbable } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NOTIFICATION_TYPE, NOTIFICATION_KIND } from './defs';
 import CDSInlineNotification from './inline-notification';
@@ -227,15 +228,12 @@ class CDSActionableNotification extends HostListenerMixin(
   }
 
   protected _renderIcon() {
-    const { statusIconDescription, kind, inline } = this;
-    const { [kind]: icon } = iconsForKinds;
-    return !icon
+    const { kind, inline } = this;
+    const IconComponent = iconsForKinds[kind];
+    return !IconComponent
       ? undefined
-      : icon({
+      : iconLoader(IconComponent, {
           class: `${prefix}--${inline ? 'inline' : 'toast'}-notification__icon`,
-          children: !statusIconDescription
-            ? undefined
-            : svg`<title>${statusIconDescription}</title>`,
         });
   }
 
