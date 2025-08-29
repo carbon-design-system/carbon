@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, RefObject } from 'react';
+import React, { ForwardedRef, RefObject, type ComponentProps } from 'react';
 import classnames from 'classnames';
 import {
   FilterableMultiSelect,
@@ -22,7 +22,8 @@ interface OnChangeData<ItemType> {
 }
 
 export interface FluidMultiSelectProps<ItemType>
-  extends MultiSelectProps<ItemType> {
+  extends MultiSelectProps<ItemType>,
+    Pick<ComponentProps<typeof MultiSelect>, 'translateWithId'> {
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
@@ -141,10 +142,6 @@ export interface FluidMultiSelectProps<ItemType>
    * visiting this control
    */
   titleText?: React.ReactNode;
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?: (id: string) => string;
   /**
    * Specify title to show title on hover
    */
@@ -365,7 +362,7 @@ FluidMultiSelect.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

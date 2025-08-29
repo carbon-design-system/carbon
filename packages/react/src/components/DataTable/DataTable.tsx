@@ -46,19 +46,19 @@ import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
-import { TranslateWithId } from '../../types/common';
+import type { TranslateWithId, TFunc } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
 
-const translationKeys = {
-  expandRow: 'carbon.table.row.expand',
-  collapseRow: 'carbon.table.row.collapse',
-  expandAll: 'carbon.table.all.expand',
-  collapseAll: 'carbon.table.all.collapse',
-  selectAll: 'carbon.table.all.select',
-  unselectAll: 'carbon.table.all.unselect',
-  selectRow: 'carbon.table.row.select',
-  unselectRow: 'carbon.table.row.unselect',
+const translationIds = {
+  'carbon.table.row.expand': 'carbon.table.row.expand',
+  'carbon.table.row.collapse': 'carbon.table.row.collapse',
+  'carbon.table.all.expand': 'carbon.table.all.expand',
+  'carbon.table.all.collapse': 'carbon.table.all.collapse',
+  'carbon.table.all.select': 'carbon.table.all.select',
+  'carbon.table.all.unselect': 'carbon.table.all.unselect',
+  'carbon.table.row.select': 'carbon.table.row.select',
+  'carbon.table.row.unselect': 'carbon.table.row.unselect',
 } as const;
 
 // TODO: All code comments in this file should be revisited for accuracy and
@@ -67,22 +67,22 @@ const translationKeys = {
 /**
  * Message ids that will be passed to translateWithId().
  */
-type TranslationKey = (typeof translationKeys)[keyof typeof translationKeys];
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations: Record<TranslationKey, string> = {
-  [translationKeys.expandAll]: 'Expand all rows',
-  [translationKeys.collapseAll]: 'Collapse all rows',
-  [translationKeys.expandRow]: 'Expand current row',
-  [translationKeys.collapseRow]: 'Collapse current row',
-  [translationKeys.selectAll]: 'Select all rows',
-  [translationKeys.unselectAll]: 'Unselect all rows',
-  [translationKeys.selectRow]: 'Select row',
-  [translationKeys.unselectRow]: 'Unselect row',
+  [translationIds['carbon.table.all.expand']]: 'Expand all rows',
+  [translationIds['carbon.table.all.collapse']]: 'Collapse all rows',
+  [translationIds['carbon.table.row.expand']]: 'Expand current row',
+  [translationIds['carbon.table.row.collapse']]: 'Collapse current row',
+  [translationIds['carbon.table.all.select']]: 'Select all rows',
+  [translationIds['carbon.table.all.unselect']]: 'Unselect all rows',
+  [translationIds['carbon.table.row.select']]: 'Select row',
+  [translationIds['carbon.table.row.unselect']]: 'Unselect row',
 };
 
-const translateWithId: NonNullable<
-  TranslateWithId<TranslationKey>['translateWithId']
-> = (id) => defaultTranslations[id];
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 export type DataTableSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -300,7 +300,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     filterRows = defaultFilterRows,
     headers,
     render,
-    translateWithId: t = translateWithId,
+    translateWithId: t = defaultTranslateWithId,
     size,
     isSortable: isSortableProp,
     useZebraStyles,
@@ -398,8 +398,8 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const isExpanded =
       isExpandedAll || rowIds.every((id) => rowsById[id].isExpanded);
     const translationKey = isExpanded
-      ? translationKeys.collapseAll
-      : translationKeys.expandAll;
+      ? translationIds['carbon.table.all.collapse']
+      : translationIds['carbon.table.all.expand'];
     return {
       ...rest,
       'aria-label': t(translationKey),
@@ -452,8 +452,8 @@ export const DataTable = <RowType, ColTypes extends any[]>(
    */
   const getRowProps: rp['getRowProps'] = ({ row, onClick, ...rest }) => {
     const translationKey = row.isExpanded
-      ? translationKeys.collapseRow
-      : translationKeys.expandRow;
+      ? translationIds['carbon.table.row.collapse']
+      : translationIds['carbon.table.row.expand'];
     return {
       ...rest,
       key: row.id,
@@ -492,8 +492,8 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     // If we're given a row, return the selection state values for that row
     if (row) {
       const translationKey = row.isSelected
-        ? translationKeys.unselectRow
-        : translationKeys.selectRow;
+        ? translationIds['carbon.table.row.unselect']
+        : translationIds['carbon.table.row.select'];
       return {
         ...rest,
         checked: row.isSelected,
@@ -515,8 +515,8 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       rowCount > 0 && selectedRowCount > 0 && selectedRowCount !== rowCount;
     const translationKey =
       checked || indeterminate
-        ? translationKeys.unselectAll
-        : translationKeys.selectAll;
+        ? translationIds['carbon.table.all.unselect']
+        : translationIds['carbon.table.all.select'];
 
     return {
       ...rest,
@@ -875,7 +875,6 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   return null;
 };
 
-DataTable.translationKeys = Object.values(translationKeys);
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
 DataTable.TableBatchAction = TableBatchAction;
@@ -976,9 +975,7 @@ DataTable.propTypes = {
   stickyHeader: PropTypes.bool,
 
   /**
-   * Optional method that takes in a message id and returns an
-   * internationalized string. See `DataTable.translationKeys` for all
-   * available message ids.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

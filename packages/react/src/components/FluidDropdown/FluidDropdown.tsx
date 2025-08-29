@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef } from 'react';
+import React, { ForwardedRef, type ComponentProps } from 'react';
 import classnames from 'classnames';
 import Dropdown, { DropdownProps } from '../Dropdown';
 import { usePrefix } from '../../internal/usePrefix';
@@ -15,7 +15,9 @@ export interface OnChangeData<ItemType> {
   selectedItem: ItemType | null;
 }
 
-export interface FluidDropdownProps<ItemType> extends DropdownProps<ItemType> {
+export interface FluidDropdownProps<ItemType>
+  extends DropdownProps<ItemType>,
+    Pick<ComponentProps<typeof Dropdown>, 'translateWithId'> {
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
@@ -105,11 +107,6 @@ export interface FluidDropdownProps<ItemType> extends DropdownProps<ItemType> {
    * visiting this control
    */
   titleText: React.ReactNode;
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?: (id: string) => string;
 
   /**
    * Specify whether the control is currently in warning state
@@ -239,7 +236,7 @@ FluidDropdown.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

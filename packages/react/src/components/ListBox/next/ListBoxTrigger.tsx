@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,35 +10,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ChevronDown } from '@carbon/icons-react';
 import { usePrefix } from '../../../internal/usePrefix';
+import type { TFunc, TranslateWithId } from '../../../types/common';
 
-export const translationIds = {
+const translationIds = {
   'close.menu': 'close.menu',
   'open.menu': 'open.menu',
 } as const;
 
-export type TranslationKey = keyof typeof translationIds;
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['close.menu']]: 'Close',
   [translationIds['open.menu']]: 'Open',
 };
 
-const defaultTranslateWithId = (id: TranslationKey): string =>
-  defaultTranslations[id];
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 export interface ListBoxTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify whether the menu is currently open, which will influence the
    * direction of the menu icon
    */
   isOpen: boolean;
-  /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
-   */
-  translateWithId?: (id: TranslationKey) => string;
 }
 
 /**
@@ -78,9 +75,7 @@ ListBoxTrigger.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 
   /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
