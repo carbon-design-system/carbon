@@ -16,7 +16,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type FC,
   type MouseEvent,
   type ReactNode,
 } from 'react';
@@ -1016,13 +1015,14 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-export interface Label {
+export interface LabelProps {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
-const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
+
+const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -1040,6 +1040,8 @@ const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   return null;
 };
 
+// TODO: `Label` isn't exported. Why does it have `propTypes`? I have the same
+// question for the `HelperText` component too.
 Label.propTypes = {
   disabled: PropTypes.bool,
   hideLabel: PropTypes.bool,
