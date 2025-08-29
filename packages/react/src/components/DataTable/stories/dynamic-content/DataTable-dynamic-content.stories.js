@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -162,8 +162,8 @@ export const Default = (args) => {
         <DataTable
           {...args}
           rows={this.state.rows}
-          headers={this.state.headers}
-          render={({
+          headers={this.state.headers}>
+          {({
             rows,
             headers,
             getHeaderProps,
@@ -176,6 +176,7 @@ export const Default = (args) => {
             selectedRows,
             getTableProps,
             getTableContainerProps,
+            getCellProps,
           }) => {
             const batchActionProps = getBatchActionProps();
             return (
@@ -252,7 +253,9 @@ export const Default = (args) => {
                         <TableExpandRow {...getRowProps({ row })}>
                           <TableSelectRow {...getSelectionProps({ row })} />
                           {row.cells.map((cell) => (
-                            <TableCell key={cell.id}>{cell.value}</TableCell>
+                            <TableCell {...getCellProps({ cell })}>
+                              {cell.value}
+                            </TableCell>
                           ))}
                         </TableExpandRow>
                         <TableExpandedRow
@@ -269,7 +272,7 @@ export const Default = (args) => {
               </TableContainer>
             );
           }}
-        />
+        </DataTable>
       );
     }
   }

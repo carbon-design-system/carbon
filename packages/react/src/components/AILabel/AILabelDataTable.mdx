@@ -75,8 +75,8 @@ callout. To achieve this, you can pass in `AILabelActions` as a child of
 
 ### Using as a column header
 
-To use an `AILabel` inside a column header, you'll need to add a `AILabel` to the
-appropriate column data.
+To use an `AILabel` inside a column header, you'll need to add a `AILabel` to
+the appropriate column data.
 
 ```jsx
 const columnAILabelHeaders = [
@@ -125,13 +125,11 @@ const columnAILabelHeaders = [
 ];
 ```
 
-To ensure the table cells are styled appropriately, you'll need to use the new
+To ensure the table cells are styled appropriately, you'll need to use the
 `getCellProps` prop getter, like so:
 
 ```jsx
-<TableCell {...getCellProps({ cell })} key={cell.id}>
-  {cell.value}
-</TableCell>
+<TableCell {...getCellProps({ cell })}>{cell.value}</TableCell>
 ```
 
 ### Using in a row
@@ -141,12 +139,12 @@ To use an `AILabel` inside a `DataTable` row, you'll need to pass in your
 
 ```jsx
 <TableBody>
-  {rows.map((row, i) => (
-    <TableRow key={i} {...getRowProps({ row })}>
+  {rows.map((row) => (
+    <TableRow {...getRowProps({ row })}>
       <TableSlugRow slug={AILabel} />
       <TableSelectRow {...getSelectionProps({ row })} />
       {row.cells.map((cell) => (
-        <TableCell key={cell.id}>{cell.value}</TableCell>
+        <TableCell {...getCellProps({ cell })}>{cell.value}</TableCell>
       ))}
     </TableRow>
   ))}
@@ -157,4 +155,4 @@ To use an `AILabel` inside a `DataTable` row, you'll need to pass in your
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/AILabel/AILabelDatatable.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/AILabel/AILabelDataTable.mdx).
