@@ -19,7 +19,7 @@ import { Button } from '../Button';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidComboBox',
+  title: 'Experimental/Fluid Components/preview__FluidComboBox',
   component: FluidComboBox,
   subcomponents: {
     FluidComboBoxSkeleton,

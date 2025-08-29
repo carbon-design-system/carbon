@@ -128,7 +128,7 @@ export const EnableExperimentalFocusWrapWithoutSentinels = (args) => {
           <span>
             This story is rendered with{' '}
             <LinkTo title="Getting Started/Feature Flags" name="Overview">
-              enable-experimental-focus-wrap-without-sentinels
+              enable-preview-focus-wrap-without-sentinels
             </LinkTo>{' '}
             enabled
           </span>
@@ -169,7 +169,7 @@ export const EnableExperimentalFocusWrapWithoutSentinels = (args) => {
   );
 };
 EnableExperimentalFocusWrapWithoutSentinels.storyName =
-  'enable-experimental-focus-wrap-without-sentinels';
+  'enable-preview-focus-wrap-without-sentinels';
 EnableExperimentalFocusWrapWithoutSentinels.argTypes = {
   children: {
     table: {

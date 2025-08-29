@@ -9,8 +9,8 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable__FluidTextInput as FluidTextInput,
-  unstable__FluidTextInputSkeleton as FluidTextInputSkeleton,
+  preview__FluidTextInput as FluidTextInput,
+  preview__FluidTextInputSkeleton as FluidTextInputSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 

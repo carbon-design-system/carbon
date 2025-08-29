@@ -17,7 +17,7 @@ test.describe('FluidMultiSelect', () => {
       test('fluid dropdown @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidMultiSelect',
-          id: 'experimental-fluid-components-unstable-fluidmultiselect--default',
+          id: 'preview-fluid-components-unstable-fluidmultiselect--default',
           theme,
         });
       });

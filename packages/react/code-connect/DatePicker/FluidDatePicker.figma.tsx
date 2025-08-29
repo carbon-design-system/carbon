@@ -9,9 +9,9 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable__FluidDatePicker as FluidDatePicker,
-  unstable__FluidDatePickerInput as FluidDatePickerInput,
-  unstable__FluidDatePickerSkeleton as FluidDatePickerSkeleton,
+  preview__FluidDatePicker as FluidDatePicker,
+  preview__FluidDatePickerInput as FluidDatePickerInput,
+  preview__FluidDatePickerSkeleton as FluidDatePickerSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 

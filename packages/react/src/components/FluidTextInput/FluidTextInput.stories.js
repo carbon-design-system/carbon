@@ -18,7 +18,7 @@ import { Information } from '@carbon/icons-react';
 import './test.scss';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidTextInput',
+  title: 'Experimental/Fluid Components/preview__FluidTextInput',
   component: FluidTextInput,
   subcomponents: {
     FluidTextInputSkeleton,

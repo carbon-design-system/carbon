@@ -22,7 +22,7 @@ import {
 import { OverflowMenuV2 } from './';
 
 export default {
-  title: 'Experimental/unstable__OverflowMenuV2',
+  title: 'Experimental/preview__OverflowMenuV2',
   component: OverflowMenuV2,
   subcomponents: {
     MenuItem,
