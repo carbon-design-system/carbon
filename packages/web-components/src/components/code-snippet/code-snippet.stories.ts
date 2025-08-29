@@ -207,7 +207,6 @@ export const Multiline = {
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config codemods packages",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
-    "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
@@ -284,7 +283,6 @@ export const MultilineWithLayer = {
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config codemods packages",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
-    "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
