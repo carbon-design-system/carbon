@@ -16,23 +16,20 @@ interface StepGroupProps {
  * Container for steps, each child represents a step
  */
 export const StepGroup: React.FC<StepGroupProps> = ({ children }) => {
-  const stepState = useStepContext();
+  const { setTotalSteps, currentStep } = useStepContext();
 
   const childrenArray = React.Children.toArray(children);
   const cleanedChildren = childrenArray?.filter(Boolean);
   const childrenCount = React.Children.count(cleanedChildren);
 
-  // set number of steps, based on num of children passed in
+  // set total step count
   useEffect(() => {
-    const { setTotalSteps } = stepState;
     setTotalSteps(childrenCount);
-  }, [childrenCount, stepState]);
+  }, [childrenCount, setTotalSteps]);
 
-  // get currently selected step
-  const { currentStep } = stepState;
   const currentStepComponent =
     React.Children.toArray(cleanedChildren)[currentStep - 1];
 
-  // and just return that one single current step
+  // return only the current step
   return currentStepComponent;
 };
