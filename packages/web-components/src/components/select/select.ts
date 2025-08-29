@@ -8,14 +8,15 @@
 import { LitElement, html } from 'lit';
 import { property, query, queryAll } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { prefix } from '../../globals/settings';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
 import { INPUT_SIZE } from '../text-input/text-input';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './select.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -268,7 +269,6 @@ class CDSSelect extends FormMixin(LitElement) {
    * `true` to enable multiple selection.
    */
   @property({ type: Boolean })
-  // eslint-disable-next-line class-methods-use-this
   get multiple() {
     return false;
   }
@@ -465,9 +465,9 @@ class CDSSelect extends FormMixin(LitElement) {
             `}
         ${this._renderItems(this)}
       </select>
-      ${ChevronDown16({
+      ${iconLoader(ChevronDown16, {
         class: `${prefix}--select__arrow`,
-        'aria-hidden': true,
+        'aria-hidden': 'true',
       })}
       <slot
         name="ai-label"
@@ -476,9 +476,11 @@ class CDSSelect extends FormMixin(LitElement) {
       <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
-        : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
+        : iconLoader(WarningFilled16, {
+            class: `${prefix}--select__invalid-icon`,
+          })}
       ${!invalid && warn
-        ? WarningAltFilled16({
+        ? iconLoader(WarningAltFilled16, {
             class: `${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`,
           })
         : null}

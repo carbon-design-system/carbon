@@ -142,6 +142,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `click` event on this element.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = async () => {
     this.lastInteractionWasKeyboard = false;
@@ -154,6 +155,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = async (event) => {
     // needed for interactive tags for when the tag is focused from tabbing into it
@@ -173,11 +175,9 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
-    const component = (target as HTMLSlotElement)
-      .assignedNodes()
-      .filter(
-        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-      );
+    const component = (target as HTMLSlotElement).assignedNodes().filter(
+      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim() // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    );
     if (!component[0]) {
       return;
     }
@@ -226,6 +226,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
 
     if (changedProperties.has('open')) {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       this.open
         ? toolTipContent?.setAttribute('open', '')
         : toolTipContent?.removeAttribute('open');

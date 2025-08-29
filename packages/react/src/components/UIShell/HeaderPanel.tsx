@@ -55,7 +55,7 @@ export interface HeaderPanelProps {
 }
 
 const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
-  function HeaderPanel(
+  (
     {
       children,
       className: customClassName,
@@ -66,7 +66,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       ...rest
     },
     ref
-  ) {
+  ) => {
     const prefix = usePrefix();
     const headerPanelReference = useRef<HTMLDivElement>(null);
     const headerPanelRef = useMergedRefs([headerPanelReference, ref]);
