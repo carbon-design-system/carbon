@@ -1562,6 +1562,11 @@ export interface IconTabProps extends DivAttributes {
   defaultOpen?: boolean;
 
   /**
+   *  Specify whether your IconTab is disabled.
+   */
+  disabled?: boolean;
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip for the icon.
    */
   enterDelayMs?: number;

@@ -368,6 +368,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/F4isalSH"><img src="https://avatars.githubusercontent.com/u/88539362?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Faisal</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=F4isalSH" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/anjju"><img src="https://avatars.githubusercontent.com/u/20580246?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anju Shivan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=anjju" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/seanhaug"><img src="https://avatars.githubusercontent.com/u/227620549?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sean Haughey</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=seanhaug" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Vignesh-Loganathan-IBM-1"><img src="https://avatars.githubusercontent.com/u/196759586?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vignesh-Loganathan-IBM-1</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Vignesh-Loganathan-IBM-1" title="Code">💻</a></td>
   </tr>
 </table>
 
