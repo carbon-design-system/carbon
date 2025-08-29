@@ -16,7 +16,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type FC,
   type MouseEvent,
   type ReactNode,
 } from 'react';
@@ -1022,7 +1021,7 @@ export interface Label {
   id?: string;
   label?: ReactNode;
 }
-const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
+const Label = ({ disabled, id, hideLabel, label }: Label) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -1040,12 +1039,14 @@ const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   return null;
 };
 
-Label.propTypes = {
+const propTypes = {
   disabled: PropTypes.bool,
   hideLabel: PropTypes.bool,
   id: PropTypes.string,
   label: PropTypes.node,
 };
+
+Object.assign(Label, { propTypes });
 
 export interface HelperTextProps {
   id?: string;

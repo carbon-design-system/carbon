@@ -314,7 +314,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
   }
 );
 
-(Tooltip as React.FC).propTypes = {
+const propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -409,5 +409,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
    */
   leaveDelayMs: PropTypes.number,
 };
+
+Object.assign(Tooltip, { propTypes });
 
 export { Tooltip };

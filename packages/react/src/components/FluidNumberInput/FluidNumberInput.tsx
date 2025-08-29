@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -173,7 +173,7 @@ export interface FluidNumberInputProps {
 }
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
-const FluidNumberInput: React.FC<FluidNumberInputProps> = React.forwardRef<
+const FluidNumberInput = React.forwardRef<
   HTMLInputElement,
   FluidNumberInputProps
 >(({ className, ...other }, ref) => {

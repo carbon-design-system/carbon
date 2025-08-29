@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { type ComponentType, type FunctionComponent } from 'react';
+import React, { type ComponentProps } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from '../Button';
@@ -49,7 +49,7 @@ export interface ChatButtonProps
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ComponentProps<typeof Button>['renderIcon'];
   /**
    * Specify the size of the `ChatButton`, from the following list of sizes:
    */

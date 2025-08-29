@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { type ChangeEvent } from 'react';
+import React, { forwardRef, type ChangeEvent } from 'react';
 import classnames from 'classnames';
 import Search from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
@@ -74,11 +74,9 @@ export interface FluidSearchProps {
   value?: string | number;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
-const FluidSearch: React.FC<FluidSearchProps> = React.forwardRef<
-  HTMLInputElement,
-  FluidSearchProps
->(({ className, ...other }, ref) => {
+const frFn = forwardRef<HTMLInputElement, FluidSearchProps>;
+
+const FluidSearch = frFn(({ className, ...other }, ref) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--search--fluid`, className);
 

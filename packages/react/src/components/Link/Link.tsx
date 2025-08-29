@@ -157,8 +157,8 @@ const LinkBase = React.forwardRef<
 );
 const Link = LinkBase as LinkComponent;
 
-(Link as React.FC).displayName = 'Link';
-(Link as React.FC).propTypes = {
+const displayName = 'Link';
+const propTypes = {
   /**
    * Provide a custom element or component to render the top-level node for the
    * component.
@@ -205,5 +205,7 @@ const Link = LinkBase as LinkComponent;
    */
   visited: PropTypes.bool,
 };
+
+Object.assign(Link, { displayName, propTypes });
 
 export default Link;

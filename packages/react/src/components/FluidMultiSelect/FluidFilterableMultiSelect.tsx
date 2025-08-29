@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, FunctionComponent } from 'react';
+import React, { type ForwardedRef, type ReactNode } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
@@ -76,7 +76,7 @@ export interface FluidFilterableMultiSelectProps<ItemType>
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: FunctionComponent<ItemType>;
+  itemToElement?: (item: ItemType) => ReactNode;
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field

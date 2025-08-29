@@ -236,8 +236,8 @@ const Button: ButtonComponent = React.forwardRef(
   }
 );
 
-(Button as React.FC).displayName = 'Button';
-(Button as React.FC).propTypes = {
+const displayName = 'Button';
+const propTypes = {
   /**
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately
@@ -418,5 +418,7 @@ const Button: ButtonComponent = React.forwardRef(
    */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
 };
+
+Object.assign(Button, { displayName, propTypes });
 
 export default Button as ButtonComponent;

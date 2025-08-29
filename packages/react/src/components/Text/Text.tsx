@@ -10,7 +10,6 @@ import React, {
   Children,
   useContext,
   type ElementType,
-  type FC,
   type ReactElement,
   type ReactNode,
 } from 'react';
@@ -89,7 +88,7 @@ const TextBase = React.forwardRef(
   }
 ) as TextComponent;
 export const Text = TextBase as TextComponent;
-(Text as FC).propTypes = {
+const propTypes = {
   /**
    * Provide a custom element type used to render the outermost node
    */
@@ -110,6 +109,8 @@ export const Text = TextBase as TextComponent;
    */
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
 };
+
+Object.assign(Text, { propTypes });
 
 const getTextFromChildren = (children: ReactNode) => {
   if (typeof children === 'string') {

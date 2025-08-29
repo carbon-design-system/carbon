@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  type ComponentType,
-  type FunctionComponent,
   useEffect,
   useLayoutEffect,
   useState,
   useRef,
   useMemo,
   useCallback,
+  type ElementType,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -75,7 +74,7 @@ interface PageHeaderBreadcrumbBarProps {
   /**
    * Provide an optional icon to render in front of the PageHeaderContent's title.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
   /**
    * The PageHeaderBreadcrumbBar's content actions
    */
@@ -169,7 +168,7 @@ interface PageHeaderContentProps {
   /**
    * Provide an optional icon to render in front of the PageHeaderContent's title.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
   /**
    * The PageHeaderContent's title
    */

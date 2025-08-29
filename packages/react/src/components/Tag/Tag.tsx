@@ -320,7 +320,7 @@ const TagBase = React.forwardRef<
   }
 );
 const Tag = TagBase as TagComponent;
-(Tag as React.FC).propTypes = {
+const propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default
    * wrapping element
@@ -400,6 +400,8 @@ const Tag = TagBase as TagComponent;
    */
   type: PropTypes.oneOf(Object.keys(TYPES)),
 };
+
+Object.assign(Tag, { propTypes });
 
 export const types = Object.keys(TYPES);
 export default Tag;
