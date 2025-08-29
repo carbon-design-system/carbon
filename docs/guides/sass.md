@@ -91,7 +91,7 @@ root/entrypoint stylesheet.
 ```scss
 @use '@carbon/styles/scss/feature-flags' with (
   $feature-flags: (
-    'enable-experimental-tile-contrast': true,
+    'enable-preview-tile-contrast': true,
   )
 );
 @use '@carbon/styles';
@@ -103,7 +103,7 @@ Feature flags can also be enabled via the provided `enable()` mixin
 @use '@carbon/styles/scss/feature-flags';
 @use '@carbon/styles';
 
-@include feature-flags.enable('enable-experimental-tile-contrast');
+@include feature-flags.enable('enable-preview-tile-contrast');
 ```
 
 ## Optimizing your Sass builds
