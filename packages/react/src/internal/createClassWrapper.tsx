@@ -5,6 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// TODO: @AdamAlston - Delete this file after part 3 of
+// https://github.com/carbon-design-system/carbon/issues/18868. That should be
+// the last thing in https://github.com/carbon-design-system/carbon/issues/18870
+// which will itself be the last thing in
+// https://github.com/carbon-design-system/carbon/issues/15498.
+
 import React, {
   type ComponentClass,
   type ForwardRefExoticComponent,

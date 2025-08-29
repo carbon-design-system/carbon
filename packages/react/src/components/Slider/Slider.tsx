@@ -6,9 +6,10 @@
  */
 
 import React, {
-  createRef,
-  PureComponent,
-  ReactNode,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
   type ChangeEvent,
   type ComponentProps,
   type CSSProperties,
@@ -17,7 +18,7 @@ import React, {
   type KeyboardEvent,
   type KeyboardEventHandler,
   type MouseEvent,
-  type RefObject,
+  type ReactNode,
   type TouchEvent,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -29,7 +30,6 @@ import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
-import { FeatureFlagContext } from '../FeatureFlags';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
@@ -306,19 +306,33 @@ export interface SliderProps
   warnText?: ReactNode;
 }
 
+// TODO: Delete this type and directory type the properties in the function.
 interface CalcLeftPercentProps {
   clientX?: number;
   value?: number;
   range?: number;
 }
 
-class Slider extends PureComponent<SliderProps> {
-  static contextType = FeatureFlagContext;
-  static translationIds = Object.values(translationIds);
+type State = {
+  value: ComponentProps<typeof Slider>['value'];
+  valueUpper: ComponentProps<typeof Slider>['unstable_valueUpper'];
+  left: number;
+  leftUpper: number;
+  needsOnRelease: boolean;
+  isValid: boolean;
+  isValidUpper: boolean;
+  activeHandle: HandlePosition | undefined;
+  correctedValue: string | null;
+  correctedPosition: HandlePosition | null;
+  isRtl: boolean;
+};
 
-  state = {
-    value: this.props.value,
-    valueUpper: this.props.unstable_valueUpper,
+export const Slider = (props: SliderProps) => {
+  // TODO: Move destructured `props` from the IIFE to here.
+
+  const initialState: State = {
+    value: props.value,
+    valueUpper: props.unstable_valueUpper,
     left: 0,
     leftUpper: 0,
     needsOnRelease: false,
@@ -330,141 +344,202 @@ class Slider extends PureComponent<SliderProps> {
     isRtl: false,
   };
 
-  thumbRef: RefObject<HTMLDivElement | null>;
-  thumbRefUpper: RefObject<HTMLDivElement | null>;
-  filledTrackRef: RefObject<HTMLDivElement | null>;
-  element: HTMLDivElement | null = null;
-  inputId = '';
-  track: HTMLDivElement | null | undefined;
+  // TODO: Investigate using generics on the hook.
+  const [state, setState] = useReducer(
+    (prev: State, args: Partial<State>) => ({ ...prev, ...args }),
+    initialState
+  );
 
-  constructor(props) {
-    super(props);
-    this.thumbRef = createRef<HTMLDivElement>();
-    this.thumbRefUpper = createRef<HTMLDivElement>();
-    this.filledTrackRef = createRef<HTMLDivElement>();
-  }
+  // TODO: Investigate getting rid of these references.
+  const stateRef = useRef(state);
+
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
+
+  const propsRef = useRef(props);
+
+  useEffect(() => {
+    propsRef.current = props;
+  }, [props]);
+
+  const thumbRef = useRef<HTMLDivElement>(null);
+  const thumbRefUpper = useRef<HTMLDivElement>(null);
+  const filledTrackRef = useRef<HTMLDivElement>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const inputIdRef = useRef('');
+
+  // TODO: Delete this function and set its return value as the value of
+  // `twoHandles`.
+  const hasTwoHandles = () => {
+    return typeof state.valueUpper !== 'undefined';
+  };
+
+  const twoHandles = hasTwoHandles();
 
   /**
    * Sets up initial slider position and value in response to component mount.
    */
-  componentDidMount() {
-    if (this.element) {
+  useEffect(() => {
+    if (elementRef.current) {
       const isRtl = document?.dir === 'rtl';
-      if (this.hasTwoHandles()) {
-        const { value, left } = this.calcValue({
-          value: this.state.value,
+      if (hasTwoHandles()) {
+        const { value, left } = calcValue({
+          value: stateRef.current.value,
           useRawValue: true,
         });
-        const { value: valueUpper, left: leftUpper } = this.calcValue({
-          value: this.state.valueUpper,
+        const { value: valueUpper, left: leftUpper } = calcValue({
+          value: stateRef.current.valueUpper,
           useRawValue: true,
         });
-        this.setState({ isRtl, value, left, valueUpper, leftUpper });
-        if (this.filledTrackRef.current) {
-          this.filledTrackRef.current.style.transform = this.state.isRtl
-            ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
-                (this.state.leftUpper - this.state.left) / 100
-              })`
-            : `translate(${this.state.left}%, -50%) scaleX(${
-                (this.state.leftUpper - this.state.left) / 100
-              })`;
-        }
+        setState({ isRtl, value, left, valueUpper, leftUpper });
       } else {
-        const { value, left } = this.calcValue({
-          value: this.state.value,
+        const { value, left } = calcValue({
+          value: stateRef.current.value,
           useRawValue: true,
         });
-        this.setState({ isRtl, value, left });
-        if (this.filledTrackRef.current) {
-          this.filledTrackRef.current.style.transform = this.state.isRtl
-            ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
-            : `translate(0%, -50%) scaleX(${this.state.left / 100})`;
-        }
+        setState({ isRtl, value, left });
       }
     }
-  }
 
-  /**
-   * Handles firing of `onChange` and `onRelease` callbacks to parent in
-   * response to state changes.
-   *
-   * @param {*} prevProps prevProps
-   * @param {*} prevState The previous Slider state, used to see if callbacks
-   * should be called.
-   */
-  componentDidUpdate(prevProps, prevState) {
+    return () => {
+      DRAG_STOP_EVENT_TYPES.forEach((element) =>
+        elementRef.current?.ownerDocument.removeEventListener(
+          element,
+          onDragStop
+        )
+      );
+
+      DRAG_EVENT_TYPES.forEach((element) =>
+        elementRef.current?.ownerDocument.removeEventListener(
+          element,
+          handleDrag
+        )
+      );
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    // TODO: Uncomment this code and delete all of the `filledTrackRef.current`
+    // checks.
+    // const el = filledTrackRef.current;
+    //
+    // if (!el) return;
+
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
-    if (this.hasTwoHandles()) {
-      if (this.filledTrackRef.current) {
-        this.filledTrackRef.current.style.transform = this.state.isRtl
-          ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
-              (this.state.leftUpper - this.state.left) / 100
+    if (hasTwoHandles()) {
+      if (filledTrackRef.current) {
+        filledTrackRef.current.style.transform = state.isRtl
+          ? `translate(${100 - state.leftUpper}%, -50%) scaleX(${
+              (state.leftUpper - state.left) / 100
             })`
-          : `translate(${this.state.left}%, -50%) scaleX(${
-              (this.state.leftUpper - this.state.left) / 100
+          : `translate(${state.left}%, -50%) scaleX(${
+              (state.leftUpper - state.left) / 100
             })`;
       }
     } else {
-      if (this.filledTrackRef.current) {
-        this.filledTrackRef.current.style.transform = this.state.isRtl
-          ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
-          : `translate(0%, -50%) scaleX(${this.state.left / 100})`;
+      if (filledTrackRef.current) {
+        filledTrackRef.current.style.transform = state.isRtl
+          ? `translate(100%, -50%) scaleX(-${state.left / 100})`
+          : `translate(0%, -50%) scaleX(${state.left / 100})`;
       }
     }
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.left, state.leftUpper, state.isRtl]);
+
+  // Fire onChange when value(s) change
+  const prevValsRef = useRef<{
+    value: State['value'];
+    valueUpper: State['valueUpper'];
+  }>(null);
+
+  useEffect(() => {
+    const prev = prevValsRef.current;
+
     if (
-      (prevState.value !== this.state.value ||
-        prevState.valueUpper !== this.state.valueUpper) &&
-      typeof this.props.onChange === 'function'
+      prev &&
+      (prev.value !== state.value || prev.valueUpper !== state.valueUpper) &&
+      typeof props.onChange === 'function'
     ) {
-      this.props.onChange({
-        value: this.state.value,
-        valueUpper: this.state.valueUpper,
+      props.onChange({
+        value: state.value,
+        valueUpper: state.valueUpper,
       });
     }
 
+    prevValsRef.current = { value: state.value, valueUpper: state.valueUpper };
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.value, state.valueUpper, props.onChange]);
+
+  useEffect(() => {
     // Fire onRelease event handler if present and if needed
-    if (
-      this.state.needsOnRelease &&
-      typeof this.props.onRelease === 'function'
-    ) {
-      this.props.onRelease({
-        value: this.state.value,
-        valueUpper: this.state.valueUpper,
+    if (state.needsOnRelease && typeof props.onRelease === 'function') {
+      props.onRelease({
+        value: state.value,
+        valueUpper: state.valueUpper,
       });
       // Reset the flag
-      this.setState({ needsOnRelease: false });
+      setState({ needsOnRelease: false });
     }
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.needsOnRelease, state.value, state.valueUpper, props.onRelease]);
+
+  const prevSyncKeysRef = useRef<
+    [number, number | undefined, number, number] | null
+  >(null);
+
+  useEffect(() => {
+    const prev = prevSyncKeysRef.current;
+    const next: [number, number | undefined, number, number] = [
+      props.value,
+      props.unstable_valueUpper,
+      props.max,
+      props.min,
+    ];
 
     // If value from props does not change, do nothing here.
     // Otherwise, do prop -> state sync without "value capping".
     if (
-      prevProps.value === this.props.value &&
-      prevProps.unstable_valueUpper === this.props.unstable_valueUpper &&
-      prevProps.max === this.props.max &&
-      prevProps.min === this.props.min
+      !prev ||
+      prev[0] !== next[0] ||
+      prev[1] !== next[1] ||
+      prev[2] !== next[2] ||
+      prev[3] !== next[3]
     ) {
-      return;
+      setState(
+        calcValue({
+          value: props.value,
+          useRawValue: true,
+        })
+      );
+      if (typeof props.unstable_valueUpper !== 'undefined') {
+        const { value: valueUpper, left: leftUpper } = calcValue({
+          value: props.unstable_valueUpper,
+          useRawValue: true,
+        });
+        setState({
+          valueUpper,
+          leftUpper,
+        });
+      } else {
+        setState({ valueUpper: undefined, leftUpper: undefined });
+      }
+
+      prevSyncKeysRef.current = next;
     }
-    this.setState(
-      this.calcValue({
-        value: this.props.value,
-        useRawValue: true,
-      })
-    );
-    if (typeof this.props.unstable_valueUpper !== 'undefined') {
-      const { value: valueUpper, left: leftUpper } = this.calcValue({
-        value: this.props.unstable_valueUpper,
-        useRawValue: true,
-      });
-      this.setState({
-        valueUpper,
-        leftUpper,
-      });
-    } else {
-      this.setState({ valueUpper: undefined, leftUpper: undefined });
-    }
-  }
+    // TODO: Investigate whether the missing dependency should be added.
+    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.value, props.unstable_valueUpper, props.max, props.min]);
 
   /**
    * Rounds a given value to the nearest step defined by the slider's `step`
@@ -473,31 +548,32 @@ class Slider extends PureComponent<SliderProps> {
    * @param value - The value to adjust to the nearest step. Defaults to `0`.
    * @returns The value rounded to the precision determined by the step.
    */
-  nearestStepValue(value = 0) {
-    const decimals = (this.props.step?.toString().split('.')[1] || '').length;
+  const nearestStepValue = (value = 0) => {
+    // TODO: Use a nullish coalescing operator.
+    const decimals = (props.step?.toString().split('.')[1] || '').length;
 
     return Number(value.toFixed(decimals));
-  }
+  };
 
-  handleDrag = (event: Event) => {
+  const handleDrag = (event: Event) => {
     if (
       event instanceof globalThis.MouseEvent ||
       event instanceof globalThis.TouchEvent
     ) {
-      this.onDrag(event);
+      onDrag(event);
     }
   };
 
   /**
-   * Sets up "drag" event handlers and calls `this.onDrag` in case dragging
+   * Sets up "drag" event handlers and calls `onDrag` in case dragging
    * started on somewhere other than the thumb without a corresponding "move"
    * event.
    */
-  onDragStart = (
+  const onDragStart = (
     evt: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>
   ) => {
     // Do nothing if component is disabled
-    if (this.props.disabled || this.props.readOnly) {
+    if (props.disabled || props.readOnly) {
       return;
     }
 
@@ -507,30 +583,33 @@ class Slider extends PureComponent<SliderProps> {
     // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#notes
     evt.preventDefault();
 
+    // TODO: Abstract `elementRef.current?.ownerDocument` to a variable that can
+    // be used here and everywhere else in this file.
+
     // Add drag stop handlers
     DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      this.element?.ownerDocument.addEventListener(element, this.onDragStop);
+      elementRef.current?.ownerDocument.addEventListener(element, onDragStop);
     });
 
     // Add drag handlers
     DRAG_EVENT_TYPES.forEach((element) => {
-      this.element?.ownerDocument.addEventListener(element, this.handleDrag);
+      elementRef.current?.ownerDocument.addEventListener(element, handleDrag);
     });
 
-    const clientX = this.getClientXFromEvent(evt.nativeEvent);
+    const clientX = getClientXFromEvent(evt.nativeEvent);
 
     let activeHandle: HandlePosition | undefined;
-    if (this.hasTwoHandles()) {
-      if (evt.target == this.thumbRef.current) {
+    if (hasTwoHandles()) {
+      if (evt.target == thumbRef.current) {
         activeHandle = HandlePosition.LOWER;
-      } else if (evt.target == this.thumbRefUpper.current) {
+      } else if (evt.target == thumbRefUpper.current) {
         activeHandle = HandlePosition.UPPER;
       } else if (clientX) {
-        const distanceToLower = this.calcDistanceToHandle(
+        const distanceToLower = calcDistanceToHandle(
           HandlePosition.LOWER,
           clientX
         );
-        const distanceToUpper = this.calcDistanceToHandle(
+        const distanceToUpper = calcDistanceToHandle(
           HandlePosition.UPPER,
           clientX
         );
@@ -546,53 +625,61 @@ class Slider extends PureComponent<SliderProps> {
     const focusOptions = {
       preventScroll: true,
     };
-    if (this.hasTwoHandles()) {
-      if (this.thumbRef.current && activeHandle === HandlePosition.LOWER) {
-        this.thumbRef.current.focus(focusOptions);
+    if (hasTwoHandles()) {
+      if (thumbRef.current && activeHandle === HandlePosition.LOWER) {
+        thumbRef.current.focus(focusOptions);
       } else if (
-        this.thumbRefUpper.current &&
+        thumbRefUpper.current &&
         activeHandle === HandlePosition.UPPER
       ) {
-        this.thumbRefUpper.current.focus(focusOptions);
+        thumbRefUpper.current.focus(focusOptions);
       }
-    } else if (this.thumbRef.current) {
-      this.thumbRef.current.focus(focusOptions);
+    } else if (thumbRef.current) {
+      thumbRef.current.focus(focusOptions);
     }
-    this.setState({ activeHandle });
+    setState({ activeHandle });
 
     // Perform first recalculation since we probably didn't click exactly in the
     // middle of the thumb.
-    this.onDrag(evt.nativeEvent, activeHandle);
+    onDrag(evt.nativeEvent, activeHandle);
   };
 
   /**
    * Removes "drag" and "drag stop" event handlers and calls sets the flag
    * indicating that the `onRelease` callback should be called.
    */
-  onDragStop = () => {
+  const onDragStop = () => {
     // Do nothing if component is disabled
-    if (this.props.disabled || this.props.readOnly) {
+    if (props.disabled || props.readOnly) {
       return;
     }
 
+    // TODO: Rename parameters in `DRAG_*` loops to `type`.
     // Remove drag stop handlers
     DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      this.element?.ownerDocument.removeEventListener(element, this.onDragStop);
+      elementRef.current?.ownerDocument.removeEventListener(
+        element,
+        onDragStop
+      );
     });
 
     // Remove drag handlers
     DRAG_EVENT_TYPES.forEach((element) => {
-      this.element?.ownerDocument.removeEventListener(element, this.handleDrag);
+      elementRef.current?.ownerDocument.removeEventListener(
+        element,
+        handleDrag
+      );
     });
 
     // Set needsOnRelease flag so event fires on next update.
-    this.setState({
+    setState({
       needsOnRelease: true,
       isValid: true,
       isValidUpper: true,
     });
   };
 
+  // TODO: Rename this reference.
   /**
    * Handles a "drag" event by recalculating the value/thumb and setting state
    * accordingly.
@@ -601,59 +688,76 @@ class Slider extends PureComponent<SliderProps> {
    * @param activeHandle The first drag event call, we may have an explicit
    * activeHandle value, which is to be used before state is used.
    */
-  _onDrag = (
-    evt: globalThis.MouseEvent | globalThis.TouchEvent,
-    activeHandle?: HandlePosition
-  ) => {
-    activeHandle = activeHandle ?? this.state.activeHandle;
+  const _onDragRef =
+    useRef<
+      (
+        evt: globalThis.MouseEvent | globalThis.TouchEvent,
+        activeHandle?: HandlePosition
+      ) => void
+    >(null);
+
+  _onDragRef.current = (evt, activeHandle) => {
+    activeHandle = activeHandle ?? stateRef.current.activeHandle;
     // Do nothing if component is disabled, or we have no event.
-    if (this.props.disabled || this.props.readOnly || !evt) {
+    if (propsRef.current.disabled || propsRef.current.readOnly || !evt) {
       return;
     }
 
-    const clientX = this.getClientXFromEvent(evt);
+    const clientX = getClientXFromEvent(evt);
 
-    const { value, left } = this.calcValue({
+    const { value, left } = calcValue({
       clientX,
-      value: this.state.value,
+      value: stateRef.current.value,
     });
     // If we're set to two handles, negotiate which drag handle is closest to
     // the users' interaction.
-    if (this.hasTwoHandles() && activeHandle) {
-      this.setValueLeftForHandle(activeHandle, {
-        value: this.nearestStepValue(value),
+    if (hasTwoHandles() && activeHandle) {
+      setValueLeftForHandle(activeHandle, {
+        value: nearestStepValue(value),
         left,
       });
     } else {
-      this.setState({
-        value: this.nearestStepValue(value),
+      setState({
+        value: nearestStepValue(value),
         left,
         isValid: true,
       });
     }
-    this.setState({ correctedValue: null, correctedPosition: null });
+    // TODO: Investigate if it would be better to not call `setState`
+    // back-to-back here and in other places.
+    setState({ correctedValue: null, correctedPosition: null });
   };
 
   /**
-   * Throttles calls to `this._onDrag` by limiting events to being processed at
+   * Throttles calls to `_onDrag` by limiting events to being processed at
    * most once every `EVENT_THROTTLE` milliseconds.
    */
-  onDrag = throttle(this._onDrag, EVENT_THROTTLE, {
-    leading: true,
-    trailing: false,
-  });
+  const onDrag = useMemo(
+    () =>
+      throttle(
+        (
+          evt: globalThis.MouseEvent | globalThis.TouchEvent,
+          activeHandle?: HandlePosition
+        ) => {
+          _onDragRef.current?.(evt, activeHandle);
+        },
+        EVENT_THROTTLE,
+        { leading: true, trailing: false }
+      ),
+    []
+  );
 
   /**
    * Handles a `keydown` event by recalculating the value/thumb and setting
    * state accordingly.
    */
-  onKeyDown = (evt: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyDown = (evt: KeyboardEvent<HTMLDivElement>) => {
     // Do nothing if component is disabled, or we don't have a valid event
-    if (this.props.disabled || this.props.readOnly) {
+    if (props.disabled || props.readOnly) {
       return;
     }
 
-    const { step = 1, stepMultiplier = 4 } = this.props;
+    const { step = 1, stepMultiplier = 4 } = props;
 
     let delta = 0;
     if (matches(evt, [keys.ArrowDown, keys.ArrowLeft])) {
@@ -670,38 +774,33 @@ class Slider extends PureComponent<SliderProps> {
       delta *= stepMultiplier;
     }
 
-    if (this.hasTwoHandles() && this.state.activeHandle) {
+    if (hasTwoHandles() && state.activeHandle) {
       const currentValue =
-        this.state.activeHandle === HandlePosition.LOWER
-          ? this.state.value
-          : this.state.valueUpper;
-      const { value, left } = this.calcValue({
-        value: this.calcValueForDelta(
-          currentValue ?? this.props.min,
-          delta,
-          this.props.step
-        ),
+        state.activeHandle === HandlePosition.LOWER
+          ? state.value
+          : state.valueUpper;
+      const { value, left } = calcValue({
+        value: calcValueForDelta(currentValue ?? props.min, delta, props.step),
       });
-      this.setValueLeftForHandle(this.state.activeHandle, {
-        value: this.nearestStepValue(value),
+      setValueLeftForHandle(state.activeHandle, {
+        value: nearestStepValue(value),
         left,
       });
     } else {
-      const { value, left } = this.calcValue({
+      const { value, left } = calcValue({
         // Ensures custom value from `<input>` won't cause skipping next stepping
         // point with right arrow key, e.g. Typing 51 in `<input>`, moving focus
         // onto the thumb and the hitting right arrow key should yield 52 instead
         // of 54.
-        value: this.calcValueForDelta(this.state.value, delta, this.props.step),
+        value: calcValueForDelta(state.value, delta, props.step),
       });
-      this.setState({
-        value: this.nearestStepValue(value),
+      setState({
+        value: nearestStepValue(value),
         left,
         isValid: true,
       });
     }
-
-    this.setState({ correctedValue: null, correctedPosition: null });
+    setState({ correctedValue: null, correctedPosition: null });
   };
 
   /**
@@ -709,9 +808,9 @@ class Slider extends PureComponent<SliderProps> {
    * Handles a change to the input field by recalculating the value/thumb and
    * setting state accordingly.
    */
-  onChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const onChangeInput = (evt: ChangeEvent<HTMLInputElement>) => {
     // Do nothing if component is disabled
-    if (this.props.disabled || this.props.readOnly) {
+    if (props.disabled || props.readOnly) {
       return;
     }
 
@@ -726,34 +825,38 @@ class Slider extends PureComponent<SliderProps> {
       HandlePosition.LOWER;
     const targetValue = Number.parseFloat(evt.target.value);
 
-    if (this.hasTwoHandles()) {
+    if (hasTwoHandles()) {
       if (isNaN(targetValue)) {
-        this.setValueForHandle(activeHandle, evt.target.value);
+        setValueForHandle(activeHandle, evt.target.value);
       } else if (
-        this.isValidValueForPosition({
+        isValidValueForPosition({
           handle: activeHandle,
           value: targetValue,
-          min: this.props.min,
-          max: this.props.max,
+          min: props.min,
+          max: props.max,
         })
       ) {
-        this.processNewInputValue(evt.target);
+        processNewInputValue(evt.target);
       } else {
-        this.setValueForHandle(activeHandle, targetValue);
+        setValueForHandle(activeHandle, targetValue);
       }
     } else {
       if (isNaN(targetValue)) {
-        this.setState({ value: evt.target.value });
+        // TODO: Address this error
+        //
+        // @ts-expect-error - Passing a string to something that expects a
+        // number.
+        setState({ value: evt.target.value });
       } else if (
-        this.isValidValue({
+        isValidValue({
           value: targetValue,
-          min: this.props.min,
-          max: this.props.max,
+          min: props.min,
+          max: props.max,
         })
       ) {
-        this.processNewInputValue(evt.target);
+        processNewInputValue(evt.target);
       } else {
-        this.setState({ value: targetValue });
+        setState({ value: targetValue });
       }
     }
   };
@@ -762,7 +865,7 @@ class Slider extends PureComponent<SliderProps> {
    * Checks for validity of input value after clicking out of the input. It also
    * Handles state change to isValid state.
    */
-  onBlur = (evt: FocusEvent<HTMLInputElement>) => {
+  const onBlurInput = (evt: FocusEvent<HTMLInputElement>) => {
     // Do nothing if we have no valid event, target, or value
     if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
       return;
@@ -770,9 +873,9 @@ class Slider extends PureComponent<SliderProps> {
 
     const { value: targetValue } = evt.target;
 
-    this.processNewInputValue(evt.target);
+    processNewInputValue(evt.target);
 
-    this.props.onBlur?.({
+    props.onBlur?.({
       value: targetValue,
       handlePosition: evt.target.dataset.handlePosition as
         | HandlePosition
@@ -780,11 +883,11 @@ class Slider extends PureComponent<SliderProps> {
     });
   };
 
-  onInputKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
+  const onInputKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
     // Do nothing if component is disabled, or we don't have a valid event.
     if (
-      this.props.disabled ||
-      this.props.readOnly ||
+      props.disabled ||
+      props.readOnly ||
       !(evt.target instanceof HTMLInputElement)
     ) {
       return;
@@ -796,12 +899,12 @@ class Slider extends PureComponent<SliderProps> {
     }
 
     if (matches(evt, [keys.Enter])) {
-      this.processNewInputValue(evt.target);
+      processNewInputValue(evt.target);
     }
   };
 
-  processNewInputValue = (input: HTMLInputElement) => {
-    this.setState({ correctedValue: null, correctedPosition: null });
+  const processNewInputValue = (input: HTMLInputElement) => {
+    setState({ correctedValue: null, correctedPosition: null });
     const targetValue = Number.parseFloat(input.value);
     const validity = !isNaN(targetValue);
 
@@ -813,47 +916,47 @@ class Slider extends PureComponent<SliderProps> {
       | undefined;
 
     if (handlePosition === HandlePosition.LOWER) {
-      this.setState({ isValid: validity });
+      setState({ isValid: validity });
     } else if (handlePosition === HandlePosition.UPPER) {
-      this.setState({ isValidUpper: validity });
+      setState({ isValidUpper: validity });
     }
-    this.setState({ isValid: validity });
+    setState({ isValid: validity });
 
     if (validity) {
       const adjustedValue = handlePosition
-        ? this.getAdjustedValueForPosition({
+        ? getAdjustedValueForPosition({
             handle: handlePosition,
             value: targetValue,
-            min: this.props.min,
-            max: this.props.max,
+            min: props.min,
+            max: props.max,
           })
-        : this.getAdjustedValue({
+        : getAdjustedValue({
             value: targetValue,
-            min: this.props.min,
-            max: this.props.max,
+            min: props.min,
+            max: props.max,
           });
 
       if (adjustedValue !== targetValue) {
-        this.setState({
+        setState({
           correctedValue: targetValue.toString(),
-          correctedPosition: handlePosition,
+          correctedPosition: handlePosition ?? null,
         });
       } else {
-        this.setState({ correctedValue: null, correctedPosition: null });
+        setState({ correctedValue: null, correctedPosition: null });
       }
 
-      const { value, left } = this.calcValue({
+      const { value, left } = calcValue({
         value: adjustedValue,
         useRawValue: true,
       });
 
       if (handlePosition) {
-        this.setValueLeftForHandle(handlePosition, {
-          value: this.nearestStepValue(value),
+        setValueLeftForHandle(handlePosition, {
+          value: nearestStepValue(value),
           left,
         });
       } else {
-        this.setState({
+        setState({
           value,
           left,
         });
@@ -861,8 +964,9 @@ class Slider extends PureComponent<SliderProps> {
     }
   };
 
-  calcLeftPercent = ({ clientX, value, range }: CalcLeftPercentProps) => {
-    const boundingRect = this.element?.getBoundingClientRect?.();
+  const calcLeftPercent = ({ clientX, value, range }: CalcLeftPercentProps) => {
+    // TODO: Delete the optional chaining operator after `getBoundingClientRect`.
+    const boundingRect = elementRef.current?.getBoundingClientRect?.();
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
 
     // Enforce a minimum width of at least 1 for calculations
@@ -873,13 +977,13 @@ class Slider extends PureComponent<SliderProps> {
     // If a clientX is specified, use it to calculate the leftPercent. If not,
     // use the provided value to calculate it instead.
     if (clientX) {
-      const leftOffset = this.state.isRtl
+      const leftOffset = state.isRtl
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
     } else if (value !== null && typeof value !== 'undefined' && range) {
       // Prevent NaN calculation if the range is 0.
-      return range === 0 ? 0 : (value - this.props.min) / range;
+      return range === 0 ? 0 : (value - props.min) / range;
     }
     // We should never end up in this scenario, but in case we do, and to
     // re-assure Typescript, return 0.
@@ -890,13 +994,12 @@ class Slider extends PureComponent<SliderProps> {
    * Calculates the discrete value (snapped to the nearest step) along
    * with the corresponding handle position percentage.
    */
-  calcDiscreteValueAndPercent = ({
+  const calcDiscreteValueAndPercent = ({
     leftPercent,
   }: {
-    /** The percentage representing the position on the track. */
     leftPercent: number;
   }) => {
-    const { step = 1, min, max } = this.props;
+    const { step = 1, min, max } = props;
     const numSteps =
       Math.floor((max - min) / step) + ((max - min) % step === 0 ? 1 : 2);
     /** Index of the step that corresponds to `leftPercent`. */
@@ -913,7 +1016,7 @@ class Slider extends PureComponent<SliderProps> {
    * Calculates the slider's value and handle position based on either a
    * mouse/touch event or an explicit value.
    */
-  calcValue = ({
+  const calcValue = ({
     clientX,
     value,
     useRawValue,
@@ -925,8 +1028,8 @@ class Slider extends PureComponent<SliderProps> {
     /** Whether to bypass the stepping logic and use the raw value. */
     useRawValue?: boolean;
   }) => {
-    const range = this.props.max - this.props.min;
-    const leftPercentRaw = this.calcLeftPercent({
+    const range = props.max - props.min;
+    const leftPercentRaw = calcLeftPercent({
       clientX,
       value,
       range,
@@ -942,16 +1045,16 @@ class Slider extends PureComponent<SliderProps> {
     }
 
     // Use the discrete value and percentage for snapping.
-    const { discreteValue, discretePercent } = this.calcDiscreteValueAndPercent(
-      { leftPercent }
-    );
+    const { discreteValue, discretePercent } = calcDiscreteValueAndPercent({
+      leftPercent,
+    });
 
     return { value: discreteValue, left: discretePercent * 100 };
   };
 
-  calcDistanceToHandle = (handle: HandlePosition, clientX: number) => {
-    const handleBoundingRect = this.getHandleBoundingRect(handle);
-    // x co-ordinate of the midpoint.
+  const calcDistanceToHandle = (handle: HandlePosition, clientX: number) => {
+    const handleBoundingRect = getHandleBoundingRect(handle);
+    /** x-coordinate of the midpoint. */
     const handleX = handleBoundingRect.left + handleBoundingRect.width / 2;
     return Math.abs(handleX - clientX);
   };
@@ -966,10 +1069,11 @@ class Slider extends PureComponent<SliderProps> {
    * @returns The new slider value, rounded to the same number of decimal places
    *          as the step.
    */
-  calcValueForDelta = (currentValue: number, delta: number, step = 1) => {
+  const calcValueForDelta = (currentValue: number, delta: number, step = 1) => {
     const base =
       delta > 0 ? Math.floor(currentValue / step) * step : currentValue;
     const newValue = base + delta;
+    // TODO: Why is the logical OR needed here?
     const decimals = (step.toString().split('.')[1] || '').length;
 
     return Number(newValue.toFixed(decimals));
@@ -980,20 +1084,20 @@ class Slider extends PureComponent<SliderProps> {
    *
    * Guards against setting either lower or upper values beyond its counterpart.
    */
-  setValueLeftForHandle = (
+  const setValueLeftForHandle = (
     handle: HandlePosition,
     { value: newValue, left: newLeft }: { value: number; left: number }
   ) => {
-    const { value, valueUpper, left, leftUpper } = this.state;
+    const { value, valueUpper, left, leftUpper } = state;
     if (handle === HandlePosition.LOWER) {
       // Don't allow higher than the upper handle.
-      this.setState({
+      setState({
         value: valueUpper && newValue > valueUpper ? valueUpper : newValue,
         left: valueUpper && newValue > valueUpper ? leftUpper : newLeft,
         isValid: true,
       });
     } else {
-      this.setState({
+      setState({
         valueUpper: value && newValue < value ? value : newValue,
         leftUpper: value && newValue < value ? left : newLeft,
         isValidUpper: true,
@@ -1001,21 +1105,32 @@ class Slider extends PureComponent<SliderProps> {
     }
   };
 
-  setValueForHandle = (handle: HandlePosition, value: number | string) => {
+  const setValueForHandle = (
+    handle: HandlePosition,
+    value: number | string
+  ) => {
     if (handle === HandlePosition.LOWER) {
-      this.setState({
+      setState({
+        // TODO: Address this error
+        //
+        // @ts-expect-error - Passing a string to something that expects a
+        // number.
         value,
         isValid: true,
       });
     } else {
-      this.setState({
+      setState({
+        // TODO: Address this error
+        //
+        // @ts-expect-error - Passing a string to something that expects a
+        // number.
         valueUpper: value,
         isValidUpper: true,
       });
     }
   };
 
-  isValidValueForPosition = ({
+  const isValidValueForPosition = ({
     handle,
     value: newValue,
     min,
@@ -1026,9 +1141,9 @@ class Slider extends PureComponent<SliderProps> {
     min: number;
     max: number;
   }) => {
-    const { value, valueUpper } = this.state;
+    const { value, valueUpper } = state;
 
-    if (!this.isValidValue({ value: newValue, min, max })) {
+    if (!isValidValue({ value: newValue, min, max })) {
       return false;
     }
 
@@ -1041,7 +1156,7 @@ class Slider extends PureComponent<SliderProps> {
     return false;
   };
 
-  isValidValue = ({
+  const isValidValue = ({
     value,
     min,
     max,
@@ -1053,9 +1168,9 @@ class Slider extends PureComponent<SliderProps> {
     return !(value < min || value > max);
   };
 
-  getAdjustedValueForPosition = ({
+  const getAdjustedValueForPosition = ({
     handle,
-    value: newValue,
+    value: newValueInput,
     min,
     max,
   }: {
@@ -1064,10 +1179,10 @@ class Slider extends PureComponent<SliderProps> {
     min: number;
     max: number;
   }) => {
-    const { value, valueUpper } = this.state;
+    const { value, valueUpper } = state;
+    let newValue = getAdjustedValue({ value: newValueInput, min, max });
 
-    newValue = this.getAdjustedValue({ value: newValue, min, max });
-
+    // TODO: Just return the value.
     // Next adjust to the opposite handle.
     if (handle === HandlePosition.LOWER && valueUpper) {
       newValue = newValue > valueUpper ? valueUpper : newValue;
@@ -1077,7 +1192,7 @@ class Slider extends PureComponent<SliderProps> {
     return newValue;
   };
 
-  getAdjustedValue = ({
+  const getAdjustedValue = ({
     value,
     min,
     max,
@@ -1086,6 +1201,7 @@ class Slider extends PureComponent<SliderProps> {
     min: number;
     max: number;
   }) => {
+    // TODO: Just return the value.
     if (value < min) {
       value = min;
     }
@@ -1100,17 +1216,19 @@ class Slider extends PureComponent<SliderProps> {
    *
    * If the bounding rect is not available, a new, empty DOMRect is returned.
    */
-  getHandleBoundingRect = (handle: HandlePosition): DOMRect => {
+  const getHandleBoundingRect = (handle: HandlePosition): DOMRect => {
     let boundingRect: DOMRect | undefined;
     if (handle === HandlePosition.LOWER) {
-      boundingRect = this.thumbRef.current?.getBoundingClientRect();
+      boundingRect = thumbRef.current?.getBoundingClientRect();
     } else {
-      boundingRect = this.thumbRefUpper.current?.getBoundingClientRect();
+      boundingRect = thumbRefUpper.current?.getBoundingClientRect();
     }
     return boundingRect ?? new DOMRect();
   };
 
-  getClientXFromEvent(event: globalThis.MouseEvent | globalThis.TouchEvent) {
+  const getClientXFromEvent = (
+    event: globalThis.MouseEvent | globalThis.TouchEvent
+  ) => {
     let clientX: number | undefined;
     if ('clientX' in event) {
       clientX = event.clientX;
@@ -1122,16 +1240,11 @@ class Slider extends PureComponent<SliderProps> {
       clientX = event.touches[0].clientX;
     }
     return clientX;
-  }
+  };
 
-  hasTwoHandles() {
-    return typeof this.state.valueUpper !== 'undefined';
-  }
-
-  // syncs invalid state and prop
-  static getDerivedStateFromProps(props: SliderProps, state: Slider['state']) {
-    const { isValid, isValidUpper } = state;
-    const derivedState: Partial<Slider['state']> = {};
+  useEffect(() => {
+    const { isValid, isValidUpper } = stateRef.current;
+    const derivedState: Partial<State> = {};
 
     // Will override state in favor of invalid prop
     if (props.invalid === true) {
@@ -1142,17 +1255,21 @@ class Slider extends PureComponent<SliderProps> {
       if (isValidUpper === false) derivedState.isValidUpper = true;
     }
 
-    return Object.keys(derivedState).length ? derivedState : null;
-  }
+    if (Object.keys(derivedState).length) {
+      setState(derivedState);
+    }
+  }, [props.invalid]);
 
-  render() {
+  // TODO: Delete this IIFE. It was added to maintain whitespace and to make it clear
+  // what exactly has changed.
+  return (() => {
     const {
       ariaLabelInput,
       unstable_ariaLabelInputUpper: ariaLabelInputUpper,
       className,
       hideTextInput = false,
-      id = (this.inputId =
-        this.inputId ||
+      id = (inputIdRef.current =
+        inputIdRef.current ||
         // TODO:
         // 1. Why isn't `inputId` just set to this value instead of an empty
         //    string?
@@ -1182,8 +1299,7 @@ class Slider extends PureComponent<SliderProps> {
       warnText,
       translateWithId: t = translateWithId,
       ...other
-    } = this.props;
-    const twoHandles = this.hasTwoHandles();
+    } = props;
 
     delete other.onRelease;
     delete other.invalid;
@@ -1197,7 +1313,7 @@ class Slider extends PureComponent<SliderProps> {
       correctedValue,
       correctedPosition,
       isRtl,
-    } = this.state;
+    } = state;
 
     const showWarning =
       (!readOnly && warn) ||
@@ -1301,11 +1417,11 @@ class Slider extends PureComponent<SliderProps> {
           ]);
           const lowerThumbWrapperProps = {
             style: {
-              insetInlineStart: `${this.state.left}%`,
+              insetInlineStart: `${state.left}%`,
             },
           };
           const upperThumbWrapperProps = {
-            style: { insetInlineStart: `${this.state.leftUpper}%` },
+            style: { insetInlineStart: `${state.leftUpper}%` },
           };
 
           return (
@@ -1332,10 +1448,10 @@ class Slider extends PureComponent<SliderProps> {
                       min={min}
                       max={max}
                       step={step}
-                      onChange={this.onChange}
-                      onBlur={this.onBlur}
-                      onKeyUp={this.props.onInputKeyUp}
-                      onKeyDown={this.onInputKeyDown}
+                      onChange={onChangeInput}
+                      onBlur={onBlurInput}
+                      onKeyUp={props.onInputKeyUp}
+                      onKeyDown={onInputKeyDown}
                       data-invalid={!isValid && !readOnly ? true : null}
                       data-handle-position={HandlePosition.LOWER}
                       aria-invalid={!isValid && !readOnly ? true : undefined}
@@ -1362,11 +1478,11 @@ class Slider extends PureComponent<SliderProps> {
                 <div
                   className={sliderClasses}
                   ref={(node) => {
-                    this.element = node;
+                    elementRef.current = node;
                   }}
-                  onMouseDown={this.onDragStart}
-                  onTouchStart={this.onDragStart}
-                  onKeyDown={this.onKeyDown}
+                  onMouseDown={onDragStart}
+                  onTouchStart={onDragStart}
+                  onKeyDown={onKeyDown}
                   role="presentation"
                   tabIndex={-1}
                   data-invalid={
@@ -1393,9 +1509,9 @@ class Slider extends PureComponent<SliderProps> {
                       aria-valuenow={value}
                       aria-labelledby={twoHandles ? undefined : labelId}
                       aria-label={twoHandles ? ariaLabelInput : undefined}
-                      ref={this.thumbRef}
+                      ref={thumbRef}
                       onFocus={() =>
-                        this.setState({ activeHandle: HandlePosition.LOWER })
+                        setState({ activeHandle: HandlePosition.LOWER })
                       }>
                       {twoHandles && !isRtl ? (
                         <>
@@ -1425,9 +1541,9 @@ class Slider extends PureComponent<SliderProps> {
                         aria-valuemin={value}
                         aria-valuenow={valueUpper}
                         aria-label={ariaLabelInputUpper}
-                        ref={this.thumbRefUpper}
+                        ref={thumbRefUpper}
                         onFocus={() =>
-                          this.setState({ activeHandle: HandlePosition.UPPER })
+                          setState({ activeHandle: HandlePosition.UPPER })
                         }>
                         {twoHandles && !isRtl ? (
                           <>
@@ -1448,12 +1564,12 @@ class Slider extends PureComponent<SliderProps> {
                   <div
                     className={`${prefix}--slider__track`}
                     ref={(node) => {
-                      this.track = node;
+                      trackRef.current = node;
                     }}
                   />
                   <div
                     className={`${prefix}--slider__filled-track`}
-                    ref={this.filledTrackRef}
+                    ref={filledTrackRef}
                   />
                 </div>
                 <Text className={`${prefix}--slider__range-label`}>
@@ -1482,10 +1598,10 @@ class Slider extends PureComponent<SliderProps> {
                     min={min}
                     max={max}
                     step={step}
-                    onChange={this.onChange}
-                    onBlur={this.onBlur}
-                    onKeyDown={this.onInputKeyDown}
-                    onKeyUp={this.props.onInputKeyUp}
+                    onChange={onChangeInput}
+                    onBlur={onBlurInput}
+                    onKeyDown={onInputKeyDown}
+                    onKeyUp={props.onInputKeyUp}
                     data-invalid={
                       (twoHandles ? !isValidUpper : !isValid) && !readOnly
                         ? true
@@ -1553,8 +1669,8 @@ class Slider extends PureComponent<SliderProps> {
         }}
       </PrefixContext.Consumer>
     );
-  }
-}
+  })();
+};
 
 Slider.propTypes = {
   /**
@@ -1731,5 +1847,3 @@ Slider.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default Slider;

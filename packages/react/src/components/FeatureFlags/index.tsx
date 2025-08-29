@@ -33,6 +33,8 @@ export interface FeatureFlagsProps {
   enableV12DynamicFloatingStyles?: boolean;
   enableEnhancedFileUploader?: boolean;
 }
+
+// TODO: Can this variable be deleted now? It isn't used anywhere.
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree
