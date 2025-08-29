@@ -81,6 +81,56 @@ describe('Breadcrumb', () => {
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
+  describe('separator prop testing', () => {
+    it('should accept a separator prop and override default forward slash separator', () => {
+      render(
+        <Breadcrumb separator="|">
+          <BreadcrumbItem href="#a">A</BreadcrumbItem>
+          <BreadcrumbItem href="#b">B</BreadcrumbItem>
+          <BreadcrumbItem href="#c">C</BreadcrumbItem>
+        </Breadcrumb>
+      );
+
+      // Note: `nav.style.getPropertyValue(...)` returns the serialized CSS value
+      // which escapes special characters (e.g. "|" becomes "\"|\"")
+      // This differs from how the browser renders the separator visually, where it shows the
+      // intended character. Therefore, our assertions compare against the normalized DOM value,
+      // not the raw prop string.
+      const nav = screen.getByRole('navigation');
+      expect(nav.style.getPropertyValue('--breadcrumb-separator')).toBe('"|"');
+    });
+
+    it('should accept backslash as a separator prop and escape it before setting style', () => {
+      render(
+        <Breadcrumb separator="\">
+          <BreadcrumbItem href="#a">A</BreadcrumbItem>
+          <BreadcrumbItem href="#b">B</BreadcrumbItem>
+          <BreadcrumbItem href="#c">C</BreadcrumbItem>
+        </Breadcrumb>
+      );
+
+      const nav = screen.getByRole('navigation');
+      expect(nav.style.getPropertyValue('--breadcrumb-separator')).toBe(
+        '"\\\\"'
+      );
+    });
+
+    it('should accept double quotes as a separator prop and escape it before setting style', () => {
+      render(
+        <Breadcrumb separator='"'>
+          <BreadcrumbItem href="#a">A</BreadcrumbItem>
+          <BreadcrumbItem href="#b">B</BreadcrumbItem>
+          <BreadcrumbItem href="#c">C</BreadcrumbItem>
+        </Breadcrumb>
+      );
+
+      const nav = screen.getByRole('navigation');
+      expect(nav.style.getPropertyValue('--breadcrumb-separator')).toBe(
+        '"\\""'
+      );
+    });
+  });
+
   describe('automated verification testing', () => {
     it('should have no aXe violations', async () => {
       const { container } = render(
