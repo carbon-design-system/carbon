@@ -102,7 +102,8 @@ export interface SearchProps extends InputPropsBase {
   renderIcon?: ComponentType | FunctionComponent;
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   * Specify the role for the underlying `<input>`, defaults to none
+   * since `<input type="search">` already provides the correct semantics.
    */
   role?: string;
 
@@ -112,7 +113,7 @@ export interface SearchProps extends InputPropsBase {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Optional prop to specify the type of the `<input>`
+   * Specify the type of the `<input>`, defaults to "search"
    */
   type?: string;
 
@@ -141,9 +142,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       onExpand,
       placeholder = 'Search',
       renderIcon,
-      role = 'searchbox',
+      role,
       size = 'md',
-      type = 'text',
+      type = 'search',
       value,
       ...rest
     },
@@ -383,7 +384,8 @@ Search.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   * Specify the role for the underlying `<input>`, defaults to none
+   * since `<input type="search">` already provides the correct semantics.
    */
   role: PropTypes.string,
 
@@ -392,7 +394,7 @@ Search.propTypes = {
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   /**
-   * Optional prop to specify the type of the `<input>`
+   * Specify the type of the `<input>`, defaults to "search"
    */
   type: PropTypes.string,
 
