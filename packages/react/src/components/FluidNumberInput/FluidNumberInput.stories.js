@@ -14,10 +14,16 @@ import {
   ToggletipContent,
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import mdx from './FluidNumberInput.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidNumberInput',
+  title: 'Components/Fluid Components/FluidNumberInput',
   component: FluidNumberInput,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     FluidNumberInputSkeleton,
   },

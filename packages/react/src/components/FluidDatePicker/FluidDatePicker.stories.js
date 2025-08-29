@@ -16,10 +16,16 @@ import {
   ToggletipContent,
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import mdx from './FluidDatePicker.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidDatePicker',
+  title: 'Components/Fluid Components/FluidDatePicker',
   component: FluidDatePicker,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     FluidDatePickerSkeleton,
   },

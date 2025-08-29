@@ -7,10 +7,16 @@
 
 import React from 'react';
 import { FluidSearch, FluidSearchSkeleton } from '.';
+import mdx from './FluidSearch.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidSearch',
+  title: 'Components/Fluid Components/FluidSearch',
   component: FluidSearch,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     FluidSearchSkeleton,
   },

@@ -17,10 +17,16 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
+import mdx from './FluidComboBox.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidComboBox',
+  title: 'Components/Fluid Components/FluidComboBox',
   component: FluidComboBox,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     FluidComboBoxSkeleton,
   },

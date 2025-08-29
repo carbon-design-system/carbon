@@ -249,45 +249,66 @@ export {
 export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
+  FluidComboBox,
+  FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
 export {
   FluidDatePicker as unstable__FluidDatePicker,
   FluidDatePickerSkeleton as unstable__FluidDatePickerSkeleton,
+  FluidDatePicker,
+  FluidDatePickerSkeleton,
 } from './components/FluidDatePicker';
-export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
+export {
+  FluidDatePickerInput,
+  FluidDatePickerInput as unstable__FluidDatePickerInput,
+} from './components/FluidDatePickerInput';
 export {
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
+  FluidDropdown,
+  FluidDropdownSkeleton,
 } from './components/FluidDropdown';
 export {
-  FluidMultiSelect as unstable__FluidMultiSelect,
-  FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
+  FluidMultiSelect,
+  FluidMultiSelectSkeleton,
 } from './components/FluidMultiSelect';
 export {
-  FluidNumberInput as unstable__FluidNumberInput,
-  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+  FluidNumberInput,
+  FluidNumberInputSkeleton,
+  FluidMultiSelect as unstable__FluidMultiSelect,
+  FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
 } from './components/FluidNumberInput';
 export {
-  FluidSearch as unstable__FluidSearch,
-  FluidSearchSkeleton as unstable__FluidSearchSkeleton,
+  FluidSearch,
+  FluidSearchSkeleton,
+  FluidNumberInput as unstable__FluidNumberInput,
+  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
 } from './components/FluidSearch';
 export {
+  FluidSelect,
+  FluidSelectSkeleton,
   FluidSelect as unstable__FluidSelect,
   FluidSelectSkeleton as unstable__FluidSelectSkeleton,
 } from './components/FluidSelect';
 export {
+  FluidTextArea,
+  FluidTextAreaSkeleton,
   FluidTextArea as unstable__FluidTextArea,
   FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
 } from './components/FluidTextArea';
 export {
+  FluidTextInput,
+  FluidTextInputSkeleton,
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
 export {
+  FluidTimePicker,
+  FluidTimePickerSkeleton,
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
 } from './components/FluidTimePicker';
-export { FluidTimePickerSelect as unstable__FluidTimePickerSelect } from './components/FluidTimePickerSelect';
+export { FluidTimePickerSelect } from './components/FluidTimePickerSelect';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';

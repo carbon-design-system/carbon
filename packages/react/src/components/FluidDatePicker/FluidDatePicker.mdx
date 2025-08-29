@@ -1,0 +1,92 @@
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidDatePickerStories from './FluidDatePicker.stories.js';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+
+# Fluid DatePicker
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/FluidDatePicker)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Skeleton](#skeleton)
+  - [Single](#single)
+  - [Range With Calendar](#range-with-calendar)
+- [Accessibility Considerations](#accessibility-considerations)
+  - [Accessible Name](#accessible-name)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+<Canvas
+  of={FluidDatePickerStories.Simple}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Simple),
+    },
+  ]}
+/>
+
+### Skeleton
+
+<Canvas
+  of={FluidDatePickerStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Skeleton),
+    },
+  ]}
+/>
+
+### Single
+
+<Canvas
+  of={FluidDatePickerStories.Single}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Single),
+    },
+  ]}
+/>
+
+### Range With Calendar
+
+<Canvas
+  of={FluidDatePickerStories.RangeWithCalendar}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.RangeWithCalendar),
+    },
+  ]}
+/>
+
+## Accessibility Considerations
+
+### Accessible Name
+
+To comply with accessibility requirements, make sure to supply the component
+with an accessible name by providing either the `aria-label`, `aria-labelledby`
+or `title` attribute. Read more on the accessible naming rule
+[here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/FluidDatePicker/FluidDatePicker.mdx).
