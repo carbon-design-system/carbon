@@ -9,7 +9,7 @@ import React, { type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
-import { textInputProps } from './util';
+import { getTextInputProps } from './util';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
@@ -223,7 +223,7 @@ const ControlledPasswordInput = React.forwardRef(
     const input = (
       <>
         <input
-          {...textInputProps({
+          {...getTextInputProps({
             invalid,
             sharedTextInputProps,
             invalidId: errorId,
