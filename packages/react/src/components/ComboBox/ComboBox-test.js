@@ -828,7 +828,7 @@ describe('ComboBox', () => {
       );
     });
 
-    it('should clear input when closing with chevron if input does not match any item and allowCustomValue is false', async () => {
+    it('should not clear input when closing with chevron if input does not match any item and allowCustomValue is false', async () => {
       render(<ComboBox {...mockProps} allowCustomValue={false} />);
 
       // First type something that doesn't match any item
@@ -843,8 +843,33 @@ describe('ComboBox', () => {
       // Menu should be closed
       assertMenuClosed();
 
-      // Input should be cleared
-      expect(findInputNode()).toHaveDisplayValue('');
+      // Input should be preserved
+      expect(findInputNode()).toHaveDisplayValue('xyz');
+    });
+
+    it('should not clear input when opening then closing the menu without changes', async () => {
+      render(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
+      );
+
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+
+      await userEvent.click(screen.getByRole('button', { name: 'Open' }));
+      assertMenuOpen(mockProps);
+
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+      assertMenuClosed(mockProps);
+
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+    });
+
+    it('should keep input on blur when no item is selected and value does not match any item (`allowCustomValue` is `false`)', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+
+      await userEvent.type(findInputNode(), 'no-match-here');
+      await userEvent.keyboard('[Tab]');
+
+      expect(findInputNode()).toHaveDisplayValue('no-match-here');
     });
 
     it('should pass defined selectedItem to onChange when item is selected', async () => {
@@ -1453,7 +1478,7 @@ describe('ComboBox', () => {
     expect(attributes).toEqual({
       'aria-activedescendant': '',
       'aria-autocomplete': 'list',
-      'aria-controls': 'downshift-«r7r»-menu',
+      'aria-controls': 'downshift-«r81»-menu',
       'aria-expanded': 'false',
       'aria-haspopup': 'listbox',
       'aria-label': 'Choose an item',
