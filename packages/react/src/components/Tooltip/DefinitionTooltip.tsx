@@ -76,7 +76,7 @@ export interface DefinitionTooltipProps
   triggerClassName?: string;
 }
 
-const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
+const DefinitionTooltip = ({
   align = 'bottom',
   autoAlign,
   className,
@@ -88,7 +88,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
   tooltipText,
   triggerClassName,
   ...rest
-}) => {
+}: DefinitionTooltipProps) => {
   const [isOpen, setOpen] = useState(defaultOpen);
   const prefix = usePrefix();
   const tooltipId = useFallbackId(id);

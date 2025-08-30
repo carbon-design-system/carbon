@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -47,7 +47,7 @@ export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
   selectionCount?: number;
 }
 
-export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
+export type ListBoxSelectionComponent = typeof ListBoxSelection;
 
 export const translationIds = {
   'clear.all': 'clear.all',
@@ -71,7 +71,7 @@ const defaultTranslateWithId = (id: string) => defaultTranslations[id];
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
-const ListBoxSelection: ListBoxSelectionComponent = ({
+const ListBoxSelection = ({
   clearSelection,
   selectionCount,
   translateWithId: t = defaultTranslateWithId,

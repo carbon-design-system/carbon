@@ -14,11 +14,10 @@ import React, {
   useState,
   useCallback,
   useContext,
-  type ComponentType,
-  type FunctionComponent,
+  type ElementType,
+  type FocusEvent,
   type MouseEvent,
   type MutableRefObject,
-  type FocusEvent,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { deprecate } from '../../prop-types/deprecate';
@@ -113,7 +112,7 @@ export type TreeNodeProps = {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree

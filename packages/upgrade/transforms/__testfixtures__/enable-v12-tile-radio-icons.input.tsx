@@ -2,7 +2,7 @@ import React from 'react';
 import { TileGroup, RadioTile, Stack } from '@carbon/react';
 import { FeatureFlags } from '@carbon/feature-flags';
 
-const TestComponent: React.FC = () => {
+const TestComponent = () => {
   return (
     //prettier-ignore
     <div>
