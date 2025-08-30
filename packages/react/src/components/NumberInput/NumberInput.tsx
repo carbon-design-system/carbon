@@ -1015,13 +1015,14 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-export interface Label {
+export interface LabelProps {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
-const Label = ({ disabled, id, hideLabel, label }: Label) => {
+
+const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -1039,14 +1040,12 @@ const Label = ({ disabled, id, hideLabel, label }: Label) => {
   return null;
 };
 
-const propTypes = {
+Label.propTypes = {
   disabled: PropTypes.bool,
   hideLabel: PropTypes.bool,
   id: PropTypes.string,
   label: PropTypes.node,
 };
-
-Object.assign(Label, { propTypes });
 
 export interface HelperTextProps {
   id?: string;

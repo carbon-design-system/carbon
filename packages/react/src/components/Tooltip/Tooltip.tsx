@@ -314,7 +314,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
   }
 );
 
-const propTypes = {
+// @ts-expect-error - `propTypes` isn't typed.
+Tooltip.propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -409,7 +410,5 @@ const propTypes = {
    */
   leaveDelayMs: PropTypes.number,
 };
-
-Object.assign(Tooltip, { propTypes });
 
 export { Tooltip };

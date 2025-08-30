@@ -88,7 +88,9 @@ const TextBase = React.forwardRef(
   }
 ) as TextComponent;
 export const Text = TextBase as TextComponent;
-const propTypes = {
+
+// @ts-expect-error - `propTypes` isn't typed.
+Text.propTypes = {
   /**
    * Provide a custom element type used to render the outermost node
    */
@@ -109,8 +111,6 @@ const propTypes = {
    */
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
 };
-
-Object.assign(Text, { propTypes });
 
 const getTextFromChildren = (children: ReactNode) => {
   if (typeof children === 'string') {
