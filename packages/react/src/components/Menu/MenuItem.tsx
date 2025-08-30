@@ -40,6 +40,7 @@ import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
 import { Text } from '../Text';
+import { defaultItemToString } from '../../internal';
 
 export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -480,8 +481,6 @@ MenuItemGroup.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const defaultItemToString = (item) => item.toString();
-
 export interface MenuItemRadioGroupProps<Item>
   extends Omit<ComponentProps<'ul'>, 'onChange'> {
   /**
@@ -495,7 +494,7 @@ export interface MenuItemRadioGroupProps<Item>
   defaultSelectedItem?: Item;
 
   /**
-   * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
+   * Converts an item into a string for display.
    */
   itemToString?: (item: Item) => string;
 
@@ -586,7 +585,7 @@ MenuItemRadioGroup.propTypes = {
   defaultSelectedItem: PropTypes.any,
 
   /**
-   * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
+   * Converts an item into a string for display.
    */
   itemToString: PropTypes.func,
 
