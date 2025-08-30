@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,9 +7,9 @@
 
 import { warning } from '../internal/warning';
 
-const didWarnAboutDeprecation = {};
+const didWarnAboutDeprecation: Record<string, boolean> = {};
 
-export default function deprecateComponent(componentName, message) {
+export const deprecateComponent = (componentName: string, message?: string) => {
   if (!componentName) {
     return;
   }
@@ -25,4 +25,4 @@ export default function deprecateComponent(componentName, message) {
   }
 
   return componentName;
-}
+};
