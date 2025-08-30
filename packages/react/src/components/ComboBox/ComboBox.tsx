@@ -606,6 +606,7 @@ const ComboBox = forwardRef(
 
         switch (type) {
           case InputBlur: {
+            // Allow custom values on blur if enabled.
             if (allowCustomValue && highlightedIndex == '-1') {
               const customValue = inputValue as ItemType;
               changes.selectedItem = customValue;
@@ -614,6 +615,8 @@ const ComboBox = forwardRef(
               }
               return changes;
             }
+
+            // If a new item was selected, keep its label in the input.
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
@@ -624,14 +627,24 @@ const ComboBox = forwardRef(
                 inputValue: itemToString(changes.selectedItem),
               };
             }
+
+            // No custom values, no new selection:
+            // - If there was a previous selection, revert to it.
+            // - Otherwise, leave the user’s input as is.
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
               !allowCustomValue &&
               !changes.selectedItem
             ) {
-              return { ...changes, inputValue: '' };
+              const fallback =
+                state.selectedItem !== null
+                  ? itemToString(state.selectedItem)
+                  : state.inputValue;
+
+              return { ...changes, inputValue: fallback };
             }
+
             return changes;
           }
 
@@ -685,20 +698,8 @@ const ComboBox = forwardRef(
             return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
-            if (
-              !changes.isOpen &&
-              state.inputValue &&
-              highlightedIndex === -1 &&
-              !allowCustomValue
-            ) {
-              return {
-                ...changes,
-                inputValue: '', // Clear the input
-              };
-            }
-            if (changes.isOpen && !changes.selectedItem) {
-              return { ...changes };
-            }
+            // Do not clear the input when opening or closing the menu. Preserve
+            // the existing input unless a selection change dictates otherwise.
             return changes;
 
           case MenuMouseLeave:
