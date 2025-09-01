@@ -8,13 +8,14 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
-import ErrorFilled16 from '@carbon/icons/lib/error--filled/16.js';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
 import { prefix } from '../../globals/settings';
 import getLoadingIcon from '../loading/loading-icon';
 import { INLINE_LOADING_STATE } from './defs';
 import styles from './inline-loading.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { INLINE_LOADING_STATE };
 
@@ -54,9 +55,9 @@ class CDSInlineLoading extends LitElement {
   private _renderIcon() {
     const { iconDescription, status } = this;
     if (status === INLINE_LOADING_STATE.ERROR) {
-      return ErrorFilled16({
+      return iconLoader(ErrorFilled16, {
         class: `${prefix}--inline-loading--error`,
-        children: html`<title>${iconDescription}</title>`,
+        'aria-label': iconDescription,
       });
     }
     const init = {
@@ -75,9 +76,9 @@ class CDSInlineLoading extends LitElement {
         );
       }, this.successDelay);
 
-      return CheckmarkFilled16({
+      return iconLoader(CheckmarkFilled16, {
         class: `${prefix}--inline-loading__checkmark-container`,
-        children: html`<title>${iconDescription}</title>`,
+        'aria-label': iconDescription,
       });
     }
     if (

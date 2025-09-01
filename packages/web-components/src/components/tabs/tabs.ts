@@ -9,11 +9,12 @@ import { TemplateResult, html } from 'lit';
 import { property, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
-import ChevronLeft16 from '@carbon/icons/lib/chevron--left/16.js';
+import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
@@ -43,6 +44,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   /**
    * The currently selected index
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: TS thinks this method is not referred to
   private _currentIndex = 0;
 
@@ -54,6 +56,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   /**
    * `true` if the tablist is scrollable
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: TS thinks this method is not referred to
   private _isScrollable = false;
 
@@ -175,15 +178,18 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       return;
     }
     const { scrollLeft, clientWidth, scrollWidth } =
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       this._contentContainerNode!;
     switch (direction) {
       case -1:
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this._contentContainerNode!.scrollLeft = Math.max(
           scrollLeft - (scrollWidth / this._totalTabs) * 1.5,
           0
         );
         break;
       case 1:
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this._contentContainerNode!.scrollLeft =
           Math.min(
             scrollLeft + (scrollWidth / this._totalTabs) * 1.5,
@@ -196,6 +202,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   _handleSlotchange() {
+    // Call super to preserve content-switcher slot handling
+    super._handleSlotchange?.();
     const { selectorItemSelected } = this.constructor as typeof CDSTabs;
     const selectedItem = this.querySelector(selectorItemSelected);
     const nextItem = this._getNextItem(selectedItem as CDSTab, 1);
@@ -368,13 +376,20 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   firstUpdated() {
+    // Call super to run content-switcher init logic (initial selection)
+    super.firstUpdated();
+
     const { selectorTablist } = this.constructor as typeof CDSTabs;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
     this.tablist = tablist;
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
   }
 
   updated(changedProperties) {
+    // Call super to keep selection/value in sync
+    super.updated?.(changedProperties);
+
     if (changedProperties.has('value')) {
       const tab = this.querySelector(
         `${prefix}-tab[value="${this.value}"]`
@@ -385,20 +400,26 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         const end = tab.offsetLeft + tabWidth;
 
         // The start and end of the visible area of the tablist
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         const visibleStart = this.tablist!.scrollLeft + this.BUTTON_WIDTH;
         const visibleEnd =
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           this.tablist!.scrollLeft +
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           this.tablist!.clientWidth -
           this.BUTTON_WIDTH;
 
         // The beginning of the tab is clipped and not visible
         if (start < visibleStart) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           this.tablist!.scrollLeft = start - this.BUTTON_WIDTH;
         }
 
         // The end of the tab is clipped and not visible
         if (end > visibleEnd) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           this.tablist!.scrollLeft =
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
             end + this.BUTTON_WIDTH - this.tablist!.clientWidth;
         }
       }
@@ -435,7 +456,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
           this._handleScrollButtonClick(_, {
             direction: NAVIGATION_DIRECTION.Left,
           })}>
-        ${ChevronLeft16()}
+        ${iconLoader(ChevronLeft16)}
       </button>
     `;
   }
@@ -464,7 +485,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
           this._handleScrollButtonClick(_, {
             direction: NAVIGATION_DIRECTION.Right,
           })}>
-        ${ChevronRight16()}
+        ${iconLoader(ChevronRight16)}
       </button>
     `;
   }

@@ -111,6 +111,9 @@ $css--plex: true !default;
       padding: $spacing-03;
     }
   }
+  .#{$prefix}--btn--ghost:not([disabled]) ::slotted([slot='icon']) {
+    fill: $icon-primary;
+  }
 }
 
 :host(#{$prefix}-button[kind='ghost']) {

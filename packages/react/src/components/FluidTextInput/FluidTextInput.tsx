@@ -102,8 +102,9 @@ export interface FluidTextInputProps {
   readOnly?: boolean;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidTextInput = React.forwardRef<HTMLInputElement, FluidTextInputProps>(
-  function FluidTextInput({ className, isPassword, ...other }, ref) {
+  ({ className, isPassword, ...other }, ref) => {
     const prefix = usePrefix();
     const classNames = classnames(className, {
       [`${prefix}--text-input--fluid`]: !isPassword,

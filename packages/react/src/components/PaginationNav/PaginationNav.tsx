@@ -206,7 +206,7 @@ function PaginationOverflow({
   fromIndex = NaN,
   count = NaN,
   onSelect,
-  // eslint-disable-next-line react/prop-types
+
   disableOverflow,
   translateWithId: t = translateWithId,
 }: PaginationOverflowProps) {
@@ -217,7 +217,7 @@ function PaginationOverflow({
     return (
       <li className={`${prefix}--pagination-nav__list-item`}>
         <div className={`${prefix}--pagination-nav__select`}>
-          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          {}
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
             aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
@@ -236,7 +236,7 @@ function PaginationOverflow({
     return (
       <li className={`${prefix}--pagination-nav__list-item`}>
         <div className={`${prefix}--pagination-nav__select`}>
-          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          {}
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
             aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
@@ -244,7 +244,7 @@ function PaginationOverflow({
               const index = Number(e.target.value);
               onSelect?.(index);
             }}>
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            {}
             <option value="" hidden />
             {[...Array(count)].map((e, i) => (
               <option
@@ -326,7 +326,7 @@ export interface PaginationNavProps
 }
 
 const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
-  function PaginationNav(
+  (
     {
       className,
       onChange = () => {},
@@ -340,7 +340,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       ...rest
     },
     ref
-  ) {
+  ) => {
     const smMediaQuery = `(max-width: ${breakpoints.sm.width})`;
     const isSm = useMatchMedia(smMediaQuery);
 
@@ -645,7 +645,7 @@ PaginationNav.propTypes = {
    * If true, the '...' pagination overflow will not render page links between the first and last rendered buttons.
    * Set this to true if you are having performance problems with large data sets.
    */
-  disableOverflow: PropTypes.bool, // eslint-disable-line react/prop-types
+  disableOverflow: PropTypes.bool,
 
   /**
    * The number of items to be shown (minimum of 4 unless props.items < 4).

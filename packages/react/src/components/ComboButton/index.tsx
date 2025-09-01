@@ -109,6 +109,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     let middlewares: any[] = [];
 
     if (!enableOnlyFloatingStyles) {
