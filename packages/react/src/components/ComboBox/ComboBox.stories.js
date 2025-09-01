@@ -223,6 +223,7 @@ export const AutocompleteWithTypeahead = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
+        allowCustomValue
         onChange={args.onChange}
         helperText="Combobox helper text"
         id="carbon-combobox"
