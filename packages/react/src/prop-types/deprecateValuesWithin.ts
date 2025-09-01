@@ -12,10 +12,10 @@ type DeprecationTracker = Record<string, Record<string, boolean>>;
 
 const didWarnAboutDeprecation: DeprecationTracker = {};
 
-export const deprecateValuesWithin = <T, U = unknown>(
-  propType: Validator<T> | Requireable<T>,
+export const deprecateValuesWithin = <T>(
+  propType: Requireable<T>,
   allowedValues?: readonly unknown[],
-  propMappingFunction?: (deprecatedValue: T) => U
+  propMappingFunction?: (deprecatedValue: T) => T
 ): Validator<T> | Requireable<T> => {
   return (props, propName, componentName, ...rest) => {
     if (typeof props[propName] === 'undefined') {
