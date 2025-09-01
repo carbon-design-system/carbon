@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import { textInputProps } from './util';
+import { getTextInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { Tooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
@@ -350,7 +350,7 @@ const PasswordInput = React.forwardRef(
     const input = (
       <>
         <input
-          {...textInputProps({
+          {...getTextInputProps({
             sharedTextInputProps,
             invalid: normalizedProps.invalid,
             invalidId: normalizedProps.invalidId,

@@ -5,25 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const invalidProps = (invalidId) => ({
+const invalidProps = (invalidId: string) => ({
   'data-invalid': true,
   'aria-invalid': true,
   'aria-describedby': invalidId,
 });
 
-const warnProps = (warnId) => ({
+const warnProps = (warnId: string | undefined) => ({
   'aria-describedby': warnId,
 });
 
-const helperProps = (helperId) => ({
+const helperProps = (helperId: string | undefined) => ({
   'aria-describedby': helperId,
 });
 
-/**
- * @param {{sharedTextInputProps: object, invalid?: boolean, invalidId?: string, warn?: boolean, warnId?: string, hasHelper?: boolean, helperId?: string}} config
- * @returns {object}
- */
-export const textInputProps = ({
+interface TextInputPropsConfig {
+  sharedTextInputProps: Record<string, unknown>;
+  invalid: boolean;
+  invalidId: string;
+  warn?: boolean;
+  warnId?: string;
+  hasHelper?: boolean;
+  helperId?: string;
+}
+
+export const getTextInputProps = ({
   sharedTextInputProps,
   invalid,
   invalidId,
@@ -31,7 +37,7 @@ export const textInputProps = ({
   warnId,
   hasHelper,
   helperId,
-}) => ({
+}: TextInputPropsConfig) => ({
   ...sharedTextInputProps,
   ...(invalid ? invalidProps(invalidId) : {}),
   ...(warn ? warnProps(warnId) : {}),
