@@ -8,16 +8,17 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import Calendar16 from '@carbon/icons/lib/calendar/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { INPUT_SIZE } from '../text-input/text-input';
 import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND } from './defs';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import styles from './date-picker.scss?lit';
+import Calendar16 from '@carbon/icons/es/calendar/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 
@@ -90,10 +91,10 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   private _renderIcon() {
     return this.kind === DATE_PICKER_INPUT_KIND.SIMPLE
       ? undefined
-      : Calendar16({
+      : iconLoader(Calendar16, {
           class: `${prefix}--date-picker__icon`,
           role: 'img',
-          children: [html` <title>Open calendar</title> `],
+          title: 'Open calendar',
         });
   }
 
@@ -247,15 +248,22 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       _hasAILabel: hasAILabel,
     } = this;
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`,
     });
 
-    const normalizedProps = {
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,
       warn: !readonly && !invalid && warn,
