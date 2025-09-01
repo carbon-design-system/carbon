@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,29 +12,49 @@ import Button from '../Button';
 import TableActionList from './TableActionList';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
-import type { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 
-const TableBatchActionsTranslationKeys = [
-  'carbon.table.batch.cancel',
-  'carbon.table.batch.items.selected',
-  'carbon.table.batch.item.selected',
-  'carbon.table.batch.selectAll',
-] as const;
+const translationIds = {
+  'carbon.table.batch.cancel': 'carbon.table.batch.cancel',
+  'carbon.table.batch.items.selected': 'carbon.table.batch.items.selected',
+  'carbon.table.batch.item.selected': 'carbon.table.batch.item.selected',
+  'carbon.table.batch.selectAll': 'carbon.table.batch.selectAll',
+} as const;
 
-export type TableBatchActionsTranslationKey =
-  (typeof TableBatchActionsTranslationKeys)[number];
+type TranslationKey = keyof typeof translationIds;
 
-export interface TableBatchActionsTranslationArgs {
+export type TableBatchActionsTranslationArgs = {
   totalSelected?: number;
   totalCount?: number;
-}
+};
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.table.batch.cancel']]: 'Cancel',
+  [translationIds['carbon.table.batch.items.selected']]: 'items selected',
+  [translationIds['carbon.table.batch.item.selected']]: 'item selected',
+  [translationIds['carbon.table.batch.selectAll']]: 'Select all',
+};
+
+const defaultTranslateWithId: TFunc<
+  TranslationKey,
+  TableBatchActionsTranslationArgs
+> = (messageId, args = { totalSelected: 0, totalCount: 0 }) => {
+  const { totalSelected, totalCount } = args;
+
+  switch (messageId) {
+    case translationIds['carbon.table.batch.cancel']:
+      return defaultTranslations[messageId];
+    case translationIds['carbon.table.batch.selectAll']:
+      return `${defaultTranslations[messageId]} (${totalCount})`;
+    case translationIds['carbon.table.batch.items.selected']:
+    case translationIds['carbon.table.batch.item.selected']:
+      return `${totalSelected} ${defaultTranslations[messageId]}`;
+  }
+};
 
 export interface TableBatchActionsProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    TranslateWithId<
-      TableBatchActionsTranslationKey,
-      TableBatchActionsTranslationArgs
-    > {
+    TranslateWithId<TranslationKey, TableBatchActionsTranslationArgs> {
   /**
    * Provide elements to be rendered inside of the component.
    */
@@ -72,34 +92,7 @@ export interface TableBatchActionsProps
   totalCount?: number;
 }
 
-export interface TableBatchActionsComponent
-  extends React.FC<TableBatchActionsProps> {
-  translationKeys: ReadonlyArray<TableBatchActionsTranslationKey>;
-}
-
-const translationKeys: Readonly<
-  Record<TableBatchActionsTranslationKey, string>
-> = {
-  'carbon.table.batch.cancel': 'Cancel',
-  'carbon.table.batch.items.selected': 'items selected',
-  'carbon.table.batch.item.selected': 'item selected',
-  'carbon.table.batch.selectAll': 'Select all',
-};
-
-const translateWithId: TableBatchActionsProps['translateWithId'] = (
-  id,
-  { totalSelected, totalCount } = { totalSelected: 0, totalCount: 0 }
-) => {
-  if (id === 'carbon.table.batch.cancel') {
-    return translationKeys[id];
-  }
-  if (id === 'carbon.table.batch.selectAll') {
-    return `${translationKeys[id]} (${totalCount})`;
-  }
-  return `${totalSelected} ${translationKeys[id]}`;
-};
-
-const TableBatchActions: TableBatchActionsComponent = ({
+const TableBatchActions = ({
   className,
   children,
   shouldShowBatchActions,
@@ -107,9 +100,9 @@ const TableBatchActions: TableBatchActionsComponent = ({
   totalCount,
   onCancel,
   onSelectAll,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
   ...rest
-}) => {
+}: TableBatchActionsProps) => {
   const [isScrolling, setIsScrolling] = React.useState(false);
   const prefix = usePrefix();
   const batchActionsClasses = cx(
@@ -164,8 +157,6 @@ const TableBatchActions: TableBatchActionsComponent = ({
   );
 };
 
-TableBatchActions.translationKeys = TableBatchActionsTranslationKeys;
-
 TableBatchActions.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
@@ -202,9 +193,7 @@ TableBatchActions.propTypes = {
   totalSelected: PropTypes.number.isRequired,
 
   /**
-   * Supply a method to translate internal strings with your i18n tool of
-   * choice. Translation keys are available on the `translationKeys` field for
-   * this component.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
