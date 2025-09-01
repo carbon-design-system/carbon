@@ -11,7 +11,7 @@ import type { StorybookConfig } from '@storybook/web-components-vite';
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import remarkGfm from 'remark-gfm';
-import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
+
 const require = createRequire(import.meta.url);
 const glob = require('fast-glob');
 
@@ -52,11 +52,7 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      plugins: [
-        litStyleLoader(),
-        litTemplateLoader(),
-        viteSVGResultCarbonIconLoader(),
-      ],
+      plugins: [litStyleLoader(), litTemplateLoader()],
       css: {
         preprocessorOptions: {
           // suppress mixed-declarations warnings until resolved in
