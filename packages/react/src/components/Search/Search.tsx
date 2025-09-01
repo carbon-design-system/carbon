@@ -102,8 +102,9 @@ export interface SearchProps extends InputPropsBase {
   renderIcon?: ComponentType | FunctionComponent;
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to none
-   * since `<input type="search">` already provides the correct semantics.
+   * @deprecated Specify the role for the underlying `<input>`.
+   * No longer needed since `<input type="search">` already provides the correct semantics.
+   * This prop will be removed in the next major release of Carbon.
    */
   role?: string;
 
@@ -384,8 +385,9 @@ Search.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to none
-   * since `<input type="search">` already provides the correct semantics.
+   * @deprecated Specify the role for the underlying `<input>`.
+   * No longer needed since `<input type="search">` already provides the correct semantics.
+   * This prop will be removed in the next major release of Carbon.
    */
   role: PropTypes.string,
 

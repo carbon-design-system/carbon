@@ -162,10 +162,4 @@ Default.argTypes = {
       type: 'select',
     },
   },
-  type: {
-    options: ['search', 'text'],
-    control: {
-      type: 'select',
-    },
-  },
 };
