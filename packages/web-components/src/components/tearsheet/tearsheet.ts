@@ -40,10 +40,9 @@ interface StackState {
   all: StackHandler[];
 }
 
-// eslint-disable-next-line no-bitwise
 const PRECEDING =
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-// eslint-disable-next-line no-bitwise
+
 const FOLLOWING =
   Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
@@ -63,6 +62,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -71,6 +71,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -157,9 +158,11 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
    * @param event The event.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: MouseEvent) => {
     if (
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       event.composedPath().indexOf(this.shadowRoot!) < 0 &&
       !this.preventCloseOnClickOutside
     ) {
@@ -175,6 +178,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
    * @param event.relatedTarget The event relatedTarget.
    */
   @HostListener('shadowRoot:focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
     if (!this._topOfStack()) {
@@ -207,7 +211,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
       const comparisonResult = (target as Node).compareDocumentPosition(
         relatedTarget as Node
       );
-      // eslint-disable-next-line no-bitwise
+
       if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
         await (this.constructor as typeof CDSTearsheet)._delay();
         if (
@@ -219,9 +223,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
         ) {
           this.focus();
         }
-      }
-      // eslint-disable-next-line no-bitwise
-      else if (
+      } else if (
         relatedTarget === endSentinelNode ||
         comparisonResult & FOLLOWING
       ) {
@@ -239,6 +241,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('document:keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
     if ((key === 'Esc' || key === 'Escape') && this._topOfStack()) {
@@ -402,6 +405,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
 
     if (actionsCount > this._maxActions) {
       this._actionsCount = this._maxActions;
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
       console.error(`Too many tearsheet actions, max ${this._maxActions}.`);
     } else {
       this._actionsCount = actionsCount;
@@ -672,14 +676,17 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     ) {
       if (this.width === 'narrow') {
         if (this._hasHeaderNavigation) {
+          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
           console.error(
             `Header navigation is not permitted in narrow Tearsheet.`
           );
         }
         if (this._hasInfluencerLeft || this._hasInfluencerRight) {
+          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
           console.error(`Influencer is not permitted in narrow Tearsheet.`);
         }
         if (this._hasHeaderActions) {
+          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
           console.error(
             `Header actions are not permitted in narrow Tearsheet.`
           );
@@ -692,6 +699,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
 
       this._checkSetOpen();
       if (this.open) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this._launcher = this.ownerDocument!.activeElement;
         const focusNode =
           this.selectorInitialFocus &&

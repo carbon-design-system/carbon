@@ -207,6 +207,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onClose?(event: MouseEvent): void | boolean;
 
   /**
@@ -293,6 +294,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         setWasOpen(!!open);
         toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [open, wasOpen, prefix]);
     // Remove the document.body className on unmount
     useEffect(() => {
@@ -331,13 +333,15 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       const { target } = evt;
       const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
-      const containsModalFooter = Children.toArray(childrenWithProps).some(
-        (child) => isComponentElement(child, ModalFooter)
-      );
-      const isPassive = !containsModalFooter;
-      const shouldCloseOnOutsideClick = isPassive
-        ? preventCloseOnClickOutside !== false
-        : preventCloseOnClickOutside === true;
+
+      const shouldCloseOnOutsideClick =
+        // Passive modals can close on clicks outside the modal when
+        // preventCloseOnClickOutside is undefined or explicitly set to false.
+        (isPassive && !preventCloseOnClickOutside) ||
+        // Non-passive modals have to explicitly opt-in for close on outside
+        // behavior by explicitly setting preventCloseOnClickOutside to false,
+        // rather than just leaving it undefined.
+        (!isPassive && preventCloseOnClickOutside === false);
 
       if (
         shouldCloseOnOutsideClick &&
@@ -394,7 +398,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         (lastContent as HTMLElement).offsetTop -
         (lastContent as HTMLElement).clientHeight;
 
-      for (let elem of modalContent.children) {
+      for (const elem of modalContent.children) {
         if (elem.contains(currentActiveNode)) {
           const spaceBelow =
             modalContent.clientHeight -
@@ -466,6 +470,20 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     });
 
+    // Modals without a footer are considered passive and carry limitations as
+    // outlined in the design spec.
+    const containsModalFooter = Children.toArray(childrenWithProps).some(
+      (child) => isComponentElement(child, ModalFooter)
+    );
+    const isPassive = !containsModalFooter;
+    warning(
+      !(!isPassive && preventCloseOnClickOutside === false),
+      '`<ComposedModal>` prop `preventCloseOnClickOutside` should not be ' +
+        '`false` when `<ModalFooter>` is present. Transactional, non-passive ' +
+        'Modals should not be dissmissable by clicking outside. ' +
+        'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
+    );
+
     useEffect(() => {
       if (!open) return;
 
@@ -481,6 +499,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       return () => {
         document.removeEventListener('keydown', handleEscapeKey, true);
       };
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [open]);
 
     useEffect(() => {
@@ -526,6 +545,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           focusButton(innerModal.current);
         }
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [open, selectorPrimaryFocus, isOpen]);
 
     // AILabel is always size `sm`

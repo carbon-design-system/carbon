@@ -77,62 +77,61 @@ export interface SwitchProps
   text?: string;
 }
 
-const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(function Switch(
-  props: SwitchProps,
-  tabRef
-) {
-  const {
-    children,
-    className,
-    disabled,
-    index,
-    name,
-    onClick = noopFn,
-    onKeyDown = noopFn,
-    selected = false,
-    text,
-    ...other
-  } = props;
-  const prefix = usePrefix();
+const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
+  (props: SwitchProps, tabRef) => {
+    const {
+      children,
+      className,
+      disabled,
+      index,
+      name,
+      onClick = noopFn,
+      onKeyDown = noopFn,
+      selected = false,
+      text,
+      ...other
+    } = props;
+    const prefix = usePrefix();
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    onClick?.({ index, name, text });
-  };
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      onClick?.({ index, name, text });
+    };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    // TODO: `which` was deprecated years ago. When can its usage be deleted?
-    const key = event.key || event.which;
+    const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+      // TODO: `which` was deprecated years ago. When can its usage be deleted?
+      const key = event.key || event.which;
 
-    onKeyDown?.({ index, name, text, key });
-  };
+      onKeyDown?.({ index, name, text, key });
+    };
 
-  const classes = classNames(className, `${prefix}--content-switcher-btn`, {
-    [`${prefix}--content-switcher--selected`]: selected,
-  });
+    const classes = classNames(className, `${prefix}--content-switcher-btn`, {
+      [`${prefix}--content-switcher--selected`]: selected,
+    });
 
-  const commonProps = {
-    onClick: handleClick,
-    onKeyDown: handleKeyDown,
-    className: classes,
-    disabled,
-  };
+    const commonProps = {
+      onClick: handleClick,
+      onKeyDown: handleKeyDown,
+      className: classes,
+      disabled,
+    };
 
-  return (
-    <button
-      type="button"
-      ref={tabRef}
-      role="tab"
-      tabIndex={selected ? 0 : -1}
-      aria-selected={selected}
-      {...other}
-      {...commonProps}>
-      <span className={`${prefix}--content-switcher__label`} title={text}>
-        {text !== undefined ? text : children}
-      </span>
-    </button>
-  );
-});
+    return (
+      <button
+        type="button"
+        ref={tabRef}
+        role="tab"
+        tabIndex={selected ? 0 : -1}
+        aria-selected={selected}
+        {...other}
+        {...commonProps}>
+        <span className={`${prefix}--content-switcher__label`} title={text}>
+          {text !== undefined ? text : children}
+        </span>
+      </button>
+    );
+  }
+);
 
 Switch.displayName = 'Switch';
 

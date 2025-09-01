@@ -7,8 +7,9 @@
 
 import { html } from 'lit';
 import './index';
-import CopyFile16 from '@carbon/icons/lib/copy--file/16';
-import Export16 from '@carbon/icons/lib/export/16';
+import CopyFile16 from '@carbon/icons/es/copy--file/16.js';
+import Export16 from '@carbon/icons/es/export/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const args = {
   label: 'Primary action',
@@ -90,14 +91,7 @@ export const Default = {
 export const ExperimentalAutoAlign = {
   argTypes: argTypes,
   args: args,
-  render: ({
-    disabled,
-    label,
-    menuAlignment,
-    size,
-    tooltipAlignment,
-    onClick,
-  }) => html`
+  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
     <div style="width: 5000px; height: 5000px;">
       <div style="position: absolute; bottom: 20px">
         <cds-combo-button
@@ -156,10 +150,10 @@ export const withIcons = {
       .tooltip-alignment="${tooltipAlignment}">
       <cds-menu>
         <cds-menu-item label="Save as a copy">
-          ${CopyFile16({ slot: 'render-icon' })}
+          ${iconLoader(CopyFile16, { slot: 'render-icon' })}
         </cds-menu-item>
         <cds-menu-item label="Export">
-          ${Export16({ slot: 'render-icon' })}
+          ${iconLoader(Export16, { slot: 'render-icon' })}
         </cds-menu-item>
       </cds-menu>
     </cds-combo-button>
