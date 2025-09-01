@@ -17,7 +17,7 @@ test.describe('FluidComboBox', () => {
       test('fluid dropdown @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidComboBox',
-          id: 'experimental-fluid-components-unstable-fluidcombobox--default',
+          id: 'components-fluid-components-fluidcombobox--default',
           theme,
         });
       });
