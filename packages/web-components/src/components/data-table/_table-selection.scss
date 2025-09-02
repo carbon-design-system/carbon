@@ -21,6 +21,22 @@
   }
 }
 
+:host(#{$prefix}-table-header-row[selected]) {
+  ::slotted(#{$prefix}-table-header-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    border-block-end: 1px solid $layer-active;
+  }
+}
+
+:host(#{$prefix}-table-row[selected]:first-of-type) {
+  ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    border-block-start: 1px solid $border-subtle-selected;
+  }
+}
+
 :host(#{$prefix}-table-row) {
   .#{$prefix}--table-column-checkbox {
     border-block-end: 1px solid $border-subtle;
@@ -41,7 +57,6 @@
 }
 
 :host(#{$prefix}-table-row[selected]) {
-  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
@@ -52,7 +67,6 @@
   }
 
   &:hover {
-    .#{$prefix}--table-column-checkbox,
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
     .#{$prefix}--table-column-checkbox {
@@ -81,7 +95,6 @@
 
     background-attachment: fixed;
 
-    .#{$prefix}--table-column-checkbox,
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
     .#{$prefix}--table-column-checkbox {
@@ -89,7 +102,6 @@
     }
   }
 
-  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {

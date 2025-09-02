@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import { TextArea, TextAreaSkeleton } from '@carbon/react';
@@ -43,6 +44,7 @@ figma.connect(
         'Read-only': true,
       }),
     },
+    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */
     example: ({ ...props }) => <TextAreaDefault {...props} />,
   }
 );

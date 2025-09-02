@@ -7,7 +7,8 @@
 
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import Layers from '@carbon/icons/lib/layers/16.js';
+import { iconLoader } from '../../src/globals/internal/icon-loader';
+import Layers from '@carbon/icons/es/layers/16.js';
 import { prefix } from '../../src/globals/settings';
 import '../../src/components/layer/index.js';
 import styles from './with-layer.scss?lit';
@@ -53,21 +54,21 @@ class CDSLayer extends LitElement {
         <div class="${prefix}--with-layer">
           <div class="${prefix}--with-layer__background">
             <div class="${prefix}--with-layer__label">
-              ${Layers()} $background
+              ${iconLoader(Layers)} $background
             </div>
             <div class="${prefix}--with-layer__content">
               <slot @slotchange="${this._handleSlotChange}"></slot>
               <cds-layer with-background>
                 <div class="${prefix}--with-layer__layer">
                   <div class="${prefix}--with-layer__label">
-                    ${Layers()} $layer-01
+                    ${iconLoader(Layers)} $layer-01
                   </div>
                   <div class="${prefix}--with-layer__content">
                     <slot name="layer-1"></slot>
                     <cds-layer with-background>
                       <div class="${prefix}--with-layer__layer">
                         <div class="${prefix}--with-layer__label">
-                          ${Layers()} $layer-02
+                          ${iconLoader(Layers)} $layer-02
                         </div>
                         <div class="${prefix}--with-layer__content">
                           <slot name="layer-2"></slot>
