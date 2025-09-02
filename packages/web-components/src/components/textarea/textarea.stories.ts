@@ -232,7 +232,10 @@ export const TextAreaVisibilityAndColsWC = {
       const curr = ta.getAttribute('cols') || '0';
       const next = curr === '10' ? '0' : '10';
       ta.setAttribute('cols', next);
-      ta.setAttribute('helper-text', `Helper text (cols = ${next})`);
+      ta.setAttribute(
+        'helper-text',
+        `HelperHelperHelperHelperHelperHelperHelperHelper text text (cols = ${next})`
+      );
     };
 
     return html`
@@ -246,7 +249,7 @@ export const TextAreaVisibilityAndColsWC = {
           <cds-textarea
             id="ta-wc"
             label="Text Area label"
-            helper-text="Helper text (cols = 0)"
+            helper-text="HelperHelperHelperHelperHelperHelperHelperHelper text (cols = 0)"
             cols="0">
           </cds-textarea>
         </div>
