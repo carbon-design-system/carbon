@@ -23,7 +23,7 @@ import { useId } from '../../internal/useId';
 import copy from 'copy-to-clipboard';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import type {
   DeprecatedPopoverAlignment,
   NewPopoverAlignment,

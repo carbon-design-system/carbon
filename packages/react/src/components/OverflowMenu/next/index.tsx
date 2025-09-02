@@ -20,7 +20,7 @@ import mergeRefs from '../../../tools/mergeRefs';
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useAttachedMenu } from '../../../internal/useAttachedMenu';
-import deprecateValuesWithin from '../../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
 const defaultSize = 'md';
