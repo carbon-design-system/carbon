@@ -14,6 +14,8 @@ const typescript = require('@rollup/plugin-typescript');
 const path = require('path');
 const { rollup } = require('rollup');
 const stripBanner = require('rollup-plugin-strip-banner');
+const { preserveDirectives } = require('rollup-plugin-preserve-directives');
+
 const {
   loadBaseTsCompilerOpts,
   loadTsCompilerOpts,
@@ -172,6 +174,10 @@ function getRollupConfig(input, rootDir, outDir) {
         },
       }),
       babel(babelConfig),
+      // suppressPreserveModulesWarning is used because the icons don't use
+      // preserveModules and the warning is unecessary.
+      // @see https://github.com/Ephem/rollup-plugin-preserve-directives?tab=readme-ov-file#rollup-plugin-preserve-directives-warning
+      preserveDirectives({ suppressPreserveModulesWarning: true }),
       stripBanner(),
       {
         transform(_code, id) {
@@ -185,6 +191,15 @@ function getRollupConfig(input, rootDir, outDir) {
         },
       },
     ],
+    // rollup-plugin-preserve-directives doesn't suppress the warning that
+    // rollup pops by default for directives. Specifically, this prevents:
+    // @carbon/react: src/index.ts (9:0): Module level directives cause errors
+    // when bundled, "use client" in "src/index.ts" was ignored.
+    onwarn(warning, warn) {
+      if (warning.code !== 'MODULE_LEVEL_DIRECTIVE') {
+        warn(warning);
+      }
+    },
   };
 }
 
