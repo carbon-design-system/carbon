@@ -1,22 +1,25 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { Requireable, Validator } from 'prop-types';
 import { warning } from '../internal/warning';
 
-const didWarnAboutDeprecation = {};
+type DeprecationTracker = Record<string, Record<string, boolean>>;
 
-export default function deprecateValuesWithin(
-  propType,
-  allowedValues,
-  propMappingFunction
-) {
-  return function checker(props, propName, componentName, ...rest) {
-    if (props[propName] === undefined) {
-      return;
+const didWarnAboutDeprecation: DeprecationTracker = {};
+
+export const deprecateValuesWithin = <T>(
+  propType: Requireable<T>,
+  allowedValues?: readonly unknown[],
+  propMappingFunction?: (deprecatedValue: T) => T
+): Validator<T> | Requireable<T> => {
+  return (props, propName, componentName, ...rest) => {
+    if (typeof props[propName] === 'undefined') {
+      return null;
     }
 
     if (
@@ -45,4 +48,4 @@ export default function deprecateValuesWithin(
     }
     return propType(props, propName, componentName, ...rest);
   };
-}
+};

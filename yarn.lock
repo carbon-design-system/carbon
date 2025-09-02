@@ -1947,6 +1947,7 @@ __metadata:
     remark-gfm: "npm:^4.0.0"
     rimraf: "npm:^6.0.1"
     rollup: "npm:^4.41.1"
+    rollup-plugin-preserve-directives: "npm:^0.4.0"
     rollup-plugin-strip-banner: "npm:^3.0.0"
     sass: "npm:^1.77.7"
     sass-loader: "npm:^16.0.0"
@@ -22339,6 +22340,18 @@ __metadata:
     globby: "npm:10.0.1"
     is-plain-object: "npm:^3.0.0"
   checksum: 10/706ba6bd2052b95d1037f12963ff4b50749730f18aefad10544f9574aff7c035c88c5dd9ae1f0c0408cf09862e595a0ea4d68e13c2717addaea2bda3ade0d0e0
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-preserve-directives@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "rollup-plugin-preserve-directives@npm:0.4.0"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.1.0"
+    magic-string: "npm:^0.30.5"
+  peerDependencies:
+    rollup: 2.x || 3.x || 4.x
+  checksum: 10/2ed0eeeb342ad87b9ec6c0521279c21b8680709e43da66b956cf111783852c01e167d463860b8e5a5b7385cf4d807d71d448eb9bf8179e1b336d777d6f7fe5b8
   languageName: node
   linkType: hard
 
