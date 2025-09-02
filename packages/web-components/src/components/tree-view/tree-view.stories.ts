@@ -10,9 +10,10 @@
 import { html } from 'lit';
 import './index';
 import { TREE_SIZE } from './defs';
-import Document16 from '@carbon/icons/lib/document/16.js';
-import Folder16 from '@carbon/icons/lib/folder/16.js';
+import Document16 from '@carbon/icons/es/document/16.js';
+import Folder16 from '@carbon/icons/es/folder/16.js';
 import '../button/index';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const sizes = {
   [`XS size (${TREE_SIZE.EXTRA_SMALL})`]: TREE_SIZE.EXTRA_SMALL,
@@ -149,68 +150,68 @@ export const withIcons = {
   render: () => html`
     <cds-tree-view label="Tree View">
       <cds-tree-node label="Artificial intelligence">
-        ${Document16({ slot: 'icon' })}
+        ${iconLoader(Document16, { slot: 'icon' })}
       </cds-tree-node>
       <cds-tree-node label="Blockchain">
-        ${Document16({ slot: 'icon' })}
+        ${iconLoader(Document16, { slot: 'icon' })}
       </cds-tree-node>
       <cds-tree-node label="Business automation">
-        ${Folder16({ slot: 'icon' })}
+        ${iconLoader(Folder16, { slot: 'icon' })}
         <cds-tree-node label="Business process automation">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
         <cds-tree-node label="Business process mapping">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
       </cds-tree-node>
       <cds-tree-node label="Business operations">
-        ${Document16({ slot: 'icon' })}
+        ${iconLoader(Document16, { slot: 'icon' })}
       </cds-tree-node>
       <cds-tree-node label="Cloud computing" is-expanded>
-        ${Folder16({ slot: 'icon' })}
+        ${iconLoader(Folder16, { slot: 'icon' })}
         <cds-tree-node label="Containers">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
         <cds-tree-node label="Databases">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
         <cds-tree-node label="DevOps">
-          ${Folder16({ slot: 'icon' })}
+          ${iconLoader(Folder16, { slot: 'icon' })}
           <cds-tree-node label="Solutions">
-            ${Document16({ slot: 'icon' })}
+            ${iconLoader(Document16, { slot: 'icon' })}
           </cds-tree-node>
           <cds-tree-node label="Case studies">
-            ${Folder16({ slot: 'icon' })}
+            ${iconLoader(Folder16, { slot: 'icon' })}
             <cds-tree-node label="Resources">
-              ${Document16({ slot: 'icon' })}
+              ${iconLoader(Document16, { slot: 'icon' })}
             </cds-tree-node>
           </cds-tree-node>
         </cds-tree-node>
       </cds-tree-node>
       <cds-tree-node label="Data & Analytics" is-expanded>
-        ${Folder16({ slot: 'icon' })}
+        ${iconLoader(Folder16, { slot: 'icon' })}
         <cds-tree-node label="Big data">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
         <cds-tree-node label="Business Intelligence">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
       </cds-tree-node>
       <cds-tree-node label="Models" is-expanded disabled>
-        ${Folder16({ slot: 'icon' })}
+        ${iconLoader(Folder16, { slot: 'icon' })}
         <cds-tree-node label="Audit">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
         <cds-tree-node label="Monthly data">
-          ${Document16({ slot: 'icon' })}
+          ${iconLoader(Document16, { slot: 'icon' })}
         </cds-tree-node>
         <cds-tree-node label="Data warehouse" is-expanded>
-          ${Folder16({ slot: 'icon' })}
+          ${iconLoader(Folder16, { slot: 'icon' })}
           <cds-tree-node label="Report samples">
-            ${Document16({ slot: 'icon' })}
+            ${iconLoader(Document16, { slot: 'icon' })}
           </cds-tree-node>
           <cds-tree-node label="Sales performance">
-            ${Document16({ slot: 'icon' })}
+            ${iconLoader(Document16, { slot: 'icon' })}
           </cds-tree-node>
         </cds-tree-node>
       </cds-tree-node>

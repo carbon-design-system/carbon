@@ -31,7 +31,10 @@ function getFilenameFor(name) {
  * @returns {string}
  */
 function serialize(data) {
-  return yaml.safeDump(data);
+  if (data === undefined || data === null) {
+    throw new Error('Cannot serialize undefined or null data');
+  }
+  return yaml.dump(data);
 }
 
 /**
@@ -40,7 +43,7 @@ function serialize(data) {
  * @returns {string}
  */
 function deserialize(data) {
-  return yaml.safeLoad(data);
+  return yaml.load(data);
 }
 
 /**

@@ -7,15 +7,16 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import CaretLeft16 from '@carbon/icons/lib/caret--left/16.js';
-import CaretRight16 from '@carbon/icons/lib/caret--right/16.js';
 import { prefix } from '../../globals/settings';
+import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
+import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import styles from './pagination.scss?lit';
 import { PAGINATION_SIZE } from './defs';
 import CDSSelect from '../select/select';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import '../button/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -55,19 +56,35 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       formatStatusWithDeterminateTotal,
       formatStatusWithIndeterminateTotal,
     } = this;
+
     // * Regular: `1-10 of 100 items`
     // * Indeterminate total: `Item 1-10` (`Item 11-` at the last page)
-    const end = Math.min(
-      start + pageSize,
-      totalItems == null ? Infinity : totalItems
-    );
+    const end = Math.min(start + pageSize, totalItems ?? Infinity);
+
     const format =
       totalItems == null || pagesUnknown
         ? formatStatusWithIndeterminateTotal
         : formatStatusWithDeterminateTotal;
 
-    // `start`/`end` properties starts with zero, whereas we want to show number starting with 1
-    return format({ start: start + 1, end, count: totalItems });
+    // Set `start` and `end` to 0 when there are no items
+    return format({
+      start: totalItems === 0 ? 0 : start + 1,
+      end: totalItems === 0 ? 0 : end,
+      count: totalItems,
+    });
+  }
+
+  /**
+   * Calculates the start value based on page, pageSize, and totalItems
+   */
+  private _calculateStart(
+    page: number,
+    pageSize: number,
+    totalItems: number
+  ): number {
+    const calculatedStart = (page - 1) * pageSize;
+    // When totalItems is 0, `start` should be 0 to prevent negative values
+    return totalItems === 0 ? 0 : Math.max(calculatedStart, 0);
   }
 
   /**
@@ -178,7 +195,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       this._handleUserInitiatedPageSizeChange();
     } else {
       this.page = value;
-      this._handleUserInitiatedChangeStart((value - 1) * pageSize);
+      const newStart = this._calculateStart(value, pageSize, totalItems);
+      this._handleUserInitiatedChangeStart(newStart);
     }
   }
 
@@ -325,7 +343,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     }
 
     if (changedProperties.has('page')) {
-      this._handleUserInitiatedChangeStart((page - 1) * pageSize);
+      const newStart = this._calculateStart(page, pageSize, totalItems);
+      this._handleUserInitiatedChangeStart(newStart);
     }
   }
 
@@ -464,7 +483,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             button-class-name="${prevButtonClasses}"
             tooltip-text="${backwardText}"
             @click="${handleClickPrevButton}">
-            ${CaretLeft16({ slot: 'icon' })}
+            ${iconLoader(CaretLeft16, { slot: 'icon' })}
           </cds-button>
           <cds-button
             tooltip-position="top-right"
@@ -474,7 +493,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             button-class-name="${nextButtonClasses}"
             tooltip-text="${forwardText}"
             @click="${handleClickNextButton}">
-            ${CaretRight16({ slot: 'icon' })}
+            ${iconLoader(CaretRight16, { slot: 'icon' })}
           </cds-button>
         </div>
       </div>

@@ -302,6 +302,8 @@ collect:
         - menu-bar-label
         # cds-header-side-nav-items
         - has-divider
+        # cds-icon
+        - class
         # cds-inline-loading
         - oncds-inline-loading-onsuccess
         - success-delay

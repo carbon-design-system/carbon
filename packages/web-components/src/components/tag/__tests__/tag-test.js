@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import Add16 from '@carbon/web-components/es/icons/add/16.js';
+import Add16 from '@carbon/icons/es/add/16.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/tag/index.js';
 
 describe('cds-tag', function () {
@@ -134,7 +135,7 @@ describe('cds-tag', function () {
 
   it('should allow for a custom icon', async () => {
     const tag = html`<cds-tag type="red"
-      >${Add16({ slot: 'icon' })} Dee Dee Ramone</cds-tag
+      >${iconLoader(Add16, { slot: 'icon' })} Dee Dee Ramone</cds-tag
     >`;
     const el = await fixture(tag);
 
