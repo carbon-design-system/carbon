@@ -1992,7 +1992,7 @@ __metadata:
     "@ibm/plex-mono": "npm:1.1.0"
     "@ibm/plex-sans": "npm:0.0.3-alpha.0"
     "@ibm/plex-sans-arabic": "npm:1.1.0"
-    "@ibm/plex-sans-devanagari": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-devanagari": "npm:1.1.0"
     "@ibm/plex-sans-hebrew": "npm:0.0.3-alpha.0"
     "@ibm/plex-sans-thai": "npm:0.0.3-alpha.0"
     "@ibm/plex-sans-thai-looped": "npm:0.0.3-alpha.0"
@@ -3058,10 +3058,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/plex-sans-devanagari@npm:0.0.3-alpha.0":
-  version: 0.0.3-alpha.0
-  resolution: "@ibm/plex-sans-devanagari@npm:0.0.3-alpha.0"
-  checksum: 10/ef3cd967100210a822bea7b36c5ac54f915a319d5e23fa1175ea63d0405c826023f241d54b4f7beb5928603fbe01a5bae22839dad6922330bb84921eb289d193
+"@ibm/plex-sans-devanagari@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@ibm/plex-sans-devanagari@npm:1.1.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+  checksum: 10/a6b05ad8c4d556cb439d5b51c94ebb8152c1a26cb9e86f6b3a95808b6a2c4c21fab29a96296ac4af7bde8d46c8360e8bea7f082054a088f96eb3949a77241e93
   languageName: node
   linkType: hard
 
