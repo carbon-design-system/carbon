@@ -71,6 +71,9 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
         composed: true,
         detail: {
           checked,
+          value: this._radio.value,
+          name: this._radio.name,
+          event: undefined,
         },
       })
     );
@@ -154,6 +157,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
               composed: true,
               detail: {
                 checked: this.checked,
+                value: this.value,
+                name: this.name,
+                event,
               },
             }
           )
@@ -167,6 +173,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
             composed: true,
             detail: {
               checked: this.checked,
+              value: this.value,
+              name: this.name,
+              event,
             },
           }
         )
