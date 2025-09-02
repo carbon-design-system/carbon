@@ -2558,6 +2558,9 @@ Map {
       },
     },
     "propTypes": {
+      "children": {
+        "type": "node",
+      },
       "experimentalAutoAlign": {
         "type": "bool",
       },
@@ -2597,6 +2600,7 @@ Map {
       "radio": {
         "type": "bool",
       },
+      "render": [Function],
       "rows": {
         "args": [
           {
