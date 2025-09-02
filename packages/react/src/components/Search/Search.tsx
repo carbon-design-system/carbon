@@ -114,7 +114,7 @@ export interface SearchProps extends InputPropsBase {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Specify the type of the `<input>`, defaults to "search"
+   * Specify the type of the `<input>`
    */
   type?: string;
 
@@ -395,8 +395,9 @@ Search.propTypes = {
    * Specify the size of the Search
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
   /**
-   * Specify the type of the `<input>`, defaults to "search"
+   * Specify the type of the `<input>`
    */
   type: PropTypes.string,
 
