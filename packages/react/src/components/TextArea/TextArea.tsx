@@ -248,7 +248,7 @@ const TextArea = frFn((props, forwardRef) => {
     });
     resizeObserver.observe(wrapperRef.current);
 
-    return () => resizeObserver.disconnect();
+    return () => resizeObserver && resizeObserver.disconnect();
   }, [other.cols, invalid, warn]);
 
   const textareaProps: {
