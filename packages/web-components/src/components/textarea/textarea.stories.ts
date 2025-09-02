@@ -219,24 +219,25 @@ export const WithLayer = {
   `,
 };
 
+// Test Story, remove before merging
 export const TestWithTab = {
   render: () => {
     return html`
-      <cds-tabs value="all">
-        <cds-tab id="tab-a" target="panel-a" value="a">Tab A</cds-tab>
-        <cds-tab id="tab-b" target="panel-b" value="b"> Tab B </cds-tab>
-      </cds-tabs>
-      <cds-textarea
-        id="panel-a"
-        helper-text="TextAreaTextAreaTextAreaTextAreaTextAreaTextAreaTextArea in tab A">
-      </cds-textarea>
-      <cds-textarea
-        id="panel-b"
-        helper-text="TextArea in tabtabtabtabtabtabtabtabtabtab B">
-      </cds-textarea>
+      <div style="margin: 3rem">
+        <cds-tabs value="all">
+          <cds-tab id="tab-a" target="panel-a" value="a">Tab A</cds-tab>
+          <cds-tab id="tab-b" target="panel-b" value="b"> Tab B </cds-tab>
+        </cds-tabs>
+        <cds-textarea id="panel-a" helper-text="TextArea in tab A">
+        </cds-textarea>
+        <cds-textarea id="panel-b" helper-text="TextArea in tab B">
+        </cds-textarea>
+      </div>
     `;
   },
 };
+
+// Test Story, remove before merging
 export const TextAreaVisibilityTest = {
   render: () => {
     const toggleVisibility = () => {
@@ -251,10 +252,7 @@ export const TextAreaVisibilityTest = {
       const curr = ta.getAttribute('cols') || '0';
       const next = curr === '10' ? '0' : '10';
       ta.setAttribute('cols', next);
-      ta.setAttribute(
-        'helper-text',
-        `HelperHelperHelperHelperHelperHelperHelperHelper text text (cols = ${next})`
-      );
+      ta.setAttribute('helper-text', `Helper text (cols = ${next})`);
     };
 
     return html`
@@ -268,7 +266,7 @@ export const TextAreaVisibilityTest = {
           <cds-textarea
             id="ta-wc"
             label="Text Area label"
-            helper-text="HelperHelperHelperHelperHelperHelperHelperHelper text (cols = 0)"
+            helper-text="Helper text (cols = 0)"
             cols="0">
           </cds-textarea>
         </div>

@@ -234,7 +234,7 @@ const TextArea = frFn((props, forwardRef) => {
     }
 
     if (!wrapperRef.current) return;
-    const apply = (width: number) => {
+    const applyWidth = (width: number) => {
       [helperTextRef, errorTextRef, warnTextRef].forEach((r) => {
         if (r.current) {
           r.current.style.maxWidth = `${width}px`;
@@ -244,7 +244,7 @@ const TextArea = frFn((props, forwardRef) => {
     };
 
     const resizeObserver = new ResizeObserver(([entry]) => {
-      apply(entry.contentRect.width);
+      applyWidth(entry.contentRect.width);
     });
     resizeObserver.observe(wrapperRef.current);
 

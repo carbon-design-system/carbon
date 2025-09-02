@@ -163,6 +163,7 @@ export const _WithLayer = () => (
   </WithLayer>
 );
 
+// Test Story, remove before merging
 export const TestWithTab = () => (
   <div style={{ margin: '3rem' }}>
     <Tabs>
@@ -172,15 +173,17 @@ export const TestWithTab = () => (
       </TabList>
       <TabPanels>
         <TabPanel>
-          <TextArea helperText="TextAreaTextAreaTextAreaTextAreaTextAreaTextAreaTextArea in tab A" />
+          <TextArea helperText="TextArea in tab A" />
         </TabPanel>
         <TabPanel>
-          <TextArea helperText="TextArea in tabtabtabtabtabtabtabtabtabtab B" />
+          <TextArea helperText="TextArea in tab B" />
         </TabPanel>
       </TabPanels>
     </Tabs>
   </div>
 );
+
+// Test Story, remove before merging
 export const TextAreaVisibilityTest = () => {
   const [visible, setVisible] = React.useState(false);
   const [cols, setCols] = React.useState(0);
@@ -202,8 +205,15 @@ export const TextAreaVisibilityTest = () => {
         <TextArea
           id="ta-visibility-test"
           labelText="Test TextArea"
-          helperText={`Helper text jgvbjkbvjtbjrtjbjtrbjrbjtjbjrtbejgjt(cols = ${cols})`}
+          helperText={`Helper text (cols = ${cols})`}
           cols={cols || undefined}
+        />
+      </div>
+      <div style={{ display: 'none' }}>
+        <TextArea
+          id="input-1"
+          helperText="Helper text should not have maxWidth 0"
+          cols="10"
         />
       </div>
     </div>
