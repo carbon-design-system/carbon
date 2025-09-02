@@ -9,7 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
-import CDSProgressStep from './progress-step';
+import CDSProgressStep, { PROGRESS_STEP_STAT } from './progress-step';
 import styles from './progress-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -35,11 +35,16 @@ export default class CDSProgressIndicator extends LitElement {
   spaceEqually = false;
 
   /**
+   * Optionally specify the current step array index.
+   */
+  @property({ type: Number, attribute: 'current-index' })
+  currentIndex = 0;
+
+  /**
    * React-like property handler (NOT an attribute).
    * If set to a function, steps become clickable and this handler will be called
    * with a CustomEvent whose detail is `{ index: number }`.
    */
-  // Note: attribute:false so HTML attributes won't try to bind inline handlers.
   @property({ attribute: false })
   onChange?: (e: CustomEvent<{ index: number }>) => void;
 
@@ -117,9 +122,11 @@ export default class CDSProgressIndicator extends LitElement {
       .selectorStep;
     const clickable = typeof this.onChange === 'function';
 
+    const steps = this.querySelectorAll(selector);
+
     if (changedProperties.has('vertical')) {
       // Propagate `vertical` attribute to descendants until :host-context() is widely supported
-      forEach(this.querySelectorAll(selector), (item) => {
+      forEach(steps, (item) => {
         (item as CDSProgressStep).vertical = this.vertical;
         (item as CDSProgressStep).spaceEqually = spacingValue;
         (item as CDSProgressStep).clickable = clickable;
@@ -128,15 +135,36 @@ export default class CDSProgressIndicator extends LitElement {
 
     if (changedProperties.has('spaceEqually')) {
       // Propagate `spaceEqually` attribute to descendants
-      forEach(this.querySelectorAll(selector), (item) => {
+      forEach(steps, (item) => {
         (item as CDSProgressStep).spaceEqually = spacingValue;
       });
     }
 
     // Propagate clickability whenever onChange changes
     if (changedProperties.has('onChange')) {
-      forEach(this.querySelectorAll(selector), (item) => {
+      forEach(steps, (item) => {
         (item as CDSProgressStep).clickable = clickable;
+      });
+    }
+
+    if (changedProperties.has('currentIndex')) {
+      steps.forEach((step, i) => {
+        const stepEl = step as CDSProgressStep;
+
+        if (
+          (stepEl as any)._manualState ||
+          stepEl.state === PROGRESS_STEP_STAT.INVALID
+        ) {
+          return;
+        }
+
+        if (i < this.currentIndex!) {
+          stepEl.state = PROGRESS_STEP_STAT.COMPLETE;
+        } else if (i === this.currentIndex) {
+          stepEl.state = PROGRESS_STEP_STAT.CURRENT;
+        } else {
+          stepEl.state = PROGRESS_STEP_STAT.INCOMPLETE;
+        }
       });
     }
   }

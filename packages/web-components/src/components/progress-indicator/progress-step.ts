@@ -57,12 +57,21 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
 
   /**
    * The secondary progress label.
+   * @deprecated Use `secondaryLabel` instead
    */
   @property({ attribute: 'secondary-label-text' })
   secondaryLabelText!: string;
 
   @property({ attribute: 'secondary-label' })
   secondaryLabel!: string;
+
+  /**
+   * `true` if the progress step should grow equally to fill space.
+   *
+   * @private
+   */
+  @property({ type: Boolean, reflect: true })
+  spaceEqually = false;
 
   /**
    * The progress state.
@@ -84,6 +93,45 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
    */
   @property({ type: Boolean })
   clickable = false;
+
+  /**
+   * Internal flag to indicate if the state was manually set
+   */
+  _manualState = false;
+
+  /** React-like boolean props mapped to `state` */
+  @property({ type: Boolean, reflect: true })
+  get complete() {
+    return this.state === PROGRESS_STEP_STAT.COMPLETE;
+  }
+  set complete(val: boolean) {
+    if (val) {
+      this.state = PROGRESS_STEP_STAT.COMPLETE;
+      this._manualState = true;
+    }
+  }
+
+  @property({ type: Boolean, reflect: true })
+  get current() {
+    return this.state === PROGRESS_STEP_STAT.CURRENT;
+  }
+  set current(val: boolean) {
+    if (val) {
+      this.state = PROGRESS_STEP_STAT.CURRENT;
+      this._manualState = true;
+    }
+  }
+
+  @property({ type: Boolean, reflect: true })
+  get invalid() {
+    return this.state === PROGRESS_STEP_STAT.INVALID;
+  }
+  set invalid(val: boolean) {
+    if (val) {
+      this.state = PROGRESS_STEP_STAT.INVALID;
+      this._manualState = true;
+    }
+  }
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -132,7 +180,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
       state,
     } = this;
     const svgLabel = iconLabel || description;
-    const optionalLabel = secondaryLabelText || secondaryLabel;
+    const optionalLabel = secondaryLabel || secondaryLabelText;
 
     // Unclickable if current OR disabled OR no onChange upstream (to match React)
     const isUnclickable =

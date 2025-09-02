@@ -97,6 +97,7 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-progress-step[current]),
 :host(#{$prefix}-progress-step[state='current']) {
   @extend .#{$prefix}--progress-step--current;
 
@@ -105,6 +106,7 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-progress-step[complete]),
 :host(#{$prefix}-progress-step[state='complete']) {
   @extend .#{$prefix}--progress-step--complete;
 
