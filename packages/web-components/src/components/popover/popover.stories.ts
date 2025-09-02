@@ -219,6 +219,33 @@ export const TabTip = {
   },
 };
 
+// I need remove this
+export const TestPopover = {
+  render: () => {
+    const handleClick = () => {
+      const popover = document.querySelector('cds-popover');
+      if (!popover) return;
+
+      if (popover.hasAttribute('open')) {
+        popover.removeAttribute('open');
+      } else {
+        popover.setAttribute('open', '');
+      }
+    };
+
+    return html`
+      <cds-popover align="bottom">
+        <cds-button kind="primary" @click="${handleClick}"> Click </cds-button>
+        <cds-popover-content>
+          <div style="padding: 1rem">
+            <p>This is just a test</p>
+          </div>
+        </cds-popover-content>
+      </cds-popover>
+    `;
+  },
+};
+
 const meta = {
   title: 'Components/Popover',
 };
