@@ -9,11 +9,12 @@ import { TemplateResult, html } from 'lit';
 import { property, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
-import ChevronLeft16 from '@carbon/icons/lib/chevron--left/16.js';
+import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
@@ -455,7 +456,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
           this._handleScrollButtonClick(_, {
             direction: NAVIGATION_DIRECTION.Left,
           })}>
-        ${ChevronLeft16()}
+        ${iconLoader(ChevronLeft16)}
       </button>
     `;
   }
@@ -484,7 +485,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
           this._handleScrollButtonClick(_, {
             direction: NAVIGATION_DIRECTION.Right,
           })}>
-        ${ChevronRight16()}
+        ${iconLoader(ChevronRight16)}
       </button>
     `;
   }

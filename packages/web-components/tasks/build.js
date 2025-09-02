@@ -12,8 +12,7 @@ import { globby } from 'globby';
 import { rollup } from 'rollup';
 import alias from '@rollup/plugin-alias';
 import autoprefixer from 'autoprefixer';
-import carbonIcons from '../tools/rollup-plugin-icons.js';
-import carbonIconPaths from '../tools/rollup-plugin-icon-paths.js';
+
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import cssnano from 'cssnano';
@@ -46,11 +45,6 @@ async function build() {
     '!src/globals/mixins/**/*.ts',
   ]);
 
-  const iconInput = await globby([
-    '../../packages/icons/lib/**/*.js',
-    '!../../packages/icons/lib/index.js',
-  ]);
-
   const entryPoint = {
     rootDir: 'src',
     outputDirectory: path.resolve(__dirname, '..'),
@@ -76,8 +70,7 @@ async function build() {
     const cwcInputConfig = getRollupConfig(
       format.type === 'esm' ? esInputs : libInputs,
       entryPoint.rootDir,
-      outputDirectory,
-      format.type === 'esm' ? iconInput : []
+      outputDirectory
     );
 
     const cwcBundle = await rollup(cwcInputConfig);
@@ -104,7 +97,7 @@ const banner = `/**
  */
 `;
 
-function getRollupConfig(input, rootDir, outDir, iconInput) {
+function getRollupConfig(input, rootDir, outDir) {
   return {
     input,
     // Mark dependencies listed in `package.json` as external so that they are
@@ -150,7 +143,6 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           ).css;
         },
       }),
-      carbonIcons(iconInput, banner),
       typescript({
         noEmitOnError: true,
         compilerOptions: {
@@ -158,7 +150,6 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           outDir,
         },
       }),
-      carbonIconPaths(),
     ],
   };
 }

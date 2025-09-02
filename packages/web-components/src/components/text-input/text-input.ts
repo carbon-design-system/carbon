@@ -10,11 +10,12 @@ import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import View16 from '@carbon/icons/lib/view/16.js';
-import ViewOff16 from '@carbon/icons/lib/view--off/16.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import ViewOff16 from '@carbon/icons/es/view--off/16.js';
 import FormMixin from '../../globals/mixins/form';
 import ValidityMixin from '../../globals/mixins/validity';
 import {
@@ -83,7 +84,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   protected _value = '';
 
   /**
-   * Handles `oninput` event on the `<input>`.
+   * Handles `oninput` event on the `input`.
    *
    * @param event The event.
    * @param event.target The event target.
@@ -333,15 +334,22 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-input__invalid-icon`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
-    const normalizedProps = {
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,
       warn: !readonly && !invalid && warn,
@@ -409,8 +417,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     //TODO deprecated, remove in v12
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
     const passwordVisibilityIcon = passwordIsVisible
-      ? ViewOff16({ class: `${prefix}--icon-visibility-off` })
-      : View16({ class: `${prefix}--icon-visibility-on` });
+      ? iconLoader(ViewOff16, { class: `${prefix}--icon-visibility-off` })
+      : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
 
     //TODO deprecated, remove in v12
     const passwordVisibilityToggleClasses = classMap({
