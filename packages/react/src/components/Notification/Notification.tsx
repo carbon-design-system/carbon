@@ -41,7 +41,7 @@ import { noopFn } from '../../internal/noopFn';
 import { wrapFocus, wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -1249,11 +1249,12 @@ export type NewKindProps = 'warning' | 'info';
 
 export type KindProps = DeprecatedKindProps | NewKindProps;
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    error: 'warning', // only redirect error -> warning
-    success: 'info', // only redirect success -> info
-  };
+const mapping = {
+  error: 'warning', // only redirect error -> warning
+  success: 'info', // only redirect success -> info
+};
+
+const propMappingFunction = (deprecatedValue: string) => {
   return mapping[deprecatedValue];
 };
 
