@@ -15,6 +15,7 @@ import './index';
 import '../form/form-item';
 import '../ai-label';
 import '../icon-button';
+import '../tabs';
 
 const content = html`
   <div slot="body-text">
@@ -218,7 +219,25 @@ export const WithLayer = {
   `,
 };
 
-export const TextAreaVisibilityAndColsWC = {
+export const TestWithTab = {
+  render: () => {
+    return html`
+      <cds-tabs value="all">
+        <cds-tab id="tab-a" target="panel-a" value="a">Tab A</cds-tab>
+        <cds-tab id="tab-b" target="panel-b" value="b"> Tab B </cds-tab>
+      </cds-tabs>
+      <cds-textarea
+        id="panel-a"
+        helper-text="TextAreaTextAreaTextAreaTextAreaTextAreaTextAreaTextArea in tab A">
+      </cds-textarea>
+      <cds-textarea
+        id="panel-b"
+        helper-text="TextArea in tabtabtabtabtabtabtabtabtabtab B">
+      </cds-textarea>
+    `;
+  },
+};
+export const TextAreaVisibilityTest = {
   render: () => {
     const toggleVisibility = () => {
       const wrap = document.getElementById('ta-wrap');
