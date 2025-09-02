@@ -218,6 +218,43 @@ export const WithLayer = {
   `,
 };
 
+export const TextAreaVisibilityAndColsWC = {
+  render: () => {
+    const toggleVisibility = () => {
+      const wrap = document.getElementById('ta-wrap');
+      if (!wrap) return;
+      wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+    };
+
+    const toggleCols = () => {
+      const ta = document.getElementById('ta-wc');
+      if (!ta) return;
+      const curr = ta.getAttribute('cols') || '0';
+      const next = curr === '10' ? '0' : '10';
+      ta.setAttribute('cols', next);
+      ta.setAttribute('helper-text', `Helper text (cols = ${next})`);
+    };
+
+    return html`
+      <div style="margin: 3rem">
+        <div style="display: flex; gap: 8px; margin-bottom: 12px">
+          <button @click=${toggleVisibility}>Toggle visibility</button>
+          <button @click=${toggleCols}>Toggle cols</button>
+        </div>
+
+        <div id="ta-wrap" style="display: none">
+          <cds-textarea
+            id="ta-wc"
+            label="Text Area label"
+            helper-text="Helper text (cols = 0)"
+            cols="0">
+          </cds-textarea>
+        </div>
+      </div>
+    `;
+  },
+};
+
 export default {
   title: 'Components/Text Area',
 };

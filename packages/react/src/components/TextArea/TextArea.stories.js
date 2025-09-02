@@ -15,6 +15,7 @@ import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
+import { Tabs, TabPanel, TabList, Tab, TabPanels } from '@carbon/react';
 
 export default {
   title: 'Components/TextArea',
@@ -161,6 +162,53 @@ export const _WithLayer = () => (
     )}
   </WithLayer>
 );
+
+export const TestWithTab = () => (
+  <div style={{ margin: '3rem' }}>
+    <Tabs>
+      <TabList>
+        <Tab>Tab A</Tab>
+        <Tab>Tab B</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          <TextArea helperText="TextAreaTextAreaTextAreaTextAreaTextAreaTextAreaTextArea in tab A" />
+        </TabPanel>
+        <TabPanel>
+          <TextArea helperText="TextArea in tabtabtabtabtabtabtabtabtabtab B" />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  </div>
+);
+export const TextAreaVisibilityTest = () => {
+  const [visible, setVisible] = React.useState(false);
+  const [cols, setCols] = React.useState(0);
+
+  return (
+    <div style={{ margin: '3rem' }}>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+        <button type="button" onClick={() => setVisible((v) => !v)}>
+          {visible ? 'Hide' : 'Show'} TextArea
+        </button>
+        <button
+          type="button"
+          onClick={() => setCols((c) => (c === 10 ? 0 : 10))}>
+          Toggle cols (now {cols})
+        </button>
+      </div>
+
+      <div style={{ display: visible ? 'block' : 'none' }}>
+        <TextArea
+          id="ta-visibility-test"
+          labelText="Test TextArea"
+          helperText={`Helper text jgvbjkbvjtbjrtjbjtrbjrbjtjbjrtbejgjt(cols = ${cols})`}
+          cols={cols || undefined}
+        />
+      </div>
+    </div>
+  );
+};
 
 export const withAILabel = (args) => {
   const aiLabel = (
