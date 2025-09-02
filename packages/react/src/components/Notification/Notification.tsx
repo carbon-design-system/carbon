@@ -14,6 +14,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type ComponentProps,
 } from 'react';
 import { deprecate } from '../../prop-types/deprecate';
 import cx from 'classnames';
@@ -89,7 +90,7 @@ export interface NotificationActionButtonProps extends ButtonProps<'button'> {
   /**
    * Optionally specify a click handler for the notification action button.
    */
-  onClick?(): void;
+  onClick?: ComponentProps<typeof Button>['onClick'];
 }
 
 export function NotificationActionButton({
@@ -882,7 +883,9 @@ export interface ActionableNotificationProps
   /**
    * Provide a function that is called when the action is clicked
    */
-  onActionButtonClick?(): void;
+  onActionButtonClick?: ComponentProps<
+    typeof NotificationActionButton
+  >['onClick'];
 
   /**
    * Provide a function that is called when menu is closed.
@@ -1287,7 +1290,9 @@ export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when the action is clicked
    */
-  onActionButtonClick?(): void;
+  onActionButtonClick?: ComponentProps<
+    typeof NotificationActionButton
+  >['onClick'];
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
