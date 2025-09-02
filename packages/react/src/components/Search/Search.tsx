@@ -385,11 +385,14 @@ Search.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * @deprecated Specify the role for the underlying `<input>`.
-   * No longer needed since `<input type="search">` already provides the correct semantics.
-   * This prop will be removed in the next major release of Carbon.
+   * Deprecated, since <input type="search"> already provides correct semantics.
+   * Specify the role for the underlying `<input>`, defaults to `searchbox`
    */
-  role: PropTypes.string,
+  role: deprecate(
+    PropTypes.string,
+    'The `role` prop has been deprecated since <input type="search"> already provides correct semantics. ' +
+      'It will be removed in the next major release of Carbon.'
+  ),
 
   /**
    * Specify the size of the Search
