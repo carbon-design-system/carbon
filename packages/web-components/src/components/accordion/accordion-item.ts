@@ -8,8 +8,9 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
 import { prefix } from '../../globals/settings';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import Handle from '../../globals/internal/handle';
 import { ACCORDION_ITEM_BREAKPOINT } from './defs';
@@ -85,9 +86,11 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
       const { selectorAccordionContent } = this
         .constructor as typeof CDSAccordionItem;
 
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       !this.open
         ? this.setAttribute('expanding', '')
         : this.setAttribute('collapsing', '');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       this.shadowRoot!.querySelector(
         selectorAccordionContent
       )!.addEventListener('animationend', () => {
@@ -125,6 +128,7 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
   // TODO: Wait for `.d.ts` update to support `ResizeObserver`
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _resizeObserver = new ResizeObserver(
     (records: ResizeObserverEntry[]) => {
@@ -186,6 +190,7 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
     } = this;
     const { _classesBreakpoints: classesBreakpoints } = this
       .constructor as typeof CDSAccordionItem;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const { [currentBreakpoint!]: classBreakpoint } = classesBreakpoints;
     const contentClasses = classMap({
       [classBreakpoint]: classBreakpoint,
@@ -201,7 +206,7 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         aria-expanded="${open}"
         @click="${handleClickExpando}"
         @keydown="${handleKeydownExpando}">
-        ${ChevronRight16({
+        ${iconLoader(ChevronRight16, {
           part: 'expando-icon',
           class: `${prefix}--accordion__arrow`,
         })}

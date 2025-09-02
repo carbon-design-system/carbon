@@ -60,6 +60,7 @@ export default (config: DatePickerFixEventsPluginConfig): Plugin =>
             // Makes sure the hitting enter key picks up pending values of both `<input>`
             // Workaround for: https://github.com/flatpickr/flatpickr/issues/1942
             fp.setDate(
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
               [inputFrom.value!, (inputTo && inputTo.value)!],
               true,
               fp.config.dateFormat

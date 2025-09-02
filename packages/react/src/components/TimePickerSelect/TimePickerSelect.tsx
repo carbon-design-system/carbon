@@ -26,6 +26,7 @@ export type TimePickerSelectProps = {
   /**
    * Optionally provide the default value of the `<select>`
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   defaultValue?: any;
 
   /**
