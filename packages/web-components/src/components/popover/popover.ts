@@ -197,10 +197,10 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       [`${prefix}--popover--tab-tip`]: tabTip,
     });
     return html`
-    <span class="${classes}" part="popover-container">
-      <slot @slotchange="${handleSlotChange}"></slot>
-      <slot name="content"><slot>
-    </span>
+      <span class="${classes}" part="popover-container">
+        <slot @slotchange="${handleSlotChange}"></slot>
+        <slot name="content"></slot>
+      </span>
     `;
   }
 
