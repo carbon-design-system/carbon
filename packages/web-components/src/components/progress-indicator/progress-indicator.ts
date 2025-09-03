@@ -29,7 +29,7 @@ export default class CDSProgressIndicator extends LitElement {
 
   /**
    * Specify whether the progress steps should be split equally in size in the
-   * div
+   * container (horizontal only).
    */
   @property({ type: Boolean, reflect: true, attribute: 'space-equally' })
   spaceEqually = false;
@@ -39,14 +39,6 @@ export default class CDSProgressIndicator extends LitElement {
    */
   @property({ type: Number, attribute: 'current-index' })
   currentIndex = 0;
-
-  /**
-   * React-like property handler (NOT an attribute).
-   * If set to a function, steps become clickable and this handler will be called
-   * with a CustomEvent whose detail is `{ index: number }`.
-   */
-  @property({ attribute: false })
-  onChange?: (e: CustomEvent<{ index: number }>) => void;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -70,10 +62,6 @@ export default class CDSProgressIndicator extends LitElement {
   }
 
   private _handleStepClick = (evt: Event) => {
-    // Steps are clickable only if onChange is a function
-    const clickable = typeof this.onChange === 'function';
-    if (!clickable) return;
-
     const steps = Array.from(
       this.querySelectorAll(
         (this.constructor as typeof CDSProgressIndicator).selectorStep
@@ -96,56 +84,28 @@ export default class CDSProgressIndicator extends LitElement {
     const detail = { index };
 
     // Standard DOM event
-    const changeEvt = new CustomEvent('change', {
-      bubbles: true,
-      composed: true,
-      detail,
-    });
-    this.dispatchEvent(changeEvt);
-
-    // Alias event name for convenience (@onChange in Lit or addEventListener('onChange', ...))
     this.dispatchEvent(
-      new CustomEvent('onChange', { bubbles: true, composed: true, detail })
+      new CustomEvent('change', {
+        bubbles: true,
+        composed: true,
+        detail,
+      })
     );
-
-    // Call property handler if provided (to match React)
-    try {
-      this.onChange?.(changeEvt as CustomEvent<{ index: number }>);
-    } catch {
-      /* no-op */
-    }
   };
 
   updated(changedProperties: Map<string, unknown>) {
     const spacingValue = this.vertical ? false : this.spaceEqually;
     const selector = (this.constructor as typeof CDSProgressIndicator)
       .selectorStep;
-    const clickable = typeof this.onChange === 'function';
 
     const steps = this.querySelectorAll(selector);
 
-    if (changedProperties.has('vertical')) {
-      // Propagate `vertical` attribute to descendants until :host-context() is widely supported
-      forEach(steps, (item) => {
-        (item as CDSProgressStep).vertical = this.vertical;
-        (item as CDSProgressStep).spaceEqually = spacingValue;
-        (item as CDSProgressStep).clickable = clickable;
-      });
-    }
-
-    if (changedProperties.has('spaceEqually')) {
-      // Propagate `spaceEqually` attribute to descendants
-      forEach(steps, (item) => {
-        (item as CDSProgressStep).spaceEqually = spacingValue;
-      });
-    }
-
-    // Propagate clickability whenever onChange changes
-    if (changedProperties.has('onChange')) {
-      forEach(steps, (item) => {
-        (item as CDSProgressStep).clickable = clickable;
-      });
-    }
+    // Always propagate interactivity to steps (except disabled/current handled inside step)
+    forEach(steps, (item) => {
+      (item as CDSProgressStep).vertical = this.vertical;
+      (item as CDSProgressStep).spaceEqually = spacingValue;
+      (item as CDSProgressStep).clickable = true;
+    });
 
     if (changedProperties.has('currentIndex')) {
       steps.forEach((step, i) => {

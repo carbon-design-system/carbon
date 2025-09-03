@@ -89,7 +89,8 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
 
   /**
    * Set by the parent indicator. If true, the step is interactive unless it is
-   * current or disabled. This mirrors React's "onChange prop exists" semantics.
+   * current or disabled. Controlled internally by the parent indicator to enable
+   * click events that trigger a `change` event.
    */
   @property({ type: Boolean })
   clickable = false;
@@ -182,7 +183,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     const svgLabel = iconLabel || description;
     const optionalLabel = secondaryLabel || secondaryLabelText;
 
-    // Unclickable if current OR disabled OR no onChange upstream (to match React)
+    // Unclickable if current OR disabled (matches React behavior)
     const isUnclickable =
       state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
 
