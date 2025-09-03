@@ -68,7 +68,16 @@ const config: StorybookConfig = {
         exclude: ['lit', 'lit-html'],
       },
       define: {
-        'process.env': process.env,
+        'process.env.NODE_ENV': JSON.stringify(
+          process.env.NODE_ENV || 'development'
+        ),
+        'process.env.STORYBOOK_USE_RTL': JSON.stringify(
+          process.env.STORYBOOK_USE_RTL
+        ),
+        'process.env.CDS_FLAGS_ALL': JSON.stringify(process.env.CDS_FLAGS_ALL),
+        'process.env.CDS_EXPERIEMENTAL_COMPONENT_NAME': JSON.stringify(
+          process.env.CDS_EXPERIEMENTAL_COMPONENT_NAME
+        ),
       },
       sourcemap: true,
     });
