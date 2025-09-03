@@ -11,7 +11,7 @@ import FluidPasswordInput from './FluidPasswordInput';
 import './test.scss';
 
 export default {
-  title: 'Experimental/Fluid Components/preview__FluidPasswordInput',
+  title: 'Preview/Fluid Components/preview__FluidPasswordInput',
   component: FluidPasswordInput,
 };
 

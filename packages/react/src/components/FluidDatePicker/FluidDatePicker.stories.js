@@ -18,7 +18,7 @@ import {
 import { Information } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/Fluid Components/preview__FluidDatePicker',
+  title: 'Preview/Fluid Components/preview__FluidDatePicker',
   component: FluidDatePicker,
   subcomponents: {
     FluidDatePickerSkeleton,

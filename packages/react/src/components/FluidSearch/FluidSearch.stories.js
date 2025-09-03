@@ -9,7 +9,7 @@ import React from 'react';
 import { FluidSearch, FluidSearchSkeleton } from '.';
 
 export default {
-  title: 'Experimental/Fluid Components/preview__FluidSearch',
+  title: 'Preview/Fluid Components/preview__FluidSearch',
   component: FluidSearch,
   subcomponents: {
     FluidSearchSkeleton,

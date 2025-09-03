@@ -10,7 +10,7 @@ import ShapeIndicator from '.';
 import mdx from './ShapeIndicator.mdx';
 
 export default {
-  title: 'Experimental/StatusIndicators/preview__ShapeIndicator',
+  title: 'Preview/StatusIndicators/preview__ShapeIndicator',
   component: ShapeIndicator,
   parameters: {
     docs: {

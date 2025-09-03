@@ -21,7 +21,7 @@ import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidSelect.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/preview__FluidSelect',
+  title: 'Preview/Fluid Components/preview__FluidSelect',
   component: FluidSelect,
   subcomponents: {
     FluidSelectSkeleton,

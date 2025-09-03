@@ -24,7 +24,7 @@ import { Button } from '../Button';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/Fluid Components/preview__FluidMultiSelect',
+  title: 'Preview/Fluid Components/preview__FluidMultiSelect',
   component: FluidMultiSelect,
   subcomponents: {
     FluidMultiSelectSkeleton,

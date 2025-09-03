@@ -11,7 +11,7 @@ import { Add } from '@carbon/icons-react';
 import './chat-button-story.scss';
 
 export default {
-  title: 'Experimental/preview__ChatButton',
+  title: 'Preview/preview__ChatButton',
   component: ChatButton,
   parameters: {},
   argTypes: {

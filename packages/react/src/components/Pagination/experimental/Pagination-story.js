@@ -23,7 +23,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Experimental/preview_Pagination',
+  title: 'Preview/preview_Pagination',
   component: Pagination,
   subcomponents: {
     PageSelector,

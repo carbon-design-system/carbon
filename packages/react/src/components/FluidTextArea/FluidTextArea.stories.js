@@ -20,7 +20,7 @@ import {
 import { Information } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/Fluid Components/preview__FluidTextArea',
+  title: 'Preview/Fluid Components/preview__FluidTextArea',
   component: FluidTextArea,
   subcomponents: {
     FluidTextAreaSkeleton,
