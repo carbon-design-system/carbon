@@ -1,0 +1,33 @@
+/**
+ * Copyright IBM Corp. 2016, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import type { Validator } from 'prop-types';
+
+/**
+ * @param name The name of the prop that must exist to validate the current
+ * prop.
+ * @param propType The original prop type checker.
+ * @returns The new prop type checker for the current prop that becomes required
+ * if the prop corresponding to the provided prop name exists.
+ */
+export const requiredIfGivenPropIsTruthy = <T>(
+  name: string,
+  propType: Validator<T>
+): Validator<T> => {
+  return (props, propName, componentName, ...rest) => {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      props[name] === true &&
+      props[propName] === null
+    ) {
+      return new Error(
+        `You must provide a value for \`${propName}\` in \`${componentName}\` if \`${name}\` exists.`
+      );
+    }
+    return propType(props, propName, componentName, ...rest);
+  };
+};

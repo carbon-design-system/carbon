@@ -48,7 +48,7 @@ import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
-import { isComponentElement } from '../../internal';
+import { defaultItemToString, isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -62,24 +62,6 @@ const {
   ItemClick,
   FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
-
-const defaultItemToString = <ItemType,>(item: ItemType | null) => {
-  if (typeof item === 'string') {
-    return item;
-  }
-  if (typeof item === 'number') {
-    return `${item}`;
-  }
-  if (
-    item !== null &&
-    typeof item === 'object' &&
-    'label' in item &&
-    typeof item['label'] === 'string'
-  ) {
-    return item['label'];
-  }
-  return '';
-};
 
 const defaultShouldFilterItem = () => true;
 
