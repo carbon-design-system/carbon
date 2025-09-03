@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -63,6 +63,7 @@ export const Default = (args) => (
       getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -86,7 +87,9 @@ export const Default = (args) => (
                   {...getRowProps({ row })}
                   onClick={action('onClick')}>
                   {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
                   ))}
                 </TableExpandRow>
                 <TableExpandedRow
@@ -110,11 +113,8 @@ Default.argTypes = {
 };
 
 export const BatchExpansion = (args) => (
-  <DataTable
-    {...args}
-    rows={rows}
-    headers={headers}
-    render={({
+  <DataTable {...args} rows={rows} headers={headers}>
+    {({
       rows,
       headers,
       getHeaderProps,
@@ -123,6 +123,7 @@ export const BatchExpansion = (args) => (
       getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -147,7 +148,9 @@ export const BatchExpansion = (args) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
                   ))}
                 </TableExpandRow>
                 <TableExpandedRow
@@ -163,7 +166,7 @@ export const BatchExpansion = (args) => (
         </Table>
       </TableContainer>
     )}
-  />
+  </DataTable>
 );
 
 BatchExpansion.argTypes = {
