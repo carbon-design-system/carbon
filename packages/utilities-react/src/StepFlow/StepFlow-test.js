@@ -6,7 +6,7 @@
  */
 
 import React, { act } from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button, TextInput } from '@carbon/react';
 
