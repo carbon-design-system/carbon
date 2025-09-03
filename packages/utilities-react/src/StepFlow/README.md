@@ -63,24 +63,4 @@ const Step1 = () => {
 };
 ```
 
-Step state (returned from `useStepContext`):
-
-```ts
-// This interface should be extended by the consumer to match
-// their own unique use case given the fields within their
-// own stepped experience
-interface formStateType {
-  [key: string]: unknown;
-}
-
-export interface StepState {
-  formState: formStateType;
-  setFormState: Dispatch<SetStateAction<formStateType>>;
-  totalSteps: number | undefined;
-  setTotalSteps: Dispatch<SetStateAction<number | undefined>>;
-  currentStep: number;
-  handleGoToStep: (a: number) => void;
-  handleNext: () => void;
-  handlePrevious: () => void;
-}
-```
+[Step state](./types.ts) (returned from `useStepContext`):
