@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -112,6 +112,7 @@ export const Default = (args) => {
         getRowProps,
         getTableProps,
         onInputChange,
+        getCellProps,
       }) => (
         <TableContainer title="DataTable" description="With filtering">
           <TableToolbar>
@@ -153,9 +154,11 @@ export const Default = (args) => {
             </TableHead>
             <TableBody>
               {rows.map((row) => (
-                <TableRow key={row.id} {...getRowProps({ row })}>
+                <TableRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -262,6 +262,72 @@ export const Playground = {
       </cds-form-item>
     `;
   },
+};
+
+// Hidden Test-Only Story for an issue where invalid with AI-Label had incorrect styling. #20117
+export const InvalidWithAILabel = {
+  tags: ['!dev', '!autodocs'], // hide story
+
+  render: () => html`
+    <div style="width: 400px">
+      <cds-number-input
+        value="50"
+        min="0"
+        max="100"
+        step="1"
+        label="Number input"
+        invalid
+        invalid-text="invalid">
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}
+        </cds-ai-label>
+      </cds-number-input>
+    </div>
+  `,
+};
+
+// Hidden Test-Only Story for an issue where warn with AI-Label had incorrect styling. #20117
+export const WarnWithAILabel = {
+  tags: ['!dev', '!autodocs'], // hide story
+
+  render: () => html`
+    <div style="width: 400px">
+      <cds-number-input
+        value="50"
+        min="0"
+        max="100"
+        step="1"
+        label="Number input"
+        warn
+        warn-text="warning">
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}
+        </cds-ai-label>
+      </cds-number-input>
+    </div>
+  `,
+};
+
+// Hidden Test-Only Story for an issue where disabled with AI-Label had incorrect styling. #20117
+export const DisabledWithAILabel = {
+  tags: ['!dev', '!autodocs'], // hide story
+
+  render: () => html`
+    <div style="width: 400px">
+      <cds-number-input
+        value="50"
+        min="0"
+        max="100"
+        step="1"
+        label="Number input"
+        helper-text="Optional helper text."
+        disabled>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}
+        </cds-ai-label>
+      </cds-number-input>
+    </div>
+  `,
 };
 
 export default {
