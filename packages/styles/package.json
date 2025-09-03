@@ -49,7 +49,7 @@
     "@carbon/type": "^11.46.0",
     "@ibm/plex": "6.0.0-next.6",
     "@ibm/plex-mono": "1.1.0",
-    "@ibm/plex-sans": "0.0.3-alpha.0",
+    "@ibm/plex-sans": "1.1.0",
     "@ibm/plex-sans-arabic": "1.1.0",
     "@ibm/plex-sans-devanagari": "1.1.0",
     "@ibm/plex-sans-hebrew": "0.0.3-alpha.0",
