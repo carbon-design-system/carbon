@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// prettier-ignore
+'use client'
+
 import './feature-flags';
 
 export * from './components/Accordion';
@@ -188,7 +191,6 @@ export {
   AISkeletonIcon as unstable__AiSkeletonIcon,
   AISkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
 } from './components/AISkeleton';
-export * from './components/Stack';
 export * from './components/Tooltip';
 export {
   Text as unstable_Text,
