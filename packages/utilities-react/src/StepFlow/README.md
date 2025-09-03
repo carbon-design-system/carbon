@@ -35,7 +35,7 @@ const Example = () => {
         <Step2 />
         {someCondition && <ConditionalStep />}
       </StepGroup>
-    <Tearsheet>
+    </Tearsheet>
   </StepProvider>
 }
 ```
