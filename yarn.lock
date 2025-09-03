@@ -3111,21 +3111,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.10.1":
+"@ibm/telemetry-js@npm:^1.10.1, @ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.6.1":
   version: 1.10.1
   resolution: "@ibm/telemetry-js@npm:1.10.1"
   bin:
     ibmtelemetry: dist/collect.js
   checksum: 10/86357c2bcc41c8b4bd4ea5e748406480a70205db65adefd1f353e97497f80767c0a9ec4dd600a3d2ab8a9fc642fc6a2b50c5b2a962b51dc46dc80dde5afe6f65
-  languageName: node
-  linkType: hard
-
-"@ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.6.1":
-  version: 1.6.1
-  resolution: "@ibm/telemetry-js@npm:1.6.1"
-  bin:
-    ibmtelemetry: dist/collect.js
-  checksum: 10/11484ae2810bf80677fca927cd0b754fc3527aa89e66e935f05efcea2d968aa3cc069acc32c6266bc2e9c74c68e6e47d640e2f6ff2cbd488eb33a4043590d6dd
   languageName: node
   linkType: hard
 
@@ -18195,17 +18186,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdn-data@npm:2.12.2":
+"mdn-data@npm:2.12.2, mdn-data@npm:^2.0.30":
   version: 2.12.2
   resolution: "mdn-data@npm:2.12.2"
   checksum: 10/854e41715a9358e69f9a530117cd6ca7e71d06176469de8d70b1e629753b6827f5bd730995c16ad3750f3c9bad92230f8e4e178de2b34926b05f5205d27d76af
-  languageName: node
-  linkType: hard
-
-"mdn-data@npm:^2.0.30":
-  version: 2.11.1
-  resolution: "mdn-data@npm:2.11.1"
-  checksum: 10/1d8f3a894a68ae7c5a1ca62f63438c013d4a357c9e5a2320b1d30ef26b9ceb82ff98643b3db13b66f3fd84295aeb584b489ac89489bcf1123cd81518244ac3b0
   languageName: node
   linkType: hard
 
@@ -19062,16 +19046,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.25, nanoid@npm:^3.3.6":
-  version: 3.3.8
-  resolution: "nanoid@npm:3.3.8"
-  bin:
-    nanoid: bin/nanoid.cjs
-  checksum: 10/2d1766606cf0d6f47b6f0fdab91761bb81609b2e3d367027aff45e6ee7006f660fb7e7781f4a34799fe6734f1268eeed2e37a5fdee809ade0c2d4eb11b0f9c40
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^3.3.11":
+"nanoid@npm:^3.1.25, nanoid@npm:^3.3.11, nanoid@npm:^3.3.6":
   version: 3.3.11
   resolution: "nanoid@npm:3.3.11"
   bin:
