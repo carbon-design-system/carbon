@@ -14,8 +14,8 @@ interface StepProviderProps {
   children?: ReactNode;
 }
 
-export const StepProvider: React.FC<StepProviderProps> = ({ children }) => {
-  const [totalSteps, setTotalSteps] = useState<number>();
+export const StepProvider = ({ children }: StepProviderProps) => {
+  const [totalSteps, setTotalSteps] = useState(1);
   const [currentStep, setCurrentStep] = useState(1);
   const [formState, setFormState] = useState({});
 

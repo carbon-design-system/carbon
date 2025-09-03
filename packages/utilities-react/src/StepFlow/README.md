@@ -53,7 +53,7 @@ const Step1 = () => {
       labelText="Email"
       value={email ?? ''}
       onChange={(e) => {
-        setFormState?.((prev: object) => ({
+        setFormState((prev: StepState['formState']) => ({
           ...prev,
           email: e.target.value,
         }));
@@ -70,7 +70,7 @@ Step state (returned from `useStepContext`):
 // their own unique use case given the fields within their
 // own stepped experience
 interface formStateType {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface StepState {

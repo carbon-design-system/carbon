@@ -9,17 +9,17 @@ import React, { useEffect } from 'react';
 import { useStepContext } from '.';
 
 interface StepGroupProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 /**
  * Container for steps, each child represents a step
  */
-export const StepGroup: React.FC<StepGroupProps> = ({ children }) => {
+export const StepGroup = ({ children }: StepGroupProps) => {
   const { setTotalSteps, currentStep } = useStepContext();
 
   const childrenArray = React.Children.toArray(children);
-  const cleanedChildren = childrenArray?.filter(Boolean);
+  const cleanedChildren = childrenArray.filter(Boolean);
   const childrenCount = React.Children.count(cleanedChildren);
 
   // set total step count
