@@ -11,7 +11,7 @@ import { StepContextType } from './types';
 const StepContext = createContext<StepContextType | undefined>(undefined);
 
 interface StepProviderProps {
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 export const StepProvider = ({ children }: StepProviderProps) => {
@@ -35,8 +35,8 @@ export const StepProvider = ({ children }: StepProviderProps) => {
   );
 };
 
-export const useStepContext = (): StepContextType => {
-  const context = useContext<StepContextType | undefined>(StepContext);
+export const useStepContext = () => {
+  const context = useContext(StepContext);
 
   if (context === undefined) {
     throw new Error('Context hook used outside of Step provider');

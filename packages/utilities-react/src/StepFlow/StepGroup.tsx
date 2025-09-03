@@ -13,14 +13,15 @@ interface StepGroupProps {
 }
 
 /**
- * Container for steps, each child represents a step
+ * Container for steps. The children are filtered for only truthy values (via Children.toArray)
+ * and only the current step is returned from this component based on the `currentStep` value
+ * from `useStepContext`.
  */
 export const StepGroup = ({ children }: StepGroupProps) => {
   const { setTotalSteps, currentStep } = useStepContext();
 
   const childrenArray = React.Children.toArray(children);
-  const cleanedChildren = childrenArray.filter(Boolean);
-  const childrenCount = React.Children.count(cleanedChildren);
+  const childrenCount = React.Children.count(childrenArray);
 
   // set total step count
   useEffect(() => {
@@ -28,7 +29,7 @@ export const StepGroup = ({ children }: StepGroupProps) => {
   }, [childrenCount, setTotalSteps]);
 
   const currentStepComponent =
-    React.Children.toArray(cleanedChildren)[currentStep - 1];
+    React.Children.toArray(childrenArray)[currentStep - 1];
 
   // return only the current step
   return currentStepComponent;
