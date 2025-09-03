@@ -28,16 +28,18 @@ component. Any content outside of the `<StepGroup>` will render on every step.
 
 ```tsx
 const Example = () => {
-  return <StepProvider>
-    <Tearsheet>
-      <StepGroup>
-        <Step1 />
-        <Step2 />
-        {someCondition && <ConditionalStep />}
-      </StepGroup>
-    </Tearsheet>
-  </StepProvider>
-}
+  return (
+    <StepProvider>
+      <Tearsheet>
+        <StepGroup>
+          <Step1 />
+          <Step2 />
+          {someCondition && <ConditionalStep />}
+        </StepGroup>
+      </Tearsheet>
+    </StepProvider>
+  );
+};
 ```
 
 Any component inside of the step enabled component (`StepProvider`) can use
