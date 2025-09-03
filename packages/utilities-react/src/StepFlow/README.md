@@ -53,7 +53,7 @@ const Step1 = () => {
       labelText="Email"
       value={email ?? ''}
       onChange={(e) => {
-        setFormState((prev: StepState['formState']) => ({
+        setFormState((prev) => ({
           ...prev,
           email: e.target.value,
         }));
