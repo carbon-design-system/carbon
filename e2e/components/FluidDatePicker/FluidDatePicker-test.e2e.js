@@ -17,7 +17,7 @@ test.describe('FluidDatePicker', () => {
       test('fluid date picker (range) @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidDatePicker',
-          id: 'preview-fluid-components-unstable-fluiddatepicker--range-with-calendar',
+          id: 'preview-fluid-components-preview-fluiddatepicker--range-with-calendar',
           theme,
         });
       });
@@ -25,7 +25,7 @@ test.describe('FluidDatePicker', () => {
       test('fluid date picker (single) @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidDatePicker',
-          id: 'preview-fluid-components-unstable-fluiddatepicker--single',
+          id: 'preview-fluid-components-preview-fluiddatepicker--single',
           theme,
         });
       });
@@ -33,7 +33,7 @@ test.describe('FluidDatePicker', () => {
       test('fluid date picker (simple) @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidDatePicker',
-          id: 'preview-fluid-components-unstable-fluiddatepicker--simple',
+          id: 'preview-fluid-components-preview-fluiddatepicker--simple',
           theme,
         });
       });

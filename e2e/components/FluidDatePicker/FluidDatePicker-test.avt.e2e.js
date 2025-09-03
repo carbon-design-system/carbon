@@ -14,7 +14,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'preview-fluid-components-unstable-fluiddatepicker--range-with-calendar',
+      id: 'preview-fluid-components-preview-fluiddatepicker--range-with-calendar',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-advanced-states single', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'preview-fluid-components-unstable-fluiddatepicker--single',
+      id: 'preview-fluid-components-preview-fluiddatepicker--single',
       globals: {
         theme: 'white',
       },
@@ -36,7 +36,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-advanced-states simple', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'preview-fluid-components-unstable-fluiddatepicker--simple',
+      id: 'preview-fluid-components-preview-fluiddatepicker--simple',
       globals: {
         theme: 'white',
       },
@@ -47,7 +47,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'preview-fluid-components-unstable-fluiddatepicker--skeleton',
+      id: 'preview-fluid-components-preview-fluiddatepicker--skeleton',
       globals: {
         theme: 'white',
       },
@@ -58,7 +58,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-keyboard-nav single', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'preview-fluid-components-unstable-fluiddatepicker--single',
+      id: 'preview-fluid-components-preview-fluiddatepicker--single',
       globals: {
         theme: 'white',
       },
@@ -93,7 +93,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-keyboard-nav range', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'preview-fluid-components-unstable-fluiddatepicker--range-with-calendar',
+      id: 'preview-fluid-components-preview-fluiddatepicker--range-with-calendar',
       globals: {
         theme: 'white',
       },

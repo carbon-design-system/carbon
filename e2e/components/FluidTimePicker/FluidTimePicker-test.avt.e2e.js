@@ -14,7 +14,7 @@ test.describe('@avt FluidTimePicker', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTimePicker',
-      id: 'preview-fluid-components-unstable-fluidtimepicker--default',
+      id: 'preview-fluid-components-preview-fluidtimepicker--default',
       globals: {
         theme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('@avt FluidTimePicker', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTimePicker',
-      id: 'preview-fluid-components-unstable-fluidtimepicker--skeleton',
+      id: 'preview-fluid-components-preview-fluidtimepicker--skeleton',
       globals: {
         theme: 'white',
       },
@@ -38,7 +38,7 @@ test.describe('@avt FluidTimePicker', () => {
   test('@avt-keyboard-nav TimePicker', async ({ page }) => {
     await visitStory(page, {
       component: 'TimePicker',
-      id: 'preview-fluid-components-unstable-fluidtimepicker--default',
+      id: 'preview-fluid-components-preview-fluidtimepicker--default',
       globals: {
         theme: 'white',
       },

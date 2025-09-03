@@ -17,7 +17,7 @@ test.describe('ChatButton', () => {
       test('default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ChatButton',
-          id: 'preview-unstable-chatbutton--default',
+          id: 'preview-preview-chatbutton--default',
           theme,
         });
       });
