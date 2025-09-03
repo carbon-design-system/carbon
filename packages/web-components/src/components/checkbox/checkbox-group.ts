@@ -21,10 +21,7 @@ export { CHECKBOX_ORIENTATION };
 /**
  * Check box.
  *
- * @element cds-checkbox
- * @fires cds-checkbox-changed - The custom event fired after this changebox changes its checked state.
- * @csspart input The checkbox.
- * @csspart label The label.
+ * @element cds-checkbox-group
  */
 @customElement(`${prefix}-checkbox-group`)
 class CDSCheckboxGroup extends LitElement {
