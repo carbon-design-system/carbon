@@ -3421,9 +3421,7 @@ Map {
         ],
         "type": "oneOfType",
       },
-      "role": {
-        "type": "string",
-      },
+      "role": [Function],
       "size": {
         "args": [
           [
@@ -7299,9 +7297,7 @@ Map {
         ],
         "type": "oneOfType",
       },
-      "role": {
-        "type": "string",
-      },
+      "role": [Function],
       "size": {
         "args": [
           [
