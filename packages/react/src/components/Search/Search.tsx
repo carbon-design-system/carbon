@@ -102,7 +102,9 @@ export interface SearchProps extends InputPropsBase {
   renderIcon?: ComponentType | FunctionComponent;
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   * @deprecated Specify the role for the underlying `<input>`.
+   * No longer needed since `<input type="search">` already provides the correct semantics.
+   * This prop will be removed in the next major release of Carbon.
    */
   role?: string;
 
@@ -112,7 +114,7 @@ export interface SearchProps extends InputPropsBase {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Optional prop to specify the type of the `<input>`
+   * Specify the type of the `<input>`
    */
   type?: string;
 
@@ -141,9 +143,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       onExpand,
       placeholder = 'Search',
       renderIcon,
-      role = 'searchbox',
+      role,
       size = 'md',
-      type = 'text',
+      type = 'search',
       value,
       ...rest
     },
@@ -383,16 +385,22 @@ Search.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * Deprecated, since <input type="search"> already provides correct semantics.
    * Specify the role for the underlying `<input>`, defaults to `searchbox`
    */
-  role: PropTypes.string,
+  role: deprecate(
+    PropTypes.string,
+    'The `role` prop has been deprecated since <input type="search"> already provides correct semantics. ' +
+      'It will be removed in the next major release of Carbon.'
+  ),
 
   /**
    * Specify the size of the Search
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
   /**
-   * Optional prop to specify the type of the `<input>`
+   * Specify the type of the `<input>`
    */
   type: PropTypes.string,
 
