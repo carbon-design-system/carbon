@@ -10,7 +10,6 @@ import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-toggle', () => {
   it('should support a custom class on the host', async () => {
-    // Useful for style overrides or integration tests
     const el = await fixture(
       html`<cds-toggle-skeleton class="custom-class"></cds-toggle-skeleton>`
     );
