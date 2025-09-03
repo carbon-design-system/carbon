@@ -1990,7 +1990,7 @@ __metadata:
     "@carbon/type": "npm:^11.46.0"
     "@ibm/plex": "npm:6.0.0-next.6"
     "@ibm/plex-mono": "npm:1.1.0"
-    "@ibm/plex-sans": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans": "npm:1.1.0"
     "@ibm/plex-sans-arabic": "npm:1.1.0"
     "@ibm/plex-sans-devanagari": "npm:1.1.0"
     "@ibm/plex-sans-hebrew": "npm:0.0.3-alpha.0"
@@ -3088,10 +3088,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/plex-sans@npm:0.0.3-alpha.0":
-  version: 0.0.3-alpha.0
-  resolution: "@ibm/plex-sans@npm:0.0.3-alpha.0"
-  checksum: 10/5b0b0521dbeb7c32eb13a932b53baef0013b96d5d39547b35c69a991707a3f75cec37383c9f239229fdedfb91fda8c8005f25fdddcb900937d6de7dbd456175a
+"@ibm/plex-sans@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@ibm/plex-sans@npm:1.1.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+  checksum: 10/065c244f5f741d60423bd714554365b323d551e8227861244d51e03c05bcd1808caa041f4909284120b3ab2bf4a5d4d0a54469013af4701b741875cf29a77b2d
   languageName: node
   linkType: hard
 
@@ -11622,7 +11624,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domhandler@npm:^5.0.2, domhandler@npm:^5.0.3":
+"domhandler@npm:^5.0.1, domhandler@npm:^5.0.2, domhandler@npm:^5.0.3":
   version: 5.0.3
   resolution: "domhandler@npm:5.0.3"
   dependencies:
@@ -11653,13 +11655,13 @@ __metadata:
   linkType: hard
 
 "domutils@npm:^3.0.1":
-  version: 3.2.2
-  resolution: "domutils@npm:3.2.2"
+  version: 3.0.1
+  resolution: "domutils@npm:3.0.1"
   dependencies:
     dom-serializer: "npm:^2.0.0"
     domelementtype: "npm:^2.3.0"
-    domhandler: "npm:^5.0.3"
-  checksum: 10/2e08842151aa406f50fe5e6d494f4ec73c2373199fa00d1f77b56ec604e566b7f226312ae35ab8160bb7f27a27c7285d574c8044779053e499282ca9198be210
+    domhandler: "npm:^5.0.1"
+  checksum: 10/c0031e4bf89bf701c552c6aa7937262351ae863d5bb0395ebae9cdb23eb3de0077343ca0ddfa63861d98c31c02bbabe4c6e0e11be87b04a090a4d5dbb75197dc
   languageName: node
   linkType: hard
 
