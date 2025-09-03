@@ -73,7 +73,6 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
           checked,
           value: this._radio.value,
           name: this._radio.name,
-          event: undefined,
         },
       })
     );
@@ -269,6 +268,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   dataTable = false;
 
   /**
+   * Specify whether the `<radio-button>` should be checked by default
+   */
+  @property({ type: Boolean, attribute: 'default-checked' })
+  defaultChecked = false;
+
+  /**
    * `true` if the radio button item should be disabled.
    */
   @property({ type: Boolean, reflect: true })
@@ -323,6 +328,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   readOnly = false;
 
   /**
+   * `true` if the radio button is required.
+   */
+  @property({ type: Boolean, reflect: true })
+  required = false;
+
+  /**
    * The `value` attribute for the `<input>` for selection.
    */
   @property()
@@ -337,6 +348,11 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
 
   firstUpdated() {
     this._radioButtonDelegate = new RadioButtonDelegate(this._inputNode);
+
+    // If user hasn’t explicitly set `checked`, respect `defaultChecked`
+    if (this.defaultChecked && this.checked === false) {
+      this.checked = true;
+    }
   }
 
   updated(changedProperties) {
@@ -404,6 +420,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${prefix}--radio-button"
         .checked=${checked}
         ?disabled="${disabledItem || disabled}"
+        ?required=${this.required}
         name=${ifDefined(name)}
         value=${ifDefined(value)} />
       <label for="input" class="${prefix}--radio-button__label">
