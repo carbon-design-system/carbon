@@ -14,7 +14,7 @@ test.describe('@avt FluidTextArea', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextArea',
-      id: 'experimental-fluid-components-unstable-fluidtextarea--default',
+      id: 'components-fluid-components-fluidtextarea--default',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('@avt FluidTextArea', () => {
   test('@avt-advanced-states default-with-layers', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextArea',
-      id: 'experimental-fluid-components-unstable-fluidtextarea--default-with-layers',
+      id: 'components-fluid-components-fluidtextarea--default-with-layers',
       globals: {
         theme: 'white',
       },
@@ -38,7 +38,7 @@ test.describe('@avt FluidTextArea', () => {
   test('@avt-advanced-states default-with-tooltip', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextArea',
-      id: 'experimental-fluid-components-unstable-fluidtextarea--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextarea--default-with-tooltip',
       globals: {
         theme: 'white',
       },
@@ -51,7 +51,7 @@ test.describe('@avt FluidTextArea', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextArea',
-      id: 'experimental-fluid-components-unstable-fluidtextarea--skeleton',
+      id: 'components-fluid-components-fluidtextarea--skeleton',
       globals: {
         theme: 'white',
       },
@@ -62,7 +62,7 @@ test.describe('@avt FluidTextArea', () => {
   test('@avt-keyboard-nav FluidTextArea default', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
-      id: 'experimental-fluid-components-unstable-fluidtextarea--default',
+      id: 'components-fluid-components-fluidtextarea--default',
       globals: {
         theme: 'white',
       },
@@ -83,7 +83,7 @@ test.describe('@avt FluidTextArea', () => {
   test('@avt-keyboard-nav FluidTextArea with tooltip', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
-      id: 'experimental-fluid-components-unstable-fluidtextarea--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextarea--default-with-tooltip',
       globals: {
         theme: 'white',
       },

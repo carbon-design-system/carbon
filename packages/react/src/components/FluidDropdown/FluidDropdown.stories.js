@@ -17,10 +17,16 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
+import mdx from './FluidDropdown.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidDropdown',
+  title: 'Components/Fluid Components/FluidDropdown',
   component: FluidDropdown,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     FluidDropdownSkeleton,
   },
