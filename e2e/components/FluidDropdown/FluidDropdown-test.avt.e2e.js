@@ -14,7 +14,7 @@ test.describe('@avt FluidDropdown', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDropdown',
-      id: 'preview-fluid-components-preview-fluiddropdown--default',
+      id: 'components-fluid-components-fluiddropdown--default',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('@avt FluidDropdown', () => {
   test('@avt-advanced-states condensed', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDropdown',
-      id: 'preview-fluid-components-preview-fluiddropdown--condensed',
+      id: 'components-fluid-components-fluiddropdown--condensed',
       globals: {
         theme: 'white',
       },
@@ -36,7 +36,7 @@ test.describe('@avt FluidDropdown', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDropdown',
-      id: 'preview-fluid-components-preview-fluiddropdown--skeleton',
+      id: 'components-fluid-components-fluiddropdown--skeleton',
       globals: {
         theme: 'white',
       },
@@ -47,7 +47,7 @@ test.describe('@avt FluidDropdown', () => {
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Dropdown',
-      id: 'preview-fluid-components-preview-fluiddropdown--default',
+      id: 'components-fluid-components-fluiddropdown--default',
       globals: {
         theme: 'white',
       },

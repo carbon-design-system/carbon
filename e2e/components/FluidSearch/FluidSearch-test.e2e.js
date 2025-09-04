@@ -17,7 +17,7 @@ test.describe('FluidSearch', () => {
       test('fluid select @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidSearch',
-          id: 'preview-fluid-components-preview-fluidsearch--default',
+          id: 'components-fluid-components-fluidsearch--default',
           theme,
         });
       });

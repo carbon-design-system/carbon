@@ -16,10 +16,16 @@ import {
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import './test.scss';
+import mdx from './FluidTextInput.mdx';
 
 export default {
-  title: 'Preview/Fluid Components/preview__FluidTextInput',
+  title: 'Components/Fluid Components/FluidTextInput',
   component: FluidTextInput,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     FluidTextInputSkeleton,
   },

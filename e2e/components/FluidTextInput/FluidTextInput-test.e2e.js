@@ -17,13 +17,13 @@ test.describe('FluidTextInput', () => {
       test('fluid text input @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidTextInput',
-          id: 'preview-fluid-components-preview-fluidtextinput--default',
+          id: 'components-fluid-components-fluidtextinput--default',
           theme,
         });
 
         await snapshotStory(page, {
           component: 'FluidPasswordInput',
-          id: 'preview-fluid-components-preview-fluidpasswordinput--default',
+          id: 'components-fluid-components-fluidpasswordinput--default',
           theme,
         });
       });

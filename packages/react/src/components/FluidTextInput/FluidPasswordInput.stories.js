@@ -7,12 +7,18 @@
 
 import React from 'react';
 import FluidPasswordInput from './FluidPasswordInput';
+import mdx from './FluidPasswordInput.mdx';
 
 import './test.scss';
 
 export default {
-  title: 'Preview/Fluid Components/preview__FluidPasswordInput',
+  title: 'Components/Fluid Components/FluidPasswordInput',
   component: FluidPasswordInput,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = (args) => (

@@ -115,70 +115,92 @@ export * from './components/UIShell';
 export * from './components/UnorderedList';
 // Experimental
 export {
+  FluidComboBox,
+  FluidComboBoxSkeleton,
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
   FluidComboBox as preview__FluidComboBox,
   FluidComboBoxSkeleton as preview__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
 export {
+  FluidDatePicker,
+  FluidDatePickerSkeleton,
   FluidDatePicker as unstable__FluidDatePicker,
   FluidDatePickerSkeleton as unstable__FluidDatePickerSkeleton,
   FluidDatePicker as preview__FluidDatePicker,
   FluidDatePickerSkeleton as preview__FluidDatePickerSkeleton,
 } from './components/FluidDatePicker';
 export {
+  FluidDatePickerInput,
   FluidDatePickerInput as unstable__FluidDatePickerInput,
   FluidDatePickerInput as preview__FluidDatePickerInput,
 } from './components/FluidDatePickerInput';
 export {
+  FluidDropdown,
+  FluidDropdownSkeleton,
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
   FluidDropdown as preview__FluidDropdown,
   FluidDropdownSkeleton as preview__FluidDropdownSkeleton,
 } from './components/FluidDropdown';
 export {
+  FluidMultiSelect,
+  FluidMultiSelectSkeleton,
   FluidMultiSelect as unstable__FluidMultiSelect,
   FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
   FluidMultiSelect as preview__FluidMultiSelect,
   FluidMultiSelectSkeleton as preview__FluidMultiSelectSkeleton,
 } from './components/FluidMultiSelect';
 export {
+  FluidSelect,
+  FluidSelectSkeleton,
   FluidSelect as unstable__FluidSelect,
   FluidSelectSkeleton as unstable__FluidSelectSkeleton,
   FluidSelect as preview__FluidSelect,
   FluidSelectSkeleton as preview__FluidSelectSkeleton,
 } from './components/FluidSelect';
 export {
+  FluidSearch,
+  FluidSearchSkeleton,
   FluidSearch as unstable__FluidSearch,
   FluidSearchSkeleton as unstable__FluidSearchSkeleton,
   FluidSearch as preview__FluidSearch,
   FluidSearchSkeleton as preview__FluidSearchSkeleton,
 } from './components/FluidSearch';
 export {
+  FluidTextArea,
+  FluidTextAreaSkeleton,
   FluidTextArea as unstable__FluidTextArea,
   FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
   FluidTextArea as preview__FluidTextArea,
   FluidTextAreaSkeleton as preview__FluidTextAreaSkeleton,
 } from './components/FluidTextArea';
 export {
+  FluidTextInput,
+  FluidTextInputSkeleton,
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
   FluidTextInput as preview__FluidTextInput,
   FluidTextInputSkeleton as preview__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
 export {
+  FluidNumberInput,
+  FluidNumberInputSkeleton,
   FluidNumberInput as unstable__FluidNumberInput,
   FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
   FluidNumberInput as preview__FluidNumberInput,
   FluidNumberInputSkeleton as preview__FluidNumberInputSkeleton,
 } from './components/FluidNumberInput';
 export {
+  FluidTimePicker,
+  FluidTimePickerSkeleton,
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
   FluidTimePicker as preview__FluidTimePicker,
   FluidTimePickerSkeleton as preview__FluidTimePickerSkeleton,
 } from './components/FluidTimePicker';
 export {
+  FluidTimePickerSelect,
   FluidTimePickerSelect as unstable__FluidTimePickerSelect,
   FluidTimePickerSelect as preview__FluidTimePickerSelect,
 } from './components/FluidTimePickerSelect';
