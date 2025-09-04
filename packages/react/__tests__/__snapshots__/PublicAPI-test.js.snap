@@ -466,8 +466,26 @@ Map {
   },
   "BreadcrumbSkeleton" => {
     "propTypes": {
+      "aria-label": {
+        "type": "string",
+      },
       "className": {
         "type": "string",
+      },
+      "items": {
+        "type": "number",
+      },
+      "noTrailingSlash": {
+        "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
