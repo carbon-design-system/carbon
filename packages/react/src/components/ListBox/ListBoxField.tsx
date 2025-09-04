@@ -72,6 +72,6 @@ ListBoxField.propTypes = {
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export type ListBoxFieldComponent = React.FC<ListBoxFieldProps>;
+export type ListBoxFieldComponent = typeof ListBoxField;
 
 export default ListBoxField as ListBoxFieldComponent;
