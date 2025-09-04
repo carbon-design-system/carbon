@@ -13,19 +13,20 @@ const template = (props?) =>
     'cds-copy-button': props,
   });
 
-describe('cds-copy-button', function () {
-  describe('Rendering', function () {
-    it('Should render with minimum attributes', async function () {
+describe('cds-copy-button', () => {
+  describe('Rendering', () => {
+    it('Should render with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-copy-button' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('Should render with various attributes', async function () {
+    it('Should render with various attributes', async () => {
       render(
         template({
           buttonAssistiveText: 'button-assistive-text-foo',
@@ -36,6 +37,7 @@ describe('cds-copy-button', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-copy-button' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -43,58 +45,69 @@ describe('cds-copy-button', function () {
     });
   });
 
-  describe('Showing tooltip', function () {
-    beforeEach(function () {
+  describe('Showing tooltip', () => {
+    beforeEach(() => {
       // Workaround for:
       // `Error: Jasmine Clock was unable to install over custom global timer functions. Is the clock already installed?`
       jasmine.clock().uninstall();
       jasmine.clock().install();
     });
 
-    xit('Should show the tooltip for 2 seconds by default', async function () {
+    xit('Should show the tooltip for 2 seconds by default', async () => {
       render(template(), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const button = document.body
         .querySelector('cds-copy-button')!
         .shadowRoot!.querySelector('button');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       button!.click();
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const feedback = button!.querySelector('.cds--btn--copy__feedback');
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         feedback!.classList.contains('cds--btn--copy__feedback--displayed')
       ).toBe(true);
       jasmine.clock().tick(2000);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         feedback!.classList.contains('cds--btn--copy__feedback--displayed')
       ).toBe(false);
     });
 
-    xit('Should support changing the duration', async function () {
+    xit('Should support changing the duration', async () => {
       render(template({ feedbackTimeout: 500 }), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const button = document.body
         .querySelector('cds-copy-button')!
         .shadowRoot!.querySelector('button');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       button!.click();
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const feedback = button!.querySelector('.cds--btn--copy__feedback');
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         feedback!.classList.contains('cds--btn--copy__feedback--displayed')
       ).toBe(true);
       jasmine.clock().tick(500);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         feedback!.classList.contains('cds--btn--copy__feedback--displayed')
       ).toBe(false);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       jasmine.clock().uninstall();
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });

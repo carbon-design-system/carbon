@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import {
@@ -53,6 +54,7 @@ figma.connect(
       <FormItem>
         <p className="cds--file--label">{labelTitle}</p>
         <p className="cds--label-description">{labelDescription}</p>
+        {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */}
         <FileUploaderDropContainer
           accept={['image/jpeg', 'image/png']}
           innerRef={{

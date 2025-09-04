@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -110,9 +110,8 @@ Default.args = {
   disabled: false,
   labelText: 'Label text',
   placeholder: 'Placeholder text',
-  role: 'searchbox',
   size: 'md',
-  type: 'text',
+  type: 'search',
 };
 
 Default.argTypes = {
@@ -157,20 +156,10 @@ Default.argTypes = {
   renderIcon: {
     control: false,
   },
-  role: {
-    control: {
-      type: 'text',
-    },
-  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: {
       type: 'select',
-    },
-  },
-  type: {
-    control: {
-      type: 'text',
     },
   },
 };

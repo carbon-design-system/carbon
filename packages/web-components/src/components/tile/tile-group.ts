@@ -73,7 +73,8 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
    * @param event click
    */
   @HostListener('click')
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   private _handleTileSelect(event: Event) {
     if (this.radioTiles.length) {
       this._handleRadioClick(event);
@@ -148,7 +149,7 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
    * @param event to get key pressed
    */
   @HostListener('keydown')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = (event: KeyboardEvent) => {
     const { target, key } = event;
     const { radioTiles, selectableTiles } = this;
@@ -185,8 +186,9 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
    * @param event to get focused
    */
   @HostListener('focusin')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocus = (event: KeyboardEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const { relatedTarget, target } = event as any;
     if ((target as HTMLElement)?.matches(`${prefix}-ai-label`)) {
       return;
@@ -223,6 +225,7 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
   currentRadioSelection;
 
   @property()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   currentSelections = [] as any;
 
   @property()

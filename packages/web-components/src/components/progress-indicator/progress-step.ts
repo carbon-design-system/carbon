@@ -5,17 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html, svg } from 'lit';
+import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import CheckmarkOutline16 from '@carbon/icons/lib/checkmark--outline/16.js';
-import CircleDash16 from '@carbon/icons/lib/circle-dash/16.js';
-import Incomplete16 from '@carbon/icons/lib/incomplete/16.js';
-import Warning16 from '@carbon/icons/lib/warning/16.js';
 import { prefix } from '../../globals/settings';
+import CheckmarkOutline16 from '@carbon/icons/es/checkmark--outline/16.js';
+import CircleDash16 from '@carbon/icons/es/circle-dash/16.js';
+import Warning16 from '@carbon/icons/es/warning/16.js';
+import Incomplete16 from '@carbon/icons/es/incomplete/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import { PROGRESS_STEP_STAT } from './defs';
 import styles from './progress-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { PROGRESS_STEP_STAT };
 
@@ -184,25 +185,16 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     const optionalLabel = secondaryLabel || secondaryLabelText;
 
     // Unclickable if current OR disabled (matches React behavior)
-    const isUnclickable =
-      state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
-
+    // const isUnclickable =
+    //   state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
     return html`
-      <div
-        class="${prefix}--progress-step-button ${isUnclickable
-          ? `${prefix}--progress-step-button--unclickable`
-          : ''}"
-        tabindex="${isUnclickable ? -1 : 0}"
-        @click=${this._fireStepClick}
-        @keydown=${this._onKeyDown}
-        role="button"
-        aria-disabled="${String(isUnclickable)}"
-        title="${label}">
-        ${icons[state]({
-          class: {
-            [PROGRESS_STEP_STAT.INVALID]: `${prefix}--progress__warning`,
-          }[state],
-          children: svgLabel ? svg`<title>${svgLabel}</title>` : undefined,
+      <div class="${prefix}--progress-step-button" tabindex="0">
+        ${iconLoader(icons[state], {
+          class:
+            state === PROGRESS_STEP_STAT.INVALID
+              ? `${prefix}--progress__warning`
+              : '',
+          title: svgLabel,
         })}
         <slot name="label-text">
           <p

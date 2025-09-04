@@ -26,7 +26,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
 import { TranslateWithId } from '../../types/common';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const defaultTranslations = {
@@ -109,6 +109,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     let middlewares: any[] = [];
 
     if (!enableOnlyFloatingStyles) {

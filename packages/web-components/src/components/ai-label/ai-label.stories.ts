@@ -6,13 +6,14 @@
  */
 
 import { html } from 'lit';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import './index';
 import '../icon-button/index';
 import '../button/index';
 import styles from './ai-label-story.scss?lit';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { AI_LABEL_SIZE } from './defs';
@@ -60,20 +61,21 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 const args = {
   aiTextLabel: '',
   alignment: POPOVER_ALIGNMENT.BOTTOM,
@@ -84,6 +86,7 @@ const args = {
   size: AI_LABEL_SIZE.EXTRA_SMALL,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 const argTypes = {
   aiTextLabel: {
     control: 'text',
