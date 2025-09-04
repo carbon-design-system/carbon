@@ -29,21 +29,19 @@ describe('BreadcrumbSkeleton', () => {
   });
 
   it('should respect size prop', () => {
-    render(<BreadcrumbSkeleton size="sm" />);
-    expect(screen.getByLabelText('Breadcrumb')).toHaveClass(
-      `${prefix}--breadcrumb--sm`
-    );
+    const { container } = render(<BreadcrumbSkeleton size="sm" />);
+    expect(container.firstChild).toHaveClass(`${prefix}--breadcrumb--sm`);
   });
 
   it('should accept a `noTrailingSlash` and omit the trailing slash', () => {
-    render(<BreadcrumbSkeleton noTrailingSlash />);
+    const { container } = render(<BreadcrumbSkeleton noTrailingSlash />);
 
     // The slashes are implemented with pseudo elements that can't be detected in jsdom.
     // So we have to settle here for just validating against the class. Pseudo elements
     // should be tested in the browser/e2e tests.
     // https://testing-library.com/docs/dom-testing-library/api-configuration/#computedstylesupportspseudoelements
     // https://github.com/jsdom/jsdom/issues/1928
-    expect(screen.getByLabelText('Breadcrumb')).toHaveClass(
+    expect(container.firstChild).toHaveClass(
       `${prefix}--breadcrumb--no-trailing-slash`
     );
   });
