@@ -28,16 +28,17 @@ declare module 'carbon-components/es/globals/js/misc/on.js' {
   function on<K extends keyof HTMLElementEventMap>(
     target: EventTarget,
     type: K,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     listener: (this: EventTarget, ev: HTMLElementEventMap[K]) => any,
-    options?: boolean | AddEventListenerOptions
-  ): // @ts-ignore
+    options?: boolean | AddEventListenerOptions // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  ): //@ts-expect-error
   Handle;
   function on(
     target: EventTarget,
     type: string,
     listener: EventListenerOrEventListenerObject,
-    options?: boolean | AddEventListenerOptions
-  ): // @ts-ignore
+    options?: boolean | AddEventListenerOptions // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  ): // @ts-expect-error
   Handle;
   export default on;
 }

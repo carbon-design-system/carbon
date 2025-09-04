@@ -8,7 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './data-table.scss?lit';
@@ -19,6 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSTableExpandedRow from './table-expanded-row';
 import CDSTableCell from './table-cell';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Data table row.
@@ -52,6 +53,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventRadioChange')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _handleClickSelectionRadio(event: CustomEvent) {
     const { detail } = event;
@@ -85,7 +87,8 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventCheckboxChange')
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // @ts-expect-error
   private _handleClickSelectionCheckbox(event: CustomEvent) {
     const { detail } = event;
     const selected = detail.checked;
@@ -126,7 +129,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @HostListener('mouseover')
   @HostListener('mouseout')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleMouseOverOut(event: MouseEvent) {
     const { selectorExpandedRow, selectorTableCellOverflowMenu } = this
       .constructor as typeof CDSTableRow;
@@ -189,7 +192,9 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
           <button
             class="${prefix}--table-expand__button"
             @click="${handleClickExpando}">
-            ${ChevronRight16({ class: `${prefix}--table-expand__svg` })}
+            ${iconLoader(ChevronRight16, {
+              class: `${prefix}--table-expand__svg`,
+            })}
           </button>
         </div>
       </div>

@@ -16,21 +16,22 @@ const template = (props?) =>
     'cds-pagination': props,
   });
 
-xdescribe('cds-pagination', function () {
+xdescribe('cds-pagination', () => {
   const events = new EventManager();
 
-  describe('Misc attributes', function () {
-    it('should render <cds-pagination> with minimum attributes', async function () {
+  describe('Misc attributes', () => {
+    it('should render <cds-pagination> with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-pagination' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render <cds-pagination> with various attributes', async function () {
+    it('should render <cds-pagination> with various attributes', async () => {
       render(
         template({
           pageSize: 20,
@@ -41,26 +42,29 @@ xdescribe('cds-pagination', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-pagination' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render <cds-page-sizes-select> with minimum attributes', async function () {
+    it('should render <cds-page-sizes-select> with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve(); // Update cycle for `<cds-pagination>`
       await Promise.resolve(); // Update cycle for `<cds-page-sizes-select>`
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-page-sizes-select' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
-    it('should render <cds-pages-select> with minimum attributes', async function () {
+    it('should render <cds-pages-select> with minimum attributes', async () => {
       render(template({ totalItems: 100 }), document.body);
       await Promise.resolve(); // Update cycle for `<cds-pagination>`
       await Promise.resolve(); // Update cycle for `<cds-pages-select>`
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-pages-select' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -68,8 +72,8 @@ xdescribe('cds-pagination', function () {
     });
   });
 
-  describe('Rendering status text', function () {
-    it('should handle plural for total row count', async function () {
+  describe('Rendering status text', () => {
+    it('should handle plural for total row count', async () => {
       render(
         template({
           pageSize: 1,
@@ -79,13 +83,15 @@ xdescribe('cds-pagination', function () {
         document.body
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const textContentNode = document.body
         .querySelector('cds-pagination')!
         .shadowRoot!.querySelector('.cds--pagination__text');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(textContentNode!.textContent!.trim()).toBe('1–1 of 1 item');
     });
 
-    it('should render page range without total rows for infinite row count', async function () {
+    it('should render page range without total rows for infinite row count', async () => {
       render(
         template({
           pageSize: 20,
@@ -95,13 +101,15 @@ xdescribe('cds-pagination', function () {
         document.body
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const textContentNode = document.body
         .querySelector('cds-pagination')!
         .shadowRoot!.querySelector('.cds--pagination__text');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(textContentNode!.textContent!.trim()).toBe('Item 11–30');
     });
 
-    it('should render only the start at the last page for infinite row count', async function () {
+    it('should render only the start at the last page for infinite row count', async () => {
       render(
         template({
           atLastPage: true,
@@ -112,15 +120,17 @@ xdescribe('cds-pagination', function () {
         document.body
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const textContentNode = document.body
         .querySelector('cds-pagination')!
         .shadowRoot!.querySelector('.cds--pagination__text');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(textContentNode!.textContent!.trim()).toBe('Item 31–');
     });
   });
 
-  describe('Propagating changes', function () {
-    it('should propagate `pageSize` property to `<cds-select>`', async function () {
+  describe('Propagating changes', () => {
+    it('should propagate `pageSize` property to `<cds-select>`', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
@@ -134,7 +144,7 @@ xdescribe('cds-pagination', function () {
       expect(pageSizesSelectNode.value).toBe('20');
     });
 
-    it('should propagate the current page to `<cds-select>`', async function () {
+    it('should propagate the current page to `<cds-select>`', async () => {
       render(template({ totalItems: 100 }), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
@@ -149,7 +159,7 @@ xdescribe('cds-pagination', function () {
       expect(pagesSelectNode.value).toBe('4');
     });
 
-    it('should propagate the total pages to `<cds-pages-select>`', async function () {
+    it('should propagate the total pages to `<cds-pages-select>`', async () => {
       render(template({ totalItems: 100 }), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
@@ -161,7 +171,7 @@ xdescribe('cds-pagination', function () {
       expect(paginationNode.totalItems).toBe(5);
     });
 
-    it('should handle change in page size at non-first page', async function () {
+    it('should handle change in page size at non-first page', async () => {
       // This test case hits the following issue if we don't apply the workaround:
       // https://github.com/Polymer/lit-html/issues/1052
       render(
@@ -182,14 +192,15 @@ xdescribe('cds-pagination', function () {
       const pagesSelectNode = paginationNode.shadowRoot?.querySelector(
         '#pages-select'
       ) as CDSSelect;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       expect(pagesSelectNode.shadowRoot!.querySelector('select')!.value).toBe(
         '38'
       );
     });
   });
 
-  describe('Handling user gestures', function () {
-    it('should support prev button', async function () {
+  describe('Handling user gestures', () => {
+    it('should support prev button', async () => {
       let newStart;
       render(
         template({
@@ -209,12 +220,13 @@ xdescribe('cds-pagination', function () {
           newStart = event.detail.start;
         }
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(10);
       expect(newStart).toBe(10);
     });
 
-    it('should ensure the start position will not be negative by hitting prev button', async function () {
+    it('should ensure the start position will not be negative by hitting prev button', async () => {
       let newStart;
       render(
         template({
@@ -234,12 +246,13 @@ xdescribe('cds-pagination', function () {
           newStart = event.detail.start;
         }
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(0);
       expect(newStart).toBe(0);
     });
 
-    it('should ensure prev button will not be in effect at the first page even if it is not disabled', async function () {
+    it('should ensure prev button will not be in effect at the first page even if it is not disabled', async () => {
       render(
         template({
           pageSize: 10,
@@ -255,13 +268,15 @@ xdescribe('cds-pagination', function () {
       events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Prev button should be disabled when `start` indicates that we are at the first page,
       // but we ensure nothing happens even if the button is enabled
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[0].disabled = false;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(0);
       expect(spyChanged).not.toHaveBeenCalled();
     });
 
-    it('should support next button', async function () {
+    it('should support next button', async () => {
       let newStart;
       render(
         template({
@@ -281,12 +296,13 @@ xdescribe('cds-pagination', function () {
           newStart = event.detail.start;
         }
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(30);
       expect(newStart).toBe(30);
     });
 
-    it('should ensure the start position will not exceed the total size by hitting next button', async function () {
+    it('should ensure the start position will not exceed the total size by hitting next button', async () => {
       render(
         template({
           pageSize: 10,
@@ -303,13 +319,15 @@ xdescribe('cds-pagination', function () {
       events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
       // but we ensure nothing happens even if the button is enabled
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[1].disabled = false;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(20);
       expect(spyChanged).not.toHaveBeenCalled();
     });
 
-    it('should support next button at the last page', async function () {
+    it('should support next button at the last page', async () => {
       render(
         template({
           pageSize: 10,
@@ -326,13 +344,15 @@ xdescribe('cds-pagination', function () {
       events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
       // but we ensure nothing happens even if the button is enabled
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[1].disabled = false;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(25);
       expect(spyChanged).not.toHaveBeenCalled();
     });
 
-    it('should support next button for infinite row count', async function () {
+    it('should support next button for infinite row count', async () => {
       let newStart;
       render(
         template({
@@ -353,12 +373,13 @@ xdescribe('cds-pagination', function () {
           newStart = event.detail.start;
         }
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(35);
       expect(newStart).toBe(35);
     });
 
-    it('should support user-initiated change in page size', async function () {
+    it('should support user-initiated change in page size', async () => {
       render(template({ totalItems: 100 }), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
@@ -376,7 +397,7 @@ xdescribe('cds-pagination', function () {
       expect(paginationNode.pageSize).toBe(5);
     });
 
-    it('should support user-initiated change in current page', async function () {
+    it('should support user-initiated change in current page', async () => {
       let newStart;
       render(template({ pageSize: 10, totalItems: 100 }), document.body);
       await Promise.resolve();
@@ -404,7 +425,8 @@ xdescribe('cds-pagination', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
     events.reset();
   });

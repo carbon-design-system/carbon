@@ -54,24 +54,27 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
   size?: Size;
 }
 
-const Layout = React.forwardRef<ReactNode, LayoutProps>(function Layout(
-  { as: BaseComponent = 'div', children, className, density, size, ...rest },
-  forwardRef
-) {
-  const prefix = usePrefix();
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+const Layout = React.forwardRef<ReactNode, LayoutProps>(
+  (
+    { as: BaseComponent = 'div', children, className, density, size, ...rest },
+    forwardRef
+  ) => {
+    const prefix = usePrefix();
 
-  const classes = cx(className, `${prefix}--layout`, {
-    [`${prefix}--layout--size-${size}`]: size && sizes.includes(size),
-    [`${prefix}--layout--density-${density}`]:
-      density && densities.includes(density),
-  });
+    const classes = cx(className, `${prefix}--layout`, {
+      [`${prefix}--layout--size-${size}`]: size && sizes.includes(size),
+      [`${prefix}--layout--density-${density}`]:
+        density && densities.includes(density),
+    });
 
-  return (
-    <BaseComponent {...rest} ref={forwardRef} className={classes}>
-      {children}
-    </BaseComponent>
-  );
-});
+    return (
+      <BaseComponent {...rest} ref={forwardRef} className={classes}>
+        {children}
+      </BaseComponent>
+    );
+  }
+);
 
 Layout.propTypes = {
   /**
@@ -142,12 +145,12 @@ export interface LayoutConstraintProps extends HTMLAttributes<HTMLElement> {
     max?: Size | null;
   } | null;
 }
-
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const LayoutConstraint = React.forwardRef<ReactNode, LayoutConstraintProps>(
-  function Layout(
+  (
     { as: BaseComponent = 'div', children, className, density, size, ...rest },
     forwardRef
-  ) {
+  ) => {
     const prefix = usePrefix();
 
     const classes = cx(

@@ -54,6 +54,7 @@ const BreadcrumbItem = frFn((props, ref) => {
     [customClassName]: !!customClassName,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   const child = children as React.FunctionComponentElement<any>;
   if (
     child.type &&

@@ -17,14 +17,17 @@ export const useNoInteractiveChildren = (
     /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
     */
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 
       if (node) {
         const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
         console.error(errorMessage);
         throw new Error(errorMessage);
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, []);
   }
 };
@@ -39,6 +42,7 @@ export const useInteractiveChildrenNeedDescription = (
     /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
     */
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 

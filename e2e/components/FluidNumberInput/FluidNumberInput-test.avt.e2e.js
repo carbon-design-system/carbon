@@ -14,7 +14,7 @@ test.describe('@avt FluidNumberInput', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidNumberInput',
-      id: 'experimental-fluid-components-unstable-fluidnumberinput--default',
+      id: 'components-fluid-components-fluidnumberinput--default',
       globals: {
         theme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('@avt FluidNumberInput', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidNumberInput',
-      id: 'experimental-fluid-components-unstable-fluidnumberinput--skeleton',
+      id: 'components-fluid-components-fluidnumberinput--skeleton',
       globals: {
         theme: 'white',
       },
@@ -38,7 +38,7 @@ test.describe('@avt FluidNumberInput', () => {
   test('@avt-keyboard-nav NumberInput', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
-      id: 'experimental-fluid-components-unstable-fluidnumberinput--default',
+      id: 'components-fluid-components-fluidnumberinput--default',
       globals: {
         theme: 'white',
       },

@@ -14,6 +14,7 @@ type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
 // This can be used if there is NO need for "ref"
 export type PolymorphicComponentProp<
   C extends React.ElementType,
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20071
   Props = {},
 > = React.PropsWithChildren<Props & AsProp<C>> &
   Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
@@ -25,5 +26,6 @@ export type PolymorphicRef<C extends React.ElementType> =
 // This is a new type utility with ref!
 export type PolymorphicComponentPropWithRef<
   C extends React.ElementType,
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20071
   Props = {},
 > = PolymorphicComponentProp<C, Props> & { ref?: PolymorphicRef<C> };

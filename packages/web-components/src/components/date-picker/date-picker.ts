@@ -53,7 +53,9 @@ enum DATE_PICKER_MODE {
 }
 
 // Weekdays shorthand for english locale
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
 flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
   const currentDay = flatpickr!.l10ns!.en!.weekdays.shorthand;
   if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
     currentDay[index] = 'Th';
@@ -193,6 +195,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     } = this;
     // We use `<cds-date-picker-input>` to communicate values/events with Flatpickr,
     // but want to use `<input>` in shadow DOM to base the calendar dropdown's position on
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const { input: positionElement } = dateInteractNode!;
     const [minDate = undefined, maxDate = undefined] = !enabledRange
       ? []
@@ -217,6 +220,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * Handles `${prefix}-date-picker-changed` event on this element.
    */
   @HostListener('eventChange')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChange = ({ detail }: CustomEvent) => {
     this._value = detail.selectedDates
@@ -369,6 +373,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     // do not instantiate Flatpickr in "simple" mode
     if (dateInteractNode && dateInteractNode.input && this._mode !== 'simple') {
       this.calendar = flatpickr(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         dateInteractNode.input as any,
         this._datePickerOptions
       );

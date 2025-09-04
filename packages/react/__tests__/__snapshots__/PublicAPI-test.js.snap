@@ -2303,11 +2303,26 @@ Map {
     "TableRow": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-controls": {
+          "type": "string",
+        },
+        "aria-label": {
+          "type": "string",
+        },
+        "ariaLabel": {
+          "type": "string",
+        },
         "className": {
           "type": "string",
         },
+        "isExpanded": {
+          "type": "bool",
+        },
         "isSelected": {
           "type": "bool",
+        },
+        "onExpand": {
+          "type": "func",
         },
       },
       "render": [Function],
@@ -2543,6 +2558,9 @@ Map {
       },
     },
     "propTypes": {
+      "children": {
+        "type": "node",
+      },
       "experimentalAutoAlign": {
         "type": "bool",
       },
@@ -2582,6 +2600,7 @@ Map {
       "radio": {
         "type": "bool",
       },
+      "render": [Function],
       "rows": {
         "args": [
           {
@@ -3075,6 +3094,25 @@ Map {
       "disabled": {
         "type": "bool",
       },
+      "dismissTooltipAlignment": {
+        "args": [
+          [
+            "top",
+            "bottom",
+            "left",
+            "right",
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end",
+            "left-end",
+            "left-start",
+            "right-end",
+            "right-start",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "dismissTooltipLabel": {
         "type": "string",
       },
@@ -3383,9 +3421,7 @@ Map {
         ],
         "type": "oneOfType",
       },
-      "role": {
-        "type": "string",
-      },
+      "role": [Function],
       "size": {
         "args": [
           [
@@ -3468,6 +3504,9 @@ Map {
         "type": "node",
       },
       "enableDialogElement": {
+        "type": "bool",
+      },
+      "enableEnhancedFileUploader": {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
@@ -3565,7 +3604,9 @@ Map {
         "args": [
           [
             "sm",
+            "small",
             "md",
+            "field",
             "lg",
           ],
         ],
@@ -4070,6 +4111,336 @@ Map {
     },
     "render": [Function],
   },
+  "FluidComboBox" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "direction": {
+        "args": [
+          [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "initialSelectedItem": {
+        "args": [
+          [
+            {
+              "type": "object",
+            },
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "isCondensed": {
+        "type": "bool",
+      },
+      "itemToElement": {
+        "type": "func",
+      },
+      "itemToString": {
+        "type": "func",
+      },
+      "items": {
+        "isRequired": true,
+        "type": "array",
+      },
+      "label": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": {
+        "isRequired": true,
+        "type": "func",
+      },
+      "renderSelectedItem": {
+        "type": "func",
+      },
+      "selectedItem": {
+        "args": [
+          [
+            {
+              "type": "object",
+            },
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "titleText": {
+        "type": "node",
+      },
+      "translateWithId": {
+        "type": "func",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidComboBoxSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "FluidDatePicker" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidDatePickerInput" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "datePickerType": {
+        "args": [
+          [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "decorator": {
+        "type": "node",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "helperText": {
+        "type": "node",
+      },
+      "hideLabel": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "pattern": [Function],
+      "placeholder": {
+        "type": "string",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": [Function],
+      "type": {
+        "type": "string",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidDatePickerSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "datePickerType": {
+        "args": [
+          [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "FluidDropdown" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "direction": {
+        "args": [
+          [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "initialSelectedItem": {
+        "args": [
+          [
+            {
+              "type": "object",
+            },
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "isCondensed": {
+        "type": "bool",
+      },
+      "itemToElement": {
+        "type": "func",
+      },
+      "itemToString": {
+        "type": "func",
+      },
+      "items": {
+        "isRequired": true,
+        "type": "array",
+      },
+      "label": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "renderSelectedItem": {
+        "type": "func",
+      },
+      "selectedItem": {
+        "args": [
+          [
+            {
+              "type": "object",
+            },
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "titleText": {
+        "type": "node",
+      },
+      "translateWithId": {
+        "type": "func",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidDropdownSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
   "FluidForm" => {
     "propTypes": {
       "children": {
@@ -4077,6 +4448,789 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+    },
+  },
+  "FluidMultiSelect" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "clearSelectionDescription": {
+        "type": "string",
+      },
+      "clearSelectionText": {
+        "type": "string",
+      },
+      "compareItems": {
+        "type": "func",
+      },
+      "direction": {
+        "args": [
+          [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "downshiftProps": {
+        "type": "object",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "initialSelectedItems": {
+        "type": "array",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "isCondensed": {
+        "type": "bool",
+      },
+      "isFilterable": {
+        "type": "bool",
+      },
+      "itemToElement": {
+        "type": "func",
+      },
+      "itemToString": {
+        "type": "func",
+      },
+      "items": {
+        "isRequired": true,
+        "type": "array",
+      },
+      "label": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "locale": {
+        "type": "string",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onInputValueChange": {
+        "type": "func",
+      },
+      "onMenuChange": {
+        "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "selectedItems": {
+        "type": "array",
+      },
+      "selectionFeedback": {
+        "args": [
+          [
+            "top",
+            "fixed",
+            "top-after-reopen",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "sortItems": {
+        "type": "func",
+      },
+      "titleText": {
+        "type": "node",
+      },
+      "translateWithId": {
+        "type": "func",
+      },
+      "useTitleInItem": {
+        "type": "bool",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidMultiSelectSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "FluidNumberInput" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "allowEmpty": {
+        "type": "bool",
+      },
+      "className": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "args": [
+          [
+            {
+              "type": "number",
+            },
+            {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disableWheel": {
+        "type": "bool",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "formatOptions": {
+        "args": [
+          {
+            "compactDisplay": {
+              "args": [
+                [
+                  "short",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currency": {
+              "type": "string",
+            },
+            "currencyDisplay": {
+              "args": [
+                [
+                  "symbol",
+                  "narrowSymbol",
+                  "code",
+                  "name",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "currencySign": {
+              "args": [
+                [
+                  "standard",
+                  "accounting",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "localeMatcher": {
+              "args": [
+                [
+                  "best fit",
+                  "lookup",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "maximumFractionDigits": {
+              "type": "number",
+            },
+            "maximumSignificantDigits": {
+              "type": "number",
+            },
+            "minimumFractionDigits": {
+              "type": "number",
+            },
+            "minimumIntegerDigits": {
+              "type": "number",
+            },
+            "minimumSignificantDigits": {
+              "type": "number",
+            },
+            "notation": {
+              "args": [
+                [
+                  "standard",
+                  "scientific",
+                  "engineering",
+                  "compact",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "numberingSystem": {
+              "type": "string",
+            },
+            "roundingIncrement": {
+              "type": "number",
+            },
+            "roundingMode": {
+              "args": [
+                [
+                  "ceil",
+                  "floor",
+                  "expand",
+                  "trunc",
+                  "halfCeil",
+                  "halfFloor",
+                  "halfExpand",
+                  "halfTrunc",
+                  "halfEven",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "signDisplay": {
+              "args": [
+                [
+                  "auto",
+                  "never",
+                  "always",
+                  "exceptZero",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "style": {
+              "args": [
+                [
+                  "decimal",
+                  "currency",
+                  "percent",
+                  "unit",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "trailingZeroDisplay": {
+              "args": [
+                [
+                  "auto",
+                  "stripIfInteger",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "unit": {
+              "type": "string",
+            },
+            "unitDisplay": {
+              "args": [
+                [
+                  "short",
+                  "narrow",
+                  "long",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            "useGrouping": {
+              "args": [
+                [
+                  {
+                    "type": "bool",
+                  },
+                  {
+                    "args": [
+                      [
+                        "always",
+                        "auto",
+                        "min2",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
+        ],
+        "type": "shape",
+      },
+      "iconDescription": {
+        "type": "string",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "inputMode": {
+        "args": [
+          [
+            "none",
+            "text",
+            "tel",
+            "url",
+            "email",
+            "numeric",
+            "decimal",
+            "search",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "label": {
+        "type": "node",
+      },
+      "locale": {
+        "type": "string",
+      },
+      "max": {
+        "type": "number",
+      },
+      "min": {
+        "type": "number",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onKeyUp": {
+        "type": "func",
+      },
+      "pattern": {
+        "type": "string",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "step": {
+        "type": "number",
+      },
+      "translateWithId": {
+        "type": "func",
+      },
+      "type": {
+        "args": [
+          [
+            "number",
+            "text",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "value": {
+        "args": [
+          [
+            {
+              "type": "number",
+            },
+            {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidNumberInputSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "FluidSearch" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "autoComplete": {
+        "type": "string",
+      },
+      "className": {
+        "type": "string",
+      },
+      "closeButtonLabelText": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "type": "string",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClear": {
+        "type": "func",
+      },
+      "onKeyDown": {
+        "type": "func",
+      },
+      "placeholder": {
+        "type": "string",
+      },
+      "role": {
+        "type": "string",
+      },
+      "type": {
+        "type": "string",
+      },
+      "value": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidSearchSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "FluidSelect" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "type": "any",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "labelText": {
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidSelectSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "FluidTextArea" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "cols": {
+        "type": "number",
+      },
+      "defaultValue": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "enableCounter": {
+        "type": "bool",
+      },
+      "helperText": {
+        "type": "node",
+      },
+      "hideLabel": {
+        "type": "bool",
+      },
+      "id": {
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": [Function],
+      "maxCount": {
+        "type": "number",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "placeholder": {
+        "type": "string",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "rows": {
+        "type": "number",
+      },
+      "value": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+  },
+  "FluidTextAreaSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "FluidTextInput" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "enableCounter": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "isPassword": {
+        "type": "bool",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "maxCount": {
+        "type": "number",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "placeholder": {
+        "type": "string",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "value": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidTextInputSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "FluidTimePicker" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidTimePickerSelect" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "type": "any",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "labelText": {
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+    },
+    "render": [Function],
+  },
+  "FluidTimePickerSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "isOnlyTwo": {
+        "type": "bool",
       },
     },
   },
@@ -7256,9 +8410,7 @@ Map {
         ],
         "type": "oneOfType",
       },
-      "role": {
-        "type": "string",
-      },
+      "role": [Function],
       "size": {
         "args": [
           [
@@ -7888,7 +9040,108 @@ Map {
     },
   },
   "Slider" => {
-    "displayName": "ClassWrapper(Slider)",
+    "propTypes": {
+      "ariaLabelInput": {
+        "type": "string",
+      },
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "formatLabel": {
+        "type": "func",
+      },
+      "hideLabel": {
+        "type": "bool",
+      },
+      "hideTextInput": {
+        "type": "bool",
+      },
+      "id": {
+        "type": "string",
+      },
+      "inputType": {
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "labelText": {
+        "type": "node",
+      },
+      "light": [Function],
+      "max": {
+        "isRequired": true,
+        "type": "number",
+      },
+      "maxLabel": {
+        "type": "string",
+      },
+      "min": {
+        "isRequired": true,
+        "type": "number",
+      },
+      "minLabel": {
+        "type": "string",
+      },
+      "name": {
+        "type": "string",
+      },
+      "onBlur": {
+        "type": "func",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onInputKeyUp": {
+        "type": "func",
+      },
+      "onRelease": {
+        "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "required": {
+        "type": "bool",
+      },
+      "step": {
+        "type": "number",
+      },
+      "stepMultiplier": {
+        "type": "number",
+      },
+      "translateWithId": {
+        "type": "func",
+      },
+      "unstable_ariaLabelInputUpper": {
+        "type": "string",
+      },
+      "unstable_nameUpper": {
+        "type": "string",
+      },
+      "unstable_valueUpper": {
+        "type": "number",
+      },
+      "value": {
+        "isRequired": true,
+        "type": "number",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
   },
   "SliderSkeleton" => {
     "propTypes": {
@@ -8684,11 +9937,26 @@ Map {
   "TableRow" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "aria-controls": {
+        "type": "string",
+      },
+      "aria-label": {
+        "type": "string",
+      },
+      "ariaLabel": {
+        "type": "string",
+      },
       "className": {
         "type": "string",
       },
+      "isExpanded": {
+        "type": "bool",
+      },
       "isSelected": {
         "type": "bool",
+      },
+      "onExpand": {
+        "type": "func",
       },
     },
     "render": [Function],
@@ -9871,19 +11139,7 @@ Map {
   "TreeNode" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
-      "active": {
-        "args": [
-          [
-            {
-              "type": "string",
-            },
-            {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
+      "active": [Function],
       "align": {
         "args": [
           [
@@ -9915,9 +11171,7 @@ Map {
       "defaultIsExpanded": {
         "type": "bool",
       },
-      "depth": {
-        "type": "number",
-      },
+      "depth": [Function],
       "disabled": {
         "type": "bool",
       },
@@ -9933,18 +11187,14 @@ Map {
       "label": {
         "type": "node",
       },
-      "onNodeFocusEvent": {
-        "type": "func",
-      },
+      "onNodeFocusEvent": [Function],
       "onSelect": {
         "type": "func",
       },
       "onToggle": {
         "type": "func",
       },
-      "onTreeSelect": {
-        "type": "func",
-      },
+      "onTreeSelect": [Function],
       "renderIcon": {
         "args": [
           [
@@ -9958,24 +11208,7 @@ Map {
         ],
         "type": "oneOfType",
       },
-      "selected": {
-        "args": [
-          {
-            "args": [
-              [
-                {
-                  "type": "string",
-                },
-                {
-                  "type": "number",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        ],
-        "type": "arrayOf",
-      },
+      "selected": [Function],
       "value": {
         "type": "string",
       },
@@ -9986,19 +11219,7 @@ Map {
     "TreeNode": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
-        "active": {
-          "args": [
-            [
-              {
-                "type": "string",
-              },
-              {
-                "type": "number",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
+        "active": [Function],
         "align": {
           "args": [
             [
@@ -10030,9 +11251,7 @@ Map {
         "defaultIsExpanded": {
           "type": "bool",
         },
-        "depth": {
-          "type": "number",
-        },
+        "depth": [Function],
         "disabled": {
           "type": "bool",
         },
@@ -10048,18 +11267,14 @@ Map {
         "label": {
           "type": "node",
         },
-        "onNodeFocusEvent": {
-          "type": "func",
-        },
+        "onNodeFocusEvent": [Function],
         "onSelect": {
           "type": "func",
         },
         "onToggle": {
           "type": "func",
         },
-        "onTreeSelect": {
-          "type": "func",
-        },
+        "onTreeSelect": [Function],
         "renderIcon": {
           "args": [
             [
@@ -10073,24 +11288,7 @@ Map {
           ],
           "type": "oneOfType",
         },
-        "selected": {
-          "args": [
-            {
-              "args": [
-                [
-                  {
-                    "type": "string",
-                  },
-                  {
-                    "type": "number",
-                  },
-                ],
-              ],
-              "type": "oneOfType",
-            },
-          ],
-          "type": "arrayOf",
-        },
+        "selected": [Function],
         "value": {
           "type": "string",
         },
@@ -10231,12 +11429,202 @@ Map {
     },
     "render": [Function],
   },
+  "preview__Dialog" => {
+    "Dialog": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "aria-label": {
+          "type": "string",
+        },
+        "aria-labelledby": {
+          "type": "string",
+        },
+        "ariaDescribedBy": {
+          "type": "string",
+        },
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "focusAfterCloseRef": {
+          "args": [
+            [
+              {
+                "type": "func",
+              },
+              {
+                "args": [
+                  {
+                    "current": {
+                      "type": "any",
+                    },
+                  },
+                ],
+                "type": "shape",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "modal": {
+          "type": "bool",
+        },
+        "onRequestClose": {
+          "type": "func",
+        },
+        "open": {
+          "type": "bool",
+        },
+        "role": {
+          "args": [
+            [
+              "dialog",
+              "alertdialog",
+            ],
+          ],
+          "type": "oneOf",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "hasScrollingContent": {
+          "type": "bool",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogCloseButton": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "onClick": {
+          "type": "func",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogControls": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogFooter": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "danger": {
+          "type": "bool",
+        },
+        "loadingDescription": {
+          "type": "string",
+        },
+        "loadingIconDescription": {
+          "type": "string",
+        },
+        "loadingStatus": {
+          "args": [
+            [
+              "inactive",
+              "active",
+              "finished",
+              "error",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "onLoadingSuccess": {
+          "type": "func",
+        },
+        "onRequestClose": {
+          "type": "func",
+        },
+        "onRequestSubmit": {
+          "type": "func",
+        },
+        "onSecondarySubmit": {
+          "type": "func",
+        },
+        "primaryButtonDisabled": {
+          "type": "bool",
+        },
+        "primaryButtonText": {
+          "type": "node",
+        },
+        "secondaryButtonText": {
+          "type": "node",
+        },
+        "secondaryButtons": [Function],
+      },
+      "render": [Function],
+    },
+    "DialogHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogSubtitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "id": {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "DialogTitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "id": {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+  },
   "unstable_FeatureFlags" => {
     "propTypes": {
       "children": {
         "type": "node",
       },
       "enableDialogElement": {
+        "type": "bool",
+      },
+      "enableEnhancedFileUploader": {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {

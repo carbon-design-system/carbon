@@ -46,7 +46,7 @@ export interface TableProps {
   stickyHeader?: boolean;
 
   /**
-   * `false` If true, will use a width of 'auto' instead of 100%
+   * If `true`, sets the table width to `auto` instead of `100%`.
    */
   useStaticWidth?: boolean;
 
@@ -131,6 +131,7 @@ export const Table = ({
 
   const toggleTableBodyAlignmentClass = useCallback(
     (alignTop = false) => {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       alignTop
         ? tableRef.current?.classList.add(
             `${prefix}--data-table--top-aligned-body`
@@ -144,6 +145,7 @@ export const Table = ({
 
   const toggleTableHeaderAlignmentClass = useCallback(
     (alignTop = false) => {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
       alignTop
         ? tableRef.current?.classList.add(
             `${prefix}--data-table--top-aligned-header`
@@ -231,7 +233,6 @@ export const Table = ({
   const table = (
     <div
       className={`${prefix}--data-table-content`}
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={tabIndex ?? (isScrollable ? 0 : undefined)}>
       <table
         aria-labelledby={titleId}
@@ -285,7 +286,7 @@ Table.propTypes = {
   stickyHeader: PropTypes.bool,
 
   /**
-   * `false` If true, will use a width of 'auto' instead of 100%
+   * If `true`, sets the table width to `auto` instead of `100%`.
    */
   useStaticWidth: PropTypes.bool,
 
