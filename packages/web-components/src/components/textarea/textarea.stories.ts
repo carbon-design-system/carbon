@@ -15,7 +15,6 @@ import './index';
 import '../form/form-item';
 import '../ai-label';
 import '../icon-button';
-import '../tabs';
 
 const content = html`
   <div slot="body-text">
@@ -217,62 +216,6 @@ export const WithLayer = {
       </cds-textarea>
     </sb-template-layers>
   `,
-};
-
-// Test Story, remove before merging
-export const TestWithTab = {
-  render: () => {
-    return html`
-      <div style="margin: 3rem">
-        <cds-tabs value="all">
-          <cds-tab id="tab-a" target="panel-a" value="a">Tab A</cds-tab>
-          <cds-tab id="tab-b" target="panel-b" value="b"> Tab B </cds-tab>
-        </cds-tabs>
-        <cds-textarea id="panel-a" helper-text="TextArea in tab A">
-        </cds-textarea>
-        <cds-textarea id="panel-b" helper-text="TextArea in tab B">
-        </cds-textarea>
-      </div>
-    `;
-  },
-};
-
-// Test Story, remove before merging
-export const TextAreaVisibilityTest = {
-  render: () => {
-    const toggleVisibility = () => {
-      const wrap = document.getElementById('ta-wrap');
-      if (!wrap) return;
-      wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
-    };
-
-    const toggleCols = () => {
-      const ta = document.getElementById('ta-wc');
-      if (!ta) return;
-      const curr = ta.getAttribute('cols') || '0';
-      const next = curr === '10' ? '0' : '10';
-      ta.setAttribute('cols', next);
-      ta.setAttribute('helper-text', `Helper text (cols = ${next})`);
-    };
-
-    return html`
-      <div style="margin: 3rem">
-        <div style="display: flex; gap: 8px; margin-bottom: 12px">
-          <button @click=${toggleVisibility}>Toggle visibility</button>
-          <button @click=${toggleCols}>Toggle cols</button>
-        </div>
-
-        <div id="ta-wrap" style="display: none">
-          <cds-textarea
-            id="ta-wc"
-            label="Text Area label"
-            helper-text="Helper text (cols = 0)"
-            cols="0">
-          </cds-textarea>
-        </div>
-      </div>
-    `;
-  },
 };
 
 export default {
