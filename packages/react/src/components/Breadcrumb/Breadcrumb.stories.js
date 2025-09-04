@@ -116,6 +116,10 @@ Skeleton.args = {
   items: 3,
 };
 
+Skeleton.parameters = {
+  controls: { exclude: ['aria-label'] },
+};
+
 Skeleton.argTypes = {
   ...sharedArgTypes,
   items: {

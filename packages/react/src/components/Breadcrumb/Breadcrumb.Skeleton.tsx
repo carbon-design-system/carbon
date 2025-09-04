@@ -13,11 +13,6 @@ import { usePrefix } from '../../internal/usePrefix';
 export interface BreadcrumbSkeletonProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Specify the label for the breadcrumb container
-   */
-  'aria-label'?: string;
-
-  /**
    * Specify an optional className to add.
    */
   className?: string;
@@ -50,7 +45,6 @@ function Item() {
 }
 
 function BreadcrumbSkeleton({
-  'aria-label': ariaLabel,
   className,
   items = 3,
   noTrailingSlash,
@@ -69,10 +63,7 @@ function BreadcrumbSkeleton({
   );
 
   return (
-    <div
-      className={classes}
-      aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}
-      {...rest}>
+    <div className={classes} {...rest}>
       {Array.from({ length: items }, (_, i) => (
         <Item key={i} />
       ))}
@@ -81,11 +72,6 @@ function BreadcrumbSkeleton({
 }
 
 BreadcrumbSkeleton.propTypes = {
-  /**
-   * Specify the label for the breadcrumb container
-   */
-  'aria-label': PropTypes.string,
-
   /**
    * Specify an optional className to add.
    */

@@ -135,12 +135,16 @@ const skeletonArgTypes = {
 export const Skeleton = {
   args: skeletonArgs,
   argTypes: skeletonArgTypes,
+  parameters: {
+    controls: {
+      exclude: ['aria-label'],
+    },
+  },
   render: (args) => {
-    const { ariaLabel, className, noTrailingSlash, size, items } = args ?? {};
+    const { className, noTrailingSlash, size, items } = args ?? {};
     return html`
       <cds-breadcrumb-skeleton
         .size="${size}"
-        aria-label="${ariaLabel}"
         .class="${className}"
         ?no-trailing-slash="${noTrailingSlash}"
         items="${items}">

@@ -466,9 +466,6 @@ Map {
   },
   "BreadcrumbSkeleton" => {
     "propTypes": {
-      "aria-label": {
-        "type": "string",
-      },
       "className": {
         "type": "string",
       },
