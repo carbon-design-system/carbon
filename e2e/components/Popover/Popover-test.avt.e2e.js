@@ -14,7 +14,7 @@ test.describe('@avt Popover', () => {
   test('@avt-advanced-states auto align', async ({ page }) => {
     await visitStory(page, {
       component: 'Popover',
-      id: 'components-popover--preview-auto-align',
+      id: 'components-popover--experimental-auto-align',
       globals: {
         theme: 'white',
       },
