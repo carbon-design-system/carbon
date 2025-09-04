@@ -40,14 +40,21 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleAfterChangeRadioButton = (event: CustomEvent) => {
+    // Bail out early if readOnly
+    if (this.readOnly) {
+      return;
+    }
+
     const { selectorRadioButton } = this
       .constructor as typeof CDSRadioButtonGroup;
     const selected = find(
       this.querySelectorAll(selectorRadioButton),
       (elem) => (elem as CDSRadioButton).checked
     );
+
     const oldValue = this.value;
     this.value = selected && selected.value;
+
     if (oldValue !== this.value) {
       const { eventChange } = this.constructor as typeof CDSRadioButtonGroup;
       this.dispatchEvent(
@@ -57,7 +64,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
           detail: {
             value: this.value,
             name: this.name,
-            event, // forward the original event from the radio
+            event,
           },
         })
       );
