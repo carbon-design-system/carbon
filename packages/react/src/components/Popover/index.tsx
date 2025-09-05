@@ -143,12 +143,12 @@ export type PopoverProps<E extends React.ElementType> =
   PolymorphicComponentPropWithRef<E, PopoverBaseProps>;
 export type PopoverComponent = <E extends React.ElementType = 'span'>(
   props: PopoverProps<E>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 export const Popover: PopoverComponent & {
   displayName?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: WeakValidationMap<PopoverProps<any>>;
 } = React.forwardRef(function PopoverRenderFunction<
   E extends ElementType = 'span',
@@ -168,10 +168,10 @@ export const Popover: PopoverComponent & {
     open,
     alignmentAxisOffset,
     ...rest
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   }: any,
   //this is a workaround, have to come back and fix this.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   forwardRef: any
 ) {
   const prefix = usePrefix();
@@ -221,9 +221,9 @@ export const Popover: PopoverComponent & {
   // we look to see if any of the children has a className containing "slug"
   const initialCaretHeight = React.Children.toArray(children).some((x) => {
     return (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (x as any)?.props?.className?.includes('slug') ||
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (x as any)?.props?.className?.includes('ai-label')
     );
   })
@@ -421,7 +421,7 @@ export const Popover: PopoverComponent & {
   );
 
   const mappedChildren = React.Children.map(children, (child) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const item = child as any;
     const displayName = item?.type?.displayName;
 
@@ -445,16 +445,16 @@ export const Popover: PopoverComponent & {
       React.isValidElement(item) &&
       (isTriggerElement || isTriggerComponent || isAllowedTriggerComponent)
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const className = (item?.props as any)?.className;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const ref = (item?.props as any).ref;
       const tabTipClasses = cx(
         `${prefix}--popover--tab-tip__button`,
         className
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       return React.cloneElement(item as any, {
         className:
           isTabTip && item?.type === 'button' ? tabTipClasses : className || '',

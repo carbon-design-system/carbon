@@ -11,7 +11,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       /* eslint-disable @typescript-eslint/no-explicit-any --
-       * https://github.com/carbon-design-system/carbon/issues/20071 */
+       * https://github.com/carbon-design-system/carbon/issues/20452 */
       'cds-accordion': any;
       'cds-accordion-item': any;
       'cds-accordion-skeleton': any;

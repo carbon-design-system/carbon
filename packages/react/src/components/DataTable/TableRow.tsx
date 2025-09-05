@@ -30,11 +30,11 @@ const TableRow = frFn((props, ref) => {
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
   const {
-    ariaLabel, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
-    'aria-label': ariaLabelAlt, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
-    'aria-controls': ariaControls, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
-    onExpand, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
-    isExpanded, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    ariaLabel, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+    'aria-label': ariaLabelAlt, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+    'aria-controls': ariaControls, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+    onExpand, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+    isExpanded, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     isSelected,
     ...cleanProps
   } = props;

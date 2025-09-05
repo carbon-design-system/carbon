@@ -54,7 +54,7 @@ const useOverflowItems = <T extends Item>(
       setMaxWidth(newMax);
     }
   };
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   useResizeObserver({
     ref: containerRef,
     onResize: handleResize,
@@ -114,17 +114,17 @@ const useOverflowItems = <T extends Item>(
   };
 
   // Memoize visible items calculation to avoid recalculating on every render
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const visibleItems = useMemo(() => {
     if (!Array.isArray(items)) {
       return [];
     }
     return getVisibleItems();
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [items, maxWidth, maxItems]);
 
   // Memoize hidden items calculation
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const hiddenItems = useMemo(() => {
     if (!Array.isArray(items)) {
       return [];
@@ -133,11 +133,11 @@ const useOverflowItems = <T extends Item>(
   }, [items, visibleItems]);
 
   // Use previous value to compare and only call onChange when needed
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const previousHiddenItems = usePreviousValue(hiddenItems);
 
   // Only call onChange if hidden items actually changed
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   useEffect(() => {
     if (previousHiddenItems && onChange) {
       const hasChanged =

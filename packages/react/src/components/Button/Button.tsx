@@ -126,9 +126,9 @@ export type ButtonProps<T extends React.ElementType> =
 
 export type ButtonComponent = <T extends React.ElementType = 'button'>(
   props: ButtonProps<T>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   context?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 function isIconOnlyButton(
@@ -142,7 +142,7 @@ function isIconOnlyButton(
   return false;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Button: ButtonComponent = React.forwardRef(
   <T extends React.ElementType = 'button'>(
     props: ButtonProps<T>,
@@ -170,7 +170,7 @@ const Button: ButtonComponent = React.forwardRef(
     } = props;
 
     if (ButtonImageElement && !children && !iconDescription) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.error(
         'Button: renderIcon property specified without also providing an iconDescription property. ' +
           'This may impact accessibility for screen reader users.'

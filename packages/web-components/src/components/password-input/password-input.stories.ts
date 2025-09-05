@@ -20,7 +20,7 @@ import {
   INPUT_TOOLTIP_DIRECTION,
 } from './password-input';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
     ${iconLoader(View16, { slot: 'icon' })}

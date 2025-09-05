@@ -10,7 +10,7 @@ export type StateType = {
   isRoot: boolean;
   hasSelectableItems: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
-  //eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  //eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20452
   updateFromChild: (item: {}) => void;
 };
 

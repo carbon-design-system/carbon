@@ -70,7 +70,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -79,7 +79,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -183,7 +183,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * @param event.relatedTarget The event relatedTarget.
    */
   @HostListener('shadowRoot:focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
     const {
@@ -241,7 +241,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('document:keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
     if (key === 'Esc' || key === 'Escape') {
@@ -452,7 +452,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     if (actionsCount > this._maxActions) {
       this._actionsCount = this._maxActions;
       if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
         console.error(`Too many side-panel actions, max ${this._maxActions}.`);
       }
     } else {
@@ -517,7 +517,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
   // TODO: Wait for `.d.ts` update to support `ResizeObserver`
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _resizeObserver = new ResizeObserver(() => {
     if (this._sidePanel) {
@@ -900,7 +900,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       this.disconnectObservers();
       if (this.open) {
         this.connectObservers();
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         this._launcher = this.ownerDocument!.activeElement;
         const focusNode =
           this.selectorInitialFocus &&

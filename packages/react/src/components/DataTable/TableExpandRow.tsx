@@ -194,7 +194,7 @@ TableExpandRow.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   /**@ts-ignore*/
   'aria-label': PropTypes.string,
 

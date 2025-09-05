@@ -13,7 +13,7 @@ export interface ErrorBoundaryContextType {
 
 export const ErrorBoundaryContext = createContext<ErrorBoundaryContextType>({
   log(error, info) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
     console.log(info.componentStack);
   },
 });

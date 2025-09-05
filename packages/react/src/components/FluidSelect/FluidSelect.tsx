@@ -26,7 +26,7 @@ export interface FluidSelectProps {
   /**
    * Optionally provide the default value of the `<select>`
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   defaultValue?: any;
 
   /**
@@ -77,7 +77,7 @@ export interface FluidSelectProps {
   readOnly?: boolean;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FluidSelect = React.forwardRef<HTMLSelectElement, FluidSelectProps>(
   ({ className, children, ...other }, ref) => {
     const prefix = usePrefix();

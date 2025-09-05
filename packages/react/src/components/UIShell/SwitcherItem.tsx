@@ -148,7 +148,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
           href={href}
           target={target}
           rel={rel}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           ref={forwardRef as ForwardedRef<HTMLAnchorElement | any>}
           {...rest}
           className={linkClassName}

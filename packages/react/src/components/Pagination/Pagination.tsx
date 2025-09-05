@@ -78,7 +78,7 @@ export interface PaginationProps
   onChange?: (data: {
     page: number;
     pageSize: number;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     ref?: React.RefObject<any>;
   }) => void;
 
@@ -166,7 +166,7 @@ function getPageSize(pageSizes, pageSize) {
   return pageSizes[0].value;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Pagination = React.forwardRef(
   (
     {
@@ -180,7 +180,7 @@ const Pagination = React.forwardRef(
       itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
       itemsPerPageText = 'Items per page:',
       onChange,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       pageNumberText: _pageNumberText = 'Page Number',
       pageRangeText = (_current, total) =>
         `of ${total} ${total === 1 ? 'page' : 'pages'}`,
@@ -260,7 +260,7 @@ const Pagination = React.forwardRef(
         handleFocus(focusTarget);
         setFocusTarget(null);
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [focusTarget]);
 
     // Sync state with props

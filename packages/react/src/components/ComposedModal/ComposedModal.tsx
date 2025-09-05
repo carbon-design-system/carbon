@@ -207,7 +207,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onClose?(event: MouseEvent): void | boolean;
 
   /**
@@ -294,7 +294,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         setWasOpen(!!open);
         toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [open, wasOpen, prefix]);
     // Remove the document.body className on unmount
     useEffect(() => {
@@ -499,7 +499,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       return () => {
         document.removeEventListener('keydown', handleEscapeKey, true);
       };
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [open]);
 
     useEffect(() => {
@@ -545,7 +545,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           focusButton(innerModal.current);
         }
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [open, selectorPrimaryFocus, isOpen]);
 
     // AILabel is always size `sm`

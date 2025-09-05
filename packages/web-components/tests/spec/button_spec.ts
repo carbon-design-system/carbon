@@ -9,7 +9,7 @@ import { render } from 'lit';
 import { BUTTON_KIND } from '../../src/components/button/button';
 import { Default } from '../../src/components/button/button.stories';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 const template = (props?: any) =>
   Default({
     'cds-button': props,
@@ -25,17 +25,17 @@ describe('cds-button', () => {
     });
 
     it('should choose the right template for default type', () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(elem!.shadowRoot!.querySelectorAll('button.cds--btn').length).toBe(
         1
       );
     });
 
     it('should choose the right template for link type', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.setAttribute('href', 'about:blank');
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(elem!.shadowRoot!.querySelectorAll('a.cds--btn').length).toBe(1);
     });
 
@@ -55,31 +55,31 @@ describe('cds-button', () => {
     });
 
     it('should deactivate when disabled attribute is set', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.setAttribute('disabled', '');
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.shadowRoot!.querySelectorAll('.cds--btn--disabled').length
       ).toBe(1);
     });
 
     it('should make it small when small attribute is set', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.setAttribute('size', 'sm');
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(elem!.shadowRoot!.querySelectorAll('.cds--btn--sm').length).toBe(
         1
       );
     });
 
     it('should allow user to select button type', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.setAttribute('kind', BUTTON_KIND.GHOST);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.shadowRoot!.querySelectorAll('.cds--btn--ghost').length
       ).toBe(1);
     });
@@ -96,7 +96,7 @@ describe('cds-button', () => {
     it('should render with minimum attributes for <button>', async () => {
       render(template(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -114,7 +114,7 @@ describe('cds-button', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -123,7 +123,7 @@ describe('cds-button', () => {
     it('should render with minimum attributes for <a>', async () => {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -146,7 +146,7 @@ describe('cds-button', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -170,7 +170,7 @@ describe('cds-button', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -178,7 +178,7 @@ describe('cds-button', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

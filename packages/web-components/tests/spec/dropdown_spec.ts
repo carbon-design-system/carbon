@@ -12,7 +12,7 @@ import CDSDropdown from '../../src/components/dropdown/dropdown';
 import CDSDropdownItem from '../../src/components/dropdown/dropdown-item';
 import { Playground } from '../../src/components/dropdown/dropdown.stories';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 const template = (props?: any) =>
   Playground({
     'cds-dropdown': props,
@@ -26,7 +26,7 @@ describe('cds-dropdown', () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-dropdown' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -48,7 +48,7 @@ describe('cds-dropdown', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-dropdown' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -63,29 +63,29 @@ describe('cds-dropdown', () => {
     beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-dropdown')!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       itemNode = elem.querySelector('cds-dropdown-item')!;
     });
 
     it('should add "open" stateful modifier class', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
 
     it('should remove "open" stateful modifier class (closed default state)', async () => {
       (elem as CDSDropdown).open = true;
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -94,9 +94,9 @@ describe('cds-dropdown', () => {
       await Promise.resolve();
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -105,9 +105,9 @@ describe('cds-dropdown', () => {
       await Promise.resolve();
       (itemNode as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -115,11 +115,11 @@ describe('cds-dropdown', () => {
       events.on(elem, 'cds-dropdown-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -129,11 +129,11 @@ describe('cds-dropdown', () => {
       events.on(elem, 'cds-dropdown-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
   });
@@ -145,7 +145,7 @@ describe('cds-dropdown', () => {
     beforeEach(async () => {
       render(template({ open: true, value: 'all' }), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-dropdown')!;
       itemNodes = elem.querySelectorAll('cds-dropdown-item');
     });
@@ -172,7 +172,7 @@ describe('cds-dropdown', () => {
       ).click();
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
       ).toBe('Option 3');
     });
@@ -217,7 +217,7 @@ describe('cds-dropdown', () => {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
       ).toBe('Option 1');
     });
@@ -230,11 +230,11 @@ describe('cds-dropdown', () => {
       (elem as CDSDropdown).value = 'value-added';
       try {
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
         ).toBe('text-added');
       } finally {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         itemNode.parentNode!.removeChild(itemNode);
       }
     });
@@ -246,7 +246,7 @@ describe('cds-dropdown', () => {
     beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-dropdown')!;
     });
 
@@ -293,7 +293,7 @@ describe('cds-dropdown', () => {
 
   afterEach(async () => {
     events.reset();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

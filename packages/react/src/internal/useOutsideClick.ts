@@ -27,7 +27,7 @@ export const useOutsideClick = <T extends HTMLElement | null>(
     /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
     */
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     useWindowEvent('click', (event) => {
       const { target } = event;
 

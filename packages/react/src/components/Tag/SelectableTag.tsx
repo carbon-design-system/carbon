@@ -82,7 +82,7 @@ export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
   SelectableTagBaseProps
 >;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const SelectableTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -102,7 +102,7 @@ const SelectableTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagId = id || `tag-${useId()}`;
     const [selectedTag, setSelectedTag] = useControllableState({
       value: selected,

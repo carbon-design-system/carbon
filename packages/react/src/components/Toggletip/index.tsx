@@ -20,7 +20,7 @@ import React, {
 } from 'react';
 import {
   Popover,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   type PopoverAlignment,
   PopoverBaseProps,
   PopoverContent,
@@ -49,7 +49,7 @@ export function ToggletipLabel<E extends ElementType>({
 }: ToggletipLabelProps<E>) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-label`, customClassName);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const BaseComponentAsAny = BaseComponent as any;
   return (
     <BaseComponentAsAny className={className} {...rest}>
@@ -185,7 +185,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
       const node = event.target as Node | null;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       if (open && node && !ref.current!.contains(node)) {
         setOpen(false);
       }
@@ -205,7 +205,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 
   return (
     <ToggletipContext.Provider value={value}>
-      {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071 */}
+      {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452 */}
       <Popover<any>
         align={align}
         as={as}
@@ -228,7 +228,7 @@ export function Toggletip<E extends ElementType = 'span'>({
 // Get all the properties from Popover except for "open".
 // The Typescript types for PropTypes are really messed up so we need lots of
 // casting.  It will be great when we can finally get rid of PropTypes altogether.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
   {}) as unknown as PopoverBaseProps;
 
@@ -271,7 +271,7 @@ export const ToggletipButton = React.forwardRef(function ToggletipButton<
   const toggletip = useToggletip();
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-button`, customClassName);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const ComponentToggle: any = BaseComponent ?? 'button';
 
   if (ComponentToggle !== 'button') {

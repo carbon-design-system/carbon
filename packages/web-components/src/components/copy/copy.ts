@@ -30,7 +30,7 @@ class CDSCopy extends CDSIconButton {
   private _animation = '';
 
   private _createHandleFeedbackTooltip = () => {
-    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
     let timeoutId: number | void;
     return (timeout: number) => {
       const buttonClasses = this.shadowRoot?.querySelector('button')?.classList;
@@ -111,7 +111,7 @@ class CDSCopy extends CDSIconButton {
 
     super.updated(changedProperties);
 
-    this.shadowRoot // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+    this.shadowRoot // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
       ?.querySelector('button') // @ts-ignore: TS thinks `host` doesn't exist on `parentNode`
       ?.setAttribute('aria-label', this.parentNode?.host.textContent);
   }
