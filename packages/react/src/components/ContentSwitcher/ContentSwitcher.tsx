@@ -156,7 +156,10 @@ export const ContentSwitcher = ({
           });
         }
       }
-    } else if (selectedIndex !== index) {
+    } else if (
+      selectedIndex !== index &&
+      (isKeyboardEvent(event) ? matches(event, [keys.Enter, keys.Space]) : true)
+    ) {
       setSelectedIndex(index);
       focusSwitch(index);
       onChange(event);
