@@ -19,6 +19,10 @@ import { TranslateWithId } from '../../types/common';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { clamp } from '../../internal/clamp';
+import { PopoverAlignment } from '../Popover';
+
+type TooltipAlignment = 'start' | 'center' | 'end';
+type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 
 const translationIds = {
   'carbon.pagination-nav.next': 'Next',
@@ -55,10 +59,7 @@ function calculateCuts(
   splitPoint: number | null = null
 ) {
   if (itemsDisplayedOnPage >= totalItems) {
-    return {
-      front: 0,
-      back: 0,
-    };
+    return { front: 0, back: 0 };
   }
 
   const split = splitPoint || Math.ceil(itemsDisplayedOnPage / 2) - 1;
@@ -76,10 +77,7 @@ function calculateCuts(
     backHidden = 0;
   }
 
-  return {
-    front: frontHidden,
-    back: backHidden,
-  };
+  return { front: frontHidden, back: backHidden };
 }
 
 export interface DirectionButtonProps {
@@ -102,6 +100,16 @@ export interface DirectionButtonProps {
    * The callback function called when the button is clicked.
    */
   onClick?: React.MouseEventHandler;
+
+  /**
+   * Specify the alignment of the tooltip for the icon-only next/prev buttons.
+   */
+  tooltipAlignment?: TooltipAlignment;
+
+  /**
+   * Specify the position of the tooltip for the icon-only next/prev buttons.
+   */
+  tooltipPosition?: TooltipPosition;
 }
 
 function DirectionButton({
@@ -109,13 +117,20 @@ function DirectionButton({
   label,
   disabled,
   onClick,
+  tooltipAlignment = 'center',
+  tooltipPosition = 'bottom',
 }: DirectionButtonProps) {
   const prefix = usePrefix();
+
+  const align: PopoverAlignment =
+    tooltipAlignment === 'center'
+      ? (tooltipPosition as PopoverAlignment)
+      : (`${tooltipPosition}-${tooltipAlignment}` as PopoverAlignment);
 
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
       <IconButton
-        align="bottom"
+        align={align}
         disabled={disabled}
         kind="ghost"
         label={label}
@@ -320,6 +335,18 @@ export interface PaginationNavProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * Specify the alignment of the tooltip for the icon-only next/prev buttons.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment?: TooltipAlignment;
+
+  /**
+   * Specify the position of the tooltip for the icon-only next/prev buttons.
+   * Can be one of: top, right, bottom, or left.
+   */
+  tooltipPosition?: TooltipPosition;
+
+  /**
    * The total number of items.
    */
   totalItems?: number;
@@ -336,6 +363,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       page = 0,
       loop = false,
       size = 'lg',
+      tooltipAlignment,
+      tooltipPosition,
       translateWithId: t = translateWithId,
       ...rest
     },
@@ -479,6 +508,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             label={t('carbon.pagination-nav.previous')}
             disabled={backwardButtonDisabled}
             onClick={jumpToPrevious}
+            tooltipAlignment={tooltipAlignment}
+            tooltipPosition={tooltipPosition}
           />
 
           {
@@ -551,6 +582,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             label={t('carbon.pagination-nav.next')}
             disabled={forwardButtonDisabled}
             onClick={jumpToNext}
+            tooltipAlignment={tooltipAlignment}
+            tooltipPosition={tooltipPosition}
           />
         </ul>
         <div
@@ -586,6 +619,18 @@ DirectionButton.propTypes = {
    * The callback function called when the button is clicked.
    */
   onClick: PropTypes.func,
+
+  /**
+   * Specify how the tooltip should align with the navigation button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the position of the tooltip relative to the navigation button.
+   * Can be one of: top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 PaginationItem.propTypes = {
@@ -671,6 +716,18 @@ PaginationNav.propTypes = {
    * Specify the size of the PaginationNav.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify the alignment of the tooltip for the icon-only prev/next buttons.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the position of the tooltip for the icon-only prev/next buttons.
+   * Can be one of: top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
    * The total number of items.

@@ -1,0 +1,144 @@
+//
+// Copyright IBM Corp. 2019, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/pagination-nav' as pagination-nav;
+@use '@carbon/styles/scss/utilities/visually-hidden' as *;
+
+:host(#{$prefix}-pagination-nav) {
+  @include pagination-nav.pagination-nav();
+
+  .#{$prefix}--pagination-nav__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+  }
+
+  .#{$prefix}--pagination-nav__list-item {
+    padding: 0;
+
+    &:first-child {
+      padding-inline-start: 0;
+    }
+
+    &:last-child {
+      padding-inline-end: 0;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__page {
+    position: relative;
+    display: block;
+    padding: calc((2.5rem - 0.875rem) / 2) $spacing-02;
+    border-radius: 0;
+    color: $text-primary;
+    font-weight: 400;
+    line-height: 1;
+    min-inline-size: 2.5rem;
+    outline: 0;
+    text-align: center;
+    text-decoration: none;
+    transition:
+      background-color $duration-fast-02 motion(standard, productive),
+      color $duration-fast-02 motion(standard, productive);
+    user-select: none;
+
+    &:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    &:disabled,
+    &.#{$prefix}--pagination-nav__page--disabled {
+      background: none;
+      color: rgba($text-secondary, 0.5);
+      outline: none;
+      pointer-events: none;
+    }
+
+    &.#{$prefix}--pagination-nav__page--active {
+      background-color: initial;
+      color: $text-primary;
+      font-weight: 600;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select {
+    position: relative;
+  }
+
+  .#{$prefix}--pagination-nav__page--select {
+    appearance: none;
+    max-block-size: 2.5rem;
+    text-align: center;
+    text-indent: calc(50% - 0.5px);
+
+    /* This is for targeting styles specific to firefox */
+    /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+    @-moz-document url-prefix() {
+      text-indent: 0;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select-icon-wrapper {
+    position: absolute;
+    block-size: 100%;
+    inline-size: 100%;
+    inset-block-start: 0;
+    pointer-events: none;
+
+    .#{$prefix}--pagination-nav__page--active + & {
+      .#{$prefix}--pagination-nav__select-icon {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select-icon {
+    position: absolute;
+    inset-block-start: calc(50% - 0.5rem);
+    inset-inline-start: calc(50% - 0.5rem);
+    pointer-events: none;
+  }
+
+  .#{$prefix}--pagination-nav__accessibility-label {
+    @include visually-hidden;
+  }
+
+  // RTL overrides
+  [dir='rtl'] & {
+    .#{$prefix}--pagination-nav__list-item svg {
+      transform: rotate(0.5turn);
+    }
+  }
+}
+
+:host(#{$prefix}-pagination-nav[size='sm']) {
+  .#{$prefix}--pagination-nav__page {
+    padding: calc((2rem - 0.875rem) / 2) $spacing-02;
+    min-inline-size: 2rem;
+  }
+}
+
+:host(#{$prefix}-pagination-nav[size='md']) {
+  .#{$prefix}--pagination-nav__page {
+    padding: calc((2.25rem - 0.875rem) / 2) $spacing-02;
+    min-inline-size: 2.25rem;
+  }
+}

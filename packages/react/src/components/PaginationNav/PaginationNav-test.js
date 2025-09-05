@@ -126,6 +126,20 @@ describe('PaginationNav', () => {
       );
       expect(screen.getByLabelText('Select Page number')).toBeInTheDocument();
     });
+
+    it('should respect tooltipAlignment and tooltipPosition props', () => {
+      render(
+        <PaginationNav
+          totalItems={10}
+          tooltipAlignment="end"
+          tooltipPosition="right"
+        />
+      );
+
+      expect(
+        document.querySelector('.cds--popover--right-end')
+      ).toBeInTheDocument();
+    });
   });
 
   describe('behaves as expected', () => {
