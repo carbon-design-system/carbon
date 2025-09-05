@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -53,23 +53,26 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
   @property({ reflect: true })
   description!: string;
 
-  /**
-   * The primary progress label.
-   */
-  @property({ attribute: 'label-text' })
-  labelText!: string;
-
   @property()
   label!: string;
 
   /**
    * The secondary progress label.
+   * @deprecated Use `secondaryLabel` instead
    */
   @property({ attribute: 'secondary-label-text' })
   secondaryLabelText!: string;
 
   @property({ attribute: 'secondary-label' })
   secondaryLabel!: string;
+
+  /**
+   * `true` if the progress step should grow equally to fill space.
+   *
+   * @private
+   */
+  @property({ type: Boolean, reflect: true })
+  spaceEqually = false;
 
   /**
    * The progress state.
@@ -86,12 +89,51 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
   vertical = false;
 
   /**
-   * `true` if the progress step should be spaced equally.
-   *
-   * @private
+   * Set by the parent indicator. If true, the step is interactive unless it is
+   * current or disabled. Controlled internally by the parent indicator to enable
+   * click events that trigger a `change` event.
    */
+  @property({ type: Boolean })
+  clickable = false;
+
+  /**
+   * Internal flag to indicate if the state was manually set
+   */
+  _manualState = false;
+
+  /** React-like boolean props mapped to `state` */
   @property({ type: Boolean, reflect: true })
-  spaceEqually = false;
+  get complete() {
+    return this.state === PROGRESS_STEP_STAT.COMPLETE;
+  }
+  set complete(val: boolean) {
+    if (val) {
+      this.state = PROGRESS_STEP_STAT.COMPLETE;
+      this._manualState = true;
+    }
+  }
+
+  @property({ type: Boolean, reflect: true })
+  get current() {
+    return this.state === PROGRESS_STEP_STAT.CURRENT;
+  }
+  set current(val: boolean) {
+    if (val) {
+      this.state = PROGRESS_STEP_STAT.CURRENT;
+      this._manualState = true;
+    }
+  }
+
+  @property({ type: Boolean, reflect: true })
+  get invalid() {
+    return this.state === PROGRESS_STEP_STAT.INVALID;
+  }
+  set invalid(val: boolean) {
+    if (val) {
+      this.state = PROGRESS_STEP_STAT.INVALID;
+      this._manualState = true;
+    }
+  }
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -100,11 +142,35 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     super.connectedCallback();
   }
 
-  updated(changedProperties) {
+  updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('disabled')) {
       this.setAttribute('aria-disabled', String(Boolean(this.disabled)));
     }
   }
+
+  // Fire internal click only when interactive
+  private _fireStepClick = () => {
+    const isUnclickable =
+      this.state === PROGRESS_STEP_STAT.CURRENT ||
+      this.disabled ||
+      !this.clickable;
+    if (isUnclickable) return;
+
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-progress-step-click`, {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
+  };
+
+  private _onKeyDown = (ev: KeyboardEvent) => {
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
+      this._fireStepClick();
+    }
+  };
 
   render() {
     const {
@@ -116,7 +182,11 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
       state,
     } = this;
     const svgLabel = iconLabel || description;
-    const optionalLabel = secondaryLabelText || secondaryLabel;
+    const optionalLabel = secondaryLabel || secondaryLabelText;
+
+    // Unclickable if current OR disabled (matches React behavior)
+    // const isUnclickable =
+    //   state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
     return html`
       <div class="${prefix}--progress-step-button" tabindex="0">
         ${iconLoader(icons[state], {
@@ -128,7 +198,6 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
         })}
         <slot name="label-text">
           <p
-            role="button"
             class="${prefix}--progress-label"
             aria-describedby="label-tooltip"
             title="${label}">
