@@ -8,10 +8,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React, { useRef, useState } from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ComposedModal, { ModalBody } from './ComposedModal';
-import { FeatureFlags } from '../FeatureFlags';
+import { ComposedModalPresence } from './ComposedModalPresence';
+import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import { TextInput } from '../../';
@@ -19,10 +26,39 @@ import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
-describe('ComposedModal', () => {
+const ComposedModalWithPresenceFeatureFlag = ({ open = true, ...props }) => {
+  const enableDialogElement = useFeatureFlag('enable-dialog-element');
+  return (
+    <FeatureFlags enablePresence enableDialogElement={enableDialogElement}>
+      <ComposedModal {...props} open={open} />
+    </FeatureFlags>
+  );
+};
+
+const ComposedModalWithPresenceContext = ({ open = true, ...props }) => {
+  return (
+    <ComposedModalPresence open={open}>
+      <ComposedModal {...props} />
+    </ComposedModalPresence>
+  );
+};
+
+describe.each([
+  { title: 'ComposedModal', Component: ComposedModal },
+  {
+    title: 'ComposedModal with presence feature flag',
+    Component: ComposedModalWithPresenceFeatureFlag,
+    isPresence: true,
+  },
+  {
+    title: 'ComposedModal with presence context',
+    Component: ComposedModalWithPresenceContext,
+    isPresence: true,
+  },
+])('$title', ({ Component, isPresence }) => {
   describe('it renders as expected', () => {
     it('supports a custom class on the outermost div', () => {
-      render(<ComposedModal className="custom-class" />);
+      render(<Component className="custom-class" />);
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'custom-class'
@@ -30,7 +66,7 @@ describe('ComposedModal', () => {
     });
 
     it('supports a custom class on the container div', () => {
-      render(<ComposedModal containerClassName="custom-class" />);
+      render(<Component containerClassName="custom-class" />);
 
       expect(screen.getByRole('dialog', { hidden: true })).toHaveClass(
         'custom-class'
@@ -39,16 +75,16 @@ describe('ComposedModal', () => {
 
     it('supports a custom class on the modal body', () => {
       render(
-        <ComposedModal>
+        <Component>
           <ModalBody className="custom-class" data-testid="modal-body" />
-        </ComposedModal>
+        </Component>
       );
 
       expect(screen.getByTestId('modal-body')).toHaveClass('custom-class');
     });
 
     it('should spread props onto the outermost div', () => {
-      render(<ComposedModal data-testid="modal" />);
+      render(<Component data-testid="modal" />);
 
       expect(
         screen.getByRole('presentation', { hidden: true })
@@ -56,7 +92,7 @@ describe('ComposedModal', () => {
     });
 
     it('should be labelled by a provided aria-label', () => {
-      render(<ComposedModal aria-label="modal" />);
+      render(<Component aria-label="modal" />);
 
       expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(
         'aria-label',
@@ -68,11 +104,11 @@ describe('ComposedModal', () => {
       render(
         <div>
           <label id="label-modal-id">Label for modal</label>
-          <ComposedModal aria-labelledby="label-modal-id">
+          <Component aria-labelledby="label-modal-id">
             <ModalHeader>Modal header</ModalHeader>
             <ModalBody>This is the modal body content</ModalBody>
             <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
-          </ComposedModal>
+          </Component>
         </div>
       );
 
@@ -84,7 +120,7 @@ describe('ComposedModal', () => {
 
     it('should change submit to danger button', () => {
       render(
-        <ComposedModal danger open>
+        <Component danger open>
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
           <ModalFooter
@@ -92,7 +128,7 @@ describe('ComposedModal', () => {
             primaryButtonText="Add"
             secondaryButtonText="Cancel"
           />
-        </ComposedModal>
+        </Component>
       );
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
@@ -103,10 +139,10 @@ describe('ComposedModal', () => {
     it('calls onClose when close button is clicked', async () => {
       const onClose = jest.fn();
       render(
-        <ComposedModal open onClose={onClose}>
+        <Component open onClose={onClose}>
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
-        </ComposedModal>
+        </Component>
       );
 
       await userEvent.click(screen.getByLabelText('Close'));
@@ -117,28 +153,14 @@ describe('ComposedModal', () => {
     it('should not close when onClose returns false', async () => {
       const onClose = () => false;
       render(
-        <ComposedModal open onClose={onClose}>
+        <Component open onClose={onClose}>
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
-        </ComposedModal>
+        </Component>
       );
 
       await userEvent.click(screen.getByLabelText('Close'));
 
-      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
-        'is-visible'
-      );
-    });
-
-    it('should be open if specified', () => {
-      render(
-        <ComposedModal open>
-          <ModalHeader>Modal header</ModalHeader>
-          <ModalBody>This is the modal body content</ModalBody>
-        </ComposedModal>
-      );
-
-      expect(screen.getByText('Modal header')).toBeInTheDocument();
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
       );
@@ -152,7 +174,7 @@ describe('ComposedModal', () => {
             <button type="button" onClick={() => setIsOpen(!isOpen)}>
               Click me
             </button>
-            <ComposedModal
+            <Component
               open={isOpen}
               preventCloseOnClickOutside
               selectorPrimaryFocus="#text-input-1">
@@ -165,7 +187,7 @@ describe('ComposedModal', () => {
                   labelText="text input"
                 />
               </ModalBody>
-            </ComposedModal>
+            </Component>
           </>
         );
       }
@@ -188,7 +210,7 @@ describe('ComposedModal', () => {
             <button type="button" onClick={() => setIsOpen(!isOpen)}>
               Click me
             </button>
-            <ComposedModal open={isOpen} preventCloseOnClickOutside>
+            <Component open={isOpen} preventCloseOnClickOutside>
               <ModalHeader>Modal header</ModalHeader>
               <ModalBody>
                 This is the modal body content
@@ -202,7 +224,7 @@ describe('ComposedModal', () => {
                 primaryButtonText="Add"
                 secondaryButtonText="Cancel"
               />
-            </ComposedModal>
+            </Component>
           </>
         );
       }
@@ -225,7 +247,7 @@ describe('ComposedModal', () => {
             <button type="button" onClick={() => setIsOpen(!isOpen)}>
               Click me
             </button>
-            <ComposedModal
+            <Component
               danger
               selectorPrimaryFocus="#text-input-1"
               open={isOpen}
@@ -243,7 +265,7 @@ describe('ComposedModal', () => {
                 primaryButtonText="Add"
                 secondaryButtonText="Cancel"
               />
-            </ComposedModal>
+            </Component>
           </>
         );
       }
@@ -266,7 +288,7 @@ describe('ComposedModal', () => {
             <button type="button" onClick={() => setIsOpen(!isOpen)}>
               Click me
             </button>
-            <ComposedModal open={isOpen} preventCloseOnClickOutside>
+            <Component open={isOpen} preventCloseOnClickOutside>
               <ModalHeader>Modal header</ModalHeader>
               <ModalBody>
                 This is the modal body content
@@ -276,7 +298,7 @@ describe('ComposedModal', () => {
                   labelText="text input"
                 />
               </ModalBody>
-            </ComposedModal>
+            </Component>
           </>
         );
       }
@@ -285,18 +307,70 @@ describe('ComposedModal', () => {
       await userEvent.click(screen.getByText('Click me'));
 
       const elementModal = screen.getByRole('presentation', { hidden: true });
-      expect(elementModal).toHaveClass('is-visible');
+      expect(elementModal).toBeVisible();
 
       const elementInput = screen.getByRole('button', { name: 'Close' });
       expect(elementInput).toHaveFocus();
     });
 
+    it('should focus on launcherButtonRef element on close when defined', async () => {
+      const ComposedModalExample = () => {
+        const buttonRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
+
+        return (
+          <>
+            <button
+              ref={buttonRef}
+              type="button"
+              onClick={() => setIsOpen(true)}>
+              Launch modal
+            </button>
+            <Component
+              launcherButtonRef={buttonRef}
+              open={isOpen}
+              onClose={() => {
+                setIsOpen(false);
+              }}>
+              <ModalHeader>Header</ModalHeader>
+            </Component>
+          </>
+        );
+      };
+      render(<ComposedModalExample />);
+
+      const button = screen.getByRole('button', { name: /Launch modal/ });
+      await userEvent.click(button);
+
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'is-visible'
+      );
+
+      await userEvent.click(screen.getByRole('button', { name: /Close/ }));
+
+      if (isPresence) {
+        expect(
+          screen.queryByRole('presentation', {
+            hidden: true,
+          })
+        ).not.toBeInTheDocument();
+      } else {
+        expect(
+          screen.getByRole('presentation', {
+            hidden: true,
+          })
+        ).not.toHaveClass('is-visible');
+      }
+
+      expect(button).toHaveFocus();
+    });
+
     it('should change size based on size prop', () => {
       render(
-        <ComposedModal open size="lg">
+        <Component open size="lg">
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
-        </ComposedModal>
+        </Component>
       );
 
       expect(screen.getByRole('dialog', { hidden: true })).toHaveClass(
@@ -306,7 +380,7 @@ describe('ComposedModal', () => {
 
     it('disables buttons when inline loading status is active', () => {
       render(
-        <ComposedModal open>
+        <Component open>
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
           <ModalFooter
@@ -314,7 +388,7 @@ describe('ComposedModal', () => {
             secondaryButtonText="Cancel"
             loadingStatus="active"
             loadingDescription="loading..."></ModalFooter>
-        </ComposedModal>
+        </Component>
       );
 
       expect(screen.getByTitle('loading')).toBeInTheDocument();
@@ -326,7 +400,7 @@ describe('ComposedModal', () => {
 
     it('should respect decorator prop', () => {
       const { container } = render(
-        <ComposedModal open decorator={<AILabel />}>
+        <Component open decorator={<AILabel />}>
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
           <ModalFooter
@@ -334,7 +408,7 @@ describe('ComposedModal', () => {
             secondaryButtonText="Cancel"
             loadingStatus="active"
             loadingDescription="loading..."></ModalFooter>
-        </ComposedModal>
+        </Component>
       );
 
       expect(container.firstChild).toHaveClass(`${prefix}--modal--decorator`);
@@ -348,14 +422,14 @@ describe('ComposedModal', () => {
         const focusRef = useRef();
         return (
           <FeatureFlags enableDialogElement>
-            <ComposedModal
+            <Component
               open={open}
               launcherButtonRef={focusRef}
               onClick={() => setOpen(false)}>
               <button data-testid="close" onClick={() => setOpen(false)}>
                 Close
               </button>
-            </ComposedModal>
+            </Component>
             <button data-testid="focusElem" ref={focusRef}>
               focus after close
             </button>
@@ -378,7 +452,7 @@ describe('ComposedModal', () => {
   it('should respect the deprecated slug prop', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(
-      <ComposedModal open slug={<AILabel />}>
+      <Component open slug={<AILabel />}>
         <ModalHeader>Modal header</ModalHeader>
         <ModalBody>This is the modal body content</ModalBody>
         <ModalFooter
@@ -386,7 +460,7 @@ describe('ComposedModal', () => {
           secondaryButtonText="Cancel"
           loadingStatus="active"
           loadingDescription="loading..."></ModalFooter>
-      </ComposedModal>
+      </Component>
     );
 
     expect(
@@ -398,13 +472,13 @@ describe('ComposedModal', () => {
   it('should handle onClick events', async () => {
     const onClick = jest.fn();
     render(
-      <ComposedModal open onClick={onClick}>
+      <Component open onClick={onClick}>
         <p>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>
-      </ComposedModal>
+      </Component>
     );
     const modal = screen.getByRole('dialog');
     await userEvent.click(modal);
@@ -414,11 +488,11 @@ describe('ComposedModal', () => {
   it('should NOT close when clicked inside dialog window, dragged outside and released mouse button', async () => {
     const onClose = jest.fn();
     render(
-      <ComposedModal open onClose={onClose}>
+      <Component open onClose={onClose}>
         <ModalBody data-testid="modal-body-1">
           This is the modal body content
         </ModalBody>
-      </ComposedModal>
+      </Component>
     );
 
     const modalBody = screen.getByTestId('modal-body-1');
@@ -435,11 +509,11 @@ describe('ComposedModal', () => {
       it('should close on outside click by default', async () => {
         const onClose = jest.fn();
         render(
-          <ComposedModal open onClose={onClose}>
+          <Component open onClose={onClose}>
             <ModalHeader>ModalHeader content</ModalHeader>
             <ModalBody>ModalBody content</ModalBody>
             {/* ModalFooter is omitted, this is what makes it passive */}
-          </ComposedModal>
+          </Component>
         );
 
         // The background layer is used here instead of a button outside the
@@ -451,17 +525,23 @@ describe('ComposedModal', () => {
         expect(backgroundLayer).toHaveClass('is-visible');
 
         await userEvent.click(backgroundLayer);
-        expect(backgroundLayer).not.toHaveClass('is-visible');
+
+        if (isPresence) {
+          expect(backgroundLayer).not.toBeInTheDocument();
+        } else {
+          expect(backgroundLayer).not.toHaveClass('is-visible');
+        }
+
         expect(onClose).toHaveBeenCalled();
       });
       it('should not close on outside click when preventCloseOnClickOutside', async () => {
         const onClose = jest.fn();
         render(
-          <ComposedModal open onClose={onClose} preventCloseOnClickOutside>
+          <Component open onClose={onClose} preventCloseOnClickOutside>
             <ModalHeader>ModalHeader content</ModalHeader>
             <ModalBody>ModalBody content</ModalBody>
             {/* ModalFooter is omitted, this is what makes it passive */}
-          </ComposedModal>
+          </Component>
         );
 
         // The background layer is used here instead of a button outside the
@@ -479,14 +559,11 @@ describe('ComposedModal', () => {
       it('should close on outside click when preventCloseOnClickOutside is explicitly false', async () => {
         const onClose = jest.fn();
         render(
-          <ComposedModal
-            open
-            onClose={onClose}
-            preventCloseOnClickOutside={false}>
+          <Component open onClose={onClose} preventCloseOnClickOutside={false}>
             <ModalHeader>ModalHeader content</ModalHeader>
             <ModalBody>ModalBody content</ModalBody>
             {/* ModalFooter is omitted, this is what makes it passive */}
-          </ComposedModal>
+          </Component>
         );
 
         // The background layer is used here instead of a button outside the
@@ -498,7 +575,13 @@ describe('ComposedModal', () => {
         expect(backgroundLayer).toHaveClass('is-visible');
 
         await userEvent.click(backgroundLayer);
-        expect(backgroundLayer).not.toHaveClass('is-visible');
+
+        if (isPresence) {
+          expect(backgroundLayer).not.toBeInTheDocument();
+        } else {
+          expect(backgroundLayer).not.toHaveClass('is-visible');
+        }
+
         expect(onClose).toHaveBeenCalled();
       });
     });
@@ -506,14 +589,14 @@ describe('ComposedModal', () => {
       it('should not close on outside click by default', async () => {
         const onClose = jest.fn();
         render(
-          <ComposedModal open onClose={onClose}>
+          <Component open onClose={onClose}>
             <ModalHeader>ModalHeader content</ModalHeader>
             <ModalBody>ModalBody content</ModalBody>
             <ModalFooter
               primaryButtonText="Confirm"
               secondaryButtonText="Cancel"
             />
-          </ComposedModal>
+          </Component>
         );
 
         // The background layer is used here instead of a button outside the
@@ -531,14 +614,14 @@ describe('ComposedModal', () => {
       it('should not close on outside click when preventCloseOnClickOutside', async () => {
         const onClose = jest.fn();
         render(
-          <ComposedModal open onClose={onClose} preventCloseOnClickOutside>
+          <Component open onClose={onClose} preventCloseOnClickOutside>
             <ModalHeader>ModalHeader content</ModalHeader>
             <ModalBody>ModalBody content</ModalBody>
             <ModalFooter
               primaryButtonText="Confirm"
               secondaryButtonText="Cancel"
             />
-          </ComposedModal>
+          </Component>
         );
 
         // The background layer is used here instead of a button outside the
@@ -597,14 +680,14 @@ describe('ComposedModal', () => {
       const focusRef = useRef();
       return (
         <>
-          <ComposedModal
+          <Component
             open={open}
             launcherButtonRef={focusRef}
             onClick={() => setOpen(false)}>
             <button data-testid="close" onClick={() => setOpen(false)}>
               Close
             </button>
-          </ComposedModal>
+          </Component>
           <button data-testid="focusElem" ref={focusRef}>
             focus after close
           </button>
@@ -656,5 +739,152 @@ describe('ComposedModal', () => {
     expect(inputField).not.toHaveFocus();
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
     expect(onClose).toHaveBeenCalled();
+  });
+});
+
+describe('state', () => {
+  it('should set expected class when state is open', () => {
+    render(
+      <ComposedModal open>
+        <ModalHeader>Modal header</ModalHeader>
+        <ModalBody>This is the modal body content</ModalBody>
+      </ComposedModal>
+    );
+
+    expect(screen.getByText('Modal header')).toBeInTheDocument();
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+  });
+});
+
+describe('state with presence feature flag', () => {
+  it('should be present when state is open', () => {
+    render(<ComposedModalWithPresenceFeatureFlag open data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should not be present when open is false', () => {
+    render(
+      <ComposedModalWithPresenceFeatureFlag open={false} data-testid="modal" />
+    );
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should not be present when open is undefined', () => {
+    render(
+      <FeatureFlags enablePresence>
+        <ComposedModal data-testid="modal" />
+      </FeatureFlags>
+    );
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+});
+
+describe('state with presence context', () => {
+  it('should be present when state is open', () => {
+    render(<ComposedModalWithPresenceContext open data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should not be present when open is false', () => {
+    render(
+      <ComposedModalWithPresenceContext open={false} data-testid="modal" />
+    );
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should not be present when open is undefined', () => {
+    render(
+      <ComposedModalPresence>
+        <ComposedModal data-testid="modal" />
+      </ComposedModalPresence>
+    );
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should handle sibling and child modals exclusively', async () => {
+    const ModalExample = () => {
+      const [isSiblingOpen, setIsSiblingOpen] = useState(false);
+      const [isChildOpen, setIsChildOpen] = useState(false);
+
+      return (
+        <ComposedModalPresence open>
+          <ComposedModal data-testid="modal">
+            <ModalHeader>Modal Header</ModalHeader>
+            <ModalBody>
+              <button type="button" onClick={() => setIsSiblingOpen(true)}>
+                Launch sibling modal
+              </button>
+            </ModalBody>
+          </ComposedModal>
+          <ComposedModal
+            data-testid="sibling-modal"
+            open={isSiblingOpen}
+            onClose={() => setIsSiblingOpen(false)}>
+            <ModalHeader>Modal Header</ModalHeader>
+            <ModalBody>
+              <button type="button" onClick={() => setIsChildOpen(true)}>
+                Launch child modal
+              </button>
+              <ComposedModal
+                data-testid="child-modal"
+                open={isChildOpen}
+                onClose={() => setIsChildOpen(false)}>
+                <ModalHeader>Modal Header</ModalHeader>
+              </ComposedModal>
+            </ModalBody>
+          </ComposedModal>
+        </ComposedModalPresence>
+      );
+    };
+    render(<ModalExample />);
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
+
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: /Launch sibling modal/,
+      })
+    );
+
+    const siblingModal = screen.queryByTestId('sibling-modal');
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(siblingModal).toBeInTheDocument();
+
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: /Launch child modal/,
+      })
+    );
+
+    const childModal = screen.queryByTestId('child-modal');
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(siblingModal).toBeInTheDocument();
+    expect(childModal).toBeInTheDocument();
+
+    await userEvent.click(
+      within(childModal).getByRole('button', {
+        name: /Close/,
+      })
+    );
+
+    expect(childModal).not.toBeInTheDocument();
+    expect(siblingModal).toBeInTheDocument();
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+
+    await userEvent.click(
+      within(siblingModal).getByRole('button', {
+        name: /Close/,
+      })
+    );
+
+    expect(childModal).not.toBeInTheDocument();
+    expect(siblingModal).not.toBeInTheDocument();
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
   });
 });
