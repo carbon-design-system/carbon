@@ -1,2 +1,2 @@
-// eslint-disable-next-line no-unused-vars
+import { preview__FluidTimePicker as FluidTimePicker } from '@carbon/react';
 import { preview__FluidTimePicker } from '@carbon/react';

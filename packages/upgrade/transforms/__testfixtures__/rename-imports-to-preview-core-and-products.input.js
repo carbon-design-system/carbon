@@ -1,4 +1,2 @@
-// eslint-disable-next-line no-unused-vars
-import { unstable__FluidTimePicker } from '@carbon/react';
-// eslint-disable-next-line no-unused-vars
+import { unstable__FluidTimePicker as FluidTimePicker } from '@carbon/react';
 import { Tearsheet, SearchBar } from '@carbon/ibm-products';
