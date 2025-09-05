@@ -198,6 +198,7 @@ class CDSTextarea extends CDSTextInput {
     const counterClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: this.disabled,
+      [`${prefix}--text-area__label-counter`]: true,
     });
 
     const helperTextClasses = classMap({
