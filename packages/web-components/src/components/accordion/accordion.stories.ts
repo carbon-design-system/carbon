@@ -136,7 +136,7 @@ export const Controlled = {
       <style>
         ${styles}
       </style>
-      <cds-button-set class="controlled-accordion-btnset">
+      <cds-button-set>
         <cds-button
           class="controlled-accordion-btn"
           @click=${() => toggleItems(true)}>
