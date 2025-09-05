@@ -45,7 +45,9 @@ export const usePresenceContext = (
 
   const { isPresent, isExiting } = usePresence(presenceRef, open);
 
-  const isPresenceExclusive = useCallback((id: string) => {
+  const isPresenceExclusive = useCallback((id: string | null) => {
+    if (!id) return false;
+
     // return false if the presence context is occupied
     if (presenceIdRef.current && presenceIdRef.current !== id) return false;
 

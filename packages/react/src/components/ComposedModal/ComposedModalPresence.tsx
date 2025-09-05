@@ -15,6 +15,7 @@ import {
   usePresenceContext,
   type PresenceContext,
 } from '../../internal/usePresenceContext';
+import { useComposedModalState } from './useComposedModalState';
 
 export interface ComposedModalPresenceProps {
   /**
@@ -39,14 +40,19 @@ export const ComposedModalPresence = ({
   _autoEnablePresence: autoEnablePresence = true,
   children,
 }: PropsWithChildren<ComposedModalPresenceProps>) => {
-  const [isPresent, context] = usePresenceContext(open, presenceId);
+  // Since the modal could be used without an onClose callback, we need to be aware of the internal isOpen state
+  const modalState = useComposedModalState(open);
+  const [isOpen] = modalState;
+
+  const [isPresent, context] = usePresenceContext(isOpen, presenceId);
 
   const presenceContextValue = useMemo(
     () => ({
+      modalState,
       autoEnablePresence,
       ...context,
     }),
-    [autoEnablePresence, context]
+    [modalState, autoEnablePresence, context]
   );
 
   if (!isPresent) return null;
@@ -59,6 +65,7 @@ export const ComposedModalPresence = ({
 };
 
 interface ComposedModalPresenceContextProps extends PresenceContext {
+  modalState: ReturnType<typeof useComposedModalState>;
   autoEnablePresence: boolean;
 }
 

@@ -525,7 +525,13 @@ describe.each([
         expect(backgroundLayer).toHaveClass('is-visible');
 
         await userEvent.click(backgroundLayer);
-        expect(backgroundLayer).not.toHaveClass('is-visible');
+
+        if (isPresence) {
+          expect(backgroundLayer).not.toBeInTheDocument();
+        } else {
+          expect(backgroundLayer).not.toHaveClass('is-visible');
+        }
+
         expect(onClose).toHaveBeenCalled();
       });
       it('should not close on outside click when preventCloseOnClickOutside', async () => {
@@ -569,7 +575,13 @@ describe.each([
         expect(backgroundLayer).toHaveClass('is-visible');
 
         await userEvent.click(backgroundLayer);
-        expect(backgroundLayer).not.toHaveClass('is-visible');
+
+        if (isPresence) {
+          expect(backgroundLayer).not.toBeInTheDocument();
+        } else {
+          expect(backgroundLayer).not.toHaveClass('is-visible');
+        }
+
         expect(onClose).toHaveBeenCalled();
       });
     });

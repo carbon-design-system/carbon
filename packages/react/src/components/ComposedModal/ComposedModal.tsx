@@ -52,6 +52,7 @@ import {
   useExclusiveComposedModalPresenceContext,
 } from './ComposedModalPresence';
 import { useId } from '../../internal/useId';
+import { useComposedModalState } from './useComposedModalState';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -320,8 +321,8 @@ const ComposedModalDialog = React.forwardRef<
 
   // always mark as open when mounted with presence
   const open = externalOpen || enablePresence;
-  const [isOpen, setIsOpen] = useState<boolean>(!!open);
-  const [wasOpen, setWasOpen] = useState<boolean>(!!open);
+  const modalState = useComposedModalState(open);
+  const [isOpen, setIsOpen] = presenceContext?.modalState ?? modalState;
 
   const enableDialogElement = useFeatureFlag('enable-dialog-element');
   const focusTrapWithoutSentinels = useFeatureFlag(
@@ -335,16 +336,13 @@ const ComposedModalDialog = React.forwardRef<
       '`focusTrapWithoutSentinels` to have any effect.'
   );
 
-  // Keep track of modal open/close state
-  // and propagate it to the document.body
+  // Propagate open/close state to the document.body
   useEffect(() => {
-    if (!enableDialogElement && open !== wasOpen) {
-      setIsOpen(!!open);
-      setWasOpen(!!open);
+    if (!enableDialogElement) {
       toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
     }
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-  }, [open, wasOpen, prefix]);
+  }, [open, prefix]);
   // Remove the document.body className on unmount
   useEffect(() => {
     if (!enableDialogElement) {
