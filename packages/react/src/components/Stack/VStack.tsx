@@ -9,7 +9,7 @@ import React, { forwardRef } from 'react';
 
 import { Stack, StackProps } from './Stack';
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const VStack = forwardRef<HTMLElement, StackProps>((props, ref) => {
   return <Stack {...props} ref={ref} orientation="vertical" />;
 });

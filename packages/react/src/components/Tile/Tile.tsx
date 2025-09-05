@@ -12,7 +12,7 @@ import React, {
   useRef,
   useState,
   type ButtonHTMLAttributes,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   type ChangeEvent,
   type HTMLAttributes,
   type KeyboardEvent,
@@ -457,7 +457,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   value?: string | number;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const SelectableTile = React.forwardRef<
   HTMLDivElement,
   SelectableTileProps
