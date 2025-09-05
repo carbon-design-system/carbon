@@ -31,6 +31,18 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
    * supports the following: `sm` & `md` (default: 'md')
    */
   size?: 'sm' | 'md';
+
+  /**
+   * Optional prop to override the default separator
+   * between breadcrumb items (default: `'/'`)
+   */
+  separator?: string;
+}
+
+function escapeSpecialCharacters(value: string): string {
+  return value
+    .replace(/\\/g, '\\\\') // escape backslashes
+    .replace(/"/g, '\\"'); // escape double quotes
 }
 
 const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>((props, ref) => {
@@ -40,6 +52,7 @@ const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>((props, ref) => {
     className: customClassNameNav,
     noTrailingSlash,
     size,
+    separator,
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -48,12 +61,18 @@ const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>((props, ref) => {
     [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,
     [`${prefix}--breadcrumb--sm`]: size === 'sm',
   });
+  const customBreadcrumbStyle: React.CSSProperties = separator
+    ? {
+        ['--breadcrumb-separator' as any]: `"${escapeSpecialCharacters(separator)}"`,
+      }
+    : {};
 
   return (
     <nav
       className={customClassNameNav}
       aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}
       ref={ref}
+      style={customBreadcrumbStyle}
       {...rest}>
       <ol className={className}>{children}</ol>
     </nav>
@@ -86,6 +105,12 @@ Breadcrumb.propTypes = {
    * Specify the size of the Breadcrumb. Currently supports the following:
    */
   size: PropTypes.oneOf(['sm', 'md']),
+
+  /**
+   * Optional prop to override the default separator
+   * between breadcrumb items (default: `'/'`)
+   */
+  separator: PropTypes.string,
 };
 
 export default Breadcrumb;
