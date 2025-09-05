@@ -1015,7 +1015,7 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-export interface LabelProps {
+interface LabelProps {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
@@ -1040,21 +1040,13 @@ const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   return null;
 };
 
-// TODO: `Label` isn't exported. Why does it have `propTypes`? I have the same
-// question for the `HelperText` component too.
-Label.propTypes = {
-  disabled: PropTypes.bool,
-  hideLabel: PropTypes.bool,
-  id: PropTypes.string,
-  label: PropTypes.node,
-};
-
-export interface HelperTextProps {
+interface HelperTextProps {
   id?: string;
   description?: ReactNode;
   disabled?: boolean;
 }
-function HelperText({ disabled, description, id }: HelperTextProps) {
+
+const HelperText = ({ disabled, description, id }: HelperTextProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -1068,12 +1060,6 @@ function HelperText({ disabled, description, id }: HelperTextProps) {
     );
   }
   return null;
-}
-
-HelperText.propTypes = {
-  description: PropTypes.node,
-  disabled: PropTypes.bool,
-  id: PropTypes.string,
 };
 
 /**
