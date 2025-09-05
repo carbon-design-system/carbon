@@ -26,7 +26,7 @@
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: 0 convert.to-rem(24px);
+    grid-gap: 0 convert.to-rem(8px);
     grid-template: auto / auto min-content;
 
     &:has(.#{$prefix}--label.#{$prefix}--visually-hidden) {
@@ -44,7 +44,7 @@
     }
 
     .#{$prefix}--form-requirement {
-      grid-column: 2;
+      grid-column: 3;
     }
   }
 
