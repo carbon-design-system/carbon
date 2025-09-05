@@ -99,6 +99,7 @@ export { default as CDSOverflowMenu } from './components/overflow-menu/overflow-
 export { default as CDSOverflowMenuBody } from './components/overflow-menu/overflow-menu-body';
 export { default as CDSOverflowMenuItem } from './components/overflow-menu/overflow-menu-item';
 export { default as CDSPagination } from './components/pagination/pagination';
+export { default as CDSPaginationNav } from './components/pagination-nav/pagination-nav';
 export { default as CDSPopover } from './components/popover/popover';
 export { default as CDSPopoverContent } from './components/popover/popover-content';
 export { default as CDSProgressBar } from './components/progress-bar/progress-bar';
