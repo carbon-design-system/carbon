@@ -469,6 +469,21 @@ Map {
       "className": {
         "type": "string",
       },
+      "items": {
+        "type": "number",
+      },
+      "noTrailingSlash": {
+        "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Button" => {
