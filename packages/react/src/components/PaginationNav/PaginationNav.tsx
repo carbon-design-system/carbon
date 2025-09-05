@@ -19,6 +19,7 @@ import { TranslateWithId } from '../../types/common';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { clamp } from '../../internal/clamp';
+import { PopoverAlignment } from '../Popover';
 
 type TooltipAlignment = 'start' | 'center' | 'end';
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -121,10 +122,10 @@ function DirectionButton({
 }: DirectionButtonProps) {
   const prefix = usePrefix();
 
-  const align =
+  const align: PopoverAlignment =
     tooltipAlignment === 'center'
-      ? tooltipPosition
-      : `${tooltipPosition}-${tooltipAlignment}`;
+      ? (tooltipPosition as PopoverAlignment)
+      : (`${tooltipPosition}-${tooltipAlignment}` as PopoverAlignment);
 
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
