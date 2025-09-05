@@ -9,8 +9,8 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable__FluidDropdown as FluidDropdown,
-  unstable__FluidDropdownSkeleton as FluidDropdownSkeleton,
+  preview__FluidDropdown as FluidDropdown,
+  preview__FluidDropdownSkeleton as FluidDropdownSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 

@@ -14,7 +14,7 @@ test.describe('@avt PageHeader', () => {
   test.skip('@avt-default-state content', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader.Content',
-      id: 'patterns-unstable-pageheader--content',
+      id: 'patterns-preview-pageheader--content',
       globals: {
         theme: 'white',
       },

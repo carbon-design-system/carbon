@@ -93,4 +93,4 @@ changes dynamically, to update the overflow with the new sizes.
 ## Example implementation
 
 For example implementation, please refer to the example code in
-[Storybook](https://ibm-products-web-components.netlify.app/?path=/docs/experimental-utilities-overflowhandler--docs).
+[Storybook](https://ibm-products-web-components.netlify.app/).
