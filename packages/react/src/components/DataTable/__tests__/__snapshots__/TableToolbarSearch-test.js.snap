@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`TableToolbarSearch renders as expected - Component API should render 1`] = `
 <div>
@@ -39,9 +39,8 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
       class="cds--search-input"
       id="custom-id"
       placeholder="Filter table"
-      role="searchbox"
       tabindex="0"
-      type="text"
+      type="search"
       value=""
     />
     <button

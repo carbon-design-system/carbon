@@ -29,7 +29,7 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 import { toggleClass } from '../../tools/toggleClass';
-import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
+import { requiredIfGivenPropIsTruthy } from '../../prop-types/requiredIfGivenPropIsTruthy';
 import {
   elementOrParentIsFloatingMenu,
   wrapFocus,
