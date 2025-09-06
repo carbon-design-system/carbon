@@ -35,10 +35,13 @@ export default (config: DatePickerAppendToPluginConfig): Plugin =>
         _positionElement: positionElement,
       } = fp;
       const { appendTo } = fpConfig;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const { top: containerTop } = appendTo!.getBoundingClientRect();
       const { bottom: refBottom } = positionElement.getBoundingClientRect();
       const isRtl =
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         appendTo!
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           .ownerDocument!.defaultView!.getComputedStyle(appendTo!)
           .getPropertyValue('direction') === 'rtl';
       calendarContainer.style.top = `${refBottom - containerTop}px`;

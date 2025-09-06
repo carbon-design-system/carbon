@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -73,6 +73,7 @@ export const Default = (args) => (
       getSelectionProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -94,9 +95,8 @@ export const Default = (args) => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
+            {rows.map((row) => (
               <TableRow
-                key={i}
                 {...getRowProps({ row })}
                 onClick={(evt) => {
                   action('TableRow onClick')(evt);
@@ -106,7 +106,9 @@ export const Default = (args) => (
                   onChange={action('TableSelectRow - onChange')}
                 />
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -129,6 +131,7 @@ export const WithRadioSelection = (args) => (
       getSelectionProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -146,11 +149,13 @@ export const WithRadioSelection = (args) => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -173,6 +178,7 @@ export const WithSelectionAndSorting = (args) => (
       getSelectionProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -190,11 +196,13 @@ export const WithSelectionAndSorting = (args) => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}

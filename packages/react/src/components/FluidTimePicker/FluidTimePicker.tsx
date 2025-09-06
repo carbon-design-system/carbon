@@ -59,91 +59,96 @@ export interface FluidTimePickerProps extends FluidTextInputProps {
   readOnly?: boolean;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidTimePicker = React.forwardRef<
   HTMLInputElement,
   FluidTimePickerProps
->(function FluidTimePicker(
-  {
-    className,
-    children,
-    disabled,
-    invalid,
-    invalidText,
-    warn,
-    warnText,
-    readOnly,
-    ...other
-  },
-  ref
-) {
-  const prefix = usePrefix();
-  const classNames = classnames(className, {
-    [`${prefix}--time-picker--fluid`]: true,
-    [`${prefix}--time-picker--equal-width`]:
-      React.Children.toArray(children).length !== 2,
-    [`${prefix}--time-picker--fluid--disabled`]: disabled,
-    [`${prefix}--time-picker--fluid--invalid`]: invalid,
-    [`${prefix}--time-picker--fluid--warning`]: warn,
-  });
+>(
+  (
+    {
+      className,
+      children,
+      disabled,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+      readOnly,
+      ...other
+    },
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const classNames = classnames(className, {
+      [`${prefix}--time-picker--fluid`]: true,
+      [`${prefix}--time-picker--equal-width`]:
+        React.Children.toArray(children).length !== 2,
+      [`${prefix}--time-picker--fluid--disabled`]: disabled,
+      [`${prefix}--time-picker--fluid--invalid`]: invalid,
+      [`${prefix}--time-picker--fluid--warning`]: warn,
+    });
 
-  const errorText = () => {
-    if (invalid) {
-      return invalidText;
-    }
-    if (warn) {
-      return warnText;
-    }
-  };
+    const errorText = () => {
+      if (invalid) {
+        return invalidText;
+      }
+      if (warn) {
+        return warnText;
+      }
+    };
 
-  const error = invalid || warn;
+    const error = invalid || warn;
 
-  const childrenWithProps = () => {
-    if (disabled) {
-      return React.Children.toArray(children).map((child) =>
-        React.cloneElement(child as React.ReactElement<any>, {
-          disabled: true,
-        })
-      );
-    }
-    if (readOnly) {
-      return React.Children.toArray(children).map((child) =>
-        React.cloneElement(child as React.ReactElement<any>, {
-          readOnly: true,
-        })
-      );
-    }
-    return children;
-  };
+    const childrenWithProps = () => {
+      if (disabled) {
+        return React.Children.toArray(children).map((child) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          React.cloneElement(child as React.ReactElement<any>, {
+            disabled: true,
+          })
+        );
+      }
+      if (readOnly) {
+        return React.Children.toArray(children).map((child) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          React.cloneElement(child as React.ReactElement<any>, {
+            readOnly: true,
+          })
+        );
+      }
+      return children;
+    };
 
-  return (
-    <div className={classNames}>
-      <div className={`${prefix}--time-picker--fluid__wrapper`}>
-        <div className={`${prefix}--time-picker__input`}>
-          <FluidTextInput
-            ref={ref}
-            readOnly={readOnly}
-            disabled={disabled}
-            {...other}
-          />
+    return (
+      <div className={classNames}>
+        <div className={`${prefix}--time-picker--fluid__wrapper`}>
+          <div className={`${prefix}--time-picker__input`}>
+            <FluidTextInput
+              ref={ref}
+              readOnly={readOnly}
+              disabled={disabled}
+              {...other}
+            />
+          </div>
+          {childrenWithProps()}
         </div>
-        {childrenWithProps()}
+        {error && <hr className={`${prefix}--time-picker__divider`} />}
+        {error && (
+          <div className={`${prefix}--form-requirement`}>{errorText()}</div>
+        )}
+        {error && invalid ? (
+          <WarningFilled
+            className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--invalid`}
+          />
+        ) : (
+          <WarningAltFilled
+            className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--warn`}
+          />
+        )}
       </div>
-      {error && <hr className={`${prefix}--time-picker__divider`} />}
-      {error && (
-        <div className={`${prefix}--form-requirement`}>{errorText()}</div>
-      )}
-      {error && invalid ? (
-        <WarningFilled
-          className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--invalid`}
-        />
-      ) : (
-        <WarningAltFilled
-          className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--warn`}
-        />
-      )}
-    </div>
-  );
-});
+    );
+  }
+);
 
 FluidTimePicker.propTypes = {
   /**

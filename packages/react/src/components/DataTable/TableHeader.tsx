@@ -19,11 +19,10 @@ import {
   ArrowsVertical as Arrows,
 } from '@carbon/icons-react';
 import classNames from 'classnames';
-import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { TranslateWithId } from '../../types/common';
-import { DataTableSortState } from './state/sortStates';
+import { sortStates, type DataTableSortState } from './state/sortStates';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
@@ -325,6 +324,7 @@ TableHeader.propTypes = {
   translateWithId: PropTypes.func,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 (TableHeader as any).translationKeys = Object.values(translationKeys);
 
 TableHeader.displayName = 'TableHeader';

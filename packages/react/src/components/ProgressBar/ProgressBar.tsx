@@ -118,17 +118,13 @@ function ProgressBar({
   > | null = null;
 
   if (isError) {
-    StatusIcon = React.forwardRef(function ErrorFilled16(
-      props,
-      ref: React.Ref<ReactSVGElement>
-    ) {
+    // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+    StatusIcon = React.forwardRef((props, ref: React.Ref<ReactSVGElement>) => {
       return <ErrorFilled ref={ref} size={16} {...props} />;
     });
   } else if (isFinished) {
-    StatusIcon = React.forwardRef(function CheckmarkFilled16(
-      props,
-      ref: React.Ref<ReactSVGElement>
-    ) {
+    // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+    StatusIcon = React.forwardRef((props, ref: React.Ref<ReactSVGElement>) => {
       return <CheckmarkFilled ref={ref} size={16} {...props} />;
     });
   }

@@ -50,5 +50,6 @@ export interface GridComponent {
     props: GridProps<T>
   ): React.ReactElement | null;
   displayName?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   propTypes?: PropTypes.WeakValidationMap<GridProps<any>>;
 }

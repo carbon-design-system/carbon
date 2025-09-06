@@ -15,6 +15,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import '../AILabel/ailabel-story.scss';
 import mdx from './Tag.mdx';
+import './story.scss';
 
 export default {
   title: 'Components/Tag',

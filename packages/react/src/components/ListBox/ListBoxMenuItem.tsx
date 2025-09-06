@@ -11,7 +11,6 @@ import React, {
   useEffect,
   useRef,
   useState,
-  type ForwardedRef,
   type HTMLAttributes,
   type MutableRefObject,
   type ReactNode,
@@ -33,6 +32,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
  */
 const useIsTruncated = <T extends HTMLElement>(
   forwardedRef?: Ref<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   deps: any[] = []
 ) => {
   const localRef = useRef<T>(null);
@@ -50,6 +50,7 @@ const useIsTruncated = <T extends HTMLElement>(
 
       setIsTruncated(offsetWidth < scrollWidth);
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [localRef, ...deps]);
 
   return { isTruncated, ref: mergedRef };
