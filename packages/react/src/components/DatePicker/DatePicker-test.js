@@ -301,8 +301,8 @@ describe('DatePicker', () => {
     warn.mockRestore();
   });
 
-  it('should show only invalid text when both invalid and warn are true', () => {
-    const { container } = render(
+  it('should show only invalid text when both invalid and warn are true in fluid mode', () => {
+    render(
       <FormContext.Provider value={{ isFluid: true }}>
         <DatePicker
           datePickerType="single"
@@ -322,8 +322,8 @@ describe('DatePicker', () => {
     expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
   });
 
-  it('should show only warning text when warn is true and invalid is false', () => {
-    const { container } = render(
+  it('should show only warning text when warn is true and invalid is false in fluid mode', () => {
+    render(
       <FormContext.Provider value={{ isFluid: true }}>
         <DatePicker
           datePickerType="single"
@@ -339,9 +339,29 @@ describe('DatePicker', () => {
         </DatePicker>
       </FormContext.Provider>
     );
-
     expect(screen.getByText('Warning message')).toBeInTheDocument();
     expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+  });
+
+  it('should not show any error text when both invalid and warn are false in fluid mode', () => {
+    render(
+      <FormContext.Provider value={{ isFluid: true }}>
+        <DatePicker
+          datePickerType="single"
+          invalid={false}
+          invalidText="Invalid date"
+          warn={false}
+          warnText="Warning message">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+          />
+        </DatePicker>
+      </FormContext.Provider>
+    );
+    expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
   });
 });
 
@@ -886,8 +906,176 @@ describe('Range date picker', () => {
     // close on pressing SHIFT+TAB from start date input
     await userEvent.tab();
     expect(startInput).toHaveFocus();
+    await userEvent.tab();
+    expect(document.activeElement).toHaveClass(`flatpickr-day`);
+    await userEvent.tab({ shift: true });
+    expect(startInput).toHaveFocus();
     await userEvent.tab({ shift: true });
     expect(document.body).toHaveFocus();
     expect(onClose).toHaveBeenCalledTimes(2);
+  });
+  it('should log a one-time warning when `value` prop is passed directly to DatePickerInput', () => {
+    const consoleWarnSpy = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
+
+    render(
+      <DatePickerInput
+        id="test-input-1"
+        labelText="Test Label 1"
+        placeholder="mm/dd/yyyy"
+        value="2023-01-01"
+      />
+    );
+    expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+    consoleWarnSpy.mockRestore();
+  });
+});
+
+describe('Date picker with locale', () => {
+  it('sets the locale when it is passed as a prop', () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale="es"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByText('Enero')).toBeInTheDocument();
+  });
+
+  it('should use default locale if one is not passed as a prop', () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByText('January')).toBeInTheDocument();
+  });
+});
+
+describe('Date picker with minDate and maxDate', () => {
+  it('should respect minDate', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        minDate="01/01/2018"
+        maxDate="01/03/2018"
+        value="01/01/2018">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-min-max"
+        />
+      </DatePicker>
+    );
+    // eslint-disable-next-line testing-library/no-node-access
+    const belowMinDate = document.querySelector(
+      '[aria-label="December 31, 2017"]'
+    );
+    await userEvent.click(screen.getByTestId('input-min-max'));
+    await userEvent.click(belowMinDate);
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/01/2018'
+    );
+  });
+
+  it('should respect maxDate', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        minDate="01/01/2018"
+        maxDate="01/03/2018"
+        value="01/01/2018">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-min-max-2"
+        />
+      </DatePicker>
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const aboveMaxDate = document.querySelector(
+      '[aria-label="January 4, 2018"]'
+    );
+
+    await userEvent.click(screen.getByTestId('input-min-max-2'));
+    await userEvent.click(aboveMaxDate);
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/01/2018'
+    );
+  });
+
+  it('should not have "console.error" being created', () => {
+    const mockConsoleError = jest.spyOn(console, 'error');
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="range"
+        minDate="01/01/2018"
+        maxDate="01/30/2018">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    expect(mockConsoleError).not.toHaveBeenCalled();
+    jest.restoreAllMocks();
+  });
+
+  it('should append the calendar to a custom container using the `appendTo` prop', async () => {
+    const customContainer = document.createElement('div');
+
+    document.body.appendChild(customContainer);
+
+    render(
+      <DatePicker
+        datePickerType="single"
+        appendTo={customContainer}
+        value="01/01/2025">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Label"
+          data-testid="date-picker-1"
+        />
+      </DatePicker>
+    );
+
+    const input = screen.getByTestId('date-picker-1');
+
+    expect(screen.getByRole('application').parentElement).toBe(customContainer);
+
+    await userEvent.click(input);
+
+    expect(screen.getByRole('application').parentElement).toBe(customContainer);
+
+    document.body.removeChild(customContainer);
   });
 });
