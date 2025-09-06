@@ -109,14 +109,14 @@ class RadioGroupManager {
         const comparisonResult = (
           lhs as ManagedRadioButtonDelegate
         ).compareDocumentPosition(rhs as ManagedRadioButtonDelegate);
-        // eslint-disable-next-line no-bitwise
+
         if (
           comparisonResult & Node.DOCUMENT_POSITION_FOLLOWING ||
           comparisonResult & Node.DOCUMENT_POSITION_CONTAINED_BY
         ) {
           return -1;
         }
-        // eslint-disable-next-line no-bitwise
+
         if (
           comparisonResult & Node.DOCUMENT_POSITION_PRECEDING ||
           comparisonResult & Node.DOCUMENT_POSITION_CONTAINS

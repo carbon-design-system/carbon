@@ -26,6 +26,7 @@ export interface FluidSelectProps {
   /**
    * Optionally provide the default value of the `<select>`
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   defaultValue?: any;
 
   /**
@@ -76,8 +77,9 @@ export interface FluidSelectProps {
   readOnly?: boolean;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const FluidSelect = React.forwardRef<HTMLSelectElement, FluidSelectProps>(
-  function FluidSelect({ className, children, ...other }, ref) {
+  ({ className, children, ...other }, ref) => {
     const prefix = usePrefix();
     const classNames = classnames(`${prefix}--select--fluid`, className);
 

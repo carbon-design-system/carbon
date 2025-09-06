@@ -47,6 +47,7 @@ export interface HeaderMenuProps {
   /**
    * Provide a custom ref handler for the menu button
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   focusRef?: Ref<any>;
 
   /**
@@ -221,6 +222,7 @@ export const HeaderMenu = frFn((props, ref) => {
    */
   const renderMenuItem = (item: ReactNode, index: number): ReactNode => {
     if (isValidElement(item)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       return cloneElement(item as ReactElement<any>, {
         ref: handleItemRef(index),
       });
@@ -254,15 +256,15 @@ export const HeaderMenu = frFn((props, ref) => {
   // - aria-expanded is on their example node with role="menuitem"
   // - href can be set to javascript:void(0), ideally this will be a button
   return (
-    <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
+    <li // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
       {...rest}
       className={itemClassName}
       onKeyDown={composeEventHandlers([onKeyDown, handleMenuClose])}
       onClick={composeEventHandlers([onClick, handleOnClick])}
       onBlur={composeEventHandlers([onBlur, handleOnBlur])}
       ref={ref}>
-      <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
-        aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
+      <a // eslint-disable-line jsx-a11y/anchor-is-valid
+        aria-haspopup="menu"
         aria-expanded={expanded}
         className={linkClassName}
         href="#"
