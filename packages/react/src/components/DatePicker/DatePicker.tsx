@@ -1015,9 +1015,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           <div className={`${prefix}--form-requirement`}>{invalidText}</div>
         </>
       );
-    }
-
-    if (warn && !invalid) {
+    } else if (warn) {
       fluidError = (
         <>
           <WarningAltFilled
