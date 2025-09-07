@@ -218,7 +218,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    */
   @property({ attribute: false })
   formatLabelText = ({ count }) =>
-    `Page number, of ${count} page${count <= 1 ? '' : 's'}`;
+    `Page of ${count} page${count <= 1 ? '' : 's'}`;
 
   /**
    * The formatter, used with determinate the total pages. Should be changed upon the locale the UI is rendered with.
@@ -428,31 +428,20 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         >
       </div>
       <div class="${prefix}--pagination__right">
-        <label for="select" class="${prefix}--label ${prefix}--visually-hidden">
-          ${formatLabelText({ count: totalPages })}
-        </label>
+        ${(!pagesUnknown || totalItems) &&
+        html`
+          <label
+            for="select"
+            class="${prefix}--label ${prefix}--visually-hidden">
+            ${formatLabelText({ count: totalPages })}
+          </label>
+        `}
         ${pagesUnknown || !totalItems
           ? html`
               <span
-                class="${prefix}--pagination__text ${prefix}--pagination__page-text"
-                >${formatSupplementalText({ count: totalPages })}</span
+                class="${prefix}--pagination__text ${prefix}--pagination__page-text ${prefix}--pagination__unknown-pages-text"
+                >${formatSupplementalText({ count: totalPages })} ${page}</span
               >
-
-              <cds-select
-                ?disabled=${disabled || pageInputDisabled}
-                id="pages-select"
-                pagination
-                size="${size}"
-                inline
-                value="${page}">
-                ${Array.from(new Array(totalPagesSafe)).map(
-                  (_item, index) => html`
-                    <cds-select-item value="${index + 1}">
-                      ${index + 1}
-                    </cds-select-item>
-                  `
-                )}
-              </cds-select>
             `
           : html`
               <cds-select
@@ -464,7 +453,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 value="${page}">
                 ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
-                    <cds-select-item value="${index + 1}">
+                    <cds-select-item
+                      value="${index + 1}"
+                      ?selected=${page === index + 1}>
                       ${index + 1}
                     </cds-select-item>
                   `
