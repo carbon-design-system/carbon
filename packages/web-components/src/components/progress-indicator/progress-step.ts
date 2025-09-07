@@ -77,7 +77,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
   /**
    * The progress state.
    */
-  @property()
+  @property({ reflect: true })
   state = PROGRESS_STEP_STAT.INCOMPLETE;
 
   /**
@@ -90,8 +90,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
 
   /**
    * Set by the parent indicator. If true, the step is interactive unless it is
-   * current or disabled. Controlled internally by the parent indicator to enable
-   * click events that trigger a `change` event.
+   * current or disabled. This mirrors React's "onChange prop exists" semantics.
    */
   @property({ type: Boolean })
   clickable = false;
@@ -184,11 +183,21 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     const svgLabel = iconLabel || description;
     const optionalLabel = secondaryLabel || secondaryLabelText;
 
-    // Unclickable if current OR disabled (matches React behavior)
-    // const isUnclickable =
-    //   state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
+    // Unclickable if current OR disabled OR no onChange upstream (to match React)
+    const isUnclickable =
+      state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
+
     return html`
-      <div class="${prefix}--progress-step-button" tabindex="0">
+      <div
+        class="${prefix}--progress-step-button ${isUnclickable
+          ? `${prefix}--progress-step-button--unclickable`
+          : ''}"
+        tabindex="${isUnclickable ? -1 : 0}"
+        @click=${this._fireStepClick}
+        @keydown=${this._onKeyDown}
+        role="button"
+        aria-disabled="${String(isUnclickable)}"
+        title="${label}">
         ${iconLoader(icons[state], {
           class:
             state === PROGRESS_STEP_STAT.INVALID

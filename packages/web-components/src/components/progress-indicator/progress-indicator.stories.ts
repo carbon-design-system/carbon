@@ -78,10 +78,12 @@ export const Default = {
 
 export const Interactive = {
   render: () => html`
-    <cds-progress-indicator current-index="1" @change=${() => alert('Clicked')}>
+    <cds-progress-indicator
+      current-index="1"
+      .onChange=${() => alert('Clicked')}>
       <cds-progress-step
         label="Click me"
-        description="Step 1: Register a change event"
+        description="Step 1: Register an onChange event"
         complete></cds-progress-step>
       <cds-progress-step
         label="Really long label"
