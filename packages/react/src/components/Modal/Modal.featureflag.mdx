@@ -61,3 +61,36 @@ To enable the flag, use the `FeatureFlags` component and set the prop:
   <Modal ... />
 </FeatureFlags>
 ```
+
+## `enable-presence`
+
+`Modal` supports the `enable-presence` feature flag. When enabled,
+Modal will not mount until it's opened and unmount when it's closed.
+This helps to stay in sync with the React lifecycle.
+
+This means that:
+
+- The DOM no longer includes `Modal` and its children in the close state
+- `Modal`, all of its children and their hooks will mount/unmount on open/close
+- Enter & exit animations change from CSS transitions to CSS animations
+
+Note: Only `Modal` and its children are unmounted/mounted.
+Use `ModalPresence` to shift the presence boundary to a higher level, if necessary.
+
+### Enabling the flag
+
+To enable the flag, use the `FeatureFlags` component and set the prop:
+
+```js
+<FeatureFlags enablePresence>
+  <ComposedModal ... />
+</FeatureFlags>
+```
+
+Or auto opt in by using `ModalPresence` to shift the presence boundary to a different level:
+
+```js
+<ModalPresence open={open}>
+  <ComposedModal ... />
+</ModalPresence>
+```
