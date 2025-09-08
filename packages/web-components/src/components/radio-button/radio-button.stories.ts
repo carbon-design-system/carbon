@@ -238,9 +238,9 @@ export const WithAILabel = {
         name="radio-group"
         value="radio-1"
         orientation="vertical">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
+        <cds-ai-label alignment="bottom-left"
+          >${content}${actions}</cds-ai-label
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-1"></cds-radio-button>
@@ -258,14 +258,14 @@ export const WithAILabel = {
         value="radio-4"
         orientation="vertical">
         <cds-radio-button label-text="Radio button label" value="radio-4">
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}
-          </cds-ai-label>
+          <cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          >
         </cds-radio-button>
         <cds-radio-button label-text="Radio button label" value="radio-5">
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}
-          </cds-ai-label>
+          <cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          >
         </cds-radio-button>
         <cds-radio-button
           label-text="Radio button label"
@@ -278,14 +278,14 @@ export const WithAILabel = {
         value="radio-7"
         orientation="vertical">
         <cds-radio-button label-text="Radio button label" value="radio-7">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
+          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          >
         </cds-radio-button>
         <cds-radio-button label-text="Radio button label" value="radio-8">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
+          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          >
         </cds-radio-button>
         <cds-radio-button
           label-text="Radio button label"
