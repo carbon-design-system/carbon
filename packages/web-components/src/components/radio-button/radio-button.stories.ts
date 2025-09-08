@@ -257,16 +257,16 @@ export const WithAILabel = {
         name="radio-group-2"
         value="radio-4"
         orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-4">
-          <cds-ai-label alignment="bottom-left"
+        <cds-radio-button label-text="Radio button label" value="radio-4"
+          ><cds-ai-label alignment="bottom-left"
             >${content}${actions}</cds-ai-label
-          >
-        </cds-radio-button>
-        <cds-radio-button label-text="Radio button label" value="radio-5">
-          <cds-ai-label alignment="bottom-left"
+          ></cds-radio-button
+        >
+        <cds-radio-button label-text="Radio button label" value="radio-5"
+          ><cds-ai-label alignment="bottom-left"
             >${content}${actions}</cds-ai-label
-          >
-        </cds-radio-button>
+          ></cds-radio-button
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-6"></cds-radio-button>
@@ -277,16 +277,16 @@ export const WithAILabel = {
         name="radio-group-3"
         value="radio-7"
         orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-7">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+        <cds-radio-button label-text="Radio button label" value="radio-7"
+          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
             >${content}${actions}</cds-ai-label
-          >
-        </cds-radio-button>
-        <cds-radio-button label-text="Radio button label" value="radio-8">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+          ></cds-radio-button
+        >
+        <cds-radio-button label-text="Radio button label" value="radio-8"
+          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
             >${content}${actions}</cds-ai-label
-          >
-        </cds-radio-button>
+          ></cds-radio-button
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-9"></cds-radio-button>
