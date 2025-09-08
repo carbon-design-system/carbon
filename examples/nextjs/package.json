@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@carbon/react": "^1.90.0",
-    "next": "15.3.5",
+    "next": "15.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

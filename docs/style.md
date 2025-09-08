@@ -74,7 +74,7 @@ row before the </tbody></table> line.
     - [Hooks that use a callback](#hooks-that-use-a-callback)
   - [Style](#style-1)
     - [Naming event handlers](#naming-event-handlers)
-    - [Naming experimental code](#naming-experimental-code)
+    - [Naming preview code](#naming-preview-code)
   - [Testing](#testing)
     - [Strategy](#strategy)
     - [Organization](#organization)
@@ -630,9 +630,9 @@ shorthand. If that name is already being used in a given scope, which often
 happens if the component supports a prop `onClick`, then we prefer to specify
 the function as `handleOnClick`.
 
-#### Naming experimental code
+#### Naming preview code
 
-See [Experimental Code](./experimental-code.md#naming-experimental-code);
+See [preview Code](./preview-code.md#naming-preview-code);
 
 ### Testing
 
@@ -845,8 +845,8 @@ Authoring component styles under a mixin allows the design system to:
 
 - Control when the CSS for accordion gets emitted, or not emitted, from the
   library
-- Allows us to author experimental or future styles in a separate mixin and
-  toggle its inclusion through feature flags
+- Allows us to author preview or future styles in a separate mixin and toggle
+  its inclusion through feature flags
 - Could allow developers consuming the design system to control when styles get
   emitted
 
