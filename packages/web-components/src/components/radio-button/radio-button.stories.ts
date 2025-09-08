@@ -72,7 +72,7 @@ const args = {
   labelPosition: RADIO_BUTTON_LABEL_POSITION.RIGHT,
   orientation: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
   name: 'radio-group',
-  value: '',
+  value: 'radio-2',
   warn: false,
   warnText: 'Please notice the warning',
   checked: false,

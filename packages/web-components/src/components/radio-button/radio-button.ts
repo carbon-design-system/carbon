@@ -397,6 +397,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
+
+    if (changedProperties.has('invalid') || changedProperties.has('readOnly')) {
+      if (this.readOnly) {
+        this.invalid = false;
+      }
+    }
   }
 
   render() {
