@@ -3450,6 +3450,16 @@
     - race car
     - speed
     - sports
+- name: f1--grid
+  friendly_name: F1 grid
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - race grid
+    - sports
 - name: f1--race
   friendly_name: F1 race
   aliases:
@@ -3458,16 +3468,6 @@
     - racing
     - race car
     - speed
-    - sports
-- name: f1--race-grid
-  friendly_name: F1 race grid
-  aliases:
-    - f1
-    - Formula One
-    - racing
-    - race car
-    - speed
-    - race grid
     - sports
 - name: f1--steering-wheel
   friendly_name: F1 steering wheel

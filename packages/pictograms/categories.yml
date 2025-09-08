@@ -1238,8 +1238,8 @@ categories:
     members:
       - f1--car--01
       - f1--car--02
+      - f1--grid
       - f1--race
-      - f1--race--grid
       - f1--steering-wheel
       - f1--pit-stop-traffic-light
       - football
