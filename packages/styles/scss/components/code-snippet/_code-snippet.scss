@@ -234,15 +234,15 @@ $copy-btn-feedback: $background-inverse !default;
     padding-inline-end: 0;
   }
 
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow::after {
-    position: absolute;
-    background-image: linear-gradient(to right, transparent, $layer);
-    block-size: 100%;
-    content: '';
-    inline-size: convert.to-rem(16px);
-    inset-block-start: 0;
-    inset-inline-end: $spacing-05;
-  }
+  // .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow::after {
+  //   position: absolute;
+  //   background-image: linear-gradient(to right, transparent, $layer);
+  //   block-size: 100%;
+  //   content: '';
+  //   inline-size: convert.to-rem(16px);
+  //   inset-block-start: 0;
+  //   inset-inline-end: $spacing-05;
+  // }
 
   [dir='rtl']
     .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow::after {
