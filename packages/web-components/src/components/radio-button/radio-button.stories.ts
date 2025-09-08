@@ -157,7 +157,7 @@ export const Default = {
       labelPosition,
       orientation,
       name,
-      value,
+      value = 'radio-2',
       warn,
       warnText,
       onChange,
