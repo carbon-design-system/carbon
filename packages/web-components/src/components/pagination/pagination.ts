@@ -86,7 +86,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   }
 
   /**
-   * Calculates the start value based on page, pageSize, and totalItems
+   * Calculates the start value based on `page`, `pageSize`, and `totalItems`
    */
   private _calculateStart(
     page: number,
@@ -185,7 +185,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     ) {
       this._handleUserInitiatedChangeStart(newStart);
     }
-    // reset focus to previous button if it reaches the end and pagesUnkonw is not true
+    // reset focus to previous button if it reaches the end and `pagesUnknown` is not true
     if (!pagesUnknown && this.page === this.totalPages) {
       const { selectorPreviousButton } = this
         .constructor as typeof CDSPagination;
