@@ -8,7 +8,6 @@
 import { html } from 'lit';
 import './index';
 import '../select/index';
-import { prefix } from '../../globals/settings';
 import { PAGINATION_SIZE } from './defs';
 
 const sizes = {
@@ -86,12 +85,6 @@ const argTypes = {
     control: 'number',
     description: 'The total number of items.',
   },
-  onChangedCurrent: {
-    action: `${prefix}-pagination-changed-current`,
-  },
-  onChangedPageSizesSelect: {
-    action: `${prefix}-page-sizes-select-changed`,
-  },
 };
 
 export const Default = {
@@ -100,8 +93,6 @@ export const Default = {
   render: (args) => {
     const {
       backwardText,
-      onChangedCurrent,
-      onChangedPageSizesSelect,
       disabled,
       forwardText,
       isLastPage,
@@ -128,8 +119,8 @@ export const Default = {
         size=${size}
         ?pages-unknown=${pagesUnknown}
         total-items=${totalItems}
-        @cds-pagination-changed-current="${onChangedCurrent}"
-        @cds-page-sizes-select-changed="${onChangedPageSizesSelect}">
+        @cds-pagination-changed-current
+        @cds-page-sizes-select-changed>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -144,8 +135,6 @@ export const MultiplePaginationComponents = {
   render: (args) => {
     const {
       backwardText,
-      onChangedCurrent,
-      onChangedPageSizesSelect,
       disabled,
       forwardText,
       isLastPage,
@@ -172,8 +161,8 @@ export const MultiplePaginationComponents = {
         size=${size}
         ?pages-unknown=${pagesUnknown}
         total-items=${totalItems}
-        @cds-pagination-changed-current="${onChangedCurrent}"
-        @cds-page-sizes-select-changed="${onChangedPageSizesSelect}">
+        @cds-pagination-changed-current
+        @cds-page-sizes-select-changed>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -193,8 +182,8 @@ export const MultiplePaginationComponents = {
         size=${size}
         ?pages-unknown=${pagesUnknown}
         total-items=${totalItems}
-        @cds-pagination-changed-current="${onChangedCurrent}"
-        @cds-page-sizes-select-changed="${onChangedPageSizesSelect}">
+        @cds-pagination-changed-current
+        @cds-page-sizes-select-changed>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -214,8 +203,6 @@ export const PaginationUnknownPages = {
   render: (args) => {
     const {
       backwardText,
-      onChangedCurrent,
-      onChangedPageSizesSelect,
       disabled,
       forwardText,
       isLastPage,
@@ -243,8 +230,8 @@ export const PaginationUnknownPages = {
         size=${size}
         ?pages-unknown=${pagesUnknown}
         total-items=${totalItems}
-        @cds-pagination-changed-current="${onChangedCurrent}"
-        @cds-page-sizes-select-changed="${onChangedPageSizesSelect}">
+        @cds-pagination-changed-current
+        @cds-page-sizes-select-changed>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -259,8 +246,6 @@ export const PaginationWithCustomPageSizesLabel = {
   render: (args) => {
     const {
       backwardText,
-      onChangedCurrent,
-      onChangedPageSizesSelect,
       disabled,
       forwardText,
       isLastPage,
@@ -287,8 +272,8 @@ export const PaginationWithCustomPageSizesLabel = {
         size=${size}
         ?pages-unknown=${pagesUnknown}
         total-items=${totalItems}
-        @cds-pagination-changed-current="${onChangedCurrent}"
-        @cds-page-sizes-select-changed="${onChangedPageSizesSelect}">
+        @cds-pagination-changed-current
+        @cds-page-sizes-select-changed>
         <cds-select-item value="10">Ten</cds-select-item>
         <cds-select-item value="20">Twenty</cds-select-item>
         <cds-select-item value="30">Thirty</cds-select-item>
