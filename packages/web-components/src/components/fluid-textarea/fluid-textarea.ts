@@ -18,6 +18,10 @@ import styles from './fluid-textarea.scss?lit';
  */
 @customElement(`${prefix}-fluid-textarea`)
 class CDSFluidTextArea extends CDSTextarea {
+  connectedCallback() {
+    this.setAttribute('isFluid', 'true');
+    super.connectedCallback();
+  }
   render() {
     return html`
       <div class="${prefix}--text-area--fluid ${prefix}--form-item">

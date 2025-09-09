@@ -176,14 +176,16 @@ export const WithLayer = {
   `,
 };
 
-export const DefaultWithTooltip = {
+export const DefaultWithToggletip = {
   render: () => html`
-    <cds-fluid-textarea placeholder="Placeholder text">
-      <cds-toggletip slot="label-text" alignment="top-left" autoAlign="true">
-        Toggletip label
-        <p slot="body-text">Additional field information here.</p>
-      </cds-toggletip>
-    </cds-fluid-textarea>
+    <div style="width:300px;">
+      <cds-fluid-textarea placeholder="Placeholder text">
+        <cds-toggletip slot="label-text" alignment="top-left" autoAlign="true">
+          Toggletip label
+          <p slot="body-text">Additional field information here.</p>
+        </cds-toggletip>
+      </cds-fluid-textarea>
+    </div>
   `,
 };
 
