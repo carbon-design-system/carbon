@@ -109,7 +109,7 @@ export const Default = {
   `,
 };
 
-export const DefaultWithTooltip = {
+export const DefaultWithToggletip = {
   render: () => html`
     <cds-fluid-text-input placeholder="Placeholder text">
       <cds-toggletip autoAlign="true" slot="label-text">
