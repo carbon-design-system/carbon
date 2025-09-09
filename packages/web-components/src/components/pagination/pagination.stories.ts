@@ -118,9 +118,7 @@ export const Default = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}
-        @cds-pagination-changed-current
-        @cds-page-sizes-select-changed>
+        total-items=${totalItems}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -160,9 +158,7 @@ export const MultiplePaginationComponents = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}
-        @cds-pagination-changed-current
-        @cds-page-sizes-select-changed>
+        total-items=${totalItems}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -229,9 +225,7 @@ export const PaginationUnknownPages = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}
-        @cds-pagination-changed-current
-        @cds-page-sizes-select-changed>
+        total-items=${totalItems}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -271,9 +265,7 @@ export const PaginationWithCustomPageSizesLabel = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}
-        @cds-pagination-changed-current
-        @cds-page-sizes-select-changed>
+        total-items=${totalItems}>
         <cds-select-item value="10">Ten</cds-select-item>
         <cds-select-item value="20">Twenty</cds-select-item>
         <cds-select-item value="30">Thirty</cds-select-item>
