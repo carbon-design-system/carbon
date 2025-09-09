@@ -50,7 +50,7 @@ export const usePresence = (
           animation instanceof CSSAnimation &&
           animation.animationName.startsWith(`${prefix}--presence`)
       );
-    console.log(animations);
+
     if (!animations.length) {
       handleAnimationEnd();
       return;
@@ -68,7 +68,7 @@ export const usePresence = (
     return () => {
       cancelled = true;
     };
-  }, [isExiting, prefix, handleAnimationEnd]);
+  }, [ref, isExiting, prefix, handleAnimationEnd]);
 
   return {
     /**
