@@ -209,6 +209,7 @@ export const PaginationUnknownPages = {
   name: 'Unknown pages and items',
   args: {
     pagesUnknown: true,
+    totalItems: undefined,
   },
   render: (args) => {
     const {
