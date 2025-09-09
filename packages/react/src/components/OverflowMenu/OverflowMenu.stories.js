@@ -24,6 +24,33 @@ export default {
   },
 };
 
+export const TestWithOnClose = () => {
+  const [closeCount, setCloseCount] = React.useState(0);
+
+  const handleOpen = () => {
+    alert('onOpen called');
+  };
+
+  const handleClose = () => {
+    setCloseCount((c) => c + 1);
+    alert('onClose called');
+  };
+
+  return (
+    <div>
+      <p>onClose was called {closeCount} time(s)</p>
+      <OverflowMenu
+        aria-label="overflow-menu-test"
+        onOpen={handleOpen}
+        onClose={handleClose}>
+        <OverflowMenuItem itemText="Option 1" />
+        <OverflowMenuItem itemText="Option 2" />
+        <OverflowMenuItem itemText="Option 3" />
+      </OverflowMenu>
+    </div>
+  );
+};
+
 export const RenderCustomIcon = () => {
   return (
     <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
