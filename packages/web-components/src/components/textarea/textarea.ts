@@ -162,10 +162,10 @@ class CDSTextarea extends CDSTextInput {
   private _prevCounterMode: 'character' | 'word' = this.counterMode;
 
   /**
-   * The previous cols value. This lets updated() conditionally call _measureWrapper()
-   * if the cols value has changed.
+   * Observes the textarea wrapper’s size to re-measure helper/invalid/warn text width when
+   * cols is updated
    */
-  private _prevCols?: number;
+  private _resizeObserver?: ResizeObserver;
 
   render() {
     const { enableCounter, maxCount } = this;
@@ -300,10 +300,6 @@ class CDSTextarea extends CDSTextInput {
   }
   updated(): void {
     super.updated?.();
-    if (this.cols !== this._prevCols) {
-      this._prevCols = this.cols;
-      this._measureWrapper();
-    }
     if (this.counterMode !== this._prevCounterMode) {
       const textarea = this._textarea;
       if (textarea) {
@@ -315,6 +311,16 @@ class CDSTextarea extends CDSTextInput {
       }
       this._prevCounterMode = this.counterMode;
     }
+
+    const wrapper = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${prefix}--text-area__wrapper`
+    );
+    if (!wrapper) return;
+
+    this._resizeObserver = new ResizeObserver(() => {
+      this._measureWrapper();
+    });
+    this._resizeObserver.observe(wrapper);
   }
 
   /**
@@ -340,6 +346,11 @@ class CDSTextarea extends CDSTextInput {
         el.style.overflowWrap = 'break-word';
       }
     });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    this._resizeObserver?.disconnect();
   }
 
   static shadowRootOptions = {

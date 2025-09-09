@@ -14,7 +14,7 @@ test.describe('@avt FluidMultiSelect', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
-      id: 'experimental-fluid-components-unstable-fluidmultiselect--default',
+      id: 'components-fluid-components-fluidmultiselect--default',
       globals: {
         theme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('@avt FluidMultiSelect', () => {
   test('@avt-advanced-states condensed', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
-      id: 'experimental-fluid-components-unstable-fluidmultiselect--condensed',
+      id: 'components-fluid-components-fluidmultiselect--condensed',
       globals: {
         theme: 'white',
       },
@@ -38,7 +38,7 @@ test.describe('@avt FluidMultiSelect', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
-      id: 'experimental-fluid-components-unstable-fluidmultiselect--skeleton',
+      id: 'components-fluid-components-fluidmultiselect--skeleton',
       globals: {
         theme: 'white',
       },
@@ -49,7 +49,7 @@ test.describe('@avt FluidMultiSelect', () => {
   test('@avt-keyboard-nav FluidMultiSelect', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
-      id: 'experimental-fluid-components-unstable-fluidmultiselect--default',
+      id: 'components-fluid-components-fluidmultiselect--default',
       globals: {
         theme: 'white',
       },
@@ -144,7 +144,7 @@ test.describe('@avt FluidMultiSelect', () => {
   test('@avt-keyboard-nav FluidMultiSelect condensed', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
-      id: 'experimental-fluid-components-unstable-fluidmultiselect--condensed',
+      id: 'components-fluid-components-fluidmultiselect--condensed',
       globals: {
         theme: 'white',
       },
