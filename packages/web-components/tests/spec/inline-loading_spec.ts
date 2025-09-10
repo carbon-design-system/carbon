@@ -17,34 +17,36 @@ const template = (props?) =>
     'cds-inline-loading': props,
   });
 
-describe('cds-inline-loading', function () {
-  describe('Misc attributes', function () {
-    it('should render with minimum attributes', async function () {
+describe('cds-inline-loading', () => {
+  describe('Misc attributes', () => {
+    it('should render with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render with unknown status', async function () {
+    it('should render with unknown status', async () => {
       render(template(), document.body);
       (
         document.body.querySelector(
           'cds-inline-loading'
         ) as unknown as CDSInlineLoading
-      ).status = undefined!;
+      ).status = undefined!; // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render with inactive status', async function () {
+    it('should render with inactive status', async () => {
       render(
         template({
           status: INLINE_LOADING_STATE.INACTIVE,
@@ -53,13 +55,14 @@ describe('cds-inline-loading', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render with finished status', async function () {
+    it('should render with finished status', async () => {
       render(
         template({
           status: INLINE_LOADING_STATE.FINISHED,
@@ -68,13 +71,14 @@ describe('cds-inline-loading', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render with error status', async function () {
+    it('should render with error status', async () => {
       render(
         template({
           status: INLINE_LOADING_STATE.ERROR,
@@ -83,6 +87,7 @@ describe('cds-inline-loading', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -90,7 +95,8 @@ describe('cds-inline-loading', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });

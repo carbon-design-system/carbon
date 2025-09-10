@@ -78,35 +78,39 @@ export interface IconIndicatorProps {
   size?: 16 | 20;
 }
 
-export const IconIndicator = React.forwardRef(function IconIndicatorContent(
-  {
-    className: customClassName,
-    kind,
-    label,
-    size = 16,
-    ...rest
-  }: IconIndicatorProps,
-  ref: React.Ref<HTMLDivElement>
-) {
-  const prefix = usePrefix();
-  const classNames = cx(`${prefix}--icon-indicator`, customClassName, {
-    [`${prefix}--icon-indicator--20`]: size == 20,
-  });
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+export const IconIndicator = React.forwardRef(
+  (
+    {
+      className: customClassName,
+      kind,
+      label,
+      size = 16,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+      ...rest
+    }: IconIndicatorProps,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
+    const prefix = usePrefix();
+    const classNames = cx(`${prefix}--icon-indicator`, customClassName, {
+      [`${prefix}--icon-indicator--20`]: size == 20,
+    });
 
-  const IconForKind = iconTypes[kind];
-  if (!IconForKind) {
-    return null;
+    const IconForKind = iconTypes[kind];
+    if (!IconForKind) {
+      return null;
+    }
+    return (
+      <div className={classNames} ref={ref}>
+        <IconForKind
+          size={size}
+          className={`${prefix}--icon-indicator--${kind}`}
+        />
+        {label}
+      </div>
+    );
   }
-  return (
-    <div className={classNames} ref={ref}>
-      <IconForKind
-        size={size}
-        className={`${prefix}--icon-indicator--${kind}`}
-      />
-      {label}
-    </div>
-  );
-});
+);
 
 IconIndicator.propTypes = {
   /**

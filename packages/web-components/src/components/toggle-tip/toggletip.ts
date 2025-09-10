@@ -9,14 +9,15 @@ import { classMap } from 'lit/directives/class-map.js';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import Information16 from '@carbon/icons/lib/information/16.js';
 import { prefix } from '../../globals/settings';
+import Information16 from '@carbon/icons/es/information/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import FloatingUIContoller from '../../globals/controllers/floating-controller';
 import styles from './toggletip.scss?lit';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Definition tooltip.
@@ -78,6 +79,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   private _handleActionsSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement).assignedNodes();
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     hasContent
       ? this.setAttribute('has-actions', '')
       : this.removeAttribute('has-actions');
@@ -91,6 +93,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleKeydown = async (event) => {
     if (event.key === 'Escape') {
@@ -104,11 +107,14 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleFocusOut(event: FocusEvent) {
-    if (!this.contains(event.relatedTarget as Node)) {
-      this.open = false;
+    const path = event.composedPath();
+    if (path.includes(this as unknown as EventTarget)) {
+      return;
     }
+    this.open = false;
   }
 
   protected _renderToggleTipLabel = () => {
@@ -126,7 +132,9 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
         aria-label="${this.buttonLabel}"
         class="${prefix}--toggletip-button"
         @click=${this._handleClick}>
-        <slot name="trigger">${Information16({ id: 'trigger' })}</slot>
+        <slot name="trigger"
+          >${iconLoader(Information16, { id: 'trigger' })}
+        </slot>
       </button>
     `;
   };

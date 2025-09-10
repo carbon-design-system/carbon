@@ -5,21 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 function noop() {}
 
-function assertAny() {
+export function assertAny() {
   return noop;
 }
 
-function assertDefined(node) {
+export function assertDefined(node) {
   if (!node) {
     throw new Error(`Expected node of type ${node.type} to be defined`);
   }
 }
 
-function assertValueType(expected) {
+export function assertValueType(expected) {
   return (value) => {
     if (typeof value !== expected) {
       throw new TypeError(
@@ -30,7 +28,7 @@ function assertValueType(expected) {
   };
 }
 
-function assertType({ type }) {
+export function assertType({ type }) {
   return (node) => {
     assertDefined(node);
 
@@ -43,7 +41,7 @@ function assertType({ type }) {
   };
 }
 
-function assertOneOf(types) {
+export function assertOneOf(types) {
   return (value, node) => {
     const errors = [];
     for (let i = 0; i < types.length; i++) {
@@ -68,19 +66,10 @@ function assertOneOf(types) {
   };
 }
 
-function arrayOf(checkType) {
+export function arrayOf(checkType) {
   return (nodes = [], node) => {
     for (let i = 0; i < nodes.length; i++) {
       checkType(nodes[i], node);
     }
   };
 }
-
-module.exports = {
-  assertAny,
-  assertDefined,
-  assertOneOf,
-  assertType,
-  assertValueType,
-  arrayOf,
-};

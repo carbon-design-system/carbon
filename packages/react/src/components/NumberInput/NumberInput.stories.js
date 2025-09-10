@@ -165,20 +165,6 @@ export const withAILabel = (args) => {
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
-// TODO: for testing. remove before marking ready for review
-const handleOnChange = (event, state) => {
-  console.log(`-------onChange--------`);
-  console.log(event.target);
-  console.log(state?.value);
-  console.log(state?.direction);
-};
-
-// TODO: for testing. remove before marking ready for review
-const handleOnBlur = (event) => {
-  console.log(`--------onBlur--------`);
-  console.log(event.target);
-};
-
 export const WithTypeOfText = (args) => {
   const locale = useDocumentLang();
 
@@ -193,8 +179,6 @@ export const WithTypeOfText = (args) => {
       helperText="Optional helper text."
       {...args}
       locale={locale}
-      onChange={handleOnChange}
-      onBlur={handleOnBlur}
     />
   );
 };
@@ -212,11 +196,11 @@ WithTypeOfText.args = {
 };
 WithTypeOfText.argTypes = {
   locale: { control: { type: 'text' } },
+  stepStartValue: { control: { type: 'number' } },
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
 };
 
-// TODO: for testing, remove before marking ready for review
 export const WithTypeOfTextControlled = (args) => {
   const locale = useDocumentLang();
   const [value, setValue] = useState(NaN);
@@ -235,13 +219,7 @@ export const WithTypeOfTextControlled = (args) => {
         locale={locale}
         value={value}
         onChange={(event, state) => {
-          handleOnChange(event, state);
-          console.log(`setting value to:`);
-          console.log(state.value);
           setValue(state.value);
-        }}
-        onBlur={(event) => {
-          handleOnBlur(event);
         }}
       />
       <button

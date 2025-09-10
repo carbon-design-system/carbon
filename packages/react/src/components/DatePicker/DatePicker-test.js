@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -865,6 +865,88 @@ describe('Range date picker', () => {
     );
     expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
     consoleWarnSpy.mockRestore();
+  });
+
+  describe('rangePlugin', () => {
+    it('should set start and end input values correctly when calling setDate with triggerChange=false', async () => {
+      const ref = React.createRef();
+
+      render(
+        <DatePicker ref={ref} datePickerType="range" value={undefined}>
+          <DatePickerInput
+            id="start"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            data-testid="start-input"
+          />
+          <DatePickerInput
+            id="end"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            data-testid="end-input"
+          />
+        </DatePicker>
+      );
+
+      const fp = ref.current.calendar;
+      const start = await screen.findByTestId('start-input');
+      const end = await screen.findByTestId('end-input');
+
+      // Call `setDate` with two dates and `triggerChange` equal to `false`,
+      // which is where the `rangePlugin` logic should be triggered to set
+      // values on both inputs.
+      fp.setDate(['01/05/2025', '01/10/2025'], false, 'm/d/Y');
+
+      expect(start.value).toBe('01/05/2025');
+      expect(end.value).toBe('01/10/2025');
+
+      // Verify clearing the end date keeps the start date while clearing the
+      // end date.
+      fp.setDate(['01/15/2025', null], false, 'm/d/Y');
+
+      expect(start.value).toBe('01/15/2025');
+      expect(end.value).toBe('');
+
+      // Verify that calling `setDate` again with both dates updates both
+      // fields.
+      fp.setDate(['02/01/2025', '02/14/2025'], false, 'm/d/Y');
+
+      expect(start.value).toBe('02/01/2025');
+      expect(end.value).toBe('02/14/2025');
+    });
+
+    it('should not write both dates into the first input', async () => {
+      const ref = React.createRef();
+
+      render(
+        <DatePicker ref={ref} datePickerType="range" value={undefined}>
+          <DatePickerInput
+            id="start-2"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            data-testid="start-input-2"
+          />
+          <DatePickerInput
+            id="end-2"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            data-testid="end-input-2"
+          />
+        </DatePicker>
+      );
+
+      const fp = ref.current.calendar;
+      const start = await screen.findByTestId('start-input-2');
+      const end = await screen.findByTestId('end-input-2');
+
+      // When `triggerChange` is `false`, flatpickr's default behavior could
+      // leave both dates reflected only in the first input. The plugin should
+      // ensure each input is updated correctly.
+      fp.setDate(['03/03/2025', '03/09/2025'], false, 'm/d/Y');
+
+      expect(start.value).toBe('03/03/2025');
+      expect(end.value).toBe('03/09/2025');
+    });
   });
 });
 

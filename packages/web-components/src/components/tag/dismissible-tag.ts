@@ -9,8 +9,9 @@
 
 import { html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import Close16 from '@carbon/icons/es/close/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -86,8 +87,10 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
    * @param event The event.
    */
   @HostListener('shadowRoot:click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleClick = (event: MouseEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
       if (this.disabled) {
         event.stopPropagation();
@@ -135,6 +138,16 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   disabled = false;
 
   /**
+   * Specify the tooltip alignment for the dismiss button
+   */
+  @property({
+    type: String,
+    attribute: 'dismiss-tooltip-alignment',
+    reflect: true,
+  })
+  dismissTooltipAlignment = 'bottom';
+
+  /**
    * Provide a custom tooltip label for the dismiss button
    */
   @property({ type: String, attribute: 'dismiss-tooltip-label', reflect: true })
@@ -180,6 +193,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       tagTitle,
       text,
       dismissTooltipLabel,
+      dismissTooltipAlignment,
     } = this;
 
     const dismissLabel = `Dismiss "${text}"`;
@@ -199,14 +213,14 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
         <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
-        <cds-tooltip align="bottom" enter-delay-ms=${0}>
+        <cds-tooltip align=${dismissTooltipAlignment} enter-delay-ms=${0}>
           <button
             class="sb-tooltip-trigger"
             role="button"
             aria-labelledby="content"
             class="${prefix}--tag__close-icon"
             ?disabled=${disabled}>
-            ${Close16()}
+            ${iconLoader(Close16)}
           </button>
           <cds-tooltip-content id="content">
             ${dismissActionLabel}

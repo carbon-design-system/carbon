@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -136,6 +136,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   y: number | number[] = 0;
 
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = (e: FocusEvent) => {
     const { isRoot } = this.context;
@@ -183,6 +184,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     await this.updateComplete;
     this._registerMenuItems();
     this._setActiveItems();
+
+    const slot = this.shadowRoot?.querySelector('slot');
+    slot?.addEventListener('slotchange', () => {
+      this._registerMenuItems();
+      this._setActiveItems();
+    });
   }
   render() {
     const {
@@ -469,11 +476,13 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     });
   };
   _setActiveItems = () => {
+    this.activeitems = [];
+
     this.items?.map((item) => {
       let activeItem: activeItemType;
       switch (item.tagName) {
         case 'CDS-MENU-ITEM-RADIO-GROUP': {
-          let slotElements = item.querySelectorAll(`${prefix}-menu-item`);
+          const slotElements = item.querySelectorAll(`${prefix}-menu-item`);
           if (slotElements?.length) {
             for (const entry of slotElements.entries()) {
               activeItem = {
@@ -486,7 +495,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
           break;
         }
         case 'CDS-MENU-ITEM-GROUP': {
-          let slotElements = item.shadowRoot
+          const slotElements = item.shadowRoot
             ?.querySelector('slot')
             ?.assignedElements();
           slotElements?.map((el) => {

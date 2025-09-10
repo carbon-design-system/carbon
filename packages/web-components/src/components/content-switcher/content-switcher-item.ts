@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -86,7 +86,6 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
    * Specify the duration in milliseconds to delay before hiding the tooltip
    * for icon-only switcher-item
    *
-   * TODO: match upstream value once #10471 is resolved
    */
   leaveDelayMs = 100;
 
@@ -96,9 +95,16 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
         ?.querySelector(`${prefix}-tooltip`)
         ?.classList.add(`${prefix}--icon-tooltip`);
     }
+
+    if (
+      this.disabled &&
+      changedProperties.has('disabled') &&
+      !this.parentElement?.hasAttribute('disabled')
+    ) {
+      this.parentElement?.setAttribute('disabled', '');
+    }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected _renderTooltipContent() {
     return html`
       <cds-tooltip-content>
