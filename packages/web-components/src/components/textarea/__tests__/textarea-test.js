@@ -191,7 +191,9 @@ describe('cds-textarea', () => {
         </cds-textarea>
       `);
       await el.updateComplete;
-      const slot = el.shadowRoot.querySelector('slot[name="helper-text"]');
+      const slot = el.shadowRoot.querySelector(
+        'div.cds--form__helper-text slot[name="helper-text"]'
+      );
       const content = slot.assignedNodes({ flatten: true })[0];
       expect(content.textContent.trim()).to.equal('Slotted Helper');
     });
