@@ -8,17 +8,18 @@
 import { html } from 'lit';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
-import Add from '@carbon/icons/lib/add/16.js';
-import Save from '@carbon/icons/lib/save/16.js';
-import TrashCan from '@carbon/icons/lib/trash-can/16.js';
+import Add from '@carbon/icons/es/add/16.js';
+import Save from '@carbon/icons/es/save/16.js';
+import TrashCan from '@carbon/icons/es/trash-can/16.js';
 // @ts-ignore
-import Download16 from '@carbon/icons/lib/download/16.js';
+import Download16 from '@carbon/icons/es/download/16.js';
 // @ts-ignore
-import Settings16 from '@carbon/icons/lib/settings/16.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../../overflow-menu';
 import '../index';
 import storyDocs from './data-table.mdx';
 import '../../link/index';
+import { iconLoader } from '../../../globals/internal/icon-loader';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -85,28 +86,31 @@ export const Default = {
         <cds-table-batch-actions ?active="true">
           <cds-button data-context="data-table"
             >Delete
-            ${TrashCan({
+            ${iconLoader(TrashCan, {
               slot: 'icon',
               class: `${prefix}--btn__icon`,
-            })}</cds-button
-          >
+            })}
+          </cds-button>
           <cds-button data-context="data-table"
             >Save
-            ${Save({ slot: 'icon', class: `${prefix}--btn__icon` })}</cds-button
-          >
+            ${iconLoader(Save, { slot: 'icon', class: `${prefix}--btn__icon` })}
+          </cds-button>
           <cds-button
             href="javascript:void 0"
             download="table-data.json"
             data-context="data-table">
             Download
-            ${Download16({ slot: 'icon', class: `${prefix}--btn__icon` })}
+            ${iconLoader(Download16, {
+              slot: 'icon',
+              class: `${prefix}--btn__icon`,
+            })}
           </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({
+            ${iconLoader(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}

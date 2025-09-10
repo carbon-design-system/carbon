@@ -9,14 +9,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
-import ErrorFilled16 from '@carbon/icons/lib/error--filled/16.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
 import {
   PROGRESS_BAR_SIZE,
   PROGRESS_BAR_STATUS,
   PROGRESS_BAR_TYPE,
 } from './defs';
 import { prefix } from '../../globals/settings';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './progress-bar.scss?lit';
 
 export { PROGRESS_BAR_SIZE, PROGRESS_BAR_STATUS, PROGRESS_BAR_TYPE };
@@ -105,6 +106,7 @@ class CDSProgressBar extends LitElement {
 
       const percentage: number = cappedValue / max;
 
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const bar = this.shadowRoot!.querySelector(
         `.${prefix}--progress-bar__bar`
       ) as HTMLElement;
@@ -139,14 +141,14 @@ class CDSProgressBar extends LitElement {
     const indeterminate =
       !isFinished && !isError && (value === null || value === undefined);
 
-    let statusIcon = null;
+    let statusIcon: ReturnType<typeof iconLoader> | null = null;
 
     if (isError) {
-      statusIcon = ErrorFilled16({
+      statusIcon = iconLoader(ErrorFilled16, {
         class: `${prefix}--progress-bar__status-icon`,
       });
     } else if (isFinished) {
-      statusIcon = CheckmarkFilled16({
+      statusIcon = iconLoader(CheckmarkFilled16, {
         class: `${prefix}--progress-bar__status-icon`,
       });
     }

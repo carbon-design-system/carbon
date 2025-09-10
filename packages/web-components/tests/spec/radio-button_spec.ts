@@ -18,7 +18,7 @@ import { Playground } from '../../src/components/radio-button/radio-button-story
  */
 const getValues = (formData: FormData) => {
   const values = {};
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const [key, value] of formData.entries()) {
     values[key] = value;
   }
@@ -30,17 +30,18 @@ const template = (props?) =>
     'cds-radio-button-group': props,
   });
 
-xdescribe('cds-radio-button', function () {
-  describe('Rendering', function () {
-    it('Should render with minimum attributes', async function () {
+xdescribe('cds-radio-button', () => {
+  describe('Rendering', () => {
+    it('Should render with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
-    it('Should render with various attributes', async function () {
+    it('Should render with various attributes', async () => {
       render(
         template({
           'cds-radio-button-group': {
@@ -59,13 +60,14 @@ xdescribe('cds-radio-button', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
   });
 
-  describe('Communication between <cds-radio-button-group> and <cds-radio-button>', function () {
-    it('Should propagate disabled', async function () {
+  describe('Communication between <cds-radio-button-group> and <cds-radio-button>', () => {
+    it('Should propagate disabled', async () => {
       render(
         template({ 'cds-radio-button-group': { disabled: true } }),
         document.body
@@ -79,7 +81,7 @@ xdescribe('cds-radio-button', function () {
       ).toBe(true);
     });
 
-    it('Should propagate labelPosition', async function () {
+    it('Should propagate labelPosition', async () => {
       render(
         template({
           'cds-radio-button-group': {
@@ -97,7 +99,7 @@ xdescribe('cds-radio-button', function () {
       ).toBe(true);
     });
 
-    it('Should propagate orientation', async function () {
+    it('Should propagate orientation', async () => {
       render(
         template({
           'cds-radio-button-group': {
@@ -115,7 +117,7 @@ xdescribe('cds-radio-button', function () {
       ).toBe(true);
     });
 
-    it('Should propagate name', async function () {
+    it('Should propagate name', async () => {
       render(
         template({
           'cds-radio-button-group': { name: 'name-foo' },
@@ -131,7 +133,7 @@ xdescribe('cds-radio-button', function () {
       ).toBe(true);
     });
 
-    it('Should select <cds-radio-button> that matches the given value', async function () {
+    it('Should select <cds-radio-button> that matches the given value', async () => {
       render(
         template({
           'cds-radio-button-group': { value: 'staging' },
@@ -147,7 +149,7 @@ xdescribe('cds-radio-button', function () {
       ).toEqual([false, false, true]);
     });
 
-    it('Should update the value upon clicking <cds-radio-button>', async function () {
+    it('Should update the value upon clicking <cds-radio-button>', async () => {
       render(
         template({
           'cds-radio-button-group': { name: 'name-foo' },
@@ -169,7 +171,7 @@ xdescribe('cds-radio-button', function () {
       ).toBe('staging');
     });
 
-    it('Should update the value upon space key on <cds-radio-button>', async function () {
+    it('Should update the value upon space key on <cds-radio-button>', async () => {
       render(
         template({
           'cds-radio-button-group': { name: 'name-foo' },
@@ -196,7 +198,7 @@ xdescribe('cds-radio-button', function () {
       ).toBe('staging');
     });
 
-    it('Should update the value upon enter key on <cds-radio-button>', async function () {
+    it('Should update the value upon enter key on <cds-radio-button>', async () => {
       render(
         template({
           'cds-radio-button-group': { name: 'name-foo' },
@@ -224,8 +226,8 @@ xdescribe('cds-radio-button', function () {
     });
   });
 
-  describe('Keyboard navigation', function () {
-    it('Should use left/right key for navigation in horizontal mode', async function () {
+  describe('Keyboard navigation', () => {
+    it('Should use left/right key for navigation in horizontal mode', async () => {
       render(
         template({
           'cds-radio-button-group': {
@@ -277,7 +279,7 @@ xdescribe('cds-radio-button', function () {
       ).toEqual([0, -1, -1]);
     });
 
-    it('Should use up/down key for navigation in vertical mode', async function () {
+    it('Should use up/down key for navigation in vertical mode', async () => {
       render(
         template({
           'cds-radio-button-group': {
@@ -330,8 +332,8 @@ xdescribe('cds-radio-button', function () {
     });
   });
 
-  describe('Event-based form participation', function () {
-    it('Should respond to `formdata` event', async function () {
+  describe('Event-based form participation', () => {
+    it('Should respond to `formdata` event', async () => {
       render(
         html`
           <form>
@@ -352,13 +354,15 @@ xdescribe('cds-radio-button', function () {
         cancelable: false,
         composed: false,
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': 'staging' });
     });
 
-    it('Should not respond to `formdata` event if form item name is not specified', async function () {
+    it('Should not respond to `formdata` event if form item name is not specified', async () => {
       render(
         html`
           <form>
@@ -378,13 +382,15 @@ xdescribe('cds-radio-button', function () {
         cancelable: false,
         composed: false,
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
 
-    it('Should not respond to `formdata` event if no item is selected', async function () {
+    it('Should not respond to `formdata` event if no item is selected', async () => {
       render(
         html`
           <form>
@@ -404,13 +410,15 @@ xdescribe('cds-radio-button', function () {
         cancelable: false,
         composed: false,
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
 
-    it('Should not respond to `formdata` event if disabled', async function () {
+    it('Should not respond to `formdata` event if disabled', async () => {
       render(
         html`
           <form>
@@ -431,14 +439,14 @@ xdescribe('cds-radio-button', function () {
         cancelable: false,
         composed: false,
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
-      const form = document.querySelector('form');
-      form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     render(undefined!, document.body);
     await Promise.resolve();
   });

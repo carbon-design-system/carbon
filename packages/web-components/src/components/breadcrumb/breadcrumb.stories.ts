@@ -18,7 +18,8 @@ import { BREADCRUMB_SIZE } from './defs';
 
 import { prefix } from '../../globals/settings';
 
-import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16.js';
+import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const sizes = {
   [`Small size (${BREADCRUMB_SIZE.SMALL})`]: BREADCRUMB_SIZE.SMALL,
@@ -101,7 +102,7 @@ export const BreadcrumbWithOverflowMenu = {
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
           <cds-overflow-menu breadcrumb align="bottom">
-            ${OverflowMenuHorizontal16({
+            ${iconLoader(OverflowMenuHorizontal16, {
               class: `${prefix}--overflow-menu__icon`,
               slot: 'icon',
             })}

@@ -53,6 +53,7 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
    * Handles `${prefix}-header-menu-button-toggle` event on the document.
    */
   @HostListener('parentRoot:eventButtonToggle')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleButtonToggle = async (event: CustomEvent) => {
     this.expanded = event.detail.active;
@@ -167,7 +168,7 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
    * @param event.relatedTarget The event relatedTarget.
    */
   @HostListener('focusout')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusOut({ relatedTarget }: FocusEvent) {
     const { collapseMode } = this;
     if (collapseMode !== SIDE_NAV_COLLAPSE_MODE.FIXED) {
@@ -182,7 +183,7 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
    *
    */
   @HostListener('focusin')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusIn() {
     const { collapseMode } = this;
     if (collapseMode !== SIDE_NAV_COLLAPSE_MODE.FIXED) {

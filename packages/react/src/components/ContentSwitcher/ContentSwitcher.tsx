@@ -34,6 +34,7 @@ export interface ContentSwitcherProps
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   children?: ReactElement<any>[];
 
   /**
@@ -118,6 +119,7 @@ export const ContentSwitcher = ({
   };
 
   const isKeyboardEvent = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     event: any
   ): event is KeyboardEvent<HTMLButtonElement> | globalThis.KeyboardEvent =>
     event && typeof event === 'object' && 'key' in event;
@@ -154,7 +156,10 @@ export const ContentSwitcher = ({
           });
         }
       }
-    } else if (selectedIndex !== index) {
+    } else if (
+      selectedIndex !== index &&
+      (isKeyboardEvent(event) ? matches(event, [keys.Enter, keys.Space]) : true)
+    ) {
       setSelectedIndex(index);
       focusSwitch(index);
       onChange(event);
