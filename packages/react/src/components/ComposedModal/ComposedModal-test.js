@@ -144,27 +144,6 @@ describe('ComposedModal', () => {
       );
     });
 
-    it('should prevent close on click outside', async () => {
-      render(
-        <>
-          <button type="button">Click me</button>
-          <ComposedModal open preventCloseOnClickOutside>
-            <ModalHeader>Modal header</ModalHeader>
-            <ModalBody>This is the modal body content</ModalBody>
-          </ComposedModal>
-        </>
-      );
-      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
-        'is-visible'
-      );
-
-      await userEvent.click(screen.getByText('Click me'));
-
-      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
-        'is-visible'
-      );
-    });
-
     it('should focus selector on open', async () => {
       function ComposedModalExample() {
         const [isOpen, setIsOpen] = React.useState(false);
@@ -432,38 +411,6 @@ describe('ComposedModal', () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should close when clicking outside passive composed modal', async () => {
-    const onClose = jest.fn();
-    render(
-      <ComposedModal open onClose={onClose}>
-        <ModalBody>This is the modal body content</ModalBody>
-      </ComposedModal>
-    );
-    const backgroundLayer = screen.getByRole('presentation');
-    await userEvent.click(backgroundLayer);
-    expect(onClose).toHaveBeenCalled();
-  });
-
-  it('should not close when clicking outside non-passive composed modal', async () => {
-    const onClose = jest.fn();
-    render(
-      <>
-        <button data-testid="outside-button">☀️</button>
-        <ComposedModal open onClose={onClose}>
-          <ModalHeader>Header</ModalHeader>
-          <ModalBody>Body</ModalBody>
-          <ModalFooter
-            primaryButtonText="Confirm"
-            secondaryButtonText="Cancel"
-          />
-        </ComposedModal>
-      </>
-    );
-
-    await userEvent.click(screen.getByTestId('outside-button'));
-    expect(onClose).not.toHaveBeenCalled();
-  });
-
   it('should NOT close when clicked inside dialog window, dragged outside and released mouse button', async () => {
     const onClose = jest.fn();
     render(
@@ -481,6 +428,167 @@ describe('ComposedModal', () => {
     fireEvent.click(backgroundLayer, { target: backgroundLayer });
 
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  describe('close behavior for clicks outside the modal', () => {
+    describe('passive', () => {
+      it('should close on outside click by default', async () => {
+        const onClose = jest.fn();
+        render(
+          <ComposedModal open onClose={onClose}>
+            <ModalHeader>ModalHeader content</ModalHeader>
+            <ModalBody>ModalBody content</ModalBody>
+            {/* ModalFooter is omitted, this is what makes it passive */}
+          </ComposedModal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(backgroundLayer).not.toHaveClass('is-visible');
+        expect(onClose).toHaveBeenCalled();
+      });
+      it('should not close on outside click when preventCloseOnClickOutside', async () => {
+        const onClose = jest.fn();
+        render(
+          <ComposedModal open onClose={onClose} preventCloseOnClickOutside>
+            <ModalHeader>ModalHeader content</ModalHeader>
+            <ModalBody>ModalBody content</ModalBody>
+            {/* ModalFooter is omitted, this is what makes it passive */}
+          </ComposedModal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(backgroundLayer).toHaveClass('is-visible');
+        expect(onClose).not.toHaveBeenCalled();
+      });
+      it('should close on outside click when preventCloseOnClickOutside is explicitly false', async () => {
+        const onClose = jest.fn();
+        render(
+          <ComposedModal
+            open
+            onClose={onClose}
+            preventCloseOnClickOutside={false}>
+            <ModalHeader>ModalHeader content</ModalHeader>
+            <ModalBody>ModalBody content</ModalBody>
+            {/* ModalFooter is omitted, this is what makes it passive */}
+          </ComposedModal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(backgroundLayer).not.toHaveClass('is-visible');
+        expect(onClose).toHaveBeenCalled();
+      });
+    });
+    describe('non-passive', () => {
+      it('should not close on outside click by default', async () => {
+        const onClose = jest.fn();
+        render(
+          <ComposedModal open onClose={onClose}>
+            <ModalHeader>ModalHeader content</ModalHeader>
+            <ModalBody>ModalBody content</ModalBody>
+            <ModalFooter
+              primaryButtonText="Confirm"
+              secondaryButtonText="Cancel"
+            />
+          </ComposedModal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(backgroundLayer).toHaveClass('is-visible');
+        expect(onClose).not.toHaveBeenCalled();
+      });
+      it('should not close on outside click when preventCloseOnClickOutside', async () => {
+        const onClose = jest.fn();
+        render(
+          <ComposedModal open onClose={onClose} preventCloseOnClickOutside>
+            <ModalHeader>ModalHeader content</ModalHeader>
+            <ModalBody>ModalBody content</ModalBody>
+            <ModalFooter
+              primaryButtonText="Confirm"
+              secondaryButtonText="Cancel"
+            />
+          </ComposedModal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(backgroundLayer).toHaveClass('is-visible');
+        expect(onClose).not.toHaveBeenCalled();
+      });
+      it('should close on outside click when preventCloseOnClickOutside is explicitly false', async () => {
+        const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        const onClose = jest.fn();
+
+        render(
+          <ComposedModal
+            open
+            onClose={onClose}
+            preventCloseOnClickOutside={false}>
+            <ModalHeader>ModalHeader content</ModalHeader>
+            <ModalBody>ModalBody content</ModalBody>
+            <ModalFooter
+              primaryButtonText="Confirm"
+              secondaryButtonText="Cancel"
+            />
+          </ComposedModal>
+        );
+
+        // The background layer is used here instead of a button outside the
+        // modal because a real user cannot interact with a button. The
+        // backround layer is in the way.
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(backgroundLayer);
+        expect(backgroundLayer).not.toHaveClass('is-visible');
+        expect(onClose).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(
+          'Warning: `<ComposedModal>` prop `preventCloseOnClickOutside` should not be `false` when `<ModalFooter>` is present. Transactional, non-passive Modals should not be dissmissable by clicking outside. See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
+        );
+
+        spy.mockRestore();
+      });
+    });
   });
 
   it('should focus on launcherButtonRef element on close when defined', async () => {

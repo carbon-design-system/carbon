@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
@@ -24,11 +24,7 @@ import {
   type Boundary,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
-import { ToggletipButton } from '../Toggletip';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -81,6 +77,11 @@ export interface PopoverBaseProps {
    * Specify how the popover should align with the trigger element.
    */
   align?: PopoverAlignment;
+
+  /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset?: number;
 
   /**
    * Will auto-align the popover on first render if it is not visible. This prop
@@ -140,13 +141,14 @@ export interface PopoverBaseProps {
 
 export type PopoverProps<E extends React.ElementType> =
   PolymorphicComponentPropWithRef<E, PopoverBaseProps>;
-
 export type PopoverComponent = <E extends React.ElementType = 'span'>(
   props: PopoverProps<E>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 ) => React.ReactElement | any;
 
 export const Popover: PopoverComponent & {
   displayName?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   propTypes?: WeakValidationMap<PopoverProps<any>>;
 } = React.forwardRef(function PopoverRenderFunction<
   E extends ElementType = 'span',
@@ -166,8 +168,10 @@ export const Popover: PopoverComponent & {
     open,
     alignmentAxisOffset,
     ...rest
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   }: any,
   //this is a workaround, have to come back and fix this.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   forwardRef: any
 ) {
   const prefix = usePrefix();
@@ -182,9 +186,18 @@ export const Popover: PopoverComponent & {
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
-    if (!relatedTarget) {
+    if (isTabTip) {
+      if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+        onRequestClose?.();
+      }
       return;
     }
+
+    if (!relatedTarget) {
+      onRequestClose?.();
+      return;
+    }
+
     const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
     const isOutsideFloating =
       enableFloatingStyles && refs.floating.current
@@ -208,7 +221,9 @@ export const Popover: PopoverComponent & {
   // we look to see if any of the children has a className containing "slug"
   const initialCaretHeight = React.Children.toArray(children).some((x) => {
     return (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (x as any)?.props?.className?.includes('slug') ||
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       (x as any)?.props?.className?.includes('ai-label')
     );
   })
@@ -406,6 +421,7 @@ export const Popover: PopoverComponent & {
   );
 
   const mappedChildren = React.Children.map(children, (child) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const item = child as any;
     const displayName = item?.type?.displayName;
 
@@ -429,13 +445,16 @@ export const Popover: PopoverComponent & {
       React.isValidElement(item) &&
       (isTriggerElement || isTriggerComponent || isAllowedTriggerComponent)
     ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       const className = (item?.props as any)?.className;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       const ref = (item?.props as any).ref;
       const tabTipClasses = cx(
         `${prefix}--popover--tab-tip__button`,
         className
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       return React.cloneElement(item as any, {
         className:
           isTabTip && item?.type === 'button' ? tabTipClasses : className || '',
@@ -454,7 +473,8 @@ export const Popover: PopoverComponent & {
           // positioning.
           if (
             (enableFloatingStyles && item?.type !== PopoverContent) ||
-            (enableFloatingStyles && item?.type === ToggletipButton)
+            (enableFloatingStyles &&
+              item?.type['displayName'] === 'ToggletipButton')
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
@@ -540,6 +560,11 @@ Popover.propTypes = {
   ),
 
   /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  alignmentAxisOffset: PropTypes.number,
+
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
@@ -614,40 +639,17 @@ Popover.propTypes = {
 export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
 function PopoverContentRenderFunction(
-  // eslint-disable-next-line react/prop-types
   { className, children, ...rest }: PopoverContentProps,
   forwardRef: React.ForwardedRef<HTMLSpanElement>
 ) {
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const [isMultiLine, setIsMultiLine] = React.useState(false);
-  const ref = useMergedRefs([setFloating, textRef, forwardRef]);
+  const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-
-  useEffect(() => {
-    checkIfMultiLine();
-  }, [children]);
-
-  const checkIfMultiLine = () => {
-    const el = textRef.current;
-    if (el) {
-      const style = getComputedStyle(el);
-      const lineHeight = parseFloat(style.lineHeight);
-      const height = el.offsetHeight;
-      const lines = Math.floor(height / lineHeight);
-      setIsMultiLine(lines > 1);
-    }
-  };
-
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span
-        className={cx(`${prefix}--popover-content`, className, {
-          [`${prefix}--tooltip-content--multiline`]: isMultiLine,
-        })}
-        ref={ref}>
+      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
         {enableFloatingStyles && (
           <span

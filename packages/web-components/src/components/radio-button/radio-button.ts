@@ -62,7 +62,7 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
 
   set checked(checked) {
     const { host } = this._radio.getRootNode() as ShadowRoot;
-    const { eventChange } = host.constructor as typeof CDSRadioButton; // eslint-disable-line no-use-before-define
+    const { eventChange } = host.constructor as typeof CDSRadioButton;
     (host as CDSRadioButton).checked = checked;
     this._radio.tabIndex = checked ? 0 : -1;
     host.dispatchEvent(
@@ -86,6 +86,10 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
 
   get name() {
     return this._radio.name;
+  }
+
+  get disabled() {
+    return this._radio.disabled;
   }
 
   compareDocumentPosition(other: RadioButtonDelegate) {
@@ -125,6 +129,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `click` event on this element.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event) => {
     if (
@@ -173,6 +178,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = (event: KeyboardEvent) => {
     if (
@@ -183,9 +189,14 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         (this.constructor as typeof CDSRadioButton)?.slugItem
       )
     ) {
-      const { orientation, _radioButtonDelegate: radioButtonDelegate } = this;
+      const {
+        orientation,
+        _radioButtonDelegate: radioButtonDelegate,
+        disabled,
+        disabledItem,
+      } = this;
       const manager = this._manager;
-      if (radioButtonDelegate && manager) {
+      if (radioButtonDelegate && manager && !disabled && !disabledItem) {
         const navigationDirectionForKey =
           orientation === RADIO_BUTTON_ORIENTATION.HORIZONTAL
             ? navigationDirectionForKeyHorizontal
@@ -338,18 +349,26 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       }
       const { _manager: manager } = this;
       if (changedProperties.has('name')) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         manager!.delete(radioButtonDelegate, changedProperties.get('name'));
         if (name) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           manager!.add(radioButtonDelegate);
         }
       }
+      // Disabled items should have tabIndex -1.
       inputNode.setAttribute(
         'tabindex',
-        !name || !manager || !manager.shouldBeFocusable(radioButtonDelegate)
+        !name ||
+          !manager ||
+          this.disabled ||
+          this.disabledItem ||
+          !manager.shouldBeFocusable(radioButtonDelegate)
           ? '-1'
           : '0'
       );
     }
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');

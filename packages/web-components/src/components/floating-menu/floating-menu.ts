@@ -93,6 +93,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
   // TODO: Wait for `.d.ts` update to support `ResizeObserver`
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _resizeObserver = new ResizeObserver(() => {
     const { container, open, parent, position } = this;
@@ -106,6 +107,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
   });
 
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     if (!this.contains(relatedTarget as Node)) {
@@ -118,6 +120,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
   };
 
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _click = () => {
     const { parent } = this;
@@ -127,6 +130,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
   };
 
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Tab') {
@@ -167,6 +171,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
       closestComposed(
         this,
         (this.constructor as typeof CDSFloatingMenu).selectorContainer
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       ) || this.ownerDocument!.body
     );
   }
@@ -175,6 +180,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
    * The position of this floating menu.
    */
   get position(): FloatingMenuPosition {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     const { triggerPosition } = this.parent!;
     if (!triggerPosition) {
       throw new TypeError('Missing information of trigger button position.');
@@ -196,6 +202,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
     refBottom = refBottom - containerTop;
 
     const containerComputedStyle =
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       container.ownerDocument!.defaultView!.getComputedStyle(container);
     const positionDirection = containerComputedStyle.getPropertyValue(
       'direction'
@@ -203,7 +210,8 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
     const isRtl = positionDirection === FLOATING_MENU_POSITION_DIRECTION.RTL;
     const containerStartFromViewport = !isRtl
       ? containerLeft
-      : container.ownerDocument!.defaultView!.innerWidth - containerRight;
+      : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        container.ownerDocument!.defaultView!.innerWidth - containerRight;
     const refStartFromContainer = !isRtl
       ? refLeft - containerLeft
       : containerRight - refRight;
@@ -213,6 +221,7 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
     const refTopFromContainer = refTop - containerTop;
 
     if (
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       (container !== this.ownerDocument!.body ||
         containerStartFromViewport !== 0 ||
         containerTop !== 0) &&

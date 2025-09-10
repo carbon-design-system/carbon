@@ -33,8 +33,6 @@ export default {
 };
 
 export const AutoColumns = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -43,28 +41,28 @@ export const AutoColumns = () => {
     );
   }
   return (
-    <FlexGrid>
-      <Row>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid>
+        <Row>
+          <Column>
+            <DemoContent>Span 25%</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>Span 25%</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>Span 25%</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>Span 25%</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const ResponsiveGrid = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -73,37 +71,37 @@ export const ResponsiveGrid = () => {
     );
   }
   return (
-    <FlexGrid>
-      <Row>
-        <Column sm={2} md={4} lg={6}>
-          <DemoContent>
-            <p>Small: Span 2 of 4</p>
-            <p>Medium: Span 4 of 8</p>
-            <p>Large: Span 6 of 16</p>
-          </DemoContent>
-        </Column>
-        <Column sm={2} md={2} lg={3}>
-          <DemoContent>
-            <p>Small: Span 2 of 4</p>
-            <p>Medium: Span 2 of 8</p>
-            <p>Large: Span 3 of 16</p>
-          </DemoContent>
-        </Column>
-        <Column sm={0} md={2} lg={3}>
-          <DemoContent>
-            <p>Small: Span 0 of 4</p>
-            <p>Medium: Span 2 of 8</p>
-            <p>Large: Span 3 of 16</p>
-          </DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid>
+        <Row>
+          <Column sm={2} md={4} lg={6}>
+            <DemoContent>
+              <p>Small: Span 2 of 4</p>
+              <p>Medium: Span 4 of 8</p>
+              <p>Large: Span 6 of 16</p>
+            </DemoContent>
+          </Column>
+          <Column sm={2} md={2} lg={3}>
+            <DemoContent>
+              <p>Small: Span 2 of 4</p>
+              <p>Medium: Span 2 of 8</p>
+              <p>Large: Span 3 of 16</p>
+            </DemoContent>
+          </Column>
+          <Column sm={0} md={2} lg={3}>
+            <DemoContent>
+              <p>Small: Span 0 of 4</p>
+              <p>Medium: Span 2 of 8</p>
+              <p>Large: Span 3 of 16</p>
+            </DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const Offset = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -112,28 +110,28 @@ export const Offset = () => {
     );
   }
   return (
-    <FlexGrid>
-      <Row>
-        <Column sm={{ span: 1, offset: 3 }}>
-          <DemoContent>Small: offset 3</DemoContent>
-        </Column>
-        <Column sm={{ span: 2, offset: 2 }}>
-          <DemoContent>Small: offset 2</DemoContent>
-        </Column>
-        <Column sm={{ span: 3, offset: 1 }}>
-          <DemoContent>Small: offset 1</DemoContent>
-        </Column>
-        <Column sm={{ span: 4, offset: 0 }}>
-          <DemoContent>Small: offset 0</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid>
+        <Row>
+          <Column sm={{ span: 1, offset: 3 }}>
+            <DemoContent>Small: offset 3</DemoContent>
+          </Column>
+          <Column sm={{ span: 2, offset: 2 }}>
+            <DemoContent>Small: offset 2</DemoContent>
+          </Column>
+          <Column sm={{ span: 3, offset: 1 }}>
+            <DemoContent>Small: offset 1</DemoContent>
+          </Column>
+          <Column sm={{ span: 4, offset: 0 }}>
+            <DemoContent>Small: offset 0</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const Condensed = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -142,28 +140,28 @@ export const Condensed = () => {
     );
   }
   return (
-    <FlexGrid condensed>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid condensed>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const CondensedColumns = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -172,56 +170,56 @@ export const CondensedColumns = () => {
     );
   }
   return (
-    <FlexGrid>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-      <Row condensed>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+        <Row condensed>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const Narrow = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -230,28 +228,28 @@ export const Narrow = () => {
     );
   }
   return (
-    <FlexGrid narrow>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid narrow>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const NarrowColumns = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -260,56 +258,56 @@ export const NarrowColumns = () => {
     );
   }
   return (
-    <FlexGrid>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-      <Row narrow>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+        <Row narrow>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const FullWidth = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -318,28 +316,28 @@ export const FullWidth = () => {
     );
   }
   return (
-    <FlexGrid fullWidth>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid fullWidth>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const MixedGutterModes = () => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -348,56 +346,56 @@ export const MixedGutterModes = () => {
     );
   }
   return (
-    <FlexGrid>
-      <Row>
-        <Column>
-          <DemoContent>Wide</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-      <Row narrow>
-        <Column>
-          <DemoContent>Narrow</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-      <Row condensed>
-        <Column>
-          <DemoContent>Condensed</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid>
+        <Row>
+          <Column>
+            <DemoContent>Wide</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+        <Row narrow>
+          <Column>
+            <DemoContent>Narrow</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+        <Row condensed>
+          <Column>
+            <DemoContent>Condensed</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 
 export const Default = (args) => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
   function DemoContent({ children }) {
     return (
       <div className="outside">
@@ -406,22 +404,24 @@ export const Default = (args) => {
     );
   }
   return (
-    <FlexGrid {...args}>
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
+    <div id="templates">
+      <FlexGrid {...args}>
+        <Row>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+          <Column>
+            <DemoContent>1/4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
   );
 };
 

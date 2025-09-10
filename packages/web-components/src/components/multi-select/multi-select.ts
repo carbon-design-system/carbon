@@ -8,8 +8,8 @@
 import { html, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
+import Close16 from '@carbon/icons/es/close/16.js';
 import {
   filter,
   forEach,
@@ -19,6 +19,7 @@ import CDSDropdown, {
   DROPDOWN_KEYBOARD_ACTION,
   DROPDOWN_TYPE,
 } from '../dropdown/dropdown';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
@@ -105,11 +106,21 @@ class CDSMultiSelect extends CDSDropdown {
     if (itemToSelect) {
       // clicked select all
       if (itemToSelect.isSelectAll) {
-        allItems.forEach((i) => {
-          if (!i.isSelectAll && !i.disabled) {
-            i.selected = !itemToSelect.selected;
+        const items = this.filterable
+          ? Array.from(
+              this.querySelectorAll(
+                (this.constructor as typeof CDSMultiSelect).selectorItemResults
+              )
+            )
+          : allItems;
+        items.forEach((i) => {
+          if (
+            !(i as CDSMultiSelectItem).isSelectAll &&
+            !(i as CDSMultiSelectItem).disabled
+          ) {
+            (i as CDSMultiSelectItem).selected = !itemToSelect.selected;
           }
-          i.indeterminate = false;
+          (i as CDSMultiSelectItem).indeterminate = false;
         });
         itemToSelect.selected = !itemToSelect.selected;
         // clicked regular item
@@ -316,7 +327,7 @@ class CDSMultiSelect extends CDSDropdown {
             aria-disabled=${readOnly}
             title="${clearSelectionLabel}">
             ${selectedItemsCount}
-            ${Close16({
+            ${iconLoader(Close16, {
               'aria-label': clearSelectionLabel,
               class: `${prefix}--tag__close-icon`,
             })}
@@ -353,6 +364,7 @@ class CDSMultiSelect extends CDSDropdown {
         `;
   }
 
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   protected _renderFollowingLabel(): TemplateResult | void {
     const { clearSelectionLabel, _filterInputNode: filterInputNode } = this;
     return filterInputNode &&
@@ -365,7 +377,7 @@ class CDSMultiSelect extends CDSDropdown {
             class="${prefix}--list-box__selection"
             tabindex="0"
             title="${clearSelectionLabel}">
-            ${Close16({ 'aria-label': clearSelectionLabel })}
+            ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
         `
       : undefined;
@@ -403,6 +415,26 @@ class CDSMultiSelect extends CDSDropdown {
 
     this.requestUpdate();
 
+    if (this.selectAll) {
+      const selectAllItem = this.querySelector(
+        `${prefix}-multi-select-item[is-select-all]`
+      ) as CDSMultiSelectItem;
+      if (selectAllItem) {
+        const visible = Array.from(
+          this.querySelectorAll(
+            (this.constructor as typeof CDSMultiSelect).selectorItemResults
+          )
+        ) as CDSMultiSelectItem[];
+        const actionable = visible.filter((i) => !i.isSelectAll && !i.disabled);
+        if (actionable.length === 0) {
+          selectAllItem.setAttribute('filtered', '');
+        } else {
+          selectAllItem.removeAttribute('filtered');
+          this._computeSelectAllState();
+        }
+      }
+    }
+
     const constructor = this.constructor as typeof CDSMultiSelect;
     const visibleItems = Array.from(
       this.querySelectorAll(constructor.selectorItemResults)
@@ -435,6 +467,7 @@ class CDSMultiSelect extends CDSDropdown {
       const highlightedItem = this.querySelector(
         constructor.selectorItemHighlighted
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       const highlightedIndex = indexOf(items, highlightedItem!);
 
       let nextIndex = highlightedIndex + direction;
@@ -514,6 +547,7 @@ class CDSMultiSelect extends CDSDropdown {
   /**
    * The CSS class list for multi-select listbox
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   protected get _classes(): any {
     const {
       disabled,
@@ -614,8 +648,10 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
         aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
         // @todo remove typecast once we've updated to Typescript.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         (this as any).replaceChildren(...sortedMenuItems);
       }
     }
@@ -629,6 +665,7 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
         aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
         // @todo remove typecast once we've updated to Typescript.
         sortedMenuItems.forEach((item) => {
@@ -661,6 +698,7 @@ class CDSMultiSelect extends CDSDropdown {
         itemToFocus.focus();
         itemToFocus.setAttribute('highlighted', '');
       } else {
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
         this.filterable
           ? this._filterInputNode.focus()
           : this._triggerNode.focus();
@@ -706,6 +744,7 @@ class CDSMultiSelect extends CDSDropdown {
     // whenever more items are added/removed, recompute the state of the select all option
     if (!this.selectAll) return;
     const defaultSlot =
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!;
     defaultSlot.addEventListener('slotchange', () =>
       this._computeSelectAllState()
@@ -725,10 +764,13 @@ class CDSMultiSelect extends CDSDropdown {
       )
     ) as CDSMultiSelectItem[];
     const selectAllItem = allItems.find((i) => i.isSelectAll);
-    if (!selectAllItem) {
+    if (!selectAllItem || selectAllItem.hasAttribute('filtered')) {
       return;
     }
-    const enabledItems = allItems.filter((i) => !i.isSelectAll && !i.disabled);
+
+    const enabledItems = allItems
+      .filter((i) => !i.isSelectAll && !i.disabled)
+      .filter((i) => !this.filterable || !i.hasAttribute('filtered'));
     const selectedCount = enabledItems.filter((i) => i.selected).length;
     const allSelected = selectedCount === enabledItems.length;
 

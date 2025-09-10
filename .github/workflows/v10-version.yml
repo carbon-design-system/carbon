@@ -1,0 +1,123 @@
+name: v10 - Version
+
+on:
+  push:
+    branches:
+      - v10
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    if: github.repository == 'carbon-design-system/carbon'
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: '0'
+          fetch-tags: true
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Build project
+        run: yarn build
+      - name: Run Continuous Integration checks
+        run: yarn ci-check
+
+      - name: Check if commit is a release commit
+        id: check-commit
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commitMessage = context.payload.head_commit?.message || '';
+            core.info(`Latest commit message: "${commitMessage}"`);
+            const isReleaseCommit = commitMessage.includes('chore(release): v10.');
+            core.setOutput('is_release_commit', isReleaseCommit);
+
+      - name: Bump package versions if commit is not a release commit
+        if: steps.check-commit.outputs.is_release_commit != 'true'
+        run: |
+          yarn lerna version prerelease --force-publish --no-push --no-git-tag-version --preid community --yes
+
+      - name: Get latest v10 tag and determine next appropriate tag
+        id: calculate-tag
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const semver = require('semver');
+
+            // Get all tags starting with v10
+            const output = execSync("git tag --list 'v10.*.*'", { encoding: 'utf8' });
+            const tags = output.trim().split('\n').filter(Boolean);
+
+            if (tags.length === 0) {
+              core.setFailed('No v10 tags found.');
+              return;
+            }
+
+            // Sort with semver
+            const sorted = tags.sort((a, b) => semver.rcompare(a, b));
+            const latest = sorted[0];
+
+            // The third argument to semver.inc(version, release, identifier)
+            // is crucial. 'prerelease' tells semver to increment the final
+            // numeric part of the prerelease tag. 'community' is passed as the
+            // prerelease identifier to continue the correct sequence.
+            // This ensures v10.60.3-community.1 is bumped to
+            // v10.60.3-community.2, for example.
+            const next = semver.inc(latest, 'prerelease', 'community');
+
+            // semver.inc() returns the version without the 'v' prefix. Here
+            // we add it back to ensure the final tag is prefixed with 'v'.
+            const nextTag = `v${next}`;
+
+            core.info(`Latest v10 tag: ${latest}`);
+            core.info(`Next v10 tag: ${next}`);
+            core.setOutput('latestTag', latest);
+            core.setOutput('nextTag', next);
+
+      # TODO dry run this as a test to see what we'd have
+      - name: If commit is a release commit, tag it
+        if: steps.check-commit.outputs.is_release_commit == 'true'
+        run: |
+          echo ${{ steps.calculate-tag.outputs.nextTag }} ${{ steps.calculate-tag.outputs.nextTag }}
+        # run: |
+        #   git tag -a ${{ steps.calculate-tag.outputs.nextTag }} -m '${{ steps.calculate-tag.outputs.nextTag }}' && git push upstream ${{ steps.calculate-tag.outputs.nextTag }}
+
+      - name: Generate token
+        # Do not generate token for release commits
+        if: steps.check-commit.outputs.is_release_commit != 'true'
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Create Pull Request
+        # Do not create PR for release commits
+        if: steps.check-commit.outputs.is_release_commit != 'true'
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        with:
+          branch: 'release/${{ steps.calculate-tag.outputs.nextTag }}'
+          commit-message:
+            'chore(release): ${{ steps.calculate-tag.outputs.nextTag }}'
+          delete-branch: true
+          base: 'v10'
+          title: 'chore(release): ${{ steps.calculate-tag.outputs.nextTag }}'
+          token: ${{ steps.generate_token.outputs.token }}
+          body: |
+            Automated release PR for ${{ steps.calculate-tag.outputs.nextTag }}
+
+            **Checklist**
+
+            - [ ] Verify package version bumps are accurate
+            - [ ] Verify CI passes as expected

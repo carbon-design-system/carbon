@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ import DataTable, {
   TableExpandedRow,
 } from '..';
 import { rows, headers } from './shared';
-import mdx from '../../AILabel/AILabelDatatable.mdx';
+import mdx from '../../AILabel/AILabelDataTable.mdx';
 import Button from '../../Button';
 import { IconButton } from '../../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
@@ -197,6 +197,7 @@ export const AILabelWithSelection = (args) => (
       getSelectionProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -216,7 +217,7 @@ export const AILabelWithSelection = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {i === 3 || i === 4 || i === 1 ? (
                   <TableDecoratorRow decorator={aiLabel} />
                 ) : (
@@ -224,7 +225,9 @@ export const AILabelWithSelection = (args) => (
                 )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -247,6 +250,7 @@ export const AILabelWithRadioSelection = (args) => (
       getSelectionProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -266,7 +270,7 @@ export const AILabelWithRadioSelection = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {i === 3 || i === 4 || i === 1 ? (
                   <TableDecoratorRow decorator={aiLabel} />
                 ) : (
@@ -274,7 +278,9 @@ export const AILabelWithRadioSelection = (args) => (
                 )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -299,6 +305,7 @@ export const AILabelWithSelectionAndExpansion = (args) => (
       getSelectionProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -331,7 +338,9 @@ export const AILabelWithSelectionAndExpansion = (args) => (
                   )}
                   <TableSelectRow {...getSelectionProps({ row })} />
                   {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
                   ))}
                 </TableExpandRow>
                 <TableExpandedRow
@@ -363,6 +372,7 @@ export const AILabelWithExpansion = (args) => (
       getExpandHeaderProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -393,7 +403,9 @@ export const AILabelWithExpansion = (args) => (
                     <TableDecoratorRow decorator={null} />
                   )}
                   {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
                   ))}
                 </TableExpandRow>
                 <TableExpandedRow
@@ -460,7 +472,7 @@ export const ColumnAILabelWithSelectionAndExpansion = (args) => (
                     <TableSelectRow {...getSelectionProps({ row })} />
                     {row.cells.map((cell) => {
                       return (
-                        <TableCell {...getCellProps({ cell })} key={cell.id}>
+                        <TableCell {...getCellProps({ cell })}>
                           {cell.value}
                         </TableCell>
                       );
@@ -513,9 +525,9 @@ export const ColumnAILabelSort = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell {...getCellProps({ cell })} key={cell.id}>
+                  <TableCell {...getCellProps({ cell })}>
                     {cell.value}
                   </TableCell>
                 ))}
@@ -559,9 +571,9 @@ export const FullTableAI = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell {...getCellProps({ cell })} key={cell.id}>
+                  <TableCell {...getCellProps({ cell })}>
                     {cell.value}
                   </TableCell>
                 ))}

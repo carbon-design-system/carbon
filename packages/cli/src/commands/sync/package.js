@@ -1,13 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const fs = require('fs-extra');
+import fs from 'fs-extra';
 
 // This is our default set of keywords to include in each `package.json` packageJson
 const DEFAULT_KEYWORDS = [
@@ -69,7 +67,7 @@ function sortFields(a, b) {
   return aValue - bValue;
 }
 
-function run({ packagePaths }) {
+export default async function run({ packagePaths }) {
   return Promise.all(
     packagePaths.map(
       async ({ packageJsonPath, packageJson, packageFolder }) => {
@@ -117,7 +115,4 @@ function run({ packagePaths }) {
   );
 }
 
-module.exports = {
-  name: 'package',
-  run,
-};
+export const name = 'package';

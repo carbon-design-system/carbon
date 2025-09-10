@@ -7,9 +7,9 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import {
   DROPDOWN_SIZE,
   DROPDOWN_TYPE,
@@ -22,7 +22,9 @@ import '../ai-label';
 import '../button';
 import '../toggle-tip';
 import '../icon-button';
+import '../link';
 import '../../../.storybook/templates/with-layer';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const content = html`
   <div slot="body-text">
@@ -41,15 +43,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -341,6 +343,28 @@ export const Filterable = {
   },
 };
 
+export const FilterableWithSelectAll = {
+  decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
+  render: () => {
+    return html`
+      <cds-multi-select
+        filterable="true"
+        title-text="FilterableMultiselect title"
+        helper-text="This is helper text"
+        select-all>
+        <cds-multi-select-item is-select-all>All roles</cds-multi-select-item>
+
+        <cds-multi-select-item value="editor">Editor</cds-multi-select-item>
+        <cds-multi-select-item value="owner">Owner</cds-multi-select-item>
+        <cds-multi-select-item disabled value="staging"
+          >Reader - a disabled itme</cds-multi-select-item
+        >
+        <cds-multi-select-item value="uploader">Uploader</cds-multi-select-item>
+      </cds-multi-select>
+    `;
+  },
+};
+
 export const FilterableWithAILabel = {
   render: () => {
     return html`
@@ -591,7 +615,7 @@ export const WithToggletipLabel = {
                 sed do eiusmod tempor incididunt ut fsil labore et dolore magna
                 aliqua.
               </p>
-              <cds-link slot="actions">Test</cds-link>
+              <cds-link href="#" slot="actions">Test</cds-link>
               <cds-button slot="actions">Button</cds-button>
             </cds-toggletip>
           </span>

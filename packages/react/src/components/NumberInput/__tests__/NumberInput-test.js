@@ -202,6 +202,33 @@ describe('NumberInput', () => {
     expect(onChange).toHaveBeenCalledTimes(2);
   });
 
+  it('should update when value prop changes externally with type="number"', async () => {
+    const ControlledNumberInput = () => {
+      const [value, setValue] = useState(5);
+      return (
+        <>
+          <NumberInput
+            type="number"
+            label="NumberInput label"
+            id="number-input"
+            value={value}
+            onChange={(e, state) => setValue(state.value)}
+            translateWithId={translateWithId}
+          />
+          <button onClick={() => setValue(10)}>set to 10</button>
+        </>
+      );
+    };
+
+    render(<ControlledNumberInput />);
+
+    const input = screen.getByLabelText('NumberInput label');
+    expect(input).toHaveValue(5);
+
+    await userEvent.click(screen.getByText('set to 10'));
+    expect(input).toHaveValue(10);
+  });
+
   describe('steppers', () => {
     it('should call `onClick` when up or down arrows are clicked', async () => {
       const onClick = jest.fn();

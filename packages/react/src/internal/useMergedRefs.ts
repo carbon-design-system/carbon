@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, type ForwardedRef, type Ref } from 'react';
+import { useCallback, useMemo, type ForwardedRef, type Ref } from 'react';
 
 /**
  * Merges multiple refs into a single callback ref.
@@ -18,9 +18,11 @@ import { useCallback, type ForwardedRef, type Ref } from 'react';
 export const useMergedRefs = <T>(
   refs: (ForwardedRef<T> | undefined)[]
 ): Ref<T> => {
+  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  const memoizedRefs = useMemo(() => refs, refs);
   return useCallback(
     (node: T | null) => {
-      refs.forEach((ref) => {
+      memoizedRefs.forEach((ref) => {
         if (typeof ref === 'function') {
           ref(node);
         } else if (ref) {
@@ -28,6 +30,6 @@ export const useMergedRefs = <T>(
         }
       });
     },
-    [refs]
+    [memoizedRefs]
   );
 };

@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// prettier-ignore
+'use client'
+
 import './feature-flags';
 
 export * from './components/Accordion';
@@ -65,6 +68,7 @@ export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
+export * as preview__Dialog from './components/Dialog';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
 export * from './components/PaginationNav';
@@ -107,47 +111,73 @@ export * from './components/UIShell';
 export * from './components/UnorderedList';
 // Experimental
 export {
+  FluidComboBox,
+  FluidComboBoxSkeleton,
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
 export {
+  FluidDatePicker,
+  FluidDatePickerSkeleton,
   FluidDatePicker as unstable__FluidDatePicker,
   FluidDatePickerSkeleton as unstable__FluidDatePickerSkeleton,
 } from './components/FluidDatePicker';
-export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
 export {
+  FluidDatePickerInput,
+  FluidDatePickerInput as unstable__FluidDatePickerInput,
+} from './components/FluidDatePickerInput';
+export {
+  FluidDropdown,
+  FluidDropdownSkeleton,
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
 } from './components/FluidDropdown';
 export {
+  FluidMultiSelect,
+  FluidMultiSelectSkeleton,
   FluidMultiSelect as unstable__FluidMultiSelect,
   FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
 } from './components/FluidMultiSelect';
 export {
+  FluidSelect,
+  FluidSelectSkeleton,
   FluidSelect as unstable__FluidSelect,
   FluidSelectSkeleton as unstable__FluidSelectSkeleton,
 } from './components/FluidSelect';
 export {
+  FluidSearch,
+  FluidSearchSkeleton,
   FluidSearch as unstable__FluidSearch,
   FluidSearchSkeleton as unstable__FluidSearchSkeleton,
 } from './components/FluidSearch';
 export {
+  FluidTextArea,
+  FluidTextAreaSkeleton,
   FluidTextArea as unstable__FluidTextArea,
   FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
 } from './components/FluidTextArea';
 export {
+  FluidTextInput,
+  FluidTextInputSkeleton,
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
 export {
+  FluidNumberInput,
+  FluidNumberInputSkeleton,
   FluidNumberInput as unstable__FluidNumberInput,
   FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
 } from './components/FluidNumberInput';
 export {
+  FluidTimePicker,
+  FluidTimePickerSkeleton,
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
 } from './components/FluidTimePicker';
-export { FluidTimePickerSelect as unstable__FluidTimePickerSelect } from './components/FluidTimePickerSelect';
+export {
+  FluidTimePickerSelect,
+  FluidTimePickerSelect as unstable__FluidTimePickerSelect,
+} from './components/FluidTimePickerSelect';
 export * from './components/Heading';
 export * from './components/IconButton';
 export * from './components/Layer';
@@ -187,7 +217,6 @@ export {
   AISkeletonIcon as unstable__AiSkeletonIcon,
   AISkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
 } from './components/AISkeleton';
-export * from './components/Stack';
 export * from './components/Tooltip';
 export {
   Text as unstable_Text,
@@ -291,9 +320,6 @@ export type { DatePickerProps } from './components/DatePicker/DatePicker';
 
 //date picker input
 export type { DatePickerInputProps } from './components/DatePickerInput/DatePickerInput';
-
-//dialog
-export type { DialogProps } from './components/Dialog/index';
 
 //dropdown
 export type { DropdownProps } from './components/Dropdown/Dropdown';
@@ -461,6 +487,17 @@ export type {
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
 } from './components/PageHeader';
+
+export type {
+  DialogProps,
+  DialogHeaderProps,
+  DialogControlsProps,
+  DialogCloseButtonProps,
+  DialogTitleProps,
+  DialogSubtitleProps,
+  DialogBodyProps,
+  DialogFooterProps,
+} from './components/Dialog';
 
 //pagination
 export type { PaginationProps } from './components/Pagination/Pagination';

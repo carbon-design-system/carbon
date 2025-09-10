@@ -14,6 +14,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type ComponentProps,
 } from 'react';
 import { deprecate } from '../../prop-types/deprecate';
 import cx from 'classnames';
@@ -41,7 +42,7 @@ import { noopFn } from '../../internal/noopFn';
 import { wrapFocus, wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -89,7 +90,7 @@ export interface NotificationActionButtonProps extends ButtonProps<'button'> {
   /**
    * Optionally specify a click handler for the notification action button.
    */
-  onClick?(): void;
+  onClick?: ComponentProps<typeof Button>['onClick'];
 }
 
 export function NotificationActionButton({
@@ -197,7 +198,6 @@ export function NotificationButton({
   return (
     <button
       {...rest}
-      // eslint-disable-next-line react/button-has-type
       type={type}
       aria-label={deprecatedAriaLabel || ariaLabel}
       title={deprecatedAriaLabel || ariaLabel}
@@ -356,6 +356,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when menu is closed
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onClose?(event: MouseEvent): boolean | void;
 
   /**
@@ -630,6 +631,7 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when menu is closed
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onClose?(event: MouseEvent): boolean | void;
 
   /**
@@ -881,17 +883,21 @@ export interface ActionableNotificationProps
   /**
    * Provide a function that is called when the action is clicked
    */
-  onActionButtonClick?(): void;
+  onActionButtonClick?: ComponentProps<
+    typeof NotificationActionButton
+  >['onClick'];
 
   /**
    * Provide a function that is called when menu is closed.
    * Default behavior of hiding the notification is prevented if this function returns false.
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
   onClose?(event: MouseEvent): boolean | void;
 
   /**
    * Provide a function that is called when the close button is clicked
    */
+
   onCloseButtonClick?(event: MouseEvent): void;
 
   /**
@@ -1246,11 +1252,12 @@ export type NewKindProps = 'warning' | 'info';
 
 export type KindProps = DeprecatedKindProps | NewKindProps;
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    error: 'warning', // only redirect error -> warning
-    success: 'info', // only redirect success -> info
-  };
+const mapping = {
+  error: 'warning', // only redirect error -> warning
+  success: 'info', // only redirect success -> info
+};
+
+const propMappingFunction = (deprecatedValue: string) => {
   return mapping[deprecatedValue];
 };
 
@@ -1283,7 +1290,9 @@ export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when the action is clicked
    */
-  onActionButtonClick?(): void;
+  onActionButtonClick?: ComponentProps<
+    typeof NotificationActionButton
+  >['onClick'];
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -1449,6 +1458,7 @@ Callout.propTypes = {
 /**
  * @deprecated Use `CalloutProps` instead.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20071
 export interface StaticNotificationProps extends CalloutProps {}
 let didWarnAboutDeprecation = false;
 export const StaticNotification: React.FC<StaticNotificationProps> = (
