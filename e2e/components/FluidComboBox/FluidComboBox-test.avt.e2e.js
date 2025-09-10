@@ -14,7 +14,7 @@ test.describe('@avt FluidComboBox', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidComboBox',
-      id: 'experimental-fluid-components-unstable-fluidcombobox--default',
+      id: 'components-fluid-components-fluidcombobox--default',
       globals: {
         theme: 'white',
       },
@@ -26,7 +26,7 @@ test.describe('@avt FluidComboBox', () => {
   test.skip('@avt-advanced-states open', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidComboBox',
-      id: 'experimental-fluid-components-unstable-fluidcombobox--default',
+      id: 'components-fluid-components-fluidcombobox--default',
       globals: {
         theme: 'white',
       },
@@ -47,7 +47,7 @@ test.describe('@avt FluidComboBox', () => {
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidComboBox',
-      id: 'experimental-fluid-components-unstable-fluidcombobox--default',
+      id: 'components-fluid-components-fluidcombobox--default',
       globals: {
         theme: 'white',
       },

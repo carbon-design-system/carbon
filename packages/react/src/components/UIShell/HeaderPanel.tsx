@@ -12,7 +12,6 @@ import React, {
   useRef,
   useState,
   type ComponentProps,
-  type ForwardedRef,
   type ReactNode,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
@@ -55,7 +54,7 @@ export interface HeaderPanelProps {
   onHeaderPanelFocus?: () => void;
 }
 
-const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
+const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
   (
     {
       children,
@@ -66,7 +65,7 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       href,
       ...rest
     },
-    ref: ForwardedRef<HTMLDivElement>
+    ref
   ) => {
     const prefix = usePrefix();
     const headerPanelReference = useRef<HTMLDivElement>(null);

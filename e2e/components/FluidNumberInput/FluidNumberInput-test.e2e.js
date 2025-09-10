@@ -17,7 +17,7 @@ test.describe('FluidNumberInput', () => {
       test('fluid text input @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidNumberInput',
-          id: 'experimental-fluid-components-unstable-fluidnumberinput--default',
+          id: 'components-fluid-components-fluidnumberinput--default',
           theme,
         });
       });
