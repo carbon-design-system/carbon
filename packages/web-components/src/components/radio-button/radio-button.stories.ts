@@ -72,6 +72,7 @@ const args = {
   labelPosition: RADIO_BUTTON_LABEL_POSITION.RIGHT,
   orientation: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
   name: 'radio-group',
+  required: false,
   value: 'radio-2',
   warn: false,
   warnText: 'Please notice the warning',
@@ -88,6 +89,10 @@ const argTypes = {
   readOnly: {
     control: 'boolean',
     description: 'read only (readOnly)',
+  },
+  required: {
+    control: 'boolean',
+    description: 'Required (required)',
   },
   helperText: {
     control: 'text',
@@ -164,6 +169,7 @@ export const Default = {
       checked,
       hideLabel,
       labelText,
+      required = false,
     } = args ?? {};
     return html`
       <cds-radio-button-group
@@ -177,6 +183,7 @@ export const Default = {
         orientation="${ifDefined(orientation)}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
+        ?required="${required}"
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}"
         @cds-radio-button-group-changed="${onChange}">
