@@ -197,7 +197,7 @@ class CDSTextarea extends CDSTextInput {
 
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
-      [`${prefix}--visually-hidden`]: this.hideLabel && !this.isFluid,
+      [`${prefix}--visually-hidden`]: this.hideLabel,
       [`${prefix}--label--disabled`]: this.disabled,
     });
 
