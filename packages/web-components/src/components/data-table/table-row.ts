@@ -231,7 +231,6 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
     const {
       disabled,
       hideCheckbox,
-      hideLabel,
       radio,
       selected,
       selectionLabel,
@@ -250,7 +249,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
               ${radio
                 ? html`<cds-radio-button data-table></cds-radio-button>`
                 : html`<cds-checkbox
-                    ?hide-label="${hideCheckbox || hideLabel}"
+                    hide-label
                     ?hide-checkbox="${hideCheckbox}"
                     label-text="${selectionLabel}"
                     name=${selectionName}
@@ -312,12 +311,6 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ type: Boolean, reflect: true, attribute: 'hide-checkbox' })
   hideCheckbox = false;
-
-  /**
-   * Specify whether the label should be shown beside the checkboxes
-   */
-  @property({ type: Boolean })
-  hideLabel = true;
 
   /**
    * `true` if the table row should be highlighted.
