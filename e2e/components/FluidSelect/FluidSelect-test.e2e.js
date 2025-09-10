@@ -17,7 +17,7 @@ test.describe('FluidSelect', () => {
       test('fluid select @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidSelect',
-          id: 'experimental-fluid-components-unstable-fluidselect--default',
+          id: 'components-fluid-components-fluidselect--default',
           theme,
         });
       });
