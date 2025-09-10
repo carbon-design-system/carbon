@@ -7701,6 +7701,27 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipAlignment": {
+        "args": [
+          [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipPosition": {
+        "args": [
+          [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "totalItems": {
         "type": "number",
       },
