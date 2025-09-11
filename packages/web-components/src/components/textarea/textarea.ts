@@ -8,14 +8,15 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { prefix } from '../../globals/settings';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import CDSTextInput from '../text-input/text-input';
 import styles from './textarea.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Text area.
@@ -155,10 +156,10 @@ class CDSTextarea extends CDSTextInput {
   private _prevCounterMode: 'character' | 'word' = this.counterMode;
 
   /**
-   * The previous cols value. This lets updated() conditionally call _measureWrapper()
-   * if the cols value has changed.
+   * Observes the textarea wrapper’s size to re-measure helper/invalid/warn text width when
+   * cols is updated
    */
-  private _prevCols?: number;
+  private _resizeObserver?: ResizeObserver;
 
   render() {
     const { enableCounter, maxCount } = this;
@@ -166,11 +167,11 @@ class CDSTextarea extends CDSTextInput {
     const textCount = this.value?.length ?? 0;
     const wordCount = this.value?.match(/\p{L}+/gu)?.length || 0;
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-area__invalid-icon`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`,
     });
 
@@ -271,10 +272,6 @@ class CDSTextarea extends CDSTextInput {
   }
   updated(): void {
     super.updated?.();
-    if (this.cols !== this._prevCols) {
-      this._prevCols = this.cols;
-      this._measureWrapper();
-    }
     if (this.counterMode !== this._prevCounterMode) {
       const textarea = this._textarea;
       if (textarea) {
@@ -286,6 +283,16 @@ class CDSTextarea extends CDSTextInput {
       }
       this._prevCounterMode = this.counterMode;
     }
+
+    const wrapper = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${prefix}--text-area__wrapper`
+    );
+    if (!wrapper) return;
+
+    this._resizeObserver = new ResizeObserver(() => {
+      this._measureWrapper();
+    });
+    this._resizeObserver.observe(wrapper);
   }
 
   /**
@@ -311,6 +318,11 @@ class CDSTextarea extends CDSTextInput {
         el.style.overflowWrap = 'break-word';
       }
     });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    this._resizeObserver?.disconnect();
   }
 
   static shadowRootOptions = {

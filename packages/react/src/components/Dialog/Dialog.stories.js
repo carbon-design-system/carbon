@@ -27,7 +27,7 @@ import { action } from 'storybook/actions';
 import mdx from './Dialog.mdx';
 
 export default {
-  title: 'Experimental/preview__Dialog',
+  title: 'Preview/preview__Dialog',
   component: Dialog,
   parameters: {
     docs: {

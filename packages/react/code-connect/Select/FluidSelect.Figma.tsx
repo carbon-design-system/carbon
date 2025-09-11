@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
-import {
-  unstable__FluidSelect as FluidSelect,
-  SelectItem,
-} from '@carbon/react';
+import { preview__FluidSelect as FluidSelect, SelectItem } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
