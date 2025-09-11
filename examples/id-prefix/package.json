@@ -2,7 +2,7 @@
   "name": "id-prefix",
   "description": "ID prefix example",
   "private": true,
-  "version": "0.88.0-rc.0",
+  "version": "0.88.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.91.0-rc.0",
+    "@carbon/react": "^1.91.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
