@@ -136,11 +136,6 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
 
   connectedCallback() {
     super.connectedCallback?.();
-    const dir =
-      this.getAttribute('dir') ?? document.documentElement.getAttribute('dir');
-    if (dir) {
-      this.setAttribute('dir', dir);
-    }
     this._attachExternalLabels();
   }
 
