@@ -39,6 +39,21 @@ const icons = {
 @customElement(`${prefix}-progress-step`)
 export default class CDSProgressStep extends FocusMixin(LitElement) {
   /**
+   * Internal flags: true if the user explicitly passed these attributes.
+   */
+  private _explicitComplete = false;
+  private _explicitCurrent = false;
+  private _explicitState: string | null = null;
+
+  get hasExplicitState() {
+    return (
+      this._explicitComplete ||
+      this._explicitCurrent ||
+      this._explicitState !== null
+    );
+  }
+
+  /**
    * `true` if the progress step should be disabled.
    */
   @property({ type: Boolean, reflect: true })
@@ -76,6 +91,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
 
   /**
    * The progress state.
+   * @deprecated Use `currentIndex` instead
    */
   @property({ reflect: true })
   state = PROGRESS_STEP_STAT.INCOMPLETE;
@@ -96,52 +112,36 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
   clickable = false;
 
   /**
-   * Internal flag to indicate if the state was manually set
+   * Specify whether the step has been completed
    */
-  _manualState = false;
-
-  /** React-like boolean props mapped to `state` */
   @property({ type: Boolean, reflect: true })
-  get complete() {
-    return this.state === PROGRESS_STEP_STAT.COMPLETE;
-  }
-  set complete(val: boolean) {
-    if (val) {
-      this.state = PROGRESS_STEP_STAT.COMPLETE;
-      this._manualState = true;
-    }
-  }
+  complete = false;
 
+  /**
+   * Specify whether the step is the current step
+   */
   @property({ type: Boolean, reflect: true })
-  get current() {
-    return this.state === PROGRESS_STEP_STAT.CURRENT;
-  }
-  set current(val: boolean) {
-    if (val) {
-      this.state = PROGRESS_STEP_STAT.CURRENT;
-      this._manualState = true;
-    }
-  }
+  current = false;
 
+  /**
+   * Specify whether the step is invalid
+   */
   @property({ type: Boolean, reflect: true })
-  get invalid() {
-    return this.state === PROGRESS_STEP_STAT.INVALID;
-  }
-  set invalid(val: boolean) {
-    if (val) {
-      this.state = PROGRESS_STEP_STAT.INVALID;
-      this._manualState = true;
-    }
-  }
+  invalid = false;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'listitem');
     }
+    // Capture which attributes were explicitly set by the user
+    this._explicitComplete = this.hasAttribute('complete');
+    this._explicitCurrent = this.hasAttribute('current');
+    this._explicitState = this.getAttribute('state');
+
     super.connectedCallback();
   }
 
-  updated(changedProperties: Map<string, unknown>) {
+  updated(changedProperties) {
     if (changedProperties.has('disabled')) {
       this.setAttribute('aria-disabled', String(Boolean(this.disabled)));
     }
@@ -150,6 +150,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
   // Fire internal click only when interactive
   private _fireStepClick = () => {
     const isUnclickable =
+      this.current ||
       this.state === PROGRESS_STEP_STAT.CURRENT ||
       this.disabled ||
       !this.clickable;
@@ -171,6 +172,13 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
     }
   };
 
+  private _svgIcon(invalid: boolean, current: boolean, complete: boolean) {
+    if (invalid) return PROGRESS_STEP_STAT.INVALID;
+    if (current) return PROGRESS_STEP_STAT.CURRENT;
+    if (complete) return PROGRESS_STEP_STAT.COMPLETE;
+    return false;
+  }
+
   render() {
     const {
       description,
@@ -179,13 +187,19 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
       secondaryLabelText,
       secondaryLabel,
       state,
+      complete,
+      current,
+      invalid,
     } = this;
     const svgLabel = iconLabel || description;
     const optionalLabel = secondaryLabel || secondaryLabelText;
 
     // Unclickable if current OR disabled OR no onChange upstream (to match React)
     const isUnclickable =
-      state === PROGRESS_STEP_STAT.CURRENT || this.disabled || !this.clickable;
+      current ||
+      state === PROGRESS_STEP_STAT.CURRENT ||
+      this.disabled ||
+      !this.clickable;
 
     return html`
       <div
@@ -198,13 +212,16 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
         role="button"
         aria-disabled="${String(isUnclickable)}"
         title="${label}">
-        ${iconLoader(icons[state], {
-          class:
-            state === PROGRESS_STEP_STAT.INVALID
-              ? `${prefix}--progress__warning`
-              : '',
-          title: svgLabel,
-        })}
+        ${iconLoader(
+          icons[this._svgIcon(invalid, current, complete) || state],
+          {
+            class:
+              invalid || state === PROGRESS_STEP_STAT.INVALID
+                ? `${prefix}--progress__warning`
+                : '',
+            title: svgLabel,
+          }
+        )}
         <slot name="label-text">
           <p
             class="${prefix}--progress-label"

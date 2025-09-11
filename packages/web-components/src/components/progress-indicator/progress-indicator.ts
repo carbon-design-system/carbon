@@ -9,7 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
-import CDSProgressStep, { PROGRESS_STEP_STAT } from './progress-step';
+import CDSProgressStep from './progress-step';
 import styles from './progress-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -108,24 +108,22 @@ export default class CDSProgressIndicator extends LitElement {
       new CustomEvent('onChange', { bubbles: true, composed: true, detail })
     );
 
-    // Call property handler if provided (to match React)
-    try {
-      this.onChange?.(changeEvt as CustomEvent<{ index: number }>);
-    } catch {
-      /* no-op */
+    if (typeof this.onChange === 'function') {
+      this.onChange(changeEvt as CustomEvent<{ index: number }>);
     }
   };
 
-  updated(changedProperties: Map<string, unknown>) {
+  updated(changedProperties) {
     const spacingValue = this.vertical ? false : this.spaceEqually;
-    const selector = (this.constructor as typeof CDSProgressIndicator)
-      .selectorStep;
     const clickable = typeof this.onChange === 'function';
 
-    const steps = this.querySelectorAll(selector);
+    const steps = this.querySelectorAll(
+      (this.constructor as typeof CDSProgressIndicator).selectorStep
+    );
 
     if (changedProperties.has('vertical')) {
-      // Propagate `vertical` attribute to descendants until :host-context() is widely supported
+      // Propagate `vertical` attribute to descendants until
+      // `:host-context()` gets supported in all major browsers
       forEach(steps, (item) => {
         (item as CDSProgressStep).vertical = this.vertical;
         (item as CDSProgressStep).spaceEqually = spacingValue;
@@ -134,14 +132,16 @@ export default class CDSProgressIndicator extends LitElement {
     }
 
     if (changedProperties.has('spaceEqually')) {
-      // Propagate `spaceEqually` attribute to descendants
+      // Propagate `spaceEqually` attribute to descendants until
+      // `:host-context()` gets supported in all major browsers
       forEach(steps, (item) => {
         (item as CDSProgressStep).spaceEqually = spacingValue;
       });
     }
 
-    // Propagate clickability whenever onChange changes
     if (changedProperties.has('onChange')) {
+      // Propagate `onChange` attribute to descendants until
+      // `:host-context()` gets supported in all major browsers
       forEach(steps, (item) => {
         (item as CDSProgressStep).clickable = clickable;
       });
@@ -151,19 +151,16 @@ export default class CDSProgressIndicator extends LitElement {
       steps.forEach((step, index) => {
         const progressStep = step as CDSProgressStep;
 
-        if (
-          progressStep._manualState ||
-          progressStep.state === PROGRESS_STEP_STAT.INVALID
-        ) {
+        if (progressStep.hasExplicitState) {
           return;
         }
+        progressStep.complete = false;
+        progressStep.current = false;
 
         if (index < this.currentIndex) {
-          progressStep.state = PROGRESS_STEP_STAT.COMPLETE;
+          progressStep.complete = true;
         } else if (index === this.currentIndex) {
-          progressStep.state = PROGRESS_STEP_STAT.CURRENT;
-        } else {
-          progressStep.state = PROGRESS_STEP_STAT.INCOMPLETE;
+          progressStep.current = true;
         }
       });
     }
