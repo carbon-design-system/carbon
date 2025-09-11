@@ -15,18 +15,14 @@
 @use '@carbon/react/scss/components/dropdown/dropdown';
 @use '@carbon/react/scss/components/multiselect/multiselect';
 
-.experimental-modal {
+.experimental-modal-with-presence {
   @include modal.modal(
-    $enable-experimental-focus-wrap-without-sentinels: true,
-    $enable-dialog-element: true
+    $enable-experimental-focus-wrap-without-sentinels: false,
+    $enable-dialog-element: false,
+    $enable-presence: true
   );
-  @include dialog.dialog();
   @include text-input.text-input();
   @include select.select();
   @include dropdown.dropdown();
   @include multiselect.multiselect();
-}
-
-.sb-notification p {
-  line-height: 1;
 }
