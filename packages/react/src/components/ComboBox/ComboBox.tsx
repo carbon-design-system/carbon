@@ -698,8 +698,24 @@ const ComboBox = forwardRef(
             return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
-            // Do not clear the input when opening or closing the menu. Preserve
-            // the existing input unless a selection change dictates otherwise.
+            // When closing the menu and custom values are disallowed, discard
+            // any text that doesn't exactly match an item.
+            if (state.isOpen && !changes.isOpen && !allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
+
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
+            }
+
             return changes;
 
           case MenuMouseLeave:
@@ -723,7 +739,7 @@ const ComboBox = forwardRef(
         }
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [allowCustomValue, inputValue, onChange]
+      [allowCustomValue, inputValue, itemToString, items, onChange]
     );
 
     const handleToggleClick =

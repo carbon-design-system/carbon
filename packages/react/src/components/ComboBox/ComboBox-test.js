@@ -828,7 +828,7 @@ describe('ComboBox', () => {
       );
     });
 
-    it('should not clear input when closing with chevron if input does not match any item and allowCustomValue is false', async () => {
+    it('should clear input when closing with chevron if input does not match any item and allowCustomValue is false', async () => {
       render(<ComboBox {...mockProps} allowCustomValue={false} />);
 
       // First type something that doesn't match any item
@@ -843,8 +843,8 @@ describe('ComboBox', () => {
       // Menu should be closed
       assertMenuClosed();
 
-      // Input should be preserved
-      expect(findInputNode()).toHaveDisplayValue('xyz');
+      // Input should be cleared
+      expect(findInputNode()).toHaveDisplayValue('');
     });
 
     it('should not clear input when opening then closing the menu without changes', async () => {
