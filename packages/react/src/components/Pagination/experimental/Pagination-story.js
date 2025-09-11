@@ -8,8 +8,8 @@
 import React from 'react';
 import { action } from 'storybook/actions';
 import {
-  unstable_PageSelector as PageSelector,
-  unstable_Pagination as Pagination,
+  preview_PageSelector as PageSelector,
+  preview_Pagination as Pagination,
 } from '../../..';
 
 const props = () => ({
@@ -23,7 +23,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Experimental/unstable_Pagination',
+  title: 'Preview/preview_Pagination',
   component: Pagination,
   subcomponents: {
     PageSelector,

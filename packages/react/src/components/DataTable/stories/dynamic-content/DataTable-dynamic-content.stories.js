@@ -239,7 +239,11 @@ export const Default = (args) => {
                   <TableHead>
                     <TableRow>
                       <TableExpandHeader aria-label="expand row" />
-                      <TableSelectAll {...getSelectionProps()} />
+                      {args.radio ? (
+                        <th scope="col" />
+                      ) : (
+                        <TableSelectAll {...getSelectionProps()} />
+                      )}
                       {headers.map((header, i) => (
                         <TableHeader key={i} {...getHeaderProps({ header })}>
                           {header.header}
@@ -279,35 +283,37 @@ export const Default = (args) => {
   return <DynamicRows />;
 };
 
+Default.args = {
+  size: 'lg',
+  useStaticWidth: false,
+  useZebraStyles: false,
+  isSortable: false,
+  locale: 'en',
+  radio: false,
+};
+
 Default.argTypes = {
-  filterRows: {
-    table: {
-      disable: true,
-    },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of table',
   },
-  headers: {
-    table: {
-      disable: true,
-    },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'If true, will use a width of "auto" instead of 100%',
   },
-  overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to rows',
   },
-  rows: {
-    table: {
-      disable: true,
-    },
+  isSortable: {
+    control: 'boolean',
+    description: 'Specify if the rows are sortable',
   },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
+  locale: {
+    description: 'Provide a string for the current locale',
   },
-  sortRow: {
-    table: {
-      disable: true,
-    },
+  radio: {
+    description: 'Use radio-selection instead of multi-selection',
   },
 };

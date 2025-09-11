@@ -342,17 +342,13 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    const closeMenu = useCallback(
-      (onCloseMenu?: () => void) => {
-        setOpen(false);
-        // Optional callback to be executed after the state as been set to close
-        if (onCloseMenu) {
-          onCloseMenu();
-        }
-        onClose();
-      },
-      [onClose]
-    );
+    const closeMenu = useCallback((onCloseMenu?: () => void) => {
+      setOpen(false);
+      // Optional callback to be executed after the state as been set to close
+      if (onCloseMenu) {
+        onCloseMenu();
+      }
+    }, []);
 
     const closeMenuAndFocus = useCallback(() => {
       const wasClicked = click;

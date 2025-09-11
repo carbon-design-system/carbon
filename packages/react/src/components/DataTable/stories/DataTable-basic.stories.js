@@ -49,7 +49,7 @@ const sharedArgTypes = {
   stickyHeader: {
     control: 'boolean',
     description:
-      'Specify whether the header should be sticky. Still experimental: may not work with every combination of table props',
+      'Specify whether the header should be sticky. Still in preview: may not work with every combination of table props',
   },
   useStaticWidth: {
     control: 'boolean',

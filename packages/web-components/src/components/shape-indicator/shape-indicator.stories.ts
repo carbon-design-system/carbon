@@ -97,7 +97,7 @@ export const Default = {
 };
 
 const meta = {
-  title: 'Experimental/Status Indicators/Shape Indicator',
+  title: 'Preview/Status Indicators/Shape Indicator',
 };
 
 export default meta;

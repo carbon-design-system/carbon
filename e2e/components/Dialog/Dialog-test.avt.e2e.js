@@ -14,7 +14,7 @@ test.describe('@avt Dialog', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__Dialog',
-      id: 'experimental-preview-dialog--modal',
+      id: 'preview-preview-dialog--modal',
       globals: {
         theme: 'white',
       },
@@ -24,7 +24,7 @@ test.describe('@avt Dialog', () => {
   test('@avt-advanced-states modal', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__Dialog',
-      id: 'experimental-preview-dialog--modal',
+      id: 'preview-preview-dialog--modal',
       globals: {
         theme: 'white',
       },
@@ -50,7 +50,7 @@ test.describe('@avt Dialog', () => {
   test('@avt-advanced-states non-modal', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__Dialog',
-      id: 'experimental-preview-dialog--non-modal',
+      id: 'preview-preview-dialog--non-modal',
       globals: {
         theme: 'white',
       },
@@ -71,7 +71,7 @@ test.describe('@avt Dialog', () => {
   test('@avt-advanced-states passive dialog', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__Dialog',
-      id: 'experimental-preview-dialog--passive-dialog',
+      id: 'preview-preview-dialog--passive-dialog',
       globals: {
         theme: 'white',
       },
@@ -93,7 +93,7 @@ test.describe('@avt Dialog', () => {
   test('@avt-advanced-states danger dialog', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__Dialog',
-      id: 'experimental-preview-dialog--danger-dialog',
+      id: 'preview-preview-dialog--danger-dialog',
       globals: {
         theme: 'white',
       },
@@ -108,7 +108,7 @@ test.describe('@avt Dialog', () => {
   test('@avt-advanced-states dialog Escape btn close', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__Dialog',
-      id: 'experimental-preview-dialog--modal',
+      id: 'preview-preview-dialog--modal',
       globals: {
         theme: 'white',
       },
@@ -123,7 +123,7 @@ test.describe('@avt Dialog', () => {
   test('@avt-advanced-states dialog with click to close', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__Dialog',
-      id: 'experimental-preview-dialog--modal',
+      id: 'preview-preview-dialog--modal',
       globals: {
         theme: 'white',
       },

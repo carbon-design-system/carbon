@@ -31,7 +31,7 @@ const devTools = {
     description: "Set the layout context's size",
     defaultValue: false,
     toolbar: {
-      title: 'dev :: unstable__Layout size',
+      title: 'dev :: preview__Layout size',
       items: [
         {
           value: false,
@@ -50,7 +50,7 @@ const devTools = {
     description: "Set the layout context's density",
     defaultValue: false,
     toolbar: {
-      title: 'dev :: unstable__Layout density',
+      title: 'dev :: preview__Layout density',
       items: [
         {
           value: false,

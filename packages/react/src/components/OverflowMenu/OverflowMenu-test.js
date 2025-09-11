@@ -117,6 +117,25 @@ describe('OverflowMenu', () => {
       expect(onClose).toHaveBeenCalled();
     });
 
+    it('should call onClose only once when menu is closed', async () => {
+      const onClose = jest.fn();
+      render(
+        <OverflowMenu
+          aria-label="Overflow menu"
+          className="extra-class"
+          onClose={onClose}>
+          <OverflowMenuItem className="test-child" itemText="one" />
+          <OverflowMenuItem className="test-child" itemText="two" />
+        </OverflowMenu>
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByText('one'));
+      await waitFor(() => {
+        expect(onClose).toHaveBeenCalledTimes(1);
+      });
+    });
+
     it('should call onFocus', async () => {
       const onFocus = jest.fn();
       render(

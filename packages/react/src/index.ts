@@ -43,6 +43,9 @@ export {
   FeatureFlags as unstable_FeatureFlags, // this export can be removed in v12
   useFeatureFlag as unstable_useFeatureFlag, // this export can be removed in v12
   useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
+  FeatureFlags as preview_FeatureFlags, // this export can be removed in v12
+  useFeatureFlag as preview_useFeatureFlag, // this export can be removed in v12
+  useFeatureFlags as preview_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
 export * from './components/FluidForm';
@@ -68,6 +71,7 @@ export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
+export * as preview__PageHeader from './components/PageHeader';
 export * as preview__Dialog from './components/Dialog';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
@@ -115,96 +119,139 @@ export {
   FluidComboBoxSkeleton,
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
+  FluidComboBox as preview__FluidComboBox,
+  FluidComboBoxSkeleton as preview__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
 export {
   FluidDatePicker,
   FluidDatePickerSkeleton,
   FluidDatePicker as unstable__FluidDatePicker,
   FluidDatePickerSkeleton as unstable__FluidDatePickerSkeleton,
+  FluidDatePicker as preview__FluidDatePicker,
+  FluidDatePickerSkeleton as preview__FluidDatePickerSkeleton,
 } from './components/FluidDatePicker';
 export {
   FluidDatePickerInput,
   FluidDatePickerInput as unstable__FluidDatePickerInput,
+  FluidDatePickerInput as preview__FluidDatePickerInput,
 } from './components/FluidDatePickerInput';
 export {
   FluidDropdown,
   FluidDropdownSkeleton,
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
+  FluidDropdown as preview__FluidDropdown,
+  FluidDropdownSkeleton as preview__FluidDropdownSkeleton,
 } from './components/FluidDropdown';
 export {
   FluidMultiSelect,
   FluidMultiSelectSkeleton,
   FluidMultiSelect as unstable__FluidMultiSelect,
   FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
+  FluidMultiSelect as preview__FluidMultiSelect,
+  FluidMultiSelectSkeleton as preview__FluidMultiSelectSkeleton,
 } from './components/FluidMultiSelect';
 export {
   FluidSelect,
   FluidSelectSkeleton,
   FluidSelect as unstable__FluidSelect,
   FluidSelectSkeleton as unstable__FluidSelectSkeleton,
+  FluidSelect as preview__FluidSelect,
+  FluidSelectSkeleton as preview__FluidSelectSkeleton,
 } from './components/FluidSelect';
 export {
   FluidSearch,
   FluidSearchSkeleton,
   FluidSearch as unstable__FluidSearch,
   FluidSearchSkeleton as unstable__FluidSearchSkeleton,
+  FluidSearch as preview__FluidSearch,
+  FluidSearchSkeleton as preview__FluidSearchSkeleton,
 } from './components/FluidSearch';
 export {
   FluidTextArea,
   FluidTextAreaSkeleton,
   FluidTextArea as unstable__FluidTextArea,
   FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
+  FluidTextArea as preview__FluidTextArea,
+  FluidTextAreaSkeleton as preview__FluidTextAreaSkeleton,
 } from './components/FluidTextArea';
 export {
   FluidTextInput,
   FluidTextInputSkeleton,
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
+  FluidTextInput as preview__FluidTextInput,
+  FluidTextInputSkeleton as preview__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
 export {
   FluidNumberInput,
   FluidNumberInputSkeleton,
   FluidNumberInput as unstable__FluidNumberInput,
   FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+  FluidNumberInput as preview__FluidNumberInput,
+  FluidNumberInputSkeleton as preview__FluidNumberInputSkeleton,
 } from './components/FluidNumberInput';
 export {
   FluidTimePicker,
   FluidTimePickerSkeleton,
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
+  FluidTimePicker as preview__FluidTimePicker,
+  FluidTimePickerSkeleton as preview__FluidTimePickerSkeleton,
 } from './components/FluidTimePicker';
 export {
   FluidTimePickerSelect,
   FluidTimePickerSelect as unstable__FluidTimePickerSelect,
+  FluidTimePickerSelect as preview__FluidTimePickerSelect,
 } from './components/FluidTimePickerSelect';
 export * from './components/Heading';
 export * from './components/IconButton';
 export * from './components/Layer';
-export { Layout as unstable_Layout } from './components/Layout';
+export {
+  Layout as unstable_Layout,
+  Layout as preview_Layout,
+} from './components/Layout';
 export {
   LayoutDirection as unstable_LayoutDirection,
   useLayoutDirection as unstable_useLayoutDirection,
+  LayoutDirection as preview_LayoutDirection,
+  useLayoutDirection as preview_useLayoutDirection,
 } from './components/LayoutDirection';
-export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
+export {
+  OverflowMenuV2 as unstable_OverflowMenuV2,
+  OverflowMenuV2 as preview_OverflowMenuV2,
+} from './components/OverflowMenuV2';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
+  PageSelector as preview_PageSelector,
+  Pagination as preview_Pagination,
 } from './components/Pagination/experimental';
 export * from './components/Popover';
 export * from './components/ProgressBar';
 export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
-export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
-export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';
+export {
+  IconIndicator as unstable__IconIndicator,
+  IconIndicator as preview__IconIndicator,
+} from './components/IconIndicator';
+export {
+  ShapeIndicator as unstable__ShapeIndicator,
+  ShapeIndicator as preview__ShapeIndicator,
+} from './components/ShapeIndicator';
 // Keep until V12
 export {
   AILabel as unstable__Slug,
   AILabelContent as unstable__SlugContent,
   AILabelActions as unstable__SlugActions,
+  AILabel as preview__Slug,
+  AILabelContent as preview__SlugContent,
+  AILabelActions as preview__SlugActions,
 } from './components/AILabel';
 export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,
+  ChatButton as preview__ChatButton,
+  ChatButtonSkeleton as preview__ChatButtonSkeleton,
 } from './components/ChatButton';
 export {
   AISkeletonText,
@@ -216,11 +263,16 @@ export {
   AISkeletonText as unstable__AiSkeletonText,
   AISkeletonIcon as unstable__AiSkeletonIcon,
   AISkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
+  AISkeletonText as preview__AiSkeletonText,
+  AISkeletonIcon as preview__AiSkeletonIcon,
+  AISkeletonPlaceholder as preview__AiSkeletonPlaceholder,
 } from './components/AISkeleton';
 export * from './components/Tooltip';
 export {
   Text as unstable_Text,
   TextDirection as unstable_TextDirection,
+  Text as preview_Text,
+  TextDirection as preview_TextDirection,
 } from './components/Text';
 export * from './components/Tooltip/DefinitionTooltip';
 export * from './components/Theme';

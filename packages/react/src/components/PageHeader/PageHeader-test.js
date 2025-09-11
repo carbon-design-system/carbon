@@ -8,7 +8,7 @@
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { unstable__PageHeader as PageHeader } from '../../';
+import { preview__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,

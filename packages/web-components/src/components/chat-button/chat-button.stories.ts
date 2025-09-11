@@ -99,7 +99,7 @@ export const Default = () => {
 };
 
 const meta = {
-  title: 'Experimental/Chat button',
+  title: 'Preview/Chat button',
 };
 
 export default meta;

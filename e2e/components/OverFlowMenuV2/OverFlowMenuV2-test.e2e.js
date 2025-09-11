@@ -16,7 +16,7 @@ test.describe('OverFlowMenuV2', () => {
       test('Over Flow Menu V2 @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'OverFlowMenuV2',
-          id: 'experimental-unstable-overflowmenuv2--overflow-menu-v-2',
+          id: 'preview-preview-overflowmenuv2--overflow-menu-v-2',
           theme,
         });
       });
@@ -26,7 +26,7 @@ test.describe('OverFlowMenuV2', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'OverFlowMenuV2',
-      id: 'experimental-unstable-overflowmenuv2--overflow-menu-v-2',
+      id: 'preview-preview-overflowmenuv2--overflow-menu-v-2',
       globals: {
         theme: 'white',
       },
