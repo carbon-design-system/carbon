@@ -19,7 +19,6 @@ import * as contribute from './commands/contribute.js';
 import * as inline from './commands/inline.js';
 import * as publish from './commands/publish.js';
 import * as release from './commands/release.js';
-import * as sync from './commands/sync.js';
 
 const require = createRequire(import.meta.url);
 
@@ -53,7 +52,6 @@ export async function main({ argv }) {
     .command(createCommand(inline))
     .command(createCommand(publish))
     .command(createCommand(release))
-    .command(createCommand(sync))
     .strict()
     .fail((message, error, yargs) => {
       if (error) {
