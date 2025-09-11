@@ -18,7 +18,7 @@ import { Heading } from '../Heading';
 import mdx from './Text.mdx';
 
 export default {
-  title: 'Experimental/unstable_Text',
+  title: 'Preview/preview_Text',
   component: Text,
   parameters: {
     docs: {
