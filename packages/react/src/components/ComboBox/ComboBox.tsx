@@ -606,20 +606,24 @@ const ComboBox = forwardRef(
 
         switch (type) {
           case InputBlur: {
-            // Allow custom values on blur if enabled.
-            if (allowCustomValue && highlightedIndex == '-1') {
-              const customValue = inputValue as ItemType;
-              changes.selectedItem = customValue;
+            // If custom values are allowed, treat whatever the user typed as
+            // the value.
+            if (allowCustomValue && highlightedIndex === -1) {
+              const { inputValue } = state;
+
+              changes.selectedItem = inputValue;
+
               if (onChange) {
-                onChange({ selectedItem: inputValue as ItemType, inputValue });
+                onChange({ selectedItem: inputValue, inputValue });
               }
+
               return changes;
             }
 
             // If a new item was selected, keep its label in the input.
             if (
               state.inputValue &&
-              highlightedIndex == '-1' &&
+              highlightedIndex === -1 &&
               changes.selectedItem
             ) {
               return {
@@ -628,21 +632,23 @@ const ComboBox = forwardRef(
               };
             }
 
-            // No custom values, no new selection:
-            // - If there was a previous selection, revert to it.
-            // - Otherwise, leave the user’s input as is.
-            if (
-              state.inputValue &&
-              highlightedIndex == '-1' &&
-              !allowCustomValue &&
-              !changes.selectedItem
-            ) {
-              const fallback =
-                state.selectedItem !== null
-                  ? itemToString(state.selectedItem)
-                  : state.inputValue;
+            // If custom values are not allowed, normalize any non-matching
+            // text. If the input isn’t an exact item label, restore the
+            // selected label if there is one, or clear it.
+            if (!allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
 
-              return { ...changes, inputValue: fallback };
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
             }
 
             return changes;
@@ -698,8 +704,7 @@ const ComboBox = forwardRef(
             return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
-            // When closing the menu and custom values are disallowed, discard
-            // any text that doesn't exactly match an item.
+            // When closing the menu, apply the same normalization as blur.
             if (state.isOpen && !changes.isOpen && !allowCustomValue) {
               const currentInput = state.inputValue ?? '';
               const hasExactMatch =
