@@ -56,3 +56,36 @@ To enable the flag, use the `FeatureFlags` component and set the prop:
   <ComposedModal ... />
 </FeatureFlags>
 ```
+
+## `enable-presence`
+
+`ComposedModal` supports the `enable-presence` feature flag. When enabled,
+ComposedModal will not mount until the modal is opened and unmount when it's closed.
+This helps to stay in sync with the React lifecycle.
+
+This means that:
+
+- The DOM no longer includes `ComposedModal` and its children in the closed state
+- `ComposedModal`, all of its children and their hooks will mount/unmount on open/close
+- Enter & exit animations change from CSS transitions to CSS animations
+
+Note: Only `ComposedModal` and its children are unmounted/mounted.
+Use `ComposedModalPresence` to shift the presence boundary to a higher level, if necessary.
+
+### Enabling the flag
+
+To enable the flag, use the `FeatureFlags` component and set the prop:
+
+```js
+<FeatureFlags enablePresence>
+  <ComposedModal ... />
+</FeatureFlags>
+```
+
+Or auto opt in by using `ComposedModalPresence` to shift the presence boundary to a different level:
+
+```js
+<ComposedModalPresence open={open}>
+  <ComposedModal ... />
+</ComposedModalPresence>
+```

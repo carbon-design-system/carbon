@@ -64,3 +64,7 @@ feature-flags:
       richer callback data and expanded trigger events for onChange and
       onDelete.
     enabled: false
+  - name: enable-presence
+    description: >
+      Enable components to remain unmounted in closed state and mount in open state.
+    enabled: false
