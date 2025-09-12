@@ -8,7 +8,6 @@
 import { html } from 'lit';
 import './index';
 import '../select/index';
-import { prefix } from '../../globals/settings';
 import { PAGINATION_SIZE } from './defs';
 
 const sizes = {
@@ -86,12 +85,6 @@ const argTypes = {
     control: 'number',
     description: 'The total number of items.',
   },
-  onChangedCurrent: {
-    action: `${prefix}-pagination-changed-current`,
-  },
-  onChangedPageSizesSelect: {
-    action: `${prefix}-page-sizes-select-changed`,
-  },
 };
 
 export const Default = {
@@ -100,8 +93,6 @@ export const Default = {
   render: (args) => {
     const {
       backwardText,
-      onChangedCurrent,
-      onChangedPageSizesSelect,
       disabled,
       forwardText,
       isLastPage,
@@ -127,9 +118,7 @@ export const Default = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}
-        @cds-pagination-changed-current="${onChangedCurrent}"
-        @cds-page-sizes-select-changed="${onChangedPageSizesSelect}">
+        total-items=${totalItems}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -141,16 +130,54 @@ export const Default = {
 };
 
 export const MultiplePaginationComponents = {
-  render: () => {
+  render: (args) => {
+    const {
+      backwardText,
+      disabled,
+      forwardText,
+      isLastPage,
+      itemsPerPageText,
+      page,
+      pageInputDisabled,
+      pageSize,
+      pageSizeInputDisabled,
+      pagesUnknown,
+      size,
+      totalItems,
+    } = args ?? {};
     return html`
-      <cds-pagination start="0" total-items="103">
+      <cds-pagination
+        backward-text=${backwardText}
+        ?disabled=${disabled}
+        forward-text=${forwardText}
+        ?is-last-page=${isLastPage}
+        items-per-page-text=${itemsPerPageText}
+        page=${page}
+        page-size=${pageSize}
+        ?page-input-disabled=${pageInputDisabled}
+        ?page-size-input-disabled=${pageSizeInputDisabled}
+        size=${size}
+        ?pages-unknown=${pagesUnknown}
+        total-items=${totalItems}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
         <cds-select-item value="40">40</cds-select-item>
         <cds-select-item value="50">50</cds-select-item>
       </cds-pagination>
-      <cds-pagination start="0" total-items="103">
+      <cds-pagination
+        backward-text=${backwardText}
+        ?disabled=${disabled}
+        forward-text=${forwardText}
+        ?is-last-page=${isLastPage}
+        items-per-page-text=${itemsPerPageText}
+        page=${page}
+        page-size=${pageSize}
+        ?page-input-disabled=${pageInputDisabled}
+        ?page-size-input-disabled=${pageSizeInputDisabled}
+        size=${size}
+        ?pages-unknown=${pagesUnknown}
+        total-items=${totalItems}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -163,15 +190,80 @@ export const MultiplePaginationComponents = {
 
 export const PaginationUnknownPages = {
   name: 'Unknown pages and items',
-  render: () => {
-    return html` <cds-pagination ?pages-unknown=${true}> </cds-pagination> `;
+  args: {
+    pagesUnknown: true,
+    totalItems: undefined,
+  },
+  render: (args) => {
+    const {
+      backwardText,
+      disabled,
+      forwardText,
+      isLastPage,
+      itemsPerPageText,
+      page,
+      pageInputDisabled,
+      pageSize,
+      pageSizeInputDisabled,
+      pagesUnknown,
+      size,
+      totalItems,
+    } = args ?? {};
+
+    return html`
+      <cds-pagination
+        backward-text=${backwardText}
+        ?disabled=${disabled}
+        forward-text=${forwardText}
+        ?is-last-page=${isLastPage}
+        items-per-page-text=${itemsPerPageText}
+        page=${page}
+        page-size=${pageSize}
+        ?page-input-disabled=${pageInputDisabled}
+        ?page-size-input-disabled=${pageSizeInputDisabled}
+        size=${size}
+        ?pages-unknown=${pagesUnknown}
+        total-items=${totalItems}>
+        <cds-select-item value="10">10</cds-select-item>
+        <cds-select-item value="20">20</cds-select-item>
+        <cds-select-item value="30">30</cds-select-item>
+        <cds-select-item value="40">40</cds-select-item>
+        <cds-select-item value="50">50</cds-select-item>
+      </cds-pagination>
+    `;
   },
 };
 
 export const PaginationWithCustomPageSizesLabel = {
-  render: () => {
+  render: (args) => {
+    const {
+      backwardText,
+      disabled,
+      forwardText,
+      isLastPage,
+      itemsPerPageText,
+      page,
+      pageInputDisabled,
+      pageSize,
+      pageSizeInputDisabled,
+      pagesUnknown,
+      size,
+      totalItems,
+    } = args ?? {};
     return html`
-      <cds-pagination start="0" total-items="103">
+      <cds-pagination
+        backward-text=${backwardText}
+        ?disabled=${disabled}
+        forward-text=${forwardText}
+        ?is-last-page=${isLastPage}
+        items-per-page-text=${itemsPerPageText}
+        page=${page}
+        page-size=${pageSize}
+        ?page-input-disabled=${pageInputDisabled}
+        ?page-size-input-disabled=${pageSizeInputDisabled}
+        size=${size}
+        ?pages-unknown=${pagesUnknown}
+        total-items=${totalItems}>
         <cds-select-item value="10">Ten</cds-select-item>
         <cds-select-item value="20">Twenty</cds-select-item>
         <cds-select-item value="30">Thirty</cds-select-item>
@@ -185,6 +277,8 @@ export const PaginationWithCustomPageSizesLabel = {
 const meta = {
   title: 'Components/Pagination',
   decorators: [(story) => html`<div style="max-width: 800px">${story()}</div>`],
+  argTypes,
+  args,
 };
 
 export default meta;

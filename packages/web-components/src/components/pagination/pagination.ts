@@ -57,34 +57,55 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       formatStatusWithIndeterminateTotal,
     } = this;
 
-    // * Regular: `1-10 of 100 items`
-    // * Indeterminate total: `Item 1-10` (`Item 11-` at the last page)
-    const end = Math.min(start + pageSize, totalItems ?? Infinity);
+    const min = totalItems === 0 ? 0 : start + 1;
 
-    const format =
-      totalItems == null || pagesUnknown
-        ? formatStatusWithIndeterminateTotal
-        : formatStatusWithDeterminateTotal;
+    if (pagesUnknown || totalItems == null) {
+      // * Indeterminate total:
+      //   - totalItems === 0 → "0–0 of 0 items"
+      //   - else → closed range "1–10 items", "11–20 items", etc.
+      if (totalItems === 0) {
+        return formatStatusWithDeterminateTotal({ start: 0, end: 0, count: 0 });
+      }
+      const end = start + pageSize;
+      return formatStatusWithIndeterminateTotal({
+        start: min,
+        end,
+        // Use visible range for pluralization, so we get "items" not "item"
+        count: Math.max(0, end - start),
+      });
+    }
 
-    // Set `start` and `end` to 0 when there are no items
-    return format({
-      start: totalItems === 0 ? 0 : start + 1,
-      end: totalItems === 0 ? 0 : end,
+    // * Determinate total:
+    //   - Regular: "1–10 of 100 items"
+    //   - When totalItems === 0 → "0–0 of 0 item"
+    return formatStatusWithDeterminateTotal({
+      start: min,
+      end: Math.min(start + pageSize, totalItems),
       count: totalItems,
     });
   }
 
   /**
-   * Calculates the start value based on page, pageSize, and totalItems
+   * Calculates the start value based on `page`, `pageSize`, and `totalItems`
    */
   private _calculateStart(
     page: number,
     pageSize: number,
-    totalItems: number
+    totalItems: number | undefined,
+    pagesUnknown: boolean
   ): number {
-    const calculatedStart = (page - 1) * pageSize;
-    // When totalItems is 0, `start` should be 0 to prevent negative values
-    return totalItems === 0 ? 0 : Math.max(calculatedStart, 0);
+    if (!pagesUnknown && totalItems === 0) return 0;
+    const safePageSize = pageSize > 0 ? pageSize : 1;
+    const calculatedStart = (Math.max(1, page) - 1) * safePageSize;
+
+    // Only clamp to the last page when the total is determinate
+    if (!pagesUnknown && Number.isFinite(totalItems)) {
+      const maxStart =
+        (Math.ceil((totalItems as number) / safePageSize) - 1) * safePageSize;
+      return Math.max(0, Math.min(calculatedStart, maxStart));
+    }
+
+    return Math.max(0, calculatedStart);
   }
 
   /**
@@ -154,14 +175,18 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * Handles `click` event on the next button.
    */
   private _handleClickNextButton() {
-    const { start: oldStart, pageSize, totalItems } = this;
+    const { start: oldStart, pageSize, totalItems, pagesUnknown } = this;
     this.page++;
     const newStart = oldStart + pageSize;
-    if (newStart < (totalItems == null ? Infinity : totalItems)) {
+
+    if (
+      newStart < (totalItems == null ? Infinity : totalItems) ||
+      pagesUnknown
+    ) {
       this._handleUserInitiatedChangeStart(newStart);
     }
-    // reset focus to previous button if it reaches the end
-    if (this.page === this.totalPages) {
+    // reset focus to previous button if it reaches the end and `pagesUnknown` is not true
+    if (!pagesUnknown && this.page === this.totalPages) {
       const { selectorPreviousButton } = this
         .constructor as typeof CDSPagination;
       (
@@ -182,7 +207,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeSelector(event) {
     const { value } = event.detail;
-    const { totalItems, pageSize } = this;
+    const { totalItems, pageSize, pagesUnknown } = this;
 
     if (event.composedPath()[0] === this._pageSizeSelect) {
       this.pageSize = parseInt(value);
@@ -195,7 +220,12 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       this._handleUserInitiatedPageSizeChange();
     } else {
       this.page = value;
-      const newStart = this._calculateStart(value, pageSize, totalItems);
+      const newStart = this._calculateStart(
+        value,
+        pageSize,
+        totalItems,
+        pagesUnknown
+      );
       this._handleUserInitiatedChangeStart(newStart);
     }
   }
@@ -218,7 +248,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    */
   @property({ attribute: false })
   formatLabelText = ({ count }) =>
-    `Page number, of ${count} page${count <= 1 ? '' : 's'}`;
+    `Page of ${count} page${count <= 1 ? '' : 's'}`;
 
   /**
    * The formatter, used with determinate the total pages. Should be changed upon the locale the UI is rendered with.
@@ -313,7 +343,14 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   /**
    * The number of total items.
    */
-  @property({ type: Number, attribute: 'total-items' })
+  @property({
+    type: Number,
+    attribute: 'total-items',
+    converter: {
+      fromAttribute: (value) =>
+        value === null || value === '' ? undefined : Number(value),
+    },
+  })
   totalItems!: number;
 
   /**
@@ -323,7 +360,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   totalPages = 1;
 
   updated(changedProperties) {
-    const { page, pageSize, totalItems } = this;
+    const { page, pageSize, totalItems, pagesUnknown } = this;
     const { selectorPageSizesSelect, selectorPagesSelect } = this
       .constructor as typeof CDSPagination;
 
@@ -332,18 +369,40 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       (this.shadowRoot!.querySelector(selectorPageSizesSelect) as any).value =
         pageSize;
     }
-    if (changedProperties.has('pageSize') || changedProperties.has('start')) {
-      // Default pageSize to effectively be 1 when we have a value of 0 to avoid
-      // division by 0.
-      this.totalPages =
-        pageSize > 0 ? Math.ceil(totalItems / pageSize) : totalItems;
+
+    // Recompute total pages and clamp the visible page whenever any relevant input changes
+    if (
+      changedProperties.has('pageSize') ||
+      changedProperties.has('start') ||
+      changedProperties.has('totalItems') ||
+      changedProperties.has('page')
+    ) {
+      const computedTotalPages =
+        pageSize > 0
+          ? Math.ceil((totalItems ?? 0) / pageSize)
+          : (totalItems ?? 0);
+
+      // Only assign if it actually changed to avoid unnecessary updates
+      if (this.totalPages !== computedTotalPages) {
+        this.totalPages = computedTotalPages;
+      }
+
+      const totalPagesSafe = Math.max(1, computedTotalPages || 1);
+      const requestedPage = Math.max(1, Math.floor(this.page || 1));
+      const displayPage = Math.min(requestedPage, totalPagesSafe);
+
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       (this.shadowRoot!.querySelector(selectorPagesSelect) as CDSSelect).value =
-        this.page.toString();
+        displayPage.toString();
     }
 
     if (changedProperties.has('page')) {
-      const newStart = this._calculateStart(page, pageSize, totalItems);
+      const newStart = this._calculateStart(
+        page,
+        pageSize,
+        totalItems,
+        pagesUnknown
+      );
       this._handleUserInitiatedChangeStart(newStart);
     }
   }
@@ -372,7 +431,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
     const { isLastPage = start + pageSize >= totalItems } = this;
     const prevButtonDisabled = disabled || start === 0;
-    const nextButtonDisabled = disabled || isLastPage;
+    const nextButtonDisabled = disabled || (!pagesUnknown && isLastPage);
 
     const prevButtonClassMap = {
       [`${prefix}--btn`]: true,
@@ -428,31 +487,21 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         >
       </div>
       <div class="${prefix}--pagination__right">
-        <label for="select" class="${prefix}--label ${prefix}--visually-hidden">
-          ${formatLabelText({ count: totalPages })}
-        </label>
+        ${!pagesUnknown || totalItems
+          ? html`
+              <label
+                for="select"
+                class="${prefix}--label ${prefix}--visually-hidden">
+                ${formatLabelText({ count: totalPages })}
+              </label>
+            `
+          : null}
         ${pagesUnknown || !totalItems
           ? html`
               <span
-                class="${prefix}--pagination__text ${prefix}--pagination__page-text"
-                >${formatSupplementalText({ count: totalPages })}</span
+                class="${prefix}--pagination__text ${prefix}--pagination__page-text ${prefix}--pagination__unknown-pages-text"
+                >${formatSupplementalText({ count: totalPages })} ${page}</span
               >
-
-              <cds-select
-                ?disabled=${disabled || pageInputDisabled}
-                id="pages-select"
-                pagination
-                size="${size}"
-                inline
-                value="${page}">
-                ${Array.from(new Array(totalPagesSafe)).map(
-                  (_item, index) => html`
-                    <cds-select-item value="${index + 1}">
-                      ${index + 1}
-                    </cds-select-item>
-                  `
-                )}
-              </cds-select>
             `
           : html`
               <cds-select
@@ -464,7 +513,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 value="${page}">
                 ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
-                    <cds-select-item value="${index + 1}">
+                    <cds-select-item
+                      value="${index + 1}"
+                      ?selected=${page === index + 1}>
                       ${index + 1}
                     </cds-select-item>
                   `
