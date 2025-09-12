@@ -1,0 +1,44 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as FluidTextInputStories from './fluid-text-input.stories';
+
+<Meta of={FluidTextInputStories} />
+
+# Text Area
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/fluid-text-input)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [Default With Toggletip](#default-with-toggletip)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={FluidTextInputStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidTextInputStories.Skeleton} />
+
+## Default With Toggletip
+
+<Canvas of={FluidTextInputStories.DefaultWithToggletip} />
+
+## Component API
+
+## `cds-fluid-text-input`
+
+<ArgTypes of="cds-text-input" />
+
+<Markdown>{`${cdnJs({ components: ['fluid-text-input'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/fluid-text-input/fluid-text-input.mdx).
