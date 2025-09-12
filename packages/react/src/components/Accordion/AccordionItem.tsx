@@ -40,6 +40,12 @@ export interface AccordionItemProps {
   disabled?: boolean;
 
   /**
+   * Specify a custom label for the accordion button.
+   * This is important for accessibility when the accordion has no visible title.
+   */
+  'aria-label'?: AriaAttributes['aria-label'];
+
+  /**
    * The handler of the massaged `click` event.
    */
   onClick?: MouseEventHandler<HTMLLIElement>;
@@ -95,6 +101,7 @@ export interface AccordionItemProps {
 export interface AccordionToggleProps {
   'aria-controls'?: AriaAttributes['aria-controls'];
   'aria-expanded'?: AriaAttributes['aria-expanded'];
+  'aria-label'?: AriaAttributes['aria-label'];
   className?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -116,6 +123,7 @@ function AccordionItem({
   title = 'title',
   disabled: controlledDisabled,
   handleAnimationEnd,
+  'aria-label': ariaLabel,
   ...rest
 }: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
@@ -187,6 +195,7 @@ function AccordionItem({
         disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
+        aria-label={ariaLabel}
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
         onKeyDown={onKeyDown}
@@ -223,6 +232,12 @@ AccordionItem.propTypes = {
    * Specify whether an individual AccordionItem should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify a custom label for the accordion button.
+   * This is important for accessibility when the accordion has no visible title.
+   */
+  'aria-label': PropTypes.string,
 
   /**
    * The handler of the massaged `click` event.

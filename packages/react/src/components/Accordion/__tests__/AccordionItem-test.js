@@ -85,6 +85,17 @@ describe('AccordionItem', () => {
 
       expect(screen.getByText('Test title')).toBeInTheDocument();
     });
+
+    it('should respect aria-label prop', () => {
+      render(
+        <AccordionItem title="Test title" aria-label="Custom accordion label" />
+      );
+
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Custom accordion label'
+      );
+    });
   });
 
   describe('behaves as expected', () => {
