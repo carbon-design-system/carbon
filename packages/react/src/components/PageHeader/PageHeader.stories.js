@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Add } from '@carbon/icons-react';
-import { unstable__PageHeader as PageHeader } from '../../';
+import { preview__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
@@ -62,7 +62,7 @@ const tags = [
 ];
 
 export default {
-  title: 'Patterns/unstable__PageHeader',
+  title: 'Patterns/preview__PageHeader',
   component: PageHeader,
   subcomponents: {
     PageHeaderBreadcrumbBar,

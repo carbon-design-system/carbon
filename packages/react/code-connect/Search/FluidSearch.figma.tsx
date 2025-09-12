@@ -7,8 +7,8 @@
 
 import React from 'react';
 import {
-  unstable__FluidSearch as FluidSearch,
-  unstable__FluidSearchSkeleton as FluidSearchSkeleton,
+  preview__FluidSearch as FluidSearch,
+  preview__FluidSearchSkeleton as FluidSearchSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
