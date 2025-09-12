@@ -124,6 +124,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   /**
+   * Specify text for the accessibility label of the button
+   */
+  @property({ attribute: 'aria-label' })
+  ariaLabel = '';
+
+  /**
    * `true` if the button should have input focus when the page loads.
    */
   @property({ type: Boolean, reflect: true })
@@ -268,6 +274,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
 
   render() {
     const {
+      ariaLabel,
       autofocus,
       buttonClassName,
       dangerDescription,
@@ -404,6 +411,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             ?disabled="${disabled}"
             tabindex="${tabIndex}"
             type="${ifDefined(type)}"
+            aria-label="${ifDefined(ariaLabel)}"
             aria-describedby="badge-indicator">
             ${isDanger
               ? html`<span class="${prefix}--visually-hidden"

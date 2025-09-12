@@ -482,6 +482,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             ?disabled="${prevButtonDisabled}"
             button-class-name="${prevButtonClasses}"
             tooltip-text="${backwardText}"
+            aria-label="${backwardText}"
             @click="${handleClickPrevButton}">
             ${iconLoader(CaretLeft16, { slot: 'icon' })}
           </cds-button>
@@ -492,6 +493,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             ?disabled="${nextButtonDisabled}"
             button-class-name="${nextButtonClasses}"
             tooltip-text="${forwardText}"
+            aria-label="${forwardText}"
             @click="${handleClickNextButton}">
             ${iconLoader(CaretRight16, { slot: 'icon' })}
           </cds-button>
