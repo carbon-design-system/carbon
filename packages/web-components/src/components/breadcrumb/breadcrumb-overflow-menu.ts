@@ -7,8 +7,9 @@
 
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
-import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16.js';
 import CDSOverflowMenu from '../overflow-menu/overflow-menu';
+import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -24,8 +25,9 @@ class CDSBreadcrumbOverflowMenu extends CDSOverflowMenu {
   render() {
     return html`
       <slot name="icon">
-        ${OverflowMenuHorizontal16({
+        ${iconLoader(OverflowMenuHorizontal16, {
           class: `${prefix}--overflow-menu__icon`,
+          slot: 'icon',
         })}
       </slot>
     `;

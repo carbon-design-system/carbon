@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable__FluidPasswordInput as FluidPasswordInput,
-  unstable__FluidTextInputSkeleton as FluidTextInputSkeleton,
+  preview__FluidPasswordInput as FluidPasswordInput,
+  preview__FluidTextInputSkeleton as FluidTextInputSkeleton,
 } from '@carbon/react';
 
 figma.connect(

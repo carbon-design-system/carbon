@@ -13,7 +13,8 @@ import CDSLink from '../link/link';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import AILabel24 from '@carbon/icons/lib/ai-label/24.js';
+import AILabel24 from '@carbon/icons/es/ai-label/24.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 /**
  * Clickable tile.
  *
@@ -21,6 +22,7 @@ import AILabel24 from '@carbon/icons/lib/ai-label/24.js';
  */
 @customElement(`${prefix}-clickable-tile`)
 class CDSClickableTile extends CDSLink {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   protected get _classes(): any {
     const { colorScheme, disabled, hasRoundedCorners, aiLabel, slug } = this;
     return classMap({
@@ -84,7 +86,7 @@ class CDSClickableTile extends CDSLink {
     return html`
       ${super._renderInner()}
       ${this.aiLabel || this.slug
-        ? AILabel24({ class: `${prefix}--tile--ai-label-icon` })
+        ? iconLoader(AILabel24, { class: `${prefix}--tile--ai-label-icon` })
         : ''}
       <slot name="decorator"></slot>
     `;

@@ -15,7 +15,8 @@ import styles from './combo-button.scss?lit';
 import '../button/index';
 import '../menu/index';
 import '../icon-button/index';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
 import { COMBO_BUTTON_SIZE, COMBO_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
@@ -85,6 +86,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   tooltipContent = 'Additional actions';
 
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: Event) => {
     const path = event.composedPath();
@@ -99,6 +101,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     // Close the menu if the focus moves outside the menu button or menu
@@ -150,7 +153,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
         align=${tooltipAlignment}
         menu-alignment=${menuAlignment}
         part="trigger">
-        ${ChevronDown16({ slot: 'icon' })}
+        ${iconLoader(ChevronDown16, { slot: 'icon' })}
         <span slot="tooltip-content">${this.tooltipContent}</span>
       </cds-icon-button>
       <slot></slot>

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,8 @@ import { BREADCRUMB_SIZE } from './defs';
 
 import { prefix } from '../../globals/settings';
 
-import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16.js';
+import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const sizes = {
   [`Small size (${BREADCRUMB_SIZE.SMALL})`]: BREADCRUMB_SIZE.SMALL,
@@ -101,7 +102,7 @@ export const BreadcrumbWithOverflowMenu = {
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
           <cds-overflow-menu breadcrumb align="bottom">
-            ${OverflowMenuHorizontal16({
+            ${iconLoader(OverflowMenuHorizontal16, {
               class: `${prefix}--overflow-menu__icon`,
               slot: 'icon',
             })}
@@ -122,22 +123,32 @@ export const BreadcrumbWithOverflowMenu = {
     `;
   },
 };
-const skeletonArgs = { className: '' };
+const skeletonArgs = { items: 3, ...args };
 const skeletonArgTypes = {
-  className: {
-    control: 'text',
-    description:
-      'Specify an optional className to be applied to the container node.',
+  items: {
+    control: 'number',
+    description: 'Specify the number of items',
   },
+  ...argTypes,
 };
 
 export const Skeleton = {
   args: skeletonArgs,
   argTypes: skeletonArgTypes,
+  parameters: {
+    controls: {
+      exclude: ['aria-label'],
+    },
+  },
   render: (args) => {
-    const { className } = args ?? {};
+    const { className, noTrailingSlash, size, items } = args ?? {};
     return html`
-      <cds-breadcrumb-skeleton .class="${className}"> </cds-breadcrumb-skeleton>
+      <cds-breadcrumb-skeleton
+        .size="${size}"
+        .class="${className}"
+        ?no-trailing-slash="${noTrailingSlash}"
+        items="${items}">
+      </cds-breadcrumb-skeleton>
     `;
   },
 };

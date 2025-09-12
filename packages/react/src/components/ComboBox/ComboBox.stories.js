@@ -223,7 +223,7 @@ export const AutocompleteWithTypeahead = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        allowCustomValue
+        allowCustomValue={args.allowCustomValue}
         onChange={args.onChange}
         helperText="Combobox helper text"
         id="carbon-combobox"
@@ -411,5 +411,6 @@ export const _fullyControlled = (args) => {
 _fullyControlled.argTypes = { ...sharedArgTypes };
 
 AutocompleteWithTypeahead.argTypes = {
+  ...sharedArgTypes,
   onChange: { action: 'onChange' },
 };

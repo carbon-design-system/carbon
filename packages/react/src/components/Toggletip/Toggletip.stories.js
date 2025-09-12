@@ -9,6 +9,7 @@ import { Information } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
+import Modal from '../Modal';
 import {
   ToggletipLabel,
   Toggletip,
@@ -88,7 +89,7 @@ export const ExperimentalAutoAlign = () => {
 };
 
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
-// autoAlign is experimental and not part of the actual implementation.
+// autoAlign is in preview and not part of the actual implementation.
 export const Default = (args) => {
   return (
     <>

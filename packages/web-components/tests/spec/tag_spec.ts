@@ -16,32 +16,37 @@ const playgroundTemplate = (props?) =>
     'cds-tag': props,
   });
 
-xdescribe('cds-tag', function () {
-  describe('Enabling/disabling', function () {
+xdescribe('cds-tag', () => {
+  describe('Enabling/disabling', () => {
     const events = new EventManager();
 
-    it('should allow firing click event for normal condition', async function () {
+    it('should allow firing click event for normal condition', async () => {
       render(tagTemplate(), document.body);
       await Promise.resolve();
       const elem = document.querySelector('cds-tag');
       const spyClick = jasmine.createSpy('click');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       events.on(elem!, 'click', spyClick);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       elem!.shadowRoot!.querySelector('button')!.click();
       expect(spyClick).toHaveBeenCalled();
     });
 
-    it('should disallow firing click event if disabled', async function () {
+    it('should disallow firing click event if disabled', async () => {
       render(playgroundTemplate({ disabled: true }), document.body);
       await Promise.resolve();
       const elem = document.querySelector('cds-tag');
       const spyClick = jasmine.createSpy('click');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       events.on(elem!, 'click', spyClick);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       elem!.shadowRoot!.querySelector('button')!.click();
       expect(spyClick).not.toHaveBeenCalled();
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
     await render(undefined!, document.body);
   });
 });
