@@ -36,6 +36,7 @@
     justify-content: space-between;
     background-color: $layer;
     border-block-start: 1px solid $border-subtle;
+    container-type: inline-size;
     inline-size: calc(100% - 1px);
     min-block-size: convert.to-rem(40px);
     overflow-x: auto;
@@ -48,8 +49,8 @@
       }
     }
 
-    // mobile friendly pagination
-    @include breakpoint-down('md') {
+    // mobile friendly pagination with container queries
+    @container (max-width: 36.625rem) {
       .#{$prefix}--pagination__left > *,
       .#{$prefix}--pagination__right > * {
         display: none;
