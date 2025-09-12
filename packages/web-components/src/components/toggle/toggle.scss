@@ -49,11 +49,11 @@ $css--plex: true !default;
 }
 
 // RTL overrides
-:host-context([dir='rtl']) .#{$prefix}--toggle__switch--checked::before {
+:host(#{$prefix}-toggle:dir(rtl)) .#{$prefix}--toggle__switch--checked::before {
   transform: translateX(convert.to-rem(-24px));
 }
 
-:host-context([dir='rtl'])
+:host(#{$prefix}-toggle:dir(rtl))
   .#{$prefix}--toggle__appearance--sm
   .#{$prefix}--toggle__switch--checked::before {
   transform: translateX(convert.to-rem(-16px));
