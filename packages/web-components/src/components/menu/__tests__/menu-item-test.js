@@ -81,25 +81,6 @@ describe('cds-menu-item', () => {
       document.dir = originalDir;
     });
 
-    // Removing the failing test for icon detection
-    // it('should dispatch icon-detect event when render-icon slot is filled', async () => {
-    //   let iconDetectFired = false;
-    //   const el = await fixture(html`
-    //     <cds-menu-item label="Item with Icon">
-    //       <svg slot="render-icon" width="16" height="16"></svg>
-    //     </cds-menu-item>
-    //   `);
-    //
-    //   el.addEventListener('icon-detect', () => {
-    //     iconDetectFired = true;
-    //   });
-    //
-    //   // Wait for the icon detection to happen
-    //   await new Promise(resolve => setTimeout(resolve, 10));
-    //
-    //   expect(iconDetectFired).to.be.true;
-    // });
-
     it('should set role to menuitem by default', async () => {
       const el = await fixture(
         html`<cds-menu-item label="Test Item"></cds-menu-item>`
@@ -107,20 +88,6 @@ describe('cds-menu-item', () => {
       await el.updateComplete;
       expect(el).to.have.attribute('role', 'menuitem');
     });
-
-    // Removing the failing test for menuitemradio
-    // it('should set role to menuitemradio when inside a radio group', async () => {
-    //   const el = await fixture(html`
-    //     <cds-menu-item-radio-group>
-    //       <cds-menu-item label="Radio Item"></cds-menu-item>
-    //     </cds-menu-item-radio-group>
-    //   `);
-    //
-    //   const menuItem = el.querySelector('cds-menu-item');
-    //   await menuItem.updateComplete;
-    //
-    //   expect(menuItem).to.have.attribute('role', 'menuitemradio');
-    // });
   });
 
   describe('event handling', () => {
@@ -176,37 +143,6 @@ describe('cds-menu-item', () => {
       // Restore original method
       el._openSubmenu = originalOpenSubmenu;
     });
-
-    // Removing the failing test for mouseleave
-    // it('should close submenu on mouseleave', async () => {
-    //   const el = await fixture(html`
-    //     <cds-menu-item label="Parent Item">
-    //       <cds-menu-item slot="submenu" label="Child Item"></cds-menu-item>
-    //     </cds-menu-item>
-    //   `);
-    //   await el.updateComplete;
-    //
-    //   // First open the submenu
-    //   el._openSubmenu();
-    //   expect(el.submenuOpen).to.be.true;
-    //
-    //   // Create a mock for _closeSubmenu
-    //   const originalCloseSubmenu = el._closeSubmenu;
-    //   let closeSubmenuCalled = false;
-    //
-    //   el._closeSubmenu = function() {
-    //     closeSubmenuCalled = true;
-    //     originalCloseSubmenu.call(this);
-    //   };
-    //
-    //   // Trigger mouseleave
-    //   el.dispatchEvent(new MouseEvent('mouseleave'));
-    //
-    //   expect(closeSubmenuCalled).to.be.true;
-    //
-    //   // Restore original method
-    //   el._closeSubmenu = originalCloseSubmenu;
-    // });
 
     it('should handle keydown events for submenu navigation', async () => {
       const el = await fixture(html`
