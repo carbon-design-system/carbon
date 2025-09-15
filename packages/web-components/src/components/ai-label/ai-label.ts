@@ -79,7 +79,7 @@ class CDSAILabel extends HostListenerMixin(CDSToggleTip) {
   @HostListener('parentRoot:click')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleOutsideClick = (event: Event) => {
+  private _handleOutsideClick = (event: MouseEvent) => {
     const path = event.composedPath();
     if (!path.includes(this)) {
       this.open = false;
@@ -90,7 +90,7 @@ class CDSAILabel extends HostListenerMixin(CDSToggleTip) {
   @HostListener('parentRoot:focusin')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleFocusChange = (event: Event) => {
+  private _handleFocusChange = (event: FocusEvent) => {
     if (
       this.open &&
       (!(event.target instanceof Node) || !this.contains(event.target))
