@@ -2131,7 +2131,7 @@ __metadata:
     "@carbon/motion": "npm:^11.35.0"
     "@carbon/styles": "npm:^1.90.0"
     "@floating-ui/dom": "npm:^1.6.3"
-    "@ibm/telemetry-js": "npm:^1.10.1"
+    "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
     "@lit/context": "npm:^1.1.3"
     "@mordech/vite-lit-loader": "npm:^0.37.0"
@@ -3111,12 +3111,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.10.1, @ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.6.1":
-  version: 1.10.1
-  resolution: "@ibm/telemetry-js@npm:1.10.1"
+"@ibm/telemetry-js@npm:^1.10.2, @ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.6.1":
+  version: 1.10.2
+  resolution: "@ibm/telemetry-js@npm:1.10.2"
   bin:
     ibmtelemetry: dist/collect.js
-  checksum: 10/86357c2bcc41c8b4bd4ea5e748406480a70205db65adefd1f353e97497f80767c0a9ec4dd600a3d2ab8a9fc642fc6a2b50c5b2a962b51dc46dc80dde5afe6f65
+  checksum: 10/bc1802cf691b0bb9df8cc19c8f4ab03b8022b5a53df778a9e99c817f708c51a02f440ea395ceb3656f057c8aa6356d5271f54eb3af3bcbb5c0b536fea9af2e36
   languageName: node
   linkType: hard
 
@@ -25855,8 +25855,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^6.3.5":
-  version: 6.3.5
-  resolution: "vite@npm:6.3.5"
+  version: 6.3.6
+  resolution: "vite@npm:6.3.6"
   dependencies:
     esbuild: "npm:^0.25.0"
     fdir: "npm:^6.4.4"
@@ -25905,7 +25905,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/7bc3a1c5ef79413ad70daeeaf69b76cd1218d16aa18ed8ee08d74648ef17284f4a17c11f5cf42b573b6dc5e3d5f115110b67b1d23c2c699cfe404757764a634a
+  checksum: 10/8b8b6fe12318ca457396bf2053df7056cf4810f1d4a43b36b6afe59860e32b749c0685a290fe8a973b0d3da179ceec4c30cebbd3c91d0c47fbcf6436b17bdeef
   languageName: node
   linkType: hard
 
