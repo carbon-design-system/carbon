@@ -1003,8 +1003,10 @@ export const Slider = (props: SliderProps) => {
     const numSteps = Math.floor((max - min) / step) + 1;
     /** Index of the step that corresponds to `leftPercent`. */
     const stepIndex = Math.round(leftPercent * (numSteps - 1));
-    const discreteValue = min + step * stepIndex;
-    /** Percentage corresponding to the discrete value. */
+    // const discreteValue = min + step * stepIndex;
+    const discreteValue =
+      stepIndex === numSteps - 1 ? max : min + step * stepIndex;
+    /** Percentage corresponding to the step index. */
     const discretePercent = stepIndex / (numSteps - 1);
 
     return { discreteValue, discretePercent };
