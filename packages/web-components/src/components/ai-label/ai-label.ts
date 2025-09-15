@@ -15,6 +15,8 @@ import Undo16 from '@carbon/icons/es/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import HostListener from '../../globals/decorators/host-listener';
+import HostListenerMixin from '../../globals/mixins/host-listener';
 
 /**
  * Basic AI Label.
@@ -22,7 +24,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @element cds-ai-label
  */
 @customElement(`${prefix}-ai-label`)
-class CDSAILabel extends CDSToggleTip {
+class CDSAILabel extends HostListenerMixin(CDSToggleTip) {
   /**
    * @deprecated the slot string will be renamed to "decorator"
    */
@@ -74,18 +76,10 @@ class CDSAILabel extends CDSToggleTip {
   @property()
   previousValue;
 
-  connectedCallback() {
-    super.connectedCallback?.();
-    document.addEventListener('click', this._handleOutsideClick, true);
-    document.addEventListener('focusin', this._handleFocusChange, true);
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback?.();
-    document.removeEventListener('click', this._handleOutsideClick, true);
-    document.removeEventListener('click', this._handleFocusChange, true);
-  }
-
-  private _handleOutsideClick = (event: MouseEvent) => {
+  @HostListener('parentRoot:click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleOutsideClick = (event: Event) => {
     const path = event.composedPath();
     if (!path.includes(this)) {
       this.open = false;
@@ -93,7 +87,10 @@ class CDSAILabel extends CDSToggleTip {
     }
   };
 
-  private _handleFocusChange = (event: FocusEvent) => {
+  @HostListener('parentRoot:focusin')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleFocusChange = (event: Event) => {
     if (
       this.open &&
       (!(event.target instanceof Node) || !this.contains(event.target))
