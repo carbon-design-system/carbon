@@ -278,6 +278,75 @@ export interface NumberInputProps
   warnText?: ReactNode;
 }
 
+const getSeparators = (locale: string) => {
+  const numberWithGroupAndDecimal = 1234567.89;
+
+  const formatted = new Intl.NumberFormat(locale).format(
+    numberWithGroupAndDecimal
+  );
+
+  // Extract separators using regex
+  const match = formatted.match(/(\D+)\d{3}(\D+)\d{2}$/);
+
+  if (match) {
+    const groupSeparator = match[1];
+    const decimalSeparator = match[2];
+    return { groupSeparator, decimalSeparator };
+  } else {
+    return { groupSeparator: null, decimalSeparator: null };
+  }
+};
+
+const isValidNumberInput = (input: string, locale: string): boolean => {
+  // allow empty string
+  if (input === '') {
+    return true;
+  }
+  const { groupSeparator, decimalSeparator } = getSeparators(locale);
+
+  if (!decimalSeparator) {
+    return !isNaN(Number(input));
+  }
+
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  let group = '';
+  if (groupSeparator) {
+    if (groupSeparator.trim() === '') {
+      group = '[\\u00A0\\u202F\\s]'; // handle NBSP, narrow NBSP, space
+    } else {
+      group = esc(groupSeparator);
+    }
+  }
+
+  const decimal = esc(decimalSeparator);
+
+  // Regex for:
+  // - integers (with/without grouping)
+  // - optional decimal with 0+ digits after separator
+  const regex = new RegExp(
+    `^-?\\d{1,3}(${group}\\d{3})*(${decimal}\\d*)?$|^-?\\d+(${decimal}\\d*)?$`
+  );
+
+  if (!regex.test(input)) {
+    return false;
+  }
+
+  // Normalize
+  let normalized = input;
+  if (groupSeparator) {
+    if (groupSeparator.trim() === '') {
+      normalized = normalized.replace(/[\u00A0\u202F\s]/g, '');
+    } else {
+      normalized = normalized.split(groupSeparator).join('');
+    }
+  }
+
+  normalized = normalized.replace(decimalSeparator, '.');
+
+  return !isNaN(Number(normalized));
+};
+
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (props: NumberInputProps, forwardRef) => {
@@ -368,7 +437,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
      * Only used when type="text"
      */
     const [previousNumberValue, setPreviousNumberValue] = useState(numberValue);
-
+    const [validFormat, setValidFormat] = useState(true);
     /**
      * The current text value of the input.
      * Only used when type=text
@@ -427,7 +496,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       id,
       readOnly,
       disabled,
-      invalid: !isInputValid,
+      invalid: !isInputValid || !validFormat,
       invalidText,
       warn,
       warnText,
@@ -494,7 +563,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           allowEmpty && event.target.value === '' ? '' : event.target.value;
 
         // When isControlled, setNumberValue will not update numberValue in useControllableState.
-        setNumberValue(numberParser.parse(_value));
+        setValidFormat(isValidNumberInput(_value, locale));
+        setNumberValue(
+          isValidNumberInput(_value, locale) ? numberParser.parse(_value) : NaN
+        );
         setInputValue(_value);
         // The onChange prop isn't called here because it will be called on blur
         // or on click of a stepper, after the number is parsed and formatted
@@ -560,7 +632,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           getDecimalPlaces(currentValue),
           getDecimalPlaces(step)
         );
-        const floatValue = parseFloat(rawValue.toFixed(precision));
+        const floatValue = parseFloat(Number(rawValue).toFixed(precision));
         const newValue = clamp(floatValue, min ?? -Infinity, max ?? Infinity);
 
         const state = {
@@ -582,6 +654,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           // When isControlled, setNumberValue will not actually update
           // numberValue in useControllableState.
           setNumberValue(parsedFormattedNewValue);
+          setValidFormat(isValidNumberInput(formattedNewValue, locale));
 
           setInputValue(formattedNewValue);
           setPreviousNumberValue(parsedFormattedNewValue);
@@ -694,8 +767,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   const formattedValue = isNaN(_numberValue)
                     ? ''
                     : format(_numberValue);
-                  setInputValue(formattedValue);
-
+                  if (!validFormat) {
+                    setInputValue('');
+                  } else {
+                    setInputValue(formattedValue);
+                  }
                   // Calling format() can alter the number (such as rounding it)
                   // causing the _numberValue to mismatch the formatted value in
                   // the input. To avoid this, formattedValue is re-parsed.
@@ -718,7 +794,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                       !(
                         isNaN(previousNumberValue) &&
                         isNaN(parsedFormattedNewValue)
-                      )
+                      ) &&
+                      validFormat
                     ) {
                       onChange(e, state);
                     }
@@ -730,7 +807,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   if (!(isNaN(previousNumberValue) && isNaN(numberValue))) {
                     setPreviousNumberValue(numberValue);
                   }
-                  if (!(isNaN(numberValue) && isNaN(parsedFormattedNewValue))) {
+                  if (
+                    !(isNaN(numberValue) && isNaN(parsedFormattedNewValue)) &&
+                    validFormat
+                  ) {
                     setNumberValue(parsedFormattedNewValue);
                   }
                 }
