@@ -7,13 +7,14 @@
 
 import { html } from 'lit';
 import './index';
-import FolderShared16 from '@carbon/icons/lib/folder--shared/16.js';
-import Cut16 from '@carbon/icons/lib/cut/16.js';
-import Copy16 from '@carbon/icons/lib/copy/16.js';
-import TrashCan16 from '@carbon/icons/lib/trash-can/16.js';
-import TextItalic16 from '@carbon/icons/lib/text--italic/16.js';
-import TextBold16 from '@carbon/icons/lib/text--bold/16.js';
-import Paste16 from '@carbon/icons/lib/paste/16.js';
+import FolderShared16 from '@carbon/icons/es/folder--shared/16.js';
+import Cut16 from '@carbon/icons/es/cut/16.js';
+import Copy16 from '@carbon/icons/es/copy/16.js';
+import TrashCan16 from '@carbon/icons/es/trash-can/16.js';
+import TextItalic16 from '@carbon/icons/es/text--italic/16.js';
+import TextBold16 from '@carbon/icons/es/text--bold/16.js';
+import Paste16 from '@carbon/icons/es/paste/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import CDSMenu from './menu';
 import MDXContent from './menu.mdx';
 import CDSmenuItem from './menu-item';
@@ -79,7 +80,7 @@ export const Default = {
     return html`
       <cds-menu ?open=${open} size=${size} menuAlignment="bottom">
         <cds-menu-item label="Share with">
-          ${FolderShared16({ slot: 'render-icon' })}
+          ${iconLoader(FolderShared16, { slot: 'render-icon' })}
           <cds-menu-item-radio-group slot="submenu" label="Share with list">
             <cds-menu-item label="None"></cds-menu-item>
             <cds-menu-item label="Product team"></cds-menu-item>
@@ -89,22 +90,22 @@ export const Default = {
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Cut" shortcut="⌘X">
-          ${Cut16({ slot: 'render-icon' })}</cds-menu-item
-        >
-        <cds-menu-item label="Copy" shortcut="⌘C"
-          >${Copy16({ slot: 'render-icon' })}</cds-menu-item
-        >
-        <cds-menu-item label="Paste" shortcut="⌘V" disabled
-          >${Paste16({ slot: 'render-icon' })}</cds-menu-item
-        >
+          ${iconLoader(Cut16, { slot: 'render-icon' })}
+        </cds-menu-item>
+        <cds-menu-item label="Copy" shortcut="⌘C">
+          ${iconLoader(Copy16, { slot: 'render-icon' })}
+        </cds-menu-item>
+        <cds-menu-item label="Paste" shortcut="⌘V" disabled>
+          ${iconLoader(Paste16, { slot: 'render-icon' })}
+        </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
-          <cds-menu-item-selectable label="Bold" shortcut="⌘B"
-            >${TextBold16({ slot: 'render-icon' })}</cds-menu-item-selectable
-          >
-          <cds-menu-item-selectable label="Italic" shortcut="⌘I"
-            >${TextItalic16({ slot: 'render-icon' })}</cds-menu-item-selectable
-          >
+          <cds-menu-item-selectable label="Bold" shortcut="⌘B">
+            ${iconLoader(TextBold16, { slot: 'render-icon' })}
+          </cds-menu-item-selectable>
+          <cds-menu-item-selectable label="Italic" shortcut="⌘I">
+            ${iconLoader(TextItalic16, { slot: 'render-icon' })}
+          </cds-menu-item-selectable>
         </cds-menu-item-group>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-radio-group label="samples">
@@ -115,8 +116,8 @@ export const Default = {
         </cds-menu-item-radio-group>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Delete" shortcut="⌫" kind="danger">
-          ${TrashCan16({ slot: 'render-icon' })}</cds-menu-item
-        >
+          ${iconLoader(TrashCan16, { slot: 'render-icon' })}
+        </cds-menu-item>
       </cds-menu>
     `;
   },

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import CDSCheckbox from '../checkbox/checkbox';
 import { TOGGLE_SIZE } from './defs';
 import styles from './toggle.scss?lit';
-import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -37,39 +36,25 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    * Handles `click` event on the `<button>` in the shadow DOM.
    */
   protected _handleChange() {
-    const { checked, indeterminate } = this._checkboxNode;
+    const { checked } = this._checkboxNode;
     if (this.disabled || this.readOnly) {
       return;
     }
     this.checked = !checked;
-    this.indeterminate = indeterminate;
-    const { eventChange } = this.constructor as typeof CDSCheckbox;
+    const { eventChange } = this.constructor as typeof CDSToggle;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
         composed: true,
         detail: {
-          indeterminate,
+          checked: this.checked,
         },
       })
     );
   }
 
-  /**
-   * Handles `keydown` event on the toggle button.
-   */
-  @HostListener('keydown')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  protected _handleKeydown = async (event: KeyboardEvent) => {
-    const { key } = event;
-
-    if (key === ' ') {
-      this._handleChange();
-    }
-  };
-
   protected _renderCheckmark() {
-    if (this.size !== TOGGLE_SIZE.SMALL) {
+    if (this.size !== TOGGLE_SIZE.SMALL || this.readOnly == true) {
       return undefined;
     }
     return html`
@@ -84,10 +69,16 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   }
 
   /**
+   * Specify another element's id to be used as the label for this toggle
+   */
+  @property({ type: String, attribute: 'aria-labelledby' })
+  ariaLabelledby?: string;
+
+  /**
    * The text for the checked state.
    */
   @property({ attribute: 'label-a' })
-  labelA = '';
+  labelA = 'On';
 
   /**
    * Hide label text.
@@ -111,7 +102,49 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    * The text for the unchecked state.
    */
   @property({ attribute: 'label-b' })
-  labelB = '';
+  labelB = 'Off';
+
+  /**
+   * Private references of external <label> elements that are
+   * `for="this-toggle-element-id"`
+   */
+  private _externalLabels: HTMLLabelElement[] = [];
+
+  /**
+   * Handles `click` on external `<label>`
+   */
+  private _onExternalLabelClick = () => {
+    this._checkboxNode?.focus();
+    this._handleChange();
+  };
+
+  /**
+   * Finds external toggle `<label>`s and attaches handlers.
+   */
+  private _attachExternalLabels() {
+    const doc = this.ownerDocument || document;
+
+    const found = this.id
+      ? [...doc.querySelectorAll<HTMLLabelElement>(`label[for="${this.id}"]`)]
+      : [];
+
+    this._externalLabels = Array.from(new Set(found));
+    this._externalLabels.forEach((lbl) => {
+      lbl.addEventListener('click', this._onExternalLabelClick);
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback?.();
+    this._attachExternalLabels();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    this._externalLabels.forEach((lbl) =>
+      lbl.removeEventListener('click', this._onExternalLabelClick)
+    );
+  }
 
   render() {
     const {
@@ -138,32 +171,43 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
 
     const labelTextClasses = classMap({
       [`${prefix}--toggle__label-text`]: labelText,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
-    const stateText = checked ? labelA : labelB;
+
+    let stateText = '';
+
+    if (hideLabel) {
+      stateText = labelText || '';
+    } else {
+      stateText = checked ? labelA : labelB;
+    }
+
+    const labelId = id ? `${id}_label` : undefined;
+
+    const hasLabelText = (this.labelText ?? '') !== '';
+
+    const ariaLabelledby = this.ariaLabelledby ?? (hasLabelText && labelId);
+
     return html`
       <button
         class="${prefix}--toggle__button"
         role="switch"
         type="button"
         aria-checked=${checked}
-        aria-lable=${labelText}
-        .checked="${checked}"
+        aria-labelledby=${ifDefined(ariaLabelledby)}
+        .checked=${checked}
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
         ?disabled=${disabled}
-        id="${id}"></button>
+        id="${id}"
+        @click=${handleChange}></button>
       <label for="${id}" class="${prefix}--toggle__label">
         ${labelText
           ? html`<span class="${labelTextClasses}">${labelText}</span>`
           : null}
         <div class="${inputClasses}">
-          <div class="${toggleClasses}" @click=${handleChange}>
-            ${this._renderCheckmark()}
-          </div>
-          <span
-            ?hidden="${hideLabel}"
-            class="${prefix}--toggle__text"
-            aria-hidden="true"
+          <div class="${toggleClasses}">${this._renderCheckmark()}</div>
+          <span class="${prefix}--toggle__text" aria-hidden="true"
             >${stateText}</span
           >
         </div>

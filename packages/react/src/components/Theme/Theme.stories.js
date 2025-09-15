@@ -62,24 +62,16 @@ export const Default = () => {
   return (
     <>
       <Theme theme="g100">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">g100</section>
       </Theme>
       <Theme theme="g90">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">g90</section>
       </Theme>
       <Theme theme="g10">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">g10</section>
       </Theme>
       <Theme theme="white">
-        <section className="theme-section">
-          <ThemeText />
-        </section>
+        <section className="theme-section">white</section>
       </Theme>
     </>
   );

@@ -14,7 +14,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import styles from './menu-button.scss?lit';
 import '../button/index';
 import '../menu/index';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
@@ -76,6 +77,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   tabIndex = 0;
 
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: Event) => {
     const path = event.composedPath();
@@ -87,6 +89,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     // Close the menu if the focus moves outside the menu button or menu
@@ -133,7 +136,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
         size=${size}
         ?disabled=${disabled}
         tab-index=${tabIndex}>
-        ${label} ${ChevronDown16({ slot: 'icon' })}
+        ${label} ${iconLoader(ChevronDown16, { slot: 'icon' })}
       </cds-button>
       <slot></slot>
     `;

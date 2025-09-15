@@ -8,9 +8,10 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ValidityMixin from '../../globals/mixins/validity';
 import FormMixin from '../../globals/mixins/form';
 import { prefix } from '../../globals/settings';
@@ -58,6 +59,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   _handleFormdata(event: Event) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const { formData } = event as any;
     const { disabled, name, value } = this;
     if (!disabled) {
@@ -251,10 +253,10 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               ? html`
                   <div class="${prefix}--time-picker__error__icon">
                     ${invalid
-                      ? WarningFilled16({
+                      ? iconLoader(WarningFilled16, {
                           class: `${prefix}--checkbox__invalid-icon`,
                         })
-                      : WarningAltFilled16({
+                      : iconLoader(WarningAltFilled16, {
                           class: `${prefix}--text-input__invalid-icon--warning`,
                         })}
                   </div>
@@ -284,6 +286,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSTimePicker]: value } = this;
         // Propagate the property to descendants
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         timePickerSelects.forEach((elem: any) => {
           elem[name] = value;
         });
