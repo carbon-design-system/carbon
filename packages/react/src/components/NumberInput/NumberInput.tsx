@@ -16,7 +16,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type FC,
   type MouseEvent,
   type ReactNode,
 } from 'react';
@@ -1016,13 +1015,14 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-export interface Label {
+interface LabelProps {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
-const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
+
+const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -1040,19 +1040,13 @@ const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   return null;
 };
 
-Label.propTypes = {
-  disabled: PropTypes.bool,
-  hideLabel: PropTypes.bool,
-  id: PropTypes.string,
-  label: PropTypes.node,
-};
-
-export interface HelperTextProps {
+interface HelperTextProps {
   id?: string;
   description?: ReactNode;
   disabled?: boolean;
 }
-function HelperText({ disabled, description, id }: HelperTextProps) {
+
+const HelperText = ({ disabled, description, id }: HelperTextProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -1066,12 +1060,6 @@ function HelperText({ disabled, description, id }: HelperTextProps) {
     );
   }
   return null;
-}
-
-HelperText.propTypes = {
-  description: PropTypes.node,
-  disabled: PropTypes.bool,
-  id: PropTypes.string,
 };
 
 /**
