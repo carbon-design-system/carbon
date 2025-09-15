@@ -47,3 +47,14 @@ $css--plex: true !default;
     inset-inline-end: convert.to-rem(5px);
   }
 }
+
+// RTL overrides
+:host(#{$prefix}-toggle:dir(rtl)) .#{$prefix}--toggle__switch--checked::before {
+  transform: translateX(convert.to-rem(-24px));
+}
+
+:host(#{$prefix}-toggle:dir(rtl))
+  .#{$prefix}--toggle__appearance--sm
+  .#{$prefix}--toggle__switch--checked::before {
+  transform: translateX(convert.to-rem(-16px));
+}

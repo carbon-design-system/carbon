@@ -203,7 +203,7 @@ export function Toggle({
         {labelText && <Text className={labelTextClasses}>{labelText}</Text>}
         <div className={appearanceClasses}>
           <div className={switchClasses}>
-            {isSm && (
+            {isSm && !readOnly && (
               <svg
                 aria-hidden="true"
                 focusable="false"
