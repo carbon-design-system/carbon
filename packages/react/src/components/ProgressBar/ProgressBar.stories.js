@@ -53,7 +53,7 @@ export const Indeterminate = () => (
   <ProgressBar label="Progress bar label" helperText="Optional helper text" />
 );
 
-export const Example = () => {
+export const Determinate = () => {
   const size = 728;
   const [progress, setProgress] = useState(0);
 
