@@ -247,6 +247,9 @@ Map {
   },
   "AccordionItem" => {
     "propTypes": {
+      "aria-label": {
+        "type": "string",
+      },
       "children": {
         "type": "node",
       },
