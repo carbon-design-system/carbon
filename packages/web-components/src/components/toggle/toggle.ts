@@ -54,7 +54,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   }
 
   protected _renderCheckmark() {
-    if (this.size !== TOGGLE_SIZE.SMALL) {
+    if (this.size !== TOGGLE_SIZE.SMALL || this.readOnly == true) {
       return undefined;
     }
     return html`
