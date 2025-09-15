@@ -307,7 +307,7 @@ export const AILabel = {
 };
 
 const meta = {
-  title: 'Experimental/Auto Align',
+  title: 'Preview/Auto Align',
 };
 
 export default meta;
