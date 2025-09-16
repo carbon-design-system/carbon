@@ -12,7 +12,7 @@ import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 

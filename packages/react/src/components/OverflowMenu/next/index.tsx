@@ -15,7 +15,7 @@ import { useFeatureFlag } from '../../FeatureFlags';
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
 import type { PopoverAlignment } from '../../Popover';
-import mergeRefs from '../../../tools/mergeRefs';
+import { mergeRefs } from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';

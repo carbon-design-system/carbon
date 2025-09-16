@@ -6,7 +6,7 @@
  */
 
 import React, { type ElementType } from 'react';
-import { Text, TextProps } from '.';
+import { Text, TextProps } from './Text';
 
 /**
  * Create a text component wrapper for a given text node type. Useful for
@@ -14,10 +14,7 @@ import { Text, TextProps } from '.';
  * @param {string} element
  * @param {string} displayName
  */
-export const createTextComponent = (
-  element: ElementType,
-  displayName: string
-) => {
+const createTextComponent = (element: ElementType, displayName: string) => {
   const TextWrapper = (props: TextProps<ElementType>) => {
     return <Text as={element} {...props} />;
   };
@@ -28,3 +25,5 @@ export const createTextComponent = (
 
   return TextWrapper;
 };
+
+export const Legend = createTextComponent('legend', 'Legend');

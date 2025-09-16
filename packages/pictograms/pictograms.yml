@@ -1176,6 +1176,17 @@
     - life science
     - science
     - biology
+- name: champagne
+  friendly_name: Champagne
+  aliases:
+    - Champagne
+    - party
+    - drink
+    - celebrations
+    - event
+    - racing
+    - F1
+    - sports
 - name: chart--3D
   friendly_name: Chart 3D
   aliases:
@@ -2346,6 +2357,36 @@
     - discount
     - torn
     - money
+- name: cowboy--hat
+  friendly_name: Cowboy hat
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
+- name: cowboy--boot
+  friendly_name: Cowboy boot
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
 - name: credit--card
   friendly_name: Credit card
   aliases:
@@ -3391,6 +3432,64 @@
     - rinse
     - emergency eye wash
     - eyewash station
+- name: f1--car--01
+  friendly_name: F1 car 01
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+- name: f1--car--02
+  friendly_name: F1 car 02
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+- name: f1--grid
+  friendly_name: F1 grid
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - race grid
+    - sports
+- name: f1--race
+  friendly_name: F1 race
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+- name: f1--steering-wheel
+  friendly_name: F1 steering wheel
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - steering wheel
+    - sports
+- name: f1--pit-stop-traffic-light
+  friendly_name: F1 pit stop traffic light
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - pit stop
+    - traffic light
+    - sports
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
   aliases:
@@ -3814,6 +3913,21 @@
     - trial
     - complimentary
     - sample
+- name: frost-tower
+  friendly_name: Frost tower
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
 - name: fuel
   friendly_name: Fuel
   aliases:
@@ -4326,6 +4440,16 @@
     - podcast
     - hearing protection
     - workplace
+- name: headset
+  friendly_name: Headset
+  aliases:
+    - headset
+    - headphones
+    - 2-way communication
+    - receiver
+    - transceiver
+    - F1
+    - sports
 - name: health
   friendly_name: Health
   aliases:
@@ -4370,6 +4494,16 @@
     - chart
     - data analytics
     - analytics
+- name: helmet
+  friendly_name: Helmet
+  aliases:
+    - Helmet
+    - headgear
+    - safety
+    - sports,
+    - acing
+    - F1
+    - sports
 - name: help-desk
   friendly_name: Help desk
   aliases:
@@ -5372,6 +5506,21 @@
     - big ben
     - cities
     - city
+- name: longhorn
+  friendly_name: Longhorn
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
 - name: loon
   friendly_name: Loon
   aliases:
@@ -8852,6 +9001,17 @@
     - data analytics
     - data
     - analytics
+- name: tire
+  friendly_name: Tire
+  aliases:
+    - F1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+    - rubber
+    - radial
 - name: toggle
   friendly_name: Toggle
   aliases:

@@ -12,6 +12,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type FocusEvent,
   type ForwardedRef,
@@ -42,7 +43,7 @@ import ListBox, {
   type ListBoxSize,
   type ListBoxType,
 } from '../ListBox';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -510,7 +511,12 @@ const Dropdown = React.forwardRef(
       setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
     };
 
-    const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const mergedRef = mergeRefs<HTMLButtonElement>(
+      toggleButtonProps.ref,
+      ref,
+      buttonRef
+    );
 
     const [currTimer, setCurrTimer] = useState<NodeJS.Timeout>();
 
@@ -563,7 +569,7 @@ const Dropdown = React.forwardRef(
             // NOTE: does not prevent click
             evt.preventDefault();
             // focus on the element as per readonly input behavior
-            mergedRef?.current?.focus();
+            buttonRef.current?.focus();
           },
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
             const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
@@ -578,7 +584,6 @@ const Dropdown = React.forwardRef(
           onKeyDown: onKeyDownHandler,
         };
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [readOnly, onKeyDownHandler]);
 
     const menuProps = useMemo(

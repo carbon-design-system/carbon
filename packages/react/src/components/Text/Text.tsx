@@ -18,7 +18,7 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { TextDirectionContext, type TextDir } from '.';
+import { TextDirectionContext, type TextDir } from './TextDirectionContext';
 
 export interface TextBaseProps {
   dir?: TextDir;

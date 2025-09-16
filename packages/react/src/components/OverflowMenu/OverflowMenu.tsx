@@ -38,7 +38,7 @@ import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
