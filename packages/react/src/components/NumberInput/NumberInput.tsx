@@ -10,6 +10,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  isValidElement,
+  ReactElement,
   useCallback,
   useContext,
   useEffect,
@@ -611,14 +613,18 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     // AILabel always size `mini`
     const candidate = slug ?? decorator;
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
-    const normalizedDecorator = candidateIsAILabel
+    const normalizedDecorator: ReactNode = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     // Need to update the internal value when the revert button is clicked
     let isRevertActive: AILabelProps['revertActive'];
-    if (normalizedDecorator?.type === AILabel) {
-      isRevertActive = normalizedDecorator.props.revertActive;
+    if (
+      isValidElement(normalizedDecorator) &&
+      normalizedDecorator.type === AILabel
+    ) {
+      const asAILabel = normalizedDecorator as ReactElement<AILabelProps>;
+      isRevertActive = asAILabel.props.revertActive;
     }
 
     useEffect(() => {
