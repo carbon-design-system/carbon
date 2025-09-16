@@ -102,7 +102,7 @@ export const Default = {
   },
 };
 
-export const Example = {
+export const Determinate = {
   render: () => {
     const size = 728;
     let progress = 0;
