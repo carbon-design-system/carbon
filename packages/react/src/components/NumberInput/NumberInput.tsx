@@ -298,53 +298,96 @@ const getSeparators = (locale: string) => {
 };
 
 const isValidNumberInput = (input: string, locale: string): boolean => {
-  // allow empty string
-  if (input === '') {
-    return true;
-  }
+  if (input === '') return true;
   const { groupSeparator, decimalSeparator } = getSeparators(locale);
-
-  if (!decimalSeparator) {
-    return !isNaN(Number(input));
-  }
-
   const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-  let group = '';
-  if (groupSeparator) {
-    if (groupSeparator.trim() === '') {
-      group = '[\\u00A0\\u202F\\s]'; // handle NBSP, narrow NBSP, space
+  // Trim & handle sign
+  let s = input.trim();
+  if (s === '') return true;
+  if (s[0] === '+' || s[0] === '-') s = s.slice(1);
+
+  // helper: is "space-like" group
+  const groupIsSpace = !!groupSeparator && groupSeparator.trim() === '';
+
+  if (decimalSeparator && s.includes(decimalSeparator)) {
+    // only one official decimal allowed
+    if ((s.match(new RegExp(esc(decimalSeparator), 'g')) || []).length > 1)
+      return false;
+
+    const [intPartRaw, fracPart = ''] = s.split(decimalSeparator);
+
+    // fraction must be digits only (allow empty for in-progress typing if you want)
+    if (fracPart && !/^\d*$/.test(fracPart)) return false;
+
+    // integer part: allow digits and groupSeparator (validate grouping if present)
+    const intPart = intPartRaw || '';
+
+    if (groupSeparator) {
+      if (groupIsSpace) {
+        // if spaces present, enforce grouping like "1 234 567"
+        if (/[\u00A0\u202F\s]/.test(intPart)) {
+          if (!/^\d{1,3}([ \u00A0\u202F]\d{3})*$/.test(intPart)) return false;
+        } else {
+          if (!/^\d+$/.test(intPart)) return false;
+        }
+      } else {
+        if (intPart.includes(groupSeparator)) {
+          const groupingRegex = new RegExp(
+            `^\\d{1,3}(?:${esc(groupSeparator)}\\d{3})*$`
+          );
+          // allow strict grouping, or fallback to tolerant (strip separators) if that yields pure digits
+          if (!groupingRegex.test(intPart)) {
+            const stripped = intPart.split(groupSeparator).join('');
+            if (!/^\d+$/.test(stripped)) return false;
+          }
+        } else {
+          if (!/^\d+$/.test(intPart)) return false;
+        }
+      }
     } else {
-      group = esc(groupSeparator);
+      if (!/^\d+$/.test(intPart)) return false;
     }
+
+    // final numeric check (remove group seps + replace decimal with '.')
+    let normalized = s;
+    if (groupSeparator) {
+      if (groupIsSpace)
+        normalized = normalized.replace(/[\u00A0\u202F\s]/g, '');
+      else
+        normalized = normalized.replace(
+          new RegExp(esc(groupSeparator), 'g'),
+          ''
+        );
+    }
+    normalized = normalized.replace(decimalSeparator, '.');
+
+    return !isNaN(Number(normalized));
   }
 
-  const decimal = esc(decimalSeparator);
+  // If the OTHER separator is present, we treat it as group-sep candidate.
+  const otherSep = decimalSeparator === '.' ? ',' : '.';
 
-  // Regex for:
-  // - integers (with/without grouping)
-  // - optional decimal with 0+ digits after separator
-  const regex = new RegExp(
-    `^-?\\d{1,3}(${group}\\d{3})*(${decimal}\\d*)?$|^-?\\d+(${decimal}\\d*)?$`
-  );
+  if (s.includes(otherSep)) {
+    // allow only digits and otherSep characters
+    const allowedChars = new RegExp(`^[0-9${esc(otherSep)}]+$`);
+    if (!allowedChars.test(s)) return false;
 
-  if (!regex.test(input)) {
-    return false;
-  }
-
-  // Normalize
-  let normalized = input;
-  if (groupSeparator) {
-    if (groupSeparator.trim() === '') {
-      normalized = normalized.replace(/[\u00A0\u202F\s]/g, '');
+    // If it strictly matches thousands grouping for otherSep, accept:
+    if (otherSep.trim() === '') {
+      if (/^\d{1,3}([ \u00A0\u202F]\d{3})*$/.test(s)) return true;
     } else {
-      normalized = normalized.split(groupSeparator).join('');
+      const groupingRegex = new RegExp(`^\\d{1,3}(?:${esc(otherSep)}\\d{3})*$`);
+      if (groupingRegex.test(s)) return true;
     }
+
+    // Otherwise: remove all otherSep characters and accept only if result is digits and length >= 4
+    const stripped = s.split(otherSep).join('');
+    if (!/^\d+$/.test(stripped)) return false;
+    return stripped.length >= 4; // >=4 ensures "187,1" (-> "1871") is valid but "1,23" (-> "123") is not
   }
 
-  normalized = normalized.replace(decimalSeparator, '.');
-
-  return !isNaN(Number(normalized));
+  return /^\d+$/.test(s);
 };
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
