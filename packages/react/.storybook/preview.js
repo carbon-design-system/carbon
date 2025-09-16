@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -367,5 +367,64 @@ const preview = {
   globalTypes,
   tags: ['autodocs'],
 };
+
+const GLOBAL_EXCLUDE = [
+  'className',
+  'children',
+  'as',
+  'decorator',
+  'slug',
+  'ref',
+  'ariaLabel',
+  /^(?:on[A-Z]\w*)$/,
+];
+
+/**
+ * ArgTypes enhancer that enforces a global control filter across all stories.
+ * Args matching elements in the GLOBAL_EXCLUDE array are not shown in the
+ * `controls` table
+ */
+export const argTypesEnhancers = [
+  (context) => {
+    const current = context.argTypes || {};
+    const next = { ...current };
+
+    // Do not hide in the ArgTypes table in Overview page,
+    // let them be visible for documentation purposes
+    if (context?.parameters?.__isArgsStory !== true) return current;
+
+    const list = Array.isArray(GLOBAL_EXCLUDE)
+      ? GLOBAL_EXCLUDE
+      : [GLOBAL_EXCLUDE];
+
+    const strings = new Set();
+    const regexes = [];
+    for (const p of list) {
+      if (typeof p === 'string') strings.add(p);
+      else if (p instanceof RegExp) regexes.push(p);
+    }
+
+    // helper
+    const disable = (name) => {
+      const prev = next[name] || {};
+      next[name] = { ...prev, table: { ...(prev.table || {}), disable: true } };
+    };
+
+    // string hides
+    strings.forEach((name) => {
+      if (name in next) disable(name);
+    });
+
+    // regex hides
+    if (regexes.length) {
+      Object.keys(next).forEach((name) => {
+        if (strings.has(name)) return;
+        if (regexes.some((re) => re.test(name))) disable(name);
+      });
+    }
+
+    return next;
+  },
+];
 
 export default preview;
