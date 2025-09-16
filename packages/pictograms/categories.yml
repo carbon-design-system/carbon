@@ -152,6 +152,7 @@ categories:
       - ecuador--quito
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
+      - frost-tower
       - geodesic-montreal-biosphere
       - guadalajara--seal
       - hamburg--philharmone
@@ -961,8 +962,11 @@ categories:
       - blender
       - cafe
       - candy
+      - champagne
       - cherries
       - cookie
+      - cowboy--hat
+      - cowboy--boot
       - crosshairs
       - cupcake
       - dining
@@ -970,32 +974,19 @@ categories:
       - firecracker
       - flower--01
       - flower--02
-      - football
-      - football--field
-      - football--goal-post
-      - golf--bag
-      - golf--ball
-      - golf--club
-      - golf--hole
       - gramophone
       - guitar
       - juice
       - lantern
-      - masters-leader-board
+      - longhorn
       - moon-cake
       - ornament
       - pencil
       - perfume
-      - punching-bag--01
-      - punching-bag--02
-      - punching-bag--03
-      - racetrack
       - rock-on
       - scale
       - snowflake
       - soft--ice--cream
-      - speed-bag
-      - sports
       - spotlight
       - stage
       - stationary--bicycle
@@ -1006,9 +997,6 @@ categories:
       - tickets
       - tree
       - tree--02
-      - ufc--belt
-      - ufc--fighting
-      - ufc--ring
       - waving-hand
       - wedding--cake
       - whistle
@@ -1246,6 +1234,38 @@ categories:
       - unlock--01
       - unlock--02
       - vault
+  - name: Sports
+    members:
+      - f1--car--01
+      - f1--car--02
+      - f1--grid
+      - f1--race
+      - f1--steering-wheel
+      - f1--pit-stop-traffic-light
+      - football
+      - football--field
+      - football--goal-post
+      - golf--bag
+      - golf--ball
+      - golf--club
+      - golf--hole
+      - headset
+      - helmet
+      - masters-leader-board
+      - punching-bag--01
+      - punching-bag--02
+      - punching-bag--03
+      - racetrack
+      - speed-bag
+      - sports
+      - tennis
+      - tennis--ball
+      - tennis--net
+      - tennis--racquet
+      - tickets
+      - ufc--belt
+      - ufc--fighting
+      - ufc--ring
   - name: Status
     members:
       - question
@@ -1363,6 +1383,7 @@ categories:
       - road
       - spaceship
       - steering--wheel
+      - tire
       - train
       - travel-and-expenses
       - tunnel
