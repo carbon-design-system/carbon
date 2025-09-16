@@ -25,15 +25,13 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['id', 'defaultValue', 'light', 'translateWithId'],
+    },
   },
 };
 
 const sharedArgTypes = {
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   min: { control: { type: 'number' } },
   max: { control: { type: 'number' } },
   step: { control: { type: 'number' } },
@@ -48,31 +46,6 @@ const sharedArgTypes = {
   },
   label: { control: { type: 'text' } },
   helperText: { control: { type: 'text' } },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  defaultValue: {
-    table: {
-      disable: true,
-    },
-  },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
-  slug: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
 };
 
 const reusableProps = {

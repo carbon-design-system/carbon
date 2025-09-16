@@ -79,40 +79,21 @@ _FileUploaderItem.argTypes = {
     control: 'text',
     description: 'Unique identifier for the file object',
   },
+};
 
-  // Remove all the props that don't apply to FileUploaderItem
-  accept: {
-    table: { disable: true },
-  },
-  buttonKind: {
-    table: { disable: true },
-  },
-  buttonLabel: {
-    table: { disable: true },
-  },
-  className: {
-    table: { disable: true },
-  },
-  disabled: {
-    table: { disable: true },
-  },
-  labelDescription: {
-    table: { disable: true },
-  },
-  labelTitle: {
-    table: { disable: true },
-  },
-  multiple: {
-    table: { disable: true },
-  },
-  onChange: {
-    table: { disable: true },
-  },
-  onClick: {
-    table: { disable: true },
-  },
-  filenameStatus: {
-    table: { disable: true },
+// Remove all the props that don't apply to FileUploaderItem
+_FileUploaderItem.parameters = {
+  controls: {
+    exclude: [
+      'accept',
+      'buttonKind',
+      'buttonLabel',
+      'disabled',
+      'labelDescription',
+      'labelTitle',
+      'multiple',
+      'filenameStatus',
+    ],
   },
 };
 
@@ -211,13 +192,8 @@ Default.argTypes = {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
   },
-  accept: {
-    table: { disable: true },
-  },
-  className: {
-    table: { disable: true },
-  },
-  role: {
-    table: { disable: true },
-  },
+};
+
+Default.parameters = {
+  controls: { exclude: ['accept', 'role'] },
 };

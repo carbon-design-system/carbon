@@ -23,13 +23,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    columns: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const AutoColumns = () => {
