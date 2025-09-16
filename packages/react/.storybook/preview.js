@@ -368,7 +368,8 @@ const preview = {
   tags: ['autodocs'],
 };
 
-const GLOBAL_EXCLUDE = [
+// Array that stores strings and regexes of controls that should be hidden in all stories
+const GLOBAL_EXCLUDED_CONTROLS = [
   'className',
   'children',
   'as',
@@ -381,7 +382,7 @@ const GLOBAL_EXCLUDE = [
 
 /**
  * ArgTypes enhancer that enforces a global control filter across all stories.
- * Args matching elements in the GLOBAL_EXCLUDE array are not shown in the
+ * Args matching elements in the GLOBAL_EXCLUDED_CONTROLS array are not shown in the
  * `controls` table
  */
 export const argTypesEnhancers = [
@@ -391,31 +392,24 @@ export const argTypesEnhancers = [
 
     // Do not hide in the ArgTypes table in Overview page,
     // let them be visible for documentation purposes
-    if (context?.parameters?.__isArgsStory !== true) return current;
-
-    const list = Array.isArray(GLOBAL_EXCLUDE)
-      ? GLOBAL_EXCLUDE
-      : [GLOBAL_EXCLUDE];
+    if (context?.name === '__meta') return current;
 
     const strings = new Set();
     const regexes = [];
-    for (const p of list) {
+    for (const p of GLOBAL_EXCLUDED_CONTROLS) {
       if (typeof p === 'string') strings.add(p);
       else if (p instanceof RegExp) regexes.push(p);
     }
 
-    // helper
+    // helper function to hide controls
     const disable = (name) => {
       const prev = next[name] || {};
       next[name] = { ...prev, table: { ...(prev.table || {}), disable: true } };
     };
 
-    // string hides
     strings.forEach((name) => {
       if (name in next) disable(name);
     });
-
-    // regex hides
     if (regexes.length) {
       Object.keys(next).forEach((name) => {
         if (strings.has(name)) return;
