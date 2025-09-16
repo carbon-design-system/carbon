@@ -7,7 +7,6 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React from 'react';
 
 import { usePrefix } from '../../internal/usePrefix';
@@ -19,7 +18,6 @@ import {
   ToggletipBaseProps,
 } from '../Toggletip';
 import { IconButton } from '../IconButton';
-import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { deprecate } from '../../prop-types/deprecate';
@@ -32,18 +30,20 @@ import type {
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const AILabelContent = React.forwardRef(function AILabelContent(
-  { className, children, ...rest }: AILabelContentProps,
-  ref
+  { className, children }: AILabelContentProps,
+  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 ) {
   const prefix = usePrefix();
 
   const hasAILabelActions = React.Children.toArray(children).some((child) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const item = child as any;
     // TODO: Is there supposed to be a `return` here? If so, this issue would
     // have been caught by ESLint. It's concerning that this code is 7 months
     // old and no one has noticed any issues with it. It also makes me question
     // whether the code is necessary.
     // https://github.com/carbon-design-system/carbon/issues/18991
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
     item.type === AILabelActions;
   });
 
@@ -75,8 +75,8 @@ AILabelContent.propTypes = {
 export type AILabelActionsProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const AILabelActions = React.forwardRef(function AILabelActions(
-  { className, children, ...rest }: AILabelActionsProps,
-  ref
+  { className, children }: AILabelActionsProps,
+  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 ) {
   const prefix = usePrefix();
 

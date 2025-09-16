@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports -- https://github.com/carbon-design-system/carbon/issues/20071
 const path = require('path');
+// eslint-disable-next-line @typescript-eslint/no-require-imports -- https://github.com/carbon-design-system/carbon/issues/20071
 const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
 
 /**
@@ -44,11 +46,12 @@ export default function svgResultCarbonIconLoader() {
         return null;
       }
 
-      let outcome: string | undefined = src;
+      const outcome: string | undefined = src;
       if (!id.match(svgRegex)) {
         return outcome;
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-require-imports -- https://github.com/carbon-design-system/carbon/issues/20071
       const descriptor = require(id);
       return `
           import { svg } from 'lit';

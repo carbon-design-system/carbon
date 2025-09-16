@@ -15,12 +15,12 @@ import { useFeatureFlag } from '../../FeatureFlags';
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
 import type { PopoverAlignment } from '../../Popover';
-import mergeRefs from '../../../tools/mergeRefs';
+import { mergeRefs } from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useAttachedMenu } from '../../../internal/useAttachedMenu';
-import deprecateValuesWithin from '../../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
 const defaultSize = 'md';
@@ -75,8 +75,9 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
-  function OverflowMenu(
+  (
     {
       autoAlign = false,
       children,
@@ -90,7 +91,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       ...rest
     },
     forwardRef
-  ) {
+  ) => {
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 

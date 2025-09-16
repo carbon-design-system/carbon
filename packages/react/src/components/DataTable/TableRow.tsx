@@ -30,11 +30,11 @@ const TableRow = frFn((props, ref) => {
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
   const {
-    ariaLabel,
-    'aria-label': ariaLabelAlt,
-    'aria-controls': ariaControls,
-    onExpand,
-    isExpanded,
+    ariaLabel, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    'aria-label': ariaLabelAlt, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    'aria-controls': ariaControls, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    onExpand, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    isExpanded, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     isSelected,
     ...cleanProps
   } = props;

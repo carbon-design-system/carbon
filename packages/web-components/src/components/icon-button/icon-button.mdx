@@ -24,11 +24,11 @@ result, this component makes it easy to create accessible icon buttons.
 
 ```javascript
 import '@carbon/web-components/es/components/icon-button/index.js';
-import Edit16 from '@carbon/icons/lib/edit/16.js';
+import Edit16 from '@carbon/icons/es/edit/16.js';
 
 function App() {
   return html`<cds-icon-button>
-    ${Edit16({ slot: 'icon' })}
+    ${iconLoader(Edit16, { slot: 'icon' })}
     <span slot="tooltip-content">label</span>
   </cds-icon-button>`;
 }

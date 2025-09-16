@@ -13,13 +13,14 @@ import {
   state,
 } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './defs';
 import { selectorTabbable } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import ArrowLeft16 from '@carbon/icons/lib/arrow--left/16.js';
-import Close20 from '@carbon/icons/lib/close/20.js';
+import ArrowLeft16 from '@carbon/icons/es/arrow--left/16.js';
+import Close20 from '@carbon/icons/es/close/20.js';
 import { moderate02 } from '@carbon/motion';
 import '../button/index';
 import '../icon-button/index';
@@ -29,10 +30,9 @@ import '../button/button-set-base';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
-// eslint-disable-next-line no-bitwise
 const PRECEDING =
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-// eslint-disable-next-line no-bitwise
+
 const FOLLOWING =
   Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
@@ -70,6 +70,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -78,6 +79,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
@@ -181,6 +183,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * @param event.relatedTarget The event relatedTarget.
    */
   @HostListener('shadowRoot:focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
     const {
@@ -208,7 +211,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       const comparisonResult = (target as Node).compareDocumentPosition(
         relatedTarget as Node
       );
-      // eslint-disable-next-line no-bitwise
+
       if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
@@ -220,9 +223,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ) {
           this.focus();
         }
-      }
-      // eslint-disable-next-line no-bitwise
-      else if (
+      } else if (
         relatedTarget === endSentinelNode ||
         comparisonResult & FOLLOWING
       ) {
@@ -240,6 +241,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('document:keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
     if (key === 'Esc' || key === 'Escape') {
@@ -413,7 +415,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasSubtitle = subtitle.length > 0;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private _handleActionToolbarChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const toolbarActions = target?.assignedElements();
@@ -451,6 +452,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     if (actionsCount > this._maxActions) {
       this._actionsCount = this._maxActions;
       if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
         console.error(`Too many side-panel actions, max ${this._maxActions}.`);
       }
     } else {
@@ -515,6 +517,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
   // TODO: Wait for `.d.ts` update to support `ResizeObserver`
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore
   private _resizeObserver = new ResizeObserver(() => {
     if (this._sidePanel) {
@@ -724,7 +727,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
               size="sm"
               class=${`${prefix}--btn ${blockClass}__navigation-back-button`}
               @click=${this._handleNavigateBack}>
-              ${ArrowLeft16({ slot: 'icon' })}
+              ${iconLoader(ArrowLeft16, { slot: 'icon' })}
               <span slot="tooltip-content">
                 ${navigationBackIconDescription}
               </span>
@@ -750,7 +753,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             size="sm"
             class=${`${blockClass}__close-button`}
             @click=${this._handleCloseClick}>
-            ${Close20({ slot: 'icon' })}
+            ${iconLoader(Close20, { slot: 'icon' })}
             <span slot="tooltip-content"> ${closeIconDescription} </span>
           </cds-icon-button>
         </div>
@@ -897,7 +900,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       this.disconnectObservers();
       if (this.open) {
         this.connectObservers();
-
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this._launcher = this.ownerDocument!.activeElement;
         const focusNode =
           this.selectorInitialFocus &&

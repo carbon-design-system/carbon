@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import { Tab, IconTab } from '@carbon/react';
@@ -21,6 +22,7 @@ const sharedTabProps = {
   icon: figma.instance('Swap icon'),
 };
 
+// eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
 '',
   figma.connect(
     Tab,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,7 +39,14 @@ export default {
 
 export const Default = (args) => (
   <DataTable isSortable rows={rows} headers={headers} {...args}>
-    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getCellProps,
+    }) => (
       <TableContainer title="DataTable" description="With sorting">
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
@@ -53,9 +60,11 @@ export const Default = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}

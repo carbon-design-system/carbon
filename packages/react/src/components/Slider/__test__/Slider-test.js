@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Slider from '../Slider';
+import { Slider } from '../Slider';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '@testing-library/react';
 
