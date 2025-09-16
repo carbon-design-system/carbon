@@ -231,6 +231,45 @@ export const ExplainabilityPopover = {
     `;
   },
 };
+class WrappingComponent extends HTMLElement {
+  constructor() {
+    super();
+    const shadow = this.attachShadow({ mode: 'open' });
+
+    const wrapper = document.createElement('cds-ai-label');
+    wrapper.setAttribute('autoalign', '');
+    wrapper.setAttribute('ai-text', 'IA');
+
+    const bodyText = document.createElement('div');
+    bodyText.setAttribute('slot', 'body-text');
+
+    const slot = document.createElement('slot');
+    slot.setAttribute('name', 'custom-content');
+
+    bodyText.appendChild(slot);
+    wrapper.appendChild(bodyText);
+    shadow.appendChild(wrapper);
+  }
+}
+
+customElements.define('wrapping-component', WrappingComponent);
+
+export const Nested = {
+  render: () => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="ai-label-container">
+        <wrapping-component>
+          <div slot="custom-content">
+            <a href="http://google.com" target="_blank">google.com</a>
+          </div>
+        </wrapping-component>
+      </div>
+    `;
+  },
+};
 
 const meta = {
   title: 'Components/AI Label',
