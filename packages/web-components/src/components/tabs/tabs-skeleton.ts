@@ -10,7 +10,6 @@ import { prefix } from '../../globals/settings';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 
 /**
  * Skeleton of tabs.
@@ -25,18 +24,10 @@ export default class CDSTabsSkeleton extends LitElement {
   @property({ type: Boolean, reflect: true })
   contained = false;
   render() {
-    const { contained } = this;
-    const tabClasses = classMap({
-      [`${prefix}--tabs`]: true,
-      [`${prefix}--skeleton`]: true,
-      [`${prefix}--tabs--contained`]: contained,
-    });
     return html`
-      <div class="${tabClasses}">
-        <ul class="${prefix}--tabs__nav">
-          <slot></slot>
-        </ul>
-      </div>
+      <ul class="${prefix}--tabs__nav">
+        <slot></slot>
+      </ul>
     `;
   }
 

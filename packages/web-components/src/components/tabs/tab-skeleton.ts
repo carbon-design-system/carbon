@@ -19,11 +19,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 export default class CDSTabSkeleton extends LitElement {
   render() {
     return html`
-      <li class="${prefix}--tabs__nav-item">
-        <div class="${prefix}--tabs__nav-link">
-          <span></span>
-        </div>
-      </li>
+      <div class="${prefix}--tabs__nav-link">
+        <span></span>
+      </div>
     `;
   }
 

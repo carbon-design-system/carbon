@@ -19,6 +19,7 @@
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/utilities/skeleton' as *;
 
 $inset-transition: inset 110ms motion(standard, productive);
 
@@ -263,7 +264,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     padding: 0 layout.density('padding-inline');
     background-color: transparent;
     block-size: 100%;
-    border-block-end: $tab-underline-color;
+    border-block-end: 2px solid $skeleton-element;
     inline-size: 10rem;
 
     &::before {
@@ -290,6 +291,19 @@ $inset-transition: inset 110ms motion(standard, productive);
     block-size: convert.to-rem(14px);
     inline-size: 100%;
   }
+}
+
+:host(#{$prefix}-tab-skeleton) {
+  @extend .#{$prefix}--tabs__nav-item;
+}
+
+:host(#{$prefix}-tabs-skeleton) {
+  @extend .#{$prefix}--tabs;
+  @extend .#{$prefix}--skeleton;
+}
+
+:host(#{$prefix}-tabs-skeleton[contained]) {
+  @extend .#{$prefix}--tabs--contained;
 }
 
 :host(#{$prefix}-tab-skeleton:first-of-type) {
