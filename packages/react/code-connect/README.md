@@ -32,6 +32,13 @@ and/or be integrated with Storybook code.
 "packages/src/react/code-connect/ComponentName/ComponentName.figma.tsx"
 ```
 
+## Demo Figma File
+
+A
+[demo Figma file](https://www.figma.com/design/NwXsMCCoMg1po4KK2oUK3o/Code-connect-demo---Carbon-Design-System?node-id=612-252440&m=dev)
+is available to help test and add new components while working with Code
+Connect:
+
 ### Publishing
 
 Figma code connect is set up to automatically publish when PRs are merged into
