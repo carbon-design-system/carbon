@@ -8,10 +8,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
-import {
-  preview__FluidFilterableMultiSelect as FluidFilterableMultiSelect,
-  preview__FluidDropdownSkeleton as FluidDropdownSkeleton,
-} from '@carbon/react';
+import { FluidMultiSelect, FluidDropdownSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
@@ -19,8 +16,8 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=45988-11486&t=aG4cJRjteQHcd71k-4',
   {
     props: {
-      titleText: figma.boolean('Show tooltip', {
-        // true: figma.string('Label text') + figma.children('Tooltip'), //https://github.com/figma/code-connect/issues/92
+      titleText: figma.boolean('Show toggletip', {
+        // true: figma.string('Label text') + figma.children('Toggletip'), //https://github.com/figma/code-connect/issues/92
         true: figma.string('Label text'),
         false: figma.string('Label text'),
       }),
@@ -53,8 +50,9 @@ figma.connect(
       ];
 
       return (
-        <FluidFilterableMultiSelect
+        <FluidMultiSelect
           {...props}
+          isFilterable
           id="id"
           initialSelectedItem={items[0]}
           itemToString={(item) => (item ? item.text : '')}

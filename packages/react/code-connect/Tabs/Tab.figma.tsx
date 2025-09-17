@@ -22,25 +22,23 @@ const sharedTabProps = {
   icon: figma.instance('Swap icon'),
 };
 
-// eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
-'',
-  figma.connect(
-    Tab,
-    'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5658-278361&t=wcK3P98b09VsrxXF-4',
-    {
-      variant: { Type: 'Text + Icon' },
-      props: sharedTabProps,
-      example: ({ label, disabled, renderIcon }) => (
-        <Tab disabled={disabled} renderIcon={renderIcon}>
-          {label}
-        </Tab>
-      ),
-    }
-  );
+figma.connect(
+  Tab,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
+  {
+    variant: { Type: 'Text + Icon' },
+    props: sharedTabProps,
+    example: ({ label, disabled, renderIcon }) => (
+      <Tab disabled={disabled} renderIcon={renderIcon}>
+        {label}
+      </Tab>
+    ),
+  }
+);
 
 figma.connect(
   Tab,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5658-278361&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
   {
     variant: {
       Type: 'Text + Icon',
@@ -61,7 +59,7 @@ figma.connect(
 
 figma.connect(
   IconTab,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5658-278361&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
   {
     variant: { Type: 'Icon only' },
     props: sharedTabProps,

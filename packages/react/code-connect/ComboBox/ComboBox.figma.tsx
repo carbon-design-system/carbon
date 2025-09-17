@@ -26,10 +26,6 @@ figma.connect(
         Small: 'sm',
       }),
       titleText: figma.string('Label text'),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
@@ -80,10 +76,6 @@ figma.connect(
         Large: 'lg',
         Medium: 'md',
         Small: 'sm',
-      }),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
       }),
     },
     example: ({ ...props }) => {
