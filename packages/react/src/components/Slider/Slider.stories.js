@@ -45,7 +45,7 @@ Default.argTypes = {
   ariaLabelInput: {
     control: { type: 'text' },
   },
-  preview_ariaLabelInputUpper: {
+  unstable_ariaLabelInputUpper: {
     control: { type: 'text' },
   },
   disabled: {
@@ -79,7 +79,7 @@ Default.argTypes = {
   name: {
     control: { type: 'text' },
   },
-  preview_nameUpper: {
+  unstable_nameUpper: {
     control: { type: 'text' },
   },
   readOnly: {
@@ -101,7 +101,7 @@ Default.argTypes = {
   value: {
     control: { type: 'number' },
   },
-  preview_valueUpper: {
+  unstable_valueUpper: {
     control: { type: 'number' },
   },
   warn: {
@@ -118,7 +118,7 @@ Default.argTypes = {
 
 Default.args = {
   ariaLabelInput: 'Lower bound',
-  preview_ariaLabelInputUpper: 'Upper bound',
+  unstable_ariaLabelInputUpper: 'Upper bound',
   disabled: false,
   hideTextInput: false,
   invalid: false,
@@ -130,7 +130,7 @@ Default.args = {
   step: 5,
   stepMultiplier: 5,
   value: 50,
-  preview_valueUpper: undefined,
+  unstable_valueUpper: undefined,
   warn: false,
   warnText: 'Warning message goes here',
 };
@@ -234,10 +234,10 @@ export const TwoHandleSlider = () => {
   return (
     <Slider
       ariaLabelInput="Lower bound"
-      preview_ariaLabelInputUpper="Upper bound"
+      unstable_ariaLabelInputUpper="Upper bound"
       labelText="Slider label"
       value={10}
-      preview_valueUpper={90}
+      unstable_valueUpper={90}
       min={0}
       max={100}
       step={1}
@@ -251,10 +251,10 @@ export const TwoHandleSliderWithHiddenInputs = () => {
   return (
     <Slider
       ariaLabelInput="Lower bound"
-      preview_ariaLabelInputUpper="Upper bound"
+      unstable_ariaLabelInputUpper="Upper bound"
       labelText="Slider label"
       value={10}
-      preview_valueUpper={90}
+      unstable_valueUpper={90}
       min={0}
       max={100}
       step={1}
