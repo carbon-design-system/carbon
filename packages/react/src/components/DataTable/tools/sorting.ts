@@ -13,6 +13,7 @@ import { sortStates, type DataTableSortState } from '../state/sortStates';
  * type, the default sort algorithm will be used for those types. Otherwise, the
  * values will be converted to strings for comparison.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
 export const compare = (a: any, b: any, locale = 'en') => {
   // prevent multiple null values in one column (sorting breaks)
   if (a === null) a = '';
@@ -49,9 +50,12 @@ const compareStrings = (a: string, b: string, locale = 'en') => {
 
 interface Cell {
   id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   value: any;
 }
 
+// TODO: Should `SortRowParams` in
+// packages/react/src/components/DataTable/state/sorting.ts be used here?
 interface SortRowParams {
   key: string;
   sortDirection: DataTableSortState;
@@ -67,6 +71,7 @@ interface SortRowsConfig {
   key: string;
   sortDirection: DataTableSortState;
   locale?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   sortRow?: (cellA: any, cellB: any, params: SortRowParams) => number;
 }
 
@@ -98,7 +103,9 @@ export const sortRows = ({
  * Sorts table rows based on the sort direction.
  */
 export const defaultSortRow = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   cellA: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   cellB: any,
   {
     sortDirection,

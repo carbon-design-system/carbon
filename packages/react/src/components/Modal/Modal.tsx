@@ -22,7 +22,7 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import { Layer } from '../Layer';
-import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
+import { requiredIfGivenPropIsTruthy } from '../../prop-types/requiredIfGivenPropIsTruthy';
 import {
   elementOrParentIsFloatingMenu,
   wrapFocus,
@@ -41,14 +41,17 @@ import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import { deprecate } from '../../prop-types/deprecate';
-import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { Dialog } from '../Dialog';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
-  '`Modal`: `preventCloseOnClickOutside` should not be `false` when `passiveModal` is `false`. Non-passive `Modal`s should not be dismissible by clicking outside.';
+  '`<Modal>` prop `preventCloseOnClickOutside` should not be `false` when ' +
+  '`passiveModal` is `false`. Transactional, non-passive Modals should ' +
+  'not be dissmissable by clicking outside. ' +
+  'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal';
 
 export type ModalSize = (typeof ModalSizes)[number];
 
@@ -265,7 +268,7 @@ const Modal = React.forwardRef(function Modal(
     size,
     hasScrollingContent = false,
     closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = !passiveModal,
+    preventCloseOnClickOutside,
     isFullWidth,
     launcherButtonRef,
     loadingStatus = 'inactive',
@@ -308,10 +311,10 @@ const Modal = React.forwardRef(function Modal(
       'element handles focus, so `enableDialogElement` must be off for ' +
       '`focusTrapWithoutSentinels` to have any effect.'
   );
-
-  if (!passiveModal && preventCloseOnClickOutside === false) {
-    console.error(invalidOutsideClickMessage);
-  }
+  warning(
+    !(!passiveModal && preventCloseOnClickOutside === false),
+    invalidOutsideClickMessage
+  );
 
   function isCloseButton(element: Element) {
     return (
@@ -353,8 +356,18 @@ const Modal = React.forwardRef(function Modal(
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
     evt.stopPropagation();
+
+    const shouldCloseOnOutsideClick =
+      // Passive modals can close on clicks outside the modal when
+      // preventCloseOnClickOutside is undefined or explicitly set to false.
+      (passiveModal && !preventCloseOnClickOutside) ||
+      // Non-passive modals have to explicitly opt-in for close on outside
+      // behavior by explicitly setting preventCloseOnClickOutside to false,
+      // rather than just leaving it undefined.
+      (!passiveModal && preventCloseOnClickOutside === false);
+
     if (
-      !preventCloseOnClickOutside &&
+      shouldCloseOnOutsideClick &&
       target instanceof Node &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       innerModal.current &&
@@ -411,6 +424,7 @@ const Modal = React.forwardRef(function Modal(
       (lastContent as HTMLElement).offsetTop -
       (lastContent as HTMLElement).clientHeight;
 
+    // eslint-disable-next-line   prefer-const -- https://github.com/carbon-design-system/carbon/issues/20071
     for (let elem of modalContent.children) {
       if (elem.contains(currentActiveNode)) {
         const spaceBelow =
@@ -500,6 +514,7 @@ const Modal = React.forwardRef(function Modal(
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, [open]);
 
   useEffect(() => {

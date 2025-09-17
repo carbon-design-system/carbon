@@ -41,6 +41,7 @@ const TableSlugRow = ({ className, slug }: TableSlugRowProps) => {
   // Slug is always size `mini`
   let normalizedSlug;
   if (slug) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });

@@ -12,6 +12,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type FocusEvent,
   type ForwardedRef,
@@ -42,7 +43,7 @@ import ListBox, {
   type ListBoxSize,
   type ListBoxType,
 } from '../ListBox';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -57,30 +58,12 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
-import { isComponentElement } from '../../internal';
+import { defaultItemToString, isComponentElement } from '../../internal';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
     ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
   };
-
-const defaultItemToString = <ItemType,>(item?: ItemType | null): string => {
-  if (typeof item === 'string') {
-    return item;
-  }
-  if (typeof item === 'number') {
-    return `${item}`;
-  }
-  if (
-    item !== null &&
-    typeof item === 'object' &&
-    'label' in item &&
-    typeof item['label'] === 'string'
-  ) {
-    return item['label'];
-  }
-  return '';
-};
 
 type ExcludedAttributes = 'id' | 'onChange';
 
@@ -377,6 +360,7 @@ const Dropdown = React.forwardRef(
           }
         });
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [floatingStyles, autoAlign, refs.floating]);
 
     const prefix = usePrefix();
@@ -391,6 +375,7 @@ const Dropdown = React.forwardRef(
       [onChange]
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     const isItemDisabled = useCallback((item, _index) => {
       const isObject = item !== null && typeof item === 'object';
       return isObject && 'disabled' in item && item.disabled === true;
@@ -403,6 +388,7 @@ const Dropdown = React.forwardRef(
         if (
           highlightedIndex !== undefined &&
           highlightedIndex > -1 &&
+          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
           typeof window !== undefined
         ) {
           const itemArray = document.querySelectorAll(
@@ -432,6 +418,7 @@ const Dropdown = React.forwardRef(
         onHighlightedIndexChange,
         ...downshiftProps,
       }),
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
       [
         items,
         itemToString,
@@ -524,7 +511,12 @@ const Dropdown = React.forwardRef(
       setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
     };
 
-    const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const mergedRef = mergeRefs<HTMLButtonElement>(
+      toggleButtonProps.ref,
+      ref,
+      buttonRef
+    );
 
     const [currTimer, setCurrTimer] = useState<NodeJS.Timeout>();
 
@@ -566,6 +558,7 @@ const Dropdown = React.forwardRef(
           toggleButtonProps.onKeyDown(evt);
         }
       },
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
       [isTyping, currTimer, toggleButtonProps]
     );
 
@@ -576,7 +569,7 @@ const Dropdown = React.forwardRef(
             // NOTE: does not prevent click
             evt.preventDefault();
             // focus on the element as per readonly input behavior
-            mergedRef?.current?.focus();
+            buttonRef.current?.focus();
           },
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
             const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
@@ -663,7 +656,8 @@ const Dropdown = React.forwardRef(
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
                   : itemToString(selectedItem)
-                : (label as any)}
+                : // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                  (label as any)}
             </span>
             <ListBox.MenuIcon
               isOpen={isOpen}
@@ -727,6 +721,7 @@ const Dropdown = React.forwardRef(
 interface DropdownComponent {
   <ItemType>(
     props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   ): React.ReactElement<any> | null;
 }
 

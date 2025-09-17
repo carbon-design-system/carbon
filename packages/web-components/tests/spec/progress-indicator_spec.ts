@@ -14,19 +14,20 @@ const template = (props?) =>
     'cds-progress-step': props,
   });
 
-describe('cds-progress-step', function () {
-  describe('Rendering', function () {
-    it('Should render with minimum attributes', async function () {
+describe('cds-progress-step', () => {
+  describe('Rendering', () => {
+    it('Should render with minimum attributes', async () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
         document.body.querySelector('cds-progress-step' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('Should render with various attributes', async function () {
+    it('Should render with various attributes', async () => {
       render(
         template({
           disabled: true,
@@ -40,12 +41,14 @@ describe('cds-progress-step', function () {
       await Promise.resolve();
       expect(
         document.body.querySelector(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
           'cds-progress-step[state="complete"]' as any
         )
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
-    afterEach(async function () {
+    afterEach(async () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
       await render(undefined!, document.body);
     });
   });

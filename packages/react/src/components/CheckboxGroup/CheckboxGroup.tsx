@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { cloneElement, type ReactNode } from 'react';
+import React, {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ComponentProps,
+  type ReactNode,
+} from 'react';
 import cx from 'classnames';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
@@ -14,6 +20,7 @@ import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { Checkbox } from '../Checkbox';
 
 export interface CheckboxGroupProps {
   children?: ReactNode;
@@ -89,6 +96,37 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     ? cloneElement(candidate, { size: 'mini', kind: 'default' })
     : null;
 
+  const clonedChildren = Children.map(children, (child) => {
+    if (
+      isValidElement<ComponentProps<typeof Checkbox>>(child) &&
+      child.type === Checkbox
+    ) {
+      const childProps: Pick<
+        ComponentProps<typeof Checkbox>,
+        'invalid' | 'readOnly' | 'warn'
+      > = {
+        ...(typeof invalid !== 'undefined' &&
+        typeof child.props.invalid === 'undefined'
+          ? { invalid }
+          : {}),
+        ...(typeof readOnly !== 'undefined' &&
+        typeof child.props.readOnly === 'undefined'
+          ? { readOnly }
+          : {}),
+        ...(typeof warn !== 'undefined' &&
+        typeof child.props.warn === 'undefined'
+          ? { warn }
+          : {}),
+      };
+
+      return Object.keys(childProps).length
+        ? cloneElement(child, childProps)
+        : child;
+    }
+
+    return child;
+  });
+
   return (
     <fieldset
       className={fieldsetClasses}
@@ -111,7 +149,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
           ''
         )}
       </legend>
-      {children}
+      {clonedChildren}
       <div className={`${prefix}--checkbox-group__validation-msg`}>
         {!readOnly && invalid && (
           <>

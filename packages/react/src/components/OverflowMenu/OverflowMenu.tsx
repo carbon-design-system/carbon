@@ -38,12 +38,12 @@ import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
@@ -105,6 +105,7 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
   const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
 
   switch (triggerButtonPositionProp) {
@@ -250,9 +251,11 @@ export interface OverflowMenuProps
    * The ref to the overflow menu's trigger button element.
    * @deprecated Use the standard React `ref` prop instead.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   innerRef?: Ref<any>;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
@@ -339,17 +342,13 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    const closeMenu = useCallback(
-      (onCloseMenu?: () => void) => {
-        setOpen(false);
-        // Optional callback to be executed after the state as been set to close
-        if (onCloseMenu) {
-          onCloseMenu();
-        }
-        onClose();
-      },
-      [onClose]
-    );
+    const closeMenu = useCallback((onCloseMenu?: () => void) => {
+      setOpen(false);
+      // Optional callback to be executed after the state as been set to close
+      if (onCloseMenu) {
+        onCloseMenu();
+      }
+    }, []);
 
     const closeMenuAndFocus = useCallback(() => {
       const wasClicked = click;

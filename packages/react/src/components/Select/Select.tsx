@@ -52,6 +52,7 @@ export interface SelectProps
   /**
    * Optionally provide the default value of the `<select>`
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
   defaultValue?: any;
 
   /**
@@ -141,220 +142,222 @@ export interface SelectProps
   warnText?: ReactNode;
 }
 
-const Select = React.forwardRef(function Select(
-  {
-    className,
-    decorator,
-    id,
-    inline = false,
-    labelText = 'Select',
-    disabled = false,
-    children,
-    // reserved for use with Pagination component
-    noLabel = false,
-    // eslint-disable-next-line no-unused-vars
-    hideLabel = false,
-    invalid = false,
-    invalidText = '',
-    helperText = '',
-    light = false,
-    readOnly,
-    size,
-    warn = false,
-    warnText,
-    onChange,
-    slug,
-    ...other
-  }: SelectProps,
-  ref: ForwardedRef<HTMLSelectElement>
-) {
-  const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
-  const [isFocused, setIsFocused] = useState(false);
-  const selectInstanceId = useId();
+const Select = React.forwardRef(
+  (
+    {
+      className,
+      decorator,
+      id,
+      inline = false,
+      labelText = 'Select',
+      disabled = false,
+      children,
+      // reserved for use with Pagination component
+      noLabel = false,
+      hideLabel = false,
+      invalid = false,
+      invalidText = '',
+      helperText = '',
+      light = false,
+      readOnly,
+      size,
+      warn = false,
+      warnText,
+      onChange,
+      slug,
+      ...other
+    }: SelectProps,
+    ref: ForwardedRef<HTMLSelectElement>
+  ) => {
+    const prefix = usePrefix();
+    const { isFluid } = useContext(FormContext);
+    const [isFocused, setIsFocused] = useState(false);
+    const selectInstanceId = useId();
 
-  interface SelectItemProps {
-    value: any;
-    text: string;
-  }
-  // Convert children to an array of valid elements once using type narrowing
-  const validChildren = React.Children.toArray(children).filter(
-    (child): child is React.ReactElement<SelectItemProps> =>
-      React.isValidElement<SelectItemProps>(child)
-  );
-
-  // Find the default option based on the specified defaultValue
-  const defaultOption = validChildren.find(
-    (child) => child.props?.value === other?.defaultValue
-  );
-
-  // Use the default option's text if available; otherwise, fallback to the first option's text
-  const initialTitle =
-    defaultOption?.props?.text || validChildren[0]?.props?.text || '';
-
-  const [title, setTitle] = useState(initialTitle);
-  const selectClasses = classNames({
-    [`${prefix}--select`]: true,
-    [`${prefix}--select--inline`]: inline,
-    [`${prefix}--select--light`]: light,
-    [`${prefix}--select--invalid`]: invalid,
-    [`${prefix}--select--disabled`]: disabled,
-    [`${prefix}--select--readonly`]: readOnly,
-    [`${prefix}--select--warning`]: warn,
-    [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
-    [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
-    [`${prefix}--select--slug`]: slug,
-    [`${prefix}--select--decorator`]: decorator,
-  });
-  const labelClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: disabled,
-  });
-  const inputClasses = classNames({
-    [`${prefix}--select-input`]: true,
-    [`${prefix}--select-input--${size}`]: size,
-  });
-  const errorId = `${id}-error-msg`;
-  const errorText = (() => {
-    if (invalid) {
-      return invalidText;
+    interface SelectItemProps {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      value: any;
+      text: string;
     }
-    if (warn) {
-      return warnText;
-    }
-  })();
-  const error =
-    invalid || warn ? (
-      <Text as="div" className={`${prefix}--form-requirement`} id={errorId}>
-        {errorText}
+    // Convert children to an array of valid elements once using type narrowing
+    const validChildren = React.Children.toArray(children).filter(
+      (child): child is React.ReactElement<SelectItemProps> =>
+        React.isValidElement<SelectItemProps>(child)
+    );
+
+    // Find the default option based on the specified defaultValue
+    const defaultOption = validChildren.find(
+      (child) => child.props?.value === other?.defaultValue
+    );
+
+    // Use the default option's text if available; otherwise, fallback to the first option's text
+    const initialTitle =
+      defaultOption?.props?.text || validChildren[0]?.props?.text || '';
+
+    const [title, setTitle] = useState(initialTitle);
+    const selectClasses = classNames({
+      [`${prefix}--select`]: true,
+      [`${prefix}--select--inline`]: inline,
+      [`${prefix}--select--light`]: light,
+      [`${prefix}--select--invalid`]: invalid,
+      [`${prefix}--select--disabled`]: disabled,
+      [`${prefix}--select--readonly`]: readOnly,
+      [`${prefix}--select--warning`]: warn,
+      [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
+      [`${prefix}--select--slug`]: slug,
+      [`${prefix}--select--decorator`]: decorator,
+    });
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: disabled,
+    });
+    const inputClasses = classNames({
+      [`${prefix}--select-input`]: true,
+      [`${prefix}--select-input--${size}`]: size,
+    });
+    const errorId = `${id}-error-msg`;
+    const errorText = (() => {
+      if (invalid) {
+        return invalidText;
+      }
+      if (warn) {
+        return warnText;
+      }
+    })();
+    const error =
+      invalid || warn ? (
+        <Text as="div" className={`${prefix}--form-requirement`} id={errorId}>
+          {errorText}
+        </Text>
+      ) : null;
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+
+    const helperId = !helperText
+      ? undefined
+      : `select-helper-text-${selectInstanceId}`;
+
+    const helper = helperText ? (
+      <Text as="div" id={helperId} className={helperTextClasses}>
+        {helperText}
       </Text>
     ) : null;
-  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-  });
+    const ariaProps = {};
+    if (invalid) {
+      ariaProps['aria-describedby'] = errorId;
+    } else if (!inline && !isFluid) {
+      ariaProps['aria-describedby'] = helper ? helperId : undefined;
+    }
 
-  const helperId = !helperText
-    ? undefined
-    : `select-helper-text-${selectInstanceId}`;
+    const handleFocus = (evt) => {
+      setIsFocused(evt.type === 'focus' ? true : false);
+    };
 
-  const helper = helperText ? (
-    <Text as="div" id={helperId} className={helperTextClasses}>
-      {helperText}
-    </Text>
-  ) : null;
-  const ariaProps = {};
-  if (invalid) {
-    ariaProps['aria-describedby'] = errorId;
-  } else if (!inline && !isFluid) {
-    ariaProps['aria-describedby'] = helper ? helperId : undefined;
-  }
+    const handleChange = (evt) => {
+      const selectedOption = evt?.target?.options[evt.target.selectedIndex];
+      setTitle(selectedOption?.text);
+    };
 
-  const handleFocus = (evt) => {
-    setIsFocused(evt.type === 'focus' ? true : false);
-  };
+    const readOnlyEventHandlers = {
+      onMouseDown: (evt) => {
+        // NOTE: does not prevent click
+        if (readOnly) {
+          evt.preventDefault();
+          // focus on the element as per readonly input behavior
+          evt.target.focus();
+        }
+      },
+      onKeyDown: (evt) => {
+        const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' '];
+        // This prevents the select from opening for the above keys
+        if (readOnly && selectAccessKeys.includes(evt.key)) {
+          evt.preventDefault();
+        }
+      },
+    };
 
-  const handleChange = (evt) => {
-    const selectedOption = evt?.target?.options[evt.target.selectedIndex];
-    setTitle(selectedOption?.text);
-  };
+    // AILabel always size `mini`
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
+      : null;
 
-  const readOnlyEventHandlers = {
-    onMouseDown: (evt) => {
-      // NOTE: does not prevent click
-      if (readOnly) {
-        evt.preventDefault();
-        // focus on the element as per readonly input behavior
-        evt.target.focus();
-      }
-    },
-    onKeyDown: (evt) => {
-      const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' '];
-      // This prevents the select from opening for the above keys
-      if (readOnly && selectAccessKeys.includes(evt.key)) {
-        evt.preventDefault();
-      }
-    },
-  };
-
-  // AILabel always size `mini`
-  const candidate = slug ?? decorator;
-  const candidateIsAILabel = isComponentElement(candidate, AILabel);
-  const normalizedDecorator = candidateIsAILabel
-    ? cloneElement(candidate, { size: 'mini' })
-    : null;
-
-  const input = (() => {
+    const input = (() => {
+      return (
+        <>
+          <select
+            {...other}
+            {...ariaProps}
+            id={id}
+            className={inputClasses}
+            disabled={disabled || undefined}
+            aria-invalid={invalid || undefined}
+            aria-readonly={readOnly || undefined}
+            title={title}
+            onChange={composeEventHandlers([onChange, handleChange])}
+            {...readOnlyEventHandlers}
+            ref={ref}>
+            {children}
+          </select>
+          <ChevronDown className={`${prefix}--select__arrow`} />
+          {invalid && (
+            <WarningFilled className={`${prefix}--select__invalid-icon`} />
+          )}
+          {!invalid && warn && (
+            <WarningAltFilled
+              className={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
+            />
+          )}
+        </>
+      );
+    })();
     return (
-      <>
-        <select
-          {...other}
-          {...ariaProps}
-          id={id}
-          className={inputClasses}
-          disabled={disabled || undefined}
-          aria-invalid={invalid || undefined}
-          aria-readonly={readOnly || undefined}
-          title={title}
-          onChange={composeEventHandlers([onChange, handleChange])}
-          {...readOnlyEventHandlers}
-          ref={ref}>
-          {children}
-        </select>
-        <ChevronDown className={`${prefix}--select__arrow`} />
-        {invalid && (
-          <WarningFilled className={`${prefix}--select__invalid-icon`} />
-        )}
-        {!invalid && warn && (
-          <WarningAltFilled
-            className={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
-          />
-        )}
-      </>
-    );
-  })();
-  return (
-    <div className={classNames(`${prefix}--form-item`, className)}>
-      <div className={selectClasses}>
-        {!noLabel && (
-          <Text as="label" htmlFor={id} className={labelClasses}>
-            {labelText}
-          </Text>
-        )}
-        {inline && (
-          <div className={`${prefix}--select-input--inline__wrapper`}>
+      <div className={classNames(`${prefix}--form-item`, className)}>
+        <div className={selectClasses}>
+          {!noLabel && (
+            <Text as="label" htmlFor={id} className={labelClasses}>
+              {labelText}
+            </Text>
+          )}
+          {inline && (
+            <div className={`${prefix}--select-input--inline__wrapper`}>
+              <div
+                className={`${prefix}--select-input__wrapper`}
+                data-invalid={invalid || null}>
+                {input}
+              </div>
+              {error}
+            </div>
+          )}
+          {!inline && (
             <div
               className={`${prefix}--select-input__wrapper`}
-              data-invalid={invalid || null}>
+              data-invalid={invalid || null}
+              onFocus={handleFocus}
+              onBlur={handleFocus}>
               {input}
+              {slug ? (
+                normalizedDecorator
+              ) : decorator ? (
+                <div className={`${prefix}--select__inner-wrapper--decorator`}>
+                  {normalizedDecorator}
+                </div>
+              ) : (
+                ''
+              )}
+              {isFluid && <hr className={`${prefix}--select__divider`} />}
+              {isFluid && error ? error : null}
             </div>
-            {error}
-          </div>
-        )}
-        {!inline && (
-          <div
-            className={`${prefix}--select-input__wrapper`}
-            data-invalid={invalid || null}
-            onFocus={handleFocus}
-            onBlur={handleFocus}>
-            {input}
-            {slug ? (
-              normalizedDecorator
-            ) : decorator ? (
-              <div className={`${prefix}--select__inner-wrapper--decorator`}>
-                {normalizedDecorator}
-              </div>
-            ) : (
-              ''
-            )}
-            {isFluid && <hr className={`${prefix}--select__divider`} />}
-            {isFluid && error ? error : null}
-          </div>
-        )}
-        {!inline && !isFluid && error ? error : helper}
+          )}
+          {!inline && !isFluid && error ? error : helper}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 Select.displayName = 'Select';
 

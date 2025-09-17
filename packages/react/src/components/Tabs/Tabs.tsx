@@ -140,6 +140,7 @@ function Tabs({
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
+    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
     console.error(
       'dismissable property specified without also providing an onTabCloseRequest property.'
     );
@@ -266,7 +267,6 @@ function TabsVertical({
 
   if (!isSm) {
     return (
-      // eslint-disable-next-line react/forbid-component-props
       <Grid style={{ height: height }}>
         <Tabs {...props}>{children}</Tabs>
       </Grid>
@@ -465,6 +465,7 @@ function TabList({
   let hasSecondaryLabelTabs = false;
   if (contained) {
     hasSecondaryLabelTabs = React.Children.toArray(children).some((child) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
       const _child = child as React.ReactElement<any>;
       return React.isValidElement(child) && !!_child.props.secondaryLabel;
     });
@@ -619,6 +620,7 @@ function TabList({
         inline: 'nearest',
       });
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
 
   useEffect(() => {
@@ -648,6 +650,7 @@ function TabList({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
 
   useIsomorphicEffect(() => {
@@ -757,6 +760,7 @@ function TabList({
                 contained,
               }}>
               {React.cloneElement(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
                 child as React.ReactElement<{ ref?: React.Ref<any> }>,
                 {
                   ref: (node) => {
@@ -965,6 +969,7 @@ function TabListVertical({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
   }, []);
 
   useEffect(() => {
@@ -985,6 +990,7 @@ function TabListVertical({
             halfTabHeight >
             containerHeight
         ) {
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
           ref.current &&
             ref.current.scrollTo({
               top: (selectedIndex - 1) * verticalTabHeight,
@@ -1058,6 +1064,7 @@ function TabListVertical({
                 hasSecondaryLabel: false,
               }}>
               {React.cloneElement(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
                 child as React.ReactElement<{ ref?: React.Ref<any> }>,
                 {
                   ref: (node) => {
@@ -1206,175 +1213,222 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   secondaryLabel?: string;
 }
 
-const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
-  {
-    as = 'button',
-    children,
-    className: customClassName,
-    disabled,
-    onClick,
-    onKeyDown,
-    secondaryLabel,
-    renderIcon: Icon,
-    ...rest
-  },
-  forwardRef
-) {
-  const prefix = usePrefix();
-  const {
-    selectedIndex,
-    setSelectedIndex,
-    baseId,
-    dismissable,
-    onTabCloseRequest,
-  } = React.useContext(TabsContext);
-  const { index, hasSecondaryLabel, contained } = React.useContext(TabContext);
-  const { badgeIndicator } = React.useContext(IconTabContext) || {};
-  const dismissIconRef = useRef<HTMLButtonElement>(null);
-  const tabRef = useRef<HTMLElement>(null);
-  const ref = useMergedRefs([forwardRef, tabRef]);
-  const [ignoreHover, setIgnoreHover] = useState(false);
-  const id = `${baseId}-tab-${index}`;
-  const panelId = `${baseId}-tabpanel-${index}`;
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-
-  const isEllipsisActive = (element: any) => {
-    setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
-    return element.offsetHeight < element.scrollHeight;
-  };
-
-  const className = cx(
-    `${prefix}--tabs__nav-item`,
-    `${prefix}--tabs__nav-link`,
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+const Tab = forwardRef<HTMLElement, TabProps>(
+  (
     {
-      [`${prefix}--tabs__nav-item--selected`]: selectedIndex === index,
-      [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      [`${prefix}--tabs__nav-item--hover-off`]: ignoreHover,
+      as = 'button',
+      children,
+      className: customClassName,
+      disabled,
+      onClick,
+      onKeyDown,
+      secondaryLabel,
+      renderIcon: Icon,
+      ...rest
     },
-    customClassName
-  );
+    forwardRef
+  ) => {
+    const prefix = usePrefix();
+    const {
+      selectedIndex,
+      setSelectedIndex,
+      baseId,
+      dismissable,
+      onTabCloseRequest,
+    } = React.useContext(TabsContext);
+    const { index, hasSecondaryLabel, contained } =
+      React.useContext(TabContext);
+    const { badgeIndicator } = React.useContext(IconTabContext) || {};
+    const dismissIconRef = useRef<HTMLButtonElement>(null);
+    const tabRef = useRef<HTMLElement>(null);
+    const ref = useMergedRefs([forwardRef, tabRef]);
+    const [ignoreHover, setIgnoreHover] = useState(false);
+    const id = `${baseId}-tab-${index}`;
+    const panelId = `${baseId}-tabpanel-${index}`;
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const BaseComponent = as as ElementType;
-
-  const onDismissIconMouseEnter = (evt) => {
-    if (contained && tabRef.current) {
-      evt.stopPropagation();
-      setIgnoreHover(true);
-      tabRef.current.classList.add(`${prefix}--tabs__nav-item--hover-off`);
-    }
-  };
-
-  const onDismissIconMouseLeave = () => {
-    if (contained && tabRef.current) {
-      tabRef.current.classList.remove(`${prefix}--tabs__nav-item--hover-off`);
-      setIgnoreHover(false);
-    }
-  };
-
-  useEvent(dismissIconRef, 'mouseover', onDismissIconMouseEnter);
-  useEvent(dismissIconRef, 'mouseleave', onDismissIconMouseLeave);
-
-  useIsomorphicEffect(() => {
-    function handler() {
-      const elementTabId = document.getElementById(`${id}`) || tabRef.current;
-      if (elementTabId?.closest(`.${prefix}--tabs--vertical`)) {
-        const newElement = elementTabId?.getElementsByClassName(
-          `${prefix}--tabs__nav-item-label`
-        )[0];
-        isEllipsisActive(newElement);
-      }
-    }
-    handler();
-    window.addEventListener('resize', handler);
-    return () => {
-      window.removeEventListener('resize', handler);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    const isEllipsisActive = (element: any) => {
+      setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
+      return element.offsetHeight < element.scrollHeight;
     };
-  }, [prefix, id]);
 
-  const handleClose = (evt) => {
-    evt.stopPropagation();
-    onTabCloseRequest?.(index);
+    const className = cx(
+      `${prefix}--tabs__nav-item`,
+      `${prefix}--tabs__nav-link`,
+      {
+        [`${prefix}--tabs__nav-item--selected`]: selectedIndex === index,
+        [`${prefix}--tabs__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs__nav-item--hover-off`]: ignoreHover,
+      },
+      customClassName
+    );
 
-    // set focus after removing tab
-    if (tabRef.current && tabRef.current.parentElement) {
-      // determine number of tabs, excluding disabled
-      const tabCount = Array.from(
-        tabRef.current.parentElement.childNodes
-      ).filter((node) => {
-        const element = node as HTMLElement;
-        return (
-          element.classList.contains(`${prefix}--tabs__nav-link`) &&
-          !element.classList.contains(`${prefix}--tabs__nav-item--disabled`)
-        );
-      }).length;
+    const BaseComponent = as as ElementType;
 
-      // if not removing last tab focus on next tab
-      if (tabRef.current && index + 1 !== tabCount) {
-        tabRef.current.focus();
+    const onDismissIconMouseEnter = (evt) => {
+      if (contained && tabRef.current) {
+        evt.stopPropagation();
+        setIgnoreHover(true);
+        tabRef.current.classList.add(`${prefix}--tabs__nav-item--hover-off`);
       }
-      // if removing last tab focus on previous tab
-      else {
-        const prevTabIndex = (tabCount - 2) * 2;
-        (
-          tabRef.current.parentElement.childNodes[prevTabIndex] as HTMLElement
-        )?.focus();
+    };
+
+    const onDismissIconMouseLeave = () => {
+      if (contained && tabRef.current) {
+        tabRef.current.classList.remove(`${prefix}--tabs__nav-item--hover-off`);
+        setIgnoreHover(false);
       }
-    }
-  };
+    };
 
-  const handleKeyDown = (event) => {
-    if (dismissable && match(event, keys.Delete)) {
-      handleClose(event);
-    }
-    onKeyDown?.(event);
-  };
+    useEvent(dismissIconRef, 'mouseover', onDismissIconMouseEnter);
+    useEvent(dismissIconRef, 'mouseleave', onDismissIconMouseLeave);
 
-  const DismissIcon = (
-    <div
-      className={cx({
-        [`${prefix}--tabs__nav-item--close`]: dismissable,
-        [`${prefix}--tabs__nav-item--close--hidden`]: !dismissable,
-      })}>
-      <button
-        type="button"
-        tabIndex={selectedIndex === index && dismissable ? 0 : -1}
-        aria-disabled={disabled}
-        aria-hidden={selectedIndex === index && dismissable ? 'false' : 'true'}
-        disabled={disabled}
+    useIsomorphicEffect(() => {
+      function handler() {
+        const elementTabId = document.getElementById(`${id}`) || tabRef.current;
+        if (elementTabId?.closest(`.${prefix}--tabs--vertical`)) {
+          const newElement = elementTabId?.getElementsByClassName(
+            `${prefix}--tabs__nav-item-label`
+          )[0];
+          isEllipsisActive(newElement);
+        }
+      }
+      handler();
+      window.addEventListener('resize', handler);
+      return () => {
+        window.removeEventListener('resize', handler);
+      };
+    }, [prefix, id]);
+
+    const handleClose = (evt) => {
+      evt.stopPropagation();
+      onTabCloseRequest?.(index);
+
+      // set focus after removing tab
+      if (tabRef.current && tabRef.current.parentElement) {
+        // determine number of tabs, excluding disabled
+        const tabCount = Array.from(
+          tabRef.current.parentElement.childNodes
+        ).filter((node) => {
+          const element = node as HTMLElement;
+          return (
+            element.classList.contains(`${prefix}--tabs__nav-link`) &&
+            !element.classList.contains(`${prefix}--tabs__nav-item--disabled`)
+          );
+        }).length;
+
+        // if not removing last tab focus on next tab
+        if (tabRef.current && index + 1 !== tabCount) {
+          tabRef.current.focus();
+        }
+        // if removing last tab focus on previous tab
+        else {
+          const prevTabIndex = (tabCount - 2) * 2;
+          (
+            tabRef.current.parentElement.childNodes[prevTabIndex] as HTMLElement
+          )?.focus();
+        }
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (dismissable && match(event, keys.Delete)) {
+        handleClose(event);
+      }
+      onKeyDown?.(event);
+    };
+
+    const DismissIcon = (
+      <div
         className={cx({
-          [`${prefix}--tabs__nav-item--close-icon`]: dismissable,
-          [`${prefix}--visually-hidden`]: !dismissable,
-          [`${prefix}--tabs__nav-item--close-icon--selected`]:
-            selectedIndex === index,
-          [`${prefix}--tabs__nav-item--close-icon--disabled`]: disabled,
-        })}
-        onClick={handleClose}
-        title={`Remove ${typeof children === 'string' ? children : ''} tab`}
-        ref={dismissIconRef}>
-        <Close
+          [`${prefix}--tabs__nav-item--close`]: dismissable,
+          [`${prefix}--tabs__nav-item--close--hidden`]: !dismissable,
+        })}>
+        <button
+          type="button"
+          tabIndex={selectedIndex === index && dismissable ? 0 : -1}
+          aria-disabled={disabled}
           aria-hidden={
             selectedIndex === index && dismissable ? 'false' : 'true'
           }
-          aria-label={`Press delete to remove ${
-            typeof children === 'string' ? children : ''
-          } tab`}
-        />
-      </button>
-    </div>
-  );
+          disabled={disabled}
+          className={cx({
+            [`${prefix}--tabs__nav-item--close-icon`]: dismissable,
+            [`${prefix}--visually-hidden`]: !dismissable,
+            [`${prefix}--tabs__nav-item--close-icon--selected`]:
+              selectedIndex === index,
+            [`${prefix}--tabs__nav-item--close-icon--disabled`]: disabled,
+          })}
+          onClick={handleClose}
+          title={`Remove ${typeof children === 'string' ? children : ''} tab`}
+          ref={dismissIconRef}>
+          <Close
+            aria-hidden={
+              selectedIndex === index && dismissable ? 'false' : 'true'
+            }
+            aria-label={`Press delete to remove ${
+              typeof children === 'string' ? children : ''
+            } tab`}
+          />
+        </button>
+      </div>
+    );
 
-  const hasIcon = Icon ?? dismissable;
+    const hasIcon = Icon ?? dismissable;
 
-  // should only happen for vertical variation, so no dismissable icon is needed here
-  if (isEllipsisApplied) {
+    // should only happen for vertical variation, so no dismissable icon is needed here
+    if (isEllipsisApplied) {
+      return (
+        <Tooltip
+          label={children}
+          align="top"
+          leaveDelayMs={0}
+          autoAlign
+          onMouseEnter={() => false}
+          closeOnActivation>
+          <BaseComponent
+            {...rest}
+            aria-controls={panelId}
+            aria-disabled={disabled}
+            aria-selected={selectedIndex === index}
+            ref={ref}
+            id={id}
+            role="tab"
+            className={className}
+            disabled={disabled}
+            title={children}
+            onClick={(evt) => {
+              if (disabled) {
+                return;
+              }
+              setSelectedIndex(index);
+              onClick?.(evt);
+            }}
+            onKeyDown={handleKeyDown}
+            tabIndex={selectedIndex === index ? '0' : '-1'}
+            type="button">
+            <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+              <Text className={`${prefix}--tabs__nav-item-label`}>
+                {children}
+              </Text>
+            </div>
+            {hasSecondaryLabel && secondaryLabel && (
+              <Text
+                as="div"
+                className={`${prefix}--tabs__nav-item-secondary-label`}
+                title={secondaryLabel}>
+                {secondaryLabel}
+              </Text>
+            )}
+          </BaseComponent>
+        </Tooltip>
+      );
+    }
+
     return (
-      <Tooltip
-        label={children}
-        align="top"
-        leaveDelayMs={0}
-        autoAlign
-        onMouseEnter={() => false}
-        closeOnActivation>
+      <>
         <BaseComponent
           {...rest}
           aria-controls={panelId}
@@ -1385,7 +1439,6 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
           role="tab"
           className={className}
           disabled={disabled}
-          title={children}
           onClick={(evt) => {
             if (disabled) {
               return;
@@ -1397,9 +1450,22 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
           tabIndex={selectedIndex === index ? '0' : '-1'}
           type="button">
           <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+            {dismissable && Icon && (
+              <div className={`${prefix}--tabs__nav-item--icon-left`}>
+                {<Icon size={16} />}
+              </div>
+            )}
             <Text className={`${prefix}--tabs__nav-item-label`}>
               {children}
             </Text>
+            {!dismissable && Icon && (
+              <div
+                className={cx(`${prefix}--tabs__nav-item--icon`, {
+                  [`${prefix}--visually-hidden`]: !hasIcon,
+                })}>
+                {!dismissable && Icon && <Icon size={16} />}
+              </div>
+            )}
           </div>
           {hasSecondaryLabel && secondaryLabel && (
             <Text
@@ -1409,64 +1475,14 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
               {secondaryLabel}
             </Text>
           )}
+          {!disabled && badgeIndicator && <BadgeIndicator />}
         </BaseComponent>
-      </Tooltip>
+        {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
+        {DismissIcon}
+      </>
     );
   }
-
-  return (
-    <>
-      <BaseComponent
-        {...rest}
-        aria-controls={panelId}
-        aria-disabled={disabled}
-        aria-selected={selectedIndex === index}
-        ref={ref}
-        id={id}
-        role="tab"
-        className={className}
-        disabled={disabled}
-        onClick={(evt) => {
-          if (disabled) {
-            return;
-          }
-          setSelectedIndex(index);
-          onClick?.(evt);
-        }}
-        onKeyDown={handleKeyDown}
-        tabIndex={selectedIndex === index ? '0' : '-1'}
-        type="button">
-        <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
-          {dismissable && Icon && (
-            <div className={`${prefix}--tabs__nav-item--icon-left`}>
-              {<Icon size={16} />}
-            </div>
-          )}
-          <Text className={`${prefix}--tabs__nav-item-label`}>{children}</Text>
-          {!dismissable && Icon && (
-            <div
-              className={cx(`${prefix}--tabs__nav-item--icon`, {
-                [`${prefix}--visually-hidden`]: !hasIcon,
-              })}>
-              {!dismissable && Icon && <Icon size={16} />}
-            </div>
-          )}
-        </div>
-        {hasSecondaryLabel && secondaryLabel && (
-          <Text
-            as="div"
-            className={`${prefix}--tabs__nav-item-secondary-label`}
-            title={secondaryLabel}>
-            {secondaryLabel}
-          </Text>
-        )}
-        {!disabled && badgeIndicator && <BadgeIndicator />}
-      </BaseComponent>
-      {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
-      {DismissIcon}
-    </>
-  );
-});
+);
 Tab.propTypes = {
   /**
    * Provide a custom element to render instead of the default button
@@ -1546,6 +1562,11 @@ export interface IconTabProps extends DivAttributes {
   defaultOpen?: boolean;
 
   /**
+   *  Specify whether your IconTab is disabled.
+   */
+  disabled?: boolean;
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip for the icon.
    */
   enterDelayMs?: number;
@@ -1564,48 +1585,50 @@ export interface IconTabProps extends DivAttributes {
    */
   leaveDelayMs?: number;
 }
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
+  (
+    {
+      badgeIndicator,
+      children,
+      className: customClassName,
+      defaultOpen = false,
+      enterDelayMs,
+      leaveDelayMs,
+      label,
+      ...rest
+    },
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const value = useMemo(() => ({ badgeIndicator }), [badgeIndicator]);
 
-const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
-  {
-    badgeIndicator,
-    children,
-    className: customClassName,
-    defaultOpen = false,
-    enterDelayMs,
-    leaveDelayMs,
-    label,
-    ...rest
-  },
-  ref
-) {
-  const prefix = usePrefix();
-  const value = useMemo(() => ({ badgeIndicator }), [badgeIndicator]);
+    const hasSize20 =
+      isValidElement(children) &&
+      (children as ReactElement<{ size?: number }>).props.size === 20;
 
-  const hasSize20 =
-    isValidElement(children) &&
-    (children as ReactElement<{ size?: number }>).props.size === 20;
-
-  const classNames = cx(
-    `${prefix}--tabs__nav-item--icon-only`,
-    customClassName,
-    { [`${prefix}--tabs__nav-item--icon-only__20`]: hasSize20 }
-  );
-  return (
-    <IconTabContext.Provider value={value}>
-      <Tooltip
-        align="bottom"
-        defaultOpen={defaultOpen}
-        className={`${prefix}--icon-tooltip`}
-        enterDelayMs={enterDelayMs}
-        label={label}
-        leaveDelayMs={leaveDelayMs}>
-        <Tab className={classNames} ref={ref} {...rest}>
-          {children}
-        </Tab>
-      </Tooltip>
-    </IconTabContext.Provider>
-  );
-});
+    const classNames = cx(
+      `${prefix}--tabs__nav-item--icon-only`,
+      customClassName,
+      { [`${prefix}--tabs__nav-item--icon-only__20`]: hasSize20 }
+    );
+    return (
+      <IconTabContext.Provider value={value}>
+        <Tooltip
+          align="bottom"
+          defaultOpen={defaultOpen}
+          className={`${prefix}--icon-tooltip`}
+          enterDelayMs={enterDelayMs}
+          label={label}
+          leaveDelayMs={leaveDelayMs}>
+          <Tab className={classNames} ref={ref} {...rest}>
+            {children}
+          </Tab>
+        </Tooltip>
+      </IconTabContext.Provider>
+    );
+  }
+);
 
 IconTab.propTypes = {
   /**
@@ -1663,11 +1686,9 @@ export interface TabPanelProps extends DivAttributes {
   className?: string;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
-  function TabPanel(
-    { children, className: customClassName, ...rest },
-    forwardRef
-  ) {
+  ({ children, className: customClassName, ...rest }, forwardRef) => {
     const prefix = usePrefix();
     const panel = useRef<HTMLDivElement>(null);
     const ref = useMergedRefs([forwardRef, panel]);
@@ -1801,6 +1822,7 @@ function TabPanels({ children }: TabPanelsProps) {
       {React.Children.map(children, (child, index) => {
         return !isElement(child) ? null : (
           <TabPanelContext.Provider value={index}>
+            {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071 */}
             {React.cloneElement(child as React.ReactElement<any>, {
               ref: (element: HTMLDivElement) => {
                 refs.current[index] = element;

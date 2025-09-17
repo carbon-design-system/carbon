@@ -5,15 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
-import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import './index';
 import { prefix } from '../../globals/settings';
-import TableOfContents16 from '@carbon/icons/lib/table-of-contents/16.js';
-import Workspace16 from '@carbon/icons/lib/workspace/16.js';
-import ViewMode2_16 from '@carbon/icons/lib/view--mode-2/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
+import Workspace16 from '@carbon/icons/es/workspace/16.js';
+import ViewMode2_16 from '@carbon/icons/es/view--mode-2/16.js';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
+
+import { CONTENT_SWITCHER_SIZE } from './content-switcher';
+import { html } from 'lit';
 
 const forwardEventDetail = (handler) => (event) => {
   handler?.(event.detail);
@@ -30,6 +32,7 @@ const args = {
   selectionMode: 'automatic',
   selectedIndex: 0,
   lowContrast: false,
+  disabled: false,
 };
 
 const argTypes = {
@@ -59,6 +62,10 @@ const argTypes = {
     control: 'boolean',
     description: '`true` to use the low contrast version.',
   },
+  disabled: {
+    control: 'boolean',
+    description: 'Specify disabled attribute to `true` to disable a button.',
+  },
 };
 
 export const Default = {
@@ -71,6 +78,7 @@ export const Default = {
     selectionMode,
     selectedIndex,
     lowContrast,
+    disabled,
   }) => {
     return html`
       <cds-content-switcher
@@ -85,18 +93,21 @@ export const Default = {
         <cds-content-switcher-item
           value="all"
           name="one"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="staging"
           name="three"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
           Third section
         </cds-content-switcher-item>
@@ -115,6 +126,7 @@ export const IconOnly = {
     selectionMode,
     selectedIndex,
     lowContrast,
+    disabled,
   }) => html`
     <cds-content-switcher
       size="${size}"
@@ -128,22 +140,25 @@ export const IconOnly = {
       <cds-content-switcher-item
         icon
         value="all"
+        ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${TableOfContents16()}
+        ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
+        ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${Workspace16()}
+        ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="staging"
+        ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${ViewMode2_16()}
+        ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
     </cds-content-switcher>
@@ -160,6 +175,7 @@ export const IconOnlyWithLayer = {
     selectionMode,
     selectedIndex,
     lowContrast,
+    disabled,
   }) => html`
     <sb-template-layers>
       <cds-content-switcher
@@ -174,22 +190,25 @@ export const IconOnlyWithLayer = {
         <cds-content-switcher-item
           icon
           value="all"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
-          ${TableOfContents16()}
+          ${iconLoader(TableOfContents16)}
           <span slot="tooltip-content">Table of Contents</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item
           icon
           value="cloudFoundry"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
-          ${Workspace16()}
+          ${iconLoader(Workspace16)}
           <span slot="tooltip-content">Workspace Test</span>
         </cds-content-switcher-item>
         <cds-content-switcher-item
           icon
           value="staging"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
-          ${ViewMode2_16()}
+          ${iconLoader(ViewMode2_16)}
           <span slot="tooltip-content">View Mode</span>
         </cds-content-switcher-item>
       </cds-content-switcher>
@@ -210,6 +229,7 @@ export const LowContrast = {
     selectionMode,
     selectedIndex,
     lowContrast,
+    disabled,
   }) => {
     return html`
       <cds-content-switcher
@@ -222,6 +242,7 @@ export const LowContrast = {
         )}"
         @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
         <cds-content-switcher-item
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}"
           value="all"
           name="one">
@@ -230,11 +251,13 @@ export const LowContrast = {
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           name="three"
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}"
           value="staging">
           Third section
@@ -257,6 +280,7 @@ export const lowContrastIconOnly = {
     selectionMode,
     selectedIndex,
     lowContrast,
+    disabled,
   }) => html`
     <cds-content-switcher
       size="${size}"
@@ -270,22 +294,25 @@ export const lowContrastIconOnly = {
       <cds-content-switcher-item
         icon
         value="all"
+        ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${TableOfContents16()}
+        ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
+        ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${Workspace16()}
+        ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="staging"
+        ?disabled="${disabled}"
         ?low-contrast="${lowContrast}">
-        ${ViewMode2_16()}
+        ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
     </cds-content-switcher>
@@ -302,6 +329,7 @@ export const WithLayer = {
     selectionMode,
     selectedIndex,
     lowContrast,
+    disabled,
   }) => html`
     <sb-template-layers>
       <cds-content-switcher
@@ -314,18 +342,21 @@ export const WithLayer = {
         )}"
         @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
         <cds-content-switcher-item
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}"
           value="all"
           name="one">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}"
           value="cloudFoundry"
           name="two">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
+          ?disabled="${disabled}"
           ?low-contrast="${lowContrast}"
           value="staging"
           name="three">
