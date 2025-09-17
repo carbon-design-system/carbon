@@ -5,9 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { ProgressBar } from '@carbon/react';
-import figma from '@figma/code-connect';
+// import React from 'react';
+// import { ProgressBar } from '@carbon/react';
+// import figma from '@figma/code-connect';
+
+// TODO: Re-enable these components when Code Connect validation bug is fixed
+// Properties exist in Figma but fail validation despite correct names:
+// https://github.com/carbon-design-system/carbon/issues/20089
 
 // const sharedProgressBarProps = {
 //   label: figma.string('Label text'),

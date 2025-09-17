@@ -9,12 +9,12 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  ClickableTile,
-  ExpandableTile,
-  SelectableTile,
+  // ClickableTile,
+  // ExpandableTile,
+  // SelectableTile,
   Tile,
-  TileAboveTheFoldContent,
-  TileBelowTheFoldContent,
+  // TileAboveTheFoldContent,
+  // TileBelowTheFoldContent,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
@@ -25,6 +25,7 @@ figma.connect(
     props: {
       // TODO: Re-enable these props when Code Connect validation bug is fixed
       // Properties exist in Figma but fail validation despite correct names:
+      // https://github.com/carbon-design-system/carbon/issues/20089
       // titleText: figma.string('Title text'),
       // descriptionText: figma.string('Description text'),
       // slot: figma.boolean('Slot'),
