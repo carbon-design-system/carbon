@@ -16,8 +16,8 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14505-304219&t=5acDGCinwyrs5Bbc-4',
   {
     props: {
-      titleText: figma.boolean('Show tooltip', {
-        // true: figma.string('Label text') + figma.children('Tooltip'), //https://github.com/figma/code-connect/issues/92
+      titleText: figma.boolean('Show toggletip', {
+        // true: figma.string('Label text') + figma.children('Toggletip'), //https://github.com/figma/code-connect/issues/92
         true: figma.string('Label text'),
         false: figma.string('Label text'),
       }),
