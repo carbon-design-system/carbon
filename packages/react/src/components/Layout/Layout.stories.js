@@ -17,7 +17,7 @@ import { Layout, LayoutConstraint } from './';
 import mdx from './Layout.mdx';
 
 export default {
-  title: 'Experimental/unstable__Layout',
+  title: 'Preview/preview__Layout',
   component: Layout,
   subcomponents: {
     LayoutConstraint,

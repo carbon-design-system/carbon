@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import CDSCheckbox from '../checkbox/checkbox';
 import { TOGGLE_SIZE } from './defs';
 import styles from './toggle.scss?lit';
-import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -37,23 +36,23 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    * Handles `click` event on the `<button>` in the shadow DOM.
    */
   protected _handleChange() {
-    const { checked, indeterminate } = this._checkboxNode;
+    const { checked } = this._checkboxNode;
     if (this.disabled || this.readOnly) {
       return;
     }
     this.checked = !checked;
-    this.indeterminate = indeterminate;
-    const { eventChange } = this.constructor as typeof CDSCheckbox;
+    const { eventChange } = this.constructor as typeof CDSToggle;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
         composed: true,
         detail: {
-          indeterminate,
+          checked: this.checked,
         },
       })
     );
   }
+
 
   /**
    * Handles `keydown` event on the toggle button.
@@ -70,7 +69,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   };
 
   protected _renderCheckmark() {
-    if (this.size !== TOGGLE_SIZE.SMALL) {
+    if (this.size !== TOGGLE_SIZE.SMALL || this.readOnly == true) {
       return undefined;
     }
     return html`
@@ -211,15 +210,13 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
         type="button"
         aria-checked=${checked}
         aria-labelledby=${ifDefined(ariaLabelledby)}
-        .checked="${checked}"
+        .checked=${checked}
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
         ?disabled=${disabled}
-        id="${id}"></button>
-      <label
-        for="${id}"
-        class="${prefix}--toggle__label"
-        @click=${handleChange}>
+        id="${id}"
+        @click=${handleChange}></button>
+      <label for="${id}" class="${prefix}--toggle__label">
         ${labelText
           ? html`<span class="${labelTextClasses}">${labelText}</span>`
           : null}

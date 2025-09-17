@@ -9,8 +9,8 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable__FluidComboBox as FluidComboBox,
-  unstable__FluidDropdownSkeleto as FluidDropdownSkeleton,
+  preview__FluidComboBox as FluidComboBox,
+  preview__FluidDropdownSkeleto as FluidDropdownSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 

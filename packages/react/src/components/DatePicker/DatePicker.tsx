@@ -22,7 +22,7 @@ import l10n from 'flatpickr/dist/l10n/index';
 import DatePickerInput from '../DatePickerInput';
 import { appendToPlugin } from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
-import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
+import { rangePlugin } from './plugins/rangePlugin';
 import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
@@ -194,6 +194,7 @@ function updateClassNames(calendar, prefix) {
 }
 
 export type DatePickerTypes = 'simple' | 'single' | 'range';
+
 export type CalRef = {
   inline: boolean;
   disableMobile: boolean;
@@ -207,6 +208,7 @@ export type CalRef = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   clickOpens: any;
 };
+
 export interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
@@ -498,8 +500,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
   }, [calendarCloseEvent, handleCalendarClose]);
 
-  const endInputField = useRef<HTMLTextAreaElement>(null);
-  const lastFocusedField = useRef<HTMLTextAreaElement>(null);
+  const endInputField = useRef<HTMLInputElement>(null);
+  const lastFocusedField = useRef<HTMLInputElement>(null);
   const savedOnChange = useSavedCallback(onChange);
 
   const savedOnOpen = useSavedCallback(onOpen);
@@ -657,8 +659,8 @@ const DatePicker = React.forwardRef(function DatePicker(
       parseDate: parseDate,
       plugins: [
         datePickerType === 'range'
-          ? carbonFlatpickrRangePlugin({
-              input: endInputField.current,
+          ? rangePlugin({
+              input: endInputField.current ?? undefined,
             })
           : () => {},
         appendTo

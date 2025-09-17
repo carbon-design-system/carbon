@@ -262,6 +262,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
+          title={label}
           {...getReferenceProps()}>
           <div className={`${prefix}--menu-item__selection-icon`}>
             {rest['aria-checked'] && <Checkmark />}
@@ -269,10 +270,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <div className={`${prefix}--menu-item__icon`}>
             {IconElement && <IconElement />}
           </div>
-          <Text
-            as="div"
-            className={`${prefix}--menu-item__label`}
-            title={label}>
+          <Text as="div" className={`${prefix}--menu-item__label`}>
             {label}
           </Text>
           {shortcut && !hasChildren && (
