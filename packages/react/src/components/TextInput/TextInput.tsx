@@ -207,7 +207,7 @@ const TextInput = React.forwardRef(
 
     useEffect(() => {
       setTextCount(getInitialTextCount());
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [value, defaultValue, enableCounter]);
 
     const normalizedProps = useNormalizedInputProps({
@@ -368,7 +368,7 @@ const TextInput = React.forwardRef(
         }
       }
     }, [ariaAnnouncement, prevAnnouncement]);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const Icon = normalizedProps.icon as any;
 
     // AILabel is always size `mini`

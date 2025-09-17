@@ -54,7 +54,7 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
   size?: Size;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Layout = React.forwardRef<ReactNode, LayoutProps>(
   (
     { as: BaseComponent = 'div', children, className, density, size, ...rest },
@@ -145,7 +145,7 @@ export interface LayoutConstraintProps extends HTMLAttributes<HTMLElement> {
     max?: Size | null;
   } | null;
 }
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const LayoutConstraint = React.forwardRef<ReactNode, LayoutConstraintProps>(
   (
     { as: BaseComponent = 'div', children, className, density, size, ...rest },

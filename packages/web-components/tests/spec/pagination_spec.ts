@@ -24,7 +24,7 @@ xdescribe('cds-pagination', () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-pagination' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -42,7 +42,7 @@ xdescribe('cds-pagination', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-pagination' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -54,7 +54,7 @@ xdescribe('cds-pagination', () => {
       await Promise.resolve(); // Update cycle for `<cds-pagination>`
       await Promise.resolve(); // Update cycle for `<cds-page-sizes-select>`
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-page-sizes-select' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
@@ -64,7 +64,7 @@ xdescribe('cds-pagination', () => {
       await Promise.resolve(); // Update cycle for `<cds-pagination>`
       await Promise.resolve(); // Update cycle for `<cds-pages-select>`
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-pages-select' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -83,11 +83,11 @@ xdescribe('cds-pagination', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const textContentNode = document.body
         .querySelector('cds-pagination')!
         .shadowRoot!.querySelector('.cds--pagination__text');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(textContentNode!.textContent!.trim()).toBe('1–1 of 1 item');
     });
 
@@ -101,11 +101,11 @@ xdescribe('cds-pagination', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const textContentNode = document.body
         .querySelector('cds-pagination')!
         .shadowRoot!.querySelector('.cds--pagination__text');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(textContentNode!.textContent!.trim()).toBe('Item 11–30');
     });
 
@@ -120,11 +120,11 @@ xdescribe('cds-pagination', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const textContentNode = document.body
         .querySelector('cds-pagination')!
         .shadowRoot!.querySelector('.cds--pagination__text');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(textContentNode!.textContent!.trim()).toBe('Item 31–');
     });
   });
@@ -192,7 +192,7 @@ xdescribe('cds-pagination', () => {
       const pagesSelectNode = paginationNode.shadowRoot?.querySelector(
         '#pages-select'
       ) as CDSSelect;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(pagesSelectNode.shadowRoot!.querySelector('select')!.value).toBe(
         '38'
       );
@@ -220,7 +220,7 @@ xdescribe('cds-pagination', () => {
           newStart = event.detail.start;
         }
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(10);
       expect(newStart).toBe(10);
@@ -246,7 +246,7 @@ xdescribe('cds-pagination', () => {
           newStart = event.detail.start;
         }
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(0);
       expect(newStart).toBe(0);
@@ -268,9 +268,9 @@ xdescribe('cds-pagination', () => {
       events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Prev button should be disabled when `start` indicates that we are at the first page,
       // but we ensure nothing happens even if the button is enabled
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[0].disabled = false;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(0);
       expect(spyChanged).not.toHaveBeenCalled();
@@ -296,7 +296,7 @@ xdescribe('cds-pagination', () => {
           newStart = event.detail.start;
         }
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(30);
       expect(newStart).toBe(30);
@@ -319,9 +319,9 @@ xdescribe('cds-pagination', () => {
       events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
       // but we ensure nothing happens even if the button is enabled
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[1].disabled = false;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(20);
       expect(spyChanged).not.toHaveBeenCalled();
@@ -344,9 +344,9 @@ xdescribe('cds-pagination', () => {
       events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
       // but we ensure nothing happens even if the button is enabled
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[1].disabled = false;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(25);
       expect(spyChanged).not.toHaveBeenCalled();
@@ -373,7 +373,7 @@ xdescribe('cds-pagination', () => {
           newStart = event.detail.start;
         }
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(35);
       expect(newStart).toBe(35);
@@ -426,7 +426,7 @@ xdescribe('cds-pagination', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
     events.reset();
   });

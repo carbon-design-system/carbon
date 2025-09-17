@@ -31,19 +31,19 @@ export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const AILabelContent = React.forwardRef(function AILabelContent(
   { className, children }: AILabelContentProps,
-  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 ) {
   const prefix = usePrefix();
 
   const hasAILabelActions = React.Children.toArray(children).some((child) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const item = child as any;
     // TODO: Is there supposed to be a `return` here? If so, this issue would
     // have been caught by ESLint. It's concerning that this code is 7 months
     // old and no one has noticed any issues with it. It also makes me question
     // whether the code is necessary.
     // https://github.com/carbon-design-system/carbon/issues/18991
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     item.type === AILabelActions;
   });
 
@@ -76,7 +76,7 @@ export type AILabelActionsProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const AILabelActions = React.forwardRef(function AILabelActions(
   { className, children }: AILabelActionsProps,
-  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 ) {
   const prefix = usePrefix();
 

@@ -14,7 +14,7 @@ type ExcludedAttributes = 'id';
 
 export interface ListBoxMenuProps
   extends Omit<HTMLAttributes<HTMLUListElement>, ExcludedAttributes> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   children?: any;
 
   /**

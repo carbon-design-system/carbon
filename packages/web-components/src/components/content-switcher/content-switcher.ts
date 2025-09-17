@@ -55,7 +55,7 @@ class CDSContentSwitcher extends LitElement {
     const index =
       type !== 'mouseover'
         ? -1
-        : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           indexOf(items, (target as Element).closest(selectorItem)!);
 
     if ((target as Element).closest(selectorItem)?.hasAttribute('disabled')) {
@@ -247,7 +247,7 @@ class CDSContentSwitcher extends LitElement {
       const items = this.querySelectorAll(selectorItem);
       const index = indexOf(
         items,
-        (itemToSelect as Element).closest(selectorItem)! // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        (itemToSelect as Element).closest(selectorItem)! // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       );
       const nextIndex = index < 0 ? index : index + 1;
       forEach(this.querySelectorAll(selectorItem), (elem, i) => {

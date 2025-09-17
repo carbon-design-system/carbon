@@ -9,7 +9,7 @@ import { render } from 'lit';
 import '../../src/components/link/link';
 import { PairedWithIcon } from '../../src/components/link/link.stories';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 const template = (props?: any) =>
   PairedWithIcon({
     'cds-link': props,
@@ -20,7 +20,7 @@ describe('cds-link', () => {
     it('should render with minimum attributes', async () => {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -41,7 +41,7 @@ describe('cds-link', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -63,7 +63,7 @@ describe('cds-link', () => {
         document.body
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -71,7 +71,7 @@ describe('cds-link', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

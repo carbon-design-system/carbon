@@ -38,7 +38,7 @@ xdescribe('cds-select', () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-select' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -61,7 +61,7 @@ xdescribe('cds-select', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-select' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -79,7 +79,7 @@ xdescribe('cds-select', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-select' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -97,11 +97,11 @@ xdescribe('cds-select', () => {
       item.label = 'label-foo';
       item.selected = true;
       item.value = 'value-foo';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.appendChild(item);
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<option>`s
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const option = elem!.shadowRoot!.querySelector(
         'option[value="value-foo"]'
       ) as HTMLOptionElement;
@@ -120,7 +120,7 @@ xdescribe('cds-select', () => {
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<option>`s
       const elem = document.body.querySelector('cds-select');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const option = elem!.shadowRoot!.querySelector(
         'option[value="staging"]'
       ) as HTMLOptionElement;
@@ -133,13 +133,13 @@ xdescribe('cds-select', () => {
       const item = document.body.querySelector(
         'cds-select-item[value="staging"]'
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       item!.parentNode!.removeChild(item!);
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<option>`s
       const elem = document.body.querySelector('cds-select');
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.shadowRoot!.querySelector('option[value="staging"]')
       ).toBeNull();
     });
@@ -153,11 +153,11 @@ xdescribe('cds-select', () => {
       ) as CDSSelectItem;
       item.disabled = true;
       item.label = 'label-foo';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.appendChild(item);
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<optgroup>`s
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const option = elem!.shadowRoot!.querySelector(
         'optgroup[label="label-foo"]'
       ) as HTMLOptGroupElement;
@@ -175,7 +175,7 @@ xdescribe('cds-select', () => {
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<optgroup>`s
       const elem = document.body.querySelector('cds-select');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const option = elem!.shadowRoot!.querySelector(
         'optgroup[label="Category 2"]'
       ) as HTMLOptGroupElement;
@@ -188,13 +188,13 @@ xdescribe('cds-select', () => {
       const itemGroup = document.body.querySelector(
         'cds-select-item-group[label="Category 2"]'
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       itemGroup!.parentNode!.removeChild(itemGroup!);
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<optgroup>`s
       const elem = document.body.querySelector('cds-select');
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.shadowRoot!.querySelector('optgroup[label="Category 2"]')
       ).toBeNull();
     });
@@ -248,16 +248,16 @@ xdescribe('cds-select', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-select');
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const { _attributeToProperty: origAttributeToProperty } = elem as any;
       let caught;
       await new Promise<void>((resolve) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         spyOn(CDSSelect.prototype as any, '_attributeToProperty').and.callFake(
           function () {
             try {
               // TODO: See if we can get around TS2683
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
               // @ts-ignore
               // eslint-disable-next-line prefer-rest-params
               origAttributeToProperty.apply(this, arguments);
@@ -267,7 +267,7 @@ xdescribe('cds-select', () => {
             resolve();
           }
         );
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.setAttribute('multiple', '');
       });
       expect(caught).toBeDefined();
@@ -311,10 +311,10 @@ xdescribe('cds-select', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': 'staging' });
     });
@@ -339,10 +339,10 @@ xdescribe('cds-select', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
@@ -354,7 +354,7 @@ xdescribe('cds-select', () => {
     beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-select')!;
     });
 
@@ -390,7 +390,7 @@ xdescribe('cds-select', () => {
 
   afterEach(async () => {
     events.reset();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

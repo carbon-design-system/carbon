@@ -75,7 +75,7 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   (
     {

@@ -28,7 +28,7 @@ declare module 'carbon-components/es/globals/js/misc/on.js' {
   function on<K extends keyof HTMLElementEventMap>(
     target: EventTarget,
     type: K,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     listener: (this: EventTarget, ev: HTMLElementEventMap[K]) => any,
     options?: boolean | AddEventListenerOptions // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   ): //@ts-expect-error

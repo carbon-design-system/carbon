@@ -40,7 +40,7 @@ const SideNavItems: React.FC<SideNavItemsProps> = ({
   const childrenWithExpandedState = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const childDisplayName = (child.type as any)?.displayName;
       return React.cloneElement(child, {
         ...(CARBON_SIDENAV_ITEMS.includes(childDisplayName)

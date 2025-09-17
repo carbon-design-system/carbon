@@ -93,15 +93,15 @@ export type ColumnProps<T extends React.ElementType> =
 export interface ColumnComponent {
   <T extends React.ElementType>(
     props: ColumnProps<T>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     context?: any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   ): React.ReactElement<any, any> | null;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Column = React.forwardRef<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   ColumnBaseProps & {
     as?: React.ElementType;
@@ -234,7 +234,7 @@ Column.propTypes = {
   xlg: spanPropType,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any , react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any , react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const CSSGridColumn = React.forwardRef<any, ColumnProps<any>>(
   (
     {

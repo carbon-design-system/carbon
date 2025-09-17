@@ -34,7 +34,7 @@ export const Section = React.forwardRef(function Section<
 ) {
   const parentLevel = React.useContext(HeadingContext);
   const level = levelOverride ?? parentLevel + 1;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const BaseComponentAsAny = BaseComponent as any;
 
   return (
@@ -68,7 +68,7 @@ Section.propTypes = {
 };
 
 type HeadingProps = JSX.IntrinsicElements[`h${HeadingLevel}`];
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const Heading = React.forwardRef(
   (props: HeadingProps, ref: React.Ref<HTMLHeadingElement>) => {
     const HeadingIntrinsic = `h${React.useContext(HeadingContext)}` as const;

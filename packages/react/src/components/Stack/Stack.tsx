@@ -69,7 +69,7 @@ export interface StackProps extends React.HTMLAttributes<HTMLElement> {
  * - https://paste.twilio.design/layout/stack/
  * - https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
  */
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const Stack = forwardRef<HTMLElement, StackProps>((props, ref) => {
   const {
     as: BaseComponent = 'div',

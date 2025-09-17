@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
 import { ComboButton } from '@carbon/react';
@@ -34,7 +34,7 @@ figma.connect(
     props: sharedComboButtonProps,
     example: ({ size, position }) => (
       <ComboButton size={size} position={position} label="Primary action">
-        {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */}
+        {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}
         Open Combo button to view <MenuItem /> props and code
       </ComboButton>
     ),
