@@ -53,7 +53,6 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
     );
   }
 
-
   /**
    * Handles `keydown` event on the toggle button.
    */
