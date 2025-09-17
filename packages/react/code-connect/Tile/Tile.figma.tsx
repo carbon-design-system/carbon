@@ -18,24 +18,49 @@ import {
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
+figma.connect(
+  Tile,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=20125-279432&m=dev',
+  {
+    props: {
+      // TODO: Re-enable these props when Code Connect validation bug is fixed
+      // Properties exist in Figma but fail validation despite correct names:
+      // titleText: figma.string('Title text'),
+      // descriptionText: figma.string('Description text'),
+      // slot: figma.boolean('Slot'),
+      // title: figma.boolean('Title'),
+      // description: figma.boolean('Description'),
+      swapSlot: figma.instance('Swap slot'),
+    },
+    example: ({ swapSlot }) => (
+      <Tile>
+        {/* See https://react.carbondesignsystem.com/?path=/docs/components-tile--overview
+            for complete prop mapping. Other properties commented out due to
+            Code Connect CLI validation bug - properties exist in Figma but fail validation. */}
+        {swapSlot}
+      </Tile>
+    ),
+  }
+);
+
 // figma.connect(
 //   Tile,
 //   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=20125-279432&m=dev',
 //   {
-//     variant: { Type: 'Base' },
+//     // variant: { Type: 'Base' },
 //     props: {
 //       swapslot: figma.instance('Swap slot'),
-//       descriptiontext: figma.string('Description text'),
-//       titletext: figma.string('Title text'),
-//       disabled: figma.enum('State', {
-//         Disabled: true,
-//       }),
+//       // descriptiontext: figma.string('Description text'),
+//       // titletext: figma.string('Title text'),
+//       // disabled: figma.enum('State', {
+//       //   Disabled: true,
+//       // }),
 //     },
-//     example: ({ disabled, titletext, swapslot, descriptiontext }) => (
-//       <Tile disabled={disabled}>
-//         {titletext}
+//     example: ({ swapslot }) => (
+//       <Tile>
+//         {/* {titletext}
 //         <br />
-//         {descriptiontext}
+//         {descriptiontext} */}
 //         {swapslot}
 //       </Tile>
 //     ),
