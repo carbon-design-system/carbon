@@ -8,10 +8,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
-import {
-  preview__FluidDropdown as FluidDropdown,
-  preview__FluidDropdownSkeleton as FluidDropdownSkeleton,
-} from '@carbon/react';
+import { FluidDropdown, FluidDropdownSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
