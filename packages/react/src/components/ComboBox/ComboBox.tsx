@@ -588,17 +588,24 @@ const ComboBox = forwardRef(
 
         switch (type) {
           case InputBlur: {
-            if (allowCustomValue && highlightedIndex == '-1') {
-              const customValue = inputValue as ItemType;
-              changes.selectedItem = customValue;
+            // If custom values are allowed, treat whatever the user typed as
+            // the value.
+            if (allowCustomValue && highlightedIndex === -1) {
+              const { inputValue } = state;
+
+              changes.selectedItem = inputValue;
+
               if (onChange) {
-                onChange({ selectedItem: inputValue as ItemType, inputValue });
+                onChange({ selectedItem: inputValue, inputValue });
               }
+
               return changes;
             }
+
+            // If a new item was selected, keep its label in the input.
             if (
               state.inputValue &&
-              highlightedIndex == '-1' &&
+              highlightedIndex === -1 &&
               changes.selectedItem
             ) {
               return {
@@ -606,14 +613,26 @@ const ComboBox = forwardRef(
                 inputValue: itemToString(changes.selectedItem),
               };
             }
-            if (
-              state.inputValue &&
-              highlightedIndex == '-1' &&
-              !allowCustomValue &&
-              !changes.selectedItem
-            ) {
-              return { ...changes, inputValue: '' };
+
+            // If custom values are not allowed, normalize any non-matching
+            // text. If the input isn’t an exact item label, restore the
+            // selected label if there is one, or clear it.
+            if (!allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
+
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
             }
+
             return changes;
           }
 
@@ -667,20 +686,23 @@ const ComboBox = forwardRef(
             return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
-            if (
-              !changes.isOpen &&
-              state.inputValue &&
-              highlightedIndex === -1 &&
-              !allowCustomValue
-            ) {
-              return {
-                ...changes,
-                inputValue: '', // Clear the input
-              };
+            // When closing the menu, apply the same normalization as blur.
+            if (state.isOpen && !changes.isOpen && !allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
+
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
             }
-            if (changes.isOpen && !changes.selectedItem) {
-              return { ...changes };
-            }
+
             return changes;
 
           case MenuMouseLeave:
@@ -704,7 +726,7 @@ const ComboBox = forwardRef(
         }
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [allowCustomValue, inputValue, onChange]
+      [allowCustomValue, inputValue, itemToString, items, onChange]
     );
 
     const handleToggleClick =

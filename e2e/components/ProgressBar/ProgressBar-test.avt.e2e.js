@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,15 +33,15 @@ test.describe('@avt ProgressBar', () => {
     await expect(page).toHaveNoACViolations('ProgressBar indeterminate');
   });
 
-  test('@avt-advanced-states ProgressBar example', async ({ page }) => {
+  test('@avt-advanced-states ProgressBar determinate', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressBar',
-      id: 'components-progressbar--example',
+      id: 'components-progressbar--determinate',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('ProgressBar example');
+    await expect(page).toHaveNoACViolations('ProgressBar determinate');
   });
 
   test('@avt-advanced-states ProgressBar layer', async ({ page }) => {
