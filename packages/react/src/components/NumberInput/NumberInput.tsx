@@ -16,7 +16,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type FC,
   type MouseEvent,
   type ReactNode,
 } from 'react';
@@ -108,6 +107,11 @@ export interface NumberInputProps
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#options
    */
   formatOptions?: NumberFormatOptions;
+
+  /**
+   * Provide the value stepping should begin at when the input is empty
+   */
+  stepStartValue?: number;
 
   /**
    * Provide text that is used alongside the control label for additional help
@@ -273,8 +277,9 @@ export interface NumberInputProps
   warnText?: ReactNode;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
-  function NumberInput(props: NumberInputProps, forwardRef) {
+  (props: NumberInputProps, forwardRef) => {
     const {
       allowEmpty = false,
       className: customClassName,
@@ -309,6 +314,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       defaultValue = type === 'number' ? 0 : NaN,
       warn = false,
       warnText = '',
+      stepStartValue = 0,
       value: controlledValue,
       ...rest
     } = props;
@@ -331,6 +337,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
       return 0;
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
 
@@ -439,15 +446,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
     });
 
-    if (
-      controlledValue !== prevControlledValue &&
-      !(isNaN(Number(controlledValue)) === isNaN(Number(prevControlledValue)))
-    ) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      setValue(controlledValue!);
-      setPrevControlledValue(controlledValue);
-    }
-
+    useEffect(() => {
+      if (type === 'number' && controlledValue !== undefined) {
+        if (allowEmpty && controlledValue === '') {
+          setValue('');
+        } else {
+          setValue(controlledValue);
+        }
+        setPrevControlledValue(controlledValue);
+      }
+    }, [controlledValue, type, allowEmpty]);
     let ariaDescribedBy: string | undefined = undefined;
     if (normalizedProps.invalid) {
       ariaDescribedBy = normalizedProps.invalidId;
@@ -512,6 +520,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const Icon = normalizedProps.icon as any;
 
     const getDecimalPlaces = (num: number) => {
@@ -526,14 +535,18 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           type === 'number' ? Number(inputRef.current.value) : numberValue;
 
         let rawValue;
-        if (Number.isNaN(currentValue)) {
-          // When the field is empty (NaN), incrementing begins at min,
-          // decrementing begins at max.
-          // When there's no min or max to use, it begins at 0.
-          if (direction === `up` && min) {
+        if (Number.isNaN(currentValue) || !currentValue) {
+          if (typeof stepStartValue === 'number' && stepStartValue) {
+            rawValue = stepStartValue;
+          } else if (
+            (min && min < 0 && max && max > 0) ||
+            (!max && !min) ||
+            max
+          ) {
+            if (direction === `up`) rawValue = 1;
+            if (direction === `down`) rawValue = -1;
+          } else if ((min && min > 0 && max && max > 0) || min) {
             rawValue = min;
-          } else if (direction === `down` && max) {
-            rawValue = max;
           } else {
             rawValue = 0;
           }
@@ -644,7 +657,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
                   match(e, keys.ArrowUp) && handleStep(e, 'up');
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
                   match(e, keys.ArrowDown) && handleStep(e, 'down');
                 }
 
@@ -910,6 +925,11 @@ NumberInput.propTypes = {
   min: PropTypes.number,
 
   /**
+   * Provide the value stepping should begin at when the input is empty
+   */
+  stepStartValue: PropTypes.number,
+
+  /**
    * Provide an optional handler that is called when the input or stepper
    * buttons are blurred.
    */
@@ -995,13 +1015,14 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-export interface Label {
+interface LabelProps {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
-const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
+
+const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -1019,19 +1040,13 @@ const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   return null;
 };
 
-Label.propTypes = {
-  disabled: PropTypes.bool,
-  hideLabel: PropTypes.bool,
-  id: PropTypes.string,
-  label: PropTypes.node,
-};
-
-export interface HelperTextProps {
+interface HelperTextProps {
   id?: string;
   description?: ReactNode;
   disabled?: boolean;
 }
-function HelperText({ disabled, description, id }: HelperTextProps) {
+
+const HelperText = ({ disabled, description, id }: HelperTextProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -1045,12 +1060,6 @@ function HelperText({ disabled, description, id }: HelperTextProps) {
     );
   }
   return null;
-}
-
-HelperText.propTypes = {
-  description: PropTypes.node,
-  disabled: PropTypes.bool,
-  id: PropTypes.string,
 };
 
 /**

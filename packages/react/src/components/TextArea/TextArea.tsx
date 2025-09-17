@@ -198,7 +198,12 @@ const TextArea = frFn((props, forwardRef) => {
 
   const textAreaInstanceId = useId();
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const helperTextRef = useRef<HTMLDivElement>(null);
+  const errorTextRef = useRef<HTMLDivElement>(null);
+  const warnTextRef = useRef<HTMLDivElement>(null);
+
   const ref = useMergedRefs([forwardRef, textareaRef]);
 
   function getInitialTextCount(): number {
@@ -227,7 +232,24 @@ const TextArea = frFn((props, forwardRef) => {
     } else if (textareaRef.current) {
       textareaRef.current.style.width = `100%`;
     }
-  }, [other.cols]);
+
+    if (!wrapperRef.current) return;
+    const applyWidth = (width: number) => {
+      [helperTextRef, errorTextRef, warnTextRef].forEach((r) => {
+        if (r.current) {
+          r.current.style.maxWidth = `${width}px`;
+          r.current.style.overflowWrap = 'break-word';
+        }
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      applyWidth(entry.contentRect.width);
+    });
+    resizeObserver.observe(wrapperRef.current);
+
+    return () => resizeObserver && resizeObserver.disconnect();
+  }, [other.cols, invalid, warn]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -383,7 +405,11 @@ const TextArea = frFn((props, forwardRef) => {
     : `text-area-helper-text-${textAreaInstanceId}`;
 
   const helper = helperText ? (
-    <Text as="div" id={helperId} className={helperTextClasses}>
+    <Text
+      as="div"
+      id={helperId}
+      className={helperTextClasses}
+      ref={helperTextRef}>
       {helperText}
     </Text>
   ) : null;
@@ -395,7 +421,8 @@ const TextArea = frFn((props, forwardRef) => {
       as="div"
       role="alert"
       className={`${prefix}--form-requirement`}
-      id={errorId}>
+      id={errorId}
+      ref={errorTextRef}>
       {invalidText}
       {isFluid && (
         <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
@@ -403,8 +430,15 @@ const TextArea = frFn((props, forwardRef) => {
     </Text>
   ) : null;
 
+  const warnId = id + '-warn-msg';
+
   const warning = warn ? (
-    <Text as="div" role="alert" className={`${prefix}--form-requirement`}>
+    <Text
+      as="div"
+      role="alert"
+      className={`${prefix}--form-requirement`}
+      id={warnId}
+      ref={warnTextRef}>
       {warnText}
       {isFluid && (
         <WarningAltFilled
@@ -493,7 +527,10 @@ const TextArea = frFn((props, forwardRef) => {
         {label}
         {counter}
       </div>
-      <div className={textAreaWrapperClasses} data-invalid={invalid || null}>
+      <div
+        ref={wrapperRef}
+        className={textAreaWrapperClasses}
+        data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}

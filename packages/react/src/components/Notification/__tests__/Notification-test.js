@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -341,6 +341,20 @@ describe('ActionableNotification', () => {
       expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
     });
   });
+
+  it('supports `title`, `subtitle`, `caption` props', () => {
+    render(
+      <ActionableNotification
+        title="A title"
+        subtitle="A subtitle"
+        caption="00:00:00 AM"
+        actionButtonLabel="My custom action"></ActionableNotification>
+    );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryByText(/A title/i)).toBeInTheDocument();
+    expect(screen.queryByText(/A subtitle/i)).toBeInTheDocument();
+    expect(screen.queryByText(/00:00:00 AM/i)).toBeInTheDocument();
+  });
 });
 
 // TODO: Remove StaticNotification tests when StaticNotification is removed (v12)
@@ -383,6 +397,9 @@ describe('Callout', () => {
     });
     await userEvent.click(closeButton);
     expect(onActionButtonClick).toHaveBeenCalledTimes(1);
+    expect(onActionButtonClick.mock.calls).toEqual([
+      [expect.objectContaining({ type: 'click' })],
+    ]);
   });
 
   it('interpolates matching className based on kind prop', () => {

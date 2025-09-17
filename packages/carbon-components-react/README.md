@@ -76,7 +76,7 @@ For a full list of components available, checkout our
 If you're looking for `carbon-components-react` API documentation, check out:
 
 - [Storybook](https://react.carbondesignsystem.com/)
-- [Icon Library](https://www.carbondesignsystem.com/guidelines/icons/library/)
+- [Icon Library](https://carbondesignsystem.com/elements/icons/library/)
 
 ## 🙌 Contributing
 

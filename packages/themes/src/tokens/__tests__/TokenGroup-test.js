@@ -59,23 +59,23 @@ describe('TokenGroup', () => {
 
       expect(group.getTokens()).toEqual([
         {
-          groups: [group],
+          groups: ['group'],
           name: 'token-01',
           properties: ['background'],
         },
         {
-          groups: [group],
+          groups: ['group'],
           name: 'token-02',
           properties: ['background'],
           state: 'hover',
         },
         {
-          groups: [group],
+          groups: ['group'],
           name: 'token-03',
           properties: ['background', 'fill'],
         },
         {
-          groups: [group, nested],
+          groups: ['group', 'nested'],
           name: 'token-04',
           properties: ['border'],
         },

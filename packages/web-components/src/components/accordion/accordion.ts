@@ -86,6 +86,7 @@ class CDSAccordion extends LitElement {
           (this.constructor as typeof CDSAccordion).selectorAccordionItems
         ),
         (elem) => {
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
           this.isFlush && this.alignment !== 'start'
             ? elem.setAttribute('isFlush', '')
             : elem.removeAttribute('isFlush');

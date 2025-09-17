@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -55,6 +55,26 @@
 
   .#{$prefix}--header__global .#{$prefix}--popover {
     z-index: z('header') + 1;
+  }
+
+  .#{$prefix}--header {
+    .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align) {
+      > .#{$prefix}--popover {
+        > .#{$prefix}--popover-caret,
+        > .#{$prefix}--popover-content {
+          inset-inline-start: $spacing-05;
+        }
+      }
+    }
+
+    .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align) {
+      > .#{$prefix}--popover {
+        > .#{$prefix}--popover-caret,
+        > .#{$prefix}--popover-content {
+          inset-inline-end: $spacing-05;
+        }
+      }
+    }
   }
 
   .#{$prefix}--header__action > :first-child {

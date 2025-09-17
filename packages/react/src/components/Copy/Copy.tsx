@@ -20,7 +20,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import type {
   DeprecatedPopoverAlignment,
@@ -128,6 +128,7 @@ export default function Copy({
       autoAlign={autoAlign}
       className={classNames}
       label={animation ? feedback : initialLabel}
+      leaveDelayMs={animation ? feedbackTimeout : undefined}
       onClick={composeEventHandlers([onClick, handleClick])}
       onAnimationEnd={composeEventHandlers([
         onAnimationEnd,

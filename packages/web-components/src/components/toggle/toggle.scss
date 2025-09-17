@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,9 +9,17 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/components/toggle/index' as *;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities/convert' as convert;
+@use '@carbon/styles/scss/theme' as *;
 
 :host(#{$prefix}-toggle) {
   outline: none;
+  .#{$prefix}--toggle__label {
+    // safari compatibility
+    -webkit-user-select: none;
+
+    user-select: none;
+  }
 }
 
 :host(#{$prefix}-toggle[disabled]) {
@@ -24,4 +32,29 @@ $css--plex: true !default;
 
 :host(#{$prefix}-toggle[read-only]) {
   @extend .#{$prefix}--toggle--readonly;
+  .#{$prefix}--toggle__switch {
+    border: none;
+    box-shadow: inset 0 0 0 1px $icon-disabled;
+
+    &::before {
+      inset-block-start: convert.to-rem(3px);
+      inset-inline-start: convert.to-rem(3px);
+    }
+  }
+
+  .#{$prefix}--toggle__check {
+    inset-block-start: convert.to-rem(6px);
+    inset-inline-end: convert.to-rem(5px);
+  }
+}
+
+// RTL overrides
+:host(#{$prefix}-toggle:dir(rtl)) .#{$prefix}--toggle__switch--checked::before {
+  transform: translateX(convert.to-rem(-24px));
+}
+
+:host(#{$prefix}-toggle:dir(rtl))
+  .#{$prefix}--toggle__appearance--sm
+  .#{$prefix}--toggle__switch--checked::before {
+  transform: translateX(convert.to-rem(-16px));
 }

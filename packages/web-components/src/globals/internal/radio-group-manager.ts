@@ -37,6 +37,11 @@ export interface ManagedRadioButtonDelegate {
   name: string;
 
   /**
+   * 'true' if the radio button is disabled.
+   */
+  disabled?: boolean;
+
+  /**
    * @param other A node to compare this radio button's DOM position in document with.
    * @returns
    *   An integer value, the same format as `Node.compareDocumentPosition` does,
@@ -104,14 +109,14 @@ class RadioGroupManager {
         const comparisonResult = (
           lhs as ManagedRadioButtonDelegate
         ).compareDocumentPosition(rhs as ManagedRadioButtonDelegate);
-        // eslint-disable-next-line no-bitwise
+
         if (
           comparisonResult & Node.DOCUMENT_POSITION_FOLLOWING ||
           comparisonResult & Node.DOCUMENT_POSITION_CONTAINED_BY
         ) {
           return -1;
         }
-        // eslint-disable-next-line no-bitwise
+
         if (
           comparisonResult & Node.DOCUMENT_POSITION_PRECEDING ||
           comparisonResult & Node.DOCUMENT_POSITION_CONTAINS
@@ -162,6 +167,11 @@ class RadioGroupManager {
   select(radio: ManagedRadioButton, readOnly?: boolean) {
     const group = this._groups[radio.name];
     if (group) {
+      // Check if disabled, if so we can return early
+      if ((radio as ManagedRadioButtonDelegate).disabled) {
+        return;
+      }
+
       // Updates the state of the one being selected up-front to avoid the state of no radio button is selected
       radio.checked = !readOnly || true;
       radio.tabIndex = 0;
@@ -182,13 +192,24 @@ class RadioGroupManager {
    */
   navigate(radio: ManagedRadioButton, direction: NAVIGATION_DIRECTION) {
     const sortedGroup = this.getSortedGroup(radio);
-    let newIndex = sortedGroup.indexOf(radio) + direction;
-    if (newIndex < 0) {
-      newIndex = sortedGroup.length - 1;
-    } else if (newIndex >= sortedGroup.length) {
-      newIndex = 0;
+
+    const n = sortedGroup.length;
+    let searchRadioIndex = sortedGroup.indexOf(radio);
+
+    // We can do circular array indexing here
+    for (let i = 0; i < n; i++) {
+      searchRadioIndex = (searchRadioIndex + direction + n) % n;
+      const candidateRadio = sortedGroup[searchRadioIndex];
+
+      //always check if the candidate is disabled, if its not, its good.
+      if (!candidateRadio.disabled) {
+        return candidateRadio;
+      }
     }
-    return sortedGroup[newIndex];
+
+    // Since we exited the for loop without returning, it means we did not find a candidate that wasn't disabled (i.e all of the possible options were disabled).
+    // Simply return the same radio back (even if current radio button is disabled).
+    return radio;
   }
 
   /**

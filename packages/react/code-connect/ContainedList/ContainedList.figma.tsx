@@ -5,10 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import { ContainedList } from '@carbon/react';
 import figma from '@figma/code-connect';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
 import { title } from 'process';
 
 const sharedContainedListProps = {
@@ -75,6 +77,7 @@ figma.connect(
   }
 );
 
+// eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
 WithPersistentSearch;
 figma.connect(
   ContainedList,

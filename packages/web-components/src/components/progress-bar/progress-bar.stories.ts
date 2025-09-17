@@ -102,7 +102,7 @@ export const Default = {
   },
 };
 
-export const Example = {
+export const Determinate = {
   render: () => {
     const size = 728;
     let progress = 0;
@@ -113,15 +113,20 @@ export const Example = {
         const advancement = Math.random() * 8;
         if (progress + advancement < size) {
           progress = progress + advancement;
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           bar!.setAttribute('value', `${progress}`);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           bar!.setAttribute(
             'helper-text',
             `${progress.toFixed(1)}MB of ${size}MB`
           );
         } else {
           clearInterval(interval);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           bar!.setAttribute('value', `${size}`);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           bar!.setAttribute('status', `${PROGRESS_BAR_STATUS.FINISHED}`);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           bar!.setAttribute('helper-text', 'Done');
         }
       }, 50);

@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-module.exports = {
+export default {
   preset: 'jest-config-carbon',
+  testEnvironment: 'jsdom',
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
     'packages/**/src/**/*.tsx',
@@ -18,21 +17,25 @@ module.exports = {
     '!**/*.stories.js',
     '!**/*-test.e2e.js',
   ],
-  coveragePathIgnorePatterns: ['packages/web-components/*'],
-  testPathIgnorePatterns: ['packages/web-components/*'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es|nanoid)'],
+  coveragePathIgnorePatterns: [
+    'packages/web-components/*',
+    // TODO: remove scss-generator once issue is resolved
+    // https://github.com/carbon-design-system/carbon/issues/20115
+    'packages/scss-generator/*',
+  ],
+  testPathIgnorePatterns: [
+    'packages/web-components/*',
+    // TODO: remove scss-generator once issue is resolved
+    // https://github.com/carbon-design-system/carbon/issues/20115
+    'packages/scss-generator/*',
+  ],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
+  ],
   moduleNameMapper: {
-    // This is a temporary workaround from moving to Jest v28. In this update,
-    // certain dependencies are only providing ESM through exports and so we use
-    // `require.resolve` to force CommonJS resolution
-    //
-    // @see https://jestjs.io/docs/upgrading-to-jest28#packagejson-exports
-    // @see https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
-    nanoid: require.resolve('nanoid'),
+    // Jest uses identity-obj-proxy to mock CSS/SCSS imports.
+    '\\.(css|scss)$': 'identity-obj-proxy',
   },
   reporters: ['default', 'jest-junit'],
-
-  // This is a temporary workaround until Jest supports Prettier 3 (and ESM)
-  // @see https://jestjs.io/docs/configuration#prettierpath-string
-  prettierPath: require.resolve('prettier2'),
+  extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
 };

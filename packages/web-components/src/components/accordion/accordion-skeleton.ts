@@ -11,7 +11,8 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ACCORDION_ALIGNMENT } from './accordion';
 import { forEach } from '../../globals/internal/collection-helpers';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import './accordion-item-skeleton';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
@@ -51,6 +52,7 @@ class CDSAccordionSkeleton extends LitElement {
     if (changedProperties.has('alignment')) {
       // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this.shadowRoot!.querySelectorAll(
           (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons
@@ -66,11 +68,13 @@ class CDSAccordionSkeleton extends LitElement {
     ) {
       // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
         this.shadowRoot!.querySelectorAll(
           (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons
         ),
         (elem) => {
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
           this.isFlush && this.alignment !== 'start'
             ? elem.setAttribute('isFlush', '')
             : elem.removeAttribute('isFlush');
@@ -93,9 +97,9 @@ class CDSAccordionSkeleton extends LitElement {
         ? html`
             <li class="${classes}">
               <span class="${prefix}--accordion__heading">
-                ${ChevronRight16({
-                  part: 'expando-icon',
+                ${iconLoader(ChevronRight16, {
                   class: `${prefix}--accordion__arrow`,
+                  part: 'expando-icon',
                 })}
                 <cds-skeleton-text
                   class="${prefix}--accordion__title"></cds-skeleton-text>

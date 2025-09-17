@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,10 +27,13 @@ export default {
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
+    onActionButtonClick: action('onActionButtonClick'),
   },
 };
 
-export const Default = (args) => <ActionableNotification {...args} />;
+export const Default = (args) => (
+  <ActionableNotification {...args}></ActionableNotification>
+);
 
 Default.argTypes = {
   ['aria-label']: {
