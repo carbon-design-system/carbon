@@ -19,11 +19,7 @@ import CDSTextInputSkeleton from '../text-input/text-input-skeleton';
 @customElement(`${prefix}-fluid-text-input-skeleton`)
 class CDSFluidTextInputSkeleton extends CDSTextInputSkeleton {
   render() {
-    return html`
-      <div class="${prefix}--text-input--fluid__skeleton ${prefix}--form-item">
-        ${super.render()}
-      </div>
-    `;
+    return html` ${super.render()} `;
   }
 
   static styles = [CDSTextInputSkeleton.styles, styles];

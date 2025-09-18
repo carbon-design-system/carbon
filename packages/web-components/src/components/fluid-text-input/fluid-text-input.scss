@@ -12,7 +12,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities/skeleton' as *;
 
 :host(#{$prefix}-fluid-text-input) {
   @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-fluid-text-input-skeleton) {
+  @extend .#{$prefix}--text-input--fluid__skeleton;
+
+  display: block;
 }
