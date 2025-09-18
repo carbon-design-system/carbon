@@ -74,10 +74,14 @@ export default tseslint.config([
       ...jsxA11y.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
+      // ...jsdoc.configs['flat/recommended'].rules, // Too noisy at the moment. Uncomment it to enable it.
     },
   },
   {
-    files: ['**/__tests__/**/*.[jt]s?(x)', '**/*-test.[jt]s?(x)'],
+    files: [
+      '**/__tests__/**/*.{js,jsx,ts,tsx}',
+      '**/*.{test,spec}.{js,jsx,ts,tsx}',
+    ],
     plugins: {
       'testing-library': testingLibrary,
     },
