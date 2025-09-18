@@ -156,7 +156,7 @@ const DismissibleTag = forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
-      : null;
+      : candidate;
 
     const tooltipClasses = classNames(
       `${prefix}--icon-tooltip`,

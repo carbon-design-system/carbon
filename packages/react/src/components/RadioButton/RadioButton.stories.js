@@ -11,6 +11,8 @@ import RadioButtonSkeleton from './RadioButton.Skeleton';
 import React from 'react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
+import { Information } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './RadioButton.mdx';
@@ -177,6 +179,40 @@ export const withAILabel = () => {
         />
       </RadioButtonGroup>
     </div>
+  );
+};
+
+export const Test = () => {
+  return (
+    <>
+      <RadioButtonGroup
+        legendText="Radio Button group"
+        name="radio-button-default-group"
+        decorator={
+          <Toggletip autoAlign>
+            <ToggletipButton label={'test'}>
+              <Information />
+            </ToggletipButton>
+            <ToggletipContent>{'test'}</ToggletipContent>
+          </Toggletip>
+        }>
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-1"
+          id="radio-1"
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-2"
+          id="radio-2"
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-3"
+          id="radio-3"
+        />
+      </RadioButtonGroup>
+    </>
   );
 };
 

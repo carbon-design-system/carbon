@@ -169,7 +169,7 @@ const Checkbox = React.forwardRef(
       ? cloneElement(candidate, {
           size: candidate.props.kind === 'inline' ? 'md' : 'mini',
         })
-      : null;
+      : candidate;
 
     return (
       <div className={wrapperClasses}>

@@ -554,7 +554,7 @@ export const SelectableTile = React.forwardRef<
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs', ref: decoratorRef })
-      : null;
+      : candidate;
 
     return (
       // eslint-disable-next-line jsx-a11y/interactive-supports-focus
@@ -945,7 +945,7 @@ export const ExpandableTile = React.forwardRef<
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs' })
-      : null;
+      : candidate;
 
     return interactive ? (
       <div

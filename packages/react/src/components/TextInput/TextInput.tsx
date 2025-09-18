@@ -376,7 +376,7 @@ const TextInput = React.forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     return (
       <div className={inputWrapperClasses}>

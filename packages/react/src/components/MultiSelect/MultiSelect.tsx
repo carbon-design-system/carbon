@@ -695,7 +695,7 @@ export const MultiSelect = React.forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     const itemsSelectedText =
       selectedItems.length > 0 &&

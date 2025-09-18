@@ -519,7 +519,7 @@ const TextArea = frFn((props, forwardRef) => {
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
-    : null;
+    : candidate;
 
   return (
     <div className={formItemClasses}>

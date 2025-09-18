@@ -94,7 +94,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini', kind: 'default' })
-    : null;
+    : candidate;
 
   const clonedChildren = Children.map(children, (child) => {
     if (
