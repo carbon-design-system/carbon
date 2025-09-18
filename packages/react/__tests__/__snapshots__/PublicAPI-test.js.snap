@@ -4875,6 +4875,86 @@ Map {
       },
     },
   },
+  "FluidPasswordInput" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "hidePasswordLabel": {
+        "type": "string",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "isPassword": {
+        "type": "bool",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onTogglePasswordVisibility": {
+        "type": "func",
+      },
+      "placeholder": {
+        "type": "string",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "showPasswordLabel": {
+        "type": "string",
+      },
+      "value": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+  },
   "FluidSearch" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
