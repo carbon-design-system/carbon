@@ -315,14 +315,14 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 3) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 4) td {
-    border-block-end: 1px solid $layer;
+    background-color: $layer-accent;
+    border-block-end: 1px solid $layer-accent;
+    border-block-start: 1px solid $layer-accent;
   }
 
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
-    background-color: $layer-accent;
-    border-block-end: 1px solid $layer-accent;
-    border-block-start: 1px solid $layer-accent;
+    border-block-end: 1px solid $layer;
   }
 
   .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,
