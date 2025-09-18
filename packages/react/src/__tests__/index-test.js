@@ -91,6 +91,7 @@ describe('Carbon Components React', () => {
         "FluidMultiSelectSkeleton",
         "FluidNumberInput",
         "FluidNumberInputSkeleton",
+        "FluidPasswordInput",
         "FluidSearch",
         "FluidSearchSkeleton",
         "FluidSelect",
