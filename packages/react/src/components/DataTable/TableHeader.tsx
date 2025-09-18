@@ -248,7 +248,8 @@ const TableHeader = React.forwardRef(function TableHeader(
         type="button"
         aria-describedby={uniqueId}
         className={className}
-        onClick={handleClick}>
+        onClick={handleClick}
+        {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
           <Arrow size={20} className={`${prefix}--table-sort__icon`} />
