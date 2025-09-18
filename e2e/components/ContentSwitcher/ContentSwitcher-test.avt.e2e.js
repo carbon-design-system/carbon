@@ -52,6 +52,50 @@ test.describe('@avt ContentSwitcher', () => {
     await page.keyboard.press('ArrowRight');
     await expect(thirdContentTab).toBeVisible();
   });
+  test('@avt-keyboard-nav ContentSwitcher manual selection mode', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'ContentSwitcher',
+      id: 'components-contentswitcher--default',
+      globals: {
+        theme: 'white',
+      },
+      args: {
+        selectionMode: 'manual',
+      },
+    });
+
+    const firstContentTab = page.getByRole('tab', { name: 'First section' });
+    const secondContentTab = page.getByRole('tab', { name: 'Second section' });
+
+    await firstContentTab.focus();
+
+    await page.keyboard.press('ArrowRight');
+    await expect(secondContentTab).toBeFocused();
+
+    await expect(firstContentTab).toHaveAttribute('aria-selected', 'true');
+    await expect(secondContentTab).not.toHaveAttribute('aria-selected', 'true');
+
+    // test selection via Enter key
+    await page.keyboard.press('Enter');
+    await expect(secondContentTab).toHaveAttribute('aria-selected', 'true');
+    await expect(firstContentTab).not.toHaveAttribute('aria-selected', 'true');
+
+    // test selection via Space key
+    await page.keyboard.press('ArrowLeft');
+    await expect(firstContentTab).toBeFocused();
+    await page.keyboard.press(' ');
+    await expect(firstContentTab).toHaveAttribute('aria-selected', 'true');
+    await expect(secondContentTab).not.toHaveAttribute('aria-selected', 'true');
+
+    // No other keys should trigger selection
+    await page.keyboard.press('ArrowRight');
+    await expect(secondContentTab).toBeFocused();
+    await page.keyboard.press('e');
+    await expect(firstContentTab).toHaveAttribute('aria-selected', 'true');
+    await expect(secondContentTab).not.toHaveAttribute('aria-selected', 'true');
+  });
 
   test('@avt-keyboard-nav ContentSwitcher Icon only', async ({ page }) => {
     await visitStory(page, {

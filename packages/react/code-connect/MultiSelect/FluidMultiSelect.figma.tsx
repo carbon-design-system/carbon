@@ -9,8 +9,8 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable__FluidMultiSelect as FluidMultiSelect,
-  unstable__FluidDropdownSkeleton as FluidDropdownSkeleton,
+  preview__FluidMultiSelect as FluidMultiSelect,
+  preview__FluidDropdownSkeleton as FluidDropdownSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
