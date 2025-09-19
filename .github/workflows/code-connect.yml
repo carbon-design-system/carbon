@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   code-connect:
-    name: Publish Code Connect
+    name: Code Connect
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
