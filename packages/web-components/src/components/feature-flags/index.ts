@@ -32,7 +32,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { LitElement, html } from 'lit';
 
 /**
- * Feature Flgs
+ * Feature Flags
  *
  * @element feature-flags
  */
@@ -44,16 +44,22 @@ class FeatureFlagsElement extends LitElement {
   private scope = GlobalFeatureFlags;
   private flags: FeatureFlags = {};
 
+  /**
+   * Mapping of feature flag attributes to their related component names.
+   */
+  private static readonly flagComponentMap: Record<string, string> = {
+    'enable-v12-tile-default-icons': 'CDS-TILE',
+    'enable-v12-tile-radio-icons': 'CDS-TILE',
+    'enable-v12-overflowmenu': 'CDS-OVERFLOW-MENU',
+    'enable-treeview-controllable': 'CDS-TREEVIEW',
+    'enable-experimental-focus-wrap-without-sentinels': 'CDS-FOCUS-WRAP',
+    'enable-dialog-element': 'CDS-DIALOG',
+    'enable-v12-dynamic-floating-styles': 'CDS-FLOATING',
+    'enable-v12-toggle-reduced-label-spacing': 'CDS-TOGGLE',
+  };
+
   static get observedAttributes() {
-    return [
-      'enable-v12-tile-default-icons',
-      'enable-v12-tile-radio-icons',
-      'enable-v12-overflowmenu',
-      'enable-treeview-controllable',
-      'enable-experimental-focus-wrap-without-sentinels',
-      'enable-dialog-element',
-      'enable-v12-dynamic-floating-styles',
-    ];
+    return Object.keys(FeatureFlagsElement.flagComponentMap);
   }
 
   constructor() {
@@ -73,6 +79,14 @@ class FeatureFlagsElement extends LitElement {
   ) {
     const value = newVal === 'true';
     this.flags[name] = value;
+
+    // Set feature flag to top component level
+    const relatedComponent =
+      FeatureFlagsElement.flagComponentMap[name] || 'unknown';
+    if (this.firstElementChild?.tagName === relatedComponent) {
+      this.firstElementChild.setAttribute(name, '');
+    }
+
     this.updateScope();
   }
 
