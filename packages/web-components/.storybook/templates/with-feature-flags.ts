@@ -8,7 +8,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { iconLoader } from '../../src/globals/internal/icon-loader';
-import Chemistry from '@carbon/icons/es/Chemistry/16.js';
+import Chemistry16 from '@carbon/icons/es/chemistry/16.js';
 import { prefix } from '../../src/globals/settings';
 import '../../src/components/layer/index.js';
 import styles from './with-feature-flags.scss?lit';
@@ -25,7 +25,7 @@ class CDSFeatureFlags extends LitElement {
   render() {
     return html`
       <div class="${prefix}--annotation__label">
-        ${iconLoader(Chemistry)}
+        ${iconLoader(Chemistry16)}
         <span>
           This story is rendered with
 
