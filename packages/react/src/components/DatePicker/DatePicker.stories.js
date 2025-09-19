@@ -30,6 +30,17 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'appendTo',
+        'datePickerType',
+        'disable',
+        'enable',
+        'inline',
+        'locale',
+        'value',
+      ],
+    },
   },
   argTypes: {
     light: {
@@ -41,46 +52,6 @@ export default {
 };
 
 const sharedArgTypes = {
-  appendTo: {
-    table: {
-      disable: true,
-    },
-  },
-  datePickerType: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  disable: {
-    table: {
-      disable: true,
-    },
-  },
-  enable: {
-    table: {
-      disable: true,
-    },
-  },
-  inline: {
-    table: {
-      disable: true,
-    },
-  },
-  locale: {
-    table: {
-      disable: true,
-    },
-  },
   onChange: {
     action: 'onChange',
   },
@@ -93,11 +64,6 @@ const sharedArgTypes = {
   readOnly: {
     control: {
       type: 'boolean',
-    },
-  },
-  value: {
-    table: {
-      disable: true,
     },
   },
   size: {

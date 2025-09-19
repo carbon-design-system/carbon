@@ -84,21 +84,6 @@ Default.args = {
 };
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  onChange: {
-    table: {
-      disable: true,
-    },
-  },
   currentIndex: {
     control: { type: 'number' },
   },

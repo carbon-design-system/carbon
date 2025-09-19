@@ -45,14 +45,6 @@ export default {
   },
 };
 
-const sharedArgTypes = {
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
 export const Default = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({
@@ -107,10 +99,6 @@ export const Default = (args) => (
     )}
   </DataTable>
 );
-
-Default.argTypes = {
-  ...sharedArgTypes,
-};
 
 export const BatchExpansion = (args) => (
   <DataTable {...args} rows={rows} headers={headers}>
@@ -168,7 +156,3 @@ export const BatchExpansion = (args) => (
     )}
   </DataTable>
 );
-
-BatchExpansion.argTypes = {
-  ...sharedArgTypes,
-};

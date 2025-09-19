@@ -26,6 +26,17 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'checked',
+        'defaultChecked',
+        'hideLabel',
+        'id',
+        'indeterminate',
+        'labelText',
+        'title',
+      ],
+    },
   },
 };
 
@@ -81,51 +92,6 @@ const sharedArgTypes = {
       'Provide the text that is displayed when the form group is in warning state',
     control: {
       type: 'text',
-    },
-  },
-  checked: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  defaultChecked: {
-    table: {
-      disable: true,
-    },
-  },
-  hideLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  indeterminate: {
-    table: {
-      disable: true,
-    },
-  },
-  labelText: {
-    table: {
-      disable: true,
-    },
-  },
-  onChange: {
-    table: {
-      disable: true,
-    },
-  },
-  title: {
-    table: {
-      disable: true,
     },
   },
   orientation: {

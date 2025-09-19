@@ -25,7 +25,26 @@ export default {
     ModalBody,
     ModalFooter,
   },
+  parameters: {
+    controls: {
+      exclude: [
+        'containerClassName',
+        'launcherButtonRef',
+        'selectorPrimaryFocus',
+        'selectorsFloatingMenus',
+      ],
+    },
+  },
   tags: ['!autodocs'],
+};
+
+const sharedArgTypes = {
+  onClose: {
+    action: 'onClose',
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
 };
 
 export const EnableDialogElement = (args) => {
@@ -79,44 +98,7 @@ export const EnableDialogElement = (args) => {
   );
 };
 EnableDialogElement.storyName = 'enable-dialog-element';
-EnableDialogElement.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  containerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    action: 'onClose',
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
-  },
-};
+EnableDialogElement.argTypes = { ...sharedArgTypes };
 
 export const EnableExperimentalFocusWrapWithoutSentinels = (args) => {
   const [open, setOpen] = useState(true);
@@ -170,41 +152,4 @@ export const EnableExperimentalFocusWrapWithoutSentinels = (args) => {
 };
 EnableExperimentalFocusWrapWithoutSentinels.storyName =
   'enable-preview-focus-wrap-without-sentinels';
-EnableExperimentalFocusWrapWithoutSentinels.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  containerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    action: 'onClose',
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
-  },
-};
+EnableExperimentalFocusWrapWithoutSentinels.argTypes = { ...sharedArgTypes };

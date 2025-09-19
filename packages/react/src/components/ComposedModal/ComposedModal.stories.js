@@ -40,45 +40,23 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'containerClassName',
+        'launcherButtonRef',
+        'selectorPrimaryFocus',
+        'selectorsFloatingMenus',
+      ],
+    },
   },
 };
 
 const sharedArgTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  containerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
   onClose: {
     action: 'onClose',
   },
   onKeyDown: {
     action: 'onKeyDown',
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
   },
 };
 

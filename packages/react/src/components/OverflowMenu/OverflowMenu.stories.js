@@ -69,26 +69,6 @@ Default.argTypes = {
       'right-start',
     ],
   },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  direction: {
-    table: {
-      disable: true,
-    },
-  },
   flipped: {
     control: {
       type: 'boolean',
@@ -99,51 +79,31 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
-  iconClass: {
-    table: {
-      disable: true,
-    },
-  },
   iconDescription: {
     control: { type: 'text' },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
-  menuOffset: {
-    table: {
-      disable: true,
-    },
-  },
-  menuOffsetFlip: {
-    table: {
-      disable: true,
-    },
-  },
-  menuOptionsClass: {
-    table: {
-      disable: true,
-    },
   },
   open: {
     control: {
       type: 'boolean',
     },
   },
-  renderIcon: {
-    table: {
-      disable: true,
-    },
-  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
+  },
+};
+
+Default.parameters = {
+  controls: {
+    exclude: [
+      'direction',
+      'iconClass',
+      'id',
+      'light',
+      'menuOffset',
+      'menuOffsetFlip',
+      'menuOptionsClass',
+      'renderIcon',
+    ],
   },
 };
