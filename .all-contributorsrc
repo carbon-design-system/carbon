@@ -1517,6 +1517,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "didoo",
+      "name": "Cristiano Rastelli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/686239?v=4",
+      "profile": "http://www.didoo.net/",
+      "contributions": [
+        "code",
+        "example"
+      ]
     }
   ],
   "commitConvention": "none"
