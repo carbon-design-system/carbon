@@ -234,6 +234,7 @@ const TableHeader = React.forwardRef(function TableHeader(
 
   return (
     <th
+      {...rest}
       id={id}
       aria-sort={ariaSort}
       className={headerClasses}
