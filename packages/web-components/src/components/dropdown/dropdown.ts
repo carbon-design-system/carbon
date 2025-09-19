@@ -32,6 +32,7 @@ import {
   NAVIGATION_DIRECTION,
 } from './defs';
 import CDSDropdownItem from './dropdown-item';
+import CDSAILabel from '../ai-label/ai-label';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -199,7 +200,10 @@ class CDSDropdown extends ValidityMixin(
     if (!this.open) {
       switch (action) {
         case DROPDOWN_KEYBOARD_ACTION.TRIGGERING:
-          this._handleUserInitiatedToggle(true);
+          // Only toggle if the event target is not a CDSAILabel
+          if (!(event.target instanceof CDSAILabel)) {
+            this._handleUserInitiatedToggle(true);
+          }
           break;
         default:
           break;
