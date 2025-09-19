@@ -1000,10 +1000,10 @@ export const Slider = (props: SliderProps) => {
     leftPercent: number;
   }) => {
     const { step = 1, min, max } = props;
-    const numSteps =
-      Math.floor((max - min) / step) + ((max - min) % step === 0 ? 1 : 2);
+    const numSteps = Math.floor((max - min) / step) + 1;
     /** Index of the step that corresponds to `leftPercent`. */
     const stepIndex = Math.round(leftPercent * (numSteps - 1));
+    // const discreteValue = min + step * stepIndex;
     const discreteValue =
       stepIndex === numSteps - 1 ? max : min + step * stepIndex;
     /** Percentage corresponding to the step index. */
