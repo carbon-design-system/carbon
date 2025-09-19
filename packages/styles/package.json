@@ -54,7 +54,7 @@
     "@ibm/plex-sans-devanagari": "1.1.0",
     "@ibm/plex-sans-hebrew": "0.0.3-alpha.0",
     "@ibm/plex-sans-thai": "0.0.3-alpha.0",
-    "@ibm/plex-sans-thai-looped": "0.0.3-alpha.0",
+    "@ibm/plex-sans-thai-looped": "1.1.0",
     "@ibm/plex-serif": "0.0.3-alpha.0",
     "@ibm/telemetry-js": "^1.5.0"
   },
