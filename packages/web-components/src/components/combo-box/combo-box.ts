@@ -159,7 +159,6 @@ class CDSComboBox extends CDSDropdown {
     ) {
       this._handleUserInitiatedClearInput();
     } else {
-      this.open = false;
       super._handleKeypressInner(event);
     }
   }
