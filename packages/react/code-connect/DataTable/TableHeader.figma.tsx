@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import { TableHeader } from '@carbon/react';

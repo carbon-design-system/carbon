@@ -176,7 +176,7 @@
     background-color: transparent;
 
     &::before {
-      background-color: $text-primary;
+      background-color: $icon-primary;
       inset-block-start: convert.to-rem(2px);
       inset-inline-start: convert.to-rem(2px);
     }

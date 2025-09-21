@@ -12,6 +12,7 @@ import {
   Stories,
   ArgTypes,
 } from '@storybook/addon-docs/blocks';
+import { allModes } from './modes';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -30,7 +31,7 @@ const devTools = {
     description: "Set the layout context's size",
     defaultValue: false,
     toolbar: {
-      title: 'dev :: unstable__Layout size',
+      title: 'dev :: preview__Layout size',
       items: [
         {
           value: false,
@@ -49,7 +50,7 @@ const devTools = {
     description: "Set the layout context's density",
     defaultValue: false,
     toolbar: {
-      title: 'dev :: unstable__Layout density',
+      title: 'dev :: preview__Layout density',
       items: [
         {
           value: false,
@@ -154,24 +155,12 @@ const parameters = {
       cellSize: 8,
       opacity: 0.5,
     },
-    values: [
-      {
-        name: 'white',
-        value: white.background,
-      },
-      {
-        name: 'g10',
-        value: g10.background,
-      },
-      {
-        name: 'g90',
-        value: g90.background,
-      },
-      {
-        name: 'g100',
-        value: g100.background,
-      },
-    ],
+    options: {
+      white: { name: 'white', value: white.background },
+      g10: { name: 'g10', value: g10.background },
+      g90: { name: 'g90', value: g90.background },
+      g100: { name: 'g100', value: g100.background },
+    },
   },
   controls: {
     // https://storybook.js.org/docs/react/essentials/controls#show-full-documentation-for-each-property
@@ -200,12 +189,8 @@ const parameters = {
         <Stories includePrimary={false} />
       </>
     ),
+    codePanel: true,
   },
-  // Small (<672)
-  // Medium (672 - 1056px)
-  // Large (1056 - 1312px)
-  // X-Large (1312 - 1584px)
-  // Max (>1584)
   viewport: {
     options: {
       sm: {
@@ -333,6 +318,14 @@ const parameters = {
       // By default, if we have no matches we'll do a locale compare between the
       // two ids
       return idA.localeCompare(idB);
+    },
+  },
+  chromatic: {
+    modes: {
+      g10: allModes['g10'],
+      g90: allModes['g90'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
     },
   },
 };

@@ -45,6 +45,7 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
   size = TREE_SIZE.SMALL;
 
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _click = ({ target }) => {
     if ((target as CDSTreeNode).disabled) return;
@@ -57,6 +58,7 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
       (node as CDSTreeNode).selected = isTarget;
       (node as CDSTreeNode).active = isTarget;
       if (!isTarget) {
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
         isLink
           ? (element as CDSTreeNode).setAttribute('tabindex', '-1')
           : (element as CDSTreeNode).removeAttribute('tabindex');
@@ -65,6 +67,7 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown = (event: KeyboardEvent) => {
     const { key } = event;
@@ -82,7 +85,8 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
 
     const currentIndex = nodes.findIndex((node) =>
       withLinks
-        ? node.shadowRoot?.querySelector('a')!.getAttribute('tabindex') === '0'
+        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          node.shadowRoot?.querySelector('a')!.getAttribute('tabindex') === '0'
         : node.getAttribute('tabindex') === '0'
     );
 
@@ -135,11 +139,13 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
         if (!withLinks) {
           node.removeAttribute('tabindex');
         } else {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
           node.shadowRoot?.querySelector('a')!.setAttribute('tabindex', '-1');
         }
       });
       const element = withLinks
-        ? (nodes[nextIndex] as CDSTreeNode).shadowRoot!.querySelector('a')
+        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          (nodes[nextIndex] as CDSTreeNode).shadowRoot!.querySelector('a')
         : nodes[nextIndex];
       (element as CDSTreeNode).setAttribute('tabindex', '0');
       (element as CDSTreeNode).focus();
@@ -156,7 +162,8 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
         Array.from(nodes).find((node) => (node as CDSTreeNode).selected) ||
         nodes[0];
       const element = (selectedNode as CDSTreeNode).href
-        ? (selectedNode as CDSTreeNode).shadowRoot!.querySelector('a')
+        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          (selectedNode as CDSTreeNode).shadowRoot!.querySelector('a')
         : selectedNode;
       (element as CDSTreeNode).setAttribute('tabindex', '0');
     }

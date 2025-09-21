@@ -88,7 +88,6 @@ class CDSIconButton extends CDSButton {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected _renderTooltipContent() {
     return html`
       <cds-tooltip-content>
