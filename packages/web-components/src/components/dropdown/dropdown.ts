@@ -143,18 +143,13 @@ class CDSDropdown extends ValidityMixin(
    * @param event The event.
    */
   protected _handleClickInner(event: PointerEvent) {
-    const { pointerType, target } = event;
+    const { target } = event;
     const constructor = this.constructor as typeof CDSDropdown;
     const clickedItem = (target as Element).closest(
       constructor.selectorItem
     ) as CDSDropdownItem | null;
 
-    if (!this.shadowRoot || this.readOnly) {
-      return;
-    }
-
-    // Only handle pointer types: mouse, pen, or touch.
-    if (!['mouse', 'pen', 'touch'].includes(pointerType)) {
+    if (this.readOnly) {
       return;
     }
 
@@ -165,7 +160,7 @@ class CDSDropdown extends ValidityMixin(
     }
 
     // If trigger inside the shadow root is clicked, toggle open/close.
-    if (this.shadowRoot.contains(target as Node)) {
+    if (this.shadowRoot && this.shadowRoot.contains(target as Node)) {
       this._handleUserInitiatedToggle();
       return;
     }
@@ -357,15 +352,13 @@ class CDSDropdown extends ValidityMixin(
     if (!disabled) {
       if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
         this.open = force;
-        if (!this.open) {
-          forEach(
-            this.querySelectorAll(constructor.selectorItemHighlighted),
-            (item) => {
-              (item as CDSDropdownItem).highlighted = false;
-            }
-          );
-        }
-        this.requestUpdate();
+        this._clearHighlight();
+        const itemToHighlight = this.querySelector(
+          constructor.selectorItemSelected
+        );
+
+        itemToHighlight?.setAttribute('highlighted', '');
+
         this.dispatchEvent(new CustomEvent(eventToggle, init));
       }
     }
