@@ -16,6 +16,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/text-input/text-input';
+@use '@carbon/styles/scss/utilities/convert';
 @use '../dropdown/dropdown';
 
 :host(#{$prefix}-combo-box) {
@@ -76,10 +77,19 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu-item__option {
     block-size: auto;
   }
+}
 
-  &:hover {
-    background-color: $layer-hover;
-  }
+:host(#{$prefix}-combo-box-item:hover:not([disabled])) {
+  background-color: $layer-hover;
+}
+
+:host(#{$prefix}-combo-box-item:active:not([disabled])) {
+  background-color: $layer-selected;
+}
+
+:host(#{$prefix}-combo-box-item:hover[disabled])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle-01;
 }
 
 :host(#{$prefix}-combo-box-item[disabled]) {
@@ -96,7 +106,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-combo-box-item[selected]) {
   @extend .#{$prefix}--list-box__menu-item--active;
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
     color: $text-primary;
@@ -134,7 +143,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-08;
+    inset-inline-end: calc($spacing-08 + 9px);
   }
 
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
@@ -143,11 +152,29 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-combo-box[ai-label])
+  .#{$prefix}--list-box__wrapper--decorator {
+  @include ai-gradient;
+}
+
 :host(#{$prefix}-combo-box[ai-label][isclosable]) {
+  padding-inline-end: $spacing-06;
+
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-10;
+    inset-inline-end: calc($spacing-10 + 18px);
   }
+}
+
+:host(#{$prefix}-combo-box[ai-label]) ::slotted(#{$prefix}-ai-label)::after {
+  position: absolute;
+  display: block;
+  background-color: $border-subtle-01;
+  block-size: $spacing-05;
+  content: '';
+  inline-size: convert.to-rem(1px);
+  inset-block-start: 0;
+  inset-inline-end: convert.to-rem(-9px);
 }
 
 :host(#{$prefix}-combo-box[warn]),

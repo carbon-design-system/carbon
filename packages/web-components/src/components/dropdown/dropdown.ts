@@ -142,21 +142,37 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param event The event.
    */
-  protected _handleClickInner(event: MouseEvent) {
-    if (this.readOnly) {
+  protected _handleClickInner(event: PointerEvent) {
+    const { pointerType, target } = event;
+    const constructor = this.constructor as typeof CDSDropdown;
+    const clickedItem = (target as Element).closest(
+      constructor.selectorItem
+    ) as CDSDropdownItem | null;
+
+    if (!this.shadowRoot || this.readOnly) {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-    if (this.shadowRoot!.contains(event.target as Node)) {
+    // Only handle pointer types: mouse, pen, or touch.
+    if (!['mouse', 'pen', 'touch'].includes(pointerType)) {
+      return;
+    }
+
+    // If user interacts with ai-label, close the dropdown.
+    if (event.target instanceof CDSAILabel) {
+      this._handleUserInitiatedToggle(false);
+      return;
+    }
+
+    // If trigger inside the shadow root is clicked, toggle open/close.
+    if (this.shadowRoot.contains(target as Node)) {
       this._handleUserInitiatedToggle();
-    } else {
-      const item = (event.target as Element).closest(
-        (this.constructor as typeof CDSDropdown).selectorItem
-      ) as CDSDropdownItem;
-      if (this.contains(item)) {
-        this._handleUserInitiatedSelectItem(item);
-      }
+      return;
+    }
+
+    // Handle item selection if a valid item is clicked from the dropdown.
+    if (clickedItem && this.contains(clickedItem) && !clickedItem.disabled) {
+      this._handleUserInitiatedSelectItem(clickedItem);
     }
   }
 
@@ -165,13 +181,18 @@ class CDSDropdown extends ValidityMixin(
    */
   protected _handleKeydownInner(event: KeyboardEvent) {
     const { key } = event;
-    const action = (this.constructor as typeof CDSDropdown).getAction(key);
+    const constructor = this.constructor as typeof CDSDropdown;
+    const action = constructor.getAction(key);
+
+    if (event.target instanceof CDSAILabel) {
+      this._handleUserInitiatedToggle(false);
+      return;
+    }
+
     if (!this.open) {
       switch (action) {
         case DROPDOWN_KEYBOARD_ACTION.NAVIGATING:
           this._handleUserInitiatedToggle(true);
-          // If this menu gets open with an arrow key, reset the highlight
-          this._clearHighlight();
           break;
         default:
           break;
@@ -197,13 +218,16 @@ class CDSDropdown extends ValidityMixin(
   protected _handleKeypressInner(event: KeyboardEvent) {
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
+
+    if (event.target instanceof CDSAILabel) {
+      this._handleUserInitiatedToggle(false);
+      return;
+    }
+
     if (!this.open) {
       switch (action) {
         case DROPDOWN_KEYBOARD_ACTION.TRIGGERING:
-          // Only toggle if the event target is not a CDSAILabel
-          if (!(event.target instanceof CDSAILabel)) {
-            this._handleUserInitiatedToggle(true);
-          }
+          this._handleUserInitiatedToggle(true);
           break;
         default:
           break;
@@ -317,6 +341,7 @@ class CDSDropdown extends ValidityMixin(
    * @param [force] If specified, forces the open state to the given one.
    */
   protected _handleUserInitiatedToggle(force = !this.open) {
+    const constructor = this.constructor as typeof CDSDropdown;
     const { eventBeforeToggle, eventToggle } = this
       .constructor as typeof CDSDropdown;
 
@@ -334,9 +359,7 @@ class CDSDropdown extends ValidityMixin(
         this.open = force;
         if (!this.open) {
           forEach(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSDropdown).selectorItemHighlighted
-            ),
+            this.querySelectorAll(constructor.selectorItemHighlighted),
             (item) => {
               (item as CDSDropdownItem).highlighted = false;
             }

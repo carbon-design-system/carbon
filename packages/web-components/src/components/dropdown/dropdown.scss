@@ -46,6 +46,7 @@ $css--plex: true !default;
     outline: none;
   }
 }
+
 :host(#{$prefix}-dropdown[ai-label]) .#{$prefix}--list-box__wrapper--decorator {
   @include ai-gradient;
 }
@@ -111,12 +112,21 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown-item:hover) {
+:host(#{$prefix}-dropdown-item:hover:not([disabled])) {
   background-color: $layer-hover;
+}
+
+:host(#{$prefix}-dropdown-item:active:not([disabled])) {
+  background-color: $layer-selected;
 }
 
 :host(#{$prefix}-dropdown-item[highlighted]) {
   @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-dropdown-item:hover[disabled])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle-01;
 }
 
 :host(#{$prefix}-dropdown-item[disabled])
@@ -128,7 +138,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-dropdown-item[selected]) {
   @extend .#{$prefix}--list-box__menu-item--active;
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
     color: $text-primary;

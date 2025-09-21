@@ -102,9 +102,15 @@ class CDSComboBox extends CDSDropdown {
     const items = this.querySelectorAll(
       (this.constructor as typeof CDSComboBox).selectorItem
     );
-    const index = !this._filterInputNode.value
+    let index = !this._filterInputNode.value
       ? -1
       : findIndex(items, this._testItemWithQueryText, this);
+
+    // clear the index if the found item is disabled
+    if (items[index]?.hasAttribute('disabled')) {
+      index = -1;
+    }
+
     forEach(items, (item, i) => {
       if (i === index) {
         const menuRect = this._itemMenu?.getBoundingClientRect();
@@ -138,7 +144,7 @@ class CDSComboBox extends CDSDropdown {
     this.requestUpdate(); // If the only change is to `_filterInputValue`, auto-update doesn't happen
   }
 
-  protected _handleClickInner(event: MouseEvent) {
+  protected _handleClickInner(event: PointerEvent) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
     const { target } = event as any;
     if (this._selectionButtonNode?.contains(target)) {
@@ -159,7 +165,6 @@ class CDSComboBox extends CDSDropdown {
     ) {
       this._handleUserInitiatedClearInput();
     } else {
-      this.open = false;
       super._handleKeypressInner(event);
     }
   }
@@ -231,7 +236,7 @@ class CDSComboBox extends CDSDropdown {
 
     const inputClasses = classMap({
       [`${prefix}--text-input`]: true,
-      [`${prefix}--text-input--empty`]: !value,
+      [`${prefix}--text-input--empty`]: !value && !filterInputValue,
     });
 
     let activeDescendantFallback: string | undefined;

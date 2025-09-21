@@ -39,11 +39,8 @@ $css--plex: true !default;
 
   .#{$prefix}--text-input {
     border: none;
+    outline: none;
     padding-inline-start: 0;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   .#{$prefix}--tag--disabled {
