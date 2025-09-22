@@ -7236,6 +7236,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "validate": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [

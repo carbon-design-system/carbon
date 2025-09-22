@@ -69,6 +69,22 @@ export interface NumberInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
     TranslateWithId<TranslationKey> {
   /**
+   * Optional validation function that is called with the input value and locale.
+   * Return false to fail validation, true to pass validation, or undefined to defer to other validation checks.
+   * This is called before other built-in validations, giving consumers control over the validation process.
+   * @example
+   * // Using the built-in separator validation
+   * <NumberInput validate={validateNumberSeparators} />
+   *
+   * // Combining with custom validation
+   * <NumberInput
+   *   validate={(value, locale) => {
+   *     return validateNumberSeparators(value, locale) && customValidation(value)
+   *   }}
+   * />
+   */
+  validate?: (value: string, locale: string) => boolean | undefined;
+  /**
    * `true` to allow empty string.
    */
   allowEmpty?: boolean;
@@ -297,9 +313,12 @@ const getSeparators = (locale: string) => {
   }
 };
 
-const isValidNumberInput = (input: string, locale: string): boolean => {
+export const validateNumberSeparators = (
+  input: string,
+  locale: string
+): boolean => {
   // allow empty string
-  if (input === '') {
+  if (input === '' || Number.isNaN(input)) {
     return true;
   }
   const { groupSeparator, decimalSeparator } = getSeparators(locale);
@@ -336,13 +355,13 @@ const isValidNumberInput = (input: string, locale: string): boolean => {
   let normalized = input;
   if (groupSeparator) {
     if (groupSeparator.trim() === '') {
-      normalized = normalized.replace(/[\u00A0\u202F\s]/g, '');
+      normalized = normalized?.replace(/[\u00A0\u202F\s]/g, '');
     } else {
-      normalized = normalized.split(groupSeparator).join('');
+      normalized = normalized?.split(groupSeparator).join('');
     }
   }
 
-  normalized = normalized.replace(decimalSeparator, '.');
+  normalized = normalized?.replace(decimalSeparator, '.');
 
   return !isNaN(Number(normalized));
 };
@@ -382,6 +401,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       translateWithId: t = (id) => defaultTranslations[id],
       type = 'number',
       defaultValue = type === 'number' ? 0 : NaN,
+      validate,
       warn = false,
       warnText = '',
       stepStartValue = 0,
@@ -437,7 +457,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
      * Only used when type="text"
      */
     const [previousNumberValue, setPreviousNumberValue] = useState(numberValue);
-    const [validFormat, setValidFormat] = useState(true);
     /**
      * The current text value of the input.
      * Only used when type=text
@@ -488,15 +507,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const isInputValid = getInputValidity({
       allowEmpty,
       invalid,
-      value: type === 'number' ? value : numberValue,
+      value: validate ? inputValue : type === 'number' ? value : numberValue,
       max,
       min,
+      validate,
+      locale,
     });
     const normalizedProps = normalize({
       id,
       readOnly,
       disabled,
-      invalid: !isInputValid || !validFormat,
+      invalid: !isInputValid,
       invalidText,
       warn,
       warnText,
@@ -562,11 +583,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         const _value =
           allowEmpty && event.target.value === '' ? '' : event.target.value;
 
-        // When isControlled, setNumberValue will not update numberValue in useControllableState.
-        setValidFormat(isValidNumberInput(_value, locale));
-        setNumberValue(
-          isValidNumberInput(_value, locale) ? numberParser.parse(_value) : NaN
-        );
+        setNumberValue(numberParser.parse(_value));
         setInputValue(_value);
         // The onChange prop isn't called here because it will be called on blur
         // or on click of a stepper, after the number is parsed and formatted
@@ -654,7 +671,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           // When isControlled, setNumberValue will not actually update
           // numberValue in useControllableState.
           setNumberValue(parsedFormattedNewValue);
-          setValidFormat(isValidNumberInput(formattedNewValue, locale));
 
           setInputValue(formattedNewValue);
           setPreviousNumberValue(parsedFormattedNewValue);
@@ -767,18 +783,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   const formattedValue = isNaN(_numberValue)
                     ? ''
                     : format(_numberValue);
-                  if (!validFormat) {
-                    setInputValue('');
-                  } else {
-                    setInputValue(formattedValue);
-                  }
+                  const rawValue = e.target.value;
+                  // Validate raw input
+                  const isValid = validate ? validate(rawValue, locale) : true;
+                  setInputValue(isValid ? formattedValue : rawValue);
                   // Calling format() can alter the number (such as rounding it)
                   // causing the _numberValue to mismatch the formatted value in
                   // the input. To avoid this, formattedValue is re-parsed.
                   const parsedFormattedNewValue =
                     numberParser.parse(formattedValue);
 
-                  if (onChange) {
+                  if (onChange && isValid) {
                     const state = {
                       value: parsedFormattedNewValue,
                       direction:
@@ -794,8 +809,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                       !(
                         isNaN(previousNumberValue) &&
                         isNaN(parsedFormattedNewValue)
-                      ) &&
-                      validFormat
+                      )
                     ) {
                       onChange(e, state);
                     }
@@ -807,10 +821,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   if (!(isNaN(previousNumberValue) && isNaN(numberValue))) {
                     setPreviousNumberValue(numberValue);
                   }
-                  if (
-                    !(isNaN(numberValue) && isNaN(parsedFormattedNewValue)) &&
-                    validFormat
-                  ) {
+                  if (!(isNaN(numberValue) && isNaN(parsedFormattedNewValue))) {
                     setNumberValue(parsedFormattedNewValue);
                   }
                 }
@@ -1094,6 +1105,11 @@ NumberInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+  /**
+   * Optional validation function that is called with the input value and locale.
+   * Return false to fail validation, true to pass validation, or undefined to defer to other validation checks.
+   */
+  validate: PropTypes.func,
 };
 
 export interface Label {
@@ -1165,9 +1181,26 @@ HelperText.propTypes = {
  * @param {number} config.value
  * @param {number} config.max
  * @param {number} config.min
+ * @param {Function} config.validate
+ * @param {string} config.locale
  * @returns {boolean}
  */
-function getInputValidity({ allowEmpty, invalid, value, max, min }) {
+function getInputValidity({
+  allowEmpty,
+  invalid,
+  value,
+  max,
+  min,
+  validate,
+  locale,
+}) {
+  if (typeof validate === 'function') {
+    const result = validate(value, locale);
+    if (result !== undefined) {
+      return result;
+    }
+  }
+
   if (invalid) {
     return false;
   }
