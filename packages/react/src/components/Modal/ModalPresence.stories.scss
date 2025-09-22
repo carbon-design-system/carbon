@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2023, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/config' with (
+  $prefix: 'dialog-refactor'
+);
+@use '@carbon/react/scss/components/modal/modal';
+@use '@carbon/react/scss/components/dialog/dialog';
+@use '@carbon/react/scss/components/text-input/text-input';
+@use '@carbon/react/scss/components/select/select';
+@use '@carbon/react/scss/components/dropdown/dropdown';
+@use '@carbon/react/scss/components/multiselect/multiselect';
+
+.experimental-modal-with-presence {
+  @include modal.modal(
+    $enable-experimental-focus-wrap-without-sentinels: false,
+    $enable-dialog-element: false,
+    $enable-presence: true
+  );
+  @include text-input.text-input();
+  @include select.select();
+  @include dropdown.dropdown();
+  @include multiselect.multiselect();
+}
