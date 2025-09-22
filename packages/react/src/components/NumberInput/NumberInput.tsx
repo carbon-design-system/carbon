@@ -69,8 +69,8 @@ export interface NumberInputProps
     TranslateWithId<TranslationKey> {
   /**
    * Optional validation function that is called with the input value and locale.
-   * Return false to fail validation, true to pass validation, or undefined to defer to other validation checks.
-   * This is called before other built-in validations, giving consumers control over the validation process.
+   * This is called before other validations, giving consumers the ability
+   * to short-circuit or extend validation without replacing built-in rules
    * @example
    * // Using the built-in separator validation
    * <NumberInput validate={validateNumberSeparators} />
@@ -81,6 +81,10 @@ export interface NumberInputProps
    *     return validateNumberSeparators(value, locale) && customValidation(value)
    *   }}
    * />
+   * - Return `false` to immediately fail validation.
+   * - Return `true` to pass this validation, but still run other checks (min, max, required, etc.).
+   * - Return `undefined` to defer entirely to built-in validation logic.
+   *
    */
   validate?: (value: string, locale: string) => boolean | undefined;
   /**
@@ -1101,12 +1105,14 @@ NumberInput.propTypes = {
   warn: PropTypes.bool,
 
   /**
-   * Provide the text that is displayed when the control is in warning state
-   */
-  warnText: PropTypes.node,
-  /**
    * Optional validation function that is called with the input value and locale.
-   * Return false to fail validation, true to pass validation, or undefined to defer to other validation checks.
+   *
+   * - Return `false` to immediately fail validation.
+   * - Return `true` to pass this validation, but still run other checks (min, max, required, etc.).
+   * - Return `undefined` to defer entirely to built-in validation logic.
+   *
+   * This is called before other validations, giving consumers the ability
+   * to short-circuit or extend validation without replacing built-in rules.
    */
   validate: PropTypes.func,
 };
@@ -1184,9 +1190,10 @@ function getInputValidity({
 }) {
   if (typeof validate === 'function') {
     const result = validate(value, locale);
-    if (result !== undefined) {
-      return result;
+    if (result === false) {
+      return false; // immediate invalid
     }
+    // If true or undefined, continue to further validations
   }
 
   if (invalid) {

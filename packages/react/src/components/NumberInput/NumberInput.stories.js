@@ -267,6 +267,7 @@ export const WithTypeOfCustomValidation = (args) => {
         {...args}
         locale={locale}
         value={value}
+        allowEmpty
         onChange={(event, state) => {
           setValue(state.value);
         }}
