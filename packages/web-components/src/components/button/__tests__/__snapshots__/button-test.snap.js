@@ -27,6 +27,7 @@ snapshots[
 snapshots['cds-button should support a custom tabIndex through props'] =
   `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -50,6 +51,7 @@ snapshots[
   'cds-button should support a custom className on the outermost element'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -71,6 +73,7 @@ snapshots[
 
 snapshots['cds-button should render an element with the button role'] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -94,6 +97,7 @@ snapshots[
   'cds-button should use the disabled prop to set disabled on the <button>'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--disabled cds--btn--lg cds--btn--primary cds--layout--size-lg"
   disabled=""
   id="button"
@@ -117,6 +121,7 @@ snapshots[
 snapshots['cds-button should render with a default button type of button'] =
   `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -140,6 +145,7 @@ snapshots[
   'cds-button should support changing the button type to button with the `type` prop'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -163,6 +169,7 @@ snapshots[
   'cds-button should support changing the button type to submit with the `type` prop'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -186,6 +193,7 @@ snapshots[
   'cds-button should support changing the button type to reset with the `type` prop'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -209,6 +217,7 @@ snapshots[
   'cds-button should render as an element with the role of `link` when the `href` prop is used'
 ] = `<a
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   href="/"
   id="button"
@@ -234,6 +243,7 @@ snapshots[
   'cds-button should not error on tooltipAlignment even when hasIconOnly=false'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -257,6 +267,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: primary'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -280,6 +291,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: secondary'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--secondary cds--layout--size-lg"
   id="button"
   part="button"
@@ -303,6 +315,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: ghost'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--ghost cds--btn--lg cds--layout--size-lg"
   id="button"
   part="button"
@@ -326,6 +339,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: danger'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--danger cds--btn--lg cds--layout--size-lg"
   id="button"
   part="button"
@@ -351,6 +365,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: danger--primary'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--danger--primary cds--btn--lg cds--layout--size-lg"
   id="button"
   part="button"
@@ -376,6 +391,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: danger--ghost'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--layout--size-lg"
   id="button"
   part="button"
@@ -401,6 +417,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: danger--tertiary'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--layout--size-lg"
   id="button"
   part="button"
@@ -426,6 +443,7 @@ snapshots[
   'cds-button should set the expected classes for the button of kind: tertiary'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--tertiary cds--layout--size-lg"
   id="button"
   part="button"
@@ -449,6 +467,7 @@ snapshots[
   'cds-button should set the expected classes for the button of size: sm'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--primary cds--btn--sm cds--layout--size-sm"
   id="button"
   part="button"
@@ -472,6 +491,7 @@ snapshots[
   'cds-button should set the expected classes for the button of size: md'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--md cds--btn--primary cds--layout--size-md"
   id="button"
   part="button"
@@ -495,6 +515,7 @@ snapshots[
   'cds-button should set the expected classes for the button of size: lg'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -518,6 +539,7 @@ snapshots[
   'cds-button should set the expected classes for the button of size: xl'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--primary cds--btn--xl cds--layout--size-xl"
   id="button"
   part="button"
@@ -541,6 +563,7 @@ snapshots[
   'cds-button should set the expected classes for the button of size: 2xl'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--2xl cds--btn--primary cds--layout--size-2xl"
   id="button"
   part="button"
@@ -564,6 +587,7 @@ snapshots[
   'cds-button Button with Icon variant should render the given icon within the <button> element'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg cds-ce--btn--has-icon"
   id="button"
   part="button"
@@ -586,6 +610,7 @@ snapshots[
 snapshots['cds-button Icon Button variant should set the icon-only class'] =
   `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--icon-only cds--btn--lg cds--btn--primary cds--layout--size-lg cds-ce--btn--has-icon"
   id="button"
   part="button"
@@ -608,6 +633,7 @@ snapshots['cds-button Icon Button variant should set the icon-only class'] =
 snapshots['cds-button Icon Button variant should support badge indicator'] =
   `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
   id="button"
   part="button"
@@ -631,6 +657,7 @@ snapshots[
   'cds-button Icon Button variant should support badge indicator and truncate'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
   id="button"
   part="button"
@@ -654,6 +681,7 @@ snapshots[
   'cds-button should set the expected classes for the button of size: `sm`'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--primary cds--btn--sm cds--layout--size-sm"
   id="button"
   part="button"
@@ -677,6 +705,7 @@ snapshots[
   'cds-button should set the expected classes for the button of size: `md`'
 ] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--md cds--btn--primary cds--layout--size-md"
   id="button"
   part="button"
@@ -767,6 +796,7 @@ snapshots[
 
 snapshots['cds-button supports props.size size="sm"'] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--primary cds--btn--sm cds--layout--size-sm"
   id="button"
   part="button"
@@ -788,6 +818,7 @@ snapshots['cds-button supports props.size size="sm"'] = `<button
 
 snapshots['cds-button supports props.size size="md"'] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--md cds--btn--primary cds--layout--size-md"
   id="button"
   part="button"
@@ -809,6 +840,7 @@ snapshots['cds-button supports props.size size="md"'] = `<button
 
 snapshots['cds-button supports props.size size="lg"'] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
@@ -830,6 +862,7 @@ snapshots['cds-button supports props.size size="lg"'] = `<button
 
 snapshots['cds-button supports props.size size="xl"'] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--primary cds--btn--xl cds--layout--size-xl"
   id="button"
   part="button"
@@ -851,6 +884,7 @@ snapshots['cds-button supports props.size size="xl"'] = `<button
 
 snapshots['cds-button supports props.size size="2xl"'] = `<button
   aria-describedby="badge-indicator"
+  aria-label=""
   class="cds--btn cds--btn--2xl cds--btn--primary cds--layout--size-2xl"
   id="button"
   part="button"
