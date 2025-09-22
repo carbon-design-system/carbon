@@ -76,7 +76,7 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   /**
    * Specify the size of the buttons and menu.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify how the trigger tooltip should be aligned.
@@ -274,7 +274,7 @@ ComboButton.propTypes = {
   /**
    * Specify the size of the buttons and menu.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify how the trigger tooltip should be aligned.
