@@ -70,8 +70,8 @@ snapshots[
   </cds-menu>
 </cds-menu-button>
 `;
-
 /* end snapshot cds-menu-button Children/slots and special menu content Snapshot variants should render with divider and danger and match snapshot */
+
 snapshots[
   'cds-menu-button Children/slots and special menu content Snapshot variants should render with nested menu and match snapshot'
 ] = `<cds-menu-button
