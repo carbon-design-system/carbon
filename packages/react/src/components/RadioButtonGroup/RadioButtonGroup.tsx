@@ -16,11 +16,11 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import type { RadioButtonProps } from '../RadioButton';
-import { Legend } from '../Text';
+import { Legend } from '../Text/createTextComponent';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { deprecate } from '../../prop-types/deprecate';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { useId } from '../../internal/useId';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';

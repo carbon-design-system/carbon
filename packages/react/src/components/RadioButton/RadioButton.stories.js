@@ -226,16 +226,19 @@ export const Default = (args) => {
         labelText="Radio button label"
         value="radio-1"
         id="radio-1"
+        hideLabel={args.hideLabel}
       />
       <RadioButton
         labelText="Radio button label"
         value="radio-2"
         id="radio-2"
+        hideLabel={args.hideLabel}
       />
       <RadioButton
         labelText="Radio button label"
         value="radio-3"
         id="radio-3"
+        hideLabel={args.hideLabel}
       />
     </RadioButtonGroup>
   );
@@ -244,6 +247,7 @@ export const Default = (args) => {
 Default.args = {
   defaultSelected: 'radio-2',
   helperText: 'Helper text',
+  hideLabel: false,
   invalidText: 'Invalid selection',
   warn: false,
   warnText: 'Please notice the warning',
@@ -268,6 +272,13 @@ Default.argTypes = {
       'Provide text that is used alongside the control label for additional help',
     control: {
       type: 'text',
+    },
+  },
+  hideLabel: {
+    description:
+      'Specify whether the label should be visually hidden but still available to screen readers',
+    control: {
+      type: 'boolean',
     },
   },
   invalid: {
