@@ -1105,6 +1105,11 @@ NumberInput.propTypes = {
   warn: PropTypes.bool,
 
   /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
+
+  /**
    * Optional validation function that is called with the input value and locale.
    *
    * - Return `false` to immediately fail validation.
