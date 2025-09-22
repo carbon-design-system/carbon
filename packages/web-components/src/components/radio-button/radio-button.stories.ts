@@ -72,7 +72,8 @@ const args = {
   labelPosition: RADIO_BUTTON_LABEL_POSITION.RIGHT,
   orientation: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
   name: 'radio-group',
-  value: '',
+  required: false,
+  value: 'radio-2',
   warn: false,
   warnText: 'Please notice the warning',
   checked: false,
@@ -88,6 +89,10 @@ const argTypes = {
   readOnly: {
     control: 'boolean',
     description: 'read only (readOnly)',
+  },
+  required: {
+    control: 'boolean',
+    description: 'Required (required)',
   },
   helperText: {
     control: 'text',
@@ -157,13 +162,14 @@ export const Default = {
       labelPosition,
       orientation,
       name,
-      value,
+      value = 'radio-2',
       warn,
       warnText,
       onChange,
       checked,
       hideLabel,
       labelText,
+      required = false,
     } = args ?? {};
     return html`
       <cds-radio-button-group
@@ -177,6 +183,7 @@ export const Default = {
         orientation="${ifDefined(orientation)}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
+        ?required="${required}"
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}"
         @cds-radio-button-group-changed="${onChange}">
@@ -238,9 +245,9 @@ export const WithAILabel = {
         name="radio-group"
         value="radio-1"
         orientation="vertical">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
+        <cds-ai-label alignment="bottom-left"
+          >${content}${actions}</cds-ai-label
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-1"></cds-radio-button>
@@ -257,16 +264,16 @@ export const WithAILabel = {
         name="radio-group-2"
         value="radio-4"
         orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-4">
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
-        <cds-radio-button label-text="Radio button label" value="radio-5">
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
+        <cds-radio-button label-text="Radio button label" value="radio-4"
+          ><cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
+        <cds-radio-button label-text="Radio button label" value="radio-5"
+          ><cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-6"></cds-radio-button>
@@ -277,16 +284,16 @@ export const WithAILabel = {
         name="radio-group-3"
         value="radio-7"
         orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-7">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
-        <cds-radio-button label-text="Radio button label" value="radio-8">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
+        <cds-radio-button label-text="Radio button label" value="radio-7"
+          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
+        <cds-radio-button label-text="Radio button label" value="radio-8"
+          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-9"></cds-radio-button>
