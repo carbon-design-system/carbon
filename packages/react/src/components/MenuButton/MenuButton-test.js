@@ -66,7 +66,7 @@ describe('MenuButton', () => {
 
     describe('supports props.size', () => {
       // Button component doesn't apply any size class for `lg`
-      const sizes = ['sm', 'md'];
+      const sizes = ['xs', 'sm', 'md'];
 
       sizes.forEach((size) => {
         it(`size="${size}"`, () => {

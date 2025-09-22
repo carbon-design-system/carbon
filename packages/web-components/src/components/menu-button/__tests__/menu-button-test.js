@@ -62,7 +62,7 @@ describe('cds-menu-button', function () {
     });
 
     describe('renders as expected – Component API', () => {
-      const sizes = ['sm', 'md', 'lg'];
+      const sizes = ['xs', 'sm', 'md', 'lg'];
       const kinds = ['primary', 'tertiary', 'ghost'];
 
       sizes.forEach((size) => {
