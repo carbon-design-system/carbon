@@ -611,7 +611,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     // AILabel always size `mini`
     const candidate = slug ?? decorator;
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
-    const normalizedDecorator: ReactNode = candidateIsAILabel
+    const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
       : candidate;
 
