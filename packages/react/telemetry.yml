@@ -147,6 +147,7 @@ collect:
         - name
         - narrow
         - nested
+        - noTrailingSlash
         - onActionButtonClick
         - onAddFiles
         - onBlur
@@ -265,8 +266,6 @@ collect:
         - style
         # AspectRatio
         - ratio
-        # Breadcrumb
-        - noTrailingSlash
         # ButtonSet
         - stacked
         # ChatButton

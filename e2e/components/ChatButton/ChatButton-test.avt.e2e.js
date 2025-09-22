@@ -14,7 +14,7 @@ test.describe('@avt ChatButton', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
-      id: 'experimental-unstable-chatbutton--default',
+      id: 'preview-preview-chatbutton--default',
       globals: {
         theme: 'white',
       },

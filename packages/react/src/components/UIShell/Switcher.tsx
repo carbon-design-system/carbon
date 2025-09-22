@@ -19,7 +19,8 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import { SwitcherDivider, SwitcherItem } from '.';
+import SwitcherItem from './SwitcherItem';
+import SwitcherDivider from './SwitcherDivider';
 
 export interface BaseSwitcherProps {
   /**
