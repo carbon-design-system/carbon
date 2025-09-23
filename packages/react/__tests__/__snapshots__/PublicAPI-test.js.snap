@@ -4794,6 +4794,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "validate": Object {
+        "type": "func",
+      },
       "value": Object {
         "args": Array [
           Array [

@@ -32,6 +32,75 @@ export const translationIds = {
   'decrement.number': 'decrement.number',
 };
 
+const getSeparators = (locale) => {
+  const numberWithGroupAndDecimal = 1234567.89;
+
+  const formatted = new Intl.NumberFormat(locale).format(
+    numberWithGroupAndDecimal
+  );
+
+  // Extract separators using regex
+  const match = formatted.match(/(\D+)\d{3}(\D+)\d{2}$/);
+
+  if (match) {
+    const groupSeparator = match[1];
+    const decimalSeparator = match[2];
+    return { groupSeparator, decimalSeparator };
+  } else {
+    return { groupSeparator: null, decimalSeparator: null };
+  }
+};
+
+export const validateNumberSeparators = (input, locale) => {
+  // allow empty string
+  if (input === '' || Number.isNaN(input)) {
+    return true;
+  }
+  const { groupSeparator, decimalSeparator } = getSeparators(locale);
+
+  if (!decimalSeparator) {
+    return !isNaN(Number(input));
+  }
+
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  let group = '';
+  if (groupSeparator) {
+    if (groupSeparator.trim() === '') {
+      group = '[\\u00A0\\u202F\\s]'; // handle NBSP, narrow NBSP, space
+    } else {
+      group = esc(groupSeparator);
+    }
+  }
+
+  const decimal = esc(decimalSeparator);
+
+  // Regex for:
+  // - integers (with/without grouping)
+  // - optional decimal with 0+ digits after separator
+  const regex = new RegExp(
+    `^-?\\d{1,3}(${group}\\d{3})*(${decimal}\\d*)?$|^-?\\d+(${decimal}\\d*)?$`
+  );
+
+  if (!regex.test(input)) {
+    return false;
+  }
+
+  // Normalize
+  let normalized = input;
+  if (groupSeparator) {
+    if (groupSeparator.trim() === '') {
+      normalized = normalized?.replace(/[\u00A0\u202F\s]/g, '');
+    } else {
+      normalized = normalized?.split(groupSeparator).join('');
+    }
+  }
+
+  normalized = normalized?.replace(decimalSeparator, '.');
+
+  return !isNaN(Number(normalized));
+};
+
 const clamp = (num, min, max) => Math.min(max, Math.max(min, num));
 /**
  * Message ids that will be passed to translateWithId().
@@ -78,6 +147,7 @@ const NumberInputV2 = React.forwardRef(function NumberInputV2(
     step = 1,
     translateWithId: t = (id) => defaultTranslations[id],
     type = 'number',
+    validate,
     warn = false,
     warnText = '',
     stepStartValue = 0,
@@ -175,9 +245,11 @@ const NumberInputV2 = React.forwardRef(function NumberInputV2(
   const isInputValid = getInputValidity({
     allowEmpty,
     invalid,
-    value: type === 'number' ? value : numberValue,
+    value: validate ? inputValue : type === 'number' ? value : numberValue,
     max,
     min,
+    validate,
+    locale,
   });
 
   const normalizedProps = normalize({
@@ -426,7 +498,10 @@ const NumberInputV2 = React.forwardRef(function NumberInputV2(
                 const formattedValue = isNaN(_numberValue)
                   ? ''
                   : format(_numberValue);
-                setInputValue(formattedValue);
+                const rawValue = e.target.value;
+                // Validate raw input
+                const isValid = validate ? validate(rawValue, locale) : true;
+                setInputValue(isValid ? formattedValue : rawValue);
                 // Calling format() can alter the number (such as rounding it)
                 // causing the _numberValue to mismatch the formatted value in
                 // the input. To avoid this, formattedValue is re-parsed.
@@ -434,7 +509,7 @@ const NumberInputV2 = React.forwardRef(function NumberInputV2(
                   formattedValue
                 );
 
-                if (onChange) {
+                if (onChange && isValid) {
                   const state = {
                     value: parsedFormattedNewValue,
                     direction:
@@ -729,6 +804,18 @@ NumberInputV2.propTypes = {
   type: PropTypes.oneOf(['number', 'text']),
 
   /**
+   * Optional validation function that is called with the input value and locale.
+   *
+   * - Return `false` to immediately fail validation.
+   * - Return `true` to pass this validation, but still run other checks (min, max, required, etc.).
+   * - Return `undefined` to defer entirely to built-in validation logic.
+   *
+   * This is called before other validations, giving consumers the ability
+   * to short-circuit or extend validation without replacing built-in rules.
+   */
+  validate: PropTypes.func,
+
+  /**
    * Specify the value of the input
    */
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -803,9 +890,27 @@ HelperText.propTypes = {
  * @param {number} config.value
  * @param {number} config.max
  * @param {number} config.min
+ * @param {Function} config.validate
+ * @param {string} config.locale
  * @returns {boolean}
  */
-function getInputValidity({ allowEmpty, invalid, value, max, min }) {
+function getInputValidity({
+  allowEmpty,
+  invalid,
+  value,
+  max,
+  min,
+  validate,
+  locale,
+}) {
+  if (typeof validate === 'function') {
+    const result = validate(value, locale);
+    if (result === false) {
+      return false; // immediate invalid
+    }
+    // If true or undefined, continue to further validations
+  }
+
   if (invalid) {
     return false;
   }
