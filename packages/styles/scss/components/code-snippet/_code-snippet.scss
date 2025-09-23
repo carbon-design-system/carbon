@@ -151,7 +151,7 @@ $copy-btn-feedback: $background-inverse !default;
     display: flex;
     align-items: center;
     block-size: $spacing-08;
-    padding-inline-end: $spacing-08;
+    padding-inline-end: $spacing-11;
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
@@ -223,9 +223,11 @@ $copy-btn-feedback: $background-inverse !default;
     word-wrap: break-word;
   }
 
-  // collapsed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    padding-inline-end: $spacing-08;
+    overflow: auto;
+    inline-size: inline-size;
+    padding-block-end: $spacing-06;
+    padding-inline-end: $spacing-06;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
@@ -391,12 +393,6 @@ $copy-btn-feedback: $background-inverse !default;
     background-color: $layer-active;
   }
 
-  .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
-  .#{$prefix}--snippet--light.#{$prefix}--snippet--multi::after {
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($layer, 0), $layer);
-  }
-
   // Skeleton State
   .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
     block-size: 100%;
@@ -432,81 +428,97 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   // Overflow Indicator
-  .#{$prefix}--snippet__overflow-indicator--left,
-  .#{$prefix}--snippet__overflow-indicator--right {
-    z-index: 1;
-    flex: 1 0 auto;
-    inline-size: $spacing-05;
+  .#{$prefix}--snippet--single {
+    position: relative;
   }
 
-  .#{$prefix}--snippet__overflow-indicator--left {
-    order: 0;
-    background-image: linear-gradient(to left, transparent, $layer);
-    margin-inline-end: -$spacing-05;
-  }
-
-  .#{$prefix}--snippet__overflow-indicator--right {
-    order: 2;
-    background-image: linear-gradient(to right, transparent, $layer);
-    margin-inline-start: -$spacing-05;
-  }
-
-  [dir='rtl'] .#{$prefix}--snippet__overflow-indicator--left {
-    background-image: linear-gradient(to right, transparent, $layer);
-  }
-
-  [dir='rtl'] .#{$prefix}--snippet__overflow-indicator--right {
-    background-image: linear-gradient(to left, transparent, $layer);
-  }
-
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
+  .#{$prefix}--snippet--single::after {
     position: absolute;
-    block-size: calc(100% - #{$spacing-02});
+    z-index: 1;
+    background-image: linear-gradient(
+      to left,
+      $layer 30%,
+      rgba($layer, 0.7) 60%,
+      rgba($layer, 0) 100%
+    );
+    content: '';
     inline-size: $spacing-07;
+    inset-block-end: 0;
+    inset-block-start: 0;
+    inset-inline-end: $spacing-05;
+    pointer-events: none;
   }
 
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
-    inset-inline-end: $spacing-08;
+  .#{$prefix}--snippet--multi {
+    position: relative;
   }
 
-  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy
-    .#{$prefix}--snippet__overflow-indicator--right {
-    inset-inline-end: 0;
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        #000000 calc(100% - #{$spacing-07}),
+        transparent 100%
+      ),
+      linear-gradient(
+        to bottom,
+        #000000 calc(100% - #{$spacing-05}),
+        transparent 100%
+      );
+    mask-image: linear-gradient(
+        to right,
+        #000000 calc(100% - #{$spacing-07}),
+        transparent 100%
+      ),
+      linear-gradient(
+        to bottom,
+        #000000 calc(100% - #{$spacing-05}),
+        transparent 100%
+      );
+    pointer-events: auto;
   }
 
-  .#{$prefix}--snippet--single
-    .#{$prefix}--snippet-container:focus
-    ~ .#{$prefix}--snippet__overflow-indicator--right {
-    inset-inline-end: calc(#{$spacing-08} + #{convert.to-rem(2px)});
+  [dir='rtl'] .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    -webkit-mask-image: linear-gradient(
+      to left,
+      #000000 calc(100% - #{$spacing-07}),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to left,
+      #000000 calc(100% - #{$spacing-07}),
+      transparent 100%
+    );
   }
 
-  .#{$prefix}--snippet--single
-    .#{$prefix}--snippet-container:focus
-    + .#{$prefix}--snippet__overflow-indicator--left {
-    inset-inline-start: convert.to-rem(2px);
+  [dir='rtl'] .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    -webkit-mask-image: linear-gradient(
+        to left,
+        #000000 calc(100% - #{$spacing-07}),
+        transparent 100%
+      ),
+      linear-gradient(
+        to bottom,
+        #000000 calc(100% - #{$spacing-05}),
+        transparent 100%
+      );
+    mask-image: linear-gradient(
+        to left,
+        #000000 calc(100% - #{$spacing-07}),
+        transparent 100%
+      ),
+      linear-gradient(
+        to bottom,
+        #000000 calc(100% - #{$spacing-05}),
+        transparent 100%
+      );
   }
 
-  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $layer);
-  }
-
-  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $layer);
-  }
-
-  // Safari-only media query
-  // since fades won't appear correctly with CSS custom properties
-  // see: tabs, code snippet, and modal overflow indicators
-  @supports (hanging-punctuation: first) and (font: -apple-system-body) and
-    (-webkit-appearance: none) {
-    .#{$prefix}--snippet__overflow-indicator--left {
-      background-image: linear-gradient(to left, rgba($layer, 0), $layer);
-    }
-
-    .#{$prefix}--snippet__overflow-indicator--right {
-      background-image: linear-gradient(to right, rgba($layer, 0), $layer);
-    }
+  .#{$prefix}--snippet--single:focus-within .#{$prefix}--snippet-container,
+  .#{$prefix}--snippet--multi:focus-within .#{$prefix}--snippet-container {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--skeleton {
