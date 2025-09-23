@@ -1666,6 +1666,7 @@ Map {
     },
     "render": [Function],
   },
+  "ComposedModalPresence" => {},
   "ContainedList" => {
     "ContainedListItem": {
       "propTypes": {
@@ -6741,6 +6742,7 @@ Map {
     },
     "render": [Function],
   },
+  "ModalPresence" => {},
   "ModalWrapper" => {
     "propTypes": {
       "buttonTriggerClassName": {
@@ -7318,6 +7320,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [
