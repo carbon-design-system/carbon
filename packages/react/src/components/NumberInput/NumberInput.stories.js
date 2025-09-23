@@ -8,6 +8,7 @@
 import React, { useState } from 'react';
 import { NumberInput } from './';
 import NumberInputSkeleton from './NumberInput.Skeleton';
+import { validateNumberSeparators } from './NumberInput';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
@@ -245,6 +246,55 @@ WithTypeOfTextControlled.args = {
   type: 'text',
 };
 WithTypeOfTextControlled.argTypes = {
+  locale: { control: { type: 'text' } },
+  formatOptions: { control: { type: 'object' } },
+  ...sharedArgTypes,
+};
+
+export const WithTypeOfCustomValidation = (args) => {
+  const locale = useDocumentLang();
+  const [value, setValue] = useState(NaN);
+
+  return (
+    <>
+      <NumberInput
+        id="default-number-input"
+        type="text"
+        inputMode="decimal"
+        label="NumberInput label"
+        helperText="Optional helper text."
+        validate={validateNumberSeparators}
+        {...args}
+        locale={locale}
+        value={value}
+        allowEmpty
+        onChange={(event, state) => {
+          setValue(state.value);
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          setValue(1000);
+        }}>
+        set to 1000
+      </button>
+    </>
+  );
+};
+WithTypeOfCustomValidation.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+  helperText: 'Optional helper text.',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+  type: 'text',
+};
+WithTypeOfCustomValidation.argTypes = {
   locale: { control: { type: 'text' } },
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
