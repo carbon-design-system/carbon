@@ -176,6 +176,7 @@ export {
   FluidTextAreaSkeleton as preview__FluidTextAreaSkeleton,
 } from './components/FluidTextArea';
 export {
+  FluidPasswordInput,
   FluidTextInput,
   FluidTextInputSkeleton,
   FluidTextInput as unstable__FluidTextInput,
