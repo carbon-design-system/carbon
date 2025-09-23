@@ -466,7 +466,7 @@ export const TabBarWithTabsAndTags = {
 };
 
 const meta = {
-  title: 'Patterns/unstable__PageHeader',
+  title: 'Patterns/preview__PageHeader',
   // comment below line to see the pageheader story
   includeStories: [],
   decorators: [

@@ -12,9 +12,13 @@ const { reactPreviewMap } = require('./nonStableMapping');
  *
  * @example
  * Before:
+ * import { unstable__FluidTimePicker as FluidTimePicker } from '@carbon/react';
+ * or
  * import { unstable__FluidTimePicker } from '@carbon/react';
  *
  * After:
+ * import { preview__FluidTimePicker as FluidTimePicker } from "@carbon/react";
+ * or
  * import { preview__FluidTimePicker } from "@carbon/react";
  */
 
@@ -29,13 +33,20 @@ function transformer(file, api) {
         value: '@carbon/react',
       },
     })
-    .find(j.ImportSpecifier)
-    .filter(
-      (path) => !!nonStableComponentKeys.includes(path.node.imported.name)
-    )
-    .replaceWith((path) =>
-      j.importSpecifier(j.identifier(reactPreviewMap[path.node.imported.name]))
-    )
+    .forEach((path) => {
+      path.node.specifiers.forEach((specifier) => {
+        if (specifier.type === 'ImportSpecifier') {
+          nonStableComponentKeys.forEach((c) => {
+            let importedName = specifier.imported.name;
+            let transformedImportedName = importedName;
+            if (importedName === c) {
+              transformedImportedName = reactPreviewMap[c];
+              specifier.imported.name = transformedImportedName;
+            }
+          });
+        }
+      });
+    })
     .toSource();
 }
 
