@@ -159,10 +159,11 @@ class CDSOverflowMenu
             (elem.constructor as typeof CDSOverflowMenuBody).FLOATING_MENU
         );
       }
-      const { _menuBody: menuBody } = this;
+      const { _menuBody: menuBody, size } = this;
       if (menuBody) {
         menuBody.setAttribute('breadcrumb', String(Boolean(this.breadcrumb)));
         menuBody.open = open;
+        menuBody.size = size;
 
         const tooltipContent = this.querySelector(
           '[slot=tooltip-content]'
@@ -178,12 +179,6 @@ class CDSOverflowMenu
     }
 
     if (changedProperties.has('size')) {
-      const { size } = this;
-      const { _menuBody: menuBody } = this;
-      if (menuBody) {
-        menuBody.size = size;
-      }
-
       button?.classList.forEach((item) => {
         if (item.startsWith(`${prefix}--overflow-menu--`)) {
           button?.classList.remove(item);

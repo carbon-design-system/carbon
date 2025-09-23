@@ -52,7 +52,7 @@ const argTypes = {
   size: {
     control: 'select',
     description:
-      'Specify the size of the OverflowMenu. Currently supports either <code>xs</code>, <code>sm</code>, <code>md</code> (default) or <code></code>lg</code> as an option.',
+      'Specify the size of the OverflowMenu. Currently supports either <code>xs</code>, <code>sm</code>, <code>md</code> (default) or <code>lg</code> as an option.',
     options: sizes,
   },
 };
