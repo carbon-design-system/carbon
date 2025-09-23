@@ -454,6 +454,7 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    inline-size: 100%;
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
     -webkit-mask-image: linear-gradient(
