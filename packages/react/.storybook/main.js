@@ -37,12 +37,7 @@ const stories = glob.sync(storyGlobs, {
 const config = {
   addons: [
     getAbsolutePath('@storybook/addon-webpack5-compiler-babel'),
-    /**
-     * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
-     * Eventually they plan to attempt to get this back into the root addon with the storybook team.
-     * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
-     */
-    // getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('storybook-addon-accessibility-checker'),
     {
       name: getAbsolutePath('@storybook/addon-docs'),
