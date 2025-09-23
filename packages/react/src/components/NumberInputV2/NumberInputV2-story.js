@@ -16,7 +16,7 @@ import {
   object,
   select,
 } from '@storybook/addon-knobs';
-
+import { validateNumberSeparators } from './NumberInputV2';
 import NumberInputV2 from './NumberInputV2';
 import mdx from './NumberInputV2.mdx';
 
@@ -103,6 +103,26 @@ export const Default = () => {
 
 Default.story = {
   name: 'Number Input Type Text',
+};
+
+export const WithTypeOfCustomValidation = () => {
+  return (
+    <NumberInputV2
+      id="default-number-input"
+      inputMode="decimal"
+      defaultValue={50}
+      allowEmpty
+      validate={validateNumberSeparators}
+      label="NumberInput label"
+      invalidText={`Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`}
+      type={'text'}
+      locale={select('Locale', locales, undefined) || undefined}
+    />
+  );
+};
+
+WithTypeOfCustomValidation.story = {
+  name: 'With type of custom validation',
 };
 
 export const Playground = () => {

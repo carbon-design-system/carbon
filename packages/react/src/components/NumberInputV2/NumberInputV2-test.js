@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NumberInputV2 from './NumberInputV2';
-
+import { validateNumberSeparators } from './NumberInputV2';
 function translateWithId(id) {
   if (id === 'increment.number') {
     return 'increment';
@@ -961,6 +961,47 @@ describe('with type="text"', () => {
 
       await userEvent.click(screen.getByLabelText('increment'));
       expect(input).toHaveValue('20%');
+    });
+
+    it('should throw an error if group seperator is in wrong position', async () => {
+      render(
+        <NumberInputV2
+          type="text"
+          label="NumberInput label"
+          id="number-input"
+          value=""
+          step={1}
+          validate={validateNumberSeparators}
+          translateWithId={translateWithId}
+          invalidText="test-invalid-text"
+        />
+      );
+      const input = screen.getByLabelText('NumberInput label');
+      await userEvent.type(input, '1,1');
+      await userEvent.tab();
+      expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+    });
+
+    it('should throw an error if group seperator is in wrong position for given locale', async () => {
+      render(
+        <NumberInputV2
+          type="text"
+          label="NumberInput label"
+          id="number-input"
+          locale="DE"
+          value=""
+          step={1}
+          validate={validateNumberSeparators}
+          translateWithId={translateWithId}
+          invalidText="test-invalid-text"
+        />
+      );
+      const input = screen.getByLabelText('NumberInput label');
+      await userEvent.type(input, '1.1');
+      await userEvent.tab();
+      expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
     });
   });
 });
