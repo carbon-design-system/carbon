@@ -136,14 +136,6 @@ class CDSPaginationNav extends FocusMixin(HostListenerMixin(LitElement)) {
   }
 
   /**
-   * Handle overflow select change
-   */
-  private _handleOverflowSelect(event: CustomEvent) {
-    const index = Number(event.detail.value);
-    this._jumpToItem(index);
-  }
-
-  /**
    * If true, the '...' pagination overflow will not render page links between the first and last rendered buttons.
    */
   @property({ type: Boolean, reflect: true })
