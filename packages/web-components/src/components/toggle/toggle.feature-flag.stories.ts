@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,8 +26,8 @@ export const Default = {
         <feature-flags enable-v12-toggle-reduced-label-spacing>
           <cds-toggle
             label-text="Label"
-            label-a="Off"
-            label-b="On"
+            label-a="On"
+            label-b="Off"
             checked></cds-toggle>
         </feature-flags>
       </div>
