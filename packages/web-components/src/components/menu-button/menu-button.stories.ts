@@ -48,10 +48,11 @@ const argTypes = {
   size: {
     control: 'radio',
     description: `Specify the size of the button and menu.
+'xs'
 'sm'
 'md'
 'lg'`,
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
   },
   tabIndex: {
     control: 'number',

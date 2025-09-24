@@ -295,7 +295,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
           </Text>
         </>
       )}
-      {warn && (
+      {warn && !invalid && (
         <>
           {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
           <Text as="div" className={`${prefix}--form-requirement`}>
