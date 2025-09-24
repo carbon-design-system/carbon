@@ -8,7 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './data-table.scss?lit';
@@ -19,6 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSTableExpandedRow from './table-expanded-row';
 import CDSTableCell from './table-cell';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Data table row.
@@ -183,16 +184,23 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
 
   protected _renderExpandButton() {
     const { _handleClickExpando: handleClickExpando } = this;
+
+    // Always use the same structure for consistency, but only render the button for expandable rows
     return html`
       <div class="${prefix}--table-expand">
         <div>
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
-          <button
-            class="${prefix}--table-expand__button"
-            @click="${handleClickExpando}">
-            ${ChevronRight16({ class: `${prefix}--table-expand__svg` })}
-          </button>
+          ${this.expandable
+            ? html`<button
+                class="${prefix}--table-expand__button"
+                @click="${handleClickExpando}">
+                ${iconLoader(ChevronRight16, {
+                  class: `${prefix}--table-expand__svg`,
+                })}
+              </button>`
+            : html`&nbsp;`}
+          <!-- Add non-breaking space for proper styling -->
         </div>
       </div>
     `;
@@ -412,8 +420,15 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
         (this.constructor as typeof CDSTableRow).selectorTable
       )?.setAttribute('is-selectable', '');
     }
+
+    // Always render the expand button container for consistent table structure
+    // The button itself will only be rendered if the row is expandable
+    const tableHasExpandableRows = this.closest(
+      (this.constructor as typeof CDSTableRow).selectorTable
+    )?.hasAttribute('expandable');
+
     return html`
-      ${this.expandable ? this._renderExpandButton() : ''}
+      ${tableHasExpandableRows ? this._renderExpandButton() : ''}
       ${this._renderFirstCells()}
       <slot></slot>
     `;

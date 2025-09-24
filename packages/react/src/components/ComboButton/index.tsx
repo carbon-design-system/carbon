@@ -23,10 +23,10 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
 import type { TFunc, TranslateWithId } from '../../types/common';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const translationIds = {

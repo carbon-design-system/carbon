@@ -344,8 +344,12 @@ describe('cds-dropdown', function () {
       await el.updateComplete;
 
       // Check that the chevron icon has the correct aria-label when closed
-      const chevronIcon = el.shadowRoot.querySelector('#trigger-caret svg');
-      expect(chevronIcon).to.have.attribute('aria-label', 'Open dropdown');
+      const chevronIconClosed =
+        el.shadowRoot.querySelector('#trigger-caret svg');
+      expect(chevronIconClosed).to.have.attribute(
+        'aria-label',
+        'Open dropdown'
+      );
 
       // Open the dropdown
       const triggerButton = el.shadowRoot.querySelector('#trigger-button');
@@ -353,7 +357,8 @@ describe('cds-dropdown', function () {
       await el.updateComplete;
 
       // Check that the aria-label changes when open
-      expect(chevronIcon).to.have.attribute('aria-label', 'Close dropdown');
+      const chevronIconOpen = el.shadowRoot.querySelector('#trigger-caret svg');
+      expect(chevronIconOpen).to.have.attribute('aria-label', 'Close dropdown');
     });
   });
 

@@ -11,9 +11,10 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './slug.scss?lit';
-import Undo16 from '@carbon/icons/lib/undo/16.js';
 import { SLUG_SIZE, SLUG_KIND } from './defs';
+import Undo16 from '@carbon/icons/es/undo/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Basic slug.
@@ -123,7 +124,7 @@ export default class CDSSlug extends CDSToggleTip {
               size="sm"
               @click="${this._handleClick}">
               <span slot="tooltip-content"> ${revertLabel} </span>
-              ${Undo16({ slot: 'icon' })}
+              ${iconLoader(Undo16, { slot: 'icon' })}
             </cds-icon-button>
           `
         : html`

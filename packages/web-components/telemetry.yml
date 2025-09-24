@@ -95,6 +95,7 @@ collect:
         - is-selectable
         - is-sortable
         - isExpressive
+        - isFluid
         - isSelected
         - kind
         - label
@@ -302,6 +303,8 @@ collect:
         - menu-bar-label
         # cds-header-side-nav-items
         - has-divider
+        # cds-icon
+        - class
         # cds-inline-loading
         - oncds-inline-loading-onsuccess
         - success-delay
@@ -463,7 +466,9 @@ collect:
         - with-row-ai-labels
         - with-row-slugs
         # cds-table-batch-actions
+        - oncds-table-batch-actions-select-all-clicked
         - selected-rows-count
+        - total-rows-count
         # cds-table-expanded-row
         - colspan
         # cds-table-header-cell
@@ -487,6 +492,8 @@ collect:
         - oncds-tabs-selected
         - selected-item-assistive-text
         - selecting-items-assistive-text
+        # cds-tabs-skeleton
+        - contained
         # cds-tearsheet
         - has-close-icon
         - influencer-placement

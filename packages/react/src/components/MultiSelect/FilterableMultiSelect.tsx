@@ -52,8 +52,7 @@ import ListBox, {
 import Checkbox from '../Checkbox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
-import { defaultItemToString } from './tools/itemToString';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
@@ -69,7 +68,7 @@ import {
 } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
-import { isComponentElement } from '../../internal';
+import { defaultItemToString, isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -969,8 +968,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           // NOTE: does not prevent click
           evt.preventDefault();
           // focus on the element as per readonly input behavior
-          if (mergedRef.current !== undefined) {
-            mergedRef.current.focus();
+          if (textInput.current) {
+            textInput.current.focus();
           }
         },
         onKeyDown: (evt: React.KeyboardEvent<HTMLInputElement>) => {

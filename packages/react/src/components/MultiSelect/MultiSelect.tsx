@@ -22,6 +22,7 @@ import React, {
   useContext,
   useLayoutEffect,
   useMemo,
+  useRef,
   useState,
   type ForwardedRef,
   type ReactNode,
@@ -42,7 +43,7 @@ import {
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import { useId } from '../../internal/useId';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
@@ -60,7 +61,7 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
-import { isComponentElement } from '../../internal';
+import { defaultItemToString, isComponentElement } from '../../internal';
 
 const {
   ItemClick,
@@ -78,24 +79,6 @@ const {
   FunctionSetHighlightedIndex,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
-};
-
-const defaultItemToString = <ItemType,>(item?: ItemType): string => {
-  if (typeof item === 'string') {
-    return item;
-  }
-  if (typeof item === 'number') {
-    return `${item}`;
-  }
-  if (
-    item !== null &&
-    typeof item === 'object' &&
-    'label' in item &&
-    typeof item['label'] === 'string'
-  ) {
-    return item['label'];
-  }
-  return '';
 };
 
 interface selectedItemType {
@@ -524,7 +507,12 @@ export const MultiSelect = React.forwardRef(
       },
     });
 
-    const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
+    const toggleButtonRef = useRef<HTMLButtonElement>(null);
+    const mergedRef = mergeRefs<HTMLButtonElement>(
+      toggleButtonProps.ref,
+      ref,
+      toggleButtonRef
+    );
 
     const selectedItems = selectedItem as ItemType[];
 
@@ -690,8 +678,8 @@ export const MultiSelect = React.forwardRef(
             // NOTE: does not prevent click
             evt.preventDefault();
             // focus on the element as per readonly input behavior
-            if (mergedRef.current !== undefined) {
-              mergedRef.current.focus();
+            if (toggleButtonRef.current) {
+              toggleButtonRef.current.focus();
             }
           },
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {

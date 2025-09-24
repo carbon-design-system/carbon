@@ -5,17 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
-import ErrorFilled20 from '@carbon/icons/lib/error--filled/20.js';
-import InformationFilled20 from '@carbon/icons/lib/information--filled/20.js';
-import InformationSquareFilled20 from '@carbon/icons/lib/information--square--filled/20.js';
-import WarningFilled20 from '@carbon/icons/lib/warning--filled/20.js';
-import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20.js';
-import { LitElement, html, svg } from 'lit';
+import { LitElement, html } from 'lit';
+import Close16 from '@carbon/icons/es/close/16.js';
+import CheckmarkFilled20 from '@carbon/icons/es/checkmark--filled/20.js';
+import InformationFilled20 from '@carbon/icons/es/information--filled/20.js';
+import InformationSquareFilled20 from '@carbon/icons/es/information--square--filled/20.js';
+import WarningFilled20 from '@carbon/icons/es/warning--filled/20.js';
+import WarningAltFilled20 from '@carbon/icons/es/warning--alt--filled/20.js';
+import ErrorFilled20 from '@carbon/icons/es/error--filled/20.js';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
@@ -26,7 +27,7 @@ export { NOTIFICATION_KIND, NOTIFICATION_TYPE };
 /**
  * The default icons, keyed by notification kind.
  */
-const iconsForKinds = {
+const iconNamesForKinds = {
   [NOTIFICATION_KIND.SUCCESS]: CheckmarkFilled20,
   [NOTIFICATION_KIND.INFO]: InformationFilled20,
   [NOTIFICATION_KIND.INFO_SQUARE]: InformationSquareFilled20,
@@ -143,7 +144,7 @@ class CDSInlineNotification extends FocusMixin(LitElement) {
         aria-label=${ifDefined(ariaLabel)}
         title=${ifDefined(ariaLabel)}
         @click="${handleClickCloseButton}">
-        ${Close16({
+        ${iconLoader(Close16, {
           class: `${prefix}--${type}-notification__close-icon`,
         })}
       </button>
@@ -173,14 +174,12 @@ class CDSInlineNotification extends FocusMixin(LitElement) {
    */
   protected _renderIcon() {
     const { statusIconDescription, kind, _type: type } = this;
-    const { [kind]: icon } = iconsForKinds;
-    return !icon
+    const IconComponent = iconNamesForKinds[kind];
+    return !IconComponent
       ? undefined
-      : icon({
+      : iconLoader(IconComponent, {
           class: `${prefix}--${type}-notification__icon`,
-          children: !statusIconDescription
-            ? undefined
-            : svg`<title>${statusIconDescription}</title>`,
+          'aria-label': statusIconDescription,
         });
   }
 

@@ -7,15 +7,16 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import CaretLeft16 from '@carbon/icons/lib/caret--left/16.js';
-import CaretRight16 from '@carbon/icons/lib/caret--right/16.js';
 import { prefix } from '../../globals/settings';
+import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
+import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import styles from './pagination.scss?lit';
 import { PAGINATION_SIZE } from './defs';
 import CDSSelect from '../select/select';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import '../button/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -482,7 +483,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             button-class-name="${prevButtonClasses}"
             tooltip-text="${backwardText}"
             @click="${handleClickPrevButton}">
-            ${CaretLeft16({ slot: 'icon' })}
+            ${iconLoader(CaretLeft16, { slot: 'icon' })}
           </cds-button>
           <cds-button
             tooltip-position="top-right"
@@ -492,7 +493,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             button-class-name="${nextButtonClasses}"
             tooltip-text="${forwardText}"
             @click="${handleClickNextButton}">
-            ${CaretRight16({ slot: 'icon' })}
+            ${iconLoader(CaretRight16, { slot: 'icon' })}
           </cds-button>
         </div>
       </div>
