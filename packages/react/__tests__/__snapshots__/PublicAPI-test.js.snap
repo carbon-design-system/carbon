@@ -6314,6 +6314,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7320,6 +7321,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [
