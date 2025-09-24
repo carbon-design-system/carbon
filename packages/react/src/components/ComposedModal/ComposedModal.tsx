@@ -8,6 +8,7 @@
 import React, {
   Children,
   cloneElement,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -460,11 +461,14 @@ const ComposedModalDialog = React.forwardRef<
     }
   }
 
-  function closeModal(evt) {
-    if (!onClose || onClose(evt) !== false) {
-      setIsOpen(false);
-    }
-  }
+  const closeModal = useCallback(
+    (evt) => {
+      if (!onClose || onClose(evt) !== false) {
+        setIsOpen(false);
+      }
+    },
+    [onClose, setIsOpen]
+  );
 
   const modalClass = cx(
     `${prefix}--modal`,
@@ -529,20 +533,34 @@ const ComposedModalDialog = React.forwardRef<
   useEffect(() => {
     if (!open) return;
 
-    const handleEscapeKey = (event) => {
+    const handleEscapeKey = (event: globalThis.KeyboardEvent) => {
       if (match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        closeModal(event);
+        const allModalContainers = document.querySelectorAll(
+          '[role="dialog"][aria-modal="true"]'
+        );
+
+        // Proper visibility check that handles visibility:hidden
+        const visibleModals = Array.from(allModalContainers).filter((modal) => {
+          const styles = window.getComputedStyle(modal);
+          return styles.display !== 'none' && styles.visibility === 'visible';
+        });
+
+        if (visibleModals.length === 0) return;
+
+        const currentModal = innerModal.current;
+        const topModal = visibleModals[visibleModals.length - 1];
+        if (topModal.contains(currentModal) || visibleModals.length === 1) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeModal(event);
+        }
       }
     };
-    document.addEventListener('keydown', handleEscapeKey, true);
 
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
-    };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-  }, [open]);
+    document.addEventListener('keydown', handleEscapeKey, true);
+    return () => document.removeEventListener('keydown', handleEscapeKey, true);
+     
+  }, [open, closeModal]);
 
   useEffect(() => {
     if (!enableDialogElement && !enablePresence && !open && launcherButtonRef) {

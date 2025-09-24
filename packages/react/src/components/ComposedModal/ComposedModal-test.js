@@ -740,6 +740,39 @@ describe.each([
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
     expect(onClose).toHaveBeenCalled();
   });
+
+  it('should close only the topmost modal when ESC is pressed with multiple ComposedModals open', async () => {
+    const onClose1 = jest.fn();
+    const onClose2 = jest.fn();
+
+    render(
+      <>
+        <ComposedModal open={true} onClose={onClose1} data-testid="modal-1">
+          <ModalHeader>First Modal</ModalHeader>
+          <ModalBody>First modal content</ModalBody>
+        </ComposedModal>
+        <ComposedModal
+          open={true}
+          onClose={onClose2}
+          size="sm"
+          data-testid="modal-2">
+          <ModalHeader>Second Modal</ModalHeader>
+          <ModalBody>Second modal content</ModalBody>
+        </ComposedModal>
+      </>
+    );
+
+    // Verify both modals are rendered
+    expect(screen.getByTestId('modal-1')).toBeInTheDocument();
+    expect(screen.getByTestId('modal-2')).toBeInTheDocument();
+
+    // Press ESC key
+    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
+
+    // Only the topmost modal (second modal) should be closed
+    expect(onClose2).toHaveBeenCalledTimes(1);
+    expect(onClose1).not.toHaveBeenCalled();
+  });
 });
 
 describe('state', () => {

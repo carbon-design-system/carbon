@@ -123,6 +123,112 @@ export const Default = (args) => {
 
 Default.argTypes = { ...sharedArgTypes };
 
+export const NestedComposedModalsESCTest = () => {
+  const [modal1Open, setModal1Open] = useState(false);
+  const [modal2Open, setModal2Open] = useState(false);
+  const [escKeyPressLog, setEscKeyPressLog] = useState([]);
+
+  const logEscKeyPress = (modalName) => {
+    setEscKeyPressLog((prev) => [
+      ...prev,
+      `${modalName} received ESC key at ${new Date().toLocaleTimeString()}`,
+    ]);
+  };
+
+  const handleModal1Close = () => {
+    logEscKeyPress('Modal 1');
+    setModal1Open(false);
+  };
+
+  const handleModal2Close = () => {
+    logEscKeyPress('Modal 2');
+    setModal2Open(false);
+  };
+
+  const clearLog = () => {
+    setEscKeyPressLog([]);
+  };
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <h3>Nested ComposedModal ESC Key Test</h3>
+        <p>
+          This story tests the ESC key behavior when multiple ComposedModals are
+          open. Only the topmost modal should close when ESC is pressed.
+        </p>
+      </div>
+
+      <div style={{ marginBottom: '20px' }}>
+        <Button onClick={() => setModal1Open(true)}>Launch Modal 1</Button>
+      </div>
+
+      {/* Modal 1 */}
+      <ComposedModal open={modal1Open} onClose={handleModal1Close}>
+        <ModalHeader label="Nested Modal Test" title="Modal 1 - Base Modal" />
+        <ModalBody>
+          <p style={{ marginBottom: '1rem' }}>
+            This is the first ComposedModal in the stack. You can open a second
+            modal from here.
+          </p>
+          <Button
+            onClick={() => setModal2Open(true)}
+            style={{ marginBottom: '1rem' }}>
+            Open Modal 2
+          </Button>
+          <TextInput
+            data-modal-primary-focus
+            id="modal1-input"
+            labelText="Test Input in Modal 1"
+            placeholder="Type here and press ESC - modal should still close properly"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Close" secondaryButtonText="Cancel" />
+      </ComposedModal>
+
+      {/* Modal 2 */}
+      <ComposedModal open={modal2Open} onClose={handleModal2Close} size="sm">
+        <ModalHeader label="Nested Modal Test" title="Modal 2 - Nested Modal" />
+        <ModalBody>
+          <p style={{ marginBottom: '1rem' }}>
+            This is the second ComposedModal, stacked on top of Modal 1.
+          </p>
+          <p style={{ marginBottom: '1rem', color: '#0f62fe' }}>
+            <strong>Expected behavior:</strong> When you press ESC, only this
+            modal (Modal 2) should close.
+          </p>
+          <Select
+            id="modal2-select"
+            defaultValue="option1"
+            labelText="Test Select">
+            <SelectItem value="option1" text="Option 1" />
+            <SelectItem value="option2" text="Option 2" />
+          </Select>
+        </ModalBody>
+        <ModalFooter primaryButtonText="Close" secondaryButtonText="Cancel" />
+      </ComposedModal>
+    </div>
+  );
+};
+
+NestedComposedModalsESCTest.parameters = {
+  docs: {
+    description: {
+      story: `
+This story demonstrates the ESC key behavior with nested ComposedModals. It tests that:
+
+- Only the topmost (most recently opened) modal closes when ESC is pressed
+- The ESC key press is properly handled and doesn't bubble to close all modals
+- The modal stack is properly maintained when modals are opened and closed
+
+**Note:** While nested modals are not officially supported by Carbon Design System, 
+this functionality is tested to ensure compatibility with partner libraries that 
+depend on this behavior.
+      `,
+    },
+  },
+};
+
 export const FullWidth = () => {
   const [open, setOpen] = useState(true);
   return (
