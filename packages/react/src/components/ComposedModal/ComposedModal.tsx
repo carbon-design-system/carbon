@@ -8,6 +8,7 @@
 import React, {
   Children,
   cloneElement,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -44,6 +45,14 @@ import { Dialog } from '../Dialog';
 import { warning } from '../../internal/warning';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useMergeRefs } from '@floating-ui/react';
+import {
+  ComposedModalPresence,
+  ComposedModalPresenceContext,
+  useExclusiveComposedModalPresenceContext,
+} from './ComposedModalPresence';
+import { useId } from '../../internal/useId';
+import { useComposedModalState } from './useComposedModalState';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -239,403 +248,445 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    */
   slug?: ReactNode;
 }
-
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
-  function ComposedModal(
-    {
-      ['aria-labelledby']: ariaLabelledBy,
-      ['aria-label']: ariaLabel,
-      children,
-      className: customClassName,
-      containerClassName,
-      danger,
-      decorator,
-      isFullWidth,
-      onClose,
-      onKeyDown,
-      open,
-      preventCloseOnClickOutside,
-      selectorPrimaryFocus = '[data-modal-primary-focus]',
-      selectorsFloatingMenus,
-      size,
-      launcherButtonRef,
-      slug,
-      ...rest
-    },
-    ref
-  ) {
-    const prefix = usePrefix();
-    const [isOpen, setIsOpen] = useState<boolean>(!!open);
-    const [wasOpen, setWasOpen] = useState<boolean>(!!open);
-    const innerModal = useRef<HTMLDivElement>(null);
-    const button = useRef<HTMLButtonElement>(null);
-    const startSentinel = useRef<HTMLButtonElement>(null);
-    const endSentinel = useRef<HTMLButtonElement>(null);
-    const onMouseDownTarget: MutableRefObject<Node | null> =
-      useRef<Node | null>(null);
+  function ComposedModal({ open, ...props }, ref) {
+    const id = useId();
 
-    const enableDialogElement = useFeatureFlag('enable-dialog-element');
-    const focusTrapWithoutSentinels = useFeatureFlag(
-      'enable-experimental-focus-wrap-without-sentinels'
+    const enablePresence = useFeatureFlag('enable-presence');
+    const hasPresenceContext = Boolean(
+      useContext(ComposedModalPresenceContext)
     );
-    warning(
-      !(focusTrapWithoutSentinels && enableDialogElement),
-      '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
-        '`enableDialogElement` feature flags are enabled. The native dialog ' +
-        'element handles focus, so `enableDialogElement` must be off for ' +
-        '`focusTrapWithoutSentinels` to have any effect.'
-    );
+    const hasPresenceOptIn = enablePresence || hasPresenceContext;
 
-    // Keep track of modal open/close state
-    // and propagate it to the document.body
-    useEffect(() => {
-      if (!enableDialogElement && open !== wasOpen) {
-        setIsOpen(!!open);
-        setWasOpen(!!open);
-        toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
-      }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-    }, [open, wasOpen, prefix]);
-    // Remove the document.body className on unmount
-    useEffect(() => {
-      if (!enableDialogElement) {
-        return () => {
-          toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
-        };
-      }
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const exclusivePresenceContext =
+      useExclusiveComposedModalPresenceContext(id);
 
-    function handleKeyDown(event) {
-      if (!enableDialogElement) {
-        if (
-          focusTrapWithoutSentinels &&
-          open &&
-          match(event, keys.Tab) &&
-          innerModal.current
-        ) {
-          wrapFocusWithoutSentinels({
-            containerNode: innerModal.current,
-            currentActiveNode: event.target,
-            event: event,
-          });
-        }
-      }
-
-      onKeyDown?.(event);
+    // if opt in and not exclusive to a presence context, wrap with presence
+    if (hasPresenceOptIn && !exclusivePresenceContext) {
+      return (
+        <ComposedModalPresence
+          open={open ?? false}
+          _presenceId={id}
+          // do not auto enable styles for opt-in by feature flag
+          _autoEnablePresence={hasPresenceContext}>
+          <ComposedModalDialog open ref={ref} {...props} />
+        </ComposedModalPresence>
+      );
     }
 
-    function handleOnMouseDown(evt: React.MouseEvent<HTMLDivElement>) {
-      const target = evt.target as Node;
-      onMouseDownTarget.current = target;
-    }
-
-    function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-      const { target } = evt;
-      const mouseDownTarget = onMouseDownTarget.current;
-      evt.stopPropagation();
-
-      const shouldCloseOnOutsideClick =
-        // Passive modals can close on clicks outside the modal when
-        // preventCloseOnClickOutside is undefined or explicitly set to false.
-        (isPassive && !preventCloseOnClickOutside) ||
-        // Non-passive modals have to explicitly opt-in for close on outside
-        // behavior by explicitly setting preventCloseOnClickOutside to false,
-        // rather than just leaving it undefined.
-        (!isPassive && preventCloseOnClickOutside === false);
-
-      if (
-        shouldCloseOnOutsideClick &&
-        target instanceof Node &&
-        !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
-        innerModal.current &&
-        !innerModal.current.contains(target) &&
-        !innerModal.current.contains(mouseDownTarget)
-      ) {
-        closeModal(evt);
-      }
-    }
-
-    function handleBlur({
-      target: oldActiveNode,
-      relatedTarget: currentActiveNode,
-    }) {
-      if (
-        !enableDialogElement &&
-        !focusTrapWithoutSentinels &&
-        open &&
-        currentActiveNode &&
-        oldActiveNode &&
-        innerModal.current
-      ) {
-        const { current: bodyNode } = innerModal;
-        const { current: startSentinelNode } = startSentinel;
-        const { current: endSentinelNode } = endSentinel;
-        wrapFocus({
-          bodyNode,
-          startTrapNode: startSentinelNode,
-          endTrapNode: endSentinelNode,
-          currentActiveNode,
-          oldActiveNode,
-          selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
-        });
-      }
-
-      // Adjust scroll if needed so that element with focus is not obscured by gradient
-      const modalContent = document.querySelector(`.${prefix}--modal-content`);
-      if (
-        !modalContent ||
-        !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
-        !currentActiveNode ||
-        !modalContent.contains(currentActiveNode)
-      ) {
-        return;
-      }
-
-      const lastContent =
-        modalContent.children[modalContent.children.length - 1];
-      const gradientSpacing =
-        modalContent.scrollHeight -
-        (lastContent as HTMLElement).offsetTop -
-        (lastContent as HTMLElement).clientHeight;
-
-      for (const elem of modalContent.children) {
-        if (elem.contains(currentActiveNode)) {
-          const spaceBelow =
-            modalContent.clientHeight -
-            (elem as HTMLElement).offsetTop +
-            modalContent.scrollTop -
-            (elem as HTMLElement).clientHeight;
-          if (spaceBelow < gradientSpacing) {
-            modalContent.scrollTop =
-              modalContent.scrollTop + (gradientSpacing - spaceBelow);
-          }
-          break;
-        }
-      }
-    }
-
-    function closeModal(evt) {
-      if (!onClose || onClose(evt) !== false) {
-        setIsOpen(false);
-      }
-    }
-
-    const modalClass = cx(
-      `${prefix}--modal`,
-      {
-        'is-visible': isOpen,
-        [`${prefix}--modal--danger`]: danger,
-        [`${prefix}--modal--slug`]: slug,
-        [`${prefix}--modal--decorator`]: decorator,
-      },
-      customClassName
-    );
-
-    const containerClass = cx(
-      `${prefix}--modal-container`,
-      size && `${prefix}--modal-container--${size}`,
-      isFullWidth && `${prefix}--modal-container--full-width`,
-      containerClassName
-    );
-
-    // Generate aria-label based on Modal Header label if one is not provided (L253)
-    let generatedAriaLabel;
-    const childrenWithProps = React.Children.toArray(children).map((child) => {
-      switch (true) {
-        case isElement(child) &&
-          child.type === React.createElement(ModalHeader).type: {
-          const el = child as ReactElement<
-            ModalHeaderProps,
-            typeof ModalHeader
-          >;
-          generatedAriaLabel = el.props.label;
-          return React.cloneElement(el, { closeModal });
-        }
-
-        case isElement(child) &&
-          child.type === React.createElement(ModalFooter).type: {
-          const el = child as ReactElement<
-            ModalFooterProps,
-            typeof ModalFooter
-          >;
-          return React.cloneElement(el, {
-            closeModal,
-            inputref: button,
-            danger,
-          });
-        }
-
-        default:
-          return child;
-      }
-    });
-
-    // Modals without a footer are considered passive and carry limitations as
-    // outlined in the design spec.
-    const containsModalFooter = Children.toArray(childrenWithProps).some(
-      (child) => isComponentElement(child, ModalFooter)
-    );
-    const isPassive = !containsModalFooter;
-    warning(
-      !(!isPassive && preventCloseOnClickOutside === false),
-      '`<ComposedModal>` prop `preventCloseOnClickOutside` should not be ' +
-        '`false` when `<ModalFooter>` is present. Transactional, non-passive ' +
-        'Modals should not be dissmissable by clicking outside. ' +
-        'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
-    );
-
-    useEffect(() => {
-      if (!open) return;
-
-      const handleEscapeKey = (event) => {
-        if (match(event, keys.Escape)) {
-          event.preventDefault();
-          event.stopPropagation();
-          closeModal(event);
-        }
-      };
-      document.addEventListener('keydown', handleEscapeKey, true);
-
-      return () => {
-        document.removeEventListener('keydown', handleEscapeKey, true);
-      };
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-    }, [open]);
-
-    useEffect(() => {
-      if (!enableDialogElement && !open && launcherButtonRef) {
-        setTimeout(() => {
-          launcherButtonRef.current?.focus();
-        });
-      }
-    }, [enableDialogElement, open, launcherButtonRef]);
-
-    useEffect(() => {
-      if (!enableDialogElement) {
-        const initialFocus = (focusContainerElement) => {
-          const containerElement = focusContainerElement || innerModal.current;
-          const primaryFocusElement = containerElement
-            ? containerElement.querySelector(
-                danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
-              )
-            : null;
-
-          if (primaryFocusElement) {
-            return primaryFocusElement;
-          }
-
-          return button && button.current;
-        };
-
-        const focusButton = (focusContainerElement) => {
-          const target = initialFocus(focusContainerElement);
-
-          const closeButton = focusContainerElement.querySelector(
-            `.${prefix}--modal-close`
-          );
-
-          if (target) {
-            target.focus();
-          } else if (!target && closeButton) {
-            closeButton?.focus();
-          }
-        };
-
-        if (open && isOpen) {
-          focusButton(innerModal.current);
-        }
-      }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
-    }, [open, selectorPrimaryFocus, isOpen]);
-
-    // AILabel is always size `sm`
-    const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
-    const normalizedDecorator = candidateIsAILabel
-      ? cloneElement(candidate, { size: 'sm' })
-      : null;
-
-    const modalBody = enableDialogElement ? (
-      <Dialog
-        open={open}
-        focusAfterCloseRef={launcherButtonRef}
-        modal
-        className={containerClass}
-        aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
-        aria-labelledby={ariaLabelledBy}>
-        <div ref={innerModal} className={`${prefix}--modal-container-body`}>
-          {slug ? (
-            normalizedDecorator
-          ) : decorator ? (
-            <div className={`${prefix}--modal--inner__decorator`}>
-              {normalizedDecorator}
-            </div>
-          ) : (
-            ''
-          )}
-          {childrenWithProps}
-        </div>
-      </Dialog>
-    ) : (
-      <div
-        className={containerClass}
-        role="dialog"
-        aria-modal="true"
-        aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
-        aria-labelledby={ariaLabelledBy}>
-        {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-        {!focusTrapWithoutSentinels && (
-          <button
-            type="button"
-            ref={startSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button>
-        )}
-        <div ref={innerModal} className={`${prefix}--modal-container-body`}>
-          {slug ? (
-            normalizedDecorator
-          ) : decorator ? (
-            <div className={`${prefix}--modal--inner__decorator`}>
-              {normalizedDecorator}
-            </div>
-          ) : (
-            ''
-          )}
-          {childrenWithProps}
-        </div>
-        {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-        {!focusTrapWithoutSentinels && (
-          <button
-            type="button"
-            ref={endSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button>
-        )}
-      </div>
-    );
-
-    return (
-      <Layer
-        {...rest}
-        level={0}
-        role="presentation"
-        ref={ref}
-        aria-hidden={!open}
-        onBlur={handleBlur}
-        onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-        onMouseDown={composeEventHandlers([
-          rest?.onMouseDown,
-          handleOnMouseDown,
-        ])}
-        onKeyDown={handleKeyDown}
-        className={modalClass}>
-        {modalBody}
-      </Layer>
-    );
+    return <ComposedModalDialog ref={ref} open={open} {...props} />;
   }
 );
+
+const ComposedModalDialog = React.forwardRef<
+  HTMLDivElement,
+  ComposedModalProps
+>(function ComposedModalDialog(
+  {
+    ['aria-labelledby']: ariaLabelledBy,
+    ['aria-label']: ariaLabel,
+    children,
+    className: customClassName,
+    containerClassName,
+    danger,
+    decorator,
+    isFullWidth,
+    onClose,
+    onKeyDown,
+    open: externalOpen,
+    preventCloseOnClickOutside,
+    selectorPrimaryFocus = '[data-modal-primary-focus]',
+    selectorsFloatingMenus,
+    size,
+    launcherButtonRef,
+    slug,
+    ...rest
+  },
+  ref
+) {
+  const prefix = usePrefix();
+
+  const innerModal = useRef<HTMLDivElement>(null);
+  const button = useRef<HTMLButtonElement>(null);
+  const startSentinel = useRef<HTMLButtonElement>(null);
+  const endSentinel = useRef<HTMLButtonElement>(null);
+  const onMouseDownTarget: MutableRefObject<Node | null> = useRef<Node | null>(
+    null
+  );
+
+  const presenceContext = useContext(ComposedModalPresenceContext);
+  const mergedRefs = useMergeRefs([ref, presenceContext?.presenceRef]);
+  const enablePresence =
+    useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
+
+  // always mark as open when mounted with presence
+  const open = externalOpen || enablePresence;
+  const modalState = useComposedModalState(open);
+  const [isOpen, setIsOpen] = presenceContext?.modalState ?? modalState;
+
+  const enableDialogElement = useFeatureFlag('enable-dialog-element');
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
+  warning(
+    !(focusTrapWithoutSentinels && enableDialogElement),
+    '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+      '`enableDialogElement` feature flags are enabled. The native dialog ' +
+      'element handles focus, so `enableDialogElement` must be off for ' +
+      '`focusTrapWithoutSentinels` to have any effect.'
+  );
+
+  // Propagate open/close state to the document.body
+  useEffect(() => {
+    if (!enableDialogElement) {
+      toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
+    }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  }, [open, prefix]);
+  // Remove the document.body className on unmount
+  useEffect(() => {
+    if (!enableDialogElement) {
+      return () => {
+        toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+      };
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  function handleKeyDown(event) {
+    if (!enableDialogElement) {
+      if (
+        focusTrapWithoutSentinels &&
+        open &&
+        match(event, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: event.target,
+          event: event,
+        });
+      }
+    }
+
+    onKeyDown?.(event);
+  }
+
+  function handleOnMouseDown(evt: React.MouseEvent<HTMLDivElement>) {
+    const target = evt.target as Node;
+    onMouseDownTarget.current = target;
+  }
+
+  function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
+    const { target } = evt;
+    const mouseDownTarget = onMouseDownTarget.current;
+    evt.stopPropagation();
+
+    const shouldCloseOnOutsideClick =
+      // Passive modals can close on clicks outside the modal when
+      // preventCloseOnClickOutside is undefined or explicitly set to false.
+      (isPassive && !preventCloseOnClickOutside) ||
+      // Non-passive modals have to explicitly opt-in for close on outside
+      // behavior by explicitly setting preventCloseOnClickOutside to false,
+      // rather than just leaving it undefined.
+      (!isPassive && preventCloseOnClickOutside === false);
+
+    if (
+      shouldCloseOnOutsideClick &&
+      target instanceof Node &&
+      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+      innerModal.current &&
+      !innerModal.current.contains(target) &&
+      !innerModal.current.contains(mouseDownTarget)
+    ) {
+      closeModal(evt);
+    }
+  }
+
+  function handleBlur({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) {
+    if (
+      !enableDialogElement &&
+      !focusTrapWithoutSentinels &&
+      open &&
+      currentActiveNode &&
+      oldActiveNode &&
+      innerModal.current
+    ) {
+      const { current: bodyNode } = innerModal;
+      const { current: startSentinelNode } = startSentinel;
+      const { current: endSentinelNode } = endSentinel;
+      wrapFocus({
+        bodyNode,
+        startTrapNode: startSentinelNode,
+        endTrapNode: endSentinelNode,
+        currentActiveNode,
+        oldActiveNode,
+        selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
+      });
+    }
+
+    // Adjust scroll if needed so that element with focus is not obscured by gradient
+    const modalContent = document.querySelector(`.${prefix}--modal-content`);
+    if (
+      !modalContent ||
+      !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+      !currentActiveNode ||
+      !modalContent.contains(currentActiveNode)
+    ) {
+      return;
+    }
+
+    const lastContent = modalContent.children[modalContent.children.length - 1];
+    const gradientSpacing =
+      modalContent.scrollHeight -
+      (lastContent as HTMLElement).offsetTop -
+      (lastContent as HTMLElement).clientHeight;
+
+    for (const elem of modalContent.children) {
+      if (elem.contains(currentActiveNode)) {
+        const spaceBelow =
+          modalContent.clientHeight -
+          (elem as HTMLElement).offsetTop +
+          modalContent.scrollTop -
+          (elem as HTMLElement).clientHeight;
+        if (spaceBelow < gradientSpacing) {
+          modalContent.scrollTop =
+            modalContent.scrollTop + (gradientSpacing - spaceBelow);
+        }
+        break;
+      }
+    }
+  }
+
+  function closeModal(evt) {
+    if (!onClose || onClose(evt) !== false) {
+      setIsOpen(false);
+    }
+  }
+
+  const modalClass = cx(
+    `${prefix}--modal`,
+    {
+      'is-visible': enablePresence || isOpen,
+      [`${prefix}--modal--enable-presence`]:
+        presenceContext?.autoEnablePresence,
+      [`${prefix}--modal--danger`]: danger,
+      [`${prefix}--modal--slug`]: slug,
+      [`${prefix}--modal--decorator`]: decorator,
+    },
+    customClassName
+  );
+
+  const containerClass = cx(
+    `${prefix}--modal-container`,
+    size && `${prefix}--modal-container--${size}`,
+    isFullWidth && `${prefix}--modal-container--full-width`,
+    containerClassName
+  );
+
+  // Generate aria-label based on Modal Header label if one is not provided (L253)
+  let generatedAriaLabel;
+  const childrenWithProps = React.Children.toArray(children).map((child) => {
+    switch (true) {
+      case isElement(child) &&
+        child.type === React.createElement(ModalHeader).type: {
+        const el = child as ReactElement<ModalHeaderProps, typeof ModalHeader>;
+        generatedAriaLabel = el.props.label;
+        return React.cloneElement(el, { closeModal });
+      }
+
+      case isElement(child) &&
+        child.type === React.createElement(ModalFooter).type: {
+        const el = child as ReactElement<ModalFooterProps, typeof ModalFooter>;
+        return React.cloneElement(el, {
+          closeModal,
+          inputref: button,
+          danger,
+        });
+      }
+
+      default:
+        return child;
+    }
+  });
+
+  // Modals without a footer are considered passive and carry limitations as
+  // outlined in the design spec.
+  const containsModalFooter = Children.toArray(childrenWithProps).some(
+    (child) => isComponentElement(child, ModalFooter)
+  );
+  const isPassive = !containsModalFooter;
+  warning(
+    !(!isPassive && preventCloseOnClickOutside === false),
+    '`<ComposedModal>` prop `preventCloseOnClickOutside` should not be ' +
+      '`false` when `<ModalFooter>` is present. Transactional, non-passive ' +
+      'Modals should not be dissmissable by clicking outside. ' +
+      'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
+  );
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleEscapeKey = (event) => {
+      if (match(event, keys.Escape)) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeModal(event);
+      }
+    };
+    document.addEventListener('keydown', handleEscapeKey, true);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey, true);
+    };
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  }, [open]);
+
+  useEffect(() => {
+    if (!enableDialogElement && !enablePresence && !open && launcherButtonRef) {
+      setTimeout(() => {
+        launcherButtonRef.current?.focus();
+      });
+    }
+  }, [enableDialogElement, enablePresence, open, launcherButtonRef]);
+  // Focus launcherButtonRef on unmount
+  useEffect(() => {
+    const launcherButton = launcherButtonRef?.current;
+    return () => {
+      if (enablePresence && launcherButton) {
+        setTimeout(() => {
+          launcherButton.focus();
+        });
+      }
+    };
+  }, [enablePresence, launcherButtonRef]);
+
+  useEffect(() => {
+    if (!enableDialogElement) {
+      const initialFocus = (focusContainerElement) => {
+        const containerElement = focusContainerElement || innerModal.current;
+        const primaryFocusElement = containerElement
+          ? containerElement.querySelector(
+              danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
+            )
+          : null;
+
+        if (primaryFocusElement) {
+          return primaryFocusElement;
+        }
+
+        return button && button.current;
+      };
+
+      const focusButton = (focusContainerElement) => {
+        const target = initialFocus(focusContainerElement);
+
+        const closeButton = focusContainerElement.querySelector(
+          `.${prefix}--modal-close`
+        );
+
+        if (target) {
+          target.focus();
+        } else if (!target && closeButton) {
+          closeButton?.focus();
+        }
+      };
+
+      if (open && isOpen) {
+        focusButton(innerModal.current);
+      }
+    }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  }, [open, selectorPrimaryFocus, isOpen]);
+
+  // AILabel is always size `sm`
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'sm' })
+    : null;
+
+  const modalBody = enableDialogElement ? (
+    <Dialog
+      open={open}
+      focusAfterCloseRef={launcherButtonRef}
+      modal
+      className={containerClass}
+      aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
+      aria-labelledby={ariaLabelledBy}
+      data-exiting={presenceContext?.isExiting || undefined}>
+      <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--modal--inner__decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
+        {childrenWithProps}
+      </div>
+    </Dialog>
+  ) : (
+    <div
+      className={containerClass}
+      role="dialog"
+      aria-modal="true"
+      aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
+      aria-labelledby={ariaLabelledBy}>
+      {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+      {!focusTrapWithoutSentinels && (
+        <button
+          type="button"
+          ref={startSentinel}
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </button>
+      )}
+      <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--modal--inner__decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
+        {childrenWithProps}
+      </div>
+      {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+      {!focusTrapWithoutSentinels && (
+        <button
+          type="button"
+          ref={endSentinel}
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </button>
+      )}
+    </div>
+  );
+
+  return (
+    <Layer
+      {...rest}
+      level={0}
+      role="presentation"
+      ref={mergedRefs}
+      aria-hidden={!open}
+      onBlur={handleBlur}
+      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
+      onMouseDown={composeEventHandlers([rest?.onMouseDown, handleOnMouseDown])}
+      onKeyDown={handleKeyDown}
+      className={modalClass}
+      data-exiting={presenceContext?.isExiting || undefined}>
+      {modalBody}
+    </Layer>
+  );
+});
 
 ComposedModal.propTypes = {
   /**
