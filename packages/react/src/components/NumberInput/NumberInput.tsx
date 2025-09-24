@@ -25,7 +25,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 import { useControllableState } from '../../internal/useControllableState';
 import {
@@ -38,19 +38,20 @@ import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
 import { AILabel, type AILabelProps } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
-export const translationIds = {
+const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
 type TranslationKey = keyof typeof translationIds;
 
-const defaultTranslations = {
+const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['increment.number']]: 'Increment number',
   [translationIds['decrement.number']]: 'Decrement number',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
 };
 
 type ExcludedAttributes =
@@ -401,7 +402,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       size = 'md',
       slug,
       step = 1,
-      translateWithId: t = (id) => defaultTranslations[id],
+      translateWithId: t = defaultTranslateWithId,
       type = 'number',
       defaultValue = type === 'number' ? 0 : NaN,
       validate,
@@ -1083,7 +1084,7 @@ NumberInput.propTypes = {
   step: PropTypes.number,
 
   /**
-   * Provide custom text for the component for each translation id
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 
