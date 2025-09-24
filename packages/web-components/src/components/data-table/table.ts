@@ -309,7 +309,10 @@ class CDSTable extends HostListenerMixin(LitElement) {
       rows.forEach((e) => {
         const sortId = e.getAttribute('sort-id');
         sortedWithExpanded.push(e);
-        sortedWithExpanded.push(mapping[sortId]);
+        // Only add the expanded row if it exists
+        if (mapping[sortId]) {
+          sortedWithExpanded.push(mapping[sortId]);
+        }
       });
 
       sortedWithExpanded.forEach((e) => {
@@ -699,8 +702,14 @@ class CDSTable extends HostListenerMixin(LitElement) {
   }
 
   updateExpandable() {
+    const { selectorTableExpandedRows } = this.constructor as typeof CDSTable;
+
     this._tableRows.forEach((e, index) => {
-      e.expandable = this.expandable;
+      // Only set expandable=true if this row has an expanded row following it
+      const hasExpandedRow = e.nextElementSibling?.matches(
+        selectorTableExpandedRows
+      );
+      e.expandable = this.expandable && hasExpandedRow;
       e.setAttribute('sort-id', index);
     });
     this._tableHeaderRow.expandable = this.expandable;

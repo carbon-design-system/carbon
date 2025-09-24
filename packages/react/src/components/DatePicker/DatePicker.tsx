@@ -506,6 +506,8 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   const savedOnOpen = useSavedCallback(onOpen);
 
+  const effectiveWarn = warn && !invalid;
+
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
     [`${prefix}--date-picker--light`]: light,
@@ -531,6 +533,8 @@ const DatePicker = React.forwardRef(function DatePicker(
           datePickerType,
           ref: startInputField,
           readOnly,
+          invalid,
+          warn: effectiveWarn,
         });
       }
       if (
@@ -541,18 +545,24 @@ const DatePicker = React.forwardRef(function DatePicker(
           datePickerType,
           ref: endInputField,
           readOnly,
+          invalid,
+          warn: effectiveWarn,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
           readOnly,
+          invalid,
+          warn: effectiveWarn,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
           readOnly,
+          invalid,
+          warn: effectiveWarn,
         });
       }
     }
@@ -1017,9 +1027,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           <div className={`${prefix}--form-requirement`}>{invalidText}</div>
         </>
       );
-    }
-
-    if (warn && !invalid) {
+    } else if (warn) {
       fluidError = (
         <>
           <WarningAltFilled
