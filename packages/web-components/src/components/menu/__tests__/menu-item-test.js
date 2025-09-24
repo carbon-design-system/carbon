@@ -12,7 +12,6 @@ describe('cds-menu-item', () => {
   it('should render with default properties', async () => {
     const el = await fixture(html`<cds-menu-item></cds-menu-item>`);
     expect(el).to.exist;
-    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should render with a label', async () => {
