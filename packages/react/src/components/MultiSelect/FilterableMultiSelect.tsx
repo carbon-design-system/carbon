@@ -828,7 +828,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
-    : null;
+    : candidate;
 
   // exclude the select-all item from the count
   const selectedItemsLength = controlledSelectedItems.filter(
