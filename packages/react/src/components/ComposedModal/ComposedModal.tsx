@@ -559,7 +559,6 @@ const ComposedModalDialog = React.forwardRef<
 
     document.addEventListener('keydown', handleEscapeKey, true);
     return () => document.removeEventListener('keydown', handleEscapeKey, true);
-     
   }, [open, closeModal]);
 
   useEffect(() => {
