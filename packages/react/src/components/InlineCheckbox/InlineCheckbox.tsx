@@ -75,7 +75,7 @@ export interface InlineCheckboxProps {
   title?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
 const InlineCheckbox = React.forwardRef<HTMLInputElement, InlineCheckboxProps>(
   (props, forwardRef) => {
     const {

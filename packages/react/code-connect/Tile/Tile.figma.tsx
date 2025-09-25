@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
 import {
@@ -156,7 +156,7 @@ figma.connect(
     },
     example: ({ titletext, descriptiontext }) => (
       <ExpandableTile
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
         onClick={() => console.log('click')}
         tileCollapsedIconText="Interact to Expand tile"
         tileExpandedIconText="Interact to Collapse tile">
