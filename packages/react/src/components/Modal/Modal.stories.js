@@ -32,6 +32,22 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Checkbox from '../Checkbox';
 import CheckboxGroup from '../CheckboxGroup';
+// remove all of these before merging
+
+import ComposedModal from '../ComposedModal';
+import { ModalHeader } from '../ComposedModal';
+import { ModalBody } from '../ComposedModal';
+import ContainedList from '../ContainedList';
+import ContainedListItem from '../ContainedList';
+import { Time, Edit, Information } from '@carbon/icons-react';
+import { Tile } from '../Tile';
+import { ModalFooter } from '../ComposedModal';
+import Tag from '../Tag';
+import { Grid } from '../Grid';
+import Column from '../Grid';
+import DatePicker from '../DatePicker';
+import TimePicker from '../TimePicker';
+import DatePickerInput from '../DatePickerInput';
 
 export default {
   title: 'Components/Modal',
@@ -47,6 +63,466 @@ const buttons = {
   'One (1)': '1',
   'Two (2)': '2',
   'Three (3)': '3',
+};
+
+// remove this test story before merging
+
+export const test = () => {
+  // --- Inline Styles ---
+  const styles = {
+    BlockoutUpdate_ListItem: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    BlockoutUpdate_Margin_Gap: {
+      marginBottom: '0.5rem',
+    },
+  };
+
+  // --- Mock components ---
+  const TagListInput = ({ tags, setTags, placeholder, allowDuplicates }) => {
+    const [input, setInput] = useState('');
+    const addTag = () => {
+      if (!input.trim()) return;
+      if (!allowDuplicates && tags.includes(input)) return;
+      setTags([...tags, input]);
+      setInput('');
+    };
+    return (
+      <>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.5rem',
+            marginBottom: '0.5rem',
+          }}>
+          {tags.map((tag, idx) => (
+            <Tag key={idx}>{tag}</Tag>
+          ))}
+        </div>
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && addTag()}
+          style={{ marginTop: '0.5rem', width: '100%', padding: '0.5rem' }}
+        />
+      </>
+    );
+  };
+
+  const DismissibleTag = ({ text, onClose }) => (
+    <Tag type="cool-gray" filter onClose={onClose}>
+      {text}
+    </Tag>
+  );
+
+  // --- App ---
+  const blockout = {
+    startTime: new Date(),
+    endTime: new Date(),
+    status: 'Medium',
+    resources: ['Server A', 'Server B'],
+    events: { value: ['Upgrade', 'Patch'] },
+    services: { value: ['DNS', 'HTTP'] },
+  };
+
+  const [open, setOpen] = useState(true);
+  const [formData, setFormData] = useState({
+    startDate: '',
+    startTime: '',
+    endDate: '',
+    endTime: '',
+    resources: [...blockout.resources],
+    comment: '',
+    events: blockout.events.value,
+    services: blockout.services.value,
+  });
+
+  const [isStartChecked, setIsStartChecked] = useState(false);
+  const [isEndChecked, setIsEndChecked] = useState(false);
+  const [isTargetChecked, setIsTargetChecked] = useState(false);
+  const [isEventsChecked, setIsEventsChecked] = useState(false);
+  const [isServicesChecked, setIsServicesChecked] = useState(false);
+
+  const [layoutType, setLayoutType] = useState('new');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingtTargets, setIsFetchingTargets] = useState(false);
+
+  const DATACENTERMODE_OPTIONS = [{ label: 'Mode1', value: 'mode1' }];
+  const [dcMode, setDcMode] = useState(DATACENTERMODE_OPTIONS[0]);
+  const datacenterListToShow = [{ id: 1, name: 'DC1' }];
+  const [selectedDc, setSelectedDc] = useState(datacenterListToShow[0]);
+  const targetDevices = [{ id: 1, name: 'xcr01' }];
+  const [selectedTarget, setSelectedTarget] = useState(targetDevices[0]);
+  const neighbors = [{ to_device_id: 'xcr01', to_port: '1' }];
+
+  const formatDateSafe = (date) => (date ? new Date(date).toUTCString() : '—');
+
+  const onClose = () => setOpen(false);
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  const handleResourceRemove = (index) =>
+    setFormData((prev) => ({
+      ...prev,
+      resources: prev.resources.filter((_, i) => i !== index),
+    }));
+
+  const handleSubmit = () => {
+    alert(JSON.stringify(formData, null, 2));
+    setOpen(false);
+  };
+
+  const handleDcModeChange = (item) => setDcMode(item);
+  const handleDcChange = (item) => setSelectedDc(item);
+  const handleTargetChange = ({ target }) => setSelectedTarget(target.value);
+  const handleNeighborChange = () => {};
+  const onAddSelection = () => alert('Selection Added');
+
+  return (
+    <ComposedModal open={open} onClose={onClose} size="md">
+      <ModalHeader title="Update Blockout" />
+      <ModalBody hasScrollingContent>
+        {/* 🔑 Fix: invisible div to catch focus so Carbon won't scroll */}
+        <div
+          tabIndex="0"
+          style={{ outline: 'none', height: 0, overflow: 'hidden' }}
+        />
+
+        <ContainedList
+          kind="on-page"
+          label={
+            <>
+              <span style={{ marginBottom: '2.7rem' }}>Status</span>
+              <span style={{ marginLeft: '1rem', marginBottom: '2.7rem' }}>
+                <Tag>{blockout.status}</Tag>
+              </span>
+            </>
+          }>
+          {/* Start Time */}
+          <Button />
+          <ContainedListItem
+            style={{ marginBottom: '0.7rem' }}
+            id="startTime"
+            rendericon={Time}
+            action={
+              <Button
+                kind="ghost"
+                size="sm"
+                hasIconOnly
+                rendericon={isStartChecked ? Close : Edit}
+                iconDescription={
+                  isStartChecked ? 'Discard changes' : 'Edit start time'
+                }
+                tabIndex={-1}
+              />
+            }>
+            {!isStartChecked ? (
+              <>
+                <span>Start Time (UTC)</span>
+                <span>{formatDateSafe(blockout.startTime)}</span>
+              </>
+            ) : (
+              <Grid className="mt-2">
+                <Column lg={8}>
+                  <DatePicker datePickerType="single" tabIndex={-1}>
+                    <DatePickerInput
+                      id="edit-start-date"
+                      labelText="Start Date"
+                      placeholder="mm/dd/yyyy"
+                    />
+                  </DatePicker>
+                </Column>
+                <Column lg={8}>
+                  <TimePicker
+                    labelText="Time"
+                    id="start-time"
+                    placeholder="00:00"
+                  />
+                </Column>
+              </Grid>
+            )}
+          </ContainedListItem>
+
+          {/* End Time */}
+          <ContainedListItem
+            style={{ marginBottom: '0.7rem' }}
+            id="endTime"
+            action={
+              <Button
+                kind="ghost"
+                size="sm"
+                hasIconOnly
+                iconDescription={
+                  isEndChecked ? 'Discard changes' : 'Edit end time'
+                }
+                onClick={() => setIsEndChecked(!isEndChecked)}
+              />
+            }>
+            {!isEndChecked ? (
+              <div style={styles.BlockoutUpdate_ListItem}>
+                <span>End Time (UTC)</span>
+                <span>{formatDateSafe(blockout.endTime)}</span>
+              </div>
+            ) : (
+              <Grid className="mt-2">
+                <Column lg={8}>
+                  <DatePicker datePickerType="single">
+                    <DatePickerInput
+                      id="edit-end-date"
+                      labelText="End Date"
+                      placeholder="mm/dd/yyyy"
+                    />
+                  </DatePicker>
+                </Column>
+                <Column lg={8}>
+                  <TimePicker
+                    labelText="Time"
+                    id="end-time"
+                    placeholder="00:00"
+                  />
+                </Column>
+              </Grid>
+            )}
+          </ContainedListItem>
+
+          {/* Targets */}
+          <ContainedListItem
+            style={{ marginBottom: '0.7rem' }}
+            action={
+              <Button
+                kind="ghost"
+                size="sm"
+                hasIconOnly
+                iconDescription={
+                  isTargetChecked ? 'Discard changes' : 'Edit Blockout Targets'
+                }
+                onClick={() => setIsTargetChecked(!isTargetChecked)}
+              />
+            }>
+            <span style={{ display: 'inline-block', marginBottom: '0.65rem' }}>
+              Blockout Targets
+            </span>
+            {!isTargetChecked ? (
+              <Tile>{formData.resources.join(', ')}</Tile>
+            ) : (
+              <>
+                <ContentSwitcher
+                  onChange={(e) => setLayoutType(e.name)}
+                  selectedIndex={layoutType === 'new' ? 0 : 1}>
+                  <Switch name="new" text="New Layout" />
+                  <Switch name="old" text="Classic Layout" />
+                </ContentSwitcher>
+
+                {layoutType === 'old' && (
+                  <TagListInput
+                    tags={formData.resources}
+                    setTags={(tags) =>
+                      setFormData((prev) => ({ ...prev, resources: tags }))
+                    }
+                    placeholder="Type and press Enter"
+                    allowDuplicates={false}
+                  />
+                )}
+
+                {layoutType === 'new' && (
+                  <>
+                    <Tile
+                      style={{
+                        maxHeight: '10.5rem',
+                        overflowY: 'scroll',
+                        marginBottom: '0.65rem',
+                      }}>
+                      {formData.resources.map((item, idx) => (
+                        <DismissibleTag
+                          key={idx}
+                          text={item}
+                          onClose={() => handleResourceRemove(idx)}
+                        />
+                      ))}
+                    </Tile>
+
+                    <Grid style={{ marginBottom: '0.65rem' }}>
+                      <Column lg={4}>
+                        {isLoading ? (
+                          <DropdownSkeleton />
+                        ) : (
+                          <Dropdown
+                            id="dc-mode"
+                            titleText="Blockout Subtype"
+                            label="Blockout Subtype"
+                            items={DATACENTERMODE_OPTIONS}
+                            selectedItem={dcMode}
+                            itemToString={(item) => item.label}
+                            onChange={({ selectedItem }) =>
+                              handleDcModeChange(selectedItem)
+                            }
+                          />
+                        )}
+                      </Column>
+                      <Column lg={4}>
+                        {isLoading ? (
+                          <DropdownSkeleton />
+                        ) : (
+                          <Dropdown
+                            id="dc"
+                            titleText="Datacenter"
+                            label="Select DC"
+                            items={datacenterListToShow}
+                            selectedItem={selectedDc}
+                            itemToString={(item) => item.name}
+                            onChange={({ selectedItem }) =>
+                              handleDcChange(selectedItem)
+                            }
+                          />
+                        )}
+                      </Column>
+                      <Column lg={8}>
+                        {isFetchingtTargets ? (
+                          <DropdownSkeleton />
+                        ) : (
+                          <Dropdown
+                            id="target"
+                            titleText="Select Target"
+                            label="Select Target"
+                            items={targetDevices}
+                            selectedItem={selectedTarget}
+                            itemToString={(item) => item.name}
+                            onChange={({ selectedItem }) =>
+                              handleTargetChange({
+                                target: { value: selectedItem },
+                              })
+                            }
+                            disabled={isFetchingtTargets}
+                          />
+                        )}
+                      </Column>
+                    </Grid>
+
+                    <Grid style={{ marginBottom: '0.65rem' }}>
+                      <Column lg={16}>
+                        <MultiSelect
+                          id="neighbor"
+                          titleText="Select Neighbor"
+                          label="Select Neighbor(s)"
+                          items={neighbors}
+                          itemToString={(item) =>
+                            `${item.to_device_id} ${item.to_port}`
+                          }
+                          onChange={handleNeighborChange}
+                        />
+                      </Column>
+                    </Grid>
+
+                    <Grid>
+                      <Column lg={16}>
+                        <Button
+                          kind="primary"
+                          onClick={onAddSelection}
+                          style={{ width: '100%' }}>
+                          Add Selection
+                        </Button>
+                      </Column>
+                    </Grid>
+                  </>
+                )}
+              </>
+            )}
+          </ContainedListItem>
+
+          {/* Events */}
+          <ContainedListItem
+            style={styles.BlockoutUpdate_Margin_Gap}
+            action={
+              <Button
+                kind="ghost"
+                size="sm"
+                hasIconOnly
+                iconDescription={
+                  isEventsChecked ? 'Discard changes' : 'Edit Events'
+                }
+                onClick={() => setIsEventsChecked(!isEventsChecked)}
+              />
+            }>
+            <span style={{ display: 'inline-block', marginBottom: '0.65rem' }}>
+              Events
+            </span>
+            {!isEventsChecked ? (
+              <Tile>{formData.events.join(', ')}</Tile>
+            ) : (
+              <TagListInput
+                tags={formData.events}
+                setTags={(tags) =>
+                  setFormData((prev) => ({ ...prev, events: tags }))
+                }
+                placeholder="Type and press Enter"
+                allowDuplicates
+              />
+            )}
+          </ContainedListItem>
+
+          {/* Services */}
+          <ContainedListItem
+            style={styles.BlockoutUpdate_Margin_Gap}
+            action={
+              <Button
+                kind="ghost"
+                size="sm"
+                hasIconOnly
+                iconDescription={
+                  isServicesChecked ? 'Discard changes' : 'Edit Services'
+                }
+                onClick={() => setIsServicesChecked(!isServicesChecked)}
+              />
+            }>
+            <span style={{ display: 'inline-block', marginBottom: '0.65rem' }}>
+              Services
+            </span>
+            {!isServicesChecked ? (
+              <Tile>{formData.services.join(', ')}</Tile>
+            ) : (
+              <TagListInput
+                tags={formData.services}
+                setTags={(tags) =>
+                  setFormData((prev) => ({ ...prev, services: tags }))
+                }
+                placeholder="Type and press Enter"
+                allowDuplicates
+              />
+            )}
+          </ContainedListItem>
+
+          {/* Comment */}
+          <ContainedListItem>
+            <span style={{ display: 'inline-block', marginBottom: '0.65rem' }}>
+              Comment (Required)
+            </span>
+            1:30
+            <TextArea
+              enableCounter
+              id="comment"
+              value={formData.comment}
+              onChange={handleChange}
+              placeholder="Type Comment here"
+              rows={8}
+            />
+          </ContainedListItem>
+        </ContainedList>
+      </ModalBody>
+
+      <ModalFooter>
+        <Button kind="secondary" onClick={onClose}>
+          Cancel
+        </Button>
+        <Button kind="primary" onClick={handleSubmit}>
+          Update
+        </Button>
+      </ModalFooter>
+    </ComposedModal>
+  );
 };
 
 export const Default = ({ numberOfButtons, ...args }) => {
