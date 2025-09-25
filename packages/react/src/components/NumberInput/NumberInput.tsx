@@ -35,7 +35,7 @@ import {
 } from '@carbon/utilities';
 import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
-import { AILabel, type AILabelProps } from '../AILabel';
+import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
 const translationIds = {
@@ -706,13 +706,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     // Need to update the internal value when the revert button is clicked
-    let isRevertActive: AILabelProps['revertActive'];
-    if (normalizedDecorator?.type === AILabel) {
-      isRevertActive = normalizedDecorator.props.revertActive;
-    }
+    const isRevertActive = isComponentElement(normalizedDecorator, AILabel)
+      ? normalizedDecorator.props.revertActive
+      : undefined;
 
     useEffect(() => {
       if (!isRevertActive && slug && defaultValue) {

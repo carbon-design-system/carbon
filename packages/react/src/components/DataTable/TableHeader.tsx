@@ -173,7 +173,7 @@ const TableHeader = React.forwardRef(function TableHeader(
   const colHasAILabel = candidateIsAILabel;
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini', ref: AILableRef })
-    : null;
+    : candidate;
 
   const headerLabelClassNames = classNames({
     [`${prefix}--table-header-label`]: true,

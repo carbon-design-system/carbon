@@ -606,7 +606,7 @@ const ComposedModalDialog = React.forwardRef<
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'sm' })
-    : null;
+    : candidate;
 
   const modalBody = enableDialogElement ? (
     <Dialog
