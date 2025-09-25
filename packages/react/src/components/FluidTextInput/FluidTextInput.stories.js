@@ -123,7 +123,7 @@ Default.argTypes = {
   },
 };
 
-export const DefaultWithTooltip = () => (
+export const DefaultWithToggletip = () => (
   <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
 );
 
