@@ -8,7 +8,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
 // @ts-nocheck
 import React from 'react';
-import { preview__FluidTextArea as FluidTextArea } from '@carbon/react';
+import { FluidTextArea } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
