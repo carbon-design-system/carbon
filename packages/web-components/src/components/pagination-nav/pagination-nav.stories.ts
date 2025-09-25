@@ -9,14 +9,13 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import { PAGINATION_NAV_SIZE } from './defs';
-import { prefix } from '../../globals/settings';
 
 export default {
   title: 'Components/PaginationNav',
-  component: `${prefix}-pagination-nav`,
+  component: 'cds-pagination-nav',
   parameters: {
     actions: {
-      handles: [`${prefix}-pagination-nav-changed`],
+      handles: ['cds-pagination-nav-changed'],
     },
   },
   argTypes: {
@@ -63,18 +62,16 @@ const Template = (args) => {
   } = args;
 
   return html`
-    <div style="width: 800px">
-      <cds-pagination-nav
-        ?disable-overflow="${disableOverflow}"
-        items-shown="${ifDefined(itemsShown)}"
-        ?loop="${loop}"
-        page="${ifDefined(page)}"
-        size="${ifDefined(size)}"
-        tooltip-alignment="${ifDefined(tooltipAlignment)}"
-        tooltip-position="${ifDefined(tooltipPosition)}"
-        total-items="${ifDefined(totalItems)}">
-      </cds-pagination-nav>
-    </div>
+    <cds-pagination-nav
+      ?disable-overflow="${disableOverflow}"
+      items-shown="${ifDefined(itemsShown)}"
+      ?loop="${loop}"
+      page="${ifDefined(page)}"
+      size="${ifDefined(size)}"
+      tooltip-alignment="${ifDefined(tooltipAlignment)}"
+      tooltip-position="${ifDefined(tooltipPosition)}"
+      total-items="${ifDefined(totalItems)}">
+    </cds-pagination-nav>
   `;
 };
 
