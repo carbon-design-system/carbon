@@ -47,8 +47,8 @@ stability.
 
 - This change could cause confusion as `preview` is inherently a bit more "open
   to interpretation". We'll need to ground this with new/updated docs, increased
-  communications surrounding the `preview` meaning, and discussions during community events
-  (office hours, DSAG, etc.).
+  communications surrounding the `preview` meaning, and discussions during
+  community events (office hours, DSAG, etc.).
 - Our exports and feature flags and such will bloat a bit. `unstable__Component`
   will need to stick around for backwards compatibility of the new
   `preview__Component`, for instance.
