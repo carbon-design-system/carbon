@@ -38,7 +38,7 @@ which encourages more early and often feedback to guide system decisions.
 
 ## Decision
 
-`Experimental` and `unstable` will no longer be used where possible, and
+`experimental` and `unstable` will no longer be used where possible, and
 `preview` will be used instead. We'll use this change as an opportunity to
 reframe expectations with consumers and communicate our heightened focus on
 stability.
@@ -47,9 +47,9 @@ stability.
 
 - This change could cause confusion as `preview` is inherently a bit more "open
   to interpretation". We'll need to ground this with new/updated docs, increased
-  communication surrounding it's meaning, and discussing during community events
+  communications surrounding the `preview` meaning, and discussions during community events
   (office hours, DSAG, etc.).
 - Our exports and feature flags and such will bloat a bit. `unstable__Component`
   will need to stick around for backwards compatibility of the new
-  `unstable__Component`, for instance.
+  `preview__Component`, for instance.
 - Docs will need updated in the codebase and the site
