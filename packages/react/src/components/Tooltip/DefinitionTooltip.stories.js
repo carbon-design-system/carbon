@@ -17,23 +17,12 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['id', 'tooltipText', 'triggerClassName'],
     },
     docs: {
       page: mdx,
     },
     layout: 'centered',
-  },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
   },
   decorators: [
     (Story) => (
@@ -98,22 +87,9 @@ Default.argTypes = {
       type: 'text',
     },
   },
-  id: {
-    table: { disable: true },
-  },
   openOnHover: {
     control: {
       type: 'boolean',
-    },
-  },
-  tooltipText: {
-    table: {
-      disable: true,
-    },
-  },
-  triggerClassName: {
-    table: {
-      disable: true,
     },
   },
 };
