@@ -195,20 +195,6 @@ function updateClassNames(calendar, prefix) {
 
 export type DatePickerTypes = 'simple' | 'single' | 'range';
 
-export type CalRef = {
-  inline: boolean;
-  disableMobile: boolean;
-  defaultDate: Date;
-  closeOnSelect: (evt: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  mode: 'simple' | 'single' | 'range';
-  allowInput: boolean;
-  dateFormat: string;
-  locale: string;
-  plugins: [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  clickOpens: any;
-};
-
 export interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,

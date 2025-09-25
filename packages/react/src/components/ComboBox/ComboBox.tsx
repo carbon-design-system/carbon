@@ -36,7 +36,12 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import isEqual from 'react-fast-compare';
-import ListBox, { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
+import ListBox, {
+  ListBoxSizePropType,
+  type ListBoxMenuIconTranslationKey,
+  type ListBoxSelectionTranslationKey,
+  type ListBoxSize,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
@@ -45,7 +50,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
-import { TranslateWithId } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
@@ -143,24 +148,13 @@ export interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
-/**
- * Message ids that will be passed to translateWithId().
- * Combination of message ids from ListBox/next/ListBoxSelection.js and
- * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
- * because those components aren't Typescript.  (If you try, TranslationKey
- * ends up just being defined as "string".)
- */
-export type TranslationKey =
-  | 'close.menu'
-  | 'open.menu'
-  | 'clear.all'
-  | 'clear.selection';
-
 export type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
-    TranslateWithId<TranslationKey> {
+    TranslateWithId<
+      ListBoxMenuIconTranslationKey | ListBoxSelectionTranslationKey
+    > {
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
@@ -1424,8 +1418,7 @@ ComboBox.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

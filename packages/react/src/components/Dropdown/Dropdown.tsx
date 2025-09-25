@@ -47,7 +47,7 @@ import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { TranslateWithId } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { useId } from '../../internal/useId';
 import {
   useFloating,
@@ -584,7 +584,6 @@ const Dropdown = React.forwardRef(
           onKeyDown: onKeyDownHandler,
         };
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [readOnly, onKeyDownHandler]);
 
     const menuProps = useMemo(
@@ -900,7 +899,7 @@ Dropdown.propTypes = {
   titleText: PropTypes.node.isRequired,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 
