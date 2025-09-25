@@ -669,7 +669,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'sm' })
-    : null;
+    : candidate;
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>

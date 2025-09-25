@@ -8,7 +8,7 @@
 @use '@carbon/react/scss/components/tile';
 @use '@carbon/react/scss/type';
 
-.experimental-tile {
+.preview-tile {
   @include tile.tile(
     $enable-experimental-tile-contrast: true,
     $enable-v12-tile-radio-icons: true

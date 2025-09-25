@@ -50,7 +50,7 @@ export const EnablePresence = (args) => {
           Launch composed modal
         </Button>
         <ClassPrefix prefix="presence">
-          <div className="experimental-modal-with-presence">
+          <div className="preview-modal-with-presence">
             <ComposedModal
               {...args}
               open={open}
