@@ -51,5 +51,5 @@ stability.
   (office hours, DSAG, etc.).
 - Our exports and feature flags and such will bloat a bit. `unstable__Component`
   will need to stick around for backwards compatibility of the new
-  `unstable__Component`, for instance.
+  `preview__Component`, for instance.
 - Docs will need updated in the codebase and the site
