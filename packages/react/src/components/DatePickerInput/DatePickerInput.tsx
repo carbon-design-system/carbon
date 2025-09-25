@@ -257,7 +257,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
-    : null;
+    : candidate;
 
   return (
     <div className={containerClasses}>
@@ -295,7 +295,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
           </Text>
         </>
       )}
-      {warn && (
+      {warn && !invalid && (
         <>
           {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
           <Text as="div" className={`${prefix}--form-requirement`}>

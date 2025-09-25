@@ -30,6 +30,8 @@ import React, {
 import ListBox, {
   ListBoxSizePropType,
   ListBoxTypePropType,
+  type ListBoxMenuIconTranslationKey,
+  type ListBoxSelectionTranslationKey,
   type ListBoxSize,
   type ListBoxType,
 } from '../ListBox';
@@ -90,7 +92,7 @@ interface OnChangeData<ItemType> {
 export interface MultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
     TranslateWithId<
-      'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
+      ListBoxMenuIconTranslationKey | ListBoxSelectionTranslationKey
     > {
   /**
    * **Experimental**: Will attempt to automatically align the floating
@@ -695,7 +697,7 @@ export const MultiSelect = React.forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     const itemsSelectedText =
       selectedItems.length > 0 &&
@@ -1132,7 +1134,7 @@ MultiSelect.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 
