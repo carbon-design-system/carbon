@@ -32,6 +32,7 @@ import {
   NAVIGATION_DIRECTION,
 } from './defs';
 import CDSDropdownItem from './dropdown-item';
+import CDSAILabel from '../ai-label/ai-label';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -141,21 +142,32 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param event The event.
    */
-  protected _handleClickInner(event: MouseEvent) {
+  protected _handleClickInner(event: PointerEvent) {
+    const { target } = event;
+    const constructor = this.constructor as typeof CDSDropdown;
+    const clickedItem = (target as Element).closest(
+      constructor.selectorItem
+    ) as CDSDropdownItem | null;
+
     if (this.readOnly) {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-    if (this.shadowRoot!.contains(event.target as Node)) {
+    // If user interacts with ai-label, close the dropdown.
+    if (event.target instanceof CDSAILabel) {
+      this._handleUserInitiatedToggle(false);
+      return;
+    }
+
+    // If trigger inside the shadow root is clicked, toggle open/close.
+    if (this.shadowRoot && this.shadowRoot.contains(target as Node)) {
       this._handleUserInitiatedToggle();
-    } else {
-      const item = (event.target as Element).closest(
-        (this.constructor as typeof CDSDropdown).selectorItem
-      ) as CDSDropdownItem;
-      if (this.contains(item)) {
-        this._handleUserInitiatedSelectItem(item);
-      }
+      return;
+    }
+
+    // Handle item selection if a valid item is clicked from the dropdown.
+    if (clickedItem && this.contains(clickedItem) && !clickedItem.disabled) {
+      this._handleUserInitiatedSelectItem(clickedItem);
     }
   }
 
@@ -164,13 +176,18 @@ class CDSDropdown extends ValidityMixin(
    */
   protected _handleKeydownInner(event: KeyboardEvent) {
     const { key } = event;
-    const action = (this.constructor as typeof CDSDropdown).getAction(key);
+    const constructor = this.constructor as typeof CDSDropdown;
+    const action = constructor.getAction(key);
+
+    if (event.target instanceof CDSAILabel) {
+      this._handleUserInitiatedToggle(false);
+      return;
+    }
+
     if (!this.open) {
       switch (action) {
         case DROPDOWN_KEYBOARD_ACTION.NAVIGATING:
           this._handleUserInitiatedToggle(true);
-          // If this menu gets open with an arrow key, reset the highlight
-          this._clearHighlight();
           break;
         default:
           break;
@@ -196,6 +213,12 @@ class CDSDropdown extends ValidityMixin(
   protected _handleKeypressInner(event: KeyboardEvent) {
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
+
+    if (event.target instanceof CDSAILabel) {
+      this._handleUserInitiatedToggle(false);
+      return;
+    }
+
     if (!this.open) {
       switch (action) {
         case DROPDOWN_KEYBOARD_ACTION.TRIGGERING:
@@ -313,6 +336,7 @@ class CDSDropdown extends ValidityMixin(
    * @param [force] If specified, forces the open state to the given one.
    */
   protected _handleUserInitiatedToggle(force = !this.open) {
+    const constructor = this.constructor as typeof CDSDropdown;
     const { eventBeforeToggle, eventToggle } = this
       .constructor as typeof CDSDropdown;
 
@@ -328,17 +352,13 @@ class CDSDropdown extends ValidityMixin(
     if (!disabled) {
       if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
         this.open = force;
-        if (!this.open) {
-          forEach(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSDropdown).selectorItemHighlighted
-            ),
-            (item) => {
-              (item as CDSDropdownItem).highlighted = false;
-            }
-          );
-        }
-        this.requestUpdate();
+        this._clearHighlight();
+        const itemToHighlight = this.querySelector(
+          constructor.selectorItemSelected
+        );
+
+        itemToHighlight?.setAttribute('highlighted', '');
+
         this.dispatchEvent(new CustomEvent(eventToggle, init));
       }
     }

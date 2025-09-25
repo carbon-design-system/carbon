@@ -150,22 +150,28 @@ class CDSMultiSelect extends CDSDropdown {
       .join(',');
   }
 
-  protected _handleClickInner(event: MouseEvent) {
-    const clickedItem = (event.target as HTMLElement).closest(
+  protected _handleClickInner(event: PointerEvent) {
+    const target = event.target as HTMLElement;
+
+    // Try to detect if a multi-select item was clicked
+    const clickedItem = target.closest(
       `${prefix}-multi-select-item`
     ) as CDSMultiSelectItem | null;
-    if (
-      this._selectionButtonNode?.contains(event.target as Node) &&
-      !this.readOnly
-    ) {
+
+    // CASE 1: User clicked the selection button (and component is not read-only)
+    if (this._selectionButtonNode?.contains(target) && !this.readOnly) {
       this._handleUserInitiatedSelectItem();
       if (this.filterable) {
         this._filterInputNode.focus();
       } else {
         this._triggerNode.focus();
       }
-    } else if (clickedItem && !clickedItem.hasAttribute('disabled')) {
-      // Handle focus highlight
+      return;
+    }
+
+    // CASE 2: User clicked on a valid multi-select item
+    if (clickedItem && !clickedItem.hasAttribute('disabled')) {
+      // Remove highlights from all items
       const allItems = this.querySelectorAll(`${prefix}-multi-select-item`);
       allItems.forEach((el) => el.removeAttribute('highlighted'));
       clickedItem.setAttribute('highlighted', '');
@@ -174,17 +180,21 @@ class CDSMultiSelect extends CDSDropdown {
       if (this.filterable) {
         this._filterInputNode.focus();
       }
-    } else if (this._clearButtonNode?.contains(event.target as Node)) {
+      return;
+    }
+
+    // CASE 3: User clicked the clear button
+    if (this._clearButtonNode?.contains(target)) {
       this._handleUserInitiatedClearInput();
-    } else if (
-      !(event.target as HTMLElement)?.matches(
-        (this.constructor as typeof CDSMultiSelect).aiLabelItem
-      ) &&
-      // remove reference to slug in v12
-      !(event.target as HTMLElement)?.matches(
-        (this.constructor as typeof CDSMultiSelect).slugItem
-      )
-    ) {
+      return;
+    }
+
+    // CASE 4: Fallback — delegate handling to parent (super) if not aiLabel/slug item
+    const isLabelOrSlugItem =
+      target.matches((this.constructor as typeof CDSMultiSelect).aiLabelItem) ||
+      target.matches((this.constructor as typeof CDSMultiSelect).slugItem);
+
+    if (!isLabelOrSlugItem) {
       super._handleClickInner(event);
       if (this.filterable) {
         this._filterInputNode.focus();
