@@ -28,21 +28,6 @@ export default {
     ToggletipContent,
     ToggletipActions,
   },
-  argTypes: {
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: { disable: true },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     docs: {
       page: mdx,

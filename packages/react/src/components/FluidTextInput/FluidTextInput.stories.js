@@ -25,6 +25,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['isPassword'],
+    },
   },
   subcomponents: {
     FluidTextInputSkeleton,
@@ -53,7 +56,6 @@ export const Default = (args) => (
 
 Default.args = {
   defaultWidth: 300,
-  className: 'test-class',
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText:
@@ -92,11 +94,6 @@ Default.argTypes = {
   invalidText: {
     control: {
       type: 'text',
-    },
-  },
-  isPassword: {
-    table: {
-      disable: true,
     },
   },
   disabled: {
