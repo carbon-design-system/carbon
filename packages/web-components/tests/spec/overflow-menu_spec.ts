@@ -10,7 +10,7 @@ import { render } from 'lit';
 import CDSOverflowMenu from '../../src/components/overflow-menu/overflow-menu';
 import { Playground } from '../../src/components/overflow-menu/overflow-menu.stories';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 const template = (props?: any) =>
   Playground({
     'cds-overflow-menu': props,
@@ -23,9 +23,9 @@ describe('cds-overflow-menu', () => {
     beforeEach(async () => {
       render(template({ hasBody: false }), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       document.querySelector('cds-overflow-menu')!.innerHTML = '';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-overflow-menu')!;
     });
 
@@ -51,9 +51,9 @@ describe('cds-overflow-menu', () => {
     beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-overflow-menu')!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       bodyNode = elem.querySelector('cds-overflow-menu-body')!;
     });
 
@@ -149,7 +149,7 @@ describe('cds-overflow-menu', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });
