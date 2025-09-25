@@ -18,6 +18,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['isPassword'],
+    },
   },
 };
 
@@ -34,7 +37,6 @@ export const Default = (args) => (
 
 Default.args = {
   defaultWidth: 300,
-  className: 'test-class',
   placeholder: 'Placeholder text',
   showPasswordLabel: 'Show password label',
   hidePasswordLabel: 'Hide password label',
@@ -82,11 +84,6 @@ Default.argTypes = {
   invalidText: {
     control: {
       type: 'text',
-    },
-  },
-  isPassword: {
-    table: {
-      disable: true,
     },
   },
   onTogglePasswordVisibility: {

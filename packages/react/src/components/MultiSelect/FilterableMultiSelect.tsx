@@ -44,6 +44,8 @@ import {
 import ListBox, {
   ListBoxSizePropType,
   ListBoxTypePropType,
+  type ListBoxMenuIconTranslationKey,
+  type ListBoxSelectionTranslationKey,
   type ListBoxSize,
   type ListBoxType,
 } from '../ListBox';
@@ -64,7 +66,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { TranslateWithId } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 
@@ -94,23 +96,12 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
-/**
- * Message ids that will be passed to translateWithId().
- * Combination of message ids from ListBox/next/ListBoxSelection.js and
- * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
- * because those components aren't Typescript.  (If you try, TranslationKey
- * ends up just being defined as "string".)
- */
-type TranslationKey =
-  | 'close.menu'
-  | 'open.menu'
-  | 'clear.all'
-  | 'clear.selection';
-
 export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
     React.RefAttributes<HTMLDivElement>,
-    TranslateWithId<TranslationKey> {
+    TranslateWithId<
+      ListBoxSelectionTranslationKey | ListBoxMenuIconTranslationKey
+    > {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -837,7 +828,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
-    : null;
+    : candidate;
 
   // exclude the select-all item from the count
   const selectedItemsLength = controlledSelectedItems.filter(
@@ -1351,7 +1342,7 @@ FilterableMultiSelect.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

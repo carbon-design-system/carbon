@@ -33,28 +33,8 @@ export default {
     docs: {
       page: mdx,
     },
-  },
-};
-
-const sharedArgTypes = {
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  relative: {
-    table: {
-      disable: true,
+    controls: {
+      exclude: ['relative'],
     },
   },
 };
@@ -91,8 +71,6 @@ const DefaultStory = (props) => {
     </Popover>
   );
 };
-
-DefaultStory.argTypes = { ...sharedArgTypes };
 
 export const TabTip = (args) => {
   const [open, setOpen] = useState(true);
@@ -186,7 +164,6 @@ export const TabTip = (args) => {
 };
 
 TabTip.argTypes = {
-  ...sharedArgTypes,
   align: { control: false },
   autoAlign: { control: false },
 };

@@ -15,7 +15,7 @@ import {
 } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { clamp } from '../../internal/clamp';
@@ -25,21 +25,26 @@ type TooltipAlignment = 'start' | 'center' | 'end';
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 
 const translationIds = {
-  'carbon.pagination-nav.next': 'Next',
-  'carbon.pagination-nav.previous': 'Previous',
-  'carbon.pagination-nav.item': 'Page',
-  'carbon.pagination-nav.active': 'Active',
-  'carbon.pagination-nav.of': 'of',
+  'carbon.pagination-nav.next': 'carbon.pagination-nav.next',
+  'carbon.pagination-nav.previous': 'carbon.pagination-nav.previous',
+  'carbon.pagination-nav.item': 'carbon.pagination-nav.item',
+  'carbon.pagination-nav.active': 'carbon.pagination-nav.active',
+  'carbon.pagination-nav.of': 'carbon.pagination-nav.of',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
 type TranslationKey = keyof typeof translationIds;
 
-function translateWithId(messageId: string): string {
-  return translationIds[messageId];
-}
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.pagination-nav.next']]: 'Next',
+  [translationIds['carbon.pagination-nav.previous']]: 'Previous',
+  [translationIds['carbon.pagination-nav.item']]: 'Page',
+  [translationIds['carbon.pagination-nav.active']]: 'Active',
+  [translationIds['carbon.pagination-nav.of']]: 'of',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 // https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state
 function usePrevious(value: number) {
@@ -165,7 +170,7 @@ function PaginationItem({
   page,
   isActive,
   onClick,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
 }: PaginationItemProps) {
   const prefix = usePrefix();
   const itemLabel = t('carbon.pagination-nav.item');
@@ -223,7 +228,7 @@ function PaginationOverflow({
   onSelect,
 
   disableOverflow,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
 }: PaginationOverflowProps) {
   const prefix = usePrefix();
 
@@ -365,7 +370,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       size = 'lg',
       tooltipAlignment,
       tooltipPosition,
-      translateWithId: t = translateWithId,
+      translateWithId: t = defaultTranslateWithId,
       ...rest
     },
     ref
@@ -650,8 +655,7 @@ PaginationItem.propTypes = {
   page: PropTypes.number,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
@@ -673,8 +677,7 @@ PaginationOverflow.propTypes = {
   onSelect: PropTypes.func,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
@@ -735,8 +738,7 @@ PaginationNav.propTypes = {
   totalItems: PropTypes.number,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
