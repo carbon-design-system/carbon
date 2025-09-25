@@ -38,7 +38,7 @@ which encourages more early and often feedback to guide system decisions.
 
 ## Decision
 
-`Experimental` and `unstable` will no longer be used where possible, and
+`experimental` and `unstable` will no longer be used where possible, and
 `preview` will be used instead. We'll use this change as an opportunity to
 reframe expectations with consumers and communicate our heightened focus on
 stability.
