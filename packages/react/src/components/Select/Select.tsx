@@ -52,7 +52,7 @@ export interface SelectProps
   /**
    * Optionally provide the default value of the `<select>`
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   defaultValue?: any;
 
   /**
@@ -175,7 +175,7 @@ const Select = React.forwardRef(
     const selectInstanceId = useId();
 
     interface SelectItemProps {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       value: any;
       text: string;
     }

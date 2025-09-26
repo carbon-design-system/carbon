@@ -539,7 +539,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
 
   useEffect(() => {

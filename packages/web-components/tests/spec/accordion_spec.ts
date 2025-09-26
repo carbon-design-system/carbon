@@ -24,27 +24,27 @@ describe('cds-accordion', () => {
     });
 
     it('Should open and close the item', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       item!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(item!.open).toBe(true);
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       item!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(item!.open).toBe(false);
     });
 
     it('Should fire cds-accordion-item-beingtoggled/cds-accordion-item-toggled events upon opening', async () => {
       const spyBeforeToggle = jasmine.createSpy('before toggle');
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(item!, 'cds-accordion-item-beingtoggled', spyBeforeToggle);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       item!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
       expect(spyBeforeToggle).toHaveBeenCalled();
@@ -53,20 +53,20 @@ describe('cds-accordion', () => {
 
     it('Should support preventing modal from being opened upon user gesture', async () => {
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(item!, 'cds-accordion-item-beingtoggled', (event) => {
         event.preventDefault();
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       item!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
       expect(spyAfterToggle).not.toHaveBeenCalled();
     });
 
     afterEach(async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       await render(undefined!, document.body);
       events.reset();
     });

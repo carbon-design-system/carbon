@@ -18,7 +18,7 @@ import { useCallback, useMemo, type ForwardedRef, type Ref } from 'react';
 export const useMergedRefs = <T>(
   refs: (ForwardedRef<T> | undefined)[]
 ): Ref<T> => {
-  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   const memoizedRefs = useMemo(() => refs, refs);
   return useCallback(
     (node: T | null) => {

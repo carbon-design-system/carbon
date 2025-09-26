@@ -216,7 +216,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onClose?(event: MouseEvent): void | boolean;
 
   /**
@@ -341,7 +341,7 @@ const ComposedModalDialog = React.forwardRef<
     if (!enableDialogElement) {
       toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open, prefix]);
   // Remove the document.body className on unmount
   useEffect(() => {
@@ -522,7 +522,7 @@ const ComposedModalDialog = React.forwardRef<
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
 
   useEffect(() => {
@@ -579,7 +579,7 @@ const ComposedModalDialog = React.forwardRef<
         focusButton(innerModal.current);
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open, selectorPrimaryFocus, isOpen]);
 
   // AILabel is always size `sm`
