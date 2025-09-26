@@ -1006,6 +1006,44 @@ describe.each([
     expect(onRequestClose).toHaveBeenCalled();
   });
 
+  it('should close only the topmost modal when ESC is pressed with multiple modals open', async () => {
+    const onClose1 = jest.fn();
+    const onClose2 = jest.fn();
+
+    render(
+      <>
+        <Modal
+          open={true}
+          onRequestClose={onClose1}
+          modalHeading="First Modal"
+          primaryButtonText="Close"
+          data-testid="modal-1">
+          <p>First modal content</p>
+        </Modal>
+        <Modal
+          open={true}
+          onRequestClose={onClose2}
+          modalHeading="Second Modal"
+          primaryButtonText="Close"
+          size="sm"
+          data-testid="modal-2">
+          <p>Second modal content</p>
+        </Modal>
+      </>
+    );
+
+    // Verify both modals are rendered
+    expect(screen.getByTestId('modal-1')).toBeInTheDocument();
+    expect(screen.getByTestId('modal-2')).toBeInTheDocument();
+
+    // Press ESC key
+    await userEvent.keyboard('{Escape}');
+
+    // Only the topmost modal (second modal) should be closed
+    expect(onClose2).toHaveBeenCalledTimes(1);
+    expect(onClose1).not.toHaveBeenCalled();
+  });
+
   it('should handle onClick events', async () => {
     const onClick = jest.fn();
     render(
