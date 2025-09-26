@@ -16,13 +16,17 @@
 @use '@carbon/styles/scss/components/tabs/index';
 @use '@carbon/styles/scss/components/tabs/vars' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout';
+@use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/utilities/skeleton' as *;
 
 $inset-transition: inset 110ms motion(standard, productive);
 
 :host(#{$prefix}-tabs),
 :host(#{$prefix}-tabs-skeleton) {
   @extend .#{$prefix}--tabs;
-
+  @include emit-layout-tokens();
   .#{$prefix}--tabs-nav-content-container {
     position: relative;
     overflow: scroll;
@@ -73,7 +77,8 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tab) {
+:host(#{$prefix}-tab),
+:host(#{$prefix}-tab-skeleton) {
   display: flex;
   background: transparent;
   inline-size: 100%;
@@ -254,10 +259,51 @@ $inset-transition: inset 110ms motion(standard, productive);
   .#{$prefix}--tabs__nav-link {
     @include skeleton;
 
-    block-size: $spacing-04;
+    display: flex;
+    align-items: center;
+    padding: 0 layout.density('padding-inline');
+    background-color: transparent;
+    block-size: 100%;
+    border-block-end: 2px solid $skeleton-element;
+    inline-size: 10rem;
 
-    inline-size: rem(75px);
+    &::before {
+      display: none;
+      content: none;
+    }
   }
+
+  .#{$prefix}--tabs__nav-item {
+    @include reset;
+
+    position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+  }
+
+  span {
+    @include skeleton;
+
+    display: block;
+    block-size: convert.to-rem(14px);
+    inline-size: 100%;
+  }
+}
+
+:host(#{$prefix}-tab-skeleton) {
+  @extend .#{$prefix}--tabs__nav-item;
+}
+
+:host(#{$prefix}-tabs-skeleton) {
+  @extend .#{$prefix}--tabs;
+  @extend .#{$prefix}--skeleton;
+}
+
+:host(#{$prefix}-tabs-skeleton[contained]) {
+  @extend .#{$prefix}--tabs--contained;
 }
 
 :host(#{$prefix}-tab-skeleton:first-of-type) {

@@ -47,12 +47,50 @@ means that:
 - `enable-experimental-focus-wrap-without-sentinels` has no effect and can be
   removed when using `enable-dialog-element`
 
+## `enable-presence`
+
+`Modal` supports the `enable-presence` feature flag. When enabled, Modal
+will not be mounted until opened and unmounted when closed. CSS transitions are replaced with animations.
+
 ### Enabling the flag
 
 To enable the flag, use the `FeatureFlags` component and set the prop:
 
 ```js
-<FeatureFlags enableDialogElement>
+<FeatureFlags enableDialogElement enablePresence>
   <Modal ... />
 </FeatureFlags>
+```
+
+## `enable-presence`
+
+`Modal` supports the `enable-presence` feature flag. When enabled,
+Modal will not mount until it's opened and unmount when it's closed.
+This helps to stay in sync with the React lifecycle.
+
+This means that:
+
+- The DOM no longer includes `Modal` and its children in the closed state
+- `Modal`, all of its children and their hooks will mount/unmount on open/close
+- Enter & exit animations change from CSS transitions to CSS animations
+
+Note: Only `Modal` and its children are unmounted/mounted.
+Use `ModalPresence` to shift the presence boundary to a higher level, if necessary.
+
+### Enabling the flag
+
+To enable the flag, use the `FeatureFlags` component and set the prop:
+
+```js
+<FeatureFlags enablePresence>
+  <ComposedModal ... />
+</FeatureFlags>
+```
+
+Or auto opt in by using `ModalPresence` to shift the presence boundary to a different level:
+
+```js
+<ModalPresence open={open}>
+  <ComposedModal ... />
+</ModalPresence>
 ```

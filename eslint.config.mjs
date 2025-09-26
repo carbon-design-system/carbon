@@ -6,6 +6,8 @@ import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import testingLibrary from 'eslint-plugin-testing-library';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 // TODO: There is an `eslintConfig` reference in `package.json`. Investigate
 // whether it should be moved to this file or deleted.
@@ -54,6 +56,7 @@ export default tseslint.config([
       'jsx-a11y': jsxA11y,
       react: react,
       'react-hooks': reactHooks,
+      jsdoc: jsdoc,
     },
     settings: {
       react: {
@@ -71,6 +74,19 @@ export default tseslint.config([
       ...jsxA11y.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
+      // ...jsdoc.configs['flat/recommended'].rules, // Too noisy at the moment. Uncomment it to enable it.
+    },
+  },
+  {
+    files: [
+      '**/__tests__/**/*.{js,jsx,ts,tsx}',
+      '**/*.{test,spec}.{js,jsx,ts,tsx}',
+    ],
+    plugins: {
+      'testing-library': testingLibrary,
+    },
+    rules: {
+      ...testingLibrary.configs.react.rules,
     },
   },
   {

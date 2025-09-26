@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['aria-label', 'hasFocus'],
+    },
   },
   args: {
     kind: 'error',
@@ -27,6 +30,7 @@ export default {
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
+    onActionButtonClick: action('onActionButtonClick'),
   },
 };
 
@@ -35,16 +39,6 @@ export const Default = (args) => (
 );
 
 Default.argTypes = {
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
   onActionButtonClick: {
     action: 'onActionButtonClick',
   },
@@ -53,21 +47,6 @@ Default.argTypes = {
   },
   onCloseButtonClick: {
     action: 'onCloseButtonClick',
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  hasFocus: {
-    table: {
-      disable: true,
-    },
   },
 };
 Default.args = {

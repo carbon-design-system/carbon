@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { NumberInput } from '../NumberInput';
 import { usePrefix } from '../../internal/usePrefix';
@@ -14,7 +14,8 @@ import { FormContext } from '../FluidForm/FormContext';
 import { type NumberFormatOptions } from '@carbon/utilities';
 import { NumberFormatOptionsPropType } from '../NumberInput/NumberFormatPropTypes';
 
-export interface FluidNumberInputProps {
+export interface FluidNumberInputProps
+  extends Pick<ComponentProps<typeof NumberInput>, 'translateWithId'> {
   /**
    * `true` to allow empty string.
    */
@@ -138,11 +139,6 @@ export interface FluidNumberInputProps {
    * Specify how much the values should increase/decrease upon clicking on up/down button
    */
   step?: number;
-
-  /**
-   * Provide custom text for the component for each translation id
-   */
-  translateWithId?: (id: string) => string;
 
   /**
    * **Experimental**: Specify if the input should be of type text or number.
@@ -313,7 +309,7 @@ FluidNumberInput.propTypes = {
   step: PropTypes.number,
 
   /**
-   * Provide custom text for the component for each translation id
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

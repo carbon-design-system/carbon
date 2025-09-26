@@ -38,9 +38,13 @@ class CDSToastNotification extends CDSInlineNotification {
         <div class="${prefix}--${type}-notification__subtitle">
           ${subtitle}<slot name="subtitle"></slot>
         </div>
-        <div class="${prefix}--${type}-notification__caption">
-          ${caption}<slot name="caption"></slot>
-        </div>
+        ${caption || this.querySelector('[slot="caption"]')
+          ? html`
+              <div class="${prefix}--${type}-notification__caption">
+                ${caption}<slot name="caption"></slot>
+              </div>
+            `
+          : null}
         <slot></slot>
       </div>
     `;

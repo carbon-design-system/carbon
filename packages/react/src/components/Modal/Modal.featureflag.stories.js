@@ -23,11 +23,9 @@ export default {
   title: 'Components/Modal/Feature Flags',
   component: Modal,
   tags: ['!autodocs'],
-  argTypes: {
-    launcherButtonRef: {
-      table: {
-        disable: true,
-      },
+  parameters: {
+    controls: {
+      exclude: ['launcherButtonRef'],
     },
   },
 };
@@ -49,7 +47,7 @@ export const EnableDialogElement = () => {
         }>
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
         <ClassPrefix prefix="dialog-refactor">
-          <div className="experimental-modal">
+          <div className="preview-modal">
             <Modal
               open={open}
               onRequestClose={() => setOpen(false)}
@@ -118,14 +116,14 @@ export const EnableExperimentalFocusWrapWithoutSentinels = () => {
           <span>
             This story is rendered with{' '}
             <LinkTo title="Getting Started/Feature Flags" name="Overview">
-              enable-experimental-focus-wrap-without-sentinels
+              enable-preview-focus-wrap-without-sentinels
             </LinkTo>{' '}
             enabled
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
         <ClassPrefix prefix="dialog-refactor">
-          <div className="experimental-modal">
+          <div className="preview-modal">
             <Modal
               open={open}
               onRequestClose={() => setOpen(false)}
@@ -183,4 +181,4 @@ export const EnableExperimentalFocusWrapWithoutSentinels = () => {
   );
 };
 EnableExperimentalFocusWrapWithoutSentinels.storyName =
-  'enable-experimental-focus-wrap-without-sentinels';
+  'enable-preview-focus-wrap-without-sentinels';

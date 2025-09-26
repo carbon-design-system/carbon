@@ -776,15 +776,11 @@ Vertical.argTypes = {
       type: 'text',
     },
   },
-  dismissable: {
-    table: {
-      disable: true,
-    },
-  },
-  onTabCloseRequest: {
-    table: {
-      disable: true,
-    },
+};
+
+Vertical.parameters = {
+  controls: {
+    exclude: ['dismissable'],
   },
 };
 

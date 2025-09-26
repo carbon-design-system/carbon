@@ -17,7 +17,7 @@ import React, {
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { deprecate } from '../../prop-types/deprecate';
-import { textInputProps } from './util';
+import { getTextInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -332,7 +332,7 @@ const TextInput = React.forwardRef(
 
     const input = (
       <input
-        {...textInputProps({
+        {...getTextInputProps({
           sharedTextInputProps,
           invalid: normalizedProps.invalid,
           invalidId: normalizedProps.invalidId,
@@ -376,7 +376,7 @@ const TextInput = React.forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     return (
       <div className={inputWrapperClasses}>

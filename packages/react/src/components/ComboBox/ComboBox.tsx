@@ -36,19 +36,24 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import isEqual from 'react-fast-compare';
-import ListBox, { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
+import ListBox, {
+  ListBoxSizePropType,
+  type ListBoxMenuIconTranslationKey,
+  type ListBoxSelectionTranslationKey,
+  type ListBoxSize,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
-import { TranslateWithId } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
-import { isComponentElement } from '../../internal';
+import { defaultItemToString, isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -62,24 +67,6 @@ const {
   ItemClick,
   FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
-
-const defaultItemToString = <ItemType,>(item: ItemType | null) => {
-  if (typeof item === 'string') {
-    return item;
-  }
-  if (typeof item === 'number') {
-    return `${item}`;
-  }
-  if (
-    item !== null &&
-    typeof item === 'object' &&
-    'label' in item &&
-    typeof item['label'] === 'string'
-  ) {
-    return item['label'];
-  }
-  return '';
-};
 
 const defaultShouldFilterItem = () => true;
 
@@ -161,24 +148,13 @@ export interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
-/**
- * Message ids that will be passed to translateWithId().
- * Combination of message ids from ListBox/next/ListBoxSelection.js and
- * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
- * because those components aren't Typescript.  (If you try, TranslationKey
- * ends up just being defined as "string".)
- */
-export type TranslationKey =
-  | 'close.menu'
-  | 'open.menu'
-  | 'clear.all'
-  | 'clear.selection';
-
 export type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
-    TranslateWithId<TranslationKey> {
+    TranslateWithId<
+      ListBoxMenuIconTranslationKey | ListBoxSelectionTranslationKey
+    > {
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
@@ -606,17 +582,24 @@ const ComboBox = forwardRef(
 
         switch (type) {
           case InputBlur: {
-            if (allowCustomValue && highlightedIndex == '-1') {
-              const customValue = inputValue as ItemType;
-              changes.selectedItem = customValue;
+            // If custom values are allowed, treat whatever the user typed as
+            // the value.
+            if (allowCustomValue && highlightedIndex === -1) {
+              const { inputValue } = state;
+
+              changes.selectedItem = inputValue;
+
               if (onChange) {
-                onChange({ selectedItem: inputValue as ItemType, inputValue });
+                onChange({ selectedItem: inputValue, inputValue });
               }
+
               return changes;
             }
+
+            // If a new item was selected, keep its label in the input.
             if (
               state.inputValue &&
-              highlightedIndex == '-1' &&
+              highlightedIndex === -1 &&
               changes.selectedItem
             ) {
               return {
@@ -624,14 +607,26 @@ const ComboBox = forwardRef(
                 inputValue: itemToString(changes.selectedItem),
               };
             }
-            if (
-              state.inputValue &&
-              highlightedIndex == '-1' &&
-              !allowCustomValue &&
-              !changes.selectedItem
-            ) {
-              return { ...changes, inputValue: '' };
+
+            // If custom values are not allowed, normalize any non-matching
+            // text. If the input isn’t an exact item label, restore the
+            // selected label if there is one, or clear it.
+            if (!allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
+
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
             }
+
             return changes;
           }
 
@@ -685,20 +680,23 @@ const ComboBox = forwardRef(
             return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
-            if (
-              !changes.isOpen &&
-              state.inputValue &&
-              highlightedIndex === -1 &&
-              !allowCustomValue
-            ) {
-              return {
-                ...changes,
-                inputValue: '', // Clear the input
-              };
+            // When closing the menu, apply the same normalization as blur.
+            if (state.isOpen && !changes.isOpen && !allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
+
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
             }
-            if (changes.isOpen && !changes.selectedItem) {
-              return { ...changes };
-            }
+
             return changes;
 
           case MenuMouseLeave:
@@ -722,7 +720,7 @@ const ComboBox = forwardRef(
         }
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [allowCustomValue, inputValue, onChange]
+      [allowCustomValue, inputValue, itemToString, items, onChange]
     );
 
     const handleToggleClick =
@@ -788,7 +786,7 @@ const ComboBox = forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     const {
       // Prop getters
@@ -1420,8 +1418,7 @@ ComboBox.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

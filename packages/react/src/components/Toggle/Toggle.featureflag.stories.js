@@ -24,11 +24,11 @@ export default {
   tags: ['!autodocs'],
 };
 
-const experimentalClassname = 'v12-toggle';
+const previewClassname = 'v12-toggle';
 
 export const _Toggle = (args) => {
   return (
-    <div className={experimentalClassname}>
+    <div className={previewClassname}>
       <Toggle
         labelText="Label"
         labelA="Off"

@@ -40,45 +40,23 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'containerClassName',
+        'launcherButtonRef',
+        'selectorPrimaryFocus',
+        'selectorsFloatingMenus',
+      ],
+    },
   },
 };
 
 const sharedArgTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  containerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
   onClose: {
     action: 'onClose',
   },
   onKeyDown: {
     action: 'onKeyDown',
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
   },
 };
 
@@ -494,88 +472,6 @@ export const _withAILabel = {
           />
         </ComposedModal>
       </div>
-    );
-  },
-};
-const alertOnClose = () => {
-  alert('modal will close');
-};
-
-export const testA = {
-  name: 'passive - close on outside',
-  render: () => {
-    return (
-      <ComposedModal open onClose={alertOnClose}>
-        <ModalHeader>ModalHeader content</ModalHeader>
-        <ModalBody>ModalBody content</ModalBody>
-        {/* ModalFooter is omitted, this is what makes it passive */}
-      </ComposedModal>
-    );
-  },
-};
-export const testB = {
-  name: 'passive w/ preventClose - do not close outside',
-  render: () => {
-    return (
-      <ComposedModal open onClose={alertOnClose} preventCloseOnClickOutside>
-        <ModalHeader>ModalHeader content</ModalHeader>
-        <ModalBody>ModalBody content</ModalBody>
-        {/* ModalFooter is omitted, this is what makes it passive */}
-      </ComposedModal>
-    );
-  },
-};
-export const testC = {
-  name: 'passive w/ preventClose={false} - close on outside',
-  render: () => {
-    return (
-      <ComposedModal
-        open
-        onClose={alertOnClose}
-        preventCloseOnClickOutside={false}>
-        <ModalHeader>ModalHeader content</ModalHeader>
-        <ModalBody>ModalBody content</ModalBody>
-        {/* ModalFooter is omitted, this is what makes it passive */}
-      </ComposedModal>
-    );
-  },
-};
-export const testD = {
-  name: 'non-passive - do not close on outside',
-  render: () => {
-    return (
-      <ComposedModal open onClose={alertOnClose}>
-        <ModalHeader>ModalHeader content</ModalHeader>
-        <ModalBody>ModalBody content</ModalBody>
-        <ModalFooter primaryButtonText="Confirm" secondaryButtonText="Cancel" />
-      </ComposedModal>
-    );
-  },
-};
-export const testE = {
-  name: 'non-passive w/ preventClose - do not close on outside',
-  render: () => {
-    return (
-      <ComposedModal open onClose={alertOnClose} preventCloseOnClickOutside>
-        <ModalHeader>ModalHeader content</ModalHeader>
-        <ModalBody>ModalBody content</ModalBody>
-        <ModalFooter primaryButtonText="Confirm" secondaryButtonText="Cancel" />
-      </ComposedModal>
-    );
-  },
-};
-export const testF = {
-  name: 'non-passive w/ preventClose={false} - close on outside with warning',
-  render: () => {
-    return (
-      <ComposedModal
-        open
-        onClose={alertOnClose}
-        preventCloseOnClickOutside={false}>
-        <ModalHeader>ModalHeader content</ModalHeader>
-        <ModalBody>ModalBody content</ModalBody>
-        <ModalFooter primaryButtonText="Confirm" secondaryButtonText="Cancel" />
-      </ComposedModal>
     );
   },
 };

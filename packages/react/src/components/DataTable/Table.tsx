@@ -46,7 +46,7 @@ export interface TableProps {
   stickyHeader?: boolean;
 
   /**
-   * `false` If true, will use a width of 'auto' instead of 100%
+   * If `true`, sets the table width to `auto` instead of `100%`.
    */
   useStaticWidth?: boolean;
 
@@ -286,7 +286,7 @@ Table.propTypes = {
   stickyHeader: PropTypes.bool,
 
   /**
-   * `false` If true, will use a width of 'auto' instead of 100%
+   * If `true`, sets the table width to `auto` instead of `100%`.
    */
   useStaticWidth: PropTypes.bool,
 
