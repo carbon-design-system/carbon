@@ -3512,6 +3512,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -11540,6 +11546,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -13691,6 +13703,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {

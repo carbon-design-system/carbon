@@ -497,9 +497,14 @@ export const FloatingMenu = ({
     }
   };
 
-  const focusTrapWithoutSentinels = FeatureFlags.enabled(
+  const deprecatedFlag = FeatureFlags.enabled(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = FeatureFlags.enabled(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    deprecatedFlag || focusTrapWithoutSentinelsFlag;
 
   if (typeof document !== 'undefined') {
     const portalTarget = target ? target() : document.body;

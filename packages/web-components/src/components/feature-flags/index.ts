@@ -51,6 +51,7 @@ class FeatureFlagsElement extends LitElement {
       'enable-v12-overflowmenu',
       'enable-treeview-controllable',
       'enable-experimental-focus-wrap-without-sentinels',
+      'enable-focus-wrap-without-sentinels',
       'enable-dialog-element',
       'enable-v12-dynamic-floating-styles',
     ];
