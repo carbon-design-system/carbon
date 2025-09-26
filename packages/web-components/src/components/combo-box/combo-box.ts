@@ -41,6 +41,8 @@ class CDSComboBox extends CDSDropdown {
    */
   protected _filterInputValue = '';
 
+  protected _originalItems: CDSComboBoxItem[] = [];
+
   protected _shouldTriggerBeFocusable = false;
 
   /**
@@ -65,11 +67,29 @@ class CDSComboBox extends CDSDropdown {
    * @param item A combo box item.
    * @returns `true` if the given combo box item matches the query text user types.
    */
-  protected _testItemWithQueryText(item) {
-    return (this.itemMatches || this._defaultItemMatches)(
-      item,
-      this._filterInputNode.value
-    );
+  protected _testItemWithQueryText(item: CDSComboBoxItem): boolean {
+    const raw = this._filterInputNode?.value ?? '';
+    const inputValue = raw.trim().toLowerCase();
+
+    if (typeof this.shouldFilterItem === 'function') {
+      return this.shouldFilterItem({ item, inputValue });
+    }
+
+    if (typeof this.itemMatches === 'function') {
+      return this.itemMatches(item, inputValue);
+    }
+
+    return this._defaultItemMatches(item, inputValue);
+  }
+
+  firstUpdated() {
+    super.firstUpdated && super.firstUpdated();
+    // capture direct light-DOM children only, in author/source order
+    this._originalItems = Array.from(
+      this.querySelectorAll(
+        ':scope > ' + (this.constructor as typeof CDSComboBox).selectorItem
+      )
+    ) as CDSComboBoxItem[];
   }
 
   /**
@@ -92,50 +112,72 @@ class CDSComboBox extends CDSDropdown {
   /**
    * Handles `input` event on the `<input>` for filtering.
    */
-  protected _handleInput() {
-    if (this._filterInputValue.length != 0) {
+  protected async _handleInput() {
+    if (this._filterInputValue.length !== 0) {
       this.setAttribute('isClosable', '');
     } else {
       this.removeAttribute('isClosable');
     }
 
-    const items = this.querySelectorAll(
-      (this.constructor as typeof CDSComboBox).selectorItem
-    );
-    const index = !this._filterInputNode.value
-      ? -1
-      : findIndex(items, this._testItemWithQueryText, this);
-    forEach(items, (item, i) => {
-      if (i === index) {
-        const menuRect = this._itemMenu?.getBoundingClientRect();
-        const itemRect = item.getBoundingClientRect();
+    // lazy-init original list if not set
+    if (!this._originalItems || this._originalItems.length === 0) {
+      this._originalItems = Array.from(
+        this.querySelectorAll(
+          (this.constructor as typeof CDSComboBox).selectorItem
+        )
+      ) as CDSComboBoxItem[];
+    }
 
-        if (menuRect && itemRect) {
-          const isViewable =
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-            menuRect!.top <= itemRect?.top &&
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-            itemRect?.bottom <= menuRect?.top + this._itemMenu!.clientHeight;
-          if (!isViewable) {
-            const scrollTop = itemRect?.top - menuRect?.top;
-            const scrollBot = itemRect?.bottom - menuRect?.bottom;
+    const raw = this._filterInputNode?.value ?? '';
+    const hasInput = Boolean(raw);
+    const visible = hasInput
+      ? this._originalItems.filter((it) => this._testItemWithQueryText(it))
+      : [...this._originalItems];
 
-            if (Math.abs(scrollTop) < Math.abs(scrollBot)) {
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-              this._itemMenu!.scrollTop += scrollTop;
-            } else {
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-              this._itemMenu!.scrollTop += scrollBot;
-            }
-          }
+    // Rebuild the visible menu, preserving element instances
+    // assume `visible` is defined as an array of CDSComboBoxItem that matched
+    if (this._itemMenu) {
+      // remove any current item nodes inside the menu
+      const existing = Array.from(
+        this._itemMenu.querySelectorAll(
+          (this.constructor as typeof CDSComboBox).selectorItem
+        )
+      );
+      existing.forEach((n) => n.remove());
+
+      // append visible nodes in the original author order
+      const visibleSet = new Set(visible);
+      this._originalItems.forEach((node) => {
+        if (visibleSet.has(node)) {
+          this._itemMenu.appendChild(node);
         }
-      }
-      (item as CDSComboBoxItem).highlighted = i === index;
+      });
+    }
+
+    // highlight first visible item
+    visible.forEach((node, i) => {
+      node.highlighted = i === 0;
     });
-    const { _filterInputNode: filterInput } = this;
-    this._filterInputValue = !filterInput ? '' : filterInput.value;
+
+    // preserve input selection/focus across update
+    const inputNode = this._filterInputNode;
+    const selStart = inputNode?.selectionStart ?? 0;
+    const selEnd = inputNode?.selectionEnd ?? 0;
+
+    this._filterInputValue = raw;
     this.open = true;
-    this.requestUpdate(); // If the only change is to `_filterInputValue`, auto-update doesn't happen
+    this.requestUpdate();
+
+    await this.updateComplete;
+
+    if (inputNode) {
+      inputNode.focus();
+      try {
+        inputNode.setSelectionRange(selStart, selEnd);
+      } catch (e) {
+        // ignore selection failure on some platforms
+      }
+    }
   }
 
   protected _handleClickInner(event: MouseEvent) {
@@ -302,6 +344,12 @@ class CDSComboBox extends CDSDropdown {
    */
   @property({ attribute: false })
   itemMatches!: (item: CDSComboBoxItem, queryText: string) => boolean;
+
+  @property({ attribute: false })
+  shouldFilterItem?: (opts: {
+    item: CDSComboBoxItem;
+    inputValue: string;
+  }) => boolean;
 
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);

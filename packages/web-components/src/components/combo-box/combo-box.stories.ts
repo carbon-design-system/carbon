@@ -43,6 +43,34 @@ const items = [
   },
 ];
 
+const fruits = [
+  {
+    value: 'fruit-0',
+    text: 'Apple',
+  },
+  {
+    value: 'fruit-1',
+    text: 'Orange',
+  },
+  {
+    value: 'fruit-2',
+    text: 'Banana',
+  },
+  {
+    value: 'fruit-3',
+    text: 'Pineapple',
+  },
+  {
+    value: 'fruit-4',
+    text: 'Raspberry',
+  },
+  {
+    value: 'fruit-5',
+    text: 'Lime',
+    disabled: true, // example of a disabled fruit
+  },
+];
+
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
   [`Bottom`]: DROPDOWN_DIRECTION.BOTTOM,
@@ -126,13 +154,18 @@ const controls = {
     description: `Text that is displayed when the control is in warning state.`,
   },
 };
-
+const filterItems = (menu) =>
+  menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
 export const Default = {
   render: () => html`
     <cds-combo-box
       helper-text="Combobox helper text"
-      title-text="ComboBox title">
-      ${items.map(
+      title-text="ComboBox title"
+      .shouldFilterItem=${({ item, inputValue }) => {
+        const label = (item.textContent || '').toString();
+        return filterItems({ item: label, inputValue });
+      }}>
+      ${fruits.map(
         (elem) => html`
           <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
             >${elem.text}</cds-combo-box-item
