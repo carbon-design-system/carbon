@@ -164,8 +164,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       enabled('enable-experimental-tile-contrast') or
         $enable-experimental-tile-contrast or
         enabled('enable-tile-contrast') or
-        $enable-tile-contrast or
-        enabled('enable-tile-contrast') or
         $enable-tile-contrast
     ) {
       border: 1px solid $border-tile;
