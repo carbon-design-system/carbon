@@ -74,7 +74,6 @@ export const Default = {
         <cds-link href="#" slot="actions">Link action</cds-link>
         <cds-button size="sm" slot="actions">Button</cds-button>
       </cds-toggletip>
-      <cds-button size="xs">test</cds-button>
     </div>
   `,
 };
