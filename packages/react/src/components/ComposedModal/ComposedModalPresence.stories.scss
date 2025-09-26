@@ -17,6 +17,7 @@
 .preview-modal-with-presence {
   @include modal.modal(
     $enable-experimental-focus-wrap-without-sentinels: false,
+    $enable-focus-wrap-without-sentinels: false,
     $enable-dialog-element: false,
     $enable-presence: true
   );
