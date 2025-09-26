@@ -36,7 +36,6 @@ import { useControllableState } from '../../internal/useControllableState';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
@@ -1690,56 +1689,12 @@ export interface TabPanelProps extends DivAttributes {
 const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ({ children, className: customClassName, ...rest }, forwardRef) => {
     const prefix = usePrefix();
-    const panel = useRef<HTMLDivElement>(null);
-    const ref = useMergedRefs([forwardRef, panel]);
 
-    const [tabIndex, setTabIndex] = useState(0);
-    const [interactiveContent, setInteractiveContent] = useState(false);
     const { selectedIndex, baseId } = React.useContext(TabsContext);
     const index = React.useContext(TabPanelContext);
     const id = `${baseId}-tabpanel-${index}`;
     const tabId = `${baseId}-tab-${index}`;
-    const className = cx(`${prefix}--tab-content`, customClassName, {
-      [`${prefix}--tab-content--interactive`]: interactiveContent,
-    });
-
-    useEffect(() => {
-      if (!panel.current) {
-        return;
-      }
-
-      const content = getInteractiveContent(panel.current);
-      if (content) {
-        setInteractiveContent(true);
-        setTabIndex(-1);
-      }
-    }, []);
-
-    // tabindex should only be 0 if no interactive content in children
-    useEffect(() => {
-      const node = panel.current;
-      if (!node) {
-        return;
-      }
-
-      function callback() {
-        const content = getInteractiveContent(node as HTMLElement);
-        if (content) {
-          setInteractiveContent(true);
-          setTabIndex(-1);
-        } else {
-          setInteractiveContent(false);
-          setTabIndex(0);
-        }
-      }
-      const observer = new MutationObserver(callback);
-
-      observer.observe(node, {
-        childList: true,
-        subtree: true,
-      });
-      return () => observer.disconnect();
-    }, []);
+    const className = cx(`${prefix}--tab-content`, customClassName);
 
     return (
       <div
@@ -1747,9 +1702,8 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         aria-labelledby={tabId}
         id={id}
         className={className}
-        ref={ref}
+        ref={forwardRef}
         role="tabpanel"
-        tabIndex={tabIndex}
         hidden={selectedIndex !== index}>
         {children}
       </div>
