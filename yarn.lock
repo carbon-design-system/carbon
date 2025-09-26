@@ -1903,7 +1903,7 @@ __metadata:
     "@carbon/test-utils": "npm:^10.38.0"
     "@carbon/themes": "npm:^11.61.0"
     "@carbon/utilities": "npm:^0.10.0"
-    "@figma/code-connect": "npm:^1.3.2"
+    "@figma/code-connect": "npm:^1.3.5"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
@@ -2816,9 +2816,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "@figma/code-connect@npm:1.3.2"
+"@figma/code-connect@npm:^1.3.5":
+  version: 1.3.5
+  resolution: "@figma/code-connect@npm:1.3.5"
   dependencies:
     boxen: "npm:5.1.1"
     chalk: "npm:^4.1.2"
@@ -2839,12 +2839,12 @@ __metadata:
     strip-ansi: "npm:^6.0.0"
     ts-morph: "npm:^23.0.0"
     typescript: "npm:5.5.4"
-    undici: "npm:^5.28.4"
-    zod: "npm:3.23.8"
+    undici: "npm:^5.29.0"
+    zod: "npm:3.25.58"
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/e708440139db066e9fa075258d30a26308c16911d46da4f334a982494a762edb44185e92d6e6ae09185f7215a67ee44b2599a5aa01743c1a012a39026e494c71
+  checksum: 10/7e5a389d8246d07a90d98208ed7635ab20cb8ef7b997ddc54845ec6022ff1d3f5282436e8360c853667ea15a926ac8ca8889a3118f88ca00c2827124a91a49ff
   languageName: node
   linkType: hard
 
@@ -25250,7 +25250,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.25.4, undici@npm:^5.28.4, undici@npm:^5.28.5":
+"undici@npm:^5.25.4, undici@npm:^5.28.5, undici@npm:^5.29.0":
   version: 5.29.0
   resolution: "undici@npm:5.29.0"
   dependencies:
@@ -26839,10 +26839,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.24.1":
-  version: 3.25.32
-  resolution: "zod@npm:3.25.32"
-  checksum: 10/58504f7e0382b04313f8e4f63d215d2a19b1d23ccdf45bf9d54c7ac9fa6362e43ba41349e251129a5d3596f4396b78d9a239d177842c04c7287e78a729b7f4bc
+"zod@npm:3.25.58, zod@npm:^3.24.1":
+  version: 3.25.58
+  resolution: "zod@npm:3.25.58"
+  checksum: 10/82a06f7a3212cb7d8aa67f273dc48dc4662fba96054707221b02f0ed854c17f0153a7abcbf09292da910007f970612aeda156fc2ffec80c8ae6e5b046aaadd1e
   languageName: node
   linkType: hard
 
