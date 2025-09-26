@@ -183,19 +183,27 @@ describe('OverflowMenu', () => {
       );
     });
 
-    it('should change size based on size prop', () => {
-      render(
-        <OverflowMenu
-          open
-          aria-label="Overflow menu"
-          className="extra-class"
-          size="lg">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
-        </OverflowMenu>
-      );
+    describe('should change size based on size prop', () => {
+      const sizes = ['xs', 'sm', 'md', 'lg'];
 
-      expect(screen.getByRole('button')).toHaveClass('cds--overflow-menu--lg');
+      sizes.forEach((size) => {
+        it(`size="${size}"`, () => {
+          render(
+            <OverflowMenu
+              open
+              aria-label="Overflow menu"
+              className="extra-class"
+              size={size}>
+              <OverflowMenuItem className="test-child" itemText="one" />
+              <OverflowMenuItem className="test-child" itemText="two" />
+            </OverflowMenu>
+          );
+
+          expect(screen.getByRole('button')).toHaveClass(
+            `cds--overflow-menu--${size}`
+          );
+        });
+      });
     });
 
     it('should open on click', async () => {

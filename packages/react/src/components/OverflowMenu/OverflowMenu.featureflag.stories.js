@@ -41,7 +41,6 @@ export const AutoAlign = () => {
   const ref = useRef();
 
   useEffect(() => {
-    console.log(ref);
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
 
