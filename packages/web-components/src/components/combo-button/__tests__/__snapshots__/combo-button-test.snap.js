@@ -1199,3 +1199,34 @@ snapshots['cds-combo-button should support `tooltips-content` attribute'] =
 </slot>
 `;
 /* end snapshot cds-combo-button should support `tooltips-content` attribute */
+snapshots['cds-combo-button supports props.size size="xs"'] = `<cds-button
+  has-main-content=""
+  kind="primary"
+  size="xs"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  Primary action
+</cds-button>
+<cds-icon-button
+  align="top"
+  close-on-activation=""
+  kind="primary"
+  menu-alignment="top"
+  part="trigger"
+  size="xs"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  <span slot="tooltip-content">
+    Additional actions
+  </span>
+</cds-icon-button>
+<slot>
+</slot>
+`;
+/* end snapshot cds-combo-button supports props.size size="xs" */
