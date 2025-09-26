@@ -36,13 +36,13 @@ export interface ListBoxMenuIconProps extends TranslateWithId<TranslationKey> {
   isOpen: boolean;
 }
 
-export type ListBoxMenuIconComponent = React.FC<ListBoxMenuIconProps>;
+export type ListBoxMenuIconComponent = typeof ListBoxMenuIcon;
 
 /**
  * `ListBoxMenuIcon` is used to orient the icon up or down depending on the
  * state of the menu for a given `ListBox`
  */
-const ListBoxMenuIcon: ListBoxMenuIconComponent = ({
+const ListBoxMenuIcon = ({
   isOpen,
   translateWithId: t = defaultTranslateWithId,
 }: ListBoxMenuIconProps) => {

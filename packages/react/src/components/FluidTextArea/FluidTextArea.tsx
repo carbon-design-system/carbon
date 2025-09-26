@@ -125,10 +125,7 @@ export interface FluidTextAreaProps {
   readOnly?: boolean;
 }
 
-const FluidTextArea: React.FC<FluidTextAreaProps> = ({
-  className,
-  ...other
-}) => {
+const FluidTextArea = ({ className, ...other }: FluidTextAreaProps) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--text-area--fluid`, className);
 

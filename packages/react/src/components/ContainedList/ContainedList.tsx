@@ -16,10 +16,6 @@ import { Search } from '../Search';
 
 const variants = ['on-page', 'disclosed'] as const;
 
-export type ContainedListType = React.FC<ContainedListProps> & {
-  ContainedListItem: typeof ContainedListItem;
-};
-
 export type Variants = (typeof variants)[number];
 
 export interface ContainedListProps {
@@ -95,7 +91,7 @@ function renderChildren(children) {
   return children;
 }
 
-const ContainedList: ContainedListType = ({
+const ContainedList = ({
   action,
   children,
   className,
@@ -104,7 +100,7 @@ const ContainedList: ContainedListType = ({
   label,
   size,
   ...rest
-}) => {
+}: ContainedListProps) => {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
@@ -207,5 +203,6 @@ ContainedList.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
-ContainedList.ContainedListItem = ContainedListItem;
+Object.assign(ContainedList, { ContainedListItem });
+
 export default ContainedList;
