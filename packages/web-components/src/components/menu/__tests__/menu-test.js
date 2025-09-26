@@ -1,0 +1,65 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import '@carbon/web-components/es/components/menu/index.js';
+import { expect, fixture, html } from '@open-wc/testing';
+
+describe('cds-menu', () => {
+  it('should render with default properties', async () => {
+    const el = await fixture(html`<cds-menu></cds-menu>`);
+    expect(el).to.exist;
+  });
+
+  it('should apply custom class to the outermost element', async () => {
+    const el = await fixture(html`<cds-menu class="custom-class"></cds-menu>`);
+    expect(el).to.have.class('custom-class');
+  });
+
+  it('should have an id when one is provided', async () => {
+    const el = await fixture(html`<cds-menu id="test-id"></cds-menu>`);
+    expect(el).to.have.attribute('id', 'test-id');
+  });
+
+  it('should be open if open is supplied', async () => {
+    const el = await fixture(html`<cds-menu open></cds-menu>`);
+    expect(el.open).to.be.true;
+    const menu = el.shadowRoot.querySelector('.cds--menu');
+    expect(menu).to.have.class('cds--menu--open');
+  });
+
+  it('should change size based on size prop', async () => {
+    const el = await fixture(html`<cds-menu size="lg"></cds-menu>`);
+    const menu = el.shadowRoot.querySelector('.cds--menu');
+    expect(menu).to.have.class('cds--menu--lg');
+  });
+
+  it('should set aria-label attribute', async () => {
+    const el = await fixture(html`<cds-menu label="Test Menu"></cds-menu>`);
+    const menu = el.shadowRoot.querySelector('[role="menu"]');
+    expect(menu).to.have.attribute('aria-label', 'Test Menu');
+  });
+
+  describe('firstUpdated', () => {
+    it('should set isRtl based on direction', async () => {
+      const el = await fixture(html`<cds-menu direction="rtl"></cds-menu>`);
+      await el.updateComplete;
+      expect(el.isRtl).to.be.true;
+    });
+
+    it('should set isRoot from context', async () => {
+      const el = await fixture(html`<cds-menu></cds-menu>`);
+      await el.updateComplete;
+      expect(el.isRoot).to.be.true;
+    });
+
+    it('should create a new context if isChild is true', async () => {
+      const el = await fixture(html`<cds-menu isChild></cds-menu>`);
+      await el.updateComplete;
+      expect(el.context.isRoot).to.be.false;
+    });
+  });
+});
