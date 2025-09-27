@@ -151,7 +151,7 @@ $copy-btn-feedback: $background-inverse !default;
     display: flex;
     align-items: center;
     block-size: $spacing-08;
-    padding-inline-end: $spacing-11;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
@@ -178,7 +178,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--single pre {
     @include type-style('code-01');
 
-    padding-inline-end: $spacing-03;
+    padding-inline-end: $spacing-07;
   }
 
   // Preserve whitespace, but don't allow wrapping for inline and single
@@ -225,7 +225,6 @@ $copy-btn-feedback: $background-inverse !default;
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     overflow: auto;
-    inline-size: inline-size;
     padding-block-end: $spacing-06;
     padding-inline-end: $spacing-06;
   }
@@ -427,26 +426,14 @@ $copy-btn-feedback: $background-inverse !default;
     inset-inline: 50% auto;
   }
 
-  // Overflow Indicator
-  .#{$prefix}--snippet--single {
-    position: relative;
-  }
-
-  .#{$prefix}--snippet--single::after {
-    position: absolute;
-    z-index: 1;
-    background-image: linear-gradient(
-      to left,
-      $layer 30%,
-      rgba($layer, 0.7) 60%,
-      rgba($layer, 0) 100%
+  // Using mask-image for single line snippet
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    mask-image: linear-gradient(
+      to right,
+      #000000 calc(100% - #{$spacing-07}),
+      transparent 100%
     );
-    content: '';
-    inline-size: $spacing-07;
-    inset-block-end: 0;
-    inset-block-start: 0;
-    inset-inline-end: $spacing-05;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   .#{$prefix}--snippet--multi {
@@ -455,18 +442,7 @@ $copy-btn-feedback: $background-inverse !default;
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     inline-size: 100%;
-    -webkit-mask-composite: source-in;
     mask-composite: intersect;
-    -webkit-mask-image: linear-gradient(
-        to right,
-        #000000 calc(100% - #{$spacing-07}),
-        transparent 100%
-      ),
-      linear-gradient(
-        to bottom,
-        #000000 calc(100% - #{$spacing-05}),
-        transparent 100%
-      );
     mask-image: linear-gradient(
         to right,
         #000000 calc(100% - #{$spacing-07}),
@@ -481,11 +457,6 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   [dir='rtl'] .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
-    -webkit-mask-image: linear-gradient(
-      to left,
-      #000000 calc(100% - #{$spacing-07}),
-      transparent 100%
-    );
     mask-image: linear-gradient(
       to left,
       #000000 calc(100% - #{$spacing-07}),
@@ -494,16 +465,6 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   [dir='rtl'] .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
-    -webkit-mask-image: linear-gradient(
-        to left,
-        #000000 calc(100% - #{$spacing-07}),
-        transparent 100%
-      ),
-      linear-gradient(
-        to bottom,
-        #000000 calc(100% - #{$spacing-05}),
-        transparent 100%
-      );
     mask-image: linear-gradient(
         to left,
         #000000 calc(100% - #{$spacing-07}),
@@ -518,7 +479,6 @@ $copy-btn-feedback: $background-inverse !default;
 
   .#{$prefix}--snippet--single:focus-within .#{$prefix}--snippet-container,
   .#{$prefix}--snippet--multi:focus-within .#{$prefix}--snippet-container {
-    -webkit-mask-image: none;
     mask-image: none;
   }
 
