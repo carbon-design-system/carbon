@@ -18,14 +18,14 @@ const sizes = {
 const defaultArgs = {
   labelA: 'On',
   labelB: 'Off',
-  checked: true,
+  toggled: true,
   labelText: 'Label',
 };
 
 const smallToggleArgs = {
   labelA: 'On',
   labelB: 'Off',
-  checked: true,
+  toggled: true,
   labelText: 'Label',
   size: 'sm',
 };
@@ -42,11 +42,11 @@ const controls = {
   },
   labelA: {
     control: 'text',
-    description: 'The text for the checked state.',
+    description: 'Specify the label for the "on" position',
   },
   labelB: {
     control: 'text',
-    description: 'The text for the unchecked state',
+    description: 'Specify the label for the "off" position',
   },
   labelText: {
     control: 'text',
@@ -62,7 +62,7 @@ const controls = {
       "Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)",
     options: sizes,
   },
-  checked: {
+  toggled: {
     control: 'boolean',
     description: 'Specify whether the control is toggled',
   },
@@ -71,6 +71,43 @@ const controls = {
 export const Default = {
   argTypes: controls,
   args: defaultArgs,
+  render: ({
+    disabled,
+    hideLabel,
+    labelA,
+    labelB,
+    labelText,
+    readOnly,
+    size,
+    toggled,
+  }) => html`
+    <cds-toggle
+      label-b="${labelB}"
+      label-a="${labelA}"
+      ?disabled="${disabled}"
+      ?hideLabel="${hideLabel}"
+      label-text="${labelText}"
+      size="${size}"
+      ?read-only=${readOnly}
+      ?toggled="${toggled}"></cds-toggle>
+  `,
+};
+
+export const Skeleton = {
+  render: () => html` <cds-toggle-skeleton></cds-toggle-skeleton> `,
+};
+
+// Test Story, remove before merging
+export const WithDeprecatedChecked = {
+  args: {
+    disabled: false,
+    hideLabel: false,
+    labelA: 'On',
+    labelB: 'Off',
+    labelText: 'Label',
+    readOnly: false,
+    checked: true,
+  },
   render: ({
     disabled,
     hideLabel,
@@ -93,10 +130,6 @@ export const Default = {
   `,
 };
 
-export const Skeleton = {
-  render: () => html` <cds-toggle-skeleton></cds-toggle-skeleton> `,
-};
-
 export const SmallToggle = {
   argTypes: controls,
   args: smallToggleArgs,
@@ -108,10 +141,10 @@ export const SmallToggle = {
     labelText,
     readOnly,
     size,
-    checked,
+    toggled,
   }) => html`
     <cds-toggle
-      ?checked="${checked}"
+      ?toggled="${toggled}"
       ?read-only=${readOnly}
       ?disabled="${disabled}"
       ?hideLabel="${hideLabel}"

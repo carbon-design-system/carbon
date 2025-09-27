@@ -37,7 +37,7 @@ describe('cds-toggle', () => {
     expect(el.shadowRoot.textContent).to.contain('Off');
     expect(el.shadowRoot.textContent).to.not.contain('On');
 
-    el.checked = true;
+    el.toggled = true;
     await el.updateComplete;
 
     expect(el.shadowRoot.textContent).to.contain('On');
@@ -83,7 +83,7 @@ describe('cds-toggle', () => {
     expect(el.shadowRoot.textContent).to.not.contain('Off');
     expect(el.shadowRoot.textContent).to.not.contain('On');
 
-    el.checked = true;
+    el.toggled = true;
 
     expect(el.shadowRoot.textContent).to.contain('Test label');
     expect(el.shadowRoot.textContent).to.not.contain('Off');
@@ -127,32 +127,32 @@ describe('cds-toggle', () => {
     const el = await fixture(html` <cds-toggle disabled> </cds-toggle> `);
     await el.updateComplete;
 
-    expect(el.checked).to.be.false;
+    expect(el.toggled).to.be.false;
     const button = el.shadowRoot.querySelector('button');
     button.click();
     await el.updateComplete;
-    expect(el.checked).to.be.false;
+    expect(el.toggled).to.be.false;
   });
 
   it('respects readonly to prevent changes', async () => {
     const el = await fixture(html` <cds-toggle read-only> </cds-toggle> `);
     await el.updateComplete;
 
-    expect(el.checked).to.be.false;
+    expect(el.toggled).to.be.false;
     const button = el.shadowRoot.querySelector('button');
     button.click();
     await el.updateComplete;
-    expect(el.checked).to.be.false;
+    expect(el.toggled).to.be.false;
   });
 
-  it('can be controlled with using checked', async () => {
+  it('can be controlled with using toggled', async () => {
     const el = await fixture(html` <cds-toggle> </cds-toggle> `);
     await el.updateComplete;
 
-    expect(el.checked).to.be.false;
-    el.checked = true;
+    expect(el.toggled).to.be.false;
+    el.toggled = true;
     await el.updateComplete;
-    expect(el.checked).to.be.true;
+    expect(el.toggled).to.be.true;
   });
 
   it('should fire cds-toggle-changed event when toggle is changed', async () => {
@@ -167,7 +167,8 @@ describe('cds-toggle', () => {
 
     expect(event).to.exist;
     expect(event.detail).to.deep.equal({
-      checked: true,
+      checked: true, // TODO: remove in v12
+      toggled: true,
     });
   });
 
