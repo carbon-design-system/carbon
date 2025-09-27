@@ -38,63 +38,33 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
-    downshiftProps: {
-      table: { disable: true },
-    },
-    compareItems: {
-      table: { disable: true },
-    },
-    sortItems: {
-      table: { disable: true },
-    },
-    initialSelectedItems: {
-      table: { disable: true },
-    },
-    id: {
-      table: { disable: true },
-    },
-    items: {
-      table: { disable: true },
-    },
     light: {
       table: {
         disable: true,
       },
     },
-    locale: {
-      table: { disable: true },
-    },
-    onChange: {
-      table: { disable: true },
-    },
-    onMenuChange: {
-      table: { disable: true },
-    },
-    itemToElement: {
-      table: { disable: true },
-    },
-    itemToString: {
-      table: { disable: true },
-    },
-    selectedItems: {
-      table: { disable: true },
-    },
-    open: {
-      table: { disable: true },
-    },
-    titleText: {
-      table: { disable: true },
-    },
-    translateWithId: {
-      table: { disable: true },
-    },
-    filterItems: {
-      table: { disable: true },
-    },
   },
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: [
+        'filterItems',
+        'translateWithId',
+        'titleText',
+        'open',
+        'selectedItems',
+        'itemToString',
+        'itemToElement',
+        'locale',
+        'items',
+        'id',
+        'initialSelectedItems',
+        'sortItems',
+        'compareItems',
+        'downshiftProps',
+      ],
     },
   },
 };

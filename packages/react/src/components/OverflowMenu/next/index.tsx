@@ -15,7 +15,7 @@ import { useFeatureFlag } from '../../FeatureFlags';
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
 import type { PopoverAlignment } from '../../Popover';
-import mergeRefs from '../../../tools/mergeRefs';
+import { mergeRefs } from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
@@ -75,7 +75,7 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   (
     {

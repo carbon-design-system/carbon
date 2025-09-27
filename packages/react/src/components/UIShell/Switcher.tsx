@@ -19,7 +19,8 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import { SwitcherDivider, SwitcherItem } from '.';
+import SwitcherItem from './SwitcherItem';
+import SwitcherDivider from './SwitcherDivider';
 
 export interface BaseSwitcherProps {
   /**
@@ -105,7 +106,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
             if (direction === 1) {
               return enabledIndices[1];
             }
-          // eslint-disable-next-line   no-fallthrough -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line   no-fallthrough -- https://github.com/carbon-design-system/carbon/issues/20452
           default:
             return enabledIndices[nextIndex];
         }

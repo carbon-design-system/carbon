@@ -247,6 +247,9 @@ Map {
   },
   "AccordionItem" => {
     "propTypes": {
+      "aria-label": {
+        "type": "string",
+      },
       "children": {
         "type": "node",
       },
@@ -1663,6 +1666,7 @@ Map {
     },
     "render": [Function],
   },
+  "ComposedModalPresence" => {},
   "ContainedList" => {
     "ContainedListItem": {
       "propTypes": {
@@ -2087,12 +2091,6 @@ Map {
           "type": "func",
         },
       },
-      "translationKeys": [
-        "carbon.table.batch.cancel",
-        "carbon.table.batch.items.selected",
-        "carbon.table.batch.item.selected",
-        "carbon.table.batch.selectAll",
-      ],
     },
     "TableBody": {
       "propTypes": {
@@ -2311,9 +2309,6 @@ Map {
         },
       },
       "render": [Function],
-      "translationKeys": [
-        "carbon.table.header.icon.description",
-      ],
     },
     "TableRow": {
       "$$typeof": Symbol(react.forward_ref),
@@ -2670,16 +2665,6 @@ Map {
         "type": "bool",
       },
     },
-    "translationKeys": [
-      "carbon.table.row.expand",
-      "carbon.table.row.collapse",
-      "carbon.table.all.expand",
-      "carbon.table.all.collapse",
-      "carbon.table.all.select",
-      "carbon.table.all.unselect",
-      "carbon.table.row.select",
-      "carbon.table.row.unselect",
-    ],
   },
   "DataTableSkeleton" => {
     "propTypes": {
@@ -4872,6 +4857,86 @@ Map {
       },
     },
   },
+  "FluidPasswordInput" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "hidePasswordLabel": {
+        "type": "string",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "isPassword": {
+        "type": "bool",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onTogglePasswordVisibility": {
+        "type": "func",
+      },
+      "placeholder": {
+        "type": "string",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "showPasswordLabel": {
+        "type": "string",
+      },
+      "value": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
+      },
+    },
+  },
   "FluidSearch" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -6230,6 +6295,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -6658,6 +6724,7 @@ Map {
     },
     "render": [Function],
   },
+  "ModalPresence" => {},
   "ModalWrapper" => {
     "propTypes": {
       "buttonTriggerClassName": {
@@ -7235,6 +7302,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -9742,12 +9812,6 @@ Map {
         "type": "func",
       },
     },
-    "translationKeys": [
-      "carbon.table.batch.cancel",
-      "carbon.table.batch.items.selected",
-      "carbon.table.batch.item.selected",
-      "carbon.table.batch.selectAll",
-    ],
   },
   "TableBody" => {
     "propTypes": {
@@ -9966,9 +10030,6 @@ Map {
       },
     },
     "render": [Function],
-    "translationKeys": [
-      "carbon.table.header.icon.description",
-    ],
   },
   "TableRow" => {
     "$$typeof": Symbol(react.forward_ref),

@@ -8,6 +8,8 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - _autoEnablePresence
+        - _presenceId
         - accept
         - action
         - actionButtonLabel
@@ -343,6 +345,7 @@ collect:
         - enableDialogElement
         - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
@@ -453,6 +456,7 @@ collect:
         # NumberInput
         - hideSteppers
         - stepStartValue
+        - validate
         # OrderedList
         - native
         # OverflowMenuItem
