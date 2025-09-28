@@ -460,5 +460,3 @@ describe('Select', () => {
     });
   });
 });
-
-// Made with Bob
