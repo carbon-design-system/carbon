@@ -20,7 +20,7 @@ import {
  * Use useSyncExternalStore when available with React v18+, use the shim with
  * React v17 and v16.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 const useSync = (React as any).useSyncExternalStore ?? useSyncExternalStoreShim;
 
 /**

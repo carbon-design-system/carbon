@@ -25,10 +25,6 @@ figma.connect(
       }),
       titleText: figma.string('Label'),
       label: figma.string('Prompt text'),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
@@ -62,6 +58,7 @@ figma.connect(
       return (
         <Dropdown
           {...props}
+          items={items}
           id="id"
           initialSelectedItem={items[0]}
           itemToString={(item) => (item ? item.text : '')}
@@ -81,10 +78,6 @@ figma.connect(
         Large: 'lg',
         Medium: 'md',
         Small: 'sm',
-      }),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
       }),
     },
     example: ({ ...props }) => {

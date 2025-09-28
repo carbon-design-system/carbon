@@ -22,7 +22,7 @@ export const ThemeContext = React.createContext<GlobalThemeProps>({
   theme: 'white',
 });
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const GlobalTheme = React.forwardRef(
   (
     { children, theme }: PropsWithChildren<GlobalThemeProps>,
@@ -35,7 +35,7 @@ export const GlobalTheme = React.forwardRef(
     }, [theme]);
 
     const childrenWithProps = React.cloneElement(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       children as React.ReactElement<any>,
       { ref: ref }
     );
@@ -92,7 +92,7 @@ export function Theme<E extends ElementType = 'div'>({
       isDark,
     };
   }, [theme]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const BaseComponentAsAny = BaseComponent as any;
 
   return (

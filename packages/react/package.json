@@ -81,7 +81,7 @@
     "@babel/preset-typescript": "^7.27.1",
     "@carbon/test-utils": "^10.38.0",
     "@carbon/themes": "^11.61.0",
-    "@figma/code-connect": "^1.3.2",
+    "@figma/code-connect": "^1.3.5",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",

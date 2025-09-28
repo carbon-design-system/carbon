@@ -253,7 +253,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
 
   private _handleSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement).assignedNodes().some(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
     );
     this.withHeader = hasContent;
@@ -303,7 +303,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
         return acc;
       }, {});
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const sortedWithExpanded = [] as any;
 
       rows.forEach((e) => {
@@ -326,19 +326,19 @@ class CDSTable extends HostListenerMixin(LitElement) {
   }
 
   private _handleFilterRows() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const unfilteredRows = [] as any;
     forEach(this._tableRows, (elem) => {
       let rowText = elem.textContent?.trim();
       let filtered = this.filterRows(rowText as string, this._searchValue);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem as any).filtered = filtered;
 
       if (filtered && this.expandable) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         rowText = (elem as any).nextElementSibling.textContent?.trim();
         filtered = this.filterRows(rowText as string, this._searchValue);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem as any).filtered = filtered;
       }
 
@@ -347,7 +347,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       }
 
       if (this.expandable) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem as any).nextElementSibling.filtered = filtered;
       }
     });
@@ -372,11 +372,11 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Download manager for selected rows.
    */
   private _handleDownload({ target }) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const data = [] as any;
 
     const elementsToArray = (elements) =>
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       Array.from(elements, (element) => (element as any).textContent);
 
     const headerCells = this.querySelectorAll(
@@ -410,7 +410,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Handles batch expansion
    */
   @HostListener('eventExpandoToggle')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBatchExpansion = async (event: CustomEvent) => {
     const { detail, target } = event;
@@ -425,13 +425,13 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Handles sorting the table depending on the column selected
    */
   @HostListener('eventBeforeSort')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleSort = async (event: CustomEvent) => {
     const { detail, target } = event;
     const { sortDirection } = detail;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     if (!this.contains(target as any)) {
       return;
     }
@@ -471,7 +471,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Handles search input within the toolbar actions
    */
   @HostListener('eventSearchInput')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleSearchInput = async (event: CustomEvent) => {
     const { detail, target } = event;
@@ -487,7 +487,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Handles row selection
    */
   @HostListener('eventBeforeChangeSelection')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleRowSelect = async (event: CustomEvent) => {
     const { detail, target } = event;
@@ -507,7 +507,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       this._tableRows.forEach((e) => {
         if (e !== target) {
           e.removeAttribute('selected');
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           e.shadowRoot!.querySelector(`${prefix}-radio-button`).checked = false;
         }
       });
@@ -563,7 +563,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Handles header row selection, selecting/unselecting all rows
    */
   @HostListener('eventBeforeChangeSelectionAll')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleAllRowsSelect = async (event: CustomEvent) => {
     const { detail, target } = event;
@@ -583,7 +583,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       if (!(elem as CDSTableRow).filtered) {
         (elem as CDSTableRow).selected = selected;
         if (this.radio) {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           const radioButton = (elem as CDSTableRow).shadowRoot!.querySelector(
             `${prefix}-radio-button`
           ) as CDSRadioButton;
@@ -636,7 +636,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Handles cancel button within the toolbar actions
    */
   @HostListener('eventClickCancel')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleCancelSelection = async (event: CustomEvent) => {
     const { target } = event;
@@ -835,7 +835,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       const tableBody = this.querySelector(
         (this.constructor as typeof CDSTable).selectorTableBody
       );
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (tableBody as any).useZebraStyles = this.useZebraStyles;
     }
 
@@ -872,7 +872,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       Array.prototype.slice
         .call((row as HTMLElement).children)
         .forEach((cell, index) => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
           headersWithAILabel.includes(index)
             ? cell.setAttribute('ai-label-in-header', '')
             : cell.removeAttribute('ai-label-in-header');
