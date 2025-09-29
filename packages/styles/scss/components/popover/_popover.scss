@@ -901,6 +901,18 @@ $popover-caret-height: custom-property.get-var(
       .#{$prefix}--popover--auto-align
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-end:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-end:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-start: 0;
   }
@@ -914,8 +926,21 @@ $popover-caret-height: custom-property.get-var(
       .#{$prefix}--popover--auto-align
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-start:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-start:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-end: 0;
+    inset-inline-start: initial;
   }
 
   .#{$prefix}--popover--tab-tip .#{$prefix}--popover {
