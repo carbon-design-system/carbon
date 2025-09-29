@@ -9,7 +9,7 @@ import { createContext, KeyboardEvent, RefObject } from 'react';
 
 type ActionType = {
   type: 'enableIcons' | 'enableSelectableItems' | 'registerItem';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   payload: any;
 };
 
@@ -18,7 +18,7 @@ type StateType = {
   hasIcons: boolean;
   hasSelectableItems: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   items: any[];
   requestCloseRoot: (e: Pick<KeyboardEvent<HTMLUListElement>, 'type'>) => void;
 };
@@ -71,7 +71,7 @@ type MenuContextProps = {
 const MenuContext = createContext<MenuContextProps>({
   state: menuDefaultState,
   // 'dispatch' is populated by the root menu
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   dispatch: (_: DispatchFuncProps) => {},
 });
 

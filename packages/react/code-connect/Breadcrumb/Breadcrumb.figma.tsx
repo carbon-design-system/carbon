@@ -11,7 +11,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Breadcrumb,
-  'https://www.figma.com/design/Bm1EL99jVq8Uv0gW11EpBC/-v11--Carbon-Design-System--Community-?node-id=3155-31030&t=udaFhcGQNUqmjDtx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=104376-11673&m=dev',
   {
     props: {
       //noTrailingSlash: needs to come from child item component in figma

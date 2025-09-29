@@ -8,5 +8,5 @@
 /**
  * Constructor type. Used for defining mix-ins.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 type Constructor<T> = new (...args: any[]) => T;

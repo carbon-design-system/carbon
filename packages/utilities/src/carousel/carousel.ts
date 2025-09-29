@@ -290,7 +290,7 @@ export const initCarousel = (
           }
         };
         // store reference on the element for later removal
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (viewItem as any)._carouselListener = listener;
 
         viewItem.addEventListener('animationend', listener);
@@ -366,11 +366,11 @@ export const initCarousel = (
    */
   const destroyEvents = () => {
     Object.values(refs).forEach((el) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       if (el && (el as any)._carouselListener) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         el.removeEventListener('animationend', (el as any)._carouselListener);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         el.removeEventListener('transitionend', (el as any)._carouselListener);
       }
     });
