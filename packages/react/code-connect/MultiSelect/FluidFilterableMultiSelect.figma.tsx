@@ -12,7 +12,7 @@ import { FluidMultiSelect, FluidDropdownSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
-  FluidFilterableMultiSelect,
+  FluidMultiSelect,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=45988-11486&t=aG4cJRjteQHcd71k-4',
   {
     props: {
