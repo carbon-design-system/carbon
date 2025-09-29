@@ -213,16 +213,23 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select[ai-label][warn]),
-:host(#{$prefix}-multi-select[ai-label][invalid]) {
+:host(#{$prefix}-multi-select[ai-label][invalid]),
+:host(#{$prefix}-multi-select[ai-label][warn][filterable]),
+:host(#{$prefix}-multi-select[ai-label][invalid][filterable]) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-12;
     }
   }
+  .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: rem(83px);
+  }
+}
 
-  ::slotted(#{$prefix}-ai-label),
-  ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-10;
+:host(#{$prefix}-multi-select[filterable][ai-label][warn][has-value]),
+:host(#{$prefix}-multi-select[filterable][ai-label][invalid][has-value]) {
+  .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: rem(116px);
   }
 }
 
