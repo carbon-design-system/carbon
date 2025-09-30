@@ -5,6 +5,6 @@
       "packages/react/src/*": "@carbon/react"
     },
     "paths": {},
-    "include": ["packages/react/code-connect/**"]
+    "include": ["code-connect/**"]
   }
 }
