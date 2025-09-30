@@ -476,5 +476,3 @@ Select.propTypes = {
 };
 
 export default Select;
-
-// Made with Bob
