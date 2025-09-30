@@ -52,7 +52,7 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handler for the `keydown` event on the trigger button.
    */
   @HostListener('keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydownTrigger({ key }: KeyboardEvent) {
     if (key === 'Esc' || key === 'Escape') {
@@ -76,7 +76,7 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `blur` event handler on this element.
    */
   @HostListener('focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur({ relatedTarget }: FocusEvent) {
     if (!this.contains(relatedTarget as Node)) {

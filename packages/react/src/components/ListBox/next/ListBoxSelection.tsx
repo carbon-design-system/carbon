@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../../internal/usePrefix';
+import type { TFunc, TranslateWithId } from '../../../types/common';
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
@@ -17,23 +18,23 @@ import { usePrefix } from '../../../internal/usePrefix';
  * selection.
  */
 
-export const translationIds = {
+const translationIds = {
   'clear.all': 'clear.all',
   'clear.selection': 'clear.selection',
 } as const;
 
-export type TranslationKey = keyof typeof translationIds;
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations: Record<TranslationKey, string> = {
-  'clear.all': 'Clear all selected items',
-  'clear.selection': 'Clear selected item',
+  [translationIds['clear.all']]: 'Clear all selected items',
+  [translationIds['clear.selection']]: 'Clear selected item',
 };
 
-function defaultTranslateWithId(id: TranslationKey): string {
-  return defaultTranslations[id];
-}
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
-export interface ListBoxSelectionProps {
+export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
   /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
@@ -48,12 +49,6 @@ export interface ListBoxSelectionProps {
    * whether the selection should display a badge or a single clear icon.
    */
   selectionCount?: number;
-  /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
-   */
-  translateWithId?: (id: TranslationKey) => string;
   /**
    * Specify whether or not the clear selection element should be disabled
    */
@@ -209,9 +204,7 @@ ListBoxSelection.propTypes = {
   selectionCount: PropTypes.number,
 
   /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };

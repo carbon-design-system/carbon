@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Feature Flags" />
+
+
+# Feature Flags
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/feature-flags)
+
+{/* prettier-ignore-start */}
+
+{/* START doctoc generated TOC please keep comment here to allow auto update */}
+
+{/* DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE */}
+
+## Table of Contents
+
+* [Current feature flags](#current-feature-flags)
+* [Turning on feature flags](#turning-on-feature-flags)
+
+{/* END doctoc generated TOC please keep comment here to allow auto update */}
+
+{/* prettier-ignore-end */}
+
+The `@carbon/web-components` codebase ships with a number of feature flags. These feature
+flags enable new behavior and styling, allowing you to opt-in to new (and
+sometimes breaking) changes while using the current version.
+
+This section in the storybook documents each feature flag that is available and
+how to configure it. Folders and stories within this section in storybook show
+components with all feature flags turned on.
+
+## Current feature flags
+
+Flags prefixed with `enable-*` contain features we'd like consuming projects to
+test and give us feedback on. They're generally stable and unlikely to change
+but may change based on your feedback.
+
+Flags prefixed with `enable-v12-*` are stable and won't change. They will be
+marked as `true` or "on" by default in the next major version, v12.
+
+For more details on this approach, see the
+[feature flag documentation](https://github.com/carbon-design-system/carbon/blob/main/docs/experimental-code.md)
+in the Carbon monorepo.
+
+| Flag                                               | Description                                                                          | Default |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------ | ------- |
+| `enable-v12-toggle-reduced-label-spacing`          | Enable a reduced spacing between the toggle control and its label                    | `false` |
+
+
+## Turning on feature flags
+
+Use the `feature-flags` component to turn on a feature flag for a portion of your
+application's react tree. Multiple feature flags can be configured at the same
+time. A feature flag must be wrapped around each component that wants the feature flag enabled.
+
+```
+import '@carbon/web-components/es/components/feature-flags/feature-flags.js';
+
+<feature-flags enable-v12-toggle-reduced-label-spacing>
+  <cds-toggle
+    label-text="Label"
+    label-a="Off"
+    label-b="On"
+    checked></cds-toggle>
+</feature-flags>
+```

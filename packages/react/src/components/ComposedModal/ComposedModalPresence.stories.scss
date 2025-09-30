@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/config' with (
+  $prefix: 'presence'
+);
+
+@use '@carbon/react/scss/components/modal/modal';
+@use '@carbon/react/scss/components/dialog/dialog';
+@use '@carbon/react/scss/components/text-input/text-input';
+@use '@carbon/react/scss/components/select/select';
+
+.preview-modal-with-presence {
+  @include modal.modal(
+    $enable-experimental-focus-wrap-without-sentinels: false,
+    $enable-dialog-element: false,
+    $enable-presence: true
+  );
+  @include text-input.text-input();
+  @include select.select();
+}

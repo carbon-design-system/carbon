@@ -18,6 +18,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['aria-label', 'hasFocus'],
+    },
   },
   args: {
     kind: 'error',
@@ -36,16 +39,6 @@ export const Default = (args) => (
 );
 
 Default.argTypes = {
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
   onActionButtonClick: {
     action: 'onActionButtonClick',
   },
@@ -54,21 +47,6 @@ Default.argTypes = {
   },
   onCloseButtonClick: {
     action: 'onCloseButtonClick',
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  hasFocus: {
-    table: {
-      disable: true,
-    },
   },
 };
 Default.args = {
