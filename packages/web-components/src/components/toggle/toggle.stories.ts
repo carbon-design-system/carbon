@@ -97,39 +97,6 @@ export const Skeleton = {
   render: () => html` <cds-toggle-skeleton></cds-toggle-skeleton> `,
 };
 
-// Test Story, remove before merging
-export const WithDeprecatedChecked = {
-  args: {
-    disabled: false,
-    hideLabel: false,
-    labelA: 'On',
-    labelB: 'Off',
-    labelText: 'Label',
-    readOnly: false,
-    checked: true,
-  },
-  render: ({
-    disabled,
-    hideLabel,
-    labelA,
-    labelB,
-    labelText,
-    readOnly,
-    size,
-    checked,
-  }) => html`
-    <cds-toggle
-      label-b="${labelB}"
-      label-a="${labelA}"
-      ?disabled="${disabled}"
-      ?hideLabel="${hideLabel}"
-      label-text="${labelText}"
-      size="${size}"
-      ?read-only=${readOnly}
-      ?checked="${checked}"></cds-toggle>
-  `,
-};
-
 export const SmallToggle = {
   argTypes: controls,
   args: smallToggleArgs,
