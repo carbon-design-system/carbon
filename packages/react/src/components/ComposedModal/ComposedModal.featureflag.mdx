@@ -10,27 +10,29 @@ import { Meta } from '@storybook/addon-docs/blocks';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
 
-## `enable-experimental-focus-wrap-without-sentinels`
+## `enable-focus-wrap-without-sentinels`
 
-`ComposedModal` supports the `enable-experimental-focus-wrap-without-sentinels`
-feature flag. When enabled, the hidden "sentinel nodes" used for focus wrap are
-no longer emitted to the DOM. These were previously used to mark the beginning
-and end of the area where focus should wrap within.
+`ComposedModal` supports the `enable-focus-wrap-without-sentinels` feature flag.
+When enabled, the hidden "sentinel nodes" used for focus wrap are no longer
+emitted to the DOM. These were previously used to mark the beginning and end of
+the area where focus should wrap within.
 
 The new behavior looks at all interactive child nodes and wraps focus based on
 tabbable order of those nodes. The focus direction is determined whether `tab`
 is being pressed (forward) or `shift`+`tab` is being pressed (backwards).
 
 Note: The native dialog element handles focus, so `enable-dialog-element` must
-be off for `enable-experimental-focus-wrap-without-sentinels` to have any
-effect.
+be off for `enable-focus-wrap-without-sentinels` to have any effect.
+
+This flag was previously called
+`enable-experimental-focus-wrap-without-sentinels`.
 
 ### Enabling the flag
 
 To enable the flag, use the `FeatureFlags` component and set the prop:
 
 ```js
-<FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+<FeatureFlags enableFocusWrapWithoutSentinels>
   <ComposedModal ... />
 </FeatureFlags>
 ```
@@ -44,8 +46,8 @@ behavior. This means that:
 
 - The DOM no longer includes the "sentinel nodes" previously needed for the
   ComposedModal to manage focus wrap.
-- `enable-experimental-focus-wrap-without-sentinels` has no effect and can be
-  removed when using `enable-dialog-element`
+- `enable-focus-wrap-without-sentinels` has no effect and can be removed when
+  using `enable-dialog-element`
 
 ### Enabling the flag
 
@@ -60,17 +62,20 @@ To enable the flag, use the `FeatureFlags` component and set the prop:
 ## `enable-presence`
 
 `ComposedModal` supports the `enable-presence` feature flag. When enabled,
-ComposedModal will not mount until the modal is opened and unmount when it's closed.
-This helps to stay in sync with the React lifecycle.
+ComposedModal will not mount until the modal is opened and unmount when it's
+closed. This helps to stay in sync with the React lifecycle.
 
 This means that:
 
-- The DOM no longer includes `ComposedModal` and its children in the closed state
-- `ComposedModal`, all of its children and their hooks will mount/unmount on open/close
+- The DOM no longer includes `ComposedModal` and its children in the closed
+  state
+- `ComposedModal`, all of its children and their hooks will mount/unmount on
+  open/close
 - Enter & exit animations change from CSS transitions to CSS animations
 
-Note: Only `ComposedModal` and its children are unmounted/mounted.
-Use `ComposedModalPresence` to shift the presence boundary to a higher level, if necessary.
+Note: Only `ComposedModal` and its children are unmounted/mounted. Use
+`ComposedModalPresence` to shift the presence boundary to a higher level, if
+necessary.
 
 ### Enabling the flag
 
@@ -82,7 +87,8 @@ To enable the flag, use the `FeatureFlags` component and set the prop:
 </FeatureFlags>
 ```
 
-Or auto opt in by using `ComposedModalPresence` to shift the presence boundary to a different level:
+Or auto opt in by using `ComposedModalPresence` to shift the presence boundary
+to a different level:
 
 ```js
 <ComposedModalPresence open={open}>

@@ -19,6 +19,10 @@ feature-flags:
     enabled: true
   - name: enable-experimental-tile-contrast
     description: >
+      Deprecated, use enable-tile-contrast instead
+    enabled: false
+  - name: enable-tile-contrast
+    description: >
       Enable the experimental tile improved contrast styles
     enabled: false
   - name: enable-v12-tile-default-icons
@@ -43,6 +47,10 @@ feature-flags:
     enabled: false
   - name: enable-experimental-focus-wrap-without-sentinels
     description: >
+      Deprecated, use enable-focus-wrap-without-sentinels instead
+    enabled: false
+  - name: enable-focus-wrap-without-sentinels
+    description: >
       Enable the new focus wrap behavior that doesn't use sentinel nodes
     enabled: false
   - name: enable-dialog-element
@@ -66,5 +74,6 @@ feature-flags:
     enabled: false
   - name: enable-presence
     description: >
-      Enable components to remain unmounted in closed state and mount in open state.
+      Enable components to remain unmounted in closed state and mount in open
+      state.
     enabled: false

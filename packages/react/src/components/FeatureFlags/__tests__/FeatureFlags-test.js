@@ -580,6 +580,60 @@ describe('FeatureFlags', () => {
       });
     });
 
+    it('enable-focus-wrap-without-sentinels - enableFocusWrapWithoutSentinels', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableFocusWrapWithoutSentinels = useFeatureFlag(
+          'enable-focus-wrap-without-sentinels'
+        );
+
+        checkFlags({
+          enableFocusWrapWithoutSentinels: featureFlags.enabled(
+            'enable-focus-wrap-without-sentinels'
+          ),
+        });
+
+        checkFlag({
+          enableFocusWrapWithoutSentinels,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableFocusWrapWithoutSentinels>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: true,
+      });
+    });
+
     it('enable-v12-dynamic-floating-styles - enableV12DynamicFloatingStyles', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();
@@ -633,6 +687,7 @@ describe('FeatureFlags', () => {
         enableV12DynamicFloatingStyles: true,
       });
     });
+
     it('enable-enhanced-file-uploader - enableEnhancedFileUploader', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();
@@ -684,6 +739,56 @@ describe('FeatureFlags', () => {
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
         enableEnhancedFileUploader: true,
+      });
+    });
+
+    it('enable-presence - enablePresence', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enablePresence = useFeatureFlag('enable-presence');
+
+        checkFlags({
+          enablePresence: featureFlags.enabled('enable-presence'),
+        });
+
+        checkFlag({
+          enablePresence,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enablePresence: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enablePresence: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enablePresence>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enablePresence: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enablePresence: true,
       });
     });
   });
