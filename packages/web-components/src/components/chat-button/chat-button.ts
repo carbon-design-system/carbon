@@ -33,7 +33,7 @@ class CDSChatButton extends LitElement {
    */
   private _handleSlotChange({ target }: Event) {
     this._hasIcon = (target as HTMLSlotElement).assignedNodes().some(
-      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim() // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim() // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     );
     this.requestUpdate();
   }

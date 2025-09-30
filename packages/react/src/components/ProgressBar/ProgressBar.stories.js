@@ -35,11 +35,6 @@ const DefaultStory = (args) => {
 export const Default = DefaultStory.bind({});
 
 Default.argTypes = {
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   hideLabel: {
     control: { type: 'boolean' },
   },

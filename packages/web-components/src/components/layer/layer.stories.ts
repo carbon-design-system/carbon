@@ -10,7 +10,7 @@ import { prefix } from '../../globals/settings';
 import styles from './layer-story.scss?lit';
 import './index';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const defaultArgs = {
   level: '0',
 };
@@ -83,7 +83,7 @@ export const UseLayer = {
   name: 'useLayer',
   render: () => {
     document.addEventListener(`${prefix}-use-layer`, (e) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const { layer, level } = (e as any).detail;
       layer.querySelector('.example-layer-test-component.use-layer').innerText =
         `The current layer level is: ${level + 1}`;

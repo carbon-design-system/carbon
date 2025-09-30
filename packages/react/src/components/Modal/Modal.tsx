@@ -461,27 +461,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       return;
     }
 
-    const lastContent = modalContent.children[modalContent.children.length - 1];
-    const gradientSpacing =
-      modalContent.scrollHeight -
-      (lastContent as HTMLElement).offsetTop -
-      (lastContent as HTMLElement).clientHeight;
-
-    // eslint-disable-next-line   prefer-const -- https://github.com/carbon-design-system/carbon/issues/20071
-    for (let elem of modalContent.children) {
-      if (elem.contains(currentActiveNode)) {
-        const spaceBelow =
-          modalContent.clientHeight -
-          (elem as HTMLElement).offsetTop +
-          modalContent.scrollTop -
-          (elem as HTMLElement).clientHeight;
-        if (spaceBelow < gradientSpacing) {
-          modalContent.scrollTop =
-            modalContent.scrollTop + (gradientSpacing - spaceBelow);
-        }
-        break;
-      }
-    }
+    currentActiveNode.scrollIntoView({ block: 'center' });
   }
 
   const onSecondaryButtonClick = onSecondarySubmit
@@ -559,7 +539,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
 
   useEffect(() => {
@@ -669,7 +649,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'sm' })
-    : null;
+    : candidate;
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>
