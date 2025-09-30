@@ -28,7 +28,7 @@ describe('featue-flag', function () {
         label-text="Label"
         label-a="On"
         label-b="Off"
-        checked></cds-toggle>
+        toggled></cds-toggle>
     </feature-flags>`;
     const el = await fixture(featureFlag);
     const child = el.querySelector('#child');
