@@ -29,7 +29,7 @@ html`<cds-accordion size=${accordionItem.size} alignment=${accordionItem.align} 
 </cds-accordion>
 `,
     imports: [
-      '<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js">',
+      '<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js"></script>',
     ],
   }
 );
