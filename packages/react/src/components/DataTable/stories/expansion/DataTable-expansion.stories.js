@@ -64,7 +64,10 @@ export const Default = (args) => (
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
-              <TableExpandHeader aria-label="expand row" />
+              <TableExpandHeader
+                aria-label="expand row"
+                {...getExpandHeaderProps()}
+              />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
