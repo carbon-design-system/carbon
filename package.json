@@ -160,5 +160,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.10.0"
+  "packageManager": "yarn@4.10.3"
 }
