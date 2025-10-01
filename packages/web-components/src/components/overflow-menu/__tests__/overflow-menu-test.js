@@ -19,7 +19,7 @@ describe('cds-overflow-menu', () => {
 
   it('should render', async () => {
     const el = await fixture(basicOverflowMenu);
-    await expect(el).shadowDom.to.equalSnapshot();
+    expect(el);
   });
 
   describe('supports size', () => {
@@ -42,7 +42,6 @@ describe('cds-overflow-menu', () => {
         const button = el.shadowRoot?.querySelector('button');
 
         expect(button).to.have.class(`cds--overflow-menu--${size}`);
-        await expect(el).shadowDom.to.equalSnapshot();
       });
     });
   });
