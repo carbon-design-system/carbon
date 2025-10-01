@@ -214,7 +214,7 @@ $css--plex: true !default;
 :host(#{$prefix}-multi-select[ai-label][invalid][filterable]) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
-      padding-inline-end: $spacing-12;
+      padding-inline-end: $spacing-11;
     }
   }
   .#{$prefix}--list-box__invalid-icon {
