@@ -28,6 +28,6 @@ import './toggle-class';
 import '@webcomponents/webcomponentsjs';
 
 if (typeof ResizeObserver === 'undefined') {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   (window as any).ResizeObserver = ResizeObserver;
 }

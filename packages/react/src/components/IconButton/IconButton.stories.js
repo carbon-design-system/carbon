@@ -23,18 +23,6 @@ export default {
     },
     layout: 'centered',
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const Default = (args) => {

@@ -18,7 +18,7 @@ import {
   rangeWithCalendar,
 } from '../../src/components/date-picker/date-picker-story';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 const defaultTemplate = (props?: any) => {
   const {
     disabled,
@@ -58,7 +58,7 @@ const getValues = (formData: FormData) => {
   const values = {};
 
   for (const [key, value] of formData.entries()) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     values[key as any] = value;
   }
   return values;
@@ -77,7 +77,7 @@ describe('cds-date-picker', () => {
     });
 
     xit('Should not instantiate Flatpickr', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { calendar } = datePicker!;
       expect(calendar).toBeFalsy();
     });
@@ -95,10 +95,10 @@ describe('cds-date-picker', () => {
     });
 
     it('Should instantiate Flatpickr', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { calendar } = datePicker!;
       expect(calendar).toBeTruthy();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { config, loadedPlugins } = datePicker!.calendar!;
       expect(
         pick(config, [
@@ -112,7 +112,7 @@ describe('cds-date-picker', () => {
         ])
       ).toEqual({
         allowInput: true,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         appendTo: datePicker!.shadowRoot!.getElementById(
           'floating-menu-container'
         )!,
@@ -120,7 +120,7 @@ describe('cds-date-picker', () => {
         locale: flatpickr.l10ns.default,
         maxDate: undefined,
         minDate: undefined,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         positionElement: datePickerInput!.input,
       });
       expect(loadedPlugins.sort()).toEqual([
@@ -136,11 +136,11 @@ describe('cds-date-picker', () => {
     });
 
     it('Should support programmatic change of the date', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       datePicker!.value = '2000-07-15';
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         datePicker!.calendar!.selectedDates.map((item) => item.getTime())
       ).toEqual([new Date(2000, 6, 15).getTime()]);
     });
@@ -164,10 +164,10 @@ describe('cds-date-picker', () => {
     });
 
     it('Should instantiate Flatpickr', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { calendar } = datePicker!;
       expect(calendar).toBeTruthy();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { config, loadedPlugins } = datePicker!.calendar!;
       expect(
         pick(config, [
@@ -181,7 +181,7 @@ describe('cds-date-picker', () => {
         ])
       ).toEqual({
         allowInput: true,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         appendTo: datePicker!.shadowRoot!.getElementById(
           'floating-menu-container'
         )!,
@@ -189,7 +189,7 @@ describe('cds-date-picker', () => {
         locale: flatpickr.l10ns.default,
         maxDate: undefined,
         minDate: undefined,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https-github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https-github.com/carbon-design-system/carbon/issues/20452
         positionElement: datePickerInputStart!.input,
       });
       expect(loadedPlugins.sort()).toEqual([
@@ -206,11 +206,11 @@ describe('cds-date-picker', () => {
     });
 
     it('Should support programmatic change of the date', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       datePicker!.value = '2000-07-10/2000-07-20';
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         datePicker!.calendar!.selectedDates.map((item) => item.getTime())
       ).toEqual([
         new Date(2000, 6, 10).getTime(),
@@ -219,26 +219,26 @@ describe('cds-date-picker', () => {
     });
 
     xit('Should support opening calendar dropdown by clicking on calendar icon for the start date', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       datePickerInputStart!
         .shadowRoot!.querySelector('svg')!
         .dispatchEvent(new CustomEvent('click', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { calendar } = datePicker!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(calendar!.isOpen).toBe(true);
     });
 
     xit('Should support opening calendar dropdown by clicking on calendar icon for the end date', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       datePickerInputEnd!
         .shadowRoot!.querySelector('svg')!
         .dispatchEvent(new CustomEvent('click', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { calendar } = datePicker!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(calendar!.isOpen).toBe(true);
     });
   });
@@ -249,7 +249,7 @@ describe('cds-date-picker', () => {
     beforeEach(async () => {
       render(defaultTemplate(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-date-picker-input')!;
     });
 
@@ -307,10 +307,10 @@ describe('cds-date-picker', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': '2000-01-01' });
     });
@@ -327,10 +327,10 @@ describe('cds-date-picker', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https-github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https-github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
@@ -347,10 +347,10 @@ describe('cds-date-picker', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({
         'name-foo': '2000-01-01/2000-01-31',
@@ -360,7 +360,7 @@ describe('cds-date-picker', () => {
 
   afterEach(async () => {
     events.reset();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

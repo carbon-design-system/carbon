@@ -11,6 +11,7 @@ import DatePickerInput from '../DatePickerInput';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AILabel } from '../AILabel';
+import { FormContext } from '../FluidForm';
 
 const prefix = 'cds';
 
@@ -298,6 +299,69 @@ describe('DatePicker', () => {
     expect(warn).toHaveBeenCalled();
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
     warn.mockRestore();
+  });
+
+  it('should show only invalid text when both invalid and warn are true in fluid mode', () => {
+    render(
+      <FormContext.Provider value={{ isFluid: true }}>
+        <DatePicker
+          datePickerType="single"
+          invalid={true}
+          invalidText="Invalid date"
+          warn={true}
+          warnText="Warning message">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+          />
+        </DatePicker>
+      </FormContext.Provider>
+    );
+    expect(screen.getByText('Invalid date')).toBeInTheDocument();
+    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+  });
+
+  it('should show only warning text when warn is true and invalid is false in fluid mode', () => {
+    render(
+      <FormContext.Provider value={{ isFluid: true }}>
+        <DatePicker
+          datePickerType="single"
+          invalid={false}
+          invalidText="Invalid date"
+          warn={true}
+          warnText="Warning message">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+          />
+        </DatePicker>
+      </FormContext.Provider>
+    );
+    expect(screen.getByText('Warning message')).toBeInTheDocument();
+    expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+  });
+
+  it('should not show any error text when both invalid and warn are false in fluid mode', () => {
+    render(
+      <FormContext.Provider value={{ isFluid: true }}>
+        <DatePicker
+          datePickerType="single"
+          invalid={false}
+          invalidText="Invalid date"
+          warn={false}
+          warnText="Warning message">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+          />
+        </DatePicker>
+      </FormContext.Provider>
+    );
+    expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
   });
 });
 
