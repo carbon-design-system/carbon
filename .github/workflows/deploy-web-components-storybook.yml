@@ -41,7 +41,7 @@ jobs:
           touch packages/web-components/storybook-static/CNAME
           echo "web-components.carbondesignsystem.com" > packages/web-components/storybook-static/CNAME
       - name: Push to Web Components repo
-        uses: cpina/github-action-push-to-another-repository@07c4d7b3def0a8ebe788a8f2c843a4e1de4f6900 #v1.7.2
+        uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 #v1.7.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
