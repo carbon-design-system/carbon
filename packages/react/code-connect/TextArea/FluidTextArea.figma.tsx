@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
-import { unstable__FluidTextArea as FluidTextArea } from '@carbon/react';
+import { FluidTextArea } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(

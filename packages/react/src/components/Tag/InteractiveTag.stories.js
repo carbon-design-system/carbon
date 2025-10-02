@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -84,35 +84,16 @@ Selectable.args = {
   disabled: false,
 };
 
+Selectable.parameters = {
+  controls: {
+    exclude: ['type', 'filter', 'title'],
+  },
+};
+
 Selectable.argTypes = {
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
-  },
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
-    },
-  },
   selected: {
     control: 'false',
     description: 'Specify the state of the selectable tag.',
-  },
-  title: {
-    table: {
-      disable: true,
-    },
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -281,6 +262,12 @@ Operational.args = {
   size: 'md',
 };
 
+Operational.parameters = {
+  controls: {
+    exclude: ['filter', 'title', 'selected'],
+  },
+};
+
 Operational.argTypes = {
   id: {
     control: false,
@@ -290,31 +277,6 @@ Operational.argTypes = {
   },
   className: {
     control: false,
-  },
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
-    },
-  },
-  title: {
-    table: {
-      disable: true,
-    },
-  },
-  selected: {
-    table: {
-      disable: true,
-    },
   },
   type: {
     control: false,
@@ -410,6 +372,7 @@ export const Dismissible = (args) => {
             text={tag.text}
             tagTitle={tag.tagTitle}
             title="Dismiss"
+            dismissTooltipAlignment={args.dismissTooltipAlignment}
             onClose={(e) => {
               e.preventDefault();
               handleClose(tag);
@@ -425,28 +388,40 @@ export const Dismissible = (args) => {
 Dismissible.args = {
   disabled: false,
   size: 'md',
+  dismissTooltipAlignment: 'bottom',
 };
 
+Dismissible.parameters = {
+  controls: {
+    exclude: ['filter', 'selected'],
+  },
+};
 Dismissible.argTypes = {
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  selected: {
-    table: {
-      disable: true,
-    },
-  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: {
       type: 'select',
+    },
+  },
+  dismissTooltipAlignment: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    control: { type: 'select' },
+    description: 'Specify the tooltip alignment for the dismiss button',
+    table: {
+      defaultValue: { summary: 'bottom' },
     },
   },
 };

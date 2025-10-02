@@ -8,6 +8,8 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - _autoEnablePresence
+        - _presenceId
         - accept
         - action
         - actionButtonLabel
@@ -147,6 +149,7 @@ collect:
         - name
         - narrow
         - nested
+        - noTrailingSlash
         - onActionButtonClick
         - onAddFiles
         - onBlur
@@ -265,8 +268,6 @@ collect:
         - style
         # AspectRatio
         - ratio
-        # Breadcrumb
-        - noTrailingSlash
         # ButtonSet
         - stacked
         # ChatButton
@@ -328,6 +329,7 @@ collect:
         - focusAfterCloseRef
         - modal
         # DismissibleTag
+        - dismissTooltipAlignment
         - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
@@ -341,7 +343,9 @@ collect:
         - tilePadding
         # FeatureFlags
         - enableDialogElement
+        - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
@@ -452,6 +456,7 @@ collect:
         # NumberInput
         - hideSteppers
         - stepStartValue
+        - validate
         # OrderedList
         - native
         # OverflowMenuItem
@@ -831,6 +836,7 @@ collect:
         - 2xl
         - 2xs
         - big
+        - field
         - lg
         - md
         - mini
@@ -897,6 +903,19 @@ collect:
         # ContentSwitcher - selectionMode
         - automatic
         - manual
+        # DismissibleTag - dismissTooltipAlignment
+        - bottom
+        - bottom-end
+        - bottom-start
+        - left
+        - left-end
+        - left-start
+        - right
+        - right-end
+        - right-start
+        - top
+        - top-end
+        - top-start
         # FileUploader - filenameStatus
         - complete
         - edit

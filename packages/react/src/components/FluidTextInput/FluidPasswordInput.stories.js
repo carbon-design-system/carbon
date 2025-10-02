@@ -7,12 +7,21 @@
 
 import React from 'react';
 import FluidPasswordInput from './FluidPasswordInput';
+import mdx from './FluidPasswordInput.mdx';
 
 import './test.scss';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidPasswordInput',
+  title: 'Components/Fluid Components/FluidPasswordInput',
   component: FluidPasswordInput,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: ['isPassword'],
+    },
+  },
 };
 
 export const Default = (args) => (
@@ -28,7 +37,6 @@ export const Default = (args) => (
 
 Default.args = {
   defaultWidth: 300,
-  className: 'test-class',
   placeholder: 'Placeholder text',
   showPasswordLabel: 'Show password label',
   hidePasswordLabel: 'Hide password label',
@@ -76,11 +84,6 @@ Default.argTypes = {
   invalidText: {
     control: {
       type: 'text',
-    },
-  },
-  isPassword: {
-    table: {
-      disable: true,
     },
   },
   onTogglePasswordVisibility: {

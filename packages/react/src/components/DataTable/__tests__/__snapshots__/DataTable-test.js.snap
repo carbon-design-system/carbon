@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`DataTable behaves as expected selection -- radio buttons should not have select-all checkbox 1`] = `
 <div>
@@ -532,9 +532,8 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             class="cds--search-input"
             id="custom-id"
             placeholder="Filter table"
-            role="searchbox"
             tabindex="0"
-            type="text"
+            type="search"
             value=""
           />
           <button
@@ -965,9 +964,8 @@ exports[`DataTable renders as expected - Component API should render and match s
             class="cds--search-input"
             id="custom-id"
             placeholder="Filter table"
-            role="searchbox"
             tabindex="0"
-            type="text"
+            type="search"
             value=""
           />
           <button

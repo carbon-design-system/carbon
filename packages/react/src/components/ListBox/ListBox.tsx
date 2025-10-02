@@ -20,7 +20,7 @@ import {
   ListBoxTypePropType,
   type ListBoxSize,
   type ListBoxType,
-} from '.';
+} from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 

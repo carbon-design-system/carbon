@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,6 +29,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: ['id'],
     },
   },
 };
@@ -110,19 +113,13 @@ Default.args = {
   disabled: false,
   labelText: 'Label text',
   placeholder: 'Placeholder text',
-  role: 'searchbox',
   size: 'md',
-  type: 'text',
+  type: 'search',
 };
 
 Default.argTypes = {
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
   },
   closeButtonLabelText: {
     control: {
@@ -132,11 +129,6 @@ Default.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
-    },
-  },
-  id: {
-    table: {
-      disable: true,
     },
   },
   defaultValue: {
@@ -157,20 +149,10 @@ Default.argTypes = {
   renderIcon: {
     control: false,
   },
-  role: {
-    control: {
-      type: 'text',
-    },
-  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: {
       type: 'select',
-    },
-  },
-  type: {
-    control: {
-      type: 'text',
     },
   },
 };

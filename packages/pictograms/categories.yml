@@ -152,6 +152,7 @@ categories:
       - ecuador--quito
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
+      - frost-tower
       - geodesic-montreal-biosphere
       - guadalajara--seal
       - hamburg--philharmone
@@ -378,6 +379,7 @@ categories:
       - geographic-flexibility
       - global--business--services
       - global--footprint
+      - global--infrastructure
       - global--technology--services
       - go--language
       - gpu-computing
@@ -408,7 +410,6 @@ categories:
       - insurance--02
       - integration--02
       - integration--03
-      - internet-of-things
       - java
       - javascript
       - keep-your-own-key
@@ -695,6 +696,7 @@ categories:
       - resourceful
       - social--tile
       - software--02
+      - systems-and-tools
       - universal-experiences
       - user--experience-design
       - user--insights
@@ -761,6 +763,7 @@ categories:
       - headphones
       - microphone
       - printer
+      - team-radio
       - telephone
       - television
       - washer
@@ -787,6 +790,8 @@ categories:
       - client--financing--02
       - commercial--financing--01
       - commercial--financing--02
+      - finance-and-operations
+      - finance-and-supply-chain
       - finance--strategy
       - financial--consultant
       - financial--gain
@@ -924,6 +929,7 @@ categories:
     members:
       - build
       - connect
+      - internet-of-things
       - iot--munich
       - migrate
       - modernize--02
@@ -956,8 +962,11 @@ categories:
       - blender
       - cafe
       - candy
+      - champagne
       - cherries
       - cookie
+      - cowboy--hat
+      - cowboy--boot
       - crosshairs
       - cupcake
       - dining
@@ -965,28 +974,19 @@ categories:
       - firecracker
       - flower--01
       - flower--02
-      - football
-      - football--field
-      - football--goal-post
-      - golf--bag
-      - golf--ball
-      - golf--club
-      - golf--hole
       - gramophone
       - guitar
       - juice
       - lantern
-      - masters-leader-board
+      - longhorn
       - moon-cake
       - ornament
       - pencil
       - perfume
-      - racetrack
       - rock-on
       - scale
       - snowflake
       - soft--ice--cream
-      - sports
       - spotlight
       - stage
       - stationary--bicycle
@@ -1065,6 +1065,7 @@ categories:
       - advocate
       - advocate--mask
       - agility--02
+      - client--support
       - design-thinking-team
       - engagement-inclusion--01
       - engagement-inclusion--02
@@ -1193,6 +1194,7 @@ categories:
       - build--leadership--and--culture
       - collaboration
       - continuous--security
+      - cybersecurity
       - data--security
       - detect--and--stop--advancing--threats
       - digital--id
@@ -1232,6 +1234,38 @@ categories:
       - unlock--01
       - unlock--02
       - vault
+  - name: Sports
+    members:
+      - f1--car--01
+      - f1--car--02
+      - f1--grid
+      - f1--race
+      - f1--steering-wheel
+      - f1--pit-stop-traffic-light
+      - football
+      - football--field
+      - football--goal-post
+      - golf--bag
+      - golf--ball
+      - golf--club
+      - golf--hole
+      - headset
+      - helmet
+      - masters-leader-board
+      - punching-bag--01
+      - punching-bag--02
+      - punching-bag--03
+      - racetrack
+      - speed-bag
+      - sports
+      - tennis
+      - tennis--ball
+      - tennis--net
+      - tennis--racquet
+      - tickets
+      - ufc--belt
+      - ufc--fighting
+      - ufc--ring
   - name: Status
     members:
       - question
@@ -1257,6 +1291,7 @@ categories:
   - name: Supply chain
     members:
       - connected--nodes--to--the--cloud
+      - control--tower
       - delivered
       - managing--contractual--flow
       - managing--items
@@ -1270,6 +1305,7 @@ categories:
       - process
       - supply-chain--01
       - supply-chain--02
+      - transparent-supply
   - name: Sustainability
     members:
       - energy--crisis
@@ -1347,6 +1383,7 @@ categories:
       - road
       - spaceship
       - steering--wheel
+      - tire
       - train
       - travel-and-expenses
       - tunnel
