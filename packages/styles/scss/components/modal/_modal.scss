@@ -279,8 +279,6 @@
   // Modal overflow
   // -----------------------------
   .#{$prefix}--modal-scroll-content {
-    // REMOVE BEFORE MERGING, makes the gradient easier to see for reviewers
-    background-color: #0000ff;
     // Required to accommodate focus outline's negative offset when scrolling in Chrome
     border-block-end: 2px solid transparent;
     mask-image: linear-gradient(
