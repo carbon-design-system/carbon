@@ -616,7 +616,6 @@ export const HeaderWActionsAndSwitcher = (args) => (
               <SwitcherItem aria-label="Link 1" href="#">
                 Link 1
               </SwitcherItem>
-              <SwitcherDivider />
               <SwitcherItem href="#" aria-label="Link 2">
                 Link 2
               </SwitcherItem>
