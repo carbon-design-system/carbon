@@ -51,6 +51,7 @@ export const Default = (args) => (
       rows,
       headers,
       getHeaderProps,
+      getExpandHeaderProps,
       getRowProps,
       getExpandedRowProps,
       getTableProps,
