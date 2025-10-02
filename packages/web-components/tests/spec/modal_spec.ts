@@ -25,103 +25,103 @@ describe('cds-modal', () => {
     it('Should have opening modal do nothing if already visible', async () => {
       (elem as unknown as CDSModal).open = true;
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML = '<input type="text">';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const input = elem!.querySelector('input');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(input!, 'focus');
       (elem as unknown as CDSModal).open = true;
       await Promise.resolve(); // For triggering the update cycle of `<cds-modal>`
       await Promise.resolve(); // `update()` in `<cds-modal>` waits for child nodes' update cycles to run
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(input!.focus).not.toHaveBeenCalled();
     });
 
     it('Should focus on modal upon showning', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(CDSModal as any, '_delay').and.callFake(() => {});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML = '<input type="text">';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const input = elem!.querySelector('input');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(input!, 'focus');
       (elem as unknown as CDSModal).open = true;
       await Promise.resolve(); // For triggering the update cycle of `<cds-modal>`
       await Promise.resolve(); // `update()` in `<cds-modal>` waits for child nodes' update cycles to run
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(input!.focus).toHaveBeenCalled();
     });
 
     it('Should support specifying the primary focus element', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(CDSModal as any, '_delay').and.callFake(() => {});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML =
         '<input type="text"><button data-modal-primary-focus></button>';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const input = elem!.querySelector('input');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const button = elem!.querySelector('button');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(input!, 'focus');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(button!, 'focus');
       (elem as unknown as CDSModal).open = true;
       await Promise.resolve(); // For triggering the update cycle of `<cds-modal>`
       await Promise.resolve(); // `update()` in `<cds-modal>` waits for child nodes' update cycles to run
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(input!.focus).not.toHaveBeenCalled();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(button!.focus).toHaveBeenCalled();
     });
 
     it('Should support using primary button in footer as the primary focus element', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(CDSModal as any, '_delay').and.callFake(() => {});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML =
         '<input type="text"><cds-modal-footer><cds-button kind="primary"></cds-button></cds-modal-footer>';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const input = elem!.querySelector('input');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const button = elem!.querySelector('cds-button');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(input!, 'focus');
       spyOn(button as HTMLButtonElement, 'focus');
       (elem as unknown as CDSModal).open = true;
       await Promise.resolve(); // For triggering the update cycle of `<cds-modal>`
       await Promise.resolve(); // `update()` in `<cds-modal>` waits for child nodes' update cycles to run
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(input!.focus).not.toHaveBeenCalled();
       expect((button as HTMLButtonElement).focus).toHaveBeenCalled();
     });
 
     it('Should have closing modal do nothing if already visible', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML = '<cds-modal-close-button></cds-modal-close-button>';
       const spyBeforeClosed = jasmine.createSpy('before closed');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-beingclosed', spyBeforeClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem!.querySelector('cds-modal-close-button') as HTMLElement).click();
       await Promise.resolve();
       expect(spyBeforeClosed).not.toHaveBeenCalled();
     });
 
     it('Should fire cds-modal-beingclosed/cds-modal-closed events upon hiding', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML = '<cds-modal-close-button></cds-modal-close-button>';
       (elem as CDSModal).open = true;
       await Promise.resolve();
       const spyBeforeClosed = jasmine.createSpy('before closed');
       const spyAfterClosed = jasmine.createSpy('after closed');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-beingclosed', spyBeforeClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-closed', spyAfterClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem!.querySelector('cds-modal-close-button') as HTMLElement).click();
       await Promise.resolve();
       expect(spyBeforeClosed).toHaveBeenCalled();
@@ -143,25 +143,25 @@ describe('cds-modal', () => {
     });
 
     it('Should support preventing modal from being closed upon user gesture', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML = '<cds-modal-close-button></cds-modal-close-button>';
       (elem as CDSModal).open = true;
       await Promise.resolve();
       const spyAfterClosed = jasmine.createSpy('after closed');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-beingclosed', (event) => {
         event.preventDefault();
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-closed', spyAfterClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem!.querySelector('cds-modal-close-button') as HTMLElement).click();
       await Promise.resolve();
       expect(spyAfterClosed).not.toHaveBeenCalled();
     });
 
     afterEach(() => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.parentNode!.removeChild(elem!);
     });
   });
@@ -180,11 +180,11 @@ describe('cds-modal', () => {
       await Promise.resolve();
       const spyBeforeClosed = jasmine.createSpy('before closed');
       const spyAfterClosed = jasmine.createSpy('after closed');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-beingclosed', spyBeforeClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-closed', spyAfterClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.ownerDocument!.body.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'Escape',
@@ -196,9 +196,9 @@ describe('cds-modal', () => {
       expect(spyAfterClosed).toHaveBeenCalled();
       const eventDataBeforeClosed = spyBeforeClosed.calls.argsFor(0)[0].detail;
       const eventDataAfterClosed = spyAfterClosed.calls.argsFor(0)[0].detail;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(eventDataBeforeClosed.triggeredBy).toBe(elem!.ownerDocument!.body);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(eventDataAfterClosed.triggeredBy).toBe(elem!.ownerDocument!.body);
     });
 
@@ -207,11 +207,11 @@ describe('cds-modal', () => {
       await Promise.resolve();
       const spyBeforeClosed = jasmine.createSpy('before closed');
       const spyAfterClosed = jasmine.createSpy('after closed');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-beingclosed', spyBeforeClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-closed', spyAfterClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.ownerDocument!.body.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'Esc',
@@ -223,24 +223,24 @@ describe('cds-modal', () => {
       expect(spyAfterClosed).toHaveBeenCalled();
       const eventDataBeforeClosed = spyBeforeClosed.calls.argsFor(0)[0].detail;
       const eventDataAfterClosed = spyAfterClosed.calls.argsFor(0)[0].detail;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(eventDataBeforeClosed.triggeredBy).toBe(elem!.ownerDocument!.body);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(eventDataAfterClosed.triggeredBy).toBe(elem!.ownerDocument!.body);
     });
 
     it('Should handle any elements with data-modal-close attribute to close the modal', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML = '<button data-modal-close></button>';
       (elem as CDSModal).open = true;
       await Promise.resolve();
       const spyBeforeClosed = jasmine.createSpy('before closed');
       const spyAfterClosed = jasmine.createSpy('after closed');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-beingclosed', spyBeforeClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-closed', spyAfterClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const closeButton = elem!.querySelector('button') as HTMLElement;
       closeButton.click();
       await Promise.resolve();
@@ -258,11 +258,11 @@ describe('cds-modal', () => {
       await Promise.resolve();
       const spyBeforeClosed = jasmine.createSpy('before closed');
       const spyAfterClosed = jasmine.createSpy('after closed');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-beingclosed', spyBeforeClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-modal-closed', spyAfterClosed);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       await Promise.resolve();
       expect((elem as CDSModal).open).toBeFalsy();
@@ -275,7 +275,7 @@ describe('cds-modal', () => {
     });
 
     afterEach(() => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.parentNode!.removeChild(elem!);
     });
   });
@@ -291,7 +291,7 @@ describe('cds-modal', () => {
 
     beforeEach(async () => {
       elem = document.body.appendChild(document.createElement('cds-modal'));
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.innerHTML = '<input type="text"><input type="text">';
       buttonBefore = document.body.insertBefore(
         document.createElement('button'),
@@ -302,29 +302,29 @@ describe('cds-modal', () => {
     });
 
     it('Should support forward focus-wrap', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(CDSModal as any, '_delay').and.callFake(() => {});
       (elem as CDSModal).open = true;
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       buttonAfter!.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.activeElement).toBe(elem!.querySelectorAll('input')[0]);
     });
 
     it('Should support backward focus-wrap', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOn(CDSModal as any, '_delay').and.callFake(() => {});
       (elem as CDSModal).open = true;
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       buttonBefore!.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(document.activeElement).toBe(elem!.querySelectorAll('input')[1]);
     });
 
     afterEach(() => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.parentNode!.removeChild(elem!);
     });
   });

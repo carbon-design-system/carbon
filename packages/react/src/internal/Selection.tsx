@@ -57,7 +57,7 @@ export const useSelection = <ItemType,>({
   const [uncontrolledItems, setUncontrolledItems] =
     useState(initialSelectedItems);
   const isControlled = !!controlledItems;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
   const selectedItems = isControlled ? controlledItems! : uncontrolledItems;
   const onItemChange = useCallback(
     (item: ItemType) => {
@@ -66,23 +66,23 @@ export const useSelection = <ItemType,>({
       // Assert special properties (e.g., `disabled`, `isSelectAll`, etc.) are
       // `any` since those properties aren’t part of the generic type.
       const allSelectableItems = filteredItems.filter(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (item) => !(item as any)?.disabled && !(item as any)?.isSelectAll
       );
       const disabledItemCount = filteredItems.filter(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (item) => (item as any)?.disabled
       ).length;
 
       let newSelectedItems: ItemType[];
 
       // deselect all on click to All/indeterminate option
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       if ((item as any)?.isSelectAll && selectedItems.length > 0) {
         newSelectedItems = [];
       }
       // select all options
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       else if ((item as any)?.isSelectAll && selectedItems.length === 0) {
         newSelectedItems = allSelectableItems;
       } else {
@@ -103,7 +103,7 @@ export const useSelection = <ItemType,>({
         } else {
           newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
           newSelectedItems = newSelectedItems.filter(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
             (item) => !(item as any)?.isSelectAll
           );
         }

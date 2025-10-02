@@ -313,74 +313,10 @@ ExplainabilityPopover.argTypes = {
     ],
     control: { type: 'select' },
   },
-  revertActive: {
-    table: {
-      disable: true,
-    },
-  },
-  AILabelContent: {
-    table: {
-      disable: true,
-    },
-  },
-  aiText: {
-    table: {
-      disable: true,
-    },
-  },
-  aiTextLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  autoAlign: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  kind: {
-    table: {
-      disable: true,
-    },
-  },
-  onRevertClick: {
-    table: {
-      disable: true,
-    },
-  },
-  revertLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  size: {
-    table: {
-      disable: true,
-    },
-  },
-  slugContent: {
-    table: {
-      disable: true,
-    },
-  },
-  slugLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  textLabel: {
-    table: {
-      disable: true,
-    },
+};
+
+ExplainabilityPopover.parameters = {
+  controls: {
+    include: ['align', 'aria-label', 'defaultOpen', 'showAILabelActions'],
   },
 };

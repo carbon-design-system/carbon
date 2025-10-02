@@ -30,7 +30,7 @@ xdescribe('cds-structured-list', () => {
       list.setAttribute('selection-name', 'selection-name-foo');
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         list
           .shadowRoot!.querySelector('section')!
           .classList.contains('cds--structured-list--selection')
@@ -44,9 +44,9 @@ xdescribe('cds-structured-list', () => {
     });
 
     it('should reflect the selection', () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const input1 = rows[1]!.shadowRoot!.querySelector('input');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       input1!.click();
       expect(
         Array.prototype.map.call(
@@ -86,7 +86,7 @@ xdescribe('cds-structured-list', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });
