@@ -641,6 +641,23 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     }
   }, [open, selectorPrimaryFocus, danger, prefix, enableDialogElement]);
 
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      const el = entry.target as HTMLElement;
+      const h = entry.contentRect.height;
+      if (h <= 300) {
+        el.style.setProperty('mask-image', 'none');
+      } else {
+        el.style.removeProperty('mask-image');
+      }
+    });
+    resizeObserver.observe(contentRef.current);
+
+    return () => resizeObserver.disconnect();
+  }, [contentRef]);
+
   useIsomorphicEffect(() => {
     if (contentRef.current) {
       setIsScrollable(
