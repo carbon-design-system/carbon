@@ -185,14 +185,19 @@ const Select = React.forwardRef(
         React.isValidElement<SelectItemProps>(child)
     );
 
-    // Find the default option based on the specified defaultValue
-    const defaultOption = validChildren.find(
-      (child) => child.props?.value === other?.defaultValue
+    // Find the default option based on the specified defaultValue or value
+    const selectedValue = other?.value || other?.defaultValue;
+    const selectedOption = validChildren.find(
+      (child) => child.props?.value === selectedValue
     );
 
-    // Use the default option's text if available; otherwise, fallback to the first option's text
+    // Use the provided title prop, or the selected option's text if available;
+    // otherwise, fallback to the first option's text
     const initialTitle =
-      defaultOption?.props?.text || validChildren[0]?.props?.text || '';
+      other?.title ||
+      selectedOption?.props?.text ||
+      validChildren[0]?.props?.text ||
+      '';
 
     const [title, setTitle] = useState(initialTitle);
     const selectClasses = classNames({

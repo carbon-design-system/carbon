@@ -26,6 +26,11 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-overflow-menu[size='xs']),
+:host(#{$prefix}-breadcrumb-overflow-menu[size='xs']) {
+  @extend .#{$prefix}--overflow-menu--xs;
+}
+
 :host(#{$prefix}-overflow-menu[size='sm']),
 :host(#{$prefix}-breadcrumb-overflow-menu[size='sm']) {
   @extend .#{$prefix}--overflow-menu--sm;
@@ -86,6 +91,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--overflow-menu-options--open;
 }
 
+:host(#{$prefix}-overflow-menu-body[size='xs']) {
+  @extend .#{$prefix}--overflow-menu-options--xs;
+}
+
 :host(#{$prefix}-overflow-menu-body[size='sm']) {
   @extend .#{$prefix}--overflow-menu-options--sm;
 }
@@ -102,6 +111,10 @@ $css--plex: true !default;
   button:hover {
     background-color: $layer-hover;
   }
+}
+
+:host(#{$prefix}-overflow-menu-item[size='xs']) {
+  block-size: $spacing-06;
 }
 
 :host(#{$prefix}-overflow-menu-item[size='sm']) {

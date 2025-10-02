@@ -28,7 +28,7 @@ export const Default = {
             label-text="Label"
             label-a="On"
             label-b="Off"
-            checked></cds-toggle>
+            toggled></cds-toggle>
         </feature-flags>
       </div>
     </sb-template-feature-flags>
