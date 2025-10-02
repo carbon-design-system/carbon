@@ -216,7 +216,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onClose?(event: MouseEvent): void | boolean;
 
   /**
@@ -341,7 +341,7 @@ const ComposedModalDialog = React.forwardRef<
     if (!enableDialogElement) {
       toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open, prefix]);
   // Remove the document.body className on unmount
   useEffect(() => {
@@ -438,26 +438,7 @@ const ComposedModalDialog = React.forwardRef<
       return;
     }
 
-    const lastContent = modalContent.children[modalContent.children.length - 1];
-    const gradientSpacing =
-      modalContent.scrollHeight -
-      (lastContent as HTMLElement).offsetTop -
-      (lastContent as HTMLElement).clientHeight;
-
-    for (const elem of modalContent.children) {
-      if (elem.contains(currentActiveNode)) {
-        const spaceBelow =
-          modalContent.clientHeight -
-          (elem as HTMLElement).offsetTop +
-          modalContent.scrollTop -
-          (elem as HTMLElement).clientHeight;
-        if (spaceBelow < gradientSpacing) {
-          modalContent.scrollTop =
-            modalContent.scrollTop + (gradientSpacing - spaceBelow);
-        }
-        break;
-      }
-    }
+    currentActiveNode.scrollIntoView({ block: 'center' });
   }
 
   function closeModal(evt) {
@@ -541,7 +522,7 @@ const ComposedModalDialog = React.forwardRef<
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
 
   useEffect(() => {
@@ -598,7 +579,7 @@ const ComposedModalDialog = React.forwardRef<
         focusButton(innerModal.current);
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open, selectorPrimaryFocus, isOpen]);
 
   // AILabel is always size `sm`
@@ -606,7 +587,7 @@ const ComposedModalDialog = React.forwardRef<
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'sm' })
-    : null;
+    : candidate;
 
   const modalBody = enableDialogElement ? (
     <Dialog

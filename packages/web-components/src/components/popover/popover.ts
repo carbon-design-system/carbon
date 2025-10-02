@@ -89,7 +89,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     if (this.tabTip) {
       const component = (target as HTMLSlotElement).assignedNodes().filter(
         (node) =>
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
       );
       (component[0] as HTMLElement).classList.add(
@@ -100,7 +100,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   }
 
   @HostListener('focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleFocusOut(event: Event) {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;

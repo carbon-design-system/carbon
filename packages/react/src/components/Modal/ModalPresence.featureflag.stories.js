@@ -49,7 +49,7 @@ export const EnablePresence = () => {
         }>
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
         <ClassPrefix prefix="dialog-refactor">
-          <div className="experimental-modal-with-presence">
+          <div className="preview-modal-with-presence">
             <Modal
               open={open}
               onRequestClose={() => setOpen(false)}

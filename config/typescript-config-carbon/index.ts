@@ -25,7 +25,7 @@ export const loadTsCompilerOpts = (path: string) => {
   const { errors } = opts;
   if (errors.length > 0) {
     errors.forEach((diagnostic) => {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.log(diagnosticToMessage(diagnostic));
     });
     throw new Error('Base TypeScript config file errors found');

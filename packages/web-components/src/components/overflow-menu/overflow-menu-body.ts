@@ -98,7 +98,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
    * Handles `keydown` event on the menu body.
    */
   @HostListener('keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleKeydown = async (event: KeyboardEvent) => {
     const { key } = event;
@@ -143,7 +143,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
           if (triggerButton) {
             (triggerButton as HTMLElement).focus();
           } else {
-            // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+            // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
             console.warn('Could not find trigger button.');
             (document.body as HTMLElement).focus();
           }
