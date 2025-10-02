@@ -132,6 +132,28 @@ describe('Popover', () => {
       expect(container.firstChild).toHaveClass(`${prefix}--popover--tab-tip`);
     });
 
+    it('should respect border prop', () => {
+      const { container } = render(
+        <Popover open border>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--border`);
+    });
+
+    it('should respect dropShadow prop', () => {
+      const { container } = render(
+        <Popover open dropShadow>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--drop-shadow`
+      );
+    });
+
     it('should not allow other alignments than bottom-start or bottom-end when isTabTip is present', () => {
       const { container } = render(
         <Popover open isTabTip align="top-start">

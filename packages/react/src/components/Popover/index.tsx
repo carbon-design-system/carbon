@@ -102,6 +102,11 @@ export interface PopoverBaseProps {
   caret?: boolean;
 
   /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
+
+  /**
    * Provide elements to be rendered inside of the component
    */
   children?: React.ReactNode;
@@ -162,6 +167,7 @@ export const Popover: PopoverComponent & {
     caret = isTabTip ? false : true,
     className: customClassName,
     children,
+    border = false,
     dropShadow = true,
     highContrast = false,
     onRequestClose,
@@ -410,6 +416,7 @@ export const Popover: PopoverComponent & {
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
@@ -597,6 +604,11 @@ Popover.propTypes = {
    * Specify whether a caret should be rendered
    */
   caret: PropTypes.bool,
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border: PropTypes.bool,
 
   /**
    * Provide elements to be rendered inside of the component

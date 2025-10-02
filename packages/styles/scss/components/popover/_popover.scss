@@ -49,6 +49,12 @@ $popover-background-color: custom-property.get-var(
 // The drop shadow value used for the popover container
 $popover-drop-shadow: custom-property.get-var('popover-drop-shadow', 'none');
 
+// The border value used for the popover container
+$popover-border-color: custom-property.get-var(
+  'popover-border-color',
+  theme.$border-subtle
+);
+
 // The border radius value for the popover container
 $popover-border-radius: custom-property.get-var('popover-border-radius', 2px);
 
@@ -107,6 +113,13 @@ $popover-caret-height: custom-property.get-var(
     .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+  }
+
+  // Border modifier
+  .#{$prefix}--popover--border
+    .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    border: 1px solid $popover-border-color;
   }
 
   // Caret tip modifier
