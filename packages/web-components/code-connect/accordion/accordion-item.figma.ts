@@ -18,14 +18,16 @@ figma.connect(
       content: figma.string('Content text'),
       children: figma.instance('Swap slot'),
     },
-    // prettier-ignore
-    example: ({ title, disabled, open, content, children }) => html`
-  <cds-accordion-item title=${title} disabled=${disabled} open=${open}>
-    <p>${content}</p>
-    ${children}
-  </cds-accordion-item>`,
+    example: ({ title, disabled, open, content, children }) =>
+      html` <cds-accordion-item
+        title=${title}
+        disabled=${disabled}
+        open=${open}>
+        <p>${content}</p>
+        ${children}
+      </cds-accordion-item>`,
     imports: [
-      '<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.min.js"></script>',
+      "import '@carbon/web-components/es/components/accordion/accordion-item.js'",
     ],
   }
 );

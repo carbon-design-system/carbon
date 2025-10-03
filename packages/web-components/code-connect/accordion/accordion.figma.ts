@@ -23,13 +23,15 @@ figma.connect(
         }),
       }),
     },
-    // prettier-ignore
     example: ({ children, accordionItem }) =>
-html`<cds-accordion size=${accordionItem.size} alignment=${accordionItem.align} isFlush=${accordionItem.isFlush}>${children}
-</cds-accordion>
-`,
+      html`<cds-accordion
+        size=${accordionItem.size}
+        alignment=${accordionItem.align}
+        isFlush=${accordionItem.isFlush}
+        >${children}
+      </cds-accordion> `,
     imports: [
-      '<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.min.js"></script>',
+      "import '@carbon/web-components/es/components/accordion/accordion.js'",
     ],
   }
 );
