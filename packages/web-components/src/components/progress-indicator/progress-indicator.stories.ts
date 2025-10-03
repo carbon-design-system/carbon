@@ -7,6 +7,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { action } from 'storybook/actions';
 import './index';
 
 const args = {
@@ -77,10 +78,11 @@ export const Default = {
 };
 
 export const Interactive = {
-  render: () => html`
-    <cds-progress-indicator
-      current-index="1"
-      .onChange=${() => alert('Clicked')}>
+  args: {
+    onChange: action('onChange'),
+  },
+  render: ({ onChange }) => html`
+    <cds-progress-indicator current-index="1" .onChange=${onChange}>
       <cds-progress-step
         label="Click me"
         description="Step 1: Register an onChange event"
