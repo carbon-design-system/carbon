@@ -7,17 +7,22 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { action } from 'storybook/actions';
 import './index';
-import ifNonEmpty from '../../globals/directives/if-non-empty';
 
 const args = {
+  currentIndex: 0,
   vertical: false,
   spaceEqually: false,
   iconLabel: '',
-  secondaryLabelText: 'Optional label',
+  secondaryLabel: 'Optional label',
 };
 
 const argTypes = {
+  currentIndex: {
+    control: 'number',
+    description: 'Optionally specify the current step array index.',
+  },
   vertical: {
     control: 'boolean',
     description:
@@ -26,13 +31,14 @@ const argTypes = {
   spaceEqually: {
     control: 'boolean',
     description:
-      'Specify whether the progress steps should be split equally in size in the div.',
+      'Specify whether progress steps should be split equally in size (horizontal only).',
   },
   iconLabel: {
-    control: 'text',
-    description: 'Label used for the SVG icons in each step.',
+    table: {
+      disable: true,
+    },
   },
-  secondaryLabelText: {
+  secondaryLabel: {
     control: 'text',
     description: 'The secondary progress label.',
   },
@@ -41,83 +47,69 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
-  render: (args) => {
-    const { iconLabel, secondaryLabelText, spaceEqually, vertical } =
-      args ?? {};
-    return html`
-      <cds-progress-indicator
-        ?vertical="${vertical}"
-        ?space-equally="${spaceEqually}">
-        <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
-          label="First step"
-          secondary-label="${ifDefined(secondaryLabelText)}"
-          state="complete"></cds-progress-step>
-        <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
-          label="Second step with tooltip"
-          state="current"></cds-progress-step>
-        <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
-          label="Third step with tooltip"
-          state="incomplete"></cds-progress-step>
-        <cds-progress-step
-          description="${ifNonEmpty(iconLabel)}"
-          label="Fourth step"
-          secondary-label="Example invalid step"
-          state="invalid"></cds-progress-step>
-        <cds-progress-step
-          disabled
-          description="${ifNonEmpty(iconLabel)}"
-          label="Fifth step"
-          state="incomplete"></cds-progress-step>
-      </cds-progress-indicator>
-    `;
-  },
+  render: ({ secondaryLabel, spaceEqually, vertical, currentIndex }) => html`
+    <cds-progress-indicator
+      ?vertical="${vertical}"
+      ?space-equally="${spaceEqually}"
+      current-index="${currentIndex}">
+      <cds-progress-step
+        description="Step 1: Getting started with Carbon Design System"
+        label="First step"
+        secondary-label="${ifDefined(secondaryLabel)}"
+        complete></cds-progress-step>
+      <cds-progress-step
+        description="Step 2: Getting started with Carbon Design System"
+        label="Second step with tooltip"
+        current></cds-progress-step>
+      <cds-progress-step
+        description="Step 3: Getting started with Carbon Design System"
+        label="Third step with tooltip"></cds-progress-step>
+      <cds-progress-step
+        description="Step 4: Getting started with Carbon Design System"
+        label="Fourth step"
+        secondary-label="Example invalid step"
+        invalid></cds-progress-step>
+      <cds-progress-step
+        disabled
+        description="Step 5: Getting started with Carbon Design System"
+        label="Fifth step"></cds-progress-step>
+    </cds-progress-indicator>
+  `,
 };
 
 export const Interactive = {
-  render: () => html`
-    <cds-progress-indicator>
+  args: {
+    onChange: action('Clicked'),
+  },
+  render: ({ onChange }) => html`
+    <cds-progress-indicator current-index="1" .onChange=${onChange}>
       <cds-progress-step
         label="Click me"
-        description="Step 1: Register a onChange event"
-        state="complete"></cds-progress-step>
+        description="Step 1: Register an onChange event"
+        complete></cds-progress-step>
       <cds-progress-step
         label="Really long label"
         description="The progress indicator will listen for clicks on the steps"
-        state="current"></cds-progress-step>
+        current></cds-progress-step>
       <cds-progress-step
-        label="Third step with tooltip"
-        description="The progress indicator will listen for clicks on the steps"
-        state="incomplete"></cds-progress-step>
+        label="Third step"
+        description="The progress indicator will listen for clicks on the steps"></cds-progress-step>
     </cds-progress-indicator>
   `,
 };
 
 export const Skeleton = {
-  args: {
-    vertical: args['vertical'],
-  },
-  argTypes: {
-    vertical: args['vertical'],
-  },
   parameters: {
-    percy: {
-      skip: true,
-    },
+    percy: { skip: true },
   },
-  render: (args) => {
-    const { vertical } = args ?? {};
-    return html`
-      <cds-progress-indicator-skeleton ?vertical="${vertical}">
-        <cds-progress-step-skeleton></cds-progress-step-skeleton>
-        <cds-progress-step-skeleton></cds-progress-step-skeleton>
-        <cds-progress-step-skeleton></cds-progress-step-skeleton>
-        <cds-progress-step-skeleton></cds-progress-step-skeleton>
-      </cds-progress-indicator-skeleton>
-    `;
-  },
+  render: () => html`
+    <cds-progress-indicator-skeleton>
+      <cds-progress-step-skeleton></cds-progress-step-skeleton>
+      <cds-progress-step-skeleton></cds-progress-step-skeleton>
+      <cds-progress-step-skeleton></cds-progress-step-skeleton>
+      <cds-progress-step-skeleton></cds-progress-step-skeleton>
+    </cds-progress-indicator-skeleton>
+  `,
 };
 
 const meta = {
