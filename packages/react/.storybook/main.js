@@ -37,6 +37,8 @@ const stories = glob.sync(storyGlobs, {
 const config = {
   addons: [
     getAbsolutePath('@storybook/addon-webpack5-compiler-babel'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('storybook-addon-accessibility-checker'),
     {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: {
