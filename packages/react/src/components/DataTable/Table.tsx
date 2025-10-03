@@ -112,7 +112,6 @@ export const Table = ({
   stickyHeader,
   overflowMenuOnHover = true,
   experimentalAutoAlign = false,
-  tabIndex,
   ...other
 }: PropsWithChildren<TableProps>) => {
   const { titleId, descriptionId } = useContext(TableContext);
