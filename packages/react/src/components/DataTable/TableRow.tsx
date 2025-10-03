@@ -36,6 +36,7 @@ const TableRow = frFn((props, ref) => {
     onExpand, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     isExpanded, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     isSelected,
+    expandHeader, // eslint-disable-line @typescript-eslint/no-unused-vars
     ...cleanProps
   } = props;
 

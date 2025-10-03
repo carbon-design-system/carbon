@@ -160,6 +160,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     isExpanded: boolean;
     onExpand: (event: MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
+    id: string;
   };
 
   getRowProps: (options: {
@@ -174,6 +175,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     key: string;
     onExpand: (event: MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
+    expandHeader: string;
   };
 
   getExpandedRowProps: (options: {
@@ -443,9 +445,12 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       ...rest,
       'aria-label': t(translationKey),
       // Provide a string of all expanded row IDs, separated by a space.
-      'aria-controls': rowIds.map((id) => `expanded-row-${id}`).join(' '),
+      'aria-controls': rowIds
+        .map((id) => `${getTablePrefix()}-expanded-row-${id}`)
+        .join(' '),
       isExpanded,
       onExpand: composeEventHandlers(handlers),
+      id: `${getTablePrefix()}-expand`,
     };
   };
 
@@ -493,9 +498,10 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       onExpand: composeEventHandlers([handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
       'aria-label': t(translationKey),
-      'aria-controls': `expanded-row-${row.id}`,
+      'aria-controls': `${getTablePrefix()}-expanded-row-${row.id}`,
       isSelected: row.isSelected,
       disabled: row.disabled,
+      expandHeader: `${getTablePrefix()}-expand`,
     };
   };
 
@@ -505,7 +511,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   }) => {
     return {
       ...rest,
-      id: `expanded-row-${row.id}`,
+      id: `${getTablePrefix()}-expanded-row-${row.id}`,
     };
   };
 
