@@ -45,6 +45,15 @@
     background: $border-subtle;
     block-size: 1px;
     inline-size: convert.to-rem(224px);
+
+    hr {
+      border: none;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      block-size: 1px;
+      inline-size: 100%;
+    }
   }
 
   .#{$prefix}--switcher__item-link {

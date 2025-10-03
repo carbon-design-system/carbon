@@ -26,7 +26,11 @@ const SwitcherDivider: React.FC<SwitcherDividerProps> = ({
     [customClassName || '']: !!customClassName,
   });
 
-  return <hr {...other} className={classNames} />;
+  return (
+    <li className={classNames}>
+      <hr {...other} />
+    </li>
+  );
 };
 
 SwitcherDivider.propTypes = {
