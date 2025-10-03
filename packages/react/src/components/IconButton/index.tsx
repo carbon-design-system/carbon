@@ -13,8 +13,13 @@ import { Tooltip } from '../Tooltip';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
+import type {
+  DeprecatedPopoverAlignment,
+  NewPopoverAlignment,
+  PopoverAlignment,
+} from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 export const IconButtonKinds = [
@@ -26,33 +31,11 @@ export const IconButtonKinds = [
 
 export type IconButtonKind = (typeof IconButtonKinds)[number];
 
-export type DeprecatedIconButtonAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
+export type DeprecatedIconButtonAlignment = DeprecatedPopoverAlignment;
 
-export type NewIconButtonAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
+export type NewIconButtonAlignment = NewPopoverAlignment;
 
-export type IconButtonAlignment =
-  | DeprecatedIconButtonAlignment
-  | NewIconButtonAlignment;
+export type IconButtonAlignment = PopoverAlignment;
 
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -62,7 +45,8 @@ export interface IconButtonProps
   align?: IconButtonAlignment;
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -150,7 +134,7 @@ export interface IconButtonProps
   /**
    * Specify the size of the Button.
    */
-  size?: Extract<ButtonSize, 'sm' | 'md' | 'lg'>;
+  size?: Extract<ButtonSize, 'xs' | 'sm' | 'md' | 'lg'>;
 
   /**
    * Optionally specify a `target` when using an `<a>` element.
@@ -163,74 +147,84 @@ export interface IconButtonProps
   wrapperClasses?: string;
 }
 
-const IconButton = React.forwardRef(function IconButton(
-  {
-    align,
-    autoAlign = false,
-    badgeCount,
-    children,
-    className,
-    closeOnActivation = true,
-    defaultOpen = false,
-    disabled,
-    dropShadow = false,
-    enterDelayMs = 100,
-    highContrast = true,
-    kind,
-    label,
-    leaveDelayMs = 100,
-    wrapperClasses,
-    size,
-    isSelected,
-    ...rest
-  }: IconButtonProps,
-  ref: ForwardedRef<unknown> // TODO: this is unknown on Button, so should it be here as well?
-) {
-  const prefix = usePrefix();
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
+const IconButton = React.forwardRef(
+  (
+    {
+      align,
+      autoAlign = false,
+      badgeCount,
+      children,
+      className,
+      closeOnActivation = true,
+      defaultOpen = false,
+      disabled,
+      dropShadow = false,
+      enterDelayMs = 100,
+      highContrast = true,
+      kind,
+      label,
+      leaveDelayMs = 100,
+      wrapperClasses,
+      size,
+      isSelected,
+      ...rest
+    }: IconButtonProps,
+    ref: ForwardedRef<unknown> // TODO: this is unknown on Button, so should it be here as well?
+  ) => {
+    const prefix = usePrefix();
 
-  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`, {
-    [`${prefix}--icon-tooltip--disabled`]: disabled,
-  });
+    const tooltipClasses = classNames(
+      wrapperClasses,
+      `${prefix}--icon-tooltip`,
+      {
+        [`${prefix}--icon-tooltip--disabled`]: disabled,
+      }
+    );
 
-  if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
-    console.warn(
-      "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+    if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      console.warn(
+        "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+      );
+    }
+    const badgeId = useId('badge-indicator');
+
+    return (
+      <Tooltip
+        align={align}
+        autoAlign={autoAlign}
+        closeOnActivation={closeOnActivation}
+        className={tooltipClasses}
+        defaultOpen={defaultOpen}
+        dropShadow={dropShadow}
+        enterDelayMs={enterDelayMs}
+        highContrast={highContrast}
+        label={label}
+        leaveDelayMs={leaveDelayMs}>
+        <ButtonBase
+          {...rest}
+          disabled={disabled}
+          kind={kind}
+          ref={ref}
+          size={size}
+          isSelected={isSelected}
+          hasIconOnly
+          className={className}
+          aria-describedby={
+            rest['aria-describedby'] || (badgeCount && badgeId)
+          }>
+          {children}
+          {!disabled && badgeCount !== undefined && (
+            <BadgeIndicator
+              id={badgeId}
+              count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
+          )}
+        </ButtonBase>
+      </Tooltip>
     );
   }
-  const badgeId = useId('badge-indicator');
-
-  return (
-    <Tooltip
-      align={align}
-      autoAlign={autoAlign}
-      closeOnActivation={closeOnActivation}
-      className={tooltipClasses}
-      defaultOpen={defaultOpen}
-      dropShadow={dropShadow}
-      enterDelayMs={enterDelayMs}
-      highContrast={highContrast}
-      label={label}
-      leaveDelayMs={leaveDelayMs}>
-      <ButtonBase
-        {...rest}
-        disabled={disabled}
-        kind={kind}
-        ref={ref}
-        size={size}
-        isSelected={isSelected}
-        hasIconOnly
-        className={className}
-        aria-describedby={badgeCount && badgeId}>
-        {children}
-        {!disabled && badgeCount !== undefined && (
-          <BadgeIndicator
-            id={badgeId}
-            count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
-        )}
-      </ButtonBase>
-    </Tooltip>
-  );
-});
+);
 
 IconButton.propTypes = {
   /**
@@ -282,7 +276,9 @@ IconButton.propTypes = {
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -352,6 +348,8 @@ IconButton.propTypes = {
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
    * announced to the screen reader.
+   * If using `badgeCount={0}`, make sure the label explains that there is a
+   * new notification.
    */
   label: PropTypes.node.isRequired,
 

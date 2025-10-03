@@ -415,6 +415,33 @@ describe('ComboBox', () => {
     expect(screen.getByTestId('selected-item').textContent).toBe('Item 0');
   });
 
+  it('should restore selected item label on blur when input does not match any item and a selection exists', async () => {
+    render(
+      <ComboBox
+        {...mockProps}
+        initialSelectedItem={mockProps.items[1]}
+        allowCustomValue={false}
+      />
+    );
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+
+    await userEvent.clear(findInputNode());
+    await userEvent.type(findInputNode(), 'no-match');
+    await userEvent.keyboard('[Tab]');
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+  });
+
+  it('should keep exact match input on blur when it matches an item label', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue={false} />);
+
+    await userEvent.type(findInputNode(), 'Item 2');
+    await userEvent.keyboard('[Tab]');
+
+    expect(findInputNode()).toHaveDisplayValue('Item 2');
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
@@ -844,6 +871,31 @@ describe('ComboBox', () => {
       assertMenuClosed();
 
       // Input should be cleared
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+
+    it('should not clear input when opening then closing the menu without changes', async () => {
+      render(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
+      );
+
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+
+      await userEvent.click(screen.getByRole('button', { name: 'Open' }));
+      assertMenuOpen(mockProps);
+
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+      assertMenuClosed(mockProps);
+
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+    });
+
+    it('should clear input on blur when no item is selected and value does not match any item (`allowCustomValue` is `false`)', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+
+      await userEvent.type(findInputNode(), 'no-match-here');
+      await userEvent.keyboard('[Tab]');
+
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
@@ -1430,6 +1482,42 @@ describe('ComboBox', () => {
       // Should NOT trigger another onChange
       expect(screen.getByTestId('change-count').textContent).toBe('1');
       expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+  });
+
+  it('passes inputProps to the input element', () => {
+    render(
+      <ComboBox
+        id="test-combo"
+        items={[{ label: 'Item 1' }]}
+        itemToString={(item) => item?.label || ''}
+        inputProps={{ maxLength: 10, placeholder: 'Type here' }}
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Type here');
+    const attributes = Array.from(input.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
+
+    expect(input).toBeInTheDocument();
+    expect(attributes).toEqual({
+      'aria-activedescendant': '',
+      'aria-autocomplete': 'list',
+      'aria-controls': attributes['aria-controls'],
+      'aria-expanded': 'false',
+      'aria-haspopup': 'listbox',
+      'aria-label': 'Choose an item',
+      autocomplete: 'off',
+      class: 'cds--text-input cds--text-input--empty',
+      id: 'test-combo',
+      maxlength: '10',
+      placeholder: 'Type here',
+      role: 'combobox',
+      tabindex: '0',
+      type: 'text',
+      value: '',
     });
   });
 });

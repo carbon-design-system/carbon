@@ -14,19 +14,23 @@ import { useFeatureFlag } from '../../FeatureFlags';
 
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
-import mergeRefs from '../../../tools/mergeRefs';
+import type { PopoverAlignment } from '../../Popover';
+import { mergeRefs } from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useAttachedMenu } from '../../../internal/useAttachedMenu';
-import deprecateValuesWithin from '../../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
 const defaultSize = 'md';
 
 interface OverflowMenuProps {
   /**
-   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   * **Experimental**: Will attempt to automatically align the floating element
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -58,20 +62,12 @@ interface OverflowMenuProps {
   /**
    * Specify the size of the menu, from a list of available sizes.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  tooltipAlignment?:
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'left'
-    | 'right';
+  tooltipAlignment?: PopoverAlignment;
 
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
@@ -79,8 +75,9 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
-  function OverflowMenu(
+  (
     {
       autoAlign = false,
       children,
@@ -94,7 +91,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       ...rest
     },
     forwardRef
-  ) {
+  ) => {
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
@@ -229,7 +226,10 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
 );
 OverflowMenu.propTypes = {
   /**
-   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   * **Experimental**: Will attempt to automatically align the floating element
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
   /**
@@ -265,7 +265,7 @@ OverflowMenu.propTypes = {
   /**
    * Specify the size of the menu, from a list of available sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify how the trigger tooltip should be aligned.

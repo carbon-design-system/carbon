@@ -1,20 +1,28 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { warning } from '../../internal/warning';
 import cx from 'classnames';
-import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
-import React, { ForwardedRef, ReactNode, useContext } from 'react';
+import PropTypes, { ReactElementLike } from 'prop-types';
+import React, {
+  cloneElement,
+  useContext,
+  type ForwardedRef,
+  type HTMLAttributes,
+  type ReactNode,
+} from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useId } from '../../internal/useId';
-import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
 export type ReactNodeLike =
@@ -26,10 +34,12 @@ export type ReactNodeLike =
   | null
   | undefined;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export type func = (...args: any[]) => any;
+let didWarnAboutDatePickerInputValue = false;
 
 export interface DatePickerInputProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * The type of the date picker:
    *
@@ -96,9 +106,11 @@ export interface DatePickerInputProps
    * TODO:need to be rewritten
    */
   pattern?: (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     props: { [key: string]: any },
     propName: string,
     componentName: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   ) => null | any | Error;
 
   /**
@@ -182,6 +194,21 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     placeholder,
     type,
   };
+
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    'value' in rest &&
+    !didWarnAboutDatePickerInputValue
+  ) {
+    warning(
+      false,
+      `The 'value' prop is not supported on the DatePickerInput component. ` +
+        `For DatePicker components with 'datePickerType="range"', please ` +
+        `pass the 'value' prop (as an array of dates) to the parent ` +
+        `DatePicker component instead.`
+    );
+    didWarnAboutDatePickerInputValue = true;
+  }
   const wrapperClasses = cx(`${prefix}--date-picker-input__wrapper`, {
     [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
     [`${prefix}--date-picker-input__wrapper--warn`]: warn,
@@ -211,6 +238,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     ? undefined
     : `datepicker-input-helper-text-${datePickerInputInstanceId}`;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const inputProps: any = {
     ...rest,
     ...datePickerInputProps,
@@ -225,20 +253,11 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   const input = <input {...inputProps} />;
 
   // AILabel always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
-    : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
+    : candidate;
 
   return (
     <div className={containerClasses}>
@@ -276,7 +295,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
           </Text>
         </>
       )}
-      {warn && (
+      {warn && !invalid && (
         <>
           {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
           <Text as="div" className={`${prefix}--form-requirement`}>
@@ -361,12 +380,14 @@ DatePickerInput.propTypes = {
   /**
    * Provide a regular expression that the input value must match
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   pattern: (props, propName, componentName): null | any | Error => {
     if (props[propName] === undefined) {
       return;
     }
     try {
       new RegExp(props[propName]);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     } catch (e) {
       return new Error(
         `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`

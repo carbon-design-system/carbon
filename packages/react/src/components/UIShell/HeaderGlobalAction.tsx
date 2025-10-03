@@ -72,7 +72,7 @@ export interface HeaderGlobalActionProps {
  * Note: children passed to this component should be an Icon.
  */
 const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
-  function HeaderGlobalAction(
+  (
     {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -86,7 +86,7 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
       ...rest
     },
     ref: React.Ref<HTMLButtonElement>
-  ) {
+  ) => {
     const prefix = usePrefix();
     const className = cx({
       [customClassName as string]: !!customClassName,

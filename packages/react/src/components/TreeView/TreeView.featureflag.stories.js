@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { Button, VStack } from '../../';
 
@@ -246,10 +246,14 @@ Default.args = {
 };
 
 Default.argTypes = {
-  active: { control: { disable: true } },
-  selected: { control: { disable: true } },
   size: {
     options: ['xs', 'sm'],
     control: { type: 'select' },
+  },
+};
+
+Default.parameters = {
+  controls: {
+    exclude: ['active', 'selected'],
   },
 };

@@ -1,19 +1,19 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import './index';
 import '../icon-button/index';
 import '../button/index';
 import styles from './ai-label-story.scss?lit';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { AI_LABEL_SIZE } from './defs';
@@ -61,20 +61,21 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const args = {
   aiTextLabel: '',
   alignment: POPOVER_ALIGNMENT.BOTTOM,
@@ -85,6 +86,7 @@ const args = {
   size: AI_LABEL_SIZE.EXTRA_SMALL,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const argTypes = {
   aiTextLabel: {
     control: 'text',
@@ -225,43 +227,6 @@ export const ExplainabilityPopover = {
           size="${AI_LABEL_SIZE.EXTRA_SMALL}">
           ${content} ${showActions ? actions : ''}
         </cds-ai-label>
-      </div>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      alignment,
-      aiTextLabel,
-      autoalign,
-      kind,
-      revertActive,
-      showActions,
-      size,
-    } = args ?? {};
-    return html`
-      <style>
-        ${styles}
-      </style>
-      <div class="ai-label-container">
-        <cds-ai-label
-          ?autoalign=${autoalign}
-          alignment="${ifDefined(alignment)}"
-          size="${size}"
-          kind="${kind}"
-          ai-text-label="${aiTextLabel}"
-          ?revert-active="${revertActive}">
-          ${content} ${showActions ? actions : ''}
-        </cds-ai-label>
-      </div>
-      <div style="display: inline-flex">
-        <cds-button>Test</cds-button>
-        <cds-button kind="danger">Test</cds-button>
-        <div></div>
       </div>
     `;
   },

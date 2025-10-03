@@ -43,6 +43,7 @@ export const useControllableState = <T>({
 }: UseControllableStateConfig<T>): [
   T,
   (stateOrUpdater: T | ((prev: T) => T)) => void,
+  boolean,
 ] => {
   const [state, internalSetState] = useState<T>(
     typeof value !== 'undefined' ? value : defaultValue
@@ -97,8 +98,8 @@ export const useControllableState = <T>({
   }, [name, value]);
 
   if (controlled.current === true) {
-    return [value as T, setState];
+    return [value as T, setState, controlled.current];
   }
 
-  return [state, setState];
+  return [state, setState, controlled.current];
 };

@@ -24,14 +24,6 @@ export default {
     visited: false,
   },
   argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    as: {
-      control: false,
-    },
     renderIcon: {
       table: {
         disable: true,

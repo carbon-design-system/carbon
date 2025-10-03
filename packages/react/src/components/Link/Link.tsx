@@ -14,12 +14,8 @@ import React, {
   ElementType,
   HTMLAttributeAnchorTarget,
 } from 'react';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
 
 export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -56,7 +52,7 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   renderIcon?: ComponentType;
 
   /**
-   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size?: 'sm' | 'md' | 'lg';
 
@@ -76,10 +72,13 @@ export type LinkProps<T extends React.ElementType> =
 
 type LinkComponent = <T extends React.ElementType = 'a'>(
   props: LinkProps<T>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 // First create the component with basic types
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const LinkBase = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   LinkBaseProps & {
     as?: ElementType;
@@ -110,7 +109,7 @@ const LinkBase = React.forwardRef<
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
-      className: BaseComponent ? undefined : className,
+      className,
       rel,
       target,
     };
@@ -124,10 +123,28 @@ const LinkBase = React.forwardRef<
       linkProps['aria-disabled'] = true;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
 
+    const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      if (disabled) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        // If the link is not disabled, we allow the onClick event to propagate
+        // so that any parent handlers can also respond to the click.
+        if (rest.onClick) {
+          rest.onClick(event);
+        }
+      }
+    };
+
     return (
-      <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
+      <BaseComponentAsAny
+        ref={ref}
+        {...linkProps}
+        {...rest}
+        onClick={handleOnClick}>
         {children}
         {!inline && Icon && (
           <div className={`${prefix}--link__icon`}>
@@ -179,7 +196,7 @@ const Link = LinkBase as LinkComponent;
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 

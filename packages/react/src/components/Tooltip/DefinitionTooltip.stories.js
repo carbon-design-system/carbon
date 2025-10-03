@@ -17,23 +17,12 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['id', 'tooltipText', 'triggerClassName'],
     },
     docs: {
       page: mdx,
     },
     layout: 'centered',
-  },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
   },
   decorators: [
     (Story) => (
@@ -68,6 +57,10 @@ Default.args = {
 
 Default.argTypes = {
   align: {
+    // TODO:
+    // 1. Should the deprecated options be deleted?
+    // 2. The list doesn't include all of the options available in the
+    //    component. Is it supposed to?
     options: [
       'top',
       'top-left',
@@ -94,22 +87,9 @@ Default.argTypes = {
       type: 'text',
     },
   },
-  id: {
-    table: { disable: true },
-  },
   openOnHover: {
     control: {
       type: 'boolean',
-    },
-  },
-  tooltipText: {
-    table: {
-      disable: true,
-    },
-  },
-  triggerClassName: {
-    table: {
-      disable: true,
     },
   },
 };

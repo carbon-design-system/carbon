@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,9 +7,8 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import { usePrefix } from '../internal/usePrefix';
-import { ReactAttr } from '../types/common';
 
 type HTMLTagName = keyof HTMLElementTagNameMap;
 
@@ -28,7 +27,8 @@ const wrapComponent = <T extends HTMLTagName>({
   className: getClassName,
   type,
 }: WrapComponentArgs<T>): ((
-  props: ReactAttr<T>
+  props: HTMLAttributes<T>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement<any>) => {
   /**
    *
@@ -55,8 +55,8 @@ const wrapComponent = <T extends HTMLTagName>({
   Component.propTypes = {
     className: PropTypes.string,
   };
-
-  return Component as (props: ReactAttr<T>) => React.ReactElement<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+  return Component as (props: HTMLAttributes<T>) => React.ReactElement<any>;
 };
 
 export default wrapComponent;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,14 +59,67 @@ class CDSHeaderGlobalAction extends CDSButton {
     super.connectedCallback();
   }
 
+  firstUpdated() {
+    document.addEventListener('click', this._handleDocumentClick, true);
+    document.addEventListener('focusin', this._handleDocumentFocusIn, true);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('click', this._handleDocumentClick, true);
+    document.removeEventListener('focusin', this._handleDocumentFocusIn, true);
+    super.disconnectedCallback();
+  }
+
+  private _handleDocumentClick = (event: MouseEvent) => {
+    const path = event.composedPath();
+    this._handlePanelCloseIfFocusOutside(path);
+  };
+
+  private _handleDocumentFocusIn = (event: FocusEvent) => {
+    const path = event.composedPath();
+    this._handlePanelCloseIfFocusOutside(path);
+  };
+
+  private _handlePanelCloseIfFocusOutside(path: EventTarget[]) {
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const isInside = path.some(
+      (el) =>
+        el instanceof HTMLElement && (panel?.contains(el) || this.contains(el))
+    );
+
+    if (panel && !isInside) {
+      panel.removeAttribute('expanded');
+      this.active = false;
+    }
+  }
+
+  @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore
+  private _handleFocusOut(event: FocusEvent) {
+    const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+    const relatedTarget = event.relatedTarget as HTMLElement;
+
+    if (
+      panel &&
+      relatedTarget &&
+      !this.contains(relatedTarget) &&
+      !panel.contains(relatedTarget)
+    ) {
+      panel.removeAttribute('expanded');
+      this.active = false;
+    }
+  }
+
   @HostListener('click', { capture: true })
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleClick(event: Event) {
     const { disabled } = this;
     if (disabled) {
       event.stopPropagation();
     } else {
-      const panel = document.querySelector(`#${this.panelId}`);
+      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
 
       // see if there is related panel for header-global-action button first
       // and then set the expanded attr of it accordingly
@@ -82,6 +135,23 @@ class CDSHeaderGlobalAction extends CDSButton {
         const active = !this.active;
         this.active = active;
       }
+    }
+  }
+
+  @HostListener('keydown', { capture: true })
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore
+  private _handleKeyDown(event: KeyboardEvent) {
+    const { key } = event;
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      this._handleClick(event);
+    } else if (key === 'Escape') {
+      const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
+      if (panel) {
+        panel.removeAttribute('expanded');
+      }
+      this.active = false;
     }
   }
 

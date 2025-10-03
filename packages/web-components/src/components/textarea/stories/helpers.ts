@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const createProps = ({ boolean, textNullable, number }) => ({
   cols: number('Number of columns (cols)', 0),

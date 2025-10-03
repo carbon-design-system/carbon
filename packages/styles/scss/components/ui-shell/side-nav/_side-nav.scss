@@ -18,7 +18,6 @@
 @use '../../../utilities/component-reset';
 @use '../../../utilities/convert';
 @use '../../../utilities/focus-outline' as *;
-@use '../../../utilities/high-contrast-mode' as *;
 @use '../../../utilities/z-index' as *;
 
 /// UI shell side nav
@@ -541,17 +540,5 @@
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $icon-secondary;
-  }
-
-  // Windows HCM fix
-  .#{$prefix}--side-nav__icon > svg,
-  .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item:hover
-    .#{$prefix}--header__menu-arrow,
-  .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item:focus
-    .#{$prefix}--header__menu-arrow,
-  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
-    @include high-contrast-mode('icon-fill');
   }
 }

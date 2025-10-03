@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import {
   Copy,
@@ -41,6 +41,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: ['target'],
     },
   },
   argTypes: {
@@ -125,12 +128,4 @@ export const Default = (args) => {
 Default.args = {
   onClose: action('onClose'),
   open: true,
-};
-
-Default.argTypes = {
-  target: {
-    table: {
-      disable: true,
-    },
-  },
 };

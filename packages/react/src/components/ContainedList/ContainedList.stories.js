@@ -7,7 +7,7 @@
 
 import React, { useEffect } from 'react';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Add,
   Apple,
@@ -34,26 +34,12 @@ export default {
   title: 'Components/ContainedList',
   component: ContainedList,
   subcomponents: { ContainedListItem },
-  argTypes: {
-    action: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: ['action'],
     },
   },
 };

@@ -12,10 +12,6 @@
 /// Set HCM styles at the end of each file to ensure they are not overwritten
 @mixin high-contrast-mode($type: '') {
   @media screen and (-ms-high-contrast: active), (forced-colors: active) {
-    @if ($type == 'icon-fill') {
-      fill: ButtonText;
-    }
-
     @if ($type == 'focus') {
       color: Highlight;
       outline: 1px solid Highlight;

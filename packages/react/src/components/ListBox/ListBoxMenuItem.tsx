@@ -8,16 +8,16 @@
 import cx from 'classnames';
 import React, {
   forwardRef,
-  ReactNode,
   useEffect,
   useRef,
   useState,
+  type HTMLAttributes,
   type MutableRefObject,
+  type ReactNode,
   type Ref,
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /**
@@ -32,6 +32,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
  */
 const useIsTruncated = <T extends HTMLElement>(
   forwardedRef?: Ref<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   deps: any[] = []
 ) => {
   const localRef = useRef<T>(null);
@@ -49,12 +50,13 @@ const useIsTruncated = <T extends HTMLElement>(
 
       setIsTruncated(offsetWidth < scrollWidth);
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [localRef, ...deps]);
 
   return { isTruncated, ref: mergedRef };
 };
 
-export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
+export interface ListBoxMenuItemProps extends HTMLAttributes<HTMLLIElement> {
   /**
    * Specify any children nodes that should be rendered inside of the ListBox
    * Menu Item

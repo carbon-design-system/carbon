@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,16 +8,17 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import Calendar16 from '@carbon/icons/lib/calendar/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { INPUT_SIZE } from '../text-input/text-input';
 import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND } from './defs';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import styles from './date-picker.scss?lit';
+import Calendar16 from '@carbon/icons/es/calendar/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 
@@ -90,10 +91,10 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   private _renderIcon() {
     return this.kind === DATE_PICKER_INPUT_KIND.SIMPLE
       ? undefined
-      : Calendar16({
+      : iconLoader(Calendar16, {
           class: `${prefix}--date-picker__icon`,
           role: 'img',
-          children: [html` <title>Open calendar</title> `],
+          title: 'Open calendar',
         });
   }
 
@@ -108,12 +109,11 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   protected _handleSlotChange({ target }: Event) {
     if (!(target as HTMLSlotElement).name) {
-      const hasContent = (target as HTMLSlotElement)
-        .assignedNodes()
-        .some(
-          (node) =>
-            node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-        );
+      const hasContent = (target as HTMLSlotElement).assignedNodes().some(
+        (node) =>
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+          node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
       this._hasHelperText = hasContent;
     }
   }
@@ -143,28 +143,16 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   hideLabel = false;
 
   /**
-   * Specify whether the control is currently in warning state
+   * Controls the invalid state and visibility of the `validityMessage`.
    */
   @property({ type: Boolean, reflect: true })
-  warn = false;
-
-  /**
-   * Provide the text that is displayed when the control is in warning state
-   */
-  @property({ attribute: 'warn-text' })
-  warnText = '';
+  invalid = false;
 
   /**
    * Message which is displayed if the value is invalid.
    */
   @property({ attribute: 'invalid-text' })
   invalidText = '';
-
-  /**
-   * Controls the invalid state and visibility of the `validityMessage`.
-   */
-  @property({ type: Boolean, reflect: true })
-  invalid = false;
 
   /**
    * Date picker input kind.
@@ -203,16 +191,16 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   required = false;
 
   /**
-   * Vertical size of this date picker input.
-   */
-  @property({ attribute: 'size', reflect: true })
-  size = INPUT_SIZE.MEDIUM;
-
-  /**
    * true to use the short version.
    */
   @property({ type: Boolean, reflect: true })
   short = false;
+
+  /**
+   * Vertical size of this date picker input.
+   */
+  @property({ attribute: 'size', reflect: true })
+  size = INPUT_SIZE.MEDIUM;
 
   /**
    * The `type` attribute for the `<input>` in the shadow DOM.
@@ -225,6 +213,18 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   @property()
   value!: string;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  @property({ attribute: 'warn-text' })
+  warnText = '';
 
   render() {
     const constructor = this.constructor as typeof CDSDatePickerInput;
@@ -248,15 +248,22 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       _hasAILabel: hasAILabel,
     } = this;
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`,
     });
 
-    const normalizedProps = {
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,
       warn: !readonly && !invalid && warn,
@@ -285,6 +292,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--date-picker__input--invalid`]: normalizedProps.invalid,
       [`${prefix}--date-picker__input--warn`]: normalizedProps.warn,
       [`${prefix}--date-picker__input--${size}`]: size,
+      [`${prefix}--date-picker__input--decorator`]: hasAILabel,
     });
 
     const inputWrapperClasses = classMap({
@@ -292,7 +300,6 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--date-picker-input__wrapper--invalid`]:
         normalizedProps.invalid,
       [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
-      [`${prefix}--date-picker-input__wrapper--slug`]: hasAILabel,
     });
 
     const helperTextClasses = classMap({
@@ -340,6 +347,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   }
 
   updated() {
+    this.toggleAttribute('ai-label', this._hasAILabel);
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {

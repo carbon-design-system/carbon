@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,9 +7,8 @@
 
 import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, { ForwardedRef, JSX, type ElementType } from 'react';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { PolymorphicProps } from '../../types/common';
-import { HeaderMenuItemBaseProps } from './HeaderMenuItem';
 
 export interface LinkBaseProps {
   /**
@@ -28,6 +27,7 @@ export type LinkProps<E extends ElementType = 'a'> = PolymorphicProps<
 export interface LinkComponent {
   <E extends ElementType = 'a'>(props: LinkProps<E>): JSX.Element | null;
   displayName?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: WeakValidationMap<LinkProps<any>>;
 }
 
@@ -40,11 +40,13 @@ const LinkBase = (
     as: BaseComponent,
     // Captured here to prevent it from being passed into the created element.
     // See https://github.com/carbon-design-system/carbon/issues/3970
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     isSideNavExpanded: _isSideNavExpanded,
     ...rest
   }: LinkPropsWithoutRef,
   ref: ForwardedRef<HTMLAnchorElement>
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const BaseComponentAsAny = (BaseComponent ?? element ?? 'a') as any;
   return <BaseComponentAsAny ref={ref} {...rest} />;
 };

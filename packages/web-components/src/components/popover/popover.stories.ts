@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,9 +11,10 @@ import './popover-content';
 import '../radio-button/index';
 import { POPOVER_ALIGNMENT } from './defs';
 import { prefix } from '../../globals/settings';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
-import Settings16 from '@carbon/icons/lib/settings/16.js';
+import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../checkbox/checkbox';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
 const controls = {
@@ -55,11 +56,66 @@ const controls = {
   },
 };
 
+export const Default = {
+  argTypes: controls,
+  args: {
+    caret: true,
+    highContrast: false,
+    align: POPOVER_ALIGNMENT.BOTTOM,
+    dropShadow: true,
+    open: true,
+  },
+
+  decorators: [
+    (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
+  ],
+  render: (args) => {
+    const handleClick = () => {
+      const popover = document.querySelector(`${prefix}-popover`);
+      const open = popover?.hasAttribute('open');
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
+    };
+
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <cds-popover
+        ?open=${args.open}
+        ?caret=${args.caret}
+        ?highContrast=${args.highContrast}
+        align=${args.align}
+        ?dropShadow=${args.dropShadow}>
+        <button
+          class="playground-trigger"
+          aria-label="Checkbox"
+          type="button"
+          aria-expanded=${open}
+          @click="${() => handleClick()}">
+          ${iconLoader(Checkbox16)}
+        </button>
+        <cds-popover-content>
+          <div class="p-3">
+            <p class="popover-title">Available storage</p>
+            <p class="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </div>
+        </cds-popover-content>
+      </cds-popover>
+    `;
+  },
+};
+
 export const TabTip = {
   render: () => {
     const handleClick = (id) => {
       const popover = document.querySelector(id);
       const open = popover?.hasAttribute('open');
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       open
         ? popover?.removeAttribute('open')
         : popover?.setAttribute('open', '');
@@ -70,12 +126,12 @@ export const TabTip = {
         ${styles}
       </style>
       <div class="popover-tabtip-story" style="display: 'flex'">
-        <cds-popover open tabTip id="popover-one">
+        <cds-popover tabTip id="popover-one">
           <button
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-one')}">
-            ${Settings16()}
+            ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">
@@ -119,7 +175,7 @@ export const TabTip = {
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-two')}">
-            ${Settings16()}
+            ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">
@@ -159,44 +215,6 @@ export const TabTip = {
           </cds-popover-content>
         </cds-popover>
       </div>
-    `;
-  },
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: {
-    caret: true,
-    highContrast: false,
-    align: POPOVER_ALIGNMENT.BOTTOM,
-    dropShadow: true,
-    open: true,
-  },
-
-  decorators: [
-    (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
-  ],
-  render: (args) => {
-    return html`
-      <style>
-        ${styles}
-      </style>
-      <cds-popover
-        ?open=${args.open}
-        ?caret=${args.caret}
-        ?highContrast=${args.highContrast}
-        align=${args.align}
-        ?dropShadow=${args.dropShadow}>
-        <div class="playground-trigger">${Checkbox16()}</div>
-        <cds-popover-content>
-          <div class="p-3">
-            <p class="popover-title">Available storage</p>
-            <p class="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
-          </div>
-        </cds-popover-content>
-      </cds-popover>
     `;
   },
 };

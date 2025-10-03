@@ -41,17 +41,16 @@ export const AutoAlign = () => {
   const ref = useRef();
 
   useEffect(() => {
-    console.log(ref);
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
 
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
+    <div style={{ width: '4900px', height: '4900px' }}>
       <div
         style={{
           position: 'absolute',
-          top: '2500px',
-          left: '2500px',
+          top: '2450px',
+          left: '2450px',
         }}
         ref={ref}>
         <OverflowMenu autoAlign={true}>
@@ -182,32 +181,17 @@ Default.args = {
   label: 'Options',
 };
 
+Default.parameters = {
+  controls: {
+    exclude: ['renderIcon', 'menuTarget'],
+  },
+};
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  renderIcon: {
-    table: {
-      disable: true,
-    },
-  },
   menuAlignment: {
     options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
     control: { type: 'select' },
     description:
       'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
     default: 'bottom-start',
-  },
-  menuTarget: {
-    table: {
-      disable: true,
-    },
   },
 };

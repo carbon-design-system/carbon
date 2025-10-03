@@ -9,10 +9,11 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
-import Add16 from '@carbon/icons/lib/add/16.js';
-import Subtract16 from '@carbon/icons/lib/subtract/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import Add16 from '@carbon/icons/es/add/16.js';
+import Subtract16 from '@carbon/icons/es/subtract/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { NUMBER_INPUT_VALIDATION_STATUS } from './defs';
 import styles from './number-input.scss?lit';
@@ -34,11 +35,16 @@ export { NUMBER_INPUT_VALIDATION_STATUS };
 @customElement(`${prefix}-number-input`)
 class CDSNumberInput extends CDSTextInput {
   /**
-   * Handles `input` event on the `<input>` in the shadow DOM.
+   * Handles `input` event on the `input` in the shadow DOM.
    */
   protected _handleInput(event: Event) {
     const { target } = event;
     const { value } = target as HTMLInputElement;
+    const direction =
+      this._value !== undefined && Number(value) > Number(this._value)
+        ? 'up'
+        : 'down';
+
     this.dispatchEvent(
       new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
         bubbles: true,
@@ -46,10 +52,11 @@ class CDSNumberInput extends CDSTextInput {
         cancelable: false,
         detail: {
           value,
+          direction,
         },
       })
     );
-    super._handleInput(event);
+    this._value = value;
   }
 
   /**
@@ -66,6 +73,7 @@ class CDSNumberInput extends CDSTextInput {
         cancelable: false,
         detail: {
           value: input.value,
+          direction: 'down',
         },
       })
     );
@@ -85,10 +93,43 @@ class CDSNumberInput extends CDSTextInput {
         cancelable: false,
         detail: {
           value: input.value,
+          direction: 'up',
         },
       })
     );
   }
+
+  /**
+   * Handles `focus` event on the `input` in the shadow DOM.
+   */
+  protected _handleFocus(event: FocusEvent) {
+    if (this.disableWheel) {
+      (event.target as HTMLInputElement).addEventListener(
+        'wheel',
+        this._preventWheel,
+        { passive: false }
+      );
+    }
+  }
+
+  /**
+   * Handles `blur` event on the `input` in the shadow DOM.
+   */
+  protected _handleBlur(event: FocusEvent) {
+    if (this.disableWheel) {
+      (event.target as HTMLInputElement).removeEventListener(
+        'wheel',
+        this._preventWheel
+      );
+    }
+  }
+
+  /**
+   * Prevents wheel events from changing the input value.
+   */
+  protected _preventWheel = (event: WheelEvent) => {
+    event.preventDefault();
+  };
 
   /**
    * The underlying input element
@@ -100,15 +141,18 @@ class CDSNumberInput extends CDSTextInput {
     if (this.invalid) {
       return false;
     }
+
+    if (this.value === '') {
+      return this.allowEmpty;
+    }
+
     if (
       this._input?.valueAsNumber > Number(this.max) ||
       this._input?.valueAsNumber < Number(this.min)
     ) {
       return false;
     }
-    if (this.value === '') {
-      return this.allowEmpty;
-    }
+
     return true;
   }
 
@@ -161,6 +205,12 @@ class CDSNumberInput extends CDSTextInput {
   }
 
   /**
+   * Provide a description for up/down icons that can be read by screen readers
+   */
+  @property({ attribute: 'icon-description' })
+  iconDescription = '';
+
+  /**
    * Aria text for the button that increments the value
    */
   @property({ attribute: 'increment-button-assistive-text' })
@@ -185,23 +235,61 @@ class CDSNumberInput extends CDSTextInput {
   allowEmpty = false;
 
   /**
+   * Optional starting value for uncontrolled state
+   */
+  @property({ attribute: 'default-value' })
+  defaultValue = '';
+
+  /**
+   * Specify if the wheel functionality for the input should be disabled, or not
+   */
+  @property({ type: Boolean, attribute: 'disable-wheel', reflect: true })
+  disableWheel = false;
+
+  /**
    * The input box size.
    */
   @property({ reflect: true })
   size = INPUT_SIZE.MEDIUM;
 
+  getDecimalPlaces = (num: number) => {
+    const parts = num.toString().split('.');
+
+    return parts[1] ? parts[1].length : 0;
+  };
+
   /**
    * Handles incrementing the value in the input
    */
   stepUp() {
-    this._input.stepUp();
+    const currentValue = Number(this._input.value);
+    const rawValue = currentValue + Number(this.step);
+
+    const precision = Math.max(
+      this.getDecimalPlaces(currentValue),
+      this.getDecimalPlaces(Number(this.step))
+    );
+
+    const floatValue = parseFloat(rawValue.toFixed(precision));
+    this._value = String(floatValue);
+    this.value = this._value;
   }
 
   /**
    * Handles decrementing the value in the input
    */
   stepDown() {
-    this._input.stepDown();
+    const currentValue = Number(this._input.value);
+    const rawValue = currentValue - Number(this.step);
+
+    const precision = Math.max(
+      this.getDecimalPlaces(currentValue),
+      this.getDecimalPlaces(Number(this.step))
+    );
+
+    const floatValue = parseFloat(rawValue.toFixed(precision));
+    this._value = String(floatValue);
+    this.value = this._value;
   }
 
   render() {
@@ -209,19 +297,28 @@ class CDSNumberInput extends CDSTextInput {
       _handleInput: handleInput,
       _handleUserInitiatedStepDown: handleUserInitiatedStepDown,
       _handleUserInitiatedStepUp: handleUserInitiatedStepUp,
+      _handleFocus: handleFocus,
+      _handleBlur: handleBlur,
     } = this;
 
     const isValid = this._getInputValidity();
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--number__invalid`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--number__invalid ${prefix}--number__invalid--warning`,
     });
 
-    const normalizedProps = {
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
       disabled: !this.readonly && this.disabled,
       invalid: !this.readonly && !isValid,
       warn: !this.readonly && isValid && this.warn,
@@ -240,7 +337,7 @@ class CDSNumberInput extends CDSTextInput {
     const inputWrapperClasses = classMap({
       [`${prefix}--number__input-wrapper`]: true,
       [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--number__input-wrapper--slug`]: this._hasAILabel,
+      [`${prefix}--number__input-wrapper--decorator`]: this._hasAILabel,
     });
 
     const labelClasses = classMap({
@@ -254,29 +351,36 @@ class CDSNumberInput extends CDSTextInput {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
+    // Use defaultValue when value is not set
+    const inputValue = this.hasAttribute('value')
+      ? this._value
+      : this.defaultValue || this._value;
+
     const incrementButton = html`
       <button
         class="${prefix}--number__control-btn up-icon"
-        aria-label="${this.incrementButtonAssistiveText}"
+        aria-label="${this.iconDescription ||
+        this.incrementButtonAssistiveText}"
         aria-live="polite"
         aria-atomic="true"
         type="button"
         ?disabled=${normalizedProps.disabled}
         @click=${handleUserInitiatedStepUp}>
-        ${Add16()}
+        ${iconLoader(Add16)}
       </button>
       <div class="${prefix}--number__rule-divider"></div>
     `;
     const decrementButton = html`
       <button
         class="${prefix}--number__control-btn down-icon"
-        aria-label="${this.decrementButtonAssistiveText}"
+        aria-label="${this.iconDescription ||
+        this.decrementButtonAssistiveText}"
         aria-live="polite"
         aria-atomic="true"
         type="button"
         ?disabled=${normalizedProps.disabled}
         @click=${handleUserInitiatedStepDown}>
-        ${Subtract16()}
+        ${iconLoader(Subtract16)}
       </button>
       <div class="${prefix}--number__rule-divider"></div>
     `;
@@ -293,8 +397,10 @@ class CDSNumberInput extends CDSTextInput {
         ?readonly="${this.readonly}"
         ?required="${this.required}"
         type="number"
-        .value="${this._value}"
+        .value="${inputValue}"
         @input="${handleInput}"
+        @focus="${handleFocus}"
+        @blur="${handleBlur}"
         min="${ifNonEmpty(this.min)}"
         max="${ifNonEmpty(this.max)}"
         step="${ifNonEmpty(this.step)}"

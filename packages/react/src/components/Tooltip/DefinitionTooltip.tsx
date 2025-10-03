@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@ import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { match, keys } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 export interface DefinitionTooltipProps
   extends Omit<
@@ -25,14 +25,16 @@ export interface DefinitionTooltipProps
   align?: PopoverAlignment;
 
   /**
-   * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
+   * Will auto-align Definition Tooltip. This prop is currently experimental
+   * and is subject to future changes. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
   /**
    * The `children` prop will be used as the value that is being defined
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 
   /**
    * Specify an optional className to be applied to the container node
@@ -109,6 +111,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         setOpen(false);
       }}
       onMouseEnter={() => {
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
         openOnHover ? setOpen(true) : null;
       }}
       onFocus={() => {
@@ -119,6 +122,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         {...rest}
         className={cx(`${prefix}--definition-term`, triggerClassName)}
         aria-controls={tooltipId}
+        aria-describedby={tooltipId}
         aria-expanded={isOpen}
         onBlur={() => {
           setOpen(false);
@@ -174,7 +178,9 @@ DefinitionTooltip.propTypes = {
   ]),
 
   /**
-   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover. This prop is currently experimental and is
+   * subject to future changes. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

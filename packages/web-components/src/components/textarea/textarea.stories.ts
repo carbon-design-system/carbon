@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,9 +7,10 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import './index';
 import '../form/form-item';
 import '../ai-label';
@@ -32,15 +33,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -48,15 +49,17 @@ const actions = html`
 
 const args = {
   cols: 0,
+  counterMode: '',
   disabled: false,
   enableCounter: true,
-  helperText: 'Textarea helper text',
+  helperText: 'TextArea helper text',
   hideLabel: false,
   invalid: false,
-  invalidText: 'Invalid text',
-  label: 'Textarea label',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  label: 'TextArea label',
   maxCount: 500,
-  onInput: 'input',
+  onInput: () => {},
   placeholder: '',
   readonly: false,
   rows: 4,
@@ -69,6 +72,12 @@ const argTypes = {
   cols: {
     control: 'number',
     description: 'Number of columns (cols)',
+  },
+  counterMode: {
+    control: 'radio',
+    options: ['character', 'word'],
+    description:
+      'Specify the method used for calculating the counter number (character or word)',
   },
   disabled: {
     control: 'boolean',
@@ -135,45 +144,11 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-form-item>
-      <cds-textarea label="Textarea label" helper-text="Optional helper text">
-      </cds-textarea>
-    </cds-form-item>
-  `,
-};
-
-export const skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: () => html` <cds-textarea-skeleton></cds-textarea-skeleton> `,
-};
-
-export const WithAILabel = {
-  render: () => html`
-    <cds-textarea label="Text input label" helper-text="Optional helper text">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-textarea>
-  `,
-};
-
-export const WithLayer = {
-  render: () => html`
-    <sb-template-layers>
-      <cds-textarea label="Text Area label" helper-text="Optional helper text">
-      </cds-textarea>
-    </sb-template-layers>
-  `,
-};
-
-export const Playground = {
   args,
   argTypes,
   render: ({
     cols,
+    counterMode,
     disabled,
     enableCounter,
     helperText,
@@ -193,6 +168,7 @@ export const Playground = {
     <cds-form-item>
       <cds-textarea
         ?enable-counter="${enableCounter}"
+        counter-mode="${ifDefined(counterMode)}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
@@ -211,6 +187,34 @@ export const Playground = {
         ${value}
       </cds-textarea>
     </cds-form-item>
+  `,
+};
+
+export const Skeleton = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => html` <cds-textarea-skeleton></cds-textarea-skeleton> `,
+};
+
+export const WithAILabel = {
+  render: () => html`
+    <cds-textarea label="Text Area label" helper-text="Optional helper text">
+      <cds-ai-label alignment="bottom-right">
+        ${content}${actions}</cds-ai-label
+      >
+    </cds-textarea>
+  `,
+};
+
+export const WithLayer = {
+  render: () => html`
+    <sb-template-layers>
+      <cds-textarea label="Text Area label" helper-text="Optional helper text">
+      </cds-textarea>
+    </sb-template-layers>
   `,
 };
 

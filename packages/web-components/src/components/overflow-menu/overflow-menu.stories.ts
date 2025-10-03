@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,10 +11,13 @@ import { OVERFLOW_MENU_SIZE } from './overflow-menu';
 import './overflow-menu-body';
 import './overflow-menu-item';
 import { prefix } from '../../globals/settings';
-import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16.js';
-import Filter16 from '@carbon/icons/lib/filter/16.js';
+import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
+import Filter16 from '@carbon/icons/es/filter/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const sizes = {
+  [`Extra small size (${OVERFLOW_MENU_SIZE.EXTRA_SMALL})`]:
+    OVERFLOW_MENU_SIZE.EXTRA_SMALL,
   [`Small size (${OVERFLOW_MENU_SIZE.SMALL})`]: OVERFLOW_MENU_SIZE.SMALL,
   [`Medium size (default) (${OVERFLOW_MENU_SIZE.MEDIUM})`]:
     OVERFLOW_MENU_SIZE.MEDIUM,
@@ -49,65 +52,19 @@ const argTypes = {
   size: {
     control: 'select',
     description:
-      'Specify the size of the OverflowMenu. Currently supports either <code>sm</code>, <code>md</code> (default) or <code></code>lg</code> as an option.',
+      'Specify the size of the OverflowMenu. Currently supports either <code>xs</code>, <code>sm</code>, <code>md</code> (default) or <code>lg</code> as an option.',
     options: sizes,
   },
 };
 
 export const Default = {
-  render: () => {
-    return html`
-      <cds-overflow-menu>
-        ${OverflowMenuVertical16({
-          class: `${prefix}--overflow-menu__icon`,
-          slot: 'icon',
-        })}
-        <span slot="tooltip-content"> Options </span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
-          <cds-overflow-menu-item disabled
-            >Clone and move app</cds-overflow-menu-item
-          >
-          <cds-overflow-menu-item
-            >Edit routes and access</cds-overflow-menu-item
-          >
-          <cds-overflow-menu-item divider danger
-            >Delete app</cds-overflow-menu-item
-          >
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `;
-  },
-};
-
-export const RenderCustomIcon = {
-  render: () => {
-    return html`
-      <cds-overflow-menu>
-        ${Filter16({
-          class: `${prefix}--overflow-menu__icon`,
-          slot: 'icon',
-        })}
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `;
-  },
-};
-
-export const Playground = {
   args,
   argTypes,
   render: (args) => {
     const { flipped, iconDescription, open, index, size } = args ?? {};
     return html`
       <cds-overflow-menu ?open="${open}" size="${size}" index=${index}>
-        ${OverflowMenuVertical16({
+        ${iconLoader(OverflowMenuVertical16, {
           class: `${prefix}--overflow-menu__icon`,
           slot: 'icon',
         })}
@@ -125,6 +82,23 @@ export const Playground = {
           <cds-overflow-menu-item divider danger
             >Delete app</cds-overflow-menu-item
           >
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `;
+  },
+};
+export const RenderCustomIcon = {
+  render: () => {
+    return html`
+      <cds-overflow-menu>
+        ${iconLoader(Filter16, {
+          class: `${prefix}--overflow-menu__icon`,
+          slot: 'icon',
+        })}
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
+          <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
         </cds-overflow-menu-body>
       </cds-overflow-menu>
     `;

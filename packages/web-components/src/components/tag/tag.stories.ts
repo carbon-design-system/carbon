@@ -7,15 +7,17 @@
 
 import { html } from 'lit';
 import { TAG_SIZE } from './tag';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
-import Asleep16 from '@carbon/icons/lib/asleep/16.js';
 import './index';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
+import Asleep16 from '@carbon/icons/es/asleep/16.js';
 import '../popover';
 import '../ai-label';
 import '../button';
 import '../icon-button';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
 
 const content = html`
   <div slot="body-text">
@@ -34,15 +36,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -69,6 +71,21 @@ const types = [
   'outline',
 ];
 
+const tooltipAlignments = {
+  [`top`]: POPOVER_ALIGNMENT.TOP,
+  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
+  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
+  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
+  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`left`]: POPOVER_ALIGNMENT.LEFT,
+  [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
+  [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
+  [`right`]: POPOVER_ALIGNMENT.RIGHT,
+  [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
+  [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
+};
+
 const defaultArgs = {
   disabled: false,
   size: TAG_SIZE.MEDIUM,
@@ -94,11 +111,20 @@ export const Dismissible = {
       control: 'text',
       description: 'Provide text to be rendered inside of a the tag.',
     },
+    dismissTooltipAlignment: {
+      control: 'select',
+      options: tooltipAlignments,
+      description: 'Specify the tooltip alignment for the dismiss button',
+      table: {
+        defaultValue: { summary: 'bottom' },
+      },
+    },
   },
   args: {
     ...defaultArgs,
+    dismissTooltipAlignment: 'bottom',
   },
-  render: ({ disabled, size, text }) => {
+  render: ({ disabled, size, text, dismissTooltipAlignment }) => {
     const tags = [
       {
         type: 'red',
@@ -168,8 +194,9 @@ export const Dismissible = {
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
             size="${size}"
-            >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
-          >`
+            dismiss-tooltip-alignment="${dismissTooltipAlignment}"
+            >${iconLoader(Asleep16, { slot: 'icon' })}
+          </cds-dismissible-tag>`
       )}`;
   },
 };
@@ -234,7 +261,7 @@ export const Selectable = {
             id="${tag.id}"
             text="${text || tag.text}"
             size="${size}"
-            >${Asleep16({ slot: 'icon' })}
+            >${iconLoader(Asleep16, { slot: 'icon' })}
           </cds-selectable-tag>`
       )}
     </div>`;
@@ -323,7 +350,7 @@ export const Operational = {
               type=${tag.type}
               text="${text || tag.text}"
               size="${size}"
-              >${Asleep16({ slot: 'icon' })}
+              >${iconLoader(Asleep16, { slot: 'icon' })}
             </cds-operational-tag>`
         )}
       </div>
@@ -340,7 +367,7 @@ export const Operational = {
               @keydown="${togglePopover}"
               ?disabled="${disabled}"
               text="${text || `Tag content`}">
-              ${Asleep16({ slot: 'icon' })}
+              ${iconLoader(Asleep16, { slot: 'icon' })}
             </cds-operational-tag>
           </div>
           <cds-popover-content class="popover-content">
@@ -361,7 +388,7 @@ export const Operational = {
               @keydown="${togglePopover}"
               ?disabled="${disabled}"
               text="${text || `Tag content`}">
-              ${Asleep16({ slot: 'icon' })}
+              ${iconLoader(Asleep16, { slot: 'icon' })}
             </cds-operational-tag>
           </div>
           <cds-popover-content>
@@ -437,13 +464,13 @@ export const WithAILabel = {
       </cds-tag>
 
       <cds-tag type="blue">
-        ${Asleep16({ slot: 'icon' })} Tag
+        ${iconLoader(Asleep16, { slot: 'icon' })} Tag
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
       </cds-tag>
       <cds-tag filter type="green">
-        ${Asleep16({ slot: 'icon' })} Tag
+        ${iconLoader(Asleep16, { slot: 'icon' })} Tag
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >

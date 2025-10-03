@@ -35,9 +35,16 @@ class CDSSkeletonText extends LitElement {
 
   /**
    * The type of skeleton text.
+   * @deprecated Use the `heading` property instead.
    */
   @property({ reflect: true })
   type = SKELETON_TEXT_TYPE.REGULAR;
+
+  /**
+   * Determines if the skeleton text should be rendered as a heading.
+   */
+  @property({ type: Boolean, reflect: true })
+  heading = false;
 
   /**
    * width (in px or %) of single line of text or max-width of paragraph lines
@@ -58,10 +65,12 @@ class CDSSkeletonText extends LitElement {
   lineCount = 3;
 
   render() {
-    const { optionalClasses, paragraph, lineCount, type, width } = this;
+    const { optionalClasses, paragraph, lineCount, type, width, heading } =
+      this;
     let defaultClasses = {
       [`${prefix}--skeleton__text`]: true,
-      [`${prefix}--skeleton__heading`]: type === SKELETON_TEXT_TYPE.HEADING,
+      [`${prefix}--skeleton__heading`]:
+        heading || type === SKELETON_TEXT_TYPE.HEADING,
     };
 
     if (optionalClasses) {

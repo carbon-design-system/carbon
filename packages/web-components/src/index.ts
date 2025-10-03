@@ -64,6 +64,7 @@ export { default as CDSDropdownItem } from './components/dropdown/dropdown-item'
 export { default as CDSDropdownSkeleton } from './components/dropdown/dropdown-skeleton';
 export { default as CDSFormItem } from './components/form/form-item';
 export { default as CDSFormGroup } from './components/form-group/form-group';
+export { default as CDSIcon } from './components/icon/icon';
 export { default as CDSIconButton } from './components/icon-button/icon-button';
 export { default as CDSIconIndicator } from './components/icon-indicator/icon-indicator';
 export { default as CDSTextInput } from './components/text-input/text-input';
@@ -169,5 +170,9 @@ export { default as CDSTimePicker } from './components/time-picker/time-picker';
 export { default as CDSTimePickerSelect } from './components/time-picker/time-picker-select';
 export { default as CDSTreeView } from './components/tree-view/tree-view';
 export { default as CDSTreeNode } from './components/tree-view/tree-node';
-export { default as CDSHeading } from './components/heading/heading';
+export {
+  CDSSection,
+  default as CDSHeading,
+} from './components/heading/heading';
 export { default as CDSMenuButton } from './components/menu-button/menu-button';
+export { default as CDSComboButton } from './components/combo-button/combo-button';

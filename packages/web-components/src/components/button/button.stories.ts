@@ -6,10 +6,6 @@
  */
 
 import { html } from 'lit';
-// Below path will be there when an application installs `carbon-web-components` package.
-// In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
-// @ts-ignore
-import Add16 from '@carbon/icons/lib/add/16.js';
 import '../badge-indicator/index';
 import {
   BUTTON_KIND,
@@ -19,6 +15,9 @@ import {
   BUTTON_TOOLTIP_POSITION,
 } from './button';
 import './index';
+
+import Add16 from '@carbon/icons/es/add/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const kind = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -52,6 +51,7 @@ const positionOptions = {
 };
 
 const sizes = {
+  [`Extra small size (${BUTTON_SIZE.EXTRA_SMALL})`]: BUTTON_SIZE.EXTRA_SMALL,
   [`Small size (${BUTTON_SIZE.SMALL})`]: BUTTON_SIZE.SMALL,
   [`Medium size (${BUTTON_SIZE.MEDIUM})`]: BUTTON_SIZE.MEDIUM,
   [`Large size (${BUTTON_SIZE.LARGE})`]: BUTTON_SIZE.LARGE,
@@ -301,7 +301,9 @@ export const IconButton = {
       tooltip-text="Icon Description"
       .type="${type}"
       @click="${onClick}">
-      ${Add16({ slot: 'icon' })}
+      ${iconLoader(Add16, {
+        slot: 'icon',
+      })}
     </cds-button>`,
 };
 
@@ -323,7 +325,7 @@ export const iconButtonWithBadge = {
       kind="ghost"
       ?disabled="${disabled}"
       tooltip-text="Icon Description">
-      ${Add16({ slot: 'icon' })}
+      ${iconLoader(Add16, { slot: 'icon' })}
       ${badgeCount > 0
         ? html`<cds-badge-indicator count=${badgeCount}></cds-badge-indicator>`
         : html`<cds-badge-indicator></cds-badge-indicator>`}

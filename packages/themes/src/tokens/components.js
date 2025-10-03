@@ -108,3 +108,13 @@ export const status = TokenGroup.create({
     'status-gray',
   ],
 });
+
+export const contentSwitcher = TokenGroup.create({
+  name: 'Content Switcher',
+  properties: [],
+  tokens: [
+    'content-switcher-selected',
+    'content-switcher-background',
+    'content-switcher-background-hover',
+  ],
+});

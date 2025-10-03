@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,17 +29,17 @@ export default {
   },
 };
 
-export const Inline = () => {
+export const Inline = (args) => {
   return (
-    <CodeSnippet type="inline" feedback="Copied to clipboard">
+    <CodeSnippet type="inline" feedback="Copied to clipboard" {...args}>
       {'node -v'}
     </CodeSnippet>
   );
 };
 
-export const Multiline = () => {
+export const Multiline = (args) => {
   return (
-    <CodeSnippet type="multi" feedback="Copied to clipboard">
+    <CodeSnippet type="multi" feedback="Copied to clipboard" {...args}>
       {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
@@ -49,7 +49,6 @@ export const Multiline = () => {
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config codemods packages",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
-    "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
@@ -73,29 +72,29 @@ export const Multiline = () => {
   );
 };
 
-export const Singleline = () => {
+export const Singleline = (args) => {
   return (
-    <CodeSnippet type="single" feedback="Copied to clipboard">
+    <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
       yarn add carbon-components@latest carbon-components-react@latest
       @carbon/icons-react@latest carbon-icons@latest
     </CodeSnippet>
   );
 };
 
-export const InlineWithLayer = () => {
+export const InlineWithLayer = (args) => {
   return (
     <WithLayer>
-      <CodeSnippet type="inline" feedback="Copied to clipboard">
+      <CodeSnippet type="inline" feedback="Copied to clipboard" {...args}>
         {'node -v'}
       </CodeSnippet>
     </WithLayer>
   );
 };
 
-export const MultilineWithLayer = () => {
+export const MultilineWithLayer = (args) => {
   return (
     <WithLayer>
-      <CodeSnippet type="multi" feedback="Copied to clipboard">
+      <CodeSnippet type="multi" feedback="Copied to clipboard" {...args}>
         {`  "scripts": {
       "build": "lerna run build --stream --prefix --npm-client yarn",
       "ci-check": "carbon-cli ci-check",
@@ -105,7 +104,6 @@ export const MultilineWithLayer = () => {
       "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
       "lint": "eslint actions config codemods packages",
       "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
-      "sync": "carbon-cli sync",
       "test": "cross-env BABEL_ENV=test jest",
       "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
       },
@@ -130,10 +128,10 @@ export const MultilineWithLayer = () => {
   );
 };
 
-export const SinglelineWithLayer = () => {
+export const SinglelineWithLayer = (args) => {
   return (
     <WithLayer>
-      <CodeSnippet type="single" feedback="Copied to clipboard">
+      <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
         yarn add carbon-components@latest carbon-components-react@latest
         @carbon/icons-react@latest carbon-icons@latest
       </CodeSnippet>

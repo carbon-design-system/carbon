@@ -21,23 +21,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   args: {
     level: 0,
   },
@@ -54,6 +37,28 @@ export const Default = () => {
       <Layer>
         <TestComponent />
         <Layer>
+          <TestComponent />
+        </Layer>
+      </Layer>
+    </>
+  );
+};
+
+export const withBackground = () => {
+  function TestComponent() {
+    return (
+      <div className="example-layer-test-component-no-background">
+        Test component
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <TestComponent />
+      <Layer withBackground>
+        <TestComponent />
+        <Layer withBackground>
           <TestComponent />
         </Layer>
       </Layer>

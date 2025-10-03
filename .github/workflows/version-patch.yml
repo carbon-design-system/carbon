@@ -70,20 +70,20 @@ jobs:
       'v11.x' }}
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
-          fetch-depth: '0'
+          fetch-depth: 0
           fetch-tags: true
           ref: ${{ github.event.inputs.existing-tag }}
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
       - name: Create new release branch
         run: |
-          git checkout -b ${{ github.event.inputs.tag }}
-      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+          git checkout -b release/${{ github.event.inputs.tag }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         id: cache
         with:
           path: |
@@ -130,24 +130,18 @@ jobs:
       - name: Create release commit
         run: |
           git add -A
-          git commit -m 'chore(release): ${{github.event.inputs.tag}}'
-          git push --set-upstream origin release/${{github.event.inputs.tag}}
+          git commit -m "chore(release): ${{ github.event.inputs.tag }}"
+          git push --set-upstream origin release/${{ github.event.inputs.tag }}
       - name: Log previous 7 commits
         run: |
           echo "This should show the new release commit, followed by the cherry-picked commits, followed by the previous release (existing tag), potentially followed by extra unrelated commits if no more than 1 commit was cherry-picked"
-          echo "$(git log -1)"
-          echo "$(git log -2)"
-          echo "$(git log -3)"
-          echo "$(git log -4)"
-          echo "$(git log -5)"
-          echo "$(git log -6)"
-          echo "$(git log -7)"
+          git log --oneline -7
       - name: Tag the release commit
         run: |
-          git tag -a ${{github.event.inputs.tag}} -m '${{github.event.inputs.tag}}'
+          git tag -a ${{ github.event.inputs.tag }} -m "${{ github.event.inputs.tag }}"
       - name: Push the tag upstream
         run: |
-          git push upstream refs/tags/${{github.event.inputs.tag}}
+          git push origin refs/tags/${{ github.event.inputs.tag }}
       - name: Print manual next steps
         run: |
           echo "Verify that this workflow triggered a release action"

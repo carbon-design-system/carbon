@@ -9,8 +9,9 @@
 
 import { html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import Close16 from '@carbon/icons/es/close/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -34,6 +35,25 @@ export { TAG_SIZE, TAG_TYPE };
 class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   @query('button')
   protected _buttonNode!: HTMLButtonElement;
+
+  /**
+   * Finds the next focusable dismissible tag sibling
+   * @returns {HTMLElement|null} The next focusable dismissible tag or null
+   */
+  protected _findNextFocusableTag() {
+    let nextElement = this.nextElementSibling;
+    while (nextElement) {
+      if (
+        nextElement.tagName.toLowerCase() === `${prefix}-dismissible-tag` &&
+        !nextElement.hasAttribute('disabled') &&
+        (nextElement as HTMLElement).getAttribute('open') !== 'false'
+      ) {
+        return nextElement;
+      }
+      nextElement = nextElement.nextElementSibling;
+    }
+    return null;
+  }
 
   /**
    * Handles `slotchange` event.
@@ -67,12 +87,15 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
    * @param event The event.
    */
   @HostListener('shadowRoot:click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleClick = (event: MouseEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
       if (this.disabled) {
         event.stopPropagation();
       } else if (this.open) {
+        const nextFocusableTag = this._findNextFocusableTag();
         const init = {
           bubbles: true,
           cancelable: true,
@@ -90,6 +113,13 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
           )
         ) {
           this.open = false;
+          if (nextFocusableTag) {
+            const nextCloseIcon = (nextFocusableTag as CDSDismissibleTag)
+              ._buttonNode;
+            if (nextCloseIcon) {
+              nextCloseIcon.focus();
+            }
+          }
           this.dispatchEvent(
             new CustomEvent(
               (this.constructor as typeof CDSDismissibleTag).eventClose,
@@ -106,6 +136,16 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * Specify the tooltip alignment for the dismiss button
+   */
+  @property({
+    type: String,
+    attribute: 'dismiss-tooltip-alignment',
+    reflect: true,
+  })
+  dismissTooltipAlignment = 'bottom';
 
   /**
    * Provide a custom tooltip label for the dismiss button
@@ -149,9 +189,11 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       _handleAILabelSlotChange: handleAILabelSlotChange,
       _handleIconSlotChange: handleIconSlotChange,
       _hasEllipsisApplied: hasEllipsisApplied,
+      size,
       tagTitle,
       text,
       dismissTooltipLabel,
+      dismissTooltipAlignment,
     } = this;
 
     const dismissLabel = `Dismiss "${text}"`;
@@ -159,7 +201,9 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       dismissTooltipLabel || (hasEllipsisApplied ? dismissLabel : 'Dismiss');
 
     return html`
-      <slot name="icon" @slotchange="${handleIconSlotChange}"></slot>
+      ${size !== TAG_SIZE.SMALL
+        ? html`<slot name="icon" @slotchange="${handleIconSlotChange}"></slot>`
+        : ''}
       <div class="${prefix}--interactive--tag-children">
         <span
           title="${tagTitle ? tagTitle : text}"
@@ -169,14 +213,14 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
         <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
-        <cds-tooltip align="bottom" enter-delay-ms=${0}>
+        <cds-tooltip align=${dismissTooltipAlignment} enter-delay-ms=${0}>
           <button
             class="sb-tooltip-trigger"
             role="button"
             aria-labelledby="content"
             class="${prefix}--tag__close-icon"
             ?disabled=${disabled}>
-            ${Close16()}
+            ${iconLoader(Close16)}
           </button>
           <cds-tooltip-content id="content">
             ${dismissActionLabel}

@@ -103,6 +103,7 @@ describe('Button', () => {
   );
 
   it.each([
+    ['xs', 'cds--btn--xs'],
     ['sm', 'cds--btn--sm'],
     ['md', 'cds--btn--md'],
     ['lg', 'cds--btn--lg'],

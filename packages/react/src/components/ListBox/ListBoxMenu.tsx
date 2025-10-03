@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import ListBoxMenuItem from './ListBoxMenuItem';
-import { ReactAttr } from '../../types/common';
 
 type ExcludedAttributes = 'id';
 
 export interface ListBoxMenuProps
-  extends Omit<ReactAttr<HTMLUListElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLUListElement>, ExcludedAttributes> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   children?: any;
 
   /**

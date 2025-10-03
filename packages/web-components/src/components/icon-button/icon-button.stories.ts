@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,10 +10,11 @@ import './index';
 import '../button/index';
 import '../badge-indicator/index';
 import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
-import Edit16 from '@carbon/icons/lib/edit/16.js';
-import Notification16 from '@carbon/icons/lib/notification/16.js';
 import { ICON_BUTTON_SIZE } from './defs';
+import Edit16 from '@carbon/icons/es/edit/16.js';
+import Notification16 from '@carbon/icons/es/notification/16.js';
 import { BUTTON_KIND } from '../button/defs';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const kinds = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -101,17 +102,6 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
-    return html`
-      <cds-icon-button>
-        ${Edit16({ slot: 'icon' })}
-        <span slot="tooltip-content">label</span>
-      </cds-icon-button>
-    `;
-  },
-};
-
-export const Playground = {
   args,
   argTypes,
   render: ({
@@ -137,7 +127,7 @@ export const Playground = {
         kind=${kind}
         leave-delay-ms=${leaveDelayMs}
         size=${size}>
-        ${Edit16({ slot: 'icon' })}
+        ${iconLoader(Edit16, { slot: 'icon' })}
         <span slot="tooltip-content">${label}</span>
       </cds-icon-button>
     `;
@@ -164,7 +154,7 @@ export const withBadgeIndicator = {
         size="lg"
         href="https://www.example.com"
         ?disabled=${disabled}>
-        ${Notification16({ slot: 'icon' })}
+        ${iconLoader(Notification16, { slot: 'icon' })}
         <span slot="tooltip-content">label</span>
         ${badgeCount > 0
           ? html` <cds-badge-indicator

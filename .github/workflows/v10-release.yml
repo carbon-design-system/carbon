@@ -16,10 +16,10 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -33,10 +33,10 @@ jobs:
       - name: Run Continuous Integration checks
         run: yarn ci-check
 
-      - name: Publish packages under the `next` dist tag
+      - name: Publish packages under the `community` dist tag
         run:
-          yarn lerna publish from-package --dist-tag next --no-verify-access
-          --yes
+          yarn lerna publish from-package --dist-tag community
+          --no-verify-access --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -44,16 +44,51 @@ jobs:
         run: |
           zip -r --junk-paths carbon-elements.sketchplugin.zip packages/sketch/carbon-elements.sketchplugin
 
-      - name: Create Release
-        id: create_release
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
+      - name: Get latest v10 tag
+        id: calculate-tag
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         with:
           script: |
+            const { execSync } = require('child_process');
+            const semver = require('semver');
+
+            // Get all tags starting with v10
+            const output = execSync("git tag --list 'v10.*.*'", { encoding: 'utf8' });
+            const tags = output.trim().split('\n').filter(Boolean);
+
+            if (tags.length === 0) {
+              core.setFailed('No v10 tags found.');
+              return;
+            }
+
+            // Sort with semver
+            const sorted = tags.sort((a, b) => semver.rcompare(a, b));
+            const latest = sorted[0];
+
+            core.info(`Latest v10 tag: ${latest}`);
+            core.setOutput('latestTag', latest);
+
+      - name: Create Release
+        id: create_release
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd #v8.0.0
+        with:
+          script: |
+            // Generate the changelog
+            const {
+              exitCode,
+              stdout,
+              stderr
+            } = await exec.getExecOutput('./packages/cli/bin/carbon-cli.js', ['changelog', `${{ steps.calculate-tag.outputs.latestTag }}..${context.ref}`, '--noPrompt'], options);
+
+            // Changelog command outputs the generated changelog to stdout
+            core.info(`${stdout}`);
+
             github.rest.repos.createRelease({
               tag_name: context.ref,
               name: context.ref,
+              body: stdout
               draft: false,
-              prerelease: true,
+              make_latest: false,
               owner: context.repo.owner,
               repo: context.repo.repo,
             });

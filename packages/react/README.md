@@ -31,7 +31,7 @@ links:
 For info on how to configure Sass for your project, here are some common
 framework's documentation worth reviewing:
 
-- [Next.js with Sass](https://nextjs.org/docs/basic-features/built-in-css-support#sass-support)
+- [Next.js with Sass](https://nextjs.org/docs/app/guides/sass)
 - [Remix with Sass](https://remix.run/docs/en/1.18.0/guides/styling#css-preprocessors)
 - [Gatsby with Sass](https://www.gatsbyjs.com/docs/how-to/styling/sass/)
 
@@ -114,14 +114,14 @@ function MyComponent() {
 ```
 
 For a full list of icons available, checkout our
-[website](https://www.carbondesignsystem.com/guidelines/icons/library/).
+[website](https://carbondesignsystem.com/elements/icons/library/).
 
 ## 📖 API Documentation
 
 If you're looking for `@carbon/react` API documentation, check out:
 
 - [Storybook](https://react.carbondesignsystem.com/)
-- [Icon Library](https://www.carbondesignsystem.com/guidelines/icons/library/)
+- [Icon Library](https://carbondesignsystem.com/elements/icons/library/)
 
 ## 🙌 Contributing
 

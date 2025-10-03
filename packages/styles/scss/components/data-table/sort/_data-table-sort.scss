@@ -12,7 +12,6 @@
 @use '../../../utilities/button-reset';
 @use '../../../utilities/convert';
 @use '../../../utilities/focus-outline' as *;
-@use '../../../utilities/high-contrast-mode' as *;
 
 /// Data table sort styles
 /// @access public
@@ -269,11 +268,5 @@
     .#{$prefix}--table-header-label--decorator-inner {
     display: block;
     margin-inline-end: convert.to-rem(8px);
-  }
-
-  // Windows HCM fix
-  .#{$prefix}--table-sort__icon,
-  .#{$prefix}--table-sort__icon-unsorted {
-    @include high-contrast-mode('icon-fill');
   }
 }

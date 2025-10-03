@@ -1,16 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ComponentClass } from 'react';
-import { createClassWrapper } from '../../internal/createClassWrapper';
-import ContentSwitcherCarbon, { ContentSwitcherProps } from './ContentSwitcher';
+import { ContentSwitcher } from './ContentSwitcher';
 
-const ContentSwitcher = createClassWrapper(
-  ContentSwitcherCarbon as ComponentClass<ContentSwitcherProps>
-);
 export default ContentSwitcher;
-export { ContentSwitcher };
+export * from './ContentSwitcher';

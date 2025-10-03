@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { TrashCan, Save, Download, Add } from '@carbon/icons-react';
 
 import Button from '../../Button';
@@ -75,6 +75,7 @@ export const Default = (args) => (
       selectedRows,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => {
       const batchActionProps = getBatchActionProps();
 
@@ -136,11 +137,7 @@ export const Default = (args) => (
           <Table {...getTableProps()} aria-label="sample table">
             <TableHead>
               <TableRow>
-                {args.radio ? (
-                  <th scope="col" />
-                ) : (
-                  <TableSelectAll {...getSelectionProps()} />
-                )}
+                <TableSelectAll {...getSelectionProps()} />
                 {headers.map((header, i) => (
                   <TableHeader key={i} {...getHeaderProps({ header })}>
                     {header.header}
@@ -149,14 +146,16 @@ export const Default = (args) => (
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, i) => (
-                <TableRow key={i} {...getRowProps({ row })}>
+              {rows.map((row) => (
+                <TableRow {...getRowProps({ row })}>
                   <TableSelectRow
                     {...getSelectionProps({ row })}
                     onChange={action('TableSelectRow - onChange')}
                   />
                   {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))}
@@ -168,35 +167,42 @@ export const Default = (args) => (
   </DataTable>
 );
 
+Default.args = {
+  isSortable: false,
+  locale: 'en',
+  overflowMenuOnHover: true,
+  size: 'lg',
+  stickyHeader: false,
+  useStaticWidth: false,
+  useZebraStyles: false,
+};
+
 Default.argTypes = {
-  filterRows: {
-    table: {
-      disable: true,
-    },
-  },
-  headers: {
-    table: {
-      disable: true,
-    },
+  locale: {
+    control: 'text',
+    description: 'Provide a string for the current locale',
   },
   overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
+    control: 'boolean',
+    description:
+      'Specify whether the overflow menu (if it exists) should be shown always, or only on hover',
   },
-  rows: {
-    table: {
-      disable: true,
-    },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of table',
   },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
+  stickyHeader: {
+    control: 'boolean',
+    description:
+      'Specify whether the header should be sticky. Still in previ: may not work with every combination of table props',
   },
-  sortRow: {
-    table: {
-      disable: true,
-    },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'If true, will use a width of "auto" instead of 100%',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to rows',
   },
 };

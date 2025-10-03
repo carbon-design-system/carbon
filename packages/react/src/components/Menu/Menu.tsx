@@ -23,7 +23,7 @@ import { createPortal } from 'react-dom';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
@@ -67,7 +67,9 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   mode?: 'full' | 'basic';
 
   /**
-   * Provide an optional function to be called when the Menu should be closed.
+   * Provide an optional function to be called when the Menu should be closed,
+   * including if the Menu is blurred, the user presses escape, or the Menu is
+   * a submenu and the user presses ArrowLeft.
    */
   onClose?: () => void;
 
@@ -111,18 +113,11 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     containerRef,
     label,
     menuAlignment,
-    mode,
     onClose,
     onOpen,
     open,
     size = 'sm',
     legacyAutoalign = 'true',
-    // TODO: `ssr-friendly` doesn't support ESLint v9.
-    // https://github.com/kopiro/eslint-plugin-ssr-friendly/issues/30
-    // https://github.com/carbon-design-system/carbon/issues/18991
-    /*
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-    */
     target = canUseDOM && document.body,
     x = 0,
     y = 0,
@@ -229,6 +224,9 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
+    const validItems = focusableItems?.filter((item) => item?.ref?.current);
+    if (!validItems?.length) return;
+
     const currentItem = focusableItems.findIndex((item) =>
       item.ref?.current?.contains(document.activeElement)
     );
@@ -248,15 +246,15 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
 
     if (indexToFocus < 0) {
-      indexToFocus = focusableItems.length - 1;
+      indexToFocus = validItems.length - 1;
     }
-    if (indexToFocus >= focusableItems.length) {
+    if (indexToFocus >= validItems.length) {
       indexToFocus = 0;
     }
 
     if (indexToFocus !== currentItem) {
-      const nodeToFocus = focusableItems[indexToFocus];
-      nodeToFocus.ref?.current?.focus();
+      const nodeToFocus = validItems[indexToFocus];
+      nodeToFocus?.ref?.current?.focus();
       e?.preventDefault();
     }
   }
@@ -384,8 +382,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   useEffect(() => {
-    if (open && focusableItems.length > 0) {
-      focusItem();
+    if (open) {
+      const raf = requestAnimationFrame(() => {
+        if (focusableItems.length > 0) {
+          focusItem();
+        }
+      });
+
+      return () => cancelAnimationFrame(raf);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, focusableItems]);
@@ -459,7 +463,6 @@ Menu.propTypes = {
   /**
    * A label describing the Menu.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   label: PropTypes.string,
 
   /**
@@ -481,7 +484,9 @@ Menu.propTypes = {
   ),
 
   /**
-   * Provide an optional function to be called when the Menu should be closed.
+   * Provide an optional function to be called when the Menu should be closed,
+   * including if the Menu is blurred, the user presses escape, or the Menu is
+   * a submenu and the user presses ArrowLeft.
    */
   onClose: PropTypes.func,
 
@@ -503,13 +508,11 @@ Menu.propTypes = {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   target: PropTypes.object,
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   x: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
@@ -518,7 +521,6 @@ Menu.propTypes = {
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   y: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),

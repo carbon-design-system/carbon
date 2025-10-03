@@ -7,17 +7,16 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
-import { ReactAttr } from '../../types/common';
+import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
 import { ButtonKinds } from '../Button';
 
 export interface FileUploaderButtonProps
-  extends Omit<ReactAttr<HTMLButtonElement>, 'onChange' | 'tabIndex'> {
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange' | 'tabIndex'> {
   /**
    * Specify the types of files that this input should be able to receive
    */
@@ -116,14 +115,15 @@ function FileUploaderButton({
   onChange = noopFn,
   name,
   size = 'md',
-  // eslint-disable-next-line react/prop-types
+
   innerRef,
   ...other
 }: FileUploaderButtonProps) {
   const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
-  const { current: inputId } = useRef(id || uniqueId());
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
+  const { current: inputId } = useRef(id || useId());
   const inputNode = useRef<HTMLInputElement>(null);
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
@@ -149,9 +149,12 @@ function FileUploaderButton({
   }
 
   function onKeyDown(event) {
-    if (matches(event, [keys.Enter, keys.Space]) && inputNode.current) {
-      inputNode.current.value = '';
-      inputNode.current.click();
+    if (matches(event, [keys.Enter, keys.Space])) {
+      event.preventDefault();
+      if (inputNode.current) {
+        inputNode.current.value = '';
+        inputNode.current.click();
+      }
     }
   }
 

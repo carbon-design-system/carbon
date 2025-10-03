@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,11 +8,13 @@
 import { html } from 'lit';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-ignore
 import './index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './tooltip-story.scss?lit';
-import Information16 from '@carbon/icons/lib/information/16.js';
+import Information16 from '@carbon/icons/es/information/16.js';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
@@ -32,9 +34,10 @@ const tooltipAlignments = {
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.BOTTOM,
   closeOnActivation: false,
-  defaultOpen: true,
+  defaultOpen: false,
   enterDelayMs: 100,
-  label: 'Custom label',
+  label:
+    'Occassionally, services are updated in a specified time window to ensure no down time for customers.',
   leaveDelayMs: 300,
 };
 
@@ -71,53 +74,6 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-tooltip align="bottom">
-      <button
-        class="sb-tooltip-trigger"
-        role="button"
-        aria-labelledby="content">
-        ${Information16()}
-      </button>
-      <cds-tooltip-content id="content">
-        Occassionally, services are updated in a specified time window to ensure
-        no down time for customers.
-      </cds-tooltip-content>
-    </cds-tooltip>
-  `,
-};
-
-export const Alignment = {
-  render: () => html`
-    <cds-tooltip align="bottom-left">
-      <button
-        class="sb-tooltip-trigger"
-        role="button"
-        aria-labelledby="content">
-        ${Information16()}
-      </button>
-      <cds-tooltip-content id="content">
-        Tooltip alignment
-      </cds-tooltip-content>
-    </cds-tooltip>
-  `,
-};
-
-export const Duration = {
-  render: () => html`
-    <cds-tooltip enter-delay-ms=${0} leave-delay-ms=${300}>
-      <button
-        class="sb-tooltip-trigger"
-        role="button"
-        aria-labelledby="content">
-        ${Information16()}
-      </button>
-      <cds-tooltip-content id="content"> Label one </cds-tooltip-content>
-    </cds-tooltip>
-  `,
-};
-
-export const Playground = {
   argTypes: controls,
   args: defaultArgs,
   render: ({
@@ -138,9 +94,39 @@ export const Playground = {
         class="sb-tooltip-trigger"
         role="button"
         aria-labelledby="content">
-        ${Information16()}
+        ${iconLoader(Information16)}
       </button>
       <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
+    </cds-tooltip>
+  `,
+};
+
+export const Alignment = {
+  render: () => html`
+    <cds-tooltip align="bottom-left">
+      <button
+        class="sb-tooltip-trigger"
+        role="button"
+        aria-labelledby="content">
+        ${iconLoader(Information16)}
+      </button>
+      <cds-tooltip-content id="content">
+        Tooltip alignment
+      </cds-tooltip-content>
+    </cds-tooltip>
+  `,
+};
+
+export const Duration = {
+  render: () => html`
+    <cds-tooltip enter-delay-ms=${0} leave-delay-ms=${300}>
+      <button
+        class="sb-tooltip-trigger"
+        role="button"
+        aria-labelledby="content">
+        ${iconLoader(Information16)}
+      </button>
+      <cds-tooltip-content id="content"> Label one </cds-tooltip-content>
     </cds-tooltip>
   `,
 };

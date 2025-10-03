@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,14 +11,23 @@ import '../stack/index';
 import { TOGGLE_SIZE } from './toggle';
 
 const sizes = {
-  'Regular size': null,
+  'Medium size (default)': null,
   [`Small size (${TOGGLE_SIZE.SMALL})`]: TOGGLE_SIZE.SMALL,
 };
 
 const defaultArgs = {
   labelA: 'On',
   labelB: 'Off',
-  checked: true,
+  toggled: true,
+  labelText: 'Label',
+};
+
+const smallToggleArgs = {
+  labelA: 'On',
+  labelB: 'Off',
+  toggled: true,
+  labelText: 'Label',
+  size: 'sm',
 };
 
 const controls = {
@@ -33,17 +42,17 @@ const controls = {
   },
   labelA: {
     control: 'text',
-    description: 'The text for the checked state.',
+    description: 'Specify the label for the "on" position',
   },
   labelB: {
     control: 'text',
-    description: 'The text for the unchecked state',
+    description: 'Specify the label for the "off" position',
   },
   labelText: {
     control: 'text',
     description: 'The text that is read for the control',
   },
-  readonly: {
+  readOnly: {
     control: 'boolean',
     description: 'Whether the toggle should be read-only',
   },
@@ -53,34 +62,13 @@ const controls = {
       "Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)",
     options: sizes,
   },
-  checked: {
+  toggled: {
     control: 'boolean',
     description: 'Specify whether the control is toggled',
   },
 };
 
 export const Default = {
-  render: () => html`
-    <cds-toggle
-      checked
-      label-a="On"
-      label-b="Off"
-      label-text="Toggle element label"></cds-toggle>
-  `,
-};
-
-export const SmallToggle = {
-  render: () => html`
-    <cds-toggle
-      checked
-      label-a="On"
-      label-b="Off"
-      label-text="Toggle element label"
-      size="sm"></cds-toggle>
-  `,
-};
-
-export const Playground = {
   argTypes: controls,
   args: defaultArgs,
   render: ({
@@ -89,9 +77,9 @@ export const Playground = {
     labelA,
     labelB,
     labelText,
-    readonly,
+    readOnly,
     size,
-    checked,
+    toggled,
   }) => html`
     <cds-toggle
       label-b="${labelB}"
@@ -100,8 +88,63 @@ export const Playground = {
       ?hideLabel="${hideLabel}"
       label-text="${labelText}"
       size="${size}"
-      ?read-only=${readonly}
-      ?checked="${checked}"></cds-toggle>
+      ?read-only=${readOnly}
+      ?toggled="${toggled}"></cds-toggle>
+  `,
+};
+
+export const Skeleton = {
+  render: () => html` <cds-toggle-skeleton></cds-toggle-skeleton> `,
+};
+
+export const SmallToggle = {
+  argTypes: controls,
+  args: smallToggleArgs,
+  render: ({
+    disabled,
+    hideLabel,
+    labelA,
+    labelB,
+    labelText,
+    readOnly,
+    size,
+    toggled,
+  }) => html`
+    <cds-toggle
+      ?toggled="${toggled}"
+      ?read-only=${readOnly}
+      ?disabled="${disabled}"
+      ?hideLabel="${hideLabel}"
+      label-text="${labelText}"
+      label-b="${labelB}"
+      label-a="${labelA}"
+      size="${size}"></cds-toggle>
+  `,
+};
+
+export const WithAccessibleLabels = {
+  render: () => html`
+    <cds-stack gap="7">
+      <cds-toggle id="toggle-4" label-text="Label"></cds-toggle>
+      <cds-toggle id="toggle-5" label-text="Label" hideLabel></cds-toggle>
+
+      <div>
+        <div id="toggle-6-label" style="margin-block-end: 0.5rem;">
+          Internal aria-label toggle
+        </div>
+        <cds-toggle aria-labelledby="toggle-6-label" id="toggle-6"></cds-toggle>
+      </div>
+
+      <div>
+        <label
+          id="toggle-7-label"
+          for="toggle-7"
+          style="display: block; margin-block-end: 0.5rem;">
+          External toggle label
+        </label>
+        <cds-toggle aria-labelledby="toggle-7-label" id="toggle-7"></cds-toggle>
+      </div>
+    </cds-stack>
   `,
 };
 

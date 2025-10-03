@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
   forwardRef,
   useContext,
   useEffect,
@@ -15,16 +16,18 @@ import React, {
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -181,7 +184,7 @@ const TextArea = frFn((props, forwardRef) => {
     light,
     placeholder = '',
     enableCounter = false,
-    maxCount = undefined,
+    maxCount,
     counterMode = 'character',
     warn = false,
     warnText = '',
@@ -195,7 +198,12 @@ const TextArea = frFn((props, forwardRef) => {
 
   const textAreaInstanceId = useId();
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const helperTextRef = useRef<HTMLDivElement>(null);
+  const errorTextRef = useRef<HTMLDivElement>(null);
+  const warnTextRef = useRef<HTMLDivElement>(null);
+
   const ref = useMergedRefs([forwardRef, textareaRef]);
 
   function getInitialTextCount(): number {
@@ -206,7 +214,7 @@ const TextArea = frFn((props, forwardRef) => {
     if (counterMode === 'character') {
       return strValue.length;
     } else {
-      return strValue.match(/\w+/g)?.length || 0;
+      return strValue.match(/\p{L}+/gu)?.length || 0;
     }
   }
 
@@ -224,7 +232,24 @@ const TextArea = frFn((props, forwardRef) => {
     } else if (textareaRef.current) {
       textareaRef.current.style.width = `100%`;
     }
-  }, [other.cols]);
+
+    if (!wrapperRef.current) return;
+    const applyWidth = (width: number) => {
+      [helperTextRef, errorTextRef, warnTextRef].forEach((r) => {
+        if (r.current) {
+          r.current.style.maxWidth = `${width}px`;
+          r.current.style.overflowWrap = 'break-word';
+        }
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      applyWidth(entry.contentRect.width);
+    });
+    resizeObserver.observe(wrapperRef.current);
+
+    return () => resizeObserver && resizeObserver.disconnect();
+  }, [other.cols, invalid, warn]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -260,9 +285,9 @@ const TextArea = frFn((props, forwardRef) => {
           textareaRef.current !== null
         ) {
           const existingWords: string[] =
-            textareaRef.current.value.match(/\w+/g) || [];
+            textareaRef.current.value.match(/\p{L}+/gu) || [];
           const pastedWords: string[] =
-            evt.clipboardData.getData('Text').match(/\w+/g) || [];
+            evt.clipboardData.getData('Text').match(/\p{L}+/gu) || [];
 
           const totalWords = existingWords.length + pastedWords.length;
 
@@ -304,7 +329,7 @@ const TextArea = frFn((props, forwardRef) => {
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
           ) {
-            const matchedWords = evt.target?.value?.match(/\w+/g);
+            const matchedWords = evt.target?.value?.match(/\p{L}+/gu);
             if (matchedWords && matchedWords.length <= maxCount) {
               textareaRef.current.removeAttribute('maxLength');
 
@@ -380,7 +405,11 @@ const TextArea = frFn((props, forwardRef) => {
     : `text-area-helper-text-${textAreaInstanceId}`;
 
   const helper = helperText ? (
-    <Text as="div" id={helperId} className={helperTextClasses}>
+    <Text
+      as="div"
+      id={helperId}
+      className={helperTextClasses}
+      ref={helperTextRef}>
       {helperText}
     </Text>
   ) : null;
@@ -392,7 +421,8 @@ const TextArea = frFn((props, forwardRef) => {
       as="div"
       role="alert"
       className={`${prefix}--form-requirement`}
-      id={errorId}>
+      id={errorId}
+      ref={errorTextRef}>
       {invalidText}
       {isFluid && (
         <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
@@ -400,8 +430,15 @@ const TextArea = frFn((props, forwardRef) => {
     </Text>
   ) : null;
 
+  const warnId = id + '-warn-msg';
+
   const warning = warn ? (
-    <Text as="div" role="alert" className={`${prefix}--form-requirement`}>
+    <Text
+      as="div"
+      role="alert"
+      className={`${prefix}--form-requirement`}
+      id={warnId}
+      ref={warnTextRef}>
       {warnText}
       {isFluid && (
         <WarningAltFilled
@@ -427,9 +464,10 @@ const TextArea = frFn((props, forwardRef) => {
 
   const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(
+  const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
+    counterMode === 'word' ? 'word' : undefined,
     counterMode === 'word' ? 'words' : undefined
   );
   useEffect(() => {
@@ -477,20 +515,11 @@ const TextArea = frFn((props, forwardRef) => {
   );
 
   // AILabel is always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
-    : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
-  }
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini' })
+    : candidate;
 
   return (
     <div className={formItemClasses}>
@@ -498,7 +527,10 @@ const TextArea = frFn((props, forwardRef) => {
         {label}
         {counter}
       </div>
-      <div className={textAreaWrapperClasses} data-invalid={invalid || null}>
+      <div
+        ref={wrapperRef}
+        className={textAreaWrapperClasses}
+        data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}

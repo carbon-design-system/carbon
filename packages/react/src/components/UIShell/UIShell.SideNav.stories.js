@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import cx from 'classnames';
 import {
   Content,
@@ -162,13 +162,6 @@ export default {
     },
     controls: {
       hideNoControlsWarning: true,
-    },
-  },
-  argTypes: {
-    className: {
-      table: {
-        disable: true,
-      },
     },
   },
 };

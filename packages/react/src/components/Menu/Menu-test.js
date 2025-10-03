@@ -1,15 +1,35 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
+import { useState } from 'react';
 import { Menu, MenuItem, MenuItemSelectable, MenuItemRadioGroup } from './';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../ListBox/test-helpers';
+
+function DynamicMenu() {
+  const [items, setItems] = useState([1, 2, 3, 4, 5]);
+  return (
+    <>
+      <button
+        onClick={() => {
+          setItems([0, 1, 2, 3, 11, 4, 5, 6, 9]);
+        }}>
+        add menu items
+      </button>
+      <Menu open>
+        {items.map((item) => (
+          <MenuItem key={item} label={item} />
+        ))}
+      </Menu>
+    </>
+  );
+}
 
 describe('Menu', () => {
   describe('renders as expected', () => {
@@ -262,5 +282,71 @@ describe('MenuItem', () => {
     await userEvent.click(screen.getByTitle('Item 1'));
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith(false);
+  });
+
+  describe('accessibility', () => {
+    it('should focus the first focusable menu item on open', async () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Item 1" />
+          <MenuItem label="Item 2" />
+        </Menu>
+      );
+
+      const item1 = await screen.findByRole('menuitem', { name: 'Item 1' });
+      expect(document.activeElement).toBe(item1);
+    });
+
+    it('should skip disabled items when determining first focusable', () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Disabled" disabled />
+          <MenuItem label="Focusable" />
+        </Menu>
+      );
+
+      const items = screen.getAllByRole('menuitem');
+      expect(items[0]).toHaveAttribute('tabindex', '-1');
+      expect(items[1]).toHaveAttribute('tabindex', '0');
+    });
+
+    it('moves focus to submenu when opening via ArrowRight key', async () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Parent">
+            <MenuItem label="Child" />
+          </MenuItem>
+        </Menu>
+      );
+
+      const parentItem = screen.getAllByRole('menuitem')[0];
+      parentItem.focus();
+      expect(parentItem).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowRight}');
+
+      const child = screen.getByRole('menuitem', { name: 'Child' });
+      expect(child).toBeVisible();
+
+      expect(child).toHaveFocus();
+    });
+  });
+
+  it('navigates through dynamically added MenuItems in the correct order', async () => {
+    render(<DynamicMenu />);
+
+    // add the new items
+    await userEvent.click(
+      screen.getByRole('button', { name: /add menu items/i })
+    );
+
+    const menu = screen.getByRole('menu');
+    menu.focus();
+
+    const expectedOrder = ['0', '1', '2', '3', '11', '4', '5', '6', '9'];
+    for (const label of expectedOrder) {
+      await userEvent.keyboard('{ArrowDown}');
+      expect(screen.getByRole('menuitem', { name: label })).toHaveFocus();
+    }
   });
 });

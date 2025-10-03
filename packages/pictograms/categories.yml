@@ -13,6 +13,7 @@ categories:
       - export--01
       - export--02
       - flexible
+      - install
       - launch
       - link
       - love
@@ -21,6 +22,7 @@ categories:
       - music
       - paper--clip
       - player--flow
+      - prepare
       - refresh
       - renew
       - repeat
@@ -54,6 +56,7 @@ categories:
       - generate--code
       - governance
       - hard--prompt
+      - human-in-the-loop
       - ibm--granite
       - intelligence
       - machine--learning--01
@@ -64,6 +67,7 @@ categories:
       - machine--learning--06
       - machine--learning--model
       - multi-model
+      - neurodiversity
       - prompt
       - spyre-accelerator
       - technical-owner
@@ -148,6 +152,7 @@ categories:
       - ecuador--quito
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
+      - frost-tower
       - geodesic-montreal-biosphere
       - guadalajara--seal
       - hamburg--philharmone
@@ -228,6 +233,7 @@ categories:
       - washington-dc--capitol
       - washington-dc--monument
       - zurich
+      - zurich--swiss-national-museum
   - name: Cloud
     members:
       - accelerating-transformation
@@ -373,6 +379,7 @@ categories:
       - geographic-flexibility
       - global--business--services
       - global--footprint
+      - global--infrastructure
       - global--technology--services
       - go--language
       - gpu-computing
@@ -403,7 +410,6 @@ categories:
       - insurance--02
       - integration--02
       - integration--03
-      - internet-of-things
       - java
       - javascript
       - keep-your-own-key
@@ -542,6 +548,7 @@ categories:
   - name: Data analytics
     members:
       - analyze
+      - assess
       - blockchain
       - box--plot
       - chart--two-y-axis
@@ -552,6 +559,7 @@ categories:
       - chart--bubble--line
       - chart--candlestick
       - chart--custom
+      - chart--donut
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
@@ -637,7 +645,9 @@ categories:
       - ibm--z17--single-frame
       - infrastructure-security
       - it--infrastructure-software
+      - linuxone-5
       - mainframe-qualities-of-service
+      - ibm--power11
       - reliability
       - resilience
       - sap--hana
@@ -663,8 +673,10 @@ categories:
       - colors
       - composer-edit
       - content--design
+      - design
       - design-and-development--01
       - design-and-development--02
+      - design-system-alignment
       - design--leadership
       - design--research
       - engineer
@@ -683,10 +695,13 @@ categories:
       - pilot-test
       - resourceful
       - social--tile
+      - software--02
+      - systems-and-tools
       - universal-experiences
       - user--experience-design
       - user--insights
       - user--interface
+      - user--research-tools
       - visual--design
       - web--banners
       - web--developer
@@ -748,6 +763,7 @@ categories:
       - headphones
       - microphone
       - printer
+      - team-radio
       - telephone
       - television
       - washer
@@ -774,6 +790,8 @@ categories:
       - client--financing--02
       - commercial--financing--01
       - commercial--financing--02
+      - finance-and-operations
+      - finance-and-supply-chain
       - finance--strategy
       - financial--consultant
       - financial--gain
@@ -868,6 +886,7 @@ categories:
   - name: Industry
     members:
       - agriculture
+      - astronaut
       - b2b-commerce
       - bulldozer
       - cargo--crane
@@ -883,6 +902,8 @@ categories:
       - green-energy
       - insurance
       - keep-dry
+      - mission-control
+      - nuclear
       - oil--pump
       - oil--rig
       - power
@@ -908,7 +929,10 @@ categories:
     members:
       - build
       - connect
+      - internet-of-things
       - iot--munich
+      - migrate
+      - modernize--02
       - solve
       - transform--01
   - name: Life Science
@@ -938,8 +962,11 @@ categories:
       - blender
       - cafe
       - candy
+      - champagne
       - cherries
       - cookie
+      - cowboy--hat
+      - cowboy--boot
       - crosshairs
       - cupcake
       - dining
@@ -947,26 +974,19 @@ categories:
       - firecracker
       - flower--01
       - flower--02
-      - football
-      - football--field
-      - football--goal-post
-      - golf--bag
-      - golf--ball
-      - golf--club
-      - golf--hole
       - gramophone
       - guitar
       - juice
       - lantern
+      - longhorn
       - moon-cake
       - ornament
+      - pencil
       - perfume
-      - racetrack
       - rock-on
       - scale
       - snowflake
       - soft--ice--cream
-      - sports
       - spotlight
       - stage
       - stationary--bicycle
@@ -974,6 +994,7 @@ categories:
       - tennis--ball
       - tennis--net
       - tennis--racquet
+      - tickets
       - tree
       - tree--02
       - waving-hand
@@ -1044,6 +1065,7 @@ categories:
       - advocate
       - advocate--mask
       - agility--02
+      - client--support
       - design-thinking-team
       - engagement-inclusion--01
       - engagement-inclusion--02
@@ -1071,6 +1093,7 @@ categories:
       - person--07
       - person--08
       - person--09
+      - recruitment--01
       - renew--team
       - resilience--02
       - sap--successfactors
@@ -1083,17 +1106,27 @@ categories:
       - user--mask
       - user--profile
       - user--search
+      - wheelchair-user
+      - wheelchair-user--active
   - name: Quantum
     members:
       - albatross
       - bloch-sphere
       - canary
       - condor
+      - crossbill
       - eagle
       - falcon
+      - flamingo
+      - heron
       - hummingbird
+      - kookaburra
+      - loon
+      - nighthawk
       - osprey
       - qiskit
+      - quantum--computer
+      - quantum--computer--02
   - name: Red Hat
     members:
       - build-applications-anywhere
@@ -1135,6 +1168,7 @@ categories:
       - mobile--pos--01
       - mobile--pos--02
       - price
+      - product
       - qr-code
       - receipt
       - retail--sustainable
@@ -1160,6 +1194,7 @@ categories:
       - build--leadership--and--culture
       - collaboration
       - continuous--security
+      - cybersecurity
       - data--security
       - detect--and--stop--advancing--threats
       - digital--id
@@ -1199,6 +1234,38 @@ categories:
       - unlock--01
       - unlock--02
       - vault
+  - name: Sports
+    members:
+      - f1--car--01
+      - f1--car--02
+      - f1--grid
+      - f1--race
+      - f1--steering-wheel
+      - f1--pit-stop-traffic-light
+      - football
+      - football--field
+      - football--goal-post
+      - golf--bag
+      - golf--ball
+      - golf--club
+      - golf--hole
+      - headset
+      - helmet
+      - masters-leader-board
+      - punching-bag--01
+      - punching-bag--02
+      - punching-bag--03
+      - racetrack
+      - speed-bag
+      - sports
+      - tennis
+      - tennis--ball
+      - tennis--net
+      - tennis--racquet
+      - tickets
+      - ufc--belt
+      - ufc--fighting
+      - ufc--ring
   - name: Status
     members:
       - question
@@ -1224,6 +1291,7 @@ categories:
   - name: Supply chain
     members:
       - connected--nodes--to--the--cloud
+      - control--tower
       - delivered
       - managing--contractual--flow
       - managing--items
@@ -1237,6 +1305,7 @@ categories:
       - process
       - supply-chain--01
       - supply-chain--02
+      - transparent-supply
   - name: Sustainability
     members:
       - energy--crisis
@@ -1314,10 +1383,11 @@ categories:
       - road
       - spaceship
       - steering--wheel
+      - tire
       - train
       - travel-and-expenses
       - tunnel
-  - name: Watson
+  - name: watsonx
     members:
       - alchemy--data--news
       - alchemy--language
@@ -1368,6 +1438,7 @@ categories:
       - cloudy--humid
       - cloudy--partial
       - cloudy--windy
+      - constellation
       - fog
       - hail
       - hail--heavy
@@ -1393,12 +1464,15 @@ categories:
   - name: Workplace
     members:
       - accessibility
+      - aed-defibrillator
       - bento-box-tray
       - beverage-carton
       - briefcase
       - cardboard
       - compost
       - do-not-step
+      - epinephrine-auto-injectors
+      - focus-room
       - fountain--drinking
       - glass-bottle
       - glass-bottle-and-metal-can
@@ -1408,13 +1482,21 @@ categories:
       - lockers
       - loop--hearing
       - metal-can
+      - no--food
+      - no--liquids
       - no--parking
       - parking
+      - person--working
       - plastic-bottle
       - plastics
       - silence
       - station--hydration
       - toilet
+      - toilet--02
+      - toilet--03
       - trash--burnable
       - trash--non-burnable
+      - urinal--01
+      - urinal--02
+      - washing-hands
       - waste--electronic

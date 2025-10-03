@@ -10,34 +10,12 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import OverflowMenu from '../OverflowMenu';
+import OverflowMenu, { OverflowMenuProps } from '../OverflowMenu';
 
 const defaultIconDescription = 'Settings';
 
-export interface TableToolbarMenuProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-
-  /**
-   * Provide an optional class name for the toolbar menu trigger button
-   */
-  className?: string;
-
-  /**
-   * The description of the menu icon.
-   */
-  iconDescription?: string;
-
-  /**
-   * Provide an optional class name for the toolbar menu
-   */
-  menuOptionsClass?: string;
-
-  /**
-   * A component used to render an icon.
-   */
-  renderIcon?: any;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20452
+export interface TableToolbarMenuProps extends OverflowMenuProps {}
 
 const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({
   className,
@@ -58,7 +36,6 @@ const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({
   );
   return (
     <OverflowMenu
-      aria-label={iconDescription}
       renderIcon={renderIcon}
       className={toolbarActionClasses}
       title={iconDescription}

@@ -6,23 +6,28 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
+import React, {
+  cloneElement,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
-import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import { SelectableTagBaseProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export const TYPES = {
   red: 'Red',
@@ -118,9 +123,12 @@ type TagComponent = <T extends React.ElementType = 'div'>(
     | OperationalTagBaseProps
     | SelectableTagBaseProps
     | DismissibleTagBaseProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TagBase = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   TagBaseProps & {
     as?: React.ElementType;
@@ -148,17 +156,20 @@ const TagBase = React.forwardRef<
     const prefix = usePrefix();
     const tagRef = useRef<HTMLElement>(null);
     if (filter) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn(
         'The `filter` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
 
     if (onClose) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn(
         'The `onClose` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
     const ref = useMergedRefs([forwardRef, tagRef]);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -198,22 +209,12 @@ const TagBase = React.forwardRef<
     };
 
     // AILabel is always size `sm` and `inline`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
-      : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel' &&
-      !isInteractiveTag
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'sm',
-          kind: 'inline',
-        }
-      );
-    }
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator =
+      candidateIsAILabel && !isInteractiveTag
+        ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
+        : null;
 
     if (filter) {
       const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';

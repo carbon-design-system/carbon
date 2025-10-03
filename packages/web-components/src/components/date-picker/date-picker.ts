@@ -53,7 +53,9 @@ enum DATE_PICKER_MODE {
 }
 
 // Weekdays shorthand for english locale
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
 flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
   const currentDay = flatpickr!.l10ns!.en!.weekdays.shorthand;
   if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
     currentDay[index] = 'Th';
@@ -92,12 +94,11 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * @returns The effective date picker mode, determined by the child `<cds-date-picker-input>`.
    */
   private get _mode() {
-    const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof CDSDatePicker;
+    const { selectorInputTo } = this.constructor as typeof CDSDatePicker;
     if (this.querySelector(selectorInputTo)) {
       return DATE_PICKER_MODE.RANGE;
     }
-    if (this.querySelector(selectorInputFrom)) {
+    if (this.querySelector(`${prefix}-date-picker-input[kind="single"]`)) {
       return DATE_PICKER_MODE.SINGLE;
     }
     return DATE_PICKER_MODE.SIMPLE;
@@ -194,6 +195,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     } = this;
     // We use `<cds-date-picker-input>` to communicate values/events with Flatpickr,
     // but want to use `<input>` in shadow DOM to base the calendar dropdown's position on
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const { input: positionElement } = dateInteractNode!;
     const [minDate = undefined, maxDate = undefined] = !enabledRange
       ? []
@@ -218,6 +220,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * Handles `${prefix}-date-picker-changed` event on this element.
    */
   @HostListener('eventChange')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChange = ({ detail }: CustomEvent) => {
     this._value = detail.selectedDates
@@ -367,10 +370,10 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   private _instantiateDatePicker() {
     this._releaseDatePicker();
     const { _dateInteractNode: dateInteractNode } = this;
-    // `this._dateInteractNode` won't be there unless there is a slotted `<cds-date-input type="from">`,
-    // which means Flatpickr will never be instantiated in "simple" mode.
-    if (dateInteractNode && dateInteractNode.input) {
+    // do not instantiate Flatpickr in "simple" mode
+    if (dateInteractNode && dateInteractNode.input && this._mode !== 'simple') {
       this.calendar = flatpickr(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         dateInteractNode.input as any,
         this._datePickerOptions
       );
@@ -451,28 +454,28 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   disabled = false;
 
   /**
-   * The localization data.
-   */
-  @property({ attribute: false })
-  locale!: FlatpickrLocale;
-
-  /**
    * The date range that a user can pick in calendar dropdown.
    */
   @property({ attribute: 'enabled-range' })
   enabledRange!: string;
 
   /**
-   * The minimum date that a user can start picking from.
+   * The localization data.
    */
-  @property({ attribute: 'min-date' })
-  minDate!: string;
+  @property({ attribute: false })
+  locale!: FlatpickrLocale;
 
   /**
    * The maximum date that a user can start picking from.
    */
   @property({ attribute: 'max-date' })
   maxDate!: string;
+
+  /**
+   * The minimum date that a user can start picking from.
+   */
+  @property({ attribute: 'min-date' })
+  minDate!: string;
 
   /**
    * Name for the input in the `FormData`
@@ -550,13 +553,15 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       <a
         class="${prefix}--visually-hidden"
         href="javascript:void 0"
-        role="navigation"></a>
+        role="navigation"
+        tabindex="-1"></a>
       <slot @slotchange="${handleSlotChange}"></slot>
       <div id="floating-menu-container"></div>
       <a
         class="${prefix}--visually-hidden"
         href="javascript:void 0"
-        role="navigation"></a>
+        role="navigation"
+        tabindex="-1"></a>
     `;
   }
 

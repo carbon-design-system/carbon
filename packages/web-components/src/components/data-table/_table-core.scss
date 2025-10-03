@@ -269,7 +269,7 @@
   }
 }
 
-:host(#{$prefix}-table-cell[slug-in-header]) {
+:host(#{$prefix}-table-cell[ai-label-in-header]) {
   @include ai-table-gradient;
 }
 

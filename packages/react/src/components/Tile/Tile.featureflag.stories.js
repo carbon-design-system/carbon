@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from '.';
-import TileGroup from '../TileGroup/TileGroup';
+import { TileGroup } from '../TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
 import '../AILabel/ailabel-story.scss';
@@ -63,11 +63,11 @@ export default {
   tags: ['!autodocs'],
 };
 
-const experimentalClassname = 'experimental-tile';
+const previewClassname = 'preview-tile';
 
 export const Clickable = (args) => {
   return (
-    <div className={experimentalClassname}>
+    <div className={previewClassname}>
       <ClickableTile
         id="clickable-tile-1"
         href="https://www.carbondesignsystem.com/"
@@ -94,7 +94,7 @@ export const ClickableWithLayer = () => {
   return (
     <WithLayer>
       {(layer) => (
-        <div className={experimentalClassname}>
+        <div className={previewClassname}>
           <ClickableTile
             id={`clickable-tile-${layer}`}
             href="https://www.carbondesignsystem.com/">
@@ -108,7 +108,7 @@ export const ClickableWithLayer = () => {
 
 export const Selectable = (args) => {
   return (
-    <div className={experimentalClassname}>
+    <div className={previewClassname}>
       <SelectableTile
         id="selectable-tile-1"
         name="tiles"
@@ -137,7 +137,7 @@ export const MultiSelect = (args) => {
     <div
       role="group"
       aria-label="selectable tiles"
-      className={experimentalClassname}>
+      className={previewClassname}>
       <SelectableTile id="selectable-tile-1" name="tiles" {...args}>
         Option 1
       </SelectableTile>
@@ -165,7 +165,7 @@ MultiSelect.argTypes = {
 
 export const Radio = (args) => {
   return (
-    <div className={experimentalClassname}>
+    <div className={previewClassname}>
       <TileGroup legend="Radio Tile Group" name="radio tile group">
         <RadioTile
           id="radio-tile-1"
@@ -205,7 +205,7 @@ export const RadioWithLayer = () => {
   return (
     <WithLayer>
       {(layer) => (
-        <div className={experimentalClassname}>
+        <div className={previewClassname}>
           <TileGroup
             legend="Radio Tile Group"
             name={`radio-tile-group-${layer}`}>
@@ -228,7 +228,7 @@ export const RadioWithLayer = () => {
 };
 
 export const Expandable = () => (
-  <div style={{ width: '400px' }} className={experimentalClassname}>
+  <div style={{ width: '400px' }} className={previewClassname}>
     <ExpandableTile
       id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
@@ -244,7 +244,7 @@ export const Expandable = () => (
 );
 
 export const ExpandableWithInteractive = () => (
-  <div style={{ width: '400px' }} className={experimentalClassname}>
+  <div style={{ width: '400px' }} className={previewClassname}>
     <ExpandableTile
       id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
@@ -271,7 +271,7 @@ export const ExpandableWithLayer = () => {
   return (
     <WithLayer>
       {(layer) => (
-        <div style={{ width: '400px' }} className={experimentalClassname}>
+        <div style={{ width: '400px' }} className={previewClassname}>
           <ExpandableTile
             id={`expandable-tile-${layer}`}
             tileCollapsedIconText="Interact to Expand tile"
@@ -343,7 +343,7 @@ export const _WithAILabel = {
     },
   },
   render: (args) => (
-    <div className="ai-label-selectable-tile-container ai-label-experimental-radio-tile-container">
+    <div className="ai-label-selectable-tile-container ai-label-preview-radio-tile-container">
       <TileGroup
         defaultSelected="default-selected"
         legend="Radio Tile Group - Feature Flags enabled"

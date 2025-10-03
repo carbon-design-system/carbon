@@ -5,19 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
-import { textInputProps } from './util';
-import deprecate from '../../prop-types/deprecate';
+import { getTextInputProps } from './util';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
 export interface ControlledPasswordInputProps
-  extends ReactAttr<HTMLInputElement> {
+  extends HTMLAttributes<HTMLInputElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<input>` node
@@ -123,7 +122,7 @@ export interface ControlledPasswordInputProps
 }
 
 const ControlledPasswordInput = React.forwardRef(
-  function ControlledPasswordInput(
+  (
     {
       labelText,
       className,
@@ -137,9 +136,9 @@ const ControlledPasswordInput = React.forwardRef(
       invalidText = '',
       helperText = '',
       light,
-      // eslint-disable-next-line react/prop-types
+
       type = 'password',
-      // eslint-disable-next-line react/prop-types
+
       togglePasswordVisibility,
       tooltipPosition = 'bottom',
       tooltipAlignment = 'center',
@@ -149,7 +148,7 @@ const ControlledPasswordInput = React.forwardRef(
       ...other
     }: ControlledPasswordInputProps,
     ref
-  ) {
+  ) => {
     const prefix = usePrefix();
     const controlledPasswordInstanceId = useId();
 
@@ -224,7 +223,7 @@ const ControlledPasswordInput = React.forwardRef(
     const input = (
       <>
         <input
-          {...textInputProps({
+          {...getTextInputProps({
             invalid,
             sharedTextInputProps,
             invalidId: errorId,

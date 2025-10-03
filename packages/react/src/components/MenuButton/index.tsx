@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,7 +29,7 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 
 const validButtonKinds = ['primary', 'tertiary', 'ghost'];
 const defaultButtonKind = 'primary';
@@ -75,7 +75,7 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   /**
    * Specify the size of the button and menu.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify the tabIndex of the button.
@@ -88,8 +88,9 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   menuTarget?: Element;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
-  function MenuButton(
+  (
     {
       children,
       className,
@@ -103,7 +104,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       ...rest
     },
     forwardRef
-  ) {
+  ) => {
     // feature flag utilized to separate out only the dynamic styles from @floating-ui
     // flag is turned on when collision detection (ie. flip, hide) logic is not desired
     const enableOnlyFloatingStyles = useFeatureFlag(
@@ -113,6 +114,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     const id = useId('MenuButton');
     const prefix = usePrefix();
     const triggerRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     let middlewares: any[] = [];
 
     if (!enableOnlyFloatingStyles) {
@@ -254,6 +256,7 @@ MenuButton.propTypes = {
   /**
    * Specify the type of button to be used as the base for the trigger button.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   kind: PropTypes.oneOf(validButtonKinds),
 
@@ -277,12 +280,14 @@ MenuButton.propTypes = {
   /**
    * Specify the size of the button and menu.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the tabIndex of the button.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   tabIndex: PropTypes.number,
 

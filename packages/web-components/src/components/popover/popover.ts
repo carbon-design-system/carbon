@@ -12,6 +12,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
+import HostListener from '../../globals/decorators/host-listener';
+import HostListenerMixin from '../../globals/mixins/host-listener';
 import FloatingUIContoller from '../../globals/controllers/floating-controller';
 
 /**
@@ -20,7 +22,7 @@ import FloatingUIContoller from '../../globals/controllers/floating-controller';
  * @element cds-popover
  */
 @customElement(`${prefix}-popover`)
-class CDSPopover extends LitElement {
+class CDSPopover extends HostListenerMixin(LitElement) {
   /**
    * Create popover controller instance
    */
@@ -85,17 +87,47 @@ class CDSPopover extends LitElement {
    */
   protected _handleSlotChange({ target }: Event) {
     if (this.tabTip) {
-      const component = (target as HTMLSlotElement)
-        .assignedNodes()
-        .filter(
-          (node) =>
-            node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-        );
+      const component = (target as HTMLSlotElement).assignedNodes().filter(
+        (node) =>
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+          node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
       (component[0] as HTMLElement).classList.add(
         `${prefix}--popover--tab-tip__button`
       );
     }
     this.requestUpdate();
+  }
+
+  @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore
+  private _handleFocusOut(event: Event) {
+    const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+    if (!this.contains(relatedTarget)) {
+      this.open = false;
+    }
+  }
+
+  private _handleOutsideClick(event: Event) {
+    const target = event.target as Node | null;
+    if (this.open && target && !this.contains(target)) {
+      this.open = false;
+    }
+  }
+
+  constructor() {
+    super();
+    this._handleOutsideClick = this._handleOutsideClick.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('click', this._handleOutsideClick);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('click', this._handleOutsideClick);
   }
 
   updated(changedProperties) {
@@ -165,10 +197,10 @@ class CDSPopover extends LitElement {
       [`${prefix}--popover--tab-tip`]: tabTip,
     });
     return html`
-    <span class="${classes}">
-      <slot @slotchange="${handleSlotChange}"></slot>
-      <slot name="content"><slot>
-    </span>
+      <span class="${classes}" part="popover-container">
+        <slot @slotchange="${handleSlotChange}"></slot>
+        <slot name="content"></slot>
+      </span>
     `;
   }
 

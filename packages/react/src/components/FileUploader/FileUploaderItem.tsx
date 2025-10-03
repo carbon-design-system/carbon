@@ -7,17 +7,21 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type HTMLAttributes,
+} from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 
-export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
+export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Error message body for an invalid file upload
    */
@@ -89,7 +93,8 @@ function FileUploaderItem({
   const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
-  const { current: id } = useRef(uuid || uniqueId());
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
+  const { current: id } = useRef(uuid || useId());
   const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
@@ -103,6 +108,7 @@ function FileUploaderItem({
     return name?.replace(/\s+/g, '');
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const isEllipsisActive = (element: any) => {
     setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
     return element.offsetWidth < element.scrollWidth;

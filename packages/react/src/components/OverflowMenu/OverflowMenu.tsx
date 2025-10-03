@@ -37,14 +37,13 @@ import {
 import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
-import mergeRefs from '../../tools/mergeRefs';
+import { deprecate } from '../../prop-types/deprecate';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonProps } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
-import { PopoverAlignment } from '../Popover';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
@@ -106,6 +105,7 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
 
   switch (triggerButtonPositionProp) {
@@ -123,12 +123,21 @@ export const getMenuOffset: MenuOffset = (
   }
 };
 
-export interface OverflowMenuProps {
-  /**
-   * Specify how the trigger tooltip should be aligned.
-   */
-  align?: PopoverAlignment;
-
+export interface OverflowMenuProps
+  extends Omit<
+    IconButtonProps,
+    | 'type'
+    | 'aria-haspopup'
+    | 'aria-expanded'
+    | 'aria-controls'
+    | 'className'
+    | 'onClick'
+    | 'id'
+    | 'ref'
+    | 'size'
+    | 'label'
+    | 'kind'
+  > {
   /**
    * Specify a label to be read by screen readers on the container node
    */
@@ -234,17 +243,19 @@ export interface OverflowMenuProps {
   selectorPrimaryFocus?: string;
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `xs`, `sm`, `md` (default) or `lg` as an option.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * The ref to the overflow menu's trigger button element.
    * @deprecated Use the standard React `ref` prop instead.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   innerRef?: Ref<any>;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
@@ -305,13 +316,15 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    // Call `onClose` when menu closes.
     useEffect(() => {
-      if (!open && prevOpenState.current) {
+      if (open && !prevOpenState.current) {
+        onOpen();
+      } else if (!open && prevOpenState.current) {
         onClose();
       }
+
       prevOpenState.current = open;
-    }, [open, onClose]);
+    }, [open, onClose, onOpen]);
 
     useOutsideClick(wrapperRef, ({ target }) => {
       if (
@@ -329,17 +342,13 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    const closeMenu = useCallback(
-      (onCloseMenu?: () => void) => {
-        setOpen(false);
-        // Optional callback to be executed after the state as been set to close
-        if (onCloseMenu) {
-          onCloseMenu();
-        }
-        onClose();
-      },
-      [onClose]
-    );
+    const closeMenu = useCallback((onCloseMenu?: () => void) => {
+      setOpen(false);
+      // Optional callback to be executed after the state as been set to close
+      if (onCloseMenu) {
+        onCloseMenu();
+      }
+    }, []);
 
     const closeMenuAndFocus = useCallback(() => {
       const wasClicked = click;
@@ -475,7 +484,6 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         },
         !hasFocusin
       );
-      onOpen();
     };
 
     const getTarget = () => {
@@ -776,9 +784,9 @@ OverflowMenu.propTypes = {
   selectorPrimaryFocus: PropTypes.string,
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `xs`, `sm`, `md` (default) or `lg` as an option.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 };
 
 export default OverflowMenu;

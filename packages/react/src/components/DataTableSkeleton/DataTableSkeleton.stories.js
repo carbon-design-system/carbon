@@ -29,8 +29,8 @@ export const Skeleton = (args) => {
   return (
     <div style={{ width: '800px' }}>
       <DataTableSkeleton
-        {...args}
         {...rest}
+        {...args}
         headers={headers}
         aria-label="sample table"
       />
@@ -39,15 +39,8 @@ export const Skeleton = (args) => {
   );
 };
 
-Skeleton.argTypes = {
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
+Skeleton.parameters = {
+  controls: {
+    exclude: ['headers'],
   },
 };

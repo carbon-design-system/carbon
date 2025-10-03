@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as PaginationStories from './pagination.stories';
 
@@ -16,6 +16,7 @@ import * as PaginationStories from './pagination.stories';
 
 - [Overview](#overview)
 - [Multiple pagination components](#multiple-pagination-components)
+- [Pagination unknown pages](#pagination-unknown-pages)
 - [Pagination with custom page sizes label](#pagination-with-custom-page-sizes-label)
 - [Component API](#component-api)
 - [CDN](#cdn)
@@ -28,6 +29,10 @@ import * as PaginationStories from './pagination.stories';
 ## Multiple pagination components
 
 <Canvas of={PaginationStories.MultiplePaginationComponents} />
+
+## Pagination unknown pages
+
+<Canvas of={PaginationStories.PaginationUnknownPages} />
 
 ## Pagination with custom page sizes label
 

@@ -25,7 +25,7 @@ export const ButtonKinds = [
 
 export type ButtonKind = (typeof ButtonKinds)[number];
 
-export const ButtonSizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+export const ButtonSizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 export type ButtonSize = (typeof ButtonSizes)[number];
 
@@ -126,7 +126,9 @@ export type ButtonProps<T extends React.ElementType> =
 
 export type ButtonComponent = <T extends React.ElementType = 'button'>(
   props: ButtonProps<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   context?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 function isIconOnlyButton(
@@ -140,6 +142,7 @@ function isIconOnlyButton(
   return false;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Button: ButtonComponent = React.forwardRef(
   <T extends React.ElementType = 'button'>(
     props: ButtonProps<T>,
@@ -167,6 +170,7 @@ const Button: ButtonComponent = React.forwardRef(
     } = props;
 
     if (ButtonImageElement && !children && !iconDescription) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.error(
         'Button: renderIcon property specified without also providing an iconDescription property. ' +
           'This may impact accessibility for screen reader users.'
@@ -245,7 +249,9 @@ const Button: ButtonComponent = React.forwardRef(
   ]),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 
@@ -372,7 +378,7 @@ const Button: ButtonComponent = React.forwardRef(
   /**
    * Specify the size of the button, from the following list of sizes:
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Optional prop to specify the tabIndex of the Button

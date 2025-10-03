@@ -57,6 +57,29 @@ describe('TreeView', () => {
       expect(within(nodeChild).getByText('Node 2')).toBeInTheDocument();
     });
 
+    it('should render children as expected when treenode is wrapped in a component', () => {
+      render(
+        <TreeView label="Tree View">
+          <div>
+            <TreeNode isExpanded={true} data-testid="Node 1" label="Node 1">
+              <div>
+                <TreeNode data-testid="Node 2" label="Node 2" />
+              </div>
+            </TreeNode>
+          </div>
+        </TreeView>
+      );
+
+      const nodeParent = screen.getByTestId('Node 1');
+      const nodeChild = screen.getByTestId('Node 2');
+
+      expect(nodeParent).toHaveClass(`${prefix}--tree-parent-node`);
+      expect(nodeChild).toHaveClass(`${prefix}--tree-leaf-node`);
+
+      expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
+      expect(within(nodeChild).getByText('Node 2')).toBeInTheDocument();
+    });
+
     it('should render children as expected when using dot syntax', () => {
       render(
         <TreeView label="Tree View">

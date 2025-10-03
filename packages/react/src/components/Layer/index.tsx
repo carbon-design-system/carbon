@@ -11,10 +11,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from './LayerContext';
 import { LayerLevel, MAX_LEVEL, MIN_LEVEL, levels } from './LayerLevel';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { clamp } from '../../internal/clamp';
 
 /**
@@ -45,25 +42,37 @@ export interface LayerBaseProps {
    * Specify the layer level and override any existing levels based on hierarchy
    */
   level?: LayerLevel;
+
+  /**
+   * Applies a css background-color set to $layer-background
+   */
+  withBackground?: boolean;
 }
 
 export type LayerProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, LayerBaseProps>;
 
-const Layer = React.forwardRef<
-  any,
-  LayerBaseProps & {
-    as?: React.ElementType;
-  } & React.HTMLAttributes<HTMLDivElement>
->(
-  (
-    { as, className: customClassName, children, level: overrideLevel, ...rest },
-    ref
-  ) => {
+const Layer = React.forwardRef(
+  <T extends React.ElementType = 'div'>(props: LayerProps<T>, ref) => {
+    const {
+      as,
+      className: customClassName,
+      children,
+      level: overrideLevel,
+      withBackground = false,
+      ...rest
+    } = props;
+
     const contextLevel = React.useContext(LayerContext);
     const level = overrideLevel ?? contextLevel;
     const prefix = usePrefix();
-    const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
+    const className = cx(
+      `${prefix}--layer-${levels[level]}`,
+      {
+        [`${prefix}--layer__with-background`]: withBackground,
+      },
+      customClassName
+    );
     // The level should be between MIN_LEVEL and MAX_LEVEL
     const value = clamp(level + 1, MIN_LEVEL, MAX_LEVEL);
 
@@ -107,6 +116,11 @@ Layer.propTypes = {
    * Specify the layer level and override any existing levels based on hierarchy
    */
   level: PropTypes.oneOf([0, 1, 2]),
+
+  /**
+   * Applies a css background-color set to $layer-background
+   */
+  withBackground: PropTypes.bool,
 };
 
 export { Layer };

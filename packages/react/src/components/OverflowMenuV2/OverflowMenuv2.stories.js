@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import LinkTo from '@storybook/addon-links/react';
 
 import { WithDeprecationNotice } from '../../../.storybook/templates/WithDeprecationNotice';
@@ -22,7 +22,7 @@ import {
 import { OverflowMenuV2 } from './';
 
 export default {
-  title: 'Experimental/unstable__OverflowMenuV2',
+  title: 'Preview/preview__OverflowMenuV2',
   component: OverflowMenuV2,
   subcomponents: {
     MenuItem,
@@ -42,7 +42,7 @@ export const _OverflowMenuV2 = () => {
         <span>
           `OverflowMenuV2` is deprecated and will be removed in the next major
           version. Use `OverflowMenu` with the `enable-v12-overflowmenu`{' '}
-          <LinkTo title="Experimental/Feature Flags" name="Overview">
+          <LinkTo title="Preview/Feature Flags" name="Overview">
             feature flag
           </LinkTo>{' '}
           instead.

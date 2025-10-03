@@ -45,7 +45,6 @@
     align-items: center;
     justify-content: center;
     border-radius: convert.to-rem(16px);
-    margin: $spacing-02;
     cursor: default;
     // restricts size of contained elements
     max-inline-size: convert.to-rem(208px);
@@ -381,10 +380,9 @@
     inline-size: convert.to-rem(60px);
 
     // Safari specific bug (#7672)
-    @media not all and (min-resolution >= 0.001dpcm) {
-      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-        transform: translateZ(0);
-      }
+    @supports (hanging-punctuation: first) and (font: -apple-system-body) and
+      (-webkit-appearance: none) {
+      transform: translateZ(0);
     }
   }
 
@@ -430,11 +428,6 @@
 
   .#{$prefix}--tag {
     @include high-contrast-mode('outline');
-  }
-
-  .#{$prefix}--tag__close-icon svg,
-  .#{$prefix}--tag__custom-icon svg {
-    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--tag__close-icon:focus {

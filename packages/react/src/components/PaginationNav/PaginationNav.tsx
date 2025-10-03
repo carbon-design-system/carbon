@@ -15,27 +15,36 @@ import {
 } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { clamp } from '../../internal/clamp';
+import { PopoverAlignment } from '../Popover';
+
+type TooltipAlignment = 'start' | 'center' | 'end';
+type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 
 const translationIds = {
-  'carbon.pagination-nav.next': 'Next',
-  'carbon.pagination-nav.previous': 'Previous',
-  'carbon.pagination-nav.item': 'Page',
-  'carbon.pagination-nav.active': 'Active',
-  'carbon.pagination-nav.of': 'of',
+  'carbon.pagination-nav.next': 'carbon.pagination-nav.next',
+  'carbon.pagination-nav.previous': 'carbon.pagination-nav.previous',
+  'carbon.pagination-nav.item': 'carbon.pagination-nav.item',
+  'carbon.pagination-nav.active': 'carbon.pagination-nav.active',
+  'carbon.pagination-nav.of': 'carbon.pagination-nav.of',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
 type TranslationKey = keyof typeof translationIds;
 
-function translateWithId(messageId: string): string {
-  return translationIds[messageId];
-}
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.pagination-nav.next']]: 'Next',
+  [translationIds['carbon.pagination-nav.previous']]: 'Previous',
+  [translationIds['carbon.pagination-nav.item']]: 'Page',
+  [translationIds['carbon.pagination-nav.active']]: 'Active',
+  [translationIds['carbon.pagination-nav.of']]: 'of',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 // https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state
 function usePrevious(value: number) {
@@ -55,10 +64,7 @@ function calculateCuts(
   splitPoint: number | null = null
 ) {
   if (itemsDisplayedOnPage >= totalItems) {
-    return {
-      front: 0,
-      back: 0,
-    };
+    return { front: 0, back: 0 };
   }
 
   const split = splitPoint || Math.ceil(itemsDisplayedOnPage / 2) - 1;
@@ -76,10 +82,7 @@ function calculateCuts(
     backHidden = 0;
   }
 
-  return {
-    front: frontHidden,
-    back: backHidden,
-  };
+  return { front: frontHidden, back: backHidden };
 }
 
 export interface DirectionButtonProps {
@@ -102,6 +105,16 @@ export interface DirectionButtonProps {
    * The callback function called when the button is clicked.
    */
   onClick?: React.MouseEventHandler;
+
+  /**
+   * Specify the alignment of the tooltip for the icon-only next/prev buttons.
+   */
+  tooltipAlignment?: TooltipAlignment;
+
+  /**
+   * Specify the position of the tooltip for the icon-only next/prev buttons.
+   */
+  tooltipPosition?: TooltipPosition;
 }
 
 function DirectionButton({
@@ -109,13 +122,20 @@ function DirectionButton({
   label,
   disabled,
   onClick,
+  tooltipAlignment = 'center',
+  tooltipPosition = 'bottom',
 }: DirectionButtonProps) {
   const prefix = usePrefix();
+
+  const align: PopoverAlignment =
+    tooltipAlignment === 'center'
+      ? (tooltipPosition as PopoverAlignment)
+      : (`${tooltipPosition}-${tooltipAlignment}` as PopoverAlignment);
 
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
       <IconButton
-        align="bottom"
+        align={align}
         disabled={disabled}
         kind="ghost"
         label={label}
@@ -150,7 +170,7 @@ function PaginationItem({
   page,
   isActive,
   onClick,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
 }: PaginationItemProps) {
   const prefix = usePrefix();
   const itemLabel = t('carbon.pagination-nav.item');
@@ -206,9 +226,9 @@ function PaginationOverflow({
   fromIndex = NaN,
   count = NaN,
   onSelect,
-  // eslint-disable-next-line react/prop-types
+
   disableOverflow,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
 }: PaginationOverflowProps) {
   const prefix = usePrefix();
 
@@ -217,7 +237,7 @@ function PaginationOverflow({
     return (
       <li className={`${prefix}--pagination-nav__list-item`}>
         <div className={`${prefix}--pagination-nav__select`}>
-          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          {}
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
             aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
@@ -236,7 +256,7 @@ function PaginationOverflow({
     return (
       <li className={`${prefix}--pagination-nav__list-item`}>
         <div className={`${prefix}--pagination-nav__select`}>
-          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          {}
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
             aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
@@ -244,7 +264,7 @@ function PaginationOverflow({
               const index = Number(e.target.value);
               onSelect?.(index);
             }}>
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            {}
             <option value="" hidden />
             {[...Array(count)].map((e, i) => (
               <option
@@ -320,13 +340,25 @@ export interface PaginationNavProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * Specify the alignment of the tooltip for the icon-only next/prev buttons.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment?: TooltipAlignment;
+
+  /**
+   * Specify the position of the tooltip for the icon-only next/prev buttons.
+   * Can be one of: top, right, bottom, or left.
+   */
+  tooltipPosition?: TooltipPosition;
+
+  /**
    * The total number of items.
    */
   totalItems?: number;
 }
 
 const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
-  function PaginationNav(
+  (
     {
       className,
       onChange = () => {},
@@ -336,11 +368,13 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       page = 0,
       loop = false,
       size = 'lg',
-      translateWithId: t = translateWithId,
+      tooltipAlignment,
+      tooltipPosition,
+      translateWithId: t = defaultTranslateWithId,
       ...rest
     },
     ref
-  ) {
+  ) => {
     const smMediaQuery = `(max-width: ${breakpoints.sm.width})`;
     const isSm = useMatchMedia(smMediaQuery);
 
@@ -479,6 +513,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             label={t('carbon.pagination-nav.previous')}
             disabled={backwardButtonDisabled}
             onClick={jumpToPrevious}
+            tooltipAlignment={tooltipAlignment}
+            tooltipPosition={tooltipPosition}
           />
 
           {
@@ -551,6 +587,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             label={t('carbon.pagination-nav.next')}
             disabled={forwardButtonDisabled}
             onClick={jumpToNext}
+            tooltipAlignment={tooltipAlignment}
+            tooltipPosition={tooltipPosition}
           />
         </ul>
         <div
@@ -586,6 +624,18 @@ DirectionButton.propTypes = {
    * The callback function called when the button is clicked.
    */
   onClick: PropTypes.func,
+
+  /**
+   * Specify how the tooltip should align with the navigation button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the position of the tooltip relative to the navigation button.
+   * Can be one of: top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 PaginationItem.propTypes = {
@@ -605,8 +655,7 @@ PaginationItem.propTypes = {
   page: PropTypes.number,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
@@ -628,8 +677,7 @@ PaginationOverflow.propTypes = {
   onSelect: PropTypes.func,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
@@ -645,7 +693,7 @@ PaginationNav.propTypes = {
    * If true, the '...' pagination overflow will not render page links between the first and last rendered buttons.
    * Set this to true if you are having performance problems with large data sets.
    */
-  disableOverflow: PropTypes.bool, // eslint-disable-line react/prop-types
+  disableOverflow: PropTypes.bool,
 
   /**
    * The number of items to be shown (minimum of 4 unless props.items < 4).
@@ -673,13 +721,24 @@ PaginationNav.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
+   * Specify the alignment of the tooltip for the icon-only prev/next buttons.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the position of the tooltip for the icon-only prev/next buttons.
+   * Can be one of: top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
    * The total number of items.
    */
   totalItems: PropTypes.number,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };

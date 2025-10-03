@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -82,18 +82,27 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const { helperText, hideLabel, label, max, size, status, type, value } =
+      args ?? {};
     return html`
       <cds-progress-bar
-        label="Progress bar label"
-        helper-text="Optional helper text"
-        value="75">
+        max="${ifDefined(max)}"
+        ?hide-label="${hideLabel}"
+        label="${ifDefined(label)}"
+        helper-text="${ifDefined(helperText)}"
+        size="${ifDefined(size)}"
+        status="${ifDefined(status)}"
+        type="${ifDefined(type)}"
+        value="${value}">
       </cds-progress-bar>
     `;
   },
 };
 
-export const Example = {
+export const Determinate = {
   render: () => {
     const size = 728;
     let progress = 0;
@@ -104,15 +113,20 @@ export const Example = {
         const advancement = Math.random() * 8;
         if (progress + advancement < size) {
           progress = progress + advancement;
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           bar!.setAttribute('value', `${progress}`);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           bar!.setAttribute(
             'helper-text',
             `${progress.toFixed(1)}MB of ${size}MB`
           );
         } else {
           clearInterval(interval);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           bar!.setAttribute('value', `${size}`);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           bar!.setAttribute('status', `${PROGRESS_BAR_STATUS.FINISHED}`);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           bar!.setAttribute('helper-text', 'Done');
         }
       }, 50);
@@ -150,27 +164,6 @@ export const WithLayer = {
           value="42">
         </cds-progress-bar>
       </sb-template-layers>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const { helperText, hideLabel, label, max, size, status, type, value } =
-      args ?? {};
-    return html`
-      <cds-progress-bar
-        max="${ifDefined(max)}"
-        ?hide-label="${hideLabel}"
-        label="${ifDefined(label)}"
-        helper-text="${ifDefined(helperText)}"
-        size="${ifDefined(size)}"
-        status="${ifDefined(status)}"
-        type="${ifDefined(type)}"
-        value="${value}">
-      </cds-progress-bar>
     `;
   },
 };

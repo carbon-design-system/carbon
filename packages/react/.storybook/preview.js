@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,8 @@ import {
   Primary,
   Stories,
   ArgTypes,
-} from '@storybook/blocks';
+} from '@storybook/addon-docs/blocks';
+import { allModes } from './modes';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -30,7 +31,7 @@ const devTools = {
     description: "Set the layout context's size",
     defaultValue: false,
     toolbar: {
-      title: 'dev :: unstable__Layout size',
+      title: 'dev :: preview__Layout size',
       items: [
         {
           value: false,
@@ -49,7 +50,7 @@ const devTools = {
     description: "Set the layout context's density",
     defaultValue: false,
     toolbar: {
-      title: 'dev :: unstable__Layout density',
+      title: 'dev :: preview__Layout density',
       items: [
         {
           value: false,
@@ -74,7 +75,12 @@ const globalTypes = {
         {
           right: '🇺🇸',
           title: 'English',
-          value: 'en',
+          value: 'en-US',
+        },
+        {
+          right: '🇩🇪',
+          title: 'German',
+          value: 'de-DE',
         },
         {
           right: '🇵🇸',
@@ -149,24 +155,12 @@ const parameters = {
       cellSize: 8,
       opacity: 0.5,
     },
-    values: [
-      {
-        name: 'white',
-        value: white.background,
-      },
-      {
-        name: 'g10',
-        value: g10.background,
-      },
-      {
-        name: 'g90',
-        value: g90.background,
-      },
-      {
-        name: 'g100',
-        value: g100.background,
-      },
-    ],
+    options: {
+      white: { name: 'white', value: white.background },
+      g10: { name: 'g10', value: g10.background },
+      g90: { name: 'g90', value: g90.background },
+      g100: { name: 'g100', value: g100.background },
+    },
   },
   controls: {
     // https://storybook.js.org/docs/react/essentials/controls#show-full-documentation-for-each-property
@@ -195,14 +189,10 @@ const parameters = {
         <Stories includePrimary={false} />
       </>
     ),
+    codePanel: true,
   },
-  // Small (<672)
-  // Medium (672 - 1056px)
-  // Large (1056 - 1312px)
-  // X-Large (1312 - 1584px)
-  // Max (>1584)
   viewport: {
-    viewports: {
+    options: {
       sm: {
         name: 'Small',
         styles: {
@@ -330,6 +320,14 @@ const parameters = {
       return idA.localeCompare(idB);
     },
   },
+  chromatic: {
+    modes: {
+      g10: allModes['g10'],
+      g90: allModes['g90'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
+    },
+  },
 };
 
 const decorators = [
@@ -367,6 +365,60 @@ const preview = {
   parameters,
   decorators,
   globalTypes,
+  tags: ['autodocs'],
 };
+
+// Array that stores strings and regexes of controls that should be hidden in all stories
+const GLOBAL_EXCLUDED_CONTROLS = [
+  'className',
+  'children',
+  'as',
+  'decorator',
+  'slug',
+  'ref',
+  'ariaLabel',
+  /^(?:on[A-Z]\w*)$/,
+];
+
+/**
+ * ArgTypes enhancer that enforces a global control filter across all stories.
+ * Args matching elements in the GLOBAL_EXCLUDED_CONTROLS array are not shown in the
+ * `controls` table
+ */
+export const argTypesEnhancers = [
+  (context) => {
+    const current = context.argTypes || {};
+    const next = { ...current };
+
+    // Do not hide in the ArgTypes table in Overview page,
+    // let them be visible for documentation purposes
+    if (context?.name === '__meta') return current;
+
+    const strings = new Set();
+    const regexes = [];
+    for (const p of GLOBAL_EXCLUDED_CONTROLS) {
+      if (typeof p === 'string') strings.add(p);
+      else if (p instanceof RegExp) regexes.push(p);
+    }
+
+    // helper function to hide controls
+    const disable = (name) => {
+      const prev = next[name] || {};
+      next[name] = { ...prev, table: { ...(prev.table || {}), disable: true } };
+    };
+
+    strings.forEach((name) => {
+      if (name in next) disable(name);
+    });
+    if (regexes.length) {
+      Object.keys(next).forEach((name) => {
+        if (strings.has(name)) return;
+        if (regexes.some((re) => re.test(name))) disable(name);
+      });
+    }
+
+    return next;
+  },
+];
 
 export default preview;

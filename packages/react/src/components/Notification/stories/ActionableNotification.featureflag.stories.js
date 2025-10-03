@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { ActionableNotification } from '../../Notification';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { WithFeatureFlags } from '../../../../.storybook/templates/WithFeatureFlags';
 
 // eslint-disable-next-line storybook/csf-component
@@ -37,17 +37,12 @@ export const FocusWrapWithoutSentinels = (args) => (
   <ActionableNotification {...args} />
 );
 
+FocusWrapWithoutSentinels.parameters = {
+  controls: {
+    exclude: ['aria-label', 'hasFocus'],
+  },
+};
 FocusWrapWithoutSentinels.argTypes = {
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
   onActionButtonClick: {
     action: 'onActionButtonClick',
   },
@@ -56,21 +51,6 @@ FocusWrapWithoutSentinels.argTypes = {
   },
   onCloseButtonClick: {
     action: 'onCloseButtonClick',
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  hasFocus: {
-    table: {
-      disable: true,
-    },
   },
 };
 FocusWrapWithoutSentinels.args = {

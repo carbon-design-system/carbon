@@ -23,7 +23,7 @@
 
 @mixin button {
   .#{$prefix}--btn {
-    @include layout.use('size', $min: 'sm', $default: 'lg', $max: '2xl');
+    @include layout.use('size', $min: 'xs', $default: 'lg', $max: '2xl');
     @include layout.use('density', $default: 'normal');
 
     @include button-base;
@@ -150,17 +150,12 @@
   }
 
   .#{$prefix}--btn--icon-only {
+    align-items: center;
     justify-content: center;
     padding: 0;
     block-size: layout.size('height');
     inline-size: layout.size('height');
-    // -1px to compensate for border width
-    padding-block-start: min(
-      calc(
-        (layout.size('height') - convert.to-rem(16px)) / 2 - convert.to-rem(1px)
-      ),
-      var(--temp-padding-block-max)
-    );
+    padding-block-start: 0;
 
     > :first-child {
       min-inline-size: convert.to-rem(16px);
@@ -182,7 +177,13 @@
     }
   }
 
-  // Adjust icon positioning in small, medium variants only
+  // Adjust text positioning in extra small variant only
+  .#{$prefix}--btn--xs:not(.#{$prefix}--btn--icon-only) {
+    padding-block-start: 1.5px;
+  }
+
+  // Adjust icon positioning in extra small, small, medium variants only
+  .#{$prefix}--btn--xs:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
   .#{$prefix}--btn--sm:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
   .#{$prefix}--btn--md:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon {
     margin-block-start: 0;
@@ -419,15 +420,6 @@
   // Windows HCM fix
   .#{$prefix}--btn:focus {
     @include high-contrast-mode('focus');
-  }
-
-  // Windows HCM fix
-
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
-    .#{$prefix}--btn__icon
-    path:not([data-icon-path]):not([fill='none']),
-  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
-    @include high-contrast-mode('icon-fill');
   }
 
   // RTL overrides

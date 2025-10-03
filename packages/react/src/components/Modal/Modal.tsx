@@ -7,11 +7,14 @@
 
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
+  cloneElement,
+  useContext,
   useEffect,
   useRef,
   useState,
+  type HTMLAttributes,
   type ReactNode,
-  type Ref,
+  type RefObject,
 } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -20,7 +23,7 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import { Layer } from '../Layer';
-import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
+import { requiredIfGivenPropIsTruthy } from '../../prop-types/requiredIfGivenPropIsTruthy';
 import {
   elementOrParentIsFloatingMenu,
   wrapFocus,
@@ -29,21 +32,34 @@ import {
 import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
-import { unstable__Dialog as Dialog } from '../Dialog/index';
-import { enable } from '@carbon/feature-flags';
+import { deprecate } from '../../prop-types/deprecate';
+import { Dialog } from '../Dialog';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 import { warning } from '../../internal/warning';
 
+import {
+  ModalPresence,
+  ModalPresenceContext,
+  useExclusiveModalPresenceContext,
+} from './ModalPresence';
+
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
+const invalidOutsideClickMessage =
+  '`<Modal>` prop `preventCloseOnClickOutside` should not be `false` when ' +
+  '`passiveModal` is `false`. Transactional, non-passive Modals should ' +
+  'not be dissmissable by clicking outside. ' +
+  'See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal';
 
 export type ModalSize = (typeof ModalSizes)[number];
 
@@ -53,7 +69,7 @@ export interface ModalSecondaryButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface ModalProps extends ReactAttr<HTMLDivElement> {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify whether the Modal is displaying an alert, error or warning
    * Should go hand in hand with the danger prop.
@@ -76,7 +92,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   className?: string;
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel?: string;
 
@@ -108,7 +124,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: Ref<HTMLButtonElement>;
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 
   /**
    * Specify the description for the loading text
@@ -233,8 +249,35 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    */
   slug?: ReactNode;
 }
+const Modal = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
+  { open, ...props },
+  ref
+) {
+  const id = useId();
 
-const Modal = React.forwardRef(function Modal(
+  const enablePresence = useFeatureFlag('enable-presence');
+  const hasPresenceContext = Boolean(useContext(ModalPresenceContext));
+  const hasPresenceOptIn = enablePresence || hasPresenceContext;
+
+  const exclusivePresenceContext = useExclusiveModalPresenceContext(id);
+
+  // if opt in and not exclusive to a presence context, wrap with presence
+  if (hasPresenceOptIn && !exclusivePresenceContext) {
+    return (
+      <ModalPresence
+        open={open ?? false}
+        _presenceId={id}
+        // do not auto enable styles for opt-in by feature flag
+        _autoEnablePresence={hasPresenceContext}>
+        <ModalDialog open ref={ref} {...props} />
+      </ModalPresence>
+    );
+  }
+
+  return <ModalDialog ref={ref} open={open} {...props} />;
+});
+
+const ModalDialog = React.forwardRef(function ModalDialog(
   {
     'aria-label': ariaLabelProp,
     children,
@@ -246,7 +289,7 @@ const Modal = React.forwardRef(function Modal(
     passiveModal = false,
     secondaryButtonText,
     primaryButtonText,
-    open,
+    open: externalOpen,
     onRequestClose = noopFn,
     onRequestSubmit = noopFn,
     onSecondarySubmit,
@@ -260,7 +303,7 @@ const Modal = React.forwardRef(function Modal(
     size,
     hasScrollingContent = false,
     closeButtonLabel = 'Close',
-    preventCloseOnClickOutside = false,
+    preventCloseOnClickOutside,
     isFullWidth,
     launcherButtonRef,
     loadingStatus = 'inactive',
@@ -279,6 +322,7 @@ const Modal = React.forwardRef(function Modal(
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
@@ -290,6 +334,15 @@ const Modal = React.forwardRef(function Modal(
   });
   const loadingActive = loadingStatus !== 'inactive';
 
+  const presenceContext = useContext(ModalPresenceContext);
+  const mergedRefs = useMergedRefs([ref, presenceContext?.presenceRef]);
+  const enablePresence =
+    useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
+
+  // always mark as open when mounted with presence
+  const open = externalOpen || enablePresence;
+  const prevOpen = usePreviousValue(open);
+
   const focusTrapWithoutSentinels = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
@@ -300,6 +353,10 @@ const Modal = React.forwardRef(function Modal(
       '`enableDialogElement` feature flags are enabled. The native dialog ' +
       'element handles focus, so `enableDialogElement` must be off for ' +
       '`focusTrapWithoutSentinels` to have any effect.'
+  );
+  warning(
+    !(!passiveModal && preventCloseOnClickOutside === false),
+    invalidOutsideClickMessage
   );
 
   function isCloseButton(element: Element) {
@@ -315,10 +372,6 @@ const Modal = React.forwardRef(function Modal(
     evt.stopPropagation();
 
     if (open && target instanceof HTMLElement) {
-      if (match(evt, keys.Escape)) {
-        onRequestClose(evt);
-      }
-
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -346,8 +399,18 @@ const Modal = React.forwardRef(function Modal(
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
     evt.stopPropagation();
+
+    const shouldCloseOnOutsideClick =
+      // Passive modals can close on clicks outside the modal when
+      // preventCloseOnClickOutside is undefined or explicitly set to false.
+      (passiveModal && !preventCloseOnClickOutside) ||
+      // Non-passive modals have to explicitly opt-in for close on outside
+      // behavior by explicitly setting preventCloseOnClickOutside to false,
+      // rather than just leaving it undefined.
+      (!passiveModal && preventCloseOnClickOutside === false);
+
     if (
-      !preventCloseOnClickOutside &&
+      shouldCloseOnOutsideClick &&
       target instanceof Node &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       innerModal.current &&
@@ -362,6 +425,7 @@ const Modal = React.forwardRef(function Modal(
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
     if (
+      !enableDialogElement &&
       open &&
       oldActiveNode instanceof HTMLElement &&
       currentActiveNode instanceof HTMLElement
@@ -369,15 +433,35 @@ const Modal = React.forwardRef(function Modal(
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
-      wrapFocus({
-        bodyNode,
-        startTrapNode,
-        endTrapNode,
-        currentActiveNode,
-        oldActiveNode,
-        selectorsFloatingMenus,
+      // use setTimeout to ensure focus is set after all browser default focus behavior. Fixes issue of
+      // focus not wrapping in Firefox
+      wrapFocusTimeout.current = setTimeout(() => {
+        wrapFocus({
+          bodyNode,
+          startTrapNode,
+          endTrapNode,
+          currentActiveNode,
+          oldActiveNode,
+          selectorsFloatingMenus,
+        });
+        if (wrapFocusTimeout.current) {
+          clearTimeout(wrapFocusTimeout.current);
+        }
       });
     }
+
+    // Adjust scroll if needed so that element with focus is not obscured by gradient
+    const modalContent = document.querySelector(`.${prefix}--modal-content`);
+    if (
+      !modalContent ||
+      !modalContent.classList.contains(`${prefix}--modal-scroll-content`) ||
+      !currentActiveNode ||
+      !modalContent.contains(currentActiveNode)
+    ) {
+      return;
+    }
+
+    currentActiveNode.scrollIntoView({ block: 'center' });
   }
 
   const onSecondaryButtonClick = onSecondarySubmit
@@ -388,7 +472,9 @@ const Modal = React.forwardRef(function Modal(
     `${prefix}--modal`,
     {
       [`${prefix}--modal-tall`]: !passiveModal,
-      'is-visible': open,
+      'is-visible': enablePresence || open,
+      [`${prefix}--modal--enable-presence`]:
+        presenceContext?.autoEnablePresence,
       [`${prefix}--modal--danger`]: danger,
       [`${prefix}--modal--slug`]: slug,
       [`${prefix}--modal--decorator`]: decorator,
@@ -429,7 +515,7 @@ const Modal = React.forwardRef(function Modal(
         }
       : {};
 
-  const alertDialogProps: ReactAttr<HTMLDivElement> = {};
+  const alertDialogProps: HTMLAttributes<HTMLDivElement> = {};
   if (alert && passiveModal) {
     alertDialogProps.role = 'alert';
   }
@@ -437,6 +523,24 @@ const Modal = React.forwardRef(function Modal(
     alertDialogProps.role = 'alertdialog';
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleEscapeKey = (event) => {
+      if (match(event, keys.Escape)) {
+        event.preventDefault();
+        event.stopPropagation();
+        onRequestClose(event);
+      }
+    };
+    document.addEventListener('keydown', handleEscapeKey, true);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey, true);
+    };
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
+  }, [open]);
 
   useEffect(() => {
     return () => {
@@ -457,14 +561,31 @@ const Modal = React.forwardRef(function Modal(
   }, [open, prefix, enableDialogElement]);
 
   useEffect(() => {
-    if (!enableDialogElement && !open && launcherButtonRef) {
+    if (
+      !enableDialogElement &&
+      !enablePresence &&
+      prevOpen &&
+      !open &&
+      launcherButtonRef
+    ) {
       setTimeout(() => {
         if ('current' in launcherButtonRef) {
           launcherButtonRef.current?.focus();
         }
       });
     }
-  }, [open, launcherButtonRef, enableDialogElement]);
+  }, [open, prevOpen, launcherButtonRef, enableDialogElement, enablePresence]);
+  // Focus launcherButtonRef on unmount
+  useEffect(() => {
+    const launcherButton = launcherButtonRef?.current;
+    return () => {
+      if (enablePresence && launcherButton) {
+        setTimeout(() => {
+          launcherButton.focus();
+        });
+      }
+    };
+  }, [enablePresence, launcherButtonRef]);
 
   useEffect(() => {
     if (!enableDialogElement) {
@@ -524,20 +645,11 @@ const Modal = React.forwardRef(function Modal(
   }, []);
 
   // AILabel always size `sm`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
-    : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-      }
-    );
-  }
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'sm' })
+    : candidate;
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>
@@ -565,12 +677,14 @@ const Modal = React.forwardRef(function Modal(
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      focusAfterCloseRef={launcherButtonRef}
       modal
       ref={innerModal}
       role={isAlertDialog ? 'alertdialog' : ''}
       aria-describedby={isAlertDialog ? modalBodyId : ''}
       className={containerClasses}
-      aria-label={ariaLabel}>
+      aria-label={ariaLabel}
+      data-exiting={presenceContext?.isExiting || undefined}>
       <div className={`${prefix}--modal-header`}>
         {modalLabel && (
           <Text
@@ -776,10 +890,11 @@ const Modal = React.forwardRef(function Modal(
       level={0}
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-      onBlur={!enableDialogElement ? handleBlur : () => {}}
+      onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
-      ref={ref}>
+      ref={mergedRefs}
+      data-exiting={presenceContext?.isExiting || undefined}>
       {modalBody}
     </Layer>
   );
@@ -811,7 +926,7 @@ Modal.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify an label for the close button of the modal; defaults to close
+   * Specify label for the close button of the modal; defaults to close
    */
   closeButtonLabel: PropTypes.string,
 
@@ -856,7 +971,7 @@ Modal.propTypes = {
         PropTypes.oneOf([null]),
       ]).isRequired,
     }),
-  ]) as Validator<Ref<HTMLButtonElement>>,
+  ]) as Validator<RefObject<HTMLButtonElement | null>>,
 
   /**
    * Specify the description for the loading text
@@ -930,7 +1045,13 @@ Modal.propTypes = {
   /**
    * Prevent closing on click outside of modal
    */
-  preventCloseOnClickOutside: PropTypes.bool,
+  preventCloseOnClickOutside: (props: ModalProps, propName: string) => {
+    if (!props.passiveModal && props[propName] === false) {
+      return new Error(invalidOutsideClickMessage);
+    }
+
+    return null;
+  },
 
   /**
    * Specify whether the Button should be disabled, or not

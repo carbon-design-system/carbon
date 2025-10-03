@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,7 @@ import { TableContext } from './TableContext';
 import { useWindowEvent } from '../../internal/useEvent';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
-interface TableProps {
+export interface TableProps {
   experimentalAutoAlign?: boolean;
 
   className?: string;
@@ -45,7 +45,7 @@ interface TableProps {
   stickyHeader?: boolean;
 
   /**
-   * `false` If true, will use a width of 'auto' instead of 100%
+   * If `true`, sets the table width to `auto` instead of `100%`.
    */
   useStaticWidth?: boolean;
 
@@ -128,6 +128,7 @@ export const Table = ({
 
   const toggleTableBodyAlignmentClass = useCallback(
     (alignTop = false) => {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       alignTop
         ? tableRef.current?.classList.add(
             `${prefix}--data-table--top-aligned-body`
@@ -141,6 +142,7 @@ export const Table = ({
 
   const toggleTableHeaderAlignmentClass = useCallback(
     (alignTop = false) => {
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       alignTop
         ? tableRef.current?.classList.add(
             `${prefix}--data-table--top-aligned-header`
@@ -259,7 +261,7 @@ Table.propTypes = {
   stickyHeader: PropTypes.bool,
 
   /**
-   * `false` If true, will use a width of 'auto' instead of 100%
+   * If `true`, sets the table width to `auto` instead of `100%`.
    */
   useStaticWidth: PropTypes.bool,
 

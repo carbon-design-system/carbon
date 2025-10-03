@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as MultiSelectStories from './multi-select.stories';
 
@@ -46,6 +46,10 @@ selectable items to a subset.
 ### With layer
 
 <Canvas of={MultiSelectStories.WithLayer} />
+
+## With select all
+
+<Canvas of={MultiSelectStories.SelectAll} />
 
 ## Component API
 

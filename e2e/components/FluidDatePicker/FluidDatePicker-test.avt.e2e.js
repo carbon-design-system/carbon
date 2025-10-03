@@ -14,7 +14,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-fluid-components-unstable-fluiddatepicker--range-with-calendar',
+      id: 'components-fluid-components-fluiddatepicker--range-with-calendar',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-advanced-states single', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-fluid-components-unstable-fluiddatepicker--single',
+      id: 'components-fluid-components-fluiddatepicker--single',
       globals: {
         theme: 'white',
       },
@@ -36,7 +36,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-advanced-states simple', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-fluid-components-unstable-fluiddatepicker--simple',
+      id: 'components-fluid-components-fluiddatepicker--simple',
       globals: {
         theme: 'white',
       },
@@ -47,7 +47,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-fluid-components-unstable-fluiddatepicker--skeleton',
+      id: 'components-fluid-components-fluiddatepicker--skeleton',
       globals: {
         theme: 'white',
       },
@@ -58,7 +58,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-keyboard-nav single', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-fluid-components-unstable-fluiddatepicker--single',
+      id: 'components-fluid-components-fluiddatepicker--single',
       globals: {
         theme: 'white',
       },
@@ -76,7 +76,7 @@ test.describe('@avt FluidDatePicker', () => {
     // avoid flaky test failures from the keyboard press happening too quickly
     // this retries the keypress along with the focus assertion until it passes
     await expect(async () => {
-      await page.keyboard.press('ArrowDown');
+      await page.keyboard.press('Tab');
       await expect(today).toBeVisible();
       await expect(today).toBeFocused();
     }).toPass();
@@ -93,7 +93,7 @@ test.describe('@avt FluidDatePicker', () => {
   test('@avt-keyboard-nav range', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-fluid-components-unstable-fluiddatepicker--range-with-calendar',
+      id: 'components-fluid-components-fluiddatepicker--range-with-calendar',
       globals: {
         theme: 'white',
       },
@@ -105,7 +105,7 @@ test.describe('@avt FluidDatePicker', () => {
       page.locator('input#date-picker-input-id-start')
     ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
-    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Tab');
     await expect(page.locator('span.today')).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('span.today')).toBeFocused();

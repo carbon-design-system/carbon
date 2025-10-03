@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
@@ -75,8 +75,9 @@ export interface InlineCheckboxProps {
   title?: string;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const InlineCheckbox = React.forwardRef<HTMLInputElement, InlineCheckboxProps>(
-  function InlineCheckbox(props, forwardRef) {
+  (props, forwardRef) => {
     const {
       ['aria-label']: ariaLabel,
       ariaLabel: deprecatedAriaLabel,
@@ -132,7 +133,7 @@ const InlineCheckbox = React.forwardRef<HTMLInputElement, InlineCheckboxProps>(
       <div className={`${prefix}--checkbox--inline`}>
         <input {...inputProps} />
         {
-          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
+          /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
           <label
             htmlFor={id}
             className={`${prefix}--checkbox-label`}

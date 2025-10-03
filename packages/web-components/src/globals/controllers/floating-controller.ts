@@ -28,6 +28,7 @@ type FloatingControllerOptions = {
   styleElement?: HTMLElement;
   matchWidth?: boolean;
   open: boolean;
+  alignmentAxisOffset?: number;
 };
 
 /**
@@ -77,6 +78,7 @@ export default class FloatingController implements ReactiveController {
       matchWidth,
       open,
       flipArguments,
+      alignmentAxisOffset,
     } = this.options;
 
     const element = styleElement ?? target;
@@ -116,7 +118,7 @@ export default class FloatingController implements ReactiveController {
 
     const middleware = [
       flip(flipArguments),
-      offset(caret ? 10 : 0),
+      offset((alignmentAxisOffset ?? 0) + (caret ? 10 : 0)),
       ...(caret && arrowElement
         ? [arrow({ element: arrowElement, padding: 15 })]
         : []),
@@ -150,9 +152,11 @@ export default class FloatingController implements ReactiveController {
       element.style.position = `${strategy}`;
 
       if (arrowElement) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
         // @ts-ignore
         const { x: arrowX, y: arrowY } = middlewareData.arrow;
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         const staticSide: any = {
           top: 'bottom',
           right: 'left',

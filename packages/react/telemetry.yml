@@ -8,6 +8,8 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - _autoEnablePresence
+        - _presenceId
         - accept
         - action
         - actionButtonLabel
@@ -26,6 +28,7 @@ collect:
         - autoAlign
         - autoComplete
         - buttonKind
+        - caption
         - checked
         - children
         - className
@@ -65,9 +68,11 @@ collect:
         - enterDelayMs
         - expanded
         - expandIconDescription
-        - experimentalAutoAlign
         - feedback
         - feedbackTimeout
+        - flipped
+        - focusTrap
+        - formatOptions
         - fullWidth
         - gap
         - hasDivider
@@ -83,6 +88,7 @@ collect:
         - hidePasswordLabel
         - highContrast
         - href
+        - iconClass
         - iconDescription
         - id
         - indeterminate
@@ -91,6 +97,8 @@ collect:
         - initialSelectedItems
         - inline
         - innerRef
+        - inputMode
+        - inputProps
         - invalid
         - invalidText
         - isActive
@@ -129,6 +137,8 @@ collect:
         - max
         - maxCount
         - menuAlignment
+        - menuOffset
+        - menuOffsetFlip
         - menuOptionsClass
         - menuTarget
         - min
@@ -139,6 +149,7 @@ collect:
         - name
         - narrow
         - nested
+        - noTrailingSlash
         - onActionButtonClick
         - onAddFiles
         - onBlur
@@ -163,6 +174,7 @@ collect:
         - onOpen
         - onRequestClose
         - onRequestSubmit
+        - onSecondarySubmit
         - onSelect
         - onToggle
         - onToggleClick
@@ -170,7 +182,6 @@ collect:
         - open
         - ordered
         - orientation
-        - overflowMenuOnHover
         - page
         - pageActions
         - paragraph
@@ -181,11 +192,9 @@ collect:
         - preventCloseOnClickOutside
         - primaryButtonDisabled
         - primaryButtonText
-        - radio
         - readOnly
         - ref
         - rel
-        - render
         - renderIcon
         - renderSelectedItem
         - required
@@ -214,7 +223,6 @@ collect:
         - statusIconDescription
         - step
         - stickyHeader
-        - style
         - subtitle
         - tabIndex
         - target
@@ -233,7 +241,6 @@ collect:
         - typeahead
         - useStaticWidth
         - useTitleInItem
-        - useZebraStyles
         - value
         - valueSelected
         - vertical
@@ -257,10 +264,10 @@ collect:
         - revertLabel
         - slugLabel
         - textLabel
+        # AISkeletonIcon
+        - style
         # AspectRatio
         - ratio
-        # Breadcrumb
-        - noTrailingSlash
         # ButtonSet
         - stacked
         # ChatButton
@@ -292,9 +299,6 @@ collect:
         - selectionMode
         # Copy
         - onAnimationEnd
-        # DataTable
-        - filterRows
-        - sortRow
         # DataTableSkeleton
         - columnCount
         - compact
@@ -320,8 +324,13 @@ collect:
         - tooltipText
         - triggerClassName
         # Dialog
+        - ariaDescribedBy
+        - ariaLabelledBy
+        - focusAfterCloseRef
         - modal
         # DismissibleTag
+        - dismissTooltipAlignment
+        - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
         - fallback
@@ -334,7 +343,9 @@ collect:
         - tilePadding
         # FeatureFlags
         - enableDialogElement
+        - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
@@ -365,6 +376,8 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # HeaderContainer
+        - render
         # HeaderMenu
         - focusRef
         - menuLinkName
@@ -383,6 +396,8 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
+        # Layer
+        - withBackground
         # LinkBase
         - visited
         # ListBox
@@ -411,7 +426,6 @@ collect:
         - alert
         - closeButtonLabel
         - modalAriaLabel
-        - onSecondarySubmit
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -441,14 +455,10 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - stepStartValue
+        - validate
         # OrderedList
         - native
-        # OverflowMenu
-        - flipped
-        - focusTrap
-        - iconClass
-        - menuOffset
-        - menuOffsetFlip
         # OverflowMenuItem
         - closeMenu
         - handleOverflowMenuItemFocus
@@ -456,10 +466,18 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderBreadcrumbBar
+        - border
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
+        - actions
         - menuButtonLabel
+        # PageHeaderTabBar
+        - tags
         # PageSelector
         - currentPage
         - totalPages
@@ -483,6 +501,7 @@ collect:
         - itemsShown
         - loop
         # Popover
+        - alignmentAxisOffset
         - autoAlignBoundary
         - caret
         - isTabTip
@@ -531,10 +550,16 @@ collect:
         - unstable_ariaLabelHandleUpper
         # StructuredListCell
         - noWrap
+        # StructuredListWrapper
+        - selectedInitialRow
         # SwitcherItem
         - handleSwitcherItemFocus
         # Tab
         - renderButton
+        # Table
+        - experimentalAutoAlign
+        - overflowMenuOnHover
+        - useZebraStyles
         # TableBatchActions
         - onSelectAll
         - shouldShowBatchActions
@@ -544,6 +569,8 @@ collect:
         - aria-live
         # TableCell
         - hasAILabelHeader
+        # TableContainer
+        - aiEnabled
         # TableExpandHeader
         - enableExpando
         - enableToggle
@@ -553,6 +580,8 @@ collect:
         - isSortHeader
         - scope
         - sortDirection
+        # TableSelectRow
+        - radio
         # TableToolbarFilter
         - onApplyFilter
         - onResetFilter
@@ -582,15 +611,12 @@ collect:
         - warning
         - warningText
         # ToastNotification
-        - caption
         - timeout
         # Toggle
         - defaultToggled
         - labelA
         - labelB
         - toggled
-        # Toggletip
-        - alignmentAxisOffset
         # TreeNode
         - defaultIsExpanded
         - depth
@@ -661,6 +687,15 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - inputMode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
         - caution-major
         - caution-minor
@@ -787,6 +822,8 @@ collect:
         - vertical
         # General - role
         - alert
+        - alertdialog
+        - dialog
         - log
         - status
         # General - selectionFeedback
@@ -799,6 +836,7 @@ collect:
         - 2xl
         - 2xs
         - big
+        - field
         - lg
         - md
         - mini
@@ -820,17 +858,9 @@ collect:
         - g90
         - white
         # General - tooltipAlignment
-        - bottom
-        - bottom-left
-        - bottom-right
         - center
         - end
-        - left
-        - right
         - start
-        - top
-        - top-left
-        - top-right
         # General - tooltipPosition
         - bottom
         - left
@@ -849,6 +879,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - outline
         - password
         - purple
@@ -872,6 +903,19 @@ collect:
         # ContentSwitcher - selectionMode
         - automatic
         - manual
+        # DismissibleTag - dismissTooltipAlignment
+        - bottom
+        - bottom-end
+        - bottom-start
+        - left
+        - left-end
+        - left-start
+        - right
+        - right-end
+        - right-start
+        - top
+        - top-end
+        - top-start
         # FileUploader - filenameStatus
         - complete
         - edit

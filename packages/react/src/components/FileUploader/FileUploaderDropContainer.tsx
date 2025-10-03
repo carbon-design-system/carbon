@@ -5,19 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { keys, matches } from '../../internal/keyboard';
-import { uniqueId } from '../../tools/uniqueId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
-import { ReactAttr } from '../../types/common';
+import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
 
 export interface FileUploaderDropContainerProps
-  extends Omit<ReactAttr<HTMLButtonElement>, 'tabIndex'> {
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'tabIndex'> {
   /**
    * Specify the types of files that this input should be able to receive
    */
@@ -104,13 +103,14 @@ function FileUploaderDropContainer({
   onAddFiles = noopFn,
   onClick,
   pattern = '.[0-9a-z]+$',
-  // eslint-disable-next-line react/prop-types
+
   innerRef,
   ...rest
 }: FileUploaderDropContainerProps) {
   const prefix = usePrefix();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { current: uid } = useRef(id || uniqueId());
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
+  const { current: uid } = useRef(id || useId());
   const [isActive, setActive] = useState(false);
   const dropareaClasses = classNames(
     `${prefix}--file__drop-container`,

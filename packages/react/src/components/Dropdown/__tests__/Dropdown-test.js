@@ -259,7 +259,7 @@ describe('Dropdown', () => {
       />
     );
 
-    //const button = dropDownItem.container.querySelector('#downshift-\\:r19\\:-toggle-button');
+    //const button = dropDownItem.container.querySelector('#downshift-\\:r19\\»-toggle-button');
     const button = screen.getByRole('combobox');
     await waitForPosition();
     if (button) {
@@ -470,8 +470,8 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-:r2d:-toggle-button',
-      id: 'downshift-:r2d:-label',
+      for: 'downshift-«r2d»-toggle-button',
+      id: 'downshift-«r2d»-label',
     });
   });
 
@@ -486,7 +486,7 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-:r2g:-label',
+      id: 'downshift-«r2g»-label',
     });
   });
 });

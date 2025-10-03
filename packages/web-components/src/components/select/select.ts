@@ -6,16 +6,17 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, queryAll } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { prefix } from '../../globals/settings';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
 import { INPUT_SIZE } from '../text-input/text-input';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './select.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -54,6 +55,18 @@ class CDSSelect extends FormMixin(LitElement) {
    */
   @query('select')
   private _selectNode!: HTMLSelectElement;
+
+  /**
+   * Input node of `select` element
+   */
+  @query('#input')
+  private _inputNode!: HTMLInputElement;
+
+  /**
+   * Select all <option> nodes with `selected` attribute
+   */
+  @queryAll(`.${prefix}--select-option[selected]`)
+  private _selectedOptionNodes!: HTMLOptionElement[];
 
   /**
    * Handles `oninput` event on the `<input>`.
@@ -159,6 +172,7 @@ class CDSSelect extends FormMixin(LitElement) {
       );
 
     this._hasAILabel = Boolean(hasContent);
+    this.setAttribute('slug', `${this._hasAILabel}`);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -255,7 +269,6 @@ class CDSSelect extends FormMixin(LitElement) {
    * `true` to enable multiple selection.
    */
   @property({ type: Boolean })
-  // eslint-disable-next-line class-methods-use-this
   get multiple() {
     return false;
   }
@@ -344,12 +357,28 @@ class CDSSelect extends FormMixin(LitElement) {
       const { value, _placeholderItemValue: placeholderItemValue } = this;
       // Ensures setting the `value` after rendering child `<option>`s/`<optgroup>`s when there is a change in `value`,
       // given reflecting `value` requires child `<option>`s/`<optgroup>`s being there beforehand
-      this._selectNode.value = !value ? placeholderItemValue : value;
+
+      const lastOption =
+        this._selectedOptionNodes?.[this._selectedOptionNodes?.length - 1]?.[
+          'value'
+        ];
+
+      if (value) {
+        this._selectNode.value = value;
+      } else if (lastOption) {
+        this._selectNode.value = lastOption;
+      } else {
+        this._selectNode.value = placeholderItemValue;
+      }
     }
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {
+      if ((label as HTMLSlotElement).assignedNodes()?.length) {
+        this._inputNode?.classList.add(`${prefix}--select-input-has--ai-label`);
+      }
+
       label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
@@ -382,18 +411,7 @@ class CDSSelect extends FormMixin(LitElement) {
       _placeholderItemValue: placeholderItemValue,
       _handleInput: handleInput,
       _handleAILabelSlotChange: handleAILabelSlotChange,
-      _hasAILabel: hasAILabel,
     } = this;
-
-    const selectClasses = classMap({
-      [`${prefix}--select`]: true,
-      [`${prefix}--select--inline`]: inline,
-      [`${prefix}--select--invalid`]: invalid,
-      [`${prefix}--select--warning`]: warn,
-      [`${prefix}--select--disabled`]: disabled,
-      [`${prefix}--select--readonly`]: readonly,
-      [`${prefix}--select--slug`]: hasAILabel,
-    });
 
     const inputClasses = classMap({
       [`${prefix}--select-input`]: true,
@@ -441,49 +459,55 @@ class CDSSelect extends FormMixin(LitElement) {
                 disabled
                 hidden
                 class="${prefix}--select-option"
-                value="${placeholderItemValue}"
-                selected>
+                value="${placeholderItemValue}">
                 ${placeholder}
               </option>
             `}
         ${this._renderItems(this)}
       </select>
-      ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-      <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
+      ${iconLoader(ChevronDown16, {
+        class: `${prefix}--select__arrow`,
+        'aria-hidden': 'true',
+      })}
+      <slot
+        name="ai-label"
+        style="--${prefix}-show-before: ${warn || invalid ? 'block' : 'none'}"
+        @slotchange=${handleAILabelSlotChange}></slot>
       <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
-        : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
+        : iconLoader(WarningFilled16, {
+            class: `${prefix}--select__invalid-icon`,
+          })}
       ${!invalid && warn
-        ? WarningAltFilled16({
+        ? iconLoader(WarningAltFilled16, {
             class: `${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`,
           })
         : null}
     `;
 
     return html`
-      <div class="${selectClasses}">
-        ${!hideLabel
-          ? html`<label class="${labelClasses}" for="input">
-              <slot name="label-text"> ${labelText} </slot>
-            </label>`
-          : null}
-        ${inline
-          ? html`<div class="${prefix}--select-input--inline__wrapper">
-              <div
-                class="${prefix}--select-input__wrapper"
-                ?data-invalid="${invalid}">
-                ${input}
-              </div>
-              ${errorText}
-            </div>`
-          : html`<div
+      ${!hideLabel
+        ? html`<label class="${labelClasses}" for="input">
+            <slot name="label-text"> ${labelText} </slot>
+          </label>`
+        : null}
+      ${inline
+        ? html`<div
+            class="${prefix}--select-input--inline__wrapper"
+            ?data-invalid="${invalid}">
+            <div
               class="${prefix}--select-input__wrapper"
               ?data-invalid="${invalid}">
               ${input}
-            </div> `}
-        ${!inline && errorText ? errorText : supplementalText}
-      </div>
+            </div>
+          </div>`
+        : html`<div
+            class="${prefix}--select-input__wrapper"
+            ?data-invalid="${invalid}">
+            ${input}
+          </div> `}
+      ${errorText ? errorText : supplementalText}
     `;
   }
 

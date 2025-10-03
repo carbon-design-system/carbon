@@ -120,7 +120,7 @@ $radio-border-width: 1px !default;
       transform: scale(0.5);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
-      @include high-contrast-mode('icon-fill') {
+      @include high-contrast-mode {
         background-color: ButtonText;
       }
 

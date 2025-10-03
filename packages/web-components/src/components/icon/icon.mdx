@@ -1,0 +1,83 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as IconStories from './icon.stories';
+
+<Meta of={IconStories} />
+
+# Icon
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/icon)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/elements/icons/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-icon` component can render icons both from Javascript imports, as well
+as inline SVG elements.
+
+## With Javascript
+
+```html
+<script>
+  import Add16 from '@carbon/icons/es/add/16.js';
+  import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
+  import Search16 from '@carbon/icons/es/search/16.js';
+</script>
+
+<cds-icon .icon="${Add16}"></cds-icon>
+<cds-icon .icon="${ChevronRight16}"></cds-icon>
+<cds-icon .icon="${Search16}"></cds-icon>
+```
+
+<Canvas
+  source={{
+    code: `    
+    <cds-icon .icon=\${Add16}\></cds-icon>
+    <cds-icon .icon=\${ChevronRight16}\></cds-icon>
+    <cds-icon .icon=\${Search16}\></cds-icon>`,
+  }}
+  of={IconStories.Default}
+/>
+
+## With Custom SVG
+
+<Canvas of={IconStories.WithCustomSVG} />
+
+## With Custom Classes
+
+<Canvas
+  source={{
+    code: `<cds-icon .icon=\${Add16}\ class="blue"></cds-icon>
+    <cds-icon .icon=\${ChevronRight16}\ class="green"></cds-icon>
+    <cds-icon .icon=\${Search16}\ class="red"></cds-icon>`,
+  }}
+  of={IconStories.WithCustomClasses}
+/>
+
+## With ARIA label
+
+<Canvas
+  source={{
+    code: `<cds-icon .icon=\${Add16}\ aria-label="Add item"></cds-icon>
+    <cds-icon .icon=\${ChevronRight16}\ aria-label="Navigate forward"></cds-icon>
+    <cds-icon .icon=\${Search16}\ aria-label="Search"></cds-icon>`,
+  }}
+  of={IconStories.WithAriaLabel}
+/>
+
+## Component API
+
+<ArgTypes of="cds-icon" />
+
+<Markdown>{`${cdnJs({ components: ['icon'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/icons/icons.mdx).

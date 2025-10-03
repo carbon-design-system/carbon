@@ -12,12 +12,21 @@
 - [Release Team](#release-team)
 - [Process](#process)
   - [Prerelease](#prerelease)
+    - [Releasing another prerelease](#releasing-another-prerelease)
   - [Stable release](#stable-release)
+  - [Update gatsby-theme-carbon and carbon-website](#update-gatsby-theme-carbon-and-carbon-website)
   - [Post release](#post-release)
-  - [Manual patch release](#manual-patch-release)
-- [Previous releases](#previous-releases)
+  - [Manual Patch Release](#manual-patch-release)
+- [Previous releases (v10)](#previous-releases-v10)
   - [How to determine if the previous major version needs to be released](#how-to-determine-if-the-previous-major-version-needs-to-be-released)
   - [Releasing the previous major version](#releasing-the-previous-major-version)
+  - [Releasing a new major for a single package](#releasing-a-new-major-for-a-single-package)
+- [Troubleshooting](#troubleshooting)
+  - [The Version workflow succeeded, but the PR was not created](#the-version-workflow-succeeded-but-the-pr-was-not-created)
+  - [Something failed in the Version workflow](#something-failed-in-the-version-workflow)
+  - [Something failed in the Release workflow](#something-failed-in-the-release-workflow)
+  - [We're getting reports of unpkg links not working](#were-getting-reports-of-unpkg-links-not-working)
+  - [When running the v10 storybook deploy manually, the v11 storybook is being published to v7-react.carbondesignsystem.com](#when-running-the-v10-storybook-deploy-manually-the-v11-storybook-is-being-published-to-v7-reactcarbondesignsystemcom)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -232,7 +241,8 @@ After the promotion workflow is completed this will trigger the
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
       to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
-      This should trigger an automatic release of `gatsby-theme-carbon`.
+- [ ] Run the `release-it` workflow in the `gatsby-theme-carbon` repo to trigger
+      a release of `gatsby-theme-carbon`.
 - [ ] Check that
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
       has been released and is on the

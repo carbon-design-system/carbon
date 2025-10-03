@@ -1,17 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 import PropTypes from 'prop-types';
 
-export interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
+export interface TableCellProps extends HTMLAttributes<HTMLTableCellElement> {
   /**
    * Pass in children that will be embedded in the table header label
    */

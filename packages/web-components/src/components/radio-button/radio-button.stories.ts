@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,14 +8,15 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import { RADIO_BUTTON_ORIENTATION } from './radio-button-group';
 import { RADIO_BUTTON_LABEL_POSITION } from './radio-button';
 import './index';
 import '../ai-label';
 import '../icon-button';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const content = html`
   <div slot="body-text">
@@ -34,15 +35,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -71,7 +72,8 @@ const args = {
   labelPosition: RADIO_BUTTON_LABEL_POSITION.RIGHT,
   orientation: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
   name: 'radio-group',
-  value: '',
+  required: false,
+  value: 'radio-2',
   warn: false,
   warnText: 'Please notice the warning',
   checked: false,
@@ -87,6 +89,10 @@ const argTypes = {
   readOnly: {
     control: 'boolean',
     description: 'read only (readOnly)',
+  },
+  required: {
+    control: 'boolean',
+    description: 'Required (required)',
   },
   helperText: {
     control: 'text',
@@ -144,22 +150,56 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      disabled,
+      readOnly,
+      helperText,
+      invalid,
+      invalidText,
+      labelPosition,
+      orientation,
+      name,
+      value = 'radio-2',
+      warn,
+      warnText,
+      onChange,
+      checked,
+      hideLabel,
+      labelText,
+      required = false,
+    } = args ?? {};
     return html`
       <cds-radio-button-group
-        legend-text="Group label"
-        name="radio-group"
-        value="radio-1">
+        ?readOnly="${readOnly}"
+        ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label-position="${ifDefined(labelPosition)}"
+        legend-text="Radio Button group"
+        orientation="${ifDefined(orientation)}"
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
+        ?required="${required}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        @cds-radio-button-group-changed="${onChange}">
         <cds-radio-button
-          label-text="Radio button label"
+          ?checked="${checked}"
+          ?hide-label="${hideLabel}"
+          label-text="${ifDefined(labelText)}"
           value="radio-1"></cds-radio-button>
         <cds-radio-button
-          label-text="Radio button label"
+          ?hide-label="${hideLabel}"
+          label-text="${ifDefined(labelText)}"
           value="radio-2"></cds-radio-button>
         <cds-radio-button
-          label-text="Radio button label"
-          value="radio-3"
-          disabledItem></cds-radio-button>
+          ?hide-label="${hideLabel}"
+          label-text="${ifDefined(labelText)}"
+          value="radio-3"></cds-radio-button>
       </cds-radio-button-group>
     `;
   },
@@ -205,9 +245,9 @@ export const WithAILabel = {
         name="radio-group"
         value="radio-1"
         orientation="vertical">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
+        <cds-ai-label alignment="bottom-left"
+          >${content}${actions}</cds-ai-label
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-1"></cds-radio-button>
@@ -224,16 +264,16 @@ export const WithAILabel = {
         name="radio-group-2"
         value="radio-4"
         orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-4">
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
-        <cds-radio-button label-text="Radio button label" value="radio-5">
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
+        <cds-radio-button label-text="Radio button label" value="radio-4"
+          ><cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
+        <cds-radio-button label-text="Radio button label" value="radio-5"
+          ><cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-6"></cds-radio-button>
@@ -244,73 +284,19 @@ export const WithAILabel = {
         name="radio-group-3"
         value="radio-7"
         orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-7">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
-        <cds-radio-button label-text="Radio button label" value="radio-8">
-          <cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-radio-button>
+        <cds-radio-button label-text="Radio button label" value="radio-7"
+          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
+        <cds-radio-button label-text="Radio button label" value="radio-8"
+          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          ></cds-radio-button
+        >
         <cds-radio-button
           label-text="Radio button label"
           value="radio-9"></cds-radio-button>
-      </cds-radio-button-group>
-    `;
-  },
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      disabled,
-      readOnly,
-      helperText,
-      invalid,
-      invalidText,
-      labelPosition,
-      orientation,
-      name,
-      value,
-      warn,
-      warnText,
-      onChange,
-      checked,
-      hideLabel,
-      labelText,
-    } = args ?? {};
-    return html`
-      <cds-radio-button-group
-        ?readOnly="${readOnly}"
-        ?disabled="${disabled}"
-        helper-text="${ifDefined(helperText)}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label-position="${ifDefined(labelPosition)}"
-        legend-text="Radio Button group"
-        orientation="${ifDefined(orientation)}"
-        name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        @cds-radio-button-group-changed="${onChange}">
-        <cds-radio-button
-          ?checked="${checked}"
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-1"></cds-radio-button>
-        <cds-radio-button
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-2"></cds-radio-button>
-        <cds-radio-button
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-3"></cds-radio-button>
       </cds-radio-button-group>
     `;
   },
