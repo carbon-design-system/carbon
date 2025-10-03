@@ -296,7 +296,8 @@
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
   .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
-  .#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade {
+  .#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
+  .#{$prefix}--modal-scroll-content--no-fade {
     mask-image: none;
   }
 
