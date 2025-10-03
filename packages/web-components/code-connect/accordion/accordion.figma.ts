@@ -32,6 +32,7 @@ figma.connect(
       </cds-accordion> `,
     imports: [
       "import '@carbon/web-components/es/components/accordion/accordion.js'",
+      "import '@carbon/web-components/es/components/accordion/accordion-item.js'",
     ],
   }
 );
