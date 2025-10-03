@@ -2,19 +2,20 @@ name: Publish Figma code connect changes
 
 on:
   push:
-    paths:
-      - src/packages/react/code-connect/**/*.figma.tsx
     branches:
       - main
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   code-connect:
-    name: Code Connect
+    name: Code Connect - ${{ matrix.package }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - react
+          - web-components
     steps:
       - name: Checkout repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -41,6 +42,7 @@ jobs:
         run: yarn install --immutable --immutable-cache
 
       - name: Publish to Figma Code Connect
+        working-directory: src/packages/${{ matrix.package }}
         run: npx figma connect publish
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
