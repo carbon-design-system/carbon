@@ -85,12 +85,12 @@ const items = [
 
 const sharedArgs = {
   invalid: false,
-  invalidText: 'invalid selection',
+  invalidText: 'Error message goes here',
   disabled: false,
   hideLabel: false,
   label: 'This is an example label',
   warn: false,
-  warnText: 'please notice the warning',
+  warnText: 'Warning message goes here',
   titleText: 'This is an example title',
   type: 'default',
 };
@@ -312,6 +312,11 @@ Inline.argTypes = {
   ...sharedArgTypes,
 };
 
+Inline.args = {
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
+};
+
 export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
@@ -356,6 +361,11 @@ export const InlineWithLayer = (args) => (
 
 InlineWithLayer.argTypes = {
   ...sharedArgTypes,
+};
+
+InlineWithLayer.args = {
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
 };
 
 export const Skeleton = () => {
