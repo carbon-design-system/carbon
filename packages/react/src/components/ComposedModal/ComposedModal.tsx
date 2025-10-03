@@ -11,7 +11,6 @@ import React, {
   useContext,
   useEffect,
   useRef,
-  useState,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -20,13 +19,12 @@ import React, {
   type ReactNode,
   type RefObject,
 } from 'react';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
 import { Layer } from '../Layer';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-import { debounce } from 'es-toolkit/compat';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { mergeRefs } from '../../tools/mergeRefs';
 import cx from 'classnames';
 import { toggleClass } from '../../tools/toggleClass';
@@ -83,61 +81,28 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
   ) {
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
-    const [isScrollable, setIsScrollable] = useState(false);
+
+    const { height } = useResizeObserver({ ref: contentRef });
+
+    const isScrollable =
+      !!contentRef.current &&
+      contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;
+
     const contentClass = cx(
       {
         [`${prefix}--modal-content`]: true,
         [`${prefix}--modal-content--with-form`]: hasForm,
         [`${prefix}--modal-scroll-content`]:
           hasScrollingContent || isScrollable,
+        [`${prefix}--modal-scroll-content--no-fade`]: height <= 300,
       },
       customClassName
     );
-
-    useIsomorphicEffect(() => {
-      if (contentRef.current) {
-        setIsScrollable(
-          contentRef.current.scrollHeight > contentRef.current.clientHeight
-        );
-      }
-
-      function handler() {
-        if (contentRef.current) {
-          setIsScrollable(
-            contentRef.current.scrollHeight > contentRef.current.clientHeight
-          );
-        }
-      }
-
-      const debouncedHandler = debounce(handler, 200);
-      window.addEventListener('resize', debouncedHandler);
-      return () => {
-        debouncedHandler.cancel();
-        window.removeEventListener('resize', debouncedHandler);
-      };
-    }, []);
 
     const hasScrollingContentProps =
       hasScrollingContent || isScrollable
         ? { tabIndex: 0, role: 'region' }
         : {};
-
-    useEffect(() => {
-      if (!contentRef.current) return;
-
-      const resizeObserver = new ResizeObserver(([entry]) => {
-        const el = entry.target as HTMLElement;
-        const h = entry.contentRect.height;
-        if (h <= 300) {
-          el.style.setProperty('mask-image', 'none');
-        } else {
-          el.style.removeProperty('mask-image');
-        }
-      });
-      resizeObserver.observe(contentRef.current);
-
-      return () => resizeObserver.disconnect();
-    }, [contentRef]);
 
     return (
       <Layer

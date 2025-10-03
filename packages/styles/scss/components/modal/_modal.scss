@@ -292,6 +292,10 @@
       linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
 
+  .#{$prefix}--modal-scroll-content--no-fade {
+    mask-image: none !important; /* stylelint-disable-line declaration-no-important */
+  }
+
   //removing mask image in case we have dropdown in modal
   .#{$prefix}--modal-scroll-content:has(.#{$prefix}--autoalign) {
     mask-image: none;
