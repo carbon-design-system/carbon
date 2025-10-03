@@ -568,6 +568,20 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
 
       if (type === 'number') {
+        // Special handling for empty input to allow deleting 0 before typing another digit
+        if (event.target.value === '') {
+          const state = {
+            value: allowEmpty ? '' : 0,
+            direction: 'down',
+          };
+          setValue('');
+
+          if (onChange) {
+            onChange(event, state);
+          }
+          return;
+        }
+
         const state = {
           value:
             allowEmpty && event.target.value === ''

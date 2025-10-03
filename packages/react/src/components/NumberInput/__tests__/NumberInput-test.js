@@ -1077,6 +1077,46 @@ describe('NumberInput', () => {
         await userEvent.click(screen.getByLabelText('decrement'));
         expect(screen.getByLabelText('test-label')).toHaveValue('10');
       });
+
+      describe('Delete Zero Feature', () => {
+        it('should allow deleting 0 before typing another digit', async () => {
+          const onChange = jest.fn();
+          render(
+            <NumberInput
+              id="test-number-input"
+              label="Test NumberInput"
+              value={0}
+              onChange={onChange}
+            />
+          );
+
+          const input = screen.getByLabelText('Test NumberInput');
+          expect(input).toHaveValue(0);
+
+          // Clear the input (delete the 0)
+          await userEvent.clear(input);
+
+          // Verify the input is empty
+          expect(input).toHaveValue(null);
+
+          // Verify onChange was called with empty value
+          expect(onChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: expect.any(Object),
+            }),
+            expect.objectContaining({
+              value: '',
+              direction: 'down',
+            })
+          );
+
+          // Type a new digit
+          await userEvent.type(input, '5');
+
+          // Verify the input now has the new value
+          expect(input).toHaveValue(5);
+        });
+      });
     });
     it('should increase by the value of large step and format to the default locale', async () => {
       render(
