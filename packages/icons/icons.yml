@@ -11789,9 +11789,9 @@
   sizes:
     - 32
 - name: ibm--webmethods-hybrid-integration
-  friendly_name: IBM® Hybrid Integration
+  friendly_name: IBM® webMethods Hybrid Integration
   aliases:
-    - IBM Hybrid iPaaS
+    - IBM webMethods Hybrid Integration
     - Integration platform as a service
     - Cloud integration
     - Hybrid integration
