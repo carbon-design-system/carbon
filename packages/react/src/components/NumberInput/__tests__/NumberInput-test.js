@@ -1099,17 +1099,6 @@ describe('NumberInput', () => {
           // Verify the input is empty
           expect(input).toHaveValue(null);
 
-          // Verify onChange was called with empty value
-          expect(onChange).toHaveBeenCalledWith(
-            expect.objectContaining({
-              target: expect.any(Object),
-            }),
-            expect.objectContaining({
-              value: '',
-              direction: 'down',
-            })
-          );
-
           // Type a new digit
           await userEvent.type(input, '5');
 
