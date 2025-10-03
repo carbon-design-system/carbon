@@ -50,6 +50,7 @@ const TableToolbar: React.FC<TableToolbarProps> = ({
   });
   return (
     <section
+      role="group"
       aria-label={deprecatedAriaLabel || ariaLabel}
       {...rest}
       className={className}>
