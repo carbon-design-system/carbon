@@ -320,7 +320,8 @@ export const HeaderWNavigationActionsAndSideNav = () => (
           <HeaderGlobalBar>
             <HeaderGlobalAction
               aria-label="Search"
-              onClick={action('search click')}>
+              onClick={action('search click')}
+              tooltipAlignment="start">
               <Search size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction

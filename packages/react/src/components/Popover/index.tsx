@@ -327,6 +327,7 @@ export const Popover: PopoverComponent & {
               }),
             arrow({
               element: caretRef,
+              padding: 16,
             }),
             autoAlign && hide(),
           ],
