@@ -79,7 +79,7 @@ export const Default = {
 
 export const Interactive = {
   args: {
-    onChange: action('onChange'),
+    onChange: action('Clicked'),
   },
   render: ({ onChange }) => html`
     <cds-progress-indicator current-index="1" .onChange=${onChange}>
