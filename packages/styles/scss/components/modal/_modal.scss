@@ -292,8 +292,8 @@
       linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
 
-  .#{$prefix}--modal-scroll-content--no-fade {
-    mask-image: none !important; /* stylelint-disable-line declaration-no-important */
+  .#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade {
+    mask-image: none;
   }
 
   //removing mask image in case we have dropdown in modal
@@ -435,6 +435,11 @@
       linear-gradient(to left, $layer 0, 16px, transparent 16px),
       linear-gradient(to right, $layer 0, 2px, transparent 2px),
       linear-gradient(to top, $layer 0, 2px, transparent 2px);
+  }
+
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade {
+    mask-image: none;
   }
 
   .#{$prefix}--modal-header
