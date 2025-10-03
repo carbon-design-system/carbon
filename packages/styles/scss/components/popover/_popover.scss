@@ -43,7 +43,8 @@
 // The background color for the popover container
 $popover-background-color: custom-property.get-var(
   'popover-background-color',
-  theme.$layer
+  // theme.$layer
+  lightblue
 );
 
 // The drop shadow value used for the popover container
@@ -52,7 +53,8 @@ $popover-drop-shadow: custom-property.get-var('popover-drop-shadow', 'none');
 // The border value used for the popover container
 $popover-border-color: custom-property.get-var(
   'popover-border-color',
-  theme.$border-subtle
+  // theme.$border-subtle
+  red
 );
 
 // The border radius value for the popover container
@@ -194,11 +196,34 @@ $popover-caret-height: custom-property.get-var(
     position: absolute;
     z-index: z('floating');
     display: none;
-    background-color: $popover-background-color;
+
     // We use `will-change: transform` to prevent antialiasing when our caret
     // has subpixel rendering. When this happens, a single pixel line appears
     // between the caret and popover-content that we would like to avoid
     will-change: transform;
+
+    // caret background
+    &::after {
+      position: absolute;
+      content: '';
+      display: block;
+      background-color: $popover-background-color;
+    }
+
+    // caret border
+    &::before {
+      position: absolute;
+      content: '';
+      display: none;
+      background-color: $popover-border-color;
+      display: none;
+    }
+  }
+
+  .#{$prefix}--popover--border .#{$prefix}--popover-caret::before,
+  .#{$prefix}--popover--border
+    .#{$prefix}--popover--auto-align.#{$prefix}--popover-caret::before {
+    display: block;
   }
 
   .#{$prefix}--popover--caret.#{$prefix}--popover--open
@@ -357,11 +382,48 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
-    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
     inline-size: $popover-caret-width;
     inset-block-end: 0;
     inset-inline-start: 50%;
     transform: translate(-50%, $popover-offset);
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+  }
+
+  // Caret placement with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    transform: translate(-50%, calc($popover-offset + 1px));
+
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inset-block-start: 1px;
+      block-size: calc($popover-caret-height - 1px);
+      inline-size: calc($popover-caret-width - 2px);
+      inset-inline-start: 1px;
+    }
   }
 
   [dir='rtl']
@@ -391,23 +453,23 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret::after,
   .#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret::after,
   .#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret::after,
   .#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret::after,
   .#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-caret::after {
     block-size: $popover-caret-height;
     clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
     inline-size: $popover-caret-width;
@@ -504,75 +566,75 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--top > .#{$prefix}--popover > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-left
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-start
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-right
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-end
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret {
-    block-size: $popover-caret-height;
-    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-    inline-size: $popover-caret-width;
-    inset-block-start: 0;
-    inset-inline-start: 50%;
-    transform: translate(-50%, calc(-1 * $popover-offset));
-  }
+  // .#{$prefix}--popover--top > .#{$prefix}--popover > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-left
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-start
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-right
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-end
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret {
+  //   block-size: $popover-caret-height;
+  //   clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+  //   inline-size: $popover-caret-width;
+  //   inset-block-start: 0;
+  //   inset-inline-start: 50%;
+  //   transform: translate(-50%, calc(-1 * $popover-offset));
+  // }
 
-  [dir='rtl']
-    .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret {
-    transform: translate(50%, calc(-1 * $popover-offset));
-  }
+  // [dir='rtl']
+  //   .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret {
+  //   transform: translate(50%, calc(-1 * $popover-offset));
+  // }
 
-  // Caret placement for autoAlign
-  .#{$prefix}--popover--top.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret {
-    block-size: $popover-caret-height;
-    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-    inline-size: $popover-caret-width;
-  }
+  // // Caret placement for autoAlign
+  // .#{$prefix}--popover--top.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret {
+  //   block-size: $popover-caret-height;
+  //   clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+  //   inline-size: $popover-caret-width;
+  // }
 
   //-----------------------------------------------------------------------------
   // Right
@@ -661,78 +723,78 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret {
-    block-size: $popover-caret-width;
-    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
-    inline-size: $popover-caret-height;
-    inset-block-start: 50%;
-    inset-inline-start: 100%;
-    transform: translate(calc($popover-offset - 100%), -50%);
-  }
+  // .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret {
+  //   block-size: $popover-caret-width;
+  //   clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  //   inline-size: $popover-caret-height;
+  //   inset-block-start: 50%;
+  //   inset-inline-start: 100%;
+  //   transform: translate(calc($popover-offset - 100%), -50%);
+  // }
 
-  [dir='rtl']
-    .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret {
-    inset-inline-end: 100%;
-    inset-inline-start: initial;
-  }
+  // [dir='rtl']
+  //   .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret {
+  //   inset-inline-end: 100%;
+  //   inset-inline-start: initial;
+  // }
 
-  // Caret placement for autoAlign
-  .#{$prefix}--popover--right.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret {
-    block-size: $popover-caret-width;
-    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
-    inline-size: $popover-caret-height;
-  }
+  // // Caret placement for autoAlign
+  // .#{$prefix}--popover--right.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret {
+  //   block-size: $popover-caret-width;
+  //   clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  //   inline-size: $popover-caret-height;
+  // }
 
   //-----------------------------------------------------------------------------
   // Left
@@ -827,79 +889,79 @@ $popover-caret-height: custom-property.get-var(
     transform: translateX(100%);
   }
 
-  // Caret placement
-  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret {
-    block-size: $popover-caret-width;
-    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-    inline-size: $popover-caret-height;
-    inset-block-start: 50%;
-    inset-inline-end: 100%;
-    transform: translate(calc(-1 * $popover-offset + 100%), -50%);
-  }
+  // // Caret placement
+  // .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret {
+  //   block-size: $popover-caret-width;
+  //   clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  //   inline-size: $popover-caret-height;
+  //   inset-block-start: 50%;
+  //   inset-inline-end: 100%;
+  //   transform: translate(calc(-1 * $popover-offset + 100%), -50%);
+  // }
 
-  [dir='rtl']
-    .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret {
-    inset-inline-end: initial;
-    inset-inline-start: 100%;
-  }
+  // [dir='rtl']
+  //   .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret,
+  // [dir='rtl']
+  //   .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-caret {
+  //   inset-inline-end: initial;
+  //   inset-inline-start: 100%;
+  // }
 
-  // Caret placement for autoAlign
-  .#{$prefix}--popover--left.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
-    > .#{$prefix}--popover-caret {
-    block-size: $popover-caret-width;
-    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-    inline-size: $popover-caret-height;
-  }
+  // // Caret placement for autoAlign
+  // .#{$prefix}--popover--left.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret,
+  // .#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
+  //   > .#{$prefix}--popover
+  //   > .#{$prefix}--popover-content
+  //   > .#{$prefix}--popover-caret {
+  //   block-size: $popover-caret-width;
+  //   clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  //   inline-size: $popover-caret-height;
+  // }
 
   //-----------------------------------------------------------------------------
   // Tab Tip Variant
