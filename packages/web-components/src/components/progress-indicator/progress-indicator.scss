@@ -143,7 +143,6 @@ $css--plex: true !default;
   max-inline-size: none;
 }
 
-:host(#{$prefix}-progress-step[disabled][state='current']) svg,
-:host(#{$prefix}-progress-step[disabled][state='complete']) svg {
+:host(#{$prefix}-progress-step[disabled]) svg {
   fill: $icon-disabled;
 }
