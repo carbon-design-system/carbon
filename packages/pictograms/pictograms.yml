@@ -94,7 +94,7 @@
   aliases:
     - emergency
     - medical
-    - 'heart attack,'
+    - heart attack,
     - health
     - resuscitation
 - name: agile
@@ -992,7 +992,7 @@
 - name: c-plus-plus--language
   friendly_name: C++
   aliases:
-    - 'c++, coding language'
+    - c++, coding language
 - name: cafe
   friendly_name: Café
   aliases:
@@ -2264,7 +2264,7 @@
   aliases:
     - Red Hat
     - container
-    - 'storage, data'
+    - storage, data
 - name: container--microservices
   friendly_name: Container microservices
   aliases:
@@ -2298,7 +2298,7 @@
   friendly_name: Containers and Cloud Native
   aliases:
     - cloud native
-    - 'container,'
+    - container,
     - containers
     - kubernetes
 - name: content--design
@@ -2331,6 +2331,11 @@
     - continuous security
     - continuous
     - security
+- name: continuous delivery
+  friendly_name: continuous--delivery
+  aliases: []
+  sizes:
+    - glyph
 - name: contract
   friendly_name: Contract
   aliases:
@@ -2401,8 +2406,8 @@
     - discount
     - torn
     - money
-- name: cowboy--hat
-  friendly_name: Cowboy hat
+- name: cowboy--boot
+  friendly_name: Cowboy boot
   aliases:
     - Hat
     - boot
@@ -2416,8 +2421,8 @@
     - south
     - farm
     - agriculture
-- name: cowboy--boot
-  friendly_name: Cowboy boot
+- name: cowboy--hat
+  friendly_name: Cowboy hat
   aliases:
     - Hat
     - boot
@@ -2459,9 +2464,9 @@
   friendly_name: Crosshairs
   aliases:
     - crosshair
-    - 'recticle,'
+    - recticle,
     - aim
-    - 'scope,'
+    - scope,
     - telescope
     - microscope
 - name: cupcake
@@ -3551,6 +3556,17 @@
     - speed
     - race grid
     - sports
+- name: f1--pit-stop-traffic-light
+  friendly_name: F1 pit stop traffic light
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - pit stop
+    - traffic light
+    - sports
 - name: f1--race
   friendly_name: F1 race
   aliases:
@@ -3569,17 +3585,6 @@
     - race car
     - speed
     - steering wheel
-    - sports
-- name: f1--pit-stop-traffic-light
-  friendly_name: F1 pit stop traffic light
-  aliases:
-    - f1
-    - Formula One
-    - racing
-    - race car
-    - speed
-    - pit stop
-    - traffic light
     - sports
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
@@ -4012,6 +4017,11 @@
     - visible
     - interactive
     - dev
+- name: front-end-development
+  friendly_name: front-end-development
+  aliases: []
+  sizes:
+    - glyph
 - name: frost-tower
   friendly_name: Frost tower
   aliases:
@@ -4836,12 +4846,14 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name:
+    IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
     - IBM
 - name: ibm--elm-gcm
-  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
+  friendly_name:
+    IBM® Engineering Lifecycle Management Global Configuration Management
   aliases:
     - engineering lifecycle management global configuration management
     - IBM
@@ -5230,7 +5242,7 @@
     - learning
     - learn
 - name: intelligent-infrastructure
-  friendly_name: 'Intelligent assets, facilities and infrastructure'
+  friendly_name: Intelligent assets, facilities and infrastructure
   aliases:
     - facilities
     - smart buildings
@@ -6331,7 +6343,7 @@
 - name: mumbai
   friendly_name: Mumbai
   aliases:
-    - 'Mumbai, India'
+    - Mumbai, India
 - name: munich
   friendly_name: Munich
   aliases:
@@ -6677,16 +6689,16 @@
   aliases:
     - on premises
     - Cloud
-- name: on-premises--02
-  friendly_name: On premises 02
-  aliases:
-    - on premises
-    - cloud
 - name: on-premise--to-cloud
   friendly_name: On premises to cloud
   aliases:
     - on premises to cloud
     - Cloud
+- name: on-premises--02
+  friendly_name: On premises 02
+  aliases:
+    - on premises
+    - cloud
 - name: open-source
   friendly_name: Open source
   aliases:
@@ -8434,11 +8446,6 @@
     - speech
     - watson
     - AI
-- name: speech-and-empathy
-  friendly_name: Speech and empathy
-  aliases:
-    - speech
-    - empathy
 - name: speech--to--text
   friendly_name: Speech to text
   aliases:
@@ -8447,6 +8454,16 @@
     - text
     - watson
     - AI
+- name: speech-and-empathy
+  friendly_name: Speech and empathy
+  aliases:
+    - speech
+    - empathy
+- name: speech-and-empathy--01
+  friendly_name: speech-and-empathy--01
+  aliases: []
+  sizes:
+    - glyph
 - name: speed-bag
   friendly_name: Speed bag
   aliases:
@@ -8492,15 +8509,15 @@
     - showtime
     - show
     - performance
+- name: spring
+  friendly_name: Spring
+  aliases:
+    - Spring
 - name: sprout
   friendly_name: Sprout
   aliases:
     - sprout
     - compost
-- name: spring
-  friendly_name: Spring
-  aliases:
-    - Spring
 - name: spss
   friendly_name: SPSS
   aliases:
@@ -9037,7 +9054,7 @@
   friendly_name: Team radio
   aliases:
     - radio
-    - 'walkie-talkie,'
+    - walkie-talkie,
     - communication
     - range
     - handheld tranciever
@@ -9223,7 +9240,7 @@
 - name: text--input
   friendly_name: Text input
   aliases:
-    - 'text input, user input'
+    - text input, user input
 - name: text--layout
   friendly_name: Text layout
   aliases:
@@ -9949,7 +9966,7 @@
     - virtual
     - speed
     - storage
-    - 'server, cloud'
+    - server, cloud
 - name: virtual--storage
   friendly_name: Virtual storage
   aliases:
@@ -10424,4 +10441,4 @@
     - Zurich
     - cultural history
     - Switzerland
-    - 'museum, swiss'
+    - museum, swiss
