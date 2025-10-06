@@ -118,7 +118,7 @@ jobs:
         run: yarn install --immutable --immutable-cache
       - name: Build web-components project
         run:
-          yarn lerna run build --scope='@carbon/web-components' \
+          yarn lerna run build --scope='@carbon/web-components'
           --include-dependencies
       - name: Run tests
         run: |
