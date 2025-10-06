@@ -486,6 +486,10 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     [`${prefix}--modal-container--full-width`]: isFullWidth,
   });
 
+  /**
+   * isScrollable is implicitly dependent on height, when height gets updated
+   * via `useResizeObserver`, clientHeight and scrollHeight get updated too
+   */
   const isScrollable =
     !!contentRef.current &&
     contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;

@@ -84,6 +84,10 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
 
     const { height } = useResizeObserver({ ref: contentRef });
 
+    /**
+     * isScrollable is implicitly dependent on height, when height gets updated
+     * via `useResizeObserver`, clientHeight and scrollHeight get updated too
+     */
     const isScrollable =
       !!contentRef.current &&
       contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;
