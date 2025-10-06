@@ -7,8 +7,6 @@
 
 import { Dispatch, SetStateAction } from 'react';
 
-export type StepContextType = StepState;
-
 /**
  * This interface should be extended by the consumer to match their own unique
  * use case given the fields within their own stepped experience.
@@ -17,7 +15,7 @@ interface formStateType {
   [key: string]: unknown;
 }
 
-export interface StepState {
+export interface StepContextType {
   formState: formStateType;
   setFormState: Dispatch<SetStateAction<formStateType>>;
   totalSteps: number;

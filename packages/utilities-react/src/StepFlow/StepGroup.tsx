@@ -21,15 +21,13 @@ export const StepGroup = ({ children }: StepGroupProps) => {
   const { setTotalSteps, currentStep } = useStepContext();
 
   const childrenArray = React.Children.toArray(children);
-  const childrenCount = React.Children.count(childrenArray);
 
   // set total step count
   useEffect(() => {
-    setTotalSteps(childrenCount);
-  }, [childrenCount, setTotalSteps]);
+    setTotalSteps(childrenArray.length);
+  }, [childrenArray.length, setTotalSteps]);
 
-  const currentStepComponent =
-    React.Children.toArray(childrenArray)[currentStep - 1];
+  const currentStepComponent = childrenArray[currentStep - 1];
 
   // return only the current step
   return currentStepComponent;
