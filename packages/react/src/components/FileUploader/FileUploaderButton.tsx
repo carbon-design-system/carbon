@@ -122,7 +122,7 @@ function FileUploaderButton({
   const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const { current: inputId } = useRef(id || useId());
   const inputNode = useRef<HTMLInputElement>(null);
   const classes = cx(`${prefix}--btn`, className, {

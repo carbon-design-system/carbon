@@ -40,6 +40,7 @@ import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
 import { Text } from '../Text';
+import { defaultItemToString } from '../../internal';
 
 export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -261,6 +262,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
+          title={label}
           {...getReferenceProps()}>
           <div className={`${prefix}--menu-item__selection-icon`}>
             {rest['aria-checked'] && <Checkmark />}
@@ -268,10 +270,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <div className={`${prefix}--menu-item__icon`}>
             {IconElement && <IconElement />}
           </div>
-          <Text
-            as="div"
-            className={`${prefix}--menu-item__label`}
-            title={label}>
+          <Text as="div" className={`${prefix}--menu-item__label`}>
             {label}
           </Text>
           {shortcut && !hasChildren && (
@@ -480,8 +479,6 @@ MenuItemGroup.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const defaultItemToString = (item) => item.toString();
-
 export interface MenuItemRadioGroupProps<Item>
   extends Omit<ComponentProps<'ul'>, 'onChange'> {
   /**
@@ -495,7 +492,7 @@ export interface MenuItemRadioGroupProps<Item>
   defaultSelectedItem?: Item;
 
   /**
-   * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
+   * Converts an item into a string for display.
    */
   itemToString?: (item: Item) => string;
 
@@ -541,7 +538,7 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
     onChange,
     defaultValue: defaultSelectedItem ?? ({} as Item),
   });
-  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   function handleClick(item, e) {
     setSelection(item);
   }
@@ -586,7 +583,7 @@ MenuItemRadioGroup.propTypes = {
   defaultSelectedItem: PropTypes.any,
 
   /**
-   * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
+   * Converts an item into a string for display.
    */
   itemToString: PropTypes.func,
 

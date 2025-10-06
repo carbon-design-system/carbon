@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,11 +35,6 @@ const DefaultStory = (args) => {
 export const Default = DefaultStory.bind({});
 
 Default.argTypes = {
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   hideLabel: {
     control: { type: 'boolean' },
   },
@@ -53,7 +48,7 @@ export const Indeterminate = () => (
   <ProgressBar label="Progress bar label" helperText="Optional helper text" />
 );
 
-export const Example = () => {
+export const Determinate = () => {
   const size = 728;
   const [progress, setProgress] = useState(0);
 

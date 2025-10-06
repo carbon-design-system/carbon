@@ -72,7 +72,7 @@ export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
 export interface SideNavLinkComponent {
   <E extends ElementType = 'a'>(props: SideNavLinkProps<E>): JSX.Element | null;
   displayName?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: WeakValidationMap<SideNavLinkProps<any>>;
 }
 
@@ -172,7 +172,7 @@ SideNavLink.propTypes = {
   tabIndex: PropTypes.number,
 };
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const createCustomSideNavLink = (element) => (props) => {
   return <SideNavLink element={element} {...props} />;
 };

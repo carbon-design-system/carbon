@@ -17,10 +17,16 @@ import {
   ToggletipContent,
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import mdx from './FluidTimePicker.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidTimePicker',
+  title: 'Components/Fluid Components/FluidTimePicker',
   component: FluidTimePicker,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     FluidTimePickerSelect,
     FluidTimePickerSkeleton,
@@ -91,16 +97,6 @@ Default.args = {
 };
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   disabled: {
     control: { type: 'boolean' },
   },

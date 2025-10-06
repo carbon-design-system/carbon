@@ -12,7 +12,7 @@ import React, {
   useRef,
   useState,
   type ButtonHTMLAttributes,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   type ChangeEvent,
   type HTMLAttributes,
   type KeyboardEvent,
@@ -457,7 +457,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   value?: string | number;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const SelectableTile = React.forwardRef<
   HTMLDivElement,
   SelectableTileProps
@@ -554,7 +554,7 @@ export const SelectableTile = React.forwardRef<
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs', ref: decoratorRef })
-      : null;
+      : candidate;
 
     return (
       // eslint-disable-next-line jsx-a11y/interactive-supports-focus
@@ -945,7 +945,7 @@ export const ExpandableTile = React.forwardRef<
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs' })
-      : null;
+      : candidate;
 
     return interactive ? (
       <div

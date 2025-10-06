@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
 import { ComboBox, DropdownSkeleton } from '@carbon/react';
@@ -26,10 +26,6 @@ figma.connect(
         Small: 'sm',
       }),
       titleText: figma.string('Label text'),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
@@ -80,10 +76,6 @@ figma.connect(
         Large: 'lg',
         Medium: 'md',
         Small: 'sm',
-      }),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
       }),
     },
     example: ({ ...props }) => {

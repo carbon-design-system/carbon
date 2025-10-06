@@ -32,7 +32,10 @@ export interface FeatureFlagsProps {
   enableDialogElement?: boolean;
   enableV12DynamicFloatingStyles?: boolean;
   enableEnhancedFileUploader?: boolean;
+  enablePresence?: boolean;
 }
+
+// TODO: Can this variable be deleted now? It isn't used anywhere.
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree
@@ -55,6 +58,7 @@ function FeatureFlags({
   enableDialogElement = false,
   enableV12DynamicFloatingStyles = false,
   enableEnhancedFileUploader = false,
+  enablePresence = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
@@ -69,6 +73,7 @@ function FeatureFlags({
     'enable-dialog-element': enableDialogElement,
     'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
     'enable-enhanced-file-uploader': enableEnhancedFileUploader,
+    'enable-presence': enablePresence,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {

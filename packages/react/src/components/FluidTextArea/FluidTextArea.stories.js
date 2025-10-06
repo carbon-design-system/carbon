@@ -18,10 +18,19 @@ import {
   ToggletipContent,
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import mdx from './FluidTextArea.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidTextArea',
+  title: 'Components/Fluid Components/FluidTextArea',
   component: FluidTextArea,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: ['id', 'value', 'defaultValue'],
+    },
+  },
   subcomponents: {
     FluidTextAreaSkeleton,
   },
@@ -36,22 +45,7 @@ export default {
         disable: true,
       },
     },
-    id: {
-      table: {
-        disable: true,
-      },
-    },
     light: {
-      table: {
-        disable: true,
-      },
-    },
-    value: {
-      table: {
-        disable: true,
-      },
-    },
-    defaultValue: {
       table: {
         disable: true,
       },

@@ -42,6 +42,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['target'],
+    },
   },
   argTypes: {
     mode: {
@@ -125,12 +128,4 @@ export const Default = (args) => {
 Default.args = {
   onClose: action('onClose'),
   open: true,
-};
-
-Default.argTypes = {
-  target: {
-    table: {
-      disable: true,
-    },
-  },
 };

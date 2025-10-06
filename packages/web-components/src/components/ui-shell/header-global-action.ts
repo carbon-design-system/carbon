@@ -94,7 +94,7 @@ class CDSHeaderGlobalAction extends CDSButton {
   }
 
   @HostListener('focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleFocusOut(event: FocusEvent) {
     const panel = this.ownerDocument?.querySelector(`#${this.panelId}`);
@@ -112,7 +112,7 @@ class CDSHeaderGlobalAction extends CDSButton {
   }
 
   @HostListener('click', { capture: true })
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleClick(event: Event) {
     const { disabled } = this;
@@ -139,7 +139,7 @@ class CDSHeaderGlobalAction extends CDSButton {
   }
 
   @HostListener('keydown', { capture: true })
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleKeyDown(event: KeyboardEvent) {
     const { key } = event;

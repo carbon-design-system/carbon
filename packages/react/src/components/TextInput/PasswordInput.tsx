@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import { textInputProps } from './util';
+import { getTextInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { Tooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
@@ -221,7 +221,7 @@ const PasswordInput = React.forwardRef(
 
     const handleTogglePasswordVisibility = (event) => {
       setInputType(inputType === 'password' ? 'text' : 'password');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       onTogglePasswordVisibility && onTogglePasswordVisibility(event);
     };
     const textInputClasses = classNames(
@@ -341,16 +341,16 @@ const PasswordInput = React.forwardRef(
       align = tooltipPosition;
     }
     if (!hidePasswordLabel || hidePasswordLabel.trim() === '') {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn('Warning: The "hidePasswordLabel" should not be blank.');
     } else if (!showPasswordLabel || showPasswordLabel.trim() === '') {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn('Warning: The "showPasswordLabel" should not be blank.');
     }
     const input = (
       <>
         <input
-          {...textInputProps({
+          {...getTextInputProps({
             sharedTextInputProps,
             invalid: normalizedProps.invalid,
             invalidId: normalizedProps.invalidId,
@@ -387,7 +387,7 @@ const PasswordInput = React.forwardRef(
       setInputType(type);
     }, [type]);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const Icon = normalizedProps.icon as any;
 
     return (

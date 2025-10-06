@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import CDSCheckbox from '../checkbox/checkbox';
 import { TOGGLE_SIZE } from './defs';
 import styles from './toggle.scss?lit';
-import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -37,40 +36,26 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    * Handles `click` event on the `<button>` in the shadow DOM.
    */
   protected _handleChange() {
-    const { checked, indeterminate } = this._checkboxNode;
+    const { checked } = this._checkboxNode;
     if (this.disabled || this.readOnly) {
       return;
     }
-    this.checked = !checked;
-    this.indeterminate = indeterminate;
-    const { eventChange } = this.constructor as typeof CDSCheckbox;
+    this.toggled = !checked;
+    const { eventChange } = this.constructor as typeof CDSToggle;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
         composed: true,
         detail: {
-          indeterminate,
+          checked: this.toggled, // TODO: remove in v12
+          toggled: this.toggled,
         },
       })
     );
   }
 
-  /**
-   * Handles `keydown` event on the toggle button.
-   */
-  @HostListener('keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  protected _handleKeydown = async (event: KeyboardEvent) => {
-    const { key } = event;
-
-    if (key === ' ' || key === 'Enter') {
-      this._handleChange();
-    }
-  };
-
   protected _renderCheckmark() {
-    if (this.size !== TOGGLE_SIZE.SMALL) {
+    if (this.size !== TOGGLE_SIZE.SMALL || this.readOnly == true) {
       return undefined;
     }
     return html`
@@ -84,14 +69,52 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
     `;
   }
 
+  // TODO: remove in v12
+  /**
+   * @deprecated Use `toggled` instead.
+   * The `checked` attribute will be removed in the next major version.
+   */
+  declare checked: boolean;
+  // TODO: remove in v12
+  /**
+   *
+   * **Deprecated:** Use `toggled` instead.
+   * The `checked` attribute will be removed in the next major version.
+   */
+  @property({ type: Boolean, attribute: 'checked', reflect: true })
+  get _checkedAttributeAlias() {
+    return this.toggled;
+  }
+  set _checkedAttributeAlias(v: boolean) {
+    this.toggled = v;
+  }
+
+  // TODO: remove get() and set() in v12
+  /**
+   * Specify whether the control is toggled
+   */
+  @property({ type: Boolean, reflect: true })
+  get toggled(): boolean {
+    return this.checked;
+  }
+  set toggled(v: boolean) {
+    const prev = this.checked;
+    const next = v;
+    if (prev === next) return;
+    this.checked = v;
+
+    this.requestUpdate('toggled', prev);
+    this.requestUpdate('_checkedAttributeAlias');
+  }
   /**
    * Specify another element's id to be used as the label for this toggle
    */
   @property({ type: String, attribute: 'aria-labelledby' })
   ariaLabelledby?: string;
 
+  // TODO: swap value with labelB in v12 to match React
   /**
-   * The text for the checked state.
+   * Specify the label for the "on" position
    */
   @property({ attribute: 'label-a' })
   labelA = 'On';
@@ -114,8 +137,9 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   @property({ reflect: true })
   size = TOGGLE_SIZE.REGULAR;
 
+  // TODO: swap value with labelA in v12 to match React
   /**
-   * The text for the unchecked state.
+   * Specify the label for the "off" position
    */
   @property({ attribute: 'label-b' })
   labelB = 'Off';
@@ -164,7 +188,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
 
   render() {
     const {
-      checked,
+      toggled,
       disabled,
       labelText,
       hideLabel,
@@ -182,7 +206,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
     });
     const toggleClasses = classMap({
       [`${prefix}--toggle__switch`]: true,
-      [`${prefix}--toggle__switch--checked`]: checked,
+      [`${prefix}--toggle__switch--checked`]: toggled,
     });
 
     const labelTextClasses = classMap({
@@ -195,7 +219,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
     if (hideLabel) {
       stateText = labelText || '';
     } else {
-      stateText = checked ? labelA : labelB;
+      stateText = toggled ? labelA : labelB;
     }
 
     const labelId = id ? `${id}_label` : undefined;
@@ -209,17 +233,15 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
         class="${prefix}--toggle__button"
         role="switch"
         type="button"
-        aria-checked=${checked}
+        aria-checked=${toggled}
         aria-labelledby=${ifDefined(ariaLabelledby)}
-        .checked="${checked}"
+        .checked=${toggled}
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
         ?disabled=${disabled}
-        id="${id}"></button>
-      <label
-        for="${id}"
-        class="${prefix}--toggle__label"
-        @click=${handleChange}>
+        id="${id}"
+        @click=${handleChange}></button>
+      <label for="${id}" class="${prefix}--toggle__label">
         ${labelText
           ? html`<span class="${labelTextClasses}">${labelText}</span>`
           : null}
@@ -234,7 +256,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   }
 
   /**
-   * The name of the custom event fired after this changebox changes its checked state.
+   * The name of the custom event fired after this changebox changes its toggled state.
    */
   static get eventChange() {
     return `${prefix}-toggle-changed`;

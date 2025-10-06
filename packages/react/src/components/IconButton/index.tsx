@@ -13,7 +13,7 @@ import { Tooltip } from '../Tooltip';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
 import type {
   DeprecatedPopoverAlignment,
@@ -147,7 +147,7 @@ export interface IconButtonProps
   wrapperClasses?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const IconButton = React.forwardRef(
   (
     {
@@ -183,7 +183,7 @@ const IconButton = React.forwardRef(
     );
 
     if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn(
         "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
       );
