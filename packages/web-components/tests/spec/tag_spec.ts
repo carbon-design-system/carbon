@@ -25,9 +25,9 @@ xdescribe('cds-tag', () => {
       await Promise.resolve();
       const elem = document.querySelector('cds-tag');
       const spyClick = jasmine.createSpy('click');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'click', spyClick);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.shadowRoot!.querySelector('button')!.click();
       expect(spyClick).toHaveBeenCalled();
     });
@@ -37,16 +37,16 @@ xdescribe('cds-tag', () => {
       await Promise.resolve();
       const elem = document.querySelector('cds-tag');
       const spyClick = jasmine.createSpy('click');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'click', spyClick);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.shadowRoot!.querySelector('button')!.click();
       expect(spyClick).not.toHaveBeenCalled();
     });
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

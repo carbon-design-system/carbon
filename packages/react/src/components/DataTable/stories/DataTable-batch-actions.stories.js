@@ -205,29 +205,4 @@ Default.argTypes = {
     control: 'boolean',
     description: 'Add zebra striping to rows',
   },
-  filterRows: {
-    table: {
-      disable: true,
-    },
-  },
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  rows: {
-    table: {
-      disable: true,
-    },
-  },
-  sortRow: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
 };

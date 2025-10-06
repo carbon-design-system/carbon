@@ -16,6 +16,10 @@ export default {
     docs: {
       page: mdx,
     },
+    // The id prop is deprecated and should be remove in the next major release
+    controls: {
+      exclude: ['id'],
+    },
   },
 };
 
@@ -31,22 +35,6 @@ Default.args = {
 };
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  // The id prop is deprecated and should be remove in the next major release
-  id: {
-    table: {
-      disable: true,
-    },
-  },
   active: {
     control: {
       type: 'boolean',

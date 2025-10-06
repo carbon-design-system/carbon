@@ -392,7 +392,7 @@ export const FloatingMenu = ({
 
       placeInProgressRef.current = false;
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [floatingPosition, onPlace]);
 
   // Attach a resize listener.
@@ -404,7 +404,7 @@ export const FloatingMenu = ({
     return () => {
       resizeHandler.remove();
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [
     triggerRef,
     menuOffset,
@@ -417,7 +417,7 @@ export const FloatingMenu = ({
   // Update menu position when key props change.
   useEffect(() => {
     updateMenuPosition();
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [
     menuOffset,
     menuDirection,
@@ -443,9 +443,9 @@ export const FloatingMenu = ({
           top: '0px',
         };
     const child = children as ReactElement<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       string | JSXElementConstructor<any>
     >;
     return cloneElement(child, {
@@ -507,7 +507,7 @@ export const FloatingMenu = ({
     const portalTarget = target ? target() : document.body;
 
     return ReactDOM.createPortal(
-      // eslint-disable-next-line  jsx-a11y/no-static-element-interactions  -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  jsx-a11y/no-static-element-interactions  -- https://github.com/carbon-design-system/carbon/issues/20452
       <div
         onBlur={
           focusTrap && !focusTrapWithoutSentinels ? handleBlur : undefined

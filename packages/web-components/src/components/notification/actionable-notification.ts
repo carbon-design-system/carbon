@@ -51,7 +51,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const active = elem.ownerDocument!.activeElement;
       if (
         active === elem ||
@@ -65,7 +65,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const active = elem.ownerDocument!.activeElement;
       if (
         active === elem ||
@@ -137,7 +137,7 @@ class CDSActionableNotification extends HostListenerMixin(
    * Escape will close the notification if `closeOnEscape` is true
    */
   @HostListener('keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown = async (event: KeyboardEvent) => {
     const { key } = event;
@@ -147,7 +147,7 @@ class CDSActionableNotification extends HostListenerMixin(
   };
 
   @HostListener('shadowRoot:focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
     const {
@@ -187,7 +187,7 @@ class CDSActionableNotification extends HostListenerMixin(
         relatedTarget as Node
       );
       // tabbable elements in Shadow root
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const shadowElems = this.shadowRoot!.querySelectorAll(
         selectorTabbableForActionableNotification
       );
