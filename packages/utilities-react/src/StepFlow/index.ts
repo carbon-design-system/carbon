@@ -7,4 +7,4 @@
 
 export { StepGroup } from './StepGroup';
 export { StepProvider, useStepContext } from './StepContext';
-export type { StepState, StepContextType } from './types';
+export type { StepContextType } from './types';
