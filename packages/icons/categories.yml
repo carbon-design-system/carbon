@@ -1996,6 +1996,7 @@ categories:
           - wifi--not-secure
           - wifi--secure
           - workflow-automation
+          - z-HyperLink
           - z--lpar
           - z--systems
           - zos
@@ -2539,7 +2540,6 @@ categories:
           - outage
           - password
           - phone--ip
-          - platform-automation
           - platforms
           - plug
           - plug--filled
