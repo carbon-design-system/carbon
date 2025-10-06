@@ -193,7 +193,27 @@ const RadioTile = React.forwardRef(
           tabIndex={!disabled ? tabIndex : undefined}
           type="radio"
           value={value}
-          ref={ref}
+          ref={(el) => {
+            // Set the checked attribute directly on the DOM element for assistive technologies
+            if (el) {
+              if (checked) {
+                el.setAttribute('checked', '');
+              } else {
+                el.removeAttribute('checked');
+              }
+            }
+
+            // Forward the ref
+            if (ref) {
+              if (typeof ref === 'function') {
+                ref(el);
+              } else {
+                (
+                  ref as React.MutableRefObject<HTMLInputElement | null>
+                ).current = el;
+              }
+            }
+          }}
           required={required}
         />
         <label {...rest} htmlFor={inputId} className={className}>

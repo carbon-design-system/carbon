@@ -126,6 +126,7 @@ describe('RadioTile', () => {
       expect(ref.current.type).toEqual('radio');
       expect(ref.current.value).toEqual('some test value');
     });
+
     it('should pass "required" prop to the input element', () => {
       render(
         <RadioTile required value="some test value">
@@ -133,6 +134,52 @@ describe('RadioTile', () => {
         </RadioTile>
       );
       expect(screen.getByRole('radio')).toHaveAttribute('required');
+    });
+
+    it('should set the checked attribute on the DOM element when checked prop is true', () => {
+      render(
+        <RadioTile value="standard" checked>
+          Option 1
+        </RadioTile>
+      );
+
+      const radioInput = screen.getByRole('radio');
+      expect(radioInput).toBeChecked();
+      expect(radioInput.hasAttribute('checked')).toBe(true);
+    });
+
+    it('should remove the checked attribute on the DOM element when checked prop is false', () => {
+      render(
+        <RadioTile value="standard" checked={false}>
+          Option 1
+        </RadioTile>
+      );
+
+      const radioInput = screen.getByRole('radio');
+      expect(radioInput).not.toBeChecked();
+      expect(radioInput.hasAttribute('checked')).toBe(false);
+    });
+
+    it('should update the checked attribute when the checked prop changes', () => {
+      const { rerender } = render(
+        <RadioTile value="standard" checked={false}>
+          Option 1
+        </RadioTile>
+      );
+
+      const radioInput = screen.getByRole('radio');
+      expect(radioInput).not.toBeChecked();
+      expect(radioInput.hasAttribute('checked')).toBe(false);
+
+      // Update with checked=true
+      rerender(
+        <RadioTile value="standard" checked>
+          Option 1
+        </RadioTile>
+      );
+
+      expect(radioInput).toBeChecked();
+      expect(radioInput.hasAttribute('checked')).toBe(true);
     });
   });
 
