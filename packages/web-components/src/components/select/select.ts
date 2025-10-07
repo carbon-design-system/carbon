@@ -421,6 +421,7 @@ class CDSSelect extends FormMixin(LitElement) {
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const helperTextClasses = classMap({
@@ -448,7 +449,6 @@ class CDSSelect extends FormMixin(LitElement) {
         id="input"
         class="${inputClasses}"
         ?disabled="${disabled}"
-        aria-label="${ifDefined(hideLabel ? labelText : undefined)}"
         aria-readonly="${String(Boolean(readonly))}"
         aria-invalid="${String(Boolean(invalid))}"
         aria-describedby="${ifDefined(!invalid ? undefined : 'invalid-text')}"
@@ -488,11 +488,10 @@ class CDSSelect extends FormMixin(LitElement) {
     `;
 
     return html`
-      ${!hideLabel
-        ? html`<label class="${labelClasses}" for="input">
-            <slot name="label-text"> ${labelText} </slot>
-          </label>`
-        : null}
+      <label class="${labelClasses}" for="input">
+        <slot name="label-text"> ${labelText} </slot>
+      </label>
+
       ${inline
         ? html`<div
             class="${prefix}--select-input--inline__wrapper"
