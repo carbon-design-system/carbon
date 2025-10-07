@@ -2319,8 +2319,9 @@
     - cloud
 - name: continuous--delivery
   friendly_name: Continuous delivery
-  aliases:
-    - continuous delivery
+  aliases: []
+  sizes:
+    - glyph
 - name: continuous--integration
   friendly_name: Continuous integration
   aliases:
@@ -2331,11 +2332,6 @@
     - continuous security
     - continuous
     - security
-- name: continuous delivery
-  friendly_name: continuous--delivery
-  aliases: []
-  sizes:
-    - glyph
 - name: contract
   friendly_name: Contract
   aliases:
@@ -4846,14 +4842,12 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name:
-    IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
     - IBM
 - name: ibm--elm-gcm
-  friendly_name:
-    IBM® Engineering Lifecycle Management Global Configuration Management
+  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
   aliases:
     - engineering lifecycle management global configuration management
     - IBM
