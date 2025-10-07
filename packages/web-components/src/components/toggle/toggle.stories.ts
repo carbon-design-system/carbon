@@ -18,14 +18,14 @@ const sizes = {
 const defaultArgs = {
   labelA: 'On',
   labelB: 'Off',
-  checked: true,
+  toggled: true,
   labelText: 'Label',
 };
 
 const smallToggleArgs = {
   labelA: 'On',
   labelB: 'Off',
-  checked: true,
+  toggled: true,
   labelText: 'Label',
   size: 'sm',
 };
@@ -42,11 +42,11 @@ const controls = {
   },
   labelA: {
     control: 'text',
-    description: 'The text for the checked state.',
+    description: 'Specify the label for the "on" position',
   },
   labelB: {
     control: 'text',
-    description: 'The text for the unchecked state',
+    description: 'Specify the label for the "off" position',
   },
   labelText: {
     control: 'text',
@@ -62,7 +62,7 @@ const controls = {
       "Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)",
     options: sizes,
   },
-  checked: {
+  toggled: {
     control: 'boolean',
     description: 'Specify whether the control is toggled',
   },
@@ -79,7 +79,7 @@ export const Default = {
     labelText,
     readOnly,
     size,
-    checked,
+    toggled,
   }) => html`
     <cds-toggle
       label-b="${labelB}"
@@ -89,7 +89,7 @@ export const Default = {
       label-text="${labelText}"
       size="${size}"
       ?read-only=${readOnly}
-      ?checked="${checked}"></cds-toggle>
+      ?toggled="${toggled}"></cds-toggle>
   `,
 };
 
@@ -108,10 +108,10 @@ export const SmallToggle = {
     labelText,
     readOnly,
     size,
-    checked,
+    toggled,
   }) => html`
     <cds-toggle
-      ?checked="${checked}"
+      ?toggled="${toggled}"
       ?read-only=${readOnly}
       ?disabled="${disabled}"
       ?hideLabel="${hideLabel}"

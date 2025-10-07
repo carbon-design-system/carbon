@@ -8,7 +8,7 @@
 import { html, render } from 'lit';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-ignore
 import Fade16 from '@carbon/icons/lib/fade/16.js';
 import EventManager from '../utils/event-manager';
@@ -159,7 +159,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-menu-button' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -178,7 +178,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-menu-button' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -190,9 +190,9 @@ describe('ui-shell', () => {
         await Promise.resolve();
         const spyAfterToggle = jasmine.createSpy('after toggle');
         const button = document.body.querySelector('cds-header-menu-button');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(button!, 'cds-header-menu-button-toggled', spyAfterToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         button!.shadowRoot!.querySelector('button')!.click();
         expect(spyAfterToggle).toHaveBeenCalled();
       });
@@ -205,7 +205,7 @@ describe('ui-shell', () => {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-menu' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -223,7 +223,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-menu' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -236,10 +236,10 @@ describe('ui-shell', () => {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
         const menu = document.body.querySelector('cds-header-menu');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         menu!.shadowRoot!.querySelector('a')!.click();
         expect((menu as CDSHeaderMenu).expanded).toBe(true);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         menu!.shadowRoot!.querySelector('a')!.click();
         expect((menu as CDSHeaderMenu).expanded).toBe(false);
       });
@@ -248,18 +248,18 @@ describe('ui-shell', () => {
         render(headerMenuTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const menu = document.body.querySelector('cds-header-menu');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const trigger = menu!.shadowRoot!.querySelector('a');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         spyOn(trigger!, 'focus');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         trigger!.dispatchEvent(
           Object.assign(new CustomEvent('keydown', { bubbles: true }), {
             key: 'Escape',
           })
         );
         expect((menu as CDSHeaderMenu).expanded).toBe(false);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         expect(trigger!.focus).toHaveBeenCalled();
       });
 
@@ -281,7 +281,7 @@ describe('ui-shell', () => {
         render(headerNameTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-name' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -294,12 +294,12 @@ describe('ui-shell', () => {
             href: 'about:blank',
             prefix: 'prefix-foo',
           }),
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body as any
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-name' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -314,7 +314,7 @@ describe('ui-shell', () => {
         render(headerNavTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-nav' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -330,7 +330,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-nav' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -345,7 +345,7 @@ describe('ui-shell', () => {
         render(headerNavItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-nav-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -359,7 +359,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-header-nav-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -372,7 +372,7 @@ describe('ui-shell', () => {
         render(sideNavLinkTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-side-nav-link' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -389,7 +389,7 @@ describe('ui-shell', () => {
         await Promise.resolve(); // First update cycle
         await Promise.resolve(); // Update cycle upon `slotchange` event
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-side-nav-link' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -409,11 +409,11 @@ describe('ui-shell', () => {
         const nav = document.body.querySelector('cds-side-nav');
         const menu = document.body.querySelector('cds-side-nav-menu');
         expect((menu as CDSSideNavMenu).forceCollapsed).toBe(true);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         nav!.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
         await Promise.resolve();
         expect((menu as CDSSideNavMenu).forceCollapsed).toBe(false);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         nav!.dispatchEvent(new CustomEvent('mouseout', { bubbles: true }));
         await Promise.resolve();
         expect((menu as CDSSideNavMenu).forceCollapsed).toBe(true);
@@ -426,7 +426,7 @@ describe('ui-shell', () => {
         const menuButton = document.body.querySelector(
           'cds-header-menu-button'
         );
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         menuButton!.dispatchEvent(
           new CustomEvent('cds-header-menu-button-toggled', {
             bubbles: true,
@@ -434,7 +434,7 @@ describe('ui-shell', () => {
           })
         );
         expect((nav as CDSSideNav).expanded).toBe(true);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         menuButton!.dispatchEvent(
           new CustomEvent('cds-header-menu-button-toggled', {
             bubbles: true,
@@ -472,7 +472,7 @@ describe('ui-shell', () => {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-side-nav-menu' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -488,7 +488,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-side-nav-menu' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -504,7 +504,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-side-nav-menu' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -517,11 +517,11 @@ describe('ui-shell', () => {
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
         const button = document.body.querySelector('cds-side-nav-menu');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(button!, 'cds-side-nav-menu-beingtoggled', spyBeforeToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(button!, 'cds-side-nav-menu-toggled', spyAfterToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         button!.shadowRoot!.querySelector('button')!.click();
         expect(spyBeforeToggle).toHaveBeenCalled();
         expect(spyAfterToggle).toHaveBeenCalled();
@@ -532,13 +532,13 @@ describe('ui-shell', () => {
         await Promise.resolve();
         const spyAfterToggle = jasmine.createSpy('after toggle');
         const button = document.body.querySelector('cds-side-nav-menu');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(button!, 'cds-side-nav-menu-beingtoggled', (event) => {
           event.preventDefault();
         });
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(button!, 'cds-side-nav-menu-toggled', spyAfterToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         button!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
         expect(spyAfterToggle).not.toHaveBeenCalled();
@@ -556,7 +556,7 @@ describe('ui-shell', () => {
         await Promise.resolve();
         const menu = document.body.querySelector('cds-side-nav-menu');
         const menuItem = document.createElement('cds-side-nav-menu-item');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         menu!.appendChild(menuItem);
         await Promise.resolve(); // `slotchange` event seems to happen at EOM
         expect(menuItem.hasAttribute('parent-has-icon')).toBe(true);
@@ -571,14 +571,14 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         const menu = document.body.querySelector('cds-side-nav-menu');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const menuItem = menu!.querySelector('cds-side-nav-menu-item');
         const svg = document.createElement('svg');
         svg.setAttribute('slot', 'title-icon');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         menu!.appendChild(svg);
         await Promise.resolve();
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         expect(menuItem!.hasAttribute('parent-has-icon')).toBe(true);
       });
     });
@@ -590,7 +590,7 @@ describe('ui-shell', () => {
         render(sideNavMenuItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-side-nav-menu-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -605,7 +605,7 @@ describe('ui-shell', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-side-nav-menu-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -624,7 +624,7 @@ describe('ui-shell', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
     events.reset();
   });

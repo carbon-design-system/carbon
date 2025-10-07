@@ -45,14 +45,14 @@ interface ModelWrapperState {
 }
 
 let didWarnAboutDeprecation = false;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const isDev = process.env.NODE_ENV !== 'production';
 
 export default class ModalWrapper extends React.Component<
   ModalWrapperProps,
   ModelWrapperState
 > {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   if(isDev) {
     warning(
       didWarnAboutDeprecation,

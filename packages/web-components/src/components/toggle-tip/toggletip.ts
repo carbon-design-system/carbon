@@ -79,7 +79,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   private _handleActionsSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement).assignedNodes();
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     hasContent
       ? this.setAttribute('has-actions', '')
       : this.removeAttribute('has-actions');
@@ -93,7 +93,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleKeydown = async (event) => {
     if (event.key === 'Escape') {
@@ -107,7 +107,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleFocusOut(event: FocusEvent) {
     if (this.contains(event.relatedTarget as Node)) {

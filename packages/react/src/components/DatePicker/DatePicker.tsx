@@ -271,7 +271,7 @@ export interface DatePickerProps {
    */
   locale?:
     | string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     | any
     | 'ar' // Arabic
     | 'at' // Austria
@@ -371,7 +371,7 @@ export interface DatePickerProps {
    * if boolean applies to all inputs
    * if array applies to each input in order
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   readOnly?: boolean | [] | any | undefined;
 
   /**
@@ -430,7 +430,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const startInputField: any = useCallback((node) => {
     if (node !== null) {
       startInputField.current = node;
@@ -468,10 +468,10 @@ const DatePicker = React.forwardRef(function DatePicker(
         onClose(selectedDates, dateStr, instance);
       }
     },
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     [onClose]
   );
-  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   const onCalendarClose = (selectedDates, dateStr, instance, e) => {
     if (e && e.type === 'clickOutside') {
       return;
@@ -507,9 +507,9 @@ const DatePicker = React.forwardRef(function DatePicker(
     [String(className)]: className,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const childrenWithProps = React.Children.toArray(children as any).map(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (child: any, index) => {
       if (
         index === 0 &&
@@ -638,7 +638,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const flatpickerConfig: any = {
       inline: inline ?? false,
       onClose: onCalendarClose,
@@ -883,7 +883,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
   // need to be imperatively called on the calendar
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   useImperativeHandle(ref, (): any => ({
     get calendar() {
       return calendarRef.current;
@@ -951,11 +951,11 @@ const DatePicker = React.forwardRef(function DatePicker(
         endInputField.current.value = '';
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [value]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     let isMouseDown = false;
 
     const handleMouseDown = (event) => {
@@ -971,7 +971,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         closeCalendar(event);
       }
     };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const closeCalendar = (event) => {
       calendarRef.current?.close();
       // Remove focus from endDate calendar input

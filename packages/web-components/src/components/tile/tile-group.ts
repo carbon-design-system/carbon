@@ -188,7 +188,7 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
   @HostListener('focusin')
   // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocus = (event: KeyboardEvent) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const { relatedTarget, target } = event as any;
     if ((target as HTMLElement)?.matches(`${prefix}-ai-label`)) {
       return;
@@ -225,7 +225,7 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
   currentRadioSelection;
 
   @property()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   currentSelections = [] as any;
 
   @property()

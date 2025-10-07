@@ -360,7 +360,7 @@ const Dropdown = React.forwardRef(
           }
         });
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [floatingStyles, autoAlign, refs.floating]);
 
     const prefix = usePrefix();
@@ -375,7 +375,7 @@ const Dropdown = React.forwardRef(
       [onChange]
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const isItemDisabled = useCallback((item, _index) => {
       const isObject = item !== null && typeof item === 'object';
       return isObject && 'disabled' in item && item.disabled === true;
@@ -388,7 +388,7 @@ const Dropdown = React.forwardRef(
         if (
           highlightedIndex !== undefined &&
           highlightedIndex > -1 &&
-          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
           typeof window !== undefined
         ) {
           const itemArray = document.querySelectorAll(
@@ -418,7 +418,7 @@ const Dropdown = React.forwardRef(
         onHighlightedIndexChange,
         ...downshiftProps,
       }),
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [
         items,
         itemToString,
@@ -558,7 +558,7 @@ const Dropdown = React.forwardRef(
           toggleButtonProps.onKeyDown(evt);
         }
       },
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [isTyping, currTimer, toggleButtonProps]
     );
 
@@ -656,7 +656,7 @@ const Dropdown = React.forwardRef(
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
                   : itemToString(selectedItem)
-                : // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                : // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                   (label as any)}
             </span>
             <ListBox.MenuIcon
@@ -721,7 +721,7 @@ const Dropdown = React.forwardRef(
 interface DropdownComponent {
   <ItemType>(
     props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   ): React.ReactElement<any> | null;
 }
 
