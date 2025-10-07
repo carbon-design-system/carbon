@@ -431,7 +431,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const supplementalText = helperText
       ? html`
-          <div class="${helperTextClasses}">
+          <div id="helper-text" class="${helperTextClasses}">
             <slot name="helper-text"> ${helperText} </slot>
           </div>
         `
@@ -439,10 +439,17 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const errorText =
       invalid || warn
-        ? html` <div class="${prefix}--form-requirement">
+        ? html` <div id="error-text" class="${prefix}--form-requirement">
             ${invalid ? invalidText : warnText}
           </div>`
         : null;
+
+    let describedBy: string | undefined;
+    if (invalid || warn) {
+      describedBy = 'error-text';
+    } else if (helperText) {
+      describedBy = 'helper-text';
+    }
 
     const input = html`
       <select
@@ -451,7 +458,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ?disabled="${disabled}"
         aria-readonly="${String(Boolean(readonly))}"
         aria-invalid="${String(Boolean(invalid))}"
-        aria-describedby="${ifDefined(!invalid ? undefined : 'invalid-text')}"
+        aria-describedby="${ifDefined(describedBy)}"
         @input="${handleInput}">
         ${!placeholder || value
           ? undefined
