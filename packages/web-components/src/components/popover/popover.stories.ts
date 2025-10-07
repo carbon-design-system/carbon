@@ -40,7 +40,10 @@ const controls = {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,
   },
-
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the popover',
+  },
   highContrast: {
     control: 'boolean',
     description: 'Render the component using the high-contrast variant',
@@ -60,6 +63,7 @@ export const Default = {
   argTypes: controls,
   args: {
     caret: true,
+    border: false,
     highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
     dropShadow: true,
@@ -86,6 +90,7 @@ export const Default = {
       <cds-popover
         ?open=${args.open}
         ?caret=${args.caret}
+        ?border=${args.border}
         ?highContrast=${args.highContrast}
         align=${args.align}
         ?dropShadow=${args.dropShadow}>

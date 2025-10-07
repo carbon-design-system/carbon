@@ -65,6 +65,12 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   dropShadow = true;
 
   /**
+   * Specify whether a border should be rendered on the popover
+   */
+  @property({ type: Boolean, reflect: true })
+  border = false;
+
+  /**
    * Render the component using the high-contrast variant
    */
   @property({ type: Boolean, reflect: true })
@@ -132,18 +138,24 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   updated(changedProperties) {
     const { selectorPopoverContent } = this.constructor as typeof CDSPopover;
-    ['open', 'align', 'autoalign', 'caret', 'dropShadow', 'tabTip'].forEach(
-      (name) => {
-        if (changedProperties.has(name)) {
-          const { [name as keyof CDSPopover]: value } = this;
-          if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
-            (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
-              name
-            ] = value;
-          }
+    [
+      'open',
+      'align',
+      'autoalign',
+      'caret',
+      'dropShadow',
+      'border',
+      'tabTip',
+    ].forEach((name) => {
+      if (changedProperties.has(name)) {
+        const { [name as keyof CDSPopover]: value } = this;
+        if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
+          (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
+            name
+          ] = value;
         }
       }
-    );
+    });
 
     if (this.autoalign && this.open) {
       // auto align functionality with @floating-ui/dom library
@@ -177,6 +189,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   render() {
     const {
       dropShadow,
+      border,
       highContrast,
       open,
       tabTip,
@@ -191,6 +204,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: this.caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--${this.align}`]: true,
