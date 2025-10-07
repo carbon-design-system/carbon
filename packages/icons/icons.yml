@@ -2587,7 +2587,7 @@
   friendly_name: Image build
   aliases:
     - build
-    - 'image build,'
+    - image build,
     - container image
     - source code
     - cube
@@ -2600,7 +2600,7 @@
   aliases:
     - occurrence of a build
     - build
-    - 'image build,'
+    - image build,
     - container image
     - source code
     - cube
@@ -4655,16 +4655,6 @@
     - variety
   sizes:
     - 32
-- name: comments
-  friendly_name: Comments
-  aliases:
-    - comments
-    - note
-    - explanation
-    - information
-    - annotations
-  sizes:
-    - 32
 - name: choose-item
   friendly_name: Choose item
   aliases:
@@ -5369,6 +5359,16 @@
     - column
     - dependency
     - formatting
+  sizes:
+    - 32
+- name: comments
+  friendly_name: Comments
+  aliases:
+    - comments
+    - note
+    - explanation
+    - information
+    - annotations
   sizes:
     - 32
 - name: commit
@@ -7668,13 +7668,6 @@
     - paper
   sizes:
     - 32
-- name: document-set
-  friendly_name: Document set
-  aliases:
-    - document
-    - unstructured data
-  sizes:
-    - 32
 - name: document--add
   friendly_name: Document add
   sizes:
@@ -7981,6 +7974,13 @@
     - understanding
     - document sentiment
     - document
+  sizes:
+    - 32
+- name: document-set
+  friendly_name: Document set
+  aliases:
+    - document
+    - unstructured data
   sizes:
     - 32
 - name: documentation
@@ -11799,6 +11799,17 @@
     - Cloud Pak for integration
   sizes:
     - 32
+- name: ibm--webmethods-integration
+  friendly_name: IBM® webMethods Integration
+  aliases:
+    - IBM webMethods Integration
+    - Integration
+    - iPaaS
+    - webMethods
+    - Integration
+    - API
+  sizes:
+    - 32
 - name: ibm--webmethods-integration-server
   friendly_name: IBM® webMethods Integration Server
   aliases:
@@ -11811,17 +11822,6 @@
     - Monitoring
     - API
     - Platform
-  sizes:
-    - 32
-- name: ibm--webmethods-integration
-  friendly_name: IBM® webMethods Integration
-  aliases:
-    - IBM webMethods Integration
-    - Integration
-    - iPaaS
-    - webMethods
-    - Integration
-    - API
   sizes:
     - 32
 - name: ibm--webmethods-managed-file-transfer
@@ -12749,7 +12749,7 @@
 - name: ibm-consulting-advantage--assistant
   friendly_name: IBM Consulting Advantage Assistant
   aliases:
-    - 'chat assistant, AI assistant, prompt based assistant'
+    - chat assistant, AI assistant, prompt based assistant
     - AI assistant
     - prompt based assistant
     - assistant
@@ -14114,6 +14114,22 @@
     - cursor
   sizes:
     - 32
+- name: interface--definition
+  friendly_name: Interface definition
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: interface--definition--alt
+  friendly_name: Interface definition alt
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
 - name: interface--usage
   friendly_name: Interactive usage
   aliases:
@@ -14142,22 +14158,6 @@
     - usage
     - sysml
     - port connectors
-  sizes:
-    - 32
-- name: interface--definition--alt
-  friendly_name: Interface definition alt
-  aliases:
-    - interface
-    - definition
-    - diagram
-  sizes:
-    - 32
-- name: interface--definition
-  friendly_name: Interface definition
-  aliases:
-    - interface
-    - definition
-    - diagram
   sizes:
     - 32
 - name: intersect
