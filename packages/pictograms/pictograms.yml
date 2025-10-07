@@ -2320,8 +2320,6 @@
 - name: continuous--delivery
   friendly_name: Continuous delivery
   aliases: []
-  sizes:
-    - glyph
 - name: continuous--integration
   friendly_name: Continuous integration
   aliases:
@@ -4013,11 +4011,6 @@
     - visible
     - interactive
     - dev
-- name: front-end-development
-  friendly_name: front-end-development
-  aliases: []
-  sizes:
-    - glyph
 - name: frost-tower
   friendly_name: Frost tower
   aliases:
@@ -8448,16 +8441,11 @@
     - text
     - watson
     - AI
-- name: speech-and-empathy
-  friendly_name: Speech and empathy
+- name: speech-and-empathy--01
+  friendly_name: speech-and-empathy--01
   aliases:
     - speech
     - empathy
-- name: speech-and-empathy--01
-  friendly_name: speech-and-empathy--01
-  aliases: []
-  sizes:
-    - glyph
 - name: speed-bag
   friendly_name: Speed bag
   aliases:
