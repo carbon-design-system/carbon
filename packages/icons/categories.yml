@@ -930,7 +930,6 @@ categories:
           - scis--transparent-supply
           - virtual-private-cloud--alt
           - vlan--ibm
-          - z-batch-reporter
       - name: Commerce
         members:
           - apple
