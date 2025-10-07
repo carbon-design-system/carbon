@@ -574,7 +574,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             value: allowEmpty ? '' : 0,
             direction: 'down',
           };
-          setValue('');
+          setValue(state.value);
 
           if (onChange) {
             onChange(event, state);
