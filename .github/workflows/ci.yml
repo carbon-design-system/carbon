@@ -230,7 +230,7 @@ jobs:
       - name: Dry run VRT on draft PRs
         if:
           ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft != false && github.base_ref != 'main'
+          github.event.pull_request.draft == true && github.base_ref != 'main'
           }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
@@ -325,7 +325,8 @@ jobs:
   merge-playwright-reports:
     # Merge reports after *-runner jobs, even if some shards have failed
     if:
-      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() }}
+      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
+      github.event.pull_request.draft == false }}
     needs: [vrt-runner, avt-runner]
 
     runs-on: ubuntu-latest
