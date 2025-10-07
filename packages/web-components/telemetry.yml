@@ -536,22 +536,10 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
-<<<<<<< HEAD
-        # feature-flags
-        - enable-dialog-element
-        - enable-experimental-focus-wrap-without-sentinels
-        - enable-focus-wrap-without-sentinels
-        - enable-treeview-controllable
-        - enable-v12-dynamic-floating-styles
-        - enable-v12-overflowmenu
-        - enable-v12-tile-default-icons
-        - enable-v12-tile-radio-icons
-=======
->>>>>>> e1a1babc72adbac7ec62f06ec090a5c47913b55e
       allowedAttributeStringValues:
         # General - boolean attributes
-        - 'true'
-        - 'false'
+        - "true"
+        - "false"
         # General - align
         - bottom
         - bottom-end
@@ -601,13 +589,13 @@ collect:
         - rail
         - responsive
         # General - color-scheme
-        - ''
+        - ""
         - light
         # General - direction
         - bottom
         - top
         # General - kind
-        - ''
+        - ""
         - caution-major
         - caution-minor
         - cautious
@@ -675,7 +663,7 @@ collect:
         - horizontal
         - vertical
         # General - size
-        - ''
+        - ""
         - 2xl
         - 2xs
         - big
@@ -699,7 +687,7 @@ collect:
         - finished
         - inactive
         # General - tooltip-alignment
-        - ''
+        - ""
         - bottom
         - bottom-left
         - bottom-right
@@ -726,7 +714,7 @@ collect:
         - right
         - top
         # General - type
-        - ''
+        - ""
         - blue
         - button
         - contained
