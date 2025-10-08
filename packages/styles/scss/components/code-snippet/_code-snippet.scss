@@ -178,7 +178,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--single pre {
     @include type-style('code-01');
 
-    padding-inline-end: $spacing-03;
+    padding-inline-end: $spacing-07;
   }
 
   // Preserve whitespace, but don't allow wrapping for inline and single
@@ -223,25 +223,16 @@ $copy-btn-feedback: $background-inverse !default;
     word-wrap: break-word;
   }
 
-  // collapsed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    padding-inline-end: $spacing-08;
+    overflow: auto;
+    padding-block-end: $spacing-06;
+    padding-inline-end: $spacing-06;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
     .#{$prefix}--snippet-container
     pre {
     padding-inline-end: 0;
-  }
-
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow::after {
-    position: absolute;
-    background-image: linear-gradient(to right, transparent, $layer);
-    block-size: 100%;
-    content: '';
-    inline-size: convert.to-rem(16px);
-    inset-block-start: 0;
-    inset-inline-end: $spacing-05;
   }
 
   [dir='rtl']
@@ -401,12 +392,6 @@ $copy-btn-feedback: $background-inverse !default;
     background-color: $layer-active;
   }
 
-  .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
-  .#{$prefix}--snippet--light.#{$prefix}--snippet--multi::after {
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($layer, 0), $layer);
-  }
-
   // Skeleton State
   .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
     block-size: 100%;
@@ -441,82 +426,60 @@ $copy-btn-feedback: $background-inverse !default;
     inset-inline: 50% auto;
   }
 
-  // Overflow Indicator
-  .#{$prefix}--snippet__overflow-indicator--left,
-  .#{$prefix}--snippet__overflow-indicator--right {
-    z-index: 1;
-    flex: 1 0 auto;
-    inline-size: $spacing-05;
+  // Using mask-image for single line snippet
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    mask-image: linear-gradient(
+      to right,
+      #000000 calc(100% - #{$spacing-07}),
+      transparent 100%
+    );
+    pointer-events: auto;
   }
 
-  .#{$prefix}--snippet__overflow-indicator--left {
-    order: 0;
-    background-image: linear-gradient(to left, transparent, $layer);
-    margin-inline-end: -$spacing-05;
+  .#{$prefix}--snippet--multi {
+    position: relative;
   }
 
-  .#{$prefix}--snippet__overflow-indicator--right {
-    order: 2;
-    background-image: linear-gradient(to right, transparent, $layer);
-    margin-inline-start: -$spacing-05;
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    inline-size: 100%;
+    mask-composite: intersect;
+    mask-image: linear-gradient(
+        to right,
+        #000000 calc(100% - #{$spacing-07}),
+        transparent 100%
+      ),
+      linear-gradient(
+        to bottom,
+        #000000 calc(100% - #{$spacing-05}),
+        transparent 100%
+      );
+    pointer-events: auto;
   }
 
-  [dir='rtl'] .#{$prefix}--snippet__overflow-indicator--left {
-    background-image: linear-gradient(to right, transparent, $layer);
+  [dir='rtl'] .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    mask-image: linear-gradient(
+      to left,
+      #000000 calc(100% - #{$spacing-07}),
+      transparent 100%
+    );
   }
 
-  [dir='rtl'] .#{$prefix}--snippet__overflow-indicator--right {
-    background-image: linear-gradient(to left, transparent, $layer);
+  [dir='rtl'] .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    mask-image: linear-gradient(
+        to left,
+        #000000 calc(100% - #{$spacing-07}),
+        transparent 100%
+      ),
+      linear-gradient(
+        to bottom,
+        #000000 calc(100% - #{$spacing-05}),
+        transparent 100%
+      );
   }
 
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
-    position: absolute;
-    block-size: calc(100% - #{$spacing-02});
-    inline-size: $spacing-07;
-  }
-
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
-    inset-inline-end: $spacing-08;
-  }
-
-  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy
-    .#{$prefix}--snippet__overflow-indicator--right {
-    inset-inline-end: 0;
-  }
-
-  .#{$prefix}--snippet--single
-    .#{$prefix}--snippet-container:focus
-    ~ .#{$prefix}--snippet__overflow-indicator--right {
-    inset-inline-end: calc(#{$spacing-08} + #{convert.to-rem(2px)});
-  }
-
-  .#{$prefix}--snippet--single
-    .#{$prefix}--snippet-container:focus
-    + .#{$prefix}--snippet__overflow-indicator--left {
-    inset-inline-start: convert.to-rem(2px);
-  }
-
-  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $layer);
-  }
-
-  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $layer);
-  }
-
-  // Safari-only media query
-  // since fades won't appear correctly with CSS custom properties
-  // see: tabs, code snippet, and modal overflow indicators
-  @supports (hanging-punctuation: first) and (font: -apple-system-body) and
-    (-webkit-appearance: none) {
-    .#{$prefix}--snippet__overflow-indicator--left {
-      background-image: linear-gradient(to left, rgba($layer, 0), $layer);
-    }
-
-    .#{$prefix}--snippet__overflow-indicator--right {
-      background-image: linear-gradient(to right, rgba($layer, 0), $layer);
-    }
+  .#{$prefix}--snippet--single:focus-within .#{$prefix}--snippet-container,
+  .#{$prefix}--snippet--multi:focus-within .#{$prefix}--snippet-container {
+    mask-image: none;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--skeleton {
