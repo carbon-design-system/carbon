@@ -66,6 +66,7 @@
     "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --wc --id 8cf8b3b8-a121-47d3-9eec-e4bea0ff23f5 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {
+    "@carbon/icon-helpers": "10.47.0",
     "@carbon/styles": "^1.92.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.10.2",
@@ -76,7 +77,6 @@
     "tslib": "^2.6.3"
   },
   "devDependencies": {
-    "@carbon/icon-helpers": "10.47.0",
     "@carbon/icons": "^11.69.0",
     "@carbon/layout": "^11.43.0",
     "@carbon/motion": "^11.37.0",
