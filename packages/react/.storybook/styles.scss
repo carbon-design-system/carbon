@@ -41,6 +41,14 @@ body {
   filter: none;
 }
 
+.docs-story {
+  background: styles.$background;
+}
+
+.docs-story > *:has(> .docblock-code-toggle) {
+  background-color: styles.$background;
+}
+
 /* stylelint-disable */
 .docblock-argstable-head ~ .docblock-argstable-body table tbody > tr > td {
   border: none !important;
