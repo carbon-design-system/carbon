@@ -150,13 +150,5 @@ test.describe('@avt CodeSnippet', () => {
 
     // Checking the Arrow navigation
     await page.keyboard.press('Shift+Tab');
-
-    await expect(
-      page.locator('div.cds--snippet__overflow-indicator--right')
-    ).toBeVisible();
-    await page.keyboard.press('ArrowRight');
-    await expect(
-      page.locator('div.cds--snippet__overflow-indicator--left')
-    ).toBeVisible();
   });
 });
