@@ -230,7 +230,7 @@ jobs:
       - name: Dry run VRT on draft PRs
         if:
           ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft != false && github.base_ref != 'main'
+          github.event.pull_request.draft == true && github.base_ref != 'main'
           }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
@@ -325,7 +325,8 @@ jobs:
   merge-playwright-reports:
     # Merge reports after *-runner jobs, even if some shards have failed
     if:
-      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() }}
+      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
+      github.event.pull_request.draft == false }}
     needs: [vrt-runner, avt-runner]
 
     runs-on: ubuntu-latest
@@ -427,7 +428,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@20c7e42e1b2f6becd5d188df9acb02f3e2f51519 # v13.2.0
+        uses: chromaui/action@4ffe736a2a8262ea28067ff05a13b635ba31ec05 # v13.3.0
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
