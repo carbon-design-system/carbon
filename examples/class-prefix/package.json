@@ -2,7 +2,7 @@
   "name": "class-prefix",
   "description": "Class prefix example",
   "private": true,
-  "version": "0.89.0",
+  "version": "0.90.0-rc.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.92.0",
+    "@carbon/react": "^1.93.0-rc.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
