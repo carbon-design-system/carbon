@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -146,6 +146,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       'dropShadow',
       'border',
       'tabTip',
+      'highContrast',
     ].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSPopover]: value } = this;
