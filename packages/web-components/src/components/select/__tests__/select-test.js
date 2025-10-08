@@ -58,7 +58,8 @@ describe('cds-select', () => {
       </cds-select>
     `);
     const label = el.shadowRoot.querySelector('label');
-    expect(label).to.be.null;
+    expect(label).to.exist;
+    expect(label.classList.contains('cds--visually-hidden')).to.be.true;
   });
 
   it('should render invalid text when invalid attribute is set', async () => {

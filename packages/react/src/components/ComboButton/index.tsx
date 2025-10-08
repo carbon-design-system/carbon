@@ -79,7 +79,7 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   /**
    * Specify the size of the buttons and menu.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify how the trigger tooltip should be aligned.
@@ -112,7 +112,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     let middlewares: any[] = [];
 
     if (!enableOnlyFloatingStyles) {
@@ -277,7 +277,7 @@ ComboButton.propTypes = {
   /**
    * Specify the size of the buttons and menu.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify how the trigger tooltip should be aligned.

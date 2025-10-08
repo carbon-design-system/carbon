@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
 import {
@@ -29,7 +29,7 @@ figma.connect(
       isFlush: figma.boolean('Flush'),
       rowItems: figma.children(['_Structured list row item']),
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     example: ({ isFlush, headerRowItem, rowItems, isCondensed }) => (
       <StructuredListWrapper isFlush={isFlush} isCondensed={isCondensed}>
         <StructuredListHead>{headerRowItems}</StructuredListHead>
@@ -52,7 +52,7 @@ figma.connect(
       rowItems: figma.children(['_Structured list row item - Selectable']),
     },
     //
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     example: ({ headerRowItem, rowItems, isCondensed }) => (
       <StructuredListWrapper selection isCondensed={isCondensed}>
         <StructuredListHead>{headerRowItems}</StructuredListHead>

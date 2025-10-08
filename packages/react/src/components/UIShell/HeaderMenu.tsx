@@ -47,7 +47,7 @@ export interface HeaderMenuProps {
   /**
    * Provide a custom ref handler for the menu button
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   focusRef?: Ref<any>;
 
   /**
@@ -222,7 +222,7 @@ export const HeaderMenu = frFn((props, ref) => {
    */
   const renderMenuItem = (item: ReactNode, index: number): ReactNode => {
     if (isValidElement(item)) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       return cloneElement(item as ReactElement<any>, {
         ref: handleItemRef(index),
       });
