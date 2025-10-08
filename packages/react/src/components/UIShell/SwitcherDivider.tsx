@@ -12,7 +12,7 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export interface SwitcherDividerProps {
   /**
-   * Optionally provide a custom class to apply to the underlying `<li>` node
+   * Optionally provide a custom class to apply to the underlying `<hr>` node
    */
   className?: string;
 }
@@ -27,15 +27,15 @@ const SwitcherDivider: React.FC<SwitcherDividerProps> = ({
   });
 
   return (
-    <li className={classNames}>
-      <hr {...other} />
+    <li>
+      <hr {...other} className={classNames} />
     </li>
   );
 };
 
 SwitcherDivider.propTypes = {
   /**
-   * Optionally provide a custom class to apply to the underlying `<li>` node
+   * Optionally provide a custom class to apply to the underlying `<hr>` node
    */
   className: PropTypes.string,
 };
