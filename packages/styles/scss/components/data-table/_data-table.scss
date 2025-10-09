@@ -96,6 +96,10 @@
     justify-content: space-between;
   }
 
+  .#{$prefix}--data-table-header.#{$prefix}--data-table-header__with-decorator.#{$prefix}--data-table-header__with-decorator--standalone {
+    justify-content: flex-end;
+  }
+
   .#{$prefix}--data-table-header__title {
     @include type-style('heading-03');
 

@@ -75,27 +75,31 @@ const TableContainer = ({
   return (
     <TableContext.Provider value={value}>
       <Section {...rest} className={tableContainerClasses}>
-        {(title || description) && (
+        {(title || description || decorator) && (
           <div
             className={cx(`${prefix}--data-table-header`, {
               [`${prefix}--data-table-header__with-decorator`]: decorator,
+              [`${prefix}--data-table-header__with-decorator--standalone`]:
+                decorator && (!title || !description),
             })}>
-            <div className={`${prefix}--data-table-header__content`}>
-              {title && (
-                <Heading
-                  className={`${prefix}--data-table-header__title`}
-                  id={titleId}>
-                  {title}
-                </Heading>
-              )}
-              {description && (
-                <p
-                  className={`${prefix}--data-table-header__description`}
-                  id={descriptionId}>
-                  {description}
-                </p>
-              )}
-            </div>
+            {(title || description) && (
+              <div className={`${prefix}--data-table-header__content`}>
+                {title && (
+                  <Heading
+                    className={`${prefix}--data-table-header__title`}
+                    id={titleId}>
+                    {title}
+                  </Heading>
+                )}
+                {description && (
+                  <p
+                    className={`${prefix}--data-table-header__description`}
+                    id={descriptionId}>
+                    {description}
+                  </p>
+                )}
+              </div>
+            )}
             {decorator && (
               <div className={`${prefix}--data-table-header__decorator`}>
                 {decorator}
