@@ -154,9 +154,9 @@ describe('Popover', () => {
       );
     });
 
-    it('should respect backgroundToken prop when set to "background"', () => {
+    it('should respect backgroundToken prop when set to "background" and highContrast is false', () => {
       const { container } = render(
-        <Popover open backgroundToken="background">
+        <Popover open backgroundToken="background" highContrast={false}>
           <button type="button">Settings</button>
           <PopoverContent>test</PopoverContent>
         </Popover>
@@ -169,6 +169,18 @@ describe('Popover', () => {
     it('should not add background token class when backgroundToken is "layer"', () => {
       const { container } = render(
         <Popover open backgroundToken="layer">
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when highContrast is true, even if backgroundToken is "background"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background" highContrast={true}>
           <button type="button">Settings</button>
           <PopoverContent>test</PopoverContent>
         </Popover>
