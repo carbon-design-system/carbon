@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import postcss from 'postcss';
 import parser from 'postcss-selector-parser';
 
 const pseudoElementNames = [
@@ -53,11 +52,10 @@ const rePseudoElements = new RegExp(`::?(${pseudoElementNames.join('|')})`);
  * ```
  */
 
-export default postcss.plugin(
-  'fix-host-pseudo',
-  // eslint-disable-next-line prefer-arrow-callback
-  function postCssPluginFixHostPseudo() {
-    return function fixHostPseudo(css) {
+export default function fixHostPseudo() {
+  return {
+    postcssPlugin: 'fix-host-pseudo',
+    async Once(css) {
       css.walkRules(async (rule) => {
         await parser((selectors) => {
           selectors.walkPseudos((pseudo) => {
@@ -108,6 +106,8 @@ export default postcss.plugin(
           });
         }).process(rule);
       });
-    };
-  }
-);
+    },
+  };
+}
+
+fixHostPseudo.postcss = true;

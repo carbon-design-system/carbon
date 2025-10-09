@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,14 +10,15 @@ import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
-import CaretRight16 from '@carbon/icons/lib/caret--right/16';
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
+import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
+import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
 
@@ -101,8 +102,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   private _updateAttributes() {
     if (this.disabled && !this.hasSubmenu) {
       this.setAttribute('aria-disabled', this.disabled);
+      this.setAttribute('tabindex', '-1');
     } else {
       this.removeAttribute('aria-disabled');
+      this.setAttribute('tabindex', '0');
     }
     if (this.hasSubmenu) {
       this.setAttribute('aria-haspopup', this.hasSubmenu + '');
@@ -115,8 +118,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     } else if (!this.getAttribute('role')) {
       this.setAttribute('role', 'menuitem');
     }
-
-    this.setAttribute('tabindex', '-1');
   }
 
   firstUpdated() {
@@ -134,6 +135,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   updated(_changedProperties: PropertyValues): void {
     if (this.hasSubmenu) {
       this.setAttribute('aria-expanded', this.hasSubmenu + '');
@@ -177,7 +179,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
 
     return html`
       <div class="${prefix}--menu-item__selection-icon">
-        ${this.ariaChecked === 'true' ? Checkmark16() : undefined}
+        ${this.ariaChecked === 'true' ? iconLoader(Checkmark16) : undefined}
       </div>
 
       <div class="${prefix}--menu-item__icon">
@@ -190,7 +192,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       ${this.hasSubmenu
         ? html`
             <div class="${prefix}--menu-item__shortcut">
-              ${isRtl ? CaretLeft16() : CaretRight16()}
+              ${isRtl ? iconLoader(CaretLeft16) : iconLoader(CaretRight16)}
             </div>
             <cds-menu
               className=${menuClassName}

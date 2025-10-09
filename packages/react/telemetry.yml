@@ -8,6 +8,8 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - _autoEnablePresence
+        - _presenceId
         - accept
         - action
         - actionButtonLabel
@@ -26,6 +28,7 @@ collect:
         - autoAlign
         - autoComplete
         - buttonKind
+        - caption
         - checked
         - children
         - className
@@ -146,6 +149,7 @@ collect:
         - name
         - narrow
         - nested
+        - noTrailingSlash
         - onActionButtonClick
         - onAddFiles
         - onBlur
@@ -264,8 +268,6 @@ collect:
         - style
         # AspectRatio
         - ratio
-        # Breadcrumb
-        - noTrailingSlash
         # ButtonSet
         - stacked
         # ChatButton
@@ -327,6 +329,7 @@ collect:
         - focusAfterCloseRef
         - modal
         # DismissibleTag
+        - dismissTooltipAlignment
         - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
@@ -340,7 +343,9 @@ collect:
         - tilePadding
         # FeatureFlags
         - enableDialogElement
+        - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
@@ -450,6 +455,8 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - stepStartValue
+        - validate
         # OrderedList
         - native
         # OverflowMenuItem
@@ -494,6 +501,7 @@ collect:
         - itemsShown
         - loop
         # Popover
+        - alignmentAxisOffset
         - autoAlignBoundary
         - caret
         - isTabTip
@@ -542,6 +550,8 @@ collect:
         - unstable_ariaLabelHandleUpper
         # StructuredListCell
         - noWrap
+        # StructuredListWrapper
+        - selectedInitialRow
         # SwitcherItem
         - handleSwitcherItemFocus
         # Tab
@@ -601,15 +611,12 @@ collect:
         - warning
         - warningText
         # ToastNotification
-        - caption
         - timeout
         # Toggle
         - defaultToggled
         - labelA
         - labelB
         - toggled
-        # Toggletip
-        - alignmentAxisOffset
         # TreeNode
         - defaultIsExpanded
         - depth
@@ -829,6 +836,7 @@ collect:
         - 2xl
         - 2xs
         - big
+        - field
         - lg
         - md
         - mini
@@ -850,17 +858,9 @@ collect:
         - g90
         - white
         # General - tooltipAlignment
-        - bottom
-        - bottom-left
-        - bottom-right
         - center
         - end
-        - left
-        - right
         - start
-        - top
-        - top-left
-        - top-right
         # General - tooltipPosition
         - bottom
         - left
@@ -903,6 +903,19 @@ collect:
         # ContentSwitcher - selectionMode
         - automatic
         - manual
+        # DismissibleTag - dismissTooltipAlignment
+        - bottom
+        - bottom-end
+        - bottom-start
+        - left
+        - left-end
+        - left-start
+        - right
+        - right-end
+        - right-start
+        - top
+        - top-end
+        - top-start
         # FileUploader - filenameStatus
         - complete
         - edit

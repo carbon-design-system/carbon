@@ -57,6 +57,7 @@ class CDSOverflowMenu
    * Handles `click` event on the trigger button.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClickTrigger = async () => {
     this._handleUserInitiatedToggle();
@@ -66,6 +67,7 @@ class CDSOverflowMenu
    * Handles `keydown` event on the trigger button.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydownTrigger = async (event) => {
     if (event.key === ' ' || event.key === 'Enter') {
@@ -157,10 +159,11 @@ class CDSOverflowMenu
             (elem.constructor as typeof CDSOverflowMenuBody).FLOATING_MENU
         );
       }
-      const { _menuBody: menuBody } = this;
+      const { _menuBody: menuBody, size } = this;
       if (menuBody) {
         menuBody.setAttribute('breadcrumb', String(Boolean(this.breadcrumb)));
         menuBody.open = open;
+        menuBody.size = size;
 
         const tooltipContent = this.querySelector(
           '[slot=tooltip-content]'
@@ -176,12 +179,6 @@ class CDSOverflowMenu
     }
 
     if (changedProperties.has('size')) {
-      const { size } = this;
-      const { _menuBody: menuBody } = this;
-      if (menuBody) {
-        menuBody.size = size;
-      }
-
       button?.classList.forEach((item) => {
         if (item.startsWith(`${prefix}--overflow-menu--`)) {
           button?.classList.remove(item);

@@ -25,9 +25,10 @@ import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { PopoverAlignment } from '../Popover';
 
 export interface DismissibleTagBaseProps {
   /**
@@ -44,6 +45,11 @@ export interface DismissibleTagBaseProps {
    * Specify if the `DismissibleTag` is disabled
    */
   disabled?: boolean;
+
+  /**
+   * Specify the tooltip alignment for the dismiss button
+   */
+  dismissTooltipAlignment?: PopoverAlignment;
 
   /**
    * Provide a custom tooltip label for the dismiss button
@@ -103,6 +109,7 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
   DismissibleTagBaseProps
 >;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const DismissibleTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -118,6 +125,7 @@ const DismissibleTag = forwardRef(
       text,
       tagTitle,
       type,
+      dismissTooltipAlignment = 'bottom',
       dismissTooltipLabel = 'Dismiss tag',
       ...other
     }: DismissibleTagProps<T>,
@@ -125,6 +133,7 @@ const DismissibleTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagLabelRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagId = id || `tag-${useId()}`;
     const tagClasses = classNames(`${prefix}--tag--filter`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
@@ -147,7 +156,7 @@ const DismissibleTag = forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
-      : null;
+      : candidate;
 
     const tooltipClasses = classNames(
       `${prefix}--icon-tooltip`,
@@ -187,7 +196,7 @@ const DismissibleTag = forwardRef(
           )}
           <Tooltip
             label={dismissActionLabel}
-            align="bottom"
+            align={dismissTooltipAlignment}
             className={tooltipClasses}
             leaveDelayMs={0}
             closeOnActivation>
@@ -220,6 +229,24 @@ DismissibleTag.propTypes = {
    * Specify if the `DismissibleTag` is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify the tooltip alignment for the dismiss button
+   */
+  dismissTooltipAlignment: PropTypes.oneOf([
+    'top',
+    'bottom',
+    'left',
+    'right',
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
+  ]),
 
   /**
    * Provide a custom tooltip label for the dismiss button

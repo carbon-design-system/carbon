@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, RefObject } from 'react';
+import React, { ForwardedRef, RefObject, type ComponentProps } from 'react';
 import classnames from 'classnames';
 import {
   FilterableMultiSelect,
@@ -21,12 +21,9 @@ interface OnChangeData<ItemType> {
   selectedItems: ItemType[] | null;
 }
 
-interface SharedOptions {
-  locale: string;
-}
-
 export interface FluidMultiSelectProps<ItemType>
-  extends MultiSelectProps<ItemType> {
+  extends MultiSelectProps<ItemType>,
+    Pick<ComponentProps<typeof MultiSelect>, 'translateWithId'> {
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
@@ -146,10 +143,6 @@ export interface FluidMultiSelectProps<ItemType>
    */
   titleText?: React.ReactNode;
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?: (id: string) => string;
-  /**
    * Specify title to show title on hover
    */
   useTitleInItem?: boolean;
@@ -162,6 +155,7 @@ export interface FluidMultiSelectProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
+
 const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   {
     className,
@@ -181,6 +175,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   return (
     <FormContext.Provider value={{ isFluid: true }}>
       {isFilterable ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
         // @ts-ignore
         <FilterableMultiSelect
           ref={ref as RefObject<HTMLDivElement | null>}
@@ -188,6 +183,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
           {...other}
         />
       ) : (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
         // @ts-ignore
         <MultiSelect ref={ref} className={classNames} {...other} />
       )}
@@ -366,7 +362,7 @@ FluidMultiSelect.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

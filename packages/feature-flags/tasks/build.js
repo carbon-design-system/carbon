@@ -20,7 +20,7 @@ const __dirname = path.dirname(__filename);
 
 async function main() {
   const featureFlagsPath = path.resolve(__dirname, '../feature-flags.yml');
-  const { 'feature-flags': featureFlags } = yaml.safeLoad(
+  const { 'feature-flags': featureFlags } = yaml.load(
     await fs.readFile(featureFlagsPath, 'utf8')
   );
 

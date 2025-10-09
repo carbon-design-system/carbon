@@ -89,9 +89,6 @@ interface TooltipBaseProps {
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
-   * If the child already has an `aria-label`, the tooltip will not apply
-   * `aria-labelledby`. If the child has its own `aria-labelledby`, that value
-   * will be kept. Otherwise, the tooltip will use its own ID to label the child.
    * This means that if you have text in the child node, that it will not be
    * announced to the screen reader.
    *
@@ -111,8 +108,10 @@ export type TooltipProps<T extends React.ElementType> =
 
 type TooltipComponent = <T extends React.ElementType = typeof Popover>(
   props: TooltipProps<T>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Tooltip: TooltipComponent = React.forwardRef(
   <T extends React.ElementType = typeof Popover>(
     {
@@ -142,28 +141,13 @@ const Tooltip: TooltipComponent = React.forwardRef(
     const child = React.Children.only(children);
 
     const {
-      'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
     } = child?.props ?? {};
 
     const hasLabel = !!label;
-    const hasAriaLabel =
-      typeof ariaLabel === 'string' ? ariaLabel.trim() !== '' : false;
-
-    // An `aria-label` takes precedence over `aria-describedby`, but when it's
-    // needed and the user doesn't specify one, the fallback `id` is used.
-    const labelledBy = hasAriaLabel
-      ? undefined
-      : hasLabel
-        ? (ariaLabelledBy ?? id)
-        : undefined;
-
-    // If `aria-label` is present, use any provided `aria-describedby`.
-    // If not, fallback to child's `aria-describedby` or the tooltip `id` if needed.
-    const describedBy = hasAriaLabel
-      ? ariaDescribedBy
-      : (ariaDescribedBy ?? (!hasLabel && !ariaLabelledBy ? id : undefined));
+    const labelledBy = ariaLabelledBy ?? (hasLabel ? id : undefined);
+    const describedBy = ariaDescribedBy ?? (!hasLabel ? id : undefined);
 
     const triggerProps = {
       onFocus: () => !focusByMouse && setOpen(true),
@@ -182,6 +166,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
       'aria-describedby': describedBy,
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     function getChildEventHandlers(childProps: any) {
       const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
         prop.startsWith('on')
@@ -296,6 +281,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
     }, [isDragging, onDragStop]);
 
     return (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       <Popover<any>
         as={as}
         ref={ref}

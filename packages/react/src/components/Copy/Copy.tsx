@@ -20,7 +20,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import type {
   DeprecatedPopoverAlignment,
@@ -42,7 +42,8 @@ export interface CopyProps
   align?: CopyAlignment;
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -127,6 +128,7 @@ export default function Copy({
       autoAlign={autoAlign}
       className={classNames}
       label={animation ? feedback : initialLabel}
+      leaveDelayMs={animation ? feedbackTimeout : undefined}
       onClick={composeEventHandlers([onClick, handleClick])}
       onAnimationEnd={composeEventHandlers([
         onAnimationEnd,
@@ -191,7 +193,9 @@ Copy.propTypes = {
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

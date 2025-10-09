@@ -7,7 +7,6 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React from 'react';
 
 import { usePrefix } from '../../internal/usePrefix';
@@ -16,9 +15,9 @@ import {
   ToggletipButton,
   ToggletipContent,
   ToggletipActions,
+  ToggletipBaseProps,
 } from '../Toggletip';
 import { IconButton } from '../IconButton';
-import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { deprecate } from '../../prop-types/deprecate';
@@ -31,18 +30,20 @@ import type {
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const AILabelContent = React.forwardRef(function AILabelContent(
-  { className, children, ...rest }: AILabelContentProps,
-  ref
+  { className, children }: AILabelContentProps,
+  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 ) {
   const prefix = usePrefix();
 
   const hasAILabelActions = React.Children.toArray(children).some((child) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const item = child as any;
     // TODO: Is there supposed to be a `return` here? If so, this issue would
     // have been caught by ESLint. It's concerning that this code is 7 months
     // old and no one has noticed any issues with it. It also makes me question
     // whether the code is necessary.
     // https://github.com/carbon-design-system/carbon/issues/18991
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     item.type === AILabelActions;
   });
 
@@ -74,8 +75,8 @@ AILabelContent.propTypes = {
 export type AILabelActionsProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const AILabelActions = React.forwardRef(function AILabelActions(
-  { className, children, ...rest }: AILabelActionsProps,
-  ref
+  { className, children }: AILabelActionsProps,
+  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 ) {
   const prefix = usePrefix();
 
@@ -113,15 +114,11 @@ export type NewAlignment = NewPopoverAlignment;
 
 export type Alignment = PopoverAlignment;
 
-export interface AILabelProps {
+export interface AILabelProps extends ToggletipBaseProps {
   AILabelContent?: React.ReactNode;
   aiText?: string;
   aiTextLabel?: string;
   textLabel?: string;
-  align?: Alignment;
-  autoAlign?: boolean;
-  children?: React.ReactNode;
-  className?: string;
   kind?: 'default' | 'inline';
   onRevertClick?: (evt: React.MouseEvent<HTMLButtonElement>) => void;
   revertActive?: boolean;
@@ -218,6 +215,8 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
 
 AILabel.displayName = 'AILabel';
 AILabel.propTypes = {
+  ...Toggletip.propTypes,
+
   /**
    * Specify the content you want rendered inside the `AILabel` ToggleTip
    */
@@ -238,72 +237,9 @@ AILabel.propTypes = {
   ),
 
   /**
-   * Specify how the popover should align with the button
-   */
-  align: deprecateValuesWithin(
-    PropTypes.oneOf([
-      'top',
-      'top-left', // deprecated use top-start instead
-      'top-right', // deprecated use top-end instead
-
-      'bottom',
-      'bottom-left', // deprecated use bottom-start instead
-      'bottom-right', // deprecated use bottom-end instead
-
-      'left',
-      'left-bottom', // deprecated use left-end instead
-      'left-top', // deprecated use left-start instead
-
-      'right',
-      'right-bottom', // deprecated use right-end instead
-      'right-top', // deprecated use right-start instead
-
-      // new values to match floating-ui
-      'top-start',
-      'top-end',
-      'bottom-start',
-      'bottom-end',
-      'left-end',
-      'left-start',
-      'right-end',
-      'right-start',
-    ]),
-    [
-      'top',
-      'top-start',
-      'top-end',
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-      'left',
-      'left-start',
-      'left-end',
-      'right',
-      'right-start',
-      'right-end',
-    ],
-    mapPopoverAlign
-  ),
-
-  /**
    * Specify the text that will be provided to the aria-label of the `AILabel` button
    */
   'aria-label': PropTypes.string,
-
-  /**
-   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
-   */
-  autoAlign: PropTypes.bool,
-
-  /**
-   * Specify the content you want rendered inside the `AILabel` ToggleTip
-   */
-  children: PropTypes.node,
-
-  /**
-   * Specify an optional className to be added to the `AILabel`
-   */
-  className: PropTypes.string,
 
   /**
    * Specify the type of `AILabel`, from the following list of types:

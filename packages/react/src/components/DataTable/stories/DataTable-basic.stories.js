@@ -41,46 +41,31 @@ export default {
 };
 
 const sharedArgTypes = {
-  filterRows: {
-    table: {
-      disable: true,
-    },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of table',
   },
-  headers: {
-    table: {
-      disable: true,
-    },
+  stickyHeader: {
+    control: 'boolean',
+    description:
+      'Specify whether the header should be sticky. Still in preview: may not work with every combination of table props',
   },
-  isSortable: {
-    table: {
-      disable: true,
-    },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'If true, will use a width of "auto" instead of 100%',
   },
-  overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to rows',
   },
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
-  rows: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  sortRow: {
-    table: {
-      disable: true,
-    },
-  },
+};
+
+const sharedArgs = {
+  size: 'lg',
+  stickyHeader: false,
+  useStaticWidth: false,
+  useZebraStyles: false,
 };
 
 export const Default = (args) => {
@@ -170,9 +155,8 @@ export const Default = (args) => {
   );
 };
 
-Default.argTypes = {
-  ...sharedArgTypes,
-};
+Default.args = sharedArgs;
+Default.argTypes = sharedArgTypes;
 
 export const XLWithTwoLines = (args) => {
   const rows = [
@@ -271,7 +255,7 @@ export const XLWithTwoLines = (args) => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table size="xl" useZebraStyles={false} aria-label="sample table" {...args}>
+    <Table {...args} aria-label="sample table">
       <TableHead>
         <TableRow>
           {headers.map((header) => (
@@ -296,6 +280,8 @@ export const XLWithTwoLines = (args) => {
   );
 };
 
-XLWithTwoLines.argTypes = {
-  ...sharedArgTypes,
+XLWithTwoLines.args = {
+  ...sharedArgs,
+  size: 'xl',
 };
+XLWithTwoLines.argTypes = sharedArgTypes;

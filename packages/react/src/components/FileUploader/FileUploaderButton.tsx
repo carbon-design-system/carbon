@@ -115,13 +115,14 @@ function FileUploaderButton({
   onChange = noopFn,
   name,
   size = 'md',
-  // eslint-disable-next-line react/prop-types
+
   innerRef,
   ...other
 }: FileUploaderButtonProps) {
   const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
+  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const { current: inputId } = useRef(id || useId());
   const inputNode = useRef<HTMLInputElement>(null);
   const classes = cx(`${prefix}--btn`, className, {
@@ -148,9 +149,12 @@ function FileUploaderButton({
   }
 
   function onKeyDown(event) {
-    if (matches(event, [keys.Enter, keys.Space]) && inputNode.current) {
-      inputNode.current.value = '';
-      inputNode.current.click();
+    if (matches(event, [keys.Enter, keys.Space])) {
+      event.preventDefault();
+      if (inputNode.current) {
+        inputNode.current.value = '';
+        inputNode.current.click();
+      }
     }
   }
 

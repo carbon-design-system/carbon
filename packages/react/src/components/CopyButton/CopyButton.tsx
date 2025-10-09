@@ -14,7 +14,7 @@ import Copy from '../Copy';
 import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import type {
   DeprecatedPopoverAlignment,
@@ -35,7 +35,8 @@ export interface CopyButtonProps extends ButtonProps<'button'> {
   align?: CopyButtonAlignment;
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
 
@@ -145,7 +146,9 @@ CopyButton.propTypes = {
   ),
 
   /**
-   * **Experimental**: Will attempt to automatically align the tooltip
+   * **Experimental**: Will attempt to automatically align the tooltip. Requires
+   * React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
 

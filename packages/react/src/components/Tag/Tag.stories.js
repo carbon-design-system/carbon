@@ -15,6 +15,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import '../AILabel/ailabel-story.scss';
 import mdx from './Tag.mdx';
+import './story.scss';
 
 export default {
   title: 'Components/Tag',
@@ -125,58 +126,13 @@ Skeleton.args = {
   size: 'md',
 };
 
-Skeleton.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
+Skeleton.parameters = {
+  controls: {
+    exclude: ['disabled', 'filter', 'id', 'renderIcon', 'title', 'type'],
   },
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  disabled: {
-    table: {
-      disable: true,
-    },
-  },
+};
 
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
-    },
-  },
-  renderIcon: {
-    table: {
-      disable: true,
-    },
-  },
-  title: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
-  },
+Skeleton.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: {

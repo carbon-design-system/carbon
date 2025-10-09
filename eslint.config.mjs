@@ -3,6 +3,11 @@
 import eslint from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import testingLibrary from 'eslint-plugin-testing-library';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 // TODO: There is an `eslintConfig` reference in `package.json`. Investigate
 // whether it should be moved to this file or deleted.
@@ -24,7 +29,7 @@ export default tseslint.config([
       // which implies that they were set previously.
       'no-console': 'error',
       'no-template-curly-in-string': 'error',
-      'prefer-arrow-callback': 'error',
+      'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
       'require-atomic-updates': 'error',
     },
   },
@@ -46,6 +51,45 @@ export default tseslint.config([
     },
   },
   {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    plugins: {
+      'jsx-a11y': jsxA11y,
+      react: react,
+      'react-hooks': reactHooks,
+      jsdoc: jsdoc,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    rules: {
+      ...jsxA11y.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      // ...jsdoc.configs['flat/recommended'].rules, // Too noisy at the moment. Uncomment it to enable it.
+    },
+  },
+  {
+    files: [
+      '**/__tests__/**/*.{js,jsx,ts,tsx}',
+      '**/*.{test,spec}.{js,jsx,ts,tsx}',
+    ],
+    plugins: {
+      'testing-library': testingLibrary,
+    },
+    rules: {
+      ...testingLibrary.configs.react.rules,
+    },
+  },
+  {
     // TODO: Should we ignore all files in the .gitignore? If so, handle the
     // nested .gitignore files too.
     ignores: [
@@ -56,6 +100,7 @@ export default tseslint.config([
       '**/lib/',
       '**/dist/',
       '**/umd/',
+      '**/types/',
 
       'node_modules',
       'packages/*/examples/*',
@@ -135,13 +180,6 @@ export default tseslint.config([
       'www/src/pages/insights/index.js',
       'www/src/pages/packages/\\[package\\]/index.js',
       'www/src/pages/packages/index.js',
-
-      // TODO:
-      // 1. Delete this ignore.
-      // 2. Delete `--no-warn-ignored` from the `lint` script in `package.json`.
-      //
-      // https://github.com/carbon-design-system/carbon/issues/18991
-      '**/*.{ts,tsx}',
     ],
   },
 ]);

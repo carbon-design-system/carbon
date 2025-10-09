@@ -36,13 +36,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const Default = (args) => {
@@ -86,12 +79,12 @@ Default.args = {
   isFlush: false,
 };
 
-Default.argTypes = {
-  selection: {
-    control: {
-      disable: true,
-    },
+Default.parameters = {
+  controls: {
+    exclude: ['selection'],
   },
+};
+Default.argTypes = {
   isCondensed: {
     control: {
       type: 'boolean',
@@ -105,7 +98,7 @@ Default.argTypes = {
 };
 const structuredListBodyRowGenerator = (numRows) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
-    <StructuredListRow key={`row-${i}`}>
+    <StructuredListRow key={`row-${i}`} id={`row-${i}`}>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>
@@ -149,18 +142,32 @@ export const Selection = (args) => {
   );
 };
 
-Selection.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    control: {
-      disable: true,
-    },
+export const InitialSelection = (args) => {
+  return (
+    <StructuredListWrapper selection {...args} selectedInitialRow="row-2">
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        {structuredListBodyRowGenerator(4)}
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
+
+const sharedParameters = {
+  controls: {
+    exclude: ['isFlush', 'selection'],
   },
 };
+
+Selection.parameters = { ...sharedParameters };
+
+InitialSelection.parameters = { ...sharedParameters };
 
 export const WithBackgroundLayer = () => {
   return (
@@ -181,18 +188,7 @@ export const WithBackgroundLayer = () => {
   );
 };
 
-WithBackgroundLayer.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    control: {
-      disable: true,
-    },
-  },
-};
+WithBackgroundLayer.parameters = { ...sharedParameters };
 
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
@@ -204,37 +200,13 @@ Skeleton.args = {
   rowCount: 5,
 };
 
+Skeleton.parameters = {
+  controls: {
+    include: ['rowCount', 'selectedInitialRow'],
+  },
+};
+
 Skeleton.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  isCondensed: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    table: {
-      disable: true,
-    },
-  },
   rowCount: {
     control: {
       type: 'number',

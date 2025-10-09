@@ -5,11 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../../ListBox/test-helpers';
+import RadioButton from '../../RadioButton';
+import RadioButtonGroup from '../../RadioButtonGroup';
+import { default as Checkbox } from '../../Checkbox';
 
 const prefix = 'cds';
 
@@ -268,45 +271,87 @@ describe('Popover', () => {
       expect(onRequestClose).toHaveBeenCalled();
     });
 
-    it('should add multi-line class to popover content when text is long', async () => {
-      const { container } = await render(
-        <Popover open>
-          <button type="button">Settings</button>
-          <PopoverContent>
-            This is a very long text that should trigger the multi-line. Adding
-            more text to make it even longer.
-          </PopoverContent>
-        </Popover>
-      );
-      waitFor(() =>
-        expect(container.firstChild.lastChild.firstChild).toHaveClass(
-          `${prefix}--popover-content--multi-line`
-        )
-      );
-    });
-    it('should not add multi-line class to popover content when text is short', () => {
-      const { container } = render(
-        <Popover open>
-          <button type="button">Settings</button>
-          <PopoverContent className="test">Short text</PopoverContent>
-        </Popover>
-      );
-      expect(container.firstChild.lastChild.firstChild).not.toHaveClass(
-        `${prefix}--popover-content--multi-line`
-      );
-    });
-
     it('should call onRequestClose when tabbing out of popover via keyboard', async () => {
       const onRequestClose = jest.fn();
       render(
         <Popover open onRequestClose={() => onRequestClose()}>
           <button type="button">Settings</button>
-          <PopoverContent>test</PopoverContent>
+          <PopoverContent>
+            <button data-testid="inside-button">Inside Button</button>
+            <input data-testid="inside-input" placeholder="Inside Input" />
+          </PopoverContent>
         </Popover>
       );
+
+      // Focus on the first focusable element inside the popover
+      screen.getByTestId('inside-button').focus();
+
+      // Tab to the next focusable element
       await userEvent.tab();
+
+      // Tab out of the popover (should trigger onRequestClose)
       await userEvent.tab();
+
       expect(onRequestClose).toHaveBeenCalled();
     });
+  });
+
+  it('should NOT call onRequestClose when clicking inside the popover content', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open onRequestClose={onRequestClose}>
+        <button type="button">Settings</button>
+        <PopoverContent data-testid="popover-content">
+          <button data-testid="inside-button">Inside Button</button>
+          <input data-testid="inside-input" placeholder="Inside Input" />
+        </PopoverContent>
+      </Popover>
+    );
+
+    // Click on button inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-button'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    // Click on input inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+  it('should not close TabTip when interacting with form elements inside', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open isTabTip onRequestClose={onRequestClose}>
+        <button type="button">Settings</button>
+        <PopoverContent>
+          <RadioButtonGroup legendText="Test options">
+            <RadioButton
+              labelText="Option 1"
+              value="option1"
+              id="tabtip-radio-1"
+              data-testid="tabtip-radio-1"
+            />
+            <RadioButton
+              labelText="Option 2"
+              value="option2"
+              id="tabtip-radio-2"
+              data-testid="tabtip-radio-2"
+            />
+          </RadioButtonGroup>
+          <Checkbox
+            labelText="Test checkbox"
+            id="tabtip-checkbox"
+            data-testid="tabtip-checkbox"
+          />
+        </PopoverContent>
+      </Popover>
+    );
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-1'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-2'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-checkbox'));
+    expect(onRequestClose).not.toHaveBeenCalled();
   });
 });

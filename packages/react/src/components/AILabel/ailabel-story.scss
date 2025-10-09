@@ -188,7 +188,7 @@
   height: 200px;
 }
 
-.ai-label-experimental-radio-tile-container {
+.ai-label-preview-radio-tile-container {
   @include tile.tile(
     $enable-experimental-tile-contrast: true,
     $enable-v12-tile-radio-icons: true
