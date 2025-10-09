@@ -92,6 +92,12 @@
     line-height: convert.to-rem(40px);
 
     min-inline-size: auto;
+
+    // Firefox-specific fix for three-digit numbers
+    @-moz-document url-prefix() {
+      text-overflow: clip;
+      padding-inline-end: $spacing-05;
+    }
   }
 
   // Extra specificity is needed to preserve padding
