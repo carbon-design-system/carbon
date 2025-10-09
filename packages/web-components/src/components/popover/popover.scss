@@ -51,6 +51,26 @@ $popover-border-color: custom-property.get-var(
   }
 }
 
+:host(
+    #{$prefix}-popover-content[backgroundToken='background']:not([highContrast])
+  ) {
+  .#{$prefix}--popover-content {
+    background: theme.$background;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[open][caret][backgroundToken='background']:not(
+        [highContrast]
+      )
+  ) {
+  .#{$prefix}--popover-caret {
+    &::after {
+      background: theme.$background;
+    }
+  }
+}
+
 :host(#{$prefix}-popover[tabTip][open]) {
   ::slotted(.#{$prefix}--popover--tab-tip__button) {
     background: theme.$layer !important; /* stylelint-disable-line declaration-no-important */

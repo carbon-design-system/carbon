@@ -67,6 +67,12 @@ class CDSPopoverContent extends LitElement {
   tabTip = false;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ reflect: true, type: String })
+  backgroundToken = 'layer';
+
+  /**
    * The shadow slot this popover content should be in.
    */
   @property({ reflect: true })

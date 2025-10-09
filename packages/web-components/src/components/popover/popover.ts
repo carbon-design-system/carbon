@@ -89,6 +89,12 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   tabTip = false;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ reflect: true, type: String })
+  backgroundToken = 'layer';
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
@@ -147,6 +153,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       'border',
       'tabTip',
       'highContrast',
+      'backgroundToken',
     ].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSPopover]: value } = this;
@@ -210,6 +217,8 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--${this.align}`]: true,
       [`${prefix}--popover--tab-tip`]: tabTip,
+      [`${prefix}--popover--background-token__background`]:
+        this.backgroundToken === 'background' && !highContrast,
     });
     return html`
       <span class="${classes}" part="popover-container">
