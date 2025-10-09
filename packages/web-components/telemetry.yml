@@ -139,6 +139,7 @@ collect:
         - oncds-table-row-expando-toggled
         - oncds-tag-beingclosed
         - oncds-tag-closed
+        - onchange
         - onClick
         - oninput
         - oninvalid
@@ -391,8 +392,13 @@ collect:
         - hide-password-label
         - show-password-label
         # cds-progress-indicator
+        - current-index
+        - ononChange
         - space-equally
         # cds-progress-step
+        - clickable
+        - complete
+        - current
         - icon-label
         - secondary-label
         - secondary-label-text
@@ -514,7 +520,6 @@ collect:
         - selectableTiles
         # cds-time-picker
         - max-length
-        - onchange
         - warning
         - warning-text
         # cds-toggle
@@ -522,6 +527,7 @@ collect:
         - label-a
         - label-b
         - oncds-toggle-changed
+        - toggled
         # cds-tooltip
         - closeOnActivation
         - keyboard-only
@@ -530,14 +536,6 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
-        # feature-flags
-        - enable-dialog-element
-        - enable-experimental-focus-wrap-without-sentinels
-        - enable-treeview-controllable
-        - enable-v12-dynamic-floating-styles
-        - enable-v12-overflowmenu
-        - enable-v12-tile-default-icons
-        - enable-v12-tile-radio-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
