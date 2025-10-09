@@ -80,7 +80,7 @@ const TableContainer = ({
             className={cx(`${prefix}--data-table-header`, {
               [`${prefix}--data-table-header__with-decorator`]: decorator,
               [`${prefix}--data-table-header__with-decorator--standalone`]:
-                decorator && (!title || !description),
+                decorator && !title && !description,
             })}>
             {(title || description) && (
               <div className={`${prefix}--data-table-header__content`}>
