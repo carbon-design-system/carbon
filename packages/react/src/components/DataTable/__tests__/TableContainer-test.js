@@ -50,17 +50,15 @@ describe('TableContainer', () => {
 
   it('should render a decorator in the table container', () => {
     const { container } = render(
-      <TableContainer aiEnabled decorator={<AILabel />}>
+      <TableContainer aiEnabled decorator={<AILabel />} title="Test title">
         <div data-testid="child-content">Child content</div>
       </TableContainer>
     );
 
-    const aiEnabledContainer = container.querySelector(
-      '[class*="--data-table-container--ai-enabled"]'
+    const decoratorWrapper = container.querySelector(
+      '[class*="--data-table-header__decorator"]'
     );
-    expect(aiEnabledContainer.firstChild).toHaveClass(
-      `${prefix}--data-table-header__with-decorator`
-    );
+    expect(decoratorWrapper).toBeInTheDocument();
   });
 
   describe('Header', () => {
@@ -112,7 +110,9 @@ describe('TableContainer', () => {
         </TableContainer>
       );
 
-      const headerEl = container.querySelector('[class*="data-table-header"]');
+      const headerEl = container.querySelector(
+        '[class*="data-table-header__content"]'
+      );
       const titleEl = headerEl.querySelector('h2');
       const descriptionEl = headerEl.querySelector('p');
 
