@@ -10,6 +10,8 @@ import React from 'react';
 import { TableContainer } from '../';
 import { AILabel } from '../../AILabel';
 
+const prefix = 'cds';
+
 describe('TableContainer', () => {
   it('should set the max-width class if stickyHeader is true', () => {
     const { container } = render(<TableContainer stickyHeader />);
