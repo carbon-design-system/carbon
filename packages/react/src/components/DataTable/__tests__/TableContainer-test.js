@@ -8,6 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { TableContainer } from '../';
+import { AILabel } from '../../AILabel';
 
 describe('TableContainer', () => {
   it('should set the max-width class if stickyHeader is true', () => {
@@ -43,6 +44,21 @@ describe('TableContainer', () => {
       '[class*="--data-table-container--ai-enabled"]'
     );
     expect(aiEnabledContainer).toBeInTheDocument();
+  });
+
+  it('should render a decorator in the table container', () => {
+    const { container } = render(
+      <TableContainer aiEnabled decorator={<AILabel />}>
+        <div data-testid="child-content">Child content</div>
+      </TableContainer>
+    );
+
+    const aiEnabledContainer = container.querySelector(
+      '[class*="--data-table-container--ai-enabled"]'
+    );
+    expect(aiEnabledContainer.firstChild).toHaveClass(
+      `${prefix}--data-table-header__with-decorator`
+    );
   });
 
   describe('Header', () => {

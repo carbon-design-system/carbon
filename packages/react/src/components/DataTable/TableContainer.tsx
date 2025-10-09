@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useMemo, type HTMLAttributes } from 'react';
+import React, { ReactNode, useMemo, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { TableContext } from './TableContext';
@@ -19,6 +19,10 @@ export interface TableContainerProps
    * Specify if the entire table has AI generated contents
    */
   aiEnabled?: boolean;
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TableContainer` component
+   */
+  decorator?: ReactNode;
   /**
    * Optional description text for the Table
    */
@@ -41,6 +45,7 @@ const TableContainer = ({
   aiEnabled,
   className,
   children,
+  decorator,
   title,
   description,
   stickyHeader,
@@ -71,20 +76,30 @@ const TableContainer = ({
     <TableContext.Provider value={value}>
       <Section {...rest} className={tableContainerClasses}>
         {(title || description) && (
-          <div className={`${prefix}--data-table-header`}>
-            {title && (
-              <Heading
-                className={`${prefix}--data-table-header__title`}
-                id={titleId}>
-                {title}
-              </Heading>
-            )}
-            {description && (
-              <p
-                className={`${prefix}--data-table-header__description`}
-                id={descriptionId}>
-                {description}
-              </p>
+          <div
+            className={cx(`${prefix}--data-table-header`, {
+              [`${prefix}--data-table-header__with-decorator`]: decorator,
+            })}>
+            <div className={`${prefix}--data-table-header__content`}>
+              {title && (
+                <Heading
+                  className={`${prefix}--data-table-header__title`}
+                  id={titleId}>
+                  {title}
+                </Heading>
+              )}
+              {description && (
+                <p
+                  className={`${prefix}--data-table-header__description`}
+                  id={descriptionId}>
+                  {description}
+                </p>
+              )}
+            </div>
+            {decorator && (
+              <div className={`${prefix}--data-table-header__decorator`}>
+                {decorator}
+              </div>
             )}
           </div>
         )}
