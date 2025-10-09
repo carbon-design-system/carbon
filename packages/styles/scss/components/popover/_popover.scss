@@ -172,6 +172,11 @@ $popover-caret-height: custom-property.get-var(
     display: block;
   }
 
+  .#{$prefix}--popover--background-token__background
+    .#{$prefix}--popover-content {
+    background-color: theme.$background;
+  }
+
   // We use a pseudo element inside of the popover to create a space between the
   // target and the popover. This helps in situations like toolcarets where you do
   // not want the toolcaret to disappear when the user moves from the target to
@@ -215,6 +220,11 @@ $popover-caret-height: custom-property.get-var(
       background-color: $popover-border-color;
       content: '';
     }
+  }
+
+  .#{$prefix}--popover--background-token__background
+    .#{$prefix}--popover-caret::after {
+    background-color: theme.$background;
   }
 
   .#{$prefix}--popover--border .#{$prefix}--popover-caret::before,

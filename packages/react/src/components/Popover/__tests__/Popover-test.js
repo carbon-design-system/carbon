@@ -154,6 +154,30 @@ describe('Popover', () => {
       );
     });
 
+    it('should respect backgroundToken prop when set to "background"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background">
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when backgroundToken is "layer"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="layer">
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
     it('should not allow other alignments than bottom-start or bottom-end when isTabTip is present', () => {
       const { container } = render(
         <Popover open isTabTip align="top-start">

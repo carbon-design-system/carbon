@@ -84,6 +84,11 @@ export interface PopoverBaseProps {
   alignmentAxisOffset?: number;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
    * Will auto-align the popover on first render if it is not visible. This prop
    * is currently experimental and is subject to future changes. Requires
    * React v17+
@@ -164,6 +169,7 @@ export const Popover: PopoverComponent & {
     as: BaseComponent = 'span' as E,
     autoAlign = false,
     autoAlignBoundary,
+    backgroundToken = 'layer',
     caret = isTabTip ? false : true,
     className: customClassName,
     children,
@@ -423,6 +429,8 @@ export const Popover: PopoverComponent & {
         enableFloatingStyles,
       [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
+      [`${prefix}--popover--background-token__background`]:
+        backgroundToken === 'background' && !highContrast,
     },
     customClassName
   );
@@ -584,6 +592,11 @@ Popover.propTypes = {
    * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
 
   /**
    * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
