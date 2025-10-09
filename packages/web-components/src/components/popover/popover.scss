@@ -111,7 +111,7 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-popover-content[open][caret][highContrast]) {
   .#{$prefix}--popover-caret {
     &::after {
-      background: theme.$background-inverse !important;
+      background: theme.$background-inverse;
     }
   }
 }
@@ -336,6 +336,10 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-caret {
     inset-inline-end: initial;
     inset-inline-start: 100%;
+
+    &::after {
+      inset-inline-start: 1px;
+    }
   }
 }
 
@@ -452,6 +456,10 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-caret {
     inset-inline-end: 100%;
     inset-inline-start: initial;
+
+    &::after {
+      inset-inline-start: -1px;
+    }
   }
 }
 
