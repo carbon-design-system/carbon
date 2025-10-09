@@ -117,6 +117,10 @@ TableContainer.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TableContainer` component
+   */
+  decorator: PropTypes.node,
+  /**
    * Optional description text for the Table
    */
   description: PropTypes.node,
