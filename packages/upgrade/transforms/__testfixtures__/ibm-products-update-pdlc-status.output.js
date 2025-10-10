@@ -1,5 +1,2 @@
-import {
-  Tearsheet,
-  previewCandidate__SearchBar as SearchBar,
-  previewCandidate__InlineTip as InlineTip,
-} from '@carbon/ibm-products';
+// eslint-disable-next-line no-unused-vars
+import { Tearsheet, previewCandidate__InlineTip as InlineTip, previewCandidate__SearchBar as SearchBar } from '@carbon/ibm-products';
