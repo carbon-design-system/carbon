@@ -345,6 +345,7 @@ collect:
         - enableDialogElement
         - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enableFocusWrapWithoutSentinels
         - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
