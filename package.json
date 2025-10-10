@@ -40,7 +40,7 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "brace-expansion": "^2.0.2",
     "@octokit/rest": "^22.0.0",
-    "eslint": "9.36.0",
+    "eslint": "9.37.0",
     "typescript-eslint": "8.45.0"
   },
   "devDependencies": {
