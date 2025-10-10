@@ -1184,4 +1184,43 @@ describe.each([
     await userEvent.keyboard('{Escape}');
     expect(onRequestClose).toHaveBeenCalled();
   });
+
+  it('should allow inner element to handle ESC key before closing the modal', async () => {
+    const onRequestClose = jest.fn();
+    const innerKeyEvents = [];
+    render(
+      <div>
+        <div
+          data-testid="outside-area"
+          style={{ width: '100px', height: '100px' }}>
+          Outside area
+        </div>
+        <Component
+          open
+          primaryButtonText="Primary button"
+          secondaryButtonText="Secondary button"
+          onRequestClose={onRequestClose}>
+          <input
+            data-modal-primary-focus
+            id="input-1"
+            data-testid="inner-area"
+            onKeyDown={(e) => {
+              innerKeyEvents.push(e.key);
+              if (e.key == 'Escape') {
+                e.stopPropagation();
+              }
+            }}
+          />
+        </Component>
+      </div>
+    );
+
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+    expect(screen.getByTestId('inner-area')).toHaveFocus();
+    await userEvent.keyboard('Hi');
+    expect(innerKeyEvents).toEqual(['H', 'i']);
+    await userEvent.keyboard('{Escape}');
+    expect(innerKeyEvents).toEqual(['H', 'i', 'Escape']);
+    expect(onRequestClose).toHaveBeenCalledTimes(0);
+  });
 });
