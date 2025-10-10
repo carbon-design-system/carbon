@@ -372,6 +372,9 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="http://www.didoo.net/"><img src="https://avatars.githubusercontent.com/u/686239?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cristiano Rastelli</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=didoo" title="Code">💻</a> <a href="#example-didoo" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/olihf-dematic"><img src="https://avatars.githubusercontent.com/u/225178617?v=4?s=100" width="100px;" alt=""/><br /><sub><b>olihf-dematic</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=olihf-dematic" title="Code">💻</a> <a href="#a11y-olihf-dematic" title="Accessibility">️️️️♿️</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/vidhyarbiji"><img src="https://avatars.githubusercontent.com/u/11348409?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vidhya Ravikumar</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=vidhyarbiji" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
