@@ -94,9 +94,10 @@
     min-inline-size: auto;
 
     // Firefox-specific fix for three-digit numbers
+    // stylelint-disable-next-line at-rule-no-vendor-prefix
     @-moz-document url-prefix() {
-      text-overflow: clip;
       padding-inline-end: $spacing-05;
+      text-overflow: clip;
     }
   }
 
