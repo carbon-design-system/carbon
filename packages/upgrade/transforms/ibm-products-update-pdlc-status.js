@@ -30,54 +30,63 @@ function transformer(file, api) {
       },
     })
     .forEach((path) => {
-      const uniqueSpecifiers = new Set();
+      const seen = new Set();
       const newSpecifiers = [];
+
       path.node.specifiers.forEach((specifier) => {
         if (specifier.type === 'ImportSpecifier') {
-          nonStableComponentKeys.forEach((c) => {
-            const importedName = specifier.imported.name;
-            const localName = specifier.local
-              ? specifier.local.name
-              : importedName;
-            let transformedImportedName = importedName;
-            if (importedName === c) {
-              transformedImportedName = productsPreviewMap[c];
-              specifier.imported.name = transformedImportedName;
-              // Build new import specifier so that
-              // products components changing exports
-              // are aliased to their original name.
-              // This will help to avoid additional changes
-              // within jsx.
+          const importedName = specifier.imported.name;
+          const localName = specifier.local
+            ? specifier.local.name
+            : importedName;
+
+          const isAlreadyUpdated = nonStableComponentKeys.some(
+            (key) => importedName === productsPreviewMap[key]
+          );
+
+          const needsUpdate = nonStableComponentKeys.includes(importedName);
+
+          if (isAlreadyUpdated) {
+            // Already has prefix, ensure it has an alias to the base component name
+            // Find the base component name by looking up which key maps to this prefixed name
+            const baseComponentName = nonStableComponentKeys.find(
+              (key) => productsPreviewMap[key] === importedName
+            );
+
+            if (baseComponentName && !seen.has(importedName)) {
+              seen.add(importedName);
               const importSpecifier = j.importSpecifier(
-                j.identifier(transformedImportedName),
-                // Use the already specified alias if there is one
+                j.identifier(importedName),
                 j.identifier(localName)
               );
-              j(path).replaceWith(
-                j.importDeclaration(
-                  [...path.node.specifiers, importSpecifier],
-                  path.node.source
-                )
-              );
-
-              if (specifier.type === 'ImportSpecifier') {
-                if (!uniqueSpecifiers.has(importedName)) {
-                  uniqueSpecifiers.add(importedName);
-                  newSpecifiers.push(importSpecifier);
-                }
-              } else {
-                newSpecifiers.push(specifier);
-              }
+              newSpecifiers.push(importSpecifier);
+            } else if (!seen.has(importedName)) {
+              seen.add(importedName);
+              newSpecifiers.push(specifier);
             }
-          });
-          // Replace the original specifiers with the new aliased ones
-          // to prevent further changes needed in jsx for products components
-          const others = path.node.specifiers.filter(
-            (c) => !Object.values(productsPreviewMap).includes(c.imported.name)
-          );
-          path.node.specifiers = [...others, ...newSpecifiers];
+          } else if (needsUpdate) {
+            const transformedImportedName = productsPreviewMap[importedName];
+
+            if (!seen.has(transformedImportedName)) {
+              seen.add(transformedImportedName);
+              const importSpecifier = j.importSpecifier(
+                j.identifier(transformedImportedName),
+                j.identifier(localName)
+              );
+              newSpecifiers.push(importSpecifier);
+            }
+          } else {
+            // Keep other imports unchanged
+            if (!seen.has(importedName)) {
+              seen.add(importedName);
+              newSpecifiers.push(specifier);
+            }
+          }
+        } else {
+          newSpecifiers.push(specifier);
         }
       });
+      path.node.specifiers = newSpecifiers;
     })
     .toSource();
 }

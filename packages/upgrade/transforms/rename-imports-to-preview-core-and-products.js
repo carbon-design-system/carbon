@@ -78,12 +78,12 @@ function transformer(file, api) {
                 }
               }
             });
-            // Replace the original specifiers with the new aliased ones
-            // to prevent further changes needed in jsx for products components
             if (p === '@carbon/ibm-products') {
+              // Replace the original specifiers with the new aliased ones
+              // to prevent further changes needed in jsx for products components
+              // and keep already updated imports if there are any
               const others = path.node.specifiers.filter(
-                (c) =>
-                  !Object.values(productsPreviewMap).includes(c.imported.name)
+                (c) => !nonStableKeys.includes(c.imported.name)
               );
               path.node.specifiers = [...others, ...newSpecifiers];
             }
