@@ -11,7 +11,6 @@ import React, {
   useContext,
   useEffect,
   useRef,
-  useState,
   type HTMLAttributes,
   type ReactNode,
   type RefObject,
@@ -29,8 +28,7 @@ import {
   wrapFocus,
   wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
-import { debounce } from 'es-toolkit/compat';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { useId } from '../../internal/useId';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -323,7 +321,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
-  const [isScrollable, setIsScrollable] = useState(false);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
@@ -461,32 +458,14 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       return;
     }
 
-    const lastContent = modalContent.children[modalContent.children.length - 1];
-    const gradientSpacing =
-      modalContent.scrollHeight -
-      (lastContent as HTMLElement).offsetTop -
-      (lastContent as HTMLElement).clientHeight;
-
-    // eslint-disable-next-line   prefer-const -- https://github.com/carbon-design-system/carbon/issues/20071
-    for (let elem of modalContent.children) {
-      if (elem.contains(currentActiveNode)) {
-        const spaceBelow =
-          modalContent.clientHeight -
-          (elem as HTMLElement).offsetTop +
-          modalContent.scrollTop -
-          (elem as HTMLElement).clientHeight;
-        if (spaceBelow < gradientSpacing) {
-          modalContent.scrollTop =
-            modalContent.scrollTop + (gradientSpacing - spaceBelow);
-        }
-        break;
-      }
-    }
+    currentActiveNode.scrollIntoView({ block: 'center' });
   }
 
   const onSecondaryButtonClick = onSecondarySubmit
     ? onSecondarySubmit
     : onRequestClose;
+
+  const { height } = useResizeObserver({ ref: contentRef });
 
   const modalClasses = classNames(
     `${prefix}--modal`,
@@ -507,8 +486,17 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     [`${prefix}--modal-container--full-width`]: isFullWidth,
   });
 
+  /**
+   * isScrollable is implicitly dependent on height, when height gets updated
+   * via `useResizeObserver`, clientHeight and scrollHeight get updated too
+   */
+  const isScrollable =
+    !!contentRef.current &&
+    contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;
+
   const contentClasses = classNames(`${prefix}--modal-content`, {
     [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
+    [`${prefix}--modal-scroll-content--no-fade`]: height <= 300,
   });
 
   const footerClasses = classNames(`${prefix}--modal-footer`, {
@@ -559,7 +547,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
 
   useEffect(() => {
@@ -641,35 +629,12 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     }
   }, [open, selectorPrimaryFocus, danger, prefix, enableDialogElement]);
 
-  useIsomorphicEffect(() => {
-    if (contentRef.current) {
-      setIsScrollable(
-        contentRef.current.scrollHeight > contentRef.current.clientHeight
-      );
-    }
-
-    function handler() {
-      if (contentRef.current) {
-        setIsScrollable(
-          contentRef.current.scrollHeight > contentRef.current.clientHeight
-        );
-      }
-    }
-
-    const debouncedHandler = debounce(handler, 200);
-    window.addEventListener('resize', debouncedHandler);
-    return () => {
-      debouncedHandler.cancel();
-      window.removeEventListener('resize', debouncedHandler);
-    };
-  }, []);
-
   // AILabel always size `sm`
   const candidate = slug ?? decorator;
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'sm' })
-    : null;
+    : candidate;
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>

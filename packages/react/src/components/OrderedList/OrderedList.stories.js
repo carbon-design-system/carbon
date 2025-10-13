@@ -48,16 +48,6 @@ Default.args = {
 };
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   isExpressive: {
     control: {
       type: 'boolean',

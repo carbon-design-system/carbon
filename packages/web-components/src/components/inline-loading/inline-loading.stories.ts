@@ -94,10 +94,10 @@ export const UxExample = {
         loadingElem.setAttribute('aria-live', 'assertive');
       }
 
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       submit && ((submit as HTMLElement).style.display = 'none');
 
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       cancel && (cancel.disabled = true);
 
       // Instead of making a real request, we mock it with a timer
@@ -109,13 +109,13 @@ export const UxExample = {
 
         // To make submittable again, we reset the state after a bit so the user gets completion feedback
         setTimeout(() => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
           loadingElem && ((loadingElem as HTMLElement).style.display = 'none');
 
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
           submit && ((submit as HTMLElement).style.display = 'block');
 
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
           cancel && (cancel.disabled = false);
           if (loadingElem) {
             loadingElem.setAttribute('aria-live', 'off');

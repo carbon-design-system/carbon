@@ -1566,6 +1566,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -2091,12 +2092,6 @@ Map {
           "type": "func",
         },
       },
-      "translationKeys": [
-        "carbon.table.batch.cancel",
-        "carbon.table.batch.items.selected",
-        "carbon.table.batch.item.selected",
-        "carbon.table.batch.selectAll",
-      ],
     },
     "TableBody": {
       "propTypes": {
@@ -2315,9 +2310,6 @@ Map {
         },
       },
       "render": [Function],
-      "translationKeys": [
-        "carbon.table.header.icon.description",
-      ],
     },
     "TableRow": {
       "$$typeof": Symbol(react.forward_ref),
@@ -2674,16 +2666,6 @@ Map {
         "type": "bool",
       },
     },
-    "translationKeys": [
-      "carbon.table.row.expand",
-      "carbon.table.row.collapse",
-      "carbon.table.all.expand",
-      "carbon.table.all.collapse",
-      "carbon.table.all.select",
-      "carbon.table.all.unselect",
-      "carbon.table.row.select",
-      "carbon.table.row.unselect",
-    ],
   },
   "DataTableSkeleton" => {
     "propTypes": {
@@ -6314,6 +6296,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7321,6 +7304,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "validate": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -7569,6 +7555,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -9827,12 +9814,6 @@ Map {
         "type": "func",
       },
     },
-    "translationKeys": [
-      "carbon.table.batch.cancel",
-      "carbon.table.batch.items.selected",
-      "carbon.table.batch.item.selected",
-      "carbon.table.batch.selectAll",
-    ],
   },
   "TableBody" => {
     "propTypes": {
@@ -10051,9 +10032,6 @@ Map {
       },
     },
     "render": [Function],
-    "translationKeys": [
-      "carbon.table.header.icon.description",
-    ],
   },
   "TableRow" => {
     "$$typeof": Symbol(react.forward_ref),

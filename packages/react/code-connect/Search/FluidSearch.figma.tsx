@@ -6,10 +6,7 @@
  */
 
 import React from 'react';
-import {
-  preview__FluidSearch as FluidSearch,
-  preview__FluidSearchSkeleton as FluidSearchSkeleton,
-} from '@carbon/react';
+import { FluidSearch, FluidSearchSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(

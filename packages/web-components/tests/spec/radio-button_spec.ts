@@ -36,7 +36,7 @@ xdescribe('cds-radio-button', () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
@@ -60,7 +60,7 @@ xdescribe('cds-radio-button', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
@@ -354,10 +354,10 @@ xdescribe('cds-radio-button', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': 'staging' });
     });
@@ -382,10 +382,10 @@ xdescribe('cds-radio-button', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
@@ -410,10 +410,10 @@ xdescribe('cds-radio-button', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
@@ -439,14 +439,14 @@ xdescribe('cds-radio-button', () => {
         cancelable: false,
         composed: false,
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       expect(getValues(formData)).toEqual({});
     });
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     render(undefined!, document.body);
     await Promise.resolve();
   });
