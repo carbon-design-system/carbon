@@ -30,22 +30,19 @@ class CDSTile extends LitElement {
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
-    const hasContent = (target as HTMLSlotElement)
+    const hasSlottedAiLabel = (target as HTMLSlotElement)
       .assignedNodes()
-      .filter((elem) =>
-        (elem as HTMLElement).matches !== undefined
-          ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTile).aiLabelItem
-            ) ||
-            // remove reference of slug in v12
-            (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTile).slugItem
-            )
-          : false
-      );
-    if (hasContent.length > 0) {
-      this._hasAILabel = Boolean(hasContent);
-      (hasContent[0] as HTMLElement).setAttribute('size', 'xs');
+      .filter((elem) => {
+        if (!(elem instanceof HTMLElement)) {
+          return false;
+        }
+        const slot = elem.getAttribute('slot');
+        return slot === 'ai-label' || slot === 'slug';
+      });
+
+    if (hasSlottedAiLabel.length > 0) {
+      this._hasAILabel = Boolean(hasSlottedAiLabel);
+      (hasSlottedAiLabel[0] as HTMLElement).setAttribute('size', 'xs');
     }
     this.requestUpdate();
   }
