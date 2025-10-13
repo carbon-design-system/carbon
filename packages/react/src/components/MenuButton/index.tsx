@@ -27,7 +27,6 @@ import {
   flip,
   size as floatingSize,
   autoUpdate,
-  type Boundary,
   type Placement,
   hide,
 } from '@floating-ui/react';
@@ -89,12 +88,6 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget?: Element;
-
-  /**
-   * Specify a bounding element to be used for calculating when to reflow and change alignment.
-   * The viewport is used by default. This allows the menu to stay within a scrollable container.
-   */
-  boundary?: Boundary;
 }
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -110,7 +103,6 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       menuAlignment = 'bottom',
       tabIndex = 0,
       menuTarget,
-      boundary,
       ...rest
     },
     forwardRef
@@ -145,12 +137,12 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       fallbackPlacements: getFallbackPlacements(),
       fallbackStrategy: 'initialPlacement' as const,
       fallbackAxisSideDirection: 'start' as const,
-      boundary,
+      boundary: menuTarget,
       crossAxis,
     });
 
     if (!enableOnlyFloatingStyles) {
-      if (boundary) {
+      if (menuTarget) {
         middlewares.push(flip(getEnhancedFlipConfig(false)));
       } else {
         middlewares.push(
@@ -161,12 +153,12 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       }
     }
 
-    if (boundary && enableOnlyFloatingStyles) {
+    if (menuTarget && enableOnlyFloatingStyles) {
       middlewares.push(flip(getEnhancedFlipConfig()));
     }
 
-    if (boundary) {
-      middlewares.push(hide({ boundary }));
+    if (menuTarget) {
+      middlewares.push(hide({ boundary: menuTarget }));
     }
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
@@ -381,22 +373,6 @@ MenuButton.propTypes = {
   menuTarget: PropTypes.instanceOf(
     typeof Element !== 'undefined' ? Element : Object
   ) as PropTypes.Validator<Element | null | undefined>,
-
-  /**
-   * Specify a bounding element to be used for calculating when to reflow and change alignment.
-   * The viewport is used by default. This allows the menu to stay within a scrollable container.
-   */
-  boundary: PropTypes.oneOfType([
-    PropTypes.oneOf(['clippingAncestors']),
-    PropTypes.elementType,
-    PropTypes.arrayOf(PropTypes.elementType),
-    PropTypes.exact({
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }),
-  ]) as PropTypes.Validator<Boundary | null | undefined>,
 };
 
 export { MenuButton };
