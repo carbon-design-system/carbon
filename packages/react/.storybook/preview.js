@@ -23,8 +23,135 @@ import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
 import { Layout } from '../src/components/Layout';
 import { TextDirection } from '../src/components/Text';
+import { DocsContainer, Unstyled } from '@storybook/addon-docs/blocks';
+import { MDXProvider } from '@mdx-js/react';
+import {
+  Accordion,
+  AccordionItem,
+  AnchorLink,
+  AnchorLinks,
+  ArtDirection,
+  ArticleCard,
+  Aside,
+  Blockquote,
+  Button,
+  Caption,
+  CardGroup,
+  Code,
+  Column,
+  Divider,
+  DoDont,
+  DoDontRow,
+  GifPlayer,
+  Grid,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  ImageWrapper,
+  InlineCode,
+  InlineNotification,
+  Layer,
+  Link,
+  LI,
+  MiniCard,
+  OL,
+  PageDescription,
+  PageTable,
+  P,
+  Preview,
+  ResourceCard,
+  Row,
+  StorybookDemo,
+  Tabs,
+  Tab,
+  Title as DocTitle,
+  UL,
+  Video,
+} from '@carbon-labs/mdx-components';
 
 import theme from './theme';
+
+const customMarkdown = {
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
+  p: P,
+  ol: OL,
+  ul: UL,
+  li: LI,
+  a: Link,
+  blockquote: Blockquote,
+  table: PageTable,
+  pre: Code,
+  code: InlineCode,
+  hr: Divider,
+  AnchorLinks,
+  AnchorLink,
+  Caption,
+  Column,
+  DoDont,
+  DoDontRow,
+  GifPlayer,
+  PageDescription,
+  Row,
+  StorybookDemo,
+  Grid,
+  Tabs,
+  Tab,
+  InlineNotification,
+  ArtDirection,
+  Accordion,
+  AccordionItem,
+  ArticleCard,
+  Aside,
+  Button,
+  CardGroup,
+  ImageWrapper,
+  Layer,
+  MiniCard,
+  Preview,
+  ResourceCard,
+  Title: DocTitle,
+  Video,
+};
+
+const CarbonMdxContainer = ({ children, ...props }) => {
+  const isDocsOnlyMdx =
+    children?.type?.name === 'MDXContent' &&
+    !props?.context?.attachedCSFFiles?.size;
+
+  React.useEffect(() => {
+    document.documentElement.classList.toggle(
+      'cds--mdx',
+      Boolean(isDocsOnlyMdx)
+    );
+  }, [isDocsOnlyMdx]);
+
+  if (!isDocsOnlyMdx) {
+    return <DocsContainer {...props}>{children}</DocsContainer>;
+  }
+
+  return (
+    <MDXProvider components={customMarkdown}>
+      <DocsContainer {...props}>
+        <Unstyled>
+          {/* Force prose docs to g10 for stable contrast and spacing */}
+          <GlobalTheme theme="g10">
+            <div style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
+              {children}
+            </div>
+          </GlobalTheme>
+        </Unstyled>
+      </DocsContainer>
+    </MDXProvider>
+  );
+};
 
 const devTools = {
   layoutSize: {
