@@ -316,6 +316,7 @@ const parameters = {
         <Stories includePrimary={false} />
       </>
     ),
+    container: CarbonMdxContainer,
     codePanel: true,
   },
   viewport: {
