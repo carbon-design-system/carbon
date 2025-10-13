@@ -370,6 +370,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/seanhaug"><img src="https://avatars.githubusercontent.com/u/227620549?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sean Haughey</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=seanhaug" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Vignesh-Loganathan-IBM-1"><img src="https://avatars.githubusercontent.com/u/196759586?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vignesh-Loganathan-IBM-1</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Vignesh-Loganathan-IBM-1" title="Code">💻</a></td>
     <td align="center"><a href="http://www.didoo.net/"><img src="https://avatars.githubusercontent.com/u/686239?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cristiano Rastelli</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=didoo" title="Code">💻</a> <a href="#example-didoo" title="Examples">💡</a></td>
+    <td align="center"><a href="https://github.com/olihf-dematic"><img src="https://avatars.githubusercontent.com/u/225178617?v=4?s=100" width="100px;" alt=""/><br /><sub><b>olihf-dematic</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=olihf-dematic" title="Code">💻</a> <a href="#a11y-olihf-dematic" title="Accessibility">️️️️♿️</a></td>
   </tr>
 </table>
 
