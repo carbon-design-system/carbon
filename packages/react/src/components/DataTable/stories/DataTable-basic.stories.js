@@ -59,41 +59,6 @@ const sharedArgTypes = {
     control: 'boolean',
     description: 'Add zebra striping to rows',
   },
-  filterRows: {
-    table: {
-      disable: true,
-    },
-  },
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  isSortable: {
-    table: {
-      disable: true,
-    },
-  },
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
-  rows: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  sortRow: {
-    table: {
-      disable: true,
-    },
-  },
 };
 
 const sharedArgs = {

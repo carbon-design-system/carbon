@@ -25,6 +25,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['inputClassName', 'pickerClassName', 'id', 'light', 'pattern'],
+    },
   },
 };
 
@@ -51,31 +54,6 @@ Default.args = {
 };
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  inputClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  pickerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
   disabled: {
     control: {
       type: 'boolean',
@@ -108,16 +86,6 @@ Default.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
-  },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
-  pattern: {
-    table: {
-      disable: true,
-    },
   },
 };
 

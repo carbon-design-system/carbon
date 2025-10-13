@@ -70,6 +70,7 @@ categories:
       - neurodiversity
       - prompt
       - spyre-accelerator
+      - technical-document-generation
       - technical-owner
       - telum-ii-chip
       - telum-ii-processor
@@ -316,6 +317,8 @@ categories:
       - containers
       - content-delivery-network
       - continuous
+      - continuous--delivery
+      - continuous--integration
       - control
       - control-panel
       - controls-framework
@@ -324,9 +327,12 @@ categories:
       - customizable
       - data--centers
       - data--management
+      - data--management--02
+      - data--management--03
       - data--privacy--02
       - data--protection-data--security
       - data--science
+      - data--science--02
       - data--transfer
       - data--warehousing
       - database
@@ -334,12 +340,16 @@ categories:
       - dedicated--host
       - dedicated--instance
       - deep-learning
+      - deep-learning--02
+      - deep-learning--03
       - deploying-containers
       - deployment
       - dev-and-test
       - developer-tools
       - devops
       - devops--02
+      - devops--loop--01
+      - devops--loop--02
       - devops--toolchain
       - digital
       - directlink
@@ -351,6 +361,7 @@ categories:
       - e-commerce
       - ease-of-use
       - ecosystem
+      - edge--computing
       - efficient
       - elements-of-the-cloud
       - encryption
@@ -411,6 +422,7 @@ categories:
       - integration--02
       - integration--03
       - java
+      - java--02
       - javascript
       - keep-your-own-key
       - leader
@@ -431,11 +443,13 @@ categories:
       - memory
       - micro
       - microservices
+      - microservices--02
       - migration
       - mobile
       - modernize
       - monitor
       - mqa
+      - multicloud--computing
       - network--02
       - network--appliances
       - network--of-devices
@@ -443,11 +457,15 @@ categories:
       - network--traffic
       - new-financial-customer-experiences
       - new-revenue-streams
+      - node-dot-js--01
+      - node-dot-js--02
       - notifications
+      - object-storage
       - observability--01
       - observability--02
       - on-premise--to-cloud
       - on-premise
+      - on-premises--02
       - operate-offline
       - operating-system
       - operational-efficiency
@@ -456,8 +474,10 @@ categories:
       - partnership
       - pay-for-what-you-use
       - php--language
+      - php--language--02
       - planning--analytics
       - platform-as-a-service
+      - platform-as-a-service--02
       - pli--language
       - power--on
       - predictability
@@ -468,6 +488,7 @@ categories:
       - public
       - public-cloud-to-private-cloud
       - r--language
+      - r--language-and-environment
       - random--samples
       - react-to-data
       - real-time
@@ -499,6 +520,7 @@ categories:
       - select--range
       - serverless
       - serverless--02
+      - serverless--03
       - sharing-data
       - single--sign-on
       - slice-code
@@ -548,6 +570,8 @@ categories:
   - name: Data analytics
     members:
       - analyze
+      - analytics--02
+      - api--management
       - assess
       - blockchain
       - box--plot
@@ -569,6 +593,8 @@ categories:
       - chart--multi-type
       - chart--parallel
       - chart--pie
+      - chart--predictive-analytics--bar
+      - chart--predictive-analytics--line
       - chart--quadrant-plot
       - chart--radar
       - chart--river
@@ -621,11 +647,13 @@ categories:
       - business--continuity
       - cloud--infrastructure-management
       - containers-and-cloud-native
+      - containers--02
       - data--backup
       - data--privacy
       - data--privacy--key
       - data--processing
       - data--storage
+      - data--store
       - flash--storage
       - flexible--compute
       - flexible--infrastructure
@@ -644,10 +672,12 @@ categories:
       - ibm--z17--plus-cloud
       - ibm--z17--single-frame
       - infrastructure-security
+      - it--infrastructure
       - it--infrastructure-software
       - linuxone-5
       - mainframe-qualities-of-service
       - ibm--power11
+      - reactive-systems
       - reliability
       - resilience
       - sap--hana
@@ -681,11 +711,13 @@ categories:
       - design--research
       - engineer
       - feedback--01
+      - front-end--development
       - hills
       - idea
       - ideate
       - inner-source
       - landing-page
+      - mobile--development
       - motion
       - organization
       - outcome-focused
@@ -696,6 +728,7 @@ categories:
       - resourceful
       - social--tile
       - software--02
+      - software--development
       - systems-and-tools
       - universal-experiences
       - user--experience-design
@@ -715,6 +748,9 @@ categories:
       - devices-at-ibm
       - flashing--content
       - keyboard
+      - messaging--01
+      - messaging--02
+      - messaging--03
       - mobile--add
       - mobile--chat
       - mobile--devices
@@ -882,6 +918,7 @@ categories:
       - ibm--z-os-package-manager
       - ibm--z--partition
       - progress
+      - swift-at-ibm
       - world--community--grid
   - name: Industry
     members:
@@ -930,6 +967,8 @@ categories:
       - build
       - connect
       - internet-of-things
+      - internet-of-things--02
+      - internet-of-things--03
       - iot--munich
       - migrate
       - modernize--02
@@ -1220,6 +1259,7 @@ categories:
       - secure--hybrid--cloud
       - secure--profile
       - security
+      - security--03
       - security--as--a--service
       - security--hygiene
       - security--intelligence
@@ -1344,6 +1384,7 @@ categories:
       - ibm--engineering-test-management
       - ibm--engineering-workflow-management
       - ibm--z-open-automation-utilities
+      - systems
       - systems-devops--analyze
       - systems-devops--build
       - systems-devops--cicd-pipeline
@@ -1357,7 +1398,11 @@ categories:
       - transaction-data
   - name: Third-party logos
     members:
+      - android
+      - linux
+      - python
       - slack
+      - spring
   - name: Time
     members:
       - calendar
@@ -1408,12 +1453,15 @@ categories:
       - language--05
       - language--translation
       - natural--language--classifier
+      - natural--language--processing--01
+      - natural--language--processing--02
       - natural--language--understanding
       - personality--insights
       - question--and--answer
       - relationship--extraction
       - retrieve--and--rank
       - speech
+      - speech-and-empathy--01
       - speech--to--text
       - text--to--speech
       - tone--analyzer
@@ -1421,6 +1469,7 @@ categories:
       - vision
       - visual--insights
       - visual--recognition
+      - visual--recognition--02
       - watson--logo
       - watsonx--ai
       - watsonx--assistant

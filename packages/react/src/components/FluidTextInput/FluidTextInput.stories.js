@@ -25,6 +25,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['isPassword'],
+    },
   },
   subcomponents: {
     FluidTextInputSkeleton,
@@ -53,7 +56,6 @@ export const Default = (args) => (
 
 Default.args = {
   defaultWidth: 300,
-  className: 'test-class',
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText:
@@ -94,11 +96,6 @@ Default.argTypes = {
       type: 'text',
     },
   },
-  isPassword: {
-    table: {
-      disable: true,
-    },
-  },
   disabled: {
     control: {
       type: 'boolean',
@@ -126,7 +123,7 @@ Default.argTypes = {
   },
 };
 
-export const DefaultWithTooltip = () => (
+export const DefaultWithToggletip = () => (
   <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
 );
 

@@ -46,7 +46,7 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
           const target: EventTarget =
             {
               document: this.ownerDocument,
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
               window: this.ownerDocument!.defaultView,
               parentRoot: this.getRootNode(),
               shadowRoot: this.shadowRoot,
