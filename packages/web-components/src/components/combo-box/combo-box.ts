@@ -165,6 +165,9 @@ class CDSComboBox extends CDSDropdown {
     // highlight first visible item
     visible.forEach((node, i) => {
       node.highlighted = i === 0;
+      if (i === 0 && this._itemMenu) {
+        node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     });
 
     // preserve input selection/focus across update
