@@ -144,14 +144,6 @@ function isLabelTextEmpty(children) {
   return children.every((child) => !child.props.labelText);
 }
 
-const rightArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
-  <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
-</svg>`;
-
-const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
-  <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
-</svg>`;
-
 function updateClassNames(calendar, prefix) {
   const calendarContainer = calendar.calendarContainer;
   const daysContainer = calendar.days;
@@ -596,6 +588,18 @@ const DatePicker = React.forwardRef(function DatePicker(
     } else {
       localeData = l10n[locale];
     }
+
+    // Accessible arrow icons (localized via flatpickr l10n)
+    const nextLabel = localeData?.nextMonth || 'Next month';
+    const prevLabel = localeData?.prevMonth || 'Previous month';
+
+    const rightArrowHTML = `<svg aria-label="${nextLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+    </svg>`;
+
+    const leftArrowHTML = `<svg aria-label="${prevLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+    </svg>`;
 
     /**
      * parseDate is called before the date is actually set.
