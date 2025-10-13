@@ -1,6 +1,6 @@
 // prettier-ignore
 // eslint-disable no-unused-vars
-import { 
+import {
   Tearsheet,
   previewCandidate__InlineTip as InlineTip,
   previewCandidate__SearchBar as SearchBar,
