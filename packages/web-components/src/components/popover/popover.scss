@@ -30,6 +30,12 @@ $popover-caret-height: custom-property.get-var(
   rem(6px)
 );
 
+// The drop shadow value used for the popover container
+$popover-drop-shadow: custom-property.get-var(
+  'popover-drop-shadow',
+  drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
+);
+
 // The border value used for the popover container
 $popover-border-color: custom-property.get-var(
   'popover-border-color',
@@ -136,17 +142,17 @@ $popover-border-color: custom-property.get-var(
   }
 }
 
-:host(#{$prefix}-popover-content[dropShadow]) {
-  @include custom-property.declaration(
-    'popover-drop-shadow',
-    drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
-  );
-}
-
 :host(#{$prefix}-tooltip-content[border]),
 :host(#{$prefix}-popover-content[border]) {
   .#{$prefix}--popover-content {
     border: 1px solid $popover-border-color;
+  }
+}
+
+:host(#{$prefix}-tooltip-content[dropShadow]),
+:host(#{$prefix}-popover-content[dropShadow]) {
+  .#{$prefix}--popover-content {
+    filter: $popover-drop-shadow;
   }
 }
 
