@@ -1,5 +1,6 @@
 import { fromRollup } from '@web/dev-server-rollup';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { playwrightLauncher } from '@web/test-runner-playwright';
 
 const resolve = fromRollup(nodeResolve);
 
@@ -13,6 +14,8 @@ export default {
       extensions: ['.js', '.ts'],
     }),
   ],
+
+  browsers: [playwrightLauncher({ product: 'chromium' })],
 
   rootDir: '.',
 
