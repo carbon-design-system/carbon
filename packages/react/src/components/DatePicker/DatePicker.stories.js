@@ -120,7 +120,6 @@ const sharedArgTypes = {
 
 export const Default = ({ readOnly, ...args }) => {
   const locale = useDocumentLang();
-  console.log(locale);
   return (
     <DatePicker
       datePickerType="single"
