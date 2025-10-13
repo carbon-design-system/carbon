@@ -6,11 +6,11 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { TemplateResult, html } from 'lit';
+import { PropertyValues, TemplateResult, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import Close16 from '@carbon/icons/es/close/16.js';
-import { findIndex, forEach } from '../../globals/internal/collection-helpers';
+import { forEach } from '../../globals/internal/collection-helpers';
 import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import CDSComboBoxItem from './combo-box-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -71,19 +71,27 @@ class CDSComboBox extends CDSDropdown {
     const raw = this._filterInputNode?.value ?? '';
     const inputValue = raw.trim().toLowerCase();
 
+    const defaultShouldFilterItem = () => true;
+
     if (typeof this.shouldFilterItem === 'function') {
-      return this.shouldFilterItem({ item, inputValue });
+      return this.shouldFilterItem({
+        item,
+        inputValue,
+        itemToString: (i) => i.textContent ?? '',
+      });
     }
 
     if (typeof this.itemMatches === 'function') {
       return this.itemMatches(item, inputValue);
     }
 
-    return this._defaultItemMatches(item, inputValue);
+    return (
+      this._defaultItemMatches(item, inputValue) && defaultShouldFilterItem()
+    );
   }
 
-  firstUpdated() {
-    super.firstUpdated && super.firstUpdated();
+  firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
     // capture direct light-DOM children only, in author/source order
     this._originalItems = Array.from(
       this.querySelectorAll(
@@ -174,7 +182,7 @@ class CDSComboBox extends CDSDropdown {
       inputNode.focus();
       try {
         inputNode.setSelectionRange(selStart, selEnd);
-      } catch (e) {
+      } catch {
         // ignore selection failure on some platforms
       }
     }
@@ -345,10 +353,18 @@ class CDSComboBox extends CDSDropdown {
   @property({ attribute: false })
   itemMatches!: (item: CDSComboBoxItem, queryText: string) => boolean;
 
+  /**
+   * Specify your own filtering logic by passing a `shouldFilterItem` function.
+   * The function receives the current input value and each item, and should
+   * return `true` if the item should be displayed or `false` if it should be filtered out.
+   *
+   * This property will be ignored if the `typeahead` prop is enabled.
+   */
   @property({ attribute: false })
   shouldFilterItem?: (opts: {
     item: CDSComboBoxItem;
     inputValue: string;
+    itemToString?: (item: CDSComboBoxItem) => string;
   }) => boolean;
 
   shouldUpdate(changedProperties) {
