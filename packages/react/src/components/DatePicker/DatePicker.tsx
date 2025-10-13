@@ -386,6 +386,16 @@ export interface DatePickerProps {
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
   warnText?: ReactNode;
+
+  /**
+   * Accessible aria-label for the "next month" arrow icon.
+   */
+  nextMonthAriaLabel?: string;
+
+  /**
+   * Accessible aria-label for the "previous month" arrow icon.
+   */
+  prevMonthAriaLabel?: string;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(
@@ -415,6 +425,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     short = false,
     value,
     parseDate: parseDateProp,
+    nextMonthAriaLabel = 'Next month',
+    prevMonthAriaLabel = 'Previous month',
     ...rest
   }: DatePickerProps,
   ref: ForwardedRef<HTMLDivElement>
@@ -589,18 +601,6 @@ const DatePicker = React.forwardRef(function DatePicker(
       localeData = l10n[locale];
     }
 
-    // Accessible arrow icons (localized via flatpickr l10n)
-    const nextLabel = localeData?.nextMonth || 'Next month';
-    const prevLabel = localeData?.prevMonth || 'Previous month';
-
-    const rightArrowHTML = `<svg aria-label="${nextLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
-      <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
-    </svg>`;
-
-    const leftArrowHTML = `<svg aria-label="${prevLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
-      <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
-    </svg>`;
-
     /**
      * parseDate is called before the date is actually set.
      * It attempts to parse the input value and return a valid date string.
@@ -639,6 +639,17 @@ const DatePicker = React.forwardRef(function DatePicker(
     } else if (parseDateProp) {
       parseDate = parseDateProp;
     }
+
+    // Accessible arrow icons (localized manually)
+    // Flatpickr does not currently support localization of next/previous month
+    // labels, so we inject translated aria-labels based on the provided locale.
+    const rightArrowHTML = `<svg aria-label="${nextMonthAriaLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+    </svg>`;
+
+    const leftArrowHTML = `<svg aria-label="${prevMonthAriaLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+    </svg>`;
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
