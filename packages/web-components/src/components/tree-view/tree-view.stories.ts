@@ -81,6 +81,26 @@ export const Default = {
   `,
 };
 
+// remove before merging
+export const Test = {
+  decorators: [
+    (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
+  ],
+  render: () => html`
+    <cds-tree-view label="Treeview Test">
+      <cds-tree-node label="Parent 1">
+        <cds-tree-node label="Child 1-1"></cds-tree-node>
+        <cds-tree-node label="Child 1-2"></cds-tree-node>
+      </cds-tree-node>
+      <cds-tree-node label="Parent 2">
+        <cds-tree-node label="Child 2-1">
+          <cds-tree-node label="Grandchild 2-1-1"></cds-tree-node>
+        </cds-tree-node>
+      </cds-tree-node>
+    </cds-tree-view>
+  `,
+};
+
 export const withControlledExpansion = {
   decorators: [
     (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
