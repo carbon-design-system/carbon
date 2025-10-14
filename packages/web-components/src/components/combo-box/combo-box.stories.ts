@@ -43,34 +43,6 @@ const items = [
   },
 ];
 
-const fruits = [
-  {
-    value: 'fruit-0',
-    text: 'Apple',
-  },
-  {
-    value: 'fruit-1',
-    text: 'Orange',
-  },
-  {
-    value: 'fruit-2',
-    text: 'Banana',
-  },
-  {
-    value: 'fruit-3',
-    text: 'Pineapple',
-  },
-  {
-    value: 'fruit-4',
-    text: 'Raspberry',
-  },
-  {
-    value: 'fruit-5',
-    text: 'Lime',
-    disabled: true, // example of a disabled fruit
-  },
-];
-
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
   [`Bottom`]: DROPDOWN_DIRECTION.BOTTOM,
@@ -154,18 +126,13 @@ const controls = {
     description: `Text that is displayed when the control is in warning state.`,
   },
 };
-const filterItems = (menu) =>
-  menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
+
 export const Default = {
   render: () => html`
     <cds-combo-box
       helper-text="Combobox helper text"
-      title-text="ComboBox title"
-      .shouldFilterItem=${({ item, inputValue }) => {
-        const label = (item.textContent || '').toString();
-        return filterItems({ item: label, inputValue });
-      }}>
-      ${fruits.map(
+      title-text="ComboBox title">
+      ${items.map(
         (elem) => html`
           <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
             >${elem.text}</cds-combo-box-item
@@ -221,6 +188,25 @@ export const WithAILabel = {
           >
         `
       )}
+    </cds-combo-box>
+  `,
+};
+
+export const ShouldFilterItemTest = {
+  render: () => html`
+    <cds-combo-box
+      title-text="Custom Filter"
+      helper-text="Type to test shouldFilterItem (only matches items starting with input)"
+      .shouldFilterItem=${({ item, inputValue }) => {
+        const label = (item.textContent || '').toLowerCase();
+        const input = (inputValue || '').toLowerCase();
+        return label.startsWith(input);
+      }}>
+      <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
+      <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
+      <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
+      <cds-combo-box-item value="raspberry">Raspberry</cds-combo-box-item>
+      <cds-combo-box-item value="grape">Grape</cds-combo-box-item>
     </cds-combo-box>
   `,
 };
