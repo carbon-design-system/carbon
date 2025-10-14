@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,22 +31,20 @@ class CDSToastNotification extends CDSInlineNotification {
   protected _renderText() {
     const { caption, subtitle, title, _type: type } = this;
     return html`
-      <div class="${prefix}--${type}-notification__details">
-        <div class="${prefix}--${type}-notification__title">
-          ${title}<slot name="title"></slot>
-        </div>
-        <div class="${prefix}--${type}-notification__subtitle">
-          ${subtitle}<slot name="subtitle"></slot>
-        </div>
-        ${caption || this.querySelector('[slot="caption"]')
-          ? html`
-              <div class="${prefix}--${type}-notification__caption">
-                ${caption}<slot name="caption"></slot>
-              </div>
-            `
-          : null}
-        <slot></slot>
+      <div class="${prefix}--${type}-notification__title">
+        ${title}<slot name="title"></slot>
       </div>
+      <div class="${prefix}--${type}-notification__subtitle">
+        ${subtitle}<slot name="subtitle"></slot>
+      </div>
+      ${caption || this.querySelector('[slot="caption"]')
+        ? html`
+            <div class="${prefix}--${type}-notification__caption">
+              ${caption}<slot name="caption"></slot>
+            </div>
+          `
+        : null}
+      <slot></slot>
     `;
   }
 
