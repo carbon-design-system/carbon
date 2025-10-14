@@ -893,6 +893,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     closeOnSelect,
     hasInput,
     datePickerType,
+    nextMonthAriaLabel,
+    prevMonthAriaLabel,
   ]);
 
   // this hook allows consumers to access the flatpickr calendar
@@ -1264,6 +1266,16 @@ DatePicker.propTypes = {
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
   warnText: PropTypes.node,
+
+  /**
+   * Accessible aria-label for the "next month" arrow icon.
+   */
+  nextMonthAriaLabel: PropTypes.string,
+
+  /**
+   * Accessible aria-label for the "previous month" arrow icon.
+   */
+  prevMonthAriaLabel: PropTypes.string,
 };
 
 export default DatePicker;
