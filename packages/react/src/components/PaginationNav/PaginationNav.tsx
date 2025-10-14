@@ -304,6 +304,11 @@ export interface PaginationNavProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'>,
     TranslateWithId<TranslationKey> {
   /**
+   * Required props for the accessibility label of the menu
+   */
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  /**
    * Additional CSS class names.
    */
   className?: string;
@@ -360,6 +365,8 @@ export interface PaginationNavProps
 const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
   (
     {
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
       className,
       onChange = () => {},
       totalItems = NaN,
@@ -504,8 +511,12 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     const startOffset = itemsDisplayedOnPage <= 4 && currentPage > 1 ? 0 : 1;
 
+    const accessibilityLabel = ariaLabelledBy
+      ? { 'aria-labelledby': ariaLabelledBy }
+      : { 'aria-label': ariaLabel ?? 'pagination' };
+
     return (
-      <nav className={classNames} ref={ref} {...rest} aria-label="pagination">
+      <nav className={classNames} ref={ref} {...rest} {...accessibilityLabel}>
         <ul className={`${prefix}--pagination-nav__list`}>
           <DirectionButton
             direction="backward"
