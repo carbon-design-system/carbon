@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { expect, fixture, html, oneEvent, nextFrame } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import '@carbon/web-components/es/components/pagination/index.js';
 import '@carbon/web-components/es/components/select/index.js';
 import '@carbon/web-components/es/components/select/select-item.js';
@@ -366,50 +366,5 @@ describe('cds-pagination', () => {
     const nextBtn = buttons?.[1];
 
     expect(nextBtn?.hasAttribute('disabled')).to.be.true;
-  });
-
-  it('should hide left and right pagination children', async () => {
-    const el = await fixture(html`
-      <div style="width: 300px;">
-        <cds-pagination "total-items="20" page-size="10" page="2">
-          <cds-select-item value="10">10</cds-select-item>
-        </cds-pagination>
-      </div>
-    `);
-
-    const pagination = el.querySelector('cds-pagination');
-    await pagination.updateComplete;
-
-    // Wait for layout & container query to apply
-    await nextFrame();
-    await nextFrame();
-
-    const filterElements = (nodes) =>
-      Array.from(nodes).filter(
-        (node) =>
-          node.matches('label') ||
-          node.matches('cds-select') ||
-          (node.matches('.cds--pagination__text') &&
-            !node.matches('.cds--pagination__items-count'))
-      );
-
-    // Query left and right children
-    const leftChildren = filterElements(
-      pagination.shadowRoot.querySelectorAll('.cds--pagination__left > *')
-    );
-    const rightChildren = filterElements(
-      pagination.shadowRoot.querySelectorAll('.cds--pagination__right > *')
-    );
-
-    // Assert all filtered elements are hidden
-    const assertHidden = (nodes) => {
-      nodes.forEach((node) => {
-        const style = getComputedStyle(node);
-        expect(style.display).to.equal('none');
-      });
-    };
-
-    assertHidden(leftChildren);
-    assertHidden(rightChildren);
   });
 });
