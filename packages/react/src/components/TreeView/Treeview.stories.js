@@ -6,13 +6,11 @@
  */
 
 import React from 'react';
-import { useState } from 'react'; // remove before merging
 import { action } from 'storybook/actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { default as TreeView, TreeNode } from './';
 import { Button } from '../Button/index';
 import mdx from './TreeView.mdx';
-import Checkbox from '../Checkbox'; // remove before merging
 
 import './story.scss';
 import TextInput from '../TextInput';
@@ -53,66 +51,6 @@ export default {
   args: {
     onSelect: action('onSelect'),
   },
-};
-
-// remove before merging
-export const test = () => {
-  const dummyData = [
-    {
-      id: '1',
-      label: 'Parent 1',
-      children: [
-        { id: '1-1', label: 'Child 1-1' },
-        { id: '1-2', label: 'Child 1-2' },
-      ],
-    },
-    {
-      id: '2',
-      label: 'Parent 2',
-      children: [
-        {
-          id: '2-1',
-          label: 'Child 2-1',
-          children: [{ id: '2-1-1', label: 'Grandchild 2-1-1' }],
-        },
-      ],
-    },
-  ];
-  const [selected, setSelected] = useState([]);
-  const [expanded, setExpanded] = useState(['1', '2']);
-  const toggleSelect = (id) => {
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id]
-    );
-  };
-  const renderTree = (nodes) =>
-    nodes.map((node) => (
-      <TreeNode
-        key={node.id}
-        value={node.id}
-        label={
-          <Checkbox
-            id={node.id}
-            labelText={node.label}
-            checked={selected.includes(node.id)}
-            onChange={() => toggleSelect(node.id)}
-          />
-        }>
-        {node.children && renderTree(node.children)}
-      </TreeNode>
-    ));
-  return (
-    <div style={{ width: '300px', margin: '2rem' }}>
-      <TreeView
-        label="Nested Checkbox Tree"
-        hideLabel
-        selected={selected}
-        expanded={expanded}
-        onNodeToggle={({ nodeIds }) => setExpanded(nodeIds)}>
-        {renderTree(dummyData)}
-      </TreeView>
-    </div>
-  );
 };
 
 export const Default = (args) => {
