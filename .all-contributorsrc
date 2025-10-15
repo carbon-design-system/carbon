@@ -1537,6 +1537,15 @@
         "code",
         "a11y"
       ]
+    },
+    {
+     "login": "vidhyarbiji",
+     "name": "Vidhya Ravikumar",
+     "avatar_url": "https://avatars.githubusercontent.com/u/11348409?v=4",
+     "profile": "https://github.com/vidhyarbiji",
+     "contributions": [
+       "code"
+     ]
     }
   ],
   "commitConvention": "none"
