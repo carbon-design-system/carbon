@@ -4177,9 +4177,6 @@ Map {
         "isRequired": true,
         "type": "func",
       },
-      "renderSelectedItem": {
-        "type": "func",
-      },
       "selectedItem": {
         "args": [
           [
@@ -12172,9 +12169,6 @@ Map {
         "isRequired": true,
         "type": "func",
       },
-      "renderSelectedItem": {
-        "type": "func",
-      },
       "selectedItem": {
         "args": [
           [
@@ -14136,9 +14130,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
