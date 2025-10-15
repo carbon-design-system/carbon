@@ -65,6 +65,18 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   menuAlignment = POPOVER_ALIGNMENT.BOTTOM;
 
   /**
+   * Specify whether the menu should have a border.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'menu-border' })
+  menuBorder = false;
+
+  /**
+   * Specify the background token to use for the menu. Default is 'layer'.
+   */
+  @property({ type: String, reflect: true, attribute: 'menu-background-token' })
+  menuBackgroundToken = 'layer';
+
+  /**
    * Specify the size of the button and menu.
    */
   @property({ type: MENU_BUTTON_SIZE, reflect: true })
@@ -125,6 +137,14 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
 
     if (changedProperties.has('size')) {
       menu.setAttribute('size', this.size);
+    }
+
+    if (changedProperties.has('menuBorder')) {
+      menu.toggleAttribute('border', this.menuBorder);
+    }
+
+    if (changedProperties.has('menuBackgroundToken')) {
+      menu.backgroundToken = this.menuBackgroundToken;
     }
   }
 

@@ -120,6 +120,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   mode;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ type: String })
+  backgroundToken = 'layer';
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  @property({ type: Boolean })
+  border = false;
+
+  /**
    * Specify how the menu should align with the button element
    */
   @property({ type: String })
@@ -208,6 +220,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-selectable-items`]:
         this.context.hasSelectableItems,
+      [`${prefix}--menu--border`]: this.border,
+      [`${prefix}--menu--background-token__background`]:
+        this.backgroundToken === 'background',
     });
     return html`
       <ul

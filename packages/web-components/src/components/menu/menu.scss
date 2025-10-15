@@ -57,6 +57,15 @@ $css--plex: true !default;
   &:not(.#{$prefix}--menu--open) .#{$prefix}--menu--open {
     visibility: hidden;
   }
+
+  &--border {
+    outline: 1px solid $border-subtle;
+    outline-offset: -1px;
+  }
+
+  &--background-token__background {
+    background: $background;
+  }
 }
 .#{$prefix}--menu--with-icons {
   min-inline-size: 12rem;
