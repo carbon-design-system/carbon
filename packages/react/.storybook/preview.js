@@ -18,9 +18,9 @@ import './styles.scss';
 import '../src/feature-flags';
 
 import { white, g10, g90, g100 } from '@carbon/themes';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { breakpoints } from '@carbon/layout';
-import { GlobalTheme } from '../src/components/Theme';
+import { GlobalTheme, Theme } from '../src/components/Theme';
 import { Layout } from '../src/components/Layout';
 import { TextDirection } from '../src/components/Text';
 import { DocsContainer, Unstyled } from '@storybook/addon-docs/blocks';
@@ -122,37 +122,41 @@ const customMarkdown = {
 };
 
 const CarbonMdxContainer = ({ children, ...props }) => {
-  const isDocsOnlyMdx =
-    children?.type?.name === 'MDXContent' &&
-    !props?.context?.attachedCSFFiles?.size;
+  // MDX pages that aren't associated with a story
+  const isCarbonMdx =
+    children?.type?.name === `MDXContent` &&
+    !props?.context?.attachedCSFFiles.size;
 
-  React.useEffect(() => {
-    document.documentElement.classList.toggle(
-      'cds--mdx',
-      Boolean(isDocsOnlyMdx)
+  useEffect(() => {
+    if (isCarbonMdx) {
+      document.documentElement.classList.add('cds--mdx');
+    } else {
+      document.documentElement.classList.remove('cds--mdx');
+    }
+  }, [isCarbonMdx]);
+
+  // Disable Storybook markdown styles and ignore global theme switchers
+  if (isCarbonMdx) {
+    return (
+      <MDXProvider components={customMarkdown}>
+        <DocsContainer {...props}>
+          <Unstyled>
+            <Theme
+              style={{
+                paddingBottom: '5rem',
+                paddingTop: '4rem',
+              }}
+              theme="g10">
+              {children}
+            </Theme>
+          </Unstyled>
+        </DocsContainer>
+      </MDXProvider>
     );
-  }, [isDocsOnlyMdx]);
-
-  if (!isDocsOnlyMdx) {
-    return <DocsContainer {...props}>{children}</DocsContainer>;
   }
 
-  return (
-    <MDXProvider components={customMarkdown}>
-      <DocsContainer {...props}>
-        <Unstyled>
-          {/* Force prose docs to g10 for stable contrast and spacing */}
-          <GlobalTheme theme="g10">
-            <div style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
-              {children}
-            </div>
-          </GlobalTheme>
-        </Unstyled>
-      </DocsContainer>
-    </MDXProvider>
-  );
+  return <DocsContainer {...props}>{children}</DocsContainer>;
 };
-
 const devTools = {
   layoutSize: {
     description: "Set the layout context's size",
@@ -317,6 +321,11 @@ const parameters = {
       </>
     ),
     container: CarbonMdxContainer,
+    options: {
+      storySort: {
+        order: ['Components'],
+      },
+    },
     codePanel: true,
   },
   viewport: {
@@ -460,8 +469,14 @@ const parameters = {
 
 const decorators = [
   (Story, context) => {
-    const { layoutDensity, layoutSize, locale, dir, theme } = context.globals;
+    let { theme } = context.globals;
+    const { layoutDensity, layoutSize, locale, dir } = context.globals;
     const [randomKey, setRandomKey] = React.useState(1);
+    const isMarkdown = context?.kind?.startsWith('MDX Components');
+
+    if (isMarkdown) {
+      theme = 'g10';
+    }
 
     React.useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
