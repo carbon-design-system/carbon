@@ -1007,8 +1007,7 @@ export const Slider = (props: SliderProps) => {
     leftPercent: number;
   }) => {
     const { step = 1, min, max } = props;
-    const numSteps =
-      Math.floor((max - min) / step) + ((max - min) % step === 0 ? 1 : 2);
+    const numSteps = Math.floor((max - min) / step) + 1;
     /** Index of the step that corresponds to `leftPercent`. */
     const stepIndex = Math.round(leftPercent * (numSteps - 1));
     const discreteValue =
@@ -1078,7 +1077,7 @@ export const Slider = (props: SliderProps) => {
    */
   const calcValueForDelta = (currentValue: number, delta: number, step = 1) => {
     const base =
-      delta > 0 ? Math.floor(currentValue / step) * step : currentValue;
+      delta > 0 ? Math.round(currentValue / step) * step : currentValue;
     const newValue = base + delta;
     // TODO: Why is the logical OR needed here?
     const decimals = (step.toString().split('.')[1] || '').length;
