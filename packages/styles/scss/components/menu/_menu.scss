@@ -39,6 +39,15 @@
     visibility: hidden;
   }
 
+  .#{$prefix}--menu--border {
+    outline: 1px solid $border-subtle;
+    outline-offset: -1px;
+  }
+
+  .#{$prefix}--menu--background-token__background {
+    background-color: $background;
+  }
+
   .#{$prefix}--menu--with-icons {
     min-inline-size: 12rem;
   }
