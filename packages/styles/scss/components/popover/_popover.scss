@@ -121,7 +121,8 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--border
     .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    border: 1px solid $popover-border-color;
+    outline: 1px solid $popover-border-color;
+    outline-offset: -1px;
   }
 
   // Caret tip modifier
@@ -446,11 +447,13 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-height;
+    inline-size: $popover-caret-width;
+
     &::after {
       block-size: $popover-caret-height;
       clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
       inline-size: $popover-caret-width;
-      margin-inline-start: calc(-1 * #{$popover-caret-width / 2});
     }
   }
 
@@ -479,7 +482,6 @@ $popover-caret-height: custom-property.get-var(
       block-size: $popover-caret-height;
       clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
       inline-size: $popover-caret-width;
-      margin-inline-start: calc(-1 * #{$popover-caret-width / 2});
     }
 
     &::after {
@@ -679,12 +681,13 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-height;
+    inline-size: $popover-caret-width;
+
     &::after {
       block-size: $popover-caret-height;
       clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
       inline-size: $popover-caret-width;
-      margin-block-start: calc(-1 * #{$popover-caret-height});
-      margin-inline-start: calc(-1 * #{$popover-caret-width / 2});
     }
   }
 
@@ -713,8 +716,6 @@ $popover-caret-height: custom-property.get-var(
       block-size: $popover-caret-height;
       clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
       inline-size: $popover-caret-width;
-      margin-block-start: calc(-1 * #{$popover-caret-height});
-      margin-inline-start: calc(-1 * #{$popover-caret-width / 2});
     }
 
     &::after {

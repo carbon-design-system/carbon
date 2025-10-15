@@ -145,7 +145,8 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[border]),
 :host(#{$prefix}-popover-content[border]) {
   .#{$prefix}--popover-content {
-    border: 1px solid $popover-border-color;
+    outline: 1px solid $popover-border-color;
+    outline-offset: -1px;
   }
 }
 
