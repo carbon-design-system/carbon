@@ -12,7 +12,7 @@ import {
   type GetTextDirection,
   type TextDir,
   type TextDirectionContextType,
-} from '.';
+} from './TextDirectionContext';
 
 export interface TextDirectionProps {
   children: ReactNode;

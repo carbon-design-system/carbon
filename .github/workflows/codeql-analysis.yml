@@ -24,7 +24,7 @@ jobs:
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@2d92b76c45b91eb80fc44c74ce3fce0ee94e8f9d # v3.30.0
+        uses: github/codeql-action/init@a8d1ac45b9a34d11fe398d5503176af0d06b303e # v3.30.7
         with:
           languages: javascript-typescript
           config: |
@@ -32,4 +32,4 @@ jobs:
               - 'packages/cli/src/component/templates/**'
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@2d92b76c45b91eb80fc44c74ce3fce0ee94e8f9d # v3.30.0
+        uses: github/codeql-action/analyze@a8d1ac45b9a34d11fe398d5503176af0d06b303e # v3.30.7

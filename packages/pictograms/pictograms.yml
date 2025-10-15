@@ -94,7 +94,7 @@
   aliases:
     - emergency
     - medical
-    - 'heart attack,'
+    - heart attack,
     - health
     - resuscitation
 - name: agile
@@ -332,6 +332,11 @@
   aliases:
     - analytics
     - cloud
+- name: analytics--02
+  friendly_name: Analytics 02
+  aliases:
+    - analytics
+    - cloud
 - name: analyze
   friendly_name: Analyze
   aliases:
@@ -362,6 +367,10 @@
   aliases:
     - analyzing containers
     - cloud
+- name: android
+  friendly_name: Android
+  aliases:
+    - android
 - name: anonymous--users
   friendly_name: Anonymous Users
   aliases:
@@ -390,6 +399,11 @@
   aliases:
     - API lifecycle
     - cloud
+- name: api--management
+  friendly_name: API management
+  aliases:
+    - API management
+    - data analytics
 - name: app--developer
   friendly_name: App developer
   aliases:
@@ -800,9 +814,10 @@
     - blockchain
     - cloud
 - name: bluepages
-  friendly_name: Bluepages
+  friendly_name: Team focus
   aliases:
     - bluepages
+    - team focus
 - name: boston--zakim-bridge
   friendly_name: Boston Zakim Bridge
   aliases:
@@ -977,7 +992,7 @@
 - name: c-plus-plus--language
   friendly_name: C++
   aliases:
-    - 'c++, coding language'
+    - c++, coding language
 - name: cafe
   friendly_name: Café
   aliases:
@@ -1176,6 +1191,17 @@
     - life science
     - science
     - biology
+- name: champagne
+  friendly_name: Champagne
+  aliases:
+    - Champagne
+    - party
+    - drink
+    - celebrations
+    - event
+    - racing
+    - F1
+    - sports
 - name: chart--3D
   friendly_name: Chart 3D
   aliases:
@@ -1345,6 +1371,22 @@
     - pie chart
     - data
     - analytics
+    - data analytics
+- name: chart--predictive-analytics--bar
+  friendly_name: Chart predictive analytics bar
+  aliases:
+    - chart
+    - predictive
+    - analytics
+    - bar chart
+    - data analytics
+- name: chart--predictive-analytics--line
+  friendly_name: Chart predictive analytics line
+  aliases:
+    - chart
+    - predictive
+    - analytics
+    - line chart
     - data analytics
 - name: chart--quadrant-plot
   friendly_name: Chart quadrant plot
@@ -2222,7 +2264,7 @@
   aliases:
     - Red Hat
     - container
-    - 'storage, data'
+    - storage, data
 - name: container--microservices
   friendly_name: Container microservices
   aliases:
@@ -2247,11 +2289,16 @@
   aliases:
     - containers
     - cloud
+- name: containers--02
+  friendly_name: Containers 02
+  aliases:
+    - containers
+    - cloud
 - name: containers-and-cloud-native
   friendly_name: Containers and Cloud Native
   aliases:
     - cloud native
-    - 'container,'
+    - container,
     - containers
     - kubernetes
 - name: content--design
@@ -2270,6 +2317,13 @@
   aliases:
     - continuous
     - cloud
+- name: continuous--delivery
+  friendly_name: Continuous delivery
+  aliases: []
+- name: continuous--integration
+  friendly_name: Continuous integration
+  aliases:
+    - continuous integration
 - name: continuous--security
   friendly_name: Continuous Security
   aliases:
@@ -2346,6 +2400,36 @@
     - discount
     - torn
     - money
+- name: cowboy--boot
+  friendly_name: Cowboy boot
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
+- name: cowboy--hat
+  friendly_name: Cowboy hat
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
 - name: credit--card
   friendly_name: Credit card
   aliases:
@@ -2374,9 +2458,9 @@
   friendly_name: Crosshairs
   aliases:
     - crosshair
-    - 'recticle,'
+    - recticle,
     - aim
-    - 'scope,'
+    - scope,
     - telescope
     - microscope
 - name: cupcake
@@ -2516,6 +2600,18 @@
     - data
     - management
     - cloud
+- name: data--management--02
+  friendly_name: Data management 02
+  aliases:
+    - data
+    - management
+    - cloud
+- name: data--management--03
+  friendly_name: Data management 03
+  aliases:
+    - data
+    - management
+    - cloud
 - name: data--privacy
   friendly_name: Data privacy
   aliases:
@@ -2548,13 +2644,19 @@
     - storage
     - data storage
 - name: data--protection-data--security
-  friendly_name: Data protection data security
+  friendly_name: Data protection and security
   aliases:
     - data protection
     - data security
     - cloud
 - name: data--science
   friendly_name: Data science
+  aliases:
+    - data
+    - science
+    - cloud
+- name: data--science--02
+  friendly_name: Data science 02
   aliases:
     - data
     - science
@@ -2585,6 +2687,12 @@
     - data storage
     - data
     - storage
+- name: data--store
+  friendly_name: Data store
+  aliases:
+    - data
+    - store
+    - data storage
 - name: data--transfer
   friendly_name: Data transfer
   aliases:
@@ -2627,6 +2735,16 @@
     - cloud
 - name: deep-learning
   friendly_name: Deep learning
+  aliases:
+    - deep learning
+    - cloud
+- name: deep-learning--02
+  friendly_name: Deep learning 02
+  aliases:
+    - deep learning
+    - cloud
+- name: deep-learning--03
+  friendly_name: Deep learning 03
   aliases:
     - deep learning
     - cloud
@@ -2767,6 +2885,14 @@
   aliases:
     - devops
     - cloud
+- name: devops--loop--01
+  friendly_name: Devops loop 01
+  aliases:
+    - Devops loop
+- name: devops--loop--02
+  friendly_name: Devops loop 02
+  aliases:
+    - Devops loop
 - name: devops--toolchain
   friendly_name: Devops toolchain
   aliases:
@@ -2783,7 +2909,7 @@
     - digital
     - cloud
 - name: digital--id
-  friendly_name: Digital Id
+  friendly_name: Digital ID
   aliases:
     - digital id
     - digital
@@ -3017,6 +3143,11 @@
     - hybrid
     - IoT
     - internet of things
+- name: edge--computing
+  friendly_name: Edge computing
+  aliases:
+    - edge
+    - computing
 - name: education
   friendly_name: Education
   aliases:
@@ -3343,7 +3474,7 @@
     - expand
     - vertical
 - name: expansion
-  friendly_name: expansion
+  friendly_name: Expansion
   aliases:
     - expansion
     - cloud
@@ -3391,6 +3522,64 @@
     - rinse
     - emergency eye wash
     - eyewash station
+- name: f1--car--01
+  friendly_name: F1 car 01
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+- name: f1--car--02
+  friendly_name: F1 car 02
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+- name: f1--grid
+  friendly_name: F1 grid
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - race grid
+    - sports
+- name: f1--pit-stop-traffic-light
+  friendly_name: F1 pit stop traffic light
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - pit stop
+    - traffic light
+    - sports
+- name: f1--race
+  friendly_name: F1 race
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+- name: f1--steering-wheel
+  friendly_name: F1 steering wheel
+  aliases:
+    - f1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - steering wheel
+    - sports
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
   aliases:
@@ -3814,6 +4003,29 @@
     - trial
     - complimentary
     - sample
+- name: front-end--development
+  friendly_name: Front-end development
+  aliases:
+    - front-end
+    - development
+    - visible
+    - interactive
+    - dev
+- name: frost-tower
+  friendly_name: Frost tower
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
 - name: fuel
   friendly_name: Fuel
   aliases:
@@ -4326,6 +4538,16 @@
     - podcast
     - hearing protection
     - workplace
+- name: headset
+  friendly_name: Headset
+  aliases:
+    - headset
+    - headphones
+    - 2-way communication
+    - receiver
+    - transceiver
+    - F1
+    - sports
 - name: health
   friendly_name: Health
   aliases:
@@ -4370,6 +4592,16 @@
     - chart
     - data analytics
     - analytics
+- name: helmet
+  friendly_name: Helmet
+  aliases:
+    - Helmet
+    - headgear
+    - safety
+    - sports,
+    - acing
+    - F1
+    - sports
 - name: help-desk
   friendly_name: Help desk
   aliases:
@@ -4997,7 +5229,7 @@
     - learning
     - learn
 - name: intelligent-infrastructure
-  friendly_name: 'Intelligent assets, facilities and infrastructure'
+  friendly_name: Intelligent assets, facilities and infrastructure
   aliases:
     - facilities
     - smart buildings
@@ -5013,6 +5245,18 @@
     - security
 - name: internet-of-things
   friendly_name: Internet of things (IoT)
+  aliases:
+    - internet of things
+    - iot
+    - cloud
+- name: internet-of-things--02
+  friendly_name: Internet of things (IoT) 02
+  aliases:
+    - internet of things
+    - iot
+    - cloud
+- name: internet-of-things--03
+  friendly_name: Internet of things (IoT) 03
   aliases:
     - internet of things
     - iot
@@ -5033,6 +5277,16 @@
     - city
     - cities
     - internet of things
+- name: it--infrastructure
+  friendly_name: IT infrastructure
+  aliases:
+    - operating system
+    - OS
+    - software
+    - application
+    - infrastructure app
+    - app
+    - information technology
 - name: it--infrastructure-software
   friendly_name: IT infrastructure software
   aliases:
@@ -5054,6 +5308,13 @@
     - cities
 - name: java
   friendly_name: Java
+  aliases:
+    - java
+    - cloud
+    - software
+    - code
+- name: java--02
+  friendly_name: Java 02
   aliases:
     - java
     - cloud
@@ -5273,6 +5534,10 @@
     - hyperlink
     - url
     - reference
+- name: linux
+  friendly_name: Linux
+  aliases:
+    - linux
 - name: linuxone-5
   friendly_name: LinuxONE 5
   aliases:
@@ -5372,6 +5637,21 @@
     - big ben
     - cities
     - city
+- name: longhorn
+  friendly_name: Longhorn
+  aliases:
+    - Hat
+    - boot
+    - clothing
+    - Austin
+    - Texas
+    - longhorn
+    - cattle
+    - cow
+    - western
+    - south
+    - farm
+    - agriculture
 - name: loon
   friendly_name: Loon
   aliases:
@@ -5703,6 +5983,30 @@
     - memory
     - RAM
     - cloud
+- name: messaging--01
+  friendly_name: Messaging 01
+  aliases:
+    - messaging
+    - electronic messages
+    - instant messaging
+    - asynchronous
+    - communication
+- name: messaging--02
+  friendly_name: Messaging 02
+  aliases:
+    - messaging
+    - electronic messages
+    - instant messaging
+    - asynchronous
+    - communication
+- name: messaging--03
+  friendly_name: Messaging 03
+  aliases:
+    - messaging
+    - electronic messages
+    - instant messaging
+    - asynchronous
+    - communication
 - name: metal-can
   friendly_name: Metal can
   aliases:
@@ -5764,6 +6068,11 @@
     - medicine
 - name: microservices
   friendly_name: Microservices
+  aliases:
+    - microservices
+    - cloud
+- name: microservices--02
+  friendly_name: Microservices 02
   aliases:
     - microservices
     - cloud
@@ -5832,6 +6141,12 @@
     - device interaction
     - device
     - chat
+- name: mobile--development
+  friendly_name: Mobile development
+  aliases:
+    - mobile
+    - development
+    - dev
 - name: mobile--devices
   friendly_name: Mobile devices
   aliases:
@@ -6000,6 +6315,10 @@
     - data storage
     - hardware
     - workloads
+- name: multicloud--computing
+  friendly_name: Multicloud computing
+  aliases:
+    - multicloud computing
 - name: multitask
   friendly_name: Multitask
   aliases:
@@ -6011,7 +6330,7 @@
 - name: mumbai
   friendly_name: Mumbai
   aliases:
-    - 'Mumbai, India'
+    - Mumbai, India
 - name: munich
   friendly_name: Munich
   aliases:
@@ -6034,6 +6353,22 @@
     - language
     - watson
     - AI
+- name: natural--language--processing--01
+  friendly_name: Natural language processing 01
+  aliases:
+    - natural language processing
+    - AI
+    - interpret
+    - generate
+    - language
+- name: natural--language--processing--02
+  friendly_name: Natural language processing 02
+  aliases:
+    - natural language processing
+    - AI
+    - interpret
+    - generate
+    - language
 - name: natural--language--understanding
   friendly_name: Natural language understanding
   aliases:
@@ -6200,6 +6535,20 @@
     - no smoking
     - smoke-free area
     - workplace
+- name: node-dot-js--01
+  friendly_name: Node.js 01
+  aliases:
+    - node.js
+    - open-source
+    - cross-platform
+    - javascript
+- name: node-dot-js--02
+  friendly_name: Node.js 02
+  aliases:
+    - node.js
+    - open-source
+    - cross-platform
+    - javascript
 - name: notifications
   friendly_name: Notifications
   aliases:
@@ -6278,6 +6627,10 @@
     - city
     - cities
     - architecture
+- name: object-storage
+  friendly_name: Object storage
+  aliases:
+    - object storage
 - name: observability--01
   friendly_name: Observability 01
   aliases:
@@ -6328,6 +6681,11 @@
   aliases:
     - on premises to cloud
     - Cloud
+- name: on-premises--02
+  friendly_name: On premises 02
+  aliases:
+    - on premises
+    - cloud
 - name: open-source
   friendly_name: Open source
   aliases:
@@ -6659,6 +7017,11 @@
   aliases:
     - php
     - coding language
+- name: php--language--02
+  friendly_name: PHP 02
+  aliases:
+    - php
+    - coding language
 - name: pill--bottle--01
   friendly_name: Pill bottle 01
   aliases:
@@ -6718,6 +7081,11 @@
     - recycling
 - name: platform-as-a-service
   friendly_name: Platform-as-a-service
+  aliases:
+    - platform-as-a-service
+    - cloud
+- name: platform-as-a-service--02
+  friendly_name: Platform-as-a-service 02
   aliases:
     - platform-as-a-service
     - cloud
@@ -7036,6 +7404,11 @@
     - puzzle
     - strategy
     - approach
+- name: python
+  friendly_name: Python
+  aliases:
+    - Python
+    - programming language
 - name: q-q-plot
   friendly_name: Q-Q plot
   aliases:
@@ -7127,6 +7500,11 @@
   aliases:
     - R
     - coding language
+- name: r--language-and-environment
+  friendly_name: R language and environment
+  aliases:
+    - R
+    - coding language
 - name: racetrack
   friendly_name: Racetrack
   aliases:
@@ -7185,6 +7563,11 @@
   aliases:
     - react to data
     - Cloud
+- name: reactive-systems
+  friendly_name: Reactive systems
+  aliases:
+    - reactive
+    - systems
 - name: read-only
   friendly_name: Read only
   aliases:
@@ -7685,6 +8068,12 @@
     - security
     - shield
     - Cloud
+- name: security--03
+  friendly_name: Security 03
+  aliases:
+    - security
+    - shield
+    - Cloud
 - name: security--as--a--service
   friendly_name: Security as a Service
   aliases:
@@ -7781,8 +8170,17 @@
     - scale
     - workload
     - resource
+    - cloud
 - name: serverless--02
   friendly_name: Serverless 02
+  aliases:
+    - serverless
+    - scale
+    - workload
+    - resource
+    - cloud
+- name: serverless--03
+  friendly_name: Serverless 03
   aliases:
     - serverless
     - scale
@@ -7998,6 +8396,11 @@
     - coding
     - html
     - markup language
+- name: software--development
+  friendly_name: Software development
+  aliases:
+    - software
+    - development
 - name: solar--field
   friendly_name: Solar field
   aliases:
@@ -8038,6 +8441,11 @@
     - text
     - watson
     - AI
+- name: speech-and-empathy--01
+  friendly_name: speech-and-empathy--01
+  aliases:
+    - speech
+    - empathy
 - name: speed-bag
   friendly_name: Speed bag
   aliases:
@@ -8083,6 +8491,10 @@
     - showtime
     - show
     - performance
+- name: spring
+  friendly_name: Spring
+  aliases:
+    - Spring
 - name: sprout
   friendly_name: Sprout
   aliases:
@@ -8437,6 +8849,11 @@
     - green
     - leaf
     - cycle
+- name: swift-at-ibm
+  friendly_name: Swift@IBM
+  aliases:
+    - Swift
+    - IBM
 - name: swipe--left
   friendly_name: Swipe left
   aliases:
@@ -8477,6 +8894,10 @@
     - synergy
     - union
     - Venn diagram
+- name: systems
+  friendly_name: Systems
+  aliases:
+    - systems
 - name: systems-and-tools
   friendly_name: Systems and tools
   aliases:
@@ -8615,7 +9036,7 @@
   friendly_name: Team radio
   aliases:
     - radio
-    - 'walkie-talkie,'
+    - walkie-talkie,
     - communication
     - range
     - handheld tranciever
@@ -8627,6 +9048,15 @@
     - teammates
     - team
     - people
+- name: technical-document-generation
+  friendly_name: Technical document generation
+  aliases:
+    - AI
+    - watsonx
+    - watsonx Code Assistant for z
+    - generate
+    - technical
+    - document
 - name: technical-owner
   friendly_name: Technical owner
   aliases:
@@ -8792,7 +9222,7 @@
 - name: text--input
   friendly_name: Text input
   aliases:
-    - 'text input, user input'
+    - text input, user input
 - name: text--layout
   friendly_name: Text layout
   aliases:
@@ -8852,6 +9282,17 @@
     - data analytics
     - data
     - analytics
+- name: tire
+  friendly_name: Tire
+  aliases:
+    - F1
+    - Formula One
+    - racing
+    - race car
+    - speed
+    - sports
+    - rubber
+    - radial
 - name: toggle
   friendly_name: Toggle
   aliases:
@@ -8955,7 +9396,7 @@
     - mobile
     - gesture
 - name: touch--id
-  friendly_name: Touch ID
+  friendly_name: Fingerprint
   aliases:
     - touch ID
     - touch
@@ -8965,6 +9406,7 @@
     - mobile
     - id
     - identity
+    - fingerprint
 - name: touch--screen
   friendly_name: Touch screen
   aliases:
@@ -9506,7 +9948,7 @@
     - virtual
     - speed
     - storage
-    - 'server, cloud'
+    - server, cloud
 - name: virtual--storage
   friendly_name: Virtual storage
   aliases:
@@ -9566,6 +10008,14 @@
     - AI
 - name: visual--recognition
   friendly_name: Visual recognition
+  aliases:
+    - visual recognition
+    - visual
+    - recognition
+    - watson
+    - AI
+- name: visual--recognition--02
+  friendly_name: Visual recognition 02
   aliases:
     - visual recognition
     - visual
@@ -9973,4 +10423,4 @@
     - Zurich
     - cultural history
     - Switzerland
-    - 'museum, swiss'
+    - museum, swiss

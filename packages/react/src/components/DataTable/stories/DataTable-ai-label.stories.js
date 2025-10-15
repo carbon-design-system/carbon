@@ -49,48 +49,17 @@ export default {
     docs: {
       page: mdx,
     },
-  },
-};
-
-const sharedArgTypes = {
-  filterRows: {
-    table: {
-      disable: true,
-    },
-  },
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  isSortable: {
-    table: {
-      disable: true,
-    },
-  },
-  overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
-  },
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
-  rows: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  sortRow: {
-    table: {
-      disable: true,
+    controls: {
+      exclude: [
+        'filterRows',
+        'headers',
+        'isSortable',
+        'overflowMenuOnHover',
+        'radio',
+        'rows',
+        'translateWithId',
+        'sortRow',
+      ],
     },
   },
 };
@@ -238,8 +207,6 @@ export const AILabelWithSelection = (args) => (
   </DataTable>
 );
 
-AILabelWithSelection.argTypes = { ...sharedArgTypes };
-
 export const AILabelWithRadioSelection = (args) => (
   <DataTable rows={rows} headers={headers} radio {...args}>
     {({
@@ -290,8 +257,6 @@ export const AILabelWithRadioSelection = (args) => (
     )}
   </DataTable>
 );
-
-AILabelWithRadioSelection.argTypes = { ...sharedArgTypes };
 
 export const AILabelWithSelectionAndExpansion = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
@@ -359,8 +324,6 @@ export const AILabelWithSelectionAndExpansion = (args) => (
   </DataTable>
 );
 
-AILabelWithSelectionAndExpansion.argTypes = { ...sharedArgTypes };
-
 export const AILabelWithExpansion = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({
@@ -423,8 +386,6 @@ export const AILabelWithExpansion = (args) => (
     )}
   </DataTable>
 );
-
-AILabelWithExpansion.argTypes = { ...sharedArgTypes };
 
 export const ColumnAILabelWithSelectionAndExpansion = (args) => (
   <DataTable rows={rows} headers={columnAILabelHeaders} {...args}>
@@ -495,8 +456,6 @@ export const ColumnAILabelWithSelectionAndExpansion = (args) => (
   </DataTable>
 );
 
-ColumnAILabelWithSelectionAndExpansion.argTypes = { ...sharedArgTypes };
-
 export const ColumnAILabelSort = (args) => (
   <DataTable rows={rows} headers={columnAILabelHeaders} {...args}>
     {({
@@ -539,8 +498,6 @@ export const ColumnAILabelSort = (args) => (
     )}
   </DataTable>
 );
-
-ColumnAILabelSort.argTypes = { ...sharedArgTypes };
 
 export const FullTableAI = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
@@ -585,5 +542,3 @@ export const FullTableAI = (args) => (
     )}
   </DataTable>
 );
-
-FullTableAI.argTypes = { ...sharedArgTypes };
