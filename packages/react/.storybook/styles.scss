@@ -11,7 +11,7 @@
 @use '../scss/grid/flexbox';
 
 @use '@carbon/styles/scss/breakpoint' as breakpoint;
-@use '@carbon-labs/mdx-components/scss/index.scss';
+@use '@carbon-labs/mdx-components/scss/index';
 
 :root {
   @include styles.theme(styles.$white);
