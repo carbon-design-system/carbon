@@ -102,12 +102,13 @@ class CDSPopover extends HostListenerMixin(LitElement) {
    */
   protected _handleSlotChange({ target }: Event) {
     if (this.tabTip) {
-      const component = (target as HTMLSlotElement).assignedNodes().filter(
-        (node) =>
-           
-          node.nodeType === Node.ELEMENT_NODE &&
-          (node as Element).tagName === 'BUTTON'
-      );
+      const component = (target as HTMLSlotElement)
+        .assignedNodes()
+        .filter(
+          (node) =>
+            node.nodeType === Node.ELEMENT_NODE &&
+            (node as Element).tagName === 'BUTTON'
+        );
 
       (component[0] as HTMLElement)?.classList.add(
         `${prefix}--popover--tab-tip__button`
