@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -67,11 +67,29 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
+:host(#{$prefix}-popover) {
+  .#{$prefix}--popover--tab-tip__button:focus-within {
+    @include focus-outline('outline');
+  }
+}
+
 :host(#{$prefix}-tooltip-content[open][tabTip]),
 :host(#{$prefix}-popover-content[open][tabTip]) {
   .#{$prefix}--popover-content {
     border-radius: 0;
-    background: theme.$layer;
+  }
+}
+:host(#{$prefix}-popover[tabTip][open]) {
+  ::slotted(button[class*='#{$prefix}--popover--tab-tip__button']:not(:focus)) {
+    &::after {
+      position: absolute;
+      z-index: z('floating') + 1;
+      background: theme.$layer;
+      block-size: 2px;
+      content: '';
+      inline-size: 100%;
+      inset-block-end: 0;
+    }
   }
 }
 
@@ -85,11 +103,8 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
-:host(#{$prefix}-popover-content[dropShadow]) {
-  @include custom-property.declaration(
-    'popover-drop-shadow',
-    drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
-  );
+:host(#{$prefix}-popover-content[dropShadow]) .#{$prefix}--popover {
+  filter: drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2));
 }
 
 :host(#{$prefix}-tooltip-content[align^='bottom']:not([autoalign])),
