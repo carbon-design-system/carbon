@@ -1566,6 +1566,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -2859,6 +2860,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "nextMonthAriaLabel": {
+        "type": "string",
+      },
       "onChange": {
         "type": "func",
       },
@@ -2870,6 +2874,9 @@ Map {
       },
       "parseDate": {
         "type": "func",
+      },
+      "prevMonthAriaLabel": {
+        "type": "string",
       },
       "readOnly": {
         "args": [
@@ -7554,6 +7561,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",

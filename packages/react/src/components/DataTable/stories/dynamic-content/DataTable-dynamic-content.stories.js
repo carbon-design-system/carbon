@@ -166,6 +166,7 @@ export const Default = (args) => {
           {({
             rows,
             headers,
+            getExpandHeaderProps,
             getHeaderProps,
             getSelectionProps,
             getToolbarProps,
@@ -238,7 +239,10 @@ export const Default = (args) => {
                 <Table {...getTableProps()} aria-label="sample table">
                   <TableHead>
                     <TableRow>
-                      <TableExpandHeader aria-label="expand row" />
+                      <TableExpandHeader
+                        aria-label="expand row"
+                        {...getExpandHeaderProps()}
+                      />
                       {args.radio ? (
                         <th scope="col" />
                       ) : (

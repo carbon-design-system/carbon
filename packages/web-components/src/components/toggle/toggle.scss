@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities/convert' as convert;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 :host(#{$prefix}-toggle) {
   outline: none;
@@ -19,6 +20,12 @@ $css--plex: true !default;
     -webkit-user-select: none;
 
     user-select: none;
+  }
+}
+
+:host(#{$prefix}-toggle[enable-v12-toggle-reduced-label-spacing]) {
+  .#{$prefix}--toggle__label-text {
+    margin-block-end: $spacing-03;
   }
 }
 

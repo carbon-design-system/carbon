@@ -27,7 +27,7 @@ const template = ({
   hasContent = true,
   hasBody = true,
 }: { hasContent?: boolean; hasBody?: boolean } = {}) =>
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
   !hasContent ? (undefined! as TemplateResult) : contentTemplate({ hasBody });
 
 const iconTemplate = (props) =>
@@ -46,12 +46,12 @@ xdescribe('cds-tooltip', () => {
     });
 
     it('Should be tolerant of missing menu body', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(trigger!.open).toBe(true);
     });
   });
@@ -68,14 +68,14 @@ xdescribe('cds-tooltip', () => {
     });
 
     it('Should open and close the menu', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(trigger!.open).toBe(true);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(content!.open).toBe(true);
       expect(trigger?.getAttribute('aria-expanded')).toBe('true');
     });
@@ -83,7 +83,7 @@ xdescribe('cds-tooltip', () => {
     it('Should start observing element resizes when tooltip gets open', async () => {
       spyOn(ResizeObserver.prototype, 'observe');
       spyOn(ResizeObserver.prototype, 'unobserve');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
@@ -93,25 +93,25 @@ xdescribe('cds-tooltip', () => {
         'div[data-floating-menu-container]'
       );
       expect(ResizeObserver.prototype.observe).toHaveBeenCalledWith(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         floatingMenuContainer!
       );
       expect(ResizeObserver.prototype.observe).toHaveBeenCalledWith(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         trigger!.parentElement!
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip>`
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip-content>`
       expect(ResizeObserver.prototype.unobserve).toHaveBeenCalledWith(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         trigger!.parentElement!
       );
       expect(ResizeObserver.prototype.unobserve).toHaveBeenCalledWith(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         floatingMenuContainer!
       );
     });
@@ -130,27 +130,27 @@ xdescribe('cds-tooltip', () => {
 
     it('Should place and position', async () => {
       // TODO: Figure out why `spyOnProperty()` with a property name that actually exists causes a TS error
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
       // @ts-ignore
       spyOnProperty(body, 'position').and.returnValue({
         start: 1,
         top: 2,
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip>`
       await Promise.resolve(); // Calls `update()` of `<cds-tooltip-body>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(content!.parentElement).toBe(
         document.body.querySelector(
           'div[data-floating-menu-container]'
         ) as HTMLElement
       );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(content!.style.left).toBe('1px');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(content!.style.top).toBe('2px');
     });
   });
@@ -166,7 +166,7 @@ describe('cds-tooltip-icon', () => {
       render(iconTemplate(), document.body);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-tooltip-icon' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -183,7 +183,7 @@ describe('cds-tooltip-icon', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-tooltip-icon' as any)
       ).toMatchSnapshot({
         mode: 'shadow',

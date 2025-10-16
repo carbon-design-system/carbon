@@ -175,7 +175,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   return (
     <FormContext.Provider value={{ isFluid: true }}>
       {isFilterable ? (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
         // @ts-ignore
         <FilterableMultiSelect
           ref={ref as RefObject<HTMLDivElement | null>}
@@ -183,7 +183,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
           {...other}
         />
       ) : (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
         // @ts-ignore
         <MultiSelect ref={ref} className={classNames} {...other} />
       )}

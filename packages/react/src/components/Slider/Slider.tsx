@@ -1007,8 +1007,7 @@ export const Slider = (props: SliderProps) => {
     leftPercent: number;
   }) => {
     const { step = 1, min, max } = props;
-    const numSteps =
-      Math.floor((max - min) / step) + ((max - min) % step === 0 ? 1 : 2);
+    const numSteps = Math.floor((max - min) / step) + 1;
     /** Index of the step that corresponds to `leftPercent`. */
     const stepIndex = Math.round(leftPercent * (numSteps - 1));
     const discreteValue =
@@ -1078,7 +1077,7 @@ export const Slider = (props: SliderProps) => {
    */
   const calcValueForDelta = (currentValue: number, delta: number, step = 1) => {
     const base =
-      delta > 0 ? Math.floor(currentValue / step) * step : currentValue;
+      delta > 0 ? Math.round(currentValue / step) * step : currentValue;
     const newValue = base + delta;
     // TODO: Why is the logical OR needed here?
     const decimals = (step.toString().split('.')[1] || '').length;
@@ -1292,7 +1291,7 @@ export const Slider = (props: SliderProps) => {
       hideLabel,
       step = 1,
       // TODO: Other properties are deleted below. Why isn't this one?
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       stepMultiplier: _stepMultiplier,
       inputType = 'number',
       invalidText,
@@ -1325,14 +1324,14 @@ export const Slider = (props: SliderProps) => {
     const showWarning =
       (!readOnly && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
-      // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
       (typeof correctedValue !== null &&
         correctedPosition === HandlePosition.LOWER &&
         isValid);
     const showWarningUpper =
       (!readOnly && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
-      // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
       (typeof correctedValue !== null &&
         correctedPosition ===
           (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
@@ -1480,7 +1479,7 @@ export const Slider = (props: SliderProps) => {
                 <Text className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
                 </Text>
-                {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071 */
+                {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452 */
                 /* @ts-ignore onBlur + onChange types are incompatible*/}
                 <div
                   className={sliderClasses}
