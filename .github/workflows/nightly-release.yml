@@ -5,13 +5,13 @@ on:
     # Run every week day at 01:00 (24hr format)
     - cron: '0 1 * * 1-5'
 
+permissions:
+  id-token: write # Required for OIDC publishing https://docs.npmjs.com/trusted-publishers
+  contents: read
+
 jobs:
   release:
     runs-on: macos-14
-    # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
-    permissions:
-      id-token: write
-      contents: write
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
