@@ -42,6 +42,7 @@
     min-block-size: convert.to-rem(40px);
     overflow-x: auto;
 
+    // 42rem = 'md' breakpoint
     @container pagination (min-width: 42rem) {
       overflow: initial;
 
@@ -186,6 +187,7 @@
   .#{$prefix}--pagination__left {
     padding: 0 $spacing-05 0 0;
 
+    // 42rem = 'md' breakpoint width
     @container pagination (min-width: 42rem) {
       padding: 0 $spacing-05;
     }
