@@ -179,7 +179,7 @@ describe('cds-multi-select', function () {
       expect(item.textContent.trim()).to.not.equal('undefined');
     });
   });
-  
+
   it('should render with initial selected items if selected is added in any item(s)', async () => {
     const el = await fixture(html`
       <cds-multi-select label="Test label">
