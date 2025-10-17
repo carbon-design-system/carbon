@@ -144,14 +144,6 @@ function isLabelTextEmpty(children) {
   return children.every((child) => !child.props.labelText);
 }
 
-const rightArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
-  <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
-</svg>`;
-
-const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
-  <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
-</svg>`;
-
 function updateClassNames(calendar, prefix) {
   const calendarContainer = calendar.calendarContainer;
   const daysContainer = calendar.days;
@@ -394,6 +386,16 @@ export interface DatePickerProps {
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
   warnText?: ReactNode;
+
+  /**
+   * Accessible aria-label for the "next month" arrow icon.
+   */
+  nextMonthAriaLabel?: string;
+
+  /**
+   * Accessible aria-label for the "previous month" arrow icon.
+   */
+  prevMonthAriaLabel?: string;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(
@@ -423,6 +425,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     short = false,
     value,
     parseDate: parseDateProp,
+    nextMonthAriaLabel = 'Next month',
+    prevMonthAriaLabel = 'Previous month',
     ...rest
   }: DatePickerProps,
   ref: ForwardedRef<HTMLDivElement>
@@ -635,6 +639,17 @@ const DatePicker = React.forwardRef(function DatePicker(
     } else if (parseDateProp) {
       parseDate = parseDateProp;
     }
+
+    // Accessible arrow icons (localized manually)
+    // Flatpickr does not currently support localization of next/previous month
+    // labels, so we inject translated aria-labels based on the provided locale.
+    const rightArrowHTML = `<svg aria-label="${nextMonthAriaLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+    </svg>`;
+
+    const leftArrowHTML = `<svg aria-label="${prevMonthAriaLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+    </svg>`;
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
@@ -878,6 +893,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     closeOnSelect,
     hasInput,
     datePickerType,
+    nextMonthAriaLabel,
+    prevMonthAriaLabel,
   ]);
 
   // this hook allows consumers to access the flatpickr calendar
@@ -1249,6 +1266,16 @@ DatePicker.propTypes = {
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
   warnText: PropTypes.node,
+
+  /**
+   * Accessible aria-label for the "next month" arrow icon.
+   */
+  nextMonthAriaLabel: PropTypes.string,
+
+  /**
+   * Accessible aria-label for the "previous month" arrow icon.
+   */
+  prevMonthAriaLabel: PropTypes.string,
 };
 
 export default DatePicker;
