@@ -36,11 +36,14 @@
     justify-content: space-between;
     background-color: $layer;
     border-block-start: 1px solid $border-subtle;
+    container-name: pagination;
+    container-type: inline-size;
     inline-size: calc(100% - 1px);
     min-block-size: convert.to-rem(40px);
     overflow-x: auto;
 
-    @include breakpoint('md') {
+    // 42rem = 'md' breakpoint
+    @container pagination (min-width: 42rem) {
       overflow: initial;
 
       .#{$prefix}--pagination__control-buttons {
@@ -49,7 +52,7 @@
     }
 
     // mobile friendly pagination
-    @include breakpoint-down('md') {
+    @container pagination (max-width: 42rem) {
       .#{$prefix}--pagination__left > *,
       .#{$prefix}--pagination__right > * {
         display: none;
@@ -191,13 +194,14 @@
   .#{$prefix}--pagination__left {
     padding: 0 $spacing-05 0 0;
 
-    @include breakpoint('md') {
+    // 42rem = 'md' breakpoint width
+    @container pagination (min-width: 42rem) {
       padding: 0 $spacing-05;
     }
   }
 
   .#{$prefix}--pagination__text {
-    @include breakpoint('md') {
+    @container pagination (min-width: 42rem) {
       display: inline-block;
     }
   }
