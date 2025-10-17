@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,9 @@ import {
   offset,
   arrow,
   autoUpdate,
+  hide,
   Placement,
+  type Boundary,
 } from '@floating-ui/dom';
 
 type FloatingControllerOptions = {
@@ -29,6 +31,9 @@ type FloatingControllerOptions = {
   matchWidth?: boolean;
   open: boolean;
   alignmentAxisOffset?: number;
+  autoAlign?: boolean;
+  autoAlignBoundary?: Boundary;
+  isTabTip?: boolean;
 };
 
 /**
@@ -77,8 +82,9 @@ export default class FloatingController implements ReactiveController {
       styleElement,
       matchWidth,
       open,
-      flipArguments,
       alignmentAxisOffset,
+      autoAlignBoundary,
+      isTabTip,
     } = this.options;
 
     const element = styleElement ?? target;
@@ -115,13 +121,61 @@ export default class FloatingController implements ReactiveController {
         shimmedAlign = alignment;
         break;
     }
+    const cs = getComputedStyle(element);
+    const toPx = (val: string) => {
+      const raw = parseFloat(val);
+      return val.trim().endsWith('rem') ? raw * 16 : raw;
+    };
+    const offsetPx = !isTabTip
+      ? (toPx(cs.getPropertyValue('--cds-popover-offset').trim()) ?? 10)
+      : 0;
 
     const middleware = [
-      flip(flipArguments),
-      offset((alignmentAxisOffset ?? 0) + (caret ? 10 : 0)),
-      ...(caret && arrowElement
-        ? [arrow({ element: arrowElement, padding: 15 })]
-        : []),
+      offset(
+        caret && !isTabTip
+          ? { alignmentAxis: alignmentAxisOffset, mainAxis: offsetPx }
+          : 0
+      ),
+      this.options.autoAlign &&
+        flip({
+          fallbackPlacements: isTabTip
+            ? shimmedAlign.includes('bottom')
+              ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+              : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+            : shimmedAlign.includes('bottom')
+              ? [
+                  'bottom',
+                  'bottom-start',
+                  'bottom-end',
+                  'right',
+                  'right-start',
+                  'right-end',
+                  'left',
+                  'left-start',
+                  'left-end',
+                  'top',
+                  'top-start',
+                  'top-end',
+                ]
+              : [
+                  'top',
+                  'top-start',
+                  'top-end',
+                  'left',
+                  'left-start',
+                  'left-end',
+                  'right',
+                  'right-start',
+                  'right-end',
+                  'bottom',
+                  'bottom-start',
+                  'bottom-end',
+                ],
+
+          fallbackStrategy: 'initialPlacement',
+          fallbackAxisSideDirection: 'start',
+          boundary: autoAlignBoundary,
+        }),
       ...(matchWidth && (shimmedAlign === 'bottom' || shimmedAlign === 'top')
         ? [
             size({
@@ -137,6 +191,12 @@ export default class FloatingController implements ReactiveController {
               },
             }),
           ]),
+
+      ...(caret && arrowElement
+        ? [arrow({ element: arrowElement, padding: 15 })]
+        : []),
+
+      ...(this.options.autoAlign ? [hide()] : []),
     ];
 
     if (open) {
@@ -150,6 +210,10 @@ export default class FloatingController implements ReactiveController {
       element.style.left = `${x}px`;
       element.style.top = `${y}px`;
       element.style.position = `${strategy}`;
+
+      element.style.visibility = middlewareData.hide?.referenceHidden
+        ? 'hidden'
+        : 'visible';
 
       if (arrowElement) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
