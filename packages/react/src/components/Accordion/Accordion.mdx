@@ -2,14 +2,24 @@ import Accordion, { AccordionItem, AccordionSkeleton } from '../Accordion';
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as AccordionStories from './Accordion.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import {
+  InlineNotification,
+  PageDescription,
+} from '@carbon-labs/mdx-components';
 
-<Meta isTemplate />
+<Meta isTemplate />;
 
 # Accordion
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Accordion)
-&nbsp;|&nbsp;
-[Usage guidelines](https://www.carbondesignsystem.com/components/accordion/usage)
+<InlineNotification kind="info">
+  This example documentation is from the component Documentation templates can
+  be found
+</InlineNotification>
+[Source
+code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Accordion)
+&nbsp;|&nbsp; [Usage
+guidelines](https://www.carbondesignsystem.com/components/accordion/usage)
+
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/accordion/accessibility)
 
@@ -67,6 +77,13 @@ accordion's panel.
     },
   ]}
 />
+
+<PageDescription>
+
+Design annotations are needed for specific instances shown below, but for the
+standard accordion component, Carbon already incorporates accessibility.
+
+</PageDescription>
 
 ## Skeleton state
 
