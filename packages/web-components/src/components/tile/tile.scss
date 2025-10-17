@@ -76,8 +76,8 @@ $css--plex: true !default;
     @extend .#{$prefix}--tile--icon;
   }
 
-  ::slotted(#{$prefix}-ai-label),
-  ::slotted(#{$prefix}-slug) {
+  ::slotted([slot='ai-label']),
+  ::slotted([slot='slug']) {
     pointer-events: none;
   }
 }
@@ -210,8 +210,8 @@ $css--plex: true !default;
 :host(#{$prefix}-selectable-tile),
 :host(#{$prefix}-radio-tile) {
   ::slotted([slot='decorator']),
-  ::slotted(#{$prefix}-ai-label),
-  ::slotted(#{$prefix}-slug) {
+  ::slotted([slot='ai-label']),
+  ::slotted([slot='slug']) {
     position: absolute;
     inset-block-start: $spacing-05;
     inset-inline-end: $spacing-05;
@@ -219,10 +219,10 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-radio-tile[selected]) ::slotted([slot='decorator']),
-:host(#{$prefix}-radio-tile[selected]) ::slotted(#{$prefix}-ai-label),
+:host(#{$prefix}-radio-tile[selected]) ::slotted([slot='ai-label']),
 :host(#{$prefix}-selectable-tile) ::slotted([slot='decorator']),
-:host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-ai-label),
-:host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-slug) {
+:host(#{$prefix}-selectable-tile) ::slotted([slot='ai-label']),
+:host(#{$prefix}-selectable-tile) ::slotted([slot='slug']) {
   inset-inline-end: $spacing-08;
   transition: inset-inline-end $duration-fast-02 motion(standard, productive);
 }
