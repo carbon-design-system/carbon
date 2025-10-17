@@ -284,7 +284,7 @@ $css--plex: true !default;
 :host(#{$prefix}-multi-select[filterable][ai-label][has-value]) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
-      padding-inline-end: rem(45px);
+      padding-inline-end: rem(43px);
     }
   }
   .#{$prefix}--multi-select--selected

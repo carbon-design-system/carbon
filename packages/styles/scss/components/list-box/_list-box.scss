@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -338,7 +338,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // populated input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: convert.to-rem(78px);
+    padding-inline-end: convert.to-rem(70px);
   }
 
   // invalid && populated input field
@@ -1010,7 +1010,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
-    padding-inline-end: $spacing-12;
+    padding-inline-end: convert.to-rem(105px);
   }
 
   .#{$prefix}--list-box__wrapper--decorator
@@ -1052,7 +1052,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
-    padding-inline-end: convert.to-rem(139px);
+    padding-inline-end: convert.to-rem(137px);
   }
 
   .#{$prefix}--list-box__wrapper--decorator
