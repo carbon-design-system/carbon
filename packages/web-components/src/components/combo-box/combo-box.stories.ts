@@ -197,11 +197,7 @@ export const ShouldFilterItemTest = {
     <cds-combo-box
       title-text="Custom Filter"
       helper-text="Type to test shouldFilterItem (only matches items starting with input)"
-      .shouldFilterItem=${({ item, inputValue }) => {
-        const label = (item.textContent || '').toLowerCase();
-        const input = (inputValue || '').toLowerCase();
-        return label.startsWith(input);
-      }}>
+      should-filter-item>
       <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
       <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
       <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
