@@ -149,8 +149,8 @@ class CDSPasswordInput extends CDSTextInput {
       icon: ReturnType<typeof iconLoader>;
     } = {
       disabled: !readonly && disabled,
-      invalid: !readonly && invalid,
-      warn: !readonly && !invalid && warn,
+      invalid: !readonly && !disabled && invalid,
+      warn: !readonly && !disabled && !invalid && warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,
