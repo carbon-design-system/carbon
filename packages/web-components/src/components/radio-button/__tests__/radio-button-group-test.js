@@ -151,4 +151,22 @@ describe('cds-radio-button-group', () => {
     expect(rb1?.checked).to.be.false;
     expect(rb2?.checked).to.be.true;
   });
+
+  it('updates selection when value is set while the group is readonly', async () => {
+    const el = await fixture(html`
+      <cds-radio-button-group readonly>
+        <cds-radio-button value="test-1"></cds-radio-button>
+        <cds-radio-button value="test-2"></cds-radio-button>
+      </cds-radio-button-group>
+    `);
+
+    el.value = 'test-2';
+    await el.updateComplete;
+
+    const rb1 = el.querySelector(`cds-radio-button[value="test-1"]`);
+    const rb2 = el.querySelector(`cds-radio-button[value="test-2"]`);
+
+    expect(rb1?.checked).to.be.false;
+    expect(rb2?.checked).to.be.true;
+  });
 });
