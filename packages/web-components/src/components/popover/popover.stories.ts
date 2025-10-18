@@ -40,7 +40,10 @@ const controls = {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,
   },
-
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the popover',
+  },
   highContrast: {
     control: 'boolean',
     description: 'Render the component using the high-contrast variant',
@@ -49,6 +52,11 @@ const controls = {
     control: 'boolean',
     description:
       'Specify whether a drop shadow should be rendered on the popover',
+  },
+  backgroundToken: {
+    control: 'select',
+    options: ['layer', 'background'],
+    description: 'Specify the background token to use. Default is "layer".',
   },
   open: {
     control: 'boolean',
@@ -60,6 +68,7 @@ export const Default = {
   argTypes: controls,
   args: {
     caret: true,
+    border: false,
     highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
     dropShadow: true,
@@ -86,9 +95,11 @@ export const Default = {
       <cds-popover
         ?open=${args.open}
         ?caret=${args.caret}
+        ?border=${args.border}
         ?highContrast=${args.highContrast}
         align=${args.align}
-        ?dropShadow=${args.dropShadow}>
+        ?dropShadow=${args.dropShadow}
+        backgroundToken=${args.backgroundToken}>
         <button
           class="playground-trigger"
           aria-label="Checkbox"
@@ -170,7 +181,11 @@ export const TabTip = {
             </div>
           </cds-popover-content>
         </cds-popover>
-        <cds-popover tabTip id="popover-two" align="bottom-right">
+        <cds-popover
+          tabTip
+          id="popover-two"
+          align="bottom-right"
+          backgroundToken="layer">
           <button
             aria-label="Settings"
             type="button"

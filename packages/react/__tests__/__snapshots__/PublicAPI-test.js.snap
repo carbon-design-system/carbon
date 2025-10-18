@@ -84,6 +84,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -8029,6 +8041,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -11099,6 +11123,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -13591,6 +13627,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -15553,6 +15601,18 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
       },
       "caret": {
         "type": "bool",

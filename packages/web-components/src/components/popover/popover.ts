@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -65,6 +65,12 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   dropShadow = true;
 
   /**
+   * Specify whether a border should be rendered on the popover
+   */
+  @property({ type: Boolean, reflect: true })
+  border = false;
+
+  /**
    * Render the component using the high-contrast variant
    */
   @property({ type: Boolean, reflect: true })
@@ -81,6 +87,12 @@ class CDSPopover extends HostListenerMixin(LitElement) {
    */
   @property({ type: Boolean, reflect: true })
   tabTip = false;
+
+  /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ reflect: true, type: String })
+  backgroundToken = 'layer';
 
   /**
    * Handles `slotchange` event.
@@ -132,18 +144,26 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   updated(changedProperties) {
     const { selectorPopoverContent } = this.constructor as typeof CDSPopover;
-    ['open', 'align', 'autoalign', 'caret', 'dropShadow', 'tabTip'].forEach(
-      (name) => {
-        if (changedProperties.has(name)) {
-          const { [name as keyof CDSPopover]: value } = this;
-          if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
-            (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
-              name
-            ] = value;
-          }
+    [
+      'open',
+      'align',
+      'autoalign',
+      'caret',
+      'dropShadow',
+      'border',
+      'tabTip',
+      'highContrast',
+      'backgroundToken',
+    ].forEach((name) => {
+      if (changedProperties.has(name)) {
+        const { [name as keyof CDSPopover]: value } = this;
+        if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
+          (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
+            name
+          ] = value;
         }
       }
-    );
+    });
 
     if (this.autoalign && this.open) {
       // auto align functionality with @floating-ui/dom library
@@ -177,6 +197,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   render() {
     const {
       dropShadow,
+      border,
       highContrast,
       open,
       tabTip,
@@ -191,10 +212,13 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: this.caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--${this.align}`]: true,
       [`${prefix}--popover--tab-tip`]: tabTip,
+      [`${prefix}--popover--background-token__background`]:
+        this.backgroundToken === 'background' && !highContrast,
     });
     return html`
       <span class="${classes}" part="popover-container">
