@@ -346,18 +346,20 @@ class CDSTable extends HostListenerMixin(LitElement) {
         unfilteredRows.push(elem);
       }
 
-      const unfilteredSelectableLength = unfilteredRows.filter((elem) => {
-        return !elem.hasAttribute('disabled');
-      }).length;
+      if (this.isSelectable) {
+        const unfilteredSelectableLength = unfilteredRows.filter((elem) => {
+          return !elem.hasAttribute('disabled');
+        }).length;
 
-      const headerCheckbox = this._tableHeaderRow.shadowRoot
-        ?.querySelector(`${prefix}-checkbox`)
-        .shadowRoot.querySelector(`.${prefix}--checkbox`);
+        const headerCheckbox = this._tableHeaderRow.shadowRoot
+          ?.querySelector(`${prefix}-checkbox`)
+          .shadowRoot.querySelector(`.${prefix}--checkbox`);
 
-      if (unfilteredSelectableLength === 0) {
-        headerCheckbox.disabled = true;
-      } else {
-        headerCheckbox.disabled = false;
+        if (unfilteredSelectableLength === 0) {
+          headerCheckbox.disabled = true;
+        } else {
+          headerCheckbox.disabled = false;
+        }
       }
 
       if (this.expandable) {
