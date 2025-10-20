@@ -314,7 +314,9 @@ collect:
         - enable
         - maxDate
         - minDate
+        - nextMonthAriaLabel
         - parseDate
+        - prevMonthAriaLabel
         - short
         # DatePickerSkeleton
         - range
