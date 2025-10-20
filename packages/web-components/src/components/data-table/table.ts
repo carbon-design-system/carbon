@@ -355,11 +355,8 @@ class CDSTable extends HostListenerMixin(LitElement) {
           ?.querySelector(`${prefix}-checkbox`)
           .shadowRoot.querySelector(`.${prefix}--checkbox`);
 
-        if (unfilteredSelectableLength === 0) {
-          headerCheckbox.disabled = true;
-        } else {
-          headerCheckbox.disabled = false;
-        }
+        headerCheckbox.disabled =
+          unfilteredSelectableLength === 0 ? true : false;
       }
 
       if (this.expandable) {
