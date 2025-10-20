@@ -346,6 +346,20 @@ class CDSTable extends HostListenerMixin(LitElement) {
         unfilteredRows.push(elem);
       }
 
+      const unfilteredSelectableLength = unfilteredRows.filter((elem) => {
+        return !elem.hasAttribute('disabled');
+      }).length;
+
+      const headerCheckbox = this._tableHeaderRow.shadowRoot
+        ?.querySelector(`${prefix}-checkbox`)
+        .shadowRoot.querySelector(`.${prefix}--checkbox`);
+
+      if (unfilteredSelectableLength === 0) {
+        headerCheckbox.disabled = true;
+      } else {
+        headerCheckbox.disabled = false;
+      }
+
       if (this.expandable) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem as any).nextElementSibling.filtered = filtered;
