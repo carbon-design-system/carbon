@@ -366,6 +366,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
@@ -810,6 +811,7 @@ exports[`DataTable renders as expected - Component API should render and match s
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
