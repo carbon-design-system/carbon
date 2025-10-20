@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Accordion should render 1`] = `
 <DocumentFragment>
@@ -9,7 +9,7 @@ exports[`Accordion should render 1`] = `
       class="cds--accordion__item child"
     >
       <button
-        aria-controls="accordion-item-«r0»"
+        aria-controls="accordion-item-_r_0_"
         aria-expanded="false"
         class="cds--accordion__heading"
         type="button"
@@ -41,7 +41,7 @@ exports[`Accordion should render 1`] = `
       >
         <div
           class="cds--accordion__content"
-          id="accordion-item-«r0»"
+          id="accordion-item-_r_0_"
         >
           Panel A
         </div>
@@ -51,7 +51,7 @@ exports[`Accordion should render 1`] = `
       class="cds--accordion__item child"
     >
       <button
-        aria-controls="accordion-item-«r1»"
+        aria-controls="accordion-item-_r_1_"
         aria-expanded="false"
         class="cds--accordion__heading"
         type="button"
@@ -83,7 +83,7 @@ exports[`Accordion should render 1`] = `
       >
         <div
           class="cds--accordion__content"
-          id="accordion-item-«r1»"
+          id="accordion-item-_r_1_"
         >
           Panel B
         </div>
@@ -93,7 +93,7 @@ exports[`Accordion should render 1`] = `
       class="cds--accordion__item child"
     >
       <button
-        aria-controls="accordion-item-«r2»"
+        aria-controls="accordion-item-_r_2_"
         aria-expanded="false"
         class="cds--accordion__heading"
         type="button"
@@ -125,7 +125,7 @@ exports[`Accordion should render 1`] = `
       >
         <div
           class="cds--accordion__content"
-          id="accordion-item-«r2»"
+          id="accordion-item-_r_2_"
         >
           Panel C
         </div>
