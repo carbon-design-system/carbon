@@ -23,8 +23,8 @@
     "provenance": true
   },
   "scripts": {
-    "clean": "rimraf index.js index.d.ts",
-    "build": "yarn clean && tsc"
+    "clean": "rimraf tsconfig.tsbuildinfo",
+    "build": "tsc"
   },
   "dependencies": {
     "typescript": "^5.7.3"

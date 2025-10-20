@@ -110,7 +110,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.51.0",
     "storybook": "^9.0.5",
-    "typescript-config-carbon": "^0.8.0",
+    "typescript-config-carbon": "workspace:*",
     "vite": "^6.3.5",
     "web-component-analyzer": "2.0.0"
   },
