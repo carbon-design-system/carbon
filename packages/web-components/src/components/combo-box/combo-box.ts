@@ -93,8 +93,7 @@ class CDSComboBox extends CDSDropdown {
    * Handles `input` event on the `<input>` for filtering.
    */
   protected _handleInput() {
-    const { _filterInputNode } = this;
-    const rawQueryText = _filterInputNode.value;
+    const rawQueryText = this._filterInputNode.value;
     const queryText = rawQueryText.trim().toLowerCase();
 
     if (rawQueryText.length !== 0) {
@@ -172,6 +171,7 @@ class CDSComboBox extends CDSDropdown {
       Math.abs(scrollTop) < Math.abs(scrollBottom) ? scrollTop : scrollBottom;
   }
 
+  // Clear the query and selection when Escape is pressed.
   protected _handleInputKeydown(event: KeyboardEvent) {
     if (event.key !== 'Escape') {
       return;
