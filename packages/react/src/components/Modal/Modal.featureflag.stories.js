@@ -106,10 +106,10 @@ export const EnableDialogElement = () => {
 };
 EnableDialogElement.storyName = 'enable-dialog-element';
 
-export const EnableExperimentalFocusWrapWithoutSentinels = () => {
+export const EnableFocusWrapWithoutSentinels = () => {
   const [open, setOpen] = useState(false);
   return (
-    <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+    <FeatureFlags enableFocusWrapWithoutSentinels>
       <Annotation
         type="feature-flags"
         text={
@@ -180,5 +180,5 @@ export const EnableExperimentalFocusWrapWithoutSentinels = () => {
     </FeatureFlags>
   );
 };
-EnableExperimentalFocusWrapWithoutSentinels.storyName =
-  'enable-preview-focus-wrap-without-sentinels';
+EnableFocusWrapWithoutSentinels.storyName =
+  'enable-focus-wrap-without-sentinels';
