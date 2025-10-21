@@ -10,6 +10,11 @@
  */
 export enum COMBO_BUTTON_SIZE {
   /**
+   * Extra small size.
+   */
+  EXTRA_SMALL = 'xs',
+
+  /**
    * Small size.
    */
   SMALL = 'sm',

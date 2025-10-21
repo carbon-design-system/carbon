@@ -27,7 +27,7 @@ export type LinkProps<E extends ElementType = 'a'> = PolymorphicProps<
 export interface LinkComponent {
   <E extends ElementType = 'a'>(props: LinkProps<E>): JSX.Element | null;
   displayName?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: WeakValidationMap<LinkProps<any>>;
 }
 
@@ -40,13 +40,13 @@ const LinkBase = (
     as: BaseComponent,
     // Captured here to prevent it from being passed into the created element.
     // See https://github.com/carbon-design-system/carbon/issues/3970
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     isSideNavExpanded: _isSideNavExpanded,
     ...rest
   }: LinkPropsWithoutRef,
   ref: ForwardedRef<HTMLAnchorElement>
 ) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const BaseComponentAsAny = (BaseComponent ?? element ?? 'a') as any;
   return <BaseComponentAsAny ref={ref} {...rest} />;
 };

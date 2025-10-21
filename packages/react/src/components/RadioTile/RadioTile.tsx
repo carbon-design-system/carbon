@@ -178,7 +178,7 @@ const RadioTile = React.forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs' })
-      : null;
+      : candidate;
 
     return (
       <div>

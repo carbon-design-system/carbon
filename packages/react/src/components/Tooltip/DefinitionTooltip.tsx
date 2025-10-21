@@ -111,7 +111,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         setOpen(false);
       }}
       onMouseEnter={() => {
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
         openOnHover ? setOpen(true) : null;
       }}
       onFocus={() => {

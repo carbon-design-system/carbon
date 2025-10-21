@@ -31,32 +31,6 @@ export default {
     size: 'md',
   },
   argTypes: {
-    onChange: {
-      action: 'onChange',
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-    defaultValue: {
-      table: {
-        disable: true,
-      },
-    },
-    id: {
-      table: {
-        disable: true,
-      },
-    },
     light: {
       table: {
         disable: true,
@@ -72,6 +46,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: ['id', 'defaultValue'],
     },
   },
 };

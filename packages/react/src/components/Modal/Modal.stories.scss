@@ -15,9 +15,10 @@
 @use '@carbon/react/scss/components/dropdown/dropdown';
 @use '@carbon/react/scss/components/multiselect/multiselect';
 
-.experimental-modal {
+.preview-modal {
   @include modal.modal(
     $enable-experimental-focus-wrap-without-sentinels: true,
+    $enable-focus-wrap-without-sentinels: true,
     $enable-dialog-element: true
   );
   @include dialog.dialog();

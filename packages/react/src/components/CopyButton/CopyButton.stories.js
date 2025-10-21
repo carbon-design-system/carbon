@@ -25,11 +25,6 @@ export default {
 export const Default = (args) => <CopyButton autoAlign {...args} />;
 
 Default.argTypes = {
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   onClick: {
     action: 'onClick',
   },

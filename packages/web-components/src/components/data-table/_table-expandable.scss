@@ -114,3 +114,52 @@
     padding-inline-start: to-rem(88px);
   }
 }
+
+// Ensure proper styling for the expansion cell in non-expandable rows
+:host(#{$prefix}-table-row) {
+  .#{$prefix}--table-expand {
+    display: table-cell;
+    block-size: 100%;
+    border-block-end: 1px solid $border-subtle;
+    vertical-align: middle;
+
+    // Ensure the inner div takes full height
+    > div {
+      display: flex;
+      align-items: center;
+      block-size: 100%;
+    }
+  }
+
+  &:hover,
+  &[highlighted] {
+    .#{$prefix}--table-expand {
+      background-color: $background-hover;
+      border-block-end-color: $layer-hover-01;
+      border-block-start-color: $layer-hover-01;
+    }
+  }
+
+  &[even] {
+    .#{$prefix}--table-expand {
+      background-color: $layer-accent-01;
+      border-block-end: 1px solid $layer-accent-01;
+
+      &:hover {
+        background-color: $background-hover;
+        border-block-end: 1px solid $layer-hover-01;
+      }
+    }
+  }
+
+  &[odd] {
+    .#{$prefix}--table-expand {
+      border-block-end: 1px solid $layer-01;
+
+      &:hover {
+        background-color: $background-hover;
+        border-block-end: 1px solid $layer-hover-01;
+      }
+    }
+  }
+}

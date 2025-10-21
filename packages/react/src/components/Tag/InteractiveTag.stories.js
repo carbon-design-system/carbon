@@ -84,35 +84,16 @@ Selectable.args = {
   disabled: false,
 };
 
+Selectable.parameters = {
+  controls: {
+    exclude: ['type', 'filter', 'title'],
+  },
+};
+
 Selectable.argTypes = {
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
-  },
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
-    },
-  },
   selected: {
     control: 'false',
     description: 'Specify the state of the selectable tag.',
-  },
-  title: {
-    table: {
-      disable: true,
-    },
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -281,6 +262,12 @@ Operational.args = {
   size: 'md',
 };
 
+Operational.parameters = {
+  controls: {
+    exclude: ['filter', 'title', 'selected'],
+  },
+};
+
 Operational.argTypes = {
   id: {
     control: false,
@@ -290,31 +277,6 @@ Operational.argTypes = {
   },
   className: {
     control: false,
-  },
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
-    },
-  },
-  title: {
-    table: {
-      disable: true,
-    },
-  },
-  selected: {
-    table: {
-      disable: true,
-    },
   },
   type: {
     control: false,
@@ -429,22 +391,12 @@ Dismissible.args = {
   dismissTooltipAlignment: 'bottom',
 };
 
+Dismissible.parameters = {
+  controls: {
+    exclude: ['filter', 'selected'],
+  },
+};
 Dismissible.argTypes = {
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  selected: {
-    table: {
-      disable: true,
-    },
-  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: {

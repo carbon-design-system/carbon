@@ -6,13 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  PropsWithChildren,
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from 'react';
+import React, { PropsWithChildren, useState, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 import { useResizeObserver } from '../../internal/useResizeObserver';
 import { ChevronDown } from '@carbon/icons-react';
@@ -190,8 +184,6 @@ function CodeSnippet({
   const codeContentRef = useRef<HTMLPreElement>(null);
   const codeContainerRef = useRef<HTMLDivElement>(null);
   const innerCodeRef = useRef<HTMLElement>(null);
-  const [hasLeftOverflow, setHasLeftOverflow] = useState(false);
-  const [hasRightOverflow, setHasRightOverflow] = useState(false);
   const getCodeRef = useCallback(() => {
     if (type === 'single') {
       return codeContainerRef;
@@ -204,48 +196,11 @@ function CodeSnippet({
   }, [type]);
   const prefix = usePrefix();
 
-  const getCodeRefDimensions = useCallback(() => {
-    const {
-      clientWidth: codeClientWidth = 0,
-      scrollLeft: codeScrollLeft = 0,
-      scrollWidth: codeScrollWidth = 0,
-    } = getCodeRef().current || {};
-
-    return {
-      horizontalOverflow: codeScrollWidth > codeClientWidth,
-      codeClientWidth,
-      codeScrollWidth,
-      codeScrollLeft,
-    };
-  }, [getCodeRef]);
-
-  const handleScroll = useCallback(() => {
-    if (
-      type === 'inline' ||
-      (type === 'single' && !codeContainerRef?.current) ||
-      (type === 'multi' && !codeContentRef?.current)
-    ) {
-      return;
-    }
-
-    const {
-      horizontalOverflow,
-      codeClientWidth,
-      codeScrollWidth,
-      codeScrollLeft,
-    } = getCodeRefDimensions();
-
-    setHasLeftOverflow(horizontalOverflow && !!codeScrollLeft);
-    setHasRightOverflow(
-      horizontalOverflow && codeScrollLeft + codeClientWidth !== codeScrollWidth
-    );
-  }, [type, getCodeRefDimensions]);
-
   useResizeObserver({
     ref: getCodeRef(),
     onResize: () => {
-      if (codeContentRef?.current && type === 'multi') {
-        const { height } = codeContentRef.current.getBoundingClientRect();
+      if (innerCodeRef?.current && type === 'multi') {
+        const { height } = innerCodeRef.current.getBoundingClientRect();
 
         if (
           maxCollapsedNumberOfRows > 0 &&
@@ -265,18 +220,8 @@ function CodeSnippet({
           setExpandedCode(false);
         }
       }
-      if (
-        (codeContentRef?.current && type === 'multi') ||
-        (codeContainerRef?.current && type === 'single')
-      ) {
-        handleScroll();
-      }
     },
   });
-
-  useEffect(() => {
-    handleScroll();
-  }, [handleScroll]);
 
   const handleCopyClick = (evt) => {
     if (copyText || innerCodeRef?.current) {
@@ -295,8 +240,6 @@ function CodeSnippet({
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
     [`${prefix}--snippet--wraptext`]: wrapText,
-    [`${prefix}--snippet--has-right-overflow`]:
-      type == 'multi' && hasRightOverflow,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
@@ -370,24 +313,11 @@ function CodeSnippet({
         aria-label={deprecatedAriaLabel || ariaLabel || 'code-snippet'}
         aria-readonly={type === 'single' || type === 'multi' ? true : undefined}
         aria-multiline={type === 'multi' ? true : undefined}
-        onScroll={(type === 'single' && handleScroll) || undefined}
         {...containerStyle}>
-        <pre
-          ref={codeContentRef}
-          onScroll={(type === 'multi' && handleScroll) || undefined}>
+        <pre ref={codeContentRef} {...containerStyle}>
           <code ref={innerCodeRef}>{children}</code>
         </pre>
       </div>
-      {/**
-       * left overflow indicator must come after the snippet due to z-index and
-       * snippet focus border overlap
-       */}
-      {hasLeftOverflow && (
-        <div className={`${prefix}--snippet__overflow-indicator--left`} />
-      )}
-      {hasRightOverflow && type !== 'multi' && (
-        <div className={`${prefix}--snippet__overflow-indicator--right`} />
-      )}
       {!hideCopyButton && (
         <CopyButton
           align={align}

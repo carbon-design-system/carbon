@@ -126,58 +126,13 @@ Skeleton.args = {
   size: 'md',
 };
 
-Skeleton.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
+Skeleton.parameters = {
+  controls: {
+    exclude: ['disabled', 'filter', 'id', 'renderIcon', 'title', 'type'],
   },
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  disabled: {
-    table: {
-      disable: true,
-    },
-  },
+};
 
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
-    },
-  },
-  renderIcon: {
-    table: {
-      disable: true,
-    },
-  },
-  title: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
-  },
+Skeleton.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: {

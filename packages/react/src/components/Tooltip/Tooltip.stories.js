@@ -25,18 +25,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   decorators: [
     (Story, context) => {
       if (context.name.toLowerCase().includes('auto align')) {

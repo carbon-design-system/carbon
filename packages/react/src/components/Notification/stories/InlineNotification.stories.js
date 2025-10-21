@@ -18,6 +18,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['actionButtonLabel', 'aria-label'],
+    },
   },
   args: {
     kind: 'error',
@@ -33,41 +36,11 @@ export default {
 export const Default = (args) => <InlineNotification {...args} />;
 
 Default.argTypes = {
-  actionButtonLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  onActionButtonClick: {
-    table: {
-      disable: true,
-    },
-  },
   onClose: {
     action: 'onClose',
   },
   onCloseButtonClick: {
     action: 'onCloseButtonClick',
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
   },
 };
 Default.args = {

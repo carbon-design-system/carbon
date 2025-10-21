@@ -10,27 +10,28 @@ import { Meta } from '@storybook/addon-docs/blocks';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
 
-## `enable-experimental-focus-wrap-without-sentinels`
+## `enable-focus-wrap-without-sentinels`
 
-`Modal` supports the `enable-experimental-focus-wrap-without-sentinels` feature
-flag. When enabled, the hidden "sentinel nodes" used for focus wrap are no
-longer emitted to the DOM. These were previously used to mark the beginning and
-end of the area where focus should wrap within.
+`Modal` supports the `enable-focus-wrap-without-sentinels` feature flag. When
+enabled, the hidden "sentinel nodes" used for focus wrap are no longer emitted
+to the DOM. These were previously used to mark the beginning and end of the area
+where focus should wrap within.
 
 The new behavior looks at all interactive child nodes and wraps focus based on
 tabbable order of those nodes. The focus direction is determined whether `tab`
 is being pressed (forward) or `shift`+`tab` is being pressed (backwards).
 
 Note: The native dialog element handles focus, so `enable-dialog-element` must
-be off for `enable-experimental-focus-wrap-without-sentinels` to have any
-effect.
+be off for `enable-focus-wrap-without-sentinels` to have any effect.
+
+This flag used to be called `enable-experimental-focus-wrap-without-sentinels`.
 
 ### Enabling the flag
 
 To enable the flag, use the `FeatureFlags` component and set the prop:
 
 ```js
-<FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+<FeatureFlags enableFocusWrapWithoutSentinels>
   <Modal ... />
 </FeatureFlags>
 ```
@@ -44,13 +45,14 @@ means that:
 
 - The DOM no longer includes the "sentinel nodes" previously needed for the
   Modal to manage focus wrap.
-- `enable-experimental-focus-wrap-without-sentinels` has no effect and can be
-  removed when using `enable-dialog-element`
+- `enable-focus-wrap-without-sentinels` has no effect and can be removed when
+  using `enable-dialog-element`
 
 ## `enable-presence`
 
-`Modal` supports the `enable-presence` feature flag. When enabled, Modal
-will not be mounted until opened and unmounted when closed. CSS transitions are replaced with animations.
+`Modal` supports the `enable-presence` feature flag. When enabled, Modal will
+not be mounted until opened and unmounted when closed. CSS transitions are
+replaced with animations.
 
 ### Enabling the flag
 
@@ -64,9 +66,9 @@ To enable the flag, use the `FeatureFlags` component and set the prop:
 
 ## `enable-presence`
 
-`Modal` supports the `enable-presence` feature flag. When enabled,
-Modal will not mount until it's opened and unmount when it's closed.
-This helps to stay in sync with the React lifecycle.
+`Modal` supports the `enable-presence` feature flag. When enabled, Modal will
+not mount until it's opened and unmount when it's closed. This helps to stay in
+sync with the React lifecycle.
 
 This means that:
 
@@ -74,8 +76,8 @@ This means that:
 - `Modal`, all of its children and their hooks will mount/unmount on open/close
 - Enter & exit animations change from CSS transitions to CSS animations
 
-Note: Only `Modal` and its children are unmounted/mounted.
-Use `ModalPresence` to shift the presence boundary to a higher level, if necessary.
+Note: Only `Modal` and its children are unmounted/mounted. Use `ModalPresence`
+to shift the presence boundary to a higher level, if necessary.
 
 ### Enabling the flag
 
@@ -87,7 +89,8 @@ To enable the flag, use the `FeatureFlags` component and set the prop:
 </FeatureFlags>
 ```
 
-Or auto opt in by using `ModalPresence` to shift the presence boundary to a different level:
+Or auto opt in by using `ModalPresence` to shift the presence boundary to a
+different level:
 
 ```js
 <ModalPresence open={open}>

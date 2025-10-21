@@ -487,7 +487,10 @@ export type { ListBoxFieldProps } from './components/ListBox/ListBoxField';
 export type { ListBoxMenuProps } from './components/ListBox/ListBoxMenu';
 export type { ListBoxMenuItemProps } from './components/ListBox/ListBoxMenuItem';
 export type { ListBoxMenuIconProps } from './components/ListBox/ListBoxMenuIcon';
-export type { ListBoxMenuIconTranslationKey } from './components/ListBox/ListBoxMenuIcon';
+export type {
+  ListBoxMenuIconTranslationKey,
+  ListBoxSelectionTranslationKey,
+} from './components/ListBox';
 export type { ListBoxMenuIconComponent } from './components/ListBox/ListBoxMenuIcon';
 export type { ListBoxSelectionProps } from './components/ListBox/ListBoxSelection';
 

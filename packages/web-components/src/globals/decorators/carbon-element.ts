@@ -12,23 +12,23 @@
  * not an arrow function.
  */
 export declare type Constructor<T> = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   new (...args: any[]): T;
 };
 export interface ClassDescriptor {
   kind: 'class';
   elements: ClassElement[];
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   finisher?: <T>(clazz: Constructor<T>) => void | Constructor<T>;
 }
 export interface ClassElement {
   kind: 'field' | 'method';
   key: PropertyKey;
   placement: 'static' | 'prototype' | 'own';
-  // eslint-disable-next-line   @typescript-eslint/no-unsafe-function-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-unsafe-function-type -- https://github.com/carbon-design-system/carbon/issues/20452
   initializer?: Function;
   extras?: ClassElement[];
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   finisher?: <T>(clazz: Constructor<T>) => void | Constructor<T>;
   descriptor?: PropertyDescriptor;
 }
@@ -41,9 +41,9 @@ type CustomElementClass = Omit<typeof HTMLElement, 'new'>;
 const legacyCustomElement = (tagName: string, clazz: CustomElementClass) => {
   try {
     customElements.define(tagName, clazz as CustomElementConstructor);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   } catch (error) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
     console.warn(`Attempting to re-define ${tagName}`);
   }
   // Cast as any because TS doesn't recognize the return type as being a
@@ -67,9 +67,9 @@ const standardCustomElement = (
     finisher(clazz: Constructor<HTMLElement>) {
       try {
         customElements.define(tagName, clazz);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       } catch (error) {
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
         console.warn(`Attempting to re-define ${tagName}`);
       }
     },

@@ -1240,13 +1240,14 @@ describe('Slider', () => {
         await keyboard('{ArrowRight}');
         await keyboard('{ArrowRight}');
         await keyboard('{ArrowRight}');
+        await keyboard('{ArrowRight}');
 
         // Retrieve the last call to `onChange`.
         const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
 
         // Assert that the value was updated correctly (i.e., not
         // 0.30000000000000004).
-        expect(lastCall.value).toBe(0.3);
+        expect(lastCall.value).toBe(0.4);
       });
     });
   });

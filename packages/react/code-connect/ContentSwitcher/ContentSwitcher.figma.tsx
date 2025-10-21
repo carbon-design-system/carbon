@@ -15,14 +15,18 @@ figma.connect(
   {
     props: {
       children: figma.children(['_Content switcher text item']),
+      lowContrast: figma.boolean('Low contrast'),
       size: figma.enum('Size', {
         Large: 'lg',
         Medium: 'md',
         Small: 'sm',
       }),
     },
-    example: ({ size, children }) => (
-      <ContentSwitcher onChange={function noRefCheck() {}} size={size}>
+    example: ({ size, children, lowContrast }) => (
+      <ContentSwitcher
+        onChange={function noRefCheck() {}}
+        size={size}
+        lowContrast={lowContrast}>
         {children}
       </ContentSwitcher>
     ),
@@ -36,14 +40,18 @@ figma.connect(
     variant: { Type: 'Icon only' },
     props: {
       children: figma.children(['_Content switcher icon item']),
+      lowContrast: figma.boolean('Low contrast'),
       size: figma.enum('Size', {
         Large: 'lg',
         Medium: 'md',
         Small: 'sm',
       }),
     },
-    example: ({ size, children }) => (
-      <ContentSwitcher onChange={function noRefCheck() {}} size={size}>
+    example: ({ size, children, lowContrast }) => (
+      <ContentSwitcher
+        onChange={function noRefCheck() {}}
+        size={size}
+        lowContrast={lowContrast}>
         {children}
       </ContentSwitcher>
     ),

@@ -241,7 +241,8 @@ After the promotion workflow is completed this will trigger the
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
       to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
-      This should trigger an automatic release of `gatsby-theme-carbon`.
+- [ ] Run the `release-it` workflow in the `gatsby-theme-carbon` repo to trigger
+      a release of `gatsby-theme-carbon`.
 - [ ] Check that
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
       has been released and is on the

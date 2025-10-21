@@ -74,7 +74,7 @@ export interface FluidSearchProps {
   value?: string | number;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FluidSearch: React.FC<FluidSearchProps> = React.forwardRef<
   HTMLInputElement,
   FluidSearchProps

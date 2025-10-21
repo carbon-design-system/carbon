@@ -25,6 +25,17 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'appendTo',
+        'disable',
+        'enable',
+        'inline',
+        'light',
+        'locale',
+        'value',
+      ],
+    },
   },
   subcomponents: {
     FluidDatePickerSkeleton,
@@ -39,63 +50,14 @@ const sharedArgs = {
 };
 
 const sharedArgTypes = {
-  appendTo: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  disable: {
-    table: {
-      disable: true,
-    },
-  },
-  enable: {
-    table: {
-      disable: true,
-    },
-  },
-  inline: {
-    table: {
-      disable: true,
-    },
-  },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
-  locale: {
-    table: {
-      disable: true,
-    },
-  },
   onChange: {
     action: 'clicked',
-    table: {
-      disable: true,
-    },
   },
   onClose: {
     action: 'clicked',
-    table: {
-      disable: true,
-    },
   },
   onOpen: {
     action: 'clicked',
-    table: {
-      disable: true,
-    },
   },
   disabled: {
     control: { type: 'boolean' },

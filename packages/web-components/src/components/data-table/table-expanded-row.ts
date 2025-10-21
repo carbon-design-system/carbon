@@ -28,7 +28,7 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
    */
   @HostListener('mouseover')
   @HostListener('mouseout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleMouseOverOut(event: MouseEvent) {
     const { selectorRow } = this.constructor as typeof CDSTableExpandedRow;
@@ -81,7 +81,7 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
   }
 
   updated() {
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     this.previousElementSibling?.hasAttribute('ai-label')
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');

@@ -62,93 +62,34 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'aria-label',
+        'id',
+        'downshiftProps',
+        'initialSelectedItem',
+        'items',
+        'itemToElement',
+        'itemToString',
+        'selectedItem',
+        'shouldFilterItem',
+        'translateWithId',
+        'titleText',
+        'type',
+      ],
+    },
   },
 };
 
 const sharedArgTypes = {
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  downshiftProps: {
-    table: {
-      disable: true,
-    },
-  },
-  initialSelectedItem: {
-    table: {
-      disable: true,
-    },
-  },
-  invalidText: {
-    control: 'text',
-  },
-  items: {
-    table: {
-      disable: true,
-    },
-  },
-  itemToElement: {
-    table: {
-      disable: true,
-    },
-  },
-  itemToString: {
-    table: {
-      disable: true,
-    },
-  },
   onChange: {
     action: 'onChange',
   },
   onToggleClick: {
     action: 'clicked',
   },
-  onInputChange: {
-    table: {
-      disable: true,
-    },
-  },
-  selectedItem: {
-    table: {
-      disable: true,
-    },
-  },
-  shouldFilterItem: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  titleText: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
+  invalidText: {
+    control: 'text',
   },
   warnText: {
     control: 'text',

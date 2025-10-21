@@ -62,7 +62,7 @@ interface OverflowMenuProps {
   /**
    * Specify the size of the menu, from a list of available sizes.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify how the trigger tooltip should be aligned.
@@ -75,7 +75,7 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   (
     {
@@ -265,7 +265,7 @@ OverflowMenu.propTypes = {
   /**
    * Specify the size of the menu, from a list of available sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify how the trigger tooltip should be aligned.

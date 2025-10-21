@@ -2575,11 +2575,19 @@
     - polygon
   sizes:
     - 32
+- name: bsam-qsam-zedc
+  friendly_name: BSAM/QSAM-zEDC
+  aliases:
+    - BSAM/QSAM-zEDC
+    - IBM Z Batch Network Analyzer
+    - z/OS
+  sizes:
+    - 32
 - name: build--image
   friendly_name: Image build
   aliases:
     - build
-    - 'image build,'
+    - image build,
     - container image
     - source code
     - cube
@@ -2592,7 +2600,7 @@
   aliases:
     - occurrence of a build
     - build
-    - 'image build,'
+    - image build,
     - container image
     - source code
     - cube
@@ -4647,16 +4655,6 @@
     - variety
   sizes:
     - 32
-- name: comments
-  friendly_name: Comments
-  aliases:
-    - comments
-    - note
-    - explanation
-    - information
-    - annotations
-  sizes:
-    - 32
 - name: choose-item
   friendly_name: Choose item
   aliases:
@@ -4878,6 +4876,14 @@
     - H
     - circuit
     - composer
+  sizes:
+    - 32
+- name: classic-batch
+  friendly_name: Classic batch
+  aliases:
+    - classic batch
+    - IBM Z Batch Network Analyzer
+    - z/OS
   sizes:
     - 32
 - name: classification
@@ -5353,6 +5359,16 @@
     - column
     - dependency
     - formatting
+  sizes:
+    - 32
+- name: comments
+  friendly_name: Comments
+  aliases:
+    - comments
+    - note
+    - explanation
+    - information
+    - annotations
   sizes:
     - 32
 - name: commit
@@ -5896,6 +5912,14 @@
     - user
     - person
     - coughing
+  sizes:
+    - 32
+- name: coupling-facility-encryption
+  friendly_name: Coupling Facility Encryption
+  aliases:
+    - coupling facility encryption
+    - IBM Z Batch Network Analyzer
+    - z/OS
   sizes:
     - 32
 - name: course
@@ -6622,6 +6646,14 @@
     - source
   sizes:
     - 32
+- name: data-set-encryption
+  friendly_name: data set encryption
+  aliases:
+    - data set encryption
+    - IBM Z Batch Network Analyzer
+    - z/OS
+  sizes:
+    - 32
 - name: data-share
   friendly_name: Data share
   aliases:
@@ -7189,6 +7221,15 @@
     - water droplet
   sizes:
     - 32
+- name: dfsort-ibm-z-sort
+  friendly_name: DFSORT IBM Z Sort
+  aliases:
+    - dfsort
+    - sort
+    - IBM Z Batch Network Analyzer
+    - z/OS
+  sizes:
+    - 32
 - name: diagram
   friendly_name: Diagram
   aliases:
@@ -7258,6 +7299,15 @@
     - digital
     - imaging
     - communication
+- name: digital--identity
+  friendly_name: Digital identity
+  aliases:
+    - identity
+    - user
+    - verification
+    - authentication
+  sizes:
+    - 32
 - name: direct-link
   friendly_name: IBM Cloud® Direct Link 2.0
   aliases:
@@ -7618,13 +7668,6 @@
     - paper
   sizes:
     - 32
-- name: document-set
-  friendly_name: Document set
-  aliases:
-    - document
-    - unstructured data
-  sizes:
-    - 32
 - name: document--add
   friendly_name: Document add
   sizes:
@@ -7931,6 +7974,13 @@
     - understanding
     - document sentiment
     - document
+  sizes:
+    - 32
+- name: document-set
+  friendly_name: Document set
+  aliases:
+    - document
+    - unstructured data
   sizes:
     - 32
 - name: documentation
@@ -9158,6 +9208,14 @@
     - code
   sizes:
     - 32
+- name: fire--fill
+  friendly_name: Fire fill
+  aliases:
+    - fire
+    - flames
+    - code
+  sizes:
+    - 32
 - name: firewall
   friendly_name: Firewall
   aliases:
@@ -10028,6 +10086,15 @@
     - wrapped box
   sizes:
     - 32
+- name: global-filters
+  friendly_name: Global filters
+  aliases:
+    - global
+    - filter
+    - IBM Z Batch Network Analyzer
+    - z/OS
+  sizes:
+    - 32
 - name: global-loan-and-trial
   friendly_name: Global loan and trial
   aliases:
@@ -10054,6 +10121,15 @@
     - gradient
     - fade
     - blend
+  sizes:
+    - 32
+- name: graph-aggregator
+  friendly_name: Graph aggregator
+  aliases:
+    - graph
+    - aggregator
+    - IBM Z Batch Network Analyzer
+    - z/OS
   sizes:
     - 32
 - name: graphical-data-flow
@@ -11662,6 +11738,105 @@
     - CLI
   sizes:
     - 32
+- name: ibm--webmethods-api-gateway
+  friendly_name: IBM® webMethods API Gateway
+  aliases:
+    - IBM webMethods API Gateway
+    - Cloud
+    - iPaaS
+    - webMethods
+    - API
+    - Gateway
+    - Hybrid
+  sizes:
+    - 32
+- name: ibm--webmethods-api-studio
+  friendly_name: IBM® webMethods API Studio
+  aliases:
+    - IBM webMethods API Studio
+    - Cloud
+    - iPaaS
+    - webMethods
+    - API
+    - Hybrid
+    - management
+    - deploy
+    - create
+    - design
+    - test
+  sizes:
+    - 32
+- name: ibm--webmethods-b2b-integration
+  friendly_name: IBM® webMethods B2B
+  aliases:
+    - IBM webMethods B2B
+    - Cloud
+    - iPaaS
+    - webmethods
+    - B2B
+  sizes:
+    - 32
+- name: ibm--webmethods-developer-portal
+  friendly_name: IBM® webMethods Developer Portal
+  aliases:
+    - IBM webMethods Developer Portal
+    - Cloud
+    - iPaaS
+    - webmethods
+    - integration
+    - developer
+    - portal
+  sizes:
+    - 32
+- name: ibm--webmethods-hybrid-integration
+  friendly_name: IBM® webMethods Hybrid Integration
+  aliases:
+    - IBM webMethods Hybrid Integration
+    - Integration platform as a service
+    - Cloud integration
+    - Hybrid integration
+    - Multicloud connectivity
+    - Cloud Pak for integration
+  sizes:
+    - 32
+- name: ibm--webmethods-integration
+  friendly_name: IBM® webMethods Integration
+  aliases:
+    - IBM webMethods Integration
+    - Integration
+    - iPaaS
+    - webMethods
+    - Integration
+    - API
+  sizes:
+    - 32
+- name: ibm--webmethods-integration-server
+  friendly_name: IBM® webMethods Integration Server
+  aliases:
+    - IBM webMethods Integration Server
+    - Integration server
+    - iPaaS
+    - webMethods
+    - Integration
+    - prem
+    - Monitoring
+    - API
+    - Platform
+  sizes:
+    - 32
+- name: ibm--webmethods-managed-file-transfer
+  friendly_name: IBM® webMethods Managed File Transfer
+  aliases:
+    - IBM webMethods Managed File Transfer
+    - Cloud
+    - webMethods
+    - MFT
+    - Hybrid
+    - Integration
+    - File
+    - Transfer
+  sizes:
+    - 32
 - name: ibm-cloud
   friendly_name: IBM Cloud®
   aliases:
@@ -12574,7 +12749,7 @@
 - name: ibm-consulting-advantage--assistant
   friendly_name: IBM Consulting Advantage Assistant
   aliases:
-    - 'chat assistant, AI assistant, prompt based assistant'
+    - chat assistant, AI assistant, prompt based assistant
     - AI assistant
     - prompt based assistant
     - assistant
@@ -12589,6 +12764,22 @@
     - control
     - integration
     - quality assurance
+  sizes:
+    - 32
+- name: ibm-federated-api-management
+  friendly_name: IBM® Federated API management
+  aliases:
+    - IBM Federated API management
+    - API
+    - Management
+  sizes:
+    - 32
+- name: ibm-hybrid-control-plane
+  friendly_name: IBM® Hybrid control plane
+  aliases:
+    - IBM Hybrid control plane
+    - hybrid
+    - control plane
   sizes:
     - 32
 - name: ibm-quantum--safe-advisor
@@ -13923,6 +14114,22 @@
     - cursor
   sizes:
     - 32
+- name: interface--definition
+  friendly_name: Interface definition
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
+- name: interface--definition--alt
+  friendly_name: Interface definition alt
+  aliases:
+    - interface
+    - definition
+    - diagram
+  sizes:
+    - 32
 - name: interface--usage
   friendly_name: Interactive usage
   aliases:
@@ -13951,22 +14158,6 @@
     - usage
     - sysml
     - port connectors
-  sizes:
-    - 32
-- name: interface--definition--alt
-  friendly_name: Interface definition alt
-  aliases:
-    - interface
-    - definition
-    - diagram
-  sizes:
-    - 32
-- name: interface--definition
-  friendly_name: Interface definition
-  aliases:
-    - interface
-    - definition
-    - diagram
   sizes:
     - 32
 - name: intersect
@@ -15394,6 +15585,19 @@
     - 32
 - name: logo--ansible-community
   friendly_name: Logo Ansible Community
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+  sizes:
+    - 32
+- name: logo--bluesky
+  friendly_name: Logo Bluesky
   aliases:
     - brand
     - emblem
@@ -18985,6 +19189,14 @@
     - sea plane
   sizes:
     - 32
+- name: platform-automation
+  friendly_name: Platform Automation
+  aliases:
+    - technology
+    - platforms
+    - automation
+  sizes:
+    - 32
 - name: platforms
   friendly_name: Platforms
   aliases:
@@ -21185,6 +21397,14 @@
     - server
     - time
     - clock
+  sizes:
+    - 32
+- name: Serverless-Fleet
+  friendly_name: Serverless Fleet
+  aliases:
+    - server
+    - fleet
+    - serverless fleet
   sizes:
     - 32
 - name: service-desk
@@ -24095,6 +24315,24 @@
     - instruments
   sizes:
     - 32
+- name: top-data-sets
+  friendly_name: Top data sets
+  aliases:
+    - data
+    - top data set
+    - IBM Z Batch Network Analyzer
+    - z/OS
+  sizes:
+    - 32
+- name: top-programs
+  friendly_name: Top programs
+  aliases:
+    - program
+    - top program
+    - IBM Z Batch Network Analyzer
+    - z/OS
+  sizes:
+    - 32
 - name: tornado
   friendly_name: Tornado
   aliases:
@@ -24806,6 +25044,13 @@
     - up
   sizes:
     - 32
+- name: update-complete
+  friendly_name: Update complete
+  aliases:
+    - operations
+    - update
+  sizes:
+    - 32
 - name: update-now
   friendly_name: Update now
   aliases:
@@ -25324,6 +25569,16 @@
     - 32
 - name: value--variable
   friendly_name: Value variable
+  aliases:
+    - value
+    - figure
+    - amount
+    - number
+    - variable
+  sizes:
+    - 32
+- name: value--variable--alt
+  friendly_name: Value variable alt
   aliases:
     - value
     - figure
@@ -26570,6 +26825,15 @@
     - 3D
     - dimension
     - '3'
+  sizes:
+    - 32
+- name: z-HyperLink
+  friendly_name: zHyperLink™
+  aliases:
+    - hyperlink
+    - IBM Z Batch Network Analyzer
+    - z/OS
+    - z
   sizes:
     - 32
 - name: ZIP

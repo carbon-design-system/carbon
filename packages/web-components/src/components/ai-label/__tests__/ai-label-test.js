@@ -263,14 +263,14 @@ describe('cds-ai-label', function () {
     document.body.removeChild(el);
   });
 
-  it('should remain open when focus stays inside', async () => {
+  // a11y
+  it('should remain open when focus stays inside, and retains focus', async () => {
     const el = await fixture(html`<cds-ai-label></cds-ai-label>`);
     const button = el.shadowRoot.querySelector('.cds--slug__button');
-    button.click();
-
     button.focus();
-
+    button.click();
     expect(el.open).to.be.true;
+    expect(document.activeElement).to.equal(el);
   });
 
   it('should close when Escape is pressed', async () => {

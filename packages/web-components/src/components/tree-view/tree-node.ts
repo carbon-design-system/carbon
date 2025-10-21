@@ -86,7 +86,7 @@ class CDSTreeNode extends LitElement {
 
       return depth + 2.5;
     };
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const label = this.shadowRoot!.querySelector(
       `.${prefix}--tree-node__label`
     );
@@ -178,10 +178,6 @@ class CDSTreeNode extends LitElement {
 
     if (!this.hasAttribute('role') && !this.href) {
       this.setAttribute('role', 'treeitem');
-    }
-
-    if (!this.hasAttribute('aria-owns') && this._hasChildren && !this.href) {
-      this.setAttribute('aria-owns', `subtree-id-${this.id}`);
     }
 
     if (this._hasChildren && !this.href) {
@@ -348,7 +344,10 @@ class CDSTreeNode extends LitElement {
                       </span>
                     </div>
                   </a>
-                  <ul id="subtree-id-${id} role="group" class="${subTreeClasses}">
+                  <ul
+                    id="subtree-id-${id}"
+                    role="group"
+                    class="${subTreeClasses}">
                     <slot @slotchange=${handleSlotChange}></slot>
                   </ul>`
               : html`<div id="label" class="${prefix}--tree-node__label">

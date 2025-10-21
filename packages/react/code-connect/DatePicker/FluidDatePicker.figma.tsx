@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
 import {
-  preview__FluidDatePicker as FluidDatePicker,
-  preview__FluidDatePickerInput as FluidDatePickerInput,
-  preview__FluidDatePickerSkeleton as FluidDatePickerSkeleton,
+  FluidDatePicker,
+  FluidDatePickerInput,
+  FluidDatePickerSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
@@ -48,7 +48,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267399&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
-    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */
+    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */
     example: () => <DatePickerSkeleton type="simple" />,
   }
 );
@@ -89,7 +89,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267989&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
-    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */
+    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */
     example: () => <DatePickerSkeleton type="single" />,
   }
 );
@@ -153,7 +153,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268235&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
-    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20071 */
+    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */
     example: () => <DatePickerSkeleton type="range" />,
   }
 );

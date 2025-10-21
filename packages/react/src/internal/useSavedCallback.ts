@@ -15,7 +15,7 @@ import { useCallback, useEffect, useRef } from 'react';
  *
  * @param callback - The callback to track.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export const useSavedCallback = <T extends (...args: any[]) => any>(
   callback: T | undefined
 ) => {

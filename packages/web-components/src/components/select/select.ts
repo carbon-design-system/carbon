@@ -421,6 +421,7 @@ class CDSSelect extends FormMixin(LitElement) {
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const helperTextClasses = classMap({
@@ -430,7 +431,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const supplementalText = helperText
       ? html`
-          <div class="${helperTextClasses}">
+          <div id="helper-text" class="${helperTextClasses}">
             <slot name="helper-text"> ${helperText} </slot>
           </div>
         `
@@ -438,10 +439,17 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const errorText =
       invalid || warn
-        ? html` <div class="${prefix}--form-requirement">
+        ? html` <div id="error-text" class="${prefix}--form-requirement">
             ${invalid ? invalidText : warnText}
           </div>`
         : null;
+
+    let describedBy: string | undefined;
+    if (invalid || warn) {
+      describedBy = 'error-text';
+    } else if (helperText) {
+      describedBy = 'helper-text';
+    }
 
     const input = html`
       <select
@@ -450,7 +458,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ?disabled="${disabled}"
         aria-readonly="${String(Boolean(readonly))}"
         aria-invalid="${String(Boolean(invalid))}"
-        aria-describedby="${ifDefined(!invalid ? undefined : 'invalid-text')}"
+        aria-describedby="${ifDefined(describedBy)}"
         @input="${handleInput}">
         ${!placeholder || value
           ? undefined
@@ -487,11 +495,10 @@ class CDSSelect extends FormMixin(LitElement) {
     `;
 
     return html`
-      ${!hideLabel
-        ? html`<label class="${labelClasses}" for="input">
-            <slot name="label-text"> ${labelText} </slot>
-          </label>`
-        : null}
+      <label class="${labelClasses}" for="input">
+        <slot name="label-text"> ${labelText} </slot>
+      </label>
+
       ${inline
         ? html`<div
             class="${prefix}--select-input--inline__wrapper"

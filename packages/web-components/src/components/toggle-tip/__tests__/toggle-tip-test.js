@@ -64,26 +64,16 @@ describe('cds-toggletip', function () {
     expect(el.open).to.be.false;
   });
 
-  it('should stay open on focus out (as per spec)', async () => {
+  // https://carbondesignsystem.com/components/toggletip/accessibility/#keyboard-interactions
+  it('should close on focus out', async () => {
     const el = await fixture(html`<cds-toggletip open></cds-toggletip>`);
-
-    const outsideElement = document.createElement('button');
-    document.body.appendChild(outsideElement);
-
-    const button = el.shadowRoot.querySelector('.cds--toggletip-button');
-    button.focus();
-
     const event = new FocusEvent('focusout', {
-      relatedTarget: outsideElement,
-      bubbles: true,
-      composed: true,
+      relatedTarget: document.body,
     });
     el.dispatchEvent(event);
-
     await el.updateComplete;
 
-    expect(el.open).to.be.true;
-    document.body.removeChild(outsideElement);
+    expect(el.open).to.be.false;
   });
 
   it('should render body text when provided via slot', async () => {

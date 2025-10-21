@@ -470,8 +470,8 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-«r2d»-toggle-button',
-      id: 'downshift-«r2d»-label',
+      for: 'downshift-_r_2d_-toggle-button',
+      id: 'downshift-_r_2d_-label',
     });
   });
 
@@ -486,7 +486,7 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-«r2g»-label',
+      id: 'downshift-_r_2g_-label',
     });
   });
 });

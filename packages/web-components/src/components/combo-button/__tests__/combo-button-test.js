@@ -82,7 +82,7 @@ describe('cds-combo-button', () => {
   });
 
   describe('supports props.size', () => {
-    const sizes = ['sm', 'md', 'lg'];
+    const sizes = ['xs', 'sm', 'md', 'lg'];
 
     sizes.forEach((size) => {
       it(`size="${size}"`, async () => {

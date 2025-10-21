@@ -24,6 +24,47 @@ describe('cds-menu-button', function () {
     await expect(el).dom.to.equalSnapshot();
   });
 
+  it('Children/slots and special menu content Snapshot variants should render with divider and danger and match snapshot', async () => {
+    const el = await fixture(html`
+      <cds-menu-button label="Test">
+        <cds-menu>
+          <cds-menu-item label="First action"></cds-menu-item>
+          <cds-menu-item-divider></cds-menu-item-divider>
+          <cds-menu-item label="Danger" kind="danger"></cds-menu-item>
+        </cds-menu>
+      </cds-menu-button>
+    `);
+    await expect(el).dom.to.equalSnapshot();
+  });
+
+  it('Children/slots and special menu content Snapshot variants should render with nested menu and match snapshot', async () => {
+    const el = await fixture(html`
+      <cds-menu-button label="Nested">
+        <cds-menu>
+          <cds-menu-item label="Export as">
+            <cds-menu-item-group slot="submenu">
+              <cds-menu-item label="PDF"></cds-menu-item>
+            </cds-menu-item-group>
+          </cds-menu-item>
+        </cds-menu>
+      </cds-menu-button>
+    `);
+    await expect(el).dom.to.equalSnapshot();
+  });
+
+  it('should support xs size', async () => {
+    const el = await fixture(html`
+      <cds-menu-button label="Actions" size="xs">
+        <cds-menu size="xs">
+          <cds-menu-item label="First action"></cds-menu-item>
+          <cds-menu-item label="Second action"></cds-menu-item>
+          <cds-menu-item label="Third action" disabled></cds-menu-item>
+        </cds-menu>
+      </cds-menu-button>
+    `);
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
   it('should be accessible (closed & open)', async () => {
     const el = await fixture(menuButton);
     await expect(el).to.be.accessible();
@@ -62,7 +103,7 @@ describe('cds-menu-button', function () {
     });
 
     describe('renders as expected – Component API', () => {
-      const sizes = ['sm', 'md', 'lg'];
+      const sizes = ['xs', 'sm', 'md', 'lg'];
       const kinds = ['primary', 'tertiary', 'ghost'];
 
       sizes.forEach((size) => {

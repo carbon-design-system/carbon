@@ -11,6 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import { NumberInput } from '../NumberInput';
+import { validateNumberSeparators } from '../NumberInput';
 import { AILabel } from '../../AILabel';
 
 function translateWithId(id) {
@@ -1469,6 +1470,46 @@ describe('NumberInput', () => {
 
         await userEvent.click(screen.getByLabelText('increment'));
         expect(input).toHaveValue('20%');
+      });
+      it('should throw an error if group seperator is in wrong position', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            value=""
+            step={1}
+            validate={validateNumberSeparators}
+            translateWithId={translateWithId}
+            invalidText="test-invalid-text"
+          />
+        );
+        const input = screen.getByLabelText('NumberInput label');
+        await userEvent.type(input, '1,1');
+        await userEvent.tab();
+        expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+      });
+
+      it('should throw an error if group seperator is in wrong position for given locale', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            locale="DE"
+            value=""
+            step={1}
+            validate={validateNumberSeparators}
+            translateWithId={translateWithId}
+            invalidText="test-invalid-text"
+          />
+        );
+        const input = screen.getByLabelText('NumberInput label');
+        await userEvent.type(input, '1.1');
+        await userEvent.tab();
+        expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
       });
     });
   });

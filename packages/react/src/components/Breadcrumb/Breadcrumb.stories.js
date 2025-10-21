@@ -28,11 +28,6 @@ export default {
 };
 
 const sharedArgTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
   size: {
     options: ['sm', 'md'],
     control: { type: 'select' },

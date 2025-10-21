@@ -59,7 +59,7 @@ export interface FluidTimePickerProps extends FluidTextInputProps {
   readOnly?: boolean;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FluidTimePicker = React.forwardRef<
   HTMLInputElement,
   FluidTimePickerProps
@@ -102,7 +102,7 @@ const FluidTimePicker = React.forwardRef<
     const childrenWithProps = () => {
       if (disabled) {
         return React.Children.toArray(children).map((child) =>
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           React.cloneElement(child as React.ReactElement<any>, {
             disabled: true,
           })
@@ -110,7 +110,7 @@ const FluidTimePicker = React.forwardRef<
       }
       if (readOnly) {
         return React.Children.toArray(children).map((child) =>
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           React.cloneElement(child as React.ReactElement<any>, {
             readOnly: true,
           })

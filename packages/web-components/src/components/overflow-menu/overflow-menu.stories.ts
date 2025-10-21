@@ -16,6 +16,8 @@ import Filter16 from '@carbon/icons/es/filter/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 const sizes = {
+  [`Extra small size (${OVERFLOW_MENU_SIZE.EXTRA_SMALL})`]:
+    OVERFLOW_MENU_SIZE.EXTRA_SMALL,
   [`Small size (${OVERFLOW_MENU_SIZE.SMALL})`]: OVERFLOW_MENU_SIZE.SMALL,
   [`Medium size (default) (${OVERFLOW_MENU_SIZE.MEDIUM})`]:
     OVERFLOW_MENU_SIZE.MEDIUM,
@@ -50,7 +52,7 @@ const argTypes = {
   size: {
     control: 'select',
     description:
-      'Specify the size of the OverflowMenu. Currently supports either <code>sm</code>, <code>md</code> (default) or <code></code>lg</code> as an option.',
+      'Specify the size of the OverflowMenu. Currently supports either <code>xs</code>, <code>sm</code>, <code>md</code> (default) or <code>lg</code> as an option.',
     options: sizes,
   },
 };

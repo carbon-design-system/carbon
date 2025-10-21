@@ -57,7 +57,6 @@ const sharedArgTypes = {
   },
   isSortable: { control: { type: 'boolean' } },
   persistent: { control: { type: 'boolean' } },
-  radio: { table: { disable: true } },
 };
 
 export const Default = (args) => (

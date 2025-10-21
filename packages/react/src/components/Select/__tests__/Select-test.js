@@ -85,6 +85,71 @@ describe('Select', () => {
       expect(screen.getByLabelText('Select').title).toEqual('Option 1');
     });
 
+    it('should show selected option text as title when defaultValue is provided', () => {
+      render(
+        <Select id="select" labelText="Select" defaultValue="option-2">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Option 2');
+    });
+
+    it('should show selected option text as title when value is provided', () => {
+      render(
+        <Select id="select" labelText="Select" value="option-2">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Option 2');
+    });
+
+    it('should prioritize title prop over value or defaultValue', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          value="option-2"
+          title="Custom Title">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Custom Title');
+    });
+
+    it('should respect title prop when provided', () => {
+      render(
+        <Select id="select" labelText="Select" title="Custom Title">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Custom Title');
+    });
+
+    it('should update title when selection changes', async () => {
+      render(
+        <Select id="select" labelText="Select">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+
+      // Initial title should be the first option
+      expect(screen.getByLabelText('Select').title).toEqual('Option 1');
+
+      // Change selection
+      await userEvent.selectOptions(
+        screen.getByLabelText('Select'),
+        'option-2'
+      );
+
+      // Title should update to the selected option
+      expect(screen.getByLabelText('Select').title).toEqual('Option 2');
+    });
+
     it('should respect disabled prop', () => {
       render(<Select id="select" labelText="Select" disabled />);
 

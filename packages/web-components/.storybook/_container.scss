@@ -67,6 +67,14 @@ body {
   inline-size: 100%;
 }
 
+.docs-story {
+  background-color: theme.$background;
+}
+
+.docs-story > *:has(> .docblock-code-toggle) {
+  background-color: theme.$background;
+}
+
 // Following styles are needed to ensure that the Canvas containers render correctly
 .docs-story div div {
   transform: none;

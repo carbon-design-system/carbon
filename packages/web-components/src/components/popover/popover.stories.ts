@@ -73,7 +73,7 @@ export const Default = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       open
         ? popover?.removeAttribute('open')
         : popover?.setAttribute('open', '');
@@ -115,7 +115,7 @@ export const TabTip = {
     const handleClick = (id) => {
       const popover = document.querySelector(id);
       const open = popover?.hasAttribute('open');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       open
         ? popover?.removeAttribute('open')
         : popover?.setAttribute('open', '');

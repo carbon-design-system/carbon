@@ -37,60 +37,49 @@ function transformer(file, api) {
         },
       })
       .forEach((path) => {
-        const uniqueSpecifiers = new Set();
         const newSpecifiers = [];
+        const seen = new Set();
+
         path.node.specifiers.forEach((specifier) => {
           if (specifier.type === 'ImportSpecifier') {
-            nonStableKeys.forEach((c) => {
-              const importedName = specifier.imported.name;
-              const localName = specifier.local
-                ? specifier.local.name
-                : importedName;
-              let transformedImportedName = importedName;
-              if (importedName === c) {
-                transformedImportedName = allPreviews[c];
-                specifier.imported.name = transformedImportedName;
+            const importedName = specifier.imported.name;
+            const localName = specifier.local
+              ? specifier.local.name
+              : importedName;
+
+            if (nonStableKeys.includes(importedName)) {
+              const transformedImportedName = allPreviews[importedName];
+
+              if (!seen.has(importedName)) {
+                seen.add(importedName);
+
                 if (p === '@carbon/ibm-products') {
-                  // Build new import specifier so that
-                  // products components changing exports
-                  // are aliased to their original name.
-                  // This will help to avoid additional changes
-                  // within jsx.
+                  // Create aliased import for products components
                   const importSpecifier = j.importSpecifier(
                     j.identifier(transformedImportedName),
-                    // Use the already specified alias if there is one
                     j.identifier(localName)
                   );
-                  j(path).replaceWith(
-                    j.importDeclaration(
-                      [...path.node.specifiers, importSpecifier],
-                      path.node.source
-                    )
-                  );
-                  if (specifier.type === 'ImportSpecifier') {
-                    if (!uniqueSpecifiers.has(importedName)) {
-                      uniqueSpecifiers.add(importedName);
-                      newSpecifiers.push(importSpecifier);
-                    }
-                  } else {
-                    newSpecifiers.push(specifier);
-                  }
+                  newSpecifiers.push(importSpecifier);
+                } else {
+                  // For @carbon/react, just update the name
+                  specifier.imported.name = transformedImportedName;
+                  newSpecifiers.push(specifier);
                 }
               }
-            });
-            // Replace the original specifiers with the new aliased ones
-            // to prevent further changes needed in jsx for products components
-            if (p === '@carbon/ibm-products') {
-              const others = path.node.specifiers.filter(
-                (c) =>
-                  !Object.values(productsPreviewMap).includes(c.imported.name)
-              );
-              path.node.specifiers = [...others, ...newSpecifiers];
+            } else {
+              // Keep non-transformed imports as-is
+              newSpecifiers.push(specifier);
             }
+          } else {
+            // Keep non-ImportSpecifier types (like ImportDefaultSpecifier)
+            newSpecifiers.push(specifier);
           }
         });
+
+        path.node.specifiers = newSpecifiers;
       });
   });
+
   return root.toSource();
 }
 

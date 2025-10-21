@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/components/progress-indicator/progress-indicator' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include progress-indicator;
@@ -54,12 +55,14 @@ $css--plex: true !default;
 
   svg {
     display: inline-block;
-    margin: 0.1rem $spacing-02 0.1rem $spacing-03;
+    margin: rem(1px) $spacing-03 0;
   }
 
   .#{$prefix}--progress-label {
     display: inline-block;
     margin: 0;
+    inline-size: $spacing-08;
+    margin-block-start: rem(1px);
     max-inline-size: none;
     vertical-align: top;
   }
@@ -74,7 +77,13 @@ $css--plex: true !default;
 
 :host(#{$prefix}-progress-step[vertical]) {
   .#{$prefix}--progress-label {
+    display: inline-block;
     inline-size: initial;
+    margin-block: auto;
+    margin-inline-start: to-rem(-4px);
+    max-inline-size: $spacing-13;
+    vertical-align: top;
+    white-space: initial;
   }
 
   .#{$prefix}--progress-optional {
@@ -88,10 +97,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-progress-step[vertical][state='current']) svg {
-  margin-inline-start: 0.563rem;
-}
-
+:host(#{$prefix}-progress-step[current]),
 :host(#{$prefix}-progress-step[state='current']) {
   @extend .#{$prefix}--progress-step--current;
 
@@ -100,6 +106,7 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-progress-step[complete]),
 :host(#{$prefix}-progress-step[state='complete']) {
   @extend .#{$prefix}--progress-step--complete;
 
@@ -117,6 +124,12 @@ $css--plex: true !default;
     fill: $layer-selected-inverse;
   }
 
+  .#{$prefix}--progress-label {
+    block-size: rem(14px);
+    inline-size: $spacing-08;
+    margin-block-start: 0.625rem;
+  }
+
   .#{$prefix}--progress-line {
     background-color: $layer-accent-01;
   }
@@ -124,4 +137,12 @@ $css--plex: true !default;
 
 :host(#{$prefix}-progress-step[spaceEqually]) {
   flex-grow: 1;
+}
+
+:host(#{$prefix}-progress-step[spaceEqually]) .#{$prefix}--progress-label {
+  max-inline-size: none;
+}
+
+:host(#{$prefix}-progress-step[disabled]) svg {
+  fill: $icon-disabled;
 }

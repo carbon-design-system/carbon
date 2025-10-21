@@ -75,7 +75,7 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const args = {
   aiTextLabel: '',
   alignment: POPOVER_ALIGNMENT.BOTTOM,
@@ -86,7 +86,7 @@ const args = {
   size: AI_LABEL_SIZE.EXTRA_SMALL,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const argTypes = {
   aiTextLabel: {
     control: 'text',

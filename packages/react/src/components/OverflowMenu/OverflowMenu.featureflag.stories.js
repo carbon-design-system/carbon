@@ -41,7 +41,6 @@ export const AutoAlign = () => {
   const ref = useRef();
 
   useEffect(() => {
-    console.log(ref);
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
 
@@ -182,32 +181,17 @@ Default.args = {
   label: 'Options',
 };
 
+Default.parameters = {
+  controls: {
+    exclude: ['renderIcon', 'menuTarget'],
+  },
+};
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  renderIcon: {
-    table: {
-      disable: true,
-    },
-  },
   menuAlignment: {
     options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
     control: { type: 'select' },
     description:
       'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
     default: 'bottom-start',
-  },
-  menuTarget: {
-    table: {
-      disable: true,
-    },
   },
 };

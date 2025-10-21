@@ -216,7 +216,7 @@ const PageHeaderContent = React.forwardRef<
     };
 
     useLayoutEffect(() => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       titleRef.current && isEllipsisActive(titleRef.current);
     }, [title]);
 
@@ -326,7 +326,7 @@ interface PageHeaderContentPageActionsProps {
 }
 const PageHeaderContentPageActions = ({
   className,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   children,
   menuButtonLabel = 'Actions',
   actions,
@@ -378,7 +378,7 @@ const PageHeaderContentPageActions = ({
         }
       },
     });
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, []);
 
   return (
@@ -592,26 +592,26 @@ const PageHeaderTabBar = React.forwardRef<
         </div>
       );
     }
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const [openPopover, setOpenPopover] = useState(false);
     const tagSize = tags[0]?.size || 'md';
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const instanceId = useId('PageHeaderTabBar');
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagsWithIds = useMemo(() => {
       return tags.map((tag, index) => ({
         ...tag,
         id: tag.id || `tag-${index}-${instanceId}`,
       }));
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [tags]);
 
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagsContainerRef = useRef<HTMLDivElement>(null);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const offsetRef = useRef<HTMLDivElement>(null);
     // To close popover when window resizes
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     useEffect(() => {
       const handleResize = () => {
         // Close the popover when window resizes to prevent unwanted opens
@@ -629,7 +629,7 @@ const PageHeaderTabBar = React.forwardRef<
       visibleItems = [],
       hiddenItems = [],
       itemRefHandler = () => {},
-      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     } = useOverflowItems<TagItem>(
       tagsWithIds,
       tagsContainerRef as React.RefObject<HTMLDivElement>,
@@ -640,7 +640,7 @@ const PageHeaderTabBar = React.forwardRef<
       itemRefHandler: () => {},
     };
 
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const handleOverflowClick = useCallback((event: React.MouseEvent) => {
       event.stopPropagation();
       setOpenPopover((prev) => !prev);
