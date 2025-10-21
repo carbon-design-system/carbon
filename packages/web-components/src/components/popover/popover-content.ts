@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
+import { POPOVER_BACKGROUND_TOKEN } from './defs';
 
 /**
  * Popover.
@@ -70,7 +71,7 @@ class CDSPopoverContent extends LitElement {
    * Specify the background token to use. Default is 'layer'.
    */
   @property({ reflect: true, type: String })
-  backgroundToken = 'layer';
+  backgroundToken = POPOVER_BACKGROUND_TOKEN.LAYER;
 
   /**
    * The shadow slot this popover content should be in.

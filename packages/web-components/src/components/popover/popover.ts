@@ -15,6 +15,7 @@ import CDSPopoverContent from './popover-content';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FloatingUIContoller from '../../globals/controllers/floating-controller';
+import { POPOVER_BACKGROUND_TOKEN } from './defs';
 
 /**
  * Popover.
@@ -92,7 +93,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
    * Specify the background token to use. Default is 'layer'.
    */
   @property({ reflect: true, type: String })
-  backgroundToken = 'layer';
+  backgroundToken = POPOVER_BACKGROUND_TOKEN.LAYER;
 
   /**
    * Handles `slotchange` event.
@@ -218,7 +219,8 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       [`${prefix}--popover--${this.align}`]: true,
       [`${prefix}--popover--tab-tip`]: tabTip,
       [`${prefix}--popover--background-token__background`]:
-        this.backgroundToken === 'background' && !highContrast,
+        this.backgroundToken === POPOVER_BACKGROUND_TOKEN.BACKGROUND &&
+        !highContrast,
     });
     return html`
       <span class="${classes}" part="popover-container">

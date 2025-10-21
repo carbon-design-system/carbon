@@ -9,7 +9,7 @@ import { html } from 'lit';
 import './popover';
 import './popover-content';
 import '../radio-button/index';
-import { POPOVER_ALIGNMENT } from './defs';
+import { POPOVER_ALIGNMENT, POPOVER_BACKGROUND_TOKEN } from './defs';
 import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
@@ -55,7 +55,10 @@ const controls = {
   },
   backgroundToken: {
     control: 'select',
-    options: ['layer', 'background'],
+    options: [
+      POPOVER_BACKGROUND_TOKEN.LAYER,
+      POPOVER_BACKGROUND_TOKEN.BACKGROUND,
+    ],
     description: 'Specify the background token to use. Default is "layer".',
   },
   open: {
@@ -185,7 +188,7 @@ export const TabTip = {
           tabTip
           id="popover-two"
           align="bottom-right"
-          backgroundToken="layer">
+          backgroundToken=${POPOVER_BACKGROUND_TOKEN.LAYER}>
           <button
             aria-label="Settings"
             type="button"
