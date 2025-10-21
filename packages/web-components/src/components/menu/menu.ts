@@ -16,7 +16,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { MenuContext, menuDefaultState } from './menu-context';
 import CDSmenuItem from './menu-item';
 import { consume, provide } from '@lit/context';
-import { MENU_SIZE } from './defs';
+import { MENU_BACKGROUND_TOKEN, MENU_SIZE } from './defs';
 
 export { MENU_SIZE };
 
@@ -123,7 +123,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    * Specify the background token to use. Default is 'layer'.
    */
   @property({ type: String })
-  backgroundToken = 'layer';
+  backgroundToken = MENU_BACKGROUND_TOKEN.LAYER;
 
   /**
    * Specify whether a border should be rendered on the menu
@@ -222,7 +222,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         this.context.hasSelectableItems,
       [`${prefix}--menu--border`]: this.border,
       [`${prefix}--menu--background-token__background`]:
-        this.backgroundToken === 'background',
+        this.backgroundToken === MENU_BACKGROUND_TOKEN.BACKGROUND,
     });
     return html`
       <ul

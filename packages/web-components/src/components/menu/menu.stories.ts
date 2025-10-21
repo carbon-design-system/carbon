@@ -22,9 +22,10 @@ import CDSmenuItemSelectable from './menu-item-selectable';
 import CDSmenuItemGroup from './menu-item-group';
 import CDSmenuItemRadioGroup from './menu-item-radio-group';
 import CDSmenuItemDivider from './menu-item-divider';
+import { MENU_BACKGROUND_TOKEN } from './defs';
 
 const args = {
-  backgroundToken: 'layer',
+  backgroundToken: MENU_BACKGROUND_TOKEN.LAYER,
   border: false,
   size: 'sm',
   open: true,
@@ -34,7 +35,7 @@ const argTypes = {
   backgroundToken: {
     control: 'select',
     description: 'Specify the background token to use. Default is "layer".',
-    options: ['layer', 'background'],
+    options: [MENU_BACKGROUND_TOKEN.LAYER, MENU_BACKGROUND_TOKEN.BACKGROUND],
   },
   border: {
     control: 'boolean',
