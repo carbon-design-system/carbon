@@ -61,7 +61,7 @@ describe('file-uploader', () => {
         render(fileUploaderShellTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-uploader' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -76,7 +76,7 @@ describe('file-uploader', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-uploader' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -89,7 +89,7 @@ describe('file-uploader', () => {
         render(dropContainerTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-drop-container' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -105,7 +105,7 @@ describe('file-uploader', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-drop-container' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -132,7 +132,7 @@ describe('file-uploader', () => {
           new CustomEvent('dragover', { bubbles: true, composed: true }),
           { dataTransfer }
         );
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.dispatchEvent(event);
         await Promise.resolve();
         expect(elem).toMatchSnapshot({ mode: 'shadow' });
@@ -145,21 +145,21 @@ describe('file-uploader', () => {
           new CustomEvent('dragleave', { bubbles: true, composed: true }),
           { dataTransfer }
         );
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.dispatchEvent(event);
         expect(dataTransfer.dropEffect).toBe('move');
       });
 
       xit('Should handle drop', async () => {
         const spyChange = jasmine.createSpy('after changed');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(elem!, 'cds-file-drop-container-changed', spyChange);
         const dataTransfer = { files: [pngFile, jpegFile] };
         const event = Object.assign(
           new CustomEvent('drop', { bubbles: true, composed: true }),
           { dataTransfer }
         );
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.dispatchEvent(event);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles.length).toBe(1);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(
@@ -168,12 +168,12 @@ describe('file-uploader', () => {
       });
 
       xit('Should handle file upload link', async () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         const origGetFiles = (elem as any)._getFiles;
         // Workaround for `HTMLInputElement.files` that only accepts `FileList` while there is no `FileList` constructor
         spyOn(elem, '_getFiles').and.callFake(function (event) {
           // TODO: See if we can get around TS2683
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
           // @ts-ignore
           return origGetFiles.call(this, {
             type: event.type,
@@ -183,15 +183,15 @@ describe('file-uploader', () => {
           });
         });
         const spyChange = jasmine.createSpy('after changed');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(elem!, 'cds-file-drop-container-changed', spyChange);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const input = elem!.shadowRoot!.querySelector('input');
         const event = new CustomEvent('change', {
           bubbles: true,
           composed: true,
         });
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         input!.dispatchEvent(event);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles.length).toBe(1);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(
@@ -208,14 +208,14 @@ describe('file-uploader', () => {
           'foo.png'
         );
         const spyChange = jasmine.createSpy('after changed');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(elem!, 'cds-file-drop-container-changed', spyChange);
         const dataTransfer = { files: [pngFileWithoutMIMEType, jpegFile] };
         const event = Object.assign(
           new CustomEvent('drop', { bubbles: true, composed: true }),
           { dataTransfer }
         );
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.dispatchEvent(event);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles.length).toBe(1);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(
@@ -231,7 +231,7 @@ describe('file-uploader', () => {
         render(fileUploderItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -247,7 +247,7 @@ describe('file-uploader', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -259,7 +259,7 @@ describe('file-uploader', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -276,7 +276,7 @@ describe('file-uploader', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body
             .querySelector('cds-file-uploader-item')!
             .shadowRoot!.querySelector('svg')!
@@ -291,7 +291,7 @@ describe('file-uploader', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -308,7 +308,7 @@ describe('file-uploader', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -325,14 +325,14 @@ describe('file-uploader', () => {
         const spyBeforeDelete = jasmine.createSpy('before deleted');
         const spyDelete = jasmine.createSpy('after deleted');
         events.on(
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           elem!,
           'cds-file-uploader-item-beingdeleted',
           spyBeforeDelete
         );
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(elem!, 'cds-file-uploader-item-deleted', spyDelete);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem!.shadowRoot!.querySelector('button') as HTMLElement).click();
         await Promise.resolve();
         expect(spyBeforeDelete).toHaveBeenCalled();
@@ -347,13 +347,13 @@ describe('file-uploader', () => {
         await Promise.resolve();
         const elem = document.querySelector('cds-file-uploader-item');
         const spyDelete = jasmine.createSpy('after deleted');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(elem!, 'cds-file-uploader-item-beingdeleted', (event) => {
           event.preventDefault();
         });
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(elem!, 'cds-file-uploader-item-deleted', spyDelete);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem!.shadowRoot!.querySelector('button') as HTMLElement).click();
         await Promise.resolve();
         expect(spyDelete).not.toHaveBeenCalled();
@@ -362,7 +362,7 @@ describe('file-uploader', () => {
   });
 
   afterEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     render(undefined!, document.body);
     events.reset();
   });

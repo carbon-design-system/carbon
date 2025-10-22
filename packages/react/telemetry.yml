@@ -27,6 +27,7 @@ collect:
         - as
         - autoAlign
         - autoComplete
+        - border
         - buttonKind
         - caption
         - checked
@@ -314,7 +315,9 @@ collect:
         - enable
         - maxDate
         - minDate
+        - nextMonthAriaLabel
         - parseDate
+        - prevMonthAriaLabel
         - short
         # DatePickerSkeleton
         - range
@@ -468,7 +471,6 @@ collect:
         - requireTitle
         - wrapperClassName
         # PageHeaderBreadcrumbBar
-        - border
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
@@ -504,6 +506,7 @@ collect:
         # Popover
         - alignmentAxisOffset
         - autoAlignBoundary
+        - backgroundToken
         - caret
         - isTabTip
         # ProgressIndicator
@@ -659,12 +662,12 @@ collect:
         - top-start
         # General - aria-current
         - date
-        - 'false'
+        - "false"
         - location
         - page
         - step
         - time
-        - 'true'
+        - "true"
         # General - buttonKind
         - danger
         - danger--ghost
@@ -736,9 +739,9 @@ collect:
         - left
         - right
         # General - level
-        - '0'
-        - '1'
-        - '2'
+        - "0"
+        - "1"
+        - "2"
         # General - loadingStatus
         - active
         - error
@@ -832,8 +835,8 @@ collect:
         - top
         - top-after-reopen
         # General - size
-        - '16'
-        - '20'
+        - "16"
+        - "20"
         - 2xl
         - 2xs
         - big
@@ -936,9 +939,12 @@ collect:
         - toast
         # Popover - autoAlignBoundary
         - clippingAncestors
+        # Popover - backgroundToken
+        - background
+        - layer
         # ShapeIndicator - textSize
-        - '12'
-        - '14'
+        - "12"
+        - "14"
         # TableBody - aria-live
         - assertive
         - off

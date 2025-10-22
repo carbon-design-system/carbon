@@ -37,7 +37,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    * Handles user-initiated change in selected radio button.
    */
   @HostListener('eventChangeRadioButton')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleAfterChangeRadioButton = (event: CustomEvent) => {
     // Bail out early if readOnly

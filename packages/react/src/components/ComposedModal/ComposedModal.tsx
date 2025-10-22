@@ -11,7 +11,6 @@ import React, {
   useContext,
   useEffect,
   useRef,
-  useState,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -20,13 +19,12 @@ import React, {
   type ReactNode,
   type RefObject,
 } from 'react';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
 import { Layer } from '../Layer';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-import { debounce } from 'es-toolkit/compat';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { mergeRefs } from '../../tools/mergeRefs';
 import cx from 'classnames';
 import { toggleClass } from '../../tools/toggleClass';
@@ -83,39 +81,27 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
   ) {
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
-    const [isScrollable, setIsScrollable] = useState(false);
+
+    const { height } = useResizeObserver({ ref: contentRef });
+
+    /**
+     * isScrollable is implicitly dependent on height, when height gets updated
+     * via `useResizeObserver`, clientHeight and scrollHeight get updated too
+     */
+    const isScrollable =
+      !!contentRef.current &&
+      contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;
+
     const contentClass = cx(
       {
         [`${prefix}--modal-content`]: true,
         [`${prefix}--modal-content--with-form`]: hasForm,
         [`${prefix}--modal-scroll-content`]:
           hasScrollingContent || isScrollable,
+        [`${prefix}--modal-scroll-content--no-fade`]: height <= 300,
       },
       customClassName
     );
-
-    useIsomorphicEffect(() => {
-      if (contentRef.current) {
-        setIsScrollable(
-          contentRef.current.scrollHeight > contentRef.current.clientHeight
-        );
-      }
-
-      function handler() {
-        if (contentRef.current) {
-          setIsScrollable(
-            contentRef.current.scrollHeight > contentRef.current.clientHeight
-          );
-        }
-      }
-
-      const debouncedHandler = debounce(handler, 200);
-      window.addEventListener('resize', debouncedHandler);
-      return () => {
-        debouncedHandler.cancel();
-        window.removeEventListener('resize', debouncedHandler);
-      };
-    }, []);
 
     const hasScrollingContentProps =
       hasScrollingContent || isScrollable
@@ -216,7 +202,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onClose?(event: MouseEvent): void | boolean;
 
   /**
@@ -346,7 +332,7 @@ const ComposedModalDialog = React.forwardRef<
     if (!enableDialogElement) {
       toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open, prefix]);
   // Remove the document.body className on unmount
   useEffect(() => {
@@ -527,7 +513,7 @@ const ComposedModalDialog = React.forwardRef<
     return () => {
       document.removeEventListener('keydown', handleEscapeKey, true);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
 
   useEffect(() => {
@@ -584,7 +570,7 @@ const ComposedModalDialog = React.forwardRef<
         focusButton(innerModal.current);
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open, selectorPrimaryFocus, isOpen]);
 
   // AILabel is always size `sm`

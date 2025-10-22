@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+import React, { // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   useEffect,
   useMemo,
   useState,
@@ -97,9 +97,9 @@ export interface DataTableCell<T> {
   hasAILabelHeader?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 type DataTableCells<T extends any[]> = { [K in keyof T]: DataTableCell<T[K]> };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface DataTableRow<ColTypes extends any[]> {
   id: string;
   cells: DataTableCells<ColTypes>;
@@ -114,7 +114,7 @@ export interface DataTableHeader {
   slug?: ReactElement;
   decorator?: ReactElement;
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   /**
    * The headers for the table.
@@ -160,6 +160,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     isExpanded: boolean;
     onExpand: (event: MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
+    id: string;
   };
 
   getRowProps: (options: {
@@ -174,6 +175,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     key: string;
     onExpand: (event: MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
+    expandHeader: string;
   };
 
   getExpandedRowProps: (options: {
@@ -209,7 +211,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 
   getBatchActionProps: (options?: { [key: string]: unknown }) => {
     onCancel: () => void;
-    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
     onSelectAll?: () => void | undefined;
     shouldShowBatchActions: boolean;
     totalCount: number;
@@ -277,7 +279,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
    */
   radio: boolean | undefined;
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface DataTableProps<RowType, ColTypes extends any[]>
   extends TranslateWithId<TranslationKey> {
   children?: (
@@ -312,7 +314,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 interface DataTableState<ColTypes extends any[]> {
   cellsById: Record<string, DataTableCell<ColTypes>>;
   filterInputValue: string | null;
@@ -333,7 +335,7 @@ interface DataTableState<ColTypes extends any[]> {
  * the DataTable is accessible through look-up by ID, and updating the state of
  * a single entity cascades updates to the consumer.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export const DataTable = <RowType, ColTypes extends any[]>(
   props: DataTableProps<RowType, ColTypes>
 ) => {
@@ -385,7 +387,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
       setState((prev) => getDerivedStateFromProps(props, prev));
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [headers, rows]);
 
   const getHeaderProps: RenderProps['getHeaderProps'] = ({
@@ -443,9 +445,12 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       ...rest,
       'aria-label': t(translationKey),
       // Provide a string of all expanded row IDs, separated by a space.
-      'aria-controls': rowIds.map((id) => `expanded-row-${id}`).join(' '),
+      'aria-controls': rowIds
+        .map((id) => `${getTablePrefix()}-expanded-row-${id}`)
+        .join(' '),
       isExpanded,
       onExpand: composeEventHandlers(handlers),
+      id: `${getTablePrefix()}-expand`,
     };
   };
 
@@ -493,9 +498,10 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       onExpand: composeEventHandlers([handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
       'aria-label': t(translationKey),
-      'aria-controls': `expanded-row-${row.id}`,
+      'aria-controls': `${getTablePrefix()}-expanded-row-${row.id}`,
       isSelected: row.isSelected,
       disabled: row.disabled,
+      expandHeader: `${getTablePrefix()}-expand`,
     };
   };
 
@@ -505,7 +511,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   }) => {
     return {
       ...rest,
-      id: `expanded-row-${row.id}`,
+      id: `${getTablePrefix()}-expanded-row-${row.id}`,
     };
   };
 

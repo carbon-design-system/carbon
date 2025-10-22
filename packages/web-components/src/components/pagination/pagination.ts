@@ -35,7 +35,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
   private _handleSlotChange({ target }: Event) {
     const content = (target as HTMLSlotElement).assignedNodes().filter(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
     );
 
@@ -203,7 +203,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener(`${prefix}-select-selected`)
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeSelector(event) {
     const { value } = event.detail;
@@ -365,9 +365,13 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       .constructor as typeof CDSPagination;
 
     if (changedProperties.has('pageSize')) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion , @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
-      (this.shadowRoot!.querySelector(selectorPageSizesSelect) as any).value =
-        pageSize;
+      const pageSizeSelect = this.shadowRoot?.querySelector(
+        selectorPageSizesSelect
+      ) as CDSSelect | null;
+
+      if (pageSizeSelect) {
+        pageSizeSelect.value = String(pageSize ?? '');
+      }
     }
 
     // Recompute total pages and clamp the visible page whenever any relevant input changes
@@ -384,16 +388,22 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
       // Only assign if it actually changed to avoid unnecessary updates
       if (this.totalPages !== computedTotalPages) {
-        this.totalPages = computedTotalPages;
+        this.updateComplete.then(() => {
+          this.totalPages = computedTotalPages;
+        });
       }
 
       const totalPagesSafe = Math.max(1, computedTotalPages || 1);
       const requestedPage = Math.max(1, Math.floor(this.page || 1));
       const displayPage = Math.min(requestedPage, totalPagesSafe);
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
-      (this.shadowRoot!.querySelector(selectorPagesSelect) as CDSSelect).value =
-        displayPage.toString();
+      const pagesSelect = this.shadowRoot?.querySelector(
+        selectorPagesSelect
+      ) as CDSSelect | null;
+
+      if (pagesSelect) {
+        pagesSelect.value = displayPage.toString();
+      }
     }
 
     if (changedProperties.has('page')) {

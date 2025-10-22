@@ -24,7 +24,7 @@ describe('cds-search', () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-search' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -47,7 +47,7 @@ describe('cds-search', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-search' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -60,11 +60,11 @@ describe('cds-search', () => {
       render(template({ value: 'value-foo' }), document.body);
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inputNode = search!.shadowRoot!.querySelector('input');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       inputNode!.value = 'value-bar';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       inputNode!.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       expect((search as CDSSearch).value).toBe('value-bar');
     });
@@ -74,13 +74,13 @@ describe('cds-search', () => {
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
       const spyBeforeClear = jasmine.createSpy('before clear');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(search!, 'cds-search-input', spyBeforeClear);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inputNode = search!.shadowRoot!.querySelector('input');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       inputNode!.value = 'value-bar';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       inputNode!.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       expect(spyBeforeClear).toHaveBeenCalled();
@@ -93,7 +93,7 @@ describe('cds-search', () => {
       render(template({ value: 'value-foo' }), document.body);
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       search!.shadowRoot!.querySelector('button')!.click();
       expect((search as CDSSearch).value).toBe('');
     });
@@ -103,9 +103,9 @@ describe('cds-search', () => {
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
       const spyBeforeClear = jasmine.createSpy('before clear');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(search!, 'cds-search-input', spyBeforeClear);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       search!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
       expect(spyBeforeClear).toHaveBeenCalled();
@@ -114,7 +114,7 @@ describe('cds-search', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
     events.reset();
   });

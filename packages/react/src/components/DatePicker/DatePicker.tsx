@@ -31,6 +31,7 @@ import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
 import type { Instance } from 'flatpickr/dist/types/instance';
+import { datePartsOrder } from '@carbon/utilities';
 
 // Weekdays shorthand for English locale
 // Ensure localization exists before trying to access it
@@ -65,6 +66,7 @@ const monthToStr = (monthNumber, shorthand, locale) =>
  * @param {string} config.selectorFlatpickrYearContainer The CSS selector for the container of year selection UI.
  * @param {string} config.selectorFlatpickrCurrentMonth The CSS selector for the text-based month selection UI.
  * @param {string} config.classFlatpickrCurrentMonth The CSS class for the text-based month selection UI.
+ * @param {string} config.locale The locale code.
  * @returns {Plugin} A Flatpickr plugin to use text instead of `<select>` for month picker.
  */
 const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
@@ -91,12 +93,21 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
           config.shorthand === true,
           fp.l10n
         );
-        fp.yearElements[0]
-          .closest(config.selectorFlatpickrMonthYearContainer)
-          .insertBefore(
-            monthElement,
-            fp.yearElements[0].closest(config.selectorFlatpickrYearContainer)
-          );
+
+        // Depending on the locale, toggle the order of the month and year
+        if (datePartsOrder.isMonthFirst(config.locale)) {
+          fp.yearElements[0]
+            .closest(config.selectorFlatpickrMonthYearContainer)
+            .insertBefore(
+              monthElement,
+              fp.yearElements[0].closest(config.selectorFlatpickrYearContainer)
+            );
+        } else {
+          fp.yearElements[0]
+            .closest(config.selectorFlatpickrMonthYearContainer)
+            .insertAdjacentElement('afterend', monthElement);
+        }
+
         return monthElement;
       })
     );
@@ -143,14 +154,6 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
 function isLabelTextEmpty(children) {
   return children.every((child) => !child.props.labelText);
 }
-
-const rightArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
-  <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
-</svg>`;
-
-const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
-  <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
-</svg>`;
 
 function updateClassNames(calendar, prefix) {
   const calendarContainer = calendar.calendarContainer;
@@ -271,7 +274,7 @@ export interface DatePickerProps {
    */
   locale?:
     | string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     | any
     | 'ar' // Arabic
     | 'at' // Austria
@@ -371,7 +374,7 @@ export interface DatePickerProps {
    * if boolean applies to all inputs
    * if array applies to each input in order
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   readOnly?: boolean | [] | any | undefined;
 
   /**
@@ -394,6 +397,16 @@ export interface DatePickerProps {
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
   warnText?: ReactNode;
+
+  /**
+   * Accessible aria-label for the "next month" arrow icon.
+   */
+  nextMonthAriaLabel?: string;
+
+  /**
+   * Accessible aria-label for the "previous month" arrow icon.
+   */
+  prevMonthAriaLabel?: string;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(
@@ -423,6 +436,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     short = false,
     value,
     parseDate: parseDateProp,
+    nextMonthAriaLabel = 'Next month',
+    prevMonthAriaLabel = 'Previous month',
     ...rest
   }: DatePickerProps,
   ref: ForwardedRef<HTMLDivElement>
@@ -430,7 +445,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const startInputField: any = useCallback((node) => {
     if (node !== null) {
       startInputField.current = node;
@@ -468,10 +483,10 @@ const DatePicker = React.forwardRef(function DatePicker(
         onClose(selectedDates, dateStr, instance);
       }
     },
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     [onClose]
   );
-  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   const onCalendarClose = (selectedDates, dateStr, instance, e) => {
     if (e && e.type === 'clickOutside') {
       return;
@@ -507,9 +522,9 @@ const DatePicker = React.forwardRef(function DatePicker(
     [String(className)]: className,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const childrenWithProps = React.Children.toArray(children as any).map(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (child: any, index) => {
       if (
         index === 0 &&
@@ -636,9 +651,20 @@ const DatePicker = React.forwardRef(function DatePicker(
       parseDate = parseDateProp;
     }
 
+    // Accessible arrow icons (localized manually)
+    // Flatpickr does not currently support localization of next/previous month
+    // labels, so we inject translated aria-labels based on the provided locale.
+    const rightArrowHTML = `<svg aria-label="${nextMonthAriaLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+    </svg>`;
+
+    const leftArrowHTML = `<svg aria-label="${prevMonthAriaLabel}" role="img" width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+    </svg>`;
+
     const { current: start } = startInputField;
     const { current: end } = endInputField;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const flatpickerConfig: any = {
       inline: inline ?? false,
       onClose: onCalendarClose,
@@ -669,6 +695,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           selectorFlatpickrYearContainer: '.numInputWrapper',
           selectorFlatpickrCurrentMonth: '.cur-month',
           classFlatpickrCurrentMonth: 'cur-month',
+          locale: locale,
         }),
         carbonFlatpickrFixEventsPlugin({
           inputFrom: startInputField.current,
@@ -878,12 +905,14 @@ const DatePicker = React.forwardRef(function DatePicker(
     closeOnSelect,
     hasInput,
     datePickerType,
+    nextMonthAriaLabel,
+    prevMonthAriaLabel,
   ]);
 
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
   // need to be imperatively called on the calendar
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   useImperativeHandle(ref, (): any => ({
     get calendar() {
       return calendarRef.current;
@@ -951,11 +980,11 @@ const DatePicker = React.forwardRef(function DatePicker(
         endInputField.current.value = '';
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [value]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     let isMouseDown = false;
 
     const handleMouseDown = (event) => {
@@ -971,7 +1000,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         closeCalendar(event);
       }
     };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const closeCalendar = (event) => {
       calendarRef.current?.close();
       // Remove focus from endDate calendar input
@@ -1249,6 +1278,16 @@ DatePicker.propTypes = {
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
   warnText: PropTypes.node,
+
+  /**
+   * Accessible aria-label for the "next month" arrow icon.
+   */
+  nextMonthAriaLabel: PropTypes.string,
+
+  /**
+   * Accessible aria-label for the "previous month" arrow icon.
+   */
+  prevMonthAriaLabel: PropTypes.string,
 };
 
 export default DatePicker;

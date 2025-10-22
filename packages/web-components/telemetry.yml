@@ -24,8 +24,10 @@ collect:
         - autoalign
         - autocomplete
         - autofocus
+        - backgroundToken
         - batch-action
         - batch-expansion
+        - border
         - breadcrumb
         - button-class-name
         - button-label
@@ -139,6 +141,7 @@ collect:
         - oncds-table-row-expando-toggled
         - oncds-tag-beingclosed
         - oncds-tag-closed
+        - onchange
         - onClick
         - oninput
         - oninvalid
@@ -368,7 +371,6 @@ collect:
         - divider
         - oncds-overflow-menu-item-clicked
         # cds-page-header-breadcrumb
-        - border
         - content-actions-flush
         - page-actions-flush
         # cds-pagination
@@ -391,8 +393,13 @@ collect:
         - hide-password-label
         - show-password-label
         # cds-progress-indicator
+        - current-index
+        - ononChange
         - space-equally
         # cds-progress-step
+        - clickable
+        - complete
+        - current
         - icon-label
         - secondary-label
         - secondary-label-text
@@ -514,7 +521,6 @@ collect:
         - selectableTiles
         # cds-time-picker
         - max-length
-        - onchange
         - warning
         - warning-text
         # cds-toggle
@@ -522,6 +528,7 @@ collect:
         - label-a
         - label-b
         - oncds-toggle-changed
+        - toggled
         # cds-tooltip
         - closeOnActivation
         - keyboard-only
@@ -530,19 +537,10 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
-        # feature-flags
-        - enable-dialog-element
-        - enable-experimental-focus-wrap-without-sentinels
-        - enable-focus-wrap-without-sentinels
-        - enable-treeview-controllable
-        - enable-v12-dynamic-floating-styles
-        - enable-v12-overflowmenu
-        - enable-v12-tile-default-icons
-        - enable-v12-tile-radio-icons
       allowedAttributeStringValues:
         # General - boolean attributes
-        - 'true'
-        - 'false'
+        - "true"
+        - "false"
         # General - align
         - bottom
         - bottom-end
@@ -587,18 +585,21 @@ collect:
         - top-left
         - top-right
         - top-start
+        # General - backgroundToken
+        - background
+        - layer
         # General - collapse-mode
         - fixed
         - rail
         - responsive
         # General - color-scheme
-        - ''
+        - ""
         - light
         # General - direction
         - bottom
         - top
         # General - kind
-        - ''
+        - ""
         - caution-major
         - caution-minor
         - cautious
@@ -666,7 +667,7 @@ collect:
         - horizontal
         - vertical
         # General - size
-        - ''
+        - ""
         - 2xl
         - 2xs
         - big
@@ -690,7 +691,7 @@ collect:
         - finished
         - inactive
         # General - tooltip-alignment
-        - ''
+        - ""
         - bottom
         - bottom-left
         - bottom-right
@@ -717,7 +718,7 @@ collect:
         - right
         - top
         # General - type
-        - ''
+        - ""
         - blue
         - button
         - contained

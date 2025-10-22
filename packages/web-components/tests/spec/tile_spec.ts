@@ -41,7 +41,7 @@ xdescribe('cds-tile', () => {
         render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -62,7 +62,7 @@ xdescribe('cds-tile', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -84,7 +84,7 @@ xdescribe('cds-tile', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -97,7 +97,7 @@ xdescribe('cds-tile', () => {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -112,7 +112,7 @@ xdescribe('cds-tile', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -125,11 +125,11 @@ xdescribe('cds-tile', () => {
         const tile = document.querySelector('cds-expandable-tile');
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyBeforeToggle).toHaveBeenCalled();
@@ -144,11 +144,11 @@ xdescribe('cds-tile', () => {
         const tile = document.querySelector('cds-expandable-tile');
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyBeforeToggle).toHaveBeenCalled();
@@ -162,13 +162,13 @@ xdescribe('cds-tile', () => {
         await Promise.resolve();
         const tile = document.querySelector('cds-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyAfterToggle).not.toHaveBeenCalled();
@@ -179,13 +179,13 @@ xdescribe('cds-tile', () => {
         await Promise.resolve();
         const tile = document.querySelector('cds-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         tile!.shadowRoot!.querySelector('button')!.click();
         expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyAfterToggle).not.toHaveBeenCalled();
@@ -199,7 +199,7 @@ xdescribe('cds-tile', () => {
         render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-radio-tile' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -218,7 +218,7 @@ xdescribe('cds-tile', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-radio-tile' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
@@ -231,14 +231,14 @@ xdescribe('cds-tile', () => {
         render(clickableTemplate({ name: 'name-foo' }), document.body);
         await Promise.resolve();
         const tiles = document.body.querySelectorAll('cds-radio-tile');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const input1 = tiles[1]!.shadowRoot!.querySelector('input');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         input1!.click();
         expect(
           Array.prototype.map.call(
             tiles,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
             (item: any) => (item as CDSRadioTile).selected
           )
         ).toEqual([false, true, false]);
@@ -252,7 +252,7 @@ xdescribe('cds-tile', () => {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -270,7 +270,7 @@ xdescribe('cds-tile', () => {
         );
         await Promise.resolve();
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
           document.body.querySelector('cds-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
@@ -281,12 +281,12 @@ xdescribe('cds-tile', () => {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
         const tile = document.body.querySelector('cds-selectable-tile');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const input = tile!.shadowRoot!.querySelector('input');
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         input!.click();
         expect((tile as CDSSelectableTile).selected).toBe(true);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         input!.click();
         expect((tile as CDSSelectableTile).selected).toBe(false);
       });
@@ -294,7 +294,7 @@ xdescribe('cds-tile', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
     events.reset();
   });

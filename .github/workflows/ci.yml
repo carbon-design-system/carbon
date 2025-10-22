@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
       - name: Run yarn dedupe
@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies
@@ -63,10 +63,10 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -99,10 +99,10 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -139,10 +139,10 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -185,10 +185,10 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -230,7 +230,7 @@ jobs:
       - name: Dry run VRT on draft PRs
         if:
           ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft != false && github.base_ref != 'main'
+          github.event.pull_request.draft == true && github.base_ref != 'main'
           }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
@@ -266,10 +266,10 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -325,17 +325,18 @@ jobs:
   merge-playwright-reports:
     # Merge reports after *-runner jobs, even if some shards have failed
     if:
-      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() }}
+      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
+      github.event.pull_request.draft == false }}
     needs: [vrt-runner, avt-runner]
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -404,10 +405,10 @@ jobs:
           # https://www.chromatic.com/docs/github-actions/#recommended-configuration-for-build-events
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -427,7 +428,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@20c7e42e1b2f6becd5d188df9acb02f3e2f51519 # v13.2.0
+        uses: chromaui/action@4ffe736a2a8262ea28067ff05a13b635ba31ec05 # v13.3.0
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
