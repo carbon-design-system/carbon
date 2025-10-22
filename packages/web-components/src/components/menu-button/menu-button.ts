@@ -20,6 +20,7 @@ import { POPOVER_ALIGNMENT } from '../popover/defs';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
 import { MENU_BUTTON_KIND, MENU_BUTTON_SIZE } from './defs';
+import { MENU_BACKGROUND_TOKEN } from '../menu/defs';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 
 export { MENU_BUTTON_KIND, MENU_BUTTON_SIZE };
@@ -74,7 +75,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
    * Specify the background token to use for the menu. Default is 'layer'.
    */
   @property({ type: String, reflect: true, attribute: 'menu-background-token' })
-  menuBackgroundToken = 'layer';
+  menuBackgroundToken = MENU_BACKGROUND_TOKEN.LAYER;
 
   /**
    * Specify the size of the button and menu.
