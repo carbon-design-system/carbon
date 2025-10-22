@@ -3531,6 +3531,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -4193,9 +4199,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -11584,6 +11587,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -12212,9 +12221,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -13749,6 +13755,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -14190,9 +14202,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
