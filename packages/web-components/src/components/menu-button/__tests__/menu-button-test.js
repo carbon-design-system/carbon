@@ -215,8 +215,10 @@ describe('cds-menu-button', function () {
       button.click();
       await el.updateComplete;
 
-      const menu = el.querySelector('cds-menu');
-      expect(menu.getAttribute('background-token')).to.equal('background');
+      const menu = el.querySelector('cds-menu').shadowRoot.querySelector('ul');
+      expect(
+        menu.classList.contains('cds--menu--background-token__background')
+      );
     });
 
     it('should pass menu-border to the menu', async () => {
