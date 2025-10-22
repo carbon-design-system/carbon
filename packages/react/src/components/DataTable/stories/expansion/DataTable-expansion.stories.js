@@ -45,20 +45,13 @@ export default {
   },
 };
 
-const sharedArgTypes = {
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
 export const Default = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
       getHeaderProps,
+      getExpandHeaderProps,
       getRowProps,
       getExpandedRowProps,
       getTableProps,
@@ -72,7 +65,10 @@ export const Default = (args) => (
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
-              <TableExpandHeader aria-label="expand row" />
+              <TableExpandHeader
+                aria-label="expand row"
+                {...getExpandHeaderProps()}
+              />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
@@ -107,10 +103,6 @@ export const Default = (args) => (
     )}
   </DataTable>
 );
-
-Default.argTypes = {
-  ...sharedArgTypes,
-};
 
 export const BatchExpansion = (args) => (
   <DataTable {...args} rows={rows} headers={headers}>
@@ -169,6 +161,122 @@ export const BatchExpansion = (args) => (
   </DataTable>
 );
 
-BatchExpansion.argTypes = {
-  ...sharedArgTypes,
-};
+export const BatchExpansionMultipleTables = (args) => (
+  <>
+    <DataTable {...args} rows={rows} headers={headers}>
+      {({
+        rows,
+        headers,
+        getHeaderProps,
+        getExpandHeaderProps,
+        getRowProps,
+        getExpandedRowProps,
+        getTableProps,
+        getTableContainerProps,
+        getCellProps,
+      }) => (
+        <TableContainer
+          title="DataTable"
+          description="With batch expansion"
+          {...getTableContainerProps()}>
+          <Table {...getTableProps()} aria-label="sample table">
+            <TableHead>
+              <TableRow>
+                <TableExpandHeader
+                  enableToggle={true}
+                  {...getExpandHeaderProps()}
+                />
+                {headers.map((header, i) => (
+                  <TableHeader key={i} {...getHeaderProps({ header })}>
+                    {header.header}
+                  </TableHeader>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <React.Fragment key={row.id}>
+                  <TableExpandRow {...getRowProps({ row })}>
+                    {row.cells.map((cell) => (
+                      <TableCell {...getCellProps({ cell })}>
+                        {cell.value}
+                      </TableCell>
+                    ))}
+                  </TableExpandRow>
+                  <TableExpandedRow
+                    colSpan={headers.length + 1}
+                    className="demo-expanded-td"
+                    {...getExpandedRowProps({ row })}>
+                    <h6>Expandable row content</h6>
+                    <div>Description here</div>
+                  </TableExpandedRow>
+                </React.Fragment>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </DataTable>
+    <DataTable {...args} rows={rows} headers={headers}>
+      {({
+        rows,
+        headers,
+        getHeaderProps,
+        getExpandHeaderProps,
+        getRowProps,
+        getExpandedRowProps,
+        getTableProps,
+        getTableContainerProps,
+        getCellProps,
+      }) => (
+        <TableContainer
+          title="DataTable"
+          description="With batch expansion"
+          {...getTableContainerProps()}>
+          <Table {...getTableProps()} aria-label="sample table">
+            <TableHead>
+              <TableRow>
+                <TableExpandHeader
+                  enableToggle={true}
+                  {...getExpandHeaderProps()}
+                />
+                {headers.map((header, i) => (
+                  <TableHeader key={i} {...getHeaderProps({ header })}>
+                    {header.header}
+                  </TableHeader>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <React.Fragment key={row.id}>
+                  <TableExpandRow {...getRowProps({ row })}>
+                    {row.cells.map((cell) => (
+                      <TableCell {...getCellProps({ cell })}>
+                        {cell.value}
+                      </TableCell>
+                    ))}
+                  </TableExpandRow>
+                  <TableExpandedRow
+                    colSpan={headers.length + 1}
+                    className="demo-expanded-td"
+                    {...getExpandedRowProps({ row })}>
+                    <h6>Expandable row content</h6>
+                    <div>Description here</div>
+                  </TableExpandedRow>
+                </React.Fragment>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </DataTable>
+  </>
+);
+/*
+ * This story will:
+ * - Be excluded from the docs page
+ * - Removed from the sidebar navigation
+ * - Still be a tested variant and available at direct url
+ */
+BatchExpansionMultipleTables.tags = ['!dev', '!autodocs'];

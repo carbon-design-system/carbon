@@ -75,7 +75,7 @@ describe('cds-content-switcher', () => {
         'all';
       await Promise.resolve();
       events.on(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!,
         'cds-content-switcher-beingselected',
         (event: CustomEvent) => {
@@ -126,7 +126,7 @@ describe('cds-content-switcher', () => {
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

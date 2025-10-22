@@ -20,22 +20,23 @@ import Search, { SearchProps } from '../Search';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 
-/**
- * Message ids that will be passed to translateWithId().
- */
-export type TableToolbarTranslationKey =
-  | 'carbon.table.toolbar.search.label'
-  | 'carbon.table.toolbar.search.placeholder';
+const translationIds = {
+  'carbon.table.toolbar.search.label': 'carbon.table.toolbar.search.label',
+  'carbon.table.toolbar.search.placeholder':
+    'carbon.table.toolbar.search.placeholder',
+} as const;
 
-const translationKeys: Record<TableToolbarTranslationKey, string> = {
-  'carbon.table.toolbar.search.label': 'Filter table',
-  'carbon.table.toolbar.search.placeholder': 'Filter table',
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.table.toolbar.search.label']]: 'Filter table',
+  [translationIds['carbon.table.toolbar.search.placeholder']]: 'Filter table',
 };
 
-const translateWithId = (id: TableToolbarTranslationKey): string => {
-  return translationKeys[id];
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
 };
 
 type ExcludedInheritedProps =
@@ -54,7 +55,7 @@ export type TableToolbarSearchHandleExpand = (
 
 export interface TableToolbarSearchProps
   extends Omit<SearchProps, ExcludedInheritedProps>,
-    TranslateWithId<TableToolbarTranslationKey> {
+    TranslateWithId<TranslationKey> {
   /**
    * Specifies if the search should initially render in an expanded state
    */
@@ -126,7 +127,7 @@ const TableToolbarSearch = ({
   searchContainerClass,
   onChange: onChangeProp,
   onClear = noopFn,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
   placeholder,
   labelText,
   expanded: expandedProp,
@@ -322,7 +323,7 @@ TableToolbarSearch.propTypes = {
    */
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
-   * Provide custom text for the component for each translation id
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };

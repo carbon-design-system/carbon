@@ -24,7 +24,7 @@ describe('cds-combo-box', () => {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-combo-box' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -48,7 +48,7 @@ describe('cds-combo-box', () => {
       );
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-combo-box' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -63,29 +63,29 @@ describe('cds-combo-box', () => {
     beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-combo-box')!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       itemNode = elem.querySelector('cds-combo-box-item')!;
     });
 
     it('should add "open" stateful modifier class', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
 
     it('should remove "open" stateful modifier class (closed default state)', async () => {
       (elem as CDSComboBox).open = true;
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -94,9 +94,9 @@ describe('cds-combo-box', () => {
       await Promise.resolve();
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -105,27 +105,27 @@ describe('cds-combo-box', () => {
       await Promise.resolve();
       (itemNode as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should support enter key to open the menu', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       const event = new CustomEvent('keypress', { bubbles: true });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).key = 'Enter';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       inner!.dispatchEvent(event);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       inner!.dispatchEvent(event);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -133,11 +133,11 @@ describe('cds-combo-box', () => {
       events.on(elem, 'cds-combo-box-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
@@ -147,11 +147,11 @@ describe('cds-combo-box', () => {
       events.on(elem, 'cds-combo-box-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
   });
@@ -163,7 +163,7 @@ describe('cds-combo-box', () => {
     beforeEach(async () => {
       render(template({ open: true, value: 'all' }), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-combo-box')!;
       itemNodes = elem.querySelectorAll('cds-combo-box-item');
     });
@@ -190,7 +190,7 @@ describe('cds-combo-box', () => {
       ).click();
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
           .value
       ).toBe('Option 3');
@@ -236,7 +236,7 @@ describe('cds-combo-box', () => {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
           .value
       ).toBe('Option 1');
@@ -247,7 +247,7 @@ describe('cds-combo-box', () => {
         expect(event.detail.item).toBeUndefined();
         event.preventDefault();
       });
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       const shadowRoot = elem.shadowRoot;
       if (shadowRoot) {
@@ -258,7 +258,7 @@ describe('cds-combo-box', () => {
       }
       await Promise.resolve();
       expect((elem as CDSComboBox).value).toBe('all');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('selected')).toBe(true);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
@@ -266,7 +266,7 @@ describe('cds-combo-box', () => {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
           .value
       ).toBe('Option 1');
@@ -275,18 +275,18 @@ describe('cds-combo-box', () => {
     it('should reflect the added child to the selection', async () => {
       const itemNode = document.createElement('cds-combo-box-item');
       itemNode.textContent = 'text-added';
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (itemNode as any).value = 'value-added';
       elem.appendChild(itemNode);
       (elem as CDSComboBox).value = 'value-added';
       try {
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
             .value
         ).toBe('text-added');
       } finally {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         itemNode.parentNode!.removeChild(itemNode);
       }
     });
@@ -300,9 +300,9 @@ describe('cds-combo-box', () => {
     beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-combo-box')!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       inputNode = elem.shadowRoot!.getElementById(
         'trigger-label'
       ) as HTMLInputElement;
@@ -313,9 +313,9 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
@@ -328,9 +328,9 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(true);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
@@ -343,13 +343,13 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line require-atomic-updates -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line require-atomic-updates -- https://github.com/carbon-design-system/carbon/issues/20452
       inputNode.value = 'Foo';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
@@ -362,13 +362,13 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line require-atomic-updates -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line require-atomic-updates -- https://github.com/carbon-design-system/carbon/issues/20452
       inputNode.value = '';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
@@ -381,9 +381,9 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       const shadowRoot = elem.shadowRoot;
       if (shadowRoot) {
@@ -397,7 +397,7 @@ describe('cds-combo-box', () => {
       await Promise.resolve();
       expect((elem as CDSComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
@@ -411,23 +411,23 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const selectionButton = elem.shadowRoot!.querySelector(
         '.cds--list-box__selection'
       );
       const event = new CustomEvent('keypress', { bubbles: true });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).key = ' ';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       selectionButton!.dispatchEvent(event);
       await Promise.resolve();
       expect((elem as CDSComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
@@ -441,23 +441,23 @@ describe('cds-combo-box', () => {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const selectionButton = elem.shadowRoot!.querySelector(
         '.cds--list-box__selection'
       );
       const event = new CustomEvent('keypress', { bubbles: true });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (event as any).key = 'Enter';
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       selectionButton!.dispatchEvent(event);
       await Promise.resolve();
       expect((elem as CDSComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
@@ -485,9 +485,9 @@ describe('cds-combo-box', () => {
         ) as HTMLElement
       ).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
@@ -499,7 +499,7 @@ describe('cds-combo-box', () => {
 
   afterEach(async () => {
     events.reset();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

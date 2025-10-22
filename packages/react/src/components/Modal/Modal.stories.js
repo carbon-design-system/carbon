@@ -156,26 +156,6 @@ Default.args = {
 };
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
   modalHeading: {
     control: 'text',
   },
@@ -199,33 +179,22 @@ Default.argTypes = {
   },
   onSecondarySubmit: {
     action: 'onSecondarySubmit',
-    table: {
-      disable: true,
-    },
   },
   primaryButtonText: {
     control: 'text',
   },
-  secondaryButtons: {
-    table: {
-      disable: true,
-    },
-  },
-  secondaryButtonText: {
-    control: 'text',
-    table: {
-      disable: true,
-    },
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
+};
+
+Default.parameters = {
+  controls: {
+    exclude: [
+      'id',
+      'launcherButtonRef',
+      'secondaryButtons',
+      'secondaryButtonText',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
   },
 };
 

@@ -28,7 +28,7 @@ const wrapComponent = <T extends HTMLTagName>({
   type,
 }: WrapComponentArgs<T>): ((
   props: HTMLAttributes<T>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement<any>) => {
   /**
    *
@@ -55,7 +55,7 @@ const wrapComponent = <T extends HTMLTagName>({
   Component.propTypes = {
     className: PropTypes.string,
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   return Component as (props: HTMLAttributes<T>) => React.ReactElement<any>;
 };
 

@@ -25,7 +25,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 import { useControllableState } from '../../internal/useControllableState';
 import {
@@ -35,22 +35,23 @@ import {
 } from '@carbon/utilities';
 import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
-import { AILabel, type AILabelProps } from '../AILabel';
+import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
-export const translationIds = {
+const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
 type TranslationKey = keyof typeof translationIds;
 
-const defaultTranslations = {
+const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['increment.number']]: 'Increment number',
   [translationIds['decrement.number']]: 'Decrement number',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
 };
 
 type ExcludedAttributes =
@@ -369,7 +370,7 @@ export const validateNumberSeparators = (
   return !isNaN(Number(normalized));
 };
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (props: NumberInputProps, forwardRef) => {
     const {
@@ -401,7 +402,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       size = 'md',
       slug,
       step = 1,
-      translateWithId: t = (id) => defaultTranslations[id],
+      translateWithId: t = defaultTranslateWithId,
       type = 'number',
       defaultValue = type === 'number' ? 0 : NaN,
       validate,
@@ -430,7 +431,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
       return 0;
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
 
@@ -613,7 +614,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const Icon = normalizedProps.icon as any;
 
     const getDecimalPlaces = (num: number) => {
@@ -705,13 +706,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     // Need to update the internal value when the revert button is clicked
-    let isRevertActive: AILabelProps['revertActive'];
-    if (normalizedDecorator?.type === AILabel) {
-      isRevertActive = normalizedDecorator.props.revertActive;
-    }
+    const isRevertActive = isComponentElement(normalizedDecorator, AILabel)
+      ? normalizedDecorator.props.revertActive
+      : undefined;
 
     useEffect(() => {
       if (!isRevertActive && slug && defaultValue) {
@@ -750,9 +750,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
                   match(e, keys.ArrowUp) && handleStep(e, 'up');
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
                   match(e, keys.ArrowDown) && handleStep(e, 'down');
                 }
 
@@ -1083,7 +1083,7 @@ NumberInput.propTypes = {
   step: PropTypes.number,
 
   /**
-   * Provide custom text for the component for each translation id
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

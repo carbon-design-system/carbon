@@ -28,18 +28,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   args: {
     theme: 'g10',
   },
