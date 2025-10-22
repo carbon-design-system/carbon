@@ -1953,7 +1953,7 @@ __metadata:
     sass: "npm:^1.77.7"
     sass-loader: "npm:^16.0.0"
     storybook: "npm:^9.1.8"
-    storybook-addon-accessibility-checker: "npm:>=9.2.0-rc.1"
+    storybook-addon-accessibility-checker: "npm:>=9.2.0-rc.2"
     stream-browserify: "npm:^3.0.0"
     style-loader: "npm:^4.0.0"
     tabbable: "npm:^6.2.0"
@@ -23493,16 +23493,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-accessibility-checker@npm:>=9.2.0-rc.1":
-  version: 9.2.0-rc.1
-  resolution: "storybook-addon-accessibility-checker@npm:9.2.0-rc.1"
+"storybook-addon-accessibility-checker@npm:>=9.2.0-rc.2":
+  version: 9.2.0-rc.2
+  resolution: "storybook-addon-accessibility-checker@npm:9.2.0-rc.2"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     accessibility-checker-engine: "npm:^4.0.8"
     axe-core: "npm:^4.2.0"
   peerDependencies:
     storybook: "workspace:^"
-  checksum: 10/7abcfa98bd8470d576dd64b983f1f9d24f2c5231b631354a0ffbc1370eeb1258b350d9138c541cee910adae9eff6a970638919a23331e067fe47310afa3534aa
+  checksum: 10/8c80e00cecdd5200e8a55fa444a3a4a1494c59e4829ab3c8365ab47fc306c2158e554a5368edc13114b6b8cd316dde145476c52239fd190f10725e526c845163
   languageName: node
   linkType: hard
 
