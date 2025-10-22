@@ -279,6 +279,54 @@ describe('Slider', () => {
       expect(onChange).toHaveBeenCalledTimes(0);
     });
 
+    it('should not display warn if disabled', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+
+      const warnMessage = screen.queryByText('Warning message');
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should not display warn if readOnly', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+
+      const warnMessage = screen.queryByText('Warning message');
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid message if disabled', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid message if readOnly', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
+    });
+
     describe('Error handling, expected behavior from event handlers', () => {
       it('handles non-number typed into input field', async () => {
         const { type, tab } = userEvent;
@@ -1010,6 +1058,54 @@ describe('Slider', () => {
         value: 0,
         valueUpper: 435,
       });
+    });
+
+    it('should not display warn if disabled', () => {
+      renderTwoHandleSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+
+      const warnMessage = screen.queryByText('Warning message');
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should not display warn if readOnly', () => {
+      renderTwoHandleSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+
+      const warnMessage = screen.queryByText('Warning message');
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid message if disabled', () => {
+      renderTwoHandleSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid message if readOnly', () => {
+      renderTwoHandleSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
     });
 
     describe('Error handling, expected behavior from event handlers', () => {
