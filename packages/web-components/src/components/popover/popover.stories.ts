@@ -9,7 +9,7 @@ import { html, LitElement } from 'lit'; // remove LitElement import before mergi
 import './popover';
 import './popover-content';
 import '../radio-button/index';
-import { POPOVER_ALIGNMENT } from './defs';
+import { POPOVER_ALIGNMENT, POPOVER_BACKGROUND_TOKEN } from './defs';
 import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
@@ -45,6 +45,10 @@ const sharedArgTypes = {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,
   },
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the popover',
+  },
   dropShadow: {
     control: 'boolean',
     description:
@@ -53,6 +57,14 @@ const sharedArgTypes = {
   highContrast: {
     control: 'boolean',
     description: 'Render the component using the high-contrast variant',
+  },
+  backgroundToken: {
+    control: 'select',
+    options: [
+      POPOVER_BACKGROUND_TOKEN.LAYER,
+      POPOVER_BACKGROUND_TOKEN.BACKGROUND,
+    ],
+    description: 'Specify the background token to use. Default is "layer".',
   },
   open: {
     control: 'boolean',
@@ -65,7 +77,10 @@ const sharedAutoAlignArgTypes = {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,
   },
-
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the popover',
+  },
   highContrast: {
     control: 'boolean',
     description: 'Render the component using the high-contrast variant',
@@ -74,6 +89,14 @@ const sharedAutoAlignArgTypes = {
     control: 'boolean',
     description:
       'Specify whether a drop shadow should be rendered on the popover',
+  },
+  backgroundToken: {
+    control: 'select',
+    options: [
+      POPOVER_BACKGROUND_TOKEN.LAYER,
+      POPOVER_BACKGROUND_TOKEN.BACKGROUND,
+    ],
+    description: 'Specify the background token to use. Default is "layer".',
   },
   open: {
     control: 'boolean',
@@ -84,6 +107,9 @@ const sharedAutoAlignArgTypes = {
 export const Default = {
   argTypes: sharedArgTypes,
   args: {
+    caret: true,
+    border: false,
+    highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
     autoAlign: false,
     caret: true,
@@ -112,11 +138,13 @@ export const Default = {
       <cds-popover
         ?open=${args.open}
         ?caret=${args.caret}
+        ?border=${args.border}
         ?highContrast=${args.highContrast}
         ?autoalign=${args.autoAlign}
         align=${args.align}
         ?tabTip=${args.tabTip}
-        ?dropShadow=${args.dropShadow}>
+        ?dropShadow=${args.dropShadow}
+        backgroundToken=${args.backgroundToken}>
         <button
           class="playground-trigger"
           aria-label="Checkbox"
@@ -371,7 +399,8 @@ export const TabTip = {
           ?highContrast=${args.highContrast}
           tabTip
           id="popover-two"
-          align="bottom-right">
+          align="bottom-right"
+          backgroundToken=${POPOVER_BACKGROUND_TOKEN.LAYER}>
           <button
             aria-label="Settings"
             type="button"
