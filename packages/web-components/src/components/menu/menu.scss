@@ -59,12 +59,11 @@ $css--plex: true !default;
   }
 
   &--border {
-    outline: 1px solid $border-subtle;
-    outline-offset: -1px;
+    @extend .#{$prefix}--menu--border;
   }
 
   &--background-token__background {
-    background: $background;
+    @extend .#{$prefix}--menu--background-token__background
   }
 }
 .#{$prefix}--menu--with-icons {
