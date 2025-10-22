@@ -63,7 +63,7 @@ $css--plex: true !default;
   }
 
   &--background-token__background {
-    @extend .#{$prefix}--menu--background-token__background
+    @extend .#{$prefix}--menu--background-token__background;
   }
 }
 .#{$prefix}--menu--with-icons {
