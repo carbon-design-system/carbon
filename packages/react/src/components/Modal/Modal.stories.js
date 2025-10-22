@@ -305,6 +305,7 @@ export const NestedModalTest = () => {
         onRequestClose={() => setModal2Open(false)}
         modalHeading="Second Modal (Topmost)"
         primaryButtonText="Close"
+        secondaryButtonText="Open Second Modal"
         size="sm">
         <p style={{ color: '#0f62fe', fontWeight: 'bold' }}>
           Press ESC - ONLY this modal should close.

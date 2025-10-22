@@ -1006,44 +1006,6 @@ describe.each([
     expect(onRequestClose).toHaveBeenCalled();
   });
 
-  it('should close only the topmost modal when ESC is pressed with multiple modals open', async () => {
-    const onClose1 = jest.fn();
-    const onClose2 = jest.fn();
-
-    render(
-      <>
-        <Modal
-          open={true}
-          onRequestClose={onClose1}
-          modalHeading="First Modal"
-          primaryButtonText="Close"
-          data-testid="modal-1">
-          <p>First modal content</p>
-        </Modal>
-        <Modal
-          open={true}
-          onRequestClose={onClose2}
-          modalHeading="Second Modal"
-          primaryButtonText="Close"
-          size="sm"
-          data-testid="modal-2">
-          <p>Second modal content</p>
-        </Modal>
-      </>
-    );
-
-    // Verify both modals are rendered
-    expect(screen.getByTestId('modal-1')).toBeInTheDocument();
-    expect(screen.getByTestId('modal-2')).toBeInTheDocument();
-
-    // Press ESC key
-    await userEvent.keyboard('{Escape}');
-
-    // Only the topmost modal (second modal) should be closed
-    expect(onClose2).toHaveBeenCalledTimes(1);
-    expect(onClose1).not.toHaveBeenCalled();
-  });
-
   it('should handle onClick events', async () => {
     const onClick = jest.fn();
     render(
@@ -1185,41 +1147,5 @@ describe.each([
 
     await keyboard('{Enter}');
     expect(onRequestSubmit).toHaveBeenCalledTimes(1);
-  });
-
-  it('should close modal when ESC key is pressed after clicking outside to lose focus', async () => {
-    const onRequestClose = jest.fn();
-    render(
-      <div>
-        <div
-          data-testid="outside-area"
-          style={{ width: '100px', height: '100px' }}>
-          Outside area
-        </div>
-        <Component
-          open
-          primaryButtonText="Primary button"
-          secondaryButtonText="Secondary button"
-          onRequestClose={onRequestClose}>
-          <p>
-            Custom domains direct requests for your apps in this Cloud Foundry
-            organization to a URL that you own. A custom domain can be a shared
-            domain, a shared subdomain, or a shared domain and host.
-          </p>
-          <TextInput
-            data-modal-primary-focus
-            id="text-input-1"
-            labelText="Domain name"
-          />
-        </Component>
-      </div>
-    );
-
-    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
-    expect(screen.getByLabelText('Domain name')).toHaveFocus();
-    await userEvent.click(screen.getByTestId('outside-area'));
-    expect(screen.getByLabelText('Domain name')).not.toHaveFocus();
-    await userEvent.keyboard('{Escape}');
-    expect(onRequestClose).toHaveBeenCalled();
   });
 });

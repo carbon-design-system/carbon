@@ -372,6 +372,9 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     evt.stopPropagation();
 
     if (open && target instanceof HTMLElement) {
+      if (match(evt, keys.Escape)) {
+        onRequestClose(evt);
+      }
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -543,38 +546,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     alertDialogProps.role = 'alertdialog';
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
-
-  useEffect(() => {
-    if (!open) return;
-
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (match(event, keys.Escape)) {
-        const allModalContainers = document.querySelectorAll(
-          '[role="dialog"][aria-modal="true"]'
-        );
-
-        // Proper visibility check that handles visibility:hidden
-        const visibleModals = Array.from(allModalContainers).filter((modal) => {
-          const styles = window.getComputedStyle(modal);
-          return styles.display !== 'none' && styles.visibility === 'visible';
-        });
-
-        if (visibleModals.length === 0) return;
-
-        const currentModal = innerModal.current;
-        const topModal = visibleModals[visibleModals.length - 1];
-
-        if (currentModal === topModal) {
-          event.preventDefault();
-          event.stopPropagation();
-          onRequestClose(event as unknown as React.KeyboardEvent<HTMLElement>);
-        }
-      }
-    };
-
-    document.addEventListener('keydown', handleEscapeKey, true);
-    return () => document.removeEventListener('keydown', handleEscapeKey, true);
-  }, [open, onRequestClose]);
 
   useEffect(() => {
     return () => {
@@ -922,6 +893,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     <Layer
       {...rest}
       level={0}
+      tabIndex="-1"
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onBlur={handleBlur}

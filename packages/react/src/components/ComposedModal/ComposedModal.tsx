@@ -355,6 +355,10 @@ const ComposedModalDialog = React.forwardRef<
 
   function handleKeyDown(event) {
     if (!enableDialogElement) {
+      event.stopPropagation();
+      if (match(event, keys.Escape)) {
+        closeModal(event);
+      }
       if (
         focusTrapWithoutSentinels &&
         open &&
@@ -531,37 +535,6 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   useEffect(() => {
-    if (!open) return;
-
-    const handleEscapeKey = (event: globalThis.KeyboardEvent) => {
-      if (match(event, keys.Escape)) {
-        const allModalContainers = document.querySelectorAll(
-          '[role="dialog"][aria-modal="true"]'
-        );
-
-        // Proper visibility check that handles visibility:hidden
-        const visibleModals = Array.from(allModalContainers).filter((modal) => {
-          const styles = window.getComputedStyle(modal);
-          return styles.display !== 'none' && styles.visibility === 'visible';
-        });
-
-        if (visibleModals.length === 0) return;
-
-        const currentModal = innerModal.current;
-        const topModal = visibleModals[visibleModals.length - 1];
-        if (topModal.contains(currentModal) || visibleModals.length === 1) {
-          event.preventDefault();
-          event.stopPropagation();
-          closeModal(event);
-        }
-      }
-    };
-
-    document.addEventListener('keydown', handleEscapeKey, true);
-    return () => document.removeEventListener('keydown', handleEscapeKey, true);
-  }, [open, closeModal]);
-
-  useEffect(() => {
     if (!enableDialogElement && !enablePresence && !open && launcherButtonRef) {
       setTimeout(() => {
         launcherButtonRef.current?.focus();
@@ -697,6 +670,7 @@ const ComposedModalDialog = React.forwardRef<
       onBlur={handleBlur}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onMouseDown={composeEventHandlers([rest?.onMouseDown, handleOnMouseDown])}
+      tabIndex="-1"
       onKeyDown={handleKeyDown}
       className={modalClass}
       data-exiting={presenceContext?.isExiting || undefined}>
