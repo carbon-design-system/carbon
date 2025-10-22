@@ -112,9 +112,7 @@ export const Default = {
     highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
     autoAlign: false,
-    caret: true,
     dropShadow: true,
-    highContrast: false,
     open: true,
   },
 
