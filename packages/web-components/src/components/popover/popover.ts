@@ -268,7 +268,20 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     }
 
     if (!this.autoalign) {
-      this.align = this.align ? this.align : tabTip ? 'bottom-left' : 'bottom';
+      this.align = this.align ? this.align : tabTip ? 'bottom-start' : 'bottom';
+    }
+
+    if (tabTip) {
+      const tabTipAlignments = [
+        'bottom-start',
+        'bottom-end',
+        'bottom-left', // remove in v12
+        'bottom-right', // remove in v12
+      ];
+
+      if (!tabTipAlignments.includes(this.align)) {
+        this.align = 'bottom-start';
+      }
     }
 
     const classes = classMap({
