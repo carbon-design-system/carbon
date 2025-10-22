@@ -33,6 +33,7 @@ export interface CheckboxGroupProps {
   orientation?: 'horizontal' | 'vertical';
   legendText: ReactNode;
   readOnly?: boolean;
+  disabled?: boolean;
   /**
    * * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
@@ -57,6 +58,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   legendId,
   legendText,
   readOnly,
+  disabled,
   warn,
   warnText,
   slug,
@@ -65,7 +67,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 }) => {
   const prefix = usePrefix();
 
-  const showWarning = !readOnly && !invalid && warn;
+  const showWarning = !readOnly && !disabled && !invalid && warn;
   const showHelper = !invalid && !warn;
 
   const checkboxGroupInstanceId = useId();
@@ -83,8 +85,9 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
     [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
     [`${prefix}--checkbox-group--readonly`]: readOnly,
-    [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
-    [`${prefix}--checkbox-group--warning`]: showWarning,
+    [`${prefix}--checkbox-group--invalid`]: !readOnly && !disabled && invalid,
+    [`${prefix}--checkbox-group--warning`]:
+      !readOnly && !disabled && showWarning,
     [`${prefix}--checkbox-group--slug`]: slug,
     [`${prefix}--checkbox-group--decorator`]: decorator,
   });
@@ -103,7 +106,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     ) {
       const childProps: Pick<
         ComponentProps<typeof Checkbox>,
-        'invalid' | 'readOnly' | 'warn'
+        'invalid' | 'readOnly' | 'warn' | 'disabled'
       > = {
         ...(typeof invalid !== 'undefined' &&
         typeof child.props.invalid === 'undefined'
@@ -116,6 +119,10 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
         ...(typeof warn !== 'undefined' &&
         typeof child.props.warn === 'undefined'
           ? { warn }
+          : {}),
+        ...(typeof disabled !== 'undefined' &&
+        typeof child.props.disabled === 'undefined'
+          ? { disabled }
           : {}),
       };
 
@@ -130,7 +137,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   return (
     <fieldset
       className={fieldsetClasses}
-      data-invalid={invalid ? true : undefined}
+      data-invalid={invalid && !disabled ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
       aria-readonly={readOnly}
       aria-describedby={!invalid && !warn && helper ? helperId : undefined}

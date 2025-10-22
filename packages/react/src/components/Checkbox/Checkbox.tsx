@@ -125,6 +125,7 @@ const Checkbox = React.forwardRef(
       title = '',
       warn,
       warnText,
+      disabled,
       slug,
       ...other
     }: CheckboxProps,
@@ -132,7 +133,7 @@ const Checkbox = React.forwardRef(
   ) => {
     const prefix = usePrefix();
 
-    const showWarning = !readOnly && !invalid && warn;
+    const showWarning = !readOnly && !disabled && !invalid && warn;
     const showHelper = !invalid && !warn;
 
     const checkboxGroupInstanceId = useId();
@@ -153,8 +154,10 @@ const Checkbox = React.forwardRef(
       className,
       {
         [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
-        [`${prefix}--checkbox-wrapper--invalid`]: !readOnly && invalid,
-        [`${prefix}--checkbox-wrapper--warning`]: showWarning,
+        [`${prefix}--checkbox-wrapper--invalid`]:
+          !readOnly && !disabled && invalid,
+        [`${prefix}--checkbox-wrapper--warning`]:
+          !readOnly && !disabled && showWarning,
         [`${prefix}--checkbox-wrapper--slug`]: slug,
         [`${prefix}--checkbox-wrapper--decorator`]: decorator,
       }
@@ -175,6 +178,7 @@ const Checkbox = React.forwardRef(
       <div className={wrapperClasses}>
         <input
           {...other}
+          disabled={disabled}
           type="checkbox"
           data-invalid={invalid ? true : undefined}
           onChange={(evt) => {
@@ -226,7 +230,7 @@ const Checkbox = React.forwardRef(
           </Text>
         </label>
         <div className={`${prefix}--checkbox__validation-msg`}>
-          {!readOnly && invalid && (
+          {!readOnly && !disabled && invalid && (
             <>
               <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
               <div className={`${prefix}--form-requirement`}>{invalidText}</div>
