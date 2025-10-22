@@ -311,9 +311,14 @@ const ComposedModalDialog = React.forwardRef<
   const [isOpen, setIsOpen] = presenceContext?.modalState ?? modalState;
 
   const enableDialogElement = useFeatureFlag('enable-dialog-element');
-  const focusTrapWithoutSentinels = useFeatureFlag(
+  const deprecatedFlag = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = useFeatureFlag(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    deprecatedFlag || focusTrapWithoutSentinelsFlag;
   warning(
     !(focusTrapWithoutSentinels && enableDialogElement),
     '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
