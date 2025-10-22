@@ -27,6 +27,7 @@ collect:
         - as
         - autoAlign
         - autoComplete
+        - border
         - buttonKind
         - caption
         - checked
@@ -347,6 +348,7 @@ collect:
         - enableDialogElement
         - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enableFocusWrapWithoutSentinels
         - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
@@ -469,7 +471,6 @@ collect:
         - requireTitle
         - wrapperClassName
         # PageHeaderBreadcrumbBar
-        - border
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
@@ -505,6 +506,7 @@ collect:
         # Popover
         - alignmentAxisOffset
         - autoAlignBoundary
+        - backgroundToken
         - caret
         - isTabTip
         # ProgressIndicator
@@ -937,6 +939,9 @@ collect:
         - toast
         # Popover - autoAlignBoundary
         - clippingAncestors
+        # Popover - backgroundToken
+        - background
+        - layer
         # ShapeIndicator - textSize
         - "12"
         - "14"

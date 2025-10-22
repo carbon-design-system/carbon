@@ -190,7 +190,7 @@
 
 .ai-label-preview-radio-tile-container {
   @include tile.tile(
-    $enable-experimental-tile-contrast: true,
+    $enable-tile-contrast: true,
     $enable-v12-tile-radio-icons: true
   );
 }

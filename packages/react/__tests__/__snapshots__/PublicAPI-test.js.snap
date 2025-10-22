@@ -84,6 +84,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -3517,6 +3529,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -8029,6 +8047,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -11099,6 +11129,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -11543,6 +11585,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -13591,6 +13639,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -13693,6 +13753,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -15553,6 +15619,18 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
       },
       "caret": {
         "type": "bool",

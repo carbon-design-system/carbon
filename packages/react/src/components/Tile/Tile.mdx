@@ -19,7 +19,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 - [Overview](#overview)
 - [Clickable](#clickable)
-    - [With Custom Icon](#with-custom-icon)
+  - [With Custom Icon](#with-custom-icon)
 - [Expandable](#expandable)
 - [Expandable with Interactive](#expandable-with-interactive)
 - [Selectable](#selectable)
@@ -56,12 +56,14 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 />
 
 #### With Custom Icon
+
 <Canvas
   of={TileStories.ClickableWithCustomIcon}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TileStories.ClickableWithCustomIcon),
+      onClick: () =>
+        stackblitzPrefillConfig(TileStories.ClickableWithCustomIcon),
     },
   ]}
 />
@@ -127,12 +129,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   ]}
 />
 
-## Experimental Improved Contrast
+## Improved Contrast Flag
 
 In Sass, you can enable the improved contrast tiles via a feature flag.
 
 ```scss
-@include feature-flags.enable('enable-experimental-tile-contrast');
+@include feature-flags.enable('enable-tile-contrast');
 ```
 
 or if you have multiple feature flags you can enable them this way.
@@ -140,7 +142,7 @@ or if you have multiple feature flags you can enable them this way.
 ```scss
 @use '@carbon/react/scss/feature-flags' with (
   $feature-flags: (
-    'enable-experimental-tile-contrast': true,
+    'enable-tile-contrast': true,
   )
 );
 ```

@@ -24,8 +24,10 @@ collect:
         - autoalign
         - autocomplete
         - autofocus
+        - backgroundToken
         - batch-action
         - batch-expansion
+        - border
         - breadcrumb
         - button-class-name
         - button-label
@@ -369,7 +371,6 @@ collect:
         - divider
         - oncds-overflow-menu-item-clicked
         # cds-page-header-breadcrumb
-        - border
         - content-actions-flush
         - page-actions-flush
         # cds-pagination
@@ -584,6 +585,9 @@ collect:
         - top-left
         - top-right
         - top-start
+        # General - backgroundToken
+        - background
+        - layer
         # General - collapse-mode
         - fixed
         - rail

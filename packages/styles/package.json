@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "1.93.0-rc.0",
+  "version": "1.93.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@carbon/colors": "^11.42.0",
-    "@carbon/feature-flags": "^0.31.0",
+    "@carbon/feature-flags": "^0.32.0",
     "@carbon/grid": "^11.45.0",
     "@carbon/layout": "^11.43.0",
     "@carbon/motion": "^11.37.0",
