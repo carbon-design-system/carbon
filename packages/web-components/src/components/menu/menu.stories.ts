@@ -94,7 +94,7 @@ export const Default = {
         ?open=${open}
         size=${size}
         menuAlignment="bottom"
-        backgroundToken=${backgroundToken}
+        background-token=${backgroundToken}
         ?border=${border}>
         <cds-menu-item label="Share with">
           ${iconLoader(FolderShared16, { slot: 'render-icon' })}
