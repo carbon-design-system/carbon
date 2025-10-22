@@ -893,7 +893,6 @@ class CDSTable extends HostListenerMixin(LitElement) {
     });
   }
 
-   
   render() {
     return html` <div class="${prefix}--data-table-header-container">
         <div ?hidden="${!this.withHeader}" class="${prefix}--data-table-header">
@@ -948,8 +947,6 @@ class CDSTable extends HostListenerMixin(LitElement) {
     });
     this._handleSortAction(columnIndex, sortDirection);
   }
-
-   
 
   /**
    * The name of the custom event fired before a new sort direction is set upon a user gesture.
