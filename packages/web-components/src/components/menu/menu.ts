@@ -122,7 +122,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   /**
    * Specify the background token to use. Default is 'layer'.
    */
-  @property({ type: String, attribute: 'background-token' })
+  @property({ attribute: 'background-token' })
   backgroundToken = MENU_BACKGROUND_TOKEN.LAYER;
 
   /**
