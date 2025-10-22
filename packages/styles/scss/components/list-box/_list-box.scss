@@ -817,6 +817,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
+    border-block-start: 0;
     color: $text-primary;
   }
 
