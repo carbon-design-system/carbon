@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,18 @@ $popover-caret-height: custom-property.get-var(
   rem(6px)
 );
 
+// The drop shadow value used for the popover container
+$popover-drop-shadow: custom-property.get-var(
+  'popover-drop-shadow',
+  drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
+);
+
+// The border value used for the popover container
+$popover-border-color: custom-property.get-var(
+  'popover-border-color',
+  theme.$border-subtle
+);
+
 :host(#{$prefix}-tooltip),
 :host(#{$prefix}-popover) {
   ::slotted(.#{$prefix}--popover--tab-tip__button) {
@@ -42,6 +54,26 @@ $popover-caret-height: custom-property.get-var(
   ::slotted(#{$prefix}-tooltip-content),
   ::slotted(#{$prefix}-popover-content) {
     @extend .#{$prefix}--popover;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[backgroundToken='background']:not([highContrast])
+  ) {
+  .#{$prefix}--popover-content {
+    background: theme.$background;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[open][caret][backgroundToken='background']:not(
+        [highContrast]
+      )
+  ) {
+  .#{$prefix}--popover-caret {
+    &::after {
+      background: theme.$background;
+    }
   }
 }
 
@@ -82,16 +114,63 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[open]) {
   .#{$prefix}--popover-caret {
     display: block;
+
+    // caret background
+    &::after {
+      position: absolute;
+      display: block;
+      background: theme.$layer;
+      content: '';
+    }
+
+    // caret border
+    &::before {
+      position: absolute;
+      display: none;
+      background-color: $popover-border-color;
+      content: '';
+    }
   }
 }
 
-:host(#{$prefix}-popover-content[dropShadow]) {
-  @include custom-property.declaration(
-    'popover-drop-shadow',
-    drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
-  );
+:host(#{$prefix}-tooltip-content[open][caret][highContrast]),
+:host(#{$prefix}-popover-content[open][caret][highContrast]) {
+  .#{$prefix}--popover-caret {
+    &::after {
+      background: theme.$background-inverse;
+    }
+  }
 }
 
+:host(#{$prefix}-tooltip-content[border]),
+:host(#{$prefix}-popover-content[border]) {
+  .#{$prefix}--popover-content {
+    outline: 1px solid $popover-border-color;
+    outline-offset: -1px;
+  }
+}
+
+:host(#{$prefix}-tooltip-content[dropShadow]),
+:host(#{$prefix}-popover-content[dropShadow]) {
+  .#{$prefix}--popover-content {
+    filter: $popover-drop-shadow;
+  }
+}
+
+:host(#{$prefix}-tooltip-content[open][caret][border]),
+:host(#{$prefix}-popover-content[open][caret][border]) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      display: block;
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------
+// Bottom
+//-----------------------------------------------------------------------------
+
+// bottom caret
 :host(#{$prefix}-tooltip-content[align^='bottom']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='bottom']:not([autoalign])),
@@ -99,11 +178,37 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='bottom']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
-    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
     inline-size: $popover-caret-width;
     inset-block-end: 0;
     inset-inline-start: 50%;
     transform: translate(-50%, $popover-offset);
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+  }
+}
+
+// bottom caret border
+:host(#{$prefix}-tooltip-content[align^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='bottom'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: 1px;
+      inset-inline-start: 0.5px;
+    }
   }
 }
 
@@ -206,6 +311,10 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
+//-----------------------------------------------------------------------------
+// Left
+//-----------------------------------------------------------------------------
+
 :host(#{$prefix}-tooltip-content[align^='left']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='left']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='left']:not([autoalign])),
@@ -213,11 +322,35 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='left']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
-    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
     inline-size: $popover-caret-height;
     inset-block-start: 50%;
     inset-inline-end: 100%;
     transform: translate(calc(-1 * $popover-offset + 100%), -50%);
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+  }
+}
+
+// left caret border
+:host(#{$prefix}-tooltip-content[align^='left'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='left'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='left'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='left'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='left'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+
+    &::after {
+      inset-inline-start: -1px;
+    }
   }
 }
 
@@ -230,6 +363,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover-caret {
     inset-inline-end: initial;
     inset-inline-start: 100%;
+
+    &::after {
+      inset-inline-start: 1px;
+    }
   }
 }
 
@@ -293,6 +430,11 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
+//-----------------------------------------------------------------------------
+// Right
+//-----------------------------------------------------------------------------
+
+// right caret
 :host(#{$prefix}-tooltip-content[align^='right']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='right']:not([autoalign])),
@@ -300,11 +442,35 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='right']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
-    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
     inline-size: $popover-caret-height;
     inset-block-start: 50%;
     inset-inline-start: 100%;
     transform: translate(calc($popover-offset - 100%), -50%);
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+    }
+  }
+}
+
+// right caret border
+:host(#{$prefix}-tooltip-content[align^='right'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='right'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='right'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='right'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='right'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+    }
+
+    &::after {
+      inset-inline-start: 1px;
+    }
   }
 }
 
@@ -317,6 +483,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover-caret {
     inset-inline-end: 100%;
     inset-inline-start: initial;
+
+    &::after {
+      inset-inline-start: -1px;
+    }
   }
 }
 
@@ -373,6 +543,11 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
+//-----------------------------------------------------------------------------
+// Top
+//-----------------------------------------------------------------------------
+
+// top caret
 :host(#{$prefix}-tooltip-content[align^='top']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='top']:not([autoalign])),
@@ -380,11 +555,37 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='top']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
-    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
     inline-size: $popover-caret-width;
     inset-block-start: 0;
     inset-inline-start: 50%;
     transform: translate(-50%, calc(-1 * $popover-offset));
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+  }
+}
+
+// top caret border
+:host(#{$prefix}-tooltip-content[align^='top'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='top'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='top'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='top'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='top'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: -1px;
+      inset-inline-start: 0.5px;
+    }
   }
 }
 
