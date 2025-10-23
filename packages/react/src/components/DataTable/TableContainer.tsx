@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useMemo, type HTMLAttributes } from 'react';
+import React, { ReactNode, useMemo, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { TableContext } from './TableContext';
@@ -19,6 +19,10 @@ export interface TableContainerProps
    * Specify if the entire table has AI generated contents
    */
   aiEnabled?: boolean;
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TableContainer` component
+   */
+  decorator?: ReactNode;
   /**
    * Optional description text for the Table
    */
@@ -41,6 +45,7 @@ const TableContainer = ({
   aiEnabled,
   className,
   children,
+  decorator,
   title,
   description,
   stickyHeader,
@@ -70,21 +75,35 @@ const TableContainer = ({
   return (
     <TableContext.Provider value={value}>
       <Section {...rest} className={tableContainerClasses}>
-        {(title || description) && (
-          <div className={`${prefix}--data-table-header`}>
-            {title && (
-              <Heading
-                className={`${prefix}--data-table-header__title`}
-                id={titleId}>
-                {title}
-              </Heading>
+        {(title || description || decorator) && (
+          <div
+            className={cx(`${prefix}--data-table-header`, {
+              [`${prefix}--data-table-header__with-decorator`]: decorator,
+              [`${prefix}--data-table-header__with-decorator--standalone`]:
+                decorator && !title && !description,
+            })}>
+            {(title || description) && (
+              <div className={`${prefix}--data-table-header__content`}>
+                {title && (
+                  <Heading
+                    className={`${prefix}--data-table-header__title`}
+                    id={titleId}>
+                    {title}
+                  </Heading>
+                )}
+                {description && (
+                  <p
+                    className={`${prefix}--data-table-header__description`}
+                    id={descriptionId}>
+                    {description}
+                  </p>
+                )}
+              </div>
             )}
-            {description && (
-              <p
-                className={`${prefix}--data-table-header__description`}
-                id={descriptionId}>
-                {description}
-              </p>
+            {decorator && (
+              <div className={`${prefix}--data-table-header__decorator`}>
+                {decorator}
+              </div>
             )}
           </div>
         )}
@@ -101,6 +120,10 @@ TableContainer.propTypes = {
   aiEnabled: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TableContainer` component
+   */
+  decorator: PropTypes.node,
   /**
    * Optional description text for the Table
    */
