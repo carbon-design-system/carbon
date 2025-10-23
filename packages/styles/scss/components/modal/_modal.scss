@@ -26,6 +26,7 @@
 /// @group modal
 @mixin modal(
   $enable-experimental-focus-wrap-without-sentinels: false,
+  $enable-focus-wrap-without-sentinels: false,
   $enable-dialog-element: false,
   $enable-presence: false
 ) {
@@ -35,6 +36,8 @@
     @if not(
       enabled('enable-experimental-focus-wrap-without-sentinels') or
         $enable-experimental-focus-wrap-without-sentinels or
+        enabled('enable-focus-wrap-without-sentinels') or
+        $enable-focus-wrap-without-sentinels or
         enabled('enable-dialog-element') or
         $enable-dialog-element
     )
@@ -70,6 +73,8 @@
   @if not(
     enabled('enable-experimental-focus-wrap-without-sentinels') or
       $enable-experimental-focus-wrap-without-sentinels or
+      enabled('enable-focus-wrap-without-sentinels') or
+      $enable-focus-wrap-without-sentinels or
       enabled('enable-dialog-element') or
       $enable-dialog-element
   )
