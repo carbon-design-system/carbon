@@ -221,7 +221,6 @@ class CDSComboBox extends CDSDropdown {
     }
 
     this._handleUserInitiatedSelectItem();
-    this.open = true;
     this.requestUpdate();
   }
 
