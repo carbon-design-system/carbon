@@ -893,10 +893,8 @@ class CDSTable extends HostListenerMixin(LitElement) {
     });
   }
 
-  /* eslint-disable no-constant-condition */
   render() {
-    return html`
-      <div class="${prefix}--data-table-header-container">
+    return html` <div class="${prefix}--data-table-header-container">
         <div ?hidden="${!this.withHeader}" class="${prefix}--data-table-header">
           <slot @slotchange="${this._handleSlotChange}" name="title"></slot>
           <slot
@@ -906,18 +904,13 @@ class CDSTable extends HostListenerMixin(LitElement) {
         <slot name="toolbar"></slot>
       </div>
 
-      ${false // TODO: replace with this.stickyHeader when feature is fully implemented
-        ? html` <div class="${prefix}--data-table_inner-container">
-            <div class="${prefix}--data-table-content">
-              <slot
-                @cds-table-body-content-change="${this
-                  ._handleTableBodyChange}"></slot>
-            </div>
-          </div>`
-        : html`<slot
+      <div class="${prefix}--data-table_inner-container">
+        <div class="${prefix}--data-table-content">
+          <slot
             @cds-table-body-content-change="${this
-              ._handleTableBodyChange}"></slot>`}
-    `;
+              ._handleTableBodyChange}"></slot>
+        </div>
+      </div>`;
   }
 
   /**
@@ -954,8 +947,6 @@ class CDSTable extends HostListenerMixin(LitElement) {
     });
     this._handleSortAction(columnIndex, sortDirection);
   }
-
-  /* eslint-enable no-constant-condition */
 
   /**
    * The name of the custom event fired before a new sort direction is set upon a user gesture.
