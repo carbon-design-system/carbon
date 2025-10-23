@@ -83,4 +83,32 @@ export const Default = {
   argTypes: controls,
 };
 
+// remove after verifying
+export const TestExportedPartButton = {
+  title: 'Components/Copy button exported part button',
+  render: ({
+    feedbackText,
+    feedbackTimeout,
+    onClick,
+    iconDescription,
+    align,
+    autoAlign,
+  }) => html`
+    <style>
+      cds-copy-button::part(button) {
+        border-top-right-radius: 8px;
+      }
+    </style>
+    <cds-copy-button
+      align="${align}"
+      ?autoalign="${autoAlign}"
+      feedback="${ifDefined(feedbackText)}"
+      feedback-timeout="${ifDefined(feedbackTimeout)}"
+      @click="${onClick}">
+      ${iconDescription}
+    </cds-copy-button>
+  `,
+  args: defaultArgs,
+};
+
 export default meta;
