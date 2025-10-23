@@ -904,6 +904,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _endDrag: endDrag,
     } = this;
 
+    const isInteractive = !readonly && !disabled;
+
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -1036,7 +1038,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         <slot></slot>
       </div>
 
-      ${!readonly && !isValid
+      ${isInteractive && !isValid
         ? html`
             <div
               class="${prefix}--slider__validation-msg ${prefix}--slider__validation-msg--invalid ${prefix}--form-requirement">
@@ -1044,7 +1046,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             </div>
           `
         : null}
-      ${!readonly && warn && isValid
+      ${isInteractive && warn && isValid
         ? html`<div
             class="${prefix}--slider__validation-msg ${prefix}--form-requirement">
             ${warnText}

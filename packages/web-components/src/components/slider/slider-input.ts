@@ -216,6 +216,9 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
+
+    const isInteractive = !readonly && !disabled;
+
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
@@ -235,7 +238,7 @@ class CDSSliderInput extends FocusMixin(LitElement) {
         ? html`
             <input
               ?disabled="${disabled}"
-              ?data-invalid="${invalid}"
+              ?data-invalid="${invalid && isInteractive}"
               type="${ifDefined(type)}"
               class="${classes}"
               max="${max}"
@@ -245,8 +248,8 @@ class CDSSliderInput extends FocusMixin(LitElement) {
               .value="${value}"
               @change="${handleChange}"
               @input="${handleInput}" />
-            ${invalid ? html`${invalidIcon}` : null}
-            ${warn ? html`${warnIcon}` : null}
+            ${invalid && isInteractive ? html`${invalidIcon}` : null}
+            ${warn && isInteractive ? html`${warnIcon}` : null}
           `
         : null}
     `;
