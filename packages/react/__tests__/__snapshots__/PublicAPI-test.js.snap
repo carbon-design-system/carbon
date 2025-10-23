@@ -6193,6 +6193,18 @@ Map {
   "Menu" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "children": {
         "type": "node",
       },
@@ -6307,6 +6319,18 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "menuBackgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "menuBorder": {
+        "type": "bool",
       },
       "menuTarget": {
         "args": [
