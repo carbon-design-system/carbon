@@ -8,7 +8,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
-
+import { Locked } from '@carbon/react/icons';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
 
@@ -933,6 +933,54 @@ export const MultiSelectControlledWithSelectAll = () => {
           )}
         </div>
       </div>
+    </div>
+  );
+};
+
+export const Test = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <FilterableMultiSelect
+        label="Multiselect Label"
+        decorator={<Locked />}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
     </div>
   );
 };
