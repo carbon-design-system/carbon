@@ -31,7 +31,6 @@ type FloatingControllerOptions = {
   matchWidth?: boolean;
   open: boolean;
   alignmentAxisOffset?: number;
-  autoAlign?: boolean;
   autoAlignBoundary?: Boundary;
   isTabTip?: boolean;
 };
@@ -136,46 +135,45 @@ export default class FloatingController implements ReactiveController {
           ? { alignmentAxis: alignmentAxisOffset, mainAxis: offsetPx }
           : 0
       ),
-      this.options.autoAlign &&
-        flip({
-          fallbackPlacements: isTabTip
-            ? shimmedAlign.includes('bottom')
-              ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-              : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
-            : shimmedAlign.includes('bottom')
-              ? [
-                  'bottom',
-                  'bottom-start',
-                  'bottom-end',
-                  'right',
-                  'right-start',
-                  'right-end',
-                  'left',
-                  'left-start',
-                  'left-end',
-                  'top',
-                  'top-start',
-                  'top-end',
-                ]
-              : [
-                  'top',
-                  'top-start',
-                  'top-end',
-                  'left',
-                  'left-start',
-                  'left-end',
-                  'right',
-                  'right-start',
-                  'right-end',
-                  'bottom',
-                  'bottom-start',
-                  'bottom-end',
-                ],
+      flip({
+        fallbackPlacements: isTabTip
+          ? shimmedAlign.includes('bottom')
+            ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+            : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+          : shimmedAlign.includes('bottom')
+            ? [
+                'bottom',
+                'bottom-start',
+                'bottom-end',
+                'right',
+                'right-start',
+                'right-end',
+                'left',
+                'left-start',
+                'left-end',
+                'top',
+                'top-start',
+                'top-end',
+              ]
+            : [
+                'top',
+                'top-start',
+                'top-end',
+                'left',
+                'left-start',
+                'left-end',
+                'right',
+                'right-start',
+                'right-end',
+                'bottom',
+                'bottom-start',
+                'bottom-end',
+              ],
 
-          fallbackStrategy: 'initialPlacement',
-          fallbackAxisSideDirection: 'start',
-          boundary: autoAlignBoundary,
-        }),
+        fallbackStrategy: 'initialPlacement',
+        fallbackAxisSideDirection: 'start',
+        boundary: autoAlignBoundary,
+      }),
       ...(matchWidth && (shimmedAlign === 'bottom' || shimmedAlign === 'top')
         ? [
             size({
@@ -196,7 +194,7 @@ export default class FloatingController implements ReactiveController {
         ? [arrow({ element: arrowElement, padding: 15 })]
         : []),
 
-      ...(this.options.autoAlign ? [hide()] : []),
+      ...[hide()],
     ];
 
     if (open) {
