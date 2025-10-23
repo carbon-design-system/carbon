@@ -61,10 +61,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
    */
   @HostListener('keydown')
   protected _handleHostKeydown = (event: KeyboardEvent) => {
-    if (this.disableFocusTrap) {
-      return;
-    }
-
     if (event.key === 'Tab') {
       const { first: _firstElement, last: _lastElement } = this.getFocusable();
 
@@ -203,12 +199,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
    */
   @property({ attribute: 'container-class' })
   containerClass = '';
-
-  /**
-   * Specify the Modal should disable the focus trap.
-   */
-  @property({ type: Boolean, reflect: true, attribute: 'disable-focus-trap' })
-  disableFocusTrap = false;
 
   /**
    * Specify whether or not the Modal content should have any inner padding.
