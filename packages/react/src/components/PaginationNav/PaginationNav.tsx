@@ -505,7 +505,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     const startOffset = itemsDisplayedOnPage <= 4 && currentPage > 1 ? 0 : 1;
 
     return (
-      <nav className={classNames} ref={ref} {...rest} aria-label="pagination">
+      <nav className={classNames} ref={ref} {...rest}>
         <ul className={`${prefix}--pagination-nav__list`}>
           <DirectionButton
             direction="backward"
