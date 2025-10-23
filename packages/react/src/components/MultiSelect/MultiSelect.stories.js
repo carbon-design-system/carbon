@@ -43,6 +43,81 @@ export default {
         disable: true,
       },
     },
+    selectionFeedback: {
+      options: ['top', 'fixed', 'top-after-reopen'],
+      control: { type: 'select' },
+    },
+    direction: {
+      options: ['top', 'bottom'],
+      control: { type: 'radio' },
+    },
+    type: {
+      options: ['inline', 'default'],
+      control: { type: 'radio' },
+    },
+    titleText: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    hideLabel: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    invalid: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    warn: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    warnText: {
+      control: {
+        type: 'text',
+      },
+    },
+    invalidText: {
+      control: {
+        type: 'text',
+      },
+    },
+    label: {
+      control: {
+        type: 'text',
+      },
+    },
+    clearSelectionDescription: {
+      control: {
+        type: 'text',
+      },
+    },
+    useTitleInItem: {
+      control: {
+        type: 'text',
+      },
+    },
+    clearSelectionText: {
+      control: {
+        type: 'text',
+      },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
   },
   parameters: {
     docs: {
@@ -107,6 +182,7 @@ const sharedArgs = {
   invalid: false,
   warn: false,
   open: false,
+  helperText: 'This is helper text',
   warnText: 'whoopsie!',
   invalidText: 'whoopsie!',
   label: 'This is a label',
@@ -115,83 +191,6 @@ const sharedArgs = {
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
   selectAll: false,
   selectAllItemText: 'All options',
-};
-
-const sharedArgTypes = {
-  selectionFeedback: {
-    options: ['top', 'fixed', 'top-after-reopen'],
-    control: { type: 'select' },
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: { type: 'select' },
-  },
-  direction: {
-    options: ['top', 'bottom'],
-    control: { type: 'radio' },
-  },
-  type: {
-    options: ['inline', 'default'],
-    control: { type: 'radio' },
-  },
-  titleText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  hideLabel: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-  },
-  clearSelectionDescription: {
-    control: {
-      type: 'text',
-    },
-  },
-  useTitleInItem: {
-    control: {
-      type: 'text',
-    },
-  },
-  clearSelectionText: {
-    control: {
-      type: 'text',
-    },
-  },
-  readOnly: {
-    control: { type: 'boolean' },
-  },
 };
 
 export const Default = (args) => {
@@ -242,7 +241,6 @@ export const Default = (args) => {
 };
 
 Default.args = { ...sharedArgs };
-Default.argTypes = { ...sharedArgTypes };
 
 export const WithInitialSelectedItems = (args) => {
   const items = [
@@ -531,7 +529,7 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = () => (
+export const withAILabel = (args) => (
   <div style={{ width: 400 }}>
     <MultiSelect
       label="Multiselect Label"
@@ -542,6 +540,7 @@ export const withAILabel = () => (
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
       decorator={aiLabel}
+      {...args}
     />
   </div>
 );
@@ -593,7 +592,11 @@ export const ExperimentalAutoAlign = (args) => {
   );
 };
 
-ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+ExperimentalAutoAlign.argTypes = {
+  autoAlign: {
+    control: false,
+  },
+};
 
 export const withToggletipLabel = (args) => {
   return (
