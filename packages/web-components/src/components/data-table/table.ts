@@ -346,6 +346,19 @@ class CDSTable extends HostListenerMixin(LitElement) {
         unfilteredRows.push(elem);
       }
 
+      if (this.isSelectable) {
+        const unfilteredSelectableLength = unfilteredRows.filter((elem) => {
+          return !elem.hasAttribute('disabled');
+        }).length;
+
+        const headerCheckbox = this._tableHeaderRow.shadowRoot
+          ?.querySelector(`${prefix}-checkbox`)
+          .shadowRoot.querySelector(`.${prefix}--checkbox`);
+
+        headerCheckbox.disabled =
+          unfilteredSelectableLength === 0 ? true : false;
+      }
+
       if (this.expandable) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem as any).nextElementSibling.filtered = filtered;
@@ -529,15 +542,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
       }
     }
 
-    const totalRows = [...this._tableRows].filter(
-      (elem) => !elem.hasAttribute('filtered')
+    const totalSelectableRows = [...this._tableRows].filter(
+      (elem) => !elem.hasAttribute('filtered') && !elem.hasAttribute('disabled')
     ).length;
 
     // selected header checkbox upon all rows being selected
     const headerCheckbox = tableHeaderRow.shadowRoot
       ?.querySelector(`${prefix}-checkbox`)
       .shadowRoot.querySelector(`.${prefix}--checkbox`);
-    const allRowsSelected = this._selectedRows.length === totalRows;
+    const allRowsSelected = this._selectedRows.length === totalSelectableRows;
     headerCheckbox.checked = !this._selectedRows.length ? false : true;
     headerCheckbox.indeterminate =
       !allRowsSelected && this._selectedRows.length > 0;
@@ -580,7 +593,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
 
     let totalRows = 0;
     forEach(tableRows, (elem) => {
-      if (!(elem as CDSTableRow).filtered) {
+      if (!(elem as CDSTableRow).filtered && !(elem as CDSTableRow).disabled) {
         (elem as CDSTableRow).selected = selected;
         if (this.radio) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452

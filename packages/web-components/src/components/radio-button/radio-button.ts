@@ -142,7 +142,15 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         (this.constructor as typeof CDSRadioButton)?.slugItem
       )
     ) {
-      const { disabled, _radioButtonDelegate: radioButtonDelegate } = this;
+      const {
+        disabled,
+        _radioButtonDelegate: radioButtonDelegate,
+        readOnly,
+      } = this;
+      if (readOnly) {
+        event.preventDefault();
+        return;
+      }
       if (radioButtonDelegate && !disabled && !this.disabledItem) {
         this.checked = true;
         if (this._manager) {
@@ -202,8 +210,13 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         _radioButtonDelegate: radioButtonDelegate,
         disabled,
         disabledItem,
+        readOnly,
       } = this;
       const manager = this._manager;
+      if (readOnly) {
+        event.preventDefault();
+        return;
+      }
       if (radioButtonDelegate && manager && !disabled && !disabledItem) {
         const navigationDirectionForKey =
           orientation === RADIO_BUTTON_ORIENTATION.HORIZONTAL
@@ -364,9 +377,6 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     } = this;
 
     if (changedProperties.has('checked') || changedProperties.has('name')) {
-      if (this.readOnly) {
-        this.checked = false;
-      }
       if (!this._manager) {
         this._manager = RadioGroupManager.get(
           this.getRootNode({ composed: true }) as Document
@@ -408,6 +418,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       value,
       disabled,
       disabledItem,
+      readOnly,
     } = this;
     const innerLabelClasses = classMap({
       [`${prefix}--radio-button__label-text`]: true,
@@ -421,6 +432,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         .checked=${checked}
         ?disabled="${disabledItem || disabled}"
         ?required=${this.required}
+        aria-readonly="${String(Boolean(readOnly))}"
         name=${ifDefined(name)}
         value=${ifDefined(value)} />
       <label for="input" class="${prefix}--radio-button__label">
