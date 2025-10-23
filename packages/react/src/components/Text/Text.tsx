@@ -102,7 +102,7 @@ export const Text = TextBase as TextComponent;
   /**
    * Provide child elements or text to be rendered inside of this component
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 
   /**
    * Specify the text direction to be used for this component and any of its
