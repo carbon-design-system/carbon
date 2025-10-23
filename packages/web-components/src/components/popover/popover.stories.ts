@@ -171,6 +171,8 @@ export const ExperimentalAutoAlign = {
     highContrast: false,
     dropShadow: true,
     open: true,
+    border: false,
+    backgroundToken: 'layer',
   },
 
   decorators: [
@@ -205,7 +207,9 @@ export const ExperimentalAutoAlign = {
             ?caret=${args.caret}
             ?highContrast=${args.highContrast}
             autoalign
-            ?dropShadow=${args.dropShadow}>
+            ?dropShadow=${args.dropShadow}
+            ?border=${args.border}
+            backgroundToken=${args.backgroundToken}>
             <button
               class="playground-trigger"
               aria-label="Checkbox"
@@ -239,6 +243,8 @@ export const ExperimentalAutoAlignWithBoundary = {
     highContrast: false,
     dropShadow: true,
     open: true,
+    border: false,
+    backgroundToken: 'layer',
   },
 
   decorators: [
@@ -277,7 +283,9 @@ export const ExperimentalAutoAlignWithBoundary = {
             ?highContrast=${args.highContrast}
             autoalign-boundary="#boundary"
             autoalign
-            ?dropShadow=${args.dropShadow}>
+            ?dropShadow=${args.dropShadow}
+            ?border=${args.border}
+            backgroundToken=${args.backgroundToken}>
             <button
               class="playground-trigger"
               aria-label="Checkbox"

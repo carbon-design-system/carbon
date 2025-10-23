@@ -207,6 +207,8 @@ export default class FloatingController implements ReactiveController {
           placement: shimmedAlign as Placement,
         });
 
+      element.setAttribute('align', placement);
+
       element.style.left = `${x}px`;
       element.style.top = `${y}px`;
       element.style.position = `${strategy}`;
