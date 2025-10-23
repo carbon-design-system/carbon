@@ -1321,17 +1321,17 @@ export const Slider = (props: SliderProps) => {
       isRtl,
     } = state;
 
-    const isCurrentlyEditable = !readOnly && !disabled;
+    const isInteractive = !readOnly && !disabled;
 
     const showWarning =
-      (isCurrentlyEditable && warn) ||
+      (isInteractive && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
       // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
       (typeof correctedValue !== null &&
         correctedPosition === HandlePosition.LOWER &&
         isValid);
     const showWarningUpper =
-      (isCurrentlyEditable && warn) ||
+      (isInteractive && warn) ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
       // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
       (typeof correctedValue !== null &&
@@ -1371,8 +1371,7 @@ export const Slider = (props: SliderProps) => {
             `${prefix}--slider-text-input--lower`,
             conditionalInputClasses,
             {
-              [`${prefix}--text-input--invalid`]:
-                isCurrentlyEditable && !isValid,
+              [`${prefix}--text-input--invalid`]: isInteractive && !isValid,
               [`${prefix}--slider-text-input--warn`]: showWarning,
             },
           ]);
@@ -1382,7 +1381,7 @@ export const Slider = (props: SliderProps) => {
             conditionalInputClasses,
             {
               [`${prefix}--text-input--invalid`]:
-                isCurrentlyEditable && (twoHandles ? !isValidUpper : !isValid),
+                isInteractive && (twoHandles ? !isValidUpper : !isValid),
               [`${prefix}--slider-text-input--warn`]: showWarningUpper,
             },
           ]);
@@ -1461,16 +1460,14 @@ export const Slider = (props: SliderProps) => {
                       onBlur={onBlurInput}
                       onKeyUp={props.onInputKeyUp}
                       onKeyDown={onInputKeyDown}
-                      data-invalid={
-                        !isValid && isCurrentlyEditable ? true : null
-                      }
+                      data-invalid={!isValid && isInteractive ? true : null}
                       data-handle-position={HandlePosition.LOWER}
                       aria-invalid={
-                        !isValid && isCurrentlyEditable ? true : undefined
+                        !isValid && isInteractive ? true : undefined
                       }
                       readOnly={readOnly}
                     />
-                    {isCurrentlyEditable && !isValid && (
+                    {isInteractive && !isValid && (
                       <WarningFilled
                         className={`${prefix}--slider__invalid-icon`}
                       />
@@ -1500,7 +1497,7 @@ export const Slider = (props: SliderProps) => {
                   tabIndex={-1}
                   data-invalid={
                     (twoHandles ? !isValid || !isValidUpper : !isValid) &&
-                    isCurrentlyEditable
+                    isInteractive
                       ? true
                       : null
                   }
@@ -1616,8 +1613,7 @@ export const Slider = (props: SliderProps) => {
                     onKeyDown={onInputKeyDown}
                     onKeyUp={props.onInputKeyUp}
                     data-invalid={
-                      (twoHandles ? !isValidUpper : !isValid) &&
-                      isCurrentlyEditable
+                      (twoHandles ? !isValidUpper : !isValid) && isInteractive
                         ? true
                         : null
                     }
@@ -1625,19 +1621,17 @@ export const Slider = (props: SliderProps) => {
                       twoHandles ? HandlePosition.UPPER : null
                     }
                     aria-invalid={
-                      (twoHandles ? !isValidUpper : !isValid) &&
-                      isCurrentlyEditable
+                      (twoHandles ? !isValidUpper : !isValid) && isInteractive
                         ? true
                         : undefined
                     }
                     readOnly={readOnly}
                   />
-                  {isCurrentlyEditable &&
-                    (twoHandles ? !isValidUpper : !isValid) && (
-                      <WarningFilled
-                        className={`${prefix}--slider__invalid-icon`}
-                      />
-                    )}
+                  {isInteractive && (twoHandles ? !isValidUpper : !isValid) && (
+                    <WarningFilled
+                      className={`${prefix}--slider__invalid-icon`}
+                    />
+                  )}
 
                   {showWarningUpper && (
                     <WarningAltFilled
@@ -1646,7 +1640,7 @@ export const Slider = (props: SliderProps) => {
                   )}
                 </div>
               </div>
-              {isCurrentlyEditable && (!isValid || !isValidUpper) && (
+              {isInteractive && (!isValid || !isValidUpper) && (
                 <Text
                   as="div"
                   className={classNames(
@@ -1657,7 +1651,7 @@ export const Slider = (props: SliderProps) => {
                   {invalidText}
                 </Text>
               )}
-              {isCurrentlyEditable && warn && isValid && isValidUpper && (
+              {isInteractive && warn && isValid && isValidUpper && (
                 <Text
                   as="div"
                   className={classNames(
