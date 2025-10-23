@@ -11826,7 +11826,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -13994,7 +13993,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
