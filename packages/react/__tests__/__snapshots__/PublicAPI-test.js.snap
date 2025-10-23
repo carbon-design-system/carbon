@@ -84,6 +84,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -3519,6 +3531,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -4181,9 +4199,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -8056,6 +8071,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -11126,6 +11153,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -11570,6 +11609,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -12200,9 +12245,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -13621,6 +13663,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -13723,6 +13777,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -14166,9 +14226,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -15586,6 +15643,18 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
       },
       "caret": {
         "type": "bool",
