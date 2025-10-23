@@ -1024,8 +1024,8 @@ describe('MultiSelect', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_5o_-toggle-button',
-      id: 'downshift-_r_5o_-label',
+      for: 'downshift-_r_64_-toggle-button',
+      id: 'downshift-_r_64_-label',
     });
   });
 
@@ -1042,7 +1042,7 @@ describe('MultiSelect', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_5r_-label',
+      id: 'downshift-_r_67_-label',
     });
   });
 
