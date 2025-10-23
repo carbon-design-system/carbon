@@ -680,6 +680,84 @@ describe('MultiSelect', () => {
         expect(option).toHaveAttribute('aria-selected', 'false');
       });
     });
+
+    it('should display helper text instead of warning when disabled', async () => {
+      render(
+        <MultiSelect
+          disabled
+          warn
+          warnText="Warning message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const warnMessage = screen.queryByText('Warning message');
+      const helper = screen.queryByText('Helper text');
+      expect(helper).toBeInTheDocument();
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should display helper text instead of warning when readOnly', async () => {
+      render(
+        <MultiSelect
+          readOnly
+          warn
+          warnText="Warning message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const warnMessage = screen.queryByText('Warning message');
+      const helper = screen.queryByText('Helper text');
+      expect(warnMessage).not.toBeInTheDocument();
+      expect(helper).toBeInTheDocument();
+    });
+
+    it('should display helper text instead of invalid message when disabled', async () => {
+      const { container } = render(
+        <MultiSelect
+          disabled
+          invalid
+          invalidText="Invalid message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const multiselectComponent = container.firstChild;
+      const inputComponent = multiselectComponent.childNodes[1];
+      const invalidMessage = screen.queryByText('Invalid message');
+      const helper = screen.queryByText('Helper text');
+      expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+      expect(invalidMessage).not.toBeInTheDocument();
+      expect(helper).toBeInTheDocument();
+    });
+
+    it('should display helper text instead of invalid message when readOnly', async () => {
+      const { container } = render(
+        <MultiSelect
+          readOnly
+          invalid
+          invalidText="Invalid message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const multiselectComponent = container.firstChild;
+      const inputComponent = multiselectComponent.childNodes[1];
+      const invalidMessage = screen.queryByText('Invalid message');
+      const helper = screen.queryByText('Helper text');
+      expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+      expect(invalidMessage).not.toBeInTheDocument();
+      expect(helper).toBeInTheDocument();
+    });
   });
 
   describe('Controlled', () => {
