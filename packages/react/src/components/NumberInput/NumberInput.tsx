@@ -16,7 +16,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type FC,
   type MouseEvent,
   type ReactNode,
 } from 'react';
@@ -26,7 +25,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 import { useControllableState } from '../../internal/useControllableState';
 import {
@@ -36,22 +35,23 @@ import {
 } from '@carbon/utilities';
 import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
-import { AILabel, type AILabelProps } from '../AILabel';
+import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
-export const translationIds = {
+const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
 type TranslationKey = keyof typeof translationIds;
 
-const defaultTranslations = {
+const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['increment.number']]: 'Increment number',
   [translationIds['decrement.number']]: 'Decrement number',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
 };
 
 type ExcludedAttributes =
@@ -68,6 +68,26 @@ type ExcludedAttributes =
 export interface NumberInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
     TranslateWithId<TranslationKey> {
+  /**
+   * Optional validation function that is called with the input value and locale.
+   * This is called before other validations, giving consumers the ability
+   * to short-circuit or extend validation without replacing built-in rules
+   * @example
+   * // Using the built-in separator validation
+   * <NumberInput validate={validateNumberSeparators} />
+   *
+   * // Combining with custom validation
+   * <NumberInput
+   *   validate={(value, locale) => {
+   *     return validateNumberSeparators(value, locale) && customValidation(value)
+   *   }}
+   * />
+   * - Return `false` to immediately fail validation.
+   * - Return `true` to pass this validation, but still run other checks (min, max, required, etc.).
+   * - Return `undefined` to defer entirely to built-in validation logic.
+   *
+   */
+  validate?: (value: string, locale: string) => boolean | undefined;
   /**
    * `true` to allow empty string.
    */
@@ -278,8 +298,81 @@ export interface NumberInputProps
   warnText?: ReactNode;
 }
 
+const getSeparators = (locale: string) => {
+  const numberWithGroupAndDecimal = 1234567.89;
+
+  const formatted = new Intl.NumberFormat(locale).format(
+    numberWithGroupAndDecimal
+  );
+
+  // Extract separators using regex
+  const match = formatted.match(/(\D+)\d{3}(\D+)\d{2}$/);
+
+  if (match) {
+    const groupSeparator = match[1];
+    const decimalSeparator = match[2];
+    return { groupSeparator, decimalSeparator };
+  } else {
+    return { groupSeparator: null, decimalSeparator: null };
+  }
+};
+
+export const validateNumberSeparators = (
+  input: string,
+  locale: string
+): boolean => {
+  // allow empty string
+  if (input === '' || Number.isNaN(input)) {
+    return true;
+  }
+  const { groupSeparator, decimalSeparator } = getSeparators(locale);
+
+  if (!decimalSeparator) {
+    return !isNaN(Number(input));
+  }
+
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  let group = '';
+  if (groupSeparator) {
+    if (groupSeparator.trim() === '') {
+      group = '[\\u00A0\\u202F\\s]'; // handle NBSP, narrow NBSP, space
+    } else {
+      group = esc(groupSeparator);
+    }
+  }
+
+  const decimal = esc(decimalSeparator);
+
+  // Regex for:
+  // - integers (with/without grouping)
+  // - optional decimal with 0+ digits after separator
+  const regex = new RegExp(
+    `^-?\\d{1,3}(${group}\\d{3})*(${decimal}\\d*)?$|^-?\\d+(${decimal}\\d*)?$`
+  );
+
+  if (!regex.test(input)) {
+    return false;
+  }
+
+  // Normalize
+  let normalized = input;
+  if (groupSeparator) {
+    if (groupSeparator.trim() === '') {
+      normalized = normalized?.replace(/[\u00A0\u202F\s]/g, '');
+    } else {
+      normalized = normalized?.split(groupSeparator).join('');
+    }
+  }
+
+  normalized = normalized?.replace(decimalSeparator, '.');
+
+  return !isNaN(Number(normalized));
+};
+
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
-  function NumberInput(props: NumberInputProps, forwardRef) {
+  (props: NumberInputProps, forwardRef) => {
     const {
       allowEmpty = false,
       className: customClassName,
@@ -309,9 +402,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       size = 'md',
       slug,
       step = 1,
-      translateWithId: t = (id) => defaultTranslations[id],
+      translateWithId: t = defaultTranslateWithId,
       type = 'number',
       defaultValue = type === 'number' ? 0 : NaN,
+      validate,
       warn = false,
       warnText = '',
       stepStartValue = 0,
@@ -337,6 +431,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
       return 0;
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
 
@@ -366,7 +461,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
      * Only used when type="text"
      */
     const [previousNumberValue, setPreviousNumberValue] = useState(numberValue);
-
     /**
      * The current text value of the input.
      * Only used when type=text
@@ -417,9 +511,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const isInputValid = getInputValidity({
       allowEmpty,
       invalid,
-      value: type === 'number' ? value : numberValue,
+      value: validate ? inputValue : type === 'number' ? value : numberValue,
       max,
       min,
+      validate,
+      locale,
     });
     const normalizedProps = normalize({
       id,
@@ -445,15 +541,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
     });
 
-    if (
-      controlledValue !== prevControlledValue &&
-      !(isNaN(Number(controlledValue)) === isNaN(Number(prevControlledValue)))
-    ) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      setValue(controlledValue!);
-      setPrevControlledValue(controlledValue);
-    }
-
+    useEffect(() => {
+      if (type === 'number' && controlledValue !== undefined) {
+        if (allowEmpty && controlledValue === '') {
+          setValue('');
+        } else {
+          setValue(controlledValue);
+        }
+        setPrevControlledValue(controlledValue);
+      }
+    }, [controlledValue, type, allowEmpty]);
     let ariaDescribedBy: string | undefined = undefined;
     if (normalizedProps.invalid) {
       ariaDescribedBy = normalizedProps.invalidId;
@@ -490,7 +587,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         const _value =
           allowEmpty && event.target.value === '' ? '' : event.target.value;
 
-        // When isControlled, setNumberValue will not update numberValue in useControllableState.
         setNumberValue(numberParser.parse(_value));
         setInputValue(_value);
         // The onChange prop isn't called here because it will be called on blur
@@ -518,6 +614,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const Icon = normalizedProps.icon as any;
 
     const getDecimalPlaces = (num: number) => {
@@ -556,7 +653,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           getDecimalPlaces(currentValue),
           getDecimalPlaces(step)
         );
-        const floatValue = parseFloat(rawValue.toFixed(precision));
+        const floatValue = parseFloat(Number(rawValue).toFixed(precision));
         const newValue = clamp(floatValue, min ?? -Infinity, max ?? Infinity);
 
         const state = {
@@ -609,13 +706,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     // Need to update the internal value when the revert button is clicked
-    let isRevertActive: AILabelProps['revertActive'];
-    if (normalizedDecorator?.type === AILabel) {
-      isRevertActive = normalizedDecorator.props.revertActive;
-    }
+    const isRevertActive = isComponentElement(normalizedDecorator, AILabel)
+      ? normalizedDecorator.props.revertActive
+      : undefined;
 
     useEffect(() => {
       if (!isRevertActive && slug && defaultValue) {
@@ -654,7 +750,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
                   match(e, keys.ArrowUp) && handleStep(e, 'up');
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
                   match(e, keys.ArrowDown) && handleStep(e, 'down');
                 }
 
@@ -688,15 +786,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   const formattedValue = isNaN(_numberValue)
                     ? ''
                     : format(_numberValue);
-                  setInputValue(formattedValue);
-
+                  const rawValue = e.target.value;
+                  // Validate raw input
+                  const isValid = validate ? validate(rawValue, locale) : true;
+                  setInputValue(isValid ? formattedValue : rawValue);
                   // Calling format() can alter the number (such as rounding it)
                   // causing the _numberValue to mismatch the formatted value in
                   // the input. To avoid this, formattedValue is re-parsed.
                   const parsedFormattedNewValue =
                     numberParser.parse(formattedValue);
 
-                  if (onChange) {
+                  if (onChange && isValid) {
                     const state = {
                       value: parsedFormattedNewValue,
                       direction:
@@ -983,7 +1083,7 @@ NumberInput.propTypes = {
   step: PropTypes.number,
 
   /**
-   * Provide custom text for the component for each translation id
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 
@@ -1008,15 +1108,28 @@ NumberInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Optional validation function that is called with the input value and locale.
+   *
+   * - Return `false` to immediately fail validation.
+   * - Return `true` to pass this validation, but still run other checks (min, max, required, etc.).
+   * - Return `undefined` to defer entirely to built-in validation logic.
+   *
+   * This is called before other validations, giving consumers the ability
+   * to short-circuit or extend validation without replacing built-in rules.
+   */
+  validate: PropTypes.func,
 };
 
-export interface Label {
+interface LabelProps {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
-const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
+
+const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -1034,19 +1147,13 @@ const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   return null;
 };
 
-Label.propTypes = {
-  disabled: PropTypes.bool,
-  hideLabel: PropTypes.bool,
-  id: PropTypes.string,
-  label: PropTypes.node,
-};
-
-export interface HelperTextProps {
+interface HelperTextProps {
   id?: string;
   description?: ReactNode;
   disabled?: boolean;
 }
-function HelperText({ disabled, description, id }: HelperTextProps) {
+
+const HelperText = ({ disabled, description, id }: HelperTextProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -1060,12 +1167,6 @@ function HelperText({ disabled, description, id }: HelperTextProps) {
     );
   }
   return null;
-}
-
-HelperText.propTypes = {
-  description: PropTypes.node,
-  disabled: PropTypes.bool,
-  id: PropTypes.string,
 };
 
 /**
@@ -1079,9 +1180,27 @@ HelperText.propTypes = {
  * @param {number} config.value
  * @param {number} config.max
  * @param {number} config.min
+ * @param {Function} config.validate
+ * @param {string} config.locale
  * @returns {boolean}
  */
-function getInputValidity({ allowEmpty, invalid, value, max, min }) {
+function getInputValidity({
+  allowEmpty,
+  invalid,
+  value,
+  max,
+  min,
+  validate,
+  locale,
+}) {
+  if (typeof validate === 'function') {
+    const result = validate(value, locale);
+    if (result === false) {
+      return false; // immediate invalid
+    }
+    // If true or undefined, continue to further validations
+  }
+
   if (invalid) {
     return false;
   }

@@ -96,7 +96,7 @@ export const CombinedFlags = () => {
         'enable-v12-tile-default-icons': true,
         'enable-v12-tile-radio-icons': true,
         'enable-v12-overflowmenu': true,
-        'enable-treeview-controllable': true,       
+        'enable-treeview-controllable': true,
         'enable-experimental-focus-wrap-without-sentinels': true,
         'enable-v11-release': true,
         'enable-css-custom-properties': true,

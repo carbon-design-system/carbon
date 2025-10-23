@@ -68,7 +68,8 @@ $css--plex: true !default;
   margin-inline-end: 0;
 }
 
-:host(#{$prefix}-radio-button[invalid]) .#{$prefix}--radio-button__appearance {
+:host(#{$prefix}-radio-button[invalid]:not([readOnly]))
+  .#{$prefix}--radio-button__appearance {
   border-color: $support-error !important; /* stylelint-disable-line declaration-no-important */
 }
 

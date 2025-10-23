@@ -18,6 +18,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/chat-button' as *;
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 
 @include code-snippet;
 
@@ -56,7 +57,7 @@ $css--plex: true !default;
     transition: none;
 
     &:focus {
-      border-inline-start: 1px solid transparent;
+      border-inline-start: 0;
       box-shadow: none;
       outline: $spacing-01 solid $focus;
       outline-offset: -#{$spacing-01};
@@ -111,6 +112,9 @@ $css--plex: true !default;
       padding: $spacing-03;
     }
   }
+  .#{$prefix}--btn--ghost:not([disabled]) ::slotted([slot='icon']) {
+    fill: $icon-primary;
+  }
 }
 
 :host(#{$prefix}-button[kind='ghost']) {
@@ -143,10 +147,35 @@ $css--plex: true !default;
     // 196px from design kit
     max-inline-size: rem(196px);
   }
+  ::slotted(#{$prefix}-button:not(:first-of-type)) {
+    z-index: 1;
+    box-shadow: to-rem(-1px) 0 0 0 button-tokens.$button-separator;
+  }
+
+  ::slotted(#{$prefix}-button:focus-within) {
+    box-shadow: inherit;
+  }
+
+  ::slotted(#{$prefix}-button:not(:first-of-type)[hide-margin]) {
+    box-shadow: inherit;
+  }
 }
 
 :host(#{$prefix}-button-set[stacked]) {
   @extend .#{$prefix}--btn-set--stacked;
+
+  ::slotted(#{$prefix}-button:not(:first-of-type)) {
+    z-index: 1;
+    box-shadow: 0 to-rem(-1px) 0 0 button-tokens.$button-separator;
+  }
+
+  ::slotted(#{$prefix}-button:focus-within) {
+    box-shadow: inherit;
+  }
+
+  ::slotted(#{$prefix}-button:not(:first-of-type)[hide-margin]) {
+    box-shadow: inherit;
+  }
 }
 
 :host(#{$prefix}-button[data-context='data-table']) {

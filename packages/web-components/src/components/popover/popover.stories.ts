@@ -9,11 +9,12 @@ import { html } from 'lit';
 import './popover';
 import './popover-content';
 import '../radio-button/index';
-import { POPOVER_ALIGNMENT } from './defs';
+import { POPOVER_ALIGNMENT, POPOVER_BACKGROUND_TOKEN } from './defs';
 import { prefix } from '../../globals/settings';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
-import Settings16 from '@carbon/icons/lib/settings/16.js';
+import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../checkbox/checkbox';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
 const controls = {
@@ -39,7 +40,10 @@ const controls = {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,
   },
-
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the popover',
+  },
   highContrast: {
     control: 'boolean',
     description: 'Render the component using the high-contrast variant',
@@ -48,6 +52,14 @@ const controls = {
     control: 'boolean',
     description:
       'Specify whether a drop shadow should be rendered on the popover',
+  },
+  backgroundToken: {
+    control: 'select',
+    options: [
+      POPOVER_BACKGROUND_TOKEN.LAYER,
+      POPOVER_BACKGROUND_TOKEN.BACKGROUND,
+    ],
+    description: 'Specify the background token to use. Default is "layer".',
   },
   open: {
     control: 'boolean',
@@ -59,6 +71,7 @@ export const Default = {
   argTypes: controls,
   args: {
     caret: true,
+    border: false,
     highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
     dropShadow: true,
@@ -72,6 +85,7 @@ export const Default = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       open
         ? popover?.removeAttribute('open')
         : popover?.setAttribute('open', '');
@@ -84,16 +98,18 @@ export const Default = {
       <cds-popover
         ?open=${args.open}
         ?caret=${args.caret}
+        ?border=${args.border}
         ?highContrast=${args.highContrast}
         align=${args.align}
-        ?dropShadow=${args.dropShadow}>
+        ?dropShadow=${args.dropShadow}
+        backgroundToken=${args.backgroundToken}>
         <button
           class="playground-trigger"
           aria-label="Checkbox"
           type="button"
           aria-expanded=${open}
           @click="${() => handleClick()}">
-          ${Checkbox16()}
+          ${iconLoader(Checkbox16)}
         </button>
         <cds-popover-content>
           <div class="p-3">
@@ -113,6 +129,7 @@ export const TabTip = {
     const handleClick = (id) => {
       const popover = document.querySelector(id);
       const open = popover?.hasAttribute('open');
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       open
         ? popover?.removeAttribute('open')
         : popover?.setAttribute('open', '');
@@ -128,7 +145,7 @@ export const TabTip = {
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-one')}">
-            ${Settings16()}
+            ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">
@@ -167,12 +184,16 @@ export const TabTip = {
             </div>
           </cds-popover-content>
         </cds-popover>
-        <cds-popover tabTip id="popover-two" align="bottom-right">
+        <cds-popover
+          tabTip
+          id="popover-two"
+          align="bottom-right"
+          backgroundToken=${POPOVER_BACKGROUND_TOKEN.LAYER}>
           <button
             aria-label="Settings"
             type="button"
             @click="${() => handleClick('#popover-two')}">
-            ${Settings16()}
+            ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
             <div class="p-3">

@@ -8,6 +8,8 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - _autoEnablePresence
+        - _presenceId
         - accept
         - action
         - actionButtonLabel
@@ -25,6 +27,7 @@ collect:
         - as
         - autoAlign
         - autoComplete
+        - border
         - buttonKind
         - caption
         - checked
@@ -147,6 +150,7 @@ collect:
         - name
         - narrow
         - nested
+        - noTrailingSlash
         - onActionButtonClick
         - onAddFiles
         - onBlur
@@ -265,8 +269,6 @@ collect:
         - style
         # AspectRatio
         - ratio
-        # Breadcrumb
-        - noTrailingSlash
         # ButtonSet
         - stacked
         # ChatButton
@@ -313,7 +315,9 @@ collect:
         - enable
         - maxDate
         - minDate
+        - nextMonthAriaLabel
         - parseDate
+        - prevMonthAriaLabel
         - short
         # DatePickerSkeleton
         - range
@@ -328,6 +332,7 @@ collect:
         - focusAfterCloseRef
         - modal
         # DismissibleTag
+        - dismissTooltipAlignment
         - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
@@ -341,7 +346,10 @@ collect:
         - tilePadding
         # FeatureFlags
         - enableDialogElement
+        - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enableFocusWrapWithoutSentinels
+        - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
@@ -452,6 +460,7 @@ collect:
         # NumberInput
         - hideSteppers
         - stepStartValue
+        - validate
         # OrderedList
         - native
         # OverflowMenuItem
@@ -462,7 +471,6 @@ collect:
         - requireTitle
         - wrapperClassName
         # PageHeaderBreadcrumbBar
-        - border
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
@@ -498,6 +506,7 @@ collect:
         # Popover
         - alignmentAxisOffset
         - autoAlignBoundary
+        - backgroundToken
         - caret
         - isTabTip
         # ProgressIndicator
@@ -831,6 +840,7 @@ collect:
         - 2xl
         - 2xs
         - big
+        - field
         - lg
         - md
         - mini
@@ -897,6 +907,19 @@ collect:
         # ContentSwitcher - selectionMode
         - automatic
         - manual
+        # DismissibleTag - dismissTooltipAlignment
+        - bottom
+        - bottom-end
+        - bottom-start
+        - left
+        - left-end
+        - left-start
+        - right
+        - right-end
+        - right-start
+        - top
+        - top-end
+        - top-start
         # FileUploader - filenameStatus
         - complete
         - edit
@@ -916,6 +939,9 @@ collect:
         - toast
         # Popover - autoAlignBoundary
         - clippingAncestors
+        # Popover - backgroundToken
+        - background
+        - layer
         # ShapeIndicator - textSize
         - "12"
         - "14"

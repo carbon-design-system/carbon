@@ -21,7 +21,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { promisify } from 'util';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
-import carbonIcons from '../tools/rollup-plugin-dist-icons.js';
+
 import fixHostPseudo from '../tools/postcss-fix-host-pseudo.js';
 import license from '../tools/rollup-plugin-license.js';
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
@@ -115,7 +115,6 @@ function getRollupConfig({ inputs = {} } = {}) {
         include: [/node_modules/],
         sourceMap: true,
       }),
-      carbonIcons(),
       typescript({
         noEmitOnError: true,
         declaration: false,

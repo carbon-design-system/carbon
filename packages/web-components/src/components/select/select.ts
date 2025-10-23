@@ -8,14 +8,15 @@
 import { LitElement, html } from 'lit';
 import { property, query, queryAll } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { prefix } from '../../globals/settings';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
 import { INPUT_SIZE } from '../text-input/text-input';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './select.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -268,7 +269,6 @@ class CDSSelect extends FormMixin(LitElement) {
    * `true` to enable multiple selection.
    */
   @property({ type: Boolean })
-  // eslint-disable-next-line class-methods-use-this
   get multiple() {
     return false;
   }
@@ -421,6 +421,7 @@ class CDSSelect extends FormMixin(LitElement) {
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const helperTextClasses = classMap({
@@ -430,7 +431,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const supplementalText = helperText
       ? html`
-          <div class="${helperTextClasses}">
+          <div id="helper-text" class="${helperTextClasses}">
             <slot name="helper-text"> ${helperText} </slot>
           </div>
         `
@@ -438,10 +439,17 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const errorText =
       invalid || warn
-        ? html` <div class="${prefix}--form-requirement">
+        ? html` <div id="error-text" class="${prefix}--form-requirement">
             ${invalid ? invalidText : warnText}
           </div>`
         : null;
+
+    let describedBy: string | undefined;
+    if (invalid || warn) {
+      describedBy = 'error-text';
+    } else if (helperText) {
+      describedBy = 'helper-text';
+    }
 
     const input = html`
       <select
@@ -450,7 +458,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ?disabled="${disabled}"
         aria-readonly="${String(Boolean(readonly))}"
         aria-invalid="${String(Boolean(invalid))}"
-        aria-describedby="${ifDefined(!invalid ? undefined : 'invalid-text')}"
+        aria-describedby="${ifDefined(describedBy)}"
         @input="${handleInput}">
         ${!placeholder || value
           ? undefined
@@ -465,9 +473,9 @@ class CDSSelect extends FormMixin(LitElement) {
             `}
         ${this._renderItems(this)}
       </select>
-      ${ChevronDown16({
+      ${iconLoader(ChevronDown16, {
         class: `${prefix}--select__arrow`,
-        'aria-hidden': true,
+        'aria-hidden': 'true',
       })}
       <slot
         name="ai-label"
@@ -476,20 +484,21 @@ class CDSSelect extends FormMixin(LitElement) {
       <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
-        : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
+        : iconLoader(WarningFilled16, {
+            class: `${prefix}--select__invalid-icon`,
+          })}
       ${!invalid && warn
-        ? WarningAltFilled16({
+        ? iconLoader(WarningAltFilled16, {
             class: `${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`,
           })
         : null}
     `;
 
     return html`
-      ${!hideLabel
-        ? html`<label class="${labelClasses}" for="input">
-            <slot name="label-text"> ${labelText} </slot>
-          </label>`
-        : null}
+      <label class="${labelClasses}" for="input">
+        <slot name="label-text"> ${labelText} </slot>
+      </label>
+
       ${inline
         ? html`<div
             class="${prefix}--select-input--inline__wrapper"

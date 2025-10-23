@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,16 @@ import { render, screen } from '@testing-library/react';
 import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
+
+/**
+ * @param element {Element}
+ * @returns {Record<string, string>}
+ */
+const getElementAttributes = ({ attributes }) =>
+  Array.from(attributes).reduce(
+    (acc, { name, value }) => ({ ...acc, [name]: value }),
+    {}
+  );
 
 describe('CheckboxGroup', () => {
   it('should support a custom `className` prop on the outermost element', () => {
@@ -190,5 +200,90 @@ describe('CheckboxGroup', () => {
     expect(container.firstChild).toHaveClass(
       `${prefix}--checkbox-group--horizontal`
     );
+  });
+
+  describe('prop inheritance', () => {
+    it('should pass props to child `Checkbox` components', () => {
+      render(
+        <CheckboxGroup legendText="Checkbox heading" invalid readOnly warn>
+          <Checkbox labelText="Checkbox 1" id="checkbox-1" />
+          <Checkbox labelText="Checkbox 2" id="checkbox-2" />
+        </CheckboxGroup>
+      );
+
+      const checkbox1 = screen.getByLabelText('Checkbox 1');
+      const checkbox2 = screen.getByLabelText('Checkbox 2');
+      const attributes1 = getElementAttributes(checkbox1);
+      const attributes2 = getElementAttributes(checkbox2);
+
+      expect(attributes1).toEqual({
+        class: `${prefix}--checkbox`,
+        id: 'checkbox-1',
+        'data-invalid': 'true',
+        'aria-readonly': 'true',
+        type: 'checkbox',
+      });
+      expect(attributes2).toEqual({
+        class: `${prefix}--checkbox`,
+        id: 'checkbox-2',
+        'data-invalid': 'true',
+        'aria-readonly': 'true',
+        type: 'checkbox',
+      });
+    });
+
+    it('should not override individual `Checkbox` props', () => {
+      render(
+        <CheckboxGroup legendText="Checkbox heading" readOnly>
+          <Checkbox labelText="Checkbox 1" id="checkbox-1" readOnly={false} />
+          <Checkbox labelText="Checkbox 2" id="checkbox-2" />
+        </CheckboxGroup>
+      );
+
+      const checkbox1 = screen.getByLabelText('Checkbox 1');
+      const checkbox2 = screen.getByLabelText('Checkbox 2');
+      const attributes1 = getElementAttributes(checkbox1);
+      const attributes2 = getElementAttributes(checkbox2);
+
+      expect(attributes1).toEqual({
+        class: `${prefix}--checkbox`,
+        id: 'checkbox-1',
+        // Should not be read-only because it explicitly sets `readOnly` to
+        // `false`.
+        'aria-readonly': 'false',
+        type: 'checkbox',
+      });
+      expect(attributes2).toEqual({
+        class: `${prefix}--checkbox`,
+        id: 'checkbox-2',
+        // Should be read-only because it inherits from the group.
+        'aria-readonly': 'true',
+        type: 'checkbox',
+      });
+    });
+
+    it('should not affect non-`Checkbox` children', () => {
+      render(
+        <CheckboxGroup legendText="Checkbox heading" readOnly>
+          <Checkbox labelText="Checkbox label" id="checkbox-1" />
+          <div data-testid="non-checkbox">Not a checkbox</div>
+        </CheckboxGroup>
+      );
+
+      const checkbox = screen.getByLabelText('Checkbox label');
+      const nonCheckbox = screen.getByTestId('non-checkbox');
+      const checkboxAttributes = getElementAttributes(checkbox);
+      const nonCheckboxAttributes = getElementAttributes(nonCheckbox);
+
+      expect(checkboxAttributes).toEqual({
+        class: `${prefix}--checkbox`,
+        id: 'checkbox-1',
+        'aria-readonly': 'true',
+        type: 'checkbox',
+      });
+      expect(nonCheckboxAttributes).toEqual({
+        'data-testid': 'non-checkbox',
+      });
+    });
   });
 });
