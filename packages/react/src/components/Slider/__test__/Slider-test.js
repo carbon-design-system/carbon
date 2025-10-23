@@ -279,50 +279,58 @@ describe('Slider', () => {
       expect(onChange).toHaveBeenCalledTimes(0);
     });
 
-    it('should not display warn if disabled', () => {
+    it('should not have warning if disabled', () => {
       renderSlider({
         ariaLabelInput: inputAriaValue,
         disabled: true,
         warn: true,
         warnText: 'Warning message',
       });
-
+      const sliderInput = screen.getByRole('spinbutton');
       const warnMessage = screen.queryByText('Warning message');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
       expect(warnMessage).not.toBeInTheDocument();
     });
 
-    it('should not display warn if readOnly', () => {
+    it('should not have warning if readOnly', () => {
       renderSlider({
         ariaLabelInput: inputAriaValue,
         readOnly: true,
         warn: true,
         warnText: 'Warning message',
       });
-
+      const sliderInput = screen.getByRole('spinbutton');
       const warnMessage = screen.queryByText('Warning message');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
       expect(warnMessage).not.toBeInTheDocument();
     });
 
-    it('should not display invalid message if disabled', () => {
+    it('should not be invalid if disabled', () => {
       renderSlider({
         ariaLabelInput: inputAriaValue,
         disabled: true,
         invalid: true,
         invalidText: 'Error message',
       });
-
+      const sliderInput = screen.getByRole('spinbutton');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
       const invalidMessage = screen.queryByText('Error message');
       expect(invalidMessage).not.toBeInTheDocument();
     });
 
-    it('should not display invalid message if readOnly', () => {
+    it('should not be invalid if readOnly', () => {
       renderSlider({
         ariaLabelInput: inputAriaValue,
         readOnly: true,
         invalid: true,
         invalidText: 'Error message',
       });
-
+      const sliderInput = screen.getByRole('spinbutton');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
       const invalidMessage = screen.queryByText('Error message');
       expect(invalidMessage).not.toBeInTheDocument();
     });
