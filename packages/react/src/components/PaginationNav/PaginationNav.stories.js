@@ -29,49 +29,6 @@ export const Default = (args) => {
   );
 };
 
-export const TwoPaginations = (args) => {
-  return (
-    <div style={{ width: '800px', display: 'grid', gap: '2rem' }}>
-      <section aria-labelledby="jobs-pagination-heading">
-        <h3 id="jobs-pagination-heading" style={{ margin: 0 }}>
-          Jobs table
-        </h3>
-        <PaginationNav
-          aria-label="Jobs table pagination"
-          totalItems={25}
-          size="lg"
-          itemsShown={10}
-          page={0}
-          loop={false}
-          disableOverflow={false}
-          {...args}
-        />
-      </section>
-
-      <section aria-labelledby="gallery-pagination-heading">
-        <h3 id="gallery-pagination-heading" style={{ margin: 0 }}>
-          Image gallery
-        </h3>
-        <PaginationNav
-          aria-label="Gallery pagination"
-          totalItems={12}
-          size="md"
-          itemsShown={5}
-          page={1}
-          loop={false}
-          disableOverflow={false}
-          {...args}
-        />
-      </section>
-    </div>
-  );
-};
-
-TwoPaginations.args = {
-  tooltipAlignment: 'center',
-  tooltipPosition: 'bottom',
-};
-
 Default.args = {
   size: 'lg',
   loop: false,
