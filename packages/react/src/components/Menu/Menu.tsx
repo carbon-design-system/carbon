@@ -33,6 +33,16 @@ const spacing = 8; // distance to keep to window edges, in px
 
 export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
+
+  /**
    * The ref of the containing element, used for positioning and alignment of the menu
    */
   containerRef?: RefObject<HTMLDivElement | null>;
@@ -108,6 +118,8 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
 
 const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
+    backgroundToken = 'layer',
+    border = false,
     children,
     className,
     containerRef,
@@ -423,6 +435,9 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       [`${prefix}--menu--with-selectable-items`]:
         childContext.state.hasSelectableItems,
       [`${prefix}--autoalign`]: !legacyAutoalign,
+      [`${prefix}--menu--border`]: border,
+      [`${prefix}--menu--background-token__background`]:
+        backgroundToken === 'background',
     }
   );
 
@@ -450,6 +465,16 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 });
 
 Menu.propTypes = {
+  /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  border: PropTypes.bool,
+
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */
