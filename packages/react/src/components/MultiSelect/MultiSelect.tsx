@@ -534,8 +534,11 @@ export const MultiSelect = React.forwardRef(
       setPrevOpenProp(open);
     }
 
+    const isInteractive = !disabled && !readOnly;
     const inline = type === 'inline';
-    const showWarning = !invalid && warn;
+    const showWarning = isInteractive && !invalid && warn;
+    const showHelperText =
+      ((!invalid && !warn) || !isInteractive) && helperText;
 
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
@@ -545,9 +548,11 @@ export const MultiSelect = React.forwardRef(
         [`${prefix}--multi-select__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
         [`${prefix}--multi-select__wrapper--inline--invalid`]:
-          inline && invalid,
-        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+          inline && invalid && isInteractive,
+        [`${prefix}--list-box__wrapper--inline--invalid`]:
+          inline && invalid && isInteractive,
+        [`${prefix}--list-box__wrapper--fluid--invalid`]:
+          isFluid && invalid && isInteractive,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
@@ -565,8 +570,9 @@ export const MultiSelect = React.forwardRef(
     });
 
     const className = cx(`${prefix}--multi-select`, {
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
+      [`${prefix}--multi-select--invalid`]: invalid && isInteractive,
+      [`${prefix}--multi-select--invalid--focused`]:
+        invalid && inputFocused && isInteractive,
       [`${prefix}--multi-select--warning`]: showWarning,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--selected`]:
@@ -774,13 +780,13 @@ export const MultiSelect = React.forwardRef(
           className={className}
           disabled={disabled}
           light={light}
-          invalid={invalid}
+          invalid={invalid && isInteractive}
           invalidText={invalidText}
-          warn={warn}
+          warn={warn && isInteractive}
           warnText={warnText}
           isOpen={isOpen}
           id={id}>
-          {invalid && (
+          {invalid && isInteractive && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
           {showWarning && (
@@ -809,9 +815,7 @@ export const MultiSelect = React.forwardRef(
               disabled={disabled}
               aria-disabled={disabled || readOnly}
               aria-describedby={
-                !inline && !invalid && !warn && helperText
-                  ? helperId
-                  : undefined
+                !inline && showHelperText ? helperId : undefined
               }
               {...toggleButtonProps}
               ref={mergedRef}
@@ -900,7 +904,7 @@ export const MultiSelect = React.forwardRef(
             <span aria-live="assertive" aria-label={clearAnnouncement} />
           )}
         </ListBox>
-        {!inline && !invalid && !warn && helperText && (
+        {!inline && showHelperText && (
           <div id={helperId} className={helperClasses}>
             {helperText}
           </div>
