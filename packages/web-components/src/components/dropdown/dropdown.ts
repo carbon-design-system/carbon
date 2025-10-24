@@ -622,13 +622,14 @@ class CDSDropdown extends ValidityMixin(
         (elem as CDSDropdownItem).size = this.size;
       });
     }
-    if (changedProperties.has('disabled') && this.disabled) {
+    if (changedProperties.has('disabled')) {
       const { disabled } = this;
       // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         if (disabled) {
           (elem as CDSDropdownItem).disabled = disabled;
         } else {
+          (elem as CDSDropdownItem).disabled = false;
           (elem as CDSDropdownItem).removeAttribute('disabled');
         }
       });
@@ -656,15 +657,13 @@ class CDSDropdown extends ValidityMixin(
     return true;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  updated(_changedProperties) {
+  updated(changedProperties) {
     // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     this._hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
-
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
@@ -678,6 +677,33 @@ class CDSDropdown extends ValidityMixin(
           this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
         );
     }
+
+    if (
+      changedProperties.has('invalid') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('readOnly') ||
+      changedProperties.has('warn')
+    ) {
+      const isInteractive = !this.readOnly && !this.disabled;
+
+      const shouldHaveInvalid = this.invalid && isInteractive;
+      const hasInvalidAttr = this.hasAttribute('invalid');
+
+      if (shouldHaveInvalid && !hasInvalidAttr) {
+        this.setAttribute('invalid', '');
+      } else if (!shouldHaveInvalid && hasInvalidAttr) {
+        this.removeAttribute('invalid');
+      }
+
+      const shouldHaveWarn = this.warn && isInteractive;
+      const hasWarnAttr = this.hasAttribute('warn');
+
+      if (shouldHaveWarn && !hasWarnAttr) {
+        this.setAttribute('warn', '');
+      } else if (!shouldHaveWarn && hasWarnAttr) {
+        this.removeAttribute('warn');
+      }
+    }
   }
 
   /**
@@ -685,8 +711,12 @@ class CDSDropdown extends ValidityMixin(
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   protected get _classes(): any {
-    const { disabled, size, type, invalid, open, warn } = this;
+    const { disabled, readOnly, size, type, invalid, open, warn } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+
+    const isInteractive = !readOnly && !disabled;
+    const showInvalid = isInteractive && invalid;
+    const showWarning = isInteractive && warn;
 
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
@@ -699,8 +729,8 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warn`]: warn,
+      [`${prefix}--dropdown--invalid`]: showInvalid,
+      [`${prefix}--dropdown--warn`]: showWarning,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
@@ -712,6 +742,7 @@ class CDSDropdown extends ValidityMixin(
       ariaLabel,
       _classes: classes,
       disabled,
+      readOnly,
       helperText,
       invalid,
       invalidText,
@@ -732,6 +763,10 @@ class CDSDropdown extends ValidityMixin(
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
 
+    const isInteractive = !readOnly && !disabled;
+    const showInvalid = isInteractive && invalid;
+    const showWarning = isInteractive && warn;
+
     let activeDescendantFallback: string | undefined;
     if (open && !activeDescendant) {
       const constructor = this.constructor as typeof CDSDropdown;
@@ -742,6 +777,8 @@ class CDSDropdown extends ValidityMixin(
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--invalid`]: showInvalid,
+      [`${prefix}--form__helper-text--warning`]: showWarning,
     });
     const iconContainerClasses = classMap({
       [`${prefix}--list-box__menu-icon`]: true,
@@ -750,23 +787,26 @@ class CDSDropdown extends ValidityMixin(
     const toggleLabel = (open ? toggleLabelOpen : toggleLabelClosed) || '';
     const hasHelperText =
       helperText ||
-      invalidText ||
-      warnText ||
+      (showInvalid && invalidText) ||
+      (showWarning && warnText) ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const validityIcon = !invalid
+    const validityIcon = !showInvalid
       ? undefined
       : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon =
-      !warn || (invalid && warn)
-        ? undefined
-        : iconLoader(WarningAltFilled16, {
-            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-            'aria-label': toggleLabel,
-          });
-    const helperMessage = invalid ? invalidText : warn ? warnText : helperText;
+    const warningIcon = !showWarning
+      ? undefined
+      : iconLoader(WarningAltFilled16, {
+          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+          'aria-label': toggleLabel,
+        });
+    const helperMessage = showInvalid
+      ? invalidText
+      : showWarning
+        ? warnText
+        : helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -784,7 +824,7 @@ class CDSDropdown extends ValidityMixin(
       ${this._renderTitleLabel()}
       <div
         class="${classes}"
-        ?data-invalid=${invalid}
+        ?data-invalid=${showInvalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
         @keypress=${handleKeypressInner}>
@@ -829,7 +869,7 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !invalid) || !hasHelperText}">
+        ?hidden="${(inline && !showWarning && !showInvalid) || !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot
         >
