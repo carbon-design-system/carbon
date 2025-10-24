@@ -63,12 +63,17 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[filterable])
+:host(#{$prefix}-multi-select[filterable]) {
   .#{$prefix}--list-box__field:focus-within {
-  outline: $spacing-01 solid $focus;
-  outline-offset: -#{$spacing-01};
+    outline: $spacing-01 solid $focus;
+    outline-offset: -#{$spacing-01};
+  }
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-01;
+    }
+  }
 }
-
 :host(#{$prefix}-multi-select[filterable][has-value])
   .#{$prefix}--list-box__field
   ~ ::slotted(#{$prefix}-ai-label) {
@@ -84,12 +89,13 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select[invalid]) {
-  .#{$prefix}--list-box__field {
-    outline: none;
-  }
-
   .#{$prefix}--form__helper-text {
     color: $text-error;
+  }
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-10;
+    }
   }
 }
 
@@ -212,17 +218,212 @@ $css--plex: true !default;
   inset-inline-end: convert.to-rem(-9px);
 }
 
-:host(#{$prefix}-multi-select[ai-label][warn]),
-:host(#{$prefix}-multi-select[ai-label][invalid]) {
+:host(#{$prefix}-multi-select[filterable][warn][has-value]),
+:host(#{$prefix}-multi-select[filterable][invalid][has-value]) {
+  .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: rem(78px);
+  }
+
+  .#{$prefix}--list-box__selection#clear-button::before {
+    position: absolute;
+    display: block;
+    background-color: $border-subtle-01;
+    block-size: $spacing-05;
+    content: '';
+    inline-size: rem(1px);
+    inset-inline-end: rem(27px);
+  }
+}
+
+// pad space to account for text-input, placeholder and selections
+
+:host(#{$prefix}-multi-select[filterable])
+  .#{$prefix}--multi-select--selected
+  .#{$prefix}--list-box__field
+  .#{$prefix}--text-input {
+  padding-inline-end: rem(45px);
+}
+
+:host(#{$prefix}-multi-select[filterable][invalid][value='']) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
-      padding-inline-end: $spacing-12;
+      padding-inline-end: $spacing-01;
+    }
+  }
+}
+
+:host(#{$prefix}-multi-select[filterable][invalid]),
+:host(#{$prefix}-multi-select[filterable][warn]) {
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    padding-inline-end: 0;
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: $spacing-08;
+  }
+}
+
+:host(#{$prefix}-multi-select[filterable][warn][value='']) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-05;
+    }
+  }
+}
+:host(#{$prefix}-multi-select[filterable][ai-label][value='']) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-03;
+    }
+  }
+}
+
+:host(#{$prefix}-multi-select[filterable][ai-label][has-value]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: rem(43px);
+    }
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    padding-inline-end: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-multi-select[filterable][invalid][has-value]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-08;
+    }
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    padding-inline-end: $spacing-10;
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: $spacing-11;
+  }
+}
+
+:host(#{$prefix}-multi-select[filterable][warn][has-value]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: rem(55px);
+    }
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    padding-inline-end: $spacing-09;
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: $spacing-11;
+  }
+}
+
+:host(#{$prefix}-multi-select[ai-label]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: rem(75px);
+    }
+  }
+}
+
+:host(#{$prefix}-multi-select[filterable][ai-label])
+  .#{$prefix}--multi-select--selected
+  .#{$prefix}--list-box__field
+  .#{$prefix}--text-input {
+  padding-inline-end: 0;
+}
+
+:host(#{$prefix}-multi-select[filterable][has-value]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-06;
+    }
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    padding-inline-end: rem(45px);
+  }
+}
+
+:host(#{$prefix}-multi-select[ai-label][invalid]),
+:host(#{$prefix}-multi-select[ai-label][warn]) {
+  ::slotted(#{$prefix}-ai-label)::before {
+    position: absolute;
+    display: block;
+    background-color: $border-subtle-01;
+    block-size: $spacing-05;
+    content: '';
+    inline-size: convert.to-rem(1px);
+    inset-block-start: 0;
+    inset-inline-end: convert.to-rem(24px);
+  }
+}
+
+:host(#{$prefix}-multi-select[ai-label][warn]),
+:host(#{$prefix}-multi-select[ai-label][invalid]),
+:host(#{$prefix}-multi-select[ai-label][warn][filterable]),
+:host(#{$prefix}-multi-select[ai-label][invalid][filterable]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-07;
+    }
+  }
+  .#{$prefix}--list-box__field .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: rem(81px);
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    padding-inline-end: rem(70px);
+  }
+}
+
+:host(#{$prefix}-multi-select[filterable][ai-label][warn][has-value]),
+:host(#{$prefix}-multi-select[filterable][ai-label][invalid][has-value]) {
+  .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: rem(114px);
+  }
+
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: rem(75px);
     }
   }
 
-  ::slotted(#{$prefix}-ai-label),
-  ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-10;
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    padding-inline-end: rem(65px);
+  }
+  .#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: rem(114px);
+  }
+}
+
+:host(#{$prefix}-multi-select[ai-label][invalid]),
+:host(#{$prefix}-multi-select[ai-label][warn]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: rem(100px);
+    }
+  }
+  .#{$prefix}--multi-select--selected .#{$prefix}--list-box__field {
+    padding-inline-end: rem(105px);
   }
 }
 
@@ -259,14 +460,23 @@ $css--plex: true !default;
   @include ai-gradient;
 }
 
-:host(#{$prefix}-multi-select[item-clicked]) .#{$prefix}--list-box__field {
-  outline: 1px solid $focus !important;
-  outline-offset: -1px !important;
+:host(#{$prefix}-multi-select[item-clicked]),
+:host(#{$prefix}-multi-select[has-value]) {
+  .#{$prefix}--list-box__field,
+  .#{$prefix}--multi-select--invalid {
+    outline: 1px solid $focus !important;
+    outline-offset: -1px !important;
+  }
 }
 
 :host(#{$prefix}-multi-select[warn]) {
   .#{$prefix}--form__helper-text {
     color: $text-primary;
+  }
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-10;
+    }
   }
 }
 
