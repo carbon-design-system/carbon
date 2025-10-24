@@ -1172,6 +1172,78 @@ describe('cds-multi-select', function () {
         'This field is required'
       );
     });
+
+    it('should not have invalid classname when is disabled', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          invalid
+          invalid-text="Invalid message"
+          disabled>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--invalid'
+      );
+    });
+
+    it('should not have invalid classname when is readOnly', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          invalid
+          invalid-text="Invalid message"
+          read-only>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--invalid'
+      );
+    });
+
+    it('should not have warn classname when is disabled', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          warn
+          warn-text="Warn message"
+          disabled>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--warn'
+      );
+    });
+
+    it('should not have warn classname when is readOnly', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          warn
+          warn-text="Warn message"
+          read-only>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--warn'
+      );
+    });
   });
 
   describe('Selection Feedback Modes', () => {
