@@ -936,7 +936,7 @@ export const ExpandableTile = React.forwardRef<
       resizeObserver.observe(aboveTheFold.current);
 
       return () => resizeObserver.disconnect();
-    }, []);
+    }, [isTileMaxHeight, isTilePadding]);
 
     const belowTheFoldId = useId('expandable-tile-interactive');
 
