@@ -137,9 +137,10 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   return (
     <fieldset
       className={fieldsetClasses}
-      data-invalid={invalid && !disabled ? true : undefined}
+      data-invalid={invalid && !disabled && !readOnly ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
       aria-readonly={readOnly}
+      aria-disabled={disabled}
       aria-describedby={!invalid && !warn && helper ? helperId : undefined}
       {...rest}>
       <legend

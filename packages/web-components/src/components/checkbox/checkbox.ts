@@ -246,7 +246,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       _handleClick: handleClick,
     } = this;
 
-    const showWarning = !readonly && !invalid && warn;
+    const showWarning = !readonly && !disabled && !invalid && warn;
     const showHelper = !invalid && !warn;
 
     const helper = helperText
@@ -289,7 +289,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       <slot name="decorator" @slotchange="${this._handleSlotChange}"></slot>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div class="${prefix}--checkbox__validation-msg">
-        ${!readonly && invalid
+        ${!readonly && !disabled && invalid
           ? html`
               ${iconLoader(WarningFilled16, {
                 class: `${prefix}--checkbox__invalid-icon`,
