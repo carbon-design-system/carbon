@@ -101,6 +101,34 @@ describe('cds-checkbox', function () {
     expect(invalidText.textContent.trim()).to.equal('Invalid text');
   });
 
+  it('should not display invalid-text if invalid prop is true but readOnly', async () => {
+    const checkbox = html`<cds-checkbox
+      readOnly
+      invalid
+      invalid-text="Invalid text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
+  });
+
+  it('should not display invalid-text if invalid prop is true but disabled', async () => {
+    const checkbox = html`<cds-checkbox
+      disabled
+      invalid
+      invalid-text="Invalid text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
+  });
+
   it('should respect readOnly prop', async () => {
     const checkbox = html`<cds-checkbox readOnly>Checkbox Label</cds-checkbox>`;
     const el = await fixture(checkbox);
@@ -129,6 +157,28 @@ describe('cds-checkbox', function () {
 
     expect(warnText).to.exist;
     expect(warnText.textContent.trim()).to.equal('Warn text');
+  });
+
+  it('should not display warn-text if warn prop is true but readOnly', async () => {
+    const checkbox = html`<cds-checkbox readOnly warn warn-text="Warn text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
+  });
+
+  it('should not display warn-text if warn prop is true but disabled', async () => {
+    const checkbox = html`<cds-checkbox disabled warn warn-text="Warn text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
   });
 
   it('should fire cds-checkbox-changed event when checkbox is changed', async () => {
