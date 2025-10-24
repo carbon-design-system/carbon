@@ -545,6 +545,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const isInteractive = !disabled && !readOnly;
   const inline = type === 'inline';
   const showWarning = isInteractive && !invalid && warn;
+  const showHelperText = (!invalid && !warn) || !isInteractive;
 
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
@@ -885,10 +886,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
-      'aria-describedby':
-        helperText && ((!invalid && !warn) || !isInteractive)
-          ? helperId
-          : undefined,
+      'aria-describedby': helperText && showHelperText ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
       // provides this aria information.
@@ -1146,7 +1144,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             : null}
         </ListBox.Menu>
       </ListBox>
-      {!inline && ((!invalid && !warn) || !isInteractive) ? helper : null}
+      {!inline && showHelperText ? helper : null}
     </div>
   );
 }) as {

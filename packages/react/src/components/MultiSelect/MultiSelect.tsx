@@ -537,6 +537,8 @@ export const MultiSelect = React.forwardRef(
     const isInteractive = !disabled && !readOnly;
     const inline = type === 'inline';
     const showWarning = isInteractive && !invalid && warn;
+    const showHelperText =
+      ((!invalid && !warn) || !isInteractive) && helperText;
 
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
@@ -813,9 +815,7 @@ export const MultiSelect = React.forwardRef(
               disabled={disabled}
               aria-disabled={disabled || readOnly}
               aria-describedby={
-                !inline && ((!invalid && !warn) || !isInteractive) && helperText
-                  ? helperId
-                  : undefined
+                !inline && showHelperText ? helperId : undefined
               }
               {...toggleButtonProps}
               ref={mergedRef}
@@ -904,7 +904,7 @@ export const MultiSelect = React.forwardRef(
             <span aria-live="assertive" aria-label={clearAnnouncement} />
           )}
         </ListBox>
-        {!inline && ((!invalid && !warn) || !isInteractive) && helperText && (
+        {!inline && showHelperText && (
           <div id={helperId} className={helperClasses}>
             {helperText}
           </div>
