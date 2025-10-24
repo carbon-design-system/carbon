@@ -43,6 +43,34 @@ describe('cds-menu', () => {
     expect(menu).to.have.attribute('aria-label', 'Test Menu');
   });
 
+  it('should apply border class when border prop is true', async () => {
+    const el = await fixture(html`<cds-menu border></cds-menu>`);
+    const menu = el.shadowRoot.querySelector('.cds--menu');
+    expect(menu).to.have.class('cds--menu--border');
+  });
+
+  it('should not apply border class when border prop is false', async () => {
+    const el = await fixture(html`<cds-menu></cds-menu>`);
+    const menu = el.shadowRoot.querySelector('.cds--menu');
+    expect(menu).to.not.have.class('cds--menu--border');
+  });
+
+  it('should apply background token class when backgroundToken is "background"', async () => {
+    const el = await fixture(
+      html`<cds-menu background-token="background"></cds-menu>`
+    );
+    const menu = el.shadowRoot.querySelector('.cds--menu');
+    expect(menu).to.have.class('cds--menu--background-token__background');
+  });
+
+  it('should not apply background token class when backgroundToken is "layer"', async () => {
+    const el = await fixture(
+      html`<cds-menu background-token="layer"></cds-menu>`
+    );
+    const menu = el.shadowRoot.querySelector('.cds--menu');
+    expect(menu).to.not.have.class('cds--menu--background-token__background');
+  });
+
   describe('firstUpdated', () => {
     it('should set isRtl based on direction', async () => {
       const el = await fixture(html`<cds-menu direction="rtl"></cds-menu>`);
