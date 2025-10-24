@@ -331,6 +331,32 @@ describe('Dropdown', () => {
     assertMenuClosed();
   });
 
+  it('should preserve selectedItem when menu is closed programmatically', async () => {
+    render(
+      <Dropdown {...mockProps} initialSelectedItem={mockProps.items[2]} />
+    );
+
+    await waitForPosition();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+
+    await openMenu();
+    assertMenuOpen(mockProps);
+
+    const button = screen.getByRole('combobox');
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+
+    act(() => {
+      fireEvent.blur(button);
+    });
+
+    await waitForPosition();
+    assertMenuClosed();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
@@ -470,8 +496,8 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_2d_-toggle-button',
-      id: 'downshift-_r_2d_-label',
+      for: 'downshift-_r_2g_-toggle-button',
+      id: 'downshift-_r_2g_-label',
     });
   });
 
@@ -486,7 +512,7 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_2g_-label',
+      id: 'downshift-_r_2j_-label',
     });
   });
 });
