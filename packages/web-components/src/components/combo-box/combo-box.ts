@@ -21,6 +21,12 @@ import ifNonEmpty from '../../globals/directives/if-non-empty';
 
 export { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from '../dropdown/dropdown';
 
+type ShouldFilterItem = (input: {
+  item: CDSComboBoxItem;
+  itemToString: (item: CDSComboBoxItem) => string;
+  inputValue: string | null;
+}) => boolean;
+
 /**
  * Combo box.
  *
@@ -106,7 +112,7 @@ class CDSComboBox extends CDSDropdown {
       (this.constructor as typeof CDSComboBox).selectorItem
     );
 
-    const firstMatchIndex = this._filterItems(items, queryText);
+    const firstMatchIndex = this._filterItems(items, queryText, rawQueryText);
     if (firstMatchIndex !== -1) {
       const highlightedItem = items[firstMatchIndex];
       if (highlightedItem) {
@@ -122,7 +128,8 @@ class CDSComboBox extends CDSDropdown {
   // Applies filtering/highlighting to all slotted items.
   protected _filterItems(
     items: NodeListOf<Element>,
-    queryText: string
+    queryText: string,
+    rawQueryText: string
   ): number {
     let firstMatchIndex = -1;
     const hasQuery = Boolean(queryText);
@@ -137,11 +144,29 @@ class CDSComboBox extends CDSDropdown {
       const matches = (comboItem.textContent || '')
         .toLowerCase()
         .includes(queryText);
-      if (matches && firstMatchIndex === -1) {
+      const filterFunction =
+        typeof this.shouldFilterItem === 'function'
+          ? this.shouldFilterItem
+          : null;
+      const shouldApplyBuiltInFilter =
+        filterFunction === null && hasQuery && this.shouldFilterItem === true;
+      const itemToString = (value: CDSComboBoxItem) => value.textContent || '';
+      const filterInputValue = rawQueryText.length === 0 ? null : rawQueryText;
+      const passesFilter = filterFunction
+        ? filterFunction({
+            item: comboItem,
+            itemToString,
+            inputValue: filterInputValue,
+          })
+        : shouldApplyBuiltInFilter
+          ? matches
+          : true;
+      const highlightMatch = filterFunction !== null ? passesFilter : matches;
+      if (highlightMatch && firstMatchIndex === -1) {
         firstMatchIndex = index;
       }
-      if (this.shouldFilterItem) {
-        (comboItem as HTMLElement).style.display = matches ? '' : 'none';
+      if (filterFunction || shouldApplyBuiltInFilter) {
+        (comboItem as HTMLElement).style.display = passesFilter ? '' : 'none';
       } else {
         (comboItem as HTMLElement).style.display = '';
       }
@@ -350,10 +375,15 @@ class CDSComboBox extends CDSDropdown {
   itemMatches!: (item: CDSComboBoxItem, queryText: string) => boolean;
 
   /**
-   * Provide custom filtering behavior via `itemMatches`.
+   * Provide custom filtering behavior.
    */
-  @property({ type: Boolean, attribute: 'should-filter-item' })
-  shouldFilterItem = false;
+  @property({
+    attribute: 'should-filter-item',
+    converter: {
+      fromAttribute: (value) => value !== null,
+    },
+  })
+  shouldFilterItem: boolean | ShouldFilterItem = false;
 
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
