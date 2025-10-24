@@ -448,12 +448,15 @@ const Dropdown = React.forwardRef(
       highlightedIndex,
     } = useSelect(selectProps);
     const inline = type === 'inline';
-    const showWarning = !invalid && warn;
+
+    const isInteractive = !readOnly && !disabled;
+    const showInvalid = isInteractive && invalid;
+    const showWarning = isInteractive && warn;
 
     const [isFocused, setIsFocused] = useState(false);
 
     const className = cx(`${prefix}--dropdown`, {
-      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--invalid`]: showInvalid,
       [`${prefix}--dropdown--warning`]: showWarning,
       [`${prefix}--dropdown--open`]: isOpen,
       [`${prefix}--dropdown--focus`]: isFocused,
@@ -482,9 +485,12 @@ const Dropdown = React.forwardRef(
       {
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
-        [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+        [`${prefix}--dropdown__wrapper--inline--invalid`]:
+          inline && showInvalid,
+        [`${prefix}--list-box__wrapper--inline--invalid`]:
+          inline && showInvalid,
+        [`${prefix}--list-box__wrapper--fluid--invalid`]:
+          isFluid && showInvalid,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
@@ -618,15 +624,15 @@ const Dropdown = React.forwardRef(
           onBlur={handleFocus}
           size={size}
           className={className}
-          invalid={invalid}
+          invalid={showInvalid}
           invalidText={invalidText}
-          warn={warn}
+          warn={showWarning}
           warnText={warnText}
           light={light}
           isOpen={isOpen}
           ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
-          {invalid && (
+          {showInvalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
           {showWarning && (
@@ -641,7 +647,9 @@ const Dropdown = React.forwardRef(
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
             aria-describedby={
-              !inline && !invalid && !warn && helper ? helperId : undefined
+              !inline && !showInvalid && !showWarning && helper
+                ? helperId
+                : undefined
             }
             title={
               selectedItem && itemToString !== undefined
@@ -710,7 +718,7 @@ const Dropdown = React.forwardRef(
               })}
           </ListBox.Menu>
         </ListBox>
-        {!inline && !invalid && !warn && helper}
+        {!inline && !showInvalid && !showWarning && helper}
       </div>
     );
   }

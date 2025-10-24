@@ -407,6 +407,183 @@ describe('cds-dropdown', function () {
   });
 });
 
+describe('Validation states with disabled/readonly', () => {
+  it('should not show invalid state when disabled', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        disabled
+        invalid
+        invalid-text="Error message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--invalid')).to.be.false;
+
+    const invalidIcon = el.shadowRoot.querySelector(
+      '.cds--list-box__invalid-icon'
+    );
+    expect(invalidIcon).to.not.exist;
+
+    const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
+    expect(helperText.textContent.trim()).to.not.equal('Error message');
+  });
+
+  it('should not show invalid state when readonly', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        read-only
+        invalid
+        invalid-text="Error message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--invalid')).to.be.false;
+
+    const invalidIcon = el.shadowRoot.querySelector(
+      '.cds--list-box__invalid-icon'
+    );
+    expect(invalidIcon).to.not.exist;
+  });
+
+  it('should not show warning state when disabled', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        disabled
+        warn
+        warn-text="Warning message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--warn')).to.be.false;
+
+    const warningIcon = el.shadowRoot.querySelector(
+      '.cds--list-box__invalid-icon--warning'
+    );
+    expect(warningIcon).to.not.exist;
+  });
+
+  it('should not show warning state when readonly', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        read-only
+        warn
+        warn-text="Warning message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--warn')).to.be.false;
+
+    const warningIcon = el.shadowRoot.querySelector(
+      '.cds--list-box__invalid-icon--warning'
+    );
+    expect(warningIcon).to.not.exist;
+  });
+
+  it('should show invalid state when interactive', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        invalid
+        invalid-text="Error message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--invalid')).to.be.true;
+
+    const invalidIcon = el.shadowRoot.querySelector(
+      '.cds--list-box__invalid-icon'
+    );
+    expect(invalidIcon).to.exist;
+
+    const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
+    expect(helperText.textContent.trim()).to.equal('Error message');
+  });
+
+  it('should show warning state when interactive', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        warn
+        warn-text="Warning message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--warn')).to.be.true;
+
+    const warningIcon = el.shadowRoot.querySelector(
+      '.cds--list-box__invalid-icon--warning'
+    );
+    expect(warningIcon).to.exist;
+
+    const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
+    expect(helperText.textContent.trim()).to.equal('Warning message');
+  });
+
+  it('should show helper text instead of validation when disabled', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        disabled
+        invalid
+        invalid-text="Error"
+        helper-text="Helper text"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
+    expect(helperText.textContent.trim()).to.equal('Helper text');
+  });
+
+  it('should show helper text instead of validation when readonly', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        read-only
+        warn
+        warn-text="Warning"
+        helper-text="Helper text"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
+    expect(helperText.textContent.trim()).to.equal('Helper text');
+  });
+});
+
 describe('cds-dropdown-skeleton', function () {
   describe('Renders as expected', () => {
     it('should render with the expected classes', async () => {
