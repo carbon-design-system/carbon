@@ -274,12 +274,14 @@ class CDSPasswordInput extends CDSTextInput {
               ${labelWrapper} ${helper}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
-          <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
+          <div
+            class="${fieldWrapperClasses}"
+            ?data-invalid="${normalizedProps.invalid}">
             ${normalizedProps.icon}
             <input
               ?autofocus="${this.autofocus}"
               class="${inputClasses}"
-              ?data-invalid="${invalid}"
+              ?data-invalid="${normalizedProps.invalid}"
               ?disabled="${disabled}"
               aria-describedby="helper-text"
               id="input"
