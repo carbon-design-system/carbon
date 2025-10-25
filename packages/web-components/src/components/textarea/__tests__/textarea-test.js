@@ -74,6 +74,85 @@ describe('cds-textarea', () => {
     expect(el.hasAttribute('warn')).to.be.true;
   });
 
+  // Tests for disabled/readonly state normalization
+  describe('disabled and readonly state normalization', () => {
+    describe('invalid state', () => {
+      it('should not show invalid styles when disabled with invalid prop', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            disabled
+            invalid
+            invalid-text="This should not be displayed">
+          </cds-textarea>
+        `);
+
+        const textarea = el.shadowRoot.querySelector('textarea');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-area__wrapper');
+        const error = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(textarea).not.to.have.attribute('data-invalid');
+        expect(wrapper).not.to.have.class('cds--text-area__wrapper--invalid');
+        expect(error).not.to.exist;
+      });
+
+      it('should not show invalid styles when readonly with invalid prop', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            readonly
+            invalid
+            invalid-text="This should not be displayed">
+          </cds-textarea>
+        `);
+
+        const textarea = el.shadowRoot.querySelector('textarea');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-area__wrapper');
+        const error = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(textarea).not.to.have.attribute('data-invalid');
+        expect(wrapper).not.to.have.class('cds--text-area__wrapper--invalid');
+        expect(error).not.to.exist;
+      });
+    });
+
+    describe('warning state', () => {
+      it('should not show warning styles when disabled with warn prop', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            disabled
+            warn
+            warn-text="This warning should not be displayed">
+          </cds-textarea>
+        `);
+
+        const textarea = el.shadowRoot.querySelector('textarea');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-area__wrapper');
+        const warning = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(textarea).not.to.have.class('cds--text-area--warning');
+        expect(wrapper).not.to.have.class('cds--text-area__wrapper--warning');
+        expect(warning).not.to.exist;
+      });
+
+      it('should not show warning styles when readonly with warn prop', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            readonly
+            warn
+            warn-text="This warning should not be displayed">
+          </cds-textarea>
+        `);
+
+        const textarea = el.shadowRoot.querySelector('textarea');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-area__wrapper');
+        const warning = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(textarea).not.to.have.class('cds--text-area--warning');
+        expect(wrapper).not.to.have.class('cds--text-area__wrapper--warning');
+        expect(warning).not.to.exist;
+      });
+    });
+  });
+
   it('should apply hide-label and visually hide the label', async () => {
     const el = await fixture(html`
       <cds-textarea label="Hidden label" hide-label></cds-textarea>
