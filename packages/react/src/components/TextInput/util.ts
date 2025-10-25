@@ -27,6 +27,8 @@ interface TextInputPropsConfig {
   warnId?: string;
   hasHelper?: boolean;
   helperId?: string;
+  disabled?: boolean;
+  readOnly?: boolean;
 }
 
 export const getTextInputProps = ({
@@ -37,9 +39,16 @@ export const getTextInputProps = ({
   warnId,
   hasHelper,
   helperId,
-}: TextInputPropsConfig) => ({
-  ...sharedTextInputProps,
-  ...(invalid ? invalidProps(invalidId) : {}),
-  ...(warn ? warnProps(warnId) : {}),
-  ...(hasHelper ? helperProps(helperId) : {}),
-});
+  disabled = false,
+  readOnly = false,
+}: TextInputPropsConfig) => {
+  // Only set aria-invalid and validation props when input is interactive (not disabled or readonly)
+  const isInteractive = !disabled && !readOnly;
+
+  return {
+    ...sharedTextInputProps,
+    ...(invalid && isInteractive ? invalidProps(invalidId) : {}),
+    ...(warn && isInteractive ? warnProps(warnId) : {}),
+    ...(hasHelper ? helperProps(helperId) : {}),
+  };
+};
