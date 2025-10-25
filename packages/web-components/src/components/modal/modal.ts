@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -17,42 +17,6 @@ import { selectorTabbable } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { MODAL_SIZE };
-
-const PRECEDING =
-  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-
-const FOLLOWING =
-  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
-
-/**
- * Tries to focus on the given elements and bails out if one of them is successful.
- *
- * @param elems The elements.
- * @param reverse `true` to go through the list in reverse order.
- * @returns `true` if one of the attempts is successful, `false` otherwise.
- */
-function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
-  if (!reverse) {
-    for (let i = 0; i < elems.length; ++i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  } else {
-    for (let i = elems.length - 1; i >= 0; --i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
 
 /**
  * Modal.
@@ -70,18 +34,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * The element that had focus before this modal gets open.
    */
   private _launcher: Element | null = null;
-
-  /**
-   * Node to track focus going outside of modal content.
-   */
-  @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
-
-  /**
-   * Node to track focus going outside of modal content.
-   */
-  @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
 
   /**
    * Handles `click` event on this element.
@@ -102,92 +54,28 @@ class CDSModal extends HostListenerMixin(LitElement) {
   };
 
   /**
-   * Handles `blur` event on this element.
+   * Handle the keydown event.
+   * Trap the focus inside the side-panel by tracking keydown.key == `Tab`
    *
-   * @param event The event.
-   * @param event.target The event target.
-   * @param event.relatedTarget The event relatedTarget.
+   * @param {KeyboardEvent} event The keyboard event object.
    */
-  @HostListener('shadowRoot:focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
-    const {
-      open,
-      _startSentinelNode: startSentinelNode,
-      _endSentinelNode: endSentinelNode,
-    } = this;
-    const oldContains = target !== this && this.contains(target as Node);
-    const currentContains =
-      relatedTarget !== this &&
-      (this.contains(relatedTarget as Node) ||
-        (this.shadowRoot?.contains(relatedTarget as Node) &&
-          relatedTarget !== (endSentinelNode as Node)));
+  @HostListener('keydown')
+  protected _handleHostKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Tab') {
+      const { first: _firstElement, last: _lastElement } = this.getFocusable();
 
-    // Performs focus wrapping if _all_ of the following is met:
-    // * This modal is open
-    // * The viewport still has focus
-    // * Modal body used to have focus but no longer has focus
-    const { selectorTabbable: selectorTabbableForModal } = this
-      .constructor as typeof CDSModal;
-    if (open && relatedTarget && oldContains && !currentContains) {
-      const comparisonResult = (target as Node).compareDocumentPosition(
-        relatedTarget as Node
-      );
-
-      if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
-        await (this.constructor as typeof CDSModal)._delay();
-        if (
-          !tryFocusElems(
-            this.querySelectorAll(selectorTabbableForModal),
-            true
-          ) &&
-          relatedTarget !== this
-        ) {
-          this.focus();
-        }
-      } else if (
-        relatedTarget === endSentinelNode ||
-        comparisonResult & FOLLOWING
+      if (
+        event.shiftKey &&
+        (this.shadowRoot?.activeElement === _firstElement ||
+          document.activeElement === _firstElement)
       ) {
-        await (this.constructor as typeof CDSModal)._delay();
-        if (!tryFocusElems(this.querySelectorAll(selectorTabbableForModal))) {
-          this.focus();
-        }
-      }
-    }
+        event.preventDefault();
 
-    // Adjust scroll if needed so that element with focus is not obscured by gradient
-    const modal = document.querySelector(`${prefix}-modal`);
-    const modalContent = document.querySelector(`${prefix}-modal-body`);
-    if (
-      !modal ||
-      !modal.hasAttribute('has-scrolling-content') ||
-      !modalContent ||
-      !relatedTarget ||
-      !modalContent.contains(relatedTarget as Node)
-    ) {
-      return;
-    }
+        _lastElement?.focus();
+      } else if (!event.shiftKey && document.activeElement === _lastElement) {
+        event.preventDefault();
 
-    const lastContent = modalContent.children[modalContent.children.length - 1];
-    const gradientSpacing =
-      modalContent.scrollHeight -
-      (lastContent as HTMLElement).offsetTop -
-      (lastContent as HTMLElement).clientHeight;
-
-    for (const elem of modalContent.children) {
-      if (elem.contains(relatedTarget as Node)) {
-        const spaceBelow =
-          modalContent.clientHeight -
-          (elem as HTMLElement).offsetTop +
-          modalContent.scrollTop -
-          (elem as HTMLElement).clientHeight;
-        if (spaceBelow < gradientSpacing) {
-          modalContent.scrollTop =
-            modalContent.scrollTop + (gradientSpacing - spaceBelow);
-        }
-        break;
+        _firstElement?.focus();
       }
     }
   };
@@ -200,6 +88,38 @@ class CDSModal extends HostListenerMixin(LitElement) {
       this._handleUserInitiatedClose(target);
     }
   };
+
+  /**
+   * Get focusable elements.
+   *
+   * Querying all tabbable items.
+   *
+   * @returns {{first: HTMLElement, last: HTMLElement, all: HTMLElement[]}} Returns an object with various elements.
+   */
+  private getFocusable(): {
+    first: HTMLElement | undefined;
+    last: HTMLElement | undefined;
+    all: HTMLElement[];
+  } {
+    const elements: HTMLElement[] = [];
+
+    // Add tabbable elements inside light DOM
+    const tabbableItems = this.querySelectorAll<HTMLElement>(selectorTabbable);
+    if (tabbableItems?.length) {
+      elements.push(...tabbableItems);
+    }
+
+    // Flatten NodeList arrays and filter for focusable items
+    const all = elements?.filter(
+      (el): el is HTMLElement => typeof el?.focus === 'function'
+    );
+
+    return {
+      first: all[0],
+      last: all[all.length - 1],
+      all,
+    };
+  }
 
   /**
    * Handles `click` event on the modal container.
@@ -345,11 +265,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
       ...containerClass,
     });
     return html`
-      <a
-        id="start-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
       <div
         aria-label=${ariaLabel}
         part="dialog"
@@ -362,11 +277,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
           ? html` <div class="cds--modal-content--overflow-indicator"></div> `
           : ``}
       </div>
-      <a
-        id="end-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
     `;
   }
 
@@ -383,15 +293,10 @@ class CDSModal extends HostListenerMixin(LitElement) {
           // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
           // where its first update/render cycle that makes it focusable happens after `<cds-modal>`'s first update/render cycle
           (primaryFocusNode as HTMLElement).focus();
-        } else if (
-          !tryFocusElems(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSModal).selectorTabbable
-            ),
-            true
-          )
-        ) {
-          this.focus();
+        } else {
+          const { first } = this.getFocusable();
+
+          first?.focus();
         }
       } else if (
         this._launcher &&

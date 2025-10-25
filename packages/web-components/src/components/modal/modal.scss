@@ -38,6 +38,12 @@
 
 :host(#{$prefix}-modal) {
   @extend .#{$prefix}--modal;
+
+  opacity: 0;
+  transition:
+    opacity $duration-moderate-02 motion(exit, expressive),
+    visibility 0ms linear $duration-moderate-02;
+  visibility: hidden;
 }
 
 :host(#{$prefix}-modal[full-width]) {

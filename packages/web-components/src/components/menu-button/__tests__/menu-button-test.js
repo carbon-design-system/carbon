@@ -178,6 +178,64 @@ describe('cds-menu-button', function () {
       expect(el.menuAlignment).to.equal('top-end');
       expect(el.getAttribute('menu-alignment')).to.equal('top-end');
     });
+
+    it('should set menu-background-token', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-background-token="background" label="Background">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      expect(el.menuBackgroundToken).to.equal('background');
+      expect(el.getAttribute('menu-background-token')).to.equal('background');
+    });
+
+    it('should set menu-border', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-border label="Border">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      expect(el.menuBorder).to.be.true;
+      expect(el.hasAttribute('menu-border')).to.be.true;
+    });
+
+    it('should pass menu-background-token to the menu', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-background-token="background" label="Background">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      const button = el.shadowRoot.querySelector('cds-button');
+      button.click();
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu').shadowRoot.querySelector('ul');
+      expect(
+        menu.classList.contains('cds--menu--background-token__background')
+      );
+    });
+
+    it('should pass menu-border to the menu', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-border label="Border">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      const button = el.shadowRoot.querySelector('cds-button');
+      button.click();
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      expect(menu.hasAttribute('border')).to.be.true;
+    });
   });
 
   describe('Opening and closing menu', () => {

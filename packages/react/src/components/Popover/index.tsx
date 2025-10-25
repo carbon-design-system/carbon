@@ -84,6 +84,11 @@ export interface PopoverBaseProps {
   alignmentAxisOffset?: number;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
    * Will auto-align the popover on first render if it is not visible. This prop
    * is currently experimental and is subject to future changes. Requires
    * React v17+
@@ -100,6 +105,11 @@ export interface PopoverBaseProps {
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
 
   /**
    * Provide elements to be rendered inside of the component
@@ -159,9 +169,11 @@ export const Popover: PopoverComponent & {
     as: BaseComponent = 'span' as E,
     autoAlign = false,
     autoAlignBoundary,
+    backgroundToken = 'layer',
     caret = isTabTip ? false : true,
     className: customClassName,
     children,
+    border = false,
     dropShadow = true,
     highContrast = false,
     onRequestClose,
@@ -411,12 +423,15 @@ export const Popover: PopoverComponent & {
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
         enableFloatingStyles,
       [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
+      [`${prefix}--popover--background-token__background`]:
+        backgroundToken === 'background' && !highContrast,
     },
     customClassName
   );
@@ -580,6 +595,11 @@ Popover.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
    * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
    */
   autoAlignBoundary: PropTypes.oneOfType([
@@ -598,6 +618,11 @@ Popover.propTypes = {
    * Specify whether a caret should be rendered
    */
   caret: PropTypes.bool,
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border: PropTypes.bool,
 
   /**
    * Provide elements to be rendered inside of the component

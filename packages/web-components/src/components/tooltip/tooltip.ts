@@ -239,6 +239,10 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
       }
     });
 
+    if (this.hasAttribute('highcontrast')) {
+      toolTipContent?.setAttribute('highcontrast', '');
+    }
+
     this.shadowRoot
       ?.querySelector(`.${prefix}--popover-container`)
       ?.classList.add(`${prefix}--tooltip`);

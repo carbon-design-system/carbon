@@ -16,6 +16,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { useDocumentLang } from '../../internal/useDocumentLang';
 
 import mdx from './DatePicker.mdx';
 
@@ -118,8 +119,13 @@ const sharedArgTypes = {
 };
 
 export const Default = ({ readOnly, ...args }) => {
+  const locale = useDocumentLang();
   return (
-    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
+    <DatePicker
+      datePickerType="single"
+      {...args}
+      readOnly={readOnly}
+      locale={locale}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
