@@ -124,3 +124,18 @@ export enum POPOVER_ALIGNMENT {
    */
   RIGHT_END = 'right-end',
 }
+
+/**
+ * The background token options for popover.
+ */
+export enum POPOVER_BACKGROUND_TOKEN {
+  /**
+   * Use the layer token for the background.
+   */
+  LAYER = 'layer',
+
+  /**
+   * Use the background token for the background.
+   */
+  BACKGROUND = 'background',
+}

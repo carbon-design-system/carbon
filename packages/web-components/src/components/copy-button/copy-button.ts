@@ -82,6 +82,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         feedback=${feedback}
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}
+        exportparts="button"
         align=${align}>
         ${iconLoader(Copy16, {
           slot: 'icon',

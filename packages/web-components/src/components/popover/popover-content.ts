@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
+import { POPOVER_BACKGROUND_TOKEN } from './defs';
 
 /**
  * Popover.
@@ -43,6 +44,18 @@ class CDSPopoverContent extends LitElement {
   dropShadow = true;
 
   /**
+   * Specify whether a border should be rendered on the popover
+   */
+  @property({ type: Boolean, reflect: true })
+  border = false;
+
+  /**
+   * Render the component using the high-contrast variant
+   */
+  @property({ type: Boolean, reflect: true })
+  highContrast = false;
+
+  /**
    * Specify whether the component is currently open or closed
    */
   @property({ type: Boolean, reflect: true })
@@ -53,6 +66,12 @@ class CDSPopoverContent extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   tabTip = false;
+
+  /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ reflect: true, type: String })
+  backgroundToken = POPOVER_BACKGROUND_TOKEN.LAYER;
 
   /**
    * The shadow slot this popover content should be in.

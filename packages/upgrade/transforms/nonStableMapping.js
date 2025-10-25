@@ -79,4 +79,5 @@ exports.productsPreviewMap = {
   ToolbarButton: 'previewCandidate__ToolbarButton',
   ToolbarGroup: 'previewCandidate__ToolbarGroup',
   TruncatedList: 'previewCandidate__TruncatedList',
+  TruncatedText: 'preview__TruncatedText',
 };

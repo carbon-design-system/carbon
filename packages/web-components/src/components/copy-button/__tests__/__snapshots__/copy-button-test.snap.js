@@ -5,6 +5,7 @@ snapshots['CopyButton should set tabIndex if one is passed via props'] =
   `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
+  exportparts="button"
   feedback="Copied!"
   feedback-timeout="2000"
   kind="primary"
@@ -24,6 +25,7 @@ snapshots['CopyButton should add extra classes via passed button-class-name'] =
   `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn extra-class"
+  exportparts="button"
   feedback="Copied!"
   feedback-timeout="2000"
   kind="primary"
@@ -44,6 +46,7 @@ snapshots['Button props should disable button if disabled prop is passed'] =
   align="bottom"
   button-class-name="cds--copy-btn"
   disabled=""
+  exportparts="button"
   feedback="Copied!"
   feedback-timeout="2000"
   kind="primary"
@@ -62,6 +65,7 @@ snapshots['Button props should disable button if disabled prop is passed'] =
 snapshots['Button props should call the click handler'] = `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
+  exportparts="button"
   feedback="Copied!"
   feedback-timeout="2000"
   kind="primary"
@@ -82,6 +86,7 @@ snapshots[
 ] = `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
+  exportparts="button"
   feedback="Copied!"
   feedback-timeout="500"
   kind="primary"
@@ -101,6 +106,7 @@ snapshots['Feedback should be able to specify the feedback message'] =
   `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
+  exportparts="button"
   feedback="Custom feedback message"
   feedback-timeout="200"
   kind="primary"
@@ -121,6 +127,7 @@ snapshots[
 ] = `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
+  exportparts="button"
   feedback="Copied!"
   feedback-timeout="100"
   kind="primary"

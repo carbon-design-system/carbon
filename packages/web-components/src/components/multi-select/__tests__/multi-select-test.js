@@ -180,6 +180,37 @@ describe('cds-multi-select', function () {
     });
   });
 
+  it('should render with initial selected items if selected is added in any item(s)', async () => {
+    const el = await fixture(html`
+      <cds-multi-select label="Test label">
+        <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        <cds-multi-select-item selected value="item-1"
+          >Item 1</cds-multi-select-item
+        >
+        <cds-multi-select-item selected="" value="item-2"
+          >Item 2</cds-multi-select-item
+        >
+        <cds-multi-select-item value="item-3">Item 3</cds-multi-select-item>
+      </cds-multi-select>
+    `);
+
+    const selectedItems = el.querySelectorAll(
+      'cds-multi-select-item[selected]'
+    );
+    expect(selectedItems.length).to.equal(2);
+
+    const values = Array.from(selectedItems).map((i) =>
+      i.getAttribute('value')
+    );
+    expect(values.includes('item-1')).to.be.true;
+    expect(values.includes('item-2')).to.be.true;
+
+    // Optionally check UI state
+    selectedItems.forEach((item) => {
+      expect(item.hasAttribute('selected')).to.be.true;
+    });
+  });
+
   describe('Component API', () => {
     it('should trigger selection events when items are selected', async () => {
       const el = await fixture(multiSelect);

@@ -86,13 +86,33 @@ const args = {
   clearSelectionText: 'To clear selection, press Delete or Backspace.',
   disabled: false,
   direction: DROPDOWN_DIRECTION.BOTTOM,
-  helperText: 'Optional helper text',
+  helperText: 'This is helper text',
   hideLabel: false,
   locale: 'en',
   invalid: false,
   invalidText: 'whoopsie!',
   titleText: 'This is a MultiSelect Title',
   label: 'This is a label',
+  size: DROPDOWN_SIZE.MEDIUM,
+  selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
+  readOnly: false,
+  type: null,
+  warn: false,
+  warnText: 'whoopsie!',
+};
+
+const filterableArgs = {
+  clearSelectionDescription: 'Total items selected: ',
+  clearSelectionText: 'To clear selection, press Delete or Backspace.',
+  disabled: false,
+  direction: DROPDOWN_DIRECTION.BOTTOM,
+  helperText: 'This is helper text',
+  hideLabel: false,
+  locale: 'en',
+  invalid: false,
+  invalidText: 'whoopsie!',
+  titleText: 'FilterableMultiSelect title',
+  label: '',
   size: DROPDOWN_SIZE.MEDIUM,
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
   readOnly: false,
@@ -248,8 +268,10 @@ export const Default = {
 };
 
 export const Controlled = {
+  args,
+  argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
-  render: () => {
+  render: (args) => {
     const toggleSelectAll = (selectAll) => {
       const items = document.querySelectorAll('cds-multi-select-item');
       const multiSelect = document.querySelector('cds-multi-select');
@@ -272,11 +294,44 @@ export const Controlled = {
 
       (multiSelect as HTMLSelectElement).value = selectedValues;
     };
-
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <cds-multi-select
-        title-text="Multiselect title"
-        label="Multiselect label">
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        label=${ifDefined(label)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}">
         <cds-multi-select-item value="example"
           >An example option that is really long to show what should be done to
           handle long text</cds-multi-select-item
@@ -318,13 +373,49 @@ export const Controlled = {
 };
 
 export const Filterable = {
+  args: filterableArgs,
+  argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
-  render: () => {
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <cds-multi-select
-        filterable="true"
-        title-text="Multiselect title"
-        helper-text="This is helper text">
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        label=${ifDefined(label)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}"
+        filterable="true">
         <cds-multi-select-item value="example"
           >An example option that is really long to show what should be done to
           handle long text</cds-multi-select-item
@@ -344,13 +435,49 @@ export const Filterable = {
 };
 
 export const FilterableWithSelectAll = {
+  args: filterableArgs,
+  argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
-  render: () => {
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <cds-multi-select
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        label=${ifDefined(label)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}"
         filterable="true"
-        title-text="FilterableMultiselect title"
-        helper-text="This is helper text"
         select-all>
         <cds-multi-select-item is-select-all>All roles</cds-multi-select-item>
 
@@ -366,13 +493,49 @@ export const FilterableWithSelectAll = {
 };
 
 export const FilterableWithAILabel = {
-  render: () => {
+  args: filterableArgs,
+  argTypes,
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <div style="width: 400px">
         <cds-multi-select
-          filterable="true"
-          title-text="FilterableMultiselect title"
-          helper-text="This is helper text">
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          type=${ifDefined(type)}
+          value="${ifDefined(value)}"
+          filterable="true">
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
@@ -396,14 +559,50 @@ export const FilterableWithAILabel = {
 };
 
 export const FilterableWithLayer = {
-  render: () => {
+  args: filterableArgs,
+  argTypes,
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <sb-template-layers>
         <div style="width:300px">
           <cds-multi-select
-            filterable="true"
-            title-text="Multiselect title"
-            helper-text="This is helper text">
+            direction=${ifDefined(direction)}
+            ?disabled=${disabled}
+            ?invalid=${invalid}
+            invalid-text=${ifDefined(invalidText)}
+            clear-selection-label=${ifDefined(clearSelectionLabel)}
+            helper-text=${ifDefined(helperText)}
+            ?hide-label=${hideLabel}
+            locale=${ifDefined(locale)}
+            ?read-only=${readOnly}
+            title-text=${ifDefined(titleText)}
+            selection-feedback=${ifDefined(selectionFeedback)}
+            size=${ifDefined(size)}
+            ?warn=${warn}
+            warn-text=${ifDefined(warnText)}
+            label=${ifDefined(label)}
+            type=${ifDefined(type)}
+            value="${ifDefined(value)}"
+            filterable="true">
             <cds-multi-select-item value="example"
               >An example option that is really long to show what should be done
               to handle long text</cds-multi-select-item
@@ -427,9 +626,11 @@ export const FilterableWithLayer = {
 };
 
 export const SelectAll = {
+  args,
+  argTypes,
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
 
-  render: () => {
+  render: (args) => {
     const updateLabel = (e) => {
       const multiSelect = e.target;
       if (multiSelect.value && multiSelect.value.length > 0) {
@@ -439,13 +640,44 @@ export const SelectAll = {
       }
       multiSelect.requestUpdate();
     };
-
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <cds-multi-select
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}"
         id="multiselect-selectall"
-        title-text="Multiselect title"
         label="Choose Options"
-        helper-text="This is helper text"
         select-all
         @cds-multi-select-selected=${updateLabel}>
         <cds-multi-select-item is-select-all>All roles</cds-multi-select-item>
@@ -461,9 +693,11 @@ export const SelectAll = {
 };
 
 export const SelectAllWithDynamicItems = {
+  args,
+  argTypes,
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
 
-  render: () => {
+  render: (args) => {
     const updateLabel = (e) => {
       const multiSelect = e.target;
       if (multiSelect.value && multiSelect.value.length > 0) {
@@ -473,12 +707,45 @@ export const SelectAllWithDynamicItems = {
       }
       multiSelect.requestUpdate();
     };
+
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <cds-multi-select
-        title-text="Multiselect title"
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}"
         label="Choose Options"
         select-all
-        helper-text="This is helper text"
         @cds-multi-select-selected=${updateLabel}>
         <cds-multi-select-item is-select-all> All roles </cds-multi-select-item>
         <cds-multi-select-item value="editor">Editor</cds-multi-select-item>
@@ -511,13 +778,48 @@ export const SelectAllWithDynamicItems = {
 };
 
 export const WithAILabel = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <div style="width: 400px">
         <cds-multi-select
-          title-text="Multiselect title"
-          label="Multiselect label"
-          helper-text="This is helper text">
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          type=${ifDefined(type)}
+          value="${ifDefined(value)}">
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
@@ -539,14 +841,50 @@ export const WithAILabel = {
     `;
   },
 };
+
 export const WithInitialSelectedItems = {
+  args,
+  argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
-  render: () => {
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <cds-multi-select
-        title-text="Multiselect title"
-        label="Multiselect label"
-        helper-text="This is helper text">
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        label=${ifDefined(label)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}">
         <cds-multi-select-item value="example"
           >An example option that is really long to show what should be done to
           handle long text</cds-multi-select-item
@@ -568,14 +906,49 @@ export const WithInitialSelectedItems = {
 };
 
 export const WithLayer = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <sb-template-layers>
         <div style="width:300px">
           <cds-multi-select
-            title-text="Multiselect title"
-            label="Multiselect label"
-            helper-text="This is helper text">
+            direction=${ifDefined(direction)}
+            ?disabled=${disabled}
+            ?invalid=${invalid}
+            invalid-text=${ifDefined(invalidText)}
+            clear-selection-label=${ifDefined(clearSelectionLabel)}
+            helper-text=${ifDefined(helperText)}
+            ?hide-label=${hideLabel}
+            locale=${ifDefined(locale)}
+            ?read-only=${readOnly}
+            title-text=${ifDefined(titleText)}
+            selection-feedback=${ifDefined(selectionFeedback)}
+            size=${ifDefined(size)}
+            ?warn=${warn}
+            warn-text=${ifDefined(warnText)}
+            label=${ifDefined(label)}
+            type=${ifDefined(type)}
+            value="${ifDefined(value)}">
             <cds-multi-select-item value="example"
               >An example option that is really long to show what should be done
               to handle long text</cds-multi-select-item
@@ -599,12 +972,48 @@ export const WithLayer = {
 };
 
 export const WithToggletipLabel = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
     return html`
       <div style="width: 400px">
         <cds-multi-select
-          label="Multiselect Label"
-          helper-text="This is helper text">
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          type=${ifDefined(type)}
+          value="${ifDefined(value)}">
           <span
             slot="title-text"
             style="display: inline-flex; align-items: center; gap: 0.25rem;">
