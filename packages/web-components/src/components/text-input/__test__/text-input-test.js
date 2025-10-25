@@ -110,6 +110,101 @@ describe('cds-text-input', () => {
     expect(warning.textContent).to.include('This is a warning');
   });
 
+  // Tests for disabled/readonly state normalization
+  describe('disabled and readonly state normalization', () => {
+    describe('invalid state', () => {
+      it('should not show invalid styles when disabled with invalid prop', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            invalid
+            invalid-text="This should not be displayed"
+            label-text="Disabled invalid input">
+            <cds-text-input-label slot="label-text"
+              >Disabled invalid input</cds-text-input-label
+            >
+          </cds-text-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
+        const error = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(input).not.to.have.attribute('data-invalid');
+        expect(wrapper).not.to.have.class('cds--text-input-wrapper--invalid');
+        expect(error).not.to.exist;
+      });
+
+      it('should not show invalid styles when readonly with invalid prop', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            invalid
+            invalid-text="This should not be displayed"
+            label-text="Readonly invalid input">
+            <cds-text-input-label slot="label-text"
+              >Readonly invalid input</cds-text-input-label
+            >
+          </cds-text-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
+        const error = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(input).not.to.have.attribute('data-invalid');
+        expect(wrapper).not.to.have.class('cds--text-input-wrapper--invalid');
+        expect(error).not.to.exist;
+      });
+    });
+
+    describe('warning state', () => {
+      it('should not show warning styles when disabled with warn prop', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            warn
+            warn-text="This warning should not be displayed"
+            label-text="Disabled warn input">
+            <cds-text-input-label slot="label-text"
+              >Disabled warn input</cds-text-input-label
+            >
+          </cds-text-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
+        const warning = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(input).not.to.have.class('cds--text-input--warning');
+        expect(wrapper).not.to.have.class('cds--text-input-wrapper--warning');
+        expect(warning).not.to.exist;
+      });
+
+      it('should not show warning styles when readonly with warn prop', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            warn
+            warn-text="This warning should not be displayed"
+            label-text="Readonly warn input">
+            <cds-text-input-label slot="label-text"
+              >Readonly warn input</cds-text-input-label
+            >
+          </cds-text-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
+        const warning = el.shadowRoot.querySelector('.cds--form-requirement');
+
+        expect(input).not.to.have.class('cds--text-input--warning');
+        expect(wrapper).not.to.have.class('cds--text-input-wrapper--warning');
+        expect(warning).not.to.exist;
+      });
+    });
+  });
+
   it('should reflect size attribute', async () => {
     const el = await fixture(html`
       <cds-text-input size="sm" label-text="Small input">
