@@ -117,6 +117,137 @@ describe('FluidTextArea', () => {
       );
     });
 
+    // Tests for disabled/readonly state normalization
+    describe('disabled and readonly state normalization', () => {
+      describe('invalid state', () => {
+        it('should not set aria-invalid when disabled with invalid prop', () => {
+          render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              disabled
+              invalid
+              invalidText="Invalid"
+              data-testid="test-disabled-invalid"
+            />
+          );
+
+          expect(screen.getByTestId('test-disabled-invalid')).not.toHaveAttribute('aria-invalid');
+          expect(screen.getByTestId('test-disabled-invalid')).not.toHaveClass(`${prefix}--text-area--invalid`);
+        });
+
+        it('should not set aria-invalid when readOnly with invalid prop', () => {
+          render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              readOnly
+              invalid
+              invalidText="Invalid"
+              data-testid="test-readonly-invalid"
+            />
+          );
+
+          expect(screen.getByTestId('test-readonly-invalid')).not.toHaveAttribute('aria-invalid');
+          expect(screen.getByTestId('test-readonly-invalid')).not.toHaveClass(`${prefix}--text-area--invalid`);
+        });
+
+        it('should not display invalid message if disabled', () => {
+          const { container } = render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              disabled
+              invalid
+              invalidText="This should not be displayed"
+            />
+          );
+
+          expect(screen.queryByText('This should not be displayed')).not.toBeInTheDocument();
+          // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+          const invalidIcon = container.querySelector(`svg.${prefix}--text-area__invalid-icon`);
+          expect(invalidIcon).not.toBeInTheDocument();
+        });
+
+        it('should not display invalid message if readOnly', () => {
+          const { container } = render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              readOnly
+              invalid
+              invalidText="This should not be displayed"
+            />
+          );
+
+          expect(screen.queryByText('This should not be displayed')).not.toBeInTheDocument();
+          // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+          const invalidIcon = container.querySelector(`svg.${prefix}--text-area__invalid-icon`);
+          expect(invalidIcon).not.toBeInTheDocument();
+        });
+      });
+
+      describe('warning state', () => {
+        it('should not display warning styles when disabled with warn prop', () => {
+          render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              disabled
+              warn
+              warnText="Warning"
+              data-testid="test-disabled-warn"
+            />
+          );
+
+          expect(screen.getByTestId('test-disabled-warn')).not.toHaveClass(`${prefix}--text-area--warning`);
+        });
+
+        it('should not display warning styles when readOnly with warn prop', () => {
+          render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              readOnly
+              warn
+              warnText="Warning"
+              data-testid="test-readonly-warn"
+            />
+          );
+
+          expect(screen.getByTestId('test-readonly-warn')).not.toHaveClass(`${prefix}--text-area--warning`);
+        });
+
+        it('should not display warning message if disabled', () => {
+          render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              disabled
+              warn
+              warnText="This warning should not be displayed"
+            />
+          );
+
+          expect(screen.queryByText('This warning should not be displayed')).not.toBeInTheDocument();
+        });
+
+        it('should not display warning message if readOnly', () => {
+          render(
+            <FluidTextArea
+              id="input-1"
+              labelText="FluidTextArea"
+              readOnly
+              warn
+              warnText="This warning should not be displayed"
+            />
+          );
+
+          expect(screen.queryByText('This warning should not be displayed')).not.toBeInTheDocument();
+        });
+      });
+    });
+
     it('should respect labelText prop', () => {
       render(<FluidTextArea id="input-1" labelText="FluidTextArea label" />);
 
