@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@carbon/colors": "^11.42.0",
-    "@carbon/feature-flags": "^0.32.0",
+    "@carbon/feature-flags": "workspace:>=0.32.0",
     "@carbon/grid": "^11.45.0",
     "@carbon/layout": "^11.43.0",
     "@carbon/motion": "^11.37.0",
