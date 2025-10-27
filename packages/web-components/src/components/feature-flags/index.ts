@@ -53,6 +53,7 @@ class FeatureFlagsElement extends LitElement {
     'enable-v12-overflowmenu': 'CDS-OVERFLOW-MENU',
     'enable-treeview-controllable': 'CDS-TREEVIEW',
     'enable-experimental-focus-wrap-without-sentinels': 'CDS-FOCUS-WRAP',
+    'enable-focus-wrap-without-sentinels': 'CDS-FOCUS-WRAP',
     'enable-dialog-element': 'CDS-DIALOG',
     'enable-v12-dynamic-floating-styles': 'CDS-FLOATING',
     'enable-v12-toggle-reduced-label-spacing': 'CDS-TOGGLE',

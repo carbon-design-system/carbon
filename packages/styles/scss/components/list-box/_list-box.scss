@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -338,7 +338,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // populated input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: convert.to-rem(80px);
+    padding-inline-end: convert.to-rem(70px);
   }
 
   // invalid && populated input field
@@ -906,16 +906,20 @@ $list-box-menu-width: convert.to-rem(300px);
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator:has(
+      .#{$prefix}--list-box__invalid-icon
+    )
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--list-box__invalid-icon)
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--list-box__invalid-icon)
+    .#{$prefix}--slug::before,
   .#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box__inner-wrapper--decorator
     > *::after,
-  .#{$prefix}--list-box__wrapper--decorator
-    .#{$prefix}--list-box__inner-wrapper--decorator
-    > *::before,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
-  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
-  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after,
-  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
     position: absolute;
     background-color: $border-subtle-01;
     block-size: convert.to-rem(16px);
@@ -934,6 +938,16 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
     > *::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
@@ -942,6 +956,11 @@ $list-box-menu-width: convert.to-rem(300px);
     inset-inline-end: convert.to-rem(-9px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::before,
   .#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box__inner-wrapper--decorator
     .#{$prefix}--ai-label--revert::after,
@@ -991,7 +1010,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
-    padding-inline-end: $spacing-12;
+    padding-inline-end: convert.to-rem(105px);
   }
 
   .#{$prefix}--list-box__wrapper--decorator
@@ -1033,7 +1052,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
-    padding-inline-end: convert.to-rem(141px);
+    padding-inline-end: convert.to-rem(137px);
   }
 
   .#{$prefix}--list-box__wrapper--decorator
@@ -1056,7 +1075,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning {
-    inset-inline-end: convert.to-rem(83px);
+    inset-inline-end: convert.to-rem(81px);
   }
 
   .#{$prefix}--list-box__wrapper--decorator
@@ -1128,7 +1147,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     .#{$prefix}--list-box__invalid-icon {
-    inset-inline-end: convert.to-rem(116px);
+    inset-inline-end: convert.to-rem(114px);
   }
 
   // Windows HCM fix
