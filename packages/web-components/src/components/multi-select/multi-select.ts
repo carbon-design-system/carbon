@@ -561,7 +561,15 @@ class CDSMultiSelect extends CDSDropdown {
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
 
-    const isInteractive = !disabled && !readOnly;
+    const isInteractive = !readOnly && !disabled;
+
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
+    };
 
     return classMap({
       [`${prefix}--multi-select`]: true,
@@ -570,8 +578,8 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--multi-select--invalid`]: invalid && isInteractive,
-      [`${prefix}--multi-select--warn`]: warn && isInteractive,
+      [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
+      [`${prefix}--multi-select--warn`]: normalizedProps.warn,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--readonly`]: readOnly,
       [`${prefix}--multi-select--selected`]: selectedItemsCount > 0,

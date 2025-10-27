@@ -62,6 +62,7 @@ import {
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 const {
   ItemClick,
@@ -312,9 +313,9 @@ export const MultiSelect = React.forwardRef(
       clearAnnouncement = 'all items have been cleared',
       clearSelectionDescription = 'Total items selected: ',
       light,
-      invalid,
+      invalid = false,
       invalidText,
-      warn,
+      warn = false,
       warnText,
       useTitleInItem,
       translateWithId,
@@ -534,11 +535,18 @@ export const MultiSelect = React.forwardRef(
       setPrevOpenProp(open);
     }
 
-    const isInteractive = !disabled && !readOnly;
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      disabled,
+      readOnly,
+      invalid,
+      warn,
+    });
+
     const inline = type === 'inline';
-    const showWarning = isInteractive && !invalid && warn;
+    const showWarning = normalizedProps.warn;
     const showHelperText =
-      ((!invalid && !warn) || !isInteractive) && helperText;
+      !normalizedProps.warn && !normalizedProps.invalid && helperText;
 
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
@@ -548,11 +556,11 @@ export const MultiSelect = React.forwardRef(
         [`${prefix}--multi-select__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
         [`${prefix}--multi-select__wrapper--inline--invalid`]:
-          inline && invalid && isInteractive,
+          inline && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]:
-          inline && invalid && isInteractive,
+          inline && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--fluid--invalid`]:
-          isFluid && invalid && isInteractive,
+          isFluid && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
@@ -570,9 +578,9 @@ export const MultiSelect = React.forwardRef(
     });
 
     const className = cx(`${prefix}--multi-select`, {
-      [`${prefix}--multi-select--invalid`]: invalid && isInteractive,
+      [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
       [`${prefix}--multi-select--invalid--focused`]:
-        invalid && inputFocused && isInteractive,
+        inputFocused && normalizedProps.invalid,
       [`${prefix}--multi-select--warning`]: showWarning,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--selected`]:
@@ -780,13 +788,13 @@ export const MultiSelect = React.forwardRef(
           className={className}
           disabled={disabled}
           light={light}
-          invalid={invalid && isInteractive}
+          invalid={normalizedProps.invalid}
           invalidText={invalidText}
-          warn={warn && isInteractive}
+          warn={normalizedProps.warn}
           warnText={warnText}
           isOpen={isOpen}
           id={id}>
-          {invalid && isInteractive && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
           {showWarning && (
