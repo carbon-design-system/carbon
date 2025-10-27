@@ -192,7 +192,7 @@ export const WithAILabel = {
   `,
 };
 
-export const ShouldFilterItemTest = {
+export const DynamicFiltering = {
   render: () => html`
     <cds-combo-box
       title-text="Custom Filter"
