@@ -10,7 +10,6 @@ import '../AILabel/ailabel-story.scss';
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../Tabs/Tabs';
 
 import Link from '../Link';
 import Button from '../Button';
@@ -359,114 +358,6 @@ const aiLabel = (
     </AILabelContent>
   </AILabel>
 );
-
-export const ExpandableWithTileInTabTest = () => {
-  return (
-    <div>
-      <Tabs defaultSelectedIndex={3}>
-        <TabList>
-          <Tab>Tab 0</Tab>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <ExpandableTile>
-              <TileAboveTheFoldContent>
-                <div>First tile above content</div>
-                <br />
-                <div>First tile above content</div>
-                <br />
-                <div>First tile above content</div>
-                <br />
-              </TileAboveTheFoldContent>
-              <TileBelowTheFoldContent>
-                <div>Below</div>
-                <br />
-                <div>below</div>
-                <br />
-              </TileBelowTheFoldContent>
-            </ExpandableTile>
-          </TabPanel>
-          <TabPanel>
-            <ExpandableTile>
-              <TileAboveTheFoldContent>
-                <div>Second tile above content</div>
-                <br />
-                <div>Second tile above content</div>
-                <br />
-                <div>Second tile above content</div>
-                <br />
-              </TileAboveTheFoldContent>
-              <TileBelowTheFoldContent>
-                <div>Below</div>
-                <br />
-                <div>below</div>
-                <br />
-              </TileBelowTheFoldContent>
-            </ExpandableTile>
-          </TabPanel>
-          <TabPanel>
-            <ExpandableTile>
-              <TileAboveTheFoldContent>
-                <div>Third tile above content</div>
-                <br />
-                <div>Third tile above content</div>
-                <br />
-                <div>Third tile above content</div>
-                <br />
-              </TileAboveTheFoldContent>
-              <TileBelowTheFoldContent>
-                <div>Below</div>
-                <br />
-                <div>below</div>
-                <br />
-              </TileBelowTheFoldContent>
-            </ExpandableTile>
-          </TabPanel>
-          <TabPanel>
-            <ExpandableTile>
-              <TileAboveTheFoldContent>
-                <div>Fourth tile above content</div>
-                <br />
-                <div>Fourth tile above content</div>
-                <br />
-                <div>Fourth tile above content</div>
-                <br />
-              </TileAboveTheFoldContent>
-              <TileBelowTheFoldContent>
-                <div>Below</div>
-                <br />
-                <div>below</div>
-                <br />
-              </TileBelowTheFoldContent>
-            </ExpandableTile>
-          </TabPanel>
-          <TabPanel>
-            <ExpandableTile>
-              <TileAboveTheFoldContent>
-                <div>Fifth tile above content</div>
-                <br />
-                <div>Fifth tile above content</div>
-                <br />
-                <div>Fifth tile above content</div>
-                <br />
-              </TileAboveTheFoldContent>
-              <TileBelowTheFoldContent>
-                <div>Below</div>
-                <br />
-                <div>below</div>
-                <br />
-              </TileBelowTheFoldContent>
-            </ExpandableTile>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </div>
-  );
-};
 
 export const withAILabel = {
   argTypes: {
