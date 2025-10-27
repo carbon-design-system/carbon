@@ -1084,6 +1084,8 @@ describe('Slider', () => {
       expect(warnMessage).not.toBeInTheDocument();
       expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
       expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
     });
 
     it('should not display warn if readOnly', () => {
@@ -1102,6 +1104,8 @@ describe('Slider', () => {
       expect(warnMessage).not.toBeInTheDocument();
       expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
       expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
     });
 
     it('should not display invalid message if disabled', () => {
@@ -1120,6 +1124,8 @@ describe('Slider', () => {
       expect(invalidMessage).not.toBeInTheDocument();
       expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
       expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
     });
 
     it('should not display invalid message if readOnly', () => {
@@ -1139,6 +1145,8 @@ describe('Slider', () => {
       expect(invalidMessage).not.toBeInTheDocument();
       expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
       expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
     });
 
     describe('Error handling, expected behavior from event handlers', () => {
