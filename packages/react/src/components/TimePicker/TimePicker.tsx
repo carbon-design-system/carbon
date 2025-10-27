@@ -208,15 +208,16 @@ const TimePicker = frFn((props, ref) => {
     [inputClassName],
     {
       [`${prefix}--text-input--light`]: light,
-      [`${prefix}--time-picker__input-field-error`]: invalid || warning,
+      [`${prefix}--time-picker__input-field-error`]:
+        (invalid || warning) && !disabled && !readOnly,
     }
   );
 
   const timePickerClasses = cx({
     [`${prefix}--time-picker`]: true,
     [`${prefix}--time-picker--light`]: light,
-    [`${prefix}--time-picker--invalid`]: invalid,
-    [`${prefix}--time-picker--warning`]: warning,
+    [`${prefix}--time-picker--invalid`]: invalid && !disabled && !readOnly,
+    [`${prefix}--time-picker--warning`]: warning && !disabled && !readOnly,
     [`${prefix}--time-picker--readonly`]: readOnly,
     [`${prefix}--time-picker--${size}`]: size,
     ...(pickerClassName && { [pickerClassName]: true }),
@@ -280,7 +281,7 @@ const TimePicker = frFn((props, ref) => {
         <div className={`${prefix}--time-picker__input`}>
           <input
             className={timePickerInputClasses}
-            data-invalid={invalid ? invalid : undefined}
+            data-invalid={invalid && !disabled && !readOnly ? true : undefined}
             disabled={disabled}
             id={id}
             maxLength={maxLength}
@@ -295,7 +296,7 @@ const TimePicker = frFn((props, ref) => {
             {...rest}
             {...readOnlyProps}
           />
-          {(invalid || warning) && (
+          {(invalid || warning) && !disabled && !readOnly && (
             <div className={`${prefix}--time-picker__error__icon`}>
               {invalid ? (
                 <WarningFilled
@@ -313,7 +314,7 @@ const TimePicker = frFn((props, ref) => {
         </div>
         {getInternalPickerSelects()}
       </div>
-      {(invalid || warning) && (
+      {(invalid || warning) && !disabled && !readOnly && (
         <div className={`${prefix}--form-requirement`}>
           {invalid ? invalidText : warningText}
         </div>

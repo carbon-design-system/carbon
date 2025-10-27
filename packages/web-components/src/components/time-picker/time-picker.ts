@@ -215,8 +215,8 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
 
     const timePickerClasses = classMap({
       [`${prefix}--time-picker`]: true,
-      [`${prefix}--time-picker--invalid`]: invalid,
-      [`${prefix}--time-picker--warning`]: warning,
+      [`${prefix}--time-picker--invalid`]: invalid && !disabled && !readOnly,
+      [`${prefix}--time-picker--warning`]: warning && !disabled && !readOnly,
       [`${prefix}--time-picker--readonly`]: readOnly,
       [`${prefix}--time-picker--${size}`]: size,
       ...(className && { [className]: true }),
@@ -225,7 +225,8 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
     const inputClasses = classMap({
       [`${prefix}--time-picker__input-field`]: true,
       [`${prefix}--text-input`]: true,
-      [`${prefix}--time-picker__input-field-error`]: invalid || warning,
+      [`${prefix}--time-picker__input-field-error`]:
+        (invalid || warning) && !disabled && !readOnly,
       ...(className && { [className]: true }),
     });
     const label = labelText
@@ -239,7 +240,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
           <div class="${prefix}--time-picker__input">
             <input
               class="${inputClasses}"
-              ?data-invalid="${invalid}"
+              ?data-invalid="${invalid && !disabled && !readOnly}"
               ?disabled="${disabled}"
               maxlength="${ifNonEmpty(maxLength)}"
               name="${ifNonEmpty(this.name)}"
@@ -249,7 +250,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               type="${ifNonEmpty(type)}"
               .value="${value}"
               @input="${handleInput}" />
-            ${invalid || warning
+            ${(invalid || warning) && !disabled && !readOnly
               ? html`
                   <div class="${prefix}--time-picker__error__icon">
                     ${invalid
@@ -265,7 +266,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
           </div>
           <slot @slotchange="${handleSlotChange}"></slot>
         </div>
-        ${invalid || warning
+        ${(invalid || warning) && !disabled && !readOnly
           ? html`
               <div class="${prefix}--form-requirement">
                 ${invalid ? invalidText : warningText}
