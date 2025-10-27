@@ -952,7 +952,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
     display: block;
-    inset-block-start: 0;
+    inset-block-start: convert.to-rem(1px);
     inset-inline-end: convert.to-rem(-9px);
   }
 
