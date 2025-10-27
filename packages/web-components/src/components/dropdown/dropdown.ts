@@ -684,9 +684,24 @@ class CDSDropdown extends ValidityMixin(
       changedProperties.has('readOnly') ||
       changedProperties.has('warn')
     ) {
-      const isInteractive = !this.readOnly && !this.disabled;
+      const normalizedProps =
+        (this.constructor as typeof CDSDropdown).normalizedProps || new Set();
 
-      const shouldHaveInvalid = this.invalid && isInteractive;
+      const disabled = normalizedProps.has('disabled')
+        ? this.hasAttribute('disabled')
+        : this.disabled;
+      const readOnly = normalizedProps.has('readOnly')
+        ? this.hasAttribute('read-only')
+        : this.readOnly;
+      const invalid = normalizedProps.has('invalid')
+        ? this.hasAttribute('invalid')
+        : this.invalid;
+      const warn = normalizedProps.has('warn')
+        ? this.hasAttribute('warn')
+        : this.warn;
+
+      const isInteractive = !readOnly && !disabled;
+      const shouldHaveInvalid = invalid && isInteractive;
       const hasInvalidAttr = this.hasAttribute('invalid');
 
       if (shouldHaveInvalid && !hasInvalidAttr) {
@@ -695,7 +710,7 @@ class CDSDropdown extends ValidityMixin(
         this.removeAttribute('invalid');
       }
 
-      const shouldHaveWarn = this.warn && isInteractive;
+      const shouldHaveWarn = warn && isInteractive;
       const hasWarnAttr = this.hasAttribute('warn');
 
       if (shouldHaveWarn && !hasWarnAttr) {
@@ -876,6 +891,13 @@ class CDSDropdown extends ValidityMixin(
       </div>
     `;
   }
+
+  /**
+   * Set of property names that should be normalized (read from attributes instead of properties)
+   */
+  static normalizedProps?: Set<string>;
+
+  /**
 
   /**
    * Symbols of keys that triggers opening/closing menu and selecting/deselecting menu item.

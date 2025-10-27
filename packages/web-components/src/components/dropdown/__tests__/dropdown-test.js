@@ -421,6 +421,8 @@ describe('Validation states with disabled/readonly', () => {
 
     await el.updateComplete;
 
+    expect(el.hasAttribute('invalid')).to.be.false;
+
     const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
     expect(dropdown.classList.contains('cds--dropdown--invalid')).to.be.false;
 
@@ -446,6 +448,8 @@ describe('Validation states with disabled/readonly', () => {
 
     await el.updateComplete;
 
+    expect(el.hasAttribute('invalid')).to.be.false;
+
     const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
     expect(dropdown.classList.contains('cds--dropdown--invalid')).to.be.false;
 
@@ -467,6 +471,8 @@ describe('Validation states with disabled/readonly', () => {
     `);
 
     await el.updateComplete;
+
+    expect(el.hasAttribute('warn')).to.be.false;
 
     const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
     expect(dropdown.classList.contains('cds--dropdown--warn')).to.be.false;
@@ -490,6 +496,8 @@ describe('Validation states with disabled/readonly', () => {
 
     await el.updateComplete;
 
+    expect(el.hasAttribute('warn')).to.be.false;
+
     const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
     expect(dropdown.classList.contains('cds--dropdown--warn')).to.be.false;
 
@@ -510,6 +518,8 @@ describe('Validation states with disabled/readonly', () => {
     `);
 
     await el.updateComplete;
+
+    expect(el.hasAttribute('invalid')).to.be.true;
 
     const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
     expect(dropdown.classList.contains('cds--dropdown--invalid')).to.be.true;
@@ -534,6 +544,8 @@ describe('Validation states with disabled/readonly', () => {
     `);
 
     await el.updateComplete;
+
+    expect(el.hasAttribute('warn')).to.be.true;
 
     const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
     expect(dropdown.classList.contains('cds--dropdown--warn')).to.be.true;
@@ -581,6 +593,52 @@ describe('Validation states with disabled/readonly', () => {
 
     const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
     expect(helperText.textContent.trim()).to.equal('Helper text');
+  });
+
+  it('should remove invalid attribute when disabled is set dynamically', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        invalid
+        invalid-text="Error message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    expect(el.hasAttribute('invalid')).to.be.true;
+
+    el.disabled = true;
+    await el.updateComplete;
+
+    expect(el.hasAttribute('invalid')).to.be.false;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--invalid')).to.be.false;
+  });
+
+  it('should remove warn attribute when readonly is set dynamically', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        warn
+        warn-text="Warning message"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    expect(el.hasAttribute('warn')).to.be.true;
+
+    el.readOnly = true;
+    await el.updateComplete;
+
+    expect(el.hasAttribute('warn')).to.be.false;
+
+    const dropdown = el.shadowRoot.querySelector('.cds--dropdown');
+    expect(dropdown.classList.contains('cds--dropdown--warn')).to.be.false;
   });
 });
 

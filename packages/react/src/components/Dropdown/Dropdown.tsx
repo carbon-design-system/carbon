@@ -48,7 +48,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import type { TranslateWithId } from '../../types/common';
-import { useId } from '../../internal/useId';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import {
   useFloating,
   flip,
@@ -430,7 +430,6 @@ const Dropdown = React.forwardRef(
         downshiftProps,
       ]
     );
-    const dropdownInstanceId = useId();
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -449,19 +448,25 @@ const Dropdown = React.forwardRef(
     } = useSelect(selectProps);
     const inline = type === 'inline';
 
-    const isInteractive = !readOnly && !disabled;
-    const showInvalid = isInteractive && invalid;
-    const showWarning = isInteractive && warn;
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      readOnly,
+      disabled: disabled ?? false,
+      invalid: invalid ?? false,
+      invalidText,
+      warn: warn ?? false,
+      warnText,
+    });
 
     const [isFocused, setIsFocused] = useState(false);
 
     const className = cx(`${prefix}--dropdown`, {
-      [`${prefix}--dropdown--invalid`]: showInvalid,
-      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
+      [`${prefix}--dropdown--warning`]: normalizedProps.warn,
       [`${prefix}--dropdown--open`]: isOpen,
       [`${prefix}--dropdown--focus`]: isFocused,
       [`${prefix}--dropdown--inline`]: inline,
-      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--disabled`]: normalizedProps.disabled,
       [`${prefix}--dropdown--light`]: light,
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
@@ -470,12 +475,12 @@ const Dropdown = React.forwardRef(
     });
 
     const titleClasses = cx(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const helperClasses = cx(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
     const wrapperClasses = cx(
@@ -486,19 +491,15 @@ const Dropdown = React.forwardRef(
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
         [`${prefix}--dropdown__wrapper--inline--invalid`]:
-          inline && showInvalid,
+          inline && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]:
-          inline && showInvalid,
+          inline && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--fluid--invalid`]:
-          isFluid && showInvalid,
+          isFluid && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
-
-    const helperId = !helperText
-      ? undefined
-      : `dropdown-helper-text-${dropdownInstanceId}`;
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
@@ -508,7 +509,7 @@ const Dropdown = React.forwardRef(
 
     const helper =
       helperText && !isFluid ? (
-        <div id={helperId} className={helperClasses}>
+        <div id={normalizedProps.helperId} className={helperClasses}>
           {helperText}
         </div>
       ) : null;
@@ -624,18 +625,16 @@ const Dropdown = React.forwardRef(
           onBlur={handleFocus}
           size={size}
           className={className}
-          invalid={showInvalid}
-          invalidText={invalidText}
-          warn={showWarning}
-          warnText={warnText}
+          invalid={normalizedProps.invalid}
+          warn={normalizedProps.warn}
           light={light}
           isOpen={isOpen}
           ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
-          {showInvalid && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
-          {showWarning && (
+          {normalizedProps.warn && (
             <WarningAltFilled
               className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
             />
@@ -644,12 +643,19 @@ const Dropdown = React.forwardRef(
             type="button"
             // aria-expanded is already being passed through {...toggleButtonProps}
             className={`${prefix}--list-box__field`}
-            disabled={disabled}
+            disabled={normalizedProps.disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
             aria-describedby={
-              !inline && !showInvalid && !showWarning && helper
-                ? helperId
-                : undefined
+              !inline &&
+              !normalizedProps.invalid &&
+              !normalizedProps.warn &&
+              helper
+                ? normalizedProps.helperId
+                : normalizedProps.invalid
+                  ? normalizedProps.invalidId
+                  : normalizedProps.warn
+                    ? normalizedProps.warnId
+                    : undefined
             }
             title={
               selectedItem && itemToString !== undefined
@@ -718,7 +724,8 @@ const Dropdown = React.forwardRef(
               })}
           </ListBox.Menu>
         </ListBox>
-        {!inline && !showInvalid && !showWarning && helper}
+        {!inline && !isFluid && !normalizedProps.validation && helper}
+        {!inline && !isFluid && normalizedProps.validation}
       </div>
     );
   }
