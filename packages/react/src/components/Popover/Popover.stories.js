@@ -17,6 +17,7 @@ import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 import OverflowMenu from '../OverflowMenu/OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import { Tooltip } from '../Tooltip';
 
 const prefix = 'cds';
 
@@ -394,6 +395,25 @@ export const TabTipExperimentalAutoAlign = () => {
           </PopoverContent>
         </Popover>
       </div>
+    </div>
+  );
+};
+
+export const Test = () => {
+  return (
+    <div style={{ padding: '50px 200px' }}>
+      <Popover open border backgroundToken="background" dropShadow={false}>
+        <PopoverContent>
+          <h2 className="popover-title">Available storage</h2>
+          <p className="popover-details">
+            This server has 150 GB of block storage remaining.
+          </p>
+
+          <Tooltip label="Close" open>
+            <button type="button">Tooltip test</button>
+          </Tooltip>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
