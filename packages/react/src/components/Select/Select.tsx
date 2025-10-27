@@ -216,7 +216,7 @@ const Select = React.forwardRef(
       [`${prefix}--select--disabled`]: normalizedProps.disabled,
       [`${prefix}--select--readonly`]: readOnly,
       [`${prefix}--select--warning`]: normalizedProps.warn,
-      [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--select--fluid--invalid`]: isFluid && normalizedProps.invalid,
       [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--select--slug`]: slug,
       [`${prefix}--select--decorator`]: decorator,
