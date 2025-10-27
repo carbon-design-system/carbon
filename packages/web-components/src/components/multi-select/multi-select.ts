@@ -787,9 +787,9 @@ class CDSMultiSelect extends CDSDropdown {
       this.querySelectorAll(
         (this.constructor as typeof CDSMultiSelect).selectorItem
       ),
-      (item) => (item as CDSMultiSelectItem).selected
+      (item) => (item as CDSMultiSelectItem).hasAttribute('selected')
     )
-      .map((item) => (item as CDSMultiSelectItem).value)
+      .map((item) => (item as CDSMultiSelectItem).getAttribute('value'))
       .join(',');
   }
 
