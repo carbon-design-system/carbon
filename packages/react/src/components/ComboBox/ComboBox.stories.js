@@ -358,11 +358,13 @@ AutocompleteWithTypeahead.argTypes = {
 
 export const Test = () => {
   return (
-    <ComboBox
-      id="compForIssue"
-      decorator={<Locked />}
-      items={['zero', 'one', 'two', 'three']}
-      onChange={() => {}}
-    />
+    <div style={{ width: 300 }}>
+      <ComboBox
+        id="compForIssue"
+        decorator={<Locked />}
+        items={['zero', 'one', 'two', 'three']}
+        onChange={() => {}}
+      />
+    </div>
   );
 };

@@ -1137,8 +1137,8 @@ $list-box-menu-width: convert.to-rem(300px);
     > * {
     inset-inline-end: calc($spacing-10 + 18px);
   }
-  Fin
-    .#{$prefix}--list-box__wrapper--decorator
+
+  .#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box--invalid
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     .#{$prefix}--list-box__invalid-icon,
