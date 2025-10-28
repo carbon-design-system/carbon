@@ -67,7 +67,7 @@ test.describe('Modal', () => {
       }) => {
         await snapshotStory(page, {
           component: 'Modal',
-          id: 'components-modal--enable-dialog-element',
+          id: 'components-modal-feature-flags--enable-dialog-element',
           theme,
         });
       });
@@ -77,7 +77,7 @@ test.describe('Modal', () => {
       }) => {
         await snapshotStory(page, {
           component: 'Modal',
-          id: 'components-modal--enable-preview-focus-wrap-without-sentinels',
+          id: 'components-modal-feature-flags--enable-preview-focus-wrap-without-sentinels',
           theme,
         });
       });
