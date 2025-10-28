@@ -72,7 +72,7 @@ test.describe('Modal', () => {
         });
       });
 
-      test('enable preview focus wrap without sentiels feature flag modal @vrt', async ({
+      test('enable preview focus wrap without sentinels feature flag modal @vrt', async ({
         page,
       }) => {
         await snapshotStory(page, {
