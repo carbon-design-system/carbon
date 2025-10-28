@@ -253,6 +253,7 @@ collect:
         - oncds-combo-box-beingtoggled
         - oncds-combo-box-selected
         - oncds-combo-box-toggled
+        - should-filter-item
         # cds-copy-button
         - autoAlign
         # cds-date-picker
@@ -320,6 +321,9 @@ collect:
         - inactive
         - overlay
         - small
+        # cds-menu-button
+        - menu-background-token
+        - menu-border
         # cds-menu-item
         - aria-checked
         - boundaries
@@ -757,6 +761,9 @@ collect:
         - primary
         - secondary
         - tertiary
+        # cds-menu-button - menu-background-token
+        - background
+        - layer
         # cds-multi-select - selection-feedback
         - fixed
         - top
