@@ -397,22 +397,3 @@ export const TabTipExperimentalAutoAlign = () => {
     </div>
   );
 };
-
-export const Test = () => {
-  return (
-    <div style={{ padding: '50px 200px' }}>
-      <Popover open border backgroundToken="background" dropShadow={false}>
-        <PopoverContent>
-          <h2 className="popover-title">Available storage</h2>
-          <p className="popover-details">
-            This server has 150 GB of block storage remaining.
-          </p>
-
-          <Tooltip label="Close" open>
-            <button type="button">Tooltip test</button>
-          </Tooltip>
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
-};
