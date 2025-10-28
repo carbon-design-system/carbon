@@ -1548,11 +1548,22 @@
      ]
     },
     {
+      "login": "mateus037",
+      "name": "Mateus Rodrigues",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34143412?v=4",
+      "profile": "https://github.com/mateus037",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "BiaBiruka",
       "name": "Beatriz Parolin",
       "avatar_url": "https://avatars.githubusercontent.com/u/128196689?v=4",
       "profile": "https://github.com/BiaBiruka",
-      "contributions": ["code"]
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
