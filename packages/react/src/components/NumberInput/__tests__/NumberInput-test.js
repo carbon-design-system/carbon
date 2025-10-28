@@ -670,8 +670,13 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
-          expect(screen.getByRole('textbox')).not.toHaveClass(`${prefix}--text-input--invalid`);
+          expect(screen.getByRole('textbox')).toHaveAttribute(
+            'aria-invalid',
+            'false'
+          );
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--invalid`
+          );
         });
 
         it('should not set aria-invalid when readOnly with invalid prop', () => {
@@ -687,8 +692,13 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
-          expect(screen.getByRole('textbox')).not.toHaveClass(`${prefix}--text-input--invalid`);
+          expect(screen.getByRole('textbox')).toHaveAttribute(
+            'aria-invalid',
+            'false'
+          );
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--invalid`
+          );
         });
 
         it('should not display invalid message if disabled', () => {
@@ -704,7 +714,9 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.queryByText('This should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
         });
 
         it('should not display invalid message if readOnly', () => {
@@ -720,7 +732,9 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.queryByText('This should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
         });
       });
 
@@ -737,7 +751,9 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.getByRole('textbox')).not.toHaveClass(`${prefix}--text-input--warning`);
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--warning`
+          );
         });
 
         it('should not display warning styles when readOnly with warn prop', () => {
@@ -752,7 +768,9 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.getByRole('textbox')).not.toHaveClass(`${prefix}--text-input--warning`);
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--warning`
+          );
         });
 
         it('should not display warning message if disabled', () => {
@@ -767,7 +785,9 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.queryByText('This warning should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
         });
 
         it('should not display warning message if readOnly', () => {
@@ -782,7 +802,9 @@ describe('NumberInput', () => {
             />
           );
 
-          expect(screen.queryByText('This warning should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
         });
       });
     });

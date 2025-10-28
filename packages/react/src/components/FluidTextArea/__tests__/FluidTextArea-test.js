@@ -132,8 +132,13 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.getByTestId('test-disabled-invalid')).not.toHaveAttribute('aria-invalid');
-          expect(screen.getByTestId('test-disabled-invalid')).not.toHaveClass(`${prefix}--text-area--invalid`);
+          expect(screen.getByTestId('test-disabled-invalid')).toHaveAttribute(
+            'aria-invalid',
+            'false'
+          );
+          expect(screen.getByTestId('test-disabled-invalid')).not.toHaveClass(
+            `${prefix}--text-area--invalid`
+          );
         });
 
         it('should not set aria-invalid when readOnly with invalid prop', () => {
@@ -148,8 +153,13 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.getByTestId('test-readonly-invalid')).not.toHaveAttribute('aria-invalid');
-          expect(screen.getByTestId('test-readonly-invalid')).not.toHaveClass(`${prefix}--text-area--invalid`);
+          expect(screen.getByTestId('test-readonly-invalid')).toHaveAttribute(
+            'aria-invalid',
+            'false'
+          );
+          expect(screen.getByTestId('test-readonly-invalid')).not.toHaveClass(
+            `${prefix}--text-area--invalid`
+          );
         });
 
         it('should not display invalid message if disabled', () => {
@@ -163,9 +173,13 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.queryByText('This should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
           // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-          const invalidIcon = container.querySelector(`svg.${prefix}--text-area__invalid-icon`);
+          const invalidIcon = container.querySelector(
+            `svg.${prefix}--text-area__invalid-icon`
+          );
           expect(invalidIcon).not.toBeInTheDocument();
         });
 
@@ -180,9 +194,13 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.queryByText('This should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
           // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-          const invalidIcon = container.querySelector(`svg.${prefix}--text-area__invalid-icon`);
+          const invalidIcon = container.querySelector(
+            `svg.${prefix}--text-area__invalid-icon`
+          );
           expect(invalidIcon).not.toBeInTheDocument();
         });
       });
@@ -200,7 +218,9 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.getByTestId('test-disabled-warn')).not.toHaveClass(`${prefix}--text-area--warning`);
+          expect(screen.getByTestId('test-disabled-warn')).not.toHaveClass(
+            `${prefix}--text-area--warning`
+          );
         });
 
         it('should not display warning styles when readOnly with warn prop', () => {
@@ -215,7 +235,9 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.getByTestId('test-readonly-warn')).not.toHaveClass(`${prefix}--text-area--warning`);
+          expect(screen.getByTestId('test-readonly-warn')).not.toHaveClass(
+            `${prefix}--text-area--warning`
+          );
         });
 
         it('should not display warning message if disabled', () => {
@@ -229,7 +251,9 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.queryByText('This warning should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
         });
 
         it('should not display warning message if readOnly', () => {
@@ -243,7 +267,9 @@ describe('FluidTextArea', () => {
             />
           );
 
-          expect(screen.queryByText('This warning should not be displayed')).not.toBeInTheDocument();
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
         });
       });
     });
