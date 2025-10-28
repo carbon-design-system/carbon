@@ -1151,7 +1151,12 @@ const ComboBox = forwardRef(
             normalizedDecorator
           ) : decorator ? (
             <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-              {normalizedDecorator}
+              {/* wrap only when NOT an AILabel */}
+              {candidateIsAILabel ? (
+                normalizedDecorator
+              ) : (
+                <span>{normalizedDecorator}</span>
+              )}
             </div>
           ) : (
             ''
