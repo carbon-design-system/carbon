@@ -5,7 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 import Modal, { type ModalProps } from './Modal';
-import { ModalPresence, type ModalPresenceProps } from './ModalPresence';
+import {
+  ModalPresence,
+  withModalPresence,
+  type ModalPresenceProps,
+} from './ModalPresence';
 
 export default Modal;
-export { Modal, ModalPresence, type ModalProps, type ModalPresenceProps };
+export {
+  Modal,
+  ModalPresence,
+  withModalPresence,
+  type ModalProps,
+  type ModalPresenceProps,
+};
