@@ -12,8 +12,6 @@
 :host(#{$prefix}-table) {
   @extend .#{$prefix}--data-table;
 
-  display: table;
-
   ::slotted(#{$prefix}-table-head) {
     @include type-style('heading-01');
 
@@ -36,6 +34,11 @@
   inline-size: auto;
 }
 
+.#{$prefix}--data-table-content {
+  display: table;
+  inline-size: 100%;
+}
+
 :host(#{$prefix}-table[sticky-header]) {
   ::slotted(#{$prefix}-table-head),
   ::slotted(#{$prefix}-table-body) {
@@ -50,14 +53,12 @@
   }
 }
 
-:host(#{$prefix}-table[with-header]) {
-  .#{$prefix}--data-table-header-container {
-    display: table-caption;
-  }
+.#{$prefix}--data-table_inner-container {
+  display: block;
+  inline-size: 100%;
+  overflow-x: auto;
 }
-.#{$prefix}--data-table-header-container {
-  display: table-caption;
-}
+
 :host(#{$prefix}-table-head[sticky-header]) {
   position: sticky;
   z-index: 1;
