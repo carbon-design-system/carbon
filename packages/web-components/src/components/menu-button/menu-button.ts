@@ -20,6 +20,7 @@ import { POPOVER_ALIGNMENT } from '../popover/defs';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
 import { MENU_BUTTON_KIND, MENU_BUTTON_SIZE } from './defs';
+import { MENU_BACKGROUND_TOKEN } from '../menu/defs';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 
 export { MENU_BUTTON_KIND, MENU_BUTTON_SIZE };
@@ -63,6 +64,18 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
    */
   @property({ reflect: true, type: String, attribute: 'menu-alignment' })
   menuAlignment = POPOVER_ALIGNMENT.BOTTOM;
+
+  /**
+   * Specify whether the menu should have a border.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'menu-border' })
+  menuBorder = false;
+
+  /**
+   * Specify the background token to use for the menu. Default is 'layer'.
+   */
+  @property({ type: String, reflect: true, attribute: 'menu-background-token' })
+  menuBackgroundToken = MENU_BACKGROUND_TOKEN.LAYER;
 
   /**
    * Specify the size of the button and menu.
@@ -125,6 +138,14 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
 
     if (changedProperties.has('size')) {
       menu.setAttribute('size', this.size);
+    }
+
+    if (changedProperties.has('menuBorder')) {
+      menu.toggleAttribute('border', this.menuBorder);
+    }
+
+    if (changedProperties.has('menuBackgroundToken')) {
+      menu.backgroundToken = this.menuBackgroundToken;
     }
   }
 
