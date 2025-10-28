@@ -622,14 +622,13 @@ class CDSDropdown extends ValidityMixin(
         (elem as CDSDropdownItem).size = this.size;
       });
     }
-    if (changedProperties.has('disabled')) {
+    if (changedProperties.has('disabled') && this.disabled) {
       const { disabled } = this;
       // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         if (disabled) {
           (elem as CDSDropdownItem).disabled = disabled;
         } else {
-          (elem as CDSDropdownItem).disabled = false;
           (elem as CDSDropdownItem).removeAttribute('disabled');
         }
       });
@@ -657,7 +656,8 @@ class CDSDropdown extends ValidityMixin(
     return true;
   }
 
-  updated(changedProperties) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  updated(_changedProperties) {
     // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     this._hasAILabel
       ? this.setAttribute('ai-label', '')
@@ -677,48 +677,18 @@ class CDSDropdown extends ValidityMixin(
           this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
         );
     }
+  }
 
-    if (
-      changedProperties.has('invalid') ||
-      changedProperties.has('disabled') ||
-      changedProperties.has('readOnly') ||
-      changedProperties.has('warn')
-    ) {
-      const normalizedProps =
-        (this.constructor as typeof CDSDropdown).normalizedProps || new Set();
-
-      const disabled = normalizedProps.has('disabled')
-        ? this.hasAttribute('disabled')
-        : this.disabled;
-      const readOnly = normalizedProps.has('readOnly')
-        ? this.hasAttribute('read-only')
-        : this.readOnly;
-      const invalid = normalizedProps.has('invalid')
-        ? this.hasAttribute('invalid')
-        : this.invalid;
-      const warn = normalizedProps.has('warn')
-        ? this.hasAttribute('warn')
-        : this.warn;
-
-      const isInteractive = !readOnly && !disabled;
-      const shouldHaveInvalid = invalid && isInteractive;
-      const hasInvalidAttr = this.hasAttribute('invalid');
-
-      if (shouldHaveInvalid && !hasInvalidAttr) {
-        this.setAttribute('invalid', '');
-      } else if (!shouldHaveInvalid && hasInvalidAttr) {
-        this.removeAttribute('invalid');
-      }
-
-      const shouldHaveWarn = warn && isInteractive;
-      const hasWarnAttr = this.hasAttribute('warn');
-
-      if (shouldHaveWarn && !hasWarnAttr) {
-        this.setAttribute('warn', '');
-      } else if (!shouldHaveWarn && hasWarnAttr) {
-        this.removeAttribute('warn');
-      }
-    }
+  /**
+   * Normalizes validation props based on disabled and readOnly states
+   */
+  protected get _normalizedProps() {
+    const { disabled, readOnly, invalid, warn } = this;
+    return {
+      disabled: !readOnly && disabled,
+      invalid: !readOnly && !disabled && invalid,
+      warn: !readOnly && !invalid && !disabled && warn,
+    };
   }
 
   /**
@@ -726,12 +696,9 @@ class CDSDropdown extends ValidityMixin(
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   protected get _classes(): any {
-    const { disabled, readOnly, size, type, invalid, open, warn } = this;
+    const { size, type, open } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
-
-    const isInteractive = !readOnly && !disabled;
-    const showInvalid = isInteractive && invalid;
-    const showWarning = isInteractive && warn;
+    const normalizedProps = this._normalizedProps;
 
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
@@ -740,12 +707,12 @@ class CDSDropdown extends ValidityMixin(
     return classMap({
       [`${prefix}--dropdown`]: true,
       [`${prefix}--list-box`]: true,
-      [`${prefix}--list-box--disabled`]: disabled,
+      [`${prefix}--list-box--disabled`]: normalizedProps.disabled,
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--dropdown--invalid`]: showInvalid,
-      [`${prefix}--dropdown--warn`]: showWarning,
+      [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
+      [`${prefix}--dropdown--warn`]: normalizedProps.warn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
@@ -756,10 +723,7 @@ class CDSDropdown extends ValidityMixin(
     const {
       ariaLabel,
       _classes: classes,
-      disabled,
-      readOnly,
       helperText,
-      invalid,
       invalidText,
       open,
       toggleLabelClosed,
@@ -777,10 +741,7 @@ class CDSDropdown extends ValidityMixin(
       _slotHelperTextNode: slotHelperTextNode,
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
-
-    const isInteractive = !readOnly && !disabled;
-    const showInvalid = isInteractive && invalid;
-    const showWarning = isInteractive && warn;
+    const normalizedProps = this._normalizedProps;
 
     let activeDescendantFallback: string | undefined;
     if (open && !activeDescendant) {
@@ -791,9 +752,7 @@ class CDSDropdown extends ValidityMixin(
 
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
-      [`${prefix}--form__helper-text--disabled`]: disabled,
-      [`${prefix}--form__helper-text--invalid`]: showInvalid,
-      [`${prefix}--form__helper-text--warning`]: showWarning,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
     const iconContainerClasses = classMap({
       [`${prefix}--list-box__menu-icon`]: true,
@@ -802,24 +761,25 @@ class CDSDropdown extends ValidityMixin(
     const toggleLabel = (open ? toggleLabelOpen : toggleLabelClosed) || '';
     const hasHelperText =
       helperText ||
-      (showInvalid && invalidText) ||
-      (showWarning && warnText) ||
+      invalidText ||
+      warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const validityIcon = !showInvalid
+    const validityIcon = !normalizedProps.invalid
       ? undefined
       : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon = !showWarning
-      ? undefined
-      : iconLoader(WarningAltFilled16, {
-          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-          'aria-label': toggleLabel,
-        });
-    const helperMessage = showInvalid
+    const warningIcon =
+      !warn || (normalizedProps.invalid && normalizedProps.warn)
+        ? undefined
+        : iconLoader(WarningAltFilled16, {
+            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+            'aria-label': toggleLabel,
+          });
+    const helperMessage = normalizedProps.invalid
       ? invalidText
-      : showWarning
+      : normalizedProps.warn
         ? warnText
         : helperText;
     const menuBody = html`
@@ -839,7 +799,7 @@ class CDSDropdown extends ValidityMixin(
       ${this._renderTitleLabel()}
       <div
         class="${classes}"
-        ?data-invalid=${showInvalid}
+        ?data-invalid=${normalizedProps.invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
         @keypress=${handleKeypressInner}>
@@ -884,20 +844,14 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !showWarning && !showInvalid) || !hasHelperText}">
+        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+        !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot
         >
       </div>
     `;
   }
-
-  /**
-   * Set of property names that should be normalized (read from attributes instead of properties)
-   */
-  static normalizedProps?: Set<string>;
-
-  /**
 
   /**
    * Symbols of keys that triggers opening/closing menu and selecting/deselecting menu item.
