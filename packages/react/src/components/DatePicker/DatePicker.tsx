@@ -245,6 +245,11 @@ export interface DatePickerProps {
   disable?: DateLimit<DateOption>[];
 
   /**
+   * Specify whether or not the input should be disabled
+   */
+  disabled?: boolean;
+
+  /**
    * The flatpickr `enable` option that allows a user to enable certain dates.
    */
   enable?: DateLimit<DateOption>[];
@@ -419,6 +424,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     dateFormat = 'm/d/Y',
     datePickerType,
     disable,
+    disabled,
     enable,
     inline,
     invalid,
@@ -534,8 +540,8 @@ const DatePicker = React.forwardRef(function DatePicker(
           datePickerType,
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: invalid && !disabled,
+          warn: effectiveWarn && !disabled,
         });
       }
       if (
@@ -546,24 +552,24 @@ const DatePicker = React.forwardRef(function DatePicker(
           datePickerType,
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: invalid && !disabled,
+          warn: effectiveWarn && !disabled,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: invalid && !disabled,
+          warn: effectiveWarn && !disabled,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: invalid && !disabled,
+          warn: effectiveWarn && !disabled,
         });
       }
     }
@@ -1108,6 +1114,11 @@ DatePicker.propTypes = {
    * The flatpickr `disable` option that allows a user to disable certain dates.
    */
   disable: PropTypes.array,
+
+  /**
+   * Specify whether or not the input should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * The flatpickr `enable` option that allows a user to enable certain dates.
