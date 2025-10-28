@@ -10,7 +10,7 @@ import { TemplateResult, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import Close16 from '@carbon/icons/es/close/16.js';
-import { findIndex, forEach } from '../../globals/internal/collection-helpers';
+import { forEach } from '../../globals/internal/collection-helpers';
 import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import CDSComboBoxItem from './combo-box-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -20,6 +20,12 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 
 export { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from '../dropdown/dropdown';
+
+type ShouldFilterItem = (input: {
+  item: CDSComboBoxItem;
+  itemToString: (item: CDSComboBoxItem) => string;
+  inputValue: string | null;
+}) => boolean;
 
 /**
  * Combo box.
@@ -93,7 +99,10 @@ class CDSComboBox extends CDSDropdown {
    * Handles `input` event on the `<input>` for filtering.
    */
   protected _handleInput() {
-    if (this._filterInputValue.length != 0) {
+    const rawQueryText = this._filterInputNode.value;
+    const queryText = rawQueryText.trim().toLowerCase();
+
+    if (rawQueryText.length !== 0) {
       this.setAttribute('isClosable', '');
     } else {
       this.removeAttribute('isClosable');
@@ -102,40 +111,102 @@ class CDSComboBox extends CDSDropdown {
     const items = this.querySelectorAll(
       (this.constructor as typeof CDSComboBox).selectorItem
     );
-    const index = !this._filterInputNode.value
-      ? -1
-      : findIndex(items, this._testItemWithQueryText, this);
-    forEach(items, (item, i) => {
-      if (i === index) {
-        const menuRect = this._itemMenu?.getBoundingClientRect();
-        const itemRect = item.getBoundingClientRect();
 
-        if (menuRect && itemRect) {
-          const isViewable =
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-            menuRect!.top <= itemRect?.top &&
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-            itemRect?.bottom <= menuRect?.top + this._itemMenu!.clientHeight;
-          if (!isViewable) {
-            const scrollTop = itemRect?.top - menuRect?.top;
-            const scrollBot = itemRect?.bottom - menuRect?.bottom;
-
-            if (Math.abs(scrollTop) < Math.abs(scrollBot)) {
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-              this._itemMenu!.scrollTop += scrollTop;
-            } else {
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-              this._itemMenu!.scrollTop += scrollBot;
-            }
-          }
-        }
+    const firstMatchIndex = this._filterItems(items, queryText, rawQueryText);
+    if (firstMatchIndex !== -1) {
+      const highlightedItem = items[firstMatchIndex];
+      if (highlightedItem) {
+        this._scrollItemIntoView(highlightedItem as HTMLElement);
       }
-      (item as CDSComboBoxItem).highlighted = i === index;
-    });
-    const { _filterInputNode: filterInput } = this;
-    this._filterInputValue = !filterInput ? '' : filterInput.value;
+    }
+
+    this._filterInputValue = rawQueryText;
     this.open = true;
-    this.requestUpdate(); // If the only change is to `_filterInputValue`, auto-update doesn't happen
+    this.requestUpdate();
+  }
+
+  // Applies filtering/highlighting to all slotted items.
+  protected _filterItems(
+    items: NodeListOf<Element>,
+    queryText: string,
+    rawQueryText: string
+  ): number {
+    let firstMatchIndex = -1;
+    const hasQuery = Boolean(queryText);
+    forEach(items, (item, i) => {
+      const comboItem = item as CDSComboBoxItem;
+      const index = i ?? -1;
+      if (!hasQuery) {
+        (comboItem as HTMLElement).style.display = '';
+        comboItem.highlighted = false;
+        return;
+      }
+      const matches = (comboItem.textContent || '')
+        .toLowerCase()
+        .includes(queryText);
+      const filterFunction =
+        typeof this.shouldFilterItem === 'function'
+          ? this.shouldFilterItem
+          : null;
+      const shouldApplyBuiltInFilter =
+        filterFunction === null && hasQuery && this.shouldFilterItem === true;
+      const itemToString = (value: CDSComboBoxItem) => value.textContent || '';
+      const filterInputValue = rawQueryText.length === 0 ? null : rawQueryText;
+      const passesFilter = filterFunction
+        ? filterFunction({
+            item: comboItem,
+            itemToString,
+            inputValue: filterInputValue,
+          })
+        : shouldApplyBuiltInFilter
+          ? matches
+          : true;
+      const highlightMatch = filterFunction !== null ? passesFilter : matches;
+      if (highlightMatch && firstMatchIndex === -1) {
+        firstMatchIndex = index;
+      }
+      if (filterFunction || shouldApplyBuiltInFilter) {
+        (comboItem as HTMLElement).style.display = passesFilter ? '' : 'none';
+      } else {
+        (comboItem as HTMLElement).style.display = '';
+      }
+      comboItem.highlighted = index === firstMatchIndex;
+    });
+    return firstMatchIndex;
+  }
+
+  protected _scrollItemIntoView(item: HTMLElement) {
+    if (!this._itemMenu) {
+      return;
+    }
+    const menuRect = this._itemMenu.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    if (!menuRect || !itemRect) {
+      return;
+    }
+    const menuBottom = menuRect.top + this._itemMenu.clientHeight;
+    const isWithinViewport =
+      menuRect.top <= itemRect.top && itemRect.bottom <= menuBottom;
+    if (isWithinViewport) {
+      return;
+    }
+    const scrollTop = itemRect.top - menuRect.top;
+    const scrollBottom = itemRect.bottom - menuRect.bottom;
+    this._itemMenu.scrollTop +=
+      Math.abs(scrollTop) < Math.abs(scrollBottom) ? scrollTop : scrollBottom;
+  }
+
+  // Clear the query and selection when Escape is pressed.
+  protected _handleInputKeydown(event: KeyboardEvent) {
+    if (event.key !== 'Escape') {
+      return;
+    }
+    if (!this._filterInputNode) {
+      return;
+    }
+    if (this._filterInputNode.value || this.value) {
+      this._handleUserInitiatedClearInput();
+    }
   }
 
   protected _handleClickInner(event: MouseEvent) {
@@ -167,17 +238,15 @@ class CDSComboBox extends CDSDropdown {
    * Handles user-initiated clearing the `<input>` for filtering.
    */
   protected _handleUserInitiatedClearInput() {
-    forEach(
-      this.querySelectorAll(
-        (this.constructor as typeof CDSComboBox).selectorItem
-      ),
-      (item) => {
-        (item as CDSComboBoxItem).highlighted = false;
-      }
-    );
+    this._resetFilteredItems();
     this._filterInputValue = '';
-    this._filterInputNode.focus();
+    if (this._filterInputNode) {
+      this._filterInputNode.value = '';
+      this._filterInputNode.focus();
+    }
+
     this._handleUserInitiatedSelectItem();
+    this.requestUpdate();
   }
 
   protected _handleUserInitiatedSelectItem(item?: CDSComboBoxItem) {
@@ -226,6 +295,7 @@ class CDSComboBox extends CDSDropdown {
       _activeDescendant: activeDescendant,
       _filterInputValue: filterInputValue,
       _handleInput: handleInput,
+      _handleInputKeydown: handleInputKeydown,
     } = this;
 
     const inputClasses = classMap({
@@ -257,7 +327,8 @@ class CDSComboBox extends CDSDropdown {
           open ? (activeDescendant ?? activeDescendantFallback) : ''
         )}"
         ?readonly=${readOnly}
-        @input=${handleInput} />
+        @input=${handleInput}
+        @keydown=${handleInputKeydown} />
     `;
   }
 
@@ -303,6 +374,17 @@ class CDSComboBox extends CDSDropdown {
   @property({ attribute: false })
   itemMatches!: (item: CDSComboBoxItem, queryText: string) => boolean;
 
+  /**
+   * Provide custom filtering behavior.
+   */
+  @property({
+    attribute: 'should-filter-item',
+    converter: {
+      fromAttribute: (value) => value !== null,
+    },
+  })
+  shouldFilterItem: boolean | ShouldFilterItem = false;
+
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
     const { _selectedItemContent: selectedItemContent } = this;
@@ -314,10 +396,29 @@ class CDSComboBox extends CDSDropdown {
 
   updated(changedProperties) {
     super.updated(changedProperties);
+    if (changedProperties.has('open')) {
+      if (this.open && this._filterInputNode) {
+        this._handleInput();
+      } else if (!this.open) {
+        this._resetFilteredItems();
+      }
+    }
     const { _listBoxNode: listBoxNode } = this;
     if (listBoxNode) {
       listBoxNode.classList.add(`${prefix}--combo-box`);
     }
+  }
+
+  // Restores the full list when the query is cleared or the menu closes.
+  protected _resetFilteredItems() {
+    const items = this.querySelectorAll(
+      (this.constructor as typeof CDSComboBox).selectorItem
+    );
+    forEach(items, (item) => {
+      const comboItem = item as CDSComboBoxItem;
+      (comboItem as HTMLElement).style.display = '';
+      comboItem.highlighted = false;
+    });
   }
 
   // For combo box, open/selection with space key is disabled given the input box should take it over
