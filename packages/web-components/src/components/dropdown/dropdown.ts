@@ -770,13 +770,12 @@ class CDSDropdown extends ValidityMixin(
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon =
-      !warn || (normalizedProps.invalid && normalizedProps.warn)
-        ? undefined
-        : iconLoader(WarningAltFilled16, {
-            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-            'aria-label': toggleLabel,
-          });
+    const warningIcon = !normalizedProps.warn
+      ? undefined
+      : iconLoader(WarningAltFilled16, {
+          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+          'aria-label': toggleLabel,
+        });
     const helperMessage = normalizedProps.invalid
       ? invalidText
       : normalizedProps.warn
