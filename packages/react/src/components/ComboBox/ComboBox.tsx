@@ -1003,7 +1003,7 @@ const ComboBox = forwardRef(
                 'aria-label': titleText
                   ? undefined
                   : deprecatedAriaLabel || ariaLabel,
-                'aria-controls': isOpen ? undefined : menuProps.id,
+                'aria-controls': menuProps.id,
                 placeholder,
                 value: inputValue,
                 ...inputProps,
