@@ -27,6 +27,7 @@ collect:
         - as
         - autoAlign
         - autoComplete
+        - backgroundToken
         - border
         - buttonKind
         - caption
@@ -422,6 +423,9 @@ collect:
         - legacyAutoalign
         - x
         - y
+        # MenuButton
+        - menuBackgroundToken
+        - menuBorder
         # MenuItem
         - shortcut
         # MenuItemRadioGroup
@@ -506,7 +510,6 @@ collect:
         # Popover
         - alignmentAxisOffset
         - autoAlignBoundary
-        - backgroundToken
         - caret
         - isTabTip
         # ProgressIndicator
@@ -668,6 +671,9 @@ collect:
         - step
         - time
         - "true"
+        # General - backgroundToken
+        - background
+        - layer
         # General - buttonKind
         - danger
         - danger--ghost
@@ -924,6 +930,9 @@ collect:
         - complete
         - edit
         - uploading
+        # MenuButton - menuBackgroundToken
+        - background
+        - layer
         # ModalWrapper - triggerButtonKind
         - danger
         - danger--ghost
@@ -939,9 +948,6 @@ collect:
         - toast
         # Popover - autoAlignBoundary
         - clippingAncestors
-        # Popover - backgroundToken
-        - background
-        - layer
         # ShapeIndicator - textSize
         - "12"
         - "14"
