@@ -172,7 +172,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     size = 'md',
     slug,
     type = 'text',
-    warn,
+    warn = false,
     warnText,
     readOnly,
     ...rest
@@ -185,9 +185,9 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     id,
     readOnly,
     disabled,
-    invalid: invalid === true,
+    invalid,
     invalidText,
-    warn: warn === true,
+    warn,
     warnText,
   });
   const datePickerInputProps = {
@@ -222,10 +222,8 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     didWarnAboutDatePickerInputValue = true;
   }
   const wrapperClasses = cx(`${prefix}--date-picker-input__wrapper`, {
-    [`${prefix}--date-picker-input__wrapper--invalid`]:
-      normalizedProps.invalid && !disabled && !readOnly,
-    [`${prefix}--date-picker-input__wrapper--warn`]:
-      normalizedProps.warn && !disabled && !readOnly,
+    [`${prefix}--date-picker-input__wrapper--invalid`]: normalizedProps.invalid,
+    [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
     [`${prefix}--date-picker-input__wrapper--slug`]: slug,
     [`${prefix}--date-picker-input__wrapper--decorator`]: decorator,
   });
@@ -239,17 +237,14 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   });
   const inputClasses = cx(`${prefix}--date-picker__input`, {
     [`${prefix}--date-picker__input--${size}`]: size,
-    [`${prefix}--date-picker__input--invalid`]:
-      normalizedProps.invalid && !disabled && !readOnly,
-    [`${prefix}--date-picker__input--warn`]:
-      normalizedProps.warn && !disabled && !readOnly,
+    [`${prefix}--date-picker__input--invalid`]: normalizedProps.invalid,
+    [`${prefix}--date-picker__input--warn`]: normalizedProps.warn,
   });
   const containerClasses = cx(`${prefix}--date-picker-container`, {
     [`${prefix}--date-picker--nolabel`]: !labelText,
     [`${prefix}--date-picker--fluid--invalid`]:
-      isFluid && normalizedProps.invalid && !disabled && !readOnly,
-    [`${prefix}--date-picker--fluid--warn`]:
-      isFluid && normalizedProps.warn && !disabled && !readOnly,
+      isFluid && normalizedProps.invalid,
+    [`${prefix}--date-picker--fluid--warn`]: isFluid && normalizedProps.warn,
   });
 
   const datePickerInputHelperId = !helperText

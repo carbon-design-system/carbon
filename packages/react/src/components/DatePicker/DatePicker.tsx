@@ -424,7 +424,6 @@ const DatePicker = React.forwardRef(function DatePicker(
     dateFormat = 'm/d/Y',
     datePickerType,
     disable,
-    disabled,
     enable,
     inline,
     invalid,
@@ -540,8 +539,8 @@ const DatePicker = React.forwardRef(function DatePicker(
           datePickerType,
           ref: startInputField,
           readOnly,
-          invalid: invalid && !disabled,
-          warn: effectiveWarn && !disabled,
+          invalid,
+          warn: effectiveWarn,
         });
       }
       if (
@@ -552,24 +551,24 @@ const DatePicker = React.forwardRef(function DatePicker(
           datePickerType,
           ref: endInputField,
           readOnly,
-          invalid: invalid && !disabled,
-          warn: effectiveWarn && !disabled,
+          invalid,
+          warn: effectiveWarn,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
           readOnly,
-          invalid: invalid && !disabled,
-          warn: effectiveWarn && !disabled,
+          invalid,
+          warn: effectiveWarn,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
           readOnly,
-          invalid: invalid && !disabled,
-          warn: effectiveWarn && !disabled,
+          invalid,
+          warn: effectiveWarn,
         });
       }
     }

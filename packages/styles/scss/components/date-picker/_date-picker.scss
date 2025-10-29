@@ -91,12 +91,6 @@
     ~ .#{$prefix}--form-requirement {
     color: $text-primary;
   }
-
-  // Don't show form requirements when disabled or readonly
-  .#{$prefix}--date-picker__input[disabled] ~ .#{$prefix}--form-requirement,
-  .#{$prefix}--date-picker__input[readonly] ~ .#{$prefix}--form-requirement {
-    display: none;
-  }
   .#{$prefix}--date-picker__input {
     @include component-reset.reset;
     @include type-style('code-02');
@@ -183,18 +177,6 @@
     fill: $support-error;
   }
 
-  // Don't show invalid/warn icons when disabled or readonly
-  .#{$prefix}--date-picker__input[disabled]
-    ~ .#{$prefix}--date-picker__icon--invalid,
-  .#{$prefix}--date-picker__input[disabled]
-    ~ .#{$prefix}--date-picker__icon--warn,
-  .#{$prefix}--date-picker__input[readonly]
-    ~ .#{$prefix}--date-picker__icon--invalid,
-  .#{$prefix}--date-picker__input[readonly]
-    ~ .#{$prefix}--date-picker__icon--warn {
-    display: none;
-  }
-
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-inline-end: $spacing-09;
   }
@@ -255,18 +237,6 @@
     @include ai-gradient;
 
     padding-inline-end: $spacing-10;
-  }
-
-  // Remove invalid/warn styling for disabled and readonly inputs
-  .#{$prefix}--date-picker-input__wrapper--invalid
-    .#{$prefix}--date-picker__input:disabled,
-  .#{$prefix}--date-picker-input__wrapper--invalid
-    .#{$prefix}--date-picker__input[readonly],
-  .#{$prefix}--date-picker-input__wrapper--warn
-    .#{$prefix}--date-picker__input:disabled,
-  .#{$prefix}--date-picker-input__wrapper--warn
-    .#{$prefix}--date-picker__input[readonly] {
-    border-block-end: 1px solid transparent;
   }
 
   // Read-only State

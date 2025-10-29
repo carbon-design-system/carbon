@@ -147,28 +147,11 @@ $css--plex: true !default;
     @extend .#{$prefix}--date-picker__icon--invalid;
   }
 
-  // Don't show invalid/warn icons when disabled or readonly
-  &[disabled],
-  &[readonly] {
-    .#{$prefix}--date-picker__icon--invalid,
-    .#{$prefix}--date-picker__icon--warn {
-      display: none;
-    }
-  }
-
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: $spacing-08;
-  }
-
-  // Remove invalid/warn styling for disabled and readonly inputs
-  input:disabled.#{$prefix}--date-picker__input--invalid,
-  input:disabled.#{$prefix}--date-picker__input--warn,
-  input[readonly].#{$prefix}--date-picker__input--invalid,
-  input[readonly].#{$prefix}--date-picker__input--warn {
-    border-block-end: 1px solid transparent;
   }
 
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
