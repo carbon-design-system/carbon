@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit'; // remove LitElement import before merging
+import { html } from 'lit';
 import './popover';
 import './popover-content';
 import '../radio-button/index';
@@ -520,45 +520,6 @@ export const TabTipExperimentalAutoAlign = {
       </div>
     `;
   },
-};
-
-// remove before merging
-class PopTest extends LitElement {
-  static properties = {
-    isOpen: { type: Boolean },
-  };
-  private isOpen: boolean = false;
-
-  constructor() {
-    super();
-    this.isOpen = false;
-  }
-
-  handleClick() {
-    this.isOpen = !this.isOpen;
-  }
-
-  render() {
-    return html`
-      <div>
-        <h3>Popover open: ${this.isOpen}</h3>
-        <cds-popover ?open=${this.isOpen}>
-          <button @click="${this.handleClick}">PRESS ME</button>
-          <cds-popover-content>
-            <div>
-              <h3>POPOVER</h3>
-            </div>
-          </cds-popover-content>
-        </cds-popover>
-      </div>
-    `;
-  }
-}
-customElements.define('pop-test', PopTest);
-
-// remove before merging
-export const test = {
-  render: () => html`<pop-test></pop-test>`,
 };
 
 const meta = {
