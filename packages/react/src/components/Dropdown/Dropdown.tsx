@@ -391,7 +391,6 @@ const Dropdown = React.forwardRef(
         if (
           highlightedIndex !== undefined &&
           highlightedIndex > -1 &&
-           
           typeof window !== 'undefined'
         ) {
           const itemArray = document.querySelectorAll(
