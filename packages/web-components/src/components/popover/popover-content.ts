@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -80,21 +80,20 @@ class CDSPopoverContent extends LitElement {
   slot = 'content';
 
   render() {
-    if (this.autoalign) {
-      return html`
-        <span class="${prefix}--popover-content" part="content">
+    return html`
+      <span class="${prefix}--popover">
+        <span class="${prefix}--popover-content" part="content" tabindex="-1">
           <slot> </slot>
-          <span class="${prefix}--popover-caret"></span>
+          ${this.autoalign
+            ? html`<span
+                class="${prefix}--popover-caret ${prefix}--popover--auto-align"></span>`
+            : null}
         </span>
-      `;
-    } else {
-      return html`
-        <span class="${prefix}--popover-content" part="content">
-          <slot> </slot>
-        </span>
-        <span class="${prefix}--popover-caret"></span>
-      `;
-    }
+        ${!this.autoalign
+          ? html`<span class="${prefix}--popover-caret"></span>`
+          : null}
+      </span>
+    `;
   }
 
   static styles = styles;
