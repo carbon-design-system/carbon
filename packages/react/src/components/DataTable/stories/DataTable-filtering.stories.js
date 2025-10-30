@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -112,6 +112,7 @@ export const Default = (args) => {
         getRowProps,
         getTableProps,
         onInputChange,
+        getCellProps,
       }) => (
         <TableContainer title="DataTable" description="With filtering">
           <TableToolbar>
@@ -153,9 +154,11 @@ export const Default = (args) => {
             </TableHead>
             <TableBody>
               {rows.map((row) => (
-                <TableRow key={row.id} {...getRowProps({ row })}>
+                <TableRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))}
@@ -165,42 +168,4 @@ export const Default = (args) => {
       )}
     </DataTable>
   );
-};
-
-Default.argTypes = {
-  filterRows: {
-    table: {
-      disable: true,
-    },
-  },
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
-  },
-  rows: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
-  sortRow: {
-    table: {
-      disable: true,
-    },
-  },
 };

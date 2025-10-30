@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,23 +17,27 @@ import {
 } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 
-const defaultTranslations = {
-  'carbon.progress-step.complete': 'Complete',
-  'carbon.progress-step.incomplete': 'Incomplete',
-  'carbon.progress-step.current': 'Current',
-  'carbon.progress-step.invalid': 'Invalid',
+const translationIds = {
+  'carbon.progress-step.complete': 'carbon.progress-step.complete',
+  'carbon.progress-step.incomplete': 'carbon.progress-step.incomplete',
+  'carbon.progress-step.current': 'carbon.progress-step.current',
+  'carbon.progress-step.invalid': 'carbon.progress-step.invalid',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
-type TranslationKey = keyof typeof defaultTranslations;
+type TranslationKey = keyof typeof translationIds;
 
-function translateWithId(messageId) {
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.progress-step.complete']]: 'Complete',
+  [translationIds['carbon.progress-step.incomplete']]: 'Incomplete',
+  [translationIds['carbon.progress-step.current']]: 'Current',
+  [translationIds['carbon.progress-step.invalid']]: 'Invalid',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
   return defaultTranslations[messageId];
-}
+};
 
 export interface ProgressIndicatorProps
   extends Omit<React.HTMLAttributes<HTMLUListElement>, 'onChange'> {
@@ -54,7 +58,7 @@ export interface ProgressIndicatorProps
   currentIndex?: number;
 
   /**
-   * Optional callback called if a ProgressStep is clicked on.  Returns the index of the step.
+   * Optional callback called if a ProgressStep is clicked on. Returns the index of the step.
    */
   onChange?: (data: number) => void;
 
@@ -148,7 +152,7 @@ ProgressIndicator.propTypes = {
   currentIndex: PropTypes.number,
 
   /**
-   * Optional callback called if a ProgressStep is clicked on.  Returns the index of the step.
+   * Optional callback called if a ProgressStep is clicked on. Returns the index of the step.
    */
   onChange: PropTypes.func,
 
@@ -238,7 +242,7 @@ function ProgressStep({
   secondaryLabel,
   disabled,
   onClick,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
   ...rest
 }: ProgressStepProps) {
   const prefix = usePrefix();
@@ -414,8 +418,7 @@ ProgressStep.propTypes = {
   tooltipId: PropTypes.string,
 
   /**
-   * Optional method that takes in a message id and returns an
-   * internationalized string.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };

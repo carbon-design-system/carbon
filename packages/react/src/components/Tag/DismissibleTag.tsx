@@ -25,7 +25,7 @@ import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { PopoverAlignment } from '../Popover';
@@ -109,6 +109,7 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
   DismissibleTagBaseProps
 >;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const DismissibleTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -132,6 +133,7 @@ const DismissibleTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagLabelRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagId = id || `tag-${useId()}`;
     const tagClasses = classNames(`${prefix}--tag--filter`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
@@ -154,7 +156,7 @@ const DismissibleTag = forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
-      : null;
+      : candidate;
 
     const tooltipClasses = classNames(
       `${prefix}--icon-tooltip`,

@@ -325,6 +325,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     if (!this.disabled && !this.readonly) {
       const { _trackNode: trackNode } = this;
       const isRtl =
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         trackNode
           .ownerDocument!.defaultView!.getComputedStyle(trackNode)
           .getPropertyValue('direction') === 'rtl';
@@ -388,6 +389,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               !this._draggingUpper &&
               differenceValue === differenceValueUpper
             ) {
+              // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
               Math.round(position) > this.unstable_valueUpper
                 ? (this._rateUpper = position / 100)
                 : (this._rate = position / 100);
@@ -416,6 +418,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * @param event The event.
    */
   @HostListener('document:pointermove')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handlePointermove = (event: PointerEvent) => {
     const {
@@ -424,6 +427,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _draggingUpper: draggingUpper,
     } = this;
     if (!disabled && (dragging || draggingUpper)) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       this._throttledHandlePointermoveImpl!(event);
     }
   };
@@ -442,6 +446,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     } = this;
     if (!disabled) {
       const isRtl =
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         trackNode
           .ownerDocument!.defaultView!.getComputedStyle(trackNode)
           .getPropertyValue('direction') === 'rtl';
@@ -542,6 +547,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * Handles `${prefix}-slider-input-changed` event to update the value.
    */
   @HostListener('eventChangeInput')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeInput = (event: CustomEvent) => {
     const input = event.target as HTMLElement;
@@ -566,6 +572,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     }
     const valueMain =
       eventContainer === 'upper' ? this.unstable_valueUpper : this.value;
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     valueMain !== '' &&
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
@@ -897,6 +904,16 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _endDrag: endDrag,
     } = this;
 
+    const isInteractive = !readonly && !disabled;
+
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: isInteractive && !isValid,
+      warn: isInteractive && isValid && warn,
+    };
+
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -1029,7 +1046,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         <slot></slot>
       </div>
 
-      ${!readonly && !isValid
+      ${normalizedProps.invalid
         ? html`
             <div
               class="${prefix}--slider__validation-msg ${prefix}--slider__validation-msg--invalid ${prefix}--form-requirement">
@@ -1037,7 +1054,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             </div>
           `
         : null}
-      ${!readonly && warn && isValid
+      ${normalizedProps.warn
         ? html`<div
             class="${prefix}--slider__validation-msg ${prefix}--form-requirement">
             ${warnText}

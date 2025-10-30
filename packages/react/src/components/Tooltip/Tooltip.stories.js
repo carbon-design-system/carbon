@@ -25,18 +25,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   decorators: [
     (Story, context) => {
       if (context.name.toLowerCase().includes('auto align')) {
@@ -52,7 +40,7 @@ export default {
 };
 
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
-// autoAlign is experimental and not part of the actual implementation.
+// autoAlign is in preview and not part of the actual implementation.
 export const Default = (args) => {
   const label = 'Options';
   return (
@@ -136,7 +124,7 @@ export const ExperimentalAutoAlign = () => {
 };
 
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
-// autoAlign is experimental and not part of the actual implementation.
+// autoAlign is in preview and not part of the actual implementation.
 export const Duration = () => {
   return (
     <Tooltip autoAlign label="Label one" enterDelayMs={0} leaveDelayMs={300}>

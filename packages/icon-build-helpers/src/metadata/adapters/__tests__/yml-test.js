@@ -58,8 +58,6 @@ describe('yml', () => {
   });
 
   it('should throw if the given data is invalid yml', async () => {
-    await expect(
-      adapter.write('/', 'test', { data: undefined })
-    ).rejects.toThrow();
+    await expect(adapter.write('/', 'test', undefined)).rejects.toThrow();
   });
 });

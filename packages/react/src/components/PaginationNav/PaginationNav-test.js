@@ -101,7 +101,14 @@ describe('PaginationNav', () => {
     });
 
     it('should render in small size and let user render 4 pages', () => {
-      render(<PaginationNav size="sm" totalItems={10} itemsShown={4} />);
+      render(
+        <PaginationNav
+          size="sm"
+          totalItems={10}
+          itemsShown={4}
+          aria-label="pagination"
+        />
+      );
 
       expect(screen.getByLabelText('pagination')).toHaveClass(
         `${prefix}--pagination-nav ${prefix}--layout--size-sm`
@@ -110,7 +117,14 @@ describe('PaginationNav', () => {
     });
 
     it('should render in medium size and let user render 4 pages', () => {
-      render(<PaginationNav size="md" totalItems={10} itemsShown={4} />);
+      render(
+        <PaginationNav
+          size="md"
+          totalItems={10}
+          itemsShown={4}
+          aria-label="pagination"
+        />
+      );
 
       expect(screen.getByLabelText('pagination')).toHaveClass(
         `${prefix}--pagination-nav ${prefix}--layout--size-md`
@@ -119,12 +133,33 @@ describe('PaginationNav', () => {
     });
 
     it('should render in default (large) size and let user render 4 pages', () => {
-      render(<PaginationNav size="lg" totalItems={10} itemsShown={4} />);
+      render(
+        <PaginationNav
+          size="lg"
+          totalItems={10}
+          itemsShown={4}
+          aria-label="pagination"
+        />
+      );
 
       expect(screen.getByLabelText('pagination')).toHaveClass(
         `${prefix}--pagination-nav ${prefix}--layout--size-lg`
       );
       expect(screen.getByLabelText('Select Page number')).toBeInTheDocument();
+    });
+
+    it('should respect tooltipAlignment and tooltipPosition props', () => {
+      render(
+        <PaginationNav
+          totalItems={10}
+          tooltipAlignment="end"
+          tooltipPosition="right"
+        />
+      );
+
+      expect(
+        document.querySelector('.cds--popover--right-end')
+      ).toBeInTheDocument();
     });
   });
 

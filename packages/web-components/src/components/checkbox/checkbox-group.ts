@@ -9,9 +9,10 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import CDSCheckbox from './checkbox';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './checkbox.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { CHECKBOX_ORIENTATION } from './defs';
@@ -20,10 +21,7 @@ export { CHECKBOX_ORIENTATION };
 /**
  * Check box.
  *
- * @element cds-checkbox
- * @fires cds-checkbox-changed - The custom event fired after this changebox changes its checked state.
- * @csspart input The checkbox.
- * @csspart label The label.
+ * @element cds-checkbox-group
  */
 @customElement(`${prefix}-checkbox-group`)
 class CDSCheckboxGroup extends LitElement {
@@ -207,7 +205,7 @@ class CDSCheckboxGroup extends LitElement {
         <div class="${prefix}--checkbox-group__validation-msg">
           ${!readonly && invalid
             ? html`
-                ${WarningFilled16({
+                ${iconLoader(WarningFilled16, {
                   class: `${prefix}--checkbox__invalid-icon`,
                 })}
                 <div class="${prefix}--form-requirement">${invalidText}</div>
@@ -215,7 +213,7 @@ class CDSCheckboxGroup extends LitElement {
             : null}
           ${showWarning
             ? html`
-                ${WarningAltFilled16({
+                ${iconLoader(WarningAltFilled16, {
                   class: `${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`,
                 })}
                 <div class="${prefix}--form-requirement">${warnText}</div>

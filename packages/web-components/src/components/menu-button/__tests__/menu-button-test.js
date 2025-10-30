@@ -24,6 +24,47 @@ describe('cds-menu-button', function () {
     await expect(el).dom.to.equalSnapshot();
   });
 
+  it('Children/slots and special menu content Snapshot variants should render with divider and danger and match snapshot', async () => {
+    const el = await fixture(html`
+      <cds-menu-button label="Test">
+        <cds-menu>
+          <cds-menu-item label="First action"></cds-menu-item>
+          <cds-menu-item-divider></cds-menu-item-divider>
+          <cds-menu-item label="Danger" kind="danger"></cds-menu-item>
+        </cds-menu>
+      </cds-menu-button>
+    `);
+    await expect(el).dom.to.equalSnapshot();
+  });
+
+  it('Children/slots and special menu content Snapshot variants should render with nested menu and match snapshot', async () => {
+    const el = await fixture(html`
+      <cds-menu-button label="Nested">
+        <cds-menu>
+          <cds-menu-item label="Export as">
+            <cds-menu-item-group slot="submenu">
+              <cds-menu-item label="PDF"></cds-menu-item>
+            </cds-menu-item-group>
+          </cds-menu-item>
+        </cds-menu>
+      </cds-menu-button>
+    `);
+    await expect(el).dom.to.equalSnapshot();
+  });
+
+  it('should support xs size', async () => {
+    const el = await fixture(html`
+      <cds-menu-button label="Actions" size="xs">
+        <cds-menu size="xs">
+          <cds-menu-item label="First action"></cds-menu-item>
+          <cds-menu-item label="Second action"></cds-menu-item>
+          <cds-menu-item label="Third action" disabled></cds-menu-item>
+        </cds-menu>
+      </cds-menu-button>
+    `);
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
   it('should be accessible (closed & open)', async () => {
     const el = await fixture(menuButton);
     await expect(el).to.be.accessible();
@@ -62,7 +103,7 @@ describe('cds-menu-button', function () {
     });
 
     describe('renders as expected – Component API', () => {
-      const sizes = ['sm', 'md', 'lg'];
+      const sizes = ['xs', 'sm', 'md', 'lg'];
       const kinds = ['primary', 'tertiary', 'ghost'];
 
       sizes.forEach((size) => {
@@ -136,6 +177,64 @@ describe('cds-menu-button', function () {
       `);
       expect(el.menuAlignment).to.equal('top-end');
       expect(el.getAttribute('menu-alignment')).to.equal('top-end');
+    });
+
+    it('should set menu-background-token', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-background-token="background" label="Background">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      expect(el.menuBackgroundToken).to.equal('background');
+      expect(el.getAttribute('menu-background-token')).to.equal('background');
+    });
+
+    it('should set menu-border', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-border label="Border">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      expect(el.menuBorder).to.be.true;
+      expect(el.hasAttribute('menu-border')).to.be.true;
+    });
+
+    it('should pass menu-background-token to the menu', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-background-token="background" label="Background">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      const button = el.shadowRoot.querySelector('cds-button');
+      button.click();
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu').shadowRoot.querySelector('ul');
+      expect(
+        menu.classList.contains('cds--menu--background-token__background')
+      );
+    });
+
+    it('should pass menu-border to the menu', async () => {
+      const el = await fixture(html`
+        <cds-menu-button menu-border label="Border">
+          <cds-menu>
+            <cds-menu-item label="A"></cds-menu-item>
+          </cds-menu>
+        </cds-menu-button>
+      `);
+      const button = el.shadowRoot.querySelector('cds-button');
+      button.click();
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      expect(menu.hasAttribute('border')).to.be.true;
     });
   });
 

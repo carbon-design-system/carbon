@@ -17,7 +17,7 @@ const { reactPreviewMap, productsPreviewMap } = require('./nonStableMapping');
  *
  * After:
  * import { preview__FluidTimePicker } from "@carbon/react";
- * import { previewCandidate__SearchBar } from '@carbon/ibm-products';
+ * import { previewCandidate__SearchBar as SearchBar } from '@carbon/ibm-products';
  */
 
 const allPreviews = { ...reactPreviewMap, ...productsPreviewMap };
@@ -36,12 +36,50 @@ function transformer(file, api) {
           value: p,
         },
       })
-      .find(j.ImportSpecifier)
-      .filter((path) => !!nonStableKeys.includes(path.node.imported.name))
-      .replaceWith((path) =>
-        j.importSpecifier(j.identifier(allPreviews[path.node.imported.name]))
-      );
+      .forEach((path) => {
+        const newSpecifiers = [];
+        const seen = new Set();
+
+        path.node.specifiers.forEach((specifier) => {
+          if (specifier.type === 'ImportSpecifier') {
+            const importedName = specifier.imported.name;
+            const localName = specifier.local
+              ? specifier.local.name
+              : importedName;
+
+            if (nonStableKeys.includes(importedName)) {
+              const transformedImportedName = allPreviews[importedName];
+
+              if (!seen.has(importedName)) {
+                seen.add(importedName);
+
+                if (p === '@carbon/ibm-products') {
+                  // Create aliased import for products components
+                  const importSpecifier = j.importSpecifier(
+                    j.identifier(transformedImportedName),
+                    j.identifier(localName)
+                  );
+                  newSpecifiers.push(importSpecifier);
+                } else {
+                  // For @carbon/react, just update the name
+                  specifier.imported.name = transformedImportedName;
+                  newSpecifiers.push(specifier);
+                }
+              }
+            } else {
+              // Keep non-transformed imports as-is
+              newSpecifiers.push(specifier);
+            }
+          } else {
+            // Keep non-ImportSpecifier types (like ImportDefaultSpecifier)
+            newSpecifiers.push(specifier);
+          }
+        });
+
+        path.node.specifiers = newSpecifiers;
+      });
   });
+
   return root.toSource();
 }
 

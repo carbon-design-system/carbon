@@ -1,2 +1,7 @@
-// eslint-disable-next-line no-unused-vars
-import { Tearsheet, previewCandidate__SearchBar } from '@carbon/ibm-products';
+// prettier-ignore
+// eslint-disable no-unused-vars
+import {
+  Tearsheet,
+  previewCandidate__InlineTip as InlineTip,
+  previewCandidate__SearchBar as SearchBar,
+} from '@carbon/ibm-products';
