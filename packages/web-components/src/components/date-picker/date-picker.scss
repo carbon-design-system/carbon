@@ -77,9 +77,16 @@ $css--plex: true !default;
     display: none;
   }
 }
-:host(#{$prefix}-date-picker-input[warn]) {
+:host(#{$prefix}-date-picker-input[warn]:not([disabled]):not([readonly])) {
   .#{$prefix}--form-requirement {
     color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-date-picker-input[disabled]),
+:host(#{$prefix}-date-picker-input[readonly]) {
+  .#{$prefix}--form-requirement {
+    display: none;
   }
 }
 
