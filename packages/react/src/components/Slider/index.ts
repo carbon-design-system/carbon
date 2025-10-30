@@ -5,8 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Slider } from './Slider';
-
+export { default as Slider } from './Slider';
 export { default as SliderSkeleton } from './Slider.Skeleton';
-export default Slider;
-export { Slider };
