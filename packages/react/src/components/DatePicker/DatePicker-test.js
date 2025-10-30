@@ -1047,6 +1047,53 @@ describe('Date picker with locale', () => {
     );
     expect(screen.getByText('January')).toBeInTheDocument();
   });
+
+  it('should render in month-year order per en locale rules', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale="en"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+    const year = screen.getByDisplayValue('2022');
+    const month = screen.getByText('January');
+    expect(year).toBeInTheDocument();
+    expect(month).toBeInTheDocument();
+    expect(month.compareDocumentPosition(year)).toBe(4);
+  });
+  it('should render in year-month order per japanese locale rules', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale="ja"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+    const year = screen.getByDisplayValue('2022');
+    const month = screen.getByText('1月');
+    expect(year).toBeInTheDocument();
+    expect(month).toBeInTheDocument();
+    expect(month.compareDocumentPosition(year)).toBe(2);
+  });
 });
 
 describe('Date picker with minDate and maxDate', () => {
