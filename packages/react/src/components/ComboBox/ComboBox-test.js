@@ -1520,4 +1520,16 @@ describe('ComboBox', () => {
       value: '',
     });
   });
+
+  it('should set `aria-controls` on the combobox input when the menu opens', async () => {
+    render(<ComboBox {...mockProps} />);
+
+    await openMenu();
+
+    const combobox = screen.getByRole('combobox');
+    const listbox = screen.getByRole('listbox');
+
+    expect(listbox).toHaveAttribute('id');
+    expect(combobox).toHaveAttribute('aria-controls', listbox.id);
+  });
 });
