@@ -413,6 +413,16 @@ class CDSSelect extends FormMixin(LitElement) {
       _handleAILabelSlotChange: handleAILabelSlotChange,
     } = this;
 
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      disabled: !readonly && disabled,
+      invalid: !readonly && !disabled && invalid,
+      warn: !readonly && !invalid && !disabled && warn,
+    };
+
     const inputClasses = classMap({
       [`${prefix}--select-input`]: true,
       [`${prefix}--select-input--${size}`]: size,
@@ -420,13 +430,13 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
-      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const helperTextClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
     const supplementalText = helperText
@@ -438,14 +448,14 @@ class CDSSelect extends FormMixin(LitElement) {
       : null;
 
     const errorText =
-      invalid || warn
+      normalizedProps.invalid || normalizedProps.warn
         ? html` <div id="error-text" class="${prefix}--form-requirement">
-            ${invalid ? invalidText : warnText}
+            ${normalizedProps.invalid ? invalidText : warnText}
           </div>`
         : null;
 
     let describedBy: string | undefined;
-    if (invalid || warn) {
+    if (normalizedProps.invalid || normalizedProps.warn) {
       describedBy = 'error-text';
     } else if (helperText) {
       describedBy = 'helper-text';
@@ -457,7 +467,7 @@ class CDSSelect extends FormMixin(LitElement) {
         class="${inputClasses}"
         ?disabled="${disabled}"
         aria-readonly="${String(Boolean(readonly))}"
-        aria-invalid="${String(Boolean(invalid))}"
+        aria-invalid="${String(Boolean(normalizedProps.invalid))}"
         aria-describedby="${ifDefined(describedBy)}"
         @input="${handleInput}">
         ${!placeholder || value
@@ -479,15 +489,18 @@ class CDSSelect extends FormMixin(LitElement) {
       })}
       <slot
         name="ai-label"
-        style="--${prefix}-show-before: ${warn || invalid ? 'block' : 'none'}"
+        style="--${prefix}-show-before: ${normalizedProps.warn ||
+        normalizedProps.invalid
+          ? 'block'
+          : 'none'}"
         @slotchange=${handleAILabelSlotChange}></slot>
       <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
-      ${!invalid
+      ${!normalizedProps.invalid
         ? undefined
         : iconLoader(WarningFilled16, {
             class: `${prefix}--select__invalid-icon`,
           })}
-      ${!invalid && warn
+      ${!normalizedProps.invalid && normalizedProps.warn
         ? iconLoader(WarningAltFilled16, {
             class: `${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`,
           })
@@ -502,16 +515,16 @@ class CDSSelect extends FormMixin(LitElement) {
       ${inline
         ? html`<div
             class="${prefix}--select-input--inline__wrapper"
-            ?data-invalid="${invalid}">
+            ?data-invalid="${normalizedProps.invalid}">
             <div
               class="${prefix}--select-input__wrapper"
-              ?data-invalid="${invalid}">
+              ?data-invalid="${normalizedProps.invalid}">
               ${input}
             </div>
           </div>`
         : html`<div
             class="${prefix}--select-input__wrapper"
-            ?data-invalid="${invalid}">
+            ?data-invalid="${normalizedProps.invalid}">
             ${input}
           </div> `}
       ${errorText ? errorText : supplementalText}
