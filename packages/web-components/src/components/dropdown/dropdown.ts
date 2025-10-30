@@ -688,6 +688,11 @@ class CDSDropdown extends ValidityMixin(
     const { disabled, size, type, invalid, open, warn } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
 
+    // Don't show invalid or warning states when disabled or readonly
+    const effectiveInvalid = invalid && !disabled && !this.readOnly;
+    const effectiveWarn =
+      !effectiveInvalid && warn && !disabled && !this.readOnly;
+
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
     ).length;
@@ -699,8 +704,8 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warn`]: warn,
+      [`${prefix}--dropdown--invalid`]: effectiveInvalid,
+      [`${prefix}--dropdown--warn`]: effectiveWarn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
@@ -753,20 +758,28 @@ class CDSDropdown extends ValidityMixin(
       invalidText ||
       warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const validityIcon = !invalid
+    // Calculate effective states
+    const effectiveInvalid = this.invalid && !this.disabled && !this.readOnly;
+    const effectiveWarn =
+      !effectiveInvalid && this.warn && !this.disabled && !this.readOnly;
+
+    const validityIcon = !effectiveInvalid
       ? undefined
       : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon =
-      !warn || (invalid && warn)
-        ? undefined
-        : iconLoader(WarningAltFilled16, {
-            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-            'aria-label': toggleLabel,
-          });
-    const helperMessage = invalid ? invalidText : warn ? warnText : helperText;
+    const warningIcon = !effectiveWarn
+      ? undefined
+      : iconLoader(WarningAltFilled16, {
+          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+          'aria-label': toggleLabel,
+        });
+    const helperMessage = effectiveInvalid
+      ? invalidText
+      : effectiveWarn
+        ? warnText
+        : helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
