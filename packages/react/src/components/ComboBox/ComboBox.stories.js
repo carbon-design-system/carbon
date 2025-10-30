@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useRef } from 'react';
-
+import { Locked } from '@carbon/react/icons';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
@@ -354,4 +354,17 @@ _fullyControlled.argTypes = { ...sharedArgTypes };
 AutocompleteWithTypeahead.argTypes = {
   ...sharedArgTypes,
   onChange: { action: 'onChange' },
+};
+
+export const Test = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        id="compForIssue"
+        decorator={<Locked />}
+        items={['zero', 'one', 'two', 'three']}
+        onChange={() => {}}
+      />
+    </div>
+  );
 };
