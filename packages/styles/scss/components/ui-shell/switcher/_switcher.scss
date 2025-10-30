@@ -47,6 +47,15 @@
     inline-size: convert.to-rem(224px);
   }
 
+  hr.#{$prefix}--switcher__item--divider {
+    padding: 0;
+    border: none;
+    margin: $spacing-03 $spacing-05;
+    background: $border-subtle;
+    block-size: 1px;
+    inline-size: convert.to-rem(224px);
+  }
+
   .#{$prefix}--switcher__item-link {
     @include type-style('heading-compact-01');
 
