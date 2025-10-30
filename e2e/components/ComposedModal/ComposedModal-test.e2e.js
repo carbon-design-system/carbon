@@ -83,7 +83,7 @@ test.describe('ComposedModal', () => {
       }) => {
         await snapshotStory(page, {
           component: 'ComposedModal',
-          id: 'components-composedmodal-feature-flags--enable-preview-focus-wrap-without-sentinels',
+          id: 'components-composedmodal-feature-flags--enable-focus-wrap-without-sentinels',
           theme,
         });
       });
