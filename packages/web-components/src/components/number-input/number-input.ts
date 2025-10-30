@@ -247,6 +247,12 @@ class CDSNumberInput extends CDSTextInput {
   disableWheel = false;
 
   /**
+   * Set to true to use the fluid variant.
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
    * The input box size.
    */
   @property({ reflect: true })
@@ -302,7 +308,6 @@ class CDSNumberInput extends CDSTextInput {
     } = this;
 
     const isValid = this._getInputValidity();
-
     const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--number__invalid`,
     });
@@ -310,7 +315,6 @@ class CDSNumberInput extends CDSTextInput {
     const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--number__invalid ${prefix}--number__invalid--warning`,
     });
-
     const normalizedProps: {
       disabled: boolean;
       invalid: boolean;
@@ -417,6 +421,25 @@ class CDSNumberInput extends CDSTextInput {
       normalizedProps['slot-name'] = 'warn-text';
       normalizedProps['slot-text'] = this.warnText;
     }
+    const validationMessage =
+      normalizedProps.invalid || normalizedProps.warn
+        ? html`<div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>`
+        : null;
+
+    const helper = this.helperText
+      ? html`<div
+          class="${helperTextClasses}"
+          id="helper-text"
+          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
+          <slot name="helper-text"> ${this.helperText} </slot>
+        </div>`
+      : null;
 
     return html`
       <div class="${wrapperClasses}" ?data-invalid=${normalizedProps.invalid}>
@@ -432,19 +455,12 @@ class CDSNumberInput extends CDSTextInput {
               ? html`${decrementButton} ${incrementButton}`
               : null}
           </div>
+          ${this.isFluid
+            ? html`<hr class="${prefix}--text-input__divider" />`
+            : null}
         </div>
-        <div
-          class="${helperTextClasses}"
-          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
-          <slot name="helper-text"> ${this.helperText} </slot>
-        </div>
-        <div
-          class="${prefix}--form-requirement"
-          ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
-          <slot name="${normalizedProps['slot-name']}">
-            ${normalizedProps['slot-text']}
-          </slot>
-        </div>
+        ${/* Non-fluid: validation and helper outside field wrapper */ ''}
+        ${!this.isFluid ? validationMessage || helper : null}
       </div>
     `;
   }
