@@ -661,6 +661,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "fluid": {
+        "type": "bool",
+      },
       "stacked": {
         "type": "bool",
       },
