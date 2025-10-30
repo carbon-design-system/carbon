@@ -200,6 +200,11 @@ Default.argTypes = {
       type: 'select',
     },
   },
+  border: {
+    control: {
+      type: 'boolean',
+    },
+  },
   caret: {
     control: {
       type: 'boolean',

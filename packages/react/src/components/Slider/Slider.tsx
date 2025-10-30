@@ -41,6 +41,7 @@ import {
 } from './SliderHandles';
 import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 interface ThumbWrapperProps
   extends Omit<
@@ -1266,70 +1267,86 @@ export const Slider = (props: SliderProps) => {
     }
   }, [props.invalid]);
 
+  const {
+    ariaLabelInput,
+    unstable_ariaLabelInputUpper: ariaLabelInputUpper,
+    className,
+    hideTextInput = false,
+    id = (inputIdRef.current =
+      inputIdRef.current ||
+      // TODO:
+      // 1. Why isn't `inputId` just set to this value instead of an empty
+      //    string?
+      // 2. Why this value instead of something else, like
+      //    `crypto.randomUUID()` or `useId()`?
+      `__carbon-slider_${Math.random().toString(36).substr(2)}`),
+    min,
+    minLabel,
+    max,
+    maxLabel,
+    formatLabel = defaultFormatLabel,
+    labelText,
+    hideLabel,
+    step = 1,
+    // TODO: Other properties are deleted below. Why isn't this one?
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+    stepMultiplier: _stepMultiplier,
+    inputType = 'number',
+    invalidText,
+    required,
+    disabled = false,
+    name,
+    unstable_nameUpper: nameUpper,
+    light,
+    readOnly = false,
+    warn = false,
+    warnText,
+    translateWithId: t = defaultTranslateWithId,
+    ...other
+  } = props;
+
+  const {
+    value,
+    valueUpper,
+    isValid,
+    isValidUpper,
+    correctedValue,
+    correctedPosition,
+    isRtl,
+  } = state;
+
+  const normalizedProps = useNormalizedInputProps({
+    id,
+    disabled,
+    readOnly,
+    invalid: !isValid,
+    warn,
+  });
+
+  const normalizedUpperProps = useNormalizedInputProps({
+    id,
+    disabled,
+    readOnly,
+    invalid: !isValidUpper,
+    warn,
+  });
+
   // TODO: Delete this IIFE. It was added to maintain whitespace and to make it clear
   // what exactly has changed.
   return (() => {
-    const {
-      ariaLabelInput,
-      unstable_ariaLabelInputUpper: ariaLabelInputUpper,
-      className,
-      hideTextInput = false,
-      id = (inputIdRef.current =
-        inputIdRef.current ||
-        // TODO:
-        // 1. Why isn't `inputId` just set to this value instead of an empty
-        //    string?
-        // 2. Why this value instead of something else, like
-        //    `crypto.randomUUID()` or `useId()`?
-        `__carbon-slider_${Math.random().toString(36).substr(2)}`),
-      min,
-      minLabel,
-      max,
-      maxLabel,
-      formatLabel = defaultFormatLabel,
-      labelText,
-      hideLabel,
-      step = 1,
-      // TODO: Other properties are deleted below. Why isn't this one?
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      stepMultiplier: _stepMultiplier,
-      inputType = 'number',
-      invalidText,
-      required,
-      disabled = false,
-      name,
-      unstable_nameUpper: nameUpper,
-      light,
-      readOnly = false,
-      warn,
-      warnText,
-      translateWithId: t = defaultTranslateWithId,
-      ...other
-    } = props;
-
     delete other.onRelease;
     delete other.invalid;
     delete other.unstable_valueUpper;
 
-    const {
-      value,
-      valueUpper,
-      isValid,
-      isValidUpper,
-      correctedValue,
-      correctedPosition,
-      isRtl,
-    } = state;
-
     const showWarning =
-      (!readOnly && warn) ||
+      normalizedProps.warn ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
       // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
       (typeof correctedValue !== null &&
         correctedPosition === HandlePosition.LOWER &&
         isValid);
     const showWarningUpper =
-      (!readOnly && warn) ||
+      normalizedUpperProps.warn ||
       // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
       // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
       (typeof correctedValue !== null &&
@@ -1369,7 +1386,7 @@ export const Slider = (props: SliderProps) => {
             `${prefix}--slider-text-input--lower`,
             conditionalInputClasses,
             {
-              [`${prefix}--text-input--invalid`]: !readOnly && !isValid,
+              [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
               [`${prefix}--slider-text-input--warn`]: showWarning,
             },
           ]);
@@ -1378,8 +1395,9 @@ export const Slider = (props: SliderProps) => {
             `${prefix}--slider-text-input--upper`,
             conditionalInputClasses,
             {
-              [`${prefix}--text-input--invalid`]:
-                !readOnly && (twoHandles ? !isValidUpper : !isValid),
+              [`${prefix}--text-input--invalid`]: twoHandles
+                ? normalizedUpperProps.invalid
+                : normalizedProps.invalid,
               [`${prefix}--slider-text-input--warn`]: showWarningUpper,
             },
           ]);
@@ -1458,12 +1476,12 @@ export const Slider = (props: SliderProps) => {
                       onBlur={onBlurInput}
                       onKeyUp={props.onInputKeyUp}
                       onKeyDown={onInputKeyDown}
-                      data-invalid={!isValid && !readOnly ? true : null}
+                      data-invalid={normalizedProps.invalid ? true : null}
                       data-handle-position={HandlePosition.LOWER}
-                      aria-invalid={!isValid && !readOnly ? true : undefined}
+                      aria-invalid={normalizedProps.invalid ? true : undefined}
                       readOnly={readOnly}
                     />
-                    {!readOnly && !isValid && (
+                    {normalizedProps.invalid && (
                       <WarningFilled
                         className={`${prefix}--slider__invalid-icon`}
                       />
@@ -1492,8 +1510,12 @@ export const Slider = (props: SliderProps) => {
                   role="presentation"
                   tabIndex={-1}
                   data-invalid={
-                    (twoHandles ? !isValid || !isValidUpper : !isValid) &&
-                    !readOnly
+                    (
+                      twoHandles
+                        ? normalizedProps.invalid ||
+                          normalizedUpperProps.invalid
+                        : normalizedProps.invalid
+                    )
                       ? true
                       : null
                   }
@@ -1609,7 +1631,11 @@ export const Slider = (props: SliderProps) => {
                     onKeyDown={onInputKeyDown}
                     onKeyUp={props.onInputKeyUp}
                     data-invalid={
-                      (twoHandles ? !isValidUpper : !isValid) && !readOnly
+                      (
+                        twoHandles
+                          ? normalizedUpperProps.invalid
+                          : normalizedProps.invalid
+                      )
                         ? true
                         : null
                     }
@@ -1617,13 +1643,19 @@ export const Slider = (props: SliderProps) => {
                       twoHandles ? HandlePosition.UPPER : null
                     }
                     aria-invalid={
-                      (twoHandles ? !isValidUpper : !isValid) && !readOnly
+                      (
+                        twoHandles
+                          ? normalizedUpperProps.invalid
+                          : normalizedProps.invalid
+                      )
                         ? true
                         : undefined
                     }
                     readOnly={readOnly}
                   />
-                  {!readOnly && (twoHandles ? !isValidUpper : !isValid) && (
+                  {(twoHandles
+                    ? normalizedUpperProps.invalid
+                    : normalizedProps.invalid) && (
                     <WarningFilled
                       className={`${prefix}--slider__invalid-icon`}
                     />
@@ -1636,7 +1668,7 @@ export const Slider = (props: SliderProps) => {
                   )}
                 </div>
               </div>
-              {!readOnly && (!isValid || !isValidUpper) && (
+              {(normalizedProps.invalid || normalizedUpperProps.invalid) && (
                 <Text
                   as="div"
                   className={classNames(
@@ -1647,7 +1679,7 @@ export const Slider = (props: SliderProps) => {
                   {invalidText}
                 </Text>
               )}
-              {!readOnly && warn && isValid && isValidUpper && (
+              {(normalizedProps.warn || normalizedUpperProps.warn) && (
                 <Text
                   as="div"
                   className={classNames(

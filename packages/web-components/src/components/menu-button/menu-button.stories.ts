@@ -16,6 +16,8 @@ const args = {
   kind: 'primary',
   size: 'lg',
   menuAlignment: 'bottom',
+  menuBackgroundToken: 'layer',
+  menuBorder: false,
 };
 
 const argTypes = {
@@ -45,6 +47,16 @@ const argTypes = {
       'bottom-end',
     ],
   },
+  menuBackgroundToken: {
+    control: 'select',
+    description:
+      'Specify the background token to use for the menu. Default is "layer".',
+    options: ['layer', 'background'],
+  },
+  menuBorder: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the menu.',
+  },
   size: {
     control: 'radio',
     description: `Specify the size of the button and menu.
@@ -63,11 +75,22 @@ const argTypes = {
 export const Default = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, kind, label, menuAlignment, size, tabIndex }) => html`
+  render: ({
+    disabled,
+    kind,
+    label,
+    menuAlignment,
+    menuBackgroundToken,
+    menuBorder,
+    size,
+    tabIndex,
+  }) => html`
     <cds-menu-button
       label="${label}"
       kind=${kind}
       menu-alignment=${menuAlignment}
+      menu-background-token=${menuBackgroundToken}
+      ?menu-border=${menuBorder}
       size=${size}
       ?disabled=${disabled}
       tab-index=${tabIndex}>
@@ -84,13 +107,24 @@ export const Default = {
 export const ExperimentalAutoAlign = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, kind, label, menuAlignment, size, tabIndex }) => html`
+  render: ({
+    disabled,
+    kind,
+    label,
+    menuAlignment,
+    menuBackgroundToken,
+    menuBorder,
+    size,
+    tabIndex,
+  }) => html`
     <div style="width: 5000px; height: 5000px;">
       <div style="position: absolute; bottom: 20px">
         <cds-menu-button
           label="${label}"
           kind=${kind}
           menu-alignment=${menuAlignment}
+          menu-background-token=${menuBackgroundToken}
+          ?menu-border=${menuBorder}
           size=${size}
           ?disabled=${disabled}
           tab-index=${tabIndex}>
@@ -109,11 +143,22 @@ export const ExperimentalAutoAlign = {
 export const withDanger = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, kind, label, menuAlignment, size, tabIndex }) => html`
+  render: ({
+    disabled,
+    kind,
+    label,
+    menuAlignment,
+    menuBackgroundToken,
+    menuBorder,
+    size,
+    tabIndex,
+  }) => html`
     <cds-menu-button
       label="${label}"
       kind=${kind}
       menu-alignment=${menuAlignment}
+      menu-background-token=${menuBackgroundToken}
+      ?menu-border=${menuBorder}
       size=${size}
       ?disabled=${disabled}
       tab-index=${tabIndex}>
@@ -131,11 +176,22 @@ export const withDanger = {
 export const withDividers = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, kind, label, menuAlignment, size, tabIndex }) => html`
+  render: ({
+    disabled,
+    kind,
+    label,
+    menuAlignment,
+    menuBackgroundToken,
+    menuBorder,
+    size,
+    tabIndex,
+  }) => html`
     <cds-menu-button
       label="${label}"
       kind=${kind}
       menu-alignment=${menuAlignment}
+      menu-background-token=${menuBackgroundToken}
+      ?menu-border=${menuBorder}
       size=${size}
       ?disabled=${disabled}
       tab-index=${tabIndex}>
@@ -161,11 +217,22 @@ export const withIcons = {
     size: 'lg',
     menuAlignment: 'bottom',
   },
-  render: ({ disabled, kind, label, menuAlignment, size, tabIndex }) => html`
+  render: ({
+    disabled,
+    kind,
+    label,
+    menuAlignment,
+    menuBackgroundToken,
+    menuBorder,
+    size,
+    tabIndex,
+  }) => html`
     <cds-menu-button
       label="${label}"
       kind=${kind}
       menu-alignment=${menuAlignment}
+      menu-background-token=${menuBackgroundToken}
+      ?menu-border=${menuBorder}
       size=${size}
       ?disabled=${disabled}
       tab-index=${tabIndex}>
@@ -187,11 +254,22 @@ export const withIcons = {
 export const withNestedMenu = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, kind, label, menuAlignment, size, tabIndex }) => html`
+  render: ({
+    disabled,
+    kind,
+    label,
+    menuAlignment,
+    menuBackgroundToken,
+    menuBorder,
+    size,
+    tabIndex,
+  }) => html`
     <cds-menu-button
       label="${label}"
       kind=${kind}
       menu-alignment=${menuAlignment}
+      menu-background-token=${menuBackgroundToken}
+      ?menu-border=${menuBorder}
       size=${size}
       ?disabled=${disabled}
       tab-index=${tabIndex}>
@@ -213,9 +291,15 @@ export const withNestedMenu = {
 };
 
 export const withMenuAlignment = {
-  render: () => html`
+  argTypes: argTypes,
+  args: args,
+  render: ({ menuBackgroundToken, menuBorder }) => html`
     <div style="display: flex; justify-content: space-between;">
-      <cds-menu-button label="Bottom" menu-alignment="bottom">
+      <cds-menu-button
+        label="Bottom"
+        menu-alignment="bottom"
+        menu-background-token=${menuBackgroundToken}
+        ?menu-border=${menuBorder}>
         <cds-menu>
           <cds-menu-item label="first"></cds-menu-item>
           <cds-menu-item
@@ -224,7 +308,11 @@ export const withMenuAlignment = {
         </cds-menu>
       </cds-menu-button>
 
-      <cds-menu-button label="Bottom start" menu-alignment="bottom-start">
+      <cds-menu-button
+        label="Bottom start"
+        menu-alignment="bottom-start"
+        menu-background-token=${menuBackgroundToken}
+        ?menu-border=${menuBorder}>
         <cds-menu>
           <cds-menu-item label="first"></cds-menu-item>
           <cds-menu-item
@@ -233,7 +321,11 @@ export const withMenuAlignment = {
         </cds-menu>
       </cds-menu-button>
 
-      <cds-menu-button label="Bottom end" menu-alignment="bottom-end">
+      <cds-menu-button
+        label="Bottom end"
+        menu-alignment="bottom-end"
+        menu-background-token=${menuBackgroundToken}
+        ?menu-border=${menuBorder}>
         <cds-menu>
           <cds-menu-item label="first"></cds-menu-item>
           <cds-menu-item
@@ -245,7 +337,11 @@ export const withMenuAlignment = {
 
     <div
       style="display: flex; justify-content: space-between; margin-top: 15rem">
-      <cds-menu-button label="Top" menu-alignment="top">
+      <cds-menu-button
+        label="Top"
+        menu-alignment="top"
+        menu-background-token=${menuBackgroundToken}
+        ?menu-border=${menuBorder}>
         <cds-menu>
           <cds-menu-item label="first"></cds-menu-item>
           <cds-menu-item
@@ -254,7 +350,11 @@ export const withMenuAlignment = {
         </cds-menu>
       </cds-menu-button>
 
-      <cds-menu-button label="Top start" menu-alignment="top-start">
+      <cds-menu-button
+        label="Top start"
+        menu-alignment="top-start"
+        menu-background-token=${menuBackgroundToken}
+        ?menu-border=${menuBorder}>
         <cds-menu>
           <cds-menu-item label="first"></cds-menu-item>
           <cds-menu-item
@@ -263,7 +363,11 @@ export const withMenuAlignment = {
         </cds-menu>
       </cds-menu-button>
 
-      <cds-menu-button label="Top end" menu-alignment="top-end">
+      <cds-menu-button
+        label="Top end"
+        menu-alignment="top-end"
+        menu-background-token=${menuBackgroundToken}
+        ?menu-border=${menuBorder}>
         <cds-menu>
           <cds-menu-item label="first"></cds-menu-item>
           <cds-menu-item

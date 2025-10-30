@@ -83,6 +83,16 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   tabIndex?: number;
 
   /**
+   * Specify the background token to use for the menu. Default is 'layer'.
+   */
+  menuBackgroundToken?: 'layer' | 'background';
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  menuBorder?: boolean;
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget?: Element;
@@ -97,6 +107,8 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       disabled,
       kind = defaultButtonKind,
       label,
+      menuBackgroundToken = 'layer',
+      menuBorder = false,
       size = 'lg',
       menuAlignment = 'bottom',
       tabIndex = 0,
@@ -229,7 +241,9 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           size={size}
           open={open}
           onClose={handleClose}
-          target={menuTarget}>
+          target={menuTarget}
+          backgroundToken={menuBackgroundToken}
+          border={menuBorder}>
           {children}
         </Menu>
       </div>
@@ -292,9 +306,18 @@ MenuButton.propTypes = {
   tabIndex: PropTypes.number,
 
   /**
+   * Specify the background token to use for the menu. Default is 'layer'.
+   */
+  menuBackgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  menuBorder: PropTypes.bool,
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-
   menuTarget: PropTypes.instanceOf(
     typeof Element !== 'undefined' ? Element : Object
   ) as PropTypes.Validator<Element | null | undefined>,

@@ -192,6 +192,21 @@ export const WithAILabel = {
   `,
 };
 
+export const DynamicFiltering = {
+  render: () => html`
+    <cds-combo-box
+      title-text="Custom Filter"
+      helper-text="Type to test shouldFilterItem (only matches items starting with input)"
+      should-filter-item>
+      <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
+      <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
+      <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
+      <cds-combo-box-item value="raspberry">Raspberry</cds-combo-box-item>
+      <cds-combo-box-item value="grape">Grape</cds-combo-box-item>
+    </cds-combo-box>
+  `,
+};
+
 export const WithLayer = {
   render: () => html`
     <sb-template-layers>

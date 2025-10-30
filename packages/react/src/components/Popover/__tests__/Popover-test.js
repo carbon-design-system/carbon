@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -130,6 +130,64 @@ describe('Popover', () => {
         </Popover>
       );
       expect(container.firstChild).toHaveClass(`${prefix}--popover--tab-tip`);
+    });
+
+    it('should respect border prop', () => {
+      const { container } = render(
+        <Popover open border>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--border`);
+    });
+
+    it('should respect dropShadow prop', () => {
+      const { container } = render(
+        <Popover open dropShadow>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--drop-shadow`
+      );
+    });
+
+    it('should respect backgroundToken prop when set to "background" and highContrast is false', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background" highContrast={false}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when backgroundToken is "layer"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="layer">
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when highContrast is true, even if backgroundToken is "background"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background" highContrast={true}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
     });
 
     it('should not allow other alignments than bottom-start or bottom-end when isTabTip is present', () => {

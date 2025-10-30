@@ -367,4 +367,30 @@ describe('cds-pagination', () => {
 
     expect(nextBtn?.hasAttribute('disabled')).to.be.true;
   });
+
+  it('should update totalPages after pageSize changes', async () => {
+    const el = await fixture(html`
+      <cds-pagination total-items="40" page-size="10"></cds-pagination>
+    `);
+
+    el.pageSize = 20;
+    await el.updateComplete;
+    await el.updateComplete;
+
+    expect(el.totalPages).to.equal(2);
+  });
+
+  it('should update totalPages only after updateComplete resolves', async () => {
+    const el = await fixture(html`
+      <cds-pagination total-items="100" page-size="10" page="1">
+        <cds-select-item value="10">10</cds-select-item>
+      </cds-pagination>
+    `);
+
+    el.pageSize = 20;
+    await el.updateComplete;
+    await el.updateComplete;
+
+    expect(el.totalPages).to.equal(5);
+  });
 });

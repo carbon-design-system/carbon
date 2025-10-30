@@ -216,11 +216,22 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
+
+    const isInteractive = !readonly && !disabled;
+
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
+    };
+
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
-      [`${prefix}--text-input--invalid`]: invalid,
-      [`${prefix}--slider-text-input--warn`]: warn,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--slider-text-input--warn`]: normalizedProps.warn,
     });
 
     const invalidIcon = iconLoader(WarningFilled16, {
@@ -235,7 +246,7 @@ class CDSSliderInput extends FocusMixin(LitElement) {
         ? html`
             <input
               ?disabled="${disabled}"
-              ?data-invalid="${invalid}"
+              ?data-invalid="${normalizedProps.invalid}"
               type="${ifDefined(type)}"
               class="${classes}"
               max="${max}"
@@ -245,8 +256,8 @@ class CDSSliderInput extends FocusMixin(LitElement) {
               .value="${value}"
               @change="${handleChange}"
               @input="${handleInput}" />
-            ${invalid ? html`${invalidIcon}` : null}
-            ${warn ? html`${warnIcon}` : null}
+            ${normalizedProps.invalid ? html`${invalidIcon}` : null}
+            ${normalizedProps.warn ? html`${warnIcon}` : null}
           `
         : null}
     `;

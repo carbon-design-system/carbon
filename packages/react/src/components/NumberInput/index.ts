@@ -6,4 +6,8 @@
  */
 
 export { default as NumberInputSkeleton } from './NumberInput.Skeleton';
-export { NumberInput, type NumberInputProps } from './NumberInput';
+export {
+  NumberInput,
+  validateNumberSeparators,
+  type NumberInputProps,
+} from './NumberInput';

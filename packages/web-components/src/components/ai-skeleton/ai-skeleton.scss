@@ -5,6 +5,20 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/config' as *;
 @use '../skeleton-text/skeleton-text';
 @use '../skeleton-icon/skeleton-icon';
 @use '../skeleton-placeholder/skeleton-placeholder';
+
+:host(#{$prefix}-ai-skeleton-text) {
+  display: block;
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-ai-skeleton-placeholder) {
+  display: block;
+}
+
+:host(#{$prefix}-ai-skeleton-icon) {
+  display: inline-block;
+}

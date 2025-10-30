@@ -102,7 +102,6 @@ const config = {
                 path.resolve(__dirname, '..', 'node_modules'),
                 path.resolve(__dirname, '..', '..', '..', 'node_modules'),
               ],
-              silenceDeprecations: ['mixed-decls'],
             },
             warnRuleAsWarning: true,
             sourceMap: true,

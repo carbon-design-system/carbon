@@ -352,7 +352,7 @@ jobs:
         run: yarn install --immutable --immutable-cache
 
       - name: Download vrt blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: all-playwright-vrt-blob-reports
           pattern: playwright-vrt-blob-report-*
@@ -371,7 +371,7 @@ jobs:
           retention-days: 14
 
       - name: Download avt blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: all-playwright-avt-blob-reports
           pattern: playwright-avt-blob-report-*
@@ -428,7 +428,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@4ffe736a2a8262ea28067ff05a13b635ba31ec05 # v13.3.0
+        uses: chromaui/action@bc2d84ad2b60813a67d995c5582d696104a19383 # v13.3.2
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects

@@ -374,6 +374,7 @@ describe('Carbon Components React', () => {
         "usePrefersDarkScheme",
         "usePrefix",
         "useTheme",
+        "validateNumberSeparators",
       ]
     `);
   });

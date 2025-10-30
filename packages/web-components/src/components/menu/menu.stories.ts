@@ -22,13 +22,25 @@ import CDSmenuItemSelectable from './menu-item-selectable';
 import CDSmenuItemGroup from './menu-item-group';
 import CDSmenuItemRadioGroup from './menu-item-radio-group';
 import CDSmenuItemDivider from './menu-item-divider';
+import { MENU_BACKGROUND_TOKEN } from './defs';
 
 const args = {
+  backgroundToken: MENU_BACKGROUND_TOKEN.LAYER,
+  border: false,
   size: 'sm',
   open: true,
 };
 
 const argTypes = {
+  backgroundToken: {
+    control: 'select',
+    description: 'Specify the background token to use. Default is "layer".',
+    options: [MENU_BACKGROUND_TOKEN.LAYER, MENU_BACKGROUND_TOKEN.BACKGROUND],
+  },
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the menu.',
+  },
   label: {
     control: 'text',
     description: 'A label describing the Menu.',
@@ -76,9 +88,14 @@ export const Default = {
   },
   args,
   argTypes,
-  render: ({ open, size }) => {
+  render: ({ open, size, backgroundToken, border }) => {
     return html`
-      <cds-menu ?open=${open} size=${size} menuAlignment="bottom">
+      <cds-menu
+        ?open=${open}
+        size=${size}
+        menuAlignment="bottom"
+        background-token=${backgroundToken}
+        ?border=${border}>
         <cds-menu-item label="Share with">
           ${iconLoader(FolderShared16, { slot: 'render-icon' })}
           <cds-menu-item-radio-group slot="submenu" label="Share with list">

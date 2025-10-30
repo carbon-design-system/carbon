@@ -53,16 +53,6 @@ const config: StorybookConfig = {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
       plugins: [litStyleLoader(), litTemplateLoader()],
-      css: {
-        preprocessorOptions: {
-          // suppress mixed-declarations warnings until resolved in
-          // https://github.com/carbon-design-system/carbon/issues/16962
-          scss: {
-            api: 'modern',
-            silenceDeprecations: ['mixed-decls'],
-          },
-        },
-      },
       optimizeDeps: {
         include: ['@storybook/web-components-vite'],
         exclude: ['lit', 'lit-html'],
