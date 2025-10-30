@@ -381,6 +381,9 @@ const Dropdown = React.forwardRef(
       return isObject && 'disabled' in item && item.disabled === true;
     }, []);
 
+    const items = useMemo(() => itemsProp, [itemsProp]);
+    const [ariaLiveText, setAriaLiveText] = useState('');
+
     const onHighlightedIndexChange = useCallback(
       (changes: UseSelectStateChange<ItemType>) => {
         const { highlightedIndex } = changes;
@@ -388,8 +391,7 @@ const Dropdown = React.forwardRef(
         if (
           highlightedIndex !== undefined &&
           highlightedIndex > -1 &&
-          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-          typeof window !== undefined
+          typeof window !== 'undefined'
         ) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
@@ -401,12 +403,16 @@ const Dropdown = React.forwardRef(
               block: 'nearest',
             });
           }
+
+          const currentItem = items[highlightedIndex] ?? null;
+          setAriaLiveText(itemToString(currentItem));
+        } else {
+          setAriaLiveText('');
         }
       },
-      [prefix]
+      [items, itemToString, prefix]
     );
 
-    const items = useMemo(() => itemsProp, [itemsProp]);
     const selectProps = useMemo(
       () => ({
         items,
@@ -451,6 +457,12 @@ const Dropdown = React.forwardRef(
     const showWarning = !invalid && warn;
 
     const [isFocused, setIsFocused] = useState(false);
+
+    useEffect(() => {
+      if (!isOpen) {
+        setAriaLiveText('');
+      }
+    }, [isOpen]);
 
     const className = cx(`${prefix}--dropdown`, {
       [`${prefix}--dropdown--invalid`]: invalid,
@@ -677,9 +689,11 @@ const Dropdown = React.forwardRef(
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';
+                const isSelected = selectedItem === item;
                 const itemProps = getItemProps({
                   item,
                   index,
+                  ['aria-selected']: isSelected || undefined,
                 });
                 const title =
                   isObject && 'text' in item && itemToElement
@@ -709,6 +723,14 @@ const Dropdown = React.forwardRef(
                 );
               })}
           </ListBox.Menu>
+          {isOpen && ariaLiveText ? (
+            <span
+              aria-live="polite"
+              aria-atomic="true"
+              className={`${prefix}--assistive-text ${prefix}--visually-hidden`}>
+              {ariaLiveText}
+            </span>
+          ) : null}
         </ListBox>
         {!inline && !invalid && !warn && helper}
       </div>
