@@ -904,8 +904,8 @@ class CDSTable extends HostListenerMixin(LitElement) {
         <slot name="toolbar"></slot>
       </div>
 
-      <div class="${prefix}--data-table_inner-container">
-        <div class="${prefix}--data-table-content">
+      <div part="inner-container" class="${prefix}--data-table_inner-container">
+        <div part="content" class="${prefix}--data-table-content">
           <slot
             @cds-table-body-content-change="${this
               ._handleTableBodyChange}"></slot>
