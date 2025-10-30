@@ -77,7 +77,7 @@ test.describe('Modal', () => {
       }) => {
         await snapshotStory(page, {
           component: 'Modal',
-          id: 'components-modal-feature-flags--enable-preview-focus-wrap-without-sentinels',
+          id: 'components-modal-feature-flags--enable-focus-wrap-without-sentinels',
           theme,
         });
       });
