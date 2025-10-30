@@ -41,7 +41,7 @@
     "brace-expansion": "^2.0.2",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.38.0",
-    "typescript-eslint": "8.46.0"
+    "typescript-eslint": "8.46.1"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
