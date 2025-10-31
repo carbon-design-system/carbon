@@ -21,22 +21,6 @@ test.describe('Pagination', () => {
           id: 'components-pagination--default',
           theme,
         });
-      });
-
-      test('multiple pagination components @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'Pagination',
-          id: 'components-pagination--multiple-pagination-components',
-          theme,
-        });
-      });
-
-      test('pagination tooltip on hover @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'Pagination',
-          id: 'components-pagination--default',
-          theme,
-        });
 
         const nextButton = page.getByRole('button', { name: /next/i });
         await nextButton.hover();
@@ -47,6 +31,14 @@ test.describe('Pagination', () => {
           theme,
           component: 'Pagination',
           id: 'components-pagination--default | tooltip hover',
+        });
+      });
+
+      test('multiple pagination components @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Pagination',
+          id: 'components-pagination--multiple-pagination-components',
+          theme,
         });
       });
 
