@@ -488,29 +488,4 @@ describe('Pagination', () => {
       expect(screen.getByText('1–2 of 4 items')).toBeInTheDocument();
     });
   });
-
-  it('should show the tooltip on hover', async () => {
-    const user = userEvent.setup();
-    render(
-      <Pagination
-        page={1}
-        pageSize={10}
-        itemsPerPageText="Items per page:"
-        forwardText="NextPageTest"
-        backwardText="PrevPageTest"
-        totalItems={100}
-        pageSizes={[10, 20, 30, 40, 50]}
-      />
-    );
-
-    const nextButton = screen.getByLabelText('NextPageTest');
-    await user.hover(nextButton);
-
-    expect(await screen.findByText('NextPageTest')).toBeInTheDocument();
-
-    const prevButton = screen.getByLabelText('PrevPageTest');
-    await user.hover(prevButton);
-
-    expect(await screen.findByText('PrevPageTest')).toBeInTheDocument();
-  });
 });

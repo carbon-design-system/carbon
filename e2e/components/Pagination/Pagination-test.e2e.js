@@ -9,6 +9,7 @@
 
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
+const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('Pagination', () => {
@@ -27,6 +28,25 @@ test.describe('Pagination', () => {
           component: 'Pagination',
           id: 'components-pagination--multiple-pagination-components',
           theme,
+        });
+      });
+
+      test('pagination tooltip on hover @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Pagination',
+          id: 'components-pagination--default',
+          theme,
+        });
+
+        const nextButton = page.getByRole('button', { name: /next/i });
+        await nextButton.hover();
+
+        await page.getByText(/next page/i).waitFor();
+
+        await snapshot(page, {
+          theme,
+          component: 'Pagination',
+          id: 'components-pagination--default | tooltip hover',
         });
       });
 
