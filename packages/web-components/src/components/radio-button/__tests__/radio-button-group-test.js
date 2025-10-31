@@ -169,4 +169,121 @@ describe('cds-radio-button-group', () => {
     expect(rb1?.checked).to.be.false;
     expect(rb2?.checked).to.be.true;
   });
+  describe('Invalid and Warning States', () => {
+    it('should show invalid message when invalid prop is true', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group invalid invalid-text="Invalid selection">
+          <cds-radio-button value="test-1"></cds-radio-button>
+          <cds-radio-button value="test-2"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+
+      const invalidMessage = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(invalidMessage).to.exist;
+      expect(invalidMessage?.textContent).to.contain('Invalid selection');
+
+      const fieldset = el.shadowRoot?.querySelector('fieldset');
+      expect(fieldset?.classList.contains('cds--radio-button-group--invalid'))
+        .to.be.true;
+    });
+
+    it('should show warning message when warn prop is true', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group warn warn-text="Warning message">
+          <cds-radio-button value="test-1"></cds-radio-button>
+          <cds-radio-button value="test-2"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+
+      const warnMessage = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(warnMessage).to.exist;
+      expect(warnMessage?.textContent).to.contain('Warning message');
+
+      const fieldset = el.shadowRoot?.querySelector('fieldset');
+      expect(fieldset?.classList.contains('cds--radio-button-group--warning'))
+        .to.be.true;
+    });
+
+    it('should not show invalid message or class when disabled and invalid', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group
+          disabled
+          invalid
+          invalid-text="Invalid selection">
+          <cds-radio-button value="test-1"></cds-radio-button>
+          <cds-radio-button value="test-2"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+
+      const invalidMessage = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(invalidMessage).to.not.exist;
+
+      const fieldset = el.shadowRoot?.querySelector('fieldset');
+      expect(fieldset?.classList.contains('cds--radio-button-group--invalid'))
+        .to.be.false;
+    });
+
+    it('should not show warning message or class when disabled and warn', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group disabled warn warn-text="Warning message">
+          <cds-radio-button value="test-1"></cds-radio-button>
+          <cds-radio-button value="test-2"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+
+      const warnMessage = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(warnMessage).to.not.exist;
+
+      const fieldset = el.shadowRoot?.querySelector('fieldset');
+      expect(fieldset?.classList.contains('cds--radio-button-group--warning'))
+        .to.be.false;
+    });
+
+    it('should not show invalid message or class when readonly and invalid', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group
+          readonly
+          invalid
+          invalid-text="Invalid selection">
+          <cds-radio-button value="test-1"></cds-radio-button>
+          <cds-radio-button value="test-2"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+
+      const invalidMessage = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(invalidMessage).to.not.exist;
+
+      const fieldset = el.shadowRoot?.querySelector('fieldset');
+      expect(fieldset?.classList.contains('cds--radio-button-group--invalid'))
+        .to.be.false;
+    });
+
+    it('should not show warning message or class when readonly and warn', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group readonly warn warn-text="Warning message">
+          <cds-radio-button value="test-1"></cds-radio-button>
+          <cds-radio-button value="test-2"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+
+      const warnMessage = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(warnMessage).to.not.exist;
+
+      const fieldset = el.shadowRoot?.querySelector('fieldset');
+      expect(fieldset?.classList.contains('cds--radio-button-group--warning'))
+        .to.be.false;
+    });
+  });
 });
