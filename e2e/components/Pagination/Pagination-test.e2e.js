@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
 const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory } = require('../../test-utils/storybook');
