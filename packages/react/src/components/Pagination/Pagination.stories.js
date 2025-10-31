@@ -37,7 +37,11 @@ export default {
   args: {
     size: 'md',
   },
-  decorators: [(story) => <div style={{ maxWidth: '800px' }}>{story()}</div>],
+  decorators: [
+    (story) => (
+      <div style={{ maxWidth: '800px', marginTop: '15px' }}>{story()}</div>
+    ),
+  ],
   parameters: {
     docs: {
       page: mdx,
