@@ -338,6 +338,8 @@ const TextInput = React.forwardRef(
           invalidId: normalizedProps.invalidId,
           warn: normalizedProps.warn,
           warnId: normalizedProps.warnId,
+          disabled: normalizedProps.disabled,
+          readOnly,
         })}
       />
     );
