@@ -41,7 +41,7 @@ test.describe('Pagination', () => {
         const nextButton = page.getByRole('button', { name: /next/i });
         await nextButton.hover();
 
-        await page.getByText(/next page/i).waitFor();
+        await expect(page.getByText(/next page/i)).toBeVisible();
 
         await snapshot(page, {
           theme,
