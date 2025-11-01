@@ -292,6 +292,9 @@ describe('cds-dropdown', function () {
 
       await el.updateComplete;
 
+      // Should have the ai-label attribute
+      expect(el.hasAttribute('ai-label')).to.be.true;
+
       // Should have the AI label in the slot
       const aiLabel = el.querySelector('cds-ai-label');
       expect(aiLabel).to.exist;
