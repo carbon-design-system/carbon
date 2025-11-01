@@ -664,7 +664,6 @@ class CDSDropdown extends ValidityMixin(
       : this.removeAttribute('ai-label');
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
-
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
@@ -681,12 +680,25 @@ class CDSDropdown extends ValidityMixin(
   }
 
   /**
+   * Normalizes validation props based on disabled and readOnly states
+   */
+  protected get _normalizedProps() {
+    const { disabled, readOnly, invalid, warn } = this;
+    return {
+      disabled: !readOnly && disabled,
+      invalid: !readOnly && !disabled && invalid,
+      warn: !readOnly && !invalid && !disabled && warn,
+    };
+  }
+
+  /**
    * The CSS class list for dropdown listbox
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   protected get _classes(): any {
-    const { disabled, size, type, invalid, open, warn } = this;
+    const { size, type, open } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+    const normalizedProps = this._normalizedProps;
 
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
@@ -695,12 +707,12 @@ class CDSDropdown extends ValidityMixin(
     return classMap({
       [`${prefix}--dropdown`]: true,
       [`${prefix}--list-box`]: true,
-      [`${prefix}--list-box--disabled`]: disabled,
+      [`${prefix}--list-box--disabled`]: normalizedProps.disabled,
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warn`]: warn,
+      [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
+      [`${prefix}--dropdown--warn`]: normalizedProps.warn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
@@ -711,9 +723,7 @@ class CDSDropdown extends ValidityMixin(
     const {
       ariaLabel,
       _classes: classes,
-      disabled,
       helperText,
-      invalid,
       invalidText,
       open,
       toggleLabelClosed,
@@ -731,6 +741,7 @@ class CDSDropdown extends ValidityMixin(
       _slotHelperTextNode: slotHelperTextNode,
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+    const normalizedProps = this._normalizedProps;
 
     let activeDescendantFallback: string | undefined;
     if (open && !activeDescendant) {
@@ -741,7 +752,7 @@ class CDSDropdown extends ValidityMixin(
 
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
     const iconContainerClasses = classMap({
       [`${prefix}--list-box__menu-icon`]: true,
@@ -753,20 +764,23 @@ class CDSDropdown extends ValidityMixin(
       invalidText ||
       warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const validityIcon = !invalid
+    const validityIcon = !normalizedProps.invalid
       ? undefined
       : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon =
-      !warn || (invalid && warn)
-        ? undefined
-        : iconLoader(WarningAltFilled16, {
-            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-            'aria-label': toggleLabel,
-          });
-    const helperMessage = invalid ? invalidText : warn ? warnText : helperText;
+    const warningIcon = !normalizedProps.warn
+      ? undefined
+      : iconLoader(WarningAltFilled16, {
+          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+          'aria-label': toggleLabel,
+        });
+    const helperMessage = normalizedProps.invalid
+      ? invalidText
+      : normalizedProps.warn
+        ? warnText
+        : helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -784,7 +798,7 @@ class CDSDropdown extends ValidityMixin(
       ${this._renderTitleLabel()}
       <div
         class="${classes}"
-        ?data-invalid=${invalid}
+        ?data-invalid=${normalizedProps.invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
         @keypress=${handleKeypressInner}>
@@ -829,7 +843,8 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !invalid) || !hasHelperText}">
+        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+        !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot
         >

@@ -54,7 +54,9 @@ $css--plex: true !default;
   .#{$prefix}--list-box__field {
     outline: none;
   }
+}
 
+:host(#{$prefix}-dropdown[invalid]:not([disabled]):not([read-only])) {
   .#{$prefix}--form__helper-text {
     color: $text-error;
   }
