@@ -28,7 +28,7 @@ export const warning: (condition: boolean, message: string) => void =
         }
 
         if (!condition) {
-          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
           console.warn('Warning: ' + message);
         }
       }

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -26,6 +26,7 @@
 /// @group modal
 @mixin modal(
   $enable-experimental-focus-wrap-without-sentinels: false,
+  $enable-focus-wrap-without-sentinels: false,
   $enable-dialog-element: false,
   $enable-presence: false
 ) {
@@ -35,6 +36,8 @@
     @if not(
       enabled('enable-experimental-focus-wrap-without-sentinels') or
         $enable-experimental-focus-wrap-without-sentinels or
+        enabled('enable-focus-wrap-without-sentinels') or
+        $enable-focus-wrap-without-sentinels or
         enabled('enable-dialog-element') or
         $enable-dialog-element
     )
@@ -70,6 +73,8 @@
   @if not(
     enabled('enable-experimental-focus-wrap-without-sentinels') or
       $enable-experimental-focus-wrap-without-sentinels or
+      enabled('enable-focus-wrap-without-sentinels') or
+      $enable-focus-wrap-without-sentinels or
       enabled('enable-dialog-element') or
       $enable-dialog-element
   )
@@ -92,7 +97,6 @@
     position: fixed;
     display: grid;
     background-color: $layer;
-    block-size: 100%;
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
     inline-size: 100%;
@@ -105,7 +109,6 @@
 
     @include breakpoint(md) {
       position: relative;
-      block-size: auto;
       inline-size: 84%;
       max-block-size: 90%;
     }
@@ -290,6 +293,15 @@
       linear-gradient(to left, $layer 0, 16px, transparent 16px),
       linear-gradient(to right, $layer 0, 2px, transparent 2px),
       linear-gradient(to top, $layer 0, 2px, transparent 2px);
+  }
+
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
+  .#{$prefix}--modal-scroll-content.#{$prefix}--modal-scroll-content--no-fade,
+  .#{$prefix}--modal-scroll-content--no-fade {
+    mask-image: none;
   }
 
   //removing mask image in case we have dropdown in modal

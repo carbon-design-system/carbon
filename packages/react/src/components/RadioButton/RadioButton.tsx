@@ -159,7 +159,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
       ? cloneElement(candidate, {
           size: candidate.props?.['kind'] === 'inline' ? 'md' : 'mini',
         })
-      : null;
+      : candidate;
 
     return (
       <div className={wrapperClasses}>

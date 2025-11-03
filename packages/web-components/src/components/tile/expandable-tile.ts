@@ -80,7 +80,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
 
     if (!this._belowTheContentHeight) {
       const element = getComputedStyle(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         this.querySelector('cds-tile-below-the-fold-content') as any
       );
       this._belowTheContentHeight = parseInt(element.height, 10);
@@ -111,7 +111,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   @HostListener('click')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = () => {
     if (!this.withInteractive) {

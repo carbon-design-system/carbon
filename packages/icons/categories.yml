@@ -379,6 +379,7 @@ categories:
           - continuous-deployment
           - continuous-integration
           - convert-to-cloud
+          - data-set-encryption
           - delete
           - demo
           - deploy
@@ -406,6 +407,8 @@ categories:
           - funnel--sequence
           - funnel--sort
           - gears
+          - global-filters
+          - graph-aggregator
           - image--search
           - image--search--alt
           - infinity-symbol
@@ -510,6 +513,7 @@ categories:
           - translate
           - transpose
           - undo
+          - update-complete
           - update-now
           - upgrade
           - view-next
@@ -640,6 +644,7 @@ categories:
           - watsonx
       - name: Social
         members:
+          - logo--bluesky
           - logo--digg
           - logo--discord
           - logo--facebook
@@ -806,6 +811,14 @@ categories:
           - ibm--vpn-for-vpc
           - ibm--vsi-on-vpc-for-regulated-industries
           - ibm--wazi-deploy
+          - ibm--webmethods-api-gateway
+          - ibm--webmethods-api-studio
+          - ibm--webmethods-b2b-integration
+          - ibm--webmethods-developer-portal
+          - ibm--webmethods-hybrid-integration
+          - ibm--webmethods-integration-server
+          - ibm--webmethods-integration
+          - ibm--webmethods-managed-file-transfer
           - ibm-cloud--app-id
           - ibm-cloud--backup-and-recovery
           - ibm-cloud--backup-service-vpc
@@ -872,6 +885,8 @@ categories:
           - ibm-cloud-pak--system
           - ibm-cloud-pak--watson-aiops
           - ibm-devops--control
+          - ibm-federated-api-management
+          - ibm-hybrid-control-plane
           - ibm-quantum--safe-advisor
           - ibm-quantum--safe-explorer
           - ibm-quantum--safe-remediator
@@ -1461,6 +1476,7 @@ categories:
           - types
           - upstream
           - value--variable
+          - value--variable--alt
           - virtual-column
           - virtual-column--key
           - virtual-machine
@@ -1764,6 +1780,7 @@ categories:
           - box--large
           - box--medium
           - box--small
+          - bsam-qsam-zedc
           - cics--cmas
           - cics--db2-connection
           - cics--program
@@ -1776,6 +1793,7 @@ categories:
           - cics-region--routing
           - cics-region--target
           - cicsplex
+          - classic-batch
           - cloud--alerting
           - cloud--data-ops
           - cloud-services
@@ -1796,6 +1814,7 @@ categories:
           - container-image--push
           - container-image--push-pull
           - container-services
+          - coupling-facility-encryption
           - data--center
           - data-accessor
           - data-backup
@@ -1815,6 +1834,8 @@ categories:
           - deployment-unit--technical--execution
           - deployment-unit--technical--installation
           - deployment-unit--technical--presentation
+          - dfsort-ibm-z-sort
+          - digital--identity
           - directory-domain
           - edge-node--alt
           - element-picker
@@ -1910,6 +1931,7 @@ categories:
           - pcn--p-node
           - pcn--z-node
           - perform--action
+          - platform-automation
           - point-of-presence
           - port--definition
           - port--usage
@@ -1949,6 +1971,8 @@ categories:
           - spyre-accelerator
           - tcp-ip-service
           - terminal--3270
+          - top-data-sets
+          - top-programs
           - tsq
           - two-factor-authentication
           - usage--included-use-case
@@ -1971,6 +1995,7 @@ categories:
           - wifi--not-secure
           - wifi--secure
           - workflow-automation
+          - z-HyperLink
           - z--lpar
           - z--systems
           - zos
@@ -2165,6 +2190,7 @@ categories:
           - earth--southeast-asia
           - earth--southeast-asia--filled
           - fire
+          - fire--fill
           - flagging-taxi
           - flight--international
           - flight--roster
@@ -2529,6 +2555,7 @@ categories:
           - share
           - signal-strength
           - sim-card
+          - Serverless-Fleet
           - service-id
           - tablet
           - tablet--landscape

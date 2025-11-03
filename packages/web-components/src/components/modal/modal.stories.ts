@@ -337,8 +337,8 @@ export const WithAILabel = {
   render: () => html`
 <cds-modal open has-scrolling-content>
       <cds-modal-header>
-        <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
         <cds-modal-close-button></cds-modal-close-button>
+        <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
         <cds-modal-label>Account resources</cds-modal-label>
         <cds-modal-heading>Add a custom domain</cds-modal-heading>
       </cds-modal-header>

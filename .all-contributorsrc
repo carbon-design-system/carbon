@@ -1517,6 +1517,53 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "didoo",
+      "name": "Cristiano Rastelli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/686239?v=4",
+      "profile": "http://www.didoo.net/",
+      "contributions": [
+        "code",
+        "example"
+      ]
+    },
+    {
+      "login": "olihf-dematic",
+      "name": "olihf-dematic",
+      "avatar_url": "https://avatars.githubusercontent.com/u/225178617?v=4",
+      "profile": "https://github.com/olihf-dematic",
+      "contributions": [
+        "code",
+        "a11y"
+      ]
+    },
+    {
+     "login": "vidhyarbiji",
+     "name": "Vidhya Ravikumar",
+     "avatar_url": "https://avatars.githubusercontent.com/u/11348409?v=4",
+     "profile": "https://github.com/vidhyarbiji",
+     "contributions": [
+       "code"
+     ]
+    },
+    {
+      "login": "mateus037",
+      "name": "Mateus Rodrigues",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34143412?v=4",
+      "profile": "https://github.com/mateus037",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "BiaBiruka",
+      "name": "Beatriz Parolin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/128196689?v=4",
+      "profile": "https://github.com/BiaBiruka",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

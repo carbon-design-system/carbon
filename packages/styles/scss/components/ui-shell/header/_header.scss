@@ -57,26 +57,6 @@
     z-index: z('header') + 1;
   }
 
-  .#{$prefix}--header {
-    .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align) {
-      > .#{$prefix}--popover {
-        > .#{$prefix}--popover-caret,
-        > .#{$prefix}--popover-content {
-          inset-inline-start: $spacing-05;
-        }
-      }
-    }
-
-    .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align) {
-      > .#{$prefix}--popover {
-        > .#{$prefix}--popover-caret,
-        > .#{$prefix}--popover-content {
-          inset-inline-end: $spacing-05;
-        }
-      }
-    }
-  }
-
   .#{$prefix}--header__action > :first-child {
     margin-block-start: 0;
   }
