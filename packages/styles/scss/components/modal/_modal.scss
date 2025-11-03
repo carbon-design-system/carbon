@@ -97,7 +97,6 @@
     position: fixed;
     display: grid;
     background-color: $layer;
-    block-size: 100%;
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
     inline-size: 100%;
@@ -110,7 +109,6 @@
 
     @include breakpoint(md) {
       position: relative;
-      block-size: auto;
       inline-size: 84%;
       max-block-size: 90%;
     }
