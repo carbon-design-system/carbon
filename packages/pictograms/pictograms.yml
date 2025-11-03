@@ -4850,12 +4850,14 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name:
+    IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
     - IBM
 - name: ibm--elm-gcm
-  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
+  friendly_name:
+    IBM® Engineering Lifecycle Management Global Configuration Management
   aliases:
     - engineering lifecycle management global configuration management
     - IBM
@@ -9206,6 +9208,16 @@
     - lifestyle
     - active
     - exercise
+- name: tennis--court
+  friendly_name: Tennis court
+  aliases:
+    - tennis
+    - ball
+    - tennis shots
+    - net
+    - sports
+    - court
+    - bounce
 - name: tennis--ball
   friendly_name: Tennis ball
   aliases:
@@ -9215,16 +9227,6 @@
     - wimbledon
     - us open
     - sports
-- name: Tennis court
-  friendly_name: tennis--court
-  aliases:
-    - tennis
-    - ball
-    - tennis shots
-    - net
-    - sports
-    - court
-    - bounce
 - name: tennis--net
   friendly_name: Tennis net
   aliases:
