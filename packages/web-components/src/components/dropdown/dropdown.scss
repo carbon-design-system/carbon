@@ -68,7 +68,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-dropdown[invalid]) {
   .#{$prefix}--form__helper-text {
-    color: $text-error;
+    color: $text-error !important; /* stylelint-disable-line declaration-no-important */
   }
 }
 
@@ -100,13 +100,45 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown[type='inline'][warn]) .#{$prefix}--list-box__field {
-  padding-inline: $spacing-05 calc(#{$spacing-08} + #{$spacing-05});
+:host(#{$prefix}-dropdown[type='inline']) {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding-block: 0;
+    padding-inline-end: $spacing-09;
+    padding-inline-start: $spacing-05;
+  }
 }
 
-// Update to use correct tokens
-:host(#{$prefix}-dropdown[type='inline']) .#{$prefix}--list-box__field {
-  padding: 0 3rem 0 1rem;
+:host(#{$prefix}-dropdown[type='inline'][warn]),
+:host(#{$prefix}-dropdown[type='inline'][invalid]) {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-dropdown[ai-label][type='inline'])
+  .#{$prefix}--list-box__expanded {
+  border-block-end: 1px solid $ai-border-strong;
+}
+
+:host(#{$prefix}-dropdown[ai-label][type='inline']:not([invalid]):not([warn]))
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+  .#{$prefix}--list-box__field {
+  padding-inline-end: $spacing-10;
+}
+
+:host(#{$prefix}-dropdown[ai-label][type='inline']:not([invalid]))
+  .#{$prefix}--list-box__field {
+  border-block-end: 1px solid $ai-border-strong;
+}
+
+:host(#{$prefix}-dropdown[ai-label][type='inline'][warn]),
+:host(#{$prefix}-dropdown[ai-label][type='inline'][invalid]) {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-12;
+  }
 }
 
 :host(#{$prefix}-dropdown[type='inline']) .#{$prefix}--list-box__menu-icon {
@@ -118,6 +150,11 @@ $css--plex: true !default;
   .#{$prefix}--form__helper-text {
     color: $text-primary;
     grid-column: 2;
+  }
+
+  .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__invalid-icon--warning {
+    inset-inline-end: convert.to-rem(40px);
   }
 }
 
@@ -131,7 +168,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown-item:first-child) {
+:host(#{$prefix}-dropdown-item:first-of-type) {
   .#{$prefix}--list-box__menu-item__option {
     border-block-start-color: transparent;
   }
@@ -220,7 +257,6 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-ai-label) {
     display: inline-flex;
     align-items: center;
-    margin-block-start: convert.to-rem(0.5px);
     margin-inline-end: convert.to-rem(9px);
   }
 

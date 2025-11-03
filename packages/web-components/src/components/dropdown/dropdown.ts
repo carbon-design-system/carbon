@@ -70,6 +70,22 @@ class CDSDropdown extends ValidityMixin(
    */
   protected _hasAILabel = false;
 
+  /**
+   * Currently slotted AI decorator nodes (`cds-ai-label`/slug) with listeners attached.
+   */
+  private _aiDecoratorNodes: HTMLElement[] = [];
+
+  /**
+   * Handles interaction on an AI decorator while the menu is open.
+   */
+  private _handleAIDecoratorInteraction = () => {
+    if (!this.open) {
+      return;
+    }
+
+    this._handleUserInitiatedToggle(false);
+  };
+
   @state()
   protected _activeDescendant?: string;
 
@@ -391,7 +407,7 @@ class CDSDropdown extends ValidityMixin(
    * Handles `slotchange` event.
    */
   protected _handleAILabelSlotChange({ target }: Event) {
-    const hasContent = (target as HTMLSlotElement)
+    const decoratorNodes = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
@@ -405,9 +421,35 @@ class CDSDropdown extends ValidityMixin(
           : false
       );
 
-    this._hasAILabel = Boolean(hasContent);
-    (hasContent[0] as HTMLElement)?.setAttribute('size', 'mini');
+    const decoratorElements = decoratorNodes.filter(
+      (node): node is HTMLElement => node instanceof HTMLElement
+    );
+
+    this._updateAIDecoratorListeners(decoratorElements);
+
+    this._hasAILabel = Boolean(decoratorElements.length);
+    decoratorElements[0]?.setAttribute('size', 'mini');
     this.requestUpdate();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._updateAIDecoratorListeners([]);
+  }
+
+  /**
+   * Updates listeners for AI decorator nodes to ensure only one menu stays open.
+   */
+  private _updateAIDecoratorListeners(nodes: HTMLElement[]) {
+    this._aiDecoratorNodes.forEach((node) => {
+      node.removeEventListener('click', this._handleAIDecoratorInteraction);
+    });
+
+    this._aiDecoratorNodes = nodes;
+
+    this._aiDecoratorNodes.forEach((node) => {
+      node.addEventListener('click', this._handleAIDecoratorInteraction);
+    });
   }
 
   /**

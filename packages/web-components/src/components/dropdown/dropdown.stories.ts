@@ -82,7 +82,7 @@ const defaultArgs = {
   hideLabel: false,
   helperText: '',
   invalid: false,
-  invalidText: 'invalid selection',
+  invalidText: '',
   label: 'This is an example label',
   open: false,
   readOnly: false,
@@ -167,7 +167,12 @@ const controls = {
 
 export const Default = {
   argTypes: controls,
-  args: defaultArgs,
+  args: {
+    ...defaultArgs,
+    helperText: 'This is some helper text',
+    invalidText: 'invalid selection',
+    warnText: 'please notice the warning',
+  },
   render: ({
     ariaLabel,
     open,
@@ -191,7 +196,7 @@ export const Default = {
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
-      helper-text=${helperText || 'This is some helper text'}
+      helper-text=${helperText}
       ?invalid=${invalid}
       ?read-only=${readOnly}
       invalid-text=${invalidText}
@@ -202,7 +207,7 @@ export const Default = {
       value=${ifDefined(value)}
       label=${ifDefined(label)}
       ?warn=${warn}
-      warn-text=${warnText || 'please notice the warning'}>
+      warn-text=${warnText}>
       ${items.map(
         (elem) => html`
           <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
@@ -249,7 +254,7 @@ export const ExperimentalAutoAlign = {
         ?open=${open}
         ?disabled="${disabled}"
         ?hide-label=${hideLabel}
-        helper-text=${helperText || 'This is some helper text'}
+        helper-text=${helperText}
         ?invalid=${invalid}
         ?read-only=${readOnly}
         invalid-text=${invalidText}
@@ -306,7 +311,7 @@ export const Inline = {
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
-      helper-text=${helperText || 'This is some helper text'}
+      helper-text=${helperText}
       ?invalid=${invalid}
       ?read-only=${readOnly}
       invalid-text=${invalidText}
@@ -363,7 +368,7 @@ export const InlineWithLayer = {
           ?open=${open}
           ?disabled="${disabled}"
           ?hide-label=${hideLabel}
-          helper-text=${helperText || 'This is some helper text'}
+          helper-text=${helperText}
           ?invalid=${invalid}
           ?read-only=${readOnly}
           invalid-text=${invalidText}
@@ -464,7 +469,7 @@ export const WithAILabel = {
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
-      helper-text=${helperText || 'This is some helper text'}
+      helper-text=${helperText}
       ?invalid=${invalid}
       ?read-only=${readOnly}
       invalid-text=${invalidText}
@@ -522,7 +527,7 @@ export const WithLayer = {
           ?open=${open}
           ?disabled="${disabled}"
           ?hide-label=${hideLabel}
-          helper-text=${helperText || 'This is some helper text'}
+          helper-text=${helperText}
           ?invalid=${invalid}
           ?read-only=${readOnly}
           invalid-text=${invalidText}
