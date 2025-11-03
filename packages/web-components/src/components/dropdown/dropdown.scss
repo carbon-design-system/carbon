@@ -17,12 +17,21 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/convert' as convert;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include list-box;
 
 :host(#{$prefix}-dropdown) {
   outline: none;
+
+  .#{$prefix}--list-box {
+    box-sizing: border-box;
+  }
+
+  .#{$prefix}--list-box--expanded {
+    border-block-end-color: $border-subtle;
+  }
 
   .#{$prefix}--assistive-text {
     inset-block-start: -100%;
@@ -37,7 +46,7 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu {
     inset-block-start: 100%;
     margin-block-start: 1px;
-    outline: 1px solid $focus;
+    outline: none;
   }
 }
 
@@ -46,15 +55,18 @@ $css--plex: true !default;
     outline: none;
   }
 }
+
+:host(#{$prefix}-dropdown.#{$prefix}--dropdown--focus) {
+  .#{$prefix}--list-box__field {
+    @include focus-outline('outline');
+  }
+}
+
 :host(#{$prefix}-dropdown[ai-label]) .#{$prefix}--list-box__wrapper--decorator {
   @include ai-gradient;
 }
 
 :host(#{$prefix}-dropdown[invalid]) {
-  .#{$prefix}--list-box__field {
-    outline: none;
-  }
-
   .#{$prefix}--form__helper-text {
     color: $text-error;
   }
@@ -82,15 +94,29 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__wrapper--inline;
 
   grid-gap: 0 $spacing-06;
+
+  .#{$prefix}--list-box__menu {
+    margin-block-start: 0;
+  }
 }
 
 :host(#{$prefix}-dropdown[type='inline'][warn]) .#{$prefix}--list-box__field {
   padding-inline: $spacing-05 calc(#{$spacing-08} + #{$spacing-05});
 }
 
+// Update to use correct tokens
+:host(#{$prefix}-dropdown[type='inline']) .#{$prefix}--list-box__field {
+  padding: 0 3rem 0 1rem;
+}
+
+:host(#{$prefix}-dropdown[type='inline']) .#{$prefix}--list-box__menu-icon {
+  inset-inline-end: $spacing-04;
+}
+
 :host(#{$prefix}-dropdown[warn]),
 :host(#{$prefix}-dropdown[invalid]) {
   .#{$prefix}--form__helper-text {
+    color: $text-primary;
     grid-column: 2;
   }
 }
@@ -107,16 +133,21 @@ $css--plex: true !default;
 
 :host(#{$prefix}-dropdown-item:first-child) {
   .#{$prefix}--list-box__menu-item__option {
-    border-block-start-width: 0;
+    border-block-start-color: transparent;
   }
 }
 
-:host(#{$prefix}-dropdown-item:hover) {
+:host(#{$prefix}-dropdown-item:not([disabled]):hover) {
   background-color: $layer-hover;
 }
 
 :host(#{$prefix}-dropdown-item[highlighted]) {
   @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-dropdown-item[data-prev-highlighted])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: transparent;
 }
 
 :host(#{$prefix}-dropdown-item[disabled])
@@ -126,9 +157,18 @@ $css--plex: true !default;
   text-decoration: none;
 }
 
+:host(#{$prefix}-dropdown-item[disabled][data-prev-highlighted]:hover)
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle;
+}
+
+:host(#{$prefix}-dropdown-item[disabled]:hover)
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle-01;
+}
+
 :host(#{$prefix}-dropdown-item[selected]) {
   @extend .#{$prefix}--list-box__menu-item--active;
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
     color: $text-primary;
@@ -137,6 +177,10 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: block;
   }
+}
+
+:host(#{$prefix}-dropdown-item[selected][highlighted]) {
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
 }
 
 :host(#{$prefix}-dropdown-item[size='sm']) {
@@ -156,6 +200,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-dropdown-skeleton) {
+  @extend .#{$prefix}--form-item;
+
   .#{$prefix}--skeleton {
     @include skeleton;
   }
@@ -171,9 +217,32 @@ $css--plex: true !default;
     inset-inline-end: $spacing-08;
   }
 
+  ::slotted(#{$prefix}-ai-label) {
+    display: inline-flex;
+    align-items: center;
+    margin-block-start: convert.to-rem(0.5px);
+    margin-inline-end: convert.to-rem(9px);
+  }
+
+  ::slotted(#{$prefix}-ai-label)::after {
+    position: absolute;
+    display: block;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+    inset-block-start: convert.to-rem(1px);
+    inset-inline-end: convert.to-rem(-9px);
+  }
+
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__invalid-icon--warning {
+    inset-inline-end: convert.to-rem(81px);
   }
 }
 
@@ -185,8 +254,19 @@ $css--plex: true !default;
     }
   }
 
+  ::slotted(#{$prefix}-ai-label)::before {
+    position: absolute;
+    display: block;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+    inset-block-start: convert.to-rem(1px);
+    inset-inline-start: convert.to-rem(-9px);
+  }
+
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-10;
+    inset-inline-end: $spacing-08;
   }
 }
