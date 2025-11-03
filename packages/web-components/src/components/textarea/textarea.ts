@@ -287,14 +287,15 @@ class CDSTextarea extends CDSTextInput {
           @input="${this._handleInput}"></textarea>
         <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
         <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
-        ${this.isFluid &&
-        html`
-          <hr class="${prefix}--text-area__divider" />
-          ${validationMessage}
-        `}
+        ${this.isFluid
+          ? html`
+              <hr class="${prefix}--text-area__divider" />
+              ${validationMessage}
+            `
+          : null}
       </div>
       ${/* Non-fluid: validation and helper outside field wrapper */ ''}
-      ${!this.isFluid && html` ${helper} ${validationMessage} `}
+      ${!this.isFluid ? html` ${helper} ${validationMessage} ` : null}
     `;
   }
   updated(): void {

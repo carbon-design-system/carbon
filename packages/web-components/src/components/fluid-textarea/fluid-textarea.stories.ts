@@ -162,7 +162,8 @@ export const WithLayer = {
   render: () => html`
     <sb-template-layers>
       <cds-fluid-textarea
-        label="FluidTextArea label"
+        placeholder="Placeholder text"
+        label="Text Area label"
         helper-text="Optional helper text">
       </cds-fluid-textarea>
     </sb-template-layers>
