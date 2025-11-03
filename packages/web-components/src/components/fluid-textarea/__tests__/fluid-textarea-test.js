@@ -9,7 +9,7 @@ import '@carbon/web-components/es/components/fluid-textarea/index.js';
 import { html, fixture, expect, oneEvent } from '@open-wc/testing';
 
 describe('cds-fluid-textarea', () => {
-  it('should render correctly with label and helper text', async () => {
+  it('should render correctly with label', async () => {
     const el = await fixture(html`
       <cds-fluid-textarea
         label="Textarea label"
@@ -17,12 +17,9 @@ describe('cds-fluid-textarea', () => {
     `);
 
     const label = el.shadowRoot.querySelector('label');
-    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
 
     expect(label).to.exist;
     expect(label.textContent).to.include('Textarea label');
-    expect(helper).to.exist;
-    expect(helper.textContent).to.include('Helper text');
   });
 
   it('should reflect value to the textarea', async () => {
@@ -186,18 +183,6 @@ describe('cds-fluid-textarea', () => {
       const slot = el.shadowRoot.querySelector('slot[name="label-text"]');
       const content = slot.assignedNodes({ flatten: true })[0];
       expect(content.textContent.trim()).to.equal('Slotted Label');
-    });
-
-    it('renders slotted helper-text', async () => {
-      const el = await fixture(html`
-        <cds-fluid-textarea>
-          <span slot="helper-text">Slotted Helper</span>
-        </cds-fluid-textarea>
-      `);
-      await el.updateComplete;
-      const slot = el.shadowRoot.querySelector('slot[name="helper-text"]');
-      const content = slot.assignedNodes({ flatten: true })[0];
-      expect(content.textContent.trim()).to.equal('Slotted Helper');
     });
 
     it('renders slotted invalid-text', async () => {

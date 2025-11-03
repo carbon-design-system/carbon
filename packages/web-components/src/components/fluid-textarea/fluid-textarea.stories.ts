@@ -15,7 +15,6 @@ const args = {
   counterMode: '',
   disabled: false,
   enableCounter: true,
-  helperText: 'Text Area helper text',
   hideLabel: false,
   invalid: false,
   invalidText:
@@ -49,10 +48,6 @@ const argTypes = {
   enableCounter: {
     control: 'boolean',
     description: 'Enable character counter (enable-counter)',
-  },
-  helperText: {
-    control: 'text',
-    description: 'Helper text (helper-text)',
   },
   hideLabel: {
     control: 'boolean',
@@ -114,7 +109,6 @@ export const Default = {
     counterMode,
     disabled,
     enableCounter,
-    helperText,
     hideLabel,
     invalid,
     invalidText,
@@ -132,7 +126,6 @@ export const Default = {
       <cds-fluid-textarea
         ?enable-counter="${enableCounter}"
         counter-mode="${ifDefined(counterMode)}"
-        helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"

@@ -232,13 +232,11 @@ class CDSTextarea extends CDSTextInput {
       return null;
     };
 
-    const helper = this.helperText
-      ? html`
-          <div class="${helperTextClasses}" id="helper-text">
-            <slot name="helper-text">${this.helperText}</slot>
-          </div>
-        `
-      : null;
+    const helper = html`
+      <div class="${helperTextClasses}" id="helper-text">
+        <slot name="helper-text">${this.helperText}</slot>
+      </div>
+    `;
 
     const normalizedProps = {
       invalid: this.invalid,
@@ -289,13 +287,14 @@ class CDSTextarea extends CDSTextInput {
           @input="${this._handleInput}"></textarea>
         <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
         <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
-        ${this.isFluid
-          ? html`<hr class="${prefix}--text-area__divider" />`
-          : null}
-        ${this.isFluid ? validationMessage : null}
+        ${this.isFluid &&
+        html`
+          <hr class="${prefix}--text-area__divider" />
+          ${validationMessage}
+        `}
       </div>
       ${/* Non-fluid: validation and helper outside field wrapper */ ''}
-      ${!this.isFluid ? validationMessage || helper : null}
+      ${!this.isFluid && html` ${helper} ${validationMessage} `}
     `;
   }
   updated(): void {
