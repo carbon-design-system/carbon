@@ -122,40 +122,24 @@ const customMarkdown = {
 };
 
 const CarbonMdxContainer = ({ children, ...props }) => {
-  // MDX pages that aren't associated with a story
-  const isCarbonMdx =
-    children?.type?.name === `MDXContent` &&
-    !props?.context?.attachedCSFFiles.size;
+  document.documentElement.classList.add('cds--mdx');
 
-  useEffect(() => {
-    if (isCarbonMdx) {
-      document.documentElement.classList.add('cds--mdx');
-    } else {
-      document.documentElement.classList.remove('cds--mdx');
-    }
-  }, [isCarbonMdx]);
-
-  // Disable Storybook markdown styles and ignore global theme switchers
-  if (isCarbonMdx) {
-    return (
-      <MDXProvider components={customMarkdown}>
-        <DocsContainer {...props}>
-          <Unstyled>
-            <Theme
-              style={{
-                paddingBottom: '5rem',
-                paddingTop: '4rem',
-              }}
-              theme="g10">
-              {children}
-            </Theme>
-          </Unstyled>
-        </DocsContainer>
-      </MDXProvider>
-    );
-  }
-
-  return <DocsContainer {...props}>{children}</DocsContainer>;
+  return (
+    <MDXProvider components={customMarkdown}>
+      <DocsContainer {...props}>
+        <Unstyled>
+          <Theme
+            style={{
+              paddingBottom: '5rem',
+              paddingTop: '4rem',
+            }}
+            theme="g10">
+            {children}
+          </Theme>
+        </Unstyled>
+      </DocsContainer>
+    </MDXProvider>
+  );
 };
 const devTools = {
   layoutSize: {
