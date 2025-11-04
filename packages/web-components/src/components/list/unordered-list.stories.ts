@@ -26,7 +26,8 @@ const controls = {
   },
   customMarker: {
     control: 'text',
-    description: 'Specify a custom marker character/content (only used when type="custom").',
+    description:
+      'Specify a custom marker character/content (only used when type="custom").',
     if: { arg: 'type', eq: 'custom' },
   },
 };
@@ -48,8 +49,7 @@ export const Default = {
       ?is-expressive="${isExpressive}"
       ?nested=${nested}
       ${type ? `type="${type}"` : ''}
-      ${customMarker ? `custom-marker="${customMarker}"` : ''}
-    >
+      ${customMarker ? `custom-marker="${customMarker}"` : ''}>
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>

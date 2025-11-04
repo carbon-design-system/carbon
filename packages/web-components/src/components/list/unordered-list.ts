@@ -83,7 +83,7 @@ class CDSUnorderedList extends LitElement {
         'Nested unordered lists without an explicit `type` attribute will default to ' +
           'square markers. This behavior is deprecated. Please explicitly set ' +
           '`type="square"` (or another marker type) for nested lists. ' +
-          'In the next major release, nested lists will inherit the parent list\'s marker type.'
+          "In the next major release, nested lists will inherit the parent list's marker type."
       );
       this._hasWarnedAboutDeprecation = true;
     }
@@ -100,19 +100,18 @@ class CDSUnorderedList extends LitElement {
     }
 
     // Check if nested and try to inherit from parent
-    const isNested =
-      this.getAttribute('slot') === 'nested' || this.nested;
-    
+    const isNested = this.getAttribute('slot') === 'nested' || this.nested;
+
     if (isNested) {
       // Try to get parent's type
       const parentList = this.closest(
         (this.constructor as typeof CDSUnorderedList).selectorUnorderedList
       ) as CDSUnorderedList | null;
-      
+
       if (parentList?.type) {
         return parentList.type;
       }
-      
+
       // Default to square for nested (backward compatible)
       return 'square';
     }
@@ -123,8 +122,7 @@ class CDSUnorderedList extends LitElement {
 
   render() {
     const markerType = this._getMarkerType();
-    const isNested =
-      this.getAttribute('slot') === 'nested' || this.nested;
+    const isNested = this.getAttribute('slot') === 'nested' || this.nested;
 
     const classes = classMap({
       [`${prefix}--list--unordered`]: true,
@@ -146,8 +144,7 @@ class CDSUnorderedList extends LitElement {
         class="${classes}"
         style="${Object.entries(customStyle)
           .map(([key, value]) => `${key}: ${value}`)
-          .join('; ')}"
-      >
+          .join('; ')}">
         <slot></slot>
       </ul>
     `;

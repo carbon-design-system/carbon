@@ -23,6 +23,7 @@ describe('UnorderedList', () => {
   });
 
   it('should render nested lists', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(
       <UnorderedList>
         <ListItem>Item</ListItem>
@@ -35,6 +36,7 @@ describe('UnorderedList', () => {
     expect(screen.getByTestId('nested-list')).toHaveClass(
       `${prefix}--list--nested`
     );
+    spy.mockRestore();
   });
 
   it('should add custom className given via className prop', () => {
@@ -134,6 +136,8 @@ describe('UnorderedList', () => {
   });
 
   it('should default to square marker for nested lists', () => {
+    // Mock console.warn to suppress expected deprecation warning
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <UnorderedList nested data-testid="list">
         <ListItem>Item</ListItem>
@@ -143,5 +147,6 @@ describe('UnorderedList', () => {
     expect(screen.getByTestId('list')).toHaveClass(
       `${prefix}--list--marker-square`
     );
+    spy.mockRestore();
   });
 });

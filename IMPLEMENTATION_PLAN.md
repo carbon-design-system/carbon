@@ -1,14 +1,22 @@
 # Implementation Plan: Marker Type Support for Unordered Lists
 
 ## Overview
-Add support for different list marker types (`disc`, `circle`, `square`, `hyphen`, `custom`) to the unordered list component across both React (`@carbon/react`) and Web Components (`@carbon/web-components`).
+
+Add support for different list marker types (`disc`, `circle`, `square`,
+`hyphen`, `custom`) to the unordered list component across both React
+(`@carbon/react`) and Web Components (`@carbon/web-components`).
 
 ## Requirements Checklist
-- ✅ Prop name: `type` accepting `'disc' | 'circle' | 'square' | 'hyphen' | 'custom'`
+
+- ✅ Prop name: `type` accepting
+  `'disc' | 'circle' | 'square' | 'hyphen' | 'custom'`
 - ✅ Custom marker prop: `customMarker` (string)
-- ✅ Default: hyphen for top-level, square for level-2 (with deprecation warning)
-- ⚠️ Nesting: child lists inherit parent's type unless overridden (Web Components ✅, React needs improvement)
-- ✅ CSS approach: use `list-style-type` for disc/circle/square, `::before` for hyphen/custom
+- ✅ Default: hyphen for top-level, square for level-2 (with deprecation
+  warning)
+- ⚠️ Nesting: child lists inherit parent's type unless overridden (Web
+  Components ✅, React needs improvement)
+- ✅ CSS approach: use `list-style-type` for disc/circle/square, `::before` for
+  hyphen/custom
 - ✅ Backward compatible
 
 ---
@@ -18,6 +26,7 @@ Add support for different list marker types (`disc`, `circle`, `square`, `hyphen
 ### File: `packages/styles/scss/components/list/_list.scss`
 
 #### Current State (Before Changes)
+
 ```scss
 // Unordered list - original implementation
 .#{$prefix}--list--unordered > .#{$prefix}--list__item {
@@ -42,124 +51,133 @@ Add support for different list marker types (`disc`, `circle`, `square`, `hyphen
 
 #### Changes to Add
 
-**Step 1.1:** Add native list-style-type overrides at the top of the mixin (after line 31)
+**Step 1.1:** Add native list-style-type overrides at the top of the mixin
+(after line 31)
+
 ```scss
-  // Allow native list-style-type for disc, circle, square markers
-  // Override list-style: none for these marker types
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-disc {
-    list-style-type: disc;
-  }
+// Allow native list-style-type for disc, circle, square markers
+// Override list-style: none for these marker types
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-disc {
+  list-style-type: disc;
+}
 
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-circle {
-    list-style-type: circle;
-  }
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-circle {
+  list-style-type: circle;
+}
 
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-square {
-    list-style-type: square;
-  }
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-square {
+  list-style-type: square;
+}
 ```
 
-**Step 1.2:** Update existing unordered list styles (around line 94-113) with comments
+**Step 1.2:** Update existing unordered list styles (around line 94-113) with
+comments
+
 ```scss
-  // Unordered list marker types
-  // Default behavior (backward compatible): hyphen for top-level, square for nested
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item {
-    position: relative;
+// Unordered list marker types
+// Default behavior (backward compatible): hyphen for top-level, square for nested
+.#{$prefix}--list--unordered > .#{$prefix}--list__item {
+  position: relative;
 
-    &::before {
-      position: absolute;
-      // – en dash (default for top-level)
-      content: '\002013';
-      inset-inline-start: calc(-1 * #{$spacing-05});
-    }
+  &::before {
+    position: absolute;
+    // – en dash (default for top-level)
+    content: '\002013';
+    inset-inline-start: calc(-1 * #{$spacing-05});
   }
+}
 
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested
-    > .#{$prefix}--list__item::before {
-    // ▪ square (default for nested, backward compatible)
-    content: '\0025AA';
-    // offset to account for smaller ▪ vs –
-    inset-inline-start: calc(-1 * #{$spacing-04});
-  }
+.#{$prefix}--list--unordered.#{$prefix}--list--nested
+  > .#{$prefix}--list__item::before {
+  // ▪ square (default for nested, backward compatible)
+  content: '\0025AA';
+  // offset to account for smaller ▪ vs –
+  inset-inline-start: calc(-1 * #{$spacing-04});
+}
 ```
 
 **Step 1.3:** Add marker type classes (after line 113)
+
 ```scss
-  // Marker type: disc
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-disc {
-    > .#{$prefix}--list__item {
-      &::before {
-        content: none;
-      }
-    }
-  }
-
-  // Marker type: circle
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-circle {
-    > .#{$prefix}--list__item {
-      &::before {
-        content: none;
-      }
-    }
-  }
-
-  // Marker type: square
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-square {
-    > .#{$prefix}--list__item {
-      &::before {
-        content: none;
-      }
-    }
-  }
-
-  // Marker type: hyphen (explicit)
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-hyphen
-    > .#{$prefix}--list__item {
+// Marker type: disc
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-disc {
+  > .#{$prefix}--list__item {
     &::before {
-      position: absolute;
-      // – en dash
-      content: '\002013';
-      inset-inline-start: calc(-1 * #{$spacing-05});
+      content: none;
     }
   }
+}
 
-  // Marker type: custom
-  .#{$prefix}--list--unordered.#{$prefix}--list--marker-custom
-    > .#{$prefix}--list__item {
-    position: relative;
-
+// Marker type: circle
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-circle {
+  > .#{$prefix}--list__item {
     &::before {
-      position: absolute;
-      // Custom marker content will be set via CSS custom property
-      content: var(--#{$prefix}--list--marker-content, '\002013');
-      inset-inline-start: calc(-1 * #{$spacing-05});
+      content: none;
     }
   }
+}
 
-  // Nested lists with marker types
-  // When nested and marker type is specified, adjust spacing for pseudo-elements
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-hyphen
-    > .#{$prefix}--list__item::before {
+// Marker type: square
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-square {
+  > .#{$prefix}--list__item {
+    &::before {
+      content: none;
+    }
+  }
+}
+
+// Marker type: hyphen (explicit)
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-hyphen
+  > .#{$prefix}--list__item {
+  &::before {
+    position: absolute;
+    // – en dash
+    content: '\002013';
     inset-inline-start: calc(-1 * #{$spacing-05});
   }
+}
 
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-custom
-    > .#{$prefix}--list__item::before {
+// Marker type: custom
+.#{$prefix}--list--unordered.#{$prefix}--list--marker-custom
+  > .#{$prefix}--list__item {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    // Custom marker content will be set via CSS custom property
+    content: var(--#{$prefix}--list--marker-content, '\002013');
     inset-inline-start: calc(-1 * #{$spacing-05});
   }
+}
 
-  // For nested lists with disc/circle/square, use smaller offset if needed
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-disc,
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-circle,
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-square {
-    // These use native list-style-type, so no special spacing needed
-  }
+// Nested lists with marker types
+// When nested and marker type is specified, adjust spacing for pseudo-elements
+.#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-hyphen
+  > .#{$prefix}--list__item::before {
+  inset-inline-start: calc(-1 * #{$spacing-05});
+}
+
+.#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-custom
+  > .#{$prefix}--list__item::before {
+  inset-inline-start: calc(-1 * #{$spacing-05});
+}
+
+// For nested lists with disc/circle/square, use smaller offset if needed
+.#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-disc,
+.#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-circle,
+.#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-square {
+  // These use native list-style-type, so no special spacing needed
+}
 ```
 
 #### Nesting Handling in CSS
-- **Native markers (disc/circle/square):** Use `list-style-type` - browser handles nesting automatically
-- **Pseudo-element markers (hyphen/custom):** Need explicit spacing adjustments for nested lists
-- **Default behavior:** Maintains backward compatibility (hyphen for top-level, square for nested)
+
+- **Native markers (disc/circle/square):** Use `list-style-type` - browser
+  handles nesting automatically
+- **Pseudo-element markers (hyphen/custom):** Need explicit spacing adjustments
+  for nested lists
+- **Default behavior:** Maintains backward compatibility (hyphen for top-level,
+  square for nested)
 
 ---
 
@@ -168,6 +186,7 @@ Add support for different list marker types (`disc`, `circle`, `square`, `hyphen
 ### File: `packages/react/src/components/UnorderedList/UnorderedList.tsx`
 
 #### Current State (Before Changes)
+
 ```typescript
 export interface UnorderedListProps extends ComponentProps<'ul'> {
   nested?: boolean | undefined;
@@ -192,6 +211,7 @@ export default function UnorderedList({
 #### Changes to Add
 
 **Step 2.1:** Add TypeScript type definition (after line 12, before interface)
+
 ```typescript
 export type UnorderedListMarkerType =
   | 'disc'
@@ -202,6 +222,7 @@ export type UnorderedListMarkerType =
 ```
 
 **Step 2.2:** Update interface to include new props
+
 ```typescript
 export interface UnorderedListProps extends ComponentProps<'ul'> {
   nested?: boolean | undefined;
@@ -212,12 +233,14 @@ export interface UnorderedListProps extends ComponentProps<'ul'> {
 ```
 
 **Step 2.3:** Import necessary hooks and utilities
+
 ```typescript
 import React, { type ComponentProps, useEffect, useRef } from 'react';
 import { warning } from '../../internal/warning';
 ```
 
 **Step 2.4:** Update component function signature
+
 ```typescript
 export default function UnorderedList({
   className,
@@ -231,6 +254,7 @@ export default function UnorderedList({
 ```
 
 **Step 2.5:** Add marker type logic and deprecation warning
+
 ```typescript
   const prefix = usePrefix();
   const hasWarnedRef = useRef(false);
@@ -287,10 +311,11 @@ export default function UnorderedList({
 ```
 
 **Step 2.6:** Update PropTypes
+
 ```typescript
 UnorderedList.propTypes = {
   // ... existing propTypes ...
-  
+
   /**
    * Specify the marker type for the list items.
    * - `disc`: filled circle (•)
@@ -315,8 +340,11 @@ UnorderedList.propTypes = {
 ```
 
 #### Notes on React Implementation
-- **Parent inheritance:** Currently defaults to `'square'` for nested lists. Future enhancement: Use React Context to pass parent's `type` down.
-- **Deprecation warning:** Only shown in development mode, once per component instance.
+
+- **Parent inheritance:** Currently defaults to `'square'` for nested lists.
+  Future enhancement: Use React Context to pass parent's `type` down.
+- **Deprecation warning:** Only shown in development mode, once per component
+  instance.
 
 ---
 
@@ -325,6 +353,7 @@ UnorderedList.propTypes = {
 ### File: `packages/web-components/src/components/list/unordered-list.ts`
 
 #### Current State (Before Changes)
+
 ```typescript
 @customElement(`${prefix}-unordered-list`)
 class CDSUnorderedList extends LitElement {
@@ -367,6 +396,7 @@ class CDSUnorderedList extends LitElement {
 #### Changes to Add
 
 **Step 3.1:** Add TypeScript type definition (after imports, before class)
+
 ```typescript
 export type UnorderedListMarkerType =
   | 'disc'
@@ -377,6 +407,7 @@ export type UnorderedListMarkerType =
 ```
 
 **Step 3.2:** Add new properties with decorators
+
 ```typescript
   /**
    * Specify the marker type for the list items.
@@ -401,6 +432,7 @@ export type UnorderedListMarkerType =
 ```
 
 **Step 3.3:** Update `connectedCallback` to include deprecation warning
+
 ```typescript
   connectedCallback() {
     if (
@@ -436,6 +468,7 @@ export type UnorderedListMarkerType =
 ```
 
 **Step 3.4:** Add marker type inheritance method
+
 ```typescript
   /**
    * Get the effective marker type, considering inheritance from parent
@@ -448,17 +481,17 @@ export type UnorderedListMarkerType =
     // Check if nested and try to inherit from parent
     const isNested =
       this.getAttribute('slot') === 'nested' || this.nested;
-    
+
     if (isNested) {
       // Try to get parent's type
       const parentList = this.closest(
         (this.constructor as typeof CDSUnorderedList).selectorUnorderedList
       ) as CDSUnorderedList | null;
-      
+
       if (parentList?.type) {
         return parentList.type;
       }
-      
+
       // Default to square for nested (backward compatible)
       return 'square';
     }
@@ -469,6 +502,7 @@ export type UnorderedListMarkerType =
 ```
 
 **Step 3.5:** Update `render` method
+
 ```typescript
   render() {
     const markerType = this._getMarkerType();
@@ -504,6 +538,7 @@ export type UnorderedListMarkerType =
 ```
 
 **Step 3.6:** Add static selector for parent lookup
+
 ```typescript
   /**
    * A selector that will return unordered list.
@@ -514,8 +549,10 @@ export type UnorderedListMarkerType =
 ```
 
 #### Notes on Web Components Implementation
+
 - **Parent inheritance:** ✅ Fully implemented using DOM traversal
-- **Attribute reflection:** `type` property reflects to attribute for CSS selectors
+- **Attribute reflection:** `type` property reflects to attribute for CSS
+  selectors
 - **Custom marker:** Uses CSS custom property set via inline style
 
 ---
@@ -525,6 +562,7 @@ export type UnorderedListMarkerType =
 ### File: `packages/web-components/src/components/list/list.scss`
 
 #### Current State (Before Changes)
+
 ```scss
 // unordered list
 :host(#{$prefix}-unordered-list) {
@@ -562,6 +600,7 @@ export type UnorderedListMarkerType =
 #### Changes to Add
 
 **Step 4.1:** Update comments (around line 50-81)
+
 ```scss
 // unordered list
 // Default behavior (backward compatible): hyphen for top-level, square for nested
@@ -577,6 +616,7 @@ export type UnorderedListMarkerType =
 ```
 
 **Step 4.2:** Add marker type styles (after line 81)
+
 ```scss
 // Marker type: disc
 :host(#{$prefix}-unordered-list[type='disc']) {
@@ -654,6 +694,7 @@ export type UnorderedListMarkerType =
 #### Changes to Add
 
 **Step 5.1:** Update `Default.argTypes` to include new props
+
 ```javascript
 Default.argTypes = {
   isExpressive: {
@@ -677,6 +718,7 @@ Default.argTypes = {
 ```
 
 **Step 5.2:** Add new story for marker types
+
 ```javascript
 export const MarkerTypes = () => {
   return (
@@ -729,6 +771,7 @@ MarkerTypes.storyName = 'marker types';
 ```
 
 **Step 5.3:** Add nested with marker types story
+
 ```javascript
 export const NestedWithMarkerTypes = () => {
   return (
@@ -758,6 +801,7 @@ NestedWithMarkerTypes.storyName = 'nested with marker types';
 ### File: `packages/web-components/src/components/list/unordered-list.stories.ts`
 
 Similar changes as React, but using Lit template syntax:
+
 ```typescript
 const controls = {
   // ... existing controls ...
@@ -768,7 +812,8 @@ const controls = {
   },
   customMarker: {
     control: 'text',
-    description: 'Specify a custom marker character/content (only used when type="custom").',
+    description:
+      'Specify a custom marker character/content (only used when type="custom").',
     if: { arg: 'type', eq: 'custom' },
   },
 };
@@ -853,6 +898,7 @@ it('should default to square marker for nested lists', () => {
 ### File: `packages/web-components/src/components/list/__tests__/unordered-list-test.js`
 
 Similar tests using `@open-wc/testing`:
+
 ```javascript
 it('should render with disc marker type', async () => {
   const list = html` <cds-unordered-list type="disc">
@@ -871,6 +917,7 @@ it('should render with disc marker type', async () => {
 ### Files to Update
 
 1. **`packages/react/src/components/UnorderedList/UnorderedList.mdx`**
+
    - Add "Marker Types" section
    - Document each marker type
    - Show examples
@@ -882,6 +929,7 @@ it('should render with disc marker type', async () => {
 ### JSDoc Comments
 
 Already included in PropTypes and component comments:
+
 - ✅ Type definitions have JSDoc
 - ✅ Props have descriptions
 - ✅ Component class has element documentation
@@ -892,14 +940,17 @@ Already included in PropTypes and component comments:
 
 ### ✅ No Breaking Changes
 
-- **Default behavior preserved:** Top-level lists default to hyphen, nested to square
+- **Default behavior preserved:** Top-level lists default to hyphen, nested to
+  square
 - **Existing code continues to work:** No `type` prop needed
 - **CSS classes:** New classes are additive, don't override existing behavior
-- **Deprecation warnings:** Only shown in development, guide users to explicit types
+- **Deprecation warnings:** Only shown in development, guide users to explicit
+  types
 
 ### Migration Path
 
 Users can gradually adopt:
+
 1. Continue using default behavior (no changes needed)
 2. Add explicit `type` prop when needed
 3. Deprecation warnings guide toward explicit types
@@ -910,12 +961,15 @@ Users can gradually adopt:
 ## 9. Implementation Checklist
 
 ### SCSS Changes
-- [ ] Add native list-style-type overrides to `packages/styles/scss/components/list/_list.scss`
+
+- [ ] Add native list-style-type overrides to
+      `packages/styles/scss/components/list/_list.scss`
 - [ ] Add marker type classes (disc, circle, square, hyphen, custom)
 - [ ] Add nested list handling for marker types
 - [ ] Update Web Components SCSS with marker type selectors
 
 ### React Component
+
 - [ ] Add TypeScript type definition
 - [ ] Add `type` and `customMarker` props
 - [ ] Add marker type logic
@@ -924,6 +978,7 @@ Users can gradually adopt:
 - [ ] Add CSS custom property for custom markers
 
 ### Web Components
+
 - [ ] Add TypeScript type definition
 - [ ] Add `type` and `customMarker` properties with decorators
 - [ ] Add parent inheritance logic
@@ -931,6 +986,7 @@ Users can gradually adopt:
 - [ ] Update render method
 
 ### Stories
+
 - [ ] Update React stories with controls
 - [ ] Add marker types story (React)
 - [ ] Add nested with marker types story (React)
@@ -939,6 +995,7 @@ Users can gradually adopt:
 - [ ] Add nested with marker types story (Web Components)
 
 ### Tests
+
 - [ ] Add tests for all marker types (React)
 - [ ] Add tests for default behavior (React)
 - [ ] Add tests for custom marker (React)
@@ -948,6 +1005,7 @@ Users can gradually adopt:
 - [ ] Add tests for parent inheritance (Web Components)
 
 ### Documentation
+
 - [ ] Update React MDX with marker types section
 - [ ] Update Web Components MDX with marker types section
 - [ ] Verify JSDoc comments are complete
@@ -957,11 +1015,13 @@ Users can gradually adopt:
 ## 10. Future Enhancements
 
 ### React Parent Inheritance
+
 - Use React Context API to pass parent's `type` down the component tree
 - Create `UnorderedListContext` provider
 - Update nested lists to consume context when no `type` prop provided
 
 ### Potential Additional Marker Types
+
 - `none` - no marker
 - `decimal-leading-zero`
 - Custom numbered markers
@@ -971,14 +1031,17 @@ Users can gradually adopt:
 ## Questions for Review
 
 1. **Should React parent inheritance be implemented now, or deferred?**
+
    - Current: Defaults to square for nested
    - Proposed: Use Context API for inheritance
 
 2. **Should we add a `markerType` prop alias for backward compatibility?**
+
    - Current: Only `type` prop
    - Consider: Also support `markerType` for migration
 
 3. **Should custom markers support HTML entities or only plain text?**
+
    - Current: Plain text only
    - Consider: Support `&rarr;` style entities
 
@@ -991,6 +1054,7 @@ Users can gradually adopt:
 ## Summary
 
 This implementation plan provides:
+
 - ✅ Complete marker type support (disc, circle, square, hyphen, custom)
 - ✅ Backward compatibility
 - ✅ Deprecation warnings for future migration
@@ -999,4 +1063,3 @@ This implementation plan provides:
 - ✅ Documentation updates
 
 **Ready for review and confirmation before implementation.**
-
