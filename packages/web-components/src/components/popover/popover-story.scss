@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -90,6 +90,7 @@
   @include type.type-style('heading-compact-01');
 
   margin-block-end: $spacing-01;
+  text-align: start;
 }
 
 #{$prefix}-popover .popover-details {

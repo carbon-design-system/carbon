@@ -1003,7 +1003,7 @@ const ComboBox = forwardRef(
                 'aria-label': titleText
                   ? undefined
                   : deprecatedAriaLabel || ariaLabel,
-                'aria-controls': isOpen ? undefined : menuProps.id,
+                'aria-controls': menuProps.id,
                 placeholder,
                 value: inputValue,
                 ...inputProps,
@@ -1151,7 +1151,12 @@ const ComboBox = forwardRef(
             normalizedDecorator
           ) : decorator ? (
             <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-              {normalizedDecorator}
+              {/* wrap only when NOT an AILabel */}
+              {candidateIsAILabel ? (
+                normalizedDecorator
+              ) : (
+                <span>{normalizedDecorator}</span>
+              )}
             </div>
           ) : (
             ''

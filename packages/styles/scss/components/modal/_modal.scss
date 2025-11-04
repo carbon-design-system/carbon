@@ -26,6 +26,7 @@
 /// @group modal
 @mixin modal(
   $enable-experimental-focus-wrap-without-sentinels: false,
+  $enable-focus-wrap-without-sentinels: false,
   $enable-dialog-element: false,
   $enable-presence: false
 ) {
@@ -35,6 +36,8 @@
     @if not(
       enabled('enable-experimental-focus-wrap-without-sentinels') or
         $enable-experimental-focus-wrap-without-sentinels or
+        enabled('enable-focus-wrap-without-sentinels') or
+        $enable-focus-wrap-without-sentinels or
         enabled('enable-dialog-element') or
         $enable-dialog-element
     )
@@ -70,6 +73,8 @@
   @if not(
     enabled('enable-experimental-focus-wrap-without-sentinels') or
       $enable-experimental-focus-wrap-without-sentinels or
+      enabled('enable-focus-wrap-without-sentinels') or
+      $enable-focus-wrap-without-sentinels or
       enabled('enable-dialog-element') or
       $enable-dialog-element
   )
@@ -92,7 +97,6 @@
     position: fixed;
     display: grid;
     background-color: $layer;
-    block-size: 100%;
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
     inline-size: 100%;
@@ -105,7 +109,6 @@
 
     @include breakpoint(md) {
       position: relative;
-      block-size: auto;
       inline-size: 84%;
       max-block-size: 90%;
     }

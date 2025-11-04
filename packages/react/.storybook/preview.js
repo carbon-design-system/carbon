@@ -216,6 +216,11 @@ const globalTypes = {
           title: 'Arabic',
           value: 'ar',
         },
+        {
+          right: '🇯🇵',
+          title: 'Japanese',
+          value: 'ja-JP',
+        },
       ],
     },
   },
