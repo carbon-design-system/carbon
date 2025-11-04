@@ -121,21 +121,35 @@ const customMarkdown = {
   Video,
 };
 
-const CarbonMdxContainer = ({ children, ...props }) => {
-  document.documentElement.classList.add('cds--mdx');
+const CarbonMdxContainer = ({ children, context, ...props }) => {
+  const csfFile = Array.from(context?.attachedCSFFiles || [])[0];
+  const customTag = csfFile?.meta?.parameters?.customTag;
+
+  console.log('Custom tag:', customTag);
+  // document.documentElement.classList.add('cds--mdx');
+
+  React.useEffect(() => {
+    document.documentElement.classList.toggle('cds--mdx', Boolean(customTag));
+  }, [customTag]);
+
+  if (!customTag) {
+    return (
+      <DocsContainer context={context} {...props}>
+        {children}
+      </DocsContainer>
+    );
+  }
 
   return (
     <MDXProvider components={customMarkdown}>
-      <DocsContainer {...props}>
+      <DocsContainer context={context} {...props}>
         <Unstyled>
-          <Theme
-            style={{
-              paddingBottom: '5rem',
-              paddingTop: '4rem',
-            }}
-            theme="g10">
-            {children}
-          </Theme>
+          {/* Force prose docs to g10 for stable contrast and spacing */}
+          <GlobalTheme theme="g10">
+            <div style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
+              {children}
+            </div>
+          </GlobalTheme>
         </Unstyled>
       </DocsContainer>
     </MDXProvider>
