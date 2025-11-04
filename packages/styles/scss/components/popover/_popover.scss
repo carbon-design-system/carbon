@@ -119,7 +119,7 @@ $popover-caret-height: custom-property.get-var(
 
   // Border modifier
   .#{$prefix}--popover--border
-    .#{$prefix}--popover
+    > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     outline: 1px solid $popover-border-color;
     outline-offset: -1px;
@@ -175,7 +175,8 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--background-token__background
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
     background-color: theme.$background;
   }
 
@@ -225,7 +226,8 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--background-token__background
-    .#{$prefix}--popover-caret::after {
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after {
     background-color: theme.$background;
   }
 
