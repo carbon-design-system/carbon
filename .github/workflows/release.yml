@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     timeout-minutes: 60
     # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
     permissions:
