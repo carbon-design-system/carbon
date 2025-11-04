@@ -29,6 +29,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 /// @group tile
 @mixin tile(
   $enable-experimental-tile-contrast: false,
+  $enable-tile-contrast: false,
   $enable-v12-tile-radio-icons: false
 ) {
   .#{$prefix}--tile-group {
@@ -78,7 +79,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -121,7 +124,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
     ) {
       border: 1px solid $border-disabled;
     }
@@ -157,7 +162,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -174,7 +181,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     @if (
       enabled('enable-v12-tile-radio-icons') or
-        $enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast or
+        $enable-tile-contrast
     ) {
       opacity: 1;
     } @else {
@@ -229,7 +237,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     inset-inline-end: 0;
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
     ) {
       border: 1px solid $border-disabled;
     }
@@ -261,7 +271,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -355,7 +367,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
     ) {
       border: 1px solid $border-disabled;
     }
@@ -408,6 +422,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     @if (
       enabled('enable-v12-tile-radio-icons') or
         $enable-experimental-tile-contrast
+        $enable-tile-contrast
     ) {
       inset-inline-end: $spacing-08;
     }

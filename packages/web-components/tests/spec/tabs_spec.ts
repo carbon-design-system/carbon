@@ -22,15 +22,15 @@ xdescribe('cds-tabs', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem!.shadowRoot!.getElementById('trigger');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--tabs-trigger--open')).toBe(true);
       (inner as HTMLElement).click();
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(inner!.classList.contains('cds--tabs-trigger--open')).toBe(false);
     });
 
@@ -38,12 +38,12 @@ xdescribe('cds-tabs', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem!.shadowRoot!.getElementById('trigger');
       (inner as HTMLElement).click();
       await Promise.resolve();
       document.documentElement.click();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(elem!.classList.contains('cds--tabs-trigger--open')).toBe(false);
     });
 
@@ -51,12 +51,12 @@ xdescribe('cds-tabs', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const inner = elem!.shadowRoot!.getElementById('trigger');
       (inner as HTMLElement).click();
       await Promise.resolve();
       (document.body.querySelector('cds-tab') as HTMLElement).click();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(elem!.classList.contains('cds--tabs-trigger--open')).toBe(false);
     });
   });
@@ -85,7 +85,7 @@ xdescribe('cds-tabs', () => {
       (itemNodes[2] as HTMLElement).click();
       await Promise.resolve();
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.shadowRoot!.getElementById('trigger-label')!.textContent!.trim()
       ).toBe('Option 3');
     });
@@ -122,7 +122,7 @@ xdescribe('cds-tabs', () => {
       const itemNodes = document.body.querySelectorAll('cds-tab');
       (document.body.querySelector('cds-tabs') as CDSTabs).value = 'all';
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       events.on(elem!, 'cds-tabs-beingselected', (event: CustomEvent) => {
         expect(event.detail.item).toBe(itemNodes[2]);
         event.preventDefault();
@@ -135,7 +135,7 @@ xdescribe('cds-tabs', () => {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         elem!.shadowRoot!.getElementById('trigger-label')!.textContent!.trim()
       ).toBe('Option 1');
     });
@@ -150,15 +150,15 @@ xdescribe('cds-tabs', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem as any)._open = true;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'Escape',
         })
       );
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect((elem as any)._open).toBe(false);
     });
 
@@ -169,11 +169,11 @@ xdescribe('cds-tabs', () => {
       (elem as CDSTabs).value = 'all';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue(null);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'ArrowLeft',
@@ -195,11 +195,11 @@ xdescribe('cds-tabs', () => {
       (elem as CDSTabs).value = 'router';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue(null);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'ArrowRight',
@@ -219,15 +219,15 @@ xdescribe('cds-tabs', () => {
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
       (elem as CDSTabs).value = 'all';
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem as any)._open = true;
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'ArrowUp',
@@ -247,15 +247,15 @@ xdescribe('cds-tabs', () => {
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
       (elem as CDSTabs).value = 'router';
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem as any)._open = true;
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'ArrowDown',
@@ -277,18 +277,18 @@ xdescribe('cds-tabs', () => {
       (elem as CDSTabs).value = 'all';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'ArrowDown',
         })
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect((elem as any)._open).toBe(true);
       const itemNodes = document.body.querySelectorAll('cds-tab');
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
@@ -305,18 +305,18 @@ xdescribe('cds-tabs', () => {
       (elem as CDSTabs).value = 'all';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: 'ArrowUp',
         })
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect((elem as any)._open).toBe(true);
       const itemNodes = document.body.querySelectorAll('cds-tab');
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
@@ -330,17 +330,17 @@ xdescribe('cds-tabs', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: ' ',
         })
       );
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect((elem as any)._open).toBe(true);
     });
 
@@ -348,23 +348,23 @@ xdescribe('cds-tabs', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem as any)._open = true;
       const itemNodes = document.body.querySelectorAll('cds-tab');
       (itemNodes[2] as CDSTab).highlighted = true;
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: ' ',
         })
       );
       await Promise.resolve();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect((elem as any)._open).toBe(false);
       expect((elem as CDSTabs).value).toBe('staging');
     });
@@ -374,23 +374,23 @@ xdescribe('cds-tabs', () => {
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
       (elem as CDSTabs).value = 'staging';
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem as any)._open = true;
       const itemNodes = document.body.querySelectorAll('cds-tab');
       (itemNodes[2] as CDSTab).highlighted = true;
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: ' ',
         })
       );
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect((elem as any)._open).toBe(false);
     });
 
@@ -398,25 +398,25 @@ xdescribe('cds-tabs', () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (elem as any)._open = true;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem!.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           key: ' ',
         })
       );
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       expect((elem as any)._open).toBe(false);
     });
   });
 
   afterEach(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "1.90.0",
+  "version": "1.94.0-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -40,22 +40,22 @@
     }
   },
   "dependencies": {
-    "@carbon/colors": "^11.40.0",
-    "@carbon/feature-flags": "^0.30.0",
-    "@carbon/grid": "^11.43.0",
-    "@carbon/layout": "^11.41.0",
-    "@carbon/motion": "^11.35.0",
-    "@carbon/themes": "^11.60.0",
-    "@carbon/type": "^11.47.0",
+    "@carbon/colors": "^11.42.0",
+    "@carbon/feature-flags": "workspace:>=0.32.0",
+    "@carbon/grid": "^11.45.0",
+    "@carbon/layout": "^11.43.0",
+    "@carbon/motion": "^11.37.0",
+    "@carbon/themes": "^11.62.0",
+    "@carbon/type": "^11.49.0",
     "@ibm/plex": "6.0.0-next.6",
     "@ibm/plex-mono": "1.1.0",
     "@ibm/plex-sans": "1.1.0",
     "@ibm/plex-sans-arabic": "1.1.0",
     "@ibm/plex-sans-devanagari": "1.1.0",
-    "@ibm/plex-sans-hebrew": "0.0.3-alpha.0",
-    "@ibm/plex-sans-thai": "0.0.3-alpha.0",
-    "@ibm/plex-sans-thai-looped": "0.0.3-alpha.0",
-    "@ibm/plex-serif": "0.0.3-alpha.0",
+    "@ibm/plex-sans-hebrew": "1.1.0",
+    "@ibm/plex-sans-thai": "1.1.0",
+    "@ibm/plex-sans-thai-looped": "1.1.0",
+    "@ibm/plex-serif": "1.1.0",
     "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {
@@ -67,7 +67,7 @@
     "postcss": "^8.5.6",
     "postcss-flexbugs-fixes": "^5.0.2",
     "rimraf": "^6.0.1",
-    "sass": "^1.77.7"
+    "sass": "^1.93.2"
   },
   "sideEffects": [
     "index.scss",

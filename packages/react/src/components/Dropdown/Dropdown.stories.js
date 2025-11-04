@@ -31,21 +31,6 @@ export default {
     DropdownSkeleton,
   },
   argTypes: {
-    items: {
-      table: { disable: true },
-    },
-    initialSelectedItem: {
-      table: { disable: true },
-    },
-    itemToElement: {
-      table: { disable: true },
-    },
-    className: {
-      table: { disable: true },
-    },
-    id: {
-      table: { disable: true },
-    },
     light: {
       table: {
         disable: true,
@@ -60,6 +45,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: ['items', 'initialSelectedItem', 'itemToElement', 'id'],
     },
   },
 };
