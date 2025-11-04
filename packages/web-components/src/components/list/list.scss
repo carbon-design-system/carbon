@@ -48,12 +48,13 @@ $css--plex: true !default;
 }
 
 // unordered list
+// Default behavior (backward compatible): hyphen for top-level, square for nested
 :host(#{$prefix}-unordered-list) {
-  // – en dash
+  // – en dash (default for top-level)
   --#{$prefix}-ce--list-marker: '\002013';
 
   &[slot='nested'] {
-    // ▪ square
+    // ▪ square (default for nested, backward compatible)
     --#{$prefix}-ce--list-marker: '\0025AA';
   }
 }
@@ -63,7 +64,7 @@ $css--plex: true !default;
 
   &::before {
     position: absolute;
-    // – en dash
+    // – en dash (default for top-level)
     content: '\002013';
     inset-inline-start: calc(-1 * #{$spacing-05});
   }
@@ -72,10 +73,76 @@ $css--plex: true !default;
 :host(#{$prefix}-unordered-list[nested]),
 :host(#{$prefix}-unordered-list[slot='nested']) {
   ::slotted(#{$prefix}-list-item)::before {
-    // ▪ square
+    // ▪ square (default for nested, backward compatible)
     content: '\0025AA';
     // offset to account for smaller ▪ vs –
     inset-inline-start: calc(-1 * #{$spacing-04});
+  }
+}
+
+// Marker type: disc
+:host(#{$prefix}-unordered-list[type='disc']) {
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-disc {
+    list-style-type: disc;
+  }
+
+  ::slotted(#{$prefix}-list-item)::before {
+    content: none;
+  }
+}
+
+// Marker type: circle
+:host(#{$prefix}-unordered-list[type='circle']) {
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-circle {
+    list-style-type: circle;
+  }
+
+  ::slotted(#{$prefix}-list-item)::before {
+    content: none;
+  }
+}
+
+// Marker type: square
+:host(#{$prefix}-unordered-list[type='square']) {
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-square {
+    list-style-type: square;
+  }
+
+  ::slotted(#{$prefix}-list-item)::before {
+    content: none;
+  }
+}
+
+// Marker type: hyphen (explicit)
+:host(#{$prefix}-unordered-list[type='hyphen']) {
+  --#{$prefix}-ce--list-marker: '\002013';
+
+  ::slotted(#{$prefix}-list-item)::before {
+    content: '\002013';
+    inset-inline-start: calc(-1 * #{$spacing-05});
+  }
+
+  &[nested],
+  &[slot='nested'] {
+    ::slotted(#{$prefix}-list-item)::before {
+      inset-inline-start: calc(-1 * #{$spacing-05});
+    }
+  }
+}
+
+// Marker type: custom
+:host(#{$prefix}-unordered-list[type='custom']) {
+  ::slotted(#{$prefix}-list-item)::before {
+    // Custom marker content will be set via CSS custom property
+    content: var(--#{$prefix}--list--marker-content, '\002013');
+    inset-inline-start: calc(-1 * #{$spacing-05});
+  }
+
+  &[nested],
+  &[slot='nested'] {
+    ::slotted(#{$prefix}-list-item)::before {
+      inset-inline-start: calc(-1 * #{$spacing-05});
+    }
   }
 }
 
