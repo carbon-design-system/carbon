@@ -17,6 +17,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Marker Types](#marker-types)
 - [Nested](#nested)
 - [Component API](#component-api)
 - [Feedback](#feedback)
@@ -31,6 +32,44 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(UnorderedList.Default),
+    },
+  ]}
+/>
+
+## Marker Types
+
+The `UnorderedList` component supports different marker types for list items. You can specify the marker type using the `type` prop:
+
+- **`disc`**: Filled circle (•) - uses native CSS `list-style-type: disc`
+- **`circle`**: Hollow circle (○) - uses native CSS `list-style-type: circle`
+- **`square`**: Filled square (▪) - uses native CSS `list-style-type: square`
+- **`hyphen`**: En dash (–) - uses a custom `::before` pseudo-element (default for top-level lists)
+- **`custom`**: Custom marker - uses a custom `::before` pseudo-element with content from the `customMarker` prop
+
+When no `type` is specified:
+- Top-level lists default to `hyphen`
+- Nested lists default to `square` (deprecated - will inherit parent type in next major release)
+
+<Canvas
+  of={UnorderedList.MarkerTypes}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(UnorderedList.MarkerTypes),
+    },
+  ]}
+/>
+
+### Nested Lists with Marker Types
+
+You can specify different marker types for nested lists. In the next major release, nested lists without an explicit `type` will inherit the parent list's marker type.
+
+<Canvas
+  of={UnorderedList.NestedWithMarkerTypes}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(UnorderedList.NestedWithMarkerTypes),
     },
   ]}
 />
