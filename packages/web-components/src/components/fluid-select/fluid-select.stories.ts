@@ -52,12 +52,13 @@ const actions = html`
 const args = {
   disabled: false,
   invalid: false,
-  invalidText: 'Error message',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long',
   labelText: 'Select an option',
   readOnly: false,
   warn: false,
-  warnText: 'Warning message',
-  value: '',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 const argTypes = {
@@ -119,10 +120,6 @@ export const Default = {
           ?warn="${warn}"
           warn-text="${ifDefined(warnText)}"
           >>
-          <cds-toggletip autoAlign="true" slot="label-text">
-            Select an option
-            <p slot="body-text">Additional field information here.</p>
-          </cds-toggletip>
           <cds-select-item
             value="An example option that is really long to show what should be done to handle long text"
             >An example option that is really long to show what should be done
@@ -162,7 +159,6 @@ export const WithAILabel = {
       readOnly,
       warn,
       warnText,
-      value,
     } = args ?? {};
 
     return html` <div style="width: 400px">
@@ -174,8 +170,7 @@ export const WithAILabel = {
         name="${ifDefined(name)}"
         ?readonly="${readOnly}"
         ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        value="${ifDefined(value)}">
+        warn-text="${ifDefined(warnText)}">
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >

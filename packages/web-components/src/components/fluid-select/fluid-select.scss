@@ -19,7 +19,9 @@ $css--plex: true !default;
 $divider-width: 1px;
 
 :host(#{$prefix}-fluid-select) {
-  @extend .#{$prefix}--select;
+  @extend .#{$prefix}--select--fluid;
+  @extend .#{$prefix}--select--invalid;
+
   @include emit-layout-tokens();
 
   // Position the AI label and slug
