@@ -39,8 +39,7 @@ export default function UnorderedList({
 
   // Determine marker type: use provided type, or default based on nesting
   const markerType: UnorderedListMarkerType | undefined =
-    type ||
-    (nested ? 'square' : 'hyphen');
+    type || (nested ? 'square' : 'hyphen');
 
   // Show deprecation warning for nested lists without explicit type
   useEffect(() => {
@@ -55,22 +54,18 @@ export default function UnorderedList({
         'Nested unordered lists without an explicit `type` prop will default to ' +
           'square markers. This behavior is deprecated. Please explicitly set ' +
           '`type="square"` (or another marker type) for nested lists. ' +
-          'In the next major release, nested lists will inherit the parent list\'s marker type.'
+          "In the next major release, nested lists will inherit the parent list's marker type."
       );
       hasWarnedRef.current = true;
     }
   }, [nested, type]);
 
   // Build class names
-  const classNames = classnames(
-    `${prefix}--list--unordered`,
-    className,
-    {
-      [`${prefix}--list--nested`]: nested,
-      [`${prefix}--list--expressive`]: isExpressive,
-      [`${prefix}--list--marker-${markerType}`]: markerType,
-    }
-  );
+  const classNames = classnames(`${prefix}--list--unordered`, className, {
+    [`${prefix}--list--nested`]: nested,
+    [`${prefix}--list--expressive`]: isExpressive,
+    [`${prefix}--list--marker-${markerType}`]: markerType,
+  });
 
   // Build styles for custom marker
   const customStyles: React.CSSProperties = {
@@ -82,9 +77,7 @@ export default function UnorderedList({
       : {}),
   };
 
-  return (
-    <ul className={classNames} style={customStyles} {...other} />
-  );
+  return <ul className={classNames} style={customStyles} {...other} />;
 }
 
 UnorderedList.propTypes = {
