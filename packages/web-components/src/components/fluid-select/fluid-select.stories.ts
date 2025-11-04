@@ -50,6 +50,7 @@ const actions = html`
 `;
 
 const args = {
+  defaultWidth: 400,
   disabled: false,
   invalid: false,
   invalidText:
@@ -62,6 +63,9 @@ const args = {
 };
 
 const argTypes = {
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
   disabled: {
     control: 'boolean',
     description: 'Specify whether the control is disabled.',
@@ -99,6 +103,7 @@ export const Default = {
   argTypes,
   render: (args) => {
     const {
+      defaultWidth,
       disabled,
       invalid,
       invalidText,
@@ -109,7 +114,7 @@ export const Default = {
       warnText,
     } = args ?? {};
     return html`
-      <cds-form-item>
+      <div style="width:${defaultWidth}px;">
         <cds-fluid-select
           ?disabled="${disabled}"
           ?invalid="${invalid}"
@@ -118,8 +123,28 @@ export const Default = {
           name="${ifDefined(name)}"
           ?readonly="${readOnly}"
           ?warn="${warn}"
-          warn-text="${ifDefined(warnText)}"
-          >>
+          warn-text="${ifDefined(warnText)}">
+          <cds-select-item value=""></cds-select-item>
+          <cds-select-item value="option-1">Option 1</cds-select-item>
+          <cds-select-item value="option-2">Option 2</cds-select-item>
+          <cds-select-item value="option-3">Option 3</cds-select-item>
+          <cds-select-item value="option-4">Option 4</cds-select-item>
+        </cds-fluid-select>
+        <div></div>
+      </div>
+    `;
+  },
+};
+
+export const WithToggletip = {
+  render: () => {
+    return html`
+      <div style="width:400px;">
+        <cds-fluid-select>
+          <cds-toggletip autoAlign="true" slot="label-text">
+            Label
+            <p slot="body-text">Additional field information here.</p>
+          </cds-toggletip>
           <cds-select-item
             value="An example option that is really long to show what should be done to handle long text"
             >An example option that is really long to show what should be done
@@ -130,7 +155,8 @@ export const Default = {
           <cds-select-item value="option-3">Option 3</cds-select-item>
           <cds-select-item value="option-4">Option 4</cds-select-item>
         </cds-fluid-select>
-      </cds-form-item>
+        <div></div>
+      </div>
     `;
   },
 };
@@ -141,7 +167,11 @@ export const Skeleton = {
       skip: true,
     },
   },
-  render: () => html` <cds-fluid-select-skeleton></cds-fluid-select-skeleton> `,
+  render: () =>
+    html` <div style="width:400px;">
+      <cds-fluid-select-skeleton></cds-fluid-select-skeleton>
+      <div style="width:400px;"></div>
+    </div>`,
 };
 
 export const WithAILabel = {
@@ -159,9 +189,10 @@ export const WithAILabel = {
       readOnly,
       warn,
       warnText,
+      defaultWidth,
     } = args ?? {};
 
-    return html` <div style="width: 400px">
+    return html` <div style="width:${defaultWidth}px;">
       <cds-fluid-select
         ?disabled="${disabled}"
         ?invalid="${invalid}"
