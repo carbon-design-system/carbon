@@ -125,9 +125,6 @@ const CarbonMdxContainer = ({ children, context, ...props }) => {
   const csfFile = Array.from(context?.attachedCSFFiles || [])[0];
   const customTag = csfFile?.meta?.parameters?.customTag;
 
-  console.log('Custom tag:', customTag);
-  // document.documentElement.classList.add('cds--mdx');
-
   React.useEffect(() => {
     document.documentElement.classList.toggle('cds--mdx', Boolean(customTag));
   }, [customTag]);
