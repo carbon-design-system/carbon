@@ -11,7 +11,7 @@ import './fluid-search';
 import './fluid-search-skeleton';
 
 const args = {
-  defaultWidth: 300,
+  defaultWidth: 400,
   closeButtonLabelText: 'Clear search input',
   disabled: false,
   labelText: 'Search',
@@ -100,7 +100,7 @@ export const Skeleton = {
     },
   },
   args: {
-    defaultWidth: 300,
+    defaultWidth: 400,
   },
   argTypes: {
     defaultWidth: {
