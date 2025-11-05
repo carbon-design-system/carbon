@@ -245,11 +245,6 @@ export interface DatePickerProps {
   disable?: DateLimit<DateOption>[];
 
   /**
-   * Specify whether or not the input should be disabled
-   */
-  disabled?: boolean;
-
-  /**
    * The flatpickr `enable` option that allows a user to enable certain dates.
    */
   enable?: DateLimit<DateOption>[];
@@ -1113,11 +1108,6 @@ DatePicker.propTypes = {
    * The flatpickr `disable` option that allows a user to disable certain dates.
    */
   disable: PropTypes.array,
-
-  /**
-   * Specify whether or not the input should be disabled
-   */
-  disabled: PropTypes.bool,
 
   /**
    * The flatpickr `enable` option that allows a user to enable certain dates.

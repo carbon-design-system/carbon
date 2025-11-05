@@ -118,13 +118,6 @@
       cursor: not-allowed;
     }
 
-    &:disabled.#{$prefix}--date-picker__input--invalid,
-    &:disabled.#{$prefix}--date-picker__input--warn,
-    &[readonly].#{$prefix}--date-picker__input--invalid,
-    &[readonly].#{$prefix}--date-picker__input--warn {
-      border-block-end: 1px solid transparent;
-    }
-
     &:disabled::placeholder {
       color: $text-disabled;
     }

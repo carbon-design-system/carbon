@@ -367,15 +367,14 @@ describe('DatePicker', () => {
   describe('Invalid and Warning States with Disabled/ReadOnly', () => {
     it('should not show invalid state when disabled', () => {
       render(
-        <DatePicker
-          datePickerType="single"
-          invalid={true}
-          invalidText="Invalid date"
-          disabled={true}>
+        <DatePicker datePickerType="single">
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
+            invalid={true}
+            invalidText="Invalid date"
+            disabled={true}
           />
         </DatePicker>
       );
@@ -389,15 +388,14 @@ describe('DatePicker', () => {
 
     it('should not show warning state when disabled', () => {
       render(
-        <DatePicker
-          datePickerType="single"
-          warn={true}
-          warnText="Warning message"
-          disabled={true}>
+        <DatePicker datePickerType="single">
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
+            warn={true}
+            warnText="Warning message"
+            disabled={true}
           />
         </DatePicker>
       );
@@ -411,15 +409,13 @@ describe('DatePicker', () => {
 
     it('should not show invalid state when readOnly', () => {
       render(
-        <DatePicker
-          datePickerType="single"
-          invalid={true}
-          invalidText="Invalid date"
-          readOnly={true}>
+        <DatePicker datePickerType="single" readOnly={true}>
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
+            invalid={true}
+            invalidText="Invalid date"
           />
         </DatePicker>
       );
@@ -433,15 +429,13 @@ describe('DatePicker', () => {
 
     it('should not show warning state when readOnly', () => {
       render(
-        <DatePicker
-          datePickerType="single"
-          warn={true}
-          warnText="Warning message"
-          readOnly={true}>
+        <DatePicker datePickerType="single" readOnly={true}>
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
+            warn={true}
+            warnText="Warning message"
           />
         </DatePicker>
       );
