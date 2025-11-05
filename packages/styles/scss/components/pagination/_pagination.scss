@@ -32,6 +32,7 @@
     @include type-style('body-compact-01');
 
     display: flex;
+    overflow: initial;
     align-items: center;
     justify-content: space-between;
     background-color: $layer;
@@ -40,12 +41,9 @@
     container-type: inline-size;
     inline-size: calc(100% - 1px);
     min-block-size: convert.to-rem(40px);
-    overflow-x: auto;
 
     // 42rem = 'md' breakpoint
     @container pagination (min-width: 42rem) {
-      overflow: initial;
-
       .#{$prefix}--pagination__control-buttons {
         display: flex;
       }

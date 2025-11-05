@@ -48,8 +48,7 @@ describe('cds-password-input', () => {
 
   it('should apply disabled attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input disabled>
-      </cds-text-input>
+      <cds-password-input disabled></cds-password-input>
     `);
     const input = el.shadowRoot.querySelector('input');
     expect(input.disabled).to.be.true;

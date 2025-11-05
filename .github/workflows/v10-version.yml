@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   version:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     if: github.repository == 'carbon-design-system/carbon'
     timeout-minutes: 60
     steps:
