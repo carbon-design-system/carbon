@@ -50,7 +50,7 @@ $css--plex: true !default;
   @include ai-gradient;
 }
 
-:host(#{$prefix}-dropdown[invalid]) {
+:host(#{$prefix}-dropdown[invalid]:not([disabled]):not([read-only])) {
   .#{$prefix}--list-box__field {
     outline: none;
   }
