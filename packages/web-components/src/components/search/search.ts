@@ -329,7 +329,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
         @input="${handleInput}" />
       <button
         part="close-button"
-        disabled="${disabled}"
+        ?disabled="${disabled}"
         class="${clearClasses}"
         @click="${handleClearInputButtonClick}"
         type="button"
