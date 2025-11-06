@@ -53,6 +53,40 @@ test.describe('ComposedModal', () => {
           theme,
         });
       });
+
+      test('with ai label @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ComposedModal',
+          id: 'components-composedmodal--with-ai-label',
+          theme,
+        });
+      });
+
+      test('with inline loading @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ComposedModal',
+          id: 'components-composedmodal--with-inline-loading',
+          theme,
+        });
+      });
+
+      test('enable dialog element feature flag @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ComposedModal',
+          id: 'components-composedmodal-feature-flags--enable-dialog-element',
+          theme,
+        });
+      });
+
+      test('enable preview focus wrap without sentinels feature flag @vrt', async ({
+        page,
+      }) => {
+        await snapshotStory(page, {
+          component: 'ComposedModal',
+          id: 'components-composedmodal-feature-flags--enable-focus-wrap-without-sentinels',
+          theme,
+        });
+      });
     });
   });
 });
