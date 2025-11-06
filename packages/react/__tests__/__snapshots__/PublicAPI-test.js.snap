@@ -15758,5 +15758,6 @@ Map {
   "usePrefersDarkScheme" => {},
   "usePrefix" => {},
   "useTheme" => {},
+  "validateNumberSeparators" => {},
 }
 `;

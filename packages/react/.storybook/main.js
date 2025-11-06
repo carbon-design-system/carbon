@@ -27,6 +27,7 @@ const storyGlobs = [
   '../src/**/next/**/*.stories.js',
   '../src/**/next/*.mdx',
   '../src/**/*-story.js',
+  './Preview/Preview.mdx',
 ];
 
 const stories = glob.sync(storyGlobs, {
@@ -102,7 +103,6 @@ const config = {
                 path.resolve(__dirname, '..', 'node_modules'),
                 path.resolve(__dirname, '..', '..', '..', 'node_modules'),
               ],
-              silenceDeprecations: ['mixed-decls'],
             },
             warnRuleAsWarning: true,
             sourceMap: true,
