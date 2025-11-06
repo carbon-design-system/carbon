@@ -5,37 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/fluid-textarea/index.js';
 import { html, fixture, expect, oneEvent } from '@open-wc/testing';
 
-describe('cds-textarea', () => {
+describe('cds-fluid-textarea', () => {
   it('should render correctly with label', async () => {
     const el = await fixture(html`
-      <cds-textarea
+      <cds-fluid-textarea
         label="Textarea label"
-        helper-text="Helper text"></cds-textarea>
+        helper-text="Helper text"></cds-fluid-textarea>
     `);
 
     const label = el.shadowRoot.querySelector('label');
+
     expect(label).to.exist;
     expect(label.textContent).to.include('Textarea label');
   });
 
-  it('should render correctly with helper-text', async () => {
-    const el = await fixture(html`
-      <cds-textarea
-        label="Textarea label"
-        helper-text="Helper text"></cds-textarea>
-    `);
-
-    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
-    expect(helper).to.exist;
-    expect(helper.textContent).to.include('Helper text');
-  });
-
   it('should reflect value to the textarea', async () => {
     const el = await fixture(html`
-      <cds-textarea value="Initial content"></cds-textarea>
+      <cds-fluid-textarea value="Initial content"></cds-fluid-textarea>
     `);
 
     const textarea = el.shadowRoot.querySelector('textarea');
@@ -43,7 +32,7 @@ describe('cds-textarea', () => {
   });
 
   it('should emit input event and update value', async () => {
-    const el = await fixture(html`<cds-textarea></cds-textarea>`);
+    const el = await fixture(html`<cds-fluid-textarea></cds-fluid-textarea>`);
     const textarea = el.shadowRoot.querySelector('textarea');
     textarea.value = 'Updated content';
     textarea.dispatchEvent(new Event('input', { bubbles: true }));
@@ -54,7 +43,7 @@ describe('cds-textarea', () => {
 
   it('should support readonly and disabled attributes', async () => {
     const el = await fixture(html`
-      <cds-textarea readonly disabled></cds-textarea>
+      <cds-fluid-textarea readonly disabled></cds-fluid-textarea>
     `);
 
     const textarea = el.shadowRoot.querySelector('textarea');
@@ -64,7 +53,9 @@ describe('cds-textarea', () => {
 
   it('should show invalid text when invalid is set', async () => {
     const el = await fixture(html`
-      <cds-textarea invalid invalid-text="Error occurred"></cds-textarea>
+      <cds-fluid-textarea
+        invalid
+        invalid-text="Error occurred"></cds-fluid-textarea>
     `);
 
     const error = el.shadowRoot.querySelector('.cds--form-requirement');
@@ -74,7 +65,9 @@ describe('cds-textarea', () => {
 
   it('should show warning text when warn is set', async () => {
     const el = await fixture(html`
-      <cds-textarea warn warn-text="This is a warning"></cds-textarea>
+      <cds-fluid-textarea
+        warn
+        warn-text="This is a warning"></cds-fluid-textarea>
     `);
 
     const warning = el.shadowRoot.querySelector('.cds--form-requirement');
@@ -84,7 +77,7 @@ describe('cds-textarea', () => {
 
   it('should apply hide-label and visually hide the label', async () => {
     const el = await fixture(html`
-      <cds-textarea label="Hidden label" hide-label></cds-textarea>
+      <cds-fluid-textarea label="Hidden label" hide-label></cds-fluid-textarea>
     `);
     const label = el.shadowRoot.querySelector('label');
     expect(label.classList.contains('cds--visually-hidden')).to.be.true;
@@ -92,7 +85,7 @@ describe('cds-textarea', () => {
 
   it('should reflect cols and rows attributes', async () => {
     const el = await fixture(html`
-      <cds-textarea cols="50" rows="10"></cds-textarea>
+      <cds-fluid-textarea cols="50" rows="10"></cds-fluid-textarea>
     `);
     const textarea = el.shadowRoot.querySelector('textarea');
     expect(textarea.getAttribute('cols')).to.equal('50');
@@ -101,7 +94,7 @@ describe('cds-textarea', () => {
 
   it('should accept pattern and required attributes', async () => {
     const el = await fixture(html`
-      <cds-textarea pattern="[A-Za-z]+" required></cds-textarea>
+      <cds-fluid-textarea pattern="[A-Za-z]+" required></cds-fluid-textarea>
     `);
     const textarea = el.shadowRoot.querySelector('textarea');
     expect(textarea.getAttribute('pattern')).to.equal('[A-Za-z]+');
@@ -110,14 +103,14 @@ describe('cds-textarea', () => {
 
   it('should forward data-* attributes', async () => {
     const el = await fixture(html`
-      <cds-textarea data-testid="textarea-id"></cds-textarea>
+      <cds-fluid-textarea data-testid="textarea-id"></cds-fluid-textarea>
     `);
     expect(el.getAttribute('data-testid')).to.equal('textarea-id');
   });
 
   it('should support skeleton variant', async () => {
     const el = await fixture(html`
-      <cds-textarea-skeleton></cds-textarea-skeleton>
+      <cds-fluid-textarea-skeleton></cds-fluid-textarea-skeleton>
     `);
     expect(el).to.exist;
     const skeleton = el.shadowRoot.querySelector('.cds--skeleton');
@@ -126,10 +119,10 @@ describe('cds-textarea', () => {
 
   it('should be accessible', async () => {
     const el = await fixture(html`
-      <cds-textarea
+      <cds-fluid-textarea
         label="Label"
         helper-text="Help"
-        value="value"></cds-textarea>
+        value="value"></cds-fluid-textarea>
     `);
     await expect(el).to.be.accessible();
   });
@@ -140,10 +133,10 @@ describe('cds-textarea', () => {
     // Test for switching counter mode from "word" to "character"
     it('should apply maxlength only in character mode', async () => {
       const el = await fixture(html`
-        <cds-textarea
+        <cds-fluid-textarea
           enable-counter
           counter-mode="character"
-          max-count="100"></cds-textarea>
+          max-count="100"></cds-fluid-textarea>
       `);
       const textarea = el.shadowRoot.querySelector('textarea');
       expect(textarea.getAttribute('maxlength')).to.equal('100');
@@ -152,10 +145,10 @@ describe('cds-textarea', () => {
     // Test for switching counter mode from "word" to "character"
     it('should remove maxlength when switching to word mode', async () => {
       const el = await fixture(html`
-        <cds-textarea
+        <cds-fluid-textarea
           enable-counter
           counter-mode="character"
-          max-count="100"></cds-textarea>
+          max-count="100"></cds-fluid-textarea>
       `);
       el.counterMode = 'word';
       await el.updateComplete;
@@ -166,10 +159,10 @@ describe('cds-textarea', () => {
     // Test for switching back to character mode
     it('should add maxlength when switching back to character mode', async () => {
       const el = await fixture(html`
-        <cds-textarea
+        <cds-fluid-textarea
           enable-counter
           counter-mode="word"
-          max-count="100"></cds-textarea>
+          max-count="100"></cds-fluid-textarea>
       `);
       el.counterMode = 'character';
       await el.updateComplete;
@@ -182,9 +175,9 @@ describe('cds-textarea', () => {
   describe('slot support', () => {
     it('renders slotted label-text', async () => {
       const el = await fixture(html`
-        <cds-textarea>
+        <cds-fluid-textarea>
           <span slot="label-text">Slotted Label</span>
-        </cds-textarea>
+        </cds-fluid-textarea>
       `);
       await el.updateComplete;
       const slot = el.shadowRoot.querySelector('slot[name="label-text"]');
@@ -192,25 +185,11 @@ describe('cds-textarea', () => {
       expect(content.textContent.trim()).to.equal('Slotted Label');
     });
 
-    it('renders slotted helper-text', async () => {
-      const el = await fixture(html`
-        <cds-textarea>
-          <span slot="helper-text">Slotted Helper</span>
-        </cds-textarea>
-      `);
-      await el.updateComplete;
-      const slot = el.shadowRoot.querySelector(
-        'div.cds--form__helper-text slot[name="helper-text"]'
-      );
-      const content = slot.assignedNodes({ flatten: true })[0];
-      expect(content.textContent.trim()).to.equal('Slotted Helper');
-    });
-
     it('renders slotted invalid-text', async () => {
       const el = await fixture(html`
-        <cds-textarea invalid>
+        <cds-fluid-textarea invalid>
           <span slot="invalid-text">Slotted Invalid</span>
-        </cds-textarea>
+        </cds-fluid-textarea>
       `);
       await el.updateComplete;
       const slot = el.shadowRoot.querySelector('slot[name="invalid-text"]');
@@ -220,9 +199,9 @@ describe('cds-textarea', () => {
 
     it('renders slotted warn-text', async () => {
       const el = await fixture(html`
-        <cds-textarea warn>
+        <cds-fluid-textarea warn>
           <span slot="warn-text">Slotted Warning</span>
-        </cds-textarea>
+        </cds-fluid-textarea>
       `);
       await el.updateComplete;
       const slot = el.shadowRoot.querySelector('slot[name="warn-text"]');
