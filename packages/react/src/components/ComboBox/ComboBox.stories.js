@@ -356,14 +356,52 @@ AutocompleteWithTypeahead.argTypes = {
   onChange: { action: 'onChange' },
 };
 
-export const Test = () => {
+export const Test = (args) => {
+  const items = [
+    {
+      id: 'option-0',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'option-1',
+      text: 'Option 1',
+    },
+    {
+      id: 'option-2',
+      text: 'Option 2',
+    },
+    {
+      id: 'option-3',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'option-4',
+      text: 'Option 4',
+    },
+    {
+      id: 'option-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        id="compForIssue"
-        decorator={<Locked />}
-        items={['zero', 'one', 'two', 'three']}
-        onChange={() => {}}
+        id="carbon-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+        onChange={action('onChange')}
+        initialSelectedItem={{
+          id: 'option-1',
+          text: 'Option 1',
+        }}
+        selectedItem={{
+          id: 'option-1',
+          text: 'Option 1',
+        }}
+        {...args}
       />
     </div>
   );
