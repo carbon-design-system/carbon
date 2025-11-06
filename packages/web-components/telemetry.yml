@@ -22,6 +22,7 @@ collect:
         - aria-labelledby
         - assistive-text
         - autoalign
+        - autoalign-boundary
         - autocomplete
         - autofocus
         - backgroundToken
