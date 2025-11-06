@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/select';
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/fluid-select' as *;
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
 
 $divider-width: 1px;
