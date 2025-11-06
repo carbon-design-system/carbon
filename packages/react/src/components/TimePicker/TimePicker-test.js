@@ -158,4 +158,131 @@ describe('TimePicker', () => {
       expect(screen.getByRole('textbox')).toHaveValue('🧛');
     });
   });
+  describe('invalid and warning states', () => {
+    it('should show invalid state when invalid is true', () => {
+      const { container } = render(
+        <TimePicker id="time-picker" invalid invalidText="Invalid time" />
+      );
+      expect(
+        container.querySelector('.cds--time-picker__error__icon')
+      ).toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).toHaveTextContent('Invalid time');
+    });
+
+    it('should show warning state when warning is true', () => {
+      const { container } = render(
+        <TimePicker id="time-picker" warning warningText="Warning message" />
+      );
+      expect(
+        container.querySelector('.cds--time-picker__error__icon')
+      ).toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).toHaveTextContent('Warning message');
+    });
+
+    it('should not show invalid state when disabled', () => {
+      const { container } = render(
+        <TimePicker
+          id="time-picker"
+          invalid
+          invalidText="Invalid time"
+          disabled
+        />
+      );
+      expect(
+        container.querySelector('.cds--time-picker__error__icon')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker--invalid')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker__input-field-error')
+      ).not.toBeInTheDocument();
+      // data-invalid attribute should not be present when disabled
+      expect(container.querySelector('[data-invalid]')).not.toBeInTheDocument();
+    });
+
+    it('should not show warning state when disabled', () => {
+      const { container } = render(
+        <TimePicker
+          id="time-picker"
+          warning
+          warningText="Warning message"
+          disabled
+        />
+      );
+      expect(
+        container.querySelector('.cds--time-picker__error__icon')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker--warning')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker__input-field-error')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not show invalid state when readOnly', () => {
+      const { container } = render(
+        <TimePicker
+          id="time-picker"
+          invalid
+          invalidText="Invalid time"
+          readOnly
+        />
+      );
+      expect(
+        container.querySelector('.cds--time-picker__error__icon')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker--invalid')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker__input-field-error')
+      ).not.toBeInTheDocument();
+      // data-invalid attribute should not be present when readonly
+      expect(container.querySelector('[data-invalid]')).not.toBeInTheDocument();
+    });
+
+    it('should not show warning state when readOnly', () => {
+      const { container } = render(
+        <TimePicker
+          id="time-picker"
+          warning
+          warningText="Warning message"
+          readOnly
+        />
+      );
+      expect(
+        container.querySelector('.cds--time-picker__error__icon')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--form-requirement')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker--warning')
+      ).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.cds--time-picker__input-field-error')
+      ).not.toBeInTheDocument();
+    });
+  });
 });
