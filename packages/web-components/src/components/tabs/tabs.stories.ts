@@ -6,7 +6,6 @@
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { TABS_TYPE } from './tabs';
 import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
@@ -14,11 +13,6 @@ import '../button';
 import '../checkbox';
 import './index';
 import '../text-input';
-
-const types = {
-  'Regular type': null,
-  [`Container type (${TABS_TYPE.CONTAINED})`]: TABS_TYPE.CONTAINED,
-};
 
 const args = {
   contained: false,
