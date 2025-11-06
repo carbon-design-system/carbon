@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   publish-cdn:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
@@ -60,7 +60,7 @@ jobs:
               --follow-symlinks \
               --endpoint-url https://${{ secrets.COMMON_COS_ENDPOINT }}
           }
-        
+
           if [ "$PRE_RELEASE" = "true" ]; then
             # If tag is a release candidate, upload the CDN artifacts to the `next` tag folder
             # ie. https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/breadcrumb.min.js
