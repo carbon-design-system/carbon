@@ -129,4 +129,145 @@ describe('cds-time-picker', () => {
       }
     });
   });
+  describe('invalid and warning states', () => {
+    it('should show invalid state when invalid is true', async () => {
+      const el = await fixture(html`
+        <cds-time-picker
+          id="time-picker"
+          invalid
+          invalid-text="Invalid time"></cds-time-picker>
+      `);
+
+      const errorIcon = el.shadowRoot?.querySelector(
+        '.cds--time-picker__error__icon'
+      );
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+
+      expect(errorIcon).to.exist;
+      expect(formRequirement).to.exist;
+      expect(formRequirement?.textContent?.trim()).to.equal('Invalid time');
+    });
+
+    it('should show warning state when warning is true', async () => {
+      const el = await fixture(html`
+        <cds-time-picker
+          id="time-picker"
+          warning
+          warning-text="Warning message"></cds-time-picker>
+      `);
+
+      const errorIcon = el.shadowRoot?.querySelector(
+        '.cds--time-picker__error__icon'
+      );
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+
+      expect(errorIcon).to.exist;
+      expect(formRequirement).to.exist;
+      expect(formRequirement?.textContent?.trim()).to.equal('Warning message');
+    });
+
+    it('should not show invalid state when disabled', async () => {
+      const el = await fixture(html`
+        <cds-time-picker
+          id="time-picker"
+          invalid
+          invalid-text="Invalid time"
+          disabled></cds-time-picker>
+      `);
+
+      const errorIcon = el.shadowRoot?.querySelector(
+        '.cds--time-picker__error__icon'
+      );
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      const timePickerEl = el.shadowRoot?.querySelector('.cds--time-picker');
+      const inputEl = el.shadowRoot?.querySelector('input');
+
+      expect(errorIcon).to.not.exist;
+      expect(formRequirement).to.not.exist;
+      expect(timePickerEl).to.not.have.class('cds--time-picker--invalid');
+      expect(inputEl).to.not.have.class('cds--time-picker__input-field-error');
+      // data-invalid attribute should not be present when disabled
+      expect(inputEl).to.not.have.attribute('data-invalid');
+    });
+
+    it('should not show warning state when disabled', async () => {
+      const el = await fixture(html`
+        <cds-time-picker
+          id="time-picker"
+          warning
+          warning-text="Warning message"
+          disabled></cds-time-picker>
+      `);
+
+      const errorIcon = el.shadowRoot?.querySelector(
+        '.cds--time-picker__error__icon'
+      );
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      const timePickerEl = el.shadowRoot?.querySelector('.cds--time-picker');
+      const inputEl = el.shadowRoot?.querySelector('input');
+
+      expect(errorIcon).to.not.exist;
+      expect(formRequirement).to.not.exist;
+      expect(timePickerEl).to.not.have.class('cds--time-picker--warning');
+      expect(inputEl).to.not.have.class('cds--time-picker__input-field-error');
+    });
+
+    it('should not show invalid state when readonly', async () => {
+      const el = await fixture(html`
+        <cds-time-picker
+          id="time-picker"
+          invalid
+          invalid-text="Invalid time"
+          readonly></cds-time-picker>
+      `);
+
+      const errorIcon = el.shadowRoot?.querySelector(
+        '.cds--time-picker__error__icon'
+      );
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      const timePickerEl = el.shadowRoot?.querySelector('.cds--time-picker');
+      const inputEl = el.shadowRoot?.querySelector('input');
+
+      expect(errorIcon).to.not.exist;
+      expect(formRequirement).to.not.exist;
+      expect(timePickerEl).to.not.have.class('cds--time-picker--invalid');
+      expect(inputEl).to.not.have.class('cds--time-picker__input-field-error');
+      // data-invalid attribute should not be present when readonly
+      expect(inputEl).to.not.have.attribute('data-invalid');
+    });
+
+    it('should not show warning state when readonly', async () => {
+      const el = await fixture(html`
+        <cds-time-picker
+          id="time-picker"
+          warning
+          warning-text="Warning message"
+          readonly></cds-time-picker>
+      `);
+
+      const errorIcon = el.shadowRoot?.querySelector(
+        '.cds--time-picker__error__icon'
+      );
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      const timePickerEl = el.shadowRoot?.querySelector('.cds--time-picker');
+      const inputEl = el.shadowRoot?.querySelector('input');
+
+      expect(errorIcon).to.not.exist;
+      expect(formRequirement).to.not.exist;
+      expect(timePickerEl).to.not.have.class('cds--time-picker--warning');
+      expect(inputEl).to.not.have.class('cds--time-picker__input-field-error');
+    });
+  });
 });

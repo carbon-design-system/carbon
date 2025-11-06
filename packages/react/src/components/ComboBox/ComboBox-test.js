@@ -498,6 +498,29 @@ describe('ComboBox', () => {
       // The displayed value should still be the one from the first render.
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
+
+    it('should mark the initially selectedItem on load when rendered', async () => {
+      render(
+        <ComboBox
+          {...mockProps}
+          initialSelectedItem={mockProps.items[0]}
+          selectedItem={mockProps.items[0]}
+        />
+      );
+      await openMenu();
+
+      // Find the first menu item (which should be the initially selected item)
+      const menuItems = screen.getAllByRole('option');
+      const firstMenuItem = menuItems[0];
+
+      // Check if the initially selected item has the active class
+      expect(firstMenuItem).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+
+      // Check if the initially selected item contains an SVG (checkmark icon)
+      expect(firstMenuItem.querySelector('svg')).toBeInTheDocument();
+    });
   });
 
   describe('provided `selectedItem`', () => {
