@@ -489,7 +489,7 @@ describe('cds-multi-select', function () {
       expect(firstItem.selected).to.be.false;
       expect(firstItem.hasAttribute('highlighted')).to.be.true;
 
-      const enterEvent = new KeyboardEvent('keypress', {
+      let enterEvent = new KeyboardEvent('keypress', {
         key: 'Enter',
         bubbles: true,
       });
@@ -498,9 +498,20 @@ describe('cds-multi-select', function () {
 
       expect(firstItem.selected).to.be.true;
 
+      // Menu closes after selection, reopen with pointer interaction then toggle off via keyboard
+      trigger.click();
+      await el.updateComplete;
+      expect(el.open).to.be.true;
+      const highlighted = el.querySelector(
+        'cds-multi-select-item[highlighted]'
+      );
+      expect(highlighted).to.equal(firstItem);
+      enterEvent = new KeyboardEvent('keypress', {
+        key: 'Enter',
+        bubbles: true,
+      });
       trigger.dispatchEvent(enterEvent);
       await el.updateComplete;
-
       expect(firstItem.selected).to.be.false;
     });
 
@@ -529,18 +540,28 @@ describe('cds-multi-select', function () {
       expect(firstItem.selected).to.be.false;
       expect(firstItem.hasAttribute('highlighted')).to.be.true;
 
-      const spaceEvent = new KeyboardEvent('keypress', {
+      let spaceEvent = new KeyboardEvent('keypress', {
         key: ' ',
         bubbles: true,
       });
       trigger.dispatchEvent(spaceEvent);
       await el.updateComplete;
-
       expect(firstItem.selected).to.be.true;
 
+      // Menu closes after selection, reopen with pointer interaction before toggling off
+      trigger.click();
+      await el.updateComplete;
+      expect(el.open).to.be.true;
+      const highlighted = el.querySelector(
+        'cds-multi-select-item[highlighted]'
+      );
+      expect(highlighted).to.equal(firstItem);
+      spaceEvent = new KeyboardEvent('keypress', {
+        key: ' ',
+        bubbles: true,
+      });
       trigger.dispatchEvent(spaceEvent);
       await el.updateComplete;
-
       expect(firstItem.selected).to.be.false;
     });
 
