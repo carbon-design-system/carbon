@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
-import { Locked } from '@carbon/react/icons';
+import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
@@ -183,6 +182,34 @@ export const AutocompleteWithTypeahead = (args) => {
     </div>
   );
 };
+
+// I need remove this test
+export const AllowCustomValueTest = (args) => {
+  const { onChange, ...rest } = args;
+  const options = [
+    { id: 'option-1', text: 'Option 1' },
+    { id: 'option-2', text: 'Option 2' },
+    { id: 'option-3', text: 'Option 3' },
+  ];
+
+  return (
+    <div style={{ width: 300, display: 'grid', gap: '1rem' }}>
+      <ComboBox
+        allowCustomValue
+        id="carbon-combobox"
+        items={options}
+        titleText="ComboBox title"
+        itemToString={(item) => (item ? item.text : '')}
+        helperText="Combobox helper text"
+        onChange={onChange}
+        {...rest}
+      />
+    </div>
+  );
+};
+
+AllowCustomValueTest.argTypes = { ...sharedArgTypes };
+
 export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: 400 }}>
     <div style={{ height: 300 }}></div>
