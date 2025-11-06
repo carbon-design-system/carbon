@@ -142,11 +142,14 @@ const CarbonMdxContainer = ({ children, context, ...props }) => {
       <DocsContainer context={context} {...props}>
         <Unstyled>
           {/* Force prose docs to g10 for stable contrast and spacing */}
-          <GlobalTheme theme="g10">
-            <div style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
-              {children}
-            </div>
-          </GlobalTheme>
+          <Theme
+            style={{
+              paddingBottom: '5rem',
+              paddingTop: '4rem',
+            }}
+            theme="g10">
+            {children}
+          </Theme>
         </Unstyled>
       </DocsContainer>
     </MDXProvider>
