@@ -208,7 +208,7 @@ export const skeletonElement = gray80;
 // Misc
 export const interactive = blue50;
 export const highlight = blue90;
-export const overlay = rgba(black, 0.65);
+export const overlay = rgba(black, 0.6);
 export const toggleOff = gray60;
 export const shadow = rgba(black, 0.8);
 
