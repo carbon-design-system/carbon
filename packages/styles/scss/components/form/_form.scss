@@ -115,6 +115,13 @@ $input-label-weight: 400 !default;
 
     inline-size: convert.to-rem(75px);
   }
+  .#{$prefix}--form__helper-text.#{$prefix}--skeleton {
+    @include skeleton;
+
+    block-size: 0.5rem;
+
+    inline-size: 7.5rem;
+  }
 
   input[type='number'],
   input[type='text'].#{$prefix}--number {
