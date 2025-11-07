@@ -585,15 +585,32 @@ const ComboBox = forwardRef(
             // If custom values are allowed, treat whatever the user typed as
             // the value.
             if (allowCustomValue && highlightedIndex === -1) {
-              const { inputValue } = state;
+              const inputValue = state.inputValue ?? '';
+              const currentSelectedItem =
+                typeof changes.selectedItem === 'undefined'
+                  ? state.selectedItem
+                  : changes.selectedItem;
+              const isMatchingSelection =
+                currentSelectedItem !== null &&
+                typeof currentSelectedItem !== 'undefined' &&
+                itemToString(currentSelectedItem) === inputValue &&
+                items.some((item) => isEqual(item, currentSelectedItem));
 
-              changes.selectedItem = inputValue;
+              if (isMatchingSelection) {
+                return changes;
+              }
+              const nextSelectedItem =
+                items.find((item) => itemToString(item) === inputValue) ??
+                inputValue;
 
-              if (onChange) {
-                onChange({ selectedItem: inputValue, inputValue });
+              if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
+                onChange({ selectedItem: nextSelectedItem, inputValue });
               }
 
-              return changes;
+              return {
+                ...changes,
+                selectedItem: nextSelectedItem,
+              };
             }
 
             // If a new item was selected, keep its label in the input.
