@@ -688,6 +688,11 @@ class CDSDropdown extends ValidityMixin(
     const { disabled, size, type, invalid, open, warn } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
 
+    // Don't show invalid or warning states when disabled or readonly
+    const effectiveInvalid = invalid && !disabled && !this.readOnly;
+    const effectiveWarn =
+      !effectiveInvalid && warn && !disabled && !this.readOnly;
+
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
     ).length;
@@ -699,8 +704,8 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warn`]: warn,
+      [`${prefix}--dropdown--invalid`]: effectiveInvalid,
+      [`${prefix}--dropdown--warn`]: effectiveWarn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
@@ -713,13 +718,11 @@ class CDSDropdown extends ValidityMixin(
       _classes: classes,
       disabled,
       helperText,
-      invalid,
       invalidText,
       open,
       toggleLabelClosed,
       toggleLabelOpen,
       type,
-      warn,
       warnText,
       _activeDescendant: activeDescendant,
       _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
@@ -739,9 +742,16 @@ class CDSDropdown extends ValidityMixin(
       activeDescendantFallback = items[0]?.id;
     }
 
+    // Calculate effective states
+    const effectiveInvalid = this.invalid && !this.disabled && !this.readOnly;
+    const effectiveWarn =
+      !effectiveInvalid && this.warn && !this.disabled && !this.readOnly;
+
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--invalid`]: effectiveInvalid,
+      [`${prefix}--form__helper-text--warn`]: effectiveWarn,
     });
     const iconContainerClasses = classMap({
       [`${prefix}--list-box__menu-icon`]: true,
@@ -753,20 +763,24 @@ class CDSDropdown extends ValidityMixin(
       invalidText ||
       warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const validityIcon = !invalid
+
+    const validityIcon = !effectiveInvalid
       ? undefined
       : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon =
-      !warn || (invalid && warn)
-        ? undefined
-        : iconLoader(WarningAltFilled16, {
-            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-            'aria-label': toggleLabel,
-          });
-    const helperMessage = invalid ? invalidText : warn ? warnText : helperText;
+    const warningIcon = !effectiveWarn
+      ? undefined
+      : iconLoader(WarningAltFilled16, {
+          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+          'aria-label': toggleLabel,
+        });
+    const helperMessage = effectiveInvalid
+      ? invalidText
+      : effectiveWarn
+        ? warnText
+        : helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -784,7 +798,7 @@ class CDSDropdown extends ValidityMixin(
       ${this._renderTitleLabel()}
       <div
         class="${classes}"
-        ?data-invalid=${invalid}
+        ?data-invalid=${effectiveInvalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
         @keypress=${handleKeypressInner}>
@@ -829,7 +843,8 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !invalid) || !hasHelperText}">
+        ?hidden="${(inline && !effectiveWarn && !effectiveInvalid) ||
+        !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot
         >

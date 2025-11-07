@@ -48,6 +48,7 @@ import { useId } from '../../internal/useId';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
@@ -499,6 +500,7 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+
     useEffect(() => {
       isManualClearingRef.current = isClearing;
 
@@ -746,11 +748,19 @@ const ComboBox = forwardRef(
         }
       };
 
-    const showWarning = !invalid && warn;
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      readOnly,
+      disabled: disabled || false,
+      invalid: invalid || false,
+      invalidText,
+      warn: warn || false,
+      warnText,
+    });
     const className = cx(`${prefix}--combo-box`, {
       [`${prefix}--combo-box--invalid--focused`]: invalid && isFocused,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--combo-box--warning`]: showWarning,
+      [`${prefix}--combo-box--warning`]: normalizedProps.warn,
       [`${prefix}--combo-box--readonly`]: readOnly,
       [`${prefix}--autoalign`]: enableFloatingStyles,
     });
@@ -937,8 +947,8 @@ const ComboBox = forwardRef(
     // when both the message is supplied *and* when the component is in
     // the matching state (invalid, warn, etc).
     const ariaDescribedBy =
-      (invalid && invalidText && invalidTextId) ||
-      (warn && warnText && warnTextId) ||
+      (normalizedProps.invalid && invalidText && invalidTextId) ||
+      (normalizedProps.warn && warnText && warnTextId) ||
       (helperText && !isFluid && helperTextId) ||
       undefined;
 
@@ -981,13 +991,13 @@ const ComboBox = forwardRef(
           onBlur={handleFocus}
           className={className}
           disabled={disabled}
-          invalid={invalid}
+          invalid={normalizedProps.invalid}
           invalidText={invalidText}
           invalidTextId={invalidTextId}
           isOpen={isOpen}
           light={light}
           size={size}
-          warn={warn}
+          warn={normalizedProps.warn}
           ref={enableFloatingStyles ? refs.setReference : null}
           warnText={warnText}
           warnTextId={warnTextId}>
@@ -1118,10 +1128,10 @@ const ComboBox = forwardRef(
               aria-describedby={ariaDescribedBy}
             />
 
-            {invalid && (
+            {normalizedProps.invalid && (
               <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
             )}
-            {showWarning && (
+            {normalizedProps.warn && (
               <WarningAltFilled
                 className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
               />
@@ -1210,11 +1220,14 @@ const ComboBox = forwardRef(
               : null}
           </ListBox.Menu>
         </ListBox>
-        {helperText && !invalid && !warn && !isFluid && (
-          <Text as="div" id={helperTextId} className={helperClasses}>
-            {helperText}
-          </Text>
-        )}
+        {helperText &&
+          !normalizedProps.invalid &&
+          !normalizedProps.warn &&
+          !isFluid && (
+            <Text as="div" id={helperTextId} className={helperClasses}>
+              {helperText}
+            </Text>
+          )}
       </div>
     );
   }
