@@ -103,6 +103,12 @@ class CDSTextarea extends CDSTextInput {
   cols;
 
   /**
+   * Specify whether the textarea is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
    * Specify the method used for calculating the counter number
    */
   @property({
@@ -203,6 +209,7 @@ class CDSTextarea extends CDSTextInput {
     const counterClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: this.disabled,
+      [`${prefix}--text-area__label-counter`]: true,
     });
 
     const helperTextClasses = classMap({
@@ -230,6 +237,29 @@ class CDSTextarea extends CDSTextInput {
       return null;
     };
 
+    const helper = html`
+      <div class="${helperTextClasses}" id="helper-text">
+        <slot name="helper-text">${this.helperText}</slot>
+      </div>
+    `;
+
+    const normalizedProps = {
+      invalid: this.invalid,
+      warn: this.warn,
+      'slot-name': this.invalid ? 'invalid-text' : 'warn-text',
+      'slot-text': this.invalid ? this.invalidText : this.warnText,
+    };
+
+    const validationMessage = html`
+      <div
+        class="${prefix}--form-requirement"
+        ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+        <slot name="${normalizedProps['slot-name']}">
+          ${normalizedProps['slot-text']} ${this.isFluid ? icon() : null}
+        </slot>
+      </div>
+    `;
+
     return html`
       <div class="${prefix}--text-area__label-wrapper">
         <label class="${labelClasses}" for="input">
@@ -237,10 +267,6 @@ class CDSTextarea extends CDSTextInput {
         </label>
         ${counter}
       </div>
-      <div
-        class="${textareaWrapperClasses}"
-        ?data-invalid="${normalizedInvalid}">
-        ${icon()}
         <textarea
           autocomplete="${this.autocomplete}"
           ?autofocus="${this.autofocus}"
@@ -264,19 +290,14 @@ class CDSTextarea extends CDSTextInput {
           @input="${this._handleInput}"></textarea>
         <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
         <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+        ${this.isFluid
+          ? html`
+              <hr class="${prefix}--text-area__divider" />
+              ${validationMessage}
+            `
+          : null}
       </div>
-      <div
-        class="${helperTextClasses}"
-        ?hidden="${normalizedInvalid || normalizedWarn}">
-        <slot name="helper-text"> ${this.helperText} </slot>
-      </div>
-      <div
-        class="${prefix}--form-requirement"
-        ?hidden="${!normalizedInvalid && !normalizedWarn}">
-        <slot name="${normalizedInvalid ? 'invalid-text' : 'warn-text'}">
-          ${normalizedInvalid ? this.invalidText : this.warnText}
-        </slot>
-      </div>
+
     `;
   }
   updated(): void {

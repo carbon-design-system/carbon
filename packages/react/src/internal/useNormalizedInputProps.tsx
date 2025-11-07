@@ -69,7 +69,7 @@ export const useNormalizedInputProps = ({
     disabled: !readOnly && disabled,
     invalid: !readOnly && !disabled && invalid,
     invalidId: `${id}-error-msg`,
-    warn: !readOnly && !disabled && !invalid && warn,
+
     warnId: `${id}-warn-msg`,
     validation: null,
     icon: null,
