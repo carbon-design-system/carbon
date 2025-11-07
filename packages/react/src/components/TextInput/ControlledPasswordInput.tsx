@@ -227,6 +227,8 @@ const ControlledPasswordInput = React.forwardRef(
             invalid,
             sharedTextInputProps,
             invalidId: errorId,
+            warn: false,
+            warnId: undefined,
             hasHelper: !error && helperText ? true : false,
             helperId,
           })}

@@ -19,7 +19,7 @@ const helperProps = (helperId: string | undefined) => ({
   'aria-describedby': helperId,
 });
 
-interface TextInputPropsConfig {
+export interface TextInputPropsConfig {
   sharedTextInputProps: Record<string, unknown>;
   invalid: boolean;
   invalidId: string;
@@ -35,7 +35,7 @@ export const getTextInputProps = ({
   sharedTextInputProps,
   invalid,
   invalidId,
-  warn,
+  warn = false,
   warnId,
   hasHelper,
   helperId,
