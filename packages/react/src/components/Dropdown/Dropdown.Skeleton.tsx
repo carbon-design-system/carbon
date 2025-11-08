@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { type HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
+import ListBoxMenuIcon from '../ListBox/ListBoxMenuIcon';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface DropdownSkeletonProps extends HTMLAttributes<HTMLDivElement> {
@@ -49,8 +50,12 @@ const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
       <div
         className={cx(`${prefix}--skeleton ${prefix}--dropdown`, {
           [`${prefix}--list-box--${size}`]: size,
-        })}
-      />
+        })}>
+        <div className={`${prefix}--list-box__field`}>
+          <ListBoxMenuIcon isOpen={false} />
+        </div>
+      </div>
+      <div className={`${prefix}--skeleton ${prefix}--form__helper-text `} />
     </div>
   );
 };
