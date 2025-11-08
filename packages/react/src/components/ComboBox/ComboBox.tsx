@@ -585,32 +585,15 @@ const ComboBox = forwardRef(
             // If custom values are allowed, treat whatever the user typed as
             // the value.
             if (allowCustomValue && highlightedIndex === -1) {
-              const inputValue = state.inputValue ?? '';
-              const currentSelectedItem =
-                typeof changes.selectedItem === 'undefined'
-                  ? state.selectedItem
-                  : changes.selectedItem;
-              const isMatchingSelection =
-                currentSelectedItem !== null &&
-                typeof currentSelectedItem !== 'undefined' &&
-                itemToString(currentSelectedItem) === inputValue &&
-                items.some((item) => isEqual(item, currentSelectedItem));
+              const { inputValue } = state;
 
-              if (isMatchingSelection) {
-                return changes;
-              }
-              const nextSelectedItem =
-                items.find((item) => itemToString(item) === inputValue) ??
-                inputValue;
+              changes.selectedItem = inputValue;
 
-              if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
-                onChange({ selectedItem: nextSelectedItem, inputValue });
+              if (onChange) {
+                onChange({ selectedItem: inputValue, inputValue });
               }
 
-              return {
-                ...changes,
-                selectedItem: nextSelectedItem,
-              };
+              return changes;
             }
 
             // If a new item was selected, keep its label in the input.
@@ -1205,7 +1188,7 @@ const ComboBox = forwardRef(
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={isEqual(selectedItem, item)}
+                        isActive={selectedItem === item}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
@@ -1215,7 +1198,7 @@ const ComboBox = forwardRef(
                         ) : (
                           itemToString(item)
                         )}
-                        {isEqual(selectedItem, item) && (
+                        {selectedItem === item && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />

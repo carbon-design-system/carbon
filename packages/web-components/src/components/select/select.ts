@@ -69,12 +69,6 @@ class CDSSelect extends FormMixin(LitElement) {
   private _selectedOptionNodes!: HTMLOptionElement[];
 
   /**
-   * Specify whether the textarea is fluid or not
-   */
-  @property({ type: Boolean })
-  isFluid = false;
-
-  /**
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
@@ -519,14 +513,8 @@ class CDSSelect extends FormMixin(LitElement) {
             class="${prefix}--select-input__wrapper"
             ?data-invalid="${invalid}">
             ${input}
-            ${this.isFluid
-              ? html`
-                  <hr class="${prefix}--select__divider" />
-                  ${errorText ? errorText : null}
-                `
-              : null}
           </div> `}
-      ${!this.isFluid && errorText ? errorText : supplementalText}
+      ${errorText ? errorText : supplementalText}
     `;
   }
 

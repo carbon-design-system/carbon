@@ -207,16 +207,6 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const normalizedProps: {
-      disabled: boolean;
-      invalid: boolean;
-      warn: boolean;
-    } = {
-      disabled: !readOnly && disabled,
-      invalid: !readOnly && !disabled && invalid,
-      warn: !readOnly && !invalid && !disabled && warning,
-    };
-
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -225,8 +215,8 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
 
     const timePickerClasses = classMap({
       [`${prefix}--time-picker`]: true,
-      [`${prefix}--time-picker--invalid`]: normalizedProps.invalid,
-      [`${prefix}--time-picker--warning`]: normalizedProps.warn,
+      [`${prefix}--time-picker--invalid`]: invalid,
+      [`${prefix}--time-picker--warning`]: warning,
       [`${prefix}--time-picker--readonly`]: readOnly,
       [`${prefix}--time-picker--${size}`]: size,
       ...(className && { [className]: true }),
@@ -235,11 +225,9 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
     const inputClasses = classMap({
       [`${prefix}--time-picker__input-field`]: true,
       [`${prefix}--text-input`]: true,
-      [`${prefix}--time-picker__input-field-error`]:
-        normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--time-picker__input-field-error`]: invalid || warning,
       ...(className && { [className]: true }),
     });
-
     const label = labelText
       ? html`<label class="${labelClasses}">${labelText}</label>`
       : null;
@@ -251,8 +239,8 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
           <div class="${prefix}--time-picker__input">
             <input
               class="${inputClasses}"
-              ?data-invalid="${normalizedProps.invalid}"
-              ?disabled="${normalizedProps.disabled}"
+              ?data-invalid="${invalid}"
+              ?disabled="${disabled}"
               maxlength="${ifNonEmpty(maxLength)}"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(pattern)}"
@@ -261,10 +249,10 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               type="${ifNonEmpty(type)}"
               .value="${value}"
               @input="${handleInput}" />
-            ${normalizedProps.invalid || normalizedProps.warn
+            ${invalid || warning
               ? html`
                   <div class="${prefix}--time-picker__error__icon">
-                    ${normalizedProps.invalid
+                    ${invalid
                       ? iconLoader(WarningFilled16, {
                           class: `${prefix}--checkbox__invalid-icon`,
                         })
@@ -277,10 +265,10 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
           </div>
           <slot @slotchange="${handleSlotChange}"></slot>
         </div>
-        ${normalizedProps.invalid || normalizedProps.warn
+        ${invalid || warning
           ? html`
               <div class="${prefix}--form-requirement">
-                ${normalizedProps.invalid ? invalidText : warningText}
+                ${invalid ? invalidText : warningText}
               </div>
             `
           : null}

@@ -377,28 +377,6 @@ describe('ComboBox', () => {
     );
   });
 
-  it('should keep the selected item active after blur when allowCustomValue is set', async () => {
-    const user = userEvent.setup();
-
-    render(
-      <>
-        <ComboBox {...mockProps} allowCustomValue />
-        <button type="button">Move focus</button>
-      </>
-    );
-
-    await openMenu();
-    await user.click(screen.getByRole('option', { name: 'Item 1' }));
-    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-
-    await user.click(screen.getByRole('button', { name: 'Move focus' }));
-
-    await openMenu();
-    const activeOption = screen.getByRole('option', { name: 'Item 1' });
-    expect(activeOption).toHaveClass(`${prefix}--list-box__menu-item--active`);
-    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-  });
-
   it('should yield highlighted item as `selectedItem` when pressing Enter with an unmodified input value', async () => {
     render(<ControlledComboBox controlledItem={null} />);
 
@@ -519,29 +497,6 @@ describe('ComboBox', () => {
       );
       // The displayed value should still be the one from the first render.
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
-    });
-
-    it('should mark the initially selectedItem on load when rendered', async () => {
-      render(
-        <ComboBox
-          {...mockProps}
-          initialSelectedItem={mockProps.items[0]}
-          selectedItem={mockProps.items[0]}
-        />
-      );
-      await openMenu();
-
-      // Find the first menu item (which should be the initially selected item)
-      const menuItems = screen.getAllByRole('option');
-      const firstMenuItem = menuItems[0];
-
-      // Check if the initially selected item has the active class
-      expect(firstMenuItem).toHaveClass(
-        `${prefix}--list-box__menu-item--active`
-      );
-
-      // Check if the initially selected item contains an SVG (checkmark icon)
-      expect(firstMenuItem.querySelector('svg')).toBeInTheDocument();
     });
   });
 

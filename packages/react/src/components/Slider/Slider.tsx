@@ -335,7 +335,7 @@ type State = {
   isRtl: boolean;
 };
 
-const Slider = (props: SliderProps) => {
+export const Slider = (props: SliderProps) => {
   // TODO: Move destructured `props` from the IIFE to here.
 
   const initialState: State = {
@@ -1886,5 +1886,3 @@ Slider.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default Slider as (props: SliderProps) => ReactNode;

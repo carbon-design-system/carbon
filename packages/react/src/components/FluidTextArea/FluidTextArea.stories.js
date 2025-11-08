@@ -160,7 +160,7 @@ const ToggleTip = (
   </>
 );
 
-export const DefaultWithToggletip = () => (
+export const DefaultWithTooltip = () => (
   <FluidTextArea labelText={ToggleTip} placeholder="Placeholder text" />
 );
 
