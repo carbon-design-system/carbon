@@ -538,7 +538,7 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
     onChange,
     defaultValue: defaultSelectedItem ?? ({} as Item),
   });
-  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   function handleClick(item, e) {
     setSelection(item);
   }

@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
-
+import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
@@ -62,93 +61,34 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'aria-label',
+        'id',
+        'downshiftProps',
+        'initialSelectedItem',
+        'items',
+        'itemToElement',
+        'itemToString',
+        'selectedItem',
+        'shouldFilterItem',
+        'translateWithId',
+        'titleText',
+        'type',
+      ],
+    },
   },
 };
 
 const sharedArgTypes = {
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  downshiftProps: {
-    table: {
-      disable: true,
-    },
-  },
-  initialSelectedItem: {
-    table: {
-      disable: true,
-    },
-  },
-  invalidText: {
-    control: 'text',
-  },
-  items: {
-    table: {
-      disable: true,
-    },
-  },
-  itemToElement: {
-    table: {
-      disable: true,
-    },
-  },
-  itemToString: {
-    table: {
-      disable: true,
-    },
-  },
   onChange: {
     action: 'onChange',
   },
   onToggleClick: {
     action: 'clicked',
   },
-  onInputChange: {
-    table: {
-      disable: true,
-    },
-  },
-  selectedItem: {
-    table: {
-      disable: true,
-    },
-  },
-  shouldFilterItem: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  titleText: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
+  invalidText: {
+    control: 'text',
   },
   warnText: {
     control: 'text',
@@ -413,4 +353,55 @@ _fullyControlled.argTypes = { ...sharedArgTypes };
 AutocompleteWithTypeahead.argTypes = {
   ...sharedArgTypes,
   onChange: { action: 'onChange' },
+};
+
+export const Test = (args) => {
+  const items = [
+    {
+      id: 'option-0',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'option-1',
+      text: 'Option 1',
+    },
+    {
+      id: 'option-2',
+      text: 'Option 2',
+    },
+    {
+      id: 'option-3',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'option-4',
+      text: 'Option 4',
+    },
+    {
+      id: 'option-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        id="carbon-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+        onChange={action('onChange')}
+        initialSelectedItem={{
+          id: 'option-1',
+          text: 'Option 1',
+        }}
+        selectedItem={{
+          id: 'option-1',
+          text: 'Option 1',
+        }}
+        {...args}
+      />
+    </div>
+  );
 };

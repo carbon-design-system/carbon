@@ -3419,7 +3419,7 @@ __metadata:
     react-router: "npm:^6.0.0-beta.0"
     react-router-dom: "npm:^6.0.0-beta.0"
     sass: "npm:1.63.6"
-    vite: "npm:^5.4.19"
+    vite: "npm:^5.4.21"
   languageName: unknown
   linkType: soft
 
@@ -4111,9 +4111,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.19":
-  version: 5.4.19
-  resolution: "vite@npm:5.4.19"
+"vite@npm:^5.4.21":
+  version: 5.4.21
+  resolution: "vite@npm:5.4.21"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -4150,7 +4150,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/27900c87ec6f84967ba12bd4a24c2b9182c3ddad278a13a1c7736ccc4ac7e325f3fbdc11836e2906857140cc89c55121cb0746d4100046e797e21e1e7570d9c4
+  checksum: 10/479a63e271d2d9e80a8e553e165444179681f33ddec1e7c84a43c4572f67c3d3abd33136389beb42703e32d3e96e1e8a930a222ee1bb64263ba057c187ccf793
   languageName: node
   linkType: hard
 

@@ -36,16 +36,21 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import isEqual from 'react-fast-compare';
-import ListBox, { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
+import ListBox, {
+  ListBoxSizePropType,
+  type ListBoxMenuIconTranslationKey,
+  type ListBoxSelectionTranslationKey,
+  type ListBoxSize,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
-import { TranslateWithId } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
@@ -143,24 +148,13 @@ export interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
-/**
- * Message ids that will be passed to translateWithId().
- * Combination of message ids from ListBox/next/ListBoxSelection.js and
- * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
- * because those components aren't Typescript.  (If you try, TranslationKey
- * ends up just being defined as "string".)
- */
-export type TranslationKey =
-  | 'close.menu'
-  | 'open.menu'
-  | 'clear.all'
-  | 'clear.selection';
-
 export type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
-    TranslateWithId<TranslationKey> {
+    TranslateWithId<
+      ListBoxMenuIconTranslationKey | ListBoxSelectionTranslationKey
+    > {
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
@@ -455,7 +449,7 @@ const ComboBox = forwardRef(
           refs.floating.current.style.width = parentWidth + 'px';
         }
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [enableFloatingStyles, floatingStyles, refs.floating, parentWidth]);
 
     const [inputValue, setInputValue] = useState(
@@ -492,7 +486,7 @@ const ComboBox = forwardRef(
         }
         prevInputLengthRef.current = inputValue.length;
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
     const isManualClearingRef = useRef(false);
     const [isClearing, setIsClearing] = useState(false);
@@ -533,7 +527,7 @@ const ComboBox = forwardRef(
         }
         prevSelectedItemProp.current = selectedItemProp;
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [selectedItemProp]);
 
     const filterItems = (
@@ -557,10 +551,10 @@ const ComboBox = forwardRef(
     useEffect(() => {
       if (prevInputValue.current !== inputValue) {
         prevInputValue.current = inputValue;
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
         onInputChange && onInputChange(inputValue);
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [inputValue]);
 
     const handleSelectionClear = () => {
@@ -588,17 +582,41 @@ const ComboBox = forwardRef(
 
         switch (type) {
           case InputBlur: {
-            if (allowCustomValue && highlightedIndex == '-1') {
-              const customValue = inputValue as ItemType;
-              changes.selectedItem = customValue;
-              if (onChange) {
-                onChange({ selectedItem: inputValue as ItemType, inputValue });
+            // If custom values are allowed, treat whatever the user typed as
+            // the value.
+            if (allowCustomValue && highlightedIndex === -1) {
+              const inputValue = state.inputValue ?? '';
+              const currentSelectedItem =
+                typeof changes.selectedItem === 'undefined'
+                  ? state.selectedItem
+                  : changes.selectedItem;
+              const isMatchingSelection =
+                currentSelectedItem !== null &&
+                typeof currentSelectedItem !== 'undefined' &&
+                itemToString(currentSelectedItem) === inputValue &&
+                items.some((item) => isEqual(item, currentSelectedItem));
+
+              if (isMatchingSelection) {
+                return changes;
               }
-              return changes;
+              const nextSelectedItem =
+                items.find((item) => itemToString(item) === inputValue) ??
+                inputValue;
+
+              if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
+                onChange({ selectedItem: nextSelectedItem, inputValue });
+              }
+
+              return {
+                ...changes,
+                selectedItem: nextSelectedItem,
+              };
             }
+
+            // If a new item was selected, keep its label in the input.
             if (
               state.inputValue &&
-              highlightedIndex == '-1' &&
+              highlightedIndex === -1 &&
               changes.selectedItem
             ) {
               return {
@@ -606,14 +624,26 @@ const ComboBox = forwardRef(
                 inputValue: itemToString(changes.selectedItem),
               };
             }
-            if (
-              state.inputValue &&
-              highlightedIndex == '-1' &&
-              !allowCustomValue &&
-              !changes.selectedItem
-            ) {
-              return { ...changes, inputValue: '' };
+
+            // If custom values are not allowed, normalize any non-matching
+            // text. If the input isn’t an exact item label, restore the
+            // selected label if there is one, or clear it.
+            if (!allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
+
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
             }
+
             return changes;
           }
 
@@ -627,7 +657,7 @@ const ComboBox = forwardRef(
                 );
                 const highlightedItem = filteredList[state.highlightedIndex];
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                 if (highlightedItem && !(highlightedItem as any).disabled) {
                   return {
                     ...changes,
@@ -640,7 +670,7 @@ const ComboBox = forwardRef(
                 if (autoIndex !== -1) {
                   const matchingItem = items[autoIndex];
 
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                   if (matchingItem && !(matchingItem as any).disabled) {
                     return {
                       ...changes,
@@ -667,20 +697,23 @@ const ComboBox = forwardRef(
             return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
-            if (
-              !changes.isOpen &&
-              state.inputValue &&
-              highlightedIndex === -1 &&
-              !allowCustomValue
-            ) {
-              return {
-                ...changes,
-                inputValue: '', // Clear the input
-              };
+            // When closing the menu, apply the same normalization as blur.
+            if (state.isOpen && !changes.isOpen && !allowCustomValue) {
+              const currentInput = state.inputValue ?? '';
+              const hasExactMatch =
+                !!currentInput &&
+                items.some((item) => itemToString(item) === currentInput);
+
+              if (!hasExactMatch) {
+                const restoredInput =
+                  state.selectedItem !== null
+                    ? itemToString(state.selectedItem)
+                    : '';
+
+                return { ...changes, inputValue: restoredInput };
+              }
             }
-            if (changes.isOpen && !changes.selectedItem) {
-              return { ...changes };
-            }
+
             return changes;
 
           case MenuMouseLeave:
@@ -704,7 +737,7 @@ const ComboBox = forwardRef(
         }
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [allowCustomValue, inputValue, onChange]
+      [allowCustomValue, inputValue, itemToString, items, onChange]
     );
 
     const handleToggleClick =
@@ -770,7 +803,7 @@ const ComboBox = forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     const {
       // Prop getters
@@ -805,12 +838,12 @@ const ComboBox = forwardRef(
         setHighlightedIndex(indexToHighlight(normalizedInput));
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion , valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion , valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
         if (highlightedIndex! > -1 && typeof window !== undefined) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           const highlightedItem = itemArray[highlightedIndex!];
           if (highlightedItem) {
             highlightedItem.scrollIntoView({
@@ -823,9 +856,9 @@ const ComboBox = forwardRef(
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       isItemDisabled(item, _index) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         return (item as any)?.disabled;
       },
       ...downshiftProps,
@@ -864,7 +897,7 @@ const ComboBox = forwardRef(
           toggleMenu,
         };
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [
       closeMenu,
       openMenu,
@@ -932,7 +965,7 @@ const ComboBox = forwardRef(
         getMenuProps({
           ref: enableFloatingStyles ? refs.setFloating : null,
         }),
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [
         enableFloatingStyles,
         deprecatedAriaLabel,
@@ -987,7 +1020,7 @@ const ComboBox = forwardRef(
                 'aria-label': titleText
                   ? undefined
                   : deprecatedAriaLabel || ariaLabel,
-                'aria-controls': isOpen ? undefined : menuProps.id,
+                'aria-controls': menuProps.id,
                 placeholder,
                 value: inputValue,
                 ...inputProps,
@@ -1135,7 +1168,12 @@ const ComboBox = forwardRef(
             normalizedDecorator
           ) : decorator ? (
             <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-              {normalizedDecorator}
+              {/* wrap only when NOT an AILabel */}
+              {candidateIsAILabel ? (
+                normalizedDecorator
+              ) : (
+                <span>{normalizedDecorator}</span>
+              )}
             </div>
           ) : (
             ''
@@ -1167,7 +1205,7 @@ const ComboBox = forwardRef(
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={selectedItem === item}
+                        isActive={isEqual(selectedItem, item)}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
@@ -1177,7 +1215,7 @@ const ComboBox = forwardRef(
                         ) : (
                           itemToString(item)
                         )}
-                        {selectedItem === item && (
+                        {isEqual(selectedItem, item) && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />
@@ -1402,8 +1440,7 @@ ComboBox.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 
@@ -1436,7 +1473,7 @@ type ComboboxComponentProps<ItemType> = PropsWithRef<
 >;
 
 export interface ComboBoxComponent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
 }
 

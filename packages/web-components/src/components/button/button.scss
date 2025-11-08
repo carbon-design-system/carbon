@@ -57,7 +57,7 @@ $css--plex: true !default;
     transition: none;
 
     &:focus {
-      border-inline-start: 1px solid transparent;
+      border-inline-start: 0;
       box-shadow: none;
       outline: $spacing-01 solid $focus;
       outline-offset: -#{$spacing-01};

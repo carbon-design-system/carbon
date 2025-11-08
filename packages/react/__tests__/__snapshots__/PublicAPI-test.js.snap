@@ -84,6 +84,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -1566,6 +1578,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -1666,6 +1679,7 @@ Map {
     },
     "render": [Function],
   },
+  "ComposedModalPresence" => {},
   "ContainedList" => {
     "ContainedListItem": {
       "propTypes": {
@@ -2090,12 +2104,6 @@ Map {
           "type": "func",
         },
       },
-      "translationKeys": [
-        "carbon.table.batch.cancel",
-        "carbon.table.batch.items.selected",
-        "carbon.table.batch.item.selected",
-        "carbon.table.batch.selectAll",
-      ],
     },
     "TableBody": {
       "propTypes": {
@@ -2314,9 +2322,6 @@ Map {
         },
       },
       "render": [Function],
-      "translationKeys": [
-        "carbon.table.header.icon.description",
-      ],
     },
     "TableRow": {
       "$$typeof": Symbol(react.forward_ref),
@@ -2673,16 +2678,6 @@ Map {
         "type": "bool",
       },
     },
-    "translationKeys": [
-      "carbon.table.row.expand",
-      "carbon.table.row.collapse",
-      "carbon.table.all.expand",
-      "carbon.table.all.collapse",
-      "carbon.table.all.select",
-      "carbon.table.all.unselect",
-      "carbon.table.row.select",
-      "carbon.table.row.unselect",
-    ],
   },
   "DataTableSkeleton" => {
     "propTypes": {
@@ -2877,6 +2872,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "nextMonthAriaLabel": {
+        "type": "string",
+      },
       "onChange": {
         "type": "func",
       },
@@ -2888,6 +2886,9 @@ Map {
       },
       "parseDate": {
         "type": "func",
+      },
+      "prevMonthAriaLabel": {
+        "type": "string",
       },
       "readOnly": {
         "args": [
@@ -3528,6 +3529,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -4192,9 +4199,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -4872,6 +4876,86 @@ Map {
     "propTypes": {
       "className": {
         "type": "string",
+      },
+    },
+  },
+  "FluidPasswordInput" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "defaultValue": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "hidePasswordLabel": {
+        "type": "string",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
+      "isPassword": {
+        "type": "bool",
+      },
+      "labelText": {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onTogglePasswordVisibility": {
+        "type": "func",
+      },
+      "placeholder": {
+        "type": "string",
+      },
+      "readOnly": {
+        "type": "bool",
+      },
+      "showPasswordLabel": {
+        "type": "string",
+      },
+      "value": {
+        "args": [
+          [
+            {
+              "type": "string",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
       },
     },
   },
@@ -6109,6 +6193,18 @@ Map {
   "Menu" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "children": {
         "type": "node",
       },
@@ -6224,6 +6320,18 @@ Map {
         ],
         "type": "oneOf",
       },
+      "menuBackgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "menuBorder": {
+        "type": "bool",
+      },
       "menuTarget": {
         "args": [
           [Function],
@@ -6233,6 +6341,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -6661,6 +6770,7 @@ Map {
     },
     "render": [Function],
   },
+  "ModalPresence" => {},
   "ModalWrapper" => {
     "propTypes": {
       "buttonTriggerClassName": {
@@ -7239,6 +7349,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "validate": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -7487,6 +7600,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7956,6 +8070,18 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
       },
       "caret": {
         "type": "bool",
@@ -9745,12 +9871,6 @@ Map {
         "type": "func",
       },
     },
-    "translationKeys": [
-      "carbon.table.batch.cancel",
-      "carbon.table.batch.items.selected",
-      "carbon.table.batch.item.selected",
-      "carbon.table.batch.selectAll",
-    ],
   },
   "TableBody" => {
     "propTypes": {
@@ -9969,9 +10089,6 @@ Map {
       },
     },
     "render": [Function],
-    "translationKeys": [
-      "carbon.table.header.icon.description",
-    ],
   },
   "TableRow" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -11036,6 +11153,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -11482,6 +11611,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -11715,7 +11850,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -12110,9 +12244,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -13531,6 +13662,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -13633,6 +13776,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -13868,7 +14017,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -14076,9 +14224,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -15497,6 +15642,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -15595,5 +15752,6 @@ Map {
   "usePrefersDarkScheme" => {},
   "usePrefix" => {},
   "useTheme" => {},
+  "validateNumberSeparators" => {},
 }
 `;

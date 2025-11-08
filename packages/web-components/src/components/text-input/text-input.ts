@@ -243,6 +243,9 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   @property({ reflect: true })
   size = INPUT_SIZE.MEDIUM;
 
+  @property({ type: Boolean })
+  isFluid = false;
+
   /**
    * true to use the inline version.
    */
@@ -318,6 +321,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       helperText,
       hideLabel,
       inline,
+      isFluid,
       invalid,
       invalidText,
       label,
@@ -462,7 +466,10 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         : null;
 
     const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
-      <label class="${labelClasses}"> ${label} </label> ${counter}
+      <label class="${labelClasses}">
+        <slot name="label-text">${label}</slot>
+      </label>
+      ${counter}
     </div>`;
 
     const helper = helperText
@@ -474,12 +481,23 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         </div>`
       : null;
 
+    const validationMessage =
+      normalizedProps.invalid || normalizedProps.warn
+        ? html`<div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>`
+        : null;
+
     return html`
       <div class="${inputWrapperClasses}">
         ${!inline
           ? labelWrapper
           : html`<div class="${prefix}--text-input__label-helper-wrapper">
-              ${labelWrapper} ${helper}
+              ${labelWrapper} ${!isFluid ? validationMessage || helper : null}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
           <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
@@ -507,15 +525,14 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
             (type === INPUT_TYPE.PASSWORD || type === INPUT_TYPE.TEXT)
               ? passwordVisibilityButton()
               : null}
+            ${isFluid
+              ? html`<hr class="${prefix}--text-input__divider" />`
+              : null}
+            ${isFluid && !inline ? validationMessage : null}
           </div>
-          ${!inline ? helper : null}
-          <div
-            class="${prefix}--form-requirement"
-            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
-            <slot name="${normalizedProps['slot-name']}">
-              ${normalizedProps['slot-text']}
-            </slot>
-          </div>
+
+          ${/* Non-fluid: validation and helper outside field wrapper */ ''}
+          ${!isFluid && !inline ? validationMessage || helper : null}
         </div>
       </div>
     `;

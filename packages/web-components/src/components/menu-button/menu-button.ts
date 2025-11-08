@@ -20,6 +20,7 @@ import { POPOVER_ALIGNMENT } from '../popover/defs';
 import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
 import { MENU_BUTTON_KIND, MENU_BUTTON_SIZE } from './defs';
+import { MENU_BACKGROUND_TOKEN } from '../menu/defs';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 
 export { MENU_BUTTON_KIND, MENU_BUTTON_SIZE };
@@ -65,6 +66,18 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   menuAlignment = POPOVER_ALIGNMENT.BOTTOM;
 
   /**
+   * Specify whether the menu should have a border.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'menu-border' })
+  menuBorder = false;
+
+  /**
+   * Specify the background token to use for the menu. Default is 'layer'.
+   */
+  @property({ type: String, reflect: true, attribute: 'menu-background-token' })
+  menuBackgroundToken = MENU_BACKGROUND_TOKEN.LAYER;
+
+  /**
    * Specify the size of the button and menu.
    */
   @property({ type: MENU_BUTTON_SIZE, reflect: true })
@@ -77,7 +90,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   tabIndex = 0;
 
   @HostListener('click')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: Event) => {
     const path = event.composedPath();
@@ -89,7 +102,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   };
 
   @HostListener('focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     // Close the menu if the focus moves outside the menu button or menu
@@ -125,6 +138,14 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
 
     if (changedProperties.has('size')) {
       menu.setAttribute('size', this.size);
+    }
+
+    if (changedProperties.has('menuBorder')) {
+      menu.toggleAttribute('border', this.menuBorder);
+    }
+
+    if (changedProperties.has('menuBackgroundToken')) {
+      menu.backgroundToken = this.menuBackgroundToken;
     }
   }
 

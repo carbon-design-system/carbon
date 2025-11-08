@@ -49,6 +49,7 @@ describe('Carbon Components React', () => {
         "ComboBox",
         "ComboButton",
         "ComposedModal",
+        "ComposedModalPresence",
         "ContainedList",
         "ContainedListItem",
         "Content",
@@ -91,6 +92,7 @@ describe('Carbon Components React', () => {
         "FluidMultiSelectSkeleton",
         "FluidNumberInput",
         "FluidNumberInputSkeleton",
+        "FluidPasswordInput",
         "FluidSearch",
         "FluidSearchSkeleton",
         "FluidSelect",
@@ -146,6 +148,7 @@ describe('Carbon Components React', () => {
         "ModalBody",
         "ModalFooter",
         "ModalHeader",
+        "ModalPresence",
         "ModalWrapper",
         "MultiSelect",
         "NotificationActionButton",
@@ -371,6 +374,7 @@ describe('Carbon Components React', () => {
         "usePrefersDarkScheme",
         "usePrefix",
         "useTheme",
+        "validateNumberSeparators",
       ]
     `);
   });

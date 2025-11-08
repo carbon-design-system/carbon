@@ -71,6 +71,8 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
         composed: true,
         detail: {
           checked,
+          value: this._radio.value,
+          name: this._radio.name,
         },
       })
     );
@@ -129,7 +131,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `click` event on this element.
    */
   @HostListener('click')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event) => {
     if (
@@ -140,7 +142,15 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         (this.constructor as typeof CDSRadioButton)?.slugItem
       )
     ) {
-      const { disabled, _radioButtonDelegate: radioButtonDelegate } = this;
+      const {
+        disabled,
+        _radioButtonDelegate: radioButtonDelegate,
+        readOnly,
+      } = this;
+      if (readOnly) {
+        event.preventDefault();
+        return;
+      }
       if (radioButtonDelegate && !disabled && !this.disabledItem) {
         this.checked = true;
         if (this._manager) {
@@ -154,6 +164,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
               composed: true,
               detail: {
                 checked: this.checked,
+                value: this.value,
+                name: this.name,
+                event,
               },
             }
           )
@@ -167,6 +180,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
             composed: true,
             detail: {
               checked: this.checked,
+              value: this.value,
+              name: this.name,
+              event,
             },
           }
         )
@@ -178,7 +194,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = (event: KeyboardEvent) => {
     if (
@@ -194,8 +210,13 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         _radioButtonDelegate: radioButtonDelegate,
         disabled,
         disabledItem,
+        readOnly,
       } = this;
       const manager = this._manager;
+      if (readOnly) {
+        event.preventDefault();
+        return;
+      }
       if (radioButtonDelegate && manager && !disabled && !disabledItem) {
         const navigationDirectionForKey =
           orientation === RADIO_BUTTON_ORIENTATION.HORIZONTAL
@@ -260,6 +281,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   dataTable = false;
 
   /**
+   * Specify whether the `<radio-button>` should be checked by default
+   */
+  @property({ type: Boolean, attribute: 'default-checked' })
+  defaultChecked = false;
+
+  /**
    * `true` if the radio button item should be disabled.
    */
   @property({ type: Boolean, reflect: true })
@@ -314,6 +341,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   readOnly = false;
 
   /**
+   * `true` if the radio button is required.
+   */
+  @property({ type: Boolean, reflect: true })
+  required = false;
+
+  /**
    * The `value` attribute for the `<input>` for selection.
    */
   @property()
@@ -328,6 +361,11 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
 
   firstUpdated() {
     this._radioButtonDelegate = new RadioButtonDelegate(this._inputNode);
+
+    // If user hasn’t explicitly set `checked`, respect `defaultChecked`
+    if (this.defaultChecked && this.checked === false) {
+      this.checked = true;
+    }
   }
 
   updated(changedProperties) {
@@ -339,9 +377,6 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     } = this;
 
     if (changedProperties.has('checked') || changedProperties.has('name')) {
-      if (this.readOnly) {
-        this.checked = false;
-      }
       if (!this._manager) {
         this._manager = RadioGroupManager.get(
           this.getRootNode({ composed: true }) as Document
@@ -349,10 +384,10 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       }
       const { _manager: manager } = this;
       if (changedProperties.has('name')) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         manager!.delete(radioButtonDelegate, changedProperties.get('name'));
         if (name) {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           manager!.add(radioButtonDelegate);
         }
       }
@@ -368,7 +403,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           : '0'
       );
     }
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
@@ -383,6 +418,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       value,
       disabled,
       disabledItem,
+      readOnly,
     } = this;
     const innerLabelClasses = classMap({
       [`${prefix}--radio-button__label-text`]: true,
@@ -395,6 +431,8 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${prefix}--radio-button"
         .checked=${checked}
         ?disabled="${disabledItem || disabled}"
+        ?required=${this.required}
+        aria-readonly="${String(Boolean(readOnly))}"
         name=${ifDefined(name)}
         value=${ifDefined(value)} />
       <label for="input" class="${prefix}--radio-button__label">
