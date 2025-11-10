@@ -52,7 +52,6 @@ describe('cds-overflow-menu', () => {
       const el = await fixture(basicOverflowMenu);
       const menuBody = el.querySelector('cds-overflow-menu-body');
 
-      // Manually set open without triggering positioning
       menuBody.open = true;
 
       const event = new KeyboardEvent('keydown', {
@@ -63,7 +62,6 @@ describe('cds-overflow-menu', () => {
 
       menuBody.dispatchEvent(event);
 
-      // Verify the menu was closed
       expect(menuBody.open).to.be.false;
     });
   });
