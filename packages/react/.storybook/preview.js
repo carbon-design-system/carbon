@@ -145,7 +145,7 @@ const CarbonMdxContainer = ({ children, context, ...props }) => {
           <Theme
             style={{
               paddingBottom: '5rem',
-              paddingTop: '4rem',
+              // paddingTop: '4rem',
             }}
             theme="g10">
             {children}
