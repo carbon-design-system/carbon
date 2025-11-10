@@ -35,16 +35,16 @@ test.describe('@avt FluidTextArea', () => {
     );
   });
 
-  test('@avt-advanced-states default-with-tooltip', async ({ page }) => {
+  test('@avt-advanced-states default-with-toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextArea',
-      id: 'components-fluid-components-fluidtextarea--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextarea--default-with-toggletip',
       globals: {
         theme: 'white',
       },
     });
     await expect(page).toHaveNoACViolations(
-      'FluidTextArea-default-with-tooltip'
+      'FluidTextArea-default-with-toggletip'
     );
   });
 
@@ -80,17 +80,17 @@ test.describe('@avt FluidTextArea', () => {
     await expect(page).toHaveNoACViolations('FluidTextArea default');
   });
 
-  test('@avt-keyboard-nav FluidTextArea with tooltip', async ({ page }) => {
+  test('@avt-keyboard-nav FluidTextArea with toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
-      id: 'components-fluid-components-fluidtextarea--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextarea--default-with-toggletip',
       globals: {
         theme: 'white',
       },
     });
     await expect(page.getByText('Text Area label')).toBeVisible();
 
-    // Checking tooltip
+    // Checking toggletip
     await page.keyboard.press('Tab');
     await expect(page.getByLabel('Show information')).toBeFocused();
     await page.keyboard.press('Enter');
@@ -106,6 +106,6 @@ test.describe('@avt FluidTextArea', () => {
     // Writting a word to check functionality
     await textArea.fill('test');
     await expect(textArea).toHaveValue('test');
-    await expect(page).toHaveNoACViolations('FluidTextArea with tooltip');
+    await expect(page).toHaveNoACViolations('FluidTextArea with toggletip');
   });
 });
