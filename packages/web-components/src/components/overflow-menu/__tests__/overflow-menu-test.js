@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/overflow-menu/index.js';
+
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-overflow-menu', () => {
@@ -43,6 +44,27 @@ describe('cds-overflow-menu', () => {
 
         expect(button).to.have.class(`cds--overflow-menu--${size}`);
       });
+    });
+  });
+
+  describe('Escape key handling', () => {
+    it('should handle Escape key to close menu', async () => {
+      const el = await fixture(basicOverflowMenu);
+      const menuBody = el.querySelector('cds-overflow-menu-body');
+
+      // Manually set open without triggering positioning
+      menuBody.open = true;
+
+      const event = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      menuBody.dispatchEvent(event);
+
+      // Verify the menu was closed
+      expect(menuBody.open).to.be.false;
     });
   });
 });

@@ -176,7 +176,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
         this.open = false;
 
         if (menuTrigger && 'open' in menuTrigger) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (menuTrigger as any).open = false;
         }
       }
