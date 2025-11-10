@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
-import { Locked } from '@carbon/react/icons';
+import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
