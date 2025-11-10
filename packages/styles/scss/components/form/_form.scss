@@ -118,7 +118,7 @@ $input-label-weight: 400 !default;
   .#{$prefix}--form__helper-text.#{$prefix}--skeleton {
     @include skeleton;
 
-    block-size: 0.5rem;
+    block-size: $spacing-03;
 
     inline-size: 7.5rem;
   }
