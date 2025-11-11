@@ -52,7 +52,7 @@
     - additional
     - add
 - name: advanced--fraud--protection
-  friendly_name: Advanced Fraud Protection
+  friendly_name: Advanced fraud protection
   aliases:
     - advanced fraud protection
     - advanced
@@ -60,7 +60,7 @@
     - protection
     - security
 - name: advanced--threats
-  friendly_name: Advanced Threats
+  friendly_name: Advanced threats
   aliases:
     - advanced threats
     - advanced
@@ -372,7 +372,7 @@
   aliases:
     - android
 - name: anonymous--users
-  friendly_name: Anonymous Users
+  friendly_name: Anonymous users
   aliases:
     - anonymous users
     - anonymous
@@ -443,7 +443,7 @@
     - application platform
     - cloud
 - name: application--security
-  friendly_name: Application Security
+  friendly_name: Application security
   aliases:
     - application security
     - application
@@ -704,6 +704,21 @@
     - town hall
     - parliament
     - government building
+- name: bat--01
+  friendly_name: Bat 01
+  aliases:
+    - bats
+    - Austin
+- name: bat--02
+  friendly_name: Bat 02
+  aliases:
+    - bats
+    - Austin
+- name: bat--hanging
+  friendly_name: Hanging bat
+  aliases:
+    - bats
+    - Austin
 - name: bee
   friendly_name: Bee
   aliases:
@@ -905,7 +920,7 @@
     - Budapest Lab
     - lab skyline
 - name: bug--virus--malware
-  friendly_name: Bug Virus Malware
+  friendly_name: Bug virus malware
   aliases:
     - bug virus malware
     - bug
@@ -919,7 +934,7 @@
     - iot
     - internet of things
 - name: build--leadership--and--culture
-  friendly_name: Build Leadership and Culture
+  friendly_name: Build leadership and culture
   aliases:
     - build leadership and culture
     - build
@@ -2325,7 +2340,7 @@
   aliases:
     - continuous integration
 - name: continuous--security
-  friendly_name: Continuous Security
+  friendly_name: Continuous security
   aliases:
     - continuous security
     - continuous
@@ -2669,7 +2684,7 @@
     - analytics
     - AI
 - name: data--security
-  friendly_name: Data Security
+  friendly_name: Data security
   aliases:
     - data security
     - data
@@ -2839,7 +2854,7 @@
     - travel
     - itinerary
 - name: detect--and--stop--advancing--threats
-  friendly_name: Detect and Stop Advancing Threats
+  friendly_name: Detect and stop advancing threats
   aliases:
     - detect and stop advancing threats
     - detect
@@ -2916,7 +2931,7 @@
     - id
     - security
 - name: digital--trust
-  friendly_name: Digital Trust
+  friendly_name: Digital trust
   aliases:
     - digital trust
     - digital
@@ -3254,7 +3269,7 @@
     - cloud
     - secure
 - name: endpoint--protection
-  friendly_name: Endpoint Protection
+  friendly_name: Endpoint protection
   aliases:
     - endpoint protection
     - endpoint
@@ -4082,7 +4097,7 @@
     - geographic flexibility
     - cloud
 - name: get--ahead--of--risk--and--compliance
-  friendly_name: Get Ahead Of Risk and Compliance
+  friendly_name: Get ahead of risk and compliance
   aliases:
     - get ahead of risk and compliance
     - get
@@ -4318,7 +4333,7 @@
     - masters
     - sports
 - name: govern--users--and--identities
-  friendly_name: Govern Users and Identities
+  friendly_name: Govern users and identities
   aliases:
     - govern users and identities
     - govern
@@ -4638,7 +4653,7 @@
     - computing
     - cloud
 - name: high--risk--users
-  friendly_name: High Risk Users
+  friendly_name: High risk users
   aliases:
     - high risk users
     - high
@@ -4835,12 +4850,14 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name:
+    IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
     - IBM
 - name: ibm--elm-gcm
-  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
+  friendly_name:
+    IBM® Engineering Lifecycle Management Global Configuration Management
   aliases:
     - engineering lifecycle management global configuration management
     - IBM
@@ -4914,6 +4931,14 @@
   aliases:
     - IBM iX®
     - IBM
+- name: ibm--machine-learning-for-z-os
+  friendly_name: IBM® Machine learning for z/OS®
+  aliases:
+    - AI
+    - Z
+    - Systems
+    - MLZ
+    - Machine learning
 - name: ibm--one-madison-avenue
   friendly_name: IBM® One Madison Avenue
   aliases:
@@ -5126,7 +5151,7 @@
     - identify and resolve issues
     - Cloud
 - name: identity--trust--assessment
-  friendly_name: Identity Trust Assessment
+  friendly_name: Identity trust assessment
   aliases:
     - identity trust assessment
     - identity
@@ -5603,14 +5628,14 @@
     - lock
     - security
 - name: locked--network--01
-  friendly_name: Locked Network 01
+  friendly_name: Locked network 01
   aliases:
     - locked network 01
     - locked network
     - network
     - security
 - name: locked--network--02
-  friendly_name: Locked Network 02
+  friendly_name: Locked network 02
   aliases:
     - locked network 02
     - locked
@@ -5880,7 +5905,7 @@
     - migration
     - cloud
 - name: master--threat--hunting
-  friendly_name: Master Threat Hunting
+  friendly_name: Master threat hunting
   aliases:
     - master threat hunting
     - master
@@ -6398,7 +6423,7 @@
     - network of devices
     - Cloud
 - name: network--protection
-  friendly_name: Network Protection
+  friendly_name: Network protection
   aliases:
     - network protection
     - network
@@ -7331,7 +7356,7 @@
     - prompt
     - AI
 - name: protect--critical--assets
-  friendly_name: Protect Critical Assets
+  friendly_name: Protect critical assets
   aliases:
     - protect critical assets
     - protect
@@ -8035,7 +8060,7 @@
     - gateway
     - cloud
 - name: secure--hybrid--cloud
-  friendly_name: Secure Hybrid Cloud
+  friendly_name: Secure hybrid cloud
   aliases:
     - secure hybrid cloud
     - secure
@@ -8087,13 +8112,13 @@
     - groups
     - cloud
 - name: security--hygiene
-  friendly_name: Security Hygiene
+  friendly_name: Security hygiene
   aliases:
     - security hygiene
     - security
     - hygiene
 - name: security--intelligence
-  friendly_name: Security Intelligence
+  friendly_name: Security intelligence
   aliases:
     - security intelligence
     - security
@@ -8442,7 +8467,7 @@
     - watson
     - AI
 - name: speech-and-empathy--01
-  friendly_name: speech-and-empathy--01
+  friendly_name: Speech and empathy 01
   aliases:
     - speech
     - empathy
@@ -8517,6 +8542,14 @@
     - hardware
     - accelerator
     - workloads
+- name: spyre-accelerator--card
+  friendly_name: Spyre accelerator card
+  aliases:
+    - AI
+    - spyre
+    - chip
+    - card
+    - accelerator
 - name: stack-limitation
   friendly_name: Stack limitation
   aliases:
@@ -8678,7 +8711,7 @@
     - business
     - plan
 - name: strategy--and--risk
-  friendly_name: Strategy and Risk
+  friendly_name: Strategy and risk
   aliases:
     - strategy and risk
     - strategy
@@ -9175,6 +9208,16 @@
     - lifestyle
     - active
     - exercise
+- name: tennis--court
+  friendly_name: Tennis court
+  aliases:
+    - tennis
+    - ball
+    - tennis shots
+    - net
+    - sports
+    - court
+    - bounce
 - name: tennis--ball
   friendly_name: Tennis ball
   aliases:
@@ -9195,11 +9238,55 @@
   friendly_name: Tennis racquet
   aliases:
     - tennis
-    - tennis ball
+    - ball
     - tennis racquet
     - wimbledon
     - us open
     - sports
+- name: tennis--scoreboard
+  friendly_name: Tennis scoreboard
+  aliases:
+    - tennis
+    - ball
+    - tennis shots
+    - net
+    - sports
+    - court
+    - bounce
+    - scoreboard
+- name: tennis--serve
+  friendly_name: Tennis serve
+  aliases:
+    - tennis
+    - ball
+    - tennis shots
+    - net
+    - sports
+    - court
+    - bounce
+    - umpire chair
+    - tennis serve
+- name: tennis--shot
+  friendly_name: Tennis shot
+  aliases:
+    - tennis
+    - ball
+    - tennis shots
+    - net
+    - sports
+    - court
+    - bounce
+- name: tennis--umpire-chair
+  friendly_name: Tennis umpire chair
+  aliases:
+    - tennis
+    - ball
+    - tennis shots
+    - net
+    - sports
+    - court
+    - bounce
+    - umpire chair
 - name: test--tubes
   friendly_name: Test tubes
   aliases:
@@ -9241,7 +9328,7 @@
     - this side up
     - packaging
 - name: threat--management
-  friendly_name: Threat Management
+  friendly_name: Threat management
   aliases:
     - threat management
     - threat
@@ -9354,7 +9441,7 @@
     - watson
     - AI
 - name: tool--overload
-  friendly_name: Tool Overload
+  friendly_name: Tool overload
   aliases:
     - tool overload
     - tool
@@ -9626,7 +9713,7 @@
     - trusted
     - Cloud
 - name: trusted--user
-  friendly_name: Trusted User
+  friendly_name: Trusted user
   aliases:
     - trusted user
     - trusted
@@ -9691,7 +9778,7 @@
     - training
     - combat
 - name: unauthorized--user--access
-  friendly_name: Unauthorized User Access
+  friendly_name: Unauthorized user access
   aliases:
     - unauthorized user access
     - unauthorized
@@ -9699,14 +9786,14 @@
     - access
     - security
 - name: under--utilized--security
-  friendly_name: Under Utilized Security
+  friendly_name: Under utilized security
   aliases:
     - under utilized security
     - under
     - utilized
     - security
 - name: unify--endpoint--management
-  friendly_name: Unify Endpoint Management
+  friendly_name: Unify endpoint management
   aliases:
     - unify endpoint management
     - unify
