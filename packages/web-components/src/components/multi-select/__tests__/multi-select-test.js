@@ -497,10 +497,6 @@ describe('cds-multi-select', function () {
       await el.updateComplete;
 
       expect(firstItem.selected).to.be.true;
-
-      // Menu closes after selection, reopen with pointer interaction then toggle off via keyboard
-      trigger.click();
-      await el.updateComplete;
       expect(el.open).to.be.true;
       const highlighted = el.querySelector(
         'cds-multi-select-item[highlighted]'
@@ -547,10 +543,6 @@ describe('cds-multi-select', function () {
       trigger.dispatchEvent(spaceEvent);
       await el.updateComplete;
       expect(firstItem.selected).to.be.true;
-
-      // Menu closes after selection, reopen with pointer interaction before toggling off
-      trigger.click();
-      await el.updateComplete;
       expect(el.open).to.be.true;
       const highlighted = el.querySelector(
         'cds-multi-select-item[highlighted]'
