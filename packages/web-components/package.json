@@ -36,8 +36,8 @@
     "./es/components/*": {
       "default": "./es/components/*"
     },
-    "./es/globals/": {
-      "default": "./es/globals/"
+    "./es/globals/*": {
+      "default": "./es/globals/*"
     },
     "./es": "./es/index.js",
     "./es/": "./es/",
