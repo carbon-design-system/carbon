@@ -35,7 +35,7 @@
     "@octokit/plugin-throttling": "^4.0.0",
     "@octokit/rest": "^22.0.0",
     "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "chalk": "^5.4.1",
     "change-case-all": "^2.1.0",
