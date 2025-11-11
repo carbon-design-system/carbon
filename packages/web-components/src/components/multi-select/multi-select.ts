@@ -152,7 +152,7 @@ class CDSMultiSelect extends CDSDropdown {
   }
 
   // Keep the menu open for individual selections, close only when clearing.
-   
+
   protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
     return !item;
   }
