@@ -129,34 +129,14 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
           (menuTrigger as any).open = false;
         }
 
-        this.updateComplete.then(() => {
-          if (menuTrigger && 'updateComplete' in menuTrigger) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (menuTrigger as any).updateComplete.then(() => {
-              requestAnimationFrame(() => {
-                const triggerButton =
-                  menuTrigger?.shadowRoot?.querySelector(
-                    `button.${prefix}--overflow-menu`
-                  ) ||
-                  menuTrigger?.querySelector(`button.${prefix}--overflow-menu`);
+        requestAnimationFrame(() => {
+          const triggerButton =
+            menuTrigger?.shadowRoot?.querySelector(
+              `button.${prefix}--overflow-menu`
+            ) || menuTrigger?.querySelector(`button.${prefix}--overflow-menu`);
 
-                if (triggerButton) {
-                  (triggerButton as HTMLElement).focus();
-                }
-              });
-            });
-          } else {
-            requestAnimationFrame(() => {
-              const triggerButton =
-                menuTrigger?.shadowRoot?.querySelector(
-                  `button.${prefix}--overflow-menu`
-                ) ||
-                menuTrigger?.querySelector(`button.${prefix}--overflow-menu`);
-
-              if (triggerButton) {
-                (triggerButton as HTMLElement).focus();
-              }
-            });
+          if (triggerButton) {
+            (triggerButton as HTMLElement).focus();
           }
         });
         return;
@@ -179,6 +159,17 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (menuTrigger as any).open = false;
         }
+
+        requestAnimationFrame(() => {
+          const triggerButton =
+            menuTrigger?.shadowRoot?.querySelector(
+              `button.${prefix}--overflow-menu`
+            ) || menuTrigger?.querySelector(`button.${prefix}--overflow-menu`);
+
+          if (triggerButton) {
+            (triggerButton as HTMLElement).focus();
+          }
+        });
       }
     }
   };
