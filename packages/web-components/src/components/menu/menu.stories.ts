@@ -140,62 +140,6 @@ export const Default = {
   },
 };
 
-export const ContextMenu = {
-  render: () => {
-    const handleContextMenuOpen = (e) => {
-      e.preventDefault();
-      const menu = document.querySelector('#context-menu-demo');
-      if (menu) {
-        menu.setAttribute('x', e.clientX);
-        menu.setAttribute('y', e.clientY);
-        menu.setAttribute('open', 'true');
-      }
-    };
-
-    const handleContextMenuClose = () => {
-      const menu = document.querySelector('#context-menu-demo');
-      if (menu) {
-        menu.removeAttribute('open');
-      }
-    };
-
-    setTimeout(() => {
-      document.addEventListener('contextmenu', handleContextMenuOpen);
-      const menu = document.querySelector('#context-menu-demo');
-      if (menu) {
-        menu.addEventListener('cds-menu-closed', handleContextMenuClose);
-      }
-    }, 0);
-
-    return html`
-      <div
-        style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-        <p>Right-click anywhere to open the context menu</p>
-      </div>
-
-      <cds-menu
-        id="context-menu-demo"
-        size="sm"
-        background-token="layer"
-        open="false">
-        <cds-menu-item label="Share with">
-          ${iconLoader(FolderShared16, { slot: 'render-icon' })}
-          <cds-menu-item-radio-group slot="submenu" label="Share with list">
-            <cds-menu-item label="None"></cds-menu-item>
-            <cds-menu-item label="Product team"></cds-menu-item>
-            <cds-menu-item label="Organization"></cds-menu-item>
-            <cds-menu-item label="Company"></cds-menu-item>
-          </cds-menu-item-radio-group>
-        </cds-menu-item>
-        <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item label="Delete" shortcut="⌫" kind="danger">
-          ${iconLoader(TrashCan16, { slot: 'render-icon' })}
-        </cds-menu-item>
-      </cds-menu>
-    `;
-  },
-};
-
 const meta = {
   title: 'Components/Menu',
 };
