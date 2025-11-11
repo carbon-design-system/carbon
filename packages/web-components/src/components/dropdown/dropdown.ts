@@ -134,13 +134,12 @@ class CDSDropdown extends ValidityMixin(
    *   Absense of this argument means clearing selection, which may be handled by a derived class.
    */
   protected _selectionDidChange(itemToSelect?: CDSDropdownItem) {
+    const constructor = this.constructor as typeof CDSDropdown;
     if (itemToSelect) {
       this.value = itemToSelect.value;
       this._activeDescendant = itemToSelect.id;
       forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSDropdown).selectorItemSelected
-        ),
+        this.querySelectorAll(constructor.selectorItemSelected),
         (item) => {
           (item as CDSDropdownItem).selected = false;
           item.setAttribute('aria-selected', 'false');
@@ -148,7 +147,9 @@ class CDSDropdown extends ValidityMixin(
       );
       itemToSelect.selected = true;
       itemToSelect.setAttribute('aria-selected', 'true');
-      this._handleUserInitiatedToggle(false);
+      this._updateSelectedNextSibling(itemToSelect);
+    } else {
+      this._updateSelectedNextSibling();
     }
   }
 
@@ -248,7 +249,6 @@ class CDSDropdown extends ValidityMixin(
               if (menu) {
                 menu.focus();
               }
-              this.classList.remove(`${prefix}--dropdown--focus`);
             }
           });
           break;
@@ -269,7 +269,6 @@ class CDSDropdown extends ValidityMixin(
           if (menu) {
             menu.focus();
           }
-          this.classList.remove(`${prefix}--dropdown--focus`);
           this._navigate(NAVIGATION_DIRECTION[key]);
           break;
         }
@@ -462,6 +461,8 @@ class CDSDropdown extends ValidityMixin(
       return;
     }
 
+    const shouldClose = this._shouldCloseAfterSelection(item);
+
     if (this._selectionShouldChange(item)) {
       const init = {
         bubbles: true,
@@ -479,15 +480,23 @@ class CDSDropdown extends ValidityMixin(
         this._selectionDidChange(item);
         const afterSelectEvent = new CustomEvent(constructor.eventSelect, init);
         this.dispatchEvent(afterSelectEvent);
-        this._handleUserInitiatedToggle(false, {
-          restoreTriggerFocus: true,
-        });
+        if (shouldClose) {
+          this._handleUserInitiatedToggle(false, {
+            restoreTriggerFocus: true,
+          });
+        }
       }
-    } else if (item) {
+    } else if (item && shouldClose) {
       this._handleUserInitiatedToggle(false, {
         restoreTriggerFocus: true,
       });
     }
+  }
+
+  // Default dropdowns close after user selection.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+  protected _shouldCloseAfterSelection(_item?: CDSDropdownItem) {
+    return true;
   }
 
   /**
@@ -523,13 +532,13 @@ class CDSDropdown extends ValidityMixin(
       if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
         this.open = force;
         if (this.open) {
-          if (focusMenu) {
-            this.classList.remove(`${prefix}--dropdown--focus`);
-          } else {
-            this.classList.add(`${prefix}--dropdown--focus`);
-          }
+          const activeElement = this.shadowRoot?.activeElement;
+          const preserveFocusTarget =
+            activeElement instanceof HTMLInputElement ? activeElement : null;
           this.updateComplete.then(() => {
-            if (focusMenu) {
+            if (preserveFocusTarget) {
+              preserveFocusTarget.focus();
+            } else if (focusMenu) {
               const menu = this.shadowRoot?.getElementById('menu-body');
               menu?.focus();
             } else if (this._shouldTriggerBeFocusable) {
@@ -541,14 +550,11 @@ class CDSDropdown extends ValidityMixin(
               this._highlightSelectedItem();
             }
           });
-        } else {
-          this.classList.remove(`${prefix}--dropdown--focus`);
-          if (restoreTriggerFocus && this._shouldTriggerBeFocusable) {
-            this.updateComplete.then(() => {
-              const trigger = this.shadowRoot?.getElementById('trigger-button');
-              trigger?.focus();
-            });
-          }
+        } else if (restoreTriggerFocus && this._shouldTriggerBeFocusable) {
+          this.updateComplete.then(() => {
+            const trigger = this.shadowRoot?.getElementById('trigger-button');
+            trigger?.focus();
+          });
         }
 
         if (!this.open) {
@@ -597,13 +603,13 @@ class CDSDropdown extends ValidityMixin(
     forEach(items, (listItem) => {
       const dropdownItem = listItem as CDSDropdownItem;
       dropdownItem.highlighted = dropdownItem === target;
-      dropdownItem.removeAttribute('data-prev-highlighted');
+      dropdownItem.removeAttribute('highlighted-next-sibling');
     });
 
     if (target) {
       const nextSibling = this._getNextDropdownItem(target);
       if (nextSibling) {
-        nextSibling.setAttribute('data-prev-highlighted', '');
+        nextSibling.setAttribute('highlighted-next-sibling', '');
       }
 
       const itemId = target.id;
@@ -634,6 +640,20 @@ class CDSDropdown extends ValidityMixin(
     }
 
     return null;
+  }
+
+  protected _updateSelectedNextSibling(item?: CDSDropdownItem | null): void {
+    const constructor = this.constructor as typeof CDSDropdown;
+    forEach(this.querySelectorAll(constructor.selectorItem), (listItem) => {
+      (listItem as CDSDropdownItem).removeAttribute('selected-next-sibling');
+    });
+
+    if (item) {
+      const nextSibling = this._getNextDropdownItem(item);
+      if (nextSibling) {
+        nextSibling.setAttribute('selected-next-sibling', '');
+      }
+    }
   }
 
   protected _highlightSelectedItem() {
@@ -906,14 +926,19 @@ class CDSDropdown extends ValidityMixin(
         (elem as CDSDropdownItem).size = this.size;
       });
     }
-    if (changedProperties.has('disabled') && this.disabled) {
+    if (changedProperties.has('disabled')) {
       const { disabled } = this;
       // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(this.querySelectorAll(selectorItem), (elem) => {
+        const item = elem as CDSDropdownItem;
         if (disabled) {
-          (elem as CDSDropdownItem).disabled = disabled;
-        } else {
-          (elem as CDSDropdownItem).removeAttribute('disabled');
+          if (!item.disabled) {
+            item.setAttribute('parent-disabled', '');
+          }
+          item.disabled = true;
+        } else if (item.hasAttribute('parent-disabled')) {
+          item.removeAttribute('parent-disabled');
+          item.disabled = false;
         }
       });
     }
@@ -924,18 +949,19 @@ class CDSDropdown extends ValidityMixin(
         (elem as CDSDropdownItem).selected =
           (elem as CDSDropdownItem).value === this.value;
       });
-      const item = find(
+      const selectedItem = find(
         this.querySelectorAll(selectorItem),
         (elem) => (elem as CDSDropdownItem).value === this.value
-      );
-      if (item) {
+      ) as CDSDropdownItem | undefined;
+      if (selectedItem) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const range = this.ownerDocument!.createRange();
-        range.selectNodeContents(item);
+        range.selectNodeContents(selectedItem);
         this._selectedItemContent = range.cloneContents();
       } else {
         this._selectedItemContent = null;
       }
+      this._updateSelectedNextSibling(selectedItem);
     }
     return true;
   }

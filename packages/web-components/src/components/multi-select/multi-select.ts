@@ -19,6 +19,7 @@ import CDSDropdown, {
   DROPDOWN_KEYBOARD_ACTION,
   DROPDOWN_TYPE,
 } from '../dropdown/dropdown';
+import CDSDropdownItem from '../dropdown/dropdown-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
@@ -150,6 +151,12 @@ class CDSMultiSelect extends CDSDropdown {
       .join(',');
   }
 
+  // Keep the menu open for individual selections, close only when clearing.
+   
+  protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
+    return !item;
+  }
+
   protected _handleClickInner(event: MouseEvent) {
     const clickedItem = (event.target as HTMLElement).closest(
       `${prefix}-multi-select-item`
@@ -219,6 +226,38 @@ class CDSMultiSelect extends CDSDropdown {
     } else {
       super._handleKeypressInner(event);
     }
+  }
+
+  protected _handleMouseoverInner(event: MouseEvent) {
+    const item = this._getDropdownItemFromEvent(event);
+    const isFiltering =
+      this.filterable && Boolean(this._filterInputNode?.value.length);
+
+    if (
+      !item ||
+      isFiltering ||
+      !item.hasAttribute('selected') ||
+      !item.hasAttribute('highlighted')
+    ) {
+      return;
+    }
+
+    super._handleMouseoverInner(event);
+  }
+
+  protected _handleMouseleaveInner(event: MouseEvent) {
+    const constructor = this.constructor as typeof CDSMultiSelect;
+    const isFiltering =
+      this.filterable && Boolean(this._filterInputNode?.value.length);
+    const highlightedItem = this.querySelector(
+      constructor.selectorItemHighlighted
+    ) as CDSMultiSelectItem | null;
+
+    if (isFiltering || highlightedItem?.hasAttribute('selected')) {
+      return;
+    }
+
+    super._handleMouseleaveInner(event);
   }
 
   /**

@@ -50,18 +50,6 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown[open]) {
-  .#{$prefix}--list-box__field {
-    outline: none;
-  }
-}
-
-:host(#{$prefix}-dropdown.#{$prefix}--dropdown--focus) {
-  .#{$prefix}--list-box__field {
-    @include focus-outline('outline');
-  }
-}
-
 :host(#{$prefix}-dropdown[ai-label]) .#{$prefix}--list-box__wrapper--decorator {
   @include ai-gradient;
 }
@@ -152,9 +140,13 @@ $css--plex: true !default;
     grid-column: 2;
   }
 
+  .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-10;
+  }
+
   .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__invalid-icon--warning {
-    inset-inline-end: convert.to-rem(40px);
+    inset-inline-end: $spacing-08;
   }
 }
 
@@ -182,7 +174,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__menu-item--highlighted;
 }
 
-:host(#{$prefix}-dropdown-item[data-prev-highlighted])
+:host(#{$prefix}-dropdown-item[highlighted-next-sibling])
   .#{$prefix}--list-box__menu-item__option {
   border-block-start-color: transparent;
 }
@@ -194,7 +186,14 @@ $css--plex: true !default;
   text-decoration: none;
 }
 
-:host(#{$prefix}-dropdown-item[disabled][data-prev-highlighted]:hover)
+:host(#{$prefix}-dropdown[disabled][warn]),
+:host(#{$prefix}-dropdown[disabled][invalid]) {
+  .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-dropdown-item[disabled][highlighted-next-sibling]:hover)
   .#{$prefix}--list-box__menu-item__option {
   border-block-start-color: $border-subtle;
 }
@@ -208,12 +207,23 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__menu-item--active;
 
   .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: transparent;
     color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: block;
   }
+}
+
+:host(#{$prefix}-dropdown-item[selected-next-sibling])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: transparent;
+}
+
+:host(#{$prefix}-dropdown-item[disabled][selected-next-sibling]:hover)
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle;
 }
 
 :host(#{$prefix}-dropdown-item[selected][highlighted]) {
@@ -243,6 +253,8 @@ $css--plex: true !default;
     @include skeleton;
   }
 }
+// AILabel styles
+$divider-width: 1px;
 
 :host(#{$prefix}-dropdown[ai-label]) {
   @extend .#{$prefix}--list-box__wrapper--slug;
@@ -264,11 +276,11 @@ $css--plex: true !default;
     position: absolute;
     display: block;
     background-color: $border-subtle-01;
-    block-size: convert.to-rem(16px);
+    block-size: $spacing-05;
     content: '';
     inline-size: convert.to-rem(1px);
     inset-block-start: convert.to-rem(1px);
-    inset-inline-end: convert.to-rem(-9px);
+    inset-inline-end: calc(-#{$spacing-03} - #{$divider-width});
   }
 
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
@@ -294,11 +306,11 @@ $css--plex: true !default;
     position: absolute;
     display: block;
     background-color: $border-subtle-01;
-    block-size: convert.to-rem(16px);
+    block-size: $spacing-05;
     content: '';
     inline-size: convert.to-rem(1px);
     inset-block-start: convert.to-rem(1px);
-    inset-inline-start: convert.to-rem(-9px);
+    inset-inline-start: calc(-#{$spacing-03} - #{$divider-width});
   }
 
   ::slotted(#{$prefix}-ai-label),
