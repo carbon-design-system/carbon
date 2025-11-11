@@ -119,19 +119,6 @@ class CDSComboBox extends CDSDropdown {
       (this.constructor as typeof CDSComboBox).selectorItem
     );
 
-    if (event.inputType?.startsWith('delete')) {
-      if (rawQueryText.length === 0) {
-        this._resetFilteredItems();
-      } else {
-        this._filterItems(items, queryText, rawQueryText);
-      }
-
-      this._filterInputValue = rawQueryText;
-      this.open = true;
-      this.requestUpdate();
-      return;
-    }
-
     const firstMatchIndex = this._filterItems(items, queryText, rawQueryText);
     if (firstMatchIndex !== -1) {
       const highlightedItem = items[firstMatchIndex];
