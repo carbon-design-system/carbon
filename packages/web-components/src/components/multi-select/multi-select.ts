@@ -484,6 +484,8 @@ class CDSMultiSelect extends CDSDropdown {
       forEach(items, (item, i) => {
         (item as CDSMultiSelectItem).highlighted = i === nextIndex;
       });
+      const nextItem = items[nextIndex];
+      nextItem.scrollIntoView({ block: 'nearest' });
       this.setAttribute('item-clicked', '');
     }
   }
