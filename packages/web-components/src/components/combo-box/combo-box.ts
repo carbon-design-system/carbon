@@ -99,7 +99,7 @@ class CDSComboBox extends CDSDropdown {
     super.connectedCallback();
     if (this.typeahead) {
       this.shouldFilterItem = true;
-      this.setAttribute('should-filter-item', 'true');
+      this.setAttribute('should-filter-item', '');
     }
   }
 
@@ -433,8 +433,8 @@ class CDSComboBox extends CDSDropdown {
   itemMatches!: (item: CDSComboBoxItem, queryText: string) => boolean;
 
   /**
-   * Provide custom filtering behavior. Defaults to
-   * `true` when `typeahead` is enabled
+   * Provide custom filtering behavior. This attribute will be ignored if
+   * `typeahead` is enabled and will default to `true`
    */
   @property({
     attribute: 'should-filter-item',
