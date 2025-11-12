@@ -647,7 +647,7 @@ HeaderWActionsAndSwitcher.storyName = 'Header w/ Actions and Switcher';
 
 HeaderWActionsAndSwitcher.argTypes = {
   isSideNavExpanded: {
-    defaultValue: true,
+    defaultValue: false,
     description: 'Optional prop to display the HeaderPanel.',
   },
 };
