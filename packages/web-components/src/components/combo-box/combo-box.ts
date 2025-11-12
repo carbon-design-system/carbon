@@ -99,6 +99,7 @@ class CDSComboBox extends CDSDropdown {
     super.connectedCallback();
     if (this.typeahead) {
       this.shouldFilterItem = true;
+      this.setAttribute('should-filter-item', 'true');
     }
   }
 
