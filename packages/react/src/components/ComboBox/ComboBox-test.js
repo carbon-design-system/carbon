@@ -377,6 +377,28 @@ describe('ComboBox', () => {
     );
   });
 
+  it('should keep the selected item active after blur when allowCustomValue is set', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <ComboBox {...mockProps} allowCustomValue />
+        <button type="button">Move focus</button>
+      </>
+    );
+
+    await openMenu();
+    await user.click(screen.getByRole('option', { name: 'Item 1' }));
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+
+    await user.click(screen.getByRole('button', { name: 'Move focus' }));
+
+    await openMenu();
+    const activeOption = screen.getByRole('option', { name: 'Item 1' });
+    expect(activeOption).toHaveClass(`${prefix}--list-box__menu-item--active`);
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+  });
+
   it('should yield highlighted item as `selectedItem` when pressing Enter with an unmodified input value', async () => {
     render(<ControlledComboBox controlledItem={null} />);
 

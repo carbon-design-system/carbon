@@ -15,6 +15,7 @@ import { useId } from '../../internal/useId';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 type ExcludedAttributes = 'onChange';
 
@@ -105,6 +106,31 @@ export interface RadioButtonProps
    * `true` to specify if the input is required.
    */
   required?: boolean;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: ReactNode;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNode;
+
+  /**
+   * Specify whether the RadioButton should be read-only
+   */
+  readOnly?: boolean;
 }
 
 const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
@@ -112,7 +138,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
     const {
       className,
       decorator,
-      disabled,
+      disabled = false,
       hideLabel,
       id,
       labelPosition = 'right',
@@ -122,12 +148,27 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
       value = '',
       slug,
       required,
+      invalid = false,
+      invalidText,
+      warn = false,
+      warnText,
+      readOnly,
       ...rest
     } = props;
 
     const prefix = usePrefix();
     const uid = useId('radio-button');
     const uniqueId = id || uid;
+
+    const normalizedProps = useNormalizedInputProps({
+      id: uniqueId,
+      readOnly,
+      disabled,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+    });
 
     function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
       onChange(value, name, event);
@@ -148,6 +189,8 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           labelPosition !== 'right',
         [`${prefix}--radio-button-wrapper--slug`]: slug,
         [`${prefix}--radio-button-wrapper--decorator`]: decorator,
+        [`${prefix}--radio-button-wrapper--invalid`]: normalizedProps.invalid,
+        [`${prefix}--radio-button-wrapper--warning`]: normalizedProps.warn,
       }
     );
 
@@ -170,10 +213,11 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           onChange={handleOnChange}
           id={uniqueId}
           ref={mergeRefs(inputRef, ref)}
-          disabled={disabled}
+          disabled={normalizedProps.disabled}
           value={value}
           name={name}
           required={required}
+          readOnly={readOnly}
         />
         <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
           <span className={`${prefix}--radio-button__appearance`} />
@@ -193,6 +237,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
             </Text>
           )}
         </label>
+        {normalizedProps.validation}
       </div>
     );
   }
@@ -268,6 +313,31 @@ RadioButton.propTypes = {
    * `true` to specify if the control is required.
    */
   required: PropTypes.bool,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.node,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
+
+  /**
+   * Specify whether the RadioButton should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButton` component

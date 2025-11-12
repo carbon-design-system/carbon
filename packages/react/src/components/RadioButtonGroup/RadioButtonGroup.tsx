@@ -218,7 +218,7 @@ const RadioButtonGroup = React.forwardRef(
       }
     }
 
-    const showWarning = !readOnly && !invalid && warn;
+    const showWarning = !readOnly && !disabled && !invalid && warn;
     const showHelper = !invalid && !disabled && !warn;
 
     const wrapperClasses = classNames(`${prefix}--form-item`, className);
@@ -228,7 +228,8 @@ const RadioButtonGroup = React.forwardRef(
         orientation === 'vertical',
       [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
       [`${prefix}--radio-button-group--readonly`]: readOnly,
-      [`${prefix}--radio-button-group--invalid`]: !readOnly && invalid,
+      [`${prefix}--radio-button-group--invalid`]:
+        !readOnly && !disabled && invalid,
       [`${prefix}--radio-button-group--warning`]: showWarning,
       [`${prefix}--radio-button-group--slug`]: slug,
       [`${prefix}--radio-button-group--decorator`]: decorator,
@@ -283,7 +284,7 @@ const RadioButtonGroup = React.forwardRef(
           {getRadioButtons()}
         </fieldset>
         <div className={`${prefix}--radio-button__validation-msg`}>
-          {!readOnly && invalid && (
+          {!readOnly && !disabled && invalid && (
             <>
               <WarningFilled
                 className={`${prefix}--radio-button__invalid-icon`}
