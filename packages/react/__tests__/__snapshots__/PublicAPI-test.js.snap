@@ -8284,6 +8284,12 @@ Map {
       "id": {
         "type": "string",
       },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
       "labelPosition": {
         "args": [
           [
@@ -8306,6 +8312,9 @@ Map {
       "onClick": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
       "required": {
         "type": "bool",
       },
@@ -8322,6 +8331,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
       },
     },
     "render": [Function],
