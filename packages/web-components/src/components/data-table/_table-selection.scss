@@ -51,8 +51,8 @@
 :host(#{$prefix}-table-row:hover) {
   .#{$prefix}--table-column-checkbox {
     background-color: $background-hover;
-    border-block-end-color: $layer-hover-01;
-    border-block-start-color: $layer-hover-01;
+    border-block-end-color: $layer-hover;
+    border-block-start-color: $layer-hover;
   }
 }
 
@@ -60,7 +60,7 @@
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    background-color: $layer-accent-01;
+    background-color: $layer-accent;
     // bottom border acts as separator from other rows
     border-block-end: 1px solid $layer-active;
     color: $text-primary;
