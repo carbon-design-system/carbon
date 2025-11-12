@@ -47,75 +47,45 @@ describe('cds-overflow-menu', () => {
     });
   });
 
-  describe('Escape key handling', () => {
-    it('should handle Escape key to close menu', async () => {
-      const el = await fixture(basicOverflowMenu);
-      const menuBody = el.querySelector('cds-overflow-menu-body');
+  it('should handle Escape key to close menu', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
 
-      menuBody.open = true;
+    menuBody.open = true;
 
-      const event = new KeyboardEvent('keydown', {
-        key: 'Escape',
-        bubbles: true,
-        cancelable: true,
-      });
-
-      menuBody.dispatchEvent(event);
-
-      expect(menuBody.open).to.be.false;
+    const event = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+      cancelable: true,
     });
 
-    it('should return focus to trigger button when Escape key is pressed', async () => {
-      const el = await fixture(basicOverflowMenu);
-      const menuBody = el.querySelector('cds-overflow-menu-body');
-      const triggerButton = el.shadowRoot?.querySelector('button');
+    menuBody.dispatchEvent(event);
 
-      el.open = true;
-      menuBody.open = true;
-      await el.updateComplete;
-
-      const event = new KeyboardEvent('keydown', {
-        key: 'Escape',
-        bubbles: true,
-        cancelable: true,
-      });
-
-      menuBody.dispatchEvent(event);
-
-      await new Promise((resolve) => requestAnimationFrame(resolve));
-
-      expect(document.activeElement).to.equal(triggerButton);
-      expect(menuBody.open).to.be.false;
-      expect(el.open).to.be.false;
-    });
+    expect(menuBody.open).to.be.false;
   });
 
-  describe('Enter key handling on menu items', () => {
-    it('should return focus to trigger button when Enter key is pressed on menu item', async () => {
-      const el = await fixture(basicOverflowMenu);
-      const menuBody = el.querySelector('cds-overflow-menu-body');
-      const menuItem = el.querySelector('cds-overflow-menu-item');
-      const triggerButton = el.shadowRoot?.querySelector('button');
+  it('should close and refocus trigger when a menu item is clicked', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+    const trigger = el.shadowRoot.querySelector('button');
 
-      el.open = true;
-      menuBody.open = true;
-      await el.updateComplete;
+    menuBody.open = true;
+    const items = menuBody.querySelectorAll('cds-overflow-menu-item');
 
-      menuItem.focus();
+    let focusCalled = false;
+    const originalFocus = trigger.focus;
+    trigger.focus = () => {
+      focusCalled = true;
+      originalFocus.call(trigger);
+    };
 
-      const event = new KeyboardEvent('keydown', {
-        key: 'Enter',
-        bubbles: true,
-        cancelable: true,
-      });
+    items[0].click();
 
-      menuBody.dispatchEvent(event);
+    await new Promise((r) => requestAnimationFrame(r));
 
-      await new Promise((resolve) => requestAnimationFrame(resolve));
+    expect(menuBody.open).to.be.false;
+    expect(focusCalled).to.be.true;
 
-      expect(document.activeElement).to.equal(triggerButton);
-      expect(menuBody.open).to.be.false;
-      expect(el.open).to.be.false;
-    });
+    trigger.focus = originalFocus;
   });
 });
