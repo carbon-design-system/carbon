@@ -58,6 +58,7 @@ categories:
       - hard--prompt
       - human-in-the-loop
       - ibm--granite
+      - ibm--machine-learning-for-z-os
       - intelligence
       - machine--learning--01
       - machine--learning--02
@@ -70,6 +71,7 @@ categories:
       - neurodiversity
       - prompt
       - spyre-accelerator
+      - spyre-accelerator--card
       - technical-document-generation
       - technical-owner
       - telum-ii-chip
@@ -997,6 +999,9 @@ categories:
       - backpack
       - balloon
       - balloon--hot-air
+      - bat--01
+      - bat--02
+      - bat--hanging
       - birthday--cake
       - blender
       - cafe
@@ -1300,8 +1305,13 @@ categories:
       - sports
       - tennis
       - tennis--ball
+      - tennis--court
       - tennis--net
       - tennis--racquet
+      - tennis--scoreboard
+      - tennis--serve
+      - tennis--shot
+      - tennis--umpire-chair
       - tickets
       - ufc--belt
       - ufc--fighting
