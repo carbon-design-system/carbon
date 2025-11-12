@@ -59,12 +59,12 @@ body,
   box-shadow: none;
 }
 /* stylelint-enable */
-
 .cds--mdx .sbdocs.sbdocs-wrapper {
   padding: 0;
 }
 
 .cds--mdx .sbdocs.sbdocs-content {
+  background: #f4f4f4;
   max-inline-size: none;
   @include breakpoint.breakpoint(lg) {
     --cds-grid-columns: 12;
@@ -72,12 +72,12 @@ body,
 }
 
 .cds--mdx img {
-  max-width: 100%;
-  background: #fff;
+  background: #ffffff;
+  max-inline-size: 100%;
 }
 
 .cds--mdx .image--fixed img {
   @include breakpoint.breakpoint(lg) {
-    max-width: 736px;
+    max-inline-size: 736px;
   }
 }
