@@ -10,6 +10,7 @@ import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
+import { Locked } from '@carbon/react/icons';
 
 import { FilterableMultiSelect, MultiSelect } from '.';
 import Button from '../Button';
@@ -678,6 +679,53 @@ export const SelectAllWithDynamicItems = () => {
         onChange={onChange}
       />
       <Button onClick={addItems}>Add 2 items to the list</Button>
+    </div>
+  );
+};
+
+export const Test = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-3"
+        titleText="FilterableMultiSelect title"
+        helperText="This is helper text"
+        items={items}
+        decorator={<Locked />}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
     </div>
   );
 };
