@@ -780,7 +780,8 @@ $popover-border-color: custom-property.get-var(
 //-----------------------------------------------------------------------------
 
 // autoalign caret
-:host(#{$prefix}-popover-content[open][caret][autoalign]) {
+:host(#{$prefix}-popover-content[open][caret][autoalign]),
+:host(#{$prefix}-tooltip-content[open][caret][autoalign]) {
   .#{$prefix}--popover-caret {
     &::before {
       block-size: 8px;
@@ -809,8 +810,8 @@ $popover-border-color: custom-property.get-var(
 
   .#{$prefix}--popover-content[align^='bottom'] > .#{$prefix}--popover-caret {
     &::after {
-      inset-block-end: -1px;
-      inset-inline-start: 0.5px;
+      inset-block-start: 1px;
+      inset-inline-start: 1px;
     }
   }
 
@@ -823,7 +824,7 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-content[align^='right'] > .#{$prefix}--popover-caret {
     &::after {
       inset-block-start: -1px;
-      inset-inline-end: 0.5px;
+      inset-inline-start: 1px;
     }
   }
 }
