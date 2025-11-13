@@ -1083,7 +1083,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           normalizedDecorator
         ) : decorator ? (
           <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-            {normalizedDecorator}
+            {candidateIsAILabel ? (
+              normalizedDecorator
+            ) : (
+              <span>{normalizedDecorator}</span>
+            )}
           </div>
         ) : (
           ''
