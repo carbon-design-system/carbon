@@ -19,7 +19,6 @@ import CDSDropdown, {
   DROPDOWN_KEYBOARD_ACTION,
   DROPDOWN_TYPE,
 } from '../dropdown/dropdown';
-import CDSDropdownItem from '../dropdown/dropdown-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
@@ -75,6 +74,31 @@ class CDSMultiSelect extends CDSDropdown {
    */
   @query('input')
   private _filterInputNode!: HTMLInputElement;
+
+  protected get _supportsMenuInputFiltering() {
+    return Boolean(this.filterable);
+  }
+
+  protected get _menuInputNode(): HTMLInputElement | null {
+    return this.filterable ? (this._filterInputNode ?? null) : null;
+  }
+
+  protected _clearMenuInputFiltering() {
+    if (this.filterable) {
+      this._handleUserInitiatedClearInput();
+    }
+  }
+
+  protected _shouldClearMenuInputOnEscape({
+    menuOpen,
+    isInputTarget,
+  }: {
+    event: KeyboardEvent;
+    menuOpen: boolean;
+    isInputTarget: boolean;
+  }) {
+    return !menuOpen || isInputTarget;
+  }
 
   /**
    * The trigger button.
@@ -153,7 +177,7 @@ class CDSMultiSelect extends CDSDropdown {
 
   // Keep the menu open for individual selections, close only when clearing.
 
-  protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
+  protected _shouldCloseAfterSelection(item?: CDSMultiSelectItem) {
     return !item;
   }
 

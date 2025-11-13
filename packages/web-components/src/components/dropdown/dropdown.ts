@@ -195,6 +195,10 @@ class CDSDropdown extends ValidityMixin(
    * Handler for the `keydown` event on the top-level element in the shadow DOM.
    */
   protected _handleKeydownInner(event: KeyboardEvent) {
+    if (this._handleMenuInputKeydown(event)) {
+      return;
+    }
+
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
     if (!this.open) {
@@ -276,6 +280,115 @@ class CDSDropdown extends ValidityMixin(
           break;
       }
     }
+  }
+
+  private _handleMenuInputKeydown(event: KeyboardEvent) {
+    if (
+      event.defaultPrevented ||
+      !this._supportsMenuInputFiltering ||
+      !this._menuInputNode
+    ) {
+      return false;
+    }
+
+    const input = this._menuInputNode;
+    if (!input) {
+      return false;
+    }
+    const isInputTarget = event.target === input;
+
+    const hasFilterValue = Boolean(input.value || this.value);
+    if (
+      event.key === 'Escape' &&
+      hasFilterValue &&
+      this._shouldClearMenuInputOnEscape({
+        event,
+        menuOpen: this.open,
+        isInputTarget,
+      })
+    ) {
+      event.preventDefault();
+      this._clearMenuInputFiltering();
+      return true;
+    }
+
+    if (!this.open || isInputTarget) {
+      return false;
+    }
+
+    if (this._shouldForwardKeyToMenuInput(event)) {
+      event.preventDefault();
+      this._forwardKeyToMenuInput(event, input);
+      return true;
+    }
+
+    return false;
+  }
+
+  protected _shouldClearMenuInputOnEscape({
+    menuOpen,
+  }: {
+    event: KeyboardEvent;
+    menuOpen: boolean;
+    isInputTarget: boolean;
+  }) {
+    return menuOpen;
+  }
+
+  protected get _supportsMenuInputFiltering() {
+    return false;
+  }
+
+  protected get _menuInputNode(): HTMLInputElement | null {
+    return null;
+  }
+
+  protected _clearMenuInputFiltering() {}
+
+  private _shouldForwardKeyToMenuInput(event: KeyboardEvent) {
+    if (event.altKey || event.metaKey || event.ctrlKey) {
+      return false;
+    }
+    const { key } = event;
+    if (key === 'Backspace' || key === 'Delete') {
+      return true;
+    }
+    return key.length === 1;
+  }
+
+  private _forwardKeyToMenuInput(
+    event: KeyboardEvent,
+    input: HTMLInputElement
+  ) {
+    input.focus({ preventScroll: true });
+    const key = event.key;
+    const selectionStart = input.selectionStart ?? input.value.length;
+    const selectionEnd = input.selectionEnd ?? input.value.length;
+    if (key === 'Backspace') {
+      if (selectionStart === 0 && selectionEnd === 0) {
+        return;
+      }
+      const start =
+        selectionStart === selectionEnd
+          ? Math.max(0, selectionStart - 1)
+          : selectionStart;
+      input.setRangeText('', start, selectionEnd, 'end');
+    } else if (key === 'Delete') {
+      if (
+        selectionStart === input.value.length &&
+        selectionStart === selectionEnd
+      ) {
+        return;
+      }
+      const end =
+        selectionStart === selectionEnd
+          ? Math.min(input.value.length, selectionEnd + 1)
+          : selectionEnd;
+      input.setRangeText('', selectionStart, end, 'end');
+    } else if (key.length === 1) {
+      input.setRangeText(key, selectionStart, selectionEnd, 'end');
+    }
+    input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
   }
 
   /**
@@ -373,6 +486,11 @@ class CDSDropdown extends ValidityMixin(
     const menu = this.shadowRoot?.getElementById('menu-body');
     const relatedTarget = event.relatedTarget as Node | null;
     if (menu && relatedTarget && menu.contains(relatedTarget)) {
+      return;
+    }
+
+    const shadowActiveElement = this.shadowRoot?.activeElement;
+    if (menu && shadowActiveElement && menu.contains(shadowActiveElement)) {
       return;
     }
 

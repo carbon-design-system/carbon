@@ -55,6 +55,18 @@ class CDSComboBox extends CDSDropdown {
   @query('input')
   private _filterInputNode!: HTMLInputElement;
 
+  protected get _supportsMenuInputFiltering() {
+    return true;
+  }
+
+  protected get _menuInputNode(): HTMLInputElement | null {
+    return this._filterInputNode ?? null;
+  }
+
+  protected _clearMenuInputFiltering() {
+    this._handleUserInitiatedClearInput();
+  }
+
   /**
    * The menu containing all selectable items.
    */
