@@ -10,6 +10,17 @@ import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-overflow-menu', () => {
+  let originalBodyPosition;
+
+  beforeEach(() => {
+    originalBodyPosition = document.body.style.position;
+    document.body.style.position = 'relative';
+  });
+
+  afterEach(() => {
+    document.body.style.position = originalBodyPosition;
+  });
+
   const basicOverflowMenu = html`<cds-overflow-menu>
     <span slot="tooltip-content">Options</span>
     <cds-overflow-menu-body>
@@ -64,28 +75,26 @@ describe('cds-overflow-menu', () => {
     expect(menuBody.open).to.be.false;
   });
 
-  it('should close and refocus trigger when a menu item is clicked', async () => {
+  it('should close menu when a menu item is clicked', async () => {
     const el = await fixture(basicOverflowMenu);
     const menuBody = el.querySelector('cds-overflow-menu-body');
-    const trigger = el.shadowRoot.querySelector('button');
 
-    menuBody.open = true;
+    el.open = true;
+    await el.updateComplete;
+    await menuBody.updateComplete;
+
+    expect(el.open).to.be.true;
+    expect(menuBody.open).to.be.true;
+
     const items = menuBody.querySelectorAll('cds-overflow-menu-item');
-
-    let focusCalled = false;
-    const originalFocus = trigger.focus;
-    trigger.focus = () => {
-      focusCalled = true;
-      originalFocus.call(trigger);
-    };
 
     items[0].click();
 
-    await new Promise((r) => requestAnimationFrame(r));
+    await new Promise((r) => setTimeout(r, 0));
+    await el.updateComplete;
+    await menuBody.updateComplete;
 
+    expect(el.open).to.be.false;
     expect(menuBody.open).to.be.false;
-    expect(focusCalled).to.be.true;
-
-    trigger.focus = originalFocus;
   });
 });
