@@ -174,4 +174,124 @@ describe('cds-select', () => {
     const el = await fixture(basicSelect);
     await expect(el).to.be.accessible();
   });
+
+  it('should not display invalid message if disabled', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        disabled
+        invalid
+        invalid-text="This is an error">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const error = el.shadowRoot.querySelector('.cds--form-requirement');
+    expect(error).to.not.exist;
+  });
+
+  it('should not display invalid message if readonly', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        readonly
+        invalid
+        invalid-text="This is an error">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const error = el.shadowRoot.querySelector('.cds--form-requirement');
+    expect(error).to.not.exist;
+  });
+
+  it('should not display warning message if disabled', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        disabled
+        warn
+        warn-text="This is a warning">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const warning = el.shadowRoot.querySelector('.cds--form-requirement');
+    expect(warning).to.not.exist;
+  });
+
+  it('should not display warning message if readonly', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        readonly
+        warn
+        warn-text="This is a warning">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const warning = el.shadowRoot.querySelector('.cds--form-requirement');
+    expect(warning).to.not.exist;
+  });
+
+  it('should not display warning styles if disabled', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        disabled
+        warn
+        warn-text="This is a warning">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const selectWrapper = el.shadowRoot.querySelector(
+      '.cds--select-input__wrapper'
+    );
+    expect(
+      selectWrapper.classList.contains('cds--select-input__wrapper--warning')
+    ).to.be.false;
+  });
+
+  it('should not display warning styles if readonly', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        readonly
+        warn
+        warn-text="This is a warning">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const selectWrapper = el.shadowRoot.querySelector(
+      '.cds--select-input__wrapper'
+    );
+    expect(
+      selectWrapper.classList.contains('cds--select-input__wrapper--warning')
+    ).to.be.false;
+  });
+
+  it('should not set aria-invalid if disabled', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        disabled
+        invalid
+        invalid-text="This is an error">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const internalSelect = el.shadowRoot.querySelector('select');
+    expect(internalSelect.getAttribute('aria-invalid')).to.equal('false');
+  });
+
+  it('should not set aria-invalid if readonly', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        readonly
+        invalid
+        invalid-text="This is an error">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const internalSelect = el.shadowRoot.querySelector('select');
+    expect(internalSelect.getAttribute('aria-invalid')).to.equal('false');
+  });
 });
