@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/menu/index.js';
+
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-menu', () => {
@@ -106,8 +107,8 @@ describe('cds-menu', () => {
 
       expect(el.position[0]).to.be.a('number');
       expect(el.position[1]).to.be.a('number');
-      expect(el.position[0]).to.be.lessThan(nearMaxX);
-      expect(el.position[1]).to.be.lessThan(nearMaxY);
+      expect(el.position[0]).to.be.at.most(nearMaxX);
+      expect(el.position[1]).to.be.at.most(nearMaxY);
     });
   });
 });
