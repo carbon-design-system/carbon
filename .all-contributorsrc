@@ -1564,6 +1564,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jvictorfsilva",
+      "name": "João Victor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68554147?v=4",
+      "profile": "https://github.com/jvictorfsilva",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
