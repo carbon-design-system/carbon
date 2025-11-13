@@ -21,3 +21,5 @@ deprecated:
     reason: This icon is no longer relevent
   - name: workday
     reason: We've switched to SuccessFactor
+  - name: user--research-tools
+    reason: has an existing duplicate with design research
