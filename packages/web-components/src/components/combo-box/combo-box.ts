@@ -196,7 +196,42 @@ class CDSComboBox extends CDSDropdown {
       Math.abs(scrollTop) < Math.abs(scrollBottom) ? scrollTop : scrollBottom;
   }
 
-  // Clear the query and selection when Escape is pressed.
+  protected _getSelectedItem(): CDSComboBoxItem | null {
+    if (!this.value) return null;
+    const items = Array.from(
+      this.querySelectorAll(
+        (this.constructor as typeof CDSDropdown).selectorItem
+      )
+    ) as CDSComboBoxItem[];
+    return items.find((it) => String(it.value) === String(this.value)) ?? null;
+  }
+
+  protected _revertInputToSelected(focus = true) {
+    const selected = this._getSelectedItem();
+    const text = selected?.textContent ?? '';
+
+    // Always set the model to the selected text (idempotent)
+    this._filterInputValue = text;
+
+    if (this._filterInputNode) {
+      this._filterInputNode.value = text;
+
+      if (focus) {
+        try {
+          this._filterInputNode.focus();
+          const len = text.length;
+          this._filterInputNode.setSelectionRange(len, len);
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+
+    this._resetFilteredItems();
+    this.removeAttribute('isClosable');
+    this.requestUpdate();
+  }
+
   protected _handleInputKeydown(event: KeyboardEvent) {
     if (event.key !== 'Escape') {
       return;
@@ -204,8 +239,13 @@ class CDSComboBox extends CDSDropdown {
     if (!this._filterInputNode) {
       return;
     }
-    if (this._filterInputNode.value || this.value) {
-      this._handleUserInitiatedClearInput();
+
+    // If there is a selected value, revert to it and keep focus (keyboard intent)
+    if (this.value) {
+      this._revertInputToSelected(true);
+    } else if (this._filterInputNode.value) {
+      // No selection, Escape should clear and keep focus
+      this._clearInputWithoutSelecting(true);
     }
   }
 
@@ -281,7 +321,20 @@ class CDSComboBox extends CDSDropdown {
       itemToSelect.selected = true;
       itemToSelect.setAttribute('aria-selected', 'true');
     }
+
+    // close dropdown first
     this._handleUserInitiatedToggle(false);
+
+    // ensure input is focused and caret is at the end, do this after close to avoid re-open
+    if (this._filterInputNode) {
+      try {
+        this._filterInputNode.focus();
+        const val = this._filterInputNode.value || '';
+        this._filterInputNode.setSelectionRange(val.length, val.length);
+      } catch {
+        /* ignore browsers that prevent setSelectionRange */
+      }
+    }
   }
 
   protected _renderLabel(): TemplateResult {
@@ -389,9 +442,32 @@ class CDSComboBox extends CDSDropdown {
     super.shouldUpdate(changedProperties);
     const { _selectedItemContent: selectedItemContent } = this;
     if (selectedItemContent && changedProperties.has('value')) {
-      this._filterInputValue = selectedItemContent?.textContent || '';
+      const selectedText = selectedItemContent?.textContent || '';
+      if (!this._filterInputValue || this._filterInputValue === selectedText) {
+        this._filterInputValue = selectedText;
+      }
     }
     return true;
+  }
+
+  protected _clearInputWithoutSelecting(focus = true) {
+    this._filterInputValue = '';
+    if (this._filterInputNode) {
+      this._filterInputNode.value = '';
+
+      if (focus) {
+        try {
+          this._filterInputNode.focus();
+          this._filterInputNode.setSelectionRange(0, 0);
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+
+    this._resetFilteredItems();
+    this.removeAttribute('isClosable');
+    this.requestUpdate();
   }
 
   updated(changedProperties) {
@@ -400,7 +476,35 @@ class CDSComboBox extends CDSDropdown {
       if (this.open && this._filterInputNode) {
         this._handleInput();
       } else if (!this.open) {
+        // pointer-close path, we must decide focus per your rules:
         this._resetFilteredItems();
+
+        if (this.value) {
+          // There is a committed selection, pointer-close should revert to selected AND blur
+          this._revertInputToSelected(false); // revert but do NOT focus
+          // blur explicitly to ensure focus leaves input
+          if (
+            this._filterInputNode &&
+            document.activeElement === this._filterInputNode
+          ) {
+            (this._filterInputNode as HTMLInputElement).blur();
+          }
+        } else if (
+          this._filterInputValue &&
+          this._filterInputValue.length > 0
+        ) {
+          // No committed selection, user had typed gibberish into an empty input:
+          // pointer-close should clear and blur
+          this._clearInputWithoutSelecting(false);
+          if (
+            this._filterInputNode &&
+            document.activeElement === this._filterInputNode
+          ) {
+            (this._filterInputNode as HTMLInputElement).blur();
+          }
+        } else {
+          // nothing typed and no selection, ensure no extra changes
+        }
       }
     }
     const { _listBoxNode: listBoxNode } = this;
