@@ -318,6 +318,22 @@ export const WithAILabel = {
   },
 };
 
+export const AutocompleteWithTypeahead = {
+  render: () => html`
+    <cds-combo-box
+      title-text="ComboBox title"
+      helper-text="Combobox helper text"
+      typeahead>
+      <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
+      <cds-combo-box-item value="apricot">Apricot</cds-combo-box-item>
+      <cds-combo-box-item value="avocado">Avocado</cds-combo-box-item>
+      <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
+      <cds-combo-box-item value="blackberry">Blackberry</cds-combo-box-item>
+      <cds-combo-box-item value="blueberry">Blueberry</cds-combo-box-item>
+      <cds-combo-box-item value="cantaloupe">Cantaloupe</cds-combo-box-item>
+    </cds-combo-box>
+  `,
+};
 export const WithLayer = {
   argTypes: controls,
   args: {
