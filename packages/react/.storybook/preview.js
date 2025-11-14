@@ -18,14 +18,143 @@ import './styles.scss';
 import '../src/feature-flags';
 
 import { white, g10, g90, g100 } from '@carbon/themes';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { breakpoints } from '@carbon/layout';
-import { GlobalTheme } from '../src/components/Theme';
+import { GlobalTheme, Theme } from '../src/components/Theme';
 import { Layout } from '../src/components/Layout';
 import { TextDirection } from '../src/components/Text';
+import { DocsContainer, Unstyled } from '@storybook/addon-docs/blocks';
+import { MDXProvider } from '@mdx-js/react';
+import {
+  Accordion,
+  AccordionItem,
+  AnchorLink,
+  AnchorLinks,
+  ArtDirection,
+  ArticleCard,
+  Aside,
+  Blockquote,
+  Button,
+  Caption,
+  CardGroup,
+  Code,
+  Column,
+  Divider,
+  DoDont,
+  DoDontRow,
+  GifPlayer,
+  Grid,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  ImageWrapper,
+  InlineCode,
+  InlineNotification,
+  Layer,
+  Link,
+  LI,
+  MiniCard,
+  OL,
+  PageDescription,
+  PageTable,
+  P,
+  Preview,
+  ResourceCard,
+  Row,
+  StorybookDemo,
+  Tabs,
+  Tab,
+  Title as DocTitle,
+  UL,
+  Video,
+} from '@carbon-labs/mdx-components';
 
 import theme from './theme';
 
+const customMarkdown = {
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
+  p: P,
+  ol: OL,
+  ul: UL,
+  li: LI,
+  a: Link,
+  blockquote: Blockquote,
+  table: PageTable,
+  pre: Code,
+  code: InlineCode,
+  hr: Divider,
+  AnchorLinks,
+  AnchorLink,
+  Caption,
+  Column,
+  DoDont,
+  DoDontRow,
+  GifPlayer,
+  PageDescription,
+  Row,
+  StorybookDemo,
+  Grid,
+  Tabs,
+  Tab,
+  InlineNotification,
+  ArtDirection,
+  Accordion,
+  AccordionItem,
+  ArticleCard,
+  Aside,
+  Button,
+  CardGroup,
+  ImageWrapper,
+  Layer,
+  MiniCard,
+  Preview,
+  ResourceCard,
+  Title: DocTitle,
+  Video,
+};
+
+const CarbonMdxContainer = ({ children, context, ...props }) => {
+  const csfFile = Array.from(context?.attachedCSFFiles || [])[0];
+  const customTag = csfFile?.meta?.parameters?.customTag;
+
+  React.useEffect(() => {
+    document.documentElement.classList.toggle('cds--mdx', Boolean(customTag));
+  }, [customTag]);
+
+  if (!customTag) {
+    return (
+      <DocsContainer context={context} {...props}>
+        {children}
+      </DocsContainer>
+    );
+  }
+
+  return (
+    <MDXProvider components={customMarkdown}>
+      <DocsContainer context={context} {...props}>
+        <Unstyled>
+          {/* Force prose docs to g10 for stable contrast and spacing */}
+          <Theme
+            style={{
+              paddingBottom: '5rem',
+              // paddingTop: '4rem',
+            }}
+            theme="g10">
+            {children}
+          </Theme>
+        </Unstyled>
+      </DocsContainer>
+    </MDXProvider>
+  );
+};
 const devTools = {
   layoutSize: {
     description: "Set the layout context's size",
@@ -194,6 +323,12 @@ const parameters = {
         <Stories includePrimary={false} />
       </>
     ),
+    container: CarbonMdxContainer,
+    options: {
+      storySort: {
+        order: ['Components'],
+      },
+    },
     codePanel: true,
   },
   viewport: {
@@ -337,8 +472,14 @@ const parameters = {
 
 const decorators = [
   (Story, context) => {
-    const { layoutDensity, layoutSize, locale, dir, theme } = context.globals;
+    let { theme } = context.globals;
+    const { layoutDensity, layoutSize, locale, dir } = context.globals;
     const [randomKey, setRandomKey] = React.useState(1);
+    const isMarkdown = context?.kind?.startsWith('MDX Components');
+
+    if (isMarkdown) {
+      theme = 'g10';
+    }
 
     React.useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);

@@ -23,6 +23,7 @@ export default {
     AccordionSkeleton,
   },
   parameters: {
+    customTag: 'accordion-special',
     docs: {
       page: mdx,
     },
