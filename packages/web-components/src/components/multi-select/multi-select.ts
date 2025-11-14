@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, TemplateResult } from 'lit';
+import { html, PropertyValues, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
@@ -79,6 +79,11 @@ class CDSMultiSelect extends CDSDropdown {
     return Boolean(this.filterable);
   }
 
+  protected willUpdate(changedProperties: PropertyValues) {
+    this._shouldTriggerBeFocusable = !this.filterable;
+    super.willUpdate(changedProperties);
+  }
+
   protected get _menuInputNode(): HTMLInputElement | null {
     return this.filterable ? (this._filterInputNode ?? null) : null;
   }
@@ -97,7 +102,15 @@ class CDSMultiSelect extends CDSDropdown {
     menuOpen: boolean;
     isInputTarget: boolean;
   }) {
-    return !menuOpen || isInputTarget;
+    if (!menuOpen) {
+      return true;
+    }
+
+    if (!isInputTarget) {
+      return false;
+    }
+
+    return Boolean(this._filterInputNode?.value);
   }
 
   /**

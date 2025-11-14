@@ -54,7 +54,7 @@ $css--plex: true !default;
   @include ai-gradient;
 }
 
-:host(#{$prefix}-dropdown[invalid]) {
+:host(#{$prefix}-dropdown[invalid]:not([disabled]):not([read-only])) {
   .#{$prefix}--form__helper-text {
     color: $text-error !important; /* stylelint-disable-line declaration-no-important */
   }
@@ -66,6 +66,21 @@ $css--plex: true !default;
   .#{$prefix}--list-box {
     background-color: transparent;
     border-block-end-color: $border-subtle;
+  }
+}
+
+:host(#{$prefix}-dropdown[ai-label][read-only]),
+:host(#{$prefix}-dropdown[ai-label][disabled]) {
+  .#{$prefix}--list-box {
+    border-block-end-color: $ai-border-strong;
+  }
+
+  .#{$prefix}--list-box__field {
+    border-block-end: 1px solid $ai-border-strong;
+  }
+
+  ::slotted(#{$prefix}-ai-label)::before {
+    display: none;
   }
 }
 
@@ -97,8 +112,12 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown[type='inline'][warn]),
-:host(#{$prefix}-dropdown[type='inline'][invalid]) {
+:host(
+    #{$prefix}-dropdown[type='inline'][warn]:not([disabled]):not([read-only])
+  ),
+:host(
+    #{$prefix}-dropdown[type='inline'][invalid]:not([disabled]):not([read-only])
+  ) {
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding-inline-end: $spacing-10;
@@ -116,7 +135,9 @@ $css--plex: true !default;
   padding-inline-end: $spacing-10;
 }
 
-:host(#{$prefix}-dropdown[ai-label][type='inline']:not([invalid]))
+:host(#{$prefix}-dropdown[ai-label][type='inline']:not([invalid])),
+:host(#{$prefix}-dropdown[ai-label][type='inline'][read-only]),
+:host(#{$prefix}-dropdown[ai-label][type='inline'][disabled])
   .#{$prefix}--list-box__field {
   border-block-end: 1px solid $ai-border-strong;
 }
@@ -133,10 +154,15 @@ $css--plex: true !default;
   inset-inline-end: $spacing-04;
 }
 
+:host(#{$prefix}-dropdown[warn]:not([disabled]):not([read-only])) {
+  .#{$prefix}--form__helper-text {
+    color: $text-primary;
+  }
+}
+
 :host(#{$prefix}-dropdown[warn]),
 :host(#{$prefix}-dropdown[invalid]) {
   .#{$prefix}--form__helper-text {
-    color: $text-primary;
     grid-column: 2;
   }
 
@@ -294,8 +320,8 @@ $divider-width: 1px;
   }
 }
 
-:host(#{$prefix}-dropdown[ai-label][warn]),
-:host(#{$prefix}-dropdown[ai-label][invalid]) {
+:host(#{$prefix}-dropdown[ai-label][warn]:not([disabled]):not([read-only])),
+:host(#{$prefix}-dropdown[ai-label][invalid]:not([disabled]):not([read-only])) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-12;

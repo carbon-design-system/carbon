@@ -204,6 +204,8 @@ class CDSDropdown extends ValidityMixin(
     if (!this.open) {
       switch (action) {
         case DROPDOWN_KEYBOARD_ACTION.NAVIGATING: {
+          const shouldKeepInputFocus = this._shouldRetainMenuInputFocus(event);
+          const menuInputNode = this._menuInputNode;
           if (this.readOnly) {
             event.preventDefault();
             return;
@@ -250,7 +252,9 @@ class CDSDropdown extends ValidityMixin(
               }
 
               const menu = this.shadowRoot?.getElementById('menu-body');
-              if (menu) {
+              if (shouldKeepInputFocus && menuInputNode) {
+                menuInputNode.focus({ preventScroll: true });
+              } else if (menu) {
                 menu.focus();
               }
             }
@@ -270,7 +274,11 @@ class CDSDropdown extends ValidityMixin(
         case DROPDOWN_KEYBOARD_ACTION.NAVIGATING: {
           event.preventDefault();
           const menu = this.shadowRoot?.getElementById('menu-body');
-          if (menu) {
+          const menuInputNode = this._menuInputNode;
+          const shouldKeepInputFocus = this._shouldRetainMenuInputFocus(event);
+          if (shouldKeepInputFocus && menuInputNode) {
+            menuInputNode.focus({ preventScroll: true });
+          } else if (menu) {
             menu.focus();
           }
           this._navigate(NAVIGATION_DIRECTION[key]);
@@ -391,6 +399,18 @@ class CDSDropdown extends ValidityMixin(
     input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
   }
 
+  private _shouldRetainMenuInputFocus(event: Event) {
+    if (!this._supportsMenuInputFiltering || !this._menuInputNode) {
+      return false;
+    }
+    if (event.target === this._menuInputNode) {
+      return true;
+    }
+    const path =
+      typeof event.composedPath === 'function' ? event.composedPath() : [];
+    return path.includes(this._menuInputNode);
+  }
+
   /**
    * Handles keypress events (Space, Enter)
    */
@@ -491,6 +511,14 @@ class CDSDropdown extends ValidityMixin(
 
     const shadowActiveElement = this.shadowRoot?.activeElement;
     if (menu && shadowActiveElement && menu.contains(shadowActiveElement)) {
+      return;
+    }
+
+    if (
+      this._supportsMenuInputFiltering &&
+      this._menuInputNode &&
+      this.shadowRoot?.activeElement === this._menuInputNode
+    ) {
       return;
     }
 
