@@ -70,6 +70,22 @@ class CDSDropdown extends ValidityMixin(
    */
   protected _hasAILabel = false;
 
+  /**
+   * Currently slotted AI decorator nodes (`cds-ai-label`/slug) with listeners attached.
+   */
+  private _aiDecoratorNodes: HTMLElement[] = [];
+
+  /**
+   * Handles interaction on an AI decorator while the menu is open.
+   */
+  private _handleAIDecoratorInteraction = () => {
+    if (!this.open) {
+      return;
+    }
+
+    this._handleUserInitiatedToggle(false);
+  };
+
   @state()
   protected _activeDescendant?: string;
 
@@ -118,13 +134,12 @@ class CDSDropdown extends ValidityMixin(
    *   Absense of this argument means clearing selection, which may be handled by a derived class.
    */
   protected _selectionDidChange(itemToSelect?: CDSDropdownItem) {
+    const constructor = this.constructor as typeof CDSDropdown;
     if (itemToSelect) {
       this.value = itemToSelect.value;
       this._activeDescendant = itemToSelect.id;
       forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSDropdown).selectorItemSelected
-        ),
+        this.querySelectorAll(constructor.selectorItemSelected),
         (item) => {
           (item as CDSDropdownItem).selected = false;
           item.setAttribute('aria-selected', 'false');
@@ -132,7 +147,9 @@ class CDSDropdown extends ValidityMixin(
       );
       itemToSelect.selected = true;
       itemToSelect.setAttribute('aria-selected', 'true');
-      this._handleUserInitiatedToggle(false);
+      this._updateSelectedNextSibling(itemToSelect);
+    } else {
+      this._updateSelectedNextSibling();
     }
   }
 
@@ -148,7 +165,22 @@ class CDSDropdown extends ValidityMixin(
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     if (this.shadowRoot!.contains(event.target as Node)) {
-      this._handleUserInitiatedToggle();
+      const opening = !this.open;
+      const constructor = this.constructor as typeof CDSDropdown;
+      const selectedItem = this.querySelector(
+        constructor.selectorItemSelected
+      ) as CDSDropdownItem | null;
+      if (opening) {
+        const shouldFocusMenu = Boolean(selectedItem);
+        this._handleUserInitiatedToggle(true, {
+          focusMenu: shouldFocusMenu,
+          highlightSelectedOnOpen: shouldFocusMenu,
+        });
+      } else {
+        this._handleUserInitiatedToggle(false, {
+          restoreTriggerFocus: true,
+        });
+      }
     } else {
       const item = (event.target as Element).closest(
         (this.constructor as typeof CDSDropdown).selectorItem
@@ -163,62 +195,279 @@ class CDSDropdown extends ValidityMixin(
    * Handler for the `keydown` event on the top-level element in the shadow DOM.
    */
   protected _handleKeydownInner(event: KeyboardEvent) {
+    if (this._handleMenuInputKeydown(event)) {
+      return;
+    }
+
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
     if (!this.open) {
       switch (action) {
-        case DROPDOWN_KEYBOARD_ACTION.NAVIGATING:
-          this._handleUserInitiatedToggle(true);
-          // If this menu gets open with an arrow key, reset the highlight
-          this._clearHighlight();
+        case DROPDOWN_KEYBOARD_ACTION.NAVIGATING: {
+          const shouldKeepInputFocus = this._shouldRetainMenuInputFocus(event);
+          const menuInputNode = this._menuInputNode;
+          if (this.readOnly) {
+            event.preventDefault();
+            return;
+          }
+          const direction =
+            NAVIGATION_DIRECTION[key as keyof typeof NAVIGATION_DIRECTION];
+
+          event.preventDefault();
+          if (direction === -1) {
+            break;
+          }
+          const constructor = this.constructor as typeof CDSDropdown;
+          const selectedItem = this.querySelector(
+            constructor.selectorItemSelected
+          ) as CDSDropdownItem | null;
+          const shouldHighlightSelected = Boolean(selectedItem);
+
+          this._handleUserInitiatedToggle(true, {
+            focusMenu: false,
+            highlightSelectedOnOpen: shouldHighlightSelected,
+          });
+
+          this.updateComplete.then(() => {
+            const constructor = this.constructor as typeof CDSDropdown;
+            const items = this.querySelectorAll(constructor.selectorItem);
+            if (items.length > 0) {
+              const selectedItem = this.querySelector(
+                constructor.selectorItemSelected
+              ) as CDSDropdownItem | null;
+
+              const firstEnabledItem = Array.from(items).find(
+                (item) => !(item as CDSDropdownItem).hasAttribute('disabled')
+              ) as CDSDropdownItem | undefined;
+
+              const initialItem =
+                selectedItem && !selectedItem.hasAttribute('disabled')
+                  ? selectedItem
+                  : (firstEnabledItem ?? null);
+
+              if (initialItem) {
+                this._setHighlightedItem(initialItem, { scrollIntoView: true });
+              } else {
+                this._clearHighlight();
+              }
+
+              const menu = this.shadowRoot?.getElementById('menu-body');
+              if (shouldKeepInputFocus && menuInputNode) {
+                menuInputNode.focus({ preventScroll: true });
+              } else if (menu) {
+                menu.focus();
+              }
+            }
+          });
           break;
+        }
         default:
           break;
       }
     } else {
       switch (action) {
         case DROPDOWN_KEYBOARD_ACTION.CLOSING:
-          this._handleUserInitiatedToggle(false);
+          this._handleUserInitiatedToggle(false, {
+            restoreTriggerFocus: true,
+          });
           break;
-        case DROPDOWN_KEYBOARD_ACTION.NAVIGATING:
+        case DROPDOWN_KEYBOARD_ACTION.NAVIGATING: {
           event.preventDefault();
+          const menu = this.shadowRoot?.getElementById('menu-body');
+          const menuInputNode = this._menuInputNode;
+          const shouldKeepInputFocus = this._shouldRetainMenuInputFocus(event);
+          if (shouldKeepInputFocus && menuInputNode) {
+            menuInputNode.focus({ preventScroll: true });
+          } else if (menu) {
+            menu.focus();
+          }
           this._navigate(NAVIGATION_DIRECTION[key]);
           break;
+        }
         default:
           break;
       }
     }
   }
 
+  private _handleMenuInputKeydown(event: KeyboardEvent) {
+    if (
+      event.defaultPrevented ||
+      !this._supportsMenuInputFiltering ||
+      !this._menuInputNode
+    ) {
+      return false;
+    }
+
+    const input = this._menuInputNode;
+    if (!input) {
+      return false;
+    }
+    const isInputTarget = event.target === input;
+
+    const hasFilterValue = Boolean(input.value || this.value);
+    if (
+      event.key === 'Escape' &&
+      hasFilterValue &&
+      this._shouldClearMenuInputOnEscape({
+        event,
+        menuOpen: this.open,
+        isInputTarget,
+      })
+    ) {
+      event.preventDefault();
+      this._clearMenuInputFiltering();
+      return true;
+    }
+
+    if (!this.open || isInputTarget) {
+      return false;
+    }
+
+    if (this._shouldForwardKeyToMenuInput(event)) {
+      event.preventDefault();
+      this._forwardKeyToMenuInput(event, input);
+      return true;
+    }
+
+    return false;
+  }
+
+  protected _shouldClearMenuInputOnEscape({
+    menuOpen,
+  }: {
+    event: KeyboardEvent;
+    menuOpen: boolean;
+    isInputTarget: boolean;
+  }) {
+    return menuOpen;
+  }
+
+  protected get _supportsMenuInputFiltering() {
+    return false;
+  }
+
+  protected get _menuInputNode(): HTMLInputElement | null {
+    return null;
+  }
+
+  protected _clearMenuInputFiltering() {}
+
+  private _shouldForwardKeyToMenuInput(event: KeyboardEvent) {
+    if (event.altKey || event.metaKey || event.ctrlKey) {
+      return false;
+    }
+    const { key } = event;
+    if (key === 'Backspace' || key === 'Delete') {
+      return true;
+    }
+    return key.length === 1;
+  }
+
+  private _forwardKeyToMenuInput(
+    event: KeyboardEvent,
+    input: HTMLInputElement
+  ) {
+    input.focus({ preventScroll: true });
+    const key = event.key;
+    const selectionStart = input.selectionStart ?? input.value.length;
+    const selectionEnd = input.selectionEnd ?? input.value.length;
+    if (key === 'Backspace') {
+      if (selectionStart === 0 && selectionEnd === 0) {
+        return;
+      }
+      const start =
+        selectionStart === selectionEnd
+          ? Math.max(0, selectionStart - 1)
+          : selectionStart;
+      input.setRangeText('', start, selectionEnd, 'end');
+    } else if (key === 'Delete') {
+      if (
+        selectionStart === input.value.length &&
+        selectionStart === selectionEnd
+      ) {
+        return;
+      }
+      const end =
+        selectionStart === selectionEnd
+          ? Math.min(input.value.length, selectionEnd + 1)
+          : selectionEnd;
+      input.setRangeText('', selectionStart, end, 'end');
+    } else if (key.length === 1) {
+      input.setRangeText(key, selectionStart, selectionEnd, 'end');
+    }
+    input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+  }
+
+  private _shouldRetainMenuInputFocus(event: Event) {
+    if (!this._supportsMenuInputFiltering || !this._menuInputNode) {
+      return false;
+    }
+    if (event.target === this._menuInputNode) {
+      return true;
+    }
+    const path =
+      typeof event.composedPath === 'function' ? event.composedPath() : [];
+    return path.includes(this._menuInputNode);
+  }
+
   /**
-   * Handler for the `keypress` event on the top-level element in the shadow DOM.
+   * Handles keypress events (Space, Enter)
    */
   protected _handleKeypressInner(event: KeyboardEvent) {
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
+    // When closed
     if (!this.open) {
+      if (this.readOnly && action === DROPDOWN_KEYBOARD_ACTION.TRIGGERING) {
+        if (key === ' ' || key === 'Space') {
+          event.preventDefault();
+        }
+        return;
+      }
       switch (action) {
-        case DROPDOWN_KEYBOARD_ACTION.TRIGGERING:
-          this._handleUserInitiatedToggle(true);
+        case DROPDOWN_KEYBOARD_ACTION.TRIGGERING: {
+          if (key === ' ' || key === 'Space') {
+            event.preventDefault();
+          }
+
+          const constructor = this.constructor as typeof CDSDropdown;
+          const selectedItem = this.querySelector(
+            constructor.selectorItemSelected
+          ) as CDSDropdownItem | null;
+          const shouldFocusMenu = Boolean(selectedItem);
+
+          this._handleUserInitiatedToggle(true, {
+            focusMenu: shouldFocusMenu,
+            highlightSelectedOnOpen: shouldFocusMenu,
+          });
           break;
+        }
         default:
           break;
       }
     } else {
+      // When open
       switch (action) {
-        case DROPDOWN_KEYBOARD_ACTION.TRIGGERING:
-          {
-            const constructor = this.constructor as typeof CDSDropdown;
-            const highlightedItem = this.querySelector(
-              constructor.selectorItemHighlighted
-            ) as CDSDropdownItem;
-            if (highlightedItem) {
-              this._handleUserInitiatedSelectItem(highlightedItem);
-            } else {
-              this._handleUserInitiatedToggle(false);
-            }
+        case DROPDOWN_KEYBOARD_ACTION.TRIGGERING: {
+          const constructor = this.constructor as typeof CDSDropdown;
+          const selectedItem = this.querySelector(
+            constructor.selectorItemSelected
+          ) as CDSDropdownItem | null;
+          const highlightedItem = this.querySelector(
+            constructor.selectorItemHighlighted
+          ) as CDSDropdownItem;
+          if (highlightedItem) {
+            this._handleUserInitiatedSelectItem(highlightedItem);
+          } else if (selectedItem) {
+            this._handleUserInitiatedSelectItem(selectedItem);
+          } else {
+            this._handleUserInitiatedToggle(false, {
+              restoreTriggerFocus: true,
+            });
           }
           break;
+        }
         default:
           break;
       }
@@ -230,6 +479,52 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param event The event.
    */
+
+  protected _handleMouseoverInner(event: MouseEvent) {
+    if (!this.open) {
+      return;
+    }
+
+    const item = this._getDropdownItemFromEvent(event);
+    if (!item) {
+      return;
+    }
+
+    if (item.hasAttribute('disabled')) {
+      this._clearHighlight();
+      return;
+    }
+
+    this._setHighlightedItem(item);
+  }
+
+  protected _handleMouseleaveInner(event: MouseEvent) {
+    if (!this.open) {
+      return;
+    }
+
+    const menu = this.shadowRoot?.getElementById('menu-body');
+    const relatedTarget = event.relatedTarget as Node | null;
+    if (menu && relatedTarget && menu.contains(relatedTarget)) {
+      return;
+    }
+
+    const shadowActiveElement = this.shadowRoot?.activeElement;
+    if (menu && shadowActiveElement && menu.contains(shadowActiveElement)) {
+      return;
+    }
+
+    if (
+      this._supportsMenuInputFiltering &&
+      this._menuInputNode &&
+      this.shadowRoot?.activeElement === this._menuInputNode
+    ) {
+      return;
+    }
+
+    this._clearHighlight();
+  }
+
   @HostListener('focusout')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -257,7 +552,7 @@ class CDSDropdown extends ValidityMixin(
    * Handles `slotchange` event.
    */
   protected _handleAILabelSlotChange({ target }: Event) {
-    const hasContent = (target as HTMLSlotElement)
+    const decoratorNodes = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
@@ -271,9 +566,35 @@ class CDSDropdown extends ValidityMixin(
           : false
       );
 
-    this._hasAILabel = Boolean(hasContent);
-    (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
+    const decoratorElements = decoratorNodes.filter(
+      (node): node is HTMLElement => node instanceof HTMLElement
+    );
+
+    this._updateAIDecoratorListeners(decoratorElements);
+
+    this._hasAILabel = Boolean(decoratorElements.length);
+    decoratorElements[0]?.setAttribute('size', 'mini');
     this.requestUpdate();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._updateAIDecoratorListeners([]);
+  }
+
+  /**
+   * Updates listeners for AI decorator nodes to ensure only one menu stays open.
+   */
+  private _updateAIDecoratorListeners(nodes: HTMLElement[]) {
+    this._aiDecoratorNodes.forEach((node) => {
+      node.removeEventListener('click', this._handleAIDecoratorInteraction);
+    });
+
+    this._aiDecoratorNodes = nodes;
+
+    this._aiDecoratorNodes.forEach((node) => {
+      node.addEventListener('click', this._handleAIDecoratorInteraction);
+    });
   }
 
   /**
@@ -285,6 +606,8 @@ class CDSDropdown extends ValidityMixin(
     if (item?.hasAttribute('disabled')) {
       return;
     }
+
+    const shouldClose = this._shouldCloseAfterSelection(item);
 
     if (this._selectionShouldChange(item)) {
       const init = {
@@ -303,8 +626,23 @@ class CDSDropdown extends ValidityMixin(
         this._selectionDidChange(item);
         const afterSelectEvent = new CustomEvent(constructor.eventSelect, init);
         this.dispatchEvent(afterSelectEvent);
+        if (shouldClose) {
+          this._handleUserInitiatedToggle(false, {
+            restoreTriggerFocus: true,
+          });
+        }
       }
+    } else if (item && shouldClose) {
+      this._handleUserInitiatedToggle(false, {
+        restoreTriggerFocus: true,
+      });
     }
+  }
+
+  // Default dropdowns close after user selection.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+  protected _shouldCloseAfterSelection(_item?: CDSDropdownItem) {
+    return true;
   }
 
   /**
@@ -312,7 +650,18 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param [force] If specified, forces the open state to the given one.
    */
-  protected _handleUserInitiatedToggle(force = !this.open) {
+  protected _handleUserInitiatedToggle(
+    force = !this.open,
+    {
+      restoreTriggerFocus = false,
+      focusMenu = true,
+      highlightSelectedOnOpen = false,
+    }: {
+      restoreTriggerFocus?: boolean;
+      focusMenu?: boolean;
+      highlightSelectedOnOpen?: boolean;
+    } = {}
+  ) {
     const { eventBeforeToggle, eventToggle } = this
       .constructor as typeof CDSDropdown;
 
@@ -328,15 +677,34 @@ class CDSDropdown extends ValidityMixin(
     if (!disabled) {
       if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
         this.open = force;
-        if (!this.open) {
-          forEach(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSDropdown).selectorItemHighlighted
-            ),
-            (item) => {
-              (item as CDSDropdownItem).highlighted = false;
+        if (this.open) {
+          const activeElement = this.shadowRoot?.activeElement;
+          const preserveFocusTarget =
+            activeElement instanceof HTMLInputElement ? activeElement : null;
+          this.updateComplete.then(() => {
+            if (preserveFocusTarget) {
+              preserveFocusTarget.focus();
+            } else if (focusMenu) {
+              const menu = this.shadowRoot?.getElementById('menu-body');
+              menu?.focus();
+            } else if (this._shouldTriggerBeFocusable) {
+              const trigger = this.shadowRoot?.getElementById('trigger-button');
+              trigger?.focus();
             }
-          );
+
+            if (highlightSelectedOnOpen) {
+              this._highlightSelectedItem();
+            }
+          });
+        } else if (restoreTriggerFocus && this._shouldTriggerBeFocusable) {
+          this.updateComplete.then(() => {
+            const trigger = this.shadowRoot?.getElementById('trigger-button');
+            trigger?.focus();
+          });
+        }
+
+        if (!this.open) {
+          this._clearHighlight();
         }
         this.requestUpdate();
         this.dispatchEvent(new CustomEvent(eventToggle, init));
@@ -348,54 +716,136 @@ class CDSDropdown extends ValidityMixin(
    * Clears the selection of dropdown items.
    */
   protected _clearHighlight() {
-    forEach(
-      this.querySelectorAll(
-        (this.constructor as typeof CDSDropdown).selectorItem
-      ),
-      (item) => {
-        (item as CDSDropdownItem).highlighted = false;
-      }
-    );
+    this._setHighlightedItem();
   }
 
-  /**
-   * Navigate through dropdown items.
-   *
-   * @param direction `-1` to navigate backward, `1` to navigate forward.
-   */
+  protected _getDropdownItemFromEvent(event: Event): CDSDropdownItem | null {
+    const constructor = this.constructor as typeof CDSDropdown;
+    const selector = constructor.selectorItem;
+    const path = event.composedPath();
+
+    for (const node of path) {
+      if (
+        node instanceof Element &&
+        typeof node.matches === 'function' &&
+        node.matches(selector)
+      ) {
+        return node as CDSDropdownItem;
+      }
+    }
+
+    return null;
+  }
+
+  protected _setHighlightedItem(
+    item?: CDSDropdownItem | null,
+    { scrollIntoView = false }: { scrollIntoView?: boolean } = {}
+  ) {
+    const constructor = this.constructor as typeof CDSDropdown;
+    const items = this.querySelectorAll(constructor.selectorItem);
+    const target =
+      item && !item.hasAttribute('disabled') ? (item as CDSDropdownItem) : null;
+
+    forEach(items, (listItem) => {
+      const dropdownItem = listItem as CDSDropdownItem;
+      dropdownItem.highlighted = dropdownItem === target;
+      dropdownItem.removeAttribute('highlighted-next-sibling');
+    });
+
+    if (target) {
+      const nextSibling = this._getNextDropdownItem(target);
+      if (nextSibling) {
+        nextSibling.setAttribute('highlighted-next-sibling', '');
+      }
+
+      const itemId = target.id;
+      if (itemId) {
+        this._activeDescendant = itemId;
+      }
+
+      if (scrollIntoView) {
+        target.scrollIntoView({ block: 'nearest' });
+      }
+    } else {
+      this._activeDescendant = undefined;
+    }
+  }
+
+  protected _getNextDropdownItem(
+    item: CDSDropdownItem
+  ): CDSDropdownItem | null {
+    const constructor = this.constructor as typeof CDSDropdown;
+    const selector = constructor.selectorItem;
+    let next = item.nextElementSibling as Element | null;
+
+    while (next) {
+      if (typeof next.matches === 'function' && next.matches(selector)) {
+        return next as CDSDropdownItem;
+      }
+      next = next.nextElementSibling as Element | null;
+    }
+
+    return null;
+  }
+
+  protected _updateSelectedNextSibling(item?: CDSDropdownItem | null): void {
+    const constructor = this.constructor as typeof CDSDropdown;
+    forEach(this.querySelectorAll(constructor.selectorItem), (listItem) => {
+      (listItem as CDSDropdownItem).removeAttribute('selected-next-sibling');
+    });
+
+    if (item) {
+      const nextSibling = this._getNextDropdownItem(item);
+      if (nextSibling) {
+        nextSibling.setAttribute('selected-next-sibling', '');
+      }
+    }
+  }
+
+  protected _highlightSelectedItem() {
+    const constructor = this.constructor as typeof CDSDropdown;
+    const selectedItem = this.querySelector(
+      constructor.selectorItemSelected
+    ) as CDSDropdownItem | null;
+
+    if (selectedItem && !selectedItem.hasAttribute('disabled')) {
+      this._setHighlightedItem(selectedItem, { scrollIntoView: true });
+    } else {
+      this._clearHighlight();
+    }
+  }
+
   protected _navigate(direction: number) {
     const constructor = this.constructor as typeof CDSDropdown;
     const items = this.querySelectorAll(constructor.selectorItem);
+    if (!items.length) {
+      return;
+    }
     const highlightedItem = this.querySelector(
       constructor.selectorItemHighlighted
     );
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const highlightedIndex = indexOf(items, highlightedItem!);
-    let nextIndex = highlightedIndex + direction;
+    let nextIndex =
+      highlightedIndex === -1
+        ? direction > 0
+          ? 0
+          : items.length - 1
+        : highlightedIndex + direction;
 
-    if (items[nextIndex]?.hasAttribute('disabled')) {
+    while (
+      nextIndex >= 0 &&
+      nextIndex < items.length &&
+      items[nextIndex]?.hasAttribute('disabled')
+    ) {
       nextIndex += direction;
     }
-    if (nextIndex < 0) {
-      nextIndex = items.length - 1;
+    if (nextIndex < 0 || nextIndex >= items.length) {
+      return;
     }
-    if (nextIndex >= items.length) {
-      nextIndex = 0;
-    }
-    forEach(items, (item, i) => {
-      (item as CDSDropdownItem).highlighted = i === nextIndex;
-    });
 
-    const nextItem = items[nextIndex];
-    // Using `{ block: 'nearest' }` to prevent scrolling unless scrolling is absolutely necessary.
-    // `scrollIntoViewOptions` seems to work in latest Safari despite of MDN/caniuse table.
-    // IE falls back to the old behavior.
-    nextItem.scrollIntoView({ block: 'nearest' });
-
-    const nextItemId = nextItem.id;
-    if (nextItemId) {
-      this._activeDescendant = nextItemId;
-    }
+    const nextItem = items[nextIndex] as CDSDropdownItem;
+    this._setHighlightedItem(nextItem, { scrollIntoView: true });
   }
 
   /**
@@ -479,7 +929,7 @@ class CDSDropdown extends ValidityMixin(
    * 'aria-label' of the ListBox component.
    * Specify a label to be read by screen readers on the container node
    */
-  @property({ type: String, reflect: true, attribute: 'aria-label' })
+  @property({ type: String, attribute: 'aria-label' })
   ariaLabel = '';
 
   /**
@@ -622,14 +1072,19 @@ class CDSDropdown extends ValidityMixin(
         (elem as CDSDropdownItem).size = this.size;
       });
     }
-    if (changedProperties.has('disabled') && this.disabled) {
+    if (changedProperties.has('disabled')) {
       const { disabled } = this;
       // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(this.querySelectorAll(selectorItem), (elem) => {
+        const item = elem as CDSDropdownItem;
         if (disabled) {
-          (elem as CDSDropdownItem).disabled = disabled;
-        } else {
-          (elem as CDSDropdownItem).removeAttribute('disabled');
+          if (!item.disabled) {
+            item.setAttribute('parent-disabled', '');
+          }
+          item.disabled = true;
+        } else if (item.hasAttribute('parent-disabled')) {
+          item.removeAttribute('parent-disabled');
+          item.disabled = false;
         }
       });
     }
@@ -640,18 +1095,19 @@ class CDSDropdown extends ValidityMixin(
         (elem as CDSDropdownItem).selected =
           (elem as CDSDropdownItem).value === this.value;
       });
-      const item = find(
+      const selectedItem = find(
         this.querySelectorAll(selectorItem),
         (elem) => (elem as CDSDropdownItem).value === this.value
-      );
-      if (item) {
+      ) as CDSDropdownItem | undefined;
+      if (selectedItem) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const range = this.ownerDocument!.createRange();
-        range.selectNodeContents(item);
+        range.selectNodeContents(selectedItem);
         this._selectedItemContent = range.cloneContents();
       } else {
         this._selectedItemContent = null;
       }
+      this._updateSelectedNextSibling(selectedItem);
     }
     return true;
   }
@@ -664,7 +1120,6 @@ class CDSDropdown extends ValidityMixin(
       : this.removeAttribute('ai-label');
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
-
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
@@ -681,12 +1136,25 @@ class CDSDropdown extends ValidityMixin(
   }
 
   /**
+   * Normalizes validation props based on disabled and readOnly states
+   */
+  protected get _normalizedProps() {
+    const { disabled, readOnly, invalid, warn } = this;
+    return {
+      disabled: !readOnly && disabled,
+      invalid: !readOnly && !disabled && invalid,
+      warn: !readOnly && !invalid && !disabled && warn,
+    };
+  }
+
+  /**
    * The CSS class list for dropdown listbox
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   protected get _classes(): any {
-    const { disabled, size, type, invalid, open, warn } = this;
+    const { size, type, open } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+    const normalizedProps = this._normalizedProps;
 
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
@@ -695,12 +1163,12 @@ class CDSDropdown extends ValidityMixin(
     return classMap({
       [`${prefix}--dropdown`]: true,
       [`${prefix}--list-box`]: true,
-      [`${prefix}--list-box--disabled`]: disabled,
+      [`${prefix}--list-box--disabled`]: normalizedProps.disabled,
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warn`]: warn,
+      [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
+      [`${prefix}--dropdown--warn`]: normalizedProps.warn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
@@ -711,9 +1179,7 @@ class CDSDropdown extends ValidityMixin(
     const {
       ariaLabel,
       _classes: classes,
-      disabled,
       helperText,
-      invalid,
       invalidText,
       open,
       toggleLabelClosed,
@@ -726,11 +1192,14 @@ class CDSDropdown extends ValidityMixin(
       _handleClickInner: handleClickInner,
       _handleKeydownInner: handleKeydownInner,
       _handleKeypressInner: handleKeypressInner,
+      _handleMouseleaveInner: handleMouseleaveInner,
+      _handleMouseoverInner: handleMouseoverInner,
       _handleSlotchangeHelperText: handleSlotchangeHelperText,
       _handleAILabelSlotChange: handleAILabelSlotChange,
       _slotHelperTextNode: slotHelperTextNode,
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+    const normalizedProps = this._normalizedProps;
 
     let activeDescendantFallback: string | undefined;
     if (open && !activeDescendant) {
@@ -741,7 +1210,7 @@ class CDSDropdown extends ValidityMixin(
 
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
     const iconContainerClasses = classMap({
       [`${prefix}--list-box__menu-icon`]: true,
@@ -753,20 +1222,23 @@ class CDSDropdown extends ValidityMixin(
       invalidText ||
       warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const validityIcon = !invalid
+    const validityIcon = !normalizedProps.invalid
       ? undefined
       : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon =
-      !warn || (invalid && warn)
-        ? undefined
-        : iconLoader(WarningAltFilled16, {
-            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-            'aria-label': toggleLabel,
-          });
-    const helperMessage = invalid ? invalidText : warn ? warnText : helperText;
+    const warningIcon = !normalizedProps.warn
+      ? undefined
+      : iconLoader(WarningAltFilled16, {
+          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+          'aria-label': toggleLabel,
+        });
+    const helperMessage = normalizedProps.invalid
+      ? invalidText
+      : normalizedProps.warn
+        ? warnText
+        : helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -776,7 +1248,9 @@ class CDSDropdown extends ValidityMixin(
         class="${prefix}--list-box__menu"
         role="listbox"
         tabindex="-1"
-        ?hidden=${!open}>
+        ?hidden=${!open}
+        @mouseover=${handleMouseoverInner}
+        @mouseleave=${handleMouseleaveInner}>
         <slot></slot>
       </div>
     `;
@@ -784,10 +1258,11 @@ class CDSDropdown extends ValidityMixin(
       ${this._renderTitleLabel()}
       <div
         class="${classes}"
-        ?data-invalid=${invalid}
+        ?data-invalid=${normalizedProps.invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
         @keypress=${handleKeypressInner}>
+        ${validityIcon}${warningIcon}
         <div
           id="${ifDefined(
             !shouldTriggerBeFocusable ? undefined : 'trigger-button'
@@ -798,6 +1273,7 @@ class CDSDropdown extends ValidityMixin(
           role="${ifDefined(
             !shouldTriggerBeFocusable ? undefined : 'combobox'
           )}"
+          aria-label="${ifDefined(ariaLabel ? ariaLabel : undefined)}"
           aria-labelledby="${ifDefined(
             !shouldTriggerBeFocusable ? undefined : 'dropdown-label'
           )}"
@@ -817,7 +1293,7 @@ class CDSDropdown extends ValidityMixin(
                 ? (activeDescendant ?? activeDescendantFallback)
                 : ''
           )}">
-          ${this._renderPrecedingLabel()}${this._renderLabel()}${validityIcon}${warningIcon}${this._renderFollowingLabel()}
+          ${this._renderPrecedingLabel()}${this._renderLabel()}${this._renderFollowingLabel()}
           <div id="trigger-caret" class="${iconContainerClasses}">
             ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}
           </div>
@@ -829,7 +1305,8 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !invalid) || !hasHelperText}">
+        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+        !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot
         >
