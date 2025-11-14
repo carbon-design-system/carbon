@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/number-input/index';
+@use '@carbon/styles/scss/components/fluid-number-input' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/spacing' as *;
 
@@ -84,4 +85,16 @@ $css--plex: true !default;
 }
 :host(#{$prefix}-number-input[ai-label]) input {
   @include ai-gradient;
+}
+
+:host(#{$prefix}-number-input[invalid][fluid]) {
+  @extend .#{$prefix}--number-input--fluid--invalid;
+}
+
+:host(#{$prefix}-number-input[focused][fluid]) {
+  @extend .#{$prefix}--number-input--fluid--focus;
+}
+
+:host(#{$prefix}-number-input[disabled][fluid]) {
+  @extend .#{$prefix}--number-input--fluid--disabled;
 }
