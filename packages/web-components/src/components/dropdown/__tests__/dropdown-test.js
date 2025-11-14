@@ -540,10 +540,11 @@ describe('cds-dropdown-skeleton', function () {
         html`<cds-dropdown-skeleton></cds-dropdown-skeleton>`
       );
       expect(el).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--skeleton')).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--dropdown-v2')).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--list-box')).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--form-item')).to.exist;
+      const skeletonRoot = el.shadowRoot.querySelector('.cds--dropdown');
+      expect(skeletonRoot).to.exist;
+      expect(skeletonRoot.classList.contains('cds--skeleton')).to.be.true;
+      expect(skeletonRoot.classList.contains('cds--list-box--md')).to.be.true;
+      expect(el.shadowRoot.querySelector('.cds--label.cds--skeleton')).to.exist;
     });
 
     it('should respect size attribute', async () => {
