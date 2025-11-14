@@ -489,7 +489,7 @@ describe('cds-multi-select', function () {
       expect(firstItem.selected).to.be.false;
       expect(firstItem.hasAttribute('highlighted')).to.be.true;
 
-      const enterEvent = new KeyboardEvent('keypress', {
+      let enterEvent = new KeyboardEvent('keypress', {
         key: 'Enter',
         bubbles: true,
       });
@@ -497,10 +497,17 @@ describe('cds-multi-select', function () {
       await el.updateComplete;
 
       expect(firstItem.selected).to.be.true;
-
+      expect(el.open).to.be.true;
+      const highlighted = el.querySelector(
+        'cds-multi-select-item[highlighted]'
+      );
+      expect(highlighted).to.equal(firstItem);
+      enterEvent = new KeyboardEvent('keypress', {
+        key: 'Enter',
+        bubbles: true,
+      });
       trigger.dispatchEvent(enterEvent);
       await el.updateComplete;
-
       expect(firstItem.selected).to.be.false;
     });
 
@@ -529,18 +536,24 @@ describe('cds-multi-select', function () {
       expect(firstItem.selected).to.be.false;
       expect(firstItem.hasAttribute('highlighted')).to.be.true;
 
-      const spaceEvent = new KeyboardEvent('keypress', {
+      let spaceEvent = new KeyboardEvent('keypress', {
         key: ' ',
         bubbles: true,
       });
       trigger.dispatchEvent(spaceEvent);
       await el.updateComplete;
-
       expect(firstItem.selected).to.be.true;
-
+      expect(el.open).to.be.true;
+      const highlighted = el.querySelector(
+        'cds-multi-select-item[highlighted]'
+      );
+      expect(highlighted).to.equal(firstItem);
+      spaceEvent = new KeyboardEvent('keypress', {
+        key: ' ',
+        bubbles: true,
+      });
       trigger.dispatchEvent(spaceEvent);
       await el.updateComplete;
-
       expect(firstItem.selected).to.be.false;
     });
 
