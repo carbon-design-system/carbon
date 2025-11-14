@@ -319,8 +319,23 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='bottom-start']:not([autoalign])),
 :host(#{$prefix}-slug:dir(rtl)[alignment='bottom-start']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    inset-inline-end: 0;
+    inset-inline-end: calc(50% - $popover-offset);
     inset-inline-start: initial;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-left']:not(
+        [autoalign]
+      )
+  ),
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-start']:not(
+        [autoalign]
+      )
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-end: 0;
   }
 }
 
@@ -364,6 +379,21 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-toggletip:dir(rtl)[alignment='bottom-end']:not([autoalign])),
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='bottom-end']:not([autoalign])),
 :host(#{$prefix}-slug:dir(rtl)[alignment='bottom-end']:not([autoalign])) {
+  .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset);
+  }
+}
+
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-right']:not(
+        [autoalign]
+      )
+  ),
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-end']:not(
+        [autoalign]
+      )
+  ) {
   .#{$prefix}--popover-content {
     inset-inline-start: 0;
   }
@@ -733,7 +763,7 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='top-start']:not([autoalign])),
 :host(#{$prefix}-slug[alignment='top-start']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    inset-inline-end: 0;
+    inset-inline-end: calc(50% - $popover-offset);
     inset-inline-start: initial;
   }
 }
@@ -767,7 +797,7 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='top-end']:not([autoalign])),
 :host(#{$prefix}-slug[alignment='top-end']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    inset-inline-start: 0;
+    inset-inline-start: calc(50% - $popover-offset);
   }
 }
 
