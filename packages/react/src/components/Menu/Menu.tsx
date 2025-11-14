@@ -272,7 +272,13 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
-    if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
+    if (
+      open &&
+      onClose &&
+      isRoot &&
+      e.relatedTarget &&
+      !menu.current?.contains(e.relatedTarget)
+    ) {
       handleClose();
     }
   }
