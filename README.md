@@ -376,6 +376,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/vidhyarbiji"><img src="https://avatars.githubusercontent.com/u/11348409?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vidhya Ravikumar</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=vidhyarbiji" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/mateus037"><img src="https://avatars.githubusercontent.com/u/34143412?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mateus Rodrigues</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mateus037" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/BiaBiruka"><img src="https://avatars.githubusercontent.com/u/128196689?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Parolin</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=BiaBiruka" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/trumanbutter"><img src="https://avatars.githubusercontent.com/u/32148874?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Truman Butterworth</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=trumanbutter" title="Code">💻</a></td>
   </tr>
 </table>
 
