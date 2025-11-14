@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,6 +23,45 @@ export default {
     layout: 'centered',
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    align: {
+      options: [
+        'top',
+        'top-start',
+        'top-end',
+
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+
+        'left',
+        'left-end',
+        'left-start',
+
+        'right',
+        'right-end',
+        'right-start',
+      ],
+      control: {
+        type: 'select',
+      },
+    },
+    highContrast: {
+      table: {
+        disable: true,
+      },
+    },
+    label: {
+      control: {
+        type: 'text',
+      },
+    },
+    description: {
+      control: {
+        type: 'text',
+      },
     },
   },
   decorators: [
@@ -52,54 +91,15 @@ export const Default = (args) => {
   );
 };
 
-Default.argTypes = {
-  align: {
-    // TODO:
-    // 1. Should the deprecated options be deleted?
-    // 2. The list doesn't include all of the options available in the
-    //    component. Is it supposed to?
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-
-      'left',
-      'left-bottom',
-      'left-top',
-
-      'right',
-      'right-bottom',
-      'right-top',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-  },
-  description: {
-    control: {
-      type: 'text',
-    },
-  },
-};
-
-export const Alignment = () => {
+export const Alignment = (args) => {
   return (
-    <Tooltip label="Tooltip alignment" align="bottom-left">
+    <Tooltip label="Tooltip alignment" align="bottom-left" {...args}>
       <Button>This button has a tooltip</Button>
     </Tooltip>
   );
 };
 
-export const ExperimentalAutoAlign = () => {
+export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   const tooltipLabel =
     'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
@@ -115,7 +115,7 @@ export const ExperimentalAutoAlign = () => {
           top: '2500px',
           left: '2500px',
         }}>
-        <Tooltip label={tooltipLabel} align="top" autoAlign>
+        <Tooltip label={tooltipLabel} align="top" autoAlign {...args}>
           <Button ref={ref}>This button has a tooltip</Button>
         </Tooltip>
       </div>
@@ -125,9 +125,14 @@ export const ExperimentalAutoAlign = () => {
 
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
 // autoAlign is in preview and not part of the actual implementation.
-export const Duration = () => {
+export const Duration = (args) => {
   return (
-    <Tooltip autoAlign label="Label one" enterDelayMs={0} leaveDelayMs={300}>
+    <Tooltip
+      autoAlign
+      label="Label one"
+      enterDelayMs={0}
+      leaveDelayMs={300}
+      {...args}>
       <Button>This button has a tooltip</Button>
     </Tooltip>
   );

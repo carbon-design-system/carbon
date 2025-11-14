@@ -232,7 +232,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
         : toolTipContent?.removeAttribute('open');
     }
 
-    ['align', 'caret', 'autoalign'].forEach((name) => {
+    ['align', 'caret', 'autoalign', 'dropShadow'].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSTooltip]: value } = this;
         (toolTipContent as CDSTooltipContent)[name] = value;
