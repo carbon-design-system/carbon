@@ -21,7 +21,7 @@ const defaultArgs = {
   align: POPOVER_ALIGNMENT.TOP,
   closeOnActivation: false,
   defaultOpen: false,
-  dropShadow: true,
+  dropShadow: false,
   enterDelayMs: 100,
   label: 'Options',
   leaveDelayMs: 300,
@@ -91,7 +91,7 @@ export const Default = {
     <cds-tooltip
       ?defaultOpen=${defaultOpen}
       align=${align}
-      ?dropShadow=${dropShadow}
+      .dropShadow=${dropShadow}
       enter-delay-ms=${enterDelayMs}
       leave-delay-ms=${leaveDelayMs}
       ?closeOnActivation=${closeOnActivation}>
@@ -125,7 +125,7 @@ export const Alignment = {
     <cds-tooltip
       ?defaultOpen=${defaultOpen}
       align=${align}
-      ?dropShadow=${dropShadow}
+      .dropShadow=${dropShadow}
       enter-delay-ms=${enterDelayMs}
       leave-delay-ms=${leaveDelayMs}
       ?closeOnActivation=${closeOnActivation}>
@@ -157,7 +157,7 @@ export const Duration = {
     <cds-tooltip
       ?defaultOpen=${defaultOpen}
       align=${align}
-      ?dropShadow=${dropShadow}
+      .dropShadow=${dropShadow}
       enter-delay-ms=${enterDelayMs}
       leave-delay-ms=${leaveDelayMs}
       ?closeOnActivation=${closeOnActivation}>
@@ -202,7 +202,7 @@ export const ExperimentalAutoAlign = {
           left: 2500px; padding-right: 2500px;">
           <cds-tooltip
             ?defaultOpen=${defaultOpen}
-            ?dropShadow=${dropShadow}
+            .dropShadow=${dropShadow}
             autoalign
             enter-delay-ms=${enterDelayMs}
             leave-delay-ms=${leaveDelayMs}
