@@ -96,6 +96,7 @@
   .#{$prefix}--modal-container {
     position: fixed;
     display: grid;
+    border: 1px solid $border-subtle-01;
     background-color: $layer;
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
