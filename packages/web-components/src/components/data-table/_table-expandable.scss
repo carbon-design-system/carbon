@@ -135,30 +135,30 @@
   &[highlighted] {
     .#{$prefix}--table-expand {
       background-color: $background-hover;
-      border-block-end-color: $layer-hover-01;
-      border-block-start-color: $layer-hover-01;
+      border-block-end-color: $layer-hover;
+      border-block-start-color: $layer-hover;
     }
   }
 
   &[even] {
     .#{$prefix}--table-expand {
-      background-color: $layer-accent-01;
-      border-block-end: 1px solid $layer-accent-01;
+      background-color: $layer-accent;
+      border-block-end: 1px solid $layer-accent;
 
       &:hover {
         background-color: $background-hover;
-        border-block-end: 1px solid $layer-hover-01;
+        border-block-end: 1px solid $layer-hover;
       }
     }
   }
 
   &[odd] {
     .#{$prefix}--table-expand {
-      border-block-end: 1px solid $layer-01;
+      border-block-end: 1px solid $layer;
 
       &:hover {
         background-color: $background-hover;
-        border-block-end: 1px solid $layer-hover-01;
+        border-block-end: 1px solid $layer-hover;
       }
     }
   }
