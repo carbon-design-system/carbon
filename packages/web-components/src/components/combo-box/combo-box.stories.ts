@@ -13,9 +13,6 @@ import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
 import '../ai-label/index';
-import '../toggle-tip/index';
-import '../button/index';
-import '../link/index';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 const items = [
@@ -191,31 +188,6 @@ export const WithAILabel = {
           >
         `
       )}
-    </cds-combo-box>
-  `,
-};
-
-export const WithToggletipLabel = {
-  render: () => html`
-    <cds-combo-box class="ComboBox">
-      <span
-        slot="title-text"
-        style="display: inline-flex; align-items: center; gap: 0.25rem">
-        ComboBox label
-        <cds-toggletip alignment="bottom" autoalign>
-          <p slot="body-text">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <cds-link href="#" slot="actions">Test</cds-link>
-          <cds-button size="sm" slot="actions">Button</cds-button>
-        </cds-toggletip>
-      </span>
-      <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
-      <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
-      <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
-      <cds-combo-box-item value="raspberry">Raspberry</cds-combo-box-item>
-      <cds-combo-box-item value="grape">Grape</cds-combo-box-item>
     </cds-combo-box>
   `,
 };
