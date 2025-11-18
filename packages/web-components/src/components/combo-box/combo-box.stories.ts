@@ -60,8 +60,8 @@ const defaultArgs = {
   hideLabel: false,
   helperText: 'This is some helper text',
   invalid: false,
-  invalidText: 'invalid selection',
-  label: 'This is an example label',
+  invalidText: '',
+  label: '',
   readOnly: false,
   size: null,
   titleText: 'This is an example title',
@@ -128,19 +128,55 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html`
-    <cds-combo-box
-      helper-text="Combobox helper text"
-      title-text="ComboBox title">
-      ${items.map(
-        (elem) => html`
-          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
-            >${elem.text}</cds-combo-box-item
-          >
-        `
-      )}
-    </cds-combo-box>
-  `,
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    helperText: 'Combobox helper text',
+    titleText: 'ComboBox title',
+  },
+  render: (args) => {
+    const {
+      disabled,
+      helperText,
+      invalid,
+      titleText,
+      hideLabel,
+      direction,
+      readOnly,
+      warn,
+      warnText,
+      size,
+      label,
+      type,
+      invalidText,
+      value,
+    } = args ?? {};
+    return html`
+      <cds-combo-box
+        ?disabled=${disabled}
+        ?hide-label=${hideLabel}
+        helper-text=${ifDefined(helperText)}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        direction=${ifDefined(direction)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        size=${ifDefined(size)}
+        type=${ifDefined(type)}
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}>
+        ${items.map(
+          (elem) => html`
+            <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
+              >${elem.text}</cds-combo-box-item
+            >
+          `
+        )}
+      </cds-combo-box>
+    `;
+  },
 };
 
 const content = html`
@@ -174,60 +210,170 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
-export const WithAILabel = {
-  render: () => html`
-    <cds-combo-box
-      helper-text="Combobox helper text"
-      title-text="ComboBox title">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-
-      ${items.map(
-        (elem) => html`
-          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
-            >${elem.text}</cds-combo-box-item
-          >
-        `
-      )}
-    </cds-combo-box>
-  `,
+export const AllowCustomValue = {
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    helperText: 'Combobox helper text',
+    titleText: 'ComboBox title',
+  },
+  render: (args) => {
+    const {
+      disabled,
+      helperText,
+      invalid,
+      titleText,
+      hideLabel,
+      direction,
+      readOnly,
+      warn,
+      warnText,
+      size,
+      label,
+      type,
+      invalidText,
+      value,
+    } = args ?? {};
+    return html`
+      <cds-combo-box
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        size=${ifDefined(size)}
+        type=${ifDefined(type)}
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        should-filter-item>
+        <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
+        <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
+        <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
+        <cds-combo-box-item value="pineapple">Pineapple</cds-combo-box-item>
+        <cds-combo-box-item value="raspberry">Raspberry</cds-combo-box-item>
+        <cds-combo-box-item value="lime">Lime</cds-combo-box-item>
+      </cds-combo-box>
+    `;
+  },
 };
 
-export const DynamicFiltering = {
-  render: () => html`
-    <cds-combo-box
-      title-text="Custom Filter"
-      helper-text="Type to test shouldFilterItem (only matches items starting with input)"
-      should-filter-item>
-      <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
-      <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
-      <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
-      <cds-combo-box-item value="raspberry">Raspberry</cds-combo-box-item>
-      <cds-combo-box-item value="grape">Grape</cds-combo-box-item>
-    </cds-combo-box>
-  `,
+export const WithAILabel = {
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    helperText: 'Combobox helper text',
+    titleText: 'ComboBox title',
+  },
+  render: (args) => {
+    const {
+      disabled,
+      helperText,
+      invalid,
+      titleText,
+      hideLabel,
+      direction,
+      readOnly,
+      warn,
+      warnText,
+      size,
+      label,
+      type,
+      invalidText,
+      value,
+    } = args ?? {};
+    return html`
+      <cds-combo-box
+        ?disabled=${disabled}
+        ?hide-label=${hideLabel}
+        helper-text=${ifDefined(helperText)}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        direction=${ifDefined(direction)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        size=${ifDefined(size)}
+        type=${ifDefined(type)}
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+
+        ${items.map(
+          (elem) => html`
+            <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
+              >${elem.text}</cds-combo-box-item
+            >
+          `
+        )}
+      </cds-combo-box>
+    `;
+  },
 };
 
 export const WithLayer = {
-  render: () => html`
-    <sb-template-layers>
-      <div style="width:300px">
-        <cds-combo-box
-          title-text="ComboBox label"
-          helper-text="Combobox helper text"
-          label="Dropdown menu options">
-          ${items.map(
-            (elem) => html`
-              <cds-combo-box-item
-                ?disabled=${elem.disabled}
-                value="${elem.value}"
-                >${elem.text}</cds-combo-box-item
-              >
-            `
-          )}
-        </cds-combo-box>
-      </div>
-    </sb-template-layers>
-  `,
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    helperText: 'Combobox helper text',
+    titleText: 'ComboBox title',
+  },
+  render: (args) => {
+    const {
+      disabled,
+      helperText,
+      invalid,
+      titleText,
+      hideLabel,
+      direction,
+      readOnly,
+      warn,
+      warnText,
+      size,
+      label,
+      type,
+      invalidText,
+      value,
+    } = args ?? {};
+    return html`
+      <sb-template-layers>
+        <div style="width:300px">
+          <cds-combo-box
+            direction=${ifDefined(direction)}
+            ?disabled=${disabled}
+            helper-text=${ifDefined(helperText)}
+            ?hide-label=${hideLabel}
+            ?invalid=${invalid}
+            invalid-text=${ifDefined(invalidText)}
+            ?read-only=${readOnly}
+            title-text=${ifDefined(titleText)}
+            size=${ifDefined(size)}
+            type=${ifDefined(type)}
+            value=${ifDefined(value)}
+            label=${ifDefined(label)}
+            ?warn=${warn}
+            warn-text=${ifDefined(warnText)}>
+            ${items.map(
+              (elem) => html`
+                <cds-combo-box-item
+                  ?disabled=${elem.disabled}
+                  value="${elem.value}"
+                  >${elem.text}</cds-combo-box-item
+                >
+              `
+            )}
+          </cds-combo-box>
+        </div>
+      </sb-template-layers>
+    `;
+  },
 };
 
 export const Playground = {
