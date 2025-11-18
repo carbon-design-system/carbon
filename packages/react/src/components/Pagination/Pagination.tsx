@@ -422,6 +422,7 @@ const Pagination = React.forwardRef(
                 hideLabel
                 onChange={handlePageInputChange}
                 value={page}
+                key={page}
                 disabled={pageInputDisabled || disabled}>
                 {selectItems}
               </Select>
