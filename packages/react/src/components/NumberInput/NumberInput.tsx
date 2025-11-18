@@ -216,7 +216,8 @@ export interface NumberInputProps
   onBlur?: (
     event:
       | React.FocusEvent<HTMLInputElement>
-      | React.FocusEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLButtonElement>,
+    value?: string | number
   ) => void;
 
   /**
@@ -830,7 +831,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                 }
 
                 if (onBlur) {
-                  onBlur(e);
+                  const _numberValue = isControlled
+                    ? numberParser.parse(inputValue)
+                    : numberValue;
+                  onBlur(e, _numberValue);
                 }
               }}
               pattern={pattern}
