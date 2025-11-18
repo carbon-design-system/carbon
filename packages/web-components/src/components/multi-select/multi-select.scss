@@ -207,13 +207,6 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[ai-label][warn]),
-:host(#{$prefix}-multi-select[ai-label][invalid]) {
-  .#{$prefix}--list-box__invalid-icon {
-    inset-inline-end: convert.to-rem(81px);
-  }
-}
-
 :host(#{$prefix}-multi-select[ai-label]) ::slotted(#{$prefix}-ai-label)::after {
   position: absolute;
   display: block;
