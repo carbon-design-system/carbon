@@ -90,4 +90,24 @@ describe('cds-menu', () => {
       expect(el.context.isRoot).to.be.false;
     });
   });
+
+  describe('positioning', () => {
+    it('should adjust position when the menu cannot open to the bottom right', async () => {
+      const nearMaxX = window.innerWidth - 10;
+      const nearMaxY = window.innerHeight - 10;
+
+      const el = await fixture(html`
+        <cds-menu .x=${nearMaxX} .y=${nearMaxY} open>
+          <cds-menu-item label="Item 1"></cds-menu-item>
+        </cds-menu>
+      `);
+
+      await el.updateComplete;
+
+      expect(el.position[0]).to.be.a('number');
+      expect(el.position[1]).to.be.a('number');
+      expect(el.position[0]).to.be.lessThan(nearMaxX);
+      expect(el.position[1]).to.be.lessThan(nearMaxY);
+    });
+  });
 });
