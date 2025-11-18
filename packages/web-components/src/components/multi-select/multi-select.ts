@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, PropertyValues, TemplateResult } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
@@ -74,44 +74,6 @@ class CDSMultiSelect extends CDSDropdown {
    */
   @query('input')
   private _filterInputNode!: HTMLInputElement;
-
-  protected get _supportsMenuInputFiltering() {
-    return Boolean(this.filterable);
-  }
-
-  protected willUpdate(changedProperties: PropertyValues) {
-    this._shouldTriggerBeFocusable = !this.filterable;
-    super.willUpdate(changedProperties);
-  }
-
-  protected get _menuInputNode(): HTMLInputElement | null {
-    return this.filterable ? (this._filterInputNode ?? null) : null;
-  }
-
-  protected _clearMenuInputFiltering() {
-    if (this.filterable) {
-      this._handleUserInitiatedClearInput();
-    }
-  }
-
-  protected _shouldClearMenuInputOnEscape({
-    menuOpen,
-    isInputTarget,
-  }: {
-    event: KeyboardEvent;
-    menuOpen: boolean;
-    isInputTarget: boolean;
-  }) {
-    if (!menuOpen) {
-      return true;
-    }
-
-    if (!isInputTarget) {
-      return false;
-    }
-
-    return Boolean(this._filterInputNode?.value);
-  }
 
   /**
    * The trigger button.
@@ -188,12 +150,6 @@ class CDSMultiSelect extends CDSDropdown {
       .join(',');
   }
 
-  // Keep the menu open for individual selections, close only when clearing.
-
-  protected _shouldCloseAfterSelection(item?: CDSMultiSelectItem) {
-    return !item;
-  }
-
   protected _handleClickInner(event: MouseEvent) {
     const clickedItem = (event.target as HTMLElement).closest(
       `${prefix}-multi-select-item`
@@ -263,38 +219,6 @@ class CDSMultiSelect extends CDSDropdown {
     } else {
       super._handleKeypressInner(event);
     }
-  }
-
-  protected _handleMouseoverInner(event: MouseEvent) {
-    const item = this._getDropdownItemFromEvent(event);
-    const isFiltering =
-      this.filterable && Boolean(this._filterInputNode?.value.length);
-
-    if (
-      !item ||
-      isFiltering ||
-      !item.hasAttribute('selected') ||
-      !item.hasAttribute('highlighted')
-    ) {
-      return;
-    }
-
-    super._handleMouseoverInner(event);
-  }
-
-  protected _handleMouseleaveInner(event: MouseEvent) {
-    const constructor = this.constructor as typeof CDSMultiSelect;
-    const isFiltering =
-      this.filterable && Boolean(this._filterInputNode?.value.length);
-    const highlightedItem = this.querySelector(
-      constructor.selectorItemHighlighted
-    ) as CDSMultiSelectItem | null;
-
-    if (isFiltering || highlightedItem?.hasAttribute('selected')) {
-      return;
-    }
-
-    super._handleMouseleaveInner(event);
   }
 
   /**
