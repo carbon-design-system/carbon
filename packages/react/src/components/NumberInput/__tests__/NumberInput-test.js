@@ -502,6 +502,66 @@ describe('NumberInput', () => {
     expect(input).toHaveValue(15.01);
   });
 
+  it('should call `onBlur` with value parameter when input is blurred (type="number")', async () => {
+    const onBlur = jest.fn();
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        onBlur={onBlur}
+        min={0}
+        defaultValue={25}
+        max={100}
+        translateWithId={translateWithId}
+      />
+    );
+
+    await userEvent.click(screen.getByLabelText('test-label'));
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      }),
+      25
+    );
+  });
+
+  it('should call `onBlur` with parsed value in controlled mode (type="number")', async () => {
+    const onBlur = jest.fn();
+    const ControlledNumberInput = () => {
+      const [value, setValue] = useState(15);
+      return (
+        <NumberInput
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          value={value}
+          onChange={(e, state) => setValue(state.value)}
+          min={0}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+    };
+
+    render(<ControlledNumberInput />);
+
+    const input = screen.getByLabelText('test-label');
+    await userEvent.click(input);
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(input).toHaveValue(16);
+
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      }),
+      16
+    );
+  });
+
   describe('with type="text"', () => {
     it('should render an <input> with type="text"', () => {
       render(<NumberInput type="text" label="test-label" id="test" />);
@@ -744,6 +804,89 @@ describe('NumberInput', () => {
         expect.objectContaining({
           target: expect.any(Object),
         })
+      );
+    });
+
+    it('should call `onBlur` with value parameter in uncontrolled mode', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          min={0}
+          defaultValue={42}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('test-label'));
+      await userEvent.tab();
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        42
+      );
+    });
+
+    it('should call `onBlur` with updated value after user types', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          min={0}
+          defaultValue={10}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      await userEvent.clear(input);
+      await userEvent.type(input, '75');
+      await userEvent.tab();
+
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        75
+      );
+    });
+
+    it('should call `onBlur` with NaN when value is empty and allowEmpty is true', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          allowEmpty
+          min={0}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      await userEvent.click(input);
+      await userEvent.tab();
+
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        NaN
       );
     });
 
@@ -1510,6 +1653,42 @@ describe('NumberInput', () => {
         await userEvent.tab();
         expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
         expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+      });
+
+      it('should call `onBlur` with parsed value in controlled mode', async () => {
+        const onBlur = jest.fn();
+        const ControlledNumberInput = () => {
+          const [value, setValue] = useState(20.4);
+          return (
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              onBlur={onBlur}
+              value={value}
+              onChange={(e, state) => setValue(state.value)}
+              min={0}
+              max={100}
+              step={1}
+              translateWithId={translateWithId}
+            />
+          );
+        };
+
+        render(<ControlledNumberInput />);
+
+        const input = screen.getByLabelText('test-label');
+        await userEvent.click(input);
+        expect(input).toHaveValue('20.4');
+
+        await userEvent.tab();
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          20.4
+        );
       });
     });
   });
