@@ -37,7 +37,6 @@ import {
   green50,
   green60,
   yellow30,
-  magenta60,
   orange40,
   red50,
   red60,
@@ -220,7 +219,7 @@ export const syntaxComment = green60;
 export const syntaxLineComment = syntaxComment;
 export const syntaxBlockComment = syntaxComment;
 export const syntaxDocComment = syntaxComment;
-export const syntaxString = magenta60;
+export const syntaxString = textPrimary;
 export const syntaxDocString = syntaxString;
 export const syntaxKeyword = blue60;
 export const syntaxOperatorKeyword = syntaxKeyword;
