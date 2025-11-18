@@ -1,7 +1,7 @@
 {
   "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
-  "version": "2.42.0-rc.0",
+  "version": "2.42.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -36,8 +36,8 @@
     "./es/components/*": {
       "default": "./es/components/*"
     },
-    "./es/globals/": {
-      "default": "./es/globals/"
+    "./es/globals/*": {
+      "default": "./es/globals/*"
     },
     "./es": "./es/index.js",
     "./es/": "./es/",
@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/styles": "^1.94.0-rc.0",
+    "@carbon/styles": "^1.94.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.10.2",
     "@lit/context": "^1.1.3",
@@ -84,7 +84,7 @@
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",
     "@playwright/test": "^1.36.2",
-    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-alias": "^6.0.0",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-replace": "^6.0.2",
