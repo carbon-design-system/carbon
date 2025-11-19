@@ -50,6 +50,10 @@ export interface TableRowExpandInteropProps {
    * Specify if the row is selected.
    */
   isSelected?: boolean;
+  /**
+   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
+   */
+  expandHeader?: string;
 }
 
 export interface TableExpandRowProps
@@ -194,6 +198,7 @@ TableExpandRow.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   /**@ts-ignore*/
   'aria-label': PropTypes.string,
 

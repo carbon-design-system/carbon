@@ -8,8 +8,8 @@
 'use strict';
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshot } = require('../../test-utils/snapshot');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+// const { snapshot } = require('../../test-utils/snapshot');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 // TODO update once stories are visible
 test.describe('PageHeader', () => {
@@ -18,7 +18,7 @@ test.describe('PageHeader', () => {
       test.skip('page header @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
-          id: 'patterns-unstable-pageheader--content',
+          id: 'patterns-preview-pageheader--content',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('PageHeader', () => {
       }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
-          id: 'patterns-unstable-pageheader--content-with-contextual-actions',
+          id: 'patterns-preview-pageheader--content-with-contextual-actions',
           theme,
         });
       });
@@ -36,21 +36,21 @@ test.describe('PageHeader', () => {
       }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
-          id: 'patterns-unstable-pageheader--content-with-contextual-actions-and-page-actions',
+          id: 'patterns-preview-pageheader--content-with-contextual-actions-and-page-actions',
           theme,
         });
       });
       test.skip('page header with hero image @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
-          id: 'patterns-unstable-pageheader--content-with-hero-image',
+          id: 'patterns-preview-pageheader--content-with-hero-image',
           theme,
         });
       });
       test.skip('page header with icon @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
-          id: 'patterns-unstable-pageheader--content-with-icon',
+          id: 'patterns-preview-pageheader--content-with-icon',
           theme,
         });
       });

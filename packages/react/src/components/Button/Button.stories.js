@@ -53,11 +53,6 @@ export default {
     as: {
       control: false,
     },
-    small: {
-      table: {
-        disable: true,
-      },
-    },
   },
   parameters: {
     docs: {

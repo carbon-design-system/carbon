@@ -11,7 +11,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import CaretDown16 from '@carbon/icons/lib/caret--down/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import CaretDown16 from '@carbon/icons/es/caret--down/16.js';
 
 import styles from './tree-view.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -85,6 +86,7 @@ class CDSTreeNode extends LitElement {
 
       return depth + 2.5;
     };
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const label = this.shadowRoot!.querySelector(
       `.${prefix}--tree-node__label`
     );
@@ -176,10 +178,6 @@ class CDSTreeNode extends LitElement {
 
     if (!this.hasAttribute('role') && !this.href) {
       this.setAttribute('role', 'treeitem');
-    }
-
-    if (!this.hasAttribute('aria-owns') && this._hasChildren && !this.href) {
-      this.setAttribute('aria-owns', `subtree-id-${this.id}`);
     }
 
     if (this._hasChildren && !this.href) {
@@ -336,7 +334,7 @@ class CDSTreeNode extends LitElement {
                         class="${prefix}--tree-parent-node__toggle"
                         ?disabled=${disabled}
                         @click=${handleToggleClick}>
-                        ${CaretDown16({ class: toggleClasses })}
+                        ${iconLoader(CaretDown16, { class: toggleClasses })}
                       </span>
                       <span class="${prefix}--tree-node__label__details">
                         <slot
@@ -346,7 +344,10 @@ class CDSTreeNode extends LitElement {
                       </span>
                     </div>
                   </a>
-                  <ul id="subtree-id-${id} role="group" class="${subTreeClasses}">
+                  <ul
+                    id="subtree-id-${id}"
+                    role="group"
+                    class="${subTreeClasses}">
                     <slot @slotchange=${handleSlotChange}></slot>
                   </ul>`
               : html`<div id="label" class="${prefix}--tree-node__label">
@@ -354,7 +355,7 @@ class CDSTreeNode extends LitElement {
                       class="${prefix}--tree-parent-node__toggle"
                       ?disabled=${disabled}
                       @click=${handleToggleClick}>
-                      ${CaretDown16({ class: toggleClasses })}
+                      ${iconLoader(CaretDown16, { class: toggleClasses })}
                     </span>
                     <span class="${prefix}--tree-node__label__details">
                       <slot

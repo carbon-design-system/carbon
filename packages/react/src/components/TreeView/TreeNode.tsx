@@ -206,8 +206,7 @@ const useEllipsisCheck = (
   }, [detailsWrapperRef]);
 
   useEffect(() => {
-    let animationFrameId: number;
-    animationFrameId = requestAnimationFrame(checkEllipsis);
+    const animationFrameId: number = requestAnimationFrame(checkEllipsis);
 
     let resizeObserver: ResizeObserver | undefined;
     if (
@@ -229,9 +228,11 @@ const useEllipsisCheck = (
       cancelAnimationFrame(animationFrameId);
       if (resizeObserver) {
         if (labelTextRef.current) {
+          // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
           resizeObserver.unobserve(labelTextRef.current);
         }
         if (detailsWrapperRef.current) {
+          // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
           resizeObserver.unobserve(detailsWrapperRef.current);
         }
         resizeObserver.disconnect();
@@ -292,6 +293,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       'enable-treeview-controllable'
     );
 
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const { current: id } = useRef(nodeId || useId());
 
     const controllableExpandedState = useControllableState({
@@ -308,6 +310,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const currentNodeLabel = useRef<HTMLDivElement>(null);
     const prefix = usePrefix();
 
+    const nodeLabelId = `${id}__label`;
+
     const renderLabelText = () => {
       if (isEllipsisApplied && tooltipText) {
         return (
@@ -319,6 +323,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             className={`${prefix}--tree-node__label__text-button`}
             wrapperClasses={`${prefix}--popover-container`}>
             <span
+              id={nodeLabelId}
               ref={labelTextRef}
               className={`${prefix}--tree-node__label__text`}>
               {label}
@@ -329,6 +334,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
       return (
         <span
+          id={nodeLabelId}
           ref={labelTextRef}
           className={`${prefix}--tree-node__label__text`}>
           {label}
@@ -581,6 +587,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const nodeContent = (
       <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
         {children && (
+          // eslint-disable-next-line  jsx-a11y/no-static-element-interactions , jsx-a11y/click-events-have-key-events -- https://github.com/carbon-design-system/carbon/issues/20452
           <span
             className={`${prefix}--tree-parent-node__toggle`}
             onClick={handleToggleClick}>
@@ -589,7 +596,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         )}
 
         <span className={`${prefix}--tree-node__label__details`}>
-          {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452*/}
+          {/*@ts-ignore - TS cannot be sure `className` exists on Icon props */}
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
           {renderLabelText()}
         </span>
@@ -612,6 +620,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             <ul
               id={`${id}-subtree`}
               role="group"
+              aria-labelledby={nodeLabelId}
               className={classNames(`${prefix}--tree-node__children`, {
                 [`${prefix}--tree-node--hidden`]: !expanded,
               })}>
@@ -625,24 +634,28 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     }
 
     return (
-      <li
-        {...treeNodeProps}
-        aria-expanded={children ? !!expanded : undefined}
-        ref={setRefs}>
-        {nodeContent}
-        {children && (
-          <ul
-            id={`${id}-subtree`}
-            role="group"
-            className={classNames(`${prefix}--tree-node__children`, {
-              [`${prefix}--tree-node--hidden`]: !expanded,
-            })}>
-            <DepthContext.Provider value={depth + 1}>
-              {children}
-            </DepthContext.Provider>
-          </ul>
-        )}
-      </li>
+      <>
+        {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props -- https://github.com/carbon-design-system/carbon/issues/20452 */}
+        <li
+          {...treeNodeProps}
+          aria-expanded={children ? !!expanded : undefined}
+          ref={setRefs}>
+          {nodeContent}
+          {children && (
+            <ul
+              id={`${id}-subtree`}
+              role="group"
+              aria-labelledby={nodeLabelId}
+              className={classNames(`${prefix}--tree-node__children`, {
+                [`${prefix}--tree-node--hidden`]: !expanded,
+              })}>
+              <DepthContext.Provider value={depth + 1}>
+                {children}
+              </DepthContext.Provider>
+            </ul>
+          )}
+        </li>
+      </>
     );
   }
 );
@@ -734,6 +747,7 @@ TreeNode.propTypes = {
   /**
    * A component used to render an icon.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
@@ -741,6 +755,7 @@ TreeNode.propTypes = {
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   selected: deprecate(
     PropTypes.arrayOf(

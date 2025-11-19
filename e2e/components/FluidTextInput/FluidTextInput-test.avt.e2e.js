@@ -14,7 +14,7 @@ test.describe('@avt FluidTextInput', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--default',
+      id: 'components-fluid-components-fluidtextinput--default',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('@avt FluidTextInput', () => {
   test('@avt-advanced-states password input', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextInput',
-      id: 'experimental-fluid-components-unstable-fluidpasswordinput--default',
+      id: 'components-fluid-components-fluidpasswordinput--default',
       globals: {
         theme: 'white',
       },
@@ -33,21 +33,21 @@ test.describe('@avt FluidTextInput', () => {
     await expect(page).toHaveNoACViolations('FluidTextInput-password-input');
   });
 
-  test('@avt-advanced-states with tooltip', async ({ page }) => {
+  test('@avt-advanced-states with toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextinput--default-with-toggletip',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('FluidTextInput-with-tooltip');
+    await expect(page).toHaveNoACViolations('FluidTextInput-with-toggletip');
   });
 
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--skeleton',
+      id: 'components-fluid-components-fluidtextinput--skeleton',
       globals: {
         theme: 'white',
       },
@@ -58,7 +58,7 @@ test.describe('@avt FluidTextInput', () => {
   test('@avt-keyboard-nav default', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--default',
+      id: 'components-fluid-components-fluidtextinput--default',
       globals: {
         theme: 'white',
       },
@@ -77,10 +77,10 @@ test.describe('@avt FluidTextInput', () => {
     await expect(input).toHaveValue('Tex');
   });
 
-  test('@avt-keyboard-nav with tooltip', async ({ page }) => {
+  test('@avt-keyboard-nav with toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextinput--default-with-toggletip',
       globals: {
         theme: 'white',
       },
@@ -88,7 +88,7 @@ test.describe('@avt FluidTextInput', () => {
     const input = page.getByRole('textbox');
     await expect(input).toBeVisible();
 
-    // Check tooltip visibility
+    // Check toggletip visibility
     await page.keyboard.press('Tab');
     await expect(page.getByLabel('Show information')).toBeFocused();
     await page.keyboard.press('Enter');
@@ -110,7 +110,7 @@ test.describe('@avt FluidTextInput', () => {
   test('@avt-keyboard-nav for password', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidPasswordInput',
-      id: 'experimental-fluid-components-unstable-fluidpasswordinput--default',
+      id: 'components-fluid-components-fluidpasswordinput--default',
       globals: {
         theme: 'white',
       },

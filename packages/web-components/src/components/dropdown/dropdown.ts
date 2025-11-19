@@ -10,9 +10,10 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html, TemplateResult } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -79,7 +80,7 @@ class CDSDropdown extends ValidityMixin(
 
   /**
    * `true` if the trigger button should be focusable.
-   * Derived class can set `false` to this if the trigger button contains another primary focusable element (e.g. `<input>`).
+   * Derived class can set `false` to this if the trigger button contains another primary focusable element (e.g. `input`).
    */
   protected _shouldTriggerBeFocusable = true;
 
@@ -145,6 +146,7 @@ class CDSDropdown extends ValidityMixin(
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     if (this.shadowRoot!.contains(event.target as Node)) {
       this._handleUserInitiatedToggle();
     } else {
@@ -229,6 +231,7 @@ class CDSDropdown extends ValidityMixin(
    * @param event The event.
    */
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleFocusOut(event: FocusEvent) {
     if (!this.contains(event.relatedTarget as Node)) {
@@ -366,6 +369,7 @@ class CDSDropdown extends ValidityMixin(
     const highlightedItem = this.querySelector(
       constructor.selectorItemHighlighted
     );
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const highlightedIndex = indexOf(items, highlightedItem!);
     let nextIndex = highlightedIndex + direction;
 
@@ -394,14 +398,13 @@ class CDSDropdown extends ValidityMixin(
     }
   }
 
-  /* eslint-disable class-methods-use-this */
   /**
    * @returns The content preceding the trigger button.
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   protected _renderPrecedingLabel(): TemplateResult | void {
     return undefined;
   }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * @returns The main content of the trigger button.
@@ -451,14 +454,13 @@ class CDSDropdown extends ValidityMixin(
     `;
   }
 
-  /* eslint-disable class-methods-use-this */
   /**
    * @returns The content following the trigger button.
    */
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   protected _renderFollowingLabel(): TemplateResult | void {
     return undefined;
   }
-  /* eslint-enable class-methods-use-this */
 
   /**
    * Handles event to include selected value on the parent form.
@@ -606,6 +608,13 @@ class CDSDropdown extends ValidityMixin(
   @property({ attribute: 'warn-text' })
   warnText = '';
 
+  /**
+   * The computed aria-label for the toggle button based on open state.
+   */
+  get toggleLabel(): string {
+    return (this.open ? this.toggleLabelOpen : this.toggleLabelClosed) || '';
+  }
+
   shouldUpdate(changedProperties) {
     const { selectorItem } = this.constructor as typeof CDSDropdown;
     if (changedProperties.has('size')) {
@@ -636,6 +645,7 @@ class CDSDropdown extends ValidityMixin(
         (elem) => (elem as CDSDropdownItem).value === this.value
       );
       if (item) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         const range = this.ownerDocument!.createRange();
         range.selectNodeContents(item);
         this._selectedItemContent = range.cloneContents();
@@ -648,12 +658,12 @@ class CDSDropdown extends ValidityMixin(
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updated(_changedProperties) {
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     this._hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
-
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
@@ -670,11 +680,25 @@ class CDSDropdown extends ValidityMixin(
   }
 
   /**
+   * Normalizes validation props based on disabled and readOnly states
+   */
+  protected get _normalizedProps() {
+    const { disabled, readOnly, invalid, warn } = this;
+    return {
+      disabled: !readOnly && disabled,
+      invalid: !readOnly && !disabled && invalid,
+      warn: !readOnly && !invalid && !disabled && warn,
+    };
+  }
+
+  /**
    * The CSS class list for dropdown listbox
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   protected get _classes(): any {
-    const { disabled, size, type, invalid, open, warn } = this;
+    const { size, type, open } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+    const normalizedProps = this._normalizedProps;
 
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
@@ -683,12 +707,12 @@ class CDSDropdown extends ValidityMixin(
     return classMap({
       [`${prefix}--dropdown`]: true,
       [`${prefix}--list-box`]: true,
-      [`${prefix}--list-box--disabled`]: disabled,
+      [`${prefix}--list-box--disabled`]: normalizedProps.disabled,
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warn`]: warn,
+      [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
+      [`${prefix}--dropdown--warn`]: normalizedProps.warn,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
@@ -699,9 +723,7 @@ class CDSDropdown extends ValidityMixin(
     const {
       ariaLabel,
       _classes: classes,
-      disabled,
       helperText,
-      invalid,
       invalidText,
       open,
       toggleLabelClosed,
@@ -719,6 +741,7 @@ class CDSDropdown extends ValidityMixin(
       _slotHelperTextNode: slotHelperTextNode,
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+    const normalizedProps = this._normalizedProps;
 
     let activeDescendantFallback: string | undefined;
     if (open && !activeDescendant) {
@@ -729,33 +752,35 @@ class CDSDropdown extends ValidityMixin(
 
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
     const iconContainerClasses = classMap({
       [`${prefix}--list-box__menu-icon`]: true,
       [`${prefix}--list-box__menu-icon--open`]: open,
     });
-    const toggleLabel =
-      (open ? toggleLabelOpen : toggleLabelClosed) || undefined;
+    const toggleLabel = (open ? toggleLabelOpen : toggleLabelClosed) || '';
     const hasHelperText =
       helperText ||
       invalidText ||
       warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const validityIcon = !invalid
+    const validityIcon = !normalizedProps.invalid
       ? undefined
-      : WarningFilled16({
+      : iconLoader(WarningFilled16, {
           class: `${prefix}--list-box__invalid-icon`,
           'aria-label': toggleLabel,
         });
-    const warningIcon =
-      !warn || (invalid && warn)
-        ? undefined
-        : WarningAltFilled16({
-            class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
-            'aria-label': toggleLabel,
-          });
-    const helperMessage = invalid ? invalidText : warn ? warnText : helperText;
+    const warningIcon = !normalizedProps.warn
+      ? undefined
+      : iconLoader(WarningAltFilled16, {
+          class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
+          'aria-label': toggleLabel,
+        });
+    const helperMessage = normalizedProps.invalid
+      ? invalidText
+      : normalizedProps.warn
+        ? warnText
+        : helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -773,7 +798,7 @@ class CDSDropdown extends ValidityMixin(
       ${this._renderTitleLabel()}
       <div
         class="${classes}"
-        ?data-invalid=${invalid}
+        ?data-invalid=${normalizedProps.invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
         @keypress=${handleKeypressInner}>
@@ -808,7 +833,7 @@ class CDSDropdown extends ValidityMixin(
           )}">
           ${this._renderPrecedingLabel()}${this._renderLabel()}${validityIcon}${warningIcon}${this._renderFollowingLabel()}
           <div id="trigger-caret" class="${iconContainerClasses}">
-            ${ChevronDown16({ 'aria-label': toggleLabel })}
+            ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}
           </div>
         </div>
         <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
@@ -818,7 +843,8 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !invalid) || !hasHelperText}">
+        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+        !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot
         >

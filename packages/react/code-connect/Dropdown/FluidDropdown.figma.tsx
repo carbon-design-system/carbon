@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
-import {
-  unstable__FluidDropdown as FluidDropdown,
-  unstable__FluidDropdownSkeleton as FluidDropdownSkeleton,
-} from '@carbon/react';
+import { FluidDropdown, FluidDropdownSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
