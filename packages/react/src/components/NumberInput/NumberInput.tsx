@@ -210,15 +210,18 @@ export interface NumberInputProps
   min?: number;
 
   /**
-   * Provide an optional handler that is called when the input or stepper
-   * buttons are blurred.
+   * Provide an optional handler that is called when the input is blurred.
    */
   onBlur?: (
-    event:
-      | React.FocusEvent<HTMLInputElement>
-      | React.FocusEvent<HTMLButtonElement>,
+    event: React.FocusEvent<HTMLInputElement>,
     value?: string | number
   ) => void;
+
+  /**
+   * Provide an optional handler that is called when the stepper
+   * buttons are blurred.
+   */
+  onStepperBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
 
   /**
    * Provide an optional handler that is called when the internal state of
@@ -395,6 +398,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       max,
       min,
       onBlur,
+      onStepperBlur,
       onChange,
       onClick,
       onKeyUp,
@@ -831,6 +835,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                 }
 
                 if (onBlur) {
+                  if (type === 'number') {
+                    onBlur(e, value);
+                    return;
+                  }
+
                   const _numberValue = isControlled
                     ? numberParser.parse(inputValue)
                     : numberValue;
@@ -862,7 +871,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn down-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'down')}
-                  onBlur={onBlur}
+                  onBlur={onStepperBlur}
                   tabIndex={-1}
                   title={decrementNumLabel || iconDescription}
                   type="button">
@@ -874,7 +883,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn up-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'up')}
-                  onBlur={onBlur}
+                  onBlur={onStepperBlur}
                   tabIndex={-1}
                   title={incrementNumLabel || iconDescription}
                   type="button">

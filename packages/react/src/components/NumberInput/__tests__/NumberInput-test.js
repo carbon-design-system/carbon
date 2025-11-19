@@ -552,8 +552,8 @@ describe('NumberInput', () => {
     await userEvent.click(screen.getByLabelText('increment'));
     expect(input).toHaveValue(16);
 
+    await userEvent.click(input);
     await userEvent.tab();
-    expect(onBlur).toHaveBeenCalledTimes(1);
     expect(onBlur).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.any(Object),
@@ -803,7 +803,8 @@ describe('NumberInput', () => {
       expect(onBlur).toHaveBeenCalledWith(
         expect.objectContaining({
           target: expect.any(Object),
-        })
+        }),
+        10
       );
     });
 
@@ -916,7 +917,7 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue('10');
       });
 
-      it('should call `onBlur` when focus leaves the input, decrement button, or increment button', async () => {
+      it('should call `onBlur` when focus leaves the input with the values set by decrement button, or increment button', async () => {
         const onBlur = jest.fn();
 
         render(
@@ -932,35 +933,35 @@ describe('NumberInput', () => {
           />
         );
 
-        await userEvent.click(screen.getByLabelText('test-label'));
-        expect(screen.getByLabelText('test-label')).toHaveFocus();
+        const input = screen.getByLabelText('test-label');
+        await userEvent.click(input);
+        expect(input).toHaveFocus();
 
         await userEvent.click(screen.getByLabelText('decrement'));
-        expect(onBlur).toHaveBeenCalledTimes(1);
-        expect(onBlur).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          })
-        );
         expect(screen.getByLabelText('decrement')).toHaveFocus();
 
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(onBlur).toHaveBeenCalledTimes(2);
+        await userEvent.click(input);
+        await userEvent.tab();
+
         expect(onBlur).toHaveBeenCalledWith(
           expect.objectContaining({
             target: expect.any(Object),
-          })
+          }),
+          9
         );
+
+        await userEvent.click(screen.getByLabelText('increment'));
         expect(screen.getByLabelText('increment')).toHaveFocus();
 
-        await userEvent.click(screen.getByLabelText('test-label'));
-        expect(onBlur).toHaveBeenCalledTimes(3);
+        await userEvent.click(input);
+        await userEvent.tab();
+
         expect(onBlur).toHaveBeenCalledWith(
           expect.objectContaining({
             target: expect.any(Object),
-          })
+          }),
+          10
         );
-        expect(screen.getByLabelText('test-label')).toHaveFocus();
       });
 
       it('should set up and down arrows as disabled if `disabled` is true', () => {
