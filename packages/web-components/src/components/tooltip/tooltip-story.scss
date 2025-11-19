@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   block-size: $spacing-05;
-  inline-size: 1rem;
+  inline-size: $spacing-05;
 }
 
 .sb-tooltip-trigger:focus {
