@@ -58,7 +58,7 @@ describe('cds-unordered-list', () => {
     const ul = el.shadowRoot.querySelector('ul');
     expect(ul.classList.contains('cds--list--nested')).to.be.false;
 
-    const nested = document.querySelector('cds-unordered-list[slot="nested"');
+    const nested = document.querySelector('cds-unordered-list[slot="nested"]');
     const nestedUl = nested.shadowRoot.querySelector('ul');
 
     expect(nestedUl.classList.contains('cds--list--nested')).to.be.true;
