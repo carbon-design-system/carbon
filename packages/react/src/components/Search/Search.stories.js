@@ -53,14 +53,16 @@ export const Disabled = () => {
 
 export const Expandable = () => {
   return (
-    <ExpandableSearch
-      size="lg"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-expandable-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
+    <div style={{ marginTop: '50px' }}>
+      <ExpandableSearch
+        size="lg"
+        labelText="Search"
+        closeButtonLabelText="Clear search input"
+        id="search-expandable-1"
+        onChange={() => {}}
+        onKeyDown={() => {}}
+      />
+    </div>
   );
 };
 
