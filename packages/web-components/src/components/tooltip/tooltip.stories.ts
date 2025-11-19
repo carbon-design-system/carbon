@@ -110,7 +110,7 @@ export const Alignment = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    align: POPOVER_ALIGNMENT.BOTTOM_END,
+    align: POPOVER_ALIGNMENT.BOTTOM_START,
     label: 'Tooltip alignment',
   },
   render: ({
