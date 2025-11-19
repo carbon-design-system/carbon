@@ -435,6 +435,7 @@ class CDSMultiSelect extends CDSDropdown {
             placeholder="${label}"
             role="combobox"
             aria-controls="menu-body"
+            aria-expanded="${String(this.open)}"
             aria-autocomplete="list"
             @input="${this._handleInput}" />
         `;
