@@ -73,7 +73,15 @@ test.describe('Button', () => {
       test('set of buttons @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Button',
-          id: 'components-button--set-of-buttons',
+          id: 'components-button-set-of-buttons--default',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
           theme,
         });
       });

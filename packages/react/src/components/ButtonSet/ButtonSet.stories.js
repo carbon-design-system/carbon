@@ -58,7 +58,7 @@ export const Fluid = {
       control: {
         type: 'range',
         min: '280',
-        max: '800',
+        max: '1200',
         step: '1',
       },
       description: 'Sets the width of the ButtonSet container',
