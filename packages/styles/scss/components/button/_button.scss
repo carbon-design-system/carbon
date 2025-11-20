@@ -56,11 +56,17 @@
   }
 
   // NOTE: Container queries are based on this value which is based on IBM Products implementation
+  // Side panel has up to 3 buttons unstacked from size lg (640px). Min 160.33px/button
+  // Narrow Tearsheet 540px has 4 buttons unstacked buttons. Min 135px/button
+  // May need to be configurable as 3 * 135px is less than 640px.
+  // Current value 176px only supports up to 3 buttons at 540px.
   $min-inline-button-size: convert.to-rem(176px);
 
   .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn {
     // default non-column layout
     flex: 0 1 25%;
+
+    // This increased size comes from use in IBM Products Tearsheet and SidePanel
     max-inline-size: convert.to-rem(232px);
   }
 
