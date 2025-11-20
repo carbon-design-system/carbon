@@ -8,12 +8,12 @@
 import React from 'react';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
-import { WithDisplayBox } from '../../../.storybook/templates/WithDisplayBox';
 import {
   fluidButtonLabels,
   fluidButtonMapping,
   fluidButtonOptions,
 } from '../Button/__story__/fluid-button-set-args';
+import { background } from 'storybook/internal/theming';
 
 export default {
   title: 'Components/Button/Button Set',
@@ -36,7 +36,12 @@ export const Default = (args) => {
 export const Fluid = {
   parameters: {
     controls: {
-      include: ['Fluid Buttons', 'Stacked'],
+      include: [
+        'Container width',
+        'Container visible',
+        'Fluid Buttons',
+        'Stacked',
+      ],
     },
   },
   argTypes: {
@@ -47,17 +52,42 @@ export const Fluid = {
       },
       options: fluidButtonOptions,
       mapping: fluidButtonMapping,
+      description: 'Sets the number and type of buttons in the set',
+    },
+    'Container width': {
+      control: {
+        type: 'range',
+        min: '280',
+        max: '800',
+        step: '1',
+      },
+      description: 'Sets the width of the ButtonSet container',
+    },
+    'Container visible': {
+      control: {
+        type: 'boolean',
+      },
+      description: 'Show the ButtonSet container using Carbon layer styling',
     },
   },
+
   render: ({ ...rest }) => {
     const buttons = rest['Fluid Buttons'];
+    const containerStyle = {
+      inlineSize: rest['Container width'] + 'px',
+      maxInlineSize: '100%',
+    };
+    if (rest['Container visible']) {
+      // 42px is the padding around the story
+      containerStyle.boxShadow = '0 0 0 42px var(--cds-layer-01)';
+    }
 
     if (!buttons || buttons === 0) {
       return <div>Select one or more buttons.</div>;
     }
 
     return (
-      <WithDisplayBox>
+      <div style={containerStyle}>
         <ButtonSet fluid>
           {buttons.map(({ label, kind, key }) => (
             <Button key={key} kind={kind}>
@@ -65,11 +95,13 @@ export const Fluid = {
             </Button>
           ))}
         </ButtonSet>
-      </WithDisplayBox>
+      </div>
     );
   },
 };
 
 Fluid.args = {
-  'Fluid Buttons': 1,
+  'Fluid Buttons': 8,
+  'Container width': 600,
+  'Container visible': false,
 };
