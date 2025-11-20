@@ -16,7 +16,7 @@ import {
 import { background } from 'storybook/internal/theming';
 
 export default {
-  title: 'Components/Button/Button Set',
+  title: 'Components/Button/Set Of Buttons',
   component: ButtonSet,
 };
 
