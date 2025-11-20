@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { ButtonKind } from '../Button/Button';
 
 export interface ButtonSetProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -32,6 +33,18 @@ const buttonOrder = (kind) =>
     danger: 5,
     primary: 6,
   })[kind] ?? 4;
+
+const getButtonKind = (element: unknown): ButtonKind | 'primary' => {
+  if (
+    React.isValidElement(element) &&
+    element.props &&
+    typeof element.props === 'object'
+  ) {
+    const props = element.props as { kind?: ButtonKind };
+    return props.kind ?? 'primary';
+  }
+  return 'primary';
+};
 
 const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
   const { children, className, fluid, stacked, ...rest } = props;
@@ -75,16 +88,16 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
 
   useEffect(() => {
     const newSortedChildren = React.Children.toArray(children);
-    newSortedChildren.sort(
-      (a: any, b: any) =>
-        (buttonOrder(a.props.kind || 'primary') -
-          buttonOrder(b.props.kind || 'primary')) *
+
+    newSortedChildren.sort((a: unknown, b: unknown) => {
+      return (
+        (buttonOrder(getButtonKind(a)) - buttonOrder(getButtonKind(b))) *
         (isStacked ? -1 : 1)
-    );
+      );
+    });
     setSortedChildren(newSortedChildren);
 
     // adding sortedChildren to deps causes an infinite loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children, isStacked]);
 
   const buttonSetClasses = classNames(className, `${prefix}--btn-set`, {
