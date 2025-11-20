@@ -9,22 +9,14 @@ import React from 'react';
 import { action } from 'storybook/actions';
 import { Add, Notification } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
-import ButtonSet from '../ButtonSet';
 import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
-import { WithDisplayBox } from '../../../.storybook/templates/WithDisplayBox';
-import {
-  fluidButtonLabels,
-  fluidButtonMapping,
-  fluidButtonOptions,
-} from './__story__/fluid-button-set-args';
 
 export default {
   title: 'Components/Button',
   component: Button,
   subcomponents: {
-    ButtonSet,
     ButtonSkeleton,
   },
   argTypes: {
@@ -161,19 +153,6 @@ IconButtonWithBadge.args = {
   badgeCount: 4,
 };
 
-export const SetOfButtons = (args) => {
-  return (
-    <ButtonSet>
-      <Button kind="secondary" {...args}>
-        Secondary button
-      </Button>
-      <Button kind="primary" {...args}>
-        Primary button
-      </Button>
-    </ButtonSet>
-  );
-};
-
 export const Skeleton = () => {
   return (
     <div>
@@ -182,45 +161,4 @@ export const Skeleton = () => {
       <ButtonSkeleton size="sm" />
     </div>
   );
-};
-
-export const SetOfButtonsFluid = {
-  parameters: {
-    controls: {
-      include: ['Fluid Buttons', 'Stacked'],
-    },
-  },
-  argTypes: {
-    'Fluid Buttons': {
-      control: {
-        type: 'select',
-        labels: fluidButtonLabels,
-      },
-      options: fluidButtonOptions,
-      mapping: fluidButtonMapping,
-    },
-  },
-  render: ({ ...rest }) => {
-    const buttons = rest['Fluid Buttons'];
-
-    if (!buttons || buttons === 0) {
-      return <div>Select one or more buttons.</div>;
-    }
-
-    return (
-      <WithDisplayBox>
-        <ButtonSet fluid>
-          {buttons.map(({ label, kind, key }) => (
-            <Button key={key} kind={kind}>
-              {label}
-            </Button>
-          ))}
-        </ButtonSet>
-      </WithDisplayBox>
-    );
-  },
-};
-
-SetOfButtonsFluid.args = {
-  'Fluid Buttons': 1,
 };
