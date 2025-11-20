@@ -24,16 +24,6 @@ export interface ButtonSetProps extends React.HTMLAttributes<HTMLDivElement> {
   stacked?: boolean;
 }
 
-const fluidMultiples = ['none', 'single', 'double', 'triple', 'quadruple'];
-const fluidMultiple = (buttonArray) => {
-  if (buttonArray.length >= fluidMultiples.length) {
-    // too many buttons
-    return 'many';
-  } else {
-    return fluidMultiples[buttonArray.length];
-  }
-};
-
 const buttonOrder = (kind) =>
   ({
     ghost: 1,
@@ -109,9 +99,6 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
           ref={fluidInnerRef}
           className={classNames(`${prefix}--btn-set__fluid-inner`, {
             [`${prefix}--btn-set__fluid-inner--auto-stack`]: true,
-            [`${prefix}--btn-set__fluid-inner--${fluidMultiple(
-              sortedChildren
-            )}`]: true,
           })}>
           {sortedChildren}
         </div>
