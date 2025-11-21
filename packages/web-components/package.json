@@ -1,7 +1,7 @@
 {
   "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
-  "version": "2.42.1-rc.0",
+  "version": "2.43.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/styles": "^1.94.1-rc.0",
+    "@carbon/styles": "^1.95.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.10.2",
     "@lit/context": "^1.1.3",
