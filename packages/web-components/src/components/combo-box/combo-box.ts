@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,6 +54,18 @@ class CDSComboBox extends CDSDropdown {
    */
   @query('input')
   private _filterInputNode!: HTMLInputElement;
+
+  protected get _supportsMenuInputFiltering() {
+    return true;
+  }
+
+  protected get _menuInputNode(): HTMLInputElement | null {
+    return this._filterInputNode ?? null;
+  }
+
+  protected _clearMenuInputFiltering() {
+    this._handleUserInitiatedClearInput();
+  }
 
   /**
    * The menu containing all selectable items.
@@ -217,6 +229,24 @@ class CDSComboBox extends CDSDropdown {
       comboItem.highlighted = index === firstMatchIndex;
     });
     return firstMatchIndex;
+  }
+
+  protected _handleMouseoverInner(event: MouseEvent) {
+    const item = this._getDropdownItemFromEvent(event);
+    if (!item?.hasAttribute('selected')) {
+      return;
+    }
+
+    super._handleMouseoverInner(event);
+  }
+
+  protected _handleMouseleaveInner(event: MouseEvent) {
+    const isFiltering = Boolean(this._filterInputNode?.value.length);
+    if (isFiltering) {
+      return;
+    }
+
+    super._handleMouseleaveInner(event);
   }
 
   protected _scrollItemIntoView(item: HTMLElement) {
