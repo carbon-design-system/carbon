@@ -53,6 +53,11 @@ class CDSModal extends HostListenerMixin(LitElement) {
   private _headerObserver?: MutationObserver;
 
   /**
+   * Loading statuses that are not `inactive`
+   */
+  private WORKING_LOADING_STATUSES = ['active', 'finished', 'error'];
+
+  /**
    * Handles `click` event on this element.
    *
    * @param event The event.
@@ -316,7 +321,10 @@ class CDSModal extends HostListenerMixin(LitElement) {
   private _initializeLoadingEl(footer: CDSModalFooter) {
     if (!footer) return null;
 
-    if (!this._loadingEl && this.loadingStatus !== 'inactive') {
+    if (
+      !this._loadingEl &&
+      this.WORKING_LOADING_STATUSES.includes(this.loadingStatus)
+    ) {
       const el = document.createElement(`${prefix}-inline-loading`);
       el.setAttribute('controlled', '');
       el.setAttribute('aria-live', 'off');
@@ -355,48 +363,26 @@ class CDSModal extends HostListenerMixin(LitElement) {
     const loader = this._initializeLoadingEl(footer as CDSModalFooter);
     if (!footer || !loader || !primaryButton) return;
 
-    switch (this.loadingStatus) {
-      case 'active': {
-        loader.style.display = 'inline-flex';
-        loader.setAttribute('status', 'active');
-        loader.setAttribute('aria-live', 'assertive');
-        loader.setAttribute(
-          'icon-description',
-          String(this.loadingIconDescription)
-        );
+    if (this.WORKING_LOADING_STATUSES.includes(this.loadingStatus)) {
+      loader.style.display = 'inline-flex';
+      loader.setAttribute('status', String(this.loadingStatus));
+      loader.setAttribute('aria-live', 'assertive');
+      loader.setAttribute(
+        'icon-description',
+        String(this.loadingIconDescription)
+      );
+      loader.textContent = this.loadingDescription;
+      primaryButton.style.display = 'none';
 
-        loader.textContent = this.loadingDescription;
-
-        primaryButton.style.display = 'none';
-
-        if (secondaryButtons) {
-          if (!footer.hasAttribute('has-three-buttons')) {
-            secondaryButtons[0].setAttribute('disabled', '');
-          } else {
-            secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
-          }
+      if (secondaryButtons[0]) {
+        if (!footer.hasAttribute('has-three-buttons')) {
+          secondaryButtons[0].setAttribute('disabled', '');
+        } else {
+          secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
         }
-        break;
       }
 
-      case 'finished': {
-        loader.style.display = 'inline-flex';
-        loader.setAttribute('status', 'finished');
-        loader.setAttribute('aria-live', 'assertive');
-        loader.setAttribute(
-          'icon-description',
-          String(this.loadingIconDescription)
-        );
-        loader.textContent = this.loadingDescription;
-
-        primaryButton.style.display = 'none';
-        if (secondaryButtons) {
-          if (!footer.hasAttribute('has-three-buttons')) {
-            secondaryButtons[0].setAttribute('disabled', '');
-          } else {
-            secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
-          }
-        }
+      if (this.loadingStatus === 'finished') {
         // fire event for successful load
         setTimeout(() => {
           this.dispatchEvent(
@@ -410,40 +396,14 @@ class CDSModal extends HostListenerMixin(LitElement) {
             )
           );
         }, this.loadingSuccessDelay);
-        break;
       }
+    } else if (this.loadingStatus === 'inactive') {
+      loader.style.display = 'none';
+      loader.setAttribute('aria-live', 'off');
 
-      case 'error': {
-        loader.style.display = 'inline-flex';
-        loader.setAttribute('status', 'error');
-        loader.setAttribute('aria-live', 'assertive');
-        loader.setAttribute(
-          'icon-description',
-          String(this.loadingIconDescription)
-        );
-        loader.textContent = this.loadingDescription;
-
-        primaryButton.style.display = 'none';
-        if (secondaryButtons) {
-          if (!footer.hasAttribute('has-three-buttons')) {
-            secondaryButtons[0].setAttribute('disabled', '');
-          } else {
-            secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
-          }
-        }
-        break;
-      }
-
-      case 'inactive':
-      default: {
-        loader.style.display = 'none';
-        loader.setAttribute('aria-live', 'off');
-
-        if (primaryButton) primaryButton.style.display = '';
-        if (secondaryButtons)
-          secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
-        break;
-      }
+      if (primaryButton) primaryButton.style.display = '';
+      if (secondaryButtons)
+        secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
     }
   }
 
