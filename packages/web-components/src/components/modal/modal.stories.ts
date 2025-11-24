@@ -836,7 +836,9 @@ export const WithScrollingContent = {
                   >`
                 : ``}
               ${numberOfButtons >= 2
-                ? html` <cds-modal-footer-button kind="secondary"
+                ? html` <cds-modal-footer-button
+                    kind="secondary"
+                    ?data-modal-close=${numberOfButtons === 2}
                     >${numberOfButtons === 2
                       ? html`Cancel`
                       : 'Rename'}</cds-modal-footer-button
@@ -931,7 +933,9 @@ export const WithStateManager = {
                   >`
                 : ``}
               ${numberOfButtons >= 2
-                ? html` <cds-modal-footer-button kind="secondary"
+                ? html` <cds-modal-footer-button
+                    kind="secondary"
+                    ?data-modal-close=${numberOfButtons === 2}
                     >${numberOfButtons === 2
                       ? html`Cancel`
                       : 'Rename'}</cds-modal-footer-button
