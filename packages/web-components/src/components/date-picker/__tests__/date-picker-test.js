@@ -110,6 +110,129 @@ describe('cds-date-picker', () => {
       expect(warnIcon).not.to.exist;
     });
   });
+
+  describe('Date Picker Functionality', () => {
+    it('should render date picker with calendar', async () => {
+      const el = await fixture(html`
+        <cds-date-picker>
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+      expect(el).to.exist;
+    });
+
+    it('should handle value changes', async () => {
+      const el = await fixture(html`
+        <cds-date-picker value="2024-01-15">
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+      expect(el.value).to.equal('2024-01-15');
+    });
+
+    it('should support range mode', async () => {
+      const el = await fixture(html`
+        <cds-date-picker>
+          <cds-date-picker-input
+            kind="from"
+            label-text="Start date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+          <cds-date-picker-input
+            kind="to"
+            label-text="End date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+      expect(el).to.exist;
+    });
+
+    it('should handle disabled state', async () => {
+      const el = await fixture(html`
+        <cds-date-picker disabled>
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+      expect(el.disabled).to.be.true;
+    });
+
+    it('should handle readonly state', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input
+          readonly
+          label-text="Date"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+      expect(el.readonly).to.be.true;
+    });
+
+    it('should handle different sizes', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input
+          size="lg"
+          label-text="Date"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+      expect(el.size).to.equal('lg');
+    });
+
+    it('should show invalid state with message', async () => {
+      const invalidText = 'Invalid date format';
+      const el = await fixture(html`
+        <cds-date-picker-input
+          invalid
+          invalid-text="${invalidText}"
+          label-text="Date"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(formRequirement?.textContent?.trim()).to.equal(invalidText);
+    });
+
+    it('should show warning state with message', async () => {
+      const warnText = 'Date is in the past';
+      const el = await fixture(html`
+        <cds-date-picker-input
+          warn
+          warn-text="${warnText}"
+          label-text="Date"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const formRequirement = el.shadowRoot?.querySelector(
+        '.cds--form-requirement'
+      );
+      expect(formRequirement?.textContent?.trim()).to.equal(warnText);
+    });
+  });
 });
 
 // Made with Bob
