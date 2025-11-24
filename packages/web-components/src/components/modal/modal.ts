@@ -460,7 +460,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
 
   /**
    * Observes the modal header to account for cases where the modal-heading,
-   * modal-label, and/or `aria-label` attributes are dynamically changing,
+   * modal-label, and/or `aria-label` are dynamically changing
    * to update the `aria-label` put on the modal
    */
   private _observeHeader() {
