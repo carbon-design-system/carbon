@@ -226,7 +226,7 @@ class CDSComboBox extends CDSDropdown {
       } else {
         (comboItem as HTMLElement).style.display = '';
       }
-      comboItem.highlighted = index === firstMatchIndex;
+      comboItem.highlighted = index === firstMatchIndex && !comboItem.disabled;
     });
     return firstMatchIndex;
   }
