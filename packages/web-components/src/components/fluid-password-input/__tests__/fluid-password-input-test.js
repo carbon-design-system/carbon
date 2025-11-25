@@ -172,6 +172,16 @@ describe('cds-fluid-password-input', () => {
     expect(toggleButton.disabled).to.be.true;
   });
 
+  it('should render divider when isFluid is true', async () => {
+    const el = await fixture(html`
+      <cds-fluid-password-input label="Password"></cds-fluid-password-input>
+    `);
+
+    const divider = el.shadowRoot.querySelector('.cds--text-input__divider');
+    expect(divider).to.exist;
+    expect(divider.tagName.toLowerCase()).to.equal('hr');
+  });
+
   it('should not allow input change when readOnly is true', async () => {
     const el = await fixture(html`
       <cds-fluid-password-input readonly></cds-fluid-password-input>

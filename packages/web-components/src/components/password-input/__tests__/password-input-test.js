@@ -75,6 +75,16 @@ describe('cds-password-input', () => {
     ).to.be.true;
   });
 
+  it('should render divider when isFluid is true', async () => {
+    const el = await fixture(html`
+      <cds-password-input isFluid="true" label="Password"></cds-password-input>
+    `);
+
+    const divider = el.shadowRoot.querySelector('.cds--text-input__divider');
+    expect(divider).to.exist;
+    expect(divider.tagName.toLowerCase()).to.equal('hr');
+  });
+
   it('should apply hide-password-label attribute', async () => {
     const el = await fixture(html`
       <cds-password-input
