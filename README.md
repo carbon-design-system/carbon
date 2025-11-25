@@ -378,6 +378,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/BiaBiruka"><img src="https://avatars.githubusercontent.com/u/128196689?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Parolin</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=BiaBiruka" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/trumanbutter"><img src="https://avatars.githubusercontent.com/u/32148874?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Truman Butterworth</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=trumanbutter" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/grishma-shah7"><img src="https://avatars.githubusercontent.com/u/87775713?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Grishma Shah</b></sub></a><br /><a href="#a11y-grishma-shah7" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://github.com/suniltc-ibm"><img src="https://avatars.githubusercontent.com/u/186133269?v=4?s=100" width="100px;" alt=""/><br /><sub><b>suniltc-ibm</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=suniltc-ibm" title="Code">💻</a></td>
   </tr>
 </table>
 
