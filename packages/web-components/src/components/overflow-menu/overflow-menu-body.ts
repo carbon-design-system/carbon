@@ -5,17 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
-import { property } from 'lit/decorators.js';
-import { prefix } from '../../globals/settings';
 import CDSFloatingMenu, {
   FLOATING_MENU_DIRECTION,
 } from '../floating-menu/floating-menu';
 import { NAVIGATION_DIRECTION, OVERFLOW_MENU_SIZE } from './defs';
+
 import CDSOverflowMenuItem from './overflow-menu-item';
 import HostListener from '../../globals/decorators/host-listener';
-import { indexOf } from '../../globals/internal/collection-helpers';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { html } from 'lit';
+import { indexOf } from '../../globals/internal/collection-helpers';
+import { prefix } from '../../globals/settings';
+import { property } from 'lit/decorators.js';
 import styles from './overflow-menu.scss?lit';
 
 /**
@@ -118,7 +119,26 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
       }
 
       if (key === 'Escape') {
+        event.preventDefault();
+
+        const menuTrigger = this.parent as HTMLElement | null;
         this.open = false;
+
+        if (menuTrigger && 'open' in menuTrigger) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (menuTrigger as any).open = false;
+        }
+
+        requestAnimationFrame(() => {
+          const triggerButton =
+            menuTrigger?.shadowRoot?.querySelector(
+              `button.${prefix}--overflow-menu`
+            ) || menuTrigger?.querySelector(`button.${prefix}--overflow-menu`);
+
+          if (triggerButton) {
+            (triggerButton as HTMLElement).focus();
+          }
+        });
         return;
       }
 
@@ -131,10 +151,16 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
 
       if (isInsideMenu) {
         event.preventDefault();
+
+        const menuTrigger = this.parent as HTMLElement | null;
         this.open = false;
 
+        if (menuTrigger && 'open' in menuTrigger) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (menuTrigger as any).open = false;
+        }
+
         requestAnimationFrame(() => {
-          const menuTrigger = this.parent as HTMLElement | null;
           const triggerButton =
             menuTrigger?.shadowRoot?.querySelector(
               `button.${prefix}--overflow-menu`
@@ -142,10 +168,6 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
 
           if (triggerButton) {
             (triggerButton as HTMLElement).focus();
-          } else {
-            // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
-            console.warn('Could not find trigger button.');
-            (document.body as HTMLElement).focus();
           }
         });
       }

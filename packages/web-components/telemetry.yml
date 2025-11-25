@@ -22,10 +22,13 @@ collect:
         - aria-labelledby
         - assistive-text
         - autoalign
+        - autoalign-boundary
         - autocomplete
         - autofocus
+        - backgroundToken
         - batch-action
         - batch-expansion
+        - border
         - breadcrumb
         - button-class-name
         - button-label
@@ -42,7 +45,9 @@ collect:
         - close-on-escape
         - collapse-mode
         - color-scheme
+        - cols
         - condensed
+        - counter-mode
         - danger-description
         - data-table
         - default-checked
@@ -129,6 +134,7 @@ collect:
         - oncds-notification-closed
         - oncds-radio-button-changed
         - oncds-search-input
+        - oncds-select-selected
         - oncds-selectable-tile-changed
         - oncds-slider-input-changed
         - oncds-table-batch-actions-cancel-clicked
@@ -139,6 +145,7 @@ collect:
         - oncds-table-row-expando-toggled
         - oncds-tag-beingclosed
         - oncds-tag-closed
+        - onchange
         - onClick
         - oninput
         - oninvalid
@@ -163,8 +170,10 @@ collect:
         - revert-active
         - revert-label
         - role
+        - rows
         - selected
         - selected-index
+        - selectedIndex
         - selection-label
         - selection-mode
         - selection-name
@@ -250,6 +259,8 @@ collect:
         - oncds-combo-box-beingtoggled
         - oncds-combo-box-selected
         - oncds-combo-box-toggled
+        - should-filter-item
+        - typeahead
         # cds-copy-button
         - autoAlign
         # cds-date-picker
@@ -317,6 +328,9 @@ collect:
         - inactive
         - overlay
         - small
+        # cds-menu-button
+        - menu-background-token
+        - menu-border
         # cds-menu-item
         - aria-checked
         - boundaries
@@ -368,7 +382,6 @@ collect:
         - divider
         - oncds-overflow-menu-item-clicked
         # cds-page-header-breadcrumb
-        - border
         - content-actions-flush
         - page-actions-flush
         # cds-pagination
@@ -391,8 +404,13 @@ collect:
         - hide-password-label
         - show-password-label
         # cds-progress-indicator
+        - current-index
+        - ononChange
         - space-equally
         # cds-progress-step
+        - clickable
+        - complete
+        - current
         - icon-label
         - secondary-label
         - secondary-label-text
@@ -404,9 +422,6 @@ collect:
         - oncds-radio-button-group-changed
         # cds-radio-tile
         - oncds-radio-tile-selected
-        # cds-select
-        - oncds-select-selected
-        - selectedIndex
         # cds-selectable-tag
         - oncds-selectable-tag-beforeselected
         - oncds-selectable-tag-selected
@@ -500,10 +515,6 @@ collect:
         - influencer-width
         - oncds-tearsheet-beingclosed
         - oncds-tearsheet-closed
-        # cds-textarea
-        - cols
-        - counter-mode
-        - rows
         # cds-tile-group
         - currentRadioSelection
         - currentSelections
@@ -514,7 +525,6 @@ collect:
         - selectableTiles
         # cds-time-picker
         - max-length
-        - onchange
         - warning
         - warning-text
         # cds-toggle
@@ -522,6 +532,7 @@ collect:
         - label-a
         - label-b
         - oncds-toggle-changed
+        - toggled
         # cds-tooltip
         - closeOnActivation
         - keyboard-only
@@ -530,14 +541,6 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
-        # feature-flags
-        - enable-dialog-element
-        - enable-experimental-focus-wrap-without-sentinels
-        - enable-treeview-controllable
-        - enable-v12-dynamic-floating-styles
-        - enable-v12-overflowmenu
-        - enable-v12-tile-default-icons
-        - enable-v12-tile-radio-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
@@ -586,6 +589,9 @@ collect:
         - top-left
         - top-right
         - top-start
+        # General - backgroundToken
+        - background
+        - layer
         # General - collapse-mode
         - fixed
         - rail
@@ -593,6 +599,9 @@ collect:
         # General - color-scheme
         - ""
         - light
+        # General - counter-mode
+        - character
+        - word
         # General - direction
         - bottom
         - top
@@ -755,6 +764,9 @@ collect:
         - primary
         - secondary
         - tertiary
+        # cds-menu-button - menu-background-token
+        - background
+        - layer
         # cds-multi-select - selection-feedback
         - fixed
         - top
@@ -768,9 +780,6 @@ collect:
         # cds-tearsheet - influencer-width
         - narrow
         - wide
-        # cds-textarea - counter-mode
-        - character
-        - word
   npm:
     dependencies: null
   js:

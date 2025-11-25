@@ -880,7 +880,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
-      'aria-describedby': helperText ? helperId : undefined,
+      'aria-describedby':
+        helperText && !invalid && !warn ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
       // provides this aria information.
@@ -1069,7 +1070,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           normalizedDecorator
         ) : decorator ? (
           <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-            {normalizedDecorator}
+            {candidateIsAILabel ? (
+              normalizedDecorator
+            ) : (
+              <span>{normalizedDecorator}</span>
+            )}
           </div>
         ) : (
           ''

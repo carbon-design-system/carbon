@@ -1214,10 +1214,10 @@
       "contributions": ["code", "doc"]
     },
     {
-      "login": "Neues",
-      "name": "Noah Sgorbati",
+      "login": "neuescodes",
+      "name": "Noah S.",
       "avatar_url": "https://avatars.githubusercontent.com/u/9409245?v=4",
-      "profile": "https://github.com/Neues",
+      "profile": "https://github.com/neuescodes",
       "contributions": ["code", "doc"]
     },
     {
@@ -1526,6 +1526,61 @@
       "contributions": [
         "code",
         "example"
+      ]
+    },
+    {
+      "login": "olihf-dematic",
+      "name": "olihf-dematic",
+      "avatar_url": "https://avatars.githubusercontent.com/u/225178617?v=4",
+      "profile": "https://github.com/olihf-dematic",
+      "contributions": [
+        "code",
+        "a11y"
+      ]
+    },
+    {
+     "login": "vidhyarbiji",
+     "name": "Vidhya Ravikumar",
+     "avatar_url": "https://avatars.githubusercontent.com/u/11348409?v=4",
+     "profile": "https://github.com/vidhyarbiji",
+     "contributions": [
+       "code"
+     ]
+    },
+    {
+      "login": "mateus037",
+      "name": "Mateus Rodrigues",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34143412?v=4",
+      "profile": "https://github.com/mateus037",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "BiaBiruka",
+      "name": "Beatriz Parolin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/128196689?v=4",
+      "profile": "https://github.com/BiaBiruka",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "trumanbutter",
+      "name": "Truman Butterworth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32148874?v=4",
+      "profile": "https://github.com/trumanbutter",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "grishma-shah7",
+      "name": "Grishma Shah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87775713?v=4",
+      "profile": "https://github.com/grishma-shah7",
+      "contributions": [
+        "a11y"
       ]
     }
   ],

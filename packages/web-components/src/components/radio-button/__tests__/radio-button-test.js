@@ -74,4 +74,42 @@ describe('cds-radio-button', () => {
       ).to.be.true;
     }
   });
+
+  it('should not toggle when readonly radio is clicked', async () => {
+    const el = await fixture(
+      html`<cds-radio-button readOnly value="test-value"></cds-radio-button>`
+    );
+    const input = el.shadowRoot.querySelector('input[type="radio"]');
+
+    el.click();
+    await el.updateComplete;
+
+    expect(el.checked).to.be.false;
+    expect(input?.checked).to.be.false;
+  });
+
+  it('should not toggle when readonly radio receives keyboard activation', async () => {
+    const el = await fixture(
+      html`<cds-radio-button readOnly value="test-value"></cds-radio-button>`
+    );
+    const keyboardEvent = new KeyboardEvent('keydown', {
+      key: ' ',
+      bubbles: true,
+      composed: true,
+    });
+
+    el.dispatchEvent(keyboardEvent);
+    await el.updateComplete;
+
+    expect(el.checked).to.be.false;
+  });
+
+  it('should set aria-readonly on the inner input when readonly', async () => {
+    const el = await fixture(
+      html`<cds-radio-button readOnly value="test-value"></cds-radio-button>`
+    );
+    const input = el.shadowRoot.querySelector('input[type="radio"]');
+
+    expect(input?.getAttribute('aria-readonly')).to.equal('true');
+  });
 });

@@ -142,7 +142,15 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         (this.constructor as typeof CDSRadioButton)?.slugItem
       )
     ) {
-      const { disabled, _radioButtonDelegate: radioButtonDelegate } = this;
+      const {
+        disabled,
+        _radioButtonDelegate: radioButtonDelegate,
+        readOnly,
+      } = this;
+      if (readOnly) {
+        event.preventDefault();
+        return;
+      }
       if (radioButtonDelegate && !disabled && !this.disabledItem) {
         this.checked = true;
         if (this._manager) {
@@ -202,8 +210,13 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         _radioButtonDelegate: radioButtonDelegate,
         disabled,
         disabledItem,
+        readOnly,
       } = this;
       const manager = this._manager;
+      if (readOnly) {
+        event.preventDefault();
+        return;
+      }
       if (radioButtonDelegate && manager && !disabled && !disabledItem) {
         const navigationDirectionForKey =
           orientation === RADIO_BUTTON_ORIENTATION.HORIZONTAL
@@ -298,6 +311,18 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   invalid = false;
 
   /**
+   * Specify whether the control is currently in warning state
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  @property({ attribute: 'warn-text' })
+  warnText = '';
+
+  /**
    * The label position.
    */
   @property({ reflect: true, attribute: 'label-position' })
@@ -361,12 +386,21 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       _inputNode: inputNode,
       _radioButtonDelegate: radioButtonDelegate,
       name,
+      disabled,
+      disabledItem,
+      readOnly,
+      invalid,
+      warn,
     } = this;
 
+    // Normalize input props similar to useNormalizedInputProps in React
+    const normalizedProps = {
+      disabled: !readOnly && (disabled || disabledItem),
+      invalid: !readOnly && !disabled && !disabledItem && invalid,
+      warn: !readOnly && !disabled && !disabledItem && !invalid && warn,
+    };
+
     if (changedProperties.has('checked') || changedProperties.has('name')) {
-      if (this.readOnly) {
-        this.checked = false;
-      }
       if (!this._manager) {
         this._manager = RadioGroupManager.get(
           this.getRootNode({ composed: true }) as Document
@@ -393,6 +427,27 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           : '0'
       );
     }
+    // Handle validation states based on normalized props
+    if (
+      changedProperties.has('invalid') ||
+      changedProperties.has('warn') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('disabledItem') ||
+      changedProperties.has('readOnly')
+    ) {
+      // Apply normalized validation states
+      if (normalizedProps.invalid) {
+        this.setAttribute('invalid', '');
+        this.removeAttribute('warn');
+      } else if (normalizedProps.warn) {
+        this.setAttribute('warn', '');
+        this.removeAttribute('invalid');
+      } else {
+        this.removeAttribute('invalid');
+        this.removeAttribute('warn');
+      }
+    }
+
     // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     hasAILabel
       ? this.setAttribute('ai-label', '')
@@ -408,7 +463,17 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       value,
       disabled,
       disabledItem,
+      readOnly,
+      invalid,
+      warn,
     } = this;
+
+    // Normalize input props similar to useNormalizedInputProps in React
+    const normalizedProps = {
+      disabled: !readOnly && (disabled || disabledItem),
+      invalid: !readOnly && !disabled && !disabledItem && invalid,
+      warn: !readOnly && !disabled && !disabledItem && !invalid && warn,
+    };
     const innerLabelClasses = classMap({
       [`${prefix}--radio-button__label-text`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -421,9 +486,16 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         .checked=${checked}
         ?disabled="${disabledItem || disabled}"
         ?required=${this.required}
+        aria-readonly="${String(Boolean(readOnly))}"
         name=${ifDefined(name)}
         value=${ifDefined(value)} />
-      <label for="input" class="${prefix}--radio-button__label">
+      <label
+        for="input"
+        class="${prefix}--radio-button__label ${normalizedProps.invalid
+          ? `${prefix}--radio-button__label--invalid`
+          : ''} ${normalizedProps.warn
+          ? `${prefix}--radio-button__label--warn`
+          : ''}">
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}">
           <slot> ${labelText} </slot>

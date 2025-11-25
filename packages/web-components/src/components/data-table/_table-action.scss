@@ -149,6 +149,7 @@
   @extend .#{$prefix}--batch-actions;
 
   box-sizing: border-box;
+  overflow-x: auto;
 }
 
 :host(#{$prefix}-table-batch-actions[active]) {
