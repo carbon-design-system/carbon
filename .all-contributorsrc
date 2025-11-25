@@ -1214,10 +1214,10 @@
       "contributions": ["code", "doc"]
     },
     {
-      "login": "Neues",
-      "name": "Noah Sgorbati",
+      "login": "neuescodes",
+      "name": "Noah S.",
       "avatar_url": "https://avatars.githubusercontent.com/u/9409245?v=4",
-      "profile": "https://github.com/Neues",
+      "profile": "https://github.com/neuescodes",
       "contributions": ["code", "doc"]
     },
     {
@@ -1563,6 +1563,24 @@
       "profile": "https://github.com/BiaBiruka",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "trumanbutter",
+      "name": "Truman Butterworth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32148874?v=4",
+      "profile": "https://github.com/trumanbutter",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "grishma-shah7",
+      "name": "Grishma Shah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87775713?v=4",
+      "profile": "https://github.com/grishma-shah7",
+      "contributions": [
+        "a11y"
       ]
     }
   ],
