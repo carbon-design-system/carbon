@@ -605,15 +605,32 @@ const ComboBox = forwardRef(
             // If custom values are allowed, treat whatever the user typed as
             // the value.
             if (allowCustomValue && highlightedIndex === -1) {
-              const { inputValue } = state;
+              const inputValue = state.inputValue ?? '';
+              const currentSelectedItem =
+                typeof changes.selectedItem === 'undefined'
+                  ? state.selectedItem
+                  : changes.selectedItem;
+              const isMatchingSelection =
+                currentSelectedItem !== null &&
+                typeof currentSelectedItem !== 'undefined' &&
+                itemToString(currentSelectedItem) === inputValue &&
+                items.some((item) => isEqual(item, currentSelectedItem));
 
-              changes.selectedItem = inputValue;
+              if (isMatchingSelection) {
+                return changes;
+              }
+              const nextSelectedItem =
+                items.find((item) => itemToString(item) === inputValue) ??
+                inputValue;
 
-              if (onChange) {
-                onChange({ selectedItem: inputValue, inputValue });
+              if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
+                onChange({ selectedItem: nextSelectedItem, inputValue });
               }
 
-              return changes;
+              return {
+                ...changes,
+                selectedItem: nextSelectedItem,
+              };
             }
 
             // If a new item was selected, keep its label in the input.
@@ -885,6 +902,11 @@ const ComboBox = forwardRef(
       },
     });
 
+    // Keep the dropdown highlight in sync with either the controlled value or
+    // Downshift's own selection when uncontrolled.
+    const menuSelectedItem =
+      typeof selectedItemProp !== 'undefined' ? selectedItemProp : selectedItem;
+
     useEffect(() => {
       // Used to expose the downshift actions to consumers for use with downshiftProps
       // An odd pattern, here we mutate the value stored in the ref provided from the consumer.
@@ -910,6 +932,7 @@ const ComboBox = forwardRef(
       downshiftSetInputValue,
       toggleMenu,
     ]);
+
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
       onClick: handleToggleClick(isOpen),
@@ -1012,169 +1035,6 @@ const ComboBox = forwardRef(
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
-            {isInputTextTruncated ? (
-              <Tooltip label={inputValue} align="bottom" leaveDelayMs={0}>
-                <input
-                  disabled={disabled}
-                  className={inputClasses}
-                  type="text"
-                  tabIndex={0}
-                  aria-haspopup="listbox"
-                  {...getInputProps({
-                    'aria-label': titleText
-                      ? undefined
-                      : deprecatedAriaLabel || ariaLabel,
-                    'aria-controls': isOpen ? undefined : menuProps.id,
-                    placeholder,
-                    value: inputValue,
-                    ...inputProps,
-                    onChange: (e) => {
-                      const newValue = e.target.value;
-                      setInputValue(newValue);
-                      downshiftSetInputValue(newValue);
-                    },
-                    ref: mergeRefs(textInput, ref, inputRef),
-                    onKeyDown: (
-                      event: KeyboardEvent<HTMLInputElement> & {
-                        preventDownshiftDefault: boolean;
-                        target: {
-                          value: string;
-                          setSelectionRange: (
-                            start: number,
-                            end: number
-                          ) => void;
-                        };
-                      }
-                    ): void => {
-                      if (match(event, keys.Space)) {
-                        event.stopPropagation();
-                      }
-                      if (
-                        match(event, keys.Enter) &&
-                        (!inputValue || allowCustomValue)
-                      ) {
-                        toggleMenu();
-
-                        if (highlightedIndex !== -1) {
-                          selectItem(
-                            filterItems(items, itemToString, inputValue)[
-                              highlightedIndex
-                            ]
-                          );
-                        }
-
-                        // Since `onChange` does not normally fire when the menu is closed, we should
-                        // manually fire it when `allowCustomValue` is provided, the menu is closing,
-                        // and there is a value.
-                        if (
-                          allowCustomValue &&
-                          isOpen &&
-                          inputValue &&
-                          highlightedIndex === -1
-                        ) {
-                          onChange({ selectedItem: null, inputValue });
-                        }
-
-                        event.preventDownshiftDefault = true;
-                        event?.persist?.();
-                      }
-
-                      if (match(event, keys.Escape) && inputValue) {
-                        if (event.target === textInput.current && isOpen) {
-                          toggleMenu();
-                          event.preventDownshiftDefault = true;
-                          event?.persist?.();
-                        }
-                      }
-
-                      if (match(event, keys.Home) && event.code !== 'Numpad7') {
-                        event.target.setSelectionRange(0, 0);
-                      }
-
-                      if (match(event, keys.End) && event.code !== 'Numpad1') {
-                        event.target.setSelectionRange(
-                          event.target.value.length,
-                          event.target.value.length
-                        );
-                      }
-
-                      if (event.altKey && event.key == 'ArrowDown') {
-                        event.preventDownshiftDefault = true;
-                        if (!isOpen) {
-                          toggleMenu();
-                        }
-                      }
-                      if (event.altKey && event.key == 'ArrowUp') {
-                        event.preventDownshiftDefault = true;
-                        if (isOpen) {
-                          toggleMenu();
-                        }
-                      }
-                      if (
-                        !inputValue &&
-                        highlightedIndex == -1 &&
-                        event.key == 'Enter'
-                      ) {
-                        if (!isOpen) toggleMenu();
-                        selectItem(null);
-                        event.preventDownshiftDefault = true;
-                        if (event.currentTarget.ariaExpanded === 'false')
-                          openMenu();
-                      }
-                      if (typeahead && event.key === 'Tab') {
-                        //  event.preventDefault();
-                        const matchingItem = items.find((item) =>
-                          itemToString(item)
-                            .toLowerCase()
-                            .startsWith(inputValue.toLowerCase())
-                        );
-                        if (matchingItem) {
-                          const newValue = itemToString(matchingItem);
-                          downshiftSetInputValue(newValue);
-                          selectItem(matchingItem);
-                        }
-                      }
-                    },
-                  })}
-                  {...rest}
-                  {...readOnlyEventHandlers}
-                  readOnly={readOnly}
-                  aria-describedby={ariaDescribedBy}
-                />
-              </Tooltip>
-            ) : (
-              <input
-                disabled={disabled}
-                className={inputClasses}
-                type="text"
-                tabIndex={0}
-                aria-haspopup="listbox"
-                title={textInput?.current?.value}
-                {...getInputProps({
-                  'aria-label': titleText
-                    ? undefined
-                    : deprecatedAriaLabel || ariaLabel,
-                  'aria-controls': isOpen ? undefined : menuProps.id,
-                  placeholder,
-                  value: inputValue,
-                  ...inputProps,
-                  onChange: (e) => {
-                    const newValue = e.target.value;
-                    setInputValue(newValue);
-                    downshiftSetInputValue(newValue);
-                  },
-                  ref: mergeRefs(textInput, ref, inputRef),
-                  onKeyDown: (
-                    event: KeyboardEvent<HTMLInputElement> & {
-                      preventDownshiftDefault: boolean;
-                      target: {
-                        value: string;
-                        setSelectionRange: (start: number, end: number) => void;
-                      };
-                    }
-                  ): void => {
-                    if (match(event, keys.Space)) {
-                      event.stopPropagation();
                     }
                     if (
                       match(event, keys.Enter) &&
@@ -1303,7 +1163,12 @@ const ComboBox = forwardRef(
             normalizedDecorator
           ) : decorator ? (
             <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-              {normalizedDecorator}
+              {/* wrap only when NOT an AILabel */}
+              {candidateIsAILabel ? (
+                normalizedDecorator
+              ) : (
+                <span>{normalizedDecorator}</span>
+              )}
             </div>
           ) : (
             ''
@@ -1335,7 +1200,7 @@ const ComboBox = forwardRef(
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={selectedItem === item}
+                        isActive={isEqual(menuSelectedItem, item)}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
@@ -1345,7 +1210,7 @@ const ComboBox = forwardRef(
                         ) : (
                           itemToString(item)
                         )}
-                        {selectedItem === item && (
+                        {isEqual(menuSelectedItem, item) && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />

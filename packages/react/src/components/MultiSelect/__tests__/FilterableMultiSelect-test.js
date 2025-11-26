@@ -512,6 +512,38 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
+  it('should not apply aria-describedby helper text in invalid state', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        helperText="This is helper text"
+        invalid
+        invalidText="Something went wrong"
+      />
+    );
+    await waitForPosition();
+
+    const input = screen.getByRole('combobox');
+    expect(input).not.toHaveAttribute('aria-describedby');
+    expect(screen.getByText('Something went wrong')).toBeInTheDocument();
+  });
+
+  it('should not apply aria-describedby helper text in warn state', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        helperText="This is helper text"
+        warn
+        warnText="Something might go wrong"
+      />
+    );
+    await waitForPosition();
+
+    const input = screen.getByRole('combobox');
+    expect(input).not.toHaveAttribute('aria-describedby');
+    expect(screen.getByText('Something might go wrong')).toBeInTheDocument();
+  });
+
   it('should handle itemToElement prop', async () => {
     const items = [{ text: 'test-item' }];
     const label = 'test-label';

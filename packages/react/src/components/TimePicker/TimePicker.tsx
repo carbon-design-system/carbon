@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
-import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 type ExcludedAttributes = 'id' | 'value';
 
@@ -202,21 +202,32 @@ const TimePicker = frFn((props, ref) => {
     }
   }
 
+  const normalizedProps = useNormalizedInputProps({
+    id,
+    readOnly,
+    disabled,
+    invalid,
+    invalidText,
+    warn: warning,
+    warnText: warningText,
+  });
+
   const timePickerInputClasses = cx(
     `${prefix}--time-picker__input-field`,
     `${prefix}--text-input`,
     [inputClassName],
     {
       [`${prefix}--text-input--light`]: light,
-      [`${prefix}--time-picker__input-field-error`]: invalid || warning,
+      [`${prefix}--time-picker__input-field-error`]:
+        normalizedProps.invalid || normalizedProps.warn,
     }
   );
 
   const timePickerClasses = cx({
     [`${prefix}--time-picker`]: true,
     [`${prefix}--time-picker--light`]: light,
-    [`${prefix}--time-picker--invalid`]: invalid,
-    [`${prefix}--time-picker--warning`]: warning,
+    [`${prefix}--time-picker--invalid`]: normalizedProps.invalid,
+    [`${prefix}--time-picker--warning`]: normalizedProps.warn,
     [`${prefix}--time-picker--readonly`]: readOnly,
     [`${prefix}--time-picker--${size}`]: size,
     ...(pickerClassName && { [pickerClassName]: true }),
@@ -280,8 +291,8 @@ const TimePicker = frFn((props, ref) => {
         <div className={`${prefix}--time-picker__input`}>
           <input
             className={timePickerInputClasses}
-            data-invalid={invalid ? invalid : undefined}
-            disabled={disabled}
+            data-invalid={normalizedProps.invalid ? true : undefined}
+            disabled={normalizedProps.disabled}
             id={id}
             maxLength={maxLength}
             onClick={handleOnClick}
@@ -295,29 +306,22 @@ const TimePicker = frFn((props, ref) => {
             {...rest}
             {...readOnlyProps}
           />
-          {(invalid || warning) && (
-            <div className={`${prefix}--time-picker__error__icon`}>
-              {invalid ? (
-                <WarningFilled
-                  className={`${prefix}--checkbox__invalid-icon`}
-                  size={16}
-                />
-              ) : (
-                <WarningAltFilled
-                  className={`${prefix}--text-input__invalid-icon--warning`}
-                  size={16}
-                />
-              )}
-            </div>
-          )}
+          {(normalizedProps.invalid || normalizedProps.warn) &&
+            normalizedProps.icon && (
+              <div className={`${prefix}--time-picker__error__icon`}>
+                {/* Use the icon from normalizedProps */}
+                {React.createElement(normalizedProps.icon, {
+                  className: normalizedProps.invalid
+                    ? `${prefix}--checkbox__invalid-icon`
+                    : `${prefix}--text-input__invalid-icon--warning`,
+                  size: 16,
+                } as React.ComponentProps<typeof normalizedProps.icon>)}
+              </div>
+            )}
         </div>
         {getInternalPickerSelects()}
       </div>
-      {(invalid || warning) && (
-        <div className={`${prefix}--form-requirement`}>
-          {invalid ? invalidText : warningText}
-        </div>
-      )}
+      {normalizedProps.validation}
     </div>
   );
 });

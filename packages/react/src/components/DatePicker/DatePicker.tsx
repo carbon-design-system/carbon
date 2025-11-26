@@ -31,6 +31,7 @@ import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
 import type { Instance } from 'flatpickr/dist/types/instance';
+import { datePartsOrder } from '@carbon/utilities';
 
 // Weekdays shorthand for English locale
 // Ensure localization exists before trying to access it
@@ -65,6 +66,7 @@ const monthToStr = (monthNumber, shorthand, locale) =>
  * @param {string} config.selectorFlatpickrYearContainer The CSS selector for the container of year selection UI.
  * @param {string} config.selectorFlatpickrCurrentMonth The CSS selector for the text-based month selection UI.
  * @param {string} config.classFlatpickrCurrentMonth The CSS class for the text-based month selection UI.
+ * @param {string} config.locale The locale code.
  * @returns {Plugin} A Flatpickr plugin to use text instead of `<select>` for month picker.
  */
 const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
@@ -91,12 +93,21 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
           config.shorthand === true,
           fp.l10n
         );
-        fp.yearElements[0]
-          .closest(config.selectorFlatpickrMonthYearContainer)
-          .insertBefore(
-            monthElement,
-            fp.yearElements[0].closest(config.selectorFlatpickrYearContainer)
-          );
+
+        // Depending on the locale, toggle the order of the month and year
+        if (datePartsOrder.isMonthFirst(config.locale)) {
+          fp.yearElements[0]
+            .closest(config.selectorFlatpickrMonthYearContainer)
+            .insertBefore(
+              monthElement,
+              fp.yearElements[0].closest(config.selectorFlatpickrYearContainer)
+            );
+        } else {
+          fp.yearElements[0]
+            .closest(config.selectorFlatpickrMonthYearContainer)
+            .insertAdjacentElement('afterend', monthElement);
+        }
+
         return monthElement;
       })
     );
@@ -684,6 +695,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           selectorFlatpickrYearContainer: '.numInputWrapper',
           selectorFlatpickrCurrentMonth: '.cur-month',
           classFlatpickrCurrentMonth: 'cur-month',
+          locale: locale,
         }),
         carbonFlatpickrFixEventsPlugin({
           inputFrom: startInputField.current,
