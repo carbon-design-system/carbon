@@ -6,19 +6,15 @@
  */
 
 'use strict';
-import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
-import { dirname, join } from 'path';
+import { dirname } from 'path';
 import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, 'package.json')));
-}
-
-const require = createRequire(import.meta.url);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -42,7 +38,7 @@ const stories = glob.sync(storyGlobs, {
 const config = {
   addons: [
     {
-      name: getAbsolutePath('@storybook/addon-docs'),
+      name: '@storybook/addon-docs',
       options: {
         mdxPluginOptions: {
           mdxCompileOptions: {
@@ -53,7 +49,7 @@ const config = {
     },
   ],
   core: {
-    builder: getAbsolutePath('@storybook/builder-vite'),
+    builder: '@storybook/builder-vite',
   },
   features: {
     previewCsfV3: true,
@@ -61,7 +57,7 @@ const config = {
     interactions: process.env.NODE_ENV !== 'production', // disable interactions in production builds, but enabled in development
   },
   framework: {
-    name: getAbsolutePath('@storybook/react-vite'),
+    name: '@storybook/react-vite',
     options: {},
   },
   stories,
@@ -77,11 +73,8 @@ const config = {
       },
       css: {
         preprocessorOptions: {
-          // suppress mixed-declarations warnings until resolved in
-          // https://github.com/carbon-design-system/carbon/issues/16962
           scss: {
             api: 'modern',
-            silenceDeprecations: ['mixed-decls'],
           },
         },
       },

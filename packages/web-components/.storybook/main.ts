@@ -1,5 +1,5 @@
-import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 /**
  * Copyright IBM Corp. 2023, 2024
  *
@@ -11,9 +11,9 @@ import type { StorybookConfig } from '@storybook/web-components-vite';
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import remarkGfm from 'remark-gfm';
+import glob from 'fast-glob';
 
-const require = createRequire(import.meta.url);
-const glob = require('fast-glob');
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const stories = glob.sync(
   [
@@ -31,7 +31,7 @@ const config: StorybookConfig = {
   stories: stories,
   addons: [
     {
-      name: getAbsolutePath('@storybook/addon-docs'),
+      name: '@storybook/addon-docs',
       options: {
         mdxPluginOptions: {
           mdxCompileOptions: {
@@ -40,13 +40,14 @@ const config: StorybookConfig = {
         },
       },
     },
-    getAbsolutePath('@storybook/addon-links'),
+    '@storybook/addon-links',
   ],
   features: {
     interactions: false, // disable Interactions tab
+    buildStoriesJson: true,
   },
   framework: {
-    name: getAbsolutePath('@storybook/web-components-vite'),
+    name: '@storybook/web-components-vite',
     options: {},
   },
   async viteFinal(config) {
@@ -69,6 +70,31 @@ const config: StorybookConfig = {
           process.env.CDS_EXPERIEMENTAL_COMPONENT_NAME
         ),
       },
+      resolve: {
+        preserveSymlinks: true,
+      },
+      build: {
+        target: 'es2020',
+        rollupOptions: {
+          output: {
+            // Don't add hashes to font file names during build
+            assetFileNames: (assetInfo) => {
+              if (
+                assetInfo.name &&
+                (assetInfo.name.endsWith('.woff2') ||
+                  assetInfo.name.endsWith('.woff'))
+              ) {
+                return 'assets/[name][extname]';
+              }
+              return 'assets/[name]-[hash][extname]';
+            },
+          },
+        },
+        // Use esbuild for minification to avoid issues with terser
+        minify: 'esbuild',
+        // Ensure proper module format
+        modulePreload: false,
+      },
       sourcemap: true,
     });
   },
@@ -77,7 +103,3 @@ const config: StorybookConfig = {
   },
 };
 export default config;
-
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, 'package.json')));
-}
