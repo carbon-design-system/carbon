@@ -882,6 +882,11 @@ const ComboBox = forwardRef(
       },
     });
 
+    // Keep the dropdown highlight in sync with either the controlled value or
+    // Downshift's own selection when uncontrolled.
+    const menuSelectedItem =
+      typeof selectedItemProp !== 'undefined' ? selectedItemProp : selectedItem;
+
     useEffect(() => {
       // Used to expose the downshift actions to consumers for use with downshiftProps
       // An odd pattern, here we mutate the value stored in the ref provided from the consumer.
@@ -907,6 +912,7 @@ const ComboBox = forwardRef(
       downshiftSetInputValue,
       toggleMenu,
     ]);
+
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
       onClick: handleToggleClick(isOpen),
@@ -1205,7 +1211,7 @@ const ComboBox = forwardRef(
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={isEqual(selectedItem, item)}
+                        isActive={isEqual(menuSelectedItem, item)}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
@@ -1215,7 +1221,7 @@ const ComboBox = forwardRef(
                         ) : (
                           itemToString(item)
                         )}
-                        {isEqual(selectedItem, item) && (
+                        {isEqual(menuSelectedItem, item) && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />
