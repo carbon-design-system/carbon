@@ -334,9 +334,7 @@
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
     padding: 0;
     inline-size: 0;
-    transition:
-      padding $duration-fast-01 motion(standard, productive),
-      width 0s linear $duration-fast-01;
+    transition: transform $duration-fast-01 motion(standard, productive);
 
     &::placeholder {
       position: relative;
@@ -388,5 +386,14 @@
 
   .#{$prefix}--search--expandable.#{$prefix}--search--disabled svg {
     fill: $icon-disabled;
+  }
+
+  .#{$prefix}--search-magnifier-tooltip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .#{$prefix}--search-magnifier {
+      position: relative;
+    }
   }
 }
