@@ -226,7 +226,7 @@ class CDSComboBox extends CDSDropdown {
       } else {
         (comboItem as HTMLElement).style.display = '';
       }
-      comboItem.highlighted = index === firstMatchIndex;
+      comboItem.highlighted = index === firstMatchIndex && !comboItem.disabled;
     });
     return firstMatchIndex;
   }
@@ -389,6 +389,7 @@ class CDSComboBox extends CDSDropdown {
     const inputClasses = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--text-input--empty`]: !value,
+      [`${prefix}--text-input--highlighted-outline`]: this._hasHighlightedItem,
     });
 
     let activeDescendantFallback: string | undefined;
@@ -418,6 +419,17 @@ class CDSComboBox extends CDSDropdown {
         @input=${handleInput}
         @keydown=${handleInputKeydown} />
     `;
+  }
+
+  protected get _hasHighlightedItem() {
+    return (
+      this.open &&
+      Boolean(
+        this.querySelector(
+          (this.constructor as typeof CDSComboBox).selectorItemHighlighted
+        )
+      )
+    );
   }
 
   // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
