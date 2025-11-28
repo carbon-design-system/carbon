@@ -104,7 +104,7 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
-   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use `children` instead.
    */
   title?: string;
 
