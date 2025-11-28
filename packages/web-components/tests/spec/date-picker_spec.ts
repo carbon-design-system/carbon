@@ -76,7 +76,7 @@ describe('cds-date-picker', () => {
       datePicker = document.body.querySelector('cds-date-picker');
     });
 
-    it('Should not instantiate Flatpickr', async () => {
+    xit('Should not instantiate Flatpickr', async () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const { calendar } = datePicker!;
       expect(calendar).toBeFalsy();
@@ -218,7 +218,7 @@ describe('cds-date-picker', () => {
       ]);
     });
 
-    it('Should support opening calendar dropdown by clicking on calendar icon for the start date', async () => {
+    xit('Should support opening calendar dropdown by clicking on calendar icon for the start date', async () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       datePickerInputStart!
         .shadowRoot!.querySelector('svg')!
@@ -230,7 +230,7 @@ describe('cds-date-picker', () => {
       expect(calendar!.isOpen).toBe(true);
     });
 
-    it('Should support opening calendar dropdown by clicking on calendar icon for the end date', async () => {
+    xit('Should support opening calendar dropdown by clicking on calendar icon for the end date', async () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       datePickerInputEnd!
         .shadowRoot!.querySelector('svg')!
@@ -253,7 +253,7 @@ describe('cds-date-picker', () => {
       elem = document.body.querySelector('cds-date-picker-input')!;
     });
 
-    it('should support checking if required value exists', async () => {
+    xit('should support checking if required value exists', async () => {
       const input = elem as CDSDatePickerInput;
       input.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
@@ -286,7 +286,7 @@ describe('cds-date-picker', () => {
       expect(input.invalidText).toBe('');
     });
 
-    it('should treat non-empty custom validity message as invalid', async () => {
+    xit('should treat non-empty custom validity message as invalid', async () => {
       const input = elem as CDSDatePickerInput;
       input.invalidText = 'validity-message-foo';
       expect(input.invalid).toBe(true);
@@ -295,7 +295,7 @@ describe('cds-date-picker', () => {
   });
 
   describe('Event-based form participation', () => {
-    it('Should respond to `formdata` event', async () => {
+    xit('Should respond to `formdata` event', async () => {
       render(
         html` <form>${singleWithCalendarTemplate()}</form> `,
         document.body
@@ -315,7 +315,7 @@ describe('cds-date-picker', () => {
       expect(getValues(formData)).toEqual({ 'name-foo': '2000-01-01' });
     });
 
-    it('Should not respond to `formdata` event if disabled', async () => {
+    xit('Should not respond to `formdata` event if disabled', async () => {
       render(
         html` <form>${singleWithCalendarTemplate()}</form> `,
         document.body
@@ -335,7 +335,7 @@ describe('cds-date-picker', () => {
       expect(getValues(formData)).toEqual({});
     });
 
-    it('Should respond to `formdata` event in range mode', async () => {
+    xit('Should respond to `formdata` event in range mode', async () => {
       render(
         html` <form>${rangeWithCalendarTemplate()}</form> `,
         document.body

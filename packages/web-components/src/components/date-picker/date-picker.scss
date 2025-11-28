@@ -83,18 +83,6 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-date-picker-input[disabled]),
-:host(#{$prefix}-date-picker-input[readonly]) {
-  .#{$prefix}--form-requirement {
-    display: none;
-  }
-
-  .#{$prefix}--date-picker__input--invalid,
-  .#{$prefix}--date-picker__input--warn {
-    border-block-end: 1px solid transparent;
-  }
-}
-
 :host(#{$prefix}-date-picker-input[kind='simple']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='simple']) {
   .#{$prefix}--date-picker__input {
