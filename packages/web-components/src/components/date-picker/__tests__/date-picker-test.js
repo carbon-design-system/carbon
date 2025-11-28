@@ -235,4 +235,3 @@ describe('cds-date-picker', () => {
   });
 });
 
-// Made with Bob
