@@ -240,15 +240,16 @@ const Select = React.forwardRef(
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-    const helperId = !helperText
+    const hasHelper = helperText !== null && helperText !== undefined;
+    const helperId = !hasHelper
       ? undefined
       : `select-helper-text-${selectInstanceId}`;
 
-    const helper = helperText ? (
+    const helper = hasHelper && (
       <Text as="div" id={helperId} className={helperTextClasses}>
         {helperText}
       </Text>
-    ) : null;
+    );
     const ariaProps = {};
     if (invalid) {
       ariaProps['aria-describedby'] = errorId;

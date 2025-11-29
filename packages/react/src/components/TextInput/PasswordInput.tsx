@@ -294,16 +294,16 @@ const PasswordInput = React.forwardRef(
       [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
     });
 
-    const label = labelText ? (
+    const label = labelText !== null && labelText !== undefined && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
-    ) : null;
-    const helper = helperText ? (
+    );
+    const helper = helperText !== null && helperText !== undefined && (
       <div id={normalizedProps.helperId} className={helperTextClasses}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     const passwordIsVisible = inputType === 'text';
     const passwordVisibilityIcon = passwordIsVisible ? (
