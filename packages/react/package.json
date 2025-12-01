@@ -123,7 +123,7 @@
     "storybook": "^9.0.5",
     "stream-browserify": "^3.0.0",
     "style-loader": "^4.0.0",
-    "typescript-config-carbon": "^0.8.0",
+    "typescript-config-carbon": "workspace:^0.8.0",
     "use-sync-external-store": "^1.5.0",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^5.0.0"
