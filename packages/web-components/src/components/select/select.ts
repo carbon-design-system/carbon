@@ -462,6 +462,7 @@ class CDSSelect extends FormMixin(LitElement) {
         id="input"
         class="${inputClasses}"
         ?disabled="${disabled}"
+        title="${value}"
         aria-readonly="${String(Boolean(readonly))}"
         aria-invalid="${String(Boolean(invalid))}"
         aria-describedby="${ifDefined(describedBy)}"
