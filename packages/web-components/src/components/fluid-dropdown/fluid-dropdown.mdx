@@ -1,0 +1,49 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as FluidDropdownStories from  './fluid-dropdown.stories';
+
+<Meta of={FluidDropdownStories} />
+
+# Fluid Dropdown
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/fluid-dropdown)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [With Toggletip](#with-toggletip)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={FluidDropdownStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidDropdownStories.Skeleton} />
+
+## With Toggletip
+
+<Canvas of={FluidDropdownStories.WithToggletip} />
+
+## With AI Label
+
+<Canvas of={FluidDropdownStories.WithAILabel} />
+
+## Component API
+
+## `cds-fluid-dropdown`
+
+<ArgTypes of="cds-dropdown" />
+
+<Markdown>{`${cdnJs({ components: ['fluid-dropdown'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/fluid-dropdown/fluid-dropdown.mdx).
