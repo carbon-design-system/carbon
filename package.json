@@ -15,7 +15,7 @@
     "www"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach --all --topological --parallel --exclude 'examples/*' run build",
+    "build": "lerna run build --stream --prefix",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
@@ -83,7 +83,7 @@
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
-    "lerna": "^8.0.0",
+    "lerna": "^9.0.1",
     "lint-staged": "^16.0.0",
     "prettier": "^3.3.3",
     "react": "^19.0.0",
