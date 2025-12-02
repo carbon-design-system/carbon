@@ -276,7 +276,7 @@ export const Popover: PopoverComponent & {
       }
     }
   });
-  const { refs, floatingStyles, placement, middlewareData } = useFloating(
+  const { refs, floatingStyles, placement, middlewareData, elements, update } = useFloating(
     enableFloatingStyles
       ? {
           placement: align,
@@ -342,13 +342,24 @@ export const Popover: PopoverComponent & {
               padding: 16,
             }),
             autoAlign && hide(),
-          ],
-          whileElementsMounted: autoUpdate,
+          ]
         }
       : {}
     // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
     // enabled, floating-ui will not be used
   );
+
+  useEffect(() => {
+    if (!enableFloatingStyles) return;
+    if (open && elements.reference && elements.floating) {
+      const cleanup = autoUpdate(
+        elements.reference,
+        elements.floating,
+        update,
+      );
+      return cleanup;
+    }
+  }, [open, elements, update]);
 
   const value = useMemo(() => {
     return {
