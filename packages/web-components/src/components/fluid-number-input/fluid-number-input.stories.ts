@@ -76,6 +76,7 @@ export const Default = {
       allowEmpty,
       disabled,
       invalid,
+      defaultWidth,
       invalidText,
       label,
       readOnly,
@@ -88,7 +89,7 @@ export const Default = {
       onInput,
     } = args ?? {};
     return html`
-      <cds-form-item>
+      <div style="width: ${defaultWidth}px;">
         <cds-fluid-number-input
           ?allow-empty="${allowEmpty}"
           ?invalid="${invalid}"
@@ -104,7 +105,7 @@ export const Default = {
           step="${ifDefined(step)}"
           @input="${onInput}">
         </cds-fluid-number-input>
-      </cds-form-item>
+      </div>
     `;
   },
 };
@@ -116,6 +117,7 @@ export const DefaultWithToggletip = {
     const {
       allowEmpty,
       disabled,
+      defaultWidth,
       invalid,
       invalidText,
       label,
@@ -129,7 +131,7 @@ export const DefaultWithToggletip = {
       onInput,
     } = args ?? {};
     return html`
-      <cds-form-item>
+      <div style="width: ${defaultWidth}px;">
         <cds-fluid-number-input
           ?allow-empty="${allowEmpty}"
           ?invalid="${invalid}"
@@ -149,7 +151,7 @@ export const DefaultWithToggletip = {
             <p slot="body-text">Additional field information here.</p>
           </cds-toggletip>
         </cds-fluid-number-input>
-      </cds-form-item>
+      </div>
     `;
   },
 };

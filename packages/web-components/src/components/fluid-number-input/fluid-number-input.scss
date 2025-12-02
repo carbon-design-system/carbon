@@ -16,7 +16,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 
 :host(#{$prefix}-fluid-number-input) {
-  @extend .#{$prefix}--number-input--fluid;
   @include emit-layout-tokens();
 }
 

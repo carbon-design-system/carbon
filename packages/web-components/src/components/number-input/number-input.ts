@@ -456,7 +456,7 @@ class CDSNumberInput extends CDSTextInput {
               : null}
           </div>
           ${this.isFluid
-            ? html`<hr class="${prefix}--text-input__divider" />`
+            ? html`<hr class="${prefix}--number-input__divider" />`
             : null}
         </div>
         ${/* Non-fluid: validation and helper outside field wrapper */ ''}

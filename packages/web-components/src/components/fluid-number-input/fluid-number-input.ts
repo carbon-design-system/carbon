@@ -10,7 +10,7 @@ import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSNumberInput from '../number-input/number-input';
 import styles from './fluid-number-input.scss?lit';
-import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 /**
  * Fluid number input.
@@ -19,11 +19,24 @@ import { property } from 'lit/decorators.js';
  */
 @customElement(`${prefix}-fluid-number-input`)
 class CDSFluidNumberInput extends CDSNumberInput {
-  @property({ type: Boolean })
-  isFluid = true;
+  connectedCallback() {
+    this.setAttribute('isFluid', 'true');
+    super.connectedCallback();
+  }
 
+  updated() {
+    super.updated();
+  }
   render() {
-    return html` ${super.render()} `;
+    const wrapperClasses = classMap({
+      [`${prefix}--number-input--fluid`]: true,
+      [`${prefix}--number-input--fluid--invalid`]: this.invalid,
+      [`${prefix}--number-input--fluid--warning`]: this.warn && !this.invalid,
+      [`${prefix}--number-input--fluid--disabled`]: this.disabled,
+      [`${prefix}--number-input--fluid--readonly`]: this.readonly,
+    });
+
+    return html`<div class="${wrapperClasses}">${super.render()}</div>`;
   }
 
   static styles = [CDSNumberInput.styles, styles];
