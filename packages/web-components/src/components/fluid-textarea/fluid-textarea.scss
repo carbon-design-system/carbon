@@ -1,0 +1,16 @@
+/**
+ * Copyright IBM Corp.2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/fluid-text-area/index';
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+:host(#{$prefix}-fluid-textarea) {
+  @include emit-layout-tokens();
+}

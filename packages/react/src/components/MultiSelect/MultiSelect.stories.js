@@ -8,7 +8,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
-
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
 
