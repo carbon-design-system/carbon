@@ -162,7 +162,7 @@ export function Toggle({
   const labelId = `${id}_label`;
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       className={wrapperClasses}
       onClick={
@@ -203,7 +203,7 @@ export function Toggle({
         {labelText && <Text className={labelTextClasses}>{labelText}</Text>}
         <div className={appearanceClasses}>
           <div className={switchClasses}>
-            {isSm && (
+            {isSm && !readOnly && (
               <svg
                 aria-hidden="true"
                 focusable="false"

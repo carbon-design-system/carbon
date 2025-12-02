@@ -226,19 +226,29 @@ const TextArea = frFn((props, forwardRef) => {
   }, [value, defaultValue, counterMode]);
 
   useIsomorphicEffect(() => {
-    const measuredWidth = wrapperRef.current?.scrollWidth;
     if (other.cols && textareaRef.current) {
       textareaRef.current.style.width = '';
       textareaRef.current.style.resize = 'none';
     } else if (textareaRef.current) {
       textareaRef.current.style.width = `100%`;
     }
-    [helperTextRef, errorTextRef, warnTextRef].forEach((r) => {
-      if (r.current) {
-        r.current.style.maxWidth = `${measuredWidth}px`;
-        r.current.style.overflowWrap = 'break-word';
-      }
+
+    if (!wrapperRef.current) return;
+    const applyWidth = (width: number) => {
+      [helperTextRef, errorTextRef, warnTextRef].forEach((r) => {
+        if (r.current) {
+          r.current.style.maxWidth = `${width}px`;
+          r.current.style.overflowWrap = 'break-word';
+        }
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      applyWidth(entry.contentRect.width);
     });
+    resizeObserver.observe(wrapperRef.current);
+
+    return () => resizeObserver && resizeObserver.disconnect();
   }, [other.cols, invalid, warn]);
 
   const textareaProps: {
@@ -509,7 +519,7 @@ const TextArea = frFn((props, forwardRef) => {
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
-    : null;
+    : candidate;
 
   return (
     <div className={formItemClasses}>

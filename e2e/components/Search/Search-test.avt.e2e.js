@@ -115,4 +115,19 @@ test.describe('@avt Search', () => {
     await expect(searchButton).not.toHaveAttribute('aria-expanded', 'true');
     await expect(search).toBeHidden();
   });
+
+  test('@avt-keyboard-nav tooltip on focus', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Search',
+      id: 'components-search--expandable',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await expect(page.getByRole('button')).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button')).toBeFocused();
+    await expect(page.getByRole('tooltip')).toHaveText('Search');
+  });
 });

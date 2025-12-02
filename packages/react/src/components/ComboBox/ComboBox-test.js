@@ -377,6 +377,28 @@ describe('ComboBox', () => {
     );
   });
 
+  it('should keep the selected item active after blur when allowCustomValue is set', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <ComboBox {...mockProps} allowCustomValue />
+        <button type="button">Move focus</button>
+      </>
+    );
+
+    await openMenu();
+    await user.click(screen.getByRole('option', { name: 'Item 1' }));
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+
+    await user.click(screen.getByRole('button', { name: 'Move focus' }));
+
+    await openMenu();
+    const activeOption = screen.getByRole('option', { name: 'Item 1' });
+    expect(activeOption).toHaveClass(`${prefix}--list-box__menu-item--active`);
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+  });
+
   it('should yield highlighted item as `selectedItem` when pressing Enter with an unmodified input value', async () => {
     render(<ControlledComboBox controlledItem={null} />);
 
@@ -413,6 +435,33 @@ describe('ComboBox', () => {
     await userEvent.keyboard('{Enter}');
 
     expect(screen.getByTestId('selected-item').textContent).toBe('Item 0');
+  });
+
+  it('should restore selected item label on blur when input does not match any item and a selection exists', async () => {
+    render(
+      <ComboBox
+        {...mockProps}
+        initialSelectedItem={mockProps.items[1]}
+        allowCustomValue={false}
+      />
+    );
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+
+    await userEvent.clear(findInputNode());
+    await userEvent.type(findInputNode(), 'no-match');
+    await userEvent.keyboard('[Tab]');
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+  });
+
+  it('should keep exact match input on blur when it matches an item label', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue={false} />);
+
+    await userEvent.type(findInputNode(), 'Item 2');
+    await userEvent.keyboard('[Tab]');
+
+    expect(findInputNode()).toHaveDisplayValue('Item 2');
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
@@ -470,6 +519,29 @@ describe('ComboBox', () => {
       );
       // The displayed value should still be the one from the first render.
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+    });
+
+    it('should mark the initially selectedItem on load when rendered', async () => {
+      render(
+        <ComboBox
+          {...mockProps}
+          initialSelectedItem={mockProps.items[0]}
+          selectedItem={mockProps.items[0]}
+        />
+      );
+      await openMenu();
+
+      // Find the first menu item (which should be the initially selected item)
+      const menuItems = screen.getAllByRole('option');
+      const firstMenuItem = menuItems[0];
+
+      // Check if the initially selected item has the active class
+      expect(firstMenuItem).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+
+      // Check if the initially selected item contains an SVG (checkmark icon)
+      expect(firstMenuItem.querySelector('svg')).toBeInTheDocument();
     });
   });
 
@@ -599,6 +671,28 @@ describe('ComboBox', () => {
       expect(screen.getByText('onChangeCallCount: 3')).toBeInTheDocument();
       expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
+    });
+    it('should sync the menu active item when `selectedItem` updates externally', async () => {
+      render(<ControlledComboBox />);
+      await openMenu();
+      let menuItems = screen.getAllByRole('option');
+      expect(menuItems[0]).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+
+      await userEvent.keyboard('{Escape}');
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+
+      await openMenu();
+      menuItems = screen.getAllByRole('option');
+      expect(menuItems[3]).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+      expect(menuItems[0]).not.toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
     });
     it('should update and call `onChange` once when selection is updated externally', async () => {
       const { rerender } = render(
@@ -844,6 +938,31 @@ describe('ComboBox', () => {
       assertMenuClosed();
 
       // Input should be cleared
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+
+    it('should not clear input when opening then closing the menu without changes', async () => {
+      render(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
+      );
+
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+
+      await userEvent.click(screen.getByRole('button', { name: 'Open' }));
+      assertMenuOpen(mockProps);
+
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+      assertMenuClosed(mockProps);
+
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+    });
+
+    it('should clear input on blur when no item is selected and value does not match any item (`allowCustomValue` is `false`)', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+
+      await userEvent.type(findInputNode(), 'no-match-here');
+      await userEvent.keyboard('[Tab]');
+
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
@@ -1453,7 +1572,7 @@ describe('ComboBox', () => {
     expect(attributes).toEqual({
       'aria-activedescendant': '',
       'aria-autocomplete': 'list',
-      'aria-controls': 'downshift-«r7r»-menu',
+      'aria-controls': attributes['aria-controls'],
       'aria-expanded': 'false',
       'aria-haspopup': 'listbox',
       'aria-label': 'Choose an item',
@@ -1467,5 +1586,17 @@ describe('ComboBox', () => {
       type: 'text',
       value: '',
     });
+  });
+
+  it('should set `aria-controls` on the combobox input when the menu opens', async () => {
+    render(<ComboBox {...mockProps} />);
+
+    await openMenu();
+
+    const combobox = screen.getByRole('combobox');
+    const listbox = screen.getByRole('listbox');
+
+    expect(listbox).toHaveAttribute('id');
+    expect(combobox).toHaveAttribute('aria-controls', listbox.id);
   });
 });

@@ -7,8 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
+const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('Pagination', () => {
@@ -19,6 +20,17 @@ test.describe('Pagination', () => {
           component: 'Pagination',
           id: 'components-pagination--default',
           theme,
+        });
+
+        const nextButton = page.getByRole('button', { name: /next/i });
+        await nextButton.hover();
+
+        await expect(page.getByText(/next page/i)).toBeVisible();
+
+        await snapshot(page, {
+          theme,
+          component: 'Pagination',
+          id: 'components-pagination--default | tooltip hover',
         });
       });
 

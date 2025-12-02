@@ -9,9 +9,10 @@ import { html } from 'lit';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 // @ts-ignore
-import Settings16 from '@carbon/icons/lib/settings/16.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../index';
 import storyDocs from './data-table.mdx';
+import { iconLoader } from '../../../globals/internal/icon-loader';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -81,7 +82,7 @@ export const Default = {
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({
+            ${iconLoader(Settings16, {
               slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}

@@ -33,6 +33,16 @@ const spacing = 8; // distance to keep to window edges, in px
 
 export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
+
+  /**
    * The ref of the containing element, used for positioning and alignment of the menu
    */
   containerRef?: RefObject<HTMLDivElement | null>;
@@ -108,12 +118,13 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
 
 const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
+    backgroundToken = 'layer',
+    border = false,
     children,
     className,
     containerRef,
     label,
     menuAlignment,
-    mode,
     onClose,
     onOpen,
     open,
@@ -225,6 +236,9 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
+    const validItems = focusableItems?.filter((item) => item?.ref?.current);
+    if (!validItems?.length) return;
+
     const currentItem = focusableItems.findIndex((item) =>
       item.ref?.current?.contains(document.activeElement)
     );
@@ -244,21 +258,27 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
 
     if (indexToFocus < 0) {
-      indexToFocus = focusableItems.length - 1;
+      indexToFocus = validItems.length - 1;
     }
-    if (indexToFocus >= focusableItems.length) {
+    if (indexToFocus >= validItems.length) {
       indexToFocus = 0;
     }
 
     if (indexToFocus !== currentItem) {
-      const nodeToFocus = focusableItems[indexToFocus];
-      nodeToFocus.ref?.current?.focus();
+      const nodeToFocus = validItems[indexToFocus];
+      nodeToFocus?.ref?.current?.focus();
       e?.preventDefault();
     }
   }
 
   function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
-    if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
+    if (
+      open &&
+      onClose &&
+      isRoot &&
+      e.relatedTarget &&
+      !menu.current?.contains(e.relatedTarget)
+    ) {
       handleClose();
     }
   }
@@ -421,6 +441,9 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       [`${prefix}--menu--with-selectable-items`]:
         childContext.state.hasSelectableItems,
       [`${prefix}--autoalign`]: !legacyAutoalign,
+      [`${prefix}--menu--border`]: border,
+      [`${prefix}--menu--background-token__background`]:
+        backgroundToken === 'background',
     }
   );
 
@@ -449,6 +472,16 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
 Menu.propTypes = {
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  border: PropTypes.bool,
+
+  /**
    * A collection of MenuItems to be rendered within this Menu.
    */
   children: PropTypes.node,
@@ -461,7 +494,6 @@ Menu.propTypes = {
   /**
    * A label describing the Menu.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   label: PropTypes.string,
 
   /**
@@ -507,13 +539,11 @@ Menu.propTypes = {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   target: PropTypes.object,
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   x: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
@@ -522,7 +552,6 @@ Menu.propTypes = {
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   y: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),

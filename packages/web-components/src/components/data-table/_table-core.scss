@@ -5,6 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/data-table';
+
 //
 // Table header and table body
 //
@@ -12,14 +22,12 @@
 :host(#{$prefix}-table) {
   @extend .#{$prefix}--data-table;
 
-  display: table;
-
   ::slotted(#{$prefix}-table-head) {
     @include type-style('heading-01');
 
     display: table-header-group;
 
-    background-color: $layer-accent-01;
+    background-color: $layer-accent;
   }
 
   ::slotted(#{$prefix}-table-body) {
@@ -27,13 +35,18 @@
 
     display: table-row-group;
 
-    background-color: $layer-01;
+    background-color: $layer;
     inline-size: 100%;
   }
 }
 
 :host(#{$prefix}-table[use-static-width]) {
   inline-size: auto;
+}
+
+.#{$prefix}--data-table-content {
+  display: table;
+  inline-size: 100%;
 }
 
 :host(#{$prefix}-table[sticky-header]) {
@@ -50,14 +63,12 @@
   }
 }
 
-:host(#{$prefix}-table[with-header]) {
-  .#{$prefix}--data-table-header-container {
-    display: table-caption;
-  }
+.#{$prefix}--data-table_inner-container {
+  display: block;
+  inline-size: 100%;
+  overflow-x: auto;
 }
-.#{$prefix}--data-table-header-container {
-  display: table-caption;
-}
+
 :host(#{$prefix}-table-head[sticky-header]) {
   position: sticky;
   z-index: 1;
@@ -158,7 +169,7 @@
   ::slotted(#{$prefix}-table-header-cell),
   ::slotted(#{$prefix}-table-header-cell-skeleton) {
     display: table-cell;
-    background-color: $layer-accent-01;
+    background-color: $layer-accent;
     color: $text-primary;
     outline: none;
     text-align: start;
@@ -400,7 +411,7 @@
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
-    border-block-end: 1px solid $layer-01;
+    border-block-end: 1px solid $layer;
   }
 }
 
@@ -409,8 +420,8 @@
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
-    background-color: $layer-accent-01;
-    border-block-end: 1px solid $layer-accent-01;
+    background-color: $layer-accent;
+    border-block-end: 1px solid $layer-accent;
   }
 }
 
@@ -422,8 +433,8 @@
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
     background-color: $background-hover;
-    border-block-end-color: $layer-hover-01;
-    border-block-start-color: $layer-hover-01;
+    border-block-end-color: $layer-hover;
+    border-block-start-color: $layer-hover;
     color: $text-primary;
   }
 }
@@ -436,7 +447,7 @@
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
     background-color: $background-hover;
-    border-block-end: 1px solid $layer-hover-01;
+    border-block-end: 1px solid $layer-hover;
   }
 }
 

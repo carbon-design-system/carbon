@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +9,7 @@ import React, { useState } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
-import { SliderSkeleton } from '.';
-import Slider from './Slider';
+import { Slider, SliderSkeleton } from '.';
 import mdx from './Slider.mdx';
 
 export default {
@@ -35,6 +34,12 @@ export const Default = (args) => {
   );
 };
 
+Default.parameters = {
+  controls: {
+    exclude: ['light', 'formatLabel', 'labelText'],
+  },
+};
+
 Default.argTypes = {
   ariaLabelInput: {
     control: { type: 'text' },
@@ -42,31 +47,11 @@ Default.argTypes = {
   unstable_ariaLabelInputUpper: {
     control: { type: 'text' },
   },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   disabled: {
     control: {
       control: {
         type: 'boolean',
       },
-    },
-  },
-  formatLabel: {
-    table: {
-      disable: true,
     },
   },
   hideTextInput: {
@@ -82,11 +67,6 @@ Default.argTypes = {
   invalidText: {
     control: {
       type: 'text',
-    },
-  },
-  labelText: {
-    table: {
-      disable: true,
     },
   },
   min: {
@@ -122,26 +102,6 @@ Default.argTypes = {
   },
   unstable_valueUpper: {
     control: { type: 'number' },
-  },
-  onBlur: {
-    table: {
-      disable: true,
-    },
-  },
-  onChange: {
-    table: {
-      disable: true,
-    },
-  },
-  onInputKeyUp: {
-    table: {
-      disable: true,
-    },
-  },
-  onRelease: {
-    table: {
-      disable: true,
-    },
   },
   warn: {
     control: {

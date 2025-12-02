@@ -41,7 +41,7 @@ class CDSTableToolbarSearch extends HostListenerMixin(CDSSearch) {
    * Handles `focus` event handler on this element.
    */
   @HostListener('focusin')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusIn() {
     this._handleUserInitiatedExpand();
   }
@@ -52,7 +52,7 @@ class CDSTableToolbarSearch extends HostListenerMixin(CDSSearch) {
    * @param event The event.
    */
   @HostListener('focusout')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusOut(event: FocusEvent) {
     if (
       !this.contains(event.relatedTarget as Node) &&
