@@ -260,7 +260,6 @@ collect:
         - oncds-combo-box-selected
         - oncds-combo-box-toggled
         - should-filter-item
-        - typeahead
         # cds-copy-button
         - autoAlign
         # cds-date-picker
