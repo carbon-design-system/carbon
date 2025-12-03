@@ -367,6 +367,7 @@ class CDSComboBox extends CDSDropdown {
         .value=${filterInputValue}
         role="combobox"
         aria-label="${ifNonEmpty(inputLabel)}"
+        aria-labelledby="dropdown-label"
         aria-controls="menu-body"
         aria-haspopup="listbox"
         aria-autocomplete="list"
@@ -425,6 +426,7 @@ class CDSComboBox extends CDSDropdown {
 
     return html`
       <label
+        id="dropdown-label"
         part="title-text"
         class="${labelClasses}"
         ?hidden="${!hasTitleText}">
