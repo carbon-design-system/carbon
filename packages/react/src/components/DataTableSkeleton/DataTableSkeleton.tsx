@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { type FunctionComponent, TableHTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { DataTableSize } from '../DataTable/DataTable';
 
 export interface DataTableSkeletonHeader {
   /**
@@ -55,6 +56,9 @@ export interface DataTableSkeletonProps
    */
   showToolbar?: boolean;
 
+  
+  size?: DataTableSize;
+
   /**
    * Optionally specify whether you want the DataTable to be zebra striped
    */
@@ -74,12 +78,14 @@ const DataTableSkeleton: FunctionComponent<DataTableSkeletonProps> = ({
   className,
   showHeader = true,
   showToolbar = true,
+  size = 'lg',
   ...rest
 }) => {
   const prefix = usePrefix();
   const dataTableSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--data-table`]: true,
+    [`${prefix}--data-table--${size}`]: size,
     [`${prefix}--data-table--zebra`]: zebra,
     [`${prefix}--data-table--compact`]: compact,
   });
@@ -180,6 +186,9 @@ DataTableSkeleton.propTypes = {
    * Specify if the table toolbar should be rendered as part of the skeleton.
    */
   showToolbar: PropTypes.bool,
+
+ 
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
    * Optionally specify whether you want the DataTable to be zebra striped

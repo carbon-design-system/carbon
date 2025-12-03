@@ -94,6 +94,14 @@ describe('DataTableSkeleton', () => {
       expect(toolbar).not.toBeInTheDocument();
     });
 
+    it('should respect the size prop', () => {
+      render(<DataTableSkeleton size="xs" />);
+
+      expect(screen.getByRole('table')).toHaveClass(
+        `${prefix}--data-table--xs`
+      );
+    });
+
     it('should respect the zebra prop', () => {
       render(<DataTableSkeleton zebra />);
 
