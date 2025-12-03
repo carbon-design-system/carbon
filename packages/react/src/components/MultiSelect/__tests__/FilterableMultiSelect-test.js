@@ -86,6 +86,85 @@ describe('FilterableMultiSelect', () => {
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
+
+  it('should display helper text instead of warning when disabled', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        disabled
+        warn
+        warnText="Warning message"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    const warnMessage = screen.queryByText('Warning message');
+    const helper = screen.queryByText('Helper text');
+    expect(helper).toBeInTheDocument();
+    expect(warnMessage).not.toBeInTheDocument();
+  });
+
+  it('should display helper text instead of warning when readOnly', async () => {
+    render(
+      <FilterableMultiSelect
+        readOnly
+        warn
+        warnText="Warning message"
+        helperText="Helper text"
+        {...mockProps}
+      />
+    );
+    await waitForPosition();
+
+    const warnMessage = screen.queryByText('Warning message');
+    const helper = screen.queryByText('Helper text');
+    expect(warnMessage).not.toBeInTheDocument();
+    expect(helper).toBeInTheDocument();
+  });
+
+  it('should display helper text instead of invalid message when disabled', async () => {
+    const { container } = render(
+      <FilterableMultiSelect
+        {...mockProps}
+        disabled
+        invalid
+        invalidText="Invalid message"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    const multiselectComponent = container.firstChild;
+    const inputComponent = multiselectComponent.childNodes[1];
+    const invalidMessage = screen.queryByText('Invalid message');
+    const helper = screen.queryByText('Helper text');
+    expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+    expect(invalidMessage).not.toBeInTheDocument();
+    expect(helper).toBeInTheDocument();
+  });
+
+  it('should display helper text instead of invalid message when readOnly', async () => {
+    const { container } = render(
+      <FilterableMultiSelect
+        readOnly
+        invalid
+        invalidText="Invalid message"
+        helperText="Helper text"
+        {...mockProps}
+      />
+    );
+    await waitForPosition();
+
+    const multiselectComponent = container.firstChild;
+    const inputComponent = multiselectComponent.childNodes[1];
+    const invalidMessage = screen.queryByText('Invalid message');
+    const helper = screen.queryByText('Helper text');
+    expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+    expect(invalidMessage).not.toBeInTheDocument();
+    expect(helper).toBeInTheDocument();
+  });
+
   it('should initially have the menu open when open prop is provided', async () => {
     render(<FilterableMultiSelect {...mockProps} open />);
     await waitForPosition();
