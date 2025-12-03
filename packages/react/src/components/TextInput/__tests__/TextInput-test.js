@@ -226,6 +226,167 @@ describe('TextInput', () => {
       );
     });
 
+    // Tests for disabled/readonly state normalization
+    describe('disabled and readonly state normalization', () => {
+      describe('invalid state', () => {
+        it('should not set aria-invalid when disabled with invalid prop', () => {
+          render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              disabled
+              invalid
+              invalidText="Invalid"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).not.toHaveAttribute(
+            'aria-invalid'
+          );
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--invalid`
+          );
+        });
+
+        it('should not set aria-invalid when readOnly with invalid prop', () => {
+          render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              readOnly
+              invalid
+              invalidText="Invalid"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).not.toHaveAttribute(
+            'aria-invalid'
+          );
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--invalid`
+          );
+        });
+
+        it('should not display invalid message if disabled', () => {
+          const { container } = render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              disabled
+              invalid
+              invalidText="This should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
+          // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+          const invalidIcon = container.querySelector(
+            `svg.${prefix}--text-input__invalid-icon`
+          );
+          expect(invalidIcon).not.toBeInTheDocument();
+        });
+
+        it('should not display invalid message if readOnly', () => {
+          const { container } = render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              readOnly
+              invalid
+              invalidText="This should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
+          // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+          const invalidIcon = container.querySelector(
+            `svg.${prefix}--text-input__invalid-icon`
+          );
+          expect(invalidIcon).not.toBeInTheDocument();
+        });
+      });
+
+      describe('warning state', () => {
+        it('should not display warning styles when disabled with warn prop', () => {
+          const { container } = render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              disabled
+              warn
+              warnText="Warning"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--warning`
+          );
+          // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+          const warnIcon = container.querySelector(
+            `svg.${prefix}--text-input__invalid-icon--warning`
+          );
+          expect(warnIcon).not.toBeInTheDocument();
+        });
+
+        it('should not display warning styles when readOnly with warn prop', () => {
+          const { container } = render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              readOnly
+              warn
+              warnText="Warning"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--warning`
+          );
+          // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+          const warnIcon = container.querySelector(
+            `svg.${prefix}--text-input__invalid-icon--warning`
+          );
+          expect(warnIcon).not.toBeInTheDocument();
+        });
+
+        it('should not display warning message if disabled', () => {
+          render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              disabled
+              warn
+              warnText="This warning should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
+        });
+
+        it('should not display warning message if readOnly', () => {
+          render(
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              readOnly
+              warn
+              warnText="This warning should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
+        });
+      });
+    });
+
     it('should respect decorator prop', () => {
       render(
         <TextInput
