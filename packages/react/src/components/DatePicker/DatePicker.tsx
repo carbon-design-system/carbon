@@ -664,6 +664,23 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
+
+    // Auto-detect if DatePicker is in a modal and use appendTo for proper positioning
+    let effectiveAppendTo = appendTo;
+    if (!effectiveAppendTo && start) {
+      // Check if the input is inside a modal
+      const modalElement = start.closest(`.${prefix}--modal`);
+      if (modalElement) {
+        // Find the modal container to append the calendar to
+        const modalContainer = modalElement.querySelector(
+          `.${prefix}--modal-container`
+        );
+        if (modalContainer) {
+          effectiveAppendTo = modalContainer as HTMLElement;
+        }
+      }
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const flatpickerConfig: any = {
       inline: inline ?? false,
@@ -685,9 +702,9 @@ const DatePicker = React.forwardRef(function DatePicker(
               input: endInputField.current ?? undefined,
             })
           : () => {},
-        appendTo
+        effectiveAppendTo
           ? appendToPlugin({
-              appendTo,
+              appendTo: effectiveAppendTo,
             })
           : () => {},
         carbonFlatpickrMonthSelectPlugin({
