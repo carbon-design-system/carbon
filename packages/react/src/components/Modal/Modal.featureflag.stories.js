@@ -116,7 +116,7 @@ export const EnableFocusWrapWithoutSentinels = () => {
           <span>
             This story is rendered with{' '}
             <LinkTo title="Getting Started/Feature Flags" name="Overview">
-              enable-preview-focus-wrap-without-sentinels
+              enable-focus-wrap-without-sentinels
             </LinkTo>{' '}
             enabled
           </span>
