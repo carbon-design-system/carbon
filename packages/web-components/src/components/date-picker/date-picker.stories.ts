@@ -34,6 +34,8 @@ const defaultArgs = {
   readonly: false,
   short: false,
   helperText: '',
+  invalid: false,
+  invalidText: '',
   warn: false,
   warnText: '',
   placeholder: 'mm/dd/yyyy',
@@ -57,6 +59,14 @@ const controls = {
   },
   disabled: { control: 'boolean' },
   helperText: { control: 'text' },
+  invalid: {
+    control: 'boolean',
+    description: 'Specify if the currently value is invalid.',
+  },
+  invalidText: {
+    control: 'text',
+    description: 'Message which is displayed if the value is invalid.',
+  },
   maxDate: {
     control: 'text',
     description: 'The maximum date that a user can pick to.',
@@ -119,6 +129,8 @@ export const Default = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     kind,
     maxDate,
     minDate,
@@ -142,6 +154,8 @@ export const Default = {
           label-text="Date Picker label"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -152,6 +166,8 @@ export const Default = {
                 label-text="End date"
                 placeholder="${placeholder}"
                 size="${size}"
+                ?invalid="${invalid}"
+                invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
               </cds-date-picker-input>
@@ -170,6 +186,8 @@ export const RangeWithCalendar = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -192,6 +210,8 @@ export const RangeWithCalendar = {
           label-text="Start date"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -200,6 +220,8 @@ export const RangeWithCalendar = {
           label-text="End date"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -216,6 +238,8 @@ export const RangeWithCalendarWithLayer = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -239,6 +263,8 @@ export const RangeWithCalendarWithLayer = {
             label-text="Start date"
             placeholder="${placeholder}"
             size="${size}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
             ?warn="${warn}"
             warn-text="${warnText}">
           </cds-date-picker-input>
@@ -247,6 +273,8 @@ export const RangeWithCalendarWithLayer = {
             label-text="End date"
             placeholder="${placeholder}"
             size="${size}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
             ?warn="${warn}"
             warn-text="${warnText}">
           </cds-date-picker-input>
@@ -264,6 +292,8 @@ export const Simple = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -285,6 +315,8 @@ export const Simple = {
           placeholder="${placeholder}"
           ?readonly="${readonly}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -301,6 +333,8 @@ export const SimpleWithLayer = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -323,6 +357,8 @@ export const SimpleWithLayer = {
           placeholder="${placeholder}"
           ?readonly="${readonly}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -339,6 +375,8 @@ export const SingleWithCalendar = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -361,6 +399,8 @@ export const SingleWithCalendar = {
           label-text="Date Picker label"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -377,6 +417,8 @@ export const SingleWithCalendarWithLayer = {
     closeOnSelect,
     disabled,
     dateFormat,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -400,6 +442,8 @@ export const SingleWithCalendarWithLayer = {
             label-text="Date Picker label"
             placeholder="${placeholder}"
             size="${size}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
             ?warn="${warn}"
             warn-text="${warnText}">
           </cds-date-picker-input>
@@ -476,6 +520,8 @@ export const WithAILabel = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -498,6 +544,8 @@ export const WithAILabel = {
           label-text="Date Picker label"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
           <cds-ai-label alignment="bottom-left">
