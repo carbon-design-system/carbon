@@ -1573,6 +1573,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "grishma-shah7",
+      "name": "Grishma Shah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87775713?v=4",
+      "profile": "https://github.com/grishma-shah7",
+      "contributions": [
+        "a11y"
+      ]
     }
   ],
   "commitConvention": "none"

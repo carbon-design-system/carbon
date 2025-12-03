@@ -5378,6 +5378,13 @@
     - operation
   sizes:
     - 32
+- name: commit-alt
+  friendly_name: Commit alt or Source
+  aliases:
+    - commit
+    - operation
+  sizes:
+    - 32
 - name: communication--unified
   friendly_name: Communication unified
   aliases:
@@ -5854,6 +5861,14 @@
   aliases:
     - copy
     - link
+    - file
+  sizes:
+    - 32
+- name: copy--to-clipboard
+  friendly_name: Copy to clipboard
+  aliases:
+    - copy
+    - clipboard
     - file
   sizes:
     - 32
@@ -8754,6 +8769,14 @@
   sizes:
     - 16
     - 32
+- name: extensions
+  friendly_name: Extensions
+  aliases:
+    - extension
+    - customization
+    - module
+  sizes:
+    - 32
 - name: eyedropper
   friendly_name: Eyedropper
   aliases:
@@ -9642,6 +9665,17 @@
     - organize
     - folder shared
     - folder
+- name: folder--tree
+  friendly_name: Folder tree
+  aliases:
+    - folder
+    - tree
+    - hierarchical
+    - structure
+    - organize
+    - directory
+  sizes:
+    - 32
 - name: folders
   friendly_name: Folders
   aliases:
@@ -15176,6 +15210,17 @@
     - format
   sizes:
     - 32
+- name: list-tree
+  friendly_name: List tree
+  aliases:
+    - list
+    - tree
+    - hierarchical
+    - organize
+    - structure
+    - directory
+  sizes:
+    - 32
 - name: load-balancer--application
   friendly_name: Load balancer application
   aliases:
@@ -18135,6 +18180,18 @@
     - data
   sizes:
     - 32
+- name: orchestrate
+  friendly_name: Orchestration
+  aliases:
+    - automation
+    - coordination
+    - workflow
+    - integration
+    - scheduling
+    - provisioning
+    - deployment
+  sizes:
+    - 32
 - name: order-details
   friendly_name: Order details
   aliases:
@@ -19313,6 +19370,14 @@
     - compression
   sizes:
     - 32
+- name: point
+  friendly_name: Point
+  aliases:
+    - point
+    - indicate
+    - choose
+  sizes:
+    - 32
 - name: point-of-presence
   friendly_name: Point of presence
   aliases:
@@ -19909,6 +19974,14 @@
     - project documentation
   sizes:
     - 32
+- name: reading--glasses
+  friendly_name: Reading glasses
+  aliases:
+    - glasses
+    - reading
+    - eyewear
+  sizes:
+    - 32
 - name: receipt
   friendly_name: Receipt
   aliases:
@@ -20055,6 +20128,15 @@
     - 32
   aliases:
     - reminder
+- name: remote-connection
+  friendly_name: Remote connection
+  aliases:
+    - SSH
+    - secure access
+    - remote
+    - connection
+  sizes:
+    - 32
 - name: renew
   friendly_name: Renew
   aliases:
@@ -20763,6 +20845,14 @@
     - play
     - program
     - mirror
+  sizes:
+    - 32
+- name: run-view-icon
+  friendly_name: Run view icon
+  aliases:
+    - run
+    - view
+    - run view
   sizes:
     - 32
 - name: running
@@ -22358,6 +22448,16 @@
     - A
     - Z
     - high
+  sizes:
+    - 32
+- name: source-control
+  friendly_name: Source control
+  aliases:
+    - source control
+    - version control
+    - repo
+    - pane
+    - commit
   sizes:
     - 32
 - name: spell-check
@@ -25700,6 +25800,13 @@
     - version
     - patch
     - fix
+  sizes:
+    - 32
+- name: vertical--fold
+  friendly_name: Vertical fold
+  aliases:
+    - vertical
+    - fold
   sizes:
     - 32
 - name: vertical-view
