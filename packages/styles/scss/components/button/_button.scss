@@ -1,10 +1,11 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:math';
 @use 'tokens' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
@@ -20,6 +21,93 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
+
+@function has-n-children($n) {
+  // Uses nth-child() to select the nth child, and :last-child to ensure that
+  // the selector only matches the last child of its parent.
+  @return ':has(:nth-child(#{$n}):last-child)';
+}
+
+@mixin button-set-fluid-column() {
+  --flex-direction: column;
+
+  .#{$prefix}--btn {
+    flex: initial;
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+
+  .#{$prefix}--btn--ghost {
+    padding-inline-start: $spacing-05;
+  }
+}
+
+@mixin button-set-fluid-layout() {
+  container-type: inline-size;
+
+  .#{$prefix}--btn-set__fluid-inner {
+    --flex-direction: row;
+
+    display: flex;
+    flex-direction: var(--flex-direction);
+    align-items: stretch;
+    justify-content: flex-end;
+    inline-size: 100%;
+  }
+
+  // NOTE: Container queries are based on this value which is based on IBM Products implementation
+  // Side panel has up to 3 buttons unstacked from size lg (640px). Min 160.33px/button
+  // Narrow Tearsheet 540px has 4 buttons unstacked buttons. Min 135px/button
+  // May need to be configurable as 3 * 135px is less than 640px.
+  // Current value 176px only supports up to 3 buttons at 540px.
+  $min-inline-button-size: convert.to-rem(176px);
+
+  .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn {
+    // default non-column layout
+    flex: 0 1 25%;
+
+    // This increased size comes from use in IBM Products Tearsheet and SidePanel
+    max-inline-size: convert.to-rem(232px);
+  }
+
+  .#{$prefix}--btn-set__fluid-inner--auto-stack .#{$prefix}--btn {
+    min-inline-size: $min-inline-button-size;
+  }
+
+  .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn--ghost,
+  .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn--danger--ghost {
+    // ghost buttons always grow to fill the container
+    flex: 1 1 25%;
+    max-inline-size: none;
+    padding-inline-start: $spacing-07; /* increased padding when inline */
+  }
+
+  $max-fluid-buttons: 4;
+  // this determines whether or not column is used
+  @for $i from 1 through $max-fluid-buttons {
+    @container (width <= #{$i * $min-inline-button-size}) {
+      .#{$prefix}--btn-set__fluid-inner--auto-stack#{has-n-children($i)} {
+        @include button-set-fluid-column();
+      }
+    }
+  }
+
+  @container (width <= #{4 * $min-inline-button-size}) {
+    .#{$prefix}--btn-set__fluid-inner#{has-n-children(2)} {
+      .#{$prefix}--btn {
+        flex-basis: 50%;
+        max-inline-size: none;
+      }
+    }
+  }
+
+  @container (width <= #{3 * $min-inline-button-size}) {
+    .#{$prefix}--btn-set__fluid-inner#{has-n-children(1)} .#{$prefix}--btn {
+      flex: 1 1 100%;
+      max-inline-size: none;
+    }
+  }
+}
 
 @mixin button {
   .#{$prefix}--btn {
@@ -425,5 +513,9 @@
   // RTL overrides
   [dir='rtl'] .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus) {
     box-shadow: convert.to-rem(1px) 0 0 0 $button-separator;
+  }
+
+  .#{$prefix}--btn-set--fluid {
+    @include button-set-fluid-layout();
   }
 }
