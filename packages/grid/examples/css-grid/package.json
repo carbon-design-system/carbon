@@ -9,7 +9,7 @@
     "@carbon/colors": "link:../../../colors",
     "@carbon/grid": "link:../../",
     "carbon-components": "link:../../../components",
-    "next": "^15.4.7",
+    "next": "^15.5.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.36.0"
