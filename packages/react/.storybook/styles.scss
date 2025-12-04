@@ -10,6 +10,9 @@
 );
 @use '../scss/grid/flexbox';
 
+@use '@carbon/styles/scss/breakpoint' as breakpoint;
+@use '@carbon-labs/mdx-components/scss/index';
+
 :root {
   @include styles.theme(styles.$white);
 }
@@ -26,7 +29,8 @@
   @include styles.theme(styles.$g100);
 }
 
-body {
+body,
+.docs-story {
   background: styles.$background;
   color: styles.$text-primary;
 }
@@ -55,3 +59,25 @@ body {
   box-shadow: none;
 }
 /* stylelint-enable */
+.cds--mdx .sbdocs.sbdocs-wrapper {
+  padding: 0;
+}
+
+.cds--mdx .sbdocs.sbdocs-content {
+  background: #f4f4f4;
+  max-inline-size: none;
+  @include breakpoint.breakpoint(lg) {
+    --cds-grid-columns: 12;
+  }
+}
+
+.cds--mdx img {
+  background: #ffffff;
+  max-inline-size: 100%;
+}
+
+.cds--mdx .image--fixed img {
+  @include breakpoint.breakpoint(lg) {
+    max-inline-size: 736px;
+  }
+}
