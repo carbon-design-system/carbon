@@ -23,6 +23,16 @@ export default {
     },
     layout: 'centered',
   },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
+  },
 };
 
 export const Default = (args) => {
@@ -79,6 +89,11 @@ Default.argTypes = {
     },
     options: ['primary', 'secondary', 'ghost', 'tertiary'],
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
 };
 
 export const withBadgeIndicator = (args) => {
@@ -102,5 +117,12 @@ withBadgeIndicator.args = {
 withBadgeIndicator.parameters = {
   controls: {
     exclude: ['size', 'kind'],
+  },
+};
+withBadgeIndicator.argTypes = {
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
 };

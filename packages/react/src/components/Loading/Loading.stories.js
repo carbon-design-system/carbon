@@ -8,33 +8,15 @@
 import React from 'react';
 import Loading from '.';
 import mdx from './Loading.mdx';
-
-export default {
-  title: 'Components/Loading',
-  component: Loading,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-    // The id prop is deprecated and should be remove in the next major release
-    controls: {
-      exclude: ['id'],
-    },
-  },
-};
-
-export const Default = (args) => {
-  return <Loading className={'some-class'} {...args} />;
-};
-
-Default.args = {
+const Defaultargs = {
   active: true,
   withOverlay: false,
   small: false,
   description: 'Loading',
+  theme: 'g10',
 };
 
-Default.argTypes = {
+const DefaultargTypes = {
   active: {
     control: {
       type: 'boolean',
@@ -55,4 +37,28 @@ Default.argTypes = {
       type: 'text',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/Loading',
+  component: Loading,
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    // The id prop is deprecated and should be remove in the next major release
+    controls: {
+      exclude: ['id'],
+    },
+  },
+};
+
+export const Default = (args) => {
+  return <Loading className={'some-class'} {...args} />;
 };

@@ -14,6 +14,16 @@ export default {
   title: 'Preview/preview__ChatButton',
   component: ChatButton,
   parameters: {},
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
+  },
 };
 
 export const Default = () => (

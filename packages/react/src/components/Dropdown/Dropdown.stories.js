@@ -93,6 +93,7 @@ const sharedArgs = {
   warnText: 'please notice the warning',
   titleText: 'This is an example title',
   type: 'default',
+  theme: 'g10',
 };
 
 const sharedArgTypes = {
@@ -148,6 +149,11 @@ const sharedArgTypes = {
   type: {
     control: { type: 'select' },
     options: ['default', 'inline'],
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
 };
 

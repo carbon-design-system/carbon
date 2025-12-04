@@ -117,6 +117,11 @@ export default {
     readOnly: {
       control: { type: 'boolean' },
     },
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
   },
   parameters: {
     docs: {
@@ -190,6 +195,7 @@ const sharedArgs = {
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
   selectAll: false,
   selectAllItemText: 'All options',
+  theme: 'g10',
 };
 
 export const Default = (args) => {

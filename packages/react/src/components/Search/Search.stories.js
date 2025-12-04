@@ -12,7 +12,60 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ExpandableSearch from '../ExpandableSearch';
 import Search from '.';
 import mdx from './Search.mdx';
+const Defaultargs = {
+  closeButtonLabelText: 'Clear search input',
+  disabled: false,
+  labelText: 'Label text',
+  placeholder: 'Placeholder text',
+  size: 'md',
+  type: 'search',
+  theme: 'g10',
+};
 
+const DefaultargTypes = {
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
+  closeButtonLabelText: {
+    control: {
+      type: 'text',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  defaultValue: {
+    control: {
+      type: 'text',
+    },
+  },
+  labelText: {
+    control: {
+      type: 'text',
+    },
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+  },
+  renderIcon: {
+    control: false,
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: {
+      type: 'select',
+    },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
 export default {
   title: 'Components/Search',
   component: Search,
@@ -26,6 +79,8 @@ export default {
   subcomponents: {
     ExpandableSearch,
   },
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
   parameters: {
     docs: {
       page: mdx,
@@ -108,53 +163,4 @@ export const Default = (args) => {
       <Search id="search-default-1" {...args} />
     </div>
   );
-};
-
-Default.args = {
-  closeButtonLabelText: 'Clear search input',
-  disabled: false,
-  labelText: 'Label text',
-  placeholder: 'Placeholder text',
-  size: 'md',
-  type: 'search',
-};
-
-Default.argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  closeButtonLabelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  renderIcon: {
-    control: false,
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: {
-      type: 'select',
-    },
-  },
 };

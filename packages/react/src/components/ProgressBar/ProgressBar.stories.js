@@ -11,7 +11,23 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './ProgressBar.mdx';
 
 import ProgressBar from './';
-
+const DefaultargTypes = {
+  hideLabel: {
+    control: { type: 'boolean' },
+  },
+  status: {
+    options: ['active', 'finished', 'error'],
+    control: { type: 'select' },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+const Defaultargs = {
+  theme: 'g10',
+};
 export default {
   title: 'Components/ProgressBar',
   component: ProgressBar,
@@ -20,6 +36,8 @@ export default {
       page: mdx,
     },
   },
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
 };
 
 const DefaultStory = (args) => {
@@ -33,16 +51,6 @@ const DefaultStory = (args) => {
 };
 
 export const Default = DefaultStory.bind({});
-
-Default.argTypes = {
-  hideLabel: {
-    control: { type: 'boolean' },
-  },
-  status: {
-    options: ['active', 'finished', 'error'],
-    control: { type: 'select' },
-  },
-};
 
 export const Indeterminate = () => (
   <ProgressBar label="Progress bar label" helperText="Optional helper text" />

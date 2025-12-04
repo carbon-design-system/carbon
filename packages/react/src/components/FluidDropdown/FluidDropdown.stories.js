@@ -18,48 +18,6 @@ import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidDropdown.mdx';
-
-export default {
-  title: 'Components/Fluid Components/FluidDropdown',
-  component: FluidDropdown,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  subcomponents: {
-    FluidDropdownSkeleton,
-  },
-};
-
-const items = [
-  {
-    id: 'option-0',
-    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-  },
-  {
-    id: 'option-1',
-    text: 'Option 1',
-  },
-  {
-    id: 'option-2',
-    text: 'Option 2',
-  },
-  {
-    id: 'option-3',
-    text: 'Option 3 - a disabled item',
-    disabled: true,
-  },
-  {
-    id: 'option-4',
-    text: 'Option 4',
-  },
-  {
-    id: 'option-5',
-    text: 'Option 5',
-  },
-];
-
 const sharedArgTypes = {
   className: {
     control: {
@@ -106,8 +64,63 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/Fluid Components/FluidDropdown',
+  component: FluidDropdown,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  subcomponents: {
+    FluidDropdownSkeleton,
+  },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    initialSelectedItem: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
+const items = [
+  {
+    id: 'option-0',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+  },
+  {
+    id: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    id: 'option-5',
+    text: 'Option 5',
+  },
+];
 export const Default = (args) => (
   <div style={{ width: args.defaultWidth }}>
     <FluidDropdown

@@ -16,32 +16,6 @@ import mdx from './TextInput.mdx';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
 import { Tooltip } from '../Tooltip';
-
-export default {
-  title: 'Components/TextInput',
-  component: TextInput,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  subcomponents: {
-    TextInputSkeleton,
-  },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-    slug: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-};
-
 const sharedArgTypes = {
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
@@ -113,6 +87,39 @@ const sharedArgTypes = {
       type: 'select',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/TextInput',
+  component: TextInput,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  subcomponents: {
+    TextInputSkeleton,
+  },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+    slug: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = (args) => {
@@ -136,6 +143,7 @@ Default.args = {
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
   size: 'md',
+  theme: 'g10',
 };
 
 Default.argTypes = {

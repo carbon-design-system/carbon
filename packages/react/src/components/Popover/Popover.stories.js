@@ -19,13 +19,76 @@ import OverflowMenu from '../OverflowMenu/OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 
 const prefix = 'cds';
+const Defaultargs = {
+  caret: true,
+  dropShadow: true,
+  highContrast: false,
+  open: true,
+  theme: 'g10',
+};
 
+const DefaultargTypes = {
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  border: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  dropShadow: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  highContrast: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  open: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
 export default {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
     PopoverContent,
   },
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
   parameters: {
     controls: {
       hideNoControlsWarning: true,
@@ -169,63 +232,6 @@ TabTip.argTypes = {
 };
 
 export const Default = DefaultStory.bind({});
-
-Default.args = {
-  caret: true,
-  dropShadow: true,
-  highContrast: false,
-  open: true,
-};
-
-Default.argTypes = {
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  border: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  caret: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  dropShadow: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  highContrast: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  open: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
 
 Default.story = {
   decorators: [

@@ -22,12 +22,18 @@ export default {
     disabled: false,
     inline: false,
     visited: false,
+    theme: 'g10',
   },
   argTypes: {
     renderIcon: {
       table: {
         disable: true,
       },
+    },
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
     },
   },
 };

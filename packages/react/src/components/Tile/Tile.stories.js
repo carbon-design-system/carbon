@@ -50,6 +50,9 @@ export default {
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
   },
+  args: {
+    theme: 'g10',
+  },
   argTypes: {
     light: {
       table: {
@@ -60,6 +63,11 @@ export default {
       table: {
         disable: true,
       },
+    },
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
     },
   },
   parameters: {
@@ -114,6 +122,11 @@ Clickable.argTypes = {
       type: 'boolean',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
 };
 
 export const ClickableWithCustomIcon = (args) => {
@@ -132,13 +145,7 @@ ClickableWithCustomIcon.args = {
   disabled: false,
 };
 
-ClickableWithCustomIcon.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+ClickableWithCustomIcon.argTypes = Clickable.argTypes;
 
 export const ClickableWithLayer = () => (
   <WithLayer>
@@ -164,13 +171,7 @@ Selectable.args = {
   disabled: false,
 };
 
-Selectable.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+Selectable.argTypes = Clickable.argTypes;
 
 export const MultiSelect = (args) => {
   return (
@@ -192,13 +193,7 @@ MultiSelect.args = {
   disabled: false,
 };
 
-MultiSelect.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+MultiSelect.argTypes = Clickable.argTypes;
 
 export const Radio = (args) => {
   return (
@@ -232,13 +227,7 @@ Radio.args = {
   disabled: false,
 };
 
-Radio.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+Radio.argTypes = Clickable.argTypes;
 
 export const RadioWithLayer = () => (
   <WithLayer>

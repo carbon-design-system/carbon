@@ -23,62 +23,6 @@ import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidMultiSelect.mdx';
-
-export default {
-  title: 'Components/Fluid Components/FluidMultiSelect',
-  component: FluidMultiSelect,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  subcomponents: {
-    FluidMultiSelectSkeleton,
-  },
-};
-
-const items = [
-  {
-    id: 'option-0',
-    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-  },
-  {
-    id: 'option-1',
-    text: 'Option 1',
-  },
-  {
-    id: 'option-2',
-    text: 'Option 2',
-  },
-  {
-    id: 'option-3',
-    text: 'Option 3 - a disabled item',
-    disabled: true,
-  },
-  {
-    id: 'option-4',
-    text: 'Option 4',
-  },
-  {
-    id: 'option-5',
-    text: 'Option 5',
-  },
-];
-
-export const Default = (args) => (
-  <div style={{ width: args.defaultWidth }}>
-    <FluidMultiSelect
-      onChange={() => {}}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...args}
-    />
-  </div>
-);
-
 const sharedArgTypes = {
   className: {
     control: {
@@ -130,7 +74,77 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
 };
+export default {
+  title: 'Components/Fluid Components/FluidMultiSelect',
+  component: FluidMultiSelect,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  subcomponents: {
+    FluidMultiSelectSkeleton,
+  },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    initialSelectedItems: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+};
+
+const items = [
+  {
+    id: 'option-0',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+  },
+  {
+    id: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    id: 'option-5',
+    text: 'Option 5',
+  },
+];
+
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
+    <FluidMultiSelect
+      onChange={() => {}}
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  </div>
+);
 
 Default.args = {
   defaultWidth: 400,

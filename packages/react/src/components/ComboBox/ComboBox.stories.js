@@ -46,6 +46,11 @@ export default {
   title: 'Components/ComboBox',
   component: ComboBox,
   argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
     size: {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
@@ -56,6 +61,9 @@ export default {
       },
     },
     onChange: { action: 'onChange' },
+  },
+  args: {
+    theme: 'g10',
   },
   parameters: {
     docs: {

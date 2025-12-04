@@ -19,40 +19,6 @@ import {
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import mdx from './FluidTextArea.mdx';
-
-export default {
-  title: 'Components/Fluid Components/FluidTextArea',
-  component: FluidTextArea,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-    controls: {
-      exclude: ['id', 'value', 'defaultValue'],
-    },
-  },
-  subcomponents: {
-    FluidTextAreaSkeleton,
-  },
-  argTypes: {
-    hideLabel: {
-      table: {
-        disable: true,
-      },
-    },
-    helperText: {
-      table: {
-        disable: true,
-      },
-    },
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-};
-
 const sharedArgTypes = {
   className: {
     control: {
@@ -102,6 +68,47 @@ const sharedArgTypes = {
   warnText: {
     control: {
       type: 'text',
+    },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/Fluid Components/FluidTextArea',
+  component: FluidTextArea,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: ['id', 'value', 'defaultValue'],
+    },
+  },
+  subcomponents: {
+    FluidTextAreaSkeleton,
+  },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    hideLabel: {
+      table: {
+        disable: true,
+      },
+    },
+    helperText: {
+      table: {
+        disable: true,
+      },
+    },
+    light: {
+      table: {
+        disable: true,
+      },
     },
   },
 };

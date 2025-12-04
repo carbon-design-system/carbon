@@ -20,7 +20,28 @@ import {
 import { CheckmarkFilled } from '@carbon/icons-react';
 const prefix = 'cds';
 import StructuredListSkeleton from './StructuredList.Skeleton';
-
+const DefaultargTypes = {
+  isCondensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+const Defaultargs = {
+  isCondensed: false,
+  isFlush: false,
+  theme: 'g10',
+};
 export default {
   title: 'Components/StructuredList',
   component: StructuredListWrapper,
@@ -31,6 +52,8 @@ export default {
     StructuredListInput,
     StructuredListCell,
   },
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
   parameters: {
     docs: {
       page: mdx,
@@ -73,29 +96,12 @@ export const Default = (args) => {
     </StructuredListWrapper>
   );
 };
-
-Default.args = {
-  isCondensed: false,
-  isFlush: false,
-};
-
 Default.parameters = {
   controls: {
     exclude: ['selection'],
   },
 };
-Default.argTypes = {
-  isCondensed: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isFlush: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+
 const structuredListBodyRowGenerator = (numRows) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
     <StructuredListRow key={`row-${i}`} id={`row-${i}`}>

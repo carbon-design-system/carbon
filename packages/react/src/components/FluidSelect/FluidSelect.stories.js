@@ -19,30 +19,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidSelect.mdx';
-
-export default {
-  title: 'Components/Fluid Components/FluidSelect',
-  component: FluidSelect,
-  subcomponents: {
-    FluidSelectSkeleton,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-    controls: {
-      exclude: ['defaultValue', 'id'],
-    },
-  },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-};
-
 const sharedArgTypes = {
   className: {
     control: {
@@ -77,6 +53,37 @@ const sharedArgTypes = {
   warnText: {
     control: {
       type: 'text',
+    },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/Fluid Components/FluidSelect',
+  component: FluidSelect,
+  subcomponents: {
+    FluidSelectSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: ['defaultValue', 'id'],
+    },
+  },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    light: {
+      table: {
+        disable: true,
+      },
     },
   },
 };

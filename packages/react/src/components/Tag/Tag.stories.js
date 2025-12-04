@@ -16,10 +16,62 @@ import { IconButton } from '../IconButton';
 import '../AILabel/ailabel-story.scss';
 import mdx from './Tag.mdx';
 import './story.scss';
+const ReadOnlyargs = {
+  disabled: false,
+  filter: false,
+  size: 'md',
+  title: 'Clear filter',
+  theme: 'g10',
+};
 
+const ReadOnlyargTypes = {
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  filter: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  id: {
+    control: false,
+  },
+  renderIcon: {
+    control: false,
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: {
+      type: 'select',
+    },
+  },
+  title: {
+    control: {
+      type: 'text',
+    },
+  },
+  type: {
+    control: false,
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
 export default {
   title: 'Components/Tag',
   component: Tag,
+  argTypes: ReadOnlyargTypes,
+  args: ReadOnlyargs,
   parameters: {
     docs: {
       page: mdx,
@@ -68,52 +120,6 @@ export const ReadOnly = (args) => {
       </Tag>
     </>
   );
-};
-
-ReadOnly.args = {
-  disabled: false,
-  filter: false,
-  size: 'md',
-  title: 'Clear filter',
-};
-
-ReadOnly.argTypes = {
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  filter: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  id: {
-    control: false,
-  },
-  renderIcon: {
-    control: false,
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: {
-      type: 'select',
-    },
-  },
-  title: {
-    control: {
-      type: 'text',
-    },
-  },
-  type: {
-    control: false,
-  },
 };
 
 export const Skeleton = (args) => (

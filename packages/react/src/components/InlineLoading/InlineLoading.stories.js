@@ -10,9 +10,33 @@ import Button from '../Button';
 import InlineLoading from '.';
 import mdx from './InlineLoading.mdx';
 
+const defaultArgs = {
+  description: 'Loading',
+  iconDescription: 'Loading data...',
+  theme: 'g10',
+};
+const defaultArgTypes = {
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
+  iconDescription: {
+    control: {
+      type: 'text',
+    },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
 export default {
   title: 'Components/InlineLoading',
   component: InlineLoading,
+  argTypes: defaultArgTypes,
+  args: defaultArgs,
   parameters: {
     docs: {
       page: mdx,
@@ -79,26 +103,8 @@ export const UxExample = () => {
 
 export const Default = (args) => <InlineLoading {...args} />;
 
-Default.args = {
-  description: 'Loading',
-  iconDescription: 'Loading data...',
-};
-
 Default.parameters = {
   controls: {
     exclude: ['successDelay'],
-  },
-};
-
-Default.argTypes = {
-  description: {
-    control: {
-      type: 'text',
-    },
-  },
-  iconDescription: {
-    control: {
-      type: 'text',
-    },
   },
 };

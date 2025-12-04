@@ -29,12 +29,18 @@ export default {
     invalid: false,
     warn: false,
     size: 'md',
+    theme: 'g10',
   },
   argTypes: {
     light: {
       table: {
         disable: true,
       },
+    },
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
     },
   },
   decorators: [(story) => <div style={{ width: '400px' }}>{story()}</div>],
@@ -192,4 +198,9 @@ Default.argTypes = {
   invalidText: { control: 'text' },
   labelText: { control: 'text' },
   warnText: { control: 'text' },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
 };

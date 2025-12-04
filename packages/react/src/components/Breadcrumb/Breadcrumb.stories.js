@@ -25,12 +25,20 @@ export default {
       page: mdx,
     },
   },
+  args: {
+    theme: 'g10',
+  },
 };
 
 const sharedArgTypes = {
   size: {
     options: ['sm', 'md'],
     control: { type: 'select' },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
 };
 
