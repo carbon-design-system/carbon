@@ -1513,4 +1513,75 @@ describe('NumberInput', () => {
       });
     });
   });
+
+  describe('validateNumberSeparators', () => {
+    const { validateNumberSeparators } = require('../NumberInput');
+
+    it('should validate properly formatted numbers with grouping', () => {
+      expect(validateNumberSeparators('1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1,234,567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1,234.56', 'en-US')).toBe(true);
+    });
+
+    it('should validate numbers without grouping', () => {
+      expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1234567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1234.56', 'en-US')).toBe(true);
+    });
+
+    it('should reject improperly formatted grouping', () => {
+      expect(validateNumberSeparators('12,34', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('1,2345', 'en-US')).toBe(false);
+    });
+
+    it('should validate scientific notation', () => {
+      expect(validateNumberSeparators('1e3', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1.5e2', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('2e-3', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1.5e+10', 'en-US')).toBe(true);
+    });
+
+    it('should validate negative numbers', () => {
+      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+    });
+
+    it('should validate different locale formats', () => {
+      expect(validateNumberSeparators('1.234,56', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('1 234,56', 'fr-FR')).toBe(true);
+    });
+
+    it('should validate Eastern Arabic numerals', () => {
+      expect(validateNumberSeparators('٢,٣٣٣', 'ar')).toBe(true);
+      expect(validateNumberSeparators('٢٣٣٬٤٥٦', 'ar')).toBe(true);
+    });
+
+    it('should validate Devanagari numerals', () => {
+      expect(validateNumberSeparators('१,२३४', 'hi-IN')).toBe(true);
+    });
+
+    it('should validate Kanji numerals', () => {
+      expect(validateNumberSeparators('一,二三四', 'ja')).toBe(true);
+    });
+
+    it('should allow empty string', () => {
+      expect(validateNumberSeparators('', 'en-US')).toBe(true);
+    });
+
+    it('should handle Arabic separators', () => {
+      expect(validateNumberSeparators('٢,٣٣٣.٣٣', 'ar')).toBe(true);
+    });
+
+    it('should reject invalid separator positions for German locale', () => {
+      expect(validateNumberSeparators('12.34', 'de-DE')).toBe(false);
+      expect(validateNumberSeparators('1.23.456', 'de-DE')).toBe(false);
+    });
+
+    it('should reject invalid separator positions for French locale', () => {
+      expect(validateNumberSeparators('12 34', 'fr-FR')).toBe(false);
+      expect(validateNumberSeparators('1 23 456', 'fr-FR')).toBe(false);
+    });
+  });
 });
