@@ -478,6 +478,7 @@ export const FloatingMenu = ({
         endTrapNode: endSentinelRef.current,
         currentActiveNode: relatedTarget,
         oldActiveNode: target,
+        prefix,
       });
     }
   };
