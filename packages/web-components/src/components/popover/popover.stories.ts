@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { html, LitElement } from 'lit'; // remove LitElement before merging
+import './my-app'; // remove before merging
 import './popover';
 import './popover-content';
 import '../radio-button/index';
@@ -521,6 +522,100 @@ export const TabTipExperimentalAutoAlign = {
     `;
   },
 };
+
+// everything from here down until const meta = {} should be removed before merging
+class PopTest extends LitElement {
+  static properties = {
+    isOpen: { type: Boolean },
+  };
+  private isOpen: boolean = false;
+
+  constructor() {
+    super();
+    this.isOpen = false;
+  }
+
+  handleClick() {
+    this.isOpen = !this.isOpen;
+  }
+
+  render() {
+    return html`
+      <div>
+        <h3>Popover open: ${this.isOpen}</h3>
+        <cds-popover ?open=${this.isOpen}>
+          <button @click="${this.handleClick}">PRESS ME</button>
+          <cds-popover-content>
+            <div>
+              <h3>POPOVER</h3>
+            </div>
+          </cds-popover-content>
+        </cds-popover>
+      </div>
+    `;
+  }
+}
+customElements.define('pop-test', PopTest);
+
+// remove before merging
+export const Test1ShouldOpenAndClose = {
+  render: () => html`<pop-test></pop-test>`,
+};
+
+class MyCard extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = `
+            <div>
+              <cds-popover open="" caret="" align="bottom" dropshadow="" backgroundtoken="">
+                <slot name="popover-trigger"></slot>
+                <cds-popover-content>
+                  <slot name="popover-content"></slot>
+                </cds-popover-content>
+              </cds-popover>
+            </div>
+            `;
+  }
+}
+
+customElements.define('my-card', MyCard);
+
+export const Test2ShouldNotCloseOnContentClick = {
+  render: () =>
+    html`<my-card>
+      <button
+        slot="popover-trigger"
+        class="playground-trigger"
+        aria-label="Checkbox"
+        type="button"
+        aria-expanded="function open() { [native code] }">
+        <svg
+          focusable="false"
+          preserveAspectRatio="xMidYMid meet"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          width="16"
+          height="16"
+          viewBox="0 0 32 32"
+          aria-hidden="true">
+          <path
+            d="M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z"></path>
+        </svg>
+      </button>
+      <div slot="popover-content" class="p-3">
+        <p class="popover-title">Available storage</p>
+        <p class="popover-details">
+          This server has 150 GB of block storage remaining.
+        </p>
+      </div>
+    </my-card>`,
+};
+
+export const Test3ShouldOpenAndClose = {
+  render: () => html` <my-app> </my-app> `,
+};
+// stop here
 
 const meta = {
   title: 'Components/Popover',
