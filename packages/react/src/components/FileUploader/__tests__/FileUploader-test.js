@@ -11,7 +11,6 @@ import userEvent from '@testing-library/user-event';
 import FileUploader from '../';
 import { FeatureFlags } from '../../FeatureFlags';
 import React from 'react';
-import { uploadFiles } from '../test-helpers';
 
 const iconDescription = 'test description';
 const requiredProps = {
@@ -135,6 +134,41 @@ describe('FileUploader', () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });
+
+  it('should reject files larger than maxFileSize', async () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader {...requiredProps} maxFileSize={1} onChange={onChange} />
+    );
+
+    const input = container.querySelector('input');
+    const largeFile = new File(['max filesize'], 'max-filesize.txt', {
+      type: 'text/plain',
+    });
+
+    await userEvent.upload(input, largeFile);
+
+    expect(screen.queryByText('max-filesize.txt')).not.toBeInTheDocument();
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('should allow onAddFiles to filter incoming files', async () => {
+    const onAddFiles = jest.fn((_, { addedFiles }) => addedFiles.slice(0, 1));
+    const { container } = render(
+      <FileUploader {...requiredProps} onAddFiles={onAddFiles} />
+    );
+
+    const input = container.querySelector('input');
+    const fileA = new File(['a'], 'a.txt', { type: 'text/plain' });
+    const fileB = new File(['b'], 'b.txt', { type: 'text/plain' });
+
+    await userEvent.upload(input, [fileA, fileB]);
+
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    expect(screen.getByText('a.txt')).toBeInTheDocument();
+    expect(screen.queryByText('b.txt')).not.toBeInTheDocument();
+  });
+
   describe('Enhanced FileUploader (with feature flag)', () => {
     beforeAll(() => {
       Object.defineProperty(global, 'crypto', {

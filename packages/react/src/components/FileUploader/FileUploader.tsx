@@ -97,6 +97,11 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   labelTitle?: string;
 
   /**
+   * Maximum file size allowed in bytes. Files larger than this will be rejected.
+   */
+  maxFileSize?: number;
+
+  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple?: boolean;
@@ -105,6 +110,18 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * Provide a name for the underlying `<input>` node
    */
   name?: string;
+
+  /**
+   * Provide an optional `onAddFiles` hook fired before files are added.
+   * Note: Unlike `FileUploaderDropContainer`, this fires before validation and
+   * can be used to filter/transform the added files.
+   * A future change may merge these APIs.
+   * - Returning an empty array prevents any files from being added
+   */
+  onAddFiles?: (
+    event: React.SyntheticEvent<HTMLElement>,
+    content: { addedFiles: File[]; rejectedFiles: File[] }
+  ) => File[] | undefined;
 
   /**
    * Provide an optional `onChange` hook that is called each time the input is changed.
@@ -162,8 +179,10 @@ const FileUploader = React.forwardRef(
       iconDescription,
       labelDescription,
       labelTitle,
+      maxFileSize,
       multiple,
       name,
+      onAddFiles,
       onChange,
       onClick,
       onDelete,
@@ -201,10 +220,42 @@ const FileUploader = React.forwardRef(
       file,
     });
 
+    const applyPreAddHook = (
+      evt: React.SyntheticEvent<HTMLElement>,
+      files: File[]
+    ) => {
+      const accepted: File[] = [];
+      const rejected: File[] = [];
+
+      files.forEach((file) => {
+        if (maxFileSize && file.size > maxFileSize) {
+          rejected.push(file);
+        } else {
+          accepted.push(file);
+        }
+      });
+
+      if (!onAddFiles) {
+        return accepted;
+      }
+
+      const shouldFilter = onAddFiles(evt, {
+        addedFiles: accepted,
+        rejectedFiles: rejected,
+      });
+
+      return Array.isArray(shouldFilter) ? shouldFilter : accepted;
+    };
+
     const handleChange = useCallback(
       (evt) => {
         evt.stopPropagation();
-        const newFiles = Array.from(evt.target.files as FileList);
+        const incomingFiles = Array.from(evt.target.files as FileList);
+        const newFiles = applyPreAddHook(evt, incomingFiles);
+
+        if (newFiles.length === 0) {
+          return;
+        }
 
         if (enhancedFileUploaderEnabled) {
           const newFileItems = newFiles.map(createFileItem);
@@ -537,6 +588,11 @@ FileUploader.propTypes = {
   labelTitle: PropTypes.string,
 
   /**
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
+   */
+  maxFileSize: PropTypes.number,
+
+  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple: PropTypes.bool,
@@ -545,6 +601,14 @@ FileUploader.propTypes = {
    * Provide a name for the underlying `<input>` node
    */
   name: PropTypes.string,
+
+  /**
+   * Event handler that is called after files are added to the uploader
+   * Note: FileUploaderDropContainer's `onAddFiles` fires after validation and
+   * cannot filter the added files. A future change may align these APIs.
+   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
+   */
+  onAddFiles: PropTypes.func,
 
   /**
    * Provide an optional `onChange` hook that is called each time the input is

@@ -102,10 +102,10 @@ export const _FileUploaderDropContainer = () => {
     <FileUploaderDropContainer
       labelText="Drag and drop files here or click to upload"
       multiple={true}
+      maxFileSize={1024 * 1024}
       accept={['image/jpeg', 'image/png']}
       disabled={false}
       name=""
-      tabIndex={0}
     />
   );
 };
@@ -117,6 +117,7 @@ DragAndDropUploadContainerExampleApplication.args = {
   labelText: 'Drag and drop files here or click to upload',
   name: '',
   multiple: true,
+  maxFileSize: 1024 * 1024,
   accept: ['image/jpeg', 'image/png'],
   disabled: false,
   tabIndex: 0,
@@ -132,6 +133,7 @@ DragAndDropUploadSingleContainerExampleApplication.args = {
   labelText: 'Drag and drop a file here or click to upload',
   name: '',
   multiple: false,
+  maxFileSize: 1024 * 1024,
   accept: ['image/jpeg', 'image/png'],
   disabled: false,
   tabIndex: 0,
@@ -165,6 +167,7 @@ Default.args = {
   filenameStatus: 'edit',
   accept: ['.jpg', '.png'],
   multiple: true,
+  maxFileSize: 1024 * 1024,
   disabled: false,
   iconDescription: 'Delete file',
   name: '',
