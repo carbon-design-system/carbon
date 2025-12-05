@@ -45,7 +45,9 @@ collect:
         - close-on-escape
         - collapse-mode
         - color-scheme
+        - cols
         - condensed
+        - counter-mode
         - danger-description
         - data-table
         - default-checked
@@ -132,6 +134,7 @@ collect:
         - oncds-notification-closed
         - oncds-radio-button-changed
         - oncds-search-input
+        - oncds-select-selected
         - oncds-selectable-tile-changed
         - oncds-slider-input-changed
         - oncds-table-batch-actions-cancel-clicked
@@ -167,8 +170,10 @@ collect:
         - revert-active
         - revert-label
         - role
+        - rows
         - selected
         - selected-index
+        - selectedIndex
         - selection-label
         - selection-mode
         - selection-name
@@ -416,9 +421,6 @@ collect:
         - oncds-radio-button-group-changed
         # cds-radio-tile
         - oncds-radio-tile-selected
-        # cds-select
-        - oncds-select-selected
-        - selectedIndex
         # cds-selectable-tag
         - oncds-selectable-tag-beforeselected
         - oncds-selectable-tag-selected
@@ -512,10 +514,6 @@ collect:
         - influencer-width
         - oncds-tearsheet-beingclosed
         - oncds-tearsheet-closed
-        # cds-textarea
-        - cols
-        - counter-mode
-        - rows
         # cds-tile-group
         - currentRadioSelection
         - currentSelections
@@ -600,6 +598,9 @@ collect:
         # General - color-scheme
         - ""
         - light
+        # General - counter-mode
+        - character
+        - word
         # General - direction
         - bottom
         - top
@@ -778,9 +779,6 @@ collect:
         # cds-tearsheet - influencer-width
         - narrow
         - wide
-        # cds-textarea - counter-mode
-        - character
-        - word
   npm:
     dependencies: null
   js:

@@ -106,6 +106,7 @@ export interface RadioTileProps {
    */
   required?: boolean;
 }
+type AriaSupportedProps = React.AriaAttributes;
 
 const RadioTile = React.forwardRef(
   (
@@ -125,7 +126,7 @@ const RadioTile = React.forwardRef(
       slug,
       required,
       ...rest
-    }: RadioTileProps,
+    }: RadioTileProps & AriaSupportedProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
     const prefix = usePrefix();
@@ -145,6 +146,11 @@ const RadioTile = React.forwardRef(
         [`${prefix}--tile--decorator-rounded`]: decorator && hasRoundedCorners,
       }
     );
+    const {
+      'aria-describedby': ariaDescribedBy,
+      'aria-labelledby': ariaLabelledBy,
+      ...labelProps
+    } = rest;
     const v12TileRadioIcons = useFeatureFlag('enable-v12-tile-radio-icons');
     function icon() {
       if (v12TileRadioIcons) {
@@ -193,10 +199,12 @@ const RadioTile = React.forwardRef(
           tabIndex={!disabled ? tabIndex : undefined}
           type="radio"
           value={value}
+          {...(ariaDescribedBy && { 'aria-describedby': ariaDescribedBy })}
+          {...(ariaLabelledBy && { 'aria-labelledby': ariaLabelledBy })}
           ref={ref}
           required={required}
         />
-        <label {...rest} htmlFor={inputId} className={className}>
+        <label {...labelProps} htmlFor={inputId} className={className}>
           <span className={`${prefix}--tile__checkmark`}>{icon()}</span>
           <Text className={`${prefix}--tile-content`}>{children}</Text>
           {slug ? (
