@@ -385,11 +385,11 @@ const TextArea = frFn((props, forwardRef) => {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  const label = labelText ? (
+  const label = labelText !== null && labelText !== undefined && (
     <Text as="label" htmlFor={id} className={labelClasses}>
       {labelText}
     </Text>
-  ) : null;
+  );
 
   const counter =
     enableCounter &&
@@ -400,11 +400,12 @@ const TextArea = frFn((props, forwardRef) => {
         className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
     ) : null;
 
-  const helperId = !helperText
+  const hasHelper = helperText !== null && helperText !== undefined;
+  const helperId = !hasHelper
     ? undefined
     : `text-area-helper-text-${textAreaInstanceId}`;
 
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <Text
       as="div"
       id={helperId}
@@ -412,7 +413,7 @@ const TextArea = frFn((props, forwardRef) => {
       ref={helperTextRef}>
       {helperText}
     </Text>
-  ) : null;
+  );
 
   const errorId = id + '-error-msg';
 
