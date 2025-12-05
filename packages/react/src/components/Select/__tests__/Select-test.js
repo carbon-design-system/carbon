@@ -337,6 +337,92 @@ describe('Select', () => {
         `${prefix}--select--decorator`
       );
     });
+
+    it('should not display invalid message if disabled', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          disabled
+          invalid
+          invalidText="This is an error message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is an error message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid message if readOnly', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          readOnly
+          invalid
+          invalidText="This is an error message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is an error message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning message if disabled', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          disabled
+          warn
+          warnText="This is a warning message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is a warning message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning message if readOnly', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          readOnly
+          warn
+          warnText="This is a warning message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is a warning message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning styles if disabled', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" disabled warn />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+
+      expect(selectWrapper).not.toHaveClass(`${prefix}--select--warning`);
+    });
+
+    it('should not display warning styles if readOnly', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" readOnly warn />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+
+      expect(selectWrapper).not.toHaveClass(`${prefix}--select--warning`);
+    });
   });
 
   describe('behaves as expected', () => {
@@ -457,6 +543,18 @@ describe('Select', () => {
         </main>
       );
       await expect(container).toHaveNoACViolations('Select');
+    });
+
+    it('should not set aria-invalid if disabled', () => {
+      render(<Select id="select" labelText="Select" disabled invalid />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
+    });
+
+    it('should not set aria-invalid if readOnly', () => {
+      render(<Select id="select" labelText="Select" readOnly invalid />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
     });
   });
 });
