@@ -195,6 +195,9 @@ export const WithTypeOfTextControlled = (args) => {
         onChange={(event, state) => {
           setValue(state.value);
         }}
+        onBlur={(_event, value) => {
+          console.log(`Recieved ${value}`);
+        }}
       />
       <button
         type="button"
