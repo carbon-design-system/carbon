@@ -249,14 +249,18 @@ export const aiPopoverCaretBottomBackground = '#202D45';
 export const chatPromptBackground = gray100;
 export const chatPromptBorderStart = gray90;
 export const chatPromptBorderEnd = rgba(gray90, 0);
+export const chatPromptText = textPrimary;
 export const chatBubbleUser = gray80;
+export const chatBubbleUserText = textPrimary;
 export const chatBubbleAgent = gray90;
+export const chatBubbleAgentText = textPrimary;
 export const chatBubbleBorder = gray70;
 export const chatAvatarBot = gray50;
 export const chatAvatarAgent = gray30;
 export const chatAvatarUser = blue50;
 export const chatShellBackground = gray90;
 export const chatHeaderBackground = gray90;
+export const chatHeaderText = textPrimary;
 
 // Chat button tokens
 export const chatButton = linkPrimary;

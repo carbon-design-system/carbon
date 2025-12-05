@@ -1038,11 +1038,23 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "chat-prompt-text",
+          "type": "color",
+        },
+        {
           "name": "chat-bubble-user",
           "type": "color",
         },
         {
+          "name": "chat-bubble-user-text",
+          "type": "color",
+        },
+        {
           "name": "chat-bubble-agent",
+          "type": "color",
+        },
+        {
+          "name": "chat-bubble-agent-text",
           "type": "color",
         },
         {
@@ -1067,6 +1079,10 @@ test('metadata', () => {
         },
         {
           "name": "chat-header-background",
+          "type": "color",
+        },
+        {
+          "name": "chat-header-text",
           "type": "color",
         },
         {
