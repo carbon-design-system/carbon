@@ -20,26 +20,6 @@ const {
 
 import mdx from '../DataTable.mdx';
 import './datatable-story.scss';
-
-export default {
-  title: 'Components/DataTable/Basic',
-  component: DataTable,
-  subcomponents: {
-    TableContainer,
-    Table,
-    TableHead,
-    TableRow,
-    TableHeader,
-    TableBody,
-    TableCell,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
 const sharedArgTypes = {
   size: {
     control: 'select',
@@ -59,6 +39,11 @@ const sharedArgTypes = {
     control: 'boolean',
     description: 'Add zebra striping to rows',
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
 };
 
 const sharedArgs = {
@@ -66,8 +51,29 @@ const sharedArgs = {
   stickyHeader: false,
   useStaticWidth: false,
   useZebraStyles: false,
+  theme: 'g10',
 };
 
+export default {
+  title: 'Components/DataTable/Basic',
+  component: DataTable,
+  subcomponents: {
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableHeader,
+    TableBody,
+    TableCell,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
+};
 export const Default = (args) => {
   const rows = [
     {

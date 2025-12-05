@@ -9,17 +9,6 @@ import React from 'react';
 import IconIndicator from '.';
 import { IconIndicatorKinds } from './index';
 import mdx from './IconIndicator.mdx';
-
-export default {
-  title: 'Preview/StatusIndicators/preview__IconIndicator',
-  component: IconIndicator,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
 const sharedArgTypes = {
   label: {
     control: {
@@ -34,6 +23,26 @@ const sharedArgTypes = {
       type: 'select',
     },
     options: [16, 20],
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Preview/StatusIndicators/preview__IconIndicator',
+  component: IconIndicator,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    ...sharedArgTypes,
   },
 };
 

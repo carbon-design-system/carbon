@@ -46,6 +46,7 @@ const sharedArgs = {
   invalidText: 'Invalid message goes here',
   warn: false,
   warnText: 'Warning message goes here',
+  theme: 'g10',
 };
 
 const sharedArgTypes = {
@@ -98,6 +99,11 @@ const sharedArgTypes = {
     description: 'Provide how checkbox should be displayed',
     control: 'select',
     options: ['horizontal', 'vertical'],
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
 };
 

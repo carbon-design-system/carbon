@@ -15,6 +15,16 @@ import mdx from './SkeletonPlaceholder.mdx';
 export default {
   title: 'Components/Skeleton/SkeletonPlaceholder',
   component: SkeletonPlaceholder,
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
+  },
   parameters: {
     docs: {
       page: mdx,

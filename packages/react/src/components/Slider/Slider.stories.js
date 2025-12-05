@@ -11,36 +11,7 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import { Slider, SliderSkeleton } from '.';
 import mdx from './Slider.mdx';
-
-export default {
-  title: 'Components/Slider',
-  component: Slider,
-  subcomponents: {
-    SliderSkeleton,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
-export const Default = (args) => {
-  return (
-    <Slider
-      {...args}
-      labelText={`Slider (must be an increment of ${args.step})`}
-    />
-  );
-};
-
-Default.parameters = {
-  controls: {
-    exclude: ['light', 'formatLabel', 'labelText'],
-  },
-};
-
-Default.argTypes = {
+const DefaultargTypes = {
   ariaLabelInput: {
     control: { type: 'text' },
   },
@@ -113,9 +84,14 @@ Default.argTypes = {
       type: 'text',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
 };
 
-Default.args = {
+const Defaultargs = {
   ariaLabelInput: 'Lower bound',
   unstable_ariaLabelInputUpper: 'Upper bound',
   disabled: false,
@@ -132,6 +108,36 @@ Default.args = {
   unstable_valueUpper: undefined,
   warn: false,
   warnText: 'Warning message goes here',
+  theme: 'g10',
+};
+export default {
+  title: 'Components/Slider',
+  component: Slider,
+  subcomponents: {
+    SliderSkeleton,
+  },
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const Default = (args) => {
+  return (
+    <Slider
+      {...args}
+      labelText={`Slider (must be an increment of ${args.step})`}
+    />
+  );
+};
+
+Default.parameters = {
+  controls: {
+    exclude: ['light', 'formatLabel', 'labelText'],
+  },
 };
 
 export const SliderWithHiddenInputs = () => {

@@ -10,46 +10,13 @@ import { OverflowMenu } from './OverflowMenu';
 import { default as OverflowMenuItem } from '../OverflowMenuItem';
 import { Filter } from '@carbon/icons-react';
 import mdx from './OverflowMenu.mdx';
-
-export default {
-  title: 'Components/OverflowMenu',
-  component: OverflowMenu,
-  subcomponents: {
-    OverflowMenuItem,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
-export const RenderCustomIcon = () => {
-  return (
-    <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
-      <OverflowMenuItem itemText="Filter A" />
-      <OverflowMenuItem itemText="Filter B" />
-    </OverflowMenu>
-  );
-};
-export const Default = (args) => (
-  <OverflowMenu aria-label="overflow-menu" {...args}>
-    <OverflowMenuItem itemText="Stop app" />
-    <OverflowMenuItem itemText="Restart app" />
-    <OverflowMenuItem itemText="Rename app" />
-    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
-  </OverflowMenu>
-);
-
-Default.args = {
+const Defaultargs = {
   flipped: document?.dir === 'rtl',
   focusTrap: false,
   open: false,
+  theme: 'g10',
 };
-
-Default.argTypes = {
+const DefaultargTypes = {
   align: {
     options: [
       'top',
@@ -91,8 +58,45 @@ Default.argTypes = {
     options: ['xs', 'sm', 'md', 'lg'],
     control: { type: 'select' },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/OverflowMenu',
+  component: OverflowMenu,
+  subcomponents: {
+    OverflowMenuItem,
+  },
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
+export const RenderCustomIcon = () => {
+  return (
+    <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
+      <OverflowMenuItem itemText="Filter A" />
+      <OverflowMenuItem itemText="Filter B" />
+    </OverflowMenu>
+  );
+};
+export const Default = (args) => (
+  <OverflowMenu aria-label="overflow-menu" {...args}>
+    <OverflowMenuItem itemText="Stop app" />
+    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+  </OverflowMenu>
+);
 Default.parameters = {
   controls: {
     exclude: [

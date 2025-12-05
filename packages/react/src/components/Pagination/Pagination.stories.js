@@ -33,9 +33,15 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
   },
   args: {
     size: 'md',
+    theme: 'g10',
   },
   decorators: [
     (story) => (
@@ -67,6 +73,7 @@ Default.args = {
   pagesUnknown: false,
   pageSizeInputDisabled: false,
   totalItems: 103,
+  theme: 'g10',
 };
 
 Default.argTypes = {
@@ -147,6 +154,11 @@ Default.argTypes = {
     control: {
       type: 'number',
     },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
 };
 

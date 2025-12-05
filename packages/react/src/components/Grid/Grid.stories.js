@@ -10,13 +10,55 @@ import './Grid.stories.scss';
 import React from 'react';
 import { Grid, Column, ColumnHang, GridSettings } from '../Grid';
 import mdx from './Grid.mdx';
+const defaultArgs = {
+  as: 'div',
+  fullWidth: false,
+  narrow: false,
+  condensed: false,
+  theme: 'g10',
+};
 
+const defaultArgTypes = {
+  as: {
+    control: {
+      type: 'text',
+    },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  fullWidth: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
 export default {
   title: 'Elements/Grid',
   component: Grid,
   subcomponents: {
     Column,
   },
+  argTypes: defaultArgTypes,
+  args: defaultArgs,
   parameters: {
     controls: {
       hideNoControlsWarning: true,
@@ -47,42 +89,6 @@ export const Default = (args) => {
       </Grid>
     </div>
   );
-};
-
-Default.args = {
-  as: 'div',
-  fullWidth: false,
-  narrow: false,
-  condensed: false,
-};
-
-Default.argTypes = {
-  as: {
-    control: {
-      type: 'text',
-    },
-  },
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  fullWidth: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  narrow: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  condensed: {
-    control: {
-      type: 'boolean',
-    },
-  },
 };
 
 export const Narrow = () => {

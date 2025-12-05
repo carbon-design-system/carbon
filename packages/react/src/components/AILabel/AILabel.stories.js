@@ -17,6 +17,16 @@ import './ailabel-story.scss';
 export default {
   title: 'Components/AILabel',
   component: AILabel,
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
+  },
+  args: {
+    theme: 'g10',
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -292,6 +302,11 @@ ExplainabilityPopover.argTypes = {
       type: 'boolean',
     },
     description: 'Playground only - toggle to show the callout toolbar',
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
   align: {
     options: [

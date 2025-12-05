@@ -17,38 +17,6 @@ import {
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import mdx from './FluidDatePicker.mdx';
-
-export default {
-  title: 'Components/Fluid Components/FluidDatePicker',
-  component: FluidDatePicker,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-    controls: {
-      exclude: [
-        'appendTo',
-        'disable',
-        'enable',
-        'inline',
-        'light',
-        'locale',
-        'value',
-      ],
-    },
-  },
-  subcomponents: {
-    FluidDatePickerSkeleton,
-  },
-};
-
-const sharedArgs = {
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-};
-
 const sharedArgTypes = {
   onChange: {
     action: 'clicked',
@@ -101,6 +69,50 @@ const sharedArgTypes = {
       category: 'DatePickerInput',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/Fluid Components/FluidDatePicker',
+  component: FluidDatePicker,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: [
+        'appendTo',
+        'disable',
+        'enable',
+        'inline',
+        'light',
+        'locale',
+        'value',
+      ],
+    },
+  },
+  subcomponents: {
+    FluidDatePickerSkeleton,
+  },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    datePickerType: {
+      control: false,
+    },
+  },
+};
+
+const sharedArgs = {
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 const ToggleTip = (

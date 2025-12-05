@@ -8,7 +8,29 @@
 import React from 'react';
 import { ProgressIndicator, ProgressStep, ProgressIndicatorSkeleton } from './';
 import mdx from './ProgressIndicator.mdx';
+const Defaultargs = {
+  currentIndex: 0,
+  spaceEqually: false,
+  vertical: false,
+  theme: 'g10',
+};
 
+const DefaultargTypes = {
+  currentIndex: {
+    control: { type: 'number' },
+  },
+  spaceEqually: {
+    control: { type: 'boolean' },
+  },
+  vertical: {
+    control: { type: 'boolean' },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
 export default {
   title: 'Components/ProgressIndicator',
   component: ProgressIndicator,
@@ -21,6 +43,8 @@ export default {
       page: mdx,
     },
   },
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
 };
 
 export const Interactive = () => {
@@ -76,21 +100,3 @@ export const Default = (args) => (
     />
   </ProgressIndicator>
 );
-
-Default.args = {
-  currentIndex: 0,
-  spaceEqually: false,
-  vertical: false,
-};
-
-Default.argTypes = {
-  currentIndex: {
-    control: { type: 'number' },
-  },
-  spaceEqually: {
-    control: { type: 'boolean' },
-  },
-  vertical: {
-    control: { type: 'boolean' },
-  },
-};

@@ -11,29 +11,15 @@ import React from 'react';
 
 import SkeletonText from '.';
 import mdx from './SkeletonText.mdx';
-
-export default {
-  title: 'Components/Skeleton/SkeletonText',
-  component: SkeletonText,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
-export const Default = (args) => {
-  return <SkeletonText {...args} />;
-};
-
-Default.args = {
+const Defaultargs = {
   heading: false,
   paragraph: false,
   width: '100%',
   lineCount: 3,
+  theme: 'g10',
 };
 
-Default.argTypes = {
+const DefaultargTypes = {
   className: {
     control: false,
   },
@@ -57,4 +43,24 @@ Default.argTypes = {
       type: 'number',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
+export default {
+  title: 'Components/Skeleton/SkeletonText',
+  component: SkeletonText,
+  argTypes: DefaultargTypes,
+  args: Defaultargs,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const Default = (args) => {
+  return <SkeletonText {...args} />;
 };

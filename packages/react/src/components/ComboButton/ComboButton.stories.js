@@ -21,6 +21,16 @@ export default {
     MenuItem,
     MenuItemDivider,
   },
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
+  },
+  args: {
+    theme: 'g10',
+  },
   parameters: {
     docs: {
       page: mdx,

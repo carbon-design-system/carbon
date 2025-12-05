@@ -31,6 +31,16 @@ export default {
     FileUploaderItem,
     FileUploaderDropContainer,
   },
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
+  },
+  args: {
+    theme: 'g10',
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -191,6 +201,10 @@ Default.argTypes = {
   size: {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
+  },
+  theme: {
+    control: { type: 'select' },
+    options: ['white', 'g10', 'g90', 'g100'],
   },
 };
 

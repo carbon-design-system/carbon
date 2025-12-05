@@ -47,6 +47,11 @@ const sharedArgTypes = {
   },
   label: { control: { type: 'text' } },
   helperText: { control: { type: 'text' } },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
 };
 
 const reusableProps = {
@@ -85,6 +90,7 @@ Default.args = {
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
   size: 'md',
+  theme: 'g10',
 };
 
 Default.argTypes = { ...sharedArgTypes };

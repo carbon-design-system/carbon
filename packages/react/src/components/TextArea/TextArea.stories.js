@@ -15,32 +15,22 @@ import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
-
-export default {
-  title: 'Components/TextArea',
-  component: TextArea,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  subcomponents: {
-    TextAreaSkeleton,
-  },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-    slug: {
-      table: {
-        disable: true,
-      },
-    },
-  },
+const Defaultargs = {
+  enableCounter: true,
+  helperText: 'TextArea helper text',
+  labelText: 'TextArea label',
+  maxCount: 500,
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  placeholder: '',
+  rows: 4,
+  warn: false,
+  warnText: 'This is a warning message.',
+  theme: 'g10',
 };
-
 const sharedArgTypes = {
   className: {
     control: false,
@@ -123,6 +113,47 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+  slug: {
+    table: {
+      disable: true,
+    },
+  },
+};
+export default {
+  title: 'Components/TextArea',
+  component: TextArea,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  subcomponents: {
+    TextAreaSkeleton,
+  },
+  argTypes: sharedArgTypes,
+  args: Defaultargs,
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+    slug: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = (args) => {
@@ -131,22 +162,6 @@ export const Default = (args) => {
 
 Default.argTypes = {
   ...sharedArgTypes,
-};
-
-Default.args = {
-  enableCounter: true,
-  helperText: 'TextArea helper text',
-  labelText: 'TextArea label',
-  maxCount: 500,
-  disabled: false,
-  hideLabel: false,
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  placeholder: '',
-  rows: 4,
-  warn: false,
-  warnText: 'This is a warning message.',
 };
 
 export const _WithLayer = () => (

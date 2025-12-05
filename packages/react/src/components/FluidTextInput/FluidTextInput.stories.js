@@ -32,6 +32,16 @@ export default {
   subcomponents: {
     FluidTextInputSkeleton,
   },
+  args: {
+    theme: 'g10',
+  },
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
+  },
 };
 
 const ToggleTip = (
@@ -120,6 +130,11 @@ Default.argTypes = {
     control: {
       type: 'text',
     },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
 };
 

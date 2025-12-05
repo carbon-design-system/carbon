@@ -23,6 +23,14 @@ export default {
   },
   args: {
     level: 0,
+    theme: 'g10',
+  },
+  argTypes: {
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
+    },
   },
 };
 
@@ -81,7 +89,13 @@ export const CustomLevel = (args) => {
 CustomLevel.args = {
   level: 2,
 };
-
+CustomLevel.argTypes = {
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
+  },
+};
 export const UseLayer = () => {
   function ExampleComponent() {
     const { level } = useLayer();

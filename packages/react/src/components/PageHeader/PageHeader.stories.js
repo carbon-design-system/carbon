@@ -70,11 +70,18 @@ export default {
     PageHeaderHeroImage,
     PageHeaderTabBar,
     PageHeaderContentText,
-    PageHeaderContentPageActions,
+  },
+  args: {
+    theme: 'g10',
   },
   argTypes: {
     children: {
       control: false, // ReactNode props don't work in the controls pane
+    },
+    theme: {
+      options: ['white', 'g10', 'g90', 'g100'],
+      control: { type: 'select' },
+      description: 'The theme to apply to the component.',
     },
   },
   parameters: {
@@ -227,6 +234,11 @@ Default.argTypes = {
     control: {
       type: 'boolean',
     },
+  },
+  theme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+    description: 'The theme to apply to the component.',
   },
 };
 
