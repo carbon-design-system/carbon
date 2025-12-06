@@ -464,6 +464,10 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       return;
     }
 
+    if (currentActiveNode.classList.contains(`${prefix}--date-picker__input`)) {
+      return;
+    }
+
     currentActiveNode.scrollIntoView({ block: 'center' });
   }
 
