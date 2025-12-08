@@ -317,7 +317,7 @@ $list-box-menu-width: convert.to-rem(300px);
     overflow: hidden;
     align-items: center;
     // Account for the border in `.cds--list-box`
-    block-size: calc(100% + 1px);
+    block-size: calc(100%);
     cursor: pointer;
     outline: none;
     padding-block: 0;
