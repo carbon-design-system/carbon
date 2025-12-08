@@ -40,7 +40,7 @@ export const Default = (args) => {
   );
 };
 
-export const Inline = ({ children, ...args }) => {
+export const Inline = (args) => {
   return (
     <>
       <Link {...args}>
@@ -64,6 +64,7 @@ export const Inline = ({ children, ...args }) => {
   );
 };
 Inline.args = {
+  ...Default.args,
   inline: true,
 };
 
