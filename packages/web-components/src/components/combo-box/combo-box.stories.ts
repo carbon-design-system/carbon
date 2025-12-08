@@ -236,6 +236,7 @@ export const AllowCustomValue = {
     } = args ?? {};
     return html`
       <cds-combo-box
+        allow-custom-value="true"
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         helper-text=${ifDefined(helperText)}
