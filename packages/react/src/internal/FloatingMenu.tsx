@@ -26,7 +26,6 @@ import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 import { PrefixContext } from './usePrefix';
 import { warning } from './warning';
 import { wrapFocus, wrapFocusWithoutSentinels } from './wrapFocus';
-import { getScrollPosition } from './useGlobalWindow';
 
 export const DIRECTION_LEFT = 'left';
 export const DIRECTION_TOP = 'top';
@@ -277,8 +276,10 @@ export const FloatingMenu = ({
           ? menuOffset(menuBody, menuDirection, triggerEl, flipped)
           : menuOffset;
 
+      const scrollX = globalThis.scrollX ?? 0;
+      const scrollY = globalThis.scrollY ?? 0;
+
       if (updateOrientation) {
-        const { scrollX, scrollY } = getScrollPosition();
         updateOrientation({
           menuSize,
           refPosition,
@@ -295,7 +296,6 @@ export const FloatingMenu = ({
 
       // Only set position if the menu has a valid size or if no offset is provided.
       if ((menuSize.width > 0 && menuSize.height > 0) || !offsetValue) {
-        const { scrollX, scrollY } = getScrollPosition();
         const newFloatingPosition = getFloatingPosition({
           menuSize,
           refPosition: refPosition ?? { left: 0, top: 0, right: 0, bottom: 0 },
