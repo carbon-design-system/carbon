@@ -974,7 +974,7 @@ export function ActionableNotification({
   useIsomorphicEffect(() => {
     if (hasFocus && role === 'alertdialog') {
       const button = document.querySelector(
-        'button.cds--actionable-notification__action-button'
+        `button.${prefix}--actionable-notification__action-button`
       ) as HTMLButtonElement;
       button?.focus();
     }
@@ -999,6 +999,7 @@ export function ActionableNotification({
         endTrapNode,
         currentActiveNode,
         oldActiveNode,
+        prefix,
       });
     }
   }
