@@ -252,12 +252,12 @@ export const AllowCustomValue = {
         ?warn=${warn}
         warn-text=${ifDefined(warnText)}
         should-filter-item>
-        <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
-        <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
-        <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
-        <cds-combo-box-item value="pineapple">Pineapple</cds-combo-box-item>
-        <cds-combo-box-item value="raspberry">Raspberry</cds-combo-box-item>
-        <cds-combo-box-item value="lime">Lime</cds-combo-box-item>
+        <cds-combo-box-item value="Apple">Apple</cds-combo-box-item>
+        <cds-combo-box-item value="Orange">Orange</cds-combo-box-item>
+        <cds-combo-box-item value="Banana">Banana</cds-combo-box-item>
+        <cds-combo-box-item value="Pineapple">Pineapple</cds-combo-box-item>
+        <cds-combo-box-item value="Raspberry">Raspberry</cds-combo-box-item>
+        <cds-combo-box-item value="Lime">Lime</cds-combo-box-item>
       </cds-combo-box>
     `;
   },
