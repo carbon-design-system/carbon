@@ -56,3 +56,55 @@ Default.argTypes = {
     },
   },
 };
+
+export const AnimationSpeeds = () => {
+  return (
+    <div style={{ display: 'flex', gap: '4rem', alignItems: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>400ms</p>
+        <Loading
+          active={true}
+          withOverlay={false}
+          description="Loading at 400ms"
+          className="loading-speed-400"
+        />
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>500ms</p>
+        <Loading
+          active={true}
+          withOverlay={false}
+          description="Loading at 500ms"
+          className="loading-speed-500"
+        />
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>
+          690ms (Default)
+        </p>
+        <Loading
+          active={true}
+          withOverlay={false}
+          description="Loading at 690ms"
+        />
+      </div>
+      <style>{`
+        .loading-speed-400 {
+          animation-duration: 400ms !important;
+        }
+        .loading-speed-500 {
+          animation-duration: 500ms !important;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+AnimationSpeeds.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compare different animation speeds side by side. Default is 690ms, with options for 400ms and 500ms.',
+    },
+  },
+};
