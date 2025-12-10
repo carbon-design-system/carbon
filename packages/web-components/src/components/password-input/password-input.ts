@@ -295,7 +295,7 @@ class CDSPasswordInput extends CDSTextInput {
             <cds-tooltip
               align="${align}"
               class="${passwordVisibilityTooltipClasses}"
-              ?disabled="${normalizedProps.disabled || readonly}">
+              ?disabled="${normalizedProps.disabled}">
               <button
                 ?disabled="${normalizedProps.disabled}"
                 type="button"
