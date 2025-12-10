@@ -19,6 +19,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert';
 
 :host(#{$prefix}-multi-select) {
+  box-sizing: border-box;
   outline: none;
 
   .#{$prefix}--assistive-text {
