@@ -313,6 +313,7 @@ categories:
           - page--first
           - page--last
           - pipelines
+          - point
           - select--window
           - stickies
           - subtract
@@ -370,6 +371,7 @@ categories:
           - collapse-all
           - collapse-categories
           - commit
+          - commit-alt
           - compare
           - connect
           - connect--recursive
@@ -379,6 +381,7 @@ categories:
           - continuous-deployment
           - continuous-integration
           - convert-to-cloud
+          - copy--to-clipboard
           - data-set-encryption
           - delete
           - demo
@@ -516,6 +519,7 @@ categories:
           - update-complete
           - update-now
           - upgrade
+          - vertical--fold
           - view-next
           - workspace--import
           - x-axis
@@ -1091,6 +1095,7 @@ categories:
           - pills--subtract
           - pointer-text
           - QC-launch
+          - reading--glasses
           - region-analysis--area
           - region-analysis--volume
           - registration
@@ -1396,6 +1401,7 @@ categories:
           - kubernetes--pod
           - linux
           - linux--alt
+          - list-tree
           - managed-solutions
           - marginal
           - math-curve
@@ -1566,6 +1572,7 @@ categories:
           - folder--open
           - folder--parent
           - folder--shared
+          - folder--tree
           - folders
           - gamification
           - gem
@@ -1730,7 +1737,6 @@ categories:
           - locked-and-blocked
           - misuse
           - misuse--outline
-          - notifications-paused
           - pending
           - pending--filled
           - queued
@@ -1843,6 +1849,7 @@ categories:
           - enumeration--definition
           - enumeration--usage
           - executable-program
+          - extensions
           - feature-membership
           - feature-membership--filled
           - feature-picker
@@ -1923,6 +1930,7 @@ categories:
           - network--overlay
           - network--public
           - object-storage--alt
+          - orchestrate
           - package-node
           - part--definition
           - part--usage
@@ -1939,9 +1947,11 @@ categories:
           - redefinition
           - requirement--definition
           - requirement--usage
+          - remote-connection
           - router
           - router--voice
           - router--wifi
+          - run-view-icon
           - satisfy--definition
           - satisfy--usage
           - screen-map
@@ -1957,6 +1967,7 @@ categories:
           - software-resource
           - software-resource--cluster
           - software-resource--resource
+          - source-control
           - subclassification
           - subject--definition
           - subject--usage
