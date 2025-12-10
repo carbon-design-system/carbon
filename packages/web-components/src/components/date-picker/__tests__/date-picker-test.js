@@ -234,4 +234,3 @@ describe('cds-date-picker', () => {
     });
   });
 });
-
