@@ -108,7 +108,7 @@ class CDSPasswordInput extends CDSTextInput {
    * Handles password visibility toggle button click
    */
   private handleTogglePasswordVisibility() {
-    if (this.disabled || this.readonly) return;
+    if (this.disabled) return;
     this.type =
       this.type === INPUT_TYPE.PASSWORD ? INPUT_TYPE.TEXT : INPUT_TYPE.PASSWORD;
   }
@@ -297,7 +297,7 @@ class CDSPasswordInput extends CDSTextInput {
               class="${passwordVisibilityTooltipClasses}"
               ?disabled="${normalizedProps.disabled || readonly}">
               <button
-                ?disabled="${normalizedProps.disabled || readonly}"
+                ?disabled="${normalizedProps.disabled}"
                 type="button"
                 role="button"
                 class="${passwordVisibilityButtonClasses}"
@@ -307,7 +307,7 @@ class CDSPasswordInput extends CDSTextInput {
               </button>
               <cds-tooltip-content
                 id="content"
-                ?hidden="${normalizedProps.disabled || readonly}">
+                ?hidden="${normalizedProps.disabled}">
                 ${passwordIsVisible
                   ? this.hidePasswordLabel
                   : this.showPasswordLabel}
