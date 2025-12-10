@@ -80,7 +80,7 @@ export const AnimationSpeeds = () => {
       </div>
       <div style={{ textAlign: 'center' }}>
         <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>
-          690ms (Default)
+          690ms (current)
         </p>
         <Loading
           active={true}
