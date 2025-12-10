@@ -58,43 +58,44 @@ Default.argTypes = {
 };
 
 export const AnimationSpeeds = () => {
+  const speeds = [400, 450, 500, 550, 600, 650, 690, 700, 750, 800, 850, 900];
+
   return (
-    <div style={{ display: 'flex', gap: '4rem', alignItems: 'center' }}>
-      <div style={{ textAlign: 'center' }}>
-        <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>400ms</p>
-        <Loading
-          active={true}
-          withOverlay={false}
-          description="Loading at 400ms"
-          className="loading-speed-400"
-        />
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>500ms</p>
-        <Loading
-          active={true}
-          withOverlay={false}
-          description="Loading at 500ms"
-          className="loading-speed-500"
-        />
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>
-          690ms (current)
-        </p>
-        <Loading
-          active={true}
-          withOverlay={false}
-          description="Loading at 690ms"
-        />
-      </div>
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '2rem',
+        alignItems: 'center',
+      }}>
+      {speeds.map((speed) => (
+        <div
+          key={speed}
+          style={{
+            textAlign: 'center',
+            padding: '1rem',
+            border: speed === 690 ? '2px solid red' : 'none',
+            borderRadius: '4px',
+          }}>
+          <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>
+            {speed}ms{speed === 690 ? ' (Current)' : ''}
+          </p>
+          <Loading
+            active={true}
+            withOverlay={false}
+            description={`Loading at ${speed}ms`}
+            className={speed !== 690 ? `loading-speed-${speed}` : ''}
+          />
+        </div>
+      ))}
       <style>{`
-        .loading-speed-400 {
-          animation-duration: 400ms !important;
-        }
-        .loading-speed-500 {
-          animation-duration: 500ms !important;
-        }
+        ${speeds
+          .filter((speed) => speed !== 690)
+          .map(
+            (speed) =>
+              `.loading-speed-${speed} { animation-duration: ${speed}ms !important; }`
+          )
+          .join('\n        ')}
       `}</style>
     </div>
   );
@@ -104,7 +105,7 @@ AnimationSpeeds.parameters = {
   docs: {
     description: {
       story:
-        'Compare different animation speeds side by side. Default is 690ms, with options for 400ms and 500ms.',
+        'Compare different animation speeds from 400ms to 900ms in 50ms increments. Current default is 690ms (highlighted with red border).',
     },
   },
 };
