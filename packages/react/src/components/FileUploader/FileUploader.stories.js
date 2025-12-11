@@ -41,7 +41,7 @@ export default {
 export const _FileUploaderItem = (args) => {
   return (
     <FileUploaderItem
-      errorBody="500 KB max file size. Select a new file and try again."
+      errorBody="1 MB max file size. Select a new file and try again."
       errorSubject="File size exceeds limit"
       iconDescription="Delete file"
       invalid={false}
@@ -160,7 +160,7 @@ export const Default = (args) => {
 
 Default.args = {
   labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
+  labelDescription: 'Max file size is 1 MB. Only .jpg files are supported.',
   buttonLabel: 'Add file',
   buttonKind: 'primary',
   size: 'md',
