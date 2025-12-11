@@ -41,7 +41,7 @@ export const FloatingStyles = (args) => {
     },
     {
       id: 'option-3',
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -59,8 +59,8 @@ export const FloatingStyles = (args) => {
       id="carbon-combobox"
       items={comboBoxItems}
       itemToString={(item) => (item ? item.text : '')}
-      titleText="ComboBox title"
-      helperText="Combobox helper text"
+      titleText="Label"
+      helperText="Helper text"
       {...args}
     />
   );

@@ -30,7 +30,7 @@ const items = [
   },
   {
     value: 'option-3',
-    text: 'Option 3 - a disabled item',
+    text: 'Option 3',
     disabled: true,
   },
   {
@@ -56,21 +56,26 @@ const sizes = {
 
 const defaultArgs = {
   direction: DROPDOWN_DIRECTION.BOTTOM,
+  allowCustomValue: false,
   disabled: false,
   hideLabel: false,
-  helperText: 'This is some helper text',
+  helperText: 'Helper text',
   invalid: false,
-  invalidText: '',
+  invalidText: 'Error message goes here',
   label: '',
   readOnly: false,
   size: null,
-  titleText: 'This is an example title',
+  titleText: 'Label',
   value: '',
   warn: false,
-  warnText: 'please notice the warning',
+  warnText: 'Warning message goes here',
 };
 
 const controls = {
+  allowCustomValue: {
+    control: 'boolean',
+    description: `Allow entering values that do not match any of the provided items.`,
+  },
   disabled: {
     control: 'boolean',
     description: `Specify if the dropdown should be disabled, or not.`,
@@ -131,11 +136,12 @@ export const Default = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Combobox helper text',
-    titleText: 'ComboBox title',
+    helperText: 'Helper text',
+    titleText: 'Label',
   },
   render: (args) => {
     const {
+      allowCustomValue,
       disabled,
       helperText,
       invalid,
@@ -160,6 +166,7 @@ export const Default = {
         invalid-text=${ifDefined(invalidText)}
         direction=${ifDefined(direction)}
         ?read-only=${readOnly}
+        ?allow-custom-value=${allowCustomValue}
         title-text=${ifDefined(titleText)}
         size=${ifDefined(size)}
         type=${ifDefined(type)}
@@ -214,11 +221,13 @@ export const AllowCustomValue = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Combobox helper text',
-    titleText: 'ComboBox title',
+    helperText: 'Helper text',
+    titleText: 'Label',
+    allowCustomValue: true,
   },
   render: (args) => {
     const {
+      allowCustomValue,
       disabled,
       helperText,
       invalid,
@@ -243,6 +252,7 @@ export const AllowCustomValue = {
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         ?read-only=${readOnly}
+        ?allow-custom-value=${allowCustomValue}
         title-text=${ifDefined(titleText)}
         size=${ifDefined(size)}
         type=${ifDefined(type)}
@@ -262,15 +272,73 @@ export const AllowCustomValue = {
   },
 };
 
+export const AutocompleteWithTypeahead = {
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    helperText: 'Helper text',
+    titleText: 'Label',
+    typeahead: true,
+  },
+  render: (args) => {
+    const {
+      allowCustomValue,
+      disabled,
+      helperText,
+      invalid,
+      titleText,
+      hideLabel,
+      direction,
+      readOnly,
+      warn,
+      warnText,
+      size,
+      label,
+      type,
+      invalidText,
+      value,
+      typeahead,
+    } = args ?? {};
+    return html`
+      <cds-combo-box
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        ?read-only=${readOnly}
+        ?allow-custom-value=${allowCustomValue}
+        title-text=${ifDefined(titleText)}
+        size=${ifDefined(size)}
+        type=${ifDefined(type)}
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        ?typeahead=${typeahead}>
+        <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
+        <cds-combo-box-item value="apricot">Apricot</cds-combo-box-item>
+        <cds-combo-box-item value="avocado">Avocado</cds-combo-box-item>
+        <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
+        <cds-combo-box-item value="blackberry">Blackberry</cds-combo-box-item>
+        <cds-combo-box-item value="blueberry">Blueberry</cds-combo-box-item>
+        <cds-combo-box-item value="cantaloupe">Cantaloupe</cds-combo-box-item>
+      </cds-combo-box>
+    `;
+  },
+};
+
 export const WithAILabel = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Combobox helper text',
-    titleText: 'ComboBox title',
+    helperText: 'Helper text',
+    titleText: 'Label',
   },
   render: (args) => {
     const {
+      allowCustomValue,
       disabled,
       helperText,
       invalid,
@@ -295,6 +363,7 @@ export const WithAILabel = {
         invalid-text=${ifDefined(invalidText)}
         direction=${ifDefined(direction)}
         ?read-only=${readOnly}
+        ?allow-custom-value=${allowCustomValue}
         title-text=${ifDefined(titleText)}
         size=${ifDefined(size)}
         type=${ifDefined(type)}
@@ -318,31 +387,16 @@ export const WithAILabel = {
   },
 };
 
-export const AutocompleteWithTypeahead = {
-  render: () => html`
-    <cds-combo-box
-      title-text="ComboBox title"
-      helper-text="Combobox helper text"
-      typeahead>
-      <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
-      <cds-combo-box-item value="apricot">Apricot</cds-combo-box-item>
-      <cds-combo-box-item value="avocado">Avocado</cds-combo-box-item>
-      <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
-      <cds-combo-box-item value="blackberry">Blackberry</cds-combo-box-item>
-      <cds-combo-box-item value="blueberry">Blueberry</cds-combo-box-item>
-      <cds-combo-box-item value="cantaloupe">Cantaloupe</cds-combo-box-item>
-    </cds-combo-box>
-  `,
-};
 export const WithLayer = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Combobox helper text',
-    titleText: 'ComboBox title',
+    helperText: 'Helper text',
+    titleText: 'Label',
   },
   render: (args) => {
     const {
+      allowCustomValue,
       disabled,
       helperText,
       invalid,
@@ -369,6 +423,7 @@ export const WithLayer = {
             ?invalid=${invalid}
             invalid-text=${ifDefined(invalidText)}
             ?read-only=${readOnly}
+            ?allow-custom-value=${allowCustomValue}
             title-text=${ifDefined(titleText)}
             size=${ifDefined(size)}
             type=${ifDefined(type)}
@@ -390,51 +445,6 @@ export const WithLayer = {
       </sb-template-layers>
     `;
   },
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({
-    disabled,
-    helperText,
-    invalid,
-    titleText,
-    hideLabel,
-    direction,
-    readOnly,
-    warn,
-    warnText,
-    size,
-    label,
-    type,
-    invalidText,
-    value,
-  }) => html`
-    <cds-combo-box
-      ?disabled="${disabled}"
-      ?hide-label=${hideLabel}
-      helper-text=${ifDefined(helperText)}
-      ?invalid=${invalid}
-      invalid-text=${invalidText}
-      direction="${direction}"
-      ?read-only=${readOnly}
-      title-text=${ifDefined(titleText)}
-      size="${ifDefined(size)}"
-      type="${ifDefined(type)}"
-      value=${ifDefined(value)}
-      label=${ifDefined(label)}
-      ?warn=${warn}
-      warn-text=${warnText}>
-      ${items.map(
-        (elem) => html`
-          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
-            >${elem.text}</cds-combo-box-item
-          >
-        `
-      )}
-    </cds-combo-box>
-  `,
 };
 
 const meta = {

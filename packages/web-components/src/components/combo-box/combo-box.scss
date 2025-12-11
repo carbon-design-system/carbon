@@ -60,7 +60,28 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-combo-box[warn]) {
+  .#{$prefix}--form__helper-text {
+    color: $text-primary;
+  }
+}
+
 :host(#{$prefix}-combo-box[read-only]) {
+  .#{$prefix}--combo-box,
+  .#{$prefix}--combo-box:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--text-input {
+    border-block-end-color: $border-subtle;
+  }
+
+  .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--list-box__selection {
+    cursor: default;
+  }
+
+  .#{$prefix}--list-box__menu-icon svg,
   .#{$prefix}--list-box__selection svg {
     fill: $icon-disabled;
   }
