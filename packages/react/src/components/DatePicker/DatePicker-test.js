@@ -363,6 +363,90 @@ describe('DatePicker', () => {
     expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
     expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
   });
+
+  describe('Invalid and Warning States with Disabled/ReadOnly', () => {
+    it('should not show invalid state when disabled', () => {
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            invalid={true}
+            invalidText="Invalid date"
+            disabled={true}
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--invalid`)
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not show warning state when disabled', () => {
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            warn={true}
+            warnText="Warning message"
+            disabled={true}
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--warn`)
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not show invalid state when readOnly', () => {
+      render(
+        <DatePicker datePickerType="single" readOnly={true}>
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            invalid={true}
+            invalidText="Invalid date"
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--invalid`)
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not show warning state when readOnly', () => {
+      render(
+        <DatePicker datePickerType="single" readOnly={true}>
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            warn={true}
+            warnText="Warning message"
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--warn`)
+      ).not.toBeInTheDocument();
+    });
+  });
 });
 
 describe('Simple date picker', () => {
