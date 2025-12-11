@@ -326,7 +326,14 @@ class CDSPasswordInput extends CDSTextInput {
       </div>
     `;
   }
-
+  firstUpdated() {
+    this.updateComplete.then(() => {
+      this.shadowRoot
+        ?.querySelector(`${prefix}-tooltip`)
+        ?.shadowRoot?.querySelector(`.${prefix}--tooltip`)
+        ?.classList.add(`${prefix}--icon-tooltip`);
+    });
+  }
   /**
    * A selector that will return the slug item.
    *

@@ -323,6 +323,11 @@ const PasswordInput = React.forwardRef(
       }
     );
 
+    const tooltipClasses = classNames(
+      `${prefix}--toggle-password-tooltip`,
+      `${prefix}--icon-tooltip`
+    );
+
     let align: PopoverAlignment | undefined = undefined;
 
     if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
@@ -370,7 +375,7 @@ const PasswordInput = React.forwardRef(
 
         <Tooltip
           align={align}
-          className={`${prefix}--toggle-password-tooltip`}
+          className={tooltipClasses}
           label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
           <button
             type="button"
