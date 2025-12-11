@@ -70,3 +70,6 @@ deprecated:
   - name: ai-status--rejected
     reason:
       Icon no longer relevant to how we represent AI moments
+  - name: database--redis
+    reason:
+      Icon no longer relevant. IBM Cloud Databases for Redis UI icon is retired. New icon with new name was requested
