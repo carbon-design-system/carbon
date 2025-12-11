@@ -220,6 +220,20 @@ const FileUploader = React.forwardRef(
       file,
     });
 
+    /**
+     * Internal function that validates and filters files before they are added to
+     * component state. Called by `handleChange` when files are selected.
+
+     * - performs validation (currently file size only)
+     * - separates files into accepted/rejected arrays
+     * - optionally calls `onAddFiles` callback (if provided) to allow
+     *   further filtering/transformation
+     * - returns final array of files to be added
+     *
+     * @param evt - event that triggered the file selection
+     * @param files - array of file objects to validate
+     * @returns array of file objects that should be added to the component
+     */
     const applyPreAddHook = (
       evt: React.SyntheticEvent<HTMLElement>,
       files: File[]
@@ -235,6 +249,7 @@ const FileUploader = React.forwardRef(
         }
       });
 
+      // If no `onAddFiles` callback, return all accepted files
       if (!onAddFiles) {
         return accepted;
       }
