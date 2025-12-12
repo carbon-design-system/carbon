@@ -15,36 +15,6 @@ import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
-
-export default {
-  title: 'Components/TextArea',
-  component: TextArea,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  subcomponents: {
-    TextAreaSkeleton,
-  },
-  argTypes: {
-    ...sharedArgTypes,
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-    slug: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-  args: {
-    ...sharedArgs,
-  },
-};
-
 const sharedArgTypes = {
   className: {
     control: false,
@@ -145,6 +115,35 @@ const sharedArgs = {
   warnText: 'This is a warning message.',
   cols: 50,
 };
+export default {
+  title: 'Components/TextArea',
+  component: TextArea,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+  subcomponents: {
+    TextAreaSkeleton,
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+    slug: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+  args: {
+    ...sharedArgs,
+  },
+};
+
 export const Default = (args) => {
   return <TextArea {...args} id="text-area-1" />;
 };
