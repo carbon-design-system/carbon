@@ -551,6 +551,51 @@ describe('NumberInput', () => {
     expect(onBlur).not.toHaveBeenCalled();
   });
 
+  it('formats decimals with formatOptions={{ maximumFractionDigits: 0 }} and passes the formatted number to onBlur (controlled, type="text")', async () => {
+    const onBlur = jest.fn();
+
+    function ControlledWrapper(props) {
+      const { defaultValue } = props;
+      const [value, setValue] = React.useState(defaultValue);
+
+      const handleChange = (e, state) => {
+        setValue(state?.value);
+      };
+
+      return (
+        <NumberInput
+          {...props}
+          value={value}
+          onChange={handleChange}
+          onBlur={onBlur}
+        />
+      );
+    }
+
+    render(
+      <ControlledWrapper
+        label="test-label"
+        id="test"
+        defaultValue={25}
+        type="text"
+        formatOptions={{ maximumFractionDigits: 0 }}
+        translateWithId={translateWithId}
+      />
+    );
+
+    const input = screen.getByLabelText('test-label');
+
+    await userEvent.clear(input);
+    await userEvent.type(input, '25.7');
+    await userEvent.tab();
+
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({ target: expect.any(Object) }),
+      26 // Intl rounding -> 25.7 -> 26
+    );
+  });
+
   it('should call `onBlur` with parsed value in controlled mode (type="number")', async () => {
     const onBlur = jest.fn();
     const ControlledNumberInput = () => {
