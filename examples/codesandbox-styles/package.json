@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "sass": "^1.93.2",
-    "vite": "^6.3.5"
+    "vite": "^7.2.4"
   },
   "dependencies": {
     "@carbon/styles": "^1.96.0"
