@@ -1024,9 +1024,14 @@ const DatePicker = React.forwardRef(function DatePicker(
         // To make up for calendarRef.current.setDate not making provision for an empty string or array
         if (
           value === '' ||
-          (Array.isArray(value) && value.every((element) => element === ''))
+          value === null ||
+          (Array.isArray(value) &&
+            (value.length === 0 || value.every((element) => !element)))
         ) {
-          calendarRef.current.clear();
+          // only clear if there are selected dates to avoid unnecessary operations
+          if (calendarRef.current.selectedDates.length > 0) {
+            calendarRef.current.clear();
+          }
         } else {
           calendarRef.current.setDate(value);
         }
