@@ -26,7 +26,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 interface FileItem {
   name: string;
   uuid: string;
-  file: File;
+  file: File & { invalidFileType?: boolean };
 }
 
 export interface FileChangeData {
@@ -97,7 +97,7 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   labelTitle?: string;
 
   /**
-   * Maximum file size allowed in bytes. Files larger than this will be rejected.
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
    */
   maxFileSize?: number;
 
@@ -112,16 +112,12 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   name?: string;
 
   /**
-   * Provide an optional `onAddFiles` hook fired before files are added.
-   * Note: Unlike `FileUploaderDropContainer`, this fires before validation and
-   * can be used to filter/transform the added files.
-   * A future change may merge these APIs.
-   * - Returning an empty array prevents any files from being added
+   * Event handler that is called after files are added to the uploader
    */
   onAddFiles?: (
     event: React.SyntheticEvent<HTMLElement>,
-    content: { addedFiles: File[]; rejectedFiles: File[] }
-  ) => File[] | undefined;
+    content: { addedFiles: Array<File & { invalidFileType?: boolean }> }
+  ) => void;
 
   /**
    * Provide an optional `onChange` hook that is called each time the input is changed.
@@ -210,7 +206,9 @@ const FileUploader = React.forwardRef(
 
     const nodes: HTMLElement[] = [];
 
-    const createFileItem = (file: File): FileItem => ({
+    const createFileItem = (
+      file: File & { invalidFileType?: boolean }
+    ): FileItem => ({
       name: file.name,
       uuid: `${fileUploaderInstanceId}-${Date.now()}-${Array.from(
         crypto.getRandomValues(new Uint8Array(8))
@@ -221,59 +219,49 @@ const FileUploader = React.forwardRef(
     });
 
     /**
-     * Internal function that validates and filters files before they are added to
-     * component state. Called by `handleChange` when files are selected.
-
-     * - performs validation (currently file size only)
-     * - separates files into accepted/rejected arrays
-     * - optionally calls `onAddFiles` callback (if provided) to allow
-     *   further filtering/transformation
-     * - returns final array of files to be added
+     * Validates files based on file size restrictions.
+     * Marks invalid files with `invalidFileType: true` but includes them in the result.
      *
-     * @param evt - event that triggered the file selection
-     * @param files - array of file objects to validate
-     * @returns array of file objects that should be added to the component
+     * Note: The `accept` prop is passed to the native HTML input element (`FileUploaderButton`),
+     * which provides UI-level filtering in the file picker dialog, but there is no JavaScript validation
+     * for file types - users can bypass this by changing the file type filter in the dialog.
+     * https://github.com/carbon-design-system/carbon/issues/21166
      */
-    const applyPreAddHook = (
-      evt: React.SyntheticEvent<HTMLElement>,
-      files: File[]
-    ) => {
-      const accepted: File[] = [];
-      const rejected: File[] = [];
-
-      files.forEach((file) => {
+    function validateFiles(
+      files: Array<File & { invalidFileType?: boolean }>
+    ): Array<File & { invalidFileType?: boolean }> {
+      return files.map((file) => {
         if (maxFileSize && file.size > maxFileSize) {
-          rejected.push(file);
-        } else {
-          accepted.push(file);
+          file.invalidFileType = true;
         }
+        return file;
       });
-
-      // If no `onAddFiles` callback, return all accepted files
-      if (!onAddFiles) {
-        return accepted;
-      }
-
-      const shouldFilter = onAddFiles(evt, {
-        addedFiles: accepted,
-        rejectedFiles: rejected,
-      });
-
-      return Array.isArray(shouldFilter) ? shouldFilter : accepted;
-    };
+    }
 
     const handleChange = useCallback(
       (evt) => {
         evt.stopPropagation();
         const incomingFiles = Array.from(evt.target.files as FileList);
-        const newFiles = applyPreAddHook(evt, incomingFiles);
+        const filesToValidate = multiple ? incomingFiles : [incomingFiles[0]];
+        const validatedFiles = validateFiles(filesToValidate);
 
-        if (newFiles.length === 0) {
+        if (onAddFiles) {
+          onAddFiles(evt, { addedFiles: validatedFiles });
+        }
+
+        // Filter out invalid files since FileUploader cannot display them
+        // (FileUploaderDropContainer returns all files because parent uses FileUploaderItem to display errors)
+        // https://github.com/carbon-design-system/carbon/issues/21166
+        const validFiles = validatedFiles.filter(
+          (file) => !file.invalidFileType
+        );
+
+        if (validFiles.length === 0) {
           return;
         }
 
         if (enhancedFileUploaderEnabled) {
-          const newFileItems = newFiles.map(createFileItem);
+          const newFileItems = validFiles.map(createFileItem);
 
           let updatedFileItems: FileItem[];
           if (multiple) {
@@ -305,7 +293,7 @@ const FileUploader = React.forwardRef(
             onChange(enhancedEvent);
           }
         } else {
-          const filenames = newFiles.map((file) => file.name);
+          const filenames = validFiles.map((file) => file.name);
 
           const updatedFileNames = multiple
             ? [...new Set([...legacyFileNames, ...filenames])]
@@ -315,7 +303,7 @@ const FileUploader = React.forwardRef(
 
           setFileObjects((prevMap) => {
             const newMap = multiple ? new Map(prevMap) : new Map();
-            newFiles.forEach((file) => {
+            validFiles.forEach((file) => {
               newMap.set(file.name, file);
             });
             return newMap;
@@ -332,7 +320,9 @@ const FileUploader = React.forwardRef(
         fileItems,
         legacyFileNames,
         multiple,
+        onAddFiles,
         onChange,
+        maxFileSize,
       ]
     );
 
@@ -619,8 +609,6 @@ FileUploader.propTypes = {
 
   /**
    * Event handler that is called after files are added to the uploader
-   * Note: FileUploaderDropContainer's `onAddFiles` fires after validation and
-   * cannot filter the added files. A future change may align these APIs.
    * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
    */
   onAddFiles: PropTypes.func,

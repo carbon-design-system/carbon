@@ -60,8 +60,6 @@ export interface FileUploaderDropContainerProps
 
   /**
    * Event handler that is called after files are added to the uploader
-   * Note: Unlike `FileUploader`, this fires after validation and cannot
-   * filter/transform the added files. A future change may merge these APIs.
    */
   onAddFiles?: (
     event: React.SyntheticEvent<HTMLElement>,
@@ -131,7 +129,7 @@ function FileUploaderDropContainer({
   );
 
   /**
-   * Filters the array of added files based on file type restrictions
+   * Filters the array of added files based on file type and size restrictions
    */
   function validateFiles(transferredFiles: AddedFile[]) {
     const acceptedTypes = new Set(accept);
