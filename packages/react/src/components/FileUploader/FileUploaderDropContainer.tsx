@@ -115,8 +115,8 @@ function FileUploaderDropContainer({
 }: FileUploaderDropContainerProps) {
   const prefix = usePrefix();
   const inputRef = useRef<HTMLInputElement>(null);
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { current: uid } = useRef(id || useId());
+  const generatedId = useId();
+  const { current: uid } = useRef(id || generatedId);
   const [isActive, setActive] = useState(false);
   const dropareaClasses = classNames(
     `${prefix}--file__drop-container`,
