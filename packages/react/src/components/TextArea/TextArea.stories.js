@@ -28,6 +28,7 @@ export default {
     TextAreaSkeleton,
   },
   argTypes: {
+    ...sharedArgTypes,
     light: {
       table: {
         disable: true,
@@ -38,6 +39,9 @@ export default {
         disable: true,
       },
     },
+  },
+  args: {
+    ...sharedArgs,
   },
 };
 
@@ -125,16 +129,8 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = (args) => {
-  return <TextArea {...args} id="text-area-1" />;
-};
-
-Default.argTypes = {
-  ...sharedArgTypes,
-};
-
-Default.args = {
-  enableCounter: true,
+const sharedArgs = {
+  enableCounter: false,
   helperText: 'TextArea helper text',
   labelText: 'TextArea label',
   maxCount: 500,
@@ -147,9 +143,17 @@ Default.args = {
   rows: 4,
   warn: false,
   warnText: 'This is a warning message.',
+  cols: 50,
+};
+export const Default = (args) => {
+  return <TextArea {...args} id="text-area-1" />;
 };
 
-export const _WithLayer = () => (
+Default.args = {
+  enableCounter: true,
+};
+
+export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <TextArea
@@ -157,11 +161,13 @@ export const _WithLayer = () => (
         helperText="Optional helper text"
         rows={4}
         id={`text-area-${layer}`}
+        {...args}
       />
     )}
   </WithLayer>
 );
 
+_WithLayer.args = { ...sharedArgs, helperText: 'Optional helper text' };
 export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">
@@ -206,10 +212,23 @@ export const withAILabel = (args) => {
   );
 };
 
-withAILabel.argTypes = {
-  ...sharedArgTypes,
-};
+withAILabel.args = { ...sharedArgs, helperText: 'Optional helper text' };
 
-export const Skeleton = () => {
-  return <TextAreaSkeleton />;
+export const Skeleton = (args) => {
+  return <TextAreaSkeleton {...args} />;
+};
+Skeleton.args = {
+  ...sharedArgs,
+  labelText: 'Skeleton Label',
+  helperText: undefined,
+  invalid: false,
+  warn: false,
+  enableCounter: false,
+};
+Skeleton.argTypes = {
+  helperText: { control: false },
+  invalid: { control: false },
+  warn: { control: false },
+  enableCounter: { control: false },
+  maxCount: { control: false },
 };
