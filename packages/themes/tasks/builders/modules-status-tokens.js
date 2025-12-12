@@ -11,7 +11,7 @@ const { types: t } = require('@carbon/scss-generator');
 const { TokenFormat } = require('../../src/tokens');
 const { statusTokens } = require('../../src/component-tokens/status');
 const { FILE_BANNER, primitive } = require('./shared');
-const { paramCase } = require('change-case');
+const { paramCase } = require('change-case-all');
 
 function buildThemesFile() {
   const imports = [t.SassModule('sass:map')];

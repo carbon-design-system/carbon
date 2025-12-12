@@ -13,7 +13,7 @@ const {
   contentSwitcherTokens,
 } = require('../../src/component-tokens/content-switcher');
 const { FILE_BANNER, primitive } = require('./shared');
-const { paramCase } = require('change-case');
+const { paramCase } = require('change-case-all');
 
 function buildThemesFile() {
   const imports = [t.SassModule('sass:map')];
