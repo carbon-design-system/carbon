@@ -141,6 +141,18 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   }
 
   private _handleOutsideClick(event: Event) {
+    const path = event.composedPath();
+
+    if (path.includes(this._triggerSlotNode.assignedElements()[0])) return;
+
+    const popoverContent = this.querySelector(
+      (this.constructor as typeof CDSPopover).selectorPopoverContent
+    )?.shadowRoot?.querySelector(
+      (this.constructor as typeof CDSPopover).selectorPopoverContentClass
+    ) as HTMLElement;
+
+    if (path.includes(popoverContent)) return;
+
     const target = event.target as Node | null;
     const composedTarget = event.composedPath?.()[0] as Node | null;
 
