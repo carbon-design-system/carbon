@@ -32,6 +32,7 @@ import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
 import type { Instance } from 'flatpickr/dist/types/instance';
 import { datePartsOrder } from '@carbon/utilities';
+import { SUPPORTED_LOCALES, type SupportedLocale } from './DatePickerLocales';
 
 // Weekdays shorthand for English locale
 // Ensure localization exists before trying to access it
@@ -276,68 +277,8 @@ export interface DatePickerProps {
     | string
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     | any
-    | 'ar' // Arabic
-    | 'at' // Austria
-    | 'az' // Azerbaijan
-    | 'be' // Belarusian
-    | 'bg' // Bulgarian
-    | 'bn' // Bangla
-    | 'bs' // Bosnia
-    | 'cat' // Catalan
-    | 'cs' // Czech
-    | 'cy' // Welsh
-    | 'da' // Danish
-    | 'de' // German
-    | 'en' // English
-    | 'eo' // Esperanto
-    | 'es' // Spanish
-    | 'et' // Estonian
-    | 'fa' // Persian
-    | 'fi' // Finnish
-    | 'fo' // Faroese
-    | 'fr' // French
-    | 'ga' // Gaelic
-    | 'gr' // Greek
-    | 'he' // Hebrew
-    | 'hi' // Hindi
-    | 'hr' // Croatian
-    | 'hu' // Hungarian
-    | 'id' // Indonesian
-    | 'is' // Icelandic
-    | 'it' // Italian
-    | 'ja' // Japanese
-    | 'ka' // Georgian
-    | 'km' // Khmer
-    | 'ko' // Korean
-    | 'kz' // Kazakh
-    | 'lt' // Lithuanian
-    | 'lv' // Latvian
-    | 'mk' // Macedonian
-    | 'mn' // Mongolian
-    | 'ms' // Malaysian
-    | 'my' // Burmese
-    | 'nl' // Dutch
-    | 'no' // Norwegian
-    | 'pa' // Punjabi
-    | 'pl' // Polish
-    | 'pt' // Portuguese
-    | 'ro' // Romanian
-    | 'ru' // Russian
-    | 'si' // Sinhala
-    | 'sk' // Slovak
-    | 'sl' // Slovenian
-    | 'sq' // Albanian
-    | 'sr' // Serbian
-    | 'sv' // Swedish
-    | 'th' // Thai
-    | 'tr' // Turkish
-    | 'uk' // Ukrainian
-    | 'uz' // Uzbek
-    | 'uz_latn' // Uzbek Latin
-    | 'vn' // Vietnamese
-    | 'zh_tw' // Mandarin Traditional
-    | 'zh'
-    | undefined; // Mandarin;
+    | SupportedLocale
+    | undefined;
 
   /**
    * The maximum date that a user can pick to.
@@ -1155,69 +1096,7 @@ DatePicker.propTypes = {
    */
   locale: PropTypes.oneOfType([
     PropTypes.object,
-    PropTypes.oneOf([
-      'ar', // Arabic
-      'at', // Austria
-      'az', // Azerbaijan
-      'be', // Belarusian
-      'bg', // Bulgarian
-      'bn', // Bangla
-      'bs', // Bosnia
-      'cat', // Catalan
-      'cs', // Czech
-      'cy', // Welsh
-      'da', // Danish
-      'de', // German
-      'en', // English
-      'eo', // Esperanto
-      'es', // Spanish
-      'et', // Estonian
-      'fa', // Persian
-      'fi', // Finnish
-      'fo', // Faroese
-      'fr', // French
-      'ga', // Gaelic
-      'gr', // Greek
-      'he', // Hebrew
-      'hi', // Hindi
-      'hr', // Croatian
-      'hu', // Hungarian
-      'id', // Indonesian
-      'is', // Icelandic
-      'it', // Italian
-      'ja', // Japanese
-      'ka', // Georgian
-      'km', // Khmer
-      'ko', // Korean
-      'kz', // Kazakh
-      'lt', // Lithuanian
-      'lv', // Latvian
-      'mk', // Macedonian
-      'mn', // Mongolian
-      'ms', // Malaysian
-      'my', // Burmese
-      'nl', // Dutch
-      'no', // Norwegian
-      'pa', // Punjabi
-      'pl', // Polish
-      'pt', // Portuguese
-      'ro', // Romanian
-      'ru', // Russian
-      'si', // Sinhala
-      'sk', // Slovak
-      'sl', // Slovenian
-      'sq', // Albanian
-      'sr', // Serbian
-      'sv', // Swedish
-      'th', // Thai
-      'tr', // Turkish
-      'uk', // Ukrainian
-      'uz', // Uzbek
-      'uz_latn', // Uzbek Latin
-      'vn', // Vietnamese
-      'zh_tw', // Mandarin Traditional
-      'zh', // Mandarin
-    ]),
+    PropTypes.oneOf(SUPPORTED_LOCALES),
   ]),
 
   /**
