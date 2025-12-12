@@ -650,6 +650,43 @@ describe('Single date picker', () => {
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
   });
 
+  it('should clear calendar when value is set to null', async () => {
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('01/20/1989');
+      return (
+        <>
+          <DatePicker
+            datePickerType="single"
+            value={date}
+            onChange={(value) => {
+              setDate(value);
+            }}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-simple"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate(null);
+            }}>
+            clear
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/20/1989'
+    );
+
+    await userEvent.click(screen.getByText('clear'));
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+  });
+
   it('should respect closeOnSelect prop', async () => {
     const DatePickerExample = () => {
       const [date, setDate] = useState();
@@ -958,6 +995,125 @@ describe('Range date picker', () => {
     );
 
     // assert that toDate is still empty
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+  });
+
+  it('should clear calendar when value is set to empty array', async () => {
+    const DatePickerExample = () => {
+      const [dateRange, setDateRange] = useState(['01/14/2025', '02/10/2025']);
+      return (
+        <>
+          <DatePicker
+            datePickerType="range"
+            value={dateRange}
+            onChange={(dates) => {
+              setDateRange(dates);
+            }}>
+            <DatePickerInput
+              id="fromDate"
+              placeholder="mm/dd/yyyy"
+              labelText="FromDate"
+            />
+            <DatePickerInput
+              id="toDate"
+              placeholder="mm/dd/yyyy"
+              labelText="ToDate"
+            />
+          </DatePicker>
+          <button type="button" onClick={() => setDateRange([])}>
+            clear
+          </button>
+        </>
+      );
+    };
+    render(<DatePickerExample />);
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('01/14/2025');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('02/10/2025');
+
+    await userEvent.click(screen.getByText('clear'));
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+  });
+
+  it('should clear calendar when value is set to array of empty strings', async () => {
+    const DatePickerExample = () => {
+      const [dateRange, setDateRange] = useState(['01/14/2025', '02/10/2025']);
+      return (
+        <>
+          <DatePicker
+            datePickerType="range"
+            value={dateRange}
+            onChange={(dates) => {
+              setDateRange(dates);
+            }}>
+            <DatePickerInput
+              id="fromDate"
+              placeholder="mm/dd/yyyy"
+              labelText="FromDate"
+            />
+            <DatePickerInput
+              id="toDate"
+              placeholder="mm/dd/yyyy"
+              labelText="ToDate"
+            />
+          </DatePicker>
+          <button type="button" onClick={() => setDateRange(['', ''])}>
+            clear
+          </button>
+        </>
+      );
+    };
+    render(<DatePickerExample />);
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('01/14/2025');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('02/10/2025');
+
+    await userEvent.click(screen.getByText('clear'));
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+  });
+
+  it('should clear calendar when value is set to array of undefined', async () => {
+    const DatePickerExample = () => {
+      const [dateRange, setDateRange] = useState(['01/14/2025', '02/10/2025']);
+      return (
+        <>
+          <DatePicker
+            datePickerType="range"
+            value={dateRange}
+            onChange={(dates) => {
+              setDateRange(dates);
+            }}>
+            <DatePickerInput
+              id="fromDate"
+              placeholder="mm/dd/yyyy"
+              labelText="FromDate"
+            />
+            <DatePickerInput
+              id="toDate"
+              placeholder="mm/dd/yyyy"
+              labelText="ToDate"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => setDateRange([undefined, undefined])}>
+            clear
+          </button>
+        </>
+      );
+    };
+    render(<DatePickerExample />);
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('01/14/2025');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('02/10/2025');
+
+    await userEvent.click(screen.getByText('clear'));
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('');
     expect(screen.getByLabelText('ToDate')).toHaveValue('');
   });
 
