@@ -2809,7 +2809,7 @@
     - file
   sizes:
     - 32
-- name: C++
+- name: CPlusPlus
   friendly_name: C++ file
   aliases:
     - C++
@@ -16946,7 +16946,7 @@
     - tent
   sizes:
     - 32
-- name: mminimap-off
+- name: minimap-off
   friendly_name: Mini-map off
   aliases:
     - minimap
