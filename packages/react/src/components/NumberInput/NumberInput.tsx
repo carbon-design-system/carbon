@@ -775,6 +775,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                 }
               }}
               onBlur={(e) => {
+                let parsedValueForBlur: number | undefined;
+
                 if (disableWheelProp) {
                   e.target.removeEventListener('wheel', disableWheel);
                 }
@@ -800,6 +802,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   // the input. To avoid this, formattedValue is re-parsed.
                   const parsedFormattedNewValue =
                     numberParser.parse(formattedValue);
+                  parsedValueForBlur = parsedFormattedNewValue;
 
                   if (onChange && isValid) {
                     const state = {
@@ -840,10 +843,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                     return;
                   }
 
-                  const _numberValue = isControlled
-                    ? numberParser.parse(inputValue)
-                    : numberValue;
-                  onBlur(e, _numberValue);
+                  const parsedTextValue =
+                    parsedValueForBlur ??
+                    (isControlled
+                      ? numberParser.parse(inputValue)
+                      : numberValue);
+                  onBlur(e, parsedTextValue);
                 }
               }}
               pattern={pattern}
@@ -1038,10 +1043,15 @@ NumberInput.propTypes = {
   stepStartValue: PropTypes.number,
 
   /**
-   * Provide an optional handler that is called when the input or stepper
-   * buttons are blurred.
+   * Provide an optional handler that is called when the input is blurred.
    */
   onBlur: PropTypes.func,
+
+  /**
+   * Provide an optional handler that is called when the stepper
+   * buttons are blurred.
+   */
+  onStepperBlur: PropTypes.func,
 
   /**
    * Provide an optional handler that is called when the internal state of
