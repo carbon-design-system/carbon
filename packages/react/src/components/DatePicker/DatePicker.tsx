@@ -29,7 +29,12 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
-import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
+import {
+  DateLimit,
+  DateOption,
+  Options as FlatpickrOptions,
+  Plugin,
+} from 'flatpickr/dist/types/options';
 import type { Instance } from 'flatpickr/dist/types/instance';
 import { datePartsOrder } from '@carbon/utilities';
 import { SUPPORTED_LOCALES, type SupportedLocale } from './DatePickerLocales';
@@ -315,8 +320,7 @@ export interface DatePickerProps {
    * if boolean applies to all inputs
    * if array applies to each input in order
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  readOnly?: boolean | [] | any | undefined;
+  readOnly?: boolean | undefined;
 
   /**
    * `true` to use the short version.
@@ -605,8 +609,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const flatpickerConfig: any = {
+    const flatpickerConfig: Partial<FlatpickrOptions> = {
       inline: inline ?? false,
       onClose: onCalendarClose,
       disableMobile: true,
@@ -625,24 +628,24 @@ const DatePicker = React.forwardRef(function DatePicker(
           ? rangePlugin({
               input: endInputField.current ?? undefined,
             })
-          : () => {},
+          : ((() => {}) as unknown as Plugin),
         appendTo
           ? appendToPlugin({
               appendTo,
             })
-          : () => {},
+          : ((() => {}) as unknown as Plugin),
         carbonFlatpickrMonthSelectPlugin({
           selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
           selectorFlatpickrYearContainer: '.numInputWrapper',
           selectorFlatpickrCurrentMonth: '.cur-month',
           classFlatpickrCurrentMonth: 'cur-month',
           locale: locale,
-        }),
+        }) as unknown as Plugin,
         carbonFlatpickrFixEventsPlugin({
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
           lastStartValue,
-        }),
+        }) as unknown as Plugin,
       ],
       clickOpens: !readOnly,
       noCalendar: readOnly,
@@ -810,12 +813,11 @@ const DatePicker = React.forwardRef(function DatePicker(
 
       // prevent a duplicate date selection when a default value is set
       if (value) {
-        if (startInputField?.current) {
-          startInputField.current.value = '';
+        if (start) {
+          start.value = '';
         }
-        if (endInputField?.current) {
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-          endInputField.current.value = '';
+        if (end) {
+          end.value = '';
         }
       }
 
@@ -921,13 +923,9 @@ const DatePicker = React.forwardRef(function DatePicker(
         endInputField.current.value = '';
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [value]);
+  }, [value, startInputField]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    let isMouseDown = false;
-
     const handleMouseDown = (event) => {
       if (
         calendarRef.current &&
@@ -936,13 +934,11 @@ const DatePicker = React.forwardRef(function DatePicker(
         !startInputField.current.contains(event.target) &&
         !endInputField.current?.contains(event.target)
       ) {
-        isMouseDown = true;
         // Close the calendar immediately on mousedown
-        closeCalendar(event);
+        closeCalendar();
       }
     };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const closeCalendar = (event) => {
+    const closeCalendar = () => {
       calendarRef.current?.close();
       // Remove focus from endDate calendar input
       onCalendarClose(
@@ -982,7 +978,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     } else if (!calendarRef.current && value) {
       startInputField.current.value = value;
     }
-  }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [value, prefix, startInputField]);
 
   let fluidError;
   if (isFluid) {
