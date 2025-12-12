@@ -527,6 +527,30 @@ describe('NumberInput', () => {
     );
   });
 
+  it('should call `onStepperBlur` when a stepper button is blurred', async () => {
+    const onBlur = jest.fn();
+    const onStepperBlur = jest.fn();
+
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        onBlur={onBlur}
+        onStepperBlur={onStepperBlur}
+        defaultValue={10}
+        translateWithId={translateWithId}
+      />
+    );
+
+    // Click the increment button to focus it
+    const incButton = screen.getByRole('button', { name: /increment/i });
+    await userEvent.click(incButton);
+    await userEvent.tab();
+
+    expect(onStepperBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).not.toHaveBeenCalled();
+  });
+
   it('should call `onBlur` with parsed value in controlled mode (type="number")', async () => {
     const onBlur = jest.fn();
     const ControlledNumberInput = () => {

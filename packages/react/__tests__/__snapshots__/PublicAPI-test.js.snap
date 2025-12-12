@@ -7326,6 +7326,9 @@ Map {
       "onKeyUp": {
         "type": "func",
       },
+      "onStepperBlur": {
+        "type": "func",
+      },
       "pattern": {
         "type": "string",
       },
