@@ -289,6 +289,7 @@ export const WithInitialSelectedItems = (args) => {
   );
 };
 
+WithInitialSelectedItems.args = { ...sharedArgs };
 export const Filterable = (args) => {
   const items = [
     {
@@ -335,6 +336,7 @@ export const Filterable = (args) => {
   );
 };
 
+Filterable.args = { ...sharedArgs };
 export const FilterableWithSelectAll = (args) => {
   return (
     <div
@@ -354,6 +356,7 @@ export const FilterableWithSelectAll = (args) => {
   );
 };
 
+FilterableWithSelectAll.args = { ...sharedArgs };
 Filterable.argTypes = {
   onChange: {
     action: 'onChange',
@@ -381,6 +384,7 @@ export const WithLayerMultiSelect = (args) => (
     )}
   </WithLayer>
 );
+WithLayerMultiSelect.args = { ...sharedArgs };
 export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
@@ -399,6 +403,7 @@ export const _FilterableWithLayer = (args) => (
   </WithLayer>
 );
 
+_FilterableWithLayer.args = { ...sharedArgs };
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
     items.filter((item) => item.id === 'downshift-1-item-0')
@@ -442,6 +447,7 @@ export const _Controlled = (args) => {
   );
 };
 
+_Controlled.args = { ...sharedArgs };
 const itemsWithSelectAll = [
   {
     id: 'downshift-1-item-0',
@@ -497,6 +503,7 @@ export const SelectAll = (args) => {
   );
 };
 
+SelectAll.args = { ...sharedArgs };
 const aiLabel = (
   <AILabel className="ai-label-container">
     <AILabelContent>
@@ -544,6 +551,7 @@ export const withAILabel = (args) => (
   </div>
 );
 
+withAILabel.args = { ...sharedArgs };
 export const FilterableWithAILabel = (args) => (
   <div style={{ width: 400 }}>
     <FilterableMultiSelect
@@ -560,6 +568,7 @@ export const FilterableWithAILabel = (args) => (
   </div>
 );
 
+FilterableWithAILabel.args = { ...sharedArgs };
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   useEffect(() => {
@@ -597,6 +606,7 @@ ExperimentalAutoAlign.argTypes = {
   },
 };
 
+ExperimentalAutoAlign.args = { ...sharedArgs, autoAlign: true };
 export const withToggletipLabel = (args) => {
   return (
     <div>
@@ -634,7 +644,8 @@ export const withToggletipLabel = (args) => {
   );
 };
 
-export const SelectAllWithDynamicItems = () => {
+withToggletipLabel.args = { ...sharedArgs };
+export const SelectAllWithDynamicItems = (args) => {
   const [label, setLabel] = useState('Choose options');
   const [items, setItems] = useState(itemsWithSelectAll);
 
@@ -676,8 +687,10 @@ export const SelectAllWithDynamicItems = () => {
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
         onChange={onChange}
+        {...args}
       />
       <Button onClick={addItems}>Add 2 items to the list</Button>
     </div>
   );
 };
+SelectAllWithDynamicItems.args = { ...sharedArgs };
