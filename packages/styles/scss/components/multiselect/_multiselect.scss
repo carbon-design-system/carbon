@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -18,6 +18,10 @@
 /// @access public
 /// @group multi-select
 @mixin multiselect {
+  .#{$prefix}--multi-select {
+    box-sizing: border-box;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__field--wrapper {
     display: inline-flex;
     align-items: center;
@@ -90,13 +94,13 @@
 
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
-    .cds--checkbox:indeterminate
-    + .cds--checkbox-label::after {
+    .#{$prefix}--checkbox:indeterminate
+    + .#{$prefix}--checkbox-label::after {
     inset-block-start: convert.to-rem(9px);
   }
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
-    .cds--checkbox-label::after {
+    .#{$prefix}--checkbox-label::after {
     inset-block-start: convert.to-rem(5px);
   }
   .#{$prefix}--multi-select

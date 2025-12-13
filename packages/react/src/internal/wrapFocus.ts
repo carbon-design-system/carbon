@@ -38,12 +38,13 @@ const DOCUMENT_POSITION_BROAD_FOLLOWING =
  */
 export const elementOrParentIsFloatingMenu = (
   node: Node,
-  selectorsFloatingMenus: string[] = []
+  selectorsFloatingMenus: string[] = [],
+  prefix = 'cds'
 ): boolean => {
   if (node instanceof Element && typeof node.closest === 'function') {
     const allSelectorsFloatingMenus = [
-      '.cds--overflow-menu-options',
-      '.cds--tooltip',
+      `.${prefix}--overflow-menu-options`,
+      `.${prefix}--tooltip`,
       '.flatpickr-calendar',
       ...selectorsFloatingMenus,
     ];
@@ -67,6 +68,7 @@ export const wrapFocus = ({
   currentActiveNode,
   oldActiveNode,
   selectorsFloatingMenus,
+  prefix = 'cds',
 }: {
   /** The DOM node of the container. */
   bodyNode: HTMLElement | null;
@@ -80,13 +82,19 @@ export const wrapFocus = ({
   oldActiveNode: HTMLElement;
   /** CSS selectors for floating menus. */
   selectorsFloatingMenus?: string[];
+  /** Classname prefix for Carbon selectors. */
+  prefix?: string;
 }) => {
   if (
     bodyNode &&
     currentActiveNode &&
     oldActiveNode &&
     !bodyNode.contains(currentActiveNode) &&
-    !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
+    !elementOrParentIsFloatingMenu(
+      currentActiveNode,
+      selectorsFloatingMenus,
+      prefix
+    )
   ) {
     const comparisonResult =
       oldActiveNode.compareDocumentPosition(currentActiveNode);

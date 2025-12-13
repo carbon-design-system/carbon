@@ -26,7 +26,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 interface FileItem {
   name: string;
   uuid: string;
-  file: File;
+  file: File & { invalidFileType?: boolean };
 }
 
 export interface FileChangeData {
@@ -97,6 +97,11 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   labelTitle?: string;
 
   /**
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
+   */
+  maxFileSize?: number;
+
+  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple?: boolean;
@@ -107,28 +112,39 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   name?: string;
 
   /**
+   * Event handler that is called after files are added to the uploader
+   */
+  onAddFiles?: (
+    event: React.SyntheticEvent<HTMLElement>,
+    content: { addedFiles: Array<File & { invalidFileType?: boolean }> }
+  ) => void;
+
+  /**
    * Provide an optional `onChange` hook that is called each time the input is changed.
    * When 'enable-enhanced-file-uploader' feature flag is enabled:
    * - Also fires for file deletions and clearFiles operations
    * - Event includes enhanced file information in event.target
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  onChange?: (event: any, data?: FileChangeData) => void;
+  onChange?: (
+    event: React.SyntheticEvent<HTMLElement>,
+    data?: FileChangeData
+  ) => void;
 
   /**
    * Provide an optional `onClick` hook that is called each time the
    * FileUploader is clicked
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClick?: (event: any) => void;
+  onClick?: (event: React.SyntheticEvent<HTMLElement>) => void;
 
   /**
    * Provide an optional `onDelete` hook that is called when an uploaded item is removed.
    * When 'enable-enhanced-file-uploader' feature flag is enabled:
    * - Event includes deleted file information in event.target
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  onDelete?: (event: any, data?: FileDeleteData) => void;
+  onDelete?: (
+    event: React.SyntheticEvent<HTMLElement>,
+    data?: FileDeleteData
+  ) => void;
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available
@@ -149,7 +165,6 @@ export interface FileUploaderHandle {
   getCurrentFiles?: () => FileItem[];
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FileUploader = React.forwardRef(
   (
     {
@@ -162,8 +177,10 @@ const FileUploader = React.forwardRef(
       iconDescription,
       labelDescription,
       labelTitle,
+      maxFileSize,
       multiple,
       name,
+      onAddFiles,
       onChange,
       onClick,
       onDelete,
@@ -184,30 +201,69 @@ const FileUploader = React.forwardRef(
       (string | undefined)[]
     >([]);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const [fileObjects, setFileObjects] = useState<Map<string, File>>(
-      new Map()
-    );
-
+    const uploaderButton = React.createRef<HTMLLabelElement>();
     const nodes: HTMLElement[] = [];
 
-    const createFileItem = (file: File): FileItem => ({
-      name: file.name,
-      uuid: `${fileUploaderInstanceId}-${Date.now()}-${Array.from(
-        crypto.getRandomValues(new Uint8Array(8))
-      )
-        .map((b) => b.toString(36))
-        .join('')}`,
-      file,
-    });
+    const createFileItem = useCallback(
+      (file: File & { invalidFileType?: boolean }): FileItem => ({
+        name: file.name,
+        uuid: `${fileUploaderInstanceId}-${Date.now()}-${Array.from(
+          crypto.getRandomValues(new Uint8Array(8))
+        )
+          .map((b) => b.toString(36))
+          .join('')}`,
+        file,
+      }),
+      [fileUploaderInstanceId]
+    );
+
+    /**
+     * Validates files based on file size restrictions.
+     * Marks invalid files with `invalidFileType: true` but includes them in the result.
+     *
+     * Note: The `accept` prop is passed to the native HTML input element (`FileUploaderButton`),
+     * which provides UI-level filtering in the file picker dialog, but there is no JavaScript validation
+     * for file types - users can bypass this by changing the file type filter in the dialog.
+     * https://github.com/carbon-design-system/carbon/issues/21166
+     */
+    const validateFiles = useCallback(
+      (
+        files: Array<File & { invalidFileType?: boolean }>
+      ): Array<File & { invalidFileType?: boolean }> => {
+        return files.map((file) => {
+          if (maxFileSize && file.size > maxFileSize) {
+            file.invalidFileType = true;
+          }
+          return file;
+        });
+      },
+      [maxFileSize]
+    );
 
     const handleChange = useCallback(
       (evt) => {
         evt.stopPropagation();
-        const newFiles = Array.from(evt.target.files as FileList);
+        const incomingFiles = Array.from(evt.target.files as FileList);
+        const filesToValidate = multiple ? incomingFiles : [incomingFiles[0]];
+        const validatedFiles = validateFiles(filesToValidate);
+
+        if (onAddFiles) {
+          onAddFiles(evt, { addedFiles: validatedFiles });
+        }
+
+        // Filter out invalid files since FileUploader cannot display them
+        // (FileUploaderDropContainer returns all files because parent uses FileUploaderItem to display errors)
+        // https://github.com/carbon-design-system/carbon/issues/21166
+        const validFiles = validatedFiles.filter(
+          (file) => !file.invalidFileType
+        );
+
+        if (validFiles.length === 0) {
+          return;
+        }
 
         if (enhancedFileUploaderEnabled) {
-          const newFileItems = newFiles.map(createFileItem);
+          const newFileItems = validFiles.map(createFileItem);
 
           let updatedFileItems: FileItem[];
           if (multiple) {
@@ -239,7 +295,7 @@ const FileUploader = React.forwardRef(
             onChange(enhancedEvent);
           }
         } else {
-          const filenames = newFiles.map((file) => file.name);
+          const filenames = validFiles.map((file) => file.name);
 
           const updatedFileNames = multiple
             ? [...new Set([...legacyFileNames, ...filenames])]
@@ -247,26 +303,20 @@ const FileUploader = React.forwardRef(
 
           setLegacyFileNames(updatedFileNames);
 
-          setFileObjects((prevMap) => {
-            const newMap = multiple ? new Map(prevMap) : new Map();
-            newFiles.forEach((file) => {
-              newMap.set(file.name, file);
-            });
-            return newMap;
-          });
-
           if (onChange) {
             onChange(evt);
           }
         }
       },
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [
         enhancedFileUploaderEnabled,
         fileItems,
         legacyFileNames,
         multiple,
+        onAddFiles,
         onChange,
+        createFileItem,
+        validateFiles,
       ]
     );
 
@@ -314,15 +364,6 @@ const FileUploader = React.forwardRef(
 
             setLegacyFileNames(filteredArray);
 
-            // Update File objects
-            setFileObjects((prevMap) => {
-              const newMap = new Map(prevMap);
-              if (deletedFileName) {
-                newMap.delete(deletedFileName);
-              }
-              return newMap;
-            });
-
             if (onDelete) {
               onDelete(evt);
             }
@@ -335,7 +376,6 @@ const FileUploader = React.forwardRef(
           uploaderButton.current?.focus?.();
         }
       },
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [
         enhancedFileUploaderEnabled,
         fileItems,
@@ -343,6 +383,7 @@ const FileUploader = React.forwardRef(
         onDelete,
         onChange,
         onClick,
+        uploaderButton,
       ]
     );
 
@@ -364,12 +405,11 @@ const FileUploader = React.forwardRef(
                 },
                 preventDefault: () => {},
                 stopPropagation: () => {},
-              };
+              } as unknown as React.SyntheticEvent<HTMLElement>;
               onChange(enhancedEvent);
             }
           } else {
             setLegacyFileNames([]);
-            setFileObjects(new Map());
           }
         },
 
@@ -382,7 +422,6 @@ const FileUploader = React.forwardRef(
       [enhancedFileUploaderEnabled, fileItems, onChange]
     );
 
-    const uploaderButton = React.createRef<HTMLLabelElement>();
     const classes = classNames({
       [`${prefix}--form-item`]: true,
       [className as string]: className,
@@ -479,15 +518,14 @@ const FileUploader = React.forwardRef(
     );
   }
 ) as {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any , @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  <ItemType>(props: FileUploaderProps): React.ReactElement<any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  propTypes?: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  contextTypes?: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  defaultProps?: any;
+  (props: FileUploaderProps): React.ReactElement;
+  displayName?: string;
+  propTypes?: unknown;
+  contextTypes?: unknown;
+  defaultProps?: unknown;
 };
+
+FileUploader.displayName = 'FileUploader';
 
 FileUploader.propTypes = {
   /**
@@ -537,6 +575,11 @@ FileUploader.propTypes = {
   labelTitle: PropTypes.string,
 
   /**
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
+   */
+  maxFileSize: PropTypes.number,
+
+  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple: PropTypes.bool,
@@ -545,6 +588,12 @@ FileUploader.propTypes = {
    * Provide a name for the underlying `<input>` node
    */
   name: PropTypes.string,
+
+  /**
+   * Event handler that is called after files are added to the uploader
+   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
+   */
+  onAddFiles: PropTypes.func,
 
   /**
    * Provide an optional `onChange` hook that is called each time the input is

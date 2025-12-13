@@ -18,12 +18,12 @@
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.0",
+    "@vitejs/plugin-react": "^5.0.0",
     "eslint": "^8.54.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "sass": "^1.93.2",
-    "vite": "^6.3.6"
+    "vite": "^7.2.4"
   }
 }
