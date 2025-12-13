@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/components/combo-box' as *;
@@ -41,6 +42,11 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-combo-box) .#{$prefix}--text-input--highlighted-outline {
+  outline: 1px solid $focus;
+  outline-offset: -1px;
+}
+
 :host(#{$prefix}-combo-box[disabled]),
 :host(#{$prefix}-combo-box[read-only]) {
   .#{$prefix}--list-box__selection {
@@ -68,18 +74,59 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu-item__option {
     block-size: auto;
   }
+}
 
-  &:hover {
-    background-color: $layer-hover;
+:host(#{$prefix}-combo-box-item:not([disabled]):hover) {
+  background-color: $layer-hover;
+}
+
+:host(#{$prefix}-combo-box-item:first-of-type)
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: transparent;
+}
+
+:host(#{$prefix}-combo-box-item:first-of-type[highlighted]) {
+  @include focus-outline('reset');
+
+  &::before {
+    position: absolute;
+    border: 2px solid $focus;
+    block-size: 100%;
+    border-block-start: 1px solid $focus;
+    content: '';
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    pointer-events: none;
   }
 }
 
+:host(#{$prefix}-combo-box-item[highlighted-next-sibling]),
+:host(#{$prefix}-combo-box-item[hovered-next-sibling])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: transparent;
+}
+
 :host(#{$prefix}-combo-box-item[disabled]) {
+  cursor: not-allowed;
+
   .#{$prefix}--list-box__menu-item__option {
     color: $text-disabled;
     cursor: not-allowed;
+    pointer-events: none;
     text-decoration: none;
   }
+}
+
+:host(#{$prefix}-combo-box-item[disabled][highlighted-next-sibling]:hover),
+:host(#{$prefix}-combo-box-item[disabled][hovered-next-sibling]:hover)
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle;
+}
+
+:host(#{$prefix}-combo-box-item[disabled]:hover)
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle-01;
 }
 
 :host(#{$prefix}-combo-box-item[highlighted]) {
@@ -88,15 +135,25 @@ $css--plex: true !default;
 
 :host(#{$prefix}-combo-box-item[selected]) {
   @extend .#{$prefix}--list-box__menu-item--active;
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: transparent;
     color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: block;
   }
+}
+
+:host(#{$prefix}-combo-box-item[selected-next-sibling])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: transparent;
+}
+
+:host(#{$prefix}-combo-box-item[disabled][selected-next-sibling]:hover)
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: $border-subtle;
 }
 
 :host(#{$prefix}-combo-box-item[size='sm']) {
@@ -112,6 +169,18 @@ $css--plex: true !default;
 
   .#{$prefix}--list-box__menu-item__option {
     padding-block: to-rem(15px);
+  }
+}
+
+:host(#{$prefix}-combo-box[size='sm']) {
+  .#{$prefix}--list-box__menu-icon {
+    inset-block: $spacing-02;
+  }
+}
+
+:host(#{$prefix}-combo-box[size='lg']) {
+  .#{$prefix}--list-box__menu-icon {
+    inset-block: $spacing-04;
   }
 }
 
