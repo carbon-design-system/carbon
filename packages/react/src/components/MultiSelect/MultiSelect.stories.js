@@ -106,7 +106,7 @@ export default {
     },
     useTitleInItem: {
       control: {
-        type: 'text',
+        type: 'boolean',
       },
     },
     clearSelectionText: {
@@ -116,6 +116,11 @@ export default {
     },
     readOnly: {
       control: { type: 'boolean' },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
     },
   },
   parameters: {
@@ -188,8 +193,6 @@ const sharedArgs = {
   clearSelectionDescription: 'Total items selected: ',
   useTitleInItem: false,
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
-  selectAll: false,
-  selectAllItemText: 'All options',
 };
 
 export const Default = (args) => {
@@ -336,7 +339,11 @@ export const Filterable = (args) => {
   );
 };
 
-Filterable.args = { ...sharedArgs };
+Filterable.args = {
+  ...sharedArgs,
+  titleText: null,
+  placeholder: 'Filter items',
+};
 export const FilterableWithSelectAll = (args) => {
   return (
     <div
@@ -356,7 +363,18 @@ export const FilterableWithSelectAll = (args) => {
   );
 };
 
-FilterableWithSelectAll.args = { ...sharedArgs };
+FilterableWithSelectAll.args = {
+  ...sharedArgs,
+  label: null,
+};
+FilterableWithSelectAll.argTypes = {
+  label: {
+    control: false,
+    table: {
+      disable: true,
+    },
+  },
+};
 Filterable.argTypes = {
   onChange: {
     action: 'onChange',
@@ -403,7 +421,15 @@ export const _FilterableWithLayer = (args) => (
   </WithLayer>
 );
 
-_FilterableWithLayer.args = { ...sharedArgs };
+_FilterableWithLayer.args = { ...sharedArgs, label: null };
+_FilterableWithLayer.argTypes = {
+  label: {
+    control: false,
+    table: {
+      disable: true,
+    },
+  },
+};
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
     items.filter((item) => item.id === 'downshift-1-item-0')
@@ -568,7 +594,15 @@ export const FilterableWithAILabel = (args) => (
   </div>
 );
 
-FilterableWithAILabel.args = { ...sharedArgs };
+FilterableWithAILabel.args = { ...sharedArgs, label: null };
+FilterableWithAILabel.argTypes = {
+  label: {
+    control: false,
+    table: {
+      disable: true,
+    },
+  },
+};
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   useEffect(() => {
