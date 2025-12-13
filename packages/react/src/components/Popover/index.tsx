@@ -84,6 +84,11 @@ export interface PopoverBaseProps {
   alignmentAxisOffset?: number;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
    * Will auto-align the popover on first render if it is not visible. This prop
    * is currently experimental and is subject to future changes. Requires
    * React v17+
@@ -100,6 +105,11 @@ export interface PopoverBaseProps {
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
 
   /**
    * Provide elements to be rendered inside of the component
@@ -143,12 +153,12 @@ export type PopoverProps<E extends React.ElementType> =
   PolymorphicComponentPropWithRef<E, PopoverBaseProps>;
 export type PopoverComponent = <E extends React.ElementType = 'span'>(
   props: PopoverProps<E>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 export const Popover: PopoverComponent & {
   displayName?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: WeakValidationMap<PopoverProps<any>>;
 } = React.forwardRef(function PopoverRenderFunction<
   E extends ElementType = 'span',
@@ -159,19 +169,21 @@ export const Popover: PopoverComponent & {
     as: BaseComponent = 'span' as E,
     autoAlign = false,
     autoAlignBoundary,
+    backgroundToken = 'layer',
     caret = isTabTip ? false : true,
     className: customClassName,
     children,
+    border = false,
     dropShadow = true,
     highContrast = false,
     onRequestClose,
     open,
     alignmentAxisOffset,
     ...rest
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   }: any,
   //this is a workaround, have to come back and fix this.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   forwardRef: any
 ) {
   const prefix = usePrefix();
@@ -221,9 +233,9 @@ export const Popover: PopoverComponent & {
   // we look to see if any of the children has a className containing "slug"
   const initialCaretHeight = React.Children.toArray(children).some((x) => {
     return (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (x as any)?.props?.className?.includes('slug') ||
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (x as any)?.props?.className?.includes('ai-label')
     );
   })
@@ -244,9 +256,11 @@ export const Popover: PopoverComponent & {
       // If a value is not set via a custom property, provide a default value that matches the
       // default values defined in the sass style file
       const getStyle = window.getComputedStyle(popover.current, null);
-      const offsetProperty = getStyle.getPropertyValue('--cds-popover-offset');
+      const offsetProperty = getStyle.getPropertyValue(
+        `--${prefix}-popover-offset`
+      );
       const caretProperty = getStyle.getPropertyValue(
-        '--cds-popover-caret-height'
+        `--${prefix}-popover-caret-height`
       );
 
       // Handle if the property values are in px or rem.
@@ -327,6 +341,7 @@ export const Popover: PopoverComponent & {
               }),
             arrow({
               element: caretRef,
+              padding: 16,
             }),
             autoAlign && hide(),
           ],
@@ -410,18 +425,21 @@ export const Popover: PopoverComponent & {
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
         enableFloatingStyles,
       [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
+      [`${prefix}--popover--background-token__background`]:
+        backgroundToken === 'background' && !highContrast,
     },
     customClassName
   );
 
   const mappedChildren = React.Children.map(children, (child) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const item = child as any;
     const displayName = item?.type?.displayName;
 
@@ -445,16 +463,16 @@ export const Popover: PopoverComponent & {
       React.isValidElement(item) &&
       (isTriggerElement || isTriggerComponent || isAllowedTriggerComponent)
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const className = (item?.props as any)?.className;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const ref = (item?.props as any).ref;
       const tabTipClasses = cx(
         `${prefix}--popover--tab-tip__button`,
         className
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       return React.cloneElement(item as any, {
         className:
           isTabTip && item?.type === 'button' ? tabTipClasses : className || '',
@@ -579,6 +597,11 @@ Popover.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
    * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
    */
   autoAlignBoundary: PropTypes.oneOfType([
@@ -597,6 +620,11 @@ Popover.propTypes = {
    * Specify whether a caret should be rendered
    */
   caret: PropTypes.bool,
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border: PropTypes.bool,
 
   /**
    * Provide elements to be rendered inside of the component

@@ -33,15 +33,15 @@ test.describe('@avt FluidTextInput', () => {
     await expect(page).toHaveNoACViolations('FluidTextInput-password-input');
   });
 
-  test('@avt-advanced-states with tooltip', async ({ page }) => {
+  test('@avt-advanced-states with toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextInput',
-      id: 'components-fluid-components-fluidtextinput--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextinput--default-with-toggletip',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('FluidTextInput-with-tooltip');
+    await expect(page).toHaveNoACViolations('FluidTextInput-with-toggletip');
   });
 
   test('@avt-advanced-states skeleton', async ({ page }) => {
@@ -77,10 +77,10 @@ test.describe('@avt FluidTextInput', () => {
     await expect(input).toHaveValue('Tex');
   });
 
-  test('@avt-keyboard-nav with tooltip', async ({ page }) => {
+  test('@avt-keyboard-nav with toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
-      id: 'components-fluid-components-fluidtextinput--default-with-tooltip',
+      id: 'components-fluid-components-fluidtextinput--default-with-toggletip',
       globals: {
         theme: 'white',
       },
@@ -88,7 +88,7 @@ test.describe('@avt FluidTextInput', () => {
     const input = page.getByRole('textbox');
     await expect(input).toBeVisible();
 
-    // Check tooltip visibility
+    // Check toggletip visibility
     await page.keyboard.press('Tab');
     await expect(page.getByLabel('Show information')).toBeFocused();
     await page.keyboard.press('Enter');

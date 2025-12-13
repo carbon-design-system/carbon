@@ -23,13 +23,6 @@ export default {
     lowContrast: false,
     statusIconDescription: 'notification',
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const Default = (args) => (
@@ -56,16 +49,6 @@ export const WithInteractiveElements = () => (
 );
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   kind: {
     options: ['info', 'warning'],
     control: { type: 'select' },

@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/menu' as *;
-@import './menu-variables';
+@use './menu-variables' as *;
 
 :host(#{$prefix}-menu) {
   position: fixed;
@@ -56,6 +56,14 @@ $css--plex: true !default;
   }
   &:not(.#{$prefix}--menu--open) .#{$prefix}--menu--open {
     visibility: hidden;
+  }
+
+  &--border {
+    @extend .#{$prefix}--menu--border;
+  }
+
+  &--background-token__background {
+    @extend .#{$prefix}--menu--background-token__background;
   }
 }
 .#{$prefix}--menu--with-icons {

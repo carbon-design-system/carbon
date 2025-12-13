@@ -30,6 +30,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['id'],
+    },
   },
 };
 
@@ -50,14 +53,16 @@ export const Disabled = () => {
 
 export const Expandable = () => {
   return (
-    <ExpandableSearch
-      size="lg"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-expandable-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
+    <div style={{ marginTop: '50px' }}>
+      <ExpandableSearch
+        size="lg"
+        labelText="Search"
+        closeButtonLabelText="Clear search input"
+        id="search-expandable-1"
+        onChange={() => {}}
+        onKeyDown={() => {}}
+      />
+    </div>
   );
 };
 
@@ -118,11 +123,6 @@ Default.argTypes = {
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   closeButtonLabelText: {
     control: {
       type: 'text',
@@ -131,11 +131,6 @@ Default.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
-    },
-  },
-  id: {
-    table: {
-      disable: true,
     },
   },
   defaultValue: {

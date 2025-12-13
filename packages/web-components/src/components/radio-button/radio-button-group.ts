@@ -37,7 +37,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    * Handles user-initiated change in selected radio button.
    */
   @HostListener('eventChangeRadioButton')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleAfterChangeRadioButton = (event: CustomEvent) => {
     // Bail out early if readOnly
@@ -242,7 +242,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const showWarning = !readOnly && !invalid && warn;
+    const showWarning = !readOnly && !disabled && !invalid && warn;
     const showHelper = !invalid && !disabled && !warn;
 
     const invalidIcon = iconLoader(WarningFilled16, {
@@ -262,6 +262,9 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       [`${prefix}--radio-button-group--readonly`]: readOnly,
       [`${prefix}--radio-button-group--${orientation}`]:
         orientation === 'vertical',
+      [`${prefix}--radio-button-group--invalid`]:
+        !readOnly && !disabled && invalid,
+      [`${prefix}--radio-button-group--warning`]: showWarning,
       [`${prefix}--radio-button-group--slug`]: hasAILabel,
     });
 
@@ -279,7 +282,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         <slot></slot>
       </fieldset>
       <div class="${prefix}--radio-button__validation-msg">
-        ${!readOnly && invalid
+        ${!readOnly && !disabled && invalid
           ? html`
               ${invalidIcon}
               <div class="${prefix}--form-requirement">${invalidText}</div>

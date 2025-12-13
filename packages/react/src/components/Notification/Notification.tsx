@@ -356,7 +356,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when menu is closed
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onClose?(event: MouseEvent): boolean | void;
 
   /**
@@ -631,7 +631,7 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when menu is closed
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onClose?(event: MouseEvent): boolean | void;
 
   /**
@@ -891,7 +891,7 @@ export interface ActionableNotificationProps
    * Provide a function that is called when menu is closed.
    * Default behavior of hiding the notification is prevented if this function returns false.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onClose?(event: MouseEvent): boolean | void;
 
   /**
@@ -962,14 +962,19 @@ export function ActionableNotification({
   const startTrap = useRef<HTMLElement>(null);
   const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const focusTrapWithoutSentinels = useFeatureFlag(
+  const deprecatedFlag = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = useFeatureFlag(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    focusTrapWithoutSentinelsFlag || deprecatedFlag;
 
   useIsomorphicEffect(() => {
     if (hasFocus && role === 'alertdialog') {
       const button = document.querySelector(
-        'button.cds--actionable-notification__action-button'
+        `button.${prefix}--actionable-notification__action-button`
       ) as HTMLButtonElement;
       button?.focus();
     }
@@ -994,6 +999,7 @@ export function ActionableNotification({
         endTrapNode,
         currentActiveNode,
         oldActiveNode,
+        prefix,
       });
     }
   }
@@ -1458,7 +1464,7 @@ Callout.propTypes = {
 /**
  * @deprecated Use `CalloutProps` instead.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface StaticNotificationProps extends CalloutProps {}
 let didWarnAboutDeprecation = false;
 export const StaticNotification: React.FC<StaticNotificationProps> = (

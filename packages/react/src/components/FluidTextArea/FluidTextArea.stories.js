@@ -27,6 +27,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['id', 'value', 'defaultValue'],
+    },
   },
   subcomponents: {
     FluidTextAreaSkeleton,
@@ -42,22 +45,7 @@ export default {
         disable: true,
       },
     },
-    id: {
-      table: {
-        disable: true,
-      },
-    },
     light: {
-      table: {
-        disable: true,
-      },
-    },
-    value: {
-      table: {
-        disable: true,
-      },
-    },
-    defaultValue: {
       table: {
         disable: true,
       },
@@ -172,7 +160,7 @@ const ToggleTip = (
   </>
 );
 
-export const DefaultWithTooltip = () => (
+export const DefaultWithToggletip = () => (
   <FluidTextArea labelText={ToggleTip} placeholder="Placeholder text" />
 );
 

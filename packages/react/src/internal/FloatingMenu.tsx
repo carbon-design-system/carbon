@@ -20,7 +20,6 @@ import React, {
 } from 'react';
 import * as FeatureFlags from '@carbon/feature-flags';
 import ReactDOM from 'react-dom';
-import window from 'window-or-global';
 import { keys, match } from '../internal/keyboard';
 import { OptimizedResize } from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
@@ -277,14 +276,17 @@ export const FloatingMenu = ({
           ? menuOffset(menuBody, menuDirection, triggerEl, flipped)
           : menuOffset;
 
+      const scrollX = globalThis.scrollX ?? 0;
+      const scrollY = globalThis.scrollY ?? 0;
+
       if (updateOrientation) {
         updateOrientation({
           menuSize,
           refPosition,
           direction: menuDirection,
           offset: offsetValue,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
@@ -299,8 +301,8 @@ export const FloatingMenu = ({
           refPosition: refPosition ?? { left: 0, top: 0, right: 0, bottom: 0 },
           offset: offsetValue,
           direction: menuDirection,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
@@ -390,7 +392,7 @@ export const FloatingMenu = ({
 
       placeInProgressRef.current = false;
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [floatingPosition, onPlace]);
 
   // Attach a resize listener.
@@ -402,7 +404,7 @@ export const FloatingMenu = ({
     return () => {
       resizeHandler.remove();
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [
     triggerRef,
     menuOffset,
@@ -415,7 +417,7 @@ export const FloatingMenu = ({
   // Update menu position when key props change.
   useEffect(() => {
     updateMenuPosition();
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [
     menuOffset,
     menuDirection,
@@ -441,9 +443,9 @@ export const FloatingMenu = ({
           top: '0px',
         };
     const child = children as ReactElement<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       string | JSXElementConstructor<any>
     >;
     return cloneElement(child, {
@@ -476,6 +478,7 @@ export const FloatingMenu = ({
         endTrapNode: endSentinelRef.current,
         currentActiveNode: relatedTarget,
         oldActiveNode: target,
+        prefix,
       });
     }
   };
@@ -497,15 +500,20 @@ export const FloatingMenu = ({
     }
   };
 
-  const focusTrapWithoutSentinels = FeatureFlags.enabled(
+  const deprecatedFlag = FeatureFlags.enabled(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = FeatureFlags.enabled(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    deprecatedFlag || focusTrapWithoutSentinelsFlag;
 
   if (typeof document !== 'undefined') {
     const portalTarget = target ? target() : document.body;
 
     return ReactDOM.createPortal(
-      // eslint-disable-next-line  jsx-a11y/no-static-element-interactions  -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  jsx-a11y/no-static-element-interactions  -- https://github.com/carbon-design-system/carbon/issues/20452
       <div
         onBlur={
           focusTrap && !focusTrapWithoutSentinels ? handleBlur : undefined

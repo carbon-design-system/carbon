@@ -17,12 +17,12 @@ const FocusMixin = <T extends Constructor<HTMLElement>>(Base: T) =>
      * Focuses on the first focusable element in the shadow DOM.
      */
     focus() {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       if (this.shadowRoot!.delegatesFocus) {
         super.focus();
       } else {
         const delegateTarget =
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           this.shadowRoot!.querySelector(selectorTabbable) ||
           this.querySelector(selectorTabbable);
         if (delegateTarget) {

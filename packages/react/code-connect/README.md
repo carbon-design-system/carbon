@@ -17,8 +17,8 @@ promoting consistency across both design and engineering.
 
 ## Connecting components
 
-You will need a Figma license with dev mode to work on code connect within
-Carbon.
+To work on Code Connect within Carbon, you’ll need a Figma editor license. If
+you only need to view code snippets, you’ll just need a Dev Mode license.
 
 Follow the
 [documentation](https://github.com/figma/code-connect/blob/main/cli/README.md#basic-setup)
@@ -32,6 +32,13 @@ and/or be integrated with Storybook code.
 "packages/src/react/code-connect/ComponentName/ComponentName.figma.tsx"
 ```
 
+## Demo Figma File
+
+A
+[demo Figma file](https://www.figma.com/design/NwXsMCCoMg1po4KK2oUK3o/Code-connect-demo---Carbon-Design-System?node-id=612-252440&m=dev)
+is available to help test and add new components while working with Code
+Connect:
+
 ### Publishing
 
 Figma code connect is set up to automatically publish when PRs are merged into
@@ -42,4 +49,10 @@ and create your own `FIGMA_ACCESS_TOKEN` variable.
 
 ```sh
 npx figma connect publish --token <token>
+```
+
+You can also publish a specific component directory instead of the entire set:
+
+```sh
+npx figma connect publish --dir packages/react/code-connect/tabs
 ```

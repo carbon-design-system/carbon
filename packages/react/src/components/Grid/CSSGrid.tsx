@@ -13,9 +13,9 @@ import { GridSettings, useGridSettings } from './GridContext';
 import { GridComponent, GridBaseProps } from './GridTypes';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const CSSGrid = React.forwardRef<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   GridBaseProps & {
     as?: React.ElementType;
@@ -137,12 +137,12 @@ interface SubgridBaseProps {
   mode?: SubgridMode;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 type SubgridProps<T extends React.ElementType = 'div'> =
   PolymorphicComponentPropWithRef<T, SubgridBaseProps>;
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Subgrid = React.forwardRef<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   SubgridBaseProps & {
     as?: React.ElementType;

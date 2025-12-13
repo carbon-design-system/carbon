@@ -84,6 +84,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -648,6 +660,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "fluid": {
+        "type": "bool",
       },
       "stacked": {
         "type": "bool",
@@ -1566,6 +1581,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -1666,6 +1682,7 @@ Map {
     },
     "render": [Function],
   },
+  "ComposedModalPresence" => {},
   "ContainedList" => {
     "ContainedListItem": {
       "propTypes": {
@@ -2090,12 +2107,6 @@ Map {
           "type": "func",
         },
       },
-      "translationKeys": [
-        "carbon.table.batch.cancel",
-        "carbon.table.batch.items.selected",
-        "carbon.table.batch.item.selected",
-        "carbon.table.batch.selectAll",
-      ],
     },
     "TableBody": {
       "propTypes": {
@@ -2314,9 +2325,6 @@ Map {
         },
       },
       "render": [Function],
-      "translationKeys": [
-        "carbon.table.header.icon.description",
-      ],
     },
     "TableRow": {
       "$$typeof": Symbol(react.forward_ref),
@@ -2673,16 +2681,6 @@ Map {
         "type": "bool",
       },
     },
-    "translationKeys": [
-      "carbon.table.row.expand",
-      "carbon.table.row.collapse",
-      "carbon.table.all.expand",
-      "carbon.table.all.collapse",
-      "carbon.table.all.select",
-      "carbon.table.all.unselect",
-      "carbon.table.row.select",
-      "carbon.table.row.unselect",
-    ],
   },
   "DataTableSkeleton" => {
     "propTypes": {
@@ -2877,6 +2875,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "nextMonthAriaLabel": {
+        "type": "string",
+      },
       "onChange": {
         "type": "func",
       },
@@ -2888,6 +2889,9 @@ Map {
       },
       "parseDate": {
         "type": "func",
+      },
+      "prevMonthAriaLabel": {
+        "type": "string",
       },
       "readOnly": {
         "args": [
@@ -3530,6 +3534,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -3603,11 +3613,17 @@ Map {
       "labelTitle": {
         "type": "string",
       },
+      "maxFileSize": {
+        "type": "number",
+      },
       "multiple": {
         "type": "bool",
       },
       "name": {
         "type": "string",
+      },
+      "onAddFiles": {
+        "type": "func",
       },
       "onChange": {
         "type": "func",
@@ -3723,6 +3739,9 @@ Map {
       "labelText": {
         "isRequired": true,
         "type": "string",
+      },
+      "maxFileSize": {
+        "type": "number",
       },
       "multiple": {
         "type": "bool",
@@ -4192,9 +4211,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -6189,6 +6205,18 @@ Map {
   "Menu" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "children": {
         "type": "node",
       },
@@ -6304,6 +6332,18 @@ Map {
         ],
         "type": "oneOf",
       },
+      "menuBackgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "menuBorder": {
+        "type": "bool",
+      },
       "menuTarget": {
         "args": [
           [Function],
@@ -6313,6 +6353,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -6741,6 +6782,7 @@ Map {
     },
     "render": [Function],
   },
+  "ModalPresence" => {},
   "ModalWrapper" => {
     "propTypes": {
       "buttonTriggerClassName": {
@@ -7319,6 +7361,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "validate": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -7567,6 +7612,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8037,6 +8083,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -8235,6 +8293,12 @@ Map {
       "id": {
         "type": "string",
       },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
       "labelPosition": {
         "args": [
           [
@@ -8257,6 +8321,9 @@ Map {
       "onClick": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
       "required": {
         "type": "bool",
       },
@@ -8273,6 +8340,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -9825,12 +9898,6 @@ Map {
         "type": "func",
       },
     },
-    "translationKeys": [
-      "carbon.table.batch.cancel",
-      "carbon.table.batch.items.selected",
-      "carbon.table.batch.item.selected",
-      "carbon.table.batch.selectAll",
-    ],
   },
   "TableBody" => {
     "propTypes": {
@@ -10049,9 +10116,6 @@ Map {
       },
     },
     "render": [Function],
-    "translationKeys": [
-      "carbon.table.header.icon.description",
-    ],
   },
   "TableRow" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -11116,6 +11180,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -11562,6 +11638,12 @@ Map {
       "enableExperimentalFocusWrapWithoutSentinels": {
         "type": "bool",
       },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
+        "type": "bool",
+      },
       "enableTreeviewControllable": {
         "type": "bool",
       },
@@ -11795,7 +11877,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -12190,9 +12271,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -13611,6 +13689,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -13713,6 +13803,12 @@ Map {
         "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enableFocusWrapWithoutSentinels": {
+        "type": "bool",
+      },
+      "enablePresence": {
         "type": "bool",
       },
       "enableTreeviewControllable": {
@@ -13948,7 +14044,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -14156,9 +14251,6 @@ Map {
       },
       "onChange": {
         "isRequired": true,
-        "type": "func",
-      },
-      "renderSelectedItem": {
         "type": "func",
       },
       "selectedItem": {
@@ -15577,6 +15669,18 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "caret": {
         "type": "bool",
       },
@@ -15675,5 +15779,6 @@ Map {
   "usePrefersDarkScheme" => {},
   "usePrefix" => {},
   "useTheme" => {},
+  "validateNumberSeparators" => {},
 }
 `;

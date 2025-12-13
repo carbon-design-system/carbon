@@ -45,6 +45,58 @@ test.describe('Modal', () => {
           theme,
         });
       });
+
+      test('with ai label modal @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal--with-ai-label',
+          theme,
+        });
+      });
+
+      test('with inline loading modal @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal--with-inline-loading',
+          theme,
+        });
+      });
+
+      test('enable dialog element feature flag modal @vrt', async ({
+        page,
+      }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal-feature-flags--enable-dialog-element',
+          theme,
+        });
+      });
+
+      test('enable preview focus wrap without sentinels feature flag modal @vrt', async ({
+        page,
+      }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal-feature-flags--enable-focus-wrap-without-sentinels',
+          theme,
+        });
+      });
+
+      test('with state manager @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal--with-state-manager',
+          theme,
+        });
+      });
+
+      test('danger modal @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal--danger-modal',
+          theme,
+        });
+      });
     });
   });
 });

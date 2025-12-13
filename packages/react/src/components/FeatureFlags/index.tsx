@@ -29,9 +29,11 @@ export interface FeatureFlagsProps {
   enableV12Overflowmenu?: boolean;
   enableTreeviewControllable?: boolean;
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
+  enableFocusWrapWithoutSentinels?: boolean;
   enableDialogElement?: boolean;
   enableV12DynamicFloatingStyles?: boolean;
   enableEnhancedFileUploader?: boolean;
+  enablePresence?: boolean;
 }
 
 // TODO: Can this variable be deleted now? It isn't used anywhere.
@@ -54,9 +56,11 @@ function FeatureFlags({
   enableV12Overflowmenu = false,
   enableTreeviewControllable = false,
   enableExperimentalFocusWrapWithoutSentinels = false,
+  enableFocusWrapWithoutSentinels = false,
   enableDialogElement = false,
   enableV12DynamicFloatingStyles = false,
   enableEnhancedFileUploader = false,
+  enablePresence = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
@@ -68,9 +72,11 @@ function FeatureFlags({
     'enable-treeview-controllable': enableTreeviewControllable,
     'enable-experimental-focus-wrap-without-sentinels':
       enableExperimentalFocusWrapWithoutSentinels,
+    'enable-focus-wrap-without-sentinels': enableFocusWrapWithoutSentinels,
     'enable-dialog-element': enableDialogElement,
     'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
     'enable-enhanced-file-uploader': enableEnhancedFileUploader,
+    'enable-presence': enablePresence,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {
@@ -119,9 +125,11 @@ FeatureFlags.propTypes = {
   enableV12Overflowmenu: PropTypes.bool,
   enableTreeviewControllable: PropTypes.bool,
   enableExperimentalFocusWrapWithoutSentinels: PropTypes.bool,
+  enableFocusWrapWithoutSentinels: PropTypes.bool,
   enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
+  enablePresence: PropTypes.bool,
 };
 
 /**
