@@ -29,12 +29,10 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['relative'],
     },
     docs: {
       page: mdx,
-    },
-    controls: {
-      exclude: ['relative'],
     },
   },
 };
@@ -198,6 +196,11 @@ Default.argTypes = {
     ],
     control: {
       type: 'select',
+    },
+  },
+  border: {
+    control: {
+      type: 'boolean',
     },
   },
   caret: {

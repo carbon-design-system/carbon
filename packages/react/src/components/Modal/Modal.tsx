@@ -340,9 +340,14 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const open = externalOpen || enablePresence;
   const prevOpen = usePreviousValue(open);
 
-  const focusTrapWithoutSentinels = useFeatureFlag(
+  const deprecatedFlag = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = useFeatureFlag(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    focusTrapWithoutSentinelsFlag || deprecatedFlag;
   const enableDialogElement = useFeatureFlag('enable-dialog-element');
   warning(
     !(focusTrapWithoutSentinels && enableDialogElement),
@@ -409,7 +414,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     if (
       shouldCloseOnOutsideClick &&
       target instanceof Node &&
-      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus, prefix) &&
       innerModal.current &&
       !innerModal.current.contains(target)
     ) {
@@ -440,6 +445,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
           currentActiveNode,
           oldActiveNode,
           selectorsFloatingMenus,
+          prefix,
         });
         if (wrapFocusTimeout.current) {
           clearTimeout(wrapFocusTimeout.current);

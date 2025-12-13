@@ -5,7 +5,7 @@
   "repository": "git@github.com:carbon-design-system/carbon.git",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=18.x"
+    "node": ">=20.x"
   },
   "workspaces": [
     "actions/*",
@@ -30,18 +30,18 @@
     "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~19.1.0",
+    "@types/react": "~19.2.0",
     "@types/prop-types": "^15.7.14",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
-    "react": "~19.1.0",
-    "react-dom": "~19.1.0",
-    "react-is": "~19.1.0",
+    "react": "~19.2.0",
+    "react-dom": "~19.2.0",
+    "react-is": "~19.2.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "brace-expansion": "^2.0.2",
     "@octokit/rest": "^22.0.0",
-    "eslint": "9.32.0",
-    "typescript-eslint": "8.45.0"
+    "eslint": "9.39.1",
+    "typescript-eslint": "8.46.1"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -53,8 +53,8 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.27.3",
     "@carbon/cli": "workspace:packages/cli",
-    "@commitlint/cli": "^18.0.0",
-    "@commitlint/config-conventional": "^18.0.0",
+    "@commitlint/cli": "^20.0.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.24.0",
     "@percy/cli": "^1.30.4",
     "@percy/playwright": "^1.0.7",
@@ -79,11 +79,11 @@
     "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
     "glob": "^11.0.0",
-    "globals": "15.15.0",
+    "globals": "16.5.0",
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
-    "lerna": "^8.0.0",
+    "lerna": "^9.0.1",
     "lint-staged": "^16.0.0",
     "prettier": "^3.3.3",
     "react": "^19.0.0",

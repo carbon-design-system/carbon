@@ -311,9 +311,14 @@ const ComposedModalDialog = React.forwardRef<
   const [isOpen, setIsOpen] = presenceContext?.modalState ?? modalState;
 
   const enableDialogElement = useFeatureFlag('enable-dialog-element');
-  const focusTrapWithoutSentinels = useFeatureFlag(
+  const deprecatedFlag = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = useFeatureFlag(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    deprecatedFlag || focusTrapWithoutSentinelsFlag;
   warning(
     !(focusTrapWithoutSentinels && enableDialogElement),
     '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
@@ -379,7 +384,7 @@ const ComposedModalDialog = React.forwardRef<
     if (
       shouldCloseOnOutsideClick &&
       target instanceof Node &&
-      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus, prefix) &&
       innerModal.current &&
       !innerModal.current.contains(target) &&
       !innerModal.current.contains(mouseDownTarget)
@@ -410,6 +415,7 @@ const ComposedModalDialog = React.forwardRef<
         currentActiveNode,
         oldActiveNode,
         selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
+        prefix,
       });
     }
 

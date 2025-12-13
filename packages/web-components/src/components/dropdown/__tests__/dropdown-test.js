@@ -407,6 +407,132 @@ describe('cds-dropdown', function () {
   });
 });
 
+describe('Validation states with disabled/readonly', () => {
+  it('should not show invalid state when readOnly is true', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        read-only
+        invalid
+        invalid-text="This field is required"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const listBox = el.shadowRoot.querySelector('.cds--list-box');
+    expect(listBox.classList.contains('cds--dropdown--invalid')).to.be.false;
+  });
+
+  it('should not show warning state when readOnly is true', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        read-only
+        warn
+        warn-text="This is a warning"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const listBox = el.shadowRoot.querySelector('.cds--list-box');
+    expect(listBox.classList.contains('cds--dropdown--warn')).to.be.false;
+  });
+
+  it('should not show invalid state when disabled is true', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        disabled
+        invalid
+        invalid-text="This field is required"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const listBox = el.shadowRoot.querySelector('.cds--list-box');
+    expect(listBox.classList.contains('cds--dropdown--invalid')).to.be.false;
+  });
+
+  it('should not show warning state when disabled is true', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        disabled
+        warn
+        warn-text="This is a warning"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const listBox = el.shadowRoot.querySelector('.cds--list-box');
+    expect(listBox.classList.contains('cds--dropdown--warn')).to.be.false;
+  });
+
+  it('should not show warning state when invalid is true', async () => {
+    const el = await fixture(html`
+      <cds-dropdown
+        invalid
+        warn
+        invalid-text="This field is required"
+        warn-text="This is a warning"
+        title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const listBox = el.shadowRoot.querySelector('.cds--list-box');
+    expect(listBox.classList.contains('cds--dropdown--invalid')).to.be.true;
+    expect(listBox.classList.contains('cds--dropdown--warn')).to.be.false;
+
+    const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
+    expect(helperText.textContent.trim()).to.equal('This field is required');
+  });
+
+  it('should apply correct CSS classes based on normalized props', async () => {
+    const el = await fixture(html`
+      <cds-dropdown disabled invalid warn title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const listBox = el.shadowRoot.querySelector('.cds--list-box');
+
+    expect(listBox.classList.contains('cds--list-box--disabled')).to.be.true;
+
+    expect(listBox.classList.contains('cds--dropdown--invalid')).to.be.false;
+
+    expect(listBox.classList.contains('cds--dropdown--warn')).to.be.false;
+  });
+
+  it('should prevent interaction when readOnly is true', async () => {
+    const el = await fixture(html`
+      <cds-dropdown read-only title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+
+    await el.updateComplete;
+
+    const triggerButton = el.shadowRoot.querySelector('#trigger-button');
+    triggerButton.click();
+    await el.updateComplete;
+
+    expect(el.open).to.be.false;
+  });
+});
+
 describe('cds-dropdown-skeleton', function () {
   describe('Renders as expected', () => {
     it('should render with the expected classes', async () => {
@@ -414,10 +540,11 @@ describe('cds-dropdown-skeleton', function () {
         html`<cds-dropdown-skeleton></cds-dropdown-skeleton>`
       );
       expect(el).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--skeleton')).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--dropdown-v2')).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--list-box')).to.exist;
-      expect(el.shadowRoot.querySelector('.cds--form-item')).to.exist;
+      const skeletonRoot = el.shadowRoot.querySelector('.cds--dropdown');
+      expect(skeletonRoot).to.exist;
+      expect(skeletonRoot.classList.contains('cds--skeleton')).to.be.true;
+      expect(skeletonRoot.classList.contains('cds--list-box--md')).to.be.true;
+      expect(el.shadowRoot.querySelector('.cds--label.cds--skeleton')).to.exist;
     });
 
     it('should respect size attribute', async () => {
