@@ -93,7 +93,8 @@ function FileUploaderItem({
   const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
-  const { current: id } = useRef(uuid || useId());
+  const generatedId = useId();
+  const { current: id } = useRef(uuid || generatedId);
   const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
@@ -107,9 +108,14 @@ function FileUploaderItem({
     return name?.replace(/\s+/g, '');
   };
 
-  const isEllipsisActive = (element: any) => {
-    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
-    return element.offsetWidth < element.scrollWidth;
+  const isEllipsisActive = (element: HTMLElement | null) => {
+    if (!element) {
+      setIsEllipsisApplied(false);
+      return false;
+    }
+    const isActive = element.offsetWidth < element.scrollWidth;
+    setIsEllipsisApplied(isActive);
+    return isActive;
   };
 
   useLayoutEffect(() => {

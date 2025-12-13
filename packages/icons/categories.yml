@@ -313,6 +313,7 @@ categories:
           - page--first
           - page--last
           - pipelines
+          - point
           - select--window
           - stickies
           - subtract
@@ -367,9 +368,11 @@ categories:
           - choose-item
           - circle-dash
           - clean
+          - cloud--infra-migration
           - collapse-all
           - collapse-categories
           - commit
+          - commit-alt
           - compare
           - connect
           - connect--recursive
@@ -379,6 +382,8 @@ categories:
           - continuous-deployment
           - continuous-integration
           - convert-to-cloud
+          - copy--to-clipboard
+          - data-set-encryption
           - delete
           - demo
           - deploy
@@ -406,6 +411,8 @@ categories:
           - funnel--sequence
           - funnel--sort
           - gears
+          - global-filters
+          - graph-aggregator
           - image--search
           - image--search--alt
           - infinity-symbol
@@ -510,8 +517,10 @@ categories:
           - translate
           - transpose
           - undo
+          - update-complete
           - update-now
           - upgrade
+          - vertical--fold
           - view-next
           - workspace--import
           - x-axis
@@ -546,6 +555,8 @@ categories:
           - microphone--filled
           - microphone--off
           - microphone--off--filled
+          - minimap-off
+          - minimap-on
           - notification
           - notification--filled
           - notification--new
@@ -574,6 +585,10 @@ categories:
           - star
           - star--filled
           - star--half
+          - toggle--off--fill
+          - toggle--on--fill
+          - toggle-off
+          - toggle-on
           - thumbnail--1
           - thumbnail--2
           - thumbs-down
@@ -640,6 +655,7 @@ categories:
           - watsonx
       - name: Social
         members:
+          - logo--bluesky
           - logo--digg
           - logo--discord
           - logo--facebook
@@ -667,7 +683,9 @@ categories:
     subcategories:
       - name: AI
         members:
+          - agent-detached
           - AI
+          - ai-agent-invocation
           - ai-business-impact-assessment
           - ai-governance--lifecycle
           - ai-governance--tracked
@@ -676,6 +694,7 @@ categories:
           - ai-label
           - ai-launch
           - ai-recommend
+          - ai--observability
           - business-metrics
           - ibm--granite
           - ibm-watson--discovery
@@ -683,6 +702,7 @@ categories:
           - ibm-watsonx--assistant
           - ibm-watsonx--code-assistant
           - ibm-watsonx--code-assistant-for-z
+          - ibm-watsonx--code-assistant-for-z-understand
           - ibm-watsonx--code-assistant-for-z--refactor
           - ibm-watsonx--orchestrate
           - machine-learning
@@ -719,6 +739,7 @@ categories:
           - cloud-satellite--config
           - cloud-satellite--link
           - cloud-satellite--services
+          - cobol-upgrade-advisor
           - content-delivery-network
           - database--datastax
           - database--elastic
@@ -729,6 +750,7 @@ categories:
           - database--postgreSQL
           - database--rabbit
           - database--redis
+          - Db2-Developer-Extension
           - direct-link
           - dns-services
           - flow-logs-vpc
@@ -753,6 +775,7 @@ categories:
           - ibm--db2-warehouse
           - ibm--db2--alt
           - ibm--deployable-architecture
+          - ibm--devops-test
           - ibm--dynamic-route-server
           - ibm--elo--automotive-compliance
           - ibm--elo--engineering-insights
@@ -806,6 +829,14 @@ categories:
           - ibm--vpn-for-vpc
           - ibm--vsi-on-vpc-for-regulated-industries
           - ibm--wazi-deploy
+          - ibm--webmethods-api-gateway
+          - ibm--webmethods-api-studio
+          - ibm--webmethods-b2b-integration
+          - ibm--webmethods-developer-portal
+          - ibm--webmethods-hybrid-integration
+          - ibm--webmethods-integration-server
+          - ibm--webmethods-integration
+          - ibm--webmethods-managed-file-transfer
           - ibm-cloud--app-id
           - ibm-cloud--backup-and-recovery
           - ibm-cloud--backup-service-vpc
@@ -872,6 +903,8 @@ categories:
           - ibm-cloud-pak--system
           - ibm-cloud-pak--watson-aiops
           - ibm-devops--control
+          - ibm-federated-api-management
+          - ibm-hybrid-control-plane
           - ibm-quantum--safe-advisor
           - ibm-quantum--safe-explorer
           - ibm-quantum--safe-remediator
@@ -911,6 +944,7 @@ categories:
           - mysql
           - power-enterprise-pools-metered-capacity-integration
           - power-virtual-server-disaster-recovery-automation
+          - red-hat-ai-instructlab-on-ibm-cloud
           - scis--control-tower
           - scis--transparent-supply
           - virtual-private-cloud--alt
@@ -1076,6 +1110,7 @@ categories:
           - pills--subtract
           - pointer-text
           - QC-launch
+          - reading--glasses
           - region-analysis--area
           - region-analysis--volume
           - registration
@@ -1249,6 +1284,7 @@ categories:
           - chart--combo
           - chart--combo-stacked
           - chart--custom
+          - chart--donut
           - chart--dual-y-axis
           - chart--error-bar
           - chart--error-bar--alt
@@ -1322,8 +1358,10 @@ categories:
           - data-class
           - data-collection
           - data-definition
+          - data-dictionary
           - data-enrichment
           - data-enrichment--add
+          - data-glossary
           - data-player
           - data-quality-definition
           - data-refinery
@@ -1355,6 +1393,7 @@ categories:
           - flow--data
           - flow--modeler
           - flow--modeler--reference
+          - flow--sequence
           - flow--stream
           - flow--stream--reference
           - global-loan-and-trial
@@ -1381,12 +1420,14 @@ categories:
           - kubernetes--pod
           - linux
           - linux--alt
+          - list-tree
           - managed-solutions
           - marginal
           - math-curve
           - model-builder
           - model-builder--reference
           - name-space
+          - naming-conventions
           - network--1
           - network--2
           - network--3
@@ -1440,6 +1481,7 @@ categories:
           - surrogate--key-flat-file
           - sys-provision
           - table
+          - table--add
           - table--alias
           - table--built
           - table--shortcut
@@ -1451,6 +1493,7 @@ categories:
           - text-mining
           - text-mining--applier
           - time-plot
+          - trace
           - transform--binary
           - transform--code
           - transform--instructions
@@ -1461,6 +1504,7 @@ categories:
           - types
           - upstream
           - value--variable
+          - value--variable--alt
           - virtual-column
           - virtual-column--key
           - virtual-machine
@@ -1472,6 +1516,7 @@ categories:
         members:
           - 4K
           - 4K--filled
+          - ASM
           - api
           - api--key
           - API--1
@@ -1481,6 +1526,8 @@ categories:
           - badge
           - base-document-set
           - book
+          - C
+          - CPlusPlus
           - CAD
           - catalog
           - categories
@@ -1489,6 +1536,7 @@ categories:
           - category--and
           - category--new
           - category--new-each
+          - CBL
           - CDA
           - certificate
           - certificate--check
@@ -1550,6 +1598,7 @@ categories:
           - folder--open
           - folder--parent
           - folder--shared
+          - folder--tree
           - folders
           - gamification
           - gem
@@ -1567,6 +1616,8 @@ categories:
           - ISO
           - ISO--filled
           - ISO--outline
+          - JAVA
+          - JCL
           - JPG
           - JSON
           - JSON--reference
@@ -1604,6 +1655,7 @@ categories:
           - PDF--reference
           - plan
           - playlist
+          - PLI
           - PNG
           - policy
           - popup
@@ -1626,6 +1678,7 @@ categories:
           - result
           - result--new
           - result--old
+          - REXX
           - scale
           - script
           - script--reference
@@ -1714,7 +1767,6 @@ categories:
           - locked-and-blocked
           - misuse
           - misuse--outline
-          - notifications-paused
           - pending
           - pending--filled
           - queued
@@ -1764,6 +1816,7 @@ categories:
           - box--large
           - box--medium
           - box--small
+          - bsam-qsam-zedc
           - cics--cmas
           - cics--db2-connection
           - cics--program
@@ -1776,6 +1829,7 @@ categories:
           - cics-region--routing
           - cics-region--target
           - cicsplex
+          - classic-batch
           - cloud--alerting
           - cloud--data-ops
           - cloud-services
@@ -1796,6 +1850,7 @@ categories:
           - container-image--push
           - container-image--push-pull
           - container-services
+          - coupling-facility-encryption
           - data--center
           - data-accessor
           - data-backup
@@ -1815,6 +1870,8 @@ categories:
           - deployment-unit--technical--execution
           - deployment-unit--technical--installation
           - deployment-unit--technical--presentation
+          - dfsort-ibm-z-sort
+          - digital--identity
           - directory-domain
           - edge-node--alt
           - element-picker
@@ -1822,6 +1879,7 @@ categories:
           - enumeration--definition
           - enumeration--usage
           - executable-program
+          - extensions
           - feature-membership
           - feature-membership--filled
           - feature-picker
@@ -1902,6 +1960,7 @@ categories:
           - network--overlay
           - network--public
           - object-storage--alt
+          - orchestrate
           - package-node
           - part--definition
           - part--usage
@@ -1910,16 +1969,20 @@ categories:
           - pcn--p-node
           - pcn--z-node
           - perform--action
+          - platform-automation
           - point-of-presence
           - port--definition
           - port--usage
+          - private-network
           - property-relationship
           - redefinition
           - requirement--definition
           - requirement--usage
+          - remote-connection
           - router
           - router--voice
           - router--wifi
+          - run-view-icon
           - satisfy--definition
           - satisfy--usage
           - screen-map
@@ -1935,6 +1998,7 @@ categories:
           - software-resource
           - software-resource--cluster
           - software-resource--resource
+          - source-control
           - subclassification
           - subject--definition
           - subject--usage
@@ -1949,6 +2013,8 @@ categories:
           - spyre-accelerator
           - tcp-ip-service
           - terminal--3270
+          - top-data-sets
+          - top-programs
           - tsq
           - two-factor-authentication
           - usage--included-use-case
@@ -1971,6 +2037,7 @@ categories:
           - wifi--not-secure
           - wifi--secure
           - workflow-automation
+          - z-HyperLink
           - z--lpar
           - z--systems
           - zos
@@ -2165,6 +2232,7 @@ categories:
           - earth--southeast-asia
           - earth--southeast-asia--filled
           - fire
+          - fire--fill
           - flagging-taxi
           - flight--international
           - flight--roster
@@ -2400,6 +2468,9 @@ categories:
           - airplay
           - airplay--filled
           - aperture
+          - array-decimal
+          - array-files
+          - array-users
           - array--booleans
           - array--dates
           - array--numbers
@@ -2529,6 +2600,7 @@ categories:
           - share
           - signal-strength
           - sim-card
+          - Serverless-Fleet
           - service-id
           - tablet
           - tablet--landscape
@@ -2536,6 +2608,7 @@ categories:
           - transmission-lte
           - trigger
           - USB
+          - vintage-mac
           - voicemail
           - VPN
           - watch

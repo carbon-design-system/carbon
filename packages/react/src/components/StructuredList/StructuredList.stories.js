@@ -36,13 +36,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const Default = (args) => {
@@ -86,12 +79,12 @@ Default.args = {
   isFlush: false,
 };
 
-Default.argTypes = {
-  selection: {
-    control: {
-      disable: true,
-    },
+Default.parameters = {
+  controls: {
+    exclude: ['selection'],
   },
+};
+Default.argTypes = {
   isCondensed: {
     control: {
       type: 'boolean',
@@ -166,31 +159,15 @@ export const InitialSelection = (args) => {
   );
 };
 
-Selection.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    control: {
-      disable: true,
-    },
+const sharedParameters = {
+  controls: {
+    exclude: ['isFlush', 'selection'],
   },
 };
 
-InitialSelection.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    control: {
-      disable: true,
-    },
-  },
-};
+Selection.parameters = { ...sharedParameters };
+
+InitialSelection.parameters = { ...sharedParameters };
 
 export const WithBackgroundLayer = () => {
   return (
@@ -211,18 +188,7 @@ export const WithBackgroundLayer = () => {
   );
 };
 
-WithBackgroundLayer.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    control: {
-      disable: true,
-    },
-  },
-};
+WithBackgroundLayer.parameters = { ...sharedParameters };
 
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
@@ -234,37 +200,13 @@ Skeleton.args = {
   rowCount: 5,
 };
 
+Skeleton.parameters = {
+  controls: {
+    include: ['rowCount', 'selectedInitialRow'],
+  },
+};
+
 Skeleton.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  isCondensed: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    table: {
-      disable: true,
-    },
-  },
   rowCount: {
     control: {
       type: 'number',

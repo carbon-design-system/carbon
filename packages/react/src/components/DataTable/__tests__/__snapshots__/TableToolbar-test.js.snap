@@ -1,10 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`TableToolbar renders as expected - Component API should render 1`] = `
 <div>
   <section
     aria-label="data table toolbar"
     class="cds--table-toolbar"
+    role="group"
   />
 </div>
 `;

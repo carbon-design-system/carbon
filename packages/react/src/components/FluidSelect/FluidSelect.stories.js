@@ -21,7 +21,7 @@ import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidSelect.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidSelect',
+  title: 'Components/Fluid Components/FluidSelect',
   component: FluidSelect,
   subcomponents: {
     FluidSelectSkeleton,
@@ -30,34 +30,11 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['defaultValue', 'id'],
+    },
   },
   argTypes: {
-    onChange: {
-      action: 'onChange',
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-    defaultValue: {
-      table: {
-        disable: true,
-      },
-    },
-    id: {
-      table: {
-        disable: true,
-      },
-    },
     light: {
       table: {
         disable: true,

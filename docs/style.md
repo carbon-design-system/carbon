@@ -74,7 +74,7 @@ row before the </tbody></table> line.
     - [Hooks that use a callback](#hooks-that-use-a-callback)
   - [Style](#style-1)
     - [Naming event handlers](#naming-event-handlers)
-    - [Naming experimental code](#naming-experimental-code)
+    - [Naming preview code](#naming-preview-code)
   - [Testing](#testing)
     - [Strategy](#strategy)
     - [Organization](#organization)
@@ -367,24 +367,33 @@ For component translation, you will need to define a map of translation ids and
 their corresponding default values, along with a default `translateWithId` prop.
 For example:
 
-```js
-const translationIds = {
+```tsx
+const translationIds = [
+  'carbon.component-name.field',
+  'carbon.component-name.other-field',
+] as const;
+
+type TranslationKey = (typeof translationIds)[number];
+
+const defaultTranslations: Record<TranslationKey, string> = {
   'carbon.component-name.field': 'Default value',
   'carbon.component-name.other-field': 'Other value',
 };
 
-function translateWithId(messageId) {
-  return translationIds[messageId];
-}
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
-function MyComponent({ translateWithId: t = translateWithId }) {
+const MyComponent = ({
+  translateWithId: t = defaultTranslateWithId,
+}: MyComponentProps) => {
   return (
     <>
-      <span>t('carbon.component-name.field')</span>
-      <span>t('carbon.component-name.other-field')</span>
+      <span>{t('carbon.component-name.field')}</span>
+      <span>{t('carbon.component-name.other-field')}</span>
     </>
   );
-}
+};
 ```
 
 The `id`s used in `translationIds` should be consistent between major versions.
@@ -402,8 +411,10 @@ For example, when working with something that can be sorted in ascending or
 descending order you could create two message ids and choose, based on state,
 which one to use.
 
-```jsx
-function MyComponent({ translateWithId: t = translateWithId }) {
+```tsx
+const MyComponent = ({
+  translateWithId: t = defaultTranslateWithId,
+}: MyComponentProps) => {
   const [sortDirection, setSortDirection] = useState('ASC');
 
   function onClick() {
@@ -424,14 +435,16 @@ function MyComponent({ translateWithId: t = translateWithId }) {
       <button onClick={onClick}>t('carbon.component-name.toggle-sort')</button>
     </>
   );
-}
+};
 ```
 
 If the message depends on a state value, for example a count, then you should
 pass along this information as a state argument to `translateWithId`.
 
 ```jsx
-function MyComponent({ translateWithId: t = translateWithId }) {
+const MyComponent = ({
+  translateWithId: t = defaultTranslateWithId,
+}: MyComponentProps) => {
   const [count, updateCount] = useState(0);
   const translationState = {
     count,
@@ -448,7 +461,7 @@ function MyComponent({ translateWithId: t = translateWithId }) {
       </button>
     </>
   );
-}
+};
 ```
 
 #### Using `useCallback` and `useMemo`
@@ -630,9 +643,9 @@ shorthand. If that name is already being used in a given scope, which often
 happens if the component supports a prop `onClick`, then we prefer to specify
 the function as `handleOnClick`.
 
-#### Naming experimental code
+#### Naming preview code
 
-See [Experimental Code](./experimental-code.md#naming-experimental-code);
+See [preview Code](./preview-code.md#naming-preview-code);
 
 ### Testing
 
@@ -845,8 +858,8 @@ Authoring component styles under a mixin allows the design system to:
 
 - Control when the CSS for accordion gets emitted, or not emitted, from the
   library
-- Allows us to author experimental or future styles in a separate mixin and
-  toggle its inclusion through feature flags
+- Allows us to author preview or future styles in a separate mixin and toggle
+  its inclusion through feature flags
 - Could allow developers consuming the design system to control when styles get
   emitted
 

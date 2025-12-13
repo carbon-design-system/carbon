@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`DataTable behaves as expected selection -- radio buttons should not have select-all checkbox 1`] = `
 <div>
@@ -8,18 +8,22 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r7g»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_7g_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r7g»-title"
+        aria-labelledby="tc-_r_7g_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -182,18 +186,22 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r77»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_77_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r77»-title"
+        aria-labelledby="tc-_r_77_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -356,16 +364,21 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r2k»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_2k_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
@@ -532,9 +545,8 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             class="cds--search-input"
             id="custom-id"
             placeholder="Filter table"
-            role="searchbox"
             tabindex="0"
-            type="text"
+            type="search"
             value=""
           />
           <button
@@ -571,7 +583,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-«r2t»"
+                aria-labelledby="tooltip-_r_2t_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -600,7 +612,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-«r2t»"
+              id="tooltip-_r_2t_"
               role="tooltip"
             >
               <span
@@ -626,7 +638,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r2k»-title"
+        aria-labelledby="tc-_r_2k_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -801,16 +813,21 @@ exports[`DataTable renders as expected - Component API should render and match s
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«re»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with toolbar
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_e_-title"
+        >
+          DataTable with toolbar
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
@@ -965,9 +982,8 @@ exports[`DataTable renders as expected - Component API should render and match s
             class="cds--search-input"
             id="custom-id"
             placeholder="Filter table"
-            role="searchbox"
             tabindex="0"
-            type="text"
+            type="search"
             value=""
           />
           <button
@@ -1004,7 +1020,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-«rm»"
+                aria-labelledby="tooltip-_r_m_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -1033,7 +1049,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-«rm»"
+              id="tooltip-_r_m_"
               role="tooltip"
             >
               <span
@@ -1059,7 +1075,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«re»-title"
+        aria-labelledby="tc-_r_e_-title"
         class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>

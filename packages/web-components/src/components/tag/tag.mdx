@@ -79,7 +79,7 @@ function App() {
           type=${tag.type}
           ?open=${true}
           tag-title=${tag.tagTitle || ''}>
-          ${Asleep16({ slot: 'icon' })} ${tag.text}
+          ${iconLoader(Asleep16, { slot: 'icon' })} ${tag.text}
         </cds-dismissible-tag>
       `
     )}
@@ -139,7 +139,7 @@ function App() {
             id="${tag.id}"
             text="${text || tag.text}"
             size="${size}"
-            >${Asleep16({ slot: 'icon' })}
+            >${iconLoader(Asleep16, { slot: 'icon' })}
           </cds-selectable-tag>`
       )}
     </div>

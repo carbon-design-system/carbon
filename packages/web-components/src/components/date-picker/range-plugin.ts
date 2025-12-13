@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
-import rangePlugin, { Config } from 'flatpickr/dist/plugins/rangePlugin.js';
+import rangePlugin from 'flatpickr/dist/esm/plugins/rangePlugin.js';
+import type { Config } from 'flatpickr/dist/plugins/rangePlugin';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
 import on from '../../globals/mixins/on';
@@ -109,6 +111,7 @@ export default (config: Config): Plugin => {
         const { ignoredFocusElements } = fp.config;
         ignoredFocusElements.push(
           ...ignoredFocusElements
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
             .map((elem) => elem.shadowRoot as any)
             .filter(Boolean)
         );

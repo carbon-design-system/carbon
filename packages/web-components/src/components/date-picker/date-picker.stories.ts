@@ -7,10 +7,11 @@
 
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { INPUT_SIZE } from '../text-input/text-input';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import './date-picker';
 import './date-picker-input-skeleton';
 import '../layer/index';
@@ -33,6 +34,8 @@ const defaultArgs = {
   readonly: false,
   short: false,
   helperText: '',
+  invalid: false,
+  invalidText: '',
   warn: false,
   warnText: '',
   placeholder: 'mm/dd/yyyy',
@@ -56,6 +59,14 @@ const controls = {
   },
   disabled: { control: 'boolean' },
   helperText: { control: 'text' },
+  invalid: {
+    control: 'boolean',
+    description: 'Specify if the currently value is invalid.',
+  },
+  invalidText: {
+    control: 'text',
+    description: 'Message which is displayed if the value is invalid.',
+  },
   maxDate: {
     control: 'text',
     description: 'The maximum date that a user can pick to.',
@@ -118,6 +129,8 @@ export const Default = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     kind,
     maxDate,
     minDate,
@@ -141,6 +154,8 @@ export const Default = {
           label-text="Date Picker label"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -151,6 +166,8 @@ export const Default = {
                 label-text="End date"
                 placeholder="${placeholder}"
                 size="${size}"
+                ?invalid="${invalid}"
+                invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
               </cds-date-picker-input>
@@ -169,6 +186,8 @@ export const RangeWithCalendar = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -191,6 +210,8 @@ export const RangeWithCalendar = {
           label-text="Start date"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -199,6 +220,8 @@ export const RangeWithCalendar = {
           label-text="End date"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -215,6 +238,8 @@ export const RangeWithCalendarWithLayer = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -238,6 +263,8 @@ export const RangeWithCalendarWithLayer = {
             label-text="Start date"
             placeholder="${placeholder}"
             size="${size}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
             ?warn="${warn}"
             warn-text="${warnText}">
           </cds-date-picker-input>
@@ -246,6 +273,8 @@ export const RangeWithCalendarWithLayer = {
             label-text="End date"
             placeholder="${placeholder}"
             size="${size}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
             ?warn="${warn}"
             warn-text="${warnText}">
           </cds-date-picker-input>
@@ -263,6 +292,8 @@ export const Simple = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -284,6 +315,8 @@ export const Simple = {
           placeholder="${placeholder}"
           ?readonly="${readonly}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -300,6 +333,8 @@ export const SimpleWithLayer = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -322,6 +357,8 @@ export const SimpleWithLayer = {
           placeholder="${placeholder}"
           ?readonly="${readonly}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -338,6 +375,8 @@ export const SingleWithCalendar = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -360,6 +399,8 @@ export const SingleWithCalendar = {
           label-text="Date Picker label"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
@@ -376,6 +417,8 @@ export const SingleWithCalendarWithLayer = {
     closeOnSelect,
     disabled,
     dateFormat,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -399,6 +442,8 @@ export const SingleWithCalendarWithLayer = {
             label-text="Date Picker label"
             placeholder="${placeholder}"
             size="${size}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
             ?warn="${warn}"
             warn-text="${warnText}">
           </cds-date-picker-input>
@@ -453,15 +498,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -475,6 +520,8 @@ export const WithAILabel = {
     closeOnSelect,
     dateFormat,
     disabled,
+    invalid,
+    invalidText,
     maxDate,
     minDate,
     placeholder,
@@ -497,6 +544,8 @@ export const WithAILabel = {
           label-text="Date Picker label"
           placeholder="${placeholder}"
           size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
           <cds-ai-label alignment="bottom-left">

@@ -7,8 +7,9 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import ChevronDown20 from '@carbon/icons/lib/chevron--down/20.js';
 import { prefix } from '../../globals/settings';
+import ChevronDown20 from '@carbon/icons/es/chevron--down/20.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './side-nav.scss?lit';
@@ -182,7 +183,7 @@ class CDSSideNavMenu extends FocusMixin(LitElement) {
         <div
           part="expando-icon-container"
           class="${prefix}--side-nav__icon ${prefix}--side-nav__icon--small ${prefix}--side-nav__submenu-chevron">
-          ${ChevronDown20({ part: 'expando-icon' })}
+          ${iconLoader(ChevronDown20, { part: 'expando-icon' })}
         </div>
       </button>
       <ul part="menu-body" class="${prefix}--side-nav__menu">

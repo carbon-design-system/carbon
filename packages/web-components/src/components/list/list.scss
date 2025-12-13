@@ -37,11 +37,11 @@ $css--plex: true !default;
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     ::slotted(#{$prefix}-list-item) {
     position: relative;
+    counter-increment: item;
 
     &::before {
       position: absolute;
       content: counter(item) '.';
-      counter-increment: item;
       inset-inline-start: rem(-24px);
     }
   }
