@@ -10667,17 +10667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-tree@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "css-tree@npm:3.0.0"
-  dependencies:
-    mdn-data: "npm:2.10.0"
-    source-map-js: "npm:^1.0.1"
-  checksum: 10/ab56b8cd1953c3270e95b63540462037b48dc120c4d6f686eeb054bb99acf3bb0a40bff306bb4fc2e077f8d95f5b518067205d577029ab84ba279d75867c4f37
-  languageName: node
-  linkType: hard
-
-"css-tree@npm:^3.0.1":
+"css-tree@npm:^3.0.0, css-tree@npm:^3.0.1":
   version: 3.1.0
   resolution: "css-tree@npm:3.1.0"
   dependencies:
@@ -18031,24 +18021,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdn-data@npm:2.10.0":
-  version: 2.10.0
-  resolution: "mdn-data@npm:2.10.0"
-  checksum: 10/41b6dde00681dc8a45a907836b10735a9bef1731c5d9269dd05e6c25749ec5d0383e4055b71acd8b1905fcb428e4c43235a2601558df361ae42c3e4c6a9aa6ed
-  languageName: node
-  linkType: hard
-
-"mdn-data@npm:2.12.2":
+"mdn-data@npm:2.12.2, mdn-data@npm:^2.0.30":
   version: 2.12.2
   resolution: "mdn-data@npm:2.12.2"
   checksum: 10/854e41715a9358e69f9a530117cd6ca7e71d06176469de8d70b1e629753b6827f5bd730995c16ad3750f3c9bad92230f8e4e178de2b34926b05f5205d27d76af
-  languageName: node
-  linkType: hard
-
-"mdn-data@npm:^2.0.30":
-  version: 2.11.1
-  resolution: "mdn-data@npm:2.11.1"
-  checksum: 10/1d8f3a894a68ae7c5a1ca62f63438c013d4a357c9e5a2320b1d30ef26b9ceb82ff98643b3db13b66f3fd84295aeb584b489ac89489bcf1123cd81518244ac3b0
   languageName: node
   linkType: hard
 
