@@ -44,6 +44,11 @@ export interface FileUploaderDropContainerProps
   labelText?: string;
 
   /**
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
+   */
+  maxFileSize?: number;
+
+  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple?: boolean;
@@ -58,7 +63,7 @@ export interface FileUploaderDropContainerProps
    */
   onAddFiles?: (
     event: React.SyntheticEvent<HTMLElement>,
-    content: { addedFiles: File[] }
+    content: { addedFiles: AddedFile[] }
   ) => void;
 
   /**
@@ -98,6 +103,7 @@ function FileUploaderDropContainer({
   id,
   disabled,
   labelText = 'Add file',
+  maxFileSize,
   multiple = false,
   name,
   onAddFiles = noopFn,
@@ -109,8 +115,8 @@ function FileUploaderDropContainer({
 }: FileUploaderDropContainerProps) {
   const prefix = usePrefix();
   const inputRef = useRef<HTMLInputElement>(null);
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { current: uid } = useRef(id || useId());
+  const generatedId = useId();
+  const { current: uid } = useRef(id || generatedId);
   const [isActive, setActive] = useState(false);
   const dropareaClasses = classNames(
     `${prefix}--file__drop-container`,
@@ -123,17 +129,24 @@ function FileUploaderDropContainer({
   );
 
   /**
-   * Filters the array of added files based on file type restrictions
+   * Filters the array of added files based on file type and size restrictions
    */
   function validateFiles(transferredFiles: AddedFile[]) {
-    if (!accept.length) {
-      return transferredFiles;
-    }
     const acceptedTypes = new Set(accept);
     return transferredFiles.reduce<AddedFile[]>((acc, curr) => {
       const { name, type: mimeType = '' } = curr;
       const fileExtensionRegExp = new RegExp(pattern, 'i');
       const [fileExtension] = name.match(fileExtensionRegExp) ?? [];
+
+      if (maxFileSize && curr.size > maxFileSize) {
+        curr.invalidFileType = true;
+        return acc.concat([curr]);
+      }
+
+      if (!accept.length) {
+        return acc.concat([curr]);
+      }
+
       if (fileExtension === undefined) {
         return acc;
       }
@@ -261,6 +274,11 @@ FileUploaderDropContainer.propTypes = {
    * this control
    */
   labelText: PropTypes.string.isRequired,
+
+  /**
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
+   */
+  maxFileSize: PropTypes.number,
 
   /**
    * Specify if the component should accept multiple files to upload
