@@ -30,8 +30,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--radio-button-group--vertical;
 }
 
-:host(#{$prefix}-radio-button-group[invalid]),
-:host(#{$prefix}-radio-button-group[warn]) {
+:host(#{$prefix}-radio-button-group[invalid]:not([disabled])),
+:host(#{$prefix}-radio-button-group[warn]:not([disabled])) {
   .#{$prefix}--radio-button__validation-msg {
     display: flex;
 
@@ -45,7 +45,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-radio-button-group[invalid]) .#{$prefix}--form-requirement {
+:host(#{$prefix}-radio-button-group[invalid]:not([disabled]))
+  .#{$prefix}--form-requirement {
   color: $text-error;
 }
 
@@ -68,7 +69,11 @@ $css--plex: true !default;
   margin-inline-end: 0;
 }
 
-:host(#{$prefix}-radio-button[invalid]:not([readOnly]))
+:host(
+    #{$prefix}-radio-button[invalid]:not([readOnly]):not([disabled]):not(
+        [disabledItem]
+      )
+  )
   .#{$prefix}--radio-button__appearance {
   border-color: $support-error !important; /* stylelint-disable-line declaration-no-important */
 }
