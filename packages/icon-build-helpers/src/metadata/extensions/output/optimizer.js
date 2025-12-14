@@ -173,10 +173,6 @@ const plugins = [
     name: 'convertColors',
   },
   {
-    name: 'convertPathData',
-    active: false,
-  },
-  {
     name: 'convertTransform',
   },
   {
@@ -217,9 +213,7 @@ const plugins = [
     name: 'removeRasterImages',
     active: false,
   },
-  {
-    name: 'mergePaths',
-  },
+  // mergePaths is disabled due to infinite loop issues in SVGO v4
   {
     name: 'convertShapeToPath',
   },
