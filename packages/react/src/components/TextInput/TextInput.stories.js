@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,6 @@ import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
-import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/TextInput',
@@ -43,9 +42,6 @@ export default {
 };
 
 const sharedArgTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
   className: {
     control: {
       type: 'text',
@@ -113,19 +109,52 @@ const sharedArgTypes = {
       type: 'select',
     },
   },
+  type: {
+    control: {
+      type: 'text',
+    },
+  },
+  id: {
+    control: false,
+    table: {
+      disable: false,
+    },
+  },
+  decorator: {
+    table: {
+      disable: true,
+    },
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  inline: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  enableCounter: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  maxCount: {
+    control: {
+      type: 'number',
+    },
+  },
 };
 
-export const Default = (args) => {
-  return (
-    <div style={{ width: args.defaultWidth }}>
-      <TextInput {...args} id="text-input-1" type="text" />
-    </div>
-  );
-};
-
-Default.args = {
-  defaultWidth: 300,
+const sharedArgs = {
   className: 'input-test-class',
+  id: 'text-input-1',
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText: 'Error message goes here',
@@ -136,44 +165,114 @@ Default.args = {
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
   size: 'md',
+  readOnly: false,
+  inline: false,
+  hideLabel: false,
+  enableCounter: false,
+  maxCount: 10,
+  type: 'text',
+  value: '',
+};
+
+export const Default = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
+
+  return (
+    <div style={{ width: defaultWidth }}>
+      <TextInput {...textInputArgs} />
+    </div>
+  );
+};
+
+Default.args = {
+  ...sharedArgs,
+  defaultWidth: 300,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
 };
 
-export const Fluid = () => {
-  return (
-    <FluidForm>
-      <TextInput type="text" labelText="Text input label" id="text-input-1" />
-    </FluidForm>
-  );
+export const Fluid = (args) => (
+  <FluidForm>
+    <TextInput {...args} />
+  </FluidForm>
+);
+
+Fluid.args = { ...sharedArgs };
+
+Fluid.argTypes = {
+  ...sharedArgTypes,
+  helperText: {
+    control: false,
+    table: { disable: true },
+  },
 };
 
-export const ReadOnly = () => {
-  return (
-    <TextInput
-      labelText="Text input label"
-      helperText="Optional help text"
-      value="This is read only, you can't type more."
-      readOnly
-      id="text-input-1"
-    />
-  );
+export const ReadOnly = (args) => {
+  return <TextInput {...args} />;
 };
 
-export const _WithLayer = () => (
+ReadOnly.args = {
+  ...sharedArgs,
+  defaultValue: "This is read only, you can't type more.",
+  readOnly: true,
+};
+
+ReadOnly.argTypes = {
+  ...sharedArgTypes,
+  readOnly: {
+    control: false,
+    table: { disable: true },
+  },
+  value: {
+    table: { disable: true },
+  },
+  id: {
+    table: { disable: true },
+  },
+  disabled: {
+    control: false,
+    table: { disable: true },
+  },
+  invalid: {
+    control: false,
+    table: { disable: true },
+  },
+  invalidText: {
+    control: false,
+    table: { disable: true },
+  },
+  warn: {
+    control: false,
+    table: { disable: true },
+  },
+  warnText: {
+    control: false,
+    table: { disable: true },
+  },
+  enableCounter: {
+    control: false,
+    table: { disable: true },
+  },
+  maxCount: {
+    control: false,
+    table: { disable: true },
+  },
+};
+
+export const _WithLayer = (args) => (
   <WithLayer>
-    {(layer) => (
-      <TextInput
-        type="text"
-        labelText="Text input label"
-        helperText="Optional help text"
-        id={`text-input-${layer}`}
-      />
-    )}
+    {(layer) => <TextInput {...args} id={`text-input-${layer}`} />}
   </WithLayer>
 );
+
+_WithLayer.args = { ...sharedArgs };
+
+_WithLayer.argTypes = { ...sharedArgTypes };
 
 export const withAILabel = (args) => {
   const aiLabel = (
@@ -221,9 +320,24 @@ export const withAILabel = (args) => {
 withAILabel.argTypes = {
   ...sharedArgTypes,
 };
+withAILabel.args = {
+  ...sharedArgs,
+};
 
-export const Skeleton = () => {
-  return <TextInputSkeleton />;
+export const Skeleton = (args) => <TextInputSkeleton {...args} />;
+
+Skeleton.args = {
+  hideLabel: false,
+};
+
+Skeleton.argTypes = {
+  hideLabel: { control: { type: 'boolean' } },
+};
+
+Skeleton.parameters = {
+  controls: {
+    include: ['hideLabel'],
+  },
 };
 
 // Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960

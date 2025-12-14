@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -55,7 +55,29 @@ const sizes = {
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
-const args = {
+type TextInputStoryArgs = {
+  disabled: boolean;
+  enableCounter: boolean;
+  helperText: string;
+  hideLabel: boolean;
+  inline: boolean;
+  invalid: boolean;
+  invalidText: string;
+  labelText: string;
+  maxCount: number;
+  placeholder: string;
+  playgroundWidth: number;
+  showPasswordVisibilityToggle: boolean;
+  size: INPUT_SIZE;
+  readonly: boolean;
+  type: string;
+  warn: boolean;
+  warnText: string;
+  value: string;
+  onInput: (e: Event) => void;
+};
+
+const sharedArgs: TextInputStoryArgs = {
   disabled: false,
   enableCounter: false,
   helperText: 'Helper text',
@@ -64,7 +86,7 @@ const args = {
   invalid: false,
   invalidText: 'Error message goes here',
   labelText: 'Label text',
-  maxCount: '100',
+  maxCount: 100,
   placeholder: 'Placeholder text',
   playgroundWidth: 300,
   showPasswordVisibilityToggle: false,
@@ -78,7 +100,7 @@ const args = {
   onInput: () => {},
 };
 
-const argTypes = {
+const sharedArgTypes = {
   disabled: {
     control: 'boolean',
     description: 'Disabled (disabled)',
@@ -112,7 +134,7 @@ const argTypes = {
     description: 'Label text (label)',
   },
   maxCount: {
-    control: 'text',
+    control: 'number',
     description: 'Max count (max-count)',
   },
   placeholder: {
@@ -167,86 +189,110 @@ const argTypes = {
   },
 };
 
+const renderTextInput = (args: TextInputStoryArgs, children?: unknown) => html`
+  <cds-text-input
+    ?disabled=${args.disabled}
+    ?enable-counter=${args.enableCounter}
+    helper-text=${ifDefined(args.helperText)}
+    ?hide-label=${args.hideLabel}
+    ?inline=${args.inline}
+    ?invalid=${args.invalid}
+    invalid-text=${ifDefined(args.invalidText)}
+    label=${ifDefined(args.labelText)}
+    max-count=${ifDefined(args.maxCount)}
+    placeholder=${ifDefined(args.placeholder)}
+    ?readonly=${args.readonly}
+    ?show-password-visibility-toggle=${args.showPasswordVisibilityToggle}
+    size=${ifDefined(args.size)}
+    type=${ifDefined(args.type)}
+    .value=${args.value}
+    ?warn=${args.warn}
+    warn-text=${ifDefined(args.warnText)}
+    @input=${args.onInput}>
+    ${children ?? ''}
+  </cds-text-input>
+`;
+
 export const Default = {
-  args,
-  argTypes,
-  render: ({
-    disabled,
-    enableCounter,
-    helperText,
-    hideLabel,
-    inline,
-    invalid,
-    invalidText,
-    labelText,
-    maxCount,
-    placeholder,
-    playgroundWidth,
-    readonly,
-    showPasswordVisibilityToggle,
-    size,
-    type,
-    value,
-    warn,
-    warnText,
-    onInput,
-  }) => html`
-    <div style="width: ${playgroundWidth}px;">
-      <cds-text-input
-        ?disabled="${disabled}"
-        ?enable-counter="${ifDefined(enableCounter)}"
-        helper-text="${ifDefined(helperText)}"
-        ?hide-label="${hideLabel}"
-        ?inline="${inline}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(labelText)}"
-        max-count="${ifDefined(maxCount)}"
-        placeholder="${ifDefined(placeholder)}"
-        ?readonly="${ifDefined(readonly)}"
-        ?show-password-visibility-toggle="${ifDefined(
-          showPasswordVisibilityToggle
-        )}"
-        size="${ifDefined(size)}"
-        type="${ifDefined(type)}"
-        value="${ifDefined(value)}"
-        ?warn="${ifDefined(warn)}"
-        warn-text="${ifDefined(warnText)}"
-        @input="${onInput}">
-      </cds-text-input>
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
+  render: (args: TextInputStoryArgs) => html`
+    <div style="width: ${args.playgroundWidth}px;">
+      ${renderTextInput(args)}
     </div>
   `,
 };
 
 export const ReadOnly = {
-  render: () => html`
-    <cds-text-input
-      value="This is read only, you can't type more."
-      readonly="true"
-      label="Text input label"
-      helper-text="Optional help text">
-    </cds-text-input>
+  args: {
+    ...sharedArgs,
+    readonly: true,
+    labelText: 'Text input label',
+    helperText: 'Optional help text',
+    value: "This is read only, you can't type more.",
+    playgroundWidth: 300,
+  },
+  argTypes: {
+    ...sharedArgTypes,
+    readonly: { table: { disable: true } },
+    invalid: { table: { disable: true } },
+    warn: { table: { disable: true } },
+    enableCounter: { table: { disable: true } },
+    showPasswordVisibilityToggle: { table: { disable: true } },
+  },
+  parameters: {
+    controls: {
+      include: [
+        'labelText',
+        'helperText',
+        'value',
+        'size',
+        'hideLabel',
+        'playgroundWidth',
+      ],
+    },
+  },
+  render: (args: TextInputStoryArgs) => html`
+    <div style="width: ${args.playgroundWidth}px;">
+      <cds-text-input
+        readonly
+        label=${ifDefined(args.labelText)}
+        helper-text=${ifDefined(args.helperText)}
+        size=${ifDefined(args.size)}
+        ?hide-label=${args.hideLabel}
+        .value=${args.value}>
+      </cds-text-input>
+    </div>
   `,
 };
 
 export const Skeleton = {
-  render: () => html` <cds-text-input-skeleton></cds-text-input-skeleton> `,
+  args: { hideLabel: false },
+  argTypes: {
+    hideLabel: { control: 'boolean', description: 'Hide label (hide-label)' },
+  },
+  render: ({ hideLabel }) =>
+    html`<cds-text-input-skeleton
+      ?hide-label=${hideLabel}></cds-text-input-skeleton>`,
 };
 
 export const WithAILabel = {
-  render: () => html`
-    <cds-text-input label="Text input label" helper-text="Optional help text">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-text-input>
-  `,
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
+  render: (args: TextInputStoryArgs) =>
+    renderTextInput(
+      args,
+      html`<cds-ai-label alignment="bottom-left"
+        >${content}${actions}</cds-ai-label
+      >`
+    ),
 };
 
 export const WithLayer = {
-  render: () => html`
-    <sb-template-layers>
-      <cds-text-input label="Text input label" helper-text="Optional help text">
-      </cds-text-input>
-    </sb-template-layers>
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
+  render: (args: TextInputStoryArgs) => html`
+    <sb-template-layers> ${renderTextInput(args)} </sb-template-layers>
   `,
 };
 
