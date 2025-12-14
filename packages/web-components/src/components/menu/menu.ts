@@ -313,7 +313,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     const { isRoot } = this.context;
 
     // const isRoot =  false
-    const { width, height } = this.getBoundingClientRect();
+    const menuElement = this.shadowRoot?.querySelector(`.${prefix}--menu`);
+    const { width, height } = (menuElement ?? this).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
     const axes = {
       x: {
