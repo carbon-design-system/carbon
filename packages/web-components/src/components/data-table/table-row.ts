@@ -360,7 +360,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * The `aria-label` attribute for the `<label>` for selection.
    */
   @property({ attribute: 'selection-label' })
-  selectionLabel = '';
+  selectionLabel = 'Select row';
 
   /**
    * The `name` attribute for the `<input>` for selection.
