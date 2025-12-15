@@ -2160,6 +2160,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "decorator": {
+          "type": "node",
+        },
         "description": {
           "type": "node",
         },
@@ -3613,11 +3616,17 @@ Map {
       "labelTitle": {
         "type": "string",
       },
+      "maxFileSize": {
+        "type": "number",
+      },
       "multiple": {
         "type": "bool",
       },
       "name": {
         "type": "string",
+      },
+      "onAddFiles": {
+        "type": "func",
       },
       "onChange": {
         "type": "func",
@@ -3733,6 +3742,9 @@ Map {
       "labelText": {
         "isRequired": true,
         "type": "string",
+      },
+      "maxFileSize": {
+        "type": "number",
       },
       "multiple": {
         "type": "bool",
@@ -9941,6 +9953,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "decorator": {
+        "type": "node",
       },
       "description": {
         "type": "node",
