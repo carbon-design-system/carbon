@@ -331,6 +331,32 @@ describe('Dropdown', () => {
     assertMenuClosed();
   });
 
+  it('should preserve selectedItem when menu is closed programmatically', async () => {
+    render(
+      <Dropdown {...mockProps} initialSelectedItem={mockProps.items[2]} />
+    );
+
+    await waitForPosition();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+
+    await openMenu();
+    assertMenuOpen(mockProps);
+
+    const button = screen.getByRole('combobox');
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+
+    act(() => {
+      fireEvent.blur(button);
+    });
+
+    await waitForPosition();
+    assertMenuClosed();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
@@ -411,6 +437,142 @@ describe('Dropdown', () => {
   });
 });
 
+describe('Validation states with disabled/readonly', () => {
+  let mockProps;
+
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-dropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      titleText: 'Dropdown label',
+    };
+  });
+
+  it('should not show invalid state when disabled', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} disabled invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--invalid`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Error message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not show invalid state when readonly', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} readOnly invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--invalid`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Error message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not show warning state when disabled', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} disabled warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--warning`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon--warning`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not show warning state when readonly', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} readOnly warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--warning`)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon--warning`)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should show invalid state when interactive', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--invalid`)
+    ).toBeInTheDocument();
+    expect(screen.getByText('Error message')).toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon`)
+    ).toBeInTheDocument();
+  });
+
+  it('should show warning state when interactive', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--dropdown--warning`)
+    ).toBeInTheDocument();
+    expect(screen.getByText('Warning message')).toBeInTheDocument();
+    expect(
+      container.querySelector(`.${prefix}--list-box__invalid-icon--warning`)
+    ).toBeInTheDocument();
+  });
+
+  it('should show helper text instead of validation when disabled', async () => {
+    render(
+      <Dropdown
+        {...mockProps}
+        disabled
+        invalid
+        invalidText="Error"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+    expect(screen.queryByText('Error')).not.toBeInTheDocument();
+  });
+
+  it('should show helper text instead of validation when readonly', async () => {
+    render(
+      <Dropdown
+        {...mockProps}
+        readOnly
+        warn
+        warnText="Warning"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+    expect(screen.queryByText('Warning')).not.toBeInTheDocument();
+  });
+});
+
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
     it('Has the expected classes', () => {
@@ -470,8 +632,8 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_2d_-toggle-button',
-      id: 'downshift-_r_2d_-label',
+      for: 'downshift-_r_27_-toggle-button',
+      id: 'downshift-_r_27_-label',
     });
   });
 
@@ -486,7 +648,7 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_2g_-label',
+      id: 'downshift-_r_29_-label',
     });
   });
 });

@@ -942,6 +942,170 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "syntax-comment",
+          "type": "color",
+        },
+        {
+          "name": "syntax-line-comment",
+          "type": "color",
+        },
+        {
+          "name": "syntax-block-comment",
+          "type": "color",
+        },
+        {
+          "name": "syntax-doc-comment",
+          "type": "color",
+        },
+        {
+          "name": "syntax-doc-string",
+          "type": "color",
+        },
+        {
+          "name": "syntax-keyword",
+          "type": "color",
+        },
+        {
+          "name": "syntax-operator-keyword",
+          "type": "color",
+        },
+        {
+          "name": "syntax-control-keyword",
+          "type": "color",
+        },
+        {
+          "name": "syntax-definition-keyword",
+          "type": "color",
+        },
+        {
+          "name": "syntax-module-keyword",
+          "type": "color",
+        },
+        {
+          "name": "syntax-variable",
+          "type": "color",
+        },
+        {
+          "name": "syntax-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-variable-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-label-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-attribute",
+          "type": "color",
+        },
+        {
+          "name": "syntax-attribute-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-property-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-tag",
+          "type": "color",
+        },
+        {
+          "name": "syntax-tag-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-type",
+          "type": "color",
+        },
+        {
+          "name": "syntax-type-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-class-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-namespace",
+          "type": "color",
+        },
+        {
+          "name": "syntax-macro-name",
+          "type": "color",
+        },
+        {
+          "name": "syntax-atom",
+          "type": "color",
+        },
+        {
+          "name": "syntax-literal",
+          "type": "color",
+        },
+        {
+          "name": "syntax-bool",
+          "type": "color",
+        },
+        {
+          "name": "syntax-null",
+          "type": "color",
+        },
+        {
+          "name": "syntax-self",
+          "type": "color",
+        },
+        {
+          "name": "syntax-number",
+          "type": "color",
+        },
+        {
+          "name": "syntax-integer",
+          "type": "color",
+        },
+        {
+          "name": "syntax-float",
+          "type": "color",
+        },
+        {
+          "name": "syntax-unit",
+          "type": "color",
+        },
+        {
+          "name": "syntax-string",
+          "type": "color",
+        },
+        {
+          "name": "syntax-character",
+          "type": "color",
+        },
+        {
+          "name": "syntax-attribute-value",
+          "type": "color",
+        },
+        {
+          "name": "syntax-special-string",
+          "type": "color",
+        },
+        {
+          "name": "syntax-regexp",
+          "type": "color",
+        },
+        {
+          "name": "syntax-escape",
+          "type": "color",
+        },
+        {
+          "name": "syntax-url",
+          "type": "color",
+        },
+        {
+          "name": "syntax-color",
+          "type": "color",
+        },
+        {
           "name": "ai-popover-background",
           "type": "color",
         },
@@ -1038,11 +1202,23 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "chat-prompt-text",
+          "type": "color",
+        },
+        {
           "name": "chat-bubble-user",
           "type": "color",
         },
         {
+          "name": "chat-bubble-user-text",
+          "type": "color",
+        },
+        {
           "name": "chat-bubble-agent",
+          "type": "color",
+        },
+        {
+          "name": "chat-bubble-agent-text",
           "type": "color",
         },
         {
@@ -1067,6 +1243,10 @@ test('metadata', () => {
         },
         {
           "name": "chat-header-background",
+          "type": "color",
+        },
+        {
+          "name": "chat-header-text",
           "type": "color",
         },
         {

@@ -75,6 +75,13 @@ $colorMap: (
     --cds-button-focus-color: var(--cds-focus);
   }
 
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
+    box-shadow: none;
+  }
+}
+
+:host(#{$prefix}-ai-label[open]) {
   .#{$prefix}--popover-caret {
     background: transparent;
     clip-path: none;
@@ -100,11 +107,6 @@ $colorMap: (
       content: '';
       inline-size: $spacing-01;
     }
-  }
-
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
-    box-shadow: none;
   }
 }
 

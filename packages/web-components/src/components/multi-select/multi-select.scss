@@ -19,6 +19,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert';
 
 :host(#{$prefix}-multi-select) {
+  box-sizing: border-box;
   outline: none;
 
   .#{$prefix}--assistive-text {
@@ -204,6 +205,13 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
+  }
+}
+
+:host(#{$prefix}-multi-select[ai-label][warn]),
+:host(#{$prefix}-multi-select[ai-label][invalid]) {
+  .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: convert.to-rem(81px);
   }
 }
 
