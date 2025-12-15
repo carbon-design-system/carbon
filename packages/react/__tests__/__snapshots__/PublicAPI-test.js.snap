@@ -2160,6 +2160,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "decorator": {
+          "type": "node",
+        },
         "description": {
           "type": "node",
         },
@@ -9953,6 +9956,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "decorator": {
+        "type": "node",
       },
       "description": {
         "type": "node",
