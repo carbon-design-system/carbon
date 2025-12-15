@@ -36,9 +36,6 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   @query(`${prefix}-button`)
   _triggerNode!: CDSButton;
 
-  @query(`${prefix}-menu`)
-  _menuNode!: CDSMenu;
-
   @property({ type: Boolean, reflect: true })
   private _open = false;
 
@@ -93,11 +90,35 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: Event) => {
+    const { _triggerNode: trigger } = this;
+    if (!trigger) {
+      return;
+    }
+
     const path = event.composedPath();
-    if (path.includes(this._triggerNode)) {
-      this._open = !this._open;
+    if (path.includes(trigger)) {
+      if (this._open) {
+        this._closeMenu({ restoreFocus: true });
+      } else {
+        this._open = true;
+      }
     } else if (this._open) {
-      this._open = false;
+      this._closeMenu();
+    }
+  };
+
+  @HostListener('mousedown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleMousedown = (event: MouseEvent) => {
+    const { _triggerNode: trigger } = this;
+    if (!trigger) {
+      return;
+    }
+
+    const path = event.composedPath();
+    if (path.includes(trigger)) {
+      event.preventDefault();
     }
   };
 
@@ -107,8 +128,44 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     // Close the menu if the focus moves outside the menu button or menu
     if (!this.contains(relatedTarget as Node)) {
-      this._open = false;
+      this._closeMenu({ restoreFocus: true });
     }
+  };
+
+  @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKeydown = (event: KeyboardEvent) => {
+    if (!this._open || event.key !== 'Escape') {
+      return;
+    }
+
+    const { _triggerNode: trigger } = this;
+    if (!trigger) {
+      return;
+    }
+
+    const path = event.composedPath();
+    if (path.includes(trigger)) {
+      event.stopPropagation();
+      event.preventDefault();
+      this._closeMenu({ restoreFocus: true });
+    }
+  };
+
+  @HostListener(`${prefix}-menu-closed`)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleMenuClosed = (
+    event: CustomEvent<{ triggerEventType?: string }>
+  ) => {
+    const menu = this.querySelector(`${prefix}-menu`);
+    if (!menu || event.target !== menu || !this._open) {
+      return;
+    }
+
+    const shouldRestoreFocus = event.detail?.triggerEventType !== 'focusout';
+    this._closeMenu({ restoreFocus: shouldRestoreFocus });
   };
 
   updated(changedProperties) {
@@ -164,6 +221,28 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   }
 
   static styles = styles;
+
+  private _closeMenu({
+    restoreFocus = false,
+  }: { restoreFocus?: boolean } = {}) {
+    if (!this._open) {
+      return;
+    }
+
+    this._open = false;
+
+    if (restoreFocus) {
+      this._focusTrigger();
+    }
+  }
+
+  private _focusTrigger() {
+    if (!this._triggerNode || typeof this._triggerNode.focus !== 'function') {
+      return;
+    }
+
+    this._triggerNode.focus();
+  }
 }
 
 export default CDSMenuButton;

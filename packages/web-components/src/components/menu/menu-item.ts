@@ -21,6 +21,7 @@ import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
+export const MENU_CLOSE_ROOT_EVENT = `${prefix}-menu-close-root-request`;
 
 /**
  * Menu Item.
