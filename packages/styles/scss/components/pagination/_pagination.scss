@@ -303,4 +303,13 @@
   [dir='rtl'] .#{$prefix}--pagination .#{$prefix}--select__arrow {
     transform: translate(0.5rem, -50%);
   }
+  // Override for disabled select inputs to maintain layer background color
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input[disabled],
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input[disabled]:hover {
+    background-color: $layer;
+  }
 }

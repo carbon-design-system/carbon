@@ -18,6 +18,10 @@
 /// @access public
 /// @group multi-select
 @mixin multiselect {
+  .#{$prefix}--multi-select {
+    box-sizing: border-box;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__field--wrapper {
     display: inline-flex;
     align-items: center;
