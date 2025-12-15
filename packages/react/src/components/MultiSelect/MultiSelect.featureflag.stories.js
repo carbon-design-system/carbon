@@ -21,6 +21,29 @@ export default {
       </WithFeatureFlags>
     ),
   ],
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+    direction: {
+      options: ['top', 'bottom'],
+      control: { type: 'radio' },
+    },
+    type: {
+      options: ['inline', 'default'],
+      control: { type: 'radio' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    invalid: {
+      control: { type: 'boolean' },
+    },
+    warn: {
+      control: { type: 'boolean' },
+    },
+  },
 };
 
 const comboBoxItems = [
@@ -51,20 +74,35 @@ const comboBoxItems = [
   },
 ];
 
+const sharedArgs = {
+  size: 'md',
+  autoAlign: false,
+  type: 'default',
+  titleText: 'Multiselect title',
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  warn: false,
+  helperText: 'This is helper text',
+  warnText: 'whoopsie!',
+  invalidText: 'whoopsie!',
+  label: 'Multiselect Label',
+  clearSelectionDescription: 'Total items selected: ',
+  useTitleInItem: false,
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+};
 export const FloatingStyles = (args) => (
   <MultiSelect
-    label="Multiselect Label"
     id="carbon-multiselect-example"
-    titleText="Multiselect title"
-    helperText="This is helper text"
     items={comboBoxItems}
-    direction={args.direction}
     itemToString={(item) => (item ? item.text : '')}
     selectionFeedback="top-after-reopen"
+    {...args}
   />
 );
 
 FloatingStyles.args = {
+  ...sharedArgs,
   direction: 'bottom',
 };
 
