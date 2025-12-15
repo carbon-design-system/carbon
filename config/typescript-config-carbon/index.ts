@@ -7,7 +7,7 @@
 import path from 'path';
 import ts from 'typescript';
 
-const tsConfigFile = path.join(__dirname, 'tsconfig.base.json');
+const tsConfigFile = path.resolve(__dirname, '../tsconfig.base.json');
 
 export const diagnosticToMessage = (diagnostic: ts.Diagnostic) => {
   const { file, messageText } = diagnostic;

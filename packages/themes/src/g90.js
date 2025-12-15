@@ -15,6 +15,7 @@ import {
   // Gray
   gray10,
   gray10Hover,
+  gray20,
   gray30,
   gray40,
   gray50,
@@ -32,6 +33,8 @@ import {
   // Support
   blue30,
   blue50,
+  green30,
+  cyan40,
   green40,
   green50,
   yellow30,
@@ -42,6 +45,7 @@ import {
   purple40,
   purple50,
   purple60,
+  teal30,
 
   // Constants
   white,
@@ -213,6 +217,49 @@ export const overlay = rgba(black, 0.6);
 export const toggleOff = gray50;
 export const shadow = rgba(black, 0.8);
 
+// Syntax highlighting
+export const syntaxComment = green40;
+export const syntaxLineComment = syntaxComment;
+export const syntaxBlockComment = syntaxComment;
+export const syntaxDocComment = syntaxComment;
+export const syntaxString = textPrimary;
+export const syntaxDocString = syntaxString;
+export const syntaxKeyword = blue50;
+export const syntaxOperatorKeyword = syntaxKeyword;
+export const syntaxControlKeyword = purple40;
+export const syntaxDefinitionKeyword = cyan40;
+export const syntaxModuleKeyword = purple40;
+export const syntaxVariable = blue30;
+export const syntaxName = syntaxVariable;
+export const syntaxVariableName = syntaxVariable;
+export const syntaxLabelName = syntaxVariable;
+export const syntaxAttribute = cyan40;
+export const syntaxAttributeName = syntaxAttribute;
+export const syntaxPropertyName = syntaxAttribute;
+export const syntaxTag = teal30;
+export const syntaxTagName = syntaxTag;
+export const syntaxType = teal30;
+export const syntaxTypeName = syntaxType;
+export const syntaxClassName = syntaxType;
+export const syntaxNamespace = syntaxType;
+export const syntaxMacroName = textPrimary;
+export const syntaxAtom = syntaxMacroName;
+export const syntaxLiteral = syntaxAtom;
+export const syntaxBool = syntaxAtom;
+export const syntaxNull = syntaxAtom;
+export const syntaxSelf = syntaxTag;
+export const syntaxNumber = green30;
+export const syntaxInteger = syntaxNumber;
+export const syntaxFloat = syntaxNumber;
+export const syntaxUnit = syntaxNumber;
+export const syntaxCharacter = syntaxString;
+export const syntaxAttributeValue = syntaxString;
+export const syntaxSpecialString = purple40;
+export const syntaxRegexp = purple40;
+export const syntaxEscape = gray20;
+export const syntaxUrl = syntaxEscape;
+export const syntaxColor = syntaxMacroName;
+
 //// AI - Experimental (Use at your own risk)
 //// Phase 2 - new \\\\
 // Shared
@@ -250,14 +297,18 @@ export const aiPopoverCaretBottomBackground = '#202D45';
 export const chatPromptBackground = gray100;
 export const chatPromptBorderStart = gray90;
 export const chatPromptBorderEnd = rgba(gray90, 0);
+export const chatPromptText = textPrimary;
 export const chatBubbleUser = gray80;
+export const chatBubbleUserText = textPrimary;
 export const chatBubbleAgent = gray90;
+export const chatBubbleAgentText = textPrimary;
 export const chatBubbleBorder = gray70;
 export const chatAvatarBot = gray50;
 export const chatAvatarAgent = gray30;
 export const chatAvatarUser = blue50;
 export const chatShellBackground = gray90;
 export const chatHeaderBackground = gray90;
+export const chatHeaderText = textPrimary;
 
 // Chat button tokens
 export const chatButton = linkPrimary;

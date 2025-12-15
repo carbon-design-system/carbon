@@ -44,7 +44,7 @@ const ExampleDropContainerApp = (props) => {
         iconDescription: 'Delete file',
         invalid: true,
         errorSubject: 'File size exceeds limit',
-        errorBody: '500 KB max file size. Select a new file and try again.',
+        errorBody: '1 MB max file size. Select a new file and try again.',
       };
       setFiles((files) =>
         files.map((file) =>
@@ -148,7 +148,7 @@ const ExampleDropContainerApp = (props) => {
     <FormItem>
       <p className={labelClasses}>Upload files</p>
       <p className={helperTextClasses}>
-        Max file size is 500 KB. Supported file types are .jpg and .png.
+        Max file size is 1 MB. Supported file types are .jpg and .png.
       </p>
       <FileUploaderDropContainer
         {...props}

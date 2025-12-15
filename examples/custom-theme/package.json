@@ -28,8 +28,8 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "4.0.0",
+    "@vitejs/plugin-react": "^5.1.1",
     "sass": "^1.93.2",
-    "vite": "^6.3.5"
+    "vite": "^7.2.4"
   }
 }

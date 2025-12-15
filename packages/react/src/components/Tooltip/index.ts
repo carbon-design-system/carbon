@@ -5,7 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { DefinitionTooltip } from './DefinitionTooltip';
+import {
+  DefinitionTooltip,
+  type DefinitionTooltipProps,
+} from './DefinitionTooltip';
 import { Tooltip, type TooltipProps } from './Tooltip';
 
-export { DefinitionTooltip, Tooltip, type TooltipProps };
+export {
+  DefinitionTooltip,
+  Tooltip,
+  type DefinitionTooltipProps,
+  type TooltipProps,
+};
+export default Tooltip;
