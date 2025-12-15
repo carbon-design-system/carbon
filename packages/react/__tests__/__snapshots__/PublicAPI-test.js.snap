@@ -661,6 +661,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "fluid": {
+        "type": "bool",
+      },
       "stacked": {
         "type": "bool",
       },
@@ -2157,6 +2160,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "decorator": {
+          "type": "node",
+        },
         "description": {
           "type": "node",
         },
@@ -3610,11 +3616,17 @@ Map {
       "labelTitle": {
         "type": "string",
       },
+      "maxFileSize": {
+        "type": "number",
+      },
       "multiple": {
         "type": "bool",
       },
       "name": {
         "type": "string",
+      },
+      "onAddFiles": {
+        "type": "func",
       },
       "onChange": {
         "type": "func",
@@ -3730,6 +3742,9 @@ Map {
       "labelText": {
         "isRequired": true,
         "type": "string",
+      },
+      "maxFileSize": {
+        "type": "number",
       },
       "multiple": {
         "type": "bool",
@@ -6193,6 +6208,18 @@ Map {
   "Menu" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "children": {
         "type": "node",
       },
@@ -6307,6 +6334,18 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "menuBackgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "menuBorder": {
+        "type": "bool",
       },
       "menuTarget": {
         "args": [
@@ -8257,6 +8296,12 @@ Map {
       "id": {
         "type": "string",
       },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
       "labelPosition": {
         "args": [
           [
@@ -8279,6 +8324,9 @@ Map {
       "onClick": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
       "required": {
         "type": "bool",
       },
@@ -8295,6 +8343,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -9899,6 +9953,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "decorator": {
+        "type": "node",
       },
       "description": {
         "type": "node",
@@ -11826,7 +11883,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -13994,7 +14050,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -15730,5 +15785,6 @@ Map {
   "usePrefersDarkScheme" => {},
   "usePrefix" => {},
   "useTheme" => {},
+  "validateNumberSeparators" => {},
 }
 `;

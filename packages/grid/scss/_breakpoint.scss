@@ -25,7 +25,7 @@
 /// Get the value of the next breakpoint, or null for the last breakpoint
 /// @param {String} $name - The name of the breakpoint
 /// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
-/// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
+/// @param {List} $breakpoint-names [map.keys($breakpoints)] - A list of names from the `$breakpoints` map
 /// @return {String}
 /// @access public
 /// @group @carbon/layout
@@ -44,7 +44,7 @@
 /// Get the value of the previous breakpoint, or null for the first breakpoint
 /// @param {String} $name - The name of the breakpoint
 /// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
-/// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
+/// @param {List} $breakpoint-names [map.keys($breakpoints)] - A list of names from the `$breakpoints` map
 /// @return {String}
 /// @access public
 /// @group @carbon/layout

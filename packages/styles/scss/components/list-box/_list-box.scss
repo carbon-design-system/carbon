@@ -885,8 +885,6 @@ $list-box-menu-width: convert.to-rem(300px);
   // When handling input, we need to target nodes that specifically opt-in to
   // the type text in order to make sure the text input is styled
   // correctly.
-  // TODO: remove [role='combobox'] in v11
-  .#{$prefix}--list-box input[role='combobox'],
   .#{$prefix}--list-box input[type='text'] {
     background-color: inherit;
     min-inline-size: 0;
@@ -952,7 +950,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
     display: block;
-    inset-block-start: 0;
+    inset-block-start: convert.to-rem(1px);
     inset-inline-end: convert.to-rem(-9px);
   }
 
@@ -1128,6 +1126,13 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--slug {
+    inset-inline-end: calc($spacing-10 + 18px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--list-box__inner-wrapper--decorator
+    > * {
     inset-inline-end: calc($spacing-10 + 18px);
   }
 
