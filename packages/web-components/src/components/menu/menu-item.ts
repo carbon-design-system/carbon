@@ -214,9 +214,23 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
     if (this.hasSubmenu) {
       this._openSubmenu();
-    } else if (e.type === 'keydown') {
-      this.click();
+      return;
     }
+
+    if (e.type === 'keydown') {
+      this.click();
+      return;
+    }
+
+    this.dispatchEvent(
+      new CustomEvent(MENU_CLOSE_ROOT_EVENT, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          triggerEvent: e,
+        },
+      })
+    );
   };
   _handleMouseEnter = () => {
     this.hoverIntentTimeout = setTimeout(() => {

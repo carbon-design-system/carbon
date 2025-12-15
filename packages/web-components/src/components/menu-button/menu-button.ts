@@ -128,7 +128,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     // Close the menu if the focus moves outside the menu button or menu
     if (!this.contains(relatedTarget as Node)) {
-      this._closeMenu({ restoreFocus: true });
+      this._closeMenu();
     }
   };
 
