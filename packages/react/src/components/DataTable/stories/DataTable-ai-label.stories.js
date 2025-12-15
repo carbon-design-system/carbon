@@ -510,6 +510,7 @@ export const FullTableAI = (args) => (
       getCellProps,
     }) => (
       <TableContainer
+        decorator={aiLabel}
         aiEnabled
         title="DataTable"
         description="AI, full table"
