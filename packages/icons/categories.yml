@@ -368,6 +368,7 @@ categories:
           - choose-item
           - circle-dash
           - clean
+          - cloud--infra-migration
           - collapse-all
           - collapse-categories
           - commit
@@ -554,6 +555,8 @@ categories:
           - microphone--filled
           - microphone--off
           - microphone--off--filled
+          - minimap-off
+          - minimap-on
           - notification
           - notification--filled
           - notification--new
@@ -582,6 +585,10 @@ categories:
           - star
           - star--filled
           - star--half
+          - toggle--off--fill
+          - toggle--on--fill
+          - toggle-off
+          - toggle-on
           - thumbnail--1
           - thumbnail--2
           - thumbs-down
@@ -676,7 +683,9 @@ categories:
     subcategories:
       - name: AI
         members:
+          - agent-detached
           - AI
+          - ai-agent-invocation
           - ai-business-impact-assessment
           - ai-governance--lifecycle
           - ai-governance--tracked
@@ -685,6 +694,7 @@ categories:
           - ai-label
           - ai-launch
           - ai-recommend
+          - ai--observability
           - business-metrics
           - ibm--granite
           - ibm-watson--discovery
@@ -692,6 +702,7 @@ categories:
           - ibm-watsonx--assistant
           - ibm-watsonx--code-assistant
           - ibm-watsonx--code-assistant-for-z
+          - ibm-watsonx--code-assistant-for-z-understand
           - ibm-watsonx--code-assistant-for-z--refactor
           - ibm-watsonx--orchestrate
           - machine-learning
@@ -728,6 +739,7 @@ categories:
           - cloud-satellite--config
           - cloud-satellite--link
           - cloud-satellite--services
+          - cobol-upgrade-advisor
           - content-delivery-network
           - database--datastax
           - database--elastic
@@ -738,6 +750,7 @@ categories:
           - database--postgreSQL
           - database--rabbit
           - database--redis
+          - Db2-Developer-Extension
           - direct-link
           - dns-services
           - flow-logs-vpc
@@ -762,6 +775,7 @@ categories:
           - ibm--db2-warehouse
           - ibm--db2--alt
           - ibm--deployable-architecture
+          - ibm--devops-test
           - ibm--dynamic-route-server
           - ibm--elo--automotive-compliance
           - ibm--elo--engineering-insights
@@ -930,6 +944,7 @@ categories:
           - mysql
           - power-enterprise-pools-metered-capacity-integration
           - power-virtual-server-disaster-recovery-automation
+          - red-hat-ai-instructlab-on-ibm-cloud
           - scis--control-tower
           - scis--transparent-supply
           - virtual-private-cloud--alt
@@ -1269,6 +1284,7 @@ categories:
           - chart--combo
           - chart--combo-stacked
           - chart--custom
+          - chart--donut
           - chart--dual-y-axis
           - chart--error-bar
           - chart--error-bar--alt
@@ -1342,8 +1358,10 @@ categories:
           - data-class
           - data-collection
           - data-definition
+          - data-dictionary
           - data-enrichment
           - data-enrichment--add
+          - data-glossary
           - data-player
           - data-quality-definition
           - data-refinery
@@ -1375,6 +1393,7 @@ categories:
           - flow--data
           - flow--modeler
           - flow--modeler--reference
+          - flow--sequence
           - flow--stream
           - flow--stream--reference
           - global-loan-and-trial
@@ -1408,6 +1427,7 @@ categories:
           - model-builder
           - model-builder--reference
           - name-space
+          - naming-conventions
           - network--1
           - network--2
           - network--3
@@ -1461,6 +1481,7 @@ categories:
           - surrogate--key-flat-file
           - sys-provision
           - table
+          - table--add
           - table--alias
           - table--built
           - table--shortcut
@@ -1472,6 +1493,7 @@ categories:
           - text-mining
           - text-mining--applier
           - time-plot
+          - trace
           - transform--binary
           - transform--code
           - transform--instructions
@@ -1494,6 +1516,7 @@ categories:
         members:
           - 4K
           - 4K--filled
+          - ASM
           - api
           - api--key
           - API--1
@@ -1503,6 +1526,8 @@ categories:
           - badge
           - base-document-set
           - book
+          - C
+          - CPlusPlus
           - CAD
           - catalog
           - categories
@@ -1511,6 +1536,7 @@ categories:
           - category--and
           - category--new
           - category--new-each
+          - CBL
           - CDA
           - certificate
           - certificate--check
@@ -1590,6 +1616,8 @@ categories:
           - ISO
           - ISO--filled
           - ISO--outline
+          - JAVA
+          - JCL
           - JPG
           - JSON
           - JSON--reference
@@ -1627,6 +1655,7 @@ categories:
           - PDF--reference
           - plan
           - playlist
+          - PLI
           - PNG
           - policy
           - popup
@@ -1649,6 +1678,7 @@ categories:
           - result
           - result--new
           - result--old
+          - REXX
           - scale
           - script
           - script--reference
@@ -1943,6 +1973,7 @@ categories:
           - point-of-presence
           - port--definition
           - port--usage
+          - private-network
           - property-relationship
           - redefinition
           - requirement--definition
@@ -2437,6 +2468,9 @@ categories:
           - airplay
           - airplay--filled
           - aperture
+          - array-decimal
+          - array-files
+          - array-users
           - array--booleans
           - array--dates
           - array--numbers
@@ -2574,6 +2608,7 @@ categories:
           - transmission-lte
           - trigger
           - USB
+          - vintage-mac
           - voicemail
           - VPN
           - watch
