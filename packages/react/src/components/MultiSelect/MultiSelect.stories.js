@@ -117,11 +117,6 @@ export default {
     readOnly: {
       control: { type: 'boolean' },
     },
-    placeholder: {
-      control: {
-        type: 'text',
-      },
-    },
   },
   parameters: {
     docs: {
@@ -195,6 +190,24 @@ const sharedArgs = {
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 
+const filterableArgTypes = {
+  label: {
+    control: false,
+    table: {
+      disable: true,
+    },
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    description:
+      'Generic `placeholder` that will be used as the textual representation of what this field is for',
+    table: {
+      type: { summary: 'string' },
+    },
+  },
+};
 export const Default = (args) => {
   const items = [
     {
@@ -339,6 +352,9 @@ export const Filterable = (args) => {
   );
 };
 
+Filterable.args = {
+  placeholder: 'Filter items',
+};
 export const FilterableWithSelectAll = (args) => {
   return (
     <div
@@ -359,18 +375,13 @@ export const FilterableWithSelectAll = (args) => {
 };
 
 FilterableWithSelectAll.args = {
-  ...sharedArgs,
-  label: null,
+  placeholder: 'Filter items',
 };
 FilterableWithSelectAll.argTypes = {
-  label: {
-    control: false,
-    table: {
-      disable: true,
-    },
-  },
+  ...filterableArgTypes,
 };
 Filterable.argTypes = {
+  ...filterableArgTypes,
   onChange: {
     action: 'onChange',
   },
@@ -416,14 +427,11 @@ export const _FilterableWithLayer = (args) => (
   </WithLayer>
 );
 
-_FilterableWithLayer.args = { ...sharedArgs, label: null };
+_FilterableWithLayer.args = {
+  placeholder: 'Filter items',
+};
 _FilterableWithLayer.argTypes = {
-  label: {
-    control: false,
-    table: {
-      disable: true,
-    },
-  },
+  ...filterableArgTypes,
 };
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
@@ -524,7 +532,6 @@ export const SelectAll = (args) => {
   );
 };
 
-SelectAll.args = { ...sharedArgs };
 const aiLabel = (
   <AILabel className="ai-label-container">
     <AILabelContent>
@@ -589,14 +596,11 @@ export const FilterableWithAILabel = (args) => (
   </div>
 );
 
-FilterableWithAILabel.args = { ...sharedArgs, label: null };
+FilterableWithAILabel.args = {
+  placeholder: 'Filter items',
+};
 FilterableWithAILabel.argTypes = {
-  label: {
-    control: false,
-    table: {
-      disable: true,
-    },
-  },
+  ...filterableArgTypes,
 };
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
@@ -722,4 +726,3 @@ export const SelectAllWithDynamicItems = (args) => {
     </div>
   );
 };
-SelectAllWithDynamicItems.args = { ...sharedArgs };
