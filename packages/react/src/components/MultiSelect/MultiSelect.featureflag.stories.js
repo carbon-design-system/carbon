@@ -49,6 +49,26 @@ export default {
       control: { type: 'boolean' },
     },
   },
+    parameters: {
+    controls: {
+      exclude: [
+        'filterItems',
+        'translateWithId',
+        'titleText',
+        'open',
+        'selectedItems',
+        'itemToString',
+        'itemToElement',
+        'locale',
+        'items',
+        'id',
+        'initialSelectedItems',
+        'sortItems',
+        'compareItems',
+        'downshiftProps',
+      ],
+    },
+  },
 };
 
 const comboBoxItems = [
