@@ -268,6 +268,11 @@ export const Skeleton = {
 export const WithAILabel = {
   args: sharedArgs,
   argTypes: sharedArgTypes,
+  parameters: {
+    controls: {
+      exclude: ['showPasswordVisibilityToggle'],
+    },
+  },
   render: (args: TextInputStoryArgs) => html`
     <div style=${`width: ${args.defaultWidth}px;`}>
       ${renderTextInput(

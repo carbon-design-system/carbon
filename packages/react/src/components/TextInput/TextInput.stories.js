@@ -112,7 +112,7 @@ export default {
       action: 'onClick',
     },
     size: {
-      options: ['sm', 'md', 'lg', 'xl'],
+      options: ['sm', 'md', 'lg'],
       control: {
         type: 'select',
       },
