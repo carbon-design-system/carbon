@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import { action } from 'storybook/actions';
 import { NumberInput } from './';
 import NumberInputSkeleton from './NumberInput.Skeleton';
 import { validateNumberSeparators } from './NumberInput';
@@ -195,9 +196,7 @@ export const WithTypeOfTextControlled = (args) => {
         onChange={(event, state) => {
           setValue(state.value);
         }}
-        onBlur={(_event, value) => {
-          console.log(`Recieved ${value}`);
-        }}
+        onBlur={action('onBlur')}
       />
       <button
         type="button"

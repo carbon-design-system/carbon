@@ -775,12 +775,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                 }
               }}
               onBlur={(e) => {
-                let parsedValueForBlur: number | undefined;
-
                 if (disableWheelProp) {
                   e.target.removeEventListener('wheel', disableWheel);
                 }
 
+                let parsedValueForBlur: number | undefined;
                 if (type === 'text') {
                   // When isControlled, the current inputValue needs re-parsed
                   // because the consumer's onChange hasn't been called yet and

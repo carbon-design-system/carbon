@@ -376,6 +376,33 @@ describe('NumberInput', () => {
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(screen.getByLabelText('test-label')).toHaveValue(0);
     });
+
+    it('should call `onStepperBlur` when a stepper button loses focus', async () => {
+      const onBlur = jest.fn();
+      const onStepperBlur = jest.fn();
+
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          onStepperBlur={onStepperBlur}
+          min={0}
+          defaultValue={10}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const decrement = screen.getByLabelText('decrement');
+      await userEvent.click(decrement);
+      expect(decrement).toHaveFocus();
+
+      await userEvent.tab();
+
+      expect(onStepperBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).not.toHaveBeenCalled();
+    });
   });
   it('should increase by the value of large step', async () => {
     render(
@@ -525,30 +552,6 @@ describe('NumberInput', () => {
       }),
       25
     );
-  });
-
-  it('should call `onStepperBlur` when a stepper button is blurred', async () => {
-    const onBlur = jest.fn();
-    const onStepperBlur = jest.fn();
-
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        onBlur={onBlur}
-        onStepperBlur={onStepperBlur}
-        defaultValue={10}
-        translateWithId={translateWithId}
-      />
-    );
-
-    // Click the increment button to focus it
-    const incButton = screen.getByRole('button', { name: /increment/i });
-    await userEvent.click(incButton);
-    await userEvent.tab();
-
-    expect(onStepperBlur).toHaveBeenCalledTimes(1);
-    expect(onBlur).not.toHaveBeenCalled();
   });
 
   it('formats decimals with formatOptions={{ maximumFractionDigits: 0 }} and passes the formatted number to onBlur (controlled, type="text")', async () => {
@@ -957,6 +960,35 @@ describe('NumberInput', () => {
           target: expect.any(Object),
         }),
         NaN
+      );
+    });
+
+    it('should call `onBlur` with the formatted value when formatting alters the number', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          defaultValue={2}
+          formatOptions={{ maximumFractionDigits: 0 }}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      await userEvent.click(input);
+      await userEvent.clear(input);
+      await userEvent.type(input, '2.7');
+      await userEvent.tab();
+
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        3
       );
     });
 
