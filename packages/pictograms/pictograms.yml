@@ -1248,6 +1248,7 @@
 - name: cat--01
   friendly_name: Cat sitting
   aliases:
+    - cat
     - animals
     - pets
     - cats
@@ -1740,7 +1741,7 @@
     - office
     - team
     - people
-    - coworker
+    - co-worker
 - name: clothes--rack--01
   friendly_name: Clothes rack 01
   aliases:
@@ -6501,6 +6502,17 @@
   aliases:
     - motion
     - movement
+- name: mountain--biking
+  friendly_name: Mountain biking
+  aliases:
+    - mountain
+    - bike
+    - biking
+    - trail riding
+    - mtb
+    - off-road
+    - sport
+    - single track
 - name: movement--in--overlapping--networks
   friendly_name: Movement in overlapping networks
   aliases:
@@ -6810,7 +6822,7 @@
     - cross-platform
     - javascript
 - name: north--america
-  friendly_name: North america
+  friendly_name: North America
   aliases:
     - globe
     - world
@@ -7872,6 +7884,16 @@
     - precipitation
     - weather
     - forecast
+- name: road--biking
+  friendly_name: Road biking
+  aliases:
+    - bike
+    - road bike
+    - biking
+    - cycling
+    - roadie
+    - sport
+    - velo
 - name: rainy--heavy
   friendly_name: Rainy heavy
   aliases:
@@ -8485,9 +8507,6 @@
     - typewriter
     - typing
     - IBM
-    - silicon
-    - wafer
-    - semiconductor
 - name: sell
   friendly_name: Sell
   aliases:
@@ -8694,6 +8713,16 @@
     - snow
     - weather
     - holiday
+- name: snowboarding
+  friendly_name: Snowboarding
+  aliases:
+    - mountain
+    - snow
+    - board
+    - snowboard
+    - snowboarding
+    - winter
+    - sport
 - name: social--distancing
   friendly_name: Social distancing
   aliases:
