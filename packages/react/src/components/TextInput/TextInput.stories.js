@@ -27,7 +27,129 @@ export default {
   subcomponents: {
     TextInputSkeleton,
   },
+  args: {
+    className: 'input-test-class',
+    id: 'text-input-1',
+    placeholder: 'Placeholder text',
+    invalid: false,
+    invalidText: 'Error message goes here',
+    disabled: false,
+    labelText: 'Label text',
+    helperText: 'Helper text',
+    warn: false,
+    warnText:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
+    size: 'md',
+    readOnly: false,
+    inline: false,
+    hideLabel: false,
+    enableCounter: false,
+    maxCount: 10,
+    type: 'text',
+    defaultWidth: 300,
+    defaultValue: '',
+  },
   argTypes: {
+    className: {
+      control: {
+        type: 'text',
+      },
+    },
+    defaultValue: {
+      control: {
+        type: 'text',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
+    },
+    invalid: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    invalidText: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    labelText: {
+      control: {
+        type: 'text',
+      },
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    warn: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    warnText: {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      control: {
+        type: 'text',
+      },
+    },
+    onChange: {
+      action: 'onChange',
+    },
+    onClick: {
+      action: 'onClick',
+    },
+    size: {
+      options: ['sm', 'md', 'lg', 'xl'],
+      control: {
+        type: 'select',
+      },
+    },
+    type: {
+      control: {
+        type: 'text',
+      },
+    },
+    id: {
+      control: { type: 'text' },
+    },
+    readOnly: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    inline: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    hideLabel: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    enableCounter: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    maxCount: {
+      control: {
+        type: 'number',
+      },
+    },
     light: {
       table: {
         disable: true,
@@ -38,140 +160,10 @@ export default {
         disable: true,
       },
     },
-  },
-};
-
-const sharedArgTypes = {
-  className: {
-    control: {
-      type: 'text',
+    defaultWidth: {
+      control: { type: 'range', min: 300, max: 800, step: 50 },
     },
   },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  helperText: {
-    control: {
-      type: 'text',
-    },
-  },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-  value: {
-    control: {
-      type: 'text',
-    },
-  },
-  onChange: {
-    action: 'onChange',
-  },
-  onClick: {
-    action: 'onClick',
-  },
-  size: {
-    options: ['sm', 'md', 'lg', 'xl'],
-    control: {
-      type: 'select',
-    },
-  },
-  type: {
-    control: {
-      type: 'text',
-    },
-  },
-  id: {
-    control: false,
-    table: {
-      disable: false,
-    },
-  },
-  decorator: {
-    table: {
-      disable: true,
-    },
-  },
-  readOnly: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  inline: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  hideLabel: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  enableCounter: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  maxCount: {
-    control: {
-      type: 'number',
-    },
-  },
-};
-
-const sharedArgs = {
-  className: 'input-test-class',
-  id: 'text-input-1',
-  placeholder: 'Placeholder text',
-  invalid: false,
-  invalidText: 'Error message goes here',
-  disabled: false,
-  labelText: 'Label text',
-  helperText: 'Helper text',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-  readOnly: false,
-  inline: false,
-  hideLabel: false,
-  enableCounter: false,
-  maxCount: 10,
-  type: 'text',
-  value: '',
 };
 
 export const Default = (args) => {
@@ -184,97 +176,71 @@ export const Default = (args) => {
   );
 };
 
-Default.args = {
-  ...sharedArgs,
-  defaultWidth: 300,
+export const Fluid = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
+
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidForm>
+        <TextInput {...textInputArgs} />
+      </FluidForm>
+    </div>
+  );
 };
 
-Default.argTypes = {
-  ...sharedArgTypes,
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-};
-
-export const Fluid = (args) => (
-  <FluidForm>
-    <TextInput {...args} />
-  </FluidForm>
-);
-
-Fluid.args = { ...sharedArgs };
-
-Fluid.argTypes = {
-  ...sharedArgTypes,
-  helperText: {
-    control: false,
-    table: { disable: true },
+Fluid.parameters = {
+  controls: {
+    exclude: ['helperText'],
   },
 };
 
 export const ReadOnly = (args) => {
-  return <TextInput {...args} />;
+  const { defaultWidth, ...textInputArgs } = args;
+
+  return (
+    <div style={{ width: defaultWidth }}>
+      <TextInput {...textInputArgs} />
+    </div>
+  );
 };
 
 ReadOnly.args = {
-  ...sharedArgs,
   defaultValue: "This is read only, you can't type more.",
   readOnly: true,
 };
 
-ReadOnly.argTypes = {
-  ...sharedArgTypes,
-  readOnly: {
-    control: false,
-    table: { disable: true },
-  },
-  value: {
-    table: { disable: true },
-  },
-  id: {
-    table: { disable: true },
-  },
-  disabled: {
-    control: false,
-    table: { disable: true },
-  },
-  invalid: {
-    control: false,
-    table: { disable: true },
-  },
-  invalidText: {
-    control: false,
-    table: { disable: true },
-  },
-  warn: {
-    control: false,
-    table: { disable: true },
-  },
-  warnText: {
-    control: false,
-    table: { disable: true },
-  },
-  enableCounter: {
-    control: false,
-    table: { disable: true },
-  },
-  maxCount: {
-    control: false,
-    table: { disable: true },
+ReadOnly.parameters = {
+  controls: {
+    exclude: [
+      'readOnly',
+      'disabled',
+      'invalid',
+      'invalidText',
+      'warn',
+      'warnText',
+      'enableCounter',
+      'maxCount',
+      'value',
+    ],
   },
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => <TextInput {...args} id={`text-input-${layer}`} />}
-  </WithLayer>
-);
+export const _WithLayer = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
 
-_WithLayer.args = { ...sharedArgs };
-
-_WithLayer.argTypes = { ...sharedArgTypes };
+  return (
+    <WithLayer>
+      {(layer) => (
+        <div style={{ width: defaultWidth }}>
+          <TextInput {...textInputArgs} id={`text-input-${layer}`} />
+        </div>
+      )}
+    </WithLayer>
+  );
+};
 
 export const withAILabel = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
   const aiLabel = (
     <AILabel className="ai-label-container">
       <AILabelContent>
@@ -306,32 +272,23 @@ export const withAILabel = (args) => {
     </AILabel>
   );
   return (
-    <TextInput
-      type="text"
-      labelText="Text input label"
-      helperText="Optional help text"
-      id="text-input-ai-label"
-      decorator={aiLabel}
-      {...args}
-    />
+    <div style={{ width: defaultWidth }}>
+      <TextInput
+        {...textInputArgs}
+        type="text"
+        labelText="Text input label"
+        helperText="Optional help text"
+        id="text-input-ai-label"
+        decorator={aiLabel}
+      />
+    </div>
   );
-};
-
-withAILabel.argTypes = {
-  ...sharedArgTypes,
-};
-withAILabel.args = {
-  ...sharedArgs,
 };
 
 export const Skeleton = (args) => <TextInputSkeleton {...args} />;
 
 Skeleton.args = {
   hideLabel: false,
-};
-
-Skeleton.argTypes = {
-  hideLabel: { control: { type: 'boolean' } },
 };
 
 Skeleton.parameters = {

@@ -66,7 +66,7 @@ type TextInputStoryArgs = {
   labelText: string;
   maxCount: number;
   placeholder: string;
-  playgroundWidth: number;
+  defaultWidth: number;
   showPasswordVisibilityToggle: boolean;
   size: INPUT_SIZE;
   readonly: boolean;
@@ -88,7 +88,7 @@ const sharedArgs: TextInputStoryArgs = {
   labelText: 'Label text',
   maxCount: 100,
   placeholder: 'Placeholder text',
-  playgroundWidth: 300,
+  defaultWidth: 300,
   showPasswordVisibilityToggle: false,
   size: INPUT_SIZE.MEDIUM,
   readonly: false,
@@ -141,15 +141,9 @@ const sharedArgTypes = {
     control: 'text',
     description: 'Placeholder (placeholder)',
   },
-  playgroundWidth: {
-    control: 'number',
-    description: 'Playground width',
-    options: {
-      range: true,
-      min: 300,
-      max: 800,
-      step: 50,
-    },
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 1 },
+    description: 'Default width',
   },
   showPasswordVisibilityToggle: {
     control: 'boolean',
@@ -217,9 +211,7 @@ export const Default = {
   args: sharedArgs,
   argTypes: sharedArgTypes,
   render: (args: TextInputStoryArgs) => html`
-    <div style="width: ${args.playgroundWidth}px;">
-      ${renderTextInput(args)}
-    </div>
+    <div style="width: ${args.defaultWidth}px;">${renderTextInput(args)}</div>
   `,
 };
 
@@ -227,33 +219,30 @@ export const ReadOnly = {
   args: {
     ...sharedArgs,
     readonly: true,
-    labelText: 'Text input label',
-    helperText: 'Optional help text',
     value: "This is read only, you can't type more.",
-    playgroundWidth: 300,
   },
   argTypes: {
     ...sharedArgTypes,
-    readonly: { table: { disable: true } },
-    invalid: { table: { disable: true } },
-    warn: { table: { disable: true } },
-    enableCounter: { table: { disable: true } },
-    showPasswordVisibilityToggle: { table: { disable: true } },
   },
   parameters: {
     controls: {
-      include: [
-        'labelText',
-        'helperText',
-        'value',
-        'size',
-        'hideLabel',
-        'playgroundWidth',
+      exclude: [
+        'readonly',
+        'invalid',
+        'invalidText',
+        'warn',
+        'warnText',
+        'enableCounter',
+        'showPasswordVisibilityToggle',
+        'onInput',
+        'onChange',
+        'disabled',
+        'maxCount',
       ],
     },
   },
   render: (args: TextInputStoryArgs) => html`
-    <div style="width: ${args.playgroundWidth}px;">
+    <div style="width: ${args.defaultWidth}px;">
       <cds-text-input
         readonly
         label=${ifDefined(args.labelText)}
@@ -279,20 +268,27 @@ export const Skeleton = {
 export const WithAILabel = {
   args: sharedArgs,
   argTypes: sharedArgTypes,
-  render: (args: TextInputStoryArgs) =>
-    renderTextInput(
-      args,
-      html`<cds-ai-label alignment="bottom-left"
-        >${content}${actions}</cds-ai-label
-      >`
-    ),
+  render: (args: TextInputStoryArgs) => html`
+    <div style=${`width: ${args.defaultWidth}px;`}>
+      ${renderTextInput(
+        args,
+        html`<cds-ai-label alignment="bottom-left"
+          >${content}${actions}</cds-ai-label
+        >`
+      )}
+    </div>
+  `,
 };
 
 export const WithLayer = {
   args: sharedArgs,
   argTypes: sharedArgTypes,
   render: (args: TextInputStoryArgs) => html`
-    <sb-template-layers> ${renderTextInput(args)} </sb-template-layers>
+    <sb-template-layers>
+      <div style=${args.defaultWidth ? `width: ${args.defaultWidth}px;` : ''}>
+        ${renderTextInput(args)}
+      </div>
+    </sb-template-layers>
   `,
 };
 
