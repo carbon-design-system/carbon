@@ -197,19 +197,6 @@
     pointer-events: none;
   }
 
-  // For Dropdown (non-ComboBox), position icon inside the field
-  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
-    .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--combo-box)
-    .#{$prefix}--list-box__invalid-icon,
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box.#{$prefix}--list-box--warning:not(
-      .#{$prefix}--combo-box
-    )
-    .#{$prefix}--list-box__invalid-icon {
-    inset-block-start: convert.to-rem(42px);
-    inset-inline-end: $spacing-08;
-  }
-
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
     .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--combo-box)
     .#{$prefix}--list-box__field {
@@ -441,7 +428,7 @@
 
   .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--dropdown)
     .#{$prefix}--list-box__menu-icon {
-    inset-inline-end: $spacing-04;
+    inset-inline-end: $spacing-05;
   }
 
   // remove ai-label divider when element is invalid and fluid
