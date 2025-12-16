@@ -40,6 +40,11 @@ export default {
     invalid: {
       control: { type: 'boolean' },
     },
+     light: {
+      table: {
+        disable: true,
+      },
+    },
     warn: {
       control: { type: 'boolean' },
     },
