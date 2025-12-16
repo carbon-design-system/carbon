@@ -339,11 +339,6 @@ export const Filterable = (args) => {
   );
 };
 
-Filterable.args = {
-  ...sharedArgs,
-  titleText: null,
-  placeholder: 'Filter items',
-};
 export const FilterableWithSelectAll = (args) => {
   return (
     <div
