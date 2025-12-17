@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
@@ -20,6 +20,7 @@ import '../tooltip';
 import '../tooltip/tooltip-content';
 import styles from './password-input.scss?lit';
 import CDSTextInput from '../text-input/text-input';
+import CDSTooltip from '../tooltip/tooltip';
 
 import {
   INPUT_COLOR_SCHEME,
@@ -46,6 +47,12 @@ export {
  */
 @customElement(`${prefix}-password-input`)
 class CDSPasswordInput extends CDSTextInput {
+  /**
+   * The Show/Hide Password tooltip
+   */
+  @query(`${prefix}-tooltip`)
+  private _passwordTooltip?: HTMLElement;
+
   /**
    * Handles `oninput` event on the `input`.
    *
@@ -327,13 +334,12 @@ class CDSPasswordInput extends CDSTextInput {
       </div>
     `;
   }
-  firstUpdated() {
-    this.updateComplete.then(() => {
-      this.shadowRoot
-        ?.querySelector(`${prefix}-tooltip`)
-        ?.shadowRoot?.querySelector(`.${prefix}--tooltip`)
-        ?.classList.add(`${prefix}--icon-tooltip`);
-    });
+
+  async firstUpdated() {
+    await (this._passwordTooltip as CDSTooltip)?.updateComplete;
+    this._passwordTooltip?.shadowRoot
+      ?.querySelector(`.${prefix}--tooltip`)
+      ?.classList.add(`${prefix}--icon-tooltip`);
   }
   /**
    * A selector that will return the slug item.
