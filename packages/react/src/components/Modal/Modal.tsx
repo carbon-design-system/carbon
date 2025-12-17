@@ -374,6 +374,9 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     evt.stopPropagation();
 
     if (open && target instanceof HTMLElement) {
+      if (match(evt, keys.Escape)) {
+        onRequestClose(evt);
+      }
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -539,24 +542,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   }
 
   useEffect(() => {
-    if (!open) return;
 
-    const handleEscapeKey = (event) => {
-      if (match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        onRequestClose(event);
-      }
-    };
-    document.addEventListener('keydown', handleEscapeKey, true);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
-    };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [open]);
-
-  useEffect(() => {
     return () => {
       if (!enableDialogElement) {
         toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
@@ -879,6 +865,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     <Layer
       {...rest}
       level={0}
+      tabIndex="-1"
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onBlur={handleBlur}
