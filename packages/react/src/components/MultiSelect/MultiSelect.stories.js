@@ -352,9 +352,6 @@ export const Filterable = (args) => {
   );
 };
 
-Filterable.args = {
-  placeholder: 'Filter items',
-};
 export const FilterableWithSelectAll = (args) => {
   return (
     <div
@@ -374,9 +371,6 @@ export const FilterableWithSelectAll = (args) => {
   );
 };
 
-FilterableWithSelectAll.args = {
-  placeholder: 'Filter items',
-};
 FilterableWithSelectAll.argTypes = {
   ...filterableArgTypes,
 };
@@ -427,9 +421,6 @@ export const _FilterableWithLayer = (args) => (
   </WithLayer>
 );
 
-_FilterableWithLayer.args = {
-  placeholder: 'Filter items',
-};
 _FilterableWithLayer.argTypes = {
   ...filterableArgTypes,
 };
@@ -596,9 +587,6 @@ export const FilterableWithAILabel = (args) => (
   </div>
 );
 
-FilterableWithAILabel.args = {
-  placeholder: 'Filter items',
-};
 FilterableWithAILabel.argTypes = {
   ...filterableArgTypes,
 };
@@ -677,7 +665,6 @@ export const withToggletipLabel = (args) => {
   );
 };
 
-withToggletipLabel.args = { ...sharedArgs };
 export const SelectAllWithDynamicItems = (args) => {
   const [label, setLabel] = useState('Choose options');
   const [items, setItems] = useState(itemsWithSelectAll);

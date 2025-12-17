@@ -40,7 +40,7 @@ export default {
     invalid: {
       control: { type: 'boolean' },
     },
-     light: {
+    light: {
       table: {
         disable: true,
       },
@@ -48,8 +48,20 @@ export default {
     warn: {
       control: { type: 'boolean' },
     },
+    helperText: {
+      control: { type: 'text' },
+    },
+    invalidText: {
+      control: { type: 'text' },
+    },
+    label: {
+      control: { type: 'text' },
+    },
+    warnText: {
+      control: { type: 'text' },
+    },
   },
-    parameters: {
+  parameters: {
     controls: {
       exclude: [
         'filterItems',
