@@ -111,7 +111,7 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
         } else {
           fp.yearElements[0]
             .closest(config.selectorFlatpickrMonthYearContainer)
-            .insertAdjacentElement('afterend', monthElement);
+            .insertAdjacentElement('beforeend', monthElement);
         }
 
         return monthElement;
