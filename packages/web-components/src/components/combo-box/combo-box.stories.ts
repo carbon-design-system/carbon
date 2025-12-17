@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -66,6 +66,7 @@ const defaultArgs = {
   readOnly: false,
   size: null,
   titleText: 'Label',
+  typeahead: false,
   value: '',
   warn: false,
   warnText: 'Warning message goes here',
@@ -74,16 +75,16 @@ const defaultArgs = {
 const controls = {
   allowCustomValue: {
     control: 'boolean',
-    description: `Allow entering values that do not match any of the provided items.`,
+    description: `Specify whether or not the ComboBox should allow a value that is not in the list to be entered in the input.`,
   },
   disabled: {
     control: 'boolean',
-    description: `Specify if the dropdown should be disabled, or not.`,
+    description: `Specify if the control should be disabled, or not.`,
   },
   direction: {
     control: 'select',
     options: directionOptions,
-    description: `Dropdown direction`,
+    description: `Specify the direction of the combobox dropdown. Can be either top or bottom.`,
   },
   hideLabel: {
     control: 'boolean',
@@ -91,11 +92,11 @@ const controls = {
   },
   helperText: {
     control: 'text',
-    description: `The helper text for the dropdown.`,
+    description: `Provide helper text that is used alongside the control label for additional help.`,
   },
   invalid: {
     control: 'boolean',
-    description: `Specify if the dropdown should display an invalid icon, or not.`,
+    description: `Specify if the currently selected value is invalid.`,
   },
   invalidText: {
     control: 'text',
@@ -107,16 +108,20 @@ const controls = {
   },
   readOnly: {
     control: 'boolean',
-    description: `Specify if the dropdown should be read only, or not.`,
+    description: `Specify whether or not the component is read-only.`,
   },
   size: {
     control: 'select',
     options: sizes,
-    description: `Dropdown size.`,
+    description: `Specify the size of the ListBox. Currently supports either \`sm\`, \`md\` or \`lg\` as an option.`,
   },
   titleText: {
     control: 'text',
-    description: `Text that will be read by a screen reader when visiting this control.`,
+    description: `Provide text to be used in a <label> element that is tied to the combobox via ARIA attributes.`,
+  },
+  typeahead: {
+    control: 'boolean',
+    description: `**Experimental**: will enable autocomplete and typeahead for the input field.`,
   },
   value: {
     control: 'text',
@@ -128,7 +133,7 @@ const controls = {
   },
   warnText: {
     control: 'text',
-    description: `Text that is displayed when the control is in warning state.`,
+    description: `Provide the text that is displayed when the control is in warning state.`,
   },
 };
 
@@ -156,6 +161,7 @@ export const Default = {
       type,
       invalidText,
       value,
+      typeahead,
     } = args ?? {};
     return html`
       <cds-combo-box
@@ -173,7 +179,8 @@ export const Default = {
         value=${ifDefined(value)}
         label=${ifDefined(label)}
         ?warn=${warn}
-        warn-text=${ifDefined(warnText)}>
+        warn-text=${ifDefined(warnText)}
+        ?typeahead=${typeahead}>
         ${items.map(
           (elem) => html`
             <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
@@ -242,6 +249,7 @@ export const AllowCustomValue = {
       type,
       invalidText,
       value,
+      typeahead,
     } = args ?? {};
     return html`
       <cds-combo-box
@@ -260,6 +268,7 @@ export const AllowCustomValue = {
         label=${ifDefined(label)}
         ?warn=${warn}
         warn-text=${ifDefined(warnText)}
+        ?typeahead=${typeahead}
         should-filter-item>
         <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
         <cds-combo-box-item value="orange">Orange</cds-combo-box-item>
@@ -353,6 +362,7 @@ export const WithAILabel = {
       type,
       invalidText,
       value,
+      typeahead,
     } = args ?? {};
     return html`
       <cds-combo-box
@@ -370,7 +380,8 @@ export const WithAILabel = {
         value=${ifDefined(value)}
         label=${ifDefined(label)}
         ?warn=${warn}
-        warn-text=${ifDefined(warnText)}>
+        warn-text=${ifDefined(warnText)}
+        ?typeahead=${typeahead}>
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
@@ -411,6 +422,7 @@ export const WithLayer = {
       type,
       invalidText,
       value,
+      typeahead,
     } = args ?? {};
     return html`
       <sb-template-layers>
@@ -430,7 +442,8 @@ export const WithLayer = {
             value=${ifDefined(value)}
             label=${ifDefined(label)}
             ?warn=${warn}
-            warn-text=${ifDefined(warnText)}>
+            warn-text=${ifDefined(warnText)}
+            ?typeahead=${typeahead}>
             ${items.map(
               (elem) => html`
                 <cds-combo-box-item
