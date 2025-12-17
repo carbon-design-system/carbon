@@ -12,16 +12,18 @@ import './fluid-number-input';
 import './fluid-number-input-skeleton';
 
 const args = {
-  defaultWidth: 300,
+  defaultWidth: 400,
   allowEmpty: false,
   disabled: false,
   invalid: false,
-  invalidText: 'Number is not valid',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
   label: 'Label',
   readOnly: false,
   value: 50,
   warn: false,
-  warnText: 'Warning text',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
   min: 0,
   max: 100,
   step: 1,

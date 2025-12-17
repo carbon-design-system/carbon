@@ -27,6 +27,7 @@ class CDSFluidNumberInput extends CDSNumberInput {
   updated() {
     super.updated();
   }
+
   render() {
     const wrapperClasses = classMap({
       [`${prefix}--number-input--fluid`]: true,

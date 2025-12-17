@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/components/number-input/index' as *;
 
 :host(#{$prefix}-fluid-number-input) {
   @include emit-layout-tokens();

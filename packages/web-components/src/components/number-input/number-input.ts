@@ -455,12 +455,11 @@ class CDSNumberInput extends CDSTextInput {
               ? html`${decrementButton} ${incrementButton}`
               : null}
           </div>
-          ${this.isFluid
-            ? html`<hr class="${prefix}--number-input__divider" />`
-            : null}
         </div>
-        ${/* Non-fluid: validation and helper outside field wrapper */ ''}
-        ${!this.isFluid ? validationMessage || helper : null}
+        ${this.isFluid
+          ? html`<hr class="${prefix}--number-input__divider" />`
+          : null}
+        ${validationMessage ? validationMessage || helper : null}
       </div>
     `;
   }
