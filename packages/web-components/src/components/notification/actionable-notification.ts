@@ -265,7 +265,7 @@ class CDSActionableNotification extends HostListenerMixin(
   @property()
   caption = '';
 
-  async updated(changedProperties) {
+  updated(changedProperties) {
     super.updated(changedProperties);
     const button = this.querySelector(
       (this.constructor as typeof CDSActionableNotification)
@@ -291,8 +291,9 @@ class CDSActionableNotification extends HostListenerMixin(
     if (changedProperties.has('hasFocus')) {
       if (this.hasFocus) {
         if (button) {
-          await (button as CDSButton).updateComplete; // wait for action button to finish up rendering
-          (button as HTMLElement).focus();
+          (button as CDSButton).updateComplete.then(() => {
+            (button as HTMLElement).focus();
+          });
         } else {
           this.focus();
         }

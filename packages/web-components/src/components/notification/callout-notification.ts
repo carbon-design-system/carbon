@@ -79,7 +79,7 @@ class CDSCalloutNotification extends CDSActionableNotification {
     this.removeAttribute('role');
   }
 
-  async updated(changedProperties) {
+  updated(changedProperties) {
     super.updated(changedProperties);
     const button = this.querySelector(
       (this.constructor as typeof CDSCalloutNotification).selectorActionButton
