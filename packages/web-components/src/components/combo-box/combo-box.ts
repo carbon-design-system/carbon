@@ -465,6 +465,12 @@ class CDSComboBox extends CDSDropdown {
   })
   shouldFilterItem: boolean | ShouldFilterItem = false;
 
+  /**
+   * **Experimental**: will enable autocomplete and typeahead for the input field.
+   */
+  @property({ type: Boolean, reflect: true })
+  typeahead = false;
+
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
     const { _selectedItemContent: selectedItemContent } = this;
