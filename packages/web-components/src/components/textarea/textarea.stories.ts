@@ -191,8 +191,6 @@ export const Default = {
 };
 
 export const Skeleton = {
-  args,
-  argTypes,
   parameters: {
     percy: {
       skip: true,
@@ -202,7 +200,7 @@ export const Skeleton = {
 };
 
 export const WithAILabel = {
-  args,
+  args: { ...args, helperText: 'Optional helper text', enableCounter: false },
   argTypes,
   render: ({
     cols,
@@ -249,7 +247,7 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
-  args,
+  args: { ...args, helperText: 'Optional helper text', enableCounter: false },
   argTypes,
   render: ({
     cols,
