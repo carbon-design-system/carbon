@@ -1,5 +1,3 @@
-import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
 /**
  * Copyright IBM Corp. 2023, 2024
  *
@@ -8,12 +6,15 @@ import { dirname, join } from 'node:path';
  */
 
 import type { StorybookConfig } from '@storybook/web-components-vite';
+
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
+import glob from 'fast-glob';
 import remarkGfm from 'remark-gfm';
 
 const require = createRequire(import.meta.url);
-const glob = require('fast-glob');
 
 const stories = glob.sync(
   [
@@ -30,6 +31,7 @@ const stories = glob.sync(
 const config: StorybookConfig = {
   stories: stories,
   addons: [
+    'storybook-addon-accessibility-checker',
     {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: {

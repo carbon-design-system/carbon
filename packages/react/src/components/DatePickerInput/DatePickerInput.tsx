@@ -23,6 +23,7 @@ import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
 export type ReactNodeLike =
@@ -171,13 +172,24 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     size = 'md',
     slug,
     type = 'text',
-    warn,
+    warn = false,
     warnText,
+    readOnly,
     ...rest
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const datePickerInputInstanceId = useId();
+
+  const normalizedProps = useNormalizedInputProps({
+    id,
+    readOnly,
+    disabled,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+  });
   const datePickerInputProps = {
     id,
     onChange: (event) => {
@@ -210,28 +222,29 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     didWarnAboutDatePickerInputValue = true;
   }
   const wrapperClasses = cx(`${prefix}--date-picker-input__wrapper`, {
-    [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
-    [`${prefix}--date-picker-input__wrapper--warn`]: warn,
+    [`${prefix}--date-picker-input__wrapper--invalid`]: normalizedProps.invalid,
+    [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
     [`${prefix}--date-picker-input__wrapper--slug`]: slug,
     [`${prefix}--date-picker-input__wrapper--decorator`]: decorator,
   });
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--label--readonly`]: rest.readOnly,
+    [`${prefix}--label--disabled`]: normalizedProps.disabled,
+    [`${prefix}--label--readonly`]: readOnly,
   });
   const helperTextClasses = cx(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
+    [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
   });
   const inputClasses = cx(`${prefix}--date-picker__input`, {
     [`${prefix}--date-picker__input--${size}`]: size,
-    [`${prefix}--date-picker__input--invalid`]: invalid,
-    [`${prefix}--date-picker__input--warn`]: warn,
+    [`${prefix}--date-picker__input--invalid`]: normalizedProps.invalid,
+    [`${prefix}--date-picker__input--warn`]: normalizedProps.warn,
   });
   const containerClasses = cx(`${prefix}--date-picker-container`, {
     [`${prefix}--date-picker--nolabel`]: !labelText,
-    [`${prefix}--date-picker--fluid--invalid`]: isFluid && invalid,
-    [`${prefix}--date-picker--fluid--warn`]: isFluid && warn,
+    [`${prefix}--date-picker--fluid--invalid`]:
+      isFluid && normalizedProps.invalid,
+    [`${prefix}--date-picker--fluid--warn`]: isFluid && normalizedProps.warn,
   });
 
   const datePickerInputHelperId = !helperText
@@ -243,11 +256,11 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     ...rest,
     ...datePickerInputProps,
     className: inputClasses,
-    disabled,
+    disabled: normalizedProps.disabled,
     ref,
     ['aria-describedby']: helperText ? datePickerInputHelperId : undefined,
   };
-  if (invalid) {
+  if (normalizedProps.invalid) {
     inputProps['data-invalid'] = true;
   }
   const input = <input {...inputProps} />;
@@ -282,28 +295,15 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
           {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
           <DatePickerIcon
             datePickerType={datePickerType}
-            invalid={invalid}
-            warn={warn}
+            invalid={normalizedProps.invalid}
+            warn={normalizedProps.warn}
+            disabled={normalizedProps.disabled}
+            readOnly={readOnly}
           />
         </span>
       </div>
-      {invalid && (
-        <>
-          {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
-          <Text as="div" className={`${prefix}--form-requirement`}>
-            {invalidText}
-          </Text>
-        </>
-      )}
-      {warn && !invalid && (
-        <>
-          {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
-          <Text as="div" className={`${prefix}--form-requirement`}>
-            {warnText}
-          </Text>
-        </>
-      )}
-      {helperText && !invalid && (
+      {normalizedProps.validation}
+      {helperText && !normalizedProps.invalid && !normalizedProps.warn && (
         <Text
           as="div"
           id={datePickerInputHelperId}
@@ -435,12 +435,16 @@ interface DatePickerIconProps {
   datePickerType: 'simple' | 'single' | 'range' | undefined;
   invalid?: boolean;
   warn?: boolean;
+  disabled?: boolean;
+  readOnly?: boolean;
 }
 
 function DatePickerIcon({
   datePickerType,
   invalid,
   warn,
+  disabled,
+  readOnly,
 }: DatePickerIconProps) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
@@ -449,6 +453,16 @@ function DatePickerIcon({
     if (!isFluid) {
       return null;
     }
+  }
+
+  // Don't show invalid/warn icons when disabled or readonly
+  if (disabled || readOnly) {
+    return (
+      <Calendar
+        className={`${prefix}--date-picker__icon`}
+        role="img"
+        aria-hidden="true"></Calendar>
+    );
   }
 
   if (invalid) {
@@ -494,6 +508,16 @@ DatePickerIcon.propTypes = {
    * Specify whether the control is currently in warning state
    */
   warn: PropTypes.bool,
+
+  /**
+   * Specify whether or not the input should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify whether the input is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default DatePickerInput;

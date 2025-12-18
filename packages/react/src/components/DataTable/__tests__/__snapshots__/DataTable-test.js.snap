@@ -8,12 +8,16 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-_r_7g_-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_7g_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <div
       class="cds--data-table-content"
@@ -182,12 +186,16 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-_r_77_-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_77_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <div
       class="cds--data-table-content"
@@ -356,12 +364,16 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-_r_2k_-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_2k_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"
@@ -801,12 +813,16 @@ exports[`DataTable renders as expected - Component API should render and match s
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-_r_e_-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with toolbar
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_e_-title"
+        >
+          DataTable with toolbar
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"

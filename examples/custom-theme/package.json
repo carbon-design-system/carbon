@@ -2,7 +2,7 @@
   "name": "custom-theme",
   "description": "Custom theme example",
   "private": true,
-  "version": "0.94.0",
+  "version": "0.96.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -23,13 +23,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.96.0",
+    "@carbon/react": "^1.98.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "4.0.0",
+    "@vitejs/plugin-react": "^5.1.1",
     "sass": "^1.93.2",
-    "vite": "^6.3.5"
+    "vite": "^7.2.4"
   }
 }

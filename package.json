@@ -41,7 +41,7 @@
     "brace-expansion": "^2.0.2",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.1",
-    "typescript-eslint": "8.46.1"
+    "typescript-eslint": "8.46.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -83,7 +83,7 @@
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
-    "lerna": "^8.0.0",
+    "lerna": "^9.0.1",
     "lint-staged": "^16.0.0",
     "prettier": "^3.3.3",
     "react": "^19.0.0",
