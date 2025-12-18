@@ -654,6 +654,161 @@ describe('NumberInput', () => {
       expect(screen.getByText('test-helper-text')).toBeInTheDocument();
     });
 
+    // Tests for disabled/readonly state normalization
+    describe('disabled and readonly state normalization', () => {
+      describe('invalid state', () => {
+        it('should not set aria-invalid when disabled with invalid prop', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              disabled
+              value={5}
+              min={10}
+              invalidText="Invalid"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).toHaveAttribute(
+            'aria-invalid',
+            'false'
+          );
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--invalid`
+          );
+        });
+
+        it('should not set aria-invalid when readOnly with invalid prop', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              readOnly
+              value={5}
+              min={10}
+              invalidText="Invalid"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).toHaveAttribute(
+            'aria-invalid',
+            'false'
+          );
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--invalid`
+          );
+        });
+
+        it('should not display invalid message if disabled', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              disabled
+              value={5}
+              min={10}
+              invalidText="This should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
+        });
+
+        it('should not display invalid message if readOnly', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              readOnly
+              value={5}
+              min={10}
+              invalidText="This should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This should not be displayed')
+          ).not.toBeInTheDocument();
+        });
+      });
+
+      describe('warning state', () => {
+        it('should not display warning styles when disabled with warn prop', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              disabled
+              warn
+              warnText="Warning"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--warning`
+          );
+        });
+
+        it('should not display warning styles when readOnly with warn prop', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              readOnly
+              warn
+              warnText="Warning"
+            />
+          );
+
+          expect(screen.getByRole('textbox')).not.toHaveClass(
+            `${prefix}--text-input--warning`
+          );
+        });
+
+        it('should not display warning message if disabled', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              disabled
+              warn
+              warnText="This warning should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
+        });
+
+        it('should not display warning message if readOnly', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              readOnly
+              warn
+              warnText="This warning should not be displayed"
+            />
+          );
+
+          expect(
+            screen.queryByText('This warning should not be displayed')
+          ).not.toBeInTheDocument();
+        });
+      });
+    });
+
     it('should call `onClick` when the `<input>` is clicked', async () => {
       const onClick = jest.fn();
       render(

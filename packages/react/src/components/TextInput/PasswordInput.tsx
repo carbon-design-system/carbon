@@ -362,6 +362,8 @@ const PasswordInput = React.forwardRef(
                 (inline || (!inline && !normalizedProps.validation))
             ),
             helperId: normalizedProps.helperId,
+            disabled,
+            readOnly,
           })}
           disabled={disabled}
           data-toggle-password-visibility={inputType === 'password'}

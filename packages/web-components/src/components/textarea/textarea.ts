@@ -173,6 +173,11 @@ class CDSTextarea extends CDSTextInput {
     const textCount = this.value?.length ?? 0;
     const wordCount = this.value?.match(/\p{L}+/gu)?.length || 0;
 
+    // Normalize invalid and warn states - they should not be shown when disabled or readonly
+    const normalizedInvalid = !this.readonly && !this.disabled && this.invalid;
+    const normalizedWarn =
+      !this.readonly && !this.disabled && !this.invalid && this.warn;
+
     const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-area__invalid-icon`,
     });
@@ -183,15 +188,15 @@ class CDSTextarea extends CDSTextInput {
 
     const textareaClasses = classMap({
       [`${prefix}--text-area`]: true,
-      [`${prefix}--text-area--warn`]: this.warn,
-      [`${prefix}--text-area--invalid`]: this.invalid,
+      [`${prefix}--text-area--warn`]: normalizedWarn,
+      [`${prefix}--text-area--invalid`]: normalizedInvalid,
       [`${prefix}--text-area__wrapper--decorator`]: this._hasAILabel,
     });
 
     const textareaWrapperClasses = classMap({
       [`${prefix}--text-area__wrapper`]: true,
       [`${prefix}--text-area__wrapper--cols`]: this.cols,
-      [`${prefix}--text-area__wrapper--warn`]: this.warn,
+      [`${prefix}--text-area__wrapper--warn`]: normalizedWarn,
       [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
     });
 
@@ -224,9 +229,9 @@ class CDSTextarea extends CDSTextInput {
         : null;
 
     const icon = () => {
-      if (this.invalid) {
+      if (normalizedInvalid) {
         return invalidIcon;
-      } else if (this.warn && !this.invalid) {
+      } else if (normalizedWarn && !normalizedInvalid) {
         return warnIcon;
       }
       return null;
@@ -262,14 +267,12 @@ class CDSTextarea extends CDSTextInput {
         </label>
         ${counter}
       </div>
-      <div class="${textareaWrapperClasses}" ?data-invalid="${this.invalid}">
-        ${!this.isFluid ? icon() : null}
         <textarea
           autocomplete="${this.autocomplete}"
           ?autofocus="${this.autofocus}"
           class="${textareaClasses}"
           cols="${ifDefined(this.cols)}"
-          ?data-invalid="${this.invalid}"
+          ?data-invalid="${normalizedInvalid}"
           ?disabled="${this.disabled}"
           id="input"
           name="${ifNonEmpty(this.name)}"
@@ -294,8 +297,7 @@ class CDSTextarea extends CDSTextInput {
             `
           : null}
       </div>
-      ${/* Non-fluid: validation and helper outside field wrapper */ ''}
-      ${!this.isFluid ? html` ${helper} ${validationMessage} ` : null}
+
     `;
   }
   updated(): void {

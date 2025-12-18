@@ -103,6 +103,93 @@ describe('<cds-number-input>', () => {
     expect(invalid?.textContent).to.include('Invalid');
   });
 
+  // Tests for disabled/readonly state normalization
+  describe('disabled and readonly state normalization', () => {
+    describe('invalid state', () => {
+      it('should not show invalid styles when disabled with invalid prop', async () => {
+        const el = await fixture(html`
+          <cds-number-input disabled invalid label="Disabled invalid input">
+            <span slot="invalid-text">This should not be displayed</span>
+          </cds-number-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector(
+          '.cds--number__input-wrapper'
+        );
+        const error = el.querySelector('[slot="invalid-text"]');
+
+        expect(input).not.to.have.attribute('data-invalid');
+        expect(wrapper).not.to.have.class(
+          'cds--number__input-wrapper--warning'
+        );
+        expect(error).to.exist; // Slot content exists but should not be displayed
+      });
+
+      it('should not show invalid styles when readonly with invalid prop', async () => {
+        const el = await fixture(html`
+          <cds-number-input readonly invalid label="Readonly invalid input">
+            <span slot="invalid-text">This should not be displayed</span>
+          </cds-number-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector(
+          '.cds--number__input-wrapper'
+        );
+        const error = el.querySelector('[slot="invalid-text"]');
+
+        expect(input).not.to.have.attribute('data-invalid');
+        expect(wrapper).not.to.have.class(
+          'cds--number__input-wrapper--warning'
+        );
+        expect(error).to.exist; // Slot content exists but should not be displayed
+      });
+    });
+
+    describe('warning state', () => {
+      it('should not show warning styles when disabled with warn prop', async () => {
+        const el = await fixture(html`
+          <cds-number-input disabled warn label="Disabled warn input">
+            <span slot="warn-text">This warning should not be displayed</span>
+          </cds-number-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector(
+          '.cds--number__input-wrapper'
+        );
+        const warning = el.querySelector('[slot="warn-text"]');
+
+        expect(input).not.to.have.class('cds--text-input--warning');
+        expect(wrapper).not.to.have.class(
+          'cds--number__input-wrapper--warning'
+        );
+        expect(warning).to.exist; // Slot content exists but should not be displayed
+      });
+
+      it('should not show warning styles when readonly with warn prop', async () => {
+        const el = await fixture(html`
+          <cds-number-input readonly warn label="Readonly warn input">
+            <span slot="warn-text">This warning should not be displayed</span>
+          </cds-number-input>
+        `);
+
+        const input = el.shadowRoot.querySelector('input');
+        const wrapper = el.shadowRoot.querySelector(
+          '.cds--number__input-wrapper'
+        );
+        const warning = el.querySelector('[slot="warn-text"]');
+
+        expect(input).not.to.have.class('cds--text-input--warning');
+        expect(wrapper).not.to.have.class(
+          'cds--number__input-wrapper--warning'
+        );
+        expect(warning).to.exist; // Slot content exists but should not be displayed
+      });
+    });
+  });
+
   it('should increment and decrement using buttons', async () => {
     const el = await fixture(
       html`<cds-number-input
