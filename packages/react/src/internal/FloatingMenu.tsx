@@ -522,6 +522,7 @@ export const FloatingMenu = ({
         {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
         {!focusTrapWithoutSentinels && (
           <span
+            aria-hidden="true"
             ref={startSentinelRef}
             tabIndex={0}
             role="link"
@@ -533,6 +534,7 @@ export const FloatingMenu = ({
         {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
         {!focusTrapWithoutSentinels && (
           <span
+            aria-hidden="true"
             ref={endSentinelRef}
             tabIndex={0}
             role="link"
