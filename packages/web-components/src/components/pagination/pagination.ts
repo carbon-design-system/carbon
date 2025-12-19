@@ -415,6 +415,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         this.totalItems,
         this.pagesUnknown
       );
+
       const pagesSelect = this.shadowRoot?.querySelector(
         (this.constructor as typeof CDSPagination).selectorPagesSelect
       ) as CDSSelect | null;
