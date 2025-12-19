@@ -1575,6 +1575,15 @@
       ]
     },
     {
+      "login": "jvictorfsilva",
+      "name": "João Victor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68554147?v=4",
+      "profile": "https://github.com/jvictorfsilva",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "trumanbutter",
       "name": "Truman Butterworth",
       "avatar_url": "https://avatars.githubusercontent.com/u/32148874?v=4",
@@ -1590,6 +1599,15 @@
       "profile": "https://github.com/grishma-shah7",
       "contributions": [
         "a11y"
+      ]
+    },
+    {
+      "login": "Pradumn11",
+      "name": "Pradumnya Zendphale",
+      "avatar_url": "https://avatars.githubusercontent.com/u/99590317?v=4",
+      "profile": "https://github.com/Pradumn11",
+      "contributions": [
+        "code"
       ]
     }
   ],
