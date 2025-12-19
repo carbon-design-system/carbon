@@ -60,7 +60,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 
-const { ItemMouseMove, MenuMouseLeave } =
+const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
     ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
   };
@@ -270,6 +270,12 @@ function stateReducer(state, actionAndChanges) {
         return state;
       }
       return changes;
+    case ToggleButtonBlur:
+    case FunctionCloseMenu:
+      return {
+        ...changes,
+        selectedItem: state.selectedItem,
+      };
     default:
       return changes;
   }

@@ -5,20 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '../button/index';
+
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { prefix } from '../../globals/settings';
+
+import CDSSelect from '../select/select';
 import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
 import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import FocusMixin from '../../globals/mixins/focus';
-import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
-import styles from './pagination.scss?lit';
+import HostListenerMixin from '../../globals/mixins/host-listener';
 import { PAGINATION_SIZE } from './defs';
-import CDSSelect from '../select/select';
-import { iconLoader } from '../../globals/internal/icon-loader';
-import '../button/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import { prefix } from '../../globals/settings';
+import styles from './pagination.scss?lit';
 
 /**
  * Pagination UI.
@@ -547,7 +549,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             ${iconLoader(CaretLeft16, { slot: 'icon' })}
           </cds-button>
           <cds-button
-            tooltip-position="top-right"
+            tooltip-position="top"
             pagination
             size="${size}"
             ?disabled="${nextButtonDisabled}"
