@@ -188,7 +188,7 @@ const ControlledPasswordInput = React.forwardRef(
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
-    const label = labelText !== null && labelText !== undefined && (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
@@ -216,7 +216,7 @@ const ControlledPasswordInput = React.forwardRef(
       }
     );
 
-    const hasHelper = helperText !== null && helperText !== undefined;
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
     const helperId = !hasHelper
       ? undefined
       : `controlled-password-helper-text-${controlledPasswordInstanceId}`;

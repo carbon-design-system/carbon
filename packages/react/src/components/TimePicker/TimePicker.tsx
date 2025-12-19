@@ -238,7 +238,7 @@ const TimePicker = frFn((props, ref) => {
     [`${prefix}--label--disabled`]: disabled,
   });
 
-  const label = labelText !== null && labelText !== undefined && (
+  const label = typeof labelText !== 'undefined' && labelText !== null && (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>

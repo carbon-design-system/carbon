@@ -239,7 +239,7 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-    const hasHelper = helperText !== null && helperText !== undefined;
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
     const helperId = !hasHelper
       ? undefined
       : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;

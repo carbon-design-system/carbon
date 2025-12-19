@@ -385,7 +385,7 @@ const TextArea = frFn((props, forwardRef) => {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  const label = labelText !== null && labelText !== undefined && (
+  const label = typeof labelText !== 'undefined' && labelText !== null && (
     <Text as="label" htmlFor={id} className={labelClasses}>
       {labelText}
     </Text>
@@ -404,7 +404,7 @@ const TextArea = frFn((props, forwardRef) => {
   const counterDescriptionId =
     enableCounter && maxCount ? `${id}-counter-desc` : undefined;
 
-  const hasHelper = helperText !== null && helperText !== undefined;
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
   const helperId = !hasHelper
     ? undefined
     : `text-area-helper-text-${textAreaInstanceId}`;

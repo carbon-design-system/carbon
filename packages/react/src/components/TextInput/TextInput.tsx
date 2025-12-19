@@ -308,7 +308,7 @@ const TextInput = React.forwardRef(
           className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
       ) : null;
 
-    const label = labelText !== null && labelText !== undefined && (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <Text as="label" htmlFor={id} className={labelClasses}>
         {labelText}
       </Text>
@@ -321,7 +321,7 @@ const TextInput = React.forwardRef(
       </div>
     );
 
-    const helper = helperText !== null && helperText !== undefined && (
+    const helper = typeof helperText !== 'undefined' && helperText !== null && (
       <Text
         as="div"
         id={normalizedProps.helperId}
