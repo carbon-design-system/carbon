@@ -26,7 +26,7 @@ exports[`Accordion should render 1`] = `
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+            d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
           />
         </svg>
         <div
@@ -68,7 +68,7 @@ exports[`Accordion should render 1`] = `
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+            d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
           />
         </svg>
         <div
@@ -110,7 +110,7 @@ exports[`Accordion should render 1`] = `
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+            d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
           />
         </svg>
         <div
