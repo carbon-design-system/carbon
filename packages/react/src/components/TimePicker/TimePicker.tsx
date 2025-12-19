@@ -238,11 +238,11 @@ const TimePicker = frFn((props, ref) => {
     [`${prefix}--label--disabled`]: disabled,
   });
 
-  const label = labelText ? (
+  const label = typeof labelText !== 'undefined' && labelText !== null && (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
-  ) : null;
+  );
 
   function getInternalPickerSelects() {
     const readOnlyEventHandlers = {

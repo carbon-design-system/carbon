@@ -233,8 +233,8 @@ const Select = React.forwardRef(
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
-
-    const helper = helperText ? (
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helper = hasHelper ? (
       <Text
         as="div"
         id={normalizedProps.helperId}
