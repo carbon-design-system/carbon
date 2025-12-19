@@ -1755,7 +1755,6 @@ __metadata:
     rimraf: "npm:^6.0.1"
     rollup: "npm:^4.41.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
-    svg-parser: "npm:^2.0.4"
     svgo: "npm:^4.0.0"
     svgson: "npm:^5.2.1"
     typescript-config-carbon: "workspace:^0.8.0"
@@ -22825,13 +22824,6 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 10/a9dc19ae2220c952bd2231d08ddeecb1b0328b61e72071ff4000c8384e145cc07c1c0bdb3b5a1cb06e186a7b2790f1dee793418b332f6ddf320de25d9125be7e
-  languageName: node
-  linkType: hard
-
-"svg-parser@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "svg-parser@npm:2.0.4"
-  checksum: 10/ec196da6ea21481868ab26911970e35488361c39ead1c6cdd977ba16c885c21a91ddcbfd113bfb01f79a822e2a751ef85b2f7f95e2cb9245558ebce12c34af1f
   languageName: node
   linkType: hard
 
