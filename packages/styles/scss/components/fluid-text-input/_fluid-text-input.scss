@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -48,6 +48,11 @@
       inset-inline-end: $spacing-05;
       inset-inline-start: auto;
     }
+  }
+  .#{$prefix}--text-input--fluid.#{$prefix}--text-input-wrapper--readonly
+    .#{$prefix}--text-input__field-wrapper
+    .#{$prefix}--text-input {
+    color: $text-secondary;
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar,

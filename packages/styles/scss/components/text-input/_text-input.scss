@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -152,19 +152,11 @@
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
     svg {
-    fill: $icon-secondary;
-    transition: fill $duration-fast-01 motion(standard, productive);
+    fill: $icon-primary;
   }
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
     @include focus-outline('outline');
-  }
-
-  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
-    svg,
-  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
-    svg {
-    fill: $icon-primary;
   }
 
   .#{$prefix}--text-input--invalid,
