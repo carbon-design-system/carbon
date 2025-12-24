@@ -124,6 +124,29 @@ describe('cds-textarea', () => {
     expect(skeleton).to.exist;
   });
 
+  it('should support hide-label on skeleton variant', async () => {
+    const el = await fixture(html`
+      <cds-textarea-skeleton></cds-textarea-skeleton>
+    `);
+
+    await el.updateComplete;
+
+    const label = el.shadowRoot?.querySelector(`.cds--label.cds--skeleton`);
+    expect(label).to.exist;
+
+    const elHiddenLabel = await fixture(html`
+      <cds-textarea-skeleton hide-label></cds-textarea-skeleton>
+    `);
+
+    await elHiddenLabel.updateComplete;
+
+    // label should not render when hide-label is true
+    const hiddenLabel = elHiddenLabel.shadowRoot?.querySelector(
+      `.cds--label.cds--skeleton`
+    );
+    expect(hiddenLabel).to.not.exist;
+  });
+
   it('should be accessible', async () => {
     const el = await fixture(html`
       <cds-textarea
