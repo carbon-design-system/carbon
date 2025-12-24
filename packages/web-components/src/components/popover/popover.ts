@@ -14,7 +14,7 @@ import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import FloatingUIContoller from '../../globals/controllers/floating-controller';
+import FloatingUIController from '../../globals/controllers/floating-controller';
 import { POPOVER_BACKGROUND_TOKEN } from './defs';
 import type { Boundary, Rect } from '@floating-ui/dom';
 
@@ -28,7 +28,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   /**
    * Create popover controller instance
    */
-  private popoverController = new FloatingUIContoller(this);
+  private popoverController = new FloatingUIController(this);
 
   /**
    * The `<slot>` element in the shadow DOM.

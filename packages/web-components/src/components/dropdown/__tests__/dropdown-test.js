@@ -362,6 +362,90 @@ describe('cds-dropdown', function () {
     });
   });
 
+  describe('auto align behavior', () => {
+    it('should apply autoalign classes and run floating placement when opened', async () => {
+      const el = await fixture(html`
+        <cds-dropdown autoalign title-text="Dropdown Label">
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const listBox = el.shadowRoot.querySelector('.cds--list-box');
+      expect(listBox.classList.contains('cds--autoalign')).to.be.true;
+
+      const menu = el.shadowRoot.querySelector('#menu-body');
+      const triggerButton = el.shadowRoot.querySelector('#trigger-button');
+      const placementCalls = [];
+      const originalSetPlacement = el._floatingController.setPlacement;
+      el._floatingController.setPlacement = (options) => {
+        placementCalls.push(options);
+      };
+
+      try {
+        el.open = true;
+        await el.updateComplete;
+
+        expect(placementCalls.length).to.equal(1);
+        expect(placementCalls[0].target).to.equal(menu);
+        expect(placementCalls[0].trigger).to.equal(triggerButton);
+        expect(placementCalls[0].alignment).to.equal('bottom');
+        expect(placementCalls[0].matchWidth).to.be.true;
+        expect(placementCalls[0].open).to.be.true;
+
+        el.direction = 'top';
+        await el.updateComplete;
+
+        expect(placementCalls.length).to.equal(2);
+        expect(placementCalls[1].alignment).to.equal('top');
+      } finally {
+        el._floatingController.setPlacement = originalSetPlacement;
+      }
+    });
+
+    it('should reset floating styles when autoalign is disabled while open', async () => {
+      const el = await fixture(html`
+        <cds-dropdown autoalign open title-text="Dropdown Label">
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const menu = el.shadowRoot.querySelector('#menu-body');
+      const listBox = el.shadowRoot.querySelector('.cds--list-box');
+      const originalHostDisconnected = el._floatingController.hostDisconnected;
+      let hostDisconnectedCalled = 0;
+      el._floatingController.hostDisconnected = () => {
+        hostDisconnectedCalled += 1;
+      };
+
+      menu.style.left = '10px';
+      menu.style.top = '5px';
+      menu.style.position = 'fixed';
+      menu.style.width = '100px';
+      menu.style.visibility = 'visible';
+      menu.setAttribute('align', 'bottom');
+
+      try {
+        el.autoalign = false;
+        await el.updateComplete;
+
+        expect(hostDisconnectedCalled).to.equal(1);
+        expect(menu.style.left).to.equal('');
+        expect(menu.style.top).to.equal('');
+        expect(menu.style.position).to.equal('');
+        expect(menu.style.width).to.equal('');
+        expect(menu.style.visibility).to.equal('');
+        expect(menu.hasAttribute('align')).to.be.false;
+        expect(listBox.classList.contains('cds--autoalign')).to.be.false;
+      } finally {
+        el._floatingController.hostDisconnected = originalHostDisconnected;
+      }
+    });
+  });
+
   describe('events', () => {
     it('should fire cds-dropdown-selected event when item is selected', async () => {
       const el = await fixture(dropdown);
