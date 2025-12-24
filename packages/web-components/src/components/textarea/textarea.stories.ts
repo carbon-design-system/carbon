@@ -191,12 +191,19 @@ export const Default = {
 };
 
 export const Skeleton = {
+  args,
+  argTypes,
   parameters: {
     percy: {
       skip: true,
     },
+    controls: {
+      include: ['hideLabel'],
+    },
   },
-  render: () => html` <cds-textarea-skeleton></cds-textarea-skeleton> `,
+  render: ({ hideLabel }) => html`
+    <cds-textarea-skeleton ?hide-label=${hideLabel}></cds-textarea-skeleton>
+  `,
 };
 
 export const WithAILabel = {
