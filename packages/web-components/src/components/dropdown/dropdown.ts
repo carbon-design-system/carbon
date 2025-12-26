@@ -1156,6 +1156,11 @@ class CDSDropdown extends ValidityMixin(
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;
 
+    // Don't show invalid or warning states when disabled or readonly
+    const effectiveInvalid = invalid && !disabled && !this.readOnly;
+    const effectiveWarn =
+      !effectiveInvalid && warn && !disabled && !this.readOnly;
+
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
     ).length;
@@ -1185,7 +1190,6 @@ class CDSDropdown extends ValidityMixin(
       toggleLabelClosed,
       toggleLabelOpen,
       type,
-      warn,
       warnText,
       _activeDescendant: activeDescendant,
       _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
@@ -1207,6 +1211,11 @@ class CDSDropdown extends ValidityMixin(
       const items = this.querySelectorAll(constructor.selectorItem);
       activeDescendantFallback = items[0]?.id;
     }
+
+    // Calculate effective states
+    const effectiveInvalid = this.invalid && !this.disabled && !this.readOnly;
+    const effectiveWarn =
+      !effectiveInvalid && this.warn && !this.disabled && !this.readOnly;
 
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
