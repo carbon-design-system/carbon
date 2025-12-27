@@ -30,6 +30,20 @@
     list-style: none;
   }
 
+  // Allow native list-style-type for disc, circle, square markers
+  // Override list-style: none for these marker types
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-disc {
+    list-style-type: disc;
+  }
+
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-circle {
+    list-style-type: circle;
+  }
+
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-square {
+    list-style-type: square;
+  }
+
   .#{$prefix}--list--unordered:not(.#{$prefix}--list--nested) {
     margin-inline-start: $spacing-05;
   }
@@ -77,9 +91,57 @@
     list-style-type: lower-latin;
   }
 
+  // Unordered list marker types
+  // Default behavior (backward compatible): hyphen for top-level, square for nested
   .#{$prefix}--list--unordered > .#{$prefix}--list__item {
     position: relative;
 
+    &::before {
+      position: absolute;
+      // – en dash (default for top-level)
+      content: '\002013';
+      inset-inline-start: calc(-1 * #{$spacing-05});
+    }
+  }
+
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested
+    > .#{$prefix}--list__item::before {
+    // ▪ square (default for nested, backward compatible)
+    content: '\0025AA';
+    // offset to account for smaller ▪ vs –
+    inset-inline-start: calc(-1 * #{$spacing-04});
+  }
+
+  // Marker type: disc
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-disc {
+    > .#{$prefix}--list__item {
+      &::before {
+        content: none;
+      }
+    }
+  }
+
+  // Marker type: circle
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-circle {
+    > .#{$prefix}--list__item {
+      &::before {
+        content: none;
+      }
+    }
+  }
+
+  // Marker type: square
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-square {
+    > .#{$prefix}--list__item {
+      &::before {
+        content: none;
+      }
+    }
+  }
+
+  // Marker type: hyphen (explicit)
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-hyphen
+    > .#{$prefix}--list__item {
     &::before {
       position: absolute;
       // – en dash
@@ -88,11 +150,35 @@
     }
   }
 
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested
+  // Marker type: custom
+  .#{$prefix}--list--unordered.#{$prefix}--list--marker-custom
+    > .#{$prefix}--list__item {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      // Custom marker content will be set via CSS custom property
+      content: var(--#{$prefix}--list--marker-content, '\002013');
+      inset-inline-start: calc(-1 * #{$spacing-05});
+    }
+  }
+
+  // Nested lists with marker types
+  // When nested and marker type is specified, adjust spacing for pseudo-elements
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-hyphen
     > .#{$prefix}--list__item::before {
-    // ▪ square
-    content: '\0025AA';
-    // offset to account for smaller ▪ vs –
-    inset-inline-start: calc(-1 * #{$spacing-04});
+    inset-inline-start: calc(-1 * #{$spacing-05});
+  }
+
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-custom
+    > .#{$prefix}--list__item::before {
+    inset-inline-start: calc(-1 * #{$spacing-05});
+  }
+
+  // For nested lists with disc/circle/square, use smaller offset if needed
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-disc,
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-circle,
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-square {
+    // These use native list-style-type, so no special spacing needed
   }
 }

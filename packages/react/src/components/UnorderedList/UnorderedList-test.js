@@ -23,6 +23,7 @@ describe('UnorderedList', () => {
   });
 
   it('should render nested lists', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(
       <UnorderedList>
         <ListItem>Item</ListItem>
@@ -35,6 +36,7 @@ describe('UnorderedList', () => {
     expect(screen.getByTestId('nested-list')).toHaveClass(
       `${prefix}--list--nested`
     );
+    spy.mockRestore();
   });
 
   it('should add custom className given via className prop', () => {
@@ -56,5 +58,95 @@ describe('UnorderedList', () => {
 
     expect(container.firstChild).toHaveClass(`${prefix}--list--unordered`);
     expect(container.firstChild).toHaveClass(`${prefix}--list--expressive`);
+  });
+
+  it('should render with disc marker type', () => {
+    const { container } = render(
+      <UnorderedList type="disc" data-testid="list">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(screen.getByTestId('list')).toHaveClass(
+      `${prefix}--list--marker-disc`
+    );
+  });
+
+  it('should render with circle marker type', () => {
+    const { container } = render(
+      <UnorderedList type="circle" data-testid="list">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(screen.getByTestId('list')).toHaveClass(
+      `${prefix}--list--marker-circle`
+    );
+  });
+
+  it('should render with square marker type', () => {
+    const { container } = render(
+      <UnorderedList type="square" data-testid="list">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(screen.getByTestId('list')).toHaveClass(
+      `${prefix}--list--marker-square`
+    );
+  });
+
+  it('should render with hyphen marker type', () => {
+    const { container } = render(
+      <UnorderedList type="hyphen" data-testid="list">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(screen.getByTestId('list')).toHaveClass(
+      `${prefix}--list--marker-hyphen`
+    );
+  });
+
+  it('should render with custom marker type', () => {
+    const { container } = render(
+      <UnorderedList type="custom" customMarker="→" data-testid="list">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(screen.getByTestId('list')).toHaveClass(
+      `${prefix}--list--marker-custom`
+    );
+    expect(screen.getByTestId('list')).toHaveStyle({
+      '--cds--list--marker-content': "'→'",
+    });
+  });
+
+  it('should default to hyphen marker for top-level lists', () => {
+    const { container } = render(
+      <UnorderedList data-testid="list">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(screen.getByTestId('list')).toHaveClass(
+      `${prefix}--list--marker-hyphen`
+    );
+  });
+
+  it('should default to square marker for nested lists', () => {
+    // Mock console.warn to suppress expected deprecation warning
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { container } = render(
+      <UnorderedList nested data-testid="list">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+
+    expect(screen.getByTestId('list')).toHaveClass(
+      `${prefix}--list--marker-square`
+    );
+    spy.mockRestore();
   });
 });
