@@ -85,3 +85,14 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
+
+  packages:
+    runs-on: ubuntu-latest
+    # only promote the packages to latest if the version is not a release candidate
+    if: contains(github.ref_name, '-rc') == false
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: ./actions/promote
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DRY_RUN: false
