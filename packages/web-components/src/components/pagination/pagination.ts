@@ -362,7 +362,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   totalPages = 1;
 
   updated(changedProperties) {
-    const { page, pageSize, totalItems, pagesUnknown } = this;
+    const { pageSize, totalItems } = this;
     const { selectorPageSizesSelect, selectorPagesSelect } = this
       .constructor as typeof CDSPagination;
 
@@ -409,13 +409,18 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     }
 
     if (changedProperties.has('page')) {
-      const newStart = this._calculateStart(
-        page,
-        pageSize,
-        totalItems,
-        pagesUnknown
+      this.start = this._calculateStart(
+        this.page,
+        this.pageSize,
+        this.totalItems,
+        this.pagesUnknown
       );
-      this._handleUserInitiatedChangeStart(newStart);
+      const pagesSelect = this.shadowRoot?.querySelector(
+        (this.constructor as typeof CDSPagination).selectorPagesSelect
+      ) as CDSSelect | null;
+      if (pagesSelect) {
+        pagesSelect.value = String(this.page);
+      }
     }
   }
 
