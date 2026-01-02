@@ -94,6 +94,12 @@ class CDSPasswordInput extends CDSTextInput {
   tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.CENTER;
 
   /**
+   * Set to true to use the fluid version.
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
    * Specify the direction of the tooltip for icon-only buttons.
    * Can be either top, right, bottom, or left.
    */
@@ -124,6 +130,7 @@ class CDSPasswordInput extends CDSTextInput {
       label,
       readonly,
       required,
+      isFluid,
       size,
       type,
       warn,
@@ -245,6 +252,17 @@ class CDSPasswordInput extends CDSTextInput {
         </div>`
       : null;
 
+    const validationMessage =
+      normalizedProps.invalid || normalizedProps.warn
+        ? html`<div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>`
+        : null;
+
     let align = '';
 
     if (
@@ -313,15 +331,13 @@ class CDSPasswordInput extends CDSTextInput {
                   : this.showPasswordLabel}
               </cds-tooltip-content>
             </cds-tooltip>
+            ${isFluid
+              ? html`<hr class="${prefix}--text-input__divider" />`
+              : null}
+            ${isFluid && !inline ? validationMessage : null}
           </div>
-          ${!inline ? helper : null}
-          <div
-            class="${prefix}--form-requirement"
-            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
-            <slot name="${normalizedProps['slot-name']}">
-              ${normalizedProps['slot-text']}
-            </slot>
-          </div>
+          ${/* Non-fluid: validation and helper outside field wrapper */ ''}
+          ${!isFluid && !inline ? validationMessage || helper : null}
         </div>
       </div>
     `;
