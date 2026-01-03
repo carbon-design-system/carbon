@@ -55,12 +55,15 @@ export const stackblitzPrefillConfig = (
     componentNames: Array<string>,
     storyCode: string
   ) => {
-    return componentNames.filter((componentName) => {
-      // Grab the component and add the "<" resulting in"`<ComponentName`
-      const regex = new RegExp(`<${componentName}\\b`, 'g');
-      // Check if the component exists in the `storyCode`
-      return regex.test(storyCode);
-    });
+    return componentNames
+      .filter((componentName) => {
+        const regex = new RegExp(`<${componentName}\\b`, 'g');
+        return regex.test(storyCode);
+      })
+      .map((componentName) => {
+        const previewVersion = `preview__${componentName}`;
+        return carbonComponents[previewVersion] ? previewVersion : componentName;
+      });
   };
 
   // Get all matched components
