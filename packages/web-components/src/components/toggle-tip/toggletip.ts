@@ -15,7 +15,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import FloatingUIContoller from '../../globals/controllers/floating-controller';
+import FloatingUIController from '../../globals/controllers/floating-controller';
 import styles from './toggletip.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
@@ -29,7 +29,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Create popover controller instance
    */
-  private popoverController = new FloatingUIContoller(this);
+  private popoverController = new FloatingUIController(this);
 
   /**
    * How the tooltip is aligned to the trigger button.
