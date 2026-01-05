@@ -92,7 +92,16 @@ jobs:
     if: contains(github.ref_name, '-rc') == false
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      - uses: ./actions/promote
+
+      - name: Promote packages
+        uses: ./actions/promote
         with:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           DRY_RUN: false
+
+      # run deploy-packages workflow
+      - name: Deploy packages
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          event-type: deploy-packages
+
