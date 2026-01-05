@@ -8,7 +8,7 @@
 import { fileURLToPath } from 'url';
 import fs from 'fs-extra';
 import path from 'path';
-import template from 'lodash.template';
+import { template } from 'lodash';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATES_DIR = path.join(__dirname, 'templates');
