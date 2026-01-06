@@ -59,17 +59,21 @@ export const Default = {
   args: defaultArgs,
   argTypes: controls,
   render: ({ label, kind, size, isInset }) => html`
-    <cds-contained-list
-      label="${label}"
-      kind="${kind}"
-      size="${ifDefined(size)}"
-      ?is-inset="${isInset}">
-      ${[...Array(8)].map(
-        () => html`
-          <cds-contained-list-item>List item</cds-contained-list-item>
-        `
-      )}
-    </cds-contained-list>
+    ${Array.from({ length: 4 }).map(
+      () => html`
+        <cds-contained-list
+          label="${label}"
+          kind="${kind}"
+          size="${ifDefined(size)}"
+          ?is-inset="${isInset}">
+          ${Array.from({ length: 8 }).map(
+            () => html`
+              <cds-contained-list-item> List item </cds-contained-list-item>
+            `
+          )}
+        </cds-contained-list>
+      `
+    )}
   `,
 };
 
@@ -108,44 +112,28 @@ export const WithActions = {
     <cds-contained-list label="List title" kind="on-page">
       <cds-contained-list-item>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
       </cds-contained-list-item>
       <cds-contained-list-item disabled>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
       </cds-contained-list-item>
       <cds-contained-list-item>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
       </cds-contained-list-item>
       <cds-contained-list-item>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
@@ -237,44 +225,28 @@ export const WithInteractiveItemsAndActions = {
     <cds-contained-list label="List title" kind="on-page">
       <cds-contained-list-item clickable>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
       </cds-contained-list-item>
       <cds-contained-list-item clickable>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
       </cds-contained-list-item>
       <cds-contained-list-item clickable>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
       </cds-contained-list-item>
       <cds-contained-list-item clickable>
         List item
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
+        <cds-icon-button slot="action" kind="ghost" size="lg">
           ${iconLoader(Close16, { slot: 'icon' })}
           <span slot="tooltip-content">Dismiss</span>
         </cds-icon-button>
