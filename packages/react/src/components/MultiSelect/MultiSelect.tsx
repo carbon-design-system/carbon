@@ -872,6 +872,7 @@ export const MultiSelect = React.forwardRef(
                     key={itemProps.id}
                     isActive={isChecked && !item['isSelectAll']}
                     aria-label={itemText}
+                    aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
