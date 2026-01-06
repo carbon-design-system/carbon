@@ -12,7 +12,7 @@ import '../button/index';
 import '../search/index';
 import '../tag/index';
 import '../overflow-menu/index';
-import '../../../.storybook/templates/with-layer';
+import '../icon-button/index';
 import storyDocs from './contained-list.mdx';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import Add16 from '@carbon/icons/es/add/16.js';
@@ -22,6 +22,7 @@ import Fish16 from '@carbon/icons/es/fish/16.js';
 import Strawberry16 from '@carbon/icons/es/strawberry/16.js';
 import Wheat16 from '@carbon/icons/es/wheat/16.js';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
+import { prefix } from '../../globals/settings';
 
 const kinds = ['on-page', 'disclosed'];
 const sizes = ['sm', 'md', 'lg', 'xl'];
@@ -60,15 +61,17 @@ export const Default = {
   argTypes: controls,
   render: ({ label, kind, size, isInset }) => html`
     ${Array.from({ length: 4 }).map(
-      () => html`
+      (_, i) => html`
         <cds-contained-list
           label="${label}"
           kind="${kind}"
           size="${ifDefined(size)}"
           ?is-inset="${isInset}">
           ${Array.from({ length: 8 }).map(
-            () => html`
-              <cds-contained-list-item> List item </cds-contained-list-item>
+            (_, j) => html`
+              <cds-contained-list-item key="${i}-${j}">
+                List item
+              </cds-contained-list-item>
             `
           )}
         </cds-contained-list>
@@ -144,31 +147,25 @@ export const WithActions = {
 
 export const WithExpandableSearch = {
   render: () => {
+    const listId = 'list-expandable-search';
     const items = ['List item 1', 'List item 2', 'List item 3', 'List item 4'];
 
     return html`
-      <cds-contained-list
-        label="List title"
-        kind="on-page"
-        id="list-with-expandable-search">
+      <cds-contained-list id="${listId}" label="List title" kind="on-page">
         <cds-search
           slot="action"
           expandable
           placeholder="Filter"
           label-text="Search"
+          close-button-label-text="Clear search input"
           size="lg"
           @cds-search-input="${(e) => {
             const searchValue = e.detail.value.toLowerCase();
-            const list = document.getElementById('list-with-expandable-search');
+            const list = document.getElementById(listId);
             const listItems = list?.querySelectorAll('cds-contained-list-item');
-
             listItems?.forEach((item, index) => {
               const text = items[index].toLowerCase();
-              if (text.includes(searchValue)) {
-                item.style.display = '';
-              } else {
-                item.style.display = 'none';
-              }
+              item.style.display = text.includes(searchValue) ? '' : 'none';
             });
           }}">
         </cds-search>
@@ -184,29 +181,23 @@ export const WithExpandableSearch = {
 
 export const WithPersistentSearch = {
   render: () => {
+    const listId = 'list-persistent-search';
     const items = ['List item 1', 'List item 2', 'List item 3', 'List item 4'];
 
     return html`
-      <cds-contained-list
-        label="List title"
-        kind="on-page"
-        id="list-with-persistent-search">
+      <cds-contained-list id="${listId}" label="List title" kind="on-page">
         <cds-search
           placeholder="Filter"
           label-text="Filter search"
+          close-button-label-text="Clear search input"
           size="lg"
           @cds-search-input="${(e) => {
             const searchValue = e.detail.value.toLowerCase();
-            const list = document.getElementById('list-with-persistent-search');
-            const listItems = list.querySelectorAll('cds-contained-list-item');
-
-            listItems.forEach((item, index) => {
+            const list = document.getElementById(listId);
+            const listItems = list?.querySelectorAll('cds-contained-list-item');
+            listItems?.forEach((item, index) => {
               const text = items[index].toLowerCase();
-              if (text.includes(searchValue)) {
-                item.style.display = '';
-              } else {
-                item.style.display = 'none';
-              }
+              item.style.display = text.includes(searchValue) ? '' : 'none';
             });
           }}">
         </cds-search>
@@ -307,86 +298,83 @@ export const _WithLayer = {
 };
 
 export const UsageExamples = {
-  render: () => {
-    const prefix = 'cds';
-    return html`
-      <cds-contained-list label="List title">
-        <cds-icon-button
-          slot="action"
-          kind="primary"
-          align="bottom-right"
-          size="lg">
-          ${iconLoader(Add16, { slot: 'icon' })}
-          <span slot="tooltip-content">Add</span>
-        </cds-icon-button>
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              List item
-              <cds-overflow-menu slot="action" size="lg" flip>
-                ${iconLoader(OverflowMenuVertical16, {
-                  class: `${prefix}--overflow-menu__icon`,
-                  slot: 'icon',
-                })}
-                <span slot="tooltip-content"> Options </span>
-                <cds-overflow-menu-body>
-                  <cds-overflow-menu-item>View details</cds-overflow-menu-item>
-                  <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
-                  <cds-overflow-menu-item danger>
-                    <div class="${prefix}--overflow-menu-item__divider"></div>
-                    Remove
-                  </cds-overflow-menu-item>
-                </cds-overflow-menu-body>
-              </cds-overflow-menu>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
-      <cds-contained-list label="List title">
-        <cds-icon-button
-          slot="action"
-          kind="ghost"
-          size="lg"
-          align="bottom-right">
-          ${iconLoader(Add16, { slot: 'icon' })}
-          <span slot="tooltip-content">Add</span>
-        </cds-icon-button>
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              <div>
-                List item<br />
-                <span class="${prefix}--label ${prefix}--label--no-margin">
-                  Description text
-                </span>
-              </div>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
-      <cds-contained-list label="List title">
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              <div
-                style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 1rem;">
-                <span>List item</span>
-                <span>List item details</span>
-                <span>List item details</span>
-              </div>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
-    `;
-  },
+  render: () => html`
+    <cds-contained-list label="List title">
+      <cds-icon-button
+        slot="action"
+        kind="primary"
+        align="bottom-right"
+        size="lg">
+        ${iconLoader(Add16, { slot: 'icon' })}
+        <span slot="tooltip-content">Add</span>
+      </cds-icon-button>
+      ${[...Array(3)].map(
+        () => html`
+          <cds-contained-list-item>
+            List item
+            <cds-overflow-menu slot="action" size="lg" flip>
+              ${iconLoader(OverflowMenuVertical16, {
+                class: `${prefix}--overflow-menu__icon`,
+                slot: 'icon',
+              })}
+              <span slot="tooltip-content">Options</span>
+              <cds-overflow-menu-body>
+                <cds-overflow-menu-item>View details</cds-overflow-menu-item>
+                <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
+                <cds-overflow-menu-item danger>
+                  <div class="${prefix}--overflow-menu-item__divider"></div>
+                  Remove
+                </cds-overflow-menu-item>
+              </cds-overflow-menu-body>
+            </cds-overflow-menu>
+          </cds-contained-list-item>
+        `
+      )}
+    </cds-contained-list>
+
+    <cds-contained-list label="List title">
+      <cds-icon-button
+        slot="action"
+        kind="ghost"
+        size="lg"
+        align="bottom-right">
+        ${iconLoader(Add16, { slot: 'icon' })}
+        <span slot="tooltip-content">Add</span>
+      </cds-icon-button>
+      ${[...Array(3)].map(
+        () => html`
+          <cds-contained-list-item>
+            <div>
+              List item<br />
+              <span class="${prefix}--label ${prefix}--label--no-margin">
+                Description text
+              </span>
+            </div>
+          </cds-contained-list-item>
+        `
+      )}
+    </cds-contained-list>
+
+    <cds-contained-list label="List title">
+      ${[...Array(3)].map(
+        () => html`
+          <cds-contained-list-item>
+            <div
+              style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 1rem;">
+              <span>List item</span>
+              <span>List item details</span>
+              <span>List item details</span>
+            </div>
+          </cds-contained-list-item>
+        `
+      )}
+    </cds-contained-list>
+  `,
 };
 
 const meta = {
   title: 'Components/Contained list',
-  decorators: [(story) => html`<div>${story()}</div>`],
   parameters: {
-    actions: { argTypesRegex: '^on.*' },
     docs: {
       page: storyDocs,
     },
