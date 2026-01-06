@@ -383,6 +383,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/Pradumn11"><img src="https://avatars.githubusercontent.com/u/99590317?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pradumnya Zendphale</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Pradumn11" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/suniltc-ibm"><img src="https://avatars.githubusercontent.com/u/186133269?v=4?s=100" width="100px;" alt=""/><br /><sub><b>suniltc-ibm</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=suniltc-ibm" title="Code">💻</a></td>
   </tr>
 </table>
 
