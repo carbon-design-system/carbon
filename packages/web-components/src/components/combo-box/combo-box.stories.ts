@@ -56,6 +56,7 @@ const sizes = {
 
 const defaultArgs = {
   direction: DROPDOWN_DIRECTION.BOTTOM,
+  autoalign: false,
   allowCustomValue: false,
   disabled: false,
   hideLabel: false,
@@ -73,6 +74,11 @@ const defaultArgs = {
 };
 
 const controls = {
+  autoalign: {
+    control: 'boolean',
+    description:
+      'Will auto-align the combo box. This attribute is currently experimental and is subject to future changes.',
+  },
   allowCustomValue: {
     control: 'boolean',
     description: `Specify whether or not the ComboBox should allow a value that is not in the list to be entered in the input.`,
@@ -146,6 +152,7 @@ export const Default = {
   },
   render: (args) => {
     const {
+      autoalign,
       allowCustomValue,
       disabled,
       helperText,
@@ -166,6 +173,7 @@ export const Default = {
     return html`
       <cds-combo-box
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?hide-label=${hideLabel}
         helper-text=${ifDefined(helperText)}
         ?invalid=${invalid}
@@ -235,6 +243,7 @@ export const AllowCustomValue = {
   render: (args) => {
     const {
       allowCustomValue,
+      autoalign,
       disabled,
       helperText,
       invalid,
@@ -255,6 +264,7 @@ export const AllowCustomValue = {
       <cds-combo-box
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         helper-text=${ifDefined(helperText)}
         ?hide-label=${hideLabel}
         ?invalid=${invalid}
@@ -281,6 +291,72 @@ export const AllowCustomValue = {
   },
 };
 
+export const ExperimentalAutoAlign = {
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    autoalign: true,
+    direction: DROPDOWN_DIRECTION.BOTTOM,
+    helperText: 'Combobox helper text',
+    titleText: 'ComboBox title',
+  },
+  render: (args) => {
+    const {
+      autoalign,
+      allowCustomValue,
+      disabled,
+      helperText,
+      invalid,
+      titleText,
+      hideLabel,
+      direction,
+      readOnly,
+      warn,
+      warnText,
+      size,
+      label,
+      type,
+      invalidText,
+      value,
+      typeahead,
+    } = args ?? {};
+    return html`
+      <div style="width:400px">
+        <div style="height: 300px"></div>
+        <cds-combo-box
+          ?autoalign=${autoalign}
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          ?read-only=${readOnly}
+          ?allow-custom-value=${allowCustomValue}
+          title-text=${ifDefined(titleText)}
+          size=${ifDefined(size)}
+          type=${ifDefined(type)}
+          value=${ifDefined(value)}
+          label=${ifDefined(label)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          ?typeahead=${typeahead}>
+          ${items.map(
+            (elem) => html`
+              <cds-combo-box-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-combo-box-item
+              >
+            `
+          )}
+        </cds-combo-box>
+        <div style="height: 800px"></div>
+      </div>
+    `;
+  },
+};
+
 export const AutocompleteWithTypeahead = {
   argTypes: controls,
   args: {
@@ -292,6 +368,7 @@ export const AutocompleteWithTypeahead = {
   render: (args) => {
     const {
       allowCustomValue,
+      autoalign,
       disabled,
       helperText,
       invalid,
@@ -312,6 +389,7 @@ export const AutocompleteWithTypeahead = {
       <cds-combo-box
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         helper-text=${ifDefined(helperText)}
         ?hide-label=${hideLabel}
         ?invalid=${invalid}
@@ -348,6 +426,7 @@ export const WithAILabel = {
   render: (args) => {
     const {
       allowCustomValue,
+      autoalign,
       disabled,
       helperText,
       invalid,
@@ -367,6 +446,7 @@ export const WithAILabel = {
     return html`
       <cds-combo-box
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?hide-label=${hideLabel}
         helper-text=${ifDefined(helperText)}
         ?invalid=${invalid}
@@ -408,6 +488,7 @@ export const WithLayer = {
   render: (args) => {
     const {
       allowCustomValue,
+      autoalign,
       disabled,
       helperText,
       invalid,
@@ -429,6 +510,7 @@ export const WithLayer = {
         <div style="width:300px">
           <cds-combo-box
             direction=${ifDefined(direction)}
+            ?autoalign=${autoalign}
             ?disabled=${disabled}
             helper-text=${ifDefined(helperText)}
             ?hide-label=${hideLabel}
