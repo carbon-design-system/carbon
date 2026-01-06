@@ -29,12 +29,10 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['relative'],
     },
     docs: {
       page: mdx,
-    },
-    controls: {
-      exclude: ['relative'],
     },
   },
 };

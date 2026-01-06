@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PaginationNav from '../PaginationNav';
-import './styles.scss';
 import mdx from './PaginationNav.mdx';
 
 export default {

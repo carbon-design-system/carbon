@@ -384,7 +384,7 @@ const ComposedModalDialog = React.forwardRef<
     if (
       shouldCloseOnOutsideClick &&
       target instanceof Node &&
-      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus, prefix) &&
       innerModal.current &&
       !innerModal.current.contains(target) &&
       !innerModal.current.contains(mouseDownTarget)
@@ -415,6 +415,7 @@ const ComposedModalDialog = React.forwardRef<
         currentActiveNode,
         oldActiveNode,
         selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
+        prefix,
       });
     }
 
