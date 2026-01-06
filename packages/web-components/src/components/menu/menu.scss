@@ -17,6 +17,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-menu) {
   position: fixed;
+  z-index: z('modal');
   --grid-template: 1fr max-content;
   --display-icon-item: none;
   --display-selection-icon: none;
