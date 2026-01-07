@@ -1599,6 +1599,5 @@
       "contributions": ["code"]
     }
   ],
-  "commitConvention": "none",
-  "commitType": "docs"
+  "commitConvention": "none"
 }
