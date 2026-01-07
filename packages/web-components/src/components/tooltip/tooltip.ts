@@ -259,12 +259,6 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   static get selectorTooltipContent() {
     return `${prefix}-tooltip-content`;
   }
-
-  // static get styles() {
-  //   return css`
-  //     ${super.styles}${styles}
-  //   `;
-  // }
 }
 
 export default CDSTooltip;
