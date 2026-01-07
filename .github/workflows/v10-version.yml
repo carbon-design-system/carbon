@@ -15,13 +15,13 @@ jobs:
     if: github.repository == 'carbon-design-system/carbon'
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: '0'
           fetch-tags: true
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -105,7 +105,7 @@ jobs:
       - name: Create Pull Request
         # Do not create PR for release commits
         if: steps.check-commit.outputs.is_release_commit != 'true'
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725 # v8.0.0
         with:
           branch: 'release/${{ steps.calculate-tag.outputs.nextTag }}'
           commit-message:

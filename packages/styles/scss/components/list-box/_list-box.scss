@@ -533,6 +533,11 @@ $list-box-menu-width: convert.to-rem(300px);
     }
   }
 
+  // Allow auto-alignment to control inline placement
+  .#{$prefix}--autoalign .#{$prefix}--list-box__menu {
+    inset-inline: auto;
+  }
+
   .#{$prefix}--list-box .#{$prefix}--list-box__field[aria-expanded='false'] {
     .#{$prefix}--list-box__menu {
       display: none;
@@ -885,9 +890,7 @@ $list-box-menu-width: convert.to-rem(300px);
   // When handling input, we need to target nodes that specifically opt-in to
   // the type text in order to make sure the text input is styled
   // correctly.
-  // TODO: remove [role='combobox'] in v11
-  .#{$prefix}--list-box input[role='combobox'],
-  .#{$prefix}--list-box input[type='text'] {
+  .#{$prefix}--list-box .#{$prefix}--text-input {
     background-color: inherit;
     min-inline-size: 0;
     text-overflow: ellipsis;
@@ -1156,18 +1159,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__invalid-icon {
     inset-inline-end: convert.to-rem(114px);
   }
-  .#{$prefix}--list-box__wrapper--decorator
-    .#{$prefix}--list-box--invalid
-    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
-    ~ .#{$prefix}--list-box__inner-wrapper--decorator
-    > *,
-  .#{$prefix}--list-box__wrapper--decorator
-    .#{$prefix}--list-box--warning
-    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
-    ~ .#{$prefix}--list-box__inner-wrapper--decorator
-    > * {
-    inset-inline-end: convert.to-rem(116px);
-  }
+
   // Windows HCM fix
   .#{$prefix}--list-box__field,
   .#{$prefix}--list-box__menu,

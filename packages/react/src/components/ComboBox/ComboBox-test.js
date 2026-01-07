@@ -672,6 +672,28 @@ describe('ComboBox', () => {
       expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
+    it('should sync the menu active item when `selectedItem` updates externally', async () => {
+      render(<ControlledComboBox />);
+      await openMenu();
+      let menuItems = screen.getAllByRole('option');
+      expect(menuItems[0]).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+
+      await userEvent.keyboard('{Escape}');
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+
+      await openMenu();
+      menuItems = screen.getAllByRole('option');
+      expect(menuItems[3]).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+      expect(menuItems[0]).not.toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+    });
     it('should update and call `onChange` once when selection is updated externally', async () => {
       const { rerender } = render(
         <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
