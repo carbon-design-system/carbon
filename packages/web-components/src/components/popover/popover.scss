@@ -50,6 +50,7 @@ $popover-border-color: custom-property.get-var(
   }
 }
 
+// TODO: used to @extend .#{$prefix}--popover
 :host(#{$prefix}-tooltip[highContrast]),
 :host(#{$prefix}-popover[highContrast]) {
   ::slotted(#{$prefix}-tooltip-content),
@@ -92,6 +93,7 @@ $popover-border-color: custom-property.get-var(
   }
 }
 
+// TODO: used to @extend .#{$prefix}--popover
 :host(#{$prefix}-tooltip-content),
 :host(#{$prefix}-popover-content) {
   position: absolute;
