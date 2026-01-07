@@ -35,8 +35,6 @@ class CDSTooltipContent extends CDSPopoverContent {
       ?.querySelector(`.${prefix}--popover-content`)
       ?.classList.add(`${prefix}--tooltip-content`);
   }
-
-  static styles = styles;
 }
 
 export default CDSTooltipContent;

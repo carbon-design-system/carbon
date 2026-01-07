@@ -129,8 +129,6 @@ class CDSIconButton extends CDSButton {
       </cds-tooltip>
     `;
   }
-
-  static styles = styles;
 }
 
 export default CDSIconButton;

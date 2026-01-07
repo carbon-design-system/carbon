@@ -44,8 +44,6 @@ class CDSChatButtonSkeleton extends LitElement {
 
     return html` <div class="${skeletonClasses}"></div> `;
   }
-
-  static styles = styles;
 }
 
 export default CDSChatButtonSkeleton;
