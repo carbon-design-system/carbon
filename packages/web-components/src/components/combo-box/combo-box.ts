@@ -367,6 +367,7 @@ class CDSComboBox extends CDSDropdown {
         .value=${filterInputValue}
         role="combobox"
         aria-label="${ifNonEmpty(inputLabel)}"
+        aria-labelledby="dropdown-label"
         aria-controls="menu-body"
         aria-haspopup="listbox"
         aria-autocomplete="list"
@@ -404,6 +405,37 @@ class CDSComboBox extends CDSDropdown {
         `;
   }
 
+  protected _renderTitleLabel(): TemplateResult {
+    const {
+      disabled,
+      hideLabel,
+      titleText,
+      _slotTitleTextNode: slotTitleTextNode,
+      _handleSlotchangeLabelText: handleSlotchangeLabelText,
+    } = this;
+
+    const labelClasses = classMap({
+      [`${prefix}--label`]: true,
+      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
+
+    const hasTitleText =
+      titleText ||
+      (slotTitleTextNode && slotTitleTextNode.assignedNodes().length > 0);
+
+    return html`
+      <label
+        id="dropdown-label"
+        part="title-text"
+        class="${labelClasses}"
+        ?hidden="${!hasTitleText}">
+        <slot name="title-text" @slotchange="${handleSlotchangeLabelText}"
+          >${titleText}</slot
+        >
+      </label>
+    `;
+  }
   /**
    * The `aria-label` attribute for the icon to clear selection.
    */
@@ -432,6 +464,12 @@ class CDSComboBox extends CDSDropdown {
     },
   })
   shouldFilterItem: boolean | ShouldFilterItem = false;
+
+  /**
+   * **Experimental**: will enable autocomplete and typeahead for the input field.
+   */
+  @property({ type: Boolean, reflect: true })
+  typeahead = false;
 
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);

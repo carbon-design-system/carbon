@@ -157,7 +157,7 @@ export const DragAndDropUploadContainerExampleApplication = {
     return html`
       <cds-file-uploader
         label-title="Upload files"
-        label-description="Max file size is 500 KB. Supported file types are .jpg and .png."
+        label-description="Max file size is 1 MB. Supported file types are .jpg and .png."
         multiple>
         <cds-file-uploader-drop-container accept="image/jpeg image/png">
           Drag and drop files here or click to upload
@@ -172,7 +172,7 @@ export const DragAndDropUploadSingleContainerExampleApplication = {
     return html`
       <cds-file-uploader
         label-title="Upload a file"
-        label-description="Max file size is 500 KB. Only .jpg files are supported.">
+        label-description="Max file size is 1 MB. Only .jpg files are supported.">
         <cds-file-uploader-drop-container accept="image/jpeg">
           Drag and drop a file here or click to upload
         </cds-file-uploader-drop-container>

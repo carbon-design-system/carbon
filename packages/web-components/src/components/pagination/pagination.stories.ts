@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
 import './index';
 import '../select/index';
+
 import { PAGINATION_SIZE } from './defs';
+import { html } from 'lit';
 
 const sizes = {
   [`Small size (${PAGINATION_SIZE.SMALL})`]: PAGINATION_SIZE.SMALL,
@@ -17,9 +18,9 @@ const sizes = {
 };
 
 const args = {
-  backwardText: 'Previous page',
+  backwardText: 'Previous',
   disabled: false,
-  forwardText: 'Next page',
+  forwardText: 'Next',
   isLastPage: false,
   itemsPerPageText: 'Items per page:',
   page: 1,
