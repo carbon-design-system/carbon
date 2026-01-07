@@ -152,20 +152,33 @@
 @mixin breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
   $is-number-lower: meta.type-of($lower) == 'number';
   $is-number-upper: meta.type-of($upper) == 'number';
-  $min: if(sass($is-number-lower), $lower, map.get($breakpoints, $lower));
-  $max: if(sass($is-number-upper), $upper, map.get($breakpoints, $upper));
+  $min: null;
+  $max: null;
+
+  @if $is-number-lower {
+    $min: $lower;
+  } @else {
+    $min: map.get($breakpoints, $lower);
+  }
+
+  @if $is-number-upper {
+    $max: $upper;
+  } @else {
+    $max: map.get($breakpoints, $upper);
+  }
 
   @if $min and $max {
-    $min-width: if(
-      sass(not $is-number-lower and $min),
-      map.get($min, width),
-      $min
-    );
-    $max-width: if(
-      sass(not $is-number-upper and $max),
-      map.get($max, width),
-      $max
-    );
+    $min-width: $min;
+    $max-width: $max;
+
+    @if not $is-number-lower and meta.type-of($min) == 'map' {
+      $min-width: map.get($min, width);
+    }
+
+    @if not $is-number-upper and meta.type-of($max) == 'map' {
+      $max-width: map.get($max, width);
+    }
+
     @media (min-width: $min-width) and (max-width: $max-width) {
       @content;
     }
