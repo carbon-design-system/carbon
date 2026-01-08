@@ -17,6 +17,9 @@ import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 import OverflowMenu from '../OverflowMenu/OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import { Tabs, TabList, TabPanels, TabPanel } from '../Tabs'; // remove before merging
+import { Tab } from '../Tab'; // remove before merging
+import { Content } from '../UIShell'; // remove before merging
 
 const prefix = 'cds';
 
@@ -67,6 +70,105 @@ const DefaultStory = (props) => {
         </p>
       </PopoverContent>
     </Popover>
+  );
+};
+
+// remove before merging
+export const TestTabIndex0 = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div tabIndex={0}>
+      <Popover open={isOpen} onRequestClose={() => setIsOpen(false)}>
+        <button
+          className="playground-trigger"
+          aria-label="Checkbox"
+          type="button"
+          aria-expanded={isOpen}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}>
+          <CheckboxIcon />
+        </button>
+        <PopoverContent className="p-3">
+          <Checkbox
+            defaultChecked
+            labelText="Checkbox label"
+            id="checkbox-label-2"
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+};
+
+// remove before merging
+export const TestIssueReprod = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+
+  return (
+    <>
+      <div>
+        <Tabs onTabCloseRequest={() => {}}>
+          <TabList>
+            <Tab>Panel1</Tab>
+            <Tab>Panel2</Tab>
+            <Tab>Panel3</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Popover
+                align="bottom-end"
+                autoAlign
+                isTabTip
+                onRequestClose={() => setIsOpen(!isOpen)}
+                open={isOpen}>
+                <button
+                  aria-expanded={isOpen}
+                  aria-label="Settings"
+                  onClick={() => setIsOpen(!isOpen)}
+                  type="button">
+                  <Settings />
+                </button>
+                <PopoverContent className="popovercontent">
+                  <Checkbox
+                    defaultChecked
+                    labelText="Checkbox label"
+                    id="checkbox-label-1"
+                  />
+                </PopoverContent>
+              </Popover>
+            </TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </div>
+      <Content tabIndex="0">
+        <Popover
+          align="bottom-end"
+          autoAlign
+          isTabTip
+          onRequestClose={() => setIsOpen2(!isOpen2)}
+          open={isOpen2}>
+          <button
+            aria-expanded={isOpen2}
+            aria-label="Settings"
+            onClick={() => setIsOpen2(!isOpen2)}
+            type="button">
+            <Settings />
+          </button>
+          <PopoverContent className="popovercontent">
+            <Checkbox
+              defaultChecked
+              labelText="Checkbox label"
+              id="checkbox-label-2"
+            />
+          </PopoverContent>
+        </Popover>
+      </Content>
+    </>
   );
 };
 
