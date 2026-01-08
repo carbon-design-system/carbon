@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
@@ -433,11 +433,13 @@ class CDSNumberInput extends CDSTextInput {
               : null}
           </div>
         </div>
-        <div
-          class="${helperTextClasses}"
-          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
-          <slot name="helper-text"> ${this.helperText} </slot>
-        </div>
+        ${this.helperText
+          ? html`<div
+              class="${helperTextClasses}"
+              ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
+              <slot name="helper-text"> ${this.helperText} </slot>
+            </div>`
+          : nothing}
         <div
           class="${prefix}--form-requirement"
           ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
