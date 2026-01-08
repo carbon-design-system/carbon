@@ -477,7 +477,7 @@ export const FullWidth = {
 export const PassiveModal = {
   args: {
     ...defaultArgs,
-    passviveModal: true,
+    passiveModal: true,
     modalHeading: 'You are now signed out.',
   },
   argTypes: controls,
