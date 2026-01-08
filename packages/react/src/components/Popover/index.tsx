@@ -223,7 +223,6 @@ export const Popover: PopoverComponent & {
       }
 
       onRequestClose?.();
-      return;
     } else if (relatedTarget && !popover.current?.contains(relatedTarget)) {
       const isOutsideFloating =
         enableFloatingStyles && refs.floating.current
