@@ -187,6 +187,27 @@ describe('cds-slider', () => {
     expect(tooltips.length).to.equal(1);
   });
 
+  it('should set input type to hidden when hide text input is true', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const sliderInput = el.firstElementChild;
+    await sliderInput.updateComplete;
+    const input = sliderInput?.shadowRoot?.querySelector('input');
+    expect(input).to.have.attribute('type', 'hidden');
+  });
+
   it('should render tooltips for both handles when hide text input is true', async () => {
     const el = await fixture(
       html` <cds-slider
@@ -209,5 +230,31 @@ describe('cds-slider', () => {
     await el.updateComplete;
     const tooltips = el?.shadowRoot?.querySelectorAll('cds-tooltip');
     expect(tooltips.length).to.equal(2);
+  });
+
+  it('should open tooltip on drag and close on pointerup', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const tooltip = el?.shadowRoot?.querySelector('cds-tooltip');
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
+    const slider = el?.shadowRoot?.querySelector('.cds--slider');
+    thumb?.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await el.updateComplete;
+    expect(tooltip?.open).to.equal(true);
+    slider?.dispatchEvent(new Event('pointerup', { bubbles: true }));
+    await el.updateComplete;
+    expect(tooltip?.open).to.equal(false);
   });
 });
