@@ -6,9 +6,21 @@
  */
 
 import '@carbon/web-components/es/components/overflow-menu/index.js';
+
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-overflow-menu', () => {
+  let originalBodyPosition;
+
+  beforeEach(() => {
+    originalBodyPosition = document.body.style.position;
+    document.body.style.position = 'relative';
+  });
+
+  afterEach(() => {
+    document.body.style.position = originalBodyPosition;
+  });
+
   const basicOverflowMenu = html`<cds-overflow-menu>
     <span slot="tooltip-content">Options</span>
     <cds-overflow-menu-body>
@@ -44,5 +56,45 @@ describe('cds-overflow-menu', () => {
         expect(button).to.have.class(`cds--overflow-menu--${size}`);
       });
     });
+  });
+
+  it('should handle Escape key to close menu', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+
+    menuBody.open = true;
+
+    const event = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+      cancelable: true,
+    });
+
+    menuBody.dispatchEvent(event);
+
+    expect(menuBody.open).to.be.false;
+  });
+
+  it('should close menu when a menu item is clicked', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+
+    el.open = true;
+    await el.updateComplete;
+    await menuBody.updateComplete;
+
+    expect(el.open).to.be.true;
+    expect(menuBody.open).to.be.true;
+
+    const items = menuBody.querySelectorAll('cds-overflow-menu-item');
+
+    items[0].click();
+
+    await new Promise((r) => setTimeout(r, 0));
+    await el.updateComplete;
+    await menuBody.updateComplete;
+
+    expect(el.open).to.be.false;
+    expect(menuBody.open).to.be.false;
   });
 });

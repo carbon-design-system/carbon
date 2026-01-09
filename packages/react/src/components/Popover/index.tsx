@@ -256,9 +256,11 @@ export const Popover: PopoverComponent & {
       // If a value is not set via a custom property, provide a default value that matches the
       // default values defined in the sass style file
       const getStyle = window.getComputedStyle(popover.current, null);
-      const offsetProperty = getStyle.getPropertyValue('--cds-popover-offset');
+      const offsetProperty = getStyle.getPropertyValue(
+        `--${prefix}-popover-offset`
+      );
       const caretProperty = getStyle.getPropertyValue(
-        '--cds-popover-caret-height'
+        `--${prefix}-popover-caret-height`
       );
 
       // Handle if the property values are in px or rem.

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-vue",
   "description": "Vue components for icons in digital and software products using the Carbon Design System",
-  "version": "10.119.0",
+  "version": "10.121.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -30,12 +30,12 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "^10.68.0",
+    "@carbon/icon-helpers": "^10.70.0",
     "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "^10.8.0",
-    "@carbon/icons": "^11.70.0",
+    "@carbon/icons": "^11.72.0",
     "fs-extra": "^11.0.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
