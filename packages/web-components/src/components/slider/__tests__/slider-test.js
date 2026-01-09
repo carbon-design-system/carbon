@@ -1,4 +1,4 @@
-import { fixture, html, expect, oneEvent } from '@open-wc/testing';
+import { fixture, html, expect } from '@open-wc/testing';
 import '@carbon/web-components/es/components/slider/index.js';
 
 describe('cds-slider', () => {
@@ -148,5 +148,66 @@ describe('cds-slider', () => {
     const input = sliderInput?.shadowRoot?.querySelector('.cds--text-input');
     expect(invalidMessage).not.to.exist;
     expect(input).not.to.have.attribute('data-invalid');
+  });
+
+  it('should not render tooltip when text input is visible', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50">
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const tooltips = el?.shadowRoot?.querySelectorAll('cds-tooltip');
+    expect(tooltips.length).to.equal(0);
+  });
+
+  it('should render tooltip when hide text input is true', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const tooltips = el?.shadowRoot?.querySelectorAll('cds-tooltip');
+    expect(tooltips.length).to.equal(1);
+  });
+
+  it('should render tooltips for both handles when hide text input is true', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="10"
+        value-upper="90"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Lower bound"
+          type="number"
+          slot="lower-input"></cds-slider-input>
+        <cds-slider-input
+          aria-label="Upper bound"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const tooltips = el?.shadowRoot?.querySelectorAll('cds-tooltip');
+    expect(tooltips.length).to.equal(2);
   });
 });
