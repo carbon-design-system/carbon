@@ -787,7 +787,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     const outerElementClasses = cx(`${prefix}--form-item`, {
-       
       ...(customClassName ? { [customClassName]: true } : {}),
       [`${prefix}--number-input--fluid--invalid`]:
         isFluid && normalizedProps.invalid,
