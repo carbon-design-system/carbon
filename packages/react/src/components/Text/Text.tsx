@@ -33,7 +33,7 @@ type TextComponent = <T extends ElementType = 'span'>(
   props: TextProps<T> & { ref?: PolymorphicRef<T> }
 ) => ReactElement | null;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TextBase = React.forwardRef(
   (
     {
@@ -103,7 +103,7 @@ Text.propTypes = {
   /**
    * Provide child elements or text to be rendered inside of this component
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 
   /**
    * Specify the text direction to be used for this component and any of its

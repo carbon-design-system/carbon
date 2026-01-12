@@ -50,6 +50,7 @@ const TableToolbar = ({
   });
   return (
     <section
+      role="group"
       aria-label={deprecatedAriaLabel || ariaLabel}
       {...rest}
       className={className}>

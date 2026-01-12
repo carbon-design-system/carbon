@@ -95,12 +95,6 @@ export interface FluidComboBoxProps<ItemType>
   onChange: (data: OnChangeData<ItemType>) => void;
 
   /**
-   * An optional callback to render the currently selected item as a react element instead of only
-   * as a string.
-   */
-  renderSelectedItem?: (selectedItem: ItemType) => React.ReactNode;
-
-  /**
    * In the case you want to control the dropdown selection entirely.
    * */
   selectedItem?: ItemType | null;
@@ -216,12 +210,6 @@ FluidComboBox.propTypes = {
    * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func.isRequired,
-
-  /**
-   * An optional callback to render the currently selected item as a react element instead of only
-   * as a string.
-   */
-  renderSelectedItem: PropTypes.func,
 
   /**
    * In the case you want to control the dropdown selection entirely.

@@ -13,10 +13,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/menu' as *;
-@import './menu-variables';
+@use './menu-variables' as *;
 
 :host(#{$prefix}-menu) {
   position: fixed;
+  z-index: z('modal');
   --grid-template: 1fr max-content;
   --display-icon-item: none;
   --display-selection-icon: none;
@@ -27,6 +28,7 @@ $css--plex: true !default;
   --display-icon-item: flex;
 }
 .#{$prefix}--menu--with-selectable-items {
+  --grid-template: #{$spacing-05} 1fr max-content;
   --display-selection-icon: flex;
 }
 
@@ -56,6 +58,14 @@ $css--plex: true !default;
   }
   &:not(.#{$prefix}--menu--open) .#{$prefix}--menu--open {
     visibility: hidden;
+  }
+
+  &--border {
+    @extend .#{$prefix}--menu--border;
+  }
+
+  &--background-token__background {
+    @extend .#{$prefix}--menu--background-token__background;
   }
 }
 .#{$prefix}--menu--with-icons {

@@ -84,10 +84,12 @@ $link-focus-text-color: custom-property.get-var(
     text-decoration: none;
   }
 
+  .#{$prefix}--link.#{$prefix}--link--visited,
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
     color: $link-visited-text-color;
   }
 
+  .#{$prefix}--link.#{$prefix}--link--visited:hover,
   .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
     color: $link-hover-text-color;
   }

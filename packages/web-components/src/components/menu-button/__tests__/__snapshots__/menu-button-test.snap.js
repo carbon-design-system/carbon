@@ -6,12 +6,13 @@ snapshots['cds-menu-button should render and match snapshot'] =
   kind="primary"
   label="Actions"
   menu-alignment="bottom"
+  menu-background-token="layer"
   size="lg"
   tab-index="0"
 >
   <cds-menu
     size="lg"
-    style="inset-inline-start: 8px; inset-inline-end: initial; inset-block-start: 8px;"
+    style=""
   >
     <cds-menu-item
       label="First action"
@@ -44,12 +45,13 @@ snapshots[
   kind="primary"
   label="Test"
   menu-alignment="bottom"
+  menu-background-token="layer"
   size="lg"
   tab-index="0"
 >
   <cds-menu
     size="lg"
-    style="inset-inline-start: 8px; inset-inline-end: initial; inset-block-start: 8px;"
+    style=""
   >
     <cds-menu-item
       label="First action"
@@ -78,12 +80,13 @@ snapshots[
   kind="primary"
   label="Nested"
   menu-alignment="bottom"
+  menu-background-token="layer"
   size="lg"
   tab-index="0"
 >
   <cds-menu
     size="lg"
-    style="inset-inline-start: 8px; inset-inline-end: initial; inset-block-start: 8px;"
+    style=""
   >
     <cds-menu-item
       aria-expanded="true"

@@ -124,7 +124,7 @@ const DataTableSkeleton = ({
             {columnsArray.map((i) => (
               <th key={i}>
                 {headers ? (
-                  <div className="cds--table-header-label">
+                  <div className={`${prefix}--table-header-label`}>
                     {headers[i]?.header}
                   </div>
                 ) : (

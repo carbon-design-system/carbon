@@ -19,7 +19,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-page-header-tabs`)
 class CDSPageHeaderTabs extends LitElement {
   render() {
-    // eslint-disable-next-line no-empty-pattern -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line no-empty-pattern -- https://github.com/carbon-design-system/carbon/issues/20452
     const {} = this;
     return html` <div class="${prefix}--css-grid">
       <div

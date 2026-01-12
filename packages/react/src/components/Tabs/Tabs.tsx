@@ -36,7 +36,6 @@ import { useControllableState } from '../../internal/useControllableState';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
@@ -140,7 +139,7 @@ function Tabs({
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
     console.error(
       'dismissable property specified without also providing an onTabCloseRequest property.'
     );
@@ -465,7 +464,7 @@ function TabList({
   let hasSecondaryLabelTabs = false;
   if (contained) {
     hasSecondaryLabelTabs = React.Children.toArray(children).some((child) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const _child = child as React.ReactElement<any>;
       return React.isValidElement(child) && !!_child.props.secondaryLabel;
     });
@@ -620,7 +619,7 @@ function TabList({
         inline: 'nearest',
       });
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, []);
 
   useEffect(() => {
@@ -650,7 +649,7 @@ function TabList({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, []);
 
   useIsomorphicEffect(() => {
@@ -760,7 +759,7 @@ function TabList({
                 contained,
               }}>
               {React.cloneElement(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                 child as React.ReactElement<{ ref?: React.Ref<any> }>,
                 {
                   ref: (node) => {
@@ -969,7 +968,7 @@ function TabListVertical({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, []);
 
   useEffect(() => {
@@ -990,7 +989,7 @@ function TabListVertical({
             halfTabHeight >
             containerHeight
         ) {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
           ref.current &&
             ref.current.scrollTo({
               top: (selectedIndex - 1) * verticalTabHeight,
@@ -1064,7 +1063,7 @@ function TabListVertical({
                 hasSecondaryLabel: false,
               }}>
               {React.cloneElement(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                 child as React.ReactElement<{ ref?: React.Ref<any> }>,
                 {
                   ref: (node) => {
@@ -1213,7 +1212,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   secondaryLabel?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Tab = forwardRef<HTMLElement, TabProps>(
   (
     {
@@ -1248,7 +1247,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(
     const panelId = `${baseId}-tabpanel-${index}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const isEllipsisActive = (element: any) => {
       setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
       return element.offsetHeight < element.scrollHeight;
@@ -1348,7 +1347,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(
         })}>
         <button
           type="button"
-          tabIndex={selectedIndex === index && dismissable ? 0 : -1}
+          tabIndex={-1}
           aria-disabled={disabled}
           aria-hidden={
             selectedIndex === index && dismissable ? 'false' : 'true'
@@ -1585,7 +1584,7 @@ export interface IconTabProps extends DivAttributes {
    */
   leaveDelayMs?: number;
 }
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
   (
     {
@@ -1686,60 +1685,16 @@ export interface TabPanelProps extends DivAttributes {
   className?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ({ children, className: customClassName, ...rest }, forwardRef) => {
     const prefix = usePrefix();
-    const panel = useRef<HTMLDivElement>(null);
-    const ref = useMergedRefs([forwardRef, panel]);
 
-    const [tabIndex, setTabIndex] = useState(0);
-    const [interactiveContent, setInteractiveContent] = useState(false);
     const { selectedIndex, baseId } = React.useContext(TabsContext);
     const index = React.useContext(TabPanelContext);
     const id = `${baseId}-tabpanel-${index}`;
     const tabId = `${baseId}-tab-${index}`;
-    const className = cx(`${prefix}--tab-content`, customClassName, {
-      [`${prefix}--tab-content--interactive`]: interactiveContent,
-    });
-
-    useEffect(() => {
-      if (!panel.current) {
-        return;
-      }
-
-      const content = getInteractiveContent(panel.current);
-      if (content) {
-        setInteractiveContent(true);
-        setTabIndex(-1);
-      }
-    }, []);
-
-    // tabindex should only be 0 if no interactive content in children
-    useEffect(() => {
-      const node = panel.current;
-      if (!node) {
-        return;
-      }
-
-      function callback() {
-        const content = getInteractiveContent(node as HTMLElement);
-        if (content) {
-          setInteractiveContent(true);
-          setTabIndex(-1);
-        } else {
-          setInteractiveContent(false);
-          setTabIndex(0);
-        }
-      }
-      const observer = new MutationObserver(callback);
-
-      observer.observe(node, {
-        childList: true,
-        subtree: true,
-      });
-      return () => observer.disconnect();
-    }, []);
+    const className = cx(`${prefix}--tab-content`, customClassName);
 
     return (
       <div
@@ -1747,9 +1702,8 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         aria-labelledby={tabId}
         id={id}
         className={className}
-        ref={ref}
+        ref={forwardRef}
         role="tabpanel"
-        tabIndex={tabIndex}
         hidden={selectedIndex !== index}>
         {children}
       </div>
@@ -1822,7 +1776,7 @@ function TabPanels({ children }: TabPanelsProps) {
       {React.Children.map(children, (child, index) => {
         return !isElement(child) ? null : (
           <TabPanelContext.Provider value={index}>
-            {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071 */}
+            {/*eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452 */}
             {React.cloneElement(child as React.ReactElement<any>, {
               ref: (element: HTMLDivElement) => {
                 refs.current[index] = element;

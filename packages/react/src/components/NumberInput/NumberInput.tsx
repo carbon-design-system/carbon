@@ -210,14 +210,18 @@ export interface NumberInputProps
   min?: number;
 
   /**
-   * Provide an optional handler that is called when the input or stepper
-   * buttons are blurred.
+   * Provide an optional handler that is called when the input is blurred.
    */
   onBlur?: (
-    event:
-      | React.FocusEvent<HTMLInputElement>
-      | React.FocusEvent<HTMLButtonElement>
+    event: React.FocusEvent<HTMLInputElement>,
+    value?: string | number
   ) => void;
+
+  /**
+   * Provide an optional handler that is called when the stepper
+   * buttons are blurred.
+   */
+  onStepperBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
 
   /**
    * Provide an optional handler that is called when the internal state of
@@ -370,7 +374,7 @@ export const validateNumberSeparators = (
   return !isNaN(Number(normalized));
 };
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (props: NumberInputProps, forwardRef) => {
     const {
@@ -394,6 +398,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       max,
       min,
       onBlur,
+      onStepperBlur,
       onChange,
       onClick,
       onKeyUp,
@@ -431,7 +436,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
       return 0;
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
 
@@ -614,7 +619,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const Icon = normalizedProps.icon as any;
 
     const getDecimalPlaces = (num: number) => {
@@ -750,9 +755,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
                   match(e, keys.ArrowUp) && handleStep(e, 'up');
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
                   match(e, keys.ArrowDown) && handleStep(e, 'down');
                 }
 
@@ -774,6 +779,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   e.target.removeEventListener('wheel', disableWheel);
                 }
 
+                let parsedValueForBlur: number | undefined;
                 if (type === 'text') {
                   // When isControlled, the current inputValue needs re-parsed
                   // because the consumer's onChange hasn't been called yet and
@@ -795,6 +801,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   // the input. To avoid this, formattedValue is re-parsed.
                   const parsedFormattedNewValue =
                     numberParser.parse(formattedValue);
+                  parsedValueForBlur = parsedFormattedNewValue;
 
                   if (onChange && isValid) {
                     const state = {
@@ -830,7 +837,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                 }
 
                 if (onBlur) {
-                  onBlur(e);
+                  if (type === 'number') {
+                    onBlur(e, value);
+                    return;
+                  }
+
+                  const parsedTextValue =
+                    parsedValueForBlur ??
+                    (isControlled
+                      ? numberParser.parse(inputValue)
+                      : numberValue);
+                  onBlur(e, parsedTextValue);
                 }
               }}
               pattern={pattern}
@@ -858,7 +875,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn down-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'down')}
-                  onBlur={onBlur}
+                  onBlur={onStepperBlur}
                   tabIndex={-1}
                   title={decrementNumLabel || iconDescription}
                   type="button">
@@ -870,7 +887,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn up-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'up')}
-                  onBlur={onBlur}
+                  onBlur={onStepperBlur}
                   tabIndex={-1}
                   title={incrementNumLabel || iconDescription}
                   type="button">
@@ -1025,10 +1042,15 @@ NumberInput.propTypes = {
   stepStartValue: PropTypes.number,
 
   /**
-   * Provide an optional handler that is called when the input or stepper
-   * buttons are blurred.
+   * Provide an optional handler that is called when the input is blurred.
    */
   onBlur: PropTypes.func,
+
+  /**
+   * Provide an optional handler that is called when the stepper
+   * buttons are blurred.
+   */
+  onStepperBlur: PropTypes.func,
 
   /**
    * Provide an optional handler that is called when the internal state of

@@ -15,7 +15,7 @@
  * @type {boolean}
  */
 export const CDS_FLAGS_ALL: boolean =
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
   process!.env.CDS_FLAGS_ALL === 'true' || false;
 
 /**
@@ -24,7 +24,7 @@ export const CDS_FLAGS_ALL: boolean =
  * @type {boolean}
  */
 export const CDS_EXPERIEMENTAL_COMPONENT_NAME: boolean =
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
   process!.env.CDS_EXPERIEMENTAL_COMPONENT_NAME === 'true' ||
   CDS_FLAGS_ALL ||
   false;

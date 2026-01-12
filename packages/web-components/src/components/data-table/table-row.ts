@@ -53,7 +53,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventRadioChange')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleClickSelectionRadio(event: CustomEvent) {
     const { detail } = event;
@@ -87,7 +87,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventCheckboxChange')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-expect-error
   private _handleClickSelectionCheckbox(event: CustomEvent) {
     const { detail } = event;
@@ -360,7 +360,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * The `aria-label` attribute for the `<label>` for selection.
    */
   @property({ attribute: 'selection-label' })
-  selectionLabel = '';
+  selectionLabel = 'Select row';
 
   /**
    * The `name` attribute for the `<input>` for selection.
