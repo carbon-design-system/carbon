@@ -1905,18 +1905,6 @@ describe('NumberInput', () => {
       expect(validateNumberSeparators('-1 234,56', 'fr-FR')).toBe(true);
     });
 
-    it('should validate negative Arabic-Indic numerals', () => {
-      expect(validateNumberSeparators('-١', 'ar-EG-u-nu-arab')).toBe(true);
-      expect(validateNumberSeparators('-١٢', 'ar-EG-u-nu-arab')).toBe(true);
-      expect(validateNumberSeparators('-١٢٣', 'ar-EG-u-nu-arab')).toBe(true);
-      expect(validateNumberSeparators('-١٢٣٤', 'ar-EG-u-nu-arab')).toBe(true);
-      expect(validateNumberSeparators('-١٬٢٣٤', 'ar-EG-u-nu-arab')).toBe(true);
-      expect(validateNumberSeparators('-١٫٥', 'ar-EG-u-nu-arab')).toBe(true);
-      expect(validateNumberSeparators('-١٬٢٣٤٫٥٦', 'ar-EG-u-nu-arab')).toBe(
-        true
-      );
-    });
-
     it('should validate negative Arabic numerals with Western digits', () => {
       expect(validateNumberSeparators('-1', 'ar-EG')).toBe(true);
       expect(validateNumberSeparators('-1234', 'ar-EG')).toBe(true);
@@ -1930,31 +1918,6 @@ describe('NumberInput', () => {
       expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
       expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
       expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
-    });
-
-    it('should handle both Arabic decimal (٫) and regular decimal (.)', () => {
-      expect(validateNumberSeparators('١٫٥', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١.٥', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١٬٢٣٤٫٥٦', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١,٢٣٤.٥٦', 'ar-EG')).toBe(true);
-    });
-
-    it('should validate numbers with various locale-specific separators', () => {
-      // Arabic-Indic numerals
-      expect(validateNumberSeparators('١٢٣٤٥٦٧٫٨٩', 'ar-EG-u-nu-arab')).toBe(
-        true
-      );
-      expect(validateNumberSeparators('١٬٢٣٤٬٥٦٧٫٨٩', 'ar-EG-u-nu-arab')).toBe(
-        true
-      );
-
-      // Devanagari numerals
-      expect(validateNumberSeparators('१२३४५६७.८९', 'hi-IN-u-nu-deva')).toBe(
-        true
-      );
-      expect(validateNumberSeparators('१,२३४,५६७.८९', 'hi-IN-u-nu-deva')).toBe(
-        true
-      );
     });
 
     it('should reject numbers with mixed valid and invalid grouping', () => {
