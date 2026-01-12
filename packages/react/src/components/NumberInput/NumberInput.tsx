@@ -1394,10 +1394,10 @@ function getInputValidity({
     return false;
   }
 
-  // 1️⃣ Skip validation if value is empty and allowEmpty
+  // Skip validation if value is empty and allowEmpty
   if (value === '') return allowEmpty;
 
-  // 2️⃣ Normalize the value
+  // Normalize the value
   let numericValue: number;
   if (typeof value === 'string') {
     numericValue = parseNumberWithLocale(value, locale); // safe: handles Arabic, Kanji, etc.
@@ -1405,7 +1405,7 @@ function getInputValidity({
     numericValue = value;
   }
 
-  // 3️⃣ Use custom validate ONLY for formatting, not numeric comparison
+  // Use custom validate ONLY for formatting, not numeric comparison
   if (validate && typeof value === 'string') {
     const isFormatValid = validate(value, locale);
     if (isFormatValid === false) {
@@ -1413,7 +1413,7 @@ function getInputValidity({
     }
   }
 
-  // 4️⃣ Check min/max bounds
+  // Check min/max bounds
   if (max !== undefined && numericValue > max) return false;
   if (min !== undefined && numericValue < min) return false;
 
