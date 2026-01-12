@@ -138,6 +138,7 @@ collect:
         - lowContrast
         - max
         - maxCount
+        - maxFileSize
         - menuAlignment
         - menuOffset
         - menuOffsetFlip
@@ -271,6 +272,7 @@ collect:
         # AspectRatio
         - ratio
         # ButtonSet
+        - fluid
         - stacked
         # ChatButton
         - isQuickAction
