@@ -321,8 +321,22 @@ const getSeparators = (locale: string) => {
     '一二三四五六七八九〇零' + // Kanji digits
     ']';
 
+  // Non-digit pattern that excludes ALL digit types (not just ASCII 0-9)
+  const nonDigitPattern =
+    '[^' +
+    '\\u0030-\\u0039' + // Western
+    '\\u0660-\\u0669' + // Eastern Arabic
+    '\\u0966-\\u096F' + // Devanagari
+    '\\u09E6-\\u09EF' + // Bengali
+    '\\uFF10-\\uFF19' + // Fullwidth Japanese ０-９
+    '一二三四五六七八九〇零' + // Kanji digits
+    ']+';
+
   // Extract separators using regex that handles all numeral systems
-  const regex = new RegExp(`(\\D+)${digitPattern}{3}(\\D+)${digitPattern}{2}$`);
+  // Use nonDigitPattern instead of \D+ to correctly identify separators
+  const regex = new RegExp(
+    `(${nonDigitPattern})${digitPattern}{3}(${nonDigitPattern})${digitPattern}{2}$`
+  );
   const match = formatted.match(regex);
 
   if (match) {
@@ -334,6 +348,16 @@ const getSeparators = (locale: string) => {
   }
 };
 
+// Normalizes all Unicode minus variants to ASCII hyphen-minus (-)
+const normalizeMinus = (value: string) =>
+  value.replace(/[\u2212\u2012\u2013\u2014\uFE63\uFF0D]/g, '-');
+
+const normalizeNumericInput = (value: string) =>
+  value
+    // Remove bidi / direction control characters (Arabic keyboards)
+    .replace(/[\u061C\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '')
+    // Normalize Unicode minus variants to ASCII "-"
+    .replace(/[\u2212\u2012\u2013\u2014\uFE63\uFF0D]/g, '-');
 /**
  * Converts a string with any Unicode numeral system to a JavaScript number.
  * Handles all numeral systems supported by Intl.NumberFormat.
@@ -350,6 +374,8 @@ export const parseNumberWithLocale = (
   if (input === '' || input === undefined || input === null) {
     return NaN;
   }
+
+  input = normalizeNumericInput(input);
 
   const { groupSeparator, decimalSeparator } = getSeparators(locale);
 
@@ -368,18 +394,15 @@ export const parseNumberWithLocale = (
     九: '9',
   };
 
-  // Map of Unicode digit ranges to their base code points
   const digitRanges = [
-    { start: 0x0030, end: 0x0039, base: 0x0030 }, // Western Arabic
-    { start: 0x0660, end: 0x0669, base: 0x0660 }, // Eastern Arabic
-    { start: 0x0966, end: 0x096f, base: 0x0966 }, // Devanagari
-    { start: 0x09e6, end: 0x09ef, base: 0x09e6 }, // Bengali
-    { start: 0xff10, end: 0xff19, base: 0xff10 }, // Fullwidth Japanese
+    { start: 0x0030, end: 0x0039, base: 0x0030 },
+    { start: 0x0660, end: 0x0669, base: 0x0660 },
+    { start: 0x0966, end: 0x096f, base: 0x0966 },
+    { start: 0x09e6, end: 0x09ef, base: 0x09e6 },
+    { start: 0xff10, end: 0xff19, base: 0xff10 },
   ];
 
-  // Convert all Unicode digits + Kanji digits to Western Arabic numerals
-  // Preserve 'e' and 'E' for scientific notation
-  let normalized = Array.from(String(input))
+  let normalized = Array.from(input)
     .map((char) => {
       // Preserve scientific notation characters
       if (char === 'e' || char === 'E' || char === '+' || char === '-') {
@@ -403,35 +426,31 @@ export const parseNumberWithLocale = (
 
   // Remove grouping separators
   if (groupSeparator) {
-    if (groupSeparator.trim() === '') {
-      normalized = normalized.replace(/[\u00A0\u202F\s]/g, '');
+    if (groupSeparator?.trim() === '') {
+      normalized = normalized?.replace(/[\u00A0\u202F\s]/g, '');
     } else {
-      // Always remove both Western comma (,) and Arabic comma (٬ U+066C) to handle mixed input
-      normalized = normalized.replace(/[,٬]/g, '');
-      // If the detected separator is something else, remove it too
+      if (decimalSeparator !== ',' && decimalSeparator !== '٬') {
+        normalized = normalized?.replace(/[,٬]/g, '');
+      }
       if (groupSeparator !== ',' && groupSeparator !== '٬') {
-        const escapedGroup = groupSeparator.replace(
-          /[.*+?^${}()|[\]\\]/g,
-          '\\$&'
-        );
-        normalized = normalized.replace(new RegExp(escapedGroup, 'g'), '');
+        const escaped = groupSeparator?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        normalized = normalized?.replace(new RegExp(escaped, 'g'), '');
       }
     }
   }
 
-  // Replace decimal separator with '.'
-  if (decimalSeparator) {
-    // Always handle both Western period (.) and Arabic decimal separator (٫ U+066B)
-    normalized = normalized.replace(/٫/g, '.');
-    // If the detected separator is something else and not already '.', replace it
-    if (decimalSeparator !== '.' && decimalSeparator !== '٫') {
-      const escapedDecimal = decimalSeparator.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        '\\$&'
-      );
-      normalized = normalized.replace(new RegExp(escapedDecimal, 'g'), '.');
-    }
+  normalized = normalized.replace(/٫/g, '.');
+
+  if (
+    decimalSeparator &&
+    decimalSeparator !== '.' &&
+    decimalSeparator !== '٫'
+  ) {
+    const escaped = decimalSeparator.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    normalized = normalized.replace(new RegExp(escaped, 'g'), '.');
   }
+
+  normalized = normalizeMinus(normalized);
 
   return Number(normalized);
 };
@@ -440,10 +459,13 @@ export const validateNumberSeparators = (
   input: string,
   locale: string
 ): boolean => {
-  // allow empty string
-  if (input === '' || Number.isNaN(input)) {
+  if (input === '') {
     return true;
   }
+
+  // Normalize bidi marks + minus signs FIRST
+  input = normalizeNumericInput(input);
+
   const { groupSeparator, decimalSeparator } = getSeparators(locale);
 
   if (!decimalSeparator) {
@@ -452,132 +474,80 @@ export const validateNumberSeparators = (
 
   const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-  // Add Japanese Fullwidth digits + Kanji digits
   const digit =
     '[' +
-    '\\u0030-\\u0039' + // Western
-    '\\u0660-\\u0669' + // Eastern Arabic
-    '\\u0966-\\u096F' + // Devanagari
-    '\\u09E6-\\u09EF' + // Bengali
-    '\\uFF10-\\uFF19' + // Fullwidth Japanese ０-９
-    '一二三四五六七八九〇零' + // Kanji digits
+    '\\u0030-\\u0039' +
+    '\\u0660-\\u0669' +
+    '\\u0966-\\u096F' +
+    '\\u09E6-\\u09EF' +
+    '\\uFF10-\\uFF19' +
+    '一二三四五六七八九〇零' +
     ']';
 
+  // Group separator regex
   let group = '';
   if (groupSeparator) {
-    if (groupSeparator.trim() === '') {
-      group = '[\\u00A0\\u202F\\s]'; // handle NBSP, narrow NBSP, space
+    if (groupSeparator?.trim() === '') {
+      group = '[\\u00A0\\u202F\\s]';
+    } else if (groupSeparator === ',' || groupSeparator === '٬') {
+      group = '[,٬]';
     } else {
-      // For Arabic locales, also accept both regular comma and Arabic comma
-      // as they may be used interchangeably
-      const escapedSep = esc(groupSeparator);
-      if (groupSeparator === ',' || groupSeparator === '٬') {
-        group = '[,٬]'; // Accept both Western comma (U+002C) and Arabic comma (U+066C)
-      } else {
-        group = escapedSep;
-      }
+      group = esc(groupSeparator);
     }
   }
 
-  // For Arabic locales, also accept Arabic decimal separator (٫ U+066B)
-  // in addition to the detected separator
+  // Decimal separator regex
   let decimal = esc(decimalSeparator);
   if (decimalSeparator === '.' || decimalSeparator === '٫') {
-    decimal = '[.٫]'; // Accept both Western period and Arabic decimal separator
+    decimal = '[.٫]';
   }
 
-  // Support scientific notation (e.g., 1e1, 2e-3, 1.5e+10)
-  const scientificNotation = `([eE][+-]?${digit}+)?`;
+  const sign = '[\\-\\u2212]?';
+  const scientific = `([eE][+-]?${digit}+)?`;
 
-  // Build regex pattern that allows:
-  // 1. Numbers with proper grouping: 1,234 or 1,234,567
-  // 2. Numbers without grouping: 1234 or 1234567
-  // 3. Decimal numbers with or without grouping
-  // 4. Scientific notation
-  let regexPattern;
-  if (group) {
-    // When group separator exists, allow both grouped and non-grouped formats
-    // Pattern 1: Numbers with grouping (e.g., 1,234 or 1,234,567)
-    // Pattern 2: Numbers without grouping (e.g., 1234 or 1234567)
-    regexPattern =
-      `^-?${digit}{1,3}(${group}${digit}{3})*(${decimal}${digit}*)?${scientificNotation}$` + // with grouping
-      `|^-?${digit}+(${decimal}${digit}*)?${scientificNotation}$`; // without grouping
+  // Detect if grouping is used AT ALL
+  const usesGrouping =
+    group &&
+    (groupSeparator?.trim() === ''
+      ? /[\u00A0\u202F\s]/.test(input)
+      : groupSeparator === ',' || groupSeparator === '٬'
+        ? /[,٬]/.test(input)
+        : groupSeparator
+          ? input.includes(groupSeparator)
+          : false);
+
+  const scientificMatch = input?.match(/^([^eE]+)([eE][+-]?.*)?$/);
+  const baseNumber = scientificMatch ? scientificMatch[1] : input;
+
+  // Split integer part from the base number - handle both decimal separator variants
+  let integerPart: string;
+  if (decimalSeparator === '.' || decimalSeparator === '٫') {
+    // Split by either . or ٫
+    integerPart = baseNumber?.split(/[.,]/)[0];
   } else {
-    // No group separator defined
-    regexPattern = `^-?${digit}+(${decimal}${digit}*)?${scientificNotation}$`;
+    integerPart = baseNumber?.split(decimalSeparator)[0];
   }
 
-  const regex = new RegExp(regexPattern);
+  // STEP 1: strict integer validation
+  // When grouping is used, we need to handle two cases:
+  // 1. Numbers with 1-3 digits (no separator required): 1, 12, 123
+  // 2. Numbers with 4+ digits (separator required): 1,234 or 12,345 or 123,456
+  const integerRegex = usesGrouping
+    ? new RegExp(`^${sign}(${digit}{1,3}|${digit}{1,3}(${group}${digit}{3})+)$`)
+    : new RegExp(`^${sign}${digit}+$`);
 
-  if (!regex.test(input)) {
+  if (!integerRegex.test(integerPart)) {
     return false;
   }
 
-  // Kanji digit map
-  const kanjiMap: Record<string, string> = {
-    零: '0',
-    〇: '0',
-    一: '1',
-    二: '2',
-    三: '3',
-    四: '4',
-    五: '5',
-    六: '6',
-    七: '7',
-    八: '8',
-    九: '9',
-  };
+  // STEP 2: full number validation
+  const fullRegex = new RegExp(
+    `^${sign}${digit}+` +
+      (usesGrouping ? `(${group}${digit}{3})*` : '') +
+      `(${decimal}${digit}+)?${scientific}$`
+  );
 
-  let normalized = input;
-  // Convert all Unicode-range digits + Kanji digits
-  const digitRanges = [
-    { start: 0x0030, end: 0x0039, base: 0x0030 }, // Western
-    { start: 0x0660, end: 0x0669, base: 0x0660 }, // Eastern Arabic
-    { start: 0x0966, end: 0x096f, base: 0x0966 }, // Devanagari
-    { start: 0x09e6, end: 0x09ef, base: 0x09e6 }, // Bengali
-    { start: 0xff10, end: 0xff19, base: 0xff10 }, // Fullwidth
-  ];
-
-  normalized = Array.from(normalized)
-    .map((char) => {
-      const code = char.charCodeAt(0);
-
-      // Check Kanji first
-      if (kanjiMap[char] !== undefined) {
-        return kanjiMap[char];
-      }
-
-      // Check digit ranges
-      for (const range of digitRanges) {
-        if (code >= range.start && code <= range.end) {
-          return String(code - range.start);
-        }
-      }
-
-      return char;
-    })
-    .join('');
-  if (groupSeparator) {
-    if (groupSeparator.trim() === '') {
-      normalized = normalized?.replace(/[\u00A0\u202F\s]/g, '');
-    } else {
-      // Remove both the detected separator and Arabic comma
-      normalized = normalized?.replace(/[,٬]/g, '');
-      // If the detected separator is something else, remove it too
-      if (groupSeparator !== ',' && groupSeparator !== '٬') {
-        normalized = normalized?.split(groupSeparator).join('');
-      }
-    }
-  }
-
-  // Replace both detected separator and Arabic decimal separator with '.'
-  normalized = normalized?.replace(/[.٫]/g, '.');
-  // If the detected separator is something else, replace it too
-  if (decimalSeparator !== '.' && decimalSeparator !== '٫') {
-    normalized = normalized?.replace(decimalSeparator, '.');
-  }
-
-  return !isNaN(Number(normalized));
+  return fullRegex.test(input);
 };
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -817,8 +787,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     const outerElementClasses = cx(`${prefix}--form-item`, {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      [customClassName!]: !!customClassName,
+       
+      ...(customClassName ? { [customClassName]: true } : {}),
       [`${prefix}--number-input--fluid--invalid`]:
         isFluid && normalizedProps.invalid,
       [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
@@ -1421,55 +1391,34 @@ function getInputValidity({
   validate,
   locale,
 }) {
-  if (typeof validate === 'function') {
-    const result = validate(value, locale);
-    if (result === false) {
-      return false; // immediate invalid
-    }
-    // If true or undefined, continue to further validations
-  }
-
   if (invalid) {
     return false;
   }
 
-  if (value === '') {
-    return allowEmpty;
+  // 1️⃣ Skip validation if value is empty and allowEmpty
+  if (value === '') return allowEmpty;
+
+  // 2️⃣ Normalize the value
+  let numericValue: number;
+  if (typeof value === 'string') {
+    numericValue = parseNumberWithLocale(value, locale); // safe: handles Arabic, Kanji, etc.
+  } else {
+    numericValue = value;
   }
 
-  // Convert value to number if it's a string (handles different numeral systems)
-  let numericValue = value;
-  if (typeof value === 'string' && validate) {
-    numericValue = parseNumberWithLocale(value, locale);
-  }
-
-  // Handle NaN values - always allow (no error shown) when validate is provided
-  if (isNaN(numericValue) && validate) {
-    return true;
-  }
-
-  // For non-validate mode with NaN, check original value
-  if (isNaN(numericValue) && !validate) {
-    // Fall back to direct comparison for type="number" mode
-    if (max !== undefined && value > max) {
-      return false;
+  // 3️⃣ Use custom validate ONLY for formatting, not numeric comparison
+  if (validate && typeof value === 'string') {
+    const isFormatValid = validate(value, locale);
+    if (isFormatValid === false) {
+      return false; // invalid format
     }
-    if (min !== undefined && value < min) {
-      return false;
-    }
-    return true;
   }
 
-  // Check min/max bounds for valid numbers
-  if (max !== undefined && numericValue > max) {
-    return false;
-  }
+  // 4️⃣ Check min/max bounds
+  if (max !== undefined && numericValue > max) return false;
+  if (min !== undefined && numericValue < min) return false;
 
-  if (min !== undefined && numericValue < min) {
-    return false;
-  }
-
-  return true;
+  return true; // valid
 }
 
 /**

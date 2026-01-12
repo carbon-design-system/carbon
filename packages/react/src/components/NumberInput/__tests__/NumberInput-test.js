@@ -1796,8 +1796,6 @@ describe('NumberInput', () => {
   });
 
   describe('validateNumberSeparators', () => {
-    const { validateNumberSeparators } = require('../NumberInput');
-
     it('should validate properly formatted numbers with grouping', () => {
       expect(validateNumberSeparators('1,234', 'en-US')).toBe(true);
       expect(validateNumberSeparators('1,234,567', 'en-US')).toBe(true);
@@ -1863,6 +1861,107 @@ describe('NumberInput', () => {
     it('should reject invalid separator positions for French locale', () => {
       expect(validateNumberSeparators('12 34', 'fr-FR')).toBe(false);
       expect(validateNumberSeparators('1 23 456', 'fr-FR')).toBe(false);
+    });
+
+    it('should validate Arabic numerals with proper grouping', () => {
+      expect(validateNumberSeparators('١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+    });
+
+    it('should reject Arabic numerals with wrong separator positions', () => {
+      expect(validateNumberSeparators('١,١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١,١١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١,١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١٬١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١٬١١', 'ar-EG')).toBe(false);
+    });
+
+    it('should validate negative numbers across different locales', () => {
+      // English US
+      expect(validateNumberSeparators('-1', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-12', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-123', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234,567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1.5', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+
+      // German
+      expect(validateNumberSeparators('-1', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1.234', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1,5', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1.234,56', 'de-DE')).toBe(true);
+
+      // French
+      expect(validateNumberSeparators('-1', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1 234', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1,5', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1 234,56', 'fr-FR')).toBe(true);
+    });
+
+    it('should validate negative Arabic-Indic numerals', () => {
+      expect(validateNumberSeparators('-١', 'ar-EG-u-nu-arab')).toBe(true);
+      expect(validateNumberSeparators('-١٢', 'ar-EG-u-nu-arab')).toBe(true);
+      expect(validateNumberSeparators('-١٢٣', 'ar-EG-u-nu-arab')).toBe(true);
+      expect(validateNumberSeparators('-١٢٣٤', 'ar-EG-u-nu-arab')).toBe(true);
+      expect(validateNumberSeparators('-١٬٢٣٤', 'ar-EG-u-nu-arab')).toBe(true);
+      expect(validateNumberSeparators('-١٫٥', 'ar-EG-u-nu-arab')).toBe(true);
+      expect(validateNumberSeparators('-١٬٢٣٤٫٥٦', 'ar-EG-u-nu-arab')).toBe(
+        true
+      );
+    });
+
+    it('should validate negative Arabic numerals with Western digits', () => {
+      expect(validateNumberSeparators('-1', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1.5', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'ar-EG')).toBe(true);
+    });
+
+    it('should handle both Arabic comma (٬) and regular comma (,)', () => {
+      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+    });
+
+    it('should handle both Arabic decimal (٫) and regular decimal (.)', () => {
+      expect(validateNumberSeparators('١٫٥', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١.٥', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬٢٣٤٫٥٦', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,٢٣٤.٥٦', 'ar-EG')).toBe(true);
+    });
+
+    it('should validate numbers with various locale-specific separators', () => {
+      // Arabic-Indic numerals
+      expect(validateNumberSeparators('١٢٣٤٥٦٧٫٨٩', 'ar-EG-u-nu-arab')).toBe(
+        true
+      );
+      expect(validateNumberSeparators('١٬٢٣٤٬٥٦٧٫٨٩', 'ar-EG-u-nu-arab')).toBe(
+        true
+      );
+
+      // Devanagari numerals
+      expect(validateNumberSeparators('१२३४५६७.८९', 'hi-IN-u-nu-deva')).toBe(
+        true
+      );
+      expect(validateNumberSeparators('१,२३४,५६७.८९', 'hi-IN-u-nu-deva')).toBe(
+        true
+      );
+    });
+
+    it('should reject numbers with mixed valid and invalid grouping', () => {
+      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('12,345,6', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('١,٢٣,٤٥٦', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١٢,٣٤٥,٦', 'ar-EG')).toBe(false);
     });
   });
 });
