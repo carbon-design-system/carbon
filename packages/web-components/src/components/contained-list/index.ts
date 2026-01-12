@@ -7,3 +7,4 @@
 
 import './contained-list';
 import './contained-list-item';
+import './contained-list-description';

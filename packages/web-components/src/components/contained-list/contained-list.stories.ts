@@ -312,13 +312,13 @@ export const UsageExamples = {
         () => html`
           <cds-contained-list-item>
             List item
-            <cds-overflow-menu slot="action" size="lg" flip>
+            <cds-overflow-menu slot="action" size="lg">
               ${iconLoader(OverflowMenuVertical16, {
                 class: `${prefix}--overflow-menu__icon`,
                 slot: 'icon',
               })}
               <span slot="tooltip-content">Options</span>
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item>View details</cds-overflow-menu-item>
                 <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
                 <cds-overflow-menu-item danger>
@@ -346,9 +346,9 @@ export const UsageExamples = {
           <cds-contained-list-item>
             <div>
               List item<br />
-              <span class="${prefix}--label ${prefix}--label--no-margin">
+              <cds-contained-list-description>
                 Description text
-              </span>
+              </cds-contained-list-description>
             </div>
           </cds-contained-list-item>
         `

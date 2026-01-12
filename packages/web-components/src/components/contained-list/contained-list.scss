@@ -6,17 +6,34 @@
 //
 
 $css--plex: true !default;
-@use '@carbon/styles/scss/components/contained-list/index' as *;
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/components/menu-button/index' as *;
-@use '@carbon/styles/scss/layout' as *;
-@use '@carbon/styles/scss/type' as *;
+
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
-
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/contained-list';
+@use '@carbon/styles/scss/components/form' as *;
 :host(#{$prefix}-contained-list) {
   @include emit-layout-tokens();
+
+  // CSS custom properties for slotted search component
+  --cds-search-background: #{$background};
+  --cds-search-border-bottom: 1px solid #{$border-subtle};
+}
+
+:host(#{$prefix}-contained-list-item) {
+  display: block;
+}
+:host(#{$prefix}-contained-list-description) {
+  @include type-style('label-01');
+
+  display: inline-block;
+  margin: 0;
+  color: $text-secondary;
+  font-weight: $input-label-weight;
+  line-height: 1rem;
+  vertical-align: baseline;
 }
 
 :host(#{$prefix}-contained-list-item:not(:last-of-type)) {
