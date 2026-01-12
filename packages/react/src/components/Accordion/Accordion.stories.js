@@ -45,6 +45,11 @@ const sharedArgTypes = {
       type: 'boolean',
     },
   },
+  ordered: {
+    control: {
+      type: 'boolean',
+    },
+  },
   isFlush: {
     control: {
       type: 'boolean',
@@ -56,52 +61,59 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = (args) => (
-  <Accordion {...args}>
-    <AccordionItem title="Section 1 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 2 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 3 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem
-      title={
-        <span>
-          Section 4 title (<em>the title can be a node</em>)
-        </span>
-      }>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-  </Accordion>
-);
-
-Default.args = {
+const sharedArgs = {
+  align: 'end',
   disabled: false,
   isFlush: false,
+  ordered: false,
+  size: 'md',
 };
+
+export const Default = (args) => {
+  return (
+    <Accordion {...args}>
+      <AccordionItem title="Section 1 title">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+      <AccordionItem title="Section 2 title">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+      <AccordionItem title="Section 3 title">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+      <AccordionItem
+        title={
+          <span>
+            Section 4 title (<em>the title can be a node</em>)
+          </span>
+        }>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+
+Default.args = { ...sharedArgs };
 
 Default.argTypes = { ...sharedArgTypes };
 
@@ -166,17 +178,14 @@ export const Controlled = (args) => {
   );
 };
 
-Controlled.args = {
-  disabled: false,
-  isFlush: false,
-};
+Controlled.args = { ...sharedArgs };
 
 Controlled.argTypes = { ...sharedArgTypes };
 
 export const _WithLayer = (args) => {
   return (
-    <WithLayer {...args}>
-      <Accordion>
+    <WithLayer>
+      <Accordion {...args}>
         <AccordionItem title="Section 1 title">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -214,12 +223,9 @@ export const _WithLayer = (args) => {
   );
 };
 
-WithLayer.args = {
-  disabled: false,
-  isFlush: false,
-};
+_WithLayer.args = { ...sharedArgs };
 
-WithLayer.argTypes = { ...sharedArgTypes };
+_WithLayer.argTypes = { ...sharedArgTypes };
 
 export const Skeleton = (args) => (
   <AccordionSkeleton open count={4} {...args} />
@@ -230,7 +236,10 @@ Skeleton.decorators = [
 ];
 
 Skeleton.args = {
+  align: 'end',
+  disabled: false,
   isFlush: false,
+  ordered: false,
 };
 
 Skeleton.argTypes = {
@@ -245,7 +254,9 @@ Skeleton.argTypes = {
     control: false,
   },
   disabled: {
-    control: false,
+    control: {
+      type: 'boolean',
+    },
   },
   isFlush: {
     control: {
@@ -253,6 +264,8 @@ Skeleton.argTypes = {
     },
   },
   size: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
 };
