@@ -8,7 +8,7 @@
 @use '@carbon/styles/scss/utilities' as *;
 
 $prefix: 'carousel' !default;
-$animateTime: $duration-moderate-02;
+$animateTime: $duration-moderate-02 !default;
 
 /// Shared keyframes (needed in both)
 @mixin keyframes {
@@ -83,6 +83,7 @@ $animateTime: $duration-moderate-02;
 
 /// Main styles for view states
 @mixin viewStyles {
+  @include keyframes;
   @include viewBase('#{$prefix}__view', 80, translateX(0));
   @include viewBase('#{$prefix}__view-active', 100, translateX(-100%));
   @include viewBase('#{$prefix}__view-in-stack', 90, translateX(-200%));
@@ -92,7 +93,6 @@ $animateTime: $duration-moderate-02;
 
 /// Optional: Universal (Lit + React)
 @mixin carousel {
-  @include keyframes;
   @include wrapperStyles;
   @include viewStyles;
 }
