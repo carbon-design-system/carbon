@@ -300,11 +300,7 @@ export const _WithLayer = {
 export const UsageExamples = {
   render: () => html`
     <cds-contained-list label="List title">
-      <cds-icon-button
-        slot="action"
-        kind="primary"
-        align="bottom-right"
-        size="lg">
+      <cds-icon-button slot="action" kind="primary" align="left" size="lg">
         ${iconLoader(Add16, { slot: 'icon' })}
         <span slot="tooltip-content">Add</span>
       </cds-icon-button>
@@ -333,11 +329,7 @@ export const UsageExamples = {
     </cds-contained-list>
 
     <cds-contained-list label="List title">
-      <cds-icon-button
-        slot="action"
-        kind="ghost"
-        size="lg"
-        align="bottom-right">
+      <cds-icon-button slot="action" kind="ghost" size="lg" align="left">
         ${iconLoader(Add16, { slot: 'icon' })}
         <span slot="tooltip-content">Add</span>
       </cds-icon-button>
