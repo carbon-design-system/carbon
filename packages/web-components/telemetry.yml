@@ -17,6 +17,7 @@ collect:
         - align
         - alignment
         - alignment-axis-offset
+        - allow-empty
         - aria-current
         - aria-label
         - aria-labelledby
@@ -50,12 +51,14 @@ collect:
         - counter-mode
         - danger-description
         - data-table
+        - decrement-button-assistive-text
         - default-checked
         - default-open
         - default-value
         - defaultOpen
         - description
         - direction
+        - disable-wheel
         - disabled
         - download
         - dropShadow
@@ -81,6 +84,7 @@ collect:
         - hide-close-button
         - hide-divider
         - hide-label
+        - hide-steppers
         - hidePasswordLabel
         - highContrast
         - highlighted
@@ -89,6 +93,7 @@ collect:
         - icon
         - icon-description
         - id
+        - increment-button-assistive-text
         - indeterminate
         - index
         - inline
@@ -132,6 +137,7 @@ collect:
         - oncds-header-menu-button-toggled
         - oncds-notification-beingclosed
         - oncds-notification-closed
+        - oncds-number-input
         - oncds-radio-button-changed
         - oncds-search-input
         - oncds-select-selected
@@ -260,6 +266,7 @@ collect:
         - oncds-combo-box-selected
         - oncds-combo-box-toggled
         - should-filter-item
+        - typeahead
         # cds-copy-button
         - autoAlign
         # cds-date-picker
@@ -364,13 +371,6 @@ collect:
         - selection-feedback
         # cds-multi-select-item
         - is-select-all
-        # cds-number-input
-        - allow-empty
-        - decrement-button-assistive-text
-        - disable-wheel
-        - hide-steppers
-        - increment-button-assistive-text
-        - oncds-number-input
         # cds-operational-tag
         - oncds-operational-tag-beforeselected
         - oncds-operational-tag-selected
