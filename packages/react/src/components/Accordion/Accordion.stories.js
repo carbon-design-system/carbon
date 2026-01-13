@@ -237,7 +237,6 @@ Skeleton.decorators = [
 
 Skeleton.args = {
   align: 'end',
-  disabled: false,
   isFlush: false,
   ordered: false,
 };
@@ -254,8 +253,8 @@ Skeleton.argTypes = {
     control: false,
   },
   disabled: {
-    control: {
-      type: 'boolean',
+    table: {
+      disable: true,
     },
   },
   isFlush: {
