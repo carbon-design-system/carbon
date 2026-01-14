@@ -40,6 +40,7 @@ collect:
         - checked
         - checkmark-label
         - clear-selection-label
+        - clickable
         - close-button-label-text
         - close-icon-description
         - close-on-activation
@@ -267,6 +268,10 @@ collect:
         - oncds-combo-box-toggled
         - should-filter-item
         - typeahead
+        # cds-contained-list
+        - is-inset
+        # cds-contained-list-item
+        - oncds-contained-list-item-click
         # cds-copy-button
         - autoAlign
         # cds-date-picker
@@ -407,7 +412,6 @@ collect:
         - ononChange
         - space-equally
         # cds-progress-step
-        - clickable
         - complete
         - current
         - icon-label
@@ -615,6 +619,7 @@ collect:
         - danger-primary
         - danger-tertiary
         - default
+        - disclosed
         - draft
         - error
         - failed
@@ -631,6 +636,7 @@ collect:
         - medium
         - normal
         - not-started
+        - on-page
         - pending
         - primary
         - secondary
