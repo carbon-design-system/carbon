@@ -59,7 +59,6 @@ const defaultArgs = {
   autoalign: false,
   allowCustomValue: false,
   disabled: false,
-  hideLabel: false,
   helperText: 'Helper text',
   invalid: false,
   invalidText: 'Error message goes here',
@@ -91,10 +90,6 @@ const controls = {
     control: 'select',
     options: directionOptions,
     description: `Specify the direction of the combobox dropdown. Can be either top or bottom.`,
-  },
-  hideLabel: {
-    control: 'boolean',
-    description: `Specify if the title text should be hidden, or not.`,
   },
   helperText: {
     control: 'text',
@@ -158,7 +153,6 @@ export const Default = {
       helperText,
       invalid,
       titleText,
-      hideLabel,
       direction,
       readOnly,
       warn,
@@ -174,7 +168,6 @@ export const Default = {
       <cds-combo-box
         ?disabled=${disabled}
         ?autoalign=${autoalign}
-        ?hide-label=${hideLabel}
         helper-text=${ifDefined(helperText)}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}

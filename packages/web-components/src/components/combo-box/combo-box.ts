@@ -543,12 +543,16 @@ class CDSComboBox extends CDSDropdown {
   shouldFilterItem: boolean | ShouldFilterItem = false;
 
   /**
+   * **Experimental**: will enable autocomplete and typeahead for the input field.
+   */
+  @property({ type: Boolean, reflect: true })
+  typeahead = false;
+
+  /**
    * `true` to allow custom values that do not match any item in the list.
    */
   @property({ type: Boolean, attribute: 'allow-custom-value' })
   allowCustomValue = false;
-=======
-
 
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
