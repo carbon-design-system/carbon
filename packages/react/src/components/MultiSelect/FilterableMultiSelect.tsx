@@ -1116,6 +1116,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                   <ListBox.MenuItem
                     key={itemProps.id}
                     aria-label={itemText}
+                    aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isActive={isChecked && !item['isSelectAll']}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
