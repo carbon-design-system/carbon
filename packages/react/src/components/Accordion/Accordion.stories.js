@@ -8,6 +8,7 @@
 /* eslint-disable no-console */
 
 import React from 'react';
+import { action } from 'storybook/actions';
 import './story.scss';
 import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
 import Button from '../Button';
@@ -59,6 +60,10 @@ const sharedArgTypes = {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
   },
+  onHeadingClick: {
+    action: 'onHeadingClick',
+    control: false,
+  },
 };
 
 const sharedArgs = {
@@ -67,12 +72,19 @@ const sharedArgs = {
   isFlush: false,
   ordered: false,
   size: 'md',
+  onHeadingClick: ({ isOpen, event }) => {
+    action('onHeadingClick')({
+      isOpen,
+      type: event.type,
+    });
+  },
 };
 
 export const Default = (args) => {
+  const { onHeadingClick, ...restArgs } = args;
   return (
-    <Accordion {...args}>
-      <AccordionItem title="Section 1 title">
+    <Accordion {...restArgs}>
+      <AccordionItem title="Section 1 title" onHeadingClick={onHeadingClick}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -80,7 +92,7 @@ export const Default = (args) => {
           aliquip ex ea commodo consequat.
         </p>
       </AccordionItem>
-      <AccordionItem title="Section 2 title">
+      <AccordionItem title="Section 2 title" onHeadingClick={onHeadingClick}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -88,7 +100,7 @@ export const Default = (args) => {
           aliquip ex ea commodo consequat.
         </p>
       </AccordionItem>
-      <AccordionItem title="Section 3 title">
+      <AccordionItem title="Section 3 title" onHeadingClick={onHeadingClick}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -97,6 +109,7 @@ export const Default = (args) => {
         </p>
       </AccordionItem>
       <AccordionItem
+        onHeadingClick={onHeadingClick}
         title={
           <span>
             Section 4 title (<em>the title can be a node</em>)
@@ -119,6 +132,8 @@ Default.argTypes = { ...sharedArgTypes };
 
 export const Controlled = (args) => {
   const [expandAll, setExpandAll] = React.useState(false);
+  const { onHeadingClick, ...restArgs } = args;
+
   return (
     <>
       <ButtonSet className={'controlled-accordion-btnset'}>
@@ -140,8 +155,11 @@ export const Controlled = (args) => {
         </Button>
       </ButtonSet>
 
-      <Accordion {...args}>
-        <AccordionItem title="Section 1 title" open={expandAll}>
+      <Accordion {...restArgs}>
+        <AccordionItem
+          title="Section 1 title"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -149,7 +167,10 @@ export const Controlled = (args) => {
             aliquip ex ea commodo consequat.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 2 title" open={expandAll}>
+        <AccordionItem
+          title="Section 2 title"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -157,7 +178,10 @@ export const Controlled = (args) => {
             aliquip ex ea commodo consequat.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 3 title" open={expandAll}>
+        <AccordionItem
+          title="Section 3 title"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -165,7 +189,10 @@ export const Controlled = (args) => {
             aliquip ex ea commodo consequat.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 4 title" open={expandAll}>
+        <AccordionItem
+          title="Section 4 title"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -183,10 +210,12 @@ Controlled.args = { ...sharedArgs };
 Controlled.argTypes = { ...sharedArgTypes };
 
 export const _WithLayer = (args) => {
+  const { onHeadingClick, ...restArgs } = args;
+
   return (
     <WithLayer>
-      <Accordion {...args}>
-        <AccordionItem title="Section 1 title">
+      <Accordion {...restArgs}>
+        <AccordionItem title="Section 1 title" onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -194,7 +223,7 @@ export const _WithLayer = (args) => {
             aliquip ex ea commodo consequat.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 2 title">
+        <AccordionItem title="Section 2 title" onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -202,7 +231,7 @@ export const _WithLayer = (args) => {
             aliquip ex ea commodo consequat.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 3 title">
+        <AccordionItem title="Section 3 title" onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -210,7 +239,7 @@ export const _WithLayer = (args) => {
             aliquip ex ea commodo consequat.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 4 title">
+        <AccordionItem title="Section 4 title" onHeadingClick={onHeadingClick}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
