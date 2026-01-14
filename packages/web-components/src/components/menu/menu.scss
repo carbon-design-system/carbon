@@ -28,6 +28,7 @@ $css--plex: true !default;
   --display-icon-item: flex;
 }
 .#{$prefix}--menu--with-selectable-items {
+  --grid-template: #{$spacing-05} 1fr max-content;
   --display-selection-icon: flex;
 }
 
