@@ -14,7 +14,7 @@ import { AILabel } from '../../AILabel';
 const prefix = 'cds';
 
 describe('Checkbox', () => {
-  it('should set the `id` on the <input> element.', () => {
+  it('should set the `id` on the <input> element', () => {
     render(<Checkbox id="test" labelText="test-label" />);
     expect(screen.getByRole('checkbox')).toHaveAttribute('id', 'test');
   });
