@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -510,11 +510,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   _registerMenuItems = () => {
     let items;
     if (this.isChild) {
-      items = (
-        this.querySelector('slot[name="submenu"]') as HTMLSlotElement
-      ).assignedElements();
+      const submenuSlot = this.querySelector(
+        'slot[name="submenu"]'
+      ) as HTMLSlotElement | null;
+      items = submenuSlot?.assignedElements() ?? [];
     } else {
-      items = this.shadowRoot?.querySelector('slot')?.assignedElements();
+      items = this.shadowRoot?.querySelector('slot')?.assignedElements() ?? [];
     }
     this.items = items?.filter((item) => {
       if (item.tagName === 'CDS-MENU-ITEM') {
