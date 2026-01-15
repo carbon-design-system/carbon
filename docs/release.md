@@ -237,8 +237,10 @@ After the release workflow for stable release is completed this will trigger the
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
       to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
-- [ ] Run the [`release-it`](https://github.com/carbon-design-system/gatsby-theme-carbon/actions/workflows/release.yml) workflow in the `gatsby-theme-carbon` repo to trigger
-      a release of `gatsby-theme-carbon`.
+- [ ] Run the
+      [`release-it`](https://github.com/carbon-design-system/gatsby-theme-carbon/actions/workflows/release.yml)
+      workflow in the `gatsby-theme-carbon` repo to trigger a release of
+      `gatsby-theme-carbon`.
 - [ ] Check that
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
       has been released and is on the
