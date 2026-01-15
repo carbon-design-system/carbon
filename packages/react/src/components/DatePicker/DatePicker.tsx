@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -453,6 +453,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const savedOnOpen = useSavedCallback(onOpen);
 
   const effectiveWarn = warn && !invalid;
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -645,6 +646,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
           lastStartValue,
+          container: wrapperRef.current,
         }) as unknown as Plugin,
       ],
       clickOpens: !readOnly,
@@ -927,9 +929,13 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   useEffect(() => {
     const handleMouseDown = (event) => {
+      const isInsideDatePicker =
+        wrapperRef.current && wrapperRef.current.contains(event.target);
+
       if (
         calendarRef.current &&
         calendarRef.current.isOpen &&
+        !isInsideDatePicker &&
         !calendarRef.current.calendarContainer.contains(event.target) &&
         !startInputField.current.contains(event.target) &&
         !endInputField.current?.contains(event.target)
@@ -1007,7 +1013,9 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
-      <div className={datePickerClasses}>{childrenWithProps}</div>
+      <div className={datePickerClasses} ref={wrapperRef}>
+        {childrenWithProps}
+      </div>
       {fluidError}
     </div>
   );
