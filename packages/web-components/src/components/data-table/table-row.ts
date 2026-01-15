@@ -53,7 +53,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventRadioChange')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleClickSelectionRadio(event: CustomEvent) {
     const { detail } = event;
@@ -87,7 +87,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * @param event The event.
    */
   @HostListener('eventCheckboxChange')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-expect-error
   private _handleClickSelectionCheckbox(event: CustomEvent) {
     const { detail } = event;
@@ -184,18 +184,23 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
 
   protected _renderExpandButton() {
     const { _handleClickExpando: handleClickExpando } = this;
+
+    // Always use the same structure for consistency, but only render the button for expandable rows
     return html`
       <div class="${prefix}--table-expand">
         <div>
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
-          <button
-            class="${prefix}--table-expand__button"
-            @click="${handleClickExpando}">
-            ${iconLoader(ChevronRight16, {
-              class: `${prefix}--table-expand__svg`,
-            })}
-          </button>
+          ${this.expandable
+            ? html`<button
+                class="${prefix}--table-expand__button"
+                @click="${handleClickExpando}">
+                ${iconLoader(ChevronRight16, {
+                  class: `${prefix}--table-expand__svg`,
+                })}
+              </button>`
+            : html`&nbsp;`}
+          <!-- Add non-breaking space for proper styling -->
         </div>
       </div>
     `;
@@ -355,7 +360,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    * The `aria-label` attribute for the `<label>` for selection.
    */
   @property({ attribute: 'selection-label' })
-  selectionLabel = '';
+  selectionLabel = 'Select row';
 
   /**
    * The `name` attribute for the `<input>` for selection.
@@ -415,8 +420,15 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
         (this.constructor as typeof CDSTableRow).selectorTable
       )?.setAttribute('is-selectable', '');
     }
+
+    // Always render the expand button container for consistent table structure
+    // The button itself will only be rendered if the row is expandable
+    const tableHasExpandableRows = this.closest(
+      (this.constructor as typeof CDSTableRow).selectorTable
+    )?.hasAttribute('expandable');
+
     return html`
-      ${this.expandable ? this._renderExpandButton() : ''}
+      ${tableHasExpandableRows ? this._renderExpandButton() : ''}
       ${this._renderFirstCells()}
       <slot></slot>
     `;

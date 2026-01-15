@@ -20,7 +20,7 @@ import {
   INPUT_TOOLTIP_DIRECTION,
 } from './password-input';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
     ${iconLoader(View16, { slot: 'icon' })}
@@ -47,14 +47,14 @@ const args = {
   disabled: false,
   helperText: 'Optional help text',
   hideLabel: false,
-  hidePasswordLabel: 'Hide Password',
+  hidePasswordLabel: 'Hide password',
   inline: false,
   invalid: false,
   invalidText: 'Error message goes here',
   labelText: 'Text input label',
   placeholder: 'Placeholder text',
   readonly: false,
-  showPasswordLabel: 'Show Password',
+  showPasswordLabel: 'Show password',
   size: INPUT_SIZE.MEDIUM,
   tooltipAlignment: INPUT_TOOLTIP_ALIGNMENT.END,
   tooltipPosition: INPUT_TOOLTIP_DIRECTION.BOTTOM,

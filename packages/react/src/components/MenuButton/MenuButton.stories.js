@@ -26,23 +26,8 @@ export default {
     docs: {
       page: mdx,
     },
-  },
-};
-
-const sharedArgTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  menuTarget: {
-    table: {
-      disable: true,
+    controls: {
+      exclude: ['menuTarget'],
     },
   },
 };
@@ -62,8 +47,6 @@ export const Default = (args) => {
 
 Default.args = { label: 'Actions' };
 
-Default.argTypes = { ...sharedArgTypes };
-
 export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: '5000px', height: '5000px' }}>
     <div
@@ -80,8 +63,6 @@ export const ExperimentalAutoAlign = (args) => (
   </div>
 );
 
-ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
-
 export const WithDanger = (args) => {
   return (
     <MenuButton label="Actions" {...args}>
@@ -93,8 +74,6 @@ export const WithDanger = (args) => {
     </MenuButton>
   );
 };
-
-WithDanger.argTypes = { ...sharedArgTypes };
 
 export const WithDividers = (args) => {
   return (
@@ -111,8 +90,6 @@ export const WithDividers = (args) => {
   );
 };
 
-WithDividers.argTypes = { ...sharedArgTypes };
-
 export const WithIcons = (args) => {
   return (
     <MenuButton label="Add" {...args}>
@@ -122,8 +99,6 @@ export const WithIcons = (args) => {
     </MenuButton>
   );
 };
-
-WithIcons.argTypes = { ...sharedArgTypes };
 
 export const WithNestedMenu = (args) => (
   <MenuButton label="Actions" {...args}>
@@ -138,8 +113,6 @@ export const WithNestedMenu = (args) => (
     <MenuItem label="Delete" kind="danger" />
   </MenuButton>
 );
-
-WithNestedMenu.argTypes = { ...sharedArgTypes };
 
 export const WithMenuAlignment = () => {
   return (

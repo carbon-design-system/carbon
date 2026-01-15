@@ -195,7 +195,7 @@ Default.argTypes = {
   stickyHeader: {
     control: 'boolean',
     description:
-      'Specify whether the header should be sticky. Still in previ: may not work with every combination of table props',
+      'Specify whether the header should be sticky. Still in preview: may not work with every combination of table props',
   },
   useStaticWidth: {
     control: 'boolean',
@@ -204,30 +204,5 @@ Default.argTypes = {
   useZebraStyles: {
     control: 'boolean',
     description: 'Add zebra striping to rows',
-  },
-  filterRows: {
-    table: {
-      disable: true,
-    },
-  },
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  rows: {
-    table: {
-      disable: true,
-    },
-  },
-  sortRow: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
   },
 };

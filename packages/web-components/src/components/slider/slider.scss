@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/slider';
+@use '@carbon/styles/scss/type' as type;
 @use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-slider),
@@ -25,8 +26,7 @@ $css--plex: true !default;
     transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
   }
 
-  .#{$prefix}--slider__thumb {
-    // TODO when updating to core carbon's #15129
+  .#{$prefix}--slider > .#{$prefix}--slider__thumb {
     z-index: 3;
     block-size: 0.875rem;
     inline-size: 0.875rem;
@@ -35,7 +35,32 @@ $css--plex: true !default;
     transform: translate(-50%, -50%) #{'/*rtl:ignore*/'};
   }
 
-  .#{$prefix}--slider__thumb:focus
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper {
+    --#{prefix}-tooltip-padding-block: 0.125rem;
+    --#{prefix}-popover-caret-width: 0.5rem;
+    --#{prefix}-popover-caret-height: 0.25rem;
+    --#{prefix}-popover-offset: 0.5rem;
+  }
+
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper
+    #{$prefix}-tooltip-content::part(content) {
+    @include type.type-style('body-compact-01');
+
+    padding: 0.125rem 0.5rem;
+  }
+
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper::part(
+      popover-container
+    ) {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--slider__thumb-wrapper:focus-within
+    ~ .#{$prefix}-ce--slider__filled-track-container
+    .#{$prefix}--slider__filled-track,
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper:focus-within
     ~ .#{$prefix}-ce--slider__filled-track-container
     .#{$prefix}--slider__filled-track {
     // TODO: audit
@@ -56,11 +81,14 @@ $css--plex: true !default;
     background-color: transparent;
   }
 }
-.#{$prefix}--slider__thumb-wrapper:focus-within
+.#{$prefix}--slider__thumb-wrapper:focus-within .#{$prefix}--slider__thumb-icon,
+#{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper:focus-within
   .#{$prefix}--slider__thumb-icon {
   display: none;
 }
 .#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon--focus,
+#{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper:focus-within
   .#{$prefix}--slider__thumb-icon--focus {
   display: block;
 }
@@ -69,7 +97,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-slider-skeleton) {
-  .#{$prefix}--slider__thumb {
+  .#{$prefix}--slider > .#{$prefix}--slider__thumb {
     inset-inline-start: 50%;
   }
   .#{$prefix}--slider__thumb--upper,

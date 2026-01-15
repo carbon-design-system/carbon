@@ -37,17 +37,24 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    * Handles user-initiated change in selected radio button.
    */
   @HostListener('eventChangeRadioButton')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleAfterChangeRadioButton = () => {
+  private _handleAfterChangeRadioButton = (event: CustomEvent) => {
+    // Bail out early if readOnly
+    if (this.readOnly) {
+      return;
+    }
+
     const { selectorRadioButton } = this
       .constructor as typeof CDSRadioButtonGroup;
     const selected = find(
       this.querySelectorAll(selectorRadioButton),
       (elem) => (elem as CDSRadioButton).checked
     );
+
     const oldValue = this.value;
     this.value = selected && selected.value;
+
     if (oldValue !== this.value) {
       const { eventChange } = this.constructor as typeof CDSRadioButtonGroup;
       this.dispatchEvent(
@@ -56,6 +63,8 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
           composed: true,
           detail: {
             value: this.value,
+            name: this.name,
+            event,
           },
         })
       );
@@ -175,6 +184,11 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   readOnly = false;
 
   /**
+   * `true` to specify if input selection in group is required.
+   */
+  @property({ type: Boolean, reflect: true })
+  required = false;
+  /**
    * The `value` attribute for the `<input>` for selection.
    */
   @property()
@@ -183,17 +197,22 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   updated(changedProperties) {
     const { selectorRadioButton } = this
       .constructor as typeof CDSRadioButtonGroup;
-    ['disabled', 'labelPosition', 'orientation', 'readOnly', 'name'].forEach(
-      (name) => {
-        if (changedProperties.has(name)) {
-          const { [name as keyof CDSRadioButtonGroup]: value } = this;
-          // Propagate the property to descendants until `:host-context()` gets supported in all major browsers
-          forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
-            (elem as CDSRadioButton)[name] = value;
-          });
-        }
+    [
+      'disabled',
+      'labelPosition',
+      'orientation',
+      'readOnly',
+      'name',
+      'required',
+    ].forEach((name) => {
+      if (changedProperties.has(name)) {
+        const { [name as keyof CDSRadioButtonGroup]: value } = this;
+        // Propagate the property to descendants until `:host-context()` gets supported in all major browsers
+        forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
+          (elem as CDSRadioButton)[name] = value;
+        });
       }
-    );
+    });
     if (changedProperties.has('value')) {
       const { value } = this;
       forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
@@ -223,7 +242,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const showWarning = !readOnly && !invalid && warn;
+    const showWarning = !readOnly && !disabled && !invalid && warn;
     const showHelper = !invalid && !disabled && !warn;
 
     const invalidIcon = iconLoader(WarningFilled16, {
@@ -243,6 +262,9 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       [`${prefix}--radio-button-group--readonly`]: readOnly,
       [`${prefix}--radio-button-group--${orientation}`]:
         orientation === 'vertical',
+      [`${prefix}--radio-button-group--invalid`]:
+        !readOnly && !disabled && invalid,
+      [`${prefix}--radio-button-group--warning`]: showWarning,
       [`${prefix}--radio-button-group--slug`]: hasAILabel,
     });
 
@@ -260,7 +282,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         <slot></slot>
       </fieldset>
       <div class="${prefix}--radio-button__validation-msg">
-        ${!readOnly && invalid
+        ${!readOnly && !disabled && invalid
           ? html`
               ${invalidIcon}
               <div class="${prefix}--form-requirement">${invalidText}</div>

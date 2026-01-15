@@ -34,24 +34,7 @@ export default {
       page: mdx,
     },
     controls: {
-      exclude: ['hasScrollingContent', 'modal', 'open'],
-    },
-  },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    focusAfterCloseRef: {
-      table: {
-        disable: true,
-      },
-    },
-    onRequestClose: {
-      table: {
-        disable: true,
-      },
+      exclude: ['hasScrollingContent', 'modal', 'open', 'focusAfterCloseRef'],
     },
   },
 };

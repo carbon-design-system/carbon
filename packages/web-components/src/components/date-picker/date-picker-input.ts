@@ -111,7 +111,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
     if (!(target as HTMLSlotElement).name) {
       const hasContent = (target as HTMLSlotElement).assignedNodes().some(
         (node) =>
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
           node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
       );
       this._hasHelperText = hasContent;
@@ -264,9 +264,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       'slot-text': string;
       icon: ReturnType<typeof iconLoader>;
     } = {
-      disabled: !readonly && disabled,
-      invalid: !readonly && invalid,
-      warn: !readonly && !invalid && warn,
+      disabled: disabled && !readonly,
+      invalid: invalid && !readonly && !disabled,
+      warn: warn && !readonly && !disabled && !invalid,
       'slot-name': '',
       'slot-text': '',
       icon: null,
@@ -317,11 +317,11 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
             id="input"
             type="${type}"
             class="${inputClasses}"
-            ?disabled="${disabled}"
+            ?disabled="${normalizedProps.disabled}"
             pattern="${pattern}"
             placeholder="${ifDefined(placeholder)}"
             .value="${ifDefined(value)}"
-            ?data-invalid="${invalid}"
+            ?data-invalid="${normalizedProps.invalid}"
             @input="${handleInput}"
             ?readonly="${readonly}" />
           ${normalizedProps.icon || this._renderIcon()}

@@ -21,6 +21,7 @@ import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
+export const MENU_CLOSE_ROOT_EVENT = `${prefix}-menu-close-root-request`;
 
 /**
  * Menu Item.
@@ -135,7 +136,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   updated(_changedProperties: PropertyValues): void {
     if (this.hasSubmenu) {
       this.setAttribute('aria-expanded', this.hasSubmenu + '');
@@ -213,9 +214,23 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
     if (this.hasSubmenu) {
       this._openSubmenu();
-    } else if (e.type === 'keydown') {
-      this.click();
+      return;
     }
+
+    if (e.type === 'keydown') {
+      this.click();
+      return;
+    }
+
+    this.dispatchEvent(
+      new CustomEvent(MENU_CLOSE_ROOT_EVENT, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          triggerEvent: e,
+        },
+      })
+    );
   };
   _handleMouseEnter = () => {
     this.hoverIntentTimeout = setTimeout(() => {

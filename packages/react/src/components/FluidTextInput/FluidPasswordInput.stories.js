@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['isPassword'],
+    },
   },
 };
 
@@ -34,10 +37,9 @@ export const Default = (args) => (
 
 Default.args = {
   defaultWidth: 300,
-  className: 'test-class',
   placeholder: 'Placeholder text',
-  showPasswordLabel: 'Show password label',
-  hidePasswordLabel: 'Hide password label',
+  showPasswordLabel: 'Show password',
+  hidePasswordLabel: 'Hide password',
   onTogglePasswordVisibility: true,
   invalid: false,
   invalidText:
@@ -82,11 +84,6 @@ Default.argTypes = {
   invalidText: {
     control: {
       type: 'text',
-    },
-  },
-  isPassword: {
-    table: {
-      disable: true,
     },
   },
   onTogglePasswordVisibility: {

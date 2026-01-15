@@ -171,13 +171,13 @@ const OverflowMenuItem = frFn((props, ref) => {
         // ref as any: the type of `ref` is `ForwardedRef<HTMLButtonElement>` in `Button` component
         // but `OverflowMenuItem` can be rendered as `a` tag as well, which is `HTMLAnchorElement`
         // so we have to use `any` here
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         ref={ref as any}
         tabIndex={-1}
         // itemText as any: itemText may be a ReactNode, but `title` only accepts string
         // to avoid compatibility issue, we use `any` here. Consider to enforce `itemText` to be `string?`
         // in the next major release
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         title={requireTitle ? title || (itemText as any) : undefined}
         {...rest}>
         {OverflowMenuItemContent}

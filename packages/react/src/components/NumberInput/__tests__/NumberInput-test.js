@@ -11,6 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import { NumberInput } from '../NumberInput';
+import { validateNumberSeparators } from '../NumberInput';
 import { AILabel } from '../../AILabel';
 
 function translateWithId(id) {
@@ -375,6 +376,33 @@ describe('NumberInput', () => {
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(screen.getByLabelText('test-label')).toHaveValue(0);
     });
+
+    it('should call `onStepperBlur` when a stepper button loses focus', async () => {
+      const onBlur = jest.fn();
+      const onStepperBlur = jest.fn();
+
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          onStepperBlur={onStepperBlur}
+          min={0}
+          defaultValue={10}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const decrement = screen.getByLabelText('decrement');
+      await userEvent.click(decrement);
+      expect(decrement).toHaveFocus();
+
+      await userEvent.tab();
+
+      expect(onStepperBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).not.toHaveBeenCalled();
+    });
   });
   it('should increase by the value of large step', async () => {
     render(
@@ -499,6 +527,111 @@ describe('NumberInput', () => {
 
     await userEvent.click(screen.getByLabelText('decrement'));
     expect(input).toHaveValue(15.01);
+  });
+
+  it('should call `onBlur` with value parameter when input is blurred (type="number")', async () => {
+    const onBlur = jest.fn();
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        onBlur={onBlur}
+        min={0}
+        defaultValue={25}
+        max={100}
+        translateWithId={translateWithId}
+      />
+    );
+
+    await userEvent.click(screen.getByLabelText('test-label'));
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      }),
+      25
+    );
+  });
+
+  it('formats decimals with formatOptions={{ maximumFractionDigits: 0 }} and passes the formatted number to onBlur (controlled, type="text")', async () => {
+    const onBlur = jest.fn();
+
+    function ControlledWrapper(props) {
+      const { defaultValue } = props;
+      const [value, setValue] = React.useState(defaultValue);
+
+      const handleChange = (e, state) => {
+        setValue(state?.value);
+      };
+
+      return (
+        <NumberInput
+          {...props}
+          value={value}
+          onChange={handleChange}
+          onBlur={onBlur}
+        />
+      );
+    }
+
+    render(
+      <ControlledWrapper
+        label="test-label"
+        id="test"
+        defaultValue={25}
+        type="text"
+        formatOptions={{ maximumFractionDigits: 0 }}
+        translateWithId={translateWithId}
+      />
+    );
+
+    const input = screen.getByLabelText('test-label');
+
+    await userEvent.clear(input);
+    await userEvent.type(input, '25.7');
+    await userEvent.tab();
+
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({ target: expect.any(Object) }),
+      26 // Intl rounding -> 25.7 -> 26
+    );
+  });
+
+  it('should call `onBlur` with parsed value in controlled mode (type="number")', async () => {
+    const onBlur = jest.fn();
+    const ControlledNumberInput = () => {
+      const [value, setValue] = useState(15);
+      return (
+        <NumberInput
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          value={value}
+          onChange={(e, state) => setValue(state.value)}
+          min={0}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+    };
+
+    render(<ControlledNumberInput />);
+
+    const input = screen.getByLabelText('test-label');
+    await userEvent.click(input);
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(input).toHaveValue(16);
+
+    await userEvent.click(input);
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      }),
+      16
+    );
   });
 
   describe('with type="text"', () => {
@@ -742,7 +875,120 @@ describe('NumberInput', () => {
       expect(onBlur).toHaveBeenCalledWith(
         expect.objectContaining({
           target: expect.any(Object),
-        })
+        }),
+        10
+      );
+    });
+
+    it('should call `onBlur` with value parameter in uncontrolled mode', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          min={0}
+          defaultValue={42}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('test-label'));
+      await userEvent.tab();
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        42
+      );
+    });
+
+    it('should call `onBlur` with updated value after user types', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          min={0}
+          defaultValue={10}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      await userEvent.clear(input);
+      await userEvent.type(input, '75');
+      await userEvent.tab();
+
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        75
+      );
+    });
+
+    it('should call `onBlur` with NaN when value is empty and allowEmpty is true', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          allowEmpty
+          min={0}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      await userEvent.click(input);
+      await userEvent.tab();
+
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        NaN
+      );
+    });
+
+    it('should call `onBlur` with the formatted value when formatting alters the number', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          defaultValue={2}
+          formatOptions={{ maximumFractionDigits: 0 }}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      await userEvent.click(input);
+      await userEvent.clear(input);
+      await userEvent.type(input, '2.7');
+      await userEvent.tab();
+
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        3
       );
     });
 
@@ -772,7 +1018,7 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue('10');
       });
 
-      it('should call `onBlur` when focus leaves the input, decrement button, or increment button', async () => {
+      it('should call `onBlur` when focus leaves the input with the values set by decrement button, or increment button', async () => {
         const onBlur = jest.fn();
 
         render(
@@ -788,35 +1034,35 @@ describe('NumberInput', () => {
           />
         );
 
-        await userEvent.click(screen.getByLabelText('test-label'));
-        expect(screen.getByLabelText('test-label')).toHaveFocus();
+        const input = screen.getByLabelText('test-label');
+        await userEvent.click(input);
+        expect(input).toHaveFocus();
 
         await userEvent.click(screen.getByLabelText('decrement'));
-        expect(onBlur).toHaveBeenCalledTimes(1);
-        expect(onBlur).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          })
-        );
         expect(screen.getByLabelText('decrement')).toHaveFocus();
 
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(onBlur).toHaveBeenCalledTimes(2);
+        await userEvent.click(input);
+        await userEvent.tab();
+
         expect(onBlur).toHaveBeenCalledWith(
           expect.objectContaining({
             target: expect.any(Object),
-          })
+          }),
+          9
         );
+
+        await userEvent.click(screen.getByLabelText('increment'));
         expect(screen.getByLabelText('increment')).toHaveFocus();
 
-        await userEvent.click(screen.getByLabelText('test-label'));
-        expect(onBlur).toHaveBeenCalledTimes(3);
+        await userEvent.click(input);
+        await userEvent.tab();
+
         expect(onBlur).toHaveBeenCalledWith(
           expect.objectContaining({
             target: expect.any(Object),
-          })
+          }),
+          10
         );
-        expect(screen.getByLabelText('test-label')).toHaveFocus();
       });
 
       it('should set up and down arrows as disabled if `disabled` is true', () => {
@@ -1470,6 +1716,215 @@ describe('NumberInput', () => {
         await userEvent.click(screen.getByLabelText('increment'));
         expect(input).toHaveValue('20%');
       });
+      it('should throw an error if group seperator is in wrong position', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            value=""
+            step={1}
+            validate={validateNumberSeparators}
+            translateWithId={translateWithId}
+            invalidText="test-invalid-text"
+          />
+        );
+        const input = screen.getByLabelText('NumberInput label');
+        await userEvent.type(input, '1,1');
+        await userEvent.tab();
+        expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+      });
+
+      it('should throw an error if group seperator is in wrong position for given locale', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            locale="DE"
+            value=""
+            step={1}
+            validate={validateNumberSeparators}
+            translateWithId={translateWithId}
+            invalidText="test-invalid-text"
+          />
+        );
+        const input = screen.getByLabelText('NumberInput label');
+        await userEvent.type(input, '1.1');
+        await userEvent.tab();
+        expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+      });
+
+      it('should call `onBlur` with parsed value in controlled mode', async () => {
+        const onBlur = jest.fn();
+        const ControlledNumberInput = () => {
+          const [value, setValue] = useState(20.4);
+          return (
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              onBlur={onBlur}
+              value={value}
+              onChange={(e, state) => setValue(state.value)}
+              min={0}
+              max={100}
+              step={1}
+              translateWithId={translateWithId}
+            />
+          );
+        };
+
+        render(<ControlledNumberInput />);
+
+        const input = screen.getByLabelText('test-label');
+        await userEvent.click(input);
+        expect(input).toHaveValue('20.4');
+
+        await userEvent.tab();
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          20.4
+        );
+      });
+    });
+  });
+
+  describe('validateNumberSeparators', () => {
+    it('should validate properly formatted numbers with grouping', () => {
+      expect(validateNumberSeparators('1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1,234,567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1,234.56', 'en-US')).toBe(true);
+    });
+
+    it('should validate numbers without grouping', () => {
+      expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1234567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1234.56', 'en-US')).toBe(true);
+    });
+
+    it('should reject improperly formatted grouping', () => {
+      expect(validateNumberSeparators('12,34', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('1,2345', 'en-US')).toBe(false);
+    });
+
+    it('should validate scientific notation', () => {
+      expect(validateNumberSeparators('1e3', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1.5e2', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('2e-3', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1.5e+10', 'en-US')).toBe(true);
+    });
+
+    it('should validate negative numbers', () => {
+      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+    });
+
+    it('should validate different locale formats', () => {
+      expect(validateNumberSeparators('1.234,56', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('1 234,56', 'fr-FR')).toBe(true);
+    });
+
+    it('should validate Eastern Arabic numerals', () => {
+      expect(validateNumberSeparators('٢,٣٣٣', 'ar')).toBe(true);
+      expect(validateNumberSeparators('٢٣٣٬٤٥٦', 'ar')).toBe(true);
+    });
+
+    it('should validate Devanagari numerals', () => {
+      expect(validateNumberSeparators('१,२३४', 'hi-IN')).toBe(true);
+    });
+
+    it('should validate Kanji numerals', () => {
+      expect(validateNumberSeparators('一,二三四', 'ja')).toBe(true);
+    });
+
+    it('should allow empty string', () => {
+      expect(validateNumberSeparators('', 'en-US')).toBe(true);
+    });
+
+    it('should handle Arabic separators', () => {
+      expect(validateNumberSeparators('٢,٣٣٣.٣٣', 'ar')).toBe(true);
+    });
+
+    it('should reject invalid separator positions for German locale', () => {
+      expect(validateNumberSeparators('12.34', 'de-DE')).toBe(false);
+      expect(validateNumberSeparators('1.23.456', 'de-DE')).toBe(false);
+    });
+
+    it('should reject invalid separator positions for French locale', () => {
+      expect(validateNumberSeparators('12 34', 'fr-FR')).toBe(false);
+      expect(validateNumberSeparators('1 23 456', 'fr-FR')).toBe(false);
+    });
+
+    it('should validate Arabic numerals with proper grouping', () => {
+      expect(validateNumberSeparators('١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+    });
+
+    it('should reject Arabic numerals with wrong separator positions', () => {
+      expect(validateNumberSeparators('١,١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١,١١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١,١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١٬١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١٬١١', 'ar-EG')).toBe(false);
+    });
+
+    it('should validate negative numbers across different locales', () => {
+      // English US
+      expect(validateNumberSeparators('-1', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-12', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-123', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234,567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1.5', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+
+      // German
+      expect(validateNumberSeparators('-1', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1.234', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1,5', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1.234,56', 'de-DE')).toBe(true);
+
+      // French
+      expect(validateNumberSeparators('-1', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1 234', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1,5', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1 234,56', 'fr-FR')).toBe(true);
+    });
+
+    it('should validate negative Arabic numerals with Western digits', () => {
+      expect(validateNumberSeparators('-1', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1.5', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'ar-EG')).toBe(true);
+    });
+
+    it('should handle both Arabic comma (٬) and regular comma (,)', () => {
+      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+    });
+
+    it('should reject numbers with mixed valid and invalid grouping', () => {
+      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('12,345,6', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('١,٢٣,٤٥٦', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١٢,٣٤٥,٦', 'ar-EG')).toBe(false);
     });
   });
 });

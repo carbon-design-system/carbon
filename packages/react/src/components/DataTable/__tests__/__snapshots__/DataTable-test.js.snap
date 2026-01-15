@@ -8,18 +8,22 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r7g»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_7g_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r7g»-title"
+        aria-labelledby="tc-_r_7g_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -182,18 +186,22 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r77»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_77_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r77»-title"
+        aria-labelledby="tc-_r_77_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -356,16 +364,21 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r2k»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_2k_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
@@ -421,7 +434,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -449,7 +462,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -477,7 +490,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -553,7 +566,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
               />
             </svg>
           </button>
@@ -570,7 +583,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-«r2t»"
+                aria-labelledby="tooltip-_r_2t_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -599,7 +612,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-«r2t»"
+              id="tooltip-_r_2t_"
               role="tooltip"
             >
               <span
@@ -625,7 +638,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r2k»-title"
+        aria-labelledby="tc-_r_2k_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -800,16 +813,21 @@ exports[`DataTable renders as expected - Component API should render and match s
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«re»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with toolbar
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_e_-title"
+        >
+          DataTable with toolbar
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
@@ -853,7 +871,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -881,7 +899,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -909,7 +927,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -985,7 +1003,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
               />
             </svg>
           </button>
@@ -1002,7 +1020,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-«rm»"
+                aria-labelledby="tooltip-_r_m_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -1031,7 +1049,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-«rm»"
+              id="tooltip-_r_m_"
               role="tooltip"
             >
               <span
@@ -1057,7 +1075,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«re»-title"
+        aria-labelledby="tc-_r_e_-title"
         class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>

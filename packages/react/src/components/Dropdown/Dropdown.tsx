@@ -12,6 +12,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type FocusEvent,
   type ForwardedRef,
@@ -42,12 +43,12 @@ import ListBox, {
   type ListBoxSize,
   type ListBoxType,
 } from '../ListBox';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { TranslateWithId } from '../../types/common';
-import { useId } from '../../internal/useId';
+import type { TranslateWithId } from '../../types/common';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import {
   useFloating,
   flip,
@@ -59,7 +60,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 
-const { ItemMouseMove, MenuMouseLeave } =
+const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
     ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
   };
@@ -269,6 +270,12 @@ function stateReducer(state, actionAndChanges) {
         return state;
       }
       return changes;
+    case ToggleButtonBlur:
+    case FunctionCloseMenu:
+      return {
+        ...changes,
+        selectedItem: state.selectedItem,
+      };
     default:
       return changes;
   }
@@ -359,7 +366,7 @@ const Dropdown = React.forwardRef(
           }
         });
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [floatingStyles, autoAlign, refs.floating]);
 
     const prefix = usePrefix();
@@ -374,7 +381,7 @@ const Dropdown = React.forwardRef(
       [onChange]
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const isItemDisabled = useCallback((item, _index) => {
       const isObject = item !== null && typeof item === 'object';
       return isObject && 'disabled' in item && item.disabled === true;
@@ -387,7 +394,7 @@ const Dropdown = React.forwardRef(
         if (
           highlightedIndex !== undefined &&
           highlightedIndex > -1 &&
-          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20071
+          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
           typeof window !== undefined
         ) {
           const itemArray = document.querySelectorAll(
@@ -417,7 +424,7 @@ const Dropdown = React.forwardRef(
         onHighlightedIndexChange,
         ...downshiftProps,
       }),
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [
         items,
         itemToString,
@@ -429,7 +436,6 @@ const Dropdown = React.forwardRef(
         downshiftProps,
       ]
     );
-    const dropdownInstanceId = useId();
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -447,17 +453,26 @@ const Dropdown = React.forwardRef(
       highlightedIndex,
     } = useSelect(selectProps);
     const inline = type === 'inline';
-    const showWarning = !invalid && warn;
+
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      readOnly,
+      disabled: disabled ?? false,
+      invalid: invalid ?? false,
+      invalidText,
+      warn: warn ?? false,
+      warnText,
+    });
 
     const [isFocused, setIsFocused] = useState(false);
 
     const className = cx(`${prefix}--dropdown`, {
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
+      [`${prefix}--dropdown--warning`]: normalizedProps.warn,
       [`${prefix}--dropdown--open`]: isOpen,
       [`${prefix}--dropdown--focus`]: isFocused,
       [`${prefix}--dropdown--inline`]: inline,
-      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--disabled`]: normalizedProps.disabled,
       [`${prefix}--dropdown--light`]: light,
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
@@ -466,12 +481,12 @@ const Dropdown = React.forwardRef(
     });
 
     const titleClasses = cx(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const helperClasses = cx(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
     const wrapperClasses = cx(
@@ -481,17 +496,16 @@ const Dropdown = React.forwardRef(
       {
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
-        [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+        [`${prefix}--dropdown__wrapper--inline--invalid`]:
+          inline && normalizedProps.invalid,
+        [`${prefix}--list-box__wrapper--inline--invalid`]:
+          inline && normalizedProps.invalid,
+        [`${prefix}--list-box__wrapper--fluid--invalid`]:
+          isFluid && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
-
-    const helperId = !helperText
-      ? undefined
-      : `dropdown-helper-text-${dropdownInstanceId}`;
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
@@ -501,7 +515,7 @@ const Dropdown = React.forwardRef(
 
     const helper =
       helperText && !isFluid ? (
-        <div id={helperId} className={helperClasses}>
+        <div id={normalizedProps.helperId} className={helperClasses}>
           {helperText}
         </div>
       ) : null;
@@ -510,7 +524,12 @@ const Dropdown = React.forwardRef(
       setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
     };
 
-    const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const mergedRef = mergeRefs<HTMLButtonElement>(
+      toggleButtonProps.ref,
+      ref,
+      buttonRef
+    );
 
     const [currTimer, setCurrTimer] = useState<NodeJS.Timeout>();
 
@@ -552,7 +571,7 @@ const Dropdown = React.forwardRef(
           toggleButtonProps.onKeyDown(evt);
         }
       },
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [isTyping, currTimer, toggleButtonProps]
     );
 
@@ -563,7 +582,7 @@ const Dropdown = React.forwardRef(
             // NOTE: does not prevent click
             evt.preventDefault();
             // focus on the element as per readonly input behavior
-            mergedRef?.current?.focus();
+            buttonRef.current?.focus();
           },
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
             const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
@@ -578,7 +597,6 @@ const Dropdown = React.forwardRef(
           onKeyDown: onKeyDownHandler,
         };
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20071
     }, [readOnly, onKeyDownHandler]);
 
     const menuProps = useMemo(
@@ -594,7 +612,7 @@ const Dropdown = React.forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
-      : null;
+      : candidate;
 
     const allLabelProps = getLabelProps();
     const labelProps = isValidElement(titleText)
@@ -613,18 +631,20 @@ const Dropdown = React.forwardRef(
           onBlur={handleFocus}
           size={size}
           className={className}
-          invalid={invalid}
-          invalidText={invalidText}
-          warn={warn}
-          warnText={warnText}
+          invalid={normalizedProps.invalid}
+          invalidText={isFluid ? invalidText : undefined}
+          invalidTextId={normalizedProps.invalidId}
+          warn={normalizedProps.warn}
+          warnText={isFluid ? warnText : undefined}
+          warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
           ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
-          {invalid && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
-          {showWarning && (
+          {normalizedProps.warn && (
             <WarningAltFilled
               className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
             />
@@ -633,10 +653,19 @@ const Dropdown = React.forwardRef(
             type="button"
             // aria-expanded is already being passed through {...toggleButtonProps}
             className={`${prefix}--list-box__field`}
-            disabled={disabled}
+            disabled={normalizedProps.disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
             aria-describedby={
-              !inline && !invalid && !warn && helper ? helperId : undefined
+              !inline &&
+              !normalizedProps.invalid &&
+              !normalizedProps.warn &&
+              helper
+                ? normalizedProps.helperId
+                : normalizedProps.invalid
+                  ? normalizedProps.invalidId
+                  : normalizedProps.warn
+                    ? normalizedProps.warnId
+                    : undefined
             }
             title={
               selectedItem && itemToString !== undefined
@@ -651,7 +680,7 @@ const Dropdown = React.forwardRef(
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
                   : itemToString(selectedItem)
-                : // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+                : // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                   (label as any)}
             </span>
             <ListBox.MenuIcon
@@ -705,7 +734,8 @@ const Dropdown = React.forwardRef(
               })}
           </ListBox.Menu>
         </ListBox>
-        {!inline && !invalid && !warn && helper}
+        {!inline && !isFluid && !normalizedProps.validation && helper}
+        {!inline && !isFluid && normalizedProps.validation}
       </div>
     );
   }
@@ -716,7 +746,7 @@ const Dropdown = React.forwardRef(
 interface DropdownComponent {
   <ItemType>(
     props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   ): React.ReactElement<any> | null;
 }
 
@@ -894,7 +924,7 @@ Dropdown.propTypes = {
   titleText: PropTypes.node.isRequired,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

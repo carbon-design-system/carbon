@@ -221,7 +221,7 @@ const PasswordInput = React.forwardRef(
 
     const handleTogglePasswordVisibility = (event) => {
       setInputType(inputType === 'password' ? 'text' : 'password');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
       onTogglePasswordVisibility && onTogglePasswordVisibility(event);
     };
     const textInputClasses = classNames(
@@ -323,6 +323,11 @@ const PasswordInput = React.forwardRef(
       }
     );
 
+    const tooltipClasses = classNames(
+      `${prefix}--toggle-password-tooltip`,
+      `${prefix}--icon-tooltip`
+    );
+
     let align: PopoverAlignment | undefined = undefined;
 
     if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
@@ -341,10 +346,10 @@ const PasswordInput = React.forwardRef(
       align = tooltipPosition;
     }
     if (!hidePasswordLabel || hidePasswordLabel.trim() === '') {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn('Warning: The "hidePasswordLabel" should not be blank.');
     } else if (!showPasswordLabel || showPasswordLabel.trim() === '') {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn('Warning: The "showPasswordLabel" should not be blank.');
     }
     const input = (
@@ -370,12 +375,12 @@ const PasswordInput = React.forwardRef(
 
         <Tooltip
           align={align}
-          className={`${prefix}--toggle-password-tooltip`}
+          className={tooltipClasses}
           label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
           <button
             type="button"
             className={passwordVisibilityToggleClasses}
-            disabled={disabled || readOnly}
+            disabled={disabled}
             onClick={handleTogglePasswordVisibility}>
             {passwordVisibilityIcon}
           </button>
@@ -387,7 +392,7 @@ const PasswordInput = React.forwardRef(
       setInputType(type);
     }, [type]);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20071
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const Icon = normalizedProps.icon as any;
 
     return (
