@@ -2605,6 +2605,9 @@ Map {
                   "isRequired": true,
                   "type": "node",
                 },
+                "isSortable": {
+                  "type": "bool",
+                },
                 "key": {
                   "isRequired": true,
                   "type": "string",

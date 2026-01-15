@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,6 +113,7 @@ export interface DataTableHeader {
   header: ReactNode;
   slug?: ReactElement;
   decorator?: ReactElement;
+  isSortable?: boolean;
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
@@ -347,7 +348,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     render,
     translateWithId: t = defaultTranslateWithId,
     size,
-    isSortable: isSortableProp,
+    isSortable,
     useZebraStyles,
     useStaticWidth,
     stickyHeader,
@@ -393,7 +394,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const getHeaderProps: RenderProps['getHeaderProps'] = ({
     header,
     onClick,
-    isSortable = isSortableProp,
+    isSortable: headerIsSortable,
     ...rest
   }) => {
     const { sortDirection, sortHeaderKey } = state;
@@ -403,7 +404,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       ...rest,
       key,
       sortDirection,
-      isSortable,
+      isSortable: headerIsSortable ?? header.isSortable ?? isSortable,
       isSortHeader: sortHeaderKey === key,
       slug,
       decorator,
@@ -589,7 +590,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     return {
       useZebraStyles,
       size: size ?? 'lg',
-      isSortable: isSortableProp,
+      isSortable,
       useStaticWidth,
       stickyHeader,
       overflowMenuOnHover: overflowMenuOnHover ?? false,
@@ -910,6 +911,7 @@ DataTable.propTypes = {
     PropTypes.shape({
       key: PropTypes.string.isRequired,
       header: PropTypes.node.isRequired,
+      isSortable: PropTypes.bool,
     })
   ).isRequired,
 
