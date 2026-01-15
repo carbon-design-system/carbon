@@ -1,0 +1,7 @@
+{
+  "codeConnect": {
+    "parser": "html",
+    "include": ["code-connect/**"],
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System"
+  }
+}

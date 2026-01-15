@@ -962,14 +962,19 @@ export function ActionableNotification({
   const startTrap = useRef<HTMLElement>(null);
   const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const focusTrapWithoutSentinels = useFeatureFlag(
+  const deprecatedFlag = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = useFeatureFlag(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    focusTrapWithoutSentinelsFlag || deprecatedFlag;
 
   useIsomorphicEffect(() => {
     if (hasFocus && role === 'alertdialog') {
       const button = document.querySelector(
-        'button.cds--actionable-notification__action-button'
+        `button.${prefix}--actionable-notification__action-button`
       ) as HTMLButtonElement;
       button?.focus();
     }
@@ -994,6 +999,7 @@ export function ActionableNotification({
         endTrapNode,
         currentActiveNode,
         oldActiveNode,
+        prefix,
       });
     }
   }

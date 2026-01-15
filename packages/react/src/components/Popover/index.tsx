@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -84,6 +84,11 @@ export interface PopoverBaseProps {
   alignmentAxisOffset?: number;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
    * Will auto-align the popover on first render if it is not visible. This prop
    * is currently experimental and is subject to future changes. Requires
    * React v17+
@@ -100,6 +105,11 @@ export interface PopoverBaseProps {
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
 
   /**
    * Provide elements to be rendered inside of the component
@@ -159,9 +169,11 @@ export const Popover: PopoverComponent & {
     as: BaseComponent = 'span' as E,
     autoAlign = false,
     autoAlignBoundary,
+    backgroundToken = 'layer',
     caret = isTabTip ? false : true,
     className: customClassName,
     children,
+    border = false,
     dropShadow = true,
     highContrast = false,
     onRequestClose,
@@ -180,33 +192,52 @@ export const Popover: PopoverComponent & {
   const popover = useRef<Element>(null);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+  const lastClickWasInsidePopoverContent = useRef(false);
 
   let align = mapPopoverAlign(initialAlign);
+
+  // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
+  // case where the popover will close when clicking non-focusable elements (e.g. text)
+  useEvent(popover, 'mousedown', (event) => {
+    const target = event.target as Node;
+    lastClickWasInsidePopoverContent.current =
+      refs.floating.current?.contains(target) || false;
+
+    // reset flag
+    if (lastClickWasInsidePopoverContent.current) {
+      setTimeout(() => {
+        lastClickWasInsidePopoverContent.current = false;
+      }, 0);
+    }
+  });
 
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
-    if (isTabTip) {
-      if (relatedTarget && !popover.current?.contains(relatedTarget)) {
-        onRequestClose?.();
-      }
-      return;
-    }
 
     if (!relatedTarget) {
-      onRequestClose?.();
-      return;
-    }
+      // do not close if PopoverContent was clicked
+      if (lastClickWasInsidePopoverContent.current) {
+        lastClickWasInsidePopoverContent.current = false;
+        return;
+      }
 
-    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
-    const isOutsideFloating =
-      enableFloatingStyles && refs.floating.current
-        ? !refs.floating.current.contains(relatedTarget)
-        : true;
-
-    // Only close if focus moved outside both containers
-    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
+    } else if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+      const isOutsideFloating =
+        enableFloatingStyles && refs.floating.current
+          ? !refs.floating.current.contains(relatedTarget)
+          : true;
+
+      const isFocusableWrapper =
+        relatedTarget &&
+        popover.current &&
+        relatedTarget.contains(popover.current);
+
+      // Only close if focus moved outside both containers and not to an interactive parent wrapper
+      if (isOutsideFloating && !isFocusableWrapper) {
+        onRequestClose?.();
+      }
     }
   });
 
@@ -244,9 +275,11 @@ export const Popover: PopoverComponent & {
       // If a value is not set via a custom property, provide a default value that matches the
       // default values defined in the sass style file
       const getStyle = window.getComputedStyle(popover.current, null);
-      const offsetProperty = getStyle.getPropertyValue('--cds-popover-offset');
+      const offsetProperty = getStyle.getPropertyValue(
+        `--${prefix}-popover-offset`
+      );
       const caretProperty = getStyle.getPropertyValue(
-        '--cds-popover-caret-height'
+        `--${prefix}-popover-caret-height`
       );
 
       // Handle if the property values are in px or rem.
@@ -327,6 +360,7 @@ export const Popover: PopoverComponent & {
               }),
             arrow({
               element: caretRef,
+              padding: 16,
             }),
             autoAlign && hide(),
           ],
@@ -410,12 +444,15 @@ export const Popover: PopoverComponent & {
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
         enableFloatingStyles,
       [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
+      [`${prefix}--popover--background-token__background`]:
+        backgroundToken === 'background' && !highContrast,
     },
     customClassName
   );
@@ -579,6 +616,11 @@ Popover.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
    * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
    */
   autoAlignBoundary: PropTypes.oneOfType([
@@ -597,6 +639,11 @@ Popover.propTypes = {
    * Specify whether a caret should be rendered
    */
   caret: PropTypes.bool,
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border: PropTypes.bool,
 
   /**
    * Provide elements to be rendered inside of the component

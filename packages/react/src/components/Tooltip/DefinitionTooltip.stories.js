@@ -93,3 +93,72 @@ Default.argTypes = {
     },
   },
 };
+
+export const WithLargeText = (args) => {
+  const definition = 'Example definition';
+  return (
+    <p>
+      Custom domains direct requests for your apps in this Cloud Foundry
+      organization to a{' '}
+      <DefinitionTooltip openOnHover definition={definition} {...args}>
+        URL that you own. A custom domain can be a shared domain,
+      </DefinitionTooltip>{' '}
+      a shared subdomain, or a shared domain and host.
+    </p>
+  );
+};
+
+WithLargeText.args = {
+  align: 'bottom-left',
+  defaultOpen: false,
+  definition: 'Example definition',
+  openOnHover: true,
+};
+
+WithLargeText.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+
+      'left',
+      'left-bottom',
+      'left-top',
+
+      'right',
+      'right-bottom',
+      'right-top',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  definition: {
+    control: {
+      type: 'text',
+    },
+  },
+  id: {
+    table: { disable: true },
+  },
+  openOnHover: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  tooltipText: {
+    table: {
+      disable: true,
+    },
+  },
+  triggerClassName: {
+    table: {
+      disable: true,
+    },
+  },
+};

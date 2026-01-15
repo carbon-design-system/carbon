@@ -22,13 +22,25 @@ import CDSmenuItemSelectable from './menu-item-selectable';
 import CDSmenuItemGroup from './menu-item-group';
 import CDSmenuItemRadioGroup from './menu-item-radio-group';
 import CDSmenuItemDivider from './menu-item-divider';
+import { MENU_BACKGROUND_TOKEN } from './defs';
 
 const args = {
+  backgroundToken: MENU_BACKGROUND_TOKEN.LAYER,
+  border: false,
   size: 'sm',
   open: true,
 };
 
 const argTypes = {
+  backgroundToken: {
+    control: { type: 'radio' },
+    description: 'Specify the background token to use. Default is "layer".',
+    options: [MENU_BACKGROUND_TOKEN.LAYER, MENU_BACKGROUND_TOKEN.BACKGROUND],
+  },
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the menu.',
+  },
   label: {
     control: 'text',
     description: 'A label describing the Menu.',
@@ -42,8 +54,9 @@ const argTypes = {
     description: `Whether the Menu is open or not.`,
   },
   size: {
-    control: 'select',
-    description: `Specify the size of the Menu. 'xs'
+    control: { type: 'radio' },
+    description: `Specify the size of the Menu. 
+    'xs'
     'sm'
     'md'
     'lg'`,
@@ -76,14 +89,20 @@ export const Default = {
   },
   args,
   argTypes,
-  render: ({ open, size }) => {
+  render: ({ open, size, backgroundToken, border, label }) => {
     return html`
-      <cds-menu ?open=${open} size=${size} menuAlignment="bottom">
+      <cds-menu
+        ?open=${open}
+        size=${size}
+        menuAlignment="bottom"
+        label=${label}
+        background-token=${backgroundToken}
+        ?border=${border}>
         <cds-menu-item label="Share with">
           ${iconLoader(FolderShared16, { slot: 'render-icon' })}
           <cds-menu-item-radio-group slot="submenu" label="Share with list">
             <cds-menu-item label="None"></cds-menu-item>
-            <cds-menu-item label="Product team"></cds-menu-item>
+            <cds-menu-item selected="true" label="Product team"></cds-menu-item>
             <cds-menu-item label="Organization"></cds-menu-item>
             <cds-menu-item label="Company"></cds-menu-item>
           </cds-menu-item-radio-group>
@@ -100,7 +119,7 @@ export const Default = {
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
-          <cds-menu-item-selectable label="Bold" shortcut="⌘B">
+          <cds-menu-item-selectable selected="true" label="Bold" shortcut="⌘B">
             ${iconLoader(TextBold16, { slot: 'render-icon' })}
           </cds-menu-item-selectable>
           <cds-menu-item-selectable label="Italic" shortcut="⌘I">
@@ -109,8 +128,8 @@ export const Default = {
         </cds-menu-item-group>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-radio-group label="samples">
-          <cds-menu-item label="None"></cds-menu-item>
-          <cds-menu-item selected="true" label="Overline"></cds-menu-item>
+          <cds-menu-item selected="true" label="None"></cds-menu-item>
+          <cds-menu-item label="Overline"></cds-menu-item>
           <cds-menu-item label="Line-through"></cds-menu-item>
           <cds-menu-item label="Underline"></cds-menu-item>
         </cds-menu-item-radio-group>

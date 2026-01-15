@@ -9,7 +9,7 @@ import '@carbon/web-components/es/components/textarea/index.js';
 import { html, fixture, expect, oneEvent } from '@open-wc/testing';
 
 describe('cds-textarea', () => {
-  it('should render correctly with label and helper text', async () => {
+  it('should render correctly with label', async () => {
     const el = await fixture(html`
       <cds-textarea
         label="Textarea label"
@@ -17,10 +17,18 @@ describe('cds-textarea', () => {
     `);
 
     const label = el.shadowRoot.querySelector('label');
-    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
-
     expect(label).to.exist;
     expect(label.textContent).to.include('Textarea label');
+  });
+
+  it('should render correctly with helper-text', async () => {
+    const el = await fixture(html`
+      <cds-textarea
+        label="Textarea label"
+        helper-text="Helper text"></cds-textarea>
+    `);
+
+    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
     expect(helper).to.exist;
     expect(helper.textContent).to.include('Helper text');
   });
@@ -116,6 +124,29 @@ describe('cds-textarea', () => {
     expect(skeleton).to.exist;
   });
 
+  it('should support hide-label on skeleton variant', async () => {
+    const el = await fixture(html`
+      <cds-textarea-skeleton></cds-textarea-skeleton>
+    `);
+
+    await el.updateComplete;
+
+    const label = el.shadowRoot?.querySelector(`.cds--label.cds--skeleton`);
+    expect(label).to.exist;
+
+    const elHiddenLabel = await fixture(html`
+      <cds-textarea-skeleton hide-label></cds-textarea-skeleton>
+    `);
+
+    await elHiddenLabel.updateComplete;
+
+    // label should not render when hide-label is true
+    const hiddenLabel = elHiddenLabel.shadowRoot?.querySelector(
+      `.cds--label.cds--skeleton`
+    );
+    expect(hiddenLabel).to.not.exist;
+  });
+
   it('should be accessible', async () => {
     const el = await fixture(html`
       <cds-textarea
@@ -191,7 +222,9 @@ describe('cds-textarea', () => {
         </cds-textarea>
       `);
       await el.updateComplete;
-      const slot = el.shadowRoot.querySelector('slot[name="helper-text"]');
+      const slot = el.shadowRoot.querySelector(
+        'div.cds--form__helper-text slot[name="helper-text"]'
+      );
       const content = slot.assignedNodes({ flatten: true })[0];
       expect(content.textContent.trim()).to.equal('Slotted Helper');
     });

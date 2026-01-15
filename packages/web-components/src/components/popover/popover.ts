@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,9 @@ import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import FloatingUIContoller from '../../globals/controllers/floating-controller';
+import FloatingUIController from '../../globals/controllers/floating-controller';
+import { POPOVER_BACKGROUND_TOKEN } from './defs';
+import type { Boundary, Rect } from '@floating-ui/dom';
 
 /**
  * Popover.
@@ -26,7 +28,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   /**
    * Create popover controller instance
    */
-  private popoverController = new FloatingUIContoller(this);
+  private popoverController = new FloatingUIController(this);
 
   /**
    * The `<slot>` element in the shadow DOM.
@@ -47,6 +49,12 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   align = '';
 
   /**
+   * **Experimental:** Provide an offset value for alignment axis. Only takes effect when `autoalign` is enabled.
+   */
+  @property({ type: Number, reflect: true, attribute: 'alignment-axis-offset' })
+  alignmentAxisOffset?: number;
+
+  /**
    * Specify whether a auto align functionality should be applied
    */
   @property({ type: Boolean, reflect: true })
@@ -63,6 +71,12 @@ class CDSPopover extends HostListenerMixin(LitElement) {
    */
   @property({ type: Boolean, reflect: true })
   dropShadow = true;
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  @property({ type: Boolean, reflect: true })
+  border = false;
 
   /**
    * Render the component using the high-contrast variant
@@ -83,16 +97,33 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   tabTip = false;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ reflect: true, type: String })
+  backgroundToken = POPOVER_BACKGROUND_TOKEN.LAYER;
+
+  /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default.
+   * Takes one of the following: 'clippingAncestors', '#elementid', '#elementid_1, #elementid_2', 'rect(x, y, width, height)'
+   * This prop is currently experimental and is subject to future changes.
+   */
+  @property({ type: String, reflect: true, attribute: 'autoalign-boundary' })
+  autoAlignBoundary?: string;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
     if (this.tabTip) {
-      const component = (target as HTMLSlotElement).assignedNodes().filter(
-        (node) =>
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-          node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-      );
-      (component[0] as HTMLElement).classList.add(
+      const component = (target as HTMLSlotElement)
+        .assignedNodes()
+        .filter(
+          (node) =>
+            node.nodeType === Node.ELEMENT_NODE &&
+            (node as Element).tagName === 'BUTTON'
+        );
+
+      (component[0] as HTMLElement)?.classList.add(
         `${prefix}--popover--tab-tip__button`
       );
     }
@@ -110,8 +141,27 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   }
 
   private _handleOutsideClick(event: Event) {
+    const path = event.composedPath();
+
+    if (path.includes(this._triggerSlotNode.assignedElements()[0])) return;
+
+    const popoverContent = this.querySelector(
+      (this.constructor as typeof CDSPopover).selectorPopoverContent
+    )?.shadowRoot?.querySelector(
+      (this.constructor as typeof CDSPopover).selectorPopoverContentClass
+    ) as HTMLElement;
+
+    if (path.includes(popoverContent)) return;
+
     const target = event.target as Node | null;
-    if (this.open && target && !this.contains(target)) {
+    const composedTarget = event.composedPath?.()[0] as Node | null;
+
+    if (
+      this.open &&
+      target &&
+      !this.contains(target) &&
+      !this.contains(composedTarget)
+    ) {
       this.open = false;
     }
   }
@@ -130,20 +180,80 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     document.removeEventListener('click', this._handleOutsideClick);
   }
 
+  /**
+   * This function resolves the string passed in for `autoAlignBoundary` to either:
+   * "clippingAncestors"
+   * An element (found via #id)
+   * An array of elements (found via #id1, #id2, #id3, separated by ",")
+   * A rect, input format should be 'rect(x,y,width,height)'
+   */
+  private _resolveAutoAlignBoundary(): Boundary {
+    const raw = (this.autoAlignBoundary ?? '').trim();
+
+    // Default to 'clippingAncestors'
+    if (!raw) return 'clippingAncestors';
+    if (raw === 'clippingAncestors') return 'clippingAncestors';
+
+    // regex match for: rect(x,y,width,height)
+    const rectMatch =
+      /^rect\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*,\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)$/i.exec(
+        raw
+      );
+    if (rectMatch) {
+      const [, x, y, w, h] = rectMatch;
+      const rect: Rect = { x: +x, y: +y, width: +w, height: +h };
+      return rect;
+    }
+
+    // Get element(s)
+    const ids = raw
+      .split(',')
+      .map((s) => s.trim())
+      .filter((s) => s.length > 1 && s.startsWith('#'))
+      .map((s) => s.slice(1).trim())
+      .filter(Boolean);
+
+    if (ids.length > 0) {
+      const elements: Element[] = [];
+      const inputted_ids = new Set<string>();
+
+      for (const id of ids) {
+        if (inputted_ids.has(id)) continue;
+        inputted_ids.add(id);
+
+        const el = document.getElementById(id);
+
+        if (el) elements.push(el);
+      }
+      return elements.length === 1 ? elements[0] : elements;
+    }
+
+    // default fallback
+    return 'clippingAncestors';
+  }
+
   updated(changedProperties) {
     const { selectorPopoverContent } = this.constructor as typeof CDSPopover;
-    ['open', 'align', 'autoalign', 'caret', 'dropShadow', 'tabTip'].forEach(
-      (name) => {
-        if (changedProperties.has(name)) {
-          const { [name as keyof CDSPopover]: value } = this;
-          if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
-            (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
-              name
-            ] = value;
-          }
+    [
+      'open',
+      'align',
+      'autoalign',
+      'caret',
+      'dropShadow',
+      'border',
+      'tabTip',
+      'highContrast',
+      'backgroundToken',
+    ].forEach((name) => {
+      if (changedProperties.has(name)) {
+        const { [name as keyof CDSPopover]: value } = this;
+        if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
+          (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
+            name
+          ] = value;
         }
       }
-    );
+    });
 
     if (this.autoalign && this.open) {
       // auto align functionality with @floating-ui/dom library
@@ -169,6 +279,9 @@ class CDSPopover extends HostListenerMixin(LitElement) {
           flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.align,
           open: this.open,
+          alignmentAxisOffset: this.alignmentAxisOffset,
+          autoAlignBoundary: this._resolveAutoAlignBoundary(),
+          isTabTip: this.tabTip,
         });
       }
     }
@@ -177,6 +290,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   render() {
     const {
       dropShadow,
+      border,
       highContrast,
       open,
       tabTip,
@@ -185,16 +299,36 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     if (tabTip) {
       this.caret = tabTip ? false : true;
     }
-    this.align = this.align ? this.align : tabTip ? 'bottom-left' : 'bottom';
+
+    if (!this.autoalign) {
+      this.align = this.align ? this.align : tabTip ? 'bottom-start' : 'bottom';
+    }
+
+    if (tabTip) {
+      const tabTipAlignments = [
+        'bottom-start',
+        'bottom-end',
+        'bottom-left', // remove in v12
+        'bottom-right', // remove in v12
+      ];
+
+      if (!tabTipAlignments.includes(this.align)) {
+        this.align = 'bottom-start';
+      }
+    }
 
     const classes = classMap({
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: this.caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--${this.align}`]: true,
       [`${prefix}--popover--tab-tip`]: tabTip,
+      [`${prefix}--popover--background-token__background`]:
+        this.backgroundToken === POPOVER_BACKGROUND_TOKEN.BACKGROUND &&
+        !highContrast,
     });
     return html`
       <span class="${classes}" part="popover-container">

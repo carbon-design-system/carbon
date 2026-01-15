@@ -41,7 +41,7 @@ export default {
 export const _FileUploaderItem = (args) => {
   return (
     <FileUploaderItem
-      errorBody="500 KB max file size. Select a new file and try again."
+      errorBody="1 MB max file size. Select a new file and try again."
       errorSubject="File size exceeds limit"
       iconDescription="Delete file"
       invalid={false}
@@ -102,10 +102,10 @@ export const _FileUploaderDropContainer = () => {
     <FileUploaderDropContainer
       labelText="Drag and drop files here or click to upload"
       multiple={true}
+      maxFileSize={1024 * 1024}
       accept={['image/jpeg', 'image/png']}
       disabled={false}
       name=""
-      tabIndex={0}
     />
   );
 };
@@ -117,6 +117,7 @@ DragAndDropUploadContainerExampleApplication.args = {
   labelText: 'Drag and drop files here or click to upload',
   name: '',
   multiple: true,
+  maxFileSize: 1024 * 1024,
   accept: ['image/jpeg', 'image/png'],
   disabled: false,
   tabIndex: 0,
@@ -132,6 +133,7 @@ DragAndDropUploadSingleContainerExampleApplication.args = {
   labelText: 'Drag and drop a file here or click to upload',
   name: '',
   multiple: false,
+  maxFileSize: 1024 * 1024,
   accept: ['image/jpeg', 'image/png'],
   disabled: false,
   tabIndex: 0,
@@ -158,13 +160,14 @@ export const Default = (args) => {
 
 Default.args = {
   labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
+  labelDescription: 'Max file size is 1 MB. Only .jpg files are supported.',
   buttonLabel: 'Add file',
   buttonKind: 'primary',
   size: 'md',
   filenameStatus: 'edit',
   accept: ['.jpg', '.png'],
   multiple: true,
+  maxFileSize: 1024 * 1024,
   disabled: false,
   iconDescription: 'Delete file',
   name: '',
