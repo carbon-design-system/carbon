@@ -13,7 +13,6 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "custom-elements.json",
-    "dist/**/*",
     "es/**/*",
     "es-custom/**/*",
     "lib/**/*",
@@ -43,7 +42,6 @@
     "./es/": "./es/",
     "./es-custom/*": "./es-custom/*",
     "./lib/": "./lib/",
-    "./dist/": "./dist/",
     "./scss/": "./scss/",
     "./custom-elements.json": "./custom-elements.json",
     "./package.json": "./package.json"
@@ -52,7 +50,7 @@
     "prebuild": "node tools/fix-carbon-sass-imports.js",
     "build": "yarn clean && node tasks/build-dist.js && node tasks/build.js && yarn wca",
     "ci-check": "yarn wca && yarn typecheck",
-    "clean": "rimraf es lib scss dist storybook-static",
+    "clean": "rimraf es es-custom lib scss dist storybook-static",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
     "serve": "node tasks/build.js --serve",
     "start": "yarn storybook",
