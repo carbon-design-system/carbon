@@ -1467,9 +1467,7 @@ Callout.propTypes = {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface StaticNotificationProps extends CalloutProps {}
 let didWarnAboutDeprecation = false;
-export const StaticNotification: React.FC<StaticNotificationProps> = (
-  props
-) => {
+export const StaticNotification = (props: StaticNotificationProps) => {
   if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,

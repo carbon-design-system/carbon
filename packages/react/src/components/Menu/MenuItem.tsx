@@ -8,18 +8,18 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ComponentProps,
-  FC,
-  ForwardedRef,
   forwardRef,
-  KeyboardEvent,
-  LiHTMLAttributes,
-  MouseEvent,
-  ReactNode,
   useContext,
   useEffect,
   useRef,
   useState,
+  type ComponentProps,
+  type ElementType,
+  type ForwardedRef,
+  type KeyboardEvent,
+  type LiHTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
 } from 'react';
 import {
   useHover,
@@ -78,7 +78,7 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: FC;
+  renderIcon?: ElementType;
 
   /**
    * Provide a shortcut for the action of this MenuItem. Note that the component will only render it as a hint but not actually register the shortcut.

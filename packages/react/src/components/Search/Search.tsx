@@ -13,8 +13,7 @@ import React, {
   useRef,
   useState,
   type ChangeEvent,
-  type ComponentType,
-  type FunctionComponent,
+  type ElementType,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -100,7 +99,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
 
   /**
    * @deprecated Specify the role for the underlying `<input>`.

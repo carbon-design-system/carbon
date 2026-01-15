@@ -17,14 +17,14 @@ const defaultIconDescription = 'Settings';
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface TableToolbarMenuProps extends OverflowMenuProps {}
 
-const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({
+const TableToolbarMenu = ({
   className,
   renderIcon = Settings,
   iconDescription = defaultIconDescription,
   children,
   menuOptionsClass,
   ...rest
-}) => {
+}: TableToolbarMenuProps) => {
   const prefix = usePrefix();
   const toolbarActionClasses = cx(
     className,
