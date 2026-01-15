@@ -150,6 +150,27 @@ class CDSComboBox extends CDSDropdown {
     }
 
     this._filterInputValue = rawQueryText;
+
+    if (this.allowCustomValue) {
+      const previousValue = this.value;
+      this.value = rawQueryText;
+
+      if (previousValue !== this.value) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSComboBox).eventSelect,
+            {
+              bubbles: true,
+              composed: true,
+              detail: {
+                item: null,
+                value: this.value,
+              },
+            }
+          )
+        );
+      }
+    }
     this.open = true;
     this.requestUpdate();
   }
@@ -252,7 +273,11 @@ class CDSComboBox extends CDSDropdown {
 
   protected _revertInputToSelected(focus = true) {
     const selected = this._getSelectedItem();
-    const text = selected?.textContent ?? '';
+
+    let text = selected?.textContent ?? '';
+    if (this.allowCustomValue && !selected && this.value) {
+      text = this.value as string;
+    }
 
     this._filterInputValue = text;
 
@@ -523,6 +548,12 @@ class CDSComboBox extends CDSDropdown {
   @property({ type: Boolean, reflect: true })
   typeahead = false;
 
+  /**
+   * `true` to allow custom values that do not match any item in the list.
+   */
+  @property({ type: Boolean, attribute: 'allow-custom-value' })
+  allowCustomValue = false;
+
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
     const { _selectedItemContent: selectedItemContent } = this;
@@ -577,7 +608,8 @@ class CDSComboBox extends CDSDropdown {
           }
         } else if (
           this._filterInputValue &&
-          this._filterInputValue.length > 0
+          this._filterInputValue.length > 0 &&
+          !this.allowCustomValue
         ) {
           this._clearInputWithoutSelecting(false);
           if (
