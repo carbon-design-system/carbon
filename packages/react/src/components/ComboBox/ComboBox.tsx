@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type ComponentType,
   type FocusEvent,
   type ForwardedRef,
   type InputHTMLAttributes,
@@ -255,10 +254,9 @@ export interface ComboBoxProps<ItemType>
   invalidText?: ReactNode;
 
   /**
-   * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
-  itemToElement?: ComponentType<ItemType> | null;
+  itemToElement?: ((item: ItemType) => ReactNode) | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -795,9 +793,6 @@ const ComboBox = forwardRef(
       [`${prefix}--combo-box--input--focus`]: isFocused,
     });
 
-    // needs to be Capitalized for react to render it correctly
-    const ItemToElement = itemToElement;
-
     // AILabel always size `mini`
     const candidate = slug ?? decorator;
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
@@ -1216,11 +1211,9 @@ const ComboBox = forwardRef(
                         title={title}
                         disabled={disabled}
                         {...modifiedItemProps}>
-                        {ItemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemToString(item)
-                        )}
+                        {itemToElement
+                          ? itemToElement(item)
+                          : itemToString(item)}
                         {isEqual(menuSelectedItem, item) && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
@@ -1351,8 +1344,7 @@ ComboBox.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 
