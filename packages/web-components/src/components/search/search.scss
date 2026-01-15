@@ -141,3 +141,9 @@ $css--plex: true !default;
 :host(#{$prefix}-search-skeleton[size='lg']) {
   @extend .#{$prefix}--search--lg;
 }
+:host(#{$prefix}-search) {
+  .#{$prefix}--search-input {
+    background-color: var(--cds-search-background, $field);
+    border-block-end: var(--cds-search-border-bottom, 1px solid $border-strong);
+  }
+}

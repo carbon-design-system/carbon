@@ -216,11 +216,22 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
+
+    const isInteractive = !readonly && !disabled;
+
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
+    };
+
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
-      [`${prefix}--text-input--invalid`]: invalid,
-      [`${prefix}--slider-text-input--warn`]: warn,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--slider-text-input--warn`]: normalizedProps.warn,
     });
 
     const invalidIcon = iconLoader(WarningFilled16, {
@@ -231,24 +242,20 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       class: `${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`,
     });
     return html`
-      ${!hideTextInput
-        ? html`
-            <input
-              ?disabled="${disabled}"
-              ?data-invalid="${invalid}"
-              type="${ifDefined(type)}"
-              class="${classes}"
-              max="${max}"
-              min="${min}"
-              ?readonly="${ifDefined(readonly)}"
-              step="${step}"
-              .value="${value}"
-              @change="${handleChange}"
-              @input="${handleInput}" />
-            ${invalid ? html`${invalidIcon}` : null}
-            ${warn ? html`${warnIcon}` : null}
-          `
-        : null}
+      <input
+        ?disabled="${disabled}"
+        ?data-invalid="${normalizedProps.invalid}"
+        type="${hideTextInput ? 'hidden' : ifDefined(type)}"
+        class="${classes}"
+        max="${max}"
+        min="${min}"
+        ?readonly="${ifDefined(readonly)}"
+        step="${step}"
+        .value="${value}"
+        @change="${handleChange}"
+        @input="${handleInput}" />
+      ${!hideTextInput && normalizedProps.invalid ? html`${invalidIcon}` : null}
+      ${!hideTextInput && normalizedProps.warn ? html`${warnIcon}` : null}
     `;
   }
 

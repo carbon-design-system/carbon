@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icon-helpers",
   "description": "Helpers used alongside icons for digital and software products using the Carbon Design System",
-  "version": "10.68.0",
+  "version": "10.70.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -37,9 +37,9 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "@carbon/cli": "^11.36.0",
+    "@carbon/cli": "^11.38.0",
     "rimraf": "^6.0.1",
-    "typescript-config-carbon": "^0.8.0"
+    "typescript-config-carbon": "workspace:^0.9.0"
   },
   "sideEffects": false,
   "dependencies": {

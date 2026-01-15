@@ -15,6 +15,7 @@ import {
   // Gray
   gray10,
   gray10Hover,
+  gray20,
   gray30,
   gray40,
   gray50,
@@ -32,16 +33,21 @@ import {
   // Support
   blue30,
   blue50,
+  green30,
+  cyan40,
   green40,
   green50,
   yellow30,
   orange40,
   red30,
   red40,
+  red50,
   red60,
   purple40,
   purple50,
   purple60,
+  teal30,
+  teal40,
 
   // Constants
   white,
@@ -209,9 +215,97 @@ export const skeletonElement = gray70;
 // Misc
 export const interactive = blue50;
 export const highlight = blue80;
-export const overlay = rgba(black, 0.65);
+export const overlay = rgba(black, 0.6);
 export const toggleOff = gray50;
 export const shadow = rgba(black, 0.8);
+
+// Syntax highlighting
+export const syntaxComment = green40;
+export const syntaxLineComment = syntaxComment;
+export const syntaxBlockComment = syntaxComment;
+export const syntaxDocComment = syntaxComment;
+export const syntaxString = textPrimary;
+export const syntaxDocString = syntaxString;
+export const syntaxKeyword = blue50;
+export const syntaxOperatorKeyword = syntaxKeyword;
+export const syntaxControlKeyword = purple40;
+export const syntaxDefinitionKeyword = cyan40;
+export const syntaxModuleKeyword = purple40;
+export const syntaxVariable = blue30;
+export const syntaxName = syntaxVariable;
+export const syntaxVariableName = syntaxVariable;
+export const syntaxLabelName = syntaxVariable;
+export const syntaxAttribute = cyan40;
+export const syntaxAttributeName = syntaxAttribute;
+export const syntaxPropertyName = syntaxAttribute;
+export const syntaxTag = teal30;
+export const syntaxTagName = syntaxTag;
+export const syntaxType = teal30;
+export const syntaxTypeName = syntaxType;
+export const syntaxClassName = syntaxType;
+export const syntaxNamespace = syntaxType;
+export const syntaxMacroName = textPrimary;
+export const syntaxAtom = syntaxMacroName;
+export const syntaxLiteral = syntaxAtom;
+export const syntaxBool = syntaxAtom;
+export const syntaxNull = syntaxAtom;
+export const syntaxSelf = syntaxTag;
+export const syntaxNumber = green30;
+export const syntaxInteger = syntaxNumber;
+export const syntaxFloat = syntaxNumber;
+export const syntaxUnit = syntaxNumber;
+export const syntaxCharacter = syntaxString;
+export const syntaxAttributeValue = syntaxString;
+export const syntaxSpecialString = purple40;
+export const syntaxRegexp = purple40;
+export const syntaxEscape = gray20;
+export const syntaxUrl = syntaxEscape;
+export const syntaxColor = syntaxMacroName;
+export const syntaxOperator = gray20;
+export const syntaxDerefOperator = syntaxOperator;
+export const syntaxArithmeticOperator = syntaxOperator;
+export const syntaxLogicOperator = syntaxOperator;
+export const syntaxBitwiseOperator = syntaxOperator;
+export const syntaxCompareOperator = syntaxOperator;
+export const syntaxUpdateOperator = syntaxOperator;
+export const syntaxDefinitionOperator = syntaxDefinitionKeyword;
+export const syntaxTypeOperator = syntaxTag;
+export const syntaxControlOperator = syntaxModuleKeyword;
+export const syntaxModifier = syntaxKeyword;
+export const syntaxPunctuation = gray20;
+export const syntaxSeparator = syntaxPunctuation;
+export const syntaxBracket = syntaxPunctuation;
+export const syntaxAngleBracket = gray50;
+export const syntaxSquareBracket = syntaxBracket;
+export const syntaxParen = syntaxBracket;
+export const syntaxBrace = syntaxBracket;
+export const syntaxContent = textPrimary;
+export const syntaxList = syntaxContent;
+export const syntaxEmphasis = syntaxContent;
+export const syntaxStrong = syntaxContent;
+export const syntaxMonospace = syntaxContent;
+export const syntaxStrikethrough = syntaxContent;
+export const syntaxHeading = cyan40;
+export const syntaxHeading1 = syntaxHeading;
+export const syntaxHeading2 = syntaxHeading;
+export const syntaxHeading3 = syntaxHeading;
+export const syntaxHeading4 = syntaxHeading;
+export const syntaxHeading5 = syntaxHeading;
+export const syntaxHeading6 = syntaxHeading;
+export const syntaxContentSeparator = syntaxPunctuation;
+export const syntaxQuote = syntaxComment;
+export const syntaxLink = blue50;
+export const syntaxInvalid = red50;
+export const syntaxMeta = green40;
+export const syntaxDocumentMeta = syntaxMeta;
+export const syntaxAnnotation = teal40;
+export const syntaxProcessingInstruction = syntaxString;
+export const syntaxDefinition = cyan40;
+export const syntaxConstant = blue50;
+export const syntaxFunction = yellow30;
+export const syntaxStandard = blue50;
+export const syntaxLocal = blue30;
+export const syntaxSpecial = blue50;
 
 //// AI - Experimental (Use at your own risk)
 //// Phase 2 - new \\\\
@@ -250,14 +344,18 @@ export const aiPopoverCaretBottomBackground = '#202D45';
 export const chatPromptBackground = gray100;
 export const chatPromptBorderStart = gray90;
 export const chatPromptBorderEnd = rgba(gray90, 0);
+export const chatPromptText = textPrimary;
 export const chatBubbleUser = gray80;
+export const chatBubbleUserText = textPrimary;
 export const chatBubbleAgent = gray90;
+export const chatBubbleAgentText = textPrimary;
 export const chatBubbleBorder = gray70;
 export const chatAvatarBot = gray50;
 export const chatAvatarAgent = gray30;
 export const chatAvatarUser = blue50;
 export const chatShellBackground = gray90;
 export const chatHeaderBackground = gray90;
+export const chatHeaderText = textPrimary;
 
 // Chat button tokens
 export const chatButton = linkPrimary;

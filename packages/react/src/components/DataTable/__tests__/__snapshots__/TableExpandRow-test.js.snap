@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`DataTable.TableExpandRow renders as expected - Component API should render 1`] = `
 <div>
@@ -37,7 +37,7 @@ exports[`DataTable.TableExpandRow renders as expected - Component API should ren
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                  d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </button>

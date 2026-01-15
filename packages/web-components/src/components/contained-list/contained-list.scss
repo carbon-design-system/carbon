@@ -1,0 +1,48 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/contained-list';
+@use '@carbon/styles/scss/components/form' as *;
+:host(#{$prefix}-contained-list) {
+  @include emit-layout-tokens();
+
+  // CSS custom properties for slotted search component
+  --cds-search-background: #{$background};
+  --cds-search-border-bottom: 1px solid #{$border-subtle};
+}
+
+:host(#{$prefix}-contained-list-item) {
+  display: block;
+}
+:host(#{$prefix}-contained-list-description) {
+  @include type-style('label-01');
+
+  display: inline-block;
+  margin: 0;
+  color: $text-secondary;
+  font-weight: $input-label-weight;
+  line-height: 1rem;
+  vertical-align: baseline;
+}
+
+:host(#{$prefix}-contained-list-item:not(:last-of-type)) {
+  .#{$prefix}--contained-list-item::before {
+    position: absolute;
+    background-color: $border-subtle;
+    block-size: 1px;
+    content: '';
+    inset-block-end: 0;
+    inset-inline: 0;
+  }
+}

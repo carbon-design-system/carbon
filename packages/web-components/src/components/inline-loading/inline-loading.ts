@@ -127,7 +127,7 @@ class CDSInlineLoading extends LitElement {
         `;
     return html`
       ${statusIconWrapperResult}
-      <p class="${prefix}--inline-loading__text"><slot></slot></p>
+      <div class="${prefix}--inline-loading__text"><slot></slot></div>
     `;
   }
 

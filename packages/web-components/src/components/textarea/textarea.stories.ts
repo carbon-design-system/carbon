@@ -191,28 +191,109 @@ export const Default = {
 };
 
 export const Skeleton = {
+  args,
+  argTypes,
   parameters: {
     percy: {
       skip: true,
     },
+    controls: {
+      include: ['hideLabel'],
+    },
   },
-  render: () => html` <cds-textarea-skeleton></cds-textarea-skeleton> `,
+  render: ({ hideLabel }) => html`
+    <cds-textarea-skeleton ?hide-label=${hideLabel}></cds-textarea-skeleton>
+  `,
 };
 
 export const WithAILabel = {
-  render: () => html`
-    <cds-textarea label="Text Area label" helper-text="Optional helper text">
+  args: { ...args, helperText: 'Optional helper text', enableCounter: false },
+  argTypes,
+  render: ({
+    cols,
+    counterMode,
+    disabled,
+    enableCounter,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    label,
+    maxCount,
+    onInput,
+    placeholder,
+    readonly,
+    rows,
+    value,
+    warn,
+    warnText,
+  }) => html`
+    <cds-textarea
+      ?enable-counter="${enableCounter}"
+      counter-mode="${ifDefined(counterMode)}"
+      helper-text="${ifDefined(helperText)}"
+      ?hide-label="${hideLabel}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?readonly="${readonly}"
+      value="${ifDefined(value)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      ?disabled="${disabled}"
+      max-count="${ifDefined(maxCount)}"
+      placeholder="${ifDefined(placeholder)}"
+      @input="${onInput}"
+      rows="${ifDefined(rows)}"
+      cols="${ifDefined(cols)}">
       <cds-ai-label alignment="bottom-right">
-        ${content}${actions}</cds-ai-label
-      >
+        ${content}${actions}
+      </cds-ai-label>
     </cds-textarea>
   `,
 };
 
 export const WithLayer = {
-  render: () => html`
+  args: { ...args, helperText: 'Optional helper text', enableCounter: false },
+  argTypes,
+  render: ({
+    cols,
+    counterMode,
+    disabled,
+    enableCounter,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    label,
+    maxCount,
+    onInput,
+    placeholder,
+    readonly,
+    rows,
+    value,
+    warn,
+    warnText,
+  }) => html`
     <sb-template-layers>
-      <cds-textarea label="Text Area label" helper-text="Optional helper text">
+      <cds-textarea
+        ?enable-counter="${enableCounter}"
+        counter-mode="${ifDefined(counterMode)}"
+        helper-text="${ifDefined(helperText)}"
+        ?hide-label="${hideLabel}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label="${ifDefined(label)}"
+        ?readonly="${readonly}"
+        value="${ifDefined(value)}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        ?disabled="${disabled}"
+        max-count="${ifDefined(maxCount)}"
+        placeholder="${ifDefined(placeholder)}"
+        @input="${onInput}"
+        rows="${ifDefined(rows)}"
+        cols="${ifDefined(cols)}">
       </cds-textarea>
     </sb-template-layers>
   `,

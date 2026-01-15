@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -374,6 +374,30 @@ describe('Popover', () => {
     await userEvent.click(screen.getByTestId('inside-input'));
     expect(onRequestClose).not.toHaveBeenCalled();
   });
+
+  it('should NOT call onRequestClose when clicking inside the popover content with a popover inside an interactive element', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <div tabIndex={0}>
+        <Popover open onRequestClose={onRequestClose}>
+          <button type="button">Settings</button>
+          <PopoverContent data-testid="popover-content">
+            <button data-testid="inside-button">Inside Button</button>
+            <input data-testid="inside-input" placeholder="Inside Input" />
+          </PopoverContent>
+        </Popover>
+      </div>
+    );
+
+    // Click on button inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-button'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    // Click on input inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
   it('should not close TabTip when interacting with form elements inside', async () => {
     const onRequestClose = jest.fn();
     render(

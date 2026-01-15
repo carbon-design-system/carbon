@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,6 @@ import React from 'react';
 import { action } from 'storybook/actions';
 import { Add, Notification } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
-import ButtonSet from '../ButtonSet';
 import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
@@ -18,7 +17,6 @@ export default {
   title: 'Components/Button',
   component: Button,
   subcomponents: {
-    ButtonSet,
     ButtonSkeleton,
   },
   argTypes: {
@@ -153,19 +151,6 @@ export const IconButtonWithBadge = (args) => {
 
 IconButtonWithBadge.args = {
   badgeCount: 4,
-};
-
-export const SetOfButtons = (args) => {
-  return (
-    <ButtonSet>
-      <Button kind="secondary" {...args}>
-        Secondary button
-      </Button>
-      <Button kind="primary" {...args}>
-        Primary button
-      </Button>
-    </ButtonSet>
-  );
 };
 
 export const Skeleton = () => {

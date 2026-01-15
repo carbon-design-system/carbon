@@ -100,7 +100,7 @@
     @include -make-col-ready($gutter);
   }
 
-  @each $breakpoint in map-keys($breakpoints) {
+  @each $breakpoint in map.keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint);
     $columns: map.get(map.get($breakpoints, $breakpoint), columns);
 

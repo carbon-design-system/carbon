@@ -1070,7 +1070,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           normalizedDecorator
         ) : decorator ? (
           <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-            {normalizedDecorator}
+            {candidateIsAILabel ? (
+              normalizedDecorator
+            ) : (
+              <span>{normalizedDecorator}</span>
+            )}
           </div>
         ) : (
           ''
@@ -1111,6 +1115,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                   <ListBox.MenuItem
                     key={itemProps.id}
                     aria-label={itemText}
+                    aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isActive={isChecked && !item['isSelectAll']}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}

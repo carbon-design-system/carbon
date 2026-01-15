@@ -7,7 +7,7 @@
 
 'use strict';
 
-const SVGO = require('svgo');
+const { optimize } = require('svgo');
 
 /**
  * Our SVGO plugin options differ a bit from the defaults, namely in the
@@ -20,64 +20,90 @@ const SVGO = require('svgo');
  *    bleed through by default. As a result, we disable the opacity rule of
  *    `removeHiddenElems`
  * 3) In order to support consistent inner styling, we let specific ids through
- *    in our `cleanupIDs` plugin so that we can target them in CSS
+ *    in our `cleanupIds` plugin so that we can target them in CSS
  */
 const plugins = [
   {
-    removeTransparentRectangle: {
-      type: 'perItem',
-      description: 'removes transparent rectangles used for bounding box',
-      fn(item) {
-        // Two potential situations can happen if we have a bounding Transparent
-        // Rectangle, namely the node has a `<rect>` element for the rectangle or
-        // the group has valid content inside of it. As a result, we can return
-        // the content and then have multipass remove the `<rect>` if that is
-        // what is contained inside.
-        if (item.isElem('g') && item.attr('id', 'Transparent_Rectangle')) {
-          return item.content;
-        }
+    name: 'removeTransparentRectangle',
+    description: 'removes transparent rectangles used for bounding box',
+    fn: () => {
+      return {
+        element: {
+          enter: (node, parentNode) => {
+            // Two potential situations can happen if we have a bounding Transparent
+            // Rectangle, namely the node has a `<rect>` element for the rectangle or
+            // the group has valid content inside of it. As a result, we can return
+            // the content and then have multipass remove the `<rect>` if that is
+            // what is contained inside.
+            if (
+              node.name === 'g' &&
+              node.attributes?.id === 'Transparent_Rectangle'
+            ) {
+              // Replace group with its children
+              if (parentNode && parentNode.children) {
+                const index = parentNode.children.indexOf(node);
+                if (index !== -1) {
+                  parentNode.children.splice(
+                    index,
+                    1,
+                    ...(node.children || [])
+                  );
+                }
+              }
+              return;
+            }
 
-        if (item.hasAttr('id')) {
-          if (item.attr('id').value.includes('Transparent_Rectangle')) {
-            return !item;
-          }
-        }
+            // Check for element with Transparent_Rectangle in id
+            if (node.attributes?.id?.includes('Transparent_Rectangle')) {
+              if (parentNode && parentNode.children) {
+                parentNode.children = parentNode.children.filter(
+                  (child) => child !== node
+                );
+              }
+              return;
+            }
 
-        const sizes = ['16', '20', '24', '32', '48'];
-
-        for (const size of sizes) {
-          if (
-            item.isElem('rect') &&
-            item.attr('width', size) &&
-            item.attr('height', size)
-          ) {
-            return !item;
-          }
-        }
-        return item;
-      },
+            // Check for transparent rectangles by size
+            const sizes = ['16', '20', '24', '32', '48'];
+            if (node.name === 'rect') {
+              const width = node.attributes?.width;
+              const height = node.attributes?.height;
+              if (
+                sizes.includes(width) &&
+                sizes.includes(height) &&
+                width === height
+              ) {
+                if (parentNode && parentNode.children) {
+                  parentNode.children = parentNode.children.filter(
+                    (child) => child !== node
+                  );
+                }
+              }
+            }
+          },
+        },
+      };
     },
   },
   {
-    addInnerPath: {
-      type: 'perItem',
-      description: 'map the inner-path id to a corresponding data attribute',
-      fn(item) {
-        if (item.attr('id', 'inner-path')) {
-          item.removeAttr('id');
-          item.addAttr({
-            name: 'data-icon-path',
-            value: 'inner-path',
-            prefix: '',
-            local: 'data-icon-path',
-          });
-        }
-        return item;
-      },
+    name: 'addInnerPath',
+    description: 'map the inner-path id to a corresponding data attribute',
+    fn: () => {
+      return {
+        element: {
+          enter: (node) => {
+            if (node.attributes?.id === 'inner-path') {
+              node.attributes['data-icon-path'] = 'inner-path';
+              delete node.attributes.id;
+            }
+          },
+        },
+      };
     },
   },
   {
-    inlineStyles: {
+    name: 'inlineStyles',
+    params: {
       onlyMatchedOnce: false,
       removeMatchedSelectors: true,
       useMqs: ['', 'screen'],
@@ -86,138 +112,156 @@ const plugins = [
   },
   // Remove the style elements from the SVG
   {
-    removeStyleElement: true,
+    name: 'removeStyleElement',
   },
   {
-    cleanupAttrs: true,
+    name: 'cleanupAttrs',
   },
   {
-    removeDoctype: true,
+    name: 'removeDoctype',
   },
   {
-    removeXMLProcInst: true,
+    name: 'removeXMLProcInst',
   },
   {
-    removeComments: true,
+    name: 'removeComments',
   },
   {
-    removeMetadata: true,
+    name: 'removeMetadata',
   },
   {
     // Remove any title tags because titles should be based on the context of
     // the SVG.
-    removeTitle: true,
+    name: 'removeTitle',
   },
   {
-    removeDesc: true,
+    name: 'removeDesc',
   },
   {
-    removeUselessDefs: true,
+    name: 'removeUselessDefs',
   },
   {
-    removeEditorsNSData: true,
+    name: 'removeEditorsNSData',
   },
   {
-    removeEmptyAttrs: true,
+    name: 'removeEmptyAttrs',
   },
   {
-    removeHiddenElems: {
+    name: 'removeHiddenElems',
+    params: {
       // Special case where we don't want to ignore nodes with `opacity="0"`
       opacity0: false,
     },
   },
   {
-    removeEmptyText: true,
+    name: 'removeEmptyText',
   },
   {
-    removeEmptyContainers: true,
+    name: 'removeEmptyContainers',
   },
   {
-    removeViewBox: false,
+    name: 'removeViewBox',
+    active: false,
   },
   {
-    cleanupEnableBackground: true,
+    name: 'cleanupEnableBackground',
   },
   {
-    convertStyleToAttrs: true,
+    name: 'convertStyleToAttrs',
   },
   {
-    convertColors: true,
+    name: 'convertColors',
   },
   {
-    convertPathData: false,
+    name: 'convertTransform',
   },
   {
-    convertTransform: true,
+    name: 'removeUnknownsAndDefaults',
   },
   {
-    removeUnknownsAndDefaults: true,
-  },
-  {
-    removeNonInheritableGroupAttrs: true,
+    name: 'removeNonInheritableGroupAttrs',
   },
   {
     // We disable `stroke` for this plugin as enabling it will cause relevant
     // stroke-* attributes to be removed from the resulting SVG. This can cause
     // issues with pictograms that use stroke attributes for rendering
     // correctly
-    removeUselessStrokeAndFill: {
+    name: 'removeUselessStrokeAndFill',
+    params: {
       stroke: false,
     },
   },
   {
-    removeUnusedNS: true,
+    name: 'removeUnusedNS',
   },
   {
-    cleanupIDs: {
+    name: 'cleanupIds',
+    params: {
       preserve: ['inner-path'],
     },
   },
   {
-    cleanupNumericValues: true,
+    name: 'cleanupNumericValues',
   },
   {
-    moveGroupAttrsToElems: true,
+    name: 'moveGroupAttrsToElems',
   },
   {
-    collapseGroups: true,
+    name: 'collapseGroups',
   },
   {
-    removeRasterImages: false,
+    name: 'removeRasterImages',
+    active: false,
+  },
+  // mergePaths is disabled due to infinite loop issues in SVGO v4
+  {
+    name: 'convertShapeToPath',
   },
   {
-    mergePaths: true,
+    name: 'sortAttrs',
   },
   {
-    convertShapeToPath: true,
-  },
-  {
-    sortAttrs: true,
-  },
-  {
-    removeDimensions: true,
+    name: 'removeDimensions',
   },
   {
     // Remove any ids or data attributes that are included in SVG source files.
-    removeAttrs: {
+    // Use elemSeparator '#' to allow removing namespaced attributes (xml:space)
+    // that contain colons, which conflict with the default ':' separator.
+    // Also avoids conflict with '|' in regex patterns like (fill|stroke)
+    name: 'removeAttrs',
+    params: {
+      elemSeparator: '#',
       attrs: [
         'class',
         'data-name',
+        // Remove namespaced attributes that cause issues in JSX
+        '*#xml:space#*',
+        '*#xml:lang#*',
         // Remove all fill and stroke attributes where the value is not "none"
-        // https://github.com/svg/svgo/pull/977
-        '*:(fill|stroke):((?!^none$).)*',
+        '*#(fill|stroke)#((?!^none$).)*',
       ],
     },
   },
 ];
 
-const svgo = new SVGO({
-  plugins,
-  full: true,
-  multipass: true,
-});
+/**
+ * Optimize SVG with our custom configuration
+ * @param {string} svgString - The SVG string to optimize
+ * @param {object} options - Additional options (e.g., path for error messages)
+ * @returns {Promise<object>} - Result object with data property containing optimized SVG
+ */
+async function optimizeSvg(svgString, options = {}) {
+  return optimize(svgString, {
+    path: options.path,
+    multipass: true,
+    plugins: plugins,
+  });
+}
 
 module.exports = {
-  svgo,
+  optimize: optimizeSvg,
+  svgo: {
+    optimize: optimizeSvg,
+  },
   plugins,
 };

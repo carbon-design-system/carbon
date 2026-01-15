@@ -25,7 +25,6 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [Ghost](#ghost)
 - [Danger Button](#danger-button)
 - [Icon-only Button](#icon-only-button)
-- [Set of Buttons](#set-of-buttons)
 - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
   - [Button `as`](#button-as)
@@ -131,25 +130,6 @@ not support Danger, Danger tertiary, or Danger ghost.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(ButtonStories.IconButton),
-    },
-  ]}
-/>
-
-## Set of Buttons
-
-You can wrap two `Button` elements in a `ButtonSet` when an action required by
-the user has more than one option. Always use a negative action button
-(secondary) paired with a positive action button (primary) in that order.
-Negative action buttons will be on the left. Positive action buttons should be
-on the right. When these two types buttons are paired in the correct order, they
-will automatically space themselves apart.
-
-<Canvas
-  of={ButtonStories.SetOfButtons}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ButtonStories.SetOfButtons),
     },
   ]}
 />

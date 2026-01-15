@@ -12,6 +12,7 @@ describe('wrapFocus', () => {
   let spyInnerModal;
   let spyButton0;
   let spyButton2;
+  let tooltip;
 
   beforeEach(() => {
     node = document.createElement('div');
@@ -39,6 +40,7 @@ describe('wrapFocus', () => {
       <div class="cds--tooltip" tabindex="0"></div>
     `;
     document.body.appendChild(node);
+    tooltip = node.querySelector('.cds--tooltip');
     spyInnerModal = jest.spyOn(node.querySelector('#inner-modal'), 'focus');
     spyButton0 = jest.spyOn(node.querySelector('#button-0'), 'focus');
     spyButton2 = jest.spyOn(node.querySelector('#button-2'), 'focus');
@@ -61,6 +63,7 @@ describe('wrapFocus', () => {
       node.parentNode.removeChild(node);
       node = null;
     }
+    tooltip = null;
   });
 
   it('runs forward focus-wrap when following outer node is focused on', () => {
@@ -114,6 +117,21 @@ describe('wrapFocus', () => {
       endSentinelNode: node.querySelector('#end-sentinel'),
       currentActiveNode: node.querySelector('.cds--tooltip'),
       oldActiveNode: node.querySelector('#button-2'),
+    });
+    expect(spyInnerModal).not.toHaveBeenCalled();
+    expect(spyButton0).not.toHaveBeenCalled();
+    expect(spyButton2).not.toHaveBeenCalled();
+  });
+
+  it('respects prefix overrides when checking floating menus', () => {
+    tooltip.className = 'bx--tooltip';
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: tooltip,
+      oldActiveNode: node.querySelector('#button-2'),
+      prefix: 'bx',
     });
     expect(spyInnerModal).not.toHaveBeenCalled();
     expect(spyButton0).not.toHaveBeenCalled();

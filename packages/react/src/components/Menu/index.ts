@@ -5,13 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Menu } from './Menu';
+import { Menu, type MenuProps } from './Menu';
 import {
   MenuItem,
   MenuItemDivider,
   MenuItemGroup,
   MenuItemRadioGroup,
   MenuItemSelectable,
+  type MenuItemProps,
+  type MenuItemDividerProps,
+  type MenuItemGroupProps,
+  type MenuItemRadioGroupProps,
+  type MenuItemSelectableProps,
 } from './MenuItem';
 
 export {
@@ -21,4 +26,11 @@ export {
   MenuItemGroup,
   MenuItemRadioGroup,
   MenuItemSelectable,
+  type MenuProps,
+  type MenuItemProps,
+  type MenuItemDividerProps,
+  type MenuItemGroupProps,
+  type MenuItemRadioGroupProps,
+  type MenuItemSelectableProps,
 };
+export default Menu;

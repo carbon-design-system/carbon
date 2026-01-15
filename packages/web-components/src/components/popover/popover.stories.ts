@@ -13,29 +13,66 @@ import { POPOVER_ALIGNMENT, POPOVER_BACKGROUND_TOKEN } from './defs';
 import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
-import '../checkbox/checkbox';
+import '../checkbox';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
-const controls = {
+const sharedArgTypes = {
   align: {
     control: 'select',
     options: [
       POPOVER_ALIGNMENT.TOP,
-      POPOVER_ALIGNMENT.TOP_LEFT,
-      POPOVER_ALIGNMENT.TOP_RIGHT,
+      POPOVER_ALIGNMENT.TOP_START,
+      POPOVER_ALIGNMENT.TOP_END,
       POPOVER_ALIGNMENT.BOTTOM,
-      POPOVER_ALIGNMENT.BOTTOM_LEFT,
-      POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+      POPOVER_ALIGNMENT.BOTTOM_START,
+      POPOVER_ALIGNMENT.BOTTOM_END,
       POPOVER_ALIGNMENT.LEFT,
-      POPOVER_ALIGNMENT.LEFT_BOTTOM,
-      POPOVER_ALIGNMENT.LEFT_TOP,
+      POPOVER_ALIGNMENT.LEFT_END,
+      POPOVER_ALIGNMENT.LEFT_START,
       POPOVER_ALIGNMENT.RIGHT,
-      POPOVER_ALIGNMENT.RIGHT_BOTTOM,
-      POPOVER_ALIGNMENT.RIGHT_TOP,
+      POPOVER_ALIGNMENT.RIGHT_END,
+      POPOVER_ALIGNMENT.RIGHT_START,
     ],
     description: `Specify how the popover should align with the trigger element`,
   },
+  autoAlign: {
+    control: 'boolean',
+    description:
+      'Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes',
+  },
+  caret: {
+    control: 'boolean',
+    description: `Specify whether a caret should be rendered`,
+  },
+  border: {
+    control: 'boolean',
+    description: 'Specify whether a border should be rendered on the popover',
+  },
+  dropShadow: {
+    control: 'boolean',
+    description:
+      'Specify whether a drop shadow should be rendered on the popover',
+  },
+  highContrast: {
+    control: 'boolean',
+    description: 'Render the component using the high-contrast variant',
+  },
+  backgroundToken: {
+    control: 'select',
+    options: [
+      POPOVER_BACKGROUND_TOKEN.LAYER,
+      POPOVER_BACKGROUND_TOKEN.BACKGROUND,
+    ],
+    description: 'Specify the background token to use. Default is "layer".',
+  },
+  open: {
+    control: 'boolean',
+    description: 'Specify whether the component is currently open or closed',
+  },
+};
+
+const sharedAutoAlignArgTypes = {
   caret: {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,
@@ -68,12 +105,13 @@ const controls = {
 };
 
 export const Default = {
-  argTypes: controls,
+  argTypes: sharedArgTypes,
   args: {
     caret: true,
     border: false,
     highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
+    autoAlign: false,
     dropShadow: true,
     open: true,
   },
@@ -100,7 +138,9 @@ export const Default = {
         ?caret=${args.caret}
         ?border=${args.border}
         ?highContrast=${args.highContrast}
+        ?autoalign=${args.autoAlign}
         align=${args.align}
+        ?tabTip=${args.tabTip}
         ?dropShadow=${args.dropShadow}
         backgroundToken=${args.backgroundToken}>
         <button
@@ -124,8 +164,178 @@ export const Default = {
   },
 };
 
+export const ExperimentalAutoAlign = {
+  argTypes: sharedAutoAlignArgTypes,
+  args: {
+    caret: true,
+    highContrast: false,
+    dropShadow: true,
+    open: true,
+    border: false,
+    backgroundToken: 'layer',
+  },
+
+  decorators: [
+    (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
+  ],
+  render: (args) => {
+    const handleClick = () => {
+      const popover = document.querySelector(`${prefix}-popover`);
+      const open = popover?.hasAttribute('open');
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
+    };
+
+    requestAnimationFrame(() => {
+      document.querySelector('cds-popover')?.scrollIntoView({
+        block: 'center',
+        inline: 'center',
+      });
+    });
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div style="width: 5000px; height: 5000px;">
+        <div
+          style="position: absolute; top: 2500px;
+          left: 2500px; padding-right: 2500px;">
+          <cds-popover
+            ?open=${args.open}
+            ?caret=${args.caret}
+            ?highContrast=${args.highContrast}
+            autoalign
+            ?dropShadow=${args.dropShadow}
+            ?border=${args.border}
+            backgroundToken=${args.backgroundToken}>
+            <button
+              class="playground-trigger"
+              aria-label="Checkbox"
+              type="button"
+              aria-expanded=${open}
+              @click="${() => handleClick()}">
+              ${iconLoader(Checkbox16)}
+            </button>
+            <cds-popover-content>
+              <div class="p-3">
+                <p class="popover-title">This popover uses autoAlign</p>
+                <p class="popover-details">
+                  Scroll the container up, down, left or right to observe how
+                  the popover will automatically change its position in attempt
+                  to stay within the viewport. This works on initial render in
+                  addition to on scroll.
+                </p>
+              </div>
+            </cds-popover-content>
+          </cds-popover>
+        </div>
+      </div>
+    `;
+  },
+};
+
+export const ExperimentalAutoAlignWithBoundary = {
+  argTypes: sharedAutoAlignArgTypes,
+  args: {
+    caret: true,
+    highContrast: false,
+    dropShadow: true,
+    open: true,
+    border: false,
+    backgroundToken: 'layer',
+  },
+
+  decorators: [
+    (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
+  ],
+  render: (args) => {
+    const handleClick = () => {
+      const popover = document.querySelector(`${prefix}-popover`);
+      const open = popover?.hasAttribute('open');
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
+    };
+
+    requestAnimationFrame(() => {
+      document.querySelector('cds-popover')?.scrollIntoView({
+        block: 'center',
+        inline: 'center',
+      });
+    });
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div
+        id="boundary"
+        style="
+         display:grid;place-items:center;overflow:auto;
+         width:800px;height:500px;border:1px dashed black;margin:0 auto;">
+        <div style="width:2100px;height:1px;"></div>
+        <div style="place-items:center;height:32px;width:32px;">
+          <cds-popover
+            ?open=${args.open}
+            ?caret=${args.caret}
+            ?highContrast=${args.highContrast}
+            autoalign-boundary="#boundary"
+            autoalign
+            ?dropShadow=${args.dropShadow}
+            ?border=${args.border}
+            backgroundToken=${args.backgroundToken}>
+            <button
+              class="playground-trigger"
+              aria-label="Checkbox"
+              type="button"
+              aria-expanded=${open}
+              @click="${() => handleClick()}">
+              ${iconLoader(Checkbox16)}
+            </button>
+            <cds-popover-content>
+              <div class="p-3">
+                <p class="popover-title">This popover uses autoAlign</p>
+                <p class="popover-details">
+                  Scroll the container up, down, left or right to observe how
+                  the popover will automatically change its position in attempt
+                  to stay within the viewport. This works on initial render in
+                  addition to on scroll.
+                </p>
+              </div>
+            </cds-popover-content>
+          </cds-popover>
+          <div style="height:1000px;width:1px;"></div>
+        </div>
+      </div>
+    `;
+  },
+};
+
+const sharedTabTipArgTypes = {
+  dropShadow: {
+    control: 'boolean',
+    description:
+      'Specify whether a drop shadow should be rendered on the popover',
+  },
+  highContrast: {
+    control: 'boolean',
+    description: 'Render the component using the high-contrast variant',
+  },
+  open: {
+    control: 'boolean',
+    description: 'Specify whether the component is currently open or closed',
+  },
+};
 export const TabTip = {
-  render: () => {
+  argTypes: sharedTabTipArgTypes,
+  args: {
+    dropShadow: true,
+    highContrast: false,
+    open: true,
+  },
+  render: (args) => {
     const handleClick = (id) => {
       const popover = document.querySelector(id);
       const open = popover?.hasAttribute('open');
@@ -140,7 +350,13 @@ export const TabTip = {
         ${styles}
       </style>
       <div class="popover-tabtip-story" style="display: 'flex'">
-        <cds-popover tabTip id="popover-one">
+        <cds-popover
+          ?dropShadow=${args.dropShadow}
+          ?highContrast=${args.highContrast}
+          ?open=${args.open}
+          tabTip
+          align="bottom-left"
+          id="popover-one">
           <button
             aria-label="Settings"
             type="button"
@@ -151,9 +367,10 @@ export const TabTip = {
             <div class="p-3">
               <cds-form-item>
                 <cds-radio-button-group
-                  legend-text="Row height"
-                  name="radio-button-group"
+                  legend-text="Row height 1"
+                  name="radio-button-group-1"
                   value="small"
+                  orientation="vertical"
                   style="align-items: flex-start; flex-direction: column">
                   <cds-radio-button
                     label-text="Small"
@@ -166,8 +383,7 @@ export const TabTip = {
                 </cds-radio-button-group>
               </cds-form-item>
               <hr />
-              <fieldset class="${prefix}--fieldset">
-                <legend class="${prefix}--label">Edit columns</legend>
+              <cds-checkbox-group legend-text="Edit columns">
                 <cds-checkbox
                   checked
                   label-text="Name"
@@ -180,11 +396,13 @@ export const TabTip = {
                   checked
                   label-text="Location"
                   id="checkbox-label-3"></cds-checkbox>
-              </fieldset>
+              </cds-checkbox-group>
             </div>
           </cds-popover-content>
         </cds-popover>
         <cds-popover
+          ?dropShadow=${args.dropShadow}
+          ?highContrast=${args.highContrast}
           tabTip
           id="popover-two"
           align="bottom-right"
@@ -199,9 +417,10 @@ export const TabTip = {
             <div class="p-3">
               <cds-form-item>
                 <cds-radio-button-group
-                  legend-text="Row height"
-                  name="radio-button-group"
+                  legend-text="Row height 2"
+                  name="radio-button-group-2"
                   value="small"
+                  orientation="vertical"
                   style="align-items: flex-start; flex-direction: column">
                   <cds-radio-button
                     label-text="Small"
@@ -214,8 +433,7 @@ export const TabTip = {
                 </cds-radio-button-group>
               </cds-form-item>
               <hr />
-              <fieldset class="${prefix}--fieldset">
-                <legend class="${prefix}--label">Edit columns</legend>
+              <cds-checkbox-group legend-text="Testing">
                 <cds-checkbox
                   checked
                   label-text="Name"
@@ -228,10 +446,77 @@ export const TabTip = {
                   checked
                   label-text="Location"
                   id="checkbox-label-3"></cds-checkbox>
-              </fieldset>
+              </cds-checkbox-group>
             </div>
           </cds-popover-content>
         </cds-popover>
+      </div>
+    `;
+  },
+};
+
+export const TabTipExperimentalAutoAlign = {
+  argTypes: sharedTabTipArgTypes,
+  args: {
+    highContrast: false,
+    dropShadow: true,
+    open: true,
+  },
+
+  decorators: [
+    (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
+  ],
+  render: (args) => {
+    const handleClick = () => {
+      const popover = document.querySelector(`${prefix}-popover`);
+      const open = popover?.hasAttribute('open');
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
+    };
+
+    requestAnimationFrame(() => {
+      document.querySelector('cds-popover')?.scrollIntoView({
+        block: 'center',
+        inline: 'center',
+      });
+    });
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div style="width: 5000px; height: 5000px;">
+        <div
+          style="position: absolute; top: 2500px;
+          left: 2500px; padding-right: 2500px;">
+          <cds-popover
+            ?open=${args.open}
+            ?highContrast=${args.highContrast}
+            autoalign
+            tabTip
+            ?dropShadow=${args.dropShadow}>
+            <div
+              class="playground-trigger"
+              aria-expanded=${open}
+              @click="${() => handleClick()}">
+              ${iconLoader(Checkbox16)}
+            </div>
+            <cds-popover-content>
+              <div class="p-3">
+                <p class="popover-title">
+                  This popover uses autoAlign with tabTip
+                </p>
+                <p class="popover-details">
+                  Scroll the container up, down, left or right to observe how
+                  the popover will automatically change its position in attempt
+                  to stay within the viewport. This works on initial render in
+                  addition to on scroll.
+                </p>
+              </div>
+            </cds-popover-content>
+          </cds-popover>
+        </div>
       </div>
     `;
   },

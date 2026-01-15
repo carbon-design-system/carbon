@@ -210,14 +210,18 @@ export interface NumberInputProps
   min?: number;
 
   /**
-   * Provide an optional handler that is called when the input or stepper
-   * buttons are blurred.
+   * Provide an optional handler that is called when the input is blurred.
    */
   onBlur?: (
-    event:
-      | React.FocusEvent<HTMLInputElement>
-      | React.FocusEvent<HTMLButtonElement>
+    event: React.FocusEvent<HTMLInputElement>,
+    value?: string | number
   ) => void;
+
+  /**
+   * Provide an optional handler that is called when the stepper
+   * buttons are blurred.
+   */
+  onStepperBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
 
   /**
    * Provide an optional handler that is called when the internal state of
@@ -305,8 +309,35 @@ const getSeparators = (locale: string) => {
     numberWithGroupAndDecimal
   );
 
-  // Extract separators using regex
-  const match = formatted.match(/(\D+)\d{3}(\D+)\d{2}$/);
+  // Comprehensive Unicode digit pattern that includes all common numeral systems
+  // supported by Intl.NumberFormat across different locales
+  const digitPattern =
+    '[' +
+    '\\u0030-\\u0039' + // Western
+    '\\u0660-\\u0669' + // Eastern Arabic
+    '\\u0966-\\u096F' + // Devanagari
+    '\\u09E6-\\u09EF' + // Bengali
+    '\\uFF10-\\uFF19' + // Fullwidth Japanese ０-９
+    '一二三四五六七八九〇零' + // Kanji digits
+    ']';
+
+  // Non-digit pattern that excludes ALL digit types (not just ASCII 0-9)
+  const nonDigitPattern =
+    '[^' +
+    '\\u0030-\\u0039' + // Western
+    '\\u0660-\\u0669' + // Eastern Arabic
+    '\\u0966-\\u096F' + // Devanagari
+    '\\u09E6-\\u09EF' + // Bengali
+    '\\uFF10-\\uFF19' + // Fullwidth Japanese ０-９
+    '一二三四五六七八九〇零' + // Kanji digits
+    ']+';
+
+  // Extract separators using regex that handles all numeral systems
+  // Use nonDigitPattern instead of \D+ to correctly identify separators
+  const regex = new RegExp(
+    `(${nonDigitPattern})${digitPattern}{3}(${nonDigitPattern})${digitPattern}{2}$`
+  );
+  const match = formatted.match(regex);
 
   if (match) {
     const groupSeparator = match[1];
@@ -317,14 +348,124 @@ const getSeparators = (locale: string) => {
   }
 };
 
+// Normalizes all Unicode minus variants to ASCII hyphen-minus (-)
+const normalizeMinus = (value: string) =>
+  value.replace(/[\u2212\u2012\u2013\u2014\uFE63\uFF0D]/g, '-');
+
+const normalizeNumericInput = (value: string) =>
+  value
+    // Remove bidi / direction control characters (Arabic keyboards)
+    .replace(/[\u061C\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '')
+    // Normalize Unicode minus variants to ASCII "-"
+    .replace(/[\u2212\u2012\u2013\u2014\uFE63\uFF0D]/g, '-');
+/**
+ * Converts a string with any Unicode numeral system to a JavaScript number.
+ * Handles all numeral systems supported by Intl.NumberFormat.
+ *
+ * @param {string} input - The input string with numerals in any Unicode system
+ * @param {string} locale - The locale for parsing separators
+ * @returns {number} The parsed number, or NaN if invalid
+ */
+export const parseNumberWithLocale = (
+  input: string,
+  locale: string
+): number => {
+  // Handle empty, null, or undefined inputs
+  if (input === '' || input === undefined || input === null) {
+    return NaN;
+  }
+
+  input = normalizeNumericInput(input);
+
+  const { groupSeparator, decimalSeparator } = getSeparators(locale);
+
+  // Kanji digit map
+  const kanjiMap: Record<string, string> = {
+    零: '0',
+    〇: '0',
+    一: '1',
+    二: '2',
+    三: '3',
+    四: '4',
+    五: '5',
+    六: '6',
+    七: '7',
+    八: '8',
+    九: '9',
+  };
+
+  const digitRanges = [
+    { start: 0x0030, end: 0x0039, base: 0x0030 },
+    { start: 0x0660, end: 0x0669, base: 0x0660 },
+    { start: 0x0966, end: 0x096f, base: 0x0966 },
+    { start: 0x09e6, end: 0x09ef, base: 0x09e6 },
+    { start: 0xff10, end: 0xff19, base: 0xff10 },
+  ];
+
+  let normalized = Array.from(input)
+    .map((char) => {
+      // Preserve scientific notation characters
+      if (char === 'e' || char === 'E' || char === '+' || char === '-') {
+        return char;
+      }
+
+      // Check Kanji first
+      if (kanjiMap[char] !== undefined) {
+        return kanjiMap[char];
+      }
+
+      const code = char.charCodeAt(0);
+      for (const range of digitRanges) {
+        if (code >= range.start && code <= range.end) {
+          return String(code - range.start);
+        }
+      }
+      return char;
+    })
+    .join('');
+
+  // Remove grouping separators
+  if (groupSeparator) {
+    if (groupSeparator?.trim() === '') {
+      normalized = normalized?.replace(/[\u00A0\u202F\s]/g, '');
+    } else {
+      if (decimalSeparator !== ',' && decimalSeparator !== '٬') {
+        normalized = normalized?.replace(/[,٬]/g, '');
+      }
+      if (groupSeparator !== ',' && groupSeparator !== '٬') {
+        const escaped = groupSeparator?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        normalized = normalized?.replace(new RegExp(escaped, 'g'), '');
+      }
+    }
+  }
+
+  normalized = normalized.replace(/٫/g, '.');
+
+  if (
+    decimalSeparator &&
+    decimalSeparator !== '.' &&
+    decimalSeparator !== '٫'
+  ) {
+    const escaped = decimalSeparator.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    normalized = normalized.replace(new RegExp(escaped, 'g'), '.');
+  }
+
+  normalized = normalizeMinus(normalized);
+
+  return Number(normalized);
+};
+
 export const validateNumberSeparators = (
   input: string,
   locale: string
 ): boolean => {
-  // allow empty string
-  if (input === '' || Number.isNaN(input)) {
+  if (input === '') {
     return true;
   }
+
+  // Normalize bidi marks + minus signs FIRST
+  input = normalizeNumericInput(input);
+
   const { groupSeparator, decimalSeparator } = getSeparators(locale);
 
   if (!decimalSeparator) {
@@ -333,41 +474,80 @@ export const validateNumberSeparators = (
 
   const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+  const digit =
+    '[' +
+    '\\u0030-\\u0039' +
+    '\\u0660-\\u0669' +
+    '\\u0966-\\u096F' +
+    '\\u09E6-\\u09EF' +
+    '\\uFF10-\\uFF19' +
+    '一二三四五六七八九〇零' +
+    ']';
+
+  // Group separator regex
   let group = '';
   if (groupSeparator) {
-    if (groupSeparator.trim() === '') {
-      group = '[\\u00A0\\u202F\\s]'; // handle NBSP, narrow NBSP, space
+    if (groupSeparator?.trim() === '') {
+      group = '[\\u00A0\\u202F\\s]';
+    } else if (groupSeparator === ',' || groupSeparator === '٬') {
+      group = '[,٬]';
     } else {
       group = esc(groupSeparator);
     }
   }
 
-  const decimal = esc(decimalSeparator);
+  // Decimal separator regex
+  let decimal = esc(decimalSeparator);
+  if (decimalSeparator === '.' || decimalSeparator === '٫') {
+    decimal = '[.٫]';
+  }
 
-  // Regex for:
-  // - integers (with/without grouping)
-  // - optional decimal with 0+ digits after separator
-  const regex = new RegExp(
-    `^-?\\d{1,3}(${group}\\d{3})*(${decimal}\\d*)?$|^-?\\d+(${decimal}\\d*)?$`
-  );
+  const sign = '[\\-\\u2212]?';
+  const scientific = `([eE][+-]?${digit}+)?`;
 
-  if (!regex.test(input)) {
+  // Detect if grouping is used AT ALL
+  const usesGrouping =
+    group &&
+    (groupSeparator?.trim() === ''
+      ? /[\u00A0\u202F\s]/.test(input)
+      : groupSeparator === ',' || groupSeparator === '٬'
+        ? /[,٬]/.test(input)
+        : groupSeparator
+          ? input.includes(groupSeparator)
+          : false);
+
+  const scientificMatch = input?.match(/^([^eE]+)([eE][+-]?.*)?$/);
+  const baseNumber = scientificMatch ? scientificMatch[1] : input;
+
+  // Split integer part from the base number - handle both decimal separator variants
+  let integerPart: string;
+  if (decimalSeparator === '.' || decimalSeparator === '٫') {
+    // Split by either . or ٫
+    integerPart = baseNumber?.split(/[.,]/)[0];
+  } else {
+    integerPart = baseNumber?.split(decimalSeparator)[0];
+  }
+
+  // STEP 1: strict integer validation
+  // When grouping is used, we need to handle two cases:
+  // 1. Numbers with 1-3 digits (no separator required): 1, 12, 123
+  // 2. Numbers with 4+ digits (separator required): 1,234 or 12,345 or 123,456
+  const integerRegex = usesGrouping
+    ? new RegExp(`^${sign}(${digit}{1,3}|${digit}{1,3}(${group}${digit}{3})+)$`)
+    : new RegExp(`^${sign}${digit}+$`);
+
+  if (!integerRegex.test(integerPart)) {
     return false;
   }
 
-  // Normalize
-  let normalized = input;
-  if (groupSeparator) {
-    if (groupSeparator.trim() === '') {
-      normalized = normalized?.replace(/[\u00A0\u202F\s]/g, '');
-    } else {
-      normalized = normalized?.split(groupSeparator).join('');
-    }
-  }
+  // STEP 2: full number validation
+  const fullRegex = new RegExp(
+    `^${sign}${digit}+` +
+      (usesGrouping ? `(${group}${digit}{3})*` : '') +
+      `(${decimal}${digit}+)?${scientific}$`
+  );
 
-  normalized = normalized?.replace(decimalSeparator, '.');
-
-  return !isNaN(Number(normalized));
+  return fullRegex.test(input);
 };
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -394,6 +574,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       max,
       min,
       onBlur,
+      onStepperBlur,
       onChange,
       onClick,
       onKeyUp,
@@ -606,8 +787,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     const outerElementClasses = cx(`${prefix}--form-item`, {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      [customClassName!]: !!customClassName,
+      ...(customClassName ? { [customClassName]: true } : {}),
       [`${prefix}--number-input--fluid--invalid`]:
         isFluid && normalizedProps.invalid,
       [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
@@ -774,6 +954,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   e.target.removeEventListener('wheel', disableWheel);
                 }
 
+                let parsedValueForBlur: number | undefined;
                 if (type === 'text') {
                   // When isControlled, the current inputValue needs re-parsed
                   // because the consumer's onChange hasn't been called yet and
@@ -795,6 +976,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   // the input. To avoid this, formattedValue is re-parsed.
                   const parsedFormattedNewValue =
                     numberParser.parse(formattedValue);
+                  parsedValueForBlur = parsedFormattedNewValue;
 
                   if (onChange && isValid) {
                     const state = {
@@ -830,7 +1012,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                 }
 
                 if (onBlur) {
-                  onBlur(e);
+                  if (type === 'number') {
+                    onBlur(e, value);
+                    return;
+                  }
+
+                  const parsedTextValue =
+                    parsedValueForBlur ??
+                    (isControlled
+                      ? numberParser.parse(inputValue)
+                      : numberValue);
+                  onBlur(e, parsedTextValue);
                 }
               }}
               pattern={pattern}
@@ -858,7 +1050,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn down-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'down')}
-                  onBlur={onBlur}
+                  onBlur={onStepperBlur}
                   tabIndex={-1}
                   title={decrementNumLabel || iconDescription}
                   type="button">
@@ -870,7 +1062,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   className={`${prefix}--number__control-btn up-icon`}
                   disabled={disabled || readOnly}
                   onClick={(event) => handleStepperClick(event, 'up')}
-                  onBlur={onBlur}
+                  onBlur={onStepperBlur}
                   tabIndex={-1}
                   title={incrementNumLabel || iconDescription}
                   type="button">
@@ -1025,10 +1217,15 @@ NumberInput.propTypes = {
   stepStartValue: PropTypes.number,
 
   /**
-   * Provide an optional handler that is called when the input or stepper
-   * buttons are blurred.
+   * Provide an optional handler that is called when the input is blurred.
    */
   onBlur: PropTypes.func,
+
+  /**
+   * Provide an optional handler that is called when the stepper
+   * buttons are blurred.
+   */
+  onStepperBlur: PropTypes.func,
 
   /**
    * Provide an optional handler that is called when the internal state of
@@ -1193,27 +1390,34 @@ function getInputValidity({
   validate,
   locale,
 }) {
-  if (typeof validate === 'function') {
-    const result = validate(value, locale);
-    if (result === false) {
-      return false; // immediate invalid
-    }
-    // If true or undefined, continue to further validations
-  }
-
   if (invalid) {
     return false;
   }
 
-  if (value === '') {
-    return allowEmpty;
+  // Skip validation if value is empty and allowEmpty
+  if (value === '') return allowEmpty;
+
+  // Normalize the value
+  let numericValue: number;
+  if (typeof value === 'string') {
+    numericValue = parseNumberWithLocale(value, locale); // safe: handles Arabic, Kanji, etc.
+  } else {
+    numericValue = value;
   }
 
-  if (value > max || value < min) {
-    return false;
+  // Use custom validate ONLY for formatting, not numeric comparison
+  if (validate && typeof value === 'string') {
+    const isFormatValid = validate(value, locale);
+    if (isFormatValid === false) {
+      return false; // invalid format
+    }
   }
 
-  return true;
+  // Check min/max bounds
+  if (max !== undefined && numericValue > max) return false;
+  if (min !== undefined && numericValue < min) return false;
+
+  return true; // valid
 }
 
 /**

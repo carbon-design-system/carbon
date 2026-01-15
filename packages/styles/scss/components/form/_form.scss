@@ -217,7 +217,7 @@ $input-label-weight: 400 !default;
 
   .#{$prefix}--form-requirement {
     @include reset;
-    @include type-style('label-01');
+    @include type-style('helper-text-01');
 
     display: none;
     overflow: hidden;

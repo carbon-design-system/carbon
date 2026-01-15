@@ -5,16 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, TemplateResult } from 'lit';
+import { html, PropertyValues, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import Close16 from '@carbon/icons/es/close/16.js';
-import {
-  filter,
-  forEach,
-  indexOf,
-} from '../../globals/internal/collection-helpers';
+import { filter, forEach } from '../../globals/internal/collection-helpers';
 import CDSDropdown, {
   DROPDOWN_KEYBOARD_ACTION,
   DROPDOWN_TYPE,
@@ -74,6 +70,44 @@ class CDSMultiSelect extends CDSDropdown {
    */
   @query('input')
   private _filterInputNode!: HTMLInputElement;
+
+  protected get _supportsMenuInputFiltering() {
+    return Boolean(this.filterable);
+  }
+
+  protected willUpdate(changedProperties: PropertyValues) {
+    this._shouldTriggerBeFocusable = !this.filterable;
+    super.willUpdate(changedProperties);
+  }
+
+  protected get _menuInputNode(): HTMLInputElement | null {
+    return this.filterable ? (this._filterInputNode ?? null) : null;
+  }
+
+  protected _clearMenuInputFiltering() {
+    if (this.filterable) {
+      this._handleUserInitiatedClearInput();
+    }
+  }
+
+  protected _shouldClearMenuInputOnEscape({
+    menuOpen,
+    isInputTarget,
+  }: {
+    event: KeyboardEvent;
+    menuOpen: boolean;
+    isInputTarget: boolean;
+  }) {
+    if (!menuOpen) {
+      return true;
+    }
+
+    if (!isInputTarget) {
+      return false;
+    }
+
+    return Boolean(this._filterInputNode?.value);
+  }
 
   /**
    * The trigger button.
@@ -150,6 +184,12 @@ class CDSMultiSelect extends CDSDropdown {
       .join(',');
   }
 
+  // Keep the menu open for individual selections, close only when clearing.
+
+  protected _shouldCloseAfterSelection(item?: CDSMultiSelectItem) {
+    return !item;
+  }
+
   protected _handleClickInner(event: MouseEvent) {
     const clickedItem = (event.target as HTMLElement).closest(
       `${prefix}-multi-select-item`
@@ -219,6 +259,38 @@ class CDSMultiSelect extends CDSDropdown {
     } else {
       super._handleKeypressInner(event);
     }
+  }
+
+  protected _handleMouseoverInner(event: MouseEvent) {
+    const item = this._getDropdownItemFromEvent(event);
+    const isFiltering =
+      this.filterable && Boolean(this._filterInputNode?.value.length);
+
+    if (
+      !item ||
+      isFiltering ||
+      !item.hasAttribute('selected') ||
+      !item.hasAttribute('highlighted')
+    ) {
+      return;
+    }
+
+    super._handleMouseoverInner(event);
+  }
+
+  protected _handleMouseleaveInner(event: MouseEvent) {
+    const constructor = this.constructor as typeof CDSMultiSelect;
+    const isFiltering =
+      this.filterable && Boolean(this._filterInputNode?.value.length);
+    const highlightedItem = this.querySelector(
+      constructor.selectorItemHighlighted
+    ) as CDSMultiSelectItem | null;
+
+    if (isFiltering || highlightedItem?.hasAttribute('selected')) {
+      return;
+    }
+
+    super._handleMouseleaveInner(event);
   }
 
   /**
@@ -359,6 +431,7 @@ class CDSMultiSelect extends CDSDropdown {
             placeholder="${label}"
             role="combobox"
             aria-controls="menu-body"
+            aria-expanded="${String(this.open)}"
             aria-autocomplete="list"
             @input="${this._handleInput}" />
         `;
@@ -457,34 +530,11 @@ class CDSMultiSelect extends CDSDropdown {
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {
-    if (!this.filterable) {
-      super._navigate(direction);
-      this._triggerNode.classList.add('no-focus-style');
-    } else {
-      // only navigate through remaining item
-      const constructor = this.constructor as typeof CDSMultiSelect;
-      const items = this.querySelectorAll(constructor.selectorItemResults);
-      const highlightedItem = this.querySelector(
-        constructor.selectorItemHighlighted
-      );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      const highlightedIndex = indexOf(items, highlightedItem!);
-
-      let nextIndex = highlightedIndex + direction;
-
-      if (items[nextIndex]?.hasAttribute('disabled')) {
-        nextIndex += direction;
-      }
-      if (nextIndex < 0) {
-        nextIndex = items.length - 1;
-      }
-      if (nextIndex >= items.length) {
-        nextIndex = 0;
-      }
-      forEach(items, (item, i) => {
-        (item as CDSMultiSelectItem).highlighted = i === nextIndex;
-      });
+    super._navigate(direction);
+    if (this.filterable) {
       this.setAttribute('item-clicked', '');
+    } else {
+      this._triggerNode.classList.add('no-focus-style');
     }
   }
 

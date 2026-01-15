@@ -20,7 +20,6 @@ import React, {
 } from 'react';
 import * as FeatureFlags from '@carbon/feature-flags';
 import ReactDOM from 'react-dom';
-import window from 'window-or-global';
 import { keys, match } from '../internal/keyboard';
 import { OptimizedResize } from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
@@ -277,14 +276,17 @@ export const FloatingMenu = ({
           ? menuOffset(menuBody, menuDirection, triggerEl, flipped)
           : menuOffset;
 
+      const scrollX = globalThis.scrollX ?? 0;
+      const scrollY = globalThis.scrollY ?? 0;
+
       if (updateOrientation) {
         updateOrientation({
           menuSize,
           refPosition,
           direction: menuDirection,
           offset: offsetValue,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
@@ -299,8 +301,8 @@ export const FloatingMenu = ({
           refPosition: refPosition ?? { left: 0, top: 0, right: 0, bottom: 0 },
           offset: offsetValue,
           direction: menuDirection,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
@@ -476,6 +478,7 @@ export const FloatingMenu = ({
         endTrapNode: endSentinelRef.current,
         currentActiveNode: relatedTarget,
         oldActiveNode: target,
+        prefix,
       });
     }
   };

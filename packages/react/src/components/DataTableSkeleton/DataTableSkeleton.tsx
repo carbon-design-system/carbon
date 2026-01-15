@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -124,7 +124,7 @@ const DataTableSkeleton: FunctionComponent<DataTableSkeletonProps> = ({
             {columnsArray.map((i) => (
               <th key={i}>
                 {headers ? (
-                  <div className="cds--table-header-label">
+                  <div className={`${prefix}--table-header-label`}>
                     {headers[i]?.header}
                   </div>
                 ) : (

@@ -10,7 +10,6 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 import { FileUploaderDropContainer } from '../';
 import React from 'react';
 import { getByText } from '@carbon/test-utils/dom';
-import { uploadFiles } from '../test-helpers';
 import userEvent from '@testing-library/user-event';
 
 const requiredProps = { labelText: 'Add file' };
@@ -175,6 +174,32 @@ describe('FileUploaderDropContainer', () => {
     const addedFiles = call[1].addedFiles;
 
     expect(addedFiles.length).toBe(2);
+    expect(addedFiles[0].invalidFileType).toBeFalsy();
+    expect(addedFiles[1].invalidFileType).toBeTruthy();
+  });
+
+  it('should mark files over maxFileSize as invalid', async () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        multiple
+        maxFileSize={1}
+        onAddFiles={onAddFiles}
+        {...requiredProps}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const files = [
+      new File(['a'], 'small.txt', { type: 'text/plain' }), // size 1, at limit
+      new File(['ab'], 'max-filesize.txt', { type: 'text/plain' }), // size 2, over limit
+    ];
+
+    await act(async () => {
+      fireEvent.change(input, { target: { files } });
+    });
+
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
     expect(addedFiles[0].invalidFileType).toBeFalsy();
     expect(addedFiles[1].invalidFileType).toBeTruthy();
   });

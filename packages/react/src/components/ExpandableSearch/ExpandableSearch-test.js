@@ -8,7 +8,7 @@
 import React from 'react';
 import ExpandableSearch from './ExpandableSearch';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -63,7 +63,12 @@ describe('ExpandableSearch', () => {
         <ExpandableSearch labelText="test-search" />
       );
 
-      await screen.getAllByRole('button')[0].focus();
+      const expandControl = container.querySelector('.cds--search-magnifier');
+      expect(expandControl).not.toBeNull();
+
+      await act(async () => {
+        expandControl.focus();
+      });
 
       await userEvent.keyboard('[Enter]');
 
@@ -75,7 +80,12 @@ describe('ExpandableSearch', () => {
         <ExpandableSearch labelText="test-search" />
       );
 
-      await screen.getAllByRole('button')[0].focus();
+      const expandControl = container.querySelector('.cds--search-magnifier');
+      expect(expandControl).not.toBeNull();
+
+      await act(async () => {
+        expandControl.focus();
+      });
 
       await userEvent.keyboard('[Space]');
 

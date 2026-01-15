@@ -5,15 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$css--plex: true !default;
-
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/breadcrumb';
-@import '../overflow-menu/overflow-menu';
+@use '../overflow-menu/overflow-menu';
 
 :host(#{$prefix}-breadcrumb),
 :host(#{$prefix}-breadcrumb-skeleton) {

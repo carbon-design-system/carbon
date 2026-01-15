@@ -41,7 +41,7 @@ export const FloatingStyles = (args) => {
     },
     {
       id: 'option-3',
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -54,15 +54,19 @@ export const FloatingStyles = (args) => {
     },
   ];
   return (
-    <ComboBox
-      onChange={() => {}}
-      id="carbon-combobox"
-      items={comboBoxItems}
-      itemToString={(item) => (item ? item.text : '')}
-      titleText="ComboBox title"
-      helperText="Combobox helper text"
-      {...args}
-    />
+    <div style={{ width: 300 }}>
+      <ComboBox
+        onChange={() => {}}
+        id="carbon-combobox"
+        items={comboBoxItems}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="Label"
+        helperText="Helper text"
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
+        {...args}
+      />
+    </div>
   );
 };
 

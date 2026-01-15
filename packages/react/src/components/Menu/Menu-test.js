@@ -125,6 +125,20 @@ describe('Menu', () => {
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
       document.body.removeChild(el);
     });
+
+    it('should not call onClose when relatedTarget is null on blur', () => {
+      const onClose = jest.fn();
+      render(
+        <Menu open onClose={onClose} label="Test Menu">
+          <MenuItem label="item" />
+        </Menu>
+      );
+
+      const menu = screen.getByRole('menu');
+      fireEvent.blur(menu, { relatedTarget: null });
+
+      expect(onClose).not.toHaveBeenCalled();
+    });
   });
 
   describe('Submenu behavior', () => {
