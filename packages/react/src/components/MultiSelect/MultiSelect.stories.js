@@ -106,7 +106,7 @@ export default {
     },
     useTitleInItem: {
       control: {
-        type: 'text',
+        type: 'boolean',
       },
     },
     clearSelectionText: {
@@ -188,10 +188,26 @@ const sharedArgs = {
   clearSelectionDescription: 'Total items selected: ',
   useTitleInItem: false,
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
-  selectAll: false,
-  selectAllItemText: 'All options',
 };
 
+const filterableArgTypes = {
+  label: {
+    control: false,
+    table: {
+      disable: true,
+    },
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    description:
+      'Generic `placeholder` that will be used as the textual representation of what this field is for',
+    table: {
+      type: { summary: 'string' },
+    },
+  },
+};
 export const Default = (args) => {
   const items = [
     {
@@ -289,6 +305,7 @@ export const WithInitialSelectedItems = (args) => {
   );
 };
 
+WithInitialSelectedItems.args = { ...sharedArgs };
 export const Filterable = (args) => {
   const items = [
     {
@@ -354,7 +371,11 @@ export const FilterableWithSelectAll = (args) => {
   );
 };
 
+FilterableWithSelectAll.argTypes = {
+  ...filterableArgTypes,
+};
 Filterable.argTypes = {
+  ...filterableArgTypes,
   onChange: {
     action: 'onChange',
   },
@@ -381,6 +402,7 @@ export const WithLayerMultiSelect = (args) => (
     )}
   </WithLayer>
 );
+WithLayerMultiSelect.args = { ...sharedArgs };
 export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
@@ -399,6 +421,9 @@ export const _FilterableWithLayer = (args) => (
   </WithLayer>
 );
 
+_FilterableWithLayer.argTypes = {
+  ...filterableArgTypes,
+};
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
     items.filter((item) => item.id === 'downshift-1-item-0')
@@ -442,6 +467,7 @@ export const _Controlled = (args) => {
   );
 };
 
+_Controlled.args = { ...sharedArgs };
 const itemsWithSelectAll = [
   {
     id: 'downshift-1-item-0',
@@ -544,6 +570,7 @@ export const withAILabel = (args) => (
   </div>
 );
 
+withAILabel.args = { ...sharedArgs };
 export const FilterableWithAILabel = (args) => (
   <div style={{ width: 400 }}>
     <FilterableMultiSelect
@@ -560,6 +587,9 @@ export const FilterableWithAILabel = (args) => (
   </div>
 );
 
+FilterableWithAILabel.argTypes = {
+  ...filterableArgTypes,
+};
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   useEffect(() => {
@@ -597,6 +627,7 @@ ExperimentalAutoAlign.argTypes = {
   },
 };
 
+ExperimentalAutoAlign.args = { ...sharedArgs, autoAlign: true };
 export const withToggletipLabel = (args) => {
   return (
     <div>
@@ -634,7 +665,7 @@ export const withToggletipLabel = (args) => {
   );
 };
 
-export const SelectAllWithDynamicItems = () => {
+export const SelectAllWithDynamicItems = (args) => {
   const [label, setLabel] = useState('Choose options');
   const [items, setItems] = useState(itemsWithSelectAll);
 
@@ -676,6 +707,7 @@ export const SelectAllWithDynamicItems = () => {
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
         onChange={onChange}
+        {...args}
       />
       <Button onClick={addItems}>Add 2 items to the list</Button>
     </div>

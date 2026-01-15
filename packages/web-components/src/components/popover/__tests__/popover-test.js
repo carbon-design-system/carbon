@@ -310,3 +310,66 @@ describe('cds-popover-content', function () {
     ).to.be.false;
   });
 });
+describe('cds-popover outside click', () => {
+  it('does not close when clicking the trigger button', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content></cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+
+    const trigger = el.querySelector('#trigger');
+    trigger.click();
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+  });
+
+  it('does not close when clicking the popover content', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button type="button">Test</button>
+        <cds-popover-content>
+          <div>Content</div>
+        </cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+
+    const content = el
+      .querySelector('cds-popover-content')
+      .shadowRoot?.querySelector('.cds--popover-content');
+
+    content.click();
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+  });
+
+  it('closes on outside click', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const outside = el.querySelector('#outside');
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    outside.click();
+    await el.updateComplete;
+    expect(popover.hasAttribute('open')).to.be.false;
+  });
+});

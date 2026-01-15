@@ -320,7 +320,9 @@ const TagBase = React.forwardRef<
   }
 );
 const Tag = TagBase as TagComponent;
-(Tag as React.FC).propTypes = {
+
+// @ts-expect-error - `propTypes` isn't typed.
+Tag.propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default
    * wrapping element

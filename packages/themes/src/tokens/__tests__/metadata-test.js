@@ -1106,6 +1106,186 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "syntax-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-deref-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-arithmetic-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-logic-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-bitwise-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-compare-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-update-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-definition-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-type-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-control-operator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-modifier",
+          "type": "color",
+        },
+        {
+          "name": "syntax-punctuation",
+          "type": "color",
+        },
+        {
+          "name": "syntax-separator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-bracket",
+          "type": "color",
+        },
+        {
+          "name": "syntax-angle-bracket",
+          "type": "color",
+        },
+        {
+          "name": "syntax-square-bracket",
+          "type": "color",
+        },
+        {
+          "name": "syntax-paren",
+          "type": "color",
+        },
+        {
+          "name": "syntax-brace",
+          "type": "color",
+        },
+        {
+          "name": "syntax-content",
+          "type": "color",
+        },
+        {
+          "name": "syntax-heading",
+          "type": "color",
+        },
+        {
+          "name": "syntax-heading-1",
+          "type": "color",
+        },
+        {
+          "name": "syntax-heading-2",
+          "type": "color",
+        },
+        {
+          "name": "syntax-heading-3",
+          "type": "color",
+        },
+        {
+          "name": "syntax-heading-4",
+          "type": "color",
+        },
+        {
+          "name": "syntax-heading-5",
+          "type": "color",
+        },
+        {
+          "name": "syntax-heading-6",
+          "type": "color",
+        },
+        {
+          "name": "syntax-content-separator",
+          "type": "color",
+        },
+        {
+          "name": "syntax-list",
+          "type": "color",
+        },
+        {
+          "name": "syntax-quote",
+          "type": "color",
+        },
+        {
+          "name": "syntax-emphasis",
+          "type": "color",
+        },
+        {
+          "name": "syntax-strong",
+          "type": "color",
+        },
+        {
+          "name": "syntax-monospace",
+          "type": "color",
+        },
+        {
+          "name": "syntax-link",
+          "type": "color",
+        },
+        {
+          "name": "syntax-strikethrough",
+          "type": "color",
+        },
+        {
+          "name": "syntax-invalid",
+          "type": "color",
+        },
+        {
+          "name": "syntax-meta",
+          "type": "color",
+        },
+        {
+          "name": "syntax-document-meta",
+          "type": "color",
+        },
+        {
+          "name": "syntax-annotation",
+          "type": "color",
+        },
+        {
+          "name": "syntax-processing-instruction",
+          "type": "color",
+        },
+        {
+          "name": "syntax-definition",
+          "type": "color",
+        },
+        {
+          "name": "syntax-constant",
+          "type": "color",
+        },
+        {
+          "name": "syntax-function",
+          "type": "color",
+        },
+        {
+          "name": "syntax-standard",
+          "type": "color",
+        },
+        {
+          "name": "syntax-local",
+          "type": "color",
+        },
+        {
+          "name": "syntax-special",
+          "type": "color",
+        },
+        {
           "name": "ai-popover-background",
           "type": "color",
         },
@@ -1202,11 +1382,23 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "chat-prompt-text",
+          "type": "color",
+        },
+        {
           "name": "chat-bubble-user",
           "type": "color",
         },
         {
+          "name": "chat-bubble-user-text",
+          "type": "color",
+        },
+        {
           "name": "chat-bubble-agent",
+          "type": "color",
+        },
+        {
+          "name": "chat-bubble-agent-text",
           "type": "color",
         },
         {
@@ -1231,6 +1423,10 @@ test('metadata', () => {
         },
         {
           "name": "chat-header-background",
+          "type": "color",
+        },
+        {
+          "name": "chat-header-text",
           "type": "color",
         },
         {

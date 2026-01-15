@@ -9,10 +9,14 @@
 import { createRequire } from 'node:module';
 
 import remarkGfm from 'remark-gfm';
-import fs from 'fs';
 import glob from 'fast-glob';
-import path, { dirname, join } from 'path';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { dirname, join } from 'path';
+import react from '@vitejs/plugin-react';
+import { mergeConfig } from 'vite';
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}
 
 const require = createRequire(import.meta.url);
 
@@ -37,7 +41,7 @@ const stories = glob.sync(storyGlobs, {
 
 const config = {
   addons: [
-    getAbsolutePath('@storybook/addon-webpack5-compiler-babel'),
+    'storybook-addon-accessibility-checker',
     {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: {
@@ -49,75 +53,78 @@ const config = {
       },
     },
   ],
+  core: {
+    builder: getAbsolutePath('@storybook/builder-vite'),
+  },
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
     interactions: process.env.NODE_ENV !== 'production', // disable interactions in production builds, but enabled in development
   },
   framework: {
-    name: getAbsolutePath('@storybook/react-webpack5'),
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
-
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.s?css$/,
-      sideEffects: true,
-      use: [
-        {
-          loader:
-            process.env.NODE_ENV === 'production'
-              ? MiniCssExtractPlugin.loader
-              : 'style-loader',
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 2,
-            sourceMap: true,
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      esbuild: {
+        include: /\.[jt]sx?$/,
+        exclude: [],
+        loader: 'tsx',
+      },
+      css: {
+        preprocessorOptions: {
+          scss: {
+            api: 'modern',
           },
         },
-        {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: [
-                require('autoprefixer')({
-                  overrideBrowserslist: ['last 1 version'],
-                }),
-              ],
-            },
-            sourceMap: true,
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          loader: {
+            '.js': 'jsx',
           },
         },
-        {
-          loader: 'sass-loader',
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              includePaths: [
-                path.resolve(__dirname, '..', 'node_modules'),
-                path.resolve(__dirname, '..', '..', '..', 'node_modules'),
-              ],
-            },
-            warnRuleAsWarning: true,
-            sourceMap: true,
+      },
+      plugins: [
+        react({
+          include: '**/*.{jsx,js,ts,tsx}',
+          babel: {
+            presets: ['babel-preset-carbon'],
+            babelrc: false,
+            configFile: false,
           },
-        },
+        }),
       ],
+      resolve: {
+        preserveSymlinks: true,
+        alias: {
+          '~@ibm/plex': '@ibm/plex',
+          '~@ibm/plex/': '@ibm/plex/',
+        },
+      },
+      build: {
+        rollupOptions: {
+          output: {
+            // Don't add hashes to font file names during build
+            assetFileNames: (assetInfo) => {
+              if (
+                assetInfo.name &&
+                (assetInfo.name.endsWith('.woff2') ||
+                  assetInfo.name.endsWith('.woff'))
+              ) {
+                return 'assets/[name][extname]';
+              }
+              return 'assets/[name]-[hash][extname]';
+            },
+          },
+        },
+      },
     });
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(
-        new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].css',
-        })
-      );
-    }
-    return config;
   },
   docs: {
     defaultName: 'Overview',
@@ -125,7 +132,3 @@ const config = {
 };
 
 export default config;
-
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, 'package.json')));
-}
