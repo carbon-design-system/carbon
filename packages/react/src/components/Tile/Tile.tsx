@@ -800,8 +800,13 @@ export const ExpandableTile = forwardRef<HTMLElement, ExpandableTileProps>(
     };
 
     const handleKeyUp = (evt: KeyboardEvent) => {
-      if (matches(evt, [keys.Enter, keys.Space])) {
-        evt.preventDefault();
+      if (
+        evt.target !== tile.current &&
+        evt.target !== chevronInteractiveRef.current
+      ) {
+        if (matches(evt, [keys.Enter, keys.Space])) {
+          evt.preventDefault();
+        }
       }
     };
 
