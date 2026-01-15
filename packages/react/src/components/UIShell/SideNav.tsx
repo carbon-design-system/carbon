@@ -1,19 +1,20 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
+  createContext,
+  isValidElement,
+  useEffect,
   useRef,
-  type ForwardedRef,
   type ComponentProps,
   type FocusEvent,
+  type ForwardedRef,
+  type JSX,
   type KeyboardEvent,
   type MouseEventHandler,
-  isValidElement,
-  createContext,
-  type JSX,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -50,7 +51,6 @@ export interface SideNavProps {
   // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   onSideNavBlur?: () => void | undefined;
   enterDelayMs?: number;
-  inert?: boolean;
 }
 
 interface SideNavContextData {
@@ -92,7 +92,7 @@ function SideNavRenderFunction(
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-  const sideNavRef = useRef<HTMLDivElement>(null);
+  const sideNavRef = useRef<HTMLElement>(null);
   const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
@@ -231,6 +231,19 @@ function SideNavRenderFunction(
 
   const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
   const isLg = useMatchMedia(lgMediaQuery);
+  const inertEnabled = !isRail ? !(expanded || isLg) : false;
+
+  useEffect(() => {
+    const node = sideNavRef.current;
+
+    if (!node) return;
+
+    if (inertEnabled) {
+      node.setAttribute('inert', '');
+    } else {
+      node.removeAttribute('inert');
+    }
+  }, [inertEnabled]);
 
   return (
     <SideNavContext.Provider value={{ isRail }}>
@@ -242,7 +255,6 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail ? !(expanded || isLg) : undefined}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
