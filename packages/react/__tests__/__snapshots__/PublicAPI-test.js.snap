@@ -2160,6 +2160,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "decorator": {
+          "type": "node",
+        },
         "description": {
           "type": "node",
         },
@@ -7326,6 +7329,9 @@ Map {
       "onKeyUp": {
         "type": "func",
       },
+      "onStepperBlur": {
+        "type": "func",
+      },
       "pattern": {
         "type": "string",
       },
@@ -9950,6 +9956,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "decorator": {
+        "type": "node",
       },
       "description": {
         "type": "node",

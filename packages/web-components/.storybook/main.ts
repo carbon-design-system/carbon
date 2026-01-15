@@ -31,6 +31,7 @@ const stories = glob.sync(
 const config: StorybookConfig = {
   stories: stories,
   addons: [
+    'storybook-addon-accessibility-checker',
     {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: {
