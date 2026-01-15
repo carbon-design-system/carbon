@@ -30,7 +30,6 @@ import React, {
   useState,
   type FocusEvent,
   type ForwardedRef,
-  type FunctionComponent,
   type KeyboardEvent,
   type MouseEvent,
   type ReactElement,
@@ -204,7 +203,7 @@ export interface FilterableMultiSelectProps<ItemType>
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: FunctionComponent<ItemType>;
+  itemToElement?: (item: ItemType) => ReactNode;
 
   /**
    * Helper function passed to downshift that allows the library to render
