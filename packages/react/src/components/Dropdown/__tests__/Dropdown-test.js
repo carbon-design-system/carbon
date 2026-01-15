@@ -53,11 +53,11 @@ describe('Dropdown', () => {
   });
 
   it('should render with strings as items', async () => {
-    render(<Dropdown {...mockProps} items={['mario', 'luigi']} />);
+    render(<Dropdown {...mockProps} items={['zar', 'doz']} />);
     await openMenu();
 
-    expect(screen.getByText('mario')).toBeInTheDocument();
-    expect(screen.getByText('luigi')).toBeInTheDocument();
+    expect(screen.getByText('zar')).toBeInTheDocument();
+    expect(screen.getByText('doz')).toBeInTheDocument();
   });
 
   it('should render custom item components', async () => {
