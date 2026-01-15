@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -485,7 +485,48 @@ describe('Pagination', () => {
       expect(screen.getByText('3–4 of 4 items')).toBeInTheDocument();
 
       rerender(<Pagination {...commonProps} pageSizes={[1]} />);
-      expect(screen.getByText('1–2 of 4 items')).toBeInTheDocument();
+      expect(screen.getByText('1–1 of 4 items')).toBeInTheDocument();
+    });
+
+    it('should reset page size when updated page sizes drop the current size', () => {
+      const commonProps = {
+        page: 2,
+        totalItems: 6,
+        pageSize: 2,
+      };
+      const { rerender } = render(
+        <Pagination {...commonProps} pageSizes={[2, 4]} />
+      );
+
+      expect(screen.getByText('3–4 of 6 items')).toBeInTheDocument();
+
+      rerender(<Pagination {...commonProps} pageSizes={[3]} />);
+
+      const select = screen.getByLabelText('Items per page:');
+
+      expect(select).toHaveValue('3');
+      expect(screen.getByText('1–3 of 6 items')).toBeInTheDocument();
+    });
+
+    it('should sync page size when pageSizes and pageSize update together', () => {
+      const commonProps = {
+        page: 1,
+        totalItems: 8,
+      };
+      const { rerender } = render(
+        <Pagination {...commonProps} pageSizes={[2, 4]} pageSize={2} />
+      );
+
+      expect(screen.getByText('1–2 of 8 items')).toBeInTheDocument();
+
+      rerender(
+        <Pagination {...commonProps} pageSizes={[5, 10]} pageSize={10} />
+      );
+
+      const select = screen.getByLabelText('Items per page:');
+
+      expect(select).toHaveValue('10');
+      expect(screen.getByText('1–8 of 8 items')).toBeInTheDocument();
     });
   });
 });
