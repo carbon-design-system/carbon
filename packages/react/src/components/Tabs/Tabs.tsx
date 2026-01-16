@@ -1347,7 +1347,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(
         })}>
         <button
           type="button"
-          tabIndex={selectedIndex === index && dismissable ? 0 : -1}
+          tabIndex={-1}
           aria-disabled={disabled}
           aria-hidden={
             selectedIndex === index && dismissable ? 'false' : 'true'

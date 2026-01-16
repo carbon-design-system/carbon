@@ -465,6 +465,7 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - onStepperBlur
         - stepStartValue
         - validate
         # OrderedList

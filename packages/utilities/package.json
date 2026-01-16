@@ -16,7 +16,9 @@
     "es",
     "lib",
     "types",
-    "telemetry.yml"
+    "telemetry.yml",
+    "scss",
+    "index.scss"
   ],
   "keywords": [
     "ibm",

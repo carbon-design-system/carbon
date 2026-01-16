@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,11 +30,11 @@ export interface SideNavItemsProps {
   isSideNavExpanded?: boolean;
 }
 
-const SideNavItems: React.FC<SideNavItemsProps> = ({
+const SideNavItems = ({
   className: customClassName,
   children,
   isSideNavExpanded,
-}) => {
+}: SideNavItemsProps) => {
   const prefix = usePrefix();
   const className = cx([`${prefix}--side-nav__items`], customClassName);
   const childrenWithExpandedState = React.Children.map(children, (child) => {
