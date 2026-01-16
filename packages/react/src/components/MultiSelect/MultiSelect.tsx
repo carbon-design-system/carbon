@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -666,10 +666,11 @@ export const MultiSelect = React.forwardRef(
     );
 
     const handleFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      evt.target.classList.contains(`${prefix}--tag__close-icon`)
-        ? setIsFocused(false)
-        : setIsFocused(evt.type === 'focus' ? true : false);
+      if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
+        setIsFocused(false);
+      } else {
+        setIsFocused(evt.type === 'focus' ? true : false);
+      }
     };
 
     const readOnlyEventHandlers = readOnly

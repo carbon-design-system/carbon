@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -221,8 +221,7 @@ const PasswordInput = React.forwardRef(
 
     const handleTogglePasswordVisibility = (event) => {
       setInputType(inputType === 'password' ? 'text' : 'password');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      onTogglePasswordVisibility && onTogglePasswordVisibility(event);
+      onTogglePasswordVisibility?.(event);
     };
     const textInputClasses = classNames(
       `${prefix}--text-input`,
