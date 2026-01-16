@@ -11,6 +11,7 @@
 @use 'z-index' as *;
 @use '../config' as *;
 @use '../motion' as *;
+@use '../spacing' as *;
 @use '../theme' as *;
 @use '../type';
 
@@ -37,9 +38,9 @@
 
   z-index: z('floating');
   @if $tooltip-type == 'definition' {
-    padding: convert.to-rem(8px) convert.to-rem(16px);
+    padding: $spacing-03 $spacing-05;
   } @else {
-    padding: convert.to-rem(3px) convert.to-rem(16px);
+    padding: convert.to-rem(3px) $spacing-05;
   }
 
   border-radius: convert.to-rem(2px);
@@ -234,10 +235,10 @@
   $align: 'center'
 ) {
   // position and alignment
-  $caret-spacing: convert.to-rem(8px);
+  $caret-spacing: $spacing-03;
 
   @if $tooltip-type == 'definition' {
-    $caret-spacing: convert.to-rem(4px);
+    $caret-spacing: $spacing-02;
   }
 
   // space between caret and trigger button
