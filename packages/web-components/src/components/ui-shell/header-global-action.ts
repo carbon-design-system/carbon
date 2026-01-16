@@ -167,7 +167,9 @@ class CDSHeaderGlobalAction extends CDSButton {
             this.tooltipText = this.buttonLabelActive;
           }
         } else {
-          this._buttonNode.classList.remove(`${prefix}--header__action--active`);
+          this._buttonNode.classList.remove(
+            `${prefix}--header__action--active`
+          );
 
           if (this.buttonLabelInactive) {
             this.tooltipText = this.buttonLabelInactive;
