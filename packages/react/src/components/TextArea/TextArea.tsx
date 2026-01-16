@@ -453,8 +453,9 @@ const TextArea = frFn((props, forwardRef) => {
   ) : null;
 
   let ariaDescribedBy;
+  let ariaErrorMessage;
   if (invalid) {
-    ariaDescribedBy = errorId;
+    ariaErrorMessage = errorId;
   } else if (warn && !isFluid) {
     ariaDescribedBy = warnId;
   } else {
@@ -516,6 +517,7 @@ const TextArea = frFn((props, forwardRef) => {
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
+      aria-errormessage={ariaErrorMessage}
       disabled={disabled}
       rows={rows}
       readOnly={other.readOnly}
