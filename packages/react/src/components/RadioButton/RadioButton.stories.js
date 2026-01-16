@@ -41,13 +41,38 @@ export default {
   },
 };
 
-export const Vertical = () => {
+const sharedArgTypes = {
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  invalid: {
+    control: { type: 'boolean' },
+  },
+  invalidText: {
+    control: { type: 'text' },
+  },
+  warn: {
+    control: { type: 'boolean' },
+  },
+  warnText: {
+    control: { type: 'text' },
+  },
+  helperText: {
+    control: { type: 'text' },
+  },
+  readOnly: {
+    control: { type: 'boolean' },
+  },
+};
+
+export const Vertical = (args) => {
   return (
     <RadioButtonGroup
       legendText="Group label"
       name="radio-button-vertical-group"
       defaultSelected="radio-1"
-      orientation="vertical">
+      orientation="vertical"
+      {...args}>
       <RadioButton
         labelText="Radio button label"
         value="radio-1"
@@ -68,11 +93,36 @@ export const Vertical = () => {
   );
 };
 
+Vertical.args = {
+  disabled: false,
+  invalid: false,
+  invalidText: 'Invalid selection',
+  warn: false,
+  warnText: 'Warning message',
+  helperText: 'Helper text',
+  readOnly: false,
+  labelPosition: 'right',
+  required: false,
+};
+
+Vertical.argTypes = {
+  ...sharedArgTypes,
+  labelPosition: {
+    control: { type: 'select' },
+    options: ['left', 'right'],
+    description: 'Provide where label text should be placed',
+  },
+  required: {
+    control: { type: 'boolean' },
+    description: 'Specify if input selection in group is required',
+  },
+};
+
 export const Skeleton = () => {
   return <RadioButtonSkeleton />;
 };
 
-export const withAILabel = () => {
+export const withAILabel = (args) => {
   const AILabelFunc = (kind) => (
     <AILabel className="ai-label-container" kind={kind}>
       <AILabelContent>
@@ -111,7 +161,8 @@ export const withAILabel = () => {
         orientation="vertical"
         legendText="Group label"
         name="radio-button-group"
-        defaultSelected="radio-1">
+        defaultSelected="radio-1"
+        {...args}>
         <RadioButton
           labelText="Radio button label"
           value="radio-1"
@@ -133,7 +184,8 @@ export const withAILabel = () => {
         orientation="vertical"
         legendText="Group label"
         name="radio-button-group-2"
-        defaultSelected="radio-4">
+        defaultSelected="radio-4"
+        {...args}>
         <RadioButton
           labelText="Radio button label"
           value="radio-4"
@@ -157,7 +209,8 @@ export const withAILabel = () => {
         orientation="vertical"
         legendText="Group label"
         name="radio-button-group-3"
-        defaultSelected="radio-7">
+        defaultSelected="radio-7"
+        {...args}>
         <RadioButton
           labelText="Radio button label"
           value="radio-7"
@@ -180,6 +233,19 @@ export const withAILabel = () => {
   );
 };
 
+withAILabel.args = {
+  disabled: false,
+  invalid: false,
+  invalidText: 'Invalid selection',
+  warn: false,
+  warnText: 'Warning message',
+  helperText: 'Helper text',
+  readOnly: false,
+};
+
+withAILabel.argTypes = {
+  ...sharedArgTypes,
+};
 export const Default = (args) => {
   return (
     <RadioButtonGroup
@@ -218,24 +284,12 @@ Default.args = {
 };
 
 Default.argTypes = {
+  ...sharedArgTypes,
   defaultSelected: {
     description: 'Specify the `<RadioButton>` to be selected by default',
     options: ['radio-1', 'radio-2', 'radio-3'],
     control: {
       type: 'select',
-    },
-  },
-  readOnly: {
-    description: 'Specify whether the RadioButtonGroup is read-only',
-    control: {
-      type: 'boolean',
-    },
-  },
-  helperText: {
-    description:
-      'Provide text that is used alongside the control label for additional help',
-    control: {
-      type: 'text',
     },
   },
   hideLabel: {
@@ -245,35 +299,9 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
-  invalid: {
-    description: 'Specify whether the RadioButtonGroup is invalid',
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    description:
-      'Provide the text that is displayed when the control is in an invalid state',
-    control: {
-      type: 'text',
-    },
-  },
   orientation: {
     description: 'Provide how radio buttons should be displayed',
     control: 'select',
     options: ['horizontal', 'vertical'],
-  },
-  warn: {
-    description: 'Specify whether the control is currently in warning state',
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    description:
-      'Provide the text that is displayed when the control is in warning state',
-    control: {
-      type: 'text',
-    },
   },
 };
