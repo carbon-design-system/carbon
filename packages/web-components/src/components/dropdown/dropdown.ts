@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -658,8 +658,9 @@ class CDSDropdown extends ValidityMixin(
   }
 
   // Default dropdowns close after user selection.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _shouldCloseAfterSelection(_item?: CDSDropdownItem) {
+  protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
+    // Keep `item` for subclasses that change close behavior based on selection.
+    void item;
     return true;
   }
 

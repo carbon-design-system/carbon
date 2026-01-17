@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,8 +38,7 @@ figma.connect(
       }),
       // information: figma.instance('Information'), look at this once icons are connected
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    example: ({ align, toggletip }) => (
+    example: ({ toggletip }) => (
       <>
         <ToggletipLabel>Toggletip label</ToggletipLabel>
 

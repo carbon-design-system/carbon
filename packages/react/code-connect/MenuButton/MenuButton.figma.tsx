@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,8 +42,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
   {
     props: sharedMenuButtonProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    example: ({ size, children, menuAlignment, button }) => (
+    example: ({ size, menuAlignment, button }) => (
       <MenuButton
         size={size}
         menuAlignment={menuAlignment}
@@ -63,8 +62,7 @@ figma.connect(
   {
     variant: { Open: 'True' },
     props: sharedMenuButtonProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    example: ({ size, children, menuAlignment, button, menu }) => (
+    example: ({ size, menuAlignment, button, menu }) => (
       <MenuButton
         size={size}
         menuAlignment={menuAlignment}

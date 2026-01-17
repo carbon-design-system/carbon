@@ -160,7 +160,7 @@ Map {
     "render": [Function],
   },
   "AILabelActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -169,10 +169,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AILabelContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -181,7 +180,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AISkeletonIcon" => {
     "propTypes": {
@@ -13774,7 +13772,7 @@ Map {
     "render": [Function],
   },
   "preview__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13783,10 +13781,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13795,7 +13792,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview_useFeatureFlag" => {},
   "preview_useFeatureFlags" => {},
@@ -15754,7 +15750,7 @@ Map {
     "render": [Function],
   },
   "unstable__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15763,10 +15759,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15775,7 +15770,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable_useFeatureFlag" => {},
   "unstable_useFeatureFlags" => {},

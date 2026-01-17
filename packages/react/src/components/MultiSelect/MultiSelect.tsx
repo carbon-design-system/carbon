@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -350,8 +350,6 @@ export const MultiSelect = React.forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const [isFocused, setIsFocused] = useState(false);
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
     const [prevOpenProp, setPrevOpenProp] = useState(open);
@@ -447,8 +445,7 @@ export const MultiSelect = React.forwardRef(
       },
       selectedItem: controlledSelectedItems as ItemType,
       items: filteredItems,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      isItemDisabled(item, _index) {
+      isItemDisabled(item) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         return (item as any)?.disabled;
       },
@@ -495,7 +492,6 @@ export const MultiSelect = React.forwardRef(
           }
           if (match(e, keys.ArrowDown) && selectedItems.length === 0) {
             setInputFocused(false);
-            setIsFocused(false);
           }
           if (match(e, keys.Escape) && isOpen) {
             setInputFocused(true);
@@ -665,13 +661,6 @@ export const MultiSelect = React.forwardRef(
       }
     );
 
-    const handleFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      evt.target.classList.contains(`${prefix}--tag__close-icon`)
-        ? setIsFocused(false)
-        : setIsFocused(evt.type === 'focus' ? true : false);
-    };
-
     const readOnlyEventHandlers = readOnly
       ? {
           onClick: (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -767,8 +756,6 @@ export const MultiSelect = React.forwardRef(
           )}
         </label>
         <ListBox
-          onFocus={isFluid ? handleFocus : undefined}
-          onBlur={isFluid ? handleFocus : undefined}
           type={type}
           size={size}
           className={className}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -41,8 +41,7 @@ type CustomElementClass = Omit<typeof HTMLElement, 'new'>;
 const legacyCustomElement = (tagName: string, clazz: CustomElementClass) => {
   try {
     customElements.define(tagName, clazz as CustomElementConstructor);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  } catch (error) {
+  } catch {
     // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
     console.warn(`Attempting to re-define ${tagName}`);
   }
@@ -67,8 +66,7 @@ const standardCustomElement = (
     finisher(clazz: Constructor<HTMLElement>) {
       try {
         customElements.define(tagName, clazz);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      } catch (error) {
+      } catch {
         // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
         console.warn(`Attempting to re-define ${tagName}`);
       }

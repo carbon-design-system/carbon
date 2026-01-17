@@ -1,5 +1,4 @@
 // prettier-ignore
-// eslint-disable no-unused-vars
 import {
   Tearsheet,
   InlineTip,
