@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
@@ -148,7 +148,11 @@ export interface IconButtonProps
 }
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
-const IconButton = React.forwardRef(
+const IconButton = forwardRef<
+  // TODO: this is unknown on Button, so should it be here as well?
+  unknown,
+  IconButtonProps
+>(
   (
     {
       align,
@@ -169,8 +173,8 @@ const IconButton = React.forwardRef(
       size,
       isSelected,
       ...rest
-    }: IconButtonProps,
-    ref: ForwardedRef<unknown> // TODO: this is unknown on Button, so should it be here as well?
+    },
+    ref
   ) => {
     const prefix = usePrefix();
 
