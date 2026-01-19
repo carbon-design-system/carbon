@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -192,33 +192,52 @@ export const Popover: PopoverComponent & {
   const popover = useRef<Element>(null);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+  const lastClickWasInsidePopoverContent = useRef(false);
 
   let align = mapPopoverAlign(initialAlign);
+
+  // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
+  // case where the popover will close when clicking non-focusable elements (e.g. text)
+  useEvent(popover, 'mousedown', (event) => {
+    const target = event.target as Node;
+    lastClickWasInsidePopoverContent.current =
+      refs.floating.current?.contains(target) || false;
+
+    // reset flag
+    if (lastClickWasInsidePopoverContent.current) {
+      setTimeout(() => {
+        lastClickWasInsidePopoverContent.current = false;
+      }, 0);
+    }
+  });
 
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
-    if (isTabTip) {
-      if (relatedTarget && !popover.current?.contains(relatedTarget)) {
-        onRequestClose?.();
-      }
-      return;
-    }
 
     if (!relatedTarget) {
-      onRequestClose?.();
-      return;
-    }
+      // do not close if PopoverContent was clicked
+      if (lastClickWasInsidePopoverContent.current) {
+        lastClickWasInsidePopoverContent.current = false;
+        return;
+      }
 
-    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
-    const isOutsideFloating =
-      enableFloatingStyles && refs.floating.current
-        ? !refs.floating.current.contains(relatedTarget)
-        : true;
-
-    // Only close if focus moved outside both containers
-    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
+    } else if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+      const isOutsideFloating =
+        enableFloatingStyles && refs.floating.current
+          ? !refs.floating.current.contains(relatedTarget)
+          : true;
+
+      const isFocusableWrapper =
+        relatedTarget &&
+        popover.current &&
+        relatedTarget.contains(popover.current);
+
+      // Only close if focus moved outside both containers and not to an interactive parent wrapper
+      if (isOutsideFloating && !isFocusableWrapper) {
+        onRequestClose?.();
+      }
     }
   });
 
