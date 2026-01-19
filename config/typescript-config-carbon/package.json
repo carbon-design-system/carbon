@@ -1,10 +1,14 @@
 {
   "name": "typescript-config-carbon",
   "description": "TypeScript configuration for Carbon",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "license": "Apache-2.0",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "tsconfig.base.json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
@@ -23,8 +27,8 @@
     "provenance": true
   },
   "scripts": {
-    "clean": "rimraf index.js index.d.ts",
-    "build": "yarn clean && tsc"
+    "clean": "rimraf dist",
+    "build": "yarn clean && tsc -p tsconfig.json"
   },
   "dependencies": {
     "typescript": "^5.7.3"

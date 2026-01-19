@@ -48,7 +48,7 @@ export interface CustomType {
   kind: string;
 }
 
-const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
+const CheckboxGroup = ({
   children,
   className,
   decorator,
@@ -64,7 +64,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   slug,
   orientation = 'vertical',
   ...rest
-}) => {
+}: CheckboxGroupProps) => {
   const prefix = usePrefix();
 
   const showWarning = !readOnly && !disabled && !invalid && warn;
