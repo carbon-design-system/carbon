@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,6 @@ import React, {
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
-  type MutableRefObject,
   type ReactElement,
   type ReactNode,
   type RefObject,
@@ -296,9 +295,7 @@ const ComposedModalDialog = React.forwardRef<
   const button = useRef<HTMLButtonElement>(null);
   const startSentinel = useRef<HTMLButtonElement>(null);
   const endSentinel = useRef<HTMLButtonElement>(null);
-  const onMouseDownTarget: MutableRefObject<Node | null> = useRef<Node | null>(
-    null
-  );
+  const onMouseDownTarget = useRef<Node | null>(null);
 
   const presenceContext = useContext(ComposedModalPresenceContext);
   const mergedRefs = useMergeRefs([ref, presenceContext?.presenceRef]);
