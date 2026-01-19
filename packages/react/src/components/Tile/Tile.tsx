@@ -850,9 +850,7 @@ export const ExpandableTile = forwardRef<HTMLElement, ExpandableTileProps>(
         parseInt(style.getPropertyValue('padding-bottom'), 10) || 0;
 
       setMeasuredPadding(paddingTop + paddingBottom);
-      setMeasuredAboveHeight(
-        aboveTheFold.current.getBoundingClientRect().height
-      );
+      setMeasuredAboveHeight(aboveTheFold.current.scrollHeight);
     }, []);
 
     useIsomorphicEffect(() => {
@@ -880,8 +878,9 @@ export const ExpandableTile = forwardRef<HTMLElement, ExpandableTileProps>(
         return;
       }
 
-      const baseHeight =
-        tileMaxHeight > 0 ? tileMaxHeight : measuredAboveHeight;
+      const measured =
+        measuredAboveHeight || aboveTheFold.current?.scrollHeight || 0;
+      const baseHeight = tileMaxHeight > 0 ? tileMaxHeight : measured;
       const pad = tilePadding > 0 ? tilePadding : measuredPadding;
 
       tile.current.style.maxHeight = `${baseHeight + pad}px`;
@@ -898,8 +897,10 @@ export const ExpandableTile = forwardRef<HTMLElement, ExpandableTileProps>(
         return;
       }
 
-      const resizeObserver = new ResizeObserver(([entry]) => {
-        setMeasuredAboveHeight(entry.contentRect.height);
+      const resizeObserver = new ResizeObserver(() => {
+        if (aboveTheFold.current) {
+          setMeasuredAboveHeight(aboveTheFold.current.scrollHeight);
+        }
       });
 
       resizeObserver.observe(aboveTheFold.current);
