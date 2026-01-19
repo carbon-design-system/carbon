@@ -77,16 +77,19 @@ export const Vertical = (args) => {
         labelText="Radio button label"
         value="radio-1"
         id="radio-1"
+        hideLabel={args.hideLabel}
       />
       <RadioButton
         labelText="Radio button label"
         value="radio-2"
         id="radio-2"
+        hideLabel={args.hideLabel}
       />
       <RadioButton
         labelText="Radio button label"
         value="radio-3"
         id="radio-3"
+        hideLabel={args.hideLabel}
         disabled
       />
     </RadioButtonGroup>
@@ -103,6 +106,7 @@ Vertical.args = {
   readOnly: false,
   labelPosition: 'right',
   required: false,
+  hideLabel: false,
 };
 
 Vertical.argTypes = {
@@ -115,6 +119,13 @@ Vertical.argTypes = {
   required: {
     control: { type: 'boolean' },
     description: 'Specify if input selection in group is required',
+  },
+  hideLabel: {
+    description:
+      'Specify whether the label should be visually hidden but still available to screen readers',
+    control: {
+      type: 'boolean',
+    },
   },
 };
 
@@ -167,16 +178,19 @@ export const withAILabel = (args) => {
           labelText="Radio button label"
           value="radio-1"
           id="radio-1"
+          hideLabel={args.hideLabel}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-2"
           id="radio-2"
+          hideLabel={args.hideLabel}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-3"
           id="radio-3"
+          hideLabel={args.hideLabel}
         />
       </RadioButtonGroup>
 
@@ -190,18 +204,21 @@ export const withAILabel = (args) => {
           labelText="Radio button label"
           value="radio-4"
           id="radio-4"
+          hideLabel={args.hideLabel}
           decorator={AILabelFunc()}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-5"
           id="radio-5"
+          hideLabel={args.hideLabel}
           decorator={AILabelFunc()}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-6"
           id="radio-6"
+          hideLabel={args.hideLabel}
         />
       </RadioButtonGroup>
 
@@ -215,18 +232,21 @@ export const withAILabel = (args) => {
           labelText="Radio button label"
           value="radio-7"
           id="radio-7"
+          hideLabel={args.hideLabel}
           decorator={AILabelFunc('inline')}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-8"
           id="radio-8"
+          hideLabel={args.hideLabel}
           decorator={AILabelFunc('inline')}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-9"
           id="radio-9"
+          hideLabel={args.hideLabel}
         />
       </RadioButtonGroup>
     </div>
@@ -241,10 +261,18 @@ withAILabel.args = {
   warnText: 'Warning message',
   helperText: 'Helper text',
   readOnly: false,
+  hideLabel: false,
 };
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
+  hideLabel: {
+    description:
+      'Specify whether the label should be visually hidden but still available to screen readers',
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 export const Default = (args) => {
   return (
