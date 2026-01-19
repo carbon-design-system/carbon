@@ -28,6 +28,7 @@ import React, {
   type ReactElement,
   type ReactNode,
   type RefAttributes,
+  type RefObject,
 } from 'react';
 import { Text } from '../Text';
 import {
@@ -223,9 +224,7 @@ export interface ComboBoxProps<ItemType>
    * cases they can not be shimmed by Carbon to shield you from potentially breaking
    * changes.
    */
-  downshiftActions?: React.MutableRefObject<
-    UseComboboxActions<ItemType> | undefined
-  >;
+  downshiftActions?: RefObject<UseComboboxActions<ItemType> | undefined>;
 
   /**
    * Provide helper text that is used alongside the control label for
