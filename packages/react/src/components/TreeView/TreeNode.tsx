@@ -14,11 +14,10 @@ import React, {
   useState,
   useCallback,
   useContext,
-  type ComponentType,
-  type FunctionComponent,
+  type ElementType,
+  type FocusEvent,
   type MouseEvent,
   type MutableRefObject,
-  type FocusEvent,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { deprecate } from '../../prop-types/deprecate';
@@ -113,7 +112,7 @@ export type TreeNodeProps = {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
@@ -310,6 +309,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const currentNodeLabel = useRef<HTMLDivElement>(null);
     const prefix = usePrefix();
 
+    const nodeLabelId = `${id}__label`;
+
     const renderLabelText = () => {
       if (isEllipsisApplied && tooltipText) {
         return (
@@ -321,6 +322,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             className={`${prefix}--tree-node__label__text-button`}
             wrapperClasses={`${prefix}--popover-container`}>
             <span
+              id={nodeLabelId}
               ref={labelTextRef}
               className={`${prefix}--tree-node__label__text`}>
               {label}
@@ -331,6 +333,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
       return (
         <span
+          id={nodeLabelId}
           ref={labelTextRef}
           className={`${prefix}--tree-node__label__text`}>
           {label}
@@ -616,6 +619,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             <ul
               id={`${id}-subtree`}
               role="group"
+              aria-labelledby={nodeLabelId}
               className={classNames(`${prefix}--tree-node__children`, {
                 [`${prefix}--tree-node--hidden`]: !expanded,
               })}>
@@ -640,6 +644,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             <ul
               id={`${id}-subtree`}
               role="group"
+              aria-labelledby={nodeLabelId}
               className={classNames(`${prefix}--tree-node__children`, {
                 [`${prefix}--tree-node--hidden`]: !expanded,
               })}>

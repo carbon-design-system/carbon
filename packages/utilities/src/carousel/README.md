@@ -54,14 +54,64 @@ carousel.goToIndex(2);
 carousel.reset();
 ```
 
-### Import styles
+## Styling
 
-Apply `@include carousel;` inside a SCSS file for React/class-based or Web
-Components with :host selectors. Automatically handles animations, view
-transitions, and reduced motion preferences across platforms.
+The carousel utility provides SCSS mixins for styling carousel components with
+smooth animations and accessibility features.
 
-```css
-@use '@carbon/utilities/styles/carousel/_index.scss' as carousel;
+### SCSS Import Options
 
-@include carousel.carousel;
+**Option 1: From `@carbon/react`** (React apps)
+
+```scss
+@use '@carbon/react/scss/_carbon-utilities.scss';
 ```
+
+**Option 2: From `@carbon/styles`**
+
+```scss
+@use '@carbon/styles/scss/_carbon-utilities.scss';
+```
+
+**Option 3: From `@carbon/utilities`** (Direct access)
+
+```scss
+@use '@carbon/utilities/scss/carousel';
+```
+
+### Configuration to override animation time
+
+```scss
+@use '@carbon/utilities/scss/carousel' with (
+  $animateTime: 500ms
+);
+```
+
+### For Web Component Applications
+
+If you're building Web Components, there are few mixins exported to be used for
+wrappers and view items
+
+**Import styles:**
+
+```scss
+@use '@carbon/styles/scss/_carbon-utilities.scss' as carousel; // or @use '@carbon/utilities/scss/carousel' as carousel ;
+
+:host {
+  @include carousel.carousel;
+  or
+  @include carousel.wrapperStyles; // for wrapper styles
+  @include carousel.viewStyles; // for view styles
+}
+```
+
+### Available Mixins
+
+- `carousel()` - Includes all carousel styles (wrapper, and view styles)
+- `wrapperStyles()` - Styles for the carousel wrapper container
+- `viewStyles()` - Styles for different carousel view items
+
+### Variables
+
+- `$animateTime` - Animation duration (default: `$duration-moderate-02` from
+  Carbon motion)

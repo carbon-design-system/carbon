@@ -30,7 +30,6 @@ import React, {
   useState,
   type FocusEvent,
   type ForwardedRef,
-  type FunctionComponent,
   type KeyboardEvent,
   type MouseEvent,
   type ReactElement,
@@ -204,7 +203,7 @@ export interface FilterableMultiSelectProps<ItemType>
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: FunctionComponent<ItemType>;
+  itemToElement?: (item: ItemType) => ReactNode;
 
   /**
    * Helper function passed to downshift that allows the library to render
@@ -880,7 +879,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
-      'aria-describedby': helperText ? helperId : undefined,
+      'aria-describedby':
+        helperText && !invalid && !warn ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
       // provides this aria information.
@@ -1069,7 +1069,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           normalizedDecorator
         ) : decorator ? (
           <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-            {normalizedDecorator}
+            {candidateIsAILabel ? (
+              normalizedDecorator
+            ) : (
+              <span>{normalizedDecorator}</span>
+            )}
           </div>
         ) : (
           ''
@@ -1110,6 +1114,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                   <ListBox.MenuItem
                     key={itemProps.id}
                     aria-label={itemText}
+                    aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isActive={isChecked && !item['isSelectAll']}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}

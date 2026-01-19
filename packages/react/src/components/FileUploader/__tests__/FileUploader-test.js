@@ -11,7 +11,6 @@ import userEvent from '@testing-library/user-event';
 import FileUploader from '../';
 import { FeatureFlags } from '../../FeatureFlags';
 import React from 'react';
-import { uploadFiles } from '../test-helpers';
 
 const iconDescription = 'test description';
 const requiredProps = {
@@ -135,6 +134,57 @@ describe('FileUploader', () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });
+
+  it('should filter out files larger than maxFileSize', async () => {
+    const onAddFiles = jest.fn();
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        maxFileSize={1}
+        onAddFiles={onAddFiles}
+        onChange={onChange}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const largeFile = new File(['max filesize'], 'max-filesize.txt', {
+      type: 'text/plain',
+    });
+
+    await userEvent.upload(input, largeFile);
+
+    // File should be marked as invalid in onAddFiles callback but not displayed
+    expect(screen.queryByText('max-filesize.txt')).not.toBeInTheDocument();
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles[0].invalidFileType).toBeTruthy();
+    // onChange should not be called since no valid files were added
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('should call onAddFiles with validated files after validation', async () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploader {...requiredProps} multiple onAddFiles={onAddFiles} />
+    );
+
+    const input = container.querySelector('input');
+    const fileA = new File(['a'], 'a.txt', { type: 'text/plain' });
+    const fileB = new File(['b'], 'b.txt', { type: 'text/plain' });
+
+    await userEvent.upload(input, [fileA, fileB]);
+
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles).toHaveLength(2);
+    expect(addedFiles[0].name).toBe('a.txt');
+    expect(addedFiles[1].name).toBe('b.txt');
+    // Both files should be in the document (onAddFiles cannot filter)
+    expect(screen.getByText('a.txt')).toBeInTheDocument();
+    expect(screen.getByText('b.txt')).toBeInTheDocument();
+  });
+
   describe('Enhanced FileUploader (with feature flag)', () => {
     beforeAll(() => {
       Object.defineProperty(global, 'crypto', {

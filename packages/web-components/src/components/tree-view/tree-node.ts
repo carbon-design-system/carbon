@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -180,10 +178,6 @@ class CDSTreeNode extends LitElement {
       this.setAttribute('role', 'treeitem');
     }
 
-    if (!this.hasAttribute('aria-owns') && this._hasChildren && !this.href) {
-      this.setAttribute('aria-owns', `subtree-id-${this.id}`);
-    }
-
     if (this._hasChildren && !this.href) {
       this.setAttribute('aria-expanded', String(this.isExpanded));
     }
@@ -348,7 +342,10 @@ class CDSTreeNode extends LitElement {
                       </span>
                     </div>
                   </a>
-                  <ul id="subtree-id-${id} role="group" class="${subTreeClasses}">
+                  <ul
+                    id="subtree-id-${id}"
+                    role="group"
+                    class="${subTreeClasses}">
                     <slot @slotchange=${handleSlotChange}></slot>
                   </ul>`
               : html`<div id="label" class="${prefix}--tree-node__label">

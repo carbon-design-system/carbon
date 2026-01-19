@@ -14,9 +14,9 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
 import { MenuContext, menuDefaultState } from './menu-context';
-import CDSmenuItem from './menu-item';
+import CDSmenuItem, { MENU_CLOSE_ROOT_EVENT } from './menu-item';
 import { consume, provide } from '@lit/context';
-import { MENU_SIZE } from './defs';
+import { MENU_BACKGROUND_TOKEN, MENU_SIZE } from './defs';
 
 export { MENU_SIZE };
 
@@ -120,6 +120,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   mode;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ type: String, attribute: 'background-token' })
+  backgroundToken = MENU_BACKGROUND_TOKEN.LAYER;
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  @property({ type: Boolean })
+  border = false;
+
+  /**
    * Specify how the menu should align with the button element
    */
   @property({ type: String })
@@ -162,8 +174,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     return `${prefix}-menu-opened`;
   }
   updated(changedProperties) {
-    if (changedProperties.has('open') && this.open) {
-      this._handleOpen();
+    if (changedProperties.has('open')) {
+      if (this.open) {
+        this._handleOpen();
+      } else {
+        this._handleClose();
+      }
     }
   }
   connectedCallback() {
@@ -173,6 +189,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         ?.querySelector('.cds--menu')
         ?.classList.add(`${prefix}--menu--with-icons`);
     });
+    this.addEventListener(
+      MENU_CLOSE_ROOT_EVENT,
+      this._handleRootCloseRequest as EventListener
+    );
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener(
+      MENU_CLOSE_ROOT_EVENT,
+      this._handleRootCloseRequest as EventListener
+    );
+    super.disconnectedCallback();
   }
   async firstUpdated() {
     this.isRtl = this.direction === 'rtl';
@@ -208,6 +236,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-selectable-items`]:
         this.context.hasSelectableItems,
+      [`${prefix}--menu--border`]: this.border,
+      [`${prefix}--menu--background-token__background`]:
+        this.backgroundToken === MENU_BACKGROUND_TOKEN.BACKGROUND,
     });
     return html`
       <ul
@@ -298,7 +329,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     const { isRoot } = this.context;
 
     // const isRoot =  false
-    const { width, height } = this.getBoundingClientRect();
+    const menuElement = this.shadowRoot?.querySelector(`.${prefix}--menu`);
+    const { width, height } = (menuElement ?? this).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
     const axes = {
       x: {
@@ -433,13 +465,14 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       );
     }
   };
-  dispatchCloseEvent = (e) => {
+  dispatchCloseEvent = (e?: Event) => {
     const init = {
       bubbles: true,
       cancelable: true,
       composed: true,
       detail: {
-        triggeredBy: e.target,
+        triggeredBy: e?.target,
+        triggerEventType: e?.type,
       },
     };
     if (
@@ -451,6 +484,21 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         new CustomEvent((this.constructor as typeof CDSMenu).eventOnClose, init)
       );
     }
+  };
+  private _handleClose = () => {
+    this.position = [-1, -1];
+    this.style.removeProperty('inset-inline-start');
+    this.style.removeProperty('inset-inline-end');
+    this.style.removeProperty('inset-block-start');
+  };
+  private _handleRootCloseRequest = (
+    event: CustomEvent<{ triggerEvent?: Event }>
+  ) => {
+    if (!this.context?.isRoot) {
+      return;
+    }
+
+    this.dispatchCloseEvent(event.detail?.triggerEvent ?? event);
   };
   _newContextCreate = () => {
     this.context = {

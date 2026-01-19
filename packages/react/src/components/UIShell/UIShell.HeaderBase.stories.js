@@ -320,7 +320,8 @@ export const HeaderWNavigationActionsAndSideNav = () => (
           <HeaderGlobalBar>
             <HeaderGlobalAction
               aria-label="Search"
-              onClick={action('search click')}>
+              onClick={action('search click')}
+              tooltipAlignment="start">
               <Search size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
@@ -574,9 +575,8 @@ HeaderWActionsAndRightPanel.args = {
   badgeCount: 4,
 };
 
-export const HeaderWActionsAndSwitcher = (args) => (
+export const HeaderWActionsAndSwitcher = () => (
   <HeaderContainer
-    {...args}
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <>
         <Header aria-label="IBM Platform Name">
@@ -643,10 +643,3 @@ export const HeaderWActionsAndSwitcher = (args) => (
 );
 
 HeaderWActionsAndSwitcher.storyName = 'Header w/ Actions and Switcher';
-
-HeaderWActionsAndSwitcher.argTypes = {
-  isSideNavExpanded: {
-    defaultValue: true,
-    description: 'Optional prop to display the HeaderPanel.',
-  },
-};

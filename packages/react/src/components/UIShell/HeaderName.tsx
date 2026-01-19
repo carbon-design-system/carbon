@@ -33,7 +33,7 @@ export default function HeaderName<E extends ElementType = 'a'>({
           &nbsp;
         </>
       )}
-      {children}
+      <span>{children}</span>
     </Link>
   );
 }

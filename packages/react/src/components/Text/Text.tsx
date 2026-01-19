@@ -10,7 +10,6 @@ import React, {
   Children,
   useContext,
   type ElementType,
-  type FC,
   type ReactElement,
   type ReactNode,
 } from 'react';
@@ -89,7 +88,9 @@ const TextBase = React.forwardRef(
   }
 ) as TextComponent;
 export const Text = TextBase as TextComponent;
-(Text as FC).propTypes = {
+
+// @ts-expect-error - `propTypes` isn't typed.
+Text.propTypes = {
   /**
    * Provide a custom element type used to render the outermost node
    */
@@ -102,7 +103,7 @@ export const Text = TextBase as TextComponent;
   /**
    * Provide child elements or text to be rendered inside of this component
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 
   /**
    * Specify the text direction to be used for this component and any of its
