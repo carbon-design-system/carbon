@@ -24,7 +24,6 @@ import React, {
   type KeyboardEvent,
   type MouseEvent,
   type PropsWithChildren,
-  type PropsWithRef,
   type ReactElement,
   type ReactNode,
   type RefAttributes,
@@ -1473,9 +1472,10 @@ ComboBox.propTypes = {
   inputProps: PropTypes.object,
 };
 
-type ComboboxComponentProps<ItemType> = PropsWithRef<
-  PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
->;
+type ComboboxComponentProps<ItemType> = PropsWithChildren<
+  ComboBoxProps<ItemType>
+> &
+  RefAttributes<HTMLInputElement>;
 
 export interface ComboBoxComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
