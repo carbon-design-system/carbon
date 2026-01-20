@@ -105,6 +105,21 @@
   }
 
   // -----------------------------------------------------------------------------
+  // v12 Grid (gap-based gutters)
+  // -----------------------------------------------------------------------------
+  .#{$prefix}--css-grid--v12 {
+    column-gap: var(--cds-grid-gutter);
+    padding-inline: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+    row-gap: var(--cds-grid-gutter);
+    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
+    --cds-grid-gutter-end: 0rem; /* stylelint-disable-line length-zero-no-unit */
+  }
+
+  .#{$prefix}--css-grid--v12.#{$prefix}--css-grid--no-row-gap {
+    row-gap: 0;
+  }
+
+  // -----------------------------------------------------------------------------
   // Full width
   // -----------------------------------------------------------------------------
   .#{$prefix}--css-grid--full-width {
@@ -132,6 +147,11 @@
     }
   }
 
+  // v12 columns don't need margins (gap handles spacing)
+  .#{$prefix}--css-grid--v12 .#{$prefix}--css-grid-column {
+    margin-inline: 0;
+  }
+
   // -----------------------------------------------------------------------------
   // Gutter modes
   // -----------------------------------------------------------------------------
@@ -148,6 +168,22 @@
         $grid-gutter-condensed,
         2
       )};
+  }
+
+  // v12 Narrow mode
+  .#{$prefix}--css-grid--v12.#{$prefix}--css-grid--narrow {
+    column-gap: calc(var(--cds-grid-gutter) / 2);
+    padding-inline: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 4);
+    row-gap: calc(var(--cds-grid-gutter) / 2);
+  }
+
+  // v12 Condensed mode
+  .#{$prefix}--css-grid--v12.#{$prefix}--css-grid--condensed {
+    column-gap: var(--cds-grid-gutter-condensed);
+    padding-inline: calc(
+      var(--cds-grid-margin) + var(--cds-grid-gutter-condensed) / 2
+    );
+    row-gap: var(--cds-grid-gutter-condensed);
   }
 
   // -----------------------------------------------------------------------------
