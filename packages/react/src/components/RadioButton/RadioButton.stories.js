@@ -118,7 +118,7 @@ Vertical.argTypes = {
   },
   required: {
     control: { type: 'boolean' },
-    description: 'Specify if input selection in group is required',
+    description: 'Specify if the input selection in group is required',
   },
   hideLabel: {
     description:
