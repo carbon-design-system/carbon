@@ -84,12 +84,14 @@ class CDSModal extends HostListenerMixin(LitElement) {
   @HostListener('keydown')
   protected _handleHostKeydown = (event: KeyboardEvent) => {
     const target = event.target as HTMLElement | null;
+    const { primaryButton } = this._getFooterElements();
 
     if (
       this.open &&
       this.shouldSubmitOnEnter &&
       event.key === 'Enter' &&
-      target
+      target &&
+      document.activeElement !== primaryButton
     ) {
       const closeButton = (this.constructor as typeof CDSModal)
         .selectorCloseButton;
@@ -99,7 +101,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
         !!document.activeElement?.closest?.(closeButton);
 
       if (!targetIsCloseButton) {
-        const { primaryButton } = this._getFooterElements();
         primaryButton?.click();
         return;
       }
