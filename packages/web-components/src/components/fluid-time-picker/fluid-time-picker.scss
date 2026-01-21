@@ -71,6 +71,10 @@ $css--plex: true !default;
   flex-basis: 50%;
 }
 
+:host(#{$prefix}-fluid-time-picker) .#{$prefix}--time-picker--fluid--invalid {
+  outline-offset: 0;
+}
+
 :host(#{$prefix}-fluid-time-picker-select) {
   @extend .#{$prefix}--select--fluid;
   @extend .#{$prefix}--select--invalid;

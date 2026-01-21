@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp.2025
+ * Copyright IBM Corp.2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,14 +16,12 @@ import './fluid-time-picker-skeleton';
 const args = {
   disabled: false,
   invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  invalidText: 'Error message goes here',
   labelText: 'Time',
   placeholder: 'hh:mm',
   readOnly: false,
   warning: false,
-  warningText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  warningText: 'Warning message goes here',
 };
 
 const argTypes = {
