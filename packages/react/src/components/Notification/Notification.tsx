@@ -71,6 +71,10 @@ function useEscapeToClose(ref, callback, override = true) {
   });
 }
 
+type NotificationCloseHandler =
+  | ((event: MouseEvent) => boolean)
+  | ((event: MouseEvent) => void);
+
 export interface NotificationActionButtonProps extends ButtonProps<'button'> {
   /**
    * Specify the content of the notification action button.
@@ -356,8 +360,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when menu is closed
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
@@ -631,8 +634,7 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when menu is closed
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
@@ -891,8 +893,7 @@ export interface ActionableNotificationProps
    * Provide a function that is called when menu is closed.
    * Default behavior of hiding the notification is prevented if this function returns false.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
