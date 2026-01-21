@@ -71,9 +71,13 @@ $css--plex: true !default;
   display: var(--child-icon-property, none);
 }
 
-:host([aria-disabled='true']) * {
+:host([aria-disabled='true']) {
   color: $text-disabled;
   cursor: not-allowed;
+}
+
+:host([aria-disabled='true']) :where(*) {
+  color: inherit;
 }
 
 :host([aria-disabled='true']:hover),
