@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -555,6 +555,33 @@ describe('FileUploaderDropContainer', () => {
 
     expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
       addedFiles: [files[0]],
+    });
+  });
+
+  it('should ignore directory items dropped via dataTransfer.items', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer onAddFiles={onAddFiles} {...requiredProps} />
+    );
+    const dropArea = container.firstChild;
+    const directoryItem = {
+      kind: 'file',
+      getAsFile: jest.fn(() => null),
+      webkitGetAsEntry: jest.fn(() => ({ isDirectory: true })),
+    };
+    const dropEvent = {
+      dataTransfer: {
+        items: [directoryItem],
+        files: [],
+      },
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
+    };
+
+    fireEvent.drop(dropArea, dropEvent);
+
+    expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
+      addedFiles: [],
     });
   });
 });

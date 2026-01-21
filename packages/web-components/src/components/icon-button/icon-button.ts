@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
@@ -13,6 +13,8 @@ import '../tooltip/index';
 import '../button/index';
 import CDSButton from '../button/button';
 import { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './icon-button.scss?lit';
 
 export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
@@ -70,6 +72,16 @@ class CDSIconButton extends CDSButton {
   @property({ reflect: true })
   size = 'md';
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      tooltipStyles,
+      buttonStyles,
+      styles,
+    ]);
+  }
+
   updated(changedProperties) {
     super.updated?.(changedProperties);
     if (changedProperties) {
@@ -117,8 +129,6 @@ class CDSIconButton extends CDSButton {
       </cds-tooltip>
     `;
   }
-
-  static styles = styles;
 }
 
 export default CDSIconButton;
