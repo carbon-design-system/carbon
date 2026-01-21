@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { css } from 'lit';
+import { adoptStyles } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
@@ -13,6 +13,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSPopover from '../popover/popover';
 import '../popover/popover-content';
 import styles from './tooltip.scss?lit';
+import popoverStyles from '../popover/popover.scss?lit';
 import CDSTooltipContent from './tooltip-content';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -210,6 +211,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
     window.addEventListener('keydown', this._handleKeydown, true);
     super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }
 
   disconnectedCallback() {
@@ -232,7 +235,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
         : toolTipContent?.removeAttribute('open');
     }
 
-    ['align', 'caret', 'autoalign'].forEach((name) => {
+    ['align', 'caret', 'autoalign', 'dropShadow'].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSTooltip]: value } = this;
         (toolTipContent as CDSTooltipContent)[name] = value;
@@ -255,12 +258,6 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    */
   static get selectorTooltipContent() {
     return `${prefix}-tooltip-content`;
-  }
-
-  static get styles() {
-    return css`
-      ${super.styles}${styles}
-    `;
   }
 }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,18 +54,6 @@ class CDSComboBox extends CDSDropdown {
    */
   @query('input')
   private _filterInputNode!: HTMLInputElement;
-
-  protected get _supportsMenuInputFiltering() {
-    return true;
-  }
-
-  protected get _menuInputNode(): HTMLInputElement | null {
-    return this._filterInputNode ?? null;
-  }
-
-  protected _clearMenuInputFiltering() {
-    this._handleUserInitiatedClearInput();
-  }
 
   /**
    * The menu containing all selectable items.
@@ -138,7 +126,6 @@ class CDSComboBox extends CDSDropdown {
       if (highlightedItem) {
         this._scrollItemIntoView(highlightedItem as HTMLElement);
       }
-
       if (this.typeahead && event?.inputType?.startsWith('insert')) {
         const suggestedItem = highlightedItem.textContent?.trim() ?? '';
         if (
@@ -161,7 +148,29 @@ class CDSComboBox extends CDSDropdown {
         }
       }
     }
+
     this._filterInputValue = rawQueryText;
+
+    if (this.allowCustomValue) {
+      const previousValue = this.value;
+      this.value = rawQueryText;
+
+      if (previousValue !== this.value) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSComboBox).eventSelect,
+            {
+              bubbles: true,
+              composed: true,
+              detail: {
+                item: null,
+                value: this.value,
+              },
+            }
+          )
+        );
+      }
+    }
     this.open = true;
     this.requestUpdate();
   }
@@ -231,24 +240,6 @@ class CDSComboBox extends CDSDropdown {
     return firstMatchIndex;
   }
 
-  protected _handleMouseoverInner(event: MouseEvent) {
-    const item = this._getDropdownItemFromEvent(event);
-    if (!item?.hasAttribute('selected')) {
-      return;
-    }
-
-    super._handleMouseoverInner(event);
-  }
-
-  protected _handleMouseleaveInner(event: MouseEvent) {
-    const isFiltering = Boolean(this._filterInputNode?.value.length);
-    if (isFiltering) {
-      return;
-    }
-
-    super._handleMouseleaveInner(event);
-  }
-
   protected _scrollItemIntoView(item: HTMLElement) {
     if (!this._itemMenu) {
       return;
@@ -270,7 +261,45 @@ class CDSComboBox extends CDSDropdown {
       Math.abs(scrollTop) < Math.abs(scrollBottom) ? scrollTop : scrollBottom;
   }
 
-  // Clear the query and selection when Escape is pressed.
+  protected _getSelectedItem(): CDSComboBoxItem | null {
+    if (!this.value) return null;
+    const items = Array.from(
+      this.querySelectorAll(
+        (this.constructor as typeof CDSDropdown).selectorItem
+      )
+    ) as CDSComboBoxItem[];
+    return items.find((it) => String(it.value) === String(this.value)) ?? null;
+  }
+
+  protected _revertInputToSelected(focus = true) {
+    const selected = this._getSelectedItem();
+
+    let text = selected?.textContent ?? '';
+    if (this.allowCustomValue && !selected && this.value) {
+      text = this.value as string;
+    }
+
+    this._filterInputValue = text;
+
+    if (this._filterInputNode) {
+      this._filterInputNode.value = text;
+
+      if (focus) {
+        try {
+          this._filterInputNode.focus();
+          const len = text.length;
+          this._filterInputNode.setSelectionRange(len, len);
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+
+    this._resetFilteredItems();
+    this.removeAttribute('isClosable');
+    this.requestUpdate();
+  }
+
   protected _handleInputKeydown(event: KeyboardEvent) {
     // remove the autocomplete suggestion when navigating away from the suggested item
     if (
@@ -285,8 +314,11 @@ class CDSComboBox extends CDSDropdown {
     if (!this._filterInputNode) {
       return;
     }
-    if (this._filterInputNode.value || this.value) {
-      this._handleUserInitiatedClearInput();
+
+    if (this.value) {
+      this._revertInputToSelected(true);
+    } else if (this._filterInputNode.value) {
+      this._clearInputWithoutSelecting(true);
     }
   }
 
@@ -362,13 +394,17 @@ class CDSComboBox extends CDSDropdown {
       itemToSelect.selected = true;
       itemToSelect.setAttribute('aria-selected', 'true');
     }
+
     this._handleUserInitiatedToggle(false);
 
-    if (this.typeahead && this._filterInputNode) {
-      this._filterInputValue = itemToSelect?.textContent?.trim() ?? '';
-
-      const length = this._filterInputValue.length;
-      this._filterInputNode.setSelectionRange(length, length);
+    if (this._filterInputNode) {
+      try {
+        this._filterInputNode.focus();
+        const val = this._filterInputNode.value || '';
+        this._filterInputNode.setSelectionRange(val.length, val.length);
+      } catch {
+        /* ignore browsers that prevent setSelectionRange */
+      }
     }
   }
 
@@ -407,6 +443,7 @@ class CDSComboBox extends CDSDropdown {
         .value=${filterInputValue}
         role="combobox"
         aria-label="${ifNonEmpty(inputLabel)}"
+        aria-labelledby="dropdown-label"
         aria-controls="menu-body"
         aria-haspopup="listbox"
         aria-autocomplete="list"
@@ -420,8 +457,7 @@ class CDSComboBox extends CDSDropdown {
     `;
   }
 
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     const { clearSelectionLabel, _filterInputValue: filterInputValue } = this;
 
     if (filterInputValue.length != 0) {
@@ -444,6 +480,37 @@ class CDSComboBox extends CDSDropdown {
         `;
   }
 
+  protected _renderTitleLabel(): TemplateResult {
+    const {
+      disabled,
+      hideLabel,
+      titleText,
+      _slotTitleTextNode: slotTitleTextNode,
+      _handleSlotchangeLabelText: handleSlotchangeLabelText,
+    } = this;
+
+    const labelClasses = classMap({
+      [`${prefix}--label`]: true,
+      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
+
+    const hasTitleText =
+      titleText ||
+      (slotTitleTextNode && slotTitleTextNode.assignedNodes().length > 0);
+
+    return html`
+      <label
+        id="dropdown-label"
+        part="title-text"
+        class="${labelClasses}"
+        ?hidden="${!hasTitleText}">
+        <slot name="title-text" @slotchange="${handleSlotchangeLabelText}"
+          >${titleText}</slot
+        >
+      </label>
+    `;
+  }
   /**
    * The `aria-label` attribute for the icon to clear selection.
    */
@@ -475,18 +542,47 @@ class CDSComboBox extends CDSDropdown {
   shouldFilterItem: boolean | ShouldFilterItem = false;
 
   /**
-   * **Experimental**: will enable autocomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   typeahead = false;
+
+  /**
+   * `true` to allow custom values that do not match any item in the list.
+   */
+  @property({ type: Boolean, attribute: 'allow-custom-value' })
+  allowCustomValue = false;
 
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
     const { _selectedItemContent: selectedItemContent } = this;
     if (selectedItemContent && changedProperties.has('value')) {
-      this._filterInputValue = selectedItemContent?.textContent || '';
+      const selectedText = selectedItemContent?.textContent || '';
+      if (!this._filterInputValue || this._filterInputValue === selectedText) {
+        this._filterInputValue = selectedText;
+      }
     }
     return true;
+  }
+
+  protected _clearInputWithoutSelecting(focus = true) {
+    this._filterInputValue = '';
+    if (this._filterInputNode) {
+      this._filterInputNode.value = '';
+
+      if (focus) {
+        try {
+          this._filterInputNode.focus();
+          this._filterInputNode.setSelectionRange(0, 0);
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+
+    this._resetFilteredItems();
+    this.removeAttribute('isClosable');
+    this.requestUpdate();
   }
 
   updated(changedProperties) {
@@ -500,6 +596,29 @@ class CDSComboBox extends CDSDropdown {
         this._resetFilteredItems();
         if (this._filterInputNode.value == '') {
           this.value = '';
+        }
+        if (this.value) {
+          this._revertInputToSelected(false);
+          if (
+            this._filterInputNode &&
+            document.activeElement === this._filterInputNode
+          ) {
+            (this._filterInputNode as HTMLInputElement).blur();
+          }
+        } else if (
+          this._filterInputValue &&
+          this._filterInputValue.length > 0 &&
+          !this.allowCustomValue
+        ) {
+          this._clearInputWithoutSelecting(false);
+          if (
+            this._filterInputNode &&
+            document.activeElement === this._filterInputNode
+          ) {
+            (this._filterInputNode as HTMLInputElement).blur();
+          }
+        } else {
+          // nothing typed and no selection, ensure no extra changes
         }
       }
     }

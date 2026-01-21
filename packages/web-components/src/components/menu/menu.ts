@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,8 +13,12 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
-import { MenuContext, menuDefaultState } from './menu-context';
-import CDSmenuItem from './menu-item';
+import {
+  MenuContext,
+  menuDefaultState,
+  type MenuContextUpdate,
+} from './menu-context';
+import CDSmenuItem, { MENU_CLOSE_ROOT_EVENT } from './menu-item';
 import { consume, provide } from '@lit/context';
 import { MENU_BACKGROUND_TOKEN, MENU_SIZE } from './defs';
 
@@ -38,7 +42,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @consume({ context: MenuContext })
   context = {
     ...menuDefaultState,
-    updateFromChild: (updatedItem) => {
+    updateFromChild: (updatedItem: MenuContextUpdate) => {
       this.context = {
         ...this.context,
         ...updatedItem,
@@ -174,8 +178,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     return `${prefix}-menu-opened`;
   }
   updated(changedProperties) {
-    if (changedProperties.has('open') && this.open) {
-      this._handleOpen();
+    if (changedProperties.has('open')) {
+      if (this.open) {
+        this._handleOpen();
+      } else {
+        this._handleClose();
+      }
     }
   }
   connectedCallback() {
@@ -185,6 +193,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         ?.querySelector('.cds--menu')
         ?.classList.add(`${prefix}--menu--with-icons`);
     });
+    this.addEventListener(
+      MENU_CLOSE_ROOT_EVENT,
+      this._handleRootCloseRequest as EventListener
+    );
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener(
+      MENU_CLOSE_ROOT_EVENT,
+      this._handleRootCloseRequest as EventListener
+    );
+    super.disconnectedCallback();
   }
   async firstUpdated() {
     this.isRtl = this.direction === 'rtl';
@@ -449,13 +469,14 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       );
     }
   };
-  dispatchCloseEvent = (e) => {
+  dispatchCloseEvent = (e?: Event) => {
     const init = {
       bubbles: true,
       cancelable: true,
       composed: true,
       detail: {
-        triggeredBy: e.target,
+        triggeredBy: e?.target,
+        triggerEventType: e?.type,
       },
     };
     if (
@@ -468,6 +489,21 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       );
     }
   };
+  private _handleClose = () => {
+    this.position = [-1, -1];
+    this.style.removeProperty('inset-inline-start');
+    this.style.removeProperty('inset-inline-end');
+    this.style.removeProperty('inset-block-start');
+  };
+  private _handleRootCloseRequest = (
+    event: CustomEvent<{ triggerEvent?: Event }>
+  ) => {
+    if (!this.context?.isRoot) {
+      return;
+    }
+
+    this.dispatchCloseEvent(event.detail?.triggerEvent ?? event);
+  };
   _newContextCreate = () => {
     this.context = {
       ...this.context,
@@ -478,11 +514,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   _registerMenuItems = () => {
     let items;
     if (this.isChild) {
-      items = (
-        this.querySelector('slot[name="submenu"]') as HTMLSlotElement
-      ).assignedElements();
+      const submenuSlot = this.querySelector(
+        'slot[name="submenu"]'
+      ) as HTMLSlotElement | null;
+      items = submenuSlot?.assignedElements() ?? [];
     } else {
-      items = this.shadowRoot?.querySelector('slot')?.assignedElements();
+      items = this.shadowRoot?.querySelector('slot')?.assignedElements() ?? [];
     }
     this.items = items?.filter((item) => {
       if (item.tagName === 'CDS-MENU-ITEM') {
