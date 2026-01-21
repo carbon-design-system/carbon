@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -1464,12 +1464,9 @@ Callout.propTypes = {
 /**
  * @deprecated Use `CalloutProps` instead.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20452
-export interface StaticNotificationProps extends CalloutProps {}
+export type StaticNotificationProps = CalloutProps;
 let didWarnAboutDeprecation = false;
-export const StaticNotification: React.FC<StaticNotificationProps> = (
-  props
-) => {
+export const StaticNotification = (props: StaticNotificationProps) => {
   if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,
