@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,8 +36,7 @@ export interface SideNavProps {
   onToggle?: (
     event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
     value: boolean
-    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => void | undefined;
+  ) => void;
   href?: string | undefined;
   // TO-DO: comment back in when footer is added for rails
   // translateById?: ((id: TranslationId) => Translation) | undefined;
@@ -47,8 +46,7 @@ export interface SideNavProps {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onSideNavBlur?: () => void | undefined;
+  onSideNavBlur?: () => void;
   enterDelayMs?: number;
   inert?: boolean;
 }

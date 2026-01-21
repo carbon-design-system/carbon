@@ -90,6 +90,12 @@ export default tseslint.config([
     },
   },
   {
+    files: ['packages/react/code-connect/**/*.figma.tsx'],
+    rules: {
+      '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': false }],
+    },
+  },
+  {
     // TODO: Should we ignore all files in the .gitignore? If so, handle the
     // nested .gitignore files too.
     ignores: [
