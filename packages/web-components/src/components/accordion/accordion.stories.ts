@@ -20,7 +20,7 @@ const sizes = {
 };
 
 const args = {
-  alignment: 'end',
+  alignment: 'END',
   disabled: false,
   isFlush: false,
   size: ACCORDION_SIZE.MEDIUM,
@@ -31,7 +31,7 @@ const argTypes = {
     control: 'select',
     description:
       'Specify the alignment of the accordion heading title and chevron.',
-    options: ['start', 'end'],
+    options: ['start', 'END'],
   },
   disabled: {
     control: 'boolean',
@@ -235,7 +235,7 @@ export const Skeleton = {
     },
   },
   args: {
-    alignment: 'end',
+    alignment: 'END',
     isFlush: false,
   },
   argTypes: {
@@ -243,7 +243,7 @@ export const Skeleton = {
       control: 'select',
       description:
         'Specify the alignment of the accordion heading title and chevron.',
-      options: ['start', 'end'],
+      options: ['start', 'END'],
     },
     isFlush: {
       control: 'boolean',
