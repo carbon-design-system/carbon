@@ -431,7 +431,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     [onClose]
   );
-  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
+
   const onCalendarClose = (selectedDates, dateStr, instance, e) => {
     if (e && e.type === 'clickOutside') {
       return;
@@ -926,40 +926,6 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     }
   }, [value, startInputField]);
-
-  useEffect(() => {
-    const handleMouseDown = (event) => {
-      const isInsideDatePicker =
-        wrapperRef.current && wrapperRef.current.contains(event.target);
-
-      if (
-        calendarRef.current &&
-        calendarRef.current.isOpen &&
-        !isInsideDatePicker &&
-        !calendarRef.current.calendarContainer.contains(event.target) &&
-        !startInputField.current.contains(event.target) &&
-        !endInputField.current?.contains(event.target)
-      ) {
-        // Close the calendar immediately on mousedown
-        closeCalendar();
-      }
-    };
-    const closeCalendar = () => {
-      calendarRef.current?.close();
-      // Remove focus from endDate calendar input
-      onCalendarClose(
-        calendarRef.current?.selectedDates,
-        '',
-        calendarRef.current,
-        { type: 'clickOutside' }
-      );
-    };
-    document.addEventListener('mousedown', handleMouseDown, true);
-
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown, true);
-    };
-  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   useEffect(() => {
     if (calendarRef.current?.set) {
