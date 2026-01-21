@@ -148,11 +148,7 @@ export interface IconButtonProps
 }
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
-const IconButton = forwardRef<
-  // TODO: this is unknown on Button, so should it be here as well?
-  unknown,
-  IconButtonProps
->(
+const IconButton = forwardRef<unknown, IconButtonProps>(
   (
     {
       align,
