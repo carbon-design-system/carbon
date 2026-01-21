@@ -25,8 +25,7 @@ export interface ClassElement {
   kind: 'field' | 'method';
   key: PropertyKey;
   placement: 'static' | 'prototype' | 'own';
-  // eslint-disable-next-line   @typescript-eslint/no-unsafe-function-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  initializer?: Function;
+  initializer?: () => unknown;
   extras?: ClassElement[];
   // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
   finisher?: <T>(clazz: Constructor<T>) => void | Constructor<T>;
