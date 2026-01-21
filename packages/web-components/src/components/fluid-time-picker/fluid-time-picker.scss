@@ -105,12 +105,6 @@ $css--plex: true !default;
     transition: none;
   }
 
-  &[data-fluid-time-picker-invalid] .#{$prefix}--select-input__wrapper::before,
-  &[data-fluid-time-picker-warn] .#{$prefix}--select-input__wrapper::before {
-    block-size: calc(100% - 1rem);
-    inset-block-start: $spacing-03;
-  }
-
   &[data-fluid-time-picker-invalid] .#{$prefix}--select,
   &[data-fluid-time-picker-invalid] .#{$prefix}--select-input {
     background: transparent;
@@ -143,6 +137,24 @@ $css--plex: true !default;
     .#{$prefix}--select-input:hover {
     border-inline-end: 2px solid $support-error;
   }
+}
+
+:host([data-fluid-time-picker-invalid])
+  .#{$prefix}--select-input__wrapper::before,
+:host([data-fluid-time-picker-warn])
+  .#{$prefix}--select-input__wrapper::before {
+  block-size: calc(100% - 1rem);
+  inset-block-start: $spacing-03;
+}
+
+:host([data-fluid-time-picker-hide-divider])
+  .#{$prefix}--select-input__wrapper::before {
+  opacity: 0;
+}
+
+:host([data-fluid-time-picker-invalid]) .#{$prefix}--select-input,
+:host([data-fluid-time-picker-warn]) .#{$prefix}--select-input {
+  border-block-end: 1px solid transparent;
 }
 
 :host(#{$prefix}-fluid-time-picker-select) .#{$prefix}--select {

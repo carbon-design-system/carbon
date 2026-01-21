@@ -27,6 +27,22 @@ import styles from './fluid-time-picker.scss?lit';
  */
 @customElement(`${prefix}-fluid-time-picker`)
 class CDSFluidTimePicker extends CDSTimePicker {
+  private _hoverTargets: HTMLElement[] = [];
+
+  private _handleSelectMouseEnter = (event: MouseEvent) => {
+    if (this.disabled || this.readOnly) {
+      return;
+    }
+    const target = event.currentTarget as HTMLElement | null;
+    if (target) {
+      this._setHoverState(target);
+    }
+  };
+
+  private _handleSelectMouseLeave = () => {
+    this._setHoverState(null);
+  };
+
   private _getNormalizedProps() {
     const { disabled, invalid, warning, readOnly } = this;
     return {
@@ -77,9 +93,77 @@ class CDSFluidTimePicker extends CDSTimePicker {
     });
   }
 
+  private _setHoverState(target: HTMLElement | null) {
+    const { selectorTimePickerSelect } = this
+      .constructor as typeof CDSFluidTimePicker;
+    const selects = Array.from(this.querySelectorAll(selectorTimePickerSelect));
+
+    selects.forEach((select) =>
+      select.removeAttribute('data-fluid-time-picker-hide-divider')
+    );
+
+    if (!target) {
+      return;
+    }
+
+    const position = target.getAttribute('data-fluid-time-picker-position');
+    const targetIndex = selects.indexOf(target);
+
+    if (targetIndex === -1) {
+      return;
+    }
+
+    if (position === 'first') {
+      for (let index = targetIndex; index < selects.length; index++) {
+        selects[index].setAttribute('data-fluid-time-picker-hide-divider', '');
+      }
+      return;
+    }
+
+    if (position === 'last') {
+      target.setAttribute('data-fluid-time-picker-hide-divider', '');
+    }
+  }
+
+  private _syncHoverListeners() {
+    const { selectorTimePickerSelect } = this
+      .constructor as typeof CDSFluidTimePicker;
+    const selects = Array.from(
+      this.querySelectorAll(selectorTimePickerSelect)
+    ) as HTMLElement[];
+
+    this._hoverTargets.forEach((select) => {
+      select.removeEventListener('mouseenter', this._handleSelectMouseEnter);
+      select.removeEventListener('mouseleave', this._handleSelectMouseLeave);
+    });
+
+    selects.forEach((select) => {
+      select.addEventListener('mouseenter', this._handleSelectMouseEnter);
+      select.addEventListener('mouseleave', this._handleSelectMouseLeave);
+    });
+
+    this._hoverTargets = selects;
+  }
+
   updated(changedProperties) {
     super.updated(changedProperties);
     this._syncSelectState();
+  }
+
+  protected _handleSlotChange() {
+    super._handleSlotChange();
+    this._syncSelectState();
+    this._syncHoverListeners();
+  }
+
+  disconnectedCallback() {
+    // Remove hover listeners added in _syncHoverListeners() to avoid leaks
+    this._hoverTargets.forEach((select) => {
+      select.removeEventListener('mouseenter', this._handleSelectMouseEnter);
+      select.removeEventListener('mouseleave', this._handleSelectMouseLeave);
+    });
+    this._hoverTargets = [];
+    super.disconnectedCallback?.();
   }
 
   render() {
