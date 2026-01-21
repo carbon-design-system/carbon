@@ -616,7 +616,7 @@ class MyElement extends LitElement {
 }
 customElements.define('my-element', MyElement);
 
-export const Test3ShouldOpenAndClose = {
+export const Test = {
   render: () => html` <my-app> </my-app> `,
 };
 // stop here
