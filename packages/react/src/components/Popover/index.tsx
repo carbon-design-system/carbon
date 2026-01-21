@@ -303,79 +303,87 @@ export const Popover: PopoverComponent & {
       }
     }
   });
-  const { refs, floatingStyles, placement, middlewareData } = useFloating(
-    enableFloatingStyles
-      ? {
-          placement: align,
+  const { refs, floatingStyles, placement, middlewareData, elements, update } =
+    useFloating(
+      enableFloatingStyles
+        ? {
+            placement: align,
 
-          // The floating element is positioned relative to its nearest
-          // containing block (usually the viewport). It will in many cases also
-          // “break” the floating element out of a clipping ancestor.
-          // https://floating-ui.com/docs/misc#clipping
-          strategy: 'fixed',
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
 
-          // Middleware order matters, arrow should be last
-          middleware: [
-            offset(
-              !isTabTip
-                ? {
-                    alignmentAxis: alignmentAxisOffset,
-                    mainAxis: popoverDimensions?.current?.offset,
-                  }
-                : 0
-            ),
-            autoAlign &&
-              flip({
-                fallbackPlacements: isTabTip
-                  ? align.includes('bottom')
-                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
-                  : align.includes('bottom')
-                    ? [
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'top',
-                        'top-start',
-                        'top-end',
-                      ]
-                    : [
-                        'top',
-                        'top-start',
-                        'top-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                      ],
+            // Middleware order matters, arrow should be last
+            middleware: [
+              offset(
+                !isTabTip
+                  ? {
+                      alignmentAxis: alignmentAxisOffset,
+                      mainAxis: popoverDimensions?.current?.offset,
+                    }
+                  : 0
+              ),
+              autoAlign &&
+                flip({
+                  fallbackPlacements: isTabTip
+                    ? align.includes('bottom')
+                      ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                      : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+                    : align.includes('bottom')
+                      ? [
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'top',
+                          'top-start',
+                          'top-end',
+                        ]
+                      : [
+                          'top',
+                          'top-start',
+                          'top-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                        ],
 
-                fallbackStrategy: 'initialPlacement',
-                fallbackAxisSideDirection: 'start',
-                boundary: autoAlignBoundary,
+                  fallbackStrategy: 'initialPlacement',
+                  fallbackAxisSideDirection: 'start',
+                  boundary: autoAlignBoundary,
+                }),
+              arrow({
+                element: caretRef,
+                padding: 16,
               }),
-            arrow({
-              element: caretRef,
-              padding: 16,
-            }),
-            autoAlign && hide(),
-          ],
-          whileElementsMounted: autoUpdate,
-        }
-      : {}
-    // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
-    // enabled, floating-ui will not be used
-  );
+              autoAlign && hide(),
+            ],
+          }
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
+    );
+
+  useEffect(() => {
+    if (!enableFloatingStyles) return;
+    if (open && elements.reference && elements.floating) {
+      const cleanup = autoUpdate(elements.reference, elements.floating, update);
+      return cleanup;
+    }
+  }, [enableFloatingStyles, open, elements, update]);
 
   const value = useMemo(() => {
     return {

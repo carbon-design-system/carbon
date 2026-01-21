@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -869,8 +869,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content preceding the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderPrecedingLabel(): TemplateResult | void {
+  protected _renderPrecedingLabel(): TemplateResult | undefined {
     return undefined;
   }
 
@@ -925,8 +924,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content following the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     return undefined;
   }
 
