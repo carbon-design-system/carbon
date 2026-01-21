@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/components/popover';
+@use '@carbon/styles/scss/components/popover' as *;
 
 // The distance between the popover container and the triggering element
 // Specify the distance between the popover and the trigger. This value must
@@ -45,7 +45,7 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-tooltip),
 :host(#{$prefix}-popover) {
   ::slotted(.#{$prefix}--popover--tab-tip__button) {
-    @extend .#{$prefix}--popover--tab-tip__button;
+    @include popover-tab-tip-button;
   }
 }
 
@@ -53,7 +53,7 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-popover[highContrast]) {
   ::slotted(#{$prefix}-tooltip-content),
   ::slotted(#{$prefix}-popover-content) {
-    @extend .#{$prefix}--popover;
+    @include popover-highcontrast-base;
   }
 }
 
@@ -86,7 +86,7 @@ $popover-border-color: custom-property.get-var(
 
 :host(#{$prefix}-tooltip-content),
 :host(#{$prefix}-popover-content) {
-  @extend .#{$prefix}--popover;
+  @include popover-base;
 }
 
 :host(#{$prefix}-tooltip-content[open]),
