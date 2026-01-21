@@ -12,7 +12,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/notification/index' as *;
-@use '@carbon/styles/scss/components/notification/mixins' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/button/mixins' as button-mixins;
 @use '@carbon/styles/scss/components/button/vars' as button-vars;
@@ -21,7 +20,7 @@ $css--plex: true !default;
 @include actionable-notification;
 
 :host(#{$prefix}-actionable-notification) {
-  @extend .#{$prefix}--actionable-notification;
+  @include actionable-notification-base;
   @include emit-layout-tokens();
 
   display: none;
@@ -90,25 +89,30 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-actionable-notification:not([inline])) {
-  @extend .#{$prefix}--actionable-notification--toast;
+  @include actionable-notification-toast-base;
+
+  .#{$prefix}--actionable-notification__content {
+    flex-direction: column;
+  }
 }
 
-:host(#{$prefix}-actionable-notification[inline][low-contrast])::before {
-  position: absolute;
-  box-sizing: border-box;
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
-  block-size: 100%;
-  content: '';
-  filter: opacity(0.4);
-  inline-size: 100%;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  pointer-events: none;
+:host(#{$prefix}-actionable-notification[inline][low-contrast])::before,
+:host(#{$prefix}-callout-notification[inline][low-contrast])::before {
+  @include actionable-notification-low-contrast-inline-before;
+}
+
+:host(#{$prefix}-actionable-notification[low-contrast]),
+:host(#{$prefix}-callout-notification[low-contrast]) {
+  @include actionable-notification-low-contrast-base;
 }
 
 :host(#{$prefix}-actionable-notification[open]) {
   display: flex;
+}
+
+:host(#{$prefix}-actionable-notification:not([inline]))
+  .#{$prefix}--actionable-notification__close-button {
+  position: absolute;
 }
 
 :host(#{$prefix}-actionable-notification[hide-close-button])
@@ -117,48 +121,28 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-actionable-notification[kind='success']) {
-  @extend .#{$prefix}--actionable-notification--success;
+  @include actionable-notification-success-base;
 }
 
 :host(#{$prefix}-actionable-notification[kind='success'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--success;
-
-  @include notification--experimental(
-    $support-success,
-    $notification-background-success
-  );
-
-  &::before {
-    border-color: $support-success;
-  }
+  @include actionable-notification-low-contrast-success;
 }
 
 :host(#{$prefix}-actionable-notification[kind='info']) {
-  @extend .#{$prefix}--actionable-notification--info;
+  @include actionable-notification-info-base;
 }
 
 :host(#{$prefix}-actionable-notification[kind='info-square']) {
-  @extend .#{$prefix}--actionable-notification--info-square;
+  @include actionable-notification-info-base;
 }
 
 :host(#{$prefix}-actionable-notification[kind='info'][low-contrast]),
 :host(#{$prefix}-actionable-notification[kind='info-square'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--info;
-
-  @include notification--experimental(
-    $support-info,
-    $notification-background-info
-  );
-
-  &::before {
-    border-color: $support-info;
-  }
+  @include actionable-notification-low-contrast-info;
 }
 
 :host(#{$prefix}-actionable-notification[kind='warning']) {
-  @extend .#{$prefix}--actionable-notification--warning;
+  @include actionable-notification-warning-base;
 
   /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
@@ -170,7 +154,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-actionable-notification[kind='warning-alt']) {
-  @extend .#{$prefix}--actionable-notification--warning-alt;
+  @include actionable-notification-warning-base;
 
   /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
@@ -186,38 +170,18 @@ $css--plex: true !default;
 
 :host(#{$prefix}-actionable-notification[kind='warning'][low-contrast]),
 :host(#{$prefix}-actionable-notification[kind='warning-alt'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--warning;
-
-  @include notification--experimental(
-    $support-warning,
-    $notification-background-warning
-  );
-
-  &::before {
-    border-color: $support-warning;
-  }
+  @include actionable-notification-low-contrast-warning;
 }
 
 :host(#{$prefix}-actionable-notification[kind='error']) {
-  @extend .#{$prefix}--actionable-notification--error;
+  @include actionable-notification-error-base;
 }
 
 :host(#{$prefix}-actionable-notification[kind='error'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--error;
-
-  @include notification--experimental(
-    $support-error,
-    $notification-background-error
-  );
-
-  &::before {
-    border-color: $support-error;
-  }
+  @include actionable-notification-low-contrast-error;
 }
 :host(#{$prefix}-callout-notification) {
-  @extend .#{$prefix}--actionable-notification;
+  @include actionable-notification-base;
   @include emit-layout-tokens();
 
   display: flex;
@@ -229,63 +193,33 @@ $css--plex: true !default;
   display: none;
 }
 
-:host(#{$prefix}-callout-notification[low-contrast])::before {
-  position: absolute;
-  box-sizing: border-box;
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
-  block-size: 100%;
-  content: '';
-  filter: opacity(0.4);
-  inline-size: 100%;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  pointer-events: none;
+:host(#{$prefix}-callout-notification[inline][low-contrast])::before {
+  @include actionable-notification-low-contrast-inline-before;
 }
 
 :host(#{$prefix}-callout-notification[kind='success']) {
-  @extend .#{$prefix}--actionable-notification--success;
+  @include actionable-notification-success-base;
 }
 
 :host(#{$prefix}-callout-notification[kind='success'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--success;
-
-  @include notification--experimental(
-    $support-success,
-    $notification-background-success
-  );
-
-  &::before {
-    border-color: $support-success;
-  }
+  @include actionable-notification-low-contrast-success;
 }
 
 :host(#{$prefix}-callout-notification[kind='info']) {
-  @extend .#{$prefix}--actionable-notification--info;
+  @include actionable-notification-info-base;
 }
 
 :host(#{$prefix}-callout-notification[kind='info-square']) {
-  @extend .#{$prefix}--actionable-notification--info-square;
+  @include actionable-notification-info-base;
 }
 
 :host(#{$prefix}-callout-notification[kind='info'][low-contrast]),
 :host(#{$prefix}-callout-notification[kind='info-square'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--info;
-
-  @include notification--experimental(
-    $support-info,
-    $notification-background-info
-  );
-
-  &::before {
-    border-color: $support-info;
-  }
+  @include actionable-notification-low-contrast-info;
 }
 
 :host(#{$prefix}-callout-notification[kind='warning']) {
-  @extend .#{$prefix}--actionable-notification--warning;
+  @include actionable-notification-warning-base;
 
   /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
@@ -297,7 +231,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-callout-notification[kind='warning-alt']) {
-  @extend .#{$prefix}--actionable-notification--warning-alt;
+  @include actionable-notification-warning-base;
 
   /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
@@ -310,35 +244,15 @@ $css--plex: true !default;
 
 :host(#{$prefix}-callout-notification[kind='warning'][low-contrast]),
 :host(#{$prefix}-callout-notification[kind='warning-alt'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--warning;
-
-  @include notification--experimental(
-    $support-warning,
-    $notification-background-warning
-  );
-
-  &::before {
-    border-color: $support-warning;
-  }
+  @include actionable-notification-low-contrast-warning;
 }
 
 :host(#{$prefix}-callout-notification[kind='error']) {
-  @extend .#{$prefix}--actionable-notification--error;
+  @include actionable-notification-error-base;
 }
 
 :host(#{$prefix}-callout-notification[kind='error'][low-contrast]) {
-  @extend .#{$prefix}--actionable-notification--low-contrast,
-    .#{$prefix}--actionable-notification--error;
-
-  @include notification--experimental(
-    $support-error,
-    $notification-background-error
-  );
-
-  &::before {
-    border-color: $support-error;
-  }
+  @include actionable-notification-low-contrast-error;
 }
 
 :host(#{$prefix}-callout-notification)
