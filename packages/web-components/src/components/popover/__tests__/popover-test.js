@@ -310,7 +310,7 @@ describe('cds-popover-content', function () {
     ).to.be.false;
   });
 });
-describe('cds-popover outside click', () => {
+describe('cds-popover focusout/outsideclick', () => {
   it('does not close when clicking the trigger button', async () => {
     const el = await fixture(html`
       <cds-popover open>
@@ -369,6 +369,151 @@ describe('cds-popover outside click', () => {
     expect(popover.hasAttribute('open')).to.be.true;
 
     outside.click();
+    await el.updateComplete;
+    expect(popover.hasAttribute('open')).to.be.false;
+  });
+
+  it('fires cds-popover-closed event when closing on outside click', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const outside = el.querySelector('#outside');
+
+    let eventFired = false;
+    popover.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    outside.click();
+    await el.updateComplete;
+
+    expect(eventFired).to.be.true;
+    expect(popover.hasAttribute('open')).to.be.false;
+  });
+
+  it('fires cds-popover-closed event on focusout to outside element', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content>
+            <button id="inside">Inside</button>
+          </cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const inside = popover.querySelector('#inside');
+    const outside = el.querySelector('#outside');
+
+    let eventFired = false;
+    popover.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    // Simulate focus moving from inside to outside
+    const focusoutEvent = new FocusEvent('focusout', {
+      bubbles: true,
+      composed: true,
+      relatedTarget: outside,
+    });
+    inside.dispatchEvent(focusoutEvent);
+
+    await el.updateComplete;
+    expect(eventFired).to.be.true;
+    expect(popover.hasAttribute('open')).to.be.false;
+  });
+
+  it('does not fire cds-popover-closed event when clicking trigger button', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content></cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+
+    let eventFired = false;
+    el.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    const trigger = el.querySelector('#trigger');
+    trigger.click();
+    await el.updateComplete;
+
+    expect(eventFired).to.be.false;
+  });
+
+  it('does not fire cds-popover-closed event when focus moves to trigger', async () => {
+    const el = await fixture(html`
+      <cds-popover open id="popover">
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content>
+          <button id="inside">Inside</button>
+        </cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+    const inside = el.querySelector('#inside');
+    const trigger = el.querySelector('#trigger');
+
+    let eventFired = false;
+    el.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    // Focus inside first, then move focus to trigger
+    inside.focus();
+    await el.updateComplete;
+    trigger.focus();
+
+    await el.updateComplete;
+    expect(eventFired).to.be.false;
+  });
+
+  it('closes on focusout when focus moves outside', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content>
+            <button id="inside">Inside</button>
+          </cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const inside = popover.querySelector('#inside');
+    const outside = el.querySelector('#outside');
+
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    // Simulate focus moving from inside to outside
+    const focusoutEvent = new FocusEvent('focusout', {
+      bubbles: true,
+      composed: true,
+      relatedTarget: outside,
+    });
+    inside.dispatchEvent(focusoutEvent);
+
     await el.updateComplete;
     expect(popover.hasAttribute('open')).to.be.false;
   });
