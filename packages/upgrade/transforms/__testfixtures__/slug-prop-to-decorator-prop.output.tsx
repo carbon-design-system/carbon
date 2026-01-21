@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, Checkbox, Tag } from '@carbon/react';
 
-const TestComponent: React.FC = () => {
+const TestComponent = () => {
   return (
     //prettier-ignore
     (<div>
