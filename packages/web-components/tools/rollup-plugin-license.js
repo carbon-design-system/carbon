@@ -63,8 +63,6 @@ export default function rollupPluginLicense({
         (name) => !whitelist || !whitelist.test(name)
       );
       if (keys.length > 0) {
-        // TODO: All @license tags have been removed. What should be done with
-        // this code?
         const thirdPartyLicenseNotice = [
           '@license',
           '',
