@@ -212,6 +212,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   }
 
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
+    if (this.disabled) {
+      return;
+    }
+
     if (this.hasSubmenu) {
       this._openSubmenu();
       return;
