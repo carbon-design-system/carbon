@@ -488,6 +488,7 @@ const ComboBox = forwardRef(
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
     const isManualClearingRef = useRef(false);
+    const committedCustomValueRef = useRef('');
     const [isClearing, setIsClearing] = useState(false);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -601,9 +602,15 @@ const ComboBox = forwardRef(
               const nextSelectedItem =
                 items.find((item) => itemToString(item) === inputValue) ??
                 inputValue;
+              const isCustomSelection =
+                typeof nextSelectedItem === 'string' &&
+                !items.some((item) => isEqual(item, nextSelectedItem));
 
               if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
                 onChange({ selectedItem: nextSelectedItem, inputValue });
+                committedCustomValueRef.current = isCustomSelection
+                  ? inputValue
+                  : '';
               }
 
               return {
@@ -876,6 +883,10 @@ const ComboBox = forwardRef(
           typeof newSelectedItem !== 'undefined' &&
           !isEqual(selectedItemProp, newSelectedItem)
         ) {
+          if (items.some((item) => isEqual(item, newSelectedItem))) {
+            committedCustomValueRef.current = '';
+          }
+
           onChange({ selectedItem: newSelectedItem });
         }
       },
@@ -883,7 +894,7 @@ const ComboBox = forwardRef(
 
     // Keep the dropdown highlight in sync with either the controlled value or
     // Downshift's own selection when uncontrolled.
-    const menuSelectedItem =
+    const currentSelectedItem =
       typeof selectedItemProp !== 'undefined' ? selectedItemProp : selectedItem;
 
     useEffect(() => {
@@ -1031,8 +1042,21 @@ const ComboBox = forwardRef(
                 ...inputProps,
                 onChange: (e) => {
                   const newValue = e.target.value;
+                  const shouldClearSelection =
+                    allowCustomValue &&
+                    committedCustomValueRef.current &&
+                    inputValue === committedCustomValueRef.current &&
+                    newValue === '';
+
                   setInputValue(newValue);
                   downshiftSetInputValue(newValue);
+
+                  if (shouldClearSelection) {
+                    setIsClearing(true);
+                    onChange({ selectedItem: null, inputValue: '' });
+                    selectItem(null);
+                    committedCustomValueRef.current = '';
+                  }
                 },
                 ref: mergeRefs(textInput, ref, inputRef),
                 onKeyDown: (
@@ -1070,6 +1094,7 @@ const ComboBox = forwardRef(
                       inputValue &&
                       highlightedIndex === -1
                     ) {
+                      committedCustomValueRef.current = inputValue;
                       onChange({ selectedItem: null, inputValue });
                     }
 
@@ -1155,6 +1180,7 @@ const ComboBox = forwardRef(
                   setInputValue('');
                   onChange({ selectedItem: null });
                   selectItem(null);
+                  committedCustomValueRef.current = '';
                   handleSelectionClear();
                 }}
                 translateWithId={translateWithId}
@@ -1210,7 +1236,7 @@ const ComboBox = forwardRef(
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={isEqual(menuSelectedItem, item)}
+                        isActive={isEqual(currentSelectedItem, item)}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
@@ -1220,7 +1246,7 @@ const ComboBox = forwardRef(
                         ) : (
                           itemToString(item)
                         )}
-                        {isEqual(menuSelectedItem, item) && (
+                        {isEqual(currentSelectedItem, item) && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />
