@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -150,8 +150,8 @@ describe('TableExpandHeader', () => {
                       enableToggle={true}
                       {...getExpandHeaderProps({ onExpand })}
                     />
-                    {headers.map((header, i) => (
-                      <TableHeader key={i} {...getHeaderProps({ header })}>
+                    {headers.map((header) => (
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -246,9 +246,7 @@ describe('TableExpandHeader', () => {
                         {...getExpandHeaderProps()}
                       />
                       {headers.map((header) => (
-                        <TableHeader
-                          key={header.key}
-                          {...getHeaderProps({ header })}>
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
