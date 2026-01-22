@@ -211,8 +211,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 
   getBatchActionProps: (options?: { [key: string]: unknown }) => {
     onCancel: () => void;
-    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-    onSelectAll?: () => void | undefined;
+    onSelectAll?: () => void;
     shouldShowBatchActions: boolean;
     totalCount: number;
     totalSelected: number;
@@ -887,7 +886,7 @@ DataTable.propTypes = {
   /**
    * Pass in the children that will be rendered within the Table
    */
-  children: PropTypes.node,
+  children: PropTypes.func,
 
   /**
    * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables

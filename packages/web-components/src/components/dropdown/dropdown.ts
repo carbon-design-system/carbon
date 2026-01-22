@@ -870,8 +870,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content preceding the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderPrecedingLabel(): TemplateResult | void {
+  protected _renderPrecedingLabel(): TemplateResult | undefined {
     return undefined;
   }
 
@@ -926,8 +925,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content following the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     return undefined;
   }
 

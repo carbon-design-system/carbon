@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
 import { MenuButton } from '@carbon/react';

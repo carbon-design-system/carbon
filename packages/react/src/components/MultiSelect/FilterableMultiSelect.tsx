@@ -67,6 +67,7 @@ import {
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 const {
   InputBlur,
@@ -340,7 +341,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     hideLabel,
     id,
     initialSelectedItems = [],
-    invalid,
+    invalid = false,
     invalidText,
     items,
     itemToElement: ItemToElement, // needs to be capitalized for react to render it correctly
@@ -361,7 +362,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
     translateWithId,
     useTitleInItem,
-    warn,
+    warn = false,
     warnText,
     slug,
     inputProps,
@@ -538,8 +539,17 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     nonSelectAllItems,
   ]);
 
+  const normalizedProps = useNormalizedInputProps({
+    id,
+    disabled,
+    readOnly,
+    invalid,
+    warn,
+  });
+
   const inline = type === 'inline';
-  const showWarning = !invalid && warn;
+  const showWarning = normalizedProps.warn;
+  const showHelperText = !normalizedProps.warn && !normalizedProps.invalid;
 
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
@@ -549,10 +559,13 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     {
       [`${prefix}--multi-select__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
-      [`${prefix}--multi-select__wrapper--inline--invalid`]: inline && invalid,
-      [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      [`${prefix}--multi-select__wrapper--inline--invalid`]:
+        inline && normalizedProps.invalid,
+      [`${prefix}--list-box__wrapper--inline--invalid`]:
+        inline && normalizedProps.invalid,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--invalid`]:
+        isFluid && normalizedProps.invalid,
       [`${prefix}--list-box__wrapper--slug`]: slug,
       [`${prefix}--list-box__wrapper--decorator`]: decorator,
       [`${prefix}--autoalign`]: autoAlign,
@@ -836,8 +849,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     `${prefix}--combo-box`,
     `${prefix}--multi-select--filterable`,
     {
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
+      [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
+      [`${prefix}--multi-select--invalid--focused`]:
+        inputFocused && normalizedProps.invalid,
       [`${prefix}--multi-select--open`]: isOpen,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--selected`]:
@@ -875,8 +889,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
-      'aria-describedby':
-        helperText && !invalid && !warn ? helperId : undefined,
+      'aria-describedby': helperText && showHelperText ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
       // provides this aria information.
@@ -988,9 +1001,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         light={light}
         ref={ref}
         id={id}
-        invalid={invalid}
+        invalid={normalizedProps.invalid}
         invalidText={invalidText}
-        warn={warn}
+        warn={normalizedProps.warn}
         warnText={warnText}
         isOpen={!readOnly && isOpen}
         size={size}>
@@ -1018,7 +1031,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             {...readOnlyEventHandlers}
             readOnly={readOnly}
           />
-          {invalid && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
           {showWarning && (
@@ -1126,7 +1139,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             : null}
         </ListBox.Menu>
       </ListBox>
-      {!inline && !invalid && !warn ? helper : null}
+      {!inline && showHelperText ? helper : null}
     </div>
   );
 }) as {

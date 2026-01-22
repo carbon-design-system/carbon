@@ -6,11 +6,13 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
+import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './slug.scss?lit';
+import popoverStyles from '../popover/popover.scss?lit';
+import toggletipStyles from '../toggle-tip/toggletip.scss?lit';
 import { SLUG_SIZE, SLUG_KIND } from './defs';
 import Undo16 from '@carbon/icons/es/undo/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -70,6 +72,16 @@ export default class CDSSlug extends CDSToggleTip {
 
   @property()
   previousValue;
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      popoverStyles,
+      toggletipStyles,
+      styles,
+    ]);
+  }
 
   protected _handleClick = () => {
     if (this.revertActive) {
@@ -140,6 +152,4 @@ export default class CDSSlug extends CDSToggleTip {
     //@ts-ignore typescript does not think requestUpdate() exists on parentElement
     name === 'revert-active' ? this.parentElement?.requestUpdate() : ``; // eslint-disable-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
   }
-
-  static styles = styles;
 }

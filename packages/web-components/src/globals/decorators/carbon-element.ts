@@ -15,21 +15,24 @@ export declare type Constructor<T> = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   new (...args: any[]): T;
 };
+
+type Finisher =
+  | (<T>(clazz: Constructor<T>) => Constructor<T>)
+  | (<T>(clazz: Constructor<T>) => void);
+
 export interface ClassDescriptor {
   kind: 'class';
   elements: ClassElement[];
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  finisher?: <T>(clazz: Constructor<T>) => void | Constructor<T>;
+  finisher?: Finisher;
 }
+
 export interface ClassElement {
   kind: 'field' | 'method';
   key: PropertyKey;
   placement: 'static' | 'prototype' | 'own';
-  // eslint-disable-next-line   @typescript-eslint/no-unsafe-function-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  initializer?: Function;
+  initializer?: () => unknown;
   extras?: ClassElement[];
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  finisher?: <T>(clazz: Constructor<T>) => void | Constructor<T>;
+  finisher?: Finisher;
   descriptor?: PropertyDescriptor;
 }
 
