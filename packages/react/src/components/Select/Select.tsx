@@ -24,11 +24,11 @@ import {
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useId } from '../../internal/useId';
 import { composeEventHandlers } from '../../tools/events';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 type ExcludedAttributes = 'size';
 
@@ -172,7 +172,6 @@ const Select = React.forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const [isFocused, setIsFocused] = useState(false);
-    const selectInstanceId = useId();
 
     interface SelectItemProps {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -200,60 +199,56 @@ const Select = React.forwardRef(
       '';
 
     const [title, setTitle] = useState(initialTitle);
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      disabled,
+      readOnly,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+    });
     const selectClasses = classNames({
       [`${prefix}--select`]: true,
       [`${prefix}--select--inline`]: inline,
       [`${prefix}--select--light`]: light,
-      [`${prefix}--select--invalid`]: invalid,
-      [`${prefix}--select--disabled`]: disabled,
+      [`${prefix}--select--invalid`]: normalizedProps.invalid,
+      [`${prefix}--select--disabled`]: normalizedProps.disabled,
       [`${prefix}--select--readonly`]: readOnly,
-      [`${prefix}--select--warning`]: warn,
-      [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--select--warning`]: normalizedProps.warn,
+      [`${prefix}--select--fluid--invalid`]: isFluid && normalizedProps.invalid,
       [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--select--slug`]: slug,
       [`${prefix}--select--decorator`]: decorator,
     });
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
-      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
     });
     const inputClasses = classNames({
       [`${prefix}--select-input`]: true,
       [`${prefix}--select-input--${size}`]: size,
     });
-    const errorId = `${id}-error-msg`;
-    const errorText = (() => {
-      if (invalid) {
-        return invalidText;
-      }
-      if (warn) {
-        return warnText;
-      }
-    })();
-    const error =
-      invalid || warn ? (
-        <Text as="div" className={`${prefix}--form-requirement`} id={errorId}>
-          {errorText}
-        </Text>
-      ) : null;
+    const error = normalizedProps.validation;
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
-    const helperId = !helperText
-      ? undefined
-      : `select-helper-text-${selectInstanceId}`;
-
     const helper = helperText ? (
-      <Text as="div" id={helperId} className={helperTextClasses}>
+      <Text
+        as="div"
+        id={normalizedProps.helperId}
+        className={helperTextClasses}>
         {helperText}
       </Text>
     ) : null;
     const ariaProps = {};
-    if (invalid) {
-      ariaProps['aria-describedby'] = errorId;
+    if (normalizedProps.invalid) {
+      ariaProps['aria-describedby'] = normalizedProps.invalidId;
     } else if (!inline && !isFluid) {
-      ariaProps['aria-describedby'] = helper ? helperId : undefined;
+      ariaProps['aria-describedby'] = helper
+        ? normalizedProps.helperId
+        : undefined;
     }
 
     const handleFocus = (evt) => {
@@ -298,8 +293,8 @@ const Select = React.forwardRef(
             {...ariaProps}
             id={id}
             className={inputClasses}
-            disabled={disabled || undefined}
-            aria-invalid={invalid || undefined}
+            disabled={normalizedProps.disabled || undefined}
+            aria-invalid={normalizedProps.invalid || undefined}
             aria-readonly={readOnly || undefined}
             title={title}
             onChange={composeEventHandlers([onChange, handleChange])}
@@ -308,10 +303,10 @@ const Select = React.forwardRef(
             {children}
           </select>
           <ChevronDown className={`${prefix}--select__arrow`} />
-          {invalid && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--select__invalid-icon`} />
           )}
-          {!invalid && warn && (
+          {!normalizedProps.invalid && normalizedProps.warn && (
             <WarningAltFilled
               className={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
             />
@@ -331,7 +326,7 @@ const Select = React.forwardRef(
             <div className={`${prefix}--select-input--inline__wrapper`}>
               <div
                 className={`${prefix}--select-input__wrapper`}
-                data-invalid={invalid || null}>
+                data-invalid={normalizedProps.invalid || null}>
                 {input}
               </div>
               {error}
@@ -340,7 +335,7 @@ const Select = React.forwardRef(
           {!inline && (
             <div
               className={`${prefix}--select-input__wrapper`}
-              data-invalid={invalid || null}
+              data-invalid={normalizedProps.invalid || null}
               onFocus={handleFocus}
               onBlur={handleFocus}>
               {input}

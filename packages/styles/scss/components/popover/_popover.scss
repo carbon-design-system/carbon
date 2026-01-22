@@ -85,6 +85,50 @@ $popover-caret-height: custom-property.get-var(
   convert.to-rem(6px)
 );
 
+/// Mixin for applying base popover styles
+@mixin popover-base {
+  position: absolute;
+  z-index: z('floating');
+  inset: 0;
+  pointer-events: none;
+}
+
+/// Mixin for applying base highcontrast popover styles
+@mixin popover-highcontrast-base {
+  @include custom-property.declaration(
+    'popover-background-color',
+    theme.$background-inverse
+  );
+  @include custom-property.declaration(
+    'popover-text-color',
+    theme.$text-inverse
+  );
+}
+
+/// Mixin for applying popover tab-tip button styles
+@mixin popover-tab-tip-button {
+  @include button-reset.reset;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: convert.to-rem(32px);
+  inline-size: convert.to-rem(32px);
+
+  &:focus {
+    @include focus-outline('outline');
+  }
+
+  &:hover {
+    background-color: theme.$layer-hover;
+  }
+
+  svg {
+    fill: theme.$icon-primary;
+  }
+}
+
 @mixin popover {
   // Container
   .#{$prefix}--popover-container {
@@ -102,14 +146,7 @@ $popover-caret-height: custom-property.get-var(
 
   // High contrast modifier
   .#{$prefix}--popover--high-contrast .#{$prefix}--popover {
-    @include custom-property.declaration(
-      'popover-background-color',
-      theme.$background-inverse
-    );
-    @include custom-property.declaration(
-      'popover-text-color',
-      theme.$text-inverse
-    );
+    @include popover-highcontrast-base;
   }
 
   // Drop shadow modifier
@@ -135,10 +172,7 @@ $popover-caret-height: custom-property.get-var(
 
   // Popover, this element contains both the caret and the popover content
   .#{$prefix}--popover {
-    position: absolute;
-    z-index: z('floating');
-    inset: 0;
-    pointer-events: none;
+    @include popover-base;
   }
 
   // Popover content
@@ -1417,22 +1451,7 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--tab-tip__button {
-    @include button-reset.reset;
-
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    block-size: convert.to-rem(32px);
-    inline-size: convert.to-rem(32px);
-
-    &:focus {
-      @include focus-outline('outline');
-    }
-
-    &:hover {
-      background-color: theme.$layer-hover;
-    }
+    @include popover-tab-tip-button;
   }
 
   .#{$prefix}--popover--tab-tip.#{$prefix}--popover--open

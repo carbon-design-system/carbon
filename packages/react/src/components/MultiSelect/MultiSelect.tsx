@@ -62,6 +62,7 @@ import {
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 
 const {
   ItemClick,
@@ -312,9 +313,9 @@ export const MultiSelect = React.forwardRef(
       clearAnnouncement = 'all items have been cleared',
       clearSelectionDescription = 'Total items selected: ',
       light,
-      invalid,
+      invalid = false,
       invalidText,
-      warn,
+      warn = false,
       warnText,
       useTitleInItem,
       translateWithId,
@@ -534,8 +535,18 @@ export const MultiSelect = React.forwardRef(
       setPrevOpenProp(open);
     }
 
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      disabled,
+      readOnly,
+      invalid,
+      warn,
+    });
+
     const inline = type === 'inline';
-    const showWarning = !invalid && warn;
+    const showWarning = normalizedProps.warn;
+    const showHelperText =
+      !normalizedProps.warn && !normalizedProps.invalid && helperText;
 
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
@@ -545,9 +556,11 @@ export const MultiSelect = React.forwardRef(
         [`${prefix}--multi-select__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
         [`${prefix}--multi-select__wrapper--inline--invalid`]:
-          inline && invalid,
-        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+          inline && normalizedProps.invalid,
+        [`${prefix}--list-box__wrapper--inline--invalid`]:
+          inline && normalizedProps.invalid,
+        [`${prefix}--list-box__wrapper--fluid--invalid`]:
+          isFluid && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
@@ -565,8 +578,9 @@ export const MultiSelect = React.forwardRef(
     });
 
     const className = cx(`${prefix}--multi-select`, {
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
+      [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
+      [`${prefix}--multi-select--invalid--focused`]:
+        inputFocused && normalizedProps.invalid,
       [`${prefix}--multi-select--warning`]: showWarning,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--selected`]:
@@ -774,13 +788,13 @@ export const MultiSelect = React.forwardRef(
           className={className}
           disabled={disabled}
           light={light}
-          invalid={invalid}
+          invalid={normalizedProps.invalid}
           invalidText={invalidText}
-          warn={warn}
+          warn={normalizedProps.warn}
           warnText={warnText}
           isOpen={isOpen}
           id={id}>
-          {invalid && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
           {showWarning && (
@@ -809,9 +823,7 @@ export const MultiSelect = React.forwardRef(
               disabled={disabled}
               aria-disabled={disabled || readOnly}
               aria-describedby={
-                !inline && !invalid && !warn && helperText
-                  ? helperId
-                  : undefined
+                !inline && showHelperText ? helperId : undefined
               }
               {...toggleButtonProps}
               ref={mergedRef}
@@ -872,6 +884,7 @@ export const MultiSelect = React.forwardRef(
                     key={itemProps.id}
                     isActive={isChecked && !item['isSelectAll']}
                     aria-label={itemText}
+                    aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
@@ -900,7 +913,7 @@ export const MultiSelect = React.forwardRef(
             <span aria-live="assertive" aria-label={clearAnnouncement} />
           )}
         </ListBox>
-        {!inline && !invalid && !warn && helperText && (
+        {!inline && showHelperText && (
           <div id={helperId} className={helperClasses}>
             {helperText}
           </div>
