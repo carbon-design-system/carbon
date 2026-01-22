@@ -8,7 +8,13 @@
 import React from 'react';
 import Pagination from '../Pagination';
 import userEvent from '@testing-library/user-event';
-import { getAllByRole, render, screen, act } from '@testing-library/react';
+import {
+  act,
+  getAllByRole,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 
 describe('Pagination', () => {
   describe('renders as expected - Component API', () => {
@@ -527,6 +533,29 @@ describe('Pagination', () => {
 
       expect(select).toHaveValue('10');
       expect(screen.getByText('1–8 of 8 items')).toBeInTheDocument();
+    });
+
+    it('should call onChange when updated page sizes drop the current size', async () => {
+      const onChange = jest.fn();
+      const commonProps = {
+        page: 2,
+        totalItems: 6,
+        pageSize: 2,
+        onChange,
+      };
+      const { rerender } = render(
+        <Pagination {...commonProps} pageSizes={[2, 4]} />
+      );
+
+      rerender(<Pagination {...commonProps} pageSizes={[3]} />);
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalledTimes(1);
+      });
+
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ page: 1, pageSize: 3 })
+      );
     });
   });
 });

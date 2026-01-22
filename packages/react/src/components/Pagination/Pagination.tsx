@@ -202,6 +202,9 @@ const Pagination = React.forwardRef(
     const inputId = useFallbackId(id?.toString());
     const backBtnRef = useRef<HTMLButtonElement>(null);
     const forwardBtnRef = useRef<HTMLButtonElement>(null);
+    const pendingChangeRef = useRef<null | { page: number; pageSize: number }>(
+      null
+    );
     const [pageSizes, setPageSizes] = useState(() => {
       return mapPageSizesToObject(controlledPageSizes);
     });
@@ -264,6 +267,14 @@ const Pagination = React.forwardRef(
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [focusTarget]);
 
+    useEffect(() => {
+      if (pendingChangeRef.current && onChange) {
+        onChange(pendingChangeRef.current);
+
+        pendingChangeRef.current = null;
+      }
+    }, [onChange, page, pageSize]);
+
     // Sync state with props
     if (controlledPage !== prevControlledPage) {
       setPage(controlledPage);
@@ -285,16 +296,33 @@ const Pagination = React.forwardRef(
       const hasPageSize = pageSizes.find((size) => {
         return size.value === pageSize;
       });
+      const nextPage = hasPageSize ? page : 1;
 
-      // Reset page to 1 if the current pageSize is not included in the new page
-      // sizes
+      const hasControlledPageSize = typeof controlledPageSize !== 'undefined';
+      const hasValidControlledPageSize = hasControlledPageSize
+        ? pageSizes.some((size) => size.value === controlledPageSize)
+        : false;
+
+      // Reset page to 1 if the current pageSize is not included in the new
+      // pageSizes.
       if (!hasPageSize) {
-        setPage(1);
+        setPage(nextPage);
       }
 
       setPageSizes(pageSizes);
       setPageSize(nextPageSize);
       setPrevPageSizes(controlledPageSizes);
+
+      if (
+        onChange &&
+        (!hasControlledPageSize || !hasValidControlledPageSize) &&
+        (nextPage !== page || nextPageSize !== pageSize)
+      ) {
+        pendingChangeRef.current = {
+          page: nextPage,
+          pageSize: nextPageSize,
+        };
+      }
     }
 
     function handleSizeChange(event) {
