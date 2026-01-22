@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -351,6 +351,24 @@ describe('ComboBox', () => {
     assertMenuClosed();
     expect(mockProps.onChange).toHaveBeenCalledWith({
       inputValue: 'Apple',
+      selectedItem: null,
+    });
+  });
+
+  it('should call onChange when clearing a committed custom value', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    const input = findInputNode();
+
+    await userEvent.type(input, 'Apple');
+    await userEvent.keyboard('[Enter]');
+    mockProps.onChange.mockClear();
+
+    await userEvent.clear(input);
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      inputValue: '',
       selectedItem: null,
     });
   });

@@ -235,6 +235,9 @@ const files = [
   'scss/utilities/_text-truncate.scss',
   'scss/utilities/_visually-hidden.scss',
   'scss/utilities/_z-index.scss',
+
+  // carbon utilities
+  'scss/_carbon-utilities.scss',
 ];
 
 module.exports = {

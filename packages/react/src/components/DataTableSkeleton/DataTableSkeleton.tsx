@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { type FunctionComponent, TableHTMLAttributes } from 'react';
+import React, { type TableHTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -65,7 +65,7 @@ export interface DataTableSkeletonProps
   className?: string;
 }
 
-const DataTableSkeleton: FunctionComponent<DataTableSkeletonProps> = ({
+const DataTableSkeleton = ({
   headers,
   rowCount = 5,
   columnCount = 5,
@@ -75,7 +75,7 @@ const DataTableSkeleton: FunctionComponent<DataTableSkeletonProps> = ({
   showHeader = true,
   showToolbar = true,
   ...rest
-}) => {
+}: DataTableSkeletonProps) => {
   const prefix = usePrefix();
   const dataTableSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
