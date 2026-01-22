@@ -17,6 +17,7 @@ import '../text-input';
 const args = {
   contained: false,
   disabled: false,
+  selectionMode: 'automatic',
 };
 
 const argTypes = {
@@ -28,12 +29,18 @@ const argTypes = {
     control: 'boolean',
     description: 'Container type styling for tabs',
   },
+  selectionMode: {
+    control: 'select',
+    description:
+      'Choose whether or not to automatically change selection on focus when left/right arrow pressed.',
+    options: ['automatic', 'manual'],
+  },
 };
 
 export const Default = {
   args,
   argTypes,
-  render: ({ disabled, contained }) => {
+  render: ({ disabled, contained, selectionMode }) => {
     const handleBeforeSelected = (event: CustomEvent) => {
       if (disabled) {
         event.preventDefault();
@@ -45,6 +52,7 @@ export const Default = {
         ${styles}
       </style>
       <cds-tabs
+        selection-mode="${selectionMode}"
         type="${contained ? TABS_TYPE.CONTAINED : null}"
         value="all"
         @cds-tabs-beingselected="${handleBeforeSelected}">

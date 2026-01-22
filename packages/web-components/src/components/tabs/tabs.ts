@@ -82,10 +82,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    *   Starts with the selected item
    *   Going prev/next item immediately changes the selection
    */
-  protected _navigate(
-    direction: number,
-    { immediate = true }: { immediate?: boolean } = {}
-  ) {
+  protected _navigate(direction: number) {
+    const immediate = this.selectionMode === 'automatic';
     const { selectorItem, selectorItemHighlighted, selectorItemSelected } = this
       .constructor as typeof CDSTabs;
     const nextItem = this._getNextItem(
@@ -97,15 +95,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (!nextItem) {
       return;
     }
-
-    if (immediate) {
-      this._handleUserInitiatedSelectItem(nextItem as CDSTab);
-    } else {
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
-          nextItem === item;
-      });
-    }
+    this._handleUserInitiatedSelectItem(nextItem as CDSTab, 'keyboard');
+    forEach(this.querySelectorAll(selectorItem), (item) => {
+      (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
+        nextItem === item;
+    });
 
     // Using `{ block: 'nearest' }` to prevent scrolling unless scrolling is absolutely necessary.
     // `scrollIntoViewOptions` seems to work in latest Safari despite of MDN/caniuse table.
@@ -158,6 +152,17 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
           const direction = NAVIGATION_DIRECTION[key];
           if (direction) {
             this._navigate(direction);
+          }
+        }
+        break;
+      case TABS_KEYBOARD_ACTION.ACTIVATING:
+        {
+          const focusedTab: CDSTab | null = this.querySelector(
+            `${prefix}-tab[highlighted]`
+          );
+          if (focusedTab) {
+            this._selectionDidChange(focusedTab);
+            this.requestUpdate();
           }
         }
         break;
@@ -215,8 +220,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
   }
 
-  protected _selectionDidChange(itemToSelect: CDSTab) {
-    super._selectionDidChange(itemToSelect);
+  protected _selectionDidChange(
+    itemToSelect: CDSTab,
+    interactionType?: 'mouse' | 'keyboard' | undefined
+  ) {
+    super._selectionDidChange(itemToSelect, interactionType);
     this._assistiveStatusText = this.selectedItemAssistiveText;
   }
 
@@ -379,10 +387,15 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
 
-    const { selectorTablist } = this.constructor as typeof CDSTabs;
+    const { selectorTablist, selectorItemEnabled } = this
+      .constructor as typeof CDSTabs;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
     this.tablist = tablist;
+    if (this.selectionMode === 'manual') {
+      const firstItem = this.querySelectorAll(selectorItemEnabled)[0];
+      (firstItem as CDSTab).highlighted = true;
+    }
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
   }
 
@@ -590,6 +603,9 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
     if (key in NAVIGATION_DIRECTION) {
       return TABS_KEYBOARD_ACTION.NAVIGATING;
+    }
+    if (key === 'Enter' || key === ' ') {
+      return TABS_KEYBOARD_ACTION.ACTIVATING;
     }
     return TABS_KEYBOARD_ACTION.NONE;
   }
