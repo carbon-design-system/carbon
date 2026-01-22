@@ -94,6 +94,14 @@ describe('DataTableSkeleton', () => {
       expect(toolbar).not.toBeInTheDocument();
     });
 
+    it('should apply the default size when none is provided', () => {
+      render(<DataTableSkeleton />);
+
+      expect(screen.getByRole('table')).toHaveClass(
+        `${prefix}--data-table--lg`
+      );
+    });
+
     it('should respect the size prop', () => {
       render(<DataTableSkeleton size="xs" />);
 

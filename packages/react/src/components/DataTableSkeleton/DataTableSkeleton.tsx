@@ -56,7 +56,9 @@ export interface DataTableSkeletonProps
    */
   showToolbar?: boolean;
 
-  
+  /**
+   * Changes the row height of table.
+   */
   size?: DataTableSize;
 
   /**
@@ -187,7 +189,9 @@ DataTableSkeleton.propTypes = {
    */
   showToolbar: PropTypes.bool,
 
- 
+  /**
+   * Changes the row height of table.
+   */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
