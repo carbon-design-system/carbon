@@ -161,18 +161,19 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       flatten: true,
     })[0];
 
-    if (relatedTarget) {
-      if (this._lastClickWasInsidePopoverContent) {
-        this._lastClickWasInsidePopoverContent = false;
-        return;
-      }
+    if (this._lastClickWasInsidePopoverContent) {
+      this._lastClickWasInsidePopoverContent = false;
+      return;
+    }
 
-      if (
-        path.includes(triggerEl) ||
+    if (
+      relatedTarget &&
+      triggerEl &&
+      (path.includes(triggerEl) ||
         triggerEl === relatedTarget ||
-        triggerEl.contains(relatedTarget)
-      )
-        return;
+        triggerEl.contains(relatedTarget))
+    ) {
+      return;
     }
     if (!this.contains(relatedTarget)) {
       const wasOpen = this.open;
