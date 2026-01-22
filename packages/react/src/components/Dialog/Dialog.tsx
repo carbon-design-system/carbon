@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  MutableRefObject,
   useEffect,
   useRef,
   useState,
@@ -146,8 +145,7 @@ const Dialog = React.forwardRef(
     // will be null. A "backup" ref is needed to ensure the dialog's instance
     // methods can always be called within this component.
     const backupRef = useRef<HTMLDialogElement>(null);
-    const ref = (forwardRef ??
-      backupRef) as MutableRefObject<HTMLDialogElement>;
+    const ref = (forwardRef ?? backupRef) as RefObject<HTMLDialogElement>;
 
     // Clicks on the backdrop of an open modal dialog should request the consuming component to close
     // the dialog. Clicks elsewhere, or on non-modal dialogs should not request
@@ -618,7 +616,7 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
       if (typeof ref === 'function') {
         ref(el);
       } else if (ref) {
-        (ref as React.MutableRefObject<HTMLDivElement>).current = el;
+        ref.current = el;
       }
       contentRef.current = el;
     };

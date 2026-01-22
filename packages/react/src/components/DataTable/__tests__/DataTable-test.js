@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -119,13 +119,8 @@ describe('DataTable', () => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map((header, i) => (
-                    // TODO: `getHeaderProps` returns a `key`. Using it instead
-                    // of overwriting it with the `key` prop may improve test
-                    // coverage.
-                    //
-                    // This comment applies here and elsewhere.
-                    <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {headers.map((header) => (
+                    <TableHeader {...getHeaderProps({ header })}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -133,10 +128,6 @@ describe('DataTable', () => {
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                  // TODO: `getRowProps` returns a `key`. Using it may improve
-                  // test coverage.
-                  //
-                  // This comment applies here and elsewhere.
                   <TableRow {...getRowProps({ row })}>
                     {row.cells.map((cell) => (
                       <TableCell {...getCellProps({ cell })}>
@@ -396,8 +387,8 @@ describe('DataTable', () => {
                   <TableHead>
                     <TableRow>
                       <TableSelectAll {...getSelectionProps()} />
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -568,8 +559,8 @@ describe('DataTable', () => {
                   <TableHead>
                     <TableRow>
                       <TableSelectAll {...getSelectionProps()} />
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -711,8 +702,8 @@ describe('DataTable', () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -842,8 +833,8 @@ describe('DataTable', () => {
                     <TableRow>
                       <TableExpandHeader {...getExpandHeaderProps()} />
                       <TableSelectAll {...getSelectionProps()} />
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -1102,9 +1093,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -1166,9 +1155,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -1252,9 +1239,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -1328,9 +1313,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
