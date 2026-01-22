@@ -96,10 +96,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       return;
     }
     this._handleUserInitiatedSelectItem(nextItem as CDSTab, 'keyboard');
-    forEach(this.querySelectorAll(selectorItem), (item) => {
-      (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
-        nextItem === item;
-    });
+    if (!immediate) {
+      forEach(this.querySelectorAll(selectorItem), (item) => {
+        (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
+          nextItem === item;
+      });
+    }
 
     // Using `{ block: 'nearest' }` to prevent scrolling unless scrolling is absolutely necessary.
     // `scrollIntoViewOptions` seems to work in latest Safari despite of MDN/caniuse table.
@@ -117,6 +119,14 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('click')
   protected _handleClick(event: MouseEvent) {
     super._handleClick(event);
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    const currentItem = this._getCurrentItem(event.target as HTMLElement);
+    if (currentItem) {
+      forEach(this.querySelectorAll(selectorItem), (item) => {
+        (item as CDSTab).highlighted = false;
+      });
+      (currentItem as CDSTab).highlighted = true;
+    }
   }
 
   @HostListener('keydown')
@@ -393,8 +403,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
     this.tablist = tablist;
     if (this.selectionMode === 'manual') {
-      const firstItem = this.querySelectorAll(selectorItemEnabled)[0];
-      (firstItem as CDSTab).highlighted = true;
+      const firstItem = this.querySelector<CDSTab>(selectorItemEnabled);
+      if (firstItem) {
+        firstItem.highlighted = true;
+      }
     }
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
   }
