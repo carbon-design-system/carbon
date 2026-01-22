@@ -2588,7 +2588,7 @@ Map {
     },
     "propTypes": {
       "children": {
-        "type": "node",
+        "type": "func",
       },
       "experimentalAutoAlign": {
         "type": "bool",
