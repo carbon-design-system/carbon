@@ -886,7 +886,7 @@ DataTable.propTypes = {
   /**
    * Pass in the children that will be rendered within the Table
    */
-  children: PropTypes.node,
+  children: PropTypes.func,
 
   /**
    * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
