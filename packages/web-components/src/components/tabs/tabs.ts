@@ -396,16 +396,19 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   firstUpdated() {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
-
     const { selectorTablist, selectorItemEnabled } = this
       .constructor as typeof CDSTabs;
+    const { selectionMode, selectedIndex } = this;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
     this.tablist = tablist;
-    if (this.selectionMode === 'manual') {
-      const firstItem = this.querySelector<CDSTab>(selectorItemEnabled);
+    if (selectionMode === 'manual') {
+      const firstItem =
+        this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
       if (firstItem) {
         firstItem.highlighted = true;
+        firstItem.selected = true;
+        this.value = firstItem.value;
       }
     }
     this._cleanAndCreateIntersectionObserverContainer({ create: true });

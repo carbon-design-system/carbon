@@ -52,6 +52,7 @@ export const Default = {
         ${styles}
       </style>
       <cds-tabs
+        disabled="${disabled}"
         selection-mode="${selectionMode}"
         type="${contained ? TABS_TYPE.CONTAINED : null}"
         value="all"
