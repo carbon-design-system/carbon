@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
+  createContext,
+  forwardRef,
+  isValidElement,
   useRef,
-  type ForwardedRef,
   type ComponentProps,
   type FocusEvent,
+  type JSX,
   type KeyboardEvent,
   type MouseEventHandler,
-  isValidElement,
-  createContext,
-  type JSX,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -59,8 +59,10 @@ export const SideNavContext = createContext<SideNavContextData>(
   {} as SideNavContextData
 );
 
-function SideNavRenderFunction(
-  {
+const frFn = forwardRef<HTMLElement, SideNavProps & ComponentProps<'nav'>>;
+
+const SideNav = frFn((props, ref) => {
+  const {
     expanded: expandedProp,
     defaultExpanded = false,
     isChildOfHeader = true,
@@ -81,9 +83,8 @@ function SideNavRenderFunction(
     onSideNavBlur,
     enterDelayMs = 100,
     ...other
-  }: SideNavProps & ComponentProps<'nav'>,
-  ref: ForwardedRef<HTMLElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useDelayedState(defaultExpanded);
@@ -248,9 +249,7 @@ function SideNavRenderFunction(
       </nav>
     </SideNavContext.Provider>
   );
-}
-
-const SideNav = React.forwardRef(SideNavRenderFunction);
+});
 
 SideNav.displayName = 'SideNav';
 
