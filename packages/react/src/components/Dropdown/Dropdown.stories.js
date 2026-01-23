@@ -63,7 +63,7 @@ const items = [
     text: 'Option 2',
   },
   {
-    text: 'Option 3 - a disabled item',
+    text: 'Option 3',
     disabled: true,
   },
   {
@@ -85,13 +85,13 @@ const items = [
 
 const sharedArgs = {
   invalid: false,
-  invalidText: 'invalid selection',
+  invalidText: 'Error message goes here',
   disabled: false,
   hideLabel: false,
-  label: 'This is an example label',
+  label: 'Choose an option',
   warn: false,
-  warnText: 'please notice the warning',
-  titleText: 'This is an example title',
+  warnText: 'Warning message goes here',
+  titleText: 'Label',
   type: 'default',
 };
 
@@ -163,7 +163,7 @@ export const Default = (args) => {
       text: 'Option 2',
     },
     {
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -187,8 +187,8 @@ export const Default = (args) => {
     <div style={{ width: 400 }}>
       <Dropdown
         id="default"
-        titleText="Dropdown label"
-        helperText="This is some helper text"
+        titleText="Label"
+        helperText="Helper text"
         label="Choose an option"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
@@ -218,7 +218,7 @@ export const ExperimentalAutoAlign = (args) => {
       text: 'Option 2',
     },
     {
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -243,8 +243,8 @@ export const ExperimentalAutoAlign = (args) => {
       <Dropdown
         autoAlign={true}
         id="default"
-        titleText="Dropdown label"
-        helperText="This is some helper text"
+        titleText="Label"
+        helperText="Helper text"
         initialSelectedItem={items[1]}
         label="Option 1"
         items={items}
@@ -273,7 +273,7 @@ export const Inline = (args) => {
       text: 'Option 2',
     },
     {
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -296,7 +296,7 @@ export const Inline = (args) => {
     <div style={{ width: 600 }}>
       <Dropdown
         id="inline"
-        titleText="Inline dropdown label"
+        titleText="Label"
         initialSelectedItem={items[1]}
         label="Option 1"
         type="inline"
@@ -318,8 +318,8 @@ export const _WithLayer = (args) => (
       <div style={{ width: 400 }}>
         <Dropdown
           id={`default-${layer}`}
-          titleText="Dropdown label"
-          helperText="This is some helper text"
+          titleText="Label"
+          helperText="Helper text"
           initialSelectedItem={items[1]}
           label="Option 1"
           items={items}
@@ -341,7 +341,7 @@ export const InlineWithLayer = (args) => (
       <div style={{ width: 600 }}>
         <Dropdown
           id={`inline-${layer}`}
-          titleText="Inline dropdown label"
+          titleText="Label"
           initialSelectedItem={items[1]}
           label="Option 1"
           type="inline"
@@ -408,7 +408,7 @@ export const withAILabel = (args) => {
       text: 'Option 2',
     },
     {
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -432,8 +432,8 @@ export const withAILabel = (args) => {
     <div style={{ width: 400 }}>
       <Dropdown
         id="default"
-        titleText="Dropdown title"
-        helperText="This is some helper text"
+        titleText="Label"
+        helperText="Helper text"
         initialSelectedItem={items[1]}
         label="Option 1"
         items={items}
@@ -451,14 +451,14 @@ withAILabel.argTypes = {
 
 export const withToggletipLabel = () => {
   return (
-    <div>
+    <div style={{ width: 400 }}>
       <Dropdown
         label="placeholder"
         id="dropdown"
         items={[]}
         titleText={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <ToggletipLabel>Dropdown title</ToggletipLabel>
+            <ToggletipLabel>Label</ToggletipLabel>
             <Toggletip>
               <ToggletipButton label="Show information">
                 <Information />
@@ -494,16 +494,16 @@ export const TestInvalidTextNoOverlap = () => {
     <div style={{ width: 400 }}>
       <Dropdown
         id="test-1"
-        titleText="test invalid text, the invalid text should not overlap"
-        helperText="This is some helper text"
+        titleText="Label"
+        helperText="Helper text"
         label="Choose an option"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         invalid
-        invalidText="invalid text, this should not overlap with the component below"
+        invalidText="Error message goes here"
       />
       <Dropdown
-        titleText="test title"
+        titleText="Label"
         label="Choose an option"
         itemToString={(item) => (item ? item.text : '')}
         id="test-2"
