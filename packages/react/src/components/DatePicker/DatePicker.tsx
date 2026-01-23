@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,14 +7,14 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  useCallback,
   useContext,
   useEffect,
-  useRef,
   useImperativeHandle,
-  useCallback,
+  useRef,
   useState,
-  ForwardedRef,
-  ReactNode,
+  type ReactNode,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -354,8 +354,9 @@ export interface DatePickerProps {
   prevMonthAriaLabel?: string;
 }
 
-const DatePicker = React.forwardRef(function DatePicker(
-  {
+// eslint-disable-next-line react/display-name
+const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
+  const {
     allowInput,
     appendTo,
     children,
@@ -384,9 +385,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     nextMonthAriaLabel = 'Next month',
     prevMonthAriaLabel = 'Previous month',
     ...rest
-  }: DatePickerProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);

@@ -1,19 +1,19 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
+  createContext,
+  forwardRef,
+  isValidElement,
   useRef,
-  type ForwardedRef,
   type ComponentProps,
   type FocusEvent,
+  type JSX,
   type KeyboardEvent,
   type MouseEventHandler,
-  isValidElement,
-  createContext,
-  type JSX,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -36,8 +36,7 @@ export interface SideNavProps {
   onToggle?: (
     event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
     value: boolean
-    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => void | undefined;
+  ) => void;
   href?: string | undefined;
   // TO-DO: comment back in when footer is added for rails
   // translateById?: ((id: TranslationId) => Translation) | undefined;
@@ -47,8 +46,7 @@ export interface SideNavProps {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onSideNavBlur?: () => void | undefined;
+  onSideNavBlur?: () => void;
   enterDelayMs?: number;
   inert?: boolean;
 }
@@ -61,8 +59,10 @@ export const SideNavContext = createContext<SideNavContextData>(
   {} as SideNavContextData
 );
 
-function SideNavRenderFunction(
-  {
+const frFn = forwardRef<HTMLElement, SideNavProps & ComponentProps<'nav'>>;
+
+const SideNav = frFn((props, ref) => {
+  const {
     expanded: expandedProp,
     defaultExpanded = false,
     isChildOfHeader = true,
@@ -83,9 +83,8 @@ function SideNavRenderFunction(
     onSideNavBlur,
     enterDelayMs = 100,
     ...other
-  }: SideNavProps & ComponentProps<'nav'>,
-  ref: ForwardedRef<HTMLElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useDelayedState(defaultExpanded);
@@ -250,9 +249,7 @@ function SideNavRenderFunction(
       </nav>
     </SideNavContext.Provider>
   );
-}
-
-const SideNav = React.forwardRef(SideNavRenderFunction);
+});
 
 SideNav.displayName = 'SideNav';
 
