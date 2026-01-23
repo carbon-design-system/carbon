@@ -47,7 +47,7 @@ export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
   selectionCount?: number;
 }
 
-export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
+export type ListBoxSelectionComponent = typeof ListBoxSelection;
 
 const translationIds = {
   'clear.all': 'clear.all',
@@ -70,7 +70,7 @@ const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
-const ListBoxSelection: ListBoxSelectionComponent = ({
+const ListBoxSelection = ({
   clearSelection,
   selectionCount,
   translateWithId: t = defaultTranslateWithId,
