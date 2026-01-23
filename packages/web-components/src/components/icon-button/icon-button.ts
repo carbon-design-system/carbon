@@ -112,7 +112,8 @@ class CDSIconButton extends CDSButton {
         ?defaultOpen=${defaultOpen}
         ?closeOnActivation=${closeOnActivation}
         enter-delay-ms=${enterDelayMs}
-        leave-delay-ms=${leaveDelayMs}>
+        leave-delay-ms=${leaveDelayMs}
+        .dropShadow=${false}>
         ${super.render()} ${this._renderTooltipContent()}
       </cds-tooltip>
     `;
