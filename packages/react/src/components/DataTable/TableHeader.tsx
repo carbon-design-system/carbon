@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  forwardRef,
   useRef,
   type HTMLAttributes,
   type MouseEventHandler,
@@ -144,8 +145,10 @@ export interface TableHeaderProps
   sortDirection?: DataTableSortState;
 }
 
-const TableHeader = React.forwardRef(function TableHeader(
-  {
+const frFn = forwardRef<HTMLTableCellElement, TableHeaderProps>;
+
+const TableHeader = frFn((props, ref) => {
+  const {
     className: headerClassName,
     children,
     colSpan,
@@ -159,9 +162,8 @@ const TableHeader = React.forwardRef(function TableHeader(
     slug,
     id,
     ...rest
-  }: TableHeaderProps,
-  ref: React.Ref<HTMLTableCellElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const uniqueId = useId('table-sort');
 
