@@ -8,7 +8,13 @@
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
-import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  type ElementType,
+} from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -693,10 +699,11 @@ Popover.propTypes = {
 
 export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-function PopoverContentRenderFunction(
-  { className, children, ...rest }: PopoverContentProps,
-  forwardRef: React.ForwardedRef<HTMLSpanElement>
-) {
+const frFn = forwardRef<HTMLSpanElement, PopoverContentProps>;
+
+export const PopoverContent = frFn((props, forwardRef) => {
+  const { className, children, ...rest } = props;
+
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
@@ -726,9 +733,8 @@ function PopoverContentRenderFunction(
       )}
     </span>
   );
-}
+});
 
-export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
 PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {
