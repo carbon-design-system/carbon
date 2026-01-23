@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -33,6 +33,15 @@ $css-grid: #{$prefix}--css-grid;
 
 :host(#{$prefix}-grid[full-width]) [grid] {
   @extend .#{$css-grid}--full-width;
+}
+
+:host(#{$prefix}-grid[enable-v12]) [grid] {
+  @extend .#{$css-grid}--v12;
+}
+
+:host(#{$prefix}-grid[enable-v12][no-row-gap]) [grid] {
+  @extend .#{$css-grid}--v12;
+  @extend .#{$css-grid}--no-row-gap;
 }
 
 /* sub grid styles */

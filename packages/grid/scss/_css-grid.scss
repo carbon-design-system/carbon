@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -109,10 +109,22 @@
   // -----------------------------------------------------------------------------
   .#{$prefix}--css-grid--v12 {
     column-gap: var(--cds-grid-gutter);
-    padding-inline: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+    padding-inline: calc(var(--cds-grid-gutter) / 2);
     row-gap: var(--cds-grid-gutter);
     --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
     --cds-grid-gutter-end: 0rem; /* stylelint-disable-line length-zero-no-unit */
+
+    // At md+: add margin to the padding
+    @each $key, $value in $breakpoints {
+      @if not is-smallest-breakpoint($key, $breakpoints) {
+        $margin: get-margin($breakpoints, $key);
+        @if $margin > 0 {
+          @include breakpoint($key) {
+            padding-inline: calc(#{$margin} + var(--cds-grid-gutter) / 2);
+          }
+        }
+      }
+    }
   }
 
   .#{$prefix}--css-grid--v12.#{$prefix}--css-grid--no-row-gap {
@@ -173,17 +185,43 @@
   // v12 Narrow mode
   .#{$prefix}--css-grid--v12.#{$prefix}--css-grid--narrow {
     column-gap: calc(var(--cds-grid-gutter) / 2);
-    padding-inline: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 4);
+    padding-inline-end: calc(var(--cds-grid-gutter) / 2);
+    padding-inline-start: 0;
     row-gap: calc(var(--cds-grid-gutter) / 2);
+
+    // At md+: add v11 margins to inline padding
+    @each $key, $value in $breakpoints {
+      @if not is-smallest-breakpoint($key, $breakpoints) {
+        $margin: get-margin($breakpoints, $key);
+        @if $margin > 0 {
+          @include breakpoint($key) {
+            padding-inline-end: calc(#{$margin} + var(--cds-grid-gutter) / 2);
+            padding-inline-start: #{$margin};
+          }
+        }
+      }
+    }
   }
 
   // v12 Condensed mode
   .#{$prefix}--css-grid--v12.#{$prefix}--css-grid--condensed {
     column-gap: var(--cds-grid-gutter-condensed);
-    padding-inline: calc(
-      var(--cds-grid-margin) + var(--cds-grid-gutter-condensed) / 2
-    );
+    padding-inline-end: 0;
+    padding-inline-start: 0;
     row-gap: var(--cds-grid-gutter-condensed);
+
+    // At md+: add v11 margins to inline padding
+    @each $key, $value in $breakpoints {
+      @if not is-smallest-breakpoint($key, $breakpoints) {
+        $margin: get-margin($breakpoints, $key);
+        @if $margin > 0 {
+          @include breakpoint($key) {
+            padding-inline-end: #{$margin};
+            padding-inline-start: #{$margin};
+          }
+        }
+      }
+    }
   }
 
   // -----------------------------------------------------------------------------

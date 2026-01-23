@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -124,5 +124,81 @@ describe('Grid', () => {
     expect(container.firstChild.className).toEqual(
       expect.stringContaining('grid--end')
     );
+  });
+
+  describe('v12 Grid', () => {
+    let Grid;
+    let cleanup;
+    let render;
+    let FeatureFlags;
+
+    beforeEach(() => {
+      jest.resetModules();
+      FeatureFlags = require('@carbon/feature-flags');
+      FeatureFlags.enable('enable-css-grid');
+      FeatureFlags.enable('enable-css-grid-v12');
+
+      cleanup = require('@testing-library/react/pure').cleanup;
+      render = require('@testing-library/react/pure').render;
+      Grid = require('../Grid').Grid;
+    });
+
+    afterEach(() => {
+      cleanup();
+      FeatureFlags.disable('enable-css-grid-v12');
+    });
+
+    it('should apply v12 class when feature flag is enabled', () => {
+      const { container } = render(<Grid />);
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--v12')
+      );
+    });
+
+    it('should apply no-row-gap class when noRowGap prop is true', () => {
+      const { container } = render(<Grid noRowGap />);
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--v12')
+      );
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--no-row-gap')
+      );
+    });
+
+    it('should not apply no-row-gap class when noRowGap prop is false', () => {
+      const { container } = render(<Grid noRowGap={false} />);
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--v12')
+      );
+      expect(container.firstChild.className).not.toEqual(
+        expect.stringContaining('css-grid--no-row-gap')
+      );
+    });
+
+    it('should work with narrow prop (narrow takes precedence over condensed)', () => {
+      const { container } = render(<Grid narrow noRowGap />);
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--v12')
+      );
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--narrow')
+      );
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--no-row-gap')
+      );
+    });
+
+    it('should work with condensed prop', () => {
+      const { container } = render(<Grid condensed noRowGap />);
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--v12')
+      );
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--condensed')
+      );
+      expect(container.firstChild.className).toEqual(
+        expect.stringContaining('css-grid--no-row-gap')
+      );
+    });
   });
 });

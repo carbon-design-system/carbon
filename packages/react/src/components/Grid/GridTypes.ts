@@ -40,6 +40,12 @@ export interface GridBaseProps {
    * typographic alignment with and without containers.
    */
   narrow?: boolean;
+
+  /**
+   * Disable row gaps in v12 grid mode. Useful for backward compatibility
+   * when migrating from v11 to v12.
+   */
+  noRowGap?: boolean;
 }
 
 export type GridProps<T extends React.ElementType> =

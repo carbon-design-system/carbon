@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings, useGridSettings } from './GridContext';
 import { GridComponent, GridBaseProps } from './GridTypes';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import { useFeatureFlag } from '../FeatureFlags';
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const CSSGrid = React.forwardRef<
@@ -30,12 +31,14 @@ const CSSGrid = React.forwardRef<
       condensed = false,
       fullWidth = false,
       narrow = false,
+      noRowGap = false,
       ...rest
     },
     ref?
   ) => {
     const prefix = usePrefix();
     const { subgrid } = useGridSettings();
+    const enableV12 = useFeatureFlag('enable-css-grid-v12');
     let mode: SubgridMode = 'wide';
     if (narrow) {
       mode = 'narrow';
@@ -60,9 +63,11 @@ const CSSGrid = React.forwardRef<
 
     const className = cx(customClassName, {
       [`${prefix}--css-grid`]: true,
+      [`${prefix}--css-grid--v12`]: enableV12,
       [`${prefix}--css-grid--condensed`]: mode === 'condensed',
       [`${prefix}--css-grid--narrow`]: mode === 'narrow',
       [`${prefix}--css-grid--full-width`]: fullWidth,
+      [`${prefix}--css-grid--no-row-gap`]: enableV12 && noRowGap,
       [`${prefix}--css-grid--start`]: align === 'start',
       [`${prefix}--css-grid--end`]: align === 'end',
     });
@@ -116,6 +121,12 @@ CSSGrid.propTypes = {
    * typographic alignment with and without containers.
    */
   narrow: PropTypes.bool,
+
+  /**
+   * Disable row gaps in v12 grid mode. Useful for backward compatibility
+   * when migrating from v11 to v12.
+   */
+  noRowGap: PropTypes.bool,
 };
 
 type SubgridMode = 'wide' | 'narrow' | 'condensed';

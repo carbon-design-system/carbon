@@ -233,6 +233,59 @@ This codemod:
 </StructuredListWrapper>
 ```
 
+### Enable v12 CSS Grid
+
+Migrates Grid components to use v12 gap-based gutters with backward
+compatibility.
+
+**Usage:**
+
+```bash
+npx @carbon/upgrade migrate enable-v12-css-grid src/**/*.{js,jsx,ts,tsx} --write
+```
+
+This codemod:
+
+- Adds `noRowGap={true}` to all Grid components for backward compatibility
+- Preserves existing Grid props (condensed, narrow, fullWidth, etc.)
+- Does not modify Column components (they work identically in v12)
+
+**After running the codemod:**
+
+1. Enable the feature flag in your application:
+
+   ```javascript
+   import { enableFeatureFlags } from '@carbon/react';
+
+   enableFeatureFlags({
+     'enable-css-grid-v12': true,
+   });
+   ```
+
+2. Test your layouts with `noRowGap={true}` (backward compatible)
+
+3. Gradually remove `noRowGap` or set to `false` to adopt row gaps:
+   ```jsx
+   // Enable row gaps when ready
+   <Grid noRowGap={false}>
+     <Column lg={4}>Content</Column>
+   </Grid>
+   ```
+
+**Example:**
+
+```jsx
+// Before
+<Grid condensed>
+  <Column lg={4}>Content</Column>
+</Grid>
+
+// After
+<Grid condensed noRowGap={true}>
+  <Column lg={4}>Content</Column>
+</Grid>
+```
+
 ## Other V12 Codemods
 
 ### Light to layer

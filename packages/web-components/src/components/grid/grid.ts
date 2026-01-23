@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,6 +45,19 @@ class CDSGrid extends LitElement {
    */
   @property({ reflect: true, attribute: 'full-width', type: Boolean })
   fullWidth = false;
+
+  /**
+   * Enable v12 CSS Grid with gap-based gutters
+   */
+  @property({ reflect: true, attribute: 'enable-v12', type: Boolean })
+  enableV12 = false;
+
+  /**
+   * Disable row gaps in v12 grid mode. Useful for backward compatibility
+   * when migrating from v11 to v12.
+   */
+  @property({ reflect: true, attribute: 'no-row-gap', type: Boolean })
+  noRowGap = false;
 
   @consume({ context: gridContext, subscribe: true })
   @property({ attribute: false })
