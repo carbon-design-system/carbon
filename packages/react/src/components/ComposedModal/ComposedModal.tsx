@@ -201,8 +201,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): void | boolean;
+  onClose?: ((event: MouseEvent) => boolean) | ((event: MouseEvent) => void);
 
   /**
    * Called for all `onKeyDown` events that do not close the modal
