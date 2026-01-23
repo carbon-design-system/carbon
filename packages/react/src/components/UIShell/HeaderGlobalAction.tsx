@@ -9,7 +9,9 @@ import cx from 'classnames';
 import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import BadgeIndicator from '../BadgeIndicator';
 import Button from '../Button';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface HeaderGlobalActionProps {
@@ -61,6 +63,12 @@ export interface HeaderGlobalActionProps {
    * Default is true
    */
   tooltipHighContrast?: boolean;
+
+  /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg" and kind="ghost"
+   */
+  badgeCount?: number;
 }
 
 /**
@@ -79,8 +87,10 @@ const HeaderGlobalAction = React.forwardRef<
     {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
+      badgeCount,
       children,
       className: customClassName,
+      disabled,
       onClick,
       tooltipHighContrast = true,
       tooltipDropShadow,
@@ -91,6 +101,7 @@ const HeaderGlobalAction = React.forwardRef<
     ref
   ) => {
     const prefix = usePrefix();
+    const badgeId = useId('badge-indicator');
     const className = cx({
       [customClassName as string]: !!customClassName,
       [`${prefix}--header__action`]: true,
@@ -99,6 +110,7 @@ const HeaderGlobalAction = React.forwardRef<
     const accessibilityLabel = {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': rest['aria-describedby'] || (badgeCount !== undefined ? badgeId : undefined),
     };
     return (
       <Button
@@ -117,6 +129,12 @@ const HeaderGlobalAction = React.forwardRef<
         tooltipHighContrast={tooltipHighContrast}
         ref={ref}>
         {children}
+        {!disabled && badgeCount !== undefined && (
+          <BadgeIndicator
+            id={badgeId}
+            count={badgeCount > 0 ? badgeCount : undefined}
+          />
+        )}
       </Button>
     );
   }
@@ -166,6 +184,12 @@ HeaderGlobalAction.propTypes = {
    * Default is true
    */
   tooltipHighContrast: PropTypes.bool,
+
+  /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg" and kind="ghost"
+   */
+  badgeCount: PropTypes.number,
 };
 
 HeaderGlobalAction.displayName = 'HeaderGlobalAction';

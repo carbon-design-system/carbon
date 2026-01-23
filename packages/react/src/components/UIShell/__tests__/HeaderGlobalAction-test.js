@@ -83,4 +83,50 @@ describe('HeaderGlobalAction', () => {
 
     expect(onClick).toHaveBeenCalled();
   });
+
+  it('should render badge indicator when badgeCount is provided', () => {
+    render(
+      <HeaderGlobalAction aria-label="test" badgeCount={5}>
+        <svg />
+      </HeaderGlobalAction>
+    );
+
+    expect(screen.getByText('5')).toBeInTheDocument();
+    expect(screen.getByLabelText('test')).toHaveAttribute('aria-describedby');
+  });
+
+  it('should render dot badge when badgeCount is 0', () => {
+    render(
+      <HeaderGlobalAction aria-label="test" badgeCount={0}>
+        <svg />
+      </HeaderGlobalAction>
+    );
+
+    // When badgeCount is 0, BadgeIndicator renders without count (dot style)
+    const badgeIndicator = document.querySelector('.cds--badge-indicator');
+    expect(badgeIndicator).toBeInTheDocument();
+    expect(badgeIndicator).not.toHaveTextContent('0');
+  });
+
+  it('should not render badge indicator when badgeCount is undefined', () => {
+    render(
+      <HeaderGlobalAction aria-label="test">
+        <svg />
+      </HeaderGlobalAction>
+    );
+
+    const badgeIndicator = document.querySelector('.cds--badge-indicator');
+    expect(badgeIndicator).not.toBeInTheDocument();
+  });
+
+  it('should not render badge indicator when disabled', () => {
+    render(
+      <HeaderGlobalAction aria-label="test" badgeCount={3} disabled>
+        <svg />
+      </HeaderGlobalAction>
+    );
+
+    const badgeIndicator = document.querySelector('.cds--badge-indicator');
+    expect(badgeIndicator).not.toBeInTheDocument();
+  });
 });
