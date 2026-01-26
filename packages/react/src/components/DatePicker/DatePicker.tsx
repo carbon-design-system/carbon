@@ -431,7 +431,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     [onClose]
   );
-  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
+
   const onCalendarClose = (selectedDates, dateStr, instance, e) => {
     if (e && e.type === 'clickOutside') {
       return;
@@ -453,6 +453,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   const savedOnOpen = useSavedCallback(onOpen);
 
   const effectiveWarn = warn && !invalid;
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -645,6 +646,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
           lastStartValue,
+          container: wrapperRef.current,
         }) as unknown as Plugin,
       ],
       clickOpens: !readOnly,
@@ -926,36 +928,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   }, [value, startInputField]);
 
   useEffect(() => {
-    const handleMouseDown = (event) => {
-      if (
-        calendarRef.current &&
-        calendarRef.current.isOpen &&
-        !calendarRef.current.calendarContainer.contains(event.target) &&
-        !startInputField.current.contains(event.target) &&
-        !endInputField.current?.contains(event.target)
-      ) {
-        // Close the calendar immediately on mousedown
-        closeCalendar();
-      }
-    };
-    const closeCalendar = () => {
-      calendarRef.current?.close();
-      // Remove focus from endDate calendar input
-      onCalendarClose(
-        calendarRef.current?.selectedDates,
-        '',
-        calendarRef.current,
-        { type: 'clickOutside' }
-      );
-    };
-    document.addEventListener('mousedown', handleMouseDown, true);
-
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown, true);
-    };
-  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
-
-  useEffect(() => {
     if (calendarRef.current?.set) {
       if (value !== undefined) {
         // To make up for calendarRef.current.setDate not making provision for an empty string or array
@@ -1007,7 +979,9 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
-      <div className={datePickerClasses}>{childrenWithProps}</div>
+      <div className={datePickerClasses} ref={wrapperRef}>
+        {childrenWithProps}
+      </div>
       {fluidError}
     </div>
   );
