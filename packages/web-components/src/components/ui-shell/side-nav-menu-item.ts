@@ -6,7 +6,8 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -38,7 +39,7 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   /**
    * Link `target`.
    */
-  @property()
+  @property({ reflect: true })
   target!: string;
 
   /**
@@ -76,7 +77,7 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
         part="link"
         class="${classes}"
         href="${href}"
-        target="${target || nothing}">
+        target="${ifDefined(target)}">
         <span part="title" class="${prefix}--side-nav__link-text">
           <slot>${title}</slot>
         </span>
