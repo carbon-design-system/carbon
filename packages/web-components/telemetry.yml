@@ -261,6 +261,7 @@ collect:
         - sm
         - span
         # cds-combo-box
+        - allow-custom-value
         - input-label
         - oncds-combo-box-beingselected
         - oncds-combo-box-beingtoggled
@@ -357,9 +358,14 @@ collect:
         - alert
         - container-class
         - has-scrolling-content
+        - loading-description
+        - loading-icon-description
+        - loading-status
+        - loading-success-delay
         - oncds-modal-beingclosed
         - oncds-modal-closed
         - prevent-close
+        - should-submit-on-enter
         # cds-modal-close-button
         - close-button-label
         # cds-modal-footer
@@ -772,6 +778,11 @@ collect:
         # cds-menu-button - menu-background-token
         - background
         - layer
+        # cds-modal - loading-status
+        - active
+        - error
+        - finished
+        - inactive
         # cds-multi-select - selection-feedback
         - fixed
         - top
