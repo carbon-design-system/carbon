@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -111,7 +111,6 @@ export const getMenuOffset: MenuOffset = (
   switch (triggerButtonPositionProp) {
     case 'top':
     case 'bottom': {
-      // TODO: Ensure `trigger` is there for `<OverflowMenu open>`
       const triggerWidth = !trigger ? 0 : trigger.offsetWidth;
       return {
         left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
