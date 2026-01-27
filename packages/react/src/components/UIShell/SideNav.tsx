@@ -5,15 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
+  createContext,
+  forwardRef,
+  isValidElement,
+  useEffect,
   useRef,
-  type ForwardedRef,
   type ComponentProps,
   type FocusEvent,
+  type JSX,
   type KeyboardEvent,
   type MouseEventHandler,
-  isValidElement,
-  createContext,
-  type JSX,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -48,7 +49,6 @@ export interface SideNavProps {
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
   onSideNavBlur?: () => void;
   enterDelayMs?: number;
-  inert?: boolean;
 }
 
 interface SideNavContextData {
@@ -59,8 +59,10 @@ export const SideNavContext = createContext<SideNavContextData>(
   {} as SideNavContextData
 );
 
-function SideNavRenderFunction(
-  {
+const frFn = forwardRef<HTMLElement, SideNavProps & ComponentProps<'nav'>>;
+
+const SideNav = frFn((props, ref) => {
+  const {
     expanded: expandedProp,
     defaultExpanded = false,
     isChildOfHeader = true,
@@ -81,16 +83,15 @@ function SideNavRenderFunction(
     onSideNavBlur,
     enterDelayMs = 100,
     ...other
-  }: SideNavProps & ComponentProps<'nav'>,
-  ref: ForwardedRef<HTMLElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useDelayedState(defaultExpanded);
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-  const sideNavRef = useRef<HTMLDivElement>(null);
+  const sideNavRef = useRef<HTMLElement>(null);
   const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
@@ -229,6 +230,19 @@ function SideNavRenderFunction(
 
   const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
   const isLg = useMatchMedia(lgMediaQuery);
+  const inertEnabled = !isRail ? !(expanded || isLg) : false;
+
+  useEffect(() => {
+    const node = sideNavRef.current;
+
+    if (!node) return;
+
+    if (inertEnabled) {
+      node.setAttribute('inert', '');
+    } else {
+      node.removeAttribute('inert');
+    }
+  }, [inertEnabled]);
 
   return (
     <SideNavContext.Provider value={{ isRail }}>
@@ -240,7 +254,6 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail ? !(expanded || isLg) : undefined}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
@@ -248,9 +261,7 @@ function SideNavRenderFunction(
       </nav>
     </SideNavContext.Provider>
   );
-}
-
-const SideNav = React.forwardRef(SideNavRenderFunction);
+});
 
 SideNav.displayName = 'SideNav';
 
