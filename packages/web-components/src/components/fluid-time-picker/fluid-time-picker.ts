@@ -13,6 +13,8 @@ import { prefix } from '../../globals/settings';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import CDSTimePicker from '../time-picker/time-picker';
+import { INPUT_SIZE } from '../text-input/text-input';
+import type CDSFluidTimePickerSelect from './fluid-time-picker-select';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import styles from './fluid-time-picker.scss?lit';
 
@@ -57,7 +59,7 @@ class CDSFluidTimePicker extends CDSTimePicker {
       .constructor as typeof CDSFluidTimePicker;
     const normalizedProps = this._getNormalizedProps();
     const timePickerSelects = Array.from(
-      this.querySelectorAll(selectorTimePickerSelect)
+      this.querySelectorAll<CDSFluidTimePickerSelect>(selectorTimePickerSelect)
     );
     const lastIndex = timePickerSelects.length - 1;
     const isOnlyOne = timePickerSelects.length === 1;
@@ -83,13 +85,15 @@ class CDSFluidTimePicker extends CDSTimePicker {
       );
       elem.toggleAttribute('data-fluid-time-picker-warn', normalizedProps.warn);
 
-      // Propagate state to the fluid select API.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (elem as any).readonly = this.readOnly;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (elem as any).disabled = this.disabled;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (elem as any).size = this.size;
+      // Propagate state to the slotted fluid selects.
+      elem.readonly = this.readOnly;
+      elem.disabled = this.disabled;
+      elem.size =
+        this.size === 'sm'
+          ? INPUT_SIZE.SMALL
+          : this.size === 'lg'
+            ? INPUT_SIZE.LARGE
+            : INPUT_SIZE.MEDIUM;
     });
   }
 
