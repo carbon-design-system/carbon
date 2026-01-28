@@ -17,14 +17,12 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type ComponentType,
   type FocusEvent,
   type ForwardedRef,
   type InputHTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
   type PropsWithChildren,
-  type PropsWithRef,
   type ReactElement,
   type ReactNode,
   type RefAttributes,
@@ -254,10 +252,9 @@ export interface ComboBoxProps<ItemType>
   invalidText?: ReactNode;
 
   /**
-   * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
-  itemToElement?: ComponentType<ItemType> | null;
+  itemToElement?: ((item: ItemType) => ReactNode) | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -488,6 +485,7 @@ const ComboBox = forwardRef(
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
     const isManualClearingRef = useRef(false);
+    const committedCustomValueRef = useRef('');
     const [isClearing, setIsClearing] = useState(false);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -601,9 +599,15 @@ const ComboBox = forwardRef(
               const nextSelectedItem =
                 items.find((item) => itemToString(item) === inputValue) ??
                 inputValue;
+              const isCustomSelection =
+                typeof nextSelectedItem === 'string' &&
+                !items.some((item) => isEqual(item, nextSelectedItem));
 
               if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
                 onChange({ selectedItem: nextSelectedItem, inputValue });
+                committedCustomValueRef.current = isCustomSelection
+                  ? inputValue
+                  : '';
               }
 
               return {
@@ -794,9 +798,6 @@ const ComboBox = forwardRef(
       [`${prefix}--combo-box--input--focus`]: isFocused,
     });
 
-    // needs to be Capitalized for react to render it correctly
-    const ItemToElement = itemToElement;
-
     // AILabel always size `mini`
     const candidate = slug ?? decorator;
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
@@ -876,6 +877,10 @@ const ComboBox = forwardRef(
           typeof newSelectedItem !== 'undefined' &&
           !isEqual(selectedItemProp, newSelectedItem)
         ) {
+          if (items.some((item) => isEqual(item, newSelectedItem))) {
+            committedCustomValueRef.current = '';
+          }
+
           onChange({ selectedItem: newSelectedItem });
         }
       },
@@ -883,7 +888,7 @@ const ComboBox = forwardRef(
 
     // Keep the dropdown highlight in sync with either the controlled value or
     // Downshift's own selection when uncontrolled.
-    const menuSelectedItem =
+    const currentSelectedItem =
       typeof selectedItemProp !== 'undefined' ? selectedItemProp : selectedItem;
 
     useEffect(() => {
@@ -1031,8 +1036,21 @@ const ComboBox = forwardRef(
                 ...inputProps,
                 onChange: (e) => {
                   const newValue = e.target.value;
+                  const shouldClearSelection =
+                    allowCustomValue &&
+                    committedCustomValueRef.current &&
+                    inputValue === committedCustomValueRef.current &&
+                    newValue === '';
+
                   setInputValue(newValue);
                   downshiftSetInputValue(newValue);
+
+                  if (shouldClearSelection) {
+                    setIsClearing(true);
+                    onChange({ selectedItem: null, inputValue: '' });
+                    selectItem(null);
+                    committedCustomValueRef.current = '';
+                  }
                 },
                 ref: mergeRefs(textInput, ref, inputRef),
                 onKeyDown: (
@@ -1070,6 +1088,7 @@ const ComboBox = forwardRef(
                       inputValue &&
                       highlightedIndex === -1
                     ) {
+                      committedCustomValueRef.current = inputValue;
                       onChange({ selectedItem: null, inputValue });
                     }
 
@@ -1155,6 +1174,7 @@ const ComboBox = forwardRef(
                   setInputValue('');
                   onChange({ selectedItem: null });
                   selectItem(null);
+                  committedCustomValueRef.current = '';
                   handleSelectionClear();
                 }}
                 translateWithId={translateWithId}
@@ -1210,17 +1230,15 @@ const ComboBox = forwardRef(
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={isEqual(menuSelectedItem, item)}
+                        isActive={isEqual(currentSelectedItem, item)}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
                         {...modifiedItemProps}>
-                        {ItemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemToString(item)
-                        )}
-                        {isEqual(menuSelectedItem, item) && (
+                        {itemToElement
+                          ? itemToElement(item)
+                          : itemToString(item)}
+                        {isEqual(currentSelectedItem, item) && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />
@@ -1350,8 +1368,7 @@ ComboBox.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 
@@ -1473,9 +1490,10 @@ ComboBox.propTypes = {
   inputProps: PropTypes.object,
 };
 
-type ComboboxComponentProps<ItemType> = PropsWithRef<
-  PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
->;
+type ComboboxComponentProps<ItemType> = PropsWithChildren<
+  ComboBoxProps<ItemType>
+> &
+  RefAttributes<HTMLInputElement>;
 
 export interface ComboBoxComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
