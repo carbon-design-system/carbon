@@ -91,7 +91,7 @@ const sharedArgTypes = {
 };
 
 const sharedArgs = {
-  onClick: action('onClick'),
+  onClick: () => action('onClick'),
 };
 
 export default {
