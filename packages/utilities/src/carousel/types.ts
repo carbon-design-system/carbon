@@ -9,6 +9,9 @@ interface CarouselStackHistory {
   id: number;
   elem: HTMLLIElement;
 }
+export interface CarouselHTMLElement extends HTMLElement {
+  _carouselListener?: EventListener;
+}
 
 type CarouselResponse = {
   currentIndex: number;
@@ -26,6 +29,7 @@ export type Config = {
   onViewChangeStart?: (args: CarouselResponse) => void;
   onViewChangeEnd?: (args: CarouselResponse) => void;
   excludeSwipeSupport?: boolean;
+  useMaxHeight?: boolean;
 };
 
 interface InitCarousel {
