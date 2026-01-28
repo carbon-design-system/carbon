@@ -13,6 +13,9 @@ import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
 
+// Note: we explicitly define the defaultValue here, as the Button component takes `props` and forwards them
+// to the underlying `button` or `a` element, so Storybook cannot infer the default values from the component itself
+
 const sharedArgTypes = {
   disabled: {
     table: { defaultValue: { summary: false } },
