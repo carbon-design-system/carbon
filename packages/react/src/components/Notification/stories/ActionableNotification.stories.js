@@ -9,7 +9,6 @@ import React from 'react';
 import { ActionableNotification } from '../../Notification';
 import { action } from 'storybook/actions';
 import mdx from '../Notification.mdx';
-import { Link } from '../../Link'; // remove before merging
 
 // eslint-disable-next-line storybook/csf-component
 export default {
@@ -39,14 +38,6 @@ export const Default = (args) => (
   <ActionableNotification {...args}></ActionableNotification>
 );
 
-// remove before merging
-export const test = (args) => (
-  <ActionableNotification {...args}>
-    <Link href="#">link1</Link>
-    <Link href="#">link2</Link>
-  </ActionableNotification>
-);
-
 Default.argTypes = {
   onActionButtonClick: {
     action: 'onActionButtonClick',
@@ -59,15 +50,6 @@ Default.argTypes = {
   },
 };
 Default.args = {
-  actionButtonLabel: 'Action',
-  inline: false,
-  closeOnEscape: true,
-  title: 'Notification title',
-  subtitle: 'Subtitle text goes here',
-};
-
-// remove before merging
-test.args = {
   actionButtonLabel: 'Action',
   inline: false,
   closeOnEscape: true,
