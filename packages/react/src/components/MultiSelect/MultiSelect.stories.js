@@ -306,6 +306,32 @@ export const WithInitialSelectedItems = (args) => {
 };
 
 WithInitialSelectedItems.args = { ...sharedArgs };
+
+const MultiSelectItem = ({ text, type }) => (
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+    }}>
+    <span
+      style={{
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}
+      title={text}>
+      {text}
+    </span>
+    {type === 'advanced' && (
+      <span style={{ marginLeft: 8, fontSize: 12, color: '#525252' }}>
+        Advanced
+      </span>
+    )}
+  </div>
+);
+
 export const Filterable = (args) => {
   const items = [
     {
@@ -333,7 +359,21 @@ export const Filterable = (args) => {
       id: 'downshift-1-item-5',
       text: 'Option 5',
     },
+    {
+      id: '5',
+      text: 'An example option that is really long to show ellipsis',
+      type: 'advanced',
+    },
   ];
+
+  const loadMoreItem = {
+    id: 'load-more',
+    text: 'Load More…',
+    label: 'Load More…',
+    disabled: true,
+    onClick: () => console.log('Load more clicked'),
+  };
+
   return (
     <div
       style={{
@@ -343,8 +383,23 @@ export const Filterable = (args) => {
         id="carbon-multiselect-example-3"
         titleText="FilterableMultiSelect title"
         helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
+        items={[...items, loadMoreItem]}
+        itemToString={(item) => (item ? item.text || item.label : '')}
+        itemToElement={(item) => {
+          if (item?.id === 'load-more') {
+            return <div onClick={item?.onClick}>{item?.label}</div>;
+          }
+          return <MultiSelectItem text={item.text} type={item.type} />;
+        }}
+        filterItems={(items, { inputValue, itemToString }) =>
+          items.filter(
+            (item) =>
+              item.id === 'load-more' ||
+              itemToString(item)
+                .toLowerCase()
+                .includes(inputValue.toLowerCase())
+          )
+        }
         selectionFeedback="top-after-reopen"
         {...args}
       />
