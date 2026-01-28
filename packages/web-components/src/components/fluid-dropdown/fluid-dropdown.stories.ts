@@ -79,9 +79,9 @@ const args = {
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long',
-  label: 'This is an example label',
+  label: 'Choose an option',
   readOnly: false,
-  titleText: 'This is an example title',
+  titleText: 'Label',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -170,28 +170,43 @@ export const Default = {
   `,
 };
 
-export const WithToggletip = {
-  render: () => {
-    return html`
-      <div style="width:400px;">
-        <cds-fluid-dropdown>
-          <cds-toggletip autoAlign="true" slot="title-text">
-            Dropdown label
-            <p slot="body-text">Additional field information here.</p>
-          </cds-toggletip>
-          <cds-dropdown-item
-            value="An example option that is really long to show what should be done to handle long text"
-            >An example option that is really long to show what should be done
-            to handle long text</cds-dropdown-item
-          >
-          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
-          <cds-dropdown-item value="option-3">Option 3</cds-dropdown-item>
-          <cds-dropdown-item value="option-4">Option 4</cds-dropdown-item>
-        </cds-fluid-dropdown>
-      </div>
-    `;
-  },
+export const Condensed = {
+  args,
+  argTypes,
+  render: ({
+    defaultWidth,
+    disabled,
+    helperText,
+    invalid,
+    invalidText,
+    label,
+    readOnly,
+    titleText,
+    warn,
+    warnText,
+  }) => html`
+    <div style="width:${defaultWidth}px;">
+      <cds-fluid-dropdown
+        is-condensed
+        ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label="${ifDefined(label)}"
+        ?read-only="${readOnly}"
+        title-text="${ifDefined(titleText)}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}">
+        ${items.map(
+          (elem) => html`
+            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+              >${elem.text}</cds-dropdown-item
+            >
+          `
+        )}
+      </cds-fluid-dropdown>
+    </div>
+  `,
 };
 
 export const Skeleton = {

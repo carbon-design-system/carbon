@@ -10,7 +10,6 @@ import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSDropdown from '../dropdown/dropdown';
 import styles from './fluid-dropdown.scss?lit';
-import { classMap } from 'lit/directives/class-map.js';
 
 /**
  * Fluid dropdown.
@@ -37,14 +36,7 @@ class CDSFluidDropdown extends CDSDropdown {
   }
 
   render() {
-    const wrapperClasses = classMap({
-      [`${prefix}--dropdown`]: true,
-      [`${prefix}--dropdown--invalid`]: this.invalid,
-      [`${prefix}--dropdown--warn`]: this.warn && !this.invalid,
-      [`${prefix}--list-box--disabled`]: this.disabled,
-      [`${prefix}--dropdown--readonly`]: this.readOnly,
-    });
-    return html`<div class="${wrapperClasses}">${super.render()}</div>`;
+    return html`${super.render()}`;
   }
 
   static styles = [CDSDropdown.styles, styles];
