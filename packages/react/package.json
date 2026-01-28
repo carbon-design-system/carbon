@@ -1,7 +1,7 @@
 {
   "name": "@carbon/react",
   "description": "React components for the Carbon Design System",
-  "version": "1.98.0",
+  "version": "1.100.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -53,10 +53,10 @@
   "dependencies": {
     "@babel/runtime": "^7.27.3",
     "@carbon/feature-flags": "workspace:>=0.32.0",
-    "@carbon/icons-react": "^11.72.0",
-    "@carbon/layout": "^11.45.0",
-    "@carbon/styles": "^1.97.0",
-    "@carbon/utilities": "^0.14.0",
+    "@carbon/icons-react": "^11.74.0-rc.0",
+    "@carbon/layout": "^11.47.0-rc.0",
+    "@carbon/styles": "^1.99.0-rc.0",
+    "@carbon/utilities": "^0.15.0-rc.0",
     "@floating-ui/react": "^0.27.4",
     "@ibm/telemetry-js": "^1.5.0",
     "classnames": "2.5.1",
@@ -67,7 +67,6 @@
     "invariant": "^2.2.3",
     "prop-types": "^15.8.1",
     "react-fast-compare": "^3.2.2",
-    "storybook-addon-accessibility-checker": "^9.2.0-rc.3",
     "tabbable": "^6.2.0"
   },
   "devDependencies": {
@@ -79,8 +78,8 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
-    "@carbon/test-utils": "^10.38.0",
-    "@carbon/themes": "^11.65.0",
+    "@carbon/test-utils": "^10.39.0",
+    "@carbon/themes": "^11.67.0-rc.0",
     "@figma/code-connect": "^1.3.5",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-commonjs": "^28.0.3",

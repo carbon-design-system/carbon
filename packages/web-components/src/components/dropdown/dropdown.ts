@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import ValidityMixin from '../../globals/mixins/validity';
 import HostListener from '../../globals/decorators/host-listener';
+import FloatingUIController from '../../globals/controllers/floating-controller';
 import {
   find,
   forEach,
@@ -76,6 +77,11 @@ class CDSDropdown extends ValidityMixin(
   private _aiDecoratorNodes: HTMLElement[] = [];
 
   /**
+   * Floating UI controller instance for autoalign positioning.
+   */
+  private _floatingController = new FloatingUIController(this);
+
+  /**
    * Handles interaction on an AI decorator while the menu is open.
    */
   private _handleAIDecoratorInteraction = () => {
@@ -105,6 +111,18 @@ class CDSDropdown extends ValidityMixin(
    */
   @query(`.${prefix}--list-box`)
   protected _listBoxNode!: HTMLDivElement;
+
+  /**
+   * The menu body element.
+   */
+  @query('#menu-body')
+  protected _menuBodyNode!: HTMLDivElement;
+
+  /**
+   * The trigger button element.
+   */
+  @query('#trigger-button')
+  protected _triggerButtonNode!: HTMLDivElement;
 
   /**
    * The `<slot>` element for the helper text in the shadow DOM.
@@ -851,8 +869,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content preceding the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderPrecedingLabel(): TemplateResult | void {
+  protected _renderPrecedingLabel(): TemplateResult | undefined {
     return undefined;
   }
 
@@ -907,8 +924,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content following the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     return undefined;
   }
 
@@ -937,6 +953,12 @@ class CDSDropdown extends ValidityMixin(
    */
   @property({ type: String, reflect: true })
   direction = DROPDOWN_DIRECTION.BOTTOM;
+
+  /**
+   * Specify whether auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
 
   /**
    * `true` if this dropdown should be disabled.
@@ -1118,8 +1140,7 @@ class CDSDropdown extends ValidityMixin(
     return true;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  updated(_changedProperties) {
+  updated(changedProperties) {
     // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
     this._hasAILabel
       ? this.setAttribute('ai-label', '')
@@ -1139,6 +1160,69 @@ class CDSDropdown extends ValidityMixin(
           this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
         );
     }
+
+    if (
+      this.autoalign &&
+      this.open &&
+      (changedProperties.has('open') ||
+        (changedProperties.has('autoalign') && this.autoalign) ||
+        changedProperties.has('direction') ||
+        changedProperties.has('size'))
+    ) {
+      this._updateAutoAlignPlacement();
+    } else if (
+      (changedProperties.has('autoalign') && !this.autoalign) ||
+      (changedProperties.has('open') && !this.open)
+    ) {
+      this._floatingController.hostDisconnected();
+      this._resetFloatingStyles();
+    }
+  }
+
+  /**
+   * Clears Floating UI styles when auto-align is off or the menu closes.
+   */
+  private _resetFloatingStyles() {
+    const menu = this._menuBodyNode;
+    if (!menu) {
+      return;
+    }
+
+    menu.style.removeProperty('left');
+    menu.style.removeProperty('top');
+    menu.style.removeProperty('position');
+    menu.style.removeProperty('width');
+    menu.style.removeProperty('visibility');
+    menu.removeAttribute('align');
+  }
+
+  /**
+   * Runs Floating UI placement while auto-align is active.
+   */
+  private _updateAutoAlignPlacement() {
+    if (!this.autoalign || !this.open) {
+      return;
+    }
+
+    const menu = this._menuBodyNode;
+    const trigger = this._triggerButtonNode || this._listBoxNode;
+
+    if (!menu || !trigger) {
+      return;
+    }
+
+    const alignment =
+      this.direction === DROPDOWN_DIRECTION.TOP
+        ? DROPDOWN_DIRECTION.TOP
+        : DROPDOWN_DIRECTION.BOTTOM;
+
+    this._floatingController.setPlacement({
+      alignment,
+      matchWidth: true,
+      open: this.open,
+      target: menu,
+      trigger,
+    });
   }
 
   /**
@@ -1158,7 +1242,7 @@ class CDSDropdown extends ValidityMixin(
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   protected get _classes(): any {
-    const { size, type, open } = this;
+    const { size, type, open, autoalign } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;
 
@@ -1178,6 +1262,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
+      [`${prefix}--autoalign`]: autoalign,
     });
   }
 

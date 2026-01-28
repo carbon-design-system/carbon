@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,7 @@ import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import FloatingUIContoller from '../../globals/controllers/floating-controller';
+import FloatingUIController from '../../globals/controllers/floating-controller';
 import { POPOVER_BACKGROUND_TOKEN } from './defs';
 import type { Boundary, Rect } from '@floating-ui/dom';
 
@@ -28,7 +28,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   /**
    * Create popover controller instance
    */
-  private popoverController = new FloatingUIContoller(this);
+  private popoverController = new FloatingUIController(this);
 
   /**
    * The `<slot>` element in the shadow DOM.
@@ -110,6 +110,9 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   @property({ type: String, reflect: true, attribute: 'autoalign-boundary' })
   autoAlignBoundary?: string;
 
+  // Tracks whether the last mousedown event was inside the popover content
+  private _lastClickWasInsidePopoverContent = false;
+
   /**
    * Handles `slotchange` event.
    */
@@ -130,13 +133,63 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     this.requestUpdate();
   }
 
+  @HostListener('mousedown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore
+  private _handleMouseDown(event: MouseEvent) {
+    const path = event.composedPath();
+    const contentEl = this._contentSlotNode.assignedElements()[0];
+
+    this._lastClickWasInsidePopoverContent =
+      contentEl && path.includes(contentEl);
+
+    // reset flag
+    if (this._lastClickWasInsidePopoverContent) {
+      setTimeout(() => {
+        this._lastClickWasInsidePopoverContent = false;
+      }, 0);
+    }
+  }
+
   @HostListener('focusout')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleFocusOut(event: Event) {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+    const path = event.composedPath();
+    const triggerEl = this._triggerSlotNode.assignedElements({
+      flatten: true,
+    })[0];
+
+    if (this._lastClickWasInsidePopoverContent) {
+      this._lastClickWasInsidePopoverContent = false;
+      return;
+    }
+
+    if (
+      relatedTarget &&
+      triggerEl &&
+      (path.includes(triggerEl) ||
+        triggerEl === relatedTarget ||
+        triggerEl.contains(relatedTarget))
+    ) {
+      return;
+    }
     if (!this.contains(relatedTarget)) {
+      const wasOpen = this.open;
       this.open = false;
+
+      if (wasOpen) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSPopover).eventOnClose,
+            {
+              bubbles: true,
+              composed: true,
+            }
+          )
+        );
+      }
     }
   }
 
@@ -163,6 +216,12 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       !this.contains(composedTarget)
     ) {
       this.open = false;
+      this.dispatchEvent(
+        new CustomEvent((this.constructor as typeof CDSPopover).eventOnClose, {
+          bubbles: true,
+          composed: true,
+        })
+      );
     }
   }
 
@@ -359,6 +418,13 @@ class CDSPopover extends HostListenerMixin(LitElement) {
    */
   static get selectorPopoverContent() {
     return `${prefix}-popover-content`;
+  }
+
+  /**
+   * The name of the custom event fired when the popover closes via focusout/outsideclick
+   */
+  static get eventOnClose() {
+    return `${prefix}-popover-closed`;
   }
 
   static styles = styles;

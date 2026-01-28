@@ -16,6 +16,7 @@ import {
   blue100,
 
   // Gray
+  coolGray60,
   coolGray80,
   gray10,
   gray10Hover,
@@ -37,6 +38,7 @@ import {
   green50,
   green60,
   yellow30,
+  yellow60,
   orange40,
   red50,
   red60,
@@ -256,6 +258,51 @@ export const syntaxRegexp = purple70;
 export const syntaxEscape = coolGray80;
 export const syntaxUrl = syntaxEscape;
 export const syntaxColor = syntaxMacroName;
+export const syntaxOperator = coolGray80;
+export const syntaxDerefOperator = syntaxOperator;
+export const syntaxArithmeticOperator = syntaxOperator;
+export const syntaxLogicOperator = syntaxOperator;
+export const syntaxBitwiseOperator = syntaxOperator;
+export const syntaxCompareOperator = syntaxOperator;
+export const syntaxUpdateOperator = syntaxOperator;
+export const syntaxDefinitionOperator = syntaxDefinitionKeyword;
+export const syntaxTypeOperator = syntaxTag;
+export const syntaxControlOperator = syntaxModuleKeyword;
+export const syntaxModifier = syntaxKeyword;
+export const syntaxPunctuation = coolGray80;
+export const syntaxSeparator = syntaxPunctuation;
+export const syntaxBracket = syntaxPunctuation;
+export const syntaxAngleBracket = coolGray60;
+export const syntaxSquareBracket = syntaxBracket;
+export const syntaxParen = syntaxBracket;
+export const syntaxBrace = syntaxBracket;
+export const syntaxContent = textPrimary;
+export const syntaxList = syntaxContent;
+export const syntaxEmphasis = syntaxContent;
+export const syntaxStrong = syntaxContent;
+export const syntaxMonospace = syntaxContent;
+export const syntaxStrikethrough = syntaxContent;
+export const syntaxHeading = cyan70;
+export const syntaxHeading1 = syntaxHeading;
+export const syntaxHeading2 = syntaxHeading;
+export const syntaxHeading3 = syntaxHeading;
+export const syntaxHeading4 = syntaxHeading;
+export const syntaxHeading5 = syntaxHeading;
+export const syntaxHeading6 = syntaxHeading;
+export const syntaxContentSeparator = syntaxPunctuation;
+export const syntaxQuote = syntaxComment;
+export const syntaxLink = blue60;
+export const syntaxInvalid = red60;
+export const syntaxMeta = green60;
+export const syntaxDocumentMeta = syntaxMeta;
+export const syntaxAnnotation = teal60;
+export const syntaxProcessingInstruction = syntaxString;
+export const syntaxDefinition = cyan70;
+export const syntaxConstant = blue60;
+export const syntaxFunction = yellow60;
+export const syntaxStandard = blue60;
+export const syntaxLocal = blue60;
+export const syntaxSpecial = blue60;
 
 //// AI - Experimental (Use at your own risk)
 //// Phase 2 - new \\\\
