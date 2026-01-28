@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,13 @@
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
-import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  type ElementType,
+} from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -192,33 +198,52 @@ export const Popover: PopoverComponent & {
   const popover = useRef<Element>(null);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+  const lastClickWasInsidePopoverContent = useRef(false);
 
   let align = mapPopoverAlign(initialAlign);
+
+  // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
+  // case where the popover will close when clicking non-focusable elements (e.g. text)
+  useEvent(popover, 'mousedown', (event) => {
+    const target = event.target as Node;
+    lastClickWasInsidePopoverContent.current =
+      refs.floating.current?.contains(target) || false;
+
+    // reset flag
+    if (lastClickWasInsidePopoverContent.current) {
+      setTimeout(() => {
+        lastClickWasInsidePopoverContent.current = false;
+      }, 0);
+    }
+  });
 
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
-    if (isTabTip) {
-      if (relatedTarget && !popover.current?.contains(relatedTarget)) {
-        onRequestClose?.();
-      }
-      return;
-    }
 
     if (!relatedTarget) {
-      onRequestClose?.();
-      return;
-    }
+      // do not close if PopoverContent was clicked
+      if (lastClickWasInsidePopoverContent.current) {
+        lastClickWasInsidePopoverContent.current = false;
+        return;
+      }
 
-    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
-    const isOutsideFloating =
-      enableFloatingStyles && refs.floating.current
-        ? !refs.floating.current.contains(relatedTarget)
-        : true;
-
-    // Only close if focus moved outside both containers
-    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
+    } else if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+      const isOutsideFloating =
+        enableFloatingStyles && refs.floating.current
+          ? !refs.floating.current.contains(relatedTarget)
+          : true;
+
+      const isFocusableWrapper =
+        relatedTarget &&
+        popover.current &&
+        relatedTarget.contains(popover.current);
+
+      // Only close if focus moved outside both containers and not to an interactive parent wrapper
+      if (isOutsideFloating && !isFocusableWrapper) {
+        onRequestClose?.();
+      }
     }
   });
 
@@ -278,79 +303,87 @@ export const Popover: PopoverComponent & {
       }
     }
   });
-  const { refs, floatingStyles, placement, middlewareData } = useFloating(
-    enableFloatingStyles
-      ? {
-          placement: align,
+  const { refs, floatingStyles, placement, middlewareData, elements, update } =
+    useFloating(
+      enableFloatingStyles
+        ? {
+            placement: align,
 
-          // The floating element is positioned relative to its nearest
-          // containing block (usually the viewport). It will in many cases also
-          // “break” the floating element out of a clipping ancestor.
-          // https://floating-ui.com/docs/misc#clipping
-          strategy: 'fixed',
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
 
-          // Middleware order matters, arrow should be last
-          middleware: [
-            offset(
-              !isTabTip
-                ? {
-                    alignmentAxis: alignmentAxisOffset,
-                    mainAxis: popoverDimensions?.current?.offset,
-                  }
-                : 0
-            ),
-            autoAlign &&
-              flip({
-                fallbackPlacements: isTabTip
-                  ? align.includes('bottom')
-                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
-                  : align.includes('bottom')
-                    ? [
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'top',
-                        'top-start',
-                        'top-end',
-                      ]
-                    : [
-                        'top',
-                        'top-start',
-                        'top-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                      ],
+            // Middleware order matters, arrow should be last
+            middleware: [
+              offset(
+                !isTabTip
+                  ? {
+                      alignmentAxis: alignmentAxisOffset,
+                      mainAxis: popoverDimensions?.current?.offset,
+                    }
+                  : 0
+              ),
+              autoAlign &&
+                flip({
+                  fallbackPlacements: isTabTip
+                    ? align.includes('bottom')
+                      ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                      : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+                    : align.includes('bottom')
+                      ? [
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'top',
+                          'top-start',
+                          'top-end',
+                        ]
+                      : [
+                          'top',
+                          'top-start',
+                          'top-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                        ],
 
-                fallbackStrategy: 'initialPlacement',
-                fallbackAxisSideDirection: 'start',
-                boundary: autoAlignBoundary,
+                  fallbackStrategy: 'initialPlacement',
+                  fallbackAxisSideDirection: 'start',
+                  boundary: autoAlignBoundary,
+                }),
+              arrow({
+                element: caretRef,
+                padding: 16,
               }),
-            arrow({
-              element: caretRef,
-              padding: 16,
-            }),
-            autoAlign && hide(),
-          ],
-          whileElementsMounted: autoUpdate,
-        }
-      : {}
-    // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
-    // enabled, floating-ui will not be used
-  );
+              autoAlign && hide(),
+            ],
+          }
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
+    );
+
+  useEffect(() => {
+    if (!enableFloatingStyles) return;
+    if (open && elements.reference && elements.floating) {
+      const cleanup = autoUpdate(elements.reference, elements.floating, update);
+      return cleanup;
+    }
+  }, [enableFloatingStyles, open, elements, update]);
 
   const value = useMemo(() => {
     return {
@@ -666,10 +699,11 @@ Popover.propTypes = {
 
 export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-function PopoverContentRenderFunction(
-  { className, children, ...rest }: PopoverContentProps,
-  forwardRef: React.ForwardedRef<HTMLSpanElement>
-) {
+const frFn = forwardRef<HTMLSpanElement, PopoverContentProps>;
+
+export const PopoverContent = frFn((props, forwardRef) => {
+  const { className, children, ...rest } = props;
+
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
@@ -699,9 +733,8 @@ function PopoverContentRenderFunction(
       )}
     </span>
   );
-}
+});
 
-export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
 PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {

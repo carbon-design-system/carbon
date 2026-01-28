@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,6 @@ import React, {
 } from 'react';
 import * as FeatureFlags from '@carbon/feature-flags';
 import ReactDOM from 'react-dom';
-import window from 'window-or-global';
 import { keys, match } from '../internal/keyboard';
 import { OptimizedResize } from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
@@ -277,14 +276,17 @@ export const FloatingMenu = ({
           ? menuOffset(menuBody, menuDirection, triggerEl, flipped)
           : menuOffset;
 
+      const scrollX = globalThis.scrollX ?? 0;
+      const scrollY = globalThis.scrollY ?? 0;
+
       if (updateOrientation) {
         updateOrientation({
           menuSize,
           refPosition,
           direction: menuDirection,
           offset: offsetValue,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
@@ -299,8 +301,8 @@ export const FloatingMenu = ({
           refPosition: refPosition ?? { left: 0, top: 0, right: 0, bottom: 0 },
           offset: offsetValue,
           direction: menuDirection,
-          scrollX: window.pageXOffset,
-          scrollY: window.pageYOffset,
+          scrollX,
+          scrollY,
           container: {
             rect: target().getBoundingClientRect(),
             position: getComputedStyle(target()).position,
@@ -319,8 +321,6 @@ export const FloatingMenu = ({
         // Re-check after setting the position if not already adjusting.
         if (!isAdjustment) {
           const newMenuSize = menuBody.getBoundingClientRect();
-          // TODO: Was there a bug in the old code? How could one `DOMRect` be
-          // compared to another using `!==`?
           if (
             newMenuSize.width !== menuSize.width ||
             newMenuSize.height !== menuSize.height

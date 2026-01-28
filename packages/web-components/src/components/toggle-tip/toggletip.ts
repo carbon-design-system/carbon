@@ -6,7 +6,7 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { html, LitElement } from 'lit';
+import { adoptStyles, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
@@ -15,8 +15,9 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import FloatingUIContoller from '../../globals/controllers/floating-controller';
+import FloatingUIController from '../../globals/controllers/floating-controller';
 import styles from './toggletip.scss?lit';
+import popoverStyles from '../popover/popover.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -29,7 +30,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Create popover controller instance
    */
-  private popoverController = new FloatingUIContoller(this);
+  private popoverController = new FloatingUIController(this);
 
   /**
    * How the tooltip is aligned to the trigger button.
@@ -72,6 +73,8 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     if (this.defaultOpen && !this.hasAttribute('open')) {
       this.open = true;
     }
+
+    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }
 
   /**
@@ -271,8 +274,6 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-
-  static styles = styles;
 }
 
 export default CDSToggletip;

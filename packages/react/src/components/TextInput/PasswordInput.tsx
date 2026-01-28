@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, {
+  forwardRef,
   InputHTMLAttributes,
   ReactNode,
   useContext,
@@ -175,7 +176,7 @@ export interface PasswordInputProps
   warnText?: ReactNode;
 }
 
-const PasswordInput = React.forwardRef(
+const PasswordInput = forwardRef<unknown, PasswordInputProps>(
   (
     {
       className,
@@ -202,7 +203,7 @@ const PasswordInput = React.forwardRef(
       warn = false,
       warnText,
       ...rest
-    }: PasswordInputProps,
+    },
     ref
   ) => {
     const [inputType, setInputType] = useState(type);
@@ -323,6 +324,11 @@ const PasswordInput = React.forwardRef(
       }
     );
 
+    const tooltipClasses = classNames(
+      `${prefix}--toggle-password-tooltip`,
+      `${prefix}--icon-tooltip`
+    );
+
     let align: PopoverAlignment | undefined = undefined;
 
     if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
@@ -370,12 +376,12 @@ const PasswordInput = React.forwardRef(
 
         <Tooltip
           align={align}
-          className={`${prefix}--toggle-password-tooltip`}
+          className={tooltipClasses}
           label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
           <button
             type="button"
             className={passwordVisibilityToggleClasses}
-            disabled={disabled || readOnly}
+            disabled={disabled}
             onClick={handleTogglePasswordVisibility}>
             {passwordVisibilityIcon}
           </button>

@@ -108,7 +108,10 @@ const InlineLoading = ({
         </CheckmarkFilled>
       );
     }
-    if (status === 'active') {
+    if (status === 'inactive' || status === 'active') {
+      if (status === 'inactive') {
+        return undefined;
+      }
       if (!iconDescription) {
         iconLabel = 'loading';
       }
@@ -121,17 +124,6 @@ const InlineLoading = ({
         />
       );
     }
-    if (status === 'inactive') {
-      if (!iconDescription) {
-        iconLabel = 'not loading';
-      }
-      return (
-        <title className={`${prefix}--inline-loading__inactive-status`}>
-          {iconLabel}
-        </title>
-      );
-    }
-    return undefined;
   };
 
   const loadingText = description && (
@@ -145,7 +137,9 @@ const InlineLoading = ({
     <div
       className={loadingClasses}
       {...rest}
-      aria-live={rest['aria-live'] ?? 'assertive'}>
+      aria-live={
+        rest['aria-live'] ?? (status === 'inactive' ? 'off' : 'assertive')
+      }>
       {loadingAnimation}
       {loadingText}
     </div>

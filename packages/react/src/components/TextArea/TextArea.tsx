@@ -320,11 +320,7 @@ const TextArea = frFn((props, forwardRef) => {
             setTimeout(() => {
               setTextCount(0);
             }, 0);
-
-            return;
-          }
-
-          if (
+          } else if (
             enableCounter &&
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
@@ -397,8 +393,12 @@ const TextArea = frFn((props, forwardRef) => {
     (counterMode === 'character' || counterMode === 'word') ? (
       <Text
         as="div"
-        className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
+        className={counterClasses}
+        aria-hidden="true">{`${textCount}/${maxCount}`}</Text>
     ) : null;
+
+  const counterDescriptionId =
+    enableCounter && maxCount ? `${id}-counter-desc` : undefined;
 
   const helperId = !helperText
     ? undefined
@@ -451,8 +451,13 @@ const TextArea = frFn((props, forwardRef) => {
   let ariaDescribedBy;
   if (invalid) {
     ariaDescribedBy = errorId;
-  } else if (!invalid && !warn && !isFluid && helperText) {
-    ariaDescribedBy = helperId;
+  } else if (warn && !isFluid) {
+    ariaDescribedBy = warnId;
+  } else {
+    const ids: string[] = [];
+    if (!isFluid && helperText && helperId) ids.push(helperId);
+    if (counterDescriptionId) ids.push(counterDescriptionId);
+    ariaDescribedBy = ids.length > 0 ? ids.join(' ') : undefined;
   }
 
   if (enableCounter) {
@@ -527,6 +532,15 @@ const TextArea = frFn((props, forwardRef) => {
         {label}
         {counter}
       </div>
+      {enableCounter && maxCount && (
+        <span
+          id={counterDescriptionId}
+          className={`${prefix}--visually-hidden`}>
+          {counterMode === 'word'
+            ? `Word limit ${maxCount}`
+            : `Character limit ${maxCount}`}
+        </span>
+      )}
       <div
         ref={wrapperRef}
         className={textAreaWrapperClasses}

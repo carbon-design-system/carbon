@@ -138,6 +138,7 @@ collect:
         - lowContrast
         - max
         - maxCount
+        - maxFileSize
         - menuAlignment
         - menuOffset
         - menuOffsetFlip
@@ -271,6 +272,7 @@ collect:
         # AspectRatio
         - ratio
         # ButtonSet
+        - fluid
         - stacked
         # ChatButton
         - isQuickAction
@@ -463,6 +465,7 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - onStepperBlur
         - stepStartValue
         - validate
         # OrderedList
@@ -528,7 +531,6 @@ collect:
         - textSize
         # SideNav
         - addMouseListeners
-        - inert
         - isChildOfHeader
         - isFixedNav
         - isPersistent

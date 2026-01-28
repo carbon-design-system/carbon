@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ElementType, ForwardedRef, Ref, ComponentProps } from 'react';
+import React, {
+  forwardRef,
+  type ComponentProps,
+  type ElementType,
+  type Ref,
+} from 'react';
 import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
@@ -41,8 +46,8 @@ export type SideNavMenuItemProps = ComponentProps<typeof Link> & {
   as?: ElementType;
 };
 
-const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
-  (props, ref: ForwardedRef<HTMLElement>) => {
+const SideNavMenuItem = forwardRef<HTMLElement, SideNavMenuItemProps>(
+  (props, ref) => {
     const prefix = usePrefix();
     const {
       children,

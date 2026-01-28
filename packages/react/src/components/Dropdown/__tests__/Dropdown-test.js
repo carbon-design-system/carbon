@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -331,6 +331,32 @@ describe('Dropdown', () => {
     assertMenuClosed();
   });
 
+  it('should preserve selectedItem when menu is closed programmatically', async () => {
+    render(
+      <Dropdown {...mockProps} initialSelectedItem={mockProps.items[2]} />
+    );
+
+    await waitForPosition();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+
+    await openMenu();
+    assertMenuOpen(mockProps);
+
+    const button = screen.getByRole('combobox');
+    fireEvent.keyDown(button, { key: 'ArrowDown' });
+
+    act(() => {
+      fireEvent.blur(button);
+    });
+
+    await waitForPosition();
+    assertMenuClosed();
+
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
@@ -408,6 +434,32 @@ describe('Dropdown', () => {
     render(<Dropdown {...mockProps} readOnly={true} />);
     await waitForPosition();
     assertMenuClosed();
+  });
+
+  it('should render custom item components when items are strings', async () => {
+    const items = ['mario', 'luigi'];
+
+    const itemToElement = jest.fn((item) => (
+      <span data-testid={`${item}-item`}>{item}</span>
+    ));
+
+    render(
+      <Dropdown
+        {...mockProps}
+        items={items}
+        itemToString={(item) => item ?? ''}
+        itemToElement={itemToElement}
+      />
+    );
+
+    await openMenu();
+
+    expect(itemToElement).toHaveBeenCalledTimes(items.length);
+    expect(itemToElement).toHaveBeenCalledWith('mario');
+    expect(itemToElement).toHaveBeenCalledWith('luigi');
+
+    expect(screen.getByTestId('mario-item')).toBeInTheDocument();
+    expect(screen.getByTestId('luigi-item')).toBeInTheDocument();
   });
 });
 
@@ -606,8 +658,8 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_25_-toggle-button',
-      id: 'downshift-_r_25_-label',
+      for: 'downshift-_r_29_-toggle-button',
+      id: 'downshift-_r_29_-label',
     });
   });
 
@@ -622,7 +674,7 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_27_-label',
+      id: 'downshift-_r_2b_-label',
     });
   });
 });

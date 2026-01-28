@@ -93,8 +93,8 @@ function FileUploaderItem({
   const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { current: id } = useRef(uuid || useId());
+  const generatedId = useId();
+  const { current: id } = useRef(uuid || generatedId);
   const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
@@ -108,10 +108,14 @@ function FileUploaderItem({
     return name?.replace(/\s+/g, '');
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  const isEllipsisActive = (element: any) => {
-    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
-    return element.offsetWidth < element.scrollWidth;
+  const isEllipsisActive = (element: HTMLElement | null) => {
+    if (!element) {
+      setIsEllipsisApplied(false);
+      return false;
+    }
+    const isActive = element.offsetWidth < element.scrollWidth;
+    setIsEllipsisApplied(isActive);
+    return isActive;
   };
 
   useLayoutEffect(() => {

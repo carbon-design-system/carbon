@@ -14,11 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export type FluidFormProps = HTMLAttributes<HTMLFormElement>;
 
-const FluidForm: React.FC<FluidFormProps> = ({
-  className,
-  children,
-  ...other
-}: FluidFormProps) => {
+const FluidForm = ({ className, children, ...other }: FluidFormProps) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--form--fluid`, className);
 
