@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,14 +7,14 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  useCallback,
   useContext,
   useEffect,
-  useRef,
   useImperativeHandle,
-  useCallback,
+  useRef,
   useState,
-  ForwardedRef,
-  ReactNode,
+  type ReactNode,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -354,8 +354,9 @@ export interface DatePickerProps {
   prevMonthAriaLabel?: string;
 }
 
-const DatePicker = React.forwardRef(function DatePicker(
-  {
+// eslint-disable-next-line react/display-name
+const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
+  const {
     allowInput,
     appendTo,
     children,
@@ -384,9 +385,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     nextMonthAriaLabel = 'Next month',
     prevMonthAriaLabel = 'Previous month',
     ...rest
-  }: DatePickerProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
@@ -431,7 +431,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     [onClose]
   );
-  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
+
   const onCalendarClose = (selectedDates, dateStr, instance, e) => {
     if (e && e.type === 'clickOutside') {
       return;
@@ -453,6 +453,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const savedOnOpen = useSavedCallback(onOpen);
 
   const effectiveWarn = warn && !invalid;
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -645,6 +646,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
           lastStartValue,
+          container: wrapperRef.current,
         }) as unknown as Plugin,
       ],
       clickOpens: !readOnly,
@@ -926,36 +928,6 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [value, startInputField]);
 
   useEffect(() => {
-    const handleMouseDown = (event) => {
-      if (
-        calendarRef.current &&
-        calendarRef.current.isOpen &&
-        !calendarRef.current.calendarContainer.contains(event.target) &&
-        !startInputField.current.contains(event.target) &&
-        !endInputField.current?.contains(event.target)
-      ) {
-        // Close the calendar immediately on mousedown
-        closeCalendar();
-      }
-    };
-    const closeCalendar = () => {
-      calendarRef.current?.close();
-      // Remove focus from endDate calendar input
-      onCalendarClose(
-        calendarRef.current?.selectedDates,
-        '',
-        calendarRef.current,
-        { type: 'clickOutside' }
-      );
-    };
-    document.addEventListener('mousedown', handleMouseDown, true);
-
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown, true);
-    };
-  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
-
-  useEffect(() => {
     if (calendarRef.current?.set) {
       if (value !== undefined) {
         // To make up for calendarRef.current.setDate not making provision for an empty string or array
@@ -1007,7 +979,9 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
-      <div className={datePickerClasses}>{childrenWithProps}</div>
+      <div className={datePickerClasses} ref={wrapperRef}>
+        {childrenWithProps}
+      </div>
       {fluidError}
     </div>
   );
