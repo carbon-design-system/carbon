@@ -320,11 +320,7 @@ const TextArea = frFn((props, forwardRef) => {
             setTimeout(() => {
               setTextCount(0);
             }, 0);
-
-            return;
-          }
-
-          if (
+          } else if (
             enableCounter &&
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null

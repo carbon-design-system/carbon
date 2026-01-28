@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { type HTMLAttributes } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
@@ -121,7 +121,10 @@ export interface ControlledPasswordInputProps
   type?: string;
 }
 
-const ControlledPasswordInput = React.forwardRef(
+const ControlledPasswordInput = forwardRef<
+  unknown,
+  ControlledPasswordInputProps
+>(
   (
     {
       labelText,
@@ -146,7 +149,7 @@ const ControlledPasswordInput = React.forwardRef(
       showPasswordLabel = 'Show password',
       size = undefined,
       ...other
-    }: ControlledPasswordInputProps,
+    },
     ref
   ) => {
     const prefix = usePrefix();

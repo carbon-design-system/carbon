@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,11 +9,11 @@ import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ForwardedRef,
-  ReactNode,
-  Ref,
+  forwardRef,
   useContext,
   useState,
+  type ReactNode,
+  type Ref,
 } from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
@@ -67,7 +67,7 @@ export interface SideNavMenuProps {
   title: string;
 }
 
-const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
+const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
   (
     {
       className: customClassName,
@@ -80,7 +80,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       tabIndex,
       title,
     },
-    ref: ForwardedRef<HTMLElement>
+    ref
   ) => {
     const { isRail } = useContext(SideNavContext);
     const prefix = usePrefix();
