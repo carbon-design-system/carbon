@@ -307,31 +307,6 @@ export const WithInitialSelectedItems = (args) => {
 
 WithInitialSelectedItems.args = { ...sharedArgs };
 
-const MultiSelectItem = ({ text, type }) => (
-  <div
-    style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      width: '100%',
-    }}>
-    <span
-      style={{
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      }}
-      title={text}>
-      {text}
-    </span>
-    {type === 'advanced' && (
-      <span style={{ marginLeft: 8, fontSize: 12, color: '#525252' }}>
-        Advanced
-      </span>
-    )}
-  </div>
-);
-
 export const Filterable = (args) => {
   const items = [
     {
@@ -359,20 +334,7 @@ export const Filterable = (args) => {
       id: 'downshift-1-item-5',
       text: 'Option 5',
     },
-    {
-      id: '5',
-      text: 'An example option that is really long to show ellipsis',
-      type: 'advanced',
-    },
   ];
-
-  const loadMoreItem = {
-    id: 'load-more',
-    text: 'Load More…',
-    label: 'Load More…',
-    disabled: true,
-    onClick: () => console.log('Load more clicked'),
-  };
 
   return (
     <div
@@ -383,7 +345,74 @@ export const Filterable = (args) => {
         id="carbon-multiselect-example-3"
         titleText="FilterableMultiSelect title"
         helperText="This is helper text"
-        items={[...items, loadMoreItem]}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+const MultiSelectItem = ({ text, type }) => (
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+    }}>
+    <span
+      style={{
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}
+      title={text}>
+      {text}
+    </span>
+    {type === 'advanced' && (
+      <span style={{ marginLeft: 8, fontSize: 12, color: '#525252' }}>
+        Advanced
+      </span>
+    )}
+  </div>
+);
+
+export const FilterableWithItemToElement = (args) => {
+  const items = [
+    {
+      id: '1',
+      text: 'Option 1',
+    },
+    {
+      id: '2',
+      text: 'Option 2',
+    },
+    {
+      id: '3',
+      text: 'An example option that is really long to show ellipsis',
+      type: 'advanced',
+    },
+    {
+      id: 'load-more',
+      text: 'Load More…',
+      label: 'Load More…',
+      disabled: true,
+      onClick: () => console.log('Load more clicked'),
+    },
+  ];
+
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-itemtoelement"
+        titleText="FilterableMultiSelect with itemToElement"
+        helperText="This demonstrates custom item rendering with itemToElement"
+        items={items}
         itemToString={(item) => (item ? item.text || item.label : '')}
         itemToElement={(item) => {
           if (item?.id === 'load-more') {
