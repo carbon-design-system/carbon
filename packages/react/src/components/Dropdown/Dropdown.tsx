@@ -264,6 +264,7 @@ function stateReducer(state, actionAndChanges) {
 
   switch (type) {
     case ItemMouseMove:
+      return state;
     case MenuMouseLeave:
       if (changes.highlightedIndex === state.highlightedIndex) {
         // Prevent state update if highlightedIndex hasn't changed
