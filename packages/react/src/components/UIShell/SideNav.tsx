@@ -8,6 +8,7 @@ import React, {
   createContext,
   forwardRef,
   isValidElement,
+  useEffect,
   useRef,
   type ComponentProps,
   type FocusEvent,
@@ -48,7 +49,6 @@ export interface SideNavProps {
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
   onSideNavBlur?: () => void;
   enterDelayMs?: number;
-  inert?: boolean;
 }
 
 interface SideNavContextData {
@@ -91,7 +91,7 @@ const SideNav = frFn((props, ref) => {
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-  const sideNavRef = useRef<HTMLDivElement>(null);
+  const sideNavRef = useRef<HTMLElement>(null);
   const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
@@ -230,6 +230,19 @@ const SideNav = frFn((props, ref) => {
 
   const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
   const isLg = useMatchMedia(lgMediaQuery);
+  const inertEnabled = !isRail ? !(expanded || isLg) : false;
+
+  useEffect(() => {
+    const node = sideNavRef.current;
+
+    if (!node) return;
+
+    if (inertEnabled) {
+      node.setAttribute('inert', '');
+    } else {
+      node.removeAttribute('inert');
+    }
+  }, [inertEnabled]);
 
   return (
     <SideNavContext.Provider value={{ isRail }}>
@@ -241,7 +254,6 @@ const SideNav = frFn((props, ref) => {
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail ? !(expanded || isLg) : undefined}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
