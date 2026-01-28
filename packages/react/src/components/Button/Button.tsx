@@ -66,7 +66,7 @@ export interface ButtonBaseProps
   isExpressive?: boolean;
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected?: boolean;
 
@@ -267,7 +267,7 @@ Button.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription: PropTypes.string,
 

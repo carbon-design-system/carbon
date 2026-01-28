@@ -49,6 +49,7 @@ const ButtonSkeleton = ({
     [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--2xl`]: size === '2xl',
+    [`${prefix}--layout--size-${size}`]: size,
   });
 
   const commonProps = {
