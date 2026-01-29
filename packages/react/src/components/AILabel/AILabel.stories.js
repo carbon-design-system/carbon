@@ -23,8 +23,72 @@ export default {
     },
   },
 };
+const sharedArgTypes = {
+  aiText: {
+    control: {
+      type: 'text',
+    },
+  },
+  aiTextLabel: {
+    table: { disable: true },
+  },
+  'aria-label': {
+    control: {
+      type: 'text',
+    },
+  },
+  kind: {
+    options: ['default', 'inline'],
+    control: { type: 'select' },
+  },
+  revertActive: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  revertLabel: {
+    control: {
+      type: 'text',
+    },
+  },
+  size: {
+    options: ['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'],
+    control: { type: 'select' },
+  },
+  slugLabel: {
+    table: { disable: true },
+  },
+  textLabel: {
+    control: {
+      type: 'text',
+    },
+  },
+  defaultOpen: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
-export const Default = () => {
+const sharedArgs = {
+  aiText: 'AI',
+  ['aria-label']: 'Show information',
+  kind: 'default',
+  revertActive: false,
+  revertLabel: 'Revert to AI input',
+  defaultOpen: false,
+};
+
+export const Default = (args) => {
+  const {
+    aiText,
+    'aria-label': ariaLabel,
+    kind,
+    revertActive,
+    revertLabel,
+    size,
+    textLabel,
+  } = args;
   const aiContent = (
     <div>
       <p className="secondary">AI Explained</p>
@@ -43,13 +107,37 @@ export const Default = () => {
   return (
     <>
       <div className="ai-label-container ai-label-container-example">
-        <AILabel autoAlign size="mini">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          autoAlign
+          size={size || 'mini'}
+          textLabel={textLabel}>
           <AILabelContent>{aiContent}</AILabelContent>
         </AILabel>
-        <AILabel autoAlign size="2xs">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          autoAlign
+          size={size || '2xs'}
+          textLabel={textLabel}>
           <AILabelContent>{aiContent}</AILabelContent>
         </AILabel>
-        <AILabel autoAlign size="xs">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          size={size || 'xs'}
+          textLabel={textLabel}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -66,7 +154,15 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign size="sm">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          autoAlign
+          size={size || 'sm'}
+          textLabel={textLabel}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -83,7 +179,15 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign size="md">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          size={size || 'md'}
+          textLabel={textLabel}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -100,7 +204,15 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign size="lg">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          autoAlign
+          size={size || 'lg'}
+          textLabel={textLabel}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -117,7 +229,15 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign size="xl">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          autoAlign
+          size={size || 'xl'}
+          textLabel={textLabel}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -136,7 +256,12 @@ export const Default = () => {
         </AILabel>
       </div>
       <div className="ai-label-container ai-label-container-example">
-        <AILabel autoAlign kind="inline" size="sm">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind="inline"
+          size="sm">
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -153,7 +278,12 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign kind="inline" size="md">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind="inline"
+          size="md">
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -170,7 +300,12 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign kind="inline" size="lg">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind="inline"
+          size="lg">
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -189,7 +324,13 @@ export const Default = () => {
         </AILabel>
       </div>
       <div className="ai-label-container ai-label-container-example">
-        <AILabel autoAlign kind="inline" size="sm" textLabel="Text goes here">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind="inline"
+          size="sm"
+          textLabel="Text goes here">
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -206,7 +347,13 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign kind="inline" size="md" textLabel="Text goes here">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind="inline"
+          size="md"
+          textLabel="Text goes here">
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -223,7 +370,13 @@ export const Default = () => {
             </AILabelActions>
           </AILabelContent>
         </AILabel>
-        <AILabel autoAlign kind="inline" size="lg" textLabel="Text goes here">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          autoAlign
+          kind="inline"
+          size="lg"
+          textLabel="Text goes here">
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -244,6 +397,8 @@ export const Default = () => {
     </>
   );
 };
+Default.args = { ...sharedArgs };
+Default.argTypes = { ...sharedArgTypes };
 
 export const ExplainabilityPopover = (args) => {
   const { showAILabelActions = true } = args;
