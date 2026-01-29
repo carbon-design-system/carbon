@@ -512,8 +512,6 @@ class CDSDropdown extends ValidityMixin(
       this._clearHighlight();
       return;
     }
-
-    this._setHighlightedItem(item);
   }
 
   protected _handleMouseleaveInner(event: MouseEvent) {
