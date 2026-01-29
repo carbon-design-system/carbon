@@ -306,6 +306,7 @@ export const WithInitialSelectedItems = (args) => {
 };
 
 WithInitialSelectedItems.args = { ...sharedArgs };
+
 export const Filterable = (args) => {
   const items = [
     {
@@ -334,6 +335,7 @@ export const Filterable = (args) => {
       text: 'Option 5',
     },
   ];
+
   return (
     <div
       style={{
