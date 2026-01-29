@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -326,8 +326,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
       ref={itemRef}
       onClick={(event) => {
         setSelectedRow?.(rowId);
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        onClick && onClick(event);
+        onClick?.(event);
         if (selection) {
           // focus items only when selection is enabled
           setHasFocusWithin(true);
@@ -460,8 +459,7 @@ export function StructuredListInput(props: StructuredListInputProps) {
       value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow?.(event.target.value);
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        onChange && onChange(event);
+        onChange?.(event);
       }}
       id={id ?? defaultId}
       className={classes}
