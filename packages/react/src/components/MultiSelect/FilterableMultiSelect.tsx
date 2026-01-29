@@ -574,7 +574,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       [`${prefix}--autoalign`]: autoAlign,
     }
   );
-  const helperId = !helperText
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const helperId = !hasHelper
     ? undefined
     : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
   const labelId = `${id}-label`;
@@ -592,11 +593,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     [`${prefix}--text-input--empty`]: !inputValue,
     [`${prefix}--text-input--light`]: light,
   });
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <div id={helperId} className={helperClasses}>
       {helperText}
     </div>
-  ) : null;
+  );
   const menuId = `${id}__menu`;
   const inputId = `${id}-input`;
 
