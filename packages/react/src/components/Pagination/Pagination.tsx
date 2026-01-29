@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -181,8 +181,7 @@ const Pagination = React.forwardRef(
       itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
       itemsPerPageText = 'Items per page:',
       onChange,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      pageNumberText: _pageNumberText = 'Page Number',
+      pageNumberText: _pageNumberText,
       pageRangeText = (_current, total) =>
         `of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,

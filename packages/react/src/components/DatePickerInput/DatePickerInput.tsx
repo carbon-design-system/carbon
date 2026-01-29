@@ -386,8 +386,7 @@ DatePickerInput.propTypes = {
     }
     try {
       new RegExp(props[propName]);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    } catch (e) {
+    } catch {
       return new Error(
         `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`
       );

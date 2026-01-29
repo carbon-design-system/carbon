@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,6 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings, useGridSettings } from './GridContext';
 import { GridComponent, GridBaseProps } from './GridTypes';
-import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const CSSGrid = React.forwardRef<
@@ -137,9 +136,6 @@ interface SubgridBaseProps {
   mode?: SubgridMode;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-type SubgridProps<T extends React.ElementType = 'div'> =
-  PolymorphicComponentPropWithRef<T, SubgridBaseProps>;
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Subgrid = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452

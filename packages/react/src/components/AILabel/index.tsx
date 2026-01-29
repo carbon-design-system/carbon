@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,10 +29,10 @@ import type {
 
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-export const AILabelContent = React.forwardRef(function AILabelContent(
-  { className, children }: AILabelContentProps,
-  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-) {
+export const AILabelContent = ({
+  className,
+  children,
+}: AILabelContentProps) => {
   const prefix = usePrefix();
 
   const hasAILabelActions = React.Children.toArray(children).some((child) => {
@@ -57,7 +57,7 @@ export const AILabelContent = React.forwardRef(function AILabelContent(
       {children}
     </ToggletipContent>
   );
-});
+};
 
 AILabelContent.displayName = 'AILabelContent';
 AILabelContent.propTypes = {
@@ -74,10 +74,10 @@ AILabelContent.propTypes = {
 
 export type AILabelActionsProps = React.HTMLAttributes<HTMLSpanElement>;
 
-export const AILabelActions = React.forwardRef(function AILabelActions(
-  { className, children }: AILabelActionsProps,
-  ref // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-) {
+export const AILabelActions = ({
+  className,
+  children,
+}: AILabelActionsProps) => {
   const prefix = usePrefix();
 
   const aiLabelActionsClasses = cx(className, {
@@ -89,7 +89,7 @@ export const AILabelActions = React.forwardRef(function AILabelActions(
       {children}
     </ToggletipActions>
   );
-});
+};
 
 AILabelActions.displayName = 'AILabelActions';
 AILabelActions.propTypes = {
