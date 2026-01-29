@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/web-components/es/components/password-input/index.js';
+import '@carbon/web-components/es/components/fluid-password-input/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
-describe('cds-password-input', () => {
+describe('cds-fluid-password-input', () => {
   const defaultInput = html`
-    <cds-password-input
+    <cds-fluid-password-input
       label="Password input label"
       placeholder="Placeholder text"
       helper-text="Helper text">
-    </cds-password-input>
+    </cds-fluid-password-input>
   `;
 
   it('should render', async () => {
@@ -25,7 +25,8 @@ describe('cds-password-input', () => {
 
   it('should support a custom class', async () => {
     const el = await fixture(
-      html`<cds-password-input class="test-class"></cds-password-input>`
+      html`<cds-fluid-password-input
+        class="test-class"></cds-fluid-password-input>`
     );
     expect(el.classList.contains('test-class')).to.be.true;
   });
@@ -40,7 +41,7 @@ describe('cds-password-input', () => {
 
   it('should reflect value attribute to input', async () => {
     const el = await fixture(html`
-      <cds-password-input value="test123"> </cds-password-input>
+      <cds-fluid-password-input value="test123"> </cds-fluid-password-input>
     `);
     const input = el.shadowRoot.querySelector('input');
     expect(input.value).to.equal('test123');
@@ -48,25 +49,17 @@ describe('cds-password-input', () => {
 
   it('should apply disabled attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input disabled></cds-password-input>
+      <cds-fluid-password-input disabled></cds-fluid-password-input>
     `);
     const input = el.shadowRoot.querySelector('input');
     expect(input.disabled).to.be.true;
   });
 
-  it('should render helper text', async () => {
-    const el = await fixture(html`
-      <cds-password-input helper-text="Helper text"></cds-password-input>
-    `);
-    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
-    expect(helper.textContent).to.include('Helper text');
-  });
-
   it('should apply hide-label attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input
+      <cds-fluid-password-input
         label="Password input label"
-        hide-label></cds-password-input>
+        hide-label></cds-fluid-password-input>
     `);
     const label = el.shadowRoot.querySelector('label');
     const classList = label?.classList || [];
@@ -75,20 +68,10 @@ describe('cds-password-input', () => {
     ).to.be.true;
   });
 
-  it('should render divider when isFluid is true', async () => {
-    const el = await fixture(html`
-      <cds-password-input isFluid="true" label="Password"></cds-password-input>
-    `);
-
-    const divider = el.shadowRoot.querySelector('.cds--text-input__divider');
-    expect(divider).to.exist;
-    expect(divider.tagName.toLowerCase()).to.equal('hr');
-  });
-
   it('should apply hide-password-label attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input
-        hide-password-label="Hide Password"></cds-password-input>
+      <cds-fluid-password-input
+        hide-password-label="Hide Password"></cds-fluid-password-input>
     `);
 
     const btn = el.shadowRoot.querySelector('button');
@@ -103,8 +86,8 @@ describe('cds-password-input', () => {
 
   it('should apply show-password-label attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input
-        show-password-label="Show Password"></cds-password-input>
+      <cds-fluid-password-input
+        show-password-label="Show Password"></cds-fluid-password-input>
     `);
 
     const tooltipContent = el.shadowRoot.querySelector(
@@ -115,7 +98,7 @@ describe('cds-password-input', () => {
 
   it('should apply inline attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input inline></cds-password-input>
+      <cds-fluid-password-input inline></cds-fluid-password-input>
     `);
     const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
     const classList = wrapper?.classList || [];
@@ -128,30 +111,18 @@ describe('cds-password-input', () => {
 
   it('should apply invalid attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input
+      <cds-fluid-password-input
         invalid
-        invalid-text="This is invalid text"></cds-password-input>
+        invalid-text="This is invalid text"></cds-fluid-password-input>
     `);
 
     const error = el.shadowRoot.querySelector('.cds--form-requirement');
     expect(error.textContent).to.include('This is invalid text');
   });
 
-  it('should apply size attribute', async () => {
-    const el = await fixture(html`
-      <cds-password-input size="sm"></cds-password-input>
-    `);
-    expect(el.getAttribute('size')).to.equal('sm');
-    const input = el.shadowRoot.querySelector('input');
-    const classList = input?.classList || [];
-    expect(
-      Array.from(classList).some((cls) => cls.includes('--text-input--sm'))
-    ).to.be.true;
-  });
-
   it('should apply type attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input type="text"></cds-password-input>
+      <cds-fluid-password-input type="text"></cds-fluid-password-input>
     `);
 
     expect(el.getAttribute('type')).to.equal('text');
@@ -159,9 +130,9 @@ describe('cds-password-input', () => {
 
   it('should apply warn attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input
+      <cds-fluid-password-input
         warn
-        warn-text="This is warning text"></cds-password-input>
+        warn-text="This is warning text"></cds-fluid-password-input>
     `);
 
     const warning = el.shadowRoot.querySelector('.cds--form-requirement');
@@ -169,7 +140,9 @@ describe('cds-password-input', () => {
   });
 
   it('should call onTogglePasswordVisibility when visibility button is clicked', async () => {
-    const el = await fixture(html` <cds-password-input></cds-password-input> `);
+    const el = await fixture(html`
+      <cds-fluid-password-input></cds-fluid-password-input>
+    `);
 
     const tooltip = el.shadowRoot.querySelector('cds-tooltip-content#content');
     expect(tooltip.textContent.trim()).to.equal('Show password');
@@ -183,45 +156,35 @@ describe('cds-password-input', () => {
 
   it('should apply readonly attribute', async () => {
     const el = await fixture(html`
-      <cds-password-input readonly></cds-password-input>
+      <cds-fluid-password-input readonly></cds-fluid-password-input>
     `);
     const input = el.shadowRoot.querySelector('input');
     expect(input.readOnly).to.be.true;
   });
 
-  it('should not disable hide/show password toggle button when readonly is true', async () => {
+  it('should disable hide/show password toggle button when readonly is true', async () => {
     const el = await fixture(html`
-      <cds-password-input readonly></cds-password-input>
+      <cds-fluid-password-input readonly></cds-fluid-password-input>
     `);
     await el.updateComplete;
 
     const toggleButton = el.shadowRoot.querySelector('button[type="button"]');
-    expect(toggleButton.disabled).to.be.false;
+    expect(toggleButton.disabled).to.be.true;
   });
 
-  it('should allow toggling password visibility when readonly is true', async () => {
+  it('should render divider when isFluid is true', async () => {
     const el = await fixture(html`
-      <cds-password-input
-        hide-password-label="Hide Password"
-        show-password-label="Show Password"></cds-password-input>
+      <cds-fluid-password-input label="Password"></cds-fluid-password-input>
     `);
-    const btn = el.shadowRoot.querySelector('button');
-    const tooltipContent = el.shadowRoot.querySelector(
-      'cds-tooltip-content#content'
-    );
 
-    btn.click();
-    await el.updateComplete;
-    expect(tooltipContent.textContent.trim()).to.equal('Hide Password');
-
-    btn.click();
-    await el.updateComplete;
-    expect(tooltipContent.textContent.trim()).to.equal('Show Password');
+    const divider = el.shadowRoot.querySelector('.cds--text-input__divider');
+    expect(divider).to.exist;
+    expect(divider.tagName.toLowerCase()).to.equal('hr');
   });
 
   it('should not allow input change when readOnly is true', async () => {
     const el = await fixture(html`
-      <cds-password-input readonly></cds-password-input>
+      <cds-fluid-password-input readonly></cds-fluid-password-input>
     `);
     await el.updateComplete;
 
