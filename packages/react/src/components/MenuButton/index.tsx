@@ -22,6 +22,7 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { useOutsideClick } from '../../internal/useOutsideClick';
 import {
   useFloating,
   flip,
@@ -174,6 +175,16 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       handleMousedown,
       handleClose,
     } = useAttachedMenu(triggerRef);
+
+    useOutsideClick(triggerRef, ({ target }) => {
+      if (
+        open &&
+        (!refs.floating.current ||
+          (target instanceof Node && !refs.floating.current.contains(target)))
+      ) {
+        handleClose();
+      }
+    });
 
     useLayoutEffect(() => {
       Object.keys(floatingStyles).forEach((style) => {
