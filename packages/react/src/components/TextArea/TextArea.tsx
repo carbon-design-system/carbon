@@ -30,7 +30,7 @@ import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
-  extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<textarea>` node
@@ -320,11 +320,7 @@ const TextArea = frFn((props, forwardRef) => {
             setTimeout(() => {
               setTextCount(0);
             }, 0);
-
-            return;
-          }
-
-          if (
+          } else if (
             enableCounter &&
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null

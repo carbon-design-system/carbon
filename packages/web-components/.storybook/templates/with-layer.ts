@@ -23,6 +23,9 @@ import styles from './with-layer.scss?lit';
 class CDSLayer extends LitElement {
   @property()
   content;
+  private _observer: MutationObserver | null = null;
+  private _layer1: HTMLElement | null = null;
+  private _layer2: HTMLElement | null = null;
 
   private _handleSlotChange({ target }: Event) {
     if (!this.content) {
@@ -38,14 +41,43 @@ class CDSLayer extends LitElement {
   }
 
   updated() {
-    if (this.content) {
-      const layer1 = this.content.cloneNode(true) as HTMLElement;
-      const layer2 = this.content.cloneNode(true) as HTMLElement;
-      layer1.setAttribute('slot', 'layer-1');
-      layer2.setAttribute('slot', 'layer-2');
-      this.appendChild(layer1);
-      this.appendChild(layer2);
+    if (this.content && !this._layer1) {
+      // Initial clone
+      this._layer1 = this.content.cloneNode(true) as HTMLElement;
+      this._layer2 = this.content.cloneNode(true) as HTMLElement;
+      this._layer1.setAttribute('slot', 'layer-1');
+      this._layer2.setAttribute('slot', 'layer-2');
+      this.appendChild(this._layer1);
+      this.appendChild(this._layer2);
+
+      // Watch for attribute changes on original
+      this._observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes') {
+            const attrName = mutation.attributeName!;
+            const newValue = this.content.getAttribute(attrName);
+
+            if (newValue !== null) {
+              this._layer1?.setAttribute(attrName, newValue);
+              this._layer2?.setAttribute(attrName, newValue);
+            } else {
+              this._layer1?.removeAttribute(attrName);
+              this._layer2?.removeAttribute(attrName);
+            }
+          }
+        });
+      });
+
+      this._observer.observe(this.content, {
+        attributes: true,
+        attributeOldValue: true,
+      });
     }
+  }
+
+  disconnectedCallback() {
+    this._observer?.disconnect();
+    super.disconnectedCallback();
   }
 
   render() {

@@ -155,14 +155,32 @@ class CDSHeaderGlobalAction extends CDSButton {
     }
   }
 
-  updated() {
+  updated(changedProperties) {
     if (this._buttonNode) {
       this._buttonNode.classList.add(`${prefix}--header__action`);
+
+      if (changedProperties.has('active') || changedProperties.size === 0) {
+        if (this.active) {
+          this._buttonNode.classList.add(`${prefix}--header__action--active`);
+
+          if (this.buttonLabelActive) {
+            this.tooltipText = this.buttonLabelActive;
+          }
+        } else {
+          this._buttonNode.classList.remove(
+            `${prefix}--header__action--active`
+          );
+
+          if (this.buttonLabelInactive) {
+            this.tooltipText = this.buttonLabelInactive;
+          }
+        }
+      }
     }
   }
 
   shouldUpdate(changedProperties) {
-    if (changedProperties.has('active')) {
+    if (changedProperties.has('active') && this._buttonNode) {
       if (this.active) {
         this._buttonNode.classList.add(`${prefix}--header__action--active`);
 

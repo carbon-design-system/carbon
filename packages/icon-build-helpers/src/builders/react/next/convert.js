@@ -8,7 +8,7 @@
 'use strict';
 
 const t = require('@babel/types');
-const { camelCase } = require('change-case');
+const { camelCase } = require('change-case-all');
 
 function jsToAST(value) {
   if (typeof value === 'string') {
