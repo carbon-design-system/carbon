@@ -135,7 +135,7 @@ class CDSCheckboxGroup extends LitElement {
     if (changedProperties.has('invalid')) {
       const { invalid } = this;
       checkboxes.forEach((elem) => {
-        if (invalid) {
+        if (invalid && !this.disabled) {
           (elem as CDSCheckbox).setAttribute('invalid-group', '');
         } else {
           (elem as CDSCheckbox).removeAttribute('invalid-group');
@@ -161,7 +161,7 @@ class CDSCheckboxGroup extends LitElement {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const showWarning = !readonly && !invalid && warn;
+    const showWarning = !readonly && !disabled && !invalid && warn;
     const showHelper = !invalid && !warn;
 
     const checkboxGroupInstanceId = Math.random().toString(16).slice(2);
@@ -179,7 +179,7 @@ class CDSCheckboxGroup extends LitElement {
     const fieldsetClasses = classMap({
       [`${prefix}--checkbox-group`]: true,
       [`${prefix}--checkbox-group--readonly`]: readonly,
-      [`${prefix}--checkbox-group--invalid`]: !readonly && invalid,
+      [`${prefix}--checkbox-group--invalid`]: !readonly && !disabled && invalid,
       [`${prefix}--checkbox-group--warning`]: showWarning,
       [`${prefix}--checkbox-group--slug`]: hasAILabel,
       [`${prefix}--checkbox-group--${orientation}`]:
@@ -189,9 +189,9 @@ class CDSCheckboxGroup extends LitElement {
     return html`
       <fieldset
         class="${fieldsetClasses}"
-        ?data-invalid=${invalid}
+        ?data-invalid=${invalid && !disabled}
         ?disabled=${disabled}
-        aria-disabled=${readonly}
+        aria-disabled=${readonly || disabled}
         ?aria-labelledby=${ariaLabelledBy || legendId}
         ?aria-describedby=${!invalid && !warn && helper ? helperId : undefined}
         orientation=${orientation}>
@@ -203,7 +203,7 @@ class CDSCheckboxGroup extends LitElement {
         </legend>
         <slot></slot>
         <div class="${prefix}--checkbox-group__validation-msg">
-          ${!readonly && invalid
+          ${!readonly && !disabled && invalid
             ? html`
                 ${iconLoader(WarningFilled16, {
                   class: `${prefix}--checkbox__invalid-icon`,
