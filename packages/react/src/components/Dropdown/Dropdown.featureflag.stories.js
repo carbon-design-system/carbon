@@ -77,6 +77,10 @@ export const FloatingStyles = (args) => {
 
 FloatingStyles.args = {
   direction: 'bottom',
+  invalid: false,
+  invalidText: 'Error message goes here',
+  warn: false,
+  warnText: 'Warning message goes here',
 };
 
 FloatingStyles.argTypes = {

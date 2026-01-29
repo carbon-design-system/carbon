@@ -235,9 +235,13 @@ export const ExperimentalAutoAlign = {
     autoalign: true,
     direction: DROPDOWN_DIRECTION.TOP,
     helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
     titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -458,9 +462,13 @@ export const WithAILabel = {
   args: {
     ...defaultArgs,
     helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
     titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -516,9 +524,13 @@ export const WithLayer = {
   args: {
     ...defaultArgs,
     helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
     titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,

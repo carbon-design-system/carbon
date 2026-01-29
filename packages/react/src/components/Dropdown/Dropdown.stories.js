@@ -261,6 +261,13 @@ ExperimentalAutoAlign.argTypes = {
   ...sharedArgTypes,
 };
 
+ExperimentalAutoAlign.args = {
+  invalid: false,
+  invalidText: 'Error message goes here',
+  warn: false,
+  warnText: 'Warning message goes here',
+};
+
 export const Inline = (args) => {
   const items = [
     {
@@ -333,6 +340,13 @@ export const _WithLayer = (args) => (
 
 _WithLayer.argTypes = {
   ...sharedArgTypes,
+};
+
+_WithLayer.args = {
+  invalid: false,
+  invalidText: 'Error message goes here',
+  warn: false,
+  warnText: 'Warning message goes here',
 };
 
 export const InlineWithLayer = (args) => (
@@ -447,6 +461,13 @@ export const withAILabel = (args) => {
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
+};
+
+withAILabel.args = {
+  invalid: false,
+  invalidText: 'Error message goes here',
+  warn: false,
+  warnText: 'Warning message goes here',
 };
 
 export const withToggletipLabel = () => {
