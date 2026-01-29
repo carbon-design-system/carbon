@@ -30,7 +30,7 @@ import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
-  extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<textarea>` node
