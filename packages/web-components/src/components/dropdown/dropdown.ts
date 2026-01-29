@@ -1135,10 +1135,11 @@ class CDSDropdown extends ValidityMixin(
   }
 
   updated(changedProperties) {
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    this._hasAILabel
-      ? this.setAttribute('ai-label', '')
-      : this.removeAttribute('ai-label');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
+    } else {
+      this.removeAttribute('ai-label');
+    }
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
     if (label) {

@@ -219,10 +219,11 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * Handles `slotchange` event.
    */
   private _handleSlotChange() {
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    this.querySelector(`${prefix}-modal-footer`)
-      ? this.setAttribute('has-footer', '')
-      : this.removeAttribute('has-footer');
+    if (this.querySelector(`${prefix}-modal-footer`)) {
+      this.setAttribute('has-footer', '');
+    } else {
+      this.removeAttribute('has-footer');
+    }
   }
 
   /**
