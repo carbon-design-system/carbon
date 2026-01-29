@@ -38,12 +38,16 @@ class CDSFluidSelect extends CDSSelect {
     }
   };
 
-  private _handleFocusIn = () => {
-    this._hasFocus = true;
+  private _handleFocusIn = (event: FocusEvent) => {
+    if ((event.target as Element | null)?.matches?.('select')) {
+      this._hasFocus = true;
+    }
   };
 
-  private _handleFocusOut = () => {
-    this._hasFocus = false;
+  private _handleFocusOut = (event: FocusEvent) => {
+    if ((event.target as Element | null)?.matches?.('select')) {
+      this._hasFocus = false;
+    }
   };
 
   connectedCallback() {
