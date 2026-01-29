@@ -29,6 +29,22 @@ test.describe('UnorderedList', () => {
           theme,
         });
       });
+
+      test('marker types @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'UnorderedList',
+          id: 'components-unorderedlist--marker-types',
+          theme,
+        });
+      });
+
+      test('nested with marker types @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'UnorderedList',
+          id: 'components-unorderedlist--nested-with-marker-types',
+          theme,
+        });
+      });
     });
   });
 });
