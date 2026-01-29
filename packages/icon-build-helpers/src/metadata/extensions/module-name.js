@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { pascalCase } = require('change-case');
+const { pascalCase } = require('change-case-all');
 
 // Computed property for icons to determine their module name in code
 const moduleName = () => {

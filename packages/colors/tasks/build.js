@@ -9,7 +9,7 @@
 
 const { colors, hoverColors } = require('@carbon/colors');
 const { types: t, generate } = require('@carbon/scss-generator');
-const { paramCase } = require('change-case');
+const { paramCase } = require('change-case-all');
 const fs = require('fs-extra');
 const path = require('path');
 

@@ -12,7 +12,7 @@
   "dependencies": {
     "@carbon/colors": "link:../../",
     "@carbon/styles": "link:../../../styles",
-    "change-case": "^4.1.1",
+    "change-case-all": "^2.1.0",
     "next": "^14.2.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
