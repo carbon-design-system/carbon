@@ -144,11 +144,7 @@ export const Controlled = {
       document
         .querySelectorAll('cds-accordion-item[controlled]')
         .forEach((item) => {
-          if (isOpen) {
-            item.setAttribute('open', '');
-          } else {
-            item.removeAttribute('open');
-          }
+          item.toggleAttribute('open', isOpen);
         });
     };
 

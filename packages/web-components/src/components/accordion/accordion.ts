@@ -54,73 +54,45 @@ class CDSAccordion extends LitElement {
   }
 
   updated(changedProperties) {
+    const items = this.querySelectorAll(
+      (this.constructor as typeof CDSAccordion).selectorAccordionItems
+    );
+
     if (changedProperties.has('size')) {
-      // Propagate `size` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSAccordion).selectorAccordionItems
-        ),
-        (elem) => {
-          elem.setAttribute('size', this.size);
-        }
-      );
+      forEach(items, (elem) => {
+        elem.setAttribute('size', this.size);
+      });
     }
     if (changedProperties.has('alignment')) {
-      // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSAccordion).selectorAccordionItems
-        ),
-        (elem) => {
-          elem.setAttribute('alignment', this.alignment);
-        }
-      );
+      forEach(items, (elem) => {
+        elem.setAttribute('alignment', this.alignment);
+      });
     }
     if (
       changedProperties.has('isFlush') ||
       changedProperties.has('alignment')
     ) {
-      // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSAccordion).selectorAccordionItems
-        ),
-        (elem) => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      forEach(items, (elem) => {
+        elem.toggleAttribute(
+          'isFlush',
           this.isFlush && this.alignment !== 'start'
-            ? elem.setAttribute('isFlush', '')
-            : elem.removeAttribute('isFlush');
-        }
-      );
+        );
+      });
     }
-
     if (changedProperties.has('disabled')) {
-      forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSAccordion).selectorAccordionItems
-        ),
-        (elem) => {
-          if (this.disabled) {
-            elem.setAttribute('disabled', '');
-          } else {
-            elem.removeAttribute('disabled');
-          }
-        }
-      );
+      forEach(items, (elem) => {
+        elem.toggleAttribute('disabled', this.disabled);
+      });
     }
 
     // Marks the last accordion item for styling (simulates :last-child in Shadow DOM)
-    const items = Array.from(
-      this.querySelectorAll(
-        (this.constructor as typeof CDSAccordion).selectorAccordionItems
-      )
-    );
-    items.forEach((item) => item.removeAttribute('data-last-item'));
-
-    const lastVisible = items
+    const itemsArray = Array.from(items);
+    const lastVisible = itemsArray
       .reverse()
       .find((item) => !(item as HTMLElement).hidden);
-    lastVisible?.setAttribute('data-last-item', '');
+    itemsArray.forEach((item) => {
+      item.toggleAttribute('data-last-item', item === lastVisible);
+    });
   }
 
   render() {

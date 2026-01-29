@@ -126,7 +126,6 @@ class CDSCheckboxGroup extends LitElement {
     ['disabled', 'readonly', 'orientation'].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSCheckboxGroup]: value } = this;
-        // Propagate the property to descendants until `:host-context()` gets supported in all major browsers
         checkboxes.forEach((elem) => {
           (elem as CDSCheckbox)[name] = value;
         });
@@ -135,11 +134,7 @@ class CDSCheckboxGroup extends LitElement {
     if (changedProperties.has('invalid')) {
       const { invalid } = this;
       checkboxes.forEach((elem) => {
-        if (invalid) {
-          (elem as CDSCheckbox).setAttribute('invalid-group', '');
-        } else {
-          (elem as CDSCheckbox).removeAttribute('invalid-group');
-        }
+        (elem as CDSCheckbox).toggleAttribute('invalid-group', invalid);
       });
     }
   }

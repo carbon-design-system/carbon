@@ -129,7 +129,8 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @HostListener('mouseover')
   @HostListener('mouseout')
-  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleMouseOverOut(event: MouseEvent) {
     const { selectorExpandedRow, selectorTableCellOverflowMenu } = this
       .constructor as typeof CDSTableRow;
@@ -407,11 +408,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
       }
     }
 
-    if (this._hasAILabel) {
-      this.setAttribute('ai-label', '');
-    } else {
-      this.removeAttribute('ai-label');
-    }
+    this.toggleAttribute('ai-label', this._hasAILabel);
   }
 
   render() {

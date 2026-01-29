@@ -49,10 +49,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   private _handleSlotChange({ target }: Event) {
     const { name } = target as HTMLSlotElement;
-    const hasContent = (target as HTMLSlotElement).assignedNodes().some(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-    );
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .some(
+        (node) =>
+          node.nodeType !== Node.TEXT_NODE || Boolean(node.textContent?.trim())
+      );
     this[name === 'icon' ? '_hasIcon' : 'hasMainContent'] = hasContent;
     this.requestUpdate();
   }
@@ -92,7 +94,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   /**
-   * Handles `keydown` event on this element.
+   * Handles `mouseout` event on this element.
    */
   @HostListener('mouseout')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -102,8 +104,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   /**
-   * Handles `keydown` event on this element.
-   * Space & enter will toggle state, Escape will only close.
+   * Handles `focus` event on this element.
    */
   @HostListener('focus')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -113,8 +114,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   /**
-   * Handles `keydown` event on this element.
-   * Space & enter will toggle state, Escape will only close.
+   * Handles `focusout` event on this element.
    */
   @HostListener('focusout')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452

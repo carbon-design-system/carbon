@@ -212,10 +212,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
 
   updated() {
     const { _hasAILabel: hasAILabel } = this;
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    hasAILabel
-      ? this.setAttribute('ai-label', '')
-      : this.removeAttribute('ai-label');
+    this.toggleAttribute('ai-label', hasAILabel);
   }
   connectedCallback() {
     super.connectedCallback();
