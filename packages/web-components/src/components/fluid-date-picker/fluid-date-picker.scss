@@ -1,0 +1,27 @@
+/**
+ * Copyright IBM Corp.2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/fluid-date-picker/index';
+@use '@carbon/styles/scss/components/fluid-date-picker' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/components/fluid-date-picker/index' as *;
+
+:host(#{$prefix}-fluid-date-picker) {
+  @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-fluid-date-picker-skeleton) {
+  @extend .#{$prefix}--fluid-date-picker__skeleton;
+
+  display: block;
+}
