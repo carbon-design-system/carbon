@@ -19,6 +19,7 @@ import type { TFunc, TranslateWithId } from '../../types/common';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { clamp } from '../../internal/clamp';
+import { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { PopoverAlignment } from '../Popover';
 
 type TooltipAlignment = 'start' | 'center' | 'end';
@@ -127,8 +128,12 @@ function DirectionButton({
 }: DirectionButtonProps) {
   const prefix = usePrefix();
 
-  const align: PopoverAlignment =
-    tooltipAlignment === 'center'
+  const invalidAlignCombos =
+    (tooltipPosition === 'right' || tooltipPosition === 'left') &&
+    tooltipAlignment !== 'center';
+  const align: PopoverAlignment = invalidAlignCombos
+    ? (tooltipPosition as PopoverAlignment)
+    : tooltipAlignment === 'center'
       ? (tooltipPosition as PopoverAlignment)
       : (`${tooltipPosition}-${tooltipAlignment}` as PopoverAlignment);
 
@@ -371,6 +376,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       tooltipAlignment,
       tooltipPosition,
       translateWithId: t = defaultTranslateWithId,
+      onKeyDown,
       ...rest
     },
     ref
@@ -504,8 +510,29 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     const startOffset = itemsDisplayedOnPage <= 4 && currentPage > 1 ? 0 : 1;
 
+    function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
+      if (loop && e.key === 'Tab') {
+        const active = document.activeElement;
+        if (
+          active instanceof HTMLElement &&
+          (e.currentTarget as HTMLElement).contains(active)
+        ) {
+          wrapFocusWithoutSentinels({
+            containerNode: e.currentTarget as HTMLElement,
+            currentActiveNode: active,
+            event: e,
+          });
+        }
+      }
+      onKeyDown?.(e);
+    }
+
     return (
-      <nav className={classNames} ref={ref} {...rest}>
+      <nav
+        className={classNames}
+        ref={ref}
+        onKeyDown={handleKeyDown}
+        {...rest}>
         <ul className={`${prefix}--pagination-nav__list`}>
           <DirectionButton
             direction="backward"
