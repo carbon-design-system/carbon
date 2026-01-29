@@ -101,6 +101,12 @@ Selectable.argTypes = {
       type: 'select',
     },
   },
+  id: {
+    control: false,
+  },
+  renderIcon: {
+    control: false,
+  },
 };
 
 export const Operational = (args) => {
@@ -287,6 +293,9 @@ Operational.argTypes = {
       type: 'select',
     },
   },
+  renderIcon: {
+    control: false,
+  },
 };
 
 export const Dismissible = (args) => {
@@ -423,5 +432,11 @@ Dismissible.argTypes = {
     table: {
       defaultValue: { summary: 'bottom' },
     },
+  },
+  id: {
+    control: false,
+  },
+  renderIcon: {
+    control: false,
   },
 };

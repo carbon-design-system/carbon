@@ -2,7 +2,7 @@
   "name": "vite",
   "description": "Vite example",
   "private": true,
-  "version": "0.96.0",
+  "version": "0.98.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.98.0",
+    "@carbon/react": "^1.100.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },

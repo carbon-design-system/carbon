@@ -2588,7 +2588,7 @@ Map {
     },
     "propTypes": {
       "children": {
-        "type": "node",
+        "type": "func",
       },
       "experimentalAutoAlign": {
         "type": "bool",
@@ -2604,6 +2604,9 @@ Map {
                 "header": {
                   "isRequired": true,
                   "type": "node",
+                },
+                "isSortable": {
+                  "type": "bool",
                 },
                 "key": {
                   "isRequired": true,
@@ -2721,6 +2724,18 @@ Map {
       },
       "showToolbar": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
       "zebra": {
         "type": "bool",
