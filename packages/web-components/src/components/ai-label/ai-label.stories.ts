@@ -20,17 +20,17 @@ import { AI_LABEL_SIZE } from './defs';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
-  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
-  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`top-start`]: POPOVER_ALIGNMENT.TOP_START,
+  [`top-end`]: POPOVER_ALIGNMENT.TOP_END,
   [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
-  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
-  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`bottom-start`]: POPOVER_ALIGNMENT.BOTTOM_START,
+  [`bottom-end`]: POPOVER_ALIGNMENT.BOTTOM_END,
   [`left`]: POPOVER_ALIGNMENT.LEFT,
-  [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
-  [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
+  [`left-start`]: POPOVER_ALIGNMENT.LEFT_START,
+  [`left-end`]: POPOVER_ALIGNMENT.LEFT_END,
   [`right`]: POPOVER_ALIGNMENT.RIGHT,
-  [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
-  [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
+  [`right-start`]: POPOVER_ALIGNMENT.RIGHT_START,
+  [`right-end`]: POPOVER_ALIGNMENT.RIGHT_END,
 };
 
 const sizes = {
@@ -75,19 +75,27 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+ 
 const args = {
+  aiText: 'AI',
   aiTextLabel: '',
-  alignment: POPOVER_ALIGNMENT.BOTTOM,
+  alignment: POPOVER_ALIGNMENT.BOTTOM_START,
   autoalign: true,
   kind: 'default',
   revertActive: false,
+  buttonLabel: 'Show information',
+  defaultOpen: false,
+  revertLabel: 'Revert to AI input',
   showActions: true,
-  size: AI_LABEL_SIZE.EXTRA_SMALL,
+  size: AI_LABEL_SIZE.MEDIUM,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+ 
 const argTypes = {
+  aiText: {
+    control: 'text',
+    description: 'Specify the correct translation of the AI text',
+  },
   aiTextLabel: {
     control: 'text',
     description:
@@ -103,11 +111,20 @@ const argTypes = {
     description:
       'Will auto-align the popover. This prop is currently experimental and is subject to future changes.',
   },
+  buttonLabel: {
+    control: 'text',
+    description:
+      'Specify the text that will be provided to the `aria-label` of the `AI Label` button',
+  },
   kind: {
-    control: 'radio',
+    control: 'select',
     description:
       'Specify the type of AI Label, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
     options: ['default', 'inline'],
+  },
+  defaultOpen: {
+    control: 'boolean',
+    description: 'Set whether toggletip is open by default.',
   },
   showActions: {
     control: 'boolean',
@@ -124,72 +141,129 @@ const argTypes = {
     control: 'boolean',
     description: 'Specify whether the revert button should be visible.',
   },
+  revertLabel: {
+    control: 'text',
+    description:
+      'Specify the text that should be shown when the revert button is hovered',
+  },
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: ({
+    aiText,
+    aiTextLabel,
+    alignment,
+    autoalign,
+    buttonLabel,
+    kind,
+    defaultOpen,
+    showActions,
+    size,
+    revertActive,
+    revertLabel,
+  }) => {
     return html`
       <style>
         ${styles}
       </style>
       <div class="ai-label-container">
-        <cds-ai-label autoalign size="mini" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="2xs" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="xs" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="sm" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="md" alignment="bottom-left">
-          ${content} ${actions}</cds-ai-label
-        >
-        <cds-ai-label autoalign size="lg" alignment="bottom-left">
-          ${content} ${actions}</cds-ai-label
-        >
-        <cds-ai-label autoalign size="xl" alignment="bottom-left">
-          ${content} ${actions}</cds-ai-label
-        >
-      </div>
-      <div class="ai-label-container">
-        <cds-ai-label autoalign size="sm" kind="inline" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="md" kind="inline" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="lg" kind="inline" alignment="bottom-left">
-          ${content}${actions}
+        <cds-ai-label
+          ai-text="${aiText}"
+          ai-text-label="${aiTextLabel}"
+          alignment="${alignment}"
+          autoalign="${autoalign}"
+          button-label="${buttonLabel}"
+          kind="${kind}"
+          ?default-open="${defaultOpen}"
+          size="${size}"
+          ?revert-active="${revertActive}"
+          ?revert-label="${revertLabel}">
+          ${content} ${showActions ? actions : ''}
         </cds-ai-label>
       </div>
+    `;
+  },
+};
+export const Inline = {
+  args: {
+    ...args,
+    kind: 'inline',
+  },
+  argTypes,
+  render: ({
+    aiText,
+    aiTextLabel,
+    alignment,
+    autoalign,
+    buttonLabel,
+    kind,
+    defaultOpen,
+    showActions,
+    size,
+    revertActive,
+    revertLabel,
+  }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
       <div class="ai-label-container">
         <cds-ai-label
-          autoalign
-          size="sm"
-          kind="inline"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${content}${actions}
+          ai-text="${aiText}"
+          ai-text-label="${aiTextLabel}"
+          alignment="${alignment}"
+          autoalign="${autoalign}"
+          button-label="${buttonLabel}"
+          kind="${kind}"
+          ?default-open="${defaultOpen}"
+          size="${size}"
+          ?revert-active="${revertActive}"
+          ?revert-label="${revertLabel}">
+          ${content} ${showActions ? actions : ''}
         </cds-ai-label>
+      </div>
+    `;
+  },
+};
+export const InlineWithContent = {
+  args: {
+    ...args,
+    kind: 'inline',
+    aiTextLabel: 'Text goes here',
+  },
+  argTypes,
+  render: ({
+    aiText,
+    aiTextLabel,
+    alignment,
+    autoalign,
+    buttonLabel,
+    kind,
+    defaultOpen,
+    showActions,
+    size,
+    revertActive,
+    revertLabel,
+  }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="ai-label-container">
         <cds-ai-label
-          autoalign
-          size="md"
-          kind="inline"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label
-          autoalign
-          size="lg"
-          kind="inline"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${content}${actions}
+          ai-text="${aiText}"
+          ai-text-label="${aiTextLabel}"
+          alignment="${alignment}"
+          autoalign="${autoalign}"
+          button-label="${buttonLabel}"
+          kind="${kind}"
+          ?default-open="${defaultOpen}"
+          size="${size}"
+          ?revert-active="${revertActive}"
+          ?revert-label="${revertLabel}">
+          ${content} ${showActions ? actions : ''}
         </cds-ai-label>
       </div>
     `;
@@ -198,33 +272,40 @@ export const Default = {
 
 export const ExplainabilityPopover = {
   args: {
+    ...args,
+    defaultOpen: true,
     alignment: tooltipAlignments.bottom,
-    showActions: true,
   },
-  argTypes: {
-    alignment: {
-      control: 'select',
-      description: 'Specify how the popover should align with the button.',
-      options: tooltipAlignments,
-    },
-    showActions: {
-      control: 'boolean',
-      description:
-        'Storybook only - Specify whether to show action items in AI Label callout',
-    },
-  },
-  render: (args) => {
-    const { alignment, showActions } = args ?? {};
-
+  argTypes,
+  render: ({
+    aiText,
+    aiTextLabel,
+    alignment,
+    autoalign,
+    buttonLabel,
+    kind,
+    defaultOpen,
+    showActions,
+    size,
+    revertActive,
+    revertLabel,
+  }) => {
     return html`
       <style>
         ${styles}
       </style>
       <div class="ai-label-container-example ai-label-container centered">
         <cds-ai-label
-          open
+          ai-text="${aiText}"
+          ai-text-label="${aiTextLabel}"
           alignment="${alignment}"
-          size="${AI_LABEL_SIZE.EXTRA_SMALL}">
+          autoalign="${autoalign}"
+          button-label="${buttonLabel}"
+          kind="${kind}"
+          ?default-open="${defaultOpen}"
+          size="${size}"
+          ?revert-active="${revertActive}"
+          ?revert-label="${revertLabel}">
           ${content} ${showActions ? actions : ''}
         </cds-ai-label>
       </div>
