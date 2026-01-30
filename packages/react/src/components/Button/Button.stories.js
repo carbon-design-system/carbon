@@ -14,7 +14,7 @@ import mdx from './Button.mdx';
 import './button-story.scss';
 
 // Note: we explicitly define the defaultValue here, as the Button component takes `props` and forwards them
-// to the underlying `button` or `a` element, so Storybook cannot infer the default values from the component itself
+// to the underlying `button` or `a` element, as a result storybook cannot infer the default values from the component.
 
 const sharedArgTypes = {
   disabled: {
@@ -24,7 +24,6 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: 'danger' } },
   },
   autoAlign: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: false } },
   },
   hasIconOnly: {
@@ -52,27 +51,21 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: 'lg' } },
   },
   tooltipAlignment: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: 'center' } },
   },
   tooltipDropShadow: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: false } },
   },
   tooltipHighContrast: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: true } },
   },
   tooltipPosition: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: 'top' } },
   },
   isExpressive: {
     table: { defaultValue: { summary: false } },
-    // if: { arg: 'hasIconOnly', exists: false },
   },
   isSelected: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: false } },
   },
   iconDescription: {
@@ -82,7 +75,6 @@ const sharedArgTypes = {
     description: 'Optional badge count to display on the icon buttons',
     type: { name: 'number' },
     control: { type: 'number', min: 0 },
-    if: { arg: 'hasIconOnly' },
   },
 
   renderIcon: {
@@ -113,6 +105,21 @@ export const Default = (args) => (
     Button
   </Button>
 );
+
+Default.parameters = {
+  controls: {
+    exclude: [
+      'hasIconOnly',
+      'autoAlign',
+      'isSelected',
+      'badgeCount',
+      'tooltipAlignment',
+      'tooltipDropShadow',
+      'tooltipHighContrast',
+      'tooltipPosition',
+    ],
+  },
+};
 
 export const IconButton = (args) => (
   <Button {...args} onClick={action('onClick')} />
