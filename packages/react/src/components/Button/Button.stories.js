@@ -77,7 +77,6 @@ const sharedArgTypes = {
   },
   iconDescription: {
     control: 'text',
-    if: { arg: 'hasIconOnly' },
   },
   renderIcon: {
     control: { type: 'select' },
@@ -90,16 +89,11 @@ const sharedArgTypes = {
   },
 };
 
-const sharedArgs = {
-  onClick: () => action('onClick'),
-};
-
 export default {
   title: 'Components/Button',
   component: Button,
   subcomponents: { ButtonSkeleton },
   argTypes: sharedArgTypes,
-  args: sharedArgs,
   parameters: {
     docs: {
       page: mdx,
@@ -107,15 +101,27 @@ export default {
   },
 };
 
-export const Default = (args) => <Button {...args}>Button</Button>;
+export const Default = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
 
-export const Secondary = (args) => <Button {...args}>Button</Button>;
+export const Secondary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
 
 Secondary.args = {
   kind: 'secondary',
 };
 
-export const Tertiary = (args) => <Button {...args}>Button</Button>;
+export const Tertiary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
 
 Tertiary.args = {
   kind: 'tertiary',
@@ -124,15 +130,15 @@ Tertiary.args = {
 export const Danger = (args) => {
   return (
     <>
-      <Button {...args} kind="danger">
+      <Button {...args} kind="danger" onClick={action('onClick')}>
         Button
       </Button>
       &nbsp;
-      <Button {...args} kind="danger--tertiary">
+      <Button {...args} kind="danger--tertiary" onClick={action('onClick')}>
         Danger tertiary button
       </Button>
       &nbsp;
-      <Button {...args} kind="danger--ghost">
+      <Button {...args} kind="danger--ghost" onClick={action('onClick')}>
         Danger ghost button
       </Button>
     </>
@@ -145,13 +151,19 @@ Danger.argTypes = {
   },
 };
 
-export const Ghost = (args) => <Button {...args}>Button</Button>;
+export const Ghost = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
 
 Ghost.args = {
   kind: 'ghost',
 };
 
-export const IconButton = (args) => <Button {...args} />;
+export const IconButton = (args) => (
+  <Button {...args} onClick={action('onClick')} />
+);
 
 IconButton.args = {
   hasIconOnly: true,
@@ -160,7 +172,7 @@ IconButton.args = {
 };
 
 export const IconButtonWithBadge = (args) => {
-  return <Button {...args} />;
+  return <Button {...args} onClick={action('onClick')} />;
 };
 
 IconButtonWithBadge.args = {

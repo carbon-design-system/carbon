@@ -42,12 +42,12 @@ Default.argTypes = {
   onActionButtonClick: {
     action: 'onActionButtonClick',
   },
-  onClose: {
-    action: 'onClose',
-  },
-  onCloseButtonClick: {
-    action: 'onCloseButtonClick',
-  },
+  // onClose: {
+  //   action: 'onClose',
+  // },
+  // onCloseButtonClick: {
+  //   action: 'onCloseButtonClick',
+  // },
 };
 Default.args = {
   actionButtonLabel: 'Action',
