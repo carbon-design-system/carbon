@@ -110,9 +110,10 @@ class CDSCopy extends CDSIconButton {
 
     super.updated(changedProperties);
 
-    this.shadowRoot // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-      ?.querySelector('button') // @ts-ignore: TS thinks `host` doesn't exist on `parentNode`
-      ?.setAttribute('aria-label', this.parentNode?.host.textContent);
+    const host = (this.parentNode as ShadowRoot | null)?.host;
+    this.shadowRoot
+      ?.querySelector('button')
+      ?.setAttribute('aria-label', host?.textContent ?? '');
   }
 
   static styles = styles;

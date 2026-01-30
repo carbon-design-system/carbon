@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -144,11 +144,7 @@ export const Controlled = {
       document
         .querySelectorAll('cds-accordion-item[controlled]')
         .forEach((item) => {
-          if (isOpen) {
-            item.setAttribute('open', '');
-          } else {
-            item.removeAttribute('open');
-          }
+          item.toggleAttribute('open', isOpen);
         });
     };
 

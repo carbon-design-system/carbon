@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -49,37 +49,29 @@ class CDSAccordionSkeleton extends LitElement {
   open = true;
 
   updated(changedProperties) {
+    const root = this.shadowRoot;
+    if (!root) return;
+
+    const items = root.querySelectorAll(
+      (this.constructor as typeof CDSAccordionSkeleton)
+        .selectorAccordionItemSkeletons
+    );
+
     if (changedProperties.has('alignment')) {
-      // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this.shadowRoot!.querySelectorAll(
-          (this.constructor as typeof CDSAccordionSkeleton)
-            .selectorAccordionItemSkeletons
-        ),
-        (elem) => {
-          elem.setAttribute('alignment', this.alignment);
-        }
-      );
+      forEach(items, (elem) => {
+        elem.setAttribute('alignment', this.alignment);
+      });
     }
     if (
       changedProperties.has('isFlush') ||
       changedProperties.has('alignment')
     ) {
-      // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this.shadowRoot!.querySelectorAll(
-          (this.constructor as typeof CDSAccordionSkeleton)
-            .selectorAccordionItemSkeletons
-        ),
-        (elem) => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      forEach(items, (elem) => {
+        elem.toggleAttribute(
+          'isFlush',
           this.isFlush && this.alignment !== 'start'
-            ? elem.setAttribute('isFlush', '')
-            : elem.removeAttribute('isFlush');
-        }
-      );
+        );
+      });
     }
   }
 

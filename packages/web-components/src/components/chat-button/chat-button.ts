@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,9 +33,12 @@ class CDSChatButton extends LitElement {
    * Handles `slotchange` event.
    */
   private _handleSlotChange({ target }: Event) {
-    this._hasIcon = (target as HTMLSlotElement).assignedNodes().some(
-      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim() // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    );
+    this._hasIcon = (target as HTMLSlotElement)
+      .assignedNodes()
+      .some(
+        (node) =>
+          node.nodeType !== Node.TEXT_NODE || Boolean(node.textContent?.trim())
+      );
     this.requestUpdate();
   }
 
