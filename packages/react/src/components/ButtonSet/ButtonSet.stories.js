@@ -13,39 +13,32 @@ import {
   fluidButtonMapping,
   fluidButtonOptions,
 } from '../Button/__story__/fluid-button-set-args';
-import { background } from 'storybook/internal/theming';
+import { action } from 'storybook/actions';
+
+const styles = `
+  .buttonSetContainer {
+    inline-size: var(--container-width, 600px);
+    max-inline-size: 100%;
+    contain: layout paint;
+  }
+
+  .buttonSetContainer--visible {
+    box-shadow: 0 0 0 42px var(--cds-layer-01);
+  }
+`;
 
 export default {
   title: 'Components/Button/Set Of Buttons',
   component: ButtonSet,
-};
 
-export const Default = (args) => {
-  return (
-    <ButtonSet>
-      <Button kind="secondary" {...args}>
-        Secondary button
-      </Button>
-      <Button kind="primary" {...args}>
-        Primary button
-      </Button>
-    </ButtonSet>
-  );
-};
-
-export const Fluid = {
-  parameters: {
-    controls: {
-      include: [
-        'Container width',
-        'Container visible',
-        'Fluid Buttons',
-        'Stacked',
-      ],
-    },
+  args: {
+    Buttons: 4,
+    'Container width': 600,
+    'Container visible': false,
   },
+
   argTypes: {
-    'Fluid Buttons': {
+    Buttons: {
       control: {
         type: 'select',
         labels: fluidButtonLabels,
@@ -53,55 +46,64 @@ export const Fluid = {
       options: fluidButtonOptions,
       mapping: fluidButtonMapping,
       description: 'Sets the number and type of buttons in the set',
+      table: { category: 'story controls' },
     },
+
     'Container width': {
       control: {
         type: 'range',
-        min: '280',
-        max: '1200',
-        step: '1',
+        min: 280,
+        max: 1200,
+        step: 1,
       },
       description: 'Sets the width of the ButtonSet container',
+      if: { arg: 'fluid', truthy: true },
+      table: { category: 'story controls' },
     },
+
     'Container visible': {
       control: {
         type: 'boolean',
       },
+      if: { arg: 'fluid', truthy: true },
       description: 'Show the ButtonSet container using Carbon layer styling',
+      table: { category: 'story controls' },
     },
   },
+};
 
-  render: ({ ...rest }) => {
-    const buttons = rest['Fluid Buttons'];
-    const containerStyle = {
-      inlineSize: rest['Container width'] + 'px',
-      maxInlineSize: '100%',
-    };
-    if (rest['Container visible']) {
-      // 42px is the padding around the story
-      containerStyle.boxShadow = '0 0 0 42px var(--cds-layer-01)';
-    }
+export const Default = {
+  render: (args) => {
+    const buttons = args.Buttons;
 
-    if (!buttons || buttons === 0) {
+    if (!buttons || buttons.length === 0) {
       return <div>Select one or more buttons.</div>;
     }
 
     return (
-      <div style={containerStyle}>
-        <ButtonSet fluid>
-          {buttons.map(({ label, kind, key }) => (
-            <Button key={key} kind={kind}>
-              {label}
-            </Button>
-          ))}
-        </ButtonSet>
-      </div>
+      <>
+        {/* CSS injected once per story render */}
+        <style>{styles}</style>
+
+        <div
+          className={[
+            'buttonSetContainer',
+            args['Container visible'] && 'buttonSetContainer--visible',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+          style={{
+            '--container-width': `${args['Container width']}px`,
+          }}>
+          <ButtonSet fluid={args.fluid} stacked={args.stacked}>
+            {buttons.map(({ label, kind, key }) => (
+              <Button key={key} kind={kind} onClick={action('onClick')}>
+                {label}
+              </Button>
+            ))}
+          </ButtonSet>
+        </div>
+      </>
     );
   },
-};
-
-Fluid.args = {
-  'Fluid Buttons': 8,
-  'Container width': 600,
-  'Container visible': false,
 };
