@@ -105,8 +105,7 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
+  const { offsetWidth: menuWidth } = menuBody;
 
   switch (triggerButtonPositionProp) {
     case 'top':

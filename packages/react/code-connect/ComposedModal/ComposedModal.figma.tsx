@@ -6,7 +6,7 @@
  */
 
 // @ts-nocheck
-import React, { useState } from 'react';
+import React from 'react';
 import { ComposedModal } from '@carbon/react';
 import figma from '@figma/code-connect';
 
@@ -37,8 +37,6 @@ figma.connect(
       }),
     },
     example: ({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      size,
       title,
       label,
       modalFooter,
@@ -46,8 +44,6 @@ figma.connect(
       descriptionText,
       progress,
     }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars , react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-      const [open, setOpen] = useState(true);
       return (
         <ComposedModal open onClose={() => setOpen(false)}>
           {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,17 +33,6 @@ const tooltipAlignments = {
   [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
 };
 
-const sizes = {
-  [`Mini size (${AI_LABEL_SIZE.MINI})`]: AI_LABEL_SIZE.MINI,
-  [`2XS size (${AI_LABEL_SIZE.EXTRA_EXTRA_SMALL})`]:
-    AI_LABEL_SIZE.EXTRA_EXTRA_SMALL,
-  [`XS size (${AI_LABEL_SIZE.EXTRA_SMALL})`]: AI_LABEL_SIZE.EXTRA_SMALL,
-  [`Small size (${AI_LABEL_SIZE.SMALL})`]: AI_LABEL_SIZE.SMALL,
-  [`Medium size (${AI_LABEL_SIZE.MEDIUM})`]: AI_LABEL_SIZE.MEDIUM,
-  [`Large size (${AI_LABEL_SIZE.LARGE})`]: AI_LABEL_SIZE.LARGE,
-  [`XL size (${AI_LABEL_SIZE.EXTRA_LARGE})`]: AI_LABEL_SIZE.EXTRA_LARGE,
-};
-
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
@@ -74,57 +63,6 @@ const actions = html`
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-const args = {
-  aiTextLabel: '',
-  alignment: POPOVER_ALIGNMENT.BOTTOM,
-  autoalign: true,
-  kind: 'default',
-  revertActive: false,
-  showActions: true,
-  size: AI_LABEL_SIZE.EXTRA_SMALL,
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-const argTypes = {
-  aiTextLabel: {
-    control: 'text',
-    description:
-      'Specify additional text to be rendered next to the AI label in the inline variant.',
-  },
-  alignment: {
-    control: 'select',
-    description: 'Specify how the popover should align with the button.',
-    options: tooltipAlignments,
-  },
-  autoalign: {
-    control: 'boolean',
-    description:
-      'Will auto-align the popover. This prop is currently experimental and is subject to future changes.',
-  },
-  kind: {
-    control: 'radio',
-    description:
-      'Specify the type of AI Label, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
-    options: ['default', 'inline'],
-  },
-  showActions: {
-    control: 'boolean',
-    description:
-      'Storybook only - Specify whether to show action items in AI Label callout',
-  },
-  size: {
-    control: 'select',
-    description:
-      'Specify the size of the button, from the following list of sizes: <code>mini</code>, <code>2xs</code>, <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>.',
-    options: sizes,
-  },
-  revertActive: {
-    control: 'boolean',
-    description: 'Specify whether the revert button should be visible.',
-  },
-};
 
 export const Default = {
   render: () => {
