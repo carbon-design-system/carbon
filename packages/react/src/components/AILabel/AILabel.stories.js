@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { AILabel, AILabelContent, AILabelActions } from '.';
+import { action } from 'storybook/actions';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
@@ -24,6 +25,9 @@ export default {
   },
 };
 const sharedArgTypes = {
+  AILabelContent: {
+    table: { disable: true },
+  },
   aiText: {
     control: {
       type: 'text',
@@ -31,6 +35,35 @@ const sharedArgTypes = {
   },
   aiTextLabel: {
     table: { disable: true },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: { type: 'select' },
+    description:
+      'Specify how the `AILabelContent` should align with the trigger element.',
+  },
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Will auto-align the `AILabelContent` on first render if it is not visible. This prop is currently experimental and is subject to future changes. Requires React v17+',
   },
   'aria-label': {
     control: {
@@ -68,6 +101,10 @@ const sharedArgTypes = {
       type: 'boolean',
     },
   },
+  onRevertClick: {
+    action: 'onRevertClick',
+    control: false,
+  },
 };
 
 const sharedArgs = {
@@ -76,18 +113,28 @@ const sharedArgs = {
   kind: 'default',
   revertActive: false,
   revertLabel: 'Revert to AI input',
+  size: 'md',
   defaultOpen: false,
+  textLabel: '',
+  autoAlign: true,
+  onRevertClick: (event) => {
+    action('onRevertClick')(event);
+  },
 };
 
 export const Default = (args) => {
   const {
     aiText,
     'aria-label': ariaLabel,
+    autoAlign,
+    align,
     kind,
+    defaultOpen,
     revertActive,
     revertLabel,
     size,
     textLabel,
+    onRevertClick,
   } = args;
   const aiContent = (
     <div>
@@ -110,273 +157,15 @@ export const Default = (args) => {
         <AILabel
           aiText={aiText}
           aria-label={ariaLabel}
+          defaultOpen={defaultOpen}
           kind={kind}
           revertActive={revertActive}
           revertLabel={revertLabel}
-          autoAlign
-          size={size || 'mini'}
-          textLabel={textLabel}>
-          <AILabelContent>{aiContent}</AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          autoAlign
-          size={size || '2xs'}
-          textLabel={textLabel}>
-          <AILabelContent>{aiContent}</AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          size={size || 'xs'}
-          textLabel={textLabel}>
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          autoAlign
-          size={size || 'sm'}
-          textLabel={textLabel}>
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          size={size || 'md'}
-          textLabel={textLabel}>
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          autoAlign
-          size={size || 'lg'}
-          textLabel={textLabel}>
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          autoAlign
-          size={size || 'xl'}
-          textLabel={textLabel}>
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-      </div>
-      <div className="ai-label-container ai-label-container-example">
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind="inline"
-          size="sm">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind="inline"
-          size="md">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind="inline"
-          size="lg">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-      </div>
-      <div className="ai-label-container ai-label-container-example">
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind="inline"
-          size="sm"
-          textLabel="Text goes here">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind="inline"
-          size="md"
-          textLabel="Text goes here">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          autoAlign
-          kind="inline"
-          size="lg"
-          textLabel="Text goes here">
+          align={align}
+          autoAlign={autoAlign}
+          size={size}
+          textLabel={textLabel}
+          onRevertClick={onRevertClick}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -399,13 +188,176 @@ export const Default = (args) => {
 };
 Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
+export const Inline = (args) => {
+  const {
+    aiText,
+    'aria-label': ariaLabel,
+    autoAlign,
+    align,
+    kind,
+    defaultOpen,
+    revertActive,
+    revertLabel,
+    size,
+    textLabel,
+    onRevertClick,
+  } = args;
+  const aiContent = (
+    <div>
+      <p className="secondary">AI Explained</p>
+      <h2 className="ai-label-heading">84%</h2>
+      <p className="secondary bold">Confidence score</p>
+      <p className="secondary">
+        Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      </p>
+      <hr />
+      <p className="secondary">Model type</p>
+      <p className="bold">Foundation model</p>
+    </div>
+  );
+
+  return (
+    <>
+      <div className="ai-label-container ai-label-container-example">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          defaultOpen={defaultOpen}
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          align={align}
+          autoAlign={autoAlign}
+          size={size}
+          textLabel={textLabel}
+          onRevertClick={onRevertClick}>
+          <AILabelContent>
+            {aiContent}
+            <AILabelActions>
+              <IconButton kind="ghost" label="View">
+                <View />
+              </IconButton>
+              <IconButton kind="ghost" label="Open Folder">
+                <FolderOpen />
+              </IconButton>
+              <IconButton kind="ghost" label="Folders">
+                <Folders />
+              </IconButton>
+              <Button>View details</Button>
+            </AILabelActions>
+          </AILabelContent>
+        </AILabel>
+      </div>
+    </>
+  );
+};
+Inline.args = {
+  ...sharedArgs,
+  kind: 'inline',
+};
+Inline.argTypes = { ...sharedArgTypes };
+export const InlineWithContent = (args) => {
+  const {
+    aiText,
+    'aria-label': ariaLabel,
+    autoAlign,
+    align,
+    kind,
+    defaultOpen,
+    revertActive,
+    revertLabel,
+    size,
+    textLabel,
+    onRevertClick,
+  } = args;
+  const aiContent = (
+    <div>
+      <p className="secondary">AI Explained</p>
+      <h2 className="ai-label-heading">84%</h2>
+      <p className="secondary bold">Confidence score</p>
+      <p className="secondary">
+        Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      </p>
+      <hr />
+      <p className="secondary">Model type</p>
+      <p className="bold">Foundation model</p>
+    </div>
+  );
+
+  return (
+    <>
+      <div className="ai-label-container ai-label-container-example">
+        <AILabel
+          aiText={aiText}
+          aria-label={ariaLabel}
+          defaultOpen={defaultOpen}
+          kind={kind}
+          revertActive={revertActive}
+          revertLabel={revertLabel}
+          align={align}
+          autoAlign={autoAlign}
+          size={size}
+          textLabel={textLabel}
+          onRevertClick={onRevertClick}>
+          <AILabelContent>
+            {aiContent}
+            <AILabelActions>
+              <IconButton kind="ghost" label="View">
+                <View />
+              </IconButton>
+              <IconButton kind="ghost" label="Open Folder">
+                <FolderOpen />
+              </IconButton>
+              <IconButton kind="ghost" label="Folders">
+                <Folders />
+              </IconButton>
+              <Button>View details</Button>
+            </AILabelActions>
+          </AILabelContent>
+        </AILabel>
+      </div>
+    </>
+  );
+};
+InlineWithContent.args = {
+  ...sharedArgs,
+  kind: 'inline',
+  textLabel: 'Text goes here',
+};
+InlineWithContent.argTypes = { ...sharedArgTypes };
 
 export const ExplainabilityPopover = (args) => {
-  const { showAILabelActions = true } = args;
+  const {
+    aiText,
+    'aria-label': ariaLabel,
+    autoAlign,
+    align,
+    kind,
+    defaultOpen,
+    revertActive,
+    revertLabel,
+    size,
+    textLabel,
+    onRevertClick,
+    showAILabelActions = true,
+  } = args;
 
   return (
     <div className="ai-label-container-example ai-label-container centered">
-      <AILabel autoAlign={false} defaultOpen {...args}>
+      <AILabel
+        aiText={aiText}
+        aria-label={ariaLabel}
+        defaultOpen={defaultOpen}
+        kind={kind}
+        revertActive={revertActive}
+        revertLabel={revertLabel}
+        align={align}
+        autoAlign={autoAlign}
+        size={size}
+        textLabel={textLabel}
+        onRevertClick={onRevertClick}>
         <AILabelContent>
           {' '}
           <div>
@@ -440,38 +392,19 @@ export const ExplainabilityPopover = (args) => {
     </div>
   );
 };
+ExplainabilityPopover.args = {
+  ...sharedArgs,
+  defaultOpen: true,
+  autoAlign: false,
+  showAILabelActions: true,
+};
 
 ExplainabilityPopover.argTypes = {
+  ...sharedArgTypes,
   showAILabelActions: {
     control: {
       type: 'boolean',
     },
     description: 'Playground only - toggle to show the callout toolbar',
-  },
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: { type: 'select' },
-  },
-};
-
-ExplainabilityPopover.parameters = {
-  controls: {
-    include: ['align', 'aria-label', 'defaultOpen', 'showAILabelActions'],
   },
 };
