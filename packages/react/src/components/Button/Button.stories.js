@@ -13,39 +13,94 @@ import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
 
+// Note: we explicitly define the defaultValue here, as the Button component takes `props` and forwards them
+// to the underlying `button` or `a` element, so Storybook cannot infer the default values from the component itself
+
+const sharedArgTypes = {
+  disabled: {
+    table: { defaultValue: { summary: false } },
+  },
+  dangerDescription: {
+    table: { defaultValue: { summary: 'danger' } },
+  },
+  autoAlign: {
+    if: { arg: 'hasIconOnly' },
+    table: { defaultValue: { summary: false } },
+  },
+  hasIconOnly: {
+    table: { defaultValue: { summary: false } },
+  },
+  kind: {
+    options: [
+      'primary',
+      'secondary',
+      'tertiary',
+      'ghost',
+      'danger',
+      'danger--tertiary',
+      'danger--ghost',
+    ],
+    control: { type: 'select' },
+    table: { defaultValue: { summary: 'primary' } },
+  },
+  type: {
+    table: { defaultValue: { summary: 'button' } },
+  },
+  size: {
+    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    control: { type: 'select' },
+    table: { defaultValue: { summary: 'lg' } },
+  },
+  tooltipAlignment: {
+    if: { arg: 'hasIconOnly' },
+    table: { defaultValue: { summary: 'center' } },
+  },
+  tooltipDropShadow: {
+    if: { arg: 'hasIconOnly' },
+    table: { defaultValue: { summary: false } },
+  },
+  tooltipHighContrast: {
+    if: { arg: 'hasIconOnly' },
+    table: { defaultValue: { summary: true } },
+  },
+  tooltipPosition: {
+    if: { arg: 'hasIconOnly' },
+    table: { defaultValue: { summary: 'top' } },
+  },
+  isExpressive: {
+    table: { defaultValue: { summary: false } },
+    // if: { arg: 'hasIconOnly', exists: false },
+  },
+  isSelected: {
+    if: { arg: 'hasIconOnly' },
+    table: { defaultValue: { summary: false } },
+  },
+  iconDescription: {
+    control: 'text',
+  },
+  badgeCount: {
+    description: 'Optional badge count to display on the icon buttons',
+    type: { name: 'number' },
+    control: { type: 'number', min: 0 },
+    if: { arg: 'hasIconOnly' },
+  },
+
+  renderIcon: {
+    control: { type: 'select' },
+    options: ['Add', 'Notification', undefined],
+    mapping: {
+      Add: (props) => <Add {...props} />,
+      Notification: (props) => <Notification {...props} />,
+      none: undefined,
+    },
+  },
+};
+
 export default {
   title: 'Components/Button',
   component: Button,
-  subcomponents: {
-    ButtonSkeleton,
-  },
-  argTypes: {
-    kind: {
-      options: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'ghost',
-        'danger',
-        'danger--tertiary',
-        'danger--ghost',
-      ],
-      control: { type: 'select' },
-    },
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-      control: { type: 'select' },
-    },
-    children: {
-      control: false,
-    },
-    renderIcon: {
-      control: false,
-    },
-    as: {
-      control: false,
-    },
-  },
+  subcomponents: { ButtonSkeleton },
+  argTypes: sharedArgTypes,
   parameters: {
     docs: {
       page: mdx,
@@ -53,112 +108,45 @@ export default {
   },
 };
 
-export const Default = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button {...args}>Button</Button>
-      <Button renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
-};
-
-export const Secondary = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button kind="secondary" {...args}>
-        Button
-      </Button>
-      <Button kind="secondary" renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
-};
-
-export const Tertiary = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button kind="tertiary" {...args}>
-        Button
-      </Button>
-      <Button kind="tertiary" renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
-};
-
-export const Danger = (args) => {
-  return (
-    <>
-      <Button kind="danger" {...args}>
-        Button
-      </Button>
-      &nbsp;
-      <Button kind="danger--tertiary" {...args}>
-        Danger tertiary button
-      </Button>
-      &nbsp;
-      <Button kind="danger--ghost" {...args}>
-        Danger ghost button
-      </Button>
-    </>
-  );
-};
-
-export const Ghost = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button kind="ghost" {...args}>
-        Button
-      </Button>
-      <Button kind="ghost" renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
-};
-
-export const IconButton = (args) => (
-  <Button
-    renderIcon={Add}
-    iconDescription="Icon Description"
-    hasIconOnly
-    onClick={action('onClick')}
-    {...args}
-  />
+export const Default = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
 );
 
-export const IconButtonWithBadge = (args) => {
-  const { badgeCount } = args;
+export const IconButton = (args) => (
+  <Button {...args} onClick={action('onClick')} />
+);
 
-  return (
-    <Button
-      kind="ghost"
-      size="lg"
-      badgeCount={badgeCount}
-      hasIconOnly
-      renderIcon={Notification}
-      iconDescription="Notification"
-      onClick={action('onClick')}
-      autoAlign
-      {...args}
-    />
-  );
+IconButton.args = {
+  hasIconOnly: true,
+  renderIcon: 'Add',
+  iconDescription: 'Icon Description',
 };
 
-IconButtonWithBadge.args = {
-  badgeCount: 4,
-};
+export const Skeleton = (args) => <ButtonSkeleton {...args} />;
 
-export const Skeleton = () => {
-  return (
-    <div>
-      <ButtonSkeleton />
-      &nbsp;
-      <ButtonSkeleton size="sm" />
-    </div>
-  );
+Skeleton.parameters = {
+  controls: {
+    exclude: [
+      'disabled',
+      'dangerDescription',
+      'autoAlign',
+      'hasIconOnly',
+      'kind',
+      'isSelected',
+      'iconDescription',
+      'rel',
+      'role',
+      'tabIndex',
+      'target',
+      'type',
+      'tooltipAlignment',
+      'tooltipDropShadow',
+      'tooltipHighContrast',
+      'tooltipPosition',
+      'isExpressive',
+      'renderIcon',
+    ],
+  },
 };
