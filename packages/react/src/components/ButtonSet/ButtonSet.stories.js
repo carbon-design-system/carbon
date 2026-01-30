@@ -20,13 +20,13 @@ export default {
   component: ButtonSet,
 
   args: {
-    'Fluid Buttons': 4,
+    Buttons: 4,
     'Container width': 600,
     'Container visible': false,
   },
 
   argTypes: {
-    'Fluid Buttons': {
+    Buttons: {
       control: {
         type: 'select',
         labels: fluidButtonLabels,
@@ -51,21 +51,16 @@ export default {
       control: {
         type: 'boolean',
       },
+      if: { arg: 'fluid', truthy: true },
       description: 'Show the ButtonSet container using Carbon layer styling',
       table: { category: 'story controls' },
-    },
-    fluid: {
-      // if: { arg: 'stacked', truthy: false },
-    },
-    stacked: {
-      // if: { arg: 'fluid', truthy: false },
     },
   },
 };
 
 export const Default = {
   render: (args) => {
-    const buttons = args['Fluid Buttons'];
+    const buttons = args['Buttons'];
 
     const containerStyle = {
       inlineSize: `${args['Container width']}px`,
