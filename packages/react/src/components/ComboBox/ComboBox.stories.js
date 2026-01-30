@@ -310,7 +310,7 @@ export const withAILabel = (args) => {
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
-export const _fullyControlled = (args) => {
+export const Controlled = (args) => {
   const options = [
     {
       id: 'option-1',
@@ -357,4 +357,4 @@ export const _fullyControlled = (args) => {
   );
 };
 
-_fullyControlled.argTypes = { ...sharedArgTypes };
+Controlled.argTypes = { ...sharedArgTypes };
