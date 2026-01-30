@@ -125,6 +125,13 @@ export const IconButton = (args) => (
   <Button {...args} onClick={action('onClick')} />
 );
 
+IconButton.argTypes = {
+  ...sharedArgTypes,
+  hasIconOnly: {
+    table: { readonly: true },
+  },
+};
+
 IconButton.args = {
   hasIconOnly: true,
   renderIcon: 'Add',
