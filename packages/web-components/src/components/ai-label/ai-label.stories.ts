@@ -75,7 +75,6 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
- 
 const args = {
   aiText: 'AI',
   aiTextLabel: '',
@@ -90,7 +89,6 @@ const args = {
   size: AI_LABEL_SIZE.MEDIUM,
 };
 
- 
 const argTypes = {
   aiText: {
     control: 'text',
