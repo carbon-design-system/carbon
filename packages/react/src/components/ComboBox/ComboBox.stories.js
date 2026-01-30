@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -310,7 +310,7 @@ export const withAILabel = (args) => {
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
-export const _fullyControlled = (args) => {
+export const Controlled = (args) => {
   const options = [
     {
       id: 'option-1',
@@ -357,4 +357,4 @@ export const _fullyControlled = (args) => {
   );
 };
 
-_fullyControlled.argTypes = { ...sharedArgTypes };
+Controlled.argTypes = { ...sharedArgTypes };
