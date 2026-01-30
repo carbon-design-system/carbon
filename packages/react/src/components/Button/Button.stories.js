@@ -79,11 +79,11 @@ const sharedArgTypes = {
 
   renderIcon: {
     control: { type: 'select' },
-    options: ['Add', 'Notification', undefined],
+    options: ['Add', 'Notification', 'None'],
     mapping: {
       Add: (props) => <Add {...props} />,
       Notification: (props) => <Notification {...props} />,
-      none: undefined,
+      None: undefined,
     },
   },
 };
