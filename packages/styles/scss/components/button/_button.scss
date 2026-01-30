@@ -253,6 +253,13 @@
       position: static;
     }
 
+    &.#{$prefix}--btn--ghost {
+      &:focus {
+        background-color: $background-active;
+        box-shadow: inset 0 0 0 $button-outline-width $button-focus-color;
+      }
+    }
+
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon,
     &.#{$prefix}--btn--danger--ghost .#{$prefix}--btn__icon {
       margin: 0;
