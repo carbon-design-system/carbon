@@ -51,7 +51,7 @@ const findGitignoreFiles = (rootDir) => {
   const gitignoreFiles = [];
   const pendingDirs = [rootDir];
 
-  // Traverse the repo tree, skipping folders that shouldn't affect ignore
+  // Traverse the repo tree, skipping directories that shouldn't affect ignore
   // rules.
   while (pendingDirs.length) {
     const currentDir = pendingDirs.pop();
@@ -214,9 +214,16 @@ export default defineConfig(
     },
   },
   {
-    // ESLint-specific ignores that are not covered by .gitignore files.
+    files: ['packages/react/code-connect/**/*.figma.tsx'],
+    rules: {
+      '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': false }],
+    },
+  },
+  {
     ignores: [
+      // Build folders
       '**/types/',
+
       'packages/*/examples/*',
 
       // Components

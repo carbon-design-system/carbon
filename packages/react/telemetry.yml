@@ -531,7 +531,6 @@ collect:
         - textSize
         # SideNav
         - addMouseListeners
-        - inert
         - isChildOfHeader
         - isFixedNav
         - isPersistent
