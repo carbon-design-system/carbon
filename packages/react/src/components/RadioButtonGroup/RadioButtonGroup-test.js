@@ -64,6 +64,24 @@ describe('RadioButtonGroup', () => {
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
   });
 
+  it('should render helperText', () => {
+    render(
+      <RadioButtonGroup legendText="test" helperText="Helper text">
+        <RadioButton labelText="test-1" value="test-1" />
+      </RadioButtonGroup>
+    );
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+  });
+
+  it('should render helperText with value 0', () => {
+    render(
+      <RadioButtonGroup legendText="test" helperText={0}>
+        <RadioButton labelText="test-1" value="test-1" />
+      </RadioButtonGroup>
+    );
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
   it('should ignore null children', () => {
     render(
       <RadioButtonGroup defaultSelected="test-1" name="test" legendText="test">

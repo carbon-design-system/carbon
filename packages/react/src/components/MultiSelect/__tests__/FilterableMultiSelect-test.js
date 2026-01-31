@@ -535,6 +535,13 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
+  it('should render helperText with value 0', async () => {
+    render(<FilterableMultiSelect {...mockProps} helperText={0} />);
+    await waitForPosition();
+
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
   it('should handle hideLabel prop', async () => {
     render(
       <FilterableMultiSelect {...mockProps} titleText="Test Title" hideLabel />

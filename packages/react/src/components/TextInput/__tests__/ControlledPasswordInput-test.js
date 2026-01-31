@@ -262,4 +262,20 @@ describe('ControlledPasswordInput Component', () => {
 
     expect(handleChange).not.toHaveBeenCalled();
   });
+
+  it('should render helperText with value 0', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="label"
+        helperText={0}
+      />
+    );
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
+  it('should render labelText with value 0', () => {
+    render(<ControlledPasswordInput id="password-input" labelText={0} />);
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
 });
