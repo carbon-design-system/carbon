@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -178,10 +178,9 @@ export interface MultiSelectProps<ItemType>
   invalidText?: ReactNode;
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
-  itemToElement?: React.JSXElementConstructor<ItemType>;
+  itemToElement?: ((item: ItemType) => NonNullable<ReactNode>) | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -591,10 +590,6 @@ export const MultiSelect = React.forwardRef(
       [`${prefix}--multi-select--selectall`]: selectAll,
     });
 
-    // needs to be capitalized for react to render it correctly
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const ItemToElement = itemToElement!;
-
     if (selectionFeedback === 'fixed') {
       sortOptions.selectedItems = [];
     } else if (selectionFeedback === 'top-after-reopen') {
@@ -680,10 +675,11 @@ export const MultiSelect = React.forwardRef(
     );
 
     const handleFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      evt.target.classList.contains(`${prefix}--tag__close-icon`)
-        ? setIsFocused(false)
-        : setIsFocused(evt.type === 'focus' ? true : false);
+      if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
+        setIsFocused(false);
+      } else {
+        setIsFocused(evt.type === 'focus' ? true : false);
+      }
     };
 
     const readOnlyEventHandlers = readOnly
@@ -893,11 +889,7 @@ export const MultiSelect = React.forwardRef(
                       <Checkbox
                         id={`${itemProps.id}__checkbox`}
                         labelText={
-                          itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemText
-                          )
+                          itemToElement ? itemToElement(item) : itemText
                         }
                         checked={isChecked}
                         title={useTitleInItem ? itemText : undefined}
@@ -1033,8 +1025,7 @@ MultiSelect.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 
