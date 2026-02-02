@@ -222,8 +222,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
 
     const handleTogglePasswordVisibility = (event) => {
       setInputType(inputType === 'password' ? 'text' : 'password');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      onTogglePasswordVisibility && onTogglePasswordVisibility(event);
+      onTogglePasswordVisibility?.(event);
     };
     const textInputClasses = classNames(
       `${prefix}--text-input`,

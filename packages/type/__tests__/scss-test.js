@@ -11,7 +11,7 @@
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
 const css = require('css');
-const { camelCase, paramCase } = require('change-case');
+const { camelCase, paramCase } = require('change-case-all');
 const { productiveHeading01 } = require('../src');
 
 const { render } = SassRenderer.create(__dirname);

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -79,8 +79,7 @@ export const useResizeObserver = ({
       setWidth(entry.contentRect.width);
       setHeight(entry.contentRect.height);
 
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      cb.current && cb.current(entry.contentRect);
+      cb.current?.(entry.contentRect);
     };
 
     const observer = new ResizeObserver((entries) => {
@@ -99,7 +98,6 @@ export const useResizeObserver = ({
     return () => {
       observer.disconnect();
     };
-     
   }, []);
   return { width, height };
 };

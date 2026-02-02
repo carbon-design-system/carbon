@@ -212,7 +212,7 @@ const Checkbox = React.forwardRef(
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
           title={title}>
-          <Text className={innerLabelClasses}>
+          <Text as="div" className={innerLabelClasses}>
             {labelText}
             {slug ? (
               normalizedDecorator
