@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/pagination-nav' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+:host(#{$prefix}-pagination-nav) {
+  @extend .#{$prefix}--pagination-nav;
+  @include emit-layout-tokens();
+
+  #{$prefix}-icon-button[disabled] svg {
+    fill: $icon-disabled;
+  }
+}
+
+// rtl
+:host(#{$prefix}-pagination-nav:dir(rtl)) {
+  .#{$prefix}--pagination-nav__list-item svg {
+    transform: rotate(0.5turn);
+  }
+}
