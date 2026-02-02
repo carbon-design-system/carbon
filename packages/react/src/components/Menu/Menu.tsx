@@ -150,6 +150,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const [childState, childDispatch] = useReducer(menuReducer, {
     ...context.state,
     isRoot: false,
+    hasIcons: false,
+    hasSelectableItems: false,
     size,
     requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
   });
