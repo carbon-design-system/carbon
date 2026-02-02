@@ -164,13 +164,13 @@ export const Default = {
           ai-text="${aiText}"
           ai-text-label="${aiTextLabel}"
           alignment="${alignment}"
-          autoalign="${autoalign}"
+          ?autoalign="${autoalign}"
           button-label="${buttonLabel}"
           kind="${kind}"
           ?default-open="${defaultOpen}"
           size="${size}"
           ?revert-active="${revertActive}"
-          ?revert-label="${revertLabel}">
+          revert-label="${revertLabel}">
           ${content} ${actions}
         </cds-ai-label>
       </div>
@@ -204,13 +204,13 @@ export const Inline = {
           ai-text="${aiText}"
           ai-text-label="${aiTextLabel}"
           alignment="${alignment}"
-          autoalign="${autoalign}"
+          ?autoalign="${autoalign}"
           button-label="${buttonLabel}"
           kind="${kind}"
           ?default-open="${defaultOpen}"
           size="${size}"
           ?revert-active="${revertActive}"
-          ?revert-label="${revertLabel}">
+          revert-label="${revertLabel}">
           ${content} ${actions}
         </cds-ai-label>
       </div>
@@ -245,13 +245,13 @@ export const InlineWithContent = {
           ai-text="${aiText}"
           ai-text-label="${aiTextLabel}"
           alignment="${alignment}"
-          autoalign="${autoalign}"
+          ?autoalign="${autoalign}"
           button-label="${buttonLabel}"
           kind="${kind}"
           ?default-open="${defaultOpen}"
           size="${size}"
           ?revert-active="${revertActive}"
-          ?revert-label="${revertLabel}">
+          revert-label="${revertLabel}">
           ${content} ${actions}
         </cds-ai-label>
       </div>
@@ -296,13 +296,13 @@ export const ExplainabilityPopover = {
           ai-text="${aiText}"
           ai-text-label="${aiTextLabel}"
           alignment="${alignment}"
-          autoalign="${autoalign}"
+          ?autoalign="${autoalign}"
           button-label="${buttonLabel}"
           kind="${kind}"
           ?default-open="${defaultOpen}"
           size="${size}"
           ?revert-active="${revertActive}"
-          ?revert-label="${revertLabel}">
+          revert-label="${revertLabel}">
           ${content} ${showActions ? actions : ''}
         </cds-ai-label>
       </div>
