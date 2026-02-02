@@ -85,7 +85,6 @@ const args = {
   buttonLabel: 'Show information',
   defaultOpen: false,
   revertLabel: 'Revert to AI input',
-  showActions: true,
   size: AI_LABEL_SIZE.MEDIUM,
 };
 
@@ -124,11 +123,6 @@ const argTypes = {
     control: 'boolean',
     description: 'Set whether toggletip is open by default.',
   },
-  showActions: {
-    control: 'boolean',
-    description:
-      'Storybook only - Specify whether to show action items in AI Label callout',
-  },
   size: {
     control: 'select',
     description:
@@ -157,7 +151,6 @@ export const Default = {
     buttonLabel,
     kind,
     defaultOpen,
-    showActions,
     size,
     revertActive,
     revertLabel,
@@ -178,7 +171,7 @@ export const Default = {
           size="${size}"
           ?revert-active="${revertActive}"
           ?revert-label="${revertLabel}">
-          ${content} ${showActions ? actions : ''}
+          ${content} ${actions}
         </cds-ai-label>
       </div>
     `;
@@ -198,7 +191,6 @@ export const Inline = {
     buttonLabel,
     kind,
     defaultOpen,
-    showActions,
     size,
     revertActive,
     revertLabel,
@@ -219,7 +211,7 @@ export const Inline = {
           size="${size}"
           ?revert-active="${revertActive}"
           ?revert-label="${revertLabel}">
-          ${content} ${showActions ? actions : ''}
+          ${content} ${actions}
         </cds-ai-label>
       </div>
     `;
@@ -240,7 +232,6 @@ export const InlineWithContent = {
     buttonLabel,
     kind,
     defaultOpen,
-    showActions,
     size,
     revertActive,
     revertLabel,
@@ -261,7 +252,7 @@ export const InlineWithContent = {
           size="${size}"
           ?revert-active="${revertActive}"
           ?revert-label="${revertLabel}">
-          ${content} ${showActions ? actions : ''}
+          ${content} ${actions}
         </cds-ai-label>
       </div>
     `;
@@ -273,8 +264,16 @@ export const ExplainabilityPopover = {
     ...args,
     defaultOpen: true,
     alignment: tooltipAlignments.bottom,
+    showActions: true,
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    showActions: {
+      control: 'boolean',
+      description:
+        'Storybook only - Specify whether to show action items in AI Label callout',
+    },
+  },
   render: ({
     aiText,
     aiTextLabel,
