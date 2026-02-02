@@ -93,3 +93,41 @@ export const Default = {
     );
   },
 };
+
+export const Fluid = {
+  render: (args) => {
+    const buttons = args.Buttons;
+    const containerStyle = {
+      inlineSize: args['Container width']
+        ? `${args['Container width']}px`
+        : undefined,
+      maxInlineSize: '100%',
+    };
+
+    if (args['Container visible']) {
+      // 42px is the padding around the story
+      containerStyle.boxShadow = '0 0 0 42px var(--cds-layer-01)';
+    }
+
+    if (!buttons || buttons.length === 0) {
+      return <div>Select one or more buttons.</div>;
+    }
+
+    return (
+      <div style={containerStyle}>
+        <ButtonSet fluid={true} stacked={args.stacked}>
+          {buttons.map(({ label, kind, key }) => (
+            <Button key={key} kind={kind} onClick={action('onClick')}>
+              {label}
+            </Button>
+          ))}
+        </ButtonSet>
+      </div>
+    );
+  },
+};
+
+Fluid.args = {
+  fluid: true,
+  Buttons: 8,
+};

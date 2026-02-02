@@ -89,6 +89,24 @@ const sharedArgTypes = {
   },
 };
 
+const textButtonControls = [
+  'dangerDescription',
+  'disabled',
+  'href',
+  'iconDescription',
+  'isExpressive',
+  'kind',
+  'rel',
+  'renderIcon',
+  'role',
+  'size',
+  'tabIndex',
+  'target',
+  'type',
+];
+
+const skeletonControls = ['href', 'size'];
+
 export default {
   title: 'Components/Button',
   component: Button,
@@ -107,18 +125,105 @@ export const Default = (args) => (
   </Button>
 );
 
+// Default.storyName = 'Primary (default)';
+
 Default.parameters = {
+  controls: { include: textButtonControls },
+};
+
+export const Secondary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Secondary.args = {
+  kind: 'secondary',
+};
+
+Secondary.parameters = {
   controls: {
-    exclude: [
-      'hasIconOnly',
-      'autoAlign',
-      'isSelected',
-      'badgeCount',
-      'tooltipAlignment',
-      'tooltipDropShadow',
-      'tooltipHighContrast',
-      'tooltipPosition',
-    ],
+    include: textButtonControls,
+  },
+};
+
+export const Tertiary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Tertiary.args = {
+  kind: 'tertiary',
+};
+
+Tertiary.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const Ghost = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Ghost.args = {
+  kind: 'ghost',
+};
+
+Ghost.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const Danger = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Danger.args = {
+  kind: 'danger',
+};
+
+Danger.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const DangerTertiary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+DangerTertiary.args = {
+  kind: 'danger--tertiary',
+};
+
+DangerTertiary.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const DangerGhost = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+DangerGhost.args = {
+  kind: 'danger--ghost',
+};
+
+DangerGhost.parameters = {
+  controls: {
+    include: textButtonControls,
   },
 };
 
@@ -139,30 +244,27 @@ IconButton.args = {
   iconDescription: 'Icon Description',
 };
 
+export const IconButtonWithBadge = (args) => {
+  return (
+    <Button {...args} onClick={action('onClick')}>
+      Button
+    </Button>
+  );
+};
+
+IconButtonWithBadge.args = {
+  hasIconOnly: true,
+  renderIcon: 'Notification',
+  iconDescription: 'Notifications',
+  badgeCount: 8,
+  kind: 'ghost',
+  size: 'lg',
+};
+
 export const Skeleton = (args) => <ButtonSkeleton {...args} />;
 
 Skeleton.parameters = {
   controls: {
-    exclude: [
-      'badgeCount',
-      'disabled',
-      'dangerDescription',
-      'autoAlign',
-      'hasIconOnly',
-      'kind',
-      'isSelected',
-      'iconDescription',
-      'rel',
-      'role',
-      'tabIndex',
-      'target',
-      'type',
-      'tooltipAlignment',
-      'tooltipDropShadow',
-      'tooltipHighContrast',
-      'tooltipPosition',
-      'isExpressive',
-      'renderIcon',
-    ],
+    include: skeletonControls,
   },
 };
