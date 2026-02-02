@@ -8,6 +8,7 @@
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import '@carbon/web-components/es/components/fluid-select/index.js';
 import '@carbon/web-components/es/components/select/index.js';
+import '@carbon/web-components/es/components/toggle-tip/index.js';
 
 describe('cds-fluid-select', () => {
   describe('renders as expected - Component API', () => {
@@ -120,6 +121,40 @@ describe('cds-fluid-select', () => {
       el.focus();
       expect(document.activeElement).to.equal(el);
       expect(el.shadowRoot.activeElement).to.equal(internalSelect);
+    });
+
+    it('should not apply field focus style when focusing a toggletip in the label', async () => {
+      const root = await fixture(html`
+        <div>
+          <cds-fluid-select>
+            <span slot="label-text">
+              Clock
+              <cds-toggletip button-label="Show information"
+                >Help</cds-toggletip
+              >
+            </span>
+            <cds-select-item value="a">A</cds-select-item>
+          </cds-fluid-select>
+        </div>
+      `);
+
+      const el = root.querySelector('cds-fluid-select');
+      expect(el).to.exist;
+      const wrapper = el.shadowRoot.querySelector('.cds--select');
+      expect(wrapper).to.exist;
+      const select = el.shadowRoot.querySelector('select');
+      expect(select).to.exist;
+      const toggletip = el.querySelector('cds-toggletip');
+      expect(toggletip).to.exist;
+
+      await toggletip.updateComplete;
+      toggletip.focus();
+      await el.updateComplete;
+      expect(wrapper).not.to.have.class('cds--select--fluid--focus');
+
+      select.focus();
+      await el.updateComplete;
+      expect(wrapper).to.have.class('cds--select--fluid--focus');
     });
   });
 
