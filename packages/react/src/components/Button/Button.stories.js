@@ -14,7 +14,7 @@ import mdx from './Button.mdx';
 import './button-story.scss';
 
 // Note: we explicitly define the defaultValue here, as the Button component takes `props` and forwards them
-// to the underlying `button` or `a` element, so Storybook cannot infer the default values from the component itself
+// to the underlying `button` or `a` element, as a result storybook cannot infer the default values from the component.
 
 const sharedArgTypes = {
   disabled: {
@@ -24,7 +24,6 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: 'danger' } },
   },
   autoAlign: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: false } },
   },
   hasIconOnly: {
@@ -52,39 +51,40 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: 'lg' } },
   },
   tooltipAlignment: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: 'center' } },
   },
   tooltipDropShadow: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: false } },
   },
   tooltipHighContrast: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: true } },
   },
   tooltipPosition: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: 'top' } },
   },
   isExpressive: {
     table: { defaultValue: { summary: false } },
-    // if: { arg: 'hasIconOnly', exists: false },
   },
   isSelected: {
-    if: { arg: 'hasIconOnly' },
     table: { defaultValue: { summary: false } },
   },
   iconDescription: {
     control: 'text',
   },
+  badgeCount: {
+    description:
+      'Optional badge count shown on icon-only buttons. This prop is supported only when `hasIconOnly=true`, `kind="ghost"`, and `size="lg"`.',
+    type: { name: 'number' },
+    control: { type: 'number', min: 0 },
+  },
+
   renderIcon: {
     control: { type: 'select' },
-    options: ['Add', 'Notification', undefined],
+    options: ['Add', 'Notification', 'None'],
     mapping: {
-      Add: Add,
-      Notification: Notification,
-      none: undefined,
+      Add: (props) => <Add {...props} />,
+      Notification: (props) => <Notification {...props} />,
+      None: undefined,
     },
   },
 };
@@ -107,63 +107,31 @@ export const Default = (args) => (
   </Button>
 );
 
-export const Secondary = (args) => (
-  <Button {...args} onClick={action('onClick')}>
-    Button
-  </Button>
-);
-
-Secondary.args = {
-  kind: 'secondary',
-};
-
-export const Tertiary = (args) => (
-  <Button {...args} onClick={action('onClick')}>
-    Button
-  </Button>
-);
-
-Tertiary.args = {
-  kind: 'tertiary',
-};
-
-export const Danger = (args) => {
-  return (
-    <>
-      <Button {...args} kind="danger" onClick={action('onClick')}>
-        Button
-      </Button>
-      &nbsp;
-      <Button {...args} kind="danger--tertiary" onClick={action('onClick')}>
-        Danger tertiary button
-      </Button>
-      &nbsp;
-      <Button {...args} kind="danger--ghost" onClick={action('onClick')}>
-        Danger ghost button
-      </Button>
-    </>
-  );
-};
-
-Danger.argTypes = {
-  kind: {
-    control: false,
+Default.parameters = {
+  controls: {
+    exclude: [
+      'hasIconOnly',
+      'autoAlign',
+      'isSelected',
+      'badgeCount',
+      'tooltipAlignment',
+      'tooltipDropShadow',
+      'tooltipHighContrast',
+      'tooltipPosition',
+    ],
   },
-};
-
-export const Ghost = (args) => (
-  <Button {...args} onClick={action('onClick')}>
-    Button
-  </Button>
-);
-
-Ghost.args = {
-  kind: 'ghost',
 };
 
 export const IconButton = (args) => (
   <Button {...args} onClick={action('onClick')} />
 );
+
+IconButton.argTypes = {
+  ...sharedArgTypes,
+  hasIconOnly: {
+    table: { readonly: true },
+  },
+};
 
 IconButton.args = {
   hasIconOnly: true,
@@ -171,25 +139,12 @@ IconButton.args = {
   iconDescription: 'Icon Description',
 };
 
-export const IconButtonWithBadge = (args) => {
-  return <Button {...args} onClick={action('onClick')} />;
-};
-
-IconButtonWithBadge.args = {
-  kind: 'ghost',
-  size: 'lg',
-  badgeCount: 4,
-  hasIconOnly: true,
-  renderIcon: Notification,
-  iconDescription: 'Notification',
-  autoAlign: true,
-};
-
 export const Skeleton = (args) => <ButtonSkeleton {...args} />;
 
 Skeleton.parameters = {
   controls: {
     exclude: [
+      'badgeCount',
       'disabled',
       'dangerDescription',
       'autoAlign',

@@ -534,16 +534,22 @@ const Dropdown = React.forwardRef(
 
     const onKeyDownHandler = useCallback(
       (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (
-          evt.code !== 'Space' ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+        const navigationKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+
+        // If the key is not a navigation key, the user is typing
+        if (!navigationKeys.includes(evt.key)) {
           setIsTyping(true);
-        }
-        if (
-          (isTyping && evt.code === 'Space') ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+          // Reset the timer for typing timeout
+          if (currTimer) {
+            clearTimeout(currTimer);
+          }
+          setCurrTimer(
+            setTimeout(() => {
+              setIsTyping(false);
+            }, 3000)
+          );
+        } else if (isTyping && evt.key === ' ') {
+          // If user is typing and presses space, reset the timer
           if (currTimer) {
             clearTimeout(currTimer);
           }
@@ -553,6 +559,7 @@ const Dropdown = React.forwardRef(
             }, 3000)
           );
         }
+
         if (['ArrowDown'].includes(evt.key)) {
           setIsFocused(false);
         }
