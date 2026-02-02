@@ -1021,6 +1021,11 @@ class CDSDropdown extends ValidityMixin(
   required = false;
 
   /**
+   * Specify whether the textarea is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+  /**
    * The special validity message for `required`.
    */
   @property({ attribute: 'required-validity-message' })
@@ -1384,19 +1389,37 @@ class CDSDropdown extends ValidityMixin(
             ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}
           </div>
         </div>
+        ${this.isFluid
+          ? html`
+              <hr class="${prefix}--list-box__divider" />
+              <div
+                part="helper-text"
+                class="${helperClasses}"
+                ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+                !hasHelperText}">
+                <slot
+                  name="helper-text"
+                  @slotchange="${handleSlotchangeHelperText}"
+                  >${helperMessage}</slot
+                >
+              </div>
+            `
+          : null}
         <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
         <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
       </div>
-      <div
-        part="helper-text"
-        class="${helperClasses}"
-        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
-        !hasHelperText}">
-        <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
-          >${helperMessage}</slot
-        >
-      </div>
+      ${!this.isFluid
+        ? html` <div
+            part="helper-text"
+            class="${helperClasses}"
+            ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+            !hasHelperText}">
+            <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
+              >${helperMessage}</slot
+            >
+          </div>`
+        : null}
     `;
   }
 
