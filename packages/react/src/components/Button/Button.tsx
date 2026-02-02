@@ -305,7 +305,7 @@ Button.propTypes = {
   isExpressive: PropTypes.bool,
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected: PropTypes.bool,
 

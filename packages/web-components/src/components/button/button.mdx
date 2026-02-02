@@ -1,4 +1,10 @@
-import { ArgTypes, Canvas, Markdown, Meta, Unstyled } from '@storybook/addon-docs/blocks';
+import {
+  ArgTypes,
+  Canvas,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as ButtonStories from './button.stories';
 
@@ -42,18 +48,6 @@ user interacts with it.
 
 <Canvas of={ButtonStories.Default} />
 
-## Secondary
-
-<Canvas of={ButtonStories.Secondary} />
-
-## Tertiary
-
-<Canvas of={ButtonStories.Tertiary} />
-
-## Ghost
-
-<Canvas of={ButtonStories.Ghost} />
-
 ## Danger Button
 
 The danger button has three different styles: primary, tertiary, and ghost.
@@ -64,7 +58,13 @@ danger button style. However, if a destructive action is just one of several
 actions a user could choose from, then a lower emphasis style like the danger
 tertiary button or the danger ghost button may be more appropriate.
 
-<Canvas of={ButtonStories.Danger} />
+<Unstyled>
+  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+    <cds-button kind="danger">Danger</cds-button>
+    <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
+    <cds-button kind="danger-ghost">Danger ghost</cds-button>
+  </div>
+</Unstyled>
 
 ## Icon-only Button
 

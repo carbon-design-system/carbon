@@ -54,15 +54,18 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: 'center' } },
   },
   tooltipDropShadow: {
+    // TODO: not present in WC. awaiting implementation?
     table: { defaultValue: { summary: false } },
   },
   tooltipHighContrast: {
+    // TODO: not present in WC. awaiting implementation?
     table: { defaultValue: { summary: true } },
   },
   tooltipPosition: {
     table: { defaultValue: { summary: 'top' } },
   },
   isExpressive: {
+    // TODO: doesn't work on icon buttons, but works for web-components icon buttons, need to investigate
     table: { defaultValue: { summary: false } },
   },
   isSelected: {
@@ -236,6 +239,9 @@ IconButton.argTypes = {
   hasIconOnly: {
     table: { readonly: true },
   },
+  badgeCount: {
+    table: { readonly: true },
+  },
 };
 
 IconButton.args = {
@@ -250,6 +256,19 @@ export const IconButtonWithBadge = (args) => {
       Button
     </Button>
   );
+};
+
+IconButtonWithBadge.argTypes = {
+  ...sharedArgTypes,
+  hasIconOnly: {
+    table: { readonly: true },
+  },
+  kind: {
+    table: { readonly: true },
+  },
+  size: {
+    table: { readonly: true },
+  },
 };
 
 IconButtonWithBadge.args = {

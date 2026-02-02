@@ -1,4 +1,10 @@
-import { Story, ArgTypes, Canvas, Unstyled, Meta } from '@storybook/addon-docs/blocks';
+import {
+  Story,
+  ArgTypes,
+  Canvas,
+  Unstyled,
+  Meta,
+} from '@storybook/addon-docs/blocks';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
@@ -72,10 +78,10 @@ actions a user could choose from, then a lower emphasis style like the danger
 tertiary button or the danger ghost button may be more appropriate.
 
 <Unstyled>
-  <div style={{ display: 'flex', gap: '1rem' }}>
-    <Button kind="danger">Secondary</Button>
-    <Button kind="danger--tertiary">Tertiary </Button>
-    <Button kind="danger--ghost">Ghost</Button>
+  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+    <Button kind="danger">Danger</Button>
+    <Button kind="danger--tertiary">Danger tertiary</Button>
+    <Button kind="danger--ghost">Danger ghost</Button>
   </div>
 </Unstyled>
 
@@ -234,8 +240,12 @@ to render an icon-only button, please refer to the section on the
 
 <Unstyled>
   <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-    <Button renderIcon={Add} iconDescription="Add">Add</Button>
-    <Button renderIcon={TrashCan} kind="danger" iconDescription="TrashCan">Delete</Button>
+    <Button renderIcon={Add} iconDescription="Add">
+      Add
+    </Button>
+    <Button renderIcon={TrashCan} kind="danger" iconDescription="TrashCan">
+      Delete
+    </Button>
   </div>
 </Unstyled>
 
@@ -247,17 +257,22 @@ to render an icon-only button, please refer to the section on the
 To render an icon of a different `size`, pass a function that spreads props on
 the Icon to ensure the proper classes are applied:
 
-this seems to not work as icons inside buttons are always 16px. should we remove this?
+this seems to not work as icons inside buttons are always 16px. should we remove
+this?
 
 <Unstyled>
   <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
     <Button
       renderIcon={(props) => <Add size={24} {...props} />}
-      iconDescription="Add">Add</Button>
+      iconDescription="Add">
+      Add
+    </Button>
     <Button
       renderIcon={(props) => <TrashCan size={24} {...props} />}
       kind="danger"
-      iconDescription="TrashCan">Delete</Button>
+      iconDescription="TrashCan">
+      Delete
+    </Button>
   </div>
 </Unstyled>
 
@@ -274,7 +289,9 @@ an element appear as a button control to a screen reader. Check out the
 [References](#references) section for more information.
 
 <Unstyled>
-  <Button as="div" role="button">a11y Button</Button>
+  <Button as="div" role="button">
+    a11y Button
+  </Button>
 </Unstyled>
 
 ```jsx
@@ -290,7 +307,13 @@ values are `xs`, `sm`, `md`, `lg`, `xl`, and `2xl`. If no size is specified, it
 renders as `lg`.
 
 <Unstyled>
-  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'end' }}>
+  <div
+    style={{
+      display: 'flex',
+      gap: '1rem',
+      flexWrap: 'wrap',
+      alignItems: 'end',
+    }}>
     <Button size="xs">Submit</Button>
     <Button size="sm">Submit</Button>
     <Button size="md">Submit</Button>
@@ -316,8 +339,20 @@ buttons. setting this prop without passing any number shows a red dot.
 
 <Unstyled>
   <div style={{ display: 'flex', gap: '1rem' }}>
-    <Button hasIconOnly kind="ghost" renderIcon={Add} iconDescription="Add to selection" badgeCount={5} />
-    <Button hasIconOnly kind="ghost" renderIcon={Add} iconDescription="Add to selection" badgeCount={0} />
+    <Button
+      hasIconOnly
+      kind="ghost"
+      renderIcon={Add}
+      iconDescription="Add to selection"
+      badgeCount={5}
+    />
+    <Button
+      hasIconOnly
+      kind="ghost"
+      renderIcon={Add}
+      iconDescription="Add to selection"
+      badgeCount={0}
+    />
   </div>
 </Unstyled>
 
@@ -334,9 +369,19 @@ and `end`. The default alignment is `center`.
 
 <Unstyled>
   <div style={{ display: 'flex', gap: '1rem' }}>
-    <Button hasIconOnly renderIcon={Add} iconDescription="Add to selection" tooltipAlignment="start" />
+    <Button
+      hasIconOnly
+      renderIcon={Add}
+      iconDescription="Add to selection"
+      tooltipAlignment="start"
+    />
     <Button hasIconOnly renderIcon={Add} iconDescription="Add to selection" />
-    <Button hasIconOnly renderIcon={Add} iconDescription="Add to selection" tooltipAlignment="end"/>
+    <Button
+      hasIconOnly
+      renderIcon={Add}
+      iconDescription="Add to selection"
+      tooltipAlignment="end"
+    />
   </div>
 </Unstyled>
 
@@ -356,9 +401,24 @@ a position and will render the tooltip accordingly. Accepted options are `top`,
 <Unstyled>
   <div style={{ display: 'flex', gap: '1rem' }}>
     <Button hasIconOnly renderIcon={Add} iconDescription="Add" />
-    <Button hasIconOnly renderIcon={Add} iconDescription="Add" tooltipPosition="right"/>
-    <Button hasIconOnly renderIcon={Add} iconDescription="Add" tooltipPosition="bottom"/>
-    <Button hasIconOnly renderIcon={Add} iconDescription="Add" tooltipPosition="left" />
+    <Button
+      hasIconOnly
+      renderIcon={Add}
+      iconDescription="Add"
+      tooltipPosition="right"
+    />
+    <Button
+      hasIconOnly
+      renderIcon={Add}
+      iconDescription="Add"
+      tooltipPosition="bottom"
+    />
+    <Button
+      hasIconOnly
+      renderIcon={Add}
+      iconDescription="Add"
+      tooltipPosition="left"
+    />
   </div>
 </Unstyled>
 
