@@ -15,21 +15,10 @@ import {
 } from '../Button/__story__/fluid-button-set-args';
 import { action } from 'storybook/actions';
 
-const styles = `
-  .buttonSetContainer {
-    inline-size: var(--container-width, 600px);
-    max-inline-size: 100%;
-    contain: layout paint;
-  }
-
-  .buttonSetContainer--visible {
-    box-shadow: 0 0 0 42px var(--cds-layer-01);
-  }
-`;
-
 export default {
   title: 'Components/Button/Set Of Buttons',
   component: ButtonSet,
+  subcomponents: { Button },
 
   args: {
     Buttons: 4,
@@ -75,35 +64,32 @@ export default {
 export const Default = {
   render: (args) => {
     const buttons = args.Buttons;
+    const containerStyle = {
+      inlineSize: args['Container width']
+        ? `${args['Container width']}px`
+        : undefined,
+      maxInlineSize: '100%',
+    };
+
+    if (args['Container visible']) {
+      // 42px is the padding around the story
+      containerStyle.boxShadow = '0 0 0 42px var(--cds-layer-01)';
+    }
 
     if (!buttons || buttons.length === 0) {
       return <div>Select one or more buttons.</div>;
     }
 
     return (
-      <>
-        {/* CSS injected once per story render */}
-        <style>{styles}</style>
-
-        <div
-          className={[
-            'buttonSetContainer',
-            args['Container visible'] && 'buttonSetContainer--visible',
-          ]
-            .filter(Boolean)
-            .join(' ')}
-          style={{
-            '--container-width': `${args['Container width']}px`,
-          }}>
-          <ButtonSet fluid={args.fluid} stacked={args.stacked}>
-            {buttons.map(({ label, kind, key }) => (
-              <Button key={key} kind={kind} onClick={action('onClick')}>
-                {label}
-              </Button>
-            ))}
-          </ButtonSet>
-        </div>
-      </>
+      <div style={containerStyle}>
+        <ButtonSet fluid={args.fluid} stacked={args.stacked}>
+          {buttons.map(({ label, kind, key }) => (
+            <Button key={key} kind={kind} onClick={action('onClick')}>
+              {label}
+            </Button>
+          ))}
+        </ButtonSet>
+      </div>
     );
   },
 };
