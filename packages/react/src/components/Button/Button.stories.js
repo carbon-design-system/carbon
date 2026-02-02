@@ -72,7 +72,8 @@ const sharedArgTypes = {
     control: 'text',
   },
   badgeCount: {
-    description: 'Optional badge count to display on the icon buttons',
+    description:
+      'Optional badge count shown on icon-only buttons. This prop is supported only when `hasIconOnly=true`, `kind="ghost"`, and `size="lg"`.',
     type: { name: 'number' },
     control: { type: 'number', min: 0 },
   },
@@ -143,6 +144,7 @@ export const Skeleton = (args) => <ButtonSkeleton {...args} />;
 Skeleton.parameters = {
   controls: {
     exclude: [
+      'badgeCount',
       'disabled',
       'dangerDescription',
       'autoAlign',
