@@ -98,7 +98,6 @@ export const useResizeObserver = ({
     return () => {
       observer.disconnect();
     };
-     
   }, []);
   return { width, height };
 };
