@@ -309,11 +309,11 @@ const TextInput = forwardRef<unknown, TextInputProps>(
           className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
       ) : null;
 
-    const label = labelText ? (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <Text as="label" htmlFor={id} className={labelClasses}>
         {labelText}
       </Text>
-    ) : null;
+    );
 
     const labelWrapper = (
       <div className={`${prefix}--text-input__label-wrapper`}>
@@ -322,14 +322,14 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       </div>
     );
 
-    const helper = helperText ? (
+    const helper = typeof helperText !== 'undefined' && helperText !== null && (
       <Text
         as="div"
         id={normalizedProps.helperId}
         className={helperTextClasses}>
         {helperText}
       </Text>
-    ) : null;
+    );
 
     const input = (
       <input

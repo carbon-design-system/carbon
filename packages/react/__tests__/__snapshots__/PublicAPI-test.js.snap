@@ -2605,6 +2605,9 @@ Map {
                   "isRequired": true,
                   "type": "node",
                 },
+                "isSortable": {
+                  "type": "bool",
+                },
                 "key": {
                   "isRequired": true,
                   "type": "string",
@@ -6786,7 +6789,7 @@ Map {
         "type": "string",
       },
       "label": {
-        "type": "node",
+        "type": "string",
       },
       "labelClassName": {
         "type": "string",
