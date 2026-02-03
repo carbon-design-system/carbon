@@ -54,11 +54,9 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: 'center' } },
   },
   tooltipDropShadow: {
-    // TODO: not present in WC. awaiting implementation?
     table: { defaultValue: { summary: false } },
   },
   tooltipHighContrast: {
-    // TODO: not present in WC. awaiting implementation?
     table: { defaultValue: { summary: true } },
   },
   tooltipPosition: {
