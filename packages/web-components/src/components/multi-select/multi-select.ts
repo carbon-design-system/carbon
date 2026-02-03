@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -437,8 +437,7 @@ class CDSMultiSelect extends CDSDropdown {
         `;
   }
 
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     const { clearSelectionLabel, _filterInputNode: filterInputNode } = this;
     return filterInputNode &&
       filterInputNode.value.length > 0 &&
@@ -611,6 +610,16 @@ class CDSMultiSelect extends CDSDropdown {
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
 
+    const isInteractive = !readOnly && !disabled;
+
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
+    };
+
     return classMap({
       [`${prefix}--multi-select`]: true,
       [`${prefix}--list-box`]: true,
@@ -618,8 +627,8 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--warn`]: warn,
+      [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
+      [`${prefix}--multi-select--warn`]: normalizedProps.warn,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--readonly`]: readOnly,
       [`${prefix}--multi-select--selected`]: selectedItemsCount > 0,
@@ -698,8 +707,9 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
+        if (aiLabel) {
+          sortedMenuItems.unshift(aiLabel);
+        }
         // @todo remove typecast once we've updated to Typescript.
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (this as any).replaceChildren(...sortedMenuItems);
@@ -715,8 +725,9 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
+        if (aiLabel) {
+          sortedMenuItems.unshift(aiLabel);
+        }
         // @todo remove typecast once we've updated to Typescript.
         sortedMenuItems.forEach((item) => {
           this.appendChild(item);
@@ -748,10 +759,11 @@ class CDSMultiSelect extends CDSDropdown {
         itemToFocus.focus();
         itemToFocus.setAttribute('highlighted', '');
       } else {
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        this.filterable
-          ? this._filterInputNode.focus()
-          : this._triggerNode.focus();
+        if (this.filterable) {
+          this._filterInputNode.focus();
+        } else {
+          this._triggerNode.focus();
+        }
       }
     }
     // reorder items so that select all is always at the top of the list

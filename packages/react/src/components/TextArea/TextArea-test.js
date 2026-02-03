@@ -435,6 +435,38 @@ describe('TextArea', () => {
       });
     });
 
+    it('should correctly call onChange when no target value', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter
+          maxCount={10}
+          counterMode="word"
+          defaultValue="A"
+          onChange={onChange}
+        />
+      );
+
+      // by default should show 1
+      expect(screen.getByText('1/10')).toBeInTheDocument();
+
+      fireEvent.change(screen.getByRole('textbox'), {
+        target: {
+          value: '',
+        },
+      });
+
+      await waitFor(() => {
+        expect(screen.getByText('0/10')).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalledTimes(1);
+      });
+    });
+
     it('should not trim words when enableCounter is disabled and then enabled', async () => {
       const { rerender } = render(
         <TextArea

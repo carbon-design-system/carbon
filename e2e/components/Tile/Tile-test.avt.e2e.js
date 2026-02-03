@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -136,7 +136,7 @@ test.describe('@avt Tile', () => {
     await expect(page.getByLabel('Interact to Expand tile')).toBeFocused();
     await page.keyboard.press('Space');
     await expect(page.locator('#expandable-tile-1')).toHaveClass(
-      'cds--tile cds--tile--expandable cds--tile--expandable--interactive cds--tile--is-expanded'
+      'cds--tile cds--tile--expandable cds--tile--is-expanded cds--tile--expandable--interactive'
     );
   });
 

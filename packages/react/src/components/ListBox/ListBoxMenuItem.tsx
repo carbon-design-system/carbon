@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,9 +12,9 @@ import React, {
   useRef,
   useState,
   type HTMLAttributes,
-  type MutableRefObject,
   type ReactNode,
   type Ref,
+  type RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
@@ -98,7 +98,7 @@ const ListBoxMenuItem = forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
     const menuItemOptionRefProp =
       forwardedRef && typeof forwardedRef !== 'function'
         ? (
-            forwardedRef as MutableRefObject<HTMLLIElement | null> & {
+            forwardedRef as RefObject<HTMLLIElement | null> & {
               menuItemOptionRef?: Ref<HTMLDivElement>;
             }
           ).menuItemOptionRef

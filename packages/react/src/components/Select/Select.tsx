@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,11 +8,11 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  forwardRef,
   useContext,
   useState,
   type ChangeEventHandler,
   type ComponentPropsWithRef,
-  type ForwardedRef,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';
@@ -142,7 +142,7 @@ export interface SelectProps
   warnText?: ReactNode;
 }
 
-const Select = React.forwardRef(
+const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       className,
@@ -166,8 +166,8 @@ const Select = React.forwardRef(
       onChange,
       slug,
       ...other
-    }: SelectProps,
-    ref: ForwardedRef<HTMLSelectElement>
+    },
+    ref
   ) => {
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);

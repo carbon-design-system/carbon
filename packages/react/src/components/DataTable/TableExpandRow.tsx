@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   Children,
+  forwardRef,
   isValidElement,
   type HTMLAttributes,
   type MouseEventHandler,
@@ -101,7 +102,7 @@ export interface TableExpandRowProps
   onExpand: MouseEventHandler<HTMLButtonElement>;
 }
 
-const TableExpandRow = React.forwardRef(
+const TableExpandRow = forwardRef<HTMLTableCellElement, TableExpandRowProps>(
   (
     {
       ['aria-controls']: ariaControls,
@@ -115,8 +116,8 @@ const TableExpandRow = React.forwardRef(
       isSelected,
       expandHeader = 'expand',
       ...rest
-    }: TableExpandRowProps,
-    ref: React.Ref<HTMLTableCellElement>
+    },
+    ref
   ) => {
     const prefix = usePrefix();
 

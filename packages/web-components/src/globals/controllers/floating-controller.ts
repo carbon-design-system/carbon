@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -86,6 +86,9 @@ export default class FloatingController implements ReactiveController {
       isTabTip,
     } = this.options;
 
+    const isListBox = target?.role === 'listbox';
+    const isMenu = target?.localName === 'cds-menu';
+
     const element = styleElement ?? target;
 
     if (!element) return;
@@ -140,35 +143,37 @@ export default class FloatingController implements ReactiveController {
           ? shimmedAlign.includes('bottom')
             ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
             : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
-          : shimmedAlign.includes('bottom')
-            ? [
-                'bottom',
-                'bottom-start',
-                'bottom-end',
-                'right',
-                'right-start',
-                'right-end',
-                'left',
-                'left-start',
-                'left-end',
-                'top',
-                'top-start',
-                'top-end',
-              ]
-            : [
-                'top',
-                'top-start',
-                'top-end',
-                'left',
-                'left-start',
-                'left-end',
-                'right',
-                'right-start',
-                'right-end',
-                'bottom',
-                'bottom-start',
-                'bottom-end',
-              ],
+          : isListBox || isMenu
+            ? ['top', 'bottom']
+            : shimmedAlign.includes('bottom')
+              ? [
+                  'bottom',
+                  'bottom-start',
+                  'bottom-end',
+                  'right',
+                  'right-start',
+                  'right-end',
+                  'left',
+                  'left-start',
+                  'left-end',
+                  'top',
+                  'top-start',
+                  'top-end',
+                ]
+              : [
+                  'top',
+                  'top-start',
+                  'top-end',
+                  'left',
+                  'left-start',
+                  'left-end',
+                  'right',
+                  'right-start',
+                  'right-end',
+                  'bottom',
+                  'bottom-start',
+                  'bottom-end',
+                ],
 
         fallbackStrategy: 'initialPlacement',
         fallbackAxisSideDirection: 'start',

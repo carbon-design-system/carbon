@@ -277,6 +277,8 @@ class PackageJson {
 
     this.changed = true;
     for (const type of types) {
+      // Use delete to fully remove the dependency key from the JSON output.
+      //
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete this.modified[type][name];
     }

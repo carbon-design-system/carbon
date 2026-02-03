@@ -142,7 +142,6 @@ function isIconOnlyButton(
   return false;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Button: ButtonComponent = React.forwardRef(
   <T extends React.ElementType = 'button'>(
     props: ButtonProps<T>,
@@ -236,8 +235,10 @@ const Button: ButtonComponent = React.forwardRef(
   }
 );
 
-(Button as React.FC).displayName = 'Button';
-(Button as React.FC).propTypes = {
+// @ts-expect-error - `displayName` isn't typed.
+Button.displayName = 'Button';
+// @ts-expect-error - `propTypes` isn't typed.
+Button.propTypes = {
   /**
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately

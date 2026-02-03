@@ -1,18 +1,17 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  type ComponentType,
-  type FunctionComponent,
   useEffect,
   useLayoutEffect,
   useState,
   useRef,
   useMemo,
   useCallback,
+  type ElementType,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -75,7 +74,7 @@ interface PageHeaderBreadcrumbBarProps {
   /**
    * Provide an optional icon to render in front of the PageHeaderContent's title.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
   /**
    * The PageHeaderBreadcrumbBar's content actions
    */
@@ -169,7 +168,7 @@ interface PageHeaderContentProps {
   /**
    * Provide an optional icon to render in front of the PageHeaderContent's title.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
   /**
    * The PageHeaderContent's title
    */
@@ -216,8 +215,7 @@ const PageHeaderContent = React.forwardRef<
     };
 
     useLayoutEffect(() => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      titleRef.current && isEllipsisActive(titleRef.current);
+      if (titleRef.current) isEllipsisActive(titleRef.current);
     }, [title]);
 
     return (

@@ -104,7 +104,7 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
-   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use `children` instead.
    */
   title?: string;
 
@@ -320,7 +320,9 @@ const TagBase = React.forwardRef<
   }
 );
 const Tag = TagBase as TagComponent;
-(Tag as React.FC).propTypes = {
+
+// @ts-expect-error - `propTypes` isn't typed.
+Tag.propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default
    * wrapping element

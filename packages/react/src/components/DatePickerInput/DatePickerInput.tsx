@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,8 @@ import cx from 'classnames';
 import PropTypes, { ReactElementLike } from 'prop-types';
 import React, {
   cloneElement,
+  forwardRef,
   useContext,
-  type ForwardedRef,
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
@@ -151,10 +151,9 @@ export interface DatePickerInputProps
   warnText?: ReactNodeLike;
 }
 
-const DatePickerInput = React.forwardRef(function DatePickerInput(
-  props: DatePickerInputProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+const frFn = forwardRef<HTMLDivElement, DatePickerInputProps>;
+
+const DatePickerInput = frFn((props, ref) => {
   const {
     datePickerType,
     decorator,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,11 +14,9 @@ import React, {
   useState,
   useCallback,
   useContext,
-  type ComponentType,
-  type FunctionComponent,
-  type MouseEvent,
-  type MutableRefObject,
+  type ElementType,
   type FocusEvent,
+  type MouseEvent,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { deprecate } from '../../prop-types/deprecate';
@@ -113,7 +111,7 @@ export type TreeNodeProps = {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
@@ -347,8 +345,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       if (typeof forwardedRef === 'function') {
         forwardedRef(element);
       } else if (forwardedRef) {
-        (forwardedRef as MutableRefObject<HTMLElement | null>).current =
-          element;
+        forwardedRef.current = element;
       }
     };
 

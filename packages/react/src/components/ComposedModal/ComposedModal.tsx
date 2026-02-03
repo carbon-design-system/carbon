@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,6 @@ import React, {
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
-  type MutableRefObject,
   type ReactElement,
   type ReactNode,
   type RefObject,
@@ -202,8 +201,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): void | boolean;
+  onClose?: ((event: MouseEvent) => boolean) | ((event: MouseEvent) => void);
 
   /**
    * Called for all `onKeyDown` events that do not close the modal
@@ -296,9 +294,7 @@ const ComposedModalDialog = React.forwardRef<
   const button = useRef<HTMLButtonElement>(null);
   const startSentinel = useRef<HTMLButtonElement>(null);
   const endSentinel = useRef<HTMLButtonElement>(null);
-  const onMouseDownTarget: MutableRefObject<Node | null> = useRef<Node | null>(
-    null
-  );
+  const onMouseDownTarget = useRef<Node | null>(null);
 
   const presenceContext = useContext(ComposedModalPresenceContext);
   const mergedRefs = useMergeRefs([ref, presenceContext?.presenceRef]);

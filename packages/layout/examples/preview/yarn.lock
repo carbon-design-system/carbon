@@ -459,51 +459,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"camel-case@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "camel-case@npm:4.1.2"
-  dependencies:
-    pascal-case: "npm:^3.1.2"
-    tslib: "npm:^2.0.3"
-  checksum: 10/bcbd25cd253b3cbc69be3f535750137dbf2beb70f093bdc575f73f800acc8443d34fd52ab8f0a2413c34f1e8203139ffc88428d8863e4dfe530cfb257a379ad6
-  languageName: node
-  linkType: hard
-
 "caniuse-lite@npm:^1.0.30001579":
   version: 1.0.30001617
   resolution: "caniuse-lite@npm:1.0.30001617"
   checksum: 10/eac442b9ad12801086be19f6dc17056827fe398f1c05983357e2531c8183ee890ffc8fb973d54519ad7114a2fd47de8f33ec66d98565b995fef1c6ba02b5bc5b
-  languageName: node
-  linkType: hard
-
-"capital-case@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "capital-case@npm:1.0.4"
-  dependencies:
-    no-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-    upper-case-first: "npm:^2.0.2"
-  checksum: 10/41fa8fa87f6d24d0835a2b4a9341a3eaecb64ac29cd7c5391f35d6175a0fa98ab044e7f2602e1ec3afc886231462ed71b5b80c590b8b41af903ec2c15e5c5931
-  languageName: node
-  linkType: hard
-
-"change-case@npm:^4.1.1":
-  version: 4.1.2
-  resolution: "change-case@npm:4.1.2"
-  dependencies:
-    camel-case: "npm:^4.1.2"
-    capital-case: "npm:^1.0.4"
-    constant-case: "npm:^3.0.4"
-    dot-case: "npm:^3.0.4"
-    header-case: "npm:^2.0.4"
-    no-case: "npm:^3.0.4"
-    param-case: "npm:^3.0.4"
-    pascal-case: "npm:^3.1.2"
-    path-case: "npm:^3.0.4"
-    sentence-case: "npm:^3.0.4"
-    snake-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-  checksum: 10/e4bc4a093a1f7cce8b33896665cf9e456e3bc3cc0def2ad7691b1994cfca99b3188d0a513b16855b01a6bd20692fcde12a7d4d87a5615c4c515bbbf0e651f116
   languageName: node
   linkType: hard
 
@@ -568,17 +527,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"constant-case@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "constant-case@npm:3.0.4"
-  dependencies:
-    no-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-    upper-case: "npm:^2.0.2"
-  checksum: 10/6c3346d51afc28d9fae922e966c68eb77a19d94858dba230dd92d7b918b37d36db50f0311e9ecf6847e43e934b1c01406a0936973376ab17ec2c471fbcfb2cf3
-  languageName: node
-  linkType: hard
-
 "core-util-is@npm:~1.0.0":
   version: 1.0.2
   resolution: "core-util-is@npm:1.0.2"
@@ -616,16 +564,6 @@ __metadata:
   version: 2.1.2
   resolution: "detect-libc@npm:2.1.2"
   checksum: 10/b736c8d97d5d46164c0d1bed53eb4e6a3b1d8530d460211e2d52f1c552875e706c58a5376854e4e54f8b828c9cada58c855288c968522eb93ac7696d65970766
-  languageName: node
-  linkType: hard
-
-"dot-case@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "dot-case@npm:3.0.4"
-  dependencies:
-    no-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-  checksum: 10/a65e3519414856df0228b9f645332f974f2bf5433370f544a681122eab59e66038fc3349b4be1cdc47152779dac71a5864f1ccda2f745e767c46e9c6543b1169
   languageName: node
   linkType: hard
 
@@ -746,16 +684,6 @@ __metadata:
   version: 2.0.1
   resolution: "has-unicode@npm:2.0.1"
   checksum: 10/041b4293ad6bf391e21c5d85ed03f412506d6623786b801c4ab39e4e6ca54993f13201bceb544d92963f9e0024e6e7fbf0cb1d84c9d6b31cb9c79c8c990d13d8
-  languageName: node
-  linkType: hard
-
-"header-case@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "header-case@npm:2.0.4"
-  dependencies:
-    capital-case: "npm:^1.0.4"
-    tslib: "npm:^2.0.3"
-  checksum: 10/571c83eeb25e8130d172218712f807c0b96d62b020981400bccc1503a7cf14b09b8b10498a962d2739eccf231d950e3848ba7d420b58a6acd2f9283439546cd9
   languageName: node
   linkType: hard
 
@@ -939,7 +867,6 @@ __metadata:
   dependencies:
     "@carbon/layout": "link:../../"
     "@carbon/styles": "link:../../../styles"
-    change-case: "npm:^4.1.1"
     next: "npm:^15.5.7"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -955,15 +882,6 @@ __metadata:
   bin:
     loose-envify: cli.js
   checksum: 10/6517e24e0cad87ec9888f500c5b5947032cdfe6ef65e1c1936a0c48a524b81e65542c9c3edc91c97d5bddc806ee2a985dbc79be89215d613b1de5db6d1cfe6f4
-  languageName: node
-  linkType: hard
-
-"lower-case@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "lower-case@npm:2.0.2"
-  dependencies:
-    tslib: "npm:^2.0.3"
-  checksum: 10/83a0a5f159ad7614bee8bf976b96275f3954335a84fad2696927f609ddae902802c4f3312d86668722e668bef41400254807e1d3a7f2e8c3eede79691aa1f010
   languageName: node
   linkType: hard
 
@@ -1176,16 +1094,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"no-case@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "no-case@npm:3.0.4"
-  dependencies:
-    lower-case: "npm:^2.0.2"
-    tslib: "npm:^2.0.3"
-  checksum: 10/0b2ebc113dfcf737d48dde49cfebf3ad2d82a8c3188e7100c6f375e30eafbef9e9124aadc3becef237b042fd5eb0aad2fd78669c20972d045bbe7fea8ba0be5c
-  languageName: node
-  linkType: hard
-
 "node-gyp@npm:latest":
   version: 8.0.0
   resolution: "node-gyp@npm:8.0.0"
@@ -1265,36 +1173,6 @@ __metadata:
   dependencies:
     aggregate-error: "npm:^3.0.0"
   checksum: 10/7ba4a2b1e24c05e1fc14bbaea0fc6d85cf005ae7e9c9425d4575550f37e2e584b1af97bcde78eacd7559208f20995988d52881334db16cf77bc1bcf68e48ed7c
-  languageName: node
-  linkType: hard
-
-"param-case@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "param-case@npm:3.0.4"
-  dependencies:
-    dot-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-  checksum: 10/b34227fd0f794e078776eb3aa6247442056cb47761e9cd2c4c881c86d84c64205f6a56ef0d70b41ee7d77da02c3f4ed2f88e3896a8fefe08bdfb4deca037c687
-  languageName: node
-  linkType: hard
-
-"pascal-case@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "pascal-case@npm:3.1.2"
-  dependencies:
-    no-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-  checksum: 10/ba98bfd595fc91ef3d30f4243b1aee2f6ec41c53b4546bfa3039487c367abaa182471dcfc830a1f9e1a0df00c14a370514fa2b3a1aacc68b15a460c31116873e
-  languageName: node
-  linkType: hard
-
-"path-case@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "path-case@npm:3.0.4"
-  dependencies:
-    dot-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-  checksum: 10/61de0526222629f65038a66f63330dd22d5b54014ded6636283e1d15364da38b3cf29e4433aa3f9d8b0dba407ae2b059c23b0104a34ee789944b1bc1c5c7e06d
   languageName: node
   linkType: hard
 
@@ -1473,17 +1351,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sentence-case@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "sentence-case@npm:3.0.4"
-  dependencies:
-    no-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-    upper-case-first: "npm:^2.0.2"
-  checksum: 10/3cfe6c0143e649132365695706702d7f729f484fa7b25f43435876efe7af2478243eefb052bacbcce10babf9319fd6b5b6bc59b94c80a1c819bcbb40651465d5
-  languageName: node
-  linkType: hard
-
 "set-blocking@npm:~2.0.0":
   version: 2.0.0
   resolution: "set-blocking@npm:2.0.0"
@@ -1580,16 +1447,6 @@ __metadata:
   version: 4.1.0
   resolution: "smart-buffer@npm:4.1.0"
   checksum: 10/eede9ea4456bd33d2d8facbea301a0ce4c1049ed89955214b1bfe56eba8e1fcfafcc944f62f1be53d407c76c4e76b665fd6a9f5d572c554ccef91307863ccb06
-  languageName: node
-  linkType: hard
-
-"snake-case@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "snake-case@npm:3.0.4"
-  dependencies:
-    dot-case: "npm:^3.0.4"
-    tslib: "npm:^2.0.3"
-  checksum: 10/0a7a79900bbb36f8aaa922cf111702a3647ac6165736d5dc96d3ef367efc50465cac70c53cd172c382b022dac72ec91710608e5393de71f76d7142e6fd80e8a3
   languageName: node
   linkType: hard
 
@@ -1724,7 +1581,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.3, tslib@npm:^2.4.0":
+"tslib@npm:^2.4.0":
   version: 2.4.1
   resolution: "tslib@npm:2.4.1"
   checksum: 10/e14311d5392ec0e3519feb9afdb54483d7f3aa2d3def6f1a1a30bd3deca5dfeadd106e80bee9ba880bce86a2e50854c9fe5958572cd188d7ac6f8625101a6a8f
@@ -1753,24 +1610,6 @@ __metadata:
   dependencies:
     imurmurhash: "npm:^0.1.4"
   checksum: 10/6cfaf91976acc9c125fd0686c561ee9ca0784bb4b2b408972e6cd30e747b4ff0ca50264c01bcf5e711b463535ea611ffb84199e9f73088cd79ac9ddee8154042
-  languageName: node
-  linkType: hard
-
-"upper-case-first@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "upper-case-first@npm:2.0.2"
-  dependencies:
-    tslib: "npm:^2.0.3"
-  checksum: 10/4487db4701effe3b54ced4b3e4aa4d9ab06c548f97244d04aafb642eedf96a76d5a03cf5f38f10f415531d5792d1ac6e1b50f2a76984dc6964ad530f12876409
-  languageName: node
-  linkType: hard
-
-"upper-case@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "upper-case@npm:2.0.2"
-  dependencies:
-    tslib: "npm:^2.0.3"
-  checksum: 10/508723a2b03ab90cf1d6b7e0397513980fab821cbe79c87341d0e96cedefadf0d85f9d71eac24ab23f526a041d585a575cfca120a9f920e44eb4f8a7cf89121c
   languageName: node
   linkType: hard
 

@@ -20,6 +20,11 @@ export enum TABS_KEYBOARD_ACTION {
   NAVIGATING = 'navigating',
 
   /**
+   * Keyboard action to Enter/Space.
+   */
+  ACTIVATING = 'activating',
+
+  /**
    * Keyboard action to navigate to first tab using home key
    */
   HOME = 'home',

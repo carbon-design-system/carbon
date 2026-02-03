@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,6 +113,7 @@ export interface DataTableHeader {
   header: ReactNode;
   slug?: ReactElement;
   decorator?: ReactElement;
+  isSortable?: boolean;
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
@@ -211,8 +212,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 
   getBatchActionProps: (options?: { [key: string]: unknown }) => {
     onCancel: () => void;
-    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-    onSelectAll?: () => void | undefined;
+    onSelectAll?: () => void;
     shouldShowBatchActions: boolean;
     totalCount: number;
     totalSelected: number;
@@ -347,7 +347,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     render,
     translateWithId: t = defaultTranslateWithId,
     size,
-    isSortable: isSortableProp,
+    isSortable,
     useZebraStyles,
     useStaticWidth,
     stickyHeader,
@@ -393,7 +393,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const getHeaderProps: RenderProps['getHeaderProps'] = ({
     header,
     onClick,
-    isSortable = isSortableProp,
+    isSortable: headerIsSortable,
     ...rest
   }) => {
     const { sortDirection, sortHeaderKey } = state;
@@ -403,7 +403,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       ...rest,
       key,
       sortDirection,
-      isSortable,
+      isSortable: headerIsSortable ?? header.isSortable ?? isSortable,
       isSortHeader: sortHeaderKey === key,
       slug,
       decorator,
@@ -589,7 +589,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     return {
       useZebraStyles,
       size: size ?? 'lg',
-      isSortable: isSortableProp,
+      isSortable,
       useStaticWidth,
       stickyHeader,
       overflowMenuOnHover: overflowMenuOnHover ?? false,
@@ -887,7 +887,7 @@ DataTable.propTypes = {
   /**
    * Pass in the children that will be rendered within the Table
    */
-  children: PropTypes.node,
+  children: PropTypes.func,
 
   /**
    * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
@@ -910,6 +910,7 @@ DataTable.propTypes = {
     PropTypes.shape({
       key: PropTypes.string.isRequired,
       header: PropTypes.node.isRequired,
+      isSortable: PropTypes.bool,
     })
   ).isRequired,
 

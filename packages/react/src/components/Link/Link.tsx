@@ -157,8 +157,10 @@ const LinkBase = React.forwardRef<
 );
 const Link = LinkBase as LinkComponent;
 
-(Link as React.FC).displayName = 'Link';
-(Link as React.FC).propTypes = {
+// @ts-expect-error - `displayName` isn't typed.
+Link.displayName = 'Link';
+// @ts-expect-error - `propTypes` isn't typed.
+Link.propTypes = {
   /**
    * Provide a custom element or component to render the top-level node for the
    * component.

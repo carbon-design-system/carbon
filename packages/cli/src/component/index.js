@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
 import { fileURLToPath } from 'url';
 import fs from 'fs-extra';
 import path from 'path';
-import template from 'lodash.template';
+import template from 'lodash/template.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATES_DIR = path.join(__dirname, 'templates');

@@ -457,8 +457,7 @@ class CDSComboBox extends CDSDropdown {
     `;
   }
 
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     const { clearSelectionLabel, _filterInputValue: filterInputValue } = this;
 
     if (filterInputValue.length != 0) {

@@ -7,6 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -36,6 +37,12 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   href = '';
 
   /**
+   * Link `target`.
+   */
+  @property({ reflect: true })
+  target!: string;
+
+  /**
    * The title.
    */
   @property()
@@ -60,13 +67,17 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   }
 
   render() {
-    const { active, href, title } = this;
+    const { active, href, target, title } = this;
     const classes = classMap({
       [`${prefix}--side-nav__link`]: true,
       [`${prefix}--side-nav__link--current`]: active,
     });
     return html`
-      <a part="link" class="${classes}" href="${href}">
+      <a
+        part="link"
+        class="${classes}"
+        href="${href}"
+        target="${ifDefined(target)}">
         <span part="title" class="${prefix}--side-nav__link-text">
           <slot>${title}</slot>
         </span>

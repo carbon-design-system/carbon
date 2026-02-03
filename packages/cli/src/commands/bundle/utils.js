@@ -7,7 +7,7 @@
 
 import path from 'path';
 import fs from 'fs-extra';
-import { pascalCase } from 'change-case';
+import { pascalCase } from 'change-case-all';
 
 export function formatGlobals(string) {
   const mappings = string.split(',').map((mapping) => {

@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { html, LitElement } from 'lit';
+import { adoptStyles, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
@@ -17,6 +17,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 import styles from './toggletip.scss?lit';
+import popoverStyles from '../popover/popover.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -72,6 +73,8 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     if (this.defaultOpen && !this.hasAttribute('open')) {
       this.open = true;
     }
+
+    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }
 
   /**
@@ -79,10 +82,11 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   private _handleActionsSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement).assignedNodes();
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    hasContent
-      ? this.setAttribute('has-actions', '')
-      : this.removeAttribute('has-actions');
+    if (hasContent) {
+      this.setAttribute('has-actions', '');
+    } else {
+      this.removeAttribute('has-actions');
+    }
   }
 
   protected _handleClick() {
@@ -271,8 +275,6 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-
-  static styles = styles;
 }
 
 export default CDSToggletip;

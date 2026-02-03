@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -1169,6 +1169,37 @@ describe('Range date picker', () => {
     );
     expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
     consoleWarnSpy.mockRestore();
+  });
+
+  it('should keep calendar open when click event lands outside after mousedown inside', async () => {
+    render(
+      <DatePicker datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    const startDateInput = screen.getByLabelText('Start date');
+    await userEvent.click(startDateInput);
+
+    const calendar = screen.getByRole('application');
+    expect(calendar).toHaveClass('open');
+
+    fireEvent.mouseDown(startDateInput);
+    // Simulate a click event that bubbles from outside after a scroll or blur.
+    document.body.dispatchEvent(
+      new MouseEvent('click', { bubbles: true, cancelable: true })
+    );
+
+    expect(calendar).toHaveClass('open');
   });
 
   describe('rangePlugin', () => {
