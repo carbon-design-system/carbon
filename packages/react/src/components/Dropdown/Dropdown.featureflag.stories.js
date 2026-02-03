@@ -39,7 +39,7 @@ export const FloatingStyles = (args) => {
       text: 'Option 2',
     },
     {
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -60,21 +60,27 @@ export const FloatingStyles = (args) => {
   ];
 
   return (
-    <Dropdown
-      id="default"
-      titleText="Dropdown label"
-      helperText="This is some helper text"
-      initialSelectedItem={items[1]}
-      label="Option 1"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...args}
-    />
+    <div style={{ width: 400 }}>
+      <Dropdown
+        id="default"
+        titleText="Label"
+        helperText="Helper text"
+        initialSelectedItem={items[1]}
+        label="Option 1"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...args}
+      />
+    </div>
   );
 };
 
 FloatingStyles.args = {
   direction: 'bottom',
+  invalid: false,
+  invalidText: 'Error message goes here',
+  warn: false,
+  warnText: 'Warning message goes here',
 };
 
 FloatingStyles.argTypes = {
