@@ -273,7 +273,7 @@ IconButtonWithBadge.args = {
   hasIconOnly: true,
   renderIcon: 'Notification',
   iconDescription: 'Notifications',
-  badgeCount: 8,
+  badgeCount: 4,
   kind: 'ghost',
   size: 'lg',
 };
