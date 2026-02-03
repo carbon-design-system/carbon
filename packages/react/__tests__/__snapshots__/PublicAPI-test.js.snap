@@ -6786,7 +6786,7 @@ Map {
         "type": "string",
       },
       "label": {
-        "type": "node",
+        "type": "string",
       },
       "labelClassName": {
         "type": "string",
