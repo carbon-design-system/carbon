@@ -21,25 +21,19 @@ import Add16 from '@carbon/icons/es/add/16.js';
 import Notification16 from '@carbon/icons/es/notification/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
-// TODO: missing props in comparison to react:
-// tooltipDropShadow
-// tooltipHighContrast
-// autoAlign
-// iconDescription
-
-// TODO: additional props supported in WC but not in react:
-// buttonClassName
-// batchAction (no relevant logic, only attribute. ignore?)
-// autofocus
-// download
-// hreflang
-// ping
-// hasMainContent
-// _hasIcon (private ignore. is equivalent to public hasIconOnly in react)
+/**
+ * Missing props compared to React:
+ * - tooltipDropShadow
+ * - tooltipHighContrast
+ * - autoAlign
+ * - iconDescription
+ *
+ * Note:
+ * In React, `iconDescription` is used for both the SVG aria-label and tooltip text.
+ * In WC, we have `tooltipText`, but it does not currently add an aria-label to SVGs.
+ */
 
 const textButtonControls = [
-  // 'autofocus',
-  // 'buttonClassName',
   'dangerDescription',
   'disabled',
   'href',
@@ -53,10 +47,10 @@ const textButtonControls = [
   'target',
   'type',
 ];
+
 const iconButtonControls = [
   ...textButtonControls,
   'isSelected',
-  // 'autoAlign',
   'count',
   'tooltipAlignment',
   'tooltipPosition',
@@ -75,7 +69,21 @@ const kind = [
 
 const types = [BUTTON_TYPE.BUTTON, BUTTON_TYPE.RESET, BUTTON_TYPE.SUBMIT];
 
-// TODO: this renders as "right", "", "left". in comparison to react which renders as "start", "center", "end". need to investigate for parity.
+const sizes = [
+  BUTTON_SIZE.EXTRA_SMALL,
+  BUTTON_SIZE.SMALL,
+  BUTTON_SIZE.MEDIUM,
+  BUTTON_SIZE.LARGE,
+  BUTTON_SIZE.EXTRA_LARGE,
+  BUTTON_SIZE.EXTRA_EXTRA_LARGE,
+];
+
+/**
+ * TODO:
+ * This currently renders as "right", "", "left".
+ * In React, it renders as "start", "center", "end".
+ * Needs investigation for parity.
+ */
 const alignmentOptions = {
   ['Start']: BUTTON_TOOLTIP_ALIGNMENT.START,
   ['Center']: BUTTON_TOOLTIP_ALIGNMENT.CENTER,
@@ -89,33 +97,11 @@ const positionOptions = [
   BUTTON_TOOLTIP_POSITION.LEFT,
 ];
 
-const sizes = [
-  BUTTON_SIZE.EXTRA_SMALL,
-  BUTTON_SIZE.SMALL,
-  BUTTON_SIZE.MEDIUM,
-  BUTTON_SIZE.LARGE,
-  BUTTON_SIZE.EXTRA_LARGE,
-  BUTTON_SIZE.EXTRA_EXTRA_LARGE,
-];
-
 const sharedArgTypes = {
-  autofocus: {
-    description:
-      'Optionally specify whether the Button should be auto-focused on page load',
-    type: { name: 'boolean' },
-  },
-  autoAlign: {
-    table: { defaultValue: { summary: false } },
-  },
   disabled: {
     description: 'Specify whether the Button should be disabled, or not',
     type: { name: 'boolean' },
     table: { defaultValue: { summary: false } },
-  },
-  buttonClassName: {
-    description: 'Optionally specify a class to be added to the button element',
-    control: 'text',
-    type: { name: 'string' },
   },
   dangerDescription: {
     description:
@@ -138,7 +124,11 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: 'primary' } },
   },
   linkRole: {
-    // TODO: doesn't meet parity with react, the `role` prop in react works on button as well as `<a>` tag, need to check
+    /**
+     * TODO:
+     * In React, the `role` prop applies to both `<button>` and `<a>`.
+     * Here, it only applies to `<a>`. Needs parity investigation.
+     */
     description:
       'Optional prop to specify the link role when using an `<a>` element',
     control: 'text',
@@ -187,7 +177,11 @@ const sharedArgTypes = {
     table: { defaultValue: { summary: true } },
   },
   tooltipText: {
-    // TODO: tooltip text does not work when we pass href need to investigate
+    /**
+     * TODO:
+     * Tooltip text does not work when `href` is provided.
+     * Needs investigation for parity with React.
+     */
     description:
       'Specify the text content to be placed inside the tooltip for icon-only buttons',
     control: 'text',
@@ -234,11 +228,15 @@ const sharedArgTypes = {
   },
 };
 
-// Note: defining attributes with `.` would not render them in storybook code tab. we switch to ifDefined for such cases.
+/**
+ * Note:
+ * Attributes prefixed with `.` do not render in the Storybook code tab.
+ * `ifDefined` is used instead to preserve visibility.
+ */
+
 const baseButtonTemplate = (args) => html`
   <cds-button
     @click=${args.onClick}
-    button-class-name=${ifDefined(args.buttonClassName)}
     danger-description=${ifDefined(args.dangerDescription)}
     ?disabled="${args.disabled}"
     href=${ifDefined(args.href)}
@@ -249,15 +247,14 @@ const baseButtonTemplate = (args) => html`
     target=${ifDefined(args.target)}
     tabindex=${ifDefined(args.tabindex)}
     size=${ifDefined(args.size)}
-    ?autofocus=${args.autofocus}
     type=${ifDefined(args.type)}>
     Button ${args.iconSlot?.({ slot: 'icon' })}
   </cds-button>
 `;
+
 const iconButtonTemplate = (args) => html`
   <cds-button
     @click=${args.onClick}
-    button-class-name=${ifDefined(args.buttonClassName)}
     danger-description=${ifDefined(args.dangerDescription)}
     ?disabled="${args.disabled}"
     href=${ifDefined(args.href)}
@@ -282,131 +279,81 @@ const iconButtonTemplate = (args) => html`
   </cds-button>
 `;
 
+const textControls = {
+  controls: { include: textButtonControls },
+};
+
+const iconControls = {
+  controls: { include: iconButtonControls },
+};
+
 export const Default = {
   argTypes: sharedArgTypes,
   render: baseButtonTemplate,
-};
-
-Default.parameters = {
-  controls: {
-    include: textButtonControls,
-  },
+  parameters: textControls,
 };
 
 export const Secondary = {
   argTypes: sharedArgTypes,
-  args: {
-    kind: BUTTON_KIND.SECONDARY,
-  },
+  args: { kind: BUTTON_KIND.SECONDARY },
   render: baseButtonTemplate,
-};
-
-Secondary.parameters = {
-  controls: {
-    include: textButtonControls,
-  },
+  parameters: textControls,
 };
 
 export const Tertiary = {
   argTypes: sharedArgTypes,
-  args: {
-    kind: BUTTON_KIND.TERTIARY,
-  },
+  args: { kind: BUTTON_KIND.TERTIARY },
   render: baseButtonTemplate,
-};
-
-Tertiary.parameters = {
-  controls: {
-    include: textButtonControls,
-  },
+  parameters: textControls,
 };
 
 export const Ghost = {
   argTypes: sharedArgTypes,
-  args: {
-    kind: BUTTON_KIND.GHOST,
-  },
+  args: { kind: BUTTON_KIND.GHOST },
   render: baseButtonTemplate,
-};
-
-Ghost.parameters = {
-  controls: {
-    include: textButtonControls,
-  },
+  parameters: textControls,
 };
 
 export const Danger = {
   argTypes: sharedArgTypes,
-  args: {
-    kind: BUTTON_KIND.DANGER,
-  },
+  args: { kind: BUTTON_KIND.DANGER },
   render: baseButtonTemplate,
-};
-
-Danger.parameters = {
-  controls: {
-    include: textButtonControls,
-  },
+  parameters: textControls,
 };
 
 export const DangerTertiary = {
   argTypes: sharedArgTypes,
-  args: {
-    kind: BUTTON_KIND.DANGER_TERTIARY,
-  },
+  args: { kind: BUTTON_KIND.DANGER_TERTIARY },
   render: baseButtonTemplate,
-};
-
-DangerTertiary.parameters = {
-  controls: {
-    include: textButtonControls,
-  },
+  parameters: textControls,
 };
 
 export const DangerGhost = {
   argTypes: sharedArgTypes,
-  args: {
-    kind: BUTTON_KIND.DANGER_GHOST,
-  },
+  args: { kind: BUTTON_KIND.DANGER_GHOST },
   render: baseButtonTemplate,
-};
-
-DangerGhost.parameters = {
-  controls: {
-    include: textButtonControls,
-  },
+  parameters: textControls,
 };
 
 export const IconButton = {
   argTypes: {
     ...sharedArgTypes,
-    count: {
-      table: { readonly: true },
-    },
+    count: { table: { readonly: true } },
   },
   args: {
     kind: BUTTON_KIND.PRIMARY,
-    iconSlot: (props) => iconLoader(Add16, props), // TODO: check this again so that its set in controls as default
+    iconSlot: (props) => iconLoader(Add16, props),
     tooltipText: 'Icon Description',
   },
   render: iconButtonTemplate,
-};
-
-IconButton.parameters = {
-  controls: {
-    include: iconButtonControls,
-  },
+  parameters: iconControls,
 };
 
 export const IconButtonWithBadge = {
   argTypes: {
     ...sharedArgTypes,
-    kind: {
-      table: { readonly: true },
-    },
-    size: {
-      table: { readonly: true },
-    },
+    kind: { table: { readonly: true } },
+    size: { table: { readonly: true } },
   },
   args: {
     count: 4,
@@ -415,35 +362,32 @@ export const IconButtonWithBadge = {
     size: BUTTON_SIZE.LARGE,
   },
   render: iconButtonTemplate,
+  parameters: iconControls,
 };
 
-IconButtonWithBadge.parameters = {
-  controls: {
-    include: iconButtonControls,
-  },
-};
-
-// TODO: complete SetOfButtons story
+/**
+ * TODO:
+ * Fluid feature parity with React is still pending.
+ */
 export const SetOfButtons = {
-  render: () => html`
-    <cds-button-set>
-      <cds-button kind="secondary"> Secondary button </cds-button>
-      <cds-button kind="primary"> Primary button</cds-button>
+  argTypes: {
+    stacked: {
+      description:
+        'Specify the button arrangement of the set (vertically stacked or horizontal)',
+      type: { name: 'boolean' },
+      table: { defaultValue: { summary: false } },
+    },
+  },
+  render: (args) => html`
+    <cds-button-set ?stacked=${args.stacked}>
+      <cds-button @click=${args.onClick} kind="secondary">
+        Secondary
+      </cds-button>
+      <cds-button @click=${args.onClick} kind="primary"> Primary</cds-button>
     </cds-button-set>
   `,
 };
 
-// TODO: supported props on skeleton:
-// autofocus,
-// disabled,
-// download,
-// href,
-// hreflang,
-// ping,
-// rel,
-// size,
-// target,
-// type,
 export const Skeleton = {
   argTypes: {
     size: {
@@ -465,10 +409,6 @@ export const Skeleton = {
     html`<cds-button-skeleton
       size="${args.size}"
       href="${args.href}"></cds-button-skeleton>`,
-};
-
-Skeleton.parameters = {
-  controls: { include: [...textButtonControls, ...iconButtonControls] },
 };
 
 const meta = {
