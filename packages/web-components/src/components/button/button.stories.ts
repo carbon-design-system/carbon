@@ -340,6 +340,7 @@ export const IconButton = {
   argTypes: {
     ...sharedArgTypes,
     count: { table: { readonly: true } },
+    iconSlot: { table: { readonly: true } },
   },
   args: {
     kind: BUTTON_KIND.PRIMARY,
@@ -353,13 +354,15 @@ export const IconButton = {
 export const IconButtonWithBadge = {
   argTypes: {
     ...sharedArgTypes,
+    iconSlot: { table: { readonly: true } },
     kind: { table: { readonly: true } },
     size: { table: { readonly: true } },
   },
   args: {
     count: 4,
-    ...IconButton.args,
     kind: BUTTON_KIND.GHOST,
+    iconSlot: (props) => iconLoader(Notification16, props),
+    tooltipText: 'Notifications',
     size: BUTTON_SIZE.LARGE,
   },
   render: iconButtonTemplate,
