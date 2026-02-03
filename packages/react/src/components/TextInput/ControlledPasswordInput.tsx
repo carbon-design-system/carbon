@@ -191,11 +191,11 @@ const ControlledPasswordInput = forwardRef<
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
-    const label = labelText ? (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
-    ) : null;
+    );
     const error = invalid ? (
       <div className={`${prefix}--form-requirement`} id={errorId}>
         {invalidText}
@@ -219,7 +219,8 @@ const ControlledPasswordInput = forwardRef<
       }
     );
 
-    const helperId = !helperText
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helperId = !hasHelper
       ? undefined
       : `controlled-password-helper-text-${controlledPasswordInstanceId}`;
 
@@ -230,7 +231,7 @@ const ControlledPasswordInput = forwardRef<
             invalid,
             sharedTextInputProps,
             invalidId: errorId,
-            hasHelper: !error && helperText ? true : false,
+            hasHelper: !error && hasHelper,
             helperId,
           })}
           data-toggle-password-visibility={type === 'password'}
@@ -247,11 +248,11 @@ const ControlledPasswordInput = forwardRef<
       </>
     );
 
-    const helper = helperText ? (
+    const helper = hasHelper && (
       <div id={helperId} className={helperTextClasses}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     return (
       <div
