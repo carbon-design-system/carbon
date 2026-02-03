@@ -23,6 +23,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Missing props compared to React:
+ * - as
  * - tooltipDropShadow
  * - tooltipHighContrast
  * - autoAlign
