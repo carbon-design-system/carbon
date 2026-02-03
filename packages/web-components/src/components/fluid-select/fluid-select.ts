@@ -11,6 +11,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import CDSSelect from '../select/select';
 import styles from './fluid-select.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
+import { state } from 'lit/decorators.js';
 
 /**
  * Fluid text select.
@@ -19,9 +20,49 @@ import { classMap } from 'lit/directives/class-map.js';
  */
 @customElement(`${prefix}-fluid-select`)
 class CDSFluidSelect extends CDSSelect {
+  @state()
+  private _hasFocus = false;
+
+  private _handleToggleTipLabelClick = (event: MouseEvent) => {
+    const path = event.composedPath();
+    const hasLabel = path.some((node) => node instanceof HTMLLabelElement);
+    const hasToggleTip = path.some(
+      (node) =>
+        node instanceof HTMLElement &&
+        (node.matches?.(`${prefix}-toggletip`) ||
+          node.classList.contains(`${prefix}--toggletip-button`))
+    );
+
+    if (hasLabel && hasToggleTip) {
+      event.preventDefault();
+    }
+  };
+
+  private _handleFocusIn = (event: FocusEvent) => {
+    if ((event.target as Element | null)?.matches?.('select')) {
+      this._hasFocus = true;
+    }
+  };
+
+  private _handleFocusOut = (event: FocusEvent) => {
+    if ((event.target as Element | null)?.matches?.('select')) {
+      this._hasFocus = false;
+    }
+  };
+
   connectedCallback() {
     this.setAttribute('isFluid', 'true');
     super.connectedCallback();
+    this.addEventListener('click', this._handleToggleTipLabelClick, {
+      capture: true,
+    });
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', this._handleToggleTipLabelClick, {
+      capture: true,
+    });
+    super.disconnectedCallback?.();
   }
 
   updated(changedProperties) {
@@ -43,8 +84,14 @@ class CDSFluidSelect extends CDSSelect {
       [`${prefix}--select--warning`]: this.warn && !this.invalid,
       [`${prefix}--select--disabled`]: this.disabled,
       [`${prefix}--select--readonly`]: this.readonly,
+      [`${prefix}--select--fluid--focus`]: this._hasFocus,
     });
-    return html`<div class="${wrapperClasses}">${super.render()}</div>`;
+    return html`<div
+      class="${wrapperClasses}"
+      @focusin="${this._handleFocusIn}"
+      @focusout="${this._handleFocusOut}">
+      ${super.render()}
+    </div>`;
   }
 
   static styles = [CDSSelect.styles, styles];

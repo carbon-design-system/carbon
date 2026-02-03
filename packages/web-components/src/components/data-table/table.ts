@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -885,10 +885,11 @@ class CDSTable extends HostListenerMixin(LitElement) {
       Array.prototype.slice
         .call((row as HTMLElement).children)
         .forEach((cell, index) => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-          headersWithAILabel.includes(index)
-            ? cell.setAttribute('ai-label-in-header', '')
-            : cell.removeAttribute('ai-label-in-header');
+          if (headersWithAILabel.includes(index)) {
+            cell.setAttribute('ai-label-in-header', '');
+          } else {
+            cell.removeAttribute('ai-label-in-header');
+          }
         });
     });
   }
