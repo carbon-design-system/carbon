@@ -89,6 +89,10 @@
   @extend .#{$prefix}--overflow-menu-options--open;
 }
 
+:host(#{$prefix}-overflow-menu-body[data-table]) {
+  @extend .#{$prefix}--overflow-menu-options--data-table;
+}
+
 :host(#{$prefix}-overflow-menu-body[size='xs']) {
   @extend .#{$prefix}--overflow-menu-options--xs;
 }
