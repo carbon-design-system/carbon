@@ -121,6 +121,16 @@ describe('Dropdown', () => {
     expect(emptySpanTargeting).toBeNull();
   });
 
+  it('should not update highlightedIndex when mouse moves over items', async () => {
+    render(<Dropdown {...mockProps} />);
+    await openMenu();
+    const items = screen.getAllByRole('option');
+    fireEvent.mouseMove(items[1]);
+    expect(items[1]).not.toHaveClass(
+      `${prefix}--list-box__menu-item--highlighted`
+    );
+  });
+
   describe('title', () => {
     it('renders a title', async () => {
       render(<Dropdown {...mockProps} titleText="Email Input" />);
