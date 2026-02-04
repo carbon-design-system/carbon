@@ -265,6 +265,7 @@ export const ExplainabilityPopover = {
     defaultOpen: true,
     alignment: tooltipAlignments.bottom,
     showActions: true,
+    autoalign: false,
   },
   argTypes: {
     ...argTypes,
