@@ -137,15 +137,16 @@ const Checkbox = React.forwardRef(
 
     const checkboxGroupInstanceId = useId();
 
-    const helperId = !helperText
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helperId = !hasHelper
       ? undefined
       : `checkbox-helper-text-${checkboxGroupInstanceId}`;
 
-    const helper = helperText ? (
+    const helper = hasHelper && (
       <div id={helperId} className={`${prefix}--form__helper-text`}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     const wrapperClasses = classNames(
       `${prefix}--form-item`,

@@ -824,6 +824,78 @@ describe('ComboBox', () => {
     });
   });
 
+  describe('invalid and warn states', () => {
+    it('should not display invalid state when readonly', async () => {
+      render(
+        <ComboBox {...mockProps} invalid invalidText="Invalid text" readOnly />
+      );
+      await waitForPosition();
+
+      // Check that the invalid class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--invalid`);
+
+      // Check that the invalid text is not displayed
+      expect(screen.queryByText('Invalid text')).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid state when disabled', async () => {
+      render(
+        <ComboBox {...mockProps} invalid invalidText="Invalid text" disabled />
+      );
+      await waitForPosition();
+
+      // Check that the invalid class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--invalid`);
+
+      // Check that the invalid text is not displayed
+      expect(screen.queryByText('Invalid text')).not.toBeInTheDocument();
+    });
+
+    it('should not display warn state when readonly', async () => {
+      render(<ComboBox {...mockProps} warn warnText="Warning text" readOnly />);
+      await waitForPosition();
+
+      // Check that the warn class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--warning`);
+
+      // Check that the warn text is not displayed
+      expect(screen.queryByText('Warning text')).not.toBeInTheDocument();
+    });
+
+    it('should not display warn state when disabled', async () => {
+      render(<ComboBox {...mockProps} warn warnText="Warning text" disabled />);
+      await waitForPosition();
+
+      // Check that the warn class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--warning`);
+
+      // Check that the warn text is not displayed
+      expect(screen.queryByText('Warning text')).not.toBeInTheDocument();
+    });
+
+    it('should display invalid state when not readonly or disabled', async () => {
+      render(<ComboBox {...mockProps} invalid invalidText="Invalid text" />);
+      await waitForPosition();
+
+      // Check that the invalid class is applied
+      expect(findListBoxNode()).toHaveClass(`${prefix}--list-box--invalid`);
+
+      // Check that the invalid text is displayed
+      expect(screen.getByText('Invalid text')).toBeInTheDocument();
+    });
+
+    it('should display warn state when not readonly or disabled', async () => {
+      render(<ComboBox {...mockProps} warn warnText="Warning text" />);
+      await waitForPosition();
+
+      // Check that the warn class is applied
+      expect(findListBoxNode()).toHaveClass(`${prefix}--list-box--warning`);
+
+      // Check that the warn text is displayed
+      expect(screen.getByText('Warning text')).toBeInTheDocument();
+    });
+  });
+
   describe('downshift quirks', () => {
     it('should set `inputValue` to an empty string if a false-y value is given', async () => {
       render(<ComboBox {...mockProps} />);
