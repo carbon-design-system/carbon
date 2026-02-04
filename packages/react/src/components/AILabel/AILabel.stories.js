@@ -22,19 +22,16 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['AILabelContent', 'aiTextLabel', 'slugLabel'],
+    },
   },
 };
 const sharedArgTypes = {
-  AILabelContent: {
-    table: { disable: true },
-  },
   aiText: {
     control: {
       type: 'text',
     },
-  },
-  aiTextLabel: {
-    table: { disable: true },
   },
   align: {
     options: [
@@ -88,9 +85,6 @@ const sharedArgTypes = {
     options: ['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'],
     control: { type: 'select' },
   },
-  slugLabel: {
-    table: { disable: true },
-  },
   textLabel: {
     control: {
       type: 'text',
@@ -103,7 +97,6 @@ const sharedArgTypes = {
   },
   onRevertClick: {
     action: 'onRevertClick',
-    control: false,
   },
 };
 
@@ -123,19 +116,6 @@ const sharedArgs = {
 };
 
 export const Default = (args) => {
-  const {
-    aiText,
-    'aria-label': ariaLabel,
-    autoAlign,
-    align,
-    kind,
-    defaultOpen,
-    revertActive,
-    revertLabel,
-    size,
-    textLabel,
-    onRevertClick,
-  } = args;
   const aiContent = (
     <div>
       <p className="secondary">AI Explained</p>
@@ -154,18 +134,7 @@ export const Default = (args) => {
   return (
     <>
       <div className="ai-label-container ai-label-container-example">
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          defaultOpen={defaultOpen}
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          align={align}
-          autoAlign={autoAlign}
-          size={size}
-          textLabel={textLabel}
-          onRevertClick={onRevertClick}>
+        <AILabel {...args}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -189,19 +158,6 @@ export const Default = (args) => {
 Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 export const Inline = (args) => {
-  const {
-    aiText,
-    'aria-label': ariaLabel,
-    autoAlign,
-    align,
-    kind,
-    defaultOpen,
-    revertActive,
-    revertLabel,
-    size,
-    textLabel,
-    onRevertClick,
-  } = args;
   const aiContent = (
     <div>
       <p className="secondary">AI Explained</p>
@@ -220,18 +176,7 @@ export const Inline = (args) => {
   return (
     <>
       <div className="ai-label-container ai-label-container-example">
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          defaultOpen={defaultOpen}
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          align={align}
-          autoAlign={autoAlign}
-          size={size}
-          textLabel={textLabel}
-          onRevertClick={onRevertClick}>
+        <AILabel {...args}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -258,19 +203,6 @@ Inline.args = {
 };
 Inline.argTypes = { ...sharedArgTypes };
 export const InlineWithContent = (args) => {
-  const {
-    aiText,
-    'aria-label': ariaLabel,
-    autoAlign,
-    align,
-    kind,
-    defaultOpen,
-    revertActive,
-    revertLabel,
-    size,
-    textLabel,
-    onRevertClick,
-  } = args;
   const aiContent = (
     <div>
       <p className="secondary">AI Explained</p>
@@ -289,18 +221,7 @@ export const InlineWithContent = (args) => {
   return (
     <>
       <div className="ai-label-container ai-label-container-example">
-        <AILabel
-          aiText={aiText}
-          aria-label={ariaLabel}
-          defaultOpen={defaultOpen}
-          kind={kind}
-          revertActive={revertActive}
-          revertLabel={revertLabel}
-          align={align}
-          autoAlign={autoAlign}
-          size={size}
-          textLabel={textLabel}
-          onRevertClick={onRevertClick}>
+        <AILabel {...args}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -329,35 +250,10 @@ InlineWithContent.args = {
 InlineWithContent.argTypes = { ...sharedArgTypes };
 
 export const ExplainabilityPopover = (args) => {
-  const {
-    aiText,
-    'aria-label': ariaLabel,
-    autoAlign,
-    align,
-    kind,
-    defaultOpen,
-    revertActive,
-    revertLabel,
-    size,
-    textLabel,
-    onRevertClick,
-    showAILabelActions = true,
-  } = args;
-
+  const { showAILabelActions, ...rest } = args;
   return (
     <div className="ai-label-container-example ai-label-container centered">
-      <AILabel
-        aiText={aiText}
-        aria-label={ariaLabel}
-        defaultOpen={defaultOpen}
-        kind={kind}
-        revertActive={revertActive}
-        revertLabel={revertLabel}
-        align={align}
-        autoAlign={autoAlign}
-        size={size}
-        textLabel={textLabel}
-        onRevertClick={onRevertClick}>
+      <AILabel {...rest}>
         <AILabelContent>
           {' '}
           <div>
