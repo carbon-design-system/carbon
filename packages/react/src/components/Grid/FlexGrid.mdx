@@ -24,6 +24,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Mix-and-match](#mix-and-match)
 - [Auto columns](#auto-columns)
 - [Offset columns](#offset-columns)
+- [Row gap](#row-gap)
 - [Component API](#component-api)
   - [Using the `as` prop](#using-the-as-prop)
 - [FAQ](#faq)
@@ -226,6 +227,71 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(FlexGridStories.Offset),
+    },
+  ]}
+/>
+
+## Row gap
+
+The `FlexGrid` component supports an optional `withRowGap` prop that adds vertical spacing between rows. When enabled, the row gap automatically matches the current gutter mode:
+
+- **Default (wide)**: 32px row gap
+- **Narrow**: 16px row gap
+- **Condensed**: 1px row gap
+
+This feature is useful when you want consistent vertical spacing between rows that matches your horizontal gutter spacing.
+
+```jsx
+import { FlexGrid, Row, Column } from '@carbon/react';
+
+function MyComponent() {
+  return (
+    <FlexGrid withRowGap>
+      <Row>
+        <Column lg={4}>Row 1, Column 1</Column>
+        <Column lg={4}>Row 1, Column 2</Column>
+        <Column lg={4}>Row 1, Column 3</Column>
+      </Row>
+      <Row>
+        <Column lg={4}>Row 2, Column 1</Column>
+        <Column lg={4}>Row 2, Column 2</Column>
+        <Column lg={4}>Row 2, Column 3</Column>
+      </Row>
+    </FlexGrid>
+  );
+}
+```
+
+You can combine `withRowGap` with different gutter modes:
+
+```jsx
+{/* Narrow grid with row gap */}
+<FlexGrid narrow withRowGap>
+  <Row>
+    <Column>Content</Column>
+  </Row>
+  <Row>
+    <Column>Content</Column>
+  </Row>
+</FlexGrid>
+
+{/* Condensed grid with row gap */}
+<FlexGrid condensed withRowGap>
+  <Row>
+    <Column>Content</Column>
+  </Row>
+  <Row>
+    <Column>Content</Column>
+  </Row>
+</FlexGrid>
+```
+
+<Canvas
+  of={FlexGridStories.WithRowGap}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FlexGridStories.WithRowGap),
     },
   ]}
 />

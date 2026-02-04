@@ -85,6 +85,57 @@ Default.argTypes = {
   },
 };
 
+export const WithRowGap = (args) => {
+  return (
+    <div className="sb-css-grid-container">
+      <Grid {...args}>
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+      </Grid>
+    </div>
+  );
+};
+
+WithRowGap.args = {
+  withRowGap: true,
+  narrow: false,
+  condensed: false,
+};
+
+WithRowGap.argTypes = {
+  withRowGap: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Add a row gap to the grid that matches the current gutter size',
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Container hangs 16px into the gutter',
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Collapse the gutter to 1px',
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+};
+
 export const Narrow = () => {
   return (
     <div className="sb-css-grid-container">

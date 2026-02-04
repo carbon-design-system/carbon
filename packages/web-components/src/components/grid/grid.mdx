@@ -17,6 +17,8 @@ import * as GridStories from './grid.stories';
 - [Gutter modes](#gutter-modes)
   - [Wide grid](#wide-grid)
   - [Condensed grid](#condensed-grid)
+  - [Narrow grid](#narrow-grid)
+- [Row gap](#row-gap)
 - [Subgrid](#subgrid)
 - [Mixed gutter modes](#mixed-gutter-modes)
 - [Auto columns](#auto-columns)
@@ -115,6 +117,31 @@ or the `narrow` prop to enable the narrow grid with a 16px gutter.
 ### Narrow grid
 
 <Canvas of={GridStories.Narrow} />
+
+## Row gap
+
+By default, the CSS Grid does not add vertical spacing (row gap) between grid items. You can enable row gap by using the `with-row-gap` attribute on the `cds-grid` component. When enabled, the row gap will automatically match the current gutter size:
+
+- **Default mode**: 2rem (32px) row gap
+- **Narrow mode**: 1rem (16px) row gap
+- **Condensed mode**: 1px row gap
+
+This is useful when you want consistent vertical spacing between rows that matches your horizontal gutter spacing.
+
+```html
+<cds-grid with-row-gap>
+  <cds-column lg='4'>Row 1, Column 1</cds-column>
+  <cds-column lg='4'>Row 1, Column 2</cds-column>
+  <cds-column lg='4'>Row 1, Column 3</cds-column>
+  <cds-column lg='4'>Row 1, Column 4</cds-column>
+  <cds-column lg='4'>Row 2, Column 1</cds-column>
+  <cds-column lg='4'>Row 2, Column 2</cds-column>
+  <cds-column lg='4'>Row 2, Column 3</cds-column>
+  <cds-column lg='4'>Row 2, Column 4</cds-column>
+</cds-grid>
+```
+
+<Canvas of={GridStories.WithRowGap} />
 
 ## Subgrid
 
