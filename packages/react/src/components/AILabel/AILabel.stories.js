@@ -114,7 +114,7 @@ const sharedArgs = {
   size: 'md',
   defaultOpen: false,
   textLabel: '',
-  autoAlign: true,
+  autoAlign: false,
   onRevertClick: (event) => {
     action('onRevertClick')(event);
   },
@@ -328,7 +328,6 @@ export const ExplainabilityPopover = (args) => {
 ExplainabilityPopover.args = {
   ...sharedArgs,
   defaultOpen: true,
-  autoAlign: false,
   showAILabelActions: true,
 };
 

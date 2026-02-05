@@ -44,6 +44,12 @@ const sizes = {
   [`XL size (${AI_LABEL_SIZE.EXTRA_LARGE})`]: AI_LABEL_SIZE.EXTRA_LARGE,
 };
 
+const inlineSizes = {
+  [`Small size (${AI_LABEL_SIZE.SMALL})`]: AI_LABEL_SIZE.SMALL,
+  [`Medium size (${AI_LABEL_SIZE.MEDIUM})`]: AI_LABEL_SIZE.MEDIUM,
+  [`Large size (${AI_LABEL_SIZE.LARGE})`]: AI_LABEL_SIZE.LARGE,
+};
+
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
@@ -79,7 +85,7 @@ const args = {
   aiText: 'AI',
   aiTextLabel: '',
   alignment: POPOVER_ALIGNMENT.BOTTOM_START,
-  autoalign: true,
+  autoalign: false,
   kind: 'default',
   revertActive: false,
   buttonLabel: 'Show information',
@@ -187,7 +193,15 @@ export const Inline = {
     ...args,
     kind: 'inline',
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    size: {
+      control: 'select',
+      description:
+        'Specify the size of the button, from the following list of sizes: <code>sm</code>, <code>md</code>, <code>lg</code>',
+      options: inlineSizes,
+    },
+  },
   render: ({
     aiText,
     aiTextLabel,
@@ -228,7 +242,15 @@ export const InlineWithContent = {
     kind: 'inline',
     aiTextLabel: 'Text goes here',
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    size: {
+      control: 'select',
+      description:
+        'Specify the size of the button, from the following list of sizes: <code>sm</code>, <code>md</code>, <code>lg</code>',
+      options: inlineSizes,
+    },
+  },
   render: ({
     aiText,
     aiTextLabel,
@@ -270,7 +292,6 @@ export const ExplainabilityPopover = {
     defaultOpen: true,
     alignment: tooltipAlignments.bottom,
     showActions: true,
-    autoalign: false,
   },
   argTypes: {
     ...argTypes,
