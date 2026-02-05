@@ -400,7 +400,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
-    evt.stopPropagation();
 
     const shouldCloseOnOutsideClick =
       // Passive modals can close on clicks outside the modal when
@@ -543,11 +542,45 @@ const ModalDialog = React.forwardRef(function ModalDialog(
 
     const handleEscapeKey = (event) => {
       if (match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        onRequestClose(event);
+        const activeElement = document.activeElement;
+
+        // When focus is on body (after nested modal closes)
+        if (activeElement === document.body) {
+          const allModalContainers = document.querySelectorAll(
+            `.${prefix}--modal-container`
+          );
+          const visibleModals = Array.from(allModalContainers).filter(
+            (modal) => {
+              const modalRoot = modal.closest(`.${prefix}--modal`);
+              return modalRoot?.classList.contains('is-visible');
+            }
+          );
+
+          // innerModal.current IS the container in Modal.tsx
+          if (
+            visibleModals.length > 0 &&
+            visibleModals[visibleModals.length - 1] === innerModal.current
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            onRequestClose(event);
+          }
+        } else {
+          // Focus is in a modal - find the closest container
+          const closestModalContainer = activeElement?.closest(
+            `.${prefix}--modal-container`
+          );
+
+          // Check if this modal's container is the closest one
+          if (closestModalContainer === innerModal.current) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            onRequestClose(event);
+          }
+        }
       }
     };
+
     document.addEventListener('keydown', handleEscapeKey, true);
 
     return () => {

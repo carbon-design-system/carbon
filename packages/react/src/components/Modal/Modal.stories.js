@@ -32,6 +32,8 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Checkbox from '../Checkbox';
 import CheckboxGroup from '../CheckboxGroup';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 
 const buttons = {
   'One (1)': '1',
@@ -146,6 +148,17 @@ export const Default = ({ numberOfButtons, ...args }) => {
         open={open}
         {...args}
         {...modalFooter(numberOfButtons)}>
+        <OverflowMenu ariaLabel="More options">
+          <OverflowMenuItem
+            itemText="Download"
+            onClick={() => console.log('Download clicked')}
+            hasDivider
+          />
+          <OverflowMenuItem
+            itemText="Share"
+            onClick={() => console.log('Share clicked')}
+          />
+        </OverflowMenu>
         <p style={{ marginBottom: '2rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -237,6 +250,39 @@ Default.argTypes = {
 };
 
 Default.parameters = { ...sharedParameters };
+
+export const Nested = () => {
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  return (
+    <div>
+      <Modal
+        id="modal1"
+        modalHeading="Modal One"
+        passiveModal
+        open={open1}
+        onRequestClose={() => setOpen1(false)}>
+        <Modal
+          id="modal2"
+          modalHeading="Modal Two"
+          passiveModal
+          open={open2}
+          onRequestClose={() => setOpen2(false)}>
+          <p>The second modal</p>
+        </Modal>
+        <Button onClick={() => setOpen2(true)}>Launch nested modal</Button>
+      </Modal>
+      <Button onClick={() => setOpen1(true)}>Launch modal</Button>
+    </div>
+  );
+};
+Nested.argTypes = {
+  onSecondarySubmit: {
+    action: 'onSecondarySubmit',
+  },
+};
+
+Nested.parameters = { ...sharedParameters };
 
 export const FullWidth = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);

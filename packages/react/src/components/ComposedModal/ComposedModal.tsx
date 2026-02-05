@@ -365,7 +365,7 @@ const ComposedModalDialog = React.forwardRef<
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
     const mouseDownTarget = onMouseDownTarget.current;
-    evt.stopPropagation();
+    // evt.stopPropagation();
 
     const shouldCloseOnOutsideClick =
       // Passive modals can close on clicks outside the modal when
@@ -492,11 +492,43 @@ const ComposedModalDialog = React.forwardRef<
 
     const handleEscapeKey = (event) => {
       if (match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        closeModal(event);
+        const activeElement = document.activeElement;
+
+        // When focus is on body, check if this is the topmost visible modal
+        if (activeElement === document.body) {
+          // Check if there are any other modal container bodies in the DOM
+          const allModalBodies = document.querySelectorAll(
+            `.${prefix}--modal-container-body`
+          );
+          const visibleModals = Array.from(allModalBodies).filter((modal) => {
+            const modalRoot = modal.closest(`.${prefix}--modal`);
+            return modalRoot?.classList.contains('is-visible');
+          });
+
+          // Only handle if this is the last/topmost visible modal
+          if (
+            visibleModals.length > 0 &&
+            visibleModals[visibleModals.length - 1] === innerModal.current
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            closeModal(event);
+          }
+        } else {
+          // Normal case: focus is within a modal
+          const closestModalBody = activeElement?.closest(
+            `.${prefix}--modal-container-body`
+          );
+
+          if (closestModalBody === innerModal.current) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            closeModal(event);
+          }
+        }
       }
     };
+
     document.addEventListener('keydown', handleEscapeKey, true);
 
     return () => {
