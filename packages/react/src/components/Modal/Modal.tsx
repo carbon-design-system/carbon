@@ -770,6 +770,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
+          aria-hidden="true"
           ref={startTrap}
           tabIndex={0}
           role="link"
@@ -865,6 +866,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
+          aria-hidden="true"
           ref={endTrap}
           tabIndex={0}
           role="link"
