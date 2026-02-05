@@ -201,7 +201,23 @@ Inline.args = {
   ...sharedArgs,
   kind: 'inline',
 };
-Inline.argTypes = { ...sharedArgTypes };
+Inline.argTypes = {
+  ...sharedArgTypes,
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+    description:
+      'Specify the size of the button, from the following list of sizes:',
+    table: {
+      defaultValue: {
+        summary: 'md',
+      },
+      type: {
+        summary: "'sm' | 'md' | 'lg'",
+      },
+    },
+  },
+};
 export const InlineWithContent = (args) => {
   const aiContent = (
     <div>
@@ -247,7 +263,23 @@ InlineWithContent.args = {
   kind: 'inline',
   textLabel: 'Text goes here',
 };
-InlineWithContent.argTypes = { ...sharedArgTypes };
+InlineWithContent.argTypes = {
+  ...sharedArgTypes,
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+    description:
+      'Specify the size of the button, from the following list of sizes:',
+    table: {
+      defaultValue: {
+        summary: 'md',
+      },
+      type: {
+        summary: "'sm' | 'md' | 'lg'",
+      },
+    },
+  },
+};
 
 export const ExplainabilityPopover = (args) => {
   const { showAILabelActions, ...rest } = args;
