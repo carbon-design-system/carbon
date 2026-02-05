@@ -294,16 +294,16 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
     });
 
-    const label = labelText ? (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
-    ) : null;
-    const helper = helperText ? (
+    );
+    const helper = typeof helperText !== 'undefined' && helperText !== null && (
       <div id={normalizedProps.helperId} className={helperTextClasses}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     const passwordIsVisible = inputType === 'text';
     const passwordVisibilityIcon = passwordIsVisible ? (

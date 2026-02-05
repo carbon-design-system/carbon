@@ -171,6 +171,11 @@ describe('Select', () => {
       );
     });
 
+    it('should render helperText with value 0', () => {
+      render(<Select id="select" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
     it('should respect hideLabel prop', () => {
       render(<Select id="select" labelText="Select" hideLabel />);
 
