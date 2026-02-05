@@ -80,6 +80,7 @@ const sharedArgTypes = {
     control: {
       type: 'text',
     },
+    if: { arg: 'revertActive', eq: true },
   },
   size: {
     options: ['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'],
@@ -88,6 +89,10 @@ const sharedArgTypes = {
   textLabel: {
     control: {
       type: 'text',
+    },
+    if: { arg: 'kind', eq: 'inline' },
+    table: {
+      category: 'Inline variant',
     },
   },
   defaultOpen: {

@@ -97,6 +97,10 @@ const argTypes = {
     control: 'text',
     description:
       'Specify additional text to be rendered next to the AI label in the inline variant.',
+    if: { arg: 'kind', eq: 'inline' },
+    table: {
+      category: 'Inline variant',
+    },
   },
   alignment: {
     control: 'select',
@@ -137,6 +141,7 @@ const argTypes = {
     control: 'text',
     description:
       'Specify the text that should be shown when the revert button is hovered',
+    if: { arg: 'revertActive', eq: true },
   },
 };
 
