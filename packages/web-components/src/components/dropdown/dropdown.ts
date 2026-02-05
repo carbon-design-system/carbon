@@ -181,8 +181,7 @@ class CDSDropdown extends ValidityMixin(
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    if (this.shadowRoot!.contains(event.target as Node)) {
+    if (this.shadowRoot?.contains(event.target as Node)) {
       const opening = !this.open;
       const constructor = this.constructor as typeof CDSDropdown;
       const selectedItem = this.querySelector(
@@ -544,8 +543,6 @@ class CDSDropdown extends ValidityMixin(
   }
 
   @HostListener('focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleFocusOut(event: FocusEvent) {
     if (!this.contains(event.relatedTarget as Node)) {
       this._handleUserInitiatedToggle(false);
@@ -658,8 +655,8 @@ class CDSDropdown extends ValidityMixin(
   }
 
   // Default dropdowns close after user selection.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _shouldCloseAfterSelection(_item?: CDSDropdownItem) {
+  protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
+    void item; // unused in default implementation but required by override signature
     return true;
   }
 
@@ -836,14 +833,18 @@ class CDSDropdown extends ValidityMixin(
   protected _navigate(direction: number) {
     const constructor = this.constructor as typeof CDSDropdown;
     const items = this.querySelectorAll(constructor.selectorItem);
+
     if (!items.length) {
       return;
     }
+
     const highlightedItem = this.querySelector(
       constructor.selectorItemHighlighted
     );
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const highlightedIndex = indexOf(items, highlightedItem!);
+    const highlightedIndex = highlightedItem
+      ? indexOf(items, highlightedItem)
+      : -1;
+
     let nextIndex =
       highlightedIndex === -1
         ? direction > 0
@@ -1089,15 +1090,17 @@ class CDSDropdown extends ValidityMixin(
 
   shouldUpdate(changedProperties) {
     const { selectorItem } = this.constructor as typeof CDSDropdown;
+    const items = this.querySelectorAll(selectorItem);
+
     if (changedProperties.has('size')) {
-      forEach(this.querySelectorAll(selectorItem), (elem) => {
+      forEach(items, (elem) => {
         (elem as CDSDropdownItem).size = this.size;
       });
     }
     if (changedProperties.has('disabled')) {
       const { disabled } = this;
-      // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll(selectorItem), (elem) => {
+
+      forEach(items, (elem) => {
         const item = elem as CDSDropdownItem;
         if (disabled) {
           if (!item.disabled) {
@@ -1113,33 +1116,36 @@ class CDSDropdown extends ValidityMixin(
     if (changedProperties.has('value')) {
       // `<cds-multi-select>` updates selection beforehand
       // because our rendering logic for `<cds-multi-select>` looks for selected items via `qSA()`
-      forEach(this.querySelectorAll(selectorItem), (elem) => {
+      forEach(items, (elem) => {
         (elem as CDSDropdownItem).selected =
           (elem as CDSDropdownItem).value === this.value;
       });
       const selectedItem = find(
-        this.querySelectorAll(selectorItem),
+        items,
         (elem) => (elem as CDSDropdownItem).value === this.value
       ) as CDSDropdownItem | undefined;
+
       if (selectedItem) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        const range = this.ownerDocument!.createRange();
-        range.selectNodeContents(selectedItem);
-        this._selectedItemContent = range.cloneContents();
+        const doc = this.ownerDocument;
+        const range = doc?.createRange();
+
+        if (range) {
+          range.selectNodeContents(selectedItem);
+          this._selectedItemContent = range.cloneContents();
+        } else {
+          this._selectedItemContent = null;
+        }
       } else {
         this._selectedItemContent = null;
       }
+
       this._updateSelectedNextSibling(selectedItem);
     }
     return true;
   }
 
   updated(changedProperties) {
-    if (this._hasAILabel) {
-      this.setAttribute('ai-label', '');
-    } else {
-      this.removeAttribute('ai-label');
-    }
+    this.toggleAttribute('ai-label', this._hasAILabel);
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
     if (label) {
@@ -1235,8 +1241,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * The CSS class list for dropdown listbox
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected get _classes(): any {
+  protected get _classes(): ReturnType<typeof classMap> {
     const { size, type, open, autoalign } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2026
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -123,11 +123,10 @@ export const Default = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
     };
 
     return html`
@@ -183,11 +182,10 @@ export const ExperimentalAutoAlign = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
     };
 
     requestAnimationFrame(() => {
@@ -256,11 +254,10 @@ export const ExperimentalAutoAlignWithBoundary = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
     };
 
     requestAnimationFrame(() => {
@@ -342,11 +339,10 @@ export const TabTip = {
     const handleClick = (id) => {
       const popover = document.querySelector(id);
       const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
     };
 
     return html`
@@ -474,11 +470,10 @@ export const TabTipExperimentalAutoAlign = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      open
+        ? popover?.removeAttribute('open')
+        : popover?.setAttribute('open', '');
     };
 
     requestAnimationFrame(() => {

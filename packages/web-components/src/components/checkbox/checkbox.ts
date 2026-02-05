@@ -212,11 +212,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
 
   updated() {
     const { _hasAILabel: hasAILabel } = this;
-    if (hasAILabel) {
-      this.setAttribute('ai-label', '');
-    } else {
-      this.removeAttribute('ai-label');
-    }
+    this.toggleAttribute('ai-label', hasAILabel);
   }
   connectedCallback() {
     super.connectedCallback();

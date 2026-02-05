@@ -86,18 +86,15 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
       const { selectorAccordionContent } = this
         .constructor as typeof CDSAccordionItem;
 
-      if (!this.open) {
-        this.setAttribute('expanding', '');
-      } else {
-        this.setAttribute('collapsing', '');
+      this.setAttribute(this.open ? 'collapsing' : 'expanding', '');
+
+      const content = this.shadowRoot?.querySelector(selectorAccordionContent);
+      if (content) {
+        content.addEventListener('animationend', () => {
+          this.removeAttribute('expanding');
+          this.removeAttribute('collapsing');
+        });
       }
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      this.shadowRoot!.querySelector(
-        selectorAccordionContent
-      )!.addEventListener('animationend', () => {
-        this.removeAttribute('expanding');
-        this.removeAttribute('collapsing');
-      });
 
       this.open = open;
       this.dispatchEvent(
@@ -191,8 +188,8 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
     } = this;
     const { _classesBreakpoints: classesBreakpoints } = this
       .constructor as typeof CDSAccordionItem;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const { [currentBreakpoint!]: classBreakpoint } = classesBreakpoints;
+    const classBreakpoint =
+      classesBreakpoints[currentBreakpoint ?? ACCORDION_ITEM_BREAKPOINT.MEDIUM];
     const contentClasses = classMap({
       [classBreakpoint]: classBreakpoint,
       [`${prefix}--accordion__content`]: true,

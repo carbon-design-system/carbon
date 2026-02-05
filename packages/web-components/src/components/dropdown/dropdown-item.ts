@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -85,10 +85,12 @@ class CDSDropdownItem extends LitElement {
    * browser tooltip appears for menu items that result in ellipsis
    */
   protected _handleSlotChange({ target }: Event) {
-    const text = (target as HTMLSlotElement).assignedNodes().filter(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-    );
+    const text = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter(
+        (node) =>
+          node.nodeType !== Node.TEXT_NODE || Boolean(node.textContent?.trim())
+      );
 
     const textContainer = this.shadowRoot?.querySelector(
       `.${prefix}--list-box__menu-item__option`

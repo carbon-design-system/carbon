@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -992,10 +992,12 @@ function TabListVertical({
             halfTabHeight >
             containerHeight
         ) {
-          ref.current?.scrollTo({
-            top: (selectedIndex - 1) * verticalTabHeight,
-            behavior: 'smooth',
-          });
+          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+          ref.current &&
+            ref.current.scrollTo({
+              top: (selectedIndex - 1) * verticalTabHeight,
+              behavior: 'smooth',
+            });
         }
       }
     }

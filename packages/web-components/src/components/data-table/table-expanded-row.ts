@@ -81,11 +81,10 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
   }
 
   updated() {
-    if (this.previousElementSibling?.hasAttribute('ai-label')) {
-      this.setAttribute('ai-label', '');
-    } else {
-      this.removeAttribute('ai-label');
-    }
+    this.toggleAttribute(
+      'ai-label',
+      Boolean(this.previousElementSibling?.hasAttribute('ai-label'))
+    );
   }
 
   /**

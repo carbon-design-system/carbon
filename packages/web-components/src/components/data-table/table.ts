@@ -24,6 +24,7 @@ import {
   CDSTableRow,
   CDSTableToolbarSearch,
 } from '../..';
+import CDSTableBody from './table-body';
 import CDSTableExpandedRow from './table-expanded-row';
 
 export { TABLE_SIZE };
@@ -252,10 +253,12 @@ class CDSTable extends HostListenerMixin(LitElement) {
   withRowSlugs = false;
 
   private _handleSlotChange({ target }: Event) {
-    const hasContent = (target as HTMLSlotElement).assignedNodes().some(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-    );
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .some(
+        (node) =>
+          node.nodeType !== Node.TEXT_NODE || Boolean(node.textContent?.trim())
+      );
     this.withHeader = hasContent;
   }
 
@@ -277,15 +280,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
 
   private _handleSortAction(columnIndex, sortDirection) {
     const rows = [...this._tableRows];
+    const selectorTableRowCells = (this.constructor as typeof CDSTable)
+      .selectorTableRowCells;
 
     // regular row sorting
     rows.sort((a, b) => {
-      const cellA = a.querySelectorAll(
-        (this.constructor as typeof CDSTable).selectorTableRowCells
-      )[columnIndex].textContent;
-      const cellB = b.querySelectorAll(
-        (this.constructor as typeof CDSTable).selectorTableRowCells
-      )[columnIndex].textContent;
+      const cellA = a.querySelectorAll(selectorTableRowCells)[columnIndex]
+        .textContent;
+      const cellB = b.querySelectorAll(selectorTableRowCells)[columnIndex]
+        .textContent;
       return (
         this.collationFactors[sortDirection] *
         this.customSortRow(cellA, cellB, this.collator)
@@ -303,8 +306,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
         return acc;
       }, {});
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      const sortedWithExpanded = [] as any;
+      const sortedWithExpanded: Element[] = [];
 
       rows.forEach((e) => {
         const sortId = e.getAttribute('sort-id');
@@ -326,42 +328,42 @@ class CDSTable extends HostListenerMixin(LitElement) {
   }
 
   private _handleFilterRows() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const unfilteredRows = [] as any;
+    const unfilteredRows: Element[] = [];
+    const headerRoot = this._tableHeaderRow?.shadowRoot;
+    const headerCheckbox = headerRoot
+      ?.querySelector(`${prefix}-checkbox`)
+      ?.shadowRoot?.querySelector(`.${prefix}--checkbox`);
+
     forEach(this._tableRows, (elem) => {
       let rowText = elem.textContent?.trim();
       let filtered = this.filterRows(rowText as string, this._searchValue);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (elem as any).filtered = filtered;
+      (elem as CDSTableRow).filtered = filtered;
 
       if (filtered && this.expandable) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        rowText = (elem as any).nextElementSibling.textContent?.trim();
-        filtered = this.filterRows(rowText as string, this._searchValue);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        (elem as any).filtered = filtered;
+        const expandedRow = (elem as Element).nextElementSibling;
+        rowText = expandedRow?.textContent?.trim() ?? '';
+        filtered = this.filterRows(rowText, this._searchValue);
+        (elem as CDSTableRow).filtered = filtered;
       }
 
       if (!filtered) {
         unfilteredRows.push(elem);
       }
 
-      if (this.isSelectable) {
+      if (this.isSelectable && headerCheckbox) {
         const unfilteredSelectableLength = unfilteredRows.filter((elem) => {
           return !elem.hasAttribute('disabled');
         }).length;
-
-        const headerCheckbox = this._tableHeaderRow.shadowRoot
-          ?.querySelector(`${prefix}-checkbox`)
-          .shadowRoot.querySelector(`.${prefix}--checkbox`);
 
         headerCheckbox.disabled =
           unfilteredSelectableLength === 0 ? true : false;
       }
 
       if (this.expandable) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        (elem as any).nextElementSibling.filtered = filtered;
+        const expandedRow = (elem as Element).nextElementSibling;
+        if (expandedRow) {
+          (expandedRow as CDSTableExpandedRow).filtered = filtered;
+        }
       }
     });
 
@@ -385,29 +387,24 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Download manager for selected rows.
    */
   private _handleDownload({ target }) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const data = [] as any;
+    const data: Record<string, string>[] = [];
+    const CDSTableClazz = this.constructor as typeof CDSTable;
 
-    const elementsToArray = (elements) =>
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      Array.from(elements, (element) => (element as any).textContent);
+    const elementsToArray = (elements: NodeListOf<Element>) =>
+      Array.from(elements, (element) => element.textContent ?? '');
 
-    const headerCells = this.querySelectorAll(
-      (this.constructor as typeof CDSTable).selectorHeaderCell
-    );
+    const headerCells = this.querySelectorAll(CDSTableClazz.selectorHeaderCell);
     const rows = this._selectedRows;
     const headerTitleArray = elementsToArray(headerCells);
 
     rows.forEach((row) => {
-      const rowData = {};
+      const rowData: Record<string, string> = {};
       const cells = elementsToArray(
-        row.querySelectorAll(
-          (this.constructor as typeof CDSTable).selectorTableRowCells
-        )
+        row.querySelectorAll(CDSTableClazz.selectorTableRowCells)
       );
 
       cells.forEach((cellText, index) => {
-        const headerTitle = headerTitleArray[index];
+        const headerTitle = headerTitleArray[index] ?? '';
         rowData[headerTitle] = cellText;
       });
 
@@ -444,8 +441,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
     const { detail, target } = event;
     const { sortDirection } = detail;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    if (!this.contains(target as any)) {
+    if (!this.contains(target as Node)) {
       return;
     }
 
@@ -520,8 +516,12 @@ class CDSTable extends HostListenerMixin(LitElement) {
       this._tableRows.forEach((e) => {
         if (e !== target) {
           e.removeAttribute('selected');
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-          e.shadowRoot!.querySelector(`${prefix}-radio-button`).checked = false;
+          const radioButton = e.shadowRoot?.querySelector(
+            `${prefix}-radio-button`
+          ) as CDSRadioButton | null;
+          if (radioButton) {
+            radioButton.checked = false;
+          }
         }
       });
       this._selectedRows.push(...[target as CDSTableRow]);
@@ -547,13 +547,16 @@ class CDSTable extends HostListenerMixin(LitElement) {
     ).length;
 
     // selected header checkbox upon all rows being selected
-    const headerCheckbox = tableHeaderRow.shadowRoot
+    const headerRoot = tableHeaderRow?.shadowRoot;
+    const headerCheckbox = headerRoot
       ?.querySelector(`${prefix}-checkbox`)
-      .shadowRoot.querySelector(`.${prefix}--checkbox`);
+      ?.shadowRoot?.querySelector(`.${prefix}--checkbox`);
     const allRowsSelected = this._selectedRows.length === totalSelectableRows;
-    headerCheckbox.checked = !this._selectedRows.length ? false : true;
-    headerCheckbox.indeterminate =
-      !allRowsSelected && this._selectedRows.length > 0;
+    if (headerCheckbox) {
+      headerCheckbox.checked = !this._selectedRows.length ? false : true;
+      headerCheckbox.indeterminate =
+        !allRowsSelected && this._selectedRows.length > 0;
+    }
 
     const init = {
       bubbles: true,
@@ -591,22 +594,22 @@ class CDSTable extends HostListenerMixin(LitElement) {
       return;
     }
 
+    const { selectorTableExpandedRows } = this.constructor as typeof CDSTable;
     let totalRows = 0;
     forEach(tableRows, (elem) => {
       if (!(elem as CDSTableRow).filtered && !(elem as CDSTableRow).disabled) {
         (elem as CDSTableRow).selected = selected;
         if (this.radio) {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-          const radioButton = (elem as CDSTableRow).shadowRoot!.querySelector(
+          const radioButton = (elem as CDSTableRow).shadowRoot?.querySelector(
             `${prefix}-radio-button`
-          ) as CDSRadioButton;
-          radioButton.checked = selected;
+          ) as CDSRadioButton | null;
+          if (radioButton) {
+            radioButton.checked = selected;
+          }
         }
         this._selectedRows.push(elem as CDSTableRow);
         totalRows++;
 
-        const { selectorTableExpandedRows } = this
-          .constructor as typeof CDSTable;
         const { nextElementSibling } = elem;
 
         // selecting the expanded row as well
@@ -655,12 +658,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
     const { target } = event;
     const { _tableHeaderRow: tableHeaderRow } = this;
 
-    if (this.contains(target as CDSTableBatchActions)) {
-      tableHeaderRow.shadowRoot
-        ?.querySelector(`${prefix}-checkbox`)
-        .shadowRoot.querySelector(`.${prefix}--checkbox`)
-        .click();
+    if (!this.contains(target as CDSTableBatchActions)) {
+      return;
     }
+    const headerRoot = tableHeaderRow?.shadowRoot;
+    const checkbox = headerRoot?.querySelector(`${prefix}-checkbox`);
+    const headerCheckbox = checkbox?.shadowRoot?.querySelector(
+      `.${prefix}--checkbox`
+    );
+    headerCheckbox?.click();
   };
 
   connectedCallback() {
@@ -731,20 +737,26 @@ class CDSTable extends HostListenerMixin(LitElement) {
   }
 
   updated(changedProperties) {
+    const CDSTableClazz = this.constructor as typeof CDSTable;
+    const headerRow = this._tableHeaderRow;
+    const tableRows = this._tableRows;
+
     if (changedProperties.has('expandable')) {
       this.updateExpandable();
     }
 
     if (changedProperties.has('headerCount')) {
-      this._tableExpandedRows.forEach((e) => {
-        e.setAttribute('colspan', this.headerCount);
-      });
+      if (this._tableExpandedRows) {
+        this._tableExpandedRows.forEach((e) => {
+          e.setAttribute('colspan', this.headerCount);
+        });
+      }
     }
 
     if (changedProperties.has('isSelectable')) {
-      if (this.isSelectable) {
-        this._tableHeaderRow.setAttribute('selection-name', 'header');
-        this._tableRows.forEach((e, index) => {
+      if (this.isSelectable && headerRow) {
+        headerRow.setAttribute('selection-name', 'header');
+        tableRows?.forEach((e, index) => {
           if (!e.hasAttribute('selection-name')) {
             e.setAttribute('selection-name', index);
           }
@@ -766,50 +778,38 @@ class CDSTable extends HostListenerMixin(LitElement) {
       changedProperties.has('overflowMenuOnHover') ||
       changedProperties.has('size')
     ) {
-      forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSTable).selectorTableCellOverflowMenu
-        ),
-        (elem) => {
-          const cell = elem.parentNode as CDSTableCell;
-          const row = cell.parentNode as CDSTableRow;
-          cell.overflowMenuOnHover = this.overflowMenuOnHover;
-          row.overflowMenuOnHover = this.overflowMenuOnHover;
-          cell.setAttribute('size', this.size);
-          elem.setAttribute('size', this.size);
-          elem.setAttribute('data-table', '');
-        }
+      const overflowMenuItems = this.querySelectorAll(
+        CDSTableClazz.selectorTableCellOverflowMenu
       );
+      forEach(overflowMenuItems, (elem) => {
+        const cell = elem.parentNode as CDSTableCell;
+        const row = cell.parentNode as CDSTableRow;
+        cell.overflowMenuOnHover = this.overflowMenuOnHover;
+        row.overflowMenuOnHover = this.overflowMenuOnHover;
+        cell.setAttribute('size', this.size);
+        elem.setAttribute('size', this.size);
+        elem.setAttribute('data-table', '');
+      });
     }
 
     if (changedProperties.has('radio')) {
-      // Propagate `size` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSTable).selectorTableRow
-        ),
-        (elem) => {
-          (elem as CDSTableRow).radio = this.radio;
-        }
-      );
-      if (this._tableHeaderRow) {
-        this._tableHeaderRow.hideCheckbox = this.radio;
+      const rows = this.querySelectorAll(CDSTableClazz.selectorTableRow);
+      forEach(rows, (elem) => {
+        (elem as CDSTableRow).radio = this.radio;
+      });
+      if (headerRow) {
+        headerRow.hideCheckbox = this.radio;
       }
     }
 
     if (changedProperties.has('size')) {
-      // Propagate `size` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        this.querySelectorAll(
-          (this.constructor as typeof CDSTable).selectorAllRows
-        ),
-        (elem) => {
-          elem.setAttribute('size', this.size);
-        }
-      );
+      const allRows = this.querySelectorAll(CDSTableClazz.selectorAllRows);
+      forEach(allRows, (elem) => {
+        elem.setAttribute('size', this.size);
+      });
       this._tableToolbar?.setAttribute('size', this.size);
       const batchActions = this.querySelector(
-        (this.constructor as typeof CDSTable).selectorTableBatchActions
+        CDSTableClazz.selectorTableBatchActions
       );
       if (batchActions) {
         batchActions.setAttribute('size', this.size);
@@ -845,51 +845,44 @@ class CDSTable extends HostListenerMixin(LitElement) {
     // }
 
     if (changedProperties.has('useZebraStyles')) {
-      const tableBody = this.querySelector(
-        (this.constructor as typeof CDSTable).selectorTableBody
-      );
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (tableBody as any).useZebraStyles = this.useZebraStyles;
+      const tableBody = this.querySelector(CDSTableClazz.selectorTableBody);
+      if (tableBody) {
+        (tableBody as CDSTableBody).useZebraStyles = this.useZebraStyles;
+      }
     }
 
-    if (this.withRowAILabels) {
-      this._tableHeaderRow.setAttribute('rows-with-ai-label', '');
-      this._tableRows.forEach((row) => {
-        row.setAttribute('rows-with-ai-label', '');
-      });
-    } else {
-      this._tableHeaderRow.removeAttribute('rows-with-ai-label');
-      this._tableRows.forEach((row) => {
-        row.removeAttribute('rows-with-ai-label');
+    if (headerRow && tableRows) {
+      headerRow.toggleAttribute('rows-with-ai-label', this.withRowAILabels);
+      tableRows.forEach((row) => {
+        row.toggleAttribute('rows-with-ai-label', this.withRowAILabels);
       });
     }
 
     // Gets table header info to add to the column cells for styles
     const headersWithAILabel: number[] = [];
 
-    Array.prototype.slice
-      .call(this._tableHeaderRow.children)
-      .forEach((headerCell, index) => {
-        if (
-          headerCell.querySelector(`${prefix}-ai-label`) ||
-          headerCell.querySelector(`${prefix}-slug`)
-        ) {
-          headerCell.setAttribute('ai-label', '');
-          headersWithAILabel.push(index);
-        } else {
-          headerCell.removeAttribute('ai-label');
-        }
-      });
+    if (headerRow) {
+      Array.prototype.slice
+        .call(headerRow.children)
+        .forEach((headerCell, index) => {
+          const hasAILabel =
+            headerCell.querySelector(`${prefix}-ai-label`) ||
+            headerCell.querySelector(`${prefix}-slug`);
+          headerCell.toggleAttribute('ai-label', Boolean(hasAILabel));
+          if (hasAILabel) {
+            headersWithAILabel.push(index);
+          }
+        });
+    }
 
-    this._tableRows.forEach((row) => {
+    tableRows?.forEach((row) => {
       Array.prototype.slice
         .call((row as HTMLElement).children)
         .forEach((cell, index) => {
-          if (headersWithAILabel.includes(index)) {
-            cell.setAttribute('ai-label-in-header', '');
-          } else {
-            cell.removeAttribute('ai-label-in-header');
-          }
+          cell.toggleAttribute(
+            'ai-label-in-header',
+            headersWithAILabel.includes(index)
+          );
         });
     });
   }
@@ -918,17 +911,23 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * Adds isSortable value for table header cells.
    */
   _enableSortAction() {
-    const headerCells = this.querySelectorAll(
-      (this.constructor as typeof CDSTable).selectorHeaderCell
-    );
+    const headerRow = this._tableHeaderRow;
+    if (!headerRow) {
+      return;
+    }
+
+    const CDSTableClazz = this.constructor as typeof CDSTable;
+    const headerCells = this.querySelectorAll(CDSTableClazz.selectorHeaderCell);
     headerCells.forEach((e) => {
       (e as CDSTableHeaderCell).isSortable = this.isSortable;
       (e as CDSTableHeaderCell).isSelectable = this.isSelectable;
       (e as CDSTableHeaderCell).isExpandable = this.expandable;
     });
-    const columns = [...this._tableHeaderRow.children];
+
+    const columns = [...headerRow.children];
     let sortDirection;
     let columnIndex = 0;
+
     columns.forEach((column, index) => {
       if (
         column.hasAttribute('sort-direction') &&
@@ -946,6 +945,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
         e.setAttribute('sort-direction', 'none');
       }
     });
+
     this._handleSortAction(columnIndex, sortDirection);
   }
 

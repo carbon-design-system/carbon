@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -52,20 +52,16 @@ class CDSContentSwitcher extends LitElement {
   private _handleHover({ target, type }: MouseEvent) {
     const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
     const items = this.querySelectorAll(selectorItem);
+    const closestItem = (target as Element).closest(selectorItem);
     const index =
-      type !== 'mouseover'
-        ? -1
-        : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-          indexOf(items, (target as Element).closest(selectorItem)!);
+      type !== 'mouseover' || !closestItem ? -1 : indexOf(items, closestItem);
 
     if ((target as Element).closest(selectorItem)?.hasAttribute('disabled')) {
       return;
     }
 
     const nextIndex = index < 0 ? index : index + 1;
-    forEach(this.querySelectorAll(selectorItem), (elem, i) => {
-      // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
-      // until `:host-context()` gets supported in all major browsers
+    forEach(items, (elem, i) => {
       (elem as CDSContentSwitcherItem).hideDivider = i === nextIndex;
     });
 
@@ -245,14 +241,10 @@ class CDSContentSwitcher extends LitElement {
 
       const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
       const items = this.querySelectorAll(selectorItem);
-      const index = indexOf(
-        items,
-        (itemToSelect as Element).closest(selectorItem)! // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      );
+      const closestItem = (itemToSelect as Element).closest(selectorItem);
+      const index = closestItem ? indexOf(items, closestItem) : -1;
       const nextIndex = index < 0 ? index : index + 1;
-      forEach(this.querySelectorAll(selectorItem), (elem, i) => {
-        // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
-        // until `:host-context()` gets supported in all major browsers
+      forEach(items, (elem, i) => {
         (elem as CDSContentSwitcherItem).hideDivider = i === nextIndex;
       });
     });
@@ -362,8 +354,6 @@ class CDSContentSwitcher extends LitElement {
       1
     );
 
-    // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
-    // until `:host-context()` gets supported in all major browsers
     if (nextItem) {
       (nextItem as CDSContentSwitcherItem).hideDivider = true;
     }

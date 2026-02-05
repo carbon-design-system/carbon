@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2026
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -396,11 +396,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               !this._draggingUpper &&
               differenceValue === differenceValueUpper
             ) {
-              if (Math.round(position) > this.unstable_valueUpper) {
-                this._rateUpper = position / 100;
-              } else {
-                this._rate = position / 100;
-              }
+              // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+              Math.round(position) > this.unstable_valueUpper
+                ? (this._rateUpper = position / 100)
+                : (this._rate = position / 100);
             }
             this.dispatchEvent(
               new CustomEvent(
@@ -599,7 +598,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     }
     const valueMain =
       eventContainer === 'upper' ? this.unstable_valueUpper : this.value;
-    if (valueMain !== '') {
+    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+    valueMain !== '' &&
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
           bubbles: true,
@@ -610,7 +610,6 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           },
         })
       );
-    }
   };
 
   /**

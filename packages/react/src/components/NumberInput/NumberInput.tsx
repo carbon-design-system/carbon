@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -930,11 +930,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
-                  if (match(e, keys.ArrowUp)) {
-                    handleStep(e, 'up');
-                  } else if (match(e, keys.ArrowDown)) {
-                    handleStep(e, 'down');
-                  }
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+                  match(e, keys.ArrowUp) && handleStep(e, 'up');
+                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+                  match(e, keys.ArrowDown) && handleStep(e, 'down');
                 }
 
                 if (rest?.onKeyDown) {

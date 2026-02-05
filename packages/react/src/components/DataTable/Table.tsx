@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -128,30 +128,28 @@ export const Table = ({
 
   const toggleTableBodyAlignmentClass = useCallback(
     (alignTop = false) => {
-      if (alignTop) {
-        tableRef.current?.classList.add(
-          `${prefix}--data-table--top-aligned-body`
-        );
-      } else {
-        tableRef.current?.classList.remove(
-          `${prefix}--data-table--top-aligned-body`
-        );
-      }
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      alignTop
+        ? tableRef.current?.classList.add(
+            `${prefix}--data-table--top-aligned-body`
+          )
+        : tableRef.current?.classList.remove(
+            `${prefix}--data-table--top-aligned-body`
+          );
     },
     [prefix]
   );
 
   const toggleTableHeaderAlignmentClass = useCallback(
     (alignTop = false) => {
-      if (alignTop) {
-        tableRef.current?.classList.add(
-          `${prefix}--data-table--top-aligned-header`
-        );
-      } else {
-        tableRef.current?.classList.remove(
-          `${prefix}--data-table--top-aligned-header`
-        );
-      }
+      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
+      alignTop
+        ? tableRef.current?.classList.add(
+            `${prefix}--data-table--top-aligned-header`
+          )
+        : tableRef.current?.classList.remove(
+            `${prefix}--data-table--top-aligned-header`
+          );
     },
     [prefix]
   );

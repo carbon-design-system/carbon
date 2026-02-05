@@ -6,7 +6,7 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { adoptStyles, html } from 'lit';
+import { adoptStyles, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
@@ -152,9 +152,7 @@ class CDSAILabel extends CDSToggleTip {
     super.attributeChangedCallback(name, old, newValue);
 
     if (name === 'revert-active') {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-      // @ts-ignore typescript does not think requestUpdate() exists on parentElement
-      this.parentElement?.requestUpdate();
+      (this.parentElement as LitElement)?.requestUpdate();
     }
   }
 }

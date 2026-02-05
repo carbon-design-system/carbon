@@ -89,10 +89,8 @@ class CDSComboBox extends CDSDropdown {
     item: CDSComboBoxItem,
     queryText: string
   ): boolean {
-    return (
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      item.textContent!.toLowerCase().indexOf(queryText.toLowerCase()) >= 0
-    );
+    const text = item.textContent?.toLowerCase() ?? '';
+    return text.indexOf(queryText.toLowerCase()) >= 0;
   }
 
   connectedCallback() {
@@ -110,11 +108,7 @@ class CDSComboBox extends CDSDropdown {
     const rawQueryText = this._filterInputNode.value;
     const queryText = rawQueryText.trim().toLowerCase();
 
-    if (rawQueryText.length !== 0) {
-      this.setAttribute('isClosable', '');
-    } else {
-      this.removeAttribute('isClosable');
-    }
+    this.toggleAttribute('isClosable', rawQueryText.length !== 0);
 
     const items = this.querySelectorAll(
       (this.constructor as typeof CDSComboBox).selectorItem
@@ -323,9 +317,8 @@ class CDSComboBox extends CDSDropdown {
   }
 
   protected _handleClickInner(event: MouseEvent) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const { target } = event as any;
-    if (this._selectionButtonNode?.contains(target)) {
+    const { target } = event;
+    if (target && this._selectionButtonNode?.contains(target as Node)) {
       this._handleUserInitiatedClearInput();
     } else {
       super._handleClickInner(event);
@@ -460,11 +453,7 @@ class CDSComboBox extends CDSDropdown {
   protected _renderFollowingLabel(): TemplateResult | undefined {
     const { clearSelectionLabel, _filterInputValue: filterInputValue } = this;
 
-    if (filterInputValue.length != 0) {
-      this.setAttribute('isClosable', '');
-    } else {
-      this.removeAttribute('isClosable');
-    }
+    this.toggleAttribute('isClosable', filterInputValue.length !== 0);
 
     return filterInputValue.length === 0
       ? undefined

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,9 @@ class CDSBreadcrumbItem extends LitElement {
    * Handles `slotchange` event.
    */
   private _handleSlotChange({ target }: Event) {
-    if (this.getAttribute('size')) {
+    const size = this.getAttribute('size');
+
+    if (size) {
       const items = (target as HTMLSlotElement)
         .assignedNodes()
         .filter(
@@ -32,11 +34,7 @@ class CDSBreadcrumbItem extends LitElement {
         );
 
       items.forEach((item) => {
-        (item as HTMLElement).setAttribute(
-          'breadcrumb-size',
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-          this.getAttribute('size')!
-        );
+        (item as HTMLElement).setAttribute('breadcrumb-size', size);
       });
     }
   }
