@@ -85,6 +85,11 @@ describe('TextArea', () => {
       );
     });
 
+    it('should render helperText with value 0', () => {
+      render(<TextArea id="textarea-1" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
     it('should respect hideLabel prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" hideLabel />);
 
@@ -150,6 +155,11 @@ describe('TextArea', () => {
       expect(screen.getByText('TextArea label')).toHaveClass(
         `${prefix}--label`
       );
+    });
+
+    it('should render labelText with value 0', () => {
+      render(<TextArea id="textarea-1" labelText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
     });
 
     it('should respect `placeholder` prop', () => {
