@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FileUploader } from '../FileUploader';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
@@ -25,48 +25,48 @@ export default {
   ],
 };
 
+// const DEBUG_ENABLED = process.env.NODE_ENV !== 'production';
+const DEBUG_ENABLED = true;
+
+const debugLog = (...args) => {
+  if (DEBUG_ENABLED) {
+    console.log(...args);
+  }
+};
+
+const mapFileList = (files) =>
+  files?.map((f) => ({ name: f.name, uuid: f.uuid })) || [];
+
+const logFileList = (label, files) => {
+  if (Array.isArray(files)) {
+    debugLog(label, mapFileList(files));
+  } else if (files) {
+    debugLog(label, { name: files.name, uuid: files.uuid });
+  }
+};
+
+const logEventData = (event) => {
+  debugLog('  Action:', event.target.action);
+
+  logFileList('  Added Files:', event.target.addedFiles);
+  logFileList('  Deleted File:', event.target.deletedFile);
+  logFileList('  Cleared Files:', event.target.clearedFiles);
+  logFileList('  Current Files:', event.target.currentFiles);
+};
+
+const logDeleteData = (event) => {
+  debugLog('  Deleted File Object:', event.target.deletedFile);
+  debugLog('  Deleted File Name:', event.target.deletedFile?.name);
+  logFileList('  Remaining Files:', event.target.remainingFiles);
+};
+
 export const EnhancedCallbacks = (args) => {
   const handleChange = (event, data) => {
-    console.log('  Action:', event.target.action);
-
-    if (event.target.addedFiles) {
-      console.log(
-        '  Added Files:',
-        event.target.addedFiles.map((f) => ({ name: f.name, uuid: f.uuid }))
-      );
-    }
-
-    if (event.target.deletedFile) {
-      console.log('  Deleted File:', {
-        name: event.target.deletedFile.name,
-        uuid: event.target.deletedFile.uuid,
-      });
-    }
-
-    if (event.target.clearedFiles) {
-      console.log(
-        '  Cleared Files:',
-        event.target.clearedFiles.map((f) => ({ name: f.name, uuid: f.uuid }))
-      );
-    }
-
-    console.log(
-      '  Current Files:',
-      event.target.currentFiles?.map((f) => ({ name: f.name, uuid: f.uuid })) ||
-        []
-    );
+    logEventData(event);
   };
 
   const handleDelete = (event, data) => {
-    console.log('  Deleted File Object:', event.target.deletedFile);
-    console.log('  Deleted File Name:', event.target.deletedFile?.name);
-    console.log(
-      '  Remaining Files:',
-      event.target.remainingFiles?.map((f) => ({
-        name: f.name,
-        uuid: f.uuid,
-      })) || []
-    );
+    logDeleteData(event);
   };
 
   return (
@@ -92,6 +92,61 @@ EnhancedCallbacks.args = {
 };
 
 EnhancedCallbacks.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+export const ControlledFileState = (args) => {
+  const fileUploaderRef = useRef(null);
+
+  useEffect(() => {
+    if (!fileUploaderRef.current) return;
+    const currentFiles = fileUploaderRef.current.getCurrentFiles();
+    if (!currentFiles?.length) return;
+
+    const mutatedFiles = currentFiles.map((file, index) => ({
+      ...file,
+      disabled: args.disabled,
+    }));
+
+    fileUploaderRef.current.setCurrentFiles(mutatedFiles);
+  }, [args.disabled]);
+
+  const handleChange = (event, data) => {
+    logEventData(event);
+  };
+
+  const handleDelete = (event, data) => {
+    logDeleteData(event);
+  };
+
+  return (
+    <div>
+      <FileUploader
+        ref={fileUploaderRef}
+        labelTitle="Enhanced FileUploader Demo"
+        labelDescription="Open browser console to see detailed callback data when adding/removing files"
+        buttonLabel="Add file(s)"
+        buttonKind="primary"
+        filenameStatus="edit"
+        multiple
+        onChange={handleChange}
+        onDelete={handleDelete}
+        iconDescription="Remove uploaded file"
+        {...args}
+      />
+    </div>
+  );
+};
+
+ControlledFileState.args = {
+  disabled: false,
+};
+
+ControlledFileState.argTypes = {
   disabled: {
     control: {
       type: 'boolean',

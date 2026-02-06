@@ -23,6 +23,11 @@ import { Tooltip } from '../Tooltip';
 
 export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
   /**
+   * Specify whether file uploader item is disabled
+   */
+  disabled?: boolean;
+
+  /**
    * Error message body for an invalid file upload
    */
   errorBody?: string;
@@ -88,6 +93,7 @@ function FileUploaderItem({
   errorBody,
   size,
   className,
+  disabled,
   ...other
 }: FileUploaderItemProps) {
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -99,6 +105,7 @@ function FileUploaderItem({
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
     [`${prefix}--file__selected-file--sm`]: size === 'sm',
+    [`${prefix}--file__selected-file--disabled`]: disabled,
   });
   const isInvalid = invalid
     ? `${prefix}--file-filename-container-wrap-invalid`
@@ -157,6 +164,7 @@ function FileUploaderItem({
         <span className={`${prefix}--file__state-container`}>
           <Filename
             name={name}
+            disabled={disabled}
             iconDescription={iconDescription}
             status={status}
             invalid={invalid}
