@@ -9,7 +9,8 @@
 
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshot } = require('../../test-utils/snapshot');
 
 test.describe('Notifications', () => {
   themes.forEach((theme) => {
@@ -39,13 +40,20 @@ test.describe('Notifications', () => {
       });
 
       test('actionable inline @vrt', async ({ page }) => {
-        await snapshotStory(page, {
+        await visitStory(page, {
           component: 'Actionable',
           id: 'components-notifications-actionable--default',
-          theme,
+          globals: {
+            theme,
+          },
           args: {
             inline: true,
           },
+        });
+        await snapshot(page, {
+          component: 'Actionable',
+          story: 'components-notifications-actionable--default-inline',
+          theme,
         });
       });
 
