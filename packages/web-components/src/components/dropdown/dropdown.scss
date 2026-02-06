@@ -205,6 +205,11 @@ $css--plex: true !default;
   border-block-start-color: transparent;
 }
 
+:host(#{$prefix}-dropdown-item[hovered-next-sibling])
+  .#{$prefix}--list-box__menu-item__option {
+  border-block-start-color: transparent;
+}
+
 :host(#{$prefix}-dropdown-item[disabled])
   .#{$prefix}--list-box__menu-item__option {
   color: $text-disabled;

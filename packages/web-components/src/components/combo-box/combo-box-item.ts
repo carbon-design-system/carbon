@@ -29,34 +29,18 @@ class CDSComboBoxItem extends CDSDropdownItem {
     'selected-next-sibling': null,
   };
 
-  private _handleMouseEnter = () => {
-    if (this.hasAttribute('disabled')) {
-      return;
-    }
-    this._syncNextSibling('hovered-next-sibling', true);
-  };
-
-  private _handleMouseLeave = () => {
-    this._syncNextSibling('hovered-next-sibling', false);
-  };
-
   connectedCallback() {
     super.connectedCallback();
     this.classList.add(`${prefix}--list-box__menu-item`);
-    this.addEventListener('mouseenter', this._handleMouseEnter);
-    this.addEventListener('mouseleave', this._handleMouseLeave);
   }
 
   disconnectedCallback() {
-    this.removeEventListener('mouseenter', this._handleMouseEnter);
-    this.removeEventListener('mouseleave', this._handleMouseLeave);
-    this._syncNextSibling('hovered-next-sibling', false);
     this._syncNextSibling('highlighted-next-sibling', false);
     this._syncNextSibling('selected-next-sibling', false);
     super.disconnectedCallback();
   }
 
-  private _getNextItem(): Element | null {
+  protected _getNextItem(): Element | null {
     let next = this.nextElementSibling;
     while (next) {
       if (
@@ -70,7 +54,7 @@ class CDSComboBoxItem extends CDSDropdownItem {
     return null;
   }
 
-  private _syncNextSibling(
+  protected _syncNextSibling(
     attribute: NextSiblingAttribute,
     shouldSet: boolean
   ) {
