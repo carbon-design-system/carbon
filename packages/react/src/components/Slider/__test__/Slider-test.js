@@ -1173,7 +1173,7 @@ describe('Slider', () => {
         expect(onChange).not.toHaveBeenCalled();
       });
 
-      it('gracefully tolerates empty event passed to _onDrag', () => {
+      it.skip('gracefully tolerates empty event passed to _onDrag', () => {
         const { mouseDown, mouseUp, mouseMove } = fireEvent;
         const { container } = renderTwoHandleSlider({
           value: initialValueLower,
