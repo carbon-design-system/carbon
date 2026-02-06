@@ -149,6 +149,50 @@ describe('Checkbox', () => {
     expect(warnIcon).toBeInTheDocument();
   });
 
+  it('should not respect warn prop if disabled', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+        disabled
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const warnIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--warning`
+    );
+    expect(warnIcon).not.toBeInTheDocument();
+  });
+
+  it('should not respect warn prop if readOnly', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+        readOnly
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const warnIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--warning`
+    );
+    expect(warnIcon).not.toBeInTheDocument();
+  });
+
   it('should display warnText if warn prop is true', () => {
     render(
       <Checkbox
