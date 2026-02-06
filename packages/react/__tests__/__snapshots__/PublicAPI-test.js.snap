@@ -11590,11 +11590,26 @@ Map {
       "className": {
         "type": "string",
       },
+      "customMarker": {
+        "type": "string",
+      },
       "isExpressive": {
         "type": "bool",
       },
       "nested": {
         "type": "bool",
+      },
+      "type": {
+        "args": [
+          [
+            "disc",
+            "circle",
+            "square",
+            "hyphen",
+            "custom",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
