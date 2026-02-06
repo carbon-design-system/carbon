@@ -1234,21 +1234,25 @@ const ComboBox = forwardRef(
                     const disabled = itemProps['aria-disabled'];
                     const {
                       'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                      'aria-selected': unusedAriaSelected, // eslint-disable-line @typescript-eslint/no-unused-vars
                       ...modifiedItemProps
                     } = itemProps;
+
+                    const isSelected = isEqual(currentSelectedItem, item);
 
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={isEqual(currentSelectedItem, item)}
+                        isActive={isSelected}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
-                        {...modifiedItemProps}>
+                        {...modifiedItemProps}
+                        aria-selected={isSelected}>
                         {itemToElement
                           ? itemToElement(item)
                           : itemToString(item)}
-                        {isEqual(currentSelectedItem, item) && (
+                        {isSelected && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />
