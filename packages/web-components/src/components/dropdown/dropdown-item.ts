@@ -63,50 +63,6 @@ class CDSDropdownItem extends LitElement {
   @state()
   _hasEllipsisApplied = false;
 
-  private _handleMouseEnter = () => {
-    if (this.hasAttribute('disabled')) {
-      return;
-    }
-    this._syncNextSibling('hovered-next-sibling', true);
-  };
-
-  private _handleMouseLeave = () => {
-    this._syncNextSibling('hovered-next-sibling', false);
-  };
-
-  private _getNextItem(): Element | null {
-    let next = this.nextElementSibling;
-    while (next) {
-      if (
-        next instanceof HTMLElement &&
-        next.tagName.toLowerCase() === `${prefix}-dropdown-item`
-      ) {
-        return next;
-      }
-      next = next.nextElementSibling;
-    }
-    return null;
-  }
-
-  private _syncNextSibling(
-    attribute: 'hovered-next-sibling',
-    shouldSet: boolean
-  ) {
-    const currentSibling = this._nextSiblingRef;
-    currentSibling?.removeAttribute(attribute);
-    if (shouldSet) {
-      const next = this._getNextItem();
-      if (next) {
-        next.setAttribute(attribute, '');
-        this._nextSiblingRef = next;
-        return;
-      }
-    }
-    this._nextSiblingRef = null;
-  }
-
-  private _nextSiblingRef: Element | null = null;
-
   connectedCallback() {
     super.connectedCallback();
     if (!this.hasAttribute('role')) {
@@ -120,15 +76,6 @@ class CDSDropdownItem extends LitElement {
       );
     }
     this.setAttribute('aria-selected', String(this.selected));
-    this.addEventListener('mouseenter', this._handleMouseEnter);
-    this.addEventListener('mouseleave', this._handleMouseLeave);
-  }
-
-  disconnectedCallback() {
-    this.removeEventListener('mouseenter', this._handleMouseEnter);
-    this.removeEventListener('mouseleave', this._handleMouseLeave);
-    this._syncNextSibling('hovered-next-sibling', false);
-    super.disconnectedCallback();
   }
 
   /**
