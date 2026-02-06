@@ -6,13 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  cloneElement,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from 'react';
+import React, { cloneElement, useRef, useState, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
@@ -28,6 +22,7 @@ import { DismissibleTagBaseProps } from './DismissibleTag';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export const TYPES = {
   red: 'Red',
@@ -173,7 +168,7 @@ const TagBase = React.forwardRef<
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
