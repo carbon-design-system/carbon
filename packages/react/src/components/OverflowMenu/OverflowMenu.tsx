@@ -511,6 +511,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     );
 
+    const isInDataTableRow = Boolean(
+      open && triggerRef.current?.closest(`.${prefix}--table-column-menu`)
+    );
+
     const overflowMenuOptionsClasses = classNames(
       menuOptionsClass,
       `${prefix}--overflow-menu-options`,
@@ -519,6 +523,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         [`${prefix}--overflow-menu-options--open`]: open,
         [`${prefix}--overflow-menu-options--light`]: light,
         [`${prefix}--overflow-menu-options--${size}`]: size,
+        [`${prefix}--overflow-menu-options--data-table`]: isInDataTableRow,
       }
     );
 

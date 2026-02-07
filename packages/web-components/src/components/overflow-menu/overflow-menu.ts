@@ -141,6 +141,7 @@ class CDSOverflowMenu
       this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
+    this.dataTable = Boolean(this.closest?.(`${prefix}-table-cell`));
 
     adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
   }
@@ -166,6 +167,7 @@ class CDSOverflowMenu
       const { _menuBody: menuBody, size } = this;
       if (menuBody) {
         menuBody.setAttribute('breadcrumb', String(Boolean(this.breadcrumb)));
+        menuBody.setAttribute('data-table', String(Boolean(this.dataTable)));
         menuBody.open = open;
         menuBody.size = size;
 
@@ -180,6 +182,10 @@ class CDSOverflowMenu
     if (changedProperties.has('dataTable')) {
       const tooltip = this.shadowRoot?.querySelector(`${prefix}-tooltip`);
       tooltip?.setAttribute('data-table', '');
+      const { _menuBody: menuBody } = this;
+      if (menuBody) {
+        menuBody.setAttribute('data-table', String(Boolean(this.dataTable)));
+      }
     }
 
     if (changedProperties.has('size')) {
