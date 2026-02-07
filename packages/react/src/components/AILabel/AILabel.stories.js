@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { AILabel, AILabelContent, AILabelActions } from '.';
+import { action } from 'storybook/actions';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
@@ -21,10 +22,105 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['AILabelContent', 'aiTextLabel', 'slugLabel'],
+    },
+  },
+};
+const sharedArgTypes = {
+  aiText: {
+    control: {
+      type: 'text',
+    },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: { type: 'select' },
+    description:
+      'Specify how the `AILabelContent` should align with the trigger element.',
+  },
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Will auto-align the `AILabelContent` on first render if it is not visible. This prop is currently experimental and is subject to future changes. Requires React v17+',
+  },
+  'aria-label': {
+    control: {
+      type: 'text',
+    },
+  },
+  kind: {
+    options: ['default', 'inline'],
+    control: { type: 'select' },
+  },
+  revertActive: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  revertLabel: {
+    control: {
+      type: 'text',
+    },
+    if: { arg: 'revertActive', eq: true },
+  },
+  size: {
+    options: ['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'],
+    control: { type: 'select' },
+  },
+  textLabel: {
+    control: {
+      type: 'text',
+    },
+    if: { arg: 'kind', eq: 'inline' },
+    table: {
+      category: 'Inline variant',
+    },
+  },
+  defaultOpen: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  onRevertClick: {
+    action: 'onRevertClick',
   },
 };
 
-export const Default = () => {
+const sharedArgs = {
+  aiText: 'AI',
+  ['aria-label']: 'Show information',
+  kind: 'default',
+  revertActive: false,
+  revertLabel: 'Revert to AI input',
+  size: 'md',
+  defaultOpen: false,
+  textLabel: '',
+  autoAlign: false,
+  onRevertClick: (event) => {
+    action('onRevertClick')(event);
+  },
+};
+
+export const Default = (args) => {
   const aiContent = (
     <div>
       <p className="secondary">AI Explained</p>
@@ -43,187 +139,7 @@ export const Default = () => {
   return (
     <>
       <div className="ai-label-container ai-label-container-example">
-        <AILabel autoAlign size="mini">
-          <AILabelContent>{aiContent}</AILabelContent>
-        </AILabel>
-        <AILabel autoAlign size="2xs">
-          <AILabelContent>{aiContent}</AILabelContent>
-        </AILabel>
-        <AILabel autoAlign size="xs">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign size="sm">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign size="md">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign size="lg">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign size="xl">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-      </div>
-      <div className="ai-label-container ai-label-container-example">
-        <AILabel autoAlign kind="inline" size="sm">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign kind="inline" size="md">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign kind="inline" size="lg">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-      </div>
-      <div className="ai-label-container ai-label-container-example">
-        <AILabel autoAlign kind="inline" size="sm" textLabel="Text goes here">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign kind="inline" size="md" textLabel="Text goes here">
-          <AILabelContent>
-            {aiContent}
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          </AILabelContent>
-        </AILabel>
-        <AILabel autoAlign kind="inline" size="lg" textLabel="Text goes here">
+        <AILabel {...args}>
           <AILabelContent>
             {aiContent}
             <AILabelActions>
@@ -244,13 +160,137 @@ export const Default = () => {
     </>
   );
 };
-
-export const ExplainabilityPopover = (args) => {
-  const { showAILabelActions = true } = args;
+Default.args = { ...sharedArgs };
+Default.argTypes = { ...sharedArgTypes };
+export const Inline = (args) => {
+  const aiContent = (
+    <div>
+      <p className="secondary">AI Explained</p>
+      <h2 className="ai-label-heading">84%</h2>
+      <p className="secondary bold">Confidence score</p>
+      <p className="secondary">
+        Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      </p>
+      <hr />
+      <p className="secondary">Model type</p>
+      <p className="bold">Foundation model</p>
+    </div>
+  );
 
   return (
+    <>
+      <div className="ai-label-container ai-label-container-example">
+        <AILabel {...args}>
+          <AILabelContent>
+            {aiContent}
+            <AILabelActions>
+              <IconButton kind="ghost" label="View">
+                <View />
+              </IconButton>
+              <IconButton kind="ghost" label="Open Folder">
+                <FolderOpen />
+              </IconButton>
+              <IconButton kind="ghost" label="Folders">
+                <Folders />
+              </IconButton>
+              <Button>View details</Button>
+            </AILabelActions>
+          </AILabelContent>
+        </AILabel>
+      </div>
+    </>
+  );
+};
+Inline.args = {
+  ...sharedArgs,
+  kind: 'inline',
+};
+Inline.argTypes = {
+  ...sharedArgTypes,
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+    description:
+      'Specify the size of the button, from the following list of sizes:',
+    table: {
+      defaultValue: {
+        summary: 'md',
+      },
+      type: {
+        summary: "'sm' | 'md' | 'lg'",
+      },
+    },
+  },
+};
+export const InlineWithContent = (args) => {
+  const aiContent = (
+    <div>
+      <p className="secondary">AI Explained</p>
+      <h2 className="ai-label-heading">84%</h2>
+      <p className="secondary bold">Confidence score</p>
+      <p className="secondary">
+        Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      </p>
+      <hr />
+      <p className="secondary">Model type</p>
+      <p className="bold">Foundation model</p>
+    </div>
+  );
+
+  return (
+    <>
+      <div className="ai-label-container ai-label-container-example">
+        <AILabel {...args}>
+          <AILabelContent>
+            {aiContent}
+            <AILabelActions>
+              <IconButton kind="ghost" label="View">
+                <View />
+              </IconButton>
+              <IconButton kind="ghost" label="Open Folder">
+                <FolderOpen />
+              </IconButton>
+              <IconButton kind="ghost" label="Folders">
+                <Folders />
+              </IconButton>
+              <Button>View details</Button>
+            </AILabelActions>
+          </AILabelContent>
+        </AILabel>
+      </div>
+    </>
+  );
+};
+InlineWithContent.args = {
+  ...sharedArgs,
+  kind: 'inline',
+  textLabel: 'Text goes here',
+};
+InlineWithContent.argTypes = {
+  ...sharedArgTypes,
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+    description:
+      'Specify the size of the button, from the following list of sizes:',
+    table: {
+      defaultValue: {
+        summary: 'md',
+      },
+      type: {
+        summary: "'sm' | 'md' | 'lg'",
+      },
+    },
+  },
+};
+
+export const ExplainabilityPopover = (args) => {
+  const { showAILabelActions, ...rest } = args;
+  return (
     <div className="ai-label-container-example ai-label-container centered">
-      <AILabel autoAlign={false} defaultOpen {...args}>
+      <AILabel {...rest}>
         <AILabelContent>
           {' '}
           <div>
@@ -285,38 +325,18 @@ export const ExplainabilityPopover = (args) => {
     </div>
   );
 };
+ExplainabilityPopover.args = {
+  ...sharedArgs,
+  defaultOpen: true,
+  showAILabelActions: true,
+};
 
 ExplainabilityPopover.argTypes = {
+  ...sharedArgTypes,
   showAILabelActions: {
     control: {
       type: 'boolean',
     },
     description: 'Playground only - toggle to show the callout toolbar',
-  },
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: { type: 'select' },
-  },
-};
-
-ExplainabilityPopover.parameters = {
-  controls: {
-    include: ['align', 'aria-label', 'defaultOpen', 'showAILabelActions'],
   },
 };
