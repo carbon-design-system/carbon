@@ -495,9 +495,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const getTarget = () => {
       const triggerEl = triggerRef.current;
       if (triggerEl instanceof Element) {
-        return (
-          triggerEl.closest('[data-floating-menu-container]') || document.body
-        );
+        return triggerEl || document.body;
       }
       return document.body;
     };
