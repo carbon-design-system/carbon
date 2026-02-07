@@ -13,39 +13,106 @@ import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
 
+// Note: we explicitly define the defaultValue here, as the Button component takes `props` and forwards them
+// to the underlying `button` or `a` element, as a result storybook cannot infer the default values from the component.
+
+const sharedArgTypes = {
+  disabled: {
+    table: { defaultValue: { summary: false } },
+  },
+  dangerDescription: {
+    table: { defaultValue: { summary: 'danger' } },
+  },
+  autoAlign: {
+    table: { defaultValue: { summary: false } },
+  },
+  hasIconOnly: {
+    table: { defaultValue: { summary: false } },
+  },
+  kind: {
+    options: [
+      'primary',
+      'secondary',
+      'tertiary',
+      'ghost',
+      'danger',
+      'danger--tertiary',
+      'danger--ghost',
+    ],
+    control: { type: 'select' },
+    table: { defaultValue: { summary: 'primary' } },
+  },
+  type: {
+    table: { defaultValue: { summary: 'button' } },
+  },
+  size: {
+    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    control: { type: 'select' },
+    table: { defaultValue: { summary: 'lg' } },
+  },
+  tooltipAlignment: {
+    table: { defaultValue: { summary: 'center' } },
+  },
+  tooltipDropShadow: {
+    table: { defaultValue: { summary: false } },
+  },
+  tooltipHighContrast: {
+    table: { defaultValue: { summary: true } },
+  },
+  tooltipPosition: {
+    table: { defaultValue: { summary: 'top' } },
+  },
+  isExpressive: {
+    // TODO: doesn't work on icon buttons, but works for web-components icon buttons, need to investigate
+    table: { defaultValue: { summary: false } },
+  },
+  isSelected: {
+    table: { defaultValue: { summary: false } },
+  },
+  iconDescription: {
+    control: 'text',
+  },
+  badgeCount: {
+    description:
+      'Optional badge count shown on icon-only buttons. This prop is supported only when `hasIconOnly=true`, `kind="ghost"`, and `size="lg"`.',
+    type: { name: 'number' },
+    control: { type: 'number', min: 0 },
+  },
+
+  renderIcon: {
+    control: { type: 'select' },
+    options: ['Add', 'Notification', 'None'],
+    mapping: {
+      Add: (props) => <Add {...props} />,
+      Notification: (props) => <Notification {...props} />,
+      None: undefined,
+    },
+  },
+};
+
+const textButtonControls = [
+  'dangerDescription',
+  'disabled',
+  'href',
+  'iconDescription',
+  'isExpressive',
+  'kind',
+  'rel',
+  'renderIcon',
+  'role',
+  'size',
+  'tabIndex',
+  'target',
+  'type',
+];
+
+const skeletonControls = ['href', 'size'];
+
 export default {
   title: 'Components/Button',
   component: Button,
-  subcomponents: {
-    ButtonSkeleton,
-  },
-  argTypes: {
-    kind: {
-      options: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'ghost',
-        'danger',
-        'danger--tertiary',
-        'danger--ghost',
-      ],
-      control: { type: 'select' },
-    },
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-      control: { type: 'select' },
-    },
-    children: {
-      control: false,
-    },
-    renderIcon: {
-      control: false,
-    },
-    as: {
-      control: false,
-    },
-  },
+  subcomponents: { ButtonSkeleton },
+  argTypes: sharedArgTypes,
   parameters: {
     docs: {
       page: mdx,
@@ -53,112 +120,168 @@ export default {
   },
 };
 
-export const Default = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button {...args}>Button</Button>
-      <Button renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
+export const Default = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+// Default.storyName = 'Primary (default)';
+
+Default.parameters = {
+  controls: { include: textButtonControls },
 };
 
-export const Secondary = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button kind="secondary" {...args}>
-        Button
-      </Button>
-      <Button kind="secondary" renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
+export const Secondary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Secondary.args = {
+  kind: 'secondary',
 };
 
-export const Tertiary = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button kind="tertiary" {...args}>
-        Button
-      </Button>
-      <Button kind="tertiary" renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
+Secondary.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
 };
 
-export const Danger = (args) => {
-  return (
-    <>
-      <Button kind="danger" {...args}>
-        Button
-      </Button>
-      &nbsp;
-      <Button kind="danger--tertiary" {...args}>
-        Danger tertiary button
-      </Button>
-      &nbsp;
-      <Button kind="danger--ghost" {...args}>
-        Danger ghost button
-      </Button>
-    </>
-  );
+export const Tertiary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Tertiary.args = {
+  kind: 'tertiary',
 };
 
-export const Ghost = (args) => {
-  return (
-    <Stack gap={7}>
-      <Button kind="ghost" {...args}>
-        Button
-      </Button>
-      <Button kind="ghost" renderIcon={Add} {...args}>
-        Button
-      </Button>
-    </Stack>
-  );
+Tertiary.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const Ghost = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Ghost.args = {
+  kind: 'ghost',
+};
+
+Ghost.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const Danger = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+Danger.args = {
+  kind: 'danger',
+};
+
+Danger.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const DangerTertiary = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+DangerTertiary.args = {
+  kind: 'danger--tertiary',
+};
+
+DangerTertiary.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
+};
+
+export const DangerGhost = (args) => (
+  <Button {...args} onClick={action('onClick')}>
+    Button
+  </Button>
+);
+
+DangerGhost.args = {
+  kind: 'danger--ghost',
+};
+
+DangerGhost.parameters = {
+  controls: {
+    include: textButtonControls,
+  },
 };
 
 export const IconButton = (args) => (
-  <Button
-    renderIcon={Add}
-    iconDescription="Icon Description"
-    hasIconOnly
-    onClick={action('onClick')}
-    {...args}
-  />
+  <Button {...args} onClick={action('onClick')} />
 );
 
-export const IconButtonWithBadge = (args) => {
-  const { badgeCount } = args;
+IconButton.argTypes = {
+  ...sharedArgTypes,
+  hasIconOnly: {
+    table: { readonly: true },
+  },
+  badgeCount: {
+    table: { readonly: true },
+  },
+};
 
+IconButton.args = {
+  hasIconOnly: true,
+  renderIcon: 'Add',
+  iconDescription: 'Icon Description',
+};
+
+export const IconButtonWithBadge = (args) => {
   return (
-    <Button
-      kind="ghost"
-      size="lg"
-      badgeCount={badgeCount}
-      hasIconOnly
-      renderIcon={Notification}
-      iconDescription="Notification"
-      onClick={action('onClick')}
-      autoAlign
-      {...args}
-    />
+    <Button {...args} onClick={action('onClick')}>
+      Button
+    </Button>
   );
+};
+
+IconButtonWithBadge.argTypes = {
+  ...sharedArgTypes,
+  hasIconOnly: {
+    table: { readonly: true },
+  },
+  kind: {
+    table: { readonly: true },
+  },
+  size: {
+    table: { readonly: true },
+  },
 };
 
 IconButtonWithBadge.args = {
+  hasIconOnly: true,
+  renderIcon: 'Notification',
+  iconDescription: 'Notifications',
   badgeCount: 4,
+  kind: 'ghost',
+  size: 'lg',
 };
 
-export const Skeleton = () => {
-  return (
-    <div>
-      <ButtonSkeleton />
-      &nbsp;
-      <ButtonSkeleton size="sm" />
-    </div>
-  );
+export const Skeleton = (args) => <ButtonSkeleton {...args} />;
+
+Skeleton.parameters = {
+  controls: {
+    include: skeletonControls,
+  },
 };

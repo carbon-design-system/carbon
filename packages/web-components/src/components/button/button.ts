@@ -318,7 +318,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     }
     const classes = classMap(defaultClasses);
 
-    const isDanger = kind.includes('danger');
+    const isDanger = kind?.includes('danger');
 
     if (href) {
       return disabled
