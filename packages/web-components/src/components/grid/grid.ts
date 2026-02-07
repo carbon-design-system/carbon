@@ -46,6 +46,13 @@ class CDSGrid extends LitElement {
   @property({ reflect: true, attribute: 'full-width', type: Boolean })
   fullWidth = false;
 
+  /**
+   * Add a row gap to the grid that matches the current gutter size.
+   * This is useful when you want consistent vertical spacing between rows.
+   */
+  @property({ reflect: true, attribute: 'with-row-gap', type: Boolean })
+  withRowGap = false;
+
   @consume({ context: gridContext, subscribe: true })
   @property({ attribute: false })
   public gridContextIn?: GridContext;

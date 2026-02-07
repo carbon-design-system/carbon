@@ -30,6 +30,7 @@ const CSSGrid = React.forwardRef<
       condensed = false,
       fullWidth = false,
       narrow = false,
+      withRowGap = false,
       ...rest
     },
     ref?
@@ -65,6 +66,7 @@ const CSSGrid = React.forwardRef<
       [`${prefix}--css-grid--full-width`]: fullWidth,
       [`${prefix}--css-grid--start`]: align === 'start',
       [`${prefix}--css-grid--end`]: align === 'end',
+      [`${prefix}--css-grid--with-row-gap`]: withRowGap,
     });
 
     // cast as any to let TypeScript allow passing in attributes to base component
@@ -116,6 +118,12 @@ CSSGrid.propTypes = {
    * typographic alignment with and without containers.
    */
   narrow: PropTypes.bool,
+
+  /**
+   * Add a row gap to the grid that matches the current gutter size.
+   * This is useful when you want consistent vertical spacing between rows.
+   */
+  withRowGap: PropTypes.bool,
 };
 
 type SubgridMode = 'wide' | 'narrow' | 'condensed';

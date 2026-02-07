@@ -453,3 +453,77 @@ Default.argTypes = {
     },
   },
 };
+
+export const WithRowGap = (args) => {
+  function DemoContent({ children }) {
+    return (
+      <div className="outside">
+        <div className="inside">{children}</div>
+      </div>
+    );
+  }
+  return (
+    <div id="templates">
+      <FlexGrid {...args}>
+        <Row>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 1, Col 1</DemoContent>
+          </Column>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 1, Col 2</DemoContent>
+          </Column>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 1, Col 3</DemoContent>
+          </Column>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 1, Col 4</DemoContent>
+          </Column>
+        </Row>
+        <Row>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 2, Col 1</DemoContent>
+          </Column>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 2, Col 2</DemoContent>
+          </Column>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 2, Col 3</DemoContent>
+          </Column>
+          <Column sm={4} md={4} lg={4}>
+            <DemoContent>Row 2, Col 4</DemoContent>
+          </Column>
+        </Row>
+      </FlexGrid>
+    </div>
+  );
+};
+
+WithRowGap.args = {
+  withRowGap: true,
+  narrow: false,
+  condensed: false,
+};
+
+WithRowGap.argTypes = {
+  withRowGap: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+};

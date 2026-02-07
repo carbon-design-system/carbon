@@ -103,6 +103,44 @@ export const FullWidth = {
       </style>`,
 };
 
+export const WithRowGap = {
+  args: {
+    ...defaultArgs,
+    withRowGap: true,
+  },
+  argTypes: {
+    ...controls,
+    withRowGap: {
+      control: 'boolean',
+      description:
+        'Add a row gap to the grid that matches the current gutter size',
+    },
+  },
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: ({ condensed, narrow, withRowGap }) =>
+    html`<cds-grid
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
 export const MixedGutterModes = {
   parameters: {
     percy: {
