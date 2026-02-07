@@ -89,6 +89,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
             </div>
+            <slot name="icon"></slot>
           </a>
         `
       : html`
@@ -100,6 +101,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
             </div>
+            <slot name="icon"></slot>
           </button>
         `;
   }
