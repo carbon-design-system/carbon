@@ -612,9 +612,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
       return 0;
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const [prevControlledValue, setPrevControlledValue] =
-      useState(controlledValue);
 
     const numberParser = useMemo(
       () => new NumberParser(locale, formatOptions),
@@ -729,7 +726,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         } else {
           setValue(controlledValue);
         }
-        setPrevControlledValue(controlledValue);
       }
     }, [controlledValue, type, allowEmpty]);
     let ariaDescribedBy: string | undefined = undefined;

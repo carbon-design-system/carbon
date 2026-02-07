@@ -557,8 +557,8 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
     onChange,
     defaultValue: defaultSelectedItem ?? ({} as Item),
   });
-  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  function handleClick(item, e) {
+
+  function handleClick(item) {
     setSelection(item);
   }
 
@@ -580,8 +580,8 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
             label={itemToString(item)}
             role="menuitemradio"
             aria-checked={item === selection}
-            onClick={(e) => {
-              handleClick(item, e);
+            onClick={() => {
+              handleClick(item);
             }}
           />
         ))}

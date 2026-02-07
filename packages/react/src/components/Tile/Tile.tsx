@@ -14,8 +14,6 @@ import React, {
   useRef,
   useState,
   type ButtonHTMLAttributes,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  type ChangeEvent,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
