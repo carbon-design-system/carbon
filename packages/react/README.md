@@ -114,14 +114,14 @@ function MyComponent() {
 ```
 
 For a full list of icons available, checkout our
-[website](https://www.carbondesignsystem.com/guidelines/icons/library/).
+[website](https://carbondesignsystem.com/elements/icons/library/).
 
 ## 📖 API Documentation
 
 If you're looking for `@carbon/react` API documentation, check out:
 
 - [Storybook](https://react.carbondesignsystem.com/)
-- [Icon Library](https://www.carbondesignsystem.com/guidelines/icons/library/)
+- [Icon Library](https://carbondesignsystem.com/elements/icons/library/)
 
 ## 🙌 Contributing
 

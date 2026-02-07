@@ -8,6 +8,8 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - _autoEnablePresence
+        - _presenceId
         - accept
         - action
         - actionButtonLabel
@@ -25,6 +27,8 @@ collect:
         - as
         - autoAlign
         - autoComplete
+        - backgroundToken
+        - border
         - buttonKind
         - caption
         - checked
@@ -134,6 +138,7 @@ collect:
         - lowContrast
         - max
         - maxCount
+        - maxFileSize
         - menuAlignment
         - menuOffset
         - menuOffsetFlip
@@ -147,6 +152,7 @@ collect:
         - name
         - narrow
         - nested
+        - noTrailingSlash
         - onActionButtonClick
         - onAddFiles
         - onBlur
@@ -265,9 +271,8 @@ collect:
         - style
         # AspectRatio
         - ratio
-        # Breadcrumb
-        - noTrailingSlash
         # ButtonSet
+        - fluid
         - stacked
         # ChatButton
         - isQuickAction
@@ -313,7 +318,9 @@ collect:
         - enable
         - maxDate
         - minDate
+        - nextMonthAriaLabel
         - parseDate
+        - prevMonthAriaLabel
         - short
         # DatePickerSkeleton
         - range
@@ -328,6 +335,7 @@ collect:
         - focusAfterCloseRef
         - modal
         # DismissibleTag
+        - dismissTooltipAlignment
         - dismissTooltipLabel
         - tagTitle
         # ErrorBoundary
@@ -343,6 +351,8 @@ collect:
         - enableDialogElement
         - enableEnhancedFileUploader
         - enableExperimentalFocusWrapWithoutSentinels
+        - enableFocusWrapWithoutSentinels
+        - enablePresence
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
@@ -415,6 +425,9 @@ collect:
         - legacyAutoalign
         - x
         - y
+        # MenuButton
+        - menuBackgroundToken
+        - menuBorder
         # MenuItem
         - shortcut
         # MenuItemRadioGroup
@@ -452,7 +465,9 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - onStepperBlur
         - stepStartValue
+        - validate
         # OrderedList
         - native
         # OverflowMenuItem
@@ -463,7 +478,6 @@ collect:
         - requireTitle
         - wrapperClassName
         # PageHeaderBreadcrumbBar
-        - border
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
@@ -517,7 +531,6 @@ collect:
         - textSize
         # SideNav
         - addMouseListeners
-        - inert
         - isChildOfHeader
         - isFixedNav
         - isPersistent
@@ -660,6 +673,9 @@ collect:
         - step
         - time
         - "true"
+        # General - backgroundToken
+        - background
+        - layer
         # General - buttonKind
         - danger
         - danger--ghost
@@ -899,10 +915,26 @@ collect:
         # ContentSwitcher - selectionMode
         - automatic
         - manual
+        # DismissibleTag - dismissTooltipAlignment
+        - bottom
+        - bottom-end
+        - bottom-start
+        - left
+        - left-end
+        - left-start
+        - right
+        - right-end
+        - right-start
+        - top
+        - top-end
+        - top-start
         # FileUploader - filenameStatus
         - complete
         - edit
         - uploading
+        # MenuButton - menuBackgroundToken
+        - background
+        - layer
         # ModalWrapper - triggerButtonKind
         - danger
         - danger--ghost

@@ -36,13 +36,13 @@ export interface TableToolbarProps
   size?: 'sm' | 'lg';
 }
 
-const TableToolbar: React.FC<TableToolbarProps> = ({
+const TableToolbar = ({
   ['aria-label']: ariaLabel = 'data table toolbar',
   ariaLabel: deprecatedAriaLabel,
   children,
   size,
   ...rest
-}) => {
+}: TableToolbarProps) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--table-toolbar`]: true,
@@ -50,6 +50,7 @@ const TableToolbar: React.FC<TableToolbarProps> = ({
   });
   return (
     <section
+      role="group"
       aria-label={deprecatedAriaLabel || ariaLabel}
       {...rest}
       className={className}>

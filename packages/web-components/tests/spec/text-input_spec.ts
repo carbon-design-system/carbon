@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,13 +13,16 @@ import CDSTextInput, {
 } from '../../src/components/text-input/text-input';
 import { Playground } from '../../src/components/text-input/text-input.stories';
 
+// JSDOM's DOM implementation does not provide `FormDataEvent`.
+type FormDataEventLike = Event & { formData: FormData };
+
 /**
  * @param formData A `FormData` instance.
  * @returns The given `formData` converted to a classic key-value pair.
  */
 const getValues = (formData: FormData) => {
   const values = {};
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const [key, value] of formData.entries()) {
     values[key] = value;
   }
@@ -31,11 +34,11 @@ const template = (props?) =>
     'cds-text-input': props,
   });
 
-xdescribe('cds-text-input', function () {
+xdescribe('cds-text-input', () => {
   const events = new EventManager();
 
-  describe('Rendering', function () {
-    it('Should render with various attributes', async function () {
+  describe('Rendering', () => {
+    it('Should render with various attributes', async () => {
       render(
         template({
           autocomplete: 'on',
@@ -60,6 +63,7 @@ xdescribe('cds-text-input', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-text-input' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -67,8 +71,8 @@ xdescribe('cds-text-input', function () {
     });
   });
 
-  describe('Event-based form participation', function () {
-    it('Should respond to `formdata` event', async function () {
+  describe('Event-based form participation', () => {
+    it('Should respond to `formdata` event', async () => {
       render(
         html`
           <form>
@@ -86,14 +90,15 @@ xdescribe('cds-text-input', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': 'value-foo' });
     });
 
-    it('Should not respond to `formdata` event if disabled', async function () {
+    it('Should not respond to `formdata` event if disabled', async () => {
       render(
         html`
           <form>
@@ -112,24 +117,26 @@ xdescribe('cds-text-input', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
   });
 
-  describe('Form validation', function () {
+  describe('Form validation', () => {
     let elem: Element;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-text-input')!;
     });
 
-    it('should support checking if required value exists', async function () {
+    it('should support checking if required value exists', async () => {
       const input = elem as CDSTextInput;
       input.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
@@ -144,7 +151,7 @@ xdescribe('cds-text-input', function () {
       expect(input.validityMessage).toBe('');
     });
 
-    it('should support canceling required check', async function () {
+    it('should support canceling required check', async () => {
       const input = elem as CDSTextInput;
       input.required = true;
       events.on(input, 'invalid', (event) => {
@@ -155,14 +162,14 @@ xdescribe('cds-text-input', function () {
       expect(input.validityMessage).toBe('');
     });
 
-    it('should treat empty custom validity message as not invalid', async function () {
+    it('should treat empty custom validity message as not invalid', async () => {
       const input = elem as CDSTextInput;
       input.setCustomValidity('');
       expect(input.invalid).toBe(false);
       expect(input.validityMessage).toBe('');
     });
 
-    it('should treat non-empty custom validity message as invalid', async function () {
+    it('should treat non-empty custom validity message as invalid', async () => {
       const input = elem as CDSTextInput;
       input.setCustomValidity('validity-message-foo');
       expect(input.invalid).toBe(true);
@@ -170,8 +177,9 @@ xdescribe('cds-text-input', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     events.reset();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

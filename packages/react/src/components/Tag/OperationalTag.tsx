@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React, {
   MouseEventHandler,
-  useLayoutEffect,
   useState,
-  ReactNode,
   useRef,
   forwardRef,
   ForwardedRef,
@@ -23,7 +21,8 @@ import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TYPES = {
   red: 'Red',
@@ -82,6 +81,7 @@ export type OperationalTagProps<T extends React.ElementType> = PolymorphicProps<
   OperationalTagBaseProps
 >;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OperationalTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -98,11 +98,12 @@ const OperationalTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagId = id || `tag-${useId()}`;
     const tagClasses = classNames(`${prefix}--tag--operational`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];

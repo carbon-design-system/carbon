@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -53,6 +53,7 @@ figma.connect(
       <FormItem>
         <p className="cds--file--label">{labelTitle}</p>
         <p className="cds--label-description">{labelDescription}</p>
+        {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}
         <FileUploaderDropContainer
           accept={['image/jpeg', 'image/png']}
           innerRef={{

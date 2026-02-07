@@ -126,7 +126,9 @@ export type ButtonProps<T extends React.ElementType> =
 
 export type ButtonComponent = <T extends React.ElementType = 'button'>(
   props: ButtonProps<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   context?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 function isIconOnlyButton(
@@ -167,6 +169,7 @@ const Button: ButtonComponent = React.forwardRef(
     } = props;
 
     if (ButtonImageElement && !children && !iconDescription) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.error(
         'Button: renderIcon property specified without also providing an iconDescription property. ' +
           'This may impact accessibility for screen reader users.'
@@ -232,8 +235,10 @@ const Button: ButtonComponent = React.forwardRef(
   }
 );
 
-(Button as React.FC).displayName = 'Button';
-(Button as React.FC).propTypes = {
+// @ts-expect-error - `displayName` isn't typed.
+Button.displayName = 'Button';
+// @ts-expect-error - `propTypes` isn't typed.
+Button.propTypes = {
   /**
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately

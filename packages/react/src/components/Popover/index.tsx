@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,14 @@
 
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
-import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
+import React, {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  type ElementType,
+} from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -24,10 +30,7 @@ import {
   type Boundary,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -87,6 +90,11 @@ export interface PopoverBaseProps {
   alignmentAxisOffset?: number;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
    * Will auto-align the popover on first render if it is not visible. This prop
    * is currently experimental and is subject to future changes. Requires
    * React v17+
@@ -103,6 +111,11 @@ export interface PopoverBaseProps {
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
 
   /**
    * Provide elements to be rendered inside of the component
@@ -144,13 +157,14 @@ export interface PopoverBaseProps {
 
 export type PopoverProps<E extends React.ElementType> =
   PolymorphicComponentPropWithRef<E, PopoverBaseProps>;
-
 export type PopoverComponent = <E extends React.ElementType = 'span'>(
   props: PopoverProps<E>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 export const Popover: PopoverComponent & {
   displayName?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: WeakValidationMap<PopoverProps<any>>;
 } = React.forwardRef(function PopoverRenderFunction<
   E extends ElementType = 'span',
@@ -161,17 +175,21 @@ export const Popover: PopoverComponent & {
     as: BaseComponent = 'span' as E,
     autoAlign = false,
     autoAlignBoundary,
+    backgroundToken = 'layer',
     caret = isTabTip ? false : true,
     className: customClassName,
     children,
+    border = false,
     dropShadow = true,
     highContrast = false,
     onRequestClose,
     open,
     alignmentAxisOffset,
     ...rest
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   }: any,
   //this is a workaround, have to come back and fix this.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   forwardRef: any
 ) {
   const prefix = usePrefix();
@@ -180,28 +198,52 @@ export const Popover: PopoverComponent & {
   const popover = useRef<Element>(null);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+  const lastClickWasInsidePopoverContent = useRef(false);
 
   let align = mapPopoverAlign(initialAlign);
+
+  // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
+  // case where the popover will close when clicking non-focusable elements (e.g. text)
+  useEvent(popover, 'mousedown', (event) => {
+    const target = event.target as Node;
+    lastClickWasInsidePopoverContent.current =
+      refs.floating.current?.contains(target) || false;
+
+    // reset flag
+    if (lastClickWasInsidePopoverContent.current) {
+      setTimeout(() => {
+        lastClickWasInsidePopoverContent.current = false;
+      }, 0);
+    }
+  });
 
   // The `Popover` should close whenever it and its children loses focus
   useEvent(popover, 'focusout', (event) => {
     const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
 
-    // No relatedTarget, focus moved to nowhere, so close the popover
     if (!relatedTarget) {
-      onRequestClose?.();
-      return;
-    }
+      // do not close if PopoverContent was clicked
+      if (lastClickWasInsidePopoverContent.current) {
+        lastClickWasInsidePopoverContent.current = false;
+        return;
+      }
 
-    const isOutsideMainContainer = !popover.current?.contains(relatedTarget);
-    const isOutsideFloating =
-      enableFloatingStyles && refs.floating.current
-        ? !refs.floating.current.contains(relatedTarget)
-        : true;
-
-    // Only close if focus moved outside both containers
-    if (isOutsideMainContainer && isOutsideFloating) {
       onRequestClose?.();
+    } else if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+      const isOutsideFloating =
+        enableFloatingStyles && refs.floating.current
+          ? !refs.floating.current.contains(relatedTarget)
+          : true;
+
+      const isFocusableWrapper =
+        relatedTarget &&
+        popover.current &&
+        relatedTarget.contains(popover.current);
+
+      // Only close if focus moved outside both containers and not to an interactive parent wrapper
+      if (isOutsideFloating && !isFocusableWrapper) {
+        onRequestClose?.();
+      }
     }
   });
 
@@ -216,7 +258,9 @@ export const Popover: PopoverComponent & {
   // we look to see if any of the children has a className containing "slug"
   const initialCaretHeight = React.Children.toArray(children).some((x) => {
     return (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (x as any)?.props?.className?.includes('slug') ||
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       (x as any)?.props?.className?.includes('ai-label')
     );
   })
@@ -237,9 +281,11 @@ export const Popover: PopoverComponent & {
       // If a value is not set via a custom property, provide a default value that matches the
       // default values defined in the sass style file
       const getStyle = window.getComputedStyle(popover.current, null);
-      const offsetProperty = getStyle.getPropertyValue('--cds-popover-offset');
+      const offsetProperty = getStyle.getPropertyValue(
+        `--${prefix}-popover-offset`
+      );
       const caretProperty = getStyle.getPropertyValue(
-        '--cds-popover-caret-height'
+        `--${prefix}-popover-caret-height`
       );
 
       // Handle if the property values are in px or rem.
@@ -257,78 +303,87 @@ export const Popover: PopoverComponent & {
       }
     }
   });
-  const { refs, floatingStyles, placement, middlewareData } = useFloating(
-    enableFloatingStyles
-      ? {
-          placement: align,
+  const { refs, floatingStyles, placement, middlewareData, elements, update } =
+    useFloating(
+      enableFloatingStyles
+        ? {
+            placement: align,
 
-          // The floating element is positioned relative to its nearest
-          // containing block (usually the viewport). It will in many cases also
-          // “break” the floating element out of a clipping ancestor.
-          // https://floating-ui.com/docs/misc#clipping
-          strategy: 'fixed',
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
 
-          // Middleware order matters, arrow should be last
-          middleware: [
-            offset(
-              !isTabTip
-                ? {
-                    alignmentAxis: alignmentAxisOffset,
-                    mainAxis: popoverDimensions?.current?.offset,
-                  }
-                : 0
-            ),
-            autoAlign &&
-              flip({
-                fallbackPlacements: isTabTip
-                  ? align.includes('bottom')
-                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
-                  : align.includes('bottom')
-                    ? [
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'top',
-                        'top-start',
-                        'top-end',
-                      ]
-                    : [
-                        'top',
-                        'top-start',
-                        'top-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                      ],
+            // Middleware order matters, arrow should be last
+            middleware: [
+              offset(
+                !isTabTip
+                  ? {
+                      alignmentAxis: alignmentAxisOffset,
+                      mainAxis: popoverDimensions?.current?.offset,
+                    }
+                  : 0
+              ),
+              autoAlign &&
+                flip({
+                  fallbackPlacements: isTabTip
+                    ? align.includes('bottom')
+                      ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                      : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+                    : align.includes('bottom')
+                      ? [
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'top',
+                          'top-start',
+                          'top-end',
+                        ]
+                      : [
+                          'top',
+                          'top-start',
+                          'top-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                        ],
 
-                fallbackStrategy: 'initialPlacement',
-                fallbackAxisSideDirection: 'start',
-                boundary: autoAlignBoundary,
+                  fallbackStrategy: 'initialPlacement',
+                  fallbackAxisSideDirection: 'start',
+                  boundary: autoAlignBoundary,
+                }),
+              arrow({
+                element: caretRef,
+                padding: 16,
               }),
-            arrow({
-              element: caretRef,
-            }),
-            autoAlign && hide(),
-          ],
-          whileElementsMounted: autoUpdate,
-        }
-      : {}
-    // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
-    // enabled, floating-ui will not be used
-  );
+              autoAlign && hide(),
+            ],
+          }
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
+    );
+
+  useEffect(() => {
+    if (!enableFloatingStyles) return;
+    if (open && elements.reference && elements.floating) {
+      const cleanup = autoUpdate(elements.reference, elements.floating, update);
+      return cleanup;
+    }
+  }, [enableFloatingStyles, open, elements, update]);
 
   const value = useMemo(() => {
     return {
@@ -403,17 +458,21 @@ export const Popover: PopoverComponent & {
       [`${prefix}--popover-container`]: true,
       [`${prefix}--popover--caret`]: caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
+      [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
         enableFloatingStyles,
       [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
+      [`${prefix}--popover--background-token__background`]:
+        backgroundToken === 'background' && !highContrast,
     },
     customClassName
   );
 
   const mappedChildren = React.Children.map(children, (child) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const item = child as any;
     const displayName = item?.type?.displayName;
 
@@ -437,13 +496,16 @@ export const Popover: PopoverComponent & {
       React.isValidElement(item) &&
       (isTriggerElement || isTriggerComponent || isAllowedTriggerComponent)
     ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const className = (item?.props as any)?.className;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       const ref = (item?.props as any).ref;
       const tabTipClasses = cx(
         `${prefix}--popover--tab-tip__button`,
         className
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       return React.cloneElement(item as any, {
         className:
           isTabTip && item?.type === 'button' ? tabTipClasses : className || '',
@@ -568,6 +630,11 @@ Popover.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
    * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
    */
   autoAlignBoundary: PropTypes.oneOfType([
@@ -586,6 +653,11 @@ Popover.propTypes = {
    * Specify whether a caret should be rendered
    */
   caret: PropTypes.bool,
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border: PropTypes.bool,
 
   /**
    * Provide elements to be rendered inside of the component
@@ -627,11 +699,11 @@ Popover.propTypes = {
 
 export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-function PopoverContentRenderFunction(
-  // eslint-disable-next-line react/prop-types
-  { className, children, ...rest }: PopoverContentProps,
-  forwardRef: React.ForwardedRef<HTMLSpanElement>
-) {
+const frFn = forwardRef<HTMLSpanElement, PopoverContentProps>;
+
+export const PopoverContent = frFn((props, forwardRef) => {
+  const { className, children, ...rest } = props;
+
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
@@ -661,9 +733,8 @@ function PopoverContentRenderFunction(
       )}
     </span>
   );
-}
+});
 
-export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
 PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {

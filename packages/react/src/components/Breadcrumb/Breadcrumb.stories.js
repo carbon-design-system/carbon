@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,11 +28,6 @@ export default {
 };
 
 const sharedArgTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
   size: {
     options: ['sm', 'md'],
     control: { type: 'select' },
@@ -108,8 +103,26 @@ BreadcrumbWithOverflowMenuSizeSmall.args = {
   size: 'sm',
 };
 
-export const Skeleton = () => {
-  return <BreadcrumbSkeleton />;
+export const Skeleton = (args) => {
+  return <BreadcrumbSkeleton {...args} />;
+};
+
+Skeleton.args = {
+  items: 3,
+};
+
+Skeleton.parameters = {
+  controls: { exclude: ['aria-label'] },
+};
+
+Skeleton.argTypes = {
+  ...sharedArgTypes,
+  items: {
+    description: 'Specify the number of items',
+    table: {
+      defaultValue: { summary: 3 },
+    },
+  },
 };
 
 export const BreadcrumbWithOverflowVisualSnapshots = (args) => (

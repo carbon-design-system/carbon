@@ -10,9 +10,10 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import styles from './slider.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -215,39 +216,46 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
+
+    const isInteractive = !readonly && !disabled;
+
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
+    };
+
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
-      [`${prefix}--text-input--invalid`]: invalid,
-      [`${prefix}--slider-text-input--warn`]: warn,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--slider-text-input--warn`]: normalizedProps.warn,
     });
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--slider__invalid-icon`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`,
     });
     return html`
-      ${!hideTextInput
-        ? html`
-            <input
-              ?disabled="${disabled}"
-              ?data-invalid="${invalid}"
-              type="${ifDefined(type)}"
-              class="${classes}"
-              max="${max}"
-              min="${min}"
-              ?readonly="${ifDefined(readonly)}"
-              step="${step}"
-              .value="${value}"
-              @change="${handleChange}"
-              @input="${handleInput}" />
-            ${invalid ? html`${invalidIcon}` : null}
-            ${warn ? html`${warnIcon}` : null}
-          `
-        : null}
+      <input
+        ?disabled="${disabled}"
+        ?data-invalid="${normalizedProps.invalid}"
+        type="${hideTextInput ? 'hidden' : ifDefined(type)}"
+        class="${classes}"
+        max="${max}"
+        min="${min}"
+        ?readonly="${ifDefined(readonly)}"
+        step="${step}"
+        .value="${value}"
+        @change="${handleChange}"
+        @input="${handleInput}" />
+      ${!hideTextInput && normalizedProps.invalid ? html`${invalidIcon}` : null}
+      ${!hideTextInput && normalizedProps.warn ? html`${warnIcon}` : null}
     `;
   }
 

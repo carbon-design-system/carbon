@@ -180,6 +180,37 @@ describe('cds-multi-select', function () {
     });
   });
 
+  it('should render with initial selected items if selected is added in any item(s)', async () => {
+    const el = await fixture(html`
+      <cds-multi-select label="Test label">
+        <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        <cds-multi-select-item selected value="item-1"
+          >Item 1</cds-multi-select-item
+        >
+        <cds-multi-select-item selected="" value="item-2"
+          >Item 2</cds-multi-select-item
+        >
+        <cds-multi-select-item value="item-3">Item 3</cds-multi-select-item>
+      </cds-multi-select>
+    `);
+
+    const selectedItems = el.querySelectorAll(
+      'cds-multi-select-item[selected]'
+    );
+    expect(selectedItems.length).to.equal(2);
+
+    const values = Array.from(selectedItems).map((i) =>
+      i.getAttribute('value')
+    );
+    expect(values.includes('item-1')).to.be.true;
+    expect(values.includes('item-2')).to.be.true;
+
+    // Optionally check UI state
+    selectedItems.forEach((item) => {
+      expect(item.hasAttribute('selected')).to.be.true;
+    });
+  });
+
   describe('Component API', () => {
     it('should trigger selection events when items are selected', async () => {
       const el = await fixture(multiSelect);
@@ -458,7 +489,7 @@ describe('cds-multi-select', function () {
       expect(firstItem.selected).to.be.false;
       expect(firstItem.hasAttribute('highlighted')).to.be.true;
 
-      const enterEvent = new KeyboardEvent('keypress', {
+      let enterEvent = new KeyboardEvent('keypress', {
         key: 'Enter',
         bubbles: true,
       });
@@ -467,6 +498,15 @@ describe('cds-multi-select', function () {
 
       expect(firstItem.selected).to.be.true;
 
+      expect(el.open).to.be.true;
+      const highlighted = el.querySelector(
+        'cds-multi-select-item[highlighted]'
+      );
+      expect(highlighted).to.equal(firstItem);
+      enterEvent = new KeyboardEvent('keypress', {
+        key: 'Enter',
+        bubbles: true,
+      });
       trigger.dispatchEvent(enterEvent);
       await el.updateComplete;
 
@@ -498,7 +538,7 @@ describe('cds-multi-select', function () {
       expect(firstItem.selected).to.be.false;
       expect(firstItem.hasAttribute('highlighted')).to.be.true;
 
-      const spaceEvent = new KeyboardEvent('keypress', {
+      let spaceEvent = new KeyboardEvent('keypress', {
         key: ' ',
         bubbles: true,
       });
@@ -506,7 +546,15 @@ describe('cds-multi-select', function () {
       await el.updateComplete;
 
       expect(firstItem.selected).to.be.true;
-
+      expect(el.open).to.be.true;
+      const highlighted = el.querySelector(
+        'cds-multi-select-item[highlighted]'
+      );
+      expect(highlighted).to.equal(firstItem);
+      spaceEvent = new KeyboardEvent('keypress', {
+        key: ' ',
+        bubbles: true,
+      });
       trigger.dispatchEvent(spaceEvent);
       await el.updateComplete;
 
@@ -1170,6 +1218,78 @@ describe('cds-multi-select', function () {
       expect(el.invalidText).to.equal('This field is required');
       expect(el.getAttribute('invalid-text')).to.equal(
         'This field is required'
+      );
+    });
+
+    it('should not have invalid classname when is disabled', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          invalid
+          invalid-text="Invalid message"
+          disabled>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--invalid'
+      );
+    });
+
+    it('should not have invalid classname when is readOnly', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          invalid
+          invalid-text="Invalid message"
+          read-only>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--invalid'
+      );
+    });
+
+    it('should not have warn classname when is disabled', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          warn
+          warn-text="Warn message"
+          disabled>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--warn'
+      );
+    });
+
+    it('should not have warn classname when is readOnly', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          warn
+          warn-text="Warn message"
+          read-only>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--warn'
       );
     });
   });

@@ -14,12 +14,12 @@ on:
 
 jobs:
   build-ibmcloud:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
           touch packages/react/storybook-static/CNAME
           echo "v7-react.carbondesignsystem.com" > packages/react/storybook-static/CNAME
       - name: Push to v7 repo
-        uses: cpina/github-action-push-to-another-repository@07c4d7b3def0a8ebe788a8f2c843a4e1de4f6900 #v1.7.2
+        uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 #v1.7.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:

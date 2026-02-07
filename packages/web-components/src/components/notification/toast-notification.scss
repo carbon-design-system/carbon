@@ -10,7 +10,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/components/notification/mixins' as *;
 @use '@carbon/styles/scss/components/notification/index' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/layout' as *;
@@ -19,7 +18,7 @@ $css--plex: true !default;
 @include toast-notification;
 
 :host(#{$prefix}-toast-notification) {
-  @extend .#{$prefix}--toast-notification;
+  @include toast-notification-base;
   @include emit-layout-tokens();
 
   display: none;
@@ -36,46 +35,38 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-toast-notification[kind='success']) {
-  @extend .#{$prefix}--toast-notification--success;
+  @include toast-notification-success-base;
+}
+
+:host(#{$prefix}-toast-notification[low-contrast]) {
+  @include toast-notification-low-contrast-base;
 }
 
 :host(#{$prefix}-toast-notification[kind='success'][low-contrast]) {
-  @extend .#{$prefix}--toast-notification--low-contrast,
-    .#{$prefix}--toast-notification--success;
-
-  @include notification--experimental(
-    $support-success,
-    $notification-background-success
-  );
+  @include toast-notification-low-contrast-success;
 }
 
 :host(#{$prefix}-toast-notification[kind='info']) {
-  @extend .#{$prefix}--toast-notification--info;
+  @include toast-notification-info-base;
 }
 
 :host(#{$prefix}-toast-notification[kind='info-square']) {
-  @extend .#{$prefix}--toast-notification--info-square;
+  @include toast-notification-info-base;
 }
 
 :host(#{$prefix}-toast-notification[kind='info'][low-contrast]),
 :host(#{$prefix}-toast-notification[kind='info-square'][low-contrast]) {
-  @extend .#{$prefix}--toast-notification--low-contrast,
-    .#{$prefix}--toast-notification--info;
-
-  @include notification--experimental(
-    $support-info,
-    $notification-background-info
-  );
+  @include toast-notification-low-contrast-info;
 }
 
 :host(#{$prefix}-toast-notification[kind='warning']) {
-  @extend .#{$prefix}--toast-notification--warning;
+  @include toast-notification-warning-base;
 }
 
 :host(#{$prefix}-toast-notification[kind='warning-alt']) {
-  @extend .#{$prefix}--toast-notification--warning-alt;
+  @include toast-notification-warning-base;
 
-  /* TODO: Remove this once the following issue with icon fill is resolved: 
+  /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
   */
   .#{$prefix}--toast-notification__icon path[data-icon-path='inner-path'] {
@@ -85,25 +76,13 @@ $css--plex: true !default;
 
 :host(#{$prefix}-toast-notification[kind='warning'][low-contrast]),
 :host(#{$prefix}-toast-notification[kind='warning-alt'][low-contrast]) {
-  @extend .#{$prefix}--toast-notification--low-contrast,
-    .#{$prefix}--toast-notification--warning;
-
-  @include notification--experimental(
-    $support-warning,
-    $notification-background-warning
-  );
+  @include toast-notification-low-contrast-warning;
 }
 
 :host(#{$prefix}-toast-notification[kind='error']) {
-  @extend .#{$prefix}--toast-notification--error;
+  @include toast-notification-error-base;
 }
 
 :host(#{$prefix}-toast-notification[kind='error'][low-contrast]) {
-  @extend .#{$prefix}--toast-notification--low-contrast,
-    .#{$prefix}--toast-notification--error;
-
-  @include notification--experimental(
-    $support-error,
-    $notification-background-error
-  );
+  @include toast-notification-low-contrast-error;
 }

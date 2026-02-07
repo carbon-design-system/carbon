@@ -64,6 +64,7 @@ describe('cds-toggletip', function () {
     expect(el.open).to.be.false;
   });
 
+  // https://carbondesignsystem.com/components/toggletip/accessibility/#keyboard-interactions
   it('should close on focus out', async () => {
     const el = await fixture(html`<cds-toggletip open></cds-toggletip>`);
     const event = new FocusEvent('focusout', {

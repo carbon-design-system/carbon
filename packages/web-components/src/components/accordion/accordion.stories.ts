@@ -20,11 +20,10 @@ const sizes = {
 };
 
 const args = {
-  alignment: 'end',
+  alignment: 'END',
   disabled: false,
   isFlush: false,
   size: ACCORDION_SIZE.MEDIUM,
-  disableToggle: false,
 };
 
 const argTypes = {
@@ -32,7 +31,7 @@ const argTypes = {
     control: 'select',
     description:
       'Specify the alignment of the accordion heading title and chevron.',
-    options: ['start', 'end'],
+    options: ['start', 'END'],
   },
   disabled: {
     control: 'boolean',
@@ -49,36 +48,41 @@ const argTypes = {
     description: 'Specify the size of the Accordion.',
     options: sizes,
   },
-  disableToggle: {
-    control: 'boolean',
-    description: `Disable user-initiated toggle action (Call event.preventDefault() in ${prefix}-accordion-beingtoggled event).`,
-  },
   onBeforeToggle: {
     action: `${prefix}-accordion-item-beingtoggled`,
+    table: {
+      disable: true,
+    },
   },
   onToggle: {
     action: `${prefix}-accordion-item-toggled`,
+    table: {
+      disable: true,
+    },
   },
 };
 
 export const Default = {
-  args: {
-    alignment: 'end',
-    disabled: false,
-    isFlush: false,
-    size: 'md',
-    disableToggle: false,
-  },
+  args,
   argTypes,
-  render: ({ alignment, isFlush, size, disabled, disableToggle }) => {
+  render: ({
+    alignment,
+    isFlush,
+    size,
+    disabled,
+    onBeforeToggle,
+    onToggle,
+  }) => {
     return html`
       <cds-accordion
         alignment="${alignment}"
         size="${size}"
         ?isFlush="${isFlush}"
-        ?disable-toggle="${disableToggle}"
         ?disabled="${disabled}">
-        <cds-accordion-item title="Section 1 title">
+        <cds-accordion-item
+          title="Section 1 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -86,7 +90,10 @@ export const Default = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item title="Section 2 title">
+        <cds-accordion-item
+          title="Section 2 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -94,7 +101,10 @@ export const Default = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item title="Section 3 title">
+        <cds-accordion-item
+          title="Section 3 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -102,7 +112,10 @@ export const Default = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item title="Section 4 title">
+        <cds-accordion-item
+          title="Section 4 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -117,9 +130,16 @@ export const Default = {
 
 export const Controlled = {
   // This story doesn't accept any args.
-  args: {},
-  argTypes: {},
-  render: () => {
+  args,
+  argTypes,
+  render: ({
+    alignment,
+    isFlush,
+    size,
+    disabled,
+    onBeforeToggle,
+    onToggle,
+  }) => {
     const toggleItems = (isOpen: boolean) => {
       document
         .querySelectorAll('cds-accordion-item[controlled]')
@@ -136,7 +156,7 @@ export const Controlled = {
       <style>
         ${styles}
       </style>
-      <cds-button-set class="controlled-accordion-btnset">
+      <cds-button-set>
         <cds-button
           class="controlled-accordion-btn"
           @click=${() => toggleItems(true)}>
@@ -149,8 +169,16 @@ export const Controlled = {
         </cds-button>
       </cds-button-set>
 
-      <cds-accordion>
-        <cds-accordion-item controlled title="Section 1 title">
+      <cds-accordion
+        alignment="${alignment}"
+        size="${size}"
+        ?isFlush="${isFlush}"
+        ?disabled="${disabled}">
+        <cds-accordion-item
+          controlled
+          title="Section 1 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -158,7 +186,11 @@ export const Controlled = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item controlled title="Section 2 title">
+        <cds-accordion-item
+          controlled
+          title="Section 2 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -166,7 +198,11 @@ export const Controlled = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item controlled title="Section 3 title">
+        <cds-accordion-item
+          controlled
+          title="Section 3 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -174,7 +210,11 @@ export const Controlled = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item controlled title="Section 4 title">
+        <cds-accordion-item
+          controlled
+          title="Section 4 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -194,37 +234,79 @@ export const Skeleton = {
       skip: true,
     },
   },
-  render: () => {
-    return html`<cds-accordion-skeleton></cds-accordion-skeleton>`;
+  args: {
+    alignment: 'END',
+    isFlush: false,
+  },
+  argTypes: {
+    alignment: {
+      control: 'select',
+      description:
+        'Specify the alignment of the accordion heading title and chevron.',
+      options: ['start', 'END'],
+    },
+    isFlush: {
+      control: 'boolean',
+      description:
+        'Specify whether Accordion text should be flush, default is false, does not work with align="start".',
+    },
+  },
+  render: ({ alignment, isFlush }) => {
+    return html`<cds-accordion-skeleton
+      alignment="${alignment}"
+      ?isFlush="${isFlush}"></cds-accordion-skeleton>`;
   },
 };
 
 export const WithLayer = {
   args,
   argTypes,
-  render: () => {
+  render: ({
+    alignment,
+    isFlush,
+    size,
+    disabled,
+    onBeforeToggle,
+    onToggle,
+  }) => {
     return html`
       <sb-template-layers>
-        <cds-accordion>
-          <cds-accordion-item title="Section 1 title">
+        <cds-accordion
+          alignment="${alignment}"
+          size="${size}"
+          ?isFlush="${isFlush}"
+          ?disabled="${disabled}">
+          <cds-accordion-item
+            title="Section 1 title"
+            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+            @cds-accordion-item-toggled="${onToggle}">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </cds-accordion-item>
-          <cds-accordion-item title="Section 2 title">
+          <cds-accordion-item
+            title="Section 2 title"
+            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+            @cds-accordion-item-toggled="${onToggle}">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </cds-accordion-item>
-          <cds-accordion-item title="Section 3 title">
+          <cds-accordion-item
+            title="Section 3 title"
+            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+            @cds-accordion-item-toggled="${onToggle}">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </cds-accordion-item>
-          <cds-accordion-item title="Section 4 title">
+          <cds-accordion-item
+            title="Section 4 title"
+            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+            @cds-accordion-item-toggled="${onToggle}">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut

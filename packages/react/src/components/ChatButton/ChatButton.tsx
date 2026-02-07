@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { type ComponentType, type FunctionComponent } from 'react';
+import React, { type ComponentProps } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from '../Button';
@@ -49,7 +49,7 @@ export interface ChatButtonProps
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ComponentProps<typeof Button>['renderIcon'];
   /**
    * Specify the size of the `ChatButton`, from the following list of sizes:
    */
@@ -87,6 +87,7 @@ const ChatButton = React.forwardRef<HTMLButtonElement, ChatButtonProps>(
     } else {
       // Check if size is valid and warn if not
       if (size && !allowedSizes.includes(size as ChatButtonSize)) {
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
         console.error(
           `Invalid size "${size}" provided to ChatButton. Size must be one of: ${allowedSizes.join(
             ', '

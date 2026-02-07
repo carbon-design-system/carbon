@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,11 +13,12 @@ import '../icon-button/index';
 import '../data-table/index';
 import { POPOVER_ALIGNMENT } from './defs';
 import { AI_LABEL_SIZE } from '../ai-label/defs';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
-import Information16 from '@carbon/icons/lib/information/16.js';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
+import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
+import Information16 from '@carbon/icons/es/information/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
 import aiLabelStyles from '../ai-label/ai-label-story.scss?lit';
@@ -66,15 +67,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -112,9 +113,11 @@ export const Popover = {
     const handleClick = (id) => {
       const popover = document.querySelector(id);
       const open = popover?.hasAttribute('open');
-      open
-        ? popover?.removeAttribute('open')
-        : popover?.setAttribute('open', '');
+      if (open) {
+        popover?.removeAttribute('open');
+      } else {
+        popover?.setAttribute('open', '');
+      }
     };
 
     return html`
@@ -134,7 +137,7 @@ export const Popover = {
           aria-label="Settings"
           type="button"
           @click="${() => handleClick('#popover-one')}">
-          ${Checkbox16()}
+          ${iconLoader(Checkbox16)}
         </button>
         <cds-popover-content>
           <div class="p-3">
@@ -242,7 +245,7 @@ export const Tooltip = {
           class="sb-tooltip-trigger"
           role="button"
           aria-labelledby="content">
-          ${Information16()}
+          ${iconLoader(Information16)}
         </button>
         <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
       </cds-tooltip>
@@ -305,7 +308,7 @@ export const AILabel = {
 };
 
 const meta = {
-  title: 'Experimental/Auto Align',
+  title: 'Preview/Auto Align',
 };
 
 export default meta;

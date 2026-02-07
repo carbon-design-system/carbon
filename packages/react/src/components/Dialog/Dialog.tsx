@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  MutableRefObject,
   useEffect,
   useRef,
   useState,
@@ -146,8 +145,7 @@ const Dialog = React.forwardRef(
     // will be null. A "backup" ref is needed to ensure the dialog's instance
     // methods can always be called within this component.
     const backupRef = useRef<HTMLDialogElement>(null);
-    const ref = (forwardRef ??
-      backupRef) as MutableRefObject<HTMLDialogElement>;
+    const ref = (forwardRef ?? backupRef) as RefObject<HTMLDialogElement>;
 
     // Clicks on the backdrop of an open modal dialog should request the consuming component to close
     // the dialog. Clicks elsewhere, or on non-modal dialogs should not request
@@ -183,6 +181,7 @@ const Dialog = React.forwardRef(
           ref.current.close();
         }
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [modal, open]);
 
     useEffect(() => {
@@ -218,10 +217,12 @@ const Dialog = React.forwardRef(
           ref.current.setAttribute('aria-labelledby', title.id);
         }
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [open, ariaLabel, ariaLabelledBy, prefix]);
 
     return (
       <DialogContext.Provider value={contextValue}>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events , jsx-a11y/no-noninteractive-element-interactions -- https://github.com/carbon-design-system/carbon/issues/20452 */}
         <dialog
           {...rest}
           className={cx(
@@ -353,6 +354,7 @@ const DialogControls = React.forwardRef<HTMLDivElement, DialogControlsProps>(
   ({ children, ...rest }, ref) => {
     const prefix = usePrefix();
     return (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
       // @ts-ignore
       <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
         {children}
@@ -387,6 +389,7 @@ const DialogCloseButton = React.forwardRef<
 >(({ onClick, ...rest }, ref) => {
   const prefix = usePrefix();
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
     // @ts-ignore
     <IconButton
       kind="ghost"
@@ -613,7 +616,7 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
       if (typeof ref === 'function') {
         ref(el);
       } else if (ref) {
-        (ref as React.MutableRefObject<HTMLDivElement>).current = el;
+        ref.current = el;
       }
       contentRef.current = el;
     };
@@ -800,6 +803,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
               ({ buttonText, onClick: onButtonClick }, i) => (
                 <Button
                   key={`${buttonText}-${i}`}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus -- https://github.com/carbon-design-system/carbon/issues/20452
                   autoFocus={danger}
                   kind="secondary"
                   ref={i === 0 && danger ? setSecondaryButtonRef : undefined}
@@ -813,6 +817,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
                 ref={danger ? setSecondaryButtonRef : undefined}
                 disabled={loadingActive}
                 kind="secondary"
+                // eslint-disable-next-line jsx-a11y/no-autofocus -- https://github.com/carbon-design-system/carbon/issues/20452
                 autoFocus={danger}
                 onClick={onSecondaryButtonClick}>
                 {secondaryButtonText}

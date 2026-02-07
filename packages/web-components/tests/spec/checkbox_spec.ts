@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,13 +8,16 @@
 import { html, render } from 'lit';
 import { Playground as Default } from '../../src/components/checkbox/checkbox.stories';
 
+// JSDOM's DOM implementation does not provide `FormDataEvent`.
+type FormDataEventLike = Event & { formData: FormData };
+
 /**
  * @param formData A `FormData` instance.
  * @returns The given `formData` converted to a classic key-value pair.
  */
 const getValues = (formData: FormData) => {
   const values = {};
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const [key, value] of formData.entries()) {
     values[key] = value;
   }
@@ -26,9 +29,9 @@ const template = (props?) =>
     'cds-checkbox': props,
   });
 
-describe('cds-checkbox', function () {
-  describe('Rendering', function () {
-    it('Should render with minimum attributes', async function () {
+describe('cds-checkbox', () => {
+  describe('Rendering', () => {
+    it('Should render with minimum attributes', async () => {
       render(
         template({
           id: 'id-foo',
@@ -37,13 +40,14 @@ describe('cds-checkbox', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-checkbox' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('Should render with various attributes', async function () {
+    it('Should render with various attributes', async () => {
       render(
         template({
           id: 'id-foo',
@@ -59,6 +63,7 @@ describe('cds-checkbox', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-checkbox' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
@@ -66,8 +71,8 @@ describe('cds-checkbox', function () {
     });
   });
 
-  xdescribe('Event-based form participation', function () {
-    it('Should respond to `formdata` event', async function () {
+  xdescribe('Event-based form participation', () => {
+    it('Should respond to `formdata` event', async () => {
       render(
         html`
           <form>
@@ -86,14 +91,15 @@ describe('cds-checkbox', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': 'value-foo' });
     });
 
-    it('Should respond to `formdata` event with default value', async function () {
+    it('Should respond to `formdata` event with default value', async () => {
       render(
         html` <form>${template({ checked: true, name: 'name-foo' })}</form> `,
         document.body
@@ -104,14 +110,15 @@ describe('cds-checkbox', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': 'on' });
     });
 
-    it('Should not respond to `formdata` event if unchecked', async function () {
+    it('Should not respond to `formdata` event if unchecked', async () => {
       render(
         html`
           <form>
@@ -129,14 +136,15 @@ describe('cds-checkbox', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
 
-    it('Should not respond to `formdata` event if disabled', async function () {
+    it('Should not respond to `formdata` event if disabled', async () => {
       render(
         html`
           <form>
@@ -156,15 +164,17 @@ describe('cds-checkbox', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     await render(undefined!, document.body);
   });
 });

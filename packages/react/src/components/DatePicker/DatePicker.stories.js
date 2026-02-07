@@ -16,6 +16,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { useDocumentLang } from '../../internal/useDocumentLang';
 
 import mdx from './DatePicker.mdx';
 
@@ -30,6 +31,17 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'appendTo',
+        'datePickerType',
+        'disable',
+        'enable',
+        'inline',
+        'locale',
+        'value',
+      ],
+    },
   },
   argTypes: {
     light: {
@@ -41,46 +53,6 @@ export default {
 };
 
 const sharedArgTypes = {
-  appendTo: {
-    table: {
-      disable: true,
-    },
-  },
-  datePickerType: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  disable: {
-    table: {
-      disable: true,
-    },
-  },
-  enable: {
-    table: {
-      disable: true,
-    },
-  },
-  inline: {
-    table: {
-      disable: true,
-    },
-  },
-  locale: {
-    table: {
-      disable: true,
-    },
-  },
   onChange: {
     action: 'onChange',
   },
@@ -93,11 +65,6 @@ const sharedArgTypes = {
   readOnly: {
     control: {
       type: 'boolean',
-    },
-  },
-  value: {
-    table: {
-      disable: true,
     },
   },
   size: {
@@ -152,8 +119,13 @@ const sharedArgTypes = {
 };
 
 export const Default = ({ readOnly, ...args }) => {
+  const locale = useDocumentLang().split('-')[0];
   return (
-    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
+    <DatePicker
+      datePickerType="single"
+      {...args}
+      readOnly={readOnly}
+      locale={locale}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"

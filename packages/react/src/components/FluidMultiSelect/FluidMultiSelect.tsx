@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, RefObject } from 'react';
+import React, { ForwardedRef, RefObject, type ComponentProps } from 'react';
 import classnames from 'classnames';
 import {
   FilterableMultiSelect,
@@ -21,12 +21,9 @@ interface OnChangeData<ItemType> {
   selectedItems: ItemType[] | null;
 }
 
-interface SharedOptions {
-  locale: string;
-}
-
 export interface FluidMultiSelectProps<ItemType>
-  extends MultiSelectProps<ItemType> {
+  extends MultiSelectProps<ItemType>,
+    Pick<ComponentProps<typeof MultiSelect>, 'translateWithId'> {
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
@@ -82,11 +79,6 @@ export interface FluidMultiSelectProps<ItemType>
    * @deprecated This prop is deprecated in favor of new component called FluidFilterableMultiSelect and will be removed in the next major release
    */
   isFilterable?: boolean;
-  /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
-   */
-  itemToElement?: React.JSXElementConstructor<ItemType>;
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
@@ -146,10 +138,6 @@ export interface FluidMultiSelectProps<ItemType>
    */
   titleText?: React.ReactNode;
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?: (id: string) => string;
-  /**
    * Specify title to show title on hover
    */
   useTitleInItem?: boolean;
@@ -162,6 +150,7 @@ export interface FluidMultiSelectProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
+
 const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   {
     className,
@@ -181,6 +170,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
   return (
     <FormContext.Provider value={{ isFluid: true }}>
       {isFilterable ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
         // @ts-ignore
         <FilterableMultiSelect
           ref={ref as RefObject<HTMLDivElement | null>}
@@ -188,6 +178,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
           {...other}
         />
       ) : (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
         // @ts-ignore
         <MultiSelect ref={ref} className={classNames} {...other} />
       )}
@@ -270,8 +261,7 @@ FluidMultiSelect.propTypes = {
   isFilterable: PropTypes.bool,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 
@@ -366,7 +356,7 @@ FluidMultiSelect.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

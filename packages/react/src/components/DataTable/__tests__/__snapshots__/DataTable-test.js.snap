@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`DataTable behaves as expected selection -- radio buttons should not have select-all checkbox 1`] = `
 <div>
@@ -8,18 +8,200 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r7g»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_7g_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r7g»-title"
+        aria-labelledby="tc-_r_7g_-title"
+        class="cds--data-table cds--data-table--lg"
+      >
+        <thead>
+          <tr>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
+              </div>
+            </th>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          aria-live="polite"
+        >
+          <tr>
+            <td
+              aria-live="off"
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
+              >
+                <input
+                  class="cds--radio-button"
+                  id="data-table-18__select-row-b"
+                  name="select-row-18"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-18__select-row-b"
+                >
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
+                  >
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 2:A
+            </td>
+            <td>
+              Field 2:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              aria-live="off"
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
+              >
+                <input
+                  class="cds--radio-button"
+                  id="data-table-18__select-row-a"
+                  name="select-row-18"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-18__select-row-a"
+                >
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
+                  >
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 1:A
+            </td>
+            <td>
+              Field 1:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              aria-live="off"
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
+              >
+                <input
+                  class="cds--radio-button"
+                  id="data-table-18__select-row-c"
+                  name="select-row-18"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-18__select-row-c"
+                >
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
+                  >
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 3:A
+            </td>
+            <td>
+              Field 3:B
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`DataTable behaves as expected selection -- radio buttons should render 1`] = `
+<div>
+  <section
+    class="cds--data-table-container"
+  >
+    <div
+      class="cds--data-table-header"
+    >
+      <div
+        class="cds--data-table-header__content"
+      >
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_77_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
+    </div>
+    <div
+      class="cds--data-table-content"
+    >
+      <table
+        aria-labelledby="tc-_r_77_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -174,180 +356,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
 </div>
 `;
 
-exports[`DataTable behaves as expected selection -- radio buttons should render 1`] = `
-<div>
-  <section
-    class="cds--data-table-container"
-  >
-    <div
-      class="cds--data-table-header"
-    >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r77»-title"
-      >
-        DataTable with selection
-      </h2>
-    </div>
-    <div
-      class="cds--data-table-content"
-    >
-      <table
-        aria-labelledby="tc-«r77»-title"
-        class="cds--data-table cds--data-table--lg"
-      >
-        <thead>
-          <tr>
-            <th
-              scope="col"
-            >
-              <div
-                class="cds--table-header-label"
-              >
-                Field A
-                <div
-                  class="cds--table-header-label--decorator-inner"
-                />
-              </div>
-            </th>
-            <th
-              scope="col"
-            >
-              <div
-                class="cds--table-header-label"
-              >
-                Field B
-                <div
-                  class="cds--table-header-label--decorator-inner"
-                />
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          aria-live="polite"
-        >
-          <tr>
-            <td
-              aria-live="off"
-              class="cds--table-column-checkbox cds--table-column-radio"
-            >
-              <div
-                class="cds--radio-button-wrapper"
-              >
-                <input
-                  class="cds--radio-button"
-                  id="data-table-16__select-row-b"
-                  name="select-row-16"
-                  type="radio"
-                  value=""
-                />
-                <label
-                  class="cds--radio-button__label"
-                  for="data-table-16__select-row-b"
-                >
-                  <span
-                    class="cds--radio-button__appearance"
-                  />
-                  <span
-                    class="cds--radio-button__label-text cds--visually-hidden"
-                    dir="auto"
-                  >
-                    Select row
-                  </span>
-                </label>
-              </div>
-            </td>
-            <td>
-              Field 2:A
-            </td>
-            <td>
-              Field 2:B
-            </td>
-          </tr>
-          <tr>
-            <td
-              aria-live="off"
-              class="cds--table-column-checkbox cds--table-column-radio"
-            >
-              <div
-                class="cds--radio-button-wrapper"
-              >
-                <input
-                  class="cds--radio-button"
-                  id="data-table-16__select-row-a"
-                  name="select-row-16"
-                  type="radio"
-                  value=""
-                />
-                <label
-                  class="cds--radio-button__label"
-                  for="data-table-16__select-row-a"
-                >
-                  <span
-                    class="cds--radio-button__appearance"
-                  />
-                  <span
-                    class="cds--radio-button__label-text cds--visually-hidden"
-                    dir="auto"
-                  >
-                    Select row
-                  </span>
-                </label>
-              </div>
-            </td>
-            <td>
-              Field 1:A
-            </td>
-            <td>
-              Field 1:B
-            </td>
-          </tr>
-          <tr>
-            <td
-              aria-live="off"
-              class="cds--table-column-checkbox cds--table-column-radio"
-            >
-              <div
-                class="cds--radio-button-wrapper"
-              >
-                <input
-                  class="cds--radio-button"
-                  id="data-table-16__select-row-c"
-                  name="select-row-16"
-                  type="radio"
-                  value=""
-                />
-                <label
-                  class="cds--radio-button__label"
-                  for="data-table-16__select-row-c"
-                >
-                  <span
-                    class="cds--radio-button__appearance"
-                  />
-                  <span
-                    class="cds--radio-button__label-text cds--visually-hidden"
-                    dir="auto"
-                  >
-                    Select row
-                  </span>
-                </label>
-              </div>
-            </td>
-            <td>
-              Field 3:A
-            </td>
-            <td>
-              Field 3:B
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-</div>
-`;
-
 exports[`DataTable behaves as expected selection should render and match snapshot 1`] = `
 <div>
   <section
@@ -356,16 +364,21 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«r2k»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with selection
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_2k_-title"
+        >
+          DataTable with selection
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
@@ -421,7 +434,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -449,7 +462,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -477,7 +490,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -532,9 +545,8 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             class="cds--search-input"
             id="custom-id"
             placeholder="Filter table"
-            role="searchbox"
             tabindex="0"
-            type="text"
+            type="search"
             value=""
           />
           <button
@@ -554,7 +566,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
               />
             </svg>
           </button>
@@ -571,7 +583,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-«r2t»"
+                aria-labelledby="tooltip-_r_2t_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -600,7 +612,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-«r2t»"
+              id="tooltip-_r_2t_"
               role="tooltip"
             >
               <span
@@ -626,7 +638,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«r2k»-title"
+        aria-labelledby="tc-_r_2k_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -641,13 +653,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-all"
-                  name="select-all-7"
+                  id="data-table-8__select-all"
+                  name="select-all-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-all"
+                  for="data-table-8__select-all"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -696,13 +708,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-row-b"
-                  name="select-row-7"
+                  id="data-table-8__select-row-b"
+                  name="select-row-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-row-b"
+                  for="data-table-8__select-row-b"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -729,13 +741,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-row-a"
-                  name="select-row-7"
+                  id="data-table-8__select-row-a"
+                  name="select-row-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-row-a"
+                  for="data-table-8__select-row-a"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -762,13 +774,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-row-c"
-                  name="select-row-7"
+                  id="data-table-8__select-row-c"
+                  name="select-row-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-row-c"
+                  for="data-table-8__select-row-c"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -801,16 +813,21 @@ exports[`DataTable renders as expected - Component API should render and match s
     <div
       class="cds--data-table-header"
     >
-      <h2
-        class="cds--data-table-header__title"
-        id="tc-«re»-title"
+      <div
+        class="cds--data-table-header__content"
       >
-        DataTable with toolbar
-      </h2>
+        <h2
+          class="cds--data-table-header__title"
+          id="tc-_r_e_-title"
+        >
+          DataTable with toolbar
+        </h2>
+      </div>
     </div>
     <section
       aria-label="data table toolbar"
       class="cds--table-toolbar"
+      role="group"
     >
       <div
         aria-hidden="true"
@@ -854,7 +871,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -882,7 +899,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -910,7 +927,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
               />
               <path
-                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                d="M24 17 17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                 data-icon-path="inner-path"
                 fill="none"
               />
@@ -965,9 +982,8 @@ exports[`DataTable renders as expected - Component API should render and match s
             class="cds--search-input"
             id="custom-id"
             placeholder="Filter table"
-            role="searchbox"
             tabindex="0"
-            type="text"
+            type="search"
             value=""
           />
           <button
@@ -987,7 +1003,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
               />
             </svg>
           </button>
@@ -1004,7 +1020,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-«rm»"
+                aria-labelledby="tooltip-_r_m_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
@@ -1033,7 +1049,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-«rm»"
+              id="tooltip-_r_m_"
               role="tooltip"
             >
               <span
@@ -1059,7 +1075,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-«re»-title"
+        aria-labelledby="tc-_r_e_-title"
         class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>

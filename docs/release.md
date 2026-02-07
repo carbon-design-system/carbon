@@ -182,13 +182,9 @@ git push upstream v11.2.0
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
 
-The packages that have been published will be switched to latest on the last
-Wednesday of a sprint. To make the switch, you will need to:
+This automatically promotes Carbon packages with new release versions to latest.
+Next you will need to:
 
-- [ ] Run the
-      [Promotion Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/promote.yml)
-      to automatically promote Carbon packages with new release versions to
-      latest
 - [ ] Verify the packages have been promoted to latest
       [on NPM](https://www.npmjs.com/package/@carbon/react)
 - [ ] Update the latest release notes with the generated output from Carbon Cli
@@ -233,7 +229,7 @@ Or, use the
 
 ### Update gatsby-theme-carbon and carbon-website
 
-After the promotion workflow is completed this will trigger the
+After the release workflow for stable release is completed this will trigger the
 `deploy-packages` workflow to update both `design-language-website` and
 `gatsby-theme-carbon` to the latest version of the Carbon packages.
 
@@ -241,7 +237,10 @@ After the promotion workflow is completed this will trigger the
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
       to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
-      This should trigger an automatic release of `gatsby-theme-carbon`.
+- [ ] Run the
+      [`release-it`](https://github.com/carbon-design-system/gatsby-theme-carbon/actions/workflows/release.yml)
+      workflow in the `gatsby-theme-carbon` repo to trigger a release of
+      `gatsby-theme-carbon`.
 - [ ] Check that
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
       has been released and is on the

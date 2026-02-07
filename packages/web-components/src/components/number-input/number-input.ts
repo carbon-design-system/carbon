@@ -9,10 +9,11 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
-import Add16 from '@carbon/icons/lib/add/16.js';
-import Subtract16 from '@carbon/icons/lib/subtract/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import Add16 from '@carbon/icons/es/add/16.js';
+import Subtract16 from '@carbon/icons/es/subtract/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { NUMBER_INPUT_VALIDATION_STATUS } from './defs';
 import styles from './number-input.scss?lit';
@@ -34,7 +35,7 @@ export { NUMBER_INPUT_VALIDATION_STATUS };
 @customElement(`${prefix}-number-input`)
 class CDSNumberInput extends CDSTextInput {
   /**
-   * Handles `input` event on the `<input>` in the shadow DOM.
+   * Handles `input` event on the `input` in the shadow DOM.
    */
   protected _handleInput(event: Event) {
     const { target } = event;
@@ -99,7 +100,7 @@ class CDSNumberInput extends CDSTextInput {
   }
 
   /**
-   * Handles `focus` event on the `<input>` in the shadow DOM.
+   * Handles `focus` event on the `input` in the shadow DOM.
    */
   protected _handleFocus(event: FocusEvent) {
     if (this.disableWheel) {
@@ -112,7 +113,7 @@ class CDSNumberInput extends CDSTextInput {
   }
 
   /**
-   * Handles `blur` event on the `<input>` in the shadow DOM.
+   * Handles `blur` event on the `input` in the shadow DOM.
    */
   protected _handleBlur(event: FocusEvent) {
     if (this.disableWheel) {
@@ -246,6 +247,12 @@ class CDSNumberInput extends CDSTextInput {
   disableWheel = false;
 
   /**
+   * Set to true to use the fluid variant.
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
    * The input box size.
    */
   @property({ reflect: true })
@@ -301,16 +308,21 @@ class CDSNumberInput extends CDSTextInput {
     } = this;
 
     const isValid = this._getInputValidity();
-
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--number__invalid`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--number__invalid ${prefix}--number__invalid--warning`,
     });
-
-    const normalizedProps = {
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
       disabled: !this.readonly && this.disabled,
       invalid: !this.readonly && !isValid,
       warn: !this.readonly && isValid && this.warn,
@@ -358,7 +370,7 @@ class CDSNumberInput extends CDSTextInput {
         type="button"
         ?disabled=${normalizedProps.disabled}
         @click=${handleUserInitiatedStepUp}>
-        ${Add16()}
+        ${iconLoader(Add16)}
       </button>
       <div class="${prefix}--number__rule-divider"></div>
     `;
@@ -372,7 +384,7 @@ class CDSNumberInput extends CDSTextInput {
         type="button"
         ?disabled=${normalizedProps.disabled}
         @click=${handleUserInitiatedStepDown}>
-        ${Subtract16()}
+        ${iconLoader(Subtract16)}
       </button>
       <div class="${prefix}--number__rule-divider"></div>
     `;
@@ -409,6 +421,25 @@ class CDSNumberInput extends CDSTextInput {
       normalizedProps['slot-name'] = 'warn-text';
       normalizedProps['slot-text'] = this.warnText;
     }
+    const validationMessage =
+      normalizedProps.invalid || normalizedProps.warn
+        ? html`<div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>`
+        : null;
+
+    const helper = this.helperText
+      ? html`<div
+          class="${helperTextClasses}"
+          id="helper-text"
+          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
+          <slot name="helper-text"> ${this.helperText} </slot>
+        </div>`
+      : null;
 
     return html`
       <div class="${wrapperClasses}" ?data-invalid=${normalizedProps.invalid}>
@@ -425,18 +456,10 @@ class CDSNumberInput extends CDSTextInput {
               : null}
           </div>
         </div>
-        <div
-          class="${helperTextClasses}"
-          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
-          <slot name="helper-text"> ${this.helperText} </slot>
-        </div>
-        <div
-          class="${prefix}--form-requirement"
-          ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
-          <slot name="${normalizedProps['slot-name']}">
-            ${normalizedProps['slot-text']}
-          </slot>
-        </div>
+        ${this.isFluid
+          ? html`<hr class="${prefix}--number-input__divider" />`
+          : null}
+        ${validationMessage ? validationMessage || helper : null}
       </div>
     `;
   }

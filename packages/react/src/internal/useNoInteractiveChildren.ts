@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,20 +11,22 @@ export const useNoInteractiveChildren = (
   ref: RefObject<HTMLElement | null>,
   message = 'component should have no interactive child nodes'
 ) => {
-  // TODO: Why can't the condition go inside the hook?
   if (process.env.NODE_ENV !== 'production') {
-    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
-    /*
+    // This hook is intentionally called conditionally because it is
+    // stripped from production builds. In development it runs once
+    // to enforce accessibility constraints.
+    //
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    */
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 
       if (node) {
         const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
         console.error(errorMessage);
         throw new Error(errorMessage);
       }
+      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, []);
   }
 };
@@ -33,12 +35,12 @@ export const useInteractiveChildrenNeedDescription = (
   ref: RefObject<HTMLElement | null>,
   message = `interactive child node(s) should have an \`aria-describedby\` property`
 ) => {
-  // TODO: Why can't the condition go inside the hook?
   if (process.env.NODE_ENV !== 'production') {
-    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
-    /*
+    // This hook is intentionally called conditionally because it is
+    // stripped from production builds. In development it runs once
+    // to enforce accessibility constraints.
+    //
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    */
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 

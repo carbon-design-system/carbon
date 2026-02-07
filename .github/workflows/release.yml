@@ -11,17 +11,17 @@ on:
 jobs:
   build:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     timeout-minutes: 60
     # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
     permissions:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -57,7 +57,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a #4.3.6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
         with:
           name: playwright-avt-report
           path: .playwright
@@ -74,7 +74,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd #v8.0.0
         with:
           script: |
             github.rest.repos.createRelease({
@@ -85,3 +85,23 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
+
+  packages:
+    runs-on: ubuntu-latest
+    # only promote the packages to latest if the version is not a release candidate
+    if: contains(github.ref_name, '-rc') == false
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Promote packages
+        uses: ./actions/promote
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DRY_RUN: false
+
+      # run deploy-packages workflow
+      - name: Deploy packages
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          event-type: deploy-packages
+

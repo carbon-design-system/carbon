@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,10 +12,11 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import styles from './checkbox.scss?lit';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Check box.
@@ -211,9 +212,11 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
 
   updated() {
     const { _hasAILabel: hasAILabel } = this;
-    hasAILabel
-      ? this.setAttribute('ai-label', '')
-      : this.removeAttribute('ai-label');
+    if (hasAILabel) {
+      this.setAttribute('ai-label', '');
+    } else {
+      this.removeAttribute('ai-label');
+    }
   }
   connectedCallback() {
     super.connectedCallback();
@@ -289,7 +292,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       <div class="${prefix}--checkbox__validation-msg">
         ${!readonly && invalid
           ? html`
-              ${WarningFilled16({
+              ${iconLoader(WarningFilled16, {
                 class: `${prefix}--checkbox__invalid-icon`,
               })}
               <div class="${prefix}--form-requirement">${invalidText}</div>
@@ -297,7 +300,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
           : null}
         ${showWarning
           ? html`
-              ${WarningAltFilled16({
+              ${iconLoader(WarningAltFilled16, {
                 class: `${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`,
               })}
               <div class="${prefix}--form-requirement">${warnText}</div>

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@ import {
   type GetTextDirection,
   type TextDir,
   type TextDirectionContextType,
-} from '.';
+} from './TextDirectionContext';
 
 export interface TextDirectionProps {
   children: ReactNode;
@@ -35,9 +35,7 @@ export const TextDirection = ({
 
   useEffect(() => {
     savedCallback.current = getTextDirection;
-    // TODO: Is this `useEffect` supposed to have a dependency on
-    // `getTextDirection`?
-  });
+  }, [getTextDirection]);
 
   return (
     <TextDirectionContext.Provider value={value}>

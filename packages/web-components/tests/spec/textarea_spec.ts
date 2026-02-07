@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,13 +11,16 @@ import EventManager from '../utils/event-manager';
 import CDSTextarea from '../../src/components/textarea/textarea';
 import { Playground } from '../../src/components/textarea/textarea.stories';
 
+// JSDOM's DOM implementation does not provide `FormDataEvent`.
+type FormDataEventLike = Event & { formData: FormData };
+
 /**
  * @param formData A `FormData` instance.
  * @returns The given `formData` converted to a classic key-value pair.
  */
 const getValues = (formData: FormData) => {
   const values = {};
-  // eslint-disable-next-line no-restricted-syntax
+
   for (const [key, value] of formData.entries()) {
     values[key] = value;
   }
@@ -29,11 +32,11 @@ const template = (props?) =>
     'cds-textarea': props,
   });
 
-xdescribe('cds-textarea', function () {
+xdescribe('cds-textarea', () => {
   const events = new EventManager();
 
-  describe('Rendering', function () {
-    it('Should render with various attributes', async function () {
+  describe('Rendering', () => {
+    it('Should render with various attributes', async () => {
       render(
         template({
           autocomplete: 'on',
@@ -53,13 +56,14 @@ xdescribe('cds-textarea', function () {
       );
       await Promise.resolve();
       expect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         document.body.querySelector('cds-textarea' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('Should reflect value in DOM', async function () {
+    it('Should reflect value in DOM', async () => {
       render(
         template({
           value: 'value-foo',
@@ -73,8 +77,8 @@ xdescribe('cds-textarea', function () {
     });
   });
 
-  describe('Reacting to user gesture', function () {
-    it('Should update value upon user input', async function () {
+  describe('Reacting to user gesture', () => {
+    it('Should update value upon user input', async () => {
       render(
         template({
           value: '',
@@ -82,20 +86,25 @@ xdescribe('cds-textarea', function () {
         document.body
       );
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       const textareaNode = document.body
         .querySelector('cds-textarea')!
         .shadowRoot!.querySelector('textarea');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(textareaNode!.value).toBe('');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       textareaNode!.value = 'value-foo';
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       textareaNode!.dispatchEvent(
         new CustomEvent('input', { bubbles: true, composed: true })
       );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       expect(textareaNode!.value).toBe('value-foo');
     });
   });
 
-  describe('Event-based form participation', function () {
-    it('Should respond to `formdata` event', async function () {
+  describe('Event-based form participation', () => {
+    it('Should respond to `formdata` event', async () => {
       render(
         html`
           <form>
@@ -113,14 +122,15 @@ xdescribe('cds-textarea', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({ 'name-foo': 'value-foo' });
     });
 
-    it('Should not respond to `formdata` event if disabled', async function () {
+    it('Should not respond to `formdata` event if disabled', async () => {
       render(
         html`
           <form>
@@ -139,24 +149,26 @@ xdescribe('cds-textarea', function () {
         bubbles: true,
         cancelable: false,
         composed: false,
-      });
-      (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
       const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       form!.dispatchEvent(event);
       expect(getValues(formData)).toEqual({});
     });
   });
 
-  describe('Form validation', function () {
+  describe('Form validation', () => {
     let elem: Element;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       render(template(), document.body);
       await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       elem = document.body.querySelector('cds-textarea')!;
     });
 
-    it('should support checking if required value exists', async function () {
+    it('should support checking if required value exists', async () => {
       const textarea = elem as CDSTextarea;
       textarea.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
@@ -171,7 +183,7 @@ xdescribe('cds-textarea', function () {
       expect(textarea.invalidText).toBe('');
     });
 
-    it('should support canceling required check', async function () {
+    it('should support canceling required check', async () => {
       const textarea = elem as CDSTextarea;
       textarea.required = true;
       events.on(textarea, 'invalid', (event) => {
@@ -182,14 +194,14 @@ xdescribe('cds-textarea', function () {
       expect(textarea.invalidText).toBe('');
     });
 
-    it('should treat empty custom validity message as not invalid', async function () {
+    it('should treat empty custom validity message as not invalid', async () => {
       const textarea = elem as CDSTextarea;
       textarea.setCustomValidity('');
       expect(textarea.invalid).toBe(false);
       expect(textarea.invalidText).toBe('');
     });
 
-    it('should treat non-empty custom validity message as invalid', async function () {
+    it('should treat non-empty custom validity message as invalid', async () => {
       const textarea = elem as CDSTextarea;
       textarea.setCustomValidity('validity-message-foo');
       expect(textarea.invalid).toBe(true);
@@ -197,7 +209,7 @@ xdescribe('cds-textarea', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async () => {
     events.reset();
     await render(undefined, document.body);
   });

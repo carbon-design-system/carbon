@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,6 +33,7 @@ figma.connect(
     props: sharedComboButtonProps,
     example: ({ size, position }) => (
       <ComboButton size={size} position={position} label="Primary action">
+        {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}
         Open Combo button to view <MenuItem /> props and code
       </ComboButton>
     ),

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { paramCase } from 'change-case';
+import { paramCase } from 'change-case-all';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import path from 'path';

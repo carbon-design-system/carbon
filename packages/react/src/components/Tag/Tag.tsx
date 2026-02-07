@@ -6,13 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  cloneElement,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from 'react';
+import React, { cloneElement, useRef, useState, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
@@ -21,16 +15,14 @@ import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { SelectableTagBaseProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export const TYPES = {
   red: 'Red',
@@ -107,7 +99,7 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
-   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use `children` instead.
    */
   title?: string;
 
@@ -126,9 +118,12 @@ type TagComponent = <T extends React.ElementType = 'div'>(
     | OperationalTagBaseProps
     | SelectableTagBaseProps
     | DismissibleTagBaseProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TagBase = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   TagBaseProps & {
     as?: React.ElementType;
@@ -156,21 +151,24 @@ const TagBase = React.forwardRef<
     const prefix = usePrefix();
     const tagRef = useRef<HTMLElement>(null);
     if (filter) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn(
         'The `filter` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
 
     if (onClose) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
       console.warn(
         'The `onClose` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
       );
     }
     const ref = useMergedRefs([forwardRef, tagRef]);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
@@ -317,7 +315,9 @@ const TagBase = React.forwardRef<
   }
 );
 const Tag = TagBase as TagComponent;
-(Tag as React.FC).propTypes = {
+
+// @ts-expect-error - `propTypes` isn't typed.
+Tag.propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default
    * wrapping element

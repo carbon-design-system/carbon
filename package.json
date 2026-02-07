@@ -5,7 +5,7 @@
   "repository": "git@github.com:carbon-design-system/carbon.git",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=18.x"
+    "node": ">=20.x"
   },
   "workspaces": [
     "actions/*",
@@ -24,23 +24,24 @@
     "lint": "eslint actions config packages www",
     "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
-    "sync": "carbon-cli sync",
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
     "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~19.1.0",
+    "@types/react": "~19.2.0",
     "@types/prop-types": "^15.7.14",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
-    "react": "~19.1.0",
-    "react-dom": "~19.1.0",
-    "react-is": "~19.1.0",
+    "react": "~19.2.3",
+    "react-dom": "~19.2.3",
+    "react-is": "~19.2.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "brace-expansion": "^2.0.2",
-    "@octokit/rest": "^22.0.0"
+    "@octokit/rest": "^22.0.0",
+    "eslint": "9.39.1",
+    "typescript-eslint": "8.46.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -52,8 +53,9 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.27.3",
     "@carbon/cli": "workspace:packages/cli",
-    "@commitlint/cli": "^18.0.0",
-    "@commitlint/config-conventional": "^18.0.0",
+    "@commitlint/cli": "^20.0.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.24.0",
     "@percy/cli": "^1.30.4",
     "@percy/playwright": "^1.0.7",
@@ -70,20 +72,23 @@
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
     "eslint": "^9.32.0",
+    "eslint-plugin-jsdoc": "^58.1.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-playwright": "^2.0.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
     "glob": "^11.0.0",
+    "globals": "16.5.0",
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
-    "lerna": "^8.0.0",
+    "lerna": "^9.0.1",
     "lint-staged": "^16.0.0",
     "prettier": "^3.3.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "rimraf": "^6.0.1",
     "stylelint": "^16.0.0",
     "typescript-eslint": "^8.34.0"
@@ -156,5 +161,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.10.3"
 }

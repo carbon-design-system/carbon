@@ -1,20 +1,21 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
-import { NumberInput, NumberInputProps } from '../NumberInput';
+import { NumberInput } from '../NumberInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 import { type NumberFormatOptions } from '@carbon/utilities';
 import { NumberFormatOptionsPropType } from '../NumberInput/NumberFormatPropTypes';
 
-export interface FluidNumberInputProps {
+export interface FluidNumberInputProps
+  extends Pick<ComponentProps<typeof NumberInput>, 'translateWithId'> {
   /**
    * `true` to allow empty string.
    */
@@ -140,11 +141,6 @@ export interface FluidNumberInputProps {
   step?: number;
 
   /**
-   * Provide custom text for the component for each translation id
-   */
-  translateWithId?: (id: string) => string;
-
-  /**
    * **Experimental**: Specify if the input should be of type text or number.
    * Use type="text" with `locale`, `formatOptions`, and guide user input with
    * `pattern` and `inputMode`.
@@ -172,10 +168,11 @@ export interface FluidNumberInputProps {
   readOnly?: boolean;
 }
 
-const FluidNumberInput: React.FC<FluidNumberInputProps> = React.forwardRef<
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
+const FluidNumberInput = React.forwardRef<
   HTMLInputElement,
   FluidNumberInputProps
->(function FluidNumberInput({ className, ...other }, ref) {
+>(({ className, ...other }, ref) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--number-input--fluid`, className);
 
@@ -312,7 +309,7 @@ FluidNumberInput.propTypes = {
   step: PropTypes.number,
 
   /**
-   * Provide custom text for the component for each translation id
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

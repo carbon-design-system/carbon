@@ -9,10 +9,6 @@ import React, { type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-// TODO: When can this code be deleted?
-// No longer used, left export for backward-compatibility
-export const translationIds = {};
-
 export interface ListBoxFieldProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify if the parent <ListBox> is disabled
@@ -72,6 +68,6 @@ ListBoxField.propTypes = {
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export type ListBoxFieldComponent = React.FC<ListBoxFieldProps>;
+export type ListBoxFieldComponent = typeof ListBoxField;
 
 export default ListBoxField as ListBoxFieldComponent;

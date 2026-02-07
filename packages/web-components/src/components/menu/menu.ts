@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,10 +13,14 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
-import { MenuContext, menuDefaultState } from './menu-context';
-import CDSmenuItem from './menu-item';
+import {
+  MenuContext,
+  menuDefaultState,
+  type MenuContextUpdate,
+} from './menu-context';
+import CDSmenuItem, { MENU_CLOSE_ROOT_EVENT } from './menu-item';
 import { consume, provide } from '@lit/context';
-import { MENU_SIZE } from './defs';
+import { MENU_BACKGROUND_TOKEN, MENU_SIZE } from './defs';
 
 export { MENU_SIZE };
 
@@ -38,7 +42,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @consume({ context: MenuContext })
   context = {
     ...menuDefaultState,
-    updateFromChild: (updatedItem) => {
+    updateFromChild: (updatedItem: MenuContextUpdate) => {
       this.context = {
         ...this.context,
         ...updatedItem,
@@ -120,6 +124,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   mode;
 
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  @property({ type: String, attribute: 'background-token' })
+  backgroundToken = MENU_BACKGROUND_TOKEN.LAYER;
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  @property({ type: Boolean })
+  border = false;
+
+  /**
    * Specify how the menu should align with the button element
    */
   @property({ type: String })
@@ -136,6 +152,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   y: number | number[] = 0;
 
   @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = (e: FocusEvent) => {
     const { isRoot } = this.context;
@@ -161,8 +178,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     return `${prefix}-menu-opened`;
   }
   updated(changedProperties) {
-    if (changedProperties.has('open') && this.open) {
-      this._handleOpen();
+    if (changedProperties.has('open')) {
+      if (this.open) {
+        this._handleOpen();
+      } else {
+        this._handleClose();
+      }
     }
   }
   connectedCallback() {
@@ -172,6 +193,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         ?.querySelector('.cds--menu')
         ?.classList.add(`${prefix}--menu--with-icons`);
     });
+    this.addEventListener(
+      MENU_CLOSE_ROOT_EVENT,
+      this._handleRootCloseRequest as EventListener
+    );
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener(
+      MENU_CLOSE_ROOT_EVENT,
+      this._handleRootCloseRequest as EventListener
+    );
+    super.disconnectedCallback();
   }
   async firstUpdated() {
     this.isRtl = this.direction === 'rtl';
@@ -207,6 +240,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-selectable-items`]:
         this.context.hasSelectableItems,
+      [`${prefix}--menu--border`]: this.border,
+      [`${prefix}--menu--background-token__background`]:
+        this.backgroundToken === MENU_BACKGROUND_TOKEN.BACKGROUND,
     });
     return html`
       <ul
@@ -297,7 +333,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     const { isRoot } = this.context;
 
     // const isRoot =  false
-    const { width, height } = this.getBoundingClientRect();
+    const menuElement = this.shadowRoot?.querySelector(`.${prefix}--menu`);
+    const { width, height } = (menuElement ?? this).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
     const axes = {
       x: {
@@ -432,13 +469,14 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       );
     }
   };
-  dispatchCloseEvent = (e) => {
+  dispatchCloseEvent = (e?: Event) => {
     const init = {
       bubbles: true,
       cancelable: true,
       composed: true,
       detail: {
-        triggeredBy: e.target,
+        triggeredBy: e?.target,
+        triggerEventType: e?.type,
       },
     };
     if (
@@ -451,6 +489,21 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       );
     }
   };
+  private _handleClose = () => {
+    this.position = [-1, -1];
+    this.style.removeProperty('inset-inline-start');
+    this.style.removeProperty('inset-inline-end');
+    this.style.removeProperty('inset-block-start');
+  };
+  private _handleRootCloseRequest = (
+    event: CustomEvent<{ triggerEvent?: Event }>
+  ) => {
+    if (!this.context?.isRoot) {
+      return;
+    }
+
+    this.dispatchCloseEvent(event.detail?.triggerEvent ?? event);
+  };
   _newContextCreate = () => {
     this.context = {
       ...this.context,
@@ -461,11 +514,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   _registerMenuItems = () => {
     let items;
     if (this.isChild) {
-      items = (
-        this.querySelector('slot[name="submenu"]') as HTMLSlotElement
-      ).assignedElements();
+      const submenuSlot = this.querySelector(
+        'slot[name="submenu"]'
+      ) as HTMLSlotElement | null;
+      items = submenuSlot?.assignedElements() ?? [];
     } else {
-      items = this.shadowRoot?.querySelector('slot')?.assignedElements();
+      items = this.shadowRoot?.querySelector('slot')?.assignedElements() ?? [];
     }
     this.items = items?.filter((item) => {
       if (item.tagName === 'CDS-MENU-ITEM') {
@@ -481,7 +535,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       let activeItem: activeItemType;
       switch (item.tagName) {
         case 'CDS-MENU-ITEM-RADIO-GROUP': {
-          let slotElements = item.querySelectorAll(`${prefix}-menu-item`);
+          const slotElements = item.querySelectorAll(`${prefix}-menu-item`);
           if (slotElements?.length) {
             for (const entry of slotElements.entries()) {
               activeItem = {
@@ -494,7 +548,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
           break;
         }
         case 'CDS-MENU-ITEM-GROUP': {
-          let slotElements = item.shadowRoot
+          const slotElements = item.shadowRoot
             ?.querySelector('slot')
             ?.assignedElements();
           slotElements?.map((el) => {

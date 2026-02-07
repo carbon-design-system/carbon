@@ -44,34 +44,12 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['label'],
+    },
   },
   args: {
     onSelect: action('onSelect'),
-  },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-
-    label: {
-      table: {
-        disable: true,
-      },
-    },
-
-    onSelect: {
-      table: {
-        disable: true,
-      },
-    },
   },
 };
 

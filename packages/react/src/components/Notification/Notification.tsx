@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type ComponentProps,
 } from 'react';
 import { deprecate } from '../../prop-types/deprecate';
 import cx from 'classnames';
@@ -41,7 +42,7 @@ import { noopFn } from '../../internal/noopFn';
 import { wrapFocus, wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -70,6 +71,10 @@ function useEscapeToClose(ref, callback, override = true) {
   });
 }
 
+type NotificationCloseHandler =
+  | ((event: MouseEvent) => boolean)
+  | ((event: MouseEvent) => void);
+
 export interface NotificationActionButtonProps extends ButtonProps<'button'> {
   /**
    * Specify the content of the notification action button.
@@ -89,7 +94,7 @@ export interface NotificationActionButtonProps extends ButtonProps<'button'> {
   /**
    * Optionally specify a click handler for the notification action button.
    */
-  onClick?(): void;
+  onClick?: ComponentProps<typeof Button>['onClick'];
 }
 
 export function NotificationActionButton({
@@ -197,7 +202,6 @@ export function NotificationButton({
   return (
     <button
       {...rest}
-      // eslint-disable-next-line react/button-has-type
       type={type}
       aria-label={deprecatedAriaLabel || ariaLabel}
       title={deprecatedAriaLabel || ariaLabel}
@@ -356,7 +360,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when menu is closed
    */
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
@@ -630,7 +634,7 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when menu is closed
    */
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
@@ -881,17 +885,20 @@ export interface ActionableNotificationProps
   /**
    * Provide a function that is called when the action is clicked
    */
-  onActionButtonClick?(): void;
+  onActionButtonClick?: ComponentProps<
+    typeof NotificationActionButton
+  >['onClick'];
 
   /**
    * Provide a function that is called when menu is closed.
    * Default behavior of hiding the notification is prevented if this function returns false.
    */
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
    */
+
   onCloseButtonClick?(event: MouseEvent): void;
 
   /**
@@ -956,14 +963,19 @@ export function ActionableNotification({
   const startTrap = useRef<HTMLElement>(null);
   const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const focusTrapWithoutSentinels = useFeatureFlag(
+  const deprecatedFlag = useFeatureFlag(
     'enable-experimental-focus-wrap-without-sentinels'
   );
+  const focusTrapWithoutSentinelsFlag = useFeatureFlag(
+    'enable-focus-wrap-without-sentinels'
+  );
+  const focusTrapWithoutSentinels =
+    focusTrapWithoutSentinelsFlag || deprecatedFlag;
 
   useIsomorphicEffect(() => {
     if (hasFocus && role === 'alertdialog') {
       const button = document.querySelector(
-        'button.cds--actionable-notification__action-button'
+        `button.${prefix}--actionable-notification__action-button`
       ) as HTMLButtonElement;
       button?.focus();
     }
@@ -988,6 +1000,7 @@ export function ActionableNotification({
         endTrapNode,
         currentActiveNode,
         oldActiveNode,
+        prefix,
       });
     }
   }
@@ -1041,60 +1054,61 @@ export function ActionableNotification({
           Focus sentinel
         </span>
       )}
-
-      <div className={`${prefix}--actionable-notification__details`}>
-        <NotificationIcon
-          notificationType={inline ? 'inline' : 'toast'}
-          kind={kind}
-          iconDescription={statusIconDescription || `${kind} icon`}
-        />
-        <div className={`${prefix}--actionable-notification__text-wrapper`}>
-          <div className={`${prefix}--actionable-notification__content`}>
-            {title && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__title`}
-                id={id}>
-                {title}
-              </Text>
-            )}
-            {subtitle && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__subtitle`}
-                id={subtitleId}>
-                {subtitle}
-              </Text>
-            )}
-            {caption && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__caption`}>
-                {caption}
-              </Text>
-            )}
-            {children}
+      <div
+        ref={innerModal}
+        className={`${prefix}--actionable-notification__focus-wrapper`}>
+        <div className={`${prefix}--actionable-notification__details`}>
+          <NotificationIcon
+            notificationType={inline ? 'inline' : 'toast'}
+            kind={kind}
+            iconDescription={statusIconDescription || `${kind} icon`}
+          />
+          <div className={`${prefix}--actionable-notification__text-wrapper`}>
+            <div className={`${prefix}--actionable-notification__content`}>
+              {title && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__title`}
+                  id={id}>
+                  {title}
+                </Text>
+              )}
+              {subtitle && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__subtitle`}
+                  id={subtitleId}>
+                  {subtitle}
+                </Text>
+              )}
+              {caption && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__caption`}>
+                  {caption}
+                </Text>
+              )}
+              {children}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className={`${prefix}--actionable-notification__button-wrapper`}
-        ref={innerModal}>
-        {actionButtonLabel && (
-          <NotificationActionButton
-            onClick={onActionButtonClick}
-            inline={inline}>
-            {actionButtonLabel}
-          </NotificationActionButton>
-        )}
+        <div className={`${prefix}--actionable-notification__button-wrapper`}>
+          {actionButtonLabel && (
+            <NotificationActionButton
+              onClick={onActionButtonClick}
+              inline={inline}>
+              {actionButtonLabel}
+            </NotificationActionButton>
+          )}
 
-        {!hideCloseButton && (
-          <NotificationButton
-            aria-label={deprecatedAriaLabel || ariaLabel}
-            notificationType="actionable"
-            onClick={handleCloseButtonClick}
-          />
-        )}
+          {!hideCloseButton && (
+            <NotificationButton
+              aria-label={deprecatedAriaLabel || ariaLabel}
+              notificationType="actionable"
+              onClick={handleCloseButtonClick}
+            />
+          )}
+        </div>
       </div>
       {!focusTrapWithoutSentinels && (
         <span
@@ -1246,11 +1260,12 @@ export type NewKindProps = 'warning' | 'info';
 
 export type KindProps = DeprecatedKindProps | NewKindProps;
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    error: 'warning', // only redirect error -> warning
-    success: 'info', // only redirect success -> info
-  };
+const mapping = {
+  error: 'warning', // only redirect error -> warning
+  success: 'info', // only redirect success -> info
+};
+
+const propMappingFunction = (deprecatedValue: string) => {
   return mapping[deprecatedValue];
 };
 
@@ -1283,7 +1298,9 @@ export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when the action is clicked
    */
-  onActionButtonClick?(): void;
+  onActionButtonClick?: ComponentProps<
+    typeof NotificationActionButton
+  >['onClick'];
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -1449,11 +1466,9 @@ Callout.propTypes = {
 /**
  * @deprecated Use `CalloutProps` instead.
  */
-export interface StaticNotificationProps extends CalloutProps {}
+export type StaticNotificationProps = CalloutProps;
 let didWarnAboutDeprecation = false;
-export const StaticNotification: React.FC<StaticNotificationProps> = (
-  props
-) => {
+export const StaticNotification = (props: StaticNotificationProps) => {
   if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,

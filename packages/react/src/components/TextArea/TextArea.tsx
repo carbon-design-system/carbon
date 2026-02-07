@@ -30,7 +30,7 @@ import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
-  extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<textarea>` node
@@ -226,19 +226,29 @@ const TextArea = frFn((props, forwardRef) => {
   }, [value, defaultValue, counterMode]);
 
   useIsomorphicEffect(() => {
-    const measuredWidth = wrapperRef.current?.scrollWidth;
     if (other.cols && textareaRef.current) {
       textareaRef.current.style.width = '';
       textareaRef.current.style.resize = 'none';
     } else if (textareaRef.current) {
       textareaRef.current.style.width = `100%`;
     }
-    [helperTextRef, errorTextRef, warnTextRef].forEach((r) => {
-      if (r.current) {
-        r.current.style.maxWidth = `${measuredWidth}px`;
-        r.current.style.overflowWrap = 'break-word';
-      }
+
+    if (!wrapperRef.current) return;
+    const applyWidth = (width: number) => {
+      [helperTextRef, errorTextRef, warnTextRef].forEach((r) => {
+        if (r.current) {
+          r.current.style.maxWidth = `${width}px`;
+          r.current.style.overflowWrap = 'break-word';
+        }
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      applyWidth(entry.contentRect.width);
     });
+    resizeObserver.observe(wrapperRef.current);
+
+    return () => resizeObserver && resizeObserver.disconnect();
   }, [other.cols, invalid, warn]);
 
   const textareaProps: {
@@ -310,11 +320,7 @@ const TextArea = frFn((props, forwardRef) => {
             setTimeout(() => {
               setTextCount(0);
             }, 0);
-
-            return;
-          }
-
-          if (
+          } else if (
             enableCounter &&
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
@@ -375,11 +381,11 @@ const TextArea = frFn((props, forwardRef) => {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  const label = labelText ? (
+  const label = typeof labelText !== 'undefined' && labelText !== null && (
     <Text as="label" htmlFor={id} className={labelClasses}>
       {labelText}
     </Text>
-  ) : null;
+  );
 
   const counter =
     enableCounter &&
@@ -387,14 +393,19 @@ const TextArea = frFn((props, forwardRef) => {
     (counterMode === 'character' || counterMode === 'word') ? (
       <Text
         as="div"
-        className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
+        className={counterClasses}
+        aria-hidden="true">{`${textCount}/${maxCount}`}</Text>
     ) : null;
 
-  const helperId = !helperText
+  const counterDescriptionId =
+    enableCounter && maxCount ? `${id}-counter-desc` : undefined;
+
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const helperId = !hasHelper
     ? undefined
     : `text-area-helper-text-${textAreaInstanceId}`;
 
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <Text
       as="div"
       id={helperId}
@@ -402,7 +413,7 @@ const TextArea = frFn((props, forwardRef) => {
       ref={helperTextRef}>
       {helperText}
     </Text>
-  ) : null;
+  );
 
   const errorId = id + '-error-msg';
 
@@ -441,8 +452,13 @@ const TextArea = frFn((props, forwardRef) => {
   let ariaDescribedBy;
   if (invalid) {
     ariaDescribedBy = errorId;
-  } else if (!invalid && !warn && !isFluid && helperText) {
-    ariaDescribedBy = helperId;
+  } else if (warn && !isFluid) {
+    ariaDescribedBy = warnId;
+  } else {
+    const ids: string[] = [];
+    if (!isFluid && helperText && helperId) ids.push(helperId);
+    if (counterDescriptionId) ids.push(counterDescriptionId);
+    ariaDescribedBy = ids.length > 0 ? ids.join(' ') : undefined;
   }
 
   if (enableCounter) {
@@ -509,7 +525,7 @@ const TextArea = frFn((props, forwardRef) => {
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
-    : null;
+    : candidate;
 
   return (
     <div className={formItemClasses}>
@@ -517,6 +533,15 @@ const TextArea = frFn((props, forwardRef) => {
         {label}
         {counter}
       </div>
+      {enableCounter && maxCount && (
+        <span
+          id={counterDescriptionId}
+          className={`${prefix}--visually-hidden`}>
+          {counterMode === 'word'
+            ? `Word limit ${maxCount}`
+            : `Character limit ${maxCount}`}
+        </span>
+      )}
       <div
         ref={wrapperRef}
         className={textAreaWrapperClasses}

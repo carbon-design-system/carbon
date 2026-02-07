@@ -9,7 +9,7 @@ import generator from '@babel/generator';
 import babelTemplate from '@babel/template';
 import * as babelTypes from '@babel/types';
 import { types as t, generate } from '@carbon/scss-generator';
-import { camelCase, constantCase } from 'change-case';
+import { camelCase, constantCase } from 'change-case-all';
 import fs from 'fs-extra';
 import yaml from 'js-yaml';
 import path from 'path';
@@ -20,7 +20,7 @@ const __dirname = path.dirname(__filename);
 
 async function main() {
   const featureFlagsPath = path.resolve(__dirname, '../feature-flags.yml');
-  const { 'feature-flags': featureFlags } = yaml.safeLoad(
+  const { 'feature-flags': featureFlags } = yaml.load(
     await fs.readFile(featureFlagsPath, 'utf8')
   );
 

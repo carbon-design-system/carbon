@@ -6,13 +6,15 @@
  */
 
 import { html } from 'lit';
+import { iconLoader } from '../../globals/internal/icon-loader';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-ignore
-import Fade16 from '@carbon/icons/lib/fade/16.js';
-import Search20 from '@carbon/icons/lib/search/20.js';
-import Notification20 from '@carbon/icons/lib/notification/20.js';
-import SwitcherIcon20 from '@carbon/icons/lib/switcher/20.js';
+import Fade16 from '@carbon/icons/es/fade/16.js';
+import Search20 from '@carbon/icons/es/search/20.js';
+import Notification20 from '@carbon/icons/es/notification/20.js';
+import SwitcherIcon20 from '@carbon/icons/es/switcher/20.js';
 import contentStyles from '@carbon/styles/scss/components/ui-shell/content/_content.scss?lit';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
 import { classMap } from 'lit/directives/class-map.js';
@@ -149,6 +151,7 @@ export const FixedSideNav = {
             <cds-side-nav-menu-item
               active
               aria-current="page"
+              target="_blank"
               href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>
@@ -177,6 +180,7 @@ export const FixedSideNav = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (result as any).hasMainTag = true;
     return result;
   },
@@ -242,6 +246,7 @@ export const FixedSideNavDivider = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (result as any).hasMainTag = true;
     return result;
   },
@@ -261,7 +266,7 @@ export const FixedSideNavIcons = {
         expanded>
         <cds-side-nav-items>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: 'title-icon' })}
+            ${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -273,7 +278,7 @@ export const FixedSideNavIcons = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: 'title-icon' })}
+            ${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -288,7 +293,7 @@ export const FixedSideNavIcons = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: 'title-icon' })}
+            ${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -300,15 +305,18 @@ export const FixedSideNavIcons = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+            >${iconLoader(Fade16, { slot: 'title-icon' })}
+            Link</cds-side-nav-link
           >
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+            >${iconLoader(Fade16, { slot: 'title-icon' })}
+            Link</cds-side-nav-link
           >
         </cds-side-nav-items>
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (result as any).hasMainTag = true;
     return result;
   },
@@ -338,18 +346,18 @@ export const HeaderBaseWActions = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: 'icon' })}
+            ${iconLoader(Search20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
             tooltip-text="Notification">
-            ${Notification20({ slot: 'icon' })}
+            ${iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
             tooltip-alignment="right">
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
         </div>
       </cds-header>`,
@@ -377,13 +385,13 @@ export const HeaderBaseWActionsRightPanel = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: 'icon' })}
+            ${iconLoader(Search20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             panel-id="notification-panel"
             aria-label="Notification"
             tooltip-text="Notification">
-            ${Notification20({ slot: 'icon' })}
+            ${iconLoader(Notification20, { slot: 'icon' })}
             ${badgeCount > 0
               ? html`<cds-badge-indicator
                   count=${badgeCount}></cds-badge-indicator>`
@@ -393,7 +401,7 @@ export const HeaderBaseWActionsRightPanel = {
             aria-label="App Switcher"
             tooltip-text="App Switcher"
             tooltip-alignment="right">
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-header-panel
@@ -414,12 +422,12 @@ export const HeaderBaseWActionsSwitcher = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: 'icon' })}
+            ${iconLoader(Search20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
             tooltip-text="Notification">
-            ${Notification20({ slot: 'icon' })}
+            ${iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             button-label-active="Close switcher"
@@ -427,7 +435,7 @@ export const HeaderBaseWActionsSwitcher = {
             tooltip-text="Open switcher"
             panel-id="switcher-panel"
             tooltip-alignment="right">
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-header-panel id="switcher-panel" aria-label="Header Panel">
@@ -495,18 +503,18 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
         </cds-header-nav>
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: 'icon' })}
+            ${iconLoader(Search20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
             tooltip-text="Notification">
-            ${Notification20({ slot: 'icon' })}
+            ${iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
             tooltip-alignment="right">
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-side-nav
@@ -536,7 +544,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu>
             </cds-header-side-nav-items>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -548,7 +556,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -560,7 +568,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -572,10 +580,12 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+              >${iconLoader(Fade16, { slot: 'title-icon' })}
+              Link</cds-side-nav-link
             >
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+              >${iconLoader(Fade16, { slot: 'title-icon' })}
+              Link</cds-side-nav-link
             >
           </cds-side-nav-items>
         </cds-side-nav>
@@ -623,18 +633,18 @@ export const HeaderBaseWNavigationActions = {
         </cds-header-nav>
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: 'icon' })}
+            ${iconLoader(Search20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
             tooltip-text="Notification">
-            ${Notification20({ slot: 'icon' })}
+            ${iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
             tooltip-alignment="right">
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-side-nav
@@ -751,7 +761,7 @@ export const HeaderBaseWSideNav = {
           collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -763,7 +773,7 @@ export const HeaderBaseWSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -778,7 +788,7 @@ export const HeaderBaseWSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -790,16 +800,21 @@ export const HeaderBaseWSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+              >${iconLoader(Fade16, {
+                slot: 'title-icon',
+              })}Link</cds-side-nav-link
             >
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+              >${iconLoader(Fade16, {
+                slot: 'title-icon',
+              })}Link</cds-side-nav-link
             >
           </cds-side-nav-items>
         </cds-side-nav>
       </cds-header>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (result as any).hasMainTag = true;
     return result;
   },
@@ -818,18 +833,18 @@ export const HeaderBaseWSkipToContent = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: 'icon' })}
+            ${iconLoader(Search20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
             tooltip-text="Notification">
-            ${Notification20({ slot: 'icon' })}
+            ${iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
             tooltip-alignment="right">
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
         </div>
       </cds-header>
@@ -847,7 +862,7 @@ export const SideNavRail = {
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}">
         <cds-side-nav-items>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: 'title-icon' })}
+            ${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -862,7 +877,7 @@ export const SideNavRail = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: 'title-icon' })}
+            ${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -874,7 +889,7 @@ export const SideNavRail = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: 'title-icon' })}
+            ${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -886,10 +901,14 @@ export const SideNavRail = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+            >${iconLoader(Fade16, {
+              slot: 'title-icon',
+            })}Link</cds-side-nav-link
           >
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+            >${iconLoader(Fade16, {
+              slot: 'title-icon',
+            })}Link</cds-side-nav-link
           >
         </cds-side-nav-items>
       </cds-side-nav>
@@ -933,18 +952,18 @@ export const SideNavRailWHeader = {
         </cds-header-nav>
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: 'icon' })}
+            ${iconLoader(Search20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
             tooltip-text="Notification">
-            ${Notification20({ slot: 'icon' })}
+            ${iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
             tooltip-alignment="right">
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-side-nav
@@ -952,7 +971,7 @@ export const SideNavRailWHeader = {
           collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}">
           <cds-side-nav-items>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -967,7 +986,7 @@ export const SideNavRailWHeader = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -979,7 +998,7 @@ export const SideNavRailWHeader = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: 'title-icon' })}
+              ${iconLoader(Fade16, { slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -991,10 +1010,14 @@ export const SideNavRailWHeader = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+              >${iconLoader(Fade16, {
+                slot: 'title-icon',
+              })}Link</cds-side-nav-link
             >
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
+              >${iconLoader(Fade16, {
+                slot: 'title-icon',
+              })}Link</cds-side-nav-link
             >
           </cds-side-nav-items>
         </cds-side-nav>
@@ -1030,7 +1053,7 @@ export const SideNavWLargeSideNavItems = {
             >Large link</cds-side-nav-link
           >
           <cds-side-nav-menu large title="Large menu w/icon"
-            >${Fade16({ slot: 'title-icon' })}
+            >${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Menu 1
             </cds-side-nav-menu-item>
@@ -1042,13 +1065,14 @@ export const SideNavWLargeSideNavItems = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-link large href="javascript:void(0)">
-            ${Fade16({ slot: 'title-icon' })} Large link
+            ${iconLoader(Fade16, { slot: 'title-icon' })} Large link
             w/icon</cds-side-nav-link
           >
         </cds-side-nav-items>
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (result as any).hasMainTag = true;
     return result;
   },

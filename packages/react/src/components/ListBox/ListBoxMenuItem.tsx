@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,11 +11,10 @@ import React, {
   useEffect,
   useRef,
   useState,
-  type ForwardedRef,
   type HTMLAttributes,
-  type MutableRefObject,
   type ReactNode,
   type Ref,
+  type RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
@@ -33,6 +32,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
  */
 const useIsTruncated = <T extends HTMLElement>(
   forwardedRef?: Ref<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   deps: any[] = []
 ) => {
   const localRef = useRef<T>(null);
@@ -50,6 +50,7 @@ const useIsTruncated = <T extends HTMLElement>(
 
       setIsTruncated(offsetWidth < scrollWidth);
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [localRef, ...deps]);
 
   return { isTruncated, ref: mergedRef };
@@ -97,7 +98,7 @@ const ListBoxMenuItem = forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
     const menuItemOptionRefProp =
       forwardedRef && typeof forwardedRef !== 'function'
         ? (
-            forwardedRef as MutableRefObject<HTMLLIElement | null> & {
+            forwardedRef as RefObject<HTMLLIElement | null> & {
               menuItemOptionRef?: Ref<HTMLDivElement>;
             }
           ).menuItemOptionRef

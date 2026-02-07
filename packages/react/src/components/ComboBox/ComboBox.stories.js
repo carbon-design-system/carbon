@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
-
+import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
@@ -31,7 +30,7 @@ const items = [
   },
   {
     id: 'option-3',
-    text: 'Option 3 - a disabled item',
+    text: 'Option 3',
     disabled: true,
   },
   {
@@ -62,93 +61,34 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'aria-label',
+        'id',
+        'downshiftProps',
+        'initialSelectedItem',
+        'items',
+        'itemToElement',
+        'itemToString',
+        'selectedItem',
+        'shouldFilterItem',
+        'translateWithId',
+        'titleText',
+        'type',
+      ],
+    },
   },
 };
 
 const sharedArgTypes = {
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  downshiftProps: {
-    table: {
-      disable: true,
-    },
-  },
-  initialSelectedItem: {
-    table: {
-      disable: true,
-    },
-  },
-  invalidText: {
-    control: 'text',
-  },
-  items: {
-    table: {
-      disable: true,
-    },
-  },
-  itemToElement: {
-    table: {
-      disable: true,
-    },
-  },
-  itemToString: {
-    table: {
-      disable: true,
-    },
-  },
   onChange: {
     action: 'onChange',
   },
   onToggleClick: {
     action: 'clicked',
   },
-  onInputChange: {
-    table: {
-      disable: true,
-    },
-  },
-  selectedItem: {
-    table: {
-      disable: true,
-    },
-  },
-  shouldFilterItem: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  titleText: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
+  invalidText: {
+    control: 'text',
   },
   warnText: {
     control: 'text',
@@ -171,7 +111,7 @@ export const Default = (args) => {
     },
     {
       id: 'option-3',
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -189,8 +129,10 @@ export const Default = (args) => {
         id="carbon-combobox"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        titleText="ComboBox title"
-        helperText="Combobox helper text"
+        titleText="Label"
+        helperText="Helper text"
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
         onChange={action('onChange')}
         {...args}
       />
@@ -209,23 +151,27 @@ export const AllowCustomValue = (args) => {
       <ComboBox
         allowCustomValue
         shouldFilterItem={filterItems}
-        onChange={args.onChange}
         id="carbon-combobox"
         items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
-        titleText="ComboBox title"
-        helperText="Combobox helper text"
+        titleText="Label"
+        helperText="Helper text"
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
+        {...args}
       />
     </div>
   );
 };
 
+AllowCustomValue.argTypes = { ...sharedArgTypes };
+
 export const AutocompleteWithTypeahead = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        allowCustomValue
-        onChange={args.onChange}
-        helperText="Combobox helper text"
+        helperText="Helper text"
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
         id="carbon-combobox"
         items={[
           'Apple',
@@ -236,12 +182,19 @@ export const AutocompleteWithTypeahead = (args) => {
           'Blueberry',
           'Cantaloupe',
         ]}
-        titleText="ComboBox title"
+        titleText="Label"
+        {...args}
         typeahead
       />
     </div>
   );
 };
+
+AutocompleteWithTypeahead.argTypes = {
+  ...sharedArgTypes,
+  onChange: { action: 'onChange' },
+};
+
 export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: 400 }}>
     <div style={{ height: 300 }}></div>
@@ -250,8 +203,8 @@ export const ExperimentalAutoAlign = (args) => (
       id="carbon-combobox"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      titleText="ComboBox title"
-      helperText="Combobox helper text"
+      titleText="Label"
+      helperText="Helper text"
       autoAlign={true}
       {...args}
     />
@@ -260,10 +213,6 @@ export const ExperimentalAutoAlign = (args) => (
 );
 
 ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
-
-AllowCustomValue.argTypes = {
-  onChange: { action: 'onChange' },
-};
 
 export const _WithLayer = (args) => (
   <WithLayer>
@@ -274,8 +223,8 @@ export const _WithLayer = (args) => (
           id={`carbon-combobox-${layer}`}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          titleText="ComboBox title"
-          helperText="Combobox helper text"
+          titleText="Label"
+          helperText="Helper text"
           {...args}
         />
       </div>
@@ -331,7 +280,7 @@ export const withAILabel = (args) => {
     },
     {
       id: 'option-3',
-      text: 'Option 3 - a disabled item',
+      text: 'Option 3',
       disabled: true,
     },
     {
@@ -350,8 +299,8 @@ export const withAILabel = (args) => {
         id="carbon-combobox"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        titleText="ComboBox title"
-        helperText="Combobox helper text"
+        titleText="Label"
+        helperText="Helper text"
         decorator={aiLabel}
         {...args}
       />
@@ -390,8 +339,8 @@ export const _fullyControlled = (args) => {
         items={options}
         selectedItem={value}
         itemToString={(item) => (item ? item.text : '')}
-        titleText="Fully Controlled ComboBox title"
-        helperText="Combobox helper text"
+        titleText="Label"
+        helperText="Helper text"
       />
       <div
         style={{
@@ -409,7 +358,3 @@ export const _fullyControlled = (args) => {
 };
 
 _fullyControlled.argTypes = { ...sharedArgTypes };
-
-AutocompleteWithTypeahead.argTypes = {
-  onChange: { action: 'onChange' },
-};

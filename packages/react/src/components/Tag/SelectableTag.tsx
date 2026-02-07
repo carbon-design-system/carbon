@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  useLayoutEffect,
   useState,
   useRef,
   MouseEvent,
@@ -22,8 +21,10 @@ import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { useControllableState } from '../../internal/useControllableState';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+
 export interface SelectableTagBaseProps {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -82,6 +83,7 @@ export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
   SelectableTagBaseProps
 >;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const SelectableTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -101,6 +103,7 @@ const SelectableTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
+    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagId = id || `tag-${useId()}`;
     const [selectedTag, setSelectedTag] = useControllableState({
       value: selected,
@@ -112,7 +115,7 @@ const SelectableTag = forwardRef(
     });
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];

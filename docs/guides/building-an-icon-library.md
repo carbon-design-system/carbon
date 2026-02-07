@@ -77,14 +77,7 @@ After following our [contribution guidelines](/.github/CONTRIBUTING.md), you
 should have a local version of Carbon Elements on your own machine. In order to
 add a new package to the project, you add a folder in the `packages` directory
 and run `yarn init -y` to generate the `package.json` file. Make sure to edit
-the `name` field in the `package.json` file and then run the following task:
-
-```bash
-yarn sync
-```
-
-This should populate your `package.json` with all the necessary information in
-order to be published correctly.
+the `name` field in the `package.json` file.
 
 Each icon library package ends up taking on the following folder structure when
 everything is built:

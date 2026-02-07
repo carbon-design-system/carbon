@@ -1,19 +1,19 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ForwardedRef, ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
 import type {
   DeprecatedPopoverAlignment,
@@ -147,74 +147,84 @@ export interface IconButtonProps
   wrapperClasses?: string;
 }
 
-const IconButton = React.forwardRef(function IconButton(
-  {
-    align,
-    autoAlign = false,
-    badgeCount,
-    children,
-    className,
-    closeOnActivation = true,
-    defaultOpen = false,
-    disabled,
-    dropShadow = false,
-    enterDelayMs = 100,
-    highContrast = true,
-    kind,
-    label,
-    leaveDelayMs = 100,
-    wrapperClasses,
-    size,
-    isSelected,
-    ...rest
-  }: IconButtonProps,
-  ref: ForwardedRef<unknown> // TODO: this is unknown on Button, so should it be here as well?
-) {
-  const prefix = usePrefix();
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
+const IconButton = forwardRef<unknown, IconButtonProps>(
+  (
+    {
+      align,
+      autoAlign = false,
+      badgeCount,
+      children,
+      className,
+      closeOnActivation = true,
+      defaultOpen = false,
+      disabled,
+      dropShadow = false,
+      enterDelayMs = 100,
+      highContrast = true,
+      kind,
+      label,
+      leaveDelayMs = 100,
+      wrapperClasses,
+      size,
+      isSelected,
+      ...rest
+    },
+    ref
+  ) => {
+    const prefix = usePrefix();
 
-  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`, {
-    [`${prefix}--icon-tooltip--disabled`]: disabled,
-  });
+    const tooltipClasses = classNames(
+      wrapperClasses,
+      `${prefix}--icon-tooltip`,
+      {
+        [`${prefix}--icon-tooltip--disabled`]: disabled,
+      }
+    );
 
-  if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
-    console.warn(
-      "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+    if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      console.warn(
+        "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+      );
+    }
+    const badgeId = useId('badge-indicator');
+
+    return (
+      <Tooltip
+        align={align}
+        autoAlign={autoAlign}
+        closeOnActivation={closeOnActivation}
+        className={tooltipClasses}
+        defaultOpen={defaultOpen}
+        dropShadow={dropShadow}
+        enterDelayMs={enterDelayMs}
+        highContrast={highContrast}
+        label={label}
+        leaveDelayMs={leaveDelayMs}>
+        <ButtonBase
+          {...rest}
+          disabled={disabled}
+          kind={kind}
+          ref={ref}
+          size={size}
+          isSelected={isSelected}
+          hasIconOnly
+          className={className}
+          aria-describedby={
+            rest['aria-describedby'] || (badgeCount && badgeId)
+          }>
+          {children}
+          {!disabled && badgeCount !== undefined && (
+            <BadgeIndicator
+              id={badgeId}
+              count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
+          )}
+        </ButtonBase>
+      </Tooltip>
     );
   }
-  const badgeId = useId('badge-indicator');
-
-  return (
-    <Tooltip
-      align={align}
-      autoAlign={autoAlign}
-      closeOnActivation={closeOnActivation}
-      className={tooltipClasses}
-      defaultOpen={defaultOpen}
-      dropShadow={dropShadow}
-      enterDelayMs={enterDelayMs}
-      highContrast={highContrast}
-      label={label}
-      leaveDelayMs={leaveDelayMs}>
-      <ButtonBase
-        {...rest}
-        disabled={disabled}
-        kind={kind}
-        ref={ref}
-        size={size}
-        isSelected={isSelected}
-        hasIconOnly
-        className={className}
-        aria-describedby={rest['aria-describedby'] || (badgeCount && badgeId)}>
-        {children}
-        {!disabled && badgeCount !== undefined && (
-          <BadgeIndicator
-            id={badgeId}
-            count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
-        )}
-      </ButtonBase>
-    </Tooltip>
-  );
-});
+);
 
 IconButton.propTypes = {
   /**

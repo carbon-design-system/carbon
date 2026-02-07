@@ -742,12 +742,6 @@
     }
   }
 
-  .#{$prefix}--tab-content--interactive {
-    &:focus {
-      outline: none;
-    }
-  }
-
   //-----------------------------
   // Skeleton state
   //-----------------------------
@@ -778,10 +772,15 @@
   }
 
   // Windows HCM fix
-  .#{$prefix}--tabs__nav-item
-    .#{$prefix}--tabs__nav-item--selected
-    .#{$prefix}--tabs__nav-item--selected {
-    @include high-contrast-mode('focus');
+  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link,
+  .#{$prefix}--tabs__nav-item--selected.#{$prefix}--tabs__nav-link,
+  .#{$prefix}--tabs.#{$prefix}--tabs--contained
+    .#{$prefix}--tabs__nav-item--selected,
+  .#{$prefix}--tabs.#{$prefix}--tabs--contained
+    .#{$prefix}--tabs__nav-item--selected.#{$prefix}--tabs__nav-link {
+    @include high-contrast-mode {
+      background-color: SelectedItem;
+    }
   }
 
   .#{$prefix}--tabs

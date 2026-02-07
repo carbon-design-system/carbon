@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/components/popover';
+@use '@carbon/styles/scss/components/popover' as *;
 
 // The distance between the popover container and the triggering element
 // Specify the distance between the popover and the trigger. This value must
@@ -30,10 +30,22 @@ $popover-caret-height: custom-property.get-var(
   rem(6px)
 );
 
+// The drop shadow value used for the popover container
+$popover-drop-shadow: custom-property.get-var(
+  'popover-drop-shadow',
+  drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
+);
+
+// The border value used for the popover container
+$popover-border-color: custom-property.get-var(
+  'popover-border-color',
+  theme.$border-subtle
+);
+
 :host(#{$prefix}-tooltip),
 :host(#{$prefix}-popover) {
   ::slotted(.#{$prefix}--popover--tab-tip__button) {
-    @extend .#{$prefix}--popover--tab-tip__button;
+    @include popover-tab-tip-button;
   }
 }
 
@@ -41,7 +53,27 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover[highContrast]) {
   ::slotted(#{$prefix}-tooltip-content),
   ::slotted(#{$prefix}-popover-content) {
-    @extend .#{$prefix}--popover;
+    @include popover-highcontrast-base;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[backgroundToken='background']:not([highContrast])
+  ) {
+  .#{$prefix}--popover-content {
+    background: theme.$background;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[open][caret][backgroundToken='background']:not(
+        [highContrast]
+      )
+  ) {
+  .#{$prefix}--popover-caret {
+    &::after {
+      background: theme.$background;
+    }
   }
 }
 
@@ -54,7 +86,7 @@ $popover-caret-height: custom-property.get-var(
 
 :host(#{$prefix}-tooltip-content),
 :host(#{$prefix}-popover-content) {
-  @extend .#{$prefix}--popover;
+  @include popover-base;
 }
 
 :host(#{$prefix}-tooltip-content[open]),
@@ -67,11 +99,29 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
+:host(#{$prefix}-popover) {
+  .#{$prefix}--popover--tab-tip__button:focus-within {
+    @include focus-outline('outline');
+  }
+}
+
 :host(#{$prefix}-tooltip-content[open][tabTip]),
 :host(#{$prefix}-popover-content[open][tabTip]) {
   .#{$prefix}--popover-content {
     border-radius: 0;
-    background: theme.$layer;
+  }
+}
+:host(#{$prefix}-popover[tabTip][open]) {
+  ::slotted(button[class*='#{$prefix}--popover--tab-tip__button']:not(:focus)) {
+    &::after {
+      position: absolute;
+      z-index: z('floating') + 1;
+      background: theme.$layer;
+      block-size: 2px;
+      content: '';
+      inline-size: 100%;
+      inset-block-end: 0;
+    }
   }
 }
 
@@ -82,16 +132,63 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[open]) {
   .#{$prefix}--popover-caret {
     display: block;
+
+    // caret background
+    &::after {
+      position: absolute;
+      display: block;
+      background: theme.$layer;
+      content: '';
+    }
+
+    // caret border
+    &::before {
+      position: absolute;
+      display: none;
+      background-color: $popover-border-color;
+      content: '';
+    }
   }
 }
 
-:host(#{$prefix}-popover-content[dropShadow]) {
-  @include custom-property.declaration(
-    'popover-drop-shadow',
-    drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
-  );
+:host(#{$prefix}-tooltip-content[open][caret][highContrast]),
+:host(#{$prefix}-popover-content[open][caret][highContrast]) {
+  .#{$prefix}--popover-caret {
+    &::after {
+      background: theme.$background-inverse;
+    }
+  }
 }
 
+:host(#{$prefix}-tooltip-content[border]),
+:host(#{$prefix}-popover-content[border]) {
+  .#{$prefix}--popover-content {
+    outline: 1px solid $popover-border-color;
+    outline-offset: -1px;
+  }
+}
+
+:host(#{$prefix}-tooltip-content[dropShadow]),
+:host(#{$prefix}-popover-content[dropShadow]) {
+  .#{$prefix}--popover {
+    filter: $popover-drop-shadow;
+  }
+}
+
+:host(#{$prefix}-tooltip-content[open][caret][border]),
+:host(#{$prefix}-popover-content[open][caret][border]) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      display: block;
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------
+// Bottom
+//-----------------------------------------------------------------------------
+
+// bottom caret
 :host(#{$prefix}-tooltip-content[align^='bottom']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='bottom']:not([autoalign])),
@@ -99,11 +196,37 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='bottom']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
-    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
     inline-size: $popover-caret-width;
     inset-block-end: 0;
     inset-inline-start: 50%;
     transform: translate(-50%, $popover-offset);
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+  }
+}
+
+// bottom caret border
+:host(#{$prefix}-tooltip-content[align^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='bottom'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='bottom'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: 1px;
+      inset-inline-start: 0.5px;
+    }
   }
 }
 
@@ -152,14 +275,27 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='bottom-left']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='bottom-left']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='bottom-left']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='bottom-left']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='bottom-left']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='bottom-start']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='bottom-start']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='bottom-start']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='bottom-start']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom-start']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 0;
-    inset-inline-start: 0;
+    inset-inline-start: calc(50% - $popover-offset);
     transform: translate(
       calc(-1 * $popover-offset),
       calc(100% + $popover-offset)
     );
+  }
+}
+:host(#{$prefix}-popover-content[tabTip][align='bottom-left']:not([autoalign])),
+:host(
+    #{$prefix}-popover-content[tabTip][align='bottom-start']:not([autoalign])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-start: 0;
   }
 }
 
@@ -172,10 +308,34 @@ $popover-caret-height: custom-property.get-var(
   ),
 :host(#{$prefix}-toggletip:dir(rtl)[alignment='bottom-left']:not([autoalign])),
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='bottom-left']:not([autoalign])),
-:host(#{$prefix}-slug:dir(rtl)[alignment='bottom-left']:not([autoalign])) {
+:host(#{$prefix}-slug:dir(rtl)[alignment='bottom-left']:not([autoalign])),
+:host(
+    #{$prefix}-tooltip-content:dir(rtl)[align='bottom-start']:not([autoalign])
+  ),
+:host(
+    #{$prefix}-popover-content:dir(rtl)[align='bottom-start']:not([autoalign])
+  ),
+:host(#{$prefix}-toggletip:dir(rtl)[alignment='bottom-start']:not([autoalign])),
+:host(#{$prefix}-ai-label:dir(rtl)[alignment='bottom-start']:not([autoalign])),
+:host(#{$prefix}-slug:dir(rtl)[alignment='bottom-start']:not([autoalign])) {
+  .#{$prefix}--popover-content {
+    inset-inline-end: calc(50% - $popover-offset);
+    inset-inline-start: initial;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-left']:not(
+        [autoalign]
+      )
+  ),
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-start']:not(
+        [autoalign]
+      )
+  ) {
   .#{$prefix}--popover-content {
     inset-inline-end: 0;
-    inset-inline-start: initial;
   }
 }
 
@@ -183,11 +343,24 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='bottom-right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='bottom-right']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='bottom-right']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='bottom-right']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='bottom-right']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='bottom-end']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='bottom-end']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='bottom-end']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='bottom-end']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom-end']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 0;
-    inset-inline-end: 0;
+    inset-inline-end: calc(50% - $popover-offset);
     transform: translate($popover-offset, calc(100% + $popover-offset));
+  }
+}
+:host(
+    #{$prefix}-popover-content[tabTip][align='bottom-right']:not([autoalign])
+  ),
+:host(#{$prefix}-popover-content[tabTip][align='bottom-end']:not([autoalign])) {
+  .#{$prefix}--popover-content {
+    inset-inline-end: 0;
   }
 }
 
@@ -200,11 +373,35 @@ $popover-caret-height: custom-property.get-var(
   ),
 :host(#{$prefix}-toggletip:dir(rtl)[alignment='bottom-right']:not([autoalign])),
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='bottom-right']:not([autoalign])),
-:host(#{$prefix}-slug:dir(rtl)[alignment='bottom-right']:not([autoalign])) {
+:host(#{$prefix}-slug:dir(rtl)[alignment='bottom-right']:not([autoalign])),
+:host(#{$prefix}-tooltip-content:dir(rtl)[align='bottom-end']:not([autoalign])),
+:host(#{$prefix}-popover-content:dir(rtl)[align='bottom-end']:not([autoalign])),
+:host(#{$prefix}-toggletip:dir(rtl)[alignment='bottom-end']:not([autoalign])),
+:host(#{$prefix}-ai-label:dir(rtl)[alignment='bottom-end']:not([autoalign])),
+:host(#{$prefix}-slug:dir(rtl)[alignment='bottom-end']:not([autoalign])) {
+  .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset);
+  }
+}
+
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-right']:not(
+        [autoalign]
+      )
+  ),
+:host(
+    #{$prefix}-popover-content:dir(rtl)[tabTip][align='bottom-end']:not(
+        [autoalign]
+      )
+  ) {
   .#{$prefix}--popover-content {
     inset-inline-start: 0;
   }
 }
+
+//-----------------------------------------------------------------------------
+// Left
+//-----------------------------------------------------------------------------
 
 :host(#{$prefix}-tooltip-content[align^='left']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='left']:not([autoalign])),
@@ -213,11 +410,35 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='left']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
-    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
     inline-size: $popover-caret-height;
     inset-block-start: 50%;
     inset-inline-end: 100%;
     transform: translate(calc(-1 * $popover-offset + 100%), -50%);
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+  }
+}
+
+// left caret border
+:host(#{$prefix}-tooltip-content[align^='left'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='left'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='left'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='left'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='left'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+
+    &::after {
+      inset-inline-start: -1px;
+    }
   }
 }
 
@@ -230,6 +451,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover-caret {
     inset-inline-end: initial;
     inset-inline-start: 100%;
+
+    &::after {
+      inset-inline-start: 1px;
+    }
   }
 }
 
@@ -251,7 +476,12 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='left-bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='left-bottom']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='left-bottom']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='left-bottom']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='left-bottom']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='left-end']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='left-end']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='left-end']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='left-end']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left-end']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 50%;
     inset-inline-end: 100%;
@@ -268,7 +498,12 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='left-top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='left-top']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='left-top']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='left-top']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='left-top']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='left-start']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='left-start']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='left-start']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='left-start']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left-start']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 50%;
     inset-inline-end: 100%;
@@ -293,6 +528,11 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
+//-----------------------------------------------------------------------------
+// Right
+//-----------------------------------------------------------------------------
+
+// right caret
 :host(#{$prefix}-tooltip-content[align^='right']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='right']:not([autoalign])),
@@ -300,11 +540,35 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='right']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
-    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
     inline-size: $popover-caret-height;
     inset-block-start: 50%;
     inset-inline-start: 100%;
     transform: translate(calc($popover-offset - 100%), -50%);
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+    }
+  }
+}
+
+// right caret border
+:host(#{$prefix}-tooltip-content[align^='right'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='right'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='right'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='right'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='right'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+    }
+
+    &::after {
+      inset-inline-start: 1px;
+    }
   }
 }
 
@@ -317,6 +581,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover-caret {
     inset-inline-end: 100%;
     inset-inline-start: initial;
+
+    &::after {
+      inset-inline-start: -1px;
+    }
   }
 }
 
@@ -338,7 +606,12 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='right-bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='right-bottom']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='right-bottom']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='right-bottom']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='right-bottom']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='right-end']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='right-end']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='right-end']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='right-end']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right-end']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 50%;
     inset-inline-start: 100%;
@@ -350,7 +623,12 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='right-top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='right-top']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='right-top']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='right-top']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='right-top']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='right-start']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='right-start']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='right-start']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='right-start']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right-start']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 50%;
     inset-inline-start: 100%;
@@ -373,6 +651,11 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
+//-----------------------------------------------------------------------------
+// Top
+//-----------------------------------------------------------------------------
+
+// top caret
 :host(#{$prefix}-tooltip-content[align^='top']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='top']:not([autoalign])),
@@ -380,11 +663,37 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-slug[alignment^='top']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
-    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
     inline-size: $popover-caret-width;
     inset-block-start: 0;
     inset-inline-start: 50%;
     transform: translate(-50%, calc(-1 * $popover-offset));
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+  }
+}
+
+// top caret border
+:host(#{$prefix}-tooltip-content[align^='top'][border]:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='top'][border]:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='top'][border]:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment^='top'][border]:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='top'][border]:not([autoalign])) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: -1px;
+      inset-inline-start: 0.5px;
+    }
   }
 }
 
@@ -426,10 +735,15 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='top-left']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='top-left']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='top-left']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='top-left']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='top-left']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='top-start']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='top-start']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='top-start']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='top-start']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-start']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 0;
-    inset-inline-start: 0;
+    inset-inline-start: calc(50% - $popover-offset);
     transform: translate(
       calc(-1 * $popover-offset),
       calc(-100% - $popover-offset)
@@ -442,9 +756,14 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content:dir(rtl)[align='top-left']:not([autoalign])),
 :host(#{$prefix}-toggletip:dir(rtl)[alignment='top-left']:not([autoalign])),
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='top-left']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='top-left']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='top-left']:not([autoalign])),
+:host(#{$prefix}-tooltip-content:dir(rtl)[align='top-start']:not([autoalign])),
+:host(#{$prefix}-popover-content:dir(rtl)[align='top-start']:not([autoalign])),
+:host(#{$prefix}-toggletip:dir(rtl)[alignment='top-start']:not([autoalign])),
+:host(#{$prefix}-ai-label:dir(rtl)[alignment='top-start']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-start']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    inset-inline-end: 0;
+    inset-inline-end: calc(50% - $popover-offset);
     inset-inline-start: initial;
   }
 }
@@ -453,10 +772,15 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content[align='top-right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='top-right']:not([autoalign])),
 :host(#{$prefix}-ai-label[alignment='top-right']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='top-right']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='top-right']:not([autoalign])),
+:host(#{$prefix}-tooltip-content[align='top-end']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='top-end']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='top-end']:not([autoalign])),
+:host(#{$prefix}-ai-label[alignment='top-end']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-end']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 0;
-    inset-inline-end: 0;
+    inset-inline-end: calc(50% - $popover-offset);
     transform: translate($popover-offset, calc(-100% - $popover-offset));
   }
 }
@@ -466,9 +790,14 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover-content:dir(rtl)[align='top-right']:not([autoalign])),
 :host(#{$prefix}-toggletip:dir(rtl)[alignment='top-right']:not([autoalign])),
 :host(#{$prefix}-ai-label:dir(rtl)[alignment='top-right']:not([autoalign])),
-:host(#{$prefix}-slug[alignment='top-right']:not([autoalign])) {
+:host(#{$prefix}-slug[alignment='top-right']:not([autoalign])),
+:host(#{$prefix}-tooltip-content:dir(rtl)[align='top-end']:not([autoalign])),
+:host(#{$prefix}-popover-content:dir(rtl)[align='top-end']:not([autoalign])),
+:host(#{$prefix}-toggletip:dir(rtl)[alignment='top-end']:not([autoalign])),
+:host(#{$prefix}-ai-label:dir(rtl)[alignment='top-end']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-end']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    inset-inline-start: 0;
+    inset-inline-start: calc(50% - $popover-offset);
   }
 }
 
@@ -489,5 +818,59 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-popover[autoalign]) {
   .#{$prefix}--popover-container {
     position: static;
+  }
+}
+
+//-----------------------------------------------------------------------------
+// AutoAlign
+//-----------------------------------------------------------------------------
+
+// autoalign caret
+:host(#{$prefix}-popover-content[open][caret][autoalign]),
+:host(#{$prefix}-tooltip-content[open][caret][autoalign]) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      block-size: 8px;
+      inline-size: 8px;
+    }
+
+    &::after {
+      block-size: 8px;
+      inline-size: 8px;
+    }
+  }
+}
+
+// autoalign caret border
+:host(#{$prefix}-popover-content[border][open][caret][autoalign]) {
+  .#{$prefix}--popover-caret {
+    &::after {
+      inline-size: 7px;
+    }
+  }
+  .#{$prefix}--popover-content[align^='top'] > .#{$prefix}--popover-caret {
+    &::after {
+      inset-block-start: -1px;
+    }
+  }
+
+  .#{$prefix}--popover-content[align^='bottom'] > .#{$prefix}--popover-caret {
+    &::after {
+      inset-block-start: 1px;
+      inset-inline-start: 1px;
+    }
+  }
+
+  .#{$prefix}--popover-content[align^='left'] > .#{$prefix}--popover-caret {
+    &::after {
+      inset-block-start: 1px;
+    }
+  }
+
+  .#{$prefix}--popover-content[align^='right'] > .#{$prefix}--popover-caret {
+    &::after {
+      inset-block-start: -1px;
+      inset-inline-start: 1px;
+    }
   }
 }

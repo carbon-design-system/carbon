@@ -137,15 +137,16 @@ const Checkbox = React.forwardRef(
 
     const checkboxGroupInstanceId = useId();
 
-    const helperId = !helperText
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helperId = !hasHelper
       ? undefined
       : `checkbox-helper-text-${checkboxGroupInstanceId}`;
 
-    const helper = helperText ? (
+    const helper = hasHelper && (
       <div id={helperId} className={`${prefix}--form__helper-text`}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     const wrapperClasses = classNames(
       `${prefix}--form-item`,
@@ -169,7 +170,7 @@ const Checkbox = React.forwardRef(
       ? cloneElement(candidate, {
           size: candidate.props.kind === 'inline' ? 'md' : 'mini',
         })
-      : null;
+      : candidate;
 
     return (
       <div className={wrapperClasses}>
@@ -212,7 +213,7 @@ const Checkbox = React.forwardRef(
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
           title={title}>
-          <Text className={innerLabelClasses}>
+          <Text as="div" className={innerLabelClasses}>
             {labelText}
             {slug ? (
               normalizedDecorator

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ class CDSCopy extends CDSIconButton {
   private _animation = '';
 
   private _createHandleFeedbackTooltip = () => {
-    let timeoutId: number | void;
+    let timeoutId: number | undefined;
     return (timeout: number) => {
       const buttonClasses = this.shadowRoot?.querySelector('button')?.classList;
 
@@ -77,7 +77,6 @@ class CDSCopy extends CDSIconButton {
   @property({ type: Number, attribute: 'feedback-timeout' })
   feedbackTimeout = 2000;
 
-  // eslint-disable-next-line class-methods-use-this
   protected _renderTooltipContent() {
     return html`
       <cds-tooltip-content>
@@ -111,7 +110,7 @@ class CDSCopy extends CDSIconButton {
 
     super.updated(changedProperties);
 
-    this.shadowRoot
+    this.shadowRoot // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
       ?.querySelector('button') // @ts-ignore: TS thinks `host` doesn't exist on `parentNode`
       ?.setAttribute('aria-label', this.parentNode?.host.textContent);
   }

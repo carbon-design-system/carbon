@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { MutableRefObject, ReactNode, useRef } from 'react';
+import React, { useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -69,7 +69,7 @@ const SkeletonText = ({
     lineCountNumber = lineCount;
   }
 
-  const refs: MutableRefObject<(HTMLParagraphElement | null)[]> = useRef([]);
+  const refs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   useIsomorphicEffect(() => {
     refs.current.map((item, j) => {
@@ -115,7 +115,6 @@ const SkeletonText = ({
     return <div>{lines}</div>;
   }
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{lines}</>;
 };
 

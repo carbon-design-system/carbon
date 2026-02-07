@@ -85,6 +85,71 @@ describe('Select', () => {
       expect(screen.getByLabelText('Select').title).toEqual('Option 1');
     });
 
+    it('should show selected option text as title when defaultValue is provided', () => {
+      render(
+        <Select id="select" labelText="Select" defaultValue="option-2">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Option 2');
+    });
+
+    it('should show selected option text as title when value is provided', () => {
+      render(
+        <Select id="select" labelText="Select" value="option-2">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Option 2');
+    });
+
+    it('should prioritize title prop over value or defaultValue', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          value="option-2"
+          title="Custom Title">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Custom Title');
+    });
+
+    it('should respect title prop when provided', () => {
+      render(
+        <Select id="select" labelText="Select" title="Custom Title">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Custom Title');
+    });
+
+    it('should update title when selection changes', async () => {
+      render(
+        <Select id="select" labelText="Select">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+
+      // Initial title should be the first option
+      expect(screen.getByLabelText('Select').title).toEqual('Option 1');
+
+      // Change selection
+      await userEvent.selectOptions(
+        screen.getByLabelText('Select'),
+        'option-2'
+      );
+
+      // Title should update to the selected option
+      expect(screen.getByLabelText('Select').title).toEqual('Option 2');
+    });
+
     it('should respect disabled prop', () => {
       render(<Select id="select" labelText="Select" disabled />);
 
@@ -104,6 +169,11 @@ describe('Select', () => {
       expect(screen.getByText('This is some helper text')).toHaveClass(
         `${prefix}--form__helper-text`
       );
+    });
+
+    it('should render helperText with value 0', () => {
+      render(<Select id="select" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
     });
 
     it('should respect hideLabel prop', () => {
@@ -272,6 +342,92 @@ describe('Select', () => {
         `${prefix}--select--decorator`
       );
     });
+
+    it('should not display invalid message if disabled', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          disabled
+          invalid
+          invalidText="This is an error message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is an error message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid message if readOnly', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          readOnly
+          invalid
+          invalidText="This is an error message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is an error message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning message if disabled', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          disabled
+          warn
+          warnText="This is a warning message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is a warning message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning message if readOnly', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          readOnly
+          warn
+          warnText="This is a warning message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is a warning message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning styles if disabled', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" disabled warn />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+
+      expect(selectWrapper).not.toHaveClass(`${prefix}--select--warning`);
+    });
+
+    it('should not display warning styles if readOnly', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" readOnly warn />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+
+      expect(selectWrapper).not.toHaveClass(`${prefix}--select--warning`);
+    });
   });
 
   describe('behaves as expected', () => {
@@ -392,6 +548,18 @@ describe('Select', () => {
         </main>
       );
       await expect(container).toHaveNoACViolations('Select');
+    });
+
+    it('should not set aria-invalid if disabled', () => {
+      render(<Select id="select" labelText="Select" disabled invalid />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
+    });
+
+    it('should not set aria-invalid if readOnly', () => {
+      render(<Select id="select" labelText="Select" readOnly invalid />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
     });
   });
 });

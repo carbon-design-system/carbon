@@ -13,7 +13,7 @@ test.describe('@avt ShapeIndicator', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ShapeIndicator',
-      id: 'experimental-statusindicators-unstable-shapeindicator--default',
+      id: 'preview-statusindicators-preview-shapeindicator--default',
       globals: {
         theme: 'white',
       },

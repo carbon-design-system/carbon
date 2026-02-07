@@ -13,8 +13,7 @@ import React, {
   useRef,
   useState,
   type ChangeEvent,
-  type ComponentType,
-  type FunctionComponent,
+  type ElementType,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -28,6 +27,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
+import { Tooltip } from '../Tooltip';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -99,10 +99,12 @@ export interface SearchProps extends InputPropsBase {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   * @deprecated Specify the role for the underlying `<input>`.
+   * No longer needed since `<input type="search">` already provides the correct semantics.
+   * This prop will be removed in the next major release of Carbon.
    */
   role?: string;
 
@@ -112,7 +114,7 @@ export interface SearchProps extends InputPropsBase {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Optional prop to specify the type of the `<input>`
+   * Specify the type of the `<input>`
    */
   type?: string;
 
@@ -122,130 +124,127 @@ export interface SearchProps extends InputPropsBase {
   value?: string | number;
 }
 
-const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
-  {
-    autoComplete = 'off',
-    className,
-    closeButtonLabelText = 'Clear search input',
-    defaultValue,
-    disabled,
-    isExpanded = true,
-    id,
-    labelText,
-    // @ts-expect-error: deprecated prop
-    light,
-    onChange = () => {},
-    onClear = () => {},
-    onKeyDown,
-    onExpand,
-    placeholder = 'Search',
-    renderIcon,
-    role = 'searchbox',
-    size = 'md',
-    type = 'text',
-    value,
-    ...rest
-  },
-  forwardRef
-) {
-  const hasPropValue = value || defaultValue ? true : false;
-  const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const ref = useMergedRefs([forwardRef, inputRef]);
-  const expandButtonRef = useRef<HTMLDivElement>(null);
-  const inputId = useId('search-input');
-  const uniqueId = id || inputId;
-  const searchId = `${uniqueId}-search`;
-  const [hasContent, setHasContent] = useState(hasPropValue || false);
-  const [prevValue, setPrevValue] = useState(value);
-  const searchClasses = cx(
+const Search = React.forwardRef<HTMLInputElement, SearchProps>(
+  (
     {
-      [`${prefix}--search`]: true,
-      [`${prefix}--search--sm`]: size === 'sm',
-      [`${prefix}--search--md`]: size === 'md',
-      [`${prefix}--search--lg`]: size === 'lg',
-      [`${prefix}--search--light`]: light,
-      [`${prefix}--search--disabled`]: disabled,
-      [`${prefix}--search--fluid`]: isFluid,
+      autoComplete = 'off',
+      className,
+      closeButtonLabelText = 'Clear search input',
+      defaultValue,
+      disabled,
+      isExpanded = true,
+      id,
+      labelText,
+      // @ts-expect-error: deprecated prop
+      light,
+      onChange = () => {},
+      onClear = () => {},
+      onKeyDown,
+      onExpand,
+      placeholder = 'Search',
+      renderIcon,
+      role,
+      size = 'md',
+      type = 'search',
+      value,
+      ...rest
     },
-    className
-  );
+    forwardRef
+  ) => {
+    const hasPropValue = value || defaultValue ? true : false;
+    const prefix = usePrefix();
+    const { isFluid } = useContext(FormContext);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const ref = useMergedRefs([forwardRef, inputRef]);
+    const expandButtonRef = useRef<HTMLDivElement>(null);
+    const inputId = useId('search-input');
+    const uniqueId = id || inputId;
+    const searchId = `${uniqueId}-search`;
+    const [hasContent, setHasContent] = useState(hasPropValue || false);
+    const [prevValue, setPrevValue] = useState(value);
+    const searchClasses = cx(
+      {
+        [`${prefix}--search`]: true,
+        [`${prefix}--search--sm`]: size === 'sm',
+        [`${prefix}--search--md`]: size === 'md',
+        [`${prefix}--search--lg`]: size === 'lg',
+        [`${prefix}--search--light`]: light,
+        [`${prefix}--search--disabled`]: disabled,
+        [`${prefix}--search--fluid`]: isFluid,
+      },
+      className
+    );
 
-  const clearClasses = cx({
-    [`${prefix}--search-close`]: true,
-    [`${prefix}--search-close--hidden`]: !hasContent || !isExpanded,
-  });
+    const clearClasses = cx({
+      [`${prefix}--search-close`]: true,
+      [`${prefix}--search-close--hidden`]: !hasContent || !isExpanded,
+    });
 
-  if (value !== prevValue) {
-    setHasContent(!!value);
-    setPrevValue(value);
-  }
-
-  function clearInput() {
-    if (!value && inputRef.current) {
-      inputRef.current.value = '';
+    if (value !== prevValue) {
+      setHasContent(!!value);
+      setPrevValue(value);
     }
 
-    if (inputRef.current) {
-      const inputTarget = Object.assign({}, inputRef.current, { value: '' });
-      const syntheticEvent: ChangeEvent<HTMLInputElement> = {
-        bubbles: false,
-        cancelable: false,
-        currentTarget: inputRef.current,
-        defaultPrevented: false,
-        eventPhase: 0,
-        isDefaultPrevented: () => false,
-        isPropagationStopped: () => false,
-        isTrusted: false,
-        nativeEvent: new Event('change'),
-        persist: noopFn,
-        preventDefault: noopFn,
-        stopPropagation: noopFn,
-        target: inputTarget,
-        timeStamp: 0,
-        type: 'change',
-      };
-
-      onChange(syntheticEvent);
-    }
-
-    onClear();
-    setHasContent(false);
-    inputRef.current?.focus();
-  }
-
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setHasContent(event.target.value !== '');
-  }
-
-  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (match(event, keys.Escape)) {
-      event.stopPropagation();
-      if (inputRef.current?.value) {
-        clearInput();
+    function clearInput() {
+      if (!value && inputRef.current) {
+        inputRef.current.value = '';
       }
-      // ExpandableSearch closes on escape when isExpanded, focus search activation button
-      else if (onExpand && isExpanded) {
-        expandButtonRef.current?.focus();
+
+      if (inputRef.current) {
+        const inputTarget = Object.assign({}, inputRef.current, { value: '' });
+        const syntheticEvent: ChangeEvent<HTMLInputElement> = {
+          bubbles: false,
+          cancelable: false,
+          currentTarget: inputRef.current,
+          defaultPrevented: false,
+          eventPhase: 0,
+          isDefaultPrevented: () => false,
+          isPropagationStopped: () => false,
+          isTrusted: false,
+          nativeEvent: new Event('change'),
+          persist: noopFn,
+          preventDefault: noopFn,
+          stopPropagation: noopFn,
+          target: inputTarget,
+          timeStamp: 0,
+          type: 'change',
+        };
+
+        onChange(syntheticEvent);
+      }
+
+      onClear();
+      setHasContent(false);
+      inputRef.current?.focus();
+    }
+
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+      setHasContent(event.target.value !== '');
+    }
+
+    function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+      if (match(event, keys.Escape)) {
+        event.stopPropagation();
+        if (inputRef.current?.value) {
+          clearInput();
+        }
+        // ExpandableSearch closes on escape when isExpanded, focus search activation button
+        else if (onExpand && isExpanded) {
+          expandButtonRef.current?.focus();
+        }
       }
     }
-  }
 
-  function handleExpandButtonKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (match(event, keys.Enter) || match(event, keys.Space)) {
-      event.stopPropagation();
-      if (onExpand) {
-        onExpand(event);
+    function handleExpandButtonKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+      if (match(event, keys.Enter) || match(event, keys.Space)) {
+        event.stopPropagation();
+        if (onExpand) {
+          onExpand(event);
+        }
       }
     }
-  }
 
-  return (
-    <div role="search" aria-label={placeholder} className={searchClasses}>
-      {/* the magnifier is used in ExpandableSearch as a click target to expand,
-      however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+    const magnifierButton = (
       <div
         aria-labelledby={onExpand ? searchId : undefined}
         role={onExpand ? 'button' : undefined}
@@ -264,37 +263,59 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
         aria-controls={onExpand ? uniqueId : undefined}>
         <CustomSearchIcon icon={renderIcon} />
       </div>
-      <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
-        {labelText}
-      </label>
-      <input
-        autoComplete={autoComplete}
-        className={`${prefix}--search-input`}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        role={role}
-        ref={ref}
-        id={uniqueId}
-        onChange={composeEventHandlers([onChange, handleChange])}
-        onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        tabIndex={onExpand && !isExpanded ? -1 : undefined}
-        {...rest}
-      />
-      <button
-        aria-label={closeButtonLabelText}
-        className={clearClasses}
-        disabled={disabled}
-        onClick={clearInput}
-        title={closeButtonLabelText}
-        type="button">
-        <Close />
-      </button>
-    </div>
-  );
-});
+    );
+
+    // Wrap magnifierButton in a tooltip if it's expandable
+    const magnifierWithTooltip =
+      onExpand && !isExpanded ? (
+        <Tooltip
+          className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip`}
+          align="top"
+          label="Search">
+          {magnifierButton}
+        </Tooltip>
+      ) : (
+        magnifierButton
+      );
+
+    return (
+      <div role="search" aria-label={placeholder} className={searchClasses}>
+        {magnifierWithTooltip}
+        {/* the magnifier is used in ExpandableSearch as a click target to expand,
+      however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
+
+        <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
+          {labelText}
+        </label>
+        <input
+          autoComplete={autoComplete}
+          className={`${prefix}--search-input`}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          role={role}
+          ref={ref}
+          id={uniqueId}
+          onChange={composeEventHandlers([onChange, handleChange])}
+          onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
+          placeholder={placeholder}
+          type={type}
+          value={value}
+          tabIndex={onExpand && !isExpanded ? -1 : undefined}
+          {...rest}
+        />
+        <button
+          aria-label={closeButtonLabelText}
+          className={clearClasses}
+          disabled={disabled}
+          onClick={clearInput}
+          title={closeButtonLabelText}
+          type="button">
+          <Close />
+        </button>
+      </div>
+    );
+  }
+);
 
 Search.displayName = 'Search';
 Search.propTypes = {
@@ -381,16 +402,22 @@ Search.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * Deprecated, since <input type="search"> already provides correct semantics.
    * Specify the role for the underlying `<input>`, defaults to `searchbox`
    */
-  role: PropTypes.string,
+  role: deprecate(
+    PropTypes.string,
+    'The `role` prop has been deprecated since <input type="search"> already provides correct semantics. ' +
+      'It will be removed in the next major release of Carbon.'
+  ),
 
   /**
    * Specify the size of the Search
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
   /**
-   * Optional prop to specify the type of the `<input>`
+   * Specify the type of the `<input>`
    */
   type: PropTypes.string,
 

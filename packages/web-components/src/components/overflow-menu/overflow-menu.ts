@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
@@ -15,6 +15,8 @@ import { find } from '../../globals/internal/collection-helpers';
 import CDSFloatingMenuTrigger from '../floating-menu/floating-menu-trigger';
 import { OVERFLOW_MENU_SIZE } from './defs';
 import CDSOverflowMenuBody from './overflow-menu-body';
+
+import iconButtonStyles from '../icon-button/icon-button.scss?lit';
 import styles from './overflow-menu.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -57,6 +59,7 @@ class CDSOverflowMenu
    * Handles `click` event on the trigger button.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClickTrigger = async () => {
     this._handleUserInitiatedToggle();
@@ -66,6 +69,7 @@ class CDSOverflowMenu
    * Handles `keydown` event on the trigger button.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydownTrigger = async (event) => {
     if (event.key === ' ' || event.key === 'Enter') {
@@ -137,6 +141,8 @@ class CDSOverflowMenu
       this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
   }
 
   updated(changedProperties) {
@@ -157,10 +163,11 @@ class CDSOverflowMenu
             (elem.constructor as typeof CDSOverflowMenuBody).FLOATING_MENU
         );
       }
-      const { _menuBody: menuBody } = this;
+      const { _menuBody: menuBody, size } = this;
       if (menuBody) {
         menuBody.setAttribute('breadcrumb', String(Boolean(this.breadcrumb)));
         menuBody.open = open;
+        menuBody.size = size;
 
         const tooltipContent = this.querySelector(
           '[slot=tooltip-content]'
@@ -176,12 +183,6 @@ class CDSOverflowMenu
     }
 
     if (changedProperties.has('size')) {
-      const { size } = this;
-      const { _menuBody: menuBody } = this;
-      if (menuBody) {
-        menuBody.size = size;
-      }
-
       button?.classList.forEach((item) => {
         if (item.startsWith(`${prefix}--overflow-menu--`)) {
           button?.classList.remove(item);
@@ -205,8 +206,6 @@ class CDSOverflowMenu
   render() {
     return html`${super.render()} `;
   }
-
-  static styles = styles;
 }
 
 export default CDSOverflowMenu;

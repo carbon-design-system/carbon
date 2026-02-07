@@ -39,15 +39,8 @@ export const Skeleton = (args) => {
   );
 };
 
-Skeleton.argTypes = {
-  headers: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
+Skeleton.parameters = {
+  controls: {
+    exclude: ['headers'],
   },
 };

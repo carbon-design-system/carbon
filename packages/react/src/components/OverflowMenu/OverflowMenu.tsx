@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,12 +38,12 @@ import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton, IconButtonProps } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
@@ -105,12 +105,12 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
 
   switch (triggerButtonPositionProp) {
     case 'top':
     case 'bottom': {
-      // TODO: Ensure `trigger` is there for `<OverflowMenu open>`
       const triggerWidth = !trigger ? 0 : trigger.offsetWidth;
       return {
         left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
@@ -170,6 +170,7 @@ export interface OverflowMenuProps
   flipped?: boolean;
 
   /**
+   * @deprecated Tab key is handled with event handler so no need for focus trap.
    * Enable or disable focus trap behavior
    */
   focusTrap?: boolean;
@@ -242,17 +243,19 @@ export interface OverflowMenuProps
   selectorPrimaryFocus?: string;
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `xs`, `sm`, `md` (default) or `lg` as an option.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * The ref to the overflow menu's trigger button element.
    * @deprecated Use the standard React `ref` prop instead.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   innerRef?: Ref<any>;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
@@ -263,7 +266,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       className,
       direction = DIRECTION_BOTTOM,
       flipped = false,
-      focusTrap = true,
+      focusTrap = false,
       iconClass,
       iconDescription = 'Options',
       id,
@@ -339,17 +342,13 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     }, []);
 
-    const closeMenu = useCallback(
-      (onCloseMenu?: () => void) => {
-        setOpen(false);
-        // Optional callback to be executed after the state as been set to close
-        if (onCloseMenu) {
-          onCloseMenu();
-        }
-        onClose();
-      },
-      [onClose]
-    );
+    const closeMenu = useCallback((onCloseMenu?: () => void) => {
+      setOpen(false);
+      // Optional callback to be executed after the state as been set to close
+      if (onCloseMenu) {
+        onCloseMenu();
+      }
+    }, []);
 
     const closeMenuAndFocus = useCallback(() => {
       const wasClicked = click;
@@ -394,12 +393,15 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         evt.preventDefault();
       }
 
-      // Close the overflow menu on escape
-      if (keyCodeMatches(evt, [keys.Escape])) {
+      // Close the overflow menu on escape or tab.
+      if (keyCodeMatches(evt, [keys.Escape, keys.Tab])) {
         closeMenuOnEscape();
 
         // Stop the esc keypress from bubbling out and closing something it shouldn't
         evt.stopPropagation();
+
+        // Stop the tab key from making the browser focus somewhere else.
+        evt.preventDefault();
       }
     };
 
@@ -688,6 +690,7 @@ OverflowMenu.propTypes = {
   flipped: PropTypes.bool,
 
   /**
+   * @deprecated Tab key is handled with event handler so no need for focus trap.
    * Enable or disable focus trap behavior
    */
   focusTrap: PropTypes.bool,
@@ -785,9 +788,9 @@ OverflowMenu.propTypes = {
   selectorPrimaryFocus: PropTypes.string,
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `xs`, `sm`, `md` (default) or `lg` as an option.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 };
 
 export default OverflowMenu;

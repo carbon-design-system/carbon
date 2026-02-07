@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,18 +8,18 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ComponentProps,
-  FC,
-  ForwardedRef,
   forwardRef,
-  KeyboardEvent,
-  LiHTMLAttributes,
-  MouseEvent,
-  ReactNode,
   useContext,
   useEffect,
   useRef,
   useState,
+  type ComponentProps,
+  type ElementType,
+  type ForwardedRef,
+  type KeyboardEvent,
+  type LiHTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
 } from 'react';
 import {
   useHover,
@@ -35,12 +35,13 @@ import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { warning } from '../../internal/warning.js';
+import { useId } from '../../internal/useId';
 
 import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
 import { Text } from '../Text';
+import { defaultItemToString } from '../../internal';
 
 export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -52,6 +53,11 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
    * Additional CSS class names.
    */
   className?: string;
+
+  /**
+   * Specify the message read by screen readers for the danger menu item variant
+   */
+  dangerDescription?: string;
 
   /**
    * Specify whether the MenuItem is disabled or not.
@@ -78,7 +84,7 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: FC;
+  renderIcon?: ElementType;
 
   /**
    * Provide a shortcut for the action of this MenuItem. Note that the component will only render it as a hint but not actually register the shortcut.
@@ -91,6 +97,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     {
       children,
       className,
+      dangerDescription = 'danger',
       disabled,
       kind = 'default',
       label,
@@ -232,7 +239,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
     useEffect(() => {
       if (IconElement && !context.state.hasIcons) {
-        // @ts-ignore - TODO: Should we be passing payload?
+        // @ts-expect-error - TODO: Should we be passing payload?
         context.dispatch({ type: 'enableIcons' });
       }
     }, [IconElement, context.state.hasIcons, context]);
@@ -244,6 +251,8 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         }
       });
     }, [floatingStyles, refs.floating]);
+
+    const assistiveId = useId('danger-description');
 
     return (
       <FloatingFocusManager
@@ -262,6 +271,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
+          title={label}
           {...getReferenceProps()}>
           <div className={`${prefix}--menu-item__selection-icon`}>
             {rest['aria-checked'] && <Checkmark />}
@@ -269,12 +279,14 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <div className={`${prefix}--menu-item__icon`}>
             {IconElement && <IconElement />}
           </div>
-          <Text
-            as="div"
-            className={`${prefix}--menu-item__label`}
-            title={label}>
+          <Text as="div" className={`${prefix}--menu-item__label`}>
             {label}
           </Text>
+          {isDanger && (
+            <span id={assistiveId} className={`${prefix}--visually-hidden`}>
+              {dangerDescription}
+            </span>
+          )}
           {shortcut && !hasChildren && (
             <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
           )}
@@ -314,6 +326,11 @@ MenuItem.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify the message read by screen readers for the danger menu item variant
+   */
+  dangerDescription: PropTypes.string,
+
+  /**
    * Specify whether the MenuItem is disabled or not.
    */
   disabled: PropTypes.bool,
@@ -331,19 +348,16 @@ MenuItem.propTypes = {
   /**
    * Provide an optional function to be called when the MenuItem is clicked.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   onClick: PropTypes.func,
 
   /**
    * A component used to render an icon.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Provide a shortcut for the action of this MenuItem. Note that the component will only render it as a hint but not actually register the shortcut.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   shortcut: PropTypes.string,
 };
 
@@ -381,13 +395,13 @@ export const MenuItemSelectable = forwardRef<
     defaultValue: defaultSelected ?? false,
   });
 
-  function handleClick(e) {
+  function handleClick() {
     setChecked(!checked);
   }
 
   useEffect(() => {
     if (!context.state.hasSelectableItems) {
-      // @ts-ignore - TODO: Should we be passing payload?
+      // @ts-expect-error - TODO: Should we be passing payload?
       context.dispatch({ type: 'enableSelectableItems' });
     }
   }, [context.state.hasSelectableItems, context]);
@@ -416,7 +430,6 @@ MenuItemSelectable.propTypes = {
   /**
    * Specify whether the option should be selected by default.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   defaultSelected: PropTypes.bool,
 
   /**
@@ -427,13 +440,11 @@ MenuItemSelectable.propTypes = {
   /**
    * Provide an optional function to be called when the selection state changes.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   onChange: PropTypes.func,
 
   /**
    * Pass a bool to props.selected to control the state of this option.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   selected: PropTypes.bool,
 };
 
@@ -487,8 +498,6 @@ MenuItemGroup.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const defaultItemToString = (item) => item.toString();
-
 export interface MenuItemRadioGroupProps<Item>
   extends Omit<ComponentProps<'ul'>, 'onChange'> {
   /**
@@ -502,7 +511,7 @@ export interface MenuItemRadioGroupProps<Item>
   defaultSelectedItem?: Item;
 
   /**
-   * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
+   * Converts an item into a string for display.
    */
   itemToString?: (item: Item) => string;
 
@@ -548,14 +557,14 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
     onChange,
     defaultValue: defaultSelectedItem ?? ({} as Item),
   });
-
+  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   function handleClick(item, e) {
     setSelection(item);
   }
 
   useEffect(() => {
     if (!context.state.hasSelectableItems) {
-      // @ts-ignore - TODO: Should we be passing payload?
+      // @ts-expect-error - TODO: Should we be passing payload?
       context.dispatch({ type: 'enableSelectableItems' });
     }
   }, [context.state.hasSelectableItems, context]);
@@ -593,15 +602,13 @@ MenuItemRadioGroup.propTypes = {
   defaultSelectedItem: PropTypes.any,
 
   /**
-   * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
+   * Converts an item into a string for display.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   itemToString: PropTypes.func,
 
   /**
    * Provide the options for this radio group. Can be of any type, as long as you provide an appropriate props.itemToString function.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   items: PropTypes.array,
 
   /**
@@ -612,7 +619,6 @@ MenuItemRadioGroup.propTypes = {
   /**
    * Provide an optional function to be called when the selection changes.
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   onChange: PropTypes.func,
 
   /**

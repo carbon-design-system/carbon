@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,6 @@ import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, {
   ComponentType,
   ElementType,
-  ForwardedRef,
   JSX,
   ReactNode,
   forwardRef,
@@ -72,14 +71,17 @@ export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
 export interface SideNavLinkComponent {
   <E extends ElementType = 'a'>(props: SideNavLinkProps<E>): JSX.Element | null;
   displayName?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: WeakValidationMap<SideNavLinkProps<any>>;
 }
 
 // First define a non-generic base component to work with forwardRef
 type SideNavLinkPropsWithoutRef = Omit<SideNavLinkProps<'a'>, 'ref'>;
 
-const SideNavLinkBase = (
-  {
+const frFn = forwardRef<HTMLAnchorElement, SideNavLinkPropsWithoutRef>;
+
+const SideNavLink = frFn((props, ref) => {
+  const {
     children,
     className: customClassName,
     renderIcon: IconElement,
@@ -88,9 +90,7 @@ const SideNavLinkBase = (
     large = false,
     tabIndex,
     ...rest
-  }: SideNavLinkPropsWithoutRef,
-  ref: ForwardedRef<HTMLAnchorElement>
-) => {
+  } = props;
   const isRail = useContext(SideNavContext);
 
   const prefix = usePrefix();
@@ -122,12 +122,8 @@ const SideNavLinkBase = (
       </Link>
     </SideNavItem>
   );
-};
-
-// Use forwardRef with the non-generic function and cast to the generic component type
-const SideNavLink = forwardRef(
-  SideNavLinkBase
-) as unknown as SideNavLinkComponent;
+  // Cast preserves the generic call signature for consumers after forwardRef.
+}) as SideNavLinkComponent;
 
 SideNavLink.displayName = 'SideNavLink';
 SideNavLink.propTypes = {
@@ -171,7 +167,7 @@ SideNavLink.propTypes = {
   tabIndex: PropTypes.number,
 };
 
-// eslint-disable-next-line react/display-name
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const createCustomSideNavLink = (element) => (props) => {
   return <SideNavLink element={element} {...props} />;
 };

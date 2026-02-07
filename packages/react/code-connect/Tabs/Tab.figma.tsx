@@ -1,9 +1,10 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 // @ts-nocheck
 import React from 'react';
 import { Tab, IconTab } from '@carbon/react';
@@ -21,24 +22,23 @@ const sharedTabProps = {
   icon: figma.instance('Swap icon'),
 };
 
-'',
-  figma.connect(
-    Tab,
-    'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5658-278361&t=wcK3P98b09VsrxXF-4',
-    {
-      variant: { Type: 'Text + Icon' },
-      props: sharedTabProps,
-      example: ({ label, disabled, renderIcon }) => (
-        <Tab disabled={disabled} renderIcon={renderIcon}>
-          {label}
-        </Tab>
-      ),
-    }
-  );
+figma.connect(
+  Tab,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
+  {
+    variant: { Type: 'Text + Icon' },
+    props: sharedTabProps,
+    example: ({ label, disabled, renderIcon }) => (
+      <Tab disabled={disabled} renderIcon={renderIcon}>
+        {label}
+      </Tab>
+    ),
+  }
+);
 
 figma.connect(
   Tab,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5658-278361&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
   {
     variant: {
       Type: 'Text + Icon',
@@ -59,7 +59,7 @@ figma.connect(
 
 figma.connect(
   IconTab,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5658-278361&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
   {
     variant: { Type: 'Icon only' },
     props: sharedTabProps,

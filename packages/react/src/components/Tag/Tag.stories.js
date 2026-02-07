@@ -15,6 +15,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import '../AILabel/ailabel-story.scss';
 import mdx from './Tag.mdx';
+import './story.scss';
 
 export default {
   title: 'Components/Tag',
@@ -111,7 +112,19 @@ ReadOnly.argTypes = {
     },
   },
   type: {
-    control: false,
+    options: [
+      'red',
+      'blue',
+      'cyan',
+      'teal',
+      'green',
+      'gray',
+      'high-contrast',
+      'outline',
+    ],
+    control: {
+      type: 'select',
+    },
   },
 };
 
@@ -125,58 +138,13 @@ Skeleton.args = {
   size: 'md',
 };
 
-Skeleton.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
+Skeleton.parameters = {
+  controls: {
+    exclude: ['disabled', 'filter', 'id', 'renderIcon', 'title', 'type'],
   },
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  disabled: {
-    table: {
-      disable: true,
-    },
-  },
+};
 
-  filter: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    table: {
-      disable: true,
-    },
-  },
-  renderIcon: {
-    table: {
-      disable: true,
-    },
-  },
-  title: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
-  },
+Skeleton.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: {
@@ -185,7 +153,7 @@ Skeleton.argTypes = {
   },
 };
 
-export const withAILabel = () => {
+export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">
       <AILabelContent>
@@ -223,8 +191,9 @@ export const withAILabel = () => {
         decorator={aiLabel}
         className="some-class"
         type="red"
-        title="Clear Filter">
-        {'Tag'}
+        title="Clear Filter"
+        {...args}>
+        {args.text}
       </Tag>
 
       <DismissibleTag
@@ -232,15 +201,16 @@ export const withAILabel = () => {
         className="some-class"
         type="purple"
         title="Clear Filter"
-        text="Tag"></DismissibleTag>
+        {...args}></DismissibleTag>
 
       <Tag
         renderIcon={Asleep}
         decorator={aiLabel}
         className="some-class"
         type="blue"
-        title="Clear Filter">
-        {'Tag'}
+        title="Clear Filter"
+        {...args}>
+        {args.text}
       </Tag>
 
       <DismissibleTag
@@ -249,7 +219,76 @@ export const withAILabel = () => {
         className="some-class"
         type="green"
         title="Clear Filter"
-        text="Tag"></DismissibleTag>
+        {...args}></DismissibleTag>
     </div>
   );
+};
+
+withAILabel.args = {
+  disabled: false,
+  size: 'md',
+  text: 'Tag content',
+};
+
+withAILabel.argTypes = {
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  decorator: {
+    control: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  filter: {
+    control: false,
+  },
+  id: {
+    control: false,
+  },
+  renderIcon: {
+    control: false,
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: {
+      type: 'select',
+    },
+  },
+  title: {
+    control: {
+      type: 'text',
+    },
+  },
+  type: {
+    options: [
+      'red',
+      'blue',
+      'cyan',
+      'teal',
+      'green',
+      'gray',
+      'high-contrast',
+      'outline',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  text: {
+    control: {
+      type: 'text',
+    },
+  },
+};
+
+withAILabel.parameters = {
+  controls: {
+    exclude: ['filter'],
+  },
 };

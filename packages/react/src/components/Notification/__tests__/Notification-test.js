@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import {
   StaticNotification,
   Callout,
 } from '../Notification';
+import { Link } from '../../Link';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -342,6 +343,28 @@ describe('ActionableNotification', () => {
     });
   });
 
+  it('includes children elements within the focusWrap', async () => {
+    render(
+      <ActionableNotification actionButtonLabel="My custom action">
+        <Link href="#">link1</Link>
+        <Link href="#">link2</Link>
+      </ActionableNotification>
+    );
+
+    // actionButton should have focus on initial render
+    const actionButton = screen.getByRole('button', {
+      name: 'My custom action',
+    });
+    expect(actionButton).toHaveFocus();
+
+    // shift tab because link is before action button
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole('link', { name: 'link2' })).toHaveFocus();
+
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole('link', { name: 'link1' })).toHaveFocus();
+  });
+
   it('supports `title`, `subtitle`, `caption` props', () => {
     render(
       <ActionableNotification
@@ -397,6 +420,9 @@ describe('Callout', () => {
     });
     await userEvent.click(closeButton);
     expect(onActionButtonClick).toHaveBeenCalledTimes(1);
+    expect(onActionButtonClick.mock.calls).toEqual([
+      [expect.objectContaining({ type: 'click' })],
+    ]);
   });
 
   it('interpolates matching className based on kind prop', () => {

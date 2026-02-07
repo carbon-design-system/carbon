@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ChevronDown } from '@carbon/icons-react';
@@ -15,6 +15,7 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   useFloating,
   flip,
@@ -23,24 +24,27 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
-import { TranslateWithId } from '../../types/common';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import type { TFunc, TranslateWithId } from '../../types/common';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
-const defaultTranslations = {
-  'carbon.combo-button.additional-actions': 'Additional actions',
+const translationIds = {
+  'carbon.combo-button.additional-actions':
+    'carbon.combo-button.additional-actions',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.combo-button.additional-actions']]:
+    'Additional actions',
 };
 
-/**
- * Message ids that will be passed to translateWithId().
- */
-export type TranslationKey = keyof typeof defaultTranslations;
-
-function defaultTranslateWithId(messageId: string) {
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
   return defaultTranslations[messageId];
-}
+};
 
 interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   /**
@@ -76,7 +80,7 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   /**
    * Specify the size of the buttons and menu.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify how the trigger tooltip should be aligned.
@@ -109,6 +113,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     let middlewares: any[] = [];
 
     if (!enableOnlyFloatingStyles) {
@@ -147,7 +152,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       handleClose,
     } = useAttachedMenu(containerRef);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const updatedFloatingStyles = {
         ...floatingStyles,
         visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
@@ -273,7 +278,7 @@ ComboButton.propTypes = {
   /**
    * Specify the size of the buttons and menu.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify how the trigger tooltip should be aligned.
@@ -324,8 +329,7 @@ ComboButton.propTypes = {
   ),
 
   /**
-   * Optional method that takes in a message id and returns an
-   * internationalized string.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };
