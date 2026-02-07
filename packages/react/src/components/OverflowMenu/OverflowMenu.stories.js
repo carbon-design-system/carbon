@@ -43,6 +43,27 @@ export const Default = (args) => (
   </OverflowMenu>
 );
 
+export const InsideScrollableContainer = (args) => (
+  <div
+    style={{
+      maxHeight: '300px',
+      overflow: 'auto',
+      border: '1px solid #e0e0e0',
+      width: '300px',
+    }}>
+    <div style={{ height: '10000px', backgroundColor: 'lightblue' }}>
+      <OverflowMenu aria-label="overflow-menu" {...args}>
+        <OverflowMenuItem itemText="Stop app" />
+        <OverflowMenuItem itemText="Restart app" />
+        <OverflowMenuItem itemText="Rename app" />
+        <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+        <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+        <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+      </OverflowMenu>
+    </div>
+  </div>
+);
+
 Default.args = {
   flipped: document?.dir === 'rtl',
   focusTrap: false,
