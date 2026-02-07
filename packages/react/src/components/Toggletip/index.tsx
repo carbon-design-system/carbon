@@ -8,15 +8,16 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  type ElementType,
+  forwardRef,
   useContext,
+  useEffect,
   useRef,
   useState,
-  useEffect,
-  type ReactNode,
   type ComponentProps,
-  type KeyboardEventHandler,
+  type ElementType,
   type FocusEventHandler,
+  type KeyboardEventHandler,
+  type ReactNode,
 } from 'react';
 import { Popover, PopoverContent, type PopoverBaseProps } from '../Popover';
 import { match, keys } from '../../internal/keyboard';
@@ -248,8 +249,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
-
-export const ToggletipButton = React.forwardRef(function ToggletipButton<
+export const ToggletipButton = forwardRef(function ToggletipButton<
   T extends React.ElementType,
 >(
   {
@@ -312,15 +312,16 @@ export interface ToggletipContentProps {
   className?: string;
 }
 
+const frFn = forwardRef<HTMLDivElement, ToggletipContentProps>;
+
 /**
  * `ToggletipContent` is a wrapper around `PopoverContent`. It places the
  * `children` passed in as a prop inside of `PopoverContent` so that they will
  * be rendered inside of the popover for this component.
  */
-const ToggletipContent = React.forwardRef<
-  HTMLDivElement,
-  ToggletipContentProps
->(function ToggletipContent({ children, className: customClassName }, ref) {
+const ToggletipContent = frFn((props, ref) => {
+  const { children, className: customClassName } = props;
+
   const toggletip = useToggletip();
   const prefix = usePrefix();
   return (

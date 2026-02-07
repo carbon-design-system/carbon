@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, {
+  forwardRef,
   InputHTMLAttributes,
   ReactNode,
   useContext,
@@ -175,7 +176,7 @@ export interface PasswordInputProps
   warnText?: ReactNode;
 }
 
-const PasswordInput = React.forwardRef(
+const PasswordInput = forwardRef<unknown, PasswordInputProps>(
   (
     {
       className,
@@ -202,7 +203,7 @@ const PasswordInput = React.forwardRef(
       warn = false,
       warnText,
       ...rest
-    }: PasswordInputProps,
+    },
     ref
   ) => {
     const [inputType, setInputType] = useState(type);
@@ -221,8 +222,7 @@ const PasswordInput = React.forwardRef(
 
     const handleTogglePasswordVisibility = (event) => {
       setInputType(inputType === 'password' ? 'text' : 'password');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      onTogglePasswordVisibility && onTogglePasswordVisibility(event);
+      onTogglePasswordVisibility?.(event);
     };
     const textInputClasses = classNames(
       `${prefix}--text-input`,
@@ -294,16 +294,16 @@ const PasswordInput = React.forwardRef(
       [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
     });
 
-    const label = labelText ? (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
-    ) : null;
-    const helper = helperText ? (
+    );
+    const helper = typeof helperText !== 'undefined' && helperText !== null && (
       <div id={normalizedProps.helperId} className={helperTextClasses}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     const passwordIsVisible = inputType === 'text';
     const passwordVisibilityIcon = passwordIsVisible ? (

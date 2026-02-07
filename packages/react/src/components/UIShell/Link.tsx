@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { WeakValidationMap } from 'prop-types';
-import React, { ForwardedRef, JSX, type ElementType } from 'react';
+import React, { forwardRef, JSX, type ElementType } from 'react';
 import { deprecate } from '../../prop-types/deprecate';
 import { PolymorphicProps } from '../../types/common';
 
@@ -34,24 +34,22 @@ export interface LinkComponent {
 // First define the component without generics
 type LinkPropsWithoutRef = Omit<LinkProps<'a'>, 'ref'>;
 
-const LinkBase = (
-  {
+const frFn = forwardRef<HTMLAnchorElement, LinkPropsWithoutRef>;
+
+const Link = frFn((props, ref) => {
+  const {
     element,
     as: BaseComponent,
     // Captured here to prevent it from being passed into the created element.
     // See https://github.com/carbon-design-system/carbon/issues/3970
     isSideNavExpanded: _isSideNavExpanded,
     ...rest
-  }: LinkPropsWithoutRef,
-  ref: ForwardedRef<HTMLAnchorElement>
-) => {
+  } = props;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const BaseComponentAsAny = (BaseComponent ?? element ?? 'a') as any;
   return <BaseComponentAsAny ref={ref} {...rest} />;
-};
-
-// Use forwardRef with the non-generic function
-const Link = React.forwardRef(LinkBase) as unknown as LinkComponent;
+}) as LinkComponent;
 
 /**
  * Link is a custom component that allows us to supporting rendering elements

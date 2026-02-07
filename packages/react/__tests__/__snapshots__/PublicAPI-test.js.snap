@@ -2603,6 +2603,9 @@ Map {
                   "isRequired": true,
                   "type": "node",
                 },
+                "isSortable": {
+                  "type": "bool",
+                },
                 "key": {
                   "isRequired": true,
                   "type": "string",
@@ -6389,6 +6392,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -6781,7 +6787,7 @@ Map {
         "type": "string",
       },
       "label": {
-        "type": "node",
+        "type": "string",
       },
       "labelClassName": {
         "type": "string",

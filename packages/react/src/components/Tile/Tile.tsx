@@ -6,7 +6,9 @@
  */
 
 import React, {
+  Children,
   cloneElement,
+  forwardRef,
   useCallback,
   useEffect,
   useRef,
@@ -752,10 +754,7 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   tilePadding?: number;
 }
 
-export const ExpandableTile = React.forwardRef<
-  HTMLElement,
-  ExpandableTileProps
->(
+export const ExpandableTile = forwardRef<HTMLElement, ExpandableTileProps>(
   (
     {
       tabIndex = 0,
@@ -778,15 +777,10 @@ export const ExpandableTile = React.forwardRef<
     },
     forwardRef
   ) => {
-    const [isTileMaxHeight, setIsTileMaxHeight] =
-      useState<number>(tileMaxHeight);
-    const [isTilePadding, setIsTilePadding] = useState<number>(tilePadding);
-    const [prevExpanded, setPrevExpanded] = useState<boolean>(expanded);
-    const [prevTileMaxHeight, setPrevTileMaxHeight] =
-      useState<number>(tileMaxHeight);
-    const [prevTilePadding, setPrevTilePadding] = useState<number>(tilePadding);
-    const [isExpanded, setIsExpanded] = useState<boolean>(expanded);
-    const [interactive, setInteractive] = useState<boolean>(true);
+    const [measuredAboveHeight, setMeasuredAboveHeight] = useState(0);
+    const [measuredPadding, setMeasuredPadding] = useState(0);
+    const [isExpanded, setIsExpanded] = useState(expanded);
+    const [interactive, setInteractive] = useState(true);
     const aboveTheFold = useRef<HTMLDivElement>(null);
     const belowTheFold = useRef<HTMLDivElement>(null);
     const chevronInteractiveRef = useRef<HTMLButtonElement>(null);
@@ -795,39 +789,15 @@ export const ExpandableTile = React.forwardRef<
     const ref = useMergedRefs([forwardRef, tile]);
     const prefix = usePrefix();
 
-    if (expanded !== prevExpanded) {
+    useEffect(() => {
       setIsExpanded(expanded);
-      setPrevExpanded(expanded);
-      setMaxHeight();
-    }
+    }, [expanded]);
 
-    if (tileMaxHeight !== prevTileMaxHeight) {
-      setIsTileMaxHeight(tileMaxHeight);
-      setPrevTileMaxHeight(tileMaxHeight);
-    }
+    const handleClick = () => {
+      setIsExpanded((prev) => !prev);
+    };
 
-    if (tilePadding !== prevTilePadding) {
-      setIsTilePadding(tilePadding);
-      setPrevTilePadding(tilePadding);
-    }
-
-    function setMaxHeight() {
-      if (isExpanded && tileContent.current) {
-        setIsTileMaxHeight(tileContent.current.getBoundingClientRect()?.height);
-      }
-
-      if (aboveTheFold.current) {
-        setIsTileMaxHeight(aboveTheFold.current.getBoundingClientRect().height);
-      }
-    }
-
-    function handleClick(evt: MouseEvent) {
-      evt?.persist?.();
-      setIsExpanded(!isExpanded);
-      setMaxHeight();
-    }
-
-    function handleKeyUp(evt: KeyboardEvent) {
+    const handleKeyUp = (evt: KeyboardEvent) => {
       if (
         evt.target !== tile.current &&
         evt.target !== chevronInteractiveRef.current
@@ -836,11 +806,7 @@ export const ExpandableTile = React.forwardRef<
           evt.preventDefault();
         }
       }
-    }
-
-    function getChildren() {
-      return React.Children.toArray(children);
-    }
+    };
 
     const classNames = cx(
       `${prefix}--tile`,
@@ -853,18 +819,14 @@ export const ExpandableTile = React.forwardRef<
     );
 
     const interactiveClassNames = cx(
-      `${prefix}--tile`,
-      `${prefix}--tile--expandable`,
+      classNames,
       `${prefix}--tile--expandable--interactive`,
       {
-        [`${prefix}--tile--is-expanded`]: isExpanded,
-        [`${prefix}--tile--light`]: light,
         [`${prefix}--tile--slug`]: slug,
         [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
         [`${prefix}--tile--decorator`]: decorator,
         [`${prefix}--tile--decorator-rounded`]: decorator && hasRoundedCorners,
-      },
-      className
+      }
     );
 
     const chevronInteractiveClassNames = cx(
@@ -872,43 +834,37 @@ export const ExpandableTile = React.forwardRef<
       `${prefix}--tile__chevron--interactive`
     );
 
-    const childrenAsArray = getChildren();
+    const childrenAsArray = Children.toArray(children);
 
     useIsomorphicEffect(() => {
       if (!tile.current || !aboveTheFold.current) {
         return;
       }
 
-      const getStyle = window.getComputedStyle(tile.current, null);
-      const { current: node } = aboveTheFold;
-      const { height } = node.getBoundingClientRect();
-      const paddingTop = parseInt(getStyle.getPropertyValue('padding-top'), 10);
-      const paddingBottom = parseInt(
-        getStyle.getPropertyValue('padding-bottom'),
-        10
-      );
+      const style = window.getComputedStyle(tile.current);
+      const paddingTop =
+        parseInt(style.getPropertyValue('padding-top'), 10) || 0;
+      const paddingBottom =
+        parseInt(style.getPropertyValue('padding-bottom'), 10) || 0;
 
-      setIsTileMaxHeight(height);
-      setIsTilePadding(paddingTop + paddingBottom);
-    }, [isTileMaxHeight]);
+      setMeasuredPadding(paddingTop + paddingBottom);
+      setMeasuredAboveHeight(aboveTheFold.current.scrollHeight);
+    }, []);
 
     useIsomorphicEffect(() => {
       if (!aboveTheFold.current || !belowTheFold.current) {
         return;
       }
 
-      // Interactive elements or elements that are given a role should be treated
-      // the same because elements with a role can not be rendered inside a `button`
-      if (
-        !getInteractiveContent(belowTheFold.current) &&
-        !getRoleContent(belowTheFold.current) &&
-        !getInteractiveContent(aboveTheFold.current) &&
-        !getRoleContent(aboveTheFold.current) &&
-        !(slug || decorator)
-      ) {
-        setInteractive(false);
-      }
-    }, [slug, decorator]);
+      const hasInteractive =
+        Boolean(getInteractiveContent(aboveTheFold.current)) ||
+        Boolean(getRoleContent(aboveTheFold.current)) ||
+        Boolean(getInteractiveContent(belowTheFold.current)) ||
+        Boolean(getRoleContent(belowTheFold.current)) ||
+        Boolean(slug || decorator);
+
+      setInteractive(hasInteractive);
+    }, [slug, decorator, children]);
 
     useIsomorphicEffect(() => {
       if (!tile.current) {
@@ -917,26 +873,42 @@ export const ExpandableTile = React.forwardRef<
 
       if (isExpanded) {
         tile.current.style.maxHeight = '';
-      } else {
-        tile.current.style.maxHeight = isTileMaxHeight + isTilePadding + 'px';
+        return;
       }
-    }, [isExpanded, isTileMaxHeight, isTilePadding]);
+
+      const measured =
+        measuredAboveHeight || aboveTheFold.current?.scrollHeight || 0;
+      const baseHeight = tileMaxHeight > 0 ? tileMaxHeight : measured;
+      const pad = tilePadding > 0 ? tilePadding : measuredPadding;
+
+      tile.current.style.maxHeight = `${baseHeight + pad}px`;
+    }, [
+      isExpanded,
+      tileMaxHeight,
+      tilePadding,
+      measuredAboveHeight,
+      measuredPadding,
+    ]);
 
     useEffect(() => {
       if (!aboveTheFold.current) {
         return;
       }
 
-      const resizeObserver = new ResizeObserver((entries) => {
-        const [aboveTheFold] = entries;
-        setIsTileMaxHeight(aboveTheFold.contentRect.height);
+      const resizeObserver = new ResizeObserver(() => {
+        if (aboveTheFold.current) {
+          setMeasuredAboveHeight(aboveTheFold.current.scrollHeight);
+        }
       });
+
       resizeObserver.observe(aboveTheFold.current);
 
       return () => resizeObserver.disconnect();
-    }, [isTileMaxHeight, isTilePadding]);
+    }, []);
 
-    const belowTheFoldId = useId('expandable-tile-interactive');
+    const belowTheFoldId = useId(
+      interactive ? 'expandable-tile-interactive' : 'expandable-tile'
+    );
 
     // AILabel is always size `xs`
     const candidate = slug ?? decorator;
@@ -989,6 +961,7 @@ export const ExpandableTile = React.forwardRef<
         type="button"
         ref={ref as Ref<HTMLButtonElement>}
         className={classNames}
+        aria-controls={belowTheFoldId}
         aria-expanded={isExpanded}
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
@@ -1003,7 +976,10 @@ export const ExpandableTile = React.forwardRef<
             <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
             <ChevronDown />
           </div>
-          <div ref={belowTheFold} className={`${prefix}--tile-content`}>
+          <div
+            ref={belowTheFold}
+            id={belowTheFoldId}
+            className={`${prefix}--tile-content`}>
             {childrenAsArray[1]}
           </div>
         </div>

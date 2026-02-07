@@ -152,10 +152,9 @@ export interface DropdownProps<ItemType>
   invalidText?: ReactNode;
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
-  itemToElement?: React.JSXElementConstructor<ItemType> | null;
+  itemToElement?: ((item: ItemType) => NonNullable<ReactNode>) | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -506,8 +505,6 @@ const Dropdown = React.forwardRef(
       }
     );
 
-    // needs to be Capitalized for react to render it correctly
-    const ItemToElement = itemToElement;
     const toggleButtonProps = getToggleButtonProps({
       'aria-label': ariaLabel || deprecatedAriaLabel,
     });
@@ -536,16 +533,22 @@ const Dropdown = React.forwardRef(
 
     const onKeyDownHandler = useCallback(
       (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (
-          evt.code !== 'Space' ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+        const navigationKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+
+        // If the key is not a navigation key, the user is typing
+        if (!navigationKeys.includes(evt.key)) {
           setIsTyping(true);
-        }
-        if (
-          (isTyping && evt.code === 'Space') ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+          // Reset the timer for typing timeout
+          if (currTimer) {
+            clearTimeout(currTimer);
+          }
+          setCurrTimer(
+            setTimeout(() => {
+              setIsTyping(false);
+            }, 3000)
+          );
+        } else if (isTyping && evt.key === ' ') {
+          // If user is typing and presses space, reset the timer
           if (currTimer) {
             clearTimeout(currTimer);
           }
@@ -555,6 +558,7 @@ const Dropdown = React.forwardRef(
             }, 3000)
           );
         }
+
         if (['ArrowDown'].includes(evt.key)) {
           setIsFocused(false);
         }
@@ -699,30 +703,21 @@ const Dropdown = React.forwardRef(
           <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
-                const isObject = item !== null && typeof item === 'object';
                 const itemProps = getItemProps({
                   item,
                   index,
                 });
-                const title =
-                  isObject && 'text' in item && itemToElement
-                    ? item.text
-                    : itemToString(item);
+                const title = itemToString(item);
+
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
                     isActive={selectedItem === item}
                     isHighlighted={highlightedIndex === index}
-                    title={title as string}
+                    title={title}
                     disabled={itemProps['aria-disabled']}
                     {...itemProps}>
-                    {typeof item === 'object' &&
-                    ItemToElement !== undefined &&
-                    ItemToElement !== null ? (
-                      <ItemToElement key={itemProps.id} {...item} />
-                    ) : (
-                      itemToString(item)
-                    )}
+                    {itemToElement ? itemToElement(item) : itemToString(item)}
                     {selectedItem === item && (
                       <Checkmark
                         className={`${prefix}--list-box__menu-item__selected-icon`}
@@ -843,8 +838,7 @@ Dropdown.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 

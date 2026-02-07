@@ -20,7 +20,6 @@ import React, {
   isValidElement,
   useCallback,
   useContext,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -63,6 +62,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const {
   ItemClick,
@@ -178,10 +178,9 @@ export interface MultiSelectProps<ItemType>
   invalidText?: ReactNode;
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
-  itemToElement?: React.JSXElementConstructor<ItemType>;
+  itemToElement?: ((item: ItemType) => NonNullable<ReactNode>) | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -388,7 +387,7 @@ export const MultiSelect = React.forwardRef(
         : {}
     );
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       if (enableFloatingStyles) {
         const updatedFloatingStyles = {
           ...floatingStyles,
@@ -586,10 +585,6 @@ export const MultiSelect = React.forwardRef(
       [`${prefix}--autoalign`]: enableFloatingStyles,
       [`${prefix}--multi-select--selectall`]: selectAll,
     });
-
-    // needs to be capitalized for react to render it correctly
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const ItemToElement = itemToElement!;
 
     if (selectionFeedback === 'fixed') {
       sortOptions.selectedItems = [];
@@ -880,11 +875,7 @@ export const MultiSelect = React.forwardRef(
                       <Checkbox
                         id={`${itemProps.id}__checkbox`}
                         labelText={
-                          itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemText
-                          )
+                          itemToElement ? itemToElement(item) : itemText
                         }
                         checked={isChecked}
                         title={useTitleInItem ? itemText : undefined}
@@ -1020,8 +1011,7 @@ MultiSelect.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 

@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   forwardRef,
-  useLayoutEffect,
   useRef,
   useState,
   type ForwardedRef,
@@ -29,6 +28,7 @@ import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { PopoverAlignment } from '../Popover';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export interface DismissibleTagBaseProps {
   /**
@@ -138,7 +138,7 @@ const DismissibleTag = forwardRef(
     const tagClasses = classNames(`${prefix}--tag--filter`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagLabelRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];

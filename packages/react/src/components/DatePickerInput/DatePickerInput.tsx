@@ -11,8 +11,8 @@ import cx from 'classnames';
 import PropTypes, { ReactElementLike } from 'prop-types';
 import React, {
   cloneElement,
+  forwardRef,
   useContext,
-  type ForwardedRef,
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
@@ -151,10 +151,9 @@ export interface DatePickerInputProps
   warnText?: ReactNodeLike;
 }
 
-const DatePickerInput = React.forwardRef(function DatePickerInput(
-  props: DatePickerInputProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+const frFn = forwardRef<HTMLDivElement, DatePickerInputProps>;
+
+const DatePickerInput = frFn((props, ref) => {
   const {
     datePickerType,
     decorator,

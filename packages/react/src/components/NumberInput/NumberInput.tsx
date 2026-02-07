@@ -926,10 +926,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-                  match(e, keys.ArrowUp) && handleStep(e, 'up');
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-                  match(e, keys.ArrowDown) && handleStep(e, 'down');
+                  if (match(e, keys.ArrowUp)) {
+                    handleStep(e, 'up');
+                  } else if (match(e, keys.ArrowDown)) {
+                    handleStep(e, 'down');
+                  }
                 }
 
                 if (rest?.onKeyDown) {

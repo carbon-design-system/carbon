@@ -35,21 +35,9 @@ export const AILabelContent = ({
 }: AILabelContentProps) => {
   const prefix = usePrefix();
 
-  const hasAILabelActions = React.Children.toArray(children).some((child) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const item = child as any;
-    // TODO: Is there supposed to be a `return` here? If so, this issue would
-    // have been caught by ESLint. It's concerning that this code is 7 months
-    // old and no one has noticed any issues with it. It also makes me question
-    // whether the code is necessary.
-    // https://github.com/carbon-design-system/carbon/issues/18991
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    item.type === AILabelActions;
-  });
-
   const aiLabelContentClasses = cx(className, {
     [`${prefix}--ai-label-content`]: true,
-    [`${prefix}--ai-label-content--with-actions`]: hasAILabelActions,
+    [`${prefix}--ai-label-content--with-actions`]: false,
   });
 
   return (

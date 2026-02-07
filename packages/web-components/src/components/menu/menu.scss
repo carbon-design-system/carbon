@@ -22,6 +22,10 @@ $css--plex: true !default;
   --display-icon-item: none;
   --display-selection-icon: none;
   --block-size-value: #{$spacing-07};
+
+  &:not([open]) {
+    pointer-events: none;
+  }
 }
 .#{$prefix}--menu--with-icons {
   --grid-template: #{$spacing-05} 1fr max-content;
@@ -39,7 +43,10 @@ $css--plex: true !default;
 .#{$prefix}--menu {
   @extend .#{$prefix}--menu;
 
+  opacity: 0;
   overflow-y: auto;
+  pointer-events: none;
+  visibility: hidden;
 
   &--shown {
     opacity: 1;
@@ -56,8 +63,10 @@ $css--plex: true !default;
   &--with-icons {
     min-inline-size: 12rem;
   }
-  &:not(.#{$prefix}--menu--open) .#{$prefix}--menu--open {
-    visibility: hidden;
+
+  // Only allow interaction once the menu is both open and positioned.
+  &--open.#{$prefix}--menu--shown {
+    pointer-events: auto;
   }
 
   &--border {
