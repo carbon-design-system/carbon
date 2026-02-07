@@ -158,7 +158,7 @@ describe('PaginationNav', () => {
       );
 
       expect(
-        document.querySelector('.cds--popover--right-end')
+        document.querySelector('.cds--popover--right')
       ).toBeInTheDocument();
     });
   });
