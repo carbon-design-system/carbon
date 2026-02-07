@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
@@ -13,6 +13,8 @@ import '../tooltip/index';
 import '../button/index';
 import CDSButton from '../button/button';
 import { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
+import tooltipStyles from '../tooltip/tooltip.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './icon-button.scss?lit';
 
 export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
@@ -62,13 +64,23 @@ class CDSIconButton extends CDSButton {
    * Specify the duration in milliseconds to delay before hiding the tooltip
    */
   @property({ attribute: 'leave-delay-ms', type: Number })
-  leaveDelayMs = 300;
+  leaveDelayMs = 100;
 
   /**
    * Specify the size of the Button. Defaults to `md`.
    */
   @property({ reflect: true })
   size = 'md';
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      tooltipStyles,
+      buttonStyles,
+      styles,
+    ]);
+  }
 
   updated(changedProperties) {
     super.updated?.(changedProperties);
@@ -90,7 +102,7 @@ class CDSIconButton extends CDSButton {
 
   protected _renderTooltipContent() {
     return html`
-      <cds-tooltip-content>
+      <cds-tooltip-content ?hidden=${this.disabled}>
         <slot name="tooltip-content"></slot>
       </cds-tooltip-content>
     `;
@@ -110,15 +122,14 @@ class CDSIconButton extends CDSButton {
         ?autoalign=${autoalign}
         align=${align}
         ?defaultOpen=${defaultOpen}
-        close-on-activation="${closeOnActivation}"
+        ?closeOnActivation=${closeOnActivation}
         enter-delay-ms=${enterDelayMs}
-        leave-delay-ms=${leaveDelayMs}>
+        leave-delay-ms=${leaveDelayMs}
+        .dropShadow=${false}>
         ${super.render()} ${this._renderTooltipContent()}
       </cds-tooltip>
     `;
   }
-
-  static styles = styles;
 }
 
 export default CDSIconButton;

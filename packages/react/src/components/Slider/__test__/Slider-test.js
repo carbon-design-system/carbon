@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Slider } from '../Slider';
+import Slider from '../Slider';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '@testing-library/react';
 
@@ -277,6 +277,62 @@ describe('Slider', () => {
       const theInput = screen.getByRole('spinbutton');
       await type(theInput, '{selectall}3');
       expect(onChange).toHaveBeenCalledTimes(0);
+    });
+
+    it('should not have warning if disabled', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+      const sliderInput = screen.getByRole('spinbutton');
+      const warnMessage = screen.queryByText('Warning message');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should not have warning if readOnly', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+      const sliderInput = screen.getByRole('spinbutton');
+      const warnMessage = screen.queryByText('Warning message');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should not be invalid if disabled', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        disabled: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+      const sliderInput = screen.getByRole('spinbutton');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
+    });
+
+    it('should not be invalid if readOnly', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+      const sliderInput = screen.getByRole('spinbutton');
+      expect(sliderInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(sliderInput).not.toHaveAttribute('aria-invalid', 'true');
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
     });
 
     describe('Error handling, expected behavior from event handlers', () => {
@@ -1010,6 +1066,87 @@ describe('Slider', () => {
         value: 0,
         valueUpper: 435,
       });
+    });
+
+    it('should not display warn if disabled', () => {
+      renderTwoHandleSlider({
+        disabled: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+      const warnMessage = screen.queryByText('Warning message');
+      expect(warnMessage).not.toBeInTheDocument();
+      expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('should not display warn if readOnly', () => {
+      renderTwoHandleSlider({
+        readOnly: true,
+        warn: true,
+        warnText: 'Warning message',
+      });
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+      const warnMessage = screen.queryByText('Warning message');
+      expect(warnMessage).not.toBeInTheDocument();
+      expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('should not display invalid message if disabled', () => {
+      renderTwoHandleSlider({
+        disabled: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
+      expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('should not display invalid message if readOnly', () => {
+      renderTwoHandleSlider({
+        readOnly: true,
+        invalid: true,
+        invalidText: 'Error message',
+      });
+
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+      const invalidMessage = screen.queryByText('Error message');
+      expect(invalidMessage).not.toBeInTheDocument();
+      expect(lowerInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('data-invalid', 'true');
+      expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+      expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
     });
 
     describe('Error handling, expected behavior from event handlers', () => {

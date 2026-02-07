@@ -1,6 +1,5 @@
 //prettier-ignore
 import React from 'react';
-import type { FC } from 'react';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 interface MenuItem {
@@ -13,7 +12,7 @@ interface Props {
   items: MenuItem[];
 }
 
-const TestComponent: FC<Props> = ({ items }) => {
+const TestComponent = ({ items }: Props) => {
   return (
     <div>
       {/* Old API usage - mapped items */}

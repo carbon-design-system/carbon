@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -15,44 +15,10 @@ import { MODAL_SIZE } from './defs';
 import styles from './modal.scss?lit';
 import { selectorTabbable } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import '../inline-loading';
+import CDSModalFooter from './modal-footer';
 
 export { MODAL_SIZE };
-
-const PRECEDING =
-  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-
-const FOLLOWING =
-  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
-
-/**
- * Tries to focus on the given elements and bails out if one of them is successful.
- *
- * @param elems The elements.
- * @param reverse `true` to go through the list in reverse order.
- * @returns `true` if one of the attempts is successful, `false` otherwise.
- */
-function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
-  if (!reverse) {
-    for (let i = 0; i < elems.length; ++i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  } else {
-    for (let i = elems.length - 1; i >= 0; --i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
 
 /**
  * Modal.
@@ -72,16 +38,24 @@ class CDSModal extends HostListenerMixin(LitElement) {
   private _launcher: Element | null = null;
 
   /**
-   * Node to track focus going outside of modal content.
+   * The inline loading element that renders when `loading-status` is not `inactive`
    */
-  @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
+  private _loadingEl: HTMLElement | null = null;
 
   /**
-   * Node to track focus going outside of modal content.
+   * MutationObserver that observes the modal-footer
    */
-  @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
+  private _footerObserver?: MutationObserver;
+
+  /**
+   * MutationObserver that observes the modal-header
+   */
+  private _headerObserver?: MutationObserver;
+
+  /**
+   * Loading statuses that are not `inactive`
+   */
+  private WORKING_LOADING_STATUSES = ['active', 'finished', 'error'];
 
   /**
    * Handles `click` event on this element.
@@ -102,92 +76,50 @@ class CDSModal extends HostListenerMixin(LitElement) {
   };
 
   /**
-   * Handles `blur` event on this element.
+   * Handle the keydown event.
+   * Trap the focus inside the side-panel by tracking keydown.key == `Tab`
    *
-   * @param event The event.
-   * @param event.target The event target.
-   * @param event.relatedTarget The event relatedTarget.
+   * @param {KeyboardEvent} event The keyboard event object.
    */
-  @HostListener('shadowRoot:focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
-    const {
-      open,
-      _startSentinelNode: startSentinelNode,
-      _endSentinelNode: endSentinelNode,
-    } = this;
-    const oldContains = target !== this && this.contains(target as Node);
-    const currentContains =
-      relatedTarget !== this &&
-      (this.contains(relatedTarget as Node) ||
-        (this.shadowRoot?.contains(relatedTarget as Node) &&
-          relatedTarget !== (endSentinelNode as Node)));
+  @HostListener('keydown')
+  protected _handleHostKeydown = (event: KeyboardEvent) => {
+    const target = event.target as HTMLElement | null;
+    const { primaryButton } = this._getFooterElements();
 
-    // Performs focus wrapping if _all_ of the following is met:
-    // * This modal is open
-    // * The viewport still has focus
-    // * Modal body used to have focus but no longer has focus
-    const { selectorTabbable: selectorTabbableForModal } = this
-      .constructor as typeof CDSModal;
-    if (open && relatedTarget && oldContains && !currentContains) {
-      const comparisonResult = (target as Node).compareDocumentPosition(
-        relatedTarget as Node
-      );
+    if (
+      this.open &&
+      this.shouldSubmitOnEnter &&
+      event.key === 'Enter' &&
+      target &&
+      document.activeElement !== primaryButton
+    ) {
+      const closeButton = (this.constructor as typeof CDSModal)
+        .selectorCloseButton;
 
-      if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
-        await (this.constructor as typeof CDSModal)._delay();
-        if (
-          !tryFocusElems(
-            this.querySelectorAll(selectorTabbableForModal),
-            true
-          ) &&
-          relatedTarget !== this
-        ) {
-          this.focus();
-        }
-      } else if (
-        relatedTarget === endSentinelNode ||
-        comparisonResult & FOLLOWING
-      ) {
-        await (this.constructor as typeof CDSModal)._delay();
-        if (!tryFocusElems(this.querySelectorAll(selectorTabbableForModal))) {
-          this.focus();
-        }
+      const targetIsCloseButton =
+        !!target.closest(closeButton) ||
+        !!document.activeElement?.closest?.(closeButton);
+
+      if (!targetIsCloseButton) {
+        primaryButton?.click();
+        return;
       }
     }
+    if (event.key === 'Tab') {
+      const { first: _firstElement, last: _lastElement } = this.getFocusable();
 
-    // Adjust scroll if needed so that element with focus is not obscured by gradient
-    const modal = document.querySelector(`${prefix}-modal`);
-    const modalContent = document.querySelector(`${prefix}-modal-body`);
-    if (
-      !modal ||
-      !modal.hasAttribute('has-scrolling-content') ||
-      !modalContent ||
-      !relatedTarget ||
-      !modalContent.contains(relatedTarget as Node)
-    ) {
-      return;
-    }
+      if (
+        event.shiftKey &&
+        (this.shadowRoot?.activeElement === _firstElement ||
+          document.activeElement === _firstElement)
+      ) {
+        event.preventDefault();
 
-    const lastContent = modalContent.children[modalContent.children.length - 1];
-    const gradientSpacing =
-      modalContent.scrollHeight -
-      (lastContent as HTMLElement).offsetTop -
-      (lastContent as HTMLElement).clientHeight;
+        _lastElement?.focus();
+      } else if (!event.shiftKey && document.activeElement === _lastElement) {
+        event.preventDefault();
 
-    for (const elem of modalContent.children) {
-      if (elem.contains(relatedTarget as Node)) {
-        const spaceBelow =
-          modalContent.clientHeight -
-          (elem as HTMLElement).offsetTop +
-          modalContent.scrollTop -
-          (elem as HTMLElement).clientHeight;
-        if (spaceBelow < gradientSpacing) {
-          modalContent.scrollTop =
-            modalContent.scrollTop + (gradientSpacing - spaceBelow);
-        }
-        break;
+        _firstElement?.focus();
       }
     }
   };
@@ -200,6 +132,38 @@ class CDSModal extends HostListenerMixin(LitElement) {
       this._handleUserInitiatedClose(target);
     }
   };
+
+  /**
+   * Get focusable elements.
+   *
+   * Querying all tabbable items.
+   *
+   * @returns {{first: HTMLElement, last: HTMLElement, all: HTMLElement[]}} Returns an object with various elements.
+   */
+  private getFocusable(): {
+    first: HTMLElement | undefined;
+    last: HTMLElement | undefined;
+    all: HTMLElement[];
+  } {
+    const elements: HTMLElement[] = [];
+
+    // Add tabbable elements inside light DOM
+    const tabbableItems = this.querySelectorAll<HTMLElement>(selectorTabbable);
+    if (tabbableItems?.length) {
+      elements.push(...tabbableItems);
+    }
+
+    // Flatten NodeList arrays and filter for focusable items
+    const all = elements?.filter(
+      (el): el is HTMLElement => typeof el?.focus === 'function'
+    );
+
+    return {
+      first: all[0],
+      last: all[all.length - 1],
+      all,
+    };
+  }
 
   /**
    * Handles `click` event on the modal container.
@@ -255,10 +219,11 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * Handles `slotchange` event.
    */
   private _handleSlotChange() {
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    this.querySelector(`${prefix}-modal-footer`)
-      ? this.setAttribute('has-footer', '')
-      : this.removeAttribute('has-footer');
+    if (this.querySelector(`${prefix}-modal-footer`)) {
+      this.setAttribute('has-footer', '');
+    } else {
+      this.removeAttribute('has-footer');
+    }
   }
 
   /**
@@ -315,12 +280,136 @@ class CDSModal extends HostListenerMixin(LitElement) {
   preventCloseOnClickOutside = false;
 
   /**
+   * Specify the loading status
+   */
+  @property({ reflect: true, attribute: 'loading-status' })
+  loadingStatus: 'inactive' | 'active' | 'finished' | 'error' = 'inactive';
+
+  /**
+   * Specify the description for the loading text
+   */
+  @property({ type: String, attribute: 'loading-description' })
+  loadingDescription = '';
+
+  /**
+   * Provide a delay for the setTimeout for success
+   */
+  @property({ type: Number, attribute: 'loading-success-delay' })
+  loadingSuccessDelay = 1500;
+
+  /**
+   * Specify the description for the loading icon
+   */
+  @property({ type: String, attribute: 'loading-icon-description' })
+  loadingIconDescription = 'Loading';
+
+  /**
+   * Specify if Enter key should be used as "submit" action that clicks the primary footer button
+   */
+  @property({
+    type: Boolean,
+    reflect: true,
+    attribute: 'should-submit-on-enter',
+  })
+  shouldSubmitOnEnter = false;
+
+  /**
    * Prevent the modal from closing after clicking the close button
    */
   @property({ type: Boolean, attribute: 'prevent-close' })
   preventClose = false;
 
-  firstUpdated() {
+  // Initializes the inline-loading element
+  private _initializeLoadingEl(footer: CDSModalFooter) {
+    if (!footer) return null;
+
+    if (
+      !this._loadingEl &&
+      this.WORKING_LOADING_STATUSES.includes(this.loadingStatus)
+    ) {
+      const el = document.createElement(`${prefix}-inline-loading`);
+      el.setAttribute('controlled', '');
+      el.setAttribute('aria-live', 'off');
+      footer.appendChild(el);
+      this._loadingEl = el as HTMLElement;
+    }
+    return this._loadingEl;
+  }
+
+  private _getFooterElements() {
+    const footer = this.querySelector(`${prefix}-modal-footer`);
+
+    const primaryButton =
+      this.querySelector<HTMLElement>(
+        `${prefix}-modal-footer-button[kind="primary"]`
+      ) ||
+      this.querySelector<HTMLElement>(
+        `${prefix}-modal-footer-button[kind="danger"]`
+      ) ||
+      null;
+
+    const secondaryButtons = Array.from(
+      this.querySelectorAll<HTMLElement>(
+        `${prefix}-modal-footer-button[kind="secondary"]`
+      )
+    );
+
+    return { footer, primaryButton, secondaryButtons };
+  }
+
+  // Updates the inline loading element in the modal footer
+  private _updateLoadingElement() {
+    const { footer, primaryButton, secondaryButtons } =
+      this._getFooterElements();
+
+    const loader = this._initializeLoadingEl(footer as CDSModalFooter);
+    if (!footer || !loader || !primaryButton) return;
+
+    if (this.WORKING_LOADING_STATUSES.includes(this.loadingStatus)) {
+      loader.style.display = 'inline-flex';
+      loader.setAttribute('status', String(this.loadingStatus));
+      loader.setAttribute('aria-live', 'assertive');
+      loader.setAttribute(
+        'icon-description',
+        String(this.loadingIconDescription)
+      );
+      loader.textContent = this.loadingDescription;
+      primaryButton.style.display = 'none';
+
+      if (secondaryButtons[0]) {
+        if (!footer.hasAttribute('has-three-buttons')) {
+          secondaryButtons[0].setAttribute('disabled', '');
+        } else {
+          secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
+        }
+      }
+
+      if (this.loadingStatus === 'finished') {
+        // fire event for successful load
+        setTimeout(() => {
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSModal).eventOnLoadingSuccess,
+              {
+                bubbles: true,
+                cancelable: true,
+                composed: true,
+              }
+            )
+          );
+        }, this.loadingSuccessDelay);
+      }
+    } else if (this.loadingStatus === 'inactive') {
+      loader.style.display = 'none';
+      loader.setAttribute('aria-live', 'off');
+
+      if (primaryButton) primaryButton.style.display = '';
+      if (secondaryButtons)
+        secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
+    }
+  }
+
+  async firstUpdated() {
     const body = this.querySelector(
       (this.constructor as typeof CDSModal).selectorModalBody
     );
@@ -333,8 +422,77 @@ class CDSModal extends HostListenerMixin(LitElement) {
     }
   }
 
+  /**
+   * Computes the aria-label of the modal based on (in order of highest to lowest precedence):
+   * - `modal-label`
+   * - `aria-label`
+   * - `modal-heading`
+   */
+  private _computeAriaLabel(): string {
+    const labelEl = this.querySelector(`${prefix}-modal-label`);
+    const label = labelEl?.textContent?.trim();
+    if (label) return label;
+
+    const ariaLabel = this.ariaLabel?.trim();
+    if (ariaLabel) return ariaLabel;
+
+    const headingEl = this.querySelector(`${prefix}-modal-heading`);
+    const heading = headingEl?.textContent?.trim();
+    return heading || '';
+  }
+
+  /**
+   * Observes the modal footer's `has-three-buttons` attribute to account for cases
+   * where the loading status and the amount of footer-buttons
+   * are being changed dynamically
+   */
+  private _observeFooter() {
+    const footer = this.querySelector(`${prefix}-modal-footer`);
+    if (!footer) return;
+
+    this._footerObserver = new MutationObserver(() => {
+      this._updateLoadingElement();
+    });
+    this._footerObserver.observe(footer, {
+      attributes: true,
+      childList: true,
+      attributeFilter: ['has-three-buttons'],
+    });
+  }
+
+  /**
+   * Observes the modal header to account for cases where the modal-heading,
+   * modal-label, and/or `aria-label` are dynamically changing
+   * to update the `aria-label` put on the modal
+   */
+  private _observeHeader() {
+    const header = this.querySelector(`${prefix}-modal-header`);
+    if (!header) return;
+
+    this._headerObserver = new MutationObserver(() => {
+      this.requestUpdate('ariaLabel');
+    });
+    this._headerObserver.observe(header, {
+      subtree: true,
+      characterData: true,
+      childList: true,
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback?.();
+    this._observeFooter();
+    this._observeHeader();
+  }
+
+  disconnectedCallback() {
+    this._footerObserver?.disconnect();
+    this._headerObserver?.disconnect();
+    super.disconnectedCallback?.();
+  }
+
   render() {
-    const { alert, ariaLabel, size, hasScrollingContent } = this;
+    const { alert, size, hasScrollingContent } = this;
     const containerClass = this.containerClass
       .split(' ')
       .filter(Boolean)
@@ -345,15 +503,11 @@ class CDSModal extends HostListenerMixin(LitElement) {
       ...containerClass,
     });
     return html`
-      <a
-        id="start-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
       <div
-        aria-label=${ariaLabel}
+        aria-label=${this._computeAriaLabel()}
         part="dialog"
         class=${containerClasses}
+        aria-modal=${true}
         role="${alert ? 'alert' : 'dialog'}"
         tabindex="-1"
         @click=${this._handleClickContainer}>
@@ -362,11 +516,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
           ? html` <div class="cds--modal-content--overflow-indicator"></div> `
           : ``}
       </div>
-      <a
-        id="end-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
     `;
   }
 
@@ -383,15 +532,22 @@ class CDSModal extends HostListenerMixin(LitElement) {
           // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
           // where its first update/render cycle that makes it focusable happens after `<cds-modal>`'s first update/render cycle
           (primaryFocusNode as HTMLElement).focus();
-        } else if (
-          !tryFocusElems(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSModal).selectorTabbable
-            ),
-            true
-          )
-        ) {
-          this.focus();
+        } else {
+          const { primaryButton, secondaryButtons } = this._getFooterElements();
+
+          if (primaryButton) {
+            const kind = primaryButton?.getAttribute('kind');
+
+            if (kind === 'danger' && secondaryButtons[0]) {
+              secondaryButtons[0].focus();
+            } else {
+              primaryButton.focus();
+            }
+          } else {
+            const { first } = this.getFocusable();
+
+            first?.focus();
+          }
         }
       } else if (
         this._launcher &&
@@ -400,6 +556,15 @@ class CDSModal extends HostListenerMixin(LitElement) {
         (this._launcher as HTMLElement).focus();
         this._launcher = null;
       }
+    }
+    if (
+      changedProperties.has('loadingStatus') ||
+      changedProperties.has('loadingDescription') ||
+      changedProperties.has('loadingSuccessDelay') ||
+      changedProperties.has('loadingIconDescription')
+    ) {
+      await (this.constructor as typeof CDSModal)._delay();
+      this._updateLoadingElement();
     }
   }
 
@@ -454,6 +619,13 @@ class CDSModal extends HostListenerMixin(LitElement) {
    */
   static get eventClose() {
     return `${prefix}-modal-closed`;
+  }
+
+  /**
+   * The name of the custom event fired when this modal reaches a `finished` loading state
+   */
+  static get eventOnLoadingSuccess() {
+    return `${prefix}-modal-on-loadingsuccess`;
   }
 
   static styles = styles;

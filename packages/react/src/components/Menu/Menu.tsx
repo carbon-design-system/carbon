@@ -33,6 +33,16 @@ const spacing = 8; // distance to keep to window edges, in px
 
 export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken?: 'layer' | 'background';
+
+  /**
+   * Specify whether a border should be rendered on the popover
+   */
+  border?: boolean;
+
+  /**
    * The ref of the containing element, used for positioning and alignment of the menu
    */
   containerRef?: RefObject<HTMLDivElement | null>;
@@ -108,6 +118,8 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
 
 const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
+    backgroundToken = 'layer',
+    border = false,
     children,
     className,
     containerRef,
@@ -138,6 +150,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const [childState, childDispatch] = useReducer(menuReducer, {
     ...context.state,
     isRoot: false,
+    hasIcons: false,
+    hasSelectableItems: false,
     size,
     requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
   });
@@ -211,12 +225,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
     e.stopPropagation();
 
-    // if the user presses escape or this is a submenu
-    // and the user presses ArrowLeft, close it
+    // If the user presses escape or tab, or this is a submenu and the user presses ArrowLeft, close it.
     if (
-      (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
+      (match(e, keys.Escape) ||
+        match(e, keys.Tab) ||
+        (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
+      e.preventDefault();
       handleClose();
     } else {
       focusItem(e);
@@ -260,7 +276,13 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
-    if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
+    if (
+      open &&
+      onClose &&
+      isRoot &&
+      e.relatedTarget &&
+      !menu.current?.contains(e.relatedTarget)
+    ) {
       handleClose();
     }
   }
@@ -381,6 +403,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     return [fitValue(ranges.x, 'x') ?? -1, fitValue(ranges.y, 'y') ?? -1];
   }
 
+  // When a menu is opened, focus the first item.
   useEffect(() => {
     if (open) {
       const raf = requestAnimationFrame(() => {
@@ -423,6 +446,9 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       [`${prefix}--menu--with-selectable-items`]:
         childContext.state.hasSelectableItems,
       [`${prefix}--autoalign`]: !legacyAutoalign,
+      [`${prefix}--menu--border`]: border,
+      [`${prefix}--menu--background-token__background`]:
+        backgroundToken === 'background',
     }
   );
 
@@ -450,6 +476,16 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 });
 
 Menu.propTypes = {
+  /**
+   * Specify the background token to use. Default is 'layer'.
+   */
+  backgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  border: PropTypes.bool,
+
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */

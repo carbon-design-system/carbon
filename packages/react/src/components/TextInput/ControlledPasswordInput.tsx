@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { type HTMLAttributes } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
@@ -121,7 +121,10 @@ export interface ControlledPasswordInputProps
   type?: string;
 }
 
-const ControlledPasswordInput = React.forwardRef(
+const ControlledPasswordInput = forwardRef<
+  unknown,
+  ControlledPasswordInputProps
+>(
   (
     {
       labelText,
@@ -146,7 +149,7 @@ const ControlledPasswordInput = React.forwardRef(
       showPasswordLabel = 'Show password',
       size = undefined,
       ...other
-    }: ControlledPasswordInputProps,
+    },
     ref
   ) => {
     const prefix = usePrefix();
@@ -188,11 +191,11 @@ const ControlledPasswordInput = React.forwardRef(
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
-    const label = labelText ? (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
-    ) : null;
+    );
     const error = invalid ? (
       <div className={`${prefix}--form-requirement`} id={errorId}>
         {invalidText}
@@ -216,7 +219,8 @@ const ControlledPasswordInput = React.forwardRef(
       }
     );
 
-    const helperId = !helperText
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helperId = !hasHelper
       ? undefined
       : `controlled-password-helper-text-${controlledPasswordInstanceId}`;
 
@@ -227,7 +231,7 @@ const ControlledPasswordInput = React.forwardRef(
             invalid,
             sharedTextInputProps,
             invalidId: errorId,
-            hasHelper: !error && helperText ? true : false,
+            hasHelper: !error && hasHelper,
             helperId,
           })}
           data-toggle-password-visibility={type === 'password'}
@@ -244,11 +248,11 @@ const ControlledPasswordInput = React.forwardRef(
       </>
     );
 
-    const helper = helperText ? (
+    const helper = hasHelper && (
       <div id={helperId} className={helperTextClasses}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     return (
       <div

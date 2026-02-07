@@ -18,7 +18,8 @@ import '../icon-button';
 import '../form';
 import '../select';
 import '../textarea';
-
+import '../combo-box';
+import '../checkbox';
 const toggleButton = () => {
   document.querySelector('cds-modal')?.toggleAttribute('open');
 };
@@ -48,9 +49,13 @@ const defaultArgs = {
   numberOfButtons: 2,
   open: true,
   passiveModal: false,
-  preventCloseOnClickOutside: false,
+  preventCloseOnClickOutside: true,
   primaryButtonDisabled: false,
   size: null,
+  loadingStatus: 'inactive',
+  loadingDescription: '',
+  loadingIconDescription: 'Loading',
+  shouldSubmitOnEnter: false,
 };
 
 const controls = {
@@ -114,15 +119,63 @@ const controls = {
     description: 'Modal size.',
     options: sizes,
   },
+  loadingStatus: {
+    control: 'radio',
+    description: 'Specify loading status',
+    options: ['inactive', 'active', 'finished', 'error'],
+  },
+  loadingIconDescription: {
+    description: 'Specify the description for the loading icon',
+  },
+  loadingDescription: {
+    description: 'Specify the description for the loading text',
+  },
+  shouldSubmitOnEnter: {
+    description:
+      'Specify if Enter key should be used as "submit" action that clicks the primary footer button',
+  },
 };
 
 export const Default = {
-  render: () => html`
-    <cds-modal open prevent-close>
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    alert,
+    ariaLabel,
+    danger,
+    open,
+    closeButtonLabel,
+    hasScrollingContent,
+    fullWidth,
+    modalHeading,
+    modalLabel,
+    numberOfButtons,
+    passiveModal,
+    preventCloseOnClickOutside,
+    primaryButtonDisabled,
+    size,
+    loadingDescription,
+    loadingStatus,
+    loadingIconDescription,
+    shouldSubmitOnEnter,
+  }) => html`
+    <cds-modal
+      aria-label=${ariaLabel}
+      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      ?alert=${alert}
+      size="${size}"
+      ?open=${open}
+      ?full-width=${fullWidth}
+      ?has-scrolling-content="${hasScrollingContent}"
+      loading-description="${loadingDescription}"
+      loading-status="${loadingStatus}"
+      loading-icon-description="${loadingIconDescription}"
+      ?should-submit-on-enter="${shouldSubmitOnEnter}">
       <cds-modal-header>
-        <cds-modal-close-button></cds-modal-close-button>
-        <cds-modal-label>Account resources</cds-modal-label>
-        <cds-modal-heading>Add a custom domain</cds-modal-heading>
+        <cds-modal-close-button
+          close-button-label=${closeButtonLabel}></cds-modal-close-button>
+        ${modalLabel && html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+        <cds-modal-heading>${modalHeading}</cds-modal-heading>
       </cds-modal-header>
       <cds-modal-body>
         <cds-modal-body-content description>
@@ -130,176 +183,775 @@ export const Default = {
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </cds-modal-body-content>
-        <cds-form-item>
-          <cds-text-input placeholder="e.g. github.com" label="Domain name">
+        <div style="margin-bottom: 24px;">
+          <cds-text-input
+            data-modal-primary-focus
+            placeholder="For example, GitHub.com"
+            label="Domain name">
           </cds-text-input>
-        </cds-form-item>
-
-        <cds-form-item>
+        </div>
+        <div style="margin-bottom: 24px;">
           <cds-select placeholder="US South" label-text="Region">
             <cds-select-item value="us-south">US South</cds-select-item>
             <cds-select-item value="us-east">US East</cds-select-item>
           </cds-select>
-        </cds-form-item>
-
-        <cds-dropdown label="Dropdown" title-text="Dropdown">
-          <cds-dropdown-item value="one">One</cds-dropdown-item>
-          <cds-dropdown-item value="two">Two</cds-dropdown-item>
-        </cds-dropdown>
-
-        <cds-multi-select label="Multiselect" title-text="Multiselect">
-          <cds-multi-select-item value="option-1"
-            >Option 1</cds-multi-select-item
-          >
-          <cds-multi-select-item value="option-2"
-            >Option 2</cds-multi-select-item
-          >
-        </cds-multi-select>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <cds-combo-box
+            autoalign
+            title-text="Permissions (Example of Floating UI)">
+            <cds-combo-box-item value="viewer">Viewer</cds-combo-box-item>
+            <cds-combo-box-item value="editor">Editor</cds-combo-box-item>
+            <cds-combo-box-item value="manager">Manager</cds-combo-box-item>
+          </cds-combo-box>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <cds-dropdown
+            autoalign
+            label="Option 1"
+            title-text="TLS (Example of Floating UI)">
+            <cds-dropdown-item value="1.0">1.0</cds-dropdown-item>
+            <cds-dropdown-item value="1.1">1.1</cds-dropdown-item>
+            <cds-dropdown-item value="1.2">1.2</cds-dropdown-item>
+          </cds-dropdown>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <cds-multi-select label="Choose Options" title-text="Mapping Domain">
+            <cds-multi-select-item value="cloud-foundry"
+              >Cloud Foundry</cds-multi-select-item
+            >
+            <cds-multi-select-item value="kubernetes-ingress"
+              >Kubernetes Ingress</cds-multi-select-item
+            >
+            <cds-multi-select-item value="vpc-load-balancer"
+              >VPC Load Balancer</cds-multi-select-item
+            >
+          </cds-multi-select>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <cds-checkbox-group legend-text="Terms of Agreement">
+            <cds-checkbox id="checkbox-label-1"
+              >I confirm domain ownership and accept IBM service terms and
+              applicable charges</cds-checkbox
+            >
+          </cds-checkbox-group>
+        </div>
       </cds-modal-body>
-      <cds-modal-footer>
-        <cds-modal-footer-button kind="secondary"
-          >Cancel</cds-modal-footer-button
-        >
-        <cds-modal-footer-button>Add</cds-modal-footer-button>
-      </cds-modal-footer>
+
+      ${passiveModal
+        ? ``
+        : html` <cds-modal-footer>
+            ${numberOfButtons > 2
+              ? html` <cds-modal-footer-button kind="secondary"
+                  >Keep both</cds-modal-footer-button
+                >`
+              : ``}
+            ${numberOfButtons >= 2
+              ? html` <cds-modal-footer-button kind="secondary"
+                  >${numberOfButtons === 2
+                    ? html`Cancel`
+                    : 'Rename'}</cds-modal-footer-button
+                >`
+              : ``}
+
+            <cds-modal-footer-button
+              ?disabled=${primaryButtonDisabled}
+              kind="${danger ? 'danger' : 'primary'}"
+              >Add</cds-modal-footer-button
+            >
+          </cds-modal-footer>`}
     </cds-modal>
+    <cds-button @click="${toggleButton}">Launch modal</cds-button>
   `,
 };
 
 export const DangerModal = {
-  render: () => html`
-    <cds-modal open prevent-close>
+  args: {
+    ...defaultArgs,
+    danger: true,
+    modalHeading: 'Are you sure you want to delete this custom domain?',
+    modalLabel: 'Account resources',
+  },
+  argTypes: controls,
+  render: ({
+    alert,
+    ariaLabel,
+    danger,
+    open,
+    closeButtonLabel,
+    hasScrollingContent,
+    fullWidth,
+    modalHeading,
+    modalLabel,
+    numberOfButtons,
+    passiveModal,
+    preventCloseOnClickOutside,
+    primaryButtonDisabled,
+    size,
+    loadingDescription,
+    loadingStatus,
+    loadingIconDescription,
+    shouldSubmitOnEnter,
+  }) => html`
+    <cds-modal
+      aria-label=${ariaLabel}
+      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      ?alert=${alert}
+      size="${size}"
+      ?open=${open}
+      ?full-width=${fullWidth}
+      ?has-scrolling-content="${hasScrollingContent}"
+      loading-description="${loadingDescription}"
+      loading-status="${loadingStatus}"
+      loading-icon-description="${loadingIconDescription}"
+      ?should-submit-on-enter="${shouldSubmitOnEnter}">
       <cds-modal-header>
-        <cds-modal-close-button></cds-modal-close-button>
-        <cds-modal-label>Account resources</cds-modal-label>
-        <cds-modal-heading
-          >Are you sure you want to delete this custom
-          domain?</cds-modal-heading
-        >
+        <cds-modal-close-button
+          close-button-label=${closeButtonLabel}></cds-modal-close-button>
+        ${modalLabel && html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+        <cds-modal-heading>${modalHeading}</cds-modal-heading>
       </cds-modal-header>
-      <cds-modal-footer>
-        <cds-modal-footer-button kind="secondary"
-          >Cancel</cds-modal-footer-button
-        >
-        <cds-modal-footer-button kind="danger">Delete</cds-modal-footer-button>
-      </cds-modal-footer>
+      <cds-modal-body>
+        <cds-modal-body-content>
+          Check for dependencies on the domain before deletion. For instance, if
+          the domain is used as a primary domain for users or if it's associated
+          with critical applications or services, those connections will need to
+          be removed or reconfigured first.
+        </cds-modal-body-content></cds-modal-body
+      >
+
+      ${passiveModal
+        ? ``
+        : html` <cds-modal-footer>
+            ${numberOfButtons > 2
+              ? html` <cds-modal-footer-button kind="secondary"
+                  >Keep both</cds-modal-footer-button
+                >`
+              : ``}
+            ${numberOfButtons >= 2
+              ? html` <cds-modal-footer-button
+                  kind="secondary"
+                  ?data-modal-close=${numberOfButtons === 2}
+                  >${numberOfButtons === 2
+                    ? html`Cancel`
+                    : 'Rename'}</cds-modal-footer-button
+                >`
+              : ``}
+
+            <cds-modal-footer-button
+              ?disabled=${primaryButtonDisabled}
+              kind="${danger ? 'danger' : 'primary'}"
+              >Delete</cds-modal-footer-button
+            >
+          </cds-modal-footer>`}
     </cds-modal>
+    <cds-button @click="${toggleButton}">Launch modal</cds-button>
   `,
 };
 
 export const FullWidth = {
-  render: () => html`
-    <cds-modal open full-width prevent-close>
+  args: {
+    ...defaultArgs,
+    fullWidth: true,
+    modalHeading: 'Full width modal',
+    modalLabel: 'An example of a modal with no padding',
+  },
+  argTypes: controls,
+  render: ({
+    alert,
+    ariaLabel,
+    danger,
+    open,
+    closeButtonLabel,
+    hasScrollingContent,
+    fullWidth,
+    modalHeading,
+    modalLabel,
+    numberOfButtons,
+    passiveModal,
+    preventCloseOnClickOutside,
+    primaryButtonDisabled,
+    size,
+    loadingDescription,
+    loadingStatus,
+    loadingIconDescription,
+    shouldSubmitOnEnter,
+  }) => html`
+    <cds-modal
+      aria-label=${ariaLabel}
+      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      ?alert=${alert}
+      size="${size}"
+      ?open=${open}
+      ?full-width=${fullWidth}
+      ?has-scrolling-content="${hasScrollingContent}"
+      loading-description="${loadingDescription}"
+      loading-status="${loadingStatus}"
+      loading-icon-description="${loadingIconDescription}"
+      ?should-submit-on-enter="${shouldSubmitOnEnter}">
       <cds-modal-header>
-        <cds-modal-close-button></cds-modal-close-button>
-        <cds-modal-label>An example of a modal with no padding</cds-modal-label>
-        <cds-modal-heading>Full Width Modal</cds-modal-heading>
+        <cds-modal-close-button
+          close-button-label=${closeButtonLabel}></cds-modal-close-button>
+        ${modalLabel && html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+        <cds-modal-heading>${modalHeading}</cds-modal-heading>
       </cds-modal-header>
       <cds-modal-body>
-        <cds-structured-list>
-          <cds-structured-list-head>
-            <cds-structured-list-header-row>
-              <cds-structured-list-header-cell
-                >Column A</cds-structured-list-header-cell
-              >
-              <cds-structured-list-header-cell
-                >Column B</cds-structured-list-header-cell
-              >
-              <cds-structured-list-header-cell
-                >Column C</cds-structured-list-header-cell
-              >
-            </cds-structured-list-header-row>
-          </cds-structured-list-head>
-          <cds-structured-list-body>
-            <cds-structured-list-row>
-              <cds-structured-list-cell>Row 1</cds-structured-list-cell>
-              <cds-structured-list-cell>Row 1</cds-structured-list-cell>
-              <cds-structured-list-cell
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </cds-structured-list-cell>
-            </cds-structured-list-row>
-            <cds-structured-list-row>
-              <cds-structured-list-cell>Row 2</cds-structured-list-cell>
-              <cds-structured-list-cell>Row 2</cds-structured-list-cell>
-              <cds-structured-list-cell
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </cds-structured-list-cell>
-            </cds-structured-list-row>
-            <cds-structured-list-row>
-              <cds-structured-list-cell>Row 3</cds-structured-list-cell>
-              <cds-structured-list-cell>Row 3</cds-structured-list-cell>
-              <cds-structured-list-cell
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </cds-structured-list-cell>
-            </cds-structured-list-row>
-          </cds-structured-list-body>
-        </cds-structured-list>
+        <div style="margin-bottom: 48px;">
+          <cds-structured-list>
+            <cds-structured-list-head>
+              <cds-structured-list-header-row>
+                <cds-structured-list-header-cell
+                  >Default size</cds-structured-list-header-cell
+                >
+                <cds-structured-list-header-cell
+                  >Features</cds-structured-list-header-cell
+                >
+                <cds-structured-list-header-cell
+                  >Pricing</cds-structured-list-header-cell
+                >
+              </cds-structured-list-header-row>
+            </cds-structured-list-head>
+            <cds-structured-list-body>
+              <cds-structured-list-row>
+                <cds-structured-list-cell>Lite</cds-structured-list-cell>
+                <cds-structured-list-cell
+                  >2 vCPUs | 4GB RAM</cds-structured-list-cell
+                >
+                <cds-structured-list-cell
+                  >$0.12 USD / hourly
+                </cds-structured-list-cell>
+              </cds-structured-list-row>
+              <cds-structured-list-row>
+                <cds-structured-list-cell
+                  >Graduated tier</cds-structured-list-cell
+                >
+                <cds-structured-list-cell
+                  >2 vCPUs | 8GB RAM</cds-structured-list-cell
+                >
+                <cds-structured-list-cell
+                  >$0.13 USD / hourly
+                </cds-structured-list-cell>
+              </cds-structured-list-row>
+              <cds-structured-list-row>
+                <cds-structured-list-cell>Premium</cds-structured-list-cell>
+                <cds-structured-list-cell
+                  >4 vCPUs | 10GB RAM</cds-structured-list-cell
+                >
+                <cds-structured-list-cell
+                  >$0.20 USD / hourly
+                </cds-structured-list-cell>
+              </cds-structured-list-row>
+            </cds-structured-list-body>
+          </cds-structured-list>
+        </div>
       </cds-modal-body>
-      <cds-modal-footer>
-        <cds-modal-footer-button kind="secondary"
-          >Cancel</cds-modal-footer-button
-        >
-        <cds-modal-footer-button>Add</cds-modal-footer-button>
-      </cds-modal-footer>
+      ${passiveModal
+        ? ``
+        : html` <cds-modal-footer>
+            ${numberOfButtons > 2
+              ? html` <cds-modal-footer-button kind="secondary"
+                  >Keep both</cds-modal-footer-button
+                >`
+              : ``}
+            ${numberOfButtons >= 2
+              ? html` <cds-modal-footer-button
+                  kind="secondary"
+                  ?data-modal-close=${numberOfButtons === 2}
+                  >${numberOfButtons === 2
+                    ? html`Cancel`
+                    : 'Rename'}</cds-modal-footer-button
+                >`
+              : ``}
+
+            <cds-modal-footer-button
+              ?disabled=${primaryButtonDisabled}
+              kind="${danger ? 'danger' : 'primary'}"
+              >Add</cds-modal-footer-button
+            >
+          </cds-modal-footer>`}
     </cds-modal>
+    <cds-button @click="${toggleButton}">Launch modal</cds-button>
   `,
 };
 
 export const PassiveModal = {
-  render: () => html`
-    <cds-modal open prevent-close>
+  args: {
+    ...defaultArgs,
+    passiveModal: true,
+    modalHeading: 'You are now signed out.',
+  },
+  argTypes: controls,
+  parameters: {
+    controls: {
+      include: [
+        'ariaLabel',
+        'closeButtonLabel',
+        'hasScrollingContent',
+        'fullWidth',
+        'modalHeading',
+        'modalLabel',
+        'open',
+        'preventCloseOnClickOutside',
+        'size',
+      ],
+    },
+  },
+  render: ({
+    ariaLabel,
+    open,
+    closeButtonLabel,
+    hasScrollingContent,
+    fullWidth,
+    modalHeading,
+    modalLabel,
+    preventCloseOnClickOutside,
+    size,
+  }) => html`
+    <cds-modal
+      aria-label=${ariaLabel}
+      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      size="${size}"
+      ?open=${open}
+      ?full-width=${fullWidth}
+      ?has-scrolling-content="${hasScrollingContent}">
       <cds-modal-header>
-        <cds-modal-close-button></cds-modal-close-button>
-        <cds-modal-heading
-          >You have been successfully signed out</cds-modal-heading
-        >
+        <cds-modal-close-button
+          close-button-label=${closeButtonLabel}></cds-modal-close-button>
+        ${modalLabel && html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+        <cds-modal-heading>${modalHeading}</cds-modal-heading>
       </cds-modal-header>
       <cds-modal-body></cds-modal-body>
     </cds-modal>
+    <cds-button @click="${toggleButton}">Launch modal</cds-button>
   `,
 };
 
-export const WithStateManager = {
-  render: () => html`
-    <cds-modal>
+export const WithAILabel = {
+  args: {
+    ...defaultArgs,
+    modalLabel: 'Account Resources',
+  },
+  argTypes: controls,
+  render: ({
+    alert,
+    ariaLabel,
+    danger,
+    open,
+    closeButtonLabel,
+    hasScrollingContent,
+    fullWidth,
+    modalHeading,
+    modalLabel,
+    numberOfButtons,
+    passiveModal,
+    preventCloseOnClickOutside,
+    primaryButtonDisabled,
+    size,
+    loadingDescription,
+    loadingStatus,
+    loadingIconDescription,
+    shouldSubmitOnEnter,
+  }) => html`
+    <cds-modal
+      aria-label=${ariaLabel}
+      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      ?alert=${alert}
+      size="${size}"
+      ?open=${open}
+      ?full-width=${fullWidth}
+      ?has-scrolling-content="${hasScrollingContent}"
+      loading-description="${loadingDescription}"
+      loading-status="${loadingStatus}"
+      loading-icon-description="${loadingIconDescription}"
+      ?should-submit-on-enter="${shouldSubmitOnEnter}">
       <cds-modal-header>
-        <cds-modal-close-button></cds-modal-close-button>
-        <cds-modal-label>Account resources</cds-modal-label>
-        <cds-modal-heading>Add a custom domain</cds-modal-heading>
+        <cds-modal-close-button
+          close-button-label=${closeButtonLabel}></cds-modal-close-button>
+        <cds-ai-label alignment="bottom-end">
+          ${content}${actions}</cds-ai-label
+        >
+        ${modalLabel && html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+        <cds-modal-heading>${modalHeading}</cds-modal-heading>
       </cds-modal-header>
       <cds-modal-body>
-        <cds-modal-body-content description>
+        <cds-modal-body-content description style="margin-bottom: 2rem;">
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </cds-modal-body-content>
-        <cds-form-item>
-          <cds-text-input placeholder="e.g. github.com" label="Domain name">
+
+        <div style="margin-bottom: 24px">
+          <cds-text-input
+            data-modal-primary-focus
+            placeholder="For example, GitHub.com"
+            label="Domain name">
           </cds-text-input>
-        </cds-form-item>
-        <cds-select label-text="Domain name" placeholder="US South">
-          <cds-select-item value="us-south">Option 1</cds-select-item>
-          <cds-select-item value="us-east">Option 2</cds-select-item>
-        </cds-select>
+        </div>
+        <div style="margin-bottom: 24px">
+          <cds-select placeholder="US South" label-text="Region">
+            <cds-select-item value="us-south">US South</cds-select-item>
+            <cds-select-item value="us-east">US East</cds-select-item>
+          </cds-select>
+        </div>
+        <cds-textarea label="Comments"></cds-textarea>
       </cds-modal-body>
-      <cds-modal-footer>
-        <cds-modal-footer-button kind="secondary" data-modal-close
-          >Cancel</cds-modal-footer-button
-        >
-        <cds-modal-footer-button>Add</cds-modal-footer-button>
-      </cds-modal-footer>
+      ${passiveModal
+        ? ``
+        : html` <cds-modal-footer>
+            ${numberOfButtons > 2
+              ? html` <cds-modal-footer-button kind="secondary"
+                  >Keep both</cds-modal-footer-button
+                >`
+              : ``}
+            ${numberOfButtons >= 2
+              ? html` <cds-modal-footer-button
+                  kind="secondary"
+                  ?data-modal-close=${numberOfButtons === 2}
+                  >${numberOfButtons === 2
+                    ? html`Cancel`
+                    : 'Rename'}</cds-modal-footer-button
+                >`
+              : ``}
+
+            <cds-modal-footer-button
+              ?disabled=${primaryButtonDisabled}
+              kind="${danger ? 'danger' : 'primary'}"
+              >Add</cds-modal-footer-button
+            >
+          </cds-modal-footer>`}
     </cds-modal>
     <cds-button @click="${toggleButton}">Launch modal</cds-button>
   `,
+};
+
+export const WithInlineLoading = {
+  args: {
+    ...defaultArgs,
+    danger: true,
+    modalHeading: 'Are you sure you want to delete this custom domain?',
+    modalLabel: 'Account resources',
+  },
+  argTypes: controls,
+  parameters: {
+    controls: {
+      exclude: [
+        'loadingStatus',
+        'loadingDescription',
+        'numberOfButtons',
+        'loadingIconDescription',
+      ],
+    },
+  },
+  render: (args) => {
+    const {
+      alert,
+      ariaLabel,
+      danger,
+      open,
+      closeButtonLabel,
+      hasScrollingContent,
+      fullWidth,
+      modalHeading,
+      modalLabel,
+      passiveModal,
+      preventCloseOnClickOutside,
+      primaryButtonDisabled,
+      size,
+      shouldSubmitOnEnter,
+    } = args ?? {};
+    const onDelete = () => {
+      const modal = document.querySelector('cds-modal') as HTMLElement;
+      if (!modal) return;
+      // Start loading
+      modal.setAttribute('loading-status', 'active');
+
+      // Simulate work
+      setTimeout(() => {
+        modal.setAttribute('loading-description', 'Deleted!');
+        modal.setAttribute('loading-status', 'finished');
+      }, 2000);
+    };
+
+    // Reset the loading description and status once finished successfully
+    const onSuccess = () => {
+      const modal = document.querySelector('cds-modal') as HTMLElement;
+      modal.setAttribute('loading-description', 'Deleting...');
+      modal.setAttribute('loading-status', 'inactive');
+    };
+
+    return html`
+      <cds-modal
+        aria-label=${ariaLabel}
+        ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+        ?alert=${alert}
+        size="${size}"
+        ?open=${open}
+        ?full-width=${fullWidth}
+        ?has-scrolling-content="${hasScrollingContent}"
+        ?should-submit-on-enter="${shouldSubmitOnEnter}"
+        loading-status="inactive"
+        loading-description="Deleting..."
+        @cds-modal-on-loadingsuccess=${onSuccess}>
+        <cds-modal-header>
+          <cds-modal-close-button
+            close-button-label=${closeButtonLabel}></cds-modal-close-button>
+          ${modalLabel &&
+          html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+          <cds-modal-heading>${modalHeading}</cds-modal-heading>
+        </cds-modal-header>
+        <cds-modal-body></cds-modal-body>
+
+        ${passiveModal
+          ? html``
+          : html` <cds-modal-footer>
+              <cds-modal-footer-button
+                id="cancel"
+                kind="secondary"
+                data-modal-close
+                >Cancel</cds-modal-footer-button
+              >
+              <cds-modal-footer-button
+                ?disabled=${primaryButtonDisabled}
+                kind="${danger ? 'danger' : 'primary'}"
+                id="submit"
+                @click=${onDelete}
+                >Delete</cds-modal-footer-button
+              >
+            </cds-modal-footer>`}
+      </cds-modal>
+      <cds-button @click="${toggleButton}">Launch modal</cds-button>
+    `;
+  },
+};
+
+export const WithScrollingContent = {
+  args: {
+    ...defaultArgs,
+    modalLabel: 'Account Resources',
+    hasScrollingContent: true,
+  },
+  argTypes: controls,
+  render: (args) => {
+    const {
+      alert,
+      ariaLabel,
+      danger,
+      open,
+      closeButtonLabel,
+      hasScrollingContent,
+      fullWidth,
+      modalHeading,
+      modalLabel,
+      numberOfButtons,
+      passiveModal,
+      preventCloseOnClickOutside,
+      primaryButtonDisabled,
+      size,
+      loadingDescription,
+      loadingStatus,
+      loadingIconDescription,
+      shouldSubmitOnEnter,
+    } = args ?? {};
+
+    return html`
+      <cds-modal
+        aria-label=${ariaLabel}
+        ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+        ?alert=${alert}
+        size="${size}"
+        ?open=${open}
+        ?full-width=${fullWidth}
+        ?has-scrolling-content="${hasScrollingContent}"
+        loading-description="${loadingDescription}"
+        loading-status="${loadingStatus}"
+        loading-icon-description="${loadingIconDescription}"
+        ?should-submit-on-enter="${shouldSubmitOnEnter}">
+        <cds-modal-header>
+          <cds-modal-close-button
+            close-button-label=${closeButtonLabel}></cds-modal-close-button>
+          ${modalLabel &&
+          html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+          <cds-modal-heading>${modalHeading}</cds-modal-heading>
+        </cds-modal-header>
+        <cds-modal-body>
+          <cds-modal-body-content description>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </cds-modal-body-content>
+          <cds-modal-body-content description style="margin-bottom: 2rem;">
+            Domain mappings provide the URL route to your Code Engine
+            application or function within a project. With Code Engine, these
+            mappings are automatically created, by default, whenever you deploy
+            an application or create a function. However, you can map your own
+            custom domain to a Code Engine application or function. This option
+            routes requests from your custom URL to your application or
+            function. You can use the Code Engine CLI.
+          </cds-modal-body-content>
+
+          <div style="margin-bottom: 24px;">
+            <cds-text-input
+              data-modal-primary-focus
+              placeholder="For example, GitHub.com"
+              label="Domain name">
+            </cds-text-input>
+          </div>
+          <div style="margin-bottom: 24px;">
+            <cds-select label-text="Domain name" placeholder="US South">
+              <cds-select-item value="us-south">Option 1</cds-select-item>
+              <cds-select-item value="us-east">Option 2</cds-select-item>
+            </cds-select>
+          </div>
+          <div style="margin-bottom: 24px;">
+            <cds-combo-box
+              autoalign
+              title-text="Permissions (Example of Floating UI)">
+              <cds-combo-box-item value="viewer">Viewer</cds-combo-box-item>
+              <cds-combo-box-item value="editor">Editor</cds-combo-box-item>
+              <cds-combo-box-item value="manager">Manager</cds-combo-box-item>
+            </cds-combo-box>
+          </div>
+          <div style="margin-bottom: 24px;">
+            <cds-multi-select
+              label="Choose Options"
+              title-text="Mapping Domain">
+              <cds-multi-select-item value="cloud-foundry"
+                >Cloud Foundry</cds-multi-select-item
+              >
+              <cds-multi-select-item value="kubernetes-ingress"
+                >Kubernetes Ingress</cds-multi-select-item
+              >
+              <cds-multi-select-item value="vpc-load-balancer"
+                >VPC Load Balancer</cds-multi-select-item
+              >
+            </cds-multi-select>
+          </div>
+        </cds-modal-body>
+        ${passiveModal
+          ? ``
+          : html` <cds-modal-footer>
+              ${numberOfButtons > 2
+                ? html` <cds-modal-footer-button kind="secondary"
+                    >Keep both</cds-modal-footer-button
+                  >`
+                : ``}
+              ${numberOfButtons >= 2
+                ? html` <cds-modal-footer-button
+                    kind="secondary"
+                    ?data-modal-close=${numberOfButtons === 2}
+                    >${numberOfButtons === 2
+                      ? html`Cancel`
+                      : 'Rename'}</cds-modal-footer-button
+                  >`
+                : ``}
+
+              <cds-modal-footer-button
+                ?disabled=${primaryButtonDisabled}
+                kind="${danger ? 'danger' : 'primary'}"
+                >Add</cds-modal-footer-button
+              >
+            </cds-modal-footer>`}
+      </cds-modal>
+      <cds-button @click="${toggleButton}">Launch modal</cds-button>
+    `;
+  },
+};
+
+export const WithStateManager = {
+  args: {
+    ...defaultArgs,
+    modalLabel: 'Account Resources',
+    open: false,
+  },
+  argTypes: controls,
+  render: (args) => {
+    const {
+      alert,
+      ariaLabel,
+      danger,
+      open,
+      closeButtonLabel,
+      hasScrollingContent,
+      fullWidth,
+      modalHeading,
+      modalLabel,
+      numberOfButtons,
+      passiveModal,
+      preventCloseOnClickOutside,
+      primaryButtonDisabled,
+      size,
+      loadingDescription,
+      loadingStatus,
+      loadingIconDescription,
+      shouldSubmitOnEnter,
+    } = args ?? {};
+
+    return html`
+      <cds-modal
+        aria-label=${ariaLabel}
+        ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+        ?alert=${alert}
+        size="${size}"
+        ?open=${open}
+        ?full-width=${fullWidth}
+        ?has-scrolling-content="${hasScrollingContent}"
+        loading-description="${loadingDescription}"
+        loading-status="${loadingStatus}"
+        loading-icon-description="${loadingIconDescription}"
+        ?should-submit-on-enter="${shouldSubmitOnEnter}">
+        <cds-modal-header>
+          <cds-modal-close-button
+            close-button-label=${closeButtonLabel}></cds-modal-close-button>
+          ${modalLabel &&
+          html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
+          <cds-modal-heading>${modalHeading}</cds-modal-heading>
+        </cds-modal-header>
+        <cds-modal-body>
+          <cds-modal-body-content description>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </cds-modal-body-content>
+          <div style="margin-bottom: 24px;">
+            <cds-text-input
+              data-modal-primary-focus
+              placeholder="e.g. github.com"
+              label="Domain name">
+            </cds-text-input>
+          </div>
+          <cds-select label-text="Domain name" placeholder="US South">
+            <cds-select-item value="us-south">Option 1</cds-select-item>
+            <cds-select-item value="us-east">Option 2</cds-select-item>
+          </cds-select>
+        </cds-modal-body>
+        ${passiveModal
+          ? ``
+          : html` <cds-modal-footer>
+              ${numberOfButtons > 2
+                ? html` <cds-modal-footer-button kind="secondary"
+                    >Keep both</cds-modal-footer-button
+                  >`
+                : ``}
+              ${numberOfButtons >= 2
+                ? html` <cds-modal-footer-button
+                    kind="secondary"
+                    ?data-modal-close=${numberOfButtons === 2}
+                    >${numberOfButtons === 2
+                      ? html`Cancel`
+                      : 'Rename'}</cds-modal-footer-button
+                  >`
+                : ``}
+
+              <cds-modal-footer-button
+                ?disabled=${primaryButtonDisabled}
+                kind="${danger ? 'danger' : 'primary'}"
+                >Add</cds-modal-footer-button
+              >
+            </cds-modal-footer>`}
+      </cds-modal>
+      <cds-button @click="${toggleButton}">Launch modal</cds-button>
+    `;
+  },
 };
 
 const content = html`
@@ -332,200 +984,6 @@ const actions = html`
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
-
-export const WithAILabel = {
-  render: () => html`
-<cds-modal open has-scrolling-content>
-      <cds-modal-header>
-        <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-        <cds-modal-close-button></cds-modal-close-button>
-        <cds-modal-label>Account resources</cds-modal-label>
-        <cds-modal-heading>Add a custom domain</cds-modal-heading>
-      </cds-modal-header>
-      <cds-modal-body>
-        <cds-modal-body-content description>
-        <p style="margin-bottom: 1rem">
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style="margin-bottom: 1rem">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-        eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
-        leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
-        ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
-        elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
-        ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
-        ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
-        mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
-        quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
-        elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
-        magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
-        leo nec molestie sollicitudin.
-      </p>
-        </cds-modal-body-content>
-        <cds-form-item>
-          <cds-text-input placeholder="e.g. github.com" label="Domain name">
-          </cds-text-input>
-        </cds-form-item>
-
-        <cds-form-item>
-          <cds-select placeholder="US South" label-text="Region">
-            <cds-select-item value="us-south">US South</cds-select-item>
-            <cds-select-item value="us-east">US East</cds-select-item>
-          </cds-select>
-        </cds-form-item>
-        <cds-form-item>
-        <cds-textarea label="Comments" >
-        </cds-form-item>
-      </cds-textarea>
-      </cds-modal-body>
-      <cds-modal-footer>
-        <cds-modal-footer-button kind="secondary"
-          >Cancel</cds-modal-footer-button
-        >
-        <cds-modal-footer-button>Add</cds-modal-footer-button>
-      </cds-modal-footer>
-    </cds-modal>
-    <cds-button @click="${toggleButton}">Launch modal</cds-button>
-  `,
-};
-
-export const Playground = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({
-    alert,
-    ariaLabel,
-    danger,
-    open,
-    closeButtonLabel,
-    hasScrollingContent,
-    fullWidth,
-    modalHeading,
-    modalLabel,
-    numberOfButtons,
-    passiveModal,
-    preventCloseOnClickOutside,
-    primaryButtonDisabled,
-    size,
-  }) => html`
-    <cds-modal
-      aria-label=${ariaLabel}
-      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
-      ?alert=${alert}
-      size="${size}"
-      ?open=${open}
-      ?full-width=${fullWidth}
-      prevent-close
-      ?has-scrolling-content="${hasScrollingContent}">
-      <cds-modal-header>
-        <cds-modal-close-button
-          close-button-label=${closeButtonLabel}></cds-modal-close-button>
-        <cds-modal-label>${modalLabel}</cds-modal-label>
-        <cds-modal-heading>${modalHeading}</cds-modal-heading>
-      </cds-modal-header>
-      <cds-modal-body>
-        <cds-modal-body-content description>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </cds-modal-body-content>
-        <cds-form-item>
-          <cds-text-input placeholder="e.g. github.com" label="Domain name">
-          </cds-text-input>
-        </cds-form-item>
-        <cds-select label-text="Region" placeholder="US South">
-          <cds-select-item value="us-south">Option 1</cds-select-item>
-          <cds-select-item value="us-east">Option 2</cds-select-item>
-        </cds-select>
-
-        ${hasScrollingContent
-          ? html` <cds-modal-body-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                id accumsan augue. Phasellus consequat augue vitae tellus
-                tincidunt posuere. Curabitur justo urna, consectetur vel elit
-                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
-                venenatis molestie tellus. Quisque consectetur non risus eu
-                rutrum.
-              </cds-modal-body-content>
-              <cds-modal-body-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                id accumsan augue. Phasellus consequat augue vitae tellus
-                tincidunt posuere. Curabitur justo urna, consectetur vel elit
-                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
-                venenatis molestie tellus. Quisque consectetur non risus eu
-                rutrum.
-              </cds-modal-body-content>
-              <cds-modal-body-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                id accumsan augue. Phasellus consequat augue vitae tellus
-                tincidunt posuere. Curabitur justo urna, consectetur vel elit
-                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
-                venenatis molestie tellus. Quisque consectetur non risus eu
-                rutrum.
-              </cds-modal-body-content>
-              <h3>Lorem ipsum</h3>
-              <cds-modal-body-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                id accumsan augue. Phasellus consequat augue vitae tellus
-                tincidunt posuere. Curabitur justo urna, consectetur vel elit
-                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
-                venenatis molestie tellus. Quisque consectetur non risus eu
-                rutrum.
-              </cds-modal-body-content>
-              <cds-modal-body-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                id accumsan augue. Phasellus consequat augue vitae tellus
-                tincidunt posuere. Curabitur justo urna, consectetur vel elit
-                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
-                venenatis molestie tellus. Quisque consectetur non risus eu
-                rutrum.
-              </cds-modal-body-content>
-              <cds-modal-body-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                id accumsan augue. Phasellus consequat augue vitae tellus
-                tincidunt posuere. Curabitur justo urna, consectetur vel elit
-                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
-                venenatis molestie tellus. Quisque consectetur non risus eu
-                rutrum.
-              </cds-modal-body-content>
-              <cds-modal-body-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                id accumsan augue. Phasellus consequat augue vitae tellus
-                tincidunt posuere. Curabitur justo urna, consectetur vel elit
-                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
-                venenatis molestie tellus. Quisque consectetur non risus eu
-                rutrum.
-              </cds-modal-body-content>`
-          : ``}
-      </cds-modal-body>
-
-      ${passiveModal
-        ? ``
-        : html` <cds-modal-footer>
-            ${numberOfButtons > 2
-              ? html` <cds-modal-footer-button kind="secondary"
-                  >Keep both</cds-modal-footer-button
-                >`
-              : ``}
-            ${numberOfButtons >= 2
-              ? html` <cds-modal-footer-button kind="secondary"
-                  >${numberOfButtons === 2
-                    ? html`Cancel`
-                    : 'Rename'}</cds-modal-footer-button
-                >`
-              : ``}
-
-            <cds-modal-footer-button
-              ?disabled=${primaryButtonDisabled}
-              kind="${danger ? 'danger' : 'primary'}"
-              >Add</cds-modal-footer-button
-            >
-          </cds-modal-footer>`}
-    </cds-modal>
-  `,
-};
 
 const meta = {
   title: 'Components/Modal',

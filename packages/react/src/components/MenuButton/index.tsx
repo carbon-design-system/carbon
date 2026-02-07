@@ -1,17 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  ComponentProps,
-  forwardRef,
-  ReactNode,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import React, { ComponentProps, forwardRef, ReactNode, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -22,6 +16,7 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   useFloating,
   flip,
@@ -83,6 +78,16 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   tabIndex?: number;
 
   /**
+   * Specify the background token to use for the menu. Default is 'layer'.
+   */
+  menuBackgroundToken?: 'layer' | 'background';
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  menuBorder?: boolean;
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget?: Element;
@@ -97,6 +102,8 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       disabled,
       kind = defaultButtonKind,
       label,
+      menuBackgroundToken = 'layer',
+      menuBorder = false,
       size = 'lg',
       menuAlignment = 'bottom',
       tabIndex = 0,
@@ -163,7 +170,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       handleClose,
     } = useAttachedMenu(triggerRef);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       Object.keys(floatingStyles).forEach((style) => {
         if (refs.floating.current) {
           let value = floatingStyles[style];
@@ -229,7 +236,9 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           size={size}
           open={open}
           onClose={handleClose}
-          target={menuTarget}>
+          target={menuTarget}
+          backgroundToken={menuBackgroundToken}
+          border={menuBorder}>
           {children}
         </Menu>
       </div>
@@ -292,9 +301,18 @@ MenuButton.propTypes = {
   tabIndex: PropTypes.number,
 
   /**
+   * Specify the background token to use for the menu. Default is 'layer'.
+   */
+  menuBackgroundToken: PropTypes.oneOf(['layer', 'background']),
+
+  /**
+   * Specify whether a border should be rendered on the menu
+   */
+  menuBorder: PropTypes.bool,
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-
   menuTarget: PropTypes.instanceOf(
     typeof Element !== 'undefined' ? Element : Object
   ) as PropTypes.Validator<Element | null | undefined>,

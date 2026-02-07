@@ -661,6 +661,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "fluid": {
+        "type": "bool",
+      },
       "stacked": {
         "type": "bool",
       },
@@ -2157,6 +2160,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "decorator": {
+          "type": "node",
+        },
         "description": {
           "type": "node",
         },
@@ -2582,7 +2588,7 @@ Map {
     },
     "propTypes": {
       "children": {
-        "type": "node",
+        "type": "func",
       },
       "experimentalAutoAlign": {
         "type": "bool",
@@ -2598,6 +2604,9 @@ Map {
                 "header": {
                   "isRequired": true,
                   "type": "node",
+                },
+                "isSortable": {
+                  "type": "bool",
                 },
                 "key": {
                   "isRequired": true,
@@ -2715,6 +2724,18 @@ Map {
       },
       "showToolbar": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
       "zebra": {
         "type": "bool",
@@ -3610,11 +3631,17 @@ Map {
       "labelTitle": {
         "type": "string",
       },
+      "maxFileSize": {
+        "type": "number",
+      },
       "multiple": {
         "type": "bool",
       },
       "name": {
         "type": "string",
+      },
+      "onAddFiles": {
+        "type": "func",
       },
       "onChange": {
         "type": "func",
@@ -3730,6 +3757,9 @@ Map {
       "labelText": {
         "isRequired": true,
         "type": "string",
+      },
+      "maxFileSize": {
+        "type": "number",
       },
       "multiple": {
         "type": "bool",
@@ -6193,6 +6223,18 @@ Map {
   "Menu" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "backgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "border": {
+        "type": "bool",
+      },
       "children": {
         "type": "node",
       },
@@ -6308,6 +6350,18 @@ Map {
         ],
         "type": "oneOf",
       },
+      "menuBackgroundToken": {
+        "args": [
+          [
+            "layer",
+            "background",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "menuBorder": {
+        "type": "bool",
+      },
       "menuTarget": {
         "args": [
           [Function],
@@ -6338,6 +6392,9 @@ Map {
         "type": "node",
       },
       "className": {
+        "type": "string",
+      },
+      "dangerDescription": {
         "type": "string",
       },
       "disabled": {
@@ -6732,7 +6789,7 @@ Map {
         "type": "string",
       },
       "label": {
-        "type": "node",
+        "type": "string",
       },
       "labelClassName": {
         "type": "string",
@@ -7288,6 +7345,9 @@ Map {
         "type": "func",
       },
       "onKeyUp": {
+        "type": "func",
+      },
+      "onStepperBlur": {
         "type": "func",
       },
       "pattern": {
@@ -8257,6 +8317,12 @@ Map {
       "id": {
         "type": "string",
       },
+      "invalid": {
+        "type": "bool",
+      },
+      "invalidText": {
+        "type": "node",
+      },
       "labelPosition": {
         "args": [
           [
@@ -8279,6 +8345,9 @@ Map {
       "onClick": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
       "required": {
         "type": "bool",
       },
@@ -8295,6 +8364,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": {
+        "type": "bool",
+      },
+      "warnText": {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -9899,6 +9974,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "decorator": {
+        "type": "node",
       },
       "description": {
         "type": "node",
@@ -11826,7 +11904,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -13994,7 +14071,6 @@ Map {
         "type": "oneOfType",
       },
       "children": {
-        "isRequired": true,
         "type": "node",
       },
       "dir": {
@@ -15730,5 +15806,6 @@ Map {
   "usePrefersDarkScheme" => {},
   "usePrefix" => {},
   "useTheme" => {},
+  "validateNumberSeparators" => {},
 }
 `;

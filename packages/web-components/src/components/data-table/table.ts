@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -346,6 +346,19 @@ class CDSTable extends HostListenerMixin(LitElement) {
         unfilteredRows.push(elem);
       }
 
+      if (this.isSelectable) {
+        const unfilteredSelectableLength = unfilteredRows.filter((elem) => {
+          return !elem.hasAttribute('disabled');
+        }).length;
+
+        const headerCheckbox = this._tableHeaderRow.shadowRoot
+          ?.querySelector(`${prefix}-checkbox`)
+          .shadowRoot.querySelector(`.${prefix}--checkbox`);
+
+        headerCheckbox.disabled =
+          unfilteredSelectableLength === 0 ? true : false;
+      }
+
       if (this.expandable) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (elem as any).nextElementSibling.filtered = filtered;
@@ -529,15 +542,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
       }
     }
 
-    const totalRows = [...this._tableRows].filter(
-      (elem) => !elem.hasAttribute('filtered')
+    const totalSelectableRows = [...this._tableRows].filter(
+      (elem) => !elem.hasAttribute('filtered') && !elem.hasAttribute('disabled')
     ).length;
 
     // selected header checkbox upon all rows being selected
     const headerCheckbox = tableHeaderRow.shadowRoot
       ?.querySelector(`${prefix}-checkbox`)
       .shadowRoot.querySelector(`.${prefix}--checkbox`);
-    const allRowsSelected = this._selectedRows.length === totalRows;
+    const allRowsSelected = this._selectedRows.length === totalSelectableRows;
     headerCheckbox.checked = !this._selectedRows.length ? false : true;
     headerCheckbox.indeterminate =
       !allRowsSelected && this._selectedRows.length > 0;
@@ -580,7 +593,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
 
     let totalRows = 0;
     forEach(tableRows, (elem) => {
-      if (!(elem as CDSTableRow).filtered) {
+      if (!(elem as CDSTableRow).filtered && !(elem as CDSTableRow).disabled) {
         (elem as CDSTableRow).selected = selected;
         if (this.radio) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -872,18 +885,17 @@ class CDSTable extends HostListenerMixin(LitElement) {
       Array.prototype.slice
         .call((row as HTMLElement).children)
         .forEach((cell, index) => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-          headersWithAILabel.includes(index)
-            ? cell.setAttribute('ai-label-in-header', '')
-            : cell.removeAttribute('ai-label-in-header');
+          if (headersWithAILabel.includes(index)) {
+            cell.setAttribute('ai-label-in-header', '');
+          } else {
+            cell.removeAttribute('ai-label-in-header');
+          }
         });
     });
   }
 
-  /* eslint-disable no-constant-condition */
   render() {
-    return html`
-      <div class="${prefix}--data-table-header-container">
+    return html` <div class="${prefix}--data-table-header-container">
         <div ?hidden="${!this.withHeader}" class="${prefix}--data-table-header">
           <slot @slotchange="${this._handleSlotChange}" name="title"></slot>
           <slot
@@ -893,18 +905,13 @@ class CDSTable extends HostListenerMixin(LitElement) {
         <slot name="toolbar"></slot>
       </div>
 
-      ${false // TODO: replace with this.stickyHeader when feature is fully implemented
-        ? html` <div class="${prefix}--data-table_inner-container">
-            <div class="${prefix}--data-table-content">
-              <slot
-                @cds-table-body-content-change="${this
-                  ._handleTableBodyChange}"></slot>
-            </div>
-          </div>`
-        : html`<slot
+      <div part="inner-container" class="${prefix}--data-table_inner-container">
+        <div part="content" class="${prefix}--data-table-content">
+          <slot
             @cds-table-body-content-change="${this
-              ._handleTableBodyChange}"></slot>`}
-    `;
+              ._handleTableBodyChange}"></slot>
+        </div>
+      </div>`;
   }
 
   /**
@@ -941,8 +948,6 @@ class CDSTable extends HostListenerMixin(LitElement) {
     });
     this._handleSortAction(columnIndex, sortDirection);
   }
-
-  /* eslint-enable no-constant-condition */
 
   /**
    * The name of the custom event fired before a new sort direction is set upon a user gesture.

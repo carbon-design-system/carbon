@@ -5,16 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CaretRight, CaretLeft } from '@carbon/icons-react';
-import cx from 'classnames';
+import { CaretLeft, CaretRight } from '@carbon/icons-react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { IconButton } from '../IconButton';
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
+import cx from 'classnames';
+import isEqual from 'react-fast-compare';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { IconButton } from '../IconButton';
-import isEqual from 'react-fast-compare';
 
 type ExcludedAttributes = 'id' | 'onChange';
 
@@ -422,6 +423,7 @@ const Pagination = React.forwardRef(
                 hideLabel
                 onChange={handlePageInputChange}
                 value={page}
+                key={page}
                 disabled={pageInputDisabled || disabled}>
                 {selectItems}
               </Select>
@@ -443,7 +445,7 @@ const Pagination = React.forwardRef(
               <CaretLeft />
             </IconButton>
             <IconButton
-              align="top-end"
+              align="top"
               disabled={forwardButtonDisabled || isLastPage}
               kind="ghost"
               className={forwardButtonClasses}

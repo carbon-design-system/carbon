@@ -6,23 +6,24 @@ snapshots['cds-menu-button should render and match snapshot'] =
   kind="primary"
   label="Actions"
   menu-alignment="bottom"
+  menu-background-token="layer"
   size="lg"
   tab-index="0"
 >
   <cds-menu
     size="lg"
-    style="inset-inline-start: 8px; inset-inline-end: initial; inset-block-start: 8px;"
+    style=""
   >
     <cds-menu-item
       label="First action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item
       label="Second action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item
@@ -44,17 +45,18 @@ snapshots[
   kind="primary"
   label="Test"
   menu-alignment="bottom"
+  menu-background-token="layer"
   size="lg"
   tab-index="0"
 >
   <cds-menu
     size="lg"
-    style="inset-inline-start: 8px; inset-inline-end: initial; inset-block-start: 8px;"
+    style=""
   >
     <cds-menu-item
       label="First action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item-divider role="separator">
@@ -64,7 +66,7 @@ snapshots[
       kind="danger"
       label="Danger"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
   </cds-menu>
@@ -78,25 +80,26 @@ snapshots[
   kind="primary"
   label="Nested"
   menu-alignment="bottom"
+  menu-background-token="layer"
   size="lg"
   tab-index="0"
 >
   <cds-menu
     size="lg"
-    style="inset-inline-start: 8px; inset-inline-end: initial; inset-block-start: 8px;"
+    style=""
   >
     <cds-menu-item
       aria-expanded="true"
       aria-haspopup="true"
       label="Export as"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
       <cds-menu-item-group slot="submenu">
         <cds-menu-item
           label="PDF"
           role="menuitem"
-          tabindex="0"
+          tabindex="-1"
         >
         </cds-menu-item>
       </cds-menu-item-group>

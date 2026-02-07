@@ -28,7 +28,7 @@ export interface DropdownSkeletonProps extends HTMLAttributes<HTMLDivElement> {
   size?: ListBoxSize;
 }
 
-const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
+const DropdownSkeleton = ({
   className,
   size,
   hideLabel,

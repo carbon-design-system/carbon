@@ -27,6 +27,8 @@ collect:
         - as
         - autoAlign
         - autoComplete
+        - backgroundToken
+        - border
         - buttonKind
         - caption
         - checked
@@ -136,6 +138,7 @@ collect:
         - lowContrast
         - max
         - maxCount
+        - maxFileSize
         - menuAlignment
         - menuOffset
         - menuOffsetFlip
@@ -269,6 +272,7 @@ collect:
         # AspectRatio
         - ratio
         # ButtonSet
+        - fluid
         - stacked
         # ChatButton
         - isQuickAction
@@ -421,6 +425,9 @@ collect:
         - legacyAutoalign
         - x
         - y
+        # MenuButton
+        - menuBackgroundToken
+        - menuBorder
         # MenuItem
         - shortcut
         # MenuItemRadioGroup
@@ -458,6 +465,7 @@ collect:
         - notificationType
         # NumberInput
         - hideSteppers
+        - onStepperBlur
         - stepStartValue
         - validate
         # OrderedList
@@ -470,7 +478,6 @@ collect:
         - requireTitle
         - wrapperClassName
         # PageHeaderBreadcrumbBar
-        - border
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
@@ -524,7 +531,6 @@ collect:
         - textSize
         # SideNav
         - addMouseListeners
-        - inert
         - isChildOfHeader
         - isFixedNav
         - isPersistent
@@ -667,6 +673,9 @@ collect:
         - step
         - time
         - "true"
+        # General - backgroundToken
+        - background
+        - layer
         # General - buttonKind
         - danger
         - danger--ghost
@@ -923,6 +932,9 @@ collect:
         - complete
         - edit
         - uploading
+        # MenuButton - menuBackgroundToken
+        - background
+        - layer
         # ModalWrapper - triggerButtonKind
         - danger
         - danger--ghost

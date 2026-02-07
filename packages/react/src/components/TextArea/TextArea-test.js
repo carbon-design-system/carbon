@@ -85,6 +85,11 @@ describe('TextArea', () => {
       );
     });
 
+    it('should render helperText with value 0', () => {
+      render(<TextArea id="textarea-1" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
     it('should respect hideLabel prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" hideLabel />);
 
@@ -150,6 +155,11 @@ describe('TextArea', () => {
       expect(screen.getByText('TextArea label')).toHaveClass(
         `${prefix}--label`
       );
+    });
+
+    it('should render labelText with value 0', () => {
+      render(<TextArea id="textarea-1" labelText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
     });
 
     it('should respect `placeholder` prop', () => {
@@ -432,6 +442,38 @@ describe('TextArea', () => {
 
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toHaveValue('one two three');
+      });
+    });
+
+    it('should correctly call onChange when no target value', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter
+          maxCount={10}
+          counterMode="word"
+          defaultValue="A"
+          onChange={onChange}
+        />
+      );
+
+      // by default should show 1
+      expect(screen.getByText('1/10')).toBeInTheDocument();
+
+      fireEvent.change(screen.getByRole('textbox'), {
+        target: {
+          value: '',
+        },
+      });
+
+      await waitFor(() => {
+        expect(screen.getByText('0/10')).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalledTimes(1);
       });
     });
 

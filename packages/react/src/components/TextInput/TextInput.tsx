@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  forwardRef,
   useContext,
   useEffect,
   useRef,
@@ -161,7 +162,7 @@ export interface TextInputProps
   warnText?: ReactNode;
 }
 
-const TextInput = React.forwardRef(
+const TextInput = forwardRef<unknown, TextInputProps>(
   (
     {
       className,
@@ -187,7 +188,7 @@ const TextInput = React.forwardRef(
       maxCount,
       slug,
       ...rest
-    }: TextInputProps,
+    },
     ref
   ) => {
     const prefix = usePrefix();
@@ -308,11 +309,11 @@ const TextInput = React.forwardRef(
           className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
       ) : null;
 
-    const label = labelText ? (
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
       <Text as="label" htmlFor={id} className={labelClasses}>
         {labelText}
       </Text>
-    ) : null;
+    );
 
     const labelWrapper = (
       <div className={`${prefix}--text-input__label-wrapper`}>
@@ -321,14 +322,14 @@ const TextInput = React.forwardRef(
       </div>
     );
 
-    const helper = helperText ? (
+    const helper = typeof helperText !== 'undefined' && helperText !== null && (
       <Text
         as="div"
         id={normalizedProps.helperId}
         className={helperTextClasses}>
         {helperText}
       </Text>
-    ) : null;
+    );
 
     const input = (
       <input

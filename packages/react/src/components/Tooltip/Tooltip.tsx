@@ -84,7 +84,7 @@ interface TooltipBaseProps {
   /**
    * Render the component using the high-contrast theme
    */
-  highContrast?: boolean;
+  highContrast?: boolean; // TODO: remove in v12, highContrast should not be configurable
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
@@ -126,7 +126,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
       defaultOpen = false,
       closeOnActivation = false,
       dropShadow = false,
-      highContrast = true,
+      highContrast = true, // TODO: remove in v12, highContrast should not be configurable
       ...rest
     }: TooltipProps<T>,
     ref?: PolymorphicRef<T>
@@ -289,7 +289,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
         align={align}
         className={cx(`${prefix}--tooltip`, customClassName)}
         dropShadow={dropShadow}
-        highContrast={highContrast}
+        highContrast={highContrast} // TODO: v12 hard-set highContrast to true
         onKeyDown={onKeyDown}
         onMouseLeave={onMouseLeave}
         open={open}>
@@ -314,7 +314,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
   }
 );
 
-(Tooltip as React.FC).propTypes = {
+// @ts-expect-error - `propTypes` isn't typed.
+Tooltip.propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -391,7 +392,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
   /**
    * Render the component using the high-contrast theme
    */
-  highContrast: PropTypes.bool,
+  highContrast: PropTypes.bool, // TODO: remove in v12, highContrast should not be configurable
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use

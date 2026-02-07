@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -48,7 +48,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import type { TranslateWithId } from '../../types/common';
-import { useId } from '../../internal/useId';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import {
   useFloating,
   flip,
@@ -60,7 +60,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 
-const { ItemMouseMove, MenuMouseLeave } =
+const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
     ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
   };
@@ -152,10 +152,9 @@ export interface DropdownProps<ItemType>
   invalidText?: ReactNode;
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
-  itemToElement?: React.JSXElementConstructor<ItemType> | null;
+  itemToElement?: ((item: ItemType) => NonNullable<ReactNode>) | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -270,6 +269,12 @@ function stateReducer(state, actionAndChanges) {
         return state;
       }
       return changes;
+    case ToggleButtonBlur:
+    case FunctionCloseMenu:
+      return {
+        ...changes,
+        selectedItem: state.selectedItem,
+      };
     default:
       return changes;
   }
@@ -430,7 +435,6 @@ const Dropdown = React.forwardRef(
         downshiftProps,
       ]
     );
-    const dropdownInstanceId = useId();
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -448,17 +452,26 @@ const Dropdown = React.forwardRef(
       highlightedIndex,
     } = useSelect(selectProps);
     const inline = type === 'inline';
-    const showWarning = !invalid && warn;
+
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      readOnly,
+      disabled: disabled ?? false,
+      invalid: invalid ?? false,
+      invalidText,
+      warn: warn ?? false,
+      warnText,
+    });
 
     const [isFocused, setIsFocused] = useState(false);
 
     const className = cx(`${prefix}--dropdown`, {
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
+      [`${prefix}--dropdown--warning`]: normalizedProps.warn,
       [`${prefix}--dropdown--open`]: isOpen,
       [`${prefix}--dropdown--focus`]: isFocused,
       [`${prefix}--dropdown--inline`]: inline,
-      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--disabled`]: normalizedProps.disabled,
       [`${prefix}--dropdown--light`]: light,
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
@@ -467,12 +480,12 @@ const Dropdown = React.forwardRef(
     });
 
     const titleClasses = cx(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const helperClasses = cx(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
     const wrapperClasses = cx(
@@ -482,27 +495,24 @@ const Dropdown = React.forwardRef(
       {
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
-        [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+        [`${prefix}--dropdown__wrapper--inline--invalid`]:
+          inline && normalizedProps.invalid,
+        [`${prefix}--list-box__wrapper--inline--invalid`]:
+          inline && normalizedProps.invalid,
+        [`${prefix}--list-box__wrapper--fluid--invalid`]:
+          isFluid && normalizedProps.invalid,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
 
-    const helperId = !helperText
-      ? undefined
-      : `dropdown-helper-text-${dropdownInstanceId}`;
-
-    // needs to be Capitalized for react to render it correctly
-    const ItemToElement = itemToElement;
     const toggleButtonProps = getToggleButtonProps({
       'aria-label': ariaLabel || deprecatedAriaLabel,
     });
 
     const helper =
       helperText && !isFluid ? (
-        <div id={helperId} className={helperClasses}>
+        <div id={normalizedProps.helperId} className={helperClasses}>
           {helperText}
         </div>
       ) : null;
@@ -524,16 +534,22 @@ const Dropdown = React.forwardRef(
 
     const onKeyDownHandler = useCallback(
       (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (
-          evt.code !== 'Space' ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+        const navigationKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+
+        // If the key is not a navigation key, the user is typing
+        if (!navigationKeys.includes(evt.key)) {
           setIsTyping(true);
-        }
-        if (
-          (isTyping && evt.code === 'Space') ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+          // Reset the timer for typing timeout
+          if (currTimer) {
+            clearTimeout(currTimer);
+          }
+          setCurrTimer(
+            setTimeout(() => {
+              setIsTyping(false);
+            }, 3000)
+          );
+        } else if (isTyping && evt.key === ' ') {
+          // If user is typing and presses space, reset the timer
           if (currTimer) {
             clearTimeout(currTimer);
           }
@@ -543,6 +559,7 @@ const Dropdown = React.forwardRef(
             }, 3000)
           );
         }
+
         if (['ArrowDown'].includes(evt.key)) {
           setIsFocused(false);
         }
@@ -618,18 +635,20 @@ const Dropdown = React.forwardRef(
           onBlur={handleFocus}
           size={size}
           className={className}
-          invalid={invalid}
-          invalidText={invalidText}
-          warn={warn}
-          warnText={warnText}
+          invalid={normalizedProps.invalid}
+          invalidText={isFluid ? invalidText : undefined}
+          invalidTextId={normalizedProps.invalidId}
+          warn={normalizedProps.warn}
+          warnText={isFluid ? warnText : undefined}
+          warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
           ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
-          {invalid && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
-          {showWarning && (
+          {normalizedProps.warn && (
             <WarningAltFilled
               className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
             />
@@ -638,10 +657,19 @@ const Dropdown = React.forwardRef(
             type="button"
             // aria-expanded is already being passed through {...toggleButtonProps}
             className={`${prefix}--list-box__field`}
-            disabled={disabled}
+            disabled={normalizedProps.disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
             aria-describedby={
-              !inline && !invalid && !warn && helper ? helperId : undefined
+              !inline &&
+              !normalizedProps.invalid &&
+              !normalizedProps.warn &&
+              helper
+                ? normalizedProps.helperId
+                : normalizedProps.invalid
+                  ? normalizedProps.invalidId
+                  : normalizedProps.warn
+                    ? normalizedProps.warnId
+                    : undefined
             }
             title={
               selectedItem && itemToString !== undefined
@@ -676,30 +704,21 @@ const Dropdown = React.forwardRef(
           <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
-                const isObject = item !== null && typeof item === 'object';
                 const itemProps = getItemProps({
                   item,
                   index,
                 });
-                const title =
-                  isObject && 'text' in item && itemToElement
-                    ? item.text
-                    : itemToString(item);
+                const title = itemToString(item);
+
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
                     isActive={selectedItem === item}
                     isHighlighted={highlightedIndex === index}
-                    title={title as string}
+                    title={title}
                     disabled={itemProps['aria-disabled']}
                     {...itemProps}>
-                    {typeof item === 'object' &&
-                    ItemToElement !== undefined &&
-                    ItemToElement !== null ? (
-                      <ItemToElement key={itemProps.id} {...item} />
-                    ) : (
-                      itemToString(item)
-                    )}
+                    {itemToElement ? itemToElement(item) : itemToString(item)}
                     {selectedItem === item && (
                       <Checkmark
                         className={`${prefix}--list-box__menu-item__selected-icon`}
@@ -710,7 +729,8 @@ const Dropdown = React.forwardRef(
               })}
           </ListBox.Menu>
         </ListBox>
-        {!inline && !invalid && !warn && helper}
+        {!inline && !isFluid && !normalizedProps.validation && helper}
+        {!inline && !isFluid && normalizedProps.validation}
       </div>
     );
   }
@@ -819,8 +839,7 @@ Dropdown.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 

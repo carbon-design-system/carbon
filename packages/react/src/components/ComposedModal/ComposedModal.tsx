@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,20 +12,18 @@ import React, {
   useContext,
   useEffect,
   useRef,
+  type ComponentProps,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
-  type MutableRefObject,
-  type ReactElement,
   type ReactNode,
   type RefObject,
 } from 'react';
 import { useResizeObserver } from '../../internal/useResizeObserver';
-import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
 import { Layer } from '../Layer';
-import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
-import { ModalFooter, type ModalFooterProps } from './ModalFooter';
+import { ModalHeader } from './ModalHeader';
+import { ModalFooter } from './ModalFooter';
 import { mergeRefs } from '../../tools/mergeRefs';
 import cx from 'classnames';
 import { toggleClass } from '../../tools/toggleClass';
@@ -203,8 +201,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): void | boolean;
+  onClose?: ((event: MouseEvent) => boolean) | ((event: MouseEvent) => void);
 
   /**
    * Called for all `onKeyDown` events that do not close the modal
@@ -297,9 +294,7 @@ const ComposedModalDialog = React.forwardRef<
   const button = useRef<HTMLButtonElement>(null);
   const startSentinel = useRef<HTMLButtonElement>(null);
   const endSentinel = useRef<HTMLButtonElement>(null);
-  const onMouseDownTarget: MutableRefObject<Node | null> = useRef<Node | null>(
-    null
-  );
+  const onMouseDownTarget = useRef<Node | null>(null);
 
   const presenceContext = useContext(ComposedModalPresenceContext);
   const mergedRefs = useMergeRefs([ref, presenceContext?.presenceRef]);
@@ -389,7 +384,7 @@ const ComposedModalDialog = React.forwardRef<
     if (
       shouldCloseOnOutsideClick &&
       target instanceof Node &&
-      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus, prefix) &&
       innerModal.current &&
       !innerModal.current.contains(target) &&
       !innerModal.current.contains(mouseDownTarget)
@@ -420,6 +415,7 @@ const ComposedModalDialog = React.forwardRef<
         currentActiveNode,
         oldActiveNode,
         selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
+        prefix,
       });
     }
 
@@ -467,29 +463,22 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   // Generate aria-label based on Modal Header label if one is not provided (L253)
-  let generatedAriaLabel;
+  //
+  // TODO: Confirm whether `ModalHeader` `label` should allow `ReactNode`. If
+  // so, define how to derive a string for `aria-label`.
+  let generatedAriaLabel: ComponentProps<typeof ModalHeader>['label'];
   const childrenWithProps = React.Children.toArray(children).map((child) => {
-    switch (true) {
-      case isElement(child) &&
-        child.type === React.createElement(ModalHeader).type: {
-        const el = child as ReactElement<ModalHeaderProps, typeof ModalHeader>;
-        generatedAriaLabel = el.props.label;
-        return React.cloneElement(el, { closeModal });
-      }
+    if (isComponentElement(child, ModalHeader)) {
+      generatedAriaLabel = child.props.label;
 
-      case isElement(child) &&
-        child.type === React.createElement(ModalFooter).type: {
-        const el = child as ReactElement<ModalFooterProps, typeof ModalFooter>;
-        return React.cloneElement(el, {
-          closeModal,
-          inputref: button,
-          danger,
-        });
-      }
-
-      default:
-        return child;
+      return cloneElement(child, { closeModal });
     }
+
+    if (isComponentElement(child, ModalFooter)) {
+      return cloneElement(child, { closeModal, inputref: button, danger });
+    }
+
+    return child;
   });
 
   // Modals without a footer are considered passive and carry limitations as
