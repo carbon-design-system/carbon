@@ -438,6 +438,20 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
+
+      const isFocusLeavingModal =
+        bodyNode && !bodyNode.contains(currentActiveNode);
+
+      const shouldPreventFocusLeaving =
+        isFocusLeavingModal &&
+        ((!passiveModal && preventCloseOnClickOutside !== false) ||
+          (passiveModal && preventCloseOnClickOutside));
+
+      if (shouldPreventFocusLeaving) {
+        oldActiveNode.focus();
+        return;
+      }
+
       // use setTimeout to ensure focus is set after all browser default focus behavior. Fixes issue of
       // focus not wrapping in Firefox
       wrapFocusTimeout.current = setTimeout(() => {
@@ -542,7 +556,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   }
 
   useEffect(() => {
-
     return () => {
       if (!enableDialogElement) {
         toggleClass(document.body, `${prefix}--body--with-modal-open`, false);

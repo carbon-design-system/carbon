@@ -290,42 +290,6 @@ export const FullWidth = ({ numberOfButtons, ...args }) => {
   );
 };
 
-export const NestedModalTest = () => {
-  const [modal1Open, setModal1Open] = useState(false);
-  const [modal2Open, setModal2Open] = useState(false);
-
-  return (
-    <>
-      <Button onClick={() => setModal1Open(true)}>Open First Modal</Button>
-
-      <Modal
-        open={modal1Open}
-        onRequestClose={() => setModal1Open(false)}
-        modalHeading="First Modal"
-        primaryButtonText="Close"
-        secondaryButtonText="Open Second Modal"
-        onSecondarySubmit={() => setModal2Open(true)}>
-        <p>
-          Press ESC - this modal should stay open if the second modal is also
-          open.
-        </p>
-      </Modal>
-
-      <Modal
-        open={modal2Open}
-        onRequestClose={() => setModal2Open(false)}
-        modalHeading="Second Modal (Topmost)"
-        primaryButtonText="Close"
-        secondaryButtonText="Open Second Modal"
-        size="sm">
-        <p style={{ color: '#0f62fe', fontWeight: 'bold' }}>
-          Press ESC - ONLY this modal should close.
-        </p>
-      </Modal>
-    </>
-  );
-};
-
 export const DangerModal = () => {
   const [open, setOpen] = useState(true);
   return (
