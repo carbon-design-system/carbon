@@ -290,9 +290,7 @@ export const FullWidth = ({ numberOfButtons, ...args }) => {
   );
 };
 
-FullWidth.parameters = { ...sharedParameters };
-
-export const DangerModal = ({ numberOfButtons, ...args }) => {
+export const DangerModal = () => {
   const [open, setOpen] = useState(true);
   return (
     <>

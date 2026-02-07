@@ -374,6 +374,9 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     evt.stopPropagation();
 
     if (open && target instanceof HTMLElement) {
+      if (match(evt, keys.Escape)) {
+        onRequestClose(evt);
+      }
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -435,6 +438,20 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
+
+      const isFocusLeavingModal =
+        bodyNode && !bodyNode.contains(currentActiveNode);
+
+      const shouldPreventFocusLeaving =
+        isFocusLeavingModal &&
+        ((!passiveModal && preventCloseOnClickOutside !== false) ||
+          (passiveModal && preventCloseOnClickOutside));
+
+      if (shouldPreventFocusLeaving) {
+        oldActiveNode.focus();
+        return;
+      }
+
       // use setTimeout to ensure focus is set after all browser default focus behavior. Fixes issue of
       // focus not wrapping in Firefox
       wrapFocusTimeout.current = setTimeout(() => {
@@ -537,24 +554,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     alertDialogProps.role = 'alertdialog';
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
-
-  useEffect(() => {
-    if (!open) return;
-
-    const handleEscapeKey = (event) => {
-      if (match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        onRequestClose(event);
-      }
-    };
-    document.addEventListener('keydown', handleEscapeKey, true);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
-    };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [open]);
 
   useEffect(() => {
     return () => {
@@ -879,6 +878,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     <Layer
       {...rest}
       level={0}
+      tabIndex="-1"
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onBlur={handleBlur}
