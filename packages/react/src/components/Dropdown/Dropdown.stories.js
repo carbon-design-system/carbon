@@ -319,6 +319,11 @@ Inline.argTypes = {
   ...sharedArgTypes,
 };
 
+Inline.args = {
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
+};
+
 export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
@@ -370,6 +375,11 @@ export const InlineWithLayer = (args) => (
 
 InlineWithLayer.argTypes = {
   ...sharedArgTypes,
+};
+
+InlineWithLayer.args = {
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
 };
 
 export const Skeleton = () => {
