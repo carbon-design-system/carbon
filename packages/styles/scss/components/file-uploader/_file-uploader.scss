@@ -257,6 +257,11 @@
     outline-width: 1px;
   }
 
+  .#{$prefix}--file__selected-file--disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
@@ -380,14 +385,18 @@
     fill: $icon-primary;
     inline-size: $spacing-06;
 
+    &[disabled] {
+      cursor: not-allowed;
+    }
+
     &:focus {
       @include focus-outline('outline');
     }
   }
 
-  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
-    fill: $icon-primary;
-  }
+  // .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+  //   fill: $icon-primary;
+  // }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
     margin-inline-end: -$spacing-03;

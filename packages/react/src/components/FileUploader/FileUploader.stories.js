@@ -54,6 +54,10 @@ export const _FileUploaderItem = (args) => {
 };
 
 _FileUploaderItem.argTypes = {
+  disabled: {
+    control: 'boolean',
+    description: 'Specify whether file uploader item is disabled',
+  },
   errorBody: {
     control: 'text',
     description: 'Error message body for an invalid file upload',
@@ -88,7 +92,7 @@ _FileUploaderItem.parameters = {
       'accept',
       'buttonKind',
       'buttonLabel',
-      'disabled',
+      // 'disabled',
       'labelDescription',
       'labelTitle',
       'multiple',
