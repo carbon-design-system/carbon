@@ -1603,10 +1603,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
 
     const hasSize20 =
       isValidElement<ComponentProps<CarbonIconType>>(children) &&
-      // TODO: The interface allows `size` to be a string. Should this case be
-      // handled here, or should the prop type be restricted to `number`
-      // instead?
-      children.props.size === 20;
+      (children.props.size === 20 || children.props.size === '20');
 
     const classNames = cx(
       `${prefix}--tabs__nav-item--icon-only`,
