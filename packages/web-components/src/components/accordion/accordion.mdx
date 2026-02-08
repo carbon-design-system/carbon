@@ -15,78 +15,94 @@ import * as AccordionStories from './accordion.stories';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Variations](#variations)
 - [Controlled](#controlled)
 - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
+- [Accessibility](#accessibility)
 - [CDN](#cdn)
-- [Feedback](#feedback)
 
 ## Overview
 
-You can build an accordion using a combination of the `cds-accordion` and
-`cds-accordion-item` components. The `accordion` components accept a list of
-`cds-accordion-item` components as children, which are responsible for
-displaying the accordion's heading and panel content.
+The Accordion component allows for the toggling of stacked sections of content. It is ideal for reducing vertical clutter while keeping related information organized.
 
-You can configure the accordion item's heading using the `title` attribute.
-Everything you pass in as a child of `cds-accordion-item` will be rendered in
-the accordion's panel.
+
 
 <Canvas of={AccordionStories.Default} />
 
+---
+
+## Variations
+
+### Alignment and Flush
+* **Alignment**: Determines the position of the chevron. Use `start` or `END`.
+* **Flush**: Use the `isFlush` boolean attribute to remove borders and padding.
+
+> **Technical Detail:** Per the component logic, the `isFlush` style is automatically suppressed if `alignment="start"` is used to maintain visual integrity.
+
+### Sizes
+Accordions support `sm`, `md` (default), and `lg` sizes. Apply the `size` attribute to the `cds-accordion` container to automatically propagate it to all children.
+
+
+
+### With Layer
+Use the `WithLayer` variant when the accordion is nested within different container depths to ensure background color contrast.
+
+<Canvas of={AccordionStories.WithLayer} />
+
+---
+
 ## Controlled
 
-> The `controlled` attribute used here is for this example only, and is not part
-> of the component API. Any valid DOM selector can be used.
+The expansion state can be managed programmatically by toggling the `open` attribute on `cds-accordion-item`. 
 
 <Canvas of={AccordionStories.Controlled} />
 
-## Skeleton state
+---
 
-You can use the `cds-accordion-skeleton` component to render a skeleton variant
-of an accordion. This is useful to display while content in your accordion is
-being fetched from an external resource like an API.
+## Skeleton State
+
+Use `cds-accordion-skeleton` to represent the component structure during data fetching. This state disables all pointer events and user interactions.
 
 <Canvas of={AccordionStories.Skeleton} />
 
+---
+
 ## Component API
 
+### cds-accordion
 <ArgTypes of="cds-accordion" />
+
+### cds-accordion-item
 <ArgTypes of="cds-accordion-item" />
 
-### Accordion align
+#### Custom Events
+| Event Name | Description |
+| :--- | :--- |
+| `cds-accordion-item-beingtoggled` | Dispatched before the toggle transition starts. |
+| `cds-accordion-item-toggled` | Dispatched after the transition is complete. |
 
-In rare cases, you may need to specify the alignment of the icon in the
-accordion. You can use the `alignment` attribute to specify the side where the
-icon should be placed.
+---
 
-_Note: This attribute must not be used to create a tree view or set of nested
-accordions._
+## Accessibility
 
-```html
-<cds-accordion alignment="start">
-  <cds-accordion-item title="Panel A">Panel A</cds-accordion-item>
-  <cds-accordion-item title="Panel B">Panel B</cds-accordion-item>
-  <cds-accordion-item title="Panel C">Panel C</cds-accordion-item>
-</cds-accordion>
-```
+The Accordion follows the W3C WAI-ARIA pattern for accordions, injecting `role="list"` on the container and `role="listitem"` on children.
 
-### Accordion Item title
+### Keyboard Interaction
+| Key | Action |
+| :--- | :--- |
+| **Space / Enter** | Toggles the focused accordion item. |
+| **Tab** | Moves focus to the next/previous header. |
+| **Up / Down Arrow** | Navigates focus between headers. |
 
-You can use the `title` attribute to specify the accordion item's heading.
 
-```html
-<cds-accordion>
-  <cds-accordion-item title="Panel A">Panel A</cds-accordion-item>
-  <cds-accordion-item title="Panel B">Panel B</cds-accordion-item>
-  <cds-accordion-item title="Panel C">Panel C</cds-accordion-item>
-</cds-accordion>
-```
+
+---
+
+## CDN
 
 <Markdown>{`${cdnJs({ components: ['accordion'] })}`}</Markdown>
 
 ## Feedback
 
-Help us improve this component by providing feedback, asking questions on Slack,
-or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/accordion/accordion.mdx).
+Help us improve this component by providing feedback or updating this file on [GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/accordion/accordion.mdx).
