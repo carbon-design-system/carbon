@@ -2696,9 +2696,6 @@ Map {
       "columnCount": {
         "type": "number",
       },
-      "compact": {
-        "type": "bool",
-      },
       "headers": {
         "args": [
           {
