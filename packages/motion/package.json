@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "types": "lib/index.d.ts",
   "sass": "index.scss",
   "repository": {
     "type": "git",
@@ -26,13 +27,16 @@
     "provenance": true
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonMotion",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonMotion && yarn build:types",
     "clean": "rimraf es lib umd",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "@carbon/cli": "^11.39.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3",
+    "typescript-config-carbon": "workspace:^0.9.0"
   },
   "dependencies": {
     "@ibm/telemetry-js": "^1.5.0"

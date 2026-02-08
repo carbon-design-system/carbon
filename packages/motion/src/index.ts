@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,9 +32,13 @@ export const unstable_tokens = [
   'durationModerate02',
   'durationSlow01',
   'durationSlow02',
-];
+] as const;
 
-export const easings = {
+export type EasingName = 'standard' | 'entrance' | 'exit';
+export type EasingMode = 'productive' | 'expressive';
+export type EasingMap = Record<EasingName, Record<EasingMode, string>>;
+
+export const easings: EasingMap = {
   standard: {
     productive: 'cubic-bezier(0.2, 0, 0.38, 0.9)',
     expressive: 'cubic-bezier(0.4, 0.14, 0.3, 1)',
@@ -49,20 +53,21 @@ export const easings = {
   },
 };
 
-export function motion(name, mode) {
+export const motion = (name: EasingName, mode: EasingMode) => {
   if (!easings[name]) {
     throw new Error(
       `Unable to find easing \`${name}\` in our supported easings. Expected ` +
-        `One of: ${Object.keys(easings).join(', ')}`
+        `one of: ${Object.keys(easings).join(', ')}`
     );
   }
 
   const easing = easings[name];
   if (!easing[mode]) {
     throw new Error(
-      `Unable to find a mode for the easing \`${name}\` called: \`${mode}\``
+      `Unable to find a mode for the easing \`${name}\` called: \`${mode}\`. ` +
+        `Expected one of: ${Object.keys(easing).join(', ')}`
     );
   }
 
   return easing[mode];
-}
+};
