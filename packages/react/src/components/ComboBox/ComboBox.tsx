@@ -427,7 +427,11 @@ const ComboBox = forwardRef(
           }
         : {}
     );
-    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
+    const referenceElement = refs?.reference?.current;
+    const parentWidth =
+      referenceElement instanceof HTMLElement
+        ? referenceElement.clientWidth
+        : undefined;
 
     useEffect(() => {
       if (enableFloatingStyles) {
