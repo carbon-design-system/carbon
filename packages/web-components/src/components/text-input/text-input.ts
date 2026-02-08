@@ -393,7 +393,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
       [`${prefix}--text-input--${size}`]: size,
       [`${prefix}--layout--size-${size}`]: size,
-      [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD, //TODO deprecated, remove in v12
+      [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD, // TODO: deprecated, remove in v12
       [`${prefix}--text-input__field-wrapper--decorator`]: hasAILabel,
     });
 
@@ -418,13 +418,13 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
     const passwordVisibilityIcon = passwordIsVisible
       ? iconLoader(ViewOff16, { class: `${prefix}--icon-visibility-off` })
       : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordVisibilityToggleClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
       [`${prefix}--btn`]: true,
@@ -437,14 +437,14 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         this.tooltipAlignment,
     });
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordButtonLabel = html`
       <span class="${prefix}--assistive-text">
         ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
       </span>
     `;
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordVisibilityButton = () => html`
       <button
         type="button"
