@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');  
+const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');  
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('AILabel', () => {
   themes.forEach((theme) => {
