@@ -321,7 +321,8 @@ export const Popover: PopoverComponent & {
                 !isTabTip
                   ? {
                       alignmentAxis: alignmentAxisOffset,
-                      mainAxis: popoverDimensions?.current?.offset,
+                      // Use 4px spacing when no caret, otherwise use the caret offset
+                      mainAxis: caret ? popoverDimensions?.current?.offset : 4,
                     }
                   : 0
               ),

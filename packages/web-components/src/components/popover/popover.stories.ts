@@ -319,10 +319,6 @@ const sharedTabTipArgTypes = {
     description:
       'Specify whether a drop shadow should be rendered on the popover',
   },
-  highContrast: {
-    control: 'boolean',
-    description: 'Render the component using the high-contrast variant',
-  },
   open: {
     control: 'boolean',
     description: 'Specify whether the component is currently open or closed',
@@ -332,7 +328,6 @@ export const TabTip = {
   argTypes: sharedTabTipArgTypes,
   args: {
     dropShadow: true,
-    highContrast: false,
     open: true,
   },
   render: (args) => {
@@ -352,7 +347,6 @@ export const TabTip = {
       <div class="popover-tabtip-story" style="display: 'flex'">
         <cds-popover
           ?dropShadow=${args.dropShadow}
-          ?highContrast=${args.highContrast}
           ?open=${args.open}
           tabTip
           align="bottom-left"

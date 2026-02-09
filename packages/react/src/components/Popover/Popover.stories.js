@@ -164,6 +164,8 @@ export const TabTip = (args) => {
 TabTip.argTypes = {
   align: { control: false },
   autoAlign: { control: false },
+  highContrast: { control: false },
+  caret: { control: false },
 };
 
 export const Default = DefaultStory.bind({});
@@ -176,6 +178,9 @@ Default.args = {
 };
 
 Default.argTypes = {
+  isTabTip: {
+    control: false,
+  },
   align: {
     options: [
       'top',
@@ -281,7 +286,42 @@ export const ExperimentalAutoAlign = (args) => {
   );
 };
 
-export const ExperimentalAutoAlignBoundary = () => {
+ExperimentalAutoAlign.argTypes = {
+  autoAlign: { control: false },
+  highContrast: { control: false },
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  isTabTip: {
+    control: false,
+  },
+};
+
+export const ExperimentalAutoAlignBoundary = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
   const [boundary, setBoundary] = useState();
@@ -318,7 +358,8 @@ export const ExperimentalAutoAlignBoundary = () => {
           autoAlign
           autoAlignBoundary={boundary}
           onRequestClose={() => setOpen(false)}
-          ref={ref}>
+          ref={ref}
+          {...args}>
           <button
             className="playground-trigger"
             aria-label="Checkbox"
@@ -351,6 +392,41 @@ export const ExperimentalAutoAlignBoundary = () => {
       </div>
     </div>
   );
+};
+
+ExperimentalAutoAlignBoundary.argTypes = {
+  autoAlign: { control: false },
+  highContrast: { control: false },
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  isTabTip: {
+    control: false,
+  },
 };
 
 export const TabTipExperimentalAutoAlign = () => {
