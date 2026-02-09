@@ -394,6 +394,10 @@
     }
   }
 
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    fill: $icon-primary;
+  }
+
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
     margin-inline-end: -$spacing-03;
   }
