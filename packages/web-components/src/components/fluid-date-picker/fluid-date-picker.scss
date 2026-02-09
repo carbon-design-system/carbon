@@ -19,9 +19,3 @@ $css--plex: true !default;
 :host(#{$prefix}-fluid-date-picker) {
   @include emit-layout-tokens();
 }
-
-:host(#{$prefix}-fluid-date-picker-skeleton) {
-  @extend .#{$prefix}--fluid-date-picker__skeleton;
-
-  display: block;
-}
