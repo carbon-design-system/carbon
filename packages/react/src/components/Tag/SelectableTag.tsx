@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  useLayoutEffect,
   useState,
   useRef,
   MouseEvent,
@@ -24,6 +23,8 @@ import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { useControllableState } from '../../internal/useControllableState';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+
 export interface SelectableTagBaseProps {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -114,7 +115,7 @@ const SelectableTag = forwardRef(
     });
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
