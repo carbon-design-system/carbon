@@ -128,7 +128,7 @@ export const ControlledFileState = (args) => {
       <FileUploader
         ref={fileUploaderRef}
         labelTitle="Enhanced FileUploader Demo"
-        labelDescription="Open browser console to see detailed callback data when adding/removing files"
+        labelDescription="Add files, then toggle the disabled state and notice that the state is passed to the items."
         buttonLabel="Add file(s)"
         buttonKind="primary"
         filenameStatus="edit"
