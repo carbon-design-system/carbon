@@ -497,6 +497,126 @@ describe('cds-combo-box', () => {
     });
   });
 
+  describe('invalid and warn states', () => {
+    it('should not display invalid state when readonly', async () => {
+      render(
+        template({
+          invalid: true,
+          invalidText: 'Invalid text',
+          readOnly: true,
+        }),
+        document.body
+      );
+      await Promise.resolve();
+      const elem = document.body.querySelector('cds-combo-box');
+      const listBox = elem && elem.shadowRoot?.querySelector('.cds--list-box');
+
+      // Check that the invalid class is not applied
+      expect(listBox?.classList.contains('cds--dropdown--invalid')).toBe(false);
+
+      // Check that the invalid text is not displayed
+      expect(elem?.shadowRoot?.textContent).not.toContain('Invalid text');
+    });
+
+    it('should not display invalid state when disabled', async () => {
+      render(
+        template({
+          invalid: true,
+          invalidText: 'Invalid text',
+          disabled: true,
+        }),
+        document.body
+      );
+      await Promise.resolve();
+      const elem = document.body.querySelector('cds-combo-box');
+      const listBox = elem && elem.shadowRoot?.querySelector('.cds--list-box');
+
+      // Check that the invalid class is not applied
+      expect(listBox?.classList.contains('cds--dropdown--invalid')).toBe(false);
+
+      // Check that the invalid text is not displayed
+      expect(elem?.shadowRoot?.textContent).not.toContain('Invalid text');
+    });
+
+    it('should not display warn state when readonly', async () => {
+      render(
+        template({
+          warn: true,
+          warnText: 'Warning text',
+          readOnly: true,
+        }),
+        document.body
+      );
+      await Promise.resolve();
+      const elem = document.body.querySelector('cds-combo-box');
+      const listBox = elem && elem.shadowRoot?.querySelector('.cds--list-box');
+
+      // Check that the warn class is not applied
+      expect(listBox?.classList.contains('cds--dropdown--warn')).toBe(false);
+
+      // Check that the warn text is not displayed
+      expect(elem?.shadowRoot?.textContent).not.toContain('Warning text');
+    });
+
+    it('should not display warn state when disabled', async () => {
+      render(
+        template({
+          warn: true,
+          warnText: 'Warning text',
+          disabled: true,
+        }),
+        document.body
+      );
+      await Promise.resolve();
+      const elem = document.body.querySelector('cds-combo-box');
+      const listBox = elem && elem.shadowRoot?.querySelector('.cds--list-box');
+
+      // Check that the warn class is not applied
+      expect(listBox?.classList.contains('cds--dropdown--warn')).toBe(false);
+
+      // Check that the warn text is not displayed
+      expect(elem?.shadowRoot?.textContent).not.toContain('Warning text');
+    });
+
+    it('should display invalid state when not readonly or disabled', async () => {
+      render(
+        template({
+          invalid: true,
+          invalidText: 'Invalid text',
+        }),
+        document.body
+      );
+      await Promise.resolve();
+      const elem = document.body.querySelector('cds-combo-box');
+      const listBox = elem && elem.shadowRoot?.querySelector('.cds--list-box');
+
+      // Check that the invalid class is applied
+      expect(listBox?.classList.contains('cds--dropdown--invalid')).toBe(true);
+
+      // Check that the invalid text is displayed
+      expect(elem?.shadowRoot?.textContent).toContain('Invalid text');
+    });
+
+    it('should display warn state when not readonly or disabled', async () => {
+      render(
+        template({
+          warn: true,
+          warnText: 'Warning text',
+        }),
+        document.body
+      );
+      await Promise.resolve();
+      const elem = document.body.querySelector('cds-combo-box');
+      const listBox = elem && elem.shadowRoot?.querySelector('.cds--list-box');
+
+      // Check that the warn class is applied
+      expect(listBox?.classList.contains('cds--dropdown--warn')).toBe(true);
+
+      // Check that the warn text is displayed
+      expect(elem?.shadowRoot?.textContent).toContain('Warning text');
+    });
+  });
+
   afterEach(async () => {
     events.reset();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452

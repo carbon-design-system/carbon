@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,7 +24,6 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -69,6 +68,7 @@ import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const {
   InputBlur,
@@ -476,7 +476,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       : {}
   );
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (autoAlign) {
       const updatedFloatingStyles = {
         ...floatingStyles,
@@ -574,7 +574,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       [`${prefix}--autoalign`]: autoAlign,
     }
   );
-  const helperId = !helperText
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const helperId = !hasHelper
     ? undefined
     : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
   const labelId = `${id}-label`;
@@ -592,11 +593,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     [`${prefix}--text-input--empty`]: !inputValue,
     [`${prefix}--text-input--light`]: light,
   });
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <div id={helperId} className={helperClasses}>
       {helperText}
     </div>
-  ) : null;
+  );
   const menuId = `${id}__menu`;
   const inputId = `${id}-input`;
 
