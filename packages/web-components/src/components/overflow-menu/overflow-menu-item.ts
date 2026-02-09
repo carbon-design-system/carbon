@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -46,6 +46,12 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
   danger = false;
 
   /**
+   * Specify the message read by screen readers for the danger over flow menu item variant
+   */
+  @property({ type: String, attribute: 'danger-description' })
+  dangerDescription = 'danger';
+
+  /**
    * `true` if the overflow menu item should be disabled.
    */
   @property({ type: Boolean, reflect: true })
@@ -88,6 +94,13 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
             @click="${handleClick}">
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
+              ${this.danger
+                ? html`<span
+                    id="danger-description"
+                    class="${prefix}--visually-hidden"
+                    >${this.dangerDescription}</span
+                  >`
+                : html``}
             </div>
           </a>
         `
@@ -99,6 +112,13 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
             @click="${handleClick}">
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
+              ${this.danger
+                ? html`<span
+                    id="danger-description"
+                    class="${prefix}--visually-hidden"
+                    >${this.dangerDescription}</span
+                  >`
+                : html``}
             </div>
           </button>
         `;
