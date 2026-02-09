@@ -48,10 +48,32 @@ test.describe('@avt AILabel', () => {
     await expect(page).toHaveNoACViolations('AILabel-form');
   });
 
-  test('@avt-keyboard-nav - slug', async ({ page }) => {
+  test('@avt-default-state inline', async ({ page }) => {
     await visitStory(page, {
-      component: 'Search',
-      id: 'components-ailabel--explainability-popover',
+      component: 'AILabel',
+      id: 'components-ailabel--inline',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('AILabel-inline');
+  });
+
+  test('@avt-default-state inline with content', async ({ page }) => {
+    await visitStory(page, {
+      component: 'AILabel',
+      id: 'components-ailabel--inline-with-content',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('AILabel-inline-with-content');
+  });
+
+  test('@avt-keyboard-nav - AILabel', async ({ page }) => {
+    await visitStory(page, {
+      component: 'AILabel',
+      id: 'components-ailabel--default',
       globals: {
         theme: 'white',
       },
