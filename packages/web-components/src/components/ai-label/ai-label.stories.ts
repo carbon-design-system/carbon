@@ -85,11 +85,10 @@ const args = {
   aiText: 'AI',
   aiTextLabel: '',
   alignment: POPOVER_ALIGNMENT.BOTTOM_START,
-  autoalign: false,
+  autoalign: true,
   kind: 'default',
   revertActive: false,
   buttonLabel: 'Show information',
-  defaultOpen: false,
   revertLabel: 'Revert to AI input',
   size: AI_LABEL_SIZE.MEDIUM,
 };
@@ -129,10 +128,6 @@ const argTypes = {
       'Specify the type of AI Label, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
     options: ['default', 'inline'],
   },
-  defaultOpen: {
-    control: 'boolean',
-    description: 'Set whether toggletip is open by default.',
-  },
   size: {
     control: 'select',
     description:
@@ -161,7 +156,6 @@ export const Default = {
     autoalign,
     buttonLabel,
     kind,
-    defaultOpen,
     size,
     revertActive,
     revertLabel,
@@ -178,7 +172,6 @@ export const Default = {
           ?autoalign="${autoalign}"
           button-label="${buttonLabel}"
           kind="${kind}"
-          ?default-open="${defaultOpen}"
           size="${size}"
           ?revert-active="${revertActive}"
           revert-label="${revertLabel}">
@@ -195,6 +188,12 @@ export const Inline = {
   },
   argTypes: {
     ...argTypes,
+    kind: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
+    },
     size: {
       control: 'select',
       description:
@@ -209,7 +208,6 @@ export const Inline = {
     autoalign,
     buttonLabel,
     kind,
-    defaultOpen,
     size,
     revertActive,
     revertLabel,
@@ -226,7 +224,6 @@ export const Inline = {
           ?autoalign="${autoalign}"
           button-label="${buttonLabel}"
           kind="${kind}"
-          ?default-open="${defaultOpen}"
           size="${size}"
           ?revert-active="${revertActive}"
           revert-label="${revertLabel}">
@@ -244,6 +241,12 @@ export const InlineWithContent = {
   },
   argTypes: {
     ...argTypes,
+    kind: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
+    },
     size: {
       control: 'select',
       description:
@@ -258,7 +261,6 @@ export const InlineWithContent = {
     autoalign,
     buttonLabel,
     kind,
-    defaultOpen,
     size,
     revertActive,
     revertLabel,
@@ -275,62 +277,10 @@ export const InlineWithContent = {
           ?autoalign="${autoalign}"
           button-label="${buttonLabel}"
           kind="${kind}"
-          ?default-open="${defaultOpen}"
           size="${size}"
           ?revert-active="${revertActive}"
           revert-label="${revertLabel}">
           ${content} ${actions}
-        </cds-ai-label>
-      </div>
-    `;
-  },
-};
-
-export const ExplainabilityPopover = {
-  args: {
-    ...args,
-    defaultOpen: true,
-    alignment: tooltipAlignments.bottom,
-    showActions: true,
-  },
-  argTypes: {
-    ...argTypes,
-    showActions: {
-      control: 'boolean',
-      description:
-        'Storybook only - Specify whether to show action items in AI Label callout',
-    },
-  },
-  render: ({
-    aiText,
-    aiTextLabel,
-    alignment,
-    autoalign,
-    buttonLabel,
-    kind,
-    defaultOpen,
-    showActions,
-    size,
-    revertActive,
-    revertLabel,
-  }) => {
-    return html`
-      <style>
-        ${styles}
-      </style>
-      <div class="ai-label-container-example ai-label-container centered">
-        <cds-ai-label
-          ai-text="${aiText}"
-          ai-text-label="${aiTextLabel}"
-          alignment="${alignment}"
-          ?autoalign="${autoalign}"
-          button-label="${buttonLabel}"
-          kind="${kind}"
-          ?default-open="${defaultOpen}"
-          size="${size}"
-          ?revert-active="${revertActive}"
-          revert-label="${revertLabel}">
-          ${content} ${showActions ? actions : ''}
         </cds-ai-label>
       </div>
     `;

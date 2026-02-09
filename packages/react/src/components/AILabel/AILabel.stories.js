@@ -23,7 +23,7 @@ export default {
       page: mdx,
     },
     controls: {
-      exclude: ['AILabelContent', 'aiTextLabel', 'slugLabel'],
+      exclude: ['AILabelContent', 'aiTextLabel', 'slugLabel', 'defaultOpen'],
     },
   },
 };
@@ -114,7 +114,7 @@ const sharedArgs = {
   size: 'md',
   defaultOpen: false,
   textLabel: '',
-  autoAlign: false,
+  autoAlign: true,
   onRevertClick: (event) => {
     action('onRevertClick')(event);
   },
@@ -204,6 +204,8 @@ export const Inline = (args) => {
 };
 Inline.args = {
   ...sharedArgs,
+  // `kind` prop is hidden from the controls table, but its value is still used for conditional `textLabel`,
+  // hence the arg value is set even though the prop can’t be updated from controls.
   kind: 'inline',
 };
 Inline.argTypes = {
@@ -221,6 +223,17 @@ Inline.argTypes = {
         summary: "'sm' | 'md' | 'lg'",
       },
     },
+  },
+};
+Inline.parameters = {
+  controls: {
+    exclude: [
+      'AILabelContent',
+      'aiTextLabel',
+      'slugLabel',
+      'defaultOpen',
+      'kind',
+    ],
   },
 };
 export const InlineWithContent = (args) => {
@@ -265,6 +278,8 @@ export const InlineWithContent = (args) => {
 };
 InlineWithContent.args = {
   ...sharedArgs,
+  // `kind` prop is hidden from the controls table, but its value is still used for conditional `textLabel`,
+  // hence the arg value is set even though the prop can’t be updated from controls.
   kind: 'inline',
   textLabel: 'Text goes here',
 };
@@ -285,58 +300,14 @@ InlineWithContent.argTypes = {
     },
   },
 };
-
-export const ExplainabilityPopover = (args) => {
-  const { showAILabelActions, ...rest } = args;
-  return (
-    <div className="ai-label-container-example ai-label-container centered">
-      <AILabel {...rest}>
-        <AILabelContent>
-          {' '}
-          <div>
-            <p className="secondary">AI Explained</p>
-            <h2 className="ai-label-heading">84%</h2>
-            <p className="secondary bold">Confidence score</p>
-            <p className="secondary">
-              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut fsil labore et dolore magna
-              aliqua.
-            </p>
-            <hr />
-            <p className="secondary">Model type</p>
-            <p className="bold">Foundation model</p>
-          </div>
-          {showAILabelActions && (
-            <AILabelActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </AILabelActions>
-          )}
-        </AILabelContent>
-      </AILabel>
-    </div>
-  );
-};
-ExplainabilityPopover.args = {
-  ...sharedArgs,
-  defaultOpen: true,
-  showAILabelActions: true,
-};
-
-ExplainabilityPopover.argTypes = {
-  ...sharedArgTypes,
-  showAILabelActions: {
-    control: {
-      type: 'boolean',
-    },
-    description: 'Playground only - toggle to show the callout toolbar',
+InlineWithContent.parameters = {
+  controls: {
+    exclude: [
+      'AILabelContent',
+      'aiTextLabel',
+      'slugLabel',
+      'defaultOpen',
+      'kind',
+    ],
   },
 };
