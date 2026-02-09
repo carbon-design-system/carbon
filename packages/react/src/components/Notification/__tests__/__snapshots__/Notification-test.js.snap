@@ -14,7 +14,9 @@ exports[`ActionableNotification should render 1`] = `
     >
       Focus sentinel
     </span>
-    <div>
+    <div
+      class="cds--actionable-notification__focus-wrapper"
+    >
       <div
         class="cds--actionable-notification__details"
       >
