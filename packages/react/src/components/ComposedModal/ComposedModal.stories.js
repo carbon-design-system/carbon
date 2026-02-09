@@ -16,7 +16,6 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
-import OverflowMenu from '../OverflowMenu';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -28,7 +27,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './ComposedModal.mdx';
-import OverflowMenuItem from '../OverflowMenuItem';
 
 export default {
   title: 'Components/ComposedModal',
@@ -74,17 +72,6 @@ export const Default = (args) => {
           {...args}
         />
         <ModalBody>
-          <OverflowMenu ariaLabel="More options">
-            <OverflowMenuItem
-              itemText="Download"
-              onClick={() => console.log('Download clicked')}
-              hasDivider
-            />
-            <OverflowMenuItem
-              itemText="Share"
-              onClick={() => console.log('Share clicked')}
-            />
-          </OverflowMenu>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
@@ -113,72 +100,6 @@ export const Default = (args) => {
 };
 
 Default.argTypes = { ...sharedArgTypes };
-
-export const Nested = (args) => {
-  const [open, setOpen] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal
-        {...args}
-        open={open}
-        onClose={() => {
-          console.log('top');
-
-          setOpen(false);
-        }}>
-        <ModalHeader
-          label="Account resources"
-          title="Add a custom domain"
-          {...args}
-        />
-        <ModalBody>
-          <p style={{ marginBottom: '1rem' }}>
-            Custom domains direct requests for your apps in this Cloud Foundry
-            organization to a URL that you own. A custom domain can be a shared
-            domain, a shared subdomain, or a shared domain and host.
-          </p>
-          <Button onClick={() => setOpen2(true)}>Launch composed modal2</Button>
-          <ComposedModal
-            {...args}
-            open={open2}
-            onClose={() => {
-              console.log('child');
-
-              setOpen2(false);
-            }}>
-            <ModalHeader
-              label="Account resources"
-              title="Add a custom domain"
-              {...args}
-            />
-            <ModalBody>
-              <p style={{ marginBottom: '1rem' }}>
-                Custom domains direct requests for your apps in this Cloud
-                Foundry organization to a URL that you own. A custom domain can
-                be a shared domain, a shared subdomain, or a shared domain and
-                host.
-              </p>
-            </ModalBody>
-            <ModalFooter
-              primaryButtonText="Add"
-              secondaryButtonText="Cancel"
-              {...args}
-            />
-          </ComposedModal>
-        </ModalBody>
-        <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
-          {...args}
-        />
-      </ComposedModal>
-    </>
-  );
-};
-
-Nested.argTypes = { ...sharedArgTypes };
 
 export const FullWidth = () => {
   const [open, setOpen] = useState(true);
