@@ -293,6 +293,14 @@
     opacity: 1;
   }
 
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--toast
+    )
+    > div {
+    display: flex;
+    flex: 1;
+  }
+
   .#{$prefix}--actionable-notification__details {
     display: flex;
     flex-grow: 1;
