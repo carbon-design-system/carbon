@@ -22,6 +22,8 @@ import type { Boundary, Rect } from '@floating-ui/dom';
  * Popover.
  *
  * @element cds-popover
+ * @fires cds-popover-beingclosed
+ * @fires cds-popover-closed
  */
 @customElement(`${prefix}-popover`)
 class CDSPopover extends HostListenerMixin(LitElement) {
@@ -133,65 +135,167 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     this.requestUpdate();
   }
 
-  @HostListener('mousedown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore
-  private _handleMouseDown(event: MouseEvent) {
-    const path = event.composedPath();
-    const contentEl = this._contentSlotNode.assignedElements()[0];
-
-    this._lastClickWasInsidePopoverContent =
-      contentEl && path.includes(contentEl);
-
-    // reset flag
-    if (this._lastClickWasInsidePopoverContent) {
-      setTimeout(() => {
-        this._lastClickWasInsidePopoverContent = false;
-      }, 0);
-    }
-  }
+  // This is from what was shown in the meeting today  https://github.com/carbon-design-system/carbon/pull/20552/changes#r2358833820
 
   @HostListener('focusout')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
-  private _handleFocusOut(event: Event) {
-    const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
-    const path = event.composedPath();
-    const triggerEl = this._triggerSlotNode.assignedElements({
-      flatten: true,
-    })[0];
-
-    if (this._lastClickWasInsidePopoverContent) {
-      this._lastClickWasInsidePopoverContent = false;
+  private _handleFocusOut(event: FocusEvent) {
+    if (this.contains(event.relatedTarget as Node)) {
       return;
     }
 
-    if (
-      relatedTarget &&
-      triggerEl &&
-      (path.includes(triggerEl) ||
-        triggerEl === relatedTarget ||
-        triggerEl.contains(relatedTarget))
-    ) {
+    if (this._deepShadowContains(this, event.relatedTarget)) {
       return;
     }
-    if (!this.contains(relatedTarget)) {
-      const wasOpen = this.open;
-      this.open = false;
-
-      if (wasOpen) {
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSPopover).eventOnClose,
-            {
-              bubbles: true,
-              composed: true,
-            }
-          )
-        );
-      }
-    }
+    // eslint-disable-next-line no-console
+    console.log(event);
+    this.open = false;
   }
+  private _deepShadowContains(root: Node, el: EventTarget | null): boolean {
+    if (!(el instanceof Node)) {
+      return false;
+    }
+    if (el === root) {
+      return true;
+    }
+
+    return this._deepShadowContains(
+      root,
+      (el as HTMLElement).assignedSlot ||
+        el.parentNode ||
+        (el.getRootNode() as ShadowRoot).host ||
+        null
+    );
+  }
+
+  //
+
+  /**
+   * This entire commented out block is my implementation, this works but idk if it's the best way to do it
+   * longevity wise. It uses two additional listeners to add flags that are used to track if the popover should close or not
+   *
+   */
+
+  //   @HostListener('mousedown')
+  // // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // // @ts-ignore
+  // private _handleMouseDown(event: MouseEvent) {
+  //   const path = event.composedPath();
+  //   const contentEl = this._contentSlotNode.assignedElements()[0];
+
+  //   if (contentEl && path.includes(contentEl)) {
+  //     this._lastClickWasInsidePopoverContent = true;
+  //   }
+  // }
+
+  // @HostListener('keydown')
+  // // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // // @ts-ignore
+  // private _handleKeyDown(event: KeyboardEvent) {
+  //   const path = event.composedPath();
+  //   const contentEl = this._contentSlotNode.assignedElements()[0];
+
+  //   // tab key should allow popover to close
+  //   if (event.key === 'Tab' && contentEl && path.includes(contentEl)) {
+  //     // Clear the activation flag when Tab is pressed
+  //     this._lastClickWasInsidePopoverContent = false;
+  //     return;
+  //   }
+
+  //   // clean this up later and marge the conditions with the top one,
+  //   // i dont think theres a need to check for Enter and space this can just be an else
+  //   if (event.key === 'Enter' || event.key === ' ') {
+  //     if (contentEl && path.includes(contentEl)) {
+  //       this._lastClickWasInsidePopoverContent = true;
+  //     }
+  //   }
+  // }
+
+  // @HostListener('focusout')
+  // // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // // @ts-ignore
+  // private _handleFocusOut(event: FocusEvent) {
+  //   const relatedTarget = (event as FocusEvent).relatedTarget as Node | null;
+  //   const path = event.composedPath();
+  //   const triggerEl = this._triggerSlotNode.assignedElements({
+  //     flatten: true,
+  //   })[0];
+  //   console.log(event);
+  //   const contentEl = this._contentSlotNode.assignedElements()[0];
+
+  //   // if there was a recent click/keypress inside popover content via flag=true, prevent close
+  //   if (this._lastClickWasInsidePopoverContent) {
+  //     return;
+  //   }
+
+  //   if (
+  //     relatedTarget &&
+  //     triggerEl &&
+  //     (path.includes(triggerEl) ||
+  //       triggerEl === relatedTarget ||
+  //       triggerEl.contains(relatedTarget))
+  //   ) {
+  //     return;
+  //   }
+
+  //   // check if the focusout event originated from within the popover content
+  //   // handles cases where relatedTarget is null
+  //   if (contentEl && path.includes(contentEl) && !relatedTarget) {  // i think !relatedTarget can be removed
+  //
+  //     const activeEl = document.activeElement;
+  //     if (
+  //       this._lastClickWasInsidePopoverContent &&
+  //       activeEl === document.body
+  //     ) {
+  //       console.log(this._lastClickWasInsidePopoverContent);
+  //       return;
+  //     }
+
+  //     // if focus is still within popover content, prevent close
+  //     if (activeEl && contentEl.contains(activeEl)) {
+  //       return;
+  //     }
+  //   }
+
+  //   if (!this.contains(relatedTarget)) {
+  //     const wasOpen = this.open;
+
+  //     // rest the flag when actually closing the popover
+  //     this._lastClickWasInsidePopoverContent = false;
+
+  //     if (wasOpen) {
+  //       const init = {
+  //         bubbles: true,
+  //         cancelable: true,
+  //         composed: true,
+  //         detail: {
+  //           triggeredBy: event.target,
+  //         },
+  //       };
+
+  //       if (
+  //         this.dispatchEvent(
+  //           new CustomEvent(
+  //             (this.constructor as typeof CDSPopover).eventBeforeClose,
+  //             init
+  //           )
+  //         )
+  //       ) {
+  //         this.open = false;
+  //         this.dispatchEvent(
+  //           new CustomEvent(
+  //             (this.constructor as typeof CDSPopover).eventOnClose,
+  //             {
+  //               bubbles: true,
+  //               composed: true,
+  //             }
+  //           )
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
 
   private _handleOutsideClick(event: Event) {
     const path = event.composedPath();
@@ -215,13 +319,37 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       !this.contains(target) &&
       !this.contains(composedTarget)
     ) {
-      this.open = false;
-      this.dispatchEvent(
-        new CustomEvent((this.constructor as typeof CDSPopover).eventOnClose, {
-          bubbles: true,
-          composed: true,
-        })
-      );
+      // rest the flag when actually closing the popover
+      this._lastClickWasInsidePopoverContent = false; // this is part of the focusout implementation that relied on flags
+
+      const init = {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {
+          triggeredBy: target,
+        },
+      };
+
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSPopover).eventBeforeClose,
+            init
+          )
+        )
+      ) {
+        this.open = false;
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSPopover).eventOnClose,
+            {
+              bubbles: true,
+              composed: true,
+            }
+          )
+        );
+      }
     }
   }
 
@@ -418,6 +546,14 @@ class CDSPopover extends HostListenerMixin(LitElement) {
    */
   static get selectorPopoverContent() {
     return `${prefix}-popover-content`;
+  }
+
+  /**
+   * The name of the custom event fired before the popover closes via focusout/outsideclick.
+   * This event is cancellable.
+   */
+  static get eventBeforeClose() {
+    return `${prefix}-popover-beingclosed`;
   }
 
   /**
