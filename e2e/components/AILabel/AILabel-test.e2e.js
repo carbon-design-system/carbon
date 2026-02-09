@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test'); // eslint-disable-line
+const { test } = require('@playwright/test');  
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook'); // eslint-disable-line
+const { snapshotStory } = require('../../test-utils/storybook');  
 
 test.describe('AILabel', () => {
   themes.forEach((theme) => {
@@ -22,10 +22,18 @@ test.describe('AILabel', () => {
         });
       });
 
-      test('AILabel callout @vrt', async ({ page }) => {
+      test('inline @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'AILabel',
-          id: 'components-ailabel--explainability-popover',
+          id: 'components-ailabel--inline',
+          theme,
+        });
+      });
+
+      test('inline with content @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'AILabel',
+          id: 'components-ailabel--inline-with-content',
           theme,
         });
       });
