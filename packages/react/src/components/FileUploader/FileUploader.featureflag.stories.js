@@ -127,6 +127,7 @@ export const ControlledFileState = (args) => {
     <div>
       <FileUploader
         ref={fileUploaderRef}
+        accept={['.jpg', '.png']}
         labelTitle="Enhanced FileUploader Demo"
         labelDescription="Add files, then toggle the disabled state and notice that the state is passed to the items."
         buttonLabel="Add file(s)"

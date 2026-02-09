@@ -219,7 +219,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           .map((b) => b.toString(36))
           .join('')}`,
         file,
-        // disabled: false,
       }),
       [fileUploaderInstanceId]
     );
