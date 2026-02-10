@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -869,8 +869,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content preceding the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderPrecedingLabel(): TemplateResult | void {
+  protected _renderPrecedingLabel(): TemplateResult | undefined {
     return undefined;
   }
 
@@ -925,8 +924,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * @returns The content following the trigger button.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     return undefined;
   }
 
@@ -1137,10 +1135,11 @@ class CDSDropdown extends ValidityMixin(
   }
 
   updated(changedProperties) {
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    this._hasAILabel
-      ? this.setAttribute('ai-label', '')
-      : this.removeAttribute('ai-label');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
+    } else {
+      this.removeAttribute('ai-label');
+    }
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
     if (label) {
@@ -1272,7 +1271,6 @@ class CDSDropdown extends ValidityMixin(
       toggleLabelClosed,
       toggleLabelOpen,
       type,
-      warn,
       warnText,
       _activeDescendant: activeDescendant,
       _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
@@ -1392,7 +1390,7 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+        ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
         !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot

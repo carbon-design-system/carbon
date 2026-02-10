@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
@@ -15,6 +15,8 @@ import { find } from '../../globals/internal/collection-helpers';
 import CDSFloatingMenuTrigger from '../floating-menu/floating-menu-trigger';
 import { OVERFLOW_MENU_SIZE } from './defs';
 import CDSOverflowMenuBody from './overflow-menu-body';
+
+import iconButtonStyles from '../icon-button/icon-button.scss?lit';
 import styles from './overflow-menu.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -139,6 +141,8 @@ class CDSOverflowMenu
       this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
   }
 
   updated(changedProperties) {
@@ -202,8 +206,6 @@ class CDSOverflowMenu
   render() {
     return html`${super.render()} `;
   }
-
-  static styles = styles;
 }
 
 export default CDSOverflowMenu;

@@ -17,14 +17,12 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type ComponentType,
   type FocusEvent,
   type ForwardedRef,
   type InputHTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
   type PropsWithChildren,
-  type PropsWithRef,
   type ReactElement,
   type ReactNode,
   type RefAttributes,
@@ -49,6 +47,7 @@ import { useId } from '../../internal/useId';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
@@ -254,10 +253,9 @@ export interface ComboBoxProps<ItemType>
   invalidText?: ReactNode;
 
   /**
-   * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
-  itemToElement?: ComponentType<ItemType> | null;
+  itemToElement?: ((item: ItemType) => ReactNode) | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -499,6 +497,7 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+
     useEffect(() => {
       isManualClearingRef.current = isClearing;
 
@@ -551,8 +550,8 @@ const ComboBox = forwardRef(
     useEffect(() => {
       if (prevInputValue.current !== inputValue) {
         prevInputValue.current = inputValue;
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        onInputChange && onInputChange(inputValue);
+
+        onInputChange?.(inputValue);
       }
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [inputValue]);
@@ -769,11 +768,19 @@ const ComboBox = forwardRef(
         }
       };
 
-    const showWarning = !invalid && warn;
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      readOnly,
+      disabled: disabled || false,
+      invalid: invalid || false,
+      invalidText,
+      warn: warn || false,
+      warnText,
+    });
     const className = cx(`${prefix}--combo-box`, {
       [`${prefix}--combo-box--invalid--focused`]: invalid && isFocused,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--combo-box--warning`]: showWarning,
+      [`${prefix}--combo-box--warning`]: normalizedProps.warn,
       [`${prefix}--combo-box--readonly`]: readOnly,
       [`${prefix}--autoalign`]: enableFloatingStyles,
     });
@@ -800,9 +807,6 @@ const ComboBox = forwardRef(
       [`${prefix}--text-input--empty`]: !inputValue,
       [`${prefix}--combo-box--input--focus`]: isFocused,
     });
-
-    // needs to be Capitalized for react to render it correctly
-    const ItemToElement = itemToElement;
 
     // AILabel always size `mini`
     const candidate = slug ?? decorator;
@@ -970,8 +974,8 @@ const ComboBox = forwardRef(
     // when both the message is supplied *and* when the component is in
     // the matching state (invalid, warn, etc).
     const ariaDescribedBy =
-      (invalid && invalidText && invalidTextId) ||
-      (warn && warnText && warnTextId) ||
+      (normalizedProps.invalid && invalidText && invalidTextId) ||
+      (normalizedProps.warn && warnText && warnTextId) ||
       (helperText && !isFluid && helperTextId) ||
       undefined;
 
@@ -1014,13 +1018,13 @@ const ComboBox = forwardRef(
           onBlur={handleFocus}
           className={className}
           disabled={disabled}
-          invalid={invalid}
+          invalid={normalizedProps.invalid}
           invalidText={invalidText}
           invalidTextId={invalidTextId}
           isOpen={isOpen}
           light={light}
           size={size}
-          warn={warn}
+          warn={normalizedProps.warn}
           ref={enableFloatingStyles ? refs.setReference : null}
           warnText={warnText}
           warnTextId={warnTextId}>
@@ -1165,10 +1169,10 @@ const ComboBox = forwardRef(
               aria-describedby={ariaDescribedBy}
             />
 
-            {invalid && (
+            {normalizedProps.invalid && (
               <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
             )}
-            {showWarning && (
+            {normalizedProps.warn && (
               <WarningAltFilled
                 className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
               />
@@ -1230,23 +1234,25 @@ const ComboBox = forwardRef(
                     const disabled = itemProps['aria-disabled'];
                     const {
                       'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                      'aria-selected': unusedAriaSelected, // eslint-disable-line @typescript-eslint/no-unused-vars
                       ...modifiedItemProps
                     } = itemProps;
+
+                    const isSelected = isEqual(currentSelectedItem, item);
 
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={isEqual(currentSelectedItem, item)}
+                        isActive={isSelected}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
-                        {...modifiedItemProps}>
-                        {ItemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemToString(item)
-                        )}
-                        {isEqual(currentSelectedItem, item) && (
+                        {...modifiedItemProps}
+                        aria-selected={isSelected}>
+                        {itemToElement
+                          ? itemToElement(item)
+                          : itemToString(item)}
+                        {isSelected && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />
@@ -1258,11 +1264,14 @@ const ComboBox = forwardRef(
               : null}
           </ListBox.Menu>
         </ListBox>
-        {helperText && !invalid && !warn && !isFluid && (
-          <Text as="div" id={helperTextId} className={helperClasses}>
-            {helperText}
-          </Text>
-        )}
+        {helperText &&
+          !normalizedProps.invalid &&
+          !normalizedProps.warn &&
+          !isFluid && (
+            <Text as="div" id={helperTextId} className={helperClasses}>
+              {helperText}
+            </Text>
+          )}
       </div>
     );
   }
@@ -1376,8 +1385,7 @@ ComboBox.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 
@@ -1499,9 +1507,10 @@ ComboBox.propTypes = {
   inputProps: PropTypes.object,
 };
 
-type ComboboxComponentProps<ItemType> = PropsWithRef<
-  PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
->;
+type ComboboxComponentProps<ItemType> = PropsWithChildren<
+  ComboBoxProps<ItemType>
+> &
+  RefAttributes<HTMLInputElement>;
 
 export interface ComboBoxComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452

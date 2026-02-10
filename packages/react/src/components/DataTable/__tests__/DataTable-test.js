@@ -213,6 +213,57 @@ describe('DataTable', () => {
         ]);
       });
 
+      it('should resolve isSortable from header, override, and table defaults', () => {
+        const headersWithSort = [
+          { key: 'princess', header: 'Princess', isSortable: false },
+          { key: 'peach', header: 'Peach' },
+        ];
+        const { render: _render, ...baseProps } = mockProps;
+
+        render(
+          <DataTable {...baseProps} headers={headersWithSort} isSortable={true}>
+            {({ headers, getHeaderProps }) => {
+              const firstDefault = getHeaderProps({ header: headers[0] });
+              const secondDefault = getHeaderProps({ header: headers[1] });
+              const firstOverride = getHeaderProps({
+                header: headers[0],
+                isSortable: true,
+              });
+
+              return (
+                <div>
+                  <span
+                    data-testid="first-default"
+                    data-issortable={firstDefault.isSortable}
+                  />
+                  <span
+                    data-testid="second-default"
+                    data-issortable={secondDefault.isSortable}
+                  />
+                  <span
+                    data-testid="first-override"
+                    data-issortable={firstOverride.isSortable}
+                  />
+                </div>
+              );
+            }}
+          </DataTable>
+        );
+
+        expect(screen.getByTestId('first-default')).toHaveAttribute(
+          'data-issortable',
+          'false'
+        );
+        expect(screen.getByTestId('second-default')).toHaveAttribute(
+          'data-issortable',
+          'true'
+        );
+        expect(screen.getByTestId('first-override')).toHaveAttribute(
+          'data-issortable',
+          'true'
+        );
+      });
+
       it('should re-sort new row props by the current sort state', async () => {
         const { rerender } = render(
           <DataTable isSortable={true} {...mockProps} />
