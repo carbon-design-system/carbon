@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit';
+import { html, LitElement } from 'lit'; // remove LitElement import before merging
 import './popover';
 import './popover-content';
 import '../radio-button/index';
@@ -145,12 +145,7 @@ export const Default = {
         align=${args.align}
         ?tabTip=${args.tabTip}
         ?dropShadow=${args.dropShadow}
-        backgroundToken=${args.backgroundToken}
-        @cds-popover-beingclosed=${(event) => {
-          // eslint-disable-next-line no-console
-          console.log('Event fired!', event); // just showing how this can be used
-          event.preventDefault();
-        }}>
+        backgroundToken=${args.backgroundToken}>
         <button
           class="playground-trigger"
           aria-label="Checkbox"
@@ -533,7 +528,8 @@ export const TabTipExperimentalAutoAlign = {
     `;
   },
 };
-// remove before merging
+
+// Everything from here downwards should be removed before merging
 class MyApp extends LitElement {
   toggleButton = () => {
     // eslint-disable-next-line no-console
@@ -628,16 +624,6 @@ customElements.define('my-element', MyElement);
 export const Test = {
   render: () => html` <my-app> </my-app> `,
 };
-// test 1
-
-//
-//
-//
-//
-//
-//
-//
-//
 
 class NestedButtonContainer extends LitElement {
   @state()
@@ -757,6 +743,8 @@ customElements.define('my-app-2', MyApp2);
 export const Test2 = {
   render: () => html` <my-app-2> </my-app-2> `,
 };
+// stop here
+
 const meta = {
   title: 'Components/Popover',
 };
