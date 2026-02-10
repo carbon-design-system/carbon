@@ -360,7 +360,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
+    sortItems = defaultSortItems,
     translateWithId,
     useTitleInItem,
     warn = false,
