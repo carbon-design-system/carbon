@@ -382,7 +382,7 @@ export const Offset = () => {
 export const WithGridSettings = (args) => {
   return (
     <div className="sb-css-grid-container">
-      <GridSettings mode={args.mode} subgrid={args.subgrid}>
+      <GridSettings subgrid={args.subgrid}>
         <Grid>
           <Column sm={4} md={4} lg={4}>
             <p>Column 1</p>
@@ -403,17 +403,13 @@ export const WithGridSettings = (args) => {
 };
 
 WithGridSettings.args = {
-  mode: 'css-grid',
   subgrid: false,
 };
 
 WithGridSettings.argTypes = {
-  mode: {
-    control: 'select',
-    options: ['flexbox', 'css-grid'],
-  },
   subgrid: {
     control: 'boolean',
+    description: 'If true, will specify whether subgrid should be enabled',
   },
   align: {
     control: false,
