@@ -18,7 +18,7 @@ import React, {
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
-import { SideNavContext } from './SideNav';
+import { SideNavContext } from './SideNavContext';
 
 export interface SideNavMenuProps {
   /**
@@ -82,7 +82,10 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
     },
     ref
   ) => {
-    const { isRail } = useContext(SideNavContext);
+    const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
+      useContext(SideNavContext);
+    const currentIsSideNavExpanded =
+      isSideNavExpanded ?? contextIsSideNavExpanded;
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
     const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
@@ -95,10 +98,10 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       [customClassName as string]: !!customClassName,
     });
 
-    if (!isSideNavExpanded && isExpanded && isRail) {
+    if (!currentIsSideNavExpanded && isExpanded && isRail) {
       setIsExpanded(false);
       setPrevExpanded(true);
-    } else if (isSideNavExpanded && prevExpanded && isRail) {
+    } else if (currentIsSideNavExpanded && prevExpanded && isRail) {
       setIsExpanded(true);
       setPrevExpanded(false);
     }
@@ -122,7 +125,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
           type="button"
           tabIndex={
             tabIndex === undefined
-              ? !isSideNavExpanded && !isRail
+              ? !currentIsSideNavExpanded && !isRail
                 ? -1
                 : 0
               : tabIndex
