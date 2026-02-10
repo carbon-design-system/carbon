@@ -957,10 +957,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       getMenuProps(
         {
           ref: autoAlign ? refs.setFloating : null,
+          hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlign, getMenuProps, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen, refs.setFloating]
   );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {

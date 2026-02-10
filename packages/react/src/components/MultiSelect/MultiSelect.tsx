@@ -723,8 +723,9 @@ export const MultiSelect = React.forwardRef(
       () =>
         getMenuProps({
           ref: enableFloatingStyles ? refs.setFloating : null,
+          hidden: !isOpen,
         }),
-      [enableFloatingStyles, getMenuProps, refs.setFloating]
+      [enableFloatingStyles, getMenuProps, isOpen, refs.setFloating]
     );
 
     const allLabelProps = getLabelProps();
