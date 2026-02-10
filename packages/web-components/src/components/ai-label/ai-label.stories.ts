@@ -87,6 +87,7 @@ const args = {
   alignment: POPOVER_ALIGNMENT.BOTTOM_START,
   autoalign: true,
   kind: 'default',
+  defaultOpen: false,
   revertActive: false,
   buttonLabel: 'Show information',
   revertLabel: 'Revert to AI input',
@@ -128,6 +129,11 @@ const argTypes = {
       'Specify the type of AI Label, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
     options: ['default', 'inline'],
   },
+  defaultOpen: {
+    control: 'boolean',
+    description:
+      'Specify if the toggletip should be open by default.\n\n(For the change to this control to be visible, refresh the page.)',
+  },
   size: {
     control: 'select',
     description:
@@ -156,6 +162,7 @@ export const Default = {
     autoalign,
     buttonLabel,
     kind,
+    defaultOpen,
     size,
     revertActive,
     revertLabel,
@@ -166,6 +173,7 @@ export const Default = {
       </style>
       <div class="ai-label-container">
         <cds-ai-label
+          ?default-open="${defaultOpen}"
           ai-text="${aiText}"
           ai-text-label="${aiTextLabel}"
           alignment="${alignment}"
@@ -184,11 +192,19 @@ export const Default = {
 export const Inline = {
   args: {
     ...args,
+    // `kind` prop is hidden from the controls table, but its value is still used for conditional `aiTextLabel`,
+    // hence the arg value is set even though the prop can’t be updated from controls.
     kind: 'inline',
   },
   argTypes: {
     ...argTypes,
     kind: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
+    },
+    defaultOpen: {
       ...argTypes.kind,
       table: {
         disable: true,
@@ -236,12 +252,20 @@ export const Inline = {
 export const InlineWithContent = {
   args: {
     ...args,
+    // `kind` prop is hidden from the controls table, but its value is still used for conditional `aiTextLabel`,
+    // hence the arg value is set even though the prop can’t be updated from controls.
     kind: 'inline',
     aiTextLabel: 'Text goes here',
   },
   argTypes: {
     ...argTypes,
     kind: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
+    },
+    defaultOpen: {
       ...argTypes.kind,
       table: {
         disable: true,

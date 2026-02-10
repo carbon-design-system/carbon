@@ -23,7 +23,7 @@ export default {
       page: mdx,
     },
     controls: {
-      exclude: ['AILabelContent', 'aiTextLabel', 'slugLabel', 'defaultOpen'],
+      exclude: ['AILabelContent', 'aiTextLabel', 'slugLabel'],
     },
   },
 };
@@ -99,6 +99,8 @@ const sharedArgTypes = {
     control: {
       type: 'boolean',
     },
+    description:
+      'Specify if the toggletip should be open by default.\n\n(For the change to this control to be visible, refresh the page.)',
   },
   onRevertClick: {
     action: 'onRevertClick',
