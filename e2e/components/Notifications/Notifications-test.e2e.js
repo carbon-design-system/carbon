@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,8 @@
 
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshot } = require('../../test-utils/snapshot');
 
 test.describe('Notifications', () => {
   themes.forEach((theme) => {
@@ -34,6 +35,24 @@ test.describe('Notifications', () => {
         await snapshotStory(page, {
           component: 'Actionable',
           id: 'components-notifications-actionable--default',
+          theme,
+        });
+      });
+
+      test('actionable inline @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Actionable',
+          id: 'components-notifications-actionable--default',
+          globals: {
+            theme,
+          },
+          args: {
+            inline: true,
+          },
+        });
+        await snapshot(page, {
+          component: 'Actionable',
+          story: 'components-notifications-actionable--default-inline',
           theme,
         });
       });
