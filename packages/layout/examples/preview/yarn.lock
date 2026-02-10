@@ -234,65 +234,65 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/env@npm:15.5.7"
-  checksum: 10/11f971691018bd62a5bf253fc843fb2a6cf1431468f5c3a9d4d41753a6ff3e8bf7f539f46aba3f58f8bac59e681bf05fb5d771ac08d7dbd966a601257e1368bf
+"@next/env@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/env@npm:15.5.12"
+  checksum: 10/1ec277290f8c54a547f1459cffe42b1dfc132c4583b21467cb9dba14583fe9d84a52a8213e8a698ffaaf50e75737520fc645a3d8b7a01ef604df7232a33f4727
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-darwin-arm64@npm:15.5.7"
+"@next/swc-darwin-arm64@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-darwin-arm64@npm:15.5.12"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-darwin-x64@npm:15.5.7"
+"@next/swc-darwin-x64@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-darwin-x64@npm:15.5.12"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-arm64-gnu@npm:15.5.7"
+"@next/swc-linux-arm64-gnu@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-linux-arm64-gnu@npm:15.5.12"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-arm64-musl@npm:15.5.7"
+"@next/swc-linux-arm64-musl@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-linux-arm64-musl@npm:15.5.12"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-x64-gnu@npm:15.5.7"
+"@next/swc-linux-x64-gnu@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-linux-x64-gnu@npm:15.5.12"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-x64-musl@npm:15.5.7"
+"@next/swc-linux-x64-musl@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-linux-x64-musl@npm:15.5.12"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-win32-arm64-msvc@npm:15.5.7"
+"@next/swc-win32-arm64-msvc@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-win32-arm64-msvc@npm:15.5.12"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-win32-x64-msvc@npm:15.5.7"
+"@next/swc-win32-x64-msvc@npm:15.5.12":
+  version: 15.5.12
+  resolution: "@next/swc-win32-x64-msvc@npm:15.5.12"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -463,6 +463,25 @@ __metadata:
   version: 1.0.30001617
   resolution: "caniuse-lite@npm:1.0.30001617"
   checksum: 10/eac442b9ad12801086be19f6dc17056827fe398f1c05983357e2531c8183ee890ffc8fb973d54519ad7114a2fd47de8f33ec66d98565b995fef1c6ba02b5bc5b
+  languageName: node
+  linkType: hard
+
+"change-case-all@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "change-case-all@npm:2.1.0"
+  dependencies:
+    change-case: "npm:^5.2.0"
+    sponge-case: "npm:^2.0.2"
+    swap-case: "npm:^3.0.2"
+    title-case: "npm:^3.0.3"
+  checksum: 10/b115f39532d66f062aafd1c86352ea87027061111508feb11d125c6c49e54e545295933ded889c4225c7d88e4667aa56661365b9433aa41d61f852677e949cfb
+  languageName: node
+  linkType: hard
+
+"change-case@npm:^5.2.0":
+  version: 5.4.4
+  resolution: "change-case@npm:5.4.4"
+  checksum: 10/446e5573f3c854290a91292afef92b957d2e43a928260c91989b482aa860caaa29711b6725fc40c200af68061cbab357b033446d16a17bc5c553636994074e92
   languageName: node
   linkType: hard
 
@@ -867,7 +886,8 @@ __metadata:
   dependencies:
     "@carbon/layout": "link:../../"
     "@carbon/styles": "link:../../../styles"
-    next: "npm:^15.5.7"
+    change-case-all: "npm:^2.1.0"
+    next: "npm:^15.5.10"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     sass: "npm:^1.57.1"
@@ -1035,19 +1055,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^15.5.7":
-  version: 15.5.7
-  resolution: "next@npm:15.5.7"
+"next@npm:^15.5.10":
+  version: 15.5.12
+  resolution: "next@npm:15.5.12"
   dependencies:
-    "@next/env": "npm:15.5.7"
-    "@next/swc-darwin-arm64": "npm:15.5.7"
-    "@next/swc-darwin-x64": "npm:15.5.7"
-    "@next/swc-linux-arm64-gnu": "npm:15.5.7"
-    "@next/swc-linux-arm64-musl": "npm:15.5.7"
-    "@next/swc-linux-x64-gnu": "npm:15.5.7"
-    "@next/swc-linux-x64-musl": "npm:15.5.7"
-    "@next/swc-win32-arm64-msvc": "npm:15.5.7"
-    "@next/swc-win32-x64-msvc": "npm:15.5.7"
+    "@next/env": "npm:15.5.12"
+    "@next/swc-darwin-arm64": "npm:15.5.12"
+    "@next/swc-darwin-x64": "npm:15.5.12"
+    "@next/swc-linux-arm64-gnu": "npm:15.5.12"
+    "@next/swc-linux-arm64-musl": "npm:15.5.12"
+    "@next/swc-linux-x64-gnu": "npm:15.5.12"
+    "@next/swc-linux-x64-musl": "npm:15.5.12"
+    "@next/swc-win32-arm64-msvc": "npm:15.5.12"
+    "@next/swc-win32-x64-msvc": "npm:15.5.12"
     "@swc/helpers": "npm:0.5.15"
     caniuse-lite: "npm:^1.0.30001579"
     postcss: "npm:8.4.31"
@@ -1090,7 +1110,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 10/bfac0cbac41b36227ec91d3a0727561f73dfc35d6a78eafd0200528ef95fa2e9d2dba5a8c8922864b4f4e4321ae6a07c6cf8f5766ac3192ad03e68516c3a458a
+  checksum: 10/1499558193fdbc31e6b0d21d570c5a61d066ab70e55d6c020836c4248e7d73e65fe26be34e38debb6a873ffc53cb304f949f5c01847e6484e4ce4779bf8c0da5
   languageName: node
   linkType: hard
 
@@ -1485,6 +1505,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sponge-case@npm:^2.0.2":
+  version: 2.0.3
+  resolution: "sponge-case@npm:2.0.3"
+  checksum: 10/e66fd121e05c9414780283f286d78d487319cc678835bd47a173144261610329435a2a4b7752cd1c4df1531fce08951f5241a6235b291c6679ce1030932f5bc1
+  languageName: node
+  linkType: hard
+
 "ssri@npm:^8.0.0, ssri@npm:^8.0.1":
   version: 8.0.1
   resolution: "ssri@npm:8.0.1"
@@ -1558,6 +1585,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swap-case@npm:^3.0.2":
+  version: 3.0.3
+  resolution: "swap-case@npm:3.0.3"
+  checksum: 10/af210c61c9eecd8af539a214ba42c7f6ece7a9849dcd365bdd3e197200f909b134872b7ffa17f8227fed05215a1c46da343d08a8086f0b3400269ebd4676efe0
+  languageName: node
+  linkType: hard
+
 "tar@npm:^6.0.2, tar@npm:^6.1.0":
   version: 6.2.1
   resolution: "tar@npm:6.2.1"
@@ -1572,6 +1606,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"title-case@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "title-case@npm:3.0.3"
+  dependencies:
+    tslib: "npm:^2.0.3"
+  checksum: 10/369fe90f650a66205c34ebef63a69c6d1fd411ae3aad23db0aae165ddb881af50e67c6ea6800d605bc2b9e0ab5f22dada58fe97a1a7e7f3131ee0ef176cc65ec
+  languageName: node
+  linkType: hard
+
 "to-regex-range@npm:^5.0.1":
   version: 5.0.1
   resolution: "to-regex-range@npm:5.0.1"
@@ -1581,17 +1624,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:^2.0.3, tslib@npm:^2.8.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^2.4.0":
   version: 2.4.1
   resolution: "tslib@npm:2.4.1"
   checksum: 10/e14311d5392ec0e3519feb9afdb54483d7f3aa2d3def6f1a1a30bd3deca5dfeadd106e80bee9ba880bce86a2e50854c9fe5958572cd188d7ac6f8625101a6a8f
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.8.0":
-  version: 2.8.1
-  resolution: "tslib@npm:2.8.1"
-  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 
