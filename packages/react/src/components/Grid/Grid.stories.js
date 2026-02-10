@@ -415,4 +415,16 @@ WithGridSettings.argTypes = {
   subgrid: {
     control: 'boolean',
   },
+  align: {
+    control: false,
+  },
+  condensed: {
+    control: false,
+  },
+  fullWidth: {
+    control: false,
+  },
+  narrow: {
+    control: false,
+  },
 };
