@@ -18,30 +18,32 @@ const SassRenderer = {
     async function render(data) {
       const values = [];
       const valuesByKey = new Map();
-      const result = sass.renderSync({
-        data: `${initialData}\n${data}`,
+      const source = `${initialData}\n${data}`;
+      const result = sass.compileString(source, {
+        loadPaths: [cwd, ...nodeModules],
+        quietDeps: true,
         functions: {
-          'get-value($arg)': (arg) => {
-            values.push(arg);
-            return sass.types.Null.NULL;
+          'get-value($arg)': (args) => {
+            values.push(args[0]);
+            return sass.sassNull;
           },
-          'get($key, $value)': (key, value) => {
-            valuesByKey.set(convert(key), {
-              value: convert(value),
+          'get($key, $value)': (args) => {
+            const key = convertValue(args[0]);
+            const value = args[1];
+            valuesByKey.set(key, {
+              value: convertValue(value),
               nativeValue: value,
             });
-            return sass.types.Null.NULL;
+            return sass.sassNull;
           },
         },
-        includePaths: [cwd, ...nodeModules],
-        quietDeps: true,
       });
 
       return {
         result,
         values,
         getValue(index) {
-          return convert(values[index]);
+          return convertValue(values[index]);
         },
         get(key) {
           if (valuesByKey.has(key)) {
@@ -59,9 +61,8 @@ const SassRenderer = {
     }
 
     return {
-      convert,
+      convert: convertValue,
       render,
-      types: sass.types,
     };
   },
 };
@@ -69,54 +70,57 @@ const SassRenderer = {
 /**
  * Converts a value from Sass into a comparable JavaScript type
  */
-function convert(value) {
-  const { types } = sass;
-
-  if (value instanceof types.Boolean) {
-    return value.getValue();
-  }
-
-  if (value instanceof types.Number) {
-    const unit = value.getUnit();
-    if (unit === '') {
-      return value.getValue();
-    }
-    return `${value.getValue()}${unit}`;
-  }
-
-  if (value instanceof types.String) {
-    return value.getValue();
-  }
-
-  if (value instanceof types.Color) {
-    return value.dartValue.toString();
-  }
-
-  if (value instanceof types.List) {
-    const length = value.getLength();
-    const result = Array(length);
-
-    for (let i = 0; i < length; i++) {
-      result[i] = convert(value.getValue(i));
-    }
-
-    return result;
-  }
-
-  if (value instanceof types.Map) {
-    const length = value.getLength();
-    const result = {};
-
-    for (let i = 0; i < length; i++) {
-      const key = convert(value.getKey(i));
-      result[key] = convert(value.getValue(i));
-    }
-
-    return result;
-  }
-
-  if (value instanceof types.Null) {
+function convertValue(value) {
+  if (value == null || value.realNull === null) {
     return null;
+  }
+
+  if (value instanceof sass.SassBoolean) {
+    return value.value;
+  }
+
+  if (value instanceof sass.SassNumber) {
+    const num = value;
+    if (!num.hasUnits) {
+      return num.value;
+    }
+    const numUnits = num.numeratorUnits.toArray().join('');
+    const denUnits = num.denominatorUnits.toArray().join('');
+    return `${num.value}${numUnits}${denUnits ? `/${denUnits}` : ''}`;
+  }
+
+  if (value instanceof sass.SassString) {
+    return value.text;
+  }
+
+  if (value instanceof sass.SassColor) {
+    return value.toString();
+  }
+
+  // tryMap() first to get objects for maps and avoid converting them to arrays.
+  const asMap = value.tryMap ? value.tryMap() : null;
+  if (asMap) {
+    const result = {};
+    const pairs = asMap.asList;
+    const size = pairs.size;
+    for (let i = 0; i < size; i++) {
+      const pair = pairs.get(i);
+      const pairList = pair.asList;
+      const k = convertValue(pairList.get(0));
+      const v = convertValue(pairList.get(1));
+      result[k] = v;
+    }
+    return result;
+  }
+
+  if (value instanceof sass.SassList || value.asList) {
+    const list = value.asList;
+    const size = list.size;
+    const result = [];
+    for (let i = 0; i < size; i++) {
+      result.push(convertValue(list.get(i)));
+    }
+    return result;
   }
 
   return value;
