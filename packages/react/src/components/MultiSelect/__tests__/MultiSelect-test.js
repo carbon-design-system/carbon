@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -237,6 +237,77 @@ describe('MultiSelect', () => {
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
+  });
+
+  it('should not call `onMenuChange` on mount when `open` remains unchanged', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+    const { rerender } = render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    expect(onMenuChange).not.toHaveBeenCalled();
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    expect(onMenuChange).not.toHaveBeenCalled();
+  });
+
+  it('should call `onMenuChange` when the controlled `open` prop changes', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+    const { rerender } = render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={true}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+    expect(onMenuChange).toHaveBeenCalledTimes(1);
+    expect(onMenuChange).toHaveBeenLastCalledWith(true);
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+    expect(onMenuChange).toHaveBeenCalledTimes(2);
+    expect(onMenuChange).toHaveBeenLastCalledWith(false);
   });
 
   it('should toggle selection with enter', async () => {
@@ -1021,12 +1092,14 @@ describe('MultiSelect', () => {
       (acc, { name, value }) => ({ ...acc, [name]: value }),
       {}
     );
+    const idPrefix = attributes.id.replace(/-label$/, '');
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_64_-toggle-button',
-      id: 'downshift-_r_64_-label',
+      for: attributes.for,
+      id: attributes.id,
     });
+    expect(attributes.for).toBe(`${idPrefix}-toggle-button`);
   });
 
   it('should add certain label props when `titleText` is an element', () => {
@@ -1042,7 +1115,7 @@ describe('MultiSelect', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_67_-label',
+      id: attributes.id,
     });
   });
 
