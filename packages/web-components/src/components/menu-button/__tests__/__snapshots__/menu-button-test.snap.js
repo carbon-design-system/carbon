@@ -17,13 +17,13 @@ snapshots['cds-menu-button should render and match snapshot'] =
     <cds-menu-item
       label="First action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item
       label="Second action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item
@@ -56,7 +56,7 @@ snapshots[
     <cds-menu-item
       label="First action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item-divider role="separator">
@@ -66,7 +66,7 @@ snapshots[
       kind="danger"
       label="Danger"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
   </cds-menu>
@@ -93,13 +93,13 @@ snapshots[
       aria-haspopup="true"
       label="Export as"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
       <cds-menu-item-group slot="submenu">
         <cds-menu-item
           label="PDF"
           role="menuitem"
-          tabindex="0"
+          tabindex="-1"
         >
         </cds-menu-item>
       </cds-menu-item-group>
