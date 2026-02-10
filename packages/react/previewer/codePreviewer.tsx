@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,12 +23,21 @@ import {
   ThemeScss,
 } from './storybookStyles';
 
+type StoryWithSourceCode = {
+  parameters: {
+    docs: {
+      source: {
+        originalSource: string;
+      };
+    };
+  };
+};
+
 export const stackblitzPrefillConfig = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  code: any,
+  code: StoryWithSourceCode,
   // components: Array<string>, // Add all required components to be imported from @carbon/react
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
-  customImport: string
+  customImport?: string
 ) => {
   const storyCode = code.parameters.docs.source.originalSource
     .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
