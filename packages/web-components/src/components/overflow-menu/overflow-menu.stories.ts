@@ -12,7 +12,6 @@ import './overflow-menu-body';
 import './overflow-menu-item';
 import { prefix } from '../../globals/settings';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
-import Delete16 from '@carbon/icons/es/delete/16.js';
 import Filter16 from '@carbon/icons/es/filter/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
@@ -82,9 +81,6 @@ export const Default = {
           >
           <cds-overflow-menu-item divider danger>
             Delete app
-            ${iconLoader(Delete16, {
-              slot: 'icon',
-            })}
           </cds-overflow-menu-item>
         </cds-overflow-menu-body>
       </cds-overflow-menu>
