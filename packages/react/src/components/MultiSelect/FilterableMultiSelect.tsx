@@ -970,7 +970,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     ) {
       setIsFocused(false);
     } else {
-      setIsFocused(evt?.type === 'focus' ? true : false);
+      setIsFocused(evt?.type === 'focus');
     }
   };
 
