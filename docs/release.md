@@ -198,6 +198,7 @@ Next you will need to:
   - [ ] #carbon-announcements
   - [ ] #carbon-design-system
   - [ ] #carbon-react
+  - [ ] #carbon-web-components
 
 <details>
   <summary>Click to view slack announcement template</summary>
