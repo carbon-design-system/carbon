@@ -20,7 +20,6 @@ import React, {
   isValidElement,
   useCallback,
   useContext,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -63,6 +62,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const {
   ItemClick,
@@ -389,7 +389,7 @@ export const MultiSelect = React.forwardRef(
         : {}
     );
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       if (enableFloatingStyles) {
         const updatedFloatingStyles = {
           ...floatingStyles,
@@ -675,10 +675,11 @@ export const MultiSelect = React.forwardRef(
     );
 
     const handleFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      evt.target.classList.contains(`${prefix}--tag__close-icon`)
-        ? setIsFocused(false)
-        : setIsFocused(evt.type === 'focus' ? true : false);
+      if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
+        setIsFocused(false);
+      } else {
+        setIsFocused(evt.type === 'focus' ? true : false);
+      }
     };
 
     const readOnlyEventHandlers = readOnly

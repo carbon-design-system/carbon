@@ -707,8 +707,9 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
+        if (aiLabel) {
+          sortedMenuItems.unshift(aiLabel);
+        }
         // @todo remove typecast once we've updated to Typescript.
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         (this as any).replaceChildren(...sortedMenuItems);
@@ -724,8 +725,9 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
+        if (aiLabel) {
+          sortedMenuItems.unshift(aiLabel);
+        }
         // @todo remove typecast once we've updated to Typescript.
         sortedMenuItems.forEach((item) => {
           this.appendChild(item);
@@ -757,10 +759,11 @@ class CDSMultiSelect extends CDSDropdown {
         itemToFocus.focus();
         itemToFocus.setAttribute('highlighted', '');
       } else {
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        this.filterable
-          ? this._filterInputNode.focus()
-          : this._triggerNode.focus();
+        if (this.filterable) {
+          this._filterInputNode.focus();
+        } else {
+          this._triggerNode.focus();
+        }
       }
     }
     // reorder items so that select all is always at the top of the list

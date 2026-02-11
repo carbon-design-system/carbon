@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,6 +35,7 @@ import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import { useId } from '../../internal/useId';
 
 import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
@@ -52,6 +53,11 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
    * Additional CSS class names.
    */
   className?: string;
+
+  /**
+   * Specify the message read by screen readers for the danger menu item variant
+   */
+  dangerDescription?: string;
 
   /**
    * Specify whether the MenuItem is disabled or not.
@@ -91,6 +97,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     {
       children,
       className,
+      dangerDescription = 'danger',
       disabled,
       kind = 'default',
       label,
@@ -245,6 +252,8 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       });
     }, [floatingStyles, refs.floating]);
 
+    const assistiveId = useId('danger-description');
+
     return (
       <FloatingFocusManager
         context={floatingContext}
@@ -273,6 +282,11 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <Text as="div" className={`${prefix}--menu-item__label`}>
             {label}
           </Text>
+          {isDanger && (
+            <span id={assistiveId} className={`${prefix}--visually-hidden`}>
+              {dangerDescription}
+            </span>
+          )}
           {shortcut && !hasChildren && (
             <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
           )}
@@ -310,6 +324,11 @@ MenuItem.propTypes = {
    * Additional CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the message read by screen readers for the danger menu item variant
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * Specify whether the MenuItem is disabled or not.
