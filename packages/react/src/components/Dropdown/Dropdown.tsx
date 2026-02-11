@@ -636,10 +636,10 @@ const Dropdown = React.forwardRef(
           size={size}
           className={className}
           invalid={normalizedProps.invalid}
-          invalidText={isFluid ? invalidText : undefined}
+          invalidText={invalidText}
           invalidTextId={normalizedProps.invalidId}
           warn={normalizedProps.warn}
-          warnText={isFluid ? warnText : undefined}
+          warnText={warnText}
           warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
@@ -730,7 +730,6 @@ const Dropdown = React.forwardRef(
           </ListBox.Menu>
         </ListBox>
         {!inline && !isFluid && !normalizedProps.validation && helper}
-        {!inline && !isFluid && normalizedProps.validation}
       </div>
     );
   }
