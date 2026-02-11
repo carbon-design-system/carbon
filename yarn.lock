@@ -1693,7 +1693,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/feature-flags@workspace:0.33.0, @carbon/feature-flags@workspace:packages/feature-flags":
+"@carbon/feature-flags@workspace:1.0.0, @carbon/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
   dependencies:
@@ -1885,7 +1885,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.27.1"
     "@babel/preset-typescript": "npm:^7.27.1"
     "@babel/runtime": "npm:^7.27.3"
-    "@carbon/feature-flags": "workspace:0.33.0"
+    "@carbon/feature-flags": "workspace:1.0.0"
     "@carbon/icons-react": "npm:^11.75.0"
     "@carbon/layout": "npm:^11.48.0"
     "@carbon/styles": "npm:^1.100.0"
@@ -1962,7 +1962,7 @@ __metadata:
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
     "@carbon/colors": "npm:^11.47.0"
-    "@carbon/feature-flags": "workspace:0.33.0"
+    "@carbon/feature-flags": "workspace:1.0.0"
     "@carbon/grid": "npm:^11.50.0"
     "@carbon/layout": "npm:^11.48.0"
     "@carbon/motion": "npm:^11.41.0"
