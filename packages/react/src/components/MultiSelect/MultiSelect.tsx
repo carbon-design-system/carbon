@@ -20,7 +20,6 @@ import React, {
   isValidElement,
   useCallback,
   useContext,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -63,6 +62,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const {
   ItemClick,
@@ -389,7 +389,7 @@ export const MultiSelect = React.forwardRef(
         : {}
     );
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       if (enableFloatingStyles) {
         const updatedFloatingStyles = {
           ...floatingStyles,
@@ -678,7 +678,7 @@ export const MultiSelect = React.forwardRef(
       if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
         setIsFocused(false);
       } else {
-        setIsFocused(evt.type === 'focus' ? true : false);
+        setIsFocused(evt.type === 'focus');
       }
     };
 
