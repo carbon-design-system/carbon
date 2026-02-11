@@ -1,17 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  ComponentProps,
-  forwardRef,
-  ReactNode,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import React, { ComponentProps, forwardRef, ReactNode, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -22,7 +16,7 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { useOutsideClick } from '../../internal/useOutsideClick';
+
 import {
   useFloating,
   flip,
@@ -176,17 +170,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       handleClose,
     } = useAttachedMenu(triggerRef);
 
-    useOutsideClick(triggerRef, ({ target }) => {
-      if (
-        open &&
-        (!refs.floating.current ||
-          (target instanceof Node && !refs.floating.current.contains(target)))
-      ) {
-        handleClose();
-      }
-    });
 
-    useLayoutEffect(() => {
       Object.keys(floatingStyles).forEach((style) => {
         if (refs.floating.current) {
           let value = floatingStyles[style];
