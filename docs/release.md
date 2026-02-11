@@ -513,6 +513,9 @@ To do this, packages must be versioned manually.
 1. Run `yarn lerna version --no-git-tag-version --no-push`
 1. An interactive prompt will be presented - select the appropriate version bump
    for each package
+   - If you are prompted with a package that does not need a version change,
+     select **Custom Version** and enter the existing version to keep it
+     unchanged
 1. After the interactive prompt is complete, run `yarn install` to update
    `yarn.lock`
 1. Commit `chore(release): v11.23.1`
