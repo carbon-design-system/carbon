@@ -176,7 +176,7 @@ export const Popover: PopoverComponent & {
     autoAlign = false,
     autoAlignBoundary,
     backgroundToken = 'layer',
-    caret = isTabTip ? false : true,
+    caret = !isTabTip,
     className: customClassName,
     children,
     border = false,
