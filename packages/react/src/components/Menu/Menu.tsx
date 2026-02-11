@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,6 +113,9 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
    */
   y?: number | [number, number];
 
+  /**
+   * @deprecated Internal compatibility flag. Use `false` to enable auto-alignment behavior.
+   */
   legacyAutoalign?: boolean;
 }
 
@@ -129,7 +132,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
-    legacyAutoalign = 'true',
+    legacyAutoalign = true,
     target = canUseDOM && document.body,
     x = 0,
     y = 0,
@@ -561,6 +564,11 @@ Menu.propTypes = {
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
   ]),
+
+  /**
+   * @deprecated Internal compatibility flag. Use `false` to enable auto-alignment behavior.
+   */
+  legacyAutoalign: PropTypes.bool,
 };
 
 export { Menu };
