@@ -27,7 +27,7 @@ const ExpandableSearch = frFn((props, forwardedRef) => {
   } = props;
 
   const [expanded, setExpanded] = useState(isExpanded || false);
-  const [hasContent, setHasContent] = useState(defaultValue ? true : false);
+  const [hasContent, setHasContent] = useState(Boolean(defaultValue));
   const searchRef = useRef<HTMLInputElement>(null);
   const prefix = usePrefix();
 

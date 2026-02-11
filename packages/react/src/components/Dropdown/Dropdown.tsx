@@ -518,7 +518,7 @@ const Dropdown = React.forwardRef(
       ) : null;
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-      setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
+      setIsFocused(evt.type === 'focus' && !selectedItem);
     };
 
     const buttonRef = useRef<HTMLButtonElement>(null);
