@@ -1700,6 +1700,7 @@ __metadata:
     "@babel/core": "npm:^7.27.3"
     "@babel/generator": "npm:^7.27.3"
     "@babel/preset-env": "npm:^7.27.2"
+    "@babel/preset-typescript": "npm:^7.27.1"
     "@babel/template": "npm:^7.27.2"
     "@babel/types": "npm:^7.27.3"
     "@carbon/scss-generator": "npm:^10.20.0"
@@ -1712,6 +1713,8 @@ __metadata:
     rimraf: "npm:^6.0.1"
     rollup: "npm:^4.41.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
+    typescript: "npm:^5.7.3"
+    typescript-config-carbon: "workspace:^0.9.0"
   languageName: unknown
   linkType: soft
 
