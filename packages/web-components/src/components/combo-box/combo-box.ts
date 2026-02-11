@@ -558,8 +558,8 @@ class CDSComboBox extends CDSDropdown {
 
   /**
    * Additional input attributes to apply to the internal input element.
-   * Allows passing native HTML input attributes like maxLength, pattern,
-   * autoComplete, etc.
+   * Allows passing native HTML input attributes like `maxlength`, `pattern`,
+   * `autocomplete`, etc.
    */
   @property({ type: Object, attribute: false })
   inputProps?: Record<string, string | number | boolean>;
