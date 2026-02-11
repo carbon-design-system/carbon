@@ -86,6 +86,11 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
    * Specify how the trigger tooltip should be aligned.
    */
   tooltipAlignment?: React.ComponentProps<typeof IconButton>['align'];
+
+  /**
+   * Provide a custom label for the trigger tooltip and menu.
+   */
+  tooltipLabel?: string;
 }
 
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
@@ -99,6 +104,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       size = 'lg',
       menuAlignment = 'bottom',
       tooltipAlignment,
+      tooltipLabel,
       translateWithId: t = defaultTranslateWithId,
       ...rest
     },
@@ -190,6 +196,8 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       `${prefix}--combo-button__primary-action`
     );
     const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
+    const triggerLabel =
+      tooltipLabel ?? t('carbon.combo-button.additional-actions');
 
     return (
       <div
@@ -209,7 +217,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
         <IconButton
           ref={refs.setReference}
           className={triggerClasses}
-          label={t('carbon.combo-button.additional-actions')}
+          label={triggerLabel}
           size={size}
           disabled={disabled}
           align={tooltipAlignment}
@@ -226,7 +234,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           className={menuClasses}
           ref={refs.setFloating}
           id={id}
-          label={t('carbon.combo-button.additional-actions')}
+          label={triggerLabel}
           size={size}
           open={open}
           onClose={handleClose}>
@@ -327,6 +335,11 @@ ComboButton.propTypes = {
     ],
     mapPopoverAlign
   ),
+
+  /**
+   * Provide a custom label for the trigger tooltip and menu.
+   */
+  tooltipLabel: PropTypes.string,
 
   /**
    * Translates component strings using your i18n tool.
