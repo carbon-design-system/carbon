@@ -378,7 +378,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       _handleSlotChange: handleSlotChange,
     } = this;
     if (tabTip) {
-      this.caret = tabTip ? false : true;
+      this.caret = !tabTip;
     }
 
     if (!this.autoalign) {
