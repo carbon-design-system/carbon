@@ -122,6 +122,7 @@ collect:
         - low-contrast
         - max
         - max-count
+        - max-length
         - menu-alignment
         - min
         - multiple
@@ -161,6 +162,7 @@ collect:
         - optional-classes
         - orientation
         - overflow-menu-on-hover
+        - page
         - paragraph
         - pattern
         - ping
@@ -186,6 +188,7 @@ collect:
         - selection-name
         - selection-value
         - selector-initial-focus
+        - shortcut
         - show-password-visibility-toggle
         - showPasswordLabel
         - size
@@ -211,6 +214,7 @@ collect:
         - tooltip-text
         - tooltipAlignment
         - tooltipDirection
+        - total-items
         - trigger-content
         - type
         - use-zebra-styles
@@ -220,6 +224,8 @@ collect:
         - visited
         - warn
         - warn-text
+        - warning
+        - warning-text
         - width
         - within-grid
         # cds-accordion
@@ -260,6 +266,7 @@ collect:
         - md
         - sm
         - span
+        - xlg
         # cds-combo-box
         - allow-custom-value
         - input-label
@@ -311,6 +318,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-time-picker-skeleton
+        - is-only-two
         # cds-form-group
         - message
         - message-text
@@ -347,13 +356,13 @@ collect:
         - aria-checked
         - boundaries
         - onicon-detect
-        - renderIcon
-        - shortcut
         - submenuOpen
         # cds-menu-item-radio-group
         - items
         - itemToString
         - selectedItem
+        # cds-menu-item-selectable
+        - renderIcon
         # cds-modal
         - alert
         - container-class
@@ -401,15 +410,18 @@ collect:
         - items-per-page-text
         - oncds-page-sizes-select-changed
         - oncds-pagination-changed-current
-        - page
         - page-input-disabled
         - page-size
         - page-size-input-disabled
         - page-size-label-text
         - pages-unknown
         - start
-        - total-items
         - totalPages
+        # cds-pagination-nav
+        - disable-overflow
+        - items-shown
+        - loop
+        - oncds-page-changed
         # cds-password-input
         - hide-password-label
         - show-password-label
@@ -532,10 +544,6 @@ collect:
         - oncds-current-selectable-tile-selections
         - radioTiles
         - selectableTiles
-        # cds-time-picker
-        - max-length
-        - warning
-        - warning-text
         # cds-toggle
         - hideLabel
         - label-a
