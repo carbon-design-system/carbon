@@ -1271,7 +1271,6 @@ class CDSDropdown extends ValidityMixin(
       toggleLabelClosed,
       toggleLabelOpen,
       type,
-      warn,
       warnText,
       _activeDescendant: activeDescendant,
       _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
@@ -1391,7 +1390,7 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+        ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
         !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot

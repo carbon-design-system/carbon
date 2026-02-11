@@ -1054,7 +1054,9 @@ export function ActionableNotification({
           Focus sentinel
         </span>
       )}
-      <div ref={innerModal}>
+      <div
+        ref={innerModal}
+        className={`${prefix}--actionable-notification__focus-wrapper`}>
         <div className={`${prefix}--actionable-notification__details`}>
           <NotificationIcon
             notificationType={inline ? 'inline' : 'toast'}
