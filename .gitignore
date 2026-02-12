@@ -8,6 +8,7 @@ lib
 dist
 umd
 css
+docs/generated
 
 # Netlify deploy folder
 /demo/*
