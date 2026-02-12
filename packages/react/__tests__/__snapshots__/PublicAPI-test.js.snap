@@ -2605,6 +2605,9 @@ Map {
                   "isRequired": true,
                   "type": "node",
                 },
+                "isSortable": {
+                  "type": "bool",
+                },
                 "key": {
                   "isRequired": true,
                   "type": "string",
@@ -2692,9 +2695,6 @@ Map {
       },
       "columnCount": {
         "type": "number",
-      },
-      "compact": {
-        "type": "bool",
       },
       "headers": {
         "args": [
@@ -3015,7 +3015,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -4338,7 +4340,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -6391,6 +6395,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -6783,7 +6790,7 @@ Map {
         "type": "string",
       },
       "label": {
-        "type": "node",
+        "type": "string",
       },
       "labelClassName": {
         "type": "string",
@@ -12404,7 +12411,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -14384,7 +14393,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },

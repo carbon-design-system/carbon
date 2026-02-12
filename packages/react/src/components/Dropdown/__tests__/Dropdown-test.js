@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -435,6 +435,32 @@ describe('Dropdown', () => {
     await waitForPosition();
     assertMenuClosed();
   });
+
+  it('should render custom item components when items are strings', async () => {
+    const items = ['mario', 'luigi'];
+
+    const itemToElement = jest.fn((item) => (
+      <span data-testid={`${item}-item`}>{item}</span>
+    ));
+
+    render(
+      <Dropdown
+        {...mockProps}
+        items={items}
+        itemToString={(item) => item ?? ''}
+        itemToElement={itemToElement}
+      />
+    );
+
+    await openMenu();
+
+    expect(itemToElement).toHaveBeenCalledTimes(items.length);
+    expect(itemToElement).toHaveBeenCalledWith('mario');
+    expect(itemToElement).toHaveBeenCalledWith('luigi');
+
+    expect(screen.getByTestId('mario-item')).toBeInTheDocument();
+    expect(screen.getByTestId('luigi-item')).toBeInTheDocument();
+  });
 });
 
 describe('Validation states with disabled/readonly', () => {
@@ -632,8 +658,8 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_27_-toggle-button',
-      id: 'downshift-_r_27_-label',
+      for: 'downshift-_r_29_-toggle-button',
+      id: 'downshift-_r_29_-label',
     });
   });
 
@@ -648,7 +674,48 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_29_-label',
+      id: 'downshift-_r_2b_-label',
     });
+  });
+});
+
+describe('Validation message ids', () => {
+  const mockProps = {
+    id: 'test-dropdown',
+    items: generateItems(5, generateGenericItem),
+    onChange: jest.fn(),
+    label: 'input',
+    type: 'default',
+    titleText: 'Dropdown label',
+  };
+
+  it('should render a single invalid requirement element with a unique id', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(container.querySelectorAll('#test-dropdown-error-msg')).toHaveLength(
+      1
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-describedby',
+      'test-dropdown-error-msg'
+    );
+  });
+
+  it('should render a single warning requirement element with a unique id', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(container.querySelectorAll('#test-dropdown-warn-msg')).toHaveLength(
+      1
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-describedby',
+      'test-dropdown-warn-msg'
+    );
   });
 });

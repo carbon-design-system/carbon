@@ -67,14 +67,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-17__select-row-b"
-                  name="select-row-17"
+                  id="data-table-18__select-row-b"
+                  name="select-row-18"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-17__select-row-b"
+                  for="data-table-18__select-row-b"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -105,14 +105,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-17__select-row-a"
-                  name="select-row-17"
+                  id="data-table-18__select-row-a"
+                  name="select-row-18"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-17__select-row-a"
+                  for="data-table-18__select-row-a"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -143,14 +143,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-17__select-row-c"
-                  name="select-row-17"
+                  id="data-table-18__select-row-c"
+                  name="select-row-18"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-17__select-row-c"
+                  for="data-table-18__select-row-c"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -245,14 +245,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-16__select-row-b"
-                  name="select-row-16"
+                  id="data-table-17__select-row-b"
+                  name="select-row-17"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-16__select-row-b"
+                  for="data-table-17__select-row-b"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -283,14 +283,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-16__select-row-a"
-                  name="select-row-16"
+                  id="data-table-17__select-row-a"
+                  name="select-row-17"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-16__select-row-a"
+                  for="data-table-17__select-row-a"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -321,14 +321,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-16__select-row-c"
-                  name="select-row-16"
+                  id="data-table-17__select-row-c"
+                  name="select-row-17"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-16__select-row-c"
+                  for="data-table-17__select-row-c"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -653,13 +653,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-all"
-                  name="select-all-7"
+                  id="data-table-8__select-all"
+                  name="select-all-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-all"
+                  for="data-table-8__select-all"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -708,13 +708,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-row-b"
-                  name="select-row-7"
+                  id="data-table-8__select-row-b"
+                  name="select-row-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-row-b"
+                  for="data-table-8__select-row-b"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -741,13 +741,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-row-a"
-                  name="select-row-7"
+                  id="data-table-8__select-row-a"
+                  name="select-row-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-row-a"
+                  for="data-table-8__select-row-a"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -774,13 +774,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-7__select-row-c"
-                  name="select-row-7"
+                  id="data-table-8__select-row-c"
+                  name="select-row-8"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-7__select-row-c"
+                  for="data-table-8__select-row-c"
                 >
                   <span
                     class="cds--visually-hidden"
