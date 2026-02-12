@@ -480,8 +480,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     </div>`;
 
     const hasHelperText =
-      helperText ||
-      (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
+      helperText || (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
 
     const helper = html`<div
       class="${helperTextClasses}"
