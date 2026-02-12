@@ -3018,7 +3018,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -4341,7 +4343,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -12410,7 +12414,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -14390,7 +14396,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
