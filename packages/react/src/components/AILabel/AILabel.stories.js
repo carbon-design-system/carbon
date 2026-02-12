@@ -213,7 +213,7 @@ Inline.args = {
 };
 Inline.argTypes = {
   ...sharedArgTypes,
-size: {
+  size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
     description:
@@ -292,7 +292,7 @@ InlineWithContent.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
-description:
+    description:
       'Specify the size of the button, from the following list of sizes:',
     table: {
       defaultValue: {

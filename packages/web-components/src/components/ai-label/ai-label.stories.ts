@@ -139,11 +139,6 @@ const argTypes = {
     description:
       'Specify the size of the button, from the following list of sizes: <code>mini</code>, <code>2xs</code>, <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>.',
     options: sizes,
-  size: {
-    control: 'select',
-    description:
-      'Specify the size of the button, from the following list of sizes: <code>mini</code>, <code>2xs</code>, <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>.',
-    options: sizes,
     if: { arg: 'revertActive', neq: true },
   },
   revertActive: {
@@ -223,6 +218,7 @@ export const Inline = {
       options: inlineSizes,
       if: { arg: 'revertActive', neq: true },
     },
+  },
   render: ({
     aiText,
     aiTextLabel,
@@ -282,6 +278,7 @@ export const InlineWithContent = {
       description:
         'Specify the size of the button, from the following list of sizes: <code>sm</code>, <code>md</code>, <code>lg</code>',
       options: inlineSizes,
+      if: { arg: 'revertActive', neq: true },
     },
   },
   render: ({
