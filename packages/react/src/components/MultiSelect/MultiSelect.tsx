@@ -678,7 +678,7 @@ export const MultiSelect = React.forwardRef(
       if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
         setIsFocused(false);
       } else {
-        setIsFocused(evt.type === 'focus' ? true : false);
+        setIsFocused(evt.type === 'focus');
       }
     };
 
