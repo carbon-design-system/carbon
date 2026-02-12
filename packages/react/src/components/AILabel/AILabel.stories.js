@@ -213,7 +213,7 @@ Inline.args = {
 };
 Inline.argTypes = {
   ...sharedArgTypes,
-  size: {
+size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
     description:
@@ -226,6 +226,7 @@ Inline.argTypes = {
         summary: "'sm' | 'md' | 'lg'",
       },
     },
+    if: { arg: 'revertActive', neq: true },
   },
 };
 Inline.parameters = {
