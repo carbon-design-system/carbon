@@ -292,7 +292,7 @@ InlineWithContent.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
-    description:
+description:
       'Specify the size of the button, from the following list of sizes:',
     table: {
       defaultValue: {
@@ -302,6 +302,7 @@ InlineWithContent.argTypes = {
         summary: "'sm' | 'md' | 'lg'",
       },
     },
+    if: { arg: 'revertActive', neq: true },
   },
 };
 InlineWithContent.parameters = {
