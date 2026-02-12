@@ -85,6 +85,7 @@ const sharedArgTypes = {
   size: {
     options: ['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'],
     control: { type: 'select' },
+    if: { arg: 'revertActive', neq: true },
   },
   textLabel: {
     control: {
