@@ -68,11 +68,9 @@ Default.argTypes = {
     },
   },
   tooltipPosition: {
-    options: ['top', 'right', 'bottom', 'left'],
-    control: { type: 'select' },
+    control: false,
   },
   tooltipAlignment: {
-    options: ['center'],
-    control: { type: 'select' },
+    control: false,
   },
 };
