@@ -34,10 +34,10 @@ icons, pictograms, layout, motion, themes, type), and tooling.
 - The packages contained within this monorepo and published to npm are
   intentionally layered on top of each other. Higher-level packages re-export or
   wrap lower-level packages.
-- For a directory-to-package mapping, see
+- A directory-to-package mapping is generated from the build:
   `docs/generated/package-structure.json`
-- For a detailed graph of packages and their relationships, see
-  `docs/generated/package-structure-graph.json`
+- A detailed graph of packages and their relationships is generated from the
+  build: `docs/generated/package-structure-graph.json`
 
 ## Package-specific details
 
