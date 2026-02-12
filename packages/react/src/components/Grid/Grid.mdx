@@ -203,6 +203,16 @@ subgrid definition. To achieve this you can wrap your nested `Grid` in
 </Grid>
 ```
 
+<Canvas
+  of={GridStories.WithGridSettings}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.WithGridSettings),
+    },
+  ]}
+/>
+
 ## Mixed gutter modes
 
 The same way that you can pass in `condensed` to a root `Grid`, you can also
