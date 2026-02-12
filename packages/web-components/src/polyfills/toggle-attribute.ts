@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,8 +10,8 @@ if (!Element.prototype.toggleAttribute) {
     name: string,
     force?: boolean
   ) {
-    const oldState = Boolean(this.hasAttribute(name));
-    const newState = typeof force !== 'undefined' ? Boolean(force) : !oldState;
+    const oldState = this.hasAttribute(name);
+    const newState = typeof force !== 'undefined' ? force : !oldState;
     if (oldState !== newState) {
       if (newState) {
         this.setAttribute(name, '');
