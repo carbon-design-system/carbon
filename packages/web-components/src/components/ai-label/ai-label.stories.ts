@@ -221,8 +221,8 @@ export const Inline = {
       description:
         'Specify the size of the button, from the following list of sizes: <code>sm</code>, <code>md</code>, <code>lg</code>',
       options: inlineSizes,
+      if: { arg: 'revertActive', neq: true },
     },
-  },
   render: ({
     aiText,
     aiTextLabel,
