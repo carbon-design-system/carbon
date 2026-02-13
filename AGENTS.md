@@ -3,15 +3,15 @@ HUMAN MAINTAINERS:
 This file should be as short as possible. More length = more tokens used.
 -->
 
-This is a monorepo for IBM's Carbon Design System that contains react
-components, web components, sass styles, foundational elements (colors, grid,
+This is a monorepo for IBM's Carbon Design System that contains React
+components, web components, Sass styles, foundational elements (colors, grid,
 icons, pictograms, layout, motion, themes, type), and tooling.
 
 # Repository Guidelines
 
-- The correct node version to use is present in `.nvmrc`
-- yarn workspaces manage dependencies and package relationships
-- `package.json` scripts make use of lerna for build and task sequencing
+- The correct Node version to use is present in `.nvmrc`
+- Yarn workspaces manage dependencies and package relationships
+- `package.json` scripts make use of Lerna for build and task sequencing
 
 ## Workflow details
 
@@ -25,13 +25,13 @@ icons, pictograms, layout, motion, themes, type), and tooling.
   `docs/guides/`
 - The approach for delivering experimental, feature-flagged, "preview" code:
   `docs/experimental-code.md`, `docs/feature-flags.md`, `docs/preview-code.md`
-- Linting, Formatting, Build and Tests should all pass before committing
+- Linting, formatting, build and tests should all pass before committing
 - Before opening or reviewing a pull request (PR), follow the instructions:
   `docs/guides/reviewing-pull-requests.md`
 
 ## Package relationships
 
-- The packages contained within this monorepo and published to npm are
+- The packages contained within this monorepo and published to NPM are
   intentionally layered on top of each other. Higher-level packages re-export or
   wrap lower-level packages.
 - A directory-to-package mapping is generated from the build:

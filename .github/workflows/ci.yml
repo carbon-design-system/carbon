@@ -496,7 +496,7 @@ jobs:
             const marker = "<!-- agents-md-comment -->";
 
             const body = `${marker}
-⚠️ An AGENTS.md was added or updated in this PR. The length of these files directly correlate with token usage and increase instruction length and spend. Please follow [best practices](https://www.aihero.dev/a-complete-guide-to-agents-md) and leave a comment explaining why this change is needed.
+⚠️ An AGENTS.md was added or updated in this PR. The length of these files directly correlate with token usage, increased instruction length, and spend. Please follow [best practices](https://www.aihero.dev/a-complete-guide-to-agents-md) and leave a comment explaining why this change is needed.
 `;
 
             const { data: comments } = await github.rest.issues.listComments({

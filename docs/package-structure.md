@@ -1,6 +1,6 @@
 # Package structure
 
-The packages contained within this monorepo and published to npm are
+The packages contained within this monorepo and published to NPM are
 intentionally layered on top of each other. Higher-level packages re-export or
 wrap lower-level packages. This sometimes paints a confusing picture of what
 packages exist, which to use, and what others' purpose is relative to the ones

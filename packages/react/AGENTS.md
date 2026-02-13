@@ -2,13 +2,13 @@
 
 This package houses the canonical react component implementations.
 `@carbon/react` is intended to be a single point of entry for most everything a
-consumer needs to build a react app with the Carbon Design System. Styles are
+consumer needs to build a React app with the Carbon Design System. Styles are
 re-exported from `packages/styles` and icons are re-exported from
 `packages/icons-react`.
 
 ## Guidelines
 
-- Follow react best practices and common conventions
+- Follow React best practices and common conventions
 - Prefer composable declarative solutions over inheritable or imperative ones
 - Don't query the DOM directly, use refs where possible
 - You might not need a `useEffect` when updating state based on props or state,
