@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
+import { enabled } from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -150,7 +150,7 @@ const Column = React.forwardRef<
 
 const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
 
-const spanPropType = FeatureFlags.enabled('enable-css-grid')
+const spanPropType = enabled('enable-css-grid')
   ? PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.number,
