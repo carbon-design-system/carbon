@@ -251,7 +251,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }
 
     const handleFocus = (evt) => {
-      setIsFocused(evt.type === 'focus' ? true : false);
+      setIsFocused(evt.type === 'focus');
     };
 
     const handleChange = (evt) => {
