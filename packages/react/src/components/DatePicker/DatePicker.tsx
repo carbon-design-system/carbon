@@ -25,6 +25,7 @@ import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import { rangePlugin } from './plugins/rangePlugin';
 import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
@@ -472,10 +473,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   const childrenWithProps = React.Children.toArray(children as any).map(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (child: any, index) => {
-      if (
-        index === 0 &&
-        child.type === React.createElement(DatePickerInput, child.props).type
-      ) {
+      if (index === 0 && isComponentElement(child, DatePickerInput)) {
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
@@ -484,10 +482,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           warn: effectiveWarn,
         });
       }
-      if (
-        index === 1 &&
-        child.type === React.createElement(DatePickerInput, child.props).type
-      ) {
+      if (index === 1 && isComponentElement(child, DatePickerInput)) {
         return React.cloneElement(child, {
           datePickerType,
           ref: endInputField,

@@ -25,6 +25,7 @@ import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
+import { isComponentElement } from '../../internal';
 import { IconSwitch } from '../Switch';
 import type { SwitchEventHandlersParams } from '../Switch/Switch';
 
@@ -166,7 +167,7 @@ export const ContentSwitcher = ({
   };
 
   const isIconOnly = Children.map(children, (child) => {
-    return isValidElement(child) ? child.type === IconSwitch : null;
+    return isComponentElement(child, IconSwitch);
   })?.every((val) => val === true);
 
   const classes = classNames(`${prefix}--content-switcher`, className, {

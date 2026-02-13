@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../Layout';
+import { isComponentElement } from '../../internal';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ContainedListItem from './ContainedListItem';
@@ -76,7 +77,7 @@ function filterChildren(children) {
 function renderChildren(children) {
   if (Array.isArray(children)) {
     children.map((child, index) => {
-      if (index === 0 && child.type === Search) {
+      if (index === 0 && isComponentElement(child, Search)) {
         return child;
       }
 
@@ -84,7 +85,7 @@ function renderChildren(children) {
     });
   }
 
-  if (children && children.type === Search) {
+  if (isComponentElement(children, Search)) {
     return children;
   }
 

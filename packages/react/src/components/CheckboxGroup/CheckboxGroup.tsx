@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   Children,
   cloneElement,
-  isValidElement,
   type ComponentProps,
   type ReactNode,
 } from 'react';
@@ -98,10 +97,7 @@ const CheckboxGroup = ({
     : candidate;
 
   const clonedChildren = Children.map(children, (child) => {
-    if (
-      isValidElement<ComponentProps<typeof Checkbox>>(child) &&
-      child.type === Checkbox
-    ) {
+    if (isComponentElement(child, Checkbox)) {
       const childProps: Pick<
         ComponentProps<typeof Checkbox>,
         'invalid' | 'readOnly' | 'warn'
