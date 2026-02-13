@@ -102,6 +102,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
                   >`
                 : html``}
             </div>
+            <slot name="icon"></slot>
           </a>
         `
       : html`
@@ -120,6 +121,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
                   >`
                 : html``}
             </div>
+            <slot name="icon"></slot>
           </button>
         `;
   }

@@ -635,7 +635,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
-      const target = event.target as HTMLElement;
+      const target = event.target;
+
+      if (!(target instanceof Node)) return;
+
       const wrapper = document
         .getElementById(id)
         ?.closest(`.${prefix}--multi-select__wrapper`);
@@ -970,7 +973,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     ) {
       setIsFocused(false);
     } else {
-      setIsFocused(evt?.type === 'focus' ? true : false);
+      setIsFocused(evt?.type === 'focus');
     }
   };
 
