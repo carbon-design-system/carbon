@@ -560,4 +560,48 @@ describe('cds-popover focusout/outsideclick', () => {
     expect(popover.hasAttribute('open')).to.be.true;
     expect(document.activeElement).to.equal(outside);
   });
+
+  it('should properly handle keyboard nav within elements inside popover', async () => {
+    const el = await fixture(html`
+      <cds-popover open id="popover">
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content>
+          <button id="first">First</button>
+          <button id="second">Second</button>
+        </cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+
+    const first = el.querySelector('#first');
+    const second = el.querySelector('#second');
+
+    expect(el.hasAttribute('open')).to.be.true;
+
+    // Focus first button and tab to second button
+    first.focus();
+    await el.updateComplete;
+    expect(document.activeElement).to.equal(first);
+
+    await sendKeys({ press: 'Tab' });
+    await el.updateComplete;
+
+    // Popover should remain open and second button should be focused
+    expect(el.hasAttribute('open')).to.be.true;
+    expect(document.activeElement).to.equal(second);
+
+    // Press Enter key while focused on the second button
+    await sendKeys({ press: 'Enter' });
+    await el.updateComplete;
+
+    // _tabKeyPressed flag should update to false so focusout (if fired) will return early and popover will remain open
+    expect(el.hasAttribute('open')).to.be.true;
+    expect(document.activeElement).to.equal(second);
+
+    // Click Tab key, the _tabKeyPressed flag will be true and popover will close
+    await sendKeys({ press: 'Tab' });
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.false;
+  });
 });
