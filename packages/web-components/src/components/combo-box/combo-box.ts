@@ -581,12 +581,19 @@ class CDSComboBox extends CDSDropdown {
 
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
-    const { _selectedItemContent: selectedItemContent } = this;
-    if (selectedItemContent && changedProperties.has('value')) {
-      const selectedText = selectedItemContent?.textContent || '';
-      if (!this._filterInputValue || this._filterInputValue === selectedText) {
-        this._filterInputValue = selectedText;
-      }
+    if (!changedProperties.has('value')) {
+      return true;
+    }
+    if (this._selectedItemContent) {
+      this._filterInputValue = this._selectedItemContent.textContent || '';
+      return true;
+    }
+    if (this.allowCustomValue && this.value) {
+      this._filterInputValue = String(this.value);
+      return true;
+    }
+    if (this.value === '') {
+      this._filterInputValue = '';
     }
     return true;
   }

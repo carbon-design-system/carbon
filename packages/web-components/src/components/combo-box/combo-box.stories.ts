@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@ import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
 import '../ai-label/index';
+import '../button/index';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 const items = [
@@ -265,7 +266,6 @@ export const AllowCustomValue = {
     return html`
       <cds-combo-box
         .inputProps=${inputProps}
-        allow-custom-value="true"
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
@@ -290,6 +290,67 @@ export const AllowCustomValue = {
         <cds-combo-box-item value="Pineapple">Pineapple</cds-combo-box-item>
         <cds-combo-box-item value="Raspberry">Raspberry</cds-combo-box-item>
         <cds-combo-box-item value="Lime">Lime</cds-combo-box-item>
+      </cds-combo-box>
+    `;
+  },
+};
+
+export const AutocompleteWithTypeahead = {
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    helperText: 'Helper text',
+    titleText: 'Label',
+    typeahead: true,
+  },
+  render: (args) => {
+    const {
+      allowCustomValue,
+      autoalign,
+      disabled,
+      helperText,
+      invalid,
+      titleText,
+      hideLabel,
+      direction,
+      readOnly,
+      warn,
+      warnText,
+      size,
+      label,
+      type,
+      invalidText,
+      value,
+      typeahead,
+      inputProps,
+    } = args ?? {};
+    return html`
+      <cds-combo-box
+        .inputProps=${inputProps}
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?autoalign=${autoalign}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        ?read-only=${readOnly}
+        ?allow-custom-value=${allowCustomValue}
+        title-text=${ifDefined(titleText)}
+        size=${ifDefined(size)}
+        type=${ifDefined(type)}
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        ?typeahead=${typeahead}>
+        <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
+        <cds-combo-box-item value="apricot">Apricot</cds-combo-box-item>
+        <cds-combo-box-item value="avocado">Avocado</cds-combo-box-item>
+        <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
+        <cds-combo-box-item value="blackberry">Blackberry</cds-combo-box-item>
+        <cds-combo-box-item value="blueberry">Blueberry</cds-combo-box-item>
+        <cds-combo-box-item value="cantaloupe">Cantaloupe</cds-combo-box-item>
       </cds-combo-box>
     `;
   },
@@ -363,43 +424,78 @@ export const ExperimentalAutoAlign = {
   },
 };
 
-export const AutocompleteWithTypeahead = {
+export const Controlled = {
   argTypes: controls,
   args: {
     ...defaultArgs,
     helperText: 'Helper text',
     titleText: 'Label',
-    typeahead: true,
+    value: 'option-1',
   },
   render: (args) => {
     const {
-      allowCustomValue,
       autoalign,
+      allowCustomValue,
       disabled,
+      direction,
       helperText,
       invalid,
-      titleText,
-      hideLabel,
-      direction,
-      readOnly,
-      warn,
-      warnText,
-      size,
-      label,
-      type,
       invalidText,
-      value,
+      label,
+      readOnly,
+      size,
+      titleText,
+      type,
       typeahead,
       inputProps,
+      value,
+      warn,
+      warnText,
     } = args ?? {};
+
+    const setValue = (nextValue: string) => {
+      const comboBox = document.querySelector('cds-combo-box[controlled]') as
+        | (HTMLElement & { value: string })
+        | null;
+      if (comboBox) {
+        comboBox.value = nextValue;
+      }
+    };
+
+    const handleBeforeSelected = (event: CustomEvent) => {
+      event.preventDefault();
+
+      const { item } = event?.detail ?? {};
+      const nextValue = item?.getAttribute?.('value') ?? item?.value ?? '';
+
+      const comboBox = event.currentTarget as
+        | (HTMLElement & { value: string; open: boolean })
+        | null;
+      if (comboBox) {
+        comboBox.value = nextValue;
+        comboBox.open = false;
+      }
+    };
+
+    const handleSelected = (event: CustomEvent) => {
+      const { item, value: detailValue } = event?.detail ?? {};
+      if (item) return;
+      const comboBox = event.currentTarget as
+        | (HTMLElement & { value: string })
+        | null;
+      if (comboBox) {
+        comboBox.value = typeof detailValue === 'string' ? detailValue : '';
+      }
+    };
+
     return html`
       <cds-combo-box
         .inputProps=${inputProps}
+        controlled
         direction=${ifDefined(direction)}
-        ?disabled=${disabled}
         ?autoalign=${autoalign}
+        ?disabled=${disabled}
         helper-text=${ifDefined(helperText)}
-        ?hide-label=${hideLabel}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         ?read-only=${readOnly}
@@ -411,15 +507,21 @@ export const AutocompleteWithTypeahead = {
         label=${ifDefined(label)}
         ?warn=${warn}
         warn-text=${ifDefined(warnText)}
-        ?typeahead=${typeahead}>
-        <cds-combo-box-item value="apple">Apple</cds-combo-box-item>
-        <cds-combo-box-item value="apricot">Apricot</cds-combo-box-item>
-        <cds-combo-box-item value="avocado">Avocado</cds-combo-box-item>
-        <cds-combo-box-item value="banana">Banana</cds-combo-box-item>
-        <cds-combo-box-item value="blackberry">Blackberry</cds-combo-box-item>
-        <cds-combo-box-item value="blueberry">Blueberry</cds-combo-box-item>
-        <cds-combo-box-item value="cantaloupe">Cantaloupe</cds-combo-box-item>
+        ?typeahead=${typeahead}
+        @cds-combo-box-beingselected=${handleBeforeSelected}
+        @cds-combo-box-selected=${handleSelected}>
+        <cds-combo-box-item value="option-1">Option 1</cds-combo-box-item>
+        <cds-combo-box-item value="option-2">Option 2</cds-combo-box-item>
+        <cds-combo-box-item value="option-3">Option 3</cds-combo-box-item>
       </cds-combo-box>
+
+      <div
+        style="display: flex; align-items: center; justify-content: space-between;">
+        <cds-button @click=${() => setValue('')}> Clear </cds-button>
+        <cds-button @click=${() => setValue('option-1')}> Option 1 </cds-button>
+        <cds-button @click=${() => setValue('option-2')}> Option 2 </cds-button>
+        <cds-button @click=${() => setValue('option-3')}> Option 3 </cds-button>
+      </div>
     `;
   },
 };
@@ -558,109 +660,14 @@ const meta = {
   title: 'Components/Combo box',
   decorators: [
     (story, { name }) => {
-      const width = !name.toLowerCase().includes('layer') ? `width:300px` : ``;
+      const storyName = name.toLowerCase();
+      const width =
+        !storyName.includes('layer') && !storyName.includes('controlled')
+          ? `width:300px`
+          : ``;
       return html` <div style="${width}">${story()}</div> `;
     },
   ],
-};
-
-export const AllowCustomValueTest = {
-  argTypes: controls,
-  args: {
-    ...defaultArgs,
-    helperText: 'Combobox helper text',
-    titleText: 'ComboBox title',
-    allowCustomValue: true,
-  },
-  render: (args) => {
-    const {
-      allowCustomValue,
-      disabled,
-      helperText,
-      invalid,
-      titleText,
-      hideLabel,
-      direction,
-      readOnly,
-      warn,
-      warnText,
-      size,
-      label,
-      type,
-      invalidText,
-      value,
-      inputProps,
-    } = args ?? {};
-
-    const debugId = `debug-console-${Math.random().toString(36).substr(2, 9)}`;
-
-    const handleSelected = (event) => {
-      const outputDiv = document.getElementById(debugId);
-      if (!outputDiv) return;
-
-      let selectedValue = event.detail.value;
-      let selectionType = 'Custom Value (String)';
-
-      if (selectedValue === undefined || selectedValue === null) {
-        if (event.detail.item) {
-          selectedValue =
-            event.detail.item.getAttribute('value') ||
-            event.detail.item.textContent;
-          selectionType = 'Standard Item (DOM Element)';
-        } else {
-          selectedValue = 'Cleared (null)';
-          selectionType = 'Clear Event';
-        }
-      }
-
-      outputDiv.innerHTML = `
-        <div style="padding: 1rem; background-color: #f4f4f4; border: 1px solid #e0e0e0; border-radius: 4px;">
-          <div style="margin-bottom: 0.5rem;"><strong>Event:</strong> <code>cds-combo-box-selected</code></div>
-          <div style="margin-bottom: 0.5rem;"><strong>Type:</strong> ${selectionType}</div>
-          <div><strong>Value:</strong> <span style="color: #0f62fe; font-weight: bold;">"${selectedValue}"</span></div>
-        </div>
-      `;
-    };
-
-    return html`
-      <div
-        style="display: flex; flex-direction: column; gap: 2rem; max-width: 400px;">
-        <cds-combo-box
-          .inputProps=${inputProps}
-          ?allow-custom-value=${allowCustomValue}
-          @cds-combo-box-selected=${handleSelected}
-          direction=${ifDefined(direction)}
-          ?disabled=${disabled}
-          helper-text=${ifDefined(helperText)}
-          ?hide-label=${hideLabel}
-          ?invalid=${invalid}
-          invalid-text=${ifDefined(invalidText)}
-          ?read-only=${readOnly}
-          title-text=${ifDefined(titleText)}
-          size=${ifDefined(size)}
-          type=${ifDefined(type)}
-          value=${ifDefined(value)}
-          label=${ifDefined(label)}
-          ?warn=${warn}
-          warn-text=${ifDefined(warnText)}
-          should-filter-item>
-          <cds-combo-box-item value="Apple">Apple</cds-combo-box-item>
-          <cds-combo-box-item value="Orange">Orange</cds-combo-box-item>
-          <cds-combo-box-item value="Banana">Banana</cds-combo-box-item>
-          <cds-combo-box-item value="Pineapple">Pineapple</cds-combo-box-item>
-          <cds-combo-box-item value="Raspberry">Raspberry</cds-combo-box-item>
-          <cds-combo-box-item value="Lime">Lime</cds-combo-box-item>
-        </cds-combo-box>
-
-        <div id="${debugId}">
-          <div
-            style="padding: 1rem; border: 1px dashed #c6c6c6; color: #6f6f6f; font-size: 0.875rem;">
-            Interact with the combobox to see selection data here.
-          </div>
-        </div>
-      </div>
-    `;
-  },
 };
 
 export default meta;
