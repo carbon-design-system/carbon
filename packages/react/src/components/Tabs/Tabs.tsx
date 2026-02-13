@@ -1263,7 +1263,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(
       customClassName
     );
 
-    const BaseComponent = as as ElementType;
+    const BaseComponent: ElementType = as;
 
     const onDismissIconMouseEnter = (evt) => {
       if (contained && tabRef.current) {

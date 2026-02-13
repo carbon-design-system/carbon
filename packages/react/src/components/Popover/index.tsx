@@ -544,13 +544,11 @@ export const Popover: PopoverComponent & {
     }
   });
 
-  const BaseComponentAsAny = BaseComponent as React.ElementType;
-
   return (
     <PopoverContext.Provider value={value}>
-      <BaseComponentAsAny {...rest} className={className} ref={ref}>
+      <BaseComponent {...rest} className={className} ref={ref}>
         {enableFloatingStyles || isTabTip ? mappedChildren : children}
-      </BaseComponentAsAny>
+      </BaseComponent>
     </PopoverContext.Provider>
   );
 }) as PopoverComponent;
