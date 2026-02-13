@@ -348,7 +348,7 @@ export const Controlled = (args) => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        <Button onClick={() => setValue(null)}>Reset</Button>
+        <Button onClick={() => setValue(null)}>Clear</Button>
         <Button onClick={() => setValue(options[0])}>Option 1</Button>
         <Button onClick={() => setValue(options[1])}>Option 2</Button>
         <Button onClick={() => setValue(options[2])}>Option 3</Button>

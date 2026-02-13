@@ -502,7 +502,7 @@ export const Controlled = {
 
       <div
         style="display: flex; align-items: center; justify-content: space-between;">
-        <cds-button @click=${() => setValue('')}> Reset </cds-button>
+        <cds-button @click=${() => setValue('')}> Clear </cds-button>
         <cds-button @click=${() => setValue('option-1')}> Option 1 </cds-button>
         <cds-button @click=${() => setValue('option-2')}> Option 2 </cds-button>
         <cds-button @click=${() => setValue('option-3')}> Option 3 </cds-button>
