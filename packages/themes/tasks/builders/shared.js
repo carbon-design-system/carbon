@@ -32,7 +32,7 @@ function primitive(value) {
     ) {
       return t.SassValue(value);
     }
-    return t.SassValue(`unquote("${value}")`);
+    return t.SassValue(`string.unquote("${value}")`);
   }
   if (typeof value === 'number') {
     return t.SassNumber(value);
