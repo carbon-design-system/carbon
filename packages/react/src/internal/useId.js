@@ -52,8 +52,6 @@ const defaultId = 'id';
 /**
  * Generate a unique ID for React <=17 with an optional prefix prepended to it.
  * This is an internal utility, not intended for public usage.
- * @param {string} [prefix]
- * @returns {string}
  */
 export function useCompatibleId(prefix = defaultId) {
   const contextPrefix = useIdPrefix();
@@ -61,7 +59,7 @@ export function useCompatibleId(prefix = defaultId) {
   const [id, setId] = useState(() => {
     if (serverHandoffCompleted) {
       return `${
-        contextPrefix ? `${contextPrefix}-` : ``
+        contextPrefix ? `${contextPrefix}-` : ''
       }${prefix}-${instanceId()}`;
     }
     return null;
@@ -70,7 +68,7 @@ export function useCompatibleId(prefix = defaultId) {
   useIsomorphicEffect(() => {
     if (id === null) {
       setId(
-        `${contextPrefix ? `${contextPrefix}-` : ``}${prefix}-${instanceId()}`
+        `${contextPrefix ? `${contextPrefix}-` : ''}${prefix}-${instanceId()}`
       );
     }
   }, [instanceId]);
@@ -87,13 +85,11 @@ export function useCompatibleId(prefix = defaultId) {
 /**
  * Generate a unique ID for React >=18 with an optional prefix prepended to it.
  * This is an internal utility, not intended for public usage.
- * @param {string} [prefix]
- * @returns {string}
  */
 function useReactId(prefix = defaultId) {
   const contextPrefix = useIdPrefix();
   return `${
-    contextPrefix ? `${contextPrefix}-` : ``
+    contextPrefix ? `${contextPrefix}-` : ''
   }${prefix}-${_React.useId()}`;
 }
 
@@ -107,8 +103,7 @@ export const useId = _React.useId ? useReactId : useCompatibleId;
 /**
  * Generate a unique id if a given `id` is not provided
  * This is an internal utility, not intended for public usage.
- * @param {string|undefined} id
- * @returns {string}
+ * @param {string} [id]
  */
 export function useFallbackId(id) {
   const fallback = useId();
