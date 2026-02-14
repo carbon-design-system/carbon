@@ -32,8 +32,7 @@ import { isComponentElement } from '../../internal';
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className?: string;
 
@@ -586,8 +585,7 @@ const TextArea = frFn((props, forwardRef) => {
 TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className: PropTypes.string,
 
