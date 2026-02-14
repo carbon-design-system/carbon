@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -203,6 +203,22 @@ describe('Search', () => {
       render(<Search labelText="test-search" value="test-value" />);
 
       expect(screen.getByRole('searchbox')).toHaveValue('test-value');
+    });
+
+    it('should sync clear button visibility when controlled value changes', () => {
+      const { rerender } = render(
+        <Search labelText="test-search" value="test-value" />
+      );
+
+      expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
+
+      rerender(<Search labelText="test-search" value="" />);
+
+      expect(screen.getByLabelText('Clear search input')).toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
     });
   });
 });

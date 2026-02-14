@@ -10,6 +10,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
+  useEffect,
   useRef,
   useState,
   type ChangeEvent,
@@ -161,7 +162,6 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
     const [hasContent, setHasContent] = useState(hasPropValue || false);
-    const [prevValue, setPrevValue] = useState(value);
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
@@ -180,10 +180,12 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       [`${prefix}--search-close--hidden`]: !hasContent || !isExpanded,
     });
 
-    if (value !== prevValue) {
-      setHasContent(!!value);
-      setPrevValue(value);
-    }
+    useEffect(() => {
+      // Sync content state when used as a controlled input.
+      if (typeof value !== 'undefined') {
+        setHasContent(!!value);
+      }
+    }, [value]);
 
     function clearInput() {
       if (!value && inputRef.current) {
