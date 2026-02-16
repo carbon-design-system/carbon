@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@ import Select from '../Select';
 import SelectItem from '../../SelectItem';
 import SelectSkeleton from '../../Select/Select.Skeleton';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
@@ -249,7 +249,7 @@ describe('Select', () => {
       expect(selectWrapper).not.toBeInTheDocument();
     });
 
-    it.skip('should respect readOnly prop', async () => {
+    it('should respect readOnly prop', async () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
 
@@ -270,19 +270,12 @@ describe('Select', () => {
       const theSelect = screen.getByRole('combobox');
       await userEvent.click(theSelect);
       expect(onClick).toHaveBeenCalledTimes(1);
+      expect(theSelect).toHaveAttribute('aria-readonly', 'true');
 
-      //------------------------------------------------------------------------
-      // Testing library - userEvent.type() does not work on <select> elements
-      // and using selectOption causes the value to change.
-      // Ideally we'd use userEvent.type(theSelect, '{arrowdown}{enter}') to test the readOnly prop
-      // or have a way to click on a slotted option.
-      // https://github.com/testing-library/user-event/issues/786
-      //------------------------------------------------------------------------
-      await userEvent.selectOptions(theSelect, 'option-1');
-
-      // Change events should *not* fire
-      expect(screen.getByText('Option 1').selected).toBe(false);
-
+      // Access keys that would open or select options should be blocked.
+      expect(fireEvent.keyDown(theSelect, { key: 'ArrowDown' })).toBe(false);
+      expect(fireEvent.keyDown(theSelect, { key: 'ArrowUp' })).toBe(false);
+      expect(fireEvent.keyDown(theSelect, { key: ' ' })).toBe(false);
       expect(onChange).toHaveBeenCalledTimes(0);
     });
 

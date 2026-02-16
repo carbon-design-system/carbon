@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import { Filename } from '../';
 const statuses = ['uploading', 'edit', 'complete'];
 
 describe('Filename', () => {
-  describe.skip('automated accessibility tests', () => {
+  describe('automated accessibility tests', () => {
     it.each(statuses)(
       'should have no axe violations with status %s',
       async (status) => {
