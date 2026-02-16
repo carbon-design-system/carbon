@@ -36,7 +36,6 @@ import ListBox, {
 } from '../ListBox';
 import {
   MultiSelectSortingProps,
-  SortItemsOptions,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
@@ -306,7 +305,7 @@ export const MultiSelect = React.forwardRef(
       size,
       disabled = false,
       initialSelectedItems = [],
-      sortItems = defaultSortItems as MultiSelectProps<ItemType>['sortItems'],
+      sortItems = defaultSortItems,
       compareItems = defaultCompareItems,
       clearSelectionText = 'To clear selection, press Delete or Backspace',
       clearAnnouncement = 'all items have been cleared',
@@ -846,10 +845,7 @@ export const MultiSelect = React.forwardRef(
           <ListBox.Menu {...menuProps}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-              sortItems!(
-                filteredItems,
-                sortOptions as SortItemsOptions<ItemType>
-              ).map((item, index) => {
+              sortItems!(filteredItems, sortOptions).map((item, index) => {
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,
