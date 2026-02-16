@@ -162,10 +162,26 @@ export const TabTip = (args) => {
 };
 
 TabTip.argTypes = {
-  align: { control: false },
-  autoAlign: { control: false },
-  highContrast: { control: false },
-  caret: { control: false },
+  align: {
+    table: {
+      disable: true,
+    },
+  },
+  autoAlign: {
+    table: {
+      disable: true,
+    },
+  },
+  highContrast: {
+    table: {
+      disable: true,
+    },
+  },
+  caret: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const Default = DefaultStory.bind({});
@@ -179,7 +195,9 @@ Default.args = {
 
 Default.argTypes = {
   isTabTip: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   align: {
     options: [
@@ -236,6 +254,51 @@ Default.story = {
   ],
 };
 
+const autoAlignArgTypes = {
+  autoAlign: {
+    table: {
+      disable: true,
+    },
+  },
+  highContrast: {
+    table: {
+      disable: true,
+    },
+  },
+  isTabTip: {
+    table: {
+      disable: true,
+    },
+  },
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+};
+
 export const ExperimentalAutoAlign = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
@@ -286,41 +349,7 @@ export const ExperimentalAutoAlign = (args) => {
   );
 };
 
-ExperimentalAutoAlign.argTypes = {
-  autoAlign: { control: false },
-  highContrast: { control: false },
-  caret: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  isTabTip: {
-    control: false,
-  },
-};
-
+ExperimentalAutoAlign.argTypes = autoAlignArgTypes;
 export const ExperimentalAutoAlignBoundary = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
@@ -394,40 +423,7 @@ export const ExperimentalAutoAlignBoundary = (args) => {
   );
 };
 
-ExperimentalAutoAlignBoundary.argTypes = {
-  autoAlign: { control: false },
-  highContrast: { control: false },
-  caret: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  isTabTip: {
-    control: false,
-  },
-};
+ExperimentalAutoAlignBoundary.argTypes = autoAlignArgTypes;
 
 export const TabTipExperimentalAutoAlign = () => {
   const [open, setOpen] = useState(true);
