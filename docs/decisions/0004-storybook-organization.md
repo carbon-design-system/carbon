@@ -1,4 +1,4 @@
-# 4. Organize Storybook for Human & MCP Friendliness
+# 4. Storybook Organization Standards
 
 Date: 2026-02-12
 
@@ -12,36 +12,31 @@ Storybook serves as the primary documentation and development environment for
 Carbon components across both React and Web Components packages. However, the
 current organization and implementation patterns have several challenges:
 
-- **Inconsistent documentation**: Component properties and behaviors are
-  documented in multiple places (TypeScript definitions, JSDoc comments, and
-  Storybook argTypes), leading to maintenance overhead and potential
-  inconsistencies.
 - **Developer experience**: The code tab in Storybook often shows irrelevant
-  wrapper code or multiple component instances, making it difficult to copy and
-  use examples directly.
-- **Limited AI/MCP accessibility**: Model Context Protocol (MCP) agents and AI
-  assistants struggle to understand and generate appropriate Storybook stories
-  due to inconsistent patterns and formats.
+  wrapper code or multiple component instances, or wrongly formatted code.
+  making it difficult to copy and use examples directly.
 - **Control panel clutter**: All component props are shown in controls
   regardless of story relevance, creating confusion about which props apply to
   specific use cases.
-- **Duplicate maintenance**: Documentation must be maintained separately in
-  TypeScript definitions and Storybook configurations.
 
-These issues impact both human developers trying to understand and use
-components, and automated tools (like MCP agents) attempting to generate or
-modify stories programmatically.
+These issues impact both maintainer and consumer developers trying to document,
+understand, and use components.
 
 ## Decision
 
 We will adopt the following standards for organizing and writing Storybook
-stories:
+stories, organized around two primary goals:
 
-### 1. Single Source of Truth for Documentation
+## 1. Every Story Should Have Operable Controls
 
-**Decision**: Use TypeScript definitions and JSDoc comments as the single source
-of truth for component documentation. Leverage Storybook's automatic type
-inference to populate argTypes.
+**Goal**: Maximize the utility of Storybook's interactive controls to help
+developers understand and experiment with component behavior.
+
+### Default Stories: Maximum Control Availability
+
+Default stories should expose as many controls as possible to give developers
+full flexibility to explore component capabilities. this includes all the props
+that are relevant to the component.
 
 **React Components**:
 
@@ -51,7 +46,7 @@ import { Button } from './Button';
 export default {
   title: 'Components/Button',
   component: Button, // ✅ Enables automatic TypeDoc extraction
-  argTypes: sharedArgTypes, // Only for overrides/additions
+  argTypes: sharedArgTypes, // For overrides/additions
 };
 ```
 
@@ -65,29 +60,32 @@ export default {
 };
 ```
 
-**Rationale**: This eliminates duplicate documentation maintenance. TypeScript
-definitions already contain comprehensive type information and JSDoc comments.
-By referencing the component in meta, Storybook automatically extracts this
-information for controls and documentation. Manual argTypes should only be added
-when additional context is needed beyond what TypeScript provides.
+### Variant Stories: Focused, Relevant Controls
 
-### 2. Read-Only Props for Focused Stories
+Non-default variant stories should limit controls to only those relevant to the
+specific variant being demonstrated. we have to mark them as `readonly` to
+prevent accidental changes to the component's behavior. but still convey the
+intent of making the props non-modifiable.
 
-**Decision**: When a story demonstrates a specific prop or feature in a
-dedicated story, make any irrelevant props read-only in other stories to prevent
-confusion.
+```typescript
+Default.argTypes = {
+  ...sharedArgTypes,
+  kind: {
+    table: { readonly: true }, // prefer to use `readonly` to still convey the variant prop requirement
+  },
+};
+```
 
-**Rationale**: High-emphasis props that warrant dedicated stories (like `kind`
-having dedicated story for each) should not be modifiable in stories where
-they're not relevant. This prevents users from accidentally enabling features
-that aren't demonstrated in that particular story, reducing confusion and
-maintaining story focus.
+**Rationale**: Default stories serve as the primary exploration point, so
+maximum control availability helps developers understand the full component API.
+Variant stories demonstrate specific use cases, so limiting controls to relevant
+props reduces cognitive load and prevents confusion about which props apply to
+that variant.
 
-### 3. One Component Per Story with Shared Controls
+### Optionally, use control categories for clarity (compound components)
 
-**Decision**: Each story should render only one component instance (or multiple
-instances of the same component sharing state from controls ex: layers). For
-compound components, separate child component controls using categories.
+For compound components with multiple sub-components, categories can be used to
+organize controls clearly.
 
 ```typescript
 argTypes: {
@@ -101,134 +99,218 @@ argTypes: {
 };
 ```
 
-**Rationale**: The code tab's copy functionality is most useful when it shows
-only the component code users need. Multiple unrelated components or complex
-wrapper code reduces utility. make use of decorator parameter for any kind of
-wrapper to avoid rendering in code tab. When showing multiple instances (e.g.,
-layers, themes), they should share the same control state to demonstrate
-consistency. For compound components, categorizing child controls maintains
-clarity while keeping all relevant controls accessible.
+**Rationale**: Categorization maintains clarity while keeping all relevant
+controls accessible, helping developers understand the relationship between
+parent and child component props.
 
-### 4. Contextual Control Visibility
+### Only Use argType Overrides When Necessary
 
-**Decision**: Only show relevant controls for each story. Hide props that don't
-apply to the story's specific use case.
+Leverage Storybook's automatic type inference from TypeScript definitions and
+JSDoc comments. Manual argTypes should only be added when you need to:
 
-**Rationale**: A Button story demonstrating icon buttons should show
-icon-related props (tooltip-position, auto-align etc.), but a basic button story
-should hide these. This reduces cognitive load and helps users understand which
-props are relevant for each use case. It also improves the generated code in the
-code tab by excluding irrelevant attributes.
+- **Hide any internal/unwanted controls from the table**:
+  `table: { disable: true }`
+- **Making controls readonly for variant stories**: `table: { readonly: true }`
+- **Specify action handlers**: `action: 'onClick'`
+- **Provide default values for the docs table if not auto inferred**:
+  `table: { defaultValue: { summary: 'value' } }`
+- **Override inferred control types**: When automatic inference doesn't match
+  the desired control
+- **Add additional descriptions not in TypeScript**: When additional context is
+  needed beyond TSDoc comments.
 
-### 5. Live Code Generation with Public Props
+Note: Make sure the types and defaultValues are correct. Sometimes they may be
+displayed incorrectly. in such cases, they need to be manually verified and
+updated in the Args table.
 
-**Decision**: All stories must use public-facing props as controls to enable
-live code generation in the code tab. For Web Components, create reusable
-templates to avoid repetition while maintaining CSF3 format.
-
-**Web Components Template Example**:
+**Example**:
 
 ```typescript
-const baseButtonTemplate = (args) => html`
-  <cds-button
-    @click=${args.onClick}
-    danger-description=${ifDefined(args.dangerDescription)}
-    ?disabled=${args.disabled}
-    href=${ifDefined(args.href)}
-    ?isExpressive=${args.isExpressive}
-    kind=${ifDefined(args.kind)}
-    rel=${ifDefined(args.rel)}
-    link-role=${ifDefined(args.linkRole)}
-    target=${ifDefined(args.target)}
-    tabindex=${ifDefined(args.tabindex)}
-    size=${ifDefined(args.size)}
-    type=${ifDefined(args.type)}>
-    Button ${args.iconSlot?.({ slot: 'icon' })}
-  </cds-button>
-`;
-
-export const Default = {
-  render: baseButtonTemplate,
-  args: {
-    disabled: false,
-    // ... other args
+argTypes: {
+  // Hide internal prop from controls
+  internalState: {
+    table: { disable: true },
+  },
+  // Make prop readonly for variant stories
+  kind: {
+    table: { readonly: true },
+  },
+  // Specify action for event handler
+  onClick: {
+    action: 'clicked',
+  },
+  // Provide default value for documentation if needed
+  size: {
+    table: {
+      defaultValue: { summary: 'md' },
+    },
   },
 };
 ```
 
-**Rationale**: Live code generation is crucial for developer experience - users
-should be able to modify controls and see the resulting code update in
-real-time. This is equally important for Web Components as it is for React.
-Templates allow code reuse while maintaining the CSF3 object format and enabling
-live code generation. The exception is stateful examples in Web Components,
-where state management limitations may require different approaches (unlike
-React stories which can use `useState` inside stories).
+**Rationale**: TypeScript definitions already contain comprehensive type
+information. By referencing the component in meta, Storybook automatically
+extracts this information for controls and documentation. Minimizing manual
+argTypes reduces duplication and maintenance burden while still allowing
+necessary customization.
 
-### 6. CSF3 Object-Based Stories Format
+## 2. The Code Tab Should Be Copy-Pastable
 
-**Decision**: All stories must follow the Component Story Format 3.0 (CSF3)
-object-based format.
+**Goal**: Ensure the code shown in Storybook's code tab is clean, practical, and
+ready to use in real applications.
+
+### Avoid Wrapper Code When Practical
+
+Minimize wrapper code in story renders to keep the code tab focused on the
+component itself. Use decorators for necessary wrappers to prevent them from
+appearing in the code tab.
+
+use [source type](https://storybook.js.org/docs/api/doc-blocks/doc-block-source)
+to format the source code in code tab if necessary.
+
+```typescript
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
+```
+
+**When to use decorators**:
+
+- Layout containers that aren't part of the component's actual usage
+- Theme providers or context wrappers needed for the story to function
+- Styling wrappers purely for Storybook presentation
+
+**When wrapper code is acceptable**:
+
+- The wrapper is part of the actual component usage pattern (e.g., form
+  elements)
+- The wrapper provides essential context that developers need to understand
+  (e.g., data providers)
+
+**Example using decorators**:
 
 ```typescript
 export const Default = {
-  argTypes: {
-    // ... argTypes
+  args: {
+    // ...
   },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '2rem' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+```
+
+**Rationale**: The code tab is most valuable when it shows exactly what
+developers need to implement. Excessive wrapper code reduces this utility, but
+some wrappers provide important context about how components should be used.
+
+### Avoid Multiple Single-Component Instances
+
+Each story should render only one component instance, unless showing multiple
+instances is the point of the story (e.g., demonstrating consistency across
+layers or themes).
+
+**Acceptable multiple instances**:
+
+```typescript
+// ✅ Multiple instances sharing controls to demonstrate consistency
+export const Layers = {
+  render: (args) => (
+    <>
+      <Button {...args} />
+      <Button {...args} />
+    </>
+  ),
+};
+```
+
+**Avoid**:
+
+```typescript
+// ❌ Multiple unrelated component instances
+export const Example = {
+  render: () => (
+    <>
+      <Button>Primary</Button>
+      <Button kind="secondary">Secondary</Button>
+      <Button kind="tertiary">Tertiary</Button>
+    </>
+  ),
+};
+```
+
+**Exception for compound components**: Components like Tabs that require
+multiple child components to function are acceptable and expected.
+
+**Rationale**: Single-instance stories produce cleaner, more focused code in the
+code tab. When multiple instances are needed to demonstrate a concept (like
+consistency), they should share control state to make the demonstration clear.
+
+### Prefer Controls Over Hardcoded Props
+
+Use control args instead of hardcoding prop values to enable live code
+generation and interactive exploration. for developers.
+
+Also make sure to map actions to every interactive elements.
+
+**Preferred**:
+
+```typescript
+export const Default = {
   args: {
     disabled: false,
     size: 'md',
   },
-  controls: {
-    include: baseButtonControls,
-  },
-};
-
-export const WithIcon = {
-  argTypes: {
-    // ... argTypes
-  },
-  args: {
-    ...Default.args,
-    hasIcon: true,
-  },
-  controls: {
-    include: iconButtonControls,
-  },
 };
 ```
 
-**Rationale**: CSF3's object-based format is more structured and declarative
-than function-based stories. This makes it significantly easier for MCP agents
-and AI assistants to parse, understand, and generate stories programmatically.
-The clear separation of args, render functions, and other story properties
-provides a predictable structure that both humans and machines can work with
-effectively.
+**Avoid**:
+
+```typescript
+export const Default = {
+  render: () => <Button disabled={false} size="md" />,
+};
+```
+
+**Rationale**: Live code generation is crucial for developer experience. When
+users modify controls, they should see the resulting code update in real-time.
+This is particularly important for Web Components where this pattern may be more
+established in React stories.
 
 ## Consequences
 
 ### Positive
 
-- **Reduced maintenance burden**: Documentation only needs to be updated in
-  TypeScript definitions, automatically flowing to Storybook.
 - **Improved developer experience**: Cleaner code tab output, focused controls,
   and live code generation make it easier to understand and use components.
-- **Better AI/MCP integration**: Consistent, structured story format enables
-  automated tools to generate and modify stories more reliably.
+- **Reduced maintenance burden**: Leveraging automatic type inference minimizes
+  duplicate documentation while still allowing necessary customization.
 - **Clearer component usage**: Story-specific control visibility helps users
   understand which props are relevant for each use case.
+- **More practical examples**: Copy-pastable code reduces friction in adopting
+  and implementing components.
 - **Consistent patterns**: Standardized approach across React and Web Components
-  packages.
+  packages improves maintainability.
 
 ### Negative
 
 - **Migration effort**: Existing stories need to be updated to follow these
-  patterns, requiring significant refactoring work.
-- **Learning curve**: Team members need to understand when to use templates vs.
-  inline renders, and how to properly configure control visibility.
+  patterns, requiring refactoring work.
+- **Judgment calls required**: Team members need to understand when to use
+  decorators vs. inline wrappers, and which controls to show for each variant.
 
 ### Neutral
 
-- **TypeScript requirement**: This approach requires well-maintained TypeScript
-  definitions and JSDoc comments, which should already be a best practice.
+- **TypeScript requirement**: This approach works best with well-maintained
+  TypeScript definitions and JSDoc comments, which should already be a best
+  practice.
 - **Storybook version dependency**: Automatic type inference requires recent
   Storybook versions with proper TypeScript support.
