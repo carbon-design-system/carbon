@@ -14,6 +14,7 @@ import React, {
   type ChangeEventHandler,
   type ComponentPropsWithRef,
   type ReactNode,
+  type SelectHTMLAttributes,
 } from 'react';
 import classNames from 'classnames';
 import {
@@ -52,8 +53,7 @@ export interface SelectProps
   /**
    * Optionally provide the default value of the `<select>`
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  defaultValue?: any;
+  defaultValue?: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
 
   /**
    * Specify whether the control is disabled
@@ -174,8 +174,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const [isFocused, setIsFocused] = useState(false);
 
     interface SelectItemProps {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      value: any;
+      value: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
       text: string;
     }
     // Convert children to an array of valid elements once using type narrowing
@@ -233,8 +232,8 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
-
-    const helper = helperText ? (
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helper = hasHelper ? (
       <Text
         as="div"
         id={normalizedProps.helperId}
@@ -252,7 +251,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }
 
     const handleFocus = (evt) => {
-      setIsFocused(evt.type === 'focus' ? true : false);
+      setIsFocused(evt.type === 'focus');
     };
 
     const handleChange = (evt) => {

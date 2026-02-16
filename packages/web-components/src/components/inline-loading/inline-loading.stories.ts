@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -94,11 +94,13 @@ export const UxExample = {
         loadingElem.setAttribute('aria-live', 'assertive');
       }
 
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      submit && ((submit as HTMLElement).style.display = 'none');
+      if (submit) {
+        (submit as HTMLElement).style.display = 'none';
+      }
 
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      cancel && (cancel.disabled = true);
+      if (cancel) {
+        cancel.disabled = true;
+      }
 
       // Instead of making a real request, we mock it with a timer
       setTimeout(() => {
@@ -109,14 +111,18 @@ export const UxExample = {
 
         // To make submittable again, we reset the state after a bit so the user gets completion feedback
         setTimeout(() => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-          loadingElem && ((loadingElem as HTMLElement).style.display = 'none');
+          if (loadingElem) {
+            (loadingElem as HTMLElement).style.display = 'none';
+          }
 
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-          submit && ((submit as HTMLElement).style.display = 'block');
+          if (submit) {
+            (submit as HTMLElement).style.display = 'block';
+          }
 
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-          cancel && (cancel.disabled = false);
+          if (cancel) {
+            cancel.disabled = false;
+          }
+
           if (loadingElem) {
             loadingElem.setAttribute('aria-live', 'off');
             loadingElem.innerHTML = 'Submitting';
