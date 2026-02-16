@@ -19,29 +19,26 @@ import './index';
 
 import Add16 from '@carbon/icons/es/add/16.js';
 import Notification16 from '@carbon/icons/es/notification/16.js';
+import Filter16 from '@carbon/icons/es/filter/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
- * Missing props compared to React:
+ * Prop parity
  * - as
  * - tooltipDropShadow
  * - tooltipHighContrast
  * - autoAlign
- * - iconDescription
- *
- * Note:
- * In React, `iconDescription` is used for both the SVG aria-label and tooltip text.
- * In WC, we have `tooltipText`, but it does not currently add an aria-label to SVGs.
+ * - hasIconOnly - not needed
+ * - iconDescription ~ tooltipText + set aria-label on icons manually
  */
 
 const textButtonControls = [
-  'dangerDescription',
   'disabled',
   'href',
   'isExpressive',
   'kind',
   'rel',
-  'iconSlot',
+  'icon',
   'linkRole',
   'size',
   'tabindex',
@@ -86,9 +83,9 @@ const sizes = [
  * Needs investigation for parity.
  */
 const alignmentOptions = {
-  ['Start']: BUTTON_TOOLTIP_ALIGNMENT.START,
-  ['Center']: BUTTON_TOOLTIP_ALIGNMENT.CENTER,
-  ['End']: BUTTON_TOOLTIP_ALIGNMENT.END,
+  Start: BUTTON_TOOLTIP_ALIGNMENT.START,
+  Center: BUTTON_TOOLTIP_ALIGNMENT.CENTER,
+  End: BUTTON_TOOLTIP_ALIGNMENT.END,
 };
 
 const positionOptions = [
@@ -109,7 +106,7 @@ const sharedArgTypes = {
       'Specify the message read by screen readers for the danger button variants',
     control: 'text',
     type: { name: 'string' },
-    table: { defaultValue: { summary: 'danger' } },
+    table: { defaultValue: { summary: '"danger"' } },
   },
   href: {
     description:
@@ -118,11 +115,12 @@ const sharedArgTypes = {
     type: { name: 'string' },
   },
   kind: {
-    description: 'Specify the kind of Button you want to create',
+    description:
+      'Specify the kind of Button you want to create. `primary`, `secondary`,`tertiary`, `ghost`, `danger`, `danger-tertiary`, `danger-ghost`',
     options: kind,
-    type: { name: 'enum' },
+    type: { name: 'BUTTON_KIND' },
     control: { type: 'select' },
-    table: { defaultValue: { summary: 'primary' } },
+    table: { defaultValue: { summary: '"primary"' } },
   },
   linkRole: {
     /**
@@ -139,16 +137,16 @@ const sharedArgTypes = {
     description: 'Optional prop to specify the type of the Button',
     options: types,
     control: { type: 'radio' },
-    type: { name: 'enum' },
-    table: { defaultValue: { summary: 'button' } },
+    type: { name: 'BUTTON_TYPE' },
+    table: { defaultValue: { summary: '"button"' } },
   },
   size: {
     options: sizes,
     description:
       'Specify the size of the button, from the following list of sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`',
-    type: { name: 'enum' },
+    type: { name: 'BUTTON_SIZE' },
     control: { type: 'select' },
-    table: { defaultValue: { summary: 'lg' } },
+    table: { defaultValue: { summary: '"lg"' } },
   },
   rel: {
     description: 'Optionally specify a `rel` when using an `<a>` element.',
@@ -156,7 +154,7 @@ const sharedArgTypes = {
     type: { name: 'string' },
   },
   tooltipAlignment: {
-    options: alignmentOptions,
+    options: [Object.keys(alignmentOptions)],
     description:
       'Specify the alignment of the tooltip to the icon-only button. Can be one of: start, center, or end.',
     control: { type: 'radio' },
@@ -215,33 +213,28 @@ const sharedArgTypes = {
     control: 'number',
     type: { name: 'number' },
   },
-  iconSlot: {
+  icon: {
     control: { type: 'select' },
-    options: ['Add', 'Notification', 'None'],
+    options: ['Add', 'None'],
     type: { name: 'HTMLElement' },
     table: { category: 'Slot' },
-    description: 'Places the slotted icon inside the Button.',
+    description: 'Places the slotted icon inside the Button. `slot="icon"`',
     mapping: {
       Add: (props) => iconLoader(Add16, props),
       Notification: (props) => iconLoader(Notification16, props),
+      Filter: (props) => iconLoader(Filter16, props),
       None: undefined,
     },
   },
 };
 
-/**
- * Note:
- * Attributes prefixed with `.` do not render in the Storybook code tab.
- * `ifDefined` is used instead to preserve visibility.
- */
-
 const baseButtonTemplate = (args) => html`
   <cds-button
     @click=${args.onClick}
     danger-description=${ifDefined(args.dangerDescription)}
-    ?disabled="${args.disabled}"
+    ?disabled=${args.disabled}
     href=${ifDefined(args.href)}
-    ?isExpressive="${args.isExpressive}"
+    ?isExpressive=${args.isExpressive}
     kind=${ifDefined(args.kind)}
     rel=${ifDefined(args.rel)}
     link-role=${ifDefined(args.linkRole)}
@@ -249,7 +242,7 @@ const baseButtonTemplate = (args) => html`
     tabindex=${ifDefined(args.tabindex)}
     size=${ifDefined(args.size)}
     type=${ifDefined(args.type)}>
-    Button ${args.iconSlot?.({ slot: 'icon' })}
+    Button ${args.icon?.({ slot: 'icon' })}
   </cds-button>
 `;
 
@@ -257,10 +250,10 @@ const iconButtonTemplate = (args) => html`
   <cds-button
     @click=${args.onClick}
     danger-description=${ifDefined(args.dangerDescription)}
-    ?disabled="${args.disabled}"
+    ?disabled=${args.disabled}
     href=${ifDefined(args.href)}
-    ?isExpressive="${args.isExpressive}"
-    ?isSelected="${args.isSelected}"
+    ?isExpressive=${args.isExpressive}
+    ?isSelected=${args.isSelected}
     kind=${ifDefined(args.kind)}
     rel=${ifDefined(args.rel)}
     link-role=${ifDefined(args.linkRole)}
@@ -271,155 +264,196 @@ const iconButtonTemplate = (args) => html`
     tooltip-alignment=${ifDefined(args.tooltipAlignment)}
     tooltip-position=${ifDefined(args.tooltipPosition)}
     type=${ifDefined(args.type)}>
-    ${args.iconSlot?.({ slot: 'icon' })}
+    ${args.icon?.({ slot: 'icon' })}
     ${args.count === undefined
       ? null
       : args.count > 0
-        ? html`<cds-badge-indicator count=${args.count}> </cds-badge-indicator>`
+        ? html`<cds-badge-indicator count=${args.count}></cds-badge-indicator>`
         : html`<cds-badge-indicator></cds-badge-indicator>`}
   </cds-button>
 `;
 
-const textControls = {
-  controls: { include: textButtonControls },
+const meta = {
+  title: 'Components/Button',
+  argTypes: sharedArgTypes,
+  parameters: {
+    actions: { argTypesRegex: '^on.*' },
+    controls: { include: textButtonControls },
+  },
+  render: baseButtonTemplate,
 };
 
-const iconControls = {
-  controls: { include: iconButtonControls },
-};
+export default meta;
 
 export const Default = {
-  argTypes: sharedArgTypes,
-  render: baseButtonTemplate,
-  parameters: textControls,
+  argTypes: {
+    ...sharedArgTypes,
+  },
+  parameters: {
+    controls: {
+      include: [...textButtonControls, 'dangerDescription'],
+    },
+  },
 };
-
 export const Secondary = {
-  argTypes: sharedArgTypes,
   args: { kind: BUTTON_KIND.SECONDARY },
-  render: baseButtonTemplate,
-  parameters: textControls,
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
 };
-
 export const Tertiary = {
-  argTypes: sharedArgTypes,
   args: { kind: BUTTON_KIND.TERTIARY },
-  render: baseButtonTemplate,
-  parameters: textControls,
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
 };
 
 export const Ghost = {
-  argTypes: sharedArgTypes,
   args: { kind: BUTTON_KIND.GHOST },
-  render: baseButtonTemplate,
-  parameters: textControls,
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
 };
 
 export const Danger = {
-  argTypes: sharedArgTypes,
   args: { kind: BUTTON_KIND.DANGER },
-  render: baseButtonTemplate,
-  parameters: textControls,
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: [...textButtonControls, 'dangerDescription'],
+    },
+  },
 };
 
 export const DangerTertiary = {
-  argTypes: sharedArgTypes,
   args: { kind: BUTTON_KIND.DANGER_TERTIARY },
-  render: baseButtonTemplate,
-  parameters: textControls,
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: [...textButtonControls, 'dangerDescription'],
+    },
+  },
 };
 
 export const DangerGhost = {
-  argTypes: sharedArgTypes,
   args: { kind: BUTTON_KIND.DANGER_GHOST },
-  render: baseButtonTemplate,
-  parameters: textControls,
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: [...textButtonControls, 'dangerDescription'],
+    },
+  },
 };
 
 export const IconButton = {
+  render: iconButtonTemplate,
+  parameters: {
+    controls: { include: [...iconButtonControls, 'dangerDescription'] },
+  },
   argTypes: {
-    ...sharedArgTypes,
     count: { table: { readonly: true } },
-    iconSlot: { table: { readonly: true } },
+    icon: {
+      options: ['Add', 'Filter'],
+    },
   },
   args: {
     kind: BUTTON_KIND.PRIMARY,
-    iconSlot: (props) => iconLoader(Add16, props),
+    icon: 'Add',
     tooltipText: 'Icon Description',
   },
-  render: iconButtonTemplate,
-  parameters: iconControls,
 };
 
 export const IconButtonWithBadge = {
+  render: iconButtonTemplate,
+  parameters: {
+    controls: { include: iconButtonControls },
+  },
   argTypes: {
-    ...sharedArgTypes,
-    iconSlot: { table: { readonly: true } },
-    kind: { table: { readonly: true } },
-    size: { table: { readonly: true } },
+    icon: {
+      options: ['Notification', 'Filter'],
+      description:
+        'Icon to display in the button with badge. Choose between Notification and Filter icons.',
+    },
+    kind: {
+      table: { readonly: true },
+      description:
+        'Specify the kind of Button you want to create. This control must be set to `ghost` if using the `cds-badge-indicator`.',
+    },
+    size: {
+      table: { readonly: true },
+      description:
+        'Specify the size of the button. This control must be set to `lg` if using the `cds-badge-indicator`.',
+    },
   },
   args: {
     count: 4,
     kind: BUTTON_KIND.GHOST,
-    iconSlot: (props) => iconLoader(Notification16, props),
-    tooltipText: 'Notifications',
+    icon: 'Notification',
+    tooltipText: 'Tooltip Text',
     size: BUTTON_SIZE.LARGE,
   },
-  render: iconButtonTemplate,
-  parameters: iconControls,
 };
 
-/**
- * TODO:
- * Fluid feature parity with React is still pending.
- */
+// TODO: move into a separate story file, after meeting feature parity with fluid attribute
 export const SetOfButtons = {
   argTypes: {
     stacked: {
+      control: 'boolean',
       description:
         'Specify the button arrangement of the set (vertically stacked or horizontal)',
-      type: { name: 'boolean' },
-      table: { defaultValue: { summary: false } },
+      type: { name: 'bool' },
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['stacked'],
     },
   },
   render: (args) => html`
     <cds-button-set ?stacked=${args.stacked}>
-      <cds-button @click=${args.onClick} kind="secondary">
-        Secondary
-      </cds-button>
-      <cds-button @click=${args.onClick} kind="primary"> Primary</cds-button>
+      <cds-button kind="secondary">Secondary</cds-button>
+      <cds-button kind="primary">Primary</cds-button>
     </cds-button-set>
   `,
 };
 
 export const Skeleton = {
   argTypes: {
-    size: {
-      options: sizes,
-      description:
-        'Specify the size of the button skeleton, from the following list of sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`',
-      type: { name: 'enum' },
-      control: { type: 'select' },
-      table: { defaultValue: { summary: 'lg' } },
-    },
-    href: {
-      description:
-        'Optionally specify an href for your Button Skeleton to become an `<a>` element',
-      control: 'text',
-      type: { name: 'string' },
+    size: { options: sizes, control: 'select' },
+    href: { control: 'text' },
+  },
+  parameters: {
+    controls: {
+      include: ['size', 'href'],
     },
   },
   render: (args) =>
     html`<cds-button-skeleton
-      size="${args.size}"
-      href="${args.href}"></cds-button-skeleton>`,
+      size=${ifDefined(args.size)}
+      href=${ifDefined(args.href)}>
+    </cds-button-skeleton>`,
 };
-
-const meta = {
-  title: 'Components/Button',
-  parameters: {
-    actions: { argTypesRegex: '^on.*' },
-  },
-};
-
-export default meta;
