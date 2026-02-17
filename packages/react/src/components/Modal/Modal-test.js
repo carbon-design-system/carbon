@@ -12,7 +12,7 @@ import Modal from './Modal';
 import TextInput from '../TextInput';
 import { AILabel } from '../AILabel';
 import { FeatureFlags } from '../FeatureFlags';
-import { ModalPresence } from './ModalPresence';
+import { ModalPresence, withModalPresence } from './ModalPresence';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 
@@ -759,6 +759,27 @@ describe('state with presence context', () => {
     expect(childModal).not.toBeInTheDocument();
     expect(siblingModal).not.toBeInTheDocument();
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+});
+
+const ModalWithPresenceHof = withModalPresence((props) => {
+  return <Modal {...props} />;
+});
+
+describe('state with hof withModalPresence', () => {
+  it('should be present when state is open', () => {
+    render(<ModalWithPresenceHof open data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should not be present when open is false', () => {
+    render(<ModalWithPresenceHof open={false} data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should not be present when open is undefined', () => {
+    render(<ModalWithPresenceHof data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
   });
 });
 
