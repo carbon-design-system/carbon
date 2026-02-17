@@ -38,28 +38,6 @@ Default stories should expose as many controls as possible to give developers
 full flexibility to explore component capabilities. this includes all the props
 that are relevant to the component.
 
-**React Components**:
-
-```typescript
-import { Button } from './Button';
-
-export default {
-  title: 'Components/Button',
-  component: Button, // ✅ Enables automatic TypeDoc extraction
-  argTypes: sharedArgTypes, // For overrides/additions
-};
-```
-
-**Web Components**:
-
-```typescript
-export default {
-  title: 'Components/Button',
-  component: 'cds-button', // ✅ Enables automatic TypeDoc extraction
-  tags: ['autodocs'],
-};
-```
-
 ### Variant Stories: Focused, Relevant Controls
 
 Non-default variant stories should limit controls to only those relevant to the
@@ -106,7 +84,31 @@ parent and child component props.
 ### Only Use argType Overrides When Necessary
 
 Leverage Storybook's automatic type inference from TypeScript definitions and
-JSDoc comments. Manual argTypes should only be added when you need to:
+JSDoc comments.
+
+**React Components**:
+
+```typescript
+import { Button } from './Button';
+
+export default {
+  title: 'Components/Button',
+  component: Button, // ✅ Enables automatic TypeDoc extraction
+  argTypes: sharedArgTypes, // For overrides/additions
+};
+```
+
+**Web Components**:
+
+```typescript
+export default {
+  title: 'Components/Button',
+  component: 'cds-button', // ✅ Enables automatic TypeDoc extraction
+  tags: ['autodocs'],
+};
+```
+
+Manual argTypes should only be added when you need to:
 
 - **Hide any internal/unwanted controls from the table**:
   `table: { disable: true }`
@@ -118,6 +120,11 @@ JSDoc comments. Manual argTypes should only be added when you need to:
   the desired control
 - **Add additional descriptions not in TypeScript**: When additional context is
   needed beyond TSDoc comments.
+- ...etc
+
+Note: in web-components, the component parameter in the default meta may have
+not been purposefully defined in some components. as enabling them puts the
+props in separate categories for attributes and properties inconsistently.
 
 Note: Make sure the types and defaultValues are correct. Sometimes they may be
 displayed incorrectly. in such cases, they need to be manually verified and
