@@ -14,12 +14,20 @@
     display: inline-grid;
     column-gap: custom-property.get-var('stack-gap', 0);
     grid-auto-flow: column;
+
+    > * {
+      min-block-size: 0;
+    }
   }
 
   .#{$prefix}--stack-vertical {
     display: grid;
     grid-auto-flow: row;
     row-gap: custom-property.get-var('stack-gap', 0);
+
+    > * {
+      min-inline-size: 0;
+    }
   }
 
   $index: 1;
