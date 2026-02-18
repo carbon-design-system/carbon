@@ -97,4 +97,51 @@ describe('cds-overflow-menu', () => {
     expect(el.open).to.be.false;
     expect(menuBody.open).to.be.false;
   });
+
+  it('should render icon slot in menu item', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu>
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>
+            Filter A
+            <svg slot="icon" width="16" height="16" data-testid="icon">
+              <rect width="16" height="16" />
+            </svg>
+          </cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+
+    const menuItem = el.querySelector('cds-overflow-menu-item');
+    const icon = menuItem.querySelector('[slot="icon"]');
+
+    expect(icon).to.exist;
+    expect(icon.getAttribute('slot')).to.equal('icon');
+    expect(icon.getAttribute('data-testid')).to.equal('icon');
+  });
+
+  it('should render icon slot in menu item with href', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu>
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item href="https://example.com">
+            Filter A
+            <svg slot="icon" width="16" height="16" data-testid="icon-link">
+              <rect width="16" height="16" />
+            </svg>
+          </cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+
+    const menuItem = el.querySelector('cds-overflow-menu-item');
+    const icon = menuItem.querySelector('[slot="icon"]');
+
+    expect(icon).to.exist;
+    expect(icon.getAttribute('slot')).to.equal('icon');
+    expect(icon.getAttribute('data-testid')).to.equal('icon-link');
+    expect(menuItem.href).to.equal('https://example.com');
+  });
 });
