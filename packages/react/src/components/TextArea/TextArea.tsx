@@ -180,7 +180,7 @@ const TextArea = frFn((props, forwardRef) => {
     onKeyDown = noopFn,
     invalid = false,
     invalidText = '',
-    helperText = '',
+    helperText,
     light,
     placeholder = '',
     enableCounter = false,
@@ -456,7 +456,7 @@ const TextArea = frFn((props, forwardRef) => {
     ariaDescribedBy = warnId;
   } else {
     const ids: string[] = [];
-    if (!isFluid && helperText && helperId) ids.push(helperId);
+    if (!isFluid && hasHelper && helperId) ids.push(helperId);
     if (counterDescriptionId) ids.push(counterDescriptionId);
     ariaDescribedBy = ids.length > 0 ? ids.join(' ') : undefined;
   }
