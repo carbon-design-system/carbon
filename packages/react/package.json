@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.3",
-    "@carbon/feature-flags": "workspace:1.0.0",
+    "@carbon/feature-flags": "^1.0.0",
     "@carbon/icons-react": "^11.75.0",
     "@carbon/layout": "^11.48.0",
     "@carbon/styles": "^1.100.0",
