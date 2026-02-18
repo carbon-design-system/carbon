@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -150,6 +150,42 @@ describe('ContainedList', () => {
 
     expect(screen.getByTestId('test-expandable-search-id')).toBeInTheDocument();
     expect(screen.queryByTestId('test-search-id')).not.toBeInTheDocument();
+  });
+
+  it('should not render a child `ExpandableSearch` component when a `Search` component is passed in as an action', () => {
+    render(
+      <ContainedList
+        label="label"
+        action={
+          <Search labelText="Search Action" data-testid="search-action-id" />
+        }>
+        <ExpandableSearch
+          labelText="Expandable Search Child"
+          data-testid="expandable-search-child-id"
+        />
+      </ContainedList>
+    );
+
+    expect(screen.getByTestId('search-action-id')).toBeInTheDocument();
+    expect(
+      screen.queryByTestId('expandable-search-child-id')
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not treat components with `displayName` "Search" as `Search`', () => {
+    const FauxSearch = () => (
+      <button data-testid="faux-search-action">Action</button>
+    );
+    FauxSearch.displayName = 'Search';
+
+    render(
+      <ContainedList label="label" action={<FauxSearch />}>
+        <Search labelText="Search Child" data-testid="search-child-id" />
+      </ContainedList>
+    );
+
+    expect(screen.getByTestId('faux-search-action')).toBeInTheDocument();
+    expect(screen.getByTestId('search-child-id')).toBeInTheDocument();
   });
 
   it('should render Search as the first child', () => {
