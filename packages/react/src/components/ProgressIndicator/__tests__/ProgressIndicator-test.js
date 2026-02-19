@@ -275,5 +275,33 @@ describe('ProgressStep', () => {
       expect(screen.getByText('Non valide')).toBeInTheDocument();
       expect(screen.getByText('Partiel')).toBeInTheDocument();
     });
+
+    it('sets tabindex to 0 for enabled steps and -1 for disabled steps', () => {
+      render(
+        <ProgressIndicator>
+          <ProgressStep label="First step" />
+          <ProgressStep label="Second step" disabled />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getByTitle('First step')).toHaveAttribute('tabindex', '0');
+      expect(screen.getByTitle('Second step')).toHaveAttribute(
+        'tabindex',
+        '-1'
+      );
+    });
+
+    it('renders labels and secondary labels as spans for valid button content', () => {
+      const { container } = render(
+        <ProgressStep label="First step" secondaryLabel="Optional label" />
+      );
+
+      expect(container.querySelector('.cds--progress-label')?.tagName).toBe(
+        'SPAN'
+      );
+      expect(container.querySelector('.cds--progress-optional')?.tagName).toBe(
+        'SPAN'
+      );
+    });
   });
 });
