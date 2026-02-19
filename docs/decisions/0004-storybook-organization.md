@@ -292,6 +292,14 @@ users modify controls, they should see the resulting code update in real-time.
 This is particularly important for Web Components where this pattern may be more
 established in React stories.
 
+### Miscellaneous
+
+Always wrap any components on the Docs page with the **Storybook Unstyled
+block**. Rendering stories directly can cause Storybook styles to bleed into
+components and break their appearance.
+https://storybook.js.org/docs/api/doc-blocks/doc-block-unstyled This wrapper
+ensures clean, isolated, and accurate component previews.
+
 ## Consequences
 
 ### Positive
