@@ -7,7 +7,7 @@
 
 import { createHash } from 'crypto';
 import fs from 'fs';
-import sass from 'sass';
+import * as sass from 'sass';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -50,14 +50,15 @@ export default {
         return fs.existsSync(directory);
       });
 
-    const result = sass.renderSync({
-      file: filepath,
-      outputStyle: 'compressed',
-      includePaths: [...nodeModules],
+    const result = sass.compile(filepath, {
+      style: 'compressed',
+      loadPaths: [...nodeModules],
     });
+    const cssString =
+      typeof result.css === 'string' ? result.css : String(result.css);
     return {
       code: `
-        const css = \`${result.css.toString()}\`;
+        const css = ${JSON.stringify(cssString)};
         let style;
         beforeAll(() => {
           style = document.createElement('style');
@@ -85,7 +86,7 @@ export default {
       .update('\0', 'utf8')
       .update(process.version)
       .update('\0', 'utf8')
-      .update(sass.info)
+      .update(String(sass.info))
       .digest('hex');
   },
 };
