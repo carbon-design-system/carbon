@@ -136,6 +136,20 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
    */
   private _hObserveResizeContainer: Handle | null = null;
 
+  /**
+   * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
+   */
+  // TODO: Wait for `.d.ts` update to support `ResizeObserver`
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore
+  private _resizeObserver = new ResizeObserver(() => {
+    const { container, open, parent, position } = this;
+    if (container && open && parent) {
+      const { top } = position;
+      this.style.top = `${top}px`;
+    }
+  });
+
   @HostListener('focusout')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
