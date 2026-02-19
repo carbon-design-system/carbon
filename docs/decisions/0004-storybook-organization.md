@@ -13,7 +13,7 @@ Carbon components across both React and Web Components packages. However, the
 current organization and implementation patterns have several challenges:
 
 - **Developer experience**: The code tab in Storybook often shows irrelevant
-  wrapper code or multiple component instances, or wrongly formatted code.
+  wrapper code or multiple component instances, or wrongly formatted code,
   making it difficult to copy and use examples directly.
 - **Control panel clutter**: All component props are shown in controls
   regardless of story relevance, creating confusion about which props apply to
@@ -35,14 +35,14 @@ developers understand and experiment with component behavior.
 ### Default Stories: Maximum Control Availability
 
 Default stories should expose as many controls as possible to give developers
-full flexibility to explore component capabilities. this includes all the props
+full flexibility to explore component capabilities. This includes all the props
 that are relevant to the component.
 
 ### Variant Stories: Focused, Relevant Controls
 
 Non-default variant stories should limit controls to only those relevant to the
-specific variant being demonstrated. we have to mark them as `readonly` to
-prevent accidental changes to the component's behavior. but still convey the
+specific variant being demonstrated. We have to mark them as `readonly` to
+prevent accidental changes to the component's behavior, but still convey the
 intent of making the props non-modifiable.
 
 ```typescript
@@ -122,12 +122,12 @@ Manual argTypes should only be added when you need to:
   needed beyond TSDoc comments.
 - ...etc
 
-Note: in web-components, the component parameter in the default meta may have
-not been purposefully defined in some components. as enabling them puts the
+Note: In web-components, the component parameter in the default meta may have
+not been purposefully defined in some components, as enabling them puts the
 props in separate categories for attributes and properties inconsistently.
 
 Note: Make sure the types and defaultValues are correct. Sometimes they may be
-displayed incorrectly. in such cases, they need to be manually verified and
+displayed incorrectly. In such cases, they need to be manually verified and
 updated in the Args table.
 
 **Example**:
@@ -172,7 +172,7 @@ Minimize wrapper code in story renders to keep the code tab focused on the
 component itself. Use decorators for necessary wrappers to prevent them from
 appearing in the code tab.
 
-use [source type](https://storybook.js.org/docs/api/doc-blocks/doc-block-source)
+Use [source type](https://storybook.js.org/docs/api/doc-blocks/doc-block-source)
 to format the source code in code tab if necessary.
 
 ```typescript
@@ -264,7 +264,7 @@ consistency), they should share control state to make the demonstration clear.
 ### Prefer Controls Over Hardcoded Props
 
 Use control args instead of hardcoding prop values to enable live code
-generation and interactive exploration. for developers.
+generation and interactive exploration for developers.
 
 Also make sure to map actions to every interactive elements.
 
@@ -302,7 +302,7 @@ https://storybook.js.org/docs/api/doc-blocks/doc-block-unstyled This wrapper
 ensures clean, isolated, and accurate component previews. Add a theme background
 to the unstyled block to show the component in theme context.
 
-wrapping them inside Canvas and defining inline story convenient too. and
+Wrapping them inside Canvas and defining inline story is convenient too, and
 provides the code snippet to copy and paste.
 
 ```javascript
