@@ -2696,9 +2696,6 @@ Map {
       "columnCount": {
         "type": "number",
       },
-      "compact": {
-        "type": "bool",
-      },
       "headers": {
         "args": [
           {
@@ -3018,7 +3015,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -4341,7 +4340,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -6394,6 +6395,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -7652,6 +7656,9 @@ Map {
       },
       "closeMenu": {
         "type": "func",
+      },
+      "dangerDescription": {
+        "type": "string",
       },
       "disabled": {
         "type": "bool",
@@ -12407,7 +12414,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -14387,7 +14396,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
