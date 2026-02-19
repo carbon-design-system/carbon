@@ -228,7 +228,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
-    this._updateTabsDismissible();
+    this._updateTabsDismissable();
   }
 
   protected _selectionDidChange(
@@ -300,7 +300,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * Whether the rendered Tab children should be dismissable.
    */
   @property({ type: Boolean, reflect: true })
-  dismissible;
+  dismissable;
   /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
    * In this condition, the left-hand paginator button should be hidden.
@@ -465,8 +465,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       }
     }
 
-    if (changedProperties.has('dismissible')) {
-      this._updateTabsDismissible();
+    if (changedProperties.has('dismissable')) {
+      this._updateTabsDismissable();
     }
   }
 
@@ -558,10 +558,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     `;
   }
 
-  protected _updateTabsDismissible() {
+  protected _updateTabsDismissable() {
     const tabs = this.querySelectorAll<CDSTab>('cds-tab');
     tabs.forEach((tab: CDSTab) => {
-      tab._dismissible = this.dismissible;
+      tab._dismissable = this.dismissable;
     });
   }
 

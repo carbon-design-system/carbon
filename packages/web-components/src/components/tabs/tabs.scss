@@ -318,7 +318,7 @@ $inset-transition: inset 110ms motion(standard, productive);
 }
 
 :host(#{$prefix}-tab) {
-  .#{$prefix}--tabs__nav-link--dismissible {
+  .#{$prefix}--tabs__nav-link--dismissable {
     display: flex;
   }
 }

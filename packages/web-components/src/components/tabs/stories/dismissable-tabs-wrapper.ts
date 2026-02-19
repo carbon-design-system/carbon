@@ -11,9 +11,9 @@ import { prefix } from '../../../globals/settings';
 import { TABS_TYPE } from '../tabs';
 
 /**
- * Wrapper component for dismissible tabs story with state management
+ * Wrapper component for dismissable tabs story with state management
  */
-export class DismissibleTabsWrapper extends LitElement {
+export class DismissableTabsWrapper extends LitElement {
   /**
    * Array of tab configurations
    */
@@ -66,7 +66,7 @@ export class DismissibleTabsWrapper extends LitElement {
         ?disabled="${this.disabled}"
         selection-mode="${this.selectionMode}"
         type="${this.contained ? TABS_TYPE.CONTAINED : TABS_TYPE.REGULAR}"
-        ?dismissible="${true}"
+        ?dismissable="${true}"
         value="all"
         @cds-tab-closed="${this._handleDismissed}"
         @cds-tabs-beingselected="${this._handleBeforeSelected}">
@@ -106,6 +106,6 @@ export class DismissibleTabsWrapper extends LitElement {
   }
 }
 
-customElements.define('dismissible-tabs-wrapper', DismissibleTabsWrapper);
+customElements.define('dismissable-tabs-wrapper', DismissableTabsWrapper);
 
 // Made with Bob

@@ -52,7 +52,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
    * Whether this tab should be dismissable.
    */
   @state()
-  _dismissible = false;
+  _dismissable = false;
 
   /**
    * Handles `slotchange` event.
@@ -73,13 +73,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
   render() {
     const navlinkClasses = classMap({
       [`${prefix}--tabs__nav-link`]: true,
-      [`${prefix}--tabs__nav-link--dismissible`]: this._dismissible,
+      [`${prefix}--tabs__nav-link--dismissable`]: this._dismissable,
     });
     const {
       disabled,
       selected,
       tabTitle,
-      _dismissible: parentDismissible,
+      _dismissable: parentDismissable,
       _handleSlotChange: handleSlotChange,
       _handleClick: handleClick,
     } = this;
@@ -100,7 +100,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
         ?disabled="${disabled}"
         aria-selected="${Boolean(selected)}">
         <slot @slotchange="${handleSlotChange}"></slot>
-        ${parentDismissible ? iconButton : ''}
+        ${parentDismissable ? iconButton : ''}
       </a>
     `;
   }

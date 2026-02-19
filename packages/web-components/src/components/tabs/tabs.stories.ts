@@ -13,7 +13,7 @@ import '../button';
 import '../checkbox';
 import './index';
 import '../text-input';
-import './stories/dismissible-tabs-wrapper';
+import './stories/dismissable-tabs-wrapper';
 
 const args = {
   contained: false,
@@ -191,11 +191,11 @@ export const Dismissable = {
       <style>
         ${styles}
       </style>
-      <dismissible-tabs-wrapper
+      <dismissable-tabs-wrapper
         ?disabled="${disabled}"
         ?contained="${contained}"
         selection-mode="${selectionMode}">
-      </dismissible-tabs-wrapper>
+      </dismissable-tabs-wrapper>
     `;
   },
 };
