@@ -10,7 +10,6 @@ import React, {
   useContext,
   useMemo,
   type ComponentType,
-  type FC,
   type PropsWithChildren,
 } from 'react';
 import {
@@ -83,16 +82,15 @@ type WithModalPresenceProps = Pick<ModalPresenceProps, 'open'>;
  */
 export const withModalPresence = <TProps extends object>(
   Component: ComponentType<TProps>
-): FC<TProps & WithModalPresenceProps> => {
-  const WithModalPresence: FC<TProps & WithModalPresenceProps> = (props) => {
-    const { open, ...componentProps } = props;
-
-    return (
-      <ModalPresence open={open}>
-        <Component {...(componentProps as TProps)} />
-      </ModalPresence>
-    );
-  };
+) => {
+  const WithModalPresence = ({
+    open,
+    ...componentProps
+  }: TProps & WithModalPresenceProps) => (
+    <ModalPresence open={open}>
+      <Component {...(componentProps as TProps)} />
+    </ModalPresence>
+  );
 
   WithModalPresence.displayName = `withModalPresence(${Component.displayName || Component.name || 'Component'})`;
 
