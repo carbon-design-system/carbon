@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -53,6 +53,15 @@ export type TableToolbarSearchHandleExpand = (
   newValue?: boolean
 ) => void;
 
+/**
+ * @deprecated Passing `''` as the event sentinel is legacy compatibility
+ * behavior for `DataTable` filtering. In the next major release, this type
+ * should become an optional `ChangeEvent<HTMLInputElement>` instead.
+ */
+export type TableToolbarSearchOnChangeEvent =
+  | ''
+  | ChangeEvent<HTMLInputElement>;
+
 export interface TableToolbarSearchProps
   extends Omit<SearchProps, ExcludedInheritedProps>,
     TranslateWithId<TranslationKey> {
@@ -88,11 +97,11 @@ export interface TableToolbarSearchProps
 
   /**
    * Provide an optional hook that is called each time the input is updated
+   *
+   * Note: the `''` event sentinel is legacy compatibility behavior and will be
+   * removed in the next major release.
    */
-  onChange?: (
-    event: '' | ChangeEvent<HTMLInputElement>,
-    value?: string
-  ) => void;
+  onChange?: (event: TableToolbarSearchOnChangeEvent, value?: string) => void;
 
   /**
    * Provide an optional hook that is called each time the input is expanded
@@ -166,6 +175,8 @@ const TableToolbarSearch = ({
   useEffect(
     () => {
       if (defaultValue) {
+        // TODO: Remove the `''` event sentinel and pass `undefined` for
+        // value initialization in the next major release.
         onChangeProp?.('', defaultValue);
       }
     },
