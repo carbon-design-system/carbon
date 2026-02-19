@@ -9,7 +9,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-//TODO: update once stories are visible
+// TODO: update once stories are visible
 test.describe('@avt PageHeader', () => {
   test.skip('@avt-default-state content', async ({ page }) => {
     await visitStory(page, {

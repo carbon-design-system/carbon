@@ -37,6 +37,9 @@ interface TableToolbarFilterProps {
 
   /**
    * Provide an optional hook that is called each time the input is updated
+   *
+   * Note: the `''` event sentinel exists for `DataTable` compatibility and
+   * should be removed in the next major release.
    */
   onChange?: (event: '' | ChangeEvent<HTMLInputElement>) => void;
 

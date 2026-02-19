@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,12 +29,6 @@ export interface DataTableSkeletonProps
    * Specify the number of columns that you want to render in the skeleton state
    */
   columnCount?: number;
-
-  /**
-   * Optionally specify whether you want the Skeleton to be rendered as a
-   * compact DataTable
-   */
-  compact?: boolean;
 
   /**
    * Optionally specify the displayed headers
@@ -76,7 +70,6 @@ const DataTableSkeleton = ({
   rowCount = 5,
   columnCount = 5,
   zebra = false,
-  compact = false,
   className,
   showHeader = true,
   showToolbar = true,
@@ -89,7 +82,6 @@ const DataTableSkeleton = ({
     [`${prefix}--data-table`]: true,
     [`${prefix}--data-table--${size}`]: size,
     [`${prefix}--data-table--zebra`]: zebra,
-    [`${prefix}--data-table--compact`]: compact,
   });
 
   const rowRepeat = rowCount;
@@ -158,12 +150,6 @@ DataTableSkeleton.propTypes = {
    * Specify the number of columns that you want to render in the skeleton state
    */
   columnCount: PropTypes.number,
-
-  /**
-   * Optionally specify whether you want the Skeleton to be rendered as a
-   * compact DataTable
-   */
-  compact: PropTypes.bool,
 
   /**
    * Optionally specify the displayed headers
