@@ -44,7 +44,11 @@ $-components: (
     color: custom-property.get-var('text-primary');
 
     @each $key, $value in $theme {
-      @if meta.type-of($value) == color {
+      @if $key == 'color-scheme' {
+        @include custom-property.declaration($key, $value);
+
+        color-scheme: custom-property.get-var($key, $value);
+      } @else if meta.type-of($value) == color {
         @include custom-property.declaration($key, $value);
       }
     }
