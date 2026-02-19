@@ -309,10 +309,9 @@ provides the code snippet to copy and paste.
 import { Canvas, Story } from '@storybook/blocks';
 import { Button } from './Button';
 
+// any component thats not a story but needs to be gracefully represented in docs.
 <Canvas>
   <Story name="demo example">
-    // any component thats not a story but needs to be gracefully represented in
-    docs.
     <Button>test</Button>
   </Story>
 </Canvas>;
