@@ -316,3 +316,9 @@ $inset-transition: inset 110ms motion(standard, productive);
     background-color: SelectedItem;
   }
 }
+
+:host(#{$prefix}-tab) {
+  .#{$prefix}--tabs__nav-link--dismissible {
+    display: flex;
+  }
+}
