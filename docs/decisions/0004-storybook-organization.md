@@ -302,21 +302,6 @@ https://storybook.js.org/docs/api/doc-blocks/doc-block-unstyled This wrapper
 ensures clean, isolated, and accurate component previews. Add a theme background
 to the unstyled block to show the component in theme context.
 
-Wrapping them inside Canvas and defining inline story is convenient too, and
-provides the code snippet to copy and paste.
-
-```javascript
-import { Canvas, Story } from '@storybook/blocks';
-import { Button } from './Button';
-
-// any component thats not a story but needs to be gracefully represented in docs.
-<Canvas>
-  <Story name="demo example">
-    <Button>test</Button>
-  </Story>
-</Canvas>;
-```
-
 ## Consequences
 
 ### Positive
