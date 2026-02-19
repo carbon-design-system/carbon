@@ -412,7 +412,7 @@ IconButtonWithBadge.argTypes = {
     table: { readonly: true },
   },
   renderIcon: {
-    options: ['Notification', 'Filter'],
+    options: ['Notification'],
   },
 };
 IconButtonWithBadge.parameters = {
@@ -424,7 +424,7 @@ IconButtonWithBadge.parameters = {
 IconButtonWithBadge.args = {
   hasIconOnly: true,
   renderIcon: 'Notification',
-  iconDescription: 'Icon Description',
+  iconDescription: 'Notification',
   badgeCount: 4,
   kind: 'ghost',
   size: 'lg',

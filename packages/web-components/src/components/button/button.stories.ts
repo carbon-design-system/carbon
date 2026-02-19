@@ -394,7 +394,7 @@ export const IconButtonWithBadge = {
   },
   argTypes: {
     icon: {
-      options: ['Notification', 'Filter'],
+      options: ['Notification'],
       description:
         'Icon to display in the button with badge. Choose between Notification and Filter icons.',
     },
@@ -413,7 +413,7 @@ export const IconButtonWithBadge = {
     count: 4,
     kind: BUTTON_KIND.GHOST,
     icon: 'Notification',
-    tooltipText: 'Tooltip Text',
+    tooltipText: 'Notification',
     size: BUTTON_SIZE.LARGE,
   },
 };
