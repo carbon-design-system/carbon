@@ -297,8 +297,10 @@ established in React stories.
 Always wrap any components on the Docs page with the **Storybook Unstyled
 block**. Rendering stories directly can cause Storybook styles to bleed into
 components and break their appearance.
+
 https://storybook.js.org/docs/api/doc-blocks/doc-block-unstyled This wrapper
-ensures clean, isolated, and accurate component previews.
+ensures clean, isolated, and accurate component previews. Add a theme background
+to the unstyled block to show the component in theme context.
 
 ## Consequences
 
