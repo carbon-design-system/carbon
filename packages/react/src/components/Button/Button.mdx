@@ -253,9 +253,6 @@ to render an icon-only button, please refer to the section on the
 To render an icon of a different `size`, pass a function that spreads props on
 the Icon to ensure the proper classes are applied:
 
-this seems to not work as icons inside buttons are always 16px. should we remove
-this?
-
 <Unstyled>
   <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
     <Button renderIcon={(props) => <Add size={24} {...props} />} iconDescription="Add">Add</Button>
