@@ -105,7 +105,7 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
-   
+
   const { offsetWidth: menuWidth } = menuBody;
 
   switch (triggerButtonPositionProp) {
