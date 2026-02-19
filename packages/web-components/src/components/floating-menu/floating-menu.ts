@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,53 @@ import CDSFloatingMenuTrigger from './floating-menu-trigger';
 import { prefix } from '../../globals/settings';
 
 export { FLOATING_MENU_DIRECTION, FLOATING_MENU_POSITION_DIRECTION };
+
+export interface Offset {
+  top: number;
+  left: number;
+}
+
+export type MenuDirection = FLOATING_MENU_DIRECTION;
+
+export type MenuOffset =
+  | Offset
+  | ((
+      menuBody: HTMLElement,
+      menuDirection: MenuDirection,
+      trigger?: HTMLElement | null,
+      flipped?: boolean
+    ) => Offset);
+
+/**
+ * Calculates the offset for the floating menu.
+ *
+ * @param menuBody - The menu body element.
+ * @param menuDirection - The floating menu direction.
+ * @param trigger - The trigger element.
+ * @param flipped - Whether the menu is flipped.
+ * @returns The adjustment of the floating menu position.
+ */
+export const getMenuOffset = (
+  menuBody: HTMLElement,
+  menuDirection: MenuDirection,
+  trigger?: HTMLElement,
+  flipped?: boolean
+): Offset => {
+  const { offsetWidth: menuWidth } = menuBody;
+
+  switch (menuDirection) {
+    case FLOATING_MENU_DIRECTION.TOP:
+    case FLOATING_MENU_DIRECTION.BOTTOM: {
+      const triggerWidth = !trigger ? 0 : trigger.offsetWidth;
+      return {
+        left: (!flipped ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
+        top: 0,
+      };
+    }
+    default:
+      return { left: 0, top: 0 };
+  }
+};
 
 /**
  * Position of floating menu, or trigger button of floating menu.
@@ -89,23 +136,6 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
    */
   private _hObserveResizeContainer: Handle | null = null;
 
-  /**
-   * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
-   */
-  // TODO: Wait for `.d.ts` update to support `ResizeObserver`
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore
-  private _resizeObserver = new ResizeObserver(() => {
-    const { container, open, parent, position } = this;
-    if (container && open && parent) {
-      const { direction, start, top } = position;
-      this.style[
-        direction !== FLOATING_MENU_POSITION_DIRECTION.RTL ? 'left' : 'right'
-      ] = `${start}px`;
-      this.style.top = `${top}px`;
-    }
-  });
-
   @HostListener('focusout')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -164,6 +194,37 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
   abstract flipped: boolean;
 
   /**
+   * Gets the menu offset configuration (object or function).
+   * Subclasses override this to specify custom offset configs.
+   *
+   * @returns The menu offset configuration, or undefined for no offset.
+   */
+  protected getOffsetConfig(): MenuOffset | undefined {
+    return undefined;
+  }
+
+  /**
+   * Resolves the final menu offset by evaluating the offset configuration.
+   * Handles both static offset objects and dynamic offset functions.
+   *
+   * @returns The resolved offset with left and top values.
+   */
+  protected resolveOffset(): Offset {
+    const config = this.getOffsetConfig();
+
+    if (!config) {
+      return { left: 0, top: 0 };
+    }
+
+    if (typeof config === 'function') {
+      const trigger = this.parent as HTMLElement;
+      return config(this, this.direction, trigger, this.flipped);
+    }
+
+    return config;
+  }
+
+  /**
    * The DOM element to put this menu into.
    */
   get container() {
@@ -191,71 +252,88 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
       left: refLeft = 0,
       top: refTop = 0,
       right: refRight = 0,
+      bottom: refBottom = 0,
     } = triggerPosition;
-    let { bottom: refBottom = 0 } = triggerPosition;
     const { width, height } = this.getBoundingClientRect();
-    const {
-      left: containerLeft = 0,
-      right: containerRight = 0,
-      top: containerTop = 0,
-    } = container.getBoundingClientRect();
-    refBottom = refBottom - containerTop;
+    const containerRect = container.getBoundingClientRect();
 
     const containerComputedStyle =
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       container.ownerDocument!.defaultView!.getComputedStyle(container);
+    const containerPosition =
+      containerComputedStyle.getPropertyValue('position');
     const positionDirection = containerComputedStyle.getPropertyValue(
       'direction'
     ) as FLOATING_MENU_POSITION_DIRECTION;
-    const isRtl = positionDirection === FLOATING_MENU_POSITION_DIRECTION.RTL;
-    const containerStartFromViewport = !isRtl
-      ? containerLeft
-      : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        container.ownerDocument!.defaultView!.innerWidth - containerRight;
-    const refStartFromContainer = !isRtl
-      ? refLeft - containerLeft
-      : containerRight - refRight;
-    const refEndFromContainer = !isRtl
-      ? refRight - containerLeft
-      : containerRight - refLeft;
-    const refTopFromContainer = refTop - containerTop;
 
-    if (
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      (container !== this.ownerDocument!.body ||
-        containerStartFromViewport !== 0 ||
-        containerTop !== 0) &&
-      containerComputedStyle.getPropertyValue('position') === 'static'
-    ) {
-      throw new Error(
-        'Floating menu container must not have `position:static`.'
-      );
-    }
+    const scrollX = globalThis.scrollX ?? 0;
+    const scrollY = globalThis.scrollY ?? 0;
+    const effectiveScrollX = containerPosition !== 'static' ? 0 : scrollX;
+    const effectiveScrollY = containerPosition !== 'static' ? 0 : scrollY;
 
-    const { flipped, direction } = this;
+    const relativeDiff = {
+      top: containerPosition !== 'static' ? containerRect.top : 0,
+      left: containerPosition !== 'static' ? containerRect.left : 0,
+    };
+
+    const refCenterHorizontal = (refLeft + refRight) / 2;
+    const refCenterVertical = (refTop + refBottom) / 2;
+
+    const offset = this.resolveOffset();
+    const { top = 0, left = 0 } = offset;
+
+    const { direction } = this;
     if (Object.values(FLOATING_MENU_DIRECTION).indexOf(direction) < 0) {
       throw new Error(`Wrong menu position direction: ${direction}`);
     }
 
-    const alignmentStart = flipped
-      ? refEndFromContainer - width
-      : refStartFromContainer;
-
-    const { start, top } = {
+    const positions: Record<MenuDirection, () => Offset> = {
+      [FLOATING_MENU_DIRECTION.LEFT]: () => ({
+        left: refLeft - width + effectiveScrollX - left - relativeDiff.left,
+        top:
+          refCenterVertical -
+          height / 2 +
+          effectiveScrollY +
+          top -
+          9 -
+          relativeDiff.top,
+      }),
       [FLOATING_MENU_DIRECTION.TOP]: () => ({
-        start: alignmentStart,
-        top: refTopFromContainer - height,
+        left:
+          refCenterHorizontal -
+          width / 2 +
+          effectiveScrollX +
+          left -
+          relativeDiff.left,
+        top: refTop - height + effectiveScrollY - top - relativeDiff.top,
+      }),
+      [FLOATING_MENU_DIRECTION.RIGHT]: () => ({
+        left: refRight + effectiveScrollX + left - relativeDiff.left,
+        top:
+          refCenterVertical -
+          height / 2 +
+          effectiveScrollY +
+          top +
+          3 -
+          relativeDiff.top,
       }),
       [FLOATING_MENU_DIRECTION.BOTTOM]: () => ({
-        start: alignmentStart,
-        top: refBottom,
+        left:
+          refCenterHorizontal -
+          width / 2 +
+          effectiveScrollX +
+          left -
+          relativeDiff.left,
+        top: refBottom + effectiveScrollY + top - relativeDiff.top,
       }),
-    }[direction]();
+    };
+
+    const { left: calculatedLeft, top: calculatedTop } = positions[direction]();
 
     return {
       direction: positionDirection,
-      start,
-      top,
+      start: calculatedLeft,
+      top: calculatedTop,
     };
   }
 
@@ -281,10 +359,9 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
         container.appendChild(this);
       }
       // Note: `this.position` cannot be referenced until `this.parent` is set
-      const { direction, start, top } = this.position;
-      this.style[
-        direction !== FLOATING_MENU_POSITION_DIRECTION.RTL ? 'left' : 'right'
-      ] = `${start}px`;
+      const { start, top } = this.position;
+      this.style.left = `${start}px`;
+      this.style.right = 'auto';
       this.style.top = `${top}px`;
     }
     if (changedProperties.has('open')) {

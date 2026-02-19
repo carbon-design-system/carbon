@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -233,5 +233,11 @@ $caret-size: convert.to-rem(7px);
     inline-size: 0;
     inset-block-start: -$caret-size;
     inset-inline-start: $caret-size * 2;
+  }
+}
+
+:host(#{$prefix}-overflow-menu-body:dir(rtl)[breadcrumb='true']) {
+  &::after {
+    direction: ltr;
   }
 }
