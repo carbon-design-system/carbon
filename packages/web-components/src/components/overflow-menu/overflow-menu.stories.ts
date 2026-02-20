@@ -79,9 +79,9 @@ export const Default = {
           <cds-overflow-menu-item
             >Edit routes and access</cds-overflow-menu-item
           >
-          <cds-overflow-menu-item divider danger
-            >Delete app</cds-overflow-menu-item
-          >
+          <cds-overflow-menu-item divider danger>
+            Delete app
+          </cds-overflow-menu-item>
         </cds-overflow-menu-body>
       </cds-overflow-menu>
     `;
