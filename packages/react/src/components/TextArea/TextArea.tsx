@@ -508,7 +508,7 @@ const TextArea = frFn((props, forwardRef) => {
       {...other}
       {...textareaProps}
       placeholder={placeholder}
-      aria-readonly={Boolean(other.readOnly)}
+      aria-readonly={other.readOnly}
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
