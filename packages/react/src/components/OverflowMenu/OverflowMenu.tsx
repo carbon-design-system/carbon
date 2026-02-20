@@ -105,8 +105,8 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
+
+  const { offsetWidth: menuWidth } = menuBody;
 
   switch (triggerButtonPositionProp) {
     case 'top':
@@ -202,7 +202,7 @@ export interface OverflowMenuProps
   menuOffset?: MenuOffset;
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip?: MenuOffset;
 
@@ -734,7 +734,7 @@ OverflowMenu.propTypes = {
   ]),
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip: PropTypes.oneOfType([
     PropTypes.shape({
