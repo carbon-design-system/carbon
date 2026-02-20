@@ -628,7 +628,7 @@ function TabList({
   }, []);
 
   useEffect(() => {
-    //adding 1 in calculation for firefox support
+    // adding 1 in calculation for firefox support
     setIsNextButtonVisible(
       ref.current
         ? scrollLeft + buttonWidth + ref.current.clientWidth + 1 <
@@ -636,12 +636,11 @@ function TabList({
         : false
     );
 
-    if (dismissable) {
-      if (ref.current) {
-        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
-      }
+    if (dismissable && ref.current) {
+      // adding 1 in calculation for firefox support
+      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
     }
-  }, [scrollLeft, children, dismissable, isScrollable]);
+  }, [buttonWidth, children, dismissable, scrollLeft]);
 
   useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {

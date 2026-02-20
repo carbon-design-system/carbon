@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,7 @@ import {
 import { act } from 'react';
 import { Notification } from '@carbon/icons-react';
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as hooks from '../../../internal/useMatchMedia';
 
@@ -547,6 +547,36 @@ describe('Tab', () => {
     expect(onTabCloseRequest).toHaveBeenCalledTimes(1);
   });
 
+  it('should hide next overflow button when only 1px remains in the overflow threshold', async () => {
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 145 : 0;
+      });
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs" />
+        </Tabs>
+      );
+
+      await waitFor(() => {
+        expect(screen.getByLabelText('Scroll right')).toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      });
+    } finally {
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+    }
+  });
+
   it('should not call onCloseTabRequest when dismissable and delete pressed on focused disabled tab', async () => {
     const onTabCloseRequest = jest.fn();
     render(
@@ -568,6 +598,58 @@ describe('Tab', () => {
     screen.getByTestId('tab-testid').focus();
     await userEvent.keyboard('[Delete]');
     expect(onTabCloseRequest).not.toHaveBeenCalled();
+  });
+
+  it('should not treat dismissable tabs as scrollable when overflow is only 1px', () => {
+    jest.useFakeTimers();
+    const onTabCloseRequest = jest.fn();
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 101 : 0;
+      });
+
+    try {
+      render(
+        <Tabs dismissable onTabCloseRequest={onTabCloseRequest}>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab>Tab Label 3</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </Tabs>
+      );
+
+      const tablist = screen.getByRole('tablist');
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 5,
+      });
+
+      fireEvent.scroll(tablist);
+      act(() => {
+        jest.advanceTimersByTime(250);
+      });
+
+      expect(screen.getByLabelText('Scroll left')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+    } finally {
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+      jest.useRealTimers();
+    }
   });
 
   it('should throw error when dismissable and onTabCloseRequest prop not supplied', () => {
