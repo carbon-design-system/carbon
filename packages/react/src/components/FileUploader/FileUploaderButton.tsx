@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState, type HTMLAttributes } from 'react';
+import React, { useEffect, useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -121,7 +121,6 @@ function FileUploaderButton({
 }: FileUploaderButtonProps) {
   const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
-  const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
   const generatedId = useId();
   const { current: inputId } = useRef(id || generatedId);
   const inputNode = useRef<HTMLInputElement>(null);
@@ -134,11 +133,9 @@ function FileUploaderButton({
     [`${prefix}--layout--size-${size}`]: size,
   });
 
-  // Adjust label text state based on changes to the labelText prop
-  if (ownerLabelText !== prevOwnerLabelText) {
+  useEffect(() => {
     setLabelText(ownerLabelText);
-    setPrevOwnerLabelText(ownerLabelText);
-  }
+  }, [ownerLabelText]);
 
   function onClick(event) {
     event.target.value = null;
