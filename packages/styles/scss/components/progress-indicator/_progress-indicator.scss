@@ -87,6 +87,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress-label {
     @include type-style('body-compact-01');
 
+    display: block;
     overflow: hidden;
     margin: $spacing-03 0 0 0;
     color: $text-primary;
@@ -115,9 +116,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     max-inline-size: 100%;
   }
 
-  .#{$prefix}--progress-step-button:not(
-      .#{$prefix}--progress-step-button--unclickable
-    ) {
+  .#{$prefix}--progress-step-button {
     &:focus {
       outline: none;
     }
@@ -125,10 +124,14 @@ $progress-indicator-bar-width: 1px inset transparent !default;
       color: $focus;
       outline: convert.to-rem(1px) solid $focus;
     }
+  }
+
+  .#{$prefix}--progress-step-button:not(
+      .#{$prefix}--progress-step-button--unclickable
+    )
     .#{$prefix}--progress-label:active {
-      box-shadow: 0 convert.to-rem(1px) 0 0 $text-primary;
-      color: $text-primary;
-    }
+    box-shadow: 0 convert.to-rem(1px) 0 0 $text-primary;
+    color: $text-primary;
   }
 
   //OVERFLOW STYLING
@@ -178,6 +181,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include type-style('label-01');
 
     position: absolute;
+    display: block;
     color: $text-secondary;
     inset-inline-start: 0;
     margin-block-start: convert.to-rem(28px);
