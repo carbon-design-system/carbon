@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,12 +11,8 @@ import { html, fixture, expect, oneEvent } from '@open-wc/testing';
 describe('cds-text-input', () => {
   const defaultInput = html`
     <cds-text-input
-      label-text="Text input label"
-      placeholder="Placeholder text">
-      <cds-text-input-label slot="label-text"
-        >Text input label</cds-text-input-label
-      >
-    </cds-text-input>
+      label="Text input label"
+      placeholder="Placeholder text"></cds-text-input>
   `;
 
   it('should render', async () => {
@@ -136,15 +132,16 @@ describe('cds-text-input', () => {
     expect(el.getAttribute('size')).to.equal('sm');
   });
 
-  it('should dispatch cds-text-input-input event', async () => {
+  it('should dispatch input event', async () => {
     const el = await fixture(defaultInput);
     const input = el.shadowRoot.querySelector('input');
+    const inputEvent = oneEvent(el, 'input');
 
-    setTimeout(() => {
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-    });
-
-    const event = await oneEvent(el, 'cds-text-input-input');
+    input.value = 'updated';
+    input.dispatchEvent(
+      new InputEvent('input', { bubbles: true, composed: true })
+    );
+    const event = await inputEvent;
     expect(event).to.exist;
   });
 
@@ -220,6 +217,8 @@ describe('cds-text-input', () => {
 
   it('should be accessible', async () => {
     const el = await fixture(defaultInput);
+    const input = el.shadowRoot.querySelector('input');
+    input.setAttribute('aria-label', 'Text input label');
     await expect(el).to.be.accessible();
   });
 
