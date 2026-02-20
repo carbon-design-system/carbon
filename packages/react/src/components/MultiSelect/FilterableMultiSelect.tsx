@@ -375,7 +375,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
-  const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
   const [topItems, setTopItems] = useState<ItemType[]>(
     initialSelectedItems ?? []
@@ -495,10 +494,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const prefix = usePrefix();
 
-  if (prevOpen !== open) {
+  useEffect(() => {
     setIsOpen(open);
-    setPrevOpen(open);
-  }
+  }, [open]);
 
   // memoize sorted items to reduce unnecessary expensive sort on rerender
   const sortedItems = useMemo(() => {
