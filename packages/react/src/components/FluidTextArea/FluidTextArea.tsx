@@ -15,8 +15,7 @@ import { FormContext } from '../FluidForm/FormContext';
 
 export interface FluidTextAreaProps {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className?: string;
 
@@ -138,8 +137,7 @@ const FluidTextArea = ({ className, ...other }: FluidTextAreaProps) => {
 
 FluidTextArea.propTypes = {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className: PropTypes.string,
 
