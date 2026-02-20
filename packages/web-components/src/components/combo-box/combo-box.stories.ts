@@ -71,6 +71,7 @@ const defaultArgs = {
   value: '',
   warn: false,
   warnText: 'Warning message goes here',
+  inputProps: undefined,
 };
 
 const controls = {
@@ -103,6 +104,10 @@ const controls = {
   invalidText: {
     control: 'text',
     description: `Message which is displayed if the value is invalid.`,
+  },
+  inputProps: {
+    control: 'object',
+    description: `Specify native input attributes to place on the internal input, for example \`{ maxlength: 5, autocomplete: 'off'}\`.`,
   },
   label: {
     control: 'text',
@@ -145,6 +150,7 @@ export const Default = {
     ...defaultArgs,
     helperText: 'Helper text',
     titleText: 'Label',
+    inputProps: {},
   },
   render: (args) => {
     const {
@@ -164,9 +170,11 @@ export const Default = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
         helper-text=${ifDefined(helperText)}
@@ -253,10 +261,11 @@ export const AllowCustomValue = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
-        allow-custom-value="true"
+        .inputProps=${inputProps}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
@@ -313,9 +322,11 @@ export const AutocompleteWithTypeahead = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
@@ -373,11 +384,13 @@ export const ExperimentalAutoAlign = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <div style="width:400px">
         <div style="height: 300px"></div>
         <cds-combo-box
+          .inputProps=${inputProps}
           ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
@@ -434,6 +447,7 @@ export const Controlled = {
       titleText,
       type,
       typeahead,
+      inputProps,
       value,
       warn,
       warnText,
@@ -476,6 +490,7 @@ export const Controlled = {
 
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         controlled
         direction=${ifDefined(direction)}
         ?autoalign=${autoalign}
@@ -537,9 +552,11 @@ export const WithAILabel = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
         ?hide-label=${hideLabel}
@@ -599,11 +616,13 @@ export const WithLayer = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <sb-template-layers>
         <div style="width:300px">
           <cds-combo-box
+            .inputProps=${inputProps}
             direction=${ifDefined(direction)}
             ?autoalign=${autoalign}
             ?disabled=${disabled}
