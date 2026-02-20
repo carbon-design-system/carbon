@@ -156,25 +156,41 @@ describe('Select', () => {
       expect(screen.getByRole('combobox')).toBeDisabled();
     });
 
-    it('should respect helperText prop', () => {
-      render(
-        <Select
-          id="select"
-          labelText="Select"
-          helperText="This is some helper text"
-        />
-      );
+    it('should not render helper text when helperText is not provided', () => {
+      const { container } = render(<Select id="select" labelText="Select" />);
 
-      expect(screen.getByText('This is some helper text')).toBeInTheDocument();
-      expect(screen.getByText('This is some helper text')).toHaveClass(
-        `${prefix}--form__helper-text`
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).toBeNull();
+      expect(screen.getByRole('combobox')).not.toHaveAttribute(
+        'aria-describedby'
       );
     });
 
-    it('should render helperText with value 0', () => {
-      render(<Select id="select" labelText="label" helperText={0} />);
-      expect(screen.getByText('0')).toBeInTheDocument();
-    });
+    it.each([
+      { label: 'string', value: 'Some helper text', shouldRender: true },
+      { label: 'true', value: true, shouldRender: true },
+      { label: 'false', value: false, shouldRender: true },
+      { label: 'component', value: <span>hmm</span>, shouldRender: true },
+      { label: 'empty string', value: '', shouldRender: true },
+      { label: 'null', value: null, shouldRender: false },
+      { label: 'undefined', value: undefined, shouldRender: false },
+      { label: 'zero', value: '0', shouldRender: true },
+    ])(
+      'should render helper wrapper based on helperText value: $label',
+      ({ label, value, shouldRender }) => {
+        const { container } = render(
+          <Select id={`select-${label}`} labelText={label} helperText={value} />
+        );
+        const helper = container.querySelector(`.${prefix}--form__helper-text`);
+
+        if (shouldRender) {
+          expect(helper).toBeInTheDocument();
+        } else {
+          expect(helper).toBeNull();
+        }
+      }
+    );
 
     it('should respect hideLabel prop', () => {
       render(<Select id="select" labelText="Select" hideLabel />);
