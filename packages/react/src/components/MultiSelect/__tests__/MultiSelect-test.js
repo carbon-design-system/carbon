@@ -249,6 +249,77 @@ describe('MultiSelect', () => {
     ).toBeFalsy();
   });
 
+  it('should not call `onMenuChange` on mount when `open` remains unchanged', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+    const { rerender } = render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    expect(onMenuChange).not.toHaveBeenCalled();
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    expect(onMenuChange).not.toHaveBeenCalled();
+  });
+
+  it('should call `onMenuChange` when the controlled `open` prop changes', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+    const { rerender } = render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={true}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+    expect(onMenuChange).toHaveBeenCalledTimes(1);
+    expect(onMenuChange).toHaveBeenLastCalledWith(true);
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+    expect(onMenuChange).toHaveBeenCalledTimes(2);
+    expect(onMenuChange).toHaveBeenLastCalledWith(false);
+  });
+
   it('should toggle selection with enter', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
