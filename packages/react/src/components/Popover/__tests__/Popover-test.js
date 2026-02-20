@@ -6,7 +6,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../../ListBox/test-helpers';
@@ -17,6 +17,11 @@ import { default as Checkbox } from '../../Checkbox';
 const prefix = 'cds';
 
 describe('Popover', () => {
+  const TriggerWithPopoverContentDisplayName = forwardRef((props, ref) => (
+    <button type="button" ref={ref} {...props} />
+  ));
+  TriggerWithPopoverContentDisplayName.displayName = 'PopoverContent';
+
   it('should support a ref on the outermost element', () => {
     const ref = jest.fn();
     const { container } = render(
@@ -110,6 +115,24 @@ describe('Popover', () => {
       const caretContainer =
         screen.getByTestId('test').lastChild.lastChild.firstChild;
       expect(caretContainer).toHaveStyle({ left: '0px', top: '-7px' });
+    });
+
+    it('should auto align when trigger component shares `PopoverContent` `displayName`', async () => {
+      render(
+        <Popover open align="bottom" data-testid="test" autoAlign>
+          <TriggerWithPopoverContentDisplayName>
+            Settings
+          </TriggerWithPopoverContentDisplayName>
+          <PopoverContent />
+        </Popover>
+      );
+
+      await waitForPosition();
+
+      const caretContainer =
+        screen.getByTestId('test').lastChild.lastChild.firstChild;
+
+      expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
     });
 
     it('should forward additional props on the outermost element', () => {
