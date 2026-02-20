@@ -119,7 +119,7 @@ jobs:
       - name: Build web-components project
         run:
           yarn lerna run build --scope='@carbon/web-components'
-          --include-dependencies
+          --include-dependencies --concurrency 1
       - name: Run tests
         run: |
           cd packages/web-components

@@ -15,7 +15,7 @@
     "www"
   ],
   "scripts": {
-    "build": "lerna run build --stream --prefix",
+    "build": "lerna run build --stream --prefix --concurrency 1",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
