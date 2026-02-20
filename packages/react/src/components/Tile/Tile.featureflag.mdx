@@ -1,20 +1,62 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
+# Tile Feature Flags
+
+[Usage guidelines](https://carbondesignsystem.com/components/tile/usage/#feature-flags)
+
 <Meta title="Components/Tile/Feature Flag" name="Flag details" />
 
-# Tile Contrast
-
-Designed to meet accessibility standards, particularly regarding contrast
-minimums. The new variant ensures that tiles are more accessible to users with
+[Feature flags](/docs/getting-started-feature-flags--overview) have been added
+to tile to improve accessibility and change their visual appearance, not their
+functionality. Designed to meet accessibility standards, particularly regarding
+contrast minimums. This ensures that tiles are more accessible to users with
 visual impairments.
+
+| Flag                                | Description                                                         | Availability | Codemod                                                                                                                                  |
+| ----------------------------------- | ------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `enable-tile-contrast`              | Enable the improved styling for tiles that provides better contrast | Sass         |                                                                                                                                          |
+| `enable-v12-tile-default-icons`     | Enable default icons for Tile components                            | React        | [enable-v12-tile-default-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-default-icons) |
+| `enable-v12-tile-radio-icons`       | Enable rendering of default icons in the tile components            | React, Sass  | [enable-v12-tile-radio-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-radio-icons)     |
+| **Deprecated flags**                |                                                                     |              |                                                                                                                                          |
+| `enable-experimental-tile-contrast` | Deprecated, use `enable-tile-contrast` instead                      | Sass         |                                                                                                                                          |
 
 ## Enable tile contrast
 
-```js
-<FeatureFlags
-  flags={{
-    'enable-tile-contrast': true,
-  }}>
-  ...
+The `enable-tile-contrast` flag adds a border to the tile with improved contrast
+for accessibility and to visually indicate they are operable.
+
+```css
+@use '@carbon/react/scss/feature-flags' with (
+  $feature-flags: ('enable-tile-contrast': true)
+);
+```
+
+## Enable tile default icons
+
+The `enable-v12-tile-default-icons` flag enables the rendering of default icons
+on the clickable variant of a tile, such as the ArrowRight icon for navigation
+or the Error icon when the tile is disabled. If the user hasn’t configured a
+different icon, these defaults will be used.
+
+```jsx
+<FeatureFlags enableV12TileDefaultIcons>
+  <App />
 </FeatureFlags>
+```
+
+## Enable tile radio icons
+
+The `enable-v12-tile-radio-icons` flag changes RadioTile to use radio button
+icons instead of checkmark icons.
+
+```jsx
+<FeatureFlags enableV12TileRadioIcons>
+  <App />
+</FeatureFlags>
+```
+
+```css
+@use '@carbon/react/scss/feature-flags' with (
+  $feature-flags: ('enable-v12-tile-radio-icons': true)
+);
 ```
