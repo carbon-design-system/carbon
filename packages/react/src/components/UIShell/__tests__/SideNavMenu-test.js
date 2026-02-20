@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -100,7 +100,7 @@ describe('SideNavMenu', () => {
     expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
   });
 
-  it('sets isExpanded and prevExpanded when sideNav is not expanded and isRail is true', () => {
+  it('should collapse the menu when the rail side nav collapses', () => {
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
@@ -119,8 +119,8 @@ describe('SideNavMenu', () => {
     );
   });
 
-  it('sets isExpanded and prevExpanded when sideNav is expanded, prevExpanded is true and isRail is true', () => {
-    render(
+  it('should restore expanded menu state when the rail side nav re-expands', () => {
+    const { rerender } = render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={true}
@@ -132,10 +132,100 @@ describe('SideNavMenu', () => {
         </SideNavMenu>
       </SideNavContext.Provider>
     );
+
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={false}
+          defaultExpanded={true}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={true}
+          defaultExpanded={true}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('closes sideNav on escape key press', async () => {
+  it('should not auto-expand if it was not expanded before the rail collapse', () => {
+    const { rerender } = render(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={true}
+          defaultExpanded={false}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={false}
+          defaultExpanded={false}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={true}
+          defaultExpanded={false}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+  });
+
+  it('should close the side nav on Escape key press', async () => {
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
