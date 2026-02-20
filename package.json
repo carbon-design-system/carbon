@@ -15,7 +15,7 @@
     "www"
   ],
   "scripts": {
-    "build": "lerna run build --stream --prefix",
+    "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.js",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
@@ -24,10 +24,10 @@
     "lint": "eslint actions config packages www",
     "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
+    "postinstall": "husky",
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "postinstall": "husky"
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
   },
   "resolutions": {
     "@types/react": "~19.2.0",
