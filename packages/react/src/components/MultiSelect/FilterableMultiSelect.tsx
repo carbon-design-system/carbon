@@ -27,7 +27,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type FocusEvent,
   type ForwardedRef,
   type KeyboardEvent,
   type MouseEvent,
@@ -372,8 +371,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 ) {
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
@@ -684,8 +681,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     inputId,
     inputValue,
     stateReducer,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    isItemDisabled(item, _index) {
+    isItemDisabled(item) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       return (item as any)?.disabled;
     },
@@ -967,17 +963,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     [autoAlign, getMenuProps, isOpen, refs.setFloating]
   );
 
-  const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
-    if (
-      evt?.target.classList.contains(`${prefix}--tag__close-icon`) ||
-      evt?.target.classList.contains(`${prefix}--list-box__selection`)
-    ) {
-      setIsFocused(false);
-    } else {
-      setIsFocused(evt?.type === 'focus');
-    }
-  };
-
   const mergedRef = mergeRefs(textInput, inputProp.ref);
 
   const readOnlyEventHandlers = readOnly
@@ -1016,8 +1001,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         </label>
       ) : null}
       <ListBox
-        onFocus={isFluid ? handleFocus : undefined}
-        onBlur={isFluid ? handleFocus : undefined}
         className={className}
         disabled={disabled}
         light={light}
@@ -1124,7 +1107,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                 // instead match the old behavior of placing the disabled attribute.
                 const disabled = itemProps['aria-disabled'];
                 const {
-                  'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                  'aria-disabled': unusedAriaDisabled,
                   ...modifiedItemProps
                 } = itemProps;
 

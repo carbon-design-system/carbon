@@ -870,8 +870,7 @@ const ComboBox = forwardRef(
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      isItemDisabled(item, _index) {
+      isItemDisabled(item) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         return (item as any)?.disabled;
       },
@@ -1237,8 +1236,8 @@ const ComboBox = forwardRef(
                     // instead match the old behavior of placing the disabled attribute.
                     const disabled = itemProps['aria-disabled'];
                     const {
-                      'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
-                      'aria-selected': unusedAriaSelected, // eslint-disable-line @typescript-eslint/no-unused-vars
+                      'aria-disabled': unusedAriaDisabled,
+                      'aria-selected': unusedAriaSelected,
                       ...modifiedItemProps
                     } = itemProps;
 

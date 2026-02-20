@@ -149,12 +149,17 @@ export default defineConfig(
       },
     },
     rules: {
-      // All of these rules have directives in the codebase that disable them,
+      // These rules have directives in the codebase that disable them,
       // which implies that they were set previously.
       'no-console': 'error',
       'no-template-curly-in-string': 'error',
       'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
       'require-atomic-updates': 'error',
+
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { ignoreRestSiblings: true },
+      ],
     },
   },
   {
@@ -217,6 +222,7 @@ export default defineConfig(
     files: ['packages/react/code-connect/**/*.figma.tsx'],
     rules: {
       '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': false }],
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
   {

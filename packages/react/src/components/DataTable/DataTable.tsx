@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+import {
   useEffect,
   useMemo,
   useState,

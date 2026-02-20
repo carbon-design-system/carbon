@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -71,8 +71,7 @@ type MenuContextProps = {
 const MenuContext = createContext<MenuContextProps>({
   state: menuDefaultState,
   // 'dispatch' is populated by the root menu
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  dispatch: (_: DispatchFuncProps) => {},
+  dispatch: () => {},
 });
 
 export { MenuContext, menuReducer };

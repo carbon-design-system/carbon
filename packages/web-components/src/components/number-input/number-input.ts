@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,8 +62,7 @@ class CDSNumberInput extends CDSTextInput {
   /**
    * Handles `click` event on the up button in the shadow DOM.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected _handleUserInitiatedStepDown(_: Event) {
+  protected _handleUserInitiatedStepDown() {
     const { _input: input } = this;
     this.stepDown();
     this.dispatchEvent(
@@ -82,8 +81,7 @@ class CDSNumberInput extends CDSTextInput {
   /**
    * Handles `click` event on the down button in the shadow DOM.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected _handleUserInitiatedStepUp(_: Event) {
+  protected _handleUserInitiatedStepUp() {
     const { _input: input } = this;
     this.stepUp();
     this.dispatchEvent(

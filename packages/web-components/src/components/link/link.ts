@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -72,12 +72,6 @@ class CDSLink extends FocusMixin(LitElement) {
   }
 
   /**
-   * Handles `click` event on the `<a>`.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected _handleClick(_: MouseEvent) {}
-
-  /**
    * @returns The inner content.
    */
 
@@ -115,7 +109,6 @@ class CDSLink extends FocusMixin(LitElement) {
       target,
       type,
       _classes: classes,
-      _handleClick: handleClick,
     } = this;
     return html`
       <a
@@ -130,8 +123,7 @@ class CDSLink extends FocusMixin(LitElement) {
         ping="${ifDefined(ping)}"
         rel="${ifDefined(rel)}"
         target="${ifDefined(target)}"
-        type="${ifDefined(type)}"
-        @click="${handleClick}">
+        type="${ifDefined(type)}">
         ${this._renderInner()}
       </a>
     `;

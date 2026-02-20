@@ -37,7 +37,6 @@ figma.connect(
       }),
     },
     example: ({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       size,
       title,
       label,
@@ -46,7 +45,7 @@ figma.connect(
       descriptionText,
       progress,
     }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars , react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
       const [open, setOpen] = useState(true);
       return (
         <ComposedModal open onClose={() => setOpen(false)}>
