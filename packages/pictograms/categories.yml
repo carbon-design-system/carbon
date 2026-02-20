@@ -76,6 +76,7 @@ categories:
       - technical-owner
       - telum-ii-chip
       - telum-ii-processor
+      - visual--inspection
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -798,10 +799,14 @@ categories:
       - console
       - console--wireless
       - desktop
+      - drone--1
+      - drone
       - electric
       - headphones
       - microphone
+      - mouse
       - printer
+      - radio
       - team-radio
       - telephone
       - television
@@ -1017,8 +1022,10 @@ categories:
       - champagne
       - cherries
       - cookie
-      - cowboy--hat
+      - cow
       - cowboy--boot
+      - cowboy--hat
+      - crab
       - crosshairs
       - cupcake
       - dining
@@ -1029,6 +1036,7 @@ categories:
       - half-note
       - hard--ice--cream
       - firecracker
+      - fish
       - flower--01
       - flower--02
       - food--truck
@@ -1036,6 +1044,7 @@ categories:
       - gramophone
       - guitar
       - hiking
+      - horse
       - juice
       - lantern
       - limes
@@ -1047,6 +1056,7 @@ categories:
       - moon-cake
       - nachos
       - northern--mockingbird
+      - octopus
       - oil--lamp
       - ornament
       - pencil
@@ -1061,10 +1071,13 @@ categories:
       - rock-on
       - salad
       - scale
+      - sea-shell
+      - shrimp
       - snowflake
       - soft--ice--cream
       - spotlight
       - stage
+      - starfish
       - stationary--bicycle
       - taco
       - tennis
@@ -1078,6 +1091,7 @@ categories:
       - vinyl--record
       - waving-hand
       - wedding--cake
+      - whale
       - whistle
       - yoga--01
       - yoga--02
@@ -1320,7 +1334,10 @@ categories:
     members:
       - binocular
       - cleat
-      - cow
+      - cricket--ball
+      - cricket--bat-and-ball
+      - cricket--field
+      - cricket--helmet
       - f1--car--01
       - f1--car--02
       - f1--grid
@@ -1341,7 +1358,6 @@ categories:
       - headset
       - helmet
       - helmet--football
-      - horse
       - masters-leader-board
       - mountain--biking
       - paddleboarding
@@ -1350,6 +1366,7 @@ categories:
       - punching-bag--03
       - racetrack
       - road--biking
+      - skiing
       - speed-bag
       - sports
       - snowboarding

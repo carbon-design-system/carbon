@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2, .cls-3 {
+        stroke: #000;
+        stroke-linejoin: round;
+        stroke-width: .72px;
+      }
+
+      .cls-3 {
+        stroke-dasharray: 2.0481 1.024;
+      }
+    </style>
+  </defs>
+  <g id="seams">
+    <g>
+      <g>
+        <line class="cls-2" x1="29" y1="5" x2="28.2929" y2="5.7071"/>
+        <line class="cls-3" x1="27.5688" y1="6.4312" x2="17.0692" y2="16.9308"/>
+        <line class="cls-2" x1="16.7071" y1="17.2929" x2="16" y2="18"/>
+      </g>
+      <g>
+        <line class="cls-2" x1="27" y1="3" x2="26.2929" y2="3.7071"/>
+        <line class="cls-3" x1="25.5688" y1="4.4312" x2="15.0692" y2="14.9308"/>
+        <line class="cls-2" x1="14.7071" y1="15.2929" x2="14" y2="16"/>
+      </g>
+    </g>
+  </g>
+  <path id="ball" class="cls-2" d="M10,12L2,20M16,26l4-4M13,19L1,31M28,4l-13,13M21.5,1c5.2467,0,9.5,4.2533,9.5,9.5s-4.2533,9.5-9.5,9.5-9.5-4.2533-9.5-9.5S16.2533,1,21.5,1Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>
