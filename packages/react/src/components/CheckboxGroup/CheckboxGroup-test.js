@@ -143,6 +143,60 @@ describe('CheckboxGroup', () => {
     expect(warnIcon).toBeInTheDocument();
   });
 
+  it('should not respect warn prop if disabled', () => {
+    const { container } = render(
+      <CheckboxGroup
+        className="some-class"
+        legendText="Checkbox heading"
+        warn
+        disabled>
+        <Checkbox
+          defaultChecked
+          labelText="Checkbox label"
+          id="checkbox-label-1"
+        />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      </CheckboxGroup>
+    );
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const warnIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-group--warning`
+    );
+    expect(warnIcon).not.toBeInTheDocument();
+  });
+
+  it('should not respect warn prop if readOnly', () => {
+    const { container } = render(
+      <CheckboxGroup
+        className="some-class"
+        legendText="Checkbox heading"
+        warn
+        readOnly>
+        <Checkbox
+          defaultChecked
+          labelText="Checkbox label"
+          id="checkbox-label-1"
+        />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      </CheckboxGroup>
+    );
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const warnIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-group--warning`
+    );
+    expect(warnIcon).not.toBeInTheDocument();
+  });
+
   it('should display warnText if warn prop is true', () => {
     render(
       <CheckboxGroup
