@@ -9,6 +9,7 @@
 import React from 'react';
 import { ContainedList } from '@carbon/react';
 import figma from '@figma/code-connect';
+import { title } from 'process';
 
 const sharedContainedListProps = {
   children: figma.children(['_Contained list row item']),

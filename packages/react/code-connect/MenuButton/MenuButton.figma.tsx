@@ -41,7 +41,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
   {
     props: sharedMenuButtonProps,
-    example: ({ size, menuAlignment, button }) => (
+    example: ({ size, children, menuAlignment, button }) => (
       <MenuButton
         size={size}
         menuAlignment={menuAlignment}
@@ -61,7 +61,7 @@ figma.connect(
   {
     variant: { Open: 'True' },
     props: sharedMenuButtonProps,
-    example: ({ size, menuAlignment, button, menu }) => (
+    example: ({ size, children, menuAlignment, button, menu }) => (
       <MenuButton
         size={size}
         menuAlignment={menuAlignment}

@@ -37,7 +37,7 @@ figma.connect(
       }),
       // information: figma.instance('Information'), look at this once icons are connected
     },
-    example: ({ toggletip }) => (
+    example: ({ align, toggletip }) => (
       <>
         <ToggletipLabel>Toggletip label</ToggletipLabel>
 

@@ -59,6 +59,7 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
+      headerRowItems,
       rowItems,
       pagination,
       toolbar,
@@ -92,6 +93,7 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
+      headerRowItems,
       rowItems,
       pagination,
       toolbar,
@@ -128,6 +130,7 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
+      headerRowItems,
       rowItems,
       pagination,
       toolbar,
@@ -164,6 +167,7 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
+      headerRowItems,
       rowItems,
       pagination,
       toolbar,
@@ -200,6 +204,7 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
+      headerRowItems,
       rowItems,
       pagination,
       toolbar,

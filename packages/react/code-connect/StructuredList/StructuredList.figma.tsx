@@ -28,7 +28,7 @@ figma.connect(
       isFlush: figma.boolean('Flush'),
       rowItems: figma.children(['_Structured list row item']),
     },
-    example: ({ isFlush, rowItems, isCondensed }) => (
+    example: ({ isFlush, headerRowItem, rowItems, isCondensed }) => (
       <StructuredListWrapper isFlush={isFlush} isCondensed={isCondensed}>
         <StructuredListHead>{headerRowItems}</StructuredListHead>
         <StructuredListBody>{rowItems}</StructuredListBody>
@@ -49,8 +49,7 @@ figma.connect(
       headerRowItems: figma.children(['_Structured list header row item']),
       rowItems: figma.children(['_Structured list row item - Selectable']),
     },
-    //
-    example: ({ rowItems, isCondensed }) => (
+    example: ({ headerRowItem, rowItems, isCondensed }) => (
       <StructuredListWrapper selection isCondensed={isCondensed}>
         <StructuredListHead>{headerRowItems}</StructuredListHead>
         <StructuredListBody>{rowItems}</StructuredListBody>
