@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,8 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { CARBON_SIDENAV_ITEMS } from './_utils';
+import React, { useContext } from 'react';
+import { SideNavContext, SideNavContextProvider } from './SideNavContext';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface SideNavItemsProps {
@@ -36,22 +36,19 @@ const SideNavItems = ({
   isSideNavExpanded,
 }: SideNavItemsProps) => {
   const prefix = usePrefix();
+  const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
+    useContext(SideNavContext);
+  const currentIsSideNavExpanded =
+    isSideNavExpanded ?? contextIsSideNavExpanded;
   const className = cx([`${prefix}--side-nav__items`], customClassName);
-  const childrenWithExpandedState = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      const childDisplayName = (child.type as any)?.displayName;
-      return React.cloneElement(child, {
-        ...(CARBON_SIDENAV_ITEMS.includes(childDisplayName)
-          ? {
-              isSideNavExpanded,
-            }
-          : {}),
-      });
-    }
-  });
-  return <ul className={className}>{childrenWithExpandedState}</ul>;
+
+  return (
+    <SideNavContextProvider
+      isRail={isRail}
+      isSideNavExpanded={currentIsSideNavExpanded}>
+      <ul className={className}>{children}</ul>
+    </SideNavContextProvider>
+  );
 };
 
 SideNavItems.displayName = 'SideNavItems';
