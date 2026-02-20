@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -66,6 +66,31 @@ describe('AccordionItem', () => {
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',
         'true'
+      );
+    });
+
+    it('should update open state when open prop changes', () => {
+      const { rerender } = render(
+        <AccordionItem title="Test title" open={false} />
+      );
+
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false'
+      );
+
+      rerender(<AccordionItem title="Test title" open />);
+
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
+
+      rerender(<AccordionItem title="Test title" open={false} />);
+
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false'
       );
     });
 
