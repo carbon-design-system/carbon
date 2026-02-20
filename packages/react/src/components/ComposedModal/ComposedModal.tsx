@@ -453,9 +453,6 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   // Generate aria-label based on Modal Header label if one is not provided (L253)
-  //
-  // TODO: Confirm whether `ModalHeader` `label` should allow `ReactNode`. If
-  // so, define how to derive a string for `aria-label`.
   let generatedAriaLabel: ComponentProps<typeof ModalHeader>['label'];
   const childrenWithProps = React.Children.toArray(children).map((child) => {
     if (isComponentElement(child, ModalHeader)) {
