@@ -26,14 +26,16 @@ This version of the `OverflowMenu` can be enabled by using the
 [subcomponents of `Menu`](/docs/components-menu--default#subcomponents).
 
 ```jsx
-<OverflowMenu label="Primary action">
-  <MenuItem label="Stop app" />
-  <MenuItem label="Restart app" />
-  <MenuItem label="Rename app" />
-  <MenuItem label="Edit routes and access" />
-  <MenuItemDivider />
-  <MenuItem label="Delete app" kind="danger" />
-</OverflowMenu>
+<FeatureFlags enableV12OverflowMenu>
+  <OverflowMenu label="Primary action">
+    <MenuItem label="Stop app" />
+    <MenuItem label="Restart app" />
+    <MenuItem label="Rename app" />
+    <MenuItem label="Edit routes and access" />
+    <MenuItemDivider />
+    <MenuItem label="Delete app" kind="danger" />
+  </OverflowMenu>
+</FeatureFlags>
 ```
 
 ## Menu Alignment
@@ -83,10 +85,7 @@ https://github.com/carbon-design-system/carbon/issues/18714.
 ## Enable dynamic setting of floating styles
 
 ```js
-<FeatureFlags
-  flags={{
-    'enable-v12-dynamic-floating-styles': true,
-  }}>
+<FeatureFlags enableV12DynamicFloatingStyles>
   <OverflowMenu>
     <MenuItem label="Stop app" />
     <MenuItem label="Restart app" />
