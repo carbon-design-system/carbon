@@ -32,3 +32,14 @@ The `enable-v12-tile-radio-icons` flag will enable rendering an updated radio ic
 <FeatureFlags enableV12TileRadioIcons>
   ...
 </FeatureFlags>
+
+and
+
+```scss
+@use '@carbon/react/scss/feature-flags' with (
+  $feature-flags: (
+    'enable-v12-tile-radio-icons': true,
+  )
+);
+@use '@carbon/react';
+```
