@@ -33,7 +33,7 @@ describe('FeatureFlags', () => {
     expect(checkFlag).toHaveBeenLastCalledWith(true);
   });
   it('should provide access to the feature flags for a scope through deprecated flags prop', () => {
-    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
 
@@ -55,21 +55,24 @@ describe('FeatureFlags', () => {
       return null;
     }
 
-    render(
-      <FeatureFlags flags={{ a: true, b: false }}>
-        <TestComponent />
-      </FeatureFlags>
-    );
+    try {
+      render(
+        <FeatureFlags flags={{ a: true, b: false }}>
+          <TestComponent />
+        </FeatureFlags>
+      );
 
-    expect(checkFlags).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-    expect(checkFlag).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-    consoleSpy.mockRestore();
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        a: true,
+        b: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        a: true,
+        b: false,
+      });
+    } finally {
+      consoleSpy.mockRestore();
+    }
   });
 
   it('should provide access to the feature flags for a scope', () => {
@@ -225,6 +228,46 @@ describe('FeatureFlags', () => {
       enableV12Overflowmenu: false,
       enableTreeviewControllable: false,
     });
+  });
+
+  it('should update nested scope when parent scope changes', () => {
+    const checkFlag = jest.fn();
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const TestComponent = () => {
+      const a = useFeatureFlag('a');
+
+      checkFlag(a);
+
+      return null;
+    };
+
+    try {
+      const { rerender } = render(
+        <FeatureFlags flags={{ a: false }}>
+          <FeatureFlags>
+            <TestComponent />
+          </FeatureFlags>
+        </FeatureFlags>
+      );
+
+      expect(checkFlag).toHaveBeenLastCalledWith(false);
+      checkFlag.mockClear();
+
+      rerender(
+        <FeatureFlags flags={{ a: true }}>
+          <FeatureFlags>
+            <TestComponent />
+          </FeatureFlags>
+        </FeatureFlags>
+      );
+
+      expect(checkFlag).toHaveBeenCalled();
+      expect(checkFlag.mock.calls).toEqual([[true]]);
+      expect(checkFlag).toHaveBeenLastCalledWith(true);
+    } finally {
+      consoleSpy.mockRestore();
+    }
   });
 
   it('should handle boolean props and flags object with no overlapping keys', () => {
