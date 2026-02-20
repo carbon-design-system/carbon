@@ -211,7 +211,7 @@ const TreeView: TreeViewComponent = ({
             `${prefix}--tree-node--hidden`
           )
         ) {
-          nodeIds.push((treeWalker.current.currentNode as Element).id);
+          nodeIds.push(treeWalker.current.currentNode.id);
         }
         while (
           match(event, keys.Home)
@@ -227,7 +227,7 @@ const TreeView: TreeViewComponent = ({
             !nextFocusNode.getAttribute('aria-disabled') &&
             !nextFocusNode.classList.contains(`${prefix}--tree-node--hidden`)
           ) {
-            nodeIds.push((nextFocusNode as Element).id);
+            nodeIds.push(nextFocusNode.id);
           }
         }
       }
@@ -244,7 +244,7 @@ const TreeView: TreeViewComponent = ({
               `${prefix}--tree-node--hidden`
             )
           ) {
-            nodeIds.push((treeWalker.current.currentNode as Element).id);
+            nodeIds.push(treeWalker.current.currentNode.id);
           }
         }
       }

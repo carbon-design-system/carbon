@@ -10,7 +10,6 @@ import {
   useEffect,
   useMemo,
   useState,
-  type ChangeEvent,
   type MouseEvent,
   type ReactElement,
   type ReactNode,
@@ -44,7 +43,9 @@ import TableSlugRow from './TableSlugRow';
 import TableToolbar from './TableToolbar';
 import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
-import TableToolbarSearch from './TableToolbarSearch';
+import TableToolbarSearch, {
+  type TableToolbarSearchOnChangeEvent,
+} from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
 import type { TranslateWithId, TFunc } from '../../types/common';
 import { deprecate } from '../../prop-types/deprecate';
@@ -242,9 +243,12 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 
   /**
    * Handles input value changes.
+   *
+   * Note: the `''` event sentinel is supported for compatibility with
+   * `TableToolbarSearch` and should be removed in the next major release.
    */
   onInputChange: (
-    event: ChangeEvent<HTMLInputElement>,
+    event: TableToolbarSearchOnChangeEvent,
     defaultValue?: string
   ) => void;
 
@@ -811,10 +815,12 @@ export const DataTable = <RowType, ColTypes extends any[]>(
    * Event handler for table filter input changes.
    */
   const handleOnInputValueChange = (
-    event: ChangeEvent<HTMLInputElement>,
+    event: TableToolbarSearchOnChangeEvent,
     defaultValue?: string
   ) => {
-    const value = defaultValue || event.target?.value;
+    // TODO: Remove `''` sentinel support once `TableToolbarSearch` no
+    // longer emits it on mount.
+    const value = defaultValue ?? (event === '' ? event : event.target.value);
 
     setState((prev) => ({ ...prev, filterInputValue: value }));
   };

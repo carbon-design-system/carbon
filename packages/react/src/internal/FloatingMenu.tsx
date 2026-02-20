@@ -18,7 +18,7 @@ import React, {
   type ReactElement,
   type RefObject,
 } from 'react';
-import * as FeatureFlags from '@carbon/feature-flags';
+import { enabled } from '@carbon/feature-flags';
 import ReactDOM from 'react-dom';
 import { keys, match } from '../internal/keyboard';
 import { OptimizedResize } from './OptimizedResize';
@@ -498,10 +498,10 @@ export const FloatingMenu = ({
     }
   };
 
-  const deprecatedFlag = FeatureFlags.enabled(
+  const deprecatedFlag = enabled(
     'enable-experimental-focus-wrap-without-sentinels'
   );
-  const focusTrapWithoutSentinelsFlag = FeatureFlags.enabled(
+  const focusTrapWithoutSentinelsFlag = enabled(
     'enable-focus-wrap-without-sentinels'
   );
   const focusTrapWithoutSentinels =

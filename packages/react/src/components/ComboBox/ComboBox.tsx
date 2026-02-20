@@ -427,7 +427,11 @@ const ComboBox = forwardRef(
           }
         : {}
     );
-    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
+    const referenceElement = refs?.reference?.current;
+    const parentWidth =
+      referenceElement instanceof HTMLElement
+        ? referenceElement.clientWidth
+        : undefined;
 
     useEffect(() => {
       if (enableFloatingStyles) {
@@ -1233,21 +1237,25 @@ const ComboBox = forwardRef(
                     const disabled = itemProps['aria-disabled'];
                     const {
                       'aria-disabled': unusedAriaDisabled,
+                      'aria-selected': unusedAriaSelected,
                       ...modifiedItemProps
                     } = itemProps;
+
+                    const isSelected = isEqual(currentSelectedItem, item);
 
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
-                        isActive={isEqual(currentSelectedItem, item)}
+                        isActive={isSelected}
                         isHighlighted={highlightedIndex === index}
                         title={title}
                         disabled={disabled}
-                        {...modifiedItemProps}>
+                        {...modifiedItemProps}
+                        aria-selected={isSelected}>
                         {itemToElement
                           ? itemToElement(item)
                           : itemToString(item)}
-                        {isEqual(currentSelectedItem, item) && (
+                        {isSelected && (
                           <Checkmark
                             className={`${prefix}--list-box__menu-item__selected-icon`}
                           />

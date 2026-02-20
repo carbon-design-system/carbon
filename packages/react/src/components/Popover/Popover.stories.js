@@ -162,8 +162,26 @@ export const TabTip = (args) => {
 };
 
 TabTip.argTypes = {
-  align: { control: false },
-  autoAlign: { control: false },
+  align: {
+    table: {
+      disable: true,
+    },
+  },
+  autoAlign: {
+    table: {
+      disable: true,
+    },
+  },
+  highContrast: {
+    table: {
+      disable: true,
+    },
+  },
+  caret: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const Default = DefaultStory.bind({});
@@ -176,6 +194,11 @@ Default.args = {
 };
 
 Default.argTypes = {
+  isTabTip: {
+    table: {
+      disable: true,
+    },
+  },
   align: {
     options: [
       'top',
@@ -231,6 +254,51 @@ Default.story = {
   ],
 };
 
+const autoAlignArgTypes = {
+  autoAlign: {
+    table: {
+      disable: true,
+    },
+  },
+  highContrast: {
+    table: {
+      disable: true,
+    },
+  },
+  isTabTip: {
+    table: {
+      disable: true,
+    },
+  },
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+};
+
 export const ExperimentalAutoAlign = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
@@ -281,7 +349,8 @@ export const ExperimentalAutoAlign = (args) => {
   );
 };
 
-export const ExperimentalAutoAlignBoundary = () => {
+ExperimentalAutoAlign.argTypes = autoAlignArgTypes;
+export const ExperimentalAutoAlignBoundary = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
   const [boundary, setBoundary] = useState();
@@ -318,7 +387,8 @@ export const ExperimentalAutoAlignBoundary = () => {
           autoAlign
           autoAlignBoundary={boundary}
           onRequestClose={() => setOpen(false)}
-          ref={ref}>
+          ref={ref}
+          {...args}>
           <button
             className="playground-trigger"
             aria-label="Checkbox"
@@ -352,6 +422,8 @@ export const ExperimentalAutoAlignBoundary = () => {
     </div>
   );
 };
+
+ExperimentalAutoAlignBoundary.argTypes = autoAlignArgTypes;
 
 export const TabTipExperimentalAutoAlign = () => {
   const [open, setOpen] = useState(true);

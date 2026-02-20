@@ -103,16 +103,9 @@ export interface DatePickerInputProps
   onClick?: func;
 
   /**
-   * Provide a regular expression that the input value must match
-   * TODO:need to be rewritten
+   * Provide a regular expression pattern string that the input value must match
    */
-  pattern?: (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    props: { [key: string]: any },
-    propName: string,
-    componentName: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => null | any | Error;
+  pattern?: string;
 
   /**
    * Specify the placeholder text
@@ -377,21 +370,9 @@ DatePickerInput.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Provide a regular expression that the input value must match
+   * Provide a regular expression pattern string that the input value must match
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  pattern: (props, propName, componentName): null | any | Error => {
-    if (props[propName] === undefined) {
-      return;
-    }
-    try {
-      new RegExp(props[propName]);
-    } catch {
-      return new Error(
-        `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`
-      );
-    }
-  },
+  pattern: PropTypes.string,
 
   /**
    * Specify the placeholder text
