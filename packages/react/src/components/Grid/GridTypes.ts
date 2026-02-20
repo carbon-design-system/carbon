@@ -40,6 +40,12 @@ export interface GridBaseProps {
    * typographic alignment with and without containers.
    */
   narrow?: boolean;
+
+  /**
+   * Add a row gap to the grid that matches the current gutter size.
+   * This is useful when you want consistent vertical spacing between rows.
+   */
+  withRowGap?: boolean;
 }
 
 export type GridProps<T extends React.ElementType> =

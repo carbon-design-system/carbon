@@ -49,6 +49,20 @@ describe('FlexGrid', () => {
       expect.stringContaining('grid--full-width')
     );
   });
+
+  it('should support setting the with-row-gap class through the `withRowGap` prop', () => {
+    const { container } = render(<FlexGrid withRowGap />);
+    expect(container.firstChild.className).toEqual(
+      expect.stringContaining('grid--with-row-gap')
+    );
+  });
+
+  it('should not set the with-row-gap class when `withRowGap` is false', () => {
+    const { container } = render(<FlexGrid withRowGap={false} />);
+    expect(container.firstChild.className).not.toEqual(
+      expect.stringContaining('grid--with-row-gap')
+    );
+  });
 });
 
 describe('Grid', () => {
@@ -123,6 +137,20 @@ describe('Grid', () => {
     const { container } = render(<Grid align="end" />);
     expect(container.firstChild.className).toEqual(
       expect.stringContaining('grid--end')
+    );
+  });
+
+  it('should support setting the with-row-gap class through the `withRowGap` prop', () => {
+    const { container } = render(<Grid withRowGap />);
+    expect(container.firstChild.className).toEqual(
+      expect.stringContaining('css-grid--with-row-gap')
+    );
+  });
+
+  it('should not set the with-row-gap class when `withRowGap` is false', () => {
+    const { container } = render(<Grid withRowGap={false} />);
+    expect(container.firstChild.className).not.toEqual(
+      expect.stringContaining('css-grid--with-row-gap')
     );
   });
 });

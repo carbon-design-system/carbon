@@ -151,6 +151,21 @@
   }
 
   // -----------------------------------------------------------------------------
+  // Row gap
+  // -----------------------------------------------------------------------------
+
+  // Add row gap support for CSS Grid
+  // Row gap should match the total gutter (start + end margins)
+  .#{$prefix}--css-grid--with-row-gap {
+    row-gap: var(--cds-grid-gutter);
+  }
+
+  // Narrow mode has 0 + 1rem = 1rem total gutter
+  .#{$prefix}--css-grid--narrow.#{$prefix}--css-grid--with-row-gap {
+    row-gap: calc(var(--cds-grid-gutter) / 2);
+  }
+
+  // -----------------------------------------------------------------------------
   // Alignment
   // -----------------------------------------------------------------------------
 
