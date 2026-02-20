@@ -138,17 +138,17 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Specify an optional className to be added to your Button
    */
-  @property({ reflect: true, attribute: 'button-class-name' })
+  @property({ type: String, reflect: true, attribute: 'button-class-name' })
   buttonClassName;
 
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
-  @property({ reflect: true, attribute: 'danger-description' })
-  dangerDescription;
+  @property({ type: String, reflect: true, attribute: 'danger-description' })
+  dangerDescription = 'danger';
 
   /**
-   * `true` if the button should be disabled.
+   * Specify whether the Button should be disabled, or not
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -156,7 +156,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * The default file name, used if this button is rendered as `<a>`.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   download!: string;
 
   /**
@@ -166,40 +166,39 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   hasMainContent = false;
 
   /**
-   * Link `href`. If present, this button is rendered as `<a>`.
+   * Optionally specify an href for your Button to become an `<a>` element
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   href!: string;
 
   /**
    * The language of what `href` points to, if this button is rendered as `<a>`.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   hreflang!: string;
 
   /**
-   * `true` if expressive theme enabled.
+   * Specify whether the Button is expressive, or not.
    */
   @property({ type: Boolean, reflect: true })
   isExpressive = false;
 
   /**
-   * Specify whether the Button is currently selected.
-   * Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   @property({ type: Boolean, reflect: true })
   isSelected = false;
 
   /**
-   * Button kind.
+   * Specify the kind of Button you want to create. `primary`, `secondary`,`tertiary`, `ghost`, `danger`, `danger-tertiary`, `danger-ghost`
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   kind = BUTTON_KIND.PRIMARY;
 
   /**
    * The a11y role for `<a>`.
    */
-  @property({ attribute: 'link-role' })
+  @property({ type: String, attribute: 'link-role' })
   linkRole = 'button';
 
   /**
@@ -211,59 +210,58 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * URLs to ping, if this button is rendered as `<a>`.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   ping!: string;
 
   /**
-   * The link type, if this button is rendered as `<a>`.
+   * Optionally specify a `rel` when using an `<a>` element.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   rel!: string;
 
   /**
-   * Button size.
+   * Specify the size of the button, from the following list of sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   size = 'lg';
 
   /**
-   * Specify the tabIndex of the button.
+   * Optional prop to specify the tabIndex of the Button
    */
   @property({ type: Number, attribute: 'tab-index', reflect: true })
   tabIndex = 0;
 
   /**
-   * The link target, if this button is rendered as `<a>`.
+   * Optionally specify a `target` when using an `<a>` element.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   target!: string;
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
    * Can be one of: start, center, or end.
    */
-  @property({ reflect: true, attribute: 'tooltip-alignment' })
+  @property({ type: String, reflect: true, attribute: 'tooltip-alignment' })
   tooltipAlignment = BUTTON_TOOLTIP_ALIGNMENT.CENTER;
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
    * Can be either top, right, bottom, or left.
    */
-  @property({ reflect: true, attribute: 'tooltip-position' })
+  @property({ type: String, reflect: true, attribute: 'tooltip-position' })
   tooltipPosition = BUTTON_TOOLTIP_POSITION.TOP;
 
   /**
-   * Specify the text to be rendered in the tooltip. If using
-   * "cds-badge-indicator" with no count prop then the text
-   * should include describing there is a new notification.
+   * If rendering an `icon-only` button through `slot="icon"`, Specify the text to be rendered in the tooltip. If using
+   * `cds-badge-indicator` with no count prop then the text should include describing there is a new notification.
    */
-  @property({ reflect: true, attribute: 'tooltip-text' })
+  @property({ type: String, reflect: true, attribute: 'tooltip-text' })
   tooltipText!: string;
 
   /**
-   * Button type.
+   * Optional prop to specify the type of the Button.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   type = BUTTON_TYPE.BUTTON;
 
   render() {
@@ -318,7 +316,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     }
     const classes = classMap(defaultClasses);
 
-    const isDanger = kind.includes('danger');
+    const isDanger = kind?.includes('danger');
 
     if (href) {
       return disabled

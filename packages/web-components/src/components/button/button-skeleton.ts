@@ -47,6 +47,7 @@ class CDSButtonSkeleton extends CDSButton {
       [`${prefix}--btn`]: true,
       [`${prefix}--skeleton`]: true,
       [`${prefix}--btn--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
     });
     return href
       ? html`

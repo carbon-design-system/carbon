@@ -38,6 +38,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-button-skeleton) {
   @include emit-layout-tokens();
+
+  display: inline-flex;
 }
 
 :host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),

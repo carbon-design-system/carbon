@@ -4,7 +4,7 @@ export const snapshots = {};
 snapshots[
   'cds-button-skeleton should set the expected classes for the size: `sm`'
 ] = `<button
-  class="cds--btn cds--btn--sm cds--skeleton"
+  class="cds--btn cds--btn--sm cds--layout--size-sm cds--skeleton"
   id="button"
   type="button"
 >
@@ -15,7 +15,7 @@ snapshots[
 snapshots[
   'cds-button-skeleton should set the expected classes for the size: `md`'
 ] = `<button
-  class="cds--btn cds--btn--md cds--skeleton"
+  class="cds--btn cds--btn--md cds--layout--size-md cds--skeleton"
   id="button"
   type="button"
 >
@@ -26,7 +26,7 @@ snapshots[
 snapshots[
   'cds-button-skeleton should set the expected classes for the size: `lg`'
 ] = `<button
-  class="cds--btn cds--btn--lg cds--skeleton"
+  class="cds--btn cds--btn--lg cds--layout--size-lg cds--skeleton"
   id="button"
   type="button"
 >
@@ -37,7 +37,7 @@ snapshots[
 snapshots[
   'cds-button-skeleton should set the expected classes for the size: `xl`'
 ] = `<button
-  class="cds--btn cds--btn--xl cds--skeleton"
+  class="cds--btn cds--btn--xl cds--layout--size-xl cds--skeleton"
   id="button"
   type="button"
 >
@@ -48,7 +48,7 @@ snapshots[
 snapshots[
   'cds-button-skeleton should set the expected classes for the size: `2xl`'
 ] = `<button
-  class="cds--btn cds--btn--2xl cds--skeleton"
+  class="cds--btn cds--btn--2xl cds--layout--size-2xl cds--skeleton"
   id="button"
   type="button"
 >
@@ -59,7 +59,7 @@ snapshots[
 snapshots[
   'cds-button-skeleton link variant should render an <a> when `href` is passed as a prop'
 ] = `<a
-  class="cds--btn cds--btn--lg cds--skeleton"
+  class="cds--btn cds--btn--lg cds--layout--size-lg cds--skeleton"
   href="/"
   id="button"
   role="button"
@@ -72,7 +72,7 @@ snapshots[
 snapshots[
   'cds-button-skeleton link variant should render with [role="button"]'
 ] = `<a
-  class="cds--btn cds--btn--lg cds--skeleton"
+  class="cds--btn cds--btn--lg cds--layout--size-lg cds--skeleton"
   href="/"
   id="button"
   role="button"
