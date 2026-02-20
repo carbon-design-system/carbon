@@ -149,6 +149,14 @@
     }
   }
 
+  .#{$prefix}--overflow-menu-options--data-table {
+    background-color: $layer-02;
+
+    &::after {
+      background-color: $layer-02;
+    }
+  }
+
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
     background-color: $layer-hover;
   }
