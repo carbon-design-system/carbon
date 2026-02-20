@@ -32,8 +32,6 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Checkbox from '../Checkbox';
 import CheckboxGroup from '../CheckboxGroup';
-import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 
 const buttons = {
   'One (1)': '1',
@@ -148,17 +146,6 @@ export const Default = ({ numberOfButtons, ...args }) => {
         open={open}
         {...args}
         {...modalFooter(numberOfButtons)}>
-        <OverflowMenu ariaLabel="More options">
-          <OverflowMenuItem
-            itemText="Download"
-            onClick={() => console.log('Download clicked')}
-            hasDivider
-          />
-          <OverflowMenuItem
-            itemText="Share"
-            onClick={() => console.log('Share clicked')}
-          />
-        </OverflowMenu>
         <p style={{ marginBottom: '2rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared

@@ -27,8 +27,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './ComposedModal.mdx';
-import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 
 export default {
   title: 'Components/ComposedModal',
@@ -74,17 +72,6 @@ export const Default = (args) => {
           {...args}
         />
         <ModalBody>
-          <OverflowMenu ariaLabel="More options">
-            <OverflowMenuItem
-              itemText="Download"
-              onClick={() => console.log('Download clicked')}
-              hasDivider
-            />
-            <OverflowMenuItem
-              itemText="Share"
-              onClick={() => console.log('Share clicked')}
-            />
-          </OverflowMenu>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
