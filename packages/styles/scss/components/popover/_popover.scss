@@ -304,6 +304,103 @@ $popover-caret-height: custom-property.get-var(
     transform: translate(-50%, calc(100% + $popover-offset));
   }
 
+  .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-end: -$spacing-02;
+  }
+
+  .#{$prefix}--popover--top:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: -$spacing-02;
+  }
+
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset - 1rem);
+  }
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: calc(50% - $popover-offset - 1rem);
+  }
+
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: calc(100% + $spacing-02);
+  }
+
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: calc(100% + $spacing-02);
+  }
+
   [dir='rtl']
     .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--auto-align)
     > .#{$prefix}--popover

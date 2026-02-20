@@ -172,7 +172,8 @@ export const Table = ({
           const label = th.querySelector(`.${prefix}--table-header-label`);
 
           return (
-            label && isElementWrappingContent(label as HTMLElement, context)
+            label instanceof HTMLElement &&
+            isElementWrappingContent(label, context)
           );
         });
 

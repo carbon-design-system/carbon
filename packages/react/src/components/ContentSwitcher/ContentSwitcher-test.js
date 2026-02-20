@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -48,6 +48,10 @@ describe('ContentSwitcher - RTL', () => {
 
       expect(screen.getAllByRole('tab')[0]).toHaveAttribute('tabindex', '0');
       expect(screen.getAllByRole('tab')[0]).toHaveClass(
+        'cds--content-switcher--selected'
+      );
+      expect(screen.getAllByRole('tab')[1]).toHaveAttribute('tabindex', '-1');
+      expect(screen.getAllByRole('tab')[1]).not.toHaveClass(
         'cds--content-switcher--selected'
       );
     });
@@ -117,6 +121,46 @@ describe('ContentSwitcher - RTL', () => {
 
       expect(screen.getAllByRole('tab')[2]).toHaveAttribute('tabindex', '0');
       expect(screen.getAllByRole('tab')[2]).toHaveClass(
+        'cds--content-switcher--selected'
+      );
+      expect(screen.getAllByRole('tab')[1]).toHaveAttribute('tabindex', '-1');
+      expect(screen.getAllByRole('tab')[1]).not.toHaveClass(
+        'cds--content-switcher--selected'
+      );
+    });
+
+    it('should update selected index when `selectedIndex` prop changes', () => {
+      const { rerender } = render(
+        <ContentSwitcher onChange={() => {}} selectedIndex={0}>
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      expect(screen.getAllByRole('tab')[0]).toHaveAttribute('tabindex', '0');
+      expect(screen.getAllByRole('tab')[0]).toHaveClass(
+        'cds--content-switcher--selected'
+      );
+      expect(screen.getAllByRole('tab')[2]).toHaveAttribute('tabindex', '-1');
+      expect(screen.getAllByRole('tab')[2]).not.toHaveClass(
+        'cds--content-switcher--selected'
+      );
+
+      rerender(
+        <ContentSwitcher onChange={() => {}} selectedIndex={2}>
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      expect(screen.getAllByRole('tab')[2]).toHaveAttribute('tabindex', '0');
+      expect(screen.getAllByRole('tab')[2]).toHaveClass(
+        'cds--content-switcher--selected'
+      );
+      expect(screen.getAllByRole('tab')[0]).toHaveAttribute('tabindex', '-1');
+      expect(screen.getAllByRole('tab')[0]).not.toHaveClass(
         'cds--content-switcher--selected'
       );
     });

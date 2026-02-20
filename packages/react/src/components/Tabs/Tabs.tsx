@@ -1263,7 +1263,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(
       customClassName
     );
 
-    const BaseComponent = as as ElementType;
+    const BaseComponent: ElementType = as;
 
     const onDismissIconMouseEnter = (evt) => {
       if (contained && tabRef.current) {
@@ -1310,10 +1310,11 @@ const Tab = forwardRef<HTMLElement, TabProps>(
         const tabCount = Array.from(
           tabRef.current.parentElement.childNodes
         ).filter((node) => {
-          const element = node as HTMLElement;
+          if (!(node instanceof HTMLElement)) return false;
+
           return (
-            element.classList.contains(`${prefix}--tabs__nav-link`) &&
-            !element.classList.contains(`${prefix}--tabs__nav-item--disabled`)
+            node.classList.contains(`${prefix}--tabs__nav-link`) &&
+            !node.classList.contains(`${prefix}--tabs__nav-item--disabled`)
           );
         }).length;
 
@@ -1324,9 +1325,12 @@ const Tab = forwardRef<HTMLElement, TabProps>(
         // if removing last tab focus on previous tab
         else {
           const prevTabIndex = (tabCount - 2) * 2;
-          (
-            tabRef.current.parentElement.childNodes[prevTabIndex] as HTMLElement
-          )?.focus();
+          const previousTab =
+            tabRef.current.parentElement.childNodes[prevTabIndex];
+
+          if (previousTab instanceof HTMLElement) {
+            previousTab.focus();
+          }
         }
       }
     };
@@ -1762,7 +1766,9 @@ function TabPanels({ children }: TabPanelsProps) {
       // set max height to TabList
       const heights = refs.current.map((ref) => ref?.offsetHeight || 0);
       const max = Math.max(...heights);
-      (tabContainer as HTMLElement).style.height = max + 'px';
+      if (tabContainer instanceof HTMLElement) {
+        tabContainer.style.height = max + 'px';
+      }
 
       // re-hide hidden Tab Panels
       refs.current.forEach((ref, index) => {
