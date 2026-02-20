@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -482,6 +482,27 @@ describe('PageHeader', () => {
     it('should not render tags when not provided', () => {
       render(<PageHeader.TabBar />);
 
+      expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 2')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 3')).not.toBeInTheDocument();
+    });
+
+    it('should support rerendering from no tags to tags and back', () => {
+      mockUseOverflowItems.mockImplementation((items) => ({
+        visibleItems: items,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      }));
+
+      const { rerender } = render(<PageHeader.TabBar />);
+      expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+
+      rerender(<PageHeader.TabBar tags={mockTags} />);
+      expect(screen.getByText('Tag 1')).toBeInTheDocument();
+      expect(screen.getByText('Tag 2')).toBeInTheDocument();
+      expect(screen.getByText('Tag 3')).toBeInTheDocument();
+
+      rerender(<PageHeader.TabBar />);
       expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
       expect(screen.queryByText('Tag 2')).not.toBeInTheDocument();
       expect(screen.queryByText('Tag 3')).not.toBeInTheDocument();
