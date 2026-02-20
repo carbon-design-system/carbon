@@ -70,4 +70,10 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
+  tooltipPosition: {
+    control: false,
+  },
+  tooltipAlignment: {
+    control: false,
+  },
 };
