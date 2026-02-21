@@ -2161,6 +2161,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "krasnoff",
+      "name": "Kobi Krasnoff",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3822883?v=4",
+      "profile": "https://krasnoff-personal-web-app.vercel.app/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 
 import { Filter } from '@carbon/icons-react';
 import OverflowMenu from './OverflowMenu';
@@ -19,8 +25,8 @@ describe('OverflowMenu', () => {
     it('should support a custom `className` prop on the button element', () => {
       render(
         <OverflowMenu open aria-label="Overflow menu" className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
       expect(screen.getByRole('button')).toHaveClass('extra-class');
@@ -30,8 +36,8 @@ describe('OverflowMenu', () => {
       const ref = React.createRef();
       render(
         <OverflowMenu open ref={ref} aria-label="Overflow menu">
-          <OverflowMenuItem itemText="one" />
-          <OverflowMenuItem itemText="two" />
+          <OverflowMenuItem itemText="one" href="#" />
+          <OverflowMenuItem itemText="two" href="#" />
         </OverflowMenu>
       );
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);
@@ -43,8 +49,8 @@ describe('OverflowMenu', () => {
           data-testid="test"
           aria-label="Overflow menu"
           className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
       expect(screen.getByRole('button')).toHaveAttribute('data-testid', 'test');
@@ -56,8 +62,8 @@ describe('OverflowMenu', () => {
           data-testid="test"
           aria-label="Overflow menu"
           className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -71,8 +77,8 @@ describe('OverflowMenu', () => {
           flipped={true}
           aria-label="Overflow menu"
           className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -91,8 +97,8 @@ describe('OverflowMenu', () => {
           aria-label="Overflow menu"
           className="extra-class"
           onClick={onClick}>
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -107,8 +113,8 @@ describe('OverflowMenu', () => {
           aria-label="Overflow menu"
           className="extra-class"
           onClose={onClose}>
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -124,8 +130,8 @@ describe('OverflowMenu', () => {
           aria-label="Overflow menu"
           className="extra-class"
           onClose={onClose}>
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -143,8 +149,8 @@ describe('OverflowMenu', () => {
           aria-label="Overflow menu"
           className="extra-class"
           onFocus={onFocus}>
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -155,8 +161,8 @@ describe('OverflowMenu', () => {
     it('should render open if open is true', () => {
       render(
         <OverflowMenu open aria-label="Overflow menu" className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -172,8 +178,8 @@ describe('OverflowMenu', () => {
           aria-label="Overflow menu"
           className="extra-class"
           renderIcon={() => <Filter aria-label="filter icon" />}>
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -194,8 +200,16 @@ describe('OverflowMenu', () => {
               aria-label="Overflow menu"
               className="extra-class"
               size={size}>
-              <OverflowMenuItem className="test-child" itemText="one" />
-              <OverflowMenuItem className="test-child" itemText="two" />
+              <OverflowMenuItem
+                className="test-child"
+                itemText="one"
+                href="#"
+              />
+              <OverflowMenuItem
+                className="test-child"
+                itemText="two"
+                href="#"
+              />
             </OverflowMenu>
           );
 
@@ -209,8 +223,8 @@ describe('OverflowMenu', () => {
     it('should open on click', async () => {
       render(
         <OverflowMenu aria-label="Overflow menu" className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -236,8 +250,8 @@ describe('OverflowMenu', () => {
           aria-label="Overflow menu"
           className="extra-class"
           onClick={handleClick}>
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
       );
 
@@ -254,8 +268,8 @@ describe('OverflowMenu', () => {
   it('should not open menu when disabled', async () => {
     render(
       <OverflowMenu aria-label="Overflow menu" className="extra-class" disabled>
-        <OverflowMenuItem className="test-child" itemText="one" />
-        <OverflowMenuItem className="test-child" itemText="two" />
+        <OverflowMenuItem className="test-child" itemText="one" href="#" />
+        <OverflowMenuItem className="test-child" itemText="two" href="#" />
       </OverflowMenu>
     );
 
@@ -267,8 +281,8 @@ describe('OverflowMenu', () => {
     render(
       <div>
         <OverflowMenu aria-label="Overflow menu" className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
+          <OverflowMenuItem className="test-child" itemText="one" href="#" />
+          <OverflowMenuItem className="test-child" itemText="two" href="#" />
         </OverflowMenu>
         <div data-testid="outside-element">Outside Element</div>
       </div>
@@ -287,8 +301,8 @@ describe('OverflowMenu', () => {
         aria-label="Overflow menu"
         className="extra-class"
         iconDescription={iconDescription}>
-        <OverflowMenuItem className="test-child" itemText="one" />
-        <OverflowMenuItem className="test-child" itemText="two" />
+        <OverflowMenuItem className="test-child" itemText="one" href="#" />
+        <OverflowMenuItem className="test-child" itemText="two" href="#" />
       </OverflowMenu>
     );
     const button = screen.getByRole('button', { name: iconDescription });
@@ -301,8 +315,8 @@ describe('OverflowMenu', () => {
         direction="top"
         iconDescription="custom-icon"
         className="extra-class">
-        <OverflowMenuItem className="test-child" itemText="one" />
-        <OverflowMenuItem className="test-child" itemText="two" />
+        <OverflowMenuItem className="test-child" itemText="one" href="#" />
+        <OverflowMenuItem className="test-child" itemText="two" href="#" />
       </OverflowMenu>
     );
     const button = screen.getByRole('button', { name: 'custom-icon' });
@@ -317,8 +331,8 @@ describe('OverflowMenu', () => {
         direction="bottom"
         iconDescription="custom-icon"
         className="extra-class">
-        <OverflowMenuItem className="test-child" itemText="one" />
-        <OverflowMenuItem className="test-child" itemText="two" />
+        <OverflowMenuItem className="test-child" itemText="one" href="#" />
+        <OverflowMenuItem className="test-child" itemText="two" href="#" />
       </OverflowMenu>
     );
     const newMenu = await waitFor(() =>
@@ -329,42 +343,66 @@ describe('OverflowMenu', () => {
   it('focuses the next enabled menu item when pressing ArrowDown', async () => {
     render(
       <OverflowMenu iconDescription="custom-icon" className="extra-class">
-        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 1"
+          data-testid="menu-item-1"
+          href="#"
+        />
         <OverflowMenuItem
           itemText="Item 2"
           disabled
           data-testid="menu-item-2"
+          href="#"
         />
-        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+        <OverflowMenuItem
+          itemText="Item 3"
+          data-testid="menu-item-3"
+          href="#"
+        />
       </OverflowMenu>
     );
     const button = screen.getByRole('button', { name: 'custom-icon' });
-    fireEvent.click(button);
+    act(() => {
+      fireEvent.click(button);
+    });
 
-    const menuItem1 = screen.getByText('Item 1').closest('button');
-    const menuItem3 = screen.getByText('Item 3').closest('button');
+    const menuItem1 = screen.getByText('Item 1').closest('a');
+    const menuItem3 = screen.getByText('Item 3').closest('a');
 
-    menuItem1.focus();
-    fireEvent.keyDown(menuItem1, { key: 'ArrowDown', code: 'ArrowDown' });
+    act(() => {
+      menuItem1.focus();
+    });
+    act(() => {
+      fireEvent.keyDown(menuItem1, { key: 'ArrowDown', code: 'ArrowDown' });
+    });
     expect(menuItem3).toHaveFocus();
   });
   it('focuses the next enabled menu item when pressing ArrowUp', async () => {
     render(
       <OverflowMenu iconDescription="custom-icon" className="extra-class">
-        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 1"
+          data-testid="menu-item-1"
+          href="#"
+        />
         <OverflowMenuItem
           itemText="Item 2"
           disabled
           data-testid="menu-item-2"
+          href="#"
         />
-        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+        <OverflowMenuItem
+          itemText="Item 3"
+          data-testid="menu-item-3"
+          href="#"
+        />
       </OverflowMenu>
     );
     const button = screen.getByRole('button', { name: 'custom-icon' });
     fireEvent.click(button);
 
-    const menuItem1 = screen.getByText('Item 1').closest('button');
-    const menuItem3 = screen.getByText('Item 3').closest('button');
+    const menuItem1 = screen.getByText('Item 1').closest('a');
+    const menuItem3 = screen.getByText('Item 3').closest('a');
 
     menuItem3.focus();
     expect(menuItem3).toHaveFocus();
@@ -374,21 +412,30 @@ describe('OverflowMenu', () => {
   it('focuses the last enabled item when moving backwards from the first enabled item (case -1)', () => {
     render(
       <OverflowMenu iconDescription="custom-icon" className="extra-class">
-        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 1"
+          data-testid="menu-item-1"
+          href="#"
+        />
         <OverflowMenuItem
           itemText="Item 2"
           disabled
           data-testid="menu-item-2"
+          href="#"
         />
-        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+        <OverflowMenuItem
+          itemText="Item 3"
+          data-testid="menu-item-3"
+          href="#"
+        />
       </OverflowMenu>
     );
 
     const button = screen.getByRole('button', { name: 'custom-icon' });
     fireEvent.click(button);
 
-    const menuItem1 = screen.getByText('Item 1').closest('button');
-    const menuItem3 = screen.getByText('Item 3').closest('button');
+    const menuItem1 = screen.getByText('Item 1').closest('a');
+    const menuItem3 = screen.getByText('Item 3').closest('a');
     menuItem1.focus();
     expect(menuItem1).toHaveFocus();
     fireEvent.keyDown(menuItem1, { key: 'ArrowUp', code: 'ArrowUp' });
@@ -398,21 +445,30 @@ describe('OverflowMenu', () => {
   it('focuses the first enabled item when moving forward from the last enabled item (case enabledIndices.length)', () => {
     render(
       <OverflowMenu iconDescription="custom-icon" className="extra-class">
-        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 1"
+          data-testid="menu-item-1"
+          href="#"
+        />
         <OverflowMenuItem
           itemText="Item 2"
           disabled
           data-testid="menu-item-2"
+          href="#"
         />
-        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+        <OverflowMenuItem
+          itemText="Item 3"
+          data-testid="menu-item-3"
+          href="#"
+        />
       </OverflowMenu>
     );
 
     const button = screen.getByRole('button', { name: 'custom-icon' });
     fireEvent.click(button);
 
-    const menuItem1 = screen.getByText('Item 1').closest('button');
-    const menuItem3 = screen.getByText('Item 3').closest('button');
+    const menuItem1 = screen.getByText('Item 1').closest('a');
+    const menuItem3 = screen.getByText('Item 3').closest('a');
     menuItem3.focus();
     expect(menuItem3).toHaveFocus();
     fireEvent.keyDown(menuItem3, { key: 'ArrowDown', code: 'ArrowDown' });
@@ -421,13 +477,22 @@ describe('OverflowMenu', () => {
   it('closes the menu on Escape key press', async () => {
     render(
       <OverflowMenu open iconDescription="custom-icon" className="extra-class">
-        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 1"
+          data-testid="menu-item-1"
+          href="#"
+        />
         <OverflowMenuItem
           itemText="Item 2"
           disabled
           data-testid="menu-item-2"
+          href="#"
         />
-        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+        <OverflowMenuItem
+          itemText="Item 3"
+          data-testid="menu-item-3"
+          href="#"
+        />
       </OverflowMenu>
     );
     const button = screen.getByRole('button', { name: 'custom-icon' });
@@ -451,8 +516,8 @@ describe('OverflowMenu', () => {
           innerRef={innerRef}
           aria-label="Overflow menu"
           data-testid="overflow-menu">
-          <OverflowMenuItem itemText="Option 1" />
-          <OverflowMenuItem itemText="Option 2" />
+          <OverflowMenuItem itemText="Option 1" href="#" />
+          <OverflowMenuItem itemText="Option 2" href="#" />
         </OverflowMenu>
       );
       const buttonElement = screen.getByRole('button');
@@ -472,8 +537,8 @@ describe('OverflowMenu', () => {
         aria-label="Overflow menu"
         className="extra-class"
         onOpen={onOpen}>
-        <OverflowMenuItem className="test-child" itemText="one" />
-        <OverflowMenuItem className="test-child" itemText="two" />
+        <OverflowMenuItem className="test-child" itemText="one" href="#" />
+        <OverflowMenuItem className="test-child" itemText="two" href="#" />
       </OverflowMenu>
     );
 
