@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@
  * @returns The size of the element in pixels. Returns 0 if the element is not provided.
  */
 export function getSize(
-  el: HTMLElement,
+  el: HTMLElement | undefined,
   dimension: 'width' | 'height'
 ): number {
   if (!el) return 0;
@@ -41,7 +41,7 @@ export interface UpdateOverflowHandlerOptions {
   /** An array of item elements to be managed for overflow. */
   items: HTMLElement[];
   /** An element that represents the offset, which can be shown or hidden based on overflow. Identified by `data-offset` attribute. */
-  offset: HTMLElement;
+  offset: HTMLElement | undefined;
   /** An array of sizes corresponding to each item in the `items` array. */
   sizes: number[];
   /** An array of sizes corresponding to each item in the fixed items array. */
@@ -179,13 +179,11 @@ export function createOverflowHandler({
     throw new Error('maxVisibleItems must be a positive integer');
   }
 
-  const children = Array.from(container.children) as HTMLElement[];
-  const offset = children.find((item) =>
-    item.hasAttribute('data-offset')
-  ) as HTMLElement;
-  const fixedItems = children.filter((item) =>
-    item.hasAttribute('data-fixed')
-  ) as HTMLElement[];
+  const children = Array.from(container.children).filter(
+    (item): item is HTMLElement => item instanceof HTMLElement
+  );
+  const offset = children.find((item) => item.hasAttribute('data-offset'));
+  const fixedItems = children.filter((item) => item.hasAttribute('data-fixed'));
   const items = children.filter(
     (item) => item !== offset && !fixedItems.includes(item)
   );
