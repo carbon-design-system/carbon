@@ -118,10 +118,12 @@ export const ContentSwitcher = ({
   };
 
   const isKeyboardEvent = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    event: any
+    event: unknown
   ): event is KeyboardEvent<HTMLButtonElement> | globalThis.KeyboardEvent =>
-    event && typeof event === 'object' && 'key' in event;
+    event !== null &&
+    typeof event !== 'undefined' &&
+    typeof event === 'object' &&
+    'key' in event;
 
   const handleChildChange = (
     event: SwitchEventHandlersParams &
